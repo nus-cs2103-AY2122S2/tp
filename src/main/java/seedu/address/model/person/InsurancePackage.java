@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Person's insurance package in the address book.
@@ -17,8 +17,8 @@ public class InsurancePackage {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String packageName;
-
+    private final String packageName;
+    private String packageDescription;
 
     /**
      * Constructs an {@code InsurancePackage}.
@@ -26,9 +26,20 @@ public class InsurancePackage {
      * @param packageName A name for the insurance package
      */
     public InsurancePackage(String packageName) {
-        requireNonNull(packageName);
+        this(packageName, "");
+    }
+
+    /**
+     * Constructs an {@code InsurancePackage} with a package description.
+     *
+     * @param packageName A name for the insurance package
+     * @param packageDescription The description of the insurance package
+     */
+    public InsurancePackage(String packageName, String packageDescription) {
+        requireAllNonNull(packageName);
         checkArgument(isValidInsurancePackage(packageName), MESSAGE_CONSTRAINTS);
         this.packageName = packageName;
+        this.packageDescription = packageDescription;
     }
 
     /**
@@ -36,6 +47,18 @@ public class InsurancePackage {
      */
     public static boolean isValidInsurancePackage(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public String getPackageDescription() {
+        return packageDescription;
+    }
+
+    public void setPackageDescription(String s) {
+        packageDescription = s;
     }
 
     @Override

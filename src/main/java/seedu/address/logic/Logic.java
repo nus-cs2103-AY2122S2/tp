@@ -7,6 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.InsurancePackagesSet;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
@@ -48,7 +49,6 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-
     /**
      * Saves the AddressBook to CSV.
      */
@@ -68,4 +68,9 @@ public interface Logic {
      * Retrieves the next command in history.
      */
     String getNextCommand();
+
+    /**
+     * Returns the object storing all insurance packages.
+     */
+    InsurancePackagesSet getAllPackages();
 }

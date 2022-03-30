@@ -26,6 +26,7 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="packageName" styleClass="cell_small_label" text="\$insurancepackage" />
+                <Label fx:id="packageDesc" styleClass="cell_small_label" text="\$insurancepackage" />
             </HBox>
             <FlowPane fx:id="tags" />
         </VBox>

@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.InsurancePackagesSet;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,7 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class RedoCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new InsurancePackagesSet());
 
     @Test
     public void execute_undoCommand_throwsCommandException() {
@@ -39,7 +40,7 @@ public class RedoCommandTest {
             String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS);
             CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
-            Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+            Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new InsurancePackagesSet());
             expectedModel.deletePerson(personToDelete);
             expectedModel.undoCommand();
             expectedModel.redoCommand();

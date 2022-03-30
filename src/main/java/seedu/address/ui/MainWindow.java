@@ -160,7 +160,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the package window or focuses on it if it's already opened.
      */
     @FXML
-    public void handlePackage() {
+    public void handleShowPackages() {
         if (!packageWindow.isShowing()) {
             packageWindow.show();
             packageWindow.fillInnerParts();
@@ -324,6 +324,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExportToCsv()) {
                 handleSaveToCsv();
+            }
+
+            if (commandResult.isShowPackages()) {
+                handleShowPackages();
             }
 
             return commandResult;

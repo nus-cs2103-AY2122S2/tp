@@ -27,6 +27,8 @@ public class PackageCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label packageName;
+    @FXML
+    private Label packageDesc;
 
     /**
      * Creates a {@code PackageCard} with the given {@code InsurancePackage}
@@ -34,7 +36,8 @@ public class PackageCard extends UiPart<Region> {
     public PackageCard(InsurancePackage insurancePackage) {
         super(FXML);
         this.insurancePackage = insurancePackage;
-        packageName.setText(insurancePackage.toString());
+        packageName.setText(insurancePackage.getPackageName());
+        packageDesc.setText(insurancePackage.getPackageDescription());
     }
 
     @Override

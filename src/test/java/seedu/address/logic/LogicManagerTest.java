@@ -24,12 +24,14 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.InsurancePackagesSet;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.CommandStorage;
+import seedu.address.storage.CsvInsurancePackagesStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -49,7 +51,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CsvInsurancePackagesStorage ipStorage = new CsvInsurancePackagesStorage(temporaryFolder.resolve("ip.csv"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, ipStorage);
         CommandStorage commandStorage = new CommandStorage();
         logic = new LogicManager(model, storage, commandStorage);
     }
@@ -79,7 +82,9 @@ public class LogicManagerTest {
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CsvInsurancePackagesStorage ipStorage =
+                new CsvInsurancePackagesStorage(temporaryFolder.resolve("ioExceptionIp.csv"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, ipStorage);
         CommandStorage commandStorage = new CommandStorage();
         logic = new LogicManager(model, storage, commandStorage);
 
@@ -134,7 +139,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new InsurancePackagesSet());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

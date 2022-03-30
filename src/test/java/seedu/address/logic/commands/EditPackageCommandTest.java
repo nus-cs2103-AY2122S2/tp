@@ -2,78 +2,48 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.InsurancePackagesSet;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
-
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
+public class EditPackageCommandTest {
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_packageAcceptedByModel_editSuccessful() throws Exception {
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        String packageName = "Test Package Name";
+        String oldDesc = "Test Desc";
+        String newDesc = "Test Desc 2";
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
+        InsurancePackage validPackage = new InsurancePackage(packageName, oldDesc);
 
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        // edit package in model stub
+        EditPackageCommandTest.ModelStubWithPackage modelStub =
+                new EditPackageCommandTest.ModelStubWithPackage(validPackage);
+        modelStub.setInsurancePackage(packageName, newDesc);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
+        // edit package
+        validPackage.setPackageDescription(newDesc);
 
-    @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        CommandResult commandResult = new EditPackageCommand(packageName, newDesc).execute(modelStub);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(String.format(EditPackageCommand.MESSAGE_EDIT_PACKAGE_SUCCESS, validPackage),
+                commandResult.getFeedbackToUser());
 
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(validPackage, modelStub.p);
 
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertEquals(newDesc, modelStub.getPackageDesc());
     }
 
     /**
@@ -212,53 +182,30 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single insurance package, with description editable.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithPackage extends EditPackageCommandTest.ModelStub {
+        private final InsurancePackage p;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accepts the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public void addInsurancePackage(InsurancePackage p) {
-            // do nothing with the package
+        ModelStubWithPackage(InsurancePackage p) {
             requireNonNull(p);
-
-            // this method is written because the Model now adds an insurance package when a person is added
+            this.p = p;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public boolean hasInsurancePackage(InsurancePackage p) {
+            return this.p.equals(p);
+        }
+
+        @Override
+        public void setInsurancePackage(String packageName, String newDesc) {
+            if (p.getPackageName().equals(packageName)) {
+                p.setPackageDescription(newDesc);
+            }
+        }
+
+        public String getPackageDesc() {
+            return p.getPackageDescription();
         }
     }
-
 }

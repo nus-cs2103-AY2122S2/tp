@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.comparators.TagPriorityComparator;
 import seedu.address.storage.UndoRedoStorage;
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private InsurancePackagesSet insurancePackagesSet;
     private final FilteredList<Person> filteredPersons;
 
     private UndoRedoStorage undoRedoStorage = new UndoRedoStorage();
@@ -31,19 +33,21 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        InsurancePackagesSet insurancePackages) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.insurancePackagesSet = new InsurancePackagesSet(insurancePackages);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         undoRedoStorage.addToUndo(copyAddressBook());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new InsurancePackagesSet());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,6 +83,49 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getInsurancePackagesFilePath() {
+        return userPrefs.getInsurancePackagesFilePath();
+    }
+
+    @Override
+    public void setInsurancePackagesFilePath(Path insurancePackagesFilePath) {
+        requireNonNull(insurancePackagesFilePath);
+        userPrefs.setInsurancePackagesFilePath(insurancePackagesFilePath);
+    }
+
+    //=========== InsurancePackages ==========================================================================
+    @Override
+    public void setInsurancePackagesSet(InsurancePackagesSet insurancePackagesSet) {
+        this.insurancePackagesSet = new InsurancePackagesSet(insurancePackagesSet);
+    }
+
+    @Override
+    public InsurancePackagesSet getInsurancePackagesSet() {
+        return insurancePackagesSet;
+    }
+
+    @Override
+    public void addInsurancePackage(InsurancePackage p) {
+        this.insurancePackagesSet.addPackage(p);
+    }
+
+    @Override
+    public void deleteInsurancePackage(InsurancePackage p) {
+        this.insurancePackagesSet.removePackage(p);
+    }
+
+    @Override
+    public boolean hasInsurancePackage(InsurancePackage p) {
+        requireNonNull(p);
+        return insurancePackagesSet.hasPackage(p);
+    }
+
+    @Override
+    public void setInsurancePackage(String targetPackageName, String newPackageDesc) {
+        insurancePackagesSet.setPackage(targetPackageName, newPackageDesc);
     }
 
     //=========== AddressBook ================================================================================

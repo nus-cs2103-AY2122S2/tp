@@ -13,16 +13,19 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
 
     /** The application should display the window allowing the user to import a CSV file. */
-    private final boolean importFromCsv;
+    private final boolean isImportFromCsv;
 
     /** The application should display the window allowing the user to export to a CSV file. */
-    private final boolean exportToCsv;
+    private final boolean isExportToCsv;
+
+    /** The application should display the window showing the insurance packages available */
+    private final boolean isShowPackages;
 
 
     /**
@@ -35,10 +38,11 @@ public class CommandResult {
 
         boolean hasSettings = Objects.nonNull(settings);
 
-        this.showHelp = hasSettings && settings.getOrDefault("showHelp", false);
-        this.exit = hasSettings && settings.getOrDefault("exit", false);
-        this.importFromCsv = hasSettings && settings.getOrDefault("importFromCsv", false);
-        this.exportToCsv = hasSettings && settings.getOrDefault("exportToCsv", false);
+        this.isShowHelp = hasSettings && settings.getOrDefault("showHelp", false);
+        this.isExit = hasSettings && settings.getOrDefault("exit", false);
+        this.isImportFromCsv = hasSettings && settings.getOrDefault("importFromCsv", false);
+        this.isExportToCsv = hasSettings && settings.getOrDefault("exportToCsv", false);
+        this.isShowPackages = hasSettings && settings.getOrDefault("showPackages", false);
     }
 
     /**
@@ -54,19 +58,23 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 
     public boolean isImportFromCsv() {
-        return importFromCsv;
+        return isImportFromCsv;
     }
 
     public boolean isExportToCsv() {
-        return exportToCsv;
+        return isExportToCsv;
+    }
+
+    public boolean isShowPackages() {
+        return isShowPackages;
     }
 
     @Override
@@ -82,13 +90,17 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isExit == otherCommandResult.isExit
+                && isImportFromCsv == otherCommandResult.isImportFromCsv
+                && isExportToCsv == otherCommandResult.isExportToCsv
+                && isShowPackages == otherCommandResult.isShowPackages;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(
+                feedbackToUser, isShowHelp, isExit, isImportFromCsv, isExportToCsv, isShowPackages);
     }
 
 }

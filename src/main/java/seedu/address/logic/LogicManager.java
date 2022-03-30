@@ -14,6 +14,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.InsurancePackagesSet;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -54,6 +55,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveInsurancePackages(model.getInsurancePackagesSet());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -118,5 +120,10 @@ public class LogicManager implements Logic {
     @Override
     public String getNextCommand() {
         return commandStorage.getNextCommand();
+    }
+
+    @Override
+    public InsurancePackagesSet getAllPackages() {
+        return model.getInsurancePackagesSet();
     }
 }

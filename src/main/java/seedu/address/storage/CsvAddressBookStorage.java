@@ -67,7 +67,7 @@ public class CsvAddressBookStorage implements AddressBookStorage {
         }
 
         // get the people in the addressbook
-        List<CsvAdaptedPerson> persons = CsvUtil.loadCsvFile(filePath);
+        List<CsvAdaptedPerson> persons = CsvUtil.loadAbCsvFile(filePath);
         Person convertedPerson;
 
         AddressBook addressBook = new AddressBook();
@@ -107,7 +107,7 @@ public class CsvAddressBookStorage implements AddressBookStorage {
         List<CsvAdaptedPerson> persons = new ArrayList<>();
         persons.addAll(addressBook.getPersonList().stream().map(CsvAdaptedPerson::new).collect(Collectors.toList()));
 
-        CsvUtil.saveCsvFile(persons, filePath);
+        CsvUtil.saveAbCsvFile(persons, filePath);
     }
 
 }

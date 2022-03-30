@@ -84,6 +84,10 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        // cannot simply replace the old insurance package, because it might still be in use by another person
+        model.addInsurancePackage(editedPerson.getInsurancePackage());
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
