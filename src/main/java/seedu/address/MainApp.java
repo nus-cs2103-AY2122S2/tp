@@ -208,7 +208,6 @@ public class MainApp extends Application {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveUserPrefs(model.getUserPrefs());
             authentication.createEncryptedFile(storage.getAddressBookFilePath());
-            FileUtil.deleteFile(storage.getAddressBookFilePath());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         } catch (InvalidKeyException e) {
