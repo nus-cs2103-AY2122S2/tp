@@ -8,14 +8,12 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
-
 <?import javafx.scene.control.PasswordField?>
-
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.layout.HBox?>
+
 <fx:root resizable="false" title="Welcome to MedBook" type="javafx.stage.Stage"
-         minWidth="600" minHeight="800" xmlns="http://javafx.com/javafx/11"
+         minWidth="600" minHeight="800" xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1"
          onCloseRequest="#handleExit">
     <icons>
