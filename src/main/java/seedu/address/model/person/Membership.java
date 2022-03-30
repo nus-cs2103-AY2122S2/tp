@@ -71,7 +71,7 @@ public class Membership extends Field {
             return Tier.GOLD;
         } else if (name.equals("silver")) {
             return Tier.SILVER;
-        } else if (name.equals("bronze")){
+        } else if (name.equals("bronze")) {
             return Tier.BRONZE;
         } else {
             return Tier.ALL;
