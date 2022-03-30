@@ -31,6 +31,17 @@ public class Interview {
         this.status = new Status();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Interview(Applicant applicant, LocalDateTime date, Position position, Status status) {
+        requireAllNonNull(applicant, date);
+        this.applicant = applicant;
+        this.date = date;
+        this.position = position;
+        this.status = status;
+    }
+
     public Applicant getApplicant() {
         return applicant;
     }
@@ -73,6 +84,61 @@ public class Interview {
     }
 
     /**
+     * Checks if the given interview can be passed based on the number of offers given for its position.
+     */
+    public boolean isPassableInterview() {
+        return this.position.canExtendOffer();
+    }
+
+    /**
+     * Checks if the given interview can be passed based on the number of offers given for its position.
+     */
+    public boolean isAcceptableInterview() {
+        return this.position.canAcceptOffer();
+    }
+
+    /**
+     * Checks if the given interview can be rejected based on the number of offers.
+     */
+    public boolean isRejectableInterview() {
+        return this.position.canRejectOffer();
+    }
+
+
+
+    /**
+     * Marks an interview as passed and increments the position offering.
+     */
+    public void markAsPassed() {
+        this.status.markAsPassed();
+    }
+
+    /**
+     * Marks an interview as failed.
+     */
+    public void markAsFailed() {
+        this.status.markAsFailed();
+    }
+
+    /**
+     * Marks an interview as accepted.
+     * The interview must already have been passed to be accepted.
+     */
+    public void markAsAccepted() {
+        this.status.markAsAccepted();
+    }
+
+    /**
+     * Marks an interview as rejected.
+     * The interview must already have been passed to be rejected.
+     */
+    public void markAsRejected() {
+        this.status.markAsRejected();
+
+        // decrement position count and offering
+    }
+
+    /**
      * Returns true if both interviews have the same data fields.
      * This defines a stronger notion of equality between two interviews.
      */
@@ -89,6 +155,7 @@ public class Interview {
         Interview otherInterview = (Interview) other;
         return otherInterview.getApplicant().equals(getApplicant())
                 && otherInterview.getDate().equals(getDate())
+                && otherInterview.getStatus().equals(getStatus())
                 && otherInterview.getPosition().equals(getPosition());
     }
 
