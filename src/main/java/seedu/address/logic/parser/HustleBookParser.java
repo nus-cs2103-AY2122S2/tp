@@ -41,7 +41,7 @@ public class HustleBookParser {
      */
     public Command parseCommand(String userInput, Command lastCommand) throws ParseException {
         if (StringUtil.isNonZeroUnsignedInteger(userInput)) {
-            return new NumberParser(userInput, lastCommand).parse();
+            return new NumberParser(lastCommand).parse(userInput);
         }
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
