@@ -99,7 +99,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_oneCorrectKeywordWithLessRestriction_oneWrongKeyword_onePersonFound() {
+    public void execute_oneCorrectAndOneCompleteWrongKeyword_onePersonFound() {
         // Two names inputted but one is incomplete can be found in the list -> one person shown
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("El Kunnz");
@@ -110,7 +110,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_oneCorrectKeywordWithLessRestriction_oneWrongKeywordWithLessRestriction_onePersonFound() {
+    public void execute_correctAndWrongKeywordWithLessRestrictions_onePersonFound() {
         // Two names inputted but one that is incomplete cannot be found in the list -> one person shown
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = preparePredicate("El Qi");
