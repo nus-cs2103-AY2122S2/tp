@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.lesson.Lesson;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -49,8 +52,12 @@ public class ClassGroupCard extends UiPart<Region> {
         classType.setText(classGroup.getClassGroupType().toString());
         moduleCode.setText(classGroup.getModule().getModuleCode().value);
         moduleName.setText(classGroup.getModule().getModuleName().value);
+        ObservableList<Lesson> lessonList = FXCollections.observableArrayList();
+        classGroup.getLessons().forEach((lesson) -> {
+            lessonList.add(lesson);
+        });
 
-        attendanceWindow = new AttendanceWindow(classGroup.getLessons());
+        attendanceWindow = new AttendanceWindow(lessonList);
     }
 
     /**
