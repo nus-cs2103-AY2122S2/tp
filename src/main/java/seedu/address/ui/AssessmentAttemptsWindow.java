@@ -1,22 +1,16 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assessment.Grade;
-import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.student.Student;
 
 /**
@@ -45,8 +39,12 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
         attemptListView.setCellFactory(listView -> new AssessmentAttemptListViewCell());
     }
 
+    /**
+     * Shows the attempts window.
+     * @throws IllegalStateException
+     */
     public void show() {
-        logger.fine("Showing attendance page.");
+        logger.fine("Showing assessment attempts page.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -73,7 +71,8 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code AssessmentAttempt} using a {@code AssessmentAttemptCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code AssessmentAttempt} using a
+     * {@code AssessmentAttemptCard}.
      */
     class AssessmentAttemptListViewCell extends ListCell<AssessmentAttempt> {
         @Override
@@ -97,7 +96,7 @@ public class AssessmentAttemptsWindow extends UiPart<Stage> {
             this.student = student;
             this.grade = grade;
         }
-        
+
         public Student getStudent() {
             return student;
         }

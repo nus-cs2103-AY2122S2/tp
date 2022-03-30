@@ -4,13 +4,10 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -35,6 +32,10 @@ public class AttendanceWindow extends UiPart<Stage> {
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
+    /**
+     * Shows the attendance window.
+     * @throws IllegalStateException
+     */
     public void show() {
         logger.fine("Showing attendance page.");
         getRoot().show();

@@ -1,17 +1,9 @@
 package seedu.address.ui;
 
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.student.Student;
-import seedu.address.model.studentattendance.Attendance;
-import seedu.address.model.studentattendance.StudentAttendance;
 import seedu.address.ui.AssessmentAttemptsWindow.AssessmentAttempt;
 
 /**
