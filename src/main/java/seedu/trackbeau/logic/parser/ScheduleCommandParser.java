@@ -1,6 +1,5 @@
 package seedu.trackbeau.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DATE;
 
@@ -12,7 +11,7 @@ import seedu.trackbeau.logic.commands.ScheduleCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddCustomerCommand object
+ * Parses input arguments and creates a new ScheduleCommand object
  */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public static final String MESSAGE_CONSTRAINT = "Date should follow dd-MM-yyyy.";

@@ -1,12 +1,5 @@
 package seedu.trackbeau.logic.parser;
 
-import seedu.trackbeau.logic.commands.ScheduleCommand;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -16,6 +9,13 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_DATE2;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_REG_DATE_AMY;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.trackbeau.logic.commands.ScheduleCommand;
 
 public class ScheduleCommandParserTest {
     private ScheduleCommandParser parser = new ScheduleCommandParser();

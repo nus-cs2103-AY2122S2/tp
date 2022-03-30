@@ -25,7 +25,6 @@ import java.util.List;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
-import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;

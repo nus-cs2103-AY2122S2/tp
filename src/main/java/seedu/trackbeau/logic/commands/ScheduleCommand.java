@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import seedu.trackbeau.model.Model;
 
 /**
- * Clears trackBeau.
+ * View schedule for the week of selected date.
  */
 public class ScheduleCommand extends Command {
 
@@ -25,6 +25,9 @@ public class ScheduleCommand extends Command {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private final LocalDate selectedDate;
 
+    /**
+     * Create a new ScheduleCommand to display schedule for week of {@code selectDate}
+     */
     public ScheduleCommand(LocalDate selectedDate) {
         requireNonNull(selectedDate);
         this.selectedDate = selectedDate;
