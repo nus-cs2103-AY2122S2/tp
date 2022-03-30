@@ -1,8 +1,10 @@
 package seedu.address.ui;
 
 import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,7 +19,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReminderTask;
 import seedu.address.storage.ReminderPersons;
 
 /**
@@ -81,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
         viewImageWindow = new ViewImageWindow(logic);
         favouriteWindow = new FavouriteWindow(logic);
         statisticsWindow = new StatisticsWindow(logic);
-        reminderWindow = ReminderWindow.getInstance(logic);
+        reminderWindow = new ReminderWindow(logic);
         timer = new Timer();
     }
 
@@ -254,7 +255,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void launchReminders() {
         Timer newTimer = new Timer();
-        ReminderTask tasks = new ReminderTask();
+        RemindersTask tasks = new RemindersTask();
         // launch the Reminder window only when there are active reminders
         if (!ReminderPersons.getInstance().isEmpty()) {
             newTimer.scheduleAtFixedRate(tasks, 60_000, 60_000);
@@ -319,6 +320,23 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    private class RemindersTask extends TimerTask {
+        @Override
+        public void run() {
+            Platform.runLater(() -> {
+                showReminders();
+            });
+        }
+
+        private void showReminders() {
+            if (!reminderWindow.isShowing()) {
+                reminderWindow.show();
+            } else {
+                reminderWindow.focus();
+            }
         }
     }
 }

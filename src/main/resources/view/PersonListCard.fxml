@@ -18,6 +18,9 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
+        <HBox>
+          <Label fx:id="reminder" styleClass="reminder-label" text="\$reminder"/>
+        </HBox>
         <HBox alignment="BASELINE_RIGHT">
           <Label fx:id="favourite" alignment="CENTER" styleClass="cell_small_label" text="\$favourite" />
         </HBox>

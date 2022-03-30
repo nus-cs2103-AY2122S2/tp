@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added a remind command that allows the user to indicate clients they wish to be reminded of.
   * What it does: Allows the user to set reminders for themselves to contact a client/clients, frequently reminds the user by launching the Reminder window if it's not active, or focusing on the Reminder window if it's already active.
-  * Justification: This feature improves the product as the user will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app. A separate Reminder Window containing the clients with Reminders helps the user focus on 
+  * Justification: This feature improves the product as the user will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app. A separate Reminder Window containing the clients with Reminders helps the user focus on
   * Highlights: This feature involves the usage of Threads and was quite tricky to implement because improper handling or usage of Threads could result in performance issues, and the app not behaving properly (closing the app with the Thread still running did not fully close the app & forcing the app to shutdown via IntelliJ resulted in an exit code error).
   * Credits: this feature was implemented with the help of these online resources: [Java Timer](https://www.baeldung.com/java-timer-and-timertask)
 

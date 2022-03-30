@@ -27,7 +27,7 @@
                         </padding>
                         <children>
                             <Label fx:id="reminderStatus" styleClass="reminder-status"/>
-                            <StackPane fx:id="reminderPersonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </children>
                     </VBox>
                 </children>
