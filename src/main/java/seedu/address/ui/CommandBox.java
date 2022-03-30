@@ -48,8 +48,10 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.UP) {
+                event.consume();
                 setPreviousCommand();
             } else if (event.getCode() == KeyCode.DOWN) {
+                event.consume();
                 setNextCommand();
             } else if (event.getCode() == KeyCode.TAB) {
                 event.consume();
