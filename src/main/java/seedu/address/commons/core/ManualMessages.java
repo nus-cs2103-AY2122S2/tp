@@ -27,6 +27,7 @@ public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_CLEAR_COMMAND = "Clears all students from TAPA. "
             + "Additionally, the user will be prompted to confirm clear command. \n"
+            + "*Warning* Clearing TAPA cannot be undone! \n"
             + "Format : clear \n"
             + "Example: clear";
 
@@ -83,6 +84,16 @@ public class ManualMessages {
             + "Format : progress m/MODULE_CODE tn/TASK_NAME \n"
             + "Example: progress m/CS2100 tn/Assignment 1";
 
+    public static final String MANUAL_MESSAGE_HISTORY_COMMAND = "Displays a list of previously executed commands. "
+            + "(Undone commands will not be shown.) \n"
+            + "Format : history \n"
+            + "Example: history";
+
+    public static final String MANUAL_MESSAGE_UNDO_COMMAND = "Reverts the effect of the most recently executed command "
+            + "(except a \"clear\" command or another \"undo\" command). \n"
+            + "Format : undo \n"
+            + "Example: undo";
+
     public static final String MANUAL_MESSAGE_ALL_COMMANDS = "Here are all the commands: \n"
             + "1. add \n"
             + "2. delete \n"
@@ -95,11 +106,13 @@ public class ManualMessages {
             + "9. archive \n"
             + "10. list \n"
             + "11. assign \n"
-            + "12. deleteTask \n"
-            + "13. progress \n"
-            + "14. manual \n"
-            + "15. help \n"
-            + "16. exit \n"
+            + "12. progress \n"
+            + "13. deleteTask \n"
+            + "14. history \n"
+            + "15. undo \n"
+            + "16. manual \n"
+            + "17. help \n"
+            + "18. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";

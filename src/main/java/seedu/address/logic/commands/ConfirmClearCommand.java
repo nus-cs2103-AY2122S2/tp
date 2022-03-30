@@ -18,6 +18,11 @@ public class ConfirmClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
+
+        // reset command history and address book history
+        model.clearCommandHistory();
+        model.clearAddressBookHistory();
+
         return new CommandResult(MESSAGE_CLEAR_ACKNOWLEDGEMENT);
     }
 }
