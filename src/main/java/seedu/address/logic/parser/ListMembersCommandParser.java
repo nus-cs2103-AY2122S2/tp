@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.ListMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Membership;
 import seedu.address.model.person.util.PersonContainsMembershipPredicate;
 
 /**
@@ -19,15 +20,15 @@ public class ListMembersCommandParser implements Parser<ListMembersCommand> {
     public ListMembersCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            return new ListMembersCommand(new PersonContainsMembershipPredicate("ALL"));
+            return new ListMembersCommand(new PersonContainsMembershipPredicate(Membership.Tier.ALL));
         }
-        trimmedArgs = trimmedArgs.toUpperCase();
-        if (!trimmedArgs.equals("GOLD") && !trimmedArgs.equals("SILVER") && !trimmedArgs.equals("BRONZE")) {
+        trimmedArgs = trimmedArgs.toLowerCase();
+        if (!trimmedArgs.equals("gold") && !trimmedArgs.equals("silver") && !trimmedArgs.equals("bronze")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListMembersCommand.MESSAGE_USAGE));
         }
 
-        return new ListMembersCommand(new PersonContainsMembershipPredicate(trimmedArgs));
+        return new ListMembersCommand(new PersonContainsMembershipPredicate(Membership.getTierFromString(trimmedArgs)));
     }
 
 }
