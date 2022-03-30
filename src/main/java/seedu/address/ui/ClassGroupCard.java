@@ -40,6 +40,8 @@ public class ClassGroupCard extends UiPart<Region> {
     private Label moduleCode;
     @FXML
     private Label moduleName;
+    @FXML
+    private Label academicYear;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,6 +54,7 @@ public class ClassGroupCard extends UiPart<Region> {
         classType.setText(classGroup.getClassGroupType().toString());
         moduleCode.setText(classGroup.getModule().getModuleCode().value);
         moduleName.setText(classGroup.getModule().getModuleName().value);
+        academicYear.setText(classGroup.getModule().getAcademicYear().value);
         ObservableList<Lesson> lessonList = FXCollections.observableArrayList();
         classGroup.getLessons().forEach((lesson) -> {
             lessonList.add(lesson);

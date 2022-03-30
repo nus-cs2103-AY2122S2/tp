@@ -27,6 +27,7 @@
         <VBox>
             <Label fx:id="code" text="\$first" styleClass="cell_big_label" />
             <Label fx:id="name" styleClass="cell_small_label" text="\$name" />
+            <Label fx:id="academicYear" styleClass="cell_small_label" text="\$academicyear" />
         </VBox>
       </HBox>
     </VBox>
