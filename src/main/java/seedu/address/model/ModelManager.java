@@ -13,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
@@ -97,6 +99,18 @@ public class ModelManager implements Model {
     public boolean hasPerson(Applicant applicant) {
         requireNonNull(applicant);
         return addressBook.hasApplicant(applicant);
+    }
+
+    @Override
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+        return addressBook.getApplicantWithEmail(email);
+    }
+
+    @Override
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return addressBook.getApplicantWithPhone(phone);
     }
 
     @Override

@@ -99,6 +99,34 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+
+        for (Applicant a : internalList) {
+            if (email.equals(a.getEmail())) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+
+        for (Applicant a : internalList) {
+            if (phone.equals(a.getPhone())) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Applicant> asUnmodifiableObservableList() {

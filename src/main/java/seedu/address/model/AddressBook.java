@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
@@ -93,6 +95,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
         return applicants.contains(applicant);
+    }
+
+    /**
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+        return applicants.getApplicantWithEmail(email);
+    }
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return applicants.getApplicantWithPhone(phone);
     }
 
     /**
