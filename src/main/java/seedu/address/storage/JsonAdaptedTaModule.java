@@ -26,7 +26,7 @@ class JsonAdaptedTaModule {
     private final String moduleName;
     private final String moduleCode;
     private final String academicYear;
-    private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedStudent> moduleStudents = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedTaModule} with the given module details.
@@ -35,12 +35,12 @@ class JsonAdaptedTaModule {
     public JsonAdaptedTaModule(@JsonProperty("moduleName") String moduleName,
                                @JsonProperty("moduleCode") String moduleCode,
                                @JsonProperty("academicYear") String academicYear,
-                               @JsonProperty("students") List<JsonAdaptedStudent> students) {
+                               @JsonProperty("moduleStudents") List<JsonAdaptedStudent> students) {
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
         this.academicYear = academicYear;
-        if (students != null) {
-            this.students.addAll(students);
+        if (!students.isEmpty()) {
+            this.moduleStudents.addAll(students);
         }
     }
 
@@ -51,7 +51,7 @@ class JsonAdaptedTaModule {
         moduleName = source.getModuleName().value;
         moduleCode = source.getModuleCode().value;
         academicYear = source.getAcademicYear().value;
-        students.addAll(source.getStudents().stream()
+        moduleStudents.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
     }
@@ -89,9 +89,8 @@ class JsonAdaptedTaModule {
             throw new IllegalValueException(AcademicYear.MESSAGE_CONSTRAINTS);
         }
         final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
-
         final UniqueStudentList modelStudents = new UniqueStudentList();
-        for (JsonAdaptedStudent s : students) {
+        for (JsonAdaptedStudent s : moduleStudents) {
             Student sObj = s.toModelType();
             if (!studentList.contains(s)) {
                 throw new IllegalValueException(NONEXISTENT_STUDENT);

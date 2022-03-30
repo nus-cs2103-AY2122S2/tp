@@ -229,7 +229,7 @@ Step 2. The user executes `clear` command to remove all existing data in `TAssis
 
 ![AddState1](images/AddState1.png)
 
-Step 3. The user executes `add student` command to add a student to `TAssist`. The `add` command also calls `AddCommandParser#parse()`, which parses the input and returns the index and entity type.    
+Step 3. The user executes `add student` command to add a student to `TAssist`. The `add` command also calls `AddCommandParser#parse()`, which parses the input and returns the index and entity type.
 * An example of the `add student` command: `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe`
 
 ![AddState2](images/AddState2.png)
@@ -343,7 +343,7 @@ Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`.
 
 ![EnrolState0](images/EnrolState1.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enrolled to a class group will automatically be linked to the module it belongs to. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** <br> 1. Student(s) enrolled to a class group will automatically be linked to the module it belongs to.
 <br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enrolled to the given class group.
 </div>
 

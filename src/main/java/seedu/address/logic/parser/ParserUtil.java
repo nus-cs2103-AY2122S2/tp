@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
@@ -22,6 +23,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.Grade;
 import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
@@ -56,6 +58,22 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses optional {@code oneBasedIndex} into an {@code Optional<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Optional<Index> parseOptionalIndex(Optional<String> oneBasedIndex) throws ParseException {
+        if (oneBasedIndex.isEmpty()) {
+            return Optional.empty();
+        }
+        String trimmedIndex = oneBasedIndex.get().trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Optional.of(Index.fromOneBased(Integer.parseInt(trimmedIndex)));
     }
 
     //@@author EvaderFati
@@ -296,6 +314,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a optional {@code String grade} into a {@code Optional<Grade>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static Optional<Grade> parseGrade(Optional<String> grade) throws ParseException {
+        if (grade.isEmpty()) {
+            return Optional.empty();
+        }
+        requireNonNull(grade);
+        String trimmedGrade = grade.get().trim();
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Grade(trimmedGrade));
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -320,6 +356,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if the index size is smaller than the list size
+     */
+    public static boolean checkValidIndex(Index index, int listSize) {
+        if (index.getZeroBased() >= listSize) {
+            return false;
+        }
+        return true;
     }
 
     //@@author jxt00

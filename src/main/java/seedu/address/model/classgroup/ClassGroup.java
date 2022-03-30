@@ -68,13 +68,26 @@ public class ClassGroup implements Entity {
     /**
      * Construct a {@code ClassGroup} by copying all the provided fields.
      */
-    private ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
+    public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
                        UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.taModule = taModule;
         this.uniqueStudentList = uniqueStudentList;
         this.lessons = lessons;
+    }
+
+    /**
+     * Constructs a {@code ClassGroup} with a new module.
+     * Every field must be present and not null.
+     * Used to initialize a class group for enrollment.
+     *
+     * @param toCopy A valid class group.
+     */
+    public ClassGroup(ClassGroup toCopy, TaModule newModule) {
+        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(), newModule, new UniqueStudentList(),
+                toCopy.lessons);
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
     }
 
     /**

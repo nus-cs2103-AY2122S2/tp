@@ -28,9 +28,21 @@ public class Lesson {
      * @param weekId A valid week ID.
      */
     public Lesson(WeekId weekId) {
+        this(weekId, new ArrayList<StudentAttendance>());
+    }
+
+    /**
+     * Constructs a {@code Lesson}.
+     * {@code weekId} must be present and not null.
+     *
+     * @param weekId A valid week ID.
+     * @param studentAttendanceList A list of {@code StudentAttendance} objects.
+     */
+    public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
         requireAllNonNull(weekId);
         this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<StudentAttendance>();
+        this.studentAttendanceList = new ArrayList<>();
+        studentAttendanceList.addAll(studentAttendanceList);
     }
 
     public WeekId getWeekId() {

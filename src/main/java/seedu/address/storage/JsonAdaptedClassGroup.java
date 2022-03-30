@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +11,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.TaModule;
 
 //@@author jxt00
@@ -20,10 +24,13 @@ class JsonAdaptedClassGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ClassGroup's %s field is missing!";
     public static final String NONEXISTENT_MODULE = "Module does not exist!";
+    public static final String NONEXISTENT_STUDENT = "Student does not exist!";
 
     private final String classGroupId;
     private final String classGroupType;
     private final JsonAdaptedTaModule module;
+    private final List<JsonAdaptedStudent> classGroupStudents = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClassGroup} with the given class group details.
@@ -31,10 +38,18 @@ class JsonAdaptedClassGroup {
     @JsonCreator
     public JsonAdaptedClassGroup(@JsonProperty("classGroupId") String classGroupId,
             @JsonProperty("classGroupType") String classGroupType,
-            @JsonProperty("module") JsonAdaptedTaModule module) {
+            @JsonProperty("module") JsonAdaptedTaModule module,
+            @JsonProperty("classGroupStudents") List<JsonAdaptedStudent> classGroupStudents,
+            @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.module = module;
+        if (!classGroupStudents.isEmpty()) {
+            this.classGroupStudents.addAll(classGroupStudents);
+        }
+        if (!lessons.isEmpty()) {
+            this.lessons.addAll(lessons);
+        }
     }
 
     /**
@@ -44,6 +59,12 @@ class JsonAdaptedClassGroup {
         classGroupId = source.getClassGroupId().value;
         classGroupType = source.getClassGroupType().toString();
         module = new JsonAdaptedTaModule(source.getModule());
+        classGroupStudents.addAll(source.getStudents().stream()
+                .map(JsonAdaptedStudent::new)
+                .collect(Collectors.toList()));
+        lessons.addAll(source.getLessons().stream()
+                .map(JsonAdaptedLesson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -94,6 +115,20 @@ class JsonAdaptedClassGroup {
             throw new IllegalValueException(NONEXISTENT_MODULE);
         }
 
-        return new ClassGroup(modelClassGroupId, modelClassGroupType, modelModule);
+        final UniqueStudentList modelStudents = new UniqueStudentList();
+        for (JsonAdaptedStudent s : classGroupStudents) {
+            Student sObj = s.toModelType();
+            if (!studentList.contains(s)) {
+                throw new IllegalValueException(NONEXISTENT_STUDENT);
+            }
+            modelStudents.add(sObj);
+        }
+
+        final List<Lesson> modelLessons = new ArrayList<Lesson>();
+        for (JsonAdaptedLesson l : lessons) {
+            modelLessons.add(l.toModelType(studentList));
+        }
+
+        return new ClassGroup(modelClassGroupId, modelClassGroupType, modelModule, modelStudents, modelLessons);
     }
 }
