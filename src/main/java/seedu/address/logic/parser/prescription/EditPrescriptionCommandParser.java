@@ -26,35 +26,41 @@ public class EditPrescriptionCommandParser {
      */
     public EditPrescriptionCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_DATE,
-                    PREFIX_INSTRUCTION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_DATE,
+                PREFIX_INSTRUCTION);
 
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-            EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor =
-                    new EditPrescriptionCommand.EditPrescriptionDescriptor();
-
-            if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-                editPrescriptionDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
-            }
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editPrescriptionDescriptor.setDrugName(ParserUtil.parseDrugName(
-                        argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                editPrescriptionDescriptor.setPrescriptionDate(ParserUtil.parsePrescriptionDate(
-                        argMultimap.getValue(PREFIX_DATE).get()));
-            }
-            if (argMultimap.getValue(PREFIX_INSTRUCTION).isPresent()) {
-                editPrescriptionDescriptor
-                        .setResult(ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get()));
-            }
-
-            return new EditPrescriptionCommand(index, editPrescriptionDescriptor);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPrescriptionCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            throw new ParseException(EditPrescriptionCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
         }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditPrescriptionCommand.MESSAGE_USAGE), pe);
+        }
+
+        EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor =
+                new EditPrescriptionCommand.EditPrescriptionDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPrescriptionDescriptor.setDrugName(ParserUtil.parseDrugName(
+                    argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            editPrescriptionDescriptor.setPrescriptionDate(ParserUtil.parsePrescriptionDate(
+                    argMultimap.getValue(PREFIX_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_INSTRUCTION).isPresent()) {
+            editPrescriptionDescriptor
+                    .setResult(ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get()));
+        }
+
+        if (!editPrescriptionDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditPrescriptionCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditPrescriptionCommand(index, editPrescriptionDescriptor);
     }
 }
