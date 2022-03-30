@@ -29,7 +29,7 @@ public class SellerBuilder {
     private PropertyToSell desiredProperty;
 
     /**
-     * Creates a {@code clientBuilder} with the default details.
+     * Creates a {@code sellerBuilder} with the default details.
      */
     public SellerBuilder() {
         name = new Name(DEFAULT_NAME);

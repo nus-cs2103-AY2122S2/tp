@@ -30,7 +30,7 @@ public class BuyerBuilder {
 
 
     /**
-     * Creates a {@code clientBuilder} with the default details.
+     * Creates a {@code buyerBuilder} with the default details.
      */
     public BuyerBuilder() {
         name = new Name(DEFAULT_NAME);

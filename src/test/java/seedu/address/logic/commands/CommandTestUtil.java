@@ -21,6 +21,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.testutil.EditClientDescriptorBuilder;
@@ -37,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CHAD = "33333333";
     public static final PropertyToBuy VALID_PROPERTY_BUY_CHAD = new PropertyToBuy(new House(HouseType.HDB_FLAT,
-            "jurong"), new PriceRange(1000, 2000));
+            new Location("jurong")), new PriceRange(1000, 2000));
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_AMY = "A remark";
