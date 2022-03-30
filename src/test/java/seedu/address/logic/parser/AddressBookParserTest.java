@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COVID_STATUS_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -26,6 +28,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -109,9 +112,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_filter() throws Exception {
         FilterCommand.FilterDescriptor filterDescriptorTest = new FilterCommand.FilterDescriptor();
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        CovidStatus positive = new CovidStatus("positive");
+        filterDescriptorTest.setCovidStatus(positive);
         FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FilterCommand.COMMAND_WORD + " " + PREFIX_COVID_STATUS + VALID_COVID_STATUS_BOB);
         assertEquals(new FilterCommand(filterDescriptorTest), command);
     }
 

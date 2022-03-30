@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Block;
 import seedu.address.model.person.CovidStatus;
@@ -28,7 +29,8 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_COVID_STATUS + "positive " + PREFIX_FACULTY + "soc "
             + PREFIX_BLOCK + "e";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all persons.";
+    public static final String MESSAGE_NO_VALID_FILTERS = "No valid filters added.";
 
     private FilterDescriptor filterDescriptor;
 
@@ -42,7 +44,11 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
+        if (filterDescriptor.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_VALID_FILTERS);
+        }
+
         requireNonNull(model);
         Predicate<Person> filters = filterDescriptor.getFilters();
         model.updateFilteredPersonList(filters);
@@ -112,6 +118,12 @@ public class FilterCommand extends Command {
         public void setBlock(Block block) {
             this.block = block;
             filters.set(BLOCK_INDEX, blockFilter);
+        }
+
+        public boolean isEmpty() {
+            return filters.get(FACULTY_INDEX) == defaultFilter
+                    && filters.get(COVID_STATUS_INDEX) == defaultFilter
+                    && filters.get(BLOCK_INDEX) == defaultFilter;
         }
 
         @Override
