@@ -22,6 +22,8 @@ public class SortCommand extends Command {
             + "Parameters: SKILL\n"
             + "Example: " + COMMAND_WORD + " Java";
 
+    public static final String MESSAGE_INVALID_SKILL = "Invalid skill name: %s";
+
     private final PersonContainsSkillPredicate predicate;
 
     private final PersonBySkillProficiencyComparator comparator;

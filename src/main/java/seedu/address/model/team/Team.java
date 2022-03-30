@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Team {
 
-    public static final String MESSAGE_CONSTRAINTS = "teams names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "teams names should be alphanumeric word(s)";
+    // The REGEX below is the regex that checks for the team name constraint mentioned on MESSAGE_CONSTRAINTS
+    public static final String VALIDATION_REGEX = "[\\d|\\w|\\s]+";
 
     public final String teamName;
 

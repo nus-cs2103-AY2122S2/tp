@@ -9,10 +9,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Skill {
 
-    public static final String NAME_CONSTRAINTS = "Skill names should be alphanumeric";
-    public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String PROFICIENCY_CONSTRAINTS = "Skill proficiency should be within range of 1-100";
-    public static final String PROFICIENCY_VALIDATION_REGEX = "^[0-9]$|^[1-9][0-9]$|^(100)$";
+    public static final String NAME_CONSTRAINTS =
+        "Skill names should be alphanumeric word(s) that can contain special characters #, +, and -";
+    //The regex below checks for skill name constraints dexcribed in NAME_CONSTRAINTS above.
+    public static final String NAME_VALIDATION_REGEX = "[\\w|\\d|\\s#+-]+";
+    public static final String PROFICIENCY_CONSTRAINTS_RANGE = "Skill proficiency should be within range of 1-100";
+    public static final String PROFICIENCY_CONSTRAINTS_INTEGER = "Skill proficiency must be an integer";
+    public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[0-9]$|^[1-9][0-9]$|^(100)$";
+    public static final String PROFICIENCY_VALIDATION_ONLY_INTEGERS = "^[0-9]+$";
+    public static final String SKILL_INPUT_CONSTRAINTS = "Skill input should be: Skill Name_Skill proficiency. eg: "
+        + "Java_50";
 
     public final String skillName;
     public final int skillProficiency;
@@ -20,14 +26,13 @@ public class Skill {
     /**
      * Constructs a {@code Skill}.
      *
-     * @param skillName A valid skill name.
+     * @param skillName        A valid skill name.
      * @param skillProficiency A valid skill proficiency.
      */
     public Skill(String skillName, int skillProficiency) {
         requireNonNull(skillName);
-        requireNonNull(skillProficiency);
         checkArgument(isValidSkillName(skillName), NAME_CONSTRAINTS);
-        checkArgument(isValidSkillProficiency(skillProficiency), PROFICIENCY_CONSTRAINTS);
+        checkArgument(isValidSkillProficiencyRange(skillProficiency), PROFICIENCY_CONSTRAINTS_RANGE);
         this.skillName = skillName;
         this.skillProficiency = skillProficiency;
     }
@@ -54,9 +59,16 @@ public class Skill {
     /**
      * Returns true if a given int is a valid skill proficiency level.
      */
-    public static boolean isValidSkillProficiency(int test) {
+    public static boolean isValidSkillProficiencyRange(int test) {
         String testInt = String.valueOf(test);
-        return testInt.matches(PROFICIENCY_VALIDATION_REGEX);
+        return testInt.matches(PROFICIENCY_VALIDATION_BETWEEN_0_TO_100);
+    }
+
+    /**
+     * Returns true if given String contains only integers
+     */
+    public static boolean isValidSkillProficiencyInteger(String test) {
+        return test.matches(PROFICIENCY_VALIDATION_ONLY_INTEGERS);
     }
 
     public boolean isSameSkill(Skill skill) {
@@ -66,9 +78,9 @@ public class Skill {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Skill // instanceof handles nulls
-                && skillName.equals(((Skill) other).skillName)
-                && skillProficiency == ((Skill) other).skillProficiency); // state check
+            || (other instanceof Skill // instanceof handles nulls
+            && skillName.equals(((Skill) other).skillName)
+            && skillProficiency == ((Skill) other).skillProficiency); // state check
     }
 
     @Override

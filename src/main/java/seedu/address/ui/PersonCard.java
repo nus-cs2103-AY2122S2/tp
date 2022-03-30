@@ -72,9 +72,11 @@ public class PersonCard extends UiPart<Region> {
             hs.showDocument(username.getGithubProfileLink());
         });
 
+        teams.getStyleClass().add("teamSet");
         person.getTeams().stream()
             .sorted(Comparator.comparing(team -> team.teamName))
             .forEach(team -> teams.getChildren().add(new Label(team.teamName)));
+
         person.getSkillSet().getSkillSetInStream()
             .sorted(Comparator.comparing(skill -> skill.skillName))
             .forEach(skill -> {

@@ -3,7 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -27,6 +30,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -35,6 +39,24 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses multiple {@code oneBasedIndex} in string format and returns a list of {@code Index}
+     *
+     * @param oneBasedIndices the string representation of indices separated with the given regex
+     * @param regex           regular expression to separate the indices in String
+     * @return the list of indices
+     * @throws ParseException if one of the arguments cannot be interpreted as an {@code Index}
+     */
+    public static LinkedList<Index> parseIndices(String oneBasedIndices, String regex) throws ParseException {
+        String[] numbers = oneBasedIndices.split(regex);
+        LinkedList<Index> indices = new LinkedList<>();
+        for (String number : numbers) {
+            number = number.trim();
+            indices.add(parseIndex(number));
+        }
+        return indices;
     }
 
     /**
@@ -113,7 +135,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String skill} into a {@code skill}.
+     * Parses a {@code String skill} into a {@code skill}.'
+     *
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code skill} is invalid.
@@ -121,15 +144,22 @@ public class ParserUtil {
     public static Skill parseSkill(String skill) throws ParseException {
         requireNonNull(skill);
         String[] trimmedSkill = skill.trim().split("_");
+        if (trimmedSkill.length != 2) {
+            throw new ParseException(Skill.SKILL_INPUT_CONSTRAINTS);
+        }
         String skillName = trimmedSkill[0];
+        String trimmedSkillName = skillName.trim();
+        if (!Skill.isValidSkillProficiencyInteger(trimmedSkill[1])) {
+            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_INTEGER);
+        }
         int skillProficiency = Integer.parseInt(trimmedSkill[1]);
-        if (!Skill.isValidSkillName(skillName)) {
+        if (!Skill.isValidSkillName(trimmedSkillName)) {
             throw new ParseException(Skill.NAME_CONSTRAINTS);
         }
-        if (!Skill.isValidSkillProficiency(skillProficiency)) {
-            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS);
+        if (!Skill.isValidSkillProficiencyRange(skillProficiency)) {
+            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_RANGE);
         }
-        return new Skill(skillName, skillProficiency);
+        return new Skill(trimmedSkillName, skillProficiency);
     }
 
     /**
@@ -155,4 +185,35 @@ public class ParserUtil {
         }
         return skillSet;
     }
+
+    /**
+     * Parses {@code Collection<String> teams} into a {@code Set<Team>} if {@code teams} is non-empty.
+     * If {@code teams} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Team>} containing zero teams.
+     */
+    public static Optional<Set<Team>> parseTeamsForEdit(Collection<String> teams) throws ParseException {
+        assert teams != null;
+
+        if (teams.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> set = teams.size() == 1 && teams.contains("") ? Collections.emptySet() : teams;
+        return Optional.of(ParserUtil.parseTeams(set));
+    }
+
+    /**
+     * Parses {@code Collection<String> skillset} into a {@code Set<Skill>} if {@code skill} is non-empty.
+     * If {@code skill} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Skill>} containing zero tags.
+     */
+    public static Optional<SkillSet> parseSkillSetForEdit(Collection<String> skill) throws ParseException {
+        assert skill != null;
+
+        if (skill.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> skillSet = skill.size() == 1 && skill.contains("") ? Collections.emptySet() : skill;
+        return Optional.of(ParserUtil.parseSkillSet(skillSet));
+    }
+
 }

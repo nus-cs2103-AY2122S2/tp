@@ -25,10 +25,15 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MakeTeamCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ShowCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonBySkillProficiencyComparator;
+import seedu.address.model.person.PersonContainsSkillPredicate;
+import seedu.address.model.team.Skill;
+import seedu.address.model.team.SkillSet;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -58,12 +63,21 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editResetMode() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_PERSON.getOneBased() + " -r " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, true), command);
+    }
+
+    @Test
+    public void parseCommand_editDefaultMode() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+            + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor, false), command);
     }
 
     @Test
@@ -82,8 +96,20 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + "") instanceof HelpCommand);
+        assertThrows(ParseException.class, ()-> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        Skill skill = new Skill("C");
+        SkillSet skillSet = new SkillSet();
+        skillSet.add(skill);
+        PersonContainsSkillPredicate predicate = new PersonContainsSkillPredicate(skillSet);
+        PersonBySkillProficiencyComparator comparator = new PersonBySkillProficiencyComparator(skill);
+
+        SortCommand expectedCommand = new SortCommand(predicate, comparator);
+        assertEquals(expectedCommand, parser.parseCommand(SortCommand.COMMAND_WORD + " C"));
     }
 
     @Test

@@ -24,11 +24,11 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
       * [Sort person by technical skill: sort](#sorting-persons-by-skill-proficiency-sort)
       * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
       * [Show potential teammates: show](#show-all-potential-teammates-show)
-    * [Exiting HackNet](#exiting-the-program-exit)
     * [Undo](#undo-last-command-undo)
     * [Redo](#redo-last-command-redo)
+    * [Navigating User Input History](#navigating-user-input-history)
+    * [Exiting HackNet](#exiting-the-program-exit)
 * [Data](#data)
-* [Future Updates](#future-updates)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -72,10 +72,10 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
     * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-    * e.g `n/NAME [t/Team]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+    * e.g `n/NAME [t/TEAM]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-    * e.g. `[t/Team]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+    * e.g. `[t/TEAM]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
     * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -107,7 +107,7 @@ This section contains commands that can help you manage the details of your cont
 
 Adds a person to HackNet.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of teams (including 0)
@@ -121,33 +121,39 @@ Examples:
 
 Edits an existing person in HackNet.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `edit INDEX [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing teams, the existing teams of the person will be removed i.e adding of teams is not cumulative.
+* In default mode, editing teams appends the new team to the person.
+* -r option activates reset mode.
+* In reset mode, editing teams edits the teams of a person from scratch. i.e adding of teams is not cumulative. You can remove all the person’s teams by typing `t/` without
+  specifying any teams after it.
+* The concept of default and reset mode applies with the skill field with prefix `s/` as well.
+
+Examples:
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 -r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
+* `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
+
+### Batch editing multiple persons: `batchedit`
+
+Edits multiple persons in HackNet.
+
+Format: `batchedit INDEX... [s/SKILLNAME_SKILLPROFICENCY...] [t/TEAM...]`
+
+* Edits multiple persons in the specified 'INDEX...'. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Existing values will be updated to the input values.
+* If some of the indices are invalid, HackNet will try its best to edit at least for the valid indices.
+* At least one field to edit must be provided.
+* The values after `t/` and `s/` is divided by commas.
 * You can remove all the person’s teams by typing `t/` without
   specifying any teams after it. Same concept applies with the skill field with prefix `s/`
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
-
-### Add/remove potential teammates: `team/unteam`
-
-Format:
-* `team INDEX`
-* `unteam INDEX`
-    * Adds/removes the person at `INDEX`as potential teammate
-    * The index refers to the index number shown in the displayed person list
-    * The index **must be a positive integer** 1, 2, 3, …​
-    * Redundant adding/removal (e.g. adding someone who is already a potential teammate) is not allowed
-
-Examples:
-* `team 1` adds the first person as a potential teammate
-
-![result for 'team 1'](images/teamCommandResult.png)
+* `batchedit 1 2 3 s/Java_100, Python_80` Edits the skill set of the 1st, 2nd and 3rd person to be `java` and `python` with proficiency of 100 and 80.
+* `batchedit 2 3 s/ t/GoogleProject, Hackathon 2022` Clears the skill set of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
 
 ### Deleting a person: `delete`
 
@@ -225,11 +231,27 @@ Format: `sort SKILL`
 Examples:
 * `sort Python` shows persons with `Python` as a skill in descending order of proficiency
 
+### Mark/unmark contact as potential teammates: `team/unteam`
+
+Format:
+* `team INDEX`
+* `unteam INDEX`
+    * Marks/unmarks the person at `INDEX`as potential teammate
+    * The index refers to the index number shown in the displayed person list
+    * The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `team 1` marks the first person as a potential teammate
+
+![result for 'team 1'](images/teamCommandResultBefore.png)
+
+![result for 'team 1'](images/teamCommandResultAfter.png)
+
 ### Filter for past teammates: `filterteam`
 
 Shows a list of past teammates in HackNet.
 
-Format: `list`
+Format: `filterteam`
 
 ### Show all potential teammates: `show`
 
@@ -252,6 +274,12 @@ Only these commands that changed HackNet can be undone:
 
 Redo the command that was previously undone.
 
+### Navigating User Input History: `↑`, `↓`
+
+Allows user to quickly retrieve their previous inputs from current session by using the up and down arrow keys.
+
+Format: `↑`, `↓`
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -260,9 +288,11 @@ Format: `exit`
 
 ## Data
 
+This section contains information about how we save your data across sessions.
+
 ### Saving the data
 
-Hacknet data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HackNet data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -275,12 +305,6 @@ If your changes to the data file makes its format invalid, HackNet will discard 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
-
-## Future updates
-
-Input validation for skills<br>
-update skills<br>
-filter by multiple skills<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -308,3 +332,4 @@ Action | Format, Examples
 **Filter Past Teammates** | `filterteam` 
 **Show potential teammates** | `show`
 **Exit HackNet** | `exit`
+**Navigate User Input History** | `↑`, `↓`
