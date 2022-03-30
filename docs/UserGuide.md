@@ -66,7 +66,7 @@ ArchDuke is a **desktop app for managing student contacts and groups, optimized 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page and shows the format of all commands.
 
 ![help message](images/helpMessage.png)
 
@@ -99,8 +99,12 @@ There is no need to save manually.
 
 ### Add student contact information: `add`
 
-Adds a student contact information to ArchDuke. `add` must be followed by the student’s name, 
-phone number, email, and academic major. Tag is optional.
+Adds a student contact information to ArchDuke. `add` must be followed by the student’s `NAME`, 
+`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional. 
+
+Note: A student contact can only be added if it **has yet to exist** in ArchDuke. The student contact 
+is uniquely identified by his `NAME` with no regards to case sensitivity. E.g. `John Doe` would be the 
+same person as `john doe`
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
 
@@ -122,9 +126,9 @@ Expected outcome:
 
 ### Delete student contact information: `delete`
 
-Deletes a student contact information at the specified index from ArchDuke.
-The index refers to the index number shown in the displayed student contact list. 
-The index must be a positive integer. The student deleted student contact would also be 
+Deletes a student contact information at the specified `INDEX` from ArchDuke.
+The `INDEX` refers to the index number shown in the currently displayed student contact list. 
+The `INDEX` **must be a positive integer**. The student deleted student contact would also be 
 deleted from all his previously assigned groups.
 
 Format: `delete INDEX`
@@ -138,6 +142,14 @@ Example:
 Expected outcome:
 
 * The student contact is removed from ArchDuke. The student contact is also removed from all previously assigned groups.
+
+Before delete:
+
+![](images/BeforeDelete.png)
+
+After delete:
+
+![](images/AfterDelete.png)
 
 ### Locating student contacts by attributes: `find`
 
@@ -161,6 +173,7 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`)
 
 Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]` for these `PREFIX`: `n/`, `a/`, `t/`
+
 Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
 
 Example:
@@ -181,6 +194,10 @@ match those keywords.
 ### Create a group: `addgroup`
 
 Creates a group in ArchDuke.
+
+Note: A group can only be added if it **has yet to exist** in ArchDuke. The group
+is uniquely identified by a `GROUP_NAME` with no regards to case sensitivity. E.g. `NUS` would be the
+same group as `Nus` and `nus`
 
 Format: `addgroup g/GROUP_NAME`
 
@@ -208,9 +225,10 @@ Expected outcome:
 
 ### Assign a student to a group: `assign`
 
-Assigns a student to an existing group in ArchDuke. `assign` is followed by the index at which the student is 
-in the ArchDuke contact list and the group name in which the student would be assigned. 
-The group must **already exist** in ArchDuke, and the index must be a **positive integer**.
+Assigns a student to an existing group in ArchDuke. `assign` is followed by the `INDEX` at which the student is 
+in the currently displayed ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
+The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive integer**. The student contact **must 
+has yet to be currently assigned** to the group. 
 
 Format: `assign INDEX g/GROUP_NAME`
 
@@ -224,11 +242,20 @@ Expected outcome:
 
 * Assigns the specified student to the specified group.
 
+Before assign:
+
+![](images/BeforeAssign.png)
+
+After assign:
+
+![](images/AfterAssign.png)
+
 ### Deassign a student from a group: `deassign`
 
-Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the index at which the student
-is in the ArchDuke contact list and the group name in which the student would be deassigned. 
-The group must **already exist** in ArchDuke, and the index must be a **positive integer**.
+Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the `INDEX` at which the student
+is in the currently displayed ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
+The group must **already exist** in ArchDuke, and the index must be a **positive integer**. The student contact **must have 
+currently been assigned** to the group.  
 
 Format: `deassign INDEX g/GROUP_NAME`
 
@@ -244,8 +271,8 @@ Expected outcome:
 
 ### View student contacts in an existing group: `viewcontact`
 
-Displays the student contacts from the specified group. `viewcontact` must be followed by a group name.
-The group must already exist in ArchDuke.
+Displays the student contacts from the specified group. `viewcontact` must be followed by a `GROUP_NAME`.
+The group **must already exist** in ArchDuke.
 
 Format: `viewcontact g/GROUP_NAME`
 
@@ -263,8 +290,12 @@ Expected outcome:
 
 ### Add a task in a group: `addtask`
 
-Adds a task to the specified group. `addtask` must be followed by a task name and a group name. 
-The group must **already exist** in ArchDuke.
+Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
+The group must **already exist** in ArchDuke. The task **must not already exist** in ArchDuke.
+
+Note: A task can only be added if it **has yet to exist** in the particular. The task
+is uniquely identified by a `TASK_NAME` with no regards to case sensitivity. E.g. `MEETING` would be the
+same task as `Meeting` and `meeting`
 
 Format: `addtask task/TASK_NAME g/GROUP_NAME`
 
@@ -278,10 +309,18 @@ Expected outcome:
 
 * Adds the task to the specified group in ArchDuke. The task appears inside the group.
 
+Before add task:
+
+![](images/BeforeAddtask.png)
+
+After add task:
+
+![](images/AfterAddtask.png)
+
 ### Delete a task in a group: `deltask`
 
-Deletes a task from the specified group. `deltask` must be followed by a task name and a group name. 
-The group must **already exist** in ArchDuke.
+Deletes a task from the specified group. `deltask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
+The group must **already exist** in ArchDuke. The task must **already exist** in the particular group.
 
 Format: `deltask task/TASK_NAME g/GROUP_NAME`
 
@@ -297,8 +336,8 @@ Expected outcome:
 
 ### Displays the tasks in a group: `viewtask`
 
-Displays the tasks from the specified group. `viewtask` must be followed by a group name. 
-The group must already exist in ArchDuke.
+Displays the tasks from the specified group. `viewtask` must be followed by a `GROUP_NAME`. 
+The group must **already exist** in ArchDuke.
 
 Format: `viewtask g/GROUP_NAME`
 
@@ -320,6 +359,14 @@ Expected outcome:
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file 
 that contains the data of your previous ArchDuke home folder.
 
+**Q**: When and why does ArchDuke use sample data?<br>
+**A**: ArchDuke uses sample data when the application is first launched. The purpose of the sample data is to 
+let the new user experiment with the data while getting familiar with ArchDuke. If you wish to start using ArchDuke
+fresh from the start, you could use the `clear` command to clear all the sample data.
+
+**Q**: What is an academic major?<br>
+**A**: An academic major is simply the major that the student is studying in university.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -330,7 +377,11 @@ Action | Format, Examples
 --------|------------------
 **View help** | `help`
 **List all student contacts** | `list`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find name** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
+**Find academic major** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find a/Computer Science`
+**Find tag** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friends colleagues`
+**Find phone number** | `find KEYWORD`<br> e.g., `find p/12345678`
+**Find email** | `find KEYWORD`<br> e.g., `find e/example@u.nus.edu`
 **Clear entries** | `clear`
 **Exit** | `exit`
 
