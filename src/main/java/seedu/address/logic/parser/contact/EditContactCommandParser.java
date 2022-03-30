@@ -36,10 +36,6 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-            throw new ParseException(EditContactCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
-        }
-
         Index index;
 
         try {
@@ -47,6 +43,10 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditContactCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            throw new ParseException(EditContactCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
         }
 
         EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
