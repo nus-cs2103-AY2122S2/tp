@@ -63,6 +63,7 @@ Before you continue reading the rest of our user guide, the table below displays
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
 4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
+   * Do note that for Linux OS, you may have to [enable double clicking to run JAR files](https://askubuntu.com/a/270175) first!
 
 5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
@@ -380,6 +381,19 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 ### Importing a show: `import`
 
+**Description:** Want to easily import Trackermon data from other devices? Just use our import function!
+
+**Format:** `import`
+
+**Example & Output:** `import`
+- Step 1. Navigate to the Trackermon data you want to import using your OS' native GUI!
+- Step 2. Select the file and click "Open"
+  - Do note that only JSON files can be imported!
+- Step 3. Trackermon will import the selected file and display the imported show list!
+  - If there was an error importing the file, Trackermon will display an error message!
+
+<img src="images/Import.png">
+
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -387,6 +401,17 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 ### Exporting a show: `export`
 
+**Description:** Want to easily export Trackermon data to other devices? Just use our export function!
+
+**Format:** `export`
+
+**Example & Output:** `export`
+- Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native GUI!
+- Step 2. Select the file and click "Save"
+- Step 3. Trackermon will export the selected file. It's that easy!
+  - If there was an error exporting the file, Trackermon will display an error message!
+
+<img src="images/Export.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -422,13 +447,16 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 ## FAQ
 * **Q:** Where is the data of Trackermon saved?<br>
-**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.<br><br>
+**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data! There is no need for you to save manually.<br><br>
 
 * **Q:** How is my data being saved in Trackermon?<br>
-**A:** <br><br>
+**A:** Your data will be stored as a JSON file called `trackermon.json`! You can find it in the "data" folder in Trackermon's _home folder_.<br><br>
 
-* **Q:** How do I transfer my data to another Computer?<br>
-  **A:**  
+* **Q:** How do I transfer my data to another computer?<br>
+  **A:** 
+  * Firstly, `export` your data to an external storage device. 
+  * Next, on your other Computer, simply start up Trackermon and `import` the data from the previous step!
+  * Congratulations! You've just transferred your data across different computers!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
