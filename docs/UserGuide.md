@@ -127,6 +127,33 @@ Examples:
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
+## Sorting persons
+
+Sorts the list of persons displayed according to one or more keywords.
+
+Format: `sort [!]KEYWORD [[!]MORE_KEYWORDS]…`
+
+- `KEYWORD` can be one of `name` `phone` `email` `address` `favourite` `usertype` `num_property` (case-insensitive)
+- Prefixing a keyword with `!` will reverse the sorting order for that keyword
+- If multiple keywords are specified, the list is sorted according to the order in which the keywords are specified, i.e., subsequent keywords are used to break ties after sorting by the previous keyword.
+
+The following table shows the keywords and the default sorting behaviours:
+
+| Keyword        | Default Behaviour                   |
+|----------------|-------------------------------------|
+| `name`         | Sort by `Name` alphabetically       |
+| `phone`        | Sort by `Phone` numerically         |
+| `email`        | Sort by `Email` lexicographically   |
+| `address`      | Sort by `Address` lexicographically |
+| `favourite`    | Show favourites first               |
+| `usertype`     | Show buyers first                   |
+| `num_property` | Sort by number of `Property`        |
+
+Examples:
+- `sort address name phone` will sort the list by `Address` first. If there are entries with equal `Address`, the entries will be sorted by `Name`. If there are entries with equal `Address` and `Name`, they will be sorted by `Phone`
+- `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`
+- `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
+
 ### Deleting a person: `delete`
 
 Deletes the specified person from the address book.
@@ -240,19 +267,19 @@ Opens up a new window that shows a pie chart of the number of buyers & sellers w
 # FAQ
 
 # Command Summary
-| Action | Format                             | Examples                                                                                                             |
-| --- |------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
-| Clear | clear                              | -                                                                                                                    |
-| Delete | delete INDEX | e.g. delete 3                                                                                                        |
-| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE] | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
-| Find | find ATTRIBUTE KEYWORD [MORE KEYWORDS...] | e.g. find name James Jake                                                                                            |
-| Upload | upload INDEX [i/FilePath:Description] | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat |
-| viewimage | viewimage INDEX | e.g. viewimage 1 |
-| List | list | -                                                                                                                    |
-| Help | help | -                                                                                                                    |
-|Match | match | -                                                                                                                    |
-| Favourite | favourite INDEX | e.g., favourite 3                                                                                                    |
-| Favourites window | fw  | - | 
-| Statistics window | stats | - | 
-
+| Action            | Format                                                                                   | Examples                                                                                                             |
+|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
+| Clear             | clear                                                                                    | -                                                                                                                    |
+| Delete            | delete INDEX                                                                             | e.g. delete 3                                                                                                        |
+| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
+| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                | e.g. find name James Jake                                                                                            |
+| Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                      | e.g. sort name !phone email                                                                                          |
+| Upload            | upload INDEX [i/FilePath:Description]                                                    | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                            |
+| viewimage         | viewimage INDEX                                                                          | e.g. viewimage 1                                                                                                     |
+| List              | list                                                                                     | -                                                                                                                    |
+| Help              | help                                                                                     | -                                                                                                                    |
+| Match             | match                                                                                    | -                                                                                                                    |
+| Favourite         | favourite INDEX                                                                          | e.g., favourite 3                                                                                                    |
+| Favourites window | fw                                                                                       | -                                                                                                                    | 
+| Statistics window | stats                                                                                    | -                                                                                                                    | 
