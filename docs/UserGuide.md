@@ -335,11 +335,12 @@ Format: `exit`
 the data of your previous TeachWhat! folder.
 
 **Q**: Why are both student and lesson lists empty? <br>
-**A**: This is most probably due to data in the respective files that holds the data for students and lessons. To guard
-against the possibility of you being misled by corrupted data, TeachWhat! will wipe all data and start from scratch if any
-irregularity is found in the data files for students *or* lessons.
+**A**: This is most probably due to data in the respective files that holds the data for students and lessons.
 
-An example of such irregularities would be conflicting lessons being found in the data file that holds lessons.
+To guard against the possibility of you being misled by corrupted data, TeachWhat! will wipe all data and start from scratch if any
+error is found in the data files for students *or* lessons.
+
+An example of such an error would be conflicting lessons being found in the data file that holds lessons.
 
 --------------------------------------------------------------------------------------------------------------------
 
