@@ -6,7 +6,7 @@ import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 
 /**
- * Clears all the products in the iBook.
+ * Represents a command that when executed clears all the products in the iBook.
  */
 public class ClearCommand extends Command {
 

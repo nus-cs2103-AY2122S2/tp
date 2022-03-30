@@ -1,13 +1,20 @@
 package seedu.ibook.ui.popup;
 
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
+import seedu.ibook.ui.popup.item.PopupAddItem;
+import seedu.ibook.ui.popup.item.PopupManageItem;
 
 public class PopupHandler {
 
-    private final PopupAdd popupAdd;
-    private final PopupUpdate popupUpdate;
-    private final PopupDelete popupDelete;
+    private final PopupAddProduct popupAddProduct;
+    private final PopupUpdateProduct popupUpdateProduct;
+    private final PopupDeleteProduct popupDeleteProduct;
+    private final PopupAddItem popupAddItem;
+    private final PopupManageItem popupManageItem;
+
+    private Popup showing;
 
     /**
      * Initializes a {@code PopupHandler}.
@@ -15,9 +22,11 @@ public class PopupHandler {
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
     public PopupHandler(MainWindow mainWindow) {
-        popupAdd = new PopupAdd(mainWindow);
-        popupUpdate = new PopupUpdate(mainWindow);
-        popupDelete = new PopupDelete(mainWindow);
+        popupAddProduct = new PopupAddProduct(mainWindow);
+        popupUpdateProduct = new PopupUpdateProduct(mainWindow);
+        popupDeleteProduct = new PopupDeleteProduct(mainWindow);
+        popupAddItem = new PopupAddItem(mainWindow);
+        popupManageItem = new PopupManageItem(mainWindow);
     }
 
     /**
@@ -26,9 +35,7 @@ public class PopupHandler {
      * @return True if a popup is showing, else false.
      */
     public boolean isShowing() {
-        return popupAdd.isShowing()
-                || popupUpdate.isShowing()
-                || popupDelete.isShowing();
+        return showing != null;
     }
 
     /**
@@ -37,48 +44,62 @@ public class PopupHandler {
      * @param message The feedback.
      */
     public void setFeedbackToUser(String message) {
-        if (popupAdd.isShowing()) {
-            popupAdd.setFeedbackToUser(message);
-        } else if (popupUpdate.isShowing()) {
-            popupUpdate.setFeedbackToUser(message);
-        } else if (popupDelete.isShowing()) {
-            popupDelete.setFeedbackToUser(message);
-        }
+        showing.setFeedbackToUser(message);
     }
 
     /**
      * Show the popup window for adding product.
      */
-    public void showPopupAdd() {
-        if (popupAdd.isShowing()) {
-            popupAdd.focus();
-        } else {
-            popupAdd.show();
-        }
+    public void showPopupAddProduct() {
+        hidePopup();
+        popupAddProduct.show();
+        showing = popupAddProduct;
     }
 
     /**
      * Shows the popup window for updating product.
      */
-    public void showPopupUpdate(int index, Product product) {
-        popupUpdate.hideIfShowing();
-        popupUpdate.show(index, product);
+    public void showPopupUpdateProduct(int index, Product product) {
+        hidePopup();
+        popupUpdateProduct.show(index, product);
+        showing = popupUpdateProduct;
     }
 
     /**
      * Shows the popup window for deleting product.
      */
-    public void showPopupDelete(int index, Product product) {
-        popupDelete.hideIfShowing();
-        popupDelete.show(index, product);
+    public void showPopupDeleteProduct(int index, Product product) {
+        hidePopup();
+        popupDeleteProduct.show(index, product);
+        showing = popupDeleteProduct;
+    }
+
+    /**
+     * Shows the popup window for adding item.
+     */
+    public void showPopupAddItem(int index, Product product) {
+        hidePopup();
+        popupAddItem.show(index, product);
+        showing = popupAddItem;
+    }
+
+    /**
+     * Shows the popup window for managing item.
+     */
+    public void showPopupManageItem(int productIndex, int itemIndex,
+                                    Product product, Item item) {
+        hidePopup();
+        popupManageItem.show(productIndex, itemIndex, product, item);
+        showing = popupManageItem;
     }
 
     /**
      * Hides the popup window.
      */
     public void hidePopup() {
-        popupAdd.hideIfShowing();
-        popupUpdate.hideIfShowing();
-        popupDelete.hideIfShowing();
+        if (showing != null) {
+            showing.hide();
+        }
+        showing = null;
     }
 }

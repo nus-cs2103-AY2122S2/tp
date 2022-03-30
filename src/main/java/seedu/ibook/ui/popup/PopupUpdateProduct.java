@@ -11,9 +11,9 @@ import seedu.ibook.ui.MainWindow;
 /**
  * Popup responsible to update product.
  */
-public class PopupUpdate extends Popup {
+public class PopupUpdateProduct extends Popup {
 
-    private static final String FXML = "popup/PopupUpdate.fxml";
+    private static final String FXML = "popup/PopupUpdateProduct.fxml";
 
     private int index;
 
@@ -27,11 +27,11 @@ public class PopupUpdate extends Popup {
     private TextArea description;
 
     /**
-     * Initializes a new {@code popupUpdate} window.
+     * Initializes a new {@code PopupUpdateProduct} window.
      *
      * @param mainWindow The {@code MainWindow} that this component resides on.
      */
-    public PopupUpdate(MainWindow mainWindow) {
+    public PopupUpdateProduct(MainWindow mainWindow) {
         super(FXML, mainWindow);
     }
 
