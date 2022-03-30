@@ -1,15 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -73,6 +78,11 @@ public class ArgumentTokenizer {
                 || prefix.equals(PREFIX_EMAIL) || prefix.equals(PREFIX_PHONE))
                 && positions.size() > 1) {
             throw new ParseException(FindCommand.MESSAGE_TOO_MANY_PREFIXES);
+        }
+
+        if ((prefix.equals(PREFIX_EVENT_NAME) || prefix.equals(PREFIX_INFO) || prefix.equals(PREFIX_DATE)
+                || prefix.equals(PREFIX_TIME)) && positions.size() > 1) {
+            throw new ParseException(EventCommand.MESSAGE_TOO_MANY_PREFIXES);
         }
         return positions;
     }
