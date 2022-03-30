@@ -12,6 +12,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 
@@ -31,6 +32,7 @@ class JsonAdaptedCandidate {
     private final String applicationStatus;
     private final String interviewStatus;
     private final String availability;
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedCandidate} with the given candidate details.
@@ -41,7 +43,8 @@ class JsonAdaptedCandidate {
             @JsonProperty("course") String course, @JsonProperty("seniority") String seniority,
             @JsonProperty("applicationStatus") String applicationStatus,
             @JsonProperty("interviewStatus") String interviewStatus,
-            @JsonProperty("availability") String availability) {
+            @JsonProperty("availability") String availability,
+            @JsonProperty("remark") String remark) {
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
@@ -51,6 +54,7 @@ class JsonAdaptedCandidate {
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
         this.availability = availability;
+        this.remark = remark;
     }
 
     /**
@@ -66,6 +70,8 @@ class JsonAdaptedCandidate {
         applicationStatus = source.getApplicationStatus().toString();
         interviewStatus = source.getInterviewStatus().toString();
         availability = source.getAvailability().availability;
+        remark = source.getRemark().value;
+
     }
 
     /**
@@ -129,7 +135,13 @@ class JsonAdaptedCandidate {
         }
         final Availability modelAvailability = new Availability(availability);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         return new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse, modelSeniority,
-                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability);
+                new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus), modelAvailability,
+                modelRemark);
     }
 }

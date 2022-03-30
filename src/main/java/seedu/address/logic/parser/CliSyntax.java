@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_AVAILABILITY = new Prefix("avail/");
     public static final Prefix PREFIX_CANDIDATE = new Prefix("candidate/");
     public static final Prefix PREFIX_DATETIME = new Prefix("at/");
+    public static final Prefix PREFIX_REMARK = new Prefix("r/");
 }

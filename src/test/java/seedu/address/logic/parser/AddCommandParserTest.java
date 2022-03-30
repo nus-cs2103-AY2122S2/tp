@@ -43,12 +43,15 @@ import seedu.address.testutil.CandidateBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+    private String emptyString = "";
+
 
     @Test
     public void parse_allFieldsPresent_success() {
         Candidate expectedCandidate = new CandidateBuilder(BOB)
                 .withApplicationStatus(VALID_APPLICATION_PENDING)
-                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED).build();
+                .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
+                .withRemark(emptyString).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB

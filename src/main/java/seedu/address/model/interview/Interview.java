@@ -76,14 +76,15 @@ public class Interview {
         if (this.interviewDay > 5) {
             return false;
         }
-
-        if (interviewHour < 8) {
+        if (interviewHour < 8 || interviewHour > 17) {
             return false;
-        } else if (interviewHour >= 17 && interviewMin > 30) {
-            return false;
-        } else {
-            return true;
         }
+        if (interviewHour == 17) {
+            if (interviewMin > 30) {
+                return false;
+            }
+        }
+        return true;
     }
     /**
      * Returns true if this interview's date and time has expired.

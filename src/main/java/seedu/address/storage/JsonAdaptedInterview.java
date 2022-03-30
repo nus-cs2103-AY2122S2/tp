@@ -14,6 +14,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
@@ -34,6 +35,7 @@ class JsonAdaptedInterview {
     private final String applicationStatus;
     private final String interviewStatus;
     private final String availability;
+    private final String remark;
     private final String interviewDateTime;
 
     /**
@@ -46,7 +48,8 @@ class JsonAdaptedInterview {
                                 @JsonProperty("applicationStatus") String applicationStatus,
                                 @JsonProperty("interviewStatus") String interviewStatus,
                                 @JsonProperty("availability") String availability,
-                                @JsonProperty("interviewDateTime") String interviewDateTime) {
+                                @JsonProperty("interviewDateTime") String interviewDateTime,
+                                @JsonProperty("remark") String remark) {
         this.studentID = studentID;
         this.name = name;
         this.phone = phone;
@@ -56,6 +59,7 @@ class JsonAdaptedInterview {
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
         this.availability = availability;
+        this.remark = remark;
         this.interviewDateTime = interviewDateTime;
     }
 
@@ -72,6 +76,7 @@ class JsonAdaptedInterview {
         applicationStatus = source.getCandidate().getApplicationStatus().toString();
         interviewStatus = source.getCandidate().getInterviewStatus().toString();
         availability = source.getCandidate().getAvailability().availability;
+        remark = source.getCandidate().getRemark().value;
         interviewDateTime = source.getInterviewDateTime().toString();
     }
 
@@ -136,9 +141,16 @@ class JsonAdaptedInterview {
         }
         final Availability modelAvailability = new Availability(availability);
 
+
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
+
         Candidate candidate = new Candidate(modelId, modelName, modelPhone, modelEmail, modelCourse,
                 modelSeniority, new ApplicationStatus(applicationStatus), new InterviewStatus(interviewStatus),
-                modelAvailability);
+                modelAvailability, modelRemark);
 
         if (interviewDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "test"));

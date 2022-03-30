@@ -11,6 +11,7 @@ import static seedu.address.ui.Styles.BLUE;
 import static seedu.address.ui.Styles.BRIGHT_GREEN;
 import static seedu.address.ui.Styles.CHANGE_COLOUR;
 import static seedu.address.ui.Styles.CLOSING_INLINE;
+import static seedu.address.ui.Styles.COLORS;
 import static seedu.address.ui.Styles.GREEN;
 import static seedu.address.ui.Styles.GREY;
 import static seedu.address.ui.Styles.RED;
@@ -18,18 +19,14 @@ import static seedu.address.ui.Styles.WHITE_FONT_INLINE;
 import static seedu.address.ui.Styles.YELLOW;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import seedu.address.model.candidate.ApplicationStatus;
@@ -50,7 +47,7 @@ public class FocusCard extends UiPart<Region> {
     private static final String NO_SCHEDULE_MESSAGE = "No interview scheduled!";
     private static final String EMPTY_MESSAGE = " ";
 
-
+    private static final int OFFSET = 65;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -90,6 +87,8 @@ public class FocusCard extends UiPart<Region> {
     private Label day;
     @FXML
     private Label time;
+    @FXML
+    private Label remark;
     @FXML
     private Label scheduleMessage;
     @FXML
@@ -208,16 +207,7 @@ public class FocusCard extends UiPart<Region> {
             initials.append(temp[0].charAt(0));
         }
 
-        Random random = new Random();
-        double red = (random.nextInt(106) + 150) / 255.0;
-        double blue = (random.nextInt(106) + 150) / 255.0;
-        double green = (random.nextInt(106) + 150) / 255.0;
-
-        stackPane.setBackground(new Background(new BackgroundFill(
-                Color.color(red, blue, green),
-                null,
-                null
-        )));
+        stackPane.setStyle(CHANGE_COLOUR + COLORS[temp[0].charAt(0) - OFFSET]);
 
         Circle circle = new Circle();
         circle.setRadius(60);

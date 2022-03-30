@@ -56,6 +56,8 @@ public class CommandTestUtil {
     public static final String VALID_INTERVIEW_NOT_SCHEDULED = "Not Scheduled";
     public static final String VALID_AVAILABILITY_AMY = "1,2,3,4,5";
     public static final String VALID_AVAILABILITY_BOB = "1,2";
+    public static final String VALID_REMARK_AMY = "Like skiing.";
+    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
 
     public static final String VALID_INTERVIEW_DATE_TIME = " " + PREFIX_DATETIME + "23-12-2022 10:00";
 
