@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.position.exceptions.UnableToAcceptOfferException;
+import seedu.address.model.position.exceptions.UnableToExtendOfferException;
+import seedu.address.model.position.exceptions.UnableToRejectOfferException;
+
 /**
  * Represent a Position in HireLah.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -109,6 +113,57 @@ public class Position {
      */
     public boolean canAcceptOffer() {
         return positionOpenings.getCount() > 0 && positionOffers.getCount() > 0;
+    }
+
+    /**
+     * Returns true if number of offers is more than 0.
+     */
+    public boolean canRejectOffer() {
+        return positionOffers.getCount() > 0;
+    }
+
+    /**
+     * Extends an offer for the current Position.
+     * An offer can be extended if the current number of offers is less than the current number of openings.
+     * The new position will contain a number of offers that is 1 more than the previous value.
+     */
+    public Position extendOffer() {
+        if (!canExtendOffer()) {
+            throw new UnableToExtendOfferException();
+        }
+        PositionOffers newOfferNumber = positionOffers.increment();
+        return new Position(getPositionName(), getDescription(), getPositionOpenings(), newOfferNumber,
+                getRequirements());
+    }
+
+    /**
+     * Accepts an offer for the current Position.
+     * An offer can be accepted if the current number of offers is more than 0 and there is more than 0 number of
+     * openings for the position.
+     * The new position will contain a number of offers and openings that is 1 less than the previous values.
+     */
+    public Position acceptOffer() {
+        if (!canAcceptOffer()) {
+            throw new UnableToAcceptOfferException();
+        }
+        PositionOffers newOfferNumber = positionOffers.decrement();
+        PositionOpenings newPositionOpenings = positionOpenings.decrement();
+        return new Position(getPositionName(), getDescription(), newPositionOpenings, newOfferNumber,
+                getRequirements());
+    }
+
+    /**
+     * Rejects an offer for the current Position.
+     * An offer can be rejected if the current number of offers is more than 0.
+     * The new position will contain a number of offers that is 1 less than the previous values.
+     */
+    public Position rejectOffer() {
+        if (!canRejectOffer()) {
+            throw new UnableToRejectOfferException();
+        }
+        PositionOffers newOfferNumber = positionOffers.decrement();
+        return new Position(getPositionName(), getDescription(), getPositionOpenings(), newOfferNumber,
+                getRequirements());
     }
 
     /**
