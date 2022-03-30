@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ILLNESSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IMMUNIZATION_HISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SURGERIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -52,7 +51,6 @@ public class EditMedicalCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW MEDICAL INFORMATION INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NRIC + "NRIC "
             + PREFIX_AGE + "AGE "
             + PREFIX_BLOODTYPE + "BLOODTYPE "
             + PREFIX_MEDICATION + "MEDICATION "
@@ -65,10 +63,11 @@ public class EditMedicalCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_ETHNICITY + "ETHNICITY\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NRIC + "S1234567L "
             + PREFIX_BLOODTYPE + "B";
 
     public static final String MESSAGE_EDIT_MEDICAL_SUCCESS = "Edited Medical Information: %1$s";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
+            + "Create a new medical information instead.";
 
     private final Index targetIndex;
     private final EditMedicalDescriptor editMedicalDescriptor;
@@ -102,7 +101,7 @@ public class EditMedicalCommand extends Command {
                                                EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor) {
         assert medicalToEdit != null;
 
-        Nric updatedNric = editMedicalDescriptor.getNric().orElse(medicalToEdit.getPatientNric());
+        Nric updatedNric = medicalToEdit.getPatientNric();
         Age updatedAge = editMedicalDescriptor.getAge().orElse(medicalToEdit.getAge());
         BloodType updatedBloodType =
                 editMedicalDescriptor.getBloodType().orElse(medicalToEdit.getBloodType());
@@ -152,7 +151,6 @@ public class EditMedicalCommand extends Command {
      * corresponding field value of the medical information.
      */
     public static class EditMedicalDescriptor {
-        private Nric nric;
         private Age age;
         private BloodType bloodType;
         private Medication medication;
@@ -172,7 +170,6 @@ public class EditMedicalCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditMedicalDescriptor(EditMedicalCommand.EditMedicalDescriptor toCopy) {
-            setNric(toCopy.nric);
             setAge(toCopy.age);
             setBloodType(toCopy.bloodType);
             setMedication(toCopy.medication);
@@ -184,14 +181,6 @@ public class EditMedicalCommand extends Command {
             setImmunizationHistory(toCopy.immunizationHistory);
             setGender(toCopy.gender);
             setEthnicity(toCopy.ethnicity);
-        }
-
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
         }
 
         public Optional<Age> getAge() {
@@ -297,8 +286,7 @@ public class EditMedicalCommand extends Command {
             // state check
             EditMedicalCommand.EditMedicalDescriptor e = (EditMedicalCommand.EditMedicalDescriptor) other;
 
-            return getNric().equals(e.getNric())
-                    && getAge().equals(e.getAge())
+            return getAge().equals(e.getAge())
                     && getBloodType().equals(e.getBloodType())
                     && getMedication().equals(e.getMedication())
                     && getHeight().equals(e.getHeight())
