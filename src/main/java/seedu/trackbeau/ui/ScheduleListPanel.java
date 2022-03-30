@@ -1,5 +1,10 @@
 package seedu.trackbeau.ui;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,10 +14,7 @@ import javafx.scene.layout.Region;
 import seedu.trackbeau.commons.core.LogsCenter;
 import seedu.trackbeau.model.booking.Booking;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.Logger;
+
 
 /**
  * Panel containing the list of bookings.
