@@ -173,7 +173,7 @@ public interface Model {
     void sortFilteredPersonList();
 
     /** Sorts the list of persons in ascending order of the number of tasks completed. */
-    void sortFilteredPersonListByTaskDone();
+    void sortFilteredPersonListByTaskLeft();
 
     /**
      * Returns the user's command history.

@@ -250,8 +250,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonListByTaskDone() {
-        addressBook.sortPersonListByTaskDone();
+    public void sortFilteredPersonListByTaskLeft() {
+        addressBook.sortPersonListByTaskLeft();
     }
 
     @Override

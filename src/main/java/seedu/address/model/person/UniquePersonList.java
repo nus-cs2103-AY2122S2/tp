@@ -374,8 +374,8 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Sorts the list of persons in ascending order of the number of tasks completed.
      */
-    public void sortListByTaskDone() {
-        internalList.sort(new SortByTaskDone());
+    public void sortListByTaskLeft() {
+        internalList.sort(new SortByTaskLeft().reversed());
     }
 
     /**
@@ -401,13 +401,23 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * SortByTaskDone implements a comparator class, to sort the list of persons by the number of tasks completed.
      */
-    class SortByTaskDone implements Comparator<Person> {
+    class SortByTaskLeft implements Comparator<Person> {
 
         @Override
         public int compare(Person a, Person b) {
+            Integer personANumOfTaskTotal = a.getTaskList().getNumberOfTasks();
+            System.out.println(a.getStudentId() + " Total : " + personANumOfTaskTotal.toString());
+            Integer personBNumOfTaskTotal = b.getTaskList().getNumberOfTasks();
+            System.out.println(b.getStudentId() + " Total : " + personBNumOfTaskTotal.toString());
             Integer personANumOfTaskDone = a.getTaskList().getNumOfCompletedTasks();
+            System.out.println(a.getStudentId() + " Done : " + personANumOfTaskDone.toString());
             Integer personBNumOfTaskDone = b.getTaskList().getNumOfCompletedTasks();
-            return personANumOfTaskDone.compareTo(personBNumOfTaskDone);
+            System.out.println(b.getStudentId() + " Done : " + personBNumOfTaskDone.toString());
+            Integer personANumOfTaskLeft = personANumOfTaskTotal - personANumOfTaskDone;
+            Integer personBNumOfTaskLeft = personBNumOfTaskTotal - personBNumOfTaskDone;
+            System.out.println(a.getStudentId() + " Left : " + personANumOfTaskLeft.toString() + " " + b.getStudentId()
+                    + " Left : " + personBNumOfTaskLeft.toString());
+            return personANumOfTaskLeft.compareTo(personBNumOfTaskLeft);
         }
     }
 }
