@@ -20,17 +20,32 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
 public class AddressBookParser {
-
+    private String[] singleCommandList = {ClearCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, SummariseCommand.COMMAND_WORD,
+            ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD};
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final String MESSAGE_IRRELEVANT_PARAMETERS = "Please ensure that there are no "
+            + "additional parameters for this type of command.";
+
+    private void checkForSingleCommandWord(String userInput, String commandWord) throws ParseException{
+        for (int i = 0; i < singleCommandList.length; i++) {
+            if (singleCommandList[i].equals(commandWord)) {
+                if (userInput.split(" ").length != 1) {
+                    throw new ParseException(MESSAGE_IRRELEVANT_PARAMETERS);
+                }
+            }
+        }
+    }
 
     /**
      * Parses user input into command for execution.
@@ -47,6 +62,9 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        checkForSingleCommandWord(userInput, commandWord);
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
