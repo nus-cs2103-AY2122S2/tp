@@ -62,8 +62,8 @@ public class EnrolCommand extends Command {
 
         ClassGroup cgToEdit = cgList.get(classGroupIndex.getZeroBased());
         TaModule moduleToEdit = cgToEdit.getModule();
-        ClassGroup newCg = new ClassGroup(cgToEdit);
         TaModule newModule = new TaModule(moduleToEdit);
+        ClassGroup newCg = new ClassGroup(cgToEdit, newModule);
 
         for (Student s : students) {
             if (!newCg.hasStudent(s) && !newModule.hasStudent(s)) {
