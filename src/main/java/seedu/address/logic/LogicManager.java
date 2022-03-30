@@ -75,15 +75,15 @@ public class LogicManager implements Logic {
         }
 
         // Saves the updated addressbook if commands are valid; resets the model if otherwise
-        try {
-            if (isValid) {
+        if (isValid) {
+            try {
                 storage.saveAddressBook(model.getAddressBook());
-            } else {
-                model.setAddressBook(addressBookBeforeCommand);
-                throw new CommandException(errMsg);
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        } else {
+            model.setAddressBook(addressBookBeforeCommand);
+            throw new CommandException(errMsg);
         }
 
         assert commandResult != null : "CommandResult is null, should not happen";
