@@ -53,12 +53,12 @@ public class DeleteConsultationCommand extends Command {
         }
 
         Consultation consultationToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteConsultation(consultationToDelete);
         if (lastShownList.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_INVALID_CONSULTATION_INDEX, targetIndex.getOneBased()),
+            CommandType.setViewCommandType(CommandType.DEFAULT);
+            return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex.getOneBased()),
                     CommandType.DEFAULT);
         }
-        model.deleteConsultation(consultationToDelete);
-
         return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, consultationToDelete.toString()),
                 COMMAND_TYPE);
     }

@@ -52,10 +52,10 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPatient(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        model.addPerson(toAdd);
+        model.addPatient(toAdd);
         CommandType.setViewCommandType(CommandType.DEFAULT);
         ViewedNric.setViewedNric(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

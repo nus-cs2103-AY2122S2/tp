@@ -51,6 +51,7 @@ public class LoginWindow extends UiPart<Stage> {
      */
     public LoginWindow(Authentication auth, Stage primaryStage) {
         super(FXML, primaryStage);
+        primaryStage.setResizable(true);
         requireNonNull(auth);
         screenTitle.setText(SCREEN_TITLE);
         this.auth = auth;
