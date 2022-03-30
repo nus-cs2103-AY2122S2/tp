@@ -26,6 +26,7 @@ public class SellerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
+    private PropertyToSell desiredProperty;
 
     /**
      * Creates a {@code clientBuilder} with the default details.
@@ -79,8 +80,16 @@ public class SellerBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Properties} of the {@code buyer} that we are building.
+     */
+    public SellerBuilder withProperty(PropertyToSell property) {
+        this.desiredProperty = property;
+        return this;
+    }
+
     public Seller build() {
-        return new Seller(name, phone, appointment, tags, DEFAULT_PROPERTY);
+        return new Seller(name, phone, appointment, tags, desiredProperty);
     }
 
 }

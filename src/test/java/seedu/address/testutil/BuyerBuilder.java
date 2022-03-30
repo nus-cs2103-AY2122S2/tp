@@ -20,6 +20,7 @@ public class BuyerBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_APPOINTMENT = "2022-05-01-12-00";
+    public static final PropertyToBuy DEFAULT_PROPERTY = NullPropertyToBuy.getNullPropertyToBuy();
 
     private Name name;
     private Phone phone;
@@ -36,7 +37,7 @@ public class BuyerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         appointment = new Appointment("");
         tags = new HashSet<>();
-        desiredProperty = NullPropertyToBuy.getNullPropertyToBuy();
+        desiredProperty = DEFAULT_PROPERTY;
     }
 
     /**
@@ -57,7 +58,6 @@ public class BuyerBuilder {
         this.name = new Name(name);
         return this;
     }
-
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code client} that we are building.

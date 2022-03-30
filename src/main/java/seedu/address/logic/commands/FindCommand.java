@@ -10,7 +10,6 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 
-
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
@@ -25,7 +24,6 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/alice bob charlie";
 
     private final Predicate<Client> predicate;
-
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;

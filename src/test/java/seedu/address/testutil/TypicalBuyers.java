@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.buyer.Buyer;
 
 /**
@@ -68,10 +68,10 @@ public class TypicalBuyers {
     /**
      * Returns an {@code AddressBook} with all the typical clients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static BuyerAddressBook getTypicalAddressBook() {
+        BuyerAddressBook ab = new BuyerAddressBook();
         for (Buyer buyer : getTypicalBuyers()) {
-            ab.addclient(buyer);
+            ab.addBuyer(buyer);
         }
         return ab;
     }

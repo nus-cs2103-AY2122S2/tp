@@ -14,7 +14,7 @@ import seedu.address.model.seller.Seller;
  */
 public class AddSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "addseller";
+    public static final String COMMAND_WORD = "add-s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book. "
             + "Parameters: "
