@@ -380,7 +380,7 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 
 ### Suggest a Show: `suggest`
 
-**Description:** Want a random show? This provides you find a random show from the displayed list!
+**Description:** Want a random show? This helps you find a random show from the displayed list!
 
 **Format:** `suggest`
 
