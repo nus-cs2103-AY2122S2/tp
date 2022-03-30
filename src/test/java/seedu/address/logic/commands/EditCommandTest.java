@@ -79,7 +79,7 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder(personInFilteredList).withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                editedPerson.displayPersonForAdd());
+                editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);

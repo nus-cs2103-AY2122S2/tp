@@ -80,7 +80,7 @@ public class CancelEventCommand extends Command {
             if (i > 0) {
                 deletedEventOrEvents.append(System.lineSeparator());
             }
-            deletedEventOrEvents.append(eventToDelete.displayForCancelEvent());
+            deletedEventOrEvents.append(eventToDelete);
         }
         return deletedEventOrEvents.toString();
     }
