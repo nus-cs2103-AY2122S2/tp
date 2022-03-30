@@ -14,6 +14,7 @@ import java.util.TreeSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.reminder.exceptions.DuplicateReminderException;
 import seedu.tinner.model.role.Role;
 
 /**
@@ -71,7 +72,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     public void add(Reminder toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            //throw new DuplicateReminderException(); //need to implement
+            throw new DuplicateReminderException();
         }
         internalList.add(toAdd);
 
@@ -93,6 +94,12 @@ public class UniqueReminderList implements Iterable<Reminder> {
                 .observableArrayList(new TreeSet<>(dateToReminderMap.keySet())));
     }
 
+    /**
+     * Returns the list of reminders associated with a specific date.
+     *
+     * @param date The date that which is used to retrieve the list of reminders.
+     * @return the list of reminders mapped from the given date.
+     */
     public ObservableList<Reminder> getDateSpecificReminders(LocalDate date) {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
         ArrayList<Reminder> retrievedReminders = dateToReminderMap.get(date);
@@ -104,6 +111,24 @@ public class UniqueReminderList implements Iterable<Reminder> {
             reminderList.add(reminder);
         }
         return reminderList;
+    }
+
+    /**
+     * Resets the internal list of reminders using the given list of companies.
+     *
+     * @param companyList The company from which the reminders are to be produced.
+     */
+    public void setReminders(ObservableList<Company> companyList) {
+        for (Company company : companyList) {
+            ObservableList<Role> roleList = company.getRoleManager().getRoleList().getRoles();
+            for (Role role : roleList) {
+                if (role.getReminderDate().isWithinReminderWindow()) {
+                    Reminder reminder =
+                            new Reminder(company.getName(), role.getName(), role.getStatus(), role.getReminderDate());
+                    add(reminder);
+                }
+            }
+        }
     }
 
     public Iterator<Reminder> iterator() {
@@ -134,18 +159,5 @@ public class UniqueReminderList implements Iterable<Reminder> {
             }
         }
         return true;
-    }
-
-    public void setReminders(ObservableList<Company> companyList) {
-        for (Company company : companyList) {
-            ObservableList<Role> roleList = company.getRoleManager().getRoleList().getRoles();
-            for (Role role : roleList) {
-                if (role.getReminderDate().isWithinReminderWindow()) {
-                    Reminder reminder =
-                            new Reminder(company.getName(), role.getName(), role.getStatus(), role.getReminderDate());
-                    add(reminder);
-                }
-            }
-        }
     }
 }
