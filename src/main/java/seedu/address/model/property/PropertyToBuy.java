@@ -28,6 +28,24 @@ public class PropertyToBuy {
         this.priceRange = priceRange;
     }
 
+    /**
+     * Update the PropertyToBuy information by calling this method, this method will be used
+     * in {@code EditBuyerCommand} class.
+     * @param houseType
+     * @param location
+     * @param priceRange
+     * @return a new updated PropertyToBuy
+     */
+    public PropertyToBuy updatePropertyToBuy(HouseType houseType, Location location,
+                                               PriceRange priceRange) {
+        //Todo: need to implement updateHouseType for House class
+        //this.house.updateHouseType(houseType);
+        //this.house.updateLocation(location);
+        this.house = new House(houseType, location.toString());
+        this.priceRange = priceRange;
+        return this;
+    }
+
     public House getHouse() {
         return this.house;
     }
