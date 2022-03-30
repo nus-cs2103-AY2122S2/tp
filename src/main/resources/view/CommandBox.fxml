@@ -5,16 +5,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER_LEFT" spacing="20.0" stylesheets="@css/commandBox.css">
+<TextField fx:id="commandTextField" onAction="#handleCommandEntered"
+           xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+           stylesheets="@css/commandBox.css"
+           maxHeight="Infinity" promptText="Enter Command Here..."
+           styleClass="command" HBox.hgrow="ALWAYS" >
     <VBox.margin>
         <Insets left="40.0" right="40.0" top="40.0"/>
     </VBox.margin>
-    <TextField fx:id="commandTextField" onAction="#handleCommandEntered"
-               maxHeight="Infinity" promptText="Enter Command Here..."
-               styleClass="command" HBox.hgrow="ALWAYS" >
-        <HBox.margin>
-            <Insets right="10.0"/>
-        </HBox.margin>
-    </TextField>
-</HBox>
+</TextField>

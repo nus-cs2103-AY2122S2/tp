@@ -24,6 +24,10 @@ public class PopupUpdateProduct extends Popup {
     @FXML
     private TextField price;
     @FXML
+    private TextField discountRate;
+    @FXML
+    private TextField discountStart;
+    @FXML
     private TextArea description;
 
     /**
@@ -47,6 +51,8 @@ public class PopupUpdateProduct extends Popup {
         name.setText(product.getName().toString());
         category.setText(product.getCategory().toString());
         price.setText(product.getPrice().toString());
+        discountRate.setText(product.getDiscountRate().toString());
+        discountStart.setText(product.getDiscountStart().toString());
         description.setText(product.getDescription().toString());
     }
 
@@ -60,6 +66,10 @@ public class PopupUpdateProduct extends Popup {
                 + category.getText()
                 + " " + CliSyntax.PREFIX_PRICE.getPrefix()
                 + price.getText()
+                + " " + CliSyntax.PREFIX_DISCOUNTRATE.getPrefix()
+                + discountRate.getText()
+                + " " + CliSyntax.PREFIX_DISCOUNTSTART.getPrefix()
+                + discountStart.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
                 + description.getText();
 

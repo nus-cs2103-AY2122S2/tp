@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.UniqueProductList;
 
@@ -93,7 +94,7 @@ public class IBook implements ReadOnlyIBook {
     /**
      * Adds {@code item} to a {@code product} in the iBook.
      */
-    public void addItem(Product product, Item item) {
+    public void addItem(Product product, ItemDescriptor item) {
         requireAllNonNull(product, item);
         product.addItem(item);
     }

@@ -27,16 +27,16 @@ import seedu.ibook.model.product.Product;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class ExpiredCommandTest {
-    private Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getTypicalItems());
-    private Product peanutButterBreadWithAllExpired =
+    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getTypicalItems());
+    private final Product peanutButterBreadWithAllExpired =
             new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getOnlyExpiredItems());
-    private Product chocolateBreadWithAllNotExpired =
+    private final Product chocolateBreadWithAllNotExpired =
             new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(getOnlyNonExpiredItems());
-    private List<Product> products = Arrays.asList(kayaBreadWithAllItems,
+    private final List<Product> products = Arrays.asList(kayaBreadWithAllItems,
             peanutButterBreadWithAllExpired, chocolateBreadWithAllNotExpired);
 
-    private Model model = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
 
     private final ExpiredCommand expiredCommand = new ExpiredCommand();
 
@@ -50,11 +50,13 @@ public class ExpiredCommandTest {
         assertEquals(model.getFilteredProductList(), Arrays.asList(KAYA_BREAD, PEANUT_BUTTER_BREAD));
         for (Product p: model.getFilteredProductList()) {
             if (p.equals(KAYA_BREAD)) {
-                assertEquals(p.getFilteredItems(), Arrays.asList(Q5_2020_01_01, Q5_2022_03_01));
+                assertEquals(p.getFilteredItems(),
+                        Arrays.asList(Q5_2020_01_01.toItem(p), Q5_2022_03_01.toItem(p)));
             }
 
             if (p.equals(PEANUT_BUTTER_BREAD)) {
-                assertEquals(p.getFilteredItems(), Arrays.asList(Q5_2020_01_01, Q5_2022_03_01));
+                assertEquals(p.getFilteredItems(),
+                        Arrays.asList(Q5_2020_01_01.toItem(p), Q5_2022_03_01.toItem(p)));
             }
 
             assertNotEquals(p, CHOCOLATE_BREAD);

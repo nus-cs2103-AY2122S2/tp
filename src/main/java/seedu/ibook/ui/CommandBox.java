@@ -2,12 +2,11 @@ package seedu.ibook.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 /**
  * CommandBox Ui class.
  */
-public class CommandBox extends UiComponent<HBox> {
+public class CommandBox extends UiComponent<TextField> {
 
     private static final String FXML = "CommandBox.fxml";
 

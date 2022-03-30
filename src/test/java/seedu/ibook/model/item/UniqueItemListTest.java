@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01;
 import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
 import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
+import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +38,7 @@ class UniqueItemListTest {
     public void contains_itemWithSameIdentityFieldsInList_returnsTrue() {
         uniqueItemList.add(Q5_2022_03_01);
         Item editedItem = new ItemBuilder(Q5_2022_03_01).withQuantity(QUANTITY_10)
-            .build();
+            .build(KAYA_BREAD);
         assertTrue(uniqueItemList.contains(editedItem));
     }
 

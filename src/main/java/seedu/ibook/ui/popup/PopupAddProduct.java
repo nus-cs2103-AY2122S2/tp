@@ -21,6 +21,10 @@ public class PopupAddProduct extends Popup {
     @FXML
     private TextField price;
     @FXML
+    private TextField discountRate;
+    @FXML
+    private TextField discountStart;
+    @FXML
     private TextArea description;
 
     /**
@@ -41,6 +45,8 @@ public class PopupAddProduct extends Popup {
         name.setText("");
         category.setText("");
         price.setText("");
+        discountRate.setText("");
+        discountStart.setText("");
         description.setText("");
     }
 
@@ -53,6 +59,10 @@ public class PopupAddProduct extends Popup {
                 + category.getText()
                 + " " + CliSyntax.PREFIX_PRICE.getPrefix()
                 + price.getText()
+                + " " + CliSyntax.PREFIX_DISCOUNTRATE.getPrefix()
+                + discountRate.getText()
+                + " " + CliSyntax.PREFIX_DISCOUNTSTART.getPrefix()
+                + discountStart.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
                 + description.getText();
 

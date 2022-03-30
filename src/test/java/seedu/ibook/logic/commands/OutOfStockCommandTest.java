@@ -24,19 +24,19 @@ import seedu.ibook.model.product.filters.OutOfStockFilter;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class OutOfStockCommandTest {
-    private List<Item> allItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02, Q5_2020_01_01);
-    private List<Item> onlyZeroItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02);
-    private List<Item> onlyNonZeroItems = Arrays.asList(Q5_2020_01_01);
-    private Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(allItems);
-    private Product peanutButterBreadWithAllExpired =
+    private final List<Item> allItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02, Q5_2020_01_01);
+    private final List<Item> onlyZeroItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02);
+    private final List<Item> onlyNonZeroItems = Arrays.asList(Q5_2020_01_01);
+    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(allItems);
+    private final Product peanutButterBreadWithAllExpired =
             new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(onlyZeroItems);
-    private Product chocolateBreadWithAllNotExpired =
+    private final Product chocolateBreadWithAllNotExpired =
             new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(onlyNonZeroItems);
-    private List<Product> products = Arrays.asList(kayaBreadWithAllItems,
+    private final List<Product> products = Arrays.asList(kayaBreadWithAllItems,
             peanutButterBreadWithAllExpired, chocolateBreadWithAllNotExpired);
 
-    private Model model = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
 
     private final OutOfStockCommand outOfStockCommand = new OutOfStockCommand();
 
@@ -49,7 +49,9 @@ public class OutOfStockCommandTest {
         assertEquals(model.getFilteredProductList(), Arrays.asList(PEANUT_BUTTER_BREAD));
         for (Product p: model.getFilteredProductList()) {
             assertEquals(p, PEANUT_BUTTER_BREAD);
-            assertEquals(p.getFilteredItems(), Arrays.asList(Q0_2022_03_01, Q0_2022_03_02));
+            assertEquals(p.getFilteredItems(),
+                    Arrays.asList(Q0_2022_03_01.toItem(PEANUT_BUTTER_BREAD),
+                            Q0_2022_03_02.toItem(PEANUT_BUTTER_BREAD)));
         }
 
     }

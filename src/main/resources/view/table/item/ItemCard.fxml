@@ -10,6 +10,7 @@
     <Label fx:id="indexLabel" styleClass="table-column-short" HBox.hgrow="ALWAYS"/>
     <Label fx:id="expiryDate" styleClass="table-column-short" HBox.hgrow="ALWAYS"/>
     <Label fx:id="quantity" styleClass="table-column-short" HBox.hgrow="ALWAYS"/>
+    <Label fx:id="price" styleClass="table-column-long" HBox.hgrow="ALWAYS"/>
     <HBox styleClass="table-column-long" HBox.hgrow="NEVER" alignment="CENTER_RIGHT">
         <Button mnemonicParsing="false" onMouseClicked="#handlePopupManageItem"
                 styleClass="modify-button" text="Manage Item">

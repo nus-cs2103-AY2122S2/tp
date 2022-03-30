@@ -20,10 +20,6 @@ public class Name {
 
     public final String fullName;
 
-    private Name() {
-        fullName = "???";
-    }
-
     /**
      * Constructs a {@code Name}.
      *

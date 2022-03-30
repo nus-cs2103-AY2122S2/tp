@@ -42,6 +42,8 @@ public class ProductCard extends UiComponent<HBox> {
     @FXML
     private Label price;
     @FXML
+    private Label discount;
+    @FXML
     private Label description;
     @FXML
     private Label quantity;
@@ -87,12 +89,17 @@ public class ProductCard extends UiComponent<HBox> {
         name.setText(product.getName().toString());
         category.setText(product.getCategory().toString());
         price.setText(product.getPrice().toString());
+        discount.setText(discountText());
         description.setText(product.getDescription().toString());
         quantity.setText(product.getTotalQuantity().toString());
     }
 
     private ProductCard getProductCard() {
         return this;
+    }
+
+    private String discountText() {
+        return String.format("%s (%s days)", product.getDiscountRate(), product.getDiscountStart());
     }
 
     @FXML

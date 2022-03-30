@@ -20,10 +20,6 @@ public class Description {
 
     public final String fullDescription;
 
-    private Description() {
-        fullDescription = "???";
-    }
-
     /**
      * Constructs a {@code Description}.
      *

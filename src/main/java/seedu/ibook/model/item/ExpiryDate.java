@@ -1,5 +1,6 @@
 package seedu.ibook.model.item;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
@@ -83,6 +84,10 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
         return expiryDate.isBefore(LocalDate.now());
     }
 
+    public long dayDifference(LocalDate other) {
+        return DAYS.between(other, expiryDate);
+    }
+
     /**
      * Find first {@code DateStringManager} object that matches the given date string.
      * @param date Date string
@@ -131,11 +136,9 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      */
     private static class DateStringManager {
 
-        private String format;
-        private DateTimeFormatter dateFormatter;
+        private final DateTimeFormatter dateFormatter;
 
         public DateStringManager(String format) {
-            this.format = format;
             dateFormatter = DateTimeFormatter.ofPattern(format);
         }
 

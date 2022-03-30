@@ -11,7 +11,7 @@ import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -32,15 +32,15 @@ public class AddItemCommand extends Command {
             + PREFIX_EXPIRY_DATE + "2022-01-01 "
             + PREFIX_QUANTITY + "10";
 
-    public static final String MESSAGE_SUCCESS = "New item added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New item added to %1$s:\n%2$s";
 
     private final Index productIndex;
-    private final Item toAdd;
+    private final ItemDescriptor toAdd;
 
     /**
      * Creates an AddItemCommand to add the specified {@code Item} to a {@code Product}
      */
-    public AddItemCommand(Index index, Item item) {
+    public AddItemCommand(Index index, ItemDescriptor item) {
         requireAllNonNull(index, item);
         productIndex = index;
         toAdd = item;
@@ -58,10 +58,10 @@ public class AddItemCommand extends Command {
         Product product = lastShownList.get(productIndex.getZeroBased());
 
         model.prepareIBookForChanges();
-        model.addItem(product, toAdd);
+        model.addItem(product, toAdd.toItem(product));
         model.saveIBookChanges();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, product.getName(), toAdd));
     }
 
     @Override
