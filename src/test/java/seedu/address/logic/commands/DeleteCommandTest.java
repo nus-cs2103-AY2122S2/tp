@@ -1,11 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.LineupBuilder;
@@ -29,12 +23,14 @@ import seedu.address.testutil.TypicalPersons;
  */
 public class DeleteCommandTest {
     private static final Name INVALID_NAME = new Name("RAcHel");
-    private static final LineupName INVALID_LINEUP_NAME = new LineupName("Not a lineup");
+    private static final seedu.address.model.lineup.LineupName INVALID_LINEUP_NAME =
+            new seedu.address.model.lineup.LineupName("Not a lineup");
 
     private static final Person VALID_PERSON = TypicalPersons.BENSON;
     private static final Lineup VALID_LINEUP = new LineupBuilder().build();
-    private static final Lineup ANOTHER_VALID_LINEUP = new Lineup(new LineupName("Dummy Lineup"));
-    private static final LineupName VALID_LINEUP_NAME = VALID_LINEUP.getLineupName();
+    private static final Lineup ANOTHER_VALID_LINEUP =
+            new Lineup(new seedu.address.model.lineup.LineupName("Dummy Lineup"));
+    private static final seedu.address.model.lineup.LineupName VALID_LINEUP_NAME = VALID_LINEUP.getLineupName();
     private Model model;
     private Model expectedModel;
 

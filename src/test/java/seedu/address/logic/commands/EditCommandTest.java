@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.EditCommand.createEditedLineup;
-import static seedu.address.logic.commands.EditCommand.createEditedPerson;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PF;
+import static seedu.address.logic.commands.EditCommand.createEditedPerson;
+import static seedu.address.logic.commands.EditCommand.createEditedSchedule;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -17,31 +17,39 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDescription;
+import seedu.address.model.schedule.ScheduleName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ScheduleBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private Model model;
     private static final LineupName EXISTING_LINEUP_NAME = new LineupBuilder().build().getLineupName();
     private static final LineupName VALID_LINEUP_NAME = new LineupName("Lakaka");
     private static final LineupName DUPLICATE_LINEUP_NAME = EXISTING_LINEUP_NAME;
+    private static final Schedule VALID_SCHEDULE = new ScheduleBuilder().withScheduleName("final")
+            .withScheduleDescription("sixers vs suns").withDateTime("01/06/2030 2030").build();
+    private static final Schedule VALID_SCHEDULE_2 = new ScheduleBuilder().withScheduleName("nba final")
+            .withScheduleDescription("sixers vs lakers").withDateTime("01/06/2030 2100").build();
+    private static final ScheduleName VALID_SCHEDULE_NAME = VALID_SCHEDULE_2.getScheduleName();
+    private static final ScheduleDescription VALID_SCHEDULE_DESCRIPTION = VALID_SCHEDULE_2.getScheduleDescription();
+
+    private Model model;
 
     @BeforeEach
     public void setUp() {
@@ -54,6 +62,7 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(BENSON.getName(), descriptor);
+        editedPerson = createEditedPerson(BENSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
@@ -147,19 +156,45 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_editSchedule_success() {
-        // EditCommand standardCommand = new EditCommand()
-        assert(true);
+    public void execute_editSchedule_success() throws CommandException {
+        model.addSchedule(VALID_SCHEDULE);
+        EditCommand.EditScheduleDescriptor editScheduleDescriptor = new EditCommand.EditScheduleDescriptor();
+        editScheduleDescriptor.setScheduleName(VALID_SCHEDULE_NAME);
+        editScheduleDescriptor.setScheduleDescription(VALID_SCHEDULE_DESCRIPTION);
+        EditCommand command = new EditCommand(Index.fromZeroBased(0), editScheduleDescriptor);
+        Schedule editedSchedule = createEditedSchedule(VALID_SCHEDULE, editScheduleDescriptor);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
+
+        String res = command.execute(model).getFeedbackToUser();
+        assertEquals(res, expectedMessage);
     }
 
     @Test
     public void execute_invalidScheduleIndex_failure() {
-        assert(true);
+        EditCommand.EditScheduleDescriptor editScheduleDescriptor = new EditCommand.EditScheduleDescriptor();
+        editScheduleDescriptor.setScheduleName(VALID_SCHEDULE_NAME);
+        editScheduleDescriptor.setScheduleDescription(VALID_SCHEDULE_DESCRIPTION);
+        EditCommand command = new EditCommand(Index.fromZeroBased(0), editScheduleDescriptor);
+        try {
+            command.execute(model);
+        } catch (CommandException e) {
+            assertEquals(e.getMessage(), Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
+        }
     }
 
     @Test
     public void execute_duplicateSchedule_failure() {
-        assert(true);
+        model.addSchedule(VALID_SCHEDULE);
+        model.addSchedule(VALID_SCHEDULE_2);
+        EditCommand.EditScheduleDescriptor editScheduleDescriptor = new EditCommand.EditScheduleDescriptor();
+        editScheduleDescriptor.setScheduleName(VALID_SCHEDULE_NAME);
+        editScheduleDescriptor.setScheduleDescription(VALID_SCHEDULE_DESCRIPTION);
+        EditCommand command = new EditCommand(Index.fromZeroBased(0), editScheduleDescriptor);
+        try {
+            command.execute(model);
+        } catch (CommandException e) {
+            assertEquals(e.getMessage(), EditCommand.MESSAGE_DUPLICATE_SCHEDULE);
+        }
     }
 
     @Test

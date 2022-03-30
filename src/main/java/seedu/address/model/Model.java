@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
@@ -100,7 +99,7 @@ public interface Model {
     /**
      * Returns true if the lineup name is taken by some lineup.
      */
-    boolean hasLineupName(LineupName targetName);
+    boolean hasLineupName(seedu.address.model.lineup.LineupName targetName);
 
     /**
      * Add a lineup to MyGM.
@@ -155,7 +154,7 @@ public interface Model {
     /**
      * TO BE FILLED
      */
-    Lineup getLineup(LineupName targetName);
+    Lineup getLineup(seedu.address.model.lineup.LineupName targetName);
 
     /**
      * Refreshes the model.
@@ -204,12 +203,16 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    ObservableList<Person> getPersonList();
+
     //=========== MyGM PlayerList (End) ======================================================================
 
     //=========== MyGM ScheduleList (Start) ==================================================================
 
     /** Returns an unmodifiable view of the filtered schedule list */
     ObservableList<Schedule> getFilteredScheduleList();
+
+    ObservableList<Schedule> getScheduleList();
 
     /**
      * Updates the filter of the filtered schedule list to filter by the given {@code predicate}.

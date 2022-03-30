@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 
 /**
@@ -30,14 +29,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             // delete player from lineup
             // for now, we assume that there is only one team
             Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
-            LineupName lineup = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
+            seedu.address.model.lineup.LineupName lineup = ParserUtil
+                    .parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
             return new DeleteCommand(person, lineup);
         } else if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
             Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
             return new DeleteCommand(person);
         } else if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)) {
             try {
-                LineupName lineup = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
+                seedu.address.model.lineup.LineupName lineup = ParserUtil
+                        .parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
                 return new DeleteCommand(lineup);
             } catch (ParseException pe) {
                 throw new ParseException(

@@ -10,11 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WITHOUT_LINEUP;
+import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
 
 import java.util.ArrayList;
@@ -32,6 +32,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.WeightContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleNameContainsKeywordsPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
+
 
 /**
  * Parses input arguments and creates a new ViewCommand object

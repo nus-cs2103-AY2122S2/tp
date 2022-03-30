@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -65,9 +64,9 @@ public class SampleDataUtil {
 
     public static Lineup[] getSampleLineups() {
         return new Lineup[] {
-            new Lineup(new LineupName("snake")),
-            new Lineup(new LineupName("all star")),
-            new Lineup(new LineupName("freak"))
+            new Lineup(new seedu.address.model.lineup.LineupName("snake")),
+            new Lineup(new seedu.address.model.lineup.LineupName("all star")),
+            new Lineup(new seedu.address.model.lineup.LineupName("freak"))
         };
     }
 
@@ -75,13 +74,13 @@ public class SampleDataUtil {
         return new Schedule[] {
             new Schedule(new ScheduleName("Championship Match"),
                 new ScheduleDescription("Against Clippers LeGM needs to stop passing"),
-                new ScheduleDateTime("06/01/2022 1200")),
+                new ScheduleDateTime("01/06/2020 1200")),
             new Schedule(new ScheduleName("All star game"),
                 new ScheduleDescription("LBJ and KD participating"),
-                new ScheduleDateTime("02/01/2020 1200")),
+                new ScheduleDateTime("01/02/2020 1200")),
             new Schedule(new ScheduleName("Skills challenge"),
                 new ScheduleDescription("Practice for this"),
-                new ScheduleDateTime("18/01/2021 1200")),
+                new ScheduleDateTime("18/01/2020 1200")),
             new Schedule(new ScheduleName("Three point shoot out"),
                 new ScheduleDescription("Steph practice 3 pointer"),
                 new ScheduleDateTime("19/02/2020 1200")),
@@ -91,6 +90,7 @@ public class SampleDataUtil {
             new Schedule(new ScheduleName("An active schedule"),
                     new ScheduleDescription("Dwight needs to improve free throws"),
                     new ScheduleDateTime("19/06/2023 1200"))
+
         };
     }
 
@@ -120,9 +120,9 @@ public class SampleDataUtil {
     /**
      * Returns a lineup set containing the list of strings given.
      */
-    public static Set<LineupName> getLineupSet(String... strings) {
+    public static Set<seedu.address.model.lineup.LineupName> getLineupSet(String... strings) {
         return Arrays.stream(strings)
-                .map(LineupName::new)
+                .map(seedu.address.model.lineup.LineupName::new)
                 .collect(Collectors.toSet());
     }
 

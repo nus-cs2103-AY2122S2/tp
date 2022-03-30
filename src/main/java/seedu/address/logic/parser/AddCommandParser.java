@@ -20,7 +20,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -58,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_LINEUP));
             } else {
-                LineupName name = ParserUtil.parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
+                seedu.address.model.lineup.LineupName name = ParserUtil
+                        .parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
                 Lineup lineup = new Lineup(name);
                 if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
                     // to be added later

@@ -165,7 +165,7 @@ This section describes some noteworthy details on how certain features are imple
 The proposed add lineup functionality will create a new lineup and store it inside `UniqueLineupList`.
 
 The following sequence diagram shows how the undo operation works:
-![AddLineup](images/AddLineupSequenceDiagram.png)
+![AddLineup](images/Add.png)
 
 #### Design Consideration
 **Aspect: Where to store lineup data:**
@@ -203,7 +203,7 @@ as well as from all lineups in `UniqueLineupList` that contains the player.
 #### 2.2 Delete lineup
 #### Proposed implementation
 The proposed delete lineup functionality will delete an existing lineup from `UniqueLineupList` and remove all players from the lineup.
-
+![DeleteLineup](images/Delete.png)
 #### Design Consideration
 **Aspect: How to remove lineup from `UniqueLineupList`:**
 
@@ -236,7 +236,7 @@ After checking that both input player and lineup are valid, the lineup's name wi
 #### Proposed implementation
 The proposed edit lineup functionality will update the name of a lineup.
 Meanwhile, the `lineups` attribute of each person should also be updated if the person is in the lineup.
-
+![Edit Lineup](images/Edit.png)
 #### Design Consideration
 **Aspect: How to locate lineup in `UniqueLineupList`:**
 
@@ -281,6 +281,7 @@ __TO BE ADDED__
 For future development (v1.3b), may consider to enter more flags so that user can perform more specific view task.
 
 #### 4.2 View lineup
+![view](images/View.png)
 #### Proposed implementation
 #### Design Consideration
 
@@ -319,7 +320,6 @@ __TO BE ADDED__
 
 ### 5. Put feature
 Puts a `Person` into a `Lineup`
-
 #### Proposed implementation
 
 Stores the `LineupName` in `Person`

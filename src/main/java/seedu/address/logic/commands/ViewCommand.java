@@ -57,7 +57,7 @@ public class ViewCommand extends Command {
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;
 
-    private static String MESSAGE_VIEW_SUCCESS = "Listed all information!";
+    private static String messageViewSuccess = "Listed all information!";
 
     private final List<Predicate<Person>> predicatePerson; // for person name or lineup name
     private final Predicate<Schedule> predicateSchedule;
@@ -98,18 +98,18 @@ public class ViewCommand extends Command {
             model.updateFilteredScheduleList(predicateSchedule);
         }
         changeSuccessMessage(model);
-        return new CommandResult(MESSAGE_VIEW_SUCCESS);
+        return new CommandResult(messageViewSuccess);
     }
 
     private void changeSuccessMessage(Model model) {
         if ((keywords.size() > 1 && keywords.contains("P/")) || keywords.contains("L/")) {
-            MESSAGE_VIEW_SUCCESS = String.format(
+            messageViewSuccess = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else if (keywords.contains("S/")) {
-            MESSAGE_VIEW_SUCCESS = String.format(
+            messageViewSuccess = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else {
-            MESSAGE_VIEW_SUCCESS = "Listed all persons!";
+            messageViewSuccess = "Listed all persons!";
         }
     }
 

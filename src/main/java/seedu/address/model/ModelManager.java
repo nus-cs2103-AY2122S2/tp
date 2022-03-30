@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
@@ -132,7 +131,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasLineupName(LineupName targetName) {
+    public boolean hasLineupName(seedu.address.model.lineup.LineupName targetName) {
         requireNonNull(targetName);
         return addressBook.hasLineupName(targetName);
     }
@@ -144,7 +143,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Lineup getLineup(LineupName targetName) {
+    public Lineup getLineup(seedu.address.model.lineup.LineupName targetName) {
         requireNonNull(targetName);
         return addressBook.getLineup(targetName);
     }
@@ -260,6 +259,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    public ObservableList<Person> getPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
     //=========== Filtered Person List Accessors (End) ====================================================
 
     //=========== Filtered Schedule List Accessors (Start) ====================================================
@@ -277,6 +280,10 @@ public class ModelManager implements Model {
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
+    }
+
+    public ObservableList<Schedule> getScheduleList() {
+        return this.addressBook.getScheduleList();
     }
 
     //=========== Filtered Schedule List Accessors (End) ====================================================

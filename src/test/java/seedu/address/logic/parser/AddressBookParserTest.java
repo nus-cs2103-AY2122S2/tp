@@ -1,6 +1,13 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -16,14 +23,8 @@ import seedu.address.testutil.LineupBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
-import static seedu.address.testutil.Assert.assertThrows;
-
 public class AddressBookParserTest {
-    AddressBookParser addressBookParser = new AddressBookParser();
+    private AddressBookParser addressBookParser = new AddressBookParser();
 
     @Test
     public void parse_commands_success() throws ParseException {

@@ -1,9 +1,10 @@
 package seedu.address.storage;
+import java.time.format.DateTimeFormatter;
+
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.time.format.DateTimeFormatter;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.schedule.Schedule;
