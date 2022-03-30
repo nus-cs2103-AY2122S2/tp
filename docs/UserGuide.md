@@ -215,14 +215,35 @@ Example:
 
 Edits an existing task in ManageEZPZ.
 
-Format:
+Possible formats:
 * `editTask INDEX [desc/NAME]`
-* `editTask INDEX []`
-* `editTask INDEX []`
+* `editTask INDEX [desc/NAME] [date/DATE]`
+* `editTask INDEX [desc/NAME] [date/DATE] [at/TIME]`
+* `editTask INDEX [date/DATE]`
+* `editTask INDEX [date/DATE] [at/TIME]`
+* `editTask INDEX [at/TIME]`
 
-Examples:
-* `editTask XXX` edits ...
-* `editTask XXX` edits ...
+Editing tasks is flexible in ManageEZPZ. 
+For example, you can update just the task description or perhaps
+just the date and time of the task only. 
+However, you are not allowed to edit a task with no input supplied.
+Either `[desc/NAME]`, `[date/DATE]` or `[at/TIME]` must have a value.
+
+<b>Note:</b> For an `Event` task, a start time and an end time separated with an empty space must be provided 
+instead of a single time value.
+
+
+Examples: <br/>
+
+Given a task list as follows... <br/>
+
+1. Type: `Todo`, Description: `Eat Bread`
+2. Type: `Deadline`, Description: `Chemistry Homework`, Date: `2022-05-03`, Time: `1700`
+3. Type: `Event`, Description: `Final Exam`, Date: `2022-06-04`, Time: `1700 2000`
+
+* `editTask 1 desc/ Drink Water` edits the task description of a `Todo` task.
+* `editTask 2 date/ 2022-05-10 at/ 2000` edits the date and the time of a `Deadline` task.
+* `editTask 3 at/ 1800 2100` edits the time of an `Event` task.
 
 ### Marking a Task : `markTask`
 
