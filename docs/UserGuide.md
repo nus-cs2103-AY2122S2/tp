@@ -249,7 +249,15 @@ Given a task list as follows... <br/>
 
 Marks the specified task in ManageEZPZ as done.
 
+<<<<<<< HEAD
+#### Note:
+* Arguments can be stacked together in any order. 
+* There must be at least one task type or options shown below. 
+* However, only one task type is allowed.
+* Any other invalid options not stated below will be ignored
+=======
 Format: `markTask INDEX`
+>>>>>>> master
 
 * Marks the task at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed task list.

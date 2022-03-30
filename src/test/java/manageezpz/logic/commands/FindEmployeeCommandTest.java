@@ -51,18 +51,6 @@ class FindEmployeeCommandTest {
     }
 
     @Test
-    void findEmployeeCommand_noOptions_showAllEmployees() {
-        PersonMultiplePredicate predicate = new PersonMultiplePredicate(null, null, null);
-        expectedModel.updateFilteredPersonList(predicate);
-        List<Person> expectedPeople = getTypicalAddressBookEmployees().getPersonList();
-        String message = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        FindEmployeeCommand command = new FindEmployeeCommand(predicate);
-
-        assertCommandSuccess(command, model, message, expectedModel);
-        assertEquals(expectedPeople, model.getFilteredPersonList());
-    }
-
-    @Test
     void findEmployeeCommand_withNames_showEmployeesWithNames() {
         PersonMultiplePredicate predicate = new PersonMultiplePredicate(List.of("Alice", "Benson"), null,
                 null);

@@ -35,6 +35,7 @@ public class FindEmployeeCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_EMAIL.getPrefix() + "alexyeo@google.com\n"
             + COMMAND_WORD + " " + PREFIX_NAME.getPrefix() + "Benson Chua " + PREFIX_PHONE.getPrefix() + "6123456 "
             + PREFIX_EMAIL.getPrefix() + "bensonc@gmail.com";
+    public static final String NO_OPTIONS = COMMAND_WORD + " needs at least 1 valid options\n";
     public static final String INVALID_NAME = Name.MESSAGE_CONSTRAINTS + "\n";
     public static final String INVALD_PHONE = Phone.MESSAGE_CONSTRAINTS + "\n";
     public static final String INVALID_EMAIL = Email.MESSAGE_CONSTRAINTS + "\n";

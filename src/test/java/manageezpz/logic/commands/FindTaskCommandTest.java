@@ -16,7 +16,6 @@ import static manageezpz.testutil.TypicalTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalTasks.RETURN_BOOK;
 import static manageezpz.testutil.TypicalTasks.WEEKLY_QUIZ;
 import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
-import static manageezpz.testutil.TypicalTasks.getTypicalTask;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -87,19 +86,6 @@ class FindTaskCommandTest {
     }
 
     @Test
-    void findCommand_findAllTasks_showAllTasks() {
-        TaskMultiplePredicate predicate = new TaskMultiplePredicate(null, null, null,
-                null, null, null);
-        expectedModel.updateFilteredTaskList(predicate);
-        String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW,
-                expectedModel.getFilteredTaskList().size());
-        FindTaskCommand command = new FindTaskCommand(predicate);
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalTask(), model.getFilteredTaskList());
-    }
-
-    @Test
     void findCommand_findSpecificTaskType_showTaskOfSpecificType() {
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(PREFIX_TODO, null, null,
                 null, null, null);
@@ -113,7 +99,7 @@ class FindTaskCommandTest {
     }
 
     @Test
-    void findCommand_findTaskWithDescription_showTasksWithGivenDescrription() {
+    void findCommand_findTaskWithDescription_showTasksWithGivenDescription() {
         // Only 1 word
         List<String> keywords1 = List.of("Book");
         TaskMultiplePredicate predicate1 = new TaskMultiplePredicate(null,
@@ -167,7 +153,7 @@ class FindTaskCommandTest {
     }
 
     @Test
-    void findCommand_findTaskWithAssignee_showTasksWithGivenPriority() {
+    void findCommand_findTaskWithAssignee_showTasksWithGivenAssignee() {
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
                 null, null, null, ALICE.getName().fullName, null);
         expectedModel.updateFilteredTaskList(predicate);

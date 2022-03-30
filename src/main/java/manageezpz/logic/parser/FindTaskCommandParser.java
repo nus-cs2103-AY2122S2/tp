@@ -13,6 +13,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -39,6 +40,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     public FindTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, VALID_OPTIONS);
 
+        checkIfHaveAtLeastOneOption(argMultiMap);
         Prefix taskType = getPrefix(argMultiMap);
         List<String> descriptions = getDescriptions(argMultiMap);
         Date date = getTaskDate(argMultiMap);
@@ -55,6 +57,12 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         } else {
             return new FindTaskCommand(new TaskMultiplePredicate(
                     taskType, descriptions, date, priority, assignee, isMarked));
+        }
+    }
+
+    private void checkIfHaveAtLeastOneOption(ArgumentMultimap argMultiMap) {
+        if (!isAtLeastOnePrefixPresent(argMultiMap, VALID_OPTIONS) || !argMultiMap.getPreamble().isEmpty()) {
+            addErrorMessage(FindTaskCommand.NO_OPTIONS);
         }
     }
 
@@ -77,15 +85,13 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         } else {
             return currentPrefixes.get(0);
         }
-
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
         List<String> descriptions = null;
         if (argMultiMap.isPrefixExist(PREFIX_DESCRIPTION)) {
-            String description = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
-            String[] descriptionArray = description.split("\\s+");
-            descriptions = List.of(descriptionArray);
+            String descriptionString = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
+            descriptions = List.of(descriptionString.split("\\s+"));
             checkIfValidDescription(descriptions);
         }
         return descriptions;
@@ -190,5 +196,13 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private void addErrorMessage(String errorMessage) {
         hasError = true;
         this.errorMessage = this.errorMessage + errorMessage;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isAtLeastOnePrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
