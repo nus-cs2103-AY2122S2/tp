@@ -24,7 +24,7 @@ public class DeleteConsultationCommand extends Command {
             + "matches the filtered list index.\n"
             + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 ";
-    public static final String MESSAGE_CONSULTATION_DELETE_OVERVIEW = "Deleted consultation: %1$s";
+    public static final String MESSAGE_CONSULTATION_DELETE_SUCCESS = "Deleted consultation: %1$s";
     public static final String MESSAGE_INVALID_CONSULTATION_INDEX =
             "The consultation index provided is invalid";
 
@@ -54,10 +54,10 @@ public class DeleteConsultationCommand extends Command {
         model.deleteConsultation(consultationToDelete);
         if (lastShownList.isEmpty()) {
             CommandType.setViewCommandType(CommandType.DEFAULT);
-            return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, targetIndex.getOneBased()),
+            return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_SUCCESS, targetIndex.getOneBased()),
                     CommandType.DEFAULT);
         }
-        return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_OVERVIEW, consultationToDelete.toString()),
+        return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_SUCCESS, consultationToDelete.toString()),
                 COMMAND_TYPE);
     }
 
