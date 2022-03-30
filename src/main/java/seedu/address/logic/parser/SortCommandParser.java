@@ -7,8 +7,10 @@ import java.util.Comparator;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.comparators.PersonMeetingComparator;
 import seedu.address.model.person.comparators.PersonNameComparator;
 import seedu.address.model.person.comparators.PersonPrevDateMetComparator;
+import seedu.address.model.person.comparators.PersonSalaryComparator;
 
 public class SortCommandParser implements Parser<SortCommand> {
 
@@ -61,10 +63,14 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
         switch(userInput) {
+        case MEETING:
+            return new PersonMeetingComparator();
         case NAME:
             return new PersonNameComparator();
         case PREV:
             return new PersonPrevDateMetComparator();
+        case SALARY:
+            return new PersonSalaryComparator();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

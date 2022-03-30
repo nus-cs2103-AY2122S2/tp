@@ -40,6 +40,17 @@ public class Salary {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Method to compare Salary with other Salary.
+     * Returns 0 if Salary is equal, -1 if this Salary is lesser and 1 if it is higher.
+     *
+     * @param otherSalary Another Salary to compare to.
+     * @return Integer indicating if Salary is equal, less or more than otherSalary
+     */
+    public int compare(Salary otherSalary) {
+        return -1 * this.value.compareTo(otherSalary.value);
+    }
+
     @Override
     public String toString() {
         return value;

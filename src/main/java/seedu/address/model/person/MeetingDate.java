@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 
+import seedu.address.model.person.exceptions.ComparatorException;
 /**
  * Represents a Person's upcoming meeting date.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
@@ -32,6 +33,26 @@ public class MeetingDate {
      */
     public static boolean isValidDate(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Method to compare MeetingDate with other MeetingDate.
+     * Returns 0 if date is equal, -1 if this MeetingDate is before and 1 if it is after.
+     *
+     * @param otherDate Another MeetingDate to compare to.
+     * @return Integer indicating if MeetingDate is equal, before or after otherDate.
+     * @throws ComparatorException if hits else statement which it should not reach.
+     */
+    public int compare(MeetingDate otherDate) throws ComparatorException {
+        if (this.equals(otherDate)) {
+            return 0;
+        } else if (this.value.isBefore(otherDate.value)) {
+            return 1;
+        } else if (this.value.isAfter(otherDate.value)) {
+            return -1;
+        } else {
+            throw new ComparatorException();
+        }
     }
 
     @Override
