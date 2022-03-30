@@ -15,7 +15,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -208,7 +207,6 @@ public class MainApp extends Application {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveUserPrefs(model.getUserPrefs());
             authentication.createEncryptedFile(storage.getAddressBookFilePath());
-            FileUtil.deleteFile(storage.getAddressBookFilePath());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         } catch (InvalidKeyException e) {
