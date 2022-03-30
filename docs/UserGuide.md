@@ -267,19 +267,19 @@ Opens up a new window that shows a pie chart of the number of buyers & sellers w
 # FAQ
 
 # Command Summary
-| Action | Format                             | Examples                                                                                                             |
-| --- |------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
-| Clear | clear                              | -                                                                                                                    |
-| Delete | delete INDEX | e.g. delete 3                                                                                                        |
-| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE] | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
-| Find | find ATTRIBUTE KEYWORD [MORE KEYWORDS...] | e.g. find name James Jake                                                                                            |
+| Action            | Format                                                                                   | Examples                                                                                                             |
+|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
+| Clear             | clear                                                                                    | -                                                                                                                    |
+| Delete            | delete INDEX                                                                             | e.g. delete 3                                                                                                        |
+| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
+| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                | e.g. find name James Jake                                                                                            |
 | Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                      | e.g. sort name !phone email                                                                                          |
-| Upload | upload INDEX [i/FilePath:Description] | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat |
-| viewimage | viewimage INDEX | e.g. viewimage 1 |
-| List | list | -                                                                                                                    |
-| Help | help | -                                                                                                                    |
-|Match | match | -                                                                                                                    |
-| Favourite | favourite INDEX | e.g., favourite 3                                                                                                    |
-| Favourites window | fw  | - | 
-| Statistics window | stats | - | 
+| Upload            | upload INDEX [i/FilePath:Description]                                                    | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                            |
+| viewimage         | viewimage INDEX                                                                          | e.g. viewimage 1                                                                                                     |
+| List              | list                                                                                     | -                                                                                                                    |
+| Help              | help                                                                                     | -                                                                                                                    |
+| Match             | match                                                                                    | -                                                                                                                    |
+| Favourite         | favourite INDEX                                                                          | e.g., favourite 3                                                                                                    |
+| Favourites window | fw                                                                                       | -                                                                                                                    | 
+| Statistics window | stats                                                                                    | -                                                                                                                    | 
