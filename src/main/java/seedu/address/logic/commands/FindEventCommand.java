@@ -1,32 +1,57 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.entry.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.entry.predicate.EventContainsKeywordsPredicate;
 
 /**
- * Finds and lists all events in address book whose companyName contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case insensitive
+ * Find event command uses User input to specify what attributes the displayed events should have.
+ * The relationship between attributes is "AND" while the relationship between keywords of the same attribute
+ * is "OR".
+ * For example, "finde n/ interview c/ shopsg dbsss" will return any events that has "interview" as its name
+ * AND has ("shopsg" OR "dbsss") as its companyName.
  */
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "finde";
+    public static final String MESSAGE_NOT_QUERIED = "At least one field to find must be provided.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose companyName contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " shopee";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds events with given details of the event "
+            + "by name, company, date, time, location and tag "
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_TIME + "TIME] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_COMPANY + " sgshop "
+            + PREFIX_TIME + " zoom";
 
-    private final CompanyNameContainsKeywordsPredicate predicate;
+    private final EventContainsKeywordsPredicate predicate;
 
-    public FindEventCommand(CompanyNameContainsKeywordsPredicate predicate) {
+    /**
+     * Constructs FindEventCommand object
+     * @param predicate A predicate containing all Event's attributes queried by user
+     */
+    public FindEventCommand(EventContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
         return new CommandResult(

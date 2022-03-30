@@ -13,10 +13,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Event extends Entry {
 
-    //Identity fields
-    private final Name companyName;
 
     // Data fields
+    private Name companyName;
     private final Date date;
     private final Time time;
     private final Location location;
@@ -68,6 +67,13 @@ public class Event extends Entry {
                 && otherEvent.getCompanyName().equals(getCompanyName())
                 && otherEvent.getDate().equals(getDate())
                 && otherEvent.getTime().equals(getTime());
+    }
+
+    @Override
+    public void updateCompanyName(String oldName, String newName) {
+        if (oldName.equals(this.companyName.toString())) {
+            this.companyName = new Name(newName);
+        }
     }
 
     /**
