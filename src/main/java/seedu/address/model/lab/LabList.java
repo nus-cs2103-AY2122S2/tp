@@ -11,8 +11,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.exceptions.DuplicateLabException;
-import seedu.address.model.student.exceptions.LabNotFoundException;
+import seedu.address.model.lab.exceptions.DuplicateLabException;
+import seedu.address.model.lab.exceptions.LabNotFoundException;
 
 public class LabList implements Iterable<Lab> {
 

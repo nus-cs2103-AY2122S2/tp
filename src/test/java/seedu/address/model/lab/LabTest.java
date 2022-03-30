@@ -8,8 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.student.exceptions.DuplicateLabException;
-import seedu.address.model.student.exceptions.InvalidLabStatusException;
+import seedu.address.model.lab.exceptions.DuplicateLabException;
+import seedu.address.model.lab.exceptions.InvalidLabStatusException;
 
 public class LabTest {
 
@@ -178,13 +178,13 @@ public class LabTest {
     @Test
     public void getDetails_submitted() {
         Lab lab = new Lab("3").of("SUBMITTED");
-        assertEquals(lab.getDetails(), LabStatus.describe(lab.labStatus));
+        assertEquals(lab.getDetails(), lab.labStatus.describe());
     }
 
     @Test
     public void getDetails_unsubmitted() {
         Lab lab = new Lab("2").of("UNSUBMITTED");
-        assertEquals(lab.getDetails(), LabStatus.describe(lab.labStatus));
+        assertEquals(lab.getDetails(), lab.labStatus.describe());
     }
 
 }

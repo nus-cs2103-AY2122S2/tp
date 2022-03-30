@@ -73,4 +73,9 @@ public class LabMarkTest {
         LabMark marks2 = new LabMark();
         assertNotEquals(marks1, marks2);
     }
+
+    @Test
+    public void describe_success() {
+
+    }
 }

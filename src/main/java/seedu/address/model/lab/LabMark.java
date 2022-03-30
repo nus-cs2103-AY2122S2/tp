@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Optional;
 
+import seedu.address.model.lab.exceptions.IllegalLabStateException;
+
 /**
  * Represents the marks attained in a Lab assignment.
  * Guarantees: immutable; is valid as declared in {@link #isValidLabMark(String)}
@@ -20,6 +22,8 @@ public class LabMark {
      * A placeholder value to represent that the marks have not been initialized.
      */
     public static final String MARKS_UNKNOWN = "Unknown";
+
+    public static final String MARKS_DESCRIPTION = "Marks: %1$s";
 
     private final Optional<Integer> marks;
 
@@ -77,4 +81,13 @@ public class LabMark {
                 && marks.equals(((LabMark) other).marks)); // state check
     }
 
+    /**
+     * Returns a description of {@code this} in String format
+     */
+    public String describe() {
+        if (isEmpty()) {
+            throw new IllegalLabStateException();
+        }
+        return String.format(MARKS_DESCRIPTION, this);
+    }
 }

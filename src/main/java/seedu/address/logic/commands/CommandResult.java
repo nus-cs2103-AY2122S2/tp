@@ -27,18 +27,18 @@ public class CommandResult {
     /**
      * {@code view} command is executed
      */
-    private final boolean view;
+    private final boolean isView;
 
     private final Optional<Student> student;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view, Student student) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isView, Student student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.view = view;
+        this.isView = isView;
         this.student = Optional.ofNullable(student);
     }
 
@@ -63,7 +63,7 @@ public class CommandResult {
     }
 
     public boolean isView() {
-        return view;
+        return isView;
     }
 
     public boolean isExit() {
@@ -85,13 +85,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && view == otherCommandResult.view
+                && isView == otherCommandResult.isView
                 && student.equals(otherCommandResult.student);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, view, student);
+        return Objects.hash(feedbackToUser, showHelp, exit, isView, student);
     }
 
 }
