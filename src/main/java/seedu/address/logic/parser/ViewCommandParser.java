@@ -4,10 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Nric;
-
 
 public class ViewCommandParser {
     /**
@@ -23,6 +23,7 @@ public class ViewCommandParser {
 
         if (arePrefixesPresent(argMultimap, PREFIX_NRIC)) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            CommandType.setViewCommandType(CommandType.SUMMARY);
         }
 
         return new ViewCommand(nric);
