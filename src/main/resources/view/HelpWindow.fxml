@@ -58,7 +58,7 @@
                 <Label fx:id="exit" styleClass="styleCommand" text="exit" prefWidth="70" alignment="CENTER" />
             </HBox>
         </children>
-        <HBox styleClass="styleHBox" alignment="BOTTOM_LEFT">
+        <HBox fx:id="copyButtonHBox" alignment="BASELINE_RIGHT">
             <Button fx:id="copyButton" mnemonicParsing="false" onAction="#goToUrl"
                     text="Open User Guide in Browser" />
         </HBox>
@@ -66,7 +66,7 @@
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </opaqueInsets>
         <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+          <Insets bottom="15.0" left="5.0" right="10.0" top="15.0" />
         </padding>
       </VBox>
     </Scene>
