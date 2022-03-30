@@ -3,11 +3,16 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <StackPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox spacing="10">
-        <Label fx:id="heading" styleClass="tag-list-heading">
-        </Label>
-        <FlowPane fx:id="tagsInPane">
-        </FlowPane>
+<!--    <VBox spacing="10">-->
+<!--        <Label fx:id="heading" styleClass="tag-list-heading">-->
+<!--        </Label>-->
+<!--        <FlowPane fx:id="tagsInPane">-->
+<!--        </FlowPane>-->
+<!--    </VBox>-->
+    <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <ListView fx:id="personListView" VBox.vgrow="ALWAYS"/>
     </VBox>
 </StackPane>
+
