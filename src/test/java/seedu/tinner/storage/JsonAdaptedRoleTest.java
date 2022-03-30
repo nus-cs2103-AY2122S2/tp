@@ -95,10 +95,26 @@ public class JsonAdaptedRoleTest {
     }
 
     @Test
+    public void toModelType_nullDescription_throwsIllegalValueException() {
+        JsonAdaptedRole role =
+                new JsonAdaptedRole(VALID_NAME, VALID_STATUS, VALID_REMINDER_DATE, null, VALID_STIPEND);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, role::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidStipend_throwsIllegalValueException() {
         JsonAdaptedRole role =
                 new JsonAdaptedRole(VALID_NAME, VALID_STATUS, VALID_REMINDER_DATE, VALID_DESCRIPTION, INVALID_STIPEND);
         String expectedMessage = Stipend.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, role::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullStipend_throwsIllegalValueException() {
+        JsonAdaptedRole role =
+                new JsonAdaptedRole(VALID_NAME, VALID_STATUS, VALID_REMINDER_DATE, VALID_DESCRIPTION, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Stipend.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, role::toModelType);
     }
 }

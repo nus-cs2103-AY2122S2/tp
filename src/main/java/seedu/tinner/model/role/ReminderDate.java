@@ -19,7 +19,7 @@ public class ReminderDate {
     public static final DateTimeFormatter VALIDATION_FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     public static final DateTimeFormatter STRING_REPRESENTATION_FORMATTER =
-            DateTimeFormatter.ofPattern("E, MMM dd yyyy, HH:mm a");
+            DateTimeFormatter.ofPattern("E, MMM dd yyyy, hh:mm a");
 
     private static int reminderWindow;
 
