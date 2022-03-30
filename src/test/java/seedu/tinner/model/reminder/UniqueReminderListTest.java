@@ -15,11 +15,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.tinner.model.reminder.exceptions.DuplicateReminderException;
-
-
+import seedu.tinner.testutil.ReminderBuilder;
 
 public class UniqueReminderListTest {
-
 
     private final UniqueReminderList reminderList = UniqueReminderList.getInstance();
 
@@ -30,19 +28,39 @@ public class UniqueReminderListTest {
 
     @Test
     public void contains_reminderNotInList_returnsFalse() {
-        assertFalse(reminderList.contains(META_DATA_ANALYSIS));
+        Reminder test = new ReminderBuilder()
+                .withCompanyName("No such company")
+                .withRoleName("Nothing")
+                .build();
+        assertFalse(reminderList.contains(test));
     }
 
     @Test
     public void contains_existingReminder_returnsTrue() {
-        reminderList.add(GOOGLE_FRONTEND);
-        assertTrue(reminderList.contains(GOOGLE_FRONTEND));
+        Reminder test = new ReminderBuilder()
+                .withCompanyName("Some Company")
+                .withRoleName("Backend Developer")
+                .build();
+        reminderList.add(test);
+        assertTrue(reminderList.contains(test));
     }
 
     @Test
     public void contains_reminderWithSameIdentity_returnsTrue() {
-        reminderList.add(GOOGLE_FRONTEND);
-        assertTrue(reminderList.contains(GOOGLE_FRONTEND));
+        Reminder test = new ReminderBuilder()
+                .withCompanyName("Test Company")
+                .withRoleName("Frontend Developer")
+                .withStatus("complete")
+                .withReminderDate("30-10-2022 23:59")
+                .build();
+        Reminder test2 = new ReminderBuilder()
+                .withCompanyName("Test Company")
+                .withRoleName("Frontend Developer")
+                .withStatus("pending")
+                .withReminderDate("30-11-2022 23:59")
+                .build();
+        reminderList.add(test);
+        assertTrue(reminderList.contains(test2));
     }
 
     @Test
@@ -52,33 +70,14 @@ public class UniqueReminderListTest {
 
     @Test
     public void add_duplicateReminder_throwsDuplicateReminderException() {
-        reminderList.add(AMAZON_DATA_ENGINEER);
-        assertThrows(DuplicateReminderException.class, () -> reminderList.add(AMAZON_DATA_ENGINEER));
+        reminderList.add(META_DATA_ANALYSIS);
+        assertThrows(DuplicateReminderException.class, () -> reminderList.add(META_DATA_ANALYSIS));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> reminderList.asUnmodifiableObservableList().remove(0));
-    }
-
-    @Test
-    public void getReminderDates_existingReminders_returnAscendingOrder() {
-        reminderList.add(AMAZON_DATA_ENGINEER);
-        reminderList.add(GOOGLE_FRONTEND);
-        ArrayList<LocalDate> expectedList = new ArrayList<>();
-        expectedList.add(GOOGLE_FRONTEND.getReminderDate().value.toLocalDate());
-        expectedList.add(AMAZON_DATA_ENGINEER.getReminderDate().value.toLocalDate());
-        assertEquals(expectedList, reminderList.getReminderDates());
-    }
-
-    @Test
-    public void getReminderDates_duplicateReminders_returnOnlyOne() {
-        reminderList.add(APPLE_ML_ENGINEER);
-        reminderList.add(GOOGLE_FRONTEND);
-        ArrayList<LocalDate> expectedList = new ArrayList<>();
-        expectedList.add(GOOGLE_FRONTEND.getReminderDate().value.toLocalDate());
-        assertEquals(expectedList, reminderList.getReminderDates());
     }
 
     @Test
@@ -95,9 +94,14 @@ public class UniqueReminderListTest {
 
     @Test
     public void getDateSpecificReminders_noRemindersOnDate_returnEmptyList() {
-        reminderList.add(APPLE_ML_ENGINEER);
+        Reminder test = new ReminderBuilder()
+                .withCompanyName("Company C")
+                .withRoleName("Frontend Developer")
+                .withReminderDate("02-02-2024 00:00")
+                .build();
+        reminderList.add(test);
         ArrayList<Reminder> expectedList = new ArrayList<>();
-        LocalDate date = META_DATA_ANALYSIS.getReminderDate().value.toLocalDate();
+        LocalDate date = LocalDate.of(2024, 01, 01);
         assertEquals(expectedList, reminderList.getDateSpecificReminders(date));
     }
 

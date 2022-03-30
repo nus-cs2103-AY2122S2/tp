@@ -7,7 +7,7 @@ public class TypicalReminders {
             .withCompanyName("Google")
             .withRoleName("Frontend Developer")
             .withStatus("applying")
-            .withReminderDate("30-04-2022 00:00")
+            .withReminderDate("30-06-2022 00:00")
             .build();
     public static final Reminder META_DATA_ANALYSIS = new ReminderBuilder()
             .withCompanyName("Meta")
@@ -25,6 +25,6 @@ public class TypicalReminders {
             .withCompanyName("Apple")
             .withRoleName("ML Engineer")
             .withStatus("offered")
-            .withReminderDate("30-04-2022 00:00")
+            .withReminderDate("30-06-2022 00:00")
             .build();
 }
