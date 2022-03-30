@@ -471,10 +471,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1.  User requests to list persons
-2.  NUSocials shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons.
+2.  NUSocials shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  NUSocials deletes the person from its addressbook.
 
     Use case ends.
 ````
@@ -495,8 +495,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User adds a new person in the given command format (see User Guide)
-2. NUSocials adds the new person to the list
+1. User adds a new person in the given command format (see User Guide).
+2. NUSocials adds the new person to the addressbook.
 
     Use case ends.
 ````
@@ -513,10 +513,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User requests to list all persons
-2. NUSocials shows a list of all persons
-3. User inputs command to tag a specific person in the list
-4. NUSocials tags the person
+1. User requests to list all persons.
+2. NUSocials shows a list of all persons from its addressbook.
+3. User inputs command to tag a specific person in the list.
+4. NUSocials tags the person.
 
     Use case ends.
 ````
@@ -542,10 +542,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User requests to list all persons
-2. NUSocials shows a list of all persons
-3. Users requests to overwrite certain fields of the person with updated information
-4. NUSocials tags the person
+1. User requests to list all persons.
+2. NUSocials shows a list of all persons from its addressbook.
+3. Users requests to overwrite certain fields of the person with updated information.
+4. NUSocials tags the person.
 
     Use case ends.
 ````
@@ -571,8 +571,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User requests to list all persons
-2. NUSocials displays all persons in a list
+1. User requests to list all persons.
+2. NUSocials displays all persons in a list from its addressbook.
 
     Use case ends.
 ````
@@ -581,8 +581,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User requests to list all events
-2. NUSocials displays all events in a list
+1. User requests to list all events.
+2. NUSocials displays all events in a list from its addressbook.
 
     Use case ends.
 ````
@@ -607,8 +607,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 ````
-1. User requests to find any person using specific fields
-2. NUSocials shows a list of persons matching any fields
+1. User requests to find any person using specific fields.
+2. NUSocials shows a list of persons matching any fields from its addressbook.
 
     Use case ends.
 ````
@@ -631,10 +631,10 @@ The user wants to find a person that has every field instead.
 
 **MSS**
 ````
-1. User requests to list all persons
-2. NUSocials shows a list of all persons
-3. User requests to remove certain tags from the person
-4. NUSocials removes the specific tags
+1. User requests to list all persons.
+2. NUSocials shows a list of all persons from its addressbook.
+3. User requests to remove certain tags from the person.
+4. NUSocials removes the specific tags from the person.
 
     Use case ends.
 ````
@@ -687,8 +687,8 @@ The user wants to delete multiple persons instead.
 
 **MSS**
 ````
-1. User adds a new event in the given command format (see User Guide)
-2. NUSocials adds the new event to the list
+1. User adds a new event in the given command format (see User Guide).
+2. NUSocials adds the new event to the addressbook.
 
     Use case ends.
 ````
@@ -763,10 +763,10 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location are retained.
 
 3. Subsequent launch
-    1. Make some changes to the addressbook and close the application.
+    1. Make some changes to NUSocials and close the application.
 
     1. Reopen the application by double-clicking the jar file<br>
-        Expected: Shows the GUI and loads contacts from the addressbook. Should reflect the changes made previously.
+        Expected: Shows the GUI and loads contacts from NUSocials. Should reflect the changes made previously.
 
 ### Deleting person
 
