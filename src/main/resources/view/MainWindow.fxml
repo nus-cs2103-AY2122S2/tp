@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+
 <fx:root maxWidth="1200.0" minHeight="400.0" minWidth="1200.0" onCloseRequest="#handleExit" title="Ultimate Divoc Tracker" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/udtlogo-white.png" />

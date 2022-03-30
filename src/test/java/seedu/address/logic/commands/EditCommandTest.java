@@ -80,7 +80,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_batchUpdateWhenPositive_success() {
+    public void execute_positiveFieldStatusBatchUpdate_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(firstPerson);
@@ -96,12 +96,14 @@ public class EditCommandTest {
 
         ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
 
-        List<Person> filteredByClassCodeList = studentList.stream()
-                .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
-                        && !student.isSamePerson(editedPerson))
+        List<Person> filteredByClassCodeAndActivityList = studentList.stream()
+                .filter(student -> (student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                        || student.hasSameActivity(editedPerson))
+                        && !student.isSamePerson(editedPerson)
+                        && !student.getStatus().toString().equals(Status.POSITIVE))
                 .collect(Collectors.toList());
 
-        for (Person classmate : filteredByClassCodeList) {
+        for (Person classmate : filteredByClassCodeAndActivityList) {
             Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_CLOSE_CONTACT).build();
             expectedModel.setPerson(classmate, editedClassmate);
         }
@@ -112,7 +114,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_batchUpdateWhenNegative_success() {
+    public void execute_negativeFieldStatusBatchUpdate_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(secondPerson);
@@ -128,17 +130,22 @@ public class EditCommandTest {
 
         ObservableList<Person> studentList = expectedModel.getAddressBook().getPersonList();
 
-        List<Person> filteredByClassCodeList = studentList.stream()
-                .filter(student -> student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+        List<Person> filteredByClassCodeAndActivityList = studentList.stream()
+                .filter(student -> (student.getClassCode().toString()
+                        .equals(editedPerson.getClassCode().toString())
+                        || student.hasSameActivity(editedPerson))
                         && !student.isSamePerson(editedPerson))
                 .collect(Collectors.toList());
 
-        List<Person> filteredByPositiveStatusInClass = filteredByClassCodeList.stream()
-                .filter(student -> student.getStatus().toString().equals(Status.POSITIVE))
-                .collect(Collectors.toList());
+        for (Person classmate : filteredByClassCodeAndActivityList) {
+            List<Person> positiveRelatedToPerson = studentList.stream()
+                    .filter(student -> (student.getClassCode().toString()
+                        .equals(classmate.getClassCode().toString()) || student.hasSameActivity(classmate))
+                        && !student.isSamePerson(editedPerson)
+                        && student.getStatus().toString().equals(Status.POSITIVE))
+                    .collect(Collectors.toList());
 
-        if (filteredByPositiveStatusInClass.size() == 0) {
-            for (Person classmate : filteredByClassCodeList) {
+            if (positiveRelatedToPerson.size() == 0) {
                 Person editedClassmate = new PersonBuilder(classmate).withStatus(VALID_STATUS_NEGATIVE).build();
                 expectedModel.setPerson(classmate, editedClassmate);
             }

@@ -122,7 +122,7 @@ public class ParserUtil {
         requireNonNull(classCode);
         String trimmedClassCode = classCode.trim();
         if (!ClassCode.isValidClassCode(trimmedClassCode)) {
-            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+            throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS);
         }
         return new ClassCode(trimmedClassCode);
     }
