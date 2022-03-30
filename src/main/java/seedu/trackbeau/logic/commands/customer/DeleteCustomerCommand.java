@@ -51,7 +51,7 @@ public class DeleteCustomerCommand extends Command {
 
         for (Booking booking : lastShownBookingsList) {
             for (Index targetIndex : targetIndexes) {
-                if (booking.getCustomer() == lastShownCustomersList.get(targetIndex.getZeroBased())
+                if (booking.getCustomer().equals(lastShownCustomersList.get(targetIndex.getZeroBased()))
                         && booking.getBookingDateTime().value.isAfter(currentTime)) {
                     bookingsToDelete.add(booking);
                     break;
