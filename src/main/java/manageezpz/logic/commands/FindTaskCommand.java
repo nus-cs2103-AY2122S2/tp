@@ -57,6 +57,8 @@ public class FindTaskCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_DESCRIPTION.getPrefix() + "Capstone project " + PREFIX_DATE.getPrefix()
             + "2022-05-01 " + PREFIX_PRIORITY.getPrefix() + "HIGH " + PREFIX_ASSIGNEES.getPrefix() + "Max Leong"
             + PREFIX_IS_MARKED.getPrefix() + "true";
+
+    public static final String NO_OPTIONS = COMMAND_WORD + " needs at least 1 valid option\n";
     public static final String INVALID_DESCRIPTION = Description.MESSAGE_CONSTRAINTS + "\n";
     public static final String INVALID_DATE = Date.MESSAGE_CONSTRAINTS + "\n";
     public static final String INVALID_PRIORITY = "Property should be NONE, LOW, MEDIUM, HIGH\n";

@@ -31,14 +31,25 @@ public class EditTaskCommand extends Command {
     public static final String COMMAND_WORD = "editTask";
     public static final String MORE_EXAMPLES = COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION + "Eat Apple "
             + PREFIX_DATE + "2022-09-05 " + PREFIX_TIME + "1800";
+    public static final String MORE_EXAMPLES_1 = COMMAND_WORD + " 2 " + PREFIX_DESCRIPTION + "Midterm Exam "
+            + PREFIX_DATE + "2022-04-06 " + PREFIX_TIME + "1800 2000";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list.\n"
             + "Parameters: INDEX (must exist in the Address Book) "
-            + "[" + PREFIX_DESCRIPTION + " NAME] \n"
+            + "[" + PREFIX_DESCRIPTION + " NAME]"
+            + "[" + PREFIX_DATE + " DATE]"
+            + "[" + PREFIX_TIME + " TIME] \n"
+            + "At least one of " + PREFIX_DESCRIPTION + " "
+            + PREFIX_DATE + " " + PREFIX_TIME + " must have a value. \n"
+            + "For an event task, a start time and an end time"
+            + " separated with an empty space" + "\n must be provided"
+            + " instead of a single time value. \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + " Eat bananas "
             + "\n"
-            + MORE_EXAMPLES;
+            + MORE_EXAMPLES
+            + "\n"
+            + MORE_EXAMPLES_1;
 
     private final Index index;
     private final String desc;
