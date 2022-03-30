@@ -121,7 +121,7 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 * Existing values will be updated to the input values.
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the editing `[t/BREED]`:**<br>
+**:information_source: Notes about editing `[t/BREED]`:**<br>
 
 * When editing `[t/BREED]`, the existing breed(s) of the pet will be removed.
 * Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's 'Bulldog' breed will be replaced
@@ -146,7 +146,7 @@ Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 * Time for pick-up and drop-off are optional but **must also follow the specified format**.
 
 Examples:
-* As per previous example `present 1 date/25-03-2022 pu/08:00 do/19:00` indicates that Woofie is present for daycare on `25-03-2022`, requires to be picked up at `08:00` and dropped off at `19:00`
+* As per previous example `present 1 date/25-03-2022 pu/08:00 do/19:00` indicates that Woofie is present for daycare on `25-03-2022` and requires to be picked up at `08:00` and dropped off at `19:00`
 
 <p align="center">
   <img src="images/forUserGuide/UpdatedAttenance.png" alt="After adding attendance sample screenshot"/>
