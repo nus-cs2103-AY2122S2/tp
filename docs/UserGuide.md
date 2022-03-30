@@ -25,6 +25,8 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
       * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
       * [Show potential teammates: show](#show-all-potential-teammates-show)
     * [Exiting HackNet](#exiting-the-program-exit)
+    * [Undo](#undo-last-command-undo)
+    * [Redo](#redo-last-command-redo)
 * [Data](#data)
 * [Future Updates](#future-updates)
 * [FAQ](#faq)
@@ -234,6 +236,21 @@ Format: `list`
 Shows the list of all persons marked as potential teammates
 
 Format: `show`
+
+### Undo last command: `undo`
+
+Undo the last command that changed HackNet. <br>
+Only these commands that changed HackNet can be undone:
+* Add
+* Delete
+* Edit
+* Team
+* Unteam
+* Clear
+
+### Redo last command: `redo`
+
+Redo the command that was previously undone.
 
 ### Exiting the program: `exit`
 
