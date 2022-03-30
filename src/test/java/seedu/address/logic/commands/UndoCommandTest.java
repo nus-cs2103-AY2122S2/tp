@@ -104,4 +104,10 @@ public class UndoCommandTest {
     public void test_undoCommandWordIsCorrect() {
         assertTrue(UndoCommand.COMMAND_WORD.equals("undo"));
     }
+
+    @Test
+    public void equals() {
+        UndoCommand command = new UndoCommand();
+        assertTrue(command.equals(new UndoCommand()));
+    }
 }

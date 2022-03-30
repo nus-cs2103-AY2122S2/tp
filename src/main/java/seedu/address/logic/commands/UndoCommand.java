@@ -6,14 +6,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Undoes the previous command.
  */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Erases the previous change to the address book and restores the the older state.\n"
+            + ": Erases the previous change to the address book and restores the older state.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_UNDO_SUCCESS = "Undid last change.";
