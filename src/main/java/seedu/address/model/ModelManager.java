@@ -27,6 +27,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final CommandHistory commandHistory;
+    private final AddressBookHistory addressBookHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +40,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.commandHistory = new CommandHistory();
+        this.addressBookHistory = new AddressBookHistory(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -90,6 +94,37 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public AddressBook getPreviousAddressBook() {
+        return addressBookHistory.getPreviousAddressBook();
+    }
+
+    @Override
+    public void saveCurrentAddressBookToHistory() {
+        addressBookHistory.addAddressBook(addressBook);
+    }
+
+    @Override
+    public AddressBookHistory getAddressBookHistory() {
+        return addressBookHistory;
+    }
+
+    @Override
+    public boolean isAddressBookHistoryEmpty() {
+        return addressBookHistory.isEmpty();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        setAddressBook(getPreviousAddressBook());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void clearAddressBookHistory() {
+        addressBookHistory.clearHistory();
     }
 
     @Override
@@ -164,6 +199,34 @@ public class ModelManager implements Model {
         requireNonNull(task);
         return addressBook.checkProgress(moduleCode, task);
     }
+
+    //=========== Command History ============================================================================
+
+    @Override
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
+    }
+
+    @Override
+    public String getPreviousCommandText() {
+        return commandHistory.popPreviousCommand();
+    }
+
+    @Override
+    public boolean isCommandHistoryEmpty() {
+        return commandHistory.isEmpty();
+    }
+
+    @Override
+    public void addToCommandHistory(String commandText) {
+        commandHistory.addToHistory(commandText);
+    }
+
+    @Override
+    public void clearCommandHistory() {
+        commandHistory.clearHistory();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -202,7 +265,9 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && addressBookHistory.equals(other.addressBookHistory)
+                && commandHistory.equals(other.commandHistory);
     }
 
 }

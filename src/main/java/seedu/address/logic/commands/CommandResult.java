@@ -17,22 +17,35 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The application should exit. */
+    /** The application should confirm if the user wants to clear the storage. */
     private final boolean clearRequest;
+
+    /** The application should verify if the user is requesting to undo the last command. */
+    private final boolean undoRequest;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean clearRequest) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean clearRequest, boolean undoRequest) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.clearRequest = clearRequest;
+        this.undoRequest = undoRequest;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code showHelp}, {@code exit} and {@code clearRequest},
+     * with {@code undoRequest} field set to false.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean clearRequest) {
+        this(feedbackToUser, showHelp, exit, clearRequest, false);
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code showHelp} and {@code exit},
-     * with clearRequest field set to false.
+     * with {@code clearRequest} field set to false.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this(feedbackToUser, showHelp, exit, false);
@@ -70,6 +83,10 @@ public class CommandResult {
         return clearRequest;
     };
 
+    public boolean isUndoRequest() {
+        return undoRequest;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -85,12 +102,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && clearRequest == otherCommandResult.clearRequest;
+                && clearRequest == otherCommandResult.clearRequest
+                && undoRequest == otherCommandResult.undoRequest;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, clearRequest);
+        return Objects.hash(feedbackToUser, showHelp, exit, clearRequest, undoRequest);
     }
 
 }
