@@ -65,12 +65,12 @@ public class TaskName {
         }
 
         // instanceof handles null
-        if (!(other instanceof seedu.address.model.task.TaskName)) {
+        if (!(other instanceof TaskName)) {
             return false;
         }
 
         // state check
-        seedu.address.model.task.TaskName e = (seedu.address.model.task.TaskName) other;
-        return taskName.equals(e.taskName);
+        TaskName e = (TaskName) other;
+        return taskName.equalsIgnoreCase(e.taskName);
     }
 }

@@ -1,10 +1,15 @@
 package seedu.address.model.group;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_NUS_FINTECH_SOCIETY;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.NUS_FINTECH_SOCIETY;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.GroupBuilder;
 
 public class GroupNameTest {
     @Test
@@ -35,5 +40,17 @@ public class GroupNameTest {
         assertTrue(GroupName.isValidGroupName("NUS Statistics and Data Science Society")); // long names
         assertTrue(GroupName.isValidGroupName("important*")); // contains non-alphanumeric characters
         assertTrue(GroupName.isValidGroupName("^")); // only non-alphanumeric characters
+    }
+
+    @Test
+    public void equal() {
+        Group editedNusFintechSocietyLowerCase = new GroupBuilder(NUS_FINTECH_SOCIETY)
+                .withGroupName(VALID_GROUP_NAME_NUS_FINTECH_SOCIETY.toLowerCase()).build();
+
+        // same group name -> equals
+        assertEquals(NUS_FINTECH_SOCIETY.getGroupName(), NUS_FINTECH_SOCIETY.getGroupName());
+
+        // same group name with different case -> equals
+        assertEquals(NUS_FINTECH_SOCIETY.getGroupName(), editedNusFintechSocietyLowerCase.getGroupName());
     }
 }

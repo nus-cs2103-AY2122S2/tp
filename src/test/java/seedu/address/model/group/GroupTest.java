@@ -57,5 +57,10 @@ public class GroupTest {
         Group editedNusFintechSociety = new GroupBuilder(NUS_FINTECH_SOCIETY)
                 .withGroupName(VALID_GROUP_NAME_NUS_DATA_SCIENCE_SOCIETY).build();
         assertFalse(NUS_FINTECH_SOCIETY.equals(editedNusFintechSociety));
+
+        // group name differs in case, all other attributes same -> returns true
+        Group editedNusFintechSocietyLowerCase = new GroupBuilder(NUS_FINTECH_SOCIETY)
+                .withGroupName(VALID_GROUP_NAME_NUS_FINTECH_SOCIETY.toLowerCase()).build();
+        assertTrue(NUS_FINTECH_SOCIETY.isSameGroup(editedNusFintechSocietyLowerCase));
     }
 }

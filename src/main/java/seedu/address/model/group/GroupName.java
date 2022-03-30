@@ -68,6 +68,6 @@ public class GroupName {
 
         // state check
         GroupName e = (GroupName) other;
-        return groupName.equals(e.groupName);
+        return groupName.equalsIgnoreCase(e.groupName);
     }
 }

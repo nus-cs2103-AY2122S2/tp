@@ -83,7 +83,7 @@ public class Group {
         }
 
         return otherGroup != null
-                && otherGroup.getGroupName().equals(getGroupName());
+                && otherGroup.getGroupName().toString().equalsIgnoreCase(getGroupName().toString());
     }
 
     /**
@@ -173,7 +173,7 @@ public class Group {
         }
 
         Group otherGroup = (Group) other;
-        return otherGroup.getGroupName().equals(getGroupName());
+        return otherGroup.getGroupName().toString().equalsIgnoreCase(getGroupName().toString());
     }
 
     @Override
