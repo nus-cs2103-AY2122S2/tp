@@ -31,7 +31,7 @@ class AddMembershipCommandTest {
         Person personEdited = person.addMembership(member);
         expectedModel.setPerson(person, personEdited);
 
-        String expectedMessage = String.format(AddMembershipCommand.MESSAGE_SUCCESS, person.getName(), "Gold Member");
+        String expectedMessage = String.format(AddMembershipCommand.MESSAGE_SUCCESS, person.getName(), "Gold member");
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
