@@ -30,7 +30,7 @@ public class PieChartWindow extends UiPart<Stage> {
     private TreeMap<String, Integer> positiveStatsByFacultyData;
     private TreeMap<String, TreeMap<String, Integer>> covidStatsDataByBlocks;
     private PieChart pieChart;
-    private Scene ChartScene;
+    private Scene chartScene;
     private HBox charts;
 
     /**
@@ -64,8 +64,8 @@ public class PieChartWindow extends UiPart<Stage> {
         HBox facultyChart = createFacultyChartPositive();
         VBox allPieCharts = new VBox(charts);
         allPieCharts.getChildren().add(facultyChart);
-        ChartScene = makeChartScene(allPieCharts);
-        this.getRoot().setScene(ChartScene);
+        chartScene = makeChartScene(allPieCharts);
+        this.getRoot().setScene(chartScene);
     }
 
     /**
@@ -141,8 +141,8 @@ public class PieChartWindow extends UiPart<Stage> {
      * @return Scene containing the pie chart
      */
     private Scene makeChartScene(VBox pieCharts) {
-        ChartScene = new Scene(pieCharts);
-        return ChartScene;
+        chartScene = new Scene(pieCharts);
+        return chartScene;
     }
 
     /**

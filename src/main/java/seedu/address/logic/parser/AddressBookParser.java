@@ -20,24 +20,31 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
 public class AddressBookParser {
-    private String[] singleCommandList = {ClearCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
-            ExitCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, SummariseCommand.COMMAND_WORD,
-            ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD};
+
+    public static final String MESSAGE_IRRELEVANT_PARAMETERS = "Please ensure that there are no "
+            + "additional parameters for this type of command.";
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final String MESSAGE_IRRELEVANT_PARAMETERS = "Please ensure that there are no "
-            + "additional parameters for this type of command.";
 
-    private void checkForSingleCommandWord(String userInput, String commandWord) throws ParseException{
+    private String[] singleCommandList = {ClearCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
+        ExitCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, SummariseCommand.COMMAND_WORD,
+        ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD};
+
+    /**
+     * Checks whether command that does not require any parameters such as {@Code ListCommand} are input by the user.
+     * @param userInput full user input string
+     * @param commandWord the type of command inputted
+     * @throws ParseException if the user input additional parameters
+     */
+    private void checkForSingleCommandWord(String userInput, String commandWord) throws ParseException {
         for (int i = 0; i < singleCommandList.length; i++) {
             if (singleCommandList[i].equals(commandWord)) {
                 if (userInput.split(" ").length != 1) {
