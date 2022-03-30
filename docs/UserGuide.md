@@ -62,6 +62,8 @@ faster than traditional GUI applications.
 
 ## Navigating the Display
 
+<div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about GUI display layout:**<br>
 
 * **Candidates List** : Bottom leftmost panel displays the list of candidates in the system, alongside some key information.
@@ -72,16 +74,16 @@ faster than traditional GUI applications.
 
 Commands that affect the display of information within each of these panels is described below.
 
+</div>
+
+// TODO: Add illustrated (with shapes and text) of GUI
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
+{:toc}
 
 <div markdown="block" class="alert alert-info">
-
-* [Viewing Help](#viewing-help)
-* [Managing candidates](#managing-candidates)
-* [Scheduling Interviews](#scheduling-interviews)
-* [Miscellaneous commands](#miscellaneous-commands)
-* [Processing data](#processing-data)
 
 **:information_source: Notes about the command format:**<br>
 
@@ -105,7 +107,6 @@ Commands that affect the display of information within each of these panels is d
 | `as`              | application status  |
 | `yr`              | seniority           |
 | `avail`           | availability        |
-
 
 </div>
 
@@ -276,7 +277,6 @@ Examples:
 * `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
 * `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
 
-
 ### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
 
 View more details about the Candidate in the middle panel.
@@ -349,6 +349,7 @@ Exits the program.
 Format: `exit`
 
 ## Processing data
+
 ### Saving the data
 
 TAlent Assistant™ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -357,10 +358,13 @@ TAlent Assistant™ data are saved in the hard disk automatically after any comm
 
 TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/talentassistant.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
-</div>
+<div markdown="span" class="alert alert-warning">
 
+:exclamation: **Caution:**
+
+If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
