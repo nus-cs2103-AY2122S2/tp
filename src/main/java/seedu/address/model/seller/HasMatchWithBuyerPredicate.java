@@ -64,10 +64,4 @@ public class HasMatchWithBuyerPredicate implements Predicate<Seller> {
         return property.getPriceRange();
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-            || (other instanceof HasMatchWithBuyerPredicate // instanceof handles nulls
-            && buyer.equals(((HasMatchWithBuyerPredicate) other).buyer)); // state check
-    }
 }
