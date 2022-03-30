@@ -24,7 +24,7 @@ public class UnpayCommandParser implements Parser<UnpayCommand> {
             index = IndexParser.parse(args.trim());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindTransactionCommand.MESSAGE_USAGE), ive);
+                    UnpayCommand.MESSAGE_USAGE), ive);
         }
 
         return new UnpayCommand(index);

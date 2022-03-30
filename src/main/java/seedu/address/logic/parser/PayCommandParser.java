@@ -24,7 +24,7 @@ public class PayCommandParser implements Parser<PayCommand> {
             index = IndexParser.parse(args.trim());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindTransactionCommand.MESSAGE_USAGE), ive);
+                    PayCommand.MESSAGE_USAGE), ive);
         }
 
         return new PayCommand(index);
