@@ -26,7 +26,7 @@ public class BookingCard extends UiPart<Region> {
      */
 
     public final Booking booking;
-    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' HH:mm a");
+    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' hh:mm a");
 
     @FXML
     private HBox cardPane;
