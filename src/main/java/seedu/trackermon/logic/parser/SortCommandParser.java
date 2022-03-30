@@ -142,7 +142,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                                                Prefix prefix, ArgumentMultimap argMultimap) throws ParseException {
         Comparator<Show> newComparator = comparator;
         if (arePrefixesPresent(argMultimap, prefix)) {
-            String value = argMultimap.getValue(prefix).orElse(VALUE_ASC).toUpperCase().trim();
+            String value = argMultimap.getValue(prefix).orElse(VALUE_ASC);
             value = ParserUtil.checkOrder(value.toUpperCase().trim());
             if (value.equals(VALUE_DSC)) {
                 newComparator = comparator.reversed();
@@ -166,16 +166,12 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Add value to value + ADD_VALUE of value is not -1
+     * Add ADD_VALUE to value.
      * @param value integer to change.
      * @return the new value.
      */
-    private static int noValueToMax(int value) {
-        if (value == NO_VALUE) {
-            return value;
-        } else {
-            return value + ADD_VALUE;
-        }
+    private static int addValue(int value) {
+        return value + ADD_VALUE;
     }
 
     /**
@@ -190,9 +186,9 @@ public class SortCommandParser implements Parser<SortCommand> {
             valueOrder = valueOrder.toUpperCase().trim();
             for (Map.Entry<Comparator<Show>, String> entry : comparatorString.entrySet()) {
                 int index = valueOrder.indexOf(entry.getValue());
-                index = noValueToMax(index);
                 if (index != NO_VALUE) {
-                    updateMapValues(entry.getKey(), index);
+                    int newValue = addValue(index);
+                    updateMapValues(entry.getKey(), newValue);
                 }
             }
 
