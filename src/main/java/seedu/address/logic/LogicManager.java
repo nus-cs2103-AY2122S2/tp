@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Preference;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.storage.Storage;
 
 /**
@@ -129,6 +130,11 @@ public class LogicManager implements Logic {
     public List<Pair<Person>> getMatchList() {
         model.updateMatchList();
         return model.getMatchList();
+    }
+
+    @Override
+    public Set<UserImage> getViewImageSet() {
+        return model.getViewImageSet();
     }
 
     @Override

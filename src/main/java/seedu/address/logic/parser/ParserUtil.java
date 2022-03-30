@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -19,6 +20,8 @@ import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
+import seedu.address.model.userimage.FilePath;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -216,4 +219,61 @@ public class ParserUtil {
         return new UserType(trimmedUserType);
     }
 
+    /**
+     * Parses a {@code Collection<String> userImage} into a {@code Set<UserImage>}.
+     */
+    public static Set<UserImage> parseUserImages(Collection<String> userImages) throws ParseException {
+        requireNonNull(userImages);
+        Set<UserImage> userImageSet = new LinkedHashSet<>();
+        for (String userImage : userImages) {
+            userImageSet.add(parseUserImage(userImage));
+        }
+        return userImageSet;
+    }
+
+    /**
+     * Parses a {@code String userImage} into a {@code UserImage}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userImage} is invalid.
+     */
+    public static UserImage parseUserImage(String userImage) throws ParseException {
+        String trimmedUserImage = userImage.trim();
+        String[] splitUserImage = trimmedUserImage.split(":");
+
+        FilePath filePath = parseFilePath(splitUserImage[0]);
+        if (!UserImage.isImage(filePath)) {
+            throw new ParseException(UserImage.MESSAGE_CONSTRAINTS);
+        }
+        String description = "";
+        if (splitUserImage.length == 2) {
+            description = parseDescription(splitUserImage[1]);
+        }
+        return new UserImage(filePath, description);
+    }
+
+    /**
+     * Parses a {@code String filePath} into a {@code FilePath}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filePath} is invalid.
+     */
+    public static FilePath parseFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        if (!FilePath.isValidFilePath(trimmedFilePath)) {
+            throw new ParseException(FilePath.MESSAGE_CONSTRAINTS);
+        }
+        return new FilePath(trimmedFilePath);
+    }
+
+    /**
+     * Parses a {@code String Description} into a {@code description}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDescription(String description) {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        return trimmedDescription;
+    }
 }

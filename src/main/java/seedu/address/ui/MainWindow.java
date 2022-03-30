@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
+    private ViewImageWindow viewImageWindow;
     private StatisticsWindow statisticsWindow;
     private int count = 0;
 
@@ -71,6 +72,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         matchWindow = new MatchWindow(logic);
+        viewImageWindow = new ViewImageWindow(logic);
         favouriteWindow = new FavouriteWindow(logic);
         statisticsWindow = new StatisticsWindow(logic);
     }
@@ -167,6 +169,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the view image window or focuses on it if it's already opened after refreshing its contents.
+     */
+    @FXML
+    public void handleViewImage() {
+        viewImageWindow.setup();
+        if (!viewImageWindow.isShowing()) {
+            viewImageWindow.show();
+        } else {
+            viewImageWindow.focus();
+        }
+    }
+
+    /**
      * Opens the favourites window or focuses on it if it's already opened.
      */
     @FXML
@@ -206,6 +221,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         matchWindow.hide();
         favouriteWindow.hide();
+        viewImageWindow.hide();
         statisticsWindow.hide();
         primaryStage.hide();
     }
@@ -231,6 +247,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowMatch()) {
                 handleMatch();
+            }
+
+
+            if (commandResult.isShowImage()) {
+                handleViewImage();
             }
 
             if (commandResult.isShowFavourites()) {
