@@ -1,13 +1,22 @@
 {
-  "masterList": [ "1" ],
+  "masterList": [
+    {
+      "labMark": "Unknown",
+      "labNumber": "1",
+      "labStatus": "UNSUBMITTED"
+    }
+  ],
   "students": [ {
       "name": "Hans Muster",
       "email": "invalid@email!3e",
       "github": "hansM",
       "telegram": "hans_M",
       "studentId": "A0123458C",
-      "labNumbers": [ "1" ],
-      "labStatuses": [ "UNSUBMITTED" ],
-      "labMarks": [ "Unknown" ]
+      "labs" : [
+      {
+        "labMark": "Unknown",
+        "labNumber": "1",
+        "labStatus": "UNSUBMITTED"
+      } ]
   } ]
 }

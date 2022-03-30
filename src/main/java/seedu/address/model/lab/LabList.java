@@ -14,6 +14,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.student.exceptions.LabNotFoundException;
 
+/**
+ * A list of Labs that enforces uniqueness between its elements and does not allow nulls.
+ * A Lab is considered unique by comparing using {@code Lab#isSameStudent(Lab)}.
+ * Maintains sorted invariance (sorted by increase labNumber) after every {@code LabList#add(Lab)},
+ * {@code LabList#setAll(LabList)}, and {@code LabList#setAll(List<Lab>)}.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Lab#isSameLab(Lab)
+ */
 public class LabList implements Iterable<Lab> {
 
     private final ObservableList<Lab> internalList = FXCollections.observableArrayList();
@@ -63,7 +73,6 @@ public class LabList implements Iterable<Lab> {
      * @return A copy of the Lab with the given lab number from the internalList.
      */
     public Lab getLab(int labNumberToGet) throws LabNotFoundException {
-        requireNonNull(labNumberToGet);
 
         for (Lab l : internalList) {
             if (l.labNumber == labNumberToGet) {
@@ -158,6 +167,9 @@ public class LabList implements Iterable<Lab> {
     public void setLabs(LabList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+
+        // Incase ObservableList.setall() does not maintain order as it is not stated in the java docs that it does.
+        internalList.sort(sortByLabNumber);
     }
 
     /**
@@ -171,6 +183,7 @@ public class LabList implements Iterable<Lab> {
         }
 
         internalList.setAll(labs);
+        internalList.sort(sortByLabNumber);
     }
 
     /**
@@ -185,6 +198,52 @@ public class LabList implements Iterable<Lab> {
      */
     public boolean isEmpty() {
         return internalList.isEmpty();
+    }
+
+    /**
+     * Aligns the current LabList to the given {@code toAlignWith}.
+     * Aligning LabList means that the current LabList has to have all the Labs that the {@code toAlignWith} has,
+     * and no additional Labs that the {@code toAlignWith} doesn't have.
+     * The end result is that both LabList will have the same list of Labs with potentially different status and marks.
+     * Most relevant for deserialization of labs in {@code JsonSerializableAddressBook}.
+     *
+     * @param toAlignWith The LabList that you want to align to.
+     * @throws DuplicateLabException if one of the LabList contains duplicate labs. (should not be the case)
+     */
+    public void alignLabs(LabList toAlignWith) throws DuplicateLabException {
+        requireNonNull(toAlignWith);
+        // Using LabList instead of List<Lab> for O(nlogn) setLabs instead of O(n^2) setLabs
+        LabList replacementList = new LabList();
+
+        // Iterator variable for toAlignWith
+        int toAlignIter = 0;
+        //Iterator variable for this
+        int thisIter = 0;
+
+        ObservableList<Lab> toAlignWithList = toAlignWith.internalList;
+
+        // This while loop takes advantage of the LabList's sorted invariant.
+        while (toAlignIter < toAlignWithList.size() && thisIter < internalList.size()) {
+
+            if (toAlignWithList.get(toAlignIter).isSameLab(internalList.get(thisIter))) {
+                replacementList.add(internalList.get(thisIter));
+                toAlignIter++;
+                thisIter++;
+            } else if (sortByLabNumber.compare(toAlignWithList.get(toAlignIter), internalList.get(thisIter)) < 0) {
+                replacementList.add(toAlignWithList.get(toAlignIter));
+                toAlignIter++;
+            } else {
+                thisIter++;
+            }
+        }
+
+        // Add any remaining Labs in toAlignWithList.
+        while (toAlignIter < toAlignWithList.size()) {
+            replacementList.add(toAlignWithList.get(toAlignIter));
+            toAlignIter++;
+        }
+
+        this.setLabs(replacementList);
     }
 
     @Override

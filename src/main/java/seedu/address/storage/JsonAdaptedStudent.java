@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabList;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.GithubUsername;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
+import seedu.address.model.student.exceptions.DuplicateLabException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +26,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedStudent.class);
+    public static final String MESSAGE_DUPLICATE_LABS = "Student list contains duplicate Labs.";
 
     private final String name;
     private final String email;
@@ -35,9 +34,7 @@ class JsonAdaptedStudent {
     private final String telegram;
     private final String studentId;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<JsonAdaptedLabNumber> labNumbers = new ArrayList<>();
-    private final List<JsonAdaptedLabStatus> labStatuses = new ArrayList<>();
-    private final List<JsonAdaptedLabMark> labMarks = new ArrayList<>();
+    private final List<JsonAdaptedLab> labs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given student details.
@@ -46,9 +43,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("email") String email,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("github") String githubUsername,
             @JsonProperty("telegram") String telegram, @JsonProperty("studentId") String studentId,
-            @JsonProperty("labNames") List<JsonAdaptedLabNumber> labNumbers,
-            @JsonProperty("labStatuses") List<JsonAdaptedLabStatus> labStatuses,
-            @JsonProperty("labMarks") List<JsonAdaptedLabMark> labMarks) {
+            @JsonProperty("labs") List<JsonAdaptedLab> labs) {
         this.name = name;
         this.email = email;
         this.githubUsername = githubUsername;
@@ -59,16 +54,8 @@ class JsonAdaptedStudent {
             this.tagged.addAll(tagged);
         }
 
-        if (labNumbers != null) {
-            this.labNumbers.addAll(labNumbers);
-        }
-
-        if (labStatuses != null) {
-            this.labStatuses.addAll(labStatuses);
-        }
-
-        if (labMarks != null) {
-            this.labMarks.addAll(labMarks);
+        if (labs != null) {
+            this.labs.addAll(labs);
         }
     }
 
@@ -84,14 +71,8 @@ class JsonAdaptedStudent {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        labNumbers.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLabNumber::new)
-                .collect(Collectors.toList()));
-        labStatuses.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLabStatus::new)
-                .collect(Collectors.toList()));
-        labMarks.addAll(source.getLabs().asUnmodifiableObservableList().stream()
-                .map(JsonAdaptedLabMark::new)
+        labs.addAll(source.getLabs().asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedLab::new)
                 .collect(Collectors.toList()));
     }
 
@@ -103,7 +84,7 @@ class JsonAdaptedStudent {
     public Student toModelType() throws IllegalValueException {
         final List<Tag> personTags = deserializeTags();
 
-        final List<Lab> personLabs = deserializeLabs();
+        final LabList personLabs = deserializeLabs();
 
         final Name modelName = deserializeName();
 
@@ -123,18 +104,17 @@ class JsonAdaptedStudent {
         return s;
     }
 
-    private List<Lab> deserializeLabs() throws IllegalValueException {
-        List<Lab> personLabs = new ArrayList<>();
-        for (int i = 0; i < labNumbers.size(); i++) {
-            // Incase of wrong lab status format we will just add the lab with LabStatus.UNSUBMITTED
-            try {
-                personLabs.add(labNumbers.get(i).toModelType().of(
-                        labStatuses.get(i).getLabStatus(), labMarks.get(i).getLabMark()));
-            } catch (IllegalArgumentException e) {
-                logger.info("Illegal lab attributes found when converting labs " + e);
-                personLabs.add(labNumbers.get(i).toModelType());
+    private LabList deserializeLabs() throws IllegalValueException {
+        LabList personLabs = new LabList();
+
+        try {
+            for (JsonAdaptedLab lab : labs) {
+                personLabs.add(lab.toModelType());
             }
+        } catch (DuplicateLabException e) {
+            throw new IllegalValueException(MESSAGE_DUPLICATE_LABS);
         }
+
         return personLabs;
     }
 
