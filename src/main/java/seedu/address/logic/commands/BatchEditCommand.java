@@ -55,7 +55,7 @@ public class BatchEditCommand extends Command {
                 continue;
             }
             Person personToEdit = lastShownList.get(index.getZeroBased());
-            Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor);
+            Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor, true);
             model.setPerson(personToEdit, editedPerson);
         }
         model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
