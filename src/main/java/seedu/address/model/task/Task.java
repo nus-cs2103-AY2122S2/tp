@@ -72,7 +72,6 @@ public class Task {
      *
      * @return String representation of a task.
      */
-
     @Override
     public String toString() {
         return String.valueOf(taskName.getTaskName());
