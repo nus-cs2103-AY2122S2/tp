@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
 
@@ -142,5 +143,9 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
     @Override
     public int hashCode() {
         return interviews.hashCode();
+    }
+
+    public List<Candidate> getExpiredInterviewCandidates() {
+        return interviews.getExpiredInterviewCandidates();
     }
 }

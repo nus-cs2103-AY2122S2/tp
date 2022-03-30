@@ -246,4 +246,19 @@ public class Candidate {
                 this.getAvailability()
         );
     }
+
+    public Candidate setCompleted() {
+        requireAllNonNull(name, phone, email, course, seniority,
+                applicationStatus, interviewStatus, availability);
+        return new Candidate(this.getStudentId(),
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCourse(),
+                this.getSeniority(),
+                this.getApplicationStatus(),
+                new InterviewStatus(COMPLETED),
+                this.getAvailability()
+        );
+    }
 }

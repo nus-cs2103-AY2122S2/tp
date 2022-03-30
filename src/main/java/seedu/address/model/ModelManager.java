@@ -142,6 +142,11 @@ public class ModelManager implements Model {
         updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
     }
 
+    @Override
+    public List<Candidate> getExpiredInterviewCandidates() {
+        return interviewSchedule.getExpiredInterviewCandidates();
+    }
+
     //=========== InterviewSchedule ================================================================================
 
     @Override
