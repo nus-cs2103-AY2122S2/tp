@@ -492,8 +492,9 @@
 }
 
 // ************* interview panel css *************
-   .interview-panel-header {
-    -fx-background-color: #3c3e3f;   }
+.interview-panel-header {
+    -fx-background-color: #3c3e3f;
+}
 
 .interview-panel-title {
     -fx-font-size: 16px;
