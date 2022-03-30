@@ -22,9 +22,11 @@ public class AddPrescriptionCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.PRESCRIPTION;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a medical prescription of a patient in Medbook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + PREFIX_TYPE + "prescription "
+            + ": Adds a medical prescription of a patient in Medbook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "PRESCRIPTION_TYPE "
+            + PREFIX_TYPE + "prescription "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "DRUG_NAME "
             + PREFIX_DATE + "DATE "

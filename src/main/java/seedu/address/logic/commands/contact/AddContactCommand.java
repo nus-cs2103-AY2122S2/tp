@@ -22,8 +22,9 @@ public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_TYPE + "contact"
-            + ": Adds a contact to patient in MedBook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + PREFIX_TYPE + "contact"
+            + ": Adds a contact to patient in MedBook. \n"
             + "Parameters: "
             + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "OWNER_NRIC "
@@ -39,7 +40,7 @@ public class AddContactCommand extends Command {
             + PREFIX_EMAIL + "johns@example.com "
             + PREFIX_ADDRESS + "21 Lower Kent Ridge Road, Singapore 119077 ";
 
-    public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New contact added: \n%1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in patient contact list";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
 
