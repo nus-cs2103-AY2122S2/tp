@@ -5,20 +5,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <VBox prefWidth="200.0" HBox.hgrow="ALWAYS">
       <children>
          <HBox alignment="BASELINE_RIGHT">
-            <Label fx:id="favourite" alignment="CENTER" styleClass="cell_small_label" text="\$favourite" />
+            <Label fx:id="favourite1" alignment="CENTER" styleClass="cell_small_label" text="\$favourite" />
          </HBox>
-         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-         <Label fx:id="tagSeller" styleClass="seller-tag" />
-         <Label fx:id="tagBuyer" styleClass="buyer-tag" />
-         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-         <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-         <Label fx:id="property" styleClass="cell_small_label" text="\$property" wrapText="true" />
-         <Label fx:id="preference" styleClass="cell_small_label" text="\$preference" />
+         <Label fx:id="name1" styleClass="cell_big_label" text="\$first" />
+         <Label fx:id="tagSeller1" styleClass="seller-tag" />
+         <Label fx:id="tagBuyer1" styleClass="buyer-tag" />
+         <Label fx:id="phone1" styleClass="cell_small_label" text="\$phone" />
+         <Label fx:id="address1" styleClass="cell_small_label" text="\$address" />
+         <Label fx:id="email1" styleClass="cell_small_label" text="\$email" />
+         <Label fx:id="property1" styleClass="cell_small_label" text="\$property" wrapText="true" />
+         <Label fx:id="preference1" styleClass="cell_small_label" text="\$preference" />
       </children>
       <HBox.margin>
          <Insets left="2.0" right="2.0" />
