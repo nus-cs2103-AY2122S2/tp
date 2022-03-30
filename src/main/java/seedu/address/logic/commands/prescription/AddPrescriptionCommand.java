@@ -60,7 +60,7 @@ public class AddPrescriptionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(new NricPredicate(nric))) {
+        if (!model.hasPatient(new NricPredicate(nric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

@@ -17,7 +17,7 @@ public interface ReadOnlyAddressBook {
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.
      */
-    ObservableList<Patient> getPersonList();
+    ObservableList<Patient> getPatientList();
     ObservableList<Prescription> getPrescriptionList();
     ObservableList<Medical> getMedicalList();
 
