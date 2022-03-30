@@ -32,7 +32,7 @@ public class Status extends TransactionField {
     }
 
     public String generateStringRep() {
-        return FIELD_NAME + ": " + generateStringRep();
+        return FIELD_NAME + ": " + getValue();
     }
 
     @Override
