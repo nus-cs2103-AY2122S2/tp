@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -36,6 +37,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditContactCommand extends Command {
     public static final String COMMAND_WORD = "edit";
+    public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
             + "by the index number used in the displayed contact list. "
@@ -53,7 +55,7 @@ public class EditContactCommand extends Command {
     public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in MedBook.";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified."
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
             + "Create a new contact instead.";
 
     private final Index index;
@@ -88,8 +90,8 @@ public class EditContactCommand extends Command {
         }
 
         model.setContact(contactToEdit, editedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, editedContact));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, editedContact), COMMAND_TYPE);
     }
 
     /**

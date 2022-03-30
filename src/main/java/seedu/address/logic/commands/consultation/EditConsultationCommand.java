@@ -12,10 +12,10 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
@@ -51,6 +51,8 @@ public class EditConsultationCommand extends Command {
             + PREFIX_TIME + "19-00 ";
 
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: \n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in MedBook.";
 
     private final Index targetIndex;
     private final EditConsultationDescriptor editConsultationDescriptor;
@@ -61,7 +63,7 @@ public class EditConsultationCommand extends Command {
      */
     public EditConsultationCommand(Index targetIndex, EditConsultationDescriptor editConsultationDescriptor) {
         this.targetIndex = targetIndex;
-        this.editConsultationDescriptor = editConsultationDescriptor;
+        this.editConsultationDescriptor = new EditConsultationDescriptor(editConsultationDescriptor);
     }
 
     @Override
@@ -135,6 +137,13 @@ public class EditConsultationCommand extends Command {
             setNotes(toCopy.notes);
         }
 
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(date, time, diagnosis, fee, notes);
+        }
+
         public Optional<Date> getDate() {
             return Optional.ofNullable(date);
         }
@@ -183,7 +192,7 @@ public class EditConsultationCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPatientDescriptor)) {
+            if (!(other instanceof EditConsultationDescriptor)) {
                 return false;
             }
 

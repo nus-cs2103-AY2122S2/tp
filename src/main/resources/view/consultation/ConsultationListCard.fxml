@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="cardPane" fx:id="cardPane" prefHeight="208.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane prefHeight="191.0" prefWidth="312.0" HBox.hgrow="ALWAYS">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" prefHeight="215.0" prefWidth="312.0" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
@@ -35,25 +35,24 @@
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
-         <Region prefHeight="200.0" prefWidth="200.0" />
       <Label text="Diagnosis">
             <font>
                <Font size="14.0" />
-            </font></Label>
-      <Label fx:id="diagnosis" styleClass="cell_small_label" text="\$diagnosis" />
-         <Region prefHeight="200.0" prefWidth="200.0" />
+            </font>
+      </Label>
+      <Label fx:id="diagnosis" styleClass="cell_small_label" text="\$diagnosis" wrapText="true" />
       <Label text="Fee">
             <font>
                <Font size="14.0" />
             </font></Label>
       <Label fx:id="fee" styleClass="cell_small_label" text="\$fee" />
-         <Region prefHeight="200.0" prefWidth="200.0" />
+
       <Label text="Notes">
             <font>
                <Font size="14.0" />
             </font></Label>
       <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" />
-         <Region prefHeight="200.0" prefWidth="200.0" />
+
     </VBox>
       <rowConstraints>
          <RowConstraints />
