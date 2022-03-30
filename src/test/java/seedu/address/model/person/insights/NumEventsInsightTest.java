@@ -11,17 +11,16 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.event.DateTime;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-public class MostRecentEventInsightTest {
+public class NumEventsInsightTest {
 
     private final Model validModelWithEvents;
     private final PersonBuilder personBuilder = new PersonBuilder();
     private final EventBuilder eventBuilder = new EventBuilder();
 
-    public MostRecentEventInsightTest() {
+    public NumEventsInsightTest() {
         this.validModelWithEvents = new ModelManager();
 
         // friend with one event
@@ -47,25 +46,25 @@ public class MostRecentEventInsightTest {
 
     @Test
     public void getInsight_nulls_failure() {
-        assertThrows(NullPointerException.class, () -> Insights.createMostRecentEventInsight(null, null));
+        assertThrows(NullPointerException.class, () -> Insights.createNumEventsInsight(null, null));
     }
 
     @Test
     public void equals() {
 
-        MostRecentEventInsight insight;
-        MostRecentEventInsight other;
+        NumEventsInsight insight;
+        NumEventsInsight other;
 
         // same object -> true
-        insight = Insights.createMostRecentEventInsight(BOB, this.validModelWithEvents);
+        insight = Insights.createNumEventsInsight(BOB, this.validModelWithEvents);
         assertEquals(insight, insight);
 
         // same values -> true
-        other = Insights.createMostRecentEventInsight(BOB, this.validModelWithEvents);
+        other = Insights.createNumEventsInsight(BOB, this.validModelWithEvents);
         assertEquals(insight, other);
 
         // different values -> false
-        other = Insights.createMostRecentEventInsight(AMY, this.validModelWithEvents);
+        other = Insights.createNumEventsInsight(AMY, this.validModelWithEvents);
         assertNotEquals(insight, other);
 
     }
@@ -74,16 +73,18 @@ public class MostRecentEventInsightTest {
     @Test
     public void getInsight_valid_success() {
 
-        MostRecentEventInsight insight;
+        NumEventsInsight insight;
 
         // no events -> correct output
-        insight = Insights.createMostRecentEventInsight(BOB, this.validModelWithEvents);
-        assertEquals(insight.getAsString(), MostRecentEventInsight.DEFAULT_NO_EVENT_MESSAGE);
+        insight = Insights.createNumEventsInsight(BOB, this.validModelWithEvents);
+        assertEquals(insight.getAsString(), NumEventsInsight.DEFAULT_HAS_EVENT_PREFIX + "0");
 
         // have events -> correct output
-        insight = Insights.createMostRecentEventInsight(AMY, this.validModelWithEvents);
-        assertEquals(MostRecentEventInsight.DEFAULT_HAS_EVENT_PREFIX
-                + new DateTime(eventBuilder.DEFAULT_DATE_TIME).toString(), insight.getAsString());
+        insight = Insights.createNumEventsInsight(AMY, this.validModelWithEvents);
+        assertEquals(NumEventsInsight.DEFAULT_HAS_EVENT_PREFIX + "1", insight.getAsString());
+
+        insight = Insights.createNumEventsInsight(LAUREN, this.validModelWithEvents);
+        assertEquals(NumEventsInsight.DEFAULT_HAS_EVENT_PREFIX + "2", insight.getAsString());
 
     }
 

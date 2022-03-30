@@ -13,7 +13,9 @@ import seedu.address.model.person.insights.Insights.Insight;
  */
 public class NumLogsInsight extends Insight implements Comparable<NumLogsInsight> {
 
-    private int number;
+    public static final String DEFAULT_HAS_LOG_PREFIX = "Number of logs: ";
+
+    private final int number;
 
     protected NumLogsInsight() {
         // dummy
@@ -35,7 +37,7 @@ public class NumLogsInsight extends Insight implements Comparable<NumLogsInsight
     @Override
     public String getAsString() {
         assert(super.isInitialized());
-        return "Number of logs: " + this.number;
+        return DEFAULT_HAS_LOG_PREFIX + this.number;
     }
 
     @Override

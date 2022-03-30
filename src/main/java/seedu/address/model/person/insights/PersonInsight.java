@@ -52,4 +52,17 @@ public class PersonInsight implements Comparable<PersonInsight> {
                 + this.lastEvent.compareTo(other.lastEvent);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else {
+            PersonInsight o = (PersonInsight) other;
+            return (this.lastEvent.equals(o.lastEvent)
+                && this.numberOfEvents.equals(o.numberOfEvents)
+                && this.numberOfLogs.equals(o.numberOfLogs)
+                && this.person.equals(o.person));
+        }
+    }
+
 }

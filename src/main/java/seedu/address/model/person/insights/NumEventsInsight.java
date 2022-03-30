@@ -12,6 +12,8 @@ import seedu.address.model.person.insights.Insights.Insight;
  */
 public class NumEventsInsight extends Insight implements Comparable<NumEventsInsight> {
 
+    public static final String DEFAULT_HAS_EVENT_PREFIX = "Number of events: ";
+
     private final int number;
 
     private NumEventsInsight(int number) {
@@ -41,7 +43,7 @@ public class NumEventsInsight extends Insight implements Comparable<NumEventsIns
     @Override
     public String getAsString() {
         assert(super.isInitialized());
-        return "Number of events: " + this.number;
+        return DEFAULT_HAS_EVENT_PREFIX + this.number;
     }
 
     @Override
