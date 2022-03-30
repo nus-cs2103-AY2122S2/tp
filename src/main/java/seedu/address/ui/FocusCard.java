@@ -88,6 +88,8 @@ public class FocusCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label remark;
+    @FXML
     private Label scheduleMessage;
     @FXML
     private FlowPane statusFocusPane;

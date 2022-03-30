@@ -19,6 +19,7 @@ import seedu.address.model.candidate.predicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.InterviewStatusContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.candidate.predicate.RemarkContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.SeniorityContainsKeywordsPredicate;
 import seedu.address.model.candidate.predicate.StudentIdContainsKeywordsPredicate;
 
@@ -70,6 +71,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameContainsKeywordsPredicate(keywords));
         case "phone":
             return new FindCommand(new PhoneContainsKeywordsPredicate(keywords));
+        case "remark":
+            return new FindCommand(new RemarkContainsKeywordsPredicate(keywords));
         case "yr":
             return new FindCommand(new SeniorityContainsKeywordsPredicate(keywords));
         case "id":

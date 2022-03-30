@@ -31,6 +31,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.InterviewStatus;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
@@ -131,10 +132,11 @@ public class EditCommand extends Command {
                 .orElse(candidateToEdit.getInterviewStatus());
         Availability updatedAvailability = editCandidateDescriptor.getAvailability()
                 .orElse(candidateToEdit.getAvailability());
+        Remark updatedRemark = candidateToEdit.getRemark(); // edit command does not allow editing remarks
 
         return new Candidate(updatedID, updatedName, updatedPhone, updatedEmail,
-                updatedCourse, updatedSeniority,
-                applicationStatus, interviewStatus, updatedAvailability);
+                updatedCourse, updatedSeniority, applicationStatus, interviewStatus,
+                updatedAvailability, updatedRemark);
     }
 
     @Override

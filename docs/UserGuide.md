@@ -13,7 +13,7 @@ If you can type fast, this application will be able to help you manage all thing
 faster than traditional GUI applications.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,11 +46,11 @@ faster than traditional GUI applications.
     * **`view today`** : Filters all interviews to display only interviews scheduled today (if any).
    
     * **`schedule add candidate/1 at/05-05-2022 10:00`** : Schedules the first candidate for an interview at 5 May 2022 10AM.
-   
+
     * **`schedule edit 1 at/06-06-2022 15:00`** : Reschedules the first interview in the interview schedule to 6 June 2022 3PM. Note that the index in the interview schedule is different from the candidate list.
 
     * **`schedule delete 1`** : Deletes the first interview in the interview schedule. Note that the index in the interview schedule is different from the candidate list.
-   
+
     * **`help`** : List all commands in the system.
    
     * **`exit`** : Closes and exits the system.
