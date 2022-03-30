@@ -69,6 +69,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Schedule> getFilteredScheduleList() {
+        model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ACTIVE_SCHEDULES);
         return model.getFilteredScheduleList();
     }
 
