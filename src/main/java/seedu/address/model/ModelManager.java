@@ -160,6 +160,7 @@ public class ModelManager implements Model {
     @Override
     public boolean isMouseUxEnabled() {
         return isMouseUxEnabled;
+    }
 
     @Override
     public int countPersonsInTag(Tag tag) {
