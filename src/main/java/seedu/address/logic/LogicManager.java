@@ -51,6 +51,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult = null;
         String[] commands = userInput.split("\\|", -1); // -1 to stop split from ignoring trailing whitespace
         ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
+        boolean isChain = commands.length > 1;
         boolean isValid = true;
         String errMsg = "";
 
@@ -62,7 +63,7 @@ public class LogicManager implements Logic {
                 commandResult = command.execute(model);
 
                 // Checks if any of the special commands are in a command chain; throws exception if found
-                if (commands.length > 1 && (commandResult.isExit() || commandResult.isShowHelp()
+                if (isChain && (commandResult.isExit() || commandResult.isShowHelp()
                         || commandResult.isUndoPrevCommand())) {
                     throw new CommandException("Special command should not be in a command chain");
                 }
