@@ -6,17 +6,20 @@ import java.util.HashMap;
 
 import seedu.address.model.Model;
 
-public class ExportToCsvCommand extends Command {
+/**
+ * A command to indicate that the insurance packages should be displayed.
+ */
+public class ListPackageCommand extends Command {
 
-    public static final String COMMAND_WORD = "export";
+    public static final String COMMAND_WORD = "listp";
 
-    public static final String MESSAGE_SUCCESS = "Exported to CSV";
+    public static final String MESSAGE_SUCCESS = "Listed all packages";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         HashMap<String, Boolean> settings = new HashMap<>();
-        settings.put("exportToCsv", true);
+        settings.put("showPackages", true);
         return new CommandResult(MESSAGE_SUCCESS, settings);
     }
 }

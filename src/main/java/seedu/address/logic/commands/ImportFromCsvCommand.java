@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashMap;
 
 import seedu.address.model.Model;
@@ -13,6 +15,7 @@ public class ImportFromCsvCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        requireNonNull(model);
         HashMap<String, Boolean> settings = new HashMap<>();
         settings.put("importFromCsv", true);
         return new CommandResult(MESSAGE_SUCCESS, settings);

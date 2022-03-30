@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportFromCsvCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPackageCommand;
 import seedu.address.logic.commands.PriorityListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -91,6 +92,9 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListPackageCommand.COMMAND_WORD:
+            return new ListPackageCommand();
 
         case PriorityListCommand.COMMAND_WORD:
             return new PriorityListCommand();

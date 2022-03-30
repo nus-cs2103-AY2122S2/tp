@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    private static int NUM_SAMPLES = 6;
+    private static final int NUM_SAMPLES = 6;
 
     private static final List<Name> sampleNames = List.of(
             new Name("Alex Yeoh"), new Name("Bernice Yu"), new Name("Charlotte Oliveiro"),

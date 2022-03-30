@@ -21,7 +21,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.InsurancePackage;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -103,18 +102,7 @@ public class MainApp extends Application {
             initialData = SampleDataUtil.getSampleAddressBook();
         }
 
-        // for each person in AddressBook, save its insurance package
-        InsurancePackagesSet allInsurancePackages = new InsurancePackagesSet();
-        for (Person p: initialData.getPersonList()) {
-            allInsurancePackages.addPackage(p.getInsurancePackage());
-        }
-
-        // if there is already insurance packages data from the saved persons, just return them
-        if (allInsurancePackages.numPackages() > 0) {
-            return new ModelManager(initialData, userPrefs, allInsurancePackages);
-        }
-
-        // otherwise, initialise initial InsurancePackages
+        // initialise initial InsurancePackages
         Optional<InsurancePackagesSet> insurancePackagesOptional;
         InsurancePackagesSet initialPackages;
         try {
@@ -131,9 +119,9 @@ public class MainApp extends Application {
             initialPackages = SampleDataUtil.getSampleInsurancePackages();
         }
 
-        // for all saved insurance packages, add them to the existing set (initialPackages)
-        for (InsurancePackage p: initialPackages.getPackagesList()) {
-            allInsurancePackages.addPackage(p);
+        // for each person in AddressBook, try to save its insurance package
+        for (Person p: initialData.getPersonList()) {
+            initialPackages.addPackage(p.getInsurancePackage());
         }
 
         return new ModelManager(initialData, userPrefs, initialPackages);
