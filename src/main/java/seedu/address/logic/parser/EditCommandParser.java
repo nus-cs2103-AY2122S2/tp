@@ -42,8 +42,24 @@ public class EditCommandParser implements Parser<EditCommand> {
         String indexDelimeter = "\\s+";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_COMMAND_OPTION, PREFIX_NAME,
             PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TEAM, PREFIX_SKILL);
+        LinkedList<Index> indices;
 
+        Index index;
         boolean isBatchEdit = isMultipleArgs(argMultimap.getPreamble(), indexDelimeter);
+        if (isBatchEdit) {
+            try {
+                indices = ParserUtil.parseIndices(argMultimap.getPreamble(), indexDelimeter);
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),
+                    pe);
+            }
+        } else {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            }
+        }
 
         boolean isResetMode = false;
         if (argMultimap.getValue(PREFIX_COMMAND_OPTION).isPresent()) {
@@ -101,7 +117,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditCommand editCommand;
 
         if (isBatchEdit) {
-            LinkedList<Index> indices;
             try {
                 indices = ParserUtil.parseIndices(argMultimap.getPreamble(), indexDelimeter);
             } catch (ParseException pe) {
@@ -110,7 +125,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             editCommand = new EditCommand(indices, editPersonDescriptor, isResetMode);
         } else {
-            Index index;
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
