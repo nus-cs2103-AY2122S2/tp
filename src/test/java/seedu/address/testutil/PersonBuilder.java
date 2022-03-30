@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import seedu.address.model.property.Price;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.property.Size;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * A utility class to help with building Person objects.
@@ -37,6 +39,7 @@ public class PersonBuilder {
     private Favourite favourite;
     private Optional<Preference> preference;
     private UserType userType;
+    private Set<UserImage> userImages;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,6 +53,7 @@ public class PersonBuilder {
         properties = new HashSet<>();
         preference = createPreference(DEFAULT_PREFERENCE);
         userType = new UserType(DEFAULT_USERTYPE);
+        userImages = new LinkedHashSet<>();
     }
 
     /**
@@ -64,6 +68,7 @@ public class PersonBuilder {
         properties = personToCopy.getProperties();
         preference = personToCopy.getPreference();
         userType = personToCopy.getUserType();
+        userImages = personToCopy.getUserImages();
     }
 
     /**
@@ -76,7 +81,6 @@ public class PersonBuilder {
 
     /**
      * Parses the {@code userType} into a {@code UserType} and set it to the {@code Person} that we are building.
-     * @param userType
      */
     public PersonBuilder withUserType(String userType) {
         this.userType = new UserType(userType);
@@ -142,7 +146,7 @@ public class PersonBuilder {
      * Does not set the {@code Preference} of the {@code Person} that we are building & return the current Person.
      */
     public PersonBuilder withPreference() {
-        this.preference = null;
+        this.preference = Optional.empty();
         return this;
     }
 
@@ -163,7 +167,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, favourite, address, properties, preference, userType);
+        return new Person(name, phone, email, favourite, address, properties, preference, userType, userImages);
     }
 
 }

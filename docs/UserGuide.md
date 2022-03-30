@@ -109,22 +109,50 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose specified attribute contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find ATTRIBUTE KEYWORD [MORE_KEYWORDS]`
 
+- `ATTRIBUTE` can be one of: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`
+- If the specified attribute is `all`, search for the keywords in all attributes.
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find sam elon` returns `Sam Yeo`, `Elon Musk`
+- `find name John` returns `john` and `John Doe`
+- `find name sam elon` returns `Sam Yeo`, `Elon Musk`
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
+
+## Sorting persons
+
+Sorts the list of persons displayed according to one or more keywords.
+
+Format: `sort [!]KEYWORD [[!]MORE_KEYWORDS]…`
+
+- `KEYWORD` can be one of `name` `phone` `email` `address` `favourite` `usertype` `num_property` (case-insensitive)
+- Prefixing a keyword with `!` will reverse the sorting order for that keyword
+- If multiple keywords are specified, the list is sorted according to the order in which the keywords are specified, i.e., subsequent keywords are used to break ties after sorting by the previous keyword.
+
+The following table shows the keywords and the default sorting behaviours:
+
+| Keyword        | Default Behaviour                   |
+|----------------|-------------------------------------|
+| `name`         | Sort by `Name` alphabetically       |
+| `phone`        | Sort by `Phone` numerically         |
+| `email`        | Sort by `Email` lexicographically   |
+| `address`      | Sort by `Address` lexicographically |
+| `favourite`    | Show favourites first               |
+| `usertype`     | Show buyers first                   |
+| `num_property` | Sort by number of `Property`        |
+
+Examples:
+- `sort address name phone` will sort the list by `Address` first. If there are entries with equal `Address`, the entries will be sorted by `Name`. If there are entries with equal `Address` and `Name`, they will be sorted by `Phone`
+- `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`
+- `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
 
 ### Deleting a person: `delete`
 
@@ -152,6 +180,23 @@ Format: `match`
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Upload an Image : `upload`
+
+Uploads an image and description to be associated with a client.
+
+Format `upload INDEX [i/FilePath:description]`
+- Adds an image to the person at the specified `INDEX`
+- The index refers to the index number shown in the displayed person list.
+- File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
+  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
+- Description is optional and can be left blank e.g. `upload 1 i/example.png`
+
+### View image of person: `viewimage`
+
+View images that are associated with a person in another window.
+
+Format `viewimage INDEX`
 
 ### Exiting the program : `exit`
 
@@ -201,8 +246,6 @@ Format: `help`
 2. Buttons to access the different help sections
 3. Help contents
 
-### User onboarding [Coming soon]
-
 ### Saving the data
 
 RealEstatePro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -216,25 +259,27 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 </aside>
 
+### Displaying statistics `stats`
+
+Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+#### By Command: `stats`
+
 # FAQ
 
 # Command Summary
-                                                                                                  |
-| Action | Format, Examples  |
-| --- | --- |
-| Add | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE
-e.g., add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller|
-| Clear | clear  |
-| Delete | delete INDEX
-e.g., delete 3  |
-| Edit | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]    ​
-e.g., edit 2 n/James Lee e/jameslee@example.com |
-| Find | find KEYWORD [MORE_KEYWORDS]
-e.g., find James Jake  |
-| List | list  |
-| Help | help  |
-|Match | match |
-| Favourite | favourite INDEX
-e.g., favourite 3  |
-| Open Favourites window                                                                                               | fw
-
+| Action            | Format                                                                                   | Examples                                                                                                             |
+|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
+| Clear             | clear                                                                                    | -                                                                                                                    |
+| Delete            | delete INDEX                                                                             | e.g. delete 3                                                                                                        |
+| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
+| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                | e.g. find name James Jake                                                                                            |
+| Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                      | e.g. sort name !phone email                                                                                          |
+| Upload            | upload INDEX [i/FilePath:Description]                                                    | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                            |
+| viewimage         | viewimage INDEX                                                                          | e.g. viewimage 1                                                                                                     |
+| List              | list                                                                                     | -                                                                                                                    |
+| Help              | help                                                                                     | -                                                                                                                    |
+| Match             | match                                                                                    | -                                                                                                                    |
+| Favourite         | favourite INDEX                                                                          | e.g., favourite 3                                                                                                    |
+| Favourites window | fw                                                                                       | -                                                                                                                    | 
+| Statistics window | stats                                                                                    | -                                                                                                                    | 

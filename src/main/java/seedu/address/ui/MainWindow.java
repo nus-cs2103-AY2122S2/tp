@@ -38,6 +38,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private MatchWindow matchWindow;
     private FavouriteWindow favouriteWindow;
+    private ViewImageWindow viewImageWindow;
+    private StatisticsWindow statisticsWindow;
+    private int count = 0;
     private ReminderWindow reminderWindow;
     // timer to track & launch reminders
     private Timer timer;
@@ -74,7 +77,9 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         matchWindow = new MatchWindow(logic);
+        viewImageWindow = new ViewImageWindow(logic);
         favouriteWindow = new FavouriteWindow(logic);
+        statisticsWindow = new StatisticsWindow(logic);
         reminderWindow = ReminderWindow.getInstance(logic);
 
         // start the reminders
@@ -173,6 +178,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the view image window or focuses on it if it's already opened after refreshing its contents.
+     */
+    @FXML
+    public void handleViewImage() {
+        viewImageWindow.setup();
+        if (!viewImageWindow.isShowing()) {
+            viewImageWindow.show();
+        } else {
+            viewImageWindow.focus();
+        }
+    }
+
+    /**
      * Opens the favourites window or focuses on it if it's already opened.
      */
     @FXML
@@ -196,6 +214,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Fills data of pie chart and opens the statistics window.
+     */
+    @FXML
+    public void handleStatistics() {
+        statisticsWindow.fillPieChart();
+        if (!statisticsWindow.isShowing()) {
+            statisticsWindow.show();
+        } else {
+            statisticsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -211,6 +242,8 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         matchWindow.hide();
         favouriteWindow.hide();
+        viewImageWindow.hide();
+        statisticsWindow.hide();
         reminderWindow.hide();
         primaryStage.hide();
         closeReminders();
@@ -249,8 +282,17 @@ public class MainWindow extends UiPart<Stage> {
                 handleMatch();
             }
 
+
+            if (commandResult.isShowImage()) {
+                handleViewImage();
+            }
+
             if (commandResult.isShowFavourites()) {
                 handleFavourites();
+            }
+
+            if (commandResult.isShowStatistics()) {
+                handleStatistics();
             }
 
             if (commandResult.isExit()) {
