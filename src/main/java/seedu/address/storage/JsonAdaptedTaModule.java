@@ -92,7 +92,7 @@ class JsonAdaptedTaModule {
         final UniqueStudentList modelStudents = new UniqueStudentList();
         for (JsonAdaptedStudent s : moduleStudents) {
             Student sObj = s.toModelType();
-            if (!studentList.contains(s)) {
+            if (!studentList.contains(sObj)) {
                 throw new IllegalValueException(NONEXISTENT_STUDENT);
             }
             modelStudents.add(sObj);

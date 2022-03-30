@@ -1,6 +1,7 @@
 package seedu.address.model.studentattendance;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author jxt00
 /**
@@ -21,6 +22,17 @@ public class Attendance {
     public Attendance(Boolean attendance) {
         requireNonNull(attendance);
         this.value = attendance;
+    }
+
+    /**
+     * Constructs a {@code Attendance}.
+     *
+     * @param attendance A valid attendance string boolean.
+     */
+    public Attendance(String attendance) {
+        requireNonNull(attendance);
+        checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
+        this.value = Boolean.valueOf(attendance);
     }
 
     public Boolean getValue() {
@@ -44,7 +56,13 @@ public class Attendance {
         return value.hashCode();
     }
 
+    /**
+     * Returns true if a given string is a valid boolean.
+     */
     public static boolean isValidAttendance(String attendance) {
+        if (attendance.equals("false") || attendance.equals("true")) {
+            return true;
+        }
         return false;
     }
 }
