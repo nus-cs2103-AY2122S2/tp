@@ -255,7 +255,8 @@ public class Candidate {
                 this.getSeniority(),
                 this.getApplicationStatus(),
                 new InterviewStatus(NOT_SCHEDULED),
-                this.getAvailability()
+                this.getAvailability(),
+                this.getRemark()
         );
     }
 
@@ -270,7 +271,8 @@ public class Candidate {
                 this.getSeniority(),
                 this.getApplicationStatus(),
                 new InterviewStatus(COMPLETED),
-                this.getAvailability()
+                this.getAvailability(),
+                this.getRemark()
         );
     }
 }
