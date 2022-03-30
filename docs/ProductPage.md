@@ -19,7 +19,7 @@ Get started now by following a step-by-step tutorial in under 10 minutes.
 
 2. Download the latest `HustleBook` [here](https://github.com/AY2122S2-CS2103T-W15-2/tp/releases/).
 
-3. Place the file into a folder where you would like to keep it. This could be your `Downloads` or `Documents` folder.
+3. Place the file into a folder where you would like to keep it. We recommend keeping it in your `Desktop` for easier access.
 
 4. Double-click the file to start the app. The app should look identical as shown below.<br>
    ![Ui](images/Ui.png)
