@@ -105,6 +105,21 @@ Deletes a student from TAPA.
 
 <br>
 
+### Deleting all students taking a particular module: `deleteModule`
+
+Deletes all students taking a particular module from TAPA.
+
+**Format**: `deleteModule m/MODULE_CODE`
+
+* All students who are taking the module with the module code specified after the `deleteModule` command will be removed from TAPA.
+* An error message will be displayed to the user if there are no students taking the specified module.
+
+**Example**:
+* `deleteModule m/CS2100`
+    * All students who are specified as taking CS2100 are deleted from TAPA.
+
+<br>
+
 ### Finding a student: `find`
 
 Allows the user to look up the details of a particular student.
@@ -329,6 +344,7 @@ Action      | Command Format with Examples
 ------------|------------------
 **Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
 **Delete**  | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> Example: `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`
+**Delete Module**  | `deleteModule m/MODULE_CODE` <br> Example: `deleteModule m/CS2100`
 **Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> Example: `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`
 **Task**    | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
 **Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`
