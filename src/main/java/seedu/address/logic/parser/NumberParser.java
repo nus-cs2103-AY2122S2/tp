@@ -12,28 +12,28 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses number inputs. Used for confirming which clients the user is referring to
  * in edit and delete scenarios where clients have similar names
  */
-public class NumberParser {
+public class NumberParser implements Parser<Command> {
 
-    private final int index;
     private final Command lastCommand;
 
     /**
      * Constructor of NumberParser.
      *
-     * @param userInput
      * @param lastCommand
      */
-    public NumberParser(String userInput, Command lastCommand) {
-        this.index = Integer.parseInt(userInput);
+    public NumberParser(Command lastCommand) {
         this.lastCommand = lastCommand;
     }
 
     /**
      * Parses the given index in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * and returns an EditCommand or DeleteCommmand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parse() throws ParseException {
+
+    @Override
+    public Command parse(String userInput) throws ParseException {
+        int index = Integer.parseInt(userInput);
         if (lastCommand instanceof EditCommand) {
             EditCommand newCommand = (EditCommand) lastCommand;
             newCommand.setIndex(index);
@@ -46,5 +46,4 @@ public class NumberParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
