@@ -40,7 +40,7 @@ public class AssessmentAttemptCard extends UiPart<Region> {
         this.attempt = attempt;
         id.setText(displayedIndex + ". ");
         student.setText(attempt.getStudent().getName().fullName);
-        grade.setText(String.valueOf(attempt.getGrade().value));
+        grade.setText("Grade: " + attempt.getGrade().value);
     }
 
     @Override
