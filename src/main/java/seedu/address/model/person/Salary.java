@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Salary {
 
     public static final String MESSAGE_CONSTRAINTS = "Salary should only contain numbers";
+    public static final String DEFAULT_VALUE = "0";
     private static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
@@ -27,7 +28,7 @@ public class Salary {
      * Constructs a {@code Salary} with a default value of "0".
      */
     public Salary() {
-        this.value = "0";
+        this.value = DEFAULT_VALUE;
     }
 
     /**

@@ -55,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         PrevDateMet prevDateMet = ParserUtil.parsePrevDateMet(argMultimap.getValue(PREFIX_PREV_DATE_MET)
                 .orElse(PrevDateMet.getTodaysDate()));
-        Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
+        Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).orElse(Salary.DEFAULT_VALUE));
         Info info = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO)
                 .orElse("No further info"));
 
