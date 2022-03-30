@@ -39,7 +39,7 @@ faster than traditional GUI applications.
 
     * **`delete 1`** : Deletes the first candidate in the system.
 
-    * **`find k/Alex f/name`** : Searches for all candidate with name containing “jane" (case-insensitive).
+    * **`find k/Alex f/name`** : Searches for all candidate with name containing “alex" (case-insensitive).
 
     * **`sort s/name`** : Sorts all candidates by name in ascending alphabetical order (i.e. A-Z).
     
