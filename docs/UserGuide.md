@@ -93,6 +93,14 @@ Adds a person to NUSocials.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
+Constraints:
+* Only 1 prefix for each field is allowed.
+* `NAME` has to be alphanumeric not blank.
+* `PHONE_NUMBER` has to be between 3 and 10 digits long and not blank.
+* `EMAIL` has to be in a valid email format and not blank.
+* `ADDRESS` has to not be blank.
+* All fields must be used.
+
 Example:
 * `add n/Kim Lai p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
   Adds a person with the following fields:
@@ -100,6 +108,13 @@ Example:
     - Phone Number: 12345678
     - Email: kimlai222@example.com
     - Address: KL street, block 123, #01-01
+    
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+`add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 123, #01-01`
+Not allowed as `n/` prefix is used more than once.
+* `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 123, #01-01`
+Not allowed as `PHONE_NUMBER` is blank. 
+</div>
 
 #### Deleting a person : `delete`
 
@@ -110,15 +125,25 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 
+Constraints:
+* `INDEX` provided has to be on the currently shown contact list.
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the currently shown contact list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person from the resulting list of the `find` command.
 
-Alternate Format: `delete INDEX…​`
+#### Deleting multiple persons : `delete`
+
+Deletes all the specified persons from NUSocials.
+
+Format: `delete INDEX…​`
 
 * Deletes multiple persons at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed person list.
-* Each index **must be separated by a whitespace**
+* Each index **must be separated by a whitespace**.
+
+Constraints:
+* All `INDEX` numbers provided has to be on the currently shown contact list.
 
 Example:
 * `list` followed by `delete 2 5 7` deletes the 2nd, 5th and 7th person in the currently shown list.
@@ -132,6 +157,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 * Edits the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
+
+Constraints:
+* Only 1 prefix for each field allowed.
+* `NAME` has to be alphanumeric not blank.
+* `PHONE_NUMBER` has to be between 3 and 10 digits long and not blank.
+* `EMAIL` has to be in a valid email format and not blank.
+* `ADDRESS` has to not be blank.
+* `INDEX` provided has to be on the currently shown contact list.
 
 Example:
 * `edit 1 p/91234567 e/KL123@example.com`<br>
@@ -148,15 +181,25 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDU
 
 * Tags the relevant information to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* At least one of the prefixes must be provided.
-* If a prefix is used, the input after must not be blank.
 * Input tag values will be added to the existing tags in their respective fields.
 
-Examples:
+Constraints:
+* At least one of the prefixes must be provided.
+* If a prefix is used, the input after must not be blank.
+* `INDEX` provided has to be on the currently shown contact list.
+
+Example:
 * `tag 1 i/abc-company m/CS2100 m/CS2030S`<br>
   Tags the internship company and 2 modules to the 1st person in the currently shown contact list.
-* `tag 1 i/ m/`<br>
-  This is an invalid command because there is no input given after a prefix is used.
+
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `tag 1`
+Not allowed as no prefix provided.
+* `tag 1 i/ m/`
+Not allowed as there is no input given after a prefix is used.
+* `tag 0 i/xyz-company m/CS2103T`
+Not allowed as there `INDEX` 0 does not exist in the contact list.
+</div>
 
 #### Removing specific tags from person: `removetag`
 Removes the specific tags of an existing contact.
@@ -165,19 +208,22 @@ Format: `removetag INDEX [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [e
 
 * Removes the tags from the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
+
+Constraints:
 * At least one of the prefixes must be provided.
 * If a prefix is used, the input after must not be blank.
 * All inputs for tags provided must be an exact match to existing tags.
+* `INDEX` provided has to be on the currently shown contact list.
 
-Examples:
+Example:
 * `removetag 1 i/abc-company m/CS2100 m/CS2030S`<br>
-  Removes the internship company and 2 modules tags from the 1st person in the currently shown contact list.
-* `removetag 1 i/ m/`<br>
-  This is an invalid command because there is no input given after a prefix is used.
+Removes the internship company tag and the 2 modules tags from the 1st person in the currently shown contact list.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If the existing education tags for person 1 contains "computer science", `removetag 1 edu/computer` would not lead to the
-removal of `computer science` from person 1 because it's not an exact match.
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `removetag 1 i/ m/`
+Not allowed as there is no input given after a prefix is used.
+* `removetag 1 edu/computer` while person 1 has an education tag with `computer science`
+Not allowed as it is not an exact match.
 </div>
 
 #### Finding persons: `find`
@@ -186,11 +232,13 @@ Finds persons that match any of the given fields and tags.
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
-* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only exact matches for fields will be allowed e.g. `Han` will not match `Hans`
+* The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
 * Persons matching at least one of the fields or tags will be returned (i.e. `OR` search).
-* All arguments for tags provided must be an exact match to existing tags.
+
+Constraints:
+* At least one of the optional fields must be provided.
+* Only 1 prefix for each basic particulars field is allowed.
 
 Examples:
 * `find m/cs2030s m/cs2040s` returns anyone tagged with either `cs2030s` or `cs2040s` or both
@@ -198,22 +246,38 @@ Examples:
 * `find i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e Alex Yeoh is tagged with Shopee), `David Li` (i.e. David Li is tagged with cs2040s, cs2030s)<br>
   ![result for 'find i/Shopee m/cs2040s cs2030s'](images/findShopeeCS2040sCS2030sResult.png)
 
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `find n/ m/`
+Not allowed as there is no input given after a prefix is used.
+* `find n/Hans n/Chewbacca`
+Not allowed as the `n/` prefix is used more than once.
+</div>
+
 #### Finding specific persons: `find -s`
 
 Finds persons that match all given fields and tags.
 
 Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…​ [m/MODULES]…​ [c/CCA]…​ [edu/EDUCATION]…​`
 
-* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only exact matches for fields will be allowed e.g. `Han` will not match `Hans`
+* The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
 * Only persons matching all fields and tags will be returned (i.e. `AND` search).
-* All arguments for tags provided must be an exact match to existing tags.
+
+Constraints:
+* At least one of the optional fields must be provided.
+* Only 1 prefix for each basic particulars field is allowed.
 
 Examples:
 * `find -s n/Bo Yang m/cs2040s` will return `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
 * `find -s i/Shopee m/cs2040s m/cs2030s` returns `Alex Yeoh` (i.e. Alex Yeoh is tagged with cs2040s, cs2030s and Shopee)<br>
   ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/find-sShopeeCS2040sCS2030s.png)
+
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `find -s n/ m/`
+Not allowed as there is no input given after a prefix is used.
+* `find -s n/Hans n/Solo`
+Not allowed as the `n/` prefix is used more than once.
+</div>
 
 ### Event Commands:
 #### Showing events: `showevents`
@@ -223,12 +287,16 @@ Format: `showevents`
 
 * Events shown are automatically sorted in chronological order.
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Tip :**<br>
+Use the `-upcoming` or `-past` flags to filter the event list.
+
 Alternate formats:
-1. `showevents -upcoming`<br>
-    * Shows a list of all upcoming events instead
-    <br><br>
-2. `showevents -past`<br>
-    * Shows a list of all past events instead
+1. `showevents -upcoming`
+* Shows a list of all upcoming events instead
+2. `showevents -past`
+* Shows a list of all past events instead
+</div>
 
 #### Adding an event: `event`
 Adds an event into NUSocials.
@@ -237,16 +305,26 @@ Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
 
 * Tags the participating persons to the events based on the specified `INDEX…​`.
 * The index refers to the index number shown in the displayed person list.
+
+Constraints:
 * All fields must be provided.
-* Input provided for `DATE` has to be in the format of `yyyy-MM-dd`.
-* Input provided for `TIME` has to be in the format of `HH:mm`.
-* Inputs for `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
+* Only 1 prefix for each field is allowed.
+* `DATE` has to be in the format of `yyyy-MM-dd`.
+* `TIME` has to be in the format of `HH:mm`.
+* `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
 * `EVENT NAME` has a limit of 100 characters.
 * `EVENT DETAILS` has a limit of 300 characters.
 
 Example:
 * `event 1 2 name/lunch appointment info/Having lunch at Hai Di Lao VivoCity d/2022-10-20 t/12:15`<br>
-  Creates the Event and adds into NUSocials.
+Creates the Event and adds into NUSocials.
+  
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`
+Not allowed as there is no input after a prefix is used.
+* `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`
+Not allowed as the `name/` prefix is more than once.
+</div>
 
 #### Cancelling an event : `cancelevent`
 
@@ -257,14 +335,24 @@ Format: `cancelevent INDEX`
 * Deletes the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 
+Constraints:
+* `INDEX` number provided has to be on the currently shown contact list.
+
 Examples:
 * `cancelevent 2` deletes the 2nd event in the currently shown event list.
 
-Alternate Format: `cancelevent INDEX…​`
+#### Cancelling multiple events: `cancelevent`
+
+Deletes all the specified events from NUSocials.
+
+Format: `cancelevent INDEX…​`
 
 * Deletes multiple events at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed event list.
 * Each index **must be separated by a whitespace**
+
+Constraints:
+* All `INDEX` numbers provided has to be on the currently shown contact list.
 
 Examples:
 * `cancelevent 2 5 7` deletes the 2nd, 5th and 7th events in the currently shown event list.
@@ -275,13 +363,26 @@ Finds an event that matches any of the given details
 
 Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPANT]…​ [dt/DATE AND TIME]…​`
 
-* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `lunch` will match `Lunch`
-* Only exact matches will be allowed e.g. `lun` will not match `lunch`
+* The matching is done by character sequence. e.g. `lun` will match `lunch`
 * Events matching at least one of the fields will be returned (i.e. `OR` search).
 
+Constraints:
+* At least one of the optional fields must be provided.
+* Only 1 prefix for each basic particulars field is allowed.
+* `DATE` has to be in the format of `yyyy-MM-dd`.
+* `TIME` has to be in the format of `HH:mm`.
+* `DATE` and `TIME` has to be valid (i.e Date and Time specified must be after the current date and time)
+
 Example:
-* `find -e name/lunch part/Alex Yeoh` returns all events named `lunch` and all events involving Alex Yeoh<br>
+* `find -e name/lunch part/Alex Yeoh` returns all events containing `lunch` in its name and all events involving Alex Yeoh<br>
+
+<div markdown="span" class="alert alert-warning">:x: **Invalid Examples:**
+* `find -e name/ info/`
+Not allowed as there is no input given after a prefix is used.
+* `find -e name/Dinner name/Lunch`
+Not allowed as the `name/` prefix is used more than once.
+</div>
 
 ### Clearing all entries : `clear`
 
@@ -301,7 +402,7 @@ NUSocials data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/nusocials.json`. Advanced users are welcome to update data directly by editing that data file.
+NUSocials data are saved as a JSON file `[JAR file location]/data/nusocials.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, NUSocials will discard all data and start with an empty data file at the next run.
