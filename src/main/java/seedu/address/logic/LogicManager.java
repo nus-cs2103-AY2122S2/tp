@@ -119,11 +119,17 @@ public class LogicManager implements Logic {
         System.out.println(getArchivedAddressBookFilePath().toString());
     }
 
+    /**
+     * 1. Remove target from existing addressbook
+     * 2. Switch to alt addressbook
+     * 3. Add target to alt addressbook
+     * 4. Switch back to original addressbook
+     */
     @Override
     public void archivePersonByIndex(String oneBasedString) throws CommandException {
         Index oneBased = Index.fromOneBased(Integer.parseInt(oneBasedString));
-
         Person target = model.getFilteredPersonList().get(oneBased.getZeroBased());
+
         model.deletePerson(target);
         switchAddressBook();
         model.addPerson(target);
