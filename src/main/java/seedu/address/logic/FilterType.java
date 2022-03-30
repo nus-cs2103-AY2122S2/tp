@@ -33,6 +33,7 @@ public class FilterType {
     public static Map<DataType, HashSet<String>> loadFilterTypes() {
         HashSet<String> applicantTypes = new HashSet<>();
         applicantTypes.add("name");
+        applicantTypes.add("gender");
 
         HashSet<String> positionTypes = new HashSet<>();
         positionTypes.add("name");

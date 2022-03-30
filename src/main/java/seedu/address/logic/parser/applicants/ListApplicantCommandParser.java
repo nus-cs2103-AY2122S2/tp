@@ -13,6 +13,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.GenericListParser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.applicant.Gender;
 
 public class ListApplicantCommandParser extends GenericListParser<ListApplicantCommand> {
 
@@ -29,6 +30,9 @@ public class ListApplicantCommandParser extends GenericListParser<ListApplicantC
                 ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
         SortArgument sortArgument =
                 ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
+
+        checkFilterTypeArgument(filterType, filterArgument);
+
         return new ListApplicantCommand(filterType, filterArgument, sortArgument);
     }
 
@@ -59,6 +63,17 @@ public class ListApplicantCommandParser extends GenericListParser<ListApplicantC
         FilterArgument filterArgument =
                 ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
 
+        checkFilterTypeArgument(filterType, filterArgument);
+
         return new ListApplicantCommand(filterType, filterArgument);
+    }
+
+    /**
+     * Checks if the given {@code FilterArgument} if valid for the given {@code FilterType}.
+     */
+    public void checkFilterTypeArgument(FilterType filterType, FilterArgument filterArgument) throws ParseException {
+        if (filterType.type.equals("gender") && !Gender.isValidGender(filterArgument.toString())) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
     }
 }

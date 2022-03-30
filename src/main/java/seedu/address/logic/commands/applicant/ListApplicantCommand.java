@@ -17,8 +17,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantGenderPredicate;
 import seedu.address.model.applicant.ApplicantNameComparator;
 import seedu.address.model.applicant.ApplicantNamePredicate;
+import seedu.address.model.applicant.Gender;
 
 /**
  * Lists applicants in HireLah to the user.
@@ -73,18 +75,30 @@ public class ListApplicantCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (filterType != null && filterArgument != null && sortArgument != null) {
+            Predicate<Applicant> predicate = null;
+
             if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-                Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
-                model.updateFilterAndSortApplicantList(predicate, comparator);
+                predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+            } else if (filterType.type.equals("gender")) {
+                predicate = new ApplicantGenderPredicate(filterArgument.toString());
             }
+
+            assert predicate != null : "Filter type should be valid";
+            Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
+            model.updateFilterAndSortApplicantList(predicate, comparator);
         } else if (filterType != null && filterArgument != null) {
+            Predicate<Applicant> predicate = null;
+
             if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-                model.updateFilteredApplicantList(predicate);
+                predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+            } else if (filterType.type.equals("gender")) {
+                predicate = new ApplicantGenderPredicate(filterArgument.toString());
             }
+
+            assert predicate != null : "Filter type should be valid";
+            model.updateFilteredApplicantList(predicate);
         } else if (sortArgument != null) {
             Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
             model.updateSortApplicantList(comparator);
