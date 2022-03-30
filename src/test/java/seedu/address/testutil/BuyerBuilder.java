@@ -26,7 +26,7 @@ public class BuyerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
-    private PropertyToBuy propertyToBuy;
+    private PropertyToBuy property;
 
 
     /**
@@ -37,7 +37,7 @@ public class BuyerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         appointment = new Appointment("");
         tags = new HashSet<>();
-        propertyToBuy = DEFAULT_PROPERTY;
+        property = DEFAULT_PROPERTY;
     }
 
     /**
@@ -48,7 +48,7 @@ public class BuyerBuilder {
         phone = buyerToCopy.getPhone();
         appointment = buyerToCopy.getAppointment();
         tags = new HashSet<>(buyerToCopy.getTags());
-        propertyToBuy = buyerToCopy.getPropertyToBuy();
+        property = buyerToCopy.getPropertyToBuy();
     }
 
     /**
@@ -87,12 +87,12 @@ public class BuyerBuilder {
      * Sets the {@code Properties} of the {@code buyer} that we are building.
      */
     public BuyerBuilder withProperty(PropertyToBuy property) {
-        this.propertyToBuy = property;
+        this.property = property;
         return this;
     }
 
     public Buyer build() {
-        return new Buyer(name, phone, appointment, tags, propertyToBuy);
+        return new Buyer(name, phone, appointment, tags, property);
     }
 
 }
