@@ -118,6 +118,18 @@ public class Candidate {
                 && otherCandidate.getAvailability().equals(getAvailability());
     }
 
+    /**
+     * For a looser bound for equal method, for refreshing Focus Panel when the Interview is being deleted.
+     */
+    public boolean looseEqual(Candidate candidate) {
+        return candidate.getStudentId().equals(getStudentId())
+                && candidate.getName().equals(getName())
+                && candidate.getPhone().equals(getPhone())
+                && candidate.getEmail().equals(getEmail())
+                && candidate.getCourse().equals(getCourse())
+                && candidate.getSeniority().equals(getSeniority());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(studentId, name, phone, email, course, seniority,

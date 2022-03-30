@@ -52,7 +52,11 @@ public class DeleteScheduleCommand extends ScheduleCommand {
         model.deleteInterview(interviewToDelete);
         model.setCandidate(interviewToDelete.getCandidate(),
                 interviewToDelete.getCandidate().triggerInterviewStatusNotScheduled());
-        return new CommandResult(String.format(MESSAGE_DELETE_INTERVIEW_SUCCESS, interviewToDelete));
+        int candidateIndex = model.getFilteredCandidateList()
+                .indexOf(interviewToDelete.getCandidate()
+                        .triggerInterviewStatusNotScheduled());
+        return new CommandResult(String.format(MESSAGE_DELETE_INTERVIEW_SUCCESS, interviewToDelete),
+                false, false, false, -1, true, candidateIndex);
     }
 
     @Override
