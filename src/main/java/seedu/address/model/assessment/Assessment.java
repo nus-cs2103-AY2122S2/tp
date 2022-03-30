@@ -62,6 +62,17 @@ public class Assessment implements Entity {
         attempts.putAll(toCopy.getAttempts());
     }
 
+    /**
+     * Returns a new copy of the assessment with a updated module.
+     *      * Every field must be present and not null.
+     *      * Used to initialize a class group for enrollment.
+     */
+    public Assessment(Assessment toCopy, TaModule module) {
+        this(toCopy.getAssessmentName(), module, Optional.of(toCopy.getSimpleName()),
+                FXCollections.observableHashMap());
+        attempts.putAll(toCopy.getAttempts());
+    }
+
 
     public AssessmentName getAssessmentName() {
         return assessmentName;
