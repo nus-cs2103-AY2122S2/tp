@@ -40,6 +40,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability("1,2,3")
+            .withRemark("")
             .build();
     public static final Candidate BENSON = new CandidateBuilder()
             .withStudentId("A0234567B")
@@ -51,6 +52,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability("2,3,4")
+            .withRemark("")
             .build();
     public static final Candidate CARL = new CandidateBuilder()
             .withStudentId("A0345678B")
@@ -62,6 +64,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("3,4,5")
+            .withRemark("")
             .build();
     public static final Candidate DANIEL = new CandidateBuilder()
             .withStudentId("A0456789B")
@@ -73,6 +76,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("5")
+            .withRemark("")
             .build();
     public static final Candidate ELLE = new CandidateBuilder()
             .withStudentId("A0567890B")
@@ -84,6 +88,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,3,5")
+            .withRemark("")
             .build();
     public static final Candidate FIONA = new CandidateBuilder()
             .withStudentId("A0678901B")
@@ -95,6 +100,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("2,4")
+            .withRemark("")
             .build();
     public static final Candidate GEORGE = new CandidateBuilder()
             .withStudentId("A0789012B")
@@ -106,6 +112,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("2,3,4,5")
+            .withRemark("")
             .build();
 
     // Manually added
@@ -119,6 +126,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("1,4")
+            .withRemark("")
             .build();
 
     public static final Candidate IDA = new CandidateBuilder()
@@ -131,6 +139,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability("3,4,5")
+            .withRemark("")
             .build();
 
     // Manually added - Candidate's details found in {@code CommandTestUtil}
@@ -144,6 +153,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_AMY)
+            .withRemark("")
             .build();
     public static final Candidate BOB = new CandidateBuilder()
             .withStudentId(VALID_STUDENT_ID_BOB)
@@ -155,6 +165,7 @@ public class TypicalCandidates {
             .withApplicationStatus(VALID_APPLICATION_PENDING)
             .withInterviewStatus(VALID_INTERVIEW_NOT_SCHEDULED)
             .withAvailability(VALID_AVAILABILITY_BOB)
+            .withRemark("")
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

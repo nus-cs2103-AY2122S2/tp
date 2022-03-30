@@ -14,6 +14,7 @@ import seedu.address.model.candidate.Candidate;
  * Tests that a {@code Candidate} matches any of the keywords given.
  */
 public class CandidateContainsKeywordsPredicate extends ContainsKeywordsPredicate implements Predicate<Candidate> {
+    public static final String[] DAYS_IN_FULL = { "", "MON", "TUE", "WED", "THU", "FRI" };
 
     /**
      * Creates a new {@link CandidateContainsKeywordsPredicate} object with the

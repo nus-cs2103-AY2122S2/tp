@@ -23,13 +23,14 @@ public class Candidate {
     private final ApplicationStatus applicationStatus;
     private final InterviewStatus interviewStatus;
     private final Availability availability;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
     public Candidate(StudentId studentId, Name name, Phone phone, Email email, Course course, Seniority seniority,
             ApplicationStatus applicationStatus, InterviewStatus interviewStatus,
-            Availability availability) {
+            Availability availability, Remark remark) {
         requireAllNonNull(studentId, name, phone, email, course, seniority, availability);
         this.studentId = studentId;
         this.name = name;
@@ -40,6 +41,7 @@ public class Candidate {
         this.applicationStatus = applicationStatus;
         this.interviewStatus = interviewStatus;
         this.availability = availability;
+        this.remark = remark;
     }
 
     public StudentId getStudentId() {
@@ -76,6 +78,10 @@ public class Candidate {
 
     public Availability getAvailability() {
         return availability;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -115,7 +121,8 @@ public class Candidate {
                 && otherCandidate.getSeniority().equals(getSeniority())
                 && otherCandidate.getApplicationStatus().equals(getApplicationStatus())
                 && otherCandidate.getInterviewStatus().equals(getInterviewStatus())
-                && otherCandidate.getAvailability().equals(getAvailability());
+                && otherCandidate.getAvailability().equals(getAvailability())
+                && otherCandidate.getRemark().equals(getRemark());
     }
 
     /**
@@ -138,7 +145,7 @@ public class Candidate {
     @Override
     public int hashCode() {
         return Objects.hash(studentId, name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
+                applicationStatus, interviewStatus, availability, remark);
     }
 
     @Override
@@ -160,7 +167,9 @@ public class Candidate {
                 .append("; Interview Status: ")
                 .append(getInterviewStatus())
                 .append("; Availability: ")
-                .append(getAvailability());
+                .append(getAvailability())
+                .append(" Remark: ")
+                .append(getRemark());
         return builder.toString();
     }
 
@@ -171,7 +180,7 @@ public class Candidate {
      */
     public Candidate triggerInterviewStatusScheduled() {
         requireAllNonNull(name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
+                applicationStatus, interviewStatus, availability, remark);
         return new Candidate(this.getStudentId(),
                 this.getName(),
                 this.getPhone(),
@@ -180,7 +189,8 @@ public class Candidate {
                 this.getSeniority(),
                 this.getApplicationStatus(),
                 new InterviewStatus(SCHEDULED),
-                this.getAvailability()
+                this.getAvailability(),
+                this.getRemark()
         );
     }
 
@@ -191,7 +201,7 @@ public class Candidate {
      */
     public Candidate triggerInterviewStatusNotScheduled() {
         requireAllNonNull(name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
+                applicationStatus, interviewStatus, availability, remark);
         return new Candidate(this.getStudentId(),
                 this.getName(),
                 this.getPhone(),
@@ -200,7 +210,8 @@ public class Candidate {
                 this.getSeniority(),
                 this.getApplicationStatus(),
                 new InterviewStatus(NOT_SCHEDULED),
-                this.getAvailability()
+                this.getAvailability(),
+                this.getRemark()
         );
     }
 
@@ -211,7 +222,7 @@ public class Candidate {
      */
     public Candidate triggerInterviewStatusCompleted() {
         requireAllNonNull(name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
+                applicationStatus, interviewStatus, availability, remark);
         return new Candidate(this.getStudentId(),
                 this.getName(),
                 this.getPhone(),
@@ -220,7 +231,8 @@ public class Candidate {
                 this.getSeniority(),
                 this.getApplicationStatus(),
                 new InterviewStatus(COMPLETED),
-                this.getAvailability()
+                this.getAvailability(),
+                this.getRemark()
         );
     }
 

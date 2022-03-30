@@ -45,7 +45,7 @@
                             <Label fx:id="date" styleClass="focusStyle" />
                             <Label fx:id="time" styleClass="focusStyle" />
                         </HBox>
-                        <Label id="focus-card-schedule-label" styleClass="focusStyle" wrapText="true" text="placeholder for remark"/>
+                        <Label id="focus-card-label" fx:id="remark" styleClass="focusStyle" text="\$remark" />
                     </VBox>
                 </GridPane>
             </VBox>
