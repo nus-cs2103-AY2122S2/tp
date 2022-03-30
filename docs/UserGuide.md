@@ -9,7 +9,7 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-What are CLIs? What are GUIs? 
+What are CLIs? What are GUIs?
 
 1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
 2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
@@ -72,14 +72,14 @@ Additional formatting guidelines:
 
 `Command`: Words/phrases that are presented like this highlight specific keywords that you can use to interact with your computer or Tracey.
 
-[Links](): Words/phrases that are presented like this are clickable links to different parts of the User Guide or to external web pages for additional information. 
+[Links](): Words/phrases that are presented like this are clickable links to different parts of the User Guide or to external web pages for additional information.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
  📓`Note:`
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
-   2. To check your java version: 
+   2. To check your java version:
       1. For Mac users, open up Terminal and type in `java --version`.
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
@@ -146,8 +146,8 @@ Examples of usage:
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
 |:--------------------:|:-----------------:|
-|     cs/Negative      | cs/Close-contact  |  
-|        f/SoC         |      f/SooC       |  
+|     cs/Negative      | cs/Close-contact  | 
+|        f/SoC         |      f/SooC       | 
 
 *Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3.*
 
@@ -260,20 +260,20 @@ Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
 * Returns a list of students with the given values in the respective specified fields.
 * The search is case-insensitive. e.g `Positive` will match `positive`.
-* The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result. 
-* At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid. 
+* The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
+* At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
 
 Examples of usage:
 * `filter cs/positive` returns all students that are tagged as covid-positive.
 * `filter f/soc` returns all students that are enrolled in the faculty SOC (School of Computing).
-* `filter b/e` returns all students who live in block E of the hall. 
+* `filter b/e` returns all students who live in block E of the hall.
 * `filter cs/negative f/soc` returns all students that are tagged as covid-negative and enrolled in the faculty SOC (School of Computing).
-* `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall. 
+* `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
 ![find](images/FilterScreenshotForUG.png) *Figure 1: Example result of `filter` command*
 
-As seen in *figure 1*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria. 
+As seen in *figure 1*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 📓`Note:`
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
@@ -330,9 +330,9 @@ Clear all the data inside Tracey.
 
 Format:`clear`
 
-⚠️`Warning:` 
+⚠️`Warning:`
 * Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
-* This feature cannot be reversed using `undo`. 
+* This feature cannot be reversed using `undo`.
 
 ### Exiting Tracey
 Close the application.
@@ -361,7 +361,7 @@ there are changes to Tracey.
 
 3. **Q**: Can I use filter using keywords to find certain people in the list of students? <br>
    **A**: Unfortunately `filter` command only allows you to search via the tags such as `positive`, `soc` and block `A`. Please use the `find` command instead which will allow you to search via keywords. <br>
-   
+
 4. **Q**: Where can I find the `INDEX` of a student? <br>
    **A**: They can be found in the numbers located beside each individual student. <br>
    ![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
@@ -369,14 +369,14 @@ there are changes to Tracey.
 5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `delete`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
-   
+
 6. **Q**: The `edit` feature only allow us to edit via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `edit` on? <br>
    **A**: The `INDEX` used for `edit` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `edit`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
 
 7. **Q**: Can I create new tags not mentioned by the app? <br>
    **A**: Yes! You are able to add optional tags with no restrictions using the `t/` prefix.
-   
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Command Summary
@@ -402,4 +402,4 @@ Figure 8: Command Summary.
 ### Glossary
 | Term  | Meaning  |
 |---|---|
-| Pre-defined constant | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. | 
+| Pre-defined constant | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
