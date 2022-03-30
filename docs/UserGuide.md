@@ -109,7 +109,7 @@ Deletes a student from TAPA.
 
 Deletes all students taking a particular module from TAPA.
 
-**Format**: `deletemodule m/MODULE_CODE`
+**Format**: `deleteModule m/MODULE_CODE`
 
 * All students who are taking the module with the module code specified after the `deletemodule` command will be removed from TAPA.
 * An error message will be displayed to the user if there are no students taking the specified module.
