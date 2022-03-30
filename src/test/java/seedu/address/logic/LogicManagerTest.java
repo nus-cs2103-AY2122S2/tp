@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_UNRECOGNIZED_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.PersonUtil.ADDRESS_DESC_AMY;
 import static seedu.address.testutil.PersonUtil.EMAIL_DESC_AMY;
@@ -116,7 +116,7 @@ class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertCommandException(invalidCommand, "\"" + "uicfhmowqewca" + "\" - " + MESSAGE_UNKNOWN_COMMAND);
+        assertCommandException(invalidCommand, "\"" + "uicfhmowqewca" + "\" - " + MESSAGE_UNRECOGNIZED_COMMAND);
     }
 
     @Test

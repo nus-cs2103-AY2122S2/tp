@@ -26,13 +26,12 @@ class AddMembershipCommandTest {
         Membership member = new Membership("Gold");
         AddMembershipCommand command = new AddMembershipCommand(Index.fromZeroBased(0), member);
 
-        String expectedMessage = String.format(AddMembershipCommand.MESSAGE_SUCCESS,
-                "GOLD MEMBER");
-
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person person = expectedModel.getFilteredPersonList().get(0);
         Person personEdited = person.addMembership(member);
         expectedModel.setPerson(person, personEdited);
+
+        String expectedMessage = String.format(AddMembershipCommand.MESSAGE_SUCCESS, person.getName(), "Gold Member");
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

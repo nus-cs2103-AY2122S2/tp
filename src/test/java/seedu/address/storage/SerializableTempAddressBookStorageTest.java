@@ -114,7 +114,7 @@ class SerializableTempAddressBookStorageTest {
 
     @Test
     public void readTemporaryFile_success() throws Exception {
-        Path path = addToTestDataPathIfNotNull("validTempAddressbookTest.json");
+        Path path = addToTestDataPathIfNotNull("validTempAddressBookTest.save");
         Optional<ReadOnlyAddressBook> retrieved = tempAddressBookStorage.getTempAddressBookFileData(path);
 
         assertTrue(retrieved.isPresent());
@@ -124,7 +124,7 @@ class SerializableTempAddressBookStorageTest {
     @Test
     public void readTemporaryFile_fail_throwException() {
         //try to read a corrupted file
-        Path path = addToTestDataPathIfNotNull("invalidTempAddressbookTest.json");
+        Path path = addToTestDataPathIfNotNull("invalidTempAddressBookTest.save");
 
         assertThrows(IOException.class, () -> tempAddressBookStorage.getTempAddressBookFileData(path));
     }

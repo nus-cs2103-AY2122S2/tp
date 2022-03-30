@@ -17,9 +17,9 @@ public class FindTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "findTransaction";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Transactions of client "
-            + "by using the index of the displayed list of client. "
-            + "Index must be greater than 0.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Find all transactions of the client in the list as specified by the index.\n"
+            + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index index;
@@ -41,7 +41,7 @@ public class FindTransactionCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_USAGE);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person person = lastShownList.get(index.getZeroBased());

@@ -18,18 +18,18 @@ public class AddMembershipCommand extends Command {
 
     public static final String COMMAND_WORD = "addMembership";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds membership to the specified person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Add a membership to the client in the list as specified by the index."
             + "Parameters: "
             + "INDEX (must be a positive integer) "
-            + Membership.PREFIX + "(bronze, silver or gold) "
-            + Membership.DATE_PREFIX + "Date\n"
+            + Membership.PREFIX + "(bronze/silver/gold) "
+            + "[" + Membership.DATE_PREFIX + "DATE]\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + Membership.PREFIX + "gold "
-            + "(optional)" + Membership.DATE_PREFIX + "2022-02-02";
+            + "[" + Membership.DATE_PREFIX + "2022-02-03]";
 
-    public static final String MESSAGE_SUCCESS = "Membership added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEMBERSHIP = "This client is already a member.";
+    public static final String MESSAGE_SUCCESS = "Added membership to %1$s (%1$s).";
 
     private final Index index;
     private final Membership membership;
@@ -54,10 +54,9 @@ public class AddMembershipCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = personToEdit.addMembership(membership);
-
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, membership.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit, membership));
     }
 
     @Override

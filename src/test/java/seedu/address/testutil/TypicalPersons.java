@@ -28,7 +28,7 @@ public class TypicalPersons {
             new Remark("Adventuring is life."),
             new Birthday("2000-10-10")),
         List.of(
-            new Tag("friends")));
+            new Tag("vendor")));
 
     public static final Person BENSON = new Person(
         List.of(
@@ -39,7 +39,7 @@ public class TypicalPersons {
             new Remark("Hates to swim."),
             new Birthday("2000-11-15")),
         List.of(
-            new Tag("friends"),
+            new Tag("supplier"),
             new Tag("owesMoney")));
 
     public static final Person CARL = new Person(
@@ -59,7 +59,7 @@ public class TypicalPersons {
             new Email("daniel@example.com"),
             new Phone("87652533")),
         List.of(
-            new Tag("friends")
+            new Tag("supplier")
         ));
 
     public static final Person ELLE = new Person(
@@ -96,7 +96,7 @@ public class TypicalPersons {
             new Email("ida@placeholder.net"),
             new Phone("8482131")),
         List.of(
-            new Tag("colleagues")
+            new Tag("distributor")
         ));
 
     public static final Person HOON = new Person(

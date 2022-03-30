@@ -20,7 +20,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a client.\n"
             + "Required Parameters: "
             + Name.PREFIX + "NAME "
             + Phone.PREFIX + "PHONE "
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + Tag.PREFIX + "vendor "
             + Tag.PREFIX + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New client added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Added %1$s.";
     public static final String MESSAGE_DUPLICATE_PERSON = "Another client is already using this email.";
 
     private final Person toAdd;

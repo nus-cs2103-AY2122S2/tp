@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_UNRECOGNIZED_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +38,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
 
         if (!CommandRegistry.PARSERS.containsKey(commandWord)) {
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNRECOGNIZED_COMMAND);
         }
         return CommandRegistry.PARSERS.get(commandWord).parse(arguments);
     }
