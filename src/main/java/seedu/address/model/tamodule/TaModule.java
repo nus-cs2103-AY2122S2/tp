@@ -139,7 +139,7 @@ public class TaModule implements Entity {
      * Returns true if both modules have the same identity and data fields.
      * This defines the strongest notion of equality between two modules.
      */
-    public boolean equals(TaModule otherTaModule) {
+    public boolean isExactSame(TaModule otherTaModule) {
         return otherTaModule.getModuleName().equals(getModuleName())
                 && otherTaModule.getAcademicYear().equals(getAcademicYear())
                 && otherTaModule.getModuleCode().equals(getModuleCode())

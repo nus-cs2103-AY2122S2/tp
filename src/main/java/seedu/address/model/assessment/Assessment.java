@@ -138,7 +138,7 @@ public class Assessment implements Entity {
 
         return otherAssessment != null
                 && otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getTaModule().equals(getTaModule());
+                && otherAssessment.getTaModule().isSameModule(getTaModule());
     }
 
     @Override
