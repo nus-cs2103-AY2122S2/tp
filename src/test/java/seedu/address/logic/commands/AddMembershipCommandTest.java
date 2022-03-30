@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * Contains integration tests (interaction with the Model) for {@code DeleteFilteredCommandTest}.
+ * Contains integration tests (interaction with the Model) for {@code AddMembershipCommand}.
  */
 class AddMembershipCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

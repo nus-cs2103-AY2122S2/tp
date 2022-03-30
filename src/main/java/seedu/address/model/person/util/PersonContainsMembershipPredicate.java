@@ -12,18 +12,18 @@ public class PersonContainsMembershipPredicate implements Predicate<Person> {
     private final String tier;
 
     public PersonContainsMembershipPredicate(String tier) {
-        this.tier = tier;
+        this.tier = tier.toUpperCase();
     }
 
     @Override
     public boolean test(Person member) {
+        if (!member.hasField(Membership.PREFIX)) {
+            return false;
+        }
         if (tier == "ALL") {
             return member.hasField(Membership.PREFIX);
         } else {
-            if (!member.hasField(Membership.PREFIX)) {
-                return false;
-            }
-            return member.getMembership().getValue().equals(tier);
+            return member.getMembership().getValue().toUpperCase().equals(tier);
         }
     }
 
