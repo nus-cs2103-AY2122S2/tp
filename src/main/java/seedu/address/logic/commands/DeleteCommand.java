@@ -64,7 +64,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_IN_LINEUP = "Player is not inside the lineup";
     public static final String MESSAGE_DELETE_PERSON_FROM_LINEUP_SUCCESS = "Person deleted from lineup %s: %s";
     public static final String MESSAGE_DELETE_LINEUP_SUCCESS = "Deleted Lineup: %s";
-    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Schedule: %1%s";
+    public static final String MESSAGE_DELETE_SCHEDULE_SUCCESS = "Deleted Schedule: %s";
     public static final String MESSAGE_DELETE_FAILURE = "Delete cannot be executed.";
 
     private enum DeleteCommandType {
@@ -175,7 +175,25 @@ public class DeleteCommand extends Command {
         default:
             throw new CommandException(MESSAGE_DELETE_FAILURE);
         }
+    }
 
-        //return null; // temporarily
+    @Override
+    public boolean equals(Object other) {
+        if (player != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof DeleteCommand // instanceof handles nulls
+                    && player.equals(((DeleteCommand) other).player));
+        }
+        if (lineup != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof DeleteCommand // instanceof handles nulls
+                    && lineup.equals(((DeleteCommand) other).lineup));
+        }
+        if (targetIndex != null) {
+            return other == this // short circuit if same object
+                    || (other instanceof DeleteCommand // instanceof handles nulls
+                    && targetIndex.equals(((DeleteCommand) other).targetIndex));
+        }
+        return false;
     }
 }

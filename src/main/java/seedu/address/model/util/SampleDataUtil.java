@@ -87,7 +87,10 @@ public class SampleDataUtil {
                 new ScheduleDateTime("19/02/2020 1200")),
             new Schedule(new ScheduleName("Free throw practice"),
                 new ScheduleDescription("Dwight needs to improve free throws"),
-                new ScheduleDateTime("19/06/2021 1200"))
+                new ScheduleDateTime("19/06/2021 1200")),
+            new Schedule(new ScheduleName("An active schedule"),
+                    new ScheduleDescription("Dwight needs to improve free throws"),
+                    new ScheduleDateTime("19/06/2023 1200"))
         };
     }
 
@@ -100,7 +103,6 @@ public class SampleDataUtil {
             sampleAb.initalizePerson(samplePerson);
         }
         for (Schedule sampleSchedule : getSampleSchedules()) {
-            System.out.println(sampleSchedule);
             sampleAb.addSchedule(sampleSchedule);
         }
         return sampleAb;

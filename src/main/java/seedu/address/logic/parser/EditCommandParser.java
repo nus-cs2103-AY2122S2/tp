@@ -70,9 +70,12 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Player level
         if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
+            if (args.equals(" P/")) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER));
+            }
             try {
                 targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
-                // System.out.println(targetPlayerName);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER), pe);
@@ -107,20 +110,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditCommand(targetPlayerName, editPersonDescriptor);
         }
 
-        if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
-            try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            } catch (ParseException pe) {
-                throw new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
-            }
-        }
-
         //Schedule level
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SCHEDULE).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
         }
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
@@ -141,10 +136,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-
         return new EditCommand(index, editScheduleDescriptor);
-
-
     }
 
     /**

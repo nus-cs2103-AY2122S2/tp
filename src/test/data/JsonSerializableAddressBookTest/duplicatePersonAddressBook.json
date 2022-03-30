@@ -3,7 +3,6 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "age": "19",
     "height": "190",
     "jerseyNumber": "19",
     "tagged": [ "SG" ],
@@ -12,9 +11,10 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "age": "19",
     "height": "190",
     "jerseyNumber": "19",
     "weight": "91"
-  } ]
+  } ],
+  "lineups" : [ ],
+  "schedules" : [ ]
 }
