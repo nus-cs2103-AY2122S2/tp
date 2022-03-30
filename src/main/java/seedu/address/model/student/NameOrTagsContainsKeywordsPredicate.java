@@ -2,6 +2,7 @@ package seedu.address.model.student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -27,7 +28,7 @@ public class NameOrTagsContainsKeywordsPredicate implements Predicate<Student> {
 
     private boolean nameContainsKeyword(Student student) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
+                .anyMatch(keyword -> student.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     private boolean tagsContainKeyword(Student student) {
