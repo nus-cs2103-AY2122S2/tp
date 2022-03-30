@@ -14,6 +14,7 @@ import java.util.TreeSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.company.ReadOnlyRoleList;
 import seedu.tinner.model.reminder.exceptions.DuplicateReminderException;
 import seedu.tinner.model.role.Role;
 
@@ -107,9 +108,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
             return reminderList;
         }
         Collections.sort(retrievedReminders);
-        for (Reminder reminder : retrievedReminders) {
-            reminderList.add(reminder);
-        }
+        reminderList.addAll(retrievedReminders);
         return reminderList;
     }
 
@@ -120,8 +119,8 @@ public class UniqueReminderList implements Iterable<Reminder> {
      */
     public void setReminders(ObservableList<Company> companyList) {
         for (Company company : companyList) {
-            ObservableList<Role> roleList = company.getRoleManager().getRoleList().getRoles();
-            for (Role role : roleList) {
+            ReadOnlyRoleList roleList = company.getRoleList();
+            for (Role role : roleList.getRoleList()) {
                 if (role.getReminderDate().isWithinReminderWindow()) {
                     Reminder reminder =
                             new Reminder(company.getName(), role.getName(), role.getStatus(), role.getReminderDate());

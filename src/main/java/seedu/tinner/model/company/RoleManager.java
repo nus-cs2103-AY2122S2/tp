@@ -34,7 +34,7 @@ public class RoleManager {
         requireAllNonNull(roleList);
 
         this.roleList = new RoleList(roleList);
-        this.filteredRoles = new FilteredList<>(this.roleList.getRoles());
+        this.filteredRoles = new FilteredList<>(this.roleList.getRoleList());
     }
 
     public RoleManager() {

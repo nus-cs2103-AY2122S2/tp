@@ -32,7 +32,7 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
      * @return
      */
     public boolean hasRoleNameKeywords(Company company) {
-        List<Role> roles = company.getRoleManager().getRoleList().getRoles();
+        List<Role> roles = company.getRoleManager().getRoleList().getRoleList();
 
         return roleNameKeywords.stream().anyMatch(keyword -> roles.stream()
                 .anyMatch(role -> StringUtil.containsWordIgnoreCase(role.getName().value, keyword)));

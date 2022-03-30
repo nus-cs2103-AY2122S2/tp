@@ -59,7 +59,7 @@ class JsonAdaptedCompany {
         address = source.getAddress().value;
         favouriteStatus = source.getFavouriteStatus().value.toString();
         roles.addAll(source.getRoleManager().getRoleList()
-                .getRoles().stream()
+                .getRoleList().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
     }
