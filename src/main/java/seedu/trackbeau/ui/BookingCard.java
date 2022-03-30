@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.trackbeau.model.booking.Booking;
 
+
+
 /**
  * An UI component that displays information of a {@code Booking}.
  */
@@ -26,7 +28,7 @@ public class BookingCard extends UiPart<Region> {
      */
 
     public final Booking booking;
-    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' HH:mm a");
+    public final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'at' hh:mm a");
 
     @FXML
     private HBox cardPane;

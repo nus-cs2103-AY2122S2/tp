@@ -64,15 +64,16 @@ The table below explains the symbols and syntax used throughout the user guide.
 
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
-![Annotated GUI](images/user-guide/annotated-gui.png)
+![Annotated GUI](images/user-guide/annotated-gui-v2.png)
 
 #### 3.2.3 Navigating in TrackBeau
 TrackBeau consists of tabs that are toggleable in the tab bar on the left side of the GUI.
 By selecting a tab, it toggles the display panel to showcase the contents related to the tab e.g., by clicking on
 Services, it will display a list of services available. By default, the Customers tab is selected.
 
-There is also a menu bar at the top of the GUI that consists of 2 menu item, File and Help. By clicking on File,
+There is also a menu bar at the top of the GUI that consists of 3 menu item, File, Help and Charts. By clicking on File,
 you will be able to access Exit to exit the app. By clicking on Help, you will be able to access Help F1 to open the help window.
+By clicking on Charts, you will be able to see a list of menu items to open the various charts in TrackBeau.
 
 You can enter the commands via the command box and pressing Enter to execute them.
 The results panel will then display a response on whether the command was successfully executed.

@@ -15,7 +15,7 @@ import seedu.trackbeau.model.uniquelist.UniqueListItem;
  * Represents a Booking in trackBeau.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Booking implements UniqueListItem {
+public class Booking implements UniqueListItem, Comparable<Booking> {
 
     private final Customer customer;
     private final Service service;
@@ -71,6 +71,11 @@ public class Booking implements UniqueListItem {
     @Override
     public boolean isSameItem(UniqueListItem otherBooking) {
         return this.equals(otherBooking);
+    }
+
+    @Override
+    public int compareTo(Booking b) {
+        return bookingDateTime.value.compareTo(b.bookingDateTime.value);
     }
 
     /**

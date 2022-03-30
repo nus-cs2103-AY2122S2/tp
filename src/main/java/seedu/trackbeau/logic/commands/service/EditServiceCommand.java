@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_SERVICES;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.service.Duration;
 import seedu.trackbeau.model.service.Price;
 import seedu.trackbeau.model.service.Service;
@@ -58,6 +60,7 @@ public class EditServiceCommand extends Command {
         this.editServiceDescriptor = new EditServiceDescriptor(editServiceDescriptor);
     }
 
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -74,8 +77,18 @@ public class EditServiceCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SERVICE);
         }
 
+        List<Booking> lastShownBookingsList = model.getFilteredBookingList();
+        for (int i = 0; i < lastShownBookingsList.size(); i++) {
+            Booking booking = lastShownBookingsList.get(i);
+            if (booking.getService().equals(serviceToEdit)) {
+                model.setBooking(booking, new Booking(booking.getCustomer(), editedService,
+                    booking.getBookingDateTime()));
+            }
+        }
+
         model.setService(serviceToEdit, editedService);
         model.updateServiceList(PREDICATE_SHOW_ALL_SERVICES);
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
         return new CommandResult(String.format(MESSAGE_EDIT_SERVICE_SUCCESS, editedService));
     }
 
