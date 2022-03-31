@@ -21,8 +21,8 @@ import seedu.address.model.tamodule.TaModule;
 public class DisenrolCommand extends Command {
     public static final String NONEXISTENT_STUDENT_CG = "Student(s) not in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
-    public static final String MESSAGE_DISENROL_OTHERS = "Successfully disenrolled the other students from %s(%s)";
-    public static final String MESSAGE_DISENROL_SUCCESS = "Successfully disenrolled all students from %s(%s)";
+    public static final String MESSAGE_DISENROL_OTHERS = "Successfully disenrolled the other student(s) from %s(%s)";
+    public static final String MESSAGE_DISENROL_SUCCESS = "Successfully disenrolled given students(s) from %s(%s)";
     public static final String COMMAND_WORD = "disenrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Disenrols the specified students from "
             + "the given class group.\n"

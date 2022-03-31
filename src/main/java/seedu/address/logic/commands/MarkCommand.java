@@ -21,8 +21,8 @@ public class MarkCommand extends Command {
     public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
     public static final String NONEXISTENT_WEEK = "Week %s does not exists.";
     public static final String MESSAGE_STUDENT_NOT_ENROLLED = "Student(s) not enrolled:\n%s";
-    public static final String MESSAGE_MARK_OTHERS = "Successfully mark other students from %s(%s).";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark given students from %s(%s).";
+    public static final String MESSAGE_MARK_OTHERS = "Successfully mark other student(s) from %s(%s).";
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark given student(s) from %s(%s).";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance(s) of the specified student(s)"
             + "belonging to the class group at the specified CLASS_GROUP_INDEX for the specified week.\n"
             + "\tParameters: " + PREFIX_CLASS_INDEX + "CLASS_GROUP_INDEX "

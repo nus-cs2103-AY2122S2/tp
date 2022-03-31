@@ -22,8 +22,8 @@ public class EnrolCommand extends Command {
 
     public static final String STUDENT_EXISTS_CG = "Student(s) exist in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %d does not exists.";
-    public static final String MESSAGE_ENROL_OTHERS = "Successfully enrolled the other students into %s(%s).";
-    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled all students into %s(%s).";
+    public static final String MESSAGE_ENROL_OTHERS = "Successfully enrolled the other student(s) into %s(%s).";
+    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled given student(s) into %s(%s).";
     public static final String COMMAND_WORD = "enrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols the specified students to "
             + "the given class group.\n"
