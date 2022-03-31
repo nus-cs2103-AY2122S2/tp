@@ -2,11 +2,15 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.transaction.DueDate;
 import seedu.address.model.transaction.Note;
 import seedu.address.model.transaction.Transaction;
+
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -14,6 +18,8 @@ import seedu.address.model.transaction.Transaction;
 public class TransactionCard extends UiPart<Region> {
 
     private static final String FXML = "TransactionListCard.fxml";
+    private static final String STATUS_PAID_ICON = "/images/check-mark.png";
+    private static final String STATUS_NOT_PAID_ICON = "/images/delete-button.png";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,7 +44,9 @@ public class TransactionCard extends UiPart<Region> {
     @FXML
     private Label identifier;
     @FXML
-    private Label isPaid;
+    private Label index;
+    @FXML
+    private ImageView status;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,9 +56,10 @@ public class TransactionCard extends UiPart<Region> {
         this.transaction = transaction;
 
         // Required fields.
-        amount.setText(transaction.getAmount().toString());
+        identifier.setText("Transaction ID #" + transaction.getTransactionId());
+        index.setText(displayedIndex + ".");
+        amount.setText("Amount: $" + transaction.getAmount().getValue());
         transactionDate.setText(transaction.getTransactionDate().toString());
-        identifier.setText(transaction.getPersonIdString());
 
         // Optional fields.
         dueDate.setText(transaction.getDueDate()
@@ -60,8 +69,14 @@ public class TransactionCard extends UiPart<Region> {
         note.setText(transaction.getNote()
                 .map(Note::toString)
                 .orElse(Note.EMPTY_NOTE));
-
-        isPaid.setText(String.format("Paid: %s", transaction.isPaid()));
+        Image image;
+        if (transaction.isPaid()) {
+            image = new Image(STATUS_PAID_ICON);
+        } else {
+            image = new Image(STATUS_NOT_PAID_ICON);
+        }
+        status.setImage(image);
+        centerImage();
     }
 
     @Override
@@ -79,5 +94,30 @@ public class TransactionCard extends UiPart<Region> {
         // state check
         TransactionCard card = (TransactionCard) other;
         return transaction.equals(card.transaction);
+    }
+
+    public void centerImage() {
+        Image img = status.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = status.getFitWidth() / img.getWidth();
+            double ratioY = status.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if (ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            status.setX((status.getFitWidth() - w) / 2);
+            status.setY((status.getFitHeight() - h) / 2);
+
+        }
     }
 }
