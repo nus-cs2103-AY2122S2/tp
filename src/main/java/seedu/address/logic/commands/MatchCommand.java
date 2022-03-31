@@ -38,7 +38,7 @@ public class MatchCommand extends Command {
         model.updateFilteredSellerList(new HasMatchWithBuyerPredicate(buyer));
 
         return new CommandResult(
-            String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredSellerList().size()));
+            String.format(Messages.MESSAGE_BUYERS_LISTED_OVERVIEW, model.getFilteredSellerList().size()));
     }
 
     @Override
