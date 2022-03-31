@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.tamodule.TaModule;
+import seedu.address.ui.AssessmentAttemptsWindow.AssessmentAttempt;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class ModuleCard extends UiPart<Region> {
+public class AssessmentAttemptCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleListCard.fxml";
+    private static final String FXML = "AssessmentAttemptListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,29 +21,26 @@ public class ModuleCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final TaModule module;
+    public final AssessmentAttempt attempt;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label code;
+    private Label student;
     @FXML
-    private Label academicYear;
+    private Label grade;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ModuleCard(TaModule module, int displayedIndex) {
+    public AssessmentAttemptCard(AssessmentAttempt attempt, int displayedIndex) {
         super(FXML);
-        this.module = module;
-        id.setText(displayedIndex + "");
-        code.setText(module.getModuleCode().value);
-        name.setText(module.getModuleName().value);
-        academicYear.setText(module.getAcademicYear().value);
+        this.attempt = attempt;
+        id.setText(displayedIndex + ". ");
+        student.setText(attempt.getStudent().getName().fullName);
+        grade.setText("Grade: " + attempt.getGrade().value);
     }
 
     @Override
@@ -54,13 +51,12 @@ public class ModuleCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModuleCard)) {
+        if (!(other instanceof AssessmentAttemptCard)) {
             return false;
         }
 
         // state check
-        ModuleCard card = (ModuleCard) other;
-        return id.getText().equals(card.id.getText())
-                && module.equals(card.module);
+        AssessmentAttemptCard card = (AssessmentAttemptCard) other;
+        return attempt.equals(card.attempt);
     }
 }

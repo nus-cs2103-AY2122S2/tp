@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.lesson.Lesson;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -23,6 +26,8 @@ public class ClassGroupCard extends UiPart<Region> {
 
     public final ClassGroup classGroup;
 
+    private AttendanceWindow attendanceWindow;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -35,6 +40,8 @@ public class ClassGroupCard extends UiPart<Region> {
     private Label moduleCode;
     @FXML
     private Label moduleName;
+    @FXML
+    private Label academicYear;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -42,11 +49,30 @@ public class ClassGroupCard extends UiPart<Region> {
     public ClassGroupCard(ClassGroup classGroup, int displayedIndex) {
         super(FXML);
         this.classGroup = classGroup;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         classId.setText(classGroup.getClassGroupId().value);
         classType.setText(classGroup.getClassGroupType().toString());
         moduleCode.setText(classGroup.getModule().getModuleCode().value);
         moduleName.setText(classGroup.getModule().getModuleName().value);
+        academicYear.setText(classGroup.getModule().getAcademicYear().value);
+        ObservableList<Lesson> lessonList = FXCollections.observableArrayList();
+        classGroup.getLessons().forEach((lesson) -> {
+            lessonList.add(lesson);
+        });
+
+        attendanceWindow = new AttendanceWindow(lessonList);
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleAttendance() {
+        if (!attendanceWindow.isShowing()) {
+            attendanceWindow.show();
+        } else {
+            attendanceWindow.focus();
+        }
     }
 
     @Override
