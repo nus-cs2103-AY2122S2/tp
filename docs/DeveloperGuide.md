@@ -390,7 +390,7 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 ### Show status
 
 #### What it does
-`Status` class is an attribute within the `Show` class. `Status` represents the watch status of the show which can be represented by `completed`, `watching`, or `plan-to-watch`. 
+`Status` class is an attribute within the `Show` class. `Status` represents the watch status of the show, and can be represented by `completed`, `watching`, or `plan-to-watch`. 
 
 #### Implementation
 
