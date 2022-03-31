@@ -31,6 +31,7 @@ class JsonAdaptedEvent {
     private final String time;
     private final String location;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final boolean isArchived;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given Event details.
@@ -48,6 +49,7 @@ class JsonAdaptedEvent {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        isArchived = false;
     }
 
     /**
@@ -62,6 +64,7 @@ class JsonAdaptedEvent {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isArchived = source.isArchived();
     }
 
     /**
@@ -122,7 +125,7 @@ class JsonAdaptedEvent {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(eventTags);
-        return new Event(modelName, modelCompany, modelDate, modelTime, modelLocation, modelTags);
+        return new Event(modelName, modelCompany, modelDate, modelTime, modelLocation, modelTags, isArchived);
     }
 
 }

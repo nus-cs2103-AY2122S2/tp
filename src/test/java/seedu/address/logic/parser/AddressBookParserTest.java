@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -76,8 +77,8 @@ public class AddressBookParserTest {
                 test);
 
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
-                keywords, List.<String>of(""),
-                        List.<String>of("")
+                keywords, List.<String>of(""), List.<String>of(""),
+                SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY)
         );
         assertEquals(new FindPersonCommand(predicate), command);
     }

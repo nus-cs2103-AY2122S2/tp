@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
 
@@ -27,7 +28,7 @@ public class FindPersonCommandParserTest {
         // no leading and trailing whitespaces
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
                 List.<String>of("Alice", "Bob"), List.<String>of(""),
-                List.<String>of(""));
+                List.<String>of(""), SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY));
         FindPersonCommand expectedFindPersonCommand =
                 new FindPersonCommand(predicate);
         assertParseSuccess(parser, " n/ Alice Bob", expectedFindPersonCommand);

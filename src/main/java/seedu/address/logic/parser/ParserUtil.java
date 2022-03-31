@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,6 +27,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_SEARCH_TYPE = "Search Type must be one of the following: "
+            + "UNARCHIVED, ARCHIVED, ALL";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -196,7 +199,6 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code location} is invalid.
      */
-
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
@@ -204,5 +206,27 @@ public class ParserUtil {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String searchType} into a {@code SearchType}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code searchType} is invalid.
+     */
+    public static SearchType parseSearchType(String searchType) throws ParseException {
+        requireNonNull(searchType);
+        String trimmedSearchType = searchType.trim();
+
+        switch (trimmedSearchType) {
+        case "unarchived":
+            return SearchType.UNARCHIVED_ONLY;
+        case "archived":
+            return SearchType.ARCHIVED_ONLY;
+        case "all":
+            return SearchType.ALL;
+        default:
+            throw new ParseException(MESSAGE_INVALID_SEARCH_TYPE);
+        }
     }
 }

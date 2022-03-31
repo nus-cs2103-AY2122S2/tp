@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.entry.Date;
+import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 
 /**
@@ -22,6 +23,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> timeKeywords;
     private final List<String> locationKeywords;
     private final List<String> tagKeywords;
+    private final Predicate<Entry> searchTypePredicate;
 
     /**
      * Main Constructor for EventContainsKeywordsPredicate
@@ -37,7 +39,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                                           Date endDate,
                                           List<String> timeKeywords,
                                           List<String> locationKeywords,
-                                          List<String> tagKeywords) {
+                                          List<String> tagKeywords,
+                                          Predicate<Entry> searchTypePredicate) {
         this.nameKeywords = nameKeywords;
         this.companyKeywords = companyKeywords;
         this.startDate = startDate;
@@ -45,6 +48,7 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
         this.timeKeywords = timeKeywords;
         this.locationKeywords = locationKeywords;
         this.tagKeywords = tagKeywords;
+        this.searchTypePredicate = searchTypePredicate;
     }
 
     /**
@@ -73,7 +77,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 || new LocationContainsKeywordsPredicate(locationKeywords).test(event);
         correctTag = invalidKeywords(tagKeywords) || new TagContainsKeywordsPredicate(tagKeywords).test(event);
 
-        return correctName && correctCompany && correctDate && correctTime && correctLocation && correctTag;
+        return correctName && correctCompany && correctDate && correctTime && correctLocation && correctTag
+                && searchTypePredicate.test(event);
     }
 
     @Override
@@ -86,7 +91,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                 && endDate.equals(((EventContainsKeywordsPredicate) other).endDate)
                 && timeKeywords.equals(((EventContainsKeywordsPredicate) other).timeKeywords)
                 && locationKeywords.equals(((EventContainsKeywordsPredicate) other).locationKeywords)
-                && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)); // state check
+                && tagKeywords.equals(((EventContainsKeywordsPredicate) other).tagKeywords)
+                && searchTypePredicate.equals(((EventContainsKeywordsPredicate) other).searchTypePredicate));
     }
 
     /**

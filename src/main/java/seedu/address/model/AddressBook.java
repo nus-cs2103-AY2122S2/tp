@@ -118,6 +118,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sets archived state of {@code key} in the person list.
+     * {@code key} must exist in the person list.
+     */
+    public void setArchivePerson(Person key, boolean isArchived) {
+        persons.setArchived(key, isArchived);
+    }
+
     //// company-level operations
 
     /**
@@ -149,11 +157,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from the company list.
+     * {@code key} must exist in the company list.
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+    }
+
+    /**
+     * Sets archived state of {@code key} in the company list.
+     * {@code key} must exist in the company list.
+     */
+    public void setArchiveCompany(Company key, boolean isArchived) {
+        companies.setArchived(key, isArchived);
     }
 
     //// event-level operations
@@ -185,11 +201,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from the event list.
+     * {@code key} must exist in the event list.
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    /**
+     * Sets archived state of {@code key} in the event list.
+     * {@code key} must exist in the event list.
+     */
+    public void setArchiveEvent(Event key, boolean isArchived) {
+        events.setArchived(key, isArchived);
     }
 
     @Override

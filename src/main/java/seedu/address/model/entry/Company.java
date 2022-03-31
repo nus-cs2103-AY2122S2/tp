@@ -24,12 +24,19 @@ public class Company extends Entry {
     /**
      * Every field must be present and not null.
      */
-    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, tags);
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isArchived) {
+        super(name, tags, isArchived);
         requireAllNonNull(phone, email, address);
         this.phone = phone;
         this.email = email;
         this.address = address;
+    }
+
+    /**
+     * Constructor if no isArchived value is provided; default value is false.
+     */
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, tags, false);
     }
 
     /**

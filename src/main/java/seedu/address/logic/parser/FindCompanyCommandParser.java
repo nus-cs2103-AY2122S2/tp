@@ -3,11 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.logic.commands.FindCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entry.predicate.CompanyContainsKeywordsPredicate;
@@ -25,9 +27,11 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
     public FindCompanyCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_SEARCH_TYPE);
 
-        if (!isValid(argMultimap)) {
+        String searchTypeString = argMultimap.getValue(PREFIX_SEARCH_TYPE).orElse("unarchived");
+
+        if (!isValid(argMultimap, searchTypeString)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCompanyCommand.MESSAGE_USAGE));
         }
@@ -35,14 +39,18 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
         String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
         String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
 
+        SearchTypeUtil.SearchType searchType = ParserUtil.parseSearchType(searchTypeString);
+
         CompanyContainsKeywordsPredicate predicate = new CompanyContainsKeywordsPredicate(Arrays.asList(nameKeywords),
-                Arrays.asList(tagKeywords));
+                Arrays.asList(tagKeywords), SearchTypeUtil.getPredicate(searchType));
         return new FindCompanyCommand(predicate);
     }
 
-    private boolean isValid(ArgumentMultimap argumentMultimap) throws ParseException {
+    private boolean isValid(ArgumentMultimap argumentMultimap, String searchTypeString) throws ParseException {
         boolean namePresent = argumentMultimap.getValue(PREFIX_NAME).isPresent();
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
+
+        ParserUtil.parseSearchType(searchTypeString);
 
         if (namePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
