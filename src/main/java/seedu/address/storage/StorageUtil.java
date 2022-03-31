@@ -59,7 +59,7 @@ public class StorageUtil {
     }
 
     /**
-     * Returns ModuleCode object if it is valid.
+     * Returns {@code ModuleCode} object if it is valid.
      *
      * @throws IllegalValueException if {@code moduleCode} is missing/invalid.
      */
@@ -76,7 +76,7 @@ public class StorageUtil {
     }
 
     /**
-     * Returns AcademicYear object if it is valid.
+     * Returns {@code AcademicYear} object if it is valid.
      *
      * @throws IllegalValueException if {@code academicYear} is missing/invalid.
      */
