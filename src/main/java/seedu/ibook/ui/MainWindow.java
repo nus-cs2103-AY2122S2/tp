@@ -64,6 +64,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setOnCloseRequest(event -> handleExit());
     }
 
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -211,6 +212,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     public ObservableList<AttributeFilter> getProductFilters() {
         return logic.getProductFilters();
+    }
+
+    /**
+     * Returns true if there are any active filters
+     */
+    public boolean hasActiveFilter() {
+        return !getProductFilters().isEmpty();
     }
 
     /**

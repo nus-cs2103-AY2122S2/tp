@@ -14,7 +14,7 @@ public class DiscountStart {
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Start should only be of type integer, and should not be negative";
 
-    public static final String VALIDATION_REGEX = "|(\\d+)";
+    public static final String VALIDATION_REGEX = "|\\d+";
 
     public final Integer discountStart;
 
@@ -26,6 +26,9 @@ public class DiscountStart {
     public DiscountStart(String discountStart) {
         requireNonNull(discountStart);
         checkArgument(isValidDiscountStart(discountStart), MESSAGE_CONSTRAINTS);
+        if (discountStart.equals("")) {
+            discountStart = DEFAULT_DISCOUNTSTART;
+        }
         this.discountStart = Integer.parseInt(discountStart);
         assert this.discountStart >= 0; // ensure that the discount rate is not negative
     }

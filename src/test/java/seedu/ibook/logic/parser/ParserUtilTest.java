@@ -56,11 +56,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
-    }
-
-    @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
@@ -76,11 +71,6 @@ public class ParserUtilTest {
     @Test
     public void parseCategory_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory((String) null));
-    }
-
-    @Test
-    public void parseCategory_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseCategory(INVALID_CATEGORY));
     }
 
     @Test

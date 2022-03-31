@@ -36,16 +36,20 @@ public class AddCommandParser implements Parser<AddCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
                 PREFIX_PRICE, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_PRICE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        // Required fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Category category =
-                ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).orElse(Category.DEFAULT_CATEGORY));
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
+
+        // Optional fields
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY)
+                .orElse(Category.DEFAULT_CATEGORY));
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
+                .orElse(Description.DEFAULT_DESCRIPTION));
         DiscountRate discountRate =
                 ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE)
                 .orElse(DiscountRate.DEFAULT_DISCOUNT_RATE));

@@ -21,6 +21,8 @@ public class ItemTable extends UiComponent<VBox> {
     private final Product product;
     private final int productIndex;
 
+    private final ObservableList<Item> filteredItem;
+
     private final Listener listener = new Listener();
 
     @FXML
@@ -38,12 +40,19 @@ public class ItemTable extends UiComponent<VBox> {
         this.productCard = productCard;
         this.product = product;
         this.productIndex = productIndex;
+        this.filteredItem = product.getFilteredItems();
+        filteredItem.addListener(listener);
         populateField();
     }
 
+    /**
+     * Removes listener from the table.
+     */
+    public void removeListener() {
+        filteredItem.removeListener(listener);
+    }
+
     private void populateField() {
-        ObservableList<Item> filteredItem = product.getFilteredItems();
-        filteredItem.addListener(listener);
         content.getChildren().clear();
         if (filteredItem.isEmpty()) {
             EmptyItemTableState emptyState = new EmptyItemTableState(productIndex, product, getMainWindow());

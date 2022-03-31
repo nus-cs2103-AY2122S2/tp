@@ -152,7 +152,7 @@ public class UpdateCommand extends Command {
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyNonNull(name, category, description, price);
+            return CollectionUtil.isAnyNonNull(name, category, description, price, discountRate, discountStart);
         }
 
         public void setName(Name name) {

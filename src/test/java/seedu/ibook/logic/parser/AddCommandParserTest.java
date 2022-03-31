@@ -9,10 +9,8 @@ import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNTRATE_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNTRATE_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNTSTART_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DISCOUNTSTART_FULL_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_DISCOUNTRATE_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_DISCOUNTSTART_DESC;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_B;
@@ -35,7 +33,6 @@ import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.DiscountRate;
 import seedu.ibook.model.product.DiscountStart;
-import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.testutil.ProductBuilder;
@@ -60,12 +57,6 @@ public class AddCommandParserTest {
         // missing name prefix
         assertParseFailure(parser,
             VALID_NAME_B + CATEGORY_FULL_B + DESCRIPTION_FULL_B
-                    + PRICE_FULL_B + DISCOUNTRATE_FULL_B + DISCOUNTSTART_FULL_B,
-            expectedMessage);
-
-        // missing description prefix
-        assertParseFailure(parser,
-            NAME_FULL_B + CATEGORY_FULL_B + VALID_DESCRIPTION_B
                     + PRICE_FULL_B + DISCOUNTRATE_FULL_B + DISCOUNTSTART_FULL_B,
             expectedMessage);
 
@@ -96,14 +87,6 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + CATEGORY_FULL_B + DESCRIPTION_FULL_B
-            + PRICE_FULL_B + DISCOUNTRATE_FULL_B + DISCOUNTSTART_FULL_B, Name.MESSAGE_CONSTRAINTS);
-
-        // invalid category
-        assertParseFailure(parser, NAME_FULL_B + INVALID_CATEGORY_DESC + DESCRIPTION_FULL_B
-            + PRICE_FULL_B + DISCOUNTRATE_FULL_B + DISCOUNTSTART_FULL_B, Category.MESSAGE_CONSTRAINTS);
-
         // invalid price
         assertParseFailure(parser, NAME_FULL_B + CATEGORY_FULL_B + DESCRIPTION_FULL_B
             + INVALID_PRICE_DESC + DISCOUNTRATE_FULL_B + DISCOUNTSTART_FULL_B, Price.MESSAGE_CONSTRAINTS);
