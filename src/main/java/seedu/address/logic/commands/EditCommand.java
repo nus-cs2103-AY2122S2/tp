@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -139,10 +138,7 @@ public class EditCommand extends ByIndexByNameCommand {
         // short circuit if same object
         if (other == this) {
             return true;
-        }
-
-        //state check
-        else if (other instanceof EditCommand) {
+        } else if (other instanceof EditCommand) { //state check
             EditCommand otherEditCommand = (EditCommand) other;
             if (otherEditCommand.isEditByIndex && this.isEditByIndex) {
                 //assertion to ensure that if it is edit by index, then targetIndex will not be null

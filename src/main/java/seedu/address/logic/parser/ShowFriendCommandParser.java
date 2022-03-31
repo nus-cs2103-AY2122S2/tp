@@ -5,12 +5,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.ArgumentMultimap.arePrefixesPresent;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.regex.Pattern;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ShowFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FriendName;
-
-import java.util.regex.Pattern;
 
 /**
  * Parses input arguments and creates a new ShowFriendCommand object

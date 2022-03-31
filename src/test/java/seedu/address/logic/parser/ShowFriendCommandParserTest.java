@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ShowFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

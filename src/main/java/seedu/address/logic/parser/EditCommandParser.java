@@ -40,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DESCRIPTION, PREFIX_TAG);
 
         //throws exception if neither current name and index are given
-        if (! argMultimap.getValue(PREFIX_CURRENT_NAME).isPresent() && argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getValue(PREFIX_CURRENT_NAME).isPresent() && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
@@ -74,7 +74,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      *
      * @throws ParseException when any field given is invalid.
      */
-    private EditPersonDescriptor getEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException{
+    private EditPersonDescriptor getEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NEW_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseFriendName(argMultimap.getValue(PREFIX_NEW_NAME).get()));
