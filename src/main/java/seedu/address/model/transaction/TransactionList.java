@@ -72,11 +72,6 @@ public class TransactionList implements Iterable<Transaction> {
         internalList.removeAll(toRemove);
     }
 
-    public void setTransactions(TransactionList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code transactions}.
      */
