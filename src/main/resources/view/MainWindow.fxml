@@ -34,7 +34,7 @@
           <Menu fx:id="addMenu" mnemonicParsing="false" text="Add">
             <MenuItem fx:id="addMenuItem" mnemonicParsing="false" onAction="#handleAddProfile" text="Add Profile"/>
           </Menu>
-          <Menu mnemonicParsing="false" text="Tags">
+          <Menu fx:id="newTagMenu" mnemonicParsing="false" text="Tags">
             <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" onAction="#handleAddTag" text="Tags" />
           </Menu>
           <Menu fx:id="themeMenu" mnemonicParsing="false" text="Theme">
