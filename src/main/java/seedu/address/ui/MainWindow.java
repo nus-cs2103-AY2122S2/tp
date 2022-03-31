@@ -243,6 +243,10 @@ public class MainWindow extends UiPart<Stage> {
                 commandResult.getTheme().applyTheme(primaryStage);
             }
 
+            if (commandResult.isShowGrabResult()) {
+                this.generalDisplay.setGrabResult(commandResult.getGrabResult());
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

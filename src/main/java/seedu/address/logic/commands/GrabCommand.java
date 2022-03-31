@@ -81,7 +81,7 @@ public class GrabCommand extends Command {
                 Person personToBeGrabbed = currAddressBook.get(personIndex - 1);
                 builder.append(grabOnePerson(personToBeGrabbed));
             }
-            return new CommandResult(MESSAGE_SUCCESS + '\n' + builder);
+            return new CommandResult(MESSAGE_SUCCESS, true, builder.toString());
         } else {
             if (index.equals("")) {
                 ObservableList<Person> newPersonList =
@@ -94,7 +94,7 @@ public class GrabCommand extends Command {
                 // extra index is found
                 throw new CommandException(MESSAGE_GRAB_ONLY_BY_TAG);
             }
-            return new CommandResult(MESSAGE_SUCCESS + '\n' + builder);
+            return new CommandResult(MESSAGE_SUCCESS + '\n', true, builder.toString());
         }
     }
 
