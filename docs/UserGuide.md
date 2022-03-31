@@ -196,6 +196,8 @@ greater than or equals to 80kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
 is lesser than 213cm **and** weight equals to 100kg **and** plays the position of "SG" or "SF"
 
+* ![viewPlayer](images/viewPlayer.png)
+
 **To view lineup:**<br>
 
 Format: `view L/[NAMES_IN_LINEUPNAME]`
@@ -213,6 +215,8 @@ Examples:
 * `view L/` Displays all the players that have at least a lineup and all current lineups
 * `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
 * `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
+
+* ![viewLineup](images/viewLineup.png)
 
 **To view schedule:**<br>
 
@@ -243,6 +247,7 @@ Examples:
 * `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules 
 * `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
 
+* ![viewSchedule](images/viewSchedule.png)
 
 ### Sort players by height/ jersey number/ weight: `sort`
 
@@ -264,6 +269,7 @@ Example:
 * `sort w/asc` Sort the displayed players in ascending order of weight
 * `sort w/desc` Sort the displayed players in descending order of weight
 
+* ![sortPlayer](images/sortPlayer.png)
 
 ### Edit a player/ lineup/ schedule information : `edit`
 
