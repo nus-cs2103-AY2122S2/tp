@@ -121,12 +121,6 @@ public class TrackBeauParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCustomerCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCustomersCommand.COMMAND_WORD:
-            return new ListCustomersCommand();
-
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommandParser().parse(arguments);
 
