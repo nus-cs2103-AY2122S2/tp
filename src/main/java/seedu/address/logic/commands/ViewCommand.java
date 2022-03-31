@@ -33,7 +33,8 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (predicate instanceof AllWithinTimePeriodPredicate && model.getInterviewSchedule().getInterviewList().size() == 0) {
+        if (predicate instanceof AllWithinTimePeriodPredicate 
+                && model.getInterviewSchedule().getInterviewList().size() == 0) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM));
         }
 
