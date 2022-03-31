@@ -39,7 +39,6 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
         } else {
             try {
-                System.out.println(argMultimap.getValue(PREFIX_ID));
                 StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_ID).get());
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
                 unmarkCommand = new UnmarkCommand(studentId, index);
