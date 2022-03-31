@@ -50,6 +50,10 @@ public class DateTime implements Comparable<DateTime> {
         return true;
     }
 
+    public boolean isAfterToday() {
+        return this.value.isAfter(LocalDateTime.now());
+    }
+
     public boolean hasSameDate(LocalDate date) {
         return value.toLocalDate().equals(date);
     }

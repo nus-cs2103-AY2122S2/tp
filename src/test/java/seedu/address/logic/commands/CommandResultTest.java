@@ -20,7 +20,7 @@ public class CommandResultTest {
 
     @Test
     public void execute_forEvent_commandResultIsEvent() throws CommandException {
-        Command eventCommand = new ShowEventsCommand();
+        Command eventCommand = new ShowEventsCommand(true);
         CommandResult commandResult = eventCommand.execute(model);
 
         assertTrue(commandResult.isEvent());
