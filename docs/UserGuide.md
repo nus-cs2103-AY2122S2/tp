@@ -13,8 +13,8 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
     * [Viewing help: help](#viewing-help-help)
     * [Contact Management](#contact-management)
       * [Adding a person: add](#adding-a-person-add)
-      * [Editing details for existing contact: edit](#editing-a-person-edit)
-      * [Add/remove person as potential teammate: team/unteam](#addremove-potential-teammates-teamunteam)
+      * [Editing details for existing contact: edit](#editing-any-number-of-persons-edit)
+      * [Add/remove person as potential teammate: team/unteam](#markunmark-contact-as-potential-teammates-teamunteam)
       * [Deleting a person: delete](#deleting-a-person-delete)
       * [Remove all contacts: clear](#clearing-all-entries-clear)
     * [Team Forming](#team-forming)
@@ -24,9 +24,10 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
       * [Sort person by technical skill: sort](#sorting-persons-by-skill-proficiency-sort)
       * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
       * [Show potential teammates: show](#show-all-potential-teammates-show)
-    * [Undo](#undo-last-command-undo)
-    * [Redo](#redo-last-command-redo)
-    * [Navigating User Input History](#navigating-user-input-history)
+    * [Utility](#utility)
+      * [Undo](#undo-last-command-undo)
+      * [Redo](#redo-last-command-redo)
+      * [Navigating User Input History](#navigating-user-input-history--)
     * [Exiting HackNet](#exiting-the-program-exit)
 * [Data](#data)
 * [FAQ](#faq)
@@ -180,7 +181,7 @@ Format: `list`
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose *names* contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -193,8 +194,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find alex melvin` returns `Alex Teo`, `Melvin Chan`<br>
+  ![result for 'find alex melvin'](images/findAlexMelvinResult.png)
 
 ### Locating persons by skills: `filter`
 
@@ -206,8 +207,8 @@ Format: `filter KEYWORD`
 * Only full words will be matched e.g. `C` will not match `C#`
 
 Examples:
-* `find C` returns `Alex Yeoh`, `Bernice Yu` and `Irfan Ibrahim`
-* `filter java` returns `David Li`<br>
+* `filter C` returns `Alex Teo`, `Lye Jia Yang` and `Toh Zhan Qing`
+* `filter java` returns `Junha Park`<br>
   ![result for 'filter C'](images/filterCResult.png)
 
 ### Sorting persons by skill proficiency: `sort`
@@ -251,6 +252,10 @@ Format: `filterteam`
 Shows the list of all persons marked as potential teammates
 
 Format: `show`
+
+## Utility
+
+This section contains some commands/shortcuts that can improve your work efficiency in using **HackNet**.
 
 ### Undo last command: `undo`
 
