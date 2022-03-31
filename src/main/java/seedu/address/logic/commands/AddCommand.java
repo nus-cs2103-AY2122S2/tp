@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTIVITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
@@ -9,9 +15,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.activity.Activity;
+import seedu.address.model.person.*;
 
 /**
  * Adds a person to the address book.
@@ -19,6 +29,7 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Command: Adds a person to the address book. "
             + "\nParameters: "
@@ -55,13 +66,92 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
+
+        try {
+            batchUpdateNegativeToPositive(toAdd, studentList, model);
+        } catch (Exception ex) {
+            logger.severe("Batch update failed: " + StringUtil.getDetails(ex));
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    /**
+     * Batch updates the list when a new person's with positive status joins the class and/or activity
+     */
+    private static void batchUpdateNegativeToPositive(Person addedPerson,
+                                                      ObservableList<Person> studentList,
+                                                      Model model) {
+
+        if (addedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+
+            List<Person> filteredByClassCodeList = studentList.stream()
+                    .filter(student -> (student.getClassCode().toString().equals(addedPerson.getClassCode().toString())
+                            || student.hasSameActivity(addedPerson))
+                            && !student.isSamePerson(addedPerson)
+                            && !student.getStatus().toString().equals(Status.POSITIVE))
+                    .collect(Collectors.toList());
+
+            for (int i = 0; i < filteredByClassCodeList.size(); i++) {
+                Person currentPerson = filteredByClassCodeList.get(i);
+                EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
+                tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
+                Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                model.setPerson(currentPerson, editedPersonStatus);
+            }
+        } else {
+            List<Person> filteredByClassCodeAndActivityList = studentList.stream()
+                    .filter(student -> (student.getClassCode().toString()
+                            .equals(addedPerson.getClassCode().toString())
+                            || student.hasSameActivity(addedPerson))
+                            && !student.isSamePerson(addedPerson))
+                    .collect(Collectors.toList());
+
+            for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
+                Person currentPerson = filteredByClassCodeAndActivityList.get(i);
+
+                List<Person> positiveRelatedToPerson = studentList.stream()
+                        .filter(student -> (student.getClassCode().toString()
+                                .equals(currentPerson.getClassCode().toString())
+                                || student.hasSameActivity(currentPerson))
+                                && !student.isSamePerson(addedPerson)
+                                && student.getStatus().toString().equals(Status.POSITIVE))
+                        .collect(Collectors.toList());
+
+                if (positiveRelatedToPerson.size() == 0) {
+                    EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
+                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
+                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
+                    model.setPerson(currentPerson, editedPersonStatus);
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
+        ClassCode updatedClassCode = editPersonDescriptor.getClassCode().orElse(personToEdit.getClassCode());
+        Set<Activity> updatedActivity = editPersonDescriptor.getActivities().orElse(personToEdit.getActivities());
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus,
+                updatedClassCode, updatedActivity);
     }
 
     @Override

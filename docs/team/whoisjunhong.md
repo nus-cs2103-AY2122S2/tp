@@ -23,18 +23,29 @@ Given below are my contributions to the project.
   * Highlights: Class Code follows the convention of an integer followed by an alphabet
   * Credits: *{Collaborators: Jun Hong, Joshua, Louis}*
 
+* **Fixes**: Fix batch update status for `AddCommand` and `DeleteCommand`  -- (Pull request: [\#118](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/118))
+* What it fixes:
+* Edge Case 1: If user is added into application who is `Positive`, the students in the same ClassCode and Activity does not change to `Close-Contact`
+* Edge Case 2: If user is deleted from the application who is `Positive` and the ClassCode and/or Activity does not have any other positive cases, those students statuses does not change to `Negative`
+* Edge Case 3: If user is added into application who is `Negative` while the ClassCode and/or Activity is `Close-Contact`, those students statuses does not change to `Negative`
+* Justification: Fix edge cases which will snowball into other critical bugs in the future
+* Credits: *Jun Hong*
+
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=whoisjunhong&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other)
 
 
 * **Project management**:
-  * Managed releases `v1.1` - `` (- releases) on GitHub
+  * Managed releases `v1.1` - `v1.3` (- releases) on GitHub
 
 
 * **Enhancements to existing features**:
   * Repurpose tags to activities (Pull requests [\#77](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/77))
     * What it does: Person can have multiple activities (e.g. CCA, functional groups)
     * Justification: Track COVID-19 close contact using activities
+  * Enhancement to UI (Pull request [\#116](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/116))
+    * What it does: Enhancement to current AB3 UI to make it more UI/UX centric
+    * Justification: To beautify the application and allow the user to have a more pleasant experience using the application instead of the default theme provided by AB3
   
 
 * **Documentation**:
