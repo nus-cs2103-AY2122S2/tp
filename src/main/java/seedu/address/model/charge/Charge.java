@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Charge {
     public static final String MESSAGE_INVALID_CHARGE_FORMAT = "Charge should be formatted as [number] or "
-             + "[number1.number2] where number2 can be up to 2 decimal places! \ne.g. 200 or 200.55";
+             + "number1[.number2] where number2 can be up to 2 decimal places! \ne.g. 200 or 200.55";
     /**
      * Regex to match charge format.
      * eg: "80.40".

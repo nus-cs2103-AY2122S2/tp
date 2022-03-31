@@ -182,6 +182,21 @@ Format: `absent INDEX date/dd-MM-yyyy`
 Examples:
 * `absent 1 date/25-03-2022` indicates that the first pet in the current list is absent for daycare on 25th March 2022.
 
+### Compute total chargeable of a pet: `charge`
+
+When you want to charge owners for their pets' stay during a specific month, you can compute the total amount chargeable.
+
+Format: `charge INDEX m/MM-yyyy c/number1[.number2]`
+
+* Computes the total amount chargeable of the pet at the specified `INDEX`, at the specified month with the specified daily charge of pet stay
+* The index refers to the index number shown in the current list of pets.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Date **must follow the specified format**.
+* Charge amount can be either a positive integer `number1` or a decimal number of up to 2 digits `number1.number2`. It **must follow the specified format**.
+
+Examples:
+* `charge 1 m/03-2022 c/200.50` computes charge for pet 1 in the month of March on 2022, where each day's stay costs `200.50`.
+
 ### Delete a pet: `delete`
 
 When a pet no longer requires daycare services, you may want to remove them from WoofAreYou.
@@ -403,6 +418,7 @@ wish to deal with the nitty-gritty details of each feature.
 | **Diet**      | `diet INDEX d/remark`                                                               | `diet 1 d/Only feed dry kibble`                                               | Adds a diet remark "Only feed dry kibble" to pet at index 1                                                           |
 | **Present**   | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm`                                   | `present 1 date/22-03-2022 pu/08:00 do/17:00`                                 | Indicates that pet at index 1 will be attending daycare on 22 March 2022, requires pick up at 8am and drop off at 5pm |
 | **Absent**    | `absent INDEX date/dd-MM-yyyy`                                                      | `absent 1 date/22-03-2022`                                                    | Indicates that pet at index 1 was absent on 22 March 2022                                                             |
+| **Charge**    | `charge INDEX m/MM-yyyy c/number1[.number2]`                                        | `charge 1 m/03-2022 c/200.50`                                                 | Computes charge for pet 1 in the month of March on 2022, where each day's stay costs `200.50`                         |
 | **App**       | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]`                                   | `app 1 date/22-03-2022 09:30 at/ NUS Vet Clinic`                              | Indicates that pet at index 1 has an appointment on 22 March 2022, 9.30am at NUS Vet Clinic                           |
 | **App clear** | `app INDEX clear`                                                                   | `app 1 clear`                                                                 | Clears the current appointment of pet at index 1                                                                      |
 | **Sort**      | `sort SORT_BY`                                                                      | `sort name`                                                                   | Sorts pet list alphabetically by name of pets                                                                         |
