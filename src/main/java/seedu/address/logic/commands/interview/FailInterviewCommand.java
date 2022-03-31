@@ -38,6 +38,11 @@ public class FailInterviewCommand extends Command {
         }
 
         Interview interviewToFail = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!interviewToFail.isFailableInterview()) {
+            throw new CommandException(Messages.MESSAGE_INTERVIEW_CANNOT_BE_FAILED);
+        }
+
         Interview failedInterview = new Interview(interviewToFail.getApplicant(), interviewToFail.getDate(),
                 interviewToFail.getPosition());
 
