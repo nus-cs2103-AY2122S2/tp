@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +16,16 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Person;
 
 public class ViewCommandTest {
     private Model model = new ModelManager();
 
     @Test
     public void execute_viewPerson_success() throws CommandException {
-        ViewCommand viewCommand = new ViewCommand(PREDICATE_SHOW_ALL_PERSONS, null, Collections.singletonList("P/"));
+        List<Predicate<Person>> list = new ArrayList<>();
+        list.add(PREDICATE_SHOW_ALL_PERSONS);
+        ViewCommand viewCommand = new ViewCommand(list, null, Collections.singletonList("P/"));
         String res = viewCommand.execute(model).getFeedbackToUser();
         String expectedMessage = "Listed all persons!";
         assertEquals(res, expectedMessage);
@@ -41,7 +45,9 @@ public class ViewCommandTest {
         List<String> list = new ArrayList<>();
         list.add("L/");
         list.add("P/");
-        ViewCommand viewCommand = new ViewCommand(PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP, null, list);
+        List<Predicate<Person>> list2 = new ArrayList<>();
+        list2.add(PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP);
+        ViewCommand viewCommand = new ViewCommand(list2, null, list);
         String res = viewCommand.execute(model).getFeedbackToUser();
         String expectedMessage = String.format(
                 Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());

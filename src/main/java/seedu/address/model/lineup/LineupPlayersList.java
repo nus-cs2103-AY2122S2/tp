@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,6 +51,19 @@ public class LineupPlayersList {
     public boolean hasPlayer(Person player) {
         return playersList.contains(player);
     }
+
+    /**
+     * Checks the LineupPlayerList contains player having the same name
+     */
+    public boolean hasPlayer(Name name) {
+        for (Person person : playersList) {
+            if (person.isMatchName(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public String toString() {

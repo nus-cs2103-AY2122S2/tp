@@ -11,8 +11,9 @@ public class JerseyNumber implements Comparable<JerseyNumber> {
     public static final String MESSAGE_CONSTRAINTS = "Jersey numbers should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain numeric characters.\n"
-            + "2. Jersey number should be between 0 and 99 (inclusive).\n";
-    public static final String VALIDATION_REGEX = "^[0-9][0-9]?$|^99$";
+            + "2. Jersey number should be between 0 and 99 (inclusive).\n"
+            + "3. Single digit jersey number must be in single digit. E.g '1' and not '01'";
+    public static final String VALIDATION_REGEX = "^([0-9]|[1-9][0-9])$";
     public final String value;
 
     /**

@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WITHOUT_LINEUP;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -23,45 +28,63 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
             + ": To view player\n"
             + "Parameters: "
-            + PREFIX_PLAYER + "[NAME...]\n"
+            + PREFIX_PLAYER + "[NAME...] " + "[" + PREFIX_WEIGHT + "WEIGHT] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] " + "[" + PREFIX_TAG + "TAG]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PLAYER + "Kevin Lebron"
-            + " OR " + COMMAND_WORD + " " + PREFIX_PLAYER;
+            + " OR " + COMMAND_WORD + " " + PREFIX_PLAYER + " " + PREFIX_HEIGHT + "gte190";
 
     public static final String MESSAGE_USAGE_LINEUP = COMMAND_WORD
-            + ": To view lineup\n"
+            + ": To view lineup or players with lineup\n"
             + "Parameters: " + PREFIX_LINEUP + "[LINEUP NAME]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_LINEUP + "starting5"
             + " OR " + COMMAND_WORD + " " + PREFIX_LINEUP;
 
+    public static final String MESSAGE_USAGE_NO_LINEUP = COMMAND_WORD
+            + ": To view players without lineup\n"
+            + "Parameters: None\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_LINEUP + " " + PREFIX_WITHOUT_LINEUP;
+
     public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD
             + ": To view schedule\n"
             + "Parameters: " + PREFIX_SCHEDULE + "[SCHEDULE NAME]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals\n"
+            + "To view all schedules\n"
+            + "Parameters: " + PREFIX_ALL_SCHEDULE + "all\n"
+            + "OR" + PREFIX_ALL_SCHEDULE + "active\n"
+            + "To view schedules on a certain date\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "finals\n";
 
     public static final String MESSAGE_ACTIVE_SCHEDULE_USAGE = COMMAND_WORD
             + ": To view all schedules\n"
             + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "all\n"
             + "To view archived schedules\n"
             + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "archive\n";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information of players, lineups and schedules.\n"
             + MESSAGE_USAGE_PLAYER + "\n"
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;
+    public static final String MESSAGE_VIEW_DATE_USAGE = COMMAND_WORD + ": To view Schedule on a certain date\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "2022-03-10";
 
     private static String messageViewSuccess = "Listed all information!";
 
-    private final Predicate<Person> predicate;
+    private final List<Predicate<Person>> predicatePerson; // for person name or lineup name
     private final Predicate<Schedule> predicateSchedule;
     private final List<String> keywords;
 
     /**
      * Constructs a view command.
-     * @param predicate the view criteria.
+     * @param predicatePerson the view criteria.
      * @param keywords the keywords that define this type of view.
      */
-    public ViewCommand(Predicate<Person> predicate, Predicate<Schedule> predicateSchedule, List<String> keywords) {
+    public ViewCommand(List<Predicate<Person>> predicatePerson,
+                       Predicate<Schedule> predicateSchedule,
+                       List<String> keywords) {
         //requireNonNull(predicate);
-        this.predicate = predicate;
+        this.predicatePerson = predicatePerson;
         this.predicateSchedule = predicateSchedule;
         this.keywords = keywords;
     }
@@ -76,8 +99,12 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (predicate != null) {
-            model.updateFilteredPersonList(predicate);
+        if (predicatePerson != null) {
+            Predicate<Person> allPredicate = person -> true;
+            for (Predicate<Person> predicate : predicatePerson) {
+                allPredicate = allPredicate.and(predicate);
+            }
+            model.updateFilteredPersonList(allPredicate);
         }
         if (predicateSchedule != null) {
             model.updateFilteredScheduleList(predicateSchedule);
@@ -87,7 +114,7 @@ public class ViewCommand extends Command {
     }
 
     private void changeSuccessMessage(Model model) {
-        if (keywords.size() > 1 && (keywords.contains("L/") || keywords.contains("P/"))) {
+        if ((keywords.size() > 1 && keywords.contains("P/")) || keywords.contains("L/")) {
             messageViewSuccess = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else if (keywords.contains("S/")) {
@@ -109,6 +136,6 @@ public class ViewCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewCommand // instanceof handles nulls
-                && predicate.equals(((ViewCommand) other).predicate)); // state check
+                && predicatePerson.equals(((ViewCommand) other).predicatePerson)); // state check
     }
 }

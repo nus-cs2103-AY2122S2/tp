@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -67,6 +68,10 @@ public class Lineup {
 
     public boolean sameLineupName(LineupName otherLineupName) {
         return this.lineupName.equals(otherLineupName);
+    }
+
+    public boolean containsPlayer(Name name) {
+        return playersList.hasPlayer(name);
     }
 
     /**

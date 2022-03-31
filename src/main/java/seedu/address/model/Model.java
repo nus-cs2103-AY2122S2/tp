@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -22,6 +23,7 @@ public interface Model {
 
     /** {@code Predicate} that evaluates to true when a person has lineup name*/
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP = person -> !person.getLineupNames().isEmpty();
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP = person -> person.getLineupNames().isEmpty();
     Predicate<Schedule> PREDICATE_SHOW_ACTIVE_SCHEDULES = Schedule::isActive;
     Predicate<Schedule> PREDICATE_SHOW_ARCHIVED_SCHEDULES = schedule -> !schedule.isActive();
     //=========== MyGM (Start) =====================================================================
@@ -156,6 +158,11 @@ public interface Model {
      * TO BE FILLED
      */
     Lineup getLineup(seedu.address.model.lineup.LineupName targetName);
+
+    /**
+     * TO BE FILLED
+     */
+    void sortPersonsInMyGM(Comparator<Person> personComparator);
 
     /**
      * Refreshes the model.
