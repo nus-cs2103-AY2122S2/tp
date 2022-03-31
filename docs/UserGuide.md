@@ -7,10 +7,10 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 ## Motivation
 
-As a pet daycare owner, it takes a lot of effort to match pets to their names,
+As a pet daycare owner, it takes a lot of effort to remember pets by their names,
 as well as remember their owner's names, phone numbers and addresses. In addition, some pets may have special dietary requirements and
 vet appointments that you have to take note off. With WoofAreYou, these things can be taken care
-of easily, so that you may focus on the things that **truly** matter: taking good care of your pets and ensuring their safety.
+of easily, so that you may focus on the things that **truly** matter: taking good care of the pets and ensuring their safety.
 --------------------------------------------------------------------------------------------------------------------
 # WoofAreYou
 
