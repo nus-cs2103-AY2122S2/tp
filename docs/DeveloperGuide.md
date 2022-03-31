@@ -23,11 +23,11 @@ title: Developer Guide
     * [Find command feature](#find-command-feature)
       * [What it does](#what-it-does)
       * [Implementation](#implementation-1)
-      * [Design consideration](#design-considerations)
+      * [Design considerations](#design-considerations)
     * [Sort command feature](#sort-command-feature)
       * [What it does](#what-it-does-1)
       * [Implementation](#implementation-2)
-      * [Design consideration](#design-considerations-1)
+      * [Design considerations](#design-considerations-1)
     * [Import and Export feature](#import-and-export-feature)
       * [What it does](#what-it-does-2)
       * [Implementation](#implementation-3)
@@ -382,7 +382,7 @@ After the data is written into the new file, `ExportCommand` returns a `CommandR
 <img src="images/ImportSequenceDiagram.png">
 </div>
 
-### Design consideration:
+### Design considerations:
 Implementing the FileChooser library allows us to create a File Explorer GUI similar to the user's Operating System's native File Explorer GUI.
 
 ---
