@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
@@ -56,6 +57,9 @@ public class ViewCommand extends Command {
             + MESSAGE_USAGE_PLAYER + "\n"
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;
+    public static final String MESSAGE_VIEW_DATE_USAGE = COMMAND_WORD + ": To view Schedule on a certain date\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "2022-03-10";
 
     private static String messageViewSuccess = "Listed all information!";
 

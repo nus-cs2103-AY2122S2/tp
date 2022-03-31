@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_VIEW_DATE_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
@@ -10,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WITHOUT_LINEUP;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP;
@@ -17,6 +20,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +38,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.WeightContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleNameContainsKeywordsPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
+import seedu.address.model.schedule.ScheduleOnThisDatePredicate;
 
 
 /**
@@ -193,10 +200,15 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 return new ViewCommand(null, PREDICATE_SHOW_ACTIVE_SCHEDULES, prefixAndArgument);
             }
 
-            System.out.println(arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE));
+            boolean isViewAll = arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE)
+                    && !arePrefixesPresent(argMultimap, PREFIX_DATE);
+
+            boolean isViewDate = arePrefixesPresent(argMultimap, PREFIX_DATE)
+                    && !arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE);
+            System.out.println("TEST: " + argMultimap.getValue(PREFIX_DATE));
+
             // view all schedules
-            if (arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE)) {
-                System.out.println(argMultimap.getValue(PREFIX_ALL_SCHEDULE));
+            if (isViewAll) {
                 if (argMultimap.getValue(PREFIX_ALL_SCHEDULE).get().equals(ARCHIVED_SCHEDULES)) {
                     System.out.println("archived");
                     return new ViewCommand(null, PREDICATE_SHOW_ARCHIVED_SCHEDULES, prefixAndArgument);
@@ -207,6 +219,22 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 } else {
                     throw new ParseException(String.format(MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT,
                             ViewCommand.MESSAGE_ACTIVE_SCHEDULE_USAGE));
+                }
+            }
+
+            System.out.println(isViewDate);
+            System.out.println(arePrefixesPresent(argMultimap, PREFIX_DATE));
+
+            if (isViewDate) {
+                String des = argMultimap.getValue(PREFIX_DATE).get();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                System.out.println("Description is " + des);
+                try {
+                    LocalDate date = LocalDate.parse(des, formatter);
+                    return new ViewCommand(null, new ScheduleOnThisDatePredicate(date), prefixAndArgument);
+                } catch (DateTimeParseException e) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_VIEW_DATE_FORMAT,
+                            ViewCommand.MESSAGE_VIEW_DATE_USAGE));
                 }
             }
 
