@@ -1,3 +1,11 @@
+@font-face {
+src: url('../fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+src: url('../fonts/Montserrat-SemiBold.ttf');
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
@@ -5,28 +13,28 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Montserrat";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Montserrat";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Montserrat";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-family: "Montserrat";
     -fx-prompt-text-fill: #383838;
 }
 
@@ -67,7 +75,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Montserrat";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -106,7 +114,7 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Montserrat";
+    -fx-font-family: 'Montserrat SemiBold';
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
@@ -151,7 +159,7 @@
 }
 
 .status-bar .label {
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Montserrat";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
