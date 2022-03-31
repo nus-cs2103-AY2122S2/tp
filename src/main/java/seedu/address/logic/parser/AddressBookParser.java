@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.AppointmentBuyerCommand;
 import seedu.address.logic.commands.AppointmentSellerCommand;
 import seedu.address.logic.commands.ClearBuyerCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearSellerCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
@@ -78,8 +79,9 @@ public class AddressBookParser {
 
         case DeleteSellerCommand.COMMAND_WORD:
             return new DeleteSellerCommandParser().parse(arguments);
-        //case ClearCommand.COMMAND_WORD:
-        //    return new ClearCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         case ClearBuyerCommand.COMMAND_WORD:
             return new ClearBuyerCommand();
