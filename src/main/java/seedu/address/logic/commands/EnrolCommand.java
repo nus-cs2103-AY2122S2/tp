@@ -84,12 +84,12 @@ public class EnrolCommand extends Command {
                     newCg.getClassGroupId(), newCg.getClassGroupType());
         } else {
             result = String.format(STUDENT_EXISTS_CG, result);
+            if (notEnrolled != students.size()) {
+                result += String.format(MESSAGE_ENROL_OTHERS,
+                        newCg.getClassGroupId(), newCg.getClassGroupType());
+            }
         }
 
-        if (notEnrolled != students.size()) {
-            result += String.format(MESSAGE_ENROL_OTHERS,
-                    newCg.getClassGroupId(), newCg.getClassGroupType());
-        }
         model.setEntity(cgToEdit, newCg);
         model.setEntity(moduleToEdit, newModule);
         return new CommandResult(result);

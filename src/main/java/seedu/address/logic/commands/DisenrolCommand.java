@@ -92,11 +92,10 @@ public class DisenrolCommand extends Command {
                     newCg.getClassGroupId(), newCg.getClassGroupType());
         } else {
             result = String.format(NONEXISTENT_STUDENT_CG, result);
-        }
-
-        if (notEnrolled != students.size()) {
-            result += String.format(MESSAGE_DISENROL_OTHERS,
-                    newCg.getClassGroupId(), newCg.getClassGroupType());
+            if (notEnrolled != students.size()) {
+                result += String.format(MESSAGE_DISENROL_OTHERS,
+                        newCg.getClassGroupId(), newCg.getClassGroupType());
+            }
         }
 
         model.setEntity(moduleToEdit, newModule);
