@@ -52,9 +52,8 @@ public class EditScheduleCommand extends ScheduleCommand {
         requireNonNull(model);
         List<Interview> lastShownList = model.getFilteredInterviewSchedule();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM));
+            throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_DISPLAYED));
         }
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
         }
@@ -64,21 +63,17 @@ public class EditScheduleCommand extends ScheduleCommand {
         if (interviewToEdit.isExpired()) {
             throw new CommandException(MESSAGE_EXPIRED_INTERVIEW);
         }
-
         Interview editedInterview = createEditedInterview(interviewToEdit, newDateTime);
-
-        if (model.hasConflictingInterview(editedInterview)) {
-            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
-        }
-
-        if (!editedInterview.hasMatchingAvailability()) {
-            throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
-        }
 
         if (!editedInterview.isDuringOfficeHour()) {
             throw new CommandException(MESSAGE_NOT_OFFICE_HOUR);
         }
-
+        if (!editedInterview.hasMatchingAvailability()) {
+            throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        }
+        if (model.hasConflictingInterview(editedInterview)) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        }
         model.setInterview(interviewToEdit, editedInterview);
         model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
