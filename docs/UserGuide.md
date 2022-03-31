@@ -386,7 +386,7 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 **Format:** `import`
 
 **Example & Output:** `import`
-- Step 1. Navigate to the Trackermon data you want to import using your OS' native GUI!
+- Step 1. Navigate to the Trackermon data you want to import using your OS' native [GUI](#glossary)!
 - Step 2. Select the file and click "Open"
   - Do note that only JSON files can be imported!
 - Step 3. Trackermon will import the selected file and display the imported show list!
@@ -406,9 +406,9 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 **Format:** `export`
 
 **Example & Output:** `export`
-- Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native GUI!
+- Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native [GUI](#glossary)!
 - Step 2. Click "Save"
-- Step 3. Trackermon will export the selected file to your selected location. It's that easy!
+- Step 3. Trackermon will export the Trackermon data as a JSON file to your selected location. It's that easy!
   - If there was an error exporting the file, Trackermon will display an error message!
 
 <img src="images/Export.png">
