@@ -448,10 +448,10 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a…​                       | I want to…​                                            | So that I can…​                                                |
+| Priority | As a…​                    | I want to…​                                         | So that I can…​                                             |
 |----------|------------------------------|--------------------------------------------------------|----------------------------------------------------------------|
 | `* * *`  | user                         | add shows                                              | add new shows into the list                                    |
-| `* * *`  | user                         | delete shows  		                                       | remove wrong entries in the list                               |
+| `* * *`  | user                         | delete shows  		                                   | remove wrong entries in the list                               |
 | `* * *`  | user                         | find a show                                            | search whether a specific show is in the list                  |
 | `* * *`  | user                         | list out all of my shows                               | see the details of all my shows in the list                    |
 | `* * *`  | user                         | edit a show from the list                              | change the name or status or tag of my show in the list        |
@@ -735,16 +735,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Trackermon shows an error message to user, indicating the import has failed.
 
       Use case ends.
-
-* 5a. Chosen file is not a JSON file.
-
-    * 5a1. Trackermon shows a message informing the user that only JSON files can be imported.
-
-      Use case ends.
     
-* 5b. Chosen file is a corrupted JSON file.
+* 5a. Chosen file is a corrupted JSON file.
 
-    * 5b1. Trackermon shows a message informing the user that the chosen file may be corrupted.
+    * 5a1. Trackermon shows a message informing the user that the chosen file may be corrupted.
 
       Use case ends.
 
