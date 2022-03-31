@@ -17,7 +17,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-public class SortCommand extends Command {
+public class SortCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -51,7 +51,8 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
         model.sortPerson(personComparator);
         return new CommandResult(String.format(MESSAGE_SUCCESS, successField));

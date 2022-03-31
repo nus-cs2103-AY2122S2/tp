@@ -25,7 +25,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
 
-public class AddModuleCommand extends Command {
+public class AddModuleCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "addmodule";
 
@@ -65,7 +65,8 @@ public class AddModuleCommand extends Command {
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 

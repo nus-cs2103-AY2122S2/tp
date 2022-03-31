@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class ClearModulesCommand extends Command {
+public class ClearModulesCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "clearmodules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -37,7 +37,7 @@ public class ClearModulesCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
