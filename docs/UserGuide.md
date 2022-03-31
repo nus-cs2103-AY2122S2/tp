@@ -137,8 +137,8 @@ Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION
 * Phone Number, email and matriculation number must be **unique** to each student.
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
 * Tracey will acknowledge that the student has been added.
-* Faculty and covid status need to be an pre-defined constant specific to the list defined below (refer to Pre-defined constants).
-* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and you will have to input the details for the keyword again.
+* Values for faculty, covid status and block need to be pre-defined constants in the table below (refer to Table 2 below or in the <a href='#glossary'>glossary</a>).
+* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Table 2, there will be an error and you will have to input the details for the keyword again.
 
 Examples of usage:
 * `add n/Melvin f/SOC cs/ Negative`
@@ -149,20 +149,22 @@ Examples of usage:
 |     cs/Negative      | cs/Close-contact  | 
 |        f/SoC         |      f/SooC       | 
 
-*Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3.*
+*Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in Table 2. 
 
-| **Prefix** | **Meaning** |                                                 **Pre-defined constants**                                                  |
-|:-------:|:-----------:|:--------------------------------------------------------------------------------------------------------------------------:|
-|    `n/`     |       Name        |                                                                                                                            |
-|    `p/`     |      Phone Number       |                                                                                                                            |
-|    `e/`     |       Email        |                                                                                                                            |
-|    `a/`     |       Address       |                                                                                                                            |
-|    `f/`     |      Faculty       |             `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`              |
-|    `mc/`     |      Matriculation Number       |                                                                                                                            |
-|    `cs/`     |      Covid Status       |                                               `Positive`, `Negative`, `HRN`                                                |
-|     `t/`    |      Optional tag(s)   |       No restrictions                                                                                       |
+*Table 2: List of prefixes, fields, pre-defined constants and constraints.*
 
-*Figure 3: Table showing list of possible prefixes and the Pre-defined constants*
+| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                          | Constraints |
+|:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:--------------------:|
+| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces. |
+| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `a/`  | Address              | None                                                                                                  | Cannot be blank. |
+| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS` | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
+| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `t/`  | Optional tag(s)      | None                                                                                                  | No constraints |
+
 
 As described in Figure 3, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
 In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
@@ -179,8 +181,9 @@ Format: `edit INDEX n/NAME ...`
 * To edit a student's details, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
 * The correct prefixes must be used in order for Tracey to know what you intend to edit.
+* Refer to Table 2 in the <a href='#glossary'>glossary</a> for the correct format and pre-defined constants to be used for each input field.
 * Existing information of the student will be replaced with the newly inputted values.
-* When editing predefined constants that are tags, all existing tags will be replaced with the newly inputted tag(s). <br>
+* When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
 * You can remove all tags of the student by typing `t/` without specifying any details after it.
 
@@ -261,6 +264,7 @@ Filter students based on faculties, health statuses and/or blocks.
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
 * Returns a list of students that fit the criteria given by the user in the form of pre-defined constants in the categories of faculty, covid status and block.
+* Refer to Table 2 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
 * The search is case-insensitive. e.g `Positive` will match `positive`.
 * The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
 * At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
