@@ -99,6 +99,14 @@ public class TaModule implements Entity {
     }
 
     /**
+     * Returns true if module has the same moduleCode and academicYear specified.
+     */
+    public boolean isSameModule(ModuleCode moduleCode, AcademicYear academicYear) {
+        return moduleCode.equals(getModuleCode())
+                && academicYear.equals(getAcademicYear());
+    }
+
+    /**
      * Returns a String representation of the module code and academic year.
      * These are the minimum fields required to uniquely represent a module class.
      */

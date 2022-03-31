@@ -23,13 +23,12 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedClassGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ClassGroup's %s field is missing!";
-    public static final String NONEXISTENT_MODULE = "Module does not exist!";
-    public static final String NONEXISTENT_STUDENT = "Student does not exist!";
 
     private final String classGroupId;
     private final String classGroupType;
-    private final JsonAdaptedTaModule module;
-    private final List<JsonAdaptedStudent> classGroupStudents = new ArrayList<>();
+    private final String moduleCode;
+    private final String academicYear;
+    private final List<String> classGroupStudentIds = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
@@ -38,14 +37,16 @@ class JsonAdaptedClassGroup {
     @JsonCreator
     public JsonAdaptedClassGroup(@JsonProperty("classGroupId") String classGroupId,
             @JsonProperty("classGroupType") String classGroupType,
-            @JsonProperty("module") JsonAdaptedTaModule module,
-            @JsonProperty("classGroupStudents") List<JsonAdaptedStudent> classGroupStudents,
+            @JsonProperty("moduleCode") String moduleCode,
+            @JsonProperty("academicYear") String academicYear,
+            @JsonProperty("classGroupStudentIds") List<String> classGroupStudentIds,
             @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
-        this.module = module;
-        if (!classGroupStudents.isEmpty()) {
-            this.classGroupStudents.addAll(classGroupStudents);
+        this.moduleCode = moduleCode;
+        this.academicYear = academicYear;
+        if (!classGroupStudentIds.isEmpty()) {
+            this.classGroupStudentIds.addAll(classGroupStudentIds);
         }
         if (!lessons.isEmpty()) {
             this.lessons.addAll(lessons);
@@ -58,9 +59,10 @@ class JsonAdaptedClassGroup {
     public JsonAdaptedClassGroup(ClassGroup source) {
         classGroupId = source.getClassGroupId().value;
         classGroupType = source.getClassGroupType().toString();
-        module = new JsonAdaptedTaModule(source.getModule());
-        classGroupStudents.addAll(source.getStudents().stream()
-                .map(JsonAdaptedStudent::new)
+        moduleCode = source.getModule().getModuleCode().value;
+        academicYear = source.getModule().getAcademicYear().value;
+        classGroupStudentIds.addAll(source.getStudents().stream()
+                .map(student -> student.getStudentId().value)
                 .collect(Collectors.toList()));
         lessons.addAll(source.getLessons().stream()
                 .map(JsonAdaptedLesson::new)
@@ -105,21 +107,12 @@ class JsonAdaptedClassGroup {
         default:
             throw new IllegalValueException("Invalid value for ClassGroupType");
         }
-        if (module == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
-        }
-        final TaModule modelModule = module.toModelType(studentList);
-        if (!taModuleList.contains(modelModule)) {
-            throw new IllegalValueException(NONEXISTENT_MODULE);
-        }
+        final TaModule modelModule = StorageUtil.getModuleByCodeAndAcadYear(taModuleList, moduleCode, academicYear,
+                MISSING_FIELD_MESSAGE_FORMAT);
 
         final UniqueStudentList modelStudents = new UniqueStudentList();
-        for (JsonAdaptedStudent s : classGroupStudents) {
-            Student sObj = s.toModelType();
-            if (!studentList.contains(sObj)) {
-                throw new IllegalValueException(NONEXISTENT_STUDENT);
-            }
+        for (String s : classGroupStudentIds) {
+            Student sObj = StorageUtil.getStudentByStudentId(studentList, s, MISSING_FIELD_MESSAGE_FORMAT);
             modelStudents.add(sObj);
         }
 
