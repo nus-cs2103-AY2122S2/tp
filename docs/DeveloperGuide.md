@@ -462,9 +462,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | long time user               | sort the list of shows                                 | view the list in an organised manner                           |
 | `* * `   | user with multiple computers | import or export the show data easily                  | keep updated copies of the show data                           |
 | `* * `   | indecisive user              | get a suggestion                                       | easily decide on what show to watch                            |
-| `* * `   | user                         | comment on shows                                       | record down my opinions about a show                           |
-| `* * `   | user                         | rate shows                                             | keep track on whether a show is good or bad                    |
-| `* * `   | user                         | tag shows                                              | keep track on what genre the show belongs to                   |
+| `* * `   | user                         | comment on shows                                       | record my opinions about a show                           |
+| `* * `   | user                         | rate shows                                             | keep track of whether a show is good or bad                    |
+| `* * `   | user                         | tag shows                                              | keep track of what genre the show belongs to                   |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
