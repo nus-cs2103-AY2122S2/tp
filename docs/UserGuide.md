@@ -378,11 +378,12 @@ Sort can help reorder the list!!
 
 <div markdown="span" class="alert alert-warning">
 
-:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)<br>
-* Use `n/` if you want to sort by name 
-* Use `s/` if you want to sort by status 
-* Use `t/` if you want to sort by tag 
-* Use `r/` if you want to sort by rating 
+:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure).<br>
+
+* Use `n/` if you want to sort by name.
+* Use `s/` if you want to sort by status.
+* Use `t/` if you want to sort by tag.
+* Use `r/` if you want to sort by rating.
 * For the above prefixes, you have to specify the `ORDER` right after the prefix.
 * `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending!
 * If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
