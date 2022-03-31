@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assessment.exceptions.AssessmentNotFoundException;
 import seedu.address.model.assessment.exceptions.DuplicateAssessmentException;
-import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.tamodule.TaModule;
 
 /**
@@ -84,10 +83,6 @@ public class UniqueAssessmentList implements Iterable<Assessment> {
         }
     }
 
-    public void setAssessments(UniqueAssessmentList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
 
     /**
      * Returns all the assessments of a TA module
@@ -100,6 +95,11 @@ public class UniqueAssessmentList implements Iterable<Assessment> {
             }
         }
         return lst;
+    }
+
+    public void setAssessments(UniqueAssessmentList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
