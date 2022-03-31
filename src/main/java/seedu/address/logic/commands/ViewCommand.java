@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.interview.predicate.AllWithinTimePeriodPredicate;
 import seedu.address.model.interview.predicate.WithinTimePeriodPredicate;
 
 /**
@@ -20,8 +22,6 @@ public class ViewCommand extends Command {
             + "Note: Allowable time periods include `all` (i.e. all scheduled interviews in the system),"
             + " `today` (i.e. same day), `week` (i.e. next 7 days), month (i.e. period till the next month).";
 
-    public static final String MESSAGE_NO_INTERVIEWS_IN_SYSTEM = "No interviews scheduled yet!";
-
     private final WithinTimePeriodPredicate predicate;
 
     public ViewCommand(WithinTimePeriodPredicate predicate) {
@@ -30,8 +30,13 @@ public class ViewCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (predicate instanceof AllWithinTimePeriodPredicate && model.getInterviewSchedule().getInterviewList().size() == 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM));
+        }
+
         model.updateFilteredInterviewSchedule(predicate);
         return new CommandResult(String
                 .format(Messages.MESSAGE_INTERVIEWS_LISTED_OVERVIEW, model.getFilteredInterviewSchedule().size()));

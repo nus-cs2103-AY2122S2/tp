@@ -24,7 +24,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SORTKEY);
 
-        // throws exception if no sort key is specified
+        // throws exception if no sort attribute field is specified
         if (!arePrefixesPresent(argMultimap, PREFIX_SORTKEY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
