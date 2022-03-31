@@ -276,6 +276,7 @@ You can choose to unfavourite by making this entry:
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite) command.
 
 [Back to Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 # Features <a id="features"></a>
 
