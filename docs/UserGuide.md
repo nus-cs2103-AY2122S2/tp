@@ -358,6 +358,19 @@ Examples:
 | `view week`     | returns all upcoming scheduled interviews within the next 7 days                 |
 | `view month`    | returns all upcoming scheduled interviews within the next month                  |
 
+### Clearing interview schedule `schedule clear`
+
+Clears the list of interviews in the schedule.
+
+Format: `schedule clear`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** The interview status of candidates who have an
+upcoming interview in the schedule will be reset from `Scheduled` to `Not Scheduled`. However, if a candidate has
+an interview which has just expired (and TAlent Assistant™ has not been refreshed) upon the execution of the command,
+his or her interview status will be updated to `Completed`.
+
 ## Miscellaneous commands
 
 ### Clearing all entries : `clear`
@@ -386,7 +399,14 @@ TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/tale
 
 :exclamation: **Caution:**
 
-If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid*, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
+
+When making changes to a candidate's details in talentassistant.json, the corresponding candidate's details in interviewlist.json (if applicable)
+must also be updated. Likewise, if an interview is deleted from interviewlist.json, the interview status of the candidate should be updated according
+to your desired outcome.
+
+*If either one of the JSON files are missing, or if the JSON files are edited to contain duplicate candidates
+and/or (conflicting) interviews.
 
 </div>
 
