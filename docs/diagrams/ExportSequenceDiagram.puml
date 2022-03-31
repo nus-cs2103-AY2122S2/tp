@@ -3,6 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TrackermonParser" as TrackermonParser LOGIC_COLOR
 participant ":ExportCommand" as ExportCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 
@@ -10,12 +11,19 @@ box Storage STORAGE_COLOR_T1
 participant "jfm:JsonFileManager" as JsonFileManager STORAGE_COLOR
 box
 
+-> LogicManager : execute("export")
+activate LogicManager
+
+LogicManager -> TrackermonParser : parseCommand("export")
+activate TrackermonParser
+
 create ExportCommand
-LogicManager -> ExportCommand : parser.parseCommand(commandText)
+TrackermonParser -> ExportCommand :
 activate ExportCommand
 
-ExportCommand --> LogicManager
+ExportCommand --> TrackermonParser
 deactivate ExportCommand
+deactivate TrackermonParser
 
 LogicManager -> ExportCommand : execute(model)
 activate ExportCommand
@@ -34,13 +42,16 @@ JsonFileManager --> ExportCommand : result
 deactivate JsonFileManager
 
 create CommandResult
-ExportCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS, false, false, true)
+ExportCommand -> CommandResult :
 activate CommandResult
 
 CommandResult --> ExportCommand
 deactivate CommandResult
 
-ExportCommand --> LogicManager : commandResult
+ExportCommand --> LogicManager : result
 deactivate ExportCommand
+
+<-- LogicManager
+deactivate LogicManager
 
 @enduml
