@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
@@ -28,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Lesson> filteredLessons;
     private Student selectedStudent;
     private Lesson selectedLesson;
+    private InfoPanelTypes currentInfoPanel;
 
     /**
      * Initializes a ModelManager with the given studentBook and userPrefs.
@@ -251,6 +253,7 @@ public class ModelManager implements Model {
 
     public void setSelectedStudent(Student student) {
         selectedStudent = student;
+        currentInfoPanel = InfoPanelTypes.STUDENT;
     }
 
     public Student getSelectedStudent() {
@@ -259,10 +262,22 @@ public class ModelManager implements Model {
 
     public void setSelectedLesson(Lesson lesson) {
         selectedLesson = lesson;
+        currentInfoPanel = InfoPanelTypes.LESSON;
     }
 
     public Lesson getSelectedLesson() {
         return selectedLesson;
     }
 
+    public boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson) {
+        boolean isLessonInfoPanel = currentInfoPanel == InfoPanelTypes.LESSON;
+        boolean isSameLesson = selectedLesson.equals(deletedLesson);
+        return isLessonInfoPanel && isSameLesson;
+    }
+
+    public boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent) {
+        boolean isStudentInfoPanel = currentInfoPanel == InfoPanelTypes.STUDENT;
+        boolean isSameStudent = selectedStudent.equals(deletedStudent);
+        return isStudentInfoPanel && isSameStudent;
+    }
 }
