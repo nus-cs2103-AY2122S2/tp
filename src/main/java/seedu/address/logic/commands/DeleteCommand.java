@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1"
             + " or " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z\n";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student:\n%1$s";
     public static final String MESSAGE_DELETE_MULTIPLE_PERSONS_SUCCESS = "%s students deleted";
 
     private final Index[] targetIndices;
