@@ -64,8 +64,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
         boolean hasLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP); // L/
-        boolean hasSSlash = arePrefixesPresent(argMultimap, PREFIX_SCHEDULE); // P/
+        boolean hasSSlash = arePrefixesPresent(argMultimap, PREFIX_SCHEDULE); // S/
         boolean hasBigNSlash = arePrefixesPresent(argMultimap, PREFIX_WITHOUT_LINEUP); // N/
+
 
         //impossible scenario (brute force)
         boolean hasLSlashAndPSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP, PREFIX_PLAYER); // L/ P/

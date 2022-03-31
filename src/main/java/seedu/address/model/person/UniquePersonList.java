@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private final PersonComparator comparator = new PersonComparator();
+    private Comparator<Person> personComparator = null;
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -49,6 +51,11 @@ public class UniquePersonList implements Iterable<Person> {
      */
     private void sort() {
         this.internalList.sort(comparator);
+    }
+
+    public void sortByCriteria(Comparator<Person> personComparator) {
+        this.personComparator = personComparator;
+        FXCollections.sort(internalList, personComparator);
     }
 
     /**
@@ -80,6 +87,9 @@ public class UniquePersonList implements Iterable<Person> {
         List<Person> playersCopy = new ArrayList<>(internalList);
         internalList.setAll(playersCopy);
         sort();
+        if (personComparator != null) {
+            sortByCriteria(personComparator);
+        }
     }
 
     /**
