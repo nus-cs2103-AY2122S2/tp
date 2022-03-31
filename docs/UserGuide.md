@@ -110,8 +110,8 @@ Adds a student contact information to ArchDuke. `add` must be followed by the st
 **:information_source: Note:**<br>
 
 A student contact can only be added if it **has yet to exist** in ArchDuke. The student contact 
-is uniquely identified by his `NAME` with **no regards to case sensitivity**. E.g. `John Doe` would be the 
-same person as `john doe`
+is uniquely identified by his `PHONE_NUMER` and or `EMAIL` with **no regards to case sensitivity**. E.g. `example@u.nus.edu` would be the 
+same person as `Example@u.nus.edu` as in the emails are usually not case-sensitive.
 
 </div>
 
