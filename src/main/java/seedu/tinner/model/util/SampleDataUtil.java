@@ -1,6 +1,8 @@
 package seedu.tinner.model.util;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,43 +27,49 @@ import seedu.tinner.model.role.Stipend;
  */
 public class SampleDataUtil {
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final LocalDate TODAY = LocalDate.now();
+
     private static final Role SAMPLE_ROLE_1 = new Role(
             new seedu.tinner.model.role.RoleName("Backend engineer"),
-            new Status("pending"), new ReminderDate("27-02-2022 18:00"),
-            new Description("Backend engineer"), new Stipend("1000"));
+            new Status("interview and assessments"), new ReminderDate(TODAY.plusDays(2).format(FORMATTER) + " 18:00"),
+            new Description("Backend engineer"), new Stipend("1200"));
     private static final Role SAMPLE_ROLE_2 = new Role(
             new seedu.tinner.model.role.RoleName("Frontend engineer"),
-            new Status("pending"), new ReminderDate("28-02-2022 22:00"),
-            new Description("Frontend engineer"), new Stipend("1000"));
+            new Status("pending"), new ReminderDate(TODAY.plusDays(3).format(FORMATTER) + " 22:00"),
+            new Description("Frontend engineer"), new Stipend("1500"));
+    private static final Role SAMPLE_ROLE_3 = new Role(
+            new seedu.tinner.model.role.RoleName("Data analyst"),
+            new Status("applying"), new ReminderDate(TODAY.plusDays(5).format(FORMATTER) + " 10:00"),
+            new Description("Data analyst"), new Stipend("1400"));
 
     private static final RoleList SAMPLE_ROLES_1 = new RoleList();
     private static final RoleList SAMPLE_ROLES_2 = new RoleList();
     private static final RoleList SAMPLE_ROLES_3 = new RoleList();
+    private static final RoleList SAMPLE_ROLES_4 = new RoleList();
 
     public static Company[] getSampleCompanies() {
         SAMPLE_ROLES_1.setRoles(Arrays.asList(SAMPLE_ROLE_1));
         SAMPLE_ROLES_2.setRoles(Arrays.asList(SAMPLE_ROLE_2));
         SAMPLE_ROLES_3.setRoles(Arrays.asList(SAMPLE_ROLE_1, SAMPLE_ROLE_2));
+        SAMPLE_ROLES_4.setRoles(Arrays.asList(SAMPLE_ROLE_2, SAMPLE_ROLE_3));
 
         return new Company[]{
-                new Company(new CompanyName("Meta"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                new Company(new CompanyName("Meta"), new Phone("87438807"), new Email("hr@meta.com"),
                         new Address("Blk 30 Geylang Street 29, #06-40"), SAMPLE_ROLES_1,
                         new FavouriteStatus(false)),
-                new Company(new CompanyName("Amazon"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), SAMPLE_ROLES_1,
+                new Company(new CompanyName("Amazon"), new Phone("99272758"), new Email("recruitment@amazon.com"),
+                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), SAMPLE_ROLES_2,
                         new FavouriteStatus(false)),
-                new Company(new CompanyName("Netflix"), new Phone("93210283"), new Email("charlotte@example.com"),
+                new Company(new CompanyName("Netflix"), new Phone("93210283"), new Email("help@netflix.com"),
                         new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), SAMPLE_ROLES_2,
                         new FavouriteStatus(false)),
-                new Company(new CompanyName("Google"), new Phone("91031282"), new Email("lidavid@example.com"),
-                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), SAMPLE_ROLES_2,
+                new Company(new CompanyName("Google"), new Phone("91031282"), new Email("hr@google.com"),
+                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), SAMPLE_ROLES_3,
                         new FavouriteStatus(false)),
-                new Company(new CompanyName("Apple"), new Phone("92492021"), new Email("irfan@example.com"),
-                        new Address("Blk 47 Tampines Street 20, #17-35"), SAMPLE_ROLES_3,
+                new Company(new CompanyName("Apple"), new Phone("92492021"), new Email("careers@apple.com"),
+                        new Address("Blk 47 Tampines Street 20, #17-35"), SAMPLE_ROLES_4,
                         new FavouriteStatus(false)),
-                new Company(new CompanyName("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                        new Address("Blk 45 Aljunied Street 85, #11-31"), SAMPLE_ROLES_3,
-                        new FavouriteStatus(false))
         };
     }
 

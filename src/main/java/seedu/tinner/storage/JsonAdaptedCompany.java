@@ -15,8 +15,6 @@ import seedu.tinner.model.company.Email;
 import seedu.tinner.model.company.FavouriteStatus;
 import seedu.tinner.model.company.Phone;
 import seedu.tinner.model.company.RoleList;
-import seedu.tinner.model.reminder.Reminder;
-import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.Role;
 
 /**
@@ -61,7 +59,7 @@ class JsonAdaptedCompany {
         address = source.getAddress().value;
         favouriteStatus = source.getFavouriteStatus().value.toString();
         roles.addAll(source.getRoleManager().getRoleList()
-                .getRoles().stream()
+                .getRoleList().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
     }
@@ -118,16 +116,10 @@ class JsonAdaptedCompany {
         final FavouriteStatus modelFavouriteStatus = new FavouriteStatus(Boolean.parseBoolean(favouriteStatus));
 
         final RoleList companyRoles = new RoleList();
-        final UniqueReminderList reminderList = UniqueReminderList.getInstance();
 
         for (JsonAdaptedRole role : roles) {
             Role currRole = role.toModelType();
             companyRoles.addRole(currRole);
-            if (currRole.getReminderDate().isWithinReminderWindow()) {
-                Reminder reminder =
-                        new Reminder(modelName, currRole.getName(), currRole.getStatus(), currRole.getReminderDate());
-                UniqueReminderList.getInstance().add(reminder);
-            }
         }
 
         final RoleList modelRoles = new RoleList(companyRoles);

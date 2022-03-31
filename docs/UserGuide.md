@@ -11,15 +11,22 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 2. **Reminds** important deadlines so that you will not miss anything about your application.
 3. **Reviews** the process and take down notes so that you can ace your next application.
 
-# Table of Contents
+The User Guide's primary goal is to assist the user in learning how to use the application Tinner.
+This guide covers everything from what the user sees, how Tinner can help the user, and even its limitations.
 
-  * [Quick start](#quick-start)
+# Table of Contents <a id="toc"></a>
+
+  * [Quick Start](#quick-start)
   * [About](#about)  
     * [Outline of this Guide](#outline)
     * [Navigating within Tinner](#navigation)
     * [Technical Terminologies](#technical-terminologies)
     * [General Symbols](#general-symbols)
     * [Command Format](#command-format)
+    * [Command Restrictions](#command-restrictions)
+      * [Company Restrictions](#c-company-restrictions)
+      * [Role Restrictions](#c-role-restrictions)
+    * [Demo Use Cases] (#demos)
   * [Features](#features)
     * [Modifying Companies](#c-modifying-companies)
       * [Adding a company: `addCompany`](#c-add-c)
@@ -40,12 +47,13 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
       * [Clearing the company list: `clear`](#c-clear)
       * [Viewing help: `help`](#c-help)
       * [Exiting Tinner: `exit`](#c-exit)
-  * [Frequently Asked Questions (FAQs)](#faq) 
+      * [Saving the data](#c-saving-the-data)
+  * [Frequently Asked Questions (FAQs)](#faq)
   * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start <a id="quick-start"></a>
+# Quick Start <a id="quick-start"></a>
 
 1. Ensure you have Java 11 or above installed in your computer.
 2. Download the latest tinner.jar.
@@ -68,15 +76,54 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 
 6. Refer to the [Features](#features) below for details of each command.
 
+[Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 # About <a id="about"></a>
 
-This section helps you to understand the Graphical User Interface (GUI), commonly used technical terminologies, general symbols and information about the command format. 
-
 ## Outline of this Guide <a id="outline"></a>
 
+This subsection helps you to understand the [Graphical User Interface (GUI)](#navigation), commonly used [technical terminologies](#technical-terminologies) and [general symbols](#general-symbols) to help you better understand the User Guide.
+
+Following this would be the [Features](#features), detailing the capabilities of Tinner and how to use them. This section can be either read from the start to bottom or by nicely divided segments of Tinner's repertoire in the [Table of Contents](#toc) and learn everything you can do with that specific area.
+
+[Back to Table of Contents](#toc)
+
 ## Navigating within Tinner <a id="navigation"></a>
+The GUI of Tinner can be broken down into different segments with different purposes. This section aims to help users who are confused by the GUI get a better understanding of its use and get more comfortable using the application.
+### Main Window
+![Main Window](images/MainWindow.png)
+
+|      Component      | Function                                                                                                                                                                  |
+|:-------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       Tab Bar       | Shortcuts for you to quickly exit Tinner or view help                                                                                                                     |
+|     Command Box     | Text field for users to key in their commands                                                                                                                             |
+|    Response Box     | Tinner's response to user's commands. <br/>If the command was successful, Tinner would respond with what it did. Else it tells you what went wrong and any tips to fix it |
+| Company Result List | List out all the companies tracked by Tinner, or those that you specifically want to find                                                                                 |
+|  Role Result List   | List out all the roles in this company tracked by Tinner, or those that you specifically want to find                                                                     |
+|      Role Tags      | A quick and easy visual aid to check an application's progress, more on this [below](#tags)                                                                               |
+|     Status Bar      | Shows the file path to which your data is being saved at                                                                                                                  |
+
+[Back to Table of Contents](#toc)
+
+### Role Tags <a id="tags"></a>
+The role tags are colour coded in order to make use of the GUI to better inform you how far along the internship application process for each role is at a glance.
+
+![Role Tags](images/RoleTags.png)
+
+[Back to Table of Contents](#toc)
+
+### Reminder Window
+
+![Reminder Window](images/ReminderWindow.png)
+
+|   Component   | Function                                                                                                             |
+|:-------------:|----------------------------------------------------------------------------------------------------------------------|
+| Reminder List | List of all reminders within the reminder window (defaults to 7 days) in ascending order                             |
+|   Date Card   | With the date denoted at the top, all the reminders within this date card have their date of reminder on the same day |
+| Reminder Card | Describes the Company name and Role name to be reminded of as well as its status and full reminder date and time     |
+
+[Back to Table of Contents](#toc)
 
 ## Technical Terminologies <a id="technical-terminologies"></a>
 
@@ -84,6 +131,8 @@ This section helps you to understand the Graphical User Interface (GUI), commonl
 |:----------:|-------------|
 | Command word| Commands are invoked based on the command word, which is the first word in every user command. The command word is indicated by `COMMAND_WORD` in the guide.|
 |Parameter|User input supplied to a command|
+
+[Back to Table of Contents](#toc)
 
 ## General Symbols <a id="general-symbols"></a>
 
@@ -93,6 +142,8 @@ This section helps you to understand the Graphical User Interface (GUI), commonl
 |:bulb:|Useful tip|
 |:warning:|Warning|
 |:information_source:|Important piece of information |
+
+[Back to Table of Contents](#toc)
 
 ## Command Format <a id="command-format"></a>
 
@@ -115,7 +166,43 @@ The following points explain the format of a command.
 
 * Duplicate company names are not allowed.<br>
   e.g. if there exists a company named `meta`, adding another company with the name `meta` is not allowed. 
+
+[Back to Table of Contents](#toc)
+
+## Command Restrictions <a id="command-restrictions"></a>
+
+### Company Restrictions <a id="c-company-restrictions"></a>
+  * The `COMPANY_NAME` should only contain alphanumeric characters and spaces, and it should not be blank.
+  * The `PHONE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+  * The `EMAIL` should be of the format local-part@domain and adhere to the following constraints:
+    * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
+    * The local-part may not start or end with any special characters.
+    * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+    * The domain name must:
+      * end with a domain label at least 2 characters long
+      * have each domain label start and end with alphanumeric characters
+      * have each domain label consist of alphanumeric characters, separated only by hyphens, if any
+  * The `ADDRESS` should not be blank.  
+
+[Back to Table of Contents](#toc)
+
+### Role Restrictions <a id="c-role-restrictions"></a>
+  * The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
+  * The `REMINDER_DATE` should be in format dd-MM-yyyy HH:mm.
+  * The `STATUS` can only accept the following inputs:
+    * applying
+    * pending
+    * interview and assessments
+    * offered
+    * rejected
+    * complete
+  * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
+  * The `STIPEND` must be a positive integer going up to 10 digits long.
   
+  Note: Integer is a number which is not a fraction; a whole number.
+
+[Back to Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 # Demo Use Cases <a id="demos"></a>
 
@@ -133,6 +220,8 @@ Say you found a company with an opening that you are interested in. You did your
 
 :information_source: Note the successful command execution message in the system feedback box upon successful adding of the role.
 
+[Back to Table of Contents](#toc)
+
 ## Use Case #2: Deleting a company or a role <a id="usecase2"></a>
 
 Perhaps for some reason, you decide not to go through with an application. Maybe you realised the company's mission and vision were  not in line with your values or maybe you realised the role isn't for you. Here's how you can delete these entries from the application:
@@ -147,6 +236,8 @@ Perhaps for some reason, you decide not to go through with an application. Maybe
 
 :information_source: Note the successful command execution message in the system feedback box upon successful deletion of the company.
 
+[Back to Table of Contents](#toc)
+
 --------------------------------------------------------------------------------------------------------------------
 # Features <a id="features"></a>
 
@@ -158,11 +249,15 @@ Adds a company that does not exist in the list.
 
 Format: `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
+* More restrictions for command parameters can be found [here](#c-company-restrictions)
+
 Examples:
 
 * `addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
 * `addCompany n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937`
 * Refer to [Demo Use Case #1](#usecase1) for an example use case.
+
+[Back to Table of Contents](#toc)
 
 ### Editing an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
 
@@ -173,10 +268,13 @@ Format: `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [
 * Edits the company at the specified INDEX. The index refers to the index number shown in the displayed company list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* More restrictions for command parameters can be found [here](#c-company-restrictions)
 
 Examples:
 
 * `list` followed by `editCompany 1 p/91234567 e/johndoe@example.com`edits the 1<sup>st</sup> company in the displayed company list.
+  
+[Back to Table of Contents](#toc)
 
 ### Deleting a Company : `deleteCompany` <a id="c-delete-c"></a>
 
@@ -189,7 +287,11 @@ Format: `deleteCompany COMPANY_INDEX`
 * The index must be a positive integer like 1, 2, 3, …
 * Refer to [Demo Use Case #2](#usecase2) for an example use case.
 
+Examples:
 
+* `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
+
+[Back to Table of Contents](#toc)
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
 
@@ -206,6 +308,8 @@ Examples:
 * `list` followed by, `favourite 1` favourites the 1<sup>st</sup>
   company in Tinner.
 
+[Back to Table of Contents](#toc)
+
 ### Unfavouriting a specific company: `unfavourite` <a id="c-unfavourite-c"></a>
 
 Unfavourite a specific company from the list of companies.
@@ -221,23 +325,19 @@ Examples:
 * `list` followed by, `unfavourite 1` unfavourites the 1<sup>st</sup>
   company in Tinner.
 
+[Back to Table of Contents](#toc)
+
 ## Modifying Roles <a id="c-modifying-roles"></a>
 
 ### Adding an internship role to an existing company: `addRole` <a id="c-add-c-r"></a>
 
 Adds an internship role to a company that already exists in the list.
 
-Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS r/REMINDER_DATE [d/DESCRIPTION] [$/STIPEND]`
-* Add internship role at the specified `COMPANY_INDEX`.
-* The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, ...
-* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
-* The `STATUS` accepted are as follows: applying, pending, interview and assessments, offered, rejected, complete.
-* The `REMINDER_DATE` should be in format dd-MM-yyyy HH:mm.
-* The `DESCRIPTION` and `STIPEND` fields are optional during the initial role creation.
-    * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
-    * The `STIPEND` must be a positive integer going up to 10 digits long.
+Format: `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
 
-Note: Integer is a number which is not a fraction; a whole number.
+* Add internship role at the specified `COMPANY_INDEX`.
+* The `COMPANY_INDEX` must be a positive integer like 1, 2, 3, …
+* More restrictions for command parameters can be found [here](#c-role-restrictions)
 
 Examples:
 
@@ -245,6 +345,8 @@ Examples:
 * `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
 * `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
 * Refer to [Demo Use Case #1](#usecase1) for an example use case.
+
+[Back to Table of Contents](#toc)
 
 
 ### Editing an existing role from company : `editRole` <a id="c-edit-r"></a>
@@ -256,10 +358,13 @@ Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/
 * Edits the role at the specified `ROLE_INDEX` of the company at the specified `COMPANY_INDEX`. The indexes refers to the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* More restrictions for command parameters can be found [here](#c-role-restrictions)
 
 Examples:
 
 * `list` followed by `editRole 1 1 [s/offered] [$/3000]` edits the 1<sup>st</sup> role from the 1<sup>st</sup> company in the displayed company list.
+
+[Back to Table of Contents](#toc)
 
 ### Deleting an internship role from company : `deleteRole` <a id="c-delete-c-r"></a>
 
@@ -276,6 +381,8 @@ Examples:
   company in the displayed company list.
 * Refer to [Demo Use Case #2](#usecase2) for an example use case.
 
+[Back to Table of Contents](#toc)
+
 ## Retrieving Companies <a id="c-retrieving-companies"></a>
 
 ### Listing all companies : `list` <a id="c-list"></a>
@@ -284,11 +391,15 @@ Shows a list of all companies and internship roles in Tinner.
 
 Format: `list`
 
+[Back to Table of Contents](#toc)
+
 ### Listing all favourited companies : `listFavourite` <a id="c-listfavourite"></a>
 
 Shows a list of all favourited companies and internship roles within these companies in Tinner.
 
 Format: `listFavourite`
+
+[Back to Table of Contents](#toc)
 
 ### Finding companies or internship roles by name: `find` <a id="c-find-c-r"></a>
 
@@ -311,6 +422,8 @@ Examples:
 
 * `find c/meta amazon r/engineer`
 
+[Back to Table of Contents](#toc)
+
 ## General <a id="c-general"></a>
 
 ### Clearing the company list: `clear` <a id="c-clear"></a>
@@ -319,13 +432,18 @@ Clears the entire company list, including roles within each company.
 
 Format: `clear`
 
+[Back to Table of Contents](#toc)
+
 ### Viewing help : `help` <a id="c-help"></a>
 
 Shows a message explaining how to access the User Guide.
 
+
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+[Back to Table of Contents](#toc)
 
 ### Changing the reminder window: `setWindow` <a id="c-setWindow-c"></a>
 
@@ -339,33 +457,42 @@ Examples:
 
 * `setWindow 14` would make Tinner remind you of all upcoming reminders from up to two weeks prior to the associated role's reminder date.
 
+[Back to Table of Contents](#toc)
+
 ### Exiting the program : `exit` <a id="c-exit"></a>
 
 Exits the Tinner application.
 
 Format: `exit`
 
-### Colour code of role tags
-Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
-![img.png](images/tagcolourcode.png)
-* "applying" : white
-* "pending": orange
-* "interview and assessments": purple
-* "rejected": red
-* "offered": green
-* "complete": black
+[Back to Table of Contents](#toc)
 
-### Saving the data
+### Saving the data <a id="c-saving-the-data"></a>
 
 Tinner data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+[Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Frequently Asked Questions (FAQs) <a id="faq"></a>
+
+**Q**: Do I need to save my data manually?<br>
+**A**: No, you don't. Your list of companies is saved automatically after each user command.
+
+**Q**: Why is there already data in Tinner when I first launch the application?<br>
+**A**: When you use Tinner for the first time, Tinner creates a list of companies with sample data containing a set of default companies and roles. You may use the command `clear` if you wish to erase all the sample data.
+
+**Q**: Where is my data saved?<br>
+**A**: When you use Tinner for the first time, a folder named data is created in the application's home directory containing a file named "companyList.json". The list of companies is stored within this file.
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer. Overwrite the empty data file it creates with the data file from your previous Tinner home folder.
+
+**Q**: What happens if I clear the company list accidentally using `clear`<br>
+**A**: Please ensure that you only use the command `clear` when you are certain that you want to erase the company list. There are currently no features to revert the `clear` command.
+
+[Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -389,3 +516,4 @@ _Details coming soon ..._
 | **Help**                      | `help`                                                                                                                                                                                                             |
 | **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
 
+[Back to Table of Contents](#toc)

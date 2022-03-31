@@ -39,6 +39,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_INSTAGRAM = "Instagram";
     public static final String VALID_NAME_WHATSAPP = "Whatsapp";
+    public static final String VALID_NAME_APPLE = "Apple";
     public static final String VALID_PHONE_INSTAGRAM = "1111111";
     public static final String VALID_PHONE_WHATSAPP = "22222222";
     public static final String VALID_EMAIL_INSTAGRAM = "insta@example.com";

@@ -21,7 +21,6 @@ import seedu.tinner.model.ModelManager;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.UserPrefs;
-//import seedu.tinner.model.reminder.Reminder;
 import seedu.tinner.model.reminder.UniqueReminderList;
 import seedu.tinner.model.role.ReminderDate;
 import seedu.tinner.model.util.SampleDataUtil;
@@ -39,7 +38,7 @@ import seedu.tinner.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -69,7 +68,6 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
-        // ui.show(model.reminderlist);
     }
 
     /**
@@ -84,10 +82,12 @@ public class MainApp extends Application {
 
         try {
             companyListOptional = storage.readCompanyList();
-            if (!companyListOptional.isPresent()) {
+            if (companyListOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample CompanyList");
             }
             initialData = companyListOptional.orElseGet(SampleDataUtil::getSampleCompanyList);
+            storage.saveCompanyList(initialData);
+            reminderList.setReminders(initialData.getCompanyList());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CompanyList");
             initialData = new CompanyList();
@@ -95,10 +95,7 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty CompanyList");
             initialData = new CompanyList();
         }
-        // testing
-        // for (Reminder r : UniqueReminderList.getReminderList().internalList) {
-        //     System.out.println(r.toString());
-        // }
+
         return new ModelManager(initialData, userPrefs, reminderList);
     }
 
