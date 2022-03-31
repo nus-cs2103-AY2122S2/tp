@@ -365,7 +365,7 @@ Examples:
 
 This feature lists out all pets, helpful for when you wish to look through all pets in WoofAreYou.
 
-Format:`list`
+Format: `list`
 
 ### Undo changes : `undo`
 
