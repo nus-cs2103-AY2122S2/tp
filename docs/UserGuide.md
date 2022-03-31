@@ -430,7 +430,7 @@ Format: `clear`
 </details>
 
 ### Clipping a client's information to clipboard : `clip`
-![info copied using 'clip 1'](images/afterClip1UG.PNG)
+![info copied using 'clip 1'](images/afterClip1UG.png)
 <details><summary>Copies a client's information onto the system's clipboard</summary>
 <p>
 
@@ -445,12 +445,12 @@ Examples:
 
 Before `clip 1`:
 
-![info copied using 'clip 1'](images/beforeClip1UG.PNG)
+![info copied using 'clip 1'](images/beforeClip1UG.png)
 
 
 Information copied using `clip 1`:
 
-![info copied using 'clip 1'](images/afterClip1UG.PNG)
+![info copied using 'clip 1'](images/afterClip1UG.png)
 </p>
 </details>
 
