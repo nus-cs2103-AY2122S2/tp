@@ -45,6 +45,13 @@ public class ItemTable extends UiComponent<VBox> {
         populateField();
     }
 
+    /**
+     * Removes listener from the table.
+     */
+    public void removeListener() {
+        filteredItem.removeListener(listener);
+    }
+
     private void populateField() {
         content.getChildren().clear();
         if (filteredItem.isEmpty()) {

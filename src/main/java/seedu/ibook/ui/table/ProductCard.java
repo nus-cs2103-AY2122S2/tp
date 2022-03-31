@@ -108,9 +108,11 @@ public class ProductCard extends UiComponent<HBox> {
     private void handleExpand() {
         if (isShowingItems) {
             isShowingItems = false;
+            expandButton.setDisable(true);
             rotateClose.play();
         } else {
             isShowingItems = true;
+            expandButton.setDisable(true);
             rotateOpen.play();
         }
     }
@@ -133,11 +135,13 @@ public class ProductCard extends UiComponent<HBox> {
     private class EventExpand implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             if (isShowingItems) {
+                itemTable.removeListener();
                 itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
                 itemTableContainer.getChildren().add(itemTable.getRoot());
             } else {
                 itemTableContainer.getChildren().clear();
             }
+            expandButton.setDisable(false);
         }
     }
 
