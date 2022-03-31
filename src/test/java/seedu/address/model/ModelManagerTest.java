@@ -19,9 +19,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabStatus;
 import seedu.address.model.lab.StudentHasLabPredicate;
+import seedu.address.model.lab.exceptions.DuplicateLabException;
+import seedu.address.model.lab.exceptions.LabNotFoundException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.exceptions.DuplicateLabException;
-import seedu.address.model.student.exceptions.LabNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

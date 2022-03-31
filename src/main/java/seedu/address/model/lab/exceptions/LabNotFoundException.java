@@ -1,4 +1,4 @@
-package seedu.address.model.student.exceptions;
+package seedu.address.model.lab.exceptions;
 
 public class LabNotFoundException extends RuntimeException {
 

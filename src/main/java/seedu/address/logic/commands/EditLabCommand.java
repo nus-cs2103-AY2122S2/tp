@@ -17,10 +17,10 @@ import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabList;
 import seedu.address.model.lab.LabMark;
 import seedu.address.model.lab.LabStatus;
+import seedu.address.model.lab.exceptions.DuplicateLabException;
+import seedu.address.model.lab.exceptions.InvalidLabStatusException;
+import seedu.address.model.lab.exceptions.LabNotFoundException;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.exceptions.DuplicateLabException;
-import seedu.address.model.student.exceptions.InvalidLabStatusException;
-import seedu.address.model.student.exceptions.LabNotFoundException;
 
 /**
  * Edits the LabStatus of a Lab of a Student in the TAddressBook.

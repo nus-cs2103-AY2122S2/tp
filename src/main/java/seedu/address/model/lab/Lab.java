@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.student.exceptions.DuplicateLabException;
-import seedu.address.model.student.exceptions.InvalidLabStatusException;
+import seedu.address.model.lab.exceptions.DuplicateLabException;
+import seedu.address.model.lab.exceptions.InvalidLabStatusException;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -203,6 +203,17 @@ public class Lab {
 
         return otherLab.labStatus.equals(this.labStatus);
 
+    }
+
+    /**
+     * Returns the details of a Lab in {@code String} format
+     */
+    public String getDetails() {
+        if (labMark.isEmpty()) {
+            return labStatus.describe();
+        } else {
+            return labMark.describe();
+        }
     }
 
     @Override
