@@ -10,6 +10,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Grabs a specific attribute of all persons
+ */
 public class GrabCommand extends Command {
 
     public static final String COMMAND_WORD = "grab";

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -64,6 +65,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane generalDisplayPlaceholder;
 
+    @FXML
+    private Menu addMenu;
+
+    @FXML
+    private Menu newTagMenu;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -84,6 +91,8 @@ public class MainWindow extends UiPart<Stage> {
         addTagWindow.getRoot().initOwner(primaryStage);
         addTagWindow.getRoot().initModality(Modality.WINDOW_MODAL);
         addProfileWindow = new AddProfileWindow(logic);
+        addMenu.setVisible(false);
+        newTagMenu.setVisible(false);
     }
 
     public Stage getPrimaryStage() {
@@ -207,7 +216,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        //helpWindow.hide();
         primaryStage.hide();
     }
 
@@ -221,6 +229,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            System.out.println(logic.getModel().isMouseUxEnabled());
+            if (logic.getModel().isMouseUxEnabled()) {
+                addMenu.setVisible(true);
+                newTagMenu.setVisible(true);
+            } else {
+                addMenu.setVisible(false);
+                newTagMenu.setVisible(false);
+            }
 
             if (commandResult.isRemoveProfile() && this.generalDisplay.getProfile().getPerson() != null
                     && this.generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
