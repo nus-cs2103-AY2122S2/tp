@@ -250,23 +250,33 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getStudentId())
+        builder.append("Student ID: ")
+                .append(getStudentId())
                 .append("; Name: ")
                 .append(getName())
                 .append("; Module Code: ")
                 .append(getModuleCode());
 
         Phone currentPhone = getPhone();
-        builder.append("; Phone Number: ").append(currentPhone);
-
+        if (currentPhone == null) {
+            builder.append("; Phone Number: ");
+        } else {
+            builder.append("; Phone Number: ").append(currentPhone);
+        }
 
         TelegramHandle currentTelegramHandle = getTelegramHandle();
-        builder.append("; Telegram Handle: @").append(currentTelegramHandle);
-
+        if (currentTelegramHandle == null) {
+            builder.append("; Telegram Handle: ");
+        } else {
+            builder.append("; Telegram Handle: @").append(currentTelegramHandle);
+        }
 
         Email currentEmail = getEmail();
-        builder.append("; Email: ").append(currentEmail);
-
+        if (currentEmail == null) {
+            builder.append("; Email: ");
+        } else {
+            builder.append("; Email: ").append(currentEmail);
+        }
 
         TaskList currentTaskList = getTaskList();
         builder.append("; Tasks: ").append(currentTaskList);
