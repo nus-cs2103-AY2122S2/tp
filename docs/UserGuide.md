@@ -71,7 +71,7 @@ This section lists down all the features available in MMF. You can click on any 
 
 ## Features
 
-ModuleMate Finder is a desktop app that allows students to find people taking the same modules as them, easily and efficiently
+ModuleMate Finder is a desktop app that allows contacts to find people taking the same modules as them, easily and efficiently
 
 <div markdown="block" class="alert alert-info">
 
@@ -370,7 +370,7 @@ You can only use this command when in the **default address book**. Otherwise, y
 
 ### Unarchiving contacts: `unarchive`
 
-You can also bring students back from the archives if necessary.
+You can also bring contacts back from the archives if necessary.
 
 format: `unarchive INDEX`
 * _Unarchives_ the contact at the specified `INDEX`.
