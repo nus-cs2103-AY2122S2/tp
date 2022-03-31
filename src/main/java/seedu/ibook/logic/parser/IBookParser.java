@@ -9,6 +9,8 @@ import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.ExitCommand;
 import seedu.ibook.logic.commands.HelpCommand;
+import seedu.ibook.logic.commands.RedoCommand;
+import seedu.ibook.logic.commands.UndoCommand;
 import seedu.ibook.logic.commands.item.AddItemCommand;
 import seedu.ibook.logic.commands.item.DeleteItemCommand;
 import seedu.ibook.logic.commands.item.UpdateItemCommand;
@@ -19,6 +21,7 @@ import seedu.ibook.logic.commands.product.ExpiredCommand;
 import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.logic.commands.product.ListCommand;
 import seedu.ibook.logic.commands.product.OutOfStockCommand;
+import seedu.ibook.logic.commands.product.RemindCommand;
 import seedu.ibook.logic.commands.product.UpdateAllCommand;
 import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -87,6 +90,12 @@ public class IBookParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
         case ExpiredCommand.COMMAND_WORD:
             return new ExpiredCommand();
 
@@ -95,6 +104,9 @@ public class IBookParser {
 
         case OutOfStockCommand.COMMAND_WORD:
             return new OutOfStockCommand();
+
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
