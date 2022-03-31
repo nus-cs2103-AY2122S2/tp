@@ -258,9 +258,9 @@ Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 * Adds appointment for pet at `INDEX` on a specific date at a specific location.
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Date and time of the appointment should be entered together with `dt/` prefix.
+* Date and time of the appointment should be entered after the `dt/` prefix.
 * Date and time should strictly follow `dd-MM-yyyy HH:mm` format.
-* Location of appointment should be entered with `at/` prefix.
+* Location of appointment should be entered after the `at/` prefix.
 * Whitespaces, special characters and alphanumeric characters are allowed for location.
 * Both `date/` and `at/` are **mandatory** fields.
 
@@ -281,9 +281,9 @@ Examples:
 
 ## _Efficiency Enhancement_
 
-You may have noticed that a handful of commands require `INDEX`, and it may be troublesome to scroll through WoofAreYou 
+You may have noticed that a handful of commands require `INDEX`, and that it is troublesome to scroll through WoofAreYou 
 to find that one pet's `INDEX` if you have many clients. Hence, this subsection covers the features that will make your
-life easier when trying to use the features previously introduced.
+life easier when using the features previously introduced.
 
 ### Find pet details: `find`
 
@@ -337,9 +337,9 @@ Examples:
 
 ### Filter pet list: `filter`
 
-If you just want to know common information about some pets, you can filter the pet list by a specified field.
+If you just want to know common information about some pets, you can filter the pets in WoofAreYou by a specified field.
 * You can filter by date, to find out which pets are present on a given date. 
-* You can filter by appointment, to check which pets have appointments on a given date. 
+* You can filter by appointment, to find out which pets have appointments on a given date. 
 * You can filter by owner's name, to find all pets with the same owner. 
 * You can also filter by tags, to find all pets of a common breed.
 
@@ -372,7 +372,13 @@ Format:`list`
 Mistakes happen when dealing with CLI. Fortunately, you can undo previous commands that you have keyed in.
 
 Format: `undo`
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Note about undo**<br>
 * You will not be able to undo `clear`, `exit`, `find`, `help` and `list` commands.
+
+</div>
 
 Examples:
 * If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted.
