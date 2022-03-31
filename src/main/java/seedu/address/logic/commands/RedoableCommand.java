@@ -54,10 +54,6 @@ public abstract class RedoableCommand extends Command {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    public void saveSuccessMessage(String message) {
-        this.saveSuccessMessage = message;
-    }
-
     @Override
     public final CommandResult execute(Model model) throws CommandException {
         saveAddressBookSnapshot(model);
