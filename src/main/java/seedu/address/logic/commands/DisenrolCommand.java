@@ -59,7 +59,7 @@ public class DisenrolCommand extends Command {
         List<ClassGroup> cgList = model.getUnfilteredClassGroupList();
 
         if (classGroupIndex.getZeroBased() >= cgList.size()) {
-            throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex));
+            throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex.getOneBased()));
         }
 
         ClassGroup cgToEdit = cgList.get(classGroupIndex.getZeroBased());
@@ -67,7 +67,6 @@ public class DisenrolCommand extends Command {
         ClassGroup newCg = new ClassGroup(cgToEdit);
         TaModule newModule = new TaModule(moduleToEdit);
         int notEnrolled = 0;
-
         for (Student s : students) {
             if (newCg.hasStudent(s)) {
                 newCg.removeStudent(s);
@@ -82,8 +81,10 @@ public class DisenrolCommand extends Command {
         for (Student s : students) {
             if (!model.getUnfilteredClassGroupList().stream().filter(cg -> cg.getModule().isSameModule(newModule))
                     .anyMatch(cg -> cg.hasStudent(s))) {
-                newModule.removeStudent(s);
-                model.removeStudentFromAssessments(s);
+                if (newModule.hasStudent(s)) {
+                    newModule.removeStudent(s);
+                    model.removeStudentFromAssessments(s);
+                }
             }
         }
 
