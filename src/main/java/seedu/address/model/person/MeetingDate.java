@@ -47,9 +47,9 @@ public class MeetingDate {
         if (this.equals(otherDate)) {
             return 0;
         } else if (this.value.isBefore(otherDate.value)) {
-            return 1;
-        } else if (this.value.isAfter(otherDate.value)) {
             return -1;
+        } else if (this.value.isAfter(otherDate.value)) {
+            return 1;
         } else {
             throw new ComparatorException();
         }

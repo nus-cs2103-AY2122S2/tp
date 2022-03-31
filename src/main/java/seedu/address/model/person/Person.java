@@ -36,7 +36,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
                   PrevDateMet prevDateMet, Salary salary, Info info, ScheduledMeeting scheduledMeeting) {
-        requireAllNonNull(name, phone, email, address, tags, prevDateMet, info, scheduledMeeting);
+        requireAllNonNull(name, phone, email, address, flag, tags, prevDateMet, salary, info, scheduledMeeting);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,7 +54,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Flag flag, Set<Tag> tags,
                   PrevDateMet prevDateMet, Salary salary, Info info) {
-        requireAllNonNull(name, phone, email, address, tags, prevDateMet, info);
+        requireAllNonNull(name, phone, email, address, flag, tags, prevDateMet, salary, info);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -106,10 +106,6 @@ public class Person {
 
     public Flag getFlag() {
         return flag;
-    }
-
-    public void setFlag(Flag flag) {
-        this.flag = flag;
     }
 
     public PrevDateMet getPrevDateMet() {
