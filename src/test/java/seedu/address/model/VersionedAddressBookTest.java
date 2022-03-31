@@ -25,9 +25,11 @@ class VersionedAddressBookTest {
     }
 
     @Test
-    void commit() {
-        // initial state -> add AMY -> add BOB
-        //                          -> add IDA
+    void commit_purgeUndoneHistory_success() {
+        // initial state -> add AMY -> add BOB(undo)
+        //                       |---> add IDA
+        // add BOB removed from history
+        // initial state -> add AMY -> add IDA
 
         typicalVersionedAddressBook.addPerson(AMY);
         typicalVersionedAddressBook.commit();

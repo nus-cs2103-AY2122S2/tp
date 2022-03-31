@@ -45,6 +45,15 @@ class UndoCommandTest {
     }
 
     @Test
+    void execute_commandsUndoNotSupported_throwsCommandException() {
+        String expectedMessage = String.format(UndoCommand.MESSAGE_UNDO_FAILED);
+        UndoCommand undoCommand = new UndoCommand();
+        ListCommand listCommand = new ListCommand();
+        listCommand.execute(model);
+        assertCommandFailure(undoCommand, model, expectedMessage);
+    }
+
+    @Test
     void testEquals() {
         UndoCommand undoCommand = new UndoCommand();
         assertTrue(undoCommand.equals(undoCommand));

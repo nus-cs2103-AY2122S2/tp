@@ -94,7 +94,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void undo_changesUndone_success() {
+    public void undo_addDeleteUndo_personAdded() {
         modelManager.addPerson(ALICE);
         modelManager.commitAddressBook();
 

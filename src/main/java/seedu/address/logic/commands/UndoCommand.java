@@ -24,12 +24,12 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.canUndoAddressBook()) {
-            model.undoAddressBook();
-            return new CommandResult(MESSAGE_UNDO_SUCCESS);
+        if (!model.canUndoAddressBook()) {
+            throw new CommandException(MESSAGE_UNDO_FAILED);
         }
 
-        throw new CommandException(MESSAGE_UNDO_FAILED);
+        model.undoAddressBook();
+        return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 
     @Override

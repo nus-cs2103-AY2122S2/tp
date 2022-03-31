@@ -62,10 +62,7 @@ public class VersionedAddressBook extends AddressBook {
      * @return True if there are commands that can be undone, False otherwise.
      */
     public boolean canUndo() {
-        if (this.addressBookStateList.size() < 1) {
-            return false;
-        }
-        return this.currentState != 0;
+        return this.currentState >= 1;
     }
 
     /**

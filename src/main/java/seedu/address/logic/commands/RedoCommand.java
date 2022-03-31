@@ -24,12 +24,12 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.canRedoAddressBook()) {
-            model.redoAddressBook();
-            return new CommandResult(MESSAGE_REDO_SUCCESS);
+        if (!model.canRedoAddressBook()) {
+            throw new CommandException(MESSAGE_REDO_FAILED);
         }
 
-        throw new CommandException(MESSAGE_REDO_FAILED);
+        model.redoAddressBook();
+        return new CommandResult(MESSAGE_REDO_SUCCESS);
     }
 
     @Override
