@@ -63,7 +63,8 @@ public class Reminder implements Comparable<Reminder> {
         }
 
         return otherReminder.getCompanyName().equals(getCompanyName())
-                && otherReminder.getRoleName().equals(getRoleName());
+                && otherReminder.getRoleName().toString().replaceAll("\\s+", "")
+                .equals(getRoleName().toString().replaceAll("\\s+", ""));
     }
 
     /**
@@ -99,6 +100,8 @@ public class Reminder implements Comparable<Reminder> {
                 .append(getCompanyName())
                 .append("; Role: ")
                 .append(getRoleName())
+                .append("; Status: ")
+                .append((getStatus()))
                 .append("; Reminder Date: ")
                 .append(getReminderDate());
 

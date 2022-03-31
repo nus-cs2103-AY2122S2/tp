@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.tinner.commons.util.StringUtil;
-import seedu.tinner.model.role.Role;
 
 /**
  * Tests that a {@code Company} matches any of the keywords given.
@@ -25,16 +24,16 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
     }
 
     /**
-     * Returns true when the {@code Company} contains a {@code Role} witth
+     * Returns true when the {@code Company} contains a {@code Role} with
      * name that matches one of the Strings in {@code roleNameKeywords}
      *
      * @param company {@code Company} to be evaluated
      * @return
      */
     public boolean hasRoleNameKeywords(Company company) {
-        List<Role> roles = company.getRoleManager().getRoleList().getRoles();
+        ReadOnlyRoleList roleList = company.getRoleList();
 
-        return roleNameKeywords.stream().anyMatch(keyword -> roles.stream()
+        return roleNameKeywords.stream().anyMatch(keyword -> roleList.getRoleList().stream()
                 .anyMatch(role -> StringUtil.containsWordIgnoreCase(role.getName().value, keyword)));
     }
 
