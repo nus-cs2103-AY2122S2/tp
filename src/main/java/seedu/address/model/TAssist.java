@@ -282,7 +282,7 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     /**
-     * Removes the student from all the modules.
+     * Removes the student from all the class groups.
      * @param student The student to remove.
      */
     public void removeStudentFromClassGroups(Student student) {

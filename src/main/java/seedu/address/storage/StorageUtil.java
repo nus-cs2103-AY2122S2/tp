@@ -15,10 +15,12 @@ public class StorageUtil {
 
 
     /**
-     * Returns student object found in studentList by comparing the studentId.
-     * Ensures that StudentId is a valid StudentId before attempting to find student in student list.
+     * Returns the {@code Student} object found in {@code studentList} by comparing the student ID.
+     * Ensures that the specified {@code studentId} is a valid {@code StudentId} before attempting to find the student
+     * in the given student list.
      *
-     * @throws IllegalValueException if studentId is missing or invalid, and if student is not found in the studentList
+     * @throws IllegalValueException if {@code studentId} is missing or invalid, and if student is not found in the
+     * {@code studentList}
      */
     public static Student getStudentByStudentId(List<Student> studentList, String studentId, String errorMsgFormat)
             throws IllegalValueException {
@@ -37,11 +39,12 @@ public class StorageUtil {
     }
 
     /**
-     * Returns module object found in moduleList by comparing the module code and academic year.
-     * Ensures that module code and academic year are valid before attempting to find module in module list.
+     * Returns the {@code TaModule} object found in {@code moduleList} by comparing the module code and academic year.
+     * Ensures that specified {@code moduleCode} and {@code academicYear} are valid before attempting to find the module
+     * in the given module list.
      *
-     * @throws IllegalValueException if moduleCode or academicYear are missing/invalid, and if module is not found
-     * in the moduleList
+     * @throws IllegalValueException if {@code moduleCode} or {@code academicYear} are missing/invalid, and if module
+     * is not found in the {@code moduleList}
      */
     public static TaModule getModuleByCodeAndAcadYear(List<TaModule> moduleList, String moduleCode, String academicYear,
                                                       String errorMsgFormat) throws IllegalValueException {
@@ -58,7 +61,7 @@ public class StorageUtil {
     /**
      * Returns ModuleCode object if it is valid.
      *
-     * @throws IllegalValueException if module code is missing/invalid.
+     * @throws IllegalValueException if {@code moduleCode} is missing/invalid.
      */
     public static ModuleCode checkAndReturnModuleCode(String moduleCode, String errorMsgFormat)
         throws IllegalValueException {
@@ -75,7 +78,7 @@ public class StorageUtil {
     /**
      * Returns AcademicYear object if it is valid.
      *
-     * @throws IllegalValueException if academicYear is missing/invalid.
+     * @throws IllegalValueException if {@code academicYear} is missing/invalid.
      */
     public static AcademicYear checkAndReturnAcademicYear(String academicYear, String errorMsgFormat)
             throws IllegalValueException {
