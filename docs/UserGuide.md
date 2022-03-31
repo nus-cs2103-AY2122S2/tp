@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their clients’ contacts and sales of properties.
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of properties.
 
 # Reference
 
@@ -18,7 +18,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
     - `list` : Lists all contacts.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/buyer` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer to the RealEstatePro app.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer to the RealEstatePro app.
     - `delete 3` : Deletes the 3rd contact shown in the current list.
     - `clear` : Deletes all contacts.
     - `exit` : Exits the app.
@@ -37,8 +37,8 @@ e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe
 - Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
-- Inputting information after `pr/` & `t/` indicates the type of property a user is selling or buying.<br>
-e.g. `pr/PROPERTY, t/USER_TYPE` can be used as `pr/East, Block 123, 2-room, $550000, t/seller` means this person is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
+- Inputting information after `pr/` & `p/` indicates the type of property a user is selling or buying.<br>
+e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this person is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
 
 - Person parameters can be in any order.<br>
 e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
@@ -56,6 +56,10 @@ Notes about the property format:
 Notes about the preference format:
 - Preference must be specified in the following format: `pf/REGION,SIZE,LOWPRICE,HIGHPRICE`. Whitespace between parameters is ignored.<br>
 
+Notes about the image format:
+- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from  the directory the jar file is run. Description
+is optional and can be omitted.
+
 Parameter formats:
 - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
 - ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
@@ -72,14 +76,14 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] t/USER_TYPE`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] i/FILEPATH:DESCRIPTION`
 
-**Tip**: A person can be tagged as either a `buyer`, or `seller`.
+**Tip**: A person is either a `buyer`, or `seller` based on whether he has a property or a preference.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000 t/buyer`
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 t/seller`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 i/living.png:living room`
 
     ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
 
@@ -93,19 +97,21 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [i/FILEPATH:DESCRIPTION]…`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- You may change the type of the user, from `buyer` to `seller` & vice versa
+- Type of the user can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the user's current `Property` or `Preference`
 - You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/seller` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person's user type to `seller`.
+- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the 
+2nd person into a `buyer`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
+- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images. 
 
 ### Locating persons by name: `find`
 
@@ -169,6 +175,9 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+**Note**:
+- Images associated with the user are not deleted and remains in the OS file system.
+
 ### Matching properties and preferences: `match`
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
@@ -191,6 +200,7 @@ Format `upload INDEX [i/FilePath:description]`
 - File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
   ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
 - Description is optional and can be left blank e.g. `upload 1 i/example.png`
+- multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`
 
 ### View image of person: `viewimage`
 
@@ -291,19 +301,21 @@ Opens up a new window that shows a pie chart of the number of buyers & sellers w
 # FAQ
 
 # Command Summary
-| Action            | Format                                                                                   | Examples                                                                                                             |
-|-------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] t/USER_TYPE | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, t/seller |
-| Clear             | clear                                                                                    | -                                                                                                                    |
-| Delete            | delete INDEX                                                                             | e.g. delete 3                                                                                                        |
-| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [t/USER_TYPE]         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                       |
-| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                | e.g. find name James Jake                                                                                            |
-| Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                      | e.g. sort name !phone email                                                                                          |
-| Upload            | upload INDEX [i/FilePath:Description]                                                    | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                            |
-| viewimage         | viewimage INDEX                                                                          | e.g. viewimage 1                                                                                                     |
-| List              | list                                                                                     | -                                                                                                                    |
-| Help              | help                                                                                     | -                                                                                                                    |
-| Match             | match                                                                                    | -                                                                                                                    |
-| Favourite         | favourite INDEX                                                                          | e.g., favourite 3                                                                                                    |
-| Favourites window | fw                                                                                       | -                                                                                                                    |
-| Statistics window | stats                                                                                    | -                                                                                                                    |
+| Action            | Format                                                                                                 | Examples                                                                                                                             |
+|-------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] i/FILEPATH[:DESCRIPTION]… | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, i/living.png:Living room |
+| Clear             | clear                                                                                                  | -                                                                                                                                    |
+| Delete            | delete INDEX                                                                                           | e.g. delete 3                                                                                                                        |
+| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [i/FILEPATH[:DESCRIPTION]]…         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                                       |
+| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                              | e.g. find name James Jake                                                                                                            |
+| Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                                    | e.g. sort name !phone email                                                                                                          |
+| Remind            | remind INDEX r/reminderDetails                                                                         | e.g. remind 1 r/home viewing                                                                                                         |
+| Upload            | upload INDEX i/FilePath[:Description]…                                                                 | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                                            |
+| viewimage         | viewimage INDEX                                                                                        | e.g. viewimage 1                                                                                                                     |
+| List              | list                                                                                                   | -                                                                                                                                    |
+| Help              | help                                                                                                   | -                                                                                                                                    |
+| Match             | match                                                                                                  | -                                                                                                                                    |
+| Favourite         | favourite INDEX                                                                                        | e.g., favourite 3                                                                                                                    |
+| Favourites window | fw                                                                                                     | -                                                                                                                                    |
+| Statistics window | stats                                                                                                  | -                                                                                                                                    |
+| Reminder window   | rm                                                                                                     | -                                                                                                                                    |
