@@ -16,8 +16,10 @@ import seedu.address.model.person.FriendFilterPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "findfriend";
+    public static final String COMMAND_ALIAS = "ff";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all friends whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Finds all friends whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + "[" + PREFIX_NAME + "NAME_KEYWORD" + "]... "
             + "[" + PREFIX_TITLE + "LOG_TITLE_KEYWORD" + "]... "

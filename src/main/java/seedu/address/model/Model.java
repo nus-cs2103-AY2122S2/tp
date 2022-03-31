@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insights.PersonInsight;
 
 /**
  * The API of the Model component.
@@ -110,6 +111,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<PersonInsight> getInsightsList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

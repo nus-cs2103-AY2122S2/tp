@@ -31,8 +31,10 @@ import seedu.address.model.tag.Tag;
 public class EditLogCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "editlog";
+    public static final String COMMAND_ALIAS = "el";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an existing log "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Edits an existing log "
             + "of an existing friend in Amigos. "
             + "Parameters: "
             + "INDEX ? " + PREFIX_NAME + "NAME "

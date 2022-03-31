@@ -17,8 +17,9 @@ import seedu.address.model.event.Event;
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "addevent";
+    public static final String COMMAND_ALIAS = "ae";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Amigos. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS + ": Adds an event to Amigos. "
             + "Parameters: "
             + PREFIX_NAME + "EVENT_NAME "
             + PREFIX_DATETIME + "DATE_TIME "
