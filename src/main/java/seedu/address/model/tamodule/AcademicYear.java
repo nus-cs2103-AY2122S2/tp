@@ -52,14 +52,14 @@ public class AcademicYear {
     public AcademicYear(String academicYear) {
         requireNonNull(academicYear);
         checkArgument(isValidAcademicYear(academicYear), MESSAGE_CONSTRAINTS);
-        value = academicYear;
+        value = academicYear.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid academic year.
      */
     public static boolean isValidAcademicYear(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
 
