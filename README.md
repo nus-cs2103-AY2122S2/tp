@@ -10,6 +10,7 @@ With **Amigos**, you can:
 * Keep track of important details about your friends
 * Maintain your friendships by keeping up-to-date logs about your friends, such as their likes/dislikes, aspirations and so on!
 * Remember key events you are doing with friends
+* Gain valuable insights about your friends, like the last time you met up with them.
 
 Amigos is also _super fast_ to use, and optimized for keyboard input while still having the benefits of a Graphical User Interface (GUI).
 
