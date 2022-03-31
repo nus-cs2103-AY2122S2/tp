@@ -377,7 +377,7 @@ After the location is selected, `ExportCommand` calls the `JsonFileManager#expor
 This method writes the data file into a file at the selected location provided by dataPath. 
 After the data is written into the new file, `ExportCommand` returns a `CommandResult` to `LogicManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `ImportCommand`, `JsonFileManager`, `FileChooser`, and `CommandResult`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `LogicManager`, `ImportCommand`, `JsonFileManager`, and `CommandResult`.
 
 <img src="images/ImportSequenceDiagram.png">
 </div>

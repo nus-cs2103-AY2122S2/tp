@@ -43,17 +43,7 @@ activate CommandResult
 CommandResult --> ImportCommand
 deactivate CommandResult
 
-ImportCommand --> LogicManager
+ImportCommand --> LogicManager : commandResult
 deactivate ImportCommand
 
 @enduml
-
-participant "fileChooser:FileChooser" as FileChooser STORAGE_COLOR
-
-
-create FileChooser
-JsonFileManager -> FileChooser : new FileChooser()
-activate FileChooser
-
-FileChooser --> JsonFileManager :
-deactivate FileChooser
