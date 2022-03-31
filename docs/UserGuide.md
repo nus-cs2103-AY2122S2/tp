@@ -354,6 +354,7 @@ Examples:
 * `addb c/2 sev/3 st/12-12-2022 10:30`
 
 Example Usage: `addb c/1 sev/1 st/10-10-2022 10:30`
+![Adding a booking example](images/user-guide/add-booking.png)
 
 #### 4.3.3 Listing all bookings : `listb`
 
@@ -381,6 +382,7 @@ Examples:
 * `editb 2 st/10-12-2022 10:30` Edits the booking time of the 1st booking to be `10-12-2022 10:30`.
 
 Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
+![Editing a booking example](images/user-guide/edit-booking.png)
 
 #### 4.3.5 Finding booking' profile by keyword: `findb`
 
@@ -394,9 +396,12 @@ Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
 
 Examples:
-* `finds c/1 sev/2` returns bookings where the customer at Index 1 has the service at Index 2.
-* `finds f/Bad` returns `Bad service` and `Service was bad`.
-* `finds st/10-10-2022` returns bookings that are on `10-10-2022`.
+* `findb n/alex` returns bookings where the customer name or service name match.
+* `findb f/Bad` returns `Bad service` and `Service was bad`.
+* `findb st/10-10-2022` returns bookings that are on `10-10-2022`.
+
+Example Usage: `findb n/alex`
+![Finding a booking example](images/user-guide/find-booking.png)
 
 #### 4.3.6 Deleting booking(s) : `deleteb`
 
