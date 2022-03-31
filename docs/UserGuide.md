@@ -388,8 +388,8 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 * By not entering any prefixes, it will sort by name in ascending order.
 * Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
 * The `ORDER` must be asc or dsc!
-* The `SEQUENCE` must contain the full name of all the prefixes used!
-* For `SEQUENCE`, if more than one of the same full name is being used, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
+* The `SEQUENCE` must contain the full name of all the sort condition used!
+* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
 
