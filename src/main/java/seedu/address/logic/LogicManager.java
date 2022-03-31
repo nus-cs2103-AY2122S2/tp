@@ -110,7 +110,7 @@ public class LogicManager implements Logic {
     /**
      * Saves AddressBook and ArchiveBook
      */
-    private void saveBooks() {
+    private void saveBooks() throws CommandException {
         try {
             if (StatusBarFooter.isArchiveBook()) {
                 storage.saveArchivedAddressBook(model.getArchiveBook());
@@ -121,8 +121,8 @@ public class LogicManager implements Logic {
                 addressBook = new AddressBook(model.getAddressBook());
                 model.setAddressBook(addressBook);
             }
-        } catch (DataConversionException | IOException e) {
-            System.out.println("Error caught: " + e);
+        } catch (DataConversionException | IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
     }
 
