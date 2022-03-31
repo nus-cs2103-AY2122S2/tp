@@ -7,7 +7,9 @@ import java.util.function.Predicate;
 public class ScheduleOnThisDatePredicate implements Predicate<Schedule> {
     private final LocalDate date;
 
-    public ScheduleOnThisDatePredicate(LocalDate date) { this.date = date; }
+    public ScheduleOnThisDatePredicate(LocalDate date) {
+        this.date = date;
+    }
 
     @Override
     public boolean test(Schedule schedule) {
@@ -19,8 +21,8 @@ public class ScheduleOnThisDatePredicate implements Predicate<Schedule> {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ScheduleOnThisDatePredicate
-        )       && date.isEqual(((ScheduleOnThisDatePredicate) other).date);
+                || (other instanceof ScheduleOnThisDatePredicate)
+                && date.isEqual(((ScheduleOnThisDatePredicate) other).date);
     }
 
 }
