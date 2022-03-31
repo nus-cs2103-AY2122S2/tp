@@ -34,6 +34,7 @@ UNite is a **desktop app for managing contacts specifically designed for people 
    5. [Delete profile](#delete-profile)
    6. [Add a new tag](#add-a-new-tag-click)
    7. [Delete tag](#delete-tag-click)
+   8. [Filter list by tag](#filter-list-by-tag-click)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
@@ -48,7 +49,7 @@ UNite is a **desktop app for managing contacts specifically designed for people 
 1. Copy the file to the folder you want to use as the _home folder_ for your UNite.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Main](images/Main.png)
 
 Some features are able to be operated via mouse interaction. Features that allow mouse interactions are disabled by default. 
 
@@ -206,11 +207,11 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find yu li'](images/find_yu_li.png)
 
 ### Grab person's attribute : `grab`<a name="grab-person-attribute"></a>
 
-Grabs person's (single or multiple) attribute.
+Grabs person's (single or multiple) attribute and display out, allow the user to copy directly.
 
 Format: `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`
 
@@ -227,6 +228,8 @@ Examples:
 * `grab e/1` grabs the email address of person with index 1.
 * `grab tele/` grabs the telegram id of everyone inside UNite.
 * `grab tele/ t/friends` grabs the telegram id of everyone tagged as "friends" inside UNite.
+
+  ![result for 'grab e/'](images/grab-email.png)
 
 ### Delete a person : `delete`<a name="delete-a-person"></a>
 
@@ -274,7 +277,7 @@ Examples:
 * `filter friends` followed by `profile 3` displays the 3rd person's profile in the filtered list generated
 by the `filter`command.
 * `find Betsy` followed by `profile 1` displays the 1st person's profile in the results of the `find` command.
-![view profile](images/profile.png)
+![result for 'profile 5'](images/profile.png)
 
 ### Clear all entries : `clear`<a name="clear-all-entries"></a>
 
@@ -368,6 +371,12 @@ Selected tags will appear in black, as shown in the figure below ("friends" and 
 <img src="images/selectedTag_GUI.png" width="300"/>
 
 
+### Filter list by tag<a name="filter-list-by-tag-click"></a>
+To filter the list of person by tag directly, first display all the tags by input the command `list_tag`, then simply 
+click on the tag to filter the list.
+
+<img src="images/filter-through-click.png"/>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ<a name="faq"></a>
@@ -381,21 +390,27 @@ Selected tags will appear in black, as shown in the figure below ("friends" and 
 
 ## Command summary<a name="command-summary"></a>
 
-Action | Command format, Examples                                                                                                                                             | Mouse Interaction
---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------
+Action | Command format, Examples                                                                                                                                          | Mouse Interaction
+--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------
 **add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | (Menu bar) `Add ` -> `Add Profile`
-**add_tag**| `add_tag t/TAG_NAME`                                                                                                                                                 | (Menu bar) `New tag` -> `New tag`; enter tag name in text field and select `Add`.
-**attach** | `attach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                                | -
-**clear** | `clear`                                                                                                                                                              | -
-**delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  | Right click on person card in person list panel, select `Delete`
-**delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`                                                                                                                          | (Menu bar) `New tag` -> `New tag`; enable `Select`, select tags and click `Delete`.
-**detach** | `detach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                                | -
-**filter** | `filter [TAGMAME]`                                                                                                                                                   | -
-**edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  | -
-**find** | `find [KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                        | -
-**list** | `list`                                                                                                                                                               | -
-**help** | `help`                                                                                                                                                               | (Menu bar) `Help` -> `Help`
-**list_tag** | `list_tag`                                                                                                                                                           | (Menu bar) `New tag` -> `New tag`. All tags are displayed in the 'Current tags' section.
-**profile** | `profile INDEX`<br> e.g., `profile 3`                                                                                                                                | (Person list panel) Click on person card
-**theme** | `theme THEME`<br> e.g., `theme light`                                                                                                                                | -
+**add_tag**| `add_tag t/TAG_NAME`                                                                                                                                              | (Menu bar) `Tags` -> `Tags`, enter tag name in text field and select `Add`.
+**attach** | `attach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                             | -
+**clear** | `clear`  <br/>                                                                                                                                                    | -
+**clear_emptyTag** | `clear_emptyTag`                                                                                                                                                  | -
+**delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                               | Right click on person card in person list panel, select `Delete`
+**delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`                                                                                                                       | (Menu bar) `Tags` -> `Tags`; enable `Select`, select tags and click `Delete`. <br> Or, (Command box) `list_tag` -> right click on tag card to delete
+**detach** | `detach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                             | -
+**disable_mouseUX** | `disable_mouseUX`                                                                                                                                                 | -
+**edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               | -
+**enable_mouseUX** | `enable_mouseUX`                                                                                                                                                  | -
+**exit** | `exit`                                                                                                                                                            | -
+**filter** | `filter [TAGMAME]`                                                                                                                                                | (Command box) `list_tag` -> click on tag card to filter
+**find** | `find [KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
+**grab** | `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`<br> e.g., `grab e/ t/classmates`                                                                                         | -
+**help** | `help`                                                                                                                                                            | (Menu bar) `Help` -> `Help`
+**list** | `list`                                                                                                                                                            | -
+**list_tag** | `list_tag`                                                                                                                                                        | (Menu bar) `Tags` -> `Tags`. All tags are displayed in the 'Current tags' section.
+**profile** | `profile INDEX`<br> e.g., `profile 3`                                                                                                                             | (Person list panel) Click on person card
+**remark** | `remark_tag t/[TAG_NAME] r/[REMARK]`<br> e.g., `remark t/classmates r/My classmates for CS2103T` | -
+**theme** | `theme THEME`<br> e.g., `theme light`                                                                                                                             | -
 
