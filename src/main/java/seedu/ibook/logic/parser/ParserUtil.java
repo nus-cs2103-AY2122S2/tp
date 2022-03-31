@@ -191,7 +191,12 @@ public class ParserUtil {
     public static ExpiryDate parseNumberIntoDate(String numberOfDays) throws ParseException {
         requireNonNull(numberOfDays);
         String trimmedDays = numberOfDays.trim();
-        int days = Integer.parseInt(trimmedDays);
+        int days;
+        try {
+            days = Integer.parseInt(trimmedDays);
+        } catch (NumberFormatException e) {
+            throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
+        }
         if (days < 0) {
             throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
         }
