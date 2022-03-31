@@ -337,12 +337,13 @@ Examples:
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
-| Parameter           | Description                                                                                                                                                                                           |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CUSTOMER_INDEX`    | Name of the service. Service name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. It should also be unique such that no two services have the same name. |
-| `SERVICE_INDEX`     | Price of the service. Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.                                                                            |
-| `BOOKING_DATE_TIME` | Duration of the service in minutes. Duration should only contain numbers and have a value that is greater than 0.                                                                                     |
-| `FEEDBACK`          | The index of the service in the displayed list. It must be a valid positive index.                                                                                                                    |
+| Parameter           | Description                                                                                                                                                                                          |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`              | Name of customer or Service. Name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
+| `CUSTOMER_INDEX`    | Customer Index should only contain numbers and have a value that is greater than 0.                                                                                                                  |
+| `SERVICE_INDEX`     | Service Index should only contain numbers and have a value that is greater than 0.                                                                                                                   |
+| `BOOKING_DATE_TIME` | Booking Date Time must be in format dd-MM-yyyy HH:mm.                                                                                                                                                |
+| `FEEDBACK`          | Feedback should only contain alphanumeric characters, hyphens and spaces, and it should not be blank.                                                                                                                                                                                            |
 
 #### 4.3.2 Adding a booking: `addb`
 Adds a booking to the application.
@@ -497,12 +498,13 @@ Examples:
 * `plotMonthlyCustomers`
 
 ### 4.5 Schedule management
-
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
 * The indexes of bookings in schedule view is not meaning for deleting bookings. Using them will lead to unexpected behaviour.
 </div>
+
+
 
 #### 4.5.1 Schedule management command parameters
 The table below shows a list of command parameters that will be used for schedule management.
@@ -603,6 +605,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
 | Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             ||
 | Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
+
 
 ### 5.4 Statistics
 
