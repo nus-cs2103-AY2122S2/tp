@@ -19,6 +19,8 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
     public static final String NONEXISTENT_WEEK = "Week %s does not exists.";
+    public static final String MESSAGE_MARK_FAILED = "Students: %s are not enrolled\n"
+            + "Successfully mark other students from %s(%s).";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark given students from %s(%s).";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance(s) of the specified student(s)"
             + "belonging to the class group at the specified CLASS_GROUP_INDEX for the specified week.\n"
@@ -68,9 +70,13 @@ public class MarkCommand extends Command {
             throw new CommandException(String.format(NONEXISTENT_WEEK, weekIndex));
         }
 
-        classGroup.markAttendance(weekIndex, students);
+        List<Student> notMarkedStudents = classGroup.markAttendance(weekIndex, students);
         model.setEntity(classGroupToEdit, classGroup);
-        return new CommandResult(String.format(MESSAGE_MARK_SUCCESS,
-                classGroup.getClassGroupId(), classGroup.getClassGroupType()));
+        if (notMarkedStudents.size() == 0) {
+            return new CommandResult(String.format(MESSAGE_MARK_SUCCESS,
+                    classGroup.getClassGroupId(), classGroup.getClassGroupType()));
+        }
+        return new CommandResult(String.format(MESSAGE_MARK_FAILED,
+                notMarkedStudents.toString(), classGroup.getClassGroupId(), classGroup.getClassGroupType()));
     }
 }

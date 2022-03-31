@@ -160,7 +160,7 @@ Examples:
 
 Marks student(s)' attendance(s).
 
-Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
+Format: `mark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Marks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
@@ -169,15 +169,15 @@ Format: `mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUD
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `mark attend c/1 w/3 s/all` marks the attendances of all the students belonging to the 1st class group for week 3.
-* `mark attend c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
-* `mark attend c/1 w/3 s/e0123456,e0234567` marks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
+* `mark c/1 w/3 s/all` marks the attendances of all the students belonging to the 1st class group for week 3.
+* `mark c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
+* `mark c/1 w/3 s/e0123456,e0234567` marks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
 #### Unmarking attendance: `unmark`
 
 Unmarks student(s)' attendance(s).
 
-Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
+Format: `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
 * Unmarks the attendance(s) of the specified student(s) belonging to the class group at the specified `CLASS_GROUP_INDEX` for the specified week.
 * Students may be specified with either `all` (i.e. all students), `STUDENT_INDEXES` or `STUDENT_IDS`.
@@ -186,9 +186,9 @@ Format: `unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|ST
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unmark attend c/1 w/3 s/all` unmarks the attendances of all the students belonging to the 1st class group for week 3.
-* `unmark attend c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
-* `unmark attend c/1 w/3 s/e0123456,e0234567` unmarks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
+* `unmark c/1 w/3 s/all` unmarks the attendances of all the students belonging to the 1st class group for week 3.
+* `unmark c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
+* `unmark c/1 w/3 s/e0123456,e0234567` unmarks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
 ### Grading assessments: `grade`
 
@@ -452,16 +452,16 @@ _Details coming soon ..._
         <td>student(s)</td>
         <td>
             <ul>
-                <li>syntax: <code>mark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
-                <li>e.g., <code>mark attend c/1 w/3 s/all</code></li>
-                <li>e.g., <code>mark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
-                <li>e.g., <code>mark attend c/1 w/3 s/e0123456,e0234567</code></li>
+                <li>syntax: <code>mark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
+                <li>e.g., <code>mark c/1 w/3 s/all</code></li>
+                <li>e.g., <code>mark c/1 w/3 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>mark c/1 w/3 s/e0123456,e0234567</code></li>
             </ul>
             <ul>
-                <li>syntax: <code>unmark attend c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
-                <li>e.g., <code>unmark attend c/1 w/3 s/all</code></li>
-                <li>e.g., <code>unmark attend c/1 w/3 s/1,2,3,4,5,6</code></li>
-                <li>e.g., <code>unmark attend c/1 w/3 s/e0123456,e0234567</code></li>
+                <li>syntax: <code>unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS</code></li>
+                <li>e.g., <code>unmark c/1 w/3 s/all</code></li>
+                <li>e.g., <code>unmark c/1 w/3 s/1,2,3,4,5,6</code></li>
+                <li>e.g., <code>unmark c/1 w/3 s/e0123456,e0234567</code></li>
             </ul>
         </td>
     </tr>

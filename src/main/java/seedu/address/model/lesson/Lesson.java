@@ -72,14 +72,18 @@ public class Lesson {
      *
      * @param students A list of students to mark attendance
      */
-    public void markAttendance(List<Student> students) {
-        for (Student s : students) {
-            for (StudentAttendance sa : studentAttendanceList) {
-                if (sa.getStudent().isSameStudent(s)) {
-                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.markAttendance(s));
+    public List<Student> markAttendance(List<Student> students) {
+        List<Student> studentsCopy = new ArrayList<>(students);
+        for (StudentAttendance sa : studentAttendanceList) {
+            for (Student s : students) {
+                if (sa.getStudent().equals(s)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.markAttendance());
+                    studentsCopy.remove(s);
+                    break;
                 }
             }
         }
+        return studentsCopy;
     }
 
     //@@author EvaderFati
@@ -89,14 +93,18 @@ public class Lesson {
      *
      * @param students A list of students to unmark attendance
      */
-    public void unmarkAttendance(List<Student> students) {
-        for (Student s : students) {
-            for (StudentAttendance sa : studentAttendanceList) {
+    public List<Student> unmarkAttendance(List<Student> students) {
+        List<Student> studentsCopy = new ArrayList<>(students);
+        for (StudentAttendance sa : studentAttendanceList) {
+            for (Student s : students) {
                 if (sa.getStudent().isSameStudent(s)) {
                     studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.unmarkAttendance(s));
+                    studentsCopy.remove(s);
+                    break;
                 }
             }
         }
+        return studentsCopy;
     }
 
     /**
