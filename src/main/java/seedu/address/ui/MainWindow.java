@@ -86,7 +86,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        System.out.println(javafx.scene.text.Font.getFamilies());
     }
 
     public Stage getPrimaryStage() {
