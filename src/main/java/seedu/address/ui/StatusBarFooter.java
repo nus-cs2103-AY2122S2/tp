@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.BookNames;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -41,23 +42,26 @@ public class StatusBarFooter extends UiPart<Region> {
 
     /**
      * Changes the text for {@code StatusBarFooter} with to the correct {@code Path}.
+     * @return the AddressBook name AFTER the update
      */
-    public String swapPaths() {
+    public String updateBookPath() {
         String currentPathString = getSaveLocationStatusText();
         String archivePathString = Paths.get(".").resolve(archivePath).toString();
         String defaultPathString = Paths.get(".").resolve(defaultPath).toString();
 
+        String nextBookName = "";
+
         if (currentPathString.equals(archivePathString)) {
             saveLocationStatus.setText(defaultPathString);
             isArchive = false;
-            return "default";
+            nextBookName = BookNames.BOOKNAME_DEFAULT;
         } else if (currentPathString.equals(defaultPathString)) {
             saveLocationStatus.setText(archivePathString);
             isArchive = true;
-            return "archives";
+            nextBookName = BookNames.BOOKNAME_ARCHIVED;
         }
 
-        return "";
+        return nextBookName;
     }
 
     /**

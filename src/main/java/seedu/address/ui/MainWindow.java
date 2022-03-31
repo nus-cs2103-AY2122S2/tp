@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.BookNames;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -21,7 +22,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -229,14 +229,13 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Handle Switch fired!");
         logic.switchAddressBook();
 
-        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.swapPaths());
+        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.updateBookPath());
 
-        boolean isArchivedNext = StatusBarFooter.isArchiveBook();
-        boolean isDefaultNext = !StatusBarFooter.isArchiveBook();
-        if (isArchivedNext) {
-            switchMenuItem.setText("Switch to Archives");
+        boolean isDefaultNext = StatusBarFooter.isArchiveBook();
+        if (isDefaultNext) {
+            switchMenuItem.setText(String.format("Switch to %s", BookNames.BOOKNAME_DEFAULT));
         } else {
-            switchMenuItem.setText("Switch to Default");
+            switchMenuItem.setText(String.format("Switch to %s", BookNames.BOOKNAME_ARCHIVED));
         }
     }
 
