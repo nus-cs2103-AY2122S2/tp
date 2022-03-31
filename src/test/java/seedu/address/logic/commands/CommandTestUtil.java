@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_FRIENDNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
@@ -65,6 +67,8 @@ public class CommandTestUtil {
     public static final String VALID_EVENT_DESCRIPTION_OTHER = "Some other valid description";
     public static final String VALID_DATE = "15-02-2022";
     public static final String VALID_DATE_OTHER = "12-10-2020";
+    public static final String VALID_DATE_BEFORE = "12-10-2021";
+    public static final String VALID_DATE_AFTER = "1-12-2022";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NEW_NAME_DESC_AMY = " " + PREFIX_NEW_NAME + VALID_NAME_AMY;
@@ -100,6 +104,10 @@ public class CommandTestUtil {
     public static final String EVENT_REMOVEFRIEND_DESC_B = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_BOB;
     public static final String EVENT_DATE_DESC_A = " " + PREFIX_DATE + VALID_DATE;
     public static final String EVENT_DATE_DESC_B = " " + PREFIX_DATE + VALID_DATE_OTHER;
+    public static final String EVENT_DATE_START_DESC_A = " " + PREFIX_DATE_START + VALID_DATE_BEFORE;
+    public static final String EVENT_DATE_START_DESC_B = " " + PREFIX_DATE_START + "1-10-2021";
+    public static final String EVENT_DATE_END_DESC_A = " " + PREFIX_DATE_END + VALID_DATE_AFTER;
+
     public static final String INVALID_CURRENT_NAME_DESC = " " + PREFIX_CURRENT_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NEW_NAME_DESC = " " + PREFIX_NEW_NAME + "James&";
@@ -113,6 +121,8 @@ public class CommandTestUtil {
     public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_NAME + "James\nBirthday";
     public static final String INVALID_EVENT_DATETIME_DESC = " " + PREFIX_DATETIME + "1400-20-10 %%";
     public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "12-15-2020 %%";
+    public static final String INVALID_EVENT_DATE_START_DESC = " " + PREFIX_DATE_START + "12-15-2020 %%";
+    public static final String INVALID_EVENT_DATE_END_DESC = " " + PREFIX_DATE_END + "12-15-2020 %%";
     public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "";
     public static final String INVALID_EVENT_FRIENDNAME_DESC = " " + PREFIX_FRIEND_NAME + "Tom $% Arthur";
     public static final String INVALID_EVENT_ADDFRIEND_DESC = " " + PREFIX_ADD_FRIENDNAME + "Jack,Hilary";

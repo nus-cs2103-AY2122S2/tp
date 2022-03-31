@@ -244,7 +244,7 @@ Delete existing event(s).
 * `deleteevent 2`
 
 ### List all events : `listevents`
-Shows all the upcoming events in amigos
+Lists all the upcoming events in amigos
 
 **Format**: `listevents [-a]`
 
@@ -260,22 +260,23 @@ Shows all the upcoming events in amigos
 
 Find events in Amigos whose properties match the given search criteria.
 
-**Format**: `findevent [n/EVENT_NAME_SUBSTRING] [da/DATE] [f/FRIEND_NAME_SUBSTRING]...`
+**Format**: `findevent [n/EVENT_NAME_SUBSTRING] [ds/DATE_START] [de/DATE_END] [f/FRIEND_NAME_SUBSTRING]...`
 
 * For search by `EVENT_NAME_KEYWORD`/`FRIEND_NAME_KEYWORD`:
   * The search is **case-insensitive**. e.g john will match John
-  * For each search field, an event is a match if the search substring matches.
+  * For each search field, an event is a match if the search substring matches
     * e.g n/Birthday will match events with names John's Birthday, Bob's Birthday
     * e.g. f/joe will match events containing either Joe Maggio or Joe Allen in the friends list.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
-  * (COMING SOON) Filter by time period???
+  * It is acceptable to provide only the `DATE_START` or `DATE_END`, if desired.
+  * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
 
 **Examples**:
-* `findevent n/dinner da/20-03-2022` returns events on 20 Mar 2022 with an event name containing 'dinner' 
+* `findevent n/dinner ds/20-03-2022` returns events starting from 20 Mar 2022 with an event name containing 'dinner' 
 * `findevent f/Joe f/John` will return events with a friends list containing both 'joe' and 'john'
 
 
@@ -301,14 +302,7 @@ Exits the program.
 ### Saving the data
 
 Amigos data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-Amigos data is saved as a JSON file `[JAR file location]/data/amigos.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Amigos will discard all data and start with an empty data file at the next run.
-</div>
+Please do not manually edit the save file to avoid the risk of data corruption.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -321,7 +315,6 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
 | Action                     | Command Alias | Format, Examples                                                                                                                                                                                                                                                       |
 |----------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Friend**             | `af`          | `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]...` <br> e.g., `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner. t/friend t/classmate` |
@@ -337,8 +330,9 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Edit Event**             | `ee`          | `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...` <br> e.g., `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo`                                                                 |
 | **Delete Event**           | `de`          | `deleteevent INDEX` <br> e.g., `deleteevent 2`                                                                                                                                                                                                                         |
 | **List all events**        | `le`          | `listevents [-a]`                                                                                                                                                                                                                                                      |
-| **Find events**            | `fe`          | `findevent [n/EVENT_NAME_SUBSTRING] [da/DATE] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner da/20-03-2022 f/Maggie`                                                                                                                                      |
+| **Find events**            | `fe`          | `findevent [n/EVENT_NAME_SUBSTRING] [ds/DATE_START] [de/DATE_END] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner ds/20-03-2022 f/Maggie`                                                                                                                  |
 | **Help**                   |               | `help`                                                                                                                                                                                                                                                                 |
 | **Clear**                  |               | `clear`                                                                                                                                                                                                                                                                |
 | **Exit**                   |               | `exit`                                                                                                                                                                                                                                                                 |
 
+>>>>>>> master
