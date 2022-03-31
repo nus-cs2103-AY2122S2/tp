@@ -33,7 +33,11 @@ This guide aims to be the one-stop shop to get you up and running.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press `Enter` to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br><br>
+5. Alternatively, you can run the application via the terminal using `java -jar ./CinnamonBun.jar` from `CinnamonBun.jar`'s home folder.
+
+6. If are unable to run it due to lack of permissions, run `chmod +x ./CinnamonBun` in the terminal from `CinnamonBun.jar`'s home folder.
+
+7. Type the command in the command box and press `Enter` to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
    * `list`: Lists all clients.
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a client named `John Doe` to CinnamonBun.
@@ -42,7 +46,7 @@ This guide aims to be the one-stop shop to get you up and running.
    * `undo`: Undo the last executed command.
    * `exit`: Exits the app.  
 
-7. Refer to the [commands](#commands) below for details of each command.
+8. Refer to the [commands](#commands) below for details of each command.
 
 ---
 
