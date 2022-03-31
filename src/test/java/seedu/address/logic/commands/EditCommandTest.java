@@ -46,7 +46,8 @@ public class EditCommandTest {
         EditCandidateDescriptor descriptor = new EditCandidateDescriptorBuilder(editedCandidate).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CANDIDATE, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate)
+                + EditCommand.REFRESH_MESSAGE;;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
@@ -67,7 +68,8 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastCandidate, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate)
+                + EditCommand.REFRESH_MESSAGE;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
@@ -81,7 +83,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CANDIDATE, new EditCandidateDescriptor());
         Candidate editedCandidate = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate)
+                + EditCommand.REFRESH_MESSAGE;;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
@@ -98,7 +101,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CANDIDATE,
                 new EditCandidateDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate)
+                + EditCommand.REFRESH_MESSAGE;;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
