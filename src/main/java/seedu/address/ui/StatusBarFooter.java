@@ -28,9 +28,9 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     public StatusBarFooter(Path saveLocation, Path defaultPath, Path archivePath) {
         super(FXML);
-        this.defaultPath = defaultPath;
-        this.archivePath = archivePath;
-        this.saveLocation = saveLocation;
+        StatusBarFooter.defaultPath = defaultPath;
+        StatusBarFooter.archivePath = archivePath;
+        StatusBarFooter.saveLocation = saveLocation;
         isArchive = false;
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
