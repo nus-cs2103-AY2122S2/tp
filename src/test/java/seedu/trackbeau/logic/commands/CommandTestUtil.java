@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
@@ -101,6 +102,9 @@ public class CommandTestUtil {
     public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGIES + VALID_ALLERGY_AMY;
     public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGIES + VALID_ALLERGY_BOB;
 
+    public static final String VALID_DATE1 = " " + PREFIX_DATE + VALID_REG_DATE_AMY;
+    public static final String VALID_DATE2 = " " + PREFIX_DATE + VALID_REG_DATE_BOB;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -110,6 +114,7 @@ public class CommandTestUtil {
     public static final String INVALID_STAFFS_DESC = " " + PREFIX_STAFFS; //empty string not allowed for tags
     public static final String INVALID_SERVICE_DESC = " " + PREFIX_SERVICES; //empty string not allowed for tags
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGIES; //empty string not allowed for tags
+    public static final String INVALID_DATE = " " + PREFIX_DATE + "10-10"; //missing year
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

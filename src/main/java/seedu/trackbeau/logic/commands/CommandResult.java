@@ -35,6 +35,9 @@ public class CommandResult {
     /** plot monthly customer chart */
     private final boolean plotMonthlyCustomerChart;
 
+    /** Schedule view should change to selected date */
+    private final boolean hasSelectedDate;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -42,7 +45,7 @@ public class CommandResult {
                          boolean exit, boolean plotStaffChart,
                          boolean plotServiceChart, boolean plotAllergyChart,
                          boolean plotSkinChart, boolean plotHairChart,
-                         boolean plotMonthlyCustomerChart) {
+                         boolean plotMonthlyCustomerChart, boolean hasSelectedDate) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -52,6 +55,7 @@ public class CommandResult {
         this.plotSkinChart = plotSkinChart;
         this.plotHairChart = plotHairChart;
         this.plotMonthlyCustomerChart = plotMonthlyCustomerChart;
+        this.hasSelectedDate = hasSelectedDate;
     }
 
     /**
@@ -61,7 +65,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false,
                 false, false, false, false,
-                false, false, false);
+                false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -98,6 +102,10 @@ public class CommandResult {
 
     public boolean isPlotMonthlyCustomerChart() {
         return plotMonthlyCustomerChart;
+    }
+
+    public boolean hasSelectedDate() {
+        return hasSelectedDate;
     }
 
     @Override

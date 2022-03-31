@@ -14,9 +14,9 @@
     <children>
         <HBox>
             <children>
-                <Label fx:id="displayDate" text="\$date" />
+                <Label fx:id="displayDate" text="\$date" wrapText="true"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label alignment="CENTER_RIGHT" fx:id="bookingCount" styleClass="cell_small_label" text="\$count"/>
+                <Label alignment="CENTER_RIGHT" fx:id="bookingCount" styleClass="cell_small_label" text="\$count" wrapText="true"/>
             </children>
         </HBox>
         <ListView fx:id="bookingListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />

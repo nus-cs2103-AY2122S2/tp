@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Service> filteredServices;
     private final FilteredList<Booking> filteredBookings;
+    private LocalDate selectedDate;
 
     /**
      * Initializes a ModelManager with the given trackBeau and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
 
         this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.selectedDate = LocalDate.now();
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
         filteredServices = new FilteredList<>(this.trackBeau.getServiceList());
         filteredBookings = new FilteredList<>(this.trackBeau.getBookingList());
@@ -222,6 +225,16 @@ public class ModelManager implements Model {
     public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
         filteredCustomers.setPredicate(predicate);
+    }
+
+    @Override
+    public LocalDate getSelectedDate() {
+        return this.selectedDate;
+    }
+
+    @Override
+    public void setSelectedDate(LocalDate selectedDate) {
+        this.selectedDate = selectedDate;
     }
 
     @Override

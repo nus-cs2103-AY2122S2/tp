@@ -52,7 +52,6 @@ public class BookingCard extends UiPart<Region> {
         phone.setText("P: " + booking.getCustomerPhone().value);
         service.setText("Sev: " + booking.getServiceName().fullName);
         startTime.setText(booking.getBookingDateTime().value.format(formatter));
-        startTime.setWrapText(true);
     }
 
     @Override
