@@ -131,6 +131,12 @@ public class ModelManager implements Model {
         this.hustleBook.resetData(prevState);
     }
 
+    @Override
+    public void redoHustleBook() {
+        ReadOnlyHustleBook nextState = HustleBookHistory.getInstance().getNextState();
+        this.hustleBook.resetData(nextState);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
