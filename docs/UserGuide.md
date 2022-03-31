@@ -131,7 +131,7 @@ Find friends in Amigos whose name, tags or logs' title matches ANY of the given 
 **Format**: `findfriend [n/NAME_KEYWORD]... [ttl/LOG_TITLE_KEYWORD]... [t/TAG_KEYWORD]...`
 
 * Name, tags, and logs' title will be searched.
-* At leadt one of the optional fields must be provided.
+* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `john` will match `John`
 * The order of the keywords does not matter. e.g Doe John will match John Doe
 * As long as the keyword matches a substring of the name / logs' title / tags
