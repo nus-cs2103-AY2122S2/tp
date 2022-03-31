@@ -44,7 +44,7 @@ The Features section will be split into 3 subsections for:
 
 * Buyer: Someone who is seeking to purchase property.
 
-* Seller: Seomeone who is seeking to sell their property.
+* Seller: Someone who is seeking to sell their property.
 
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
   e.g. In `add-b n/NAME`, `NAME` is an input such as `add-b n/Chok Hoe`.
@@ -335,7 +335,7 @@ Function: Add a new property for the specified seller.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note: `add-ptb` and `add-pts` have different fields! **<br>
+:information_source: Note: `add-ptb` and `add-pts` have different fields!<br>
 
 * `add-pts` has an additional `a/ADDRESS` field.
 
