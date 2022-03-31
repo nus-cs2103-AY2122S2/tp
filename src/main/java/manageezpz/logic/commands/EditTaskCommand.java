@@ -24,6 +24,7 @@ import manageezpz.model.task.Event;
 import manageezpz.model.task.Task;
 import manageezpz.model.task.Time;
 import manageezpz.model.task.Todo;
+import manageezpz.model.task.exceptions.DuplicateTaskException;
 
 /**
  * Edits the details of an existing task in the address book.
@@ -86,15 +87,15 @@ public class EditTaskCommand extends Command {
         }
 
         Task currentTask = model.getFilteredTaskList().get(index.getZeroBased());
-        Task updatedTask;
+        Task updatedTask = null;
 
         try {
             if (currentTask.getType().equalsIgnoreCase("todo")) {
-                updatedTask = updateTodo((Todo) currentTask, model, this.desc);
+                updatedTask = updateTodo((Todo) currentTask, this.desc);
             } else if (currentTask.getType().equalsIgnoreCase("deadline")) {
-                updatedTask = updateDeadline((Deadline) currentTask, model, this.desc, this.date, this.time);
+                updatedTask = updateDeadline((Deadline) currentTask, this.desc, this.date, this.time);
             } else if (currentTask.getType().equalsIgnoreCase("event")) {
-                updatedTask = updateEvent((Event) currentTask, model, this.desc, this.date, this.time);
+                updatedTask = updateEvent((Event) currentTask, this.desc, this.date, this.time);
             } else {
                 // Should not reach this as there are only three types of tasks
                 throw new CommandException(MESSAGE_UNEXPECTED_ERROR);
@@ -102,28 +103,30 @@ public class EditTaskCommand extends Command {
 
             model.setTask(currentTask, updatedTask);
             return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, updatedTask));
-        } catch (ParseException pe) {
-            throw new CommandException(pe.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, pe);
+        } catch (CommandException | ParseException e) {
+            throw new CommandException(e.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, e);
+        } catch (DuplicateTaskException de) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, updatedTask) + "\n" + MESSAGE_USAGE, de);
         }
     }
 
-    private Task updateTodo(Todo currentTask, Model model, String desc) throws CommandException, ParseException {
+    private Task updateTodo(Todo currentTask, String desc) throws CommandException, ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
 
         if (!desc.isEmpty()) {
-            Description newDesc = parseDescription(model, desc);
+            Description newDesc = ParserUtil.parseDescription(desc);
             updatedToDoTask.setDescription(newDesc);
         }
 
         return updatedToDoTask;
     }
 
-    private Task updateDeadline(Deadline currentTask, Model model, String desc, String date,
-                                String time) throws CommandException, ParseException {
+    private Task updateDeadline(Deadline currentTask, String desc, String date, String time)
+            throws CommandException, ParseException {
         Deadline updatedDeadlineTask = new Deadline(currentTask);
 
         if (!desc.isEmpty()) {
-            Description newDesc = parseDescription(model, desc);
+            Description newDesc = ParserUtil.parseDescription(desc);
             updatedDeadlineTask.setDescription(newDesc);
         }
 
@@ -140,12 +143,12 @@ public class EditTaskCommand extends Command {
         return updatedDeadlineTask;
     }
 
-    private Task updateEvent(Event currentTask, Model model, String desc, String date,
-                             String time) throws CommandException, ParseException {
+    private Task updateEvent(Event currentTask, String desc, String date, String time)
+            throws CommandException, ParseException {
         Event updatedEventTask = new Event(currentTask);
 
         if (!desc.isEmpty()) {
-            Description newDesc = parseDescription(model, desc);
+            Description newDesc = ParserUtil.parseDescription(desc);
             updatedEventTask.setDescription(newDesc);
         }
 
@@ -173,20 +176,5 @@ public class EditTaskCommand extends Command {
         }
 
         return updatedEventTask;
-    }
-
-    private Description parseDescription(Model model, String desc) throws CommandException, ParseException {
-        Description newDesc = ParserUtil.parseDescription(desc);
-
-        List<Task> fullTaskList = model.getAddressBook().getTaskList();
-
-        for (Task task : fullTaskList) {
-            if (task.getDescription().equals(newDesc)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK,
-                        newDesc) + "\n" + MESSAGE_USAGE);
-            }
-        }
-
-        return newDesc;
     }
 }
