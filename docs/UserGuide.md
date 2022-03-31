@@ -16,27 +16,31 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
+2. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * `list -i`: Switches to interview tab and displays all interviews.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `list -a s/asc`: Switches to applicants tab and displays all applicants sorted by name in ascending order.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`: Adds an applicant named `Benedict` to the Address Book.
 
-   * **`clear`** : Deletes all contacts.
+   * `delete -i 2`: Deletes the 2nd interview shown in the current interview list.
 
-   * **`exit`** : Exits the app.
+   * `pass 1`: Passes the 1st interview shown in the current interview list.
+   
+   * `export -a`: Exports the data of all applicants in HireLah to a CSV file.
+   
+   * `exit`: Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,7 +51,7 @@ from offering positions to scheduling interviews with candidates. It is optimise
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add -a n/NAME`, `NAME` is a parameter which can be used as `add n/Benedict`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -61,8 +65,8 @@ from offering positions to scheduling interviews with candidates. It is optimise
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+* Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
 
@@ -87,7 +91,8 @@ An applicant can have any number of tags (including 0)
 </div>
 
 * Age provided must be at least two digits eg: “23”
-* Gender must be M/F
+* Phone number and email must be unique 
+* Gender must be M/F (case-sensitive)
 
 Examples:
 * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
@@ -319,8 +324,7 @@ Format: `pass INTERVIEW_INDEX`
 * Interview must have status `pending` before it can be passed.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
- * pass 1
+Example: `pass 1`
 
 ## Failing Interviews : `fail`
 
@@ -332,8 +336,7 @@ Format: `fail INTERVIEW_INDEX`
 * Interview must have status `pending` before it can be failed.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* fail 1
+Example: `fail 1`
 
 ## Accepting Interviews : `accept`
 
@@ -357,6 +360,14 @@ Format: `reject INTERVIEW_INDEX`
 * Interview must have status `passed` before it can be rejected.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+## Exporting Data : `export`
+
+Exports all data of the specified typo in HireLah to a CSV file. 
+
+Format: `export -TYPE`
+
+`TYPE` can be `a` for applicants, `p` for positions, and `i` for interviews
+
 ## Viewing help: `help`
 
 Lists all the command keywords with their general descriptions
@@ -375,13 +386,13 @@ Examples:
 * `help add`
 * `help del`
 
-### Exiting the program : `exit`
+## Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Saving the data
 
 Upon exiting HireLah, the data in the application will automatically be saved, including the positions, applicants, and interviews. There is no need to save manually.
 
