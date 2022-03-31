@@ -38,7 +38,9 @@
             <padding>
                 <Insets top="10" right="5" bottom="5" left="15" />
             </padding>
+            <ScrollPane prefWidth="600" prefViewportHeight="80">
             <FlowPane fx:id="personName" maxHeight="200" vgap="10" style="-fx-font-size: 14px; "/>
+            </ScrollPane>
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
                 <padding>

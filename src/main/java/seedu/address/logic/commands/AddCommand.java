@@ -34,7 +34,9 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student contact already exists in ArchDuke";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student contact already exists in ArchDuke. \n"
+            + "A student contact cannot have the same phone number and/or email (case insensitive) "
+            + "as another student contact";
 
     private final Person toAdd;
 
