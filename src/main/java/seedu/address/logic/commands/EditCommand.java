@@ -22,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
@@ -33,6 +34,7 @@ import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
 import seedu.address.model.userimage.UserImage;
 import seedu.address.model.util.UserTypeUtil;
+import seedu.address.storage.ReminderPersons;
 
 
 /**
@@ -91,6 +93,11 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        // remove reminder for previous instance of Person
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Reminder previousReminder = reminderPersons.remove(personToEdit);
+        reminderPersons.add(editedPerson, previousReminder);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -25,6 +25,7 @@ import seedu.address.model.person.Preference;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Region;
 import seedu.address.model.userimage.UserImage;
+import seedu.address.storage.ReminderPersons;
 import seedu.address.storage.Storage;
 
 /**
@@ -130,6 +131,16 @@ public class LogicManager implements Logic {
     public List<Pair<Person>> getMatchList() {
         model.updateMatchList();
         return model.getMatchList();
+    }
+
+    @Override
+    public ObservableList<Person> getReminderPersonList() {
+        // get HashSet of HashMap's keys
+        ObservableList<Person> reminderList = FXCollections.observableArrayList();
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Set<Person> keySetOfReminderPerson = reminderPersons.getKeySet();
+        reminderList.addAll(keySetOfReminderPerson);
+        return reminderList;
     }
 
     @Override

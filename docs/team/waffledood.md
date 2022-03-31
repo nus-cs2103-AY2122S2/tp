@@ -16,10 +16,14 @@ Given below are my contributions to the project.
   * Credits: this feature is completely original, with no reference materials.
 
 * **New Feature**: Added a remind command that allows the user to indicate clients they wish to be reminded of.
-  * What it does: Allows the client to set reminders for themselves to contact a client/clients.
-  * Justification: This feature improves the product as the client will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app.
+  * What it does: Allows the user to set reminders for themselves to contact a client/clients, frequently reminds the user by launching the Reminder window if it's not active, or focusing on the Reminder window if it's already active.
+  * Justification: This feature improves the product as the user will take note of which clients to follow up with, and will be constantly reminded when the app is active, or after they just launched the app. A separate Reminder Window containing the clients with Reminders helps the user focus on
   * Highlights: This feature involves the usage of Threads and was quite tricky to implement because improper handling or usage of Threads could result in performance issues, and the app not behaving properly (closing the app with the Thread still running did not fully close the app & forcing the app to shutdown via IntelliJ resulted in an exit code error).
   * Credits: this feature was implemented with the help of these online resources: [Java Timer](https://www.baeldung.com/java-timer-and-timertask)
+
+* **New Feature**: Added a reminder window command that allows the user to directly open the Reminder window, without having to interact with the GUI.
+  * What it does: Allows the user to directly view a compact list of clients which have Reminders set by the user (real estate agent).
+  * Justification: This feature improves the product as the user will be able to quickly open up the Reminder window from just their keyboard!
 
 * **Code contributed**: [RepoSense link]()
 
@@ -35,7 +39,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `help`, `add`, `list` and `edit` (Howard, Cindy & myself authored the document on Notion, Jiet helped uploade the User Guide on our behalf) [\#34](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/34)
   * Developer Guide:
     * Added implementation details of the `UserType` feature.
-    * Added implementation details of the `remind` feature.
+    * Added implementation details of the `Remind` feature.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#45](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/45), [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#51](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/51), [\#52](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/52), [\#79](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/79)

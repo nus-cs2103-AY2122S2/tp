@@ -49,6 +49,9 @@ public interface Logic {
     /** Returns the number of persons in specified region*/
     int getPersonsBasedOnRegion(String region);
 
+    /** Returns an unmodifiable view of the filtered list of reminder persons */
+    ObservableList<Person> getReminderPersonList();
+
     /**
      * Returns the user prefs' address book file path.
      */
