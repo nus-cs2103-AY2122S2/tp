@@ -1,14 +1,17 @@
 package seedu.ibook.logic.parser;
 
+import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_END_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_START_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.ibook.logic.commands.FindCommand;
+import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
@@ -32,12 +35,14 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE);
 
         Name name;
         Category category;
         Description description;
         Price price;
+        Price startPrice;
+        Price endPrice;
 
         List<AttributeFilter> filterList = new ArrayList<>();
 
@@ -59,6 +64,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
             filterList.add(new PriceFilter(price));
+        } else if (argMultimap.getValue(PREFIX_START_PRICE).isPresent()
+            && argMultimap.getValue(PREFIX_END_PRICE).isPresent()) {
+            startPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_START_PRICE).get());
+            endPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_END_PRICE).get());
+            filterList.add(new PriceFilter(startPrice, endPrice));
+        }
+
+        if (filterList.size() == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         return new FindCommand(filterList);

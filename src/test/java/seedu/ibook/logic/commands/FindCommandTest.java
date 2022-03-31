@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;

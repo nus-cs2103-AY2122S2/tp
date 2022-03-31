@@ -3,11 +3,15 @@
     "name" : "Kaya Bread",
     "category" : "Bread",
     "description" : "Kaya on bread",
-    "price" : "1.99"
+    "price" : "4.42",
+    "discountRate": "25",
+    "discountStart": "1"
   }, {
     "name" : "Kaya Bread",
     "category" : "Bread",
     "description" : "Kaya on bread",
-    "price" : "1.99"
+    "price" : "4.42",
+    "discountRate": "25",
+    "discountStart": "1"
   } ]
 }

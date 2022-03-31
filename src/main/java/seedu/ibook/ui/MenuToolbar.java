@@ -2,6 +2,8 @@ package seedu.ibook.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
+import seedu.ibook.logic.commands.product.ExpiredCommand;
+import seedu.ibook.logic.commands.product.OutOfStockCommand;
 
 /**
  * The menu toolbar of the application.
@@ -10,7 +12,6 @@ public class MenuToolbar extends UiComponent<MenuBar> {
 
     private static final String FXML = "MenuToolbar.fxml";
 
-    private MainWindow mainWindow;
     private HelpWindow helpWindow;
 
     /**
@@ -21,7 +22,6 @@ public class MenuToolbar extends UiComponent<MenuBar> {
     MenuToolbar(MainWindow mainWindow) {
         super(FXML, mainWindow);
 
-        this.mainWindow = mainWindow;
         this.helpWindow = new HelpWindow();
     }
 
@@ -30,7 +30,7 @@ public class MenuToolbar extends UiComponent<MenuBar> {
      */
     @FXML
     private void handleExit() {
-        mainWindow.handleExit();
+        getMainWindow().handleExit();
     }
 
     /**
@@ -43,5 +43,21 @@ public class MenuToolbar extends UiComponent<MenuBar> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Finds items that are expired.
+     */
+    @FXML
+    private void handleExpired() {
+        getMainWindow().executeCommand(ExpiredCommand.COMMAND_WORD);
+    }
+
+    /**
+     * Finds products that are out of stock.
+     */
+    @FXML
+    private void handleOutOfStock() {
+        getMainWindow().executeCommand(OutOfStockCommand.COMMAND_WORD);
     }
 }

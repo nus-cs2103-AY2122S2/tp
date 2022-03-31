@@ -12,20 +12,12 @@ public class Price {
     public static final String MESSAGE_CONSTRAINTS =
             "Prices should only be of type double, and should not be negative";
 
-    /*
-     * The first character of the name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "\\$?(\\d+(?:.\\d{1,2})?)";
+    public static final String VALIDATION_REGEX = "\\$?\\d+(?:\\.\\d{1,2})?";
 
     public final Double price;
 
-    private Price() {
-        price = 0.00;
-    }
-
     /**
-     * Constructs a {@code Price}.
+     * Constructs a {@code Price} from string.
      *
      * @param price A valid price.
      */
@@ -36,6 +28,16 @@ public class Price {
         price = removeDollarSign(price);
         this.price = Double.parseDouble(price);
         assert this.price >= 0; // ensure that the price is not negative
+    }
+
+    /**
+     * Constructs a {@code Price} from double.
+     *
+     * @param price A valid price.
+     */
+    public Price(Double price) {
+        this.price = price;
+        assert this.price >= 0;
     }
 
     /**
@@ -60,6 +62,17 @@ public class Price {
         }
 
         return price;
+    }
+
+    public Price getDiscountedPrice(DiscountRate rate) {
+        return new Price(price * (100 - rate.discountRate) / 100.0);
+    }
+
+    /**
+     * Checks that the price is within a specified range.
+     */
+    public boolean isWithin(Price startPrice, Price endPrice) {
+        return price >= startPrice.price && price <= endPrice.price;
     }
 
     @Override

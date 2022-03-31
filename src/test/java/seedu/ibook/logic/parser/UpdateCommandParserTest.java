@@ -5,9 +5,6 @@ import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.CATEGORY_FULL_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESCRIPTION_FULL_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_EXPIRY_DATE_DESC;
-import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.NAME_FULL_B;
@@ -30,10 +27,8 @@ import static seedu.ibook.testutil.TypicalIndexes.INDEX_THIRD_PRODUCT;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.UpdateCommand;
-import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
-import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Name;
+import seedu.ibook.logic.commands.product.UpdateCommand;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
@@ -73,23 +68,12 @@ public class UpdateCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
-        // invalid category
-        assertParseFailure(parser, "1" + INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
         // invalid price
         assertParseFailure(parser, "1" + INVALID_PRICE_DESC, Price.MESSAGE_CONSTRAINTS);
-
-        // invalid name followed by valid category
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + CATEGORY_FULL_A, Name.MESSAGE_CONSTRAINTS);
 
         // valid price followed by invalid price. The test case for invalid price followed by valid price
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + PRICE_FULL_A + INVALID_PRICE_DESC, Price.MESSAGE_CONSTRAINTS);
-
-        // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EXPIRY_DATE_DESC + VALID_PRICE_A,
-                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

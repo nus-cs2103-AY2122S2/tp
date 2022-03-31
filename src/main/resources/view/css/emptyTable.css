@@ -1,0 +1,9 @@
+.empty-item-table {
+    -fx-background-color: #FBFBFC;
+}
+
+.command-text {
+    -fx-font-family: 'MonoLisa Regular';
+    -fx-font-size: 15px;
+    -fx-text-fill: #858687;
+}

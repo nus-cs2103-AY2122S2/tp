@@ -1,0 +1,38 @@
+.filter {
+    -fx-background-color: #EEF0F3;
+    -fx-background-radius: 8px;
+    -fx-max-height: 20px;
+}
+
+.filter-tab {
+    -fx-background-color: white;
+}
+
+.filter-value {
+    -fx-padding: 0 8px;
+    -fx-text-fill: #000000A0;
+    -fx-text-overrun: ELLIPSIS;
+}
+
+.filter-type-container {
+    -fx-background-radius: 8px 0 0px 8px;
+    -fx-background-color: #FFE08A;
+    -fx-padding: 0 12px;
+}
+
+.filter-type {
+    -fx-text-fill: #000000B3;
+}
+
+.filter-action {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px 8px 8px 0px;
+}
+
+.filter-action:hover {
+    -fx-background-color: #F6416C25;
+}
+
+.filter-action:pressed {
+    -fx-background-color: #F43F6A30;
+}

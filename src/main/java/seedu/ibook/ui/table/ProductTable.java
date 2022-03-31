@@ -9,11 +9,11 @@ import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
 
 /**
- * The {@code Product} table that is containing {@code ProductCard}.
+ * The {@code ProductTable} that is containing {@code ProductCard}.
  */
 public class ProductTable extends UiComponent<VBox> {
 
-    private static final String FXML = "Table/ProductTable.fxml";
+    private static final String FXML = "table/ProductTable.fxml";
 
     private final ObservableList<Product> filteredIBook;
 
@@ -37,10 +37,25 @@ public class ProductTable extends UiComponent<VBox> {
     private void populateField() {
         getMainWindow().populateFilters();
         content.getChildren().clear();
-        for (int i = 0; i < filteredIBook.size(); i++) {
-            Product product = filteredIBook.get(i);
-            ProductCard productCard = new ProductCard(i + 1, product, getMainWindow());
-            content.getChildren().add(productCard.getRoot());
+
+        if (filteredIBook.isEmpty()) {
+            getTableState();
+        } else {
+            for (int i = 0; i < filteredIBook.size(); i++) {
+                Product product = filteredIBook.get(i);
+                ProductCard productCard = new ProductCard(i + 1, product, getMainWindow());
+                content.getChildren().add(productCard.getRoot());
+            }
+        }
+    }
+
+    private void getTableState() {
+        if (getMainWindow().hasActiveFilter()) {
+            NotFoundProductTableState notFoundState = new NotFoundProductTableState(getMainWindow());
+            content.getChildren().add(notFoundState.getRoot());
+        } else {
+            EmptyProductTableState emptyState = new EmptyProductTableState(getMainWindow());
+            content.getChildren().add(emptyState.getRoot());
         }
     }
 
@@ -50,5 +65,4 @@ public class ProductTable extends UiComponent<VBox> {
             populateField();
         }
     }
-
 }

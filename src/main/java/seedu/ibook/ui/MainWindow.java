@@ -7,14 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
 import seedu.ibook.logic.Logic;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.logic.parser.exceptions.ParseException;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.ui.filters.FilterList;
+import seedu.ibook.ui.control.ControlBox;
 import seedu.ibook.ui.popup.PopupHandler;
 import seedu.ibook.ui.table.ProductTable;
 
@@ -34,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuToolbar menuToolbar;
     private CommandBox commandBox;
     private ResultWindow resultWindow;
-    private FilterList filterList;
+    private ControlBox controlBox;
     private ProductTable productTable;
 
     private PopupHandler popupHandler;
@@ -54,6 +56,25 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        // Configure the UI
+        setWindowDefaultSize(logic.getGuiSettings());
+
+        // Register event handler for stage close
+        primaryStage.setOnCloseRequest(event -> handleExit());
+    }
+
+
+    /**
+     * Sets the default size based on {@code guiSettings}.
+     */
+    private void setWindowDefaultSize(GuiSettings guiSettings) {
+        primaryStage.setHeight(guiSettings.getWindowHeight());
+        primaryStage.setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.getWindowCoordinates() != null) {
+            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
     }
 
     /**
@@ -67,7 +88,10 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    public void handleExit() {
+    void handleExit() {
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
         primaryStage.hide();
     }
 
@@ -96,8 +120,8 @@ public class MainWindow extends UiPart<Stage> {
         resultWindow = new ResultWindow(this);
         children.add(resultWindow.getRoot());
 
-        filterList = new FilterList(this);
-        children.add(filterList.getRoot());
+        controlBox = new ControlBox(this);
+        children.add(controlBox.getRoot());
 
         productTable = new ProductTable(this);
         children.add(productTable.getRoot());
@@ -133,28 +157,43 @@ public class MainWindow extends UiPart<Stage> {
      * Populate the filters used for the product list.
      */
     public void populateFilters() {
-        filterList.populateFilters();
+        controlBox.populateFilters();
     }
 
     /**
      * Shows the popup window for adding product.
      */
-    public void showPopupAdd() {
-        popupHandler.showPopupAdd();
+    public void showPopupAddProduct() {
+        popupHandler.showPopupAddProduct();
     }
 
     /**
      * Shows the popup window for updating product.
      */
-    public void showPopupUpdate(int index, Product product) {
-        popupHandler.showPopupUpdate(index, product);
+    public void showPopupUpdateProduct(int index, Product product) {
+        popupHandler.showPopupUpdateProduct(index, product);
     }
 
     /**
      * Shows the popup window for deleting product.
      */
-    public void showPopupDelete(int index, Product product) {
-        popupHandler.showPopupDelete(index, product);
+    public void showPopupDeleteProduct(int index, Product product) {
+        popupHandler.showPopupDeleteProduct(index, product);
+    }
+
+    /**
+     * Shows the popup window for adding item.
+     */
+    public void showPopupAddItem(int index, Product product) {
+        popupHandler.showPopupAddItem(index, product);
+    }
+
+    /**
+     * Shows the popup window for managing item.
+     */
+    public void showPopupManageItem(int productIndex, int itemIndex,
+                                    Product product, Item item) {
+        popupHandler.showPopupManageItem(productIndex, itemIndex, product, item);
     }
 
     /**
@@ -176,18 +215,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Returns true if there are any active filters
+     */
+    public boolean hasActiveFilter() {
+        return !getProductFilters().isEmpty();
+    }
+
+    /**
      * Removes a filter for the product list.
      */
     public void removeProductFilter(AttributeFilter filter) {
         logic.removeProductFilter(filter);
-        populateFilters();
-    }
-
-    /**
-     * Removes all filter for the product list.
-     */
-    public void clearProductFilters() {
-        logic.clearProductFilters();
         populateFilters();
     }
 

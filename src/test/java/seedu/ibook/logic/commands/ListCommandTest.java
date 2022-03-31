@@ -9,6 +9,7 @@ import static seedu.ibook.testutil.TypicalProducts.getTypicalIBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.logic.commands.product.ListCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;

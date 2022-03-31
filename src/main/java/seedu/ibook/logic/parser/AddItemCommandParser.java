@@ -7,10 +7,10 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import java.util.stream.Stream;
 
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.AddItemCommand;
+import seedu.ibook.logic.commands.item.AddItemCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.item.ExpiryDate;
-import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.item.Quantity;
 
 public class AddItemCommandParser implements Parser<AddItemCommand> {
@@ -35,9 +35,9 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
         ExpiryDate expiry = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
         Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
 
-        Item item = new Item(expiry, quantity);
+        ItemDescriptor itemDescriptor = new ItemDescriptor(expiry, quantity);
 
-        return new AddItemCommand(index, item);
+        return new AddItemCommand(index, itemDescriptor);
     }
 
     /**

@@ -2,11 +2,13 @@ package seedu.ibook.testutil;
 
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
-import seedu.ibook.logic.commands.AddCommand;
-import seedu.ibook.logic.commands.UpdateCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
+import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -29,6 +31,8 @@ public class ProductUtil {
         sb.append(PREFIX_CATEGORY + product.getCategory().toString() + " ");
         sb.append(PREFIX_DESCRIPTION + product.getDescription().toString() + " ");
         sb.append(PREFIX_PRICE + product.getPrice().toString() + " ");
+        sb.append(PREFIX_DISCOUNTRATE + product.getDiscountRate().toString() + " ");
+        sb.append(PREFIX_DISCOUNTSTART + product.getDiscountStart().toString() + " ");
         return sb.toString();
     }
 
@@ -44,7 +48,11 @@ public class ProductUtil {
         descriptor.getDescription().ifPresent(
             description -> sb.append(PREFIX_DESCRIPTION).append(description).append(" "));
         descriptor.getPrice().ifPresent(
-            price -> sb.append(PREFIX_PRICE).append(price.toString()).append(" "));
+            price -> sb.append(PREFIX_PRICE).append(price).append(" "));
+        descriptor.getDiscountRate().ifPresent(
+            discountRate -> sb.append(PREFIX_DISCOUNTRATE).append(discountRate).append(" "));
+        descriptor.getDiscountStart().ifPresent(
+            discountStart -> sb.append(PREFIX_DISCOUNTSTART).append(discountStart).append(" "));
         return sb.toString();
     }
 

@@ -34,6 +34,8 @@ public class TypicalProductFilters {
         new DescriptionFilter(new Description(VALID_DESCRIPTION_B));
     public static final PriceFilter PRICE_FILTER_A = new PriceFilter(new Price(VALID_PRICE_A));
     public static final PriceFilter PRICE_FILTER_B = new PriceFilter(new Price(VALID_PRICE_B));
+    public static final PriceFilter PRICE_FILTER_0_0 = new PriceFilter(new Price(0.0), new Price(0.0));
+    public static final PriceFilter PRICE_FILTER_0_100 = new PriceFilter(new Price(0.0), new Price(100.0));
 
     public static ProductFilter getProductFilterA() {
         return new ProductFilter(PRODUCT_A);

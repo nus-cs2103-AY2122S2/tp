@@ -4,6 +4,11 @@
     -fx-font-size: 28;
 }
 
+.title-2 {
+    -fx-font-family: 'Noto Sans Thin';
+    -fx-font-size: 24;
+}
+
 .alert {
     -fx-text-fill: #D82148;
 }

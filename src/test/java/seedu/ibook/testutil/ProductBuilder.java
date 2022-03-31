@@ -2,9 +2,11 @@ package seedu.ibook.testutil;
 
 import java.util.List;
 
-import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.DiscountRate;
+import seedu.ibook.model.product.DiscountStart;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -18,11 +20,15 @@ public class ProductBuilder {
     public static final String DEFAULT_CATEGORY = "Noodles";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
+    public static final String DEFAULT_DISCOUNT_RATE = "25.0";
+    public static final String DEFAULT_DISCOUNT_START = "2";
 
     private Name name;
     private Category category;
     private Description description;
     private Price price;
+    private DiscountRate discountRate;
+    private DiscountStart discountStart;
 
     /**
      * Creates a {@code ProductBuilder} with the default details.
@@ -32,6 +38,8 @@ public class ProductBuilder {
         category = new Category(DEFAULT_CATEGORY);
         description = new Description(DEFAULT_DESCRIPTION);
         price = new Price(DEFAULT_PRICE);
+        discountRate = new DiscountRate(DEFAULT_DISCOUNT_RATE);
+        discountStart = new DiscountStart(DEFAULT_DISCOUNT_START);
     }
 
     /**
@@ -42,6 +50,8 @@ public class ProductBuilder {
         category = productToCopy.getCategory();
         description = productToCopy.getDescription();
         price = productToCopy.getPrice();
+        discountRate = productToCopy.getDiscountRate();
+        discountStart = productToCopy.getDiscountStart();
     }
 
     /**
@@ -76,11 +86,27 @@ public class ProductBuilder {
         return this;
     }
 
-    public Product build() {
-        return new Product(name, category, description, price);
+    /**
+     * Sets the {@code DiscountRate} of the {@code Product} that we are building.
+     */
+    public ProductBuilder withDiscountRate(String discountRate) {
+        this.discountRate = new DiscountRate(discountRate);
+        return this;
     }
 
-    public Product buildWithItems(List<Item> items) {
-        return new Product(name, category, description, price, items);
+    /**
+     * Sets the {@code DiscountStart} of the {@code Product} that we are building.
+     */
+    public ProductBuilder withDiscountStart(String discountStart) {
+        this.discountStart = new DiscountStart(discountStart);
+        return this;
+    }
+
+    public Product build() {
+        return new Product(name, category, description, price, discountRate, discountStart);
+    }
+
+    public Product buildWithItems(List<? extends ItemDescriptor> items) {
+        return new Product(name, category, description, price, discountRate, discountStart, items);
     }
 }

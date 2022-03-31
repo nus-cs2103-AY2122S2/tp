@@ -1,7 +1,11 @@
 .command {
     -fx-background-color: #F1F2F3;
     -fx-background-radius: 8;
-    -fx-padding: 15;
+    -fx-padding: 15 15 15 45;
+    -fx-background-image: url('../../images/terminal.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 15px center;
+    -fx-background-size: 20px;
 }
 
 .command:focused {

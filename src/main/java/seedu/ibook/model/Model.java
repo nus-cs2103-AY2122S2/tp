@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
+import seedu.ibook.commons.core.index.CompoundIndex;
+import seedu.ibook.commons.core.index.Index;
+import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
@@ -52,6 +55,9 @@ public interface Model {
     /** Returns the iBook */
     ReadOnlyIBook getIBook();
 
+    /** Returns the product specified at the index */
+    Product getProduct(Index targetIndex) throws CommandException;
+
     /**
      * Returns true if a product with the same identity as {@code product} exists in the IBook.
      */
@@ -70,11 +76,14 @@ public interface Model {
     void deleteProduct(Product target);
 
     /**
-     * Replaces the given product {@code target} with {@code editedProduct}.
-     * {@code target} must exist in the iBook.
-     * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
+     * Replaces the given product {@code target} with {@code updatedProduct}.
+     * {@code target} must exist in the Ibook.
+     * The product identity of {@code updatedProduct} must not be the same as another existing product in the book.
      */
-    void setProduct(Product target, Product editedProduct);
+    void setProduct(Product target, Product updatedProduct);
+
+    /** Returns the item specified at the index */
+    Item getItem(CompoundIndex targetIndex) throws CommandException;
 
     /**
      * Adds the given item to {@code product}.
@@ -113,7 +122,7 @@ public interface Model {
     void removeProductFilter(AttributeFilter filter);
 
     /**
-     * Clear all filters.
+     * Clears all filters.
      */
     void clearProductFilters();
 
@@ -128,4 +137,34 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null
      */
     void updateFilteredItemListForProducts(Predicate<Item> predicate);
+
+    /**
+     * Prepares the iBook for changes.
+     */
+    void prepareIBookForChanges();
+
+    /**
+     * Saves changes made to IBook.
+     */
+    void saveIBookChanges();
+
+    /**
+     * Checks if the current state of iBook can be undone.
+     */
+    boolean canUndoIBook();
+
+    /**
+     * Checks if there is any undone state of iBook that can be redone.
+     */
+    boolean canRedoIBook();
+
+    /**
+     * Reverts the iBook to one state older.
+     */
+    void undoIBook();
+
+    /**
+     * Restores the iBook to one state newer.
+     */
+    void redoIBook();
 }

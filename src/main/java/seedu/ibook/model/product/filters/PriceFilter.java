@@ -6,16 +6,26 @@ import seedu.ibook.model.product.Product;
 public class PriceFilter extends AttributeFilter {
     private static final String TYPE = "price";
 
-    private final Price price;
+    private final Price startPrice;
+    private final Price endPrice;
     private final String value;
 
     /**
      * Creates a predicate that checks if the product has the same parameters.
-     * @param price
      */
     public PriceFilter(Price price) {
-        this.price = price;
+        this.startPrice = price;
+        this.endPrice = price;
         this.value = price.toString();
+    }
+
+    /**
+     * Creates a predicate that checks if the product falls within the price range.
+     */
+    public PriceFilter(Price startPrice, Price endPrice) {
+        this.startPrice = startPrice;
+        this.endPrice = endPrice;
+        this.value = String.format("%s-%s", startPrice, endPrice);
     }
 
     @Override
@@ -30,7 +40,7 @@ public class PriceFilter extends AttributeFilter {
 
     @Override
     public boolean test(Product otherProduct) {
-        return this.price.equals(otherProduct.getPrice());
+        return otherProduct.getPrice().isWithin(startPrice, endPrice);
     }
 
     @Override
@@ -42,6 +52,8 @@ public class PriceFilter extends AttributeFilter {
         if (!(other instanceof PriceFilter)) {
             return false;
         }
-        return this.price.equals(((PriceFilter) other).price);
+
+        PriceFilter otherPriceFilter = (PriceFilter) other;
+        return startPrice.equals(otherPriceFilter.startPrice) && endPrice.equals(otherPriceFilter.endPrice);
     }
 }

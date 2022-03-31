@@ -3,15 +3,19 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.stream.Stream;
 
-import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.DiscountRate;
+import seedu.ibook.model.product.DiscountStart;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
@@ -30,20 +34,30 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
-                PREFIX_PRICE);
+                PREFIX_PRICE, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_PRICE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        // Required fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Category category =
-            ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).orElse(Category.DEFAULT_CATEGORY));
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
 
-        Product product = new Product(name, category, description, price);
+        // Optional fields
+        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY)
+                .orElse(Category.DEFAULT_CATEGORY));
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
+                .orElse(Description.DEFAULT_DESCRIPTION));
+        DiscountRate discountRate =
+                ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE)
+                .orElse(DiscountRate.DEFAULT_DISCOUNT_RATE));
+        DiscountStart discountStart =
+                ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART)
+                .orElse(DiscountStart.DEFAULT_DISCOUNT_START));
+
+        Product product = new Product(name, category, description, price, discountRate, discountStart);
 
         return new AddCommand(product);
     }

@@ -5,8 +5,8 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import seedu.ibook.commons.core.index.CompoundIndex;
-import seedu.ibook.logic.commands.UpdateItemCommand;
-import seedu.ibook.logic.commands.UpdateItemCommand.UpdateItemDescriptor;
+import seedu.ibook.logic.commands.item.UpdateItemCommand;
+import seedu.ibook.logic.commands.item.UpdateItemCommand.UpdateItemDescriptor;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 
 public class UpdateItemCommandParser implements Parser<UpdateItemCommand> {
@@ -27,7 +27,8 @@ public class UpdateItemCommandParser implements Parser<UpdateItemCommand> {
             compoundIndex = ParserUtil.parseCompoundIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateItemCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateItemCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         UpdateItemDescriptor updateItemDescriptor = new UpdateItemDescriptor();

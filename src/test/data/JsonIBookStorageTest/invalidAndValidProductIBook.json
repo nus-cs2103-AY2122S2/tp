@@ -4,12 +4,16 @@
     "category" : "Bread",
     "expiryDate" : "2022-03-08",
     "description" : "Valid product",
-    "price" : "1.99"
+    "price" : "1.99",
+    "discountRate": "25",
+    "discountStart": "1"
   }, {
     "name" : "Invalid product with negative price",
     "category" : "Bread",
     "expiryDate" : "2022-03-08",
     "description" : "Negative price",
-    "price" : "-3.99"
+    "price" : "-3.99",
+    "discountRate": "25",
+    "discountStart": "1"
   } ]
 }

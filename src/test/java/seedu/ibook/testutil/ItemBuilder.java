@@ -2,7 +2,9 @@ package seedu.ibook.testutil;
 
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.item.Quantity;
+import seedu.ibook.model.product.Product;
 
 public class ItemBuilder {
     public static final String DEFAULT_EXPIRY_DATE = "2022-12-13";
@@ -46,7 +48,14 @@ public class ItemBuilder {
     /**
      * Builds the {@code Item} object.
      */
-    public Item build() {
-        return new Item(expiryDate, quantity);
+    public Item build(Product product) {
+        return new Item(product, expiryDate, quantity);
+    }
+
+    /**
+     * Builds the {@code ItemDescriptor} object.
+     */
+    public ItemDescriptor buildItemDescriptor() {
+        return new ItemDescriptor(expiryDate, quantity);
     }
 }
