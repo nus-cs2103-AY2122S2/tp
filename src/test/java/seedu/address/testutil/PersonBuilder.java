@@ -111,7 +111,6 @@ public class PersonBuilder {
 
     /**
      * Sets the {@Code Faculty} of the {@Code Person} that we are building
-     * This method is to be used in future tests
      */
     public PersonBuilder withFaculty(String faculty) {
         this.faculty = new Faculty(faculty);
@@ -120,16 +119,14 @@ public class PersonBuilder {
 
     /**
      * Sets the {@Code MatriculationNumber} of the {@Code Person} that we are building
-     * This method is to be used in future tests
      */
-    public PersonBuilder withMatricNumber(String matriculationNumber) {
+    public PersonBuilder withMatriculationNumber(String matriculationNumber) {
         this.matriculationNumber = new MatriculationNumber(matriculationNumber.trim());
         return this;
     }
 
     /**
      * Sets the {@Code CovidStatus} of the {@Code Person} that we are building
-     * This method is to be used in future tests
      */
     public PersonBuilder withCovidStatus(String covidStatus) {
         this.covidStatus = new CovidStatus(covidStatus);
@@ -138,13 +135,16 @@ public class PersonBuilder {
 
     /**
      * Sets the {@Code Block} of the {@Code Person} that we are building
-     * This method is to be used in future tests
      */
     public PersonBuilder withBlock(String block) {
         this.block = new Block(block);
         return this;
     }
 
+    /**
+     * Build a Person object.
+     * @return Person object with this Object's attributes.
+     */
     public Person build() {
         return new Person(name, block, faculty, phone, email, address, matriculationNumber, covidStatus, tags);
     }

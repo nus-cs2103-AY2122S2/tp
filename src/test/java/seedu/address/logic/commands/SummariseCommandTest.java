@@ -58,4 +58,22 @@ public class SummariseCommandTest {
         assertTrue(actual.length() > 0);
     }
 
+    @Test
+    public void filterByBlock_onEmptyList_showsEmptyString() {
+        List<Person> emptyList = new ArrayList<>();
+        String actual = new SummariseCommand().filterByBlock(emptyList);
+        assertEquals(actual, "");
+    }
+
+    @Test
+    public void filterByBlock_onValidList_showsNonEmptyString() {
+        List<Person> validList = model.getFilteredPersonList();
+        String actual = new SummariseCommand().filterByBlock(validList);
+        assertTrue(actual.length() > 0);
+    }
+
+    @Test
+    public void test_summariseCommandWordIsCorrect() {
+        assertTrue(SummariseCommand.COMMAND_WORD.equals("summarise"));
+    }
 }

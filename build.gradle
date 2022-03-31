@@ -83,7 +83,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'Tracey.jar'
 }
 
 defaultTasks 'clean', 'test'

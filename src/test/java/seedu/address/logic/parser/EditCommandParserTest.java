@@ -43,6 +43,11 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+/**
+ * As we are only doing white-box testing, our test cases do not cover path variations
+ * outside of the EditCommand code. The path variation for those two cases occur inside
+ * the ParserUtil, and therefore should be covered by the ParserUtilTest.
+ */
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;

@@ -6,7 +6,7 @@ title: Tracey
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T12-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T12-3/tp/branch/master/graph/badge.svg?token=PY3SCJ58QH)](https://codecov.io/gh/AY2122S2-CS2103T-T12-3/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/Ui_ReadMe.png)
 
 **Tracey is a desktop app for **managing health statuses** of NUS students by administrative staffs, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tracey can get your student health status management tasks done faster than traditional GUI apps.
 

@@ -8,7 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,11 +26,11 @@ public class PieChartWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(PieChartWindow.class);
     private static final String FXML = "PieChartWindow.fxml";
-    private TreeMap<String, Double> covidStatsByBlockData;
-    private TreeMap<String, Double> positiveStatsByFacultyData;
-    private TreeMap<String, TreeMap<String, Double>> covidStatsDataByBlocks;
+    private TreeMap<String, Integer> covidStatsByBlockData;
+    private TreeMap<String, Integer> positiveStatsByFacultyData;
+    private TreeMap<String, TreeMap<String, Integer>> covidStatsDataByBlocks;
     private PieChart pieChart;
-    private Scene pieChartScene;
+    private Scene chartScene;
     private HBox charts;
 
     /**
@@ -46,44 +50,64 @@ public class PieChartWindow extends UiPart<Stage> {
     public PieChartWindow() {
         this(new Stage());
         charts = new HBox();
-        covidStatsByBlockData = new TreeMap<>();
         covidStatsDataByBlocks = SummariseCommand.getCovidStatsByBlockDataList();
+        covidStatsByBlockData = new TreeMap<>();
         positiveStatsByFacultyData = SummariseCommand.getPositiveStatsByFacultyData();
         execute();
     }
 
     /**
-     * Organise the data into Pie Charts in a new window.
+     * Organises the data into Pie Charts in a new window.
      */
     private void execute() {
         collateBlocksChart();
         HBox facultyChart = createFacultyChartPositive();
         VBox allPieCharts = new VBox(charts);
         allPieCharts.getChildren().add(facultyChart);
-        pieChartScene = makePieChartScene(allPieCharts);
-        this.getRoot().setScene(pieChartScene);
+        chartScene = makeChartScene(allPieCharts);
+        this.getRoot().setScene(chartScene);
     }
 
     /**
-     * Collate the pie charts for each block into a H-box by stacking the charts together.
+     * Collates the pie charts for each block into a H-box by stacking the charts together.
      * Pie charts are created one at a time by blocks. ie, if there are 5 blocks, 5 pie charts are created.
      */
     private void collateBlocksChart() {
-        for (Map.Entry<String, TreeMap<String, Double>> entry : covidStatsDataByBlocks.entrySet()) {
+        for (Map.Entry<String, TreeMap<String, Integer>> entry : covidStatsDataByBlocks.entrySet()) {
             String title = entry.getKey(); // ie. A, B, C, D, E
             covidStatsByBlockData = entry.getValue();
-            pieChart = makePieChart(covidStatsByBlockData, title);
+            if (!covidStatsByBlockData.isEmpty()) {
+                pieChart = makePieChart(covidStatsByBlockData, title);
+            }
             charts.getChildren().add(pieChart);
         }
     }
 
     /**
-     * Create Pie Chart for hall containing Covid Positive statistics only, by Faculty.
+     * Creates Bar Chart for hall containing Covid Positive statistics only, by Faculty.
      */
     private HBox createFacultyChartPositive() {
+        if (positiveStatsByFacultyData.isEmpty()) {
+            // No positive students to create chart
+            return new HBox();
+        }
         HBox facChart = new HBox();
-        pieChart = makePieChart(positiveStatsByFacultyData, "Hall");
-        facChart.getChildren().add(pieChart);
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Covid Positive by Faculty");
+        xAxis.setLabel("Faculty");
+        yAxis.setLabel("Number of Students");
+        barChart.setBarGap(50);
+        barChart.setCategoryGap(150);
+
+        for (Map.Entry<String, Integer> entry : positiveStatsByFacultyData.entrySet()) {
+            XYChart.Series<String, Number> fac = new XYChart.Series<>();
+            fac.setName(entry.getKey());
+            fac.getData().add(new XYChart.Data<>("", entry.getValue()));
+            barChart.getData().add(fac);
+        }
+        facChart.getChildren().add(barChart);
         facChart.setAlignment(Pos.CENTER);
         return facChart;
     }
@@ -95,13 +119,17 @@ public class PieChartWindow extends UiPart<Stage> {
      * @param title Label of this particular pie chart
      * @return A pie chart that shows covid status breakdown
      */
-    private PieChart makePieChart(TreeMap<String, Double> data, String title) {
-        TreeMap<String, Double> treeMap = data;
+    private PieChart makePieChart(TreeMap<String, Integer> data, String title) {
+        TreeMap<String, Integer> treeMap = data;
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
         PieChart pieChart = new PieChart(pieChartData);
         pieChart.setTitle("Covid overview in " + title);
-        for (Map.Entry<String, Double> entry : treeMap.entrySet()) {
-            pieChartData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+        for (Map.Entry<String, Integer> entry : treeMap.entrySet()) {
+            PieChart.Data statusType = new PieChart.Data(entry.getKey(), entry.getValue());
+            statusType.setName(String.format("%s (%.0f)", statusType.getName(),
+                    statusType.pieValueProperty().getValue()));
+            pieChartData.add(statusType);
         }
         return pieChart;
     }
@@ -112,9 +140,9 @@ public class PieChartWindow extends UiPart<Stage> {
      * @param pieCharts collated group of charts to be displayed
      * @return Scene containing the pie chart
      */
-    private Scene makePieChartScene(VBox pieCharts) {
-        pieChartScene = new Scene(pieCharts);
-        return pieChartScene;
+    private Scene makeChartScene(VBox pieCharts) {
+        chartScene = new Scene(pieCharts);
+        return chartScene;
     }
 
     /**

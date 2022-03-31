@@ -63,9 +63,6 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
-    /**
-     * TODO: add test cases for faculty, matriculation number and covid status
-     */
     @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
@@ -133,9 +130,6 @@ public class AddCommandParserTest {
                 new AddCommand(expectedPerson));
     }
 
-    /**
-     * TODO: Add field missing failure test for faculty, matric number and covid status
-     */
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -186,9 +180,6 @@ public class AddCommandParserTest {
                 expectedMessage);
     }
 
-    /**
-     * TODO: Add invalid value failure test for faculty, matric number and covid status
-     */
     @Test
     public void parse_invalidValue_failure() {
         // invalid name

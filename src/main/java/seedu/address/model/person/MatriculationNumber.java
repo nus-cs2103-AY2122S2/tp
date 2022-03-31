@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's matriculation number in the address book.
+ * Represents a Person's matriculation number in Tracey.
  * Guarantees: immutable; is valid as declared in {@link #isValidMatriculationNumber(String)}
  */
 public class MatriculationNumber {
@@ -38,7 +38,7 @@ public class MatriculationNumber {
      * Returns true if a given string is a valid matriculation number.
      *
      * @param test string to be tested to determine if valid matriculation number.
-     * @return Boolean result where it is true if a given string is a valid number, false otherwise.
+     * @return boolean where true if a given string is a valid number, false otherwise.
      */
     public static boolean isValidMatriculationNumber(String test) {
         return test.matches(VALIDATION_REGEX);

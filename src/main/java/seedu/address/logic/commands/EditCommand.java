@@ -193,70 +193,122 @@ public class EditCommand extends Command {
                     matriculationNumber, covidStatus, tags);
         }
 
+        /**
+         * Sets {@code Name} to this object's {@code Name}.
+         */
         public void setName(Name name) {
             this.name = name;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Name.
+         * Returns {@code Optional#empty()} if {@code Name} is null.
+         */
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
+        /**
+         * Sets {@code Block} to this object's {@code Block}.
+         */
         public void setBlock(Block block) {
             this.block = block;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Block.
+         * Returns {@code Optional#empty()} if {@code Block} is null.
+         */
         public Optional<Block> getBlock() {
             return Optional.ofNullable(block);
         }
 
+        /**
+         * Sets {@code Faculty} to this object's {@code Faculty}.
+         */
         public void setFaculty(Faculty faculty) {
             this.faculty = faculty;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Faculty.
+         * Returns {@code Optional#empty()} if {@code Faculty} is null.
+         */
         public Optional<Faculty> getFaculty() {
             return Optional.ofNullable(faculty);
         }
 
+        /**
+         * Sets {@code Phone} to this object's {@code Phone}.
+         */
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a Phone.
+         * Returns {@code Optional#empty()} if {@code Phone} is null.
+         */
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
+        /**
+         * Sets {@code Email} to this object's {@code Email}.
+         */
         public void setEmail(Email email) {
             this.email = email;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain an Email.
+         * Returns {@code Optional#empty()} if {@code Email} is null.
+         */
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
+        /**
+         * Sets {@code Address} to this object's {@code Address}.
+         */
         public void setAddress(Address address) {
             this.address = address;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain an Address.
+         * Returns {@code Optional#empty()} if {@code Address} is null.
+         */
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
 
+        /**
+         * Sets {@code MatriculationNumber} to this object's {@code MatriculationNumber}.
+         */
         public void setMatriculationNumber(MatriculationNumber matriculationNumber) {
             this.matriculationNumber = matriculationNumber;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a MatriculationNumber.
+         * Returns {@code Optional#empty()} if {@code MatriculationNumber} is null.
+         */
         public Optional<MatriculationNumber> getMatriculationNumber() {
             return Optional.ofNullable(matriculationNumber);
         }
 
         /**
-         * Set the covid status of a student
-         * @param covidStatus is the covid status of a student in POSITIVE, NEGATIVE, HRN
+         * Sets {@code CovidStatus} to this object's {@code CovidStatus}.
          */
         public void setCovidStatus(CovidStatus covidStatus) {
             this.covidStatus = covidStatus;
         }
 
+        /**
+         * Returns an Optional object with may or may not contain a CovidStatus
+         * Returns {@code Optional#empty()} if {@code CovidStatus} is null.
+         */
         public Optional<CovidStatus> getCovidStatus() {
             return Optional.ofNullable(covidStatus);
         }

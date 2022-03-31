@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Represents a Person's faculty in the address book.
+ * Represents a Person's faculty in Tracey.
  * Guarantees: immutable; is valid as declared in {@link #isValidFaculty(String)}
  */
 public class Faculty {
@@ -32,7 +32,6 @@ public class Faculty {
         SOPP,
         LKYSPP,
         SPH,
-        TEST,
         FOS
     }
 
@@ -51,7 +50,7 @@ public class Faculty {
      * Returns true if a given string is a valid faculty.
      *
      * @param test string to be tested to determine if valid faculty.
-     * @return Boolean result where it is true if a given string is a valid faculty, false otherwise.
+     * @return boolean where true if a given string is a valid faculty, false otherwise.
      */
     public static boolean isValidFaculty(String test) {
         return Stream.of(Nus.values())

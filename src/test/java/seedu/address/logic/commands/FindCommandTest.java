@@ -56,6 +56,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
+        // no keywords -> no list
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -65,9 +66,87 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_oneKeyword_onePersonFound() {
+        // One name inputted and only one person has this name -> one person shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Elle");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneKeywordWithLessRestrictions_onePersonFound() {
+        // One incomplete inputted keyword and only one person has this incomplete keyword in name -> one person shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("E");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneCorrectAndOneWrongKeyword_onePersonFound() {
+        // Two names inputted but only one can be found in the list -> one person shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Elle Kunnz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneIncompleteCorrectAndOneWrongKeyword_onePersonFound() {
+        // Two names inputted but one is incomplete can be found in the list -> one person shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("El Kunnz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_correctAndWrongKeywordWithLessRestrictions_onePersonFound() {
+        // Two names inputted but one that is incomplete cannot be found in the list -> one person shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("El Qi");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneCorrectKeywordWithLessRestriction_multiplePersonFound() {
+        // One incomplete name inputted but more than one person have this name -> multiple people shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Ku");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
+        // Multiple names inputted and multiple people can be found -> multiple people shown
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleKeywordsWithLessRestrictions_multiplePersonsFound() {
+        // Multiple incomplete names inputted and multiple people can be found -> multiple people shown
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Ku El Ku");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -79,5 +158,11 @@ public class FindCommandTest {
      */
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    @Test
+    public void test_findCommandWordIsCorrect() {
+        // Check this command is a find command
+        assertTrue(FindCommand.COMMAND_WORD.equals("find"));
     }
 }

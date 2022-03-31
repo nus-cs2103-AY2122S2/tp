@@ -37,7 +37,7 @@ public class TypicalPersons {
             .withFaculty("SOC")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withMatricNumber("A0000000E")
+            .withMatriculationNumber("A0000000E")
             .withCovidStatus("NEGATIVE")
             .withTags("friends")
             .build();
@@ -46,7 +46,7 @@ public class TypicalPersons {
             .withFaculty("BIZ")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withMatricNumber("A1234567X")
+            .withMatriculationNumber("A1234567X")
             .withCovidStatus("HRN")
             .withTags("owesMoney", "friends")
             .build();
@@ -56,7 +56,7 @@ public class TypicalPersons {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
-            .withMatricNumber("A9988773V")
+            .withMatriculationNumber("A9988773V")
             .withCovidStatus("HRN")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
@@ -65,7 +65,7 @@ public class TypicalPersons {
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
-            .withMatricNumber("A3212345B")
+            .withMatriculationNumber("A3212345B")
             .withCovidStatus("POSITIVE")
             .withTags("friends")
             .build();
@@ -75,7 +75,7 @@ public class TypicalPersons {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
-            .withMatricNumber("A4345678N")
+            .withMatriculationNumber("A4345678N")
             .withCovidStatus("HRN")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
@@ -84,7 +84,7 @@ public class TypicalPersons {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
-            .withMatricNumber("A1114446J")
+            .withMatriculationNumber("A1114446J")
             .withCovidStatus("NEGATIVE")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
@@ -93,15 +93,22 @@ public class TypicalPersons {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
-            .withMatricNumber("A0043245H")
+            .withMatriculationNumber("A0043245H")
             .withCovidStatus("POSITIVE")
             .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
+            .withBlock("E")
+            .withFaculty("SOC")
+            .withPhone("8482424")
+            .withEmail("stefan@example.com")
+            .withAddress("little india")
+            .withMatriculationNumber("A0843245H")
+            .withCovidStatus("POSITIVE")
+            .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").withMatricNumber("A5243627L").build();
+            .withEmail("hans@example.com").withAddress("chicago ave").withMatriculationNumber("A5243627L").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
@@ -110,7 +117,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY)
-            .withMatricNumber(VALID_MATRICULATION_NUMBER_AMY)
+            .withMatriculationNumber(VALID_MATRICULATION_NUMBER_AMY)
             .withCovidStatus(VALID_COVID_STATUS_AMY)
             .withTags(VALID_TAG_FRIEND)
             .build();
@@ -120,7 +127,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB)
-            .withMatricNumber(VALID_MATRICULATION_NUMBER_BOB)
+            .withMatriculationNumber(VALID_MATRICULATION_NUMBER_BOB)
             .withCovidStatus(VALID_COVID_STATUS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();

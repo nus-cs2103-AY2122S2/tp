@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -35,10 +37,11 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: add n/NAME p/PHONENUMBER e/EMAIL ..."
             + NEWLINE_AND_INDENTATION
-            + "Example 1: add n/Melvin f/SOC cs/ Negative"
+            + "Example 1: add n/Melvin b/e f/SOC p/99999999 a/12 Kent Ridge Drive "
+            + "e/melvin@bing.com mc/a0216456n cs/negative"
             + NEWLINE_AND_INDENTATION
-            + "Example 2: add e/student69@u.nus.edu n/ Martin\n"
-
+            + "Example 2: add f/FOL p/84848002 a/13 Kent Ridge Drive e/danny@yahoo.com "
+            + "mc/a0024345h n/Danny cs/positive b/c\n"
             + "\n3.DELETE a contact at a specific INDEX. The index refers to the index number shown in the "
             + "displayed person list."
             + NEWLINE_AND_INDENTATION
@@ -85,7 +88,7 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     @FXML
-    private Button copyButton;
+    private Button openUserGuideButton;
 
     @FXML
     private Label helpMessage;
@@ -152,14 +155,26 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Open the User Guide in the user's default browser.
      */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    private void openUG() {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.browse(URI.create(USERGUIDE_URL));
+            } catch (IOException e) {
+                logger.warning("User Guide page is currently down");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "The URL is currently down/being changed!");
+                alert.show();
+                e.printStackTrace();
+            }
+        } else {
+            logger.warning("User operating system not supported");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Your operating system is currently not supported!");
+            alert.show();
+        }
     }
 }

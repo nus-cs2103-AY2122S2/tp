@@ -1,12 +1,12 @@
 title: "Tracey"
-theme: minima
+theme: jekyll-theme-hacker
 
 header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
 
-markdown: kramdown
+markdown: GFM
 
 repository: "AY2122S2-CS2103T-T12-3/tp"
 github_icon: "images/github-icon.png"

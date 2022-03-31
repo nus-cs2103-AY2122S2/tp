@@ -76,6 +76,27 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Restores the previous state of the address book.
+     */
+    void restoreHistory();
+
+    /**
+     * Checks the presence of a previous state of the address book.
+     */
+    boolean checkHistory();
+
+    /**
+     * Restores the original state of the address book.
+     */
+    void restoreOriginal();
+
+    /**
+     * Checks the presence of an original state of the address book.
+     * @return
+     */
+    boolean checkOriginal();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

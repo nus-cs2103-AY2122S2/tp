@@ -26,6 +26,11 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandTest {
 
     @Test
+    public void test_addCommandWordIsCorrect() {
+        assertTrue(AddCommand.COMMAND_WORD.equals("add"));
+    }
+
+    @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
@@ -145,6 +150,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreOriginal() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkOriginal() {
             throw new AssertionError("This method should not be called.");
         }
     }

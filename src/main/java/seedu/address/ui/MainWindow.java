@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ResizeCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,6 +33,9 @@ public class MainWindow extends UiPart<Stage> {
     private static HelpWindow helpWindow;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Double resultDisplaySizeOne = 100.0;
+    private final Double resultDisplaySizeTwo = 200.0;
+    private final Double resultDisplaySizeThree = 300.0;
 
     private Stage primaryStage;
     private Logic logic;
@@ -181,6 +185,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Toggles display text place holder height to grow and shrink.
+     */
+    @FXML
+    public void handleResize() {
+        double height = resultDisplayPlaceholder.getHeight();
+        if (height == resultDisplaySizeOne) {
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeTwo);
+        } else if (height == resultDisplaySizeTwo) {
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeThree);
+        } else {
+            resultDisplayPlaceholder.setMinHeight(resultDisplaySizeOne);
+        }
+    }
+
+    /**
      * Instantiates a new EmailWindow and shows it.
      */
     public void createImportWindow() {
@@ -199,6 +218,15 @@ public class MainWindow extends UiPart<Stage> {
             emailWindow.hide();
             createEmailWindow();
         }
+    }
+
+    /**
+     * Resizes the result display window according to 3 different sizes.
+     */
+    @FXML
+    public void handleResizeResultDisplayWindow() {
+        resultDisplayPlaceholder.setMinHeight(ResizeCommand.getResultWindowDisplaySize()
+                * ResizeCommand.getResieWindowMultiplier());
     }
 
     /**
@@ -230,6 +258,7 @@ public class MainWindow extends UiPart<Stage> {
      * Creates and open a pie chart window if it is not yet created or not showing. Or else it will close, create and
      * open a new pie chart window. Focus of window is not used because user might edit the contact in Tracey and
      * use the {@code SummariseCommand} again, so an updated window is needed to be shown.
+     *
      * @param message Feedback message from {@code SummariseCommand} to user
      */
     @FXML
@@ -269,8 +298,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleSummarise(commandResult.getFeedbackToUser());
             }
 
+            if (commandResult.isResize()) {
+                handleResizeResultDisplayWindow();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowEmail()) {
+                handleEmailWindow();
             }
 
             if (commandResult.isExit()) {
