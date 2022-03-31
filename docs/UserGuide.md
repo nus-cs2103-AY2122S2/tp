@@ -19,7 +19,8 @@ title: User Guide
   * [Finding a show: `find`](#finding-a-show-find)
     * [General find](#general-find)
     * [Precise find](#precise-find)
-  * [Sorting the shows: `sort`](#sorting-the-shows)
+  * [Sorting the shows `sort`](#sorting-the-shows)
+  * [Suggesting a show `suggest`](#suggest-a-show-suggest)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -406,7 +407,17 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 <img src="images/Sort_UI3.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+---
 
+### Suggest a Show: `suggest`
+
+**Description:** Want a random show? This suggests a random show from the displayed list!
+
+**Format:** `suggest`
+
+**Example:** `suggest`
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 ---
 
 ### Importing a show: `import`
@@ -477,7 +488,12 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 | **Clear**        | `clear`                                                                                                                  |
 | **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
 | **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
+<<<<<<< HEAD
 | **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             |
+=======
+| **Sort**         | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                 |
+| **Suggest**      | `suggest`                                                                                                                |
+>>>>>>> master
 | **Import**       | `import`                                                                                                                 |
 | **Export**       | `export`                                                                                                                 |
 | **Exit**         | `exit`                                                                                                                   |
