@@ -729,35 +729,20 @@ There are currently no features to revert the `clear` command.
 
 | Action                        | Format, Examples                                                                                                                                                                                                   |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add
-company**               | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` |
-| **Edit
-company**              | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`                                                                         |
-| **Delete
-company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `                                                                                                                                                     |
-| **Favourite
-company**         | `favourite COMPANY_INDEX` <br><br> e.g., `favourite 1`                                                                                                                                                             |
-| **Unfavourite
-company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
-| **Add
-role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
-| **Edit
-role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
-| **Delete
-role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `                                                                                                                                              |
-| **List
-companies**            | `list`                                                                                                                                                                                                             |
-| **List favourited
-companies** | `listFavourite`                                                                                                                                                                                                    |
-| **Find company or
-role**      | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`                                                                              |
-| **Set reminder
-window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
-| **
-Clear**                     | `clear`                                                                                                                                                                                                             |
-| **
-Help**                      | `help`                                                                                                                                                                                                             |
-| **Exit
-Tinner**               | `exit`                                                                                                                                                                                                             |
+| **Add company**               | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` |
+| **Edit company**              | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`                                                                         |
+| **Delete company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `                                                                                                                                                     |
+| **Favourite company**         | `favourite COMPANY_INDEX` <br><br> e.g., `favourite 1`                                                                                                                                                             |
+| **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
+| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
+| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
+| **Delete role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `                                                                                                                                              |
+| **List companies**            | `list`                                                                                                                                                                                                             |
+| **List favourited companies** | `listFavourite`                                                                                                                                                                                                    |
+| **Find company or role**      | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`                                                                              |
+| **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
+| **Clear**                     | `clear`                                                                                                                                                                                                             |
+| **Help**                      | `help`                                                                                                                                                                                                             |
+| **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
 
 [Back to Table of Contents](#toc)
