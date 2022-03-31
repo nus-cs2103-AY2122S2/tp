@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
@@ -35,7 +36,7 @@ public class RemarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalInterviewSchedule(), new UserPrefs());
 
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_addRemarkUnfilteredList_success() throws CommandException {
         Candidate firstCandidate = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         Candidate editedCandidate = new CandidateBuilder(firstCandidate).withRemark(REMARK_STUB).build();
 
@@ -52,7 +53,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_deleteRemarkUnfilteredList_success() {
+    public void execute_deleteRemarkUnfilteredList_success() throws CommandException {
         Candidate firstCandidate = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         Candidate editedCandidate = new CandidateBuilder(firstCandidate).withRemark("").build();
 
@@ -69,7 +70,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
         showCandidateAtIndex(model, INDEX_FIRST_CANDIDATE);
 
         Candidate firstCandidate = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
