@@ -30,7 +30,7 @@ for convenience use.
 
    * **`list`** : Lists all products.
 
-   * **`add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
+   * **`add n:Maggie Mee c:noodles e:2022-01-01 p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
    * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
 
@@ -43,18 +43,18 @@ for convenience use.
 ## 2. About
 ### 2.1 Structure of the document
 
-This document is structured in a chronological manner so that you would be able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
+This document is structured in a chronological manner so that you are able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
 
 ### 2.2 Reading the document
 
-This subsection would introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
+This subsection will introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 It is important to read this section before proceeding further to avoid getting confused!
 
 #### 2.2.1 Special symbols
 
 **Additional Information**
 
-Text that appear in an information box indicates additional information that may be useful to know.
+Text that appears in an information box indicates additional information that may be useful to know.
 
 <div markdown="block" class="alert alert-info">
 
@@ -65,7 +65,7 @@ Example additional information.
 
 **Caution**
 
-Text that appear in a caution box should be followed carefully, else unintended consequences might arise.
+Text that appears in a caution box should be followed carefully, else unintended consequences might arise.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -76,7 +76,7 @@ Example warnings.
 
 **Tip**
 
-Text that appear in a tip box are useful for improving your experience with iBook.
+Text that appears in a tip box are useful for improving your experience with iBook.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -165,20 +165,19 @@ Only a single product would be added at a time
 </div>
 
 Examples:
-* `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour dr:25 ds:10`
+* `add n:Maggie Mee c:noodles e:2022-01-01 p:3.00 d:curry flavour dr:25 ds:10`
 
 #### 3.1.3 Updating products : `update`
 
 Updates the product at the specified INDEX.
 
-Click the <img align="center" src = "images/ui-icons/edit-color.png" alt="Edit" height = "25"/>  
-on the right side of each product to update the product.
+Click <img align="center" src = "images/ui-icons/edit-color.png" alt="edit button" height = "25"/> on the right side of each product to update the product.
 
 *Alternatively*, by using command,
 
 Format: `update INDEX [TAG:NEW_VALUE ...]`
 
-* Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index must be **a positive integer**(1, 2, 3, …)
+* Updates the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index must be **a positive integer** (1, 2, 3, …)
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the new values.
 
@@ -190,10 +189,6 @@ Examples:
 
 Deletes the product at a specified INDEX.
 
-Click the <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Edit" height = "25"/> on the right side of each product to delete the product.
-
-*Alternatively*, by using command,
-
 Format: `delete INDEX`
 
 * Deletes the product at the specified `INDEX`.
@@ -203,7 +198,11 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd product in the iBook.
 
-*Alternatively*, we are able to delete all items that match one or more (tag, value) pairs.
+*Alternatively*, click the <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Edit" height = "25"/> on the right side of each product to delete the product.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can delete all items that match one or more (tag, value) pairs.
 
 Format: `delete [TAG:VALUE ...]`
 
@@ -212,9 +211,11 @@ Format: `delete [TAG:VALUE ...]`
 
 Example: `delete n:Bread`
 
+</div>
+
 #### 3.1.5 Finding certain products : `find`
 
-Finds products that fit a certain filter in the application.
+Finds products that fit certain filters given by the user.
 
 Format: `find [TAG:VALUE ...]`
 
@@ -222,9 +223,9 @@ Tags and their values: `n:NAME` `c:CATEGORY` `p:PRICE` `d:DESCRIPTION`
 
 Examples:
 
-`find n:Water` lists all products that has Water as name.
+`find n:Water` lists all products that contains "Water" in its name.
 
-`find n:Bread c:Food` lists all products that has Bread as name and category as Food.
+`find n:Bread c:Food` lists all products that contains "Bread" in its name and category as Food.
 
 `find c:Food` lists all products that has category as Food.
 
@@ -283,6 +284,19 @@ Examples:
 `update-item 2-1 e:2022-08-01` updates the 1st item of the 2nd product in the displayed list to have expiry date `01 Aug 2022`.
 
 #### 3.2.3 Deleting an item from a product : `delete-item`
+
+Deletes the item at a specified INDEX.
+
+Format: `delete-item INDEX`
+
+* Deletes the item at the specified `INDEX`.
+* The index refers to the index number shown in the displayed product list.
+* The index **must be a positive integer pair** 1-1, 3-2, 2-1, …
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd product in the iBook.
+
+*Alternatively*, click the <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Edit" height = "25"/> on the right side of each product to delete the product.
 
 #### 3.2.4 Finding items that are expiring soon: `remind`
 
