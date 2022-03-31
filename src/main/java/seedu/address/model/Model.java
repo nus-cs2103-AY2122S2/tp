@@ -8,7 +8,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.UniqueLineupList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
