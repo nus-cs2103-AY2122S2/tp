@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -13,7 +14,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ChargeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.charge.Charge;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
@@ -251,4 +254,40 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String chargeDate} into an {@code ChargeDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return Parsed charge date.
+     * @throws ParseException if the given charge date is invalid.
+
+     */
+    public static YearMonth parseChargeDate(String chargeDate) throws ParseException {
+        requireNonNull(chargeDate);
+        String trimmedChargeDate = chargeDate.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-yyyy");
+        try {
+            return YearMonth.parse(trimmedChargeDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(ChargeCommand.MESSAGE_INVALID_DATE_FORMAT);
+        }
+    }
+
+    /**
+     * Parses a {@code String charge} into a {@code Charge}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @return Parsed charge.
+     * @throws ParseException if the given charge is invalid.
+
+     */
+    public static Charge parseCharge(String charge) throws ParseException {
+        requireNonNull(charge);
+
+        String trimmedCharge = charge.trim();
+        if (!Charge.isValidCharge(trimmedCharge)) {
+            throw new ParseException(Charge.MESSAGE_INVALID_CHARGE_FORMAT);
+        }
+        return new Charge(trimmedCharge);
+    }
 }
