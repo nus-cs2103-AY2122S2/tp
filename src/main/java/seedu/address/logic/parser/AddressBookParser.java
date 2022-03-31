@@ -38,7 +38,7 @@ public class AddressBookParser {
 
     private String[] singleCommandList = {ClearCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, SummariseCommand.COMMAND_WORD,
-        ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD};
+        ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, EmailCommand.COMMAND_WORD};
 
     /**
      * Checks whether command that does not require any parameters such as {@Code ListCommand} are input by the user.
