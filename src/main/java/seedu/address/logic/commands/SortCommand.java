@@ -22,7 +22,7 @@ public class SortCommand extends Command {
             + PREFIX_HEIGHT + "SORTING_ORDER or "
             + PREFIX_WEIGHT + "SORTING_ORDER or "
             + PREFIX_JERSEY_NUMBER + "SORTING_ORDER\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PLAYER + " " + PREFIX_HEIGHT + "asc";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_HEIGHT + "asc";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": sort players based on the specified criteria.\n"
             + MESSAGE_USAGE_PLAYER;
 

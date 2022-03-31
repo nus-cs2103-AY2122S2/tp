@@ -27,20 +27,11 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     @Override
     public SortCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_HEIGHT, PREFIX_WEIGHT,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HEIGHT, PREFIX_WEIGHT,
                 PREFIX_JERSEY_NUMBER);
-        boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
-
-        //brute force other scenario (impossible)
-        boolean hasSSlashAndPSlash = arePrefixesPresent(argMultimap, PREFIX_SCHEDULE, PREFIX_PLAYER); // S/ P/
-
-        // both P/ and S/ are missing -> false or S/ and P/ coexist -> false
-        if (!hasPSlash || hasSSlashAndPSlash) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
 
         // check has preamble or any extreme behaviour
-        if (!argMultimap.getPreamble().isEmpty() || !argMultimap.getValue(PREFIX_PLAYER).get().equals("")) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 

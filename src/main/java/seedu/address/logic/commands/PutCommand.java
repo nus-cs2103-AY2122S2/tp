@@ -30,6 +30,8 @@ public class PutCommand extends Command {
     public static final String MESSAGE_NO_SUCH_LINEUP = "Lineup does not exist.";
     public static final String MESSAGE_LINEUP_FULL = "Lineup is already full (max 5).";
     public static final String MESSAGE_PUT_PERSON_SUCCESS = "Successfully put %s into %s";
+    public static final String MESSAGE_LINEUP_ALREADY_HAS_PLAYER = "Player is already in the lineup";
+
 
     private final Name playerName;
     private final seedu.address.model.lineup.LineupName lineupName;
@@ -66,6 +68,8 @@ public class PutCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_LINEUP);
         } else if (model.getLineup(this.lineupName).reachMaximumCapacity()) {
             throw new CommandException(MESSAGE_LINEUP_FULL);
+        } else if (model.getLineup(this.lineupName).containsPlayer(playerName)) {
+            throw new CommandException(MESSAGE_LINEUP_ALREADY_HAS_PLAYER);
         } else {
             Person player = model.getPerson(this.playerName);
             Lineup lineup = model.getLineup(this.lineupName);

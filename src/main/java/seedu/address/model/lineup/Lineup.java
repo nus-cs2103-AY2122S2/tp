@@ -2,9 +2,9 @@ package seedu.address.model.lineup;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,13 +53,6 @@ public class Lineup {
     /**
      * Get the player at specific index of the lineupList.
      */
-    public Person getPlayer(int index) {
-        return playersList.get(index);
-    }
-
-    public ArrayList<Person> getPlayerList() {
-        return playersList.getPlayersList();
-    }
 
     public void addPlayer(Person player) {
         playersList.add(player);
@@ -75,6 +68,10 @@ public class Lineup {
 
     public boolean sameLineupName(LineupName otherLineupName) {
         return this.lineupName.equals(otherLineupName);
+    }
+
+    public boolean containsPlayer(Name name) {
+        return playersList.hasPlayer(name);
     }
 
     /**

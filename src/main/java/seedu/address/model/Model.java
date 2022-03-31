@@ -21,7 +21,8 @@ public interface Model {
 
     /** {@code Predicate} that evaluates to true when a person has lineup name*/
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP = person -> !person.getLineupNames().isEmpty();
-    Predicate<Schedule> PREDICATE_SHOW_ACTIVE_SCHEDULES = schedule -> schedule.isActive();
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP = person -> person.getLineupNames().isEmpty();
+    Predicate<Schedule> PREDICATE_SHOW_ACTIVE_SCHEDULES = Schedule::isActive;
     Predicate<Schedule> PREDICATE_SHOW_ARCHIVED_SCHEDULES = schedule -> !schedule.isActive();
     //=========== MyGM (Start) =====================================================================
     /**

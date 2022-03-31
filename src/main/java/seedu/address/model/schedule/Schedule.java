@@ -1,6 +1,5 @@
 package seedu.address.model.schedule;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
@@ -35,14 +34,6 @@ public class Schedule {
 
     public ScheduleDateTime getScheduleDateTime() {
         return scheduleDateTime;
-    }
-
-    /**
-     * Returns true if some schedule's name is {@code targetName}.
-     */
-    public boolean isMatchName(ScheduleName targetName) {
-        requireNonNull(targetName);
-        return getScheduleName().equals(targetName);
     }
 
     /**

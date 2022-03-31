@@ -33,9 +33,10 @@ public class LineupNameContainsKeywordsPredicate implements Predicate<Person> {
         Set<LineupName> lineupNames = person.getLineupNames();
         for (LineupName lineupName : lineupNames) {
             String[] splitLineupName = lineupName.toString().split("\\s+");
-            for (int i = 0; i < splitLineupName.length; i++) {
-                if (keyword.equals(splitLineupName[i])) {
+            for (String s : splitLineupName) {
+                if (keyword.equals(s)) {
                     isMatch = true;
+                    break;
                 }
             }
         }

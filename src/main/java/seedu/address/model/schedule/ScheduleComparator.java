@@ -12,9 +12,6 @@ public class ScheduleComparator implements Comparator<Schedule> {
     public int compare(Schedule s1, Schedule s2) {
         LocalDateTime d1 = s1.getScheduleDateTime().getScheduleDateTime();
         LocalDateTime d2 = s2.getScheduleDateTime().getScheduleDateTime();
-        if (d2.isBefore(d1)) {
-            return 1;
-        }
-        return -1;
+        return d2.isBefore(d1) ? 1 : (d2.isAfter(d1) ? -1 : 0);
     }
 }
