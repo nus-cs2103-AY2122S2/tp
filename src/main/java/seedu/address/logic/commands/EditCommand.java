@@ -127,6 +127,7 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getMatriculationNumber(), personToEdit.getMatriculationNumber());
         CovidStatus updatedCovidStatus = editChecker(editPersonDescriptor.getCovidStatus(),
                 personToEdit.getStatus());
+
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedBlock, updatedFaculty, updatedPhone, updatedEmail, updatedAddress,
