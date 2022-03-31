@@ -16,18 +16,20 @@ public class AddEmployeeCommand extends Command {
 
     public static final String COMMAND_WORD = "addEmployee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Employee to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds an Employee to ManageEZPZ.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_EMAIL + "EMAIL\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com ";
+            + PREFIX_EMAIL + "johnd@example.com";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New Employee added: %1$s";
+
+    public static final String MESSAGE_DUPLICATE_PERSON = "Employee %1$s already exists!\n";
 
     private final Person toAdd;
 
@@ -44,7 +46,8 @@ public class AddEmployeeCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON,
+                    toAdd.getName().toString()) + "\n" + MESSAGE_USAGE);
         }
 
         model.addPerson(toAdd);

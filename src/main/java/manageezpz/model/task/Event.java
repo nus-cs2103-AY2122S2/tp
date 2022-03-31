@@ -68,6 +68,22 @@ public class Event extends Task {
         return this.description;
     }
 
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public String getDateTime() {
         return "at " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))

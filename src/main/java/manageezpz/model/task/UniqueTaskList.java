@@ -58,6 +58,21 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Updates the task with the edited person.
+     * @param toUpdate the task to be updated.
+     * @param assigneesIndex the index of the person in List of assignees.
+     * @param editedPerson the edited person.
+     */
+    public void updateTaskWithEditedPerson(Task toUpdate, int assigneesIndex, Person editedPerson) {
+        requireAllNonNull(toUpdate, assigneesIndex, editedPerson);
+
+        Task updatedTask = duplicateTask(toUpdate);
+        updatedTask.assignedTo(assigneesIndex, editedPerson);
+
+        setTask(toUpdate, updatedTask);
+    }
+
+    /**
      * Marks a task in the list as done.
      * The task must already exist in the list.
      */

@@ -28,27 +28,33 @@ public class EditEmployeeCommand extends Command {
 
     public static final String COMMAND_WORD = "editEmployee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the employee identified "
-            + "by the index number used in the displayed employee list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the employee identified by the "
+            + "index number used in the displayed employee list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited employee: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
+
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n";
+
+    public static final String MESSAGE_DUPLICATE_PERSON = "Employee %1$s already exists!\n";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * Constructor to initialize a EditEmployeeCommand class with the given
+     * index and editPersonDescriptor.
+     *
+     * @param index Index of the Employee to edit
+     * @param editPersonDescriptor Details of the Employee to edit
      */
     public EditEmployeeCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -61,30 +67,41 @@ public class EditEmployeeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownPersonList = model.getFilteredPersonList();
-        List<Task> lastShownTaskList = model.getFilteredTaskList();
+        List<Task> fullTaskList = model.getAddressBook().getTaskList();
 
         if (index.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownPersonList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON,
+                    editedPerson.getName().toString()) + "\n" + MESSAGE_USAGE);
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        List<Task> taskList = lastShownTaskList.stream()
-                .filter(task -> task.getAssignees().contains(personToEdit)).collect(Collectors.toList());
+        List<Task> affectedTaskList = fullTaskList.stream()
+                .filter(task -> task.getAssignees().contains(personToEdit))
+                .collect(Collectors.toList());
 
+        for (Task task : affectedTaskList) {
+            List<Person> assignees = task.getAssignees();
 
-        for (int j = 0; j < taskList.size(); j++) {
-            taskList.get(j).assignedTo(index.getZeroBased(), editedPerson);
+            for (Person assignee : assignees) {
+                if (assignee.equals(personToEdit)) {
+                    Task taskToUpdate = fullTaskList.get(fullTaskList.indexOf(task));
+                    model.updateTaskWithEditedPerson(taskToUpdate, assignees.indexOf(assignee), editedPerson);
+                }
+            }
         }
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
@@ -100,6 +117,7 @@ public class EditEmployeeCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         int personToEditNumOfTask = personToEdit.getNumOfTasks();
+
         return new Person(updatedName, updatedPhone, updatedEmail, personToEditNumOfTask);
     }
 

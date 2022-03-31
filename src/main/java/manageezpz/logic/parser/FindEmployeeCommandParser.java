@@ -86,7 +86,7 @@ public class FindEmployeeCommandParser implements Parser<FindEmployeeCommand> {
     private void checkIfPhoneValid(String phone) {
         boolean isValidPhone = Phone.isValidPhone(phone);
         if (!isValidPhone) {
-            addErrorMessage(FindEmployeeCommand.INVALD_PHONE);
+            addErrorMessage(FindEmployeeCommand.INVALID_PHONE);
         }
     }
 

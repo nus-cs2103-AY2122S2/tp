@@ -60,7 +60,7 @@ public class AddressBookParser {
             return new AddEmployeeCommandParser().parse(arguments);
 
         case EditEmployeeCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditEmployeeCommandParser().parse(arguments);
 
         case DeleteEmployeeCommand.COMMAND_WORD:
             return new DeleteEmployeeCommandParser().parse(arguments);

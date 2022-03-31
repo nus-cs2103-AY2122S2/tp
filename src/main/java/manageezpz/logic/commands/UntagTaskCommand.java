@@ -2,6 +2,7 @@ package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
 
 public class UntagTaskCommand extends Command {
+
     public static final String COMMAND_WORD = "untagTask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -39,6 +41,7 @@ public class UntagTaskCommand extends Command {
      * @param name Name of the Employee to untag the Task from
      */
     public UntagTaskCommand(Index targetIndex, String name) {
+        requireAllNonNull(targetIndex, name);
         this.targetIndex = targetIndex;
         this.name = name;
     }
@@ -66,12 +69,12 @@ public class UntagTaskCommand extends Command {
         }
 
         if (person == null) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_PERSON, name) + "\n" + MESSAGE_USAGE);
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_PERSON, name) + "\n\n" + MESSAGE_USAGE);
         }
 
-        if (!model.isTagged(taskToUntagEmployee, person)) {
+        if (!model.isEmployeeTaggedToTask(taskToUntagEmployee, person)) {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_TAGGED_TO_TASK,
-                    person.getName().toString()) + taskToUntagEmployee + "\n" + MESSAGE_USAGE);
+                    person.getName().toString()) + taskToUntagEmployee + "\n\n" + MESSAGE_USAGE);
         }
 
         Task untaggedEmployeeTask = model.untagEmployeeFromTask(taskToUntagEmployee, person);
@@ -80,5 +83,4 @@ public class UntagTaskCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNTAG_TASK_SUCCESS,
                 person.getName().toString()) + untaggedEmployeeTask);
     }
-
 }

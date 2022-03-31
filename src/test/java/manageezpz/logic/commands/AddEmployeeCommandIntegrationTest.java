@@ -1,5 +1,6 @@
 package manageezpz.logic.commands;
 
+import static manageezpz.logic.commands.AddEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandFailure;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
@@ -39,7 +40,9 @@ public class AddEmployeeCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddEmployeeCommand(personInList), model, AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddEmployeeCommand(personInList), model,
+                String.format(AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON,
+                        personInList.getName().toString()) + "\n" + MESSAGE_USAGE);
     }
 
 }
