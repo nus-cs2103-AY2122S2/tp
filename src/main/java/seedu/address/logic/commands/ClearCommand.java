@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -17,7 +18,12 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        if (isArchiveBook()) {
+            model.setArchiveBook(new AddressBook());
+        } else {
+            model.setAddressBook(new AddressBook());
+        }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -104,11 +104,13 @@ public class LogicManager implements Logic {
     private void saveBooks() {
         try {
             if (StatusBarFooter.isArchiveBook()) {
-                storage.saveArchivedAddressBook(archiveBook);
-                archiveBook = new AddressBook(model.getAddressBook());
+                storage.saveArchivedAddressBook(model.getArchiveBook());
+                archiveBook = new AddressBook(model.getArchiveBook());
+                model.setAddressBook(archiveBook);
             } else {
                 storage.saveAddressBook(model.getAddressBook());
                 addressBook = new AddressBook(model.getAddressBook());
+                model.setAddressBook(addressBook);
             }
         } catch (DataConversionException | IOException e) {
             System.out.println("Error caught: " + e);
@@ -126,19 +128,34 @@ public class LogicManager implements Logic {
         Index oneBased = Index.fromOneBased(Integer.parseInt(oneBasedString));
         Person target = model.getFilteredPersonList().get(oneBased.getZeroBased());
 
-        model.deletePerson(target);
+
         try {
+            // Not in archive, so that means we are archiving someone
             if (!StatusBarFooter.isArchiveBook()) {
-                archiveBook.addPerson(target);
+                // Delete then save addressBook
+                model.deletePerson(target);
+                storage.saveAddressBook(model.getAddressBook());
+
+                // Add then save archiveBook
+                model.addArchivedPerson(target);
+                storage.saveArchivedAddressBook(model.getArchiveBook());
+
+                archiveBook = new AddressBook(model.getArchiveBook());
             } else {
+                // Delete then save archiveBook
+                model.deleteArchivedPerson(target);
+                storage.saveArchivedAddressBook(model.getArchiveBook());
+
+                // Add then save addressBook
                 addressBook.addPerson(target);
+                storage.saveAddressBook(addressBook);
+                model.setAddressBook(model.getArchiveBook());
             }
         } catch (DuplicatePersonException e) {
-            throw new CommandException(String.format(ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
-        } finally {
             saveBooks();
+            throw new CommandException(String.format(ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
+        } catch (DataConversionException | IOException e) {
+            System.out.println("Exception caught: " + e);
         }
-
-        archiveBook.getPersonList().forEach(x -> System.out.println(x));
     }
 }

@@ -91,6 +91,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setArchiveBook(ReadOnlyAddressBook addressBook) {
+        this.archiveBook.resetData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
@@ -127,6 +132,35 @@ public class ModelManager implements Model {
     @Override
     public void sortPerson(PersonComparator comparator) {
         addressBook.sortPerson(comparator);
+    }
+
+    @Override
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return archiveBook.hasPerson(person);
+    }
+
+    @Override
+    public void deleteArchivedPerson(Person target) {
+        archiveBook.removePerson(target);
+    }
+
+    @Override
+    public void addArchivedPerson(Person person) {
+        archiveBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setArchivedPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        archiveBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void sortArchivedPerson(PersonComparator comparator) {
+        archiveBook.sortPerson(comparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================

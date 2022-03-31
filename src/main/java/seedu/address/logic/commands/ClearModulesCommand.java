@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Address;
@@ -47,7 +49,12 @@ public class ClearModulesCommand extends Command {
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit);
-        model.setPerson(personToEdit, editedPerson);
+
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName()));

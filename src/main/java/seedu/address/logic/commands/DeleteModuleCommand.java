@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -65,7 +66,12 @@ public class DeleteModuleCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FAILURE, modules));
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToDelete));

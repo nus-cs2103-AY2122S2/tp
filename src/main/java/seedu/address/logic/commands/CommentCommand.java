@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.List;
 
@@ -59,7 +60,12 @@ public class CommentCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getStatus(),
                 personToEdit.getModules(), comment);
 
-        model.setPerson(personToEdit, editedPerson);
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
