@@ -8,8 +8,8 @@ If you can type fast, Tinner allows you to easily sort through and retrieve rele
 
 Tinner aims to solve the hassle of managing internship applications though 3 aspects.
 1. **Tracks** essential information such as statuses and deadlines at a glance.
-2. **Reminds** important deadlines so that you will not miss anything about your application.
-3. **Reviews** the process and take down notes so that you can ace your next application.
+2. **Reminds** you of important deadlines so that you will not miss anything about your application.
+3. Allows you to **Review** the process and take down notes so that you can ace your next application.
 
 The User Guide's primary goal is to assist the user in learning how to use the application Tinner.
 This guide covers everything from what the user sees, how Tinner can help the user, and even its limitations.
@@ -26,7 +26,7 @@ This guide covers everything from what the user sees, how Tinner can help the us
     * [Command Restrictions](#command-restrictions)
       * [Company Restrictions](#c-company-restrictions)
       * [Role Restrictions](#c-role-restrictions)
-    * [Demo Use Cases] (#demos)
+    * [Demo Use Cases](#demos)
   * [Features](#features)
     * [Modifying Companies](#c-modifying-companies)
       * [Adding a company: `addCompany`](#c-add-c)
@@ -236,6 +236,45 @@ Perhaps for some reason, you decide not to go through with an application. Maybe
 
 :information_source: Note the successful command execution message in the system feedback box upon successful deletion of the company.
 
+## Use Case #3: Editing a company or a role <a id="usecase3"></a>
+Say you received an email for an interview and the point of contact's email is different.
+Here's how you can make changes to the application:
+1. [Edit the company](#c-edit-c) from the company list.  
+![EditCompanyDemo](images/EditCompanyDemo.png)  
+:information_source: Note the successful command execution message in the system feedback box upon successful edit of the company.
+
+Also, you can change the status of your internship application and set the reminder for the interview date by making this entry:
+2. [Edit the role](#c-edit-r) from a given company.  
+![EditRoleDemo](images/EditRoleDemo.png)  
+:information_source: Note the successful command execution message in the system feedback box upon successful edit of the role.  
+:information_source: Note the change in color of the [role tag](#tags).
+
+## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
+Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of Tinner, you will be able to see a reminder pop-out box like this:   
+![ReminderDemo](images/ReminderDemo.png)  
+
+If you do not see the intended reminder, it is likely that the reminder date is not within the [reminder window](#c-setWindow-c).  
+Thus, you can increase the reminder window by making this entry:  
+1. [Set the reminder window](#c-setWindow-c) for the reminder list.  
+![WindowrDemo](images/WindowDemo.png)    
+:information_source: Note the successful command execution message in the system feedback box upon successful change of reminder window.
+
+## Use Case #5: Favouriting a company <a id="usecase5"></a>
+A scenario where multiple companies have sent you offers and you may want to store these companies in a [list of favourites](#c-listfavourite) for ease of reference.  
+you can favourite a company by making this entry:
+
+1. [Favourite a company](#c-favourite-c) from the company list.  
+![FavouriteDemo](images/FavouriteDemo.png)    
+:information_source: Note the successful command execution message in the system feedback box upon successful favourite of the company.  
+:information_source: Note that the favourite company will be denoted by the star icon next to the company name.
+
+You can choose to unfavourite by making this entry:
+2. [Unfavourite a company](#c-favourite-c) from the company list.  
+![UnfavouriteDemo](images/UnfavouriteDemo.png)  
+:information_source: Note the successful command execution message in the system feedback box upon successful unfavourite of the company.  
+
+Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite) command.
+
 [Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -273,6 +312,7 @@ Format: `editCompany COMPANY_INDEX [n/COMPANY_NAME] [p/PHONE_NUMBER] [e/EMAIL] [
 Examples:
 
 * `list` followed by `editCompany 1 p/91234567 e/johndoe@example.com`edits the 1<sup>st</sup> company in the displayed company list.
+* Refer to [Demo Use Case #3](#usecase3) for an example use case.
   
 [Back to Table of Contents](#toc)
 
@@ -308,6 +348,8 @@ Examples:
 
 * `list` followed by, `favourite 1` favourites the 1<sup>st</sup>
   company in Tinner.
+* Refer to [Demo Use Case #5](#usecase5) for an example use case.
+
 
 [Back to Table of Contents](#toc)
 
@@ -325,6 +367,8 @@ Examples:
 
 * `list` followed by, `unfavourite 1` unfavourites the 1<sup>st</sup>
   company in Tinner.
+* Refer to [Demo Use Case #5](#usecase5) for an example use case.
+
 
 [Back to Table of Contents](#toc)
 
@@ -361,6 +405,7 @@ Format: `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/
 Examples:
 
 * `list` followed by `editRole 1 1 [s/offered] [$/3000]` edits the 1<sup>st</sup> role from the 1<sup>st</sup> company in the displayed company list.
+* Refer to [Demo Use Case #3](#usecase3) for an example use case.
 
 [Back to Table of Contents](#toc)
 
@@ -396,6 +441,9 @@ Format: `list`
 Shows a list of all favourited companies and internship roles within these companies in Tinner.
 
 Format: `listFavourite`
+
+Examples:
+* Refer to [Demo Use Case #5](#usecase5) for an example use case.
 
 [Back to Table of Contents](#toc)
 
@@ -454,6 +502,7 @@ Format: `setWindow REMINDER_WINDOW`
 Examples:
 
 * `setWindow 14` would make Tinner remind you of all upcoming reminders from up to two weeks prior to the associated role's reminder date.
+* Refer to [Demo Use Case #4](#usecase4) for an example use case.
 
 [Back to Table of Contents](#toc)
 
