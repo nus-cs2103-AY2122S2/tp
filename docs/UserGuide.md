@@ -10,9 +10,9 @@ Interface** (CLI) while still having the benefits of a Graphical User Interface 
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
 <details>
-  <summary>What are CLIs?</summary>
+  <summary>What are CLIs? What are GUIs?</summary>
 
-##  What are GUIs?
+##  Brief Introduction
 1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
 2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
 
