@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "diabetic "
             + PREFIX_TAG + "hypertension";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Patient toAdd;
