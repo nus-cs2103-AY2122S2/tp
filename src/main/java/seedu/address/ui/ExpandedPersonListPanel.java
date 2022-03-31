@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,17 +17,19 @@ import seedu.address.model.person.Person;
 public class ExpandedPersonListPanel extends UiPart<Region> {
     private static final String FXML = "ExpandedPersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ExpandedPersonListPanel.class);
+    private final ObservableList<Event> eventList;
 
     @FXML
     private ListView<Person> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList} of event and person.
      */
-    public ExpandedPersonListPanel(ObservableList<Person> personList) {
+    public ExpandedPersonListPanel(ObservableList<Person> personList, ObservableList<Event> eventList) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.eventList = eventList;
     }
 
     /**
@@ -40,9 +43,8 @@ public class ExpandedPersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ExpandedPersonCard(person).getRoot());
+                setGraphic(new ExpandedPersonCard(person, eventList).getRoot());
             }
         }
     }
-
 }

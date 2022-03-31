@@ -3,11 +3,14 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
@@ -27,6 +30,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
      */
 
     private final Person person;
+    private EventListPanel upcomingEventsPanel;
 
     @FXML
     private HBox cardPane;
@@ -43,12 +47,14 @@ public class ExpandedPersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private StackPane upcomingEventsPanelPlaceholder;
+    @FXML
     private Label logs;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public ExpandedPersonCard(Person person) {
+    public ExpandedPersonCard(Person person, ObservableList<Event> eventList) {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
@@ -62,6 +68,9 @@ public class ExpandedPersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        upcomingEventsPanel = new EventListPanel(eventList);
+        upcomingEventsPanelPlaceholder.getChildren().add(upcomingEventsPanel.getRoot());
 
         //displaying each log
         StringBuilder sb = new StringBuilder();
