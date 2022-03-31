@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -21,7 +22,7 @@ import seedu.address.model.person.Person;
 public class RedoCommandTest {
     private static final StackUndoRedo EMPTY_STACK = new StackUndoRedo();
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
     private final DeleteCommand deleteCommandOne = new DeleteCommand(INDEX_FIRST_PERSON);
     private final DeleteCommand deleteCommandTwo = new DeleteCommand(INDEX_SECOND_PERSON);
 
@@ -34,7 +35,7 @@ public class RedoCommandTest {
         RedoCommand redoCommand = new RedoCommand();
         redoCommand.setData(undoRedoStack);
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
         Person firstPerson = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.deletePerson(firstPerson);

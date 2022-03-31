@@ -80,7 +80,6 @@ public class EditCommand extends RedoableCommand {
     /**
      * Factory method for an empty EditCommand. Prevents unintended calls to an
      * EditCommand.
-     * 
      * @return an empty EditCommand
      */
     public static EditCommand editWindowHelper() {
