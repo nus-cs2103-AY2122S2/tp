@@ -66,8 +66,6 @@ public class CommandTestUtil {
     public static final String QUANTITY_FULL_A = " " + PREFIX_QUANTITY + VALID_QUANTITY_A;
     public static final String QUANTITY_FULL_B = " " + PREFIX_QUANTITY + VALID_QUANTITY_B;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Bread&"; // '&' not allowed in names
-    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "Bread&"; // '&' not allowed in category
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "-1"; // price must be a positive amount
     // discount rate must be less than 100;
     public static final String INVALID_DISCOUNTRATE_DESC = " " + PREFIX_DISCOUNTRATE + "101";
