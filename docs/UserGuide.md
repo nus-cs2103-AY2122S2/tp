@@ -36,7 +36,6 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`exit`** : Exits the app.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -159,6 +158,8 @@ Examples:
 **:bulb: Take Note:**
 
 For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format).
+
+For event, the START_TIME must be earlier than the END_TIME.
 
 </div>
 
@@ -393,8 +394,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | Action                | Format, Examples                                                                                                                |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | **Add Todo Task**     | `addTodo desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book`                                                             |
-| **Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/16-02-2022 1800`                    |
-| **Add Event Task**    | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/17-02-2022 1900 2000` |
+| **Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/2022-02-16 1800`                    |
+| **Add Event Task**    | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/2022-02-17 1900 2000` |
 | **List Tasks**        | `listTasks`                                                                                                                     |
 | **Find Task**         | `findTask OPTIONS` <br> e.g.,`findTask todo/`                                                                                   |
 | **Mark Task**         | `markTask INDEX` <br> e.g., `markTask 2`                                                                                        |
@@ -409,6 +410,5 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | Action    | Format  |
 |-----------|---------|
 | **Clear** | `clear` |
-| **List**  | `list`  |
 | **Help**  | `help`  |
 | **Exit**  | `exit`  |
