@@ -137,10 +137,11 @@ public class TAssist implements ReadOnlyTAssist {
      * {@code key} must exist in the TAssist.
      */
     public void removeStudent(Student key) {
-        students.remove(key);
-        removeStudentFromModules(key);
         removeStudentFromClassGroups(key);
         removeStudentFromAssessments(key);
+        removeStudentFromModules(key);
+        students.remove(key);
+
     }
 
     //// module-level operations
