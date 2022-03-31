@@ -152,7 +152,7 @@ Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
 * Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `as` prefix short for Application Status` should only be either `Pending`, `Accepted` or `Rejected`.
+* `as` prefix short for Application Status should only be either `Pending`, `Accepted` or `Rejected`.
 
 Examples:
 * `edit 1 n/Jane Doe yr/3 avail/1` Edits the name, year and availability of the 1st candidate to be Jane Doe, Year 3, Monday only respectively.
