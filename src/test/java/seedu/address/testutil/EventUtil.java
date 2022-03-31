@@ -21,6 +21,14 @@ public class EventUtil {
     }
 
     /**
+     * Returns an addevent command string (command alias version) for adding the {@code event}.
+     */
+    public static String getAddEventCommandAlias(Event event) {
+        return AddEventCommand.COMMAND_ALIAS + " " + getEventDetails(event);
+    }
+
+
+    /**
      * Returns the part of command string for the given {@code event}'s details.
      */
     public static String getEventDetails(Event event) {

@@ -10,7 +10,8 @@ import seedu.address.model.Model;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "showfriends";
+    public static final String COMMAND_WORD = "listfriends";
+    public static final String COMMAND_ALIAS = "lf";
 
     public static final String MESSAGE_SUCCESS = "Listed all friends";
 

@@ -35,6 +35,7 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "editfriend";
+    public static final String COMMAND_ALIAS = "ef";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the name or index number used in the displayed person list. "

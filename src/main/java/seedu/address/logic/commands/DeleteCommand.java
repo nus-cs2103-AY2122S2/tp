@@ -15,8 +15,9 @@ import seedu.address.model.person.Person;
 public class DeleteCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "deletefriend";
+    public static final String COMMAND_ALIAS = "df";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
             + ": Deletes the friend identified by index or name.\n"
             + "Parameters: "
             + " INDEX ? "

@@ -14,8 +14,9 @@ import seedu.address.model.person.Person;
 public class ShowFriendCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "showfriend";
+    public static final String COMMAND_ALIAS = "sf";
 
-    public static final String MESSAGE_USAGE = "COMMAND_WORD : Shows full details of a friend in"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows full details of a friend in"
             + " the address book. "
             + "Parameters: "
             + "INDEX ? "
@@ -69,7 +70,7 @@ public class ShowFriendCommand extends ByIndexByNameCommand {
         model.updateFilteredPersonList(x -> x.isSamePerson(personToShow));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToShow.getName()), false,
-                false, false, true);
+                false, false, true, false);
     }
 
     @Override
