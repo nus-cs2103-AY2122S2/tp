@@ -42,8 +42,8 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Task Assigned: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task is already assigned to all students.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given studentId";
-    public static final String MODULE_CODE_NOT_FOUND = "There is no person taking the given module";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given Student ID.";
+    public static final String MODULE_CODE_NOT_FOUND = "There is no person taking the given module.";
 
     private final StudentId studentId;
     private final Task task;

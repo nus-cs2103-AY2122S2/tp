@@ -156,7 +156,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleClearRequest() {
-        resultDisplay.setFeedbackToUser("WARNING: Input \"confirm\" if you want to clear the address book completely");
+        resultDisplay.setFeedbackToUser("WARNING: Input \"confirm\" if you want to clear the address book completely.");
 
         //replace CommandBox with CommandBox that only confirms clear requests
         CommandBox commandBox = new CommandBox(this::confirmClearRequest);
