@@ -424,6 +424,7 @@ and/or (conflicting) interviews.
 Commands in this section have been organised based on the expected scope of behaviour.
 
 ### Managing candidates
+
 | Action     | Format, Examples                                                                                                                                                                                |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add id/STUDENT_ID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
@@ -435,6 +436,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **Focus**  | `focus INDEX`<br> e.g., `focus 1`                                                                                                                                                               |
 
 ### Scheduling interviews
+
 | Action                        | Format, Examples                                                                                      |
 |-------------------------------|-------------------------------------------------------------------------------------------------------|
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME`<br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
@@ -444,6 +446,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **View scheduled interviews** | `view TIME_PERIOD`<br> e.g., `view all`, `view today`                                                 |
 
 ### Miscellaneous commands
+
 | Action    | Format, Examples |
 |-----------|------------------|
 | **Clear** | `clear`          |

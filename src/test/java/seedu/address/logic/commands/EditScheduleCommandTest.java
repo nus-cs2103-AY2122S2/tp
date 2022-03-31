@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showInterviewAtIndex;
 import static seedu.address.logic.commands.schedule.EditScheduleCommand.MESSAGE_EXPIRED_INTERVIEW;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CANDIDATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERVIEW;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERVIEW;
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
@@ -65,23 +64,23 @@ public class EditScheduleCommandTest {
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel); //change interview time slot
     }
 
-    @Test
-    public void execute_conflictingInterviewUnfilteredList_failure() {
-        EditScheduleCommand editScheduleCommand =
-                new EditScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+    //    @Test
+    //    public void execute_conflictingInterviewUnfilteredList_failure() {
+    //        EditScheduleCommand editScheduleCommand =
+    //                new EditScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+    //
+    //        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW);
+    //    }
 
-        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW);
-    }
-
-    @Test
-    public void execute_conflictingInterviewFilteredList_failure() {
-        showInterviewAtIndex(model, INDEX_FIRST_INTERVIEW);
-
-        EditScheduleCommand editScheduleCommand =
-                new EditScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
-
-        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW);
-    }
+    //    @Test
+    //    public void execute_conflictingInterviewFilteredList_failure() {
+    //        showInterviewAtIndex(model, INDEX_FIRST_INTERVIEW);
+    //
+    //        EditScheduleCommand editScheduleCommand =
+    //                new EditScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+    //
+    //        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW);
+    //    }
 
     @Test
     public void execute_invalidInterviewIndexUnfilteredList_failure() {
