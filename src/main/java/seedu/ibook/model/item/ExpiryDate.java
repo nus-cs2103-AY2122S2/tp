@@ -144,12 +144,11 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
 
         public boolean matches(String test) {
             try {
-                LocalDate.parse(test, dateFormatter);
+                LocalDate parsedDate = LocalDate.parse(test, dateFormatter);
+                return parsedDate.format(dateFormatter).equals(test);
             } catch (DateTimeParseException pe) {
                 return false;
             }
-
-            return true;
         }
 
         public LocalDate parse(String date) {
