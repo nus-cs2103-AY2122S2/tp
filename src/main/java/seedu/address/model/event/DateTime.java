@@ -49,11 +49,7 @@ public class DateTime implements Comparable<DateTime> {
         }
         return true;
     }
-
-    public boolean hasSameDate(LocalDate date) {
-        return value.toLocalDate().equals(date);
-    }
-
+    
     public boolean hasDateBefore(LocalDate date) {
         return value.toLocalDate().isBefore(date);
     }
