@@ -26,6 +26,7 @@ This guide covers everything from what the user sees, how Tinner can help the us
     * [Command Restrictions](#command-restrictions)
       * [Company Restrictions](#c-company-restrictions)
       * [Role Restrictions](#c-role-restrictions)
+    * [Demo Use Cases] (#demos)
   * [Features](#features)
     * [Modifying Companies](#c-modifying-companies)
       * [Adding a company: `addCompany`](#c-add-c)
@@ -203,7 +204,41 @@ The following points explain the format of a command.
 [Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+# Demo Use Cases <a id="demos"></a>
 
+## Use Case #1: Applying to a role in a company <a id="usecase1"></a>
+
+Say you found a company with an opening that you are interested in. You did your research and found relevant information pertaining to the company and the role. Here's how you can input this data in the application:
+
+1. [Add the company](#c-add-c) to the company list.
+![AddCompanyDemo](images/AddCompanyDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful adding of the company.
+
+2. [Add the role](#c-add-c-r) under the added company.
+![AddRoleDemo](images/AddRoleDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful adding of the role.
+
+[Back to Table of Contents](#toc)
+
+## Use Case #2: Deleting a company or a role <a id="usecase2"></a>
+
+Perhaps for some reason, you decide not to go through with an application. Maybe you realised the company's mission and vision were  not in line with your values or maybe you realised the role isn't for you. Here's how you can delete these entries from the application:
+
+1. [Delete the role](#c-delete-c-r) from a given company.
+![DeleteRoleDemo](images/DeleteRoleDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful deletion of the role.
+
+2. [Delete the company](#c-delete-c) from the company list.
+![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful deletion of the company.
+
+[Back to Table of Contents](#toc)
+
+--------------------------------------------------------------------------------------------------------------------
 # Features <a id="features"></a>
 
 ## Modifying Companies <a id="c-modifying-companies"></a>
@@ -220,6 +255,7 @@ Examples:
 
 * `addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
 * `addCompany n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937`
+* Refer to [Demo Use Case #1](#usecase1) for an example use case.
 
 [Back to Table of Contents](#toc)
 
@@ -249,6 +285,8 @@ Format: `deleteCompany COMPANY_INDEX`
 * Deletes the company at the specified `COMPANY_INDEX`.
 * The index refers to the index number shown in the displayed company list.
 * The index must be a positive integer like 1, 2, 3, …
+* Refer to [Demo Use Case #2](#usecase2) for an example use case.
+
 
 Examples:
 
@@ -339,6 +377,7 @@ Examples:
 
 * `list` followed by, `deleteRole 1 1` deletes the 1<sup>st</sup> role from the 1<sup>st</sup>
   company in the displayed company list.
+* Refer to [Demo Use Case #2](#usecase2) for an example use case.
 
 [Back to Table of Contents](#toc)
 
