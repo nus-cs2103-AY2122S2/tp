@@ -22,13 +22,13 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by their name in the displayed person list.\n"
+            + ": Deletes the client identified by their name in the displayed client list.\n"
             + "Parameters: Name (Alphanumerical characters and spaces only)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
-            + "list below and enter the index of the client you wish to delete \n"
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 client exists with that name. Please look at "
+            + "the list below and enter the index of the client you wish to delete \n"
             + "Example: 1, 2, 3 ...";
 
     private final Name targetName;

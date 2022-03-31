@@ -12,7 +12,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all persons in the program.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all clients in the program.";
 
     public static final String MESSAGE_SUCCESS = "Hustle book has been cleared!";
 

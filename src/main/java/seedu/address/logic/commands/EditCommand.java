@@ -45,8 +45,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
+            + "by the name used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NAME (Alphanumerical and spaces only) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -62,13 +62,12 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 client exists with that name. Please look at the "
             + "list below and enter the index of the client you wish to edit \n"
             + "Example: 1, 2, 3 ...";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book.";
-    public static final String MESSAGE_INVALID_INDEX = "This index does not exist!";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the hustle book.";
 
     private final Name targetName;
     private final String targetNameStr;

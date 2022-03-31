@@ -13,9 +13,9 @@ import seedu.address.model.person.Person;
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons based on parameters given.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all clients based on parameters given.\n"
             + "Parameters available: meeting, name, prev, salary \n"
-            + "Example: " + COMMAND_WORD + " name";
+            + "Example: " + COMMAND_WORD + " John Doe";
 
     public static final String MESSAGE_SUCCESS = "Clients are now sorted";
     private final Comparator<Person> sortComparator;

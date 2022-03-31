@@ -33,16 +33,17 @@ public class FlagCommand extends Command {
     public static final String FLAG_COMMAND_WORD = "flag";
     public static final String UNFLAG_COMMAND_WORD = "unflag";
 
-    public static final String MESSAGE_USAGE = FLAG_COMMAND_WORD + "|" + UNFLAG_COMMAND_WORD
-            + ": Flags the person identified by the index number used in the displayed person list.\n"
+    public static final String MESSAGE_USAGE = FLAG_COMMAND_WORD + " or " + UNFLAG_COMMAND_WORD
+            + ": Flags the client identified by the name. "
+            + "In the event of conflicting name, index number is used together with the displayed client list.\n"
             + "Parameters: NAME\n"
             + "Example: " + UNFLAG_COMMAND_WORD + " Joe";
 
-    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
-            + "list below and enter the index of the client you wish to edit \n"
-            + "Example: 1, 2, 3 ...";
+    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Client: %1$s";
 
-    public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Person: %1$s";
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 client exists with that name. "
+            + "Please look at the list below and enter the index of the client you wish to edit \n"
+            + "Example: 1, 2, 3 ...";
 
     private final Name targetName;
     private final String targetNameStr;
