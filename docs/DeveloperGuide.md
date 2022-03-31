@@ -48,7 +48,6 @@ title: Developer Guide
   * [Adding a show](#adding-a-show)
   * [Deleting a show](#deleting-a-show)
   * [Editing a show](#editing-a-show)
-  * [Edit a comment](#edit-comment)
   * [Saving data](#saving-data)
   * [Finding a show](#finding-a-show)
   * [Importing Trackermon data](#importing-trackermon-data)
@@ -878,30 +877,6 @@ testers are expected to do more *exploratory* testing.
    1. Condition: Show named `Inception` exists in the show list.
    2. Command: `edit n/Inception` <br>
       Expected: No show is edited. Error details shown in the result display.
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
-### Edit comment
-
-1. Prerequisites: None, but if the list is empty, all edits will result in an error.
-
-2. List all shows using the `list` command.
-3. Test case: 
-   1. Command: `comment 1 c/Hello`<br> 
-      Expected: Comment of the first show in the list is edited to "Hello".
-
-4. Test case: 
-   1. Command: `comment 1`<br>
-      Expected: Comment of the first show in the list is deleted.
-
-5. Test case: 
-   1. Command: `comment 0`<br>
-      Expected: No comments are edited. Error details shown in the status message. Status bar remains the same.
-
-6. Other incorrect comment commands to try: `comment`, `comment x` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
