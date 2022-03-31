@@ -8,23 +8,19 @@ import static seedu.address.logic.commands.CommandTestUtil.LOG_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LOG_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOG_TITLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE_END;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE_START;
-import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_FRIEND_NAME_SUBSTRINGS;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_FRIEND_NAME_SUBSTRING_1;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_FRIEND_NAME_SUBSTRING_2;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_NAME_SUBSTRING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -49,16 +45,13 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventDateIsAfterPredicate;
-import seedu.address.model.event.EventDateIsBeforePredicate;
-import seedu.address.model.event.EventFriendNamesContainSubstringPredicate;
-import seedu.address.model.event.EventNameContainsSubstringPredicate;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventPredicateListBuilder;
 import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -191,12 +184,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findevent() throws Exception {
-        ArrayList<Predicate<Event>> predicates = new ArrayList<>();
-        predicates.add(new EventNameContainsSubstringPredicate(DEFAULT_NAME_SUBSTRING));
-        predicates.add(new EventDateIsBeforePredicate(DEFAULT_DATE_START));
-        predicates.add(new EventDateIsAfterPredicate(DEFAULT_DATE_END));
-        predicates.add(new EventFriendNamesContainSubstringPredicate(DEFAULT_FRIEND_NAME_SUBSTRING_1));
-        predicates.add(new EventFriendNamesContainSubstringPredicate(DEFAULT_FRIEND_NAME_SUBSTRING_2));
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().build();
 
         FindEventCommand command = (FindEventCommand) parser.parseCommand(
                 FindEventCommand.COMMAND_WORD + " " + PREFIX_NAME + DEFAULT_NAME_SUBSTRING

@@ -25,6 +25,8 @@ import seedu.address.model.event.EventNameContainsSubstringPredicate;
  */
 public class FindEventCommandParser implements Parser<FindEventCommand> {
 
+    public static final String MESSAGE_INVALID_DATE_RANGE = "The start date cannot be after the end date";
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindEventCommand
      * and returns a FindEventCommand object for execution.
@@ -50,16 +52,23 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
             eventPredicates.add(new EventNameContainsSubstringPredicate(eventNameSubstring));
         }
 
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+
         if (argMultimap.getValue(PREFIX_DATE_START).isPresent()) {
-            LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE_START).get());
+            startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE_START).get());
             LocalDate nonInclusiveStartDate = startDate.minusDays(1);
             eventPredicates.add(new EventDateIsAfterPredicate(nonInclusiveStartDate));
         }
 
         if (argMultimap.getValue(PREFIX_DATE_END).isPresent()) {
-            LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE_END).get());
+            endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE_END).get());
             LocalDate nonInclusiveEndDate = endDate.plusDays(1);
             eventPredicates.add(new EventDateIsBeforePredicate(nonInclusiveEndDate));
+        }
+
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            throw new ParseException(MESSAGE_INVALID_DATE_RANGE);
         }
 
         List<String> friendNameSubstrings = argMultimap.getAllValues(PREFIX_FRIEND_NAME);

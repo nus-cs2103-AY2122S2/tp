@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalAddressBookWithEven
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,15 +21,19 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventFilterPredicate;
-import seedu.address.testutil.EventFilterPredicateBuilder;
+import seedu.address.testutil.EventPredicateListBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
  */
 public class FindEventCommandTest {
-    public static final String UMATCHING_DATE = "19-02-1959";
-    public static final String MATCHING_DATE = "12-5-2022";
+    public static final String UNMATCHING_START_DATE = "19-02-2059";
+    public static final String MATCHING_START_DATE = "11-5-2022";
+    public static final String UNMATCHING_END_DATE = "11-5-1959";
+    public static final String MATCHING_END_DATE = "12-5-2022";
+    public static final String[] UNMATCHING_DATE_RANGE = {"19-2-2045", "12-5-2045"};
+    public static final String[] MATCHING_DATE_RANGE = {"12-3-2022", "11-5-2022"};
+
     public static final String UNMATCHING_EVENT_NAME = "aksdjaskdj";
     public static final String MATCHING_EVENT_NAME_SUBSTRING = " Birthday";
     public static final String MATCHING_EVENT_NAME_ENTIRE = "2nd Birthday";
@@ -42,8 +47,8 @@ public class FindEventCommandTest {
 
     @Test
     public void equals() {
-        EventFilterPredicate firstPredicate = new EventFilterPredicate("first", List.of("first"));
-        EventFilterPredicate secondPredicate = new EventFilterPredicate("second", List.of("second"));
+        List<Predicate<Event>> firstPredicate = new EventPredicateListBuilder().build();
+        List<Predicate<Event>> secondPredicate = new EventPredicateListBuilder().clearNameSubstring().build();
 
         FindEventCommand findFirstCommand = new FindEventCommand(firstPredicate);
         FindEventCommand findSecondCommand = new FindEventCommand(secondPredicate);
@@ -61,14 +66,21 @@ public class FindEventCommandTest {
         // null -> returns false
         assertNotEquals(null, findFirstCommand);
 
-        // different predicate -> returns false
+        // different predicates -> returns false
         assertNotEquals(findFirstCommand, findSecondCommand);
     }
 
-    public void assertFindEventCommandSuccess(String expectedMessage, EventFilterPredicate predicate,
+    public void assertFindEventCommandSuccess(String expectedMessage, List<Predicate<Event>> predicates,
                                               List<Event> expectedFilteredList) {
-        FindEventCommand command = new FindEventCommand(predicate);
-        expectedModel.updateFilteredEventList(predicate);
+        FindEventCommand command = new FindEventCommand(predicates);
+        expectedModel.updateFilteredEventList(event -> {
+            for (Predicate<Event> predicate : predicates) {
+                if (!predicate.test(event)) {
+                    return false;
+                }
+            }
+            return true;
+        });
         Collections.sort(expectedFilteredList);
         assertEventCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedFilteredList, model.getFilteredEventList());
@@ -77,122 +89,167 @@ public class FindEventCommandTest {
     @Test
     public void execute_filterByEventName_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring(UNMATCHING_EVENT_NAME)
-                .clearDate().withFriendNameSubstrings().build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().withNameSubstring(UNMATCHING_EVENT_NAME)
+                .clearStartDate().clearEndDate().clearFriendNameSubstrings().build();
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, Collections.emptyList());
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
 
     @Test
     public void execute_filterByEventName_multipleEventsFound() {
         // Match partial event name
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
-                .clearDate().withFriendNameSubstrings().build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
+                .clearStartDate().clearEndDate().clearFriendNameSubstrings().build();
         List<Event> expectedFilteredList =
                 Arrays.asList(EVENT_WITH_DESCRIPTION, EVENT_NO_FRIENDS, EVENT_WITH_DIFF_DESCRIPTION);
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
 
         // Different case -> same outcome
-        predicate = new EventFilterPredicateBuilder().withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING.toUpperCase())
-                .clearDate().withFriendNameSubstrings().build();
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+        predicates = new EventPredicateListBuilder().withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING.toUpperCase())
+                .clearStartDate().clearEndDate().clearFriendNameSubstrings().build();
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
 
         // Match entire event name
         expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
-        predicate = new EventFilterPredicateBuilder().withNameSubstring(MATCHING_EVENT_NAME_ENTIRE)
-                .clearDate().withFriendNameSubstrings().build();
+        predicates = new EventPredicateListBuilder().withNameSubstring(MATCHING_EVENT_NAME_ENTIRE)
+                .clearStartDate().clearEndDate().clearFriendNameSubstrings().build();
         expectedFilteredList = Arrays.asList(EVENT_WITH_DESCRIPTION);
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 
     @Test
-    public void execute_filterByDate_noEventFound() {
+    public void execute_filterByOnlyStartDate_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .withDate(UMATCHING_DATE).withFriendNameSubstrings().build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .withStartDate(UNMATCHING_START_DATE).clearFriendNameSubstrings().build();
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, Collections.emptyList());
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
 
     @Test
-    public void execute_filterByDate_multipleEventsFound() {
-        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .withDate(MATCHING_DATE).withFriendNameSubstrings().build();
+    public void execute_filterByOnlyStartDate_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .withStartDate(MATCHING_START_DATE).clearFriendNameSubstrings().build();
         List<Event> expectedFilteredList =
-                Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION);
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+                Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION, EVENT_NO_FRIENDS);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
+    }
+
+    @Test
+    public void execute_filterByOnlyEndDate_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .withEndDate(UNMATCHING_END_DATE).clearFriendNameSubstrings().build();
+
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
+    }
+
+    @Test
+    public void execute_filterByOnlyEndDate_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .withEndDate(MATCHING_END_DATE).clearFriendNameSubstrings().build();
+        List<Event> expectedFilteredList =
+                Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION, EVENT_NO_FRIENDS);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
+    }
+
+    @Test
+    public void execute_filterByDateRange_noEventFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .withStartDate(UNMATCHING_DATE_RANGE[0]).withEndDate(UNMATCHING_DATE_RANGE[1])
+                .clearFriendNameSubstrings().build();
+
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
+    }
+
+    @Test
+    public void execute_filterByDateRange_multipleEventsFound() {
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .withStartDate(MATCHING_DATE_RANGE[0]).withEndDate(MATCHING_DATE_RANGE[1])
+                .clearFriendNameSubstrings().build();
+        List<Event> expectedFilteredList =
+                Arrays.asList(EVENT_NO_FRIENDS, EVENT_WITH_DIFF_DESCRIPTION);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 
     @Test
     public void execute_filterBySingleFriendName_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .clearDate().withFriendNameSubstrings(UNMATCHING_FRIEND_NAME_1).build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .clearStartDate().clearEndDate().withFriendNameSubstrings(UNMATCHING_FRIEND_NAME_1).build();
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, Collections.emptyList());
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
 
     @Test
     public void execute_filterBySingleFriendName_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .clearDate().withFriendNameSubstrings(MATCHING_FRIEND_NAME_1).build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .clearStartDate().clearEndDate().withFriendNameSubstrings(MATCHING_FRIEND_NAME_1).build();
         List<Event> expectedFilteredList =
                 Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION);
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 
     @Test
     public void execute_filterByMultipleFriendNames_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .clearDate().withFriendNameSubstrings(UNMATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_1).build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .clearStartDate().clearEndDate()
+                .withFriendNameSubstrings(UNMATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_1).build();
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, Collections.emptyList());
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
 
     @Test
     public void execute_filterByMultipleFriendNames_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .clearDate().withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2).build();
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .clearStartDate().clearEndDate()
+                .withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2).build();
         List<Event> expectedFilteredList =
                 Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION);
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
 
         // Diff case -> same result
         String nameDiffCase1 = MATCHING_FRIEND_NAME_1.toLowerCase();
         String nameDiffCase2 = MATCHING_FRIEND_NAME_2.toUpperCase();
-        predicate = new EventFilterPredicateBuilder().withNameSubstring("")
-                .clearDate().withFriendNameSubstrings(nameDiffCase1, nameDiffCase2).build();
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
-
+        predicates = new EventPredicateListBuilder().clearNameSubstring()
+                .clearStartDate().clearEndDate().withFriendNameSubstrings(nameDiffCase1, nameDiffCase2).build();
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 
     @Test
     public void execute_filterByAllThree_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder().withNameSubstring(UNMATCHING_EVENT_NAME)
-                .withDate(MATCHING_DATE).withFriendNameSubstrings(UNMATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder()
+                .withNameSubstring(UNMATCHING_EVENT_NAME)
+                .withStartDate(UNMATCHING_END_DATE).withEndDate(MATCHING_END_DATE)
+                .withFriendNameSubstrings(UNMATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
                 .build();
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, Collections.emptyList());
+        assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
 
 
     @Test
     public void execute_filterByAllThree_eventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
-        EventFilterPredicate predicate = new EventFilterPredicateBuilder()
+        List<Predicate<Event>> predicates = new EventPredicateListBuilder()
                 .withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
-                .withDate(MATCHING_DATE).withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
+                .withStartDate(MATCHING_END_DATE)
+                .withEndDate(MATCHING_END_DATE)
+                .withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
                 .build();
         List<Event> expectedFilteredList = Arrays.asList(EVENT_WITH_DIFF_DESCRIPTION);
 
-        assertFindEventCommandSuccess(expectedMessage, predicate, expectedFilteredList);
+        assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 }

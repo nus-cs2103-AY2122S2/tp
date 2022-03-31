@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * Tests that {@code Event}'s {@code date} is after the given date.
  */
-public class EventDateIsAfterPredicate implements Predicate<Event>{
+public class EventDateIsAfterPredicate implements Predicate<Event> {
     private final LocalDate date;
 
     /**

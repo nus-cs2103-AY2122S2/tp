@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  * Tests that at least one of {@code Event}'s {@code friend names} contains the given substring. Matching is
  * case-insensitive.
  */
-public class EventFriendNamesContainSubstringPredicate implements Predicate<Event>{
+public class EventFriendNamesContainSubstringPredicate implements Predicate<Event> {
     private final String substring;
 
     /**
