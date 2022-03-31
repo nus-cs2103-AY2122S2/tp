@@ -21,7 +21,7 @@ Given below are my contributions to the project.
   To be added
 
 * **Enhancements to existing features**:
-  
+
 
 * **Documentation**:
   * User Guide:

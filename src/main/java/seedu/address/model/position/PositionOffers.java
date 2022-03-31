@@ -1,6 +1,9 @@
 package seedu.address.model.position;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.position.Position.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.position.PositionOpenings.isValidNumber;
 
 import seedu.address.model.ImmutableCounter;
 
@@ -26,6 +29,16 @@ public class PositionOffers implements ImmutableCounter {
     private PositionOffers(Integer offers) {
         requireNonNull(offers);
         numOfOffers = offers;
+    }
+
+    /**
+     * Constructs a {@code PositionOpenings}
+     * @param offers A valid non-negative integer that is between 1 and 3 digits
+     */
+    public PositionOffers(String offers) {
+        requireNonNull(offers);
+        checkArgument(isValidNumber(offers), MESSAGE_CONSTRAINTS);
+        numOfOffers = Integer.parseInt(offers);
     }
 
     @Override
