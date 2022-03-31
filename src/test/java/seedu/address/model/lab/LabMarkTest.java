@@ -8,6 +8,7 @@ import static seedu.address.model.lab.LabMark.MARKS_DESCRIPTION;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.lab.exceptions.IllegalLabStateException;
 
 public class LabMarkTest {
