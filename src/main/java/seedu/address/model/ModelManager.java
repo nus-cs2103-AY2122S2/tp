@@ -148,7 +148,7 @@ public class ModelManager implements Model {
 
         return !availability.contains(String.valueOf(interview.getInterviewDay()));
     }
-    
+
     @Override
     public void resetAllScheduledStatus() {
         addressBook.resetAllScheduledStatus();
