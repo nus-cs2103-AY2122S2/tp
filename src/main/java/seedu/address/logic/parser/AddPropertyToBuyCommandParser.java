@@ -43,7 +43,7 @@ public class AddPropertyToBuyCommandParser implements Parser<AddPropertyToBuyCom
         HouseType houseType = ParserUtil.parseHouseType(argMultimap.getValue(PREFIX_HOUSE_TYPE).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         PriceRange priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_PRICE_RANGE).get());
-        PropertyToBuy propertyToBuy = new PropertyToBuy(new House(houseType, location.toString()), priceRange);
+        PropertyToBuy propertyToBuy = new PropertyToBuy(new House(houseType, location), priceRange);
 
         return new AddPropertyToBuyCommand(index, propertyToBuy);
     }

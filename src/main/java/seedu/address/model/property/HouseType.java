@@ -6,10 +6,10 @@ import java.util.HashMap;
  * All types of houses are listed here
  */
 public enum HouseType {
-    ANY("any") {
+    UNSPECIFIED("any", "unspecified") {
         @Override
         public String toString() {
-            return "Any";
+            return "Unspecified";
         }
     },
     APARTMENT("apartment") {
@@ -62,7 +62,7 @@ public enum HouseType {
     };
 
     public static final String MESSAGE_CONSTRAINTS = "Only the following house types are available: "
-            + HouseType.ANY + " "
+            + HouseType.UNSPECIFIED + " "
             + HouseType.APARTMENT + " "
             + HouseType.BUNGALOW + " "
             + HouseType.COLONIA + " "
@@ -124,7 +124,7 @@ public enum HouseType {
                 return houseType;
             }
         }
-        return HouseType.ANY;
+        return HouseType.UNSPECIFIED;
     }
 }
 

@@ -46,7 +46,7 @@ public class PropertyToSell {
         //Todo: need to implement updateHouseType for House class
         //this.house.updateHouseType(houseType);
         //this.house.updateLocation(location);
-        this.house = new House(houseType, location.toString());
+        this.house = new House(houseType, location);
         this.priceRange = priceRange;
         this.address = address;
         return this;

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.testutil.BuyerBuilder;
@@ -90,9 +91,9 @@ public class BuyerTest {
         PriceRange pr2;
         PriceRange pr3;
 
-        String location1 = "Serangoon";
-        String location2 = "Kovan";
-        String location3 = "Bishan";
+        Location location1 = new Location("Serangoon");
+        Location location2 = new Location("Kovan");
+        Location location3 = new Location("Bishan");
 
         HouseType ht1 = HouseType.HDB_FLAT;
         HouseType ht2 = HouseType.BUNGALOW;

@@ -47,7 +47,7 @@ public class AddPropertyToSellCommandParser implements Parser<AddPropertyToSellC
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         PriceRange priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_PRICE_RANGE).get());
-        PropertyToSell propertyToSell = new PropertyToSell(new House(houseType, location.toString()),
+        PropertyToSell propertyToSell = new PropertyToSell(new House(houseType, location),
                 priceRange, address);
 
         return new AddPropertyToSellCommand(index, propertyToSell);

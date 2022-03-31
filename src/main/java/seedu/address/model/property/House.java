@@ -13,9 +13,9 @@ public class House {
      * @param houseType the HouseType of a house.
      * @param location the location of a house.
      */
-    public House(HouseType houseType, String location) {
+    public House(HouseType houseType, Location location) {
         this.houseType = houseType;
-        this.location = new Location(location);
+        this.location = location;
     }
 
 
