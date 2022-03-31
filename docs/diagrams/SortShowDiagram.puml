@@ -4,8 +4,17 @@
 start
 :User enters sort command;
 :Parse command arguments;
-:Creates Comparator based on prefixes;
-:Sort command;
+
+if () then ([has order Prefixes]])
+    :Saves comparators in a Map;
+else ([else])
+endif
+if () then ([has prefix '/so'])
+    :Reorder the Map;
+else ([else])
+endif
+:Use the Map to create Comparators in order;
+:return then execute the Sort command;
 :Update show list;
 stop
 
