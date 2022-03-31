@@ -38,7 +38,7 @@ public class DeleteTaskCommand extends Command {
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task for %1$s deleted.";
     public static final String MESSAGE_MODULE_CODE_NOT_FOUND = "There is no person taking the given module.";
     public static final String MESSAGE_TASK_NOT_FOUND = "There is no person assigned to the given task.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given studentId.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given Student ID.";
     public static final String INVALID_TASK_INDEX = "Invalid index.";
 
     private final Optional<Index> index;
