@@ -25,10 +25,10 @@ public class MarkCommand extends Command {
             + "Parameters: STUDENT_ID and INDEX \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z " + PREFIX_INDEX + "1";
 
-    public static final String MARKED_TASK_SUCCESS = "Task for %1$s marked";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given studentId";
-    public static final String TASK_ALREADY_DONE = "Task is already marked as done";
-    public static final String INVALID_TASK_INDEX = "Invalid index";
+    public static final String MARKED_TASK_SUCCESS = "Task for %1$s marked.";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "There is no person with the given Student ID.";
+    public static final String TASK_ALREADY_DONE = "Task is already marked as done.";
+    public static final String INVALID_TASK_INDEX = "Invalid index.";
 
     private final StudentId studentId;
     private final Index index;

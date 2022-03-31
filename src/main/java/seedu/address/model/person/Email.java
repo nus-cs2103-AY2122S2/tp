@@ -85,6 +85,9 @@ public class Email {
 
     @Override
     public int hashCode() {
+        if (value == null) {
+            return 0;
+        }
         return value.hashCode();
     }
 
