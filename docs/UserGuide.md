@@ -174,7 +174,7 @@ Format: `filter TAG_NAME`
 
 ### Locate person by name: `find`<a name="locate-person-by-name"></a>
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain the keyword exactly.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
