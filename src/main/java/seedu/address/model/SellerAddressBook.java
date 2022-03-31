@@ -87,10 +87,6 @@ public class SellerAddressBook implements ReadOnlySellerAddressBook {
         sellers.setSeller(target, editedSeller);
     }
 
-    public void sortPersons() {
-        sellers.sortPersons();
-    }
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -122,5 +118,9 @@ public class SellerAddressBook implements ReadOnlySellerAddressBook {
     @Override
     public int hashCode() {
         return sellers.hashCode();
+    }
+
+    public void sortSellers(String comparedItem, String order) {
+        sellers.sortSellers(comparedItem, order);
     }
 }
