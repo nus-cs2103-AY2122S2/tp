@@ -112,4 +112,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Disables mouse interaction in UNite */
+    void disableMouseUX();
+
+    /** Enables mouse interaction in UNite */
+    void enableMouseUX();
+
+    /** Returns true is mouseUX is enabled */
+    boolean isMouseUxEnabled();
+
+    /** Counts the number of persons attached to the given tag */
+    int countPersonsInTag(Tag tag);
+
 }

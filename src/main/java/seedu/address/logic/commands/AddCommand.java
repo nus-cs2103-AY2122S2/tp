@@ -73,7 +73,8 @@ public class AddCommand extends Command {
             }
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                true, false, false, toAdd);
     }
 
     @Override

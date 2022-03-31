@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -23,7 +24,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Person> fullPersonList;
     private final ObservableList<Tag> tags;
+    private boolean isMouseUxEnabled;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,7 +39,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        fullPersonList = this.addressBook.getPersonList();
         tags = this.addressBook.getTagList();
+        isMouseUxEnabled = false;
     }
 
     public ModelManager() {
@@ -140,6 +145,33 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags;
+    }
+
+    @Override
+    public void enableMouseUX() {
+        isMouseUxEnabled = true;
+    }
+
+    @Override
+    public void disableMouseUX() {
+        isMouseUxEnabled = false;
+    }
+
+    @Override
+    public boolean isMouseUxEnabled() {
+        return isMouseUxEnabled;
+    }
+
+    @Override
+    public int countPersonsInTag(Tag tag) {
+        int count = 0;
+        for (Person p : fullPersonList) {
+            Set<Tag> tagList = p.getTags();
+            if (tagList.contains(tag)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     //=========== Filtered Person List Accessors =============================================================

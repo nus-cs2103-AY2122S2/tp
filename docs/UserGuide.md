@@ -310,6 +310,7 @@ Format: `disable mouseUX`
 To view a profile, click on the person card in the list to view it.
 
 ### Add a new profile<a name="add-a-new-person-click"></a>
+
 To add a new profile, click the `Add` button on the menu bar, and select `Add profile`. An **add profile pop up
 window** will appear.
 
@@ -320,12 +321,14 @@ In the window, simply enter all related information into the spaces provided, an
 
 
 ### Delete profile<a name="delete-profile"></a>
+
 To delete a profile, right click on the profile and select `delete`.
 
 <img src="images/deleteProfile_GUI.png" width="300"/>
 
 
 ### Add a new tag<a name="add-a-new-tag-click"></a>
+
 To add a new tag, click the `New tag` button on the menu bar, and select `New tag`. A **new tag pop up
 window** will appear.
 

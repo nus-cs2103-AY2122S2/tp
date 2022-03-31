@@ -25,7 +25,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TagBuilder;
 
 
-
 public class AddTagCommandTest {
     @Test
     public void constructor_nullTag_throwsNullPointerException() {
@@ -38,7 +37,6 @@ public class AddTagCommandTest {
         Tag validTag = new TagBuilder().build();
 
         CommandResult commandResult = new AddTagCommand(validTag).execute(modelStub);
-
         assertEquals(String.format(AddTagCommand.MESSAGE_SUCCESS, validTag), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTag), modelStub.tagsAdded);
     }
@@ -173,6 +171,26 @@ public class AddTagCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void disableMouseUX() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void enableMouseUX() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isMouseUxEnabled() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int countPersonsInTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
     }

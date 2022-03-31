@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Clears the address book.
+ * Detaches the tag from a person
  */
 public class DetachTagCommand extends Command {
 
@@ -79,8 +79,10 @@ public class DetachTagCommand extends Command {
                 personToDetachTagFrom.getTelegram());
 
         model.setPerson(personToDetachTagFrom, personAfterDetach);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDetach,
-                personToDetachTagFrom.getName()));
+                personToDetachTagFrom.getName()),
+                true, false, false, personAfterDetach);
     }
 
 

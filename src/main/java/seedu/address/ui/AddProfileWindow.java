@@ -26,6 +26,12 @@ public class AddProfileWindow extends UiPart<Stage> {
     private TextField addressInput;
     @FXML
     private TextField tagInput;
+    @FXML
+    private TextField courseInput;
+    @FXML
+    private TextField matricCardInput;
+    @FXML
+    private TextField telegramInput;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -103,6 +109,10 @@ public class AddProfileWindow extends UiPart<Stage> {
         String profileEmail = emailInput.getText();
         String profileAddress = addressInput.getText();
         String profileTag = tagInput.getText();
+        String profileCourse = courseInput.getText();
+        String profileMatricCard = matricCardInput.getText();
+        String profileTelegram = telegramInput.getText();
+
 
         String[] arrayOfProfileTag = profileTag.split(", ");
 
@@ -110,7 +120,10 @@ public class AddProfileWindow extends UiPart<Stage> {
                 + "n/" + profileName + " "
                 + "p/" + profilePhoneNumber + " "
                 + "e/" + profileEmail + " "
-                + "a/" + profileAddress + " ";
+                + "a/" + profileAddress + " "
+                + "c/" + profileCourse + " "
+                + "m/" + profileMatricCard + " "
+                + "tele/" + profileTelegram + " ";
 
         if (!profileTag.equals("")) {
             for (String tag : arrayOfProfileTag) {
@@ -139,6 +152,9 @@ public class AddProfileWindow extends UiPart<Stage> {
         emailInput.clear();
         addressInput.clear();
         tagInput.clear();
+        courseInput.clear();
+        matricCardInput.clear();
+        telegramInput.clear();
         resultDisplay.setFeedbackToUser(" ");
     }
 

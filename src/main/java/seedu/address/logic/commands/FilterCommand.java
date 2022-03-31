@@ -8,6 +8,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PersonContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Filters the full person list with a tag
+ */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";

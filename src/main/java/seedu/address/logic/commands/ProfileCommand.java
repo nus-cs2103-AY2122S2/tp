@@ -11,22 +11,21 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * View the profile of a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
-
-    public static final String COMMAND_WORD = "delete";
+public class ProfileCommand extends Command {
+    public static final String COMMAND_WORD = "profile";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": View the person's profile identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DISPLAY_PROFILE_SUCCESS = "Shown profile: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public ProfileCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -39,16 +38,16 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
-                false, false, true, personToDelete);
+        Person personToShowProfile = lastShownList.get(targetIndex.getZeroBased());
+
+        return new CommandResult(String.format(MESSAGE_DISPLAY_PROFILE_SUCCESS, personToShowProfile.getName()),
+                true, false, false, personToShowProfile);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof ProfileCommand // instanceof handles nulls
+                && targetIndex.equals(((ProfileCommand) other).targetIndex)); // state check
     }
 }
