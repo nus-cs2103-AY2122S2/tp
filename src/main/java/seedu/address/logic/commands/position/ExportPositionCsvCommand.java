@@ -7,13 +7,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class ExportPositionCsvCommand extends ExportCsvCommand {
-    @Override
-    public DataType getCommandDataType() {
-        return null;
-    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         return null;
+    }
+
+    @Override
+    public DataType getCommandDataType() {
+        return DataType.POSITION;
     }
 }

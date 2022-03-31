@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -231,4 +232,6 @@ public interface Model {
     void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator);
 
     void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
+
+    void exportCsvApplicant() throws FileNotFoundException;
 }
