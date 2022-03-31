@@ -15,6 +15,7 @@ import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
+import seedu.address.model.applicant.HiredStatus;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
@@ -32,6 +33,7 @@ class JsonAdaptedApplicant {
     private final String age;
     private final String address;
     private final String gender;
+    private final String hiredStatus;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,13 +43,14 @@ class JsonAdaptedApplicant {
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("age") String age,
             @JsonProperty("address") String address, @JsonProperty("gender") String gender,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("hiredStatus") String hiredStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.age = age;
         this.address = address;
         this.gender = gender;
+        this.hiredStatus = hiredStatus;
 
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -64,6 +67,7 @@ class JsonAdaptedApplicant {
         age = source.getAge().value;
         address = source.getAddress().value;
         gender = source.getGender().value;
+        hiredStatus = source.getStatus().getValue();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -128,8 +132,16 @@ class JsonAdaptedApplicant {
         }
         final Gender modelGender = new Gender(gender);
 
+        if (hiredStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    HiredStatus.class.getSimpleName()));
+        }
+        final HiredStatus modelHireStatus = new HiredStatus(hiredStatus);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Applicant(modelName, modelPhone, modelEmail, modelAge, modelAddress, modelGender, modelTags);
+
+        return new Applicant(modelName, modelPhone, modelEmail, modelAge, modelAddress, modelGender, modelHireStatus,
+                modelTags);
     }
 
 }

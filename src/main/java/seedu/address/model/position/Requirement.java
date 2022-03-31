@@ -11,12 +11,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Requirement {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Requirement text should be alphanumeric and contains 30 or less characters. If you need to fit more"
-                    + "information, consider breaking them up into different requirements.";
+            "Requirement text should contain at least 1 alphanumeric character, and contains 30 or less characters. "
+                    + "If you need to fit more information, consider breaking them up into different requirements.";
 
     public static final int MAX_TEXT_LENGTH = 30;
-    public static final String VALIDATION_REGEX =
-            String.format("(?=.*[\\p{Alnum}].*)([^\\s].*){1,%s}", MAX_TEXT_LENGTH);
+    public static final String VALIDATION_REGEX = "(?=.*[\\p{Alnum}].*)([^\\s].*)";
 
     public final String requirementText;
 
