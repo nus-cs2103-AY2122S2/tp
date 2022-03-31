@@ -10,7 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ProfileCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -61,7 +64,19 @@ public class PersonListPanel extends UiPart<Region> {
      * Handles the event whenever the selected person card changes.
      */
     public void handleSelect() throws CommandException {
-        UiManager.getMainWindow().getGeneralDisplay().setProfile(personListView.getSelectionModel().getSelectedItem());
+        try {
+            Index personIndexSelected = Index.fromZeroBased(personListView.getSelectionModel().getSelectedIndex() + 1);
+            Person personSelected = personListView.getSelectionModel().getSelectedItem();
+
+            String profileCommandInput = String.format("%s %s", ProfileCommand.COMMAND_WORD, personIndexSelected);
+            CommandResult commandResult = logic.execute(profileCommandInput);
+            //update general display to show profile
+            UiManager.getMainWindow().getGeneralDisplay().setProfile(personSelected);
+            //set command feedback
+            UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        } catch (ParseException | CommandException e) {
+            UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
+        }
     }
 
     /**
@@ -74,7 +89,8 @@ public class PersonListPanel extends UiPart<Region> {
             try {
                 int personToDeleteIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
                 String deleteCommand = "delete " + personToDeleteIndex;
-                logic.execute(deleteCommand);
+                CommandResult commandResult = logic.execute(deleteCommand);
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
             } catch (ParseException | CommandException e) {
                 UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
             }

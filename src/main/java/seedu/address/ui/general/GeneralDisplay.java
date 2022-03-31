@@ -1,7 +1,6 @@
 package seedu.address.ui.general;
 
-import java.util.List;
-
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -56,11 +55,12 @@ public class GeneralDisplay extends UiPart<Region> {
     /**
      * Set the general display to show all tags.
      */
-    public void setTagList(List<Tag> tags) {
+    public void setTagList(ObservableList<Tag> tags) {
         this.tagList.setTagList(tags);
         tagListPlaceholder.setVisible(true);
         profileDisplayPlaceholder.setVisible(false);
         grabResultPlaceholder.setVisible(false);
+        resetTagList();
         tagListPlaceholder.getChildren().add(tagList.getTagListView());
     }
 
@@ -72,7 +72,7 @@ public class GeneralDisplay extends UiPart<Region> {
         tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(false);
         grabResultPlaceholder.setVisible(true);
-        grabResultPlaceholder.getChildren().clear();
+        resetGrabResult();
         grabResultPlaceholder.getChildren().add(grabResult.getRoot());
     }
 
@@ -82,5 +82,13 @@ public class GeneralDisplay extends UiPart<Region> {
 
     public void resetProfile() {
         profileDisplayPlaceholder.getChildren().clear();
+    }
+
+    public void resetTagList() {
+        tagListPlaceholder.getChildren().clear();
+    }
+
+    public void resetGrabResult() {
+        grabResultPlaceholder.getChildren().clear();
     }
 }
