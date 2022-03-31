@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -50,11 +51,12 @@ public class EditCommand extends Command {
         + PREFIX_PHONE + "91234567 "
         + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_SINGLE_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS = "Edited Persons: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in HackNet.";
 
-    private final Index index;
+    private final List<Index> indicesToEdit;
     private final EditPersonDescriptor editPersonDescriptor;
     private final boolean isResetMode;
 
@@ -65,9 +67,25 @@ public class EditCommand extends Command {
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, boolean isResetMode) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
-        requireNonNull(isResetMode);
 
-        this.index = index;
+        this.indicesToEdit = new ArrayList<>();
+        indicesToEdit.add(index);
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.isResetMode = isResetMode;
+    }
+
+    /**
+     * Constructs EditCommand that edits multiple Persons in batch.
+     *
+     * @param indices              List of indices of Persons to be edited in the displayed list
+     * @param editPersonDescriptor details to edit the person with
+     * @param isResetMode          of the person in the filtered person list to edit
+     */
+    public EditCommand(List<Index> indices, EditPersonDescriptor editPersonDescriptor, boolean isResetMode) {
+        requireNonNull(indices);
+        requireNonNull(editPersonDescriptor);
+
+        this.indicesToEdit = indices;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
         this.isResetMode = isResetMode;
     }
@@ -77,7 +95,7 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor,
-                                             boolean isResetMode) {
+                                            boolean isResetMode) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -118,22 +136,14 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getDisplayPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_FOR_PERSON);
+        boolean isSingleEdit = this.indicesToEdit.size() == 1;
+        CommandResult commandResult;
+        if (isSingleEdit) {
+            commandResult = executeSingleEdit(model, lastShownList);
+        } else {
+            commandResult = executeBatchEdit(model, lastShownList);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return commandResult;
     }
 
     @Override
@@ -150,8 +160,50 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
+        return indicesToEdit.equals(e.indicesToEdit)
             && editPersonDescriptor.equals(e.editPersonDescriptor);
+    }
+
+    private CommandResult executeSingleEdit(Model model, List<Person> lastShownList) throws CommandException {
+        Index index = indicesToEdit.get(0);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_FOR_PERSON);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_EDIT_SINGLE_PERSON_SUCCESS, editedPerson));
+    }
+
+    private CommandResult executeBatchEdit(Model model, List<Person> lastShownList) throws CommandException {
+
+        boolean isAllIndicesValid = true;
+        List<Name> editedNames = new ArrayList<Name>();
+        for (Index index : indicesToEdit) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                isAllIndicesValid = false;
+                continue;
+            }
+            Person personToEdit = lastShownList.get(index.getZeroBased());
+            Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
+            editedNames.add(personToEdit.getName());
+            model.setPerson(personToEdit, editedPerson);
+        }
+        model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // Throwing error after editing for valid indices allows the successful edit for least the valid indices.
+        if (!isAllIndicesValid) {
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_FOR_SOME_PERSON);
+        }
+        return new CommandResult(String.format(MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames));
     }
 
     /**
@@ -166,7 +218,8 @@ public class EditCommand extends Command {
         private Set<Team> teams;
         private SkillSet skillSet;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -188,48 +241,36 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, username, teams, skillSet);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setName(Name name) {
+            this.name = name;
         }
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setPhone(Phone phone) {
+            this.phone = phone;
         }
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setGithubUsername(GithubUsername username) {
-            this.username = username;
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
         public Optional<GithubUsername> getGithubUsername() {
             return Optional.ofNullable(username);
         }
 
-        /**
-         * Sets {@code teams} to this object's {@code teams}.
-         * A defensive copy of {@code teams} is used internally.
-         */
-        public void setTeams(Set<Team> teams) {
-            this.teams = (teams != null) ? new HashSet<>(teams) : null;
-        }
-
-        public void setSkillSet(SkillSet skillSet) {
-            this.skillSet = (skillSet != null) ? new SkillSet(new HashSet<>(skillSet.getSkillSet())) : null;
+        public void setGithubUsername(GithubUsername username) {
+            this.username = username;
         }
 
         /**
@@ -241,9 +282,21 @@ public class EditCommand extends Command {
             return (teams != null) ? Optional.of(Collections.unmodifiableSet(teams)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code teams} to this object's {@code teams}.
+         * A defensive copy of {@code teams} is used internally.
+         */
+        public void setTeams(Set<Team> teams) {
+            this.teams = (teams != null) ? new HashSet<>(teams) : null;
+        }
+
         public Optional<SkillSet> getSkillSet() {
             return (this.skillSet != null && skillSet.getSkillSet() != null)
-                    ? Optional.of(new SkillSet(Collections.unmodifiableSet(skillSet.getSkillSet()))) : Optional.empty();
+                ? Optional.of(new SkillSet(Collections.unmodifiableSet(skillSet.getSkillSet()))) : Optional.empty();
+        }
+
+        public void setSkillSet(SkillSet skillSet) {
+            this.skillSet = (skillSet != null) ? new SkillSet(new HashSet<>(skillSet.getSkillSet())) : null;
         }
 
         @Override
@@ -262,11 +315,11 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getGithubUsername().equals(e.getGithubUsername())
-                    && getTeams().equals(e.getTeams())
-                    && getSkillSet().equals(e.getSkillSet());
+                && getPhone().equals(e.getPhone())
+                && getEmail().equals(e.getEmail())
+                && getGithubUsername().equals(e.getGithubUsername())
+                && getTeams().equals(e.getTeams())
+                && getSkillSet().equals(e.getSkillSet());
         }
 
     }

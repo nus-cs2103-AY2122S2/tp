@@ -95,9 +95,16 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 
 Shows a message explaining how to access the help page.
 
+Format: `help [topic]` or `help`
+
+Simply calling `help` will bring up a prompt linking to the user guide.
+
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Calling `help [topic]` with `topic` being a relevant keyword such as `add` will bring up a brief description and usage
+of the topic.
+
+![help add message](images/helpAdd.png)
 
 ## Contact Management
 
@@ -117,43 +124,29 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur s/java_80`
 
-### Editing a person: `edit`
+### Editing any number of person(s): `edit`
 
-Edits an existing person in HackNet.
+Edits any number of existing person(s) in HackNet.
 
-Format: `edit INDEX [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `edit INDEX… [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]…​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* Edits the person(s) at the specified `INDEX...`. The index refers to the index number shown in the displayed person list. All index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided besides `[-r]`.
 * Existing values will be updated to the input values.
 * In default mode, editing teams appends the new team to the person.
-* -r option activates reset mode.
+* `-r` option activates reset mode.
 * In reset mode, editing teams edits the teams of a person from scratch. i.e adding of teams is not cumulative. You can remove all the person’s teams by typing `t/` without
   specifying any teams after it.
-* The concept of default and reset mode applies with the skill field with prefix `s/` as well.
+* The concept of default and reset mode applies with skills as well.
+* when editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `Name` and `Phone` will be silently ignored.
+* Arguments in `TEAM…` and `SKILLNAME_SKILLPROFICENCY…` are separated by commas.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 -r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
 * `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
-
-### Batch editing multiple persons: `batchedit`
-
-Edits multiple persons in HackNet.
-
-Format: `batchedit INDEX... [s/SKILLNAME_SKILLPROFICENCY...] [t/TEAM...]`
-
-* Edits multiple persons in the specified 'INDEX...'. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
-* If some of the indices are invalid, HackNet will try its best to edit at least for the valid indices.
-* At least one field to edit must be provided.
-* The values after `t/` and `s/` is divided by commas.
-* You can remove all the person’s teams by typing `t/` without
-  specifying any teams after it. Same concept applies with the skill field with prefix `s/`
-
-Examples:
-* `batchedit 1 2 3 s/Java_100, Python_80` Edits the skill set of the 1st, 2nd and 3rd person to be `java` and `python` with proficiency of 100 and 80.
-* `batchedit 2 3 s/ t/GoogleProject, Hackathon 2022` Clears the skill set of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
+* `edit 2 3 s/ t/GoogleProject, Hackathon 2022` Does not change the skills of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
+* `edit 1 2 3 -r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The exiting teams are cleared as well.
 
 ### Deleting a person: `delete`
 
