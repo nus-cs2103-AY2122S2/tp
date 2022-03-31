@@ -29,9 +29,6 @@ Let's get started!
   <img src="images/forUserGuide/UpdatedSampleSS.png" alt="WoofForYou sample screenshot"/>
 </p>
 
-* Table of Contents
-  {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
