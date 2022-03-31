@@ -20,7 +20,7 @@ class JsonAdaptedTag {
     @JsonCreator
     public JsonAdaptedTag(@JsonProperty("name") String tagName, @JsonProperty("remark") String remark) {
         this.tagName = tagName;
-        tagRemark = "";
+        tagRemark = remark;
     }
 
     /**
@@ -49,7 +49,7 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Tag(tagName, tagRemark);
     }
 
 }
