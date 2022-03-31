@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -14,13 +13,15 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.BookNames;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -139,8 +140,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        Path defaultPath = logic.getAddressBookFilePath();
+        Path archivePath = logic.getArchivedAddressBookFilePath();
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), defaultPath, archivePath);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -214,12 +216,11 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * GUI alternative to activate a SwitchCommand.
-     * TODO: Bind F10 to this function
      */
     @FXML
     private void handleSwitchMenu() throws CommandException, ParseException {
         logger.info("Switch Menu Item fired!!!");
-        executeCommand("switch");
+        executeCommand(SwitchCommand.COMMAND_WORD);
     }
     /**
      * Function to perform operations involving logic object
@@ -228,18 +229,13 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Handle Switch fired!");
         logic.switchAddressBook();
 
-        Path defaultPath = logic.getAddressBookFilePath();
-        Path archivePath = logic.getArchivedAddressBookFilePath();
-        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.swapPaths(defaultPath, archivePath));
+        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.updateBookPath());
 
-        boolean isArchivedNext = statusBarFooter.getSaveLocationStatusText().equals(Paths.get(".")
-                .resolve(defaultPath).toString());
-        boolean isDefaultNext = statusBarFooter.getSaveLocationStatusText().equals(Paths.get(".")
-                .resolve(archivePath).toString());
-        if (isArchivedNext) {
-            switchMenuItem.setText("Switch to Archived");
-        } else if (isDefaultNext) {
-            switchMenuItem.setText("Switch to Default");
+        boolean isDefaultNext = StatusBarFooter.isArchiveBook();
+        if (isDefaultNext) {
+            switchMenuItem.setText(String.format("Switch to %s", BookNames.BOOKNAME_DEFAULT));
+        } else {
+            switchMenuItem.setText(String.format("Switch to %s", BookNames.BOOKNAME_ARCHIVED));
         }
     }
 
@@ -280,8 +276,14 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
                 handleCopy(commandResult);
             } else if (commandResult.isArchiveCommand()) {
-                resultDisplay.setFeedbackToUser(String.format("Archived Contact #%s!",
-                                                commandResult.getFeedbackToUser()));
+                String archiveMode = commandResult.getArchiveMode();
+                if (archiveMode.equals(ArchiveCommand.COMMAND_WORD)) {
+                    resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                            commandResult.getFeedbackToUser()));
+                } else if (archiveMode.equals(ArchiveCommand.ALT_COMMAND_WORD)) {
+                    resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_UNARCHIVE_PERSON_SUCCESS,
+                            commandResult.getFeedbackToUser()));
+                }
                 handleArchive(commandResult);
             } else {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

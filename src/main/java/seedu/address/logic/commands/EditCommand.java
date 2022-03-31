@@ -121,12 +121,11 @@ public class EditCommand extends RedoableCommand {
 
     @Override
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
-
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index == null || editPersonDescriptor == null) {
-            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false, false, false);
+            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false, false, "");
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
