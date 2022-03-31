@@ -33,14 +33,19 @@ public class FilterType {
     public static Map<DataType, HashSet<String>> loadFilterTypes() {
         HashSet<String> applicantTypes = new HashSet<>();
         applicantTypes.add("name");
+        applicantTypes.add("gender");
+        applicantTypes.add("status");
+        applicantTypes.add("tag");
 
         HashSet<String> positionTypes = new HashSet<>();
         positionTypes.add("name");
+        positionTypes.add("req");
 
         HashSet<String> interviewTypes = new HashSet<>();
         interviewTypes.add("appl");
         interviewTypes.add("pos");
         interviewTypes.add("date");
+        interviewTypes.add("status");
 
         HashMap<DataType, HashSet<String>> filterTypes = new HashMap<>();
         filterTypes.put(DataType.APPLICANT, applicantTypes);

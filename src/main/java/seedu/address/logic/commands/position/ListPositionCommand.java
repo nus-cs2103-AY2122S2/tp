@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.PositionNameComparator;
 import seedu.address.model.position.PositionNamePredicate;
+import seedu.address.model.position.PositionRequirementPredicate;
 
 /**
  * Lists positions in HireLah to the user.
@@ -77,18 +78,12 @@ public class ListPositionCommand extends ListCommand {
         requireNonNull(model);
 
         if (filterType != null && filterArgument != null && sortArgument != null) {
+            Predicate<Position> predicate = getFilterPredicate(filterType, filterArgument);
             Comparator<Position> comparator = new PositionNameComparator(sortArgument.toString());
-            if (filterType.type.equals("name")) {
-                String[] nameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));
-                model.updateFilterAndSortPositionList(predicate, comparator);
-            }
+            model.updateFilterAndSortPositionList(predicate, comparator);
         } else if (filterType != null && filterArgument != null) {
-            if (filterType.type.equals("name")) {
-                String[] nameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Position> predicate = new PositionNamePredicate(Arrays.asList(nameKeywords));
-                model.updateFilteredPositionList(predicate);
-            }
+            Predicate<Position> predicate = getFilterPredicate(filterType, filterArgument);
+            model.updateFilteredPositionList(predicate);
         } else if (sortArgument != null) {
             Comparator<Position> comparator = new PositionNameComparator(sortArgument.toString());
             model.updateSortPositionList(comparator);
@@ -103,5 +98,21 @@ public class ListPositionCommand extends ListCommand {
     @Override
     public DataType getCommandDataType() {
         return DataType.POSITION;
+    }
+
+    /**
+     * Returns the suitable {@code Predicate} based on the given {@code filterType} and {@code filterArgument}
+     */
+    public Predicate<Position> getFilterPredicate(FilterType filterType, FilterArgument filterArgument) {
+        if (filterType.type.equals("name")) {
+            String[] nameKeywords = filterArgument.toString().split("\\s+");
+            return new PositionNamePredicate(Arrays.asList(nameKeywords));
+        } else if ((filterType.type.equals("req"))) {
+            String[] reqKeywords = filterArgument.toString().split("\\s+");
+            return new PositionRequirementPredicate(Arrays.asList(reqKeywords));
+        }
+
+        assert true : "Filter type should be valid";
+        return null;
     }
 }
