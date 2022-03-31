@@ -58,7 +58,7 @@ public class Booking implements UniqueListItem, Comparable<Booking> {
     }
 
     public LocalDateTime getBookingEndTime() {
-        return bookingDateTime.value.plusHours(service.getDuration().value / 60);
+        return bookingDateTime.value.plusMinutes(service.getDuration().value);
     }
 
     public Feedback getFeedback() {
