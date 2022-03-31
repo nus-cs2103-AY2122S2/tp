@@ -11,18 +11,40 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
+    // Tells us whether it's archive or unarchive
+    private String mode;
+
+    public ArchiveCommandParser(String mode) {
+        this.mode = mode;
+    }
+
     /**
      * Parses {@code userInput} into a command and returns it.
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
     public ArchiveCommand parse(String userInput) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(userInput);
-            return new ArchiveCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
+
+        // Either it is archive
+        if (mode.equals("ARCHIVE")) {
+            try {
+                Index index = ParserUtil.parseIndex(userInput);
+                return new ArchiveCommand(index, "ARCHIVE");
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
+            }
+        }
+
+        // Otherwise, it is unarchive
+        else {
+            try {
+                Index index = ParserUtil.parseIndex(userInput);
+                return new ArchiveCommand(index, "UNARCHIVE");
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.ALT_MESSAGE_USAGE), pe);
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -280,8 +281,14 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
                 handleCopy(commandResult);
             } else if (commandResult.isArchiveCommand()) {
-                resultDisplay.setFeedbackToUser(String.format("Archived Contact #%s!",
-                                                commandResult.getFeedbackToUser()));
+                String archiveMode = commandResult.getArchiveMode();
+                if (archiveMode.equals("ARCHIVE")) {
+                    resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                            commandResult.getFeedbackToUser()));
+                } else if (archiveMode.equals("UNARCHIVE")) {
+                    resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_UNARCHIVE_PERSON_SUCCESS,
+                            commandResult.getFeedbackToUser()));
+                }
                 handleArchive(commandResult);
             } else {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

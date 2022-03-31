@@ -106,8 +106,9 @@ public class AddressBookParser {
             return new SwitchCommand();
 
         case ArchiveCommand.COMMAND_WORD:
-            return new ArchiveCommandParser().parse(arguments);
-
+            return new ArchiveCommandParser("ARCHIVE").parse(arguments);
+        case ArchiveCommand.ALT_COMMAND_WORD:
+            return new ArchiveCommandParser("UNARCHIVE").parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
