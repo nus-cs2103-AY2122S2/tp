@@ -122,13 +122,13 @@ A person can have any number of teams or skills(including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
-* `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur, friend  s/java_80`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur, friend  s/`
 
 ### Editing any number of person(s): `edit`
 
 Edits any number of existing person(s) in HackNet.
 
-Format: `edit INDEX… [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]…​ [s/SKILLNAME_SKILLPROFICENCY…]​`
+Format: `edit INDEX… [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
 * Edits the person(s) at the specified `INDEX...`. The index refers to the index number shown in the displayed person list. All index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided besides `[-r]`.
