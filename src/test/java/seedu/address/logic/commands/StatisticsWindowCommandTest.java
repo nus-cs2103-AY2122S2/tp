@@ -15,7 +15,7 @@ public class StatisticsWindowCommandTest {
     @Test
     public void execute_statistics_success() {
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_STATISTICS_WINDOW_SUCCESS,
-                false, false, false, true, false);
+                false, false, false, false, true, false, false);
         assertCommandSuccess(new StatisticsWindowCommand(), model, expectedCommandResult, expectedModel);
     }
 }

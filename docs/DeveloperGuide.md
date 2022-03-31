@@ -46,7 +46,7 @@ Step 3. User can access the Favourites window by navigating to the menu item as 
 The `match` opens a new `MatchWindow`, in which all matches are displayed in pairs.
 The left column shows the sellers, while the right column shows the buyers.
 
-Two Persons make a match if one has at least one `property` that matches the other's `preference`.
+Two `Person` make a match if the seller has at least one `property` that matches the buyer's `preference`.
 
 ## Help Feature and Window
 The `help` command and selecting help from the dropdown opens the `helpwindow`.
@@ -84,17 +84,17 @@ Unlike other attributes of a `Person`, the `UserType` of a `Person` cannot be ed
 The remind feature is implemented by storing a static list of Persons the user wants to be reminded of.
 
 - `ReminderTask` -- Schedules and handles the work of activating the Reminders window.
-- `ReminderPersons` -- Stores a `HashSet` of `Person`s, because only 1 reminder can be set per Person & thus only 1 occurrence of a Person in this data structure is allowed.
-- `ReminderWindow` --  A Window to display all `Person`s the Person set reminders for.
+- `ReminderPersons` -- Stores a `HashSet` of `Person`s, because only 1 reminder can be set per person & thus only 1 occurrence of a Person in this data structure is allowed.
+- `ReminderWindow` --  A Window to display all `Person`s the client set reminders for.
 - Both `ReminderTask` and `ReminderWindow` classes are singletons as there can only ever be 1 occurrence of these classes.
 
-The remind feature can be activated by typing `remind INDEX` where INDEX is the `Person` the user wants to set a reminder for.
+The remind feature can be activated by typing `remind INDEX r/ReminderDetails` where `INDEX` is the `Person` the user wants to set a reminder for and `ReminderDetails` are the details of the reminder in regard to the specific client.
 
 Given below is an example usage scenarios and the behavior of the program specific to this feature.
 
 Step 1: The user launches the app. Within 5 seconds, a Reminder window pops up & displays any reminders the user has actively set. As the User does not have any active reminders set, they can add a reminder.
 
-Step 2: User executes the `remind` command by typing in `remind 1`, as the user wants to set a reminder for the Person with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` is then added to the HashSet in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched.
+Step 2: User executes the `remind` command by typing in `remind 1 r/arrange meeting`, as the user wants to set a reminder for the client with `Index` 1. The `RemindCommandParser` parses the `Index` the `User` inputted & creates a `RemindCommand`. The `RemindCommand` is executed & retrieves the `Person` corresponding to the `Index` from `Model`. This `Person` and the corresponding `Reminder` is then added to the HashMap in `ReminderPersons`. The `CommandResult` returned is created with the input argument `showReminders` marked as true. This then gets executed by MainWindow and the `ReminderWindow` is launched.
 
 Step 3: The User will be prompted with the Reminder window, containing the Person the user just set a `Reminder` for.
 
@@ -158,6 +158,10 @@ If multiple attributes are specified, the first attribute is given the highest p
 The sorting feature is implemented by using a `SortedList<Person>` to observe the `FilteredList<Person>` in `ModelManager`.
 
 Whenever the underlying application data is modified, the `FilteredList<Person>` is notified first and will filter the data. If there is any change in the `FilteredList<Person>`, the `SortedList<Person>` is notified and will sort the filtered data.
+
+## Feature `find` enhanced
+In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
+They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
 
 # Documentation, logging, testing, configuration, dev-ops
 

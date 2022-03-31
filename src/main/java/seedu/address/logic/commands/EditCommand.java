@@ -7,10 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
@@ -29,7 +32,10 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.model.util.UserTypeUtil;
+import seedu.address.storage.ReminderPersons;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -47,7 +53,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_PREFERENCE + "PREFERENCE]"
-            + "[" + PREFIX_PROPERTY + "PROPERTY]...\n"
+            + "[" + PREFIX_PROPERTY + "PROPERTY]..."
+            + "[" + PREFIX_USERIMAGE + "FILEPATH:DESCRIPTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -74,7 +81,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getFilteredAndSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -86,6 +93,11 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        // remove reminder for previous instance of Person
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Reminder previousReminder = reminderPersons.remove(personToEdit);
+        reminderPersons.add(editedPerson, previousReminder);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -105,16 +117,17 @@ public class EditCommand extends Command {
         //Favourite status for a client will remain unchanged when edited if not, the FavouriteCommand is redundant.
         Favourite noChangeFavourite = editPersonDescriptor.getFavourite().orElse(personToEdit.getFavourite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-
         // set value of edited person's properties
         Set<Property> updatedProperties = setProperties(personToEdit, editPersonDescriptor);
         // set value of edited person's preference
         Optional<Preference> updatedPreference = setPreference(personToEdit, editPersonDescriptor);
         // set value of edited person's user type
         UserType updatedUserType = setUserType(updatedProperties, updatedPreference);
+        Set<UserImage> updatedUserImages = editPersonDescriptor.getUserImages().orElse(personToEdit.getUserImages());
+
 
         return new Person(updatedName, updatedPhone, updatedEmail, noChangeFavourite, updatedAddress, updatedProperties,
-                updatedPreference, updatedUserType);
+                updatedPreference, updatedUserType, updatedUserImages);
     }
 
     private static Set<Property> setProperties(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
@@ -201,6 +214,7 @@ public class EditCommand extends Command {
         private Preference preference;
         private Set<Property> properties;
         private UserType userType;
+        private Set<UserImage> userImages;
 
         public EditPersonDescriptor() {
         }
@@ -218,13 +232,15 @@ public class EditCommand extends Command {
             setPreference(toCopy.preference);
             setProperties(toCopy.properties);
             setUserType(toCopy.userType);
+            setUserImages(toCopy.userImages);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, preference, userType);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, properties, preference,
+                        userType, userImages);
         }
 
         public void setName(Name name) {
@@ -273,6 +289,16 @@ public class EditCommand extends Command {
 
         public Optional<UserType> getUserType() {
             return Optional.ofNullable(userType);
+        }
+
+        public void setUserImages(Set<UserImage> userImages) {
+            this.userImages = (userImages == null)
+                ? null
+                : new LinkedHashSet<UserImage>(userImages);
+        }
+
+        public Optional<Set<UserImage>> getUserImages() {
+            return Optional.ofNullable(userImages);
         }
 
         public Optional<Preference> getPreference() {

@@ -1,13 +1,16 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
 import java.util.StringJoiner;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
+import seedu.address.storage.ReminderPersons;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -48,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private Label buyer;
     @FXML
     private Label seller;
+    @FXML
+    private Label reminder;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -90,6 +95,16 @@ public class PersonCard extends UiPart<Region> {
             preference.setText(person.getPreference().get().toString());
         } else {
             preference.setManaged(false);
+        }
+
+        // set the Reminder associated with a Person
+        HashMap<Person, Reminder> reminderHashMap = ReminderPersons.getInstance().clone();
+        Reminder reminderForPerson = reminderHashMap.get(person);
+        if (reminderForPerson != null) {
+            reminder.setText(reminderForPerson.value);
+        } else {
+            reminder.setVisible(false);
+            reminder.setManaged(false);
         }
     }
 

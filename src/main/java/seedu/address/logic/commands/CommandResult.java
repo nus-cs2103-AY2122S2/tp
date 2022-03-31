@@ -17,8 +17,14 @@ public class CommandResult {
     /** Match information should be shown to the user. */
     private final boolean showMatch;
 
+    /** Images associated to client should be shown to the user. */
+    private final boolean showImage;
+
     /** Favourites information should be shown to the user. */
     private final boolean showFavourites;
+
+    /** Reminder information should be shown to the user. */
+    private final boolean showReminders;
 
     /** Statistics information should be shown to the user. */
     private final boolean showStatistics;
@@ -30,13 +36,15 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showMatch,
-                         boolean showFavourites, boolean showStatistics, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showMatch, boolean showImage,
+                         boolean showFavourites, boolean showStatistics, boolean showReminders, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showMatch = showMatch;
+        this.showImage = showImage;
         this.showFavourites = showFavourites;
         this.showStatistics = showStatistics;
+        this.showReminders = showReminders;
         this.exit = exit;
     }
 
@@ -45,7 +53,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -60,8 +68,17 @@ public class CommandResult {
         return showMatch;
     }
 
+
+    public boolean isShowImage() {
+        return showImage;
+    }
+
     public boolean isShowFavourites() {
         return showFavourites;
+    }
+
+    public boolean isShowReminders() {
+        return showReminders;
     }
 
     public boolean isShowStatistics() {
@@ -87,14 +104,17 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && showMatch == otherCommandResult.showMatch
+                && showImage == otherCommandResult.showImage
                 && showFavourites == otherCommandResult.showFavourites
+                && showReminders == otherCommandResult.showReminders
                 && showStatistics == otherCommandResult.showStatistics
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showMatch, showFavourites, showStatistics, exit);
+        return Objects.hash(feedbackToUser, showHelp, showMatch, showImage, showFavourites,
+                showStatistics, showReminders, exit);
     }
 
     @Override

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PROPERTY, PREFIX_PREFERENCE);
+                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_USERIMAGE);
 
         Index index;
 
@@ -66,6 +67,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
             editPersonDescriptor.setPreference(ParserUtil.parsePreference(
                     argMultimap.getValue(PREFIX_PREFERENCE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_USERIMAGE).isPresent()) {
+            editPersonDescriptor.setUserImages(ParserUtil.parseUserImages(argMultimap.getAllValues(PREFIX_USERIMAGE)));
         }
 
         parsePropertiesForEdit(argMultimap.getAllValues(PREFIX_PROPERTY)).ifPresent(
