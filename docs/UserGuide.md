@@ -120,14 +120,16 @@ Alternatively, you can also interact with the application through buttons, such 
 
 #### 2.2.5 Command inputs
 
-| Input          | Description                                               |
-|:---------------|:----------------------------------------------------------|
-| `NAME`         | Name of the product.                                      |
-| `CATEGORY`     | Category of the product.                                  |
-| `PRICE`        | Price of the product. A valid price is a positive number. |
-| `DESCRIPTION`  | Description of the product.                               |
-| `EXPRIRY_DATE` | Expiry date of the item.                                  |
-| `QUANTITY`     | Quantity of the item.                                     |
+| Input            | Description                                                            |
+|:-----------------|:-----------------------------------------------------------------------|
+| `NAME`           | Name of the product.                                                   |
+| `CATEGORY`       | Category of the product.                                               |
+| `PRICE`          | Price of the product. A valid price is a positive number.              |
+| `DESCRIPTION`    | Description of the product.                                            |
+| `EXPRIRY_DATE`   | Expiry date of the item.                                               |
+| `QUANTITY`       | Quantity of the item.                                                  |
+| `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date. |
+| `DISCOUNT_START` | Days before the expiry date to start the discount.                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -141,28 +143,36 @@ Shows a list of all products in the application.
 
 Format: `list`
 
-#### 3.1.2 Adding a product : `add`
+#### 3.1.2 Adding a product : `add` 
 
 Adds a new product to the application.
 
-Click the add product button on the left of command input to add a new product.
+Click the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button on the 
+left of command input to add a new product.
+
+A pop-up window will appear, allowing you to fill in the details for name, expiry date, price, description. 
+Optionally, you can also fill in the category, discount rate and discount start. 
+
+After filling in the required fields, click 
+<img align="center" src = "images/ui-icons/add-icon.png" alt="Add Product" height = "25"/> 
 
 *Alternatively*, by using command,
 
-Format: `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION`
+Format: `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Only a single product would be added at a time
 </div>
 
 Examples:
-* `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour`
+* `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour dr:25 ds:10`
 
 #### 3.1.3 Updating products : `update`
 
 Updates the product at the specified INDEX.
 
-Click the yellow edit icon on the right side of each product to update the product.
+Click the <img align="center" src = "images/ui-icons/edit-color.png" alt="Edit" height = "25"/>  
+on the right side of each product to update the product.
 
 *Alternatively*, by using command,
 
@@ -180,7 +190,7 @@ Examples:
 
 Deletes the product at a specified INDEX.
 
-Click the red delete icon on the right side of each product to delete the product.
+Click the <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Edit" height = "25"/> on the right side of each product to delete the product.
 
 *Alternatively*, by using command,
 
@@ -224,9 +234,13 @@ Finds products that contain expired items.
 
 Format: `expired`
 
+*Alternatively*, click on the menu bar `Actions` > `Find expired`
+
 #### 3.1.7 Looking for products that are out of stock : `out-of-stock`
 
 Lists products that are out of stock.
+
+*Alternatively*, click on the menu bar `Actions` > `Find out of stock items`
 
 Format: `out-of-stock`
 
@@ -241,6 +255,14 @@ Format: `out-of-stock`
 #### 3.2.2 Updating an item of a product : `update-item`
 
 #### 3.2.3 Deleting an item from a product : `delete-item`
+
+#### 3.2.4 Finding items that are expiring soon: `remind`
+
+Lists items that are expiring within a certain number of days
+
+Format: `remind NUMBER_OF_DAYS`
+
+Examples: `remind 10` lists items that are expiring 10 days from now.
 
 ### 3.3 Miscellaneous Commands
 
@@ -285,12 +307,12 @@ _Details coming soon ..._
 
 ## 6. Glossary
 
-| Term               | Meanings                                                                                     |
-|------------------  |----------------------------------------------------------------------------------------------|
-| **Main stream OS** | `to-be-added`                                                                                |
-| **To be added**    | `to-be-added`                                                                                |
-| **To be added**    | `to-be-added`                                                                                |
-| **To be added**    | `to-be-added`                                                                                |
+| Term               | Meanings                                                         |
+|--------------------|------------------------------------------------------------------|
+| **Main stream OS** | `Windows, Linux, Unix, MacOS`                                    |
+| **Products**       | `Goods that are unique in name, price, category and description` |
+| **Items**          | `Copies of products that have different expiry dates`            |
+| **To be added**    | `to-be-added`                                                    |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,17 +320,22 @@ _Details coming soon ..._
 
 ### 7.1 Product Commands
 
-| Action           | Format, Examples                                                                                                                         |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------   |
-| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour` |
-| **List**         | `list`                                                                                                                                   |
-| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                          |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                      |
-| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                       |
-| **Expired**      | `expired`                                                                                                                                |
-| **Out of Stock** | `out-of-stock`                                                                                                                           |
+| Action           | Format, Examples                                                                                                                                                                         |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE  ds:DISCOUNT_START` <br> e.g., `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour dr:50 ds:10` |
+| **List**         | `list`                                                                                                                                                                                   |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                                                          |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                                                       |
+| **Expired**      | `expired`                                                                                                                                                                                |
+| **Out of Stock** | `out-of-stock`                                                                                                                                                                           |
 
 ### 7.2 Item Commands
+
+| Action     | Format, Examples             |
+|------------|------------------------------|
+| **Remind** | `remind DAYS` <br> remind 10 |
+
 
 ### 7.3 Miscellaneous Commands
 
