@@ -203,7 +203,6 @@ TAssist is a **desktop app for managing students and their participation in less
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
 ### Adding entries
 
 #### Adding a module: `add module`
