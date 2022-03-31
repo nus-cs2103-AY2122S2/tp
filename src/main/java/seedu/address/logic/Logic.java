@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTAssist;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
@@ -42,6 +43,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of class groups. */
     ObservableList<ClassGroup> getFilteredClassGroupList();
+
+    /** Returns an unmodifiable view of the filtered list of assessments. */
+    ObservableList<Assessment> getFilteredAssessmentList();
 
     /**
      * Returns the user prefs' address book file path.

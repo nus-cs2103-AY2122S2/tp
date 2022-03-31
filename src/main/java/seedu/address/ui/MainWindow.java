@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ModuleListPanel moduleListPanel;
     private ClassGroupListPanel classGroupListPanel;
     private StudentListPanel studentListPanel;
+    private AssessmentListPanel assessmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -59,6 +60,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Button studentListButton;
+
+    @FXML
+    private Button assessmentListButton;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -180,10 +184,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
+    private void handleAssessmentListButtonPress() {
+        moduleListButton.getStyleClass().remove("active");
+        classGroupListButton.getStyleClass().remove("active");
+        studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().add("active");
+        showAssessmentList();
+    }
+
+    @FXML
     private void handleModuleListButtonPress() {
         moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
         moduleListButton.getStyleClass().add("active");
         showModuleList();
     }
@@ -193,6 +208,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().add("active");
         showClassGroupList();
     }
@@ -202,6 +218,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleListButton.getStyleClass().remove("active");
         classGroupListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().remove("active");
+        assessmentListButton.getStyleClass().remove("active");
         studentListButton.getStyleClass().add("active");
         showStudentList();
     }
@@ -236,6 +253,16 @@ public class MainWindow extends UiPart<Stage> {
         listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
+    /**
+     * Displays assessment list in list panel.
+     */
+    @FXML
+    private void showAssessmentList() {
+        assessmentListPanel = new AssessmentListPanel(logic.getFilteredAssessmentList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(assessmentListPanel.getRoot());
+    }
+
     public ModuleListPanel getModuleListPanel() {
         return moduleListPanel;
     }
@@ -246,6 +273,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
+    }
+
+    public AssessmentListPanel getAssessmentListPanel() {
+        return assessmentListPanel;
     }
 
     /**
@@ -267,6 +298,9 @@ public class MainWindow extends UiPart<Stage> {
                     break;
                 case CLASS_GROUP:
                     handleClassGroupListButtonPress();
+                    break;
+                case ASSESSMENT:
+                    handleAssessmentListButtonPress();
                     break;
                 default:
                     break;
