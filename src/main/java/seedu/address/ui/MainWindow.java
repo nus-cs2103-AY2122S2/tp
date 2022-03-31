@@ -274,6 +274,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowEmail()) {
+                handleEmailWindow();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }

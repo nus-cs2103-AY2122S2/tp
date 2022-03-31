@@ -21,7 +21,7 @@ public class ResizeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_RESIZE, false, false, false, true);
+        return new CommandResult(MESSAGE_RESIZE, false, false, false, false, true);
     }
 
     public static Double getResultWindowDisplaySize() {
