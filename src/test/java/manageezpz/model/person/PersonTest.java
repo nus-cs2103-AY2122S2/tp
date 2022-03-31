@@ -71,4 +71,16 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
     }
+
+    @Test
+    public void increaseTaskCount_personInAddressBook_returnsTrue() {
+        ALICE.increaseTaskCount();
+        assertTrue(ALICE.getNumOfTasks() == 1);
+    }
+
+    @Test
+    public void decreaseTaskCount_personInAddressBook_throwsAssertionError() {
+        ALICE.decreaseTaskCount();
+        assertTrue(ALICE.getNumOfTasks() == 0);
+    }
 }

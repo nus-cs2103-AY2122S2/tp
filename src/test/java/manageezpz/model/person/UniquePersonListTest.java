@@ -163,4 +163,15 @@ public class UniquePersonListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void increaseNumOfTasks_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.increaseNumOfTasks(null));
+    }
+
+    @Test
+    public void decreaseNumOfTasks_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.decreaseNumOfTasks(null));
+    }
+
 }
