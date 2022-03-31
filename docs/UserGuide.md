@@ -124,7 +124,7 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
 * The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
-* <a href="#house-type"></a>The `HOUSE_TYPE` can be defined as any of the following:
+* The `HOUSE_TYPE` can be defined as any of the following:
   * `unspecified`
   * `apartment`
   * `bungalow`
@@ -469,6 +469,36 @@ Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
   }
 }
 ```
+And here are the examples of 2 sellers, one has a property and one does not have a property yet.
+
+```
+{
+  "sellers" : [ {
+    "name" : "chua",
+    "phone" : "1234",
+    "appointment" : "",
+    "tagged" : [ "tag1", "tag2" ],
+    "propertyToSell" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Queens Town"
+      },
+      "priceRange" : {
+        "lower" : "24",
+        "upper" : "48"
+      },
+      "address" : "Utown"
+    }
+  }, {
+    "name" : "Ben Leong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "friendly" ],
+    "propertyToSell" : null
+  }
+}
+```
+
 ### Some special format of the data
 #### name and phone
 - They cannot be empty string: `""` , otherwise it will be seen as invalid format and start with empty buyerbook
@@ -485,7 +515,6 @@ Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
 Otherwise, all other value will be translated to `Unspecified` housetype!
 - Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
 - `pricerange` must be digit string, and `lower` value must be less than or equal to `upper`
-
 
 
 --------------------------------------------------------------------------------------------------------------------
