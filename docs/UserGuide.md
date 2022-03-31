@@ -295,6 +295,18 @@ Opens a window to choose a CSV file to export to.
 
 Format: `export`
 
+### Undo previous command: `undo`
+
+Undoes previous command executed.
+
+Format: `undo`
+
+### Redo previous command: `redo`
+
+Redoes undone command.
+
+Format: `redo`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
