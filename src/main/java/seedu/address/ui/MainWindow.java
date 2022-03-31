@@ -266,22 +266,27 @@ public class MainWindow extends UiPart<Stage> {
         return focusListPanel;
     }
 
+
     /**
      * Methods where we need to execute the command to get the Index of the Candidate to refresh the panel
      */
     public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
         CommandResult commandResult = logic.execute(commandText);
-        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
-            if (focusListPanel.getCandidate().looseEqual(logic
-                    .getFilteredCandidateList()
-                    .get(commandResult.getEditIndex()))) {
-                executeCommand(FocusCommand.COMMAND_WORD + " "
-                        + String.valueOf(commandResult.getEditIndex() + 1));
-            }
+
+        if (focusListPanel.getCandidate().looseEqual(logic
+                .getFilteredCandidateList()
+                .get(commandResult.getEditIndex()))) {
+            executeCommand(FocusCommand.COMMAND_WORD + " "
+                    + String.valueOf(commandResult.getEditIndex() + 1));
         }
+
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        //to manually clear the commandBox
+        commandBoxPlaceholder.getChildren().remove(0);
+        commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
         return commandResult;
     }
+
 
     /**
      * Refreshes the FocusCard if all schedules are cleared so that the displayed Candidate has the latest information.
@@ -291,9 +296,13 @@ public class MainWindow extends UiPart<Stage> {
         CommandResult commandResult = logic.execute(commandText);
         if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
             logger.info(String.valueOf(logic.getFilteredCandidateList().contains(focusListPanel.getCandidate())));
-            executeCommand(FocusCommand.COMMAND_WORD + " "
-                    + String.valueOf(displayedIndex + 1));
+            executeCommand(FocusCommand.COMMAND_WORD + " " + String.valueOf(displayedIndex + 1));
         }
+
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        //to manually clear the commandBox
+        commandBoxPlaceholder.getChildren().remove(0);
+        commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
         return commandResult;
     }
 
