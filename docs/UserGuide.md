@@ -234,17 +234,27 @@ Examples:
 
 ![view schedules](images/helpMessage.png)
 
-### Filtering players by position: `filter`
+### Sort players by height/ jersey number/ weight: `sort`
 
-Filter all players with the specified tag(s).
+The `sort` command allows you to sort the displayed players based on the criteria specified.
 
-Format: `filter [T/] t/TAG [t/TAGS]`
-* Display all the players with the specific tag(s) from a particular team.
-* If T/ is not specified, players with these tags from all teams will be displayed.
+Format: `sort PREFIX/ORDER`
+* Sorts all the players based on the specified `PREFIX` and `ORDER`.
+* The parameter `PREFIX` must be specified only as `h/`, `j/` or `w/` for height, jersey number and weight respectively. 
+Other `PREFIX` will not be accepted.
+* The parameter `ORDER` must be specified only as `asc` or `desc` for ascending and
+descending respectively. Other `ORDER` will not be accepted.
+* Player names in alphabetical order will be used as tiebreaker when sorting based on height or weight.
 
 Example:
-* `filter T/Sandama t/PF` Displays all the players with the tag PF in the team Sandama.
+* `sort h/asc` Sort the displayed players in ascending order of height
+* `sort h/desc` Sort the displayed players in descending order of height
+* `sort j/asc` Sort the displayed players in ascending order of jersey number
+* `sort j/desc` Sort the displayed players in descending order of jersey number
+* `sort w/asc` Sort the displayed players in ascending order of weight
+* `sort w/desc` Sort the displayed players in descending order of weight
 
+![sort players](images/helpMessage.png)
 
 ### Edit a player/ lineup/ schedule information : `edit`
 
@@ -353,7 +363,7 @@ _Details coming soon ..._
 | **Put**    | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Mark**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Unmark** | `unmark i/INDEX_SCHEDULE P/PLAYER [P/PLAYER]`<br> e.g. `unmark i/1 P/John Doe P/James P/Durant`                                                                                                                                                                                                                                                                            |
-| **Filter** | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **sort**   | `sort PREFIX/ORDER` <br> e.g. `sort h/desc`                                                                                                                                                                                                                                                                                                                                |
 | **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`<br> e.g. `add S/ i/1 n/competition d/22/02/2022 0900`                                                                   |
 | **Find**   | `find P/PLAYER`<br>e.g. `find P/Wu Lala`<br>`find L/LINEUP`<br>e.g. `find L/Oo la la`                                                                                                                                                                                                                                                                                      |
 | **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                    |
