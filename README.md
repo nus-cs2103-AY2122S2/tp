@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T12-3/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/Ui_ReadMe.png)
 
 # Tracey
 
