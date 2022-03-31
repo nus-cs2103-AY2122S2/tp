@@ -26,7 +26,6 @@ public class HelpCommand extends Command {
     public static final String HELP_MESSAGE_SORT = SortCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_TEAM = MakeTeamCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_UNTEAM = MakeTeamCommand.MESSAGE_USAGE;
-    public static final String HELP_MESSAGE_BATCHEDIT = BatchEditCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_CLEAR = ClearCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_EXIT = ExitCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_SKILL = "Skill stores a Skill Name and Skill proficiency. Usage: "
@@ -58,8 +57,6 @@ public class HelpCommand extends Command {
             return new CommandResult(HELP_MESSAGE_UNTEAM, false, false);
         case "sort":
             return new CommandResult(HELP_MESSAGE_SORT, false, false);
-        case "batchedit":
-            return new CommandResult(HELP_MESSAGE_BATCHEDIT, false, false);
         case "clear":
             return new CommandResult(HELP_MESSAGE_CLEAR, false, false);
         case "exit":
