@@ -217,7 +217,17 @@ public class AddSellerCommandTest {
 
         }
 
+        @Override
+        public void sortFilteredSellerList(String comparator, String order) {
+            throw new AssertionError("This method should not be called");
+        }
+
         // buyer
+
+        @Override
+        public void sortFilteredBuyerList(String comparedItem, String order) {
+            throw new AssertionError("This method should not be called");
+        }
 
         @Override
         public Path getBuyerAddressBookFilePath() {
