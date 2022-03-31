@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,9 @@ import seedu.ibook.testutil.ItemBuilder;
 import seedu.ibook.testutil.ProductBuilder;
 
 class ItemTest {
+
+    private static final DateTimeFormatter dateFormatter =
+            DateTimeFormatter.ofPattern("d MMM yyyy", new Locale("en"));
 
     @Test
     void add() {
@@ -112,7 +116,6 @@ class ItemTest {
     }
 
     private UniqueItemList getExpiringItems() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         int discountStart = WAFFLES.getDiscountStart().discountStart;
         String expiryDate1 = LocalDate.now().plusDays(discountStart - 1).format(dateFormatter);
         String expiryDate2 = LocalDate.now().plusDays(discountStart - 2).format(dateFormatter);
@@ -128,7 +131,6 @@ class ItemTest {
     }
 
     private UniqueItemList getAlmostExpiringItems() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         int discountStart = WAFFLES.getDiscountStart().discountStart;
         String expiryDate1 = LocalDate.now().plusDays(discountStart).format(dateFormatter);
         String expiryDate2 = LocalDate.now().plusDays(discountStart + 1).format(dateFormatter);

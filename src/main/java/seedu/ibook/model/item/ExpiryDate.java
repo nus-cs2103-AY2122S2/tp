@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Represents a Product's expiry date in the ibook.
@@ -139,20 +140,24 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      */
     private static class DateStringManager {
 
+        // Default use of English locality for dates
+        private final Locale locale = new Locale("en");
+
         private final DateTimeFormatter dateFormatter;
 
         public DateStringManager(String format) {
-            dateFormatter = DateTimeFormatter.ofPattern(format);
+            dateFormatter = DateTimeFormatter.ofPattern(format, locale);
         }
 
         public boolean matches(String test) {
             try {
-                LocalDate.parse(test, dateFormatter);
+                LocalDate parsedDate = LocalDate.parse(test, dateFormatter);
+
+                // Java truncates the date into appropriate ranges according to the year and month
+                return parsedDate.format(dateFormatter).equals(test);
             } catch (DateTimeParseException pe) {
                 return false;
             }
-
-            return true;
         }
 
         public LocalDate parse(String date) {
