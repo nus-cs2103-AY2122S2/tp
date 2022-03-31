@@ -331,7 +331,14 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
                 handleDelete(commandText);
             } else if (commandText.contains(EditCommand.COMMAND_WORD)) {
-                clearFocusCard();
+                try {
+                    CommandResult commandResult = logic.execute(commandText);
+                    logger.info("Result: " + commandResult.getFeedbackToUser());
+                    resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                    clearFocusCard();
+                } catch (CommandException e) {
+                    throw e;
+                }
             } else if (commandText.contains(AddScheduleCommand.COMMAND_WORD)) {
                 editFlag = handleEdit(commandText, ADD_SCHEDULE_COMMAND_INDEX);
             } else if (commandText.contains(ClearScheduleCommand.COMMAND_WORD)) {
@@ -341,8 +348,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -360,6 +366,8 @@ public class MainWindow extends UiPart<Stage> {
                 executeCommand(FocusCommand.COMMAND_WORD + " " + editFlag);
             }
 
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
