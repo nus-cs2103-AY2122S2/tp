@@ -1,8 +1,9 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_ONE;
+import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_TWO;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +48,24 @@ public class DueDateTest {
         assertTrue(DueDate.isValid("2020-11-11"));
         assertTrue(DueDate.isValid("2020-12-26"));
         assertTrue(DueDate.isValid("2020-01-01"));
+    }
+
+    @Test
+    public void equalsTest() {
+        DueDate firstDueDate = new DueDate(VALID_DUE_DATE_ONE);
+        DueDate secondDueDate = new DueDate(VALID_DUE_DATE_TWO);
+        DueDate firstDueDateCopy = new DueDate(firstDueDate.getValue());
+
+        // compare with itself -> returns true
+        assertTrue(firstDueDate.equals(firstDueDate));
+
+        // compare with object with same constructor args
+        assertTrue(firstDueDate.equals(firstDueDateCopy));
+
+        //compare with different date
+        assertFalse(firstDueDate.equals(secondDueDate));
+
+        //compare with different object
+        assertFalse(firstDueDate.equals("2021-11-11"));
     }
 }

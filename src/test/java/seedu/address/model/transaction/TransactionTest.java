@@ -1,14 +1,10 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_INCOMPLETE;
-import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO;
-import static seedu.address.testutil.TransactionUtil.VALID_AMOUNT_ONE;
-import static seedu.address.testutil.TransactionUtil.VALID_ID;
-import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
+import static seedu.address.testutil.TransactionUtil.*;
+import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_TWO;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,4 +54,5 @@ public class TransactionTest {
         // some fields are missing -> return false
         assertNotEquals(TRANSACTION_ONE, TRANSACTION_ONE_INCOMPLETE);
     }
+
 }
