@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -14,19 +15,24 @@ import seedu.address.model.entry.Event;
  * Panel containing the list of events.
  */
 public class EventListPanel extends UiPart<Region> {
-    private static final String FXML = "EventListPanel.fxml";
+    private static final String FXML = "EntryListPanel.fxml";
+    private static final String LIST_TITLE = "Events";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML
-    private ListView<Event> eventListView;
+    private Label listTitle;
+
+    @FXML
+    private ListView<Event> entryListView;
 
     /**
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
-        eventListView.setItems(eventList);
-        eventListView.setCellFactory(listView -> new EventListViewCell());
+        listTitle.setText(LIST_TITLE);
+        entryListView.setItems(eventList);
+        entryListView.setCellFactory(listView -> new EventListViewCell());
     }
 
     /**
