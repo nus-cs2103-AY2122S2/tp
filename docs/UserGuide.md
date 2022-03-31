@@ -172,7 +172,6 @@ Format: `listc`
 Edits an existing customer in the application.
 
 Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
-* Editing a customer will edit all future bookings of that customer.
 
 <div markdown="block" class="alert alert-info">
 
@@ -180,6 +179,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
+    <li>Editing a customer will edit all future bookings of that customer.</li>
 </ul>
 
 </div>
@@ -227,6 +227,12 @@ Format: `deletec INDEX,[MORE INDEXES]`
 * All indexes must be valid else the operation will not execute.
 * Deleting a customer will delete all future bookings of that customer.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:** All the input indexes must be valid else the command will not be executed.
+
+</div>
+
 Examples:
 * `deletec 1,2` Removes the 1st and 2nd customer from the application.
 
@@ -266,7 +272,17 @@ Format: `lists`
 Edits an existing service in the application.
 
 Format: `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
-* Editing a service will edit all future bookings with that service.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>At least one of the optional fields must be provided.</li>
+    <li>Existing values will be updated to the input values.</li>
+    <li>Editing a service will edit all future bookings with that service.</li>
+</ul>
+
+</div>
 
 Examples:
 * `edits 1 pr/200` Edits the price of the 1st service to be `200`.
@@ -347,13 +363,23 @@ Edits an existing service in the application.
 
 Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>At least one of the optional fields must be provided.</li>
+    <li>Existing values will be updated to the input values.</li>
+</ul>
+
+</div>
+
 Examples:
 * `editb 1 sev/3 f/Excellent Customer Service` Edits the 1st booking's service to the service at Index 2 and edit its feedback to `Excellent Customer Service` .
 * `editb 2 st/10-12-2022 10:30` Edits the booking time of the 1st booking to be `10-12-2022 10:30`.
 
 Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
 
-#### 4.3.5 Finding booking' profile by keyword: `finds`
+#### 4.3.5 Finding booking' profile by keyword: `findb`
 
 Find bookings whose parameters contain any of the given keywords.
 
