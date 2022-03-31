@@ -2,10 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.MeetCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -45,6 +42,10 @@ public class NumberParser implements Parser<Command> {
             return newCommand;
         } else if (lastCommand instanceof MeetCommand) {
             MeetCommand newCommand = (MeetCommand) lastCommand;
+            newCommand.setIndex(index);
+            return newCommand;
+        } else if (lastCommand instanceof FlagCommand) {
+            FlagCommand newCommand = (FlagCommand) lastCommand;
             newCommand.setIndex(index);
             return newCommand;
         } else {
