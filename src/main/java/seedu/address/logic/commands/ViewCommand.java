@@ -32,13 +32,20 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE_SCHEDULE = COMMAND_WORD
             + ": To view schedule\n"
             + "Parameters: " + PREFIX_SCHEDULE + "[SCHEDULE NAME]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals\n"
+            + "To view all schedules\n"
+            + "Parameters: " + PREFIX_ALL_SCHEDULE + "all\n"
+            + "OR" + PREFIX_ALL_SCHEDULE + "active\n"
+            + "To view schedules on a certain date\n"
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "finals\n";
 
     public static final String MESSAGE_ACTIVE_SCHEDULE_USAGE = COMMAND_WORD
             + ": To view all schedules\n"
             + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "all\n"
             + "To view archived schedules\n"
             + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_ALL_SCHEDULE + "archive\n";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views information of players, lineups and schedules.\n"
             + MESSAGE_USAGE_PLAYER + "\n"
             + MESSAGE_USAGE_LINEUP + "\n"
