@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.transaction.util.StatusFactory;
+import seedu.address.model.transaction.util.StatusFactoryInterface;
 
 /**
  * Represents a Person in the address book.
@@ -74,7 +75,7 @@ public class Transaction implements Serializable {
         this(otherTransaction.getTransactionId(), otherTransaction.getFields(), otherTransaction.getPersonId());
     }
 
-    private long getTransactionId() {
+    public long getTransactionId() {
         return transactionId;
     }
 
@@ -89,16 +90,6 @@ public class Transaction implements Serializable {
         // Check whether due date >= transaction date
         return ((TransactionDate) fields.get(TransactionDate.PREFIX))
                 .isBefore((DueDate) fields.get(DueDate.PREFIX));
-    }
-
-    /**
-     * Returns true if the person contains the specified field.
-     * @param prefix the field prefix
-     * @return return true if the transaction contains the specified field
-     */
-    public boolean hasField(Prefix prefix) {
-        requireAllNonNull(prefix);
-        return fields.containsKey(prefix);
     }
 
     public Optional<TransactionField> getField(Prefix prefix) {
@@ -136,7 +127,11 @@ public class Transaction implements Serializable {
     }
 
     public Transaction setStatusTo(Class<? extends Command> command) {
-        return this.setField(StatusFactory.getStatus(command));
+        return this.setField(new StatusFactory().getStatus(command));
+    }
+
+    public Transaction setStatusTo(Class<? extends Command> command, StatusFactoryInterface factory) {
+        return this.setField(factory.getStatus(command));
     }
 
     public List<TransactionField> getFields() {

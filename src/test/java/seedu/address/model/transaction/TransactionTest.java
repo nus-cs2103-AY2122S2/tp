@@ -6,12 +6,41 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TransactionUtil.*;
 import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_TWO;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.PayCommand;
+import seedu.address.model.transaction.util.StatusFactoryInterface;
 
 public class TransactionTest {
+    public Amount amount;
+    public TransactionDate transactionDate;
+    public DueDate dueDate;
+    public Transaction transaction;
+    public long validId;
+
+    @BeforeEach
+    public void setUp() {
+        amount = new Amount(VALID_AMOUNT_ONE);
+        transactionDate = new TransactionDate(VALID_TRANSACTION_DATE_ONE);
+        dueDate = new DueDate(VALID_DUE_DATE_ONE);
+        validId = VALID_ID;
+
+        Collection<TransactionField> fields = List.of(
+                amount,
+                transactionDate,
+                dueDate
+        );
+        transaction = new Transaction(
+                fields,
+                validId
+        );
+    }
 
     @Test
     public void constructor_null_throwsNullArgumentException() {
@@ -31,6 +60,70 @@ public class TransactionTest {
                     new TransactionDate(VALID_TRANSACTION_DATE_ONE)
         );
         assertThrows(IllegalArgumentException.class, () -> new Transaction(incompleteArgumentsTwo, VALID_ID));
+    }
+
+    @Test
+    public void isValidTest() {
+        Transaction validTransaction = TRANSACTION_ONE;
+        Transaction invalidTransaction = INVALID_TRANSACTION;
+
+        // valid transaction -> returns True
+        assertTrue(validTransaction.isValid());
+
+        // invalid transaction (due date < transaction date) -> returns false
+        assertFalse(invalidTransaction.isValid());
+    }
+
+    @Test
+    public void removeFieldTest() {
+        DueDate toRemove = dueDate;
+        Collection<TransactionField> fieldsOne = List.of(
+                amount,
+                transactionDate,
+                dueDate
+        );
+
+        Collection<TransactionField> fieldCopy = new ArrayList<>(fieldsOne);
+
+        Transaction transactionOne = new Transaction(fieldsOne, VALID_ID);
+        fieldCopy.remove(toRemove);
+        Transaction expectedTransaction = new Transaction(transactionOne.getTransactionId(), fieldCopy, VALID_ID);
+
+        assertEquals(expectedTransaction, transactionOne.removeField(DueDate.PREFIX));
+    }
+
+    @Test
+    public void addFieldTest() {
+        DueDate toAdd = dueDate;
+
+        Collection<TransactionField> fieldsOne = List.of(
+                amount,
+                transactionDate,
+                dueDate
+        );
+
+        Collection<TransactionField> fieldCopy = new ArrayList<>(fieldsOne);
+
+        Transaction transactionOne = new Transaction(fieldsOne, VALID_ID);
+        fieldCopy.add(toAdd);
+        Transaction expectedTransaction = new Transaction(transactionOne.getTransactionId(), fieldCopy, VALID_ID);
+
+        assertEquals(expectedTransaction, transactionOne.addField(toAdd));
+    }
+
+    @Test
+    public void setStatusToTest() {
+        Status statusPaid = new Status("true");
+
+        Collection<TransactionField> fields = new ArrayList<>(transaction.getFields());
+        fields.add(statusPaid);
+
+        Transaction expectedTransaction = new Transaction(transaction.getTransactionId(),
+                fields,
+                validId
+        );
+
+        assertEquals(expectedTransaction, transaction.setStatusTo(Command.class, new StatusFactoryAlwaysReturnsTrue()));
     }
 
     @Test
@@ -55,4 +148,11 @@ public class TransactionTest {
         assertNotEquals(TRANSACTION_ONE, TRANSACTION_ONE_INCOMPLETE);
     }
 
+    private class StatusFactoryAlwaysReturnsTrue implements StatusFactoryInterface {
+
+        @Override
+        public Status getStatus(Class<? extends Command> command) {
+            return new Status("True");
+        }
+    }
 }
