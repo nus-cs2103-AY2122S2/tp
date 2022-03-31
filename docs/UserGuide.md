@@ -403,7 +403,7 @@ Figure 8: Command Summary.
 
 ### Glossary
 
-*Table 1: Specific terminology used*
+*Table 1: Specific terminology used.*
 
 | Term  | Meaning  |
 |---|---|
@@ -415,6 +415,20 @@ Figure 8: Command Summary.
 | Health Risk Notice (HRN) | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case. |
 | JAR File | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files. |
 | Matriculation Number | A student's unique identification number; also known as Student ID. |
-| Prefix | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
+| Prefix | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a> and in Table 2. |
 | Pre-defined constant | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
 | Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address. |
+
+*Table 2: List of prefixes, fields, pre-defined constants and constraints.*
+
+| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                          | Constraints |
+|:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:--------------------:|
+| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces. |
+| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `a/`  | Address              | None                                                                                                  | Cannot be blank. |
+| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS` | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
+| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `t/`  | Optional tag(s)      | None                                                                                                  | No constraints |
