@@ -27,6 +27,12 @@ public class Tag {
         remark = new Remark("");
     }
 
+    /**
+     * Constructs a {@code Tag}.
+     *
+     * @param tagName A valid tag name.
+     * @param tagRemark A tag remark
+     */
     public Tag(String tagName, String tagRemark) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
