@@ -139,13 +139,13 @@ Alternatively, you can also interact with the application through buttons, such 
 
 #### 3.1.1 Listing all products : `list`
 
-Shows a list of all products in the application.
+Shows the full list of all products in iBook.
 
 Format: `list`
 
 #### 3.1.2 Adding a product : `add` 
 
-Adds a new product to the application.
+Adds a new product to iBook.
 
 Click the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button on the 
 left of command input to add a new product.
@@ -246,13 +246,41 @@ Format: `out-of-stock`
 
 #### 3.1.8 Updating all products : `update-all`
 
+Updates all products in the displayed list.
+
+Format: `update-all [TAG:VALUE ...]`
+
+Examples:
+
+`update-all c:fruits` updates all products in current displayed list to have category `fruits`.
+
+`update-all p:5.00` updates all products in current displayed list to have price `5.00`.
+
 #### 3.1.9 Deleting all products : `delete-all`
+
+Deletes all products in the displayed list.
+
+Format: `delete-all`
 
 ### 3.2 Item Commands
 
 #### 3.2.1 Adding an item to a product : `add-item`
 
 #### 3.2.2 Updating an item of a product : `update-item`
+
+Updates an item of a specified product in iBook.
+
+Format: `update-item INDEX-INDEX [TAG:VALUE ... ]`
+
+* The first index refers to the index of product.
+* The second index refers to the index of item.
+* At least one (tag, value) pair must be provided.
+
+Examples:
+
+`update-item 1-2 q:10` updates the 2nd item of the 1st product in the displayed list to have quantity `10`.
+
+`update-item 2-1 e:2022-08-01` updates the 1st item of the 2nd product in the displayed list to have expiry date `01 Aug 2022`.
 
 #### 3.2.3 Deleting an item from a product : `delete-item`
 
@@ -268,13 +296,25 @@ Examples: `remind 10` lists items that are expiring 10 days from now.
 
 #### 3.3.1 Clearing all data : `clear`
 
-#### 3.3.2 Undo most recent changes : `undo`
+Clears all data in iBook.
 
-#### 3.3.3 Redo most recent undone changes : `redo`
+Format: `clear`
+
+#### 3.3.2 Undoing most recent changes : `undo`
+
+Undoes the most recent changes(actions involving add/update/delete product/item) made to iBook.
+
+Format: `undo`
+
+#### 3.3.3 Redoing most recent undone changes : `redo`
+
+Redoes the most recent undone changes made to iBook.
+
+Format: `undo`
 
 #### 3.3.2 Exiting the program : `exit`
 
-Exits the program.
+Exits iBook.
 
 Format: `exit`
 
@@ -339,6 +379,9 @@ _Details coming soon ..._
 
 ### 7.3 Miscellaneous Commands
 
-| Action   | Format, Examples |
-|:---------|:-----------------|
-| **Exit** | `exit`           |
+| Action    | Format, Examples |
+|:--------- |:-----------------|
+| **Clear** | `clear`          |
+| **Undo**  | `undo`           |
+| **Redo**  | `redo`           |
+| **Exit**  | `exit`           |
