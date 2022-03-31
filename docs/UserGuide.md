@@ -352,7 +352,7 @@ Examples:
 
 ### Archiving contacts: `archive`
 
-You can archive students who have graduated in order to keep ModuleMate Finder more organised.
+You can archive contacts into a separate contact list. Archiving a contact can keep ModuleMate Finder more organised by hiding individuals (such as those whom have graduated) away from your contact list.
 
 format: `archive INDEX`
 * Archives the person at the specified `INDEX`.
