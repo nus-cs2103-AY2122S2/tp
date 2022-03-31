@@ -18,11 +18,14 @@ public class GeneralDisplay extends UiPart<Region> {
     private static final String FXML = "GeneralDisplay.fxml";
     private Profile profile;
     private TagList tagList;
+    private GrabResult grabResult;
 
     @FXML
     private StackPane profileDisplayPlaceholder;
     @FXML
     private StackPane tagListPlaceholder;
+    @FXML
+    private StackPane grabResultPlaceholder;
 
     /**
      * Creates a {@code GeneralDisplay}.
@@ -31,8 +34,10 @@ public class GeneralDisplay extends UiPart<Region> {
         super(FXML);
         profile = new Profile();
         tagList = new TagList(logic);
+        grabResult = new GrabResult();
         tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(false);
+        grabResultPlaceholder.setVisible(false);
     }
 
     /**
@@ -41,8 +46,9 @@ public class GeneralDisplay extends UiPart<Region> {
      */
     public void setProfile(Person person) {
         this.profile.setPerson(person);
-        tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(true);
+        tagListPlaceholder.setVisible(false);
+        grabResultPlaceholder.setVisible(false);
         resetProfile();
         profileDisplayPlaceholder.getChildren().add(profile.getRoot());
     }
@@ -54,7 +60,20 @@ public class GeneralDisplay extends UiPart<Region> {
         this.tagList.setTagList(tags);
         tagListPlaceholder.setVisible(true);
         profileDisplayPlaceholder.setVisible(false);
+        grabResultPlaceholder.setVisible(false);
         tagListPlaceholder.getChildren().add(tagList.getTagListView());
+    }
+
+    /**
+     * Set the general display to show the result from GrabCommand.
+     */
+    public void setGrabResult(String result) {
+        this.grabResult.setResult(result);
+        tagListPlaceholder.setVisible(false);
+        profileDisplayPlaceholder.setVisible(false);
+        grabResultPlaceholder.setVisible(true);
+        grabResultPlaceholder.getChildren().clear();
+        grabResultPlaceholder.getChildren().add(grabResult.getRoot());
     }
 
     public Profile getProfile() {

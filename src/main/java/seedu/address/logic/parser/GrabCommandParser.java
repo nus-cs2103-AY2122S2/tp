@@ -60,7 +60,7 @@ public class GrabCommandParser implements Parser<GrabCommand> {
             String indexToBeGrabbed = argMultimap.getValue(PREFIX_EMAIL).get();
             return new GrabCommand(PREFIX_EMAIL, indexToBeGrabbed, tagRead);
         } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            String indexToBeGrabbed = argMultimap.getValue(PREFIX_NAME).get();
+            String indexToBeGrabbed = argMultimap.getValue(PREFIX_ADDRESS).get();
             return new GrabCommand(PREFIX_ADDRESS, indexToBeGrabbed, tagRead);
         } else if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
             String indexToBeGrabbed = argMultimap.getValue(PREFIX_COURSE).get();

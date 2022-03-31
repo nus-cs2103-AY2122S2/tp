@@ -15,7 +15,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DetachTagCommand;
+import seedu.address.logic.commands.DisableMouseUxCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EnableMouseUxCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -111,6 +113,12 @@ public class AddressBookParser {
 
         case ClearEmptyTagCommand.COMMAND_WORD:
             return new ClearEmptyTagCommand();
+
+        case EnableMouseUxCommand.COMMAND_WORD:
+            return new EnableMouseUxCommand();
+
+        case DisableMouseUxCommand.COMMAND_WORD:
+            return new DisableMouseUxCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

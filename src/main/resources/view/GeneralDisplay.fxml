@@ -13,5 +13,7 @@
       </ScrollPane>
       <StackPane fx:id="tagListPlaceholder" snapToPixel="false" styleClass="scroll-pane-general" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
       </StackPane>
+      <StackPane fx:id="grabResultPlaceholder" snapToPixel="false" styleClass="scroll-pane-general" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+      </StackPane>
 </StackPane>
 
