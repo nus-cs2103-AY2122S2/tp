@@ -13,11 +13,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.FocusCommand;
-import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.logic.commands.schedule.ClearScheduleCommand;
@@ -209,15 +205,22 @@ public class MainWindow extends UiPart<Stage> {
         try {
             index = Integer.parseInt(commandResult.substring(DELETE_COMMAND_INDEX));
             if (focusListPanel.getCandidate().equals(logic.getFilteredCandidateList().get(index - 1))) {
-                if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
-                    focusListPanelPlaceholder.getChildren().remove(0);
-                }
-                FocusCard focusCard = new FocusCard(null, null);
-                focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
+                clearFocusCard();
             }
         } catch (Exception e) {
             return;
         }
+    }
+
+    /**
+     * Clear Focus Card
+     */
+    public void clearFocusCard() {
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            focusListPanelPlaceholder.getChildren().remove(0);
+        }
+        FocusCard focusCard = new FocusCard(null, null);
+        focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
     }
 
     /**
@@ -306,6 +309,7 @@ public class MainWindow extends UiPart<Stage> {
         return commandResult;
     }
 
+
     /**
      * Executes the command and returns the result.
      *
@@ -327,6 +331,8 @@ public class MainWindow extends UiPart<Stage> {
                 editFlag = handleEdit(commandText, ADD_SCHEDULE_COMMAND_INDEX);
             } else if (commandText.contains(ClearScheduleCommand.COMMAND_WORD)) {
                 return refreshWhenClearAllSchedule(commandText);
+            } else if (commandText.split(" ")[0].equals(ClearCommand.COMMAND_WORD)) {
+                clearFocusCard();
             }
 
             CommandResult commandResult = logic.execute(commandText);
