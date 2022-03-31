@@ -371,7 +371,7 @@ Sort can help reorder the list!!
 
 <div markdown="block" class="alert alert-danger">
 
-:exclamation:**Caution:** You cannot undo the sort once you have applied it!
+:exclamation: **Caution:** You cannot undo the sort once you have applied it!
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
@@ -380,17 +380,17 @@ Sort can help reorder the list!!
 
 :bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)<br>
 * Use `n/` if you want to sort by name 
-* Use `s/` if you want to sort by status
-* Use `t/` if you want to sort by tag
-* Use `r/` if you want to sort by rating
+* Use `s/` if you want to sort by status 
+* Use `t/` if you want to sort by tag 
+* Use `r/` if you want to sort by rating 
 * For the above prefixes, you have to specify the `ORDER` right after the prefix.
-* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending! 
-* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.   
+* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending!
+* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
 * List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
 * For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "name status rating tag"
 * `SEQUENCE` input is case-insensitive.
-* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!  
+* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!
 </div>
 
 <div markdown="block" class="alert alert-info">
