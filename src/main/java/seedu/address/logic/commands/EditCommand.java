@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,9 @@ import seedu.address.model.interview.Interview;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+
+    public static final String REFRESH_MESSAGE = "\nNote: To view updated Candidate's profile, refresh "
+            + "the candidate's information by using the Focus Command.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the candidate identified "
             + "by the index number used in the displayed candidate list. "
@@ -109,7 +113,9 @@ public class EditCommand extends Command {
             }
         }
 
-        return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate));
+        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+        return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate)
+                + REFRESH_MESSAGE);
     }
 
     /**
