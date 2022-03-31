@@ -68,6 +68,15 @@
                         </AnchorPane>
                   </content>
                 </Tab>
+                  <Tab fx:id="personInsightsListTab" text="Insights">
+                      <content>
+                          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" styleClass="background">
+                              <children>
+                                  <StackPane fx:id="personInsightListPanelPlaceholder" prefHeight="0.0" prefWidth="199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              </children>
+                          </AnchorPane>
+                      </content>
+                  </Tab>
               </tabs>
                <styleClass>
                   <String fx:value="column-header-background" />

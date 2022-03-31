@@ -98,7 +98,7 @@ public class AddressBookParserTest {
         Event event = new EventBuilder().build();
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
         EditEventCommand command = (EditEventCommand) parser.parseCommand(EditEventCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + "n/Default Event " + "dt/12-5-2022 1500 " + "d/Default Description "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + "n/Default Event " + "dt/1-1-2022 1500 " + "d/Default Description "
                 + "af/Amy Koh af/Alex Yeoh");
         assertEquals(new EditEventCommand(INDEX_FIRST_PERSON, descriptor), command);
     }

@@ -14,7 +14,7 @@ public class ShowFriendCommand extends Command {
 
     public static final String COMMAND_WORD = "showfriend";
 
-    public static final String MESSAGE_USAGE = "COMMAND_WORD : Shows full details of a friend in"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows full details of a friend in"
             + " the address book. "
             + "Parameters: "
             + PREFIX_NAME + " NAME \n"
@@ -46,7 +46,7 @@ public class ShowFriendCommand extends Command {
         model.updateFilteredPersonList(x -> x.isSamePerson(toShow));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toShow.getName()), false,
-                false, false, true);
+                false, false, true, false);
     }
 
     @Override
