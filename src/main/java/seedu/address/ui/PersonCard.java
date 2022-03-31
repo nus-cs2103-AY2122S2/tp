@@ -81,7 +81,7 @@ public class PersonCard extends UiPart<Region> {
 
         Membership membership = person.getMembership();
         if (membership != null) {
-            Label newLabel = new Label(membership.toString());
+            Label newLabel = new Label(membership.toString().toUpperCase());
             if (membership.getTier() == Membership.Tier.GOLD) {
                 newLabel.setId("gold");
             } else if (membership.getTier() == Membership.Tier.SILVER) {
