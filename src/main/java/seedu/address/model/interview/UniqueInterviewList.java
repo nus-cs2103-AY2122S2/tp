@@ -3,6 +3,7 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -178,8 +179,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
 
     public List<Candidate> getExpiredInterviewCandidates() {
         List<Candidate> candidates = new ArrayList<>();
+        LocalDateTime currentDateTime = LocalDateTime.now();
         for (Interview i : internalList) {
-            if (i.isExpired()) {
+            if (i.getInterviewEndDateTime().isBefore(currentDateTime)) {
                 candidates.add(i.getCandidate());
             }
         }
