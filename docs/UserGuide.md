@@ -85,7 +85,7 @@ Shows a list of all persons in NUSocials.
 Format: `list`
 
 * All existing persons and upcoming events are automatically rendered when the application is launched.
-* The different tags are listed as follows: yellow for education, blue for modules, orange for CCAs and red for internships.
+* The different tags are listed as follows: yellow for education, teal for modules, orange for CCAs and red for internships.
 * Personal details are listed in the following order: Phone number, Address, Email.
 
 #### Adding a person: `add`
