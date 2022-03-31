@@ -539,6 +539,7 @@
     -fx-text-fill: white;
     -fx-inner-background: #383838;
     -fx-inner-border-radius: 0 0 0 0;
+    -fx-control-inner-background: #383838;
 }
 
 .player-suggestion .content {
@@ -557,4 +558,12 @@
     -fx-padding: 0 27 20 0;
     -fx-border-width: 0 0 5 0;
     -fx-border-color: #383838;
+}
+
+#today {
+    -fx-text-fill: white;
+}
+
+#today-date {
+    -fx-text-fill: white;
 }

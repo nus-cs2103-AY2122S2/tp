@@ -539,6 +539,7 @@
     -fx-text-fill: black;
     -fx-inner-background: #C7C7C7;
     -fx-inner-border-radius: 0 0 0 0;
+    -fx-control-inner-background: #C7C7C7;
 }
 
 .player-suggestion .content {
@@ -559,3 +560,8 @@
     -fx-border-color: #C7C7C7;
 }
 
+.darker-pane-without-border {
+     -fx-background-color: #252525;
+     -fx-border-width: 0;
+     -fx-border-radius: 0 0 0 0;
+}

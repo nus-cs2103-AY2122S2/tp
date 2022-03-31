@@ -14,7 +14,7 @@
     <children>
         <StackPane fx:id="todayPlaceHolder" styleClass="day-box" alignment="TOP_RIGHT">
             <children>
-                <Text fill="white" fx:id="todayDay"></Text>
+                <Text fx:id="todayDay" fill="white"></Text>
 
             </children>
         </StackPane>
@@ -22,7 +22,7 @@
 
         <StackPane fx:id="todayDatePlaceHolder" styleClass="date-box"  alignment="TOP_RIGHT">
             <children>
-                <Text fill="white" fx:id="todayDate"></Text>
+                <Text fx:id="todayDate" fill="white"></Text>
 
             </children>
         </StackPane>
