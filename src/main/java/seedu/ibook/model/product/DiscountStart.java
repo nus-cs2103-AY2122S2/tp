@@ -27,7 +27,7 @@ public class DiscountStart {
         requireNonNull(discountStart);
         checkArgument(isValidDiscountStart(discountStart), MESSAGE_CONSTRAINTS);
         if (discountStart.equals("")) {
-            discountStart = DEFAULT_DISCOUNTSTART;
+            discountStart = DEFAULT_DISCOUNT_START;
         }
         this.discountStart = Integer.parseInt(discountStart);
         assert this.discountStart >= 0; // ensure that the discount rate is not negative

@@ -27,7 +27,7 @@ public class DiscountRate {
         requireNonNull(discountRate);
         checkArgument(isValidDiscountRate(discountRate), MESSAGE_CONSTRAINTS);
         if (discountRate.equals("")) {
-            discountRate = DEFAULT_DISCOUNTRATE;
+            discountRate = DEFAULT_DISCOUNT_RATE;
         }
         discountRate = removePercentage(discountRate);
         this.discountRate = Double.parseDouble(discountRate);

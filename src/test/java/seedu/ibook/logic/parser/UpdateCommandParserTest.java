@@ -29,8 +29,6 @@ import org.junit.jupiter.api.Test;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
-import seedu.ibook.model.product.Category;
-import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 

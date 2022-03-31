@@ -20,8 +20,8 @@ public class ProductBuilder {
     public static final String DEFAULT_CATEGORY = "Noodles";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
-    public static final String DEFAULT_DISCOUNTRATE = "25.0";
-    public static final String DEFAULT_DISCOUNTSTART = "2";
+    public static final String DEFAULT_DISCOUNT_RATE = "25.0";
+    public static final String DEFAULT_DISCOUNT_START = "2";
 
     private Name name;
     private Category category;
@@ -38,8 +38,8 @@ public class ProductBuilder {
         category = new Category(DEFAULT_CATEGORY);
         description = new Description(DEFAULT_DESCRIPTION);
         price = new Price(DEFAULT_PRICE);
-        discountRate = new DiscountRate(DEFAULT_DISCOUNTRATE);
-        discountStart = new DiscountStart(DEFAULT_DISCOUNTSTART);
+        discountRate = new DiscountRate(DEFAULT_DISCOUNT_RATE);
+        discountStart = new DiscountStart(DEFAULT_DISCOUNT_START);
     }
 
     /**
