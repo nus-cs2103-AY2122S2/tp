@@ -68,12 +68,20 @@ public class ManualCommand extends Command {
         case AssignCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_ASSIGN_COMMAND);
 
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_DELETE_TASK_COMMAND);
+
         case ProgressCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_PROGRESS_COMMAND);
+
+        case HistoryCommand.COMMAND_WORD:
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_HISTORY_COMMAND);
+
+        case UndoCommand.COMMAND_WORD:
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_UNDO_COMMAND);
 
         default:
             throw new CommandException(ManualMessages.MANUAL_MESSAGE_UNKNOWN_COMMANDS);
         }
-
     }
 }

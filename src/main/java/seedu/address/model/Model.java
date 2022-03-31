@@ -58,6 +58,36 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the AddressBook that was saved before the last user command was executed.
+     */
+    ReadOnlyAddressBook getPreviousAddressBook();
+
+    /**
+     * Adds AddressBook to the list of address books that are saved with each user command.
+     */
+    void saveCurrentAddressBookToHistory();
+
+    /**
+     * Returns the history of address books following the user's commands.
+     */
+    AddressBookHistory getAddressBookHistory();
+
+    /**
+     * Returns true if the address book history is empty.
+     */
+    boolean isAddressBookHistoryEmpty();
+
+    /**
+     * Replaces the current address book with one that was saved before the last user command was executed.
+     */
+    void undoAddressBook();
+
+    /**
+     * Clears the user's address book history.
+     */
+    void clearAddressBookHistory();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -87,6 +117,20 @@ public interface Model {
      * The {@code task} should be unique and not a duplicate of already assigned task.
      */
     void assignTaskToPerson(StudentId studentId, Task task);
+
+    /**
+     * Deletes {@code Task} assigned to {@code person} with {@code studentId}.
+     * A person with {@code studentId} must exist in the address book.
+     * A {@code task} at {@code Index} should exist.
+     */
+    void deleteTaskOfPerson(StudentId studentId, Index index);
+
+    /**
+     * Deletes {@code Task} assigned to {@code person} with {@code moduleCode}.
+     * A person with {@code moduleCode} must exist in the address book.
+     * A {@code task} with the exact task name as given by the user should exist.
+     */
+    void deleteTaskForAllInModule(ModuleCode moduleCode, Task task);
 
     /**
      * Assigns {@code Task} to 1 or more {@code person} with taking the module with the {@code moduleCode}.
@@ -125,6 +169,31 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Sorts the list of persons in alphabetical order by their names */
+    /** Sorts the list of persons in alphabetical order by their names. */
     void sortFilteredPersonList();
+
+    /**
+     * Returns the user's command history.
+     */
+    CommandHistory getCommandHistory();
+
+    /**
+     * Returns the user's previously executed command (represented as a String).
+     */
+    String getPreviousCommandText();
+
+    /**
+     * Returns true if the command history is empty.
+     */
+    boolean isCommandHistoryEmpty();
+
+    /**
+     * Adds the command (as a {@code String}) to command history.
+     */
+    void addToCommandHistory(String commandText);
+
+    /**
+     * Clears the user's command history.
+     */
+    void clearCommandHistory();
 }

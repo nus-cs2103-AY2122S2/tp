@@ -13,15 +13,19 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConfirmClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteModuleCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ManualCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.ProgressCommand;
 import seedu.address.logic.commands.TaskCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -61,6 +65,12 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteModuleCommand.COMMAND_WORD:
+            return new DeleteModuleCommandParser().parse(arguments);
+
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new DeleteTaskCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -97,6 +107,12 @@ public class AddressBookParser {
         case ProgressCommand.COMMAND_WORD:
             return new ProgressCommandParser().parse(arguments);
 
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -116,11 +132,10 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        switch (commandWord) {
 
+        switch (commandWord) {
         case ConfirmClearCommand.COMMAND_WORD:
             return new ConfirmClearCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
