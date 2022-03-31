@@ -17,7 +17,7 @@ public class UniqueLineupList {
      * Constructs a {@code UniqueLineupList}
      */
     public UniqueLineupList() {
-        this.list = new ArrayList<Lineup>();
+        this.list = new ArrayList<>();
     }
 
     /**
@@ -38,20 +38,6 @@ public class UniqueLineupList {
     public void deleteLineupFromList(Lineup lineup) {
         requireNonNull(lineup);
         this.list.remove(lineup);
-    }
-
-    /**
-     * Deletes a lineup from the list using lineup name
-     *
-     * @param lineupName The name of the lineup to be deleted
-     */
-    public void deleteLineupNameFromList(LineupName lineupName) {
-        requireNonNull(lineupName);
-        for (Lineup lineup : list) {
-            if (lineup.sameLineupName(lineupName)) {
-                this.list.remove(lineup);
-            }
-        }
     }
 
     /**
@@ -102,7 +88,7 @@ public class UniqueLineupList {
     }
 
     /**
-     * Replaces a old lineup by a new lineup
+     * Replaces an old lineup by a new lineup
      * @param target The old lineup to be replaced
      * @param editedLineup The new lineup to replace the old lineup
      */

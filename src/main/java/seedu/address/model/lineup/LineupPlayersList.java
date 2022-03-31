@@ -19,10 +19,6 @@ public class LineupPlayersList {
         this.playersList = new ArrayList<>();
     }
 
-    public LineupPlayersList(ArrayList<Person> players) {
-        this.playersList = players;
-    }
-
     public int size() {
         return playersList.size();
     }
@@ -37,10 +33,6 @@ public class LineupPlayersList {
 
     public void remove(Person player) {
         playersList.remove(player);
-    }
-
-    public ArrayList<Person> getPlayersList() {
-        return this.playersList;
     }
 
     /**

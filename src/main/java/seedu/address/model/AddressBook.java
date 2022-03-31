@@ -142,7 +142,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Checks for the existence of a lineup name
      * @param targetName The lineup name to check
-     * @return Boolean represents the existecne of the lineup name
+     * @return Boolean represents the existence of the lineup name
      */
     public boolean hasLineupName(seedu.address.model.lineup.LineupName targetName) {
         requireNonNull(targetName);
@@ -208,7 +208,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Add a person and update the respective lineups
      * The person must not already exist in the address book and the lineups must exist.
      */
-    public void initalizePerson(Person p) {
+    public void initializePerson(Person p) {
         persons.add(p);
 
         for (seedu.address.model.lineup.LineupName lineupName : p.getLineupNames()) {
