@@ -9,14 +9,16 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
+    public static final String DEFAULT_DESCRIPTION = "";
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Descriptions should only contain alphanumeric characters and spaces";
+            "Descriptions should only contain alphanumeric characters and spaces (except the first character)";
 
     /*
      * Empty strings are allowed. Otherwise, the first character of the description
      * must not be a whitespace
      */
-    public static final String VALIDATION_REGEX = "(.*)";
+    public static final String VALIDATION_REGEX = "|[^ ].*";
 
     public final String fullDescription;
 

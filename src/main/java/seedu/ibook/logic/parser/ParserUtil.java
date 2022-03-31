@@ -28,12 +28,20 @@ public class ParserUtil {
                     + CompoundIndex.SEPARATOR + "\" with values at most %d.", Integer.MAX_VALUE);
 
     /**
+     * Strips away leading and trailing whitespaces as well as unescaping escaped colon characters ("\:").
+     * @return Stripped string
+     */
+    public static String strip(String string) {
+        return string.trim().replace("\\:", ":");
+    }
+
+    /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
+        String trimmedIndex = strip(oneBasedIndex);
 
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -48,7 +56,7 @@ public class ParserUtil {
      * @throws ParseException if the specified compound index is invalid (not non-zero unsigned integer pair).
      */
     public static CompoundIndex parseCompoundIndex(String oneBasedIndices) throws ParseException {
-        String trimmedIndices = oneBasedIndices.trim();
+        String trimmedIndices = strip(oneBasedIndices);
         if (!StringUtil.isNonZeroUnsignedCompoundInteger(trimmedIndices)) {
             throw new ParseException(MESSAGE_INVALID_COMPOUND_INDEX);
         }
@@ -70,7 +78,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = strip(name);
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -85,7 +93,7 @@ public class ParserUtil {
      */
     public static Category parseCategory(String category) throws ParseException {
         requireNonNull(category);
-        String trimmedCategory = category.trim();
+        String trimmedCategory = strip(category);
         if (!Category.isValidCategoryName(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
@@ -100,7 +108,7 @@ public class ParserUtil {
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
-        String trimmedDescription = description.trim();
+        String trimmedDescription = strip(description);
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
@@ -115,7 +123,7 @@ public class ParserUtil {
      */
     public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
         requireNonNull(expiryDate);
-        String trimmedExpiryDate = expiryDate.trim();
+        String trimmedExpiryDate = strip(expiryDate);
         if (!ExpiryDate.isValidExpiryDate(trimmedExpiryDate)) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
@@ -130,7 +138,7 @@ public class ParserUtil {
      */
     public static Quantity parseQuantity(String quantity) throws ParseException {
         requireNonNull(quantity);
-        String trimmedQuantity = quantity.trim();
+        String trimmedQuantity = strip(quantity);
         if (!Quantity.isValidQuantity(trimmedQuantity)) {
             throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
         }
@@ -145,7 +153,7 @@ public class ParserUtil {
      */
     public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
-        String trimmedPrice = price.trim();
+        String trimmedPrice = strip(price);
         if (!Price.isValidPrice(trimmedPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
@@ -160,7 +168,7 @@ public class ParserUtil {
      */
     public static DiscountRate parseDiscountRate(String discountRate) throws ParseException {
         requireNonNull(discountRate);
-        String trimmedDiscountRate = discountRate.trim();
+        String trimmedDiscountRate = strip(discountRate);
         if (!DiscountRate.isValidDiscountRate(trimmedDiscountRate)) {
             throw new ParseException(DiscountRate.MESSAGE_CONSTRAINTS);
         }
@@ -175,7 +183,7 @@ public class ParserUtil {
      */
     public static DiscountStart parseDiscountStart(String discountStart) throws ParseException {
         requireNonNull(discountStart);
-        String trimmedDiscountStart = discountStart.trim();
+        String trimmedDiscountStart = strip(discountStart);
         if (!DiscountStart.isValidDiscountStart(trimmedDiscountStart)) {
             throw new ParseException(DiscountStart.MESSAGE_CONSTRAINTS);
         }
@@ -190,13 +198,16 @@ public class ParserUtil {
      */
     public static ExpiryDate parseNumberIntoDate(String numberOfDays) throws ParseException {
         requireNonNull(numberOfDays);
-        String trimmedDays = numberOfDays.trim();
+
+        String trimmedDays = strip(numberOfDays);
         int days;
+
         try {
             days = Integer.parseInt(trimmedDays);
         } catch (NumberFormatException e) {
             throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
         }
+
         if (days < 0) {
             throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
         }
