@@ -292,16 +292,16 @@ The proposed implementation of view schedule has three variants, which differ in
 Step 1. The user launches the application.
 
 Step 2a. The user wants to view active schedules happening at future dates.
-
 Step 3a. The user executes `view S/`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ACTIVE_SCHEDULES`.
 
-Step 2b. The user wants to view all schedules added.
-
+Step 2b. The user wants to view all historically added schedules.
 Step 3b. The user executes `view S/ a/all`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ALL_SCHEDULES`.
 
-Step 2b. The user wants to view archived schedules only.
+Step 2c. The user wants to view archived schedules only.
+Step 3c. The user executes `view S/ a/archive`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ARCHIVED_SCHEDULES`.
 
-Step 3b. The user executes `view S/ a/archive`.  The command will set the predicate for `FilteredList<Schedule>` to be `PREDICATE_SHOW_ARCHIVED_SCHEDULES`.
+step 2d. The user wants to view schedules on a specific date.
+Step 3d. The user executes `view S/ d/2000-11-29`. The command will set the predicate for `FilteredList<Schedule>` to be a new `ScheduleOnThisDatePredicate`.
 
 The following sequence diagram shows how the find operation works:
 Sequence Diagram:
