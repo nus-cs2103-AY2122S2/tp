@@ -55,10 +55,6 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of test results */
     ObservableList<TestResult> getFilteredTestResultList();
 
-
-    /** Returns summary of current patient */
-    String getSummary();
-
     /**
      * Returns the user prefs' address book file path.
      */
