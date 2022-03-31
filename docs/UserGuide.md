@@ -300,12 +300,62 @@ The interviews displayed can be filtered by providing the optional parameters `f
 | `date`      | Date the interview is happening in `yyyy-mm-dd`          | View interviews which happens on the date provided                   |
 | `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given                                |
 
+Example: `list -i f/date a/2022-05-04`
+
 The positions displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
 
 Examples: 
 - `list -i s/dsc`
 - `list -i f/date a/2022-05-04`
 - `list -i f/status a/accepted s/asc`
+
+## Passing Interviews : `pass`
+
+Passes an existing interview in Hirelah.
+
+Format: `pass INTERVIEW_INDEX`
+
+* Passes the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `pending` before it can be passed.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+ * pass 1
+
+## Failing Interviews : `fail`
+
+Fails an existing interview in Hirelah.
+
+Format: `fail INTERVIEW_INDEX`
+
+* Passes the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `pending` before it can be failed.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* fail 1
+
+## Accepting Interviews : `accept`
+
+Accepts an existing `passed` interview in Hirelah. This command accepts the `passed` interview,
+meaning that the candidate has accepted the job.
+
+Format: `accept INTERVIEW_INDEX`
+
+* Accepts the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `passed` before it can be accepted.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+## Rejecting Interviews : `reject`
+
+Rejects an existing interview in Hirelah. This command rejects the `passed` interview,
+meaning that the candidate has rejected the job.
+
+Format: `reject INTERVIEW_INDEX`
+
+* Rejects the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `passed` before it can be rejected.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 ## Viewing help: `help`
 
