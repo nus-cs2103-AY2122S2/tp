@@ -20,6 +20,8 @@ public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_UNMARK_SUCCESS = "Successfully unmark given students from %s(%s).";
+    public static final String MESSAGE_MARK_FAILED = "Students: %s are not enrolled\n"
+            + "Successfully unmark other students from %s(%s).";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance(s) of the specified student(s)"
             + "belonging to the class group at the specified CLASS_GROUP_INDEX for the specified week.\n"
             + "\tParameters: " + PREFIX_CLASS_INDEX + "CLASS_GROUP_INDEX "
@@ -68,9 +70,13 @@ public class UnmarkCommand extends Command {
             throw new CommandException(String.format(NONEXISTENT_WEEK, weekIndex));
         }
 
-        classGroup.unmarkAttendance(weekIndex, students);
+        List<Student> notUnmarkedStudents = classGroup.unmarkAttendance(weekIndex, students);
         model.setEntity(classGroupToEdit, classGroup);
-        return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS,
-                classGroup.getClassGroupId(), classGroup.getClassGroupType()));
+        if (notUnmarkedStudents.size() == 0) {
+            return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS,
+                    classGroup.getClassGroupId(), classGroup.getClassGroupType()));
+        }
+        return new CommandResult(String.format(MESSAGE_MARK_FAILED,
+                notUnmarkedStudents.toString(), classGroup.getClassGroupId(), classGroup.getClassGroupType()));
     }
 }

@@ -12,7 +12,7 @@ public class Attendance {
     public static final String MESSAGE_CONSTRAINTS =
             "Attendance should only be false or true";
 
-    private static Boolean value;
+    private final Boolean value;
 
     /**
      * Constructs a {@code Attendance}.
