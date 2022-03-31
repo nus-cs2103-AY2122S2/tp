@@ -210,7 +210,7 @@ public class FocusCard extends UiPart<Region> {
             initials.append(temp[0].charAt(0));
         }
 
-        stackPane.setStyle(CHANGE_COLOUR + COLORS[temp[0].charAt(0) - OFFSET]);
+        stackPane.setStyle(CHANGE_COLOUR + COLORS[26]);
 
         Circle circle = new Circle();
         circle.setRadius(60);
