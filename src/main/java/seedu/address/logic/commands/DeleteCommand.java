@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             + "\tParameters: " + TYPE_CLASS
             + " INDEX (must be a positive integer)\n"
             + "\tExample: " + COMMAND_WORD + " "
-            + TYPE_CLASS + " 1"
+            + TYPE_CLASS + " 1\n"
             + "4. Deletes an assessment:\n"
             + "\tParameters: " + TYPE_ASSESSMENT
             + " INDEX (must be a positive integer)\n"
@@ -77,28 +77,28 @@ public class DeleteCommand extends Command {
         switch(entityType) {
 
         case STUDENT:
-            if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownStudentList.size() || checkZeroIndex(targetIndex)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
             break;
 
         case TA_MODULE:
-            if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownModuleList.size() || checkZeroIndex(targetIndex)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownModuleList.get(targetIndex.getZeroBased());
             break;
 
         case CLASS_GROUP:
-            if (targetIndex.getZeroBased() >= lastShownClassGroupList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownClassGroupList.size() || checkZeroIndex(targetIndex)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownClassGroupList.get(targetIndex.getZeroBased());
             break;
 
         case ASSESSMENT:
-            if (targetIndex.getZeroBased() >= lastShownAssessmentList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownAssessmentList.size() || checkZeroIndex(targetIndex)) {
                 throw new CommandException(Messages.MESSAGE_INVALID_ASSESSMENT_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownAssessmentList.get(targetIndex.getZeroBased());
@@ -112,6 +112,10 @@ public class DeleteCommand extends Command {
         model.deleteEntity(entityToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ENTITY_SUCCESS, entityToDelete),
                 entityToDelete.getEntityType());
+    }
+
+    public boolean checkZeroIndex(Index targetIndex) {
+        return targetIndex.getZeroBased() == 1;
     }
 
     @Override
