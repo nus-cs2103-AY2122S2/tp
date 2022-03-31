@@ -124,6 +124,7 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
 * The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
+### House Type
 * The `HOUSE_TYPE` can be defined as any of the following:
   * `unspecified`
   * `apartment`
@@ -472,13 +473,94 @@ Examples:
 
 AgentSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Editing the data file
+## Editing the data file (For experienced user)
 
-AgentSee data are saved as a JSON file `[JAR file location]/data/agensee.json`. Advanced users are welcome to update data directly by editing that data file.
+AgentSee data are saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
+Advanced users are welcome to update data directly by editing these data files.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run.
+So if you are afraid of losing all the data, please backup your data files somewhere else before attempting to edit the data file by yourself.
 </div>
+
+
+### JSON format of the data
+
+Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
+
+```
+{
+  "buyers" : [ {
+    "name" : "Shi Hong",
+    "phone" : "12345678",
+    "appointment" : "2022-03-31-17-00",
+    "tagged" : [ "smart" ],
+    "propertyToBuy" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Clementi"
+      },
+      "priceRange" : {
+        "lower" : "500000",
+        "upper" : "600000"
+      }
+    }
+  }, {
+    "name" : "Jun Hong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "kind" ],
+    "propertyToBuy" : null
+  }
+}
+```
+And here are the examples of 2 sellers, one has a property and one does not have a property yet.
+
+```
+{
+  "sellers" : [ {
+    "name" : "chua",
+    "phone" : "1234",
+    "appointment" : "",
+    "tagged" : [ "tag1", "tag2" ],
+    "propertyToSell" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Queens Town"
+      },
+      "priceRange" : {
+        "lower" : "24",
+        "upper" : "48"
+      },
+      "address" : "Utown"
+    }
+  }, {
+    "name" : "Ben Leong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "friendly" ],
+    "propertyToSell" : null
+  }
+}
+```
+
+### Some special format of the data
+#### name and phone
+- They cannot be empty string: `""` , otherwise it will be seen as invalid format and start with empty buyerbook
+- `phone` be digits string and must have more than 3 digits.
+#### appointment
+- The `appointment` field should be either `""` or `"Year-Month-Day-Hour-Minute"` format, no other format is acceptable. `""` is when the appoinment date is not specified yet
+- When specifying the Month and Day, the data should be specified in exactly 2 digits, i.e. you need to pad 0 for 1 digit date or month.
+
+#### tagged
+- empty tag should be `[]`
+#### propertyToBuy
+- empty property must be `null`, not `"null"` or `'null'`
+- for the `housetype` under `house`, the housetype provided must be one of our [defined houseType](#house-type).
+Otherwise, all other value will be translated to `Unspecified` housetype!
+- Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
+- `pricerange` must be digit string, and `lower` value must be less than or equal to `upper`
 
 
 --------------------------------------------------------------------------------------------------------------------
