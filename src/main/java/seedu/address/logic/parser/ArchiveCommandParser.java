@@ -26,10 +26,10 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
     public ArchiveCommand parse(String userInput) throws ParseException {
 
         // Either it is archive
-        if (mode.equals("ARCHIVE")) {
+        if (mode.equals(ArchiveCommand.COMMAND_WORD)) {
             try {
                 Index index = ParserUtil.parseIndex(userInput);
-                return new ArchiveCommand(index, "ARCHIVE");
+                return new ArchiveCommand(index, ArchiveCommand.COMMAND_WORD);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ArchiveCommand.MESSAGE_USAGE), pe);
@@ -37,7 +37,7 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
         } else {
             try {
                 Index index = ParserUtil.parseIndex(userInput);
-                return new ArchiveCommand(index, "UNARCHIVE");
+                return new ArchiveCommand(index, ArchiveCommand.ALT_COMMAND_WORD);
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.ALT_MESSAGE_USAGE), pe);

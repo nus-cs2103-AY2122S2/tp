@@ -277,10 +277,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleCopy(commandResult);
             } else if (commandResult.isArchiveCommand()) {
                 String archiveMode = commandResult.getArchiveMode();
-                if (archiveMode.equals("ARCHIVE")) {
+                if (archiveMode.equals(ArchiveCommand.COMMAND_WORD)) {
                     resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
                             commandResult.getFeedbackToUser()));
-                } else if (archiveMode.equals("UNARCHIVE")) {
+                } else if (archiveMode.equals(ArchiveCommand.ALT_COMMAND_WORD)) {
                     resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_UNARCHIVE_PERSON_SUCCESS,
                             commandResult.getFeedbackToUser()));
                 }
