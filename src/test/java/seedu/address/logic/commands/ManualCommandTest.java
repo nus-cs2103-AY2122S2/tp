@@ -33,6 +33,13 @@ public class ManualCommandTest {
     }
 
     @Test
+    public void execute_manualDeleteModule_success() {
+        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_DELETE_MODULE_COMMAND);
+        assertCommandSuccess(new ManualCommand("deleteModule"), model,
+                expectedCommandResult, expectedModel);
+    }
+    
+    @Test
     public void execute_manualFind_success() {
         CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_FIND_COMMAND);
         assertCommandSuccess(new ManualCommand("find"), model, expectedCommandResult, expectedModel);

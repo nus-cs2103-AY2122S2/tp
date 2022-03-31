@@ -32,6 +32,9 @@ public class ManualCommand extends Command {
         case DeleteCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_DELETE_COMMAND);
 
+        case DeleteModuleCommand.COMMAND_WORD:
+            return new CommandResult(ManualMessages.MANUAL_MESSAGE_DELETE_MODULE_COMMAND);
+
         case FindCommand.COMMAND_WORD:
             return new CommandResult(ManualMessages.MANUAL_MESSAGE_FIND_COMMAND);
 
