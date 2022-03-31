@@ -70,6 +70,8 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
+* Commands are case sensitive. `Add` is considered as invalid commands, the correct command should be in lower case.
+* Parameters are case sensitive. `John Doe` and `joHN dOE` are considered as different person.
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
 * If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
@@ -96,6 +98,7 @@ Adds a player/ lineup/ schedule to MyGM.
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
+* The first character of every word in `NAME` should be capitalized. For example:`John Doe`
 
 Examples:
 * `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of John Doe, jersey number of 3, position of PG, weight of 69kg, height of 188cm, handphone number of 98765432
