@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
             File selectedFile = fileChooser.getSelectedFile();
             assert (selectedFile != null);
             ImportFileParser converter = new ImportFileParser();
-            List<String> res = converter.JsonToPerson(selectedFile);
+            List<String> res = converter.jsonToPerson(selectedFile);
             for (int i = 0; i < res.size(); i++) {
                 executeCommand(res.get(i));
             }
