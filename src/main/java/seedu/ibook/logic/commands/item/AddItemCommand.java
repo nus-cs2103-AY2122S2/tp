@@ -5,9 +5,6 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
-import java.util.List;
-
-import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.CommandResult;

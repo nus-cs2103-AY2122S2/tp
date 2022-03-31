@@ -6,7 +6,6 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.Optional;
 
-import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.commons.util.CollectionUtil;
 import seedu.ibook.logic.commands.Command;

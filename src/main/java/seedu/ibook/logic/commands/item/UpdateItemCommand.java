@@ -3,10 +3,8 @@ package seedu.ibook.logic.commands.item;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.model.product.Product.PREDICATE_SHOW_ALL_ITEMS;
 
-import java.util.List;
 import java.util.Optional;
 
-import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.commons.util.CollectionUtil;
 import seedu.ibook.logic.commands.Command;

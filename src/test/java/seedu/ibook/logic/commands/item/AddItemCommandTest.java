@@ -1,8 +1,6 @@
 package seedu.ibook.logic.commands.item;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.ibook.testutil.Assert.assertThrows;
 import static seedu.ibook.testutil.TypicalItems.ITEM_A;
 import static seedu.ibook.testutil.TypicalItems.ITEM_B;
