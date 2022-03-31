@@ -129,7 +129,11 @@ This is a sample screenshot of what you can expect from the `list` command.
 Format: `help`
 
 ### Importing Excel sheet
-{to be added here}
+Add a list of students from an Excel file into Tracey.
+
+Format: import button
+* Adds a list of students with relevant details such as Covid status into Tracey.
+* Relevant details required are mentioned in the section below in the ~Adding a contact~ section. 
 
 ### Adding a contact
 Add a student with relevant details into Tracey.
