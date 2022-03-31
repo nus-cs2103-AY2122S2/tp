@@ -18,7 +18,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL =
             "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html";
     private static final String HELP_MESSAGE = "Available commands on this version";
-    private static final String ADD_FIELD = "id/STUDENT_ID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY "
+    private static final String ADD_FIELD = "id/STUDENT_ID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY "
             + "avail/AVAILABILITY";
     private static final String CLEAR_FIELD = "Clears all data in the system";
     private static final String INDEX = "INDEX";
