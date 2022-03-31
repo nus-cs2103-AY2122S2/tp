@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,7 +36,7 @@ class CopyCommandTest {
     private List<Prefix> allPrefixes = Arrays.asList(PREFIX_NAME, PREFIX_PHONE,
             PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE, PREFIX_COMMENT);
     private FormatPersonUtil fpJson = new FormatPersonUtil(FormatPersonUtil.JSON_FORMAT);
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
     public void execute_validCopyCommand_copyPerson() {
@@ -45,7 +46,7 @@ class CopyCommandTest {
             Person personToCopy = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
             String expectedMessage = fpJson.formatPerson(personToCopy, partialPrefixes);
 
-            ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+            ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
             assertCommandSuccess(copyCommand, model, expectedMessage, expectedModel);
 
         } catch (Exception e) {
@@ -61,7 +62,7 @@ class CopyCommandTest {
             List<Person> personToCopy = model.getFilteredPersonList();
             String expectedMessage = fpJson.formatAddressBook(personToCopy, allPrefixes);
 
-            ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+            ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
             assertCommandSuccess(copyCommand, model, expectedMessage, expectedModel);
         } catch (Exception e) {
             assert false;

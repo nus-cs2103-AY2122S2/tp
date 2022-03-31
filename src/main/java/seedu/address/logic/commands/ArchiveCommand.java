@@ -28,6 +28,7 @@ public class ArchiveCommand extends RedoableCommand {
 
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Contact: #%1$s!";
     public static final String MESSAGE_UNARCHIVE_PERSON_SUCCESS = "Unarchived Contact: #%1$s!";
+    public static final String MESSAGE_DUPLICATE_PERSON_ARCHIVE = "Duplicate person already exists in the archives";
 
     private final Index targetIndex;
     private final String mode;

@@ -21,24 +21,26 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final AddressBook archiveBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyAddressBook archiveBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, archiveBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.archiveBook = new AddressBook(archiveBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -89,8 +91,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setArchiveBook(ReadOnlyAddressBook addressBook) {
+        this.archiveBook.resetData(addressBook);
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public ReadOnlyAddressBook getArchiveBook() {
+        return archiveBook;
     }
 
     @Override
@@ -120,6 +132,35 @@ public class ModelManager implements Model {
     @Override
     public void sortPerson(PersonComparator comparator) {
         addressBook.sortPerson(comparator);
+    }
+
+    @Override
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return archiveBook.hasPerson(person);
+    }
+
+    @Override
+    public void deleteArchivedPerson(Person target) {
+        archiveBook.removePerson(target);
+    }
+
+    @Override
+    public void addArchivedPerson(Person person) {
+        archiveBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setArchivedPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        archiveBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void sortArchivedPerson(PersonComparator comparator) {
+        archiveBook.sortPerson(comparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -19,7 +20,12 @@ public class ClearCommand extends RedoableCommand {
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
 
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        if (isArchiveBook()) {
+            model.setArchiveBook(new AddressBook());
+        } else {
+            model.setAddressBook(new AddressBook());
+        }
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

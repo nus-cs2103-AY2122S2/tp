@@ -58,6 +58,9 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            if (StatusBarFooter.isArchiveBook()) {
+                throw new ParseException("Unable to add Person while in archives");
+            }
             return new AddCommandParser().parse(arguments);
 
         case AddModuleCommand.COMMAND_WORD:

@@ -125,7 +125,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setArchiveBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getArchiveBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -156,6 +166,31 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            return false; // because we did not set up any testing for archive yet
+        }
+
+        @Override
+        public void deleteArchivedPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortArchivedPerson(SortCommand.PersonComparator comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }

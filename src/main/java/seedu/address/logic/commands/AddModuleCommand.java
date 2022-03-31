@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.DeleteModuleCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,7 +83,12 @@ public class AddModuleCommand extends RedoableCommand {
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, modulesToAdd);
 
-        model.setPerson(personToEdit, editedPerson);
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return getCommandResult(personToEdit, editedPerson, modulesToAddActual);

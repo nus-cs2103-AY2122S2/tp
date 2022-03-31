@@ -30,7 +30,7 @@ public class StatusCommandTest {
 
     private static final String STATUS_STUB = "favourite";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
     public void execute_addStatusUnfilteredList_success() {
@@ -41,7 +41,8 @@ public class StatusCommandTest {
 
         String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_STATUS_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new AddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);
@@ -56,7 +57,8 @@ public class StatusCommandTest {
             StatusCommand statusCommand = new StatusCommand(INDEX_FIRST_PERSON, new Status("asdf"));
             String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_STATUS_FAILURE, editedPerson);
 
-            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                    new AddressBook(), new UserPrefs());
             expectedModel.setPerson(firstPerson, editedPerson);
             isStatusAdded = true;
             // Unable to actually execute this due to IllegalArgumentException when "asdf" is passed in.
@@ -78,7 +80,8 @@ public class StatusCommandTest {
 
         String expectedMessage = String.format(StatusCommand.MESSAGE_DELETE_STATUS_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new AddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);
@@ -96,7 +99,8 @@ public class StatusCommandTest {
 
         String expectedMessage = String.format(StatusCommand.MESSAGE_ADD_STATUS_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new AddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);

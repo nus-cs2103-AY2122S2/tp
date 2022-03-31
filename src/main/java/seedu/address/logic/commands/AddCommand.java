@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -74,8 +75,18 @@ public class AddCommand extends RedoableCommand {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+        // Note that although we disallow adding in archiveBook, we have to do this still
+        // As the moving of data between archiveBook and addressBook uses AddCommand
+        if (isArchiveBook()) {
+            model.addArchivedPerson(toAdd);
+        } else {
+            // Disallows adding if such a person already exists in the archives
+            if (model.hasArchivedPerson(toAdd)) {
+                throw new CommandException("This person is already in your archives");
+            }
+            model.addPerson(toAdd);
+        }
 
-        model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

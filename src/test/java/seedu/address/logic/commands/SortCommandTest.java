@@ -19,12 +19,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 class SortCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
     public void execute_validSortCommand_sortsList() {
@@ -37,7 +38,7 @@ class SortCommandTest {
 
             String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, successMessage);
 
-            ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+            ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
             expectedModel.sortPerson(new SortCommand.PersonComparator(prefixes, orders));
             assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
 

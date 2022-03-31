@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -24,7 +25,7 @@ import seedu.address.testutil.PersonBuilder;
 
 class ClearModulesCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnFilteredList_success() {
@@ -33,7 +34,7 @@ class ClearModulesCommandTest {
 
         String expectedMessage = String.format(ClearModulesCommand.MESSAGE_SUCCESS, personToClear.getName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
         Person editedPerson = new PersonBuilder(personToClear).withModules().build();
         expectedModel.setPerson(personToClear, editedPerson);
 
@@ -57,7 +58,7 @@ class ClearModulesCommandTest {
 
         Person personToClear = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(ClearModulesCommand.MESSAGE_SUCCESS, personToClear.getName());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
         Person editedPerson = new PersonBuilder(personToClear).withModules().build();
         expectedModel.setPerson(personToClear, editedPerson);
 

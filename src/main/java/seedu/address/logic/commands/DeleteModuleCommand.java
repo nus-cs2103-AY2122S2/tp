@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class DeleteModuleCommand extends RedoableCommand {
 
     /**
      * @param targetIndex of the person in the filtered person list
-     * @param modules modules to be deleted
+     * @param modules     modules to be deleted
      */
     public DeleteModuleCommand(Index targetIndex, List<Module> modules) {
         this.targetIndex = targetIndex;
@@ -74,8 +75,8 @@ public class DeleteModuleCommand extends RedoableCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteModuleCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteModuleCommand) other).targetIndex)) // state check
-                && modules.equals(((DeleteModuleCommand) other).modules);
+                        && targetIndex.equals(((DeleteModuleCommand) other).targetIndex)) // state check
+                        && modules.equals(((DeleteModuleCommand) other).modules);
     }
 
     @Override
@@ -96,7 +97,12 @@ public class DeleteModuleCommand extends RedoableCommand {
             throw new CommandException(String.format(MESSAGE_FAILURE, modules));
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToDelete));

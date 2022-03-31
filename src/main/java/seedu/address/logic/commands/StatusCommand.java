@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class StatusCommand extends RedoableCommand {
     private final Status status;
 
     /**
-     * @param index of the person in the filtered person list to edit the status
+     * @param index  of the person in the filtered person list to edit the status
      * @param status of the person to be updated to
      */
     public StatusCommand(Index index, Status status) {
@@ -46,7 +47,8 @@ public class StatusCommand extends RedoableCommand {
     }
 
     /**
-     * Generates a command execution success message based on whether the status is added to or removed from
+     * Generates a command execution success message based on whether the status is
+     * added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
@@ -85,7 +87,11 @@ public class StatusCommand extends RedoableCommand {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
 
-        model.setPerson(personToEdit, editedPerson);
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }

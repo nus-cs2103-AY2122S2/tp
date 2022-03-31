@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ import seedu.address.model.person.Person;
 
 /**
  * Adds a comment to an existing person in the address book.
- * AddCommentCommand is adapted from https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
+ * AddCommentCommand is adapted from
+ * https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html
  */
 public class CommentCommand extends RedoableCommand {
 
@@ -35,7 +37,7 @@ public class CommentCommand extends RedoableCommand {
     private final Comment comment;
 
     /**
-     * @param index of the person in the filtered person list
+     * @param index   of the person in the filtered person list
      * @param comment comment to be added
      */
     public CommentCommand(Index index, Comment comment) {
@@ -91,7 +93,12 @@ public class CommentCommand extends RedoableCommand {
                 personToEdit.getAddress(), personToEdit.getStatus(),
                 personToEdit.getModules(), comment);
 
-        model.setPerson(personToEdit, editedPerson);
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }

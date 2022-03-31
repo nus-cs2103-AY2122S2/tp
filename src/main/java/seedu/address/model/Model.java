@@ -55,8 +55,13 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    void setArchiveBook(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the ArchiveBook */
+    ReadOnlyAddressBook getArchiveBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -86,6 +91,16 @@ public interface Model {
      * Sort the person list with PersonComparator {@code comparator}.
      */
     void sortPerson(PersonComparator comparator);
+
+    boolean hasArchivedPerson(Person person);
+
+    void deleteArchivedPerson(Person target);
+
+    void addArchivedPerson(Person person);
+
+    void setArchivedPerson(Person target, Person editedPerson);
+
+    void sortArchivedPerson(PersonComparator comparator);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
