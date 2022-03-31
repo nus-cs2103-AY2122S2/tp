@@ -298,6 +298,8 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
 * The candidate index must be a positive integer 1, 2, 3, …​
 * `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
 * `DATE_TIME` must not be earlier than the present date and time.
+* Interview duration is fixed at 30 minutes. Attempts to schedule an interview within the duration of another interview will
+result in an error. (e.g. Interview A starts at 10AM on a given day. Attempts to schedule an interview from 9:31AM up to 10:29AM is prohibited.)
 
 Examples:
 * `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
@@ -371,6 +373,8 @@ upcoming interview in the schedule will be reset from `Scheduled` to `Not Schedu
 an interview which has just expired (and TAlent Assistant™ has not been refreshed) upon the execution of the command,
 his or her interview status will be updated to `Completed`.
 
+</div>
+
 ## Miscellaneous commands
 
 ### Clearing all entries : `clear`
@@ -399,16 +403,17 @@ TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/tale
 
 :exclamation: **Caution:**
 
-If your changes to the data file makes its format invalid*, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid*, TAlent Assistant™ will discard all data and start with an empty data file at the next run. It
+is highly advised that you do not modify the JSON files unless you are aware of what you are doing.
 
 When making changes to a candidate's details in talentassistant.json, the corresponding candidate's details in interviewlist.json (if applicable)
 must also be updated. Likewise, if an interview is deleted from interviewlist.json, the interview status of the candidate should be updated according
-to your desired outcome.
+to your desired outcome (scheduled or not completed).
 
-*If either one of the JSON files are missing, or if the JSON files are edited to contain duplicate candidates
+*Format is considered to be invalid when either one of the JSON files are missing, or if the JSON files are edited to contain duplicate candidates
 and/or (conflicting) interviews.
-
 </div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
