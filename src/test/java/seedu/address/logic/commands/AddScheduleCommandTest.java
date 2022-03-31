@@ -22,6 +22,7 @@ import static seedu.address.testutil.TypicalInterviews.TUESDAY_INTERVIEW_DATE_TI
 import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +53,8 @@ public class AddScheduleCommandTest {
 
         String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 toAdd.getCandidate().getName(), toAdd.getCandidate().getStudentId(),
-                toAdd.getInterviewDate(), toAdd.getInterviewStartTime());
+                toAdd.getInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                toAdd.getInterviewStartTime());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
                 model.getInterviewSchedule(), new UserPrefs());
@@ -82,7 +84,8 @@ public class AddScheduleCommandTest {
 
         String expectedMessage = String.format(AddScheduleCommand.MESSAGE_SCHEDULED_CANDIDATE_SUCCESS,
                 candidateToInterview.getName(), candidateToInterview.getStudentId(),
-                interviewDateTime.toLocalDate(), interviewDateTime.toLocalTime());
+                interviewDateTime.toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                interviewDateTime.toLocalTime());
 
         Interview toAdd = new Interview(candidateToInterview, interviewDateTime);
 

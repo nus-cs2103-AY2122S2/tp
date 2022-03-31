@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalInterviews.VALID_NO_CONFLICT_INTERVI
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +53,8 @@ public class EditScheduleCommandTest {
                 new EditScheduleCommand(INDEX_FIRST_INTERVIEW, VALID_NO_CONFLICT_INTERVIEW_DATE_TIME);
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_INTERVIEW_SUCCESS,
-                interviewInFilteredList + " to " + editedInterview.getInterviewDate() + " "
+                interviewInFilteredList + " to " + editedInterview.getInterviewDate()
+                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " "
                         + editedInterview.getInterviewStartTime());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
