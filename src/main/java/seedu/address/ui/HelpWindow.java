@@ -18,13 +18,22 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL =
             "https://ay2122s2-cs2103-f11-2.github.io/tp/UserGuide.html";
     private static final String HELP_MESSAGE = "Available commands on this version";
-    private static final String ADD_FIELD = "n/NAME id/STUDENT_ID c/COURSE avail/AVAILABILITY";
-    private static final String FIELD_IS_INDEX = "INDEX";
-    private static final String EDIT_FIELD = FIELD_IS_INDEX + " [PREFIX]/[NEW VALUE]";
-    private static final String FIND_FIELD = "k/KEYWORD k/[MORE_KEYWORDS] f/[ATTRIBUTE_FIELD]";
-    private static final String SCHEDULE_FIELD = "add candidate/" + FIELD_IS_INDEX + " at/dd-MM-yyyy HH:mm";
-    private static final String SORT_FIELD = "s/ATTRIBUTE";
-    private static final String VIEW_FIELD = "[today] [week] [month]";
+    private static final String ADD_FIELD = "id/STUDENT_ID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY "
+            + "avail/AVAILABILITY";
+    private static final String CLEAR_FIELD = "Clears Candidate and Interview lists";
+    private static final String INDEX = "INDEX";
+    private static final String EDIT_FIELD = INDEX + " PREFIX/NEW VALUE";
+    private static final String EXIT_FIELD = "Ends the program";
+    private static final String FIND_FIELD = "k/KEYWORD [k/MORE_KEYWORDS] [f/ATTRIBUTE_FIELD]";
+    private static final String LIST_FIELD = "List all candidates in the system";
+    private static final String HELP_FIELD = "Opens the help window";
+    private static final String REMARK_FIELD = INDEX + " r/REMARKS";
+    private static final String SCHEDULE_INDEX = "SCHEDULE_INDEX";
+    private static final String SCHEDULE_FIELD = "add candidate/" + INDEX + " at/dd-MM-yyyy HH:mm\n"
+            + "delete " + SCHEDULE_INDEX
+            + "\nedit " + SCHEDULE_INDEX + " at/dd-MM-yyyy HH:mm";
+    private static final String SORT_FIELD = "s/ATTRIBUTE_FIELD";
+    private static final String VIEW_FIELD = "today | week | month | all";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -33,19 +42,26 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
     @FXML
     private Label helpMessage;
-
     @FXML
     private Label addField;
+    @FXML
+    private Label clearField;
     @FXML
     private Label deleteField;
     @FXML
     private Label editField;
     @FXML
-    private Label exit;
+    private Label exitField;
     @FXML
     private Label findField;
     @FXML
     private Label focusField;
+    @FXML
+    private Label helpField;
+    @FXML
+    private Label listField;
+    @FXML
+    private Label remarkField;
     @FXML
     private Label scheduleField;
     @FXML
@@ -62,12 +78,17 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         addField.setText(ADD_FIELD);
-        deleteField.setText(FIELD_IS_INDEX);
+        clearField.setText(CLEAR_FIELD);
+        deleteField.setText(INDEX);
         editField.setText(EDIT_FIELD);
+        exitField.setText(EXIT_FIELD);
         findField.setText(FIND_FIELD);
+        focusField.setText(INDEX);
+        helpField.setText(HELP_FIELD);
+        listField.setText(LIST_FIELD);
+        remarkField.setText(REMARK_FIELD);
         scheduleField.setText(SCHEDULE_FIELD);
         sortField.setText(SORT_FIELD);
-        focusField.setText(FIELD_IS_INDEX);
         viewField.setText(VIEW_FIELD);
     }
 
