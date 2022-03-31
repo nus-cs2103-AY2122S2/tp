@@ -21,7 +21,7 @@ public class ArchiveCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String ALT_MESSAGE_USAGE = ALT_COMMAND_WORD
-            + ": unarchives the person identified by the index number used in the displayed person list.\n"
+            + ": Unarchives the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + ALT_COMMAND_WORD + " 1";
 

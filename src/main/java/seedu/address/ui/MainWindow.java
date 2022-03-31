@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -219,7 +220,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleSwitchMenu() throws CommandException, ParseException {
         logger.info("Switch Menu Item fired!!!");
-        executeCommand("switch");
+        executeCommand(SwitchCommand.COMMAND_WORD);
     }
     /**
      * Function to perform operations involving logic object
@@ -234,7 +235,7 @@ public class MainWindow extends UiPart<Stage> {
         boolean isDefaultNext = !StatusBarFooter.isArchiveBook();
         if (isArchivedNext) {
             switchMenuItem.setText("Switch to Archives");
-        } else if (isDefaultNext) {
+        } else {
             switchMenuItem.setText("Switch to Default");
         }
     }
