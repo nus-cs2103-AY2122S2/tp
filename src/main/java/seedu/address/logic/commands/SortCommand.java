@@ -30,11 +30,14 @@ public class SortCommand extends Command {
     private final Prefix sortingCriteria;
     private final String sortingOrder;
 
+    /**
+     * Constructs a {@code SortCommand}
+     */
     public SortCommand(Prefix itemList, Prefix sortingCriteria, String sortingOrder) {
         requireAllNonNull(itemList, sortingCriteria, sortingOrder);
         this.itemList = itemList;
         this.sortingCriteria = sortingCriteria;
-        this.sortingOrder= sortingOrder;
+        this.sortingOrder = sortingOrder;
     }
 
     @Override
@@ -51,8 +54,8 @@ public class SortCommand extends Command {
             if (sortingOrder.equals("asc")) {
                 model.sortPersonsInMyGM(Comparator.comparing(Person::getHeight));
             } else {
-                model.sortPersonsInMyGM(
-                        (Person person1, Person person2) -> person2.getHeight().compareTo(person1.getHeight()));
+                model.sortPersonsInMyGM((Person person1, Person person2) ->
+                        person2.getHeight().compareTo(person1.getHeight()));
             }
         }
 
@@ -60,8 +63,8 @@ public class SortCommand extends Command {
             if (sortingOrder.equals("asc")) {
                 model.sortPersonsInMyGM(Comparator.comparing(Person::getWeight));
             } else {
-                model.sortPersonsInMyGM(
-                        (Person person1, Person person2) -> person2.getWeight().compareTo(person1.getWeight())
+                model.sortPersonsInMyGM((Person person1, Person person2) ->
+                        person2.getWeight().compareTo(person1.getWeight())
                 );
             }
         }
@@ -71,9 +74,8 @@ public class SortCommand extends Command {
                 model.sortPersonsInMyGM(Comparator.comparing(Person::getJerseyNumber)
                 );
             } else {
-                model.sortPersonsInMyGM(
-                        (Person person1, Person person2) ->
-                                person2.getJerseyNumber().compareTo(person1.getJerseyNumber())
+                model.sortPersonsInMyGM((Person person1, Person person2) ->
+                        person2.getJerseyNumber().compareTo(person1.getJerseyNumber())
                 );
             }
         }

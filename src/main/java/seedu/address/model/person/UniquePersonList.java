@@ -53,6 +53,9 @@ public class UniquePersonList implements Iterable<Person> {
         this.internalList.sort(comparator);
     }
 
+    /**
+     * Sorts the internal list by a personComparator
+     */
     public void sortByCriteria(Comparator<Person> personComparator) {
         this.personComparator = personComparator;
         FXCollections.sort(internalList, personComparator);
