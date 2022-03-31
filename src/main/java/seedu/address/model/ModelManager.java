@@ -290,6 +290,11 @@ public class ModelManager implements Model {
         return addressBook.getPositionsInterview(position);
     }
 
+    @Override
+    public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+        return addressBook.isSameApplicantPosition(applicant, position);
+    }
+
     //=========== Filtered Position List Accessors =============================================================
     @Override
     public ObservableList<Position> getFilteredPositionList() {

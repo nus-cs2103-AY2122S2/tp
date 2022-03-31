@@ -170,6 +170,11 @@ public interface Model {
     ArrayList<Interview> getPositionsInterviews(Position position);
 
     /**
+     * Checks if the specified applicant has an interview for the specified position.
+     */
+    boolean isSameApplicantPosition(Applicant applicant, Position position);
+
+    /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
