@@ -115,7 +115,7 @@ public class DeleteCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit,
                                              EditCommand.EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+        requireNonNull(personToEdit);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());

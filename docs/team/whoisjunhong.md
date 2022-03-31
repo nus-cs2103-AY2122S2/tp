@@ -28,6 +28,7 @@ Given below are my contributions to the project.
 * Edge Case 1: If user is added into application who is `Positive`, the students in the same ClassCode and Activity does not change to `Close-Contact`
 * Edge Case 2: If user is deleted from the application who is `Positive` and the ClassCode and/or Activity does not have any other positive cases, those students statuses does not change to `Negative`
 * Edge Case 3: If user is added into application who is `Negative` while the ClassCode and/or Activity is `Close-Contact`, those students statuses does not change to `Negative`
+* Edge Case 4: If user is added into application who is `Negative` while there is still a `Positive` case in the ClassCode and/or Activity, the recently added student status will be changed to `Close-Contact`
 * Justification: Fix edge cases which will snowball into other critical bugs in the future
 * Credits: *Jun Hong*
 

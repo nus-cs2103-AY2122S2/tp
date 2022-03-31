@@ -71,11 +71,12 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
         model.addPerson(toAdd);
 
@@ -135,6 +136,11 @@ public class AddCommand extends Command {
                     tempDescriptor.setStatus(new Status(Status.NEGATIVE));
                     Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
                     model.setPerson(currentPerson, editedPersonStatus);
+                } else {
+                    EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
+                    tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
+                    Person editedPersonStatus = createEditedPerson(addedPerson, tempDescriptor);
+                    model.setPerson(addedPerson, editedPersonStatus);
                 }
             }
         }
@@ -146,7 +152,7 @@ public class AddCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit,
                                              EditCommand.EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+        requireNonNull(personToEdit);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
