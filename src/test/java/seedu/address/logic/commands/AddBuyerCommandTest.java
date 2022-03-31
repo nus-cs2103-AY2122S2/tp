@@ -166,12 +166,6 @@ public class AddBuyerCommandTest {
         public void sortFilteredBuyerList(String comparedItem, String order) {
             throw new AssertionError("This method should not be called");
         }
-
-        @Override
-        public void sortFilteredClientList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
         @Override
         public void addBuyer(Buyer buyer) {
             throw new AssertionError("This method should not be called.");

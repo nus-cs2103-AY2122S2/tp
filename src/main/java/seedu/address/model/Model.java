@@ -133,8 +133,6 @@ public interface Model {
 
     void updateFilteredClientList(Predicate<Client> predicate);
 
-    void sortFilteredClientList();
-
     //========== For addbuyer============//
 
     /**
