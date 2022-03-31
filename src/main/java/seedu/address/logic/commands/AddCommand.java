@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johndoe@u.nus.edu "
-            + PREFIX_ACADEMIC_MAJOR + "Y2 Computer Science "
+            + PREFIX_ACADEMIC_MAJOR + "Computer Science "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

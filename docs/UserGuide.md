@@ -103,7 +103,7 @@ There is no need to save manually.
 ### Add student contact information: `add`
 
 Adds a student contact information to ArchDuke. `add` must be followed by the student’s `NAME`, 
-`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional. 
+`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional and is one word consisting of letters and/or numerals. 
 
 <div markdown="block" class="alert alert-info">
 
@@ -138,7 +138,7 @@ Expected outcome:
 
 Deletes a student contact information at the specified `INDEX` from ArchDuke.
 The `INDEX` refers to the index number shown in the **currently displayed** student contact list. 
-The `INDEX` **must be a positive integer**. The deleted student contact would also be 
+The `INDEX` **must be a positive integer** not exceeding the total number of student contacts. The deleted student contact would also be 
 deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
@@ -211,7 +211,9 @@ Find result for the command `find n/alex david`:
 
 ### Create a group: `addgroup`
 
-Creates a group in ArchDuke.
+Creates a group in ArchDuke. `addgroup` must be followed by `GROUP_NAME`, which can take any values, 
+and it **should not be blank** and **should not have preceeding whitespaces**. `GROUP_NAME` with preceeding white spaces
+followed by words will be treated as if there is no preceeding white spaces. E.g. `<whitespaces>Group` is the same as `Group`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -259,7 +261,8 @@ Expected outcome:
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the `INDEX` at which the student is 
 in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
-The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive integer**. The student contact **must 
+The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive integer** not 
+exceeding the total number of student contacts. The student contact **must 
 has yet to be currently assigned** to the group. 
 
 Format: `assign INDEX g/GROUP_NAME`
@@ -286,7 +289,8 @@ After assigning:
 
 Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the `INDEX` at which the student
 is in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
-The group must **already exist** in ArchDuke, and the index must be a **positive integer**. The student contact **must have 
+The group must **already exist** in ArchDuke, and the index must be a **positive integer** not 
+exceeding the total number of student contacts. The student contact **must have 
 currently been assigned** to the group.  
 
 Format: `deassign INDEX g/GROUP_NAME`
@@ -328,6 +332,9 @@ Result of viewing contact in a group:
 
 Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
 The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group ArchDuke.
+`TASK_NAME` can take any values,
+and it **should not be blank** and **should not have preceeding whitespaces**. `TASK_NAME` with preceeding white spaces
+followed by words will be treated as if there is no preceeding white spaces. E.g. `<whitespaces>Meeting` is the same as `Meeting`.
 
 <div markdown="block" class="alert alert-info">
 
