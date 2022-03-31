@@ -1,14 +1,13 @@
 package seedu.ibook.model.item;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.ibook.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.ibook.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
 
 public class ExpiryDateTest {
     @Test
@@ -23,11 +22,9 @@ public class ExpiryDateTest {
 
     @Test
     void create_invalidFormat_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("07-02-2022"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("07-02-2022"));
 
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("07/02/2022"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("07/02/2022"));
     }
 
     /**
@@ -37,24 +34,15 @@ public class ExpiryDateTest {
     @Test
     void create_invalidDate_throwsIllegalArgumentException() {
         // Invalid day for February
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("30 Feb 2022"));
-
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("2022-02-30"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("30 Feb 2022"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("2022-02-30"));
 
         // Invalid day for months with 30 days only
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("31 Apr 2022"));
-
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("2022-04-31"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("31 Apr 2022"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("2022-04-31"));
 
         // Invalid 29th of February in an ordinary year
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("29 Feb 2022"));
-
-        assertThrows(IllegalArgumentException.class,
-                () -> new ExpiryDate("2022-02-29"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("29 Feb 2022"));
+        assertThrows(IllegalArgumentException.class, () -> new ExpiryDate("2022-02-29"));
     }
 }
