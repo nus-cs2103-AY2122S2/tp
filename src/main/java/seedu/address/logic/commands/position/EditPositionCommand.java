@@ -114,7 +114,7 @@ public class EditPositionCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_POSITION);
         }
 
-        model.setPosition(positionToEdit, editedPosition);
+        model.updatePosition(positionToEdit, editedPosition);
         model.updateFilteredPositionList(Model.PREDICATE_SHOW_ALL_POSITIONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_POSITION_SUCCESS, editedPosition), getCommandDataType());

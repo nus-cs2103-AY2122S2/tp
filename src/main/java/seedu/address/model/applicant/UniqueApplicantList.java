@@ -3,8 +3,10 @@ package seedu.address.model.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +48,14 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Sorts a list of applicant
+     */
+    public void sort(Comparator<Applicant> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
     }
 
     /**
@@ -98,6 +108,34 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+
+        for (Applicant a : internalList) {
+            if (email.equals(a.getEmail())) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+
+        for (Applicant a : internalList) {
+            if (phone.equals(a.getPhone())) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Applicant> asUnmodifiableObservableList() {
@@ -133,5 +171,10 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             }
         }
         return true;
+    }
+    // May change isSameApplicant to equals if required
+    public Applicant getApplicant(Applicant interviewApplicant) {
+        return internalList.stream().filter(a -> a.isSamePerson(interviewApplicant))
+                        .collect(Collectors.toList()).get(0);
     }
 }

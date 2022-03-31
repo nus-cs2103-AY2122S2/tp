@@ -6,15 +6,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.DataType;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
+import seedu.address.logic.SortArgument;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantNameComparator;
 import seedu.address.model.applicant.ApplicantNamePredicate;
 
 /**
@@ -34,6 +37,7 @@ public class ListApplicantCommand extends ListCommand {
 
     private FilterType filterType;
     private FilterArgument filterArgument;
+    private SortArgument sortArgument;
 
     /**
      * Creates an ListApplicantCommand to display all {@code Applicant}
@@ -41,6 +45,7 @@ public class ListApplicantCommand extends ListCommand {
     public ListApplicantCommand() {
         filterType = null;
         filterArgument = null;
+        sortArgument = null;
     }
 
     /**
@@ -51,16 +56,38 @@ public class ListApplicantCommand extends ListCommand {
         this.filterArgument = filterArgument;
     }
 
+    public ListApplicantCommand(SortArgument sortArgument) {
+        this.sortArgument = sortArgument;
+    }
+
+    /**
+     * Creates an ListApplicantCommand to filter and sort then display {@code Applicant}
+     */
+    public ListApplicantCommand(FilterType filterType, FilterArgument filterArgument, SortArgument sortArgument) {
+        this.filterArgument = filterArgument;
+        this.filterType = filterType;
+        this.sortArgument = sortArgument;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        if (filterType != null && filterArgument != null) {
+        if (filterType != null && filterArgument != null && sortArgument != null) {
+            if (filterType.type.equals("name")) {
+                String[] nameKeywords = filterArgument.toString().split("\\s+");
+                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+                Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
+                model.updateFilterAndSortApplicantList(predicate, comparator);
+            }
+        } else if (filterType != null && filterArgument != null) {
             if (filterType.type.equals("name")) {
                 String[] nameKeywords = filterArgument.toString().split("\\s+");
                 Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
                 model.updateFilteredApplicantList(predicate);
             }
+        } else if (sortArgument != null) {
+            Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
+            model.updateSortApplicantList(comparator);
         } else {
             model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
         }
