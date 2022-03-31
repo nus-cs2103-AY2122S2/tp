@@ -99,7 +99,6 @@ public class EditCommand extends Command {
         }
 
         model.setCandidate(candidateToEdit, editedCandidate);
-        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
 
         for (int i = 0; i < interviewSchedule.size(); i++) {
             if (candidateToEdit.equals(interviewSchedule.get(i).getCandidate())) {
