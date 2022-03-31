@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DisenrolCommand;
 import seedu.address.logic.commands.EnrolCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -52,7 +51,7 @@ public class GenericEnrolCommandParser {
             }
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage), pe);
         }
     }
 }

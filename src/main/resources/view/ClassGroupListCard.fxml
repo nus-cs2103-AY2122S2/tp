@@ -32,7 +32,7 @@
             <Label fx:id="moduleCode" styleClass="cell_small_label" text="\$moduleCode" />
             <Label fx:id="moduleName" styleClass="cell_small_label" text="\$moduleName" />
             <Label fx:id="academicYear" styleClass="cell_small_label" text="\$academicYear" />
-            <Button fx:id="attendanceButton" text="Check Attendance" onAction="#handleAttendance"/>
+            <Button fx:id="attendanceButton" text="Check Absentees" onAction="#handleAttendance"/>
         </VBox>
       </HBox>
     </VBox>

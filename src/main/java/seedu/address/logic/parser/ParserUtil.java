@@ -34,6 +34,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
@@ -46,7 +47,8 @@ import seedu.address.model.tamodule.TaModule;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_STUDENT_ID_INVALID = "One of the student ID is invalid!";
+    public static final String MESSAGE_STUDENT_INDEXES_INVALID = "One of the student indexes is invalid!";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -402,7 +404,11 @@ public class ParserUtil {
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ""), pe);
                 }
             }
-            return model.getStudentListByStudentIds(studentIds);
+            try {
+                return model.getStudentListByStudentIds(studentIds);
+            } catch (StudentNotFoundException e) {
+                throw new ParseException(MESSAGE_STUDENT_ID_INVALID);
+            }
         default:
             List<Index> studentIndexes = new ArrayList<>();
             for (String i : splitS) {
@@ -416,7 +422,11 @@ public class ParserUtil {
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ""), pe);
                 }
             }
-            return model.getStudentListByIndexes(studentIndexes);
+            try {
+                return model.getStudentListByIndexes(studentIndexes);
+            } catch (StudentNotFoundException e) {
+                throw new ParseException(MESSAGE_STUDENT_INDEXES_INVALID);
+            }
         }
     }
 }

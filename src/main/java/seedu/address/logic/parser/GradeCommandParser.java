@@ -85,8 +85,7 @@ public class GradeCommandParser implements Parser<GradeCommand> {
                 && (argumentMultimap.getValue(moduleIndex).isPresent()
                 || argumentMultimap.getValue(simpleName).isPresent())) {
             return false;
-        }
-        else if (argumentMultimap.getValue(assessmentIndex).isPresent()
+        } else if (argumentMultimap.getValue(assessmentIndex).isPresent()
                 && argumentMultimap.getValue(student).isPresent()) {
             return true;
         } else if (argumentMultimap.getValue(moduleIndex).isPresent()
