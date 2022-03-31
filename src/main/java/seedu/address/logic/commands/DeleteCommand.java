@@ -26,13 +26,13 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list "
-            + "or matriculation number.\n"
+            + "or Student ID.\n"
             + "Parameters: INDEX (must be a positive integer) or STUDENT_ID\n"
             + "Example: " + COMMAND_WORD + " 1"
             + " or " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z\n";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
-    public static final String MESSAGE_DELETE_MULTIPLE_PERSONS_SUCCESS = "%s students deleted";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student:\n%1$s";
+    public static final String MESSAGE_DELETE_MULTIPLE_PERSONS_SUCCESS = "%s students deleted.";
 
     private final Index[] targetIndices;
     private final StudentId targetId;
@@ -87,6 +87,7 @@ public class DeleteCommand extends Command {
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
             } else {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENTID);
             }
         }
