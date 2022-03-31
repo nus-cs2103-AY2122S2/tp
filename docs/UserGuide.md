@@ -52,6 +52,7 @@ The GUI is split into two categories: Players and Schedules. <br>
 
 6. Refer to the Features below for details of each command.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -162,7 +163,9 @@ Format: `put P/PLAYER L/LINEUP`
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five.
 
+
 * ![Put_SS](images/Put_SS.png)
+
 ### Viewing player/schedule/lineup: `view`
 
 This function makes listing, searching filtering of player/schedule/lineup quick and easy.
