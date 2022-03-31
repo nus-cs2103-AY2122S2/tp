@@ -5,7 +5,7 @@ title: TrackBeau
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103-F11-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103-F11-3/tp/branch/master/graph/badge.svg?token=12OE6Y6JBZ)](https://codecov.io/gh/AY2122S2-CS2103-F11-3/tp)
-![Ui](images/Ui_old_v3.png)
+![Ui](images/Ui.png)
 
 * This is application that is designed for busy beauty salons with diverse customer bases that want to personalise service. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface). <br>
   Example usages:

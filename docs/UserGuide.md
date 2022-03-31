@@ -64,7 +64,7 @@ The table below explains the symbols and syntax used throughout the user guide.
 
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
-![Annotated GUI](images/user-guide/annotated-gui-v2.png)
+![Annotated GUI](images/user-guide/annotated-gui-v3.png)
 
 #### 3.2.3 Navigating in TrackBeau
 TrackBeau consists of tabs that are toggleable in the tab bar on the left side of the GUI.
@@ -134,7 +134,7 @@ The table below shows a list of command parameters that will be used for custome
 |`NAME`|Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.|
 |`PHONE_NUMBER`|Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.|
 |`ADDRESS`|Address of the customer. Addresses can take any values, and it should not be blank.|
-|`EMAIL`|Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <br> <ol><li> The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li> <li> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li> <li>have each domain label start and end with alphanumeric characters</li> <li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>|
+|`EMAIL`|Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: {::nomarkdown}<ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>{:/}|
 |`STAFF_PREFERENCE`|The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank.|
 |`SERVICE_PREFERENCE`|The name of the services that the customer prefers. Services' name can be any values, and it should not be blank.|
 |`HAIR_TYPE`|The hair type of the customer. Hair types can be any values, and it should not be blank.|
