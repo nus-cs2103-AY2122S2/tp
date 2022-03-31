@@ -271,13 +271,13 @@ public class ModelManager implements Model {
 
     public boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson) {
         boolean isLessonInfoPanel = currentInfoPanel == InfoPanelTypes.LESSON;
-        boolean isSameLesson = selectedLesson.equals(deletedLesson);
+        boolean isSameLesson = deletedLesson.equals(selectedLesson);
         return isLessonInfoPanel && isSameLesson;
     }
 
     public boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent) {
         boolean isStudentInfoPanel = currentInfoPanel == InfoPanelTypes.STUDENT;
-        boolean isSameStudent = selectedStudent.equals(deletedStudent);
+        boolean isSameStudent = deletedStudent.equals(selectedStudent);
         return isStudentInfoPanel && isSameStudent;
     }
 }
