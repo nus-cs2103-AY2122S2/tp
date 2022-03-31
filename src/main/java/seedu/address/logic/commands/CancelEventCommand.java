@@ -26,8 +26,8 @@ public class CancelEventCommand extends Command {
             + "Parameters: INDEX... (all indexes must be unique and positive integers)"
             + "Example: " + COMMAND_WORD + "1 3 5";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Cancelled Event:%n%1$s";
-    public static final String MESSAGE_DELETE_EVENTS_SUCCESS = "Cancelled Events:%n%1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "CANCELLED EVENT:%n%1$s";
+    public static final String MESSAGE_DELETE_EVENTS_SUCCESS = "CANCELLED EVENTS:%n%1$s";
 
     private final Index[] targetIndexArr;
     private final Index targetIndex;

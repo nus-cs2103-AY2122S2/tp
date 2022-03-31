@@ -37,8 +37,8 @@ public class RemoveTagCommand extends Command {
     public static final String MESSAGE_NO_PARAMETERS = "At least 1 field must be used and not blank.";
     public static final String MESSAGE_NO_TAG_FOUND = "Deleting a non-existent tag cannot be done. "
             + "All specified tags must be present in %1$s";
-    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Education: %2$s, Internship: %3$s, Module: %4$s, "
-            + "CCA: %5$s";
+    public static final String MESSAGE_ARGUMENTS = "TAGS REMOVED FROM %1$s \n-Current Tags- \nEducation: %2$s "
+            + "\nInternship: %3$s " + "\nModule: %4$s " + "\nCCA: %5$s";
 
     private final Index index;
     private final List<Tag> educations;
