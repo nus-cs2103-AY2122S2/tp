@@ -20,7 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String HELP_MESSAGE = "Available commands on this version";
     private static final String ADD_FIELD = "id/STUDENT_ID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY "
             + "avail/AVAILABILITY";
-    private static final String CLEAR_FIELD = "Clears Candidate and Interview lists";
+    private static final String CLEAR_FIELD = "Clears all data in the system";
     private static final String INDEX = "INDEX";
     private static final String EDIT_FIELD = INDEX + " PREFIX/NEW_VALUE";
     private static final String EXIT_FIELD = "Ends the program";
