@@ -63,19 +63,8 @@ TAssist is a **desktop app for managing students and their participation in less
 
 </div>
 
-### Adding entries
 
-#### Adding a student: `add student`
-
-Adds a student to TAssist.
-
-Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
-
-Examples:
-* `add student id/E0123456 n/John Doe e/johnd@example.com` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@example.com`.
-* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
-
-#### Adding a module: `add module`
+### Add modules: `add module`
 
 Adds a module to TAssist.
 
@@ -98,7 +87,18 @@ Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 Examples:
 * `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `21S1` (academic year 2021 Semester 1).
 
-#### Adding a class group: `add class`
+
+### Add assessments: `add assessment`
+
+Adds an assessment to TAssist.
+
+Format: `add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]`
+
+Examples:
+* `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
+
+
+### Add your classes: `add class`
 
 Adds a class group to TAssist.
 
@@ -109,18 +109,21 @@ Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
 
-#### Adding an assessment: `add assessment`
 
-Adds an assessment to TAssist.
+### Add students to your classes
 
-Format: `add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]`
+#### Creating students: `add student`
+
+Adds a student to TAssist.
+
+Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
 
 Examples:
-* `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
+* `add student id/E0123456 n/John Doe e/johnd@example.com` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@example.com`.
+* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
 
-### Enrolling students
 
-#### Enrolling students: `enrol`
+#### Enrolling student: `enrol`
 
 Enrols 1 or more students to a class group.
 
@@ -136,6 +139,7 @@ Examples:
 * `enrol c/1 s/all` enrols all students to the 1st class group shown when `list class` is run.
 * `enrol c/1 s/1,2,3,4,5,6` enrols the 1st 6 students shown when `list student` is run to the 1st class group shown when `list class` is run.
 * `enrol c/1 s/e0123456,e0234567` enrols the students with student IDs `E0123456` and `E0234567` to the 1st class group shown when `list class` is run.
+
 
 #### Disenrolling students: `disenrol`
 
