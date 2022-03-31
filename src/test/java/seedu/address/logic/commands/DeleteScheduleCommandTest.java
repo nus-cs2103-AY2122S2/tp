@@ -94,7 +94,7 @@ public class DeleteScheduleCommandTest {
         model.updateFilteredInterviewSchedule(Model.PREDICATE_SHOW_EMPTY_INTERVIEW_SCHEDULE);
         DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM);
+        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_NO_INTERVIEWS_DISPLAYED);
     }
 
     @Test

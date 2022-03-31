@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_CANDIDATES_DISPLAYED;
 import static seedu.address.commons.core.Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
@@ -68,7 +69,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_NO_CANDIDATES_IN_SYSTEM);
+        assertCommandException(deleteCommand, MESSAGE_NO_CANDIDATES_DISPLAYED);
     }
 
     @Test

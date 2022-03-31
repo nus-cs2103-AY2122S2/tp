@@ -163,7 +163,7 @@ public class AddScheduleCommandTest {
         LocalDateTime interviewDateTime = ON_WEEKEND;
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FOURTH_CANDIDATE, interviewDateTime);
 
-        assertCommandFailure(addScheduleCommand, model, MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        assertCommandFailure(addScheduleCommand, model, MESSAGE_NOT_OFFICE_HOUR);
     }
 
     @Test
