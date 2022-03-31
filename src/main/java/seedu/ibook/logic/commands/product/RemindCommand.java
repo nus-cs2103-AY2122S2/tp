@@ -1,9 +1,11 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+import seedu.ibook.logic.commands.Command;
+import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;

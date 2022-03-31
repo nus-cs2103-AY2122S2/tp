@@ -1,6 +1,6 @@
 package seedu.ibook.testutil;
 
-import seedu.ibook.logic.commands.UpdateCommand.UpdateProductDescriptor;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.DiscountRate;

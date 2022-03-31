@@ -15,7 +15,7 @@ import static seedu.ibook.testutil.TypicalItems.ITEM_A;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.AddItemCommand;
+import seedu.ibook.logic.commands.item.AddItemCommand;
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.item.Quantity;

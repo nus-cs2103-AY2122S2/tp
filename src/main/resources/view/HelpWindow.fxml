@@ -43,7 +43,8 @@
                         <VBox.margin>
                             <Insets top="20.0" bottom="10.0"/>
                         </VBox.margin>
-                        <Button fx:id="copyButton" styleClass="primary-button" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+                        <Button fx:id="copyButton" styleClass="primary-button" mnemonicParsing="false"
+                                onAction="#copyUrl" text="Copy URL">
                             <graphic>
                                 <ImageView fitHeight="14.0" fitWidth="14.0"
                                            pickOnBounds="true" preserveRatio="true">

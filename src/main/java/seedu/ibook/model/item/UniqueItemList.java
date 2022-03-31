@@ -72,6 +72,7 @@ public class UniqueItemList extends UniqueList<Item> {
             internalList().remove(index);
         } else {
             internalList().set(index, updatedItem);
+            FXCollections.sort(internalList());
         }
     }
 

@@ -1,7 +1,9 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.ibook.logic.commands.Command;
+import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 

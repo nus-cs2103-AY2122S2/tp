@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;

@@ -11,7 +11,7 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_START_PRICE;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.ibook.logic.commands.FindCommand;
+import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;

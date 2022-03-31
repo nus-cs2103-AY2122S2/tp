@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
+import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;

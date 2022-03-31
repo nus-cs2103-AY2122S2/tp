@@ -3,7 +3,7 @@ package seedu.ibook.ui.popup;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import seedu.ibook.logic.commands.UpdateCommand;
+import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.logic.parser.CliSyntax;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;

@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
+import seedu.ibook.commons.core.index.CompoundIndex;
+import seedu.ibook.commons.core.index.Index;
+import seedu.ibook.logic.commands.CommandResult;
+import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ReadOnlyIBook;
@@ -97,22 +101,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addProduct(Product product) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addItem(Product product, Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setIBook(ReadOnlyIBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyIBook getIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Product getProduct(Index targetIndex) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addProduct(Product product) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -128,6 +132,16 @@ public class AddCommandTest {
 
         @Override
         public void setProduct(Product target, Product editedProduct) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Item getItem(CompoundIndex targetIndex) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addItem(Product product, Item item) {
             throw new AssertionError("This method should not be called.");
         }
 

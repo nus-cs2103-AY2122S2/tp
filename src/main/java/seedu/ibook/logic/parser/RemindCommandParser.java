@@ -2,7 +2,7 @@ package seedu.ibook.logic.parser;
 
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.ibook.logic.commands.RemindCommand;
+import seedu.ibook.logic.commands.product.RemindCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.item.ExpiryDate;
 

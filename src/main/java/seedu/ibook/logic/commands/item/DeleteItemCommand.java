@@ -1,11 +1,10 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
-import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.CompoundIndex;
+import seedu.ibook.logic.commands.Command;
+import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.item.Item;
@@ -25,7 +24,7 @@ public class DeleteItemCommand extends Command {
             + "' at most " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 1" + CompoundIndex.SEPARATOR + "1";
 
-    public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Item: %1$s";
+    public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted Item: %1$s";
 
     private final CompoundIndex targetIndex;
 
@@ -37,25 +36,20 @@ public class DeleteItemCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Product> lastShownList = model.getFilteredProductList();
-
-        if (targetIndex.getZeroBasedFirst() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-        }
-
-        Product targetProduct = lastShownList.get(targetIndex.getZeroBasedFirst());
-        List<Item> targetItemList = targetProduct.getItems().asUnmodifiableObservableList();
-
-        if (targetIndex.getZeroBasedSecond() >= targetItemList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-        }
-
-        Item itemToDelete = targetItemList.get(targetIndex.getZeroBasedSecond());
+        Product targetProduct = model.getProduct(targetIndex.getFirst());
+        Item itemToDelete = model.getItem(targetIndex);
 
         model.prepareIBookForChanges();
         model.deleteItem(targetProduct, itemToDelete);
         model.saveIBookChanges();
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, itemToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof DeleteItemCommand // instanceof handles nulls
+            && targetIndex.equals(((DeleteItemCommand) other).targetIndex)); // state check
     }
 }

@@ -9,7 +9,7 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class DiscountStart {
 
-    public static final String DEFAULT_DISCOUNTSTART = "0";
+    public static final String DEFAULT_DISCOUNT_START = "0";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Start should only be of type integer, and should not be negative";
@@ -27,7 +27,7 @@ public class DiscountStart {
         requireNonNull(discountStart);
         checkArgument(isValidDiscountStart(discountStart), MESSAGE_CONSTRAINTS);
         if (discountStart.equals("")) {
-            discountStart = DEFAULT_DISCOUNTSTART;
+            discountStart = DEFAULT_DISCOUNT_START;
         }
         this.discountStart = Integer.parseInt(discountStart);
         assert this.discountStart >= 0; // ensure that the discount rate is not negative

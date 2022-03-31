@@ -118,8 +118,8 @@ public class TypicalProducts {
 
     public static IBook getTypicalIBookWithItems() {
         IBook ab = new IBook();
-        for (Product product : getTypicalProductsWithItems()) {
-            ab.addProduct(product);
+        for (Product product : getTypicalProducts()) {
+            ab.addProduct(new ProductBuilder(product).buildWithItems(getTypicalItems()));
         }
         return ab;
     }

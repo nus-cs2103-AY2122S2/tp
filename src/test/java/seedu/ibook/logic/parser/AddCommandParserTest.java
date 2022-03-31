@@ -29,7 +29,7 @@ import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.DiscountRate;
 import seedu.ibook.model.product.DiscountStart;
@@ -78,8 +78,8 @@ public class AddCommandParserTest {
         // missing category
         Product expectedProduct = new ProductBuilder(PRODUCT_A)
                 .withCategory(Category.DEFAULT_CATEGORY)
-                .withDiscountRate(DiscountRate.DEFAULT_DISCOUNTRATE)
-                .withDiscountStart(DiscountStart.DEFAULT_DISCOUNTSTART)
+                .withDiscountRate(DiscountRate.DEFAULT_DISCOUNT_RATE)
+                .withDiscountStart(DiscountStart.DEFAULT_DISCOUNT_START)
                 .build();
         assertParseSuccess(parser, NAME_FULL_A + DESCRIPTION_FULL_A + PRICE_FULL_A,
             new AddCommand(expectedProduct));

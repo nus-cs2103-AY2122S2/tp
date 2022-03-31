@@ -10,7 +10,7 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.stream.Stream;
 
-import seedu.ibook.logic.commands.AddCommand;
+import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
@@ -48,15 +48,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         // Optional fields
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY)
                 .orElse(Category.DEFAULT_CATEGORY));
-
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
                 .orElse(Description.DEFAULT_DESCRIPTION));
-
-        DiscountRate discountRate = ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE)
-                .orElse(DiscountRate.DEFAULT_DISCOUNTRATE));
-
-        DiscountStart discountStart = ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART)
-                .orElse(DiscountStart.DEFAULT_DISCOUNTSTART));
+        DiscountRate discountRate =
+                ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE)
+                .orElse(DiscountRate.DEFAULT_DISCOUNT_RATE));
+        DiscountStart discountStart =
+                ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART)
+                .orElse(DiscountStart.DEFAULT_DISCOUNT_START));
 
         Product product = new Product(name, category, description, price, discountRate, discountStart);
 
