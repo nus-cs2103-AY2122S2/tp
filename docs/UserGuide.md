@@ -19,7 +19,8 @@ title: User Guide
   * [Finding a show: `find`](#finding-a-show-find)
     * [General find](#general-find)
     * [Precise find](#precise-find)
-  * [Sorting the shows](#sorting-the-shows)
+  * [Sorting the shows `sort`](#sorting-the-shows)
+  * [Suggesting a show `suggest`](#suggest-a-show-suggest)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -50,6 +51,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                 |
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                 |
 | [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional |
+| \<Instructions for Parameters\>                                                     | Represents certain requirements you will need to follow |
 
 ---
 
@@ -233,6 +235,14 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 [INSERT IMAGE AFTER UI IS DONE COMPLETELY]
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the Rating and Comment feature:** <br>
+* Reset the rating of a show: `edit INDEX r/0`
+* Removing a comment: `edit INDEX c/`
+
+</div>
+
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
@@ -243,6 +253,15 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 * Editing a `TAG` parameter will cause all the **previous tags of the show to be deleted**.
 * The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
+
+:exclamation:**Adding, Editing and Deleting a Tag:** <br>
+* Doing any of these can result in your tags being deleted if you do not specify existing tags you want to keep. <br>
+* Adding a Tag:
+  * `edit INDEX <Specify all tags in show> t/NEW_TAG`
+* Deleting a Tag:
+  * `edit INDEX <Specify all tags in show except the tag you want to delete>`
+* Editing a Tag:
+  * `edit INDEX <Specify all other tags in show> t/EDITED_TAG`
 
 </div>
 
@@ -341,23 +360,64 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ---
 
-### Sorting the shows
-[TO CHANGE AFTER REWORK]
+### Sorting the shows `sort`
 
-Sort shows based on the input prefix.
+Your show list is in a mess! Do you need a way to organise your list?
+Sort can help reorder the list!!
 
-Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
-* Use sna/ to sort name in ascending order.
-* Use snd/ to sort name in descending order.
-* Use ssa/ to sort status in ascending order.
-* Use ssd/ to sort status in descending order.
-* If there are no prefix, it will sort by name in ascending order.
-* If both prefixes for ascending and descending are used for the same attribute, it will only sort by ascending.
-* If both prefixes for name and status are used, by default, it will sort by name then status.
-* Use so/ to sort by status then name.
+:exclamation:**Caution:**<br>
+*You cannot undo the sort once you have applied it!
+
+Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
+
+`Sort` will sort according to the [prefixes](#command-structure)**
+* Use `n/` if you want to sort by name 
+* Use `s/` if you want to sort by status
+* Use `t/` if you want to sort by tag
+* Use `r/` if you want to sort by rating
+* For the above prefixes, you have to specify the `ORDER` right after the prefix.
+* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending! 
+* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.   
+* Use `so/` if you want to reorder the priority and state the `SEQUENCE`
+* List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
+* For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "RatingTagStatusName"
+* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!  
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Sort:**<br>
+* By not entering any prefixes, it will sort by name in ascending order.
+* Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
+* The `ORDER` must be asc or dsc!
+* The `SEQUENCE` must contain the full name of all the sort conditions used!
+* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
+* If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
+</div>
+
+**Example & Output:** `sort`
+
+<img src="images/Sort_UI.png">
+
+**Example & Output:** `sort t/dsc r/asc`
+
+<img src="images/Sort_UI2.png">
+
+**Example & Output:** `sort t/dsc r/asc so/tagrating`
+
+<img src="images/Sort_UI3.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+---
 
+### Suggest a Show: `suggest`
+
+**Description:** Want a random show? This suggests a random show from the displayed list!
+
+**Format:** `suggest`
+
+**Example:** `suggest`
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 ---
 
 ### Importing a show: `import`
@@ -428,7 +488,8 @@ Format: `sort [sna/] [snd/] [ssa/] [ssd/] [so/]…​`
 | **Clear**        | `clear`                                                                                                                  |
 | **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
 | **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                 |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             | 
+| **Suggest**      | `suggest`                                                                                                                |
 | **Import**       | `import`                                                                                                                 |
 | **Export**       | `export`                                                                                                                 |
 | **Exit**         | `exit`                                                                                                                   |
