@@ -13,8 +13,6 @@ box Storage STORAGE_COLOR_T1
 participant "jfm:JsonFileManager" as JsonFileManager STORAGE_COLOR
 box
 
-participant "fileChooser:FileChooser" as FileChooser STORAGE_COLOR
-
 create ImportCommand
 LogicManager -> ImportCommand : parser.parseCommand(commandText)
 activate ImportCommand
@@ -28,13 +26,6 @@ activate ImportCommand
 create JsonFileManager
 ImportCommand -> JsonFileManager : new JsonFileManager()
 activate JsonFileManager
-
-create FileChooser
-JsonFileManager -> FileChooser : new FileChooser()
-activate FileChooser
-
-FileChooser --> JsonFileManager :
-deactivate FileChooser
 
 JsonFileManager --> ImportCommand :
 deactivate JsonFileManager
@@ -56,3 +47,13 @@ ImportCommand --> LogicManager
 deactivate ImportCommand
 
 @enduml
+
+participant "fileChooser:FileChooser" as FileChooser STORAGE_COLOR
+
+
+create FileChooser
+JsonFileManager -> FileChooser : new FileChooser()
+activate FileChooser
+
+FileChooser --> JsonFileManager :
+deactivate FileChooser
