@@ -32,16 +32,15 @@ public class AddConsultationCommand extends Command {
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
             + PREFIX_DIAGNOSIS + "DIAGNOSIS "
-            + PREFIX_FEE + "FEE "
-            + PREFIX_NOTES + "NOTES \n"
+            + PREFIX_FEE + "FEE ["
+            + PREFIX_NOTES + "NOTES] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "S1234567L "
             + PREFIX_DATE + "19-09-2020 "
             + PREFIX_TIME + "19-00 "
             + PREFIX_DIAGNOSIS + "Upper respiratory infection. Patient was having cough, sneezing fits. "
-            + PREFIX_FEE + "54.00 "
-            + PREFIX_NOTES + "Should get more cough drops. ";
+            + PREFIX_FEE + "54.00 ";
 
     public static final String MESSAGE_SUCCESS = "New consultation added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already "

@@ -23,6 +23,7 @@ later.">
   - [Editing Medical Information: `edit`](#editing-medical-information-edit)
   - [Adding Consultation Information: `add t/consultation`](#adding-consultation-information-add-tconsultation)
   - [Viewing Past Consultations: `view t/consultation`](#viewing-past-consultations-view-tconsultation)
+  - [Editing Consultation Information: `edit`](#editing-consultation-information-edit)
   - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
   - [Viewing Prescription: `view t/prescription`](#viewing-prescription-view-tprescription)
   - [Adding Test Result: `add t/test`](#adding-test-result-add-ttest)
@@ -160,21 +161,22 @@ Examples:
 ### Editing Medical Information: `edit`
 
 Edits an existing medical information entry in MedBook when a list of medical information entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Medical Information.
 
 Format:  `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
 Examples:
-* `view t/medical` followed by `edit 1 bt/B` updates NRIC and blood type of first medical information entry displayed on the screen.
+* `view t/medical` followed by `edit 1 bt/B` updates blood type of first medical information entry displayed on the screen.
 
 ### Adding Consultation Information: `add t/consultation`
 
 Adds a consultation report of a patient to MedBook.
 
-Format: `add t/consultation i/NRIC dt/DATE tm/TIME n/NOTES`
+Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE nt/NOTES`
 
 Examples:
-* `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 n/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection.`
+* `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 dg/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. fe/54.00 nt/Patient is having fever.`
 
 ### Viewing Past Consultations: `view t/consultation`
 
@@ -184,6 +186,18 @@ Format: `view t/consultation i/NRIC`
 
 Examples:
 * `view t/consultation i/S1234567L`
+
+### Editing Consultation Information: `edit`
+
+Edits an existing consultation entry in MedBook when a list of consultation entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Consultation.
+
+Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
+
+Examples:
+* `view t/consultation` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
+
+
 
 ### Adding Prescription: `add t/prescription`
 

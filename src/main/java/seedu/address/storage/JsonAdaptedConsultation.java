@@ -110,9 +110,7 @@ class JsonAdaptedConsultation {
         }
         final String modelFee = fee;
 
-
         final String modelNotes = notes;
-
 
         return new Consultation(new Nric(modelOwnerNric), new Date(modelDate), new Time(modelTime),
                 new ConsultationDiagnosis(modelDiagnosis), new ConsultationFee(modelFee),
