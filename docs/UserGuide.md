@@ -258,7 +258,7 @@ Filter students based on faculties, health statuses and/or blocks.
 
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
-* Returns a list of students with the given values in the respective specified fields.
+* Returns a list of students that fit the criteria given by the user in the form of pre-defined constants in the categories of faculty, covid status and block.
 * The search is case-insensitive. e.g `Positive` will match `positive`.
 * The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
 * At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
