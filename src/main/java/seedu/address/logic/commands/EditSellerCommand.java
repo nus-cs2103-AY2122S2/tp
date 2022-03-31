@@ -60,6 +60,8 @@ public class EditSellerCommand extends Command {
     public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Edited seller: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book.";
+    public static final String MESSAGE_NO_PROPERTY_YET = "You cannot edit a property until you have added one!\n"
+            + "Use \"add-pts\" command to add a property first.";
 
     private final Index index;
     private final EditSellerDescriptor editSellerDescriptor;
@@ -101,47 +103,41 @@ public class EditSellerCommand extends Command {
      * Creates and returns a {@code client} with the details of {@code sellerToEdit}
      * edited with {@code editSellerDescriptor}.
      */
-    private static Seller createEditedSeller(Seller sellerToEdit, EditSellerDescriptor editSellerDescriptor) {
+    private static Seller createEditedSeller(Seller sellerToEdit, EditSellerDescriptor editSellerDescriptor)
+            throws CommandException {
+
         assert sellerToEdit != null;
+
+        //Todo: add property
+        //PropertyToSell updatedPropertyToSell = editSellerDescriptor.getPropertyToSell()
+        //        .orElse(NullPropertyToSell.getNullPropertyToSell());
+        if (editSellerDescriptor.isAnyPropertyFieldEdited()
+                && sellerToEdit.getPropertyToSell() instanceof NullPropertyToSell) {
+            throw new CommandException(MESSAGE_NO_PROPERTY_YET);
+        }
+
+        //The seller already has a property just update it with new values
+        Address updatedAddress = editSellerDescriptor.getAddress().orElse(
+            sellerToEdit.getAddress());
+        HouseType updatedHouseType = editSellerDescriptor.getHouseType().orElse(
+            sellerToEdit.getPropertyToSell().getHouse().getHouseType());
+        Location updatedLocation = editSellerDescriptor.getLocation().orElse(
+            sellerToEdit.getPropertyToSell().getHouse().getLocation());
+        PriceRange updatedPriceRange = editSellerDescriptor.getPriceRange().orElse(
+            sellerToEdit.getPropertyToSell().getPriceRange());
+        PropertyToSell updatedPropertyToSell = sellerToEdit.getPropertyToSell().updatePropertyToSell(
+            updatedHouseType,
+            updatedLocation,
+            updatedPriceRange,
+            updatedAddress
+        );
 
         Name updatedName = editSellerDescriptor.getName().orElse(sellerToEdit.getName());
         Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
         Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
         Appointment updatedAppointment = editSellerDescriptor.getAppointment().orElse(sellerToEdit.getAppointment());
 
-        //Todo: add property
-        //PropertyToSell updatedPropertyToSell = editSellerDescriptor.getPropertyToSell()
-        //        .orElse(NullPropertyToSell.getNullPropertyToSell());
-        if (sellerToEdit.getPropertyToSell() instanceof NullPropertyToSell) {
-            //The seller do not have property yet,
-            /*
-            Todo:
-             Option 1: throw error to user ;
-             Option 2: addProperty for user(more dangerous and harder: what if user miss out some fields?
-             */
-            //Current way: dont do update to property first
-            return new Seller(updatedName, updatedPhone, updatedAppointment, updatedTags,
-                    NullPropertyToSell.getNullPropertyToSell());
-        } else {
-            //The seller already has a property just update it with new values
-            Address updatedAddress = editSellerDescriptor.getAddress().orElse(
-                    sellerToEdit.getAddress());
-            HouseType updatedHouseType = editSellerDescriptor.getHouseType().orElse(
-                    sellerToEdit.getPropertyToSell().getHouse().getHouseType());
-            Location updatedLocation = editSellerDescriptor.getLocation().orElse(
-                    sellerToEdit.getPropertyToSell().getHouse().getLocation());
-            PriceRange updatedPriceRange = editSellerDescriptor.getPriceRange().orElse(
-                    sellerToEdit.getPropertyToSell().getPriceRange());
-            PropertyToSell updatedPropertyToSell = sellerToEdit.getPropertyToSell().updatePropertyToSell(
-                    updatedHouseType,
-                    updatedLocation,
-                    updatedPriceRange,
-                    updatedAddress
-            );
-            return new Seller(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToSell);
-        }
-
-
+        return new Seller(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToSell);
     }
 
     @Override
@@ -199,6 +195,13 @@ public class EditSellerCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, tags, address, houseType, location, priceRange);
+        }
+
+        /**
+         * Returns true if at least one Property field is edited.
+         */
+        public boolean isAnyPropertyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(address, houseType, location, priceRange);
         }
 
         public void setName(Name name) {
