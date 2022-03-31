@@ -7,6 +7,9 @@ public class TextFieldLimited extends TextField {
 
     private int maxStringLength;
 
+    /**
+     *  Constructs a new TextFieldLimited Object.
+     */
     public TextFieldLimited() {
         this.maxStringLength = 10;
     }
@@ -19,6 +22,13 @@ public class TextFieldLimited extends TextField {
         this.maxStringLength = maxStringLength;
     }
 
+    /**
+     * Replaces a range of characters with the given text as long as the length of the text does not
+     * exceed the maximum limit.
+     * @param start Start index in string.
+     * @param end End index in string.
+     * @param text User input.
+     */
     @Override
     public void replaceText(int start, int end, String text) {
         // Delete or backspace user input.
@@ -29,6 +39,10 @@ public class TextFieldLimited extends TextField {
         }
     }
 
+    /**
+     * Replaces selection with a given limited string.
+     * @param text Selection text.
+     */
     @Override
     public void replaceSelection(String text) {
         if (text.equals("")) {
