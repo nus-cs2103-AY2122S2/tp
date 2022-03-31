@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 import javafx.event.ActionEvent;
@@ -172,7 +173,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleImport () throws ParseException, CommandException {
         JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
+        JDialog dialog = new JDialog();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        int returnValue = fileChooser.showOpenDialog(dialog);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             assert (selectedFile != null);
