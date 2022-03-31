@@ -186,6 +186,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sorts the list of students in descending order of the number of incomplete tasks.
+     */
+    public void sortPersonListByTaskLeft() {
+        persons.sortListByTaskLeft();
+    }
+
+    /**
      * Returns a key-value pair between each {@code person} and the completion status of a task,
      * if the person is taking the specified module and is being assigned with the specified task.
      *

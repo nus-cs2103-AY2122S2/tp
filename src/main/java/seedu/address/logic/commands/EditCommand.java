@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TaskList;
 import seedu.address.model.person.TelegramHandle;
 
 /**
@@ -99,9 +100,9 @@ public class EditCommand extends Command {
         TelegramHandle updatedTelegramHandle =
                 editPersonDescriptor.getTelegramHandle().orElse(personToEdit.getTelegramHandle());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-
+        TaskList updatedTaskList = personToEdit.getTaskList();
         return new Person(updatedStudentId, updatedName, updatedModuleCode,
-                updatedPhone, updatedTelegramHandle, updatedEmail);
+                updatedPhone, updatedTelegramHandle, updatedEmail, updatedTaskList);
     }
 
     @Override

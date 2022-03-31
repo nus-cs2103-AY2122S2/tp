@@ -94,6 +94,11 @@ public class ManualMessages {
             + "Format : undo \n"
             + "Example: undo";
 
+    public static final String MANUAL_MESSAGE_SORT_COMMAND = "Sorts the students in TAPA by the number of undone "
+            + "tasks in descending order. \n"
+            + "Format: sort \n"
+            + "Example: sort";
+
     public static final String MANUAL_MESSAGE_ALL_COMMANDS = "Here are all the commands: \n"
             + "1. add \n"
             + "2. delete \n"
@@ -110,9 +115,10 @@ public class ManualMessages {
             + "13. deleteTask \n"
             + "14. history \n"
             + "15. undo \n"
-            + "16. manual \n"
-            + "17. help \n"
-            + "18. exit \n"
+            + "16. sort \n"
+            + "17. manual \n"
+            + "18. help \n"
+            + "19. exit \n"
             + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";

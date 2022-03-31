@@ -250,6 +250,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortFilteredPersonListByTaskLeft() {
+        addressBook.sortPersonListByTaskLeft();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
