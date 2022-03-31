@@ -24,7 +24,11 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.property.*;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
+import seedu.address.model.property.NullPropertyToBuy;
+import seedu.address.model.property.PriceRange;
+import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,7 +102,7 @@ public class EditBuyerCommand extends Command {
      * edited with {@code editBuyerDescriptor}.
      */
     private static Buyer createEditedBuyer(Buyer buyerToEdit, EditBuyerDescriptor editBuyerDescriptor)
-            throws CommandException{
+            throws CommandException {
 
         assert buyerToEdit != null;
 

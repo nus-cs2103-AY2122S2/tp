@@ -136,7 +136,7 @@ public class EditSellerCommand extends Command {
         Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
         Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
         Appointment updatedAppointment = editSellerDescriptor.getAppointment().orElse(sellerToEdit.getAppointment());
-        
+
         return new Seller(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToSell);
     }
 
