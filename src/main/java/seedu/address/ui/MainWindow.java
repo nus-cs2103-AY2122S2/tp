@@ -266,10 +266,11 @@ public class MainWindow extends UiPart<Stage> {
         return focusListPanel;
     }
 
+
     /**
      * Methods where we need to execute the command to get the Index of the Candidate to refresh the panel
      */
-      public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
+    public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
         CommandResult commandResult = logic.execute(commandText);
 
         if (focusListPanel.getCandidate().looseEqual(logic
@@ -285,7 +286,8 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
         return commandResult;
     }
-  
+
+
     /**
      * Refreshes the FocusCard if all schedules are cleared so that the displayed Candidate has the latest information.
      */
