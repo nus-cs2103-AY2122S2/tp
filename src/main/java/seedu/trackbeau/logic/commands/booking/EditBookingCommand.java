@@ -22,6 +22,7 @@ import seedu.trackbeau.model.booking.BookingDateTime;
 import seedu.trackbeau.model.booking.Feedback;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
+import seedu.trackbeau.ui.Panel;
 
 
 /**
@@ -85,7 +86,7 @@ public class EditBookingCommand extends Command {
 
         model.setBooking(bookingToEdit, editedBooking);
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
-        return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, editedBooking), Panel.BOOKING_PANEL);
     }
 
     /**

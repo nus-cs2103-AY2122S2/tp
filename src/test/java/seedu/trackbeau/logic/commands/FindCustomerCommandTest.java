@@ -23,6 +23,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
 import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCustomerCommand}.
@@ -70,7 +71,7 @@ public class FindCustomerCommandTest {
         CustomerSearchContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
         assertEquals(Collections.emptyList(), model.getFilteredCustomerList());
     }
 
@@ -80,7 +81,7 @@ public class FindCustomerCommandTest {
         CustomerSearchContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCustomerList());
     }
 

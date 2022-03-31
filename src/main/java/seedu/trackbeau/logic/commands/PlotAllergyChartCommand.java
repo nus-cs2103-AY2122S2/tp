@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Plots a Allergy Chart that shows the most common allergies amongst customers.
@@ -18,6 +19,6 @@ public class PlotAllergyChartCommand extends Command {
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
                 false, true, false, true, false,
-            false, false, false);
+            false, false, Panel.NO_CHANGE);
     }
 }

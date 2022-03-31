@@ -10,6 +10,7 @@ import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.service.ServiceSearchContainsKeywordsPredicate;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Finds and lists all services in trackBeau whose name contains any of the argument keywords.
@@ -40,7 +41,8 @@ public class FindServiceCommand extends Command {
         requireNonNull(model);
         model.updateFilteredServiceList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SERVICES_LISTED_OVERVIEW, model.getFilteredServiceList().size()));
+                String.format(Messages.MESSAGE_SERVICES_LISTED_OVERVIEW, model.getFilteredServiceList().size()),
+                Panel.SERVICE_PANEL);
     }
 
     @Override

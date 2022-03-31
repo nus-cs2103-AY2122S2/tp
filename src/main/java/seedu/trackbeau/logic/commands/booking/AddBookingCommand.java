@@ -19,6 +19,7 @@ import seedu.trackbeau.model.booking.BookingDateTime;
 import seedu.trackbeau.model.booking.Feedback;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
+import seedu.trackbeau.ui.Panel;
 
 
 /**
@@ -84,7 +85,7 @@ public class AddBookingCommand extends Command {
         }
 
         model.addBooking(booking);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, booking));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, booking), Panel.BOOKING_PANEL);
     }
 
     @Override

@@ -22,6 +22,7 @@ import seedu.trackbeau.model.service.Duration;
 import seedu.trackbeau.model.service.Price;
 import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.model.service.ServiceName;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Edits the details of an existing service in trackBeau.
@@ -89,7 +90,7 @@ public class EditServiceCommand extends Command {
         model.setService(serviceToEdit, editedService);
         model.updateServiceList(PREDICATE_SHOW_ALL_SERVICES);
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
-        return new CommandResult(String.format(MESSAGE_EDIT_SERVICE_SUCCESS, editedService));
+        return new CommandResult(String.format(MESSAGE_EDIT_SERVICE_SUCCESS, editedService), Panel.SERVICE_PANEL);
     }
 
     /**

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * View schedule for the week of selected date.
@@ -39,7 +40,7 @@ public class ScheduleCommand extends Command {
         model.setSelectedDate(selectedDate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, selectedDate.format(formatter)),
             false, false, false, false, false,
-            false, false, false, true);
+            false, false, false, Panel.SCHEDULE_PANEL);
     }
 
     @Override
