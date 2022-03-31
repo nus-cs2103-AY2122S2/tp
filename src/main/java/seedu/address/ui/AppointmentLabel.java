@@ -2,9 +2,6 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import javafx.scene.control.Label;
 import seedu.address.model.pet.Appointment;
 
