@@ -50,8 +50,7 @@ public class GenericEnrolCommandParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage), pe);
+            throw new ParseException(String.format("%s\n%s", pe.getMessage(), usage), pe);
         }
     }
 }

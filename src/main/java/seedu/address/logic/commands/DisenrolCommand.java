@@ -18,9 +18,9 @@ import seedu.address.model.tamodule.TaModule;
  * Disenrols given student(s) from the specified class group and automatically from the module.
  */
 public class DisenrolCommand extends Command {
-    public static final String NONEXISTENT_STUDENT_CG = "Student %s(%s) does not belong in given class group.";
+    public static final String NONEXISTENT_STUDENT_CG = "Student(s) not in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
-    public static final String MESSAGE_DISENROL_SUCCESS = "Successfully disenrolled given students from %s(%s).";
+    public static final String MESSAGE_DISENROL_SUCCESS = "Successfully disenrolled the other students from %s(%s)";
     public static final String COMMAND_WORD = "disenrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Disenrols the specified students from "
             + "the given class group.\n"
@@ -53,6 +53,7 @@ public class DisenrolCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        String result = "";
 
         List<ClassGroup> cgList = model.getUnfilteredClassGroupList();
 
@@ -64,12 +65,14 @@ public class DisenrolCommand extends Command {
         TaModule moduleToEdit = cgToEdit.getModule();
         ClassGroup newCg = new ClassGroup(cgToEdit);
         TaModule newModule = new TaModule(moduleToEdit);
+        int notEnrolled = 0;
 
         for (Student s : students) {
             if (newCg.hasStudent(s)) {
                 newCg.removeStudent(s);
             } else {
-                throw new CommandException(String.format(NONEXISTENT_STUDENT_CG, s.getName(), s.getStudentId()));
+                result += String.format("\t%s (%s)\n", s.getName(), s.getStudentId());
+                notEnrolled++;
             }
         }
 
@@ -83,8 +86,16 @@ public class DisenrolCommand extends Command {
             }
         }
 
+        if (!result.isEmpty()) {
+            result = String.format(NONEXISTENT_STUDENT_CG, result);
+        }
+
+        if (notEnrolled != students.size()) {
+            result += String.format(MESSAGE_DISENROL_SUCCESS,
+                    newCg.getClassGroupId(), newCg.getClassGroupType());
+        }
+
         model.setEntity(moduleToEdit, newModule);
-        return new CommandResult(String.format(MESSAGE_DISENROL_SUCCESS,
-                newCg.getClassGroupId(), newCg.getClassGroupType()));
+        return new CommandResult(result);
     }
 }

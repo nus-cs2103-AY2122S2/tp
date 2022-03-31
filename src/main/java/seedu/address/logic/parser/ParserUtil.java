@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PARAM_ALL_STUDENTS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
@@ -47,8 +46,7 @@ import seedu.address.model.tamodule.TaModule;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_STUDENT_ID_INVALID = "One of the student ID is invalid!";
-    public static final String MESSAGE_STUDENT_INDEXES_INVALID = "One of the student indexes is invalid!";
+    public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid!";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -390,6 +388,9 @@ public class ParserUtil {
         }
 
         String[] splitS = s.toUpperCase().split(",");
+        if (splitS[0].isEmpty()) {
+            throw new ParseException(MESSAGE_STUDENT_INVALID);
+        }
         switch(splitS[0].charAt(0)) {
         case 'E':
             List<StudentId> studentIds = new ArrayList<>();
@@ -400,14 +401,13 @@ public class ParserUtil {
                         studentIds.add(sid);
                     }
                 } catch (ParseException pe) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ""), pe);
+                    throw new ParseException(MESSAGE_STUDENT_INVALID, pe);
                 }
             }
             try {
                 return model.getStudentListByStudentIds(studentIds);
             } catch (StudentNotFoundException e) {
-                throw new ParseException(MESSAGE_STUDENT_ID_INVALID);
+                throw new ParseException(MESSAGE_STUDENT_INVALID);
             }
         default:
             List<Index> studentIndexes = new ArrayList<>();
@@ -418,14 +418,13 @@ public class ParserUtil {
                         studentIndexes.add(index);
                     }
                 } catch (ParseException pe) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ""), pe);
+                    throw new ParseException(MESSAGE_STUDENT_INVALID, pe);
                 }
             }
             try {
                 return model.getStudentListByIndexes(studentIndexes);
             } catch (StudentNotFoundException e) {
-                throw new ParseException(MESSAGE_STUDENT_INDEXES_INVALID);
+                throw new ParseException(MESSAGE_STUDENT_INVALID);
             }
         }
     }

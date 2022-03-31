@@ -18,9 +18,10 @@ import seedu.address.model.tamodule.TaModule;
  * Enrols given student(s) into the specified class group and automatically into the module.
  */
 public class EnrolCommand extends Command {
-    public static final String STUDENT_EXISTS_CG = "Student %s(%s) is already in given class group.";
+
+    public static final String STUDENT_EXISTS_CG = "Student(s) exist in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %d does not exists.";
-    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled given students into %s(%s).";
+    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled the other students into %s(%s).";
     public static final String COMMAND_WORD = "enrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols the specified students to "
             + "the given class group.\n"
@@ -53,7 +54,7 @@ public class EnrolCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        String result = "";
         List<ClassGroup> cgList = model.getUnfilteredClassGroupList();
 
         if (classGroupIndex.getZeroBased() >= cgList.size()) {
@@ -64,7 +65,7 @@ public class EnrolCommand extends Command {
         TaModule moduleToEdit = cgToEdit.getModule();
         TaModule newModule = new TaModule(moduleToEdit);
         ClassGroup newCg = new ClassGroup(cgToEdit, newModule);
-
+        int notEnrolled = 0;
         for (Student s : students) {
             if (!newCg.hasStudent(s)) {
                 newCg.addStudent(s);
@@ -72,13 +73,21 @@ public class EnrolCommand extends Command {
                     newModule.addStudent(s);
                 }
             } else {
-                throw new CommandException(String.format(STUDENT_EXISTS_CG, s.getName(), s.getStudentId()));
+                result += String.format("\t%s (%s)\n", s.getName(), s.getStudentId());
+                notEnrolled++;
             }
         }
 
+        if (!result.isEmpty()) {
+            result = String.format(STUDENT_EXISTS_CG, result);
+        }
+
+        if (notEnrolled != students.size()) {
+            result += String.format(MESSAGE_ENROL_SUCCESS,
+                    newCg.getClassGroupId(), newCg.getClassGroupType());
+        }
         model.setEntity(cgToEdit, newCg);
         model.setEntity(moduleToEdit, newModule);
-        return new CommandResult(String.format(MESSAGE_ENROL_SUCCESS,
-                newCg.getClassGroupId(), newCg.getClassGroupType()));
+        return new CommandResult(result);
     }
 }
