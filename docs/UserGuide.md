@@ -11,17 +11,13 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 {:toc}
   * Quick Start
   * Features
-    * Adding a player/ team/ lineup/ schedule: add
-    * Deleting a player/ team/ lineup/ schedule: delete
-    * Filtering players by position: filter
-    * Marking the attendance of player: mark
-    * Unmarking the attendance of players: unmark
-    * Tagging players by their position: tag
-    * Viewing the summary: view
-    * Finding a lineup or player: find
+    * Getting help: help
+    * Adding a player/ lineup/ schedule: add
+    * Deleting a player/ lineup/ schedule: delete
     * Putting a player to a team/ lineup: put
-    * Updating a player/ team/ lineup/ schedule: update
-    * Changing the theme of the UI
+    * Viewing the summary: view
+    * Updating a player/ lineup/ schedule: update
+    * Changing the theme of the UI: them
     * Saving the data: save
     * Loading data from user-specified file: load
     * Clearing all data: clear
@@ -79,14 +75,13 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 </div>
 
-### Viewing help : `help`
+### Getting help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a player/ lineup/ schedule: `add`
 
@@ -156,65 +151,105 @@ Format: `put P/PLAYER L/LINEUP`
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five
 
+### Viewing player/schedule/lineup: `view`
 
-### Viewing the summary: `view`
+This function makes listing, searching filtering of player/schedule/lineup quick and easy.
+You can specify criteria to list out the current player and schedule list.
 
-Views the summarised information of lineup/ player/ schedule.
+**To view player:**<br>
 
-**To view a lineup:**<br>
-
-Format: `view L/[LINEUP]`
-* The summarised information of a lineup only include the name, the position of the player and the number of slots (out of 5) filled.
-* Displays the summarised information of the specified `LINEUP` in the specified ``.
-  - All the players in the specified `LINEUP` will be displayed.
-* If no `LINEUP` is provided, the summarised information of all lineups in the specified `` will be displayed.
-  - All the `LINEUP` in the specified team will be displayed.
-* The specified `LINEUP` and specified `` must be **valid** to be viewed.
-
-Examples:
-* `view L/Starting Five` Displays the summarised information of lineup `Start Five`
-* `view L/` Displays the summarised information of all lineups
-
-**To view a player:**<br>
-
-Format: `view P/[PLAYER]`
-* The summarised information of a player includes all its attributes.
-* Displays the summarised information of the specified `PLAYER`.
-  - Only the specified player will be displayed.
-* If no `PLAYER` is provided, the summarised information of all existing players in the system will be displayed.
+Format: `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/POSITIONS]`
+* Filters the existing players to display only the players matching the criteria specified.
+* Parameters `[NAMES_IN_PLAYERNAME]` and `[POSITIONS]` will only find players that contain 
+the specific word that is specified. <br> e.g. `view P/John` will not display players with the name
+"Johnson" in their name. However, it will display players with name such as "John Cena", "Stockton John" if 
+players with such name exists.
+* "OP" in the parameters `[OPWEIGHT]` and `[OPHEIGHT]` must be either `gte`, `lte`, `gt`, `lt`, `eq`. On the other hand,
+"WEIGHT" and "HEIGHT" must be integers. <br> e.g. `gte180`, `lt90` can be a potential `OPWEIGHT` or `OPHEIGHT`
+* Words in `NAMES_IN_PLAYERNAME` are case **insensitive** but words in `POSITIONS` are case **sensitive**.
 
 Examples:
-* `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.
-* `view P/` Displays all players in the system.
+* `view P/` Displays all the players
+* `view P/Kelvin Darent` Displays all the players that have "Kelvin" **or** "Darent" in their name
+* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is 
+greater than or equals to 80kg
+* `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
+is lesser than 213cm **and** weight equals to 100kg **and** plays the position of "SG" or "SF"
 
-**To view schedules:**<br>
+![view players](images/helpMessage.png)
 
-Format: `view S/[KEYWORDS]`
-* Displays the schedule containing `KEYWORDS`, cases ignored.
-* If no `KEYWORDS` is provided, the list of all active schedules which happen at future dates will be displayed.
+**To view lineup:**<br>
 
-Format: `view S/ a/all`
-* Displays all schedules added.
-* If no `all` is provided, error message will be displayed.
-
-Format: `view S/ a/archive`
-* Displays archived schedules only.
-* If no `archive` is provided, error message will be displayed.
+Format: `view L/[NAMES_IN_LINEUPNAME]`
+* Filters players who are in the lineup that corresponds to the criteria specified.
+* Parameters `[NAMES_IN_LINEUPNAME]` will only find players that are in the lineup which contains the lineup name that
+matches the specific word that is specified. <br> e.g. `view L/super` will not display players in the lineup
+with the lineup name of "superstars". However, it will display players in the lineup with the lineup name of "super" 
+or "super idol" provided that lineup with this lineup name exists and there are players in this lineup as well.
+* If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed.
+* Words in `NAMES_IN_LINEUPNAME` are case **insensitive**.
+* To view players that are **without** a lineup, the `N/` prefix must be specified.
 
 Examples:
-* `view i/1` Displays the information on `Lakaka`'s 1st schedule.
+* `view L/ N/` Displays all the players without a lineup
+* `view L/` Displays all the players that have at least a lineup
+* `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
+* `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
 
-### Filtering players by position: `filter`
+![view lineups](images/helpMessage.png)
 
-Filter all players with the specified tag(s).
+**To view schedule:**<br>
 
-Format: `filter [T/] t/TAG [t/TAGS]`
-* Display all the players with the specific tag(s) from a particular team.
-* If T/ is not specified, players with these tags from all teams will be displayed.
+Format: `view S/[NAMES_IN_SCHEDULENAME]`
+* Filters the existing schedules to display only the schedules matching the criteria specified.
+* Parameter `[DATE]` must be in dd/mm/yyyy
+* Parameters `[NAMES_IN_SCHEDULENAME]` will only find schedules that contain
+the specific word that is specified. <br> e.g. `view S/training` will not display schedules with the name
+"training" in the schedule name. However, it will display schedules with name such as "training", "always training" if
+schedules with such name exists.
+* Words in the parameter `[NAMES_IN_SCHEDULENAME]` are case **insensitive**.
+* If no `NAMES_IN_SCHEDULENAME` is provided, the list of all active schedules which happen at future dates will be displayed.
+* To display all the schedules which also includes schedules that happened in the past (i.e. archived schedule), the prefix `a/` together with
+`all` must be specified. <br>
+e.g `a/all`
+* To display all the schedules which are archived, the prefix `a/` together with `archive` must be specified.<br>
+e.g `a/archive`
+* The prefix `a/` can **only** follow with either `all` or `archive` is provided. Any other scenario, error message will be displayed.
+* To view all the schedules that has happened or is going to happen on a particular date, the `d/` prefix must be specified
+together with a `date` that is in `dd/mm/yyyy`. The parameter `[NAMES_IN_SCHEDULENAME]` must be empty.
+<br> e.g `d/22/02/2023`
+
+Examples:
+* `view S/` Displays all the schedules that are upcoming
+* `view S/drills` Displays all the upcoming schedules that have the name of "drills"
+* `view S/drills shooting` Displays all the upcoming schedules that have the name of "drills" **or** "shooting"
+* `view S/ a/all` Displays the all schedules which includes upcoming and archived schedules
+* `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules 
+* `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
+
+![view schedules](images/helpMessage.png)
+
+### Sort players by height/ jersey number/ weight: `sort`
+
+The `sort` command allows you to sort the displayed players based on the criteria specified.
+
+Format: `sort PREFIX/ORDER`
+* Sorts all the players based on the specified `PREFIX` and `ORDER`.
+* The parameter `PREFIX` must be specified only as `h/`, `j/` or `w/` for height, jersey number and weight respectively. 
+Other `PREFIX` will not be accepted.
+* The parameter `ORDER` must be specified only as `asc` or `desc` for ascending and
+descending respectively. Other `ORDER` will not be accepted.
+* Player names in alphabetical order will be used as tiebreaker when sorting based on height or weight.
 
 Example:
-* `filter T/Sandama t/PF` Displays all the players with the tag PF in the team Sandama.
+* `sort h/asc` Sort the displayed players in ascending order of height
+* `sort h/desc` Sort the displayed players in descending order of height
+* `sort j/asc` Sort the displayed players in ascending order of jersey number
+* `sort j/desc` Sort the displayed players in descending order of jersey number
+* `sort w/asc` Sort the displayed players in ascending order of weight
+* `sort w/desc` Sort the displayed players in descending order of weight
 
+![sort players](images/helpMessage.png)
 
 ### Edit a player/ lineup/ schedule information : `edit`
 
@@ -319,11 +354,11 @@ _Details coming soon ..._
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br>`add L/ n/LINEUP_NAME [P/PLAYER]…​`<br>e.g. `add L/ n/starting five  P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ n/NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ r/competition d/22/02/2022 0900` |
 | **Delete** | `xxx`<br>e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                         |
-| **View**   | `view L/[LINEUP]`<br>e.g. `view L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view S/ i/[INDEX]`<br>e.g. `view S/ i/1`                                                                                                                                                                                                                              |
+| **View**   | `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/POSITIONS]`<br>e.g. `view P/James h/lt213 w/eq100 t/SG SF`<br>`view L/[NAMES_IN_LINEUPNAME]`<br>e.g. `view L/Starting five`<br>`view S/[NAMES_IN_SCHEDULENAME]`<br>e.g. `view S/drills shooting`                                                                                                                |
 | **Put**    | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Mark**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Unmark** | `unmark i/INDEX_SCHEDULE P/PLAYER [P/PLAYER]`<br> e.g. `unmark i/1 P/John Doe P/James P/Durant`                                                                                                                                                                                                                                                                            |
-| **Filter** | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **sort**   | `sort PREFIX/ORDER` <br> e.g. `sort h/desc`                                                                                                                                                                                                                                                                                                                                |
 | **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit i/INDEX_SCHEDULE [n/DESCRIPTION] [d/DATETIME]`<br> e.g. `add S/ i/1 n/competition d/22/02/2022 0900`                                                                   |
 | **Find**   | `find P/PLAYER`<br>e.g. `find P/Wu Lala`<br>`find L/LINEUP`<br>e.g. `find L/Oo la la`                                                                                                                                                                                                                                                                                      |
 | **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                    |
