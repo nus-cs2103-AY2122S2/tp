@@ -113,7 +113,7 @@ Example:
   :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'add n/Alisson Becker p/12345678 e/alisson111@example.com a/VVD street, block 123, #01-01'](images/screenshots/addAlissonBecker.png) |
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
@@ -181,7 +181,7 @@ Example:
 * `edit 1 p/91234567 e/KL123@example.com`<br>
   Edits the phone number and email address of the 1st person to `91234567` and `KL123@example.com` respectively.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**
 Existing values will be overwritten and updated to the new input values!
@@ -209,7 +209,7 @@ Example:
   :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'tag 1 i/abc company m/CS2100 m/CS2105'](images/screenshots/tagInternshipModuleModule.png) |
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
@@ -244,7 +244,7 @@ Example:
 * `removetag 1 i/abc company m/CS2100 m/CS2030S`<br>
 Removes the internship company tag and the 2 modules tags from the 1st person in the currently shown contact list.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
@@ -283,7 +283,7 @@ Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find i/Shopee m/cs2040s cs2030s'](images/screenshots/findShopeeCS2040sCS2030sResult.png) |
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
@@ -321,13 +321,13 @@ Examples:
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/screenshots/find-sShopeeCS2040sCS2030s.png) |
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
 * `find -s n/ m/`<br>
 
-Not allowed as there is no input given after a prefix is used.
+Not allowed as there is no input given after a prefix is used.<br>
 
 * `find -s n/Hans n/Solo`<br>
 
@@ -380,7 +380,7 @@ Creates the Event and adds into NUSocials. (as shown below)
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'event 2 3 name/Movie marathon info/Harry Potter movies d/2022-08-15 t/14:00'](images/screenshots/eventMovieMarathon.png) |
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
@@ -444,7 +444,7 @@ Constraints:
 Example:
 * `find -e name/lunch part/Alex Yeoh` returns all events containing `lunch` in its name and all events involving Alex Yeoh<br>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:x: Invalid Examples:**<br>
 
@@ -477,7 +477,7 @@ NUSocials data are saved in the hard disk automatically after any command that c
 
 NUSocials data are saved as a JSON file `[JAR file location]/data/nusocials.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**
 If your changes to the data file makes its format invalid, NUSocials will discard all data and start with an empty data file at the next run.
