@@ -77,10 +77,13 @@ public class ParserUtil {
     public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
         String trimmedAppointment = appointment.trim();
-        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+        if (trimmedAppointment.equals("reset")) {
+            return new Appointment("");
+        } else if (!Appointment.isValidAppointment(trimmedAppointment)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        } else {
+            return new Appointment(trimmedAppointment);
         }
-        return new Appointment(trimmedAppointment);
     }
 
     /**
