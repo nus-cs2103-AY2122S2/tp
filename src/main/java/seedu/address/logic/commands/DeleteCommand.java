@@ -114,10 +114,6 @@ public class DeleteCommand extends Command {
                 entityToDelete.getEntityType());
     }
 
-    public boolean checkZeroIndex(Index targetIndex) {
-        return targetIndex.getZeroBased() == 1;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this
