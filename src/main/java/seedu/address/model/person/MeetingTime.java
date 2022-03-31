@@ -50,9 +50,9 @@ public class MeetingTime {
         if (this.equals(otherTime)) {
             return 0;
         } else if (this.value.isBefore(otherTime.value)) {
-            return 1;
-        } else if (this.value.isAfter(otherTime.value)) {
             return -1;
+        } else if (this.value.isAfter(otherTime.value)) {
+            return 1;
         } else {
             throw new ComparatorException();
         }
