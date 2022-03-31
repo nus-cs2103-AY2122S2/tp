@@ -19,17 +19,17 @@ public class ShowEventsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all events";
 
-    private final boolean showAllEvents;
+    private final boolean isShowAllEvents;
 
     public ShowEventsCommand(Boolean showAllEvents) {
-        this.showAllEvents = showAllEvents;
+        this.isShowAllEvents = showAllEvents;
     }
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (!showAllEvents) {
+        if (!isShowAllEvents) {
             model.updateFilteredEventList(event -> event.getDateTime().isAfterNow());
             return new CommandResult(MESSAGE_SUCCESS, false, false, true);
         }

@@ -54,12 +54,16 @@ public class DateTime implements Comparable<DateTime> {
         return this.value.isAfter(LocalDateTime.now());
     }
 
-    public boolean isBeforeNow() {
-        return this.value.isBefore(LocalDateTime.now());
+    public boolean hasDateBefore(LocalDate date) {
+        return value.toLocalDate().isBefore(date);
     }
 
-    public boolean hasSameDate(LocalDate date) {
-        return value.toLocalDate().equals(date);
+    public boolean hasDateAfter(LocalDate date) {
+        return value.toLocalDate().isAfter(date);
+    }
+
+    public boolean isBeforeNow() {
+        return this.value.isBefore(LocalDateTime.now());
     }
 
     public boolean hasSameDate(DateTime dateTime) {
