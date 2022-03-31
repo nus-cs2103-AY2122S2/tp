@@ -23,7 +23,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     };
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
+            "Expiry dates should have format such as 03 Apr 2022, 3 Apr 2022 or 2022-04-03";
 
     public static final String DAYS_CONSTRAINTS =
             "Number of days should be non-negative.";
