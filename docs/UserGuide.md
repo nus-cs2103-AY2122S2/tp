@@ -288,6 +288,10 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 **Format:** `clear`
 
 **Example:** `clear`
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**Caution:** Clear will delete the current list! Your list data will be lost!
+</div>
 
 ---
 
@@ -366,15 +370,15 @@ Your show list is in a mess! Do you need a way to organise your list?
 Sort can help reorder the list!!
 
 <div markdown="block" class="alert alert-danger">
-:exclamation:**Caution:**<br>
-*You cannot undo the sort once you have applied it!
+
+:exclamation:**Caution:** You cannot undo the sort once you have applied it!
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
 <div markdown="span" class="alert alert-warning">
 
-:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)**<br>
+:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)<br>
 * Use `n/` if you want to sort by name 
 * Use `s/` if you want to sort by status
 * Use `t/` if you want to sort by tag
@@ -445,6 +449,10 @@ Sort can help reorder the list!!
 
 <img src="images/Import.png">
 
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**Caution:** Import will override the current list if successful! Your previous list data will be lost!
+</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
