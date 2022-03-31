@@ -110,14 +110,14 @@ A client can have many fields & tags, including both optional and compulsory one
 
 A transaction also have compulsory and optional fields.
 
-| Field            | Prefix      | Constraints                                                                         | Compulsory         | Example                |
-|------------------|-------------|-------------------------------------------------------------------------------------|--------------------|------------------------|
-| Index            | ` `         | Must be an Integer greater than 0.                                                  | :heavy_check_mark: | `1`                    |
-| Amount           | `a/`        | Must be a number between 0 and 9999999.99 inclusive.                                | :heavy_check_mark: | `a/12.45`              |
-| Transaction Date | `td/`       | Must be in *YYY-MM-DD* format and a valid date.                                     | :heavy_check_mark: | `td/2020-11-11`        |
-| Due Date         | `dd/`       | Must be in *YYY-MM-DD* format and a valid date and not before the transaction date. |                    | `dd/2020-11-11`        |
-| Note             | `n/`        | No constraints.                                                                     |                    | `n/2 Box of ice cream` |
-| Status           | `--paid`    | This is a flag, no constraints.                                                     |                    | `--paid`               |       
+| Field            | Prefix      | Constraints                                                                                          | Compulsory         | Example                |
+|------------------|-------------|------------------------------------------------------------------------------------------------------|--------------------|------------------------|
+| Index            | ` `         | Must be an Integer greater than 0.                                                                   | :heavy_check_mark: | `1`                    |
+| Amount           | `a/`        | Must be a number between 0 and 9999999.99 inclusive. The number will be rounded to 2 decimal places. | :heavy_check_mark: | `a/12.45`              |
+| Transaction Date | `td/`       | Must be in *YYY-MM-DD* format and a valid date.                                                      | :heavy_check_mark: | `td/2020-11-11`        |
+| Due Date         | `dd/`       | Must be in *YYY-MM-DD* format and a valid date and not before the transaction date.                  |                    | `dd/2020-11-11`        |
+| Note             | `n/`        | No constraints.                                                                                      |                    | `n/2 Box of ice cream` |
+| Status           | `--paid`    | This is a flag, no constraints.                                                                      |                    | `--paid`               |       
 
 ### Command Summary
 
@@ -348,7 +348,7 @@ Format: `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE
 * Add a transaction to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
-* The `AMOUNT` specified **must be between** 0 and 9999999.99 inclusive.
+* The `AMOUNT` specified **must be between** 0 and 9999999.99 inclusive. The number will be rounded to two decimal places.
 * The `TRANSACTION_DATE` and `DUE_DATE` specified **must be a valid date** in `YYY-MM-DD` format.
 * The flag `--paid` will set the transaction status to `paid`
 
