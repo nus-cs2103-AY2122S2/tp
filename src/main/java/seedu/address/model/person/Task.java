@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Task {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Task name should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Task name should only contain alphanumeric characters and spaces, and it should not be blank.";
 
     /*
      * The first character of the name must not be a whitespace,

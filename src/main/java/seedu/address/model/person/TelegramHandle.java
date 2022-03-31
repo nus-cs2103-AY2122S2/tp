@@ -66,6 +66,9 @@ public class TelegramHandle {
 
     @Override
     public int hashCode() {
+        if (telegramHandle == null) {
+            return 0;
+        }
         return telegramHandle.hashCode();
     }
 

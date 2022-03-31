@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TELEGRAM_HANDLE + "johnny "
             + PREFIX_EMAIL + "e0123456@u.nus.edu ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New person added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
