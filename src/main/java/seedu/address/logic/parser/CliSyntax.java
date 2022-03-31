@@ -18,6 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_PLAYER = new Prefix("P/");
     public static final Prefix PREFIX_SCHEDULE = new Prefix("S/");
+    public static final Prefix PREFIX_WITHOUT_LINEUP = new Prefix("N/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_THEME = new Prefix("T/");
     public static final Prefix PREFIX_WEIGHT = new Prefix("w/");
