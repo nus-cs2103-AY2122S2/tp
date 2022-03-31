@@ -488,12 +488,8 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 | **Clear**        | `clear`                                                                                                                  |
 | **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
 | **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-<<<<<<< HEAD
-| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             |
-=======
-| **Sort**         | `sort [sna/] [snd/] [ssa/] [ssd/] [so/]`                                                                                 |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             | 
 | **Suggest**      | `suggest`                                                                                                                |
->>>>>>> master
 | **Import**       | `import`                                                                                                                 |
 | **Export**       | `export`                                                                                                                 |
 | **Exit**         | `exit`                                                                                                                   |
