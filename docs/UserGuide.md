@@ -5,17 +5,24 @@ title: User Guide
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
+## Motivation
 
+As a pet daycare owner, it takes a lot of effort to remember pets by their names,
+as well as remember their owner's names, phone numbers and addresses. In addition, some pets may have special dietary requirements and
+vet appointments that you have to take note of. With WoofAreYou, these things can be taken care
+of easily, so that you may focus on the things that **truly** matter: taking good care of the pets and ensuring their safety.
+--------------------------------------------------------------------------------------------------------------------
 # WoofAreYou
 
-WoofAreYou is a desktop application for pet daycare owners to handle the administrative information of their clients. 
-WoofAreYou is faster than any traditional platform such as Microsoft Excel or Google Sheets when you want to consolidate
+WoofAreYou is a desktop application for pet daycare owners like you to handle the administrative information of your clients. 
+WoofAreYou is faster than many traditional platforms, such as Microsoft Excel or Google Sheets, when you want to consolidate
 all your clients' information. You can perform a variety of tasks by typing in a single command using CLI (Command Line
 Interface) syntax. Just tell WoofAreYou what you want to do, and it will get it done quickly and efficiently.
 
-Even if you are not familiar with CLI,  this user guide is written specifically to guide you through the
-process of using WoofAreYou. By the end of this user guide, you will definitely be able to execute our CLI commands with
-ease and achieve something similar to the screenshot below.
+Even if you are unfamiliar with CLI, fret not, for this user guide is written specifically to guide you through the
+process of using WoofAreYou step-by-step. By the end of this user guide, it is our hope that you will be able to harness the power of WoofAreYou to bring your pet daycare establishment to greater heights.
+
+Let's get started!
 
 <p align="center">
   <img src="images/forUserGuide/UpdatedSampleSS.png" alt="WoofForYou sample screenshot"/>
@@ -28,38 +35,31 @@ ease and achieve something similar to the screenshot below.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
-   1. For Mac users: [Use this link](https://www.oracle.com/java/technologies/downloads/#java11-mac)
-   2. For Windows users: [Use this link](https://www.oracle.com/java/technologies/downloads/#java11-windows)
-   3. For Linux Users: [Use this link](https://www.oracle.com/java/technologies/downloads/#java11-linux)
+1. Ensure you have Java `11` or above installed on your computer.
+      1. For Mac users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-mac)
+      2. For Windows users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-windows)
+      3. For Linux Users, [click here](https://www.oracle.com/java/technologies/downloads/#java11-linux)
 
-2. Download the latest `WoofAreYou.jar` from [here](https://github.com/AY2122S2-CS2103T-T13-1/tp/releases/tag/v1.3.trial).
+2. Download the latest `WoofAreYou.jar` [here](https://github.com/AY2122S2-CS2103T-T13-1/tp/releases/tag/v1.3.trial).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy `WoofAreYou.jar` to the folder you want to use as the _home folder_ for WoofAreYou.
 
-4. Double-click the file to start the app.
+4. Double-click the file to start the app. WoofAreYou should appear in a few seconds.
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`** : Adds a pet named `Peepee` to the tracker.
+   * **`add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`** : Adds a pet named `Woofie` to WoofAreYou.
 
-   * **`delete 3`** : Deletes the 3rd pet shown in list.
+   * **`delete 3`** : Deletes the 3rd pet shown in the current list of pets.
 
-   * **`find Woofie`** : Returns a list of pets with similar name as keywords and their corresponding information.
+   * **`find Woofie`** : Searches WoofAreYou for pets with the keyword `Woofie` in their name and displays their information.
 
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-## Motivation
-
-As a pet daycare owner, it takes a lot of effort to match pets to their names,
-remember their owner's names, phone numbers and addresses. Not to mention, some pets have special dietary requirements and
-vet appointments that you have to take note off. With WoofAreYou, these things can be taken care
-of easily, and you can do exactly what you are good at: taking good care of them and ensuring their safety.
-
 ## Features
 
 This section will elaborate on the features WoofAreYou has and is
@@ -95,7 +95,7 @@ This subsection covers the basic processes that you will encounter when adding a
 
 ### Add a pet: `add`
 
-When you have a new pet in the daycare, you will need to add a pet to the pet list.
+When you receive a new pet in the daycare, you may wish to add them to WoofAreYou.
 
 Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]...`
 * Each particular field is compulsory except for `BREED`.
@@ -113,18 +113,18 @@ Examples:
 
 ### Edit a pet : `edit`
 
-When you key in some particular(s) wrongly, you can edit an existing pet in the pet list.
+When certain details of pets require updating, you can edit such details on WoofAreYou.
 
 Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/BREED]...`
 * Edits the pet at the specified `INDEX`. The index refers to the index number shown in the displayed pet list. The index **must be a positive integer** 1, 2, 3, …​.
-* All the fields are optional but at least one of the fields must be provided.
+* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about editing `[t/BREED]`:**<br>
 
 * When editing `[t/BREED]`, the existing breed(s) of the pet will be removed.
-* Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's 'Bulldog' breed will be replaced
+* Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
 by "German Sheppard" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
 </div>
@@ -134,8 +134,9 @@ Examples:
 
 ### Mark a pet as present: `present`
 
-When a pet is arriving for daycare on a certain day, you will need to mark a pet as present on that day. Sometimes the
-pet will require school bus pick-up and drop-off, if you provide those services.
+When a pet is arriving for daycare on a certain day, you will need to mark a pet as present on that day.
+
+In addition, if your daycare offers transport services to your clients, you may also indicate the pick-up and drop-off times of such arrangements.
 
 Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 
@@ -143,10 +144,13 @@ Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Date **must follow the specified format**.
-* Time for pick-up and drop-off are optional but **must also follow the specified format**.
+* Times for pick-up and drop-off are optional but **must also follow the specified format**.
+* Pick-up and drop-off times are either specified **together** as a pair, or **not at all**.
+* Pick-up time must be **before** the drop-off time.
 
 Examples:
-* As per previous example `present 1 date/25-03-2022 pu/08:00 do/19:00` indicates that Woofie is present for daycare on `25-03-2022` and requires to be picked up at `08:00` and dropped off at `19:00`
+* Following from the previous example, `present 1 date/25-03-2022 pu/08:00 do/19:00` indicates that Woofie is present for daycare on 25th March 2022 and requires to be picked up at 8:00am and dropped off at 7:00pm.
+* On the other hand, `present 1 date/25-03-2022` indicates that Woofie is present for daycare on 25th March 2022, with no transport arrangements planned.
 
 <p align="center">
   <img src="images/forUserGuide/UpdatedAttenance.png" alt="After adding attendance sample screenshot"/>
@@ -154,19 +158,19 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: ProTip about the command:**<br>
+**:information_source: Pro-tip about the command:**<br>
 
 You may have observed that the attendance tag for the specific date has turned <span style="color:lime">green</span> for
-Woofie. This happens if the date you keyed in is within the past 7 days (inclusive of today)! Similarly, for the next command, you
+Woofie. This happens if the date you keyed in is within the past 7 days (inclusive of today). Similarly, for the next command, you
 will observe that the attendance tag has turned <span style="color:red">red</span> to indicate that the pet is absent.
 
-This can serve as a visual cue for you if you need to recall which pet came in to daycare in the past week.
+This can serve as a visual cue for you if you need to quickly recall, at a glance, which pet attended daycare in the past week.
 
 </div>
 
 ### Mark a pet as absent: `absent`
 
-On other days that the pet is not coming for daycare, you may want to mark a pet as absent.
+On days that a pet is not attending daycare, you may want to mark them as absent.
 
 Format: `absent INDEX date/dd-MM-yyyy`
 
@@ -176,11 +180,11 @@ Format: `absent INDEX date/dd-MM-yyyy`
 * Date **must follow the specified format**.
 
 Examples:
-* `absent 1 date/24-03-2022` indicates that pet 1 is absent for daycare on `24-03-2022`.
+* `absent 1 date/25-03-2022` indicates that the first pet in the current list is absent for daycare on 25th March 2022.
 
 ### Delete a pet: `delete`
 
-When the pet no longer needs daycare services, you may want to delete the specified pet from the pet list.
+When a pet no longer requires daycare services, you may want to remove them from WoofAreYou.
 
 Format: `delete INDEX`
 
@@ -197,7 +201,12 @@ When you no longer need the information on any of the pets, you can clear all en
 
 Format: `clear`
 
-* This command is irreversible and clears all the data you have on all the pets in the list.
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: WARNING** <br>
+This command is **irreversible** and clears **all the data** that you have in WoofAreYou.
+
+</div>
 
 ### Exiting the program : `exit`
 
@@ -207,12 +216,12 @@ Format: `exit`
 
 ## _Optional Requirements_
 
-This subsection covers the features that you may encounter when having a pet that requires more attention.
+This subsection covers the features that you may encounter when taking care of a pet that requires more attention.
 
 ### Add pets' dietary requirements: `diet` ###
 
-When some pets have health issues, owners will give instructions on what their pet can or cannot eat. You will want to
-put a diet remark on the pet to take note.
+Your clients may provide you with instructions on what their pets can or cannot consume, in the event that their pets suffer 
+from health issues. You may wish to include a diet remark along with such pets in WoofAreYou to take note.
 
 Format: `diet INDEX d/REMARK`
 
@@ -230,16 +239,15 @@ Examples:
 
 ### Add / Clear pets' appointment details: `app` ###
 
-Sometimes, you will need to bring the pet out for its vet or grooming appointments. You will want to put a reminder on
-the pet to take note as well. With this feature you can **_Add Appointment_** and **_Clear Appointment_** when appropriate.
+In the event that your client tasks you with bringing their pets out for their vet or grooming appointments, you may wish 
+to note down the relevant details of such appointments, such as the date, time and location.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about this feature:**<br>
 
-* You can only store one appointment to a pet at any point of time.
-  * This is because pets often have varying appointment dates, and it is unlikely to know when the next appointment will be.
-* Once the appointment is over, you have to clear it if you want to put new appointments in the future.
+* You can only note down one appointment per pet at any point in time.
+* Once the appointment is over, you will have to clear it manually if you wish to note down a new appointments.
 
 </div>
 
@@ -247,18 +255,17 @@ the pet to take note as well. With this feature you can **_Add Appointment_** an
 
 Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 
-* Adds appointment for pet at `INDEX` on `dt/[dd-MM-yyyy HH:mm]` `at/[location]` .
+* Adds appointment for pet at `INDEX` on a specific date at a specific location.
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Date and time of appointment should be entered together with `dt/` prefix.
+* Date and time of the appointment should be entered after the `dt/` prefix.
 * Date and time should strictly follow `dd-MM-yyyy HH:mm` format.
-* Location of appointment should be entered with `at/` prefix.
+* Location of appointment should be entered after the `at/` prefix.
 * Whitespaces, special characters and alphanumeric characters are allowed for location.
-* If both `date/` and `at/` are not present, `app` will be deemed invalid.
+* Both `dt/` and `at/` are **mandatory** fields.
 
 Examples:
-* `app 1 dt/27-03-2022 09:30 at/ NUS Vet Clinic` will store the appointment details for Woofie as
-`Mar-27-2022 9:30 AM at NUS Vet Clinic`.
+* `app 1 dt/27-03-2022 09:30 at/ NUS Vet Clinic` will note down that Woofie has an appointment on 27 March 2022, 9:30 am at the NUS Vet Clinic.
 
 **Clear Appointment**
 
@@ -268,28 +275,55 @@ Format: `app INDEX clear`
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * `clear` is case-sensitive.
-* Whitespaces, special characters and alphanumeric characters are allowed for location.
-* If `clear` is not present, `app` will be deemed invalid.
 
 Examples:
-`app 1 clear` will clear the appointment details for Woofie and set it to be an empty field.
+* `app 1 clear` will clear the appointment details for Woofie.
 
 ## _Efficiency Enhancement_
 
-You may have noticed that a handful of commands require `INDEX` and it may be very troublesome to scroll through the
-whole pet list to find that one `INDEX` if your pet list is huge. Hence, this subsection covers the features that
-will make life easier when trying to implement the features above.
+You may have noticed that a handful of commands require `INDEX`, and that it is troublesome to scroll through WoofAreYou 
+to find that one pet's `INDEX` if you have many clients. Hence, this subsection covers the features that will make your
+life easier when using the features previously introduced.
+
+### Find pet details: `find`
+
+In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names, you can use this function to find pets with a particular name. 
+
+If there are multiple pets with the same name, all such pets will be displayed. 
+
+You can also find multiple pets by providing multiple pet names as keywords.
+
+Format: `find NAME_OF_PET...`
+* The name of the pet is case-insensitive e.g: `find woofie` will return Woofie as a match.
+* Only the names of pets are searched.
+* Search returns partial name matches e.g.: `find woo` will return Woofie as a match.
+
+Examples:
+* `find poofie woofie` will return a list of pets containing all pets named Poofie and Woofie.
+
+<p align="center">
+  <img src="images/forUserGuide/UpdatedFind.png" alt="After finding sample screenshot"/>
+</p>
 
 ### Sort pets: `sort`
 
-Firstly, you can sort the pet list by a few parameters. This command returns a sorted list of pets according to the
-parameter chosen. You can choose to either sort alphabetically by owner name or pet name. You can also sort chronologically
-by appointment date.
+You may also find sorting pets in WoofAreYou useful during your daily administration. 
+
+The command returns a sorted list of pets according to the parameter chosen. 
+
+You can choose to either sort pets alphabetically, 
+* By the pets' names
+* By the owners' names
+
+You can also sort pets chronologically, 
+* By their appointment dates
+* By their transport pick-up times
+* By their transport drop-off times
 
 Format: `sort SORT_BY`
-* The valid `SORT_BY` parameters are `name` , `owner` and `app`.
+* **One and only one** `SORT_BY` parameter is to be used with this command.
+* The valid `SORT_BY` parameters are `name` , `owner`, `app`, `pick up` and `drop off`.
 * The parameters are case-sensitive.
-* Only one `SORT_BY` parameter is to be used with this command. If none or more than one parameter is used, command will throw an error.
 
 Examples:
 * `sort name` will sort the pets alphabetically as shown below.
@@ -298,38 +332,24 @@ Examples:
   <img src="images/forUserGuide/UpdatedSort.png" alt="After sorting sample screenshot"/>
 </p>
 
-### Find pet details: `find`
-
-If sorting alone is not enough, and you know exactly which pet you are looking for then you can use this command to find
-pets with that name. If there are multiple pets with the same name, a pet list of all such pets
-will be displayed. You can also find using multiple pet names.
-
-Format: `find NAME_OF_PET [KEYWORDS]...`
-* The name of pet is case-insensitive e.g: `find Woofie` will match `find woofie`.
-* Only the name is searched.
-* Search returns partial name matches e.g.: `find woo` will return Woofie as a result.
-
-Examples:
-* `find poofie woofie` will return a pet list with these two pets in the list.
-
-<p align="center">
-  <img src="images/forUserGuide/UpdatedFind.png" alt="After finding sample screenshot"/>
-</p>
+* `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
+* `sort pick up` and `sort drop off` will sort the pets by their pick-up and drop-off times for transport arrangements **for today only**, listing the pets starting from the pet with the earliest time to the latest time.
 
 ### Filter pet list: `filter`
 
-If you just want to know  common information about some pets, you can filter the pet list by a specified field.
-You can filter by date, to find out which pets are present on a given date. You can filter by appointment to check which
-pets have appointment on a given date. You can filter by owner's name to find all pets with the same owner. You can also
-filter by tags to find all pets of with a common tag.
+If you just want to know common information about some pets, you can filter the pets in WoofAreYou by a specified field.
+* You can filter by date, to find out which pets are present on a given date. 
+* You can filter by appointment, to find out which pets have appointments on a given date. 
+* You can filter by owner's name, to find all pets with the same owner. 
+* You can also filter by tags, to find all pets of a common breed.
 
 Format: `filter f/KEYWORD`
 
-* Can only filter by date specified, owner's name and tags of pets (choose one out of three, else error will be shown)
+* **One and only one** filter parameter is to be used with this command.
 * Specified `f/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
-* `KEYWORD` if you use `byDate/` or `byApp/` has to be in `dd-MM-yyyy` format, or `today`.
-* `KEYWORD` if you use `byOwner/` can be any length.
-* `KEYWORD` if you use `byTags/` can be any length.
+* If you use `byDate/` or `byApp/`, `KEYWORD` has to be in `dd-MM-yyyy` format, or `today`.
+* If you use `byOwner/`, `KEYWORD` can be any length.
+* If you use `byTags/`, `KEYWORD` can be any length.
     * Can filter with a partial match in `Keyword`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
 
 Examples:
@@ -343,31 +363,36 @@ Examples:
 
 ### List all pets : `list`
 
-After using all of those commands, you may want to retrieve the initial pet list with all the pets. This feature just
-shows a list of all pets in pet list.
+This feature lists out all pets, helpful for when you wish to look through all pets in WoofAreYou.
 
-Format:`list`
+Format: `list`
 
 ### Undo changes : `undo`
 
 Mistakes happen when dealing with CLI. Fortunately, you can undo previous commands that you have keyed in.
 
 Format: `undo`
-* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` Commands.
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Note about undo**<br>
+* You will not be able to undo `clear`, `exit`, `find`, `help` and `list` commands.
+
+</div>
 
 Examples:
 * If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted.
 
 ### View help : `help`
 
-If you need additional help when using WoofAreYou, you can use the help command. It shows a message explaining how to access the help page.
+If you need additional help when using WoofAreYou, feel free to use the help command. It shows a message explaining how to access the help page.
 
 Format: `help`
 
 ## Command Summary
 
-The table below summarises all the commands and features discussed above. You can refer to this if you do not want to
-deal with the nitty-gritty details of each feature.
+The table below summarises all the commands and features discussed above. You can refer to this nifty table if you do not 
+wish to deal with the nitty-gritty details of each feature.
 
 | Action        | Format                                                                              | Example                                                                       | Function                                                                                                              |
 |---------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
