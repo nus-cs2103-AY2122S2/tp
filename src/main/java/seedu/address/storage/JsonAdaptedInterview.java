@@ -25,7 +25,7 @@ public class JsonAdaptedInterview {
     @JsonCreator
     public JsonAdaptedInterview(@JsonProperty("applicant") JsonAdaptedApplicant applicant,
             @JsonProperty("date") LocalDateTime date, @JsonProperty("position") JsonAdaptedPosition position,
-            @JsonProperty("status") String status) {
+            @JsonProperty("position") String status) {
         this.applicant = applicant;
         this.date = date;
         this.position = position;
