@@ -43,7 +43,7 @@ public class TypicalItems {
     private TypicalItems() {} // prevents instantiation
 
     public static List<Item> getTypicalItems() {
-        return new ArrayList<>(Arrays.asList(Q5_2022_03_01, Q5_2020_01_01, Q5_2200_01_01));
+        return new ArrayList<>(Arrays.asList(Q5_2020_01_01, Q5_2022_03_01, Q5_2200_01_01));
     }
 
     public static List<Item> getOnlyExpiredItems() {

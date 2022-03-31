@@ -24,7 +24,7 @@ public class DeleteItemCommand extends Command {
             + "' at most " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 1" + CompoundIndex.SEPARATOR + "1";
 
-    public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Item: %1$s";
+    public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted Item: %1$s";
 
     private final CompoundIndex targetIndex;
 
@@ -43,6 +43,13 @@ public class DeleteItemCommand extends Command {
         model.deleteItem(targetProduct, itemToDelete);
         model.saveIBookChanges();
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, itemToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof DeleteItemCommand // instanceof handles nulls
+            && targetIndex.equals(((DeleteItemCommand) other).targetIndex)); // state check
     }
 }

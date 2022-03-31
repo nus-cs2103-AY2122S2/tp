@@ -1,6 +1,7 @@
 package seedu.ibook.logic.commands.product;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESC_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.DESC_B;
@@ -30,7 +31,7 @@ import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 public class UpdateCommandTest {
 
-    private Model model = new ModelManager(getTypicalIBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalIBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -150,22 +151,22 @@ public class UpdateCommandTest {
         // same values -> returns true
         UpdateProductDescriptor copyDescriptor = new UpdateProductDescriptor(DESC_A);
         UpdateCommand commandWithSameValues = new UpdateCommand(INDEX_FIRST_PRODUCT, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new UpdateCommand(INDEX_SECOND_PRODUCT, DESC_A)));
+        assertNotEquals(standardCommand, new UpdateCommand(INDEX_SECOND_PRODUCT, DESC_A));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new UpdateCommand(INDEX_FIRST_PRODUCT, DESC_B)));
+        assertNotEquals(standardCommand, new UpdateCommand(INDEX_FIRST_PRODUCT, DESC_B));
     }
 
 }
