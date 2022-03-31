@@ -8,14 +8,9 @@ import java.util.Stack;
  */
 
 public class StackUndoRedo {
-
     private Stack<RedoableCommand> undoStack;
     private Stack<RedoableCommand> redoStack;
 
-    /**
-     * Pushes {@code command} onto the undo-stack if it is of type {@code UndoableCommand}. Clears the redo-stack
-     * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
-     */
     public StackUndoRedo() {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
@@ -25,24 +20,14 @@ public class StackUndoRedo {
      * Pushes {@code command} onto the undo-stack if it is of type {@code UndoableCommand}. Clears the redo-stack
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
-    public StackUndoRedo(StackUndoRedo otherUndoRedoStack) {
-        undoStack = otherUndoRedoStack.undoStack;
-        redoStack = otherUndoRedoStack.redoStack;
-    }
-
-    /**
-     * Pushes {@code command} onto the undo-stack if it is of type {@code UndoableCommand}. Clears the redo-stack
-     * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
-     */
     public void push(Command command) {
-        if (!(command instanceof RedoableCommand)) {
-            return;
-        }
-
         if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
             redoStack.clear();
         }
 
+        if (!(command instanceof RedoableCommand)) {
+            return;
+        }
 
         undoStack.add((RedoableCommand) command);
     }
@@ -51,8 +36,8 @@ public class StackUndoRedo {
      * Pops and returns the next {@code UndoableCommand} to be undone in the stack.
      */
     public RedoableCommand popUndo() {
-        RedoableCommand toUndo = undoStack.remove(0);
-        redoStack.add(toUndo);
+        RedoableCommand toUndo = undoStack.pop();
+        redoStack.push(toUndo);
         return toUndo;
     }
 
@@ -60,42 +45,40 @@ public class StackUndoRedo {
      * Pops and returns the next {@code UndoableCommand} to be redone in the stack.
      */
     public RedoableCommand popRedo() {
-        RedoableCommand toRedo = redoStack.remove(0);
-        undoStack.add(toRedo);
+        RedoableCommand toRedo = redoStack.pop();
+        undoStack.push(toRedo);
         return toRedo;
     }
 
     /**
-     * Returns true if can undo
+     * Returns true if there are more commands that can be undone.
      */
     public boolean canUndo() {
-        return undoStack.size() > 0;
+        return !undoStack.empty();
     }
 
     /**
-     * Returns true if can redo
+     * Returns true if there are more commands that can be redone.
      */
     public boolean canRedo() {
-        return redoStack.size() > 0;
+        return !redoStack.empty();
     }
 
-    /**
-     *
-     * @param other
-     * @return boolean whether the command are the same
-     */
     @Override
     public boolean equals(Object other) {
+        // short circuit if same object
         if (other == this) {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof StackUndoRedo)) {
             return false;
         }
 
         StackUndoRedo stack = (StackUndoRedo) other;
 
+        // state check
         return undoStack.equals(stack.undoStack)
                 && redoStack.equals(stack.redoStack);
     }

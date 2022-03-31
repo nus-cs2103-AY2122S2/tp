@@ -26,7 +26,7 @@ public class RedoCommandTest {
         RedoCommand redoCommand = new RedoCommand();
 
         //execute undo command, expects a command failure
-        assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_USAGE_FAILURE);
+        assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_FAILURE);
 
     }
 
@@ -42,14 +42,14 @@ public class RedoCommandTest {
 
         //Execute a command
         RedoableCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        CommandResult commandResult = deleteCommand.execute(model, undoRedoStack);
+        CommandResult commandResult = deleteCommand.execute(model);
         deleteCommand.saveSuccessMessage(commandResult.getFeedbackToUser());
         undoRedoStack.push(deleteCommand);
         undoRedoStack.popUndo();
 
 
         assertCommandSuccess(new RedoCommand(), model, undoRedoStack,
-                String.format(RedoCommand.MESSAGE_USAGE_SUCCESS, commandResult.getFeedbackToUser()), expectedModel);
+                String.format(RedoCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser()), expectedModel);
 
     }
 

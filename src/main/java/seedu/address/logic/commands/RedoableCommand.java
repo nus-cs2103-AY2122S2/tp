@@ -12,76 +12,56 @@ import seedu.address.model.ReadOnlyAddressBook;
  * This class enables command to be able to undo / redo
  */
 public abstract class RedoableCommand extends Command {
-    private ReadOnlyAddressBook previousPersonBook;
 
-    private String message = "";
+    private ReadOnlyAddressBook previousAddressBook;
+    private String saveSuccessMessage = "";
 
-    protected abstract CommandResult executeUndoableCommand(Model model,
-                                                            StackUndoRedo undoRedoStack) throws CommandException;
+    protected abstract CommandResult executeUndoableCommand(Model model) throws CommandException;
 
     /**
-     * Save the snapshot of the address book
-     * @param model
+     * Stores the current state of {@code model#addressBook}.
      */
     private void saveAddressBookSnapshot(Model model) {
         requireNonNull(model);
-        this.previousPersonBook = new AddressBook(model.getAddressBook());
+        this.previousAddressBook = new AddressBook(model.getAddressBook());
     }
 
-
     /**
-     *
-     * @param command
-     * Redo the command
-     */
-    protected final void redo(Model model) {
-        requireNonNull(model);
-        undo(model);
-    }
-
-
-    /**
-     * Undo the command.
+     * Reverts the AddressBook to the state before this command
+     * was executed and updates the filtered person list to
+     * show all persons.
      */
     protected final void undo(Model model) {
-        requireAllNonNull(model, previousPersonBook);
+        requireAllNonNull(model, this.previousAddressBook);
 
-        model.setAddressBook(previousPersonBook);
+        model.setAddressBook(this.previousAddressBook);
 
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
-
     /**
-     * Saves state of model.
+     * Executes the command and updates the filtered person
+     * list to show all persons.
      */
-    public void save(Model model) {
-        saveAddressBookSnapshot(model);
+    protected final void redo(Model model) {
+        requireNonNull(model);
+        try {
+            executeUndoableCommand(model);
+        } catch (CommandException ce) {
+            throw new AssertionError("The command has been successfully executed previously; "
+                    + "it should not fail now");
+        }
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    /**
-     * Print successful message
-     * @param feedbackToUser
-     */
-    public void saveSuccessMessage(String feedbackToUser) {
-        this.message = feedbackToUser;
-    }
-
-    /**
-     * Get successful message
-     * @return
-     */
-    public String getSuccessMessage() {
-        return this.message;
+    public void saveSuccessMessage(String message){
+        this.saveSuccessMessage = message;
     }
 
     @Override
-    public CommandResult execute(Model model,
-                                 StackUndoRedo undoRedoStack) throws CommandException {
-
+    public final CommandResult execute(Model model) throws CommandException {
         saveAddressBookSnapshot(model);
-
-        return executeUndoableCommand(model, undoRedoStack);
+        return executeUndoableCommand(model);
     }
 
 }

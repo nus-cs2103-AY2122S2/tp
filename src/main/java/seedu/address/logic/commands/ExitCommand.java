@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model,
-                                 StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
+
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, false, false, true, false);
     }
 }

@@ -16,8 +16,8 @@ public class ClearCommand extends RedoableCommand {
 
 
     @Override
-    public CommandResult executeUndoableCommand(Model model,
-                                                StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);

@@ -51,8 +51,8 @@ public class SortCommand extends RedoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand(Model model,
-                                                StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
         model.sortPerson(personComparator);
         return new CommandResult(String.format(MESSAGE_SUCCESS, successField));

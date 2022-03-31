@@ -16,8 +16,8 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     @Override
-    public CommandResult execute(Model model,
-                                 StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
+
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, false, false);
     }
 }

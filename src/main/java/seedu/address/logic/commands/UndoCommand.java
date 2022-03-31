@@ -3,12 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.UserPrefs;
-
 
 /**
  * Undo the previous {@code UndoableCommand}.
@@ -16,28 +11,23 @@ import seedu.address.model.UserPrefs;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_USAGE_SUCCESS = "Successfully Undo";
-    public static final String MESSAGE_USAGE_FAILURE = "There is no more command left in stack to undo";
-
+    public static final String MESSAGE_USAGE_SUCCESS = "Undo success!";
+    public static final String MESSAGE_USAGE_FAILURE = "No more commands to undo!";
 
     @Override
-    public CommandResult execute(Model model ,
-                                 StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model, undoRedoStack);
 
-        //Check if whether there is a command exist in the stack
-        if (undoRedoStack.canUndo()) {
-            ReadOnlyAddressBook previousAddressBook = new AddressBook(model.getAddressBook());
-            Model prevModel = new ModelManager(previousAddressBook, new UserPrefs());
-
-            RedoableCommand undoCommand = undoRedoStack.popUndo();
-            undoCommand.undo(model);
-
-            undoCommand.save(prevModel);
-            return new CommandResult(String.format(MESSAGE_USAGE_SUCCESS, undoCommand.getSuccessMessage()));
+        if (!undoRedoStack.canUndo()) {
+            throw new CommandException(MESSAGE_USAGE_FAILURE);
         }
 
-        throw new CommandException(MESSAGE_USAGE_FAILURE);
+        undoRedoStack.popUndo().undo(model);
+        return new CommandResult(MESSAGE_USAGE_SUCCESS);
     }
 
+    @Override
+    public void setData(StackUndoRedo undoRedoStack) {
+        this.undoRedoStack = undoRedoStack;
+    }
 }

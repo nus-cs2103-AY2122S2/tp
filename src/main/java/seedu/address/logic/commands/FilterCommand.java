@@ -28,8 +28,8 @@ public class FilterCommand extends RedoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand(Model model,
-                                                StackUndoRedo undoRedoStack) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
