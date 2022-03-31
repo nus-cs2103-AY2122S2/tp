@@ -32,7 +32,6 @@ public class AmountTest {
 
         // invalid argument
         assertFalse(Amount.isValid("-1"));
-        assertFalse(Amount.isValid("0"));
         assertFalse(Amount.isValid(""));
         assertFalse(Amount.isValid("abcd"));
         assertFalse(Amount.isValid("2.33e"));
@@ -47,21 +46,17 @@ public class AmountTest {
         assertTrue(Amount.isValid("45"));
         assertTrue(Amount.isValid("2.33"));
         assertTrue(Amount.isValid("2.33f"));
-        assertTrue(Amount.isValid("999999999999999999999999999999999999999999999"
-                + "999999999999999999999999999999999999999999999999999999999999999999999"
-                + "999999999999999999999999999999999999999999999999999999999999999999999"
-                + "9999999999999999999999999999999999999999999999999999999999999999999999"
-                + "9999999999999999999999999999999999999999999999999999999999999999999999"
-                + "99999999999999999999999999999999.999"));
+        assertTrue(Amount.isValid("9999999.990"));
         assertTrue(Amount.isValid("0.00123"));
+        assertTrue(Amount.isValid("0"));
         assertTrue(Amount.isValid("2."));
     }
 
     @Test
     public void toStringAmount() {
         assertEquals(FIELD_NAME + ": 123.0", new Amount("123").toString());
-        assertEquals(FIELD_NAME + ": 0.123", new Amount("000.123").toString());
+        assertEquals(FIELD_NAME + ": 0.12", new Amount("000.123").toString());
         assertEquals(FIELD_NAME + ": 1.0", new Amount("1.").toString());
-        assertEquals(FIELD_NAME + ": 0.123", new Amount("0.123f").toString());
+        assertEquals(FIELD_NAME + ": 0.12", new Amount("0.123f").toString());
     }
 }
