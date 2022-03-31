@@ -1,12 +1,10 @@
 package seedu.address.model.transaction;
 
-import static java.lang.Math.round;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.logic.parser.Prefix;
 
-import java.text.DecimalFormat;
 
 public class Amount extends TransactionField {
 
@@ -60,7 +58,7 @@ public class Amount extends TransactionField {
     public static boolean isValid(String value) {
         try {
             double number = Double.parseDouble(value);
-            return  number >= 0 && number <= MAXIMUM_INPUT;
+            return number >= 0 && number <= MAXIMUM_INPUT;
         } catch (Exception e) {
             return false;
         }
