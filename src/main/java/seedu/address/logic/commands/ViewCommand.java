@@ -128,8 +128,8 @@ public class ViewCommand extends Command {
                 sb.append(Integer.toString(i) + ". " + lineup.toString() + "\n");
                 i++;
             }
-            messageViewSuccess = sb.length() != 0 ? sb.toString() :
-                    "There is currently no lineups available. Use the \"add\" command to add new lineups.";
+            messageViewSuccess = sb.length() != 0 ? sb.toString()
+                    : "There is currently no lineups available. Use the \"add\" command to add new lineups.";
         }
     }
 

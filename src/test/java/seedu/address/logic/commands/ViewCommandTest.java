@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
@@ -20,16 +19,6 @@ import seedu.address.model.person.Person;
 
 public class ViewCommandTest {
     private Model model = new ModelManager();
-
-    @Test
-    public void execute_viewPerson_success() throws CommandException {
-        List<Predicate<Person>> list = new ArrayList<>();
-        list.add(PREDICATE_SHOW_ALL_PERSONS);
-        ViewCommand viewCommand = new ViewCommand(list, null, Collections.singletonList("P/"));
-        String res = viewCommand.execute(model).getFeedbackToUser();
-        String expectedMessage = "Listed all persons!";
-        assertEquals(res, expectedMessage);
-    }
 
     @Test
     public void execute_viewSchedule_success() throws CommandException {
