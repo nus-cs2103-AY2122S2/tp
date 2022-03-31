@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Person's Weight in the MedBook.
+ * Represents a patient's weight in MedBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidWeight(String)}
  */
 public class Weight {
 
-    public static final String MESSAGE_CONSTRAINTS = "Height can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Weight can take any values, and it should not be blank";
 
     /*
      * The first character of the Weight must not be a whitespace,
