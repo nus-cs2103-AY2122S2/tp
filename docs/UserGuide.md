@@ -480,8 +480,8 @@ Advanced users are welcome to update data directly by editing these data files.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run.
-So if you are afraid of losing all the data, please backup your data files somewhere else before attempting to edit the data file by yourself.
+If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run!
+So if you are afraid of losing all the data, please backup your data files somewhere else before attempting to edit the data file by yourself!
 </div>
 
 
@@ -547,7 +547,7 @@ And here are the examples of 2 sellers, one has a property and one does not have
 
 ### Some special format of the data
 #### name and phone
-- They cannot be empty string: `""` , otherwise it will be seen as invalid format and start with empty buyerbook
+- They cannot be an empty string: `""` ,  otherwise, it will be seen as invalid format and the buyerbook's data will become empty!
 - `phone` be digits string and must have more than 3 digits.
 #### appointment
 - The `appointment` field should be either `""` or `"Year-Month-Day-Hour-Minute"` format, no other format is acceptable. `""` is when the appoinment date is not specified yet
@@ -560,7 +560,7 @@ And here are the examples of 2 sellers, one has a property and one does not have
 - for the `housetype` under `house`, the housetype provided must be one of our [defined houseType](#house-type).
 Otherwise, all other value will be translated to `Unspecified` housetype!
 - Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
-- `pricerange` must be digit string, and `lower` value must be less than or equal to `upper`
+- `pricerange` must be a digit string, and `lower` value must be less than or equal to `upper`
 
 
 --------------------------------------------------------------------------------------------------------------------
