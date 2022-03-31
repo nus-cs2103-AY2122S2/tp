@@ -318,6 +318,7 @@ public class ModelManager implements Model {
         assert (csvOutputFile.exists());
     }
 
+    @Override
     public boolean isSameApplicantPosition(Applicant applicant, Position position) {
         return addressBook.isSameApplicantPosition(applicant, position);
     }
