@@ -121,12 +121,20 @@ public class UniqueReminderList implements Iterable<Reminder> {
         for (Company company : companyList) {
             ReadOnlyRoleList roleList = company.getRoleList();
             for (Role role : roleList.getRoleList()) {
-                if (role.getReminderDate().isWithinReminderWindow()) {
-                    Reminder reminder =
-                            new Reminder(company.getName(), role.getName(), role.getStatus(), role.getReminderDate());
-                    add(reminder);
-                }
+                addFromRole(company, role);
             }
+        }
+    }
+
+    /**
+     * Checks the validity of the role with respect to the reminder window and
+     * adds a new reminder generated from the given company and role.
+     */
+    public void addFromRole(Company company, Role role) {
+        if (role.getReminderDate().isWithinReminderWindow()) {
+            Reminder reminder = new Reminder(company.getName(),
+                    role.getName(), role.getStatus(), role.getReminderDate());
+            add(reminder);
         }
     }
 
