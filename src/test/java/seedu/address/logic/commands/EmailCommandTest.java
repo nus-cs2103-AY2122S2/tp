@@ -15,7 +15,8 @@ public class EmailCommandTest {
 
     @Test
     public void execute_email_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_EMAIL_MESSAGE, false, false, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_EMAIL_MESSAGE, false,
+                false, false, true, false);
         assertCommandSuccess(new EmailCommand(), model, expectedCommandResult, expectedModel);
     }
 

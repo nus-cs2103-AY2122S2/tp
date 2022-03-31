@@ -29,8 +29,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summarisePieChart, boolean showEmail,
-            boolean resizeWindow) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summarisePieChart,
+                         boolean showEmail, boolean resizeWindow) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.resizeWindow = resizeWindow;
         this.summarisePieChart = summarisePieChart;

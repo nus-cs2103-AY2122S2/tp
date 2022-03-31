@@ -94,18 +94,23 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true,
+                false, false, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                true, false, false, false).hashCode());
 
         // different summarise value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, true, false, false).hashCode());
 
         // different email value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, false, true, false).hashCode());
 
         //different resize value -> return different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false,
+                false, false, false, true).hashCode());
     }
 }
