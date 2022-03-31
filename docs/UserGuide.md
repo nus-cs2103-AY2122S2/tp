@@ -300,6 +300,7 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
 * `DATE_TIME` must not be earlier than the present date and time.
 * Interview duration is fixed at 30 minutes. Attempts to schedule an interview within the duration of another interview will
 result in an error. (e.g. Interview A starts at 10AM on a given day. Attempts to schedule an interview from 9:31AM up to 10:29AM is prohibited.)
+* Interviews must be scheduled within the office hours, defined as Monday to Friday, 8AM - 6PM (i.e. The last interview for the day allowed is at 5:30PM).
 
 Examples:
 * `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
