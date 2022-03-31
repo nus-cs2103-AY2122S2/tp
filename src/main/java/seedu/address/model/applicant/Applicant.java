@@ -187,7 +187,20 @@ public class Applicant {
             tagString.append(tag.tagName);
             tagString.append(" | ");
         }
-        return name.fullName + "," + phone.value + "," + email.value + "," + age.value + "," + address.value + ","
+        return name.fullName + "," + phone.value + "," + email.value + "," + age.value + ","
+                + escapeSpecialCharacters(address.value) + ","
                 + gender.value + "," + hiredStatus.toString() + "," + tagString;
+    }
+
+    /**
+     * Eliminates special characters from csv string
+     */
+    private String escapeSpecialCharacters(String data) {
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
     }
 }
