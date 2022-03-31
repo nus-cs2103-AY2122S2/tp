@@ -27,7 +27,7 @@ public class AppointmentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)"
             + "dt/[dd-MM-yyyy HH:mm] at/[location]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "date/04-03-2022 09:30 at/ NUS Vet Clinic\n"
+            + "dt/04-03-2022 09:30 at/ NUS Vet Clinic\n"
             + "To clear appointment: \n"
             + "Parameters: INDEX (must be a positive integer) clear"
             + "Example: " + COMMAND_WORD + " 1 clear";
