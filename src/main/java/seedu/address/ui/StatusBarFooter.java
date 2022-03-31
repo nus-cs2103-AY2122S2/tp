@@ -41,10 +41,10 @@ public class StatusBarFooter extends UiPart<Region> {
 
         if (currentPathString.equals(archivePathString)) {
             saveLocationStatus.setText(defaultPathString);
-            return defaultPathString;
+            return "archived book";
         } else if (currentPathString.equals(defaultPathString)) {
             saveLocationStatus.setText(archivePathString);
-            return archivePathString;
+            return "default book";
         }
 
         return "";
