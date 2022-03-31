@@ -9,8 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.util.List;
 import java.util.Optional;
@@ -101,7 +99,6 @@ public class EditCommand extends Command {
         }
 
         model.setCandidate(candidateToEdit, editedCandidate);
-        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
 
         for (int i = 0; i < interviewSchedule.size(); i++) {
             if (candidateToEdit.equals(interviewSchedule.get(i).getCandidate())) {
@@ -110,7 +107,6 @@ public class EditCommand extends Command {
                 model.updateInterviewCandidate(interviewToUpdate, updatedInterview);
             }
         }
-        model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate));
     }

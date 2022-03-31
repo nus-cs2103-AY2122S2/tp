@@ -17,14 +17,12 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all candidates by the field specified "
-            + "in ascending order (A-Z, 0-9) and displays them as a list with index numbers.\n"
-            + " The search can be conducted only on a specific field in candidates' description by specifying the"
-            + PREFIX_SORTKEY + " SORTKEY argument.\n"
-            + "Parameters: " + PREFIX_SORTKEY + "SORTKEY \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all currently displayed candidates "
+            + "by the field specified in ascending order (A-Z, 0-9).\n"
+            + "Parameters: " + PREFIX_SORTKEY + "ATTRIBUTE_FIELD \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name\n"
-            + "Allowable fields to be sorted by include: appstatus, course, "
-            + "intstatus, name, seniority, studentid.";
+            + "Note: Allowable fields for sorting include `appstatus`, `course`, "
+            + "`intstatus`, `name`, `seniority`, `studentid`.";
 
     private final Comparator<Candidate> sortComparator;
     private final String sortKey;
@@ -48,7 +46,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.updateSortedCandidateList(sortComparator);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CANDIDATES_LISTED_OVERVIEW, model.getFilteredCandidateList().size()));
+                String.format(Messages.MESSAGE_CANDIDATES_SORTED_OVERVIEW, model.getFilteredCandidateList().size()));
     }
 
     @Override

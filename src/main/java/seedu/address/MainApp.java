@@ -184,7 +184,8 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws CommandException {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TalentAssistant " + MainApp.VERSION);
+
         model.deletePastInterviewsForInterviewList(LocalDateTime.now());
         ui.start(primaryStage);
     }
