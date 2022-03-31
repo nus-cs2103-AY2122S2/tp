@@ -1,5 +1,7 @@
 package seedu.trackbeau.ui;
 
+import static seedu.trackbeau.logic.parser.booking.AddBookingCommandParser.EMPTY_FEEDBACK_TYPE;
+
 import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
@@ -40,6 +42,10 @@ public class BookingCard extends UiPart<Region> {
     private Label service;
     @FXML
     private Label startTime;
+    @FXML
+    private Label endTime;
+    @FXML
+    private Label feedback;
 
     /**
      * Creates a {@code BookingCard} with the given {@code Booking} and index to display.
@@ -49,9 +55,16 @@ public class BookingCard extends UiPart<Region> {
         this.booking = booking;
         id.setText(displayedIndex + ". ");
         name.setText(booking.getCustomerName().fullName);
-        phone.setText("P: " + booking.getCustomerPhone().value);
-        service.setText("Sev: " + booking.getServiceName().fullName);
-        startTime.setText(booking.getBookingDateTime().value.format(formatter));
+        phone.setText("Phone Number: " + booking.getCustomerPhone().value);
+        service.setText("Service: " + booking.getServiceName().fullName);
+        startTime.setText("Appointment Time: " + booking.getBookingDateTime().value.format(formatter));
+        endTime.setText("End Time: " + booking.getBookingEndTime().format(formatter));
+
+        if (!booking.getFeedback().feedback.equals(EMPTY_FEEDBACK_TYPE)) {
+            feedback.setText("Feedback: " + booking.getFeedback().feedback);
+        } else {
+            feedback.setManaged(false);
+        }
     }
 
     @Override

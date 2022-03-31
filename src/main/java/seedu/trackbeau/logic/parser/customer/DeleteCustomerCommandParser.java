@@ -1,8 +1,10 @@
-package seedu.trackbeau.logic.parser;
+package seedu.trackbeau.logic.parser.customer;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.trackbeau.logic.commands.customer.DeleteCustomerCommand;
+import seedu.trackbeau.logic.parser.Parser;
+import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 
 /**

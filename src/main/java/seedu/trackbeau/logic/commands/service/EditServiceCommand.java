@@ -64,7 +64,7 @@ public class EditServiceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Service> lastShownServiceList = model.getFilteredServicesList();
+        List<Service> lastShownServiceList = model.getFilteredServiceList();
 
         if (index.getZeroBased() >= lastShownServiceList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
@@ -82,7 +82,7 @@ public class EditServiceCommand extends Command {
             Booking booking = lastShownBookingsList.get(i);
             if (booking.getService().equals(serviceToEdit)) {
                 model.setBooking(booking, new Booking(booking.getCustomer(), editedService,
-                    booking.getBookingDateTime()));
+                    booking.getBookingDateTime(), booking.getFeedback()));
             }
         }
 

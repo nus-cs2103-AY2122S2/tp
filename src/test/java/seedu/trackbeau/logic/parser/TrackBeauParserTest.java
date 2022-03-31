@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 
@@ -28,7 +28,7 @@ import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.ListCustomersCommand;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.CustomerBuilder;
 import seedu.trackbeau.testutil.CustomerUtil;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
@@ -87,7 +87,7 @@ public class TrackBeauParserTest {
         prefixArr.set(0, keywords);
         FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
             FindCustomerCommand.COMMAND_WORD + " /n" + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr)), command);
+        assertEquals(new FindCustomerCommand(new CustomerSearchContainsKeywordsPredicate(prefixArr)), command);
     }
 
     @Test

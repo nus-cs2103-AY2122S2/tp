@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.parser;
+package seedu.trackbeau.logic.parser.customer;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -16,6 +16,10 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 import java.util.Set;
 
 import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
+import seedu.trackbeau.logic.parser.ArgumentMultimap;
+import seedu.trackbeau.logic.parser.ArgumentTokenizer;
+import seedu.trackbeau.logic.parser.Parser;
+import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
