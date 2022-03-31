@@ -165,7 +165,7 @@ TAssist is a **desktop app for managing students and their participation in less
     <tr>
         <td>SIMPLE_NAME</td>
         <td><code>sn/</code></td>
-        <td>It represents the simple name of the assessment.
+        <td>It represents the short form of the assessment. It is used to grade assessment, so that you do not need to type the full assessment name. If no simple name is provided, the assessment name will be used (with the spaces removed).
         </td>
     </tr>
     <tr>
