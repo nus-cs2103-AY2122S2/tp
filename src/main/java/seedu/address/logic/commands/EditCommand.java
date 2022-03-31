@@ -102,7 +102,6 @@ public class EditCommand extends Command {
         }
 
         try {
-
             batchUpdatePositiveToNegative(personToEdit, editedPerson, studentList, model);
         } catch (Exception ex) {
             logger.severe("Batch update failed: " + StringUtil.getDetails(ex));
