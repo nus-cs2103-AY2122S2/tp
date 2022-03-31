@@ -38,7 +38,7 @@ public class ManualCommandTest {
         assertCommandSuccess(new ManualCommand("deleteModule"), model,
                 expectedCommandResult, expectedModel);
     }
-    
+
     @Test
     public void execute_manualFind_success() {
         CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_FIND_COMMAND);
