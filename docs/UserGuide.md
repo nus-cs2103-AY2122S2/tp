@@ -156,7 +156,7 @@ Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
 * Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `as` prefix short for Application Status` should only be either `Pending`, `Accepted` or `Rejected`.
+* `as` prefix short for Application Status should only be either `Pending`, `Accepted` or `Rejected`.
 
 Examples:
 * `edit 1 n/Jane Doe yr/3 avail/1` Edits the name, year and availability of the 1st candidate to be Jane Doe, Year 3, Monday only respectively.
@@ -274,15 +274,14 @@ Examples:
 * `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
 * `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
 
-### Bringing a Candidate's Information to the Center Panel : `focus` [Work-In-Progress]
+### Bringing a Candidate's Information to the Center Panel : `focus`
 
 View more details about the Candidate in the middle panel.
 
 Format: `focus INDEX`
 
 * Additional details of the Candidate will be displayed on the center panel in the application.
-* To switch to another Candidate's information, user will just need to type the new command
-* and the new index of the candidate.
+* To switch to another Candidate's information, user will just need to type the new command and the new index of the candidate.
 
 ## Scheduling interviews
 
@@ -436,13 +435,13 @@ Commands in this section have been organised based on the expected scope of beha
 | **Focus**  | `focus INDEX`<br> e.g., `focus 1`                                                                                                                                                               |
 
 ### Scheduling interviews
-| Action                        | Format, Examples                                                                                       |
-|-------------------------------|--------------------------------------------------------------------------------------------------------|
-| **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
-| **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
-| **Delete interview**          | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                        |
-| **Clear all interviews**      | `schedule clear`                                                                                       |
-| **View scheduled interviews** | `view TIME_PERIOD` <br> e.g., `view all`, `view today`                                                 |
+| Action                        | Format, Examples                                                                                      |
+|-------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME`<br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
+| **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME`<br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
+| **Delete interview**          | `schedule delete SCHEDULE_INDEX`<br> e.g., `schedule delete 1`                                        |
+| **Clear all interviews**      | `schedule clear`                                                                                      |
+| **View scheduled interviews** | `view TIME_PERIOD`<br> e.g., `view all`, `view today`                                                 |
 
 ### Miscellaneous commands
 | Action    | Format, Examples |
