@@ -25,33 +25,7 @@ import seedu.address.model.team.Team;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME,
-                    PREFIX_TEAM, PREFIX_SKILL);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GITHUB_USERNAME, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        GithubUsername username = ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).get());
-        Set<Team> teamList = ParserUtil.parseTeams(argMultimap.getAllValues(PREFIX_TEAM));
-        SkillSet skillSet = ParserUtil.parseSkillSet(argMultimap.getAllValues(PREFIX_SKILL));
-
-        Person person = new Person(name, phone, email, username, teamList, skillSet, false);
-
-        return new AddCommand(person);
-    }
+    private final String separator = "\\s?,\\s?";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -59,6 +33,35 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * and returns an AddCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public AddCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME,
+                PREFIX_TEAM, PREFIX_SKILL);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GITHUB_USERNAME, PREFIX_PHONE, PREFIX_EMAIL)
+            || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        GithubUsername username = ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).get());
+        Set<Team> teamList = ParserUtil.parseTeamsWithRegex(argMultimap.getValue(PREFIX_TEAM), separator);
+        SkillSet skillSet =
+            new SkillSet(ParserUtil.parseSkillsWithRegex(argMultimap.getValue(PREFIX_SKILL), separator));
+
+        Person person = new Person(name, phone, email, username, teamList, skillSet, false);
+
+        return new AddCommand(person);
     }
 
 }

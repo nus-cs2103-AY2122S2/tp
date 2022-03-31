@@ -74,8 +74,8 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 * Items in square brackets are optional.<br>
     * e.g `n/NAME [t/TEAM]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-    * e.g. `[t/TEAM]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can have multiple values including 0, separated by a comma.<br>
+    * e.g. `[t/TEAM…]​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend, family` etc.
 
 * Parameters can be in any order.<br>
     * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -114,15 +114,15 @@ This section contains commands that can help you manage the details of your cont
 
 Adds a person to HackNet.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of teams (including 0)
+A person can have any number of teams or skills(including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur s/java_80`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur, friend  s/java_80`
 
 ### Editing any number of person(s): `edit`
 
