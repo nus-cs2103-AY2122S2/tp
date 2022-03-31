@@ -30,8 +30,9 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String REMARK_FIELD = INDEX + " r/REMARKS";
     private static final String SCHEDULE_INDEX = "SCHEDULE_INDEX";
     private static final String SCHEDULE_FIELD = "add candidate/" + INDEX + " at/dd-MM-yyyy HH:mm\n"
-            + "delete " + SCHEDULE_INDEX
-            + "\nedit " + SCHEDULE_INDEX + " at/dd-MM-yyyy HH:mm";
+            + "edit " + SCHEDULE_INDEX + " at/dd-MM-yyyy HH:mm"
+            + "\ndelete " + SCHEDULE_INDEX
+            + "\nclear";
     private static final String SORT_FIELD = "s/ATTRIBUTE_FIELD";
     private static final String VIEW_FIELD = "today | week | month | all";
 

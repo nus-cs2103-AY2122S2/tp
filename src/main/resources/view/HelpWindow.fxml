@@ -47,8 +47,8 @@
                 <Label fx:id="remarkField" styleClass="styleField"/>
             </HBox>
             <HBox styleClass="styleHBox">
-                <VBox minHeight="65" alignment="CENTER">
-                    <Label fx:id="scheduleCommand" styleClass="styleCommand" text="schedule" prefHeight="65"
+                <VBox minHeight="72" alignment="CENTER">
+                    <Label fx:id="scheduleCommand" styleClass="styleCommand" text="schedule" prefHeight="72"
                            prefWidth="70" alignment="CENTER"/>
                 </VBox>
                 <Label fx:id="scheduleField" styleClass="styleField"/>
