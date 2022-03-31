@@ -99,17 +99,6 @@ public class HustleBook implements ReadOnlyHustleBook {
     }
 
     /**
-     * Schedules a meeting date and time with the targetted person.
-     * @param target The person to be scheduled a meeting with.
-     * @param scheduledMeeting The meeting details.
-     */
-    public void scheduleMeeting(Person target, ScheduledMeeting scheduledMeeting) {
-        requireNonNull(scheduledMeeting);
-
-        persons.scheduleMeeting(target, scheduledMeeting);
-    }
-
-    /**
      * Removes {@code key} from this {@code HustleBook}.
      * {@code key} must exist in the hustle book.
      */

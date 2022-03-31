@@ -103,11 +103,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting) {
-        hustleBook.scheduleMeeting(target, scheduledMeeting);
-    }
-
-    @Override
     public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
         requireNonNull(scheduledMeeting);
         return hustleBook.hasSameMeeting(scheduledMeeting);
