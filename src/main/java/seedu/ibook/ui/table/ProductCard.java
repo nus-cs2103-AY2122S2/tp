@@ -23,6 +23,7 @@ public class ProductCard extends UiComponent<HBox> {
 
     private final int index;
     private final Product product;
+    private ItemTable itemTable;
 
     private final EventExpand eventExpand = new EventExpand();
 
@@ -63,6 +64,7 @@ public class ProductCard extends UiComponent<HBox> {
         this.index = index;
         this.product = product;
         this.isShowingItems = false;
+        this.itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
         initRotate();
         populateField();
     }
@@ -131,7 +133,7 @@ public class ProductCard extends UiComponent<HBox> {
     private class EventExpand implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             if (isShowingItems) {
-                ItemTable itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
+                itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
                 itemTableContainer.getChildren().add(itemTable.getRoot());
             } else {
                 itemTableContainer.getChildren().clear();
