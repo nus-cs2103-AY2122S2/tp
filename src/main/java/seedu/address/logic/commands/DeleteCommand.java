@@ -48,7 +48,7 @@ public class DeleteCommand extends Command {
         model.deleteCandidate(candidateToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, candidateToDelete), false,
-                false, true, -1, true, targetIndex.getZeroBased());
+                false, false, -1, true, targetIndex.getZeroBased());
     }
 
     @Override
