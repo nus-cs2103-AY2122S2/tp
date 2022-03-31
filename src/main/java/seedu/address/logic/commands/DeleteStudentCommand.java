@@ -47,7 +47,7 @@ public class DeleteStudentCommand extends Command {
         boolean shouldClearInfoPanel = model.shouldClearStudentInfoPanelOnDelete(studentToDelete);
         String commandResultMessage = String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
         if (shouldClearInfoPanel) {
-            return new CommandResult(commandResultMessage, true, InfoPanelTypes.EMPTY, ViewTab.NONE);
+            return new CommandResult(commandResultMessage, InfoPanelTypes.EMPTY);
         }
         return new CommandResult(commandResultMessage);
     }

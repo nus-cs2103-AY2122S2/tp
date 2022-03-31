@@ -24,7 +24,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setLessonBook(new LessonBook());
         model.setStudentBook(new StudentBook());
-        return new CommandResult(MESSAGE_SUCCESS, true, InfoPanelTypes.EMPTY, ViewTab.NONE);
+        return new CommandResult(MESSAGE_SUCCESS, InfoPanelTypes.EMPTY);
     }
 
 }

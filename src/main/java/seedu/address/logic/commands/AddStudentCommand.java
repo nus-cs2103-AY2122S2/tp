@@ -60,7 +60,7 @@ public class AddStudentCommand extends Command {
 
         model.addStudent(toAdd);
         model.setSelectedStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
 
     @Override

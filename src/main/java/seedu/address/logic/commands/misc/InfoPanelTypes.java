@@ -6,7 +6,8 @@ package seedu.address.logic.commands.misc;
 public enum InfoPanelTypes {
     STUDENT("Student Info Panel"),
     LESSON("Lesson Info Panel"),
-    EMPTY("Empty Info Panel");
+    EMPTY("Clear Info Panel"),
+    NONE("No change to Info Panel");
 
     private final String str;
     InfoPanelTypes(String string) {
