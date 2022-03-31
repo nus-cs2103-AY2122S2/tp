@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ResizeCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -188,6 +189,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Resizes the result display window according to 3 different sizes.
+     */
+    @FXML
+    public void handleResizeResultDisplayWindow() {
+        resultDisplayPlaceholder.setMinHeight(ResizeCommand.getResultWindowDisplaySize()
+                * ResizeCommand.getResieWindowMultiplier());
+    }
+
+    /**
      * Instantiates a new EmailWindow and shows it.
      */
     public void createEmailWindow() {
@@ -254,6 +264,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isSummarise()) {
                 handleSummarise(commandResult.getFeedbackToUser());
+            }
+
+            if (commandResult.isResize()) {
+                handleResizeResultDisplayWindow();
             }
 
             if (commandResult.isShowHelp()) {
