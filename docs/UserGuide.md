@@ -7,9 +7,13 @@ title: User Guide
 later.">
 
 ## **Table of Contents**
+- [Introduction](#introduction)
 - [Quick start](#quick-start)
   - [Requirement](#requirement)
   - [Setup](#setup)
+  - [Graphical User Interface](#graphical-user-interface)
+  - [Controls](#controls)
+  - [Getting Started](#getting-started)
 - [Features](#features)
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
@@ -18,6 +22,7 @@ later.">
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
+  - [Editing Contact Information: `edit`](#editing-contact-information-edit)
   - [Adding Medical Information: `add t/medical`](#adding-medical-information-add-tmedical)
   - [Viewing Medical Information: `view t/medical`](#viewing-medical-information-view-tmedical)
   - [Editing Medical Information: `edit`](#editing-medical-information-edit)
@@ -26,22 +31,42 @@ later.">
   - [Editing Consultation Information: `edit`](#editing-consultation-information-edit)
   - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
   - [Viewing Prescription: `view t/prescription`](#viewing-prescription-view-tprescription)
+  - [Editing Prescription: `edit`](#editing-prescription-edit)
   - [Adding Test Result: `add t/test`](#adding-test-result-add-ttest)
   - [Viewing Test Result: `view t/test`](#viewing-test-result-view-ttest)
 - [FAQ](#faq)
-- [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+Welcome to MedBook user guide. This guide serves to equip users with the necessary knowledge to fully utilise all features implemented in MedBook.
 
+## Introduction
+
+MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s information. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' emergency contacts, medical information, medical tests, consultations and prescriptions through a simple and easy-to-use platform.
+## Quick start
+This section includes information you will need to get started with using MedBook.
 ### Requirement
 - Ensure you have Java 11 or above installed on your computer.
-- Download the latest `medbook.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-1/tp/releases).
+- Download the latest `MedBook.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-1/tp/releases).
 
 ### Setup
-1. Copy the file to the folder you want to use as the home folder for your MedBook.
-2. Double-click the file to start the app.
+1. Copy the file to the folder you want to use as the home folder for MedBook.
+2. Double-click the `MedBook.jar` to start the app.
+
+### Graphical User Interface
+MedBook has an intuitive graphical user interface built for you to enjoy easy interaction with the application. This section describes each part of the graphical user interface in detail.
+
+<figure class="figure">
+   <img src="images/GUI.png" class="figure-img img-fluid rounded" alt="Graphical User Interface">
+</figure>
+
+| Label | Description |
+| ----- | ----------- |
+| 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window. |
+| 2     | **Command Input**. This is where you type the commands to be executed by the application. |
+| 3     | **Command Result**. This text box displays the response of the  entered commands. |
+| 4     | **List of Patients**. This is the list of patients that are stored in the application. |
+| 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information. |
 
 ### Controls
 
@@ -51,7 +76,38 @@ In order to improve your experience when using the app, we have included the fol
 
 ### Getting Started
 Follow this tutorial to get started in using MedBook:
-1. to be added.......
+1. Open MedBook by double clicking `MedBook.jar` located in your MedBook home folder.
+2. If you are first time using MedBook. You will see a prompt window requesting you to set up a new password.
+3. Type in a password and press `enter` to continue.
+
+   <figure class="figure">
+       <img src="images/SignUpScreen.png" class="figure-img img-fluid rounded" alt="Password Prompt Display" width="350">
+       <figcaption class="figure-caption">Figure 1: Password Prompt Display</figcaption>
+   </figure>
+
+   <div class="d-flex alert alert-info">
+   <div class="mr-2">
+       <span class="badge badge-info">INFO</span>
+   </div>
+   <div>
+       This password should only be known to you as it will be used to encrypt your MedBook data.
+   </div>
+   </div>
+
+4. Once you have set up a password, you will be prompted to enter the same password for every logins.
+
+   <figure class="figure">
+       <img src="images/LoginScreen.png" class="figure-img img-fluid rounded" alt="Login Prompt Display" width="350">
+       <figcaption class="figure-caption">Figure 2: Login Prompt Display</figcaption>
+   </figure>
+
+5. After you successfully login, the GUI will load up with sample data and you should see the picture below.
+
+   <figure class="figure">
+       <img src="images/HomeScreen.png" class="figure-img img-fluid rounded" alt="Login Prompt Display" width="500">
+       <figcaption class="figure-caption">Figure 3: Main Display</figcaption>
+   </figure>
+6. You may refer the command list [here](#features) for the details of each available command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,6 +150,17 @@ Format: `help`
 Adds a patient to MedBook.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
+
+   <div class="d-flex alert alert-info">
+   <div class="mr-2">
+       <span class="badge badge-info">INFO</span>
+   </div>
+   <div>
+       Patient's NRIC must be a valid Singapore-issued NRIC. See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about the valid format.
+
+       NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
+   </div>
+   </div>
 
 Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -267,11 +334,42 @@ Examples:
 * `view t/test i/S1234567L`
 
 
-## FAQ
-Q: How do I transfer my data to another Computer?
-A: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedBook folder.
 
-## Command Summary
+
+## FAQ
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
+
+**Option 1:**
+By default, MedBook will always read `medbook.json` located in `HOME_DIRECTORY of MedBook.jar/data/`. Just move your data to `HOME_DIRECTORY of MedBook.jar/data/` in your new device if you wish to import them.
+
+**Option 2 (with encryption):**
+By default, MedBook will always encrypt your data to `password.enc` in `HOME_DIRECTORY of MedBook.jar/data/` for security reason. You can move `password.enc` to `HOME_DIRECTORY of MedBook.jar/data/` in your new device and MedBook will ask for your password upon launching.
+</div>
+</div>
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">What happens if I forget my password?</h6>
+Due to security reason, there is no way to reset to password. To continue using the application you need to delete the encrypted data file (located at `HOME_DIRECTORY of MedBook.jar/data/password.enc`) or move it to another location. MedBook will start with a fresh data for you to start over. See the next FAQ for restoring data.
+</div>
+</div>
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">What happens if I accidentally remove `password.enc`?</h6>
+Unfortunately, the encrypted data will be lost along with your password. However, you can restore your data if you have `medbook.json` with you. Make sure you place them in `HOME_DIRECTORY of MedBook.jar/data/` before launching the app. When you start MedBook again, you will be asked to set up a new password.
+
+We highly discourage users to temper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
+</div>
+</div>
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">Can I modify `medbook.json` locally?</h6>
+We highly discourage users from modifying `medbook.json` directly as any invalid input will cause MedBook to launch with empty data and `medbook.json` will be overwritten. 
+
+If you understood what you are dealing with, you may proceed with cautions. We recommended you to back up a copy of `medbook.json` in case you accidentally corrupt the file at any point of time.
+</div>
+</div>
 
 | Action                        | Format Example                                                                                                                                                                                |
 |:------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
