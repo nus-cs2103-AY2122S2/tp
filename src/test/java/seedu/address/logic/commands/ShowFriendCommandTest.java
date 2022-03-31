@@ -30,7 +30,8 @@ public class ShowFriendCommandTest {
     @Test
     public void execute_showValidFriendName_success() {
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
+        ShowFriendCommand showFriendCommandByIndex = new ShowFriendCommand(INDEX_FIRST_PERSON);
+        ShowFriendCommand showFriendCommandByName = new ShowFriendCommand(personToShow.getName());
 
         String expectedMessage = String.format(ShowFriendCommand.MESSAGE_SUCCESS, personToShow.getName());
 
@@ -39,22 +40,23 @@ public class ShowFriendCommandTest {
 
         assert(expectedModel.getFilteredPersonList().size() == 1);
 
-        assertShowFriendCommandSuccess(showFriendCommand, model, expectedMessage, expectedModel);
+        assertShowFriendCommandSuccess(showFriendCommandByIndex, model, expectedMessage, expectedModel);
+        assertShowFriendCommandSuccess(showFriendCommandByName, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_showNameDoesNotExist_throwsCommandException() {
         //Tommy Ang does not exist in the sample model that is used for testing here
         Person personToShow = new Person(new FriendName("Tommy Ang"));
-        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
-        assertCommandFailure(showFriendCommand, model, Messages.MESSAGE_PERSON_DOES_NOT_EXIST);
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow.getName());
+        assertCommandFailure(showFriendCommand, model, Messages.MESSAGE_INVALID_PERSON_NAME);
     }
 
     @Test
     public void execute_switchingWindows_success() {
 
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow.getName());
         String expectedMessage = String.format(ShowFriendCommand.MESSAGE_SUCCESS, personToShow.getName());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredPersonList(x -> x.isSamePerson(personToShow));
@@ -81,20 +83,27 @@ public class ShowFriendCommandTest {
         assert (!listCommandResult.isShowFriendCommand());
     }
 
+    @Test
+    public void execute_showFriendByNameNameDoesNotExist_throwsCommandException() {
+        //Tommy Ang does not exist in the sample model that is used for testing here
+        Person personToShow = new Person(new FriendName("Tommy Ang"));
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow.getName());
+        assertCommandFailure(showFriendCommand, model, ByIndexByNameCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
 
     @Test
     public void equals() {
 
         Person one = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person two = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        ShowFriendCommand showFriendCommandOne = new ShowFriendCommand(one);
-        ShowFriendCommand showFriendCommandTwo = new ShowFriendCommand(two);
+        ShowFriendCommand showFriendCommandOne = new ShowFriendCommand(one.getName());
+        ShowFriendCommand showFriendCommandTwo = new ShowFriendCommand(two.getName());
 
         // same object -> returns true
         assertTrue(showFriendCommandOne.equals(showFriendCommandOne));
 
         // same values -> returns true
-        ShowFriendCommand showFriendCommandOneCopy = new ShowFriendCommand(one);
+        ShowFriendCommand showFriendCommandOneCopy = new ShowFriendCommand(one.getName());
         assertTrue(showFriendCommandOne.equals(showFriendCommandOneCopy));
 
         // different friends -> returns false

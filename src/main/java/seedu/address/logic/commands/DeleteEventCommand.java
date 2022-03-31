@@ -16,8 +16,9 @@ import seedu.address.model.event.Event;
 public class DeleteEventCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteevent";
+    public static final String COMMAND_ALIAS = "de";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
             + ": Deletes the event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";

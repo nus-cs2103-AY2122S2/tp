@@ -20,19 +20,27 @@ public class CommandResult {
     /** The application should switch to event */
     private final boolean event;
 
-    /**PersonListPanel will switch to expanded view showing all details of a friend */
+    /** PersonListPanel will switch to expanded view showing all details of a friend */
     private final boolean showDetails;
+
+    /** The application should switch to insights */
+    private final boolean showInsights;
+
 
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean event, boolean showDetails) {
+    public CommandResult(String feedbackToUser, boolean showHelp,
+                         boolean exit, boolean event,
+                         boolean showDetails, boolean showInsights) {
+        // todo use assertions as sanity checks!
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.event = event;
         this.showDetails = showDetails;
+        this.showInsights = showInsights;
     }
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -43,6 +51,7 @@ public class CommandResult {
         this.exit = exit;
         this.event = event;
         this.showDetails = false;
+        this.showInsights = false;
     }
 
     /**
@@ -54,14 +63,16 @@ public class CommandResult {
         this.exit = exit;
         this.event = false;
         this.showDetails = false;
+        this.showInsights = false;
     }
+
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -82,6 +93,10 @@ public class CommandResult {
 
     public boolean isShowFriendCommand() {
         return showDetails;
+    }
+
+    public boolean isShowInsights() {
+        return this.showInsights;
     }
 
     @Override

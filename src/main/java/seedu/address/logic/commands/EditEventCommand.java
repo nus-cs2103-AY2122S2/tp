@@ -31,8 +31,10 @@ import seedu.address.model.person.FriendName;
 public class EditEventCommand extends Command {
 
     public static final String COMMAND_WORD = "editevent";
+    public static final String COMMAND_ALIAS = "ee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "

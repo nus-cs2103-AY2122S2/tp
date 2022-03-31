@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowEventsCommand;
 import seedu.address.logic.commands.ShowFriendCommand;
+import seedu.address.logic.commands.ShowInsightsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,24 +55,30 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_ALIAS:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
 
         case ShowFriendCommand.COMMAND_WORD:
+        case ShowFriendCommand.COMMAND_ALIAS:
             return new ShowFriendCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
@@ -81,27 +88,37 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddLogCommand.COMMAND_WORD:
+        case AddLogCommand.COMMAND_ALIAS:
             return new AddLogCommandParser().parse(arguments);
 
         case DeleteLogCommand.COMMAND_WORD:
+        case DeleteLogCommand.COMMAND_ALIAS:
             return new DeleteLogCommandParser().parse(arguments);
 
         case EditLogCommand.COMMAND_WORD:
+        case EditLogCommand.COMMAND_ALIAS:
             return new EditLogCommandParser().parse(arguments);
 
         case AddEventCommand.COMMAND_WORD:
+        case AddEventCommand.COMMAND_ALIAS:
             return new AddEventCommandParser().parse(arguments);
 
         case EditEventCommand.COMMAND_WORD:
+        case EditEventCommand.COMMAND_ALIAS:
             return new EditEventCommandParser().parse(arguments);
 
         case DeleteEventCommand.COMMAND_WORD:
+        case DeleteEventCommand.COMMAND_ALIAS:
             return new DeleteEventCommandParser().parse(arguments);
 
         case ShowEventsCommand.COMMAND_WORD:
+        case ShowEventsCommand.COMMAND_ALIAS:
             return new ShowEventsCommand();
 
+        case ShowInsightsCommand.COMMAND_WORD:
+            return new ShowInsightsCommand();
         case FindEventCommand.COMMAND_WORD:
+        case FindEventCommand.COMMAND_ALIAS:
             return new FindEventCommandParser().parse(arguments);
 
         default:
