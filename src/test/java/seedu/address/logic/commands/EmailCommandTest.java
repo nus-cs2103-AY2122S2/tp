@@ -2,25 +2,25 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static seedu.address.logic.commands.EmailCommand.SHOWING_EMAIL_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
-public class HelpCommandTest {
+public class EmailCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, false);
-        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+    public void execute_email_success() {
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_EMAIL_MESSAGE, false, false, false, true);
+        assertCommandSuccess(new EmailCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void test_helpCommandWordIsCorrect() {
-        assertTrue(HelpCommand.COMMAND_WORD.equals("help"));
+        assertTrue(EmailCommand.COMMAND_WORD.equals("email"));
     }
 }

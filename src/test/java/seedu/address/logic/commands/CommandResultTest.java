@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,16 +29,22 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false)));
+
+        // different summarise value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, false)));
+
+        // different email value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
     }
 
     @Test
     public void constructor_helpCommandResultAssignment_success() {
         CommandResult helpCommand =
-                new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE, true, false, false);
+                new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE, true, false, false, false);
         assertTrue(helpCommand.isShowHelp());
     }
 
@@ -46,7 +52,7 @@ public class CommandResultTest {
     public void constructor_summariseCommandResultAssignment_success() {
         CommandResult summariseCommand =
                 new CommandResult(SummariseCommand.MESSAGE_SUMMARISE_PERSON_SUCCESS, false,
-                        false, true);
+                        false, true, false);
         assertTrue(summariseCommand.isSummarise());
     }
 
@@ -54,8 +60,16 @@ public class CommandResultTest {
     public void constructor_exitCommandResultAssignment_success() {
         CommandResult exitCommand =
                 new CommandResult(SummariseCommand.MESSAGE_SUMMARISE_PERSON_SUCCESS, false,
-                        true, false);
+                        true, false, false);
         assertTrue(exitCommand.isExit());
+    }
+
+    @Test
+    public void constructor_emailCommandResultAssignment_success() {
+        CommandResult emailCommand =
+                new CommandResult(SummariseCommand.MESSAGE_SUMMARISE_PERSON_SUCCESS, false,
+                        false, false, true);
+        assertTrue(emailCommand.isShowEmail());
     }
 
     @Test
@@ -69,9 +83,15 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false).hashCode());
+
+        // different summarise value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false).hashCode());
+
+        // different email value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true).hashCode());
     }
 }
