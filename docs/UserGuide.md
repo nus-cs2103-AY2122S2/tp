@@ -292,7 +292,7 @@ Schedules the specified candidate for an interview.
 
 Format: `schedule add candidate/INDEX at/DATE_TIME`
 
-* Schedules the candidate at the specified `INDEX` for an interview on given `DATE_TIME`
+* Schedules the candidate at the specified `INDEX` for an interview on given `DATE_TIME`.
 * The candidate index refers to the index number shown in the displayed candidate list.
 * The candidate index must be a positive integer 1, 2, 3, …​
 * `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
