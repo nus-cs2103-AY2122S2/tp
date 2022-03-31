@@ -286,10 +286,14 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String sortArgument} into a {@code SortArgument}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be trimmed, and argument will be converted to lower case.
      */
-    public static SortArgument parseSortArgument(String sortArgument) {
+    public static SortArgument parseSortArgument(String sortArgument) throws ParseException {
         requireNonNull(sortArgument);
-        return new SortArgument(sortArgument.trim());
+        String trimmedSortArgument = sortArgument.trim().toLowerCase();
+        if (!SortArgument.isValidSortArgument(sortArgument)) {
+            throw new ParseException(SortArgument.MESSAGE_CONSTRAINTS);
+        }
+        return new SortArgument(trimmedSortArgument);
     }
 }

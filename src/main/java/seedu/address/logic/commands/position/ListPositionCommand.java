@@ -3,6 +3,7 @@ package seedu.address.logic.commands.position;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POSITIONS;
 
 import java.util.Arrays;
@@ -29,9 +30,11 @@ public class ListPositionCommand extends ListCommand {
             + "\nOptional parameters: "
             + PREFIX_FILTER_TYPE + "FILTER_TYPE "
             + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
+            + PREFIX_SORT_ARGUMENT + "[asc/dsc] "
             + "\nExample: " + COMMAND_WORD + " -p "
-            + PREFIX_FILTER_TYPE + "name "
-            + PREFIX_FILTER_ARGUMENT + "Software Engineer ";
+            + PREFIX_FILTER_TYPE + "req "
+            + PREFIX_FILTER_ARGUMENT + "Java "
+            + PREFIX_SORT_ARGUMENT + "asc ";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$d position(s)";
 
