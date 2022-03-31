@@ -3,16 +3,15 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ACTIVE_SCHEDULE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_VIEW_DATE_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WITHOUT_LINEUP;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP;
@@ -37,8 +36,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.WeightContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleNameContainsKeywordsPredicate;
-import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleOnThisDatePredicate;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 
 /**

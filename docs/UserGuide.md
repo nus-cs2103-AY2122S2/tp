@@ -28,14 +28,16 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `MyGM.jar` from [here](https://github.com/AY2122S2-CS2103-F09-1/tp/releases).
+2. Download the latest `MyGM.jar` from [here](https://github.com/AY2122S2-CS2103-F09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
+3. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
+The GUI is split into two categories: Players and Schedules. <br>
+![Ui_Players](images/UiPlayers.png) <br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`add`**`P/ n/John Doe p/98765432 e/johnd@example.com h/183 w/70 j/24 t/PG` : Adds a player named `John Doe` to MyGM.
@@ -46,10 +48,10 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
    * **`clear`** : Deletes all players, lineup and schedule.
 
-
    * **`exit`** : Exits the app.
 
-1. Refer to the Features below for details of each command.
+6. Refer to the Features below for details of each command.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -164,6 +166,7 @@ Format: `put P/PLAYER L/LINEUP`
 
 
 * ![Put_SS](images/Put_SS.png)
+
 
 ### Viewing player/schedule/lineup: `view`
 
