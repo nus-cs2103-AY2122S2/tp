@@ -376,12 +376,10 @@ Sort can help reorder the list!!
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 :bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure).<br>
-
 * Use `n/` if you want to sort by name.
-
 * Use `s/` if you want to sort by status.
 * Use `t/` if you want to sort by tag.
 * Use `r/` if you want to sort by rating.
