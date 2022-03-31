@@ -14,7 +14,7 @@ later.">
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
   - [Listing all Patients: `view`](#listing-all-patients-view)
-  - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-patient-view-inric)
+  - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
@@ -56,10 +56,10 @@ later.">
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [tg/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`  after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]… ` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[tg/TAG]… ` can be used as ` ` (i.e. 0 times), `tg/diabetic`, `tg/diabetic tg/hypertension` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -84,10 +84,11 @@ Format: `help`
 
 Adds a patient to MedBook.
 
-Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
 Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add i/S1234568L n/Jane Doe p/98763488 e/janed@example.com a/311, Clementi Ave 2, #02-25 tg/diabetic tg/hypertension`
 
 ### Listing all Patients: `view`
 
@@ -244,7 +245,7 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | Action | Format Example |
 | :----- | :------------- |
 | View Help | `help` |
-| Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
+| Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...` |
 | List all Patients | `view` |
 | View Summary of a Patient | `view i/NRIC` |
 | Delete any Entry | `delete INDEX` |
