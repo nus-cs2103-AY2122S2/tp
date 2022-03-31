@@ -26,6 +26,7 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatusCommand;
 import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.StatusBarFooter;
 
 /**
  * Parses user input.
@@ -106,8 +107,15 @@ public class AddressBookParser {
             return new SwitchCommand();
 
         case ArchiveCommand.COMMAND_WORD:
-            return new ArchiveCommandParser().parse(arguments);
-
+            if (StatusBarFooter.isArchiveBook()) {
+                throw new ParseException("You are currently in the archived book!\nDid you mean 'unarchive'?");
+            }
+            return new ArchiveCommandParser(ArchiveCommand.COMMAND_WORD).parse(arguments);
+        case ArchiveCommand.ALT_COMMAND_WORD:
+            if (!StatusBarFooter.isArchiveBook()) {
+                throw new ParseException("You are currently in the default book!\nDid you mean 'archive'?");
+            }
+            return new ArchiveCommandParser(ArchiveCommand.ALT_COMMAND_WORD).parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

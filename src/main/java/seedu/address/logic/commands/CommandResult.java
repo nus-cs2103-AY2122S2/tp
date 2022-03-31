@@ -29,14 +29,14 @@ public class CommandResult {
     /** The application should switch addressbook */
     private final boolean isSwitchCommand;
 
-    /** The application should archive a person*/
-    private final boolean isArchiveCommand;
+    /** Indication of whether it is archive or not */
+    private final String archiveMode;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean showAdd,
-                         boolean showEdit, boolean exit, boolean isCopy, boolean isSwitch, boolean isArchive) {
+                         boolean showEdit, boolean exit, boolean isCopy, boolean isSwitch, String archiveMode) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showAdd = showAdd;
@@ -44,7 +44,7 @@ public class CommandResult {
         this.exit = exit;
         this.isCopyCommand = isCopy;
         this.isSwitchCommand = isSwitch;
-        this.isArchiveCommand = isArchive;
+        this.archiveMode = archiveMode;
     }
 
     /**
@@ -52,7 +52,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false, false, "");
     }
 
     public String getFeedbackToUser() {
@@ -84,7 +84,12 @@ public class CommandResult {
     }
 
     public boolean isArchiveCommand() {
-        return isArchiveCommand;
+        // If it is an empty string, then it is not an archive command.
+        return !archiveMode.equals("");
+    }
+
+    public String getArchiveMode() {
+        return archiveMode;
     }
 
     @Override
