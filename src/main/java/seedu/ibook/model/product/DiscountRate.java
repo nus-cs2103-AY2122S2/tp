@@ -26,6 +26,9 @@ public class DiscountRate {
     public DiscountRate(String discountRate) {
         requireNonNull(discountRate);
         checkArgument(isValidDiscountRate(discountRate), MESSAGE_CONSTRAINTS);
+        if (discountRate.equals("")) {
+            discountRate = DEFAULT_DISCOUNTRATE;
+        }
         discountRate = removePercentage(discountRate);
         this.discountRate = Double.parseDouble(discountRate);
         assert this.discountRate >= 0; // ensure that the discount rate is not negative
