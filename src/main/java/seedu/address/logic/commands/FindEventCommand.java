@@ -16,8 +16,10 @@ import seedu.address.model.event.EventFilterPredicate;
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "findevent";
+    public static final String COMMAND_ALIAS = "fe";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose fields contain all of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Finds all events whose fields contain all of "
             + "the specified search terms (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "EVENT_NAME_SUBSTRING] "

@@ -99,7 +99,7 @@ public class DeleteCommandTest {
         //Tommy Ang does not exist in the sample model that is used for testing here
         Person personToDelete = new Person(new FriendName("Tommy Ang"));
         DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getName());
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSON_DOES_NOT_EXIST);
+        assertCommandFailure(deleteCommand, model, ByIndexByNameCommand.MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
