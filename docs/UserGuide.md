@@ -248,7 +248,7 @@ Shows all the upcoming events in amigos
 
 **Examples**:
 * `showevents`
-* `shoevents -a`
+* `showevents -a`
 
 ### Find events : `findevent`
 
