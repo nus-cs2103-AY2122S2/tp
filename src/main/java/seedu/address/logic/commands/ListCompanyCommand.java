@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
-import seedu.address.logic.parser.ParserUtil.SearchType;
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.model.Model;
 
 public class ListCompanyCommand extends ListCommand {

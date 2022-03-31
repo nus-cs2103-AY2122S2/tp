@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import seedu.address.commons.core.ListType;
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
 import seedu.address.logic.commands.ListEventCommand;
@@ -34,7 +35,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         String searchTypeString = argMultimap.getValue(PREFIX_SEARCH_TYPE).orElse("unarchived");
 
         try {
-            ParserUtil.SearchType searchType = ParserUtil.parseSearchType(searchTypeString);
+            SearchType searchType = ParserUtil.parseSearchType(searchTypeString);
 
             switch (listType) {
             case PERSON:

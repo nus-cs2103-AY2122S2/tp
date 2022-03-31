@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -13,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entry.Date;
@@ -32,9 +34,11 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COMPANY, PREFIX_START_DATE,
-                        PREFIX_END_DATE, PREFIX_TIME, PREFIX_LOCATION, PREFIX_TAG);
+                        PREFIX_END_DATE, PREFIX_TIME, PREFIX_LOCATION, PREFIX_TAG, PREFIX_SEARCH_TYPE);
 
-        if (!isValid(argMultimap)) {
+        String searchTypeString = argMultimap.getValue(PREFIX_SEARCH_TYPE).orElse("unarchived");
+
+        if (!isValid(argMultimap, searchTypeString)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindEventCommand.MESSAGE_USAGE));
         }
@@ -49,18 +53,20 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         String[] locationKeywords = argMultimap.getValue(PREFIX_LOCATION).orElse("").split("\\s+");
         String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
 
+        SearchTypeUtil.SearchType searchType = ParserUtil.parseSearchType(searchTypeString);
+
         EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Arrays.asList(nameKeywords),
                 Arrays.asList(companyNameKeywords),
-                startDate,
-                endDate,
+                startDate, endDate,
                 Arrays.asList(timeKeywords),
                 Arrays.asList(locationKeywords),
-                Arrays.asList(tagKeywords));
+                Arrays.asList(tagKeywords),
+                SearchTypeUtil.getPredicate(searchType));
 
         return new FindEventCommand(predicate);
     }
 
-    private boolean isValid(ArgumentMultimap argumentMultimap) throws ParseException {
+    private boolean isValid(ArgumentMultimap argumentMultimap, String searchTypeString) throws ParseException {
         boolean namePresent = argumentMultimap.getValue(PREFIX_NAME).isPresent();
         boolean companyNamePresent = argumentMultimap.getValue(PREFIX_COMPANY).isPresent();
         boolean startDatePresent = argumentMultimap.getValue(PREFIX_START_DATE).isPresent();
@@ -68,6 +74,8 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         boolean timePresent = argumentMultimap.getValue(PREFIX_TIME).isPresent();
         boolean locationPresent = argumentMultimap.getValue(PREFIX_LOCATION).isPresent();
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
+
+        ParserUtil.parseSearchType(searchTypeString);
 
         if (namePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_NAME).get().split("\\s+"));

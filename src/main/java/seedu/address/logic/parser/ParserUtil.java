@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,8 +29,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_SEARCH_TYPE = "Search Type must be one of the following: "
             + "UNARCHIVED, ARCHIVED, ALL";
-
-    public static enum SearchType { UNARCHIVED_ONLY, ARCHIVED_ONLY, ALL };
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

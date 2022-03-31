@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.model.Model;
 
 /**
@@ -22,7 +22,7 @@ public class ListPersonCommand extends ListCommand {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SEARCH_TYPE + "unarchived";
 
-    public ListPersonCommand(ParserUtil.SearchType searchType) {
+    public ListPersonCommand(SearchType searchType) {
         super(searchType);
     }
 
