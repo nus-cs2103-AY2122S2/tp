@@ -173,6 +173,7 @@ Format: `put P/PLAYER L/LINEUP`
 This function makes listing, searching filtering of player/schedule/lineup quick and easy.
 You can specify criteria to list out the current player and schedule list.
 
+
 Views the information of lineup/ player/ schedule.
 
 **To view player:**<br>
@@ -203,13 +204,13 @@ Format: `view L/[NAMES_IN_LINEUPNAME]`
 matches the specific word that is specified. <br> e.g. `view L/super` will not display players in the lineup
 with the lineup name of "superstars". However, it will display players in the lineup with the lineup name of "super" 
 or "super idol" provided that lineup with this lineup name exists and there are players in this lineup as well.
-* If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed.
+* If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed and all current lineups.
 * Words in `NAMES_IN_LINEUPNAME` are case **insensitive**.
 * To view players that are **without** a lineup, the `N/` prefix must be specified.
 
 Examples:
 * `view L/ N/` Displays all the players without a lineup
-* `view L/` Displays all the players that have at least a lineup
+* `view L/` Displays all the players that have at least a lineup and all current lineups
 * `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
 * `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
 
