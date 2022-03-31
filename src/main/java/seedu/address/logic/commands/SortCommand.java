@@ -5,13 +5,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.model.Model;
 
 /**
- * Sorts all persons in the address book by the number of tasks completed.
+ * Sorts all students in TAPA by the number of incomplete tasks left.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons";
+    public static final String MESSAGE_SUCCESS = "Sorted all students";
 
     @Override
     public CommandResult execute(Model model) {

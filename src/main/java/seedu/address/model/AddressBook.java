@@ -186,7 +186,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts the list of persons in ascending order of the number of tasks completed.
+     * Sorts the list of students in descending order of the number of incomplete tasks.
      */
     public void sortPersonListByTaskLeft() {
         persons.sortListByTaskLeft();
