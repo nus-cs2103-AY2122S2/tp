@@ -69,6 +69,7 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
+
         final String arguments = matcher.group("arguments");
 
         checkForSingleCommandWord(arguments, commandWord);
@@ -77,7 +78,6 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
