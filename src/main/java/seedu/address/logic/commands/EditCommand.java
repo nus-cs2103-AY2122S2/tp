@@ -12,7 +12,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -62,15 +61,14 @@ public class EditCommand extends Command {
     private final boolean isResetMode;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, boolean isResetMode) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
-        requireNonNull(isResetMode);
 
-        this.indicesToEdit = new LinkedList<Index>();
+        this.indicesToEdit = new ArrayList<>();
         indicesToEdit.add(index);
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
         this.isResetMode = isResetMode;
@@ -86,7 +84,6 @@ public class EditCommand extends Command {
     public EditCommand(List<Index> indices, EditPersonDescriptor editPersonDescriptor, boolean isResetMode) {
         requireNonNull(indices);
         requireNonNull(editPersonDescriptor);
-        requireNonNull(isResetMode);
 
         this.indicesToEdit = indices;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
@@ -139,9 +136,9 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getDisplayPersonList();
-        boolean isBatchEdit = this.indicesToEdit.size() == 1;
+        boolean isSingleEdit = this.indicesToEdit.size() == 1;
         CommandResult commandResult;
-        if (isBatchEdit) {
+        if (isSingleEdit) {
             commandResult = executeSingleEdit(model, lastShownList);
         } else {
             commandResult = executeBatchEdit(model, lastShownList);
