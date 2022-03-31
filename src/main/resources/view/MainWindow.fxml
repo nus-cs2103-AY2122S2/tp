@@ -25,7 +25,7 @@
       </stylesheets>
 
       <VBox VBox.vgrow="ALWAYS">
-        <MenuBar fx:id="menuBar" style="-fx-background-color: e6ecf0;" VBox.vgrow="NEVER">
+        <MenuBar fx:id="menuBar" style="-fx-background-color: e6ecf0;" VBox.vgrow="SOMETIMES">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
@@ -34,13 +34,13 @@
           </Menu>
         </MenuBar>
 
-        <StackPane fx:id="commandBoxPlaceholder" prefWidth="582.0" style="-fx-background-color: ffffff;" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="commandBoxPlaceholder" prefWidth="582.0" style="-fx-background-color: ffffff;" styleClass="pane-with-border" VBox.vgrow="SOMETIMES">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="200" prefHeight="200" style="-fx-background-color: ffffff;" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="200" prefHeight="200" style="-fx-background-color: ffffff;" styleClass="pane-with-border" VBox.vgrow="SOMETIMES">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
