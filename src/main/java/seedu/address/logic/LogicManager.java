@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.StackUndoRedo;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,13 +36,17 @@ public class LogicManager implements Logic {
     private final AddressBookParser addressBookParser;
     private AddressBook addressBook;
     private AddressBook archiveBook;
+    private final StackUndoRedo undoRedoStack;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Constructs a {@code LogicManager} with the given {@code Model} and
+     * {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+        this.undoRedoStack = new StackUndoRedo();
+
         addressBookParser = new AddressBookParser();
 
         this.addressBook = new AddressBook(model.getAddressBook());
@@ -54,8 +59,17 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        command.setData(undoRedoStack);
         commandResult = command.execute(model);
-        saveBooks();
+
+        try {
+            saveBooks();
+            undoRedoStack.push(command);
+
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
         return commandResult;
     }
 
@@ -127,7 +141,6 @@ public class LogicManager implements Logic {
     public void archivePersonByIndex(String oneBasedString) throws CommandException {
         Index oneBased = Index.fromOneBased(Integer.parseInt(oneBasedString));
         Person target = model.getFilteredPersonList().get(oneBased.getZeroBased());
-
 
         try {
             // Not in archive, so that means we are archiving someone

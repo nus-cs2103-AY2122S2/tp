@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -64,7 +64,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
         requireNonNull(model);
 
         if (toAdd == null) {

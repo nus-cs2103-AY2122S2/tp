@@ -32,7 +32,7 @@ import seedu.address.model.person.Status;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -58,7 +58,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -78,41 +78,13 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Factory method for an empty EditCommand. Prevents unintended calls to an EditCommand.
+     * Factory method for an empty EditCommand. Prevents unintended calls to an
+     * EditCommand.
+     * 
      * @return an empty EditCommand
      */
     public static EditCommand editWindowHelper() {
         return new EditCommand();
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index == null || editPersonDescriptor == null) {
-            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false, false, "");
-        }
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (isArchiveBook()) {
-            model.setArchivedPerson(personToEdit, editedPerson);
-        } else {
-            model.setPerson(personToEdit, editedPerson);
-        }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
@@ -150,8 +122,39 @@ public class EditCommand extends Command {
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
+    @Override
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index == null || editPersonDescriptor == null) {
+            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false, false, "");
+        }
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the person with. Each non-empty field value will
+     * replace the
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
@@ -163,7 +166,8 @@ public class EditCommand extends Command {
         private Set<Module> modules;
         private Comment comment;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -233,7 +237,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(comment);
         }
 
-
         /**
          * Sets {@code modules} to this object's {@code modules}.
          * A defensive copy of {@code modules} is used internally.
@@ -244,14 +247,14 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable module set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable module set, which throws
+         * {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code modules} is null.
          */
         public Optional<Set<Module>> getModules() {
             return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
-
 
         @Override
         public boolean equals(Object other) {

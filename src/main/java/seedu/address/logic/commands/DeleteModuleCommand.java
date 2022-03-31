@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class DeleteModuleCommand extends Command {
+public class DeleteModuleCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "deletemodule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -42,39 +42,11 @@ public class DeleteModuleCommand extends Command {
 
     /**
      * @param targetIndex of the person in the filtered person list
-     * @param modules modules to be deleted
+     * @param modules     modules to be deleted
      */
     public DeleteModuleCommand(Index targetIndex, List<Module> modules) {
         this.targetIndex = targetIndex;
         this.modules = modules;
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        List<Module> modulesToDelete = new ArrayList<>(modules);
-        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, modules);
-
-        if (modules.size() != 0) {
-            throw new CommandException(String.format(MESSAGE_FAILURE, modules));
-        }
-
-        if (isArchiveBook()) {
-            model.setArchivedPerson(personToEdit, editedPerson);
-        } else {
-            model.setPerson(personToEdit, editedPerson);
-        }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToDelete));
     }
 
     /**
@@ -103,7 +75,36 @@ public class DeleteModuleCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteModuleCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteModuleCommand) other).targetIndex)) // state check
-                && modules.equals(((DeleteModuleCommand) other).modules);
+                        && targetIndex.equals(((DeleteModuleCommand) other).targetIndex)) // state check
+                        && modules.equals(((DeleteModuleCommand) other).modules);
+    }
+
+    @Override
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        List<Module> modulesToDelete = new ArrayList<>(modules);
+        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, modules);
+
+        if (modules.size() != 0) {
+            throw new CommandException(String.format(MESSAGE_FAILURE, modules));
+        }
+
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToDelete));
     }
 }

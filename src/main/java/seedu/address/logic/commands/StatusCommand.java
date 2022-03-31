@@ -17,7 +17,7 @@ import seedu.address.model.person.Status;
 /**
  * Changes the status of an existing person in the address book.
  */
-public class StatusCommand extends Command {
+public class StatusCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "status";
 
@@ -36,7 +36,7 @@ public class StatusCommand extends Command {
     private final Status status;
 
     /**
-     * @param index of the person in the filtered person list to edit the status
+     * @param index  of the person in the filtered person list to edit the status
      * @param status of the person to be updated to
      */
     public StatusCommand(Index index, Status status) {
@@ -45,31 +45,10 @@ public class StatusCommand extends Command {
         this.index = index;
         this.status = status;
     }
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
-
-        if (isArchiveBook()) {
-            model.setArchivedPerson(personToEdit, editedPerson);
-        } else {
-            model.setPerson(personToEdit, editedPerson);
-        }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson));
-    }
 
     /**
-     * Generates a command execution success message based on whether the status is added to or removed from
+     * Generates a command execution success message based on whether the status is
+     * added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
@@ -93,5 +72,27 @@ public class StatusCommand extends Command {
         StatusCommand e = (StatusCommand) other;
         return index.equals(e.index)
                 && status.equals(e.status);
+    }
+
+    @Override
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
+
+        if (isArchiveBook()) {
+            model.setArchivedPerson(personToEdit, editedPerson);
+        } else {
+            model.setPerson(personToEdit, editedPerson);
+        }
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 }

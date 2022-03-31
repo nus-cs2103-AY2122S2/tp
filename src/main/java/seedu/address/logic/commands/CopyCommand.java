@@ -50,8 +50,9 @@ public class CopyCommand extends Command {
 
     /**
      * Constructor for copy command.
-     * @param index of the person in the filtered person list to edit
-     * @param prefixes details to copy the person with
+     *
+     * @param index            of the person in the filtered person list to edit
+     * @param prefixes         details to copy the person with
      * @param formatPersonUtil to format the person
      */
     public CopyCommand(Index index, List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
@@ -66,7 +67,8 @@ public class CopyCommand extends Command {
 
     /**
      * Constructor for copy command
-     * @param prefixes details to copy the person with
+     *
+     * @param prefixes         details to copy the person with
      * @param formatPersonUtil to format the person
      */
     public CopyCommand(List<Prefix> prefixes, FormatPersonUtil formatPersonUtil) {
