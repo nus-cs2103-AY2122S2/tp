@@ -502,7 +502,10 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Exit** | `exit`
-**Match property** | `match INDEX` <br> e.g., `match 1`
+**Match buyer with all fields** | `match INDEX` <br> e.g., `match 1`
+**Match Buyer with house type** | `match-h INDEX` <br> e.g., `match-h 1`
+**Match Buyer with location** | `match-l INDEX` <br> e.g., `match-l 1`
+**Match Buyer with price range** | `match-pr INDEX` <br> e.g., `match-pr 1`
 **List Buyers** | `list-b`
 **Add Buyer** | `add-b n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-b n/James Ho p/22224444`
 **Add Buyer Property** | `add-ptb l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-ptb l/Bishan pr/100000,200000 h/hdb`
