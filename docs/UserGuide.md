@@ -13,7 +13,7 @@ If you can type fast, this application will be able to help you manage all thing
 faster than traditional GUI applications.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
