@@ -11,17 +11,13 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 {:toc}
   * Quick Start
   * Features
-    * Adding a player/ team/ lineup/ schedule: add
-    * Deleting a player/ team/ lineup/ schedule: delete
-    * Filtering players by position: filter
-    * Marking the attendance of player: mark
-    * Unmarking the attendance of players: unmark
-    * Tagging players by their position: tag
-    * Viewing the summary: view
-    * Finding a lineup or player: find
+    * Getting help: help
+    * Adding a player/ lineup/ schedule: add
+    * Deleting a player/ lineup/ schedule: delete
     * Putting a player to a team/ lineup: put
-    * Updating a player/ team/ lineup/ schedule: update
-    * Changing the theme of the UI
+    * Viewing the summary: view
+    * Updating a player/ lineup/ schedule: update
+    * Changing the theme of the UI: them
     * Saving the data: save
     * Loading data from user-specified file: load
     * Clearing all data: clear
@@ -79,14 +75,13 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 </div>
 
-### Viewing help : `help`
+### Getting help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a player/ lineup/ schedule: `add`
 
