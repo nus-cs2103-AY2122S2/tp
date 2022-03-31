@@ -20,6 +20,7 @@ import seedu.address.logic.commands.FocusCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.ClearScheduleCommand;
 import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
 import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -271,11 +272,27 @@ public class MainWindow extends UiPart<Stage> {
     public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
         CommandResult commandResult = logic.execute(commandText);
         resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-        if (focusListPanel.getCandidate().looseEqual(logic
-                .getFilteredCandidateList()
-                .get(commandResult.getEditIndex()))) {
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            if (focusListPanel.getCandidate().looseEqual(logic
+                    .getFilteredCandidateList()
+                    .get(commandResult.getEditIndex()))) {
+                executeCommand(FocusCommand.COMMAND_WORD + " "
+                        + String.valueOf(commandResult.getEditIndex() + 1));
+            }
+        }
+        return commandResult;
+    }
+
+    /**
+     * Refreshes the FocusCard if all schedules are cleared so that the displayed Candidate has the latest information.
+     */
+    public CommandResult refreshWhenClearAllSchedule(String commandText) throws CommandException, ParseException {
+        int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+        CommandResult commandResult = logic.execute(commandText);
+        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+            logger.info(String.valueOf(logic.getFilteredCandidateList().contains(focusListPanel.getCandidate())));
             executeCommand(FocusCommand.COMMAND_WORD + " "
-                    + String.valueOf(commandResult.getEditIndex() + 1));
+                    + String.valueOf(displayedIndex + 1));
         }
         return commandResult;
     }
@@ -289,11 +306,9 @@ public class MainWindow extends UiPart<Stage> {
         try {
             int editFlag = -1;
 
-            if (commandText.contains(DeleteScheduleCommand.COMMAND_WORD)) {
-                return executeCommandThenRefresh(commandText);
-            } else if (commandText.contains(RemarkCommand.COMMAND_WORD)) {
-                return executeCommandThenRefresh(commandText);
-            } else if (commandText.contains(EditScheduleCommand.COMMAND_WORD)) {
+            if (commandText.contains(DeleteScheduleCommand.COMMAND_WORD)
+                    || commandText.contains(RemarkCommand.COMMAND_WORD)
+                    || (commandText.contains(EditScheduleCommand.COMMAND_WORD))) {
                 return executeCommandThenRefresh(commandText);
             } else if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
                 handleDelete(commandText);
@@ -301,6 +316,8 @@ public class MainWindow extends UiPart<Stage> {
                 editFlag = handleEdit(commandText, EDIT_COMMAND_INDEX);
             } else if (commandText.contains(AddScheduleCommand.COMMAND_WORD)) {
                 editFlag = handleEdit(commandText, ADD_SCHEDULE_COMMAND_INDEX);
+            } else if (commandText.contains(ClearScheduleCommand.COMMAND_WORD)) {
+                return refreshWhenClearAllSchedule(commandText);
             }
 
             CommandResult commandResult = logic.execute(commandText);
