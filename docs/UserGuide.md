@@ -253,9 +253,10 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | View Contact Information | `view t/contact i/NRIC` |
 | Add Medical Information | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | View Medical Information | `view t/medical [i/NRIC]` |
-| Edit Medical Information | `edit INDEX [i/NRIC] [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
+| Edit Medical Information | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | Add Consultation Information | `add t/consultation i/NRIC dt/DATE tm/TIME n/NOTES` |
 | View Past Consultations | `view t/consultation i/NRIC` |
+| Edit Consultation Information | `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]` |
 | Add Prescription | `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION` |
 | View Prescription | `view t/prescription i/NRIC` |
 | Add Test Result | `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT` |
