@@ -32,7 +32,7 @@
     -fx-border-color: #333;
 }
 
-.result-display .content {
+.result-display .content, .result-display .scroll-bar {
     -fx-background-color: #333;
 }
 
