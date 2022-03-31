@@ -50,21 +50,35 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and with the intention of updating the UI with a new {@code InfoPanel}
+     * and with the intention of updating the UI with a new {@code InfoPanel} and {@code ViewTab}
      *
      * @param feedbackToUser Feedback given to user from the command.
-     * @param updateInfoPanel Boolean indicating if the {@code InfoPanel} of the UI is updated.
      * @param infoPanelType {@code InfoPanelTypes} value representing the type of {@code InfoPanel} that is updated.
      * @param viewTab {@code viewTab} value representing the type of {@code ViewTab} that will be switched.
      */
-    public CommandResult(String feedbackToUser, boolean updateInfoPanel,
-                         InfoPanelTypes infoPanelType, ViewTab viewTab) {
+    public CommandResult(String feedbackToUser, InfoPanelTypes infoPanelType, ViewTab viewTab) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
-        this.updateInfoPanel = updateInfoPanel;
+        this.updateInfoPanel = true;
         this.infoPanelType = infoPanelType;
         this.viewTab = viewTab;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and with the intention of updating the UI with a new {@code InfoPanel}.
+     *
+     * @param feedbackToUser Feedback given to user from the command.
+     * @param infoPanelType {@code InfoPanelTypes} value representing the type of {@code InfoPanel} that is updated.
+     */
+    public CommandResult(String feedbackToUser, InfoPanelTypes infoPanelType) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.updateInfoPanel = true;
+        this.infoPanelType = infoPanelType;
+        this.viewTab = ViewTab.NONE;
     }
 
     /**
@@ -76,7 +90,7 @@ public class CommandResult {
         this.exit = false;
         this.viewTab = viewTab;
         this.updateInfoPanel = false;
-        this.infoPanelType = null;
+        this.infoPanelType = InfoPanelTypes.NONE;
     }
 
     public String getFeedbackToUser() {

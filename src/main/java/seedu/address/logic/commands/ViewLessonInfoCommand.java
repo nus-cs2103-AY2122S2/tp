@@ -44,8 +44,8 @@ public class ViewLessonInfoCommand extends Command {
 
         Lesson lessonToSelect = lastShownList.get(targetIndex.getZeroBased());
         model.setSelectedLesson(lessonToSelect);
-        return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, lessonToSelect.getName()),
-                true, InfoPanelTypes.LESSON, ViewTab.LESSON);
+        String commandResultMessage = String.format(MESSAGE_VIEW_SUCCESS, lessonToSelect.getName());
+        return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
 
     @Override

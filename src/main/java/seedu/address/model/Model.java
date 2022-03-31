@@ -172,4 +172,22 @@ public interface Model {
      * Checks if the {@code Index} provided is out of bounds of the {@code filteredLessonList}
      */
     boolean checkLessonListIndex(Index lessonId);
+
+    /**
+     * Checks if the provided {@code Lesson} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedLesson Lesson to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
+    boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson);
+
+    /**
+     * Checks if the provided {@code Student} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedStudent Student to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
+    boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent);
 }
