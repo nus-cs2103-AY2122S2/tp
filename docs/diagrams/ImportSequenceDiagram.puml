@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+
+mainframe **Import** implementation
+
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ImportCommand" as ImportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+box Storage STORAGE_COLOR_T1
+participant "jfm:JsonFileManager" as JsonFileManager STORAGE_COLOR
+box
+
+participant "fileChooser:FileChooser" as FileChooser STORAGE_COLOR
+
+create ImportCommand
+LogicManager -> ImportCommand : parser.parseCommand(commandText)
+activate ImportCommand
+
+ImportCommand --> LogicManager
+deactivate ImportCommand
+
+LogicManager -> ImportCommand : execute(model)
+activate ImportCommand
+
+create JsonFileManager
+ImportCommand -> JsonFileManager : new JsonFileManager()
+activate JsonFileManager
+
+create FileChooser
+JsonFileManager -> FileChooser : new FileChooser()
+activate FileChooser
+
+FileChooser --> JsonFileManager :
+deactivate FileChooser
+
+JsonFileManager --> ImportCommand :
+deactivate JsonFileManager
+
+ImportCommand -> JsonFileManager : importFile(model.getShowListFilePath)
+activate JsonFileManager
+
+JsonFileManager --> ImportCommand : result
+deactivate JsonFileManager
+
+create CommandResult
+ImportCommand -> CommandResult : new CommandResult(MESSAGE_SUCCESS, false, false, true)
+activate CommandResult
+
+CommandResult --> ImportCommand
+deactivate CommandResult
+
+ImportCommand --> LogicManager
+deactivate ImportCommand
+
+@enduml

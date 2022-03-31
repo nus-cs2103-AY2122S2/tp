@@ -360,9 +360,27 @@ The following sequence diagram summarizes what happens when a user executes a so
 Allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
 
 ### Implementation
-When the import/export command is executed, a `JsonFileManager` is created with the default filename. The `JsonFileManager` handles the creation of the File Explorer GUI along with the logic behind import/export. The `importFile()` and `exportFile()` methods return an integer used to represent the status of the process.
+When the import/export command is executed, a `JsonFileManager` is created. The `JsonFileManager` creates the File Explorer GUI using `JavaFx`'s `FileChooser` library, and handles the logic behind import/export. The user can then use the File Explorer GUI to select which file they want to import, or where they want to export Trackermon data.
 
-For `import`: After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
+For `import`: 
+
+After the file is selected, `ImportCommand` calls the `JsonFileManager#importFile(dataPath)` method. This method overwrites the file provided in dataPath with the selected file. 
+`ImportCommand` passes in the file path of the data that Trackermon is currently using. 
+After the file is overwritten, `ImportCommand` returns a `CommandResult` to `LogicManager`. 
+In `LogicManager`, the new data will be read and converted into an `Optional<ReadOnlyShowList>`. 
+The old data is stored as another `ReadOnlyShowList`, and `Model#setShowList` is called to update `Model`'s show list with the new data if it exists. 
+If the new data does not exist, the show list will not be updated. Finally, `Storage#saveShowList` is called to update the actual data file.
+
+For `export`:
+
+After the location is selected, `ExportCommand` calls the `JsonFileManager#exportFile(dataPath)` method. 
+This method writes the data file into a file at the selected location provided by dataPath. 
+After the data is written into the new file, `ExportCommand` returns a `CommandResult` to `LogicManager`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `ImportCommand`, `JsonFileManager`, `FileChooser`, and `CommandResult`.
+
+<img src="images/ImportSequenceDiagram.png">
+</div>
 
 ### Design considerations:
 Implementing the FileChooser library allows us to create a File Explorer GUI similar to the user's Operating System's native File Explorer GUI.
@@ -372,7 +390,7 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 ### Show status
 
 #### What it does
-`Status` class is an attribute within the `Show` class. `Status` represents the watched status of the show which can be represented by `completed`, `watching`, or `plan-to-watch`. 
+`Status` class is an attribute within the `Show` class. `Status` represents the watch status of the show which can be represented by `completed`, `watching`, or `plan-to-watch`. 
 
 #### Implementation
 
