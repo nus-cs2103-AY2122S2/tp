@@ -22,10 +22,10 @@ public class HelpWindow extends UiPart<Stage> {
             + "avail/AVAILABILITY";
     private static final String CLEAR_FIELD = "Clears Candidate and Interview lists";
     private static final String INDEX = "INDEX";
-    private static final String EDIT_FIELD = INDEX + " PREFIX/NEW VALUE";
+    private static final String EDIT_FIELD = INDEX + " PREFIX/NEW_VALUE";
     private static final String EXIT_FIELD = "Ends the program";
-    private static final String FIND_FIELD = "k/KEYWORD [k/MORE_KEYWORDS] [f/ATTRIBUTE_FIELD]";
-    private static final String LIST_FIELD = "List all candidates in the system";
+    private static final String FIND_FIELD = "k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]";
+    private static final String LIST_FIELD = "Lists all candidates in the system";
     private static final String HELP_FIELD = "Opens the help window";
     private static final String REMARK_FIELD = INDEX + " r/REMARKS";
     private static final String SCHEDULE_INDEX = "SCHEDULE_INDEX";
