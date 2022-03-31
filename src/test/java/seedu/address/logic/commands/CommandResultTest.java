@@ -32,7 +32,7 @@ public class CommandResultTest {
     @Test
     public void execute_forShowFriend_commandResultIsShowFriend() throws CommandException {
         Person person = model.getFilteredPersonList().get(0);
-        Command showFriendCommand = new ShowFriendCommand(person);
+        Command showFriendCommand = new ShowFriendCommand(person.getName());
         CommandResult commandResult = showFriendCommand.execute(model);
 
         assertTrue(commandResult.isShowFriendCommand());
@@ -85,7 +85,7 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         //different showFriend value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true, false)));
 
         //different showEvent value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
@@ -108,7 +108,7 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         //different showFriend value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("different", false, false, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("different", false, false, false, true, false).hashCode());
 
         //different showEvent value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different", false, false, true).hashCode());

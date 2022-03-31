@@ -3,6 +3,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insights.PersonInsight;
 
 /**
  * Unmodifiable view of an address book
@@ -20,5 +21,7 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate events.
      */
     ObservableList<Event> getEventList();
+
+    ObservableList<PersonInsight> getInsightsList(Model model);
 
 }

@@ -239,10 +239,17 @@ Delete existing event(s).
 * `deleteevent 2`
 
 ### Show all events : `showevents`
+Shows all the upcoming events in amigos
 
-Shows all events stored in Amigos. Switches GUI to the events tab.
+**Format**: `showevents [-a]`
 
-**Format**: `showevents`
+* Switches GUI to the events tab
+* if the `-a` flag is omitted it will only show upcoming events (Events with date and time after the system's date and time)
+* if the `-a` flag is provided it will show all events in Amigos 
+  
+**Examples**:
+* `showevents`
+* `showevents -a`
 
 ### Find events : `findevent`
 
@@ -325,7 +332,7 @@ If your changes to the data file makes its format invalid, Amigos will discard a
 | **Add Event**              | `addevent n/EVENT_NAME dt/DATE_TIME [d/DESCRIPTION] [f/FRIEND_NAME]...` <br> e.g.,`addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`                                                                                   |
 | **Edit Event**             | `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...` <br> e.g., `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo`                                                                 |
 | **Delete Event**           | `deleteevent INDEX` <br> e.g., `deleteevent 2`                                                                                                                                                                                                                         |
-| **Show all events**        | `showevents`                                                                                                                                                                                                                                                           |
+| **Show events**            | `showevents [-a]`                                                                                                                                                                                                                                                      |
 | **Find events**            | `findevent [n/EVENT_NAME_SUBSTRING] [ds/DATE_START] [de/DATE_END] [f/FRIEND_NAME_SUBSTRING]...` <br> e.g.,`findevent n/dinner ds/20-03-2022 f/Maggie`                                                                                                                  |
 | **Help**                   | `help`                                                                                                                                                                                                                                                                 |
 | **Clear**                  | `clear`                                                                                                                                                                                                                                                                |

@@ -10,6 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insights.PersonInsight;
 
 /**
  * A default model stub that has all of the methods failing.
@@ -107,6 +108,11 @@ public class ModelStub implements Model {
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<PersonInsight> getInsightsList() {
         throw new AssertionError("This method should not be called.");
     }
 

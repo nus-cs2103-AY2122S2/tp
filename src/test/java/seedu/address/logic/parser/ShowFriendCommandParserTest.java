@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -26,9 +27,19 @@ public class ShowFriendCommandParserTest {
     public void parse_validName_returnsShowFriendCommand() {
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         FriendName name = personToShow.getName();
-        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow);
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(name);
 
         assertParseSuccess(parser, " n/" + name.fullName, showFriendCommand);
+    }
+
+    @Test
+    public void parse_validArgsIndex_returnsShowFriendCommand() {
+        assertParseSuccess(parser, "1", new ShowFriendCommand(INDEX_FIRST_PERSON));
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        assertParseFailure(parser, "-1", MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER);
     }
 
 
@@ -56,7 +67,7 @@ public class ShowFriendCommandParserTest {
         Person personTwoToShow = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         String fullNameOne = personOneToShow.getName().fullName;
         String fullNameTwo = personTwoToShow.getName().fullName;
-        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personTwoToShow);
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(new FriendName(fullNameTwo));
         assertParseSuccess(parser, " n/" + fullNameOne + " n/" + fullNameTwo, showFriendCommand);
     }
 

@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.insights.PersonInsight;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -36,8 +37,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList().sorted());
-        filteredEvents = new FilteredList<>(this.addressBook.getEventList().sorted());
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -165,6 +166,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
+    }
+
+    @Override
+    public ObservableList<PersonInsight> getInsightsList() {
+        return this.addressBook.getInsightsList(this);
     }
 
     @Override

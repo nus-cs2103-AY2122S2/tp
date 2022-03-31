@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.insights.PersonInsight;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -92,6 +93,11 @@ public class AddressBookTest {
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
+        }
+
+        @Override
+        public ObservableList<PersonInsight> getInsightsList(Model model) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

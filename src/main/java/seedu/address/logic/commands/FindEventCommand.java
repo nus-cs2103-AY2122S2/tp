@@ -19,8 +19,10 @@ import seedu.address.model.event.Event;
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "findevent";
+    public static final String COMMAND_ALIAS = "fe";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose fields match all of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Finds all events whose fields match all of "
             + "the specified search terms (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "EVENT_NAME_SUBSTRING] "
@@ -33,7 +35,7 @@ public class FindEventCommand extends Command {
             + PREFIX_FRIEND_NAME + "john "
             + PREFIX_FRIEND_NAME + "joe ";
 
-    public final List<Predicate<Event>> predicates;
+    private final List<Predicate<Event>> predicates;
 
     public FindEventCommand(List<Predicate<Event>> predicates) {
         this.predicates = predicates;

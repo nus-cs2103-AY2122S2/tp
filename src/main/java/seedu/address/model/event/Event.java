@@ -136,6 +136,15 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Returns true if the event has a friend with the same name as the specified person.
+     */
+    public boolean hasFriendWithName(Person person) {
+        requireNonNull(person);
+        return this.getFriendNames().stream().anyMatch(person::hasName);
+    }
+
+
+    /**
      * Returns true if all friend names correspond to actual Friends in the AddressBook.
      *
      * @return true if all friend names correspond to actual Friends in the AddressBook.
