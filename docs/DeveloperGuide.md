@@ -365,7 +365,7 @@ When the import/export command is executed, a `JsonFileManager` is created with 
 For `import`: After the copying is completed, `ImportCommand` sends a `CommandResult` to `LogicManager`. In the `LogicManager`, the `Model`'s show list will get updated with the imported data before `Storage` saves `Model`'s show list.
 
 ### Design considerations:
-Using the FileChooser library, it manages to create a File Explorer GUI similar to Windows' native File Explorer's GUI.
+Implementing the FileChooser library allows us to create a File Explorer GUI similar to the user's Operating System's native File Explorer GUI.
 
 ---
 
@@ -1032,21 +1032,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Importing Trackermon data
 
-1. Import Trackermon data.
-   2. Launch the app.
-   3. Ensure that current Trackermon data is different from data we plan to import.
-   4. Import chosen data.
-       1. Test case: Select valid data to import.
-          <br>Expected: Trackermon's data reflects imported data.
-       2. Test case: Select invalid data to import. An example would be any non JSON file.
-          <br>Expected: Trackermon displays an error messsage stating that the imported file has to be of type JSON.
-       3. Test case: Click on cancel in the file explorer GUI.
-          <br>Expected: File explorer GUI closes, Trackermon displays an error message stating that the file import has failed.
-3. Dealing with corrupted data
-   1. Prerequisite: Data must be corrupted.
-   2. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
-   3. Test case: `data/trackermon.json` was corrupted.
-      <br>Expected: Trackermon displays an error message stating that the imported file may be corrupted.
+1. Prerequisites: Another valid copy of Trackermon data exists.
+2. Ensure that current Trackermon data is different from data we plan to import.
+3. Launch the app.
+4. Command: `import`
+5. Test case: Importing valid data
+   1. Condition: Valid Trackermon data file exists in storage.
+   2. Action: Select valid Trackermon data file to import.
+   
+      Expected: Import succeeds, current show list is replaced with imported Trackermon data's show list.
+6. Test case: Cancelling import
+   1. Condition: None.
+   2. Action: Click "Cancel" button in File Explorer GUI.
+   
+      Expected: Trackermon displays message saying `Import data aborted.`
+7. Test case: Importing corrupted Trackermon data file
+   1. Condition: Corrupted Trackermon data file exists in storage. Manually edit `data/trackermon.json` to break JSON formatting. An example would be removing the opening curly braces.
+   2. Action: Select corrupted Trackermon data file to import.
+   
+      Expected: Trackermon displays error message saying `Could not read import data: File may be corrupted.`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -1054,25 +1058,30 @@ testers are expected to do more *exploratory* testing.
 
 ### Exporting Trackermon data
 
-1. Export Trackermon data.
-    1. Launch the app.
-    2. Take note of current Trackermon data.
-    3. Export the data.
-       1. Test case: Exporting to any directory
-          <br>Expected: Data is exported as `trackermon.json`.
-       2. Test case: Exporting to directory with preexisting `trackermon.json`
-          1. A popup appears asking if you want to replace the old file.
-          2. Test case: Click on `No`
-             <br>Expected: Popup closes, you are brought back to file explorer GUI.
-          3. Test case: Click on `Yes`
-             <br>Expected: Popup and file explorer GUI closes. Old file is replaced.
-       3. Test case: Renaming the exported file in the file explorer GUI.
-          <br>Expected: Trackermon data exported as chosen filename in chosen directory.
-       4. Test case: Renaming the exported file in the file explorer GUI to `filename`, and exporting to directory with preexisting new `filename`.
-          <br>Expected: Same as Test case: Exporting to directory with preexisting `trackermon.json`
-       5. Test case: Click on cancel in the file explorer GUI.
-          <br>Expected: File explorer GUI closes, Trackermon displays error message stating file export has failed.
-       
+1. Prerequisites: None.
+2. Ensure that current Trackermon data is different from data we plan to import.
+3. Launch the app.
+4. Command: `export`
+5. Test case: Exporting data to directory without existing `trackermon.json`
+    1. Condition: Directory without existing `trackermon.json` exists.
+    2. Action: Select directory fulfilling condition to export Trackermon data to.
+
+       Expected: Export succeeds, selected directory now has `trackermon.json` file containing exported show data.
+6. Test case: Exporting data to directory with existing `trackermon.json`
+    1. Condition: Directory with existing `trackermon.json` exists.
+    2. Action: Select directory fulfilling condition to export Trackermon data to.
+   
+       Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.
+7. Test case: Renaming exported data in File Explorer GUI.
+    1. Condition: None.
+    2. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.
+      
+       Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.
+8. Test case: Cancelling export
+    1. Condition: None.
+    2. Action: Click "Cancel" button in File Explorer GUI.
+
+       Expected: Trackermon displays message saying `Export data aborted.`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
