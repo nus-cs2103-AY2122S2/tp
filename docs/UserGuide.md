@@ -23,7 +23,7 @@ Amigos is a desktop application to help tech-savvy university students manage th
 
 5. Type the command in the command box and press Enter to execute it. e.g:
 
-  * **`showfriends`** : Lists all friends.
+  * **`listfriends`** : Lists all friends.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -50,8 +50,8 @@ Amigos is a desktop application to help tech-savvy university students manage th
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `showfriends`, `showevents` and `exit`) will be ignored.<br>
-  e.g. if the command specifies `showfriends 123`, it will be interpreted as `showfriends`.
+* Extraneous parameters for commands that do not take in parameters (such as `listfriends`, `listevents` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `listfriends 123`, it will be interpreted as `listfriends`.
 
 * Arguments connected by a `?` are exclusively-or - i.e. only one or the other can be provided.
   e.g. in `addlog INDEX ? n/NAME`, either `INDEX` or `NAME` must be provided, but not both.
@@ -244,7 +244,7 @@ Delete existing event(s).
 * `deleteevent 2`
 
 ### List all events : `listevents`
-Lists all the upcoming events in amigos
+Lists all the upcoming events in Amigos.
 
 **Format**: `listevents [-a]`
 
@@ -334,5 +334,3 @@ Please do not manually edit the save file to avoid the risk of data corruption.
 | **Help**                   |               | `help`                                                                                                                                                                                                                                                                 |
 | **Clear**                  |               | `clear`                                                                                                                                                                                                                                                                |
 | **Exit**                   |               | `exit`                                                                                                                                                                                                                                                                 |
-
->>>>>>> master
