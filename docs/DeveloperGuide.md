@@ -3,12 +3,7 @@ layout: page
 title: CinnamonBun Developer Guide
 ---
 * Table of Contents
-1. Acknowledgements
-2. Setting up
-3. Design
-   1. Architecture
-   2. UI Components
-4. Implementation
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
