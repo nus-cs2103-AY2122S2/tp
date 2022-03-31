@@ -377,7 +377,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 * Use `r/` if you want to sort by rating
 * For the above prefixes, you have to specify the `ORDER` right after the prefix.
 * `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending! 
-* If two or more of the above prefixes are being used, sort will prioritise sorting by name then status then rating then tag.   
+* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.   
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
 * List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
 * For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "RatingTagStatusName"
@@ -389,7 +389,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 * By not entering any prefixes, it will sort by name in ascending order.
 * Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
 * The `ORDER` must be asc or dsc!
-* The `SEQUENCE` must contain the full name of all the sort condition used!
+* The `SEQUENCE` must contain the full name of all the sort conditions used!
 * For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
