@@ -6,10 +6,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Flag;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
 import seedu.address.model.person.UniquePersonList;
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -88,16 +88,6 @@ public class HustleBook implements ReadOnlyHustleBook {
     }
 
     /**
-     * Replaces the flag of the given person {@code target} in the list with {@code flag}.
-     * {@code target} must exist in the hustle book.
-     */
-    public void flagPerson(Person target, Flag flag) {
-        requireNonNull(flag);
-
-        persons.flagPerson(target, flag);
-    }
-
-    /**
      * Returns true if any person with the same scheduled meeting
      * as {@code scheduledMeeting} exists in the hustle book.
      * @param scheduledMeeting The meeting to be scheduled.
@@ -106,17 +96,6 @@ public class HustleBook implements ReadOnlyHustleBook {
     public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
         requireNonNull(scheduledMeeting);
         return persons.anyMeetingClash(scheduledMeeting);
-    }
-
-    /**
-     * Schedules a meeting date and time with the targetted person.
-     * @param target The person to be scheduled a meeting with.
-     * @param scheduledMeeting The meeting details.
-     */
-    public void scheduleMeeting(Person target, ScheduledMeeting scheduledMeeting) {
-        requireNonNull(scheduledMeeting);
-
-        persons.scheduleMeeting(target, scheduledMeeting);
     }
 
     /**

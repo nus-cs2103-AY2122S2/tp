@@ -16,9 +16,12 @@ public abstract class Command {
         exit(ExitCommand.MESSAGE_USAGE),
         find(FindCommand.MESSAGE_USAGE),
         flag(FlagCommand.MESSAGE_USAGE),
+        help(HelpCommand.MESSAGE_USAGE),
         list(ListCommand.MESSAGE_USAGE),
         meet(MeetCommand.MESSAGE_USAGE),
-        sort(SortCommand.MESSAGE_USAGE);
+        redo(RedoCommand.MESSAGE_USAGE),
+        sort(SortCommand.MESSAGE_USAGE),
+        undo(UndoCommand.MESSAGE_USAGE);
 
         public static final String MESSAGE_CONSTRAINTS = "Please include proper commands to display help for.";
 

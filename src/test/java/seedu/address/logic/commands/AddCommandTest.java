@@ -22,7 +22,6 @@ import seedu.address.model.HustleBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyHustleBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Flag;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
@@ -129,22 +128,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void undoHustleBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoHustleBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void flagPerson(Person target, Flag flag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void scheduleMeetingPerson(Person target, ScheduledMeeting meeting) {
             throw new AssertionError("This method should not be called.");
         }
 

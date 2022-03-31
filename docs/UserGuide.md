@@ -24,6 +24,8 @@ To get started, click on any of the headers in the table of content to jump to t
     * [Editing a client : `edit`](#editing-a-client--edit)
     * [Locating clients by name : `find`](#locating-clients-by-name--find)
     * [Deleting a client : `delete`](#deleting-a-client--delete)
+    * [Undoing the previous commands : `undo`](#undoing-the-previous-commands--undo)
+    * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
     * [Saving the data](#saving-the-data)
@@ -285,6 +287,22 @@ Example:
 * Running the command `delete n/John` will show a list of clients with names containing "John"
 * If you wish to delete `John Doe` and he is the first person listed, typing `1` will delete `John Doe`
 
+### Undoing the previous commands : `undo`
+
+Undoes the previous commands executed.
+  * Multiple `undo` is possible. 
+  * Maximum possible `undo` is till the time HustleBook is launched. 
+
+Format: `undo`
+
+### Redoing the previous commands : `redo`
+
+Redoes the previous commands executed.
+  * Multiple `redo` is possible.
+  * Maximum possible `redo` is till the last executed command.
+
+Format: `redo`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the HustleBook.
@@ -319,10 +337,12 @@ If your changes to the data file makes its format invalid, HustleBook will disca
 | **List**   | `list`                                                                                                                                                                                      |
 | **Clear**  | `clear`                                                                                                                                                                                     |
 | **Sort**   | `sort`                                                                                                                                                                                      |
+| **Undo**  | `undo`                                                                                                                                                                                       |
+| **Redo**   | `redo`                                                                                                                                                                                      |
 | **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                                       |
 | **Flag**   | `flag NAME`<br> e.g., `flag John`                                                                                                                                                           |
 | **Unflag** | `unflag NAME` <br> e.g., `unflag John`                                                                                                                                                      |
 | **Meet**   | `meet NAME d/DATE t/TIME` <br> e.g., `meet John d/2022-05-25 t/1430`                                                                                                                        |
-| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                             |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [i/INFO] [t/TAG]…​`<br> e.g.,`edit John n/James Lee e/jameslee@example.com`                                          |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                      |
