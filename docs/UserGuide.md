@@ -96,7 +96,7 @@ The table below explains the important technical terms to help you understand ho
 
 The commands in TrackBeau follows these rules:
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g., in `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g., `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnd@example.com` or as `n/John Doe`.
@@ -179,6 +179,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
+    <li>Editing a customer will edit all future bookings of that customer.</li>
 </ul>
 
 </div>
@@ -200,21 +201,21 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 ![Editing a customer example](images/user-guide/edit-customer.png)
 
 
-#### 4.1.5 Finding customers' profile by name: `findc`
+#### 4.1.5 Finding customers' profile by keyword: `findc`
 
-Finds customers whose names contain any of the given keywords.
+Finds customers whose parameters contain any of the given keywords.
 
 Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 
 * Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies
-* The search is case-insensitive. e.g, `john` will match `john`
-* Only the name is searched.
+* The search is case-insensitive. e.g, `John` will match `john`
+* Only the parameters is searched.
 * Only full words will be matched e.g. `john` will not match `joh`
 
 Examples:
 * `findc n/John` returns `john` and `John Doe`
 * `findc al/Nickel` returns customer profiles with nickle allergies
-* `findc h/Oily h/Dry` returns customer profiles that has the hair type of oily or dry
+* `findc h/Oily Dry` returns customer profiles that has the hair type of oily or dry
 
 #### 4.1.6 Deleting customer(s) : `deletec`
 
@@ -225,6 +226,13 @@ Format: `deletec INDEX,[MORE INDEXES]`
 * The index refers to the index number shown in the displayed customer list.
 * The index must be a positive integer 1, 2, 3, …
 * All indexes must be valid else the operation will not execute.
+* Deleting a customer will delete all future bookings of that customer.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:** All the input indexes must be valid else the command will not be executed.
+
+</div>
 
 Examples:
 * `deletec 1,2` Removes the 1st and 2nd customer from the application.
@@ -266,6 +274,17 @@ Edits an existing service in the application.
 
 Format: `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>At least one of the optional fields must be provided.</li>
+    <li>Existing values will be updated to the input values.</li>
+    <li>Editing a service will edit all future bookings with that service.</li>
+</ul>
+
+</div>
+
 Examples:
 * `edits 1 pr/200` Edits the price of the 1st service to be `200`.
 * `edits 2 n/Dark Eye Circle Treatment d/30` Edits the name and duration of the 2nd service to be `Dark Eye Circle Treatment` and `60` respectively.
@@ -274,12 +293,32 @@ Example Usage: `edits 1 pr/200`
 
 ![Editing a service example](images/user-guide/edit-service.png)
 
+#### 4.2.5 Finding service' profile by keyword: `finds`
 
-#### 4.2.5 Deleting service(s) : `deletes`
+Find services whose parameters contain any of the given keywords.
+
+Format: `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+
+* Keyword types available: name, price, duration
+* The search is case-insensitive. e.g, `Facial` will match `facial`.
+* Only the parameters is searched.
+* Only full words will be matched e.g. `Facial` will not match `Faial`.
+
+Examples:
+* `finds n/Facial` returns `Organic Radiance Facial` and `Bio Ageless Facial`.
+* `finds pr/100` returns service profiles at cost $100.
+* `finds d/90` returns services that lasts 90 minutes.
+
+#### 4.2.6 Deleting service(s) : `deletes`
 
 Deletes the specified service(s) from the application.
 
 Format: `deletes INDEX,[MORE INDEXES]`
+* Deletes the service profile at the specified INDEXES.
+* The index refers to the index number shown in the displayed service list.
+* The index must be a positive integer 1, 2, 3, …
+* All indexes must be valid else the operation will not execute.
+* Deleting a service will delete all future bookings with that service.
 
 <div markdown="block" class="alert alert-info">
 
@@ -296,12 +335,86 @@ Examples:
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
-| Parameter             | Description                                                                                     |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| `INDEX`               | The index of the booking in the displayed list. It must be a valid positive index.              |
-| `CUSTOMERINDEX`       | The index of the customer in the displayed list. It must be a valid positive index.             |
-| `SERVICEINDEX`        | The index of the service in the displayed list. It must be a valid positive index.              |
-| `APPOINTMENTTIME `    | The date and time of the booking. It should follow dd-MM-yyyy HH:mm and be valid date and time. |
+|Parameter|Description|
+|---------|-----------|
+|`CUSTOMER_INDEX`|Name of the service. Service name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. It should also be unique such that no two services have the same name.|
+|`SERVICE_INDEX`|Price of the service. Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.|
+|`BOOKING_DATE_TIME`|Duration of the service in minutes. Duration should only contain numbers and have a value that is greater than 0.|
+|`FEEDBACK`|The index of the service in the displayed list. It must be a valid positive index.|
+
+#### 4.3.2 Adding a booking: `addb`
+Adds a booking to the application.
+
+Format: `addb c/CUSTOMER_INDEX sev/SERVICE_INDEX st/BOOKING_DATE_TIME`
+
+Examples:
+* `addb c/1 sev/1 st/10-10-2022 10:30`
+* `addb c/2 sev/3 st/12-12-2022 10:30`
+
+Example Usage: `addb c/1 sev/1 st/10-10-2022 10:30`
+
+#### 4.3.3 Listing all bookings : `listb`
+
+Shows a list of all bookings in the application.
+
+Format: `listb`
+
+#### 4.3.4 Editing a booking: `editb`
+Edits an existing service in the application.
+
+Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>At least one of the optional fields must be provided.</li>
+    <li>Existing values will be updated to the input values.</li>
+</ul>
+
+</div>
+
+Examples:
+* `editb 1 sev/3 f/Excellent Customer Service` Edits the 1st booking's service to the service at Index 2 and edit its feedback to `Excellent Customer Service` .
+* `editb 2 st/10-12-2022 10:30` Edits the booking time of the 1st booking to be `10-12-2022 10:30`.
+
+Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
+
+#### 4.3.5 Finding booking' profile by keyword: `findb`
+
+Find bookings whose parameters contain any of the given keywords.
+
+Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+
+* Keyword types available: customer index, service index, booking date time, feedback
+* The search is case-insensitive. e.g, `Excellent` will match `excellent`
+* Only the parameters is searched.
+* Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
+
+Examples:
+* `finds c/1 sev/2` returns bookings where the customer at Index 1 has the service at Index 2.
+* `finds f/Bad` returns `Bad service` and `Service was bad`.
+* `finds st/10-10-2022` returns bookings that are on `10-10-2022`.
+
+#### 4.3.6 Deleting booking(s) : `deleteb`
+
+Deletes the specified booking(s) from the application.
+
+Format: `deleteb INDEX,[MORE INDEXES]`
+* Deletes the booking profile at the specified INDEXES.
+* The index refers to the index number shown in the displayed booking list.
+* The index must be a positive integer 1, 2, 3, …
+* All indexes must be valid else the operation will not execute.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:** All the input indexes must be valid else the command will not be executed.
+
+</div>
+
+Examples:
+* `deleteb 3` Removes the 3rd booking from the application.
+* `deleteb 1,2,3` Removes the 1st, 2nd and 3rd booking from the application.
 
 ### 4.4 Statistics Management
 
@@ -375,6 +488,8 @@ Format: `plotMonthlyCustomer`
 
 Examples:
 * `plotMonthlyCustomer`
+   
+### 4.5 Miscellaneous
 
 ### 4.5 Schedule management
 
@@ -450,18 +565,24 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 ### 5.2 Service
 
-|Action|Format|Examples|
-|------|------|--------|
-|Add a service|`adds n/SERVICE_NAME pr/PRICE d/DURATION`|`adds n/Acne Facial Treatment pr/138 d/120`|
-|List all services|`lists`||
-|Edit a service|`edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]`|`edits 2 n/Dark Eye Circle Treatment d/30`|
-|Delete service(s)|`deletes INDEX,[MORE INDEXES]`|`deletes 1,2,3`|
+| Action                | Format                                                 |Examples|
+|-----------------------|--------------------------------------------------------|--------|
+| Add a service         | `adds n/SERVICE_NAME pr/PRICE d/DURATION`              |`adds n/Acne Facial Treatment pr/138 d/120`|
+| List all services     | `lists`                                                ||
+| Edit a service        | `edits INDEX [n/SERVICE_NAME] [pr/PRICE] [d/DURATION]` |`edits 2 n/Dark Eye Circle Treatment d/30`|
+| Find service profiles | `finds KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`           ||
+| Delete service(s)     | `deletes INDEX,[MORE INDEXES]`                         |`deletes 1,2,3`|
 
 ### 5.3 Booking
 
-|Action|Format|Examples|
-|------|------|--------|
-|||
+| Action                | Format                                                 |Examples|
+|-----------------------|--------------------------------------------------------|--------|
+| Add a booking         | `addb c/CUSTOMER_INDEX sev/SERVICE_INDEX st/BOOKING_DATE_TIME`                           | `addb c/1 sev/1 st/10-10-2022 10:30`         |
+| List all bookings     | `listb`                                                                                  ||
+| Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
+| Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             ||
+| Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
+
 
 ### 5.4 Statistics
 
