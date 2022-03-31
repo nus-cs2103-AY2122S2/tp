@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.candidate.Candidate;
 
@@ -146,6 +147,6 @@ public class Interview {
     @Override
     public String toString() {
         return this.candidate.getName() + " " + this.candidate.getStudentId() + " "
-                + this.getInterviewDate() + " " + this.getInterviewStartTime();
+                + this.getInterviewDateTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 }
