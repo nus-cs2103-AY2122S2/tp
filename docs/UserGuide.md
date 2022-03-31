@@ -120,11 +120,13 @@ deletes a player/ lineup/ schedule from MyGM
 
 **To delete a player:**
 Format: `delete P/PLAYER [L/LINEUP]`
+
 * Deletes the player from the player list.
-* Id `L/LINEUP` is specified, delete the player from the lineup.
+* If `L/LINEUP` is specified, delete the player from the lineup.
 
 Example:
 *`delete P/James Soften` will delete player `James Soften`.
+*`delete P/James Soften L/Staring 5` will delete player `James Soften` from the `Starting 5` lineup.
 
 **To delete a lineup:**
 Format: `delete L/LINEUP`
@@ -134,10 +136,11 @@ Example:
 * `delete L/Starting 5` will delete the lineup `Starting 5` from MyGM.
 
 **To delete a schedule:**
-Format: `delete T/ i/INDEX_SCHEDULE`
+Format: `delete S/INDEX_SCHEDULE`
 * Delete the i-th schedule of MyGM.
-  Example:
-  *`delete i/1` will delete schedule `1` from MyGM.
+
+Example:
+*`delete S/1` will delete the first schedule from MyGM.
 
 ### Putting a player to a lineup: `put`
 
@@ -257,14 +260,15 @@ Update the details of a player, team, lineup or schedule
 
 **To edit a player:**
 
-Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [a/AGE] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`
+Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [T/TAGS]`
 
 * Edit the details of a player from the player list
 * If any fields are specified, it will change accordingly
 * Multiple fields can be changed at once
+* At least one field must be specified
 
 Example:
-* `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888
+* `edit P/Alex Yeoh p/8888888` will change the phone number of player Alex Yeoh to 88888888
 
 **To edit a lineup:**
 
@@ -273,14 +277,16 @@ Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 * Edit the lineup name of lineup to a new lineup name
 
 Example:
-* `edit L/Starting5 n/Worst5` will change name of the lineup Starting5 of team Lakers to Worst5
+* `edit L/Starting5 n/Worst5` will change name of the lineup Starting5 to Worst5
 
 **To edit a schedule:**
 
 Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 
-* Edit the details of the i-th schedule of a team
+* Edit the details of the i-th schedule
 * If any fields are specified, it will be changed accordingly
+* Multiple fields can be changed at once
+* At least one field must be specified
 
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule
@@ -300,6 +306,8 @@ Format: `exit`
 ### Changing the theme of the UI: `theme`
 
 Changes to either light mode or dark mode. MyGM is defaulted to dark mode on start up.
+
+* Only have the following THEME currently: `light` and `dark`
 
 Format: `theme T/THEME`
 
