@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -83,6 +84,13 @@ public class ShowFriendCommandTest {
         assert (!listCommandResult.isShowFriendCommand());
     }
 
+    @Test
+    public void execute_showFriendByNameNameDoesNotExist_throwsCommandException() {
+        //Tommy Ang does not exist in the sample model that is used for testing here
+        Person personToShow = new Person(new FriendName("Tommy Ang"));
+        ShowFriendCommand showFriendCommand = new ShowFriendCommand(personToShow.getName());
+        assertCommandFailure(showFriendCommand, model, ByIndexByNameCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
 
     @Test
     public void equals() {

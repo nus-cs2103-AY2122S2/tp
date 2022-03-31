@@ -126,13 +126,27 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicatePersonUnfilteredListByIndex_failure() {
+        //the new details are the details of a person already existing in Amigos
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
+    }
+
+    @Test
+    public void execute_duplicatePersonUnfilteredListByName_failure() {
+        //the new name is the name of a person already existing in Amigos
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        FriendName nameOfFirstPerson = firstPerson.getName();
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        FriendName nameOfSecondPerson = secondPerson.getName();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(nameOfSecondPerson.fullName).build();
+        EditCommand editCommand = new EditCommand(nameOfFirstPerson, descriptor);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 
@@ -157,6 +171,15 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void execute_nameDoesNotExistInUnfilteredList_failure() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(personToEdit).build();
+        //Tommy Ang does not exist in the sample model that is used for testing here.
+        EditCommand editCommand = new EditCommand(new FriendName("Tommy Ang"), descriptor);
+        assertCommandFailure(editCommand, model, ByIndexByNameCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
@@ -173,6 +196,7 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
 
     @Test
     public void equals() {
