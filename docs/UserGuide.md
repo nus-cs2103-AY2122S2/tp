@@ -71,10 +71,10 @@ TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook
 We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`s.
 
 Please note the following defensive behavior related to the data JSON file:
-1) All `Student`s will have their `LabList` aligned with the `MasterLabList` when the data file is loaded in. This means that any `Lab`s that a `Student` is missing will be added in with the default `LabStatus` of `UNSUBMITTED`. 
+1. All `Student`s will have their `LabList` aligned with the `MasterLabList` when the data file is loaded in. This means that any `Lab`s that a `Student` is missing will be added in with the default `LabStatus` of `UNSUBMITTED`. 
 Any `Lab`s that the `Student` has that is not in the `MasterLabList` will be ignored.
-2) If a `Student` has a lab that has a missing or invalid `LabStatus`, it is loaded as an `UNSUBMITTED` lab or `GRADED` if `labMark` is present and valid. 
-3) If a `Student` has a lab with a missing or invalid `labMark` but has a `LabStatus` of `GRADED`,  it is loaded as an `UNSUBMITTED` lab with `Unknown` mark.
+2. If a `Student` has a lab that has a missing or invalid `LabStatus`, it is loaded as an `UNSUBMITTED` lab or `GRADED` if `labMark` is present and valid. 
+3. If a `Student` has a lab with a missing or invalid `labMark` but has a `LabStatus` of `GRADED`,  it is loaded as an `UNSUBMITTED` lab with `Unknown` mark.
 
 If the TAddressBook starts up with blank data, but the user expects there to be data, it means that there are  formatting issues in the data JSON due to editing by the user.
 In which case, if the user wants to fix the data JSON, the user should exit the app without using any commands that can modify data.
