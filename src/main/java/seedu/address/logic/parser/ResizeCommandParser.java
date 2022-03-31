@@ -27,7 +27,6 @@ public class ResizeCommandParser implements Parser<ResizeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResizeCommand.MESSAGE_USAGE));
         }
         for (int d : resizableWindowSizeList) {
-            System.out.println(resultWindowSize == d);
             if (resultWindowSize == d) {
                 return new ResizeCommand((double) resultWindowSize);
             }
