@@ -200,7 +200,7 @@ Format `upload INDEX [i/FilePath:description]`
 - File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
   ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
 - Description is optional and can be left blank e.g. `upload 1 i/example.png`
-- multiple images can be uploaded at once by starting each file with a now flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`
+- multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`
 
 ### View image of person: `viewimage`
 
