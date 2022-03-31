@@ -31,34 +31,23 @@ faster than traditional GUI applications.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all candidates.
-
     * **`add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
-   
-    * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate displayed in the system.
+
+    * **`list`** : Lists all candidates.
 
     * **`delete 1`** : Deletes the first candidate displayed in the system.
 
     * **`find k/Alex f/name`** : Searches for all candidates with name containing “alex" (case-insensitive).
 
     * **`sort s/name`** : Sorts all candidates by name in ascending alphabetical order (i.e. A-Z).
-    
-    * **`view today`** : Filters all interviews to display only interviews scheduled today (if any).
-   
-    * **`remark 1 r/a good candidate`** : Adds a remark to the first candidate displayed in the system.
    
     * **`schedule add candidate/1 at/05-05-2022 10:00`** : Schedules the first candidate for an interview at 5 May 2022 10AM.
-
-    * **`schedule edit 1 at/06-06-2022 15:00`** : Reschedules the first interview in the interview schedule to 6 June 2022 3PM. Note that the index in the interview schedule is different from the candidate list.
-
-    * **`schedule delete 1`** : Deletes the first interview in the interview schedule. Note that the index in the interview schedule is different from the candidate list.
 
     * **`help`** : List all commands in the system.
    
     * **`exit`** : Closes and exits the system.
-
-
-1. Refer to the [Features](#features) below for details of all commands.
+    
+1. Refer to the [Features](#features) section below for details of all the available commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
