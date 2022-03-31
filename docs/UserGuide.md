@@ -115,9 +115,11 @@ Examples:
 Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a dd/mm/yyyy hhmm format.
+* The first character of every word in `SCHEDULE_NAME` should be capitalized. For example:`Starting Five`
+
 
 Examples:
-* `add S/ n/competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
+* `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
 
 ![AddSchedule_SS](images/AddSchedule_SS.png)
 
@@ -378,7 +380,7 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                           |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/competition r/first game of national competition d/20/04/2024 2200` |
+| **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` |
 | **Delete** | `delete P/PLAYER`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/ i/INDEX`<br>e.g. `delete S/INDEX`                                                                                                                                                                                                         |
 | **View**   | `view L/[LINEUP]`<br>e.g. `view L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view S/ i/[INDEX]`<br>e.g. `view S/1`                                                                                                                                                                                                              |
 | **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                      
