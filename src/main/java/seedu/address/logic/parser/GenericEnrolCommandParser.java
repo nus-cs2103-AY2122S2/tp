@@ -52,7 +52,7 @@ public class GenericEnrolCommandParser {
             }
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage), pe);
         }
     }
 }
