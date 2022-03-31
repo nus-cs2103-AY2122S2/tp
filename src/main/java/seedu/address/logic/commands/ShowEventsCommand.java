@@ -13,14 +13,28 @@ public class ShowEventsCommand extends Command {
     public static final String COMMAND_WORD = "listevents";
     public static final String COMMAND_ALIAS = "le";
 
-    public static final String MESSAGE_SUCCESS = "Listed all events";
+    public static final String MESSAGE_USAGE = "showevents [-a]";
+
+    public static final String MESSAGE_SUCCESS = "Listed upcoming events";
+
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all events";
+
+    private final boolean isShowAllEvents;
+
+    public ShowEventsCommand(Boolean showAllEvents) {
+        this.isShowAllEvents = showAllEvents;
+    }
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (!isShowAllEvents) {
+            model.updateFilteredEventList(event -> event.getDateTime().isAfterNow());
+            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        }
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS_ALL, false, false, true);
     }
 
     @Override
@@ -32,4 +46,5 @@ public class ShowEventsCommand extends Command {
     public boolean equals(Object other) {
         return (other instanceof ShowEventsCommand);
     }
+
 }
