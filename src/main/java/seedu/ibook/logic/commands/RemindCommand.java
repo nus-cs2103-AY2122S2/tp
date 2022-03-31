@@ -42,6 +42,7 @@ public class RemindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.clearProductFilters();
         model.addProductFilter(expiringFilter);
         model.updateFilteredItemListForProducts(itemPredicate);
         return new CommandResult(MESSAGE_SUCCESS);

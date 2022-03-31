@@ -11,7 +11,7 @@ import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code IBook} with sample data.
  */
 public class SampleDataUtil {
     public static Product[] getSampleProducts() {
