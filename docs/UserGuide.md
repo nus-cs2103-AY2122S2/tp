@@ -335,7 +335,7 @@ Function: Add a new property for the specified seller.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note: `add-ptb` and `add-pts` have different fields! **<br>
+:information_source: Note: `add-ptb` and `add-pts` have different fields!<br>
 
 * `add-pts` has an additional `a/ADDRESS` field.
 
