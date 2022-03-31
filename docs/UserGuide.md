@@ -289,20 +289,22 @@ Format: `clear-b`
 
 Function: Sort all the buyers according to the orders specified.
 
-Format: `sort-b [o/FIELDS]`
+Format: `sort-b [by/COMPAREDITEM] [o/ORDER]`
 
-* The `FIELDS` are:
-  * `appointment` time
+* The `COMPAREDITEM` are:
+  * `time`
   * `name`
 
-* If the input is omitted, `sort-b` will simply sort by the **name** of the buyer in **descending alphabetical order**.
-  * E.g. Alex, Bob, Cartman
-* `appointment` will sort by the appointment time, from the earliest appointment first.
+* The `ORDER` are:
+  * `asc`
+  * `desc`
+
+* All entries are compulsory
+* When there's no appointment with certain buyers, those buyers will be put at the bottom of the list, regardless of the sorting order, and only buyers with an appointment time will be sorted.
 
 Examples:
-* `sort-b`
-* `sort-b o/name`
-* `sort-b o/appointment`
+* `sort-b by/time o/asc`
+* `sort-b by/name o/desc`
 
 [back to start of section](#features)
 
@@ -452,20 +454,23 @@ Function: Sort all the sellers according to the orders specified.
 :bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
 </div>
 
-Format: `sort-s [o/FIELDS]`
+Format: `sort-s [by/COMPAREDITEM] [o/ORDER]`
 
-* The `FIELDS` are:
-  * `appointment`
+* The `COMPAREDITEM` are:
+  * `time`
   * `name`
+  
+* The `ORDER` are:
+  * `asc`
+  * `desc`
 
-* If the input is omitted, `sort-s` will simply sort by the **name** of the seller in **descending alphabetical order**.
-  * E.g. Alex, Bob, Cartman
-* `appointment` will sort by the appointment time, from the earliest appointment first.
+* All entries are compulsory
+* When there's no appointment with certain sellers, those sellers
+* will be put at the bottom of the list, regardless of the sorting order, and only sellers with an appointment time will be sorted.
 
 Examples:
-* `sort-s`
-* `sort-s o/name`
-* `sort-s o/appointment`
+* `sort-s by/time o/asc`
+* `sort-s by/name o/desc`
 
 [back to start of section](#features)
 
@@ -593,7 +598,7 @@ Action | Format, Examples
 **Find Buyer** | `find-b field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-b n/James Jake`
 **Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
 **Clear Buyers** | `clear-b`
-**Sort Buyers** | `sort-b [o/FIELDS]` <br> e.g., `sort-b o/name`
+**Sort Buyers** | `sort-b [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-b by/name o/desc`
 **List Sellers** | `list-s`
 **Add Seller** | `add-s n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-s n/James Ho p/22224444`
 **Add Seller Property** | `add-pts a/ADDRESS l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-pts a/Blk 343, Rika Ave 1 #09-1231 l/Bishan pr/100000,200000 h/hdb`
@@ -602,7 +607,7 @@ Action | Format, Examples
 **Find Seller** | `find-s field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-s n/James Jake`
 **Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
 **Clear Sellers** | `clear-s`
-**Sort Sellers** | `sort-s [o/FIELDS]` <br> e.g., `sort-s o/name`
+**Sort Sellers** | `sort-s [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-s by/time o/asc`
 
 
 [Back to top](#quick-start)

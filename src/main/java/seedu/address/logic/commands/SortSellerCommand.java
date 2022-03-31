@@ -35,7 +35,7 @@ public class SortSellerCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         model.sortFilteredSellerList(comparedItem, order);
-        return new CommandResult("Buyers sorted by " + comparedItem + " " + order);
+        return new CommandResult("Sellers sorted by " + comparedItem + " " + order);
     }
 
     @Override
