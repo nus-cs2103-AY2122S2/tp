@@ -144,11 +144,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void scheduleMeetingPerson(Person target, ScheduledMeeting meeting) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasSameMeeting(ScheduledMeeting scheduledMeeting) {
             throw new AssertionError("This method should not be called.");
         }

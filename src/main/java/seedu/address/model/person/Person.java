@@ -127,10 +127,6 @@ public class Person {
         return scheduledMeeting;
     }
 
-    public void setScheduledMeeting(ScheduledMeeting scheduledMeeting) {
-        this.scheduledMeeting = scheduledMeeting;
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

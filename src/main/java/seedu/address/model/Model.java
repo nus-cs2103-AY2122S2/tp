@@ -82,13 +82,6 @@ public interface Model {
     void flagPerson(Person target, Flag flag);
 
     /**
-     * Schedule a meeting with the given person.
-     * @param target Person to be scheduled meeting with.
-     * @param scheduledMeeting The meeting scheduled details.
-     */
-    void scheduleMeetingPerson(Person target, ScheduledMeeting scheduledMeeting);
-
-    /**
      * Adds the given person.
      * {@code person} must not already exist in the hustle book.
      */

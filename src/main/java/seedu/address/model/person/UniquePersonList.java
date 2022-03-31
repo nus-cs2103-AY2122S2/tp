@@ -92,17 +92,6 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Schedules a meeting with the targeted person.
-     * @param target The person to be scheduled a meeting with.
-     * @param scheduledMeeting The meeting details.
-     */
-    public void scheduleMeeting(Person target, ScheduledMeeting scheduledMeeting) {
-        requireAllNonNull(target, scheduledMeeting);
-        target.setScheduledMeeting(scheduledMeeting);
-    }
-
-
-    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
