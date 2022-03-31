@@ -44,17 +44,17 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`add`**`P/ n/John Doe p/98765432 e/johnd@example.com h/183 w/70 j/24 t/PG` : Adds a player named `John Doe` to MyGM.
+   
+   * **`add`**`S/ n/training r/shooting training d/01/01/2023 1800` : Adds a schedule called `training` to MyGM.
+   
+   * **`delete`**`P/John Doe` : Deletes John Doe from MyGM.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all players, lineup and schedule.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the Features below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -62,10 +62,10 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
 * Items in square brackets are optional.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
@@ -74,7 +74,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
 * If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as help.
 
 </div>
@@ -98,27 +98,29 @@ Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_A
 * Adds a player with the specified attributes to the player list in MyGM.
 
 Examples:
-* `add P/ n/John Doe a/17 j/3 w/69 h/188 p/98765432 e/johnd@example.com` Adds a player by the name of John Doe, who is age of 17, jersey number of 3, weight of 69kg, height of 188cm, handphone number of 98765432
+* `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of John Doe, jersey number of 3, position of PG, weight of 69kg, height of 188cm, handphone number of 98765432
 and email of johnd@example.com to the player list.`
+
+![AddPlayer_SS](images/AddPlayer_SS.png)
 
 **To add a lineup:**
 Format: `add L/ n/LINEUP_NAME`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
-* If `n/LINEUP_NAME` and `P/PLAYER` are specified, a lineup with the specified `LINEUP_NAME` with the specified `PLAYER` added to this lineup.
-* Multiple `PLAYER` can be specified but it will be **capped at 5**.
-* Tthe `PLAYER` specified **must already exist** in MyGM.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
-* `add L/ n/starting five P/James P/Curry P/Harden P/Durant P/Embiid` Players `James`, `Curry`, `Harden`, `Durant` and `Embiid` are also added to the lineup `starting five`.
+
+![AddLineup_SS](images/AddLineup_SS.png)
 
 **To add a schedule:**
-Format: `add S/ r/DESCRIPTION d/DATETIME`
-* Adds a schedule with the description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
-* `DATETIME` must be in a date time format.
+Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
+* Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
+* `DATETIME` must be in a dd/mm/yyyy hhmm format.
 
 Examples:
-* `add S/ r/competition d/22/02/2022 0900` adds a schedule with the description of `competition` that is held on `22/02/2022 0900`.
+* `add S/ n/competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
+
+![AddSchedule_SS](images/AddSchedule_SS.png)
 
 ### deleting a player/ lineup/ schedule :  `delete`
 deletes a player/ lineup/ schedule from MyGM
@@ -156,6 +158,7 @@ Format: `put P/PLAYER L/LINEUP`
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five
 
+* ![Put_SS](images/Put_SS.png)
 
 ### Viewing the summary: `view`
 
@@ -317,10 +320,10 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                           |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com`<br>`add L/ n/LINEUP_NAME [P/PLAYER]…​`<br>e.g. `add L/ n/starting five  P/James P/Curry P/Harden P/Durant P/Embiid`<br>`add S/ n/NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ r/competition d/22/02/2022 0900` |
+| **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/competition r/first game of national competition d/20/04/2024 2200` |
 | **Delete** | `xxx`<br>e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                         |
 | **View**   | `view L/[LINEUP]`<br>e.g. `view L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view S/ i/[INDEX]`<br>e.g. `view S/ i/1`                                                                                                                                                                                                                              |
-| **Put**    | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
+| **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/starting five`                                                                                                                                                                                                                                                                                                                                                        |
 | **Mark**   | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
 | **Unmark** | `unmark i/INDEX_SCHEDULE P/PLAYER [P/PLAYER]`<br> e.g. `unmark i/1 P/John Doe P/James P/Durant`                                                                                                                                                                                                                                                                            |
 | **Filter** | `xxx`<br> e.g.`xxx`                                                                                                                                                                                                                                                                                                                                                        |
