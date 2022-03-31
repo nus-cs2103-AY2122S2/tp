@@ -33,6 +33,9 @@ This section lists down all the features available in MMF. You can click on any 
 - [Find](#locating-a-person-find)
 - [Filter](#locating-a-person-by-their-module-filter)
 - [Sort](#sorting-contacts-in-list-sort)
+- [Archive](#archiving-contacts-archive)
+- [Unarchive](#unarchiving-contacts-archive)
+- [Switch](#switching-between-default-and-archives-switch)
 - [Undo](#undo-a-command--undo)
 - [Redo](#redo-a-command--redo)
 - [Exit](#exiting-the-program--exit)
@@ -347,6 +350,52 @@ Examples:
 * `sort n/asc p/desc`  will sort the list by name in ascending order first. If two persons have the same name, then sort by phone number in descending order.
 * `sort n/` will sort the list by name in ascending order by default.
 
+### Archiving contacts: `archive`
+
+You can archive students who have graduated in order to keep ModuleMate Finder more organised.
+
+format: `archive INDEX`
+* Archives the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `archive 2` archives the 2nd person in ModuleMate Finder.
+* `find Betsy` followed by `archive 1` archives the 1st person in the results of the `find` command.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
+You can only use this command when in the **default address book**. Otherwise, you will get an error that tells you to use the correct command
+</div>
+
+
+### Unarchiving contacts: `unarchive`
+
+You can also bring students back from the archives if necessary.
+
+format: `unarchive INDEX`
+* _Unarchives_ the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `unarchive 5` _unarchives_ the 5th person in ModuleMate Finder.
+* `find Lizzy` followed by `unarchive 1` _unarchives_ the 1st person in the results of the `find` command.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
+You can only use this command when in the **archives address book**. Otherwise, you will get an error that tells you to use the correct command
+</div>
+
+### Switching between default and archives: `switch`
+
+Switch between archives or the default address book in ModuleMate Finder.
+
+format: `switch`
+* Alternatively, you may use F10 to perform the same command
+
+Examples:
+* `switch` changes the view to the other address book. If you are in `Default` mode, then it changes to `Archives`, and vice-versa.
+* Pressing `F10` on your keyboard also does the same as the above.
+
 ### Undo a command : `undo`
 
 Undoes the most recent command. 
@@ -403,10 +452,6 @@ If your changes to the data file makes its format invalid, ModuleMateFinder will
 </div>
 
 
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
