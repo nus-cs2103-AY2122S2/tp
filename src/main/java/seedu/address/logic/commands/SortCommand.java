@@ -23,8 +23,8 @@ public class SortCommand extends Command {
             + PREFIX_SORTKEY + " SORTKEY argument.\n"
             + "Parameters: " + PREFIX_SORTKEY + "SORTKEY \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SORTKEY + "name\n"
-            + "Allowable fields to be sorted by include: applicationstatus, availability, course, email, "
-            + "interviewstatus, name, phone, seniority, studentid.";
+            + "Allowable fields to be sorted by include: appstatus, course, "
+            + "intstatus, name, seniority, studentid.";
 
     private final Comparator<Candidate> sortComparator;
     private final String sortKey;

@@ -215,7 +215,7 @@ public class MainWindow extends UiPart<Stage> {
                 focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
             }
         } catch (Exception e) {
-            throw new CommandException(DeleteCommand.MESSAGE_USAGE);
+            return;
         }
     }
 

@@ -78,10 +78,10 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindStudentIdCommand =
                 new FindCommand(new StudentIdContainsKeywordsPredicate(Arrays.asList("E0324", "149")));
-        assertParseSuccess(parser, " k/E0324 k/149 f/id", expectedFindStudentIdCommand);
+        assertParseSuccess(parser, " k/E0324 k/149 f/studentid", expectedFindStudentIdCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    k/E0324 \t \t  k/149  \t  f/id \t", expectedFindStudentIdCommand);
+        assertParseSuccess(parser, "    k/E0324 \t \t  k/149  \t  f/studentid \t", expectedFindStudentIdCommand);
     }
 
     @Test
@@ -89,12 +89,12 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindInterviewStatusCommand =
                 new FindCommand(new InterviewStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
-        assertParseSuccess(parser, " k/pending k/reject f/is", expectedFindInterviewStatusCommand);
+        assertParseSuccess(parser, " k/pending k/reject f/intstatus", expectedFindInterviewStatusCommand);
 
         // multiple whitespaces between keywords
         FindCommand expectedFindApplicationStatusCommand =
                 new FindCommand(new ApplicationStatusContainsKeywordsPredicate(Arrays.asList("pending", "reject")));
-        assertParseSuccess(parser, " k/  pending    k/  reject   f/     as",
+        assertParseSuccess(parser, " k/  pending    k/  reject   f/     appstatus",
                 expectedFindApplicationStatusCommand);
     }
 
@@ -103,7 +103,7 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindSeniorityCommand =
                 new FindCommand(new SeniorityContainsKeywordsPredicate(Arrays.asList("2", "com1")));
-        assertParseSuccess(parser, " k/2 k/com1 f/yr", expectedFindSeniorityCommand);
+        assertParseSuccess(parser, " k/2 k/com1 f/seniority", expectedFindSeniorityCommand);
     }
 
     @Test

@@ -48,7 +48,7 @@
           </padding>
         </StackPane>
 
-        <SplitPane fx:id="splitPanePlaceholder" VBox.vgrow="ALWAYS" dividerPositions="0.35, 0.70">
+        <SplitPane fx:id="splitPanePlaceholder" VBox.vgrow="ALWAYS" dividerPositions="0.35, 0.75">
           <items>
             <VBox fx:id="candidateList" styleClass="pane-with-border" VBox.vgrow="ALWAYS" >
               <padding>
