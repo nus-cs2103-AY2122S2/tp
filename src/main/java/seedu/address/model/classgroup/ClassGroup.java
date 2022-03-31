@@ -150,9 +150,9 @@ public class ClassGroup implements Entity {
      * Finds the lesson according to the specified weekIndex and marks attendance
      * for all students in the given student list.
      */
-    public void markAttendance(Index weekIndex, List<Student> students) {
+    public List<Student> markAttendance(Index weekIndex, List<Student> students) {
         Lesson toMark = findLessonByIndex(weekIndex);
-        toMark.markAttendance(students);
+        return toMark.markAttendance(students);
     }
 
     //@@author EvaderFati
@@ -160,9 +160,9 @@ public class ClassGroup implements Entity {
      * Finds the lesson according to the specified weekIndex and unmarks attendance
      * for all students in the given student list.
      */
-    public void unmarkAttendance(Index weekIndex, List<Student> students) {
+    public List<Student> unmarkAttendance(Index weekIndex, List<Student> students) {
         Lesson toUnmark = findLessonByIndex(weekIndex);
-        toUnmark.unmarkAttendance(students);
+        return toUnmark.unmarkAttendance(students);
     }
 
     /**
