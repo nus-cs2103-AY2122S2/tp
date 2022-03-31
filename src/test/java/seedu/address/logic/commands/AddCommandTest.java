@@ -129,6 +129,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void undoHustleBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
