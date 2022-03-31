@@ -32,6 +32,7 @@ public class ClearEmptyTagCommand extends Command {
         for (Tag t : tagsToDelete) {
             model.deleteTag(t);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, emptyTagCount));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, emptyTagCount),
+                false, true, false, null);
     }
 }
