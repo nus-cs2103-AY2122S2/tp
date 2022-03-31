@@ -21,7 +21,8 @@ public class EnrolCommand extends Command {
 
     public static final String STUDENT_EXISTS_CG = "Student(s) exist in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %d does not exists.";
-    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled the other students into %s(%s).";
+    public static final String MESSAGE_ENROL_OTHERS = "Successfully enrolled the other students into %s(%s).";
+    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled all students into %s(%s).";
     public static final String COMMAND_WORD = "enrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols the specified students to "
             + "the given class group.\n"
@@ -78,12 +79,15 @@ public class EnrolCommand extends Command {
             }
         }
 
-        if (!result.isEmpty()) {
+        if (notEnrolled == 0) {
+            result = String.format(MESSAGE_ENROL_SUCCESS,
+                    newCg.getClassGroupId(), newCg.getClassGroupType());
+        } else {
             result = String.format(STUDENT_EXISTS_CG, result);
         }
 
         if (notEnrolled != students.size()) {
-            result += String.format(MESSAGE_ENROL_SUCCESS,
+            result += String.format(MESSAGE_ENROL_OTHERS,
                     newCg.getClassGroupId(), newCg.getClassGroupType());
         }
         model.setEntity(cgToEdit, newCg);
