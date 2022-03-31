@@ -167,7 +167,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTH
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
     * Note: Editing email value to an existing email in the addressBook is not allowed.
@@ -190,7 +190,7 @@ Format: `remark INDEX r/REMARK`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 * You can also remove a client's remarks by typing `r/` without anything else.
 
 </div>
@@ -203,7 +203,7 @@ Format: `append INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIR
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields and tags that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
 
@@ -218,7 +218,7 @@ Format: `remove INDEX [r/] [b/] [t/TAG]…​`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * **Compulsory fields cannot be removed.**
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
 
@@ -234,8 +234,8 @@ Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* When the client is deleted, all of its' transactions will also get deleted
+* The index **must be a positive integer up to size of the list** 1, 2, 3, …​
+* When the client is deleted, all of its transactions are also deleted.
 
 </div>
 
@@ -243,9 +243,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
-### Delete All Entries (`clear`)
+### Delete All Data (`clear`)
 
-Clears all entries from CinnamonBun.
+Clears all data from CinnamonBun.
 
 Format: `clear`
 
@@ -316,6 +316,7 @@ Format: `deleteFiltered`
 * `deleteFiltered` deletes all the clients shown in the filtered client list.
 * Use [`find`](#find-client-by-keyword-find) to filter the clients to delete.
 * Otherwise, if the client list is not filtered, it acts like [`clear`](#delete-all-entries-clear).
+* When the client is deleted, all of its transactions are also deleted.
 
 </div>
 
@@ -332,7 +333,7 @@ Format: `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE
 
 * Add a transaction to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 * The `AMOUNT` specified **must be greater** than 0.
 * The `TRANSACTION_DATE` and `DUE_DATE` specified **must be a valid date** in `YYY-MM-DD` format.
 * The flag `--paid` will set the transaction status to `paid`
@@ -364,7 +365,7 @@ Format: `findTransaction INDEX`
 
 * List all transactions of the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 
 </div>
 
@@ -382,7 +383,7 @@ Format: `deleteTransaction INDEX_TRANSACTION`
 
 * Delete the transaction at the specified `INDEX_TRANSACTION`.
 * The index refers to the index number shown in the displayed **transaction list NOT the client list**.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 
 </div>
 
@@ -436,7 +437,7 @@ Format: `addMembership INDEX m/MembershipName [d/Date]`
 
 * Adds a membership to the specified `INDEX`.
 * The index refers to the user at the index number displayed.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer up to size of the list** 1, 2, 3, …​
 * The membership name has to be an alphanumeric string (no symbols, only number and letters).
 * The date has to be in the format 'YYYY-MM-DD'
 

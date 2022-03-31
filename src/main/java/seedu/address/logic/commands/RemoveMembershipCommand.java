@@ -21,7 +21,7 @@ public class RemoveMembershipCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Remove membership from the client in the list as specified by the index.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
+            + "INDEX (positive integer up to size of the list)\n"
             + "Example: " + COMMAND_WORD + "1";
 
     public static final String MESSAGE_SUCCESS = "Removed membership from %s.";
