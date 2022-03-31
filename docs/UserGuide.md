@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ArchDuke is a **desktop app for managing student contacts and groups, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArchDuke can get your contact management tasks done faster than traditional GUI apps.
+ArchDuke is an **application to help students manage student contacts, groups, and group tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+This product is also optimized for students to **update and keep track of members of student groups and tasks in each group**.
+If you can type fast, ArchDuke can get your contact management, group management, and task management done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -26,7 +28,7 @@ ArchDuke is a **desktop app for managing student contacts and groups, optimized 
 
    * **`list`** : Lists all student contacts.
 
-   * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science [t/optional]` : Adds a contact named `John Doe` to ArchDuke.
+   * **`add`**`n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends` : Adds a contact named `John Doe` to ArchDuke.
 
    * **`clear`** : Deletes all entries in ArchDuke.
 
@@ -135,9 +137,9 @@ Expected outcome:
 ### Delete student contact information: `delete`
 
 Deletes a student contact information at the specified `INDEX` from ArchDuke.
-The `INDEX` refers to the index number shown in the currently displayed student contact list. 
-The `INDEX` **must be a positive integer**. The student deleted student contact would also be 
-deleted from all his previously assigned groups.
+The `INDEX` refers to the index number shown in the **currently displayed** student contact list. 
+The `INDEX` **must be a positive integer**. The deleted student contact would also be 
+deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
 
@@ -151,11 +153,11 @@ Expected outcome:
 
 * The student contact is removed from ArchDuke. The student contact is also removed from all previously assigned groups.
 
-Before delete:
+Before deleting Alex Yeoh at index 1:
 
 ![](images/BeforeDelete.png)
 
-After delete:
+After deleting Alex Yeoh previously at index 1:
 
 ![](images/AfterDelete.png)
 
@@ -165,17 +167,21 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
 * The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
 * The specified keywords are **case-insensitive**. 
 * The attributes could be accessed by adding prefixes before the keywords.
-* The result must match the exact wording, partial words will not match (e.g. `n/Dav` will not match the student contact
+* The result must match the **exact wording**, partial words will not match (e.g. `n/Dav` will not match the student contact
 `David` or `David Li`).
 * The command will list out all student contacts that matches the keyword.
   * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`
   * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`
   * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`
+  
+
 * The attributes supported **multiple findings** at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`
   * `find n/Alex David` is possible and would show two results as `Alex Yeoh` and `David Li`, assuming that these are the only matching contacts.
   * `find a/Computer Science Business` is possible and would show contacts that has the following major: `Computer Science`, `Business`, `Business Analytics`
   , assuming that these majors are the exhaustive majors in the student contacts.
   * `find t/friends colleagues` is possible and would show contacts that has the at least one of the 2 tags: `friends` and `colleagues`
+
+
 * The attributes **not supported multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
   * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`)
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`)
@@ -186,16 +192,20 @@ Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
 
 Example:
 
-* `find n/Alex David`
+* `find n/Alex David` or `find n/Alex`
 * `find p/98765432`
 * `find e/example@u.nus.edu`
-* `find a/Computer Science`
-* `find t/friends colleagues`
+* `find a/Computer Science` or `find a/Security`
+* `find t/friends colleagues` or `find t/colleagues`
 
 Expected outcome:
 
 * Lists all student contacts that match with those attributes and displays the number of student contacts that 
 match those keywords.
+
+Find result for the command `find n/alex david`:
+
+![](images/FindResult.png)
 
 ## Student Group Management
 
@@ -223,6 +233,14 @@ Expected outcome:
 
 * Creates a group with the name CS2103-W16-3 to ArchDuke.
 
+Before adding the group. Note that NUS Data Science Society is currently the last group in the list:
+
+![](images/BeforeAddgroup.png)
+
+After adding the group CS2103-W16-3:
+
+![](images/AfterAddgroup.png)
+
 ### Delete a group: `delgroup`
 
 Deletes a group from ArchDuke. The group must **already exist** in ArchDuke.
@@ -240,7 +258,7 @@ Expected outcome:
 ### Assign a student to a group: `assign`
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the `INDEX` at which the student is 
-in the currently displayed ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
+in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
 The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive integer**. The student contact **must 
 has yet to be currently assigned** to the group. 
 
@@ -256,18 +274,18 @@ Expected outcome:
 
 * Assigns the specified student to the specified group.
 
-Before assign:
+Before assigning Charlotte at index 3 to the group NUS Fintech Society:
 
 ![](images/BeforeAssign.png)
 
-After assign:
+After assigning:
 
 ![](images/AfterAssign.png)
 
 ### Deassign a student from a group: `deassign`
 
 Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the `INDEX` at which the student
-is in the currently displayed ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
+is in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
 The group must **already exist** in ArchDuke, and the index must be a **positive integer**. The student contact **must have 
 currently been assigned** to the group.  
 
@@ -300,6 +318,10 @@ Expected outcome:
 
 * Displays all the student contacts from the specified group.
 
+Result of viewing contact in a group:
+
+![](images/ViewcontactResult.png)
+
 ## Student Group Task Management
 
 ### Add a task in a group: `addtask`
@@ -311,8 +333,8 @@ The group must **already exist** in ArchDuke. The task **must not already exist*
 
 **:information_source: Note:**<br>
 
-A task can only be added if it **has yet to exist** in the particular. The task
-is uniquely identified by a `TASK_NAME` with no regards to case sensitivity. E.g. `MEETING` would be the
+A task can only be added if it **has yet to exist** in the particular group. The task
+is uniquely identified by a `TASK_NAME` with **no regards to case sensitivity**. E.g. `MEETING` would be the
 same task as `Meeting` and `meeting`
 
 </div>
@@ -329,7 +351,7 @@ Expected outcome:
 
 * Adds the specified task to the specified group. The task appears inside the group.
 
-Before add task:
+Before add task v1.2 user guide to the group NUS Fintech Society:
 
 ![](images/BeforeAddtask.png)
 
@@ -370,6 +392,10 @@ Example:
 Expected outcome:
 
 * Displays all the tasks from the specified group.
+
+Result of viewing task in the group NUS Fintech Society:
+
+![](images/ViewtaskResult.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
