@@ -17,7 +17,7 @@ public class TransportTag {
     private static final String TOMORROW_TRANSPORT_ARRANGEMENT_TAG_STYLE = "-fx-background-color: #f9844a";
     private static final String NO_TRANSPORT_ARRANGEMENT_TAG_STYLE = "-fx-background-color: #c4c4c4";
     private static final String TRANSPORT_TAG_ARRANGEMENT = "%1$s | Pick-up: %2$s, Drop-off: %3$s";
-    private static final String TRANSPORT_TAG_NO_ARRANGEMENT = "%1$s | no arrangement";
+    private static final String TRANSPORT_TAG_NO_ARRANGEMENT = "%1$s | No Arrangement";
 
     /**
      * Private constructor to prevent creation.
