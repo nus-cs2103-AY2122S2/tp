@@ -54,6 +54,7 @@ public class TeachWhatParser {
         switch (commandWord) {
 
         case AddStudentCommand.COMMAND_WORD:
+            // Fallthrough
         case AddStudentCommand.SHORTENED_COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
