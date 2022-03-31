@@ -93,9 +93,16 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 
 Shows a message explaining how to access the help page.
 
+Format: `help [topic]` or `help`
+
+Simply calling `help` will bring up a prompt linking to the user guide.
+
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Calling `help [topic]` with `topic` being a relevant keyword such as `add` will bring up a brief description and usage
+of the topic.
+
+![help add message](images/helpAdd.png)
 
 ## Contact Management
 
