@@ -36,6 +36,7 @@ public class ClearModulesCommand extends RedoableCommand {
         this.targetIndex = targetIndex;
     }
 
+    @Override
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
