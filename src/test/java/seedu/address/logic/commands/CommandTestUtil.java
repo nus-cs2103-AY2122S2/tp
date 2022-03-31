@@ -35,6 +35,7 @@ import seedu.address.model.person.FriendFilterPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.FriendFilterPredicateBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -242,7 +243,8 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new FriendFilterPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new FriendFilterPredicateBuilder()
+                .withNameSubstring(splitName[0]).build());
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.FriendFilterPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.FriendFilterPredicateBuilder;
 
 public class ModelManagerTest {
 
@@ -117,8 +118,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new FriendFilterPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new FriendFilterPredicateBuilder()
+                .withNameSubstring("Alice").build());
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
