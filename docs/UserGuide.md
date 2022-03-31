@@ -60,7 +60,7 @@ Amigos is a desktop application to help tech-savvy university students manage th
 ## Friend Management
 Amigos is designed to help you keep track of the friends in your life.
 
-### Adding a friend: `addfriend`
+### Adding a friend: `addfriend` / `af`
 
 Adds a new friend to Amigos. A friend has:
 
@@ -73,7 +73,7 @@ Adds a new friend to Amigos. A friend has:
 * `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
 * `addfriend n/John Doe t/Friend t/Banker`
 
-### Editing a friend : `editfriend`
+### Editing a friend : `editfriend` / `ef`
 
 Edits an existing friend in Amigos.
 
@@ -91,7 +91,7 @@ Edits an existing friend in Amigos.
   and email of the friend at `INDEX` 1 to be `John street, block 456, #01-01` and `johndoe@example.com` respectively.
 * `editfriend cn/Alex Yeoh nn/Alex Tan` will change the name of `Alex Yeoh` to `Alex Tan`.
 
-### Deleting a friend : `deletefriend`
+### Deleting a friend : `deletefriend` / `df`
 
 Deletes a friend in Amigos.
 
@@ -104,7 +104,7 @@ Deletes a friend in Amigos.
 * `deletefriend 1`
 
 
-### Show a specific friend: `showfriend`
+### Show a specific friend: `showfriend` / `sf`
 
 Shows page containing the full details related to an existing friend in Amigos.
 
@@ -118,13 +118,13 @@ Shows page containing the full details related to an existing friend in Amigos.
 
 
 
-### List all friends : `listfriends`
+### List all friends : `listfriends` / `lf`
 
 Lists all friends in Amigos. Switches GUI to the friends tab.
 
 **Format**: `listfriends`
 
-### Find friends : `findfriend`
+### Find friends : `findfriend` / `ff`
 
 Find friends in Amigos whose name, tags or logs' title matches ANY of the given keyword(s).
 
@@ -148,7 +148,7 @@ Find friends in Amigos whose name, tags or logs' title matches ANY of the given 
 ## Logs management
 Amigos provides functionality to manage logs, which are essentially detailed notes about a specific friend.
 
-### Adding a log: `addlog`
+### Adding a log: `addlog` / `al`
 
 Adds a log to an existing friend at the specified `INDEX` in Amigos.
 The `INDEX` refers to the index number shown in the displayed person's list.
@@ -164,7 +164,7 @@ The `INDEX` refers to the index number shown in the displayed person's list.
 * `addlog 1 ttl/has a pet named poki`
 * `addlog John ttl/recommended movies d/the martian, interstellar, three idiots`
 
-### Editing a log: `editlog`
+### Editing a log: `editlog` / `el`
 
 Edits an existing log of an existing friend in Amigos.
 
@@ -182,7 +182,7 @@ Edits an existing log of an existing friend in Amigos.
 * `editlog n/John Doe id/1 nt/has a pet named Poki`
 * `editlog n/Andrew Tan id/1 nt/recommended movies and shows nd/the martian, interstellar, three idiots, peaky blinders`
 
-### Deleting a log: `deletelog`
+### Deleting a log: `deletelog` / `dl`
 
 Deletes an existing log of an existing friend in Amigos.
 
@@ -205,7 +205,7 @@ Deletes an existing log of an existing friend in Amigos.
 Amigos also allows you to keep track of your social events!
 ![Events Page](images/EventPage.png)
 
-### Creating an event: `addevent`
+### Creating an event: `addevent` / `ae`
 Adds a new event, which can be optionally linked to any number of existing friends.
 
 **Format**: `addevent n/EVENT_NAME dt/DATE_TIME [d/DESCRIPTION] [f/FRIEND_NAME]...`
@@ -218,7 +218,7 @@ Adds a new event, which can be optionally linked to any number of existing frien
 * `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
 * `addevent n/Christmas Party dt/25-12-2022`
 
-### Editing an event: `editevent`
+### Editing an event: `editevent` / `ee`
 Edits an existing event.
 
 **Format**: `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...`
@@ -231,7 +231,7 @@ Edits an existing event.
 **Examples**:
 * `editevent 2 dt/16-08-2022 1600 af/Jacky Jones rf/Sarah Lim rf/Alex Yeo` will edit the date & time of the 2nd event to `16-08-2022 1600`, adds `Jacky Jones`, and removes `Sarah Lim` and `Alex Yeo` from the event.
 
-### Deleting events: `deleteevent`
+### Deleting events: `deleteevent` / `de`
 Delete existing event(s).
 
 **Format**: `deleteevent INDEX`
@@ -243,13 +243,13 @@ Delete existing event(s).
 **Examples**:
 * `deleteevent 2`
 
-### List all events : `listevents`
+### List all events : `listevents` / `le`
 
 Lists all events stored in Amigos. Switches GUI to the events tab.
 
 **Format**: `showevents`
 
-### Find events : `findevent`
+### Find events : `findevent` / `fe`
 
 Find events in Amigos whose properties match the given search criteria.
 
