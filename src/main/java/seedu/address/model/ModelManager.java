@@ -27,7 +27,6 @@ import seedu.address.model.position.Position;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final String CSV_FOLDER = "csv";
     private static final String APPLICANT_CSV_FILE = "applicant.csv";
 
     private final AddressBook addressBook;
