@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -10,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,8 +19,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.storage.Storage;
+import seedu.address.ui.StatusBarFooter;
 
 /**
  * The main LogicManager of the app.
@@ -32,6 +33,8 @@ public class LogicManager implements Logic {
     private Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private AddressBook addressBook;
+    private AddressBook archiveBook;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -40,6 +43,9 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+
+        this.addressBook = new AddressBook(model.getAddressBook());
+        this.archiveBook = new AddressBook(model.getArchiveBook());
     }
 
     @Override
@@ -49,13 +55,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
-
+        saveBooks();
         return commandResult;
     }
 
@@ -90,33 +90,29 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void switchAddressBook() throws CommandException {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+    public void switchAddressBook() {
+        if (StatusBarFooter.isArchiveBook()) {
+            model.setAddressBook(addressBook);
+        } else {
+            model.setAddressBook(archiveBook);
+        }
+    }
+
+    /**
+     * Saves AddressBook and ArchiveBook
+     */
+    private void saveBooks() {
         try {
-            addressBookOptional = storage.readArchivedAddressBook();
-            if (addressBookOptional.isEmpty()) {
-                logger.info("Data file not found. Will be starting with a sample Archived AddressBook");
+            if (StatusBarFooter.isArchiveBook()) {
+                storage.saveArchivedAddressBook(archiveBook);
+                archiveBook = new AddressBook(model.getAddressBook());
+            } else {
+                storage.saveAddressBook(model.getAddressBook());
+                addressBook = new AddressBook(model.getAddressBook());
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Archived AddressBook");
-            initialData = new AddressBook();
-
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Archived AddressBook");
-            initialData = new AddressBook();
+        } catch (DataConversionException | IOException e) {
+            System.out.println("Error caught: " + e);
         }
-
-        try {
-            storage.saveArchivedAddressBook(model.getAddressBook());
-            storage.saveAddressBook(new AddressBook(initialData));
-        } catch (IOException | DataConversionException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
-
-        model.setAddressBook(new AddressBook(initialData));
-        System.out.println(getArchivedAddressBookFilePath().toString());
     }
 
     /**
@@ -131,8 +127,18 @@ public class LogicManager implements Logic {
         Person target = model.getFilteredPersonList().get(oneBased.getZeroBased());
 
         model.deletePerson(target);
-        switchAddressBook();
-        model.addPerson(target);
-        switchAddressBook();
+        try {
+            if (!StatusBarFooter.isArchiveBook()) {
+                archiveBook.addPerson(target);
+            } else {
+                addressBook.addPerson(target);
+            }
+        } catch (DuplicatePersonException e) {
+            throw new CommandException(String.format(ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
+        } finally {
+            saveBooks();
+        }
+
+        archiveBook.getPersonList().forEach(x -> System.out.println(x));
     }
 }
