@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -205,6 +206,8 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+
+
     /**
      * Refreshes the model to display the change in GUI.
      */
@@ -284,6 +287,11 @@ public class ModelManager implements Model {
 
     public ObservableList<Schedule> getScheduleList() {
         return this.addressBook.getScheduleList();
+    }
+
+    @Override
+    public List<Lineup> getLineups() {
+        return addressBook.getLineupList();
     }
 
     //=========== Filtered Schedule List Accessors (End) ====================================================

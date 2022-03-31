@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lineup.Lineup;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -93,7 +94,14 @@ public class ViewCommand extends Command {
             messageViewSuccess = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else {
-            messageViewSuccess = "Listed all persons!";
+            StringBuilder sb = new StringBuilder();
+            int i = 1;
+            for (Lineup lineup : model.getLineups()) {
+                sb.append(Integer.toString(i) + ". " + lineup.toString() + "\n");
+                i++;
+            }
+            messageViewSuccess = sb.length() != 0 ? sb.toString() :
+                    "There is currently no lineups available. Use the \"add\" command to add new lineups.";
         }
     }
 
