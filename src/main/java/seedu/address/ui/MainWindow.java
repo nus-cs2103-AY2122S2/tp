@@ -89,10 +89,15 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
         addTagWindow = new AddTagWindow(logic);
         addTagWindow.getRoot().initOwner(primaryStage);
         addTagWindow.getRoot().initModality(Modality.WINDOW_MODAL);
+
         addProfileWindow = new AddProfileWindow(logic);
+        addProfileWindow.getRoot().initOwner(primaryStage);
+        addProfileWindow.getRoot().initModality(Modality.WINDOW_MODAL);
+
         addMenu.setVisible(false);
         newTagMenu.setVisible(false);
         themeMenu.setVisible(false);

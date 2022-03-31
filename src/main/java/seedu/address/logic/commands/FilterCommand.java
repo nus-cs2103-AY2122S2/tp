@@ -20,6 +20,8 @@ public class FilterCommand extends Command {
             + "Parameters: TAG_NAME\n"
             + "Example: " + COMMAND_WORD + " family";
 
+    public static final String MESSAGE_SUCCESS = "\n" + "To clear the filter, enter 'list'.";
+
     private final Tag tag;
     private final PersonContainsTagPredicate predicate;
 
@@ -39,7 +41,8 @@ public class FilterCommand extends Command {
         }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
+                        + MESSAGE_SUCCESS);
     }
 
     @Override
