@@ -103,7 +103,7 @@ public class EditScheduleCommandTest {
     @Test
     public void execute_expiredInterview_failure() {
         Interview interviewToEdit = new InterviewBuilder().withInterviewDateTime(LocalDateTime.now()
-                .minusMinutes(1)).build();
+                .minusMinutes(31)).build();
         model.addInterview(interviewToEdit);
         EditScheduleCommand editScheduleCommand =
                 new EditScheduleCommand(INDEX_FIRST_INTERVIEW, TYPICAL_INTERVIEW_DATE_TIME);

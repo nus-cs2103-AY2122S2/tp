@@ -77,7 +77,8 @@ public class RemarkCommand extends Command {
             }
         }
 
-        return new CommandResult(generateSuccessMessage(editedCandidate));
+        return new CommandResult(generateSuccessMessage(editedCandidate),
+                false, false, false, -1, true, index.getZeroBased());
     }
 
     /**
