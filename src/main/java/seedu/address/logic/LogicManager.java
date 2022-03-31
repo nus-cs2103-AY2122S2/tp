@@ -62,13 +62,8 @@ public class LogicManager implements Logic {
         command.setData(undoRedoStack);
         commandResult = command.execute(model);
 
-        try {
-            saveBooks();
-            undoRedoStack.push(command);
-
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
+        saveBooks();
+        undoRedoStack.push(command);
 
         return commandResult;
     }
