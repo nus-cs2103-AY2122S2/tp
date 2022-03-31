@@ -165,7 +165,7 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
         }
-        if(days < 0) {
+        if (days < 0) {
             throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
         }
         return ExpiryDate.getDateFromNow(days);
