@@ -12,7 +12,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 public class AddPersonCommand extends AddCommand {
 
@@ -54,13 +53,6 @@ public class AddPersonCommand extends AddCommand {
         }
 
         model.addPerson(toAdd);
-
-        for (Tag tag: toAdd.getTags()) {
-            if (!model.hasTag(tag)) {
-                model.addTag(tag);
-            }
-        }
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -36,7 +36,6 @@ public class MainWindow extends UiPart<Stage> {
     private ContactDetailPanel rightHandSidePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private TagPanel tagPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -52,9 +51,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane tagPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -157,9 +153,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        tagPanel = new TagPanel(logic.getFilteredTagList(), logic);
-        tagPanelPlaceholder.getChildren().add(tagPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -228,7 +221,6 @@ public class MainWindow extends UiPart<Stage> {
                 logger.info("Result: " + commandResult.getFeedbackToUser());
             }
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            tagPanel.setPanel(new TagCard(logic.getFilteredTagList(), logic).getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
