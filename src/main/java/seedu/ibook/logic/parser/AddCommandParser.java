@@ -48,10 +48,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         DiscountRate discountRate =
                 ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE)
-                .orElse(DiscountRate.DEFAULT_DISCOUNTRATE));
+                .orElse(DiscountRate.DEFAULT_DISCOUNT_RATE));
         DiscountStart discountStart =
                 ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART)
-                .orElse(DiscountStart.DEFAULT_DISCOUNTSTART));
+                .orElse(DiscountStart.DEFAULT_DISCOUNT_START));
 
         Product product = new Product(name, category, description, price, discountRate, discountStart);
 

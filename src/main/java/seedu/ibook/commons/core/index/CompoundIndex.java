@@ -20,6 +20,14 @@ public class CompoundIndex {
         this.second = Index.fromZeroBased(zeroBasedSecond);
     }
 
+    public Index getFirst() {
+        return first;
+    }
+
+    public Index getSecond() {
+        return second;
+    }
+
     public int getZeroBasedFirst() {
         return first.getZeroBased();
     }

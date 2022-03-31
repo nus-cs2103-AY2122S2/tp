@@ -35,14 +35,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        List<Product> lastShownList = model.getFilteredProductList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
-        }
-
-        Product productToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Product productToDelete = model.getProduct(targetIndex);
 
         model.prepareIBookForChanges();
         model.deleteProduct(productToDelete);

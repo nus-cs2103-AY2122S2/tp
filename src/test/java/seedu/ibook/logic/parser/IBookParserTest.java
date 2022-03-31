@@ -18,13 +18,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.ExitCommand;
-import seedu.ibook.logic.commands.ExpiredCommand;
-import seedu.ibook.logic.commands.OutOfStockCommand;
 import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.logic.commands.product.DeleteAllCommand;
 import seedu.ibook.logic.commands.product.DeleteCommand;
+import seedu.ibook.logic.commands.product.ExpiredCommand;
 import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.logic.commands.product.ListCommand;
+import seedu.ibook.logic.commands.product.OutOfStockCommand;
 import seedu.ibook.logic.commands.product.UpdateAllCommand;
 import seedu.ibook.logic.commands.product.UpdateCommand;
 import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;

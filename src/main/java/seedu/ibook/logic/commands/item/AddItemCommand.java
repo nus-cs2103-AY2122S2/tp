@@ -51,13 +51,7 @@ public class AddItemCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        List<Product> lastShownList = model.getFilteredProductList();
-        if (productIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
-        }
-
-        Product product = lastShownList.get(productIndex.getZeroBased());
+        Product product = model.getProduct(productIndex);
 
         model.prepareIBookForChanges();
         model.addItem(product, toAdd.toItem(product));

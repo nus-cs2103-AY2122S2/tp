@@ -55,20 +55,8 @@ public class UpdateItemCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Product> lastShownList = model.getFilteredProductList();
-
-        if (targetIndex.getZeroBasedFirst() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-        }
-
-        Product targetProduct = lastShownList.get(targetIndex.getZeroBasedFirst());
-        List<Item> targetItemList = targetProduct.getItems().asUnmodifiableObservableList();
-
-        if (targetIndex.getZeroBasedSecond() >= targetItemList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-        }
-
-        Item itemToUpdate = targetItemList.get(targetIndex.getZeroBasedSecond());
+        Product targetProduct = model.getProduct(targetIndex.getFirst());
+        Item itemToUpdate = model.getItem(targetIndex);
         Item updatedItem = createUpdatedItem(targetProduct, itemToUpdate, updateItemDescriptor);
 
         if (!itemToUpdate.isSame(updatedItem) && targetProduct.hasItem(updatedItem)) {

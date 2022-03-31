@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
+import seedu.ibook.commons.core.index.CompoundIndex;
+import seedu.ibook.commons.core.index.Index;
+import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
@@ -52,6 +55,9 @@ public interface Model {
     /** Returns the iBook */
     ReadOnlyIBook getIBook();
 
+    /** Returns the product specified at the index */
+    Product getProduct(Index targetIndex) throws CommandException;
+
     /**
      * Returns true if a product with the same identity as {@code product} exists in the IBook.
      */
@@ -75,6 +81,9 @@ public interface Model {
      * The product identity of {@code updatedProduct} must not be the same as another existing product in the book.
      */
     void setProduct(Product target, Product updatedProduct);
+
+    /** Returns the item specified at the index */
+    Item getItem(CompoundIndex targetIndex) throws CommandException;
 
     /**
      * Adds the given item to {@code product}.

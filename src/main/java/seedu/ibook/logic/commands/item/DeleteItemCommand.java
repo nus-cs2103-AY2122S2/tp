@@ -2,9 +2,6 @@ package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
-import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.CompoundIndex;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.CommandResult;
@@ -39,20 +36,8 @@ public class DeleteItemCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Product> lastShownList = model.getFilteredProductList();
-
-        if (targetIndex.getZeroBasedFirst() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-        }
-
-        Product targetProduct = lastShownList.get(targetIndex.getZeroBasedFirst());
-        List<Item> targetItemList = targetProduct.getItems().asUnmodifiableObservableList();
-
-        if (targetIndex.getZeroBasedSecond() >= targetItemList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-        }
-
-        Item itemToDelete = targetItemList.get(targetIndex.getZeroBasedSecond());
+        Product targetProduct = model.getProduct(targetIndex.getFirst());
+        Item itemToDelete = model.getItem(targetIndex);
 
         model.prepareIBookForChanges();
         model.deleteItem(targetProduct, itemToDelete);

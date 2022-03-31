@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
-import java.util.List;
 import java.util.Optional;
 
 import seedu.ibook.commons.core.Messages;
@@ -62,13 +61,7 @@ public class UpdateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Product> lastShownList = model.getFilteredProductList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
-        }
-
-        Product productToUpdate = lastShownList.get(index.getZeroBased());
+        Product productToUpdate = model.getProduct(index);
         Product updatedProduct = createUpdatedProduct(productToUpdate, updateProductDescriptor);
 
         if (!productToUpdate.isSame(updatedProduct) && model.hasProduct(updatedProduct)) {

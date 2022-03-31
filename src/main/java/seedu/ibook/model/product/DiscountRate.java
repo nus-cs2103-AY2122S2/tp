@@ -9,7 +9,7 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class DiscountRate {
 
-    public static final String DEFAULT_DISCOUNTRATE = "0.00";
+    public static final String DEFAULT_DISCOUNT_RATE = "0.00";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Rate should only be a positive double, and at most 100";

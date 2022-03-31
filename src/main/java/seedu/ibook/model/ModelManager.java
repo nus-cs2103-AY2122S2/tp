@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.commons.core.LogsCenter;
+import seedu.ibook.commons.core.Messages;
+import seedu.ibook.commons.core.index.CompoundIndex;
+import seedu.ibook.commons.core.index.Index;
+import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
@@ -97,6 +102,14 @@ public class ModelManager implements Model {
     //=========== Product =====================================================================================
 
     @Override
+    public Product getProduct(Index targetIndex) throws CommandException {
+        if (targetIndex.getZeroBased() >= filteredProducts.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
+        }
+        return filteredProducts.get(targetIndex.getZeroBased());
+    }
+
+    @Override
     public boolean hasProduct(Product product) {
         requireNonNull(product);
         return reversibleIBook.hasProduct(product);
@@ -121,6 +134,17 @@ public class ModelManager implements Model {
     }
 
     //=========== Item ========================================================================================
+
+    @Override
+    public Item getItem(CompoundIndex targetIndex) throws CommandException {
+        Product targetProduct = getProduct(targetIndex.getFirst());
+        List<Item> targetItemList = targetProduct.getItems().asUnmodifiableObservableList();
+
+        if (targetIndex.getZeroBasedSecond() >= targetItemList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        }
+        return targetItemList.get(targetIndex.getZeroBasedSecond());
+    }
 
     @Override
     public void addItem(Product product, Item item) {
