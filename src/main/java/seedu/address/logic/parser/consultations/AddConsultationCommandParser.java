@@ -28,14 +28,13 @@ import seedu.address.model.consultation.Time;
 import seedu.address.model.patient.Nric;
 
 public class AddConsultationCommandParser implements Parser<AddConsultationCommand> {
+    public static final String EMPTY_PLACEHOLDER = "NIL";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddConsultationCommand
      * and returns an AddConsultationCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-
-    public static final String EMPTY_PLACEHOLDER = "NIL";
-
     public AddConsultationCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_DATE, PREFIX_TIME, PREFIX_DIAGNOSIS,
