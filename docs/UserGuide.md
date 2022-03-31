@@ -9,8 +9,10 @@ Tracey is a **desktop app for managing health statuses of NUS Hall Residents, op
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast,
 Tracey can get your student health status management tasks done faster than traditional GUI apps.
 
-What are CLIs? What are GUIs?
+<details>
+  <summary>What are CLIs? What are GUIs?</summary>
 
+##  Brief Introduction
 1) CLIs are Command Line Interfaces. CLIs connect you to a computer program and through the CLI, you can interact with the application by typing in texts (commands).
 2) GUIs are Graphical User Interfaces. GUIs are a system of interactive visual components for computer applications. You can interact with a GUI through a pointing device, such as your mouse.
 
@@ -19,11 +21,13 @@ Note that the main difference between GUI and CLI is the method of interaction.
 As Tracey is a Command Line Interface, these are the aspects that highlight the power of Tracey and why it was developed using a CLI:
 
 1. **Speed** <br>
-Tracey offers immense response speed. GUIs require additional resources to render graphical components, making them slower than CLIs.
+   Tracey offers immense response speed. GUIs require additional resources to render graphical components, making them slower than CLIs.
 2. **Functionality** <br>
-Tracey offers flexibility in its use. A typical GUI does not have the same level of functionality and granular control as a typical CLI. This is portrayed in the variety of features that Tracey offers, which you can learn about more in this User Guide.
+   Tracey offers flexibility in its use. A typical GUI does not have the same level of functionality and granular control as a typical CLI. This is portrayed in the variety of features that Tracey offers, which you can learn about more in this User Guide.
 3. **Scalability** <br>
-Simple command functions in Tracey allows it to handle various complex features. Additionally, the CLI of Tracey allows easier integration of newer features that may be added in future iterations, compared to GUIs which require rendering and creation of graphical components.
+   Simple command functions in Tracey allows it to handle various complex features. Additionally, the CLI of Tracey allows easier integration of newer features that may be added in future iterations, compared to GUIs which require rendering and creation of graphical components.
+
+</details>
 
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
@@ -92,7 +96,7 @@ Additional formatting guidelines:
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data. <br>
-   ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data* <br>
+   ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
    📓`Note:`
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
    2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
@@ -129,7 +133,19 @@ This is a sample screenshot of what you can expect from the `list` command.
 Format: `help`
 
 ### Importing Excel sheet
-{to be added here}
+Add a list of students from an Excel file into Tracey.
+
+Format: import button
+* Adds a list of students with Relevant Details such as Covid status into Tracey.
+* Relevant details required are mentioned in Table 4 below.
+* In the Excel sheet, the first column has to be the names of students followed by the Relevant Details.
+* Tracey will then store all students from the Excel file into her!
+
+Sample Excel file:
+![Excel_Sample](images/Excel_Sample.png) *Figure 3: Screenshot of Excel file.*
+
+How to identify import button:
+![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
 
 ### Adding a contact
 Add a student with relevant details into Tracey.
@@ -193,7 +209,7 @@ Format: `edit INDEX n/NAME ...`
 * You can remove all tags of the student by typing `t/` without specifying any details after it.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
 
 Examples of usage:
 * `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st student to be `91234567`
@@ -214,7 +230,7 @@ Format: `delete INDEX`
 * You can only delete the contact information at an index where there is a student assigned to it.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
 
 Examples of usage:
 * `delete 2` removes the 2nd student on the list.
@@ -248,7 +264,7 @@ Find a particular contact in Tracey and retrieve their specific details.
 Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
 * The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
-* A screenshot (Figure 1) is provided below to demonstrate what the find function returns.
+* A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
 * The search is case-insensitive. e.g `johnDoe` will match `Johndoe`.
 * The search does not require full name. e.g. `jo` will match `Joe` and `John`.
 
@@ -259,9 +275,9 @@ Examples of usages:
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 3: Screenshot of result of the find command*
+![find](images/FindScreenshotForUG.png) *Figure 6: Screenshot of result of the find command.*
 
-As seen in the *Figure 3*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 6*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
@@ -282,9 +298,9 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 4: Example result of `filter` command*
+![find](images/FilterScreenshotForUG.png) *Figure 7: Example result of `filter` command.*
 
-As seen in *Figure 4*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 7*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 📓`Note:`
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
@@ -296,7 +312,7 @@ Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 8: Screenshot of list command.*
 
 ### Copying emails
 Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
@@ -306,9 +322,9 @@ Format:`email`
 📓`Note:`
 There is also a `Show Email` button on the GUI which you can click to open the same window.
 
-![Email](images/CopyEmailScreenshot.png) *Figure 6: Screenshot of Copy Email function.*
+![Email](images/CopyEmailScreenshot.png) *Figure 9: Screenshot of Copy Email function.*
 
-From Figure 7, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From Figure 9, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
 Summarises the statistics of the student records inside Tracey.
@@ -319,9 +335,9 @@ Format:`summarise`
 Example of usage:
 * `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-![SummariseExample](images/SummariseExample.png) *Figure 7: Example response of Tracey in response to the `summarise` command*
+![SummariseExample](images/SummariseExample.png) *Figure 10: Example response of Tracey in response to the `summarise` command.*
 
-From Figure 4, when the user inputs the `Summarise` command, the result are multiple pie charts of the proportion of the student population categorised by `Covid Status`. These pie charts are separated into the student `Blocks` and the wider hall population.
+From Figure 10, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
@@ -347,7 +363,7 @@ Resizes the result display window to 3 pre-set sizes.
 Format: `resize SIZE`
 * There are 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figures 8 for the comparison for the different result display window sizes. 
+* Refer to figures 11 for the comparison for the different result display window sizes. 
 
 💡`Tips:`
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
@@ -355,7 +371,7 @@ Format: `resize SIZE`
 📓`Note:`
 * There is also a `Resize Window` button on the GUI which you can click to cycle between the 3 different resizing options.
 * 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 8: Comparison of the 3 different resizing options for the result display window.*
+![Comparison of 3 resize options](images/resize_options.png) *Figure 11: Comparison of the 3 different resizing options for the result display window.*
 
 ### Clearing all records
 Clear all the data inside Tracey.
@@ -396,7 +412,7 @@ there are changes to Tracey.
 
 4. **Q**: Where can I find the `INDEX` of a student? <br>
    **A**: They can be found in the numbers located beside each individual student. <br>
-   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png)
+   ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
 
 5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
