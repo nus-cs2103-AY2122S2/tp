@@ -64,4 +64,13 @@ public class Date {
         return date.hashCode();
     }
 
+
+    /**
+     * Accesses and returns the date attribute
+     * @return the date attribute as LocalDate
+     */
+    public LocalDate getPure() {
+        return this.date;
+    }
+
 }
