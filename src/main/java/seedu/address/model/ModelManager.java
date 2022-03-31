@@ -269,13 +269,29 @@ public class ModelManager implements Model {
         return selectedLesson;
     }
 
+    /**
+     * Checks if the provided {@code Lesson} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedLesson Lesson to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
     public boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson) {
+        requireNonNull(deletedLesson);
         boolean isLessonInfoPanel = currentInfoPanel == InfoPanelTypes.LESSON;
         boolean isSameLesson = deletedLesson.equals(selectedLesson);
         return isLessonInfoPanel && isSameLesson;
     }
 
+    /**
+     * Checks if the provided {@code Student} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedStudent Student to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
     public boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent) {
+        requireNonNull(deletedStudent);
         boolean isStudentInfoPanel = currentInfoPanel == InfoPanelTypes.STUDENT;
         boolean isSameStudent = deletedStudent.equals(selectedStudent);
         return isStudentInfoPanel && isSameStudent;
