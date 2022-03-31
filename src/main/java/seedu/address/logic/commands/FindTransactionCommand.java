@@ -19,7 +19,7 @@ public class FindTransactionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Find all transactions of the client in the list as specified by the index.\n"
-            + "Parameters: INDEX (must be a positive integer) \n"
+            + "Parameters: INDEX (positive integer up to size of the list) \n"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index index;
