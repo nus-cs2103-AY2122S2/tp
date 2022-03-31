@@ -24,7 +24,7 @@ public class ClearScheduleCommand extends ScheduleCommand {
         requireNonNull(model);
         List<Candidate> candidatesToSetComplete = model.getExpiredInterviewCandidates();
         for (Candidate c : candidatesToSetComplete) {
-            model.setCandidate(c, c.setCompleted());
+            model.setCandidate(c, c.triggerInterviewStatusCompleted());
         }
         model.setInterviewSchedule(new InterviewSchedule());
         model.resetAllScheduledStatus();

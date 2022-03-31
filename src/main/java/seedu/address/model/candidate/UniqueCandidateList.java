@@ -152,7 +152,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     public void resetScheduledStatus() throws CommandException {
         for (Candidate c : internalList) {
             if (c.isScheduled()) {
-                setCandidate(c, c.setNotScheduled());
+                setCandidate(c, c.triggerInterviewStatusNotScheduled());
             }
         }
     }
