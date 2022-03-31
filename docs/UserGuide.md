@@ -24,8 +24,10 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
       * [Sort person by technical skill: sort](#sorting-persons-by-skill-proficiency-sort)
       * [Show past teammates: filterteam](#filter-for-past-teammates-filterteam)
       * [Show potential teammates: show](#show-all-potential-teammates-show)
-    * [Exiting HackNet](#exiting-the-program-exit)
+    * [Undo](#undo-last-command-undo)
+    * [Redo](#redo-last-command-redo)
     * [Navigating User Input History](#navigating-user-input-history)
+    * [Exiting HackNet](#exiting-the-program-exit)
 * [Data](#data)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -250,17 +252,32 @@ Shows the list of all persons marked as potential teammates
 
 Format: `show`
 
-### Exiting the program: `exit`
+### Undo last command: `undo`
 
-Exits the program.
+Undo the last command that changed HackNet. <br>
+Only these commands that changed HackNet can be undone:
+* Add
+* Delete
+* Edit
+* Team
+* Unteam
+* Clear
 
-Format: `exit`
+### Redo last command: `redo`
+
+Redo the command that was previously undone.
 
 ### Navigating User Input History: `↑`, `↓`
 
 Allows user to quickly retrieve their previous inputs from current session by using the up and down arrow keys.
 
 Format: `↑`, `↓`
+
+### Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ## Data
 

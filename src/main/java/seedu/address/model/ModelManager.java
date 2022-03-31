@@ -36,7 +36,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         // A sorted list wrapping over the internal filtered list
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new VersionedAddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -114,8 +114,73 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Returns whether the underlying {@code AddressBook} can be undone,
+     * and if there are any commands that can be undone.
+     *
+     * @return True if the {@code AddressBook} can be undone,
+     * False if the underlying AddressBook does not support undoing,
+     * or there  are no commands left to be undone.
+     */
+    public boolean canUndoAddressBook() {
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            return versionedAddressBook.canUndo();
+        }
+
+        return false;
+    }
+
+    /**
+     * Undo the last command that edited {@code AddressBook}. If the AddressBook does not support undoing commands,
+     * or there are no commands left to undo, this method does nothing.
+     */
+    public void undoAddressBook() {
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            versionedAddressBook.undo();
+        }
+    }
+
+    /**
+     * Returns whether the underlying {@code AddressBook} can be redone,
+     * and if there are any commands that can be redone.
+     *
+     * @return True if the {@code AddressBook} can be redone,
+     * False if the underlying AddressBook does not support redoing,
+     * or there  are no commands left to be redone.
+     */
+    public boolean canRedoAddressBook() {
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            return versionedAddressBook.canRedo();
+        }
+        return false;
+    }
+
+    /**
+     * Redo the last command that edited {@code AddressBook}. If the AddressBook does not support redoing commands,
+     * or there are no commands left to redo, this method does nothing.
+     */
+    public void redoAddressBook() {
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            versionedAddressBook.redo();
+        }
+    }
+
+    /**
+     * Saves the current state of the AddressBook in its history, if it supports it.
+     * If the underlying AddressBook does not support a history, this method does nothing.
+     */
+    public void commitAddressBook() {
+        if (this.addressBook instanceof VersionedAddressBook) {
+            VersionedAddressBook versionedAddressBook = (VersionedAddressBook) this.addressBook;
+            versionedAddressBook.commit();
+        }
     }
 
     //=========== Filtered & Sorted Person List Accessors ==========================================================

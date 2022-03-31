@@ -89,6 +89,7 @@ public class MakeTeamCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TEAM_ACTION);
         }
         model.setPerson(personToUpdate, updatedPerson);
+        model.commitAddressBook();
         return new CommandResult(String.format(successMessage, personToUpdate));
     }
 

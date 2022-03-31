@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.person.Person;
 
 /**
@@ -101,6 +102,15 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
         return ab;
+    }
+
+    public static VersionedAddressBook getTypicalVersionedAddressBook() {
+        VersionedAddressBook versionedAddressBook = new VersionedAddressBook();
+        for (Person p : getTypicalPersons()) {
+            versionedAddressBook.addPerson(p);
+        }
+        versionedAddressBook.commit();
+        return versionedAddressBook;
     }
 
     public static List<Person> getTypicalPersons() {
