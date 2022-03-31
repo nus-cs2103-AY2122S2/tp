@@ -57,7 +57,7 @@ public class DeleteScheduleCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() throws CommandException {
         showInterviewAtIndex(model, TypicalIndexes.INDEX_FIRST_INTERVIEW);
         Interview interviewToDelete = model.getFilteredInterviewSchedule().get(INDEX_FIRST_INTERVIEW.getZeroBased());
         Candidate candidateToDelete = interviewToDelete.getCandidate();
@@ -94,7 +94,7 @@ public class DeleteScheduleCommandTest {
         model.updateFilteredInterviewSchedule(Model.PREDICATE_SHOW_EMPTY_INTERVIEW_SCHEDULE);
         DeleteScheduleCommand deleteScheduleCommand = new DeleteScheduleCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM);
+        assertCommandFailure(deleteScheduleCommand, model, Messages.MESSAGE_NO_INTERVIEWS_DISPLAYED);
     }
 
     @Test

@@ -173,18 +173,17 @@ Format: `list`
 
 Finds and lists candidates whose attribute field(s) contain(s) any of the given keyword(s).
 
-Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
+Format: `find k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the find format:**<br>
 
-`ATTRIBUTE_FIELD` can take on the following values 
-`appstatus`, `course`, `email`, `intstatus`, `name`, `phone`, `seniority`, `studentid`, `all`, `avail`
+`ATTRIBUTE_FIELD` can take on the following values
+`all`, `avail`, `appstatus`, `course`, `email`, `intstatus`, `name`, `phone`, `seniority`, `studentid`, `remark`
 
-Note: 
-`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
-`avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
+* A candidate's`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
+* A candidate's `avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
 
 </div>
 
@@ -201,7 +200,7 @@ Note:
 
 Examples:
 * `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`
-* `find k/Computer Science f/course` returns candidates with the course field i.e. `computer science`
+* `find k/Computer k/Science f/course` returns candidates with the course field i.e. `computer science` and `computer engineering`
 * `find k/Jane k/Tan f/name` returns candidates with name e.g. `Jane`, `tan` and `John Tan`
 
 ### Sorting candidates by attribute field: `sort`
@@ -240,11 +239,11 @@ Let's reference a default sample list of unique candidates with attribute fields
 3. (`Ben`, `A5588565L`)
 
 
-### Updating a candidate's remarks: `remark`
+### Updating a candidate's remark: `remark`
 
 Updates the `remark` field of a candidate to the user input keyed in.
 
-Format: `remark INDEX r/REMARK`
+Format: `remark INDEX [r/REMARK]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -254,12 +253,12 @@ Format: `remark INDEX r/REMARK`
 
 </div>
 
-* To remove the remark of the first candidate displayed in the system, the user can simply key in `remark 1 r/`, 
+* To remove the remark of the first candidate displayed in the system, the user can simply key in `remark 1` or `remark 1 r/`, 
 which will update the remark of the candidate to be empty.
 
 Examples:
 * `remark 1 r/a good candidate` Updates the candidate's remark field to reflect 'a good candidate'.
-* `remark 1 r/` Removes the candidate's remark field to reflect ''.
+* `remark 1 r/` Removes the candidate's remark field to reflect ``.
 
 ### Deleting a candidate : `delete`
 
@@ -298,6 +297,9 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
 * The candidate index must be a positive integer 1, 2, 3, …​
 * `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
 * `DATE_TIME` must not be earlier than the present date and time.
+* Interview duration is fixed at 30 minutes. Attempts to schedule an interview within the duration of another interview will
+result in an error. (e.g. Interview A starts at 10AM on a given day. Attempts to schedule an interview from 9:31AM up to 10:29AM is prohibited.)
+* Interviews must be scheduled within the office hours, defined as Monday to Friday, 8AM - 6PM (i.e. The last interview for the day allowed is at 5:30PM).
 
 Examples:
 * `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
@@ -350,13 +352,25 @@ Format: `view TIME_PERIOD`
 * Scheduled interviews are automatically sorted from earliest to latest
 
 Examples:
+* `view all` returns all scheduled interviews still in system whether in the past or upcoming
+* `view today` returns all scheduled interviews on the same date as the current time
+* `view week` returns all upcoming scheduled interviews within the next 7 days
+* `view month` returns all upcoming scheduled interviews within the next month
 
-| Example command | Expected Behaviour                                                               |
-|-----------------|----------------------------------------------------------------------------------|
-| `view all`      | returns all scheduled interviews still in system whether in the past or upcoming |
-| `view today`    | returns all scheduled interviews on the same date as the current time            |
-| `view week`     | returns all upcoming scheduled interviews within the next 7 days                 |
-| `view month`    | returns all upcoming scheduled interviews within the next month                  |
+### Clearing interview schedule `schedule clear`
+
+Clears the list of interviews in the schedule.
+
+Format: `schedule clear`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** The interview status of candidates who have an
+upcoming interview in the schedule will be reset from `Scheduled` to `Not Scheduled`. However, if a candidate has
+an interview which has just expired (and TAlent Assistant™ has not been refreshed) upon the execution of the command,
+his or her interview status will be updated to `Completed`.
+
+</div>
 
 ## Miscellaneous commands
 
@@ -386,9 +400,17 @@ TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/tale
 
 :exclamation: **Caution:**
 
-If your changes to the data file makes its format invalid, TAlent Assistant™ will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid*, TAlent Assistant™ will discard all data and start with an empty data file at the next run. It
+is highly advised that you do not modify the JSON files unless you are aware of what you are doing.
 
+When making changes to a candidate's details in talentassistant.json, the corresponding candidate's details in interviewlist.json (if applicable)
+must also be updated. Likewise, if an interview is deleted from interviewlist.json, the interview status of the candidate should be updated according
+to your desired outcome (scheduled or not completed).
+
+*Format is considered to be invalid when either one of the JSON files are missing, or if the JSON files are edited to contain duplicate candidates
+and/or (conflicting) interviews.
 </div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -403,20 +425,16 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 
 Commands in this section have been organised based on the expected scope of behaviour.
 
-### Candidates List
+### Managing Candidates
 | Action     | Format, Examples                                                                                                                                                                               |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add id/STUDENTID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
 | **Edit**   | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [c/COURSE] [yr/YEAR] [avail/AVAILABILITY] [as/APPLICATION_STATUS]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                             |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                   |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                 |
 | **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                               |
-| **Remark** | `remark INDEX r/REMARKS`<br> e.g., `remark 1 r/a good candidate`                                                                                                                               |
-
-### Candidate Profile
-| Action    | Format, Examples |
-|-----------|------------------|
-| **Focus** | [[PLACEHOLDER]]  |
+| **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 1 r/a good candidate`                                                                                                                              |
+| **Focus**  | [[PLACEHOLDER]]                                                                                                                                                                                |
 
 ### Scheduling Interviews
 | Action                        | Format, Examples                                                                                       |
@@ -424,6 +442,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
 | **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
 | **Delete interview**          | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                        |
+| **Clear all interviews**      | [[PLACEHOLDER]]                                                                                        |
 | **View scheduled interviews** | `view TIME_PERIOD` <br> e.g., `view all`, `view today`                                                 |
 
 ### Miscellaneous commands / Help

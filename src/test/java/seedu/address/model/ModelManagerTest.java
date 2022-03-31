@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.predicate.AllWithinTimePeriodPredicate;
@@ -193,7 +194,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePastInterviews_noPastInterviews() {
+    public void deletePastInterviews_noPastInterviews() throws CommandException {
         AddressBook addressBook = new AddressBook();
         InterviewSchedule interviewSchedule = new InterviewScheduleBuilder().withInterview(INTERVIEW_ALICE).build();
         UserPrefs userPrefs = new UserPrefs();
@@ -207,7 +208,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePastInterviews_hasPastInterviews() {
+    public void deletePastInterviews_hasPastInterviews() throws CommandException {
         LocalDateTime currentDateTime = LocalDateTime.now();
         Interview pastInterview = new Interview(ALICE, currentDateTime);
 
@@ -226,7 +227,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void deletePastInterviews_hasBothPastAndFutureInterviews() {
+    public void deletePastInterviews_hasBothPastAndFutureInterviews() throws CommandException {
         LocalDateTime currentDateTime = LocalDateTime.now();
         Interview pastInterview = new Interview(ALICE, currentDateTime);
 

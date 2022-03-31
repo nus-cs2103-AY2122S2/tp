@@ -41,13 +41,11 @@ public class DeleteScheduleCommand extends ScheduleCommand {
         requireNonNull(model);
         List<Interview> lastShownList = model.getFilteredInterviewSchedule();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_IN_SYSTEM));
+            throw new CommandException(String.format(Messages.MESSAGE_NO_INTERVIEWS_DISPLAYED));
         }
-
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW_DISPLAYED_INDEX);
         }
-
         Interview interviewToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteInterview(interviewToDelete);
         model.setCandidate(interviewToDelete.getCandidate(),

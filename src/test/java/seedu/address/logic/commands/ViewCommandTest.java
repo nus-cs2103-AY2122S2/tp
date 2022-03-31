@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCandidates.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
@@ -46,8 +48,6 @@ public class ViewCommandTest {
     public void execute_listIsEmpty_showsNoInterviewsListed() {
         model = new ModelManager(new AddressBook(), new InterviewSchedule(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), model.getInterviewSchedule(), new UserPrefs());
-        assertCommandSuccess(new ViewCommand(predicate), model, new CommandResult(String
-                .format(Messages.MESSAGE_INTERVIEWS_LISTED_OVERVIEW, model.getFilteredInterviewSchedule().size())),
-                expectedModel);
+        assertThrows(CommandException.class, () -> new ViewCommand(predicate).execute(model));
     }
 }

@@ -95,7 +95,8 @@ public class Candidate {
 
         return otherCandidate != null
                 && (otherCandidate.getStudentId().equals(getStudentId())
-                || otherCandidate.getEmail().equals(getEmail()));
+                || otherCandidate.getEmail().equals(getEmail())
+                || otherCandidate.getPhone().equals(getPhone()));
     }
 
     /**
@@ -244,35 +245,4 @@ public class Candidate {
         return interviewStatus.equals(new InterviewStatus(SCHEDULED));
     }
 
-    public Candidate setNotScheduled() {
-        requireAllNonNull(name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
-        return new Candidate(this.getStudentId(),
-                this.getName(),
-                this.getPhone(),
-                this.getEmail(),
-                this.getCourse(),
-                this.getSeniority(),
-                this.getApplicationStatus(),
-                new InterviewStatus(NOT_SCHEDULED),
-                this.getAvailability(),
-                this.getRemark()
-        );
-    }
-
-    public Candidate setCompleted() {
-        requireAllNonNull(name, phone, email, course, seniority,
-                applicationStatus, interviewStatus, availability);
-        return new Candidate(this.getStudentId(),
-                this.getName(),
-                this.getPhone(),
-                this.getEmail(),
-                this.getCourse(),
-                this.getSeniority(),
-                this.getApplicationStatus(),
-                new InterviewStatus(COMPLETED),
-                this.getAvailability(),
-                this.getRemark()
-        );
-    }
 }

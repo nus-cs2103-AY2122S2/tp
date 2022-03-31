@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.util.List;
 
@@ -70,7 +68,7 @@ public class RemarkCommand extends Command {
                 remark);
 
         model.setCandidate(candidateToEdit, editedCandidate);
-        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+
         for (int i = 0; i < interviewSchedule.size(); i++) {
             if (candidateToEdit.equals(interviewSchedule.get(i).getCandidate())) {
                 Interview interviewToUpdate = interviewSchedule.get(i);
@@ -78,7 +76,6 @@ public class RemarkCommand extends Command {
                 model.updateInterviewCandidate(interviewToUpdate, updatedInterview);
             }
         }
-        model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
         return new CommandResult(generateSuccessMessage(editedCandidate),
                 false, false, false, -1, true, index.getZeroBased());
