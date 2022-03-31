@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
@@ -15,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Flag;
 import seedu.address.model.person.Info;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PrevDateMet;
@@ -35,10 +38,16 @@ public class FlagCommand extends Command {
             + "Parameters: NAME\n"
             + "Example: " + UNFLAG_COMMAND_WORD + " Joe";
 
+    public static final String MESSAGE_MULTIPLE_PERSON = "More than 1 person exists with that name. Please look at the "
+            + "list below and enter the index of the client you wish to edit \n"
+            + "Example: 1, 2, 3 ...";
+
     public static final String MESSAGE_FLAG_PERSON_SUCCESS = "Updated flag for Person: %1$s";
 
     private final Name targetName;
+    private final String targetNameStr;
     private final Flag flag;
+    private int index = 0;
 
     /**
      * @param targetName Name of person whose flag to replace.
@@ -46,6 +55,7 @@ public class FlagCommand extends Command {
      */
     public FlagCommand(Name targetName, Flag flag) {
         this.targetName = targetName;
+        this.targetNameStr = targetName.fullName;
         this.flag = flag;
     }
 
@@ -53,7 +63,22 @@ public class FlagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         FilteredList<Person> lastShownList = (FilteredList<Person>) model.getFilteredPersonList();
-        Index targetIndex = model.getPersonListIndex(targetName);
+        Index targetIndex;
+        if (index == 0) {
+            FilteredList<Person> tempList = new FilteredList<Person>((FilteredList<Person>) lastShownList);
+            String[] nameKeywords = {targetNameStr};
+            Predicate<Person> predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            tempList.setPredicate(predicate);
+
+            if (tempList.size() > 1) {
+                lastShownList.setPredicate(predicate);
+                return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+            }
+
+            targetIndex = model.getPersonListIndex(targetName);
+        } else {
+            targetIndex = Index.fromOneBased(index);
+        }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -63,6 +88,10 @@ public class FlagCommand extends Command {
         model.setPerson(personToFlag, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, personToFlag));
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     /**
