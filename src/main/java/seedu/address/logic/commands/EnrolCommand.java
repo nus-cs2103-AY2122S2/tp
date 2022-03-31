@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
@@ -92,6 +93,7 @@ public class EnrolCommand extends Command {
 
         model.setEntity(cgToEdit, newCg);
         model.setEntity(moduleToEdit, newModule);
-        return new CommandResult(result);
+        model.updateFilteredStudentList(student -> newCg.hasStudent(student));
+        return new CommandResult(result, EntityType.STUDENT);
     }
 }

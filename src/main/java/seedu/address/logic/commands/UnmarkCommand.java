@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 
 //@@author EvaderFati
@@ -84,6 +85,6 @@ public class UnmarkCommand extends Command {
             result += String.format(MESSAGE_UNMARK_OTHERS,
                     classGroup.getClassGroupId(), classGroup.getClassGroupType());
         }
-        return new CommandResult(result);
+        return new CommandResult(result, EntityType.CLASS_GROUP);
     }
 }
