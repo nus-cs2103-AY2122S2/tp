@@ -18,8 +18,8 @@ import seedu.address.model.transaction.Transaction;
 public class TransactionCard extends UiPart<Region> {
 
     private static final String FXML = "TransactionListCard.fxml";
-    private static final String STATUS_PAID_ICON = "/images/check-mark.png";
-    private static final String STATUS_NOT_PAID_ICON = "/images/delete-button.png";
+    private static final String STATUS_PAID_ICON = "/images/paid.png";
+    private static final String STATUS_NOT_PAID_ICON = "/images/unpaid.png";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
