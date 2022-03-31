@@ -16,6 +16,7 @@ import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Deletes a customer identified using it's displayed index from trackBeau.
@@ -97,7 +98,7 @@ public class DeleteCustomerCommand extends Command {
             successMessage += String.format(MESSAGE_DELETE_BOOKING_SUCCESS, sbBookings);
         }
 
-        return new CommandResult(successMessage);
+        return new CommandResult(successMessage, Panel.CUSTOMER_PANEL);
     }
 
     @Override

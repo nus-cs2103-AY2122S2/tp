@@ -68,8 +68,8 @@ public class MainWindow extends UiPart<Stage> {
     private MonthlyCustomerChartWindow monthlyCustomerChartWindow;
     private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
-    private StatisticsPanel statisticsPanel;
     private SchedulePanel schedulePanel;
+    private Panel currPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -146,28 +146,50 @@ public class MainWindow extends UiPart<Stage> {
                     l.getStyleClass().remove("selected");
                 }
                 label.getStyleClass().add("selected");
-                switchPanel(label.getId());
+                switchPanel(stringToPanel(label.getId()));
             }
         });
     }
 
-    private void switchPanel(String labelId) {
-        detailsPanelPlaceholder.getChildren().clear();
-
-        switch (labelId) {
+    private Panel stringToPanel(String id) {
+        switch (id) {
         case "customersLabel":
+            return Panel.CUSTOMER_PANEL;
+        case "servicesLabel":
+            return Panel.SERVICE_PANEL;
+        case "bookingsLabel":
+            return Panel.BOOKING_PANEL;
+        case "scheduleLabel":
+            return Panel.SCHEDULE_PANEL;
+        default:
+            return Panel.NO_CHANGE;
+        }
+    }
+
+    private void switchPanel(Panel panel) {
+        detailsPanelPlaceholder.getChildren().clear();
+        for (Label l : labels) {
+            l.getStyleClass().remove("selected");
+        }
+
+        switch (panel) {
+        case CUSTOMER_PANEL:
+            customersLabel.getStyleClass().add("selected");
             customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
             detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
             break;
-        case "servicesLabel":
+        case SERVICE_PANEL:
+            servicesLabel.getStyleClass().add("selected");
             serviceListPanel = new ServiceListPanel(logic.getFilteredServiceList());
             detailsPanelPlaceholder.getChildren().add(serviceListPanel.getRoot());
             break;
-        case "bookingsLabel":
+        case BOOKING_PANEL:
+            bookingsLabel.getStyleClass().add("selected");
             bookingListPanel = new BookingListPanel(logic.getFilteredBookingList());
             detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
             break;
-        case "scheduleLabel":
+        case SCHEDULE_PANEL:
+            scheduleLabel.getStyleClass().add("selected");
             schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), logic.getSelectedDate());
             detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
             break;
@@ -221,6 +243,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+        currPanel = Panel.CUSTOMER_PANEL;
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -635,10 +658,8 @@ public class MainWindow extends UiPart<Stage> {
                 plotHairChart();
             }
 
-            if (commandResult.hasSelectedDate()) {
-                schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), logic.getSelectedDate());
-                detailsPanelPlaceholder.getChildren().clear();
-                detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
+            if (commandResult.getPanel() != Panel.NO_CHANGE) {
+                switchPanel(commandResult.getPanel());
             }
 
             return commandResult;

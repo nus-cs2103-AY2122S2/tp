@@ -30,6 +30,7 @@ import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains helper methods for testing commands.
@@ -164,8 +165,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+                                            Model expectedModel, Panel expectPanel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectPanel);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

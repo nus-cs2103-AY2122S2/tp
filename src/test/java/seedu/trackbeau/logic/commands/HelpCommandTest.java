@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
+import seedu.trackbeau.ui.Panel;
 
 public class HelpCommandTest {
     private Model model = new ModelManager();
@@ -16,7 +17,7 @@ public class HelpCommandTest {
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false,
                 false, false, false,
-                false, false, false, false);
+                false, false, false, Panel.NO_CHANGE);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

@@ -9,6 +9,7 @@ import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.booking.BookingSearchContainsKeywordsPredicate;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Finds and lists all bookings in trackBeau whose name contains any of the argument keywords.
@@ -37,7 +38,8 @@ public class FindBookingCommand extends Command {
         requireNonNull(model);
         model.updateFilteredBookingList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_BOOKING_LISTED_OVERVIEW, model.getFilteredBookingList().size()));
+                String.format(Messages.MESSAGE_BOOKING_LISTED_OVERVIEW, model.getFilteredBookingList().size()),
+                Panel.BOOKING_PANEL);
     }
 
     @Override

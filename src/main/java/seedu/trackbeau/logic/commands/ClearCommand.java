@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Clears trackBeau.
@@ -18,6 +19,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setTrackBeau(new TrackBeau());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, Panel.NO_CHANGE);
     }
 }

@@ -64,7 +64,7 @@ The table below explains the symbols and syntax used throughout the user guide.
 
 #### 3.2.2 Sections of TrackBeau's GUI
 The image below shows the annotated GUI components of TrackBeau.
-![Annotated GUI](images/user-guide/annotated-gui-v2.png)
+![Annotated GUI](images/user-guide/annotated-gui-v3.png)
 
 #### 3.2.3 Navigating in TrackBeau
 TrackBeau consists of tabs that are toggleable in the tab bar on the left side of the GUI.
@@ -134,7 +134,7 @@ The table below shows a list of command parameters that will be used for custome
 |`NAME`|Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.|
 |`PHONE_NUMBER`|Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.|
 |`ADDRESS`|Address of the customer. Addresses can take any values, and it should not be blank.|
-|`EMAIL`|Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <br> <ol><li> The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li> <li> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li> <li>have each domain label start and end with alphanumeric characters</li> <li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>|
+|`EMAIL`|Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: {::nomarkdown}<ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>{:/}|
 |`STAFF_PREFERENCE`|The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank.|
 |`SERVICE_PREFERENCE`|The name of the services that the customer prefers. Services' name can be any values, and it should not be blank.|
 |`HAIR_TYPE`|The hair type of the customer. Hair types can be any values, and it should not be blank.|
@@ -206,6 +206,7 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 Finds customers whose parameters contain any of the given keywords.
 
 Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+
 * Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies
 * The search is case-insensitive. e.g, `John` will match `john`
 * Only the parameters is searched.
@@ -490,7 +491,29 @@ Examples:
    
 ### 4.5 Miscellaneous
 
-#### 4.5.1 Viewing help : `help`
+### 4.5 Schedule management
+
+#### 4.5.1 Schedule management command parameters
+The table below shows a list of command parameters that will be used for schedule management.
+
+| Parameter | Description                                                            |
+|-----------|------------------------------------------------------------------------|
+| `DATE`    | The date of interest. Date should follow dd-MM-yyyy and be valid date. |
+
+#### 4.5.2 Viewing schedule: `schedule`
+Display the schedule of the week containing selected date.
+
+Format: `schedule date/DATE`
+
+Examples: 
+* `schedule date/10-10-2022`
+
+Example Usage: `schedule date/10-10-2022`
+![display schedule](images/user-guide/display_schedule.png)
+
+### 4.6 Miscellaneous
+
+#### 4.6.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -498,23 +521,23 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-#### 4.5.2 Clearing all entries : `clear`
+#### 4.6.2 Clearing all entries : `clear`
 
 Clears all entries from the application.
 
 Format: `clear`
 
-#### 4.5.3 Exiting the program : `exit`
+#### 4.6.3 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-#### 4.5.4 Saving the data
+#### 4.6.4 Saving the data
 
 TrackBeau data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.5.5 Editing the data file
+#### 4.6.5 Editing the data file
 
 TrackBeau data are saved as a JSON file `[JAR file location]/data/trackbeau.json`. Advanced users are welcome to update data directly by editing that data file.
 
