@@ -34,7 +34,7 @@ public class EditLabCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_LAB + "LAB_NUMBER "
             + "[" + PREFIX_LABSTATUS + "LAB_STATUS (u/s/g)] "
-            + "[" + PREFIX_LABMARK + "LAB_SCORE]\n"
+            + "[" + PREFIX_LABMARK + "LAB_MARK]\n"
             + "Example (changing status): " + COMMAND_WORD + " 1 " + PREFIX_LAB + "1 " + PREFIX_LABSTATUS + "s\n"
             + "Example (changing marks): " + COMMAND_WORD + " 1 " + PREFIX_LAB + "2 " + PREFIX_LABMARK + "10";
 
