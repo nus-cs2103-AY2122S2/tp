@@ -36,7 +36,7 @@ We aim to help store keeper to simplify the process of managing inventory and re
 
    * **`list`** : Lists all products.
 
-   * **`add n:Maggie Mee c:noodles e:2022-01-01 p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
+   * **`add n:Maggie Mee c:noodles p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
    * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
 
@@ -121,6 +121,15 @@ Alternatively, you can also interact with the application through buttons, such 
 
 * Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
   e.g. the command `exit 123` will be interpreted as `exit`.
+
+</div>
+
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Important notes about inputs**<br>
+
+Inputs containing a colon (`:`) might cause unexpected behaviour. You are strongly recommended to add `\` before a colon character in your input.<br>
+e.g. To provide a product name of `Nescafe: special edition`, you should type `n:Nescafe\: special edition`.
 
 </div>
 
