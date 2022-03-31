@@ -52,6 +52,10 @@ public class PetCard extends UiPart<Region> {
     private FlowPane attendanceTags;
     @FXML
     private FlowPane transportTags;
+    @FXML
+    private FlowPane dietLabel;
+    @FXML
+    private FlowPane appLabel;
 
 
     /**
@@ -83,6 +87,8 @@ public class PetCard extends UiPart<Region> {
                     .getChildren()
                     .add(TransportTag.createTransportTag(attendance));
             });
+        dietLabel.getChildren().add(DietLabel.createDietLabel(pet.getDiet()));
+        appLabel.getChildren().add(AppointmentLabel.createAppointmentLabel(pet.getAppointment()));
     }
 
     public void setColour(String colour) {
