@@ -113,8 +113,8 @@ public class EditInterviewCommand extends EditCommand {
         boolean applicantEdited = !(interviewToEdit.getApplicant().equals(editedInterview.getApplicant()));
         boolean positionEdited = !(interviewToEdit.getPosition().equals(editedInterview.getPosition()));
 
-        if ((applicantEdited || positionEdited) &&
-                model.isSameApplicantPosition(editedInterview.getApplicant(), editedInterview.getPosition())) {
+        if ((applicantEdited || positionEdited)
+                && model.isSameApplicantPosition(editedInterview.getApplicant(), editedInterview.getPosition())) {
             throw new CommandException(String.format(MESSAGE_APPLICANT_SAME_POSITION,
                     editedInterview.getApplicant().getName().fullName,
                     editedInterview.getPosition().getPositionName().positionName));
