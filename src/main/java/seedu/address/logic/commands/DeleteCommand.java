@@ -170,6 +170,7 @@ public class DeleteCommand extends Command {
 
             Schedule personToDelete = lastShownList.get(targetIndex.getZeroBased());
             model.deleteSchedule(personToDelete);
+            model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ACTIVE_SCHEDULES);
             return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS, personToDelete));
         default:
             throw new CommandException(MESSAGE_DELETE_FAILURE);
