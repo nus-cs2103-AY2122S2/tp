@@ -90,8 +90,8 @@ Additional formatting guidelines:
    Note how the app contains some sample data. <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data* <br>
    📓`Note:`
-   1. If you are a Mac user and are unable to open the jar file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-   2. If you are a Windows user and are unable to open the jar file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
 6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -162,20 +162,21 @@ Examples of usage:
 |    `cs/`     |      Covid Status       |                                               `Positive`, `Negative`, `HRN`                                                |
 |     `t/`    |      Optional tag(s)   |       No restrictions                                                                                       |
 
-*Figure 3: Table showing list of possible tags and the Pre-defined constants*
+*Figure 3: Table showing list of possible prefixes and the Pre-defined constants*
 
-As described in Figure 3, these are the possible tags that can be used with Tracey. E.g `n/`, `cs/` etc.
-In addition, the list of Pre-defined constants are also provided for `Faculty` and `Covid Status`.
+As described in Figure 3, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
+In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
 💡`Tips`:
 * You are able to add optional tags with no restrictions using the `t/` prefix.
+* Additions can be reversed with the `undo` feature.
 
 ### Editing an existing contact
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
 * Edits an existing student's information found in Tracey. The student is referred to by an index, displayed beside his/her name in the student list.
-* To edit a student's pre-defined constant, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
+* To edit a student's details, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
 * The correct prefixes must be used in order for Tracey to know what you intend to edit.
 * Existing information of the student will be replaced with the newly inputted values.
@@ -191,8 +192,8 @@ Examples of usage:
   and `johndoe@example.com` respectively.
 * `edit 2 n/David Limpeh t/` edits the entry to become `David Limpeh` and clears all existing tags.
 
-⚠️`Warning:`
-* Once the tags of the student has been edited, the old tags cannot be recovered.
+💡`Tip`:
+* Edits can be reversed with the `undo` feature.
 
 ### Deleting a contact
 Delete a contact at a specific index.
@@ -215,6 +216,7 @@ Examples of usage:
 * The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
 * You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
+* Deletions can be reversed with the `undo` feature.
 
 ### Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
@@ -400,6 +402,19 @@ Figure 8: Command Summary.
 
 
 ### Glossary
+
+*Table 1: Specific terminology used*
+
 | Term  | Meaning  |
 |---|---|
+| Block | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E. |
+| Command Line Interface (CLI) | A text-based user interface used to run applications. |
+| Covid Status | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN). |
+| Faculty |  A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).  |
+| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application. |
+| Health Risk Notice (HRN) | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case. |
+| JAR File | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files. |
+| Matriculation Number | A student's unique identification number; also known as Student ID. |
+| Prefix | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
 | Pre-defined constant | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
+| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address. |
