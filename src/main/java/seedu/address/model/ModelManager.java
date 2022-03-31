@@ -136,6 +136,17 @@ public class ModelManager implements Model {
         addressBook.setCandidate(target, editedCandidate);
     }
 
+    @Override
+    public void resetAllScheduledStatus() {
+        addressBook.resetAllScheduledStatus();
+        updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+    }
+
+    @Override
+    public List<Candidate> getExpiredInterviewCandidates() {
+        return interviewSchedule.getExpiredInterviewCandidates();
+    }
+
     //=========== InterviewSchedule ================================================================================
 
     @Override
@@ -269,9 +280,10 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && interviewSchedule.equals(other.interviewSchedule)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCandidates.equals(other.filteredCandidates)
-                && interviewSchedule.equals(other.interviewSchedule);
+                && filteredInterviewSchedule.equals(other.filteredInterviewSchedule);
     }
 
 }

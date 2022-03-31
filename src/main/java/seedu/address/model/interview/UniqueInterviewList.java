@@ -3,11 +3,14 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
@@ -172,5 +175,16 @@ public class UniqueInterviewList implements Iterable<Interview> {
             }
         }
         return true;
+    }
+
+    public List<Candidate> getExpiredInterviewCandidates() {
+        List<Candidate> candidates = new ArrayList<>();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        for (Interview i : internalList) {
+            if (i.getInterviewEndDateTime().isBefore(currentDateTime)) {
+                candidates.add(i.getCandidate());
+            }
+        }
+        return candidates;
     }
 }
