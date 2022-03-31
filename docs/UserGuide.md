@@ -244,7 +244,7 @@ Delete existing event(s).
 * `deleteevent 2`
 
 ### List all events : `listevents`
-Shows all the upcoming events in amigos
+Lists all the upcoming events in Amigos.
 
 **Format**: `listevents [-a]`
 
