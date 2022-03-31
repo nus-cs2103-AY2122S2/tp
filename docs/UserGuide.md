@@ -179,12 +179,13 @@ Views the information of a specific lineup/ player/ schedule.
 
 Format: `view L/[LINEUP]`
 * All the players in the specified `LINEUP` will be displayed.
-* If no `LINEUP` is provided, all players who are inside some lineup will be displayed.
+* If no `LINEUP` is provided, all players who are inside some lineup will be displayed. Also display the list of 
+all current lineups.
 * The specified `LINEUP` and specified `` must be **valid** to be viewed.
 
 Examples:
 * `view L/Starting Five` Displays all players inside the lineup `Starting Five`
-* `view L/` Displays all players who are inside some lineup.
+* `view L/` Displays all players who are inside some lineup and the current lineups.
 
 **To view a player:**<br>
 
