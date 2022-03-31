@@ -138,6 +138,9 @@ public class TAssist implements ReadOnlyTAssist {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        removeStudentFromModules(key);
+        removeStudentFromClassGroups(key);
+        removeStudentFromAssessments(key);
     }
 
     //// module-level operations
@@ -263,11 +266,30 @@ public class TAssist implements ReadOnlyTAssist {
      * @param student The student to remove.
      */
     public void removeStudentFromAssessments(Student student) {
-        List<Assessment> assessmentToModify = new ArrayList<>(assessments.asUnmodifiableObservableList());
-        assessmentToModify.stream().forEach(assessment -> assessment.removeStudent(student));
-        assessments.setAssessments(assessmentToModify);
+        List<Assessment> assessmentsToModify = new ArrayList<>(assessments.asUnmodifiableObservableList());
+        assessmentsToModify.stream().forEach(assessment -> assessment.removeStudent(student));
+        assessments.setAssessments(assessmentsToModify);
     }
 
+    /**
+     * Removes the student from all the modules.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromModules(Student student) {
+        List<TaModule> modulesToModify = new ArrayList<>(modules.asUnmodifiableObservableList());
+        modulesToModify.stream().forEach(module -> module.removeStudent(student));
+        modules.setModules(modulesToModify);
+    }
+
+    /**
+     * Removes the student from all the modules.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromClassGroups(Student student) {
+        List<ClassGroup> classGroupsToModify = new ArrayList<>(classGroups.asUnmodifiableObservableList());
+        classGroupsToModify.stream().forEach(classGroup -> classGroup.removeStudent(student));
+        classGroups.setClassGroups(classGroupsToModify);
+    }
 
     //// util methods
 
