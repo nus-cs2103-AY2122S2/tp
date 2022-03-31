@@ -81,7 +81,11 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n9. FILTER student based on health statuses"
             + NEWLINE_AND_INDENTATION
-            + "Format: filter covid-positive";
+            + "Format: filter covid-positive"
+
+            + "\n10. IMPORT excel files"
+            + NEWLINE_AND_INDENTATION
+            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
