@@ -158,8 +158,8 @@ A customer can have any number of preferred staffs, preferred services and aller
 </div>
 
 Examples:
-* `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com`
-* `addc n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 al/Aloe Vera sep/facial sep/massage`
+* `addc n/John Doe p/98765432 a/John street, block 123, #01-01 e/johnd@example.com rd/31-03-2022`
+* `addc n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 rd/31-03-2022 al/Aloe Vera sep/facial sep/massage`
 
 #### 4.1.3 Listing all customers : `listc`
 
@@ -189,6 +189,7 @@ Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_
 **:exclamation: Caution:**<br>
 * When editing staff/service preferences or allergies, the existing staff/service preferences or allergies will be removed i.e., adding of staff/service preferences or allergies is not cumulative.<br>
 * By leaving the staff/service preferences or allergies parameter empty, i.e, `stp/` or `sep/` or `al/` it will remove all the staff/service preferences or allergies currently associated with the customer.
+* Note that 2 customers cannot have the same phone number.
 
 </div>
 
@@ -206,16 +207,16 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 Finds customers whose parameters contain any of the given keywords.
 
 Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
-
-* Keyword types available: name, phone, skintype, hairtype, staffpref, servicepref & allergies
-* The search is case-insensitive. e.g, `John` will match `john`
-* Only the parameters is searched.
+   
+**:exclamation: Caution:**<br>
+* For tags, using two tags of the same type will lead to only the latest one being searched for. For instance, `findc h/Oily h/Dry` will search for only customers with dry hair type.<br>
+* The search is case-insensitive. e.g, `john` will match `john`
 * Only full words will be matched e.g. `john` will not match `joh`
 
 Examples:
 * `findc n/John` returns `john` and `John Doe`
 * `findc al/Nickel` returns customer profiles with nickle allergies
-* `findc h/Oily Dry` returns customer profiles that has the hair type of oily or dry
+* `findc h/Oily` returns customer profiles that has the hair type of oily
 
 #### 4.1.6 Deleting customer(s) : `deletec`
 
