@@ -19,7 +19,7 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class EnrolCommand extends Command {
     public static final String STUDENT_EXISTS_CG = "Student %s(%s) is already in given class group.";
-    public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
+    public static final String NONEXISTENT_CG = "Class Group %d does not exists.";
     public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled given students into %s(%s).";
     public static final String COMMAND_WORD = "enrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols the specified students to "
@@ -57,7 +57,7 @@ public class EnrolCommand extends Command {
         List<ClassGroup> cgList = model.getUnfilteredClassGroupList();
 
         if (classGroupIndex.getZeroBased() >= cgList.size()) {
-            throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex));
+            throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex.getOneBased()));
         }
 
         ClassGroup cgToEdit = cgList.get(classGroupIndex.getZeroBased());
@@ -66,9 +66,11 @@ public class EnrolCommand extends Command {
         ClassGroup newCg = new ClassGroup(cgToEdit, newModule);
 
         for (Student s : students) {
-            if (!newCg.hasStudent(s) && !newModule.hasStudent(s)) {
+            if (!newCg.hasStudent(s)) {
                 newCg.addStudent(s);
-                newModule.addStudent(s);
+                if (!newModule.hasStudent(s)) {
+                    newModule.addStudent(s);
+                }
             } else {
                 throw new CommandException(String.format(STUDENT_EXISTS_CG, s.getName(), s.getStudentId()));
             }
