@@ -131,7 +131,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
-        hostServices = MainApp.getInstance();
+        hostServices = MainApp.getHostSvs();
         initCol();
         loadData();
     }

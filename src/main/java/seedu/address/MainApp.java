@@ -56,7 +56,8 @@ public class MainApp extends Application {
      * Getter to pass HostServices to UI elements.
      * @return HostServices
      */
-    public static HostServices getInstance() {
+    public static HostServices getHostSvs() {
+        assert mainInstance != null;
         return mainInstance.getHostServices();
     }
 
