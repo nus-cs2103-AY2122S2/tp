@@ -428,7 +428,7 @@ Format: `unpay INDEX_TRANSACTION`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Set the status of the transaction at the specified `INDEX_TRANSACTION` to `unpaid`.
-* The index refers to the index number shown in the displayed **transaction list NO the client list**.
+* The index refers to the index number shown in the displayed **transaction list NOT the client list**.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 
 </div>
