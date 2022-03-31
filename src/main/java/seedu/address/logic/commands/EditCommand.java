@@ -37,16 +37,28 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String RESET_ARG = "r";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-        + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person(s) identified "
+        + "by the index number(s) used in the displayed person list. "
         + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
+        + "Index numbers should be separated by a white space,"
+        + "as opposed to other ... objects that are separated by a comma."
+        + "\n"
+        + "By default, Teams will be appended."
+        + "However in reset mode, editing Teams will purge all previous data."
+        + "This means declaring t/ with no values in reset mode deletes all teams from the person(s) in reset mode."
+        + "The concept of reset mode applies the same to Skills."
+        + "\n"
+        + "Only Teams and Skills will be changed when editing multiple persons in batch."
+        + "Other changes such as Name and Email will be silently ignored, if provided."
+        + "\n"
+        + "Parameters: INDEX... (must be a positive integer) "
+        + "[-r](activates reset mode)"
         + "[" + PREFIX_NAME + "NAME] "
         + "[" + PREFIX_PHONE + "PHONE] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
         + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
-        + "[" + PREFIX_TEAM + "TEAM]"
-        + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY]...\n"
+        + "[" + PREFIX_TEAM + "TEAM...]"
+        + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY...]\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_PHONE + "91234567 "
         + PREFIX_EMAIL + "johndoe@example.com";
@@ -61,7 +73,7 @@ public class EditCommand extends Command {
     private final boolean isResetMode;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, boolean isResetMode) {
