@@ -93,4 +93,22 @@ public class CommandResultTest {
         );
     }
 
+    @Test
+    public void isView_test() {
+        assertTrue(new CommandResult("feedback", false, false, firstStudent).isView());
+        assertFalse(new CommandResult("feedback").isView());
+    }
+
+    @Test
+    public void isShowHelp_test() {
+        assertTrue(new CommandResult("feedback", true, false, null).isShowHelp());
+        assertFalse(new CommandResult("feedback").isView());
+    }
+
+    @Test
+    public void isExit_test() {
+        assertTrue(new CommandResult("feedback", false, true, null).isExit());
+        assertFalse(new CommandResult("feedback").isView());
+    }
+
 }
