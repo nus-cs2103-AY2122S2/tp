@@ -465,6 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | user                         | comment on shows                                       | record down my opinions about a show                           |
 | `* * `   | user                         | rate shows                                             | keep track on whether a show is good or bad                    |
 | `* * `   | user                         | tag shows                                              | keep track on what genre the show belongs to                   |
+
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
