@@ -24,12 +24,12 @@ public class FindCompanyCommand extends Command {
     public static final String MESSAGE_NOT_QUERIED = "At least one field to find must be provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies with given details of the company "
-            + "by name and tag "
+            + "by name and tag.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " sgshop dbsss ";
+            + PREFIX_NAME + "sgshop dbsss ";
 
     private final CompanyContainsKeywordsPredicate predicate;
 
