@@ -443,3 +443,13 @@
 #personInTagCount {
     -fx-text-fill: white;
 }
+
+#grabResult {
+    -fx-text-fill: white;
+    -fx-faint-focus-color: white;
+}
+
+#grabResult .content {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}

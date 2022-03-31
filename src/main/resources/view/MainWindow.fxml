@@ -31,8 +31,8 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Add">
-            <MenuItem fx:id="addMenuItem" mnemonicParsing="false" onAction="#handleAddProfile" text="Add Profile" />
+          <Menu fx:id="addMenu" mnemonicParsing="false" text="Add">
+            <MenuItem fx:id="addMenuItem" mnemonicParsing="false" onAction="#handleAddProfile" text="Add Profile"/>
           </Menu>
           <Menu mnemonicParsing="false" text="Tags">
             <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" onAction="#handleAddTag" text="Tags" />

@@ -9,7 +9,7 @@ import seedu.address.model.person.PersonContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Filters the full person list using a tag
+ * Filters the full person list with a tag
  */
 public class FilterCommand extends Command {
 
