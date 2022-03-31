@@ -160,14 +160,14 @@ After filling in the required fields, click
 
 *Alternatively*, by using command,
 
-Format: `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
+Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Only a single product would be added at a time
 </div>
 
 Examples:
-* `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour dr:25 ds:10`
+* `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
 
 #### 3.1.3 Updating products : `update`
 
