@@ -270,13 +270,18 @@ public class MainWindow extends UiPart<Stage> {
      */
     public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
         CommandResult commandResult = logic.execute(commandText);
-        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
         if (focusListPanel.getCandidate().looseEqual(logic
                 .getFilteredCandidateList()
                 .get(commandResult.getEditIndex()))) {
             executeCommand(FocusCommand.COMMAND_WORD + " "
                     + String.valueOf(commandResult.getEditIndex() + 1));
         }
+
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        //to manually clear the commandBox
+        commandBoxPlaceholder.getChildren().remove(0);
+        commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
         return commandResult;
     }
 
