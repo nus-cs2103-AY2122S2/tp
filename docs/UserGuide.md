@@ -307,7 +307,7 @@ The interviews displayed can be filtered by providing the optional parameters `f
 
 Example: `list -i f/date a/2022-05-04`
 
-The positions displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
+The interviews displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
 
 Examples: 
 - `list -i s/dsc`
