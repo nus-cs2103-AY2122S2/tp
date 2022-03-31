@@ -224,8 +224,8 @@ public class MainWindow extends UiPart<Stage> {
         if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
             focusListPanelPlaceholder.getChildren().remove(0);
         }
-        FocusCard focusCard = new FocusCard(null, null);
-        focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
+        candidateListPanel = new CandidateListPanel(logic.getFilteredCandidateList());
+        candidateListPanelPlaceholder.getChildren().add(candidateListPanel.getRoot());
     }
 
     /**
