@@ -22,17 +22,18 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the hustle book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the hustle book. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SALARY + "Salary "
-            + PREFIX_INFO + "INFO "
-            + PREFIX_PREV_DATE_MET + "YYYY-MM-DD "
-            + "[" + PREFIX_FLAG + "FLAG]"
+            + "[" + PREFIX_SALARY + "SALARY] "
+            + "[" + PREFIX_INFO + "INFO] "
+            + "[" + PREFIX_PREV_DATE_MET + "PREVIOUS DATE MET] "
+            + "[" + PREFIX_FLAG + "FLAG] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "The d/PREVIOUS DATE MET has to be in the format YYYY-MM-DD \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -45,8 +46,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the hustle book";
+    public static final String MESSAGE_SUCCESS = "New client added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the hustle book";
 
     private final Person toAdd;
 

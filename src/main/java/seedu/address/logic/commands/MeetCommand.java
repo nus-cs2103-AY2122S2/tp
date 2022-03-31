@@ -27,9 +27,9 @@ public class MeetCommand extends Command {
     public static final String COMMAND_WORD = "meet";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Schedule meeting with the person identified by the name used in HustleBook.\n"
+            + ": Schedule meeting with the client identified by the name used in HustleBook.\n"
             + "Parameters: NAME (must be found in HustleBook), DATE (YYYY-MM-DD format), TIME (24HR Format)\n"
-            + "Example: " + COMMAND_WORD + " NAME" + " d/2022-02-23" + " t/1530";
+            + "Example: " + COMMAND_WORD + " John Doe" + " d/2022-02-23" + " t/1530";
 
     public static final String MESSAGE_MEETING_CLASH = "A meeting clash is detected!";
     public static final String MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS = "Updated a meeting with %1$s";
