@@ -11,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 
 //@@author EvaderFati
@@ -20,8 +21,8 @@ public class MarkCommand extends Command {
     public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
     public static final String NONEXISTENT_WEEK = "Week %s does not exists.";
     public static final String MESSAGE_STUDENT_NOT_ENROLLED = "Student(s) not enrolled:\n%s";
-    public static final String MESSAGE_MARK_OTHERS = "Successfully mark other students from %s(%s).";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark given students from %s(%s).";
+    public static final String MESSAGE_MARK_OTHERS = "Successfully mark other student(s) from %s(%s).";
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark given student(s) from %s(%s).";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance(s) of the specified student(s)"
             + "belonging to the class group at the specified CLASS_GROUP_INDEX for the specified week.\n"
             + "\tParameters: " + PREFIX_CLASS_INDEX + "CLASS_GROUP_INDEX "
@@ -83,7 +84,7 @@ public class MarkCommand extends Command {
         if (notMarkedStudents.size() != students.size()) {
             result += String.format(MESSAGE_MARK_OTHERS, classGroup.getClassGroupId(), classGroup.getClassGroupType());
         }
-        return new CommandResult(result);
+        return new CommandResult(result, EntityType.CLASS_GROUP);
 
     }
 }

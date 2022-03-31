@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
@@ -20,7 +21,8 @@ import seedu.address.model.tamodule.TaModule;
 public class DisenrolCommand extends Command {
     public static final String NONEXISTENT_STUDENT_CG = "Student(s) not in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %s does not exists.";
-    public static final String MESSAGE_DISENROL_SUCCESS = "Successfully disenrolled the other students from %s(%s)";
+    public static final String MESSAGE_DISENROL_OTHERS = "Successfully disenrolled the other student(s) from %s(%s)";
+    public static final String MESSAGE_DISENROL_SUCCESS = "Successfully disenrolled given students(s) from %s(%s)";
     public static final String COMMAND_WORD = "disenrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Disenrols the specified students from "
             + "the given class group.\n"
@@ -58,7 +60,7 @@ public class DisenrolCommand extends Command {
         List<ClassGroup> cgList = model.getUnfilteredClassGroupList();
 
         if (classGroupIndex.getZeroBased() >= cgList.size()) {
-            throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex));
+            throw new CommandException(String.format(NONEXISTENT_CG, classGroupIndex.getOneBased()));
         }
 
         ClassGroup cgToEdit = cgList.get(classGroupIndex.getZeroBased());
@@ -66,7 +68,6 @@ public class DisenrolCommand extends Command {
         ClassGroup newCg = new ClassGroup(cgToEdit);
         TaModule newModule = new TaModule(moduleToEdit);
         int notEnrolled = 0;
-
         for (Student s : students) {
             if (newCg.hasStudent(s)) {
                 newCg.removeStudent(s);
@@ -81,21 +82,26 @@ public class DisenrolCommand extends Command {
         for (Student s : students) {
             if (!model.getUnfilteredClassGroupList().stream().filter(cg -> cg.getModule().isSameModule(newModule))
                     .anyMatch(cg -> cg.hasStudent(s))) {
-                newModule.removeStudent(s);
-                model.removeStudentFromAssessments(s);
+                if (newModule.hasStudent(s)) {
+                    newModule.removeStudent(s);
+                    model.removeStudentFromAssessments(s);
+                }
             }
         }
 
-        if (!result.isEmpty()) {
-            result = String.format(NONEXISTENT_STUDENT_CG, result);
-        }
-
-        if (notEnrolled != students.size()) {
-            result += String.format(MESSAGE_DISENROL_SUCCESS,
+        if (notEnrolled == 0) {
+            result = String.format(MESSAGE_DISENROL_SUCCESS,
                     newCg.getClassGroupId(), newCg.getClassGroupType());
+        } else {
+            result = String.format(NONEXISTENT_STUDENT_CG, result);
+            if (notEnrolled != students.size()) {
+                result += String.format(MESSAGE_DISENROL_OTHERS,
+                        newCg.getClassGroupId(), newCg.getClassGroupType());
+            }
         }
 
         model.setEntity(moduleToEdit, newModule);
-        return new CommandResult(result);
+        model.updateFilteredStudentList(student -> newCg.hasStudent(student));
+        return new CommandResult(result, EntityType.STUDENT);
     }
 }

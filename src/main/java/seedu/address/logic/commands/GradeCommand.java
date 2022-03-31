@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.address.model.Model;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.Grade;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
@@ -69,6 +70,6 @@ public class GradeCommand extends Command {
                     s.getName(), s.getStudentId());
         }
         model.setEntity(assessment, assessmentToEdit);
-        return new CommandResult(result);
+        return new CommandResult(result, EntityType.ASSESSMENT);
     }
 }

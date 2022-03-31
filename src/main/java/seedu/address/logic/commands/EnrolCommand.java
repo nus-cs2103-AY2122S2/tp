@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
@@ -21,7 +22,8 @@ public class EnrolCommand extends Command {
 
     public static final String STUDENT_EXISTS_CG = "Student(s) exist in class group:\n%s";
     public static final String NONEXISTENT_CG = "Class Group %d does not exists.";
-    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled the other students into %s(%s).";
+    public static final String MESSAGE_ENROL_OTHERS = "Successfully enrolled the other student(s) into %s(%s).";
+    public static final String MESSAGE_ENROL_SUCCESS = "Successfully enrolled given student(s) into %s(%s).";
     public static final String COMMAND_WORD = "enrol";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols the specified students to "
             + "the given class group.\n"
@@ -78,16 +80,20 @@ public class EnrolCommand extends Command {
             }
         }
 
-        if (!result.isEmpty()) {
+        if (notEnrolled == 0) {
+            result = String.format(MESSAGE_ENROL_SUCCESS,
+                    newCg.getClassGroupId(), newCg.getClassGroupType());
+        } else {
             result = String.format(STUDENT_EXISTS_CG, result);
+            if (notEnrolled != students.size()) {
+                result += String.format(MESSAGE_ENROL_OTHERS,
+                        newCg.getClassGroupId(), newCg.getClassGroupType());
+            }
         }
 
-        if (notEnrolled != students.size()) {
-            result += String.format(MESSAGE_ENROL_SUCCESS,
-                    newCg.getClassGroupId(), newCg.getClassGroupType());
-        }
         model.setEntity(cgToEdit, newCg);
         model.setEntity(moduleToEdit, newModule);
-        return new CommandResult(result);
+        model.updateFilteredStudentList(student -> newCg.hasStudent(student));
+        return new CommandResult(result, EntityType.STUDENT);
     }
 }
