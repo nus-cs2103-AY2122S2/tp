@@ -421,13 +421,15 @@ Action              | Command Format with Examples
 **Task**            | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
 **Mark**            | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`
 **Unmark**          | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`
-**Delete Task**     | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`  
 **Edit**            | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**           | `clear`
 **Archive**         | `archive`
 **List**            | `list`
 **Assign**          | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> Example: `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`
 **Progress**        | `progress m/MODULE_CODE tn/TASK_NAME` <br> Example: `progress m/CS2103T tn/assignment 1`
+**Delete Task**     | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`
+**History**         | `history`
+**Undo**            | `undo`
 **Sort**            | `sort`
 **Manual**          | `manual [COMMAND_NAME]` <br> Example: `manual` (or) `manual add`
 **Help**            | `help`
