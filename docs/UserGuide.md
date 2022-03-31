@@ -139,7 +139,7 @@ Examples:
 
 Edits a candidate in the system.
 
-Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]...`
+Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -169,7 +169,7 @@ Format: `list`
 
 Finds and lists candidates whose attribute field(s) contain(s) any of the given keyword(s).
 
-Format: `find k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]`
+Format: `find k/KEYWORD [k/MORE_KEYWORDS]…​ [f/ATTRIBUTE_FIELD]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -407,7 +407,6 @@ to your desired outcome (scheduled or not completed).
 and/or (conflicting) interviews.
 </div>
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -426,11 +425,11 @@ Commands in this section have been organised based on the expected scope of beha
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add id/STUDENT_ID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                             |
-| **Edit**   | `edit INDEX [id/STUDENT_ID] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE] [yr/YEAR] [avail/AVAILABILITY] [as/APPLICATION_STATUS]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`              |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                  |
+| **Edit**   | `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                                                                                                 |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]…​ [f/ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                   |
 | **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                                |
 | **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 1 r/a good candidate`                                                                                                                               |
-| **Focus**  | [[PLACEHOLDER]]                                                                                                                                                                                 |
+| **Focus**  | `focus INDEX`<br> e.g., `focus 1`                                                                                                                                                               |
 
 ### Scheduling interviews
 | Action                        | Format, Examples                                                                                       |
@@ -438,7 +437,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
 | **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
 | **Delete interview**          | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                        |
-| **Clear all interviews**      | [[PLACEHOLDER]]                                                                                        |
+| **Clear all interviews**      | `schedule clear`                                                                                       |
 | **View scheduled interviews** | `view TIME_PERIOD` <br> e.g., `view all`, `view today`                                                 |
 
 ### Miscellaneous commands
