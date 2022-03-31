@@ -8,24 +8,23 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.seller.AllFieldsMatchBuyerPredicate;
-
+import seedu.address.model.seller.LocationMatchBuyerPredicate;
 
 /**
- * Matches and finds all sellers in UniqueSellerList whose PropertyToSell matches with the Buyer's PropertyToBuy.
+ * Matches and finds all sellers in UniqueSellerList whose PropertyToSell matches with the Buyer's Location.
  */
-public class MatchCommand extends Command {
+public class MatchLocationCommand extends Command {
 
-    public static final String COMMAND_WORD = "match";
+    public static final String COMMAND_WORD = "match-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all sellers whose specified fields matches "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all sellers whose location matches "
         + "the given buyer index and displays them as a list with index numbers.\n"
         + "Parameters: BUYER_INDEX...\n"
         + "Example: " + COMMAND_WORD + " 2";
 
     private final Index index;
 
-    public MatchCommand(Index index) {
+    public MatchLocationCommand(Index index) {
         this.index = index;
     }
 
@@ -35,7 +34,7 @@ public class MatchCommand extends Command {
         ObservableList<Buyer> buyerList = model.getFilteredBuyerList();
         Buyer buyer = buyerList.get(index.getZeroBased());
 
-        model.updateFilteredSellerList(new AllFieldsMatchBuyerPredicate(buyer));
+        model.updateFilteredSellerList(new LocationMatchBuyerPredicate(buyer));
 
         return new CommandResult(
             String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, model.getFilteredSellerList().size()));
@@ -44,7 +43,8 @@ public class MatchCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof MatchCommand // instanceof handles nulls
-            && index.equals(((MatchCommand) other).index)); // state check
+            || (other instanceof MatchLocationCommand // instanceof handles nulls
+            && index.equals(((MatchLocationCommand) other).index)); // state check
     }
+
 }

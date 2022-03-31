@@ -3,14 +3,10 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.MatchCommand;
+import seedu.address.logic.commands.MatchPriceRangeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-/**
- * Parses input arguments and creates a new MatchCommand object
- */
-public class MatchCommandParser implements Parser<MatchCommand> {
+public class MatchPriceRangeCommandParser implements Parser<MatchPriceRangeCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
@@ -18,13 +14,13 @@ public class MatchCommandParser implements Parser<MatchCommand> {
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public MatchCommand parse(String userInput) throws ParseException {
+    public MatchPriceRangeCommand parse(String userInput) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(userInput);
-            return new MatchCommand(index);
+            return new MatchPriceRangeCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE), pe);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchPriceRangeCommand.MESSAGE_USAGE), pe);
         }
     }
 }
