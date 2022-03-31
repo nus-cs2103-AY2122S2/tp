@@ -237,7 +237,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Mark {@code task} task belonging to a person {@code studentId} as done.
      *
      * @param studentId the student id of the person's whose task is to be marked as done.
-     * @param index the index of he task to be marked as complete.
+     * @param index the index of the task to be marked as complete.
      */
     public void markTaskOfPerson(StudentId studentId, Index index) {
         requireAllNonNull(studentId, index);
@@ -271,7 +271,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Unmark {@code task} task belonging to a person {@code studentId} as undone.
      *
      * @param studentId the student id of the person's whose task is to be marked as undone.
-     * @param index the index of he task to be marked as incomplete.
+     * @param index the index of the task to be marked as incomplete.
      */
     public void unmarkTaskOfPerson(StudentId studentId, Index index) {
         requireAllNonNull(studentId, index);
@@ -372,6 +372,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sorts the list of persons in ascending order of the number of tasks completed.
+     */
+    public void sortListByTaskLeft() {
+        internalList.sort(new SortByTaskLeft().reversed());
+    }
+
+    /**
      * SortAlphabetically implements a comparator class, to sort the list of persons in alphabetical order.
      */
     class SortAlphabetically implements Comparator<Person> {
@@ -388,6 +395,23 @@ public class UniquePersonList implements Iterable<Person> {
             String personAFullName = a.getName().fullName;
             String personBFullName = b.getName().fullName;
             return personAFullName.compareTo(personBFullName);
+        }
+    }
+
+    /**
+     * SortByTaskDone implements a comparator class, to sort the list of persons by the number of tasks completed.
+     */
+    class SortByTaskLeft implements Comparator<Person> {
+
+        @Override
+        public int compare(Person a, Person b) {
+            Integer personANumOfTaskTotal = a.getTaskList().getNumberOfTasks();
+            Integer personBNumOfTaskTotal = b.getTaskList().getNumberOfTasks();
+            Integer personANumOfTaskDone = a.getTaskList().getNumOfCompletedTasks();
+            Integer personBNumOfTaskDone = b.getTaskList().getNumOfCompletedTasks();
+            Integer personANumOfTaskLeft = personANumOfTaskTotal - personANumOfTaskDone;
+            Integer personBNumOfTaskLeft = personBNumOfTaskTotal - personBNumOfTaskDone;
+            return personANumOfTaskLeft.compareTo(personBNumOfTaskLeft);
         }
     }
 }

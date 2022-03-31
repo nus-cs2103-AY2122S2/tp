@@ -79,6 +79,7 @@ public class ManualCommandTest {
         CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_TASK_COMMAND);
         assertCommandSuccess(new ManualCommand("task"), model, expectedCommandResult, expectedModel);
     }
+
     @Test
     public void execute_manualMark_success() {
         CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_MARK_COMMAND);
@@ -110,9 +111,32 @@ public class ManualCommandTest {
     }
 
     @Test
-    public void execute_manualInvalid_success() {
+    public void execute_manualProgress_success() {
+        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_PROGRESS_COMMAND);
+        assertCommandSuccess(new ManualCommand("progress"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_manualHistory_success() {
+        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_HISTORY_COMMAND);
+        assertCommandSuccess(new ManualCommand("history"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_manualUndo_success() {
+        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_UNDO_COMMAND);
+        assertCommandSuccess(new ManualCommand("undo"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_manualSort_success() {
+        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_SORT_COMMAND);
+        assertCommandSuccess(new ManualCommand("sort"), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_manualInvalid_failure() {
         ManualCommand manualCommand = new ManualCommand(INVALID_COMMAND_NAME);
-        CommandResult expectedCommandResult = new CommandResult(ManualMessages.MANUAL_MESSAGE_UNKNOWN_COMMANDS);
         assertCommandFailure(manualCommand, model, ManualMessages.MANUAL_MESSAGE_UNKNOWN_COMMANDS);
     }
 }

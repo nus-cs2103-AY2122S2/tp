@@ -35,7 +35,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        // withTaskList is used here as the tasklist will be the same before and after an edit command.
+        // This is because, we do not allow users to edit tasklist directly.
+        Person editedPerson = new PersonBuilder()
+                .withTaskList(model.getFilteredPersonList().get(0).getTaskList()).build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 

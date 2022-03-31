@@ -135,6 +135,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TaskList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTaskList(TaskList tasklist) {
+        if (tasklist == null || tasklist.isEmpty()) {
+            return this;
+        }
+
+        for (Task i : tasklist.getTaskList()) {
+            this.taskList.addTask(i);
+        }
+        return this;
+    }
+
     public Person build() {
         return new Person(studentId, name, moduleCode, phone, telegramHandle, email, taskList);
     }
