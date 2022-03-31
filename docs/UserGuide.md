@@ -41,8 +41,17 @@ later.">
 
 ### Setup
 1. Copy the file to the folder you want to use as the home folder for your MedBook.
-2. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
-3. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Refer to the [Features](#features) below for details of each command.
+2. Double-click the file to start the app.
+
+### Controls
+
+In order to improve your experience when using the app, we have included the following feature:
+
+- Use the `↑` and `↓` arrow keys to navigate between previously entered commands in the command box.
+
+### Getting Started
+Follow this tutorial to get started in using MedBook:
+1. to be added.......
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -120,14 +129,16 @@ Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
 * `view` followed by `delete 1` deletes the first patient displayed on the screen.
 
+Caution*: Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+
 ### Adding Contact Information: `add t/contact`
 
 Adds a patient's emergency contact to MedBook.
 
-Format: `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 Examples:
-* `add t/contact i/S1234567L n/Rihanna r/Mother p/80008000 e/rihanna@gmail.com a/COM1`
+* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1`
 
 
 ### Viewing Contact Information: `view t/contact`
@@ -139,11 +150,21 @@ Format: `view t/contact i/NRIC`
 Examples:
 * `/view t/contact i/S1234567L`
 
+### Editing Contact Information: `edit`
+
+Edits an existing contact information entry in MedBook when a patient's list of contact information entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Contact Information.
+
+Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+Examples:
+* `view t/contact` followed by `edit 1 n/John` updates name of first contact information entry displayed on the screen.
+
 ### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to MedBook.
 
 Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
-  [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
+[il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
 Examples:
 * `add t/medical i/S1234567L bt/O ht/185 cm`
@@ -160,7 +181,7 @@ Examples:
 
 ### Editing Medical Information: `edit`
 
-Edits an existing medical information entry in MedBook when a list of medical information entries is being displayed.
+Edits an existing medical information entry in MedBook when a patient's list of medical information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Medical Information.
 
 Format:  `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
@@ -217,6 +238,16 @@ Format: `view t/prescription i/NRIC`
 Examples:
 * `view t/prescription i/S1234567L`
 
+### Editing Prescription: `edit`
+
+Edits an existing prescription entry in MedBook when a list of prescription entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Prescription.
+
+Format:  `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`
+
+Examples:
+* `view t/prescription` followed by `edit 1 s/1 tablet everyday` updates instruction of first prescription entry displayed on the screen.
+
 ### Adding Test Result: `add t/test`
 
 Adds a test result taken by a patient in MedBook.
@@ -242,22 +273,24 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 
 ## Command Summary
 
-| Action | Format Example |
-| :----- | :------------- |
-| View Help | `help` |
-| Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...` |
-| List all Patients | `view` |
-| View Summary of a Patient | `view i/NRIC` |
-| Delete any Entry | `delete INDEX` |
-| Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
-| View Contact Information | `view t/contact i/NRIC` |
-| Add Medical Information | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
-| View Medical Information | `view t/medical [i/NRIC]` |
-| Edit Medical Information | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
-| Add Consultation Information | `add t/consultation i/NRIC dt/DATE tm/TIME n/NOTES` |
-| View Past Consultations | `view t/consultation i/NRIC` |
-| Edit Consultation Information | `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]` |
-| Add Prescription | `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION` |
-| View Prescription | `view t/prescription i/NRIC` |
-| Add Test Result | `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT` |
-| View Test Result| `view t/test i/NRIC` |
+| Action                        | Format Example                                                                                                                                                                                |
+|:------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| View Help                     | `help`                                                                                                                                                                                        |
+| Add a Patient                 | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
+| List all Patients             | `view`                                                                                                                                                                                        |
+| View Summary of a Patient     | `view i/NRIC`                                                                                                                                                                                 |
+| Delete any Entry              | `delete INDEX`                                                                                                                                                                                |
+| Add Contact Information       | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                                                                                 |
+| View Contact Information      | `view t/contact i/NRIC`                                                                                                                                                                       |
+| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                                                                                                                  |
+| Add Medical Information       | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
+| View Medical Information      | `view t/medical [i/NRIC]`                                                                                                                                                                     |
+| Edit Medical Information      | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`           |
+| Add Consultation Information  | `add t/consultation i/NRIC dt/DATE tm/TIME n/NOTES`                                                                                                                                           |
+| View Past Consultations       | `view t/consultation i/NRIC`                                                                                                                                                                  |
+| Edit Consultation Information | `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`                                                                                                                           |
+| Add Prescription              | `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`                                                                                                                                 |
+| View Prescription             | `view t/prescription i/NRIC`                                                                                                                                                                  |
+| Edit Prescription             | `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`                                                                                                                                          |
+| Add Test Result               | `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT`                                                                                                                                          |
+| View Test Result              | `view t/test i/NRIC`                                                                                                                                                                          |
