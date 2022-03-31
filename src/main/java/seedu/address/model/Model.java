@@ -2,11 +2,14 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 
@@ -61,6 +64,16 @@ public interface Model {
      * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
      */
     boolean hasPerson(Applicant applicant);
+
+    /**
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    Applicant getApplicantWithEmail(Email email);
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    Applicant getApplicantWithPhone(Phone phone);
 
     /**
      * Deletes the given applicant.
@@ -206,4 +219,16 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered position list */
     ObservableList<Position> getFilteredPositionList();
+
+    void updateSortApplicantList(Comparator<Applicant> comparator);
+
+    void updateSortInterviewList(Comparator<Interview> comparator);
+
+    void updateSortPositionList(Comparator<Position> comparator);
+
+    void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator);
+
+    void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator);
+
+    void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
 }

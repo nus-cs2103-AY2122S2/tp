@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
+import seedu.address.logic.SortArgument;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Age;
@@ -281,5 +282,14 @@ public class ParserUtil {
     public static FilterArgument parseFilterArgument(String filterArgument) {
         requireNonNull(filterArgument);
         return new FilterArgument(filterArgument.trim());
+    }
+
+    /**
+     * Parses a {@code String sortArgument} into a {@code SortArgument}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static SortArgument parseSortArgument(String sortArgument) {
+        requireNonNull(sortArgument);
+        return new SortArgument(sortArgument.trim());
     }
 }

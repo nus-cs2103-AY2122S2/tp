@@ -3,6 +3,7 @@ package seedu.address.model.position;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -96,6 +97,14 @@ public class UniquePositionList implements Iterable<Position> {
         }
 
         internalList.setAll(positions);
+    }
+
+    /**
+     * Sorts a list of positions
+     */
+    public void sort(Comparator<Position> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
     }
 
     /**

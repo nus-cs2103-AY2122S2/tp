@@ -4,10 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
@@ -96,6 +99,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+        return applicants.getApplicantWithEmail(email);
+    }
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return applicants.getApplicantWithPhone(phone);
+    }
+
+    /**
      * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
      */
@@ -121,6 +140,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeApplicant(Applicant key) {
         applicants.remove(key);
+    }
+
+    /**
+     * Sorts list of applicant using comparator
+     */
+    public void sortApplicant(Comparator<Applicant> comparator) {
+        applicants.sort(comparator);
     }
 
     //// interview-level operations
@@ -206,6 +232,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         interviews.setInterview(target, editedInterview);
     }
 
+    /**
+     * Sorts list of interview using comparator
+     */
+    public void sortInterview(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        interviews.sort(comparator);
+    }
+
     //// position-level operations
 
     /**
@@ -266,6 +300,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         positions.setPosition(target, editedPosition);
     }
 
+    /**
+     * Sorts list of interview using comparator
+     */
+    public void sortPosition(Comparator<Position> comparator) {
+        requireNonNull(comparator);
+        positions.sort(comparator);
+    }
     //// util methods
 
     @Override
