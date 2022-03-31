@@ -1,6 +1,8 @@
 # User Guide
 ClientConnect is a **desktop app for managing clients’ contact details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps with the ability to `find` specific clients based on keywords provided.
 
+![result for 'list'](images/listAllClientsUG.png)
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -61,9 +63,9 @@ ClientConnect is a **desktop app for managing clients’ contact details, optimi
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 ### Viewing help : `help`
+![Help button image](images/helpButtonUG.png)
 <details><summary>Shows a message explaining how to access the ClientConnect help page</summary>
 <p>
-
 
 Format: `help`
 
@@ -71,33 +73,29 @@ Alternatively, click the Help button on the toolbar to view a dropdown window di
 
 This also shows that you can press F1 on your keyboard to open the help message.
 
-![Help button image](images/helpButtonUG.png)
-
 On clicking Help, you will see this as a result:
 
 ![Help window image](images/helpWindowUG.png)
-
 </p>
 </details>
 
 ### Viewing Packages
+![Package button image](images/packageButtonUG.png)
 <details><summary>Opens a new window that shows the various insurance packages and their description</summary>
 <p>
 
 Click on the Package button to view a dropdown window displaying a "Package" button.
 
-![Package button image](images/packageButtonUG.png)
-
 On clicking Package, you will see this as a result:
 
 ![Package window image](images/packageWindowUG.png)
-
 </p>
 </details>
 
 ### Adding a person: `add`
-
-Adds a person, as well as any details, to ClientConnect.
+![result before 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/beforeAddDamithUG.png)
+<details><summary>Adds a person, as well as any details, to ClientConnect</summary>
+<p>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
@@ -105,20 +103,19 @@ Examples:
 * `add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1`
 * `add n/Jackson p/92341888 e/jackson5@example.com a/laney street, block 123, #01-01, i/package1 t/important`
 
-Before adding:
-
-![result before 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/beforeAddDamithUG.png)
-
 After adding:
 
 ![result after 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/afterAddDamithUG.png)
 
 Notes:
 * Any tags are optional.
+</p>
+</details>
 
 ### Adding a tag to a person: `addTag`
-
-Adds a tag to the specified person in ClientConnect.
+![result before 'addTag 3 friend of the family'](images/beforeAddTagUG.png)
+<details><summary>Adds a tag to the specified person in ClientConnect</summary>
+<p>
 
 Format: `addTag INDEX TAG …​`
 
@@ -126,61 +123,75 @@ Examples:
 * `addTag 3 friend of the family`
 * `addTag 2 owes money :p2`
 
+After adding:
+
+![result after 'addTag 3 friend of the family'](images/afterAddTagUG.png)
+
 Notes:
 * Adds tag to the person at the specified `INDEX`.
 * Only one tag can be added at a time
+</p>
+</details>
 
 ### Listing all persons : `list`
-
-Displays all your clients in ClientConnect.
+![result for 'list'](images/listAllClientsUG.png)
+<details><summary>Displays all your clients in ClientConnect</summary>
+<p>
 
 Format: `list`
 
-![result for 'list'](images/listAllClientsUG.png)
+</p>
+</details>
 
 ### Editing a person : `edit`
+![result before 'edit 1 p/123456'](images/beforeEditUG.png)
 
-Edits an existing client in ClientConnect, similar to adding a new client.
+<details><summary>Edits an existing client in ClientConnect, similar to adding a new client</summary>
+<p>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
 Examples:
 * `edit 1 p/123456 will edit the phone number of the client listed as #1 to 123456`
 
-Before editing:
-
-![result before 'edit 1 p/123456'](images/beforeEditUG.png)
-
 After editing:
 
 ![result after 'edit 1 p/123456'](images/afterEditUG.png)
-
 
 Notes:
 * Edits the person at the specified `INDEX`.
 * You can look for a client’s index by using the `list` command.
 * At least one of the fields must be provided.
 * Existing values will be updated to the input values.
-
+</p>
+</details>
 
 ### Editing a tag of a person: `editTag`
-
-Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect.
+![result before 'editTag 2 1 owes money :p3'](images/beforeEditTagUG.png)
+<details><summary>Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect</summary>
+<p>
 
 Format: `editTag INDEX TAG_NUMBER TAG …​`
 
 Examples:
 * `editTag 3 1 friend of the family`
-* `editTag 2 3 owes money :p2`
+* `editTag 2 1 owes money :p3`
+
+After editTag:
+
+![result after 'editTag 2 1 owes money :p3'](images/afterEditTagUG.png)
 
 Notes:
 * Edits person at the specified `INDEX`.
 * Edits person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be edited at a time.
+</p>
+</details>
 
 ### Locating persons by field: `find`
-
-Finds clients whose field contains any of the given keywords.
+![result for 'find i/undecided'](images/findInsurancePackageUG.png)
+<details><summary>Finds clients whose field contains any of the given keywords</summary>
+<p>
 
 Format: `find FIELD KEYWORD [MORE_KEYWORDS] [MORE_FIELD] [MORE_KEYWORDS]`
 
@@ -212,10 +223,14 @@ After a `find` command:
 * `find i/undecided n/david` returns `David Li`
 
 ![result for 'find i/undecided n/david'](images/findUndecidedDavid.png)
+</p>
+</details>
 
 ### Deleting a person : `delete`
+![result after 'delete 2'](images/afterDeleteUG.png)
 
-Deletes an existing client from ClientConnect.
+<details><summary>Deletes an existing client from ClientConnect</summary>
+<p>
 
 Format: `delete INDEX`
 
@@ -234,10 +249,14 @@ Before a delete command:
 After `delete 2`:
 
 ![result after 'delete 2'](images/afterDeleteUG.png)
+</p>
+</details>
 
 ### Deleting a tag of a person: `deleteTag`
+![result after 'deleteTag 3 1'](images/afterDeleteTagUG.png)
 
-Deletes the specified tag of the specified person in ClientConnect.
+<details><summary>Deletes the specified tag of the specified person in ClientConnect</summary>
+<p>
 
 Format: `deleteTag INDEX TAG_NUMBER …​`
 
@@ -245,77 +264,175 @@ Examples:
 * `deleteTag 3 1`
 * `deleteTag 2 3`
 
+Before deleteTag command:
+
+![result before 'deleteTag 3 1'](images/beforeDeleteTagUG.png)
+
+After `deleteTag 3 1`:
+
+![result after 'deleteTag 3 1'](images/afterDeleteTagUG.png)
+
 Notes:
 * Deletes person at the specified `INDEX`.
 * Deletes person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be deleted at a time.
+</p>
+</details>
 
 ### Adding an insurance package: `addp`
+![result after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage1UG.png)
 
-Adds an insurance package to ClientConnect.
+<details><summary>Adds an insurance package to ClientConnect</summary>
+<p>
 
 Format: `addp i/PACKAGE_NAME d/PACKAGE_DESC`
 
 Examples:
-* `addp i/Golden Package d/First class package`
+* `addp i/Classic Package d/Classic coverages for your needs`
+
+Before addp:
+
+![result before 'addp i/Classic Package d/Classic coverages for your needs'](images/beforeAddInsurancePackage.png)
+
+After `addp i/Classic Package d/Classic coverages for your needs`:
+
+![result1 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage1UG.png)
+
+
+![result2 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage2UG.png)
+
+</p>
+</details>
 
 ### Editing an insurance package: `editp`
+![result1 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage1UG.png)
 
-Edits an existing insurance package in ClientConnect.
+<details><summary>Edits an existing insurance package in ClientConnect</summary>
+<p>
 
 Format: `editp i/PACKAGE_NAME d/PACKAGE_DESC`
 
 Examples:
 * `editp i/Golden Package d/Lifetime insurance`
 
-### Deleting an insurance package: `deletep`
+Before editp:
 
-Deletes an existing insurance package in ClientConnect.
+![result before 'editp i/Golden Package d/Lifetime insurance'](images/beforeEditInsurancePackageUG.png)
+
+After `editp i/Golden Package d/Lifetime insurance`:
+
+![result1 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage1UG.png)
+
+![result2 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage2UG.png)
+
+</p>
+</details>
+
+### Deleting an insurance package: `deletep`
+![result1 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackge1UG.png)
+
+<details><summary>Deletes an existing insurance package in ClientConnect</summary>
+<p>
 
 Format: `deletep i/PACKAGE_NAME`
 
 Examples:
-* `editp i/Golden Package`
+* `deletep i/Golden Package`
+
+Before deletep:
+
+![result before 'deletep i/Golden Package'](images/beforeDeleteInsurancePackageUG.png)
+
+After `deletep i/Golden Package`:
+
+![result1 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackge1UG.png)
+
+![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
+
+</p>
+</details>
 
 ### Shows all insurance package: `listp`
-
-Displays all your insurance packages in ClientConnect.
+![result2 after 'listp'](images/listInsurancePackage2UG.png)
+<details><summary>Displays all your insurance packages in ClientConnect</summary>
+<p>
 
 Format: `listp`
 
-### Importing ClientConnect CSV data: `import`
+![result1 after 'listp'](images/listInsurancePackage1UG.png)
 
-Opens a window to choose a CSV file to load.
+![result2 after 'listp'](images/listInsurancePackage2UG.png)
+
+</p>
+</details>
+
+
+### Importing ClientConnect CSV data: `import`
+<details><summary>Opens a window to choose a CSV file to load</summary>
+<p>
 
 Format: `import`
+</p>
+</details>
 
 ### Exporting ClientConnect data to CSV: `export`
-
-Opens a window to choose a CSV file to export to.
+<details><summary>Opens a window to choose a CSV file to export to</summary>
+<p>
 
 Format: `export`
+</p>
+</details>
 
 ### Undo previous command: `undo`
-
-Undoes previous command executed.
+![result after undo](images/undo2UG.png)
+<details><summary>Undoes previous command executed</summary>
+<p>
 
 Format: `undo`
 
-### Redo previous command: `redo`
+Before undo (after we `delete 1`):
 
-Redoes undone command.
+![result before undo](images/undo1UG.png)
+
+After undo (where we undo command `delete 1`):
+
+![result after undo](images/undo2UG.png)
+
+</p>
+</details>
+
+### Redo previous command: `redo`
+<details><summary>Redoes undone command</summary>
+<p>
 
 Format: `redo`
 
+Before redo (we undo `delete 1`):
+
+![result before redo](images/redo1UG.png)
+
+After redo (where we redo `delete 1`):
+
+![result after redo](images/redo2UG.png)
+
+</p>
+</details>
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+![result after 'clear'](images/clearUG.png)
+
+<details><summary>Clears all entries from the address book</summary>
+<p>
 
 Format: `clear`
+</p>
+</details>
 
 ### Clipping a client's information to clipboard : `clip`
-
-Copies a client's information onto the system's clipboard.
+![info copied using 'clip 1'](images/afterClip1UG.PNG)
+<details><summary>Copies a client's information onto the system's clipboard</summary>
+<p>
 
 Format: `clip n/NAME` or `clip INDEX`
 
@@ -326,15 +443,24 @@ Examples:
 1. `clip n/John Doe`
 2. `clip 1`
 
-Information copied using `clip n/John Doe`:
+Before `clip 1`:
 
-![info copied using 'clip n/John Doe'](images/clipJohnDoe.PNG)
+![info copied using 'clip 1'](images/beforeClip1UG.PNG)
+
+
+Information copied using `clip 1`:
+
+![info copied using 'clip 1'](images/afterClip1UG.PNG)
+</p>
+</details>
 
 ### Exiting the program : `exit`
-
-Exits the program.
+<details><summary>Exits the program</summary>
+<p>
 
 Format: `exit`
+</p>
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
