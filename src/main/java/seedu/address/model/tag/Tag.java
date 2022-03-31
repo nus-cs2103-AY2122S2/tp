@@ -27,6 +27,13 @@ public class Tag {
         remark = new Remark("");
     }
 
+    public Tag(String tagName, String tagRemark) {
+        requireNonNull(tagName);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
+        remark = new Remark(tagRemark);
+    }
+
     /**
      * Returns true if a given string is a valid tag name.
      */
