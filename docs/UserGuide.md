@@ -302,6 +302,7 @@ Opens up a new window that displays a pie chart containing the data of the numbe
 # FAQ
 
 # Command Summary
+
 | Action            | Format                                                                                                 | Examples                                                                                                                             |
 |-------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] i/FILEPATH[:DESCRIPTION]… | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, i/living.png:Living room |
