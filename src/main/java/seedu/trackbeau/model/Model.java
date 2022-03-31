@@ -1,6 +1,7 @@
 package seedu.trackbeau.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -162,4 +163,14 @@ public interface Model {
      * Returns true if a booking with the same identity as {@code booking} exists in trackBeau.
      */
     boolean hasBooking(Booking booking);
+
+    /**
+     * Return selected date.
+     */
+    LocalDate getSelectedDate();
+
+    /**
+     * Set the selected date in model.
+     */
+    void setSelectedDate(LocalDate selectedDate);
 }

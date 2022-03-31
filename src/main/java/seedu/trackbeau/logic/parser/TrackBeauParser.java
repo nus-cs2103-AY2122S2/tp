@@ -17,6 +17,7 @@ import seedu.trackbeau.logic.commands.PlotMonthlyCustomerChartCommand;
 import seedu.trackbeau.logic.commands.PlotServiceChartCommand;
 import seedu.trackbeau.logic.commands.PlotSkinChartCommand;
 import seedu.trackbeau.logic.commands.PlotStaffChartCommand;
+import seedu.trackbeau.logic.commands.ScheduleCommand;
 import seedu.trackbeau.logic.commands.booking.AddBookingCommand;
 import seedu.trackbeau.logic.commands.booking.DeleteBookingCommand;
 import seedu.trackbeau.logic.commands.booking.EditBookingCommand;
@@ -119,6 +120,15 @@ public class TrackBeauParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case FindCustomerCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
+        case ListCustomersCommand.COMMAND_WORD:
+            return new ListCustomersCommand();
+
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

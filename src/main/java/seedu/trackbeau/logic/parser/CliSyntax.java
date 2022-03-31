@@ -23,5 +23,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRICE = new Prefix("pr/");
     public static final Prefix PREFIX_DURATION = new Prefix("d/");
     public static final Prefix PREFIX_FEEDBACK = new Prefix("f/");
-
+    public static final Prefix PREFIX_DATE = new Prefix("date/");
 }

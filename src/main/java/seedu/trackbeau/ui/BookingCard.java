@@ -61,7 +61,7 @@ public class BookingCard extends UiPart<Region> {
         endTime.setText("End Time: " + booking.getBookingEndTime().format(formatter));
 
         if (!booking.getFeedback().feedback.equals(EMPTY_FEEDBACK_TYPE)) {
-            feedback.setText("Skin Feedback: " + booking.getFeedback().feedback);
+            feedback.setText("Feedback: " + booking.getFeedback().feedback);
         } else {
             feedback.setManaged(false);
         }

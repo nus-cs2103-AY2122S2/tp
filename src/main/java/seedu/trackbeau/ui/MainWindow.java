@@ -168,7 +168,7 @@ public class MainWindow extends UiPart<Stage> {
             detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
             break;
         case "scheduleLabel":
-            schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), LocalDate.now());
+            schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), logic.getSelectedDate());
             detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
             break;
         default:
@@ -633,6 +633,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isPlotHairChart()) {
                 plotHairChart();
+            }
+
+            if (commandResult.hasSelectedDate()) {
+                schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), logic.getSelectedDate());
+                detailsPanelPlaceholder.getChildren().clear();
+                detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
             }
 
             return commandResult;

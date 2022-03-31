@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -216,6 +217,16 @@ public class AddCustomerCommandTest {
 
         @Override
         public void updateServiceList(Predicate<Service> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public LocalDate getSelectedDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedDate(LocalDate selectedDate) {
             throw new AssertionError("This method should not be called.");
         }
     }
