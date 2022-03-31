@@ -19,9 +19,9 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
             + ": To sort player\n"
             + "Parameters: "
-            + PREFIX_HEIGHT + "SORTING_ORDER or "
-            + PREFIX_WEIGHT + "SORTING_ORDER or "
-            + PREFIX_JERSEY_NUMBER + "SORTING_ORDER\n"
+            + PREFIX_HEIGHT + "ORDER or "
+            + PREFIX_WEIGHT + "ORDER or "
+            + PREFIX_JERSEY_NUMBER + "ORDER\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_HEIGHT + "asc";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": sort players based on the specified criteria.\n"
             + MESSAGE_USAGE_PLAYER;
@@ -44,9 +44,21 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         if (itemList.equals(PREFIX_PLAYER)) {
             performSort(model);
-            return new CommandResult(String.format(Messages.MESSAGE_SORTED, sortingCriteria.getPrefix(), sortingOrder));
+            String criteria = "";
+            String order = "";
+            if (sortingCriteria.getPrefix().equals("h/")) {
+                criteria = "height";
+            }
+            if (sortingCriteria.getPrefix().equals("w/")) {
+                criteria = "weight";
+            }
+            if (sortingCriteria.getPrefix().equals("j/")) {
+                criteria = "jersey";
+            }
+            order = sortingOrder.equals("asc") ? "ascending" : "descending";
+            return new CommandResult(String.format(Messages.MESSAGE_SORTED, criteria, order));
         }
-        return null;
+        throw new CommandException(MESSAGE_USAGE);
     }
 
     private void performSort(Model model) {

@@ -269,6 +269,7 @@ Example:
 * `sort w/asc` Sort the displayed players in ascending order of weight
 * `sort w/desc` Sort the displayed players in descending order of weight
 
+* ![sortPlayer](images/sortPlayer.png)
 
 ### Edit a player/ lineup/ schedule information : `edit`
 
