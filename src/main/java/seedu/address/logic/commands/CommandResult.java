@@ -11,6 +11,9 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** Result display window should be resized. */
+    private final boolean resizeWindow;
+
     /** Pie Chart should be shown to the user. */
     private final boolean summarisePieChart;
 
@@ -26,9 +29,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summarisePieChart,
-                         boolean showEmail) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summarisePieChart, boolean showEmail,
+            boolean resizeWindow) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.resizeWindow = resizeWindow;
         this.summarisePieChart = summarisePieChart;
         this.showHelp = showHelp;
         this.showEmail = showEmail;
@@ -40,7 +44,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -51,12 +55,16 @@ public class CommandResult {
         return summarisePieChart;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
+    public boolean isResize() {
+        return resizeWindow;
     }
 
     public boolean isShowEmail() {
         return showEmail;
+    }
+
+    public boolean isShowHelp() {
+        return showHelp;
     }
 
     public boolean isExit() {
@@ -79,12 +87,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && summarisePieChart == otherCommandResult.summarisePieChart
-                && showEmail == otherCommandResult.showEmail;
+                && showEmail == otherCommandResult.showEmail
+                && resizeWindow == otherCommandResult.resizeWindow;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, summarisePieChart, showEmail);
+        return Objects.hash(feedbackToUser, showHelp, exit, summarisePieChart, showEmail, resizeWindow);
     }
 
 }
