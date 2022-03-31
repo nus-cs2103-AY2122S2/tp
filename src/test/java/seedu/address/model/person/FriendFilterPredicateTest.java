@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.FriendFilterPredicateBuilder;
@@ -45,7 +43,7 @@ public class FriendFilterPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Substring match
-        predicate =  new FriendFilterPredicateBuilder().withNameSubstring("Bob").withNameSubstring("Carol").build();
+        predicate = new FriendFilterPredicateBuilder().withNameSubstring("Bob").withNameSubstring("Carol").build();
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Caroline").build()));
 
         // Mixed-case keywords
@@ -76,7 +74,7 @@ public class FriendFilterPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withTags("Neighbour").build()));
 
         // Substring match
-        predicate =  new FriendFilterPredicateBuilder().withTagSubstring("School").build();
+        predicate = new FriendFilterPredicateBuilder().withTagSubstring("School").build();
         assertTrue(predicate.test(new PersonBuilder().withTags("Schoolmates").build()));
 
         // Mixed-case keywords
@@ -117,7 +115,7 @@ public class FriendFilterPredicateTest {
     }
 
     @Test
-    public void test_LogTitleDoesNotContainKeywords_returnsFalse() {
+    public void test_logTitleDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         FriendFilterPredicate predicate = new FriendFilterPredicateBuilder().build();
         assertFalse(predicate.test(new PersonBuilder().withLogs(new Log("log title", "desc")).build()));

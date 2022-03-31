@@ -19,10 +19,6 @@ import static seedu.address.testutil.EventFilterPredicateBuilder.DEFAULT_NAME_SU
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -44,9 +40,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventFilterPredicate;
 import seedu.address.model.person.FriendName;
-import seedu.address.model.person.FriendFilterPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EditEventDescriptorBuilder;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventFilterPredicateBuilder;
+import seedu.address.testutil.EventUtil;
+import seedu.address.testutil.FriendFilterPredicateBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 

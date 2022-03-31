@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+
 import seedu.address.model.person.FriendFilterPredicate;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.LogName;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
 
 /**
  * A utility class to help with building FriendFilterPredicate objects.

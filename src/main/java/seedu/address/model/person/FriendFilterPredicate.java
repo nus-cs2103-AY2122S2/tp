@@ -1,12 +1,13 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Set;
 import java.util.Locale;
+import java.util.Set;
 import java.util.function.Predicate;
+
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Tests that a {@code Person}'s {@code name, tags, logs title} matches any of the keywords given.
@@ -16,6 +17,9 @@ public class FriendFilterPredicate implements Predicate<Person> {
     private final Set<LogName> logTitleKeywords;
     private final Set<Tag> tagKeywords;
 
+    /**
+     * Constructs a FriendFilterPredicate based on the given keywords.
+     */
     public FriendFilterPredicate(Set<FriendName> nameKeywords, Set<LogName> logTitleKeywords, Set<Tag> tagKeywords) {
         requireAllNonNull(nameKeywords, logTitleKeywords, tagKeywords);
         this.nameKeywords = nameKeywords;
