@@ -365,12 +365,14 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 Your show list is in a mess! Do you need a way to organise your list?
 Sort can help reorder the list!!
 
+<div markdown="block" class="alert alert-danger">
 :exclamation:**Caution:**<br>
 *You cannot undo the sort once you have applied it!
+</div>
 
-Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
+**Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 
-`Sort` will sort according to the [prefixes](#command-structure)**
+<div markdown="span" class="alert alert-warning">:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)**
 * Use `n/` if you want to sort by name 
 * Use `s/` if you want to sort by status
 * Use `t/` if you want to sort by tag
@@ -382,6 +384,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 * List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
 * For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "RatingTagStatusName"
 * If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!  
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -407,6 +410,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 <img src="images/Sort_UI3.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Suggest a Show: `suggest`
@@ -415,9 +419,12 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 
 **Format:** `suggest`
 
-**Example:** `suggest`
+**Example & Output:** `suggest`
+
+<img src="images/SuggestImage.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Importing a show: `import`
