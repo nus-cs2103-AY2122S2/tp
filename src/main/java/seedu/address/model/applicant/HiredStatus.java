@@ -16,12 +16,20 @@ public class HiredStatus {
     }
 
     public HiredStatus(String positionName) {
-        value = "Hired as " + positionName;
+        value = positionName;
     }
 
     @Override
     public String toString() {
-        return value;
+        if (value.equals("Available")) {
+            return value;
+        } else {
+            return "Hired as " + value;
+        }
+    }
+
+    public String getValue() {
+        return this.value;
     }
 
     /**
