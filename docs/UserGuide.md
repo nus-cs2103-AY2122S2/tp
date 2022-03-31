@@ -33,9 +33,9 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 3. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   ![Ui](images/Ui.png)
-The GUI is split into two categories: Players and Schedules. <br>
-![Ui_Players](images/UiPlayers.png) <br>
+The GUI is split into two parts: Players and Schedules. <br>
+   ![Ui](images/Ui.png) ![Ui2](images/Ui2.png) <br>
+Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Schedule](images/UiSchedule.png)<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
