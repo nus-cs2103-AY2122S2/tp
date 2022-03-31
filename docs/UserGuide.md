@@ -94,7 +94,7 @@ Format: `exit`
 
 #### Clear. `clear-all`
 
-Function: Clears both buy er and seller lists
+Function: Clears both buyer and seller lists
 
 Format: `clear-all`
 
