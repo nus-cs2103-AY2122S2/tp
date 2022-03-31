@@ -299,8 +299,13 @@ This is a sample screenshot of what you can expect from the `list` command.
 ![list](images/ListFeatureScreenShot.PNG) *Figure 5: Screenshot of list command.*
 
 ### Copying emails
-The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
-`Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
+Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
+
+Format:`email`
+
+📓`Note:`
+There is also a `Show Email` button on the GUI which you can click to open the same window.
+
 ![Email](images/CopyEmailScreenshot.png) *Figure 6: Screenshot of Copy Email function.*
 
 From Figure 7, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
@@ -335,6 +340,22 @@ Example:
 💡`Tips:`
 * You can rename the archived file in the file path manually for easier reference.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
+
+### Resizing the result display window
+Resizes the result display window to 3 pre-set sizes.
+
+Format: `resize SIZE`
+* There are 3 options for `SIZE` which are 1, 2 and 3.
+* The default result display window size is option 1.
+* Refer to figures 8 for the comparison for the different result display window sizes. 
+
+💡`Tips:`
+* This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+
+📓`Note:`
+* There is also a `Resize Window` button on the GUI which you can click to cycle between the 3 different resizing options.
+* 
+![Comparison of 3 resize options](images/resize_options.png) *Figure 8: Comparison of the 3 different resizing options for the result display window.*
 
 ### Clearing all records
 Clear all the data inside Tracey.
@@ -394,18 +415,21 @@ there are changes to Tracey.
 
 *Table 5: Command Summary.*
 
-| No.  | Command  | Description                                               | Example  |
-|---|---|-----------------------------------------------------------|---|
-| 1.  | `find`  | Find a particular student                                 | `find alex` \n `find j`  |
-| 2.  | `add`  | Add a student to the Tracey Database                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney`  |
-|  3.  | `delete`  | Remove a student from Tracey                              | `delete 2`  |
-| 4.  | `edit`  | Change particulars of a student                           | `edit 1 p/91234567 e/johndoe@example.com`  |
-| 5.  | `clear`  | Format the Tracey Database                                | `clear`  |
-| 6.  | `summarise`   | Summarise data into a list and pie charts for an overview | `summarise`  |
-| 7.  | `list`  |             Get a list of everyone in Tracey                                               | `list`  |
-| 8.  |  `help` |            In-app support to understand how the commands work in Tracey                                               | `help`  |
-| 9.  |  `filter` |        Retrieve list of people based on tags                                                   | `filter cs/HEALTH_STATUS f/FACULTY` |
-| 10. | `archive` |  Archives the Tracey Database                             |     `archive`                           |
+| No. | Command     | Description                                                                               | Example                                                                                                                                |
+|-----|-------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| 1.  | `find`      | Find a particular student                                                                 | `find alex` \n `find j`                                                                                                                |
+| 2.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
+| 3.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 4.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
+| 5.  | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
+| 6.  | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
+| 7.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
+| 8.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
+| 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/HEALTH_STATUS f/FACULTY`                                                                                                    |
+| 10. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 11. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
+| 12. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                              |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
