@@ -74,7 +74,7 @@ public class Transaction implements Serializable {
         this(otherTransaction.getTransactionId(), otherTransaction.getFields(), otherTransaction.getPersonId());
     }
 
-    private long getTransactionId() {
+    public long getTransactionId() {
         return transactionId;
     }
 
