@@ -77,28 +77,28 @@ public class DeleteCommand extends Command {
         switch(entityType) {
 
         case STUDENT:
-            if (targetIndex.getZeroBased() >= lastShownStudentList.size() || checkZeroIndex(targetIndex)) {
+            if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
             break;
 
         case TA_MODULE:
-            if (targetIndex.getZeroBased() >= lastShownModuleList.size() || checkZeroIndex(targetIndex)) {
+            if (targetIndex.getZeroBased() >= lastShownModuleList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownModuleList.get(targetIndex.getZeroBased());
             break;
 
         case CLASS_GROUP:
-            if (targetIndex.getZeroBased() >= lastShownClassGroupList.size() || checkZeroIndex(targetIndex)) {
+            if (targetIndex.getZeroBased() >= lastShownClassGroupList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_CLASS_GROUP_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownClassGroupList.get(targetIndex.getZeroBased());
             break;
 
         case ASSESSMENT:
-            if (targetIndex.getZeroBased() >= lastShownAssessmentList.size() || checkZeroIndex(targetIndex)) {
+            if (targetIndex.getZeroBased() >= lastShownAssessmentList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_ASSESSMENT_DISPLAYED_INDEX);
             }
             entityToDelete = lastShownAssessmentList.get(targetIndex.getZeroBased());
