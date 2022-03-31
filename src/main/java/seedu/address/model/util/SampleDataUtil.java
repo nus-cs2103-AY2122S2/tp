@@ -100,7 +100,7 @@ public class SampleDataUtil {
             sampleAb.addLineup(sampleLineup);
         }
         for (Person samplePerson : getSamplePersons()) {
-            sampleAb.initalizePerson(samplePerson);
+            sampleAb.initializePerson(samplePerson);
         }
         for (Schedule sampleSchedule : getSampleSchedules()) {
             sampleAb.addSchedule(sampleSchedule);
