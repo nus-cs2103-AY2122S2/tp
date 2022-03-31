@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +25,7 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatusCommand;
 import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.StatusBarFooter;
 
 /**
  * Parses user input.
@@ -106,11 +106,17 @@ public class AddressBookParser {
             return new SwitchCommand();
 
         case ArchiveCommand.COMMAND_WORD:
+            if (StatusBarFooter.isArchiveBook()) {
+                throw new ParseException("You are currently in the archived book!\nDid you mean 'unarchive'?");
+            }
             return new ArchiveCommandParser("ARCHIVE").parse(arguments);
         case ArchiveCommand.ALT_COMMAND_WORD:
+            if (!StatusBarFooter.isArchiveBook()) {
+                throw new ParseException("You are currently in the default book!\nDid you mean 'archive'?");
+            }
             return new ArchiveCommandParser("UNARCHIVE").parse(arguments);
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException("MESSAGE_UNKNOWN_COMMAND");
         }
     }
 

@@ -32,6 +32,11 @@ public class ArchiveCommand extends Command {
     private final Index targetIndex;
     private final String mode;
 
+    /**
+     * Constructor for an archive command
+     * @param targetIndex the index of the {@code Person} we want to archive
+     * @param mode represents the archive mode. Either ARCHIVE or UNARCHIVE
+     */
     public ArchiveCommand(Index targetIndex, String mode) {
         this.targetIndex = targetIndex;
         this.mode = mode;
@@ -62,6 +67,7 @@ public class ArchiveCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ArchiveCommand // instanceof handles nulls
-                && targetIndex.equals(((ArchiveCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((ArchiveCommand) other).targetIndex) // state check
+                && mode.equals(((ArchiveCommand) other).mode));
     }
 }

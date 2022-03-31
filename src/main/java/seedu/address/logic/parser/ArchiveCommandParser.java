@@ -31,13 +31,10 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
                 Index index = ParserUtil.parseIndex(userInput);
                 return new ArchiveCommand(index, "ARCHIVE");
             } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ArchiveCommand.MESSAGE_USAGE), pe);
             }
-        }
-
-        // Otherwise, it is unarchive
-        else {
+        } else {
             try {
                 Index index = ParserUtil.parseIndex(userInput);
                 return new ArchiveCommand(index, "UNARCHIVE");

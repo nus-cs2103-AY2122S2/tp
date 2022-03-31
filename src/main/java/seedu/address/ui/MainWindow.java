@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -140,8 +139,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        Path defaultPath = logic.getAddressBookFilePath();
+        Path archivePath = logic.getArchivedAddressBookFilePath();
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), defaultPath, archivePath);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -215,7 +215,6 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * GUI alternative to activate a SwitchCommand.
-     * TODO: Bind F10 to this function
      */
     @FXML
     private void handleSwitchMenu() throws CommandException, ParseException {
@@ -229,16 +228,12 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Handle Switch fired!");
         logic.switchAddressBook();
 
-        Path defaultPath = logic.getAddressBookFilePath();
-        Path archivePath = logic.getArchivedAddressBookFilePath();
-        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.swapPaths(defaultPath, archivePath));
+        resultDisplay.setFeedbackToUser("Switched to: " + statusBarFooter.swapPaths());
 
-        boolean isArchivedNext = statusBarFooter.getSaveLocationStatusText().equals(Paths.get(".")
-                .resolve(defaultPath).toString());
-        boolean isDefaultNext = statusBarFooter.getSaveLocationStatusText().equals(Paths.get(".")
-                .resolve(archivePath).toString());
+        boolean isArchivedNext = StatusBarFooter.isArchiveBook();
+        boolean isDefaultNext = !StatusBarFooter.isArchiveBook();
         if (isArchivedNext) {
-            switchMenuItem.setText("Switch to Archived");
+            switchMenuItem.setText("Switch to Archives");
         } else if (isDefaultNext) {
             switchMenuItem.setText("Switch to Default");
         }
