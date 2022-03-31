@@ -60,6 +60,7 @@ public class SampleDataUtil {
                 }
             }
         }
+        sampleAb.addTag(new Tag("Professors", "Consultation on next Monday"));
         return sampleAb;
     }
 

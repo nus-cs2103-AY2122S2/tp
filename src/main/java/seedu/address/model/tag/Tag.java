@@ -28,6 +28,19 @@ public class Tag {
     }
 
     /**
+     * Constructs a {@code Tag}.
+     *
+     * @param tagName A valid tag name.
+     * @param tagRemark A tag remark
+     */
+    public Tag(String tagName, String tagRemark) {
+        requireNonNull(tagName);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
+        remark = new Remark(tagRemark);
+    }
+
+    /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
