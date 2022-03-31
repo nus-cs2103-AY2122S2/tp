@@ -44,7 +44,6 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = iBookParser.parseCommand(commandText);
-        model.clearProductFilters();
         commandResult = command.execute(model);
 
         try {

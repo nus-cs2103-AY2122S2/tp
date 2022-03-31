@@ -21,6 +21,7 @@ public class ExpiredCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.clearProductFilters();
         model.addProductFilter(expiredFilter);
         model.updateFilteredItemListForProducts(Item::isExpired);
         return new CommandResult(MESSAGE_SUCCESS);
