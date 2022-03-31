@@ -37,14 +37,11 @@
           <Menu mnemonicParsing="false" text="Tags">
             <MenuItem fx:id="newTagMenuItem" mnemonicParsing="false" onAction="#handleAddTag" text="Tags" />
           </Menu>
+          <Menu fx:id="themeMenu" mnemonicParsing="false" text="Theme">
+            <MenuItem fx:id="darkTheme" mnemonicParsing="false" onAction="#handleSwitchDarkTheme" text="Dark" />
+            <MenuItem fx:id="lightTheme" mnemonicParsing="false" onAction="#handleSwitchLightTheme" text="Light" />
+          </Menu>
         </MenuBar>
-
-        <HBox>
-          <StackPane VBox.vgrow="NEVER" fx:id="searchBarPlaceholder" minHeight="40" prefHeight="40" maxHeight="40"
-                     prefWidth="NaN" HBox.hgrow="ALWAYS">
-
-          </StackPane>
-        </HBox>
 
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" prefWidth="400">
           <StackPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-with-border" minWidth="400" prefWidth="NaN">

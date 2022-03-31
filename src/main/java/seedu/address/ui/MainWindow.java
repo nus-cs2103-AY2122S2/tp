@@ -19,6 +19,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.theme.DarkTheme;
+import seedu.address.model.theme.LightTheme;
 import seedu.address.ui.general.GeneralDisplay;
 import seedu.address.ui.general.Profile;
 
@@ -60,9 +62,6 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane searchBarPlaceholder;
-
-    @FXML
     private StackPane generalDisplayPlaceholder;
 
     @FXML
@@ -70,6 +69,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Menu newTagMenu;
+
+    @FXML
+    private Menu themeMenu;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -98,7 +100,7 @@ public class MainWindow extends UiPart<Stage> {
 
         addMenu.setVisible(false);
         newTagMenu.setVisible(false);
-
+        themeMenu.setVisible(false);
     }
 
     public Stage getPrimaryStage() {
@@ -155,9 +157,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        SearchBar searchBar = new SearchBar();
-        searchBarPlaceholder.getChildren().add(searchBar.getRoot());
-
         generalDisplay = new GeneralDisplay(logic);
         generalDisplayPlaceholder.getChildren().add(generalDisplay.getRoot());
     }
@@ -210,6 +209,22 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switch the theme to dark theme.
+     */
+    @FXML
+    public void handleSwitchDarkTheme() {
+        new DarkTheme().applyTheme(primaryStage);
+    }
+
+    /**
+     * Switch the theme to light theme.
+     */
+    @FXML
+    public void handleSwitchLightTheme() {
+        new LightTheme().applyTheme(primaryStage);
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -239,9 +254,11 @@ public class MainWindow extends UiPart<Stage> {
             if (logic.getModel().isMouseUxEnabled()) {
                 addMenu.setVisible(true);
                 newTagMenu.setVisible(true);
+                themeMenu.setVisible(true);
             } else {
                 addMenu.setVisible(false);
                 newTagMenu.setVisible(false);
+                themeMenu.setVisible(false);
             }
 
             if (commandResult.isRemoveProfile() && this.generalDisplay.getProfile().getPerson() != null
@@ -295,9 +312,5 @@ public class MainWindow extends UiPart<Stage> {
 
     public ResultDisplay getResultDisplay() {
         return this.resultDisplay;
-    }
-
-    public Logic getLogic() {
-        return this.logic;
     }
 }
