@@ -311,31 +311,6 @@
     -fx-text-fill: #004aad;
 }
 
-.scroll-bar {
-    -fx-background-color: derive(#ffffff, 20%);
-}
-
-.scroll-bar .thumb {
-    -fx-background-color: derive(#ffffff, 50%);
-    -fx-background-insets: 3;
-}
-
-.scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
-}
-
-.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
-    -fx-shape: " ";
-}
-
-.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
-}
-
-.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
-}
 
 #cardPane {
     -fx-background-color: transparent;
@@ -400,7 +375,6 @@
     -fx-background-color: derive(#004aad, 0%);
     -fx-background-insets: 1 2 1 1;
     -fx-background-radius: 5;
-
 }
 
 .scroll-bar {
@@ -408,13 +382,13 @@
     -fx-border-color: #7e7a7a;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: derive(#c1c1c1,0%);
     -fx-border-color: transparent;
-        -fx-background-insets: 2 2 2 1;
+    -fx-background-insets: 2 2 2 1;
+    -fx-padding: 8 8 8 8;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
@@ -429,12 +403,10 @@
 }
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
 }
 
-.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 8 8 8 8;
-}
-
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow,
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 8 8 8;
+    -fx-padding: 0 0 0 0;
 }
