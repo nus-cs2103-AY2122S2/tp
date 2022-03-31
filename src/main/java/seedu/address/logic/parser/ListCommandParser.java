@@ -9,18 +9,16 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
-
-
 public class ListCommandParser implements Parser<ListCommand> {
 
     public static final Predicate<Person> PREDICATE_SHOW_FLAGGED_PERSONS = person -> person.getFlag().isFlagged;
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns a Sort Command object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListCommand
+     * and returns a List Command object for execution.
      *
-     * @param args arguments to be parsed for SortCommand.
-     * @return SortCommand with parsed Comparator.
+     * @param args arguments to be parsed for ListCommand.
+     * @return ListCommand with parsed Predicate.
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ListCommand parse(String args) throws ParseException {
@@ -29,21 +27,20 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListCommand(PREDICATE_SHOW_ALL_PERSONS);
         }
 
-        String[] sortVariable = trimmedArgs.split("\\s+");
+        String[] listArgs = trimmedArgs.split("\\s+");
 
-
-        if (sortVariable.length != 1) {
+        if (listArgs.length != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
-        switch(sortVariable[0].toLowerCase()) {
+
+        switch(listArgs[0].toLowerCase()) {
         case "flag":
             return new ListCommand(PREDICATE_SHOW_FLAGGED_PERSONS);
         case "unflag":
             return new ListCommand(PREDICATE_SHOW_FLAGGED_PERSONS.negate());
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-
         }
     }
 }
