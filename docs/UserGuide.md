@@ -11,23 +11,34 @@ later.">
   - [Requirement](#requirement)
   - [Setup](#setup)
 - [Features](#features)
-  - [Viewing Help: `help`](#viewing-help-help)
-  - [Adding a Patient: `add`](#adding-a-patient-add)
-  - [Listing all Patients: `view`](#listing-all-patients-view)
-  - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
-  - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
-  - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
-  - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
-  - [Adding Medical Information: `add t/medical`](#adding-medical-information-add-tmedical)
-  - [Viewing Medical Information: `view t/medical`](#viewing-medical-information-view-tmedical)
-  - [Editing Medical Information: `edit`](#editing-medical-information-edit)
-  - [Adding Consultation Information: `add t/consultation`](#adding-consultation-information-add-tconsultation)
-  - [Viewing Past Consultations: `view t/consultation`](#viewing-past-consultations-view-tconsultation)
-  - [Editing Consultation Information: `edit`](#editing-consultation-information-edit)
-  - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
-  - [Viewing Prescription: `view t/prescription`](#viewing-prescription-view-tprescription)
-  - [Adding Test Result: `add t/test`](#adding-test-result-add-ttest)
-  - [Viewing Test Result: `view t/test`](#viewing-test-result-view-ttest)
+  - Common Commands:
+    - [Viewing Help: `help`](#viewing-help-help)
+    - [Adding a Patient: `add`](#adding-a-patient-add)
+    - [Listing all Patients: `view`](#listing-all-patients-view)
+    - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
+    - [Editing a Patient: `edit`](#editing-a-patient)
+    - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
+    - [Find: `find`](#finding-by-keyword)
+  - Contact Information:
+    - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
+    - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
+    - [Editing Contact Information: `edit`](#editing-contact-information-edit)
+  - Medical Information
+    - [Adding Medical Information: `add t/medical`](#adding-medical-information-add-tmedical)
+    - [Viewing Medical Information: `view t/medical`](#viewing-medical-information-view-tmedical)
+    - [Editing Medical Information: `edit`](#editing-medical-information-edit)
+  - Consultation Information
+    - [Adding Consultation Information: `add t/consultation`](#adding-consultation-information-add-tconsultation)
+    - [Viewing Past Consultations: `view t/consultation`](#viewing-past-consultations-view-tconsultation)
+    - [Editing Consultation Information: `edit`](#editing-consultation-information-edit)
+  - Prescription 
+    - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
+    - [Viewing Prescription: `view t/prescription`](#viewing-prescription-view-tprescription)
+    - [Editing Prescription: `edit`](#editing-prescription-edit)
+  - Test Result
+    - [Adding Test Result: `add t/test`](#adding-test-result-add-ttest)
+    - [Viewing Test Result: `view t/test`](#viewing-test-result-view-ttest)
+    - [Editing Test Result: `edit`](#editing-test-result-edit)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -105,6 +116,15 @@ Format: `view i/NRIC`
 Examples:
 * `view i/S1234567L`
 
+### Editing a Patient: `edit`
+
+Edits an existing patient in MedBook when a list of patients is being displayed.
+
+Format:  `edit INDEX [n/NAME] [r/RELATIONSHIP] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+Examples:
+* `view` followed by `edit 1 p/91234567` updates phone number of first patient displayed on the screen.
+
 ### Deleting any Entry: `delete`
 
 Deletes a specified entry (patient, contact, medical information,...) on current screen from MedBook.
@@ -119,6 +139,16 @@ Format: `delete INDEX`
 Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
 * `view` followed by `delete 1` deletes the first patient displayed on the screen.
+
+### Find: `find`
+
+Finds all entries in the current page whose information contain any of the specified keywords (case-insensitive).
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+Examples:
+* `find John`
+* `find Betsy Tim`
 
 ### Adding Contact Information: `add t/contact`
 
@@ -138,6 +168,16 @@ Format: `view t/contact i/NRIC`
 
 Examples:
 * `/view t/contact i/S1234567L`
+
+### Editing Contact Information: `edit`
+
+Edits an existing contact information entry in MedBook when a list of contact information entries is being displayed.
+Note that we cannot edit NRIC after creating a contact information entry.
+
+Format:  `edit INDEX [n/NAME] [r/RELATIONSHIP] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+Examples:
+* `/view t/contact i/S1234567L` followed by `edit 1 r/Father` updates relationship of contact entry displayed on the screen.
 
 ### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to MedBook.
@@ -161,7 +201,7 @@ Examples:
 ### Editing Medical Information: `edit`
 
 Edits an existing medical information entry in MedBook when a list of medical information entries is being displayed.
-This is with the exception of the NRIC field, which cannot be modified after creation of Medical Information.
+Note that we cannot edit NRIC after creating a medical information entry.
 
 Format:  `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
@@ -190,7 +230,7 @@ Examples:
 ### Editing Consultation Information: `edit`
 
 Edits an existing consultation entry in MedBook when a list of consultation entries is being displayed.
-This is with the exception of the NRIC field, which cannot be modified after creation of Consultation.
+Note that we cannot edit NRIC after creating a consultation.
 
 Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
 
@@ -217,6 +257,16 @@ Format: `view t/prescription i/NRIC`
 Examples:
 * `view t/prescription i/S1234567L`
 
+### Editing Prescription: `edit`
+
+Edits an existing prescription entry in MedBook when a list of prescriptions is being displayed.
+Note that we cannot edit NRIC after creating a prescription.
+
+Format:  `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`
+
+Examples:
+* `view t/prescription i/S1234567L` followed by `edit 1 n/Amoxicillin` updates the drug name of first prescription entry displayed on the screen.
+
 ### Adding Test Result: `add t/test`
 
 Adds a test result taken by a patient in MedBook.
@@ -235,6 +285,16 @@ Format: `view t/test i/NRIC`
 Examples:
 * `view t/test i/S1234567L`
 
+### Editing Test Result: `edit`
+
+Edits an existing test result entry in MedBook when a list of test results is being displayed.
+Note that we cannot edit NRIC after creating a test result.
+
+Format:  `edit INDEX [dt/DATE] [mt/MEDICAL_TEST] [r/RESULT]`
+
+Examples:
+* `view t/test i/S1234567L` followed by `edit 1 mt/CT Scan` updates the test type of first test result entry displayed on the screen.
+
 
 ## FAQ
 Q: How do I transfer my data to another Computer?
@@ -248,9 +308,12 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | Add a Patient | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...` |
 | List all Patients | `view` |
 | View Summary of a Patient | `view i/NRIC` |
+| Edit Patient | `edit INDEX [n/NAME] [r/RELATIONSHIP] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`|
 | Delete any Entry | `delete INDEX` |
+| Find | `find KEYWORD [MORE_KEYWORDS]` |
 | Add Contact Information | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
 | View Contact Information | `view t/contact i/NRIC` |
+| Edit Contact Information | `edit [n/NAME] [r/RELATIONSHIP] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` |
 | Add Medical Information | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | View Medical Information | `view t/medical [i/NRIC]` |
 | Edit Medical Information | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
@@ -259,5 +322,7 @@ A: Install the app on the other computer and overwrite the empty data file it cr
 | Edit Consultation Information | `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]` |
 | Add Prescription | `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION` |
 | View Prescription | `view t/prescription i/NRIC` |
+| Edit Prescription | `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]` |
 | Add Test Result | `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT` |
 | View Test Result| `view t/test i/NRIC` |
+| Edit Test Result | `edit INDEX [dt/DATE] [mt/MEDICAL_TEST] [r/RESULT]` |
