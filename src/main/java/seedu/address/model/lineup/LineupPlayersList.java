@@ -52,6 +52,9 @@ public class LineupPlayersList {
         return playersList.contains(player);
     }
 
+    /**
+     * Checks the LineupPlayerList contains player having the same name
+     */
     public boolean hasPlayer(Name name) {
         for (Person person : playersList) {
             if (person.isMatchName(name)) {
