@@ -152,9 +152,13 @@ Format: `appt-b INDEX time/TIME`
 Examples:
 * `appt-b 1 time/2023-01-01-12-12` sets a new appointment for the 1st buyer on the displayed buyer list on 1st January 2023 and 12:12pm.
 
-#### Matching a buyer! `match`
+#### Matching a buyer!
 
 Function: Display potential sellers by matching the demand of a buyer. Now, you can easily find properties that buyers are interested in!
+
+* Want to match using just a certain criterion? Fret not! Here are the different match commands:
+
+###### Matching all fields of buyers to sellers. `match`
 
 Format: `match INDEX`
 
@@ -167,6 +171,47 @@ Format: `match INDEX`
 
 Examples:
 * `match 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+###### Matching House Types of buyers to sellers. `match-h`
+
+Format: `match-h INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers whose housetype matches the buyer's desired house type will be displayed.
+* A seller will match to the buyer if:
+  * They have the same house type.
+  * Buyer's house type is unspecified.
+* E.g. A buyer with house type `UNSPECIFIED` or `HDB_FLAT` will match with a seller with house type `HDB_FLAT`.
+
+Examples:
+* `match-h 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+###### Matching Locations of buyers to sellers. `match-l`
+
+Format: `match-l INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers whose location matches the buyer's desired location will be displayed.
+* A seller will match to the buyer if:
+  * They have the same house location
+* E.g. A buyer with house location `bishan` will match with a seller with house location `bishan`.
+
+Examples:
+* `match-l 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+###### Matching Price Range of buyers to sellers. `match-pr`
+
+Format: `match-pr INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers whose price range matches the buyer's desired price range will be displayed.
+* A seller will match to the buyer if:
+  * There is a price at which the buyer is willing to buy a property at, and the seller is willing to sell their property at.
+* E.g. A buyer with price range `20-100` will match with a seller with house price range `100-200`, because `100` is a matching price.
+* Price matches are inclusive, so if a price range is `100-200`, it includes the values `100` and `200` as well.
+
+Examples:
+* `match-pr 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
 
 #### Editing a buyer. `edit-b`
 

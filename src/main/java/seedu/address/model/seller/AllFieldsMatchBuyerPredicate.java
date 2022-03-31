@@ -13,14 +13,14 @@ import seedu.address.model.property.PropertyToSell;
  * Tests that a {@code Seller}'s {@code PropertyToSell} matches the demand
  *  of a given {@code Buyer}'s {@code PropertyToBuy}.
  */
-public class HasMatchWithBuyerPredicate implements Predicate<Seller> {
+public class AllFieldsMatchBuyerPredicate implements Predicate<Seller> {
 
     /**
      * Index of Buyer in UniqueBuyerList to match with.
      */
     private final Buyer buyer;
 
-    public HasMatchWithBuyerPredicate(Buyer buyer) {
+    public AllFieldsMatchBuyerPredicate(Buyer buyer) {
         this.buyer = buyer;
     }
 

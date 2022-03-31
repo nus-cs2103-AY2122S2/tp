@@ -16,7 +16,7 @@ import seedu.address.model.property.PropertyToSell;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.SellerBuilder;
 
-class HasMatchWithBuyerPredicateTest {
+class AllFieldsMatchBuyerPredicateTest {
 
     private PropertyToBuy propertyToBuyStub1 = new PropertyToBuy(
         new House(HouseType.BUNGALOW, new Location("Kranji")),
@@ -65,8 +65,8 @@ class HasMatchWithBuyerPredicateTest {
     private Seller seller5 = new SellerBuilder().withProperty(propertyToSellStub5).build();
     private Seller seller6 = new SellerBuilder().withProperty(propertyToSellStub6).build();
 
-    private HasMatchWithBuyerPredicate predicate1 = new HasMatchWithBuyerPredicate(buyer1);
-    private HasMatchWithBuyerPredicate predicate2 = new HasMatchWithBuyerPredicate(buyer2);
+    private AllFieldsMatchBuyerPredicate predicate1 = new AllFieldsMatchBuyerPredicate(buyer1);
+    private AllFieldsMatchBuyerPredicate predicate2 = new AllFieldsMatchBuyerPredicate(buyer2);
 
     @Test
     void test1() {

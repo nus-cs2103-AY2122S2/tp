@@ -26,6 +26,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBuyerCommand;
 import seedu.address.logic.commands.ListSellerCommand;
 import seedu.address.logic.commands.MatchCommand;
+import seedu.address.logic.commands.MatchHouseTypeCommand;
+import seedu.address.logic.commands.MatchLocationCommand;
+import seedu.address.logic.commands.MatchPriceRangeCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -123,6 +126,15 @@ public class AddressBookParser {
 
         case MatchCommand.COMMAND_WORD:
             return new MatchCommandParser().parse(arguments);
+
+        case MatchHouseTypeCommand.COMMAND_WORD:
+            return new MatchHouseTypeCommandParser().parse(arguments);
+
+        case MatchLocationCommand.COMMAND_WORD:
+            return new MatchLocationCommandParser().parse(arguments);
+
+        case MatchPriceRangeCommand.COMMAND_WORD:
+            return new MatchPriceRangeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
