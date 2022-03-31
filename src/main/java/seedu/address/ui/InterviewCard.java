@@ -62,9 +62,11 @@ public class InterviewCard extends UiPart<Region> {
 
         String status = interview.getStatus().toString();
         interviewstatus.setText(status);
-        if (status.equals("Pending") || status.equals("Passed - Waiting for Applicant")) {
+        if (status.equals("Pending")) {
             interviewstatus.setStyle("-fx-background-color: #9f8331;");
-        } else if (status.equals("Failed")) {
+        } else if (status.equals("Passed - Waiting for Applicant")) {
+            interviewstatus.setStyle("-fx-background-color: #4187a1;");
+        } else if (status.equals("Failed") || status.equals("Rejected")) {
             interviewstatus.setStyle("-fx-background-color: #b92c2c;");
         } else if (status.equals("Accepted")) {
             interviewstatus.setStyle("-fx-background-color: #319f43;");

@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -170,6 +171,11 @@ public interface Model {
     ArrayList<Interview> getPositionsInterviews(Position position);
 
     /**
+     * Checks if the specified applicant has an interview for the specified position.
+     */
+    boolean isSameApplicantPosition(Applicant applicant, Position position);
+
+    /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -231,4 +237,10 @@ public interface Model {
     void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator);
 
     void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
+
+    void exportCsvApplicant() throws FileNotFoundException;
+
+    void exportCsvInterview() throws FileNotFoundException;
+
+    void exportCsvPosition() throws FileNotFoundException;
 }

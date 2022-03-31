@@ -3,6 +3,7 @@ package seedu.address.logic.commands.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
@@ -32,9 +33,11 @@ public class ListApplicantCommand extends ListCommand {
             + "\nOptional parameters: "
             + PREFIX_FILTER_TYPE + "FILTER_TYPE "
             + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
+            + PREFIX_SORT_ARGUMENT + "[asc/dsc] "
             + "\nExample: " + COMMAND_WORD + " -a "
-            + PREFIX_FILTER_TYPE + "name "
-            + PREFIX_FILTER_ARGUMENT + "John Doe ";
+            + PREFIX_FILTER_TYPE + "gender "
+            + PREFIX_FILTER_ARGUMENT + "M "
+            + PREFIX_SORT_ARGUMENT + "dsc ";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$d applicants";
 

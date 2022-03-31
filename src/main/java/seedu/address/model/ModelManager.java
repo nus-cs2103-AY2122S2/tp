@@ -3,6 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,6 +27,9 @@ import seedu.address.model.position.Position;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String APPLICANT_CSV_FILE = "applicant.csv";
+    private static final String INTERVIEW_CSV_FILE = "interview.csv";
+    private static final String POSITION_CSV_FILE = "position.csv";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -249,6 +255,17 @@ public class ModelManager implements Model {
         filteredApplicants.setPredicate(predicate);
     }
 
+    @Override
+    public void exportCsvApplicant() throws FileNotFoundException {
+        File csvOutputFile = new File(APPLICANT_CSV_FILE);
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            filteredApplicants.stream()
+                    .map(Applicant::convertToCsv)
+                    .forEach(pw::println);
+        }
+        assert(csvOutputFile.exists());
+    }
+
     //=========== Filtered Interview List Accessors =============================================================
 
     /**
@@ -290,6 +307,21 @@ public class ModelManager implements Model {
         return addressBook.getPositionsInterview(position);
     }
 
+    @Override
+    public void exportCsvInterview() throws FileNotFoundException {
+        File csvOutputFile = new File(INTERVIEW_CSV_FILE);
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            filteredInterviews.stream()
+                    .map(Interview::convertToCsv)
+                    .forEach(pw::println);
+        }
+        assert (csvOutputFile.exists());
+    }
+    
+    public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+        return addressBook.isSameApplicantPosition(applicant, position);
+    }
+
     //=========== Filtered Position List Accessors =============================================================
     @Override
     public ObservableList<Position> getFilteredPositionList() {
@@ -314,6 +346,17 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate, comparator);
         addressBook.sortPosition(comparator);
         filteredPositions.setPredicate(predicate);
+    }
+
+    @Override
+    public void exportCsvPosition() throws FileNotFoundException {
+        File csvOutputFile = new File(POSITION_CSV_FILE);
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            filteredPositions.stream()
+                    .map(Position::convertToCsv)
+                    .forEach(pw::println);
+        }
+        assert(csvOutputFile.exists());
     }
 
     //=========== Utility methods =============================================================

@@ -48,7 +48,7 @@ public class ListApplicantCommandParser extends GenericListParser<ListApplicantC
      * @return ListApplicantCommand object with respective filter type and filter argument for execution
      */
     @Override
-    public ListApplicantCommand parseSort(ArgumentMultimap args) {
+    public ListApplicantCommand parseSort(ArgumentMultimap args) throws ParseException {
         SortArgument sortArgument =
                 ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
 

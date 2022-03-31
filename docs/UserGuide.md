@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-HireLah is a desktop app that helps **recruiters to manage talent and job candidates** by tracking every step of the hiring process, 
+HireLah is a desktop app that helps **recruiters to manage talent and job candidates** by tracking every step of the hiring process,
 from offering positions to scheduling interviews with candidates. It is optimised for Command Line Interface (CLI) users while still offering a GUI, so that power users can accomplish tasks much quicker by using commands
 
 
@@ -151,7 +151,7 @@ Examples:
 Edit an existing interview in HireLah.
 
 Format: `edit -i INTERVIEW_INDEX [d/DATE] [p/POSITION_INDEX]`
-* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the 
+* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the
   last displayed interview list.
 * At least one optional field must be provided.
 * The position index refers to the index number shown in the last displayed interview list.
@@ -229,26 +229,30 @@ Examples:
 * `delete -p Senior Frontend Software Engineer`
 
 ## List
-General command to list different data type in HireLah. User can provide optional parameters to filter the data to display.
-If there are no parameters provided, HireLah will display all data of that type by default.
+General command to list different data type in HireLah. User can provide optional parameters to filter and sort the data to display.
+If there are no parameters provided, HireLah will display all data of that type by default. User can either display as default, filter only,
+sort only, or filter and sort.
 
 Note: This command may change the index of the displayed items, and all other commands that accepts an index will follow the latest index shown in HireLah.
 
-Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT]`
+Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 * `TYPE` must take the form of `a`, `i`, `p`
   * `-a` will list all applicants
   * `-i` will list all interview
   * `-p` will list all position
-* `FILTER_TYPE` and `FILTER_ARGUMENT` are optional paramters to filter the data listed
+* `FILTER_TYPE` and `FILTER_ARGUMENT` are optional parameters to filter the data displayed
   * Note that **both** `FILTER_TYPE` and `FILTER_ARGUMENT` need to be provided to filter data
   * Different data types will accept different `FILTER_TYPE` and `FILTER_ARGUMENT`, as elaborated below
-  * `FILTER_TYPE` has to be exactly the same as listed below (not caps-sensitive)
   
+* `SORT_ARGUMENT` is the optional parameter to sort the data displayed
+  * Can either be `asc` or `dsc`
+  * Different data types will be sorted according to different properties, as elaborated below
 
-### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT]`
-Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI. 
+### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI.
 
 The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
+
 
 | FILTER_TYPE | FILTER_ARGUMENT                    | Description                                              |
 |-------------|------------------------------------|----------------------------------------------------------|
@@ -257,12 +261,15 @@ The applicants displayed can be filtered by providing the optional parameters `f
 | `status`    | available/hired                    | View applicants with the status given                    |
 | `tag`       | Keyword(s) in the applicant's tag  | View applicants with a tag that matches the keywords(s)  |
 
-Examples: 
-- `list -a f/name a/John Doe`
-- `list -a f/status a/hired`
-- `list -a f/tag a/Java`
+The applicants displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`. 
 
-### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT]`
+Examples: 
+- `list -a s/asc`
+- `list -a f/name a/John Doe`
+- `list -a f/tag a/Java`
+- `list -a f/status a/hired s/dsc`
+
+### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 
 Lists all existing positions by default. Automatically toggles view to the position tab on the GUI.
 
@@ -273,12 +280,14 @@ The positions displayed can be filtered by providing the optional parameters `f/
 | `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
 | `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
 
+The positions displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`.
+
 Examples: 
+- `list -p s/asc`
 - `list -p f/name a/Software Engineer`
-- `list -p f/req a/Java`
+- `list -p f/req a/Java s/dsc`
 
-
-### Listing interviews: `list -i [f/FILTER_TYPE a/FILTER_ARGUMENT]`
+### Listing interviews: `list -i [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 
 Lists all existing interviews by default. Automatically toggles view to the interview tab on the GUI.
 
@@ -291,30 +300,12 @@ The interviews displayed can be filtered by providing the optional parameters `f
 | `date`      | Date the interview is happening in `yyyy-mm-dd`          | View interviews which happens on the date provided                   |
 | `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given                                |
 
+The positions displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
 
 Examples: 
+- `list -i s/dsc`
 - `list -i f/date a/2022-05-04`
-- `list -i f/status a/accepted`
-
-## Sort data: `sort`
-
-Arranges applicants, interview and positions in HireLah according to their properties. 
-It alters the current display of HireLah and changes the index of the relevant data.
-
-Format: `sort DATA_TYPE SORT_ORDER`
-
-User can specify the order of the sorted data by typing `ASC` (for ascending) 
-or `DSC` (for descending) in the `REVERSE` part.
-
-| DATA_TYPE | Sorting properties | Description                                            |
-|-----------|--------------------|--------------------------------------------------------|
-| `APPL`    | Name               | Sort and view applicants based on their name           |
-| `INTVW`   | Date               | Sort and view interviews based on their occurring date |
-| `POS`     | Name               | Sort and view positions based on the position name     |
-
-Examples:
-* `sort APPL ASC`
-* `sort POS DSC`
+- `list -i f/status a/accepted s/asc`
 
 ## Viewing help: `help`
 
@@ -331,7 +322,7 @@ Format: `help COMMAND`
 * Command name is not case-sensitive
 
 Examples:
-* `help add` 
+* `help add`
 * `help del`
 
 ### Exiting the program : `exit`

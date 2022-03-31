@@ -3,6 +3,7 @@ package seedu.address.logic.commands.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.time.LocalDate;
@@ -33,9 +34,11 @@ public class ListInterviewCommand extends ListCommand {
             + "\nOptional parameters: "
             + PREFIX_FILTER_TYPE + "FILTER_TYPE "
             + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
+            + PREFIX_SORT_ARGUMENT + "[asc/dsc] "
             + "\nExample: " + COMMAND_WORD + " -i "
-            + PREFIX_FILTER_TYPE + "name "
-            + PREFIX_FILTER_ARGUMENT + "John Doe ";
+            + PREFIX_FILTER_TYPE + "appl "
+            + PREFIX_FILTER_ARGUMENT + "John Doe "
+            + PREFIX_SORT_ARGUMENT + "asc ";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$d interviews";
 
