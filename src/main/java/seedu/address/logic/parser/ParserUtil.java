@@ -266,16 +266,15 @@ public class ParserUtil {
      */
     public static EntityType parseEntity(String entityType) throws ParseException {
         String trimmedEntityType = entityType.trim();
-        switch(trimmedEntityType) {
-        case TYPE_STUDENT:
+        if (TYPE_STUDENT.startsWith(trimmedEntityType)) {
             return EntityType.STUDENT;
-        case TYPE_MODULE:
+        } else if (TYPE_MODULE.startsWith(trimmedEntityType)) {
             return EntityType.TA_MODULE;
-        case TYPE_CLASS:
+        } else if (TYPE_CLASS.startsWith(trimmedEntityType)) {
             return EntityType.CLASS_GROUP;
-        case TYPE_ASSESSMENT:
+        } else if (TYPE_ASSESSMENT.startsWith(trimmedEntityType)) {
             return EntityType.ASSESSMENT;
-        default:
+        } else {
             throw new ParseException(Messages.MESSAGE_UNKNOWN_ENTITY);
         }
     }
