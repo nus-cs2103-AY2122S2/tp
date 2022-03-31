@@ -25,6 +25,7 @@ To get started, click on any of the headers in the table of content to jump to t
     * [Locating clients by name : `find`](#locating-clients-by-name--find)
     * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Undoing the previous commands : `undo`](#undoing-the-previous-commands--undo)
+    * [Redoing the previous commands : `redo`](#redoing-the-previous-commands--redo)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
     * [Saving the data](#saving-the-data)
@@ -288,6 +289,14 @@ Undoes the previous commands executed.
 
 Format: `undo`
 
+### Redoing the previous commands : `redo`
+
+Redoes the previous commands executed.
+  * Multiple `redo` is possible.
+  * Maximum possible `redo` is till the last executed command.
+
+Format: `redo`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the HustleBook.
@@ -323,6 +332,7 @@ If your changes to the data file makes its format invalid, HustleBook will disca
 | **Clear**  | `clear`                                                                                                                                                                                     |
 | **Sort**   | `sort`                                                                                                                                                                                      |
 | **Undo**  | `undo`                                                                                                                                                                                       |
+| **Redo**   | `redo`                                                                                                                                                                                      |
 | **Delete** | `delete NAME`<br> e.g., `delete John`                                                                                                                                                       |
 | **Flag**   | `flag NAME`<br> e.g., `flag John`                                                                                                                                                           |
 | **Unflag** | `unflag NAME` <br> e.g., `unflag John`                                                                                                                                                      |

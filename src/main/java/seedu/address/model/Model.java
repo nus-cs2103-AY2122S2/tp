@@ -62,6 +62,11 @@ public interface Model {
     void undoHustleBook();
 
     /**
+     * Redo the HustleBook data
+     */
+    void redoHustleBook();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the hustle book.
      */
     boolean hasPerson(Person person);

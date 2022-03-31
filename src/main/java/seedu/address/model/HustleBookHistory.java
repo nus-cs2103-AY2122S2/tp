@@ -42,6 +42,18 @@ public class HustleBookHistory {
     }
 
     /**
+     * Provides the recent/next data state of the HustleBook.
+     * @return The recent/next data state of the HustleBook.
+     * @throws IndexOutOfBoundsException If no commands left to redo.
+     */
+    public ReadOnlyHustleBook getNextState() throws IndexOutOfBoundsException,
+            NullPointerException {
+        ReadOnlyHustleBook result = historyList.get(currStatePointer + 1);
+        currStatePointer = Math.min(historyList.size() - 1, currStatePointer + 1);
+        return result;
+    }
+
+    /**
      * Updates the History with new updated data state of HustleBook.
      * @param readOnlyHustleBook The new modified data state of HustleBook.
      */

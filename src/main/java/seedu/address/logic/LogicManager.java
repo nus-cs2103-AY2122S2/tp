@@ -53,7 +53,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveHustleBook(model.getHustleBook());
-            if (!commandText.equals("undo")) {
+            if (!(commandText.equals("undo") || commandText.equals("redo"))) {
                 logger.info("Saving previous data state of HustleBook");
                 hustleBookHistory.update(getHustleBook());
             }
