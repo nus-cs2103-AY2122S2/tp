@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.tamodule.TaModule;
+import seedu.address.model.assessment.Assessment;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class ModuleCard extends UiPart<Region> {
+public class AssessmentCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleListCard.fxml";
+    private static final String FXML = "AssessmentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,29 +21,40 @@ public class ModuleCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final TaModule module;
+    public final Assessment assessment;
+
+    private AssessmentAttemptsWindow attemptsWindow;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label code;
+    private Label name;
     @FXML
-    private Label academicYear;
+    private Label module;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public ModuleCard(TaModule module, int displayedIndex) {
+    public AssessmentCard(Assessment assessment, int displayedIndex) {
         super(FXML);
-        this.module = module;
+        this.assessment = assessment;
+
         id.setText(displayedIndex + "");
-        code.setText(module.getModuleCode().value);
-        name.setText(module.getModuleName().value);
-        academicYear.setText(module.getAcademicYear().value);
+        name.setText(assessment.getAssessmentName().value);
+        module.setText(assessment.getTaModule().getModuleCode().value);
+
+        attemptsWindow = new AssessmentAttemptsWindow(assessment.getAttempts());
+    }
+
+    @FXML
+    private void handleAttempts() {
+        if (!attemptsWindow.isShowing()) {
+            attemptsWindow.show();
+        } else {
+            attemptsWindow.focus();
+        }
     }
 
     @Override
@@ -54,13 +65,12 @@ public class ModuleCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModuleCard)) {
+        if (!(other instanceof AssessmentCard)) {
             return false;
         }
 
         // state check
-        ModuleCard card = (ModuleCard) other;
-        return id.getText().equals(card.id.getText())
-                && module.equals(card.module);
+        AssessmentCard card = (AssessmentCard) other;
+        return assessment.equals(card.assessment);
     }
 }
