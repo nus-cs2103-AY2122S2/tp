@@ -1,7 +1,5 @@
 package woofareyou.logic.commands;
 
-import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import org.junit.jupiter.api.Test;
 
 import woofareyou.model.Model;

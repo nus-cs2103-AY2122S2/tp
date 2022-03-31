@@ -1,20 +1,18 @@
 package woofareyou.model.pet;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static woofareyou.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_NAME_BOB_WITH_SPACES;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_OWNER_NAME_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.Assert;
+import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.TypicalPets;
 
 public class PetTest {
@@ -34,7 +32,8 @@ public class PetTest {
         Assertions.assertFalse(TypicalPets.BOBA.isSamePet(null));
 
         // same name, all other attributes different -> returns true
-        Pet editedAlice = new PetBuilder(TypicalPets.BOBA).withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB)
+        Pet editedAlice = new PetBuilder(TypicalPets.BOBA).withPhone(VALID_PHONE_BOB)
+                .withOwnerName(VALID_OWNER_NAME_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         Assertions.assertTrue(TypicalPets.BOBA.isSamePet(editedAlice));
 

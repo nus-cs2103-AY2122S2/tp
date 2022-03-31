@@ -2,7 +2,6 @@ package woofareyou.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +47,8 @@ public class EditCommandTest {
         Pet editedPet = petInList.withName(CommandTestUtil.VALID_NAME_BOB).withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
 
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB)
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
+                .withName(CommandTestUtil.VALID_NAME_BOB)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPet, descriptor);
 
@@ -113,7 +113,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPetIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
+                .withName(CommandTestUtil.VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         CommandTestUtil.assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);

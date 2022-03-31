@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.FindCommand;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
-import woofareyou.commons.core.Messages;
 
 public class FindCommandParserTest {
 
@@ -14,7 +14,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "     ", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        CommandParserTestUtil.assertParseFailure(parser, "     ",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test

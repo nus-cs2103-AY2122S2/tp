@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ import woofareyou.model.Model;
 import woofareyou.model.ReadOnlyAddressBook;
 import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.pet.Pet;
-import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.Assert;
+import woofareyou.testutil.PetBuilder;
 
 public class AddCommandTest {
 
@@ -48,7 +47,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPet);
         ModelStub modelStub = new ModelStubWithPet(validPet);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test

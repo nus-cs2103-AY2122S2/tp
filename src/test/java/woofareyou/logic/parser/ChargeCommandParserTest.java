@@ -17,10 +17,10 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.ChargeCommand;
 import woofareyou.model.charge.Charge;
-import woofareyou.commons.core.Messages;
 
 
 public class ChargeCommandParserTest {

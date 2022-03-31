@@ -7,7 +7,6 @@ import static woofareyou.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_ADDRESS_BOBA;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import woofareyou.model.pet.exceptions.DuplicatePetException;
 import woofareyou.model.pet.exceptions.PetNotFoundException;
-import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.Assert;
+import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.TypicalPets;
 
 public class UniquePetListTest {

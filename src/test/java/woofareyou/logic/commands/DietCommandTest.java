@@ -2,7 +2,6 @@ package woofareyou.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,8 @@ class DietCommandTest {
         Pet firstPerson = model.getFilteredPetList().get(TypicalIndexes.INDEX_FIRST_PET.getZeroBased());
         Pet editedPerson = new PetBuilder(firstPerson).withDiet(DIET_STUB).build();
 
-        DietCommand dietCommand = new DietCommand(TypicalIndexes.INDEX_FIRST_PET, new Diet(editedPerson.getDiet().value));
+        DietCommand dietCommand = new DietCommand(TypicalIndexes.INDEX_FIRST_PET,
+                new Diet(editedPerson.getDiet().value));
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 
@@ -64,7 +64,8 @@ class DietCommandTest {
         Pet editedPerson = new PetBuilder(model.getFilteredPetList().get(TypicalIndexes.INDEX_FIRST_PET.getZeroBased()))
                 .withDiet(DIET_STUB).build();
 
-        DietCommand dietCommand = new DietCommand(TypicalIndexes.INDEX_FIRST_PET, new Diet(editedPerson.getDiet().value));
+        DietCommand dietCommand = new DietCommand(TypicalIndexes.INDEX_FIRST_PET,
+                new Diet(editedPerson.getDiet().value));
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 

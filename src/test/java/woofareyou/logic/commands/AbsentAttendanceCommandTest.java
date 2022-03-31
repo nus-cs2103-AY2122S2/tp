@@ -197,13 +197,13 @@ public class AbsentAttendanceCommandTest {
     }
 
     private static String generateExpectedSuccessMessage(Pet pet, String messageDate,
-                                                         AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor) {
+        AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor) {
         return String.format(AbsentAttendanceCommand.MESSAGE_ABSENT_ATTENDANCE_SUCCESS,
             pet.getName(), messageDate, descriptor);
     }
 
     private static String generateExpectedFailureMessage(Pet pet, String messageDate,
-                                                         AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor) {
+        AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor) {
         return String.format(AbsentAttendanceCommand.MESSAGE_ABSENT_ATTENDANCE_FAILURE,
             pet.getName(), messageDate, descriptor);
     }

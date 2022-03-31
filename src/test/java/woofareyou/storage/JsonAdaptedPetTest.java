@@ -1,8 +1,5 @@
 package woofareyou.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static woofareyou.testutil.Assert.assertThrows;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,7 +73,8 @@ public class JsonAdaptedPetTest {
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME, null,
                 VALID_ADDRESS, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
-        String expectedMessage = String.format(JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+        String expectedMessage = String.format(JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT,
+                Phone.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
@@ -93,7 +91,8 @@ public class JsonAdaptedPetTest {
     public void toModelType_nullOwnerName_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, null, VALID_PHONE, VALID_ADDRESS,
                 VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
-        String expectedMessage = String.format(JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT, OwnerName.class.getSimpleName());
+        String expectedMessage = String.format(JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT,
+                OwnerName.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 
@@ -110,7 +109,8 @@ public class JsonAdaptedPetTest {
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedPet pet = new JsonAdaptedPet(VALID_NAME, VALID_OWNER_NAME,
                 VALID_PHONE, null, VALID_TAGS, VALID_DIET, VALID_APPOINTMENT, VALID_ATTENDANCE_MAP);
-        String expectedMessage = String.format(JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        String expectedMessage = String.format(JsonAdaptedPet.MISSING_FIELD_MESSAGE_FORMAT,
+                Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, pet::toModelType);
     }
 

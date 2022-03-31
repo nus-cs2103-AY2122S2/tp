@@ -1,7 +1,5 @@
 package woofareyou.logic.commands;
 
-import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +28,8 @@ public class SortCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSortedListByOwnerName() {
         expectedModel.sortPetList("owner");
-        CommandTestUtil.assertCommandSuccess(new SortCommand("owner"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new SortCommand("owner"),
+                model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     /**
@@ -39,7 +38,8 @@ public class SortCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetName() {
         expectedModel.sortPetList("name");
-        CommandTestUtil.assertCommandSuccess(new SortCommand("name"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new SortCommand("name"), model,
+                SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     /**
@@ -48,7 +48,8 @@ public class SortCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetAppointment() {
         expectedModel.sortPetList("app");
-        CommandTestUtil.assertCommandSuccess(new SortCommand("app"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new SortCommand("app"), model,
+                SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     /**
@@ -57,7 +58,8 @@ public class SortCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetDropOffTime() {
         expectedModel.sortPetList("drop off");
-        CommandTestUtil.assertCommandSuccess(new SortCommand("drop off"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new SortCommand("drop off"), model,
+                SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     /**
@@ -66,7 +68,8 @@ public class SortCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetPickUpTime() {
         expectedModel.sortPetList("pick up");
-        CommandTestUtil.assertCommandSuccess(new SortCommand("pick up"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new SortCommand("pick up"), model,
+                SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

@@ -10,11 +10,11 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
-import woofareyou.commons.core.Messages;
 import woofareyou.testutil.TypicalPets;
 
 /**
@@ -68,7 +68,8 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPets.BAGEL, TypicalPets.PANCAKE, TypicalPets.WAFFLE), model.getFilteredPetList());
+        assertEquals(Arrays.asList(TypicalPets.BAGEL, TypicalPets.PANCAKE, TypicalPets.WAFFLE),
+                model.getFilteredPetList());
     }
 
     /**

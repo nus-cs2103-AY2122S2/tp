@@ -2,7 +2,6 @@ package woofareyou.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.commands.ClearCommand;
 import woofareyou.logic.commands.DeleteCommand;
@@ -21,11 +21,12 @@ import woofareyou.logic.commands.ListCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
 import woofareyou.model.pet.Pet;
+import woofareyou.testutil.Assert;
 import woofareyou.testutil.EditPetDescriptorBuilder;
 import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.PetUtil;
-import woofareyou.commons.core.Messages;
-import woofareyou.testutil.*;
+import woofareyou.testutil.TypicalIndexes;
+
 
 public class AddressBookParserTest {
 
@@ -88,12 +89,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        Assert.assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () ->
+            parser.parseCommand("unknownCommand"));
     }
 }

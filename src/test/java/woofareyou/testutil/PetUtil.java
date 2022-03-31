@@ -4,9 +4,9 @@ import java.util.Set;
 
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.commands.EditCommand;
+import woofareyou.logic.parser.CliSyntax;
 import woofareyou.model.pet.Pet;
 import woofareyou.model.tag.Tag;
-import woofareyou.logic.parser.CliSyntax;
 
 
 /**
@@ -45,7 +45,8 @@ public class PetUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getOwnerName().ifPresent(ownerName -> sb.append(CliSyntax.PREFIX_OWNER_NAME).append(ownerName.value)
                 .append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(CliSyntax.PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(CliSyntax.PREFIX_ADDRESS)
+                .append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

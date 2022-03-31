@@ -2,7 +2,9 @@ package woofareyou.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
+import woofareyou.logic.commands.CommandTestUtil;
 import woofareyou.logic.commands.EditCommand;
 import woofareyou.model.pet.Address;
 import woofareyou.model.pet.Name;
@@ -10,8 +12,6 @@ import woofareyou.model.pet.OwnerName;
 import woofareyou.model.pet.Phone;
 import woofareyou.model.tag.Tag;
 import woofareyou.testutil.EditPetDescriptorBuilder;
-import woofareyou.commons.core.Messages;
-import woofareyou.logic.commands.CommandTestUtil;
 import woofareyou.testutil.TypicalIndexes;
 
 public class EditCommandParserTest {
@@ -52,31 +52,42 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS); // invalid name
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS); // invalid phone
         // invalid ownerName
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_OWNER_NAME_DESC, OwnerName.MESSAGE_CONSTRAINTS);
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_OWNER_NAME_DESC,
+                OwnerName.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_ADDRESS_DESC,
+                Address.MESSAGE_CONSTRAINTS); // invalid address
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid ownerName
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.OWNER_NAME_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PHONE_DESC
+                + CommandTestUtil.OWNER_NAME_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.PHONE_DESC_BOB
+                + CommandTestUtil.INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Pet} being edited,
         // parsing it together with a valid tag results in error
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND + TAG_EMPTY,
+        CommandParserTestUtil.assertParseFailure(parser,
+                "1" + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND + TAG_EMPTY,
                 Tag.MESSAGE_CONSTRAINTS);
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.TAG_DESC_FRIEND + TAG_EMPTY + CommandTestUtil.TAG_DESC_HUSBAND,
+        CommandParserTestUtil.assertParseFailure(parser,
+                "1" + CommandTestUtil.TAG_DESC_FRIEND + TAG_EMPTY + CommandTestUtil.TAG_DESC_HUSBAND,
                 Tag.MESSAGE_CONSTRAINTS);
-        CommandParserTestUtil.assertParseFailure(parser, "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND,
+        CommandParserTestUtil.assertParseFailure(parser,
+                "1" + TAG_EMPTY + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.TAG_DESC_HUSBAND,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_OWNER_NAME_DESC + CommandTestUtil.VALID_ADDRESS_AMY
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_NAME_DESC
+                        + CommandTestUtil.INVALID_OWNER_NAME_DESC + CommandTestUtil.VALID_ADDRESS_AMY
                         + CommandTestUtil.VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
@@ -85,11 +96,16 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PET;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.OWNER_NAME_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.OWNER_NAME_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
+                + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
 
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY)
-                .withPhone(CommandTestUtil.VALID_PHONE_BOB).withOwnerName(CommandTestUtil.VALID_OWNER_NAME_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
-                .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND).build();
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
+                .withName(CommandTestUtil.VALID_NAME_AMY)
+                .withPhone(CommandTestUtil.VALID_PHONE_BOB)
+                .withOwnerName(CommandTestUtil.VALID_OWNER_NAME_AMY)
+                .withAddress(CommandTestUtil.VALID_ADDRESS_AMY)
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND,
+                        CommandTestUtil.VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -98,9 +114,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PET;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.OWNER_NAME_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB
+                + CommandTestUtil.OWNER_NAME_DESC_AMY;
 
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB)
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
+                .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withOwnerName(CommandTestUtil.VALID_OWNER_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -112,7 +130,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = TypicalIndexes.INDEX_THIRD_PET;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_AMY;
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY).build();
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
+                .withName(CommandTestUtil.VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -144,9 +163,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PET;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.OWNER_NAME_DESC_AMY
-                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY + CommandTestUtil.OWNER_NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
-                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.OWNER_NAME_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
+                + CommandTestUtil.OWNER_NAME_DESC_AMY
+                + CommandTestUtil.TAG_DESC_FRIEND + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
+                + CommandTestUtil.OWNER_NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.OWNER_NAME_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND;
 
         EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
@@ -163,15 +185,19 @@ public class EditCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PET;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.PHONE_DESC_BOB;
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_PHONE_DESC
+                + CommandTestUtil.PHONE_DESC_BOB;
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder()
+                .withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + CommandTestUtil.OWNER_NAME_DESC_BOB + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.ADDRESS_DESC_BOB
+        userInput = targetIndex.getOneBased() + CommandTestUtil.OWNER_NAME_DESC_BOB
+                + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.ADDRESS_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB;
-        descriptor = new EditPetDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).withOwnerName(CommandTestUtil.VALID_OWNER_NAME_BOB)
+        descriptor = new EditPetDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB)
+                .withOwnerName(CommandTestUtil.VALID_OWNER_NAME_BOB)
                 .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);

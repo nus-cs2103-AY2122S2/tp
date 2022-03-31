@@ -331,7 +331,8 @@ public class PresentAttendanceCommandTest {
             DESC_WITH_TRANSPORT_ARRANGEMENT);
 
         // same values -> returns true
-        PresentAttendanceCommand.PresentAttendanceDescriptor copyDescriptor = new PresentAttendanceCommand.PresentAttendanceDescriptor(DESC_WITH_TRANSPORT_ARRANGEMENT);
+        PresentAttendanceCommand.PresentAttendanceDescriptor copyDescriptor =
+                new PresentAttendanceCommand.PresentAttendanceDescriptor(DESC_WITH_TRANSPORT_ARRANGEMENT);
         PresentAttendanceCommand commandWithSameValues = new PresentAttendanceCommand(INDEX_FIRST_PET, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 

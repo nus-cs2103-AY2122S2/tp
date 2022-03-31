@@ -1,8 +1,7 @@
 package woofareyou.model;
 
-import static woofareyou.testutil.Assert.assertThrows;
-
 import org.junit.jupiter.api.Test;
+
 import woofareyou.testutil.Assert;
 
 public class UserPrefsTest {

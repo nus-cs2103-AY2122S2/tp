@@ -15,6 +15,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.commons.util.FilterUtil;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.Model;
@@ -26,7 +27,6 @@ import woofareyou.model.filter.OwnerNameContainsFilterWordPredicate;
 import woofareyou.model.filter.TagContainsFilterWordPredicate;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.PetBuilder;
-import woofareyou.commons.core.Messages;
 import woofareyou.testutil.TypicalPets;
 
 public class FilterCommandTest {

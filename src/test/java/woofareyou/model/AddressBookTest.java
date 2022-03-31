@@ -7,7 +7,6 @@ import static woofareyou.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_ADDRESS_BOBA;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,8 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import woofareyou.model.pet.Pet;
 import woofareyou.model.pet.exceptions.DuplicatePetException;
-import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.Assert;
+import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.TypicalPets;
 
 public class AddressBookTest {

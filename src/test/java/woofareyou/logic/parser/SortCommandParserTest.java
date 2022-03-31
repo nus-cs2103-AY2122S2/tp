@@ -4,8 +4,8 @@ import static woofareyou.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.jupiter.api.Test;
 
-import woofareyou.logic.commands.SortCommand;
 import woofareyou.commons.core.Messages;
+import woofareyou.logic.commands.SortCommand;
 
 
 public class SortCommandParserTest {
@@ -16,7 +16,8 @@ public class SortCommandParserTest {
      */
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -24,6 +25,7 @@ public class SortCommandParserTest {
      */
     @Test
     public void parse_invalidArg_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 }

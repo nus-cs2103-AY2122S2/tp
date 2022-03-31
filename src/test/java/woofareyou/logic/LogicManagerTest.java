@@ -1,7 +1,6 @@
 package woofareyou.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,8 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.commands.CommandResult;
+import woofareyou.logic.commands.CommandTestUtil;
 import woofareyou.logic.commands.ListCommand;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
@@ -23,10 +24,8 @@ import woofareyou.model.pet.Pet;
 import woofareyou.storage.JsonAddressBookStorage;
 import woofareyou.storage.JsonUserPrefsStorage;
 import woofareyou.storage.StorageManager;
-import woofareyou.testutil.PetBuilder;
-import woofareyou.commons.core.Messages;
-import woofareyou.logic.commands.CommandTestUtil;
 import woofareyou.testutil.Assert;
+import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.TypicalPets;
 
 public class LogicManagerTest {
@@ -76,7 +75,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.OWNER_NAME_DESC_AMY
+        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
+                + CommandTestUtil.OWNER_NAME_DESC_AMY
                 + CommandTestUtil.ADDRESS_DESC_AMY;
         Pet expectedPet = new PetBuilder(TypicalPets.AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

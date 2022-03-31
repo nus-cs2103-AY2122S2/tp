@@ -2,7 +2,6 @@ package woofareyou.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static woofareyou.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,14 +9,15 @@ import java.util.List;
 
 import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.exceptions.CommandException;
+import woofareyou.logic.parser.CliSyntax;
 import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
 import woofareyou.model.pet.Pet;
+import woofareyou.testutil.Assert;
 import woofareyou.testutil.EditPetDescriptorBuilder;
 import woofareyou.testutil.PresentAttendanceDescriptorBuilder;
-import woofareyou.logic.parser.CliSyntax;
-import woofareyou.testutil.Assert;
+
 
 /**
  * Contains helper methods for testing commands.
@@ -76,7 +76,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     // '!' not allowed in ownerNames
     public static final String INVALID_OWNER_NAME_DESC = " " + CliSyntax.PREFIX_OWNER_NAME + "bob!yahoo";
-    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS;
+    // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
