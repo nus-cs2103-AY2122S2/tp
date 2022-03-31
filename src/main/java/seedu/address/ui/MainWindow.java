@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -148,6 +149,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML void handleView(Student student) {
+        ViewWindow viewWindow = new ViewWindow(student);
+        viewWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -183,11 +189,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isView()) {
+                handleView(commandResult.getStudent());
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
 
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());

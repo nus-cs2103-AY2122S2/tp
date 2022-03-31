@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lab.Lab;
-import seedu.address.model.student.exceptions.InvalidLabStatusException;
+import seedu.address.model.lab.exceptions.InvalidLabStatusException;
 
 /**
  * Jackson-friendly version of {@link Lab}.

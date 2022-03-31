@@ -36,7 +36,7 @@ public class FilterCommand extends Command {
         if (!model.hasLab(toFilter)) {
             throw new CommandException(String.format(MESSAGE_LAB_NOT_FOUND, toFilter.labNumber));
         }
-        model.updateFilteredStudentList(predicate);
+        model.addOnFilteredStudentList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
     }

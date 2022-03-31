@@ -23,12 +23,14 @@ public class StudentHasLabPredicate implements Predicate<Student> {
     }
 
     @Override
-    public boolean test(Student student) {
-        if (!student.getLabs().contains(lab)) { // student does not have lab -> return false
+    public boolean test(Student studentToTest) {
+        LabList studentToTestLabs = studentToTest.getLabs();
+
+        if (!studentToTestLabs.contains(lab)) { // student does not have lab -> return false
             return false;
         } else { // student has lab -> check if labStatus is same
-            Lab labForStudent = student.getLabs().getLab(lab);
-            return labForStudent.equals(lab);
+            Lab labForStudent = studentToTestLabs.getLab(lab);
+            return labForStudent.hasSameLabStatus(lab);
         }
 
     }

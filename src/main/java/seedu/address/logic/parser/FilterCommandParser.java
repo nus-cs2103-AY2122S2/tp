@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LABSTATUS;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lab.Lab;
+import seedu.address.model.lab.LabMark;
 import seedu.address.model.lab.LabStatus;
 import seedu.address.model.lab.StudentHasLabPredicate;
 
@@ -30,10 +31,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        Lab lab = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
+        Lab labToFilter = ParserUtil.parseLab(argMultimap.getValue(PREFIX_LAB).get());
         LabStatus labStatus = ParserUtil.parseLabStatus(argMultimap.getValue(PREFIX_LABSTATUS).get());
 
-        return new FilterCommand(new StudentHasLabPredicate(lab.of(labStatus)));
+        labToFilter = labToFilter.of(labStatus, new LabMark("0"));
+
+        return new FilterCommand(new StudentHasLabPredicate(labToFilter));
 
     }
 

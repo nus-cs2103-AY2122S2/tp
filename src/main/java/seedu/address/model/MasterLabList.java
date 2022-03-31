@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.LabList;
-import seedu.address.model.student.exceptions.LabNotFoundException;
+import seedu.address.model.lab.exceptions.LabNotFoundException;
 
 public class MasterLabList extends LabList {
 

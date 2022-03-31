@@ -44,7 +44,8 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Add, edit, delete students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
+    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter)
+    - [View student details](#view-student-details--view)
 
 - [Manage labs](#lab-related-features)
     - [Add labs](#adding-a-lab--labadd)
@@ -108,12 +109,21 @@ Format: `clear`
 #### Filter (by status of individual labs) : `filter`
 Filters students based on the status of their lab tags. LAB_NUMBER must be a positive integer.
 
+Multiple filters can be applied in a conjunctional manner by executing the filter command multiple times
+
+Using the `list` command clears all filters that are currently applied
+
 LAB_STATUS:
 * Unsubmitted = u
 * Submitted = s
 * Graded = g
 
 Format: `filter l/LAB_NUMBER s/LAB_STATUS`
+
+#### View student details : `view`
+View a student's details from the TAddressBook. INDEX must be a positive integer 1, 2, 3...
+
+Format: `view INDEX`
 
 ### Lab-related features
 
@@ -154,6 +164,7 @@ In which case, if the user wants to fix the data JSON, the user should exit the 
 
 ## Command summary
 
+
 | Action              | Format, Examples                                                                                                                                        |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**             | `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` |
@@ -162,6 +173,7 @@ In which case, if the user wants to fix the data JSON, the user should exit the 
 | **Edit**            | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
 | **Filter**          | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`                                                                                           |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                              |
+| **View**            | `view INDEX`                                                                                                                                            |
 | **Add lab**         | `labadd l/LAB_NUMBER`                                                                                                                                   |
 | **Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`                                                                                                               |
 | **Remove lab**      | `labrm l/LAB_NUMBER`                                                                                                                                    |

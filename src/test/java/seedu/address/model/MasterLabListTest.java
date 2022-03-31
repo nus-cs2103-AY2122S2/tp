@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lab.Lab;
-import seedu.address.model.student.exceptions.LabNotFoundException;
+import seedu.address.model.lab.exceptions.LabNotFoundException;
 
 class MasterLabListTest {
 

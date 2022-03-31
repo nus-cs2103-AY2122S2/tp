@@ -150,6 +150,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addOnFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasLab(Lab lab) {
             throw new AssertionError("This method should not be called.");
         }

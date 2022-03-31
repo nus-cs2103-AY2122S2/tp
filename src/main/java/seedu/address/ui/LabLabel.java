@@ -3,7 +3,7 @@ package seedu.address.ui;
 
 import javafx.scene.control.Label;
 import seedu.address.model.lab.Lab;
-import seedu.address.model.student.exceptions.InvalidLabStatusException;
+import seedu.address.model.lab.exceptions.InvalidLabStatusException;
 
 public class LabLabel extends Label {
 
