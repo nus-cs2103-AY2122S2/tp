@@ -23,6 +23,7 @@ later.">
   - [Editing Medical Information: `edit`](#editing-medical-information-edit)
   - [Adding Consultation Information: `add t/consultation`](#adding-consultation-information-add-tconsultation)
   - [Viewing Past Consultations: `view t/consultation`](#viewing-past-consultations-view-tconsultation)
+  - [Editing Consultation Information: `edit`](#editing-consultation-information-edit)
   - [Adding Prescription: `add t/prescription`](#adding-prescription-add-tprescription)
   - [Viewing Prescription: `view t/prescription`](#viewing-prescription-view-tprescription)
   - [Adding Test Result: `add t/test`](#adding-test-result-add-ttest)
@@ -183,6 +184,18 @@ Format: `view t/consultation i/NRIC`
 
 Examples:
 * `view t/consultation i/S1234567L`
+
+### Editing Consultation Information: `edit`
+
+Edits an existing consultation entry in MedBook when a list of consultation entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified.
+
+Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
+
+Examples:
+* `view t/consultation` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
+
+
 
 ### Adding Prescription: `add t/prescription`
 
