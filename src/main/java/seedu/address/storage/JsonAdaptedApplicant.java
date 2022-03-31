@@ -67,7 +67,7 @@ class JsonAdaptedApplicant {
         age = source.getAge().value;
         address = source.getAddress().value;
         gender = source.getGender().value;
-        hiredStatus = source.getStatus().toString();
+        hiredStatus = source.getStatus().getValue();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

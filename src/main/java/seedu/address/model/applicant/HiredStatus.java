@@ -24,8 +24,12 @@ public class HiredStatus {
         if (value.equals("Available")) {
             return value;
         } else {
-            return "Hired as" + value;
+            return "Hired as " + value;
         }
+    }
+
+    public String getValue() {
+        return this.value;
     }
 
     /**

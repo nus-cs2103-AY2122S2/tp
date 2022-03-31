@@ -223,7 +223,19 @@ public class Position {
             requirementString.append(" | ");
         }
 
-        return positionName.positionName + "," + description.descriptionText + "," + positionOpenings.toString()
-                + "," + positionOffers.toString() + "," + requirementString;
+        return positionName.positionName + "," + escapeSpecialCharacters(description.descriptionText) + ","
+                + positionOpenings.toString() + "," + positionOffers.toString() + "," + requirementString;
+    }
+
+    /**
+     * Eliminates special characters from csv string
+     */
+    private String escapeSpecialCharacters(String data) {
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
     }
 }
