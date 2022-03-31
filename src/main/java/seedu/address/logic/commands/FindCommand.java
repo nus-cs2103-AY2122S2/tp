@@ -17,14 +17,18 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+    public static final String INVALID_ATTRIBUTE_FIELD = "The provided attribute field to search by is invalid! \n"
+            + "Note: Searchable attribute fields include `appstatus`, `avail`, `all`, `course`, `email`, "
+            + "`intstatus`, `name`, `phone`, `remark`, `seniority`, `studentid`.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all candidates containing any of "
             + "the specified keywords (case-insensitive) in the specified attribute field.\n"
-            + "Parameters: " + PREFIX_KEYWORD + "KEYWORD [" + PREFIX_KEYWORD + "ANOTHER_KEYWORD]... ["
+            + "Parameters: " + PREFIX_KEYWORD + "KEYWORD [" + PREFIX_KEYWORD + "MORE_KEYWORDS]... ["
             + PREFIX_FIELD + "ATTRIBUTE_FIELD]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_KEYWORD + "alice " + PREFIX_KEYWORD + "charlie "
             + PREFIX_FIELD + "name\n"
             + "Note: Searchable attribute fields include `appstatus`, `avail`, `all`, `course`, `email`, "
-            + "intstatus`, `name`, `phone`, `remark`, `seniority`, `studentid`.";
+            + "`intstatus`, `name`, `phone`, `remark`, `seniority`, `studentid`.";
 
     private final ContainsKeywordsPredicate predicate;
 
