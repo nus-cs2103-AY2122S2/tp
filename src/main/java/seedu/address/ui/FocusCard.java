@@ -49,7 +49,7 @@ public class FocusCard extends UiPart<Region> {
     private static final String NO_REMARK_MESSAGE = "No remark added!";
     private static final String EMPTY_MESSAGE = " ";
 
-    private static final int OFFSET = 65;
+    private static final int OFFSET = 26;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -213,7 +213,7 @@ public class FocusCard extends UiPart<Region> {
             initials.append(temp[0].charAt(0));
         }
 
-        stackPane.setStyle(CHANGE_COLOUR + COLORS[temp[0].toUpperCase().charAt(0) - OFFSET]);
+        stackPane.setStyle(CHANGE_COLOUR + COLORS[temp[0].charAt(0) % OFFSET]);
 
         Circle circle = new Circle();
         circle.setRadius(60);
