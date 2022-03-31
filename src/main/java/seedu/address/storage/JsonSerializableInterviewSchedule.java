@@ -20,7 +20,8 @@ import seedu.address.model.interview.Interview;
 class JsonSerializableInterviewSchedule {
 
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
-
+    public static final String MESSAGE_CONFLICTING_INTERVIEW =
+            "Interviews list contains conflicting interview timeslots";
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
 
     /**
@@ -52,6 +53,9 @@ class JsonSerializableInterviewSchedule {
             Interview interview = jsonAdaptedInterview.toModelType();
             if (interviewSchedule.hasCandidate(interview)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INTERVIEW);
+            }
+            if (interviewSchedule.hasConflictingInterview(interview)) {
+                throw new IllegalValueException(MESSAGE_CONFLICTING_INTERVIEW);
             }
             interviewSchedule.addInterview(interview);
         }

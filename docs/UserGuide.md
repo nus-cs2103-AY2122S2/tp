@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to professors for managing
-the interview scheduling process of candidates applying to be undergraduate/graduate Teaching Assistants (TA). 
+the interview scheduling process of candidates applying to be undergraduate Teaching Assistants (TA). 
 Professors will be able to access the candidates’ application data easily and review their general availability for 
 scheduling interviews during office hours.
 TAlent Assistant™ is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a 
@@ -28,22 +28,24 @@ faster than traditional GUI applications.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * **`list`** : Lists all candidates.
 
     * **`add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3`** Adds a new candidate into the system.
    
-    * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate in the system.
+    * **`edit 1 c/Computer Science yr/3 avail/1 ...`** Edits the first candidate displayed in the system.
 
-    * **`delete 1`** : Deletes the first candidate in the system.
+    * **`delete 1`** : Deletes the first candidate displayed in the system.
 
-    * **`find k/Alex f/name`** : Searches for all candidate with name containing “alex" (case-insensitive).
+    * **`find k/Alex f/name`** : Searches for all candidates with name containing “alex" (case-insensitive).
 
     * **`sort s/name`** : Sorts all candidates by name in ascending alphabetical order (i.e. A-Z).
     
     * **`view today`** : Filters all interviews to display only interviews scheduled today (if any).
+   
+    * **`remark 1 r/a good candidate`** : Adds a remark to the first candidate displayed in the system.
    
     * **`schedule add candidate/1 at/05-05-2022 10:00`** : Schedules the first candidate for an interview at 5 May 2022 10AM.
 
@@ -68,11 +70,11 @@ faster than traditional GUI applications.
 
 * **Candidates List** : Bottom leftmost panel displays the list of candidates in the system, alongside some key information.
 
-* **Candidate Profile** : Bottom middle panel brings up a focused view of the candidate's profile when the related command is entered.
+* **Candidate Profile** : Bottom middle panel brings up a focused view of the candidate's profile when the related `focus` command is entered.
 
 * **Scheduled Interviews** : Bottom rightmost panel displays the list of scheduled interviews.
 
-Commands that affect the display of information within each of these panels is described below.
+Features relating to the display of information within these panels are described below.
 
 </div>
 
@@ -99,14 +101,14 @@ Commands that affect the display of information within each of these panels is d
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The following table lists some common abbreviations used in `ATTRIBUTE_FIELD`s.
+* The following table lists some common abbreviations used in the command prefixes or `ATTRIBUTE_FIELD`s.
 
-| `ATTRIBUTE_FIELD` | Refers to           |
-|-------------------|---------------------|
-| `is`              | interview status    |
-| `as`              | application status  |
-| `yr`              | seniority           |
-| `avail`           | availability        |
+| Abbreviation(s)     | Refer(s) to        |
+|---------------------|--------------------|
+| `is` or `intstatus` | interview status   |
+| `as` or `appstatus` | application status |
+| `yr`                | seniority          |
+| `avail`             | availability       |
 
 </div>
 
@@ -149,8 +151,6 @@ Format: `edit INDEX c/COURSE yr/YEAR [ATTRIBUTE_FIELD/VALUE]...`
 
 `ATTRIBUTE_FIELD` can take on the following values `id`, `name`, `email`, `phone`, `course`, `yr`, `as`, `avail`
 
-* `as` is short for `ApplicationStatus`.
-
 </div>
 
 * Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
@@ -168,6 +168,7 @@ Displays all candidates found in the system.
 
 Format: `list`
 
+
 ### Finding candidates by keyword(s) search: `find`
 
 Finds and lists candidates whose attribute field(s) contain(s) any of the given keyword(s).
@@ -179,10 +180,10 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
 **:information_source: Notes about the find format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values 
-`as`, `course`, `email`, `is`, `name`, `phone`, `yr`, `id`, `all`, `avail`
+`appstatus`, `course`, `email`, `intstatus`, `name`, `phone`, `seniority`, `studentid`, `all`, `avail`
 
 Note: 
-`yr` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
+`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
 `avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
 
 </div>
@@ -196,6 +197,7 @@ Note:
 * Candidates matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
   e.g. `k/Jane k/Doe f/name` will return candidates with name e.g. `Jane Koe`, `John Doe`
 * If multiple `ATTRIBUTE_FIELD`s are provided, only the last field will be used.
+* If no `ATTRIBUTE_FIELD` is provided, the search will be conducted across all fields by default.
 
 Examples:
 * `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`
@@ -213,7 +215,7 @@ Format: `sort s/ATTRIBUTE_FIELD`
 **:information_source: Notes about the edit format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values
-`as`, `course`, `email`, `is`, `name`, `phone`, `yr`, `id`
+`appstatus`, `course`, `intstatus`, `name`, `seniority`, `studentid`
 
 </div>
 
@@ -222,7 +224,7 @@ Format: `sort s/ATTRIBUTE_FIELD`
   (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
-Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `id`).
+Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `studentid`).
 1. (`Ben`, `A5588565L`)
 2. (`Alice`, `A2344567B`)
 3. (`Charlie`, `A0188565L`)
@@ -232,36 +234,32 @@ Let's reference a default sample list of unique candidates with attribute fields
 2. (`Ben`, `A5588565L`)
 3. (`Charlie`, `A0188565L`)
 
-`sort s/id` returns candidates sorted by name in the following order:
+`sort s/studentid` returns candidates sorted by student id in the following order:
 1. (`Charlie`, `A0188565L`)
 2. (`Alice`, `A2344567B`)
 3. (`Ben`, `A5588565L`)
 
-### Viewing scheduled interviews `view`
 
-Returns the list of scheduled interviews within the specified time period.
+### Updating a candidate's remarks: `remark`
 
-Format: `view TIME_PERIOD`
+Updates the `remark` field of a candidate to the user input keyed in.
+
+Format: `remark INDEX r/REMARK`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the edit format:**<br>
 
-`TIME_PERIOD` can take on the following values `all`, `today`, `week`, `month`
+`INDEX` must be non-negative
 
 </div>
 
-* The attribute field is case-insensitive. e.g. `ALL` is equivalent to `all`
-* Scheduled interviews are automatically sorted from earliest to latest
+* To remove the remark of the first candidate displayed in the system, the user can simply key in `remark 1 r/`, 
+which will update the remark of the candidate to be empty.
 
 Examples:
-
-| Example command | Expected Behaviour                                                               |
-|-----------------|----------------------------------------------------------------------------------|
-| `view all`      | returns all scheduled interviews still in system whether in the past or upcoming |
-| `view today`    | returns all scheduled interviews on the same date as the current time            |
-| `view week`     | returns all upcoming scheduled interviews within the next 7 days                 |
-| `view month`    | returns all upcoming scheduled interviews within the next month                  |
+* `remark 1 r/a good candidate` Updates the candidate's remark field to reflect 'a good candidate'.
+* `remark 1 r/` Removes the candidate's remark field to reflect ''.
 
 ### Deleting a candidate : `delete`
 
@@ -318,7 +316,7 @@ Format: `schedule edit SCHEDULE_INDEX at/DATE_TIME`
 * `DATE_TIME` must not be earlier than the present date and time.
 
 Examples:
-* `view` followed by `schedule edit 2 at/06-06-2022 15:00` reschedules the second interview in the interview schedule
+* `view all` followed by `schedule edit 2 at/06-06-2022 15:00` reschedules the second interview in the interview schedule
   to 6 June 2022 3PM.
 
 ### Deleting an interview: `schedule delete`
@@ -332,7 +330,33 @@ Format: `schedule delete SCHEDULE_INDEX`
 * The schedule index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `view` followed by `schedule delete 2` deletes the second interview in the interview schedule.
+* `view all` followed by `schedule delete 2` deletes the second interview in the interview schedule.
+
+### Viewing scheduled interviews `view`
+
+Returns the list of scheduled interviews within the specified time period.
+
+Format: `view TIME_PERIOD`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit format:**<br>
+
+`TIME_PERIOD` can take on the following values `all`, `today`, `week`, `month`
+
+</div>
+
+* The attribute field is case-insensitive. e.g. `ALL` is equivalent to `all`
+* Scheduled interviews are automatically sorted from earliest to latest
+
+Examples:
+
+| Example command | Expected Behaviour                                                               |
+|-----------------|----------------------------------------------------------------------------------|
+| `view all`      | returns all scheduled interviews still in system whether in the past or upcoming |
+| `view today`    | returns all scheduled interviews on the same date as the current time            |
+| `view week`     | returns all upcoming scheduled interviews within the next 7 days                 |
+| `view month`    | returns all upcoming scheduled interviews within the next month                  |
 
 ## Miscellaneous commands
 
@@ -387,6 +411,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **Edit**   | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [c/COURSE] [yr/YEAR] [avail/AVAILABILITY] [as/APPLICATION_STATUS]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                             |
 | **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                   |
 | **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                               |
+| **Remark** | `remark INDEX r/REMARKS`<br> e.g., `remark 1 r/a good candidate`                                                                                                                               |
 
 ### Candidate Profile
 | Action    | Format, Examples |
@@ -399,7 +424,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
 | **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
 | **Delete interview**          | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                        |
-| **View scheduled interviews** | `view TIME PERIOD` <br> e.g., `view all`, `view today`                                                 |
+| **View scheduled interviews** | `view TIME_PERIOD` <br> e.g., `view all`, `view today`                                                 |
 
 ### Miscellaneous commands / Help
 | Action    | Format, Examples |

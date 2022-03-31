@@ -112,6 +112,8 @@ public class FocusCard extends UiPart<Region> {
             phone.setText(EMPTY_MESSAGE);
             email.setText(EMPTY_MESSAGE);
             course.setText(EMPTY_MESSAGE);
+            remark.setText(EMPTY_MESSAGE);
+
         } else {
             this.candidate = candidate;
             this.interview = interview;
@@ -120,6 +122,7 @@ public class FocusCard extends UiPart<Region> {
             phone.setText(candidate.getPhone().value);
             email.setText(candidate.getEmail().value);
             course.setText(candidate.getCourse().course + ", " + SENIORITY_VALUE + candidate.getSeniority().seniority);
+            remark.setText("Remarks (if any): " + candidate.getRemark().value);
             setProfilePicture(candidate.getName());
             setApplicationStatus(candidate.getApplicationStatus());
             setInterviewStatus(candidate.getInterviewStatus());

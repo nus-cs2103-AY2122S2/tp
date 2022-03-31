@@ -132,4 +132,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return candidates.hashCode();
     }
+
+    public void resetAllScheduledStatus() {
+        candidates.resetScheduledStatus();
+    }
 }

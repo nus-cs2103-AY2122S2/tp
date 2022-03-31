@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Remark;
+import seedu.address.model.interview.Interview;
 
 /**
  * Changes the remark of an existing candidate in the address book.
@@ -47,6 +49,7 @@ public class RemarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Candidate> lastShownList = model.getFilteredCandidateList();
+        List<Interview> interviewSchedule = model.getFilteredInterviewSchedule();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
@@ -68,8 +71,17 @@ public class RemarkCommand extends Command {
 
         model.setCandidate(candidateToEdit, editedCandidate);
         model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
+        for (int i = 0; i < interviewSchedule.size(); i++) {
+            if (candidateToEdit.equals(interviewSchedule.get(i).getCandidate())) {
+                Interview interviewToUpdate = interviewSchedule.get(i);
+                Interview updatedInterview = new Interview(editedCandidate, interviewToUpdate.getInterviewDateTime());
+                model.updateInterviewCandidate(interviewToUpdate, updatedInterview);
+            }
+        }
+        model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
-        return new CommandResult(generateSuccessMessage(editedCandidate));
+        return new CommandResult(generateSuccessMessage(editedCandidate),
+                false, false, false, -1, true, index.getZeroBased());
     }
 
     /**

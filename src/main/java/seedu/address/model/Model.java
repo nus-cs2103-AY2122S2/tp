@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -154,5 +155,9 @@ public interface Model {
 
     void updateInterviewCandidate(Interview target, Interview editedInterview);
 
-    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException;
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException;;
+
+    void resetAllScheduledStatus();
+
+    List<Candidate> getExpiredInterviewCandidates();
 }

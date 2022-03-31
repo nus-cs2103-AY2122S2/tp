@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FocusCommand;
+import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
@@ -214,7 +215,7 @@ public class MainWindow extends UiPart<Stage> {
                 focusListPanelPlaceholder.getChildren().add(focusCard.getRoot());
             }
         } catch (Exception e) {
-            throw new CommandException(DeleteCommand.MESSAGE_USAGE);
+            return;
         }
     }
 
@@ -265,6 +266,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Methods where we need to execute the command to get the Index of the Candidate to refresh the panel
+     */
+    public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute(commandText);
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        if (focusListPanel.getCandidate().looseEqual(logic
+                .getFilteredCandidateList()
+                .get(commandResult.getEditIndex()))) {
+            executeCommand(FocusCommand.COMMAND_WORD + " "
+                    + String.valueOf(commandResult.getEditIndex() + 1));
+        }
+        return commandResult;
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -274,31 +290,16 @@ public class MainWindow extends UiPart<Stage> {
             int editFlag = -1;
 
             if (commandText.contains(DeleteScheduleCommand.COMMAND_WORD)) {
-                CommandResult commandResult = logic.execute(commandText);
-                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-                if (focusListPanel.getCandidate().looseEqual(logic
-                        .getFilteredCandidateList()
-                        .get(commandResult.getEditIndex()))) {
-                    executeCommand(FocusCommand.COMMAND_WORD + " "
-                            + String.valueOf(commandResult.getEditIndex() + 1));
-                }
-                return commandResult;
+                return executeCommandThenRefresh(commandText);
+            } else if (commandText.contains(RemarkCommand.COMMAND_WORD)) {
+                return executeCommandThenRefresh(commandText);
             } else if (commandText.contains(EditScheduleCommand.COMMAND_WORD)) {
-                CommandResult commandResult = logic.execute(commandText);
-                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-                if (focusListPanel.getCandidate().equals(logic
-                        .getFilteredCandidateList()
-                        .get(commandResult.getEditIndex()))) {
-                    executeCommand(FocusCommand.COMMAND_WORD + " "
-                            + String.valueOf(commandResult.getEditIndex() + 1));
-                }
-                return commandResult;
+                return executeCommandThenRefresh(commandText);
             } else if (commandText.contains(DeleteCommand.COMMAND_WORD)) {
                 handleDelete(commandText);
             } else if (commandText.contains(EditCommand.COMMAND_WORD)) {
                 editFlag = handleEdit(commandText, EDIT_COMMAND_INDEX);
             } else if (commandText.contains(AddScheduleCommand.COMMAND_WORD)) {
-                logger.info(commandText);
                 editFlag = handleEdit(commandText, ADD_SCHEDULE_COMMAND_INDEX);
             }
 
