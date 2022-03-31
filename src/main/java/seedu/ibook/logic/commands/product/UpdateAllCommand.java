@@ -88,6 +88,8 @@ public class UpdateAllCommand extends Command {
             }
         }
 
+        model.prepareIBookForChanges();
+
         StringBuilder updatedProductDescription = new StringBuilder();
         for (int i = 0; i < productsToUpdate.size(); i++) {
             Product productToUpdate = productsToUpdate.get(i);
@@ -97,7 +99,9 @@ public class UpdateAllCommand extends Command {
             updatedProductDescription.append(String.format(MESSAGE_UPDATED_PRODUCT, updatedProduct));
         }
 
+        model.saveIBookChanges();
         model.clearProductFilters();
+
         return new CommandResult(MESSAGE_UPDATE_ALL_PRODUCT_SUCCESS + updatedProductDescription);
     }
 

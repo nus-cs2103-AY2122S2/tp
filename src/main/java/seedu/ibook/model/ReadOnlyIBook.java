@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.ibook.model.product.Product;
 
 /**
- * Unmodifiable view of an ibook
+ * Unmodifiable view of an iBook.
  */
 public interface ReadOnlyIBook {
 

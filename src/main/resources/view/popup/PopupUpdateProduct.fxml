@@ -30,7 +30,7 @@
                  <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                  </padding>
-                 <Label text="Product" styleClass="title"/>
+                 <Label text="Product" styleClass="title" />
                  <HBox maxWidth="Infinity" spacing="20.0">
                     <VBox.margin>
                        <Insets top="20.0"/>
@@ -48,13 +48,21 @@
                     </VBox>
                     <VBox HBox.hgrow="ALWAYS">
                        <HBox spacing="3.0">
-                          <VBox.margin>
-                             <Insets/>
-                          </VBox.margin>
                           <Label styleClass="field-label" text="Category"/>
                           <Label alignment="CENTER" text="*" styleClass="alert"/>
                        </HBox>
                        <TextField fx:id="category" promptText="Noodles">
+                          <VBox.margin>
+                             <Insets top="5.0"/>
+                          </VBox.margin>
+                       </TextField>
+                    </VBox>
+                    <VBox HBox.hgrow="ALWAYS">
+                       <HBox spacing="3.0">
+                          <Label styleClass="field-label" text="Price"/>
+                          <Label alignment="CENTER" text="*" styleClass="alert"/>
+                       </HBox>
+                       <TextField fx:id="price" promptText="3.33">
                           <VBox.margin>
                              <Insets top="5.0"/>
                           </VBox.margin>
@@ -65,14 +73,28 @@
                     <VBox.margin>
                        <Insets top="30.0"/>
                     </VBox.margin>
-                    <HBox spacing="3.0">
-                       <Label styleClass="field-label" text="Price"/>
+                    <HBox maxWidth="Infinity" spacing="20.0">
+                       <VBox HBox.hgrow="ALWAYS">
+                          <HBox spacing="3.0">
+                             <Label styleClass="field-label" text="Discount Rate (X% Off)"/>
+                          </HBox>
+                          <TextField fx:id="discountRate" promptText="25%">
+                             <VBox.margin>
+                                <Insets top="5.0"/>
+                             </VBox.margin>
+                          </TextField>
+                       </VBox>
+                       <VBox HBox.hgrow="ALWAYS">
+                          <HBox spacing="3.0">
+                             <Label styleClass="field-label" text="Discount Start (X Days Before Expiry Date)"/>
+                          </HBox>
+                          <TextField fx:id="discountStart" promptText="2">
+                             <VBox.margin>
+                                <Insets top="5.0"/>
+                             </VBox.margin>
+                          </TextField>
+                       </VBox>
                     </HBox>
-                    <TextField fx:id="price" promptText="3.33">
-                       <VBox.margin>
-                          <Insets top="5.0"/>
-                       </VBox.margin>
-                    </TextField>
                  </VBox>
                  <VBox maxHeight="Infinity" VBox.vgrow="ALWAYS">
                     <VBox.margin>

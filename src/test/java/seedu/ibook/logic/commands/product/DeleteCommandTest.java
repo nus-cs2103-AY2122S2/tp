@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.product.DeleteCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;

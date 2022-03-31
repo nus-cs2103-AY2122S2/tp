@@ -28,10 +28,10 @@ public class UpdateItemCommand extends Command {
             + ": Updates the item identified by the index number used in the displayed list.\n"
             + "Parameters: INDEX (must be a positive integer pair separated by '"
             + CompoundIndex.SEPARATOR
-            + "')\n"
+            + "' at most " + Integer.MAX_VALUE + ")\n"
             + "Example: " + COMMAND_WORD + " 2" + CompoundIndex.SEPARATOR + "1";
 
-    public static final String MESSAGE_UPDATE_ITEM_SUCCESS = "Updated Item: %1$s";
+    public static final String MESSAGE_UPDATE_ITEM_SUCCESS = "Updated Item in %1$s:\n%2$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the iBook.";
 
@@ -69,22 +69,25 @@ public class UpdateItemCommand extends Command {
         }
 
         Item itemToUpdate = targetItemList.get(targetIndex.getZeroBasedSecond());
-        Item updatedItem = createUpdatedItem(itemToUpdate, updateItemDescriptor);
+        Item updatedItem = createUpdatedItem(targetProduct, itemToUpdate, updateItemDescriptor);
 
         if (!itemToUpdate.isSame(updatedItem) && targetProduct.hasItem(updatedItem)) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
 
+        model.prepareIBookForChanges();
         model.updateItem(targetProduct, itemToUpdate, updatedItem);
+        model.saveIBookChanges();
         model.updateFilteredItemListForProducts(PREDICATE_SHOW_ALL_ITEMS);
-        return new CommandResult(String.format(MESSAGE_UPDATE_ITEM_SUCCESS, updatedItem));
+        return new CommandResult(
+                String.format(MESSAGE_UPDATE_ITEM_SUCCESS, targetProduct.getName(), updatedItem));
     }
-
     /**
      * Creates and returns an {@code Item} with the details of {@code itemToUpdate}
      * updated with {@code updateItemDescriptor}.
      */
     private static Item createUpdatedItem(
+            Product product,
             Item itemToUpdate, UpdateItemDescriptor updateItemDescriptor) {
 
         assert itemToUpdate != null;
@@ -92,7 +95,7 @@ public class UpdateItemCommand extends Command {
         ExpiryDate updatedExpiryDate = updateItemDescriptor.getExpiryDate().orElse(itemToUpdate.getExpiryDate());
         Quantity updatedQuantity = updateItemDescriptor.getQuantity().orElse(itemToUpdate.getQuantity());
 
-        return new Item(updatedExpiryDate, updatedQuantity);
+        return new Item(product, updatedExpiryDate, updatedQuantity);
     }
 
     @Override

@@ -20,10 +20,6 @@ public class Description {
 
     public final String fullDescription;
 
-    private Description() {
-        fullDescription = "???";
-    }
-
     /**
      * Constructs a {@code Description}.
      *
@@ -43,6 +39,13 @@ public class Description {
      */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Checks if the description contains the keyword.
+     */
+    public boolean contains(Description keyword) {
+        return fullDescription.contains(keyword.toString());
     }
 
     @Override

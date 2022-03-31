@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.ibook.commons.exceptions.IllegalValueException;
 import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.item.Quantity;
 
 /**
@@ -41,7 +42,7 @@ class JsonAdaptedItem {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted product.
      */
-    public Item toModelType() throws IllegalValueException {
+    public ItemDescriptor toModelType() throws IllegalValueException {
         if (expiryDate == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
@@ -60,7 +61,7 @@ class JsonAdaptedItem {
         }
         final Quantity modelQuantity = new Quantity(quantity);
 
-        return new Item(modelExpiryDate, modelQuantity);
+        return new ItemDescriptor(modelExpiryDate, modelQuantity);
     }
 
 }

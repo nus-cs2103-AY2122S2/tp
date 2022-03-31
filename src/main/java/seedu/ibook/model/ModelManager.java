@@ -22,7 +22,7 @@ import seedu.ibook.model.product.filters.ProductFilter;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final IBook iBook;
+    private final ReversibleIBook reversibleIBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Product> filteredProducts;
     private final ProductFilter productFilter;
@@ -35,11 +35,11 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with iBook: " + iBook + " and user prefs " + userPrefs);
 
-        this.iBook = new IBook(iBook);
+        this.reversibleIBook = new ReversibleIBook(iBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredProducts = new FilteredList<>(this.iBook.getProductList());
-        productFilter = new ProductFilter();
 
+        filteredProducts = new FilteredList<>(this.reversibleIBook.getProductList());
+        productFilter = new ProductFilter();
         filteredProducts.setPredicate(productFilter);
     }
 
@@ -86,36 +86,38 @@ public class ModelManager implements Model {
 
     @Override
     public void setIBook(ReadOnlyIBook iBook) {
-        this.iBook.resetData(iBook);
+        this.reversibleIBook.reversibleResetData(iBook);
     }
 
     @Override
     public ReadOnlyIBook getIBook() {
-        return iBook;
+        return this.reversibleIBook;
     }
 
     //=========== Product =====================================================================================
+
     @Override
     public boolean hasProduct(Product product) {
         requireNonNull(product);
-        return iBook.hasProduct(product);
-    }
-
-    @Override
-    public void deleteProduct(Product target) {
-        iBook.removeProduct(target);
+        return reversibleIBook.hasProduct(product);
     }
 
     @Override
     public void addProduct(Product product) {
-        iBook.addProduct(product);
+        reversibleIBook.reversibleAddProduct(product);
         clearProductFilters();
     }
 
     @Override
-    public void setProduct(Product target, Product editedProduct) {
-        requireAllNonNull(target, editedProduct);
-        iBook.setProduct(target, editedProduct);
+    public void deleteProduct(Product target) {
+        reversibleIBook.reversibleRemoveProduct(target);
+    }
+
+    @Override
+    public void setProduct(Product target, Product updatedProduct) {
+        requireAllNonNull(target, updatedProduct);
+
+        reversibleIBook.reversibleSetProduct(target, updatedProduct);
     }
 
     //=========== Item ========================================================================================
@@ -123,19 +125,51 @@ public class ModelManager implements Model {
     @Override
     public void addItem(Product product, Item item) {
         requireAllNonNull(product, item);
-        iBook.addItem(product, item);
+        reversibleIBook.reversibleAddItem(product, item);
     }
 
     @Override
     public void deleteItem(Product targetProduct, Item target) {
         requireAllNonNull(targetProduct, target);
-        iBook.removeItem(targetProduct, target);
+        reversibleIBook.reversibleRemoveItem(targetProduct, target);
     }
 
     @Override
     public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
         requireAllNonNull(targetProduct, targetItem, updatedItem);
-        iBook.setItem(targetProduct, targetItem, updatedItem);
+        reversibleIBook.reversibleSetItem(targetProduct, targetItem, updatedItem);
+    }
+
+    //=========== Undo/Redo ===================================================================================
+
+    @Override
+    public void prepareIBookForChanges() {
+        reversibleIBook.prepareForChanges();
+    }
+
+    @Override
+    public void saveIBookChanges() {
+        reversibleIBook.saveChanges();
+    }
+
+    @Override
+    public boolean canUndoIBook() {
+        return reversibleIBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoIBook() {
+        return reversibleIBook.canRedo();
+    }
+
+    @Override
+    public void undoIBook() {
+        reversibleIBook.undo();
+    }
+
+    @Override
+    public void redoIBook() {
+        reversibleIBook.redo();
     }
 
     //=========== Filtered Product List Accessors =============================================================
@@ -217,7 +251,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return iBook.equals(other.iBook)
+        return reversibleIBook.equals(other.reversibleIBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredProducts.equals(other.filteredProducts);
     }

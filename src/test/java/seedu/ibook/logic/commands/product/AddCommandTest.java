@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
-import seedu.ibook.logic.commands.product.AddCommand;
+import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ReadOnlyIBook;
@@ -182,6 +182,36 @@ public class AddCommandTest {
         public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void prepareIBookForChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveIBookChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -218,6 +248,16 @@ public class AddCommandTest {
         public void addProduct(Product product) {
             requireNonNull(product);
             productsAdded.add(product);
+        }
+
+        @Override
+        public void prepareIBookForChanges() {
+
+        }
+
+        @Override
+        public void saveIBookChanges() {
+
         }
 
         @Override

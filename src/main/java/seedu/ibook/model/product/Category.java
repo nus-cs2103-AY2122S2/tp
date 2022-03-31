@@ -23,13 +23,6 @@ public class Category {
     public final String fullCategoryName;
 
     /**
-     * Constructs a {@code Category} representing no categorization.
-     */
-    private Category() {
-        fullCategoryName = DEFAULT_CATEGORY;
-    }
-
-    /**
      * Constructs a {@code Category}.
      *
      * @param categoryName A valid category name.
@@ -50,6 +43,12 @@ public class Category {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the category contains the keyword.
+     */
+    public boolean contains(Category keyword) {
+        return fullCategoryName.contains(keyword.toString());
+    }
 
     @Override
     public String toString() {

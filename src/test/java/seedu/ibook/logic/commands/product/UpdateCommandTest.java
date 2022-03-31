@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands;
+package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
-import seedu.ibook.logic.commands.product.UpdateCommand;
+import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
