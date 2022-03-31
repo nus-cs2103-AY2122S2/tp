@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditScheduleDescriptor;
@@ -52,9 +51,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         seedu.address.model.lineup.LineupName targetLineupName;
         Index index;
 
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
+        //if (!argMultimap.getPreamble().isEmpty()) {
+        //    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        //}
 
         if (argMultimap.getValue(PREFIX_LINEUP).isPresent()) {
             if (argMultimap.getValue(PREFIX_PLAYER).isPresent()) {
