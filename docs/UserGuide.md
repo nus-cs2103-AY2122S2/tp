@@ -492,6 +492,12 @@ Examples:
 
 ### 4.5 Schedule management
 
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* The indexes of bookings in schedule view is not meaning for deleting bookings. Using them will lead to unexpected behaviour.
+</div>
+
 #### 4.5.1 Schedule management command parameters
 The table below shows a list of command parameters that will be used for schedule management.
 
