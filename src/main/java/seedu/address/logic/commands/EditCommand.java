@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -67,8 +68,7 @@ public class EditCommand extends ByIndexByNameCommand {
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireAllNonNull(index, editPersonDescriptor);
 
         this.nameOfPersonToEdit = null;
         this.targetIndex = index;
@@ -81,8 +81,7 @@ public class EditCommand extends ByIndexByNameCommand {
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(FriendName name, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(name);
-        requireNonNull(editPersonDescriptor);
+        requireAllNonNull(name, editPersonDescriptor);
 
         this.nameOfPersonToEdit = name;
         this.targetIndex = null;
