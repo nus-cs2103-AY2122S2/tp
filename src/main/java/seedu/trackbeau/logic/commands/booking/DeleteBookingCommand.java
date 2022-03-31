@@ -12,6 +12,7 @@ import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.booking.Booking;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Deletes a Booking identified using it's displayed index from trackBeau.
@@ -52,7 +53,7 @@ public class DeleteBookingCommand extends Command {
             sb.append(bookingToDelete).append("\n");
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, sb));
+        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, sb), Panel.BOOKING_PANEL);
     }
 
     @Override

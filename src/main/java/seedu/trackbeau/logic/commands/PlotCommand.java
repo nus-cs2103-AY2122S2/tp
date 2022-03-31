@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Plots all charts.
@@ -19,6 +20,6 @@ public class PlotCommand extends Command {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
                 false, true,
                 true, true, true, true,
-            true, false);
+            true, Panel.NO_CHANGE);
     }
 }

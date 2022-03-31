@@ -20,7 +20,7 @@ import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
 import seedu.trackbeau.model.customer.Customer;
-
+import seedu.trackbeau.ui.Panel;
 
 
 /**
@@ -47,7 +47,7 @@ public class DeleteCustomerCommandTest {
         ModelManager expectedModel = new ModelManager(model.getTrackBeau(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
 
-        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class DeleteCustomerCommandTest {
         expectedModel.deleteCustomer(customerToDelete1);
         expectedModel.deleteCustomer(customerToDelete2);
 
-        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
@@ -120,7 +120,7 @@ public class DeleteCustomerCommandTest {
         expectedModel.deleteCustomer(customerToDelete);
         showNoCustomer(expectedModel);
 
-        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test

@@ -37,6 +37,7 @@ import seedu.trackbeau.model.customer.Phone;
 import seedu.trackbeau.model.customer.RegistrationDate;
 import seedu.trackbeau.model.customer.SkinType;
 import seedu.trackbeau.model.tag.Tag;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Edits the details of an existing customer in trackBeau.
@@ -101,7 +102,7 @@ public class EditCustomerCommand extends Command {
 
         model.setCustomer(customerToEdit, editedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer));
+        return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer), Panel.CUSTOMER_PANEL);
     }
 
     /**

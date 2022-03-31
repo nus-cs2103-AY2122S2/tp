@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Plots a Staff Chart that shows the favourite staffs amongst customers.
@@ -18,6 +19,6 @@ public class PlotStaffChartCommand extends Command {
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
                 false, true, false,
-                false, false, false, false, false);
+                false, false, false, false, Panel.NO_CHANGE);
     }
 }

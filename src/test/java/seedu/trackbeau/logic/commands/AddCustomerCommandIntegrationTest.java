@@ -13,6 +13,7 @@ import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.testutil.CustomerBuilder;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCustomerCommand}.
@@ -34,7 +35,7 @@ public class AddCustomerCommandIntegrationTest {
         expectedModel.addCustomer(validCustomer);
 
         assertCommandSuccess(new AddCustomerCommand(validCustomer), model,
-            String.format(AddCustomerCommand.MESSAGE_SUCCESS, validCustomer), expectedModel);
+            String.format(AddCustomerCommand.MESSAGE_SUCCESS, validCustomer), expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
