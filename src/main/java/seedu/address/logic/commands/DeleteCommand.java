@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1\n"
             + "Note: The candidate index number must be a valid non zero positive integer.";
 
-    public static final String MESSAGE_DELETE_CANDIDATE_SUCCESS = "Deleted candidate: %1$s";
+    public static final String MESSAGE_DELETE_CANDIDATE_SUCCESS = "Deleted candidate: \n%1$s";
 
     private final Index targetIndex;
 
