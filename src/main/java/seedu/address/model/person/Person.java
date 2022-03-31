@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
+
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -91,12 +93,21 @@ public class Person {
     }
 
     /**
-     * Removes the task at {@code index} from the list of tasks.
+     * Deletes the task at {@code index} from the list of tasks.
      *
-     * @param index the index of the task to be removed.
+     * @param index the index of the task to be deleted.
      */
-    public void removeTask(int index) {
-        taskList.removeTask(index);
+    public void deleteTask(Index index) {
+        taskList.deleteTask(index);
+    }
+
+    /**
+     * Deletes the {@code task} from the list of tasks.
+     *
+     * @param task the task to be deleted.
+     */
+    public void deleteTask(Task task) {
+        taskList.deleteTask(task);
     }
 
     /**
@@ -146,8 +157,17 @@ public class Person {
      * @return a copy of the person object.
      */
     public Person getCopy() {
+        TaskList copyOfTaskList = new TaskList();
+        for (Task task : getTaskList().getTaskList()) {
+            Task copyOfTask = new Task(task.getTaskName());
+            if (task.isTaskComplete()) {
+                copyOfTask.markComplete();
+            }
+            copyOfTaskList.addTask(copyOfTask);
+        }
+
         return new Person(getStudentId(), getName(), getModuleCode(), getPhone(),
-                getTelegramHandle(), getEmail(), getTaskList());
+                getTelegramHandle(), getEmail(), copyOfTaskList);
     }
 
     /**
@@ -202,13 +222,23 @@ public class Person {
             isEmailEqual = otherPerson.getEmail().equals(getEmail());
         }
 
+        boolean isTaskListEqual;
+
+        if (otherPerson.getTaskList() == null && getTaskList() == null) {
+            isTaskListEqual = true;
+        } else if (getTaskList() == null || otherPerson.getTaskList() == null) {
+            isTaskListEqual = false;
+        } else {
+            isTaskListEqual = otherPerson.getTaskList().equals(getTaskList());
+        }
+
         return otherPerson.getStudentId().equals(getStudentId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getModuleCode().equals(getModuleCode())
                 && isPhoneEqual
                 && isTelegramHandleEqual
                 && isEmailEqual
-                && otherPerson.getTaskList().equals(getTaskList());
+                && isTaskListEqual;
     }
 
     @Override

@@ -44,9 +44,24 @@ public class TelegramHandle {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TelegramHandle // instanceof handles nulls
-                && telegramHandle.equals(((TelegramHandle) other).telegramHandle)); // state check
+        if (other == this) { // short circuit if same object
+            return true;
+        }
+        if (!(other instanceof TelegramHandle)) { // target object is of different type
+            return false;
+        }
+
+        TelegramHandle targetObject = (TelegramHandle) other;
+
+        if (targetObject.telegramHandle == null && this.telegramHandle == null) {
+            return true;
+        } else if (targetObject.telegramHandle == null) {
+            return false;
+        } else if (this.telegramHandle == null) {
+            return false;
+        } else {
+            return telegramHandle.equals(targetObject.telegramHandle);
+        }
     }
 
     @Override

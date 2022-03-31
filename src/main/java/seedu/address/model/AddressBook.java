@@ -125,9 +125,37 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Deletes task with {@code index} belonging to {@code Person} with {@code studentId}.
+     *
+     * @param studentId the student id of the person whose task is to be deleted.
+     * @param index the index of the task to be deleted.
+     */
+    public void deleteTaskOfPerson(StudentId studentId, Index index) {
+        requireNonNull(studentId);
+        requireNonNull(index);
+
+        persons.deleteTaskOfPerson(studentId, index);
+    }
+
+    /**
+     * Deletes task assigned to any {@code Person} with {@code moduleCode}.
+     *
+     * @param moduleCode the module code of the person whose task is to be deleted.
+     * @param task the task to be deleted.
+     */
+    public void deleteTaskForAllInModule(ModuleCode moduleCode, Task task) {
+        requireNonNull(moduleCode);
+        requireNonNull(task);
+
+        persons.deleteTaskForAllInModule(moduleCode, task);
+    }
+
+
+
+    /**
      * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as done.
      *
-     * @param studentId the student id of the person who's task is to be marked.
+     * @param studentId the student id of the person whose task is to be marked.
      * @param index the task to be marked as done.
      */
     public void markTaskOfPerson(StudentId studentId, Index index) {
@@ -140,7 +168,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Marks task with {@code index} belonging to {@code Person} with {@code studentId} as undone.
      *
-     * @param studentId the student id of the person who's task is to be marked.
+     * @param studentId the student id of the person whose task is to be marked.
      * @param index the task to be marked as undone.
      */
     public void unmarkTaskOfPerson(StudentId studentId, Index index) {
@@ -176,8 +204,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        //return persons.asUnmodifiableObservableList().size() + " persons";
+        //TODO: refine later
+        StringBuilder sb = new StringBuilder();
+        for (Person p : getPersonList()) {
+            sb.append(p.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     @Override

@@ -72,7 +72,7 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 Adds a student to TAPA.
 
-Format: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
+**Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
 * The student’s matriculation number, name as well as module code are compulsory fields.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
@@ -98,6 +98,23 @@ Example:
     * The students named John and Mary (whose list indices are “10” and “20”) are deleted from TAPA.
 * `delete i/A0123456Z`
     * A student named John whose matriculation number is "A0123456Z" is deleted from TAPA.
+
+<br>
+
+### Deleting all students taking a particular module: `deleteModule`
+
+Deletes all students taking a particular module from TAPA.
+
+**Format**: `deleteModule m/MODULE_CODE`
+
+* All students who are taking the module with the module code specified after the `deleteModule` command will be removed from TAPA.
+* An error message will be displayed to the user if there are no students taking the specified module.
+
+**Example**:
+* `deleteModule m/CS2100`
+    * All students who are specified as taking CS2100 are deleted from TAPA.
+
+<br>
 
 ### Finding a student: `find`
 
@@ -160,7 +177,7 @@ Example:
 
 Edits a student's information in TAPA.
 
-Format: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
+**Format**: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
 * The index of the student to be edited is a compulsory field.
 * The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
@@ -217,6 +234,27 @@ Example:
     * Assigns assignment 1 to student with id AXXXXXXXR.
 * `assign m/CS2103T tn/assignment 1`
     * Assigns assignment 1 to students taking module CS2103T.
+
+<br>
+
+### Deleting previously assigned task: `deleteTask`
+
+Deletes a task from a particular student's list of tasks.
+
+Format: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
+
+* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
+* An error message will be displayed if the student with the given student ID does not exist.
+* An error message will be displayed if none of the students taking the module had previously been assigned the task with the given task name.
+* An error message will be displayed if none of the students are taking a module with the given module code.
+
+Example:
+* `deleteTask i/AXXXXXXXR idx/3`
+    * Deletes task at index 3 from the student's list of assigned task, provided that a task exists at that index.
+* `deleteTask m/cs2030 tn/Assignment 1`
+    * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
+
+<br>
 
 ### Viewing the completion status of a particular task: `progress`
 
@@ -277,13 +315,15 @@ Format: `exit`
 
 Action      | Format, Examples
 ------------|------------------
-**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [h/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
-**Delete**  | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> e.g., `delete 10`, `delete 10 20`, `delete i/AXXXXXXXR`
-**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> e.g., `find n/john`, `find i/AXXXXXXXR`, `find m/CS2103T`
-**Task**    | `task i/STUDENT_ID` <br> e.g., `task i/AXXXXXXXR`
-**Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> e.g., `mark i/AXXXXXXXR idx/1`
-**Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> e.g., `unmark i/AXXXXXXXR idx/1`
-**Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> e.g., `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
+**Add**     | `add i/MATRICULATION_NO n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
+**Delete**  | `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID` <br> Example: `delete 10` (or) `delete 10 20` (or) `delete i/AXXXXXXXR`
+**Delete Module**  | `deleteModule m/MODULE_CODE` <br> Example: `deleteModule m/CS2100`
+**Find**    | `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE` <br> Example: `find n/john` (or) `find i/AXXXXXXXR` (or) `find m/CS2103T`
+**Task**    | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
+**Mark**    | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`
+**Unmark**  | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`
+**Delete Task**| `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`  
+**Edit**    | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**   | `clear`
 **Archive** | `archive`
 **List**    | `list`
