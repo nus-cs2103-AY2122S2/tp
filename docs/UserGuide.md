@@ -296,10 +296,12 @@ Examples:
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
-|Parameter|Description|
-|---------|-----------|
-|||
-|`INDEX`|The index of the booking in the displayed list. It must be a valid positive index.|
+| Parameter             | Description                                                                                     |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| `INDEX`               | The index of the booking in the displayed list. It must be a valid positive index.              |
+| `CUSTOMERINDEX`       | The index of the customer in the displayed list. It must be a valid positive index.             |
+| `SERVICEINDEX`        | The index of the service in the displayed list. It must be a valid positive index.              |
+| `APPOINTMENTTIME `    | The date and time of the booking. It should follow dd-MM-yyyy HH:mm and be valid date and time. |
 
 ### 4.4 Statistics Management
 
@@ -373,10 +375,30 @@ Format: `plotMonthlyCustomer`
 
 Examples:
 * `plotMonthlyCustomer`
-   
-### 4.5 Miscellaneous
 
-#### 4.5.1 Viewing help : `help`
+### 4.5 Schedule management
+
+#### 4.5.1 Schedule management command parameters
+The table below shows a list of command parameters that will be used for schedule management.
+
+| Parameter | Description                                                            |
+|-----------|------------------------------------------------------------------------|
+| `DATE`    | The date of interest. Date should follow dd-MM-yyyy and be valid date. |
+
+#### 4.5.2 Viewing schedule: `schedule`
+Display the schedule of the week containing selected date.
+
+Format: `schedule date/DATE`
+
+Examples: 
+* `schedule date/10-10-2022`
+
+Example Usage: `schedule date/10-10-2022`
+![display schedule](images/user-guide/display_schedule.png)
+
+### 4.6 Miscellaneous
+
+#### 4.6.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -384,23 +406,23 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-#### 4.5.2 Clearing all entries : `clear`
+#### 4.6.2 Clearing all entries : `clear`
 
 Clears all entries from the application.
 
 Format: `clear`
 
-#### 4.5.3 Exiting the program : `exit`
+#### 4.6.3 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-#### 4.5.4 Saving the data
+#### 4.6.4 Saving the data
 
 TrackBeau data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-#### 4.5.5 Editing the data file
+#### 4.6.5 Editing the data file
 
 TrackBeau data are saved as a JSON file `[JAR file location]/data/trackbeau.json`. Advanced users are welcome to update data directly by editing that data file.
 
