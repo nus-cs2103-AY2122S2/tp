@@ -28,7 +28,7 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 
    * **`list`** : Lists all students.
 
-   * **`add`**`n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` : Adds a student named `James Ho` to the Address Book.
+   * **`add`**`n/James Ho e/jamesho@email.com g/jamesH tl/jamesho i/A0123456T` : Adds a student named `James Ho` to the Address Book.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
