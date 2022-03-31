@@ -130,7 +130,7 @@ A transaction also have compulsory and optional fields.
 | [List](#list-all-clients-list)                                | `list`                                                                                                                                                                |
 | [Sort](#sort-client-list-sort)                                | `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [desc]` <br> e.g., `sort n/ desc p/`, `sort b/ a/`                                             |
 | [Find](#find-client-by-keyword-find)                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            | 
-| [Delete Filtered](#delete-filtered-clients-deletefiltered)    | `deleteFiltered`                                                                                                                                                      |
+| [Clear Filtered](#clear-filtered-clients-clearfiltered)       | `clearFiltered`                                                                                                                                                       |
 | [Undo](#undo-last-modification-undo)                          | `undo`                                                                                                                                                                |
 | [Add Transaction](#add-transaction-addtransaction)            | `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE] [--paid]`                                                                                   |
 | [List Transaction](#list-all-transactions-listtransaction)    | `listTransaction`                                                                                                                                                     |
@@ -138,7 +138,9 @@ A transaction also have compulsory and optional fields.
 | [Delete Transaction](#delete-transaction-deletetransaction)   | `deleteTransaction INDEX_TRANSACTION`                                                                                                                                 |
 | [Pay Transaction](#pay-transaction-pay)                       | `pay INDEX_TRANSACTION`                                                                                                                                               | 
 | [Unpay Transaction](#unpay-transaction-unpay)                 | `unpay INDEX_TRANSACTION`                                                                                                                                             |
-| [Add Membership](#add-membership-addmembership)               | `addMembership INDEX m/MEMBERSHIP_NAME [d/DATE]`                                                                                                                      |
+| [Add Membership](#add-membership-addmembership)               | `addMembership INDEX m/TIER [d/DATE]`                                                                                                                                 |
+| [Remove Membership](#remove-membership-removemembership)      | `removeMembership INDEX`                                                                                                                                              |
+| [List Members](#list-members-listmembers)                     | `listMembers [TIER]`                                                                                                                                                  |
  | [Exit](#exit-program-exit)                                    | `exit`                                                                                                                                                                |
 
 ### Getting Help (`help`)
@@ -313,15 +315,15 @@ Examples:
 * `find bob` returns clients with attributes containing `bob` e.g. clients named `Sponge Bob` and `Bobs Doe`
 * `find kent ridge` returns clients with attributes containing `kent` or `ridge`. e.g. A client named `Clark Kent` and a client who lives at `123 Ridgeview Cres`.
 
-### Delete Filtered Clients (`deleteFiltered`)
+### Clear Filtered Clients (`clearFiltered`)
 
 Deletes the clients filtered after using the `find` function.
 
-Format: `deleteFiltered`
+Format: `clearFiltered`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* `deleteFiltered` deletes all the clients shown in the filtered client list.
+* `clearFiltered` deletes all the clients shown in the filtered client list.
 * Use [`find`](#find-client-by-keyword-find) to filter the clients to delete.
 * Otherwise, if the client list is not filtered, it acts like [`clear`](#delete-all-entries-clear).
 * When the client is deleted, all of its transactions are also deleted.
@@ -329,7 +331,7 @@ Format: `deleteFiltered`
 </div>
 
 Examples:
-* `find Bob` followed by `deleteFiltered` deletes all people named Bob. Alternatively, `find Bob | deleteFiltered` does the same thing.
+* `find Bob` followed by `clearFiltered` deletes all people named Bob. Alternatively, `find Bob | clearFiltered` does the same thing.
 
 ### Add Transaction (`addTransaction`)
 
@@ -439,22 +441,61 @@ Examples:
 
 Adds a membership to a specified user.
 
-Format: `addMembership INDEX m/MembershipName [d/Date]`
+Format: `addMembership INDEX m/TIER [d/Date]`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Adds a membership to the specified `INDEX`.
 * The index refers to the user at the index number displayed.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
-* The membership name has to be an alphanumeric string (no symbols, only number and letters).
+* The tier can be either Bronze,Silver or Gold. This is not case-sensitive.
 * The date has to be in the format 'YYYY-MM-DD'
 
 </div>
 
 Examples:
-* `addMembership 1 m/Glee Club d/2022-02-02`
-* `find Bob | addMembership 1 m/Glee Club` will add the membership to the first client that has Bob
+* `addMembership 1 m/Gold d/2022-02-02`
+* `find Bob | addMembership 1 m/Silver` will add the silver membership to the first client that has Bob
   in its' attributes.
+
+### Remove Membership (`removeMembership`)
+
+Removes a membership from the specified user.
+
+Format: `removeMembership INDEX`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Removes a membership from the specified `INDEX`.
+* The index refers to the user at the index number displayed.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
+* If the user has no membership, it simply does nothing.
+
+</div>
+
+Examples:
+* `removeMembership 1`
+* `find Bob | removeMembership` remove the membership from the first client that has Bob
+  in its' attributes.
+
+### List Members (`listMembers`)
+
+List all members belonging to the specified tier.
+
+Format: `listMembers [TIER]`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Lists all members belonging to the specified TIER.
+* The tier is optional. If no tier is specified, it simply lists all members.
+* The tier can be either Bronze,Silver or Gold. This is not case-sensitive.
+
+</div>
+
+Examples:
+* `listMembers gold` list all users with gold membership.
+* `addMembership 2 m/silver | listMembers` will add the silver membership to the second client displayed and then
+list all existing members.
 
 ### Undo Last Modification (`undo`)
 
