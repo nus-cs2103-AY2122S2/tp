@@ -175,7 +175,7 @@ players with such name exists.
 
 Examples:
 * `view P/` Displays all the players
-* `view P/Kelvin Darent` Displays all the players that have "Kelvin" or "Darent" in their name
+* `view P/Kelvin Darent` Displays all the players that have "Kelvin" **or** "Darent" in their name
 * `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is 
 greater than or equals to 80kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
@@ -227,7 +227,7 @@ together with a `date` that is in `dd/mm/yyyy`. The parameter `[NAMES_IN_SCHEDUL
 Examples:
 * `view S/` Displays all the schedules that are upcoming
 * `view S/drills` Displays all the upcoming schedules that have the name of "drills"
-* `view S/drills shooting` Displays all the upcoming schedules that have the name of "drills" or "shooting"
+* `view S/drills shooting` Displays all the upcoming schedules that have the name of "drills" **or** "shooting"
 * `view S/ a/all` Displays the all schedules which includes upcoming and archived schedules
 * `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules 
 * `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
