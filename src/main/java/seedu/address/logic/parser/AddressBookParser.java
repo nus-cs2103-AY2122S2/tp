@@ -23,7 +23,6 @@ import seedu.address.logic.commands.ResizeCommand;
 import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
 
 /**
  * Parses user input.
