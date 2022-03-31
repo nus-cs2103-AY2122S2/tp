@@ -14,15 +14,22 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window, meanwhile here are the commands "
             + "available for your use! \n"
-            + "1. add: Add User\n"
-            + "2. clear: Clear List\n"
-            + "3. delete: Delete User\n"
+            + "1. add: Adds a new User\n"
+            + "     Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cc/CLASS s/STATUS [act/ACTIVITIES] [act/MORE ACTIVITIES]\n"
+            + "2. clear: Clears List\n"
+            + "3. delete: Deletes a Student by their Index\n"
+            + "     Format: delete INDEX\n"
             + "4. edit: Edit User\n"
-            + "5. exit: Exit Program\n"
-            + "6. findactivity: Find User by Activity\n"
-            + "7. findstatus: Find User by Covid-19 Status\n"
-            + "8. help: Displays User Guide and commands to use\n"
-            + "9. list: Lists all users";
+            + "     Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITIES] [act/MORE ACTIVITIES]\n"
+            + "5. list: Lists all users\n"
+            + "6. findactivity: Find Students by their Activity\n"
+            + "     Format: findactivity ACTIVITY [MORE ACTIVITIES]\n"
+            + "7. findstatus: Find Students by their COVID-19 Status\n"
+            + "     Format: findstatus STATUS\n"
+            + "8. findclasscode: Find Students by their class\n"
+            + "     Format: findclasscode CLASS\n"
+            + "9. help: Displays User Guide and commands to use\n"
+            + "10. exit: Exit Program";
 
     @Override
     public CommandResult execute(Model model) {
