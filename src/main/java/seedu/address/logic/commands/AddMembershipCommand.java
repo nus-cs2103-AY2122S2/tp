@@ -22,7 +22,7 @@ public class AddMembershipCommand extends Command {
             + ": Add a membership to the client in the list as specified by the index. "
             + "There are 3 membership tiers: Bronze, Silver & Gold.\n"
             + "Parameters: "
-            + "INDEX (positive integer up to size of the list) "
+            + "INDEX (between 1 and 2147483647 inclusive) "
             + Membership.PREFIX + "MEMBERSHIP "
             + "[" + Membership.DATE_PREFIX + "DATE]\n"
             + "Example: " + COMMAND_WORD + " "

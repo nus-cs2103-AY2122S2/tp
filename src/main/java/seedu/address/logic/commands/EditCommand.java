@@ -33,7 +33,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edit the fields of the client in the list as specified by the index. "
             + "Existing values will be overwritten.\n"
-            + "Parameters: INDEX (positive integer up to size of the list) "
+            + "Parameters: INDEX (between 1 and 2147483647 inclusive) "
             + "[" + Name.PREFIX + "NAME] "
             + "[" + Phone.PREFIX + "PHONE] "
             + "[" + Email.PREFIX + "EMAIL] "
