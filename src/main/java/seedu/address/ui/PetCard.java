@@ -45,8 +45,6 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label diet;
     @FXML
-    private Label appointment;
-    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane attendanceTags;
@@ -56,6 +54,8 @@ public class PetCard extends UiPart<Region> {
     private FlowPane dietLabel;
     @FXML
     private FlowPane appLabel;
+    @FXML
+    private FlowPane appointment;
 
 
     /**
@@ -70,7 +70,6 @@ public class PetCard extends UiPart<Region> {
         phone.setText(pet.getPhone().value);
         address.setText(pet.getAddress().value);
         diet.setText(pet.getDiet().value);
-        appointment.setText(pet.getAppointment().value);
         pet.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -89,6 +88,7 @@ public class PetCard extends UiPart<Region> {
             });
         dietLabel.getChildren().add(DietLabel.createDietLabel(pet.getDiet()));
         appLabel.getChildren().add(AppointmentLabel.createAppointmentLabel(pet.getAppointment()));
+        appointment.getChildren().add(AppointmentInfoLabel.createAppointmentLabel(pet.getAppointment()));
     }
 
     public void setColour(String colour) {
