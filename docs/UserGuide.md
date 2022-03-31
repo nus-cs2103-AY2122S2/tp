@@ -335,12 +335,13 @@ Examples:
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
-|Parameter|Description|
-|---------|-----------|
-|`CUSTOMER_INDEX`|Name of the service. Service name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. It should also be unique such that no two services have the same name.|
-|`SERVICE_INDEX`|Price of the service. Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.|
-|`BOOKING_DATE_TIME`|Duration of the service in minutes. Duration should only contain numbers and have a value that is greater than 0.|
-|`FEEDBACK`|The index of the service in the displayed list. It must be a valid positive index.|
+| Parameter           | Description                                                                                                                                                                                          |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`              | Name of customer or Service. Name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
+| `CUSTOMER_INDEX`    | Customer Index should only contain numbers and have a value that is greater than 0.                                                                                                                  |
+| `SERVICE_INDEX`     | Service Index should only contain numbers and have a value that is greater than 0.                                                                                                                   |
+| `BOOKING_DATE_TIME` | Booking Date Time must be in format dd-MM-yyyy HH:mm.                                                                                                                                                |
+| `FEEDBACK`          | Feedback should only contain alphanumeric characters, hyphens and spaces, and it should not be blank.                                                                                                                                                                                            |
 
 #### 4.3.2 Adding a booking: `addb`
 Adds a booking to the application.
@@ -392,9 +393,9 @@ Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
 
 Examples:
-* `finds c/1 sev/2` returns bookings where the customer at Index 1 has the service at Index 2.
-* `finds f/Bad` returns `Bad service` and `Service was bad`.
-* `finds st/10-10-2022` returns bookings that are on `10-10-2022`.
+* `findb n/Alex` returns bookings customer or service name contains alex.
+* `findb f/Bad` returns `Bad service` and `Service was bad`.
+* `findb st/10-10-2022` returns bookings that are on `10-10-2022`.
 
 #### 4.3.6 Deleting booking(s) : `deleteb`
 
