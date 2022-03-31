@@ -323,20 +323,18 @@ Examples:
 
 Deletes the item at a specified INDEX.
 
-Click the <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
-Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
-
-*Alternatively*, by using command,
-
-Format: `delete INDEX-INDEX`
+Format: `delete-item INDEX-INDEX`
 
 * The first index refers to the index of product shown in the displayed product list.
 * The second index refers to the index of item shown in the item list of the product.
 * Both the product index and the item index must be specified.
-* The index **must be a positive integer** 1, 2, 3, …
+* The resulting input **must be a positive integer pair** 1-2, 2-3, 1-3, …
 
 Examples:
-* `list` followed by `delete 1-2` deletes the 2nd item of the 1st product in the iBook.
+* `list` followed by `delete-item 1-2` deletes the 2nd item of the 1st product currently shown.
+
+*Alternatively*, lick the <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
+Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
 
 #### 3.2.4 Finding items that are expiring soon: `remind`
 
