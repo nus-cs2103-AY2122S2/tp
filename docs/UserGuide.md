@@ -257,6 +257,24 @@ Assigns a task to a particular student.
 
 <br>
 
+### Viewing the completion status of a particular task: `progress`
+
+Displays a list of students who are taking the specified module, and have been assigned with a particular task.
+The completion status of each student in the list will be displayed as well.
+
+**Format**: `progress m/MODULE_CODE tn/TASK_NAME`
+
+* The module code and task name are compulsory fields.
+
+**Example**:
+* `progress m/CS2103T tn/assignment 1`
+    * Displays all students who are taking "CS2103T" and have been assigned with "assignment 1".
+    * For each student in the output list, a :heavy_check_mark: "tick" symbol signifies that he/she has already
+      completed the assigned task.
+    * On the other hand, a :x: "cross" symbol signifies that the student has not complete the assigned task.
+
+<br>
+
 ### Deleting previously assigned task: `deleteTask`
 
 Deletes a task from a particular student's list of tasks.
@@ -276,25 +294,49 @@ Deletes a task from a particular student's list of tasks.
 
 <br>
 
-### Viewing the completion status of a particular task: `progress`
+### Viewing previously executed commands: `history`
 
-Displays a list of students who are taking the specified module, and have been assigned with a particular task.
-The completion status of each student in the list will be displayed as well.
+Displays a list of previous commands that were executed successfully.
 
-**Format**: `progress m/MODULE_CODE tn/TASK_NAME`
+<div markdown="block" class="alert alert-info">
+**:information_source: Quick Tip!:**<br>
 
-* The module code and task name are compulsory fields.
+* Aside from the `history` command, you can also use the :arrow_up_small: Up and :arrow_down_small: Down arrow keys on your keyboard to navigate through your previously executed commands.
 
-**Example**:
-* `progress m/CS2103T tn/assignment 1`
-    * Displays all students who are taking "CS2103T" and have been assigned with "assignment 1".
-    * For each student in the output list, a "tick" symbol signifies that he/she has already
-      completed the assigned task.
-    * On the other hand, a "cross" symbol signifies that the student has not complete the assigned task.
-    
+</div>
+
+**Format**: `history`
+
+* Displays the list of previously executed commands in chronological order (from the earliest command to most recent command).
+* The commands are displayed exactly as they were inputted by the user.
+* The commands are indexed as 1, 2, 3, ......
+
 <br>
 
-### View the list of students by the number of undone tasks in descending order: `sort`
+### Undoing the previous command: `undo`
+
+Reverts the changes made by the previously executed command.
+
+**Format**: `undo`
+
+<div markdown="block" class="alert alert-info">
+**:warning: Warning!:**<br>
+
+* The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
+
+</div>
+
+* Reverts the changes of the previously executed command, and removes the command from history.
+
+**Example**:
+* `undo`
+    * Displays the command that has been undone.
+    * The changes made by the previously executed command are undone.
+    * The undone command is removed from the history of commands.
+
+<br>
+
+### Sorting the list of students by the number of undone tasks: `sort`
 
 Sorts and displays the students in TAPA by the number of undone tasks in **descending** order.
 
@@ -311,7 +353,7 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 
 ### Displaying manual for a command: `manual`
 
-Display the format for a specified command and a short description for a particular command.
+Display the format and a short description for a specified command.
 
 **Format**: `manual [COMMAND_NAME]`
 
@@ -348,13 +390,27 @@ Exits the program.
 
 ## FAQ
 
-**Q**: What command can I use to view a list of available commands?<br>
-**A**: Use the command “manual” to view the list of commands used within TAPA. Alternatively, refer to the Command Summary section below.
+**Q**: How do I get started with TAPA?<br>
+**A**: You can refer to the [Quick Start](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#quick-start) section of this guide to start using TAPA as soon as possible!
 
+**Q**: How can I view a list of available commands within TAPA?<br>
+**A**: You can input the command "`manual`" to view the list of commands used within TAPA. Alternatively, you can refer to the [Command Summary](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#command-summary) section below.
+
+**Q**: Who developed this amazing app?<br>
+**A**: You can find more details about our team on TAPA's [About Us](https://ay2122s2-cs2103t-w09-4.github.io/tp/AboutUs.html) page!
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Command summary
+
+You can think of this Command Summary as a cheatsheet to using TAPA.
+Each action that TAPA can perform is listed next to the format you should use to execute that command, as well as an example of how the command can be used.
+
+For example, say you are using TAPA and would like to see the manual description for the `add` command.
+
+As seen in the Command Summary below, you can input `manual add` to view a short description of the `add` command.
+
+If you would like to learn more about a specific command, you can read more about it in the [Features](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#features) section above!
 
 Action              | Command Format with Examples
 --------------------|------------------
@@ -365,13 +421,15 @@ Action              | Command Format with Examples
 **Task**            | `task i/STUDENT_ID` <br> Example: `task i/AXXXXXXXR`
 **Mark**            | `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX` <br> Example: `mark i/AXXXXXXXR idx/1`
 **Unmark**          | `unmark i/STUDENT_ID idx/DONE_TASK_INDEX` <br> Example: `unmark i/AXXXXXXXR idx/1`
-**Delete Task**     | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`  
 **Edit**            | `edit STUDENT_INDEX [i/MATRICULATION_NO] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS] ` <br> Example: `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456@nus.edu.sg`
 **Clear**           | `clear`
 **Archive**         | `archive`
 **List**            | `list`
 **Assign**          | `assign i/STUDENT_ID tn/TASK_NAME` (or) `assign m/MODULE_CODE tn/TASK_NAME` <br> Example: `task i/AXXXXXXXR tn/assignment 1` (or) `assign m/CS2103T tn/assignment 2`
 **Progress**        | `progress m/MODULE_CODE tn/TASK_NAME` <br> Example: `progress m/CS2103T tn/assignment 1`
+**Delete Task**     | `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME` <br> Example: `deleteTask i/AXXXXXXXR idx/3` (or) `deleteTask m/CS2030 tn/Assignment 1`
+**History**         | `history`
+**Undo**            | `undo`
 **Sort**            | `sort`
 **Manual**          | `manual [COMMAND_NAME]` <br> Example: `manual` (or) `manual add`
 **Help**            | `help`
