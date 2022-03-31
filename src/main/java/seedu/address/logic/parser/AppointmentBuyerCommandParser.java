@@ -32,6 +32,9 @@ public class AppointmentBuyerCommandParser implements Parser<AppointmentBuyerCom
         }
 
         Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get());
+        if (appointment.appointmentTime == null) {
+            return new AppointmentBuyerCommand(index, appointment);
+        }
         if (!appointment.isLaterThanCurrentTime()) {
             throw new ParseException(AppointmentBuyerCommand.MESSAGE_TIME_IN_PAST);
         }

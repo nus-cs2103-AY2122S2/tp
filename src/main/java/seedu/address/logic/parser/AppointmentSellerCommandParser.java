@@ -32,6 +32,9 @@ public class AppointmentSellerCommandParser implements Parser<AppointmentSellerC
         }
 
         Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get());
+        if (appointment.appointmentTime == null) {
+            return new AppointmentSellerCommand(index, appointment);
+        }
         if (!appointment.isLaterThanCurrentTime()) {
             throw new ParseException(AppointmentSellerCommand.MESSAGE_TIME_IN_PAST);
         }
