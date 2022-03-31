@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -144,6 +145,11 @@ class JsonAdaptedPerson {
         if (!PrevDateMet.isValidPrevDateMet(prevDateMet)) {
             throw new IllegalValueException(PrevDateMet.MESSAGE_CONSTRAINTS);
         }
+        try {
+            PrevDateMet.isDatePossible(prevDateMet);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
         final PrevDateMet modelPrevDateMet = new PrevDateMet(prevDateMet);
 
         if (salary == null) {
@@ -183,6 +189,11 @@ class JsonAdaptedPerson {
         String meetingTime = meetingSplit[1];
         if (!MeetingDate.isValidDate(meetingDate)) {
             throw new IllegalValueException(MeetingDate.MESSAGE_CONSTRAINTS);
+        }
+        try {
+            MeetingDate.isDatePossible(meetingDate);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(e.getMessage());
         }
         if (!MeetingTime.isValidTime(meetingTime)) {
             throw new IllegalValueException(MeetingTime.MESSAGE_CONSTRAINTS);

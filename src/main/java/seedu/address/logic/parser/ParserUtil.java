@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -123,6 +124,12 @@ public class ParserUtil {
         if (!MeetingDate.isValidDate(trimmedDate)) {
             throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
         }
+        try {
+            // Helps to catch invalid date e.g. 29 Feb in non-leap years
+            MeetingDate.isDatePossible(trimmedDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
+        }
         return new MeetingDate(trimmedDate);
     }
 
@@ -179,6 +186,11 @@ public class ParserUtil {
         String trimmedDate = date.trim();
         if (!PrevDateMet.isValidPrevDateMet(trimmedDate)) {
             throw new ParseException(PrevDateMet.MESSAGE_CONSTRAINTS);
+        }
+        try {
+            PrevDateMet.isDatePossible(trimmedDate);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
         }
         return new PrevDateMet(trimmedDate);
     }
