@@ -35,8 +35,7 @@ public class ViewCommandTest {
 
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(ViewCommand.MESSAGE_VIEW_SUCCESS, studentToView.getName()),
-                        false, false, true,
-                        studentToView);
+                        false, false, studentToView);
 
         assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
 
@@ -60,8 +59,7 @@ public class ViewCommandTest {
 
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(ViewCommand.MESSAGE_VIEW_SUCCESS, studentToView.getName()),
-                        false, false, true,
-                        studentToView);
+                        false, false, studentToView);
         showStudentAtIndex(expectedModel, INDEX_SECOND_STUDENT);
 
         assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);

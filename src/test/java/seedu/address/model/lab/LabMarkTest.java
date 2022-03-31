@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.lab.LabMark.MARKS_DESCRIPTION;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.lab.exceptions.IllegalLabStateException;
 
 public class LabMarkTest {
 
@@ -76,6 +78,13 @@ public class LabMarkTest {
 
     @Test
     public void describe_success() {
+        LabMark marks1 = new LabMark("1");
+        assertEquals(String.format(MARKS_DESCRIPTION, "1"), marks1.describe());
+    }
 
+    @Test
+    public void describe_illegalLabMark_throwsIllegalLabStateException() {
+        LabMark illegalLabMark = new LabMark();
+        assertThrows(IllegalLabStateException.class, illegalLabMark::describe);
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
@@ -15,14 +16,14 @@ public class CommandResultTest {
 
     private final Student firstStudent = ALICE;
     private final Student secondStudent = BENSON;
-    private final CommandResult commandResult = new CommandResult("feedback", false, false, true, firstStudent);
+    private final CommandResult commandResult = new CommandResult("feedback", false, false, firstStudent);
 
     @Test
     public void equals() {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback",
-                false, false, true, firstStudent)));
+                false, false, firstStudent)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -37,17 +38,17 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, null)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, null)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, null)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, null)));
 
         // different view value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, null)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, null)));
 
         // different viewDetails value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
-                false, false, true, secondStudent)));
+                false, false, secondStudent)));
     }
 
     @Test
@@ -55,26 +56,41 @@ public class CommandResultTest {
 
         // same values -> returns same hashcode
         assertEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, false, true, firstStudent).hashCode());
+                new CommandResult("feedback", false, false, firstStudent).hashCode());
 
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", true, false, true, firstStudent).hashCode());
+                new CommandResult("feedback", true, false, firstStudent).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, true, true, firstStudent).hashCode());
+                new CommandResult("feedback", false, true, firstStudent).hashCode());
 
         // different view value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, false, false, null).hashCode());
+                new CommandResult("feedback", false, false, null).hashCode());
 
         // different viewStatus value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, false, true, secondStudent).hashCode());
+                new CommandResult("feedback", false, false, secondStudent).hashCode());
+    }
+
+    @Test
+    public void getStudent_isViewStudentExists_success() {
+        assertEquals(
+                new CommandResult("feedback", false, false, firstStudent).getStudent(),
+                firstStudent
+        );
+    }
+
+    @Test
+    public void getStudent_studentDoesNotExists_throwsIllegalStateException() {
+        assertThrows(IllegalStateException.class, () ->
+                new CommandResult("feedback", false, false, null).getStudent()
+        );
     }
 
 }

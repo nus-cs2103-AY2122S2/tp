@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.Student;
 
 /**
@@ -34,12 +35,12 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isView, Student student) {
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, Student student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowHelp = isShowHelp;
         this.isExit = isExit;
-        this.isView = isView;
         this.student = Optional.ofNullable(student);
+        this.isView = this.student.isPresent();
     }
 
     /**
@@ -47,7 +48,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null);
+        this(feedbackToUser, false, false, null);
     }
 
     public String getFeedbackToUser() {
