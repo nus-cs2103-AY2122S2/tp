@@ -156,53 +156,83 @@ Format: `put P/PLAYER L/LINEUP`
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five
 
+### Viewing player/schedule/lineup: `view`
 
-### Viewing the summary: `view`
+This function makes listing, searching filtering of player/schedule/lineup quick and easy.
+You can specify criteria to list out the current player and schedule list.
 
-Views the summarised information of lineup/ player/ schedule.
+**To view player:**<br>
 
-**To view a lineup:**<br>
-
-Format: `view L/[LINEUP]`
-* The summarised information of a lineup only include the name, the position of the player and the number of slots (out of 5) filled.
-* Displays the summarised information of the specified `LINEUP` in the specified ``.
-  - All the players in the specified `LINEUP` will be displayed.
-* If no `LINEUP` is provided, the summarised information of all lineups in the specified `` will be displayed.
-  - All the `LINEUP` in the specified team will be displayed.
-* The specified `LINEUP` and specified `` must be **valid** to be viewed.
-
-Examples:
-* `view L/Starting Five` Displays the summarised information of lineup `Start Five`
-* `view L/` Displays the summarised information of all lineups
-
-**To view a player:**<br>
-
-Format: `view P/[PLAYER]`
-* The summarised information of a player includes all its attributes.
-* Displays the summarised information of the specified `PLAYER`.
-  - Only the specified player will be displayed.
-* If no `PLAYER` is provided, the summarised information of all existing players in the system will be displayed.
+Format: `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/POSITIONS]`
+* Filters the existing players to display only the players matching the criteria specified.
+* Parameters `[NAMES_IN_PLAYERNAME]` and `[POSITIONS]` will only find players that contain 
+the specific word that is specified. <br> e.g. `view P/John` will not display players with the name
+"Johnson" in their name. However, it will display players with name such as "John Cena", "Stockton John" if 
+players with such name exists.
+* "OP" in the parameters `[OPWEIGHT]` and `[OPHEIGHT]` must be either `gte`, `lte`, `gt`, `lt`, `eq`. On the other hand,
+"WEIGHT" and "HEIGHT" must be integers. <br> e.g. `gte180`, `lt90` can be a potential `OPWEIGHT` or `OPHEIGHT`
+* Words in `NAMES_IN_PLAYERNAME` are case **insensitive** but words in `POSITIONS` are case **sensitive**.
 
 Examples:
-* `view P/Kelvin Darent` Displays the information of `Kelvin Darent`.
-* `view P/` Displays all players in the system.
+* `view P/` Displays all the players
+* `view P/Kelvin Darent` Displays all the players that have "Kelvin" or "Darent" in their name
+* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is 
+greater than or equals to 80kg
+* `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
+is lesser than 213cm **and** weight equals to 100kg **and** plays the position of "SG" or "SF"
 
-**To view schedules:**<br>
+![view players](images/helpMessage.png)
 
-Format: `view S/[KEYWORDS]`
-* Displays the schedule containing `KEYWORDS`, cases ignored.
-* If no `KEYWORDS` is provided, the list of all active schedules which happen at future dates will be displayed.
+**To view lineup:**<br>
 
-Format: `view S/ a/all`
-* Displays all schedules added.
-* If no `all` is provided, error message will be displayed.
-
-Format: `view S/ a/archive`
-* Displays archived schedules only.
-* If no `archive` is provided, error message will be displayed.
+Format: `view L/[NAMES_IN_LINEUPNAME]`
+* Filters players who are in the lineup that corresponds to the criteria specified.
+* Parameters `[NAMES_IN_LINEUPNAME]` will only find players that are in the lineup which contains the lineup name that
+matches the specific word that is specified. <br> e.g. `view L/super` will not display players in the lineup
+with the lineup name of "superstars". However, it will display players in the lineup with the lineup name of "super" 
+or "super idol" provided that lineup with this lineup name exists and there are players in this lineup as well.
+* If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed.
+* Words in `NAMES_IN_LINEUPNAME` are case **insensitive**.
+* To view players that are **without** a lineup, the `N/` prefix must be specified.
 
 Examples:
-* `view i/1` Displays the information on `Lakaka`'s 1st schedule.
+* `view L/ N/` Displays all the players without a lineup
+* `view L/` Displays all the players that have at least a lineup
+* `view L/starting` Displays all the players that are in the lineup that has "starting" in the lineup name
+* `view L/Starting five` Displays all the players that are in the lineup that has "Starting" **or** "five" in the lineup name
+
+![view lineups](images/helpMessage.png)
+
+**To view schedule:**<br>
+
+Format: `view S/[NAMES_IN_SCHEDULENAME]`
+* Filters the existing schedules to display only the schedules matching the criteria specified.
+* Parameter `[DATE]` must be in dd/mm/yyyy
+* Parameters `[NAMES_IN_SCHEDULENAME]` will only find schedules that contain
+the specific word that is specified. <br> e.g. `view S/training` will not display schedules with the name
+"training" in the schedule name. However, it will display schedules with name such as "training", "always training" if
+schedules with such name exists.
+* Words in the parameter `[NAMES_IN_SCHEDULENAME]` are case **insensitive**.
+* If no `NAMES_IN_SCHEDULENAME` is provided, the list of all active schedules which happen at future dates will be displayed.
+* To display all the schedules which also includes schedules that happened in the past (i.e. archived schedule), the prefix `a/` together with
+`all` must be specified. <br>
+e.g `a/all`
+* To display all the schedules which are archived, the prefix `a/` together with `archive` must be specified.<br>
+e.g `a/archive`
+* The prefix `a/` can **only** follow with either `all` or `archive` is provided. Any other scenario, error message will be displayed.
+* To view all the schedules that has happened or is going to happen on a particular date, the `d/` prefix must be specified
+together with a `date` that is in `dd/mm/yyyy`. The parameter `[NAMES_IN_SCHEDULENAME]` must be empty.
+<br> e.g `d/22/02/2023`
+
+Examples:
+* `view S/` Displays all the schedules that are upcoming
+* `view S/drills` Displays all the upcoming schedules that have the name of "drills"
+* `view S/drills shooting` Displays all the upcoming schedules that have the name of "drills" or "shooting"
+* `view S/ a/all` Displays the all schedules which includes upcoming and archived schedules
+* `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules 
+* `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
+
+![view schedules](images/helpMessage.png)
 
 ### Filtering players by position: `filter`
 
