@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
@@ -8,7 +9,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.applicant.Applicant;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 /**
  * API of the Logic component
@@ -21,7 +24,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException, FileNotFoundException;
 
     /**
      * Returns the AddressBook.
@@ -30,8 +33,14 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of applicants */
+    ObservableList<Applicant> getFilteredApplicantList();
+
+    /** Returns an unmodifiable view of the filtered list of positions */
+    ObservableList<Position> getFilteredPositionList();
+
+    /** Returns an unmodifiable view of the filtered list of interviews */
+    ObservableList<Interview> getFilteredInterviewList();
 
     /**
      * Returns the user prefs' address book file path.

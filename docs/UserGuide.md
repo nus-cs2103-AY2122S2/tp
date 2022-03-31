@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HireLah is a desktop app that helps **recruiters to manage talent and job candidates** by tracking every step of the hiring process,
+from offering positions to scheduling interviews with candidates. It is optimised for Command Line Interface (CLI) users while still offering a GUI, so that power users can accomplish tasks much quicker by using commands
+
 
 * Table of Contents
 {:toc}
@@ -14,7 +16,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -59,199 +61,319 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 </div>
 
-### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+## Add
+General command to add different types into HireLah.
 
-![help message](images/helpMessage.png)
+Format: `add -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will add an applicant
+* -i will add an interview
+* -p will add a position
 
-Format: `help`
+### Adding an Applicant: `add -a`
 
+Adds a new applicant to HireLah
 
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+An applicant can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Age provided must be at least two digits eg: “23”
+* Gender must be M/F
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
+* `add -a n/Max ag/15 g/M p/97123456 e/max@yahoo.com a/12 Kent Ridge Drive, 119243 t/Data Analyst`
 
-### Locating persons by name: `find`
+### Adding Interview : `add -i`
 
-Finds persons whose names contain any of the given keywords.
+Adds a new interview to HireLah.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
+* Date provided must be in format YYYY-MM-DD HH:MM.
+* The index refers to the index number shown in the last displayed Applicant
+  list and Position list.
+* Index provided must be positive.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `add -i 1 d/2022-01-01 14:00 p/2`
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Adding positions : `posadd`
+### Adding positions : `add -p`
 
 Adds a new open position to HireLah.
-Format: `posadd POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+Format: `add -p POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
 * Positions must have a **unique name**.
 * Name provided is case-insensitive.
 * Number of openings in the position must be **0 or more** 0, 1, 2, …​
 
 Examples:
-* `posadd Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+* `add -p Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
 
-### Edit positions : `posedit`
+## Edit
+General command to edit different types into HireLah.
+
+Format: `edit -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will edit an applicant
+* -i will edit an interview
+* -p will edit a position
+
+### Editing an Applicant : `edit -a`
+
+Edits an existing Applicant in HireLah.
+
+Format: `edit -a INDEX [n/APPLICANT_NAME] [ag/AGE] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant
+  list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
+* You can remove all the Applicant’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit -a 1 n/Belle ag/43 g/F p/81234567` Edits the name, age, gender and phone number of the 1st applicant
+   to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
+*  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd applicant to be
+   `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
+
+### Editing an Interview : `edit -i`
+
+Edit an existing interview in HireLah.
+
+Format: `edit -i INTERVIEW_INDEX [d/DATE] [p/POSITION_INDEX]`
+* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the
+  last displayed interview list.
+* At least one optional field must be provided.
+* The position index refers to the index number shown in the last displayed interview list.
+* Existing attribute of the interview will be updated to the input value.
+* When editing requirements, the existing requirements of the interview will be removed. i.e.
+  adding requirements is not cumulative.
+
+Examples:
+* `edit -i 1 d/2022-01-01 15:00`
+* `edit -i 3 d/2022-01-01 15:00 p/1`
+
+
+### Edit positions : `edit -p`
 
 Edit an existing position in HireLah.
-Format: `posedit POSITION_NAME [n/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
+Format: `edit -p POSITION_NAME [n/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
 
 * Edits the available position with POSITION_NAME.
 * Position name provided is case-insensitive.
 * At least one optional field must be provided.
 * Existing attributes of the position will be updated to the input value.
-* When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative. 
+* When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
 * Requirements can be removed by providing an empty requirement field. i.e. r/
 
 Examples:
-* `posedit Senior Frontend Software Engineer n/5`
-* `posedit Senior Frontend Software Engineer r/JavaScript r/React`
+* `edit -p Senior Frontend Software Engineer n/5`
+* `edit -p Senior Frontend Software Engineer r/JavaScript r/React`
 
-### Delete positions : `posdel`
+## Delete
+General command to delete different data type in HireLah.
+
+Format: `delete -TYPE`
+* TYPE must take the form of `a`, `i`, `p`
+* -a will delete an applicant
+* -i will delete an interview
+* -p will delete a position
+
+### Deleting an Applicant : `del -a`
+
+Deletes the specified Applicant from HireLah.
+
+Format: `delete -a CANDIDATE_INDEX`
+
+* Deletes the Applicant at the specified `CANDIDATE_INDEX`.
+* The index refers to the index number shown in the displayed Applicant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete -a 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting an Interview: `del -i`
+
+Deletes an existing interview in HireLah.
+
+Format: `delete -i INTERVIEW_INDEX`
+* Deletes the Interview at the specified `INTERVIEW_INDEX`.
+* The index refers to the index number shown in the displayed Applicant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete -i 3`
+
+
+### Delete positions : `del -p`
 
 Deletes an existing position in HireLah.
-Format: `posdel POSITION_NAME`
+
+Format: `delete -p ROLE`
 * Existing position with the specified name is deleted.
 * The position name has to match with the position that is to be deleted.
 * Position name provided is case-insensitive.
 
 Examples:
-* `posdel Senior Frontend Software Engineer`
+* `delete -p Senior Frontend Software Engineer`
 
-### List Positions : `poslist`
+## List
+General command to list different data type in HireLah. User can provide optional parameters to filter and sort the data to display.
+If there are no parameters provided, HireLah will display all data of that type by default. User can either display as default, filter only,
+sort only, or filter and sort.
 
-Lists all existing positions in HireLah.
-Format: `poslist`
+Note: This command may change the index of the displayed items, and all other commands that accepts an index will follow the latest index shown in HireLah.
 
-### Adding Interview : `intvwadd`
+Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+* `TYPE` must take the form of `a`, `i`, `p`
+  * `-a` will list all applicants
+  * `-i` will list all interview
+  * `-p` will list all position
+* `FILTER_TYPE` and `FILTER_ARGUMENT` are optional parameters to filter the data displayed
+  * Note that **both** `FILTER_TYPE` and `FILTER_ARGUMENT` need to be provided to filter data
+  * Different data types will accept different `FILTER_TYPE` and `FILTER_ARGUMENT`, as elaborated below
+  
+* `SORT_ARGUMENT` is the optional parameter to sort the data displayed
+  * Can either be `asc` or `dsc`
+  * Different data types will be sorted according to different properties, as elaborated below
 
-Adds a new interview to HireLah.
+### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI.
 
-Format: `intvwadd n/CANDIDATE_INDEX d/DATE r/ROLE`
-* Date provided must be in format YYYY-MM-DD HH:MM.
-* Role *must* currently exist in position.
+The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
+
+
+| FILTER_TYPE | FILTER_ARGUMENT                    | Description                                              |
+|-------------|------------------------------------|----------------------------------------------------------|
+| `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s)       |
+| `gender`    | M/F                                | View applicants of the given gender                      |
+| `status`    | available/hired                    | View applicants with the status given                    |
+| `tag`       | Keyword(s) in the applicant's tag  | View applicants with a tag that matches the keywords(s)  |
+
+The applicants displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`. 
+
+Examples: 
+- `list -a s/asc`
+- `list -a f/name a/John Doe`
+- `list -a f/tag a/Java`
+- `list -a f/status a/hired s/dsc`
+
+### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+
+Lists all existing positions by default. Automatically toggles view to the position tab on the GUI.
+
+The positions displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
+
+| FILTER_TYPE | FILTER_ARGUMENT                 | Description                                                     |
+|------------|---------------------------------|-----------------------------------------------------------------|
+| `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
+| `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
+
+The positions displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`.
+
+Examples: 
+- `list -p s/asc`
+- `list -p f/name a/Software Engineer`
+- `list -p f/req a/Java s/dsc`
+
+### Listing interviews: `list -i [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
+
+Lists all existing interviews by default. Automatically toggles view to the interview tab on the GUI.
+
+The interviews displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
+
+| FILTER_TYPE | FILTER_ARGUMENT                                          | Description                                                          |
+|-------------|----------------------------------------------------------|----------------------------------------------------------------------|
+| `appl`      | Keyword(s) in the applicant's name                       | View interviews for applicants whose name contains the keyword(s)    |
+| `pos`       | Keyword(s) in the position's name                        | View interviews for position with names that contains the keyword(s) |
+| `date`      | Date the interview is happening in `yyyy-mm-dd`          | View interviews which happens on the date provided                   |
+| `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given                                |
+
+Example: `list -i f/date a/2022-05-04`
+
+The positions displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
+
+Examples: 
+- `list -i s/dsc`
+- `list -i f/date a/2022-05-04`
+- `list -i f/status a/accepted s/asc`
+
+## Passing Interviews : `pass`
+
+Passes an existing interview in Hirelah.
+
+Format: `pass INTERVIEW_INDEX`
+
+* Passes the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `pending` before it can be passed.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `intvwadd n/1 d/2022-01-01 14:00 r/Senior Frontend Software Engineer`
+ * pass 1
 
-### Editing an Interview : `intvwedit`
+## Failing Interviews : `fail`
 
-Edit an existing interview in HireLah.
+Fails an existing interview in Hirelah.
 
-Format: `intvwedit CANDIDATE_INDEX ROLE [d/DATE] [r/NEWROLE]`
-* Edits the interview with CANDIDATE_INDEX and ROLE.
-* At least one optional field must be provided.
-* Existing attribute of the interview will be updated to the input value.
-* When editing requirements, the existing requirements of the interview will be removed. i.e. 
-adding requirements is not cumulative.
+Format: `fail INTERVIEW_INDEX`
 
-Examples:
-* `intvwedit 1 Senior Frontend Software Engineer d/2022-01-01 15:00`
-* `intvwedit 1 Senior Frontend Software Engineer r/Senior FullStack Developer`
-
-### Deleting an Interview: `intvwdel`
-
-Deletes an existing interview in HireLah.
-
-Format: `intvwdel CANDIDATE_INDEX ROLE`
-* Date provided must be in format YYYY-MM-DD HH:MM. 
-* Existing interview with the matching CANDIDATE_INDEX and ROLE is deleted. 
-* Role provided is case-insensitive.
+* Passes the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `pending` before it can be failed.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `intvwdel 1 Senior Frontend Software Engineer`
+* fail 1
 
-### Listing interviews: `intvwlist`
+## Accepting Interviews : `accept`
 
-Lists all existing interviews for the candidate in HireLah.
+Accepts an existing `passed` interview in Hirelah. This command accepts the `passed` interview,
+meaning that the candidate has accepted the job.
 
-Format: `intvwlist CANDIDATE_INDEX`
+Format: `accept INTERVIEW_INDEX`
+
+* Accepts the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `passed` before it can be accepted.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+## Rejecting Interviews : `reject`
+
+Rejects an existing interview in Hirelah. This command rejects the `passed` interview,
+meaning that the candidate has rejected the job.
+
+Format: `reject INTERVIEW_INDEX`
+
+* Rejects the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `passed` before it can be rejected.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+## Viewing help: `help`
+
+Lists all the command keywords with their general descriptions
+
+Format: `help`
+
+_**For a more detail description about a specific `command`, you can type in the following:**_
+
+Format: `help COMMAND`
+
+* Full description and format of the command will be displayed
+
+* Command name is not case-sensitive
 
 Examples:
-* `intvwlist 1`
-
-### Filter data: `filter`
-View different applicants, interviews and positions in HireLah through various filters. It alters the current display of HireLah and changes the index of the relevant data.
-
-Format: `filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]`
-
-* 
-* Different data has different filters available, thus requiring different arguments, as listed:
-
-DATA_TYPE | FILTER_TYPE | ARGUMENT(S)           | Description
-----|-------------|-----------------------|---
-`appl` | `name`      | `n/KEYWORD`           | View applicants whose name contains the keyword
-`appl` | `tag`       | `t/TAG1, [t/TAG2, …]` | View applicants who have all the tags specified
-`intvw` | `appl`      | `n/NAME`              | View interviews for applicants whose name is specified
-`intvw` | `date`      | `d/DATE`              | View interviews happening on the specified date (Date provided must be in format YYYY-MM-DD)
-`pos` | `name`      | `n/KEYWORD`           | View positions which has the specified keyword in the position name
-
-Examples:
-* `filter appl name n/john`
-* `filter appl tag t/school t/friend`
-* `filter intvw date d/2022-03-20`
+* `help add`
+* `help del`
 
 ### Exiting the program : `exit`
 

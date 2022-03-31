@@ -1,4 +1,8 @@
-#copyButton, #helpMessage {
+* {
+    -fx-font-family: 'sans-serif';
+}
+
+#copyButton, #helpMessage, #ugMessage {
     -fx-text-fill: white;
 }
 

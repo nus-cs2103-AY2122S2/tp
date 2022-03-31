@@ -1,20 +1,26 @@
 package seedu.address.ui;
 
+import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.help.HelpDescription;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -31,7 +37,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ApplicantListPanel applicantListPanel;
+    private PositionListPanel positionListPanel;
+    private InterviewListPanel interviewListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,10 +53,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane positionListPanelPlaceholder;
+
+    @FXML
+    private StackPane interviewListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private TabPane dataTypeTabs;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -65,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = new HelpWindow(HelpDescription.OVERALL_HELPING_DESCRIPTION);
     }
 
     public Stage getPrimaryStage() {
@@ -110,8 +127,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        applicantListPanel = new ApplicantListPanel(logic.getFilteredApplicantList());
+        personListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
+
+        positionListPanel = new PositionListPanel(logic.getFilteredPositionList());
+        positionListPanelPlaceholder.getChildren().add(positionListPanel.getRoot());
+
+        interviewListPanel = new InterviewListPanel(logic.getFilteredInterviewList());
+        interviewListPanelPlaceholder.getChildren().add(interviewListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -136,15 +159,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Handle help command based on command
      */
-    @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelpTab() {
+        helpWindow.setHelpDescription(HelpDescription.OVERALL_HELPING_DESCRIPTION);
+        handleHelp();
     }
 
     void show() {
@@ -163,8 +194,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ApplicantListPanel getPersonListPanel() {
+        return applicantListPanel;
     }
 
     /**
@@ -172,13 +203,16 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws CommandException, ParseException,
+            FileNotFoundException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
+                resultDisplay.setFeedbackToUser("Display help");
+                helpWindow.setHelpDescription(commandResult.getFeedbackToUser());
                 handleHelp();
             }
 
@@ -186,10 +220,22 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            SingleSelectionModel<Tab> selectionModel = dataTypeTabs.getSelectionModel();
+            if (commandResult.getDataType() == DataType.APPLICANT) {
+                selectionModel.select(0);
+            } else if (commandResult.getDataType() == DataType.POSITION) {
+                selectionModel.select(1);
+            } else if (commandResult.getDataType() == DataType.INTERVIEW) {
+                selectionModel.select(2);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
             throw e;
         }
     }
