@@ -88,15 +88,15 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             interviewListOptional = storage.readInterviewSchedule();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TalentAssistant");
+            if (!addressBookOptional.isPresent() || !interviewListOptional.isPresent()) {
+                logger.info("One or both data files not found. Will be starting with a sample TalentAssistant "
+                        + "and empty schedule");
+                initialInterviewSchedule = SampleDataUtil.getEmptyInterviewList();
+                initialData = SampleDataUtil.getSampleAddressBook();
+            } else {
+                initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+                initialInterviewSchedule = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            //Does not make sense for sample interview list. Change to empty list
-            if (!interviewListOptional.isPresent()) {
-                logger.info("Data file for interviews not found. Will be starting with a sample InterviewSchedule");
-            }
-            initialInterviewSchedule = interviewListOptional.orElseGet(SampleDataUtil::getEmptyInterviewList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TalentAssistant");
             initialData = new AddressBook();
