@@ -59,20 +59,24 @@ We hope you enjoy Tracey as much as we did developing it!
 
 There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
-| Symbol  |                                                Purpose                                                |
-|:-------:|:-----------------------------------------------------------------------------------------------------:|
-|   📓    |    Additional notes are parked here. They contain beneficial information in case you are confused.    |
-|   ⚠️    |          Warnings are parked here. They contain information that you **NEED** to take note of.           |
-|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey. |
-*Figure 1: Symbols and their purposes*
+| Symbol  |                                                 Purpose                                                 |
+|:-------:|:-------------------------------------------------------------------------------------------------------:|
+|   📓    |     Additional notes are parked here. They contain beneficial information in case you are confused.     |
+|   ⚠️    |          Warnings are parked here. They contain information that you **NEED** to take note of.          |
+|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.  |
+
+*Table 1: Symbols and their purposes*
 
 Additional formatting guidelines:
 
-**Bold**: Bolded words indicate important keywords.
+|  Format   |                                                                         Purpose                                                                          |
+|:---------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| **Bold**  |                                                        Bolded words indicate important keywords.                                                         |
+| `Command` |            Words/phrases that are presented like this highlight specific keywords that you can use to interact with your computer or Tracey.             |
+| [Links]() | Words/phrases that are presented like this are clickable links to different parts of the User Guide or to external web pages for additional information. |
 
-`Command`: Words/phrases that are presented like this highlight specific keywords that you can use to interact with your computer or Tracey.
+*Table 2: Word formats and their purposes*
 
-[Links](): Words/phrases that are presented like this are clickable links to different parts of the User Guide or to external web pages for additional information.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
@@ -91,7 +95,7 @@ Additional formatting guidelines:
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data* <br>
    📓`Note:`
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
-   2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is locaated. Then, type the following command to open the application: `java -jar Tracey.jar`.
+   2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
 6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -120,7 +124,7 @@ The pop-up window also offers a button to copy the URL of the User Guide for eas
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![help](images/HelpScreenshot.png) *Figure 6: Screenshot of help command.*
+![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
 Format: `help`
 
@@ -131,25 +135,25 @@ Format: `help`
 Add a student with relevant details into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
-* Adds a student with the specific tags, the tags are optional and you can add as many tags as you like.
+* Adds a student with the specified details. Tags are optional, and you can add as many tags as you like.
     * Duplicate tags will be displayed as a single tag.
 * The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey.
 * Phone Number, email and matriculation number must be **unique** to each student.
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
 * Tracey will acknowledge that the student has been added.
-* Faculty and covid status need to be an pre-defined constant specific to the list defined below (refer to Pre-defined constants).
-* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Figure 3, there will be an error and you will have to input the details for the keyword again.
+* Faculty and covid status need to be a pre-defined constant specific to the list defined below (refer to pre-defined constants).
+* If the inputted keyword is not one of those defined in the **pre-defined constants** as described in Table 4, there will be an error, and you will have to input the details for the keyword again.
 
 Examples of usage:
-* `add n/Melvin f/SOC cs/ Negative`
-* `add e/student69@u.nus.edu n/ Martin`=
+* `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343 cs/Negative`
+* `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
 |:--------------------:|:-----------------:|
 |     cs/Negative      | cs/Close-contact  | 
 |        f/SoC         |      f/SooC       | 
 
-*Figure 2 highlights the importance of sticking to the **Pre-defined constants** as listed in figure 3.*
+*Table 3: Incorrect usage of **pre-defined constants**. Refer to Table 4 for an exhaustive list of such constants.
 
 | **Prefix** | **Meaning** |                                                 **Pre-defined constants**                                                  |
 |:-------:|:-----------:|:--------------------------------------------------------------------------------------------------------------------------:|
@@ -162,9 +166,9 @@ Examples of usage:
 |    `cs/`     |      Covid Status       |                                               `Positive`, `Negative`, `HRN`                                                |
 |     `t/`    |      Optional tag(s)   |       No restrictions                                                                                       |
 
-*Figure 3: Table showing list of possible prefixes and the Pre-defined constants*
+*Table 4: Table showing list of possible prefixes and the Pre-defined constants*
 
-As described in Figure 3, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
+As described in Table 4, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
 In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
 💡`Tips`:
@@ -251,9 +255,9 @@ Examples of usages:
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 1: Screenshot of result of the find command*
+![find](images/FindScreenshotForUG.png) *Figure 3: Screenshot of result of the find command*
 
-As seen in the *figure 1*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 3*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
@@ -273,9 +277,9 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 1: Example result of `filter` command*
+![find](images/FilterScreenshotForUG.png) *Figure 4: Example result of `filter` command*
 
-As seen in *figure 1*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 4*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 📓`Note:`
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
@@ -292,9 +296,9 @@ This is a sample screenshot of what you can expect from the `list` command.
 ### Copying emails
 The `Show Email` button opens up a separate window that consists of all the emails of the current displayed individuals.
 `Copy Email` copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
-![Email](images/CopyEmailScreenshot.png) *Figure 7: Screenshot of Copy Email function.*
+![Email](images/CopyEmailScreenshot.png) *Figure 6: Screenshot of Copy Email function.*
 
-From Figure 7, this function is beneficial for administators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From Figure 7, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
 Summarises the statistics of the student records inside Tracey.
@@ -305,7 +309,7 @@ Format:`summarise`
 Example of usage:
 * `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-![SummariseExample](images/SummariseExample.png) *Figure 4: Example response of Tracey in response to the `summarise` command*
+![SummariseExample](images/SummariseExample.png) *Figure 7: Example response of Tracey in response to the `summarise` command*
 
 From Figure 4, when the user inputs the `Summarise` command, the result are multiple pie charts of the proportion of the student population categorised by `Covid Status`. These pie charts are separated into the student `Blocks` and the wider hall population.
 
@@ -383,7 +387,7 @@ there are changes to Tracey.
 
 ### Command Summary
 
-Figure 8: Command Summary.
+Table 5: Command Summary.
 
 | No.  | Command  | Description                                               | Example  |
 |---|---|-----------------------------------------------------------|---|
@@ -403,18 +407,18 @@ Figure 8: Command Summary.
 
 ### Glossary
 
-*Table 1: Specific terminology used*
+*Table 6: Specific terminology used*
 
-| Term  | Meaning  |
-|---|---|
-| Block | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E. |
-| Command Line Interface (CLI) | A text-based user interface used to run applications. |
-| Covid Status | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN). |
-| Faculty |  A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).  |
-| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application. |
-| Health Risk Notice (HRN) | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case. |
-| JAR File | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files. |
-| Matriculation Number | A student's unique identification number; also known as Student ID. |
-| Prefix | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
-| Pre-defined constant | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error. |
-| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address. |
+| Term                           | Meaning                                                                                                                                                                                                                                                                                              |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Block                          | The building or demarcated area within a residential hall that a student resides in. Typically, A residential hall is separated into 5 blocks: A, B, C, D and E.                                                                                                                                     |
+| Command Line Interface (CLI)   | A text-based user interface used to run applications.                                                                                                                                                                                                                                                |
+| Covid Status                   | A status to indicate whether a person is Covid-positive or has a has a health risk notice (HRN).                                                                                                                                                                                                     |
+| Faculty                        | A group of departments in a university with a major division of knowledge. E.g. The School of Computing (SOC).                                                                                                                                                                                       |
+| Graphical User Interface (GUI) | A system of interactive visual components used for managing user interaction with an application.                                                                                                                                                                                                    |
+| Health Risk Notice (HRN)       | A label on a person to indicate that he/she has been identified as a close contact or household member of a Covid positive case.                                                                                                                                                                     |
+| JAR File                       | JAR stands for **J**ava **AR**chive. This is a cross-platform file archive format that combines and compresses a large number of files into one, handling class files, audio and image files.                                                                                                        |
+| Matriculation Number           | A student's unique identification number; also known as Student ID.                                                                                                                                                                                                                                  |
+| Prefix                         | A set of one or more characters placed before others. When using Tracey, one or more letters followed by a forward slash (e.g. `cs/`) is used as a prefix to a detail to be input. The set of prefixes used by Tracey is shown in figure 3 under <a href='#adding-a-contact'>"Adding a contact"</a>. |
+| Pre-defined constant           | Specific values that certain fields can only take. E.g. The pre-defined constants for Covid Status are `Positive`, `Negative` and `HRN`. Thus, these are the only values that can be input with the Covid Status prefix. Any other values would result in an error.                                  |
+| Uniform Resource Locator (URL) | A reference to a web resource specifying its location in a computer network and the mechanism for its retrieval; more commonly known as a web address.                                                                                                                                               |
