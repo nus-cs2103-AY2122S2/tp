@@ -271,7 +271,7 @@ The following is a detailed explanation of the operations which take place when 
 
 The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`
 
-![ShowEventSequenceDiagram.png](..\src\main\resources\images\ShowEventsSequenceDiagram.png)
+![ShowEventSequenceDiagram.png](images\ShowEventsSequenceDiagram.png)
 
 #### Design Considerations
 
@@ -295,7 +295,7 @@ The following is a detailed explanations of the operations which take place for 
 
 The following activity diagram summarizes what happens when a user executes the `EditEventCommand`:
 
-![EditEventActivityDiagram.png](..\src\main\resources\images\EditEvent.png)
+![EditEventActivityDiagram.png](images\EditEvent.png)
 
 #### Design Considerations
 
@@ -406,7 +406,7 @@ Since our application had two primary classes `Friends` and `Events` we needed t
 
 The following images show how the Tabs feature look when the `Friends` tab is selected and when the `Events` tabs is selected
 
-![friendsTab.png](..\src\main\resources\images\friendsTab.png) ![eventsTab.png](..\src\main\resources\images\eventsTab.png)
+![friendsTab.png](images\friendsTab.png) ![eventsTab.png](images\eventsTab.png)
 
 #### 4.1 Automatically Change tabs (By Command)
 

@@ -218,4 +218,16 @@ public class ParserUtil {
         return new LogName(title);
     }
 
+    /**
+     * Parses {@code Collection<String> titles} into a {@code Set<Title>}.
+     */
+    public static Set<LogName> parseTitles(Collection<String> titles) throws ParseException {
+        requireNonNull(titles);
+        final Set<LogName> logNameSet = new HashSet<>();
+        for (String title : titles) {
+            logNameSet.add(parseTitle(title));
+        }
+        return logNameSet;
+    }
+
 }
