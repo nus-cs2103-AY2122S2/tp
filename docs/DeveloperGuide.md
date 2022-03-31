@@ -61,7 +61,10 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
+the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component 
+through its interface rather than the concrete class (reason: to prevent outside components being coupled to the 
+implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -73,9 +76,16 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, 
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which 
+captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+that are in the `src/main/resources/view` folder. For example, the layout of the[`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+The `UI` has 3 different `ListPanel` components: `PersonList`, `CompanyList`, and `EventList`. Only one of these lists
+are shown at a time in the display.
 
 The `UI` component,
 
@@ -121,8 +131,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person`, `Company`, and `Event` objects (which are each contained in their own `UniqueEntryList` objects).
+* stores the currently 'selected' objects (e.g., results of a search query) as a separate _filtered_ list.
+  * Each type of entry (`Person`, `Company`, and `Event`) has their own filtered list
+  * These filtered lists are exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' 
+e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -234,10 +247,61 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Archive Feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Design
 
+The main idea of the archive feature for InternBuddy is that archived entries will not show up when searching for entries
+with the `find` or `list` commands unless you add an option to search for archived entries.
+
+To handle this, the `list` and `find` commands needed an extra parameter indicating the search type. To allow for the greatest
+flexibility, there were 3 kinds of search types: `UNARCHIVED_ONLY`, `ARCHIVED_ONLY`, and `ALL`. The user could still opt
+not to explicitly pass a search type; in this case, the default behavior would be `UNARCHIVED_ONLY`.
+
+This extra parameter necessitate
+a `ListCommandParser` to parse it (the list commands previously had no parameters and so did not need a parser class).
+Because the parser would function almost the same for each of the list commands, only one `ListCommandParser` objects was
+added to handle the 3 kinds of list commands. This itself necessitated creating a `ListCommand` object class that each of the
+3 list command classes would inherit from, so that the `ListCommandParser` could return any of the 3 list command classes
+for the `parse()` method.
+
+To deal with the actual archiving, each `Entry` class would simply have an `isArchived` attribute indicating if the entry
+was archived or not. Predicates to check the value of the `isArchived` attribute of each entry can then be applied to the
+filtered lists to filter out archived entries (or filter only archived entries).
+
+Finally, the `archive` command would simply only take the index as the parameter and it would archive whichever entry in
+the currently displayed list was specified by the index. The `unarchive` command has a similar design.
+
+#### Implementation
+
+For the `archive` command:
+1. The user executes `archive 3`.
+2. This command is parsed to check if the given index is valid. If not, a `ParseException` is thrown.
+3. Otherwise, the created `ArchiveCommand` object will execute `Model#archiveEntry(index, true)`.
+4. The model will then retrieve the object from the currently displayed filtered list based on the `index` given and pass
+this along with the boolean argument to`ReadOnlyAddressBook#setArchiveEvent()` (or `setArchiveCompany()` or `setArchivePerson()`) depending on
+the value of `currentlyDisplayedListType`
+5. The address book will then call `setArchiveEntry(object, true)` in the respective `UniqueEntryList`.
+6. Finally, the `UniqueEntryList` will search for the passed object and if it exists (which it should unless a bug occurs),
+it will call the `setArchived(true)` of the Entry.
+7. Finally, the command calls `Model#updateCurrentlyDisplayedList(PREDICATE_SHOW_UNARCHIVED_ONLY)` to change the currently
+displayed list to show all its unarchived entries. Note that in order to get the update to work properly,
+`Model#updateCurrentlyDisplayedList(PREDICATE_ALL) must be called first.
+8. The `CommandResult` of the `archive` command is returned.
+
+A similar process is performed with the `unarchive` command, but `Entry#setArchived()` is ultimately passed `false` instead of `true`.
+
+For the `list` command, here is a sample process:
+1. The user executes `listc`
+2. The `ListCommandParser` object is creates with the appropriate `ListType` passed as a parameter to the constructor.
+3. The `ListCommandParser` parses the command to see if the search type parameter is valid. If there is none, or if the
+passed search type parameter is `unarchived`, `archived`, or `all`, the execution proceeds to 3). Otherwise, a `ParseException`
+is thrown.
+4. The `ListCommandParser` then creates the appropriate `ListCommand` object based on the `ListType` attribute. The
+`ListCommand` object is created with a `SearchType` passed as the parameter.
+5. When the `ListCommand` object is executed, it switches the displayed list to the proper one and applies the appropriate
+predicate on it depending on the search type.
+6. The `CommandResult` of the `find` command is returned.
 
 --------------------------------------------------------------------------------------------------------------------
 
