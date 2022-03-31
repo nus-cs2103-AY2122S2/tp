@@ -94,7 +94,7 @@ class JsonAdaptedLabTest {
     }
 
     @Test
-    public void toModelType_nullLabMarkStatusGraded_throwIllegalArgumentException() {
+    public void toModelType_nullLabMarkStatusGraded_success() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, VALID_LABSTATUS, null);
         Lab expectedLab = new Lab("1");
         try {
@@ -105,7 +105,7 @@ class JsonAdaptedLabTest {
     }
 
     @Test
-    public void toModelType_invalidLabMark_throwIllegalArgumentException() {
+    public void toModelType_invalidLabMark_success() {
         JsonAdaptedLab js = new JsonAdaptedLab(VALID_LABNUMBER, VALID_LABSTATUS, INVALID_LABMARK);
         Lab expectedLab = new Lab("1");
         try {

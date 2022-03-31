@@ -28,7 +28,7 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 
    * **`list`** : Lists all students.
 
-   * **`add`**`n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` : Adds a student named `James Ho` to the Address Book.
+   * **`add`**`n/James Ho e/jamesho@email.com g/jamesH tl/jamesho i/A0123456T` : Adds a student named `James Ho` to the Address Book.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -69,17 +69,10 @@ TAddress Book data are saved in the hard disk automatically after any command th
 
 #### Editing the data file
 TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit that data file.
-We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`s.
 
-Please note the following defensive behavior related to the data JSON file:
-1) All `Student`s will have their `LabList` aligned with the `MasterLabList` when the data file is loaded in. This means that any `Lab`s that a `Student` is missing will be added in with the default `LabStatus` of `UNSUBMITTED`. 
-Any `Lab`s that the `Student` has that is not in the `MasterLabList` will be ignored.
-2) If a `Student` has a lab that has a missing or invalid `LabStatus`, it is loaded as an `UNSUBMITTED` lab or `GRADED` if `labMark` is present and valid. 
-3) If a `Student` has a lab with a missing or invalid `labMark` but has a `LabStatus` of `GRADED`,  it is loaded as an `UNSUBMITTED` lab with `Unknown` mark.
+We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`'s `Lab`s.
 
-If the TAddressBook starts up with blank data, but the user expects there to be data, it means that there are  formatting issues in the data JSON due to editing by the user.
-In which case, if the user wants to fix the data JSON, the user should exit the app without using any commands that can modify data.
-
+If the data loaded is different from the data JSON, refer to [FAQ Q2](#faq).
 
 ### Student-related features
 
@@ -104,7 +97,7 @@ Finds students whose names contain any of the given keywords. At least one keywo
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 #### Deleting a student : `delete`
-Deletes the specified person from the TAddress book. INDEX must be a positive integer 1, 2, 3...
+Deletes the specified student from the TAddress book. INDEX must be a positive integer 1, 2, 3...
 
 Format: `delete INDEX`
 
@@ -154,8 +147,18 @@ Format: `labrm l/LAB_NUMBER`
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q1**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAddressBook home folder.
+
+**Q2**: Why is the data loaded different from my data JSON?<br>
+**A**: Please note the following defensive behavior related to the data JSON file:
+1. All `Student`s will have their `LabList` aligned with the `MasterLabList` when the data file is loaded in. This means that any `Lab`s that a `Student` is missing will be added in with the default `LabStatus` of `UNSUBMITTED`.
+   Any `Lab`s that the `Student` has that is not in the `MasterLabList` will be ignored.
+2. If a `Student` has a lab that has a missing or invalid `LabStatus`, it is loaded as an `UNSUBMITTED` lab or `GRADED` if `labMark` is present and valid.
+3. If a `Student` has a lab with a missing or invalid `labMark` but has a `LabStatus` of `GRADED`,  it is loaded as an `UNSUBMITTED` lab with `Unknown` mark.
+
+If the TAddressBook starts up with blank data, but the user expects there to be data, it means that there are  formatting issues in the data JSON due to editing by the user.
+In which case, if the user wants to fix the data JSON, the user should exit the app without using any commands that can modify data.
 
 --------------------------------------------------------------------------------------------------------------------
 
