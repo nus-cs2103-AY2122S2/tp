@@ -63,7 +63,8 @@ Before you continue reading the rest of our user guide, the table below displays
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
 4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
-
+   * Do note that for Linux OS, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! <br><br>
+   
 5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
 6. For details of each command, please proceed to the [command-structure](#command-structure) section.
@@ -287,6 +288,10 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 **Format:** `clear`
 
 **Example:** `clear`
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**Caution:** Clear will delete the current list! Your list data will be lost!
+</div>
 
 ---
 
@@ -364,23 +369,29 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 Your show list is in a mess! Do you need a way to organise your list?
 Sort can help reorder the list!!
 
-:exclamation:**Caution:**<br>
-*You cannot undo the sort once you have applied it!
+<div markdown="block" class="alert alert-danger">
 
-Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
+:exclamation: **Caution:** You cannot undo the sort once you have applied it!
+</div>
 
-`Sort` will sort according to the [prefixes](#command-structure)**
-* Use `n/` if you want to sort by name 
-* Use `s/` if you want to sort by status
-* Use `t/` if you want to sort by tag
-* Use `r/` if you want to sort by rating
+**Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
+
+<div markdown="block" class="alert alert-warning">
+
+:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure).<br>
+* Use `n/` if you want to sort by name.
+* Use `s/` if you want to sort by status.
+* Use `t/` if you want to sort by tag.
+* Use `r/` if you want to sort by rating.
 * For the above prefixes, you have to specify the `ORDER` right after the prefix.
-* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending! 
-* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.   
+* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending!
+* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
 * List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
-* For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "RatingTagStatusName"
-* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!  
+* For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "name status rating tag"
+* `SEQUENCE` input is case-insensitive.
+* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -389,7 +400,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 * Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
 * The `ORDER` must be asc or dsc!
 * The `SEQUENCE` must contain the full name of all the sort conditions used!
-* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
+* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
 
@@ -406,6 +417,7 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 <img src="images/Sort_UI3.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Suggest a Show: `suggest`
@@ -414,13 +426,33 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 
 **Format:** `suggest`
 
-**Example:** `suggest`
+**Example & Output:** `suggest`
+
+<img src="images/SuggestImage.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Importing a show: `import`
 
+**Description:** Want to easily import Trackermon data from other devices? Just use our import function!
+
+**Format:** `import`
+
+**Example & Output:** `import`
+- Step 1. Navigate to the Trackermon data you want to import using your OS' native [GUI](#glossary)!
+- Step 2. Select the file and click "Open"
+  - Do note that only JSON files can be imported!
+- Step 3. Trackermon will import the selected file and display the imported show list!
+  - If there was an error importing the file, Trackermon will display an error message!
+
+<img src="images/Import.png">
+
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**Caution:** Import will override the current list if successful! Your previous list data will be lost!
+</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -428,6 +460,17 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 
 ### Exporting a show: `export`
 
+**Description:** Want to easily export Trackermon data to other devices? Just use our export function!
+
+**Format:** `export`
+
+**Example & Output:** `export`
+- Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native [GUI](#glossary)!
+- Step 2. Click "Save"
+- Step 3. Trackermon will export the Trackermon data as a JSON file to your selected location. It's that easy!
+  - If there was an error exporting the file, Trackermon will display an error message!
+
+<img src="images/Export.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -447,13 +490,16 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 
 ## FAQ
 * **Q:** Where is the data of Trackermon saved?<br>
-**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.<br><br>
+**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data! There is no need for you to save manually.<br><br>
 
 * **Q:** How is my data being saved in Trackermon?<br>
-**A:** <br><br>
+**A:** Your data will be stored as a JSON file called `trackermon.json`! You can find it in the "data" folder in Trackermon's _home folder_.<br><br>
 
-* **Q:** How do I transfer my data to another Computer?<br>
-  **A:**  
+* **Q:** How do I transfer my data to another computer?<br>
+  **A:** 
+  * Firstly, `export` your data to an external storage device. 
+  * Next, on your other Computer, simply start up Trackermon and `import` the data from the previous step!
+  * Congratulations! You've just transferred your data across different computers!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
