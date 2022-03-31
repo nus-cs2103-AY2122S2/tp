@@ -50,6 +50,8 @@ UNite is a **desktop app for managing contacts specifically designed for people 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+Some features are able to be operated via mouse interaction. Features that allow mouse interactions are disabled by default. 
+
 
 Refer to the [Features](#features-cli) below for details of each command.
 
@@ -172,6 +174,20 @@ filter, simply input the `list` command.
 
 Format: `filter TAG_NAME`
 
+### Add remark to a tag: `remark_tag`
+Modifies the remark of an existing tag. The existing remark will be replaced by the new remark entered. 
+
+Format: `remark_tag t/[TAG_NAME] r/[REMARK]` 
+
+Examples: 
+* `remark_tag t/labGroup1 r/report due 1st May` changes the remark for tag `labGroup1` to 'report due 1st May'.
+* `remark_tag t/labGroup1 r/` clears the remark for tag `labGroup1`.
+
+### Remove all empty tags: `clear_emptyTag`
+Removes all tags that are not attached to any person.
+
+Format: `clear_emptyTag`
+
 ### Locate person by name: `find`<a name="locate-person-by-name"></a>
 
 Finds persons whose names contain any of the given keywords.
@@ -293,18 +309,18 @@ it. Below are the features that are supported by mouse interactions.
 **Note:** Some features included in the CLI section cannot be done using mouse interaction. To execute those features,
 enter the command in the command box following the instructions in the previous section.
 
-### Enable mouse interaction : `enable mouseUX`<a name="enable-mouse-interaction"></a>
+### Enable mouse interaction : `enable_mouseUX`<a name="enable-mouse-interaction"></a>
 Enables mouse interaction in mouseUX. After enabling mouse interactions, 2 new buttons ("Add" and "New tag") will
 appear on the menu bar as shown in the figure below.
 
 <img src="images/enableMouseUX_menuBar.png" width="250"/>
 
-Format: `enable mouseUX`
+Format: `enable_mouseUX`
 
-### Disable mouse interaction : `disable mouseUX`<a name="disable-mouse-interaction"></a>
+### Disable mouse interaction : `disable_mouseUX`<a name="disable-mouse-interaction"></a>
 Enables mouse interaction in mouseUX.
 
-Format: `disable mouseUX`
+Format: `disable_mouseUX`
 
 ### View detailed profile<a name="view-profile-click"></a>
 To view a profile, click on the person card in the list to view it.

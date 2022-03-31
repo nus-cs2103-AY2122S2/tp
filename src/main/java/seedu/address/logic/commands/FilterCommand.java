@@ -8,6 +8,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PersonContainsTagPredicate;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Filters the full person list using a tag
+ */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
@@ -36,7 +39,8 @@ public class FilterCommand extends Command {
         }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
+                        + "\n" + "To clear the filter, enter 'list'.");
     }
 
     @Override
