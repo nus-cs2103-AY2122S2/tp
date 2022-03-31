@@ -28,7 +28,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true"/>
       </HBox>
          <FlowPane fx:id="parentFlowPane">
             <children>
@@ -39,10 +39,10 @@
             <FlowPane fx:id="tags" prefWrapLength="200" />
             </children>
          </FlowPane>
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="info" styleClass="cell_small_label" text="\$info" />
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
+      <Label fx:id="info" styleClass="cell_small_label" text="\$info" wrapText="true"/>
     </VBox>
       <rowConstraints>
          <RowConstraints />
