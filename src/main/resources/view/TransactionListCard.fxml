@@ -2,12 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
@@ -18,8 +19,18 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <Label fx:id="amount" text="\\$amount" />
-            <Label fx:id="isPaid" text="\\$dueDate" />
+         <HBox spacing="5.0">
+            <children>
+               <Label fx:id="index" text="Label" styleClass="cell_big_label">
+                  <font>
+                     <Font size="15.0" />
+                  </font></Label>
+                  <Label fx:id="amount" text="\\$amount" styleClass="cell_big_label">
+                  <font>
+                     <Font size="15.0" />
+                  </font></Label>
+            </children>
+         </HBox>
             <Label fx:id="identifier" text="\\$identifier" />
             <Label fx:id="transactionDate" text="\\$transactionDate" />
             <Label fx:id="dueDate" text="\\$dueDate" />
@@ -29,4 +40,15 @@
          <RowConstraints />
       </rowConstraints>
     </GridPane>
+   <GridPane>
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <ImageView fx:id="status" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      </children>
+   </GridPane>
 </HBox>
