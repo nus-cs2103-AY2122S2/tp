@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.commands.ClearCommand;
 import seedu.ibook.logic.commands.ExitCommand;
+import seedu.ibook.logic.commands.RedoCommand;
+import seedu.ibook.logic.commands.UndoCommand;
 import seedu.ibook.logic.commands.product.AddCommand;
 import seedu.ibook.logic.commands.product.DeleteAllCommand;
 import seedu.ibook.logic.commands.product.DeleteCommand;
@@ -102,6 +104,18 @@ public class IBookParserTest {
     public void parseCommand_outOfStock() throws Exception {
         assertTrue(parser.parseCommand(OutOfStockCommand.COMMAND_WORD) instanceof OutOfStockCommand);
         assertTrue(parser.parseCommand(OutOfStockCommand.COMMAND_WORD + " ") instanceof OutOfStockCommand);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + " 5") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " 5") instanceof RedoCommand);
     }
 
     @Test
