@@ -325,25 +325,74 @@ wrap it into a comparator and pass to `Model#sortPersonList()`.
     * Cons: Will clutter `SortCommand` and may not be manageable once there are a lot of fields.
 
 
-### \[Proposed\] Command chaining
-**Proposed implementation**
+### Command chaining
+**Implementation**
 
-The proposed command chaining mechanism is facilitated in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
+The command chaining mechanism is handled in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
 
-To facilitate multiple commands, the program will split the given user input by a specified delimiter - in this case `|` will be used to seperate multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands collected.
+To handle multiple commands, the program splits the given user input using the `|` delimiter used to separate the multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands.
+
+While iterating through the individual commands, the program checks if any of the commands are a special command - `help`, `exit` and `undo` - or if it is invalid. If any of these conditions are met, the program will then set the `isValid` boolean to false, break out of the loop and set the addressBook of the model to one that was taken before the start of command execution, essentially reverting all the changes.
 
 #### Design considerations:
 
-**Aspect: Handling of special commands and errors:**
+**Aspect: Behaviour of command chains with special commands and errors:**
 
-* **Alternative 1 (current choice):** The special commands `help` and `exit` and command errors will break the chain of execution.
-    * Pros: Intuitive as `help` and `exit` often require immediate action thus subsequent commands are unlikely to be executed anyway even in normal circumstances. Errors in preceding commands may also affect subsequent commands and thus should stop execution to be rectified.
-    * Cons: Will not allow the execution of the following commands which may cause some confusion.
+* **Alternative 1:** The valid commands before a special command `help`, `exit` or `undo` or command error will still be executed
+    * Pros: Easier to implement as there is no need to check the validity of each command and reset the model.
+    * Cons: Will only execute certain commands instead of all when a chain is broken which may be confusing. The undo feature may be harder to implement since a command can be partially run.
 
 
-* **Alternative 2:** Ignore special commands and errors in the middle of the command chain and execute the following commands regardless.
-    * Pros: Allows all commands to be executed which may be expected by some. May even make more sense as calling `help` or `exit` in the command chain does not make much sense and may more often or not be an error.
-    * Cons: Calling `help` or `exit` in the middle of a chain will be useless and some commands may be incorrectly run if preceding commands are invalid.
+* **Alternative 2 (current choice):** Disregard all commands in a chain whenever a special command or error is found.
+    * Pros: Intuitive and plays well with other features such as `undo`.
+    * Cons: Command validity has to be caught and handled in execution() which may slow down performance.
+
+### Command chaining
+**Implementation**
+
+The command chaining mechanism is handled in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
+
+To handle multiple commands, the program splits the given user input using the `|` delimiter used to separate the multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands.
+
+While iterating through the individual commands, the program checks if any of the commands are a special command - `help`, `exit` and `undo` - or if it is invalid. If any of these conditions are met, the program will then set the `isValid` boolean to false, break out of the loop and set the addressBook of the model to one that was taken before the start of command execution, essentially reverting all the changes.
+
+#### Design considerations:
+
+**Aspect: Behaviour of command chains with special commands and errors:**
+
+* **Alternative 1:** The valid commands before a special command `help`, `exit` or `undo` or command error will still be executed
+    * Pros: Easier to implement as there is no need to check the validity of each command and reset the model.
+    * Cons: Will only execute certain commands instead of all when a chain is broken which may be confusing. The undo feature may be harder to implement since a command can be partially run.
+
+
+* **Alternative 2 (current choice):** Disregard all commands in a chain whenever a special command or error is found.
+    * Pros: Intuitive and plays well with other features such as `undo`.
+    * Cons: Command validity has to be caught and handled in execution() which may slow down performance.
+
+### Command completion/correction
+**Implementation**
+
+First, the program checks if the given input or the last command is blank. It is hardcoded to complete such cases with an `add` command as I thought that was more fitting and also because it would most probably get completed with `add` anyway after running through the completion algorithm.
+
+If the input is not blank, it will get the last word in the user's input and first try to complete it by checking if it is a substring of any command. If it is a substring of a command, it will be completed with that command. If the word is a substring of multiple commands, the shortest command will be used.
+
+Once the program determines that the last word cannot be completed, it will try to correct it by finding the Levenshtein distance between the word and all commands. The Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other. The command with the smallest distance from the word will be used as the correction. In the event of a tie, the first evaluated command will be used.
+
+The Levenshtein distance is calculated using the `editDistance(String str1, String str2)` method which uses a typical dynamic programming algorithm with a runtime of O(m * n). Unlike standard algorithms, however, this method uses a fixed height matrix with only two rows that the program alternates between during computation. This means the size is bounded by the length of `str2` which in this case will be one of the fixed commands.
+
+#### Design considerations:
+
+**Aspect: Behaviour of command completion/correction:**
+
+* **Alternative 1:** Suggestions will be shown to the user in realtime while they are typing.
+    * Pros: The user will be able to view each suggestion and will have much more information and freedom to decide whether to take up a suggestion.
+    * Cons: A lot harder to implement in terms of logic, storage and UI.
+
+
+* **Alternative 2 (current choice):** Complete/correct on demand. Take away user choice and provide what the program thinks is the most accurate replacement.
+    * Pros: Less computationally intensive and a lot easier to implement.
+    * Cons: The user will not have a choice of suggestions and will not know what they'll get (blackbox).
+
 
 
 --------------------------------------------------------------------------------------------------------------------

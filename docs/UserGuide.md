@@ -104,6 +104,17 @@ A client can have many fields & tags, including both optional and compulsory one
 | Remark   | `r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`         |       
 | Tags     | `t/`     | Alphanumeric only.<br/><br/> No spaces allowed.<br/><br/> Multiple tags are allowed per client.                                            |                    | `t/Frequentclient t/AppointmentOverdue`   | 
 
+A transaction also have compulsory and optional fields.
+
+| Field            | Prefix      | Constraints                                                                         | Compulsory         | Example                |
+|------------------|-------------|-------------------------------------------------------------------------------------|--------------------|------------------------|
+| Index            | ` `         | Must be an Integer greater than 0.                                                  | :heavy_check_mark: | `1`                    |
+| Amount           | `a/`        | Must be a number greater than 0.                                                    | :heavy_check_mark: | `a/12.45`              |
+| Transaction Date | `td/`       | Must be in *YYY-MM-DD* format and a valid date.                                     | :heavy_check_mark: | `td/2020-11-11`        |
+| Due Date         | `dd/`       | Must be in *YYY-MM-DD* format and a valid date and not before the transaction date. |                    | `dd/2020-11-11`        |
+| Note             | `n/`        | No constraints.                                                                     |                    | `n/2 Box of ice cream` |
+| Status           | `--paid`    | This is a flag, no constraints.                                                     |                    | `--paid`               |       
+
 ### Command Summary
 
 | Action                                                        | Format, Examples                                                                                                                                                      |
@@ -121,11 +132,13 @@ A client can have many fields & tags, including both optional and compulsory one
 | [Find](#find-client-by-keyword-find)                          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            | 
 | [Delete Filtered](#delete-filtered-clients-deletefiltered)    | `deleteFiltered`                                                                                                                                                      |
 | [Undo](#undo-last-modification-undo)                          | `undo`                                                                                                                                                                |
-| [Add Transaction](#add-transaction-addtransaction)            | `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE]`                                                                                            |
+| [Add Transaction](#add-transaction-addtransaction)            | `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE] [--paid]`                                                                                   |
 | [List Transaction](#list-all-transactions-listtransaction)    | `listTransaction`                                                                                                                                                     |
 | [Find Transaction](#find-clients-transaction-findtransaction) | `findTransaction INDEX`                                                                                                                                               |
 | [Delete Transaction](#delete-transaction-deletetransaction)   | `deleteTransaction INDEX_TRANSACTION`                                                                                                                                 |
- | [Add Membership](#add-membership-addmembership)               | `addMembership INDEX m/MEMBERSHIP_NAME [d/DATE]`                                                                                                                      |
+| [Pay Transaction](#pay-transaction-pay)                       | `pay INDEX_TRANSACTION`                                                                                                                                               | 
+| [Unpay Transaction](#unpay-transaction-unpay)                 | `unpay INDEX_TRANSACTION`                                                                                                                                             |
+| [Add Membership](#add-membership-addmembership)               | `addMembership INDEX m/MEMBERSHIP_NAME [d/DATE]`                                                                                                                      |
  | [Exit](#exit-program-exit)                                    | `exit`                                                                                                                                                                |
 
 ### Getting Help (`help`)
@@ -154,7 +167,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTH
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
     * Note: Editing email value to an existing email in the addressBook is not allowed.
@@ -177,7 +192,9 @@ Format: `remark INDEX r/REMARK`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * You can also remove a client's remarks by typing `r/` without anything else.
 
 </div>
@@ -190,7 +207,9 @@ Format: `append INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIR
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields and tags that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
 
@@ -205,7 +224,9 @@ Format: `remove INDEX [r/] [b/] [t/TAG]…​`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * **Compulsory fields cannot be removed.**
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
 * Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
 
@@ -221,8 +242,8 @@ Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* When the client is deleted, all of its' transactions will also get deleted
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
+* When the client is deleted, all of its transactions are also deleted.
 
 </div>
 
@@ -230,9 +251,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
-### Delete All Entries (`clear`)
+### Delete All Data (`clear`)
 
-Clears all entries from CinnamonBun.
+Clears all data from CinnamonBun.
 
 Format: `clear`
 
@@ -303,6 +324,7 @@ Format: `deleteFiltered`
 * `deleteFiltered` deletes all the clients shown in the filtered client list.
 * Use [`find`](#find-client-by-keyword-find) to filter the clients to delete.
 * Otherwise, if the client list is not filtered, it acts like [`clear`](#delete-all-entries-clear).
+* When the client is deleted, all of its transactions are also deleted.
 
 </div>
 
@@ -313,22 +335,23 @@ Examples:
 
 Add a transaction associated with a client.
 
-Format: `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE]`
+Format: `addTransaction INDEX a/AMOUNT td/TRANSACTION_DATE [dd/DUE_DATE] [n/NOTE] [--paid]`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Add a transaction to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * The `AMOUNT` specified **must be greater** than 0.
 * The `TRANSACTION_DATE` and `DUE_DATE` specified **must be a valid date** in `YYY-MM-DD` format.
+* The flag `--paid` will set the transaction status to `paid`
 
 </div>
 
 Examples:
 * `addTransaction 1 a/123.456 td/2020-11-11`
-* `addTransaction 1 a/123.456 td/2020-11-11 dd/2020-12-11 n/Unpaid order CONTACT ASAP`
-* `find Bob | addTransaction 1 a/123.456 td/2020-11-11` will add the transaction to the first client that has Bob 
+* `addTransaction 1 a/123.456 td/2020-11-11 dd/2020-12-11 n/Unpaid order CONTACT ASAP --paid`
+* `find Bob | addTransaction 1 a/123.456 td/2020-11-11` will add the transaction to the first client that contains Bob 
  in its' attributes
 
 ### List All Transactions (`listTransaction`)
@@ -350,12 +373,12 @@ Format: `findTransaction INDEX`
 
 * List all transactions of the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 
 </div>
 
 Examples:
-* `find Bob | listTransaction 1` will add the transaction to the first client that has Bob
+* `find Bob | findTransaction 1` will list the transactions of the first client that contains Bob
   in its' attributes.
 
 ### Delete Transaction (`deleteTransaction`)
@@ -367,15 +390,50 @@ Format: `deleteTransaction INDEX_TRANSACTION`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Delete the transaction at the specified `INDEX_TRANSACTION`.
-* The index refers to the index number shown in the displayed **transaction** list **NOT** the **client** list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed **transaction list NOT the client list**.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 
 </div>
 
 Examples:
 * `deleteTransaction 2`
-* `find Bob | deleteTransaction 1` will add the transaction to the first client that has Bob
-  in its' attributes.
+* `findTransaction 1 | deleteTransaction 1` will delete the first transaction of the first client.
+
+### Pay Transaction (`pay`)
+
+Set the status of a transaction to `paid`.
+
+Format: `pay INDEX_TRANSACTION`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Set the status of the transaction at the specified `INDEX_TRANSACTION` to `paid`.
+* The index refers to the index number shown in the displayed **transaction list NOT the client list**.
+* The index **must be a positive integer** e.g. 1, 2, 3, …​
+
+</div>
+
+Examples:
+* `pay 2`
+* `find 1 | pay 1` will set the first transaction of the first client to `paid`
+
+### Unpay Transaction (`unpay`)
+
+Set the status of a transaction to `unpaid`.
+
+Format: `unpay INDEX_TRANSACTION`
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+* Set the status of the transaction at the specified `INDEX_TRANSACTION` to `unpaid`.
+* The index refers to the index number shown in the displayed **transaction list NO the client list**.
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
+
+</div>
+
+Examples:
+* `unpay 2`
+* `find 1 | unpay 1` will set the first transaction of the first client to `unpaid`
 
 ### Add Membership (`addMembership`)
 
@@ -387,7 +445,7 @@ Format: `addMembership INDEX m/MembershipName [d/Date]`
 
 * Adds a membership to the specified `INDEX`.
 * The index refers to the user at the index number displayed.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * The membership name has to be an alphanumeric string (no symbols, only number and letters).
 * The date has to be in the format 'YYYY-MM-DD'
 

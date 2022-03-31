@@ -17,7 +17,7 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Add/Remove a remark to the client in the list as specified by the index."
         + "Existing remarks will be overwritten.\n"
-        + "Parameters: INDEX (must be a positive integer) "
+        + "Parameters: INDEX (between 1 and 2147483647 inclusive) "
         + "r/[REMARK]\n"
         + "Example: " + COMMAND_WORD + " 2 "
         + "r/Goods to be delivered by next Thursday.";

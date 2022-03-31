@@ -22,13 +22,13 @@ public class AddMembershipCommand extends Command {
             + ": Add a membership to the client in the list as specified by the index. "
             + "There are 3 membership tiers: Bronze, Silver & Gold.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
+            + "INDEX (between 1 and 2147483647 inclusive) "
             + Membership.PREFIX + "MEMBERSHIP "
             + "[" + Membership.DATE_PREFIX + "DATE]\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + Membership.PREFIX + "gold "
-            + "[" + Membership.DATE_PREFIX + "2022-02-03]";
+            + Membership.DATE_PREFIX + "2022-02-03";
 
     public static final String MESSAGE_SUCCESS = "Added membership to %s (%s).";
 
