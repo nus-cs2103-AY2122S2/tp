@@ -235,6 +235,51 @@ Notes:
 * Deletes person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be deleted at a time.
 
+### Adding an insurance package: `addp`
+
+Adds an insurance package to ClientConnect.
+
+Format: `addp i/PACKAGE_NAME d/PACKAGE_DESC`
+
+Examples:
+* `addp i/Golden Package d/First class package`
+
+### Editing an insurance package: `editp`
+
+Edits an existing insurance package in ClientConnect.
+
+Format: `editp i/PACKAGE_NAME d/PACKAGE_DESC`
+
+Examples:
+* `editp i/Golden Package d/Lifetime insurance`
+
+### Deleting an insurance package: `deletep`
+
+Deletes an existing insurance package in ClientConnect.
+
+Format: `deletep i/PACKAGE_NAME`
+
+Examples:
+* `editp i/Golden Package`
+
+### Shows all insurance package: `listp`
+
+Displays all your insurance packages in ClientConnect.
+
+Format: `listp`
+
+### Importing ClientConnect CSV data: `import`
+
+Opens a window to choose a CSV file to load.
+
+Format: `import`
+
+### Exporting ClientConnect data to CSV: `export`
+
+Opens a window to choose a CSV file to export to.
+
+Format: `export`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -245,13 +290,14 @@ Format: `clear`
 
 Copies a client's information onto the system's clipboard.
 
-Format: `clip n/NAME`
+Format: `clip n/NAME` or `clip INDEX`
 
-* Copies the information of the client with the specified NAME.
-* You can look for a client’s name by using the `list` command.
+* Copies the information of the client with the specified NAME, or at the specified INDEX.
+* You can look for a client’s name or his number by using the `list` command.
 
 Examples:
 1. `clip n/John Doe`
+2. `clip 1`
 
 Information copied using `clip n/John Doe`:
 
@@ -267,19 +313,29 @@ Format: `exit`
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                    |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague` |
-| **Add Tag**    | `addTag INDEX TAG`<br> e.g., `addTag 3 owes money :p2`                                                                                                                                              |
- | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
-| **Delete Tag** | `deleteTag INDEX TAG_NUMBER` <br> e.g.,`deleteTag 3 2`                                                                                                         |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                   |
-| **Edit Tag**   | `editTag INDEX TAG_NUMBER TAG`<br> e.g.,`edit 2 3 friend of family`                                                                                                                                 |
-| **Find**       | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                                                  |
- | **Clip**       | `clip n/NAME`<br> e.g., `find n/John Doe`                                                                                                                                                           |
-| **List**       | `list`                                                                                                                                                                                              |
- | **Help**       | `help`                                                                                                                                                                                              |
- | **Exit**       | `exit`                                                                                                                                                                                              |
+| Action               | Format, Examples                                                                                                                                                                                        |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INSURANCE_PACKAGE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 i/package1 t/friend t/colleague` |
+| **Edit Person**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| **Delete Person**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                     |
+| **Add Tag**          | `addTag INDEX TAG`<br> e.g., `addTag 3 owes money :p2`                                                                                                                                                  |
+| **Edit Tag**         | `editTag INDEX TAG_NUMBER TAG`<br> e.g.,`edit 2 3 friend of family`                                                                                                                                     |
+| **Delete Tag**       | `deleteTag INDEX TAG_NUMBER` <br> e.g.,`deleteTag 3 2`                                                                                                                                                  |
+| **Add Package**      | `addp i/PACKAGE_NAME d/PACKAGE_DESC`<br> e.g., `addp i/Golden Package d/Covers everything!`                                                                                                             |
+| **Edit Package**     | `editp i/PACKAGE_NAME d/NEW_PACKAGE_DESC`<br> e.g., `editp i/Golden Package d/Covers everything but death.`                                                                                             |
+| **Delete Package**   | `deletep i/PACKAGE_NAME` <br> e.g.,`deletep i/Golden Package`                                                                                                                                           |
+| **Find**             | `find FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                                                      |
+| **Clip**             | `clip n/NAME`or `clip INDEX` <br> e.g., `clip n/John Doe` or `clip 1`                                                                                                                                   |
+| **List**             | `list`                                                                                                                                                                                                  |
+| **List Packages**    | `listp`                                                                                                                                                                                                 |
+| **Help**             | `help`                                                                                                                                                                                                  |
+| **Import from CSV**  | `import`                                                                                                                                                                                                |
+| **Export to CSV**    | `export`                                                                                                                                                                                                |
+| **Clear**            | `clear`                                                                                                                                                                                                 |
+| **Undo**             | `undo`                                                                                                                                                                                                  |
+| **Redo**             | `redo`                                                                                                                                                                                                  |
+| **Sort by priority** | `prioList`                                                                                                                                                                                              |
+| **Exit**             | `exit`                                                                                                                                                                                                  |
 
 Fields:
 * `n/`: name
@@ -288,3 +344,4 @@ Fields:
 * `a/`: address
 * `i/`: insurance package
 * `t/`: tags
+* `d/`: insurance package description

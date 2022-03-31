@@ -24,10 +24,10 @@ public class DeleteTagCommand extends Command {
             + "(identified by the tag's index number) "
             + "of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Only one tag can be deleted at a time. "
+            + "Only one tag can be deleted at a time. \n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TAG_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + "3 " + "2";
+            + "TAG_INDEX (must be a positive integer) \n"
+            + "Example: " + COMMAND_WORD + " 3 " + "2";
 
     public static final String MESSAGE_SUCCESS = "Deleted tag in Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
