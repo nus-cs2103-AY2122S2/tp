@@ -124,6 +124,7 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
 * The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
+### House Type
 * The `HOUSE_TYPE` can be defined as any of the following:
   * `unspecified`
   * `apartment`
