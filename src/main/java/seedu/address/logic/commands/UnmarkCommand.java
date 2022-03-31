@@ -20,8 +20,8 @@ public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_UNMARK_SUCCESS = "Successfully unmark given students from %s(%s).";
-    public static final String MESSAGE_UNMARK_FAILED = "Students: %s are not enrolled\n"
-            + "Successfully unmark other students from %s(%s).";
+    public static final String MESSAGE_STUDENT_NOT_ENROLLED = "Student(s) not enrolled:\n%s";
+    public static final String MESSAGE_UNMARK_OTHERS = "Successfully unmark other students from %s(%s).";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance(s) of the specified student(s)"
             + "belonging to the class group at the specified CLASS_GROUP_INDEX for the specified week.\n"
             + "\tParameters: " + PREFIX_CLASS_INDEX + "CLASS_GROUP_INDEX "
@@ -57,7 +57,7 @@ public class UnmarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        String result = "";
         List<ClassGroup> cgList = model.getUnfilteredClassGroupList();
 
         if (classGroupIndex.getZeroBased() >= cgList.size()) {
@@ -76,7 +76,14 @@ public class UnmarkCommand extends Command {
             return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS,
                     classGroup.getClassGroupId(), classGroup.getClassGroupType()));
         }
-        return new CommandResult(String.format(MESSAGE_UNMARK_FAILED,
-                notUnmarkedStudents.toString(), classGroup.getClassGroupId(), classGroup.getClassGroupType()));
+        String notEnrolledStudents = notUnmarkedStudents.stream().map(student ->
+                        String.format("\t%s (%s)\n", student.getName(), student.getStudentId()))
+                .reduce("", (x, y) -> x + y);
+        result = String.format(MESSAGE_STUDENT_NOT_ENROLLED, notEnrolledStudents);
+        if (notUnmarkedStudents.size() != students.size()) {
+            result += String.format(MESSAGE_UNMARK_OTHERS,
+                    classGroup.getClassGroupId(), classGroup.getClassGroupType());
+        }
+        return new CommandResult(result);
     }
 }

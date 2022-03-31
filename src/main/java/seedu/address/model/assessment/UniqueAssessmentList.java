@@ -3,6 +3,7 @@ package seedu.address.model.assessment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assessment.exceptions.AssessmentNotFoundException;
 import seedu.address.model.assessment.exceptions.DuplicateAssessmentException;
+import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * A list of assessments that enforces uniqueness between its elements and does not allow nulls.
@@ -84,6 +87,19 @@ public class UniqueAssessmentList implements Iterable<Assessment> {
     public void setAssessments(UniqueAssessmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Returns all the assessments of a TA module
+     */
+    public List<Assessment> findAssessmentsOfModule(TaModule taModule) {
+        List<Assessment> lst = new ArrayList<>();
+        for (Assessment assessment : internalList) {
+            if (assessment.getModule().equals(taModule)) {
+                lst.add(assessment);
+            }
+        }
+        return lst;
     }
 
     /**

@@ -43,8 +43,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                     argMultimap.getValue(PREFIX_STUDENT).get(), model);
             return new MarkCommand(classGroupIndex, weekIndex, students);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format("%s\n%s", pe.getMessage(), MarkCommand.MESSAGE_USAGE), pe);
         }
     }
 }

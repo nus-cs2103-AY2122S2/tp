@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -43,8 +44,7 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
                     argMultimap.getValue(PREFIX_STUDENT).get(), model);
             return new UnmarkCommand(classGroupIndex, weekIndex, students);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format("%s\n%s", pe.getMessage(), UnmarkCommand.MESSAGE_USAGE), pe);
         }
     }
 }

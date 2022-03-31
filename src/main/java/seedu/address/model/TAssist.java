@@ -182,6 +182,10 @@ public class TAssist implements ReadOnlyTAssist {
         for (ClassGroup classGroup : lst) {
             this.removeClassGroup(classGroup);
         }
+        List<Assessment> assessmentList = assessments.findAssessmentsOfModule(key);
+        for (Assessment assessment : assessmentList) {
+            this.removeAssessment(assessment);
+        }
         modules.remove(key);
     }
 

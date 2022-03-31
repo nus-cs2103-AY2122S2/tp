@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DisenrolCommand;
 import seedu.address.logic.commands.EnrolCommand;
+import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
@@ -50,8 +51,7 @@ public class GenericEnrolCommandParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage), pe);
+            throw new ParseException(String.format("%s\n%s", pe.getMessage(), usage), pe);
         }
     }
 }
