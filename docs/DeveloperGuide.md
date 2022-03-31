@@ -32,11 +32,11 @@ The `.puml` files used to create diagrams in this document can be found in the [
 
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
-*Figure: High-level ***architecture diagram*** of the CinnamonBun.*
+*Figure: High-level architecture diagram of the CinnamonBun.*
 
 Given below is a quick overview of main components and how they interact with each other.
 
-#### Main components of the architecture
+**Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-W09-2/tp/blob/master/src/main/java/seedu/address/Main.java)
 and [`MainApp`](https://github.com/AY2122S2-CS2103T-W09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java).
@@ -53,11 +53,11 @@ The rest of the App consists of four components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 
-#### How the architecture components interact with each other
+**How the architecture components interact with each other**
 
 ![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
-*Figure: ***Sequence diagram*** of main components' interaction when use issues the command `delete 1`.*
+*Figure: Sequence diagram of main components' interaction when use issues the command `delete 1`.*
 
 Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
@@ -67,7 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 ![Component Managers](images/ComponentManagers.png)
 
-*Figure: ***Partial class diagram*** of interaction of the main components.*
+*Figure: Partial class diagram of interaction of the main components.*
 
 The sections below give more details of each component.
 
@@ -81,7 +81,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![UI Class Diagram](images/UiClassDiagram.png)
 
-*Figure: ***Class diagram*** of CinnamonBun's GUI using JavaFX framework.*
+*Figure: Class diagram of CinnamonBun's GUI using JavaFX framework.*
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TransactionListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -99,7 +99,7 @@ The `UI` component,
 
 ![Logic Class Diagram](images/LogicClassDiagram.png)
 
-*Figure: ***Partial class diagram*** of the `Logic` component.*
+*Figure: Partial class diagram of the `Logic` component.*
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -127,7 +127,7 @@ How the parsing works:
 
 ![Model Class Diagram](images/ModelClassDiagram.png)
 
-*Figure: ***Class diagram*** of `Model` component.*
+*Figure: Class diagram of `Model` component.*
 
 The `Model` component,
 
@@ -138,22 +138,13 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-![Better Model Class Diagram](images/BetterModelClassDiagram.png)
-
-*Figure: A better ***class diagram*** of `Model` component.*
-
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-W09-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 ![Storage Class Diagram](images/StorageClassDiagram.png)
 
-*Figure: ***Class diagram*** of `Storage` component.*
+*Figure: Class diagram of `Storage` component.*
 
 The `Storage` component,
 * stores user preference data in json format, and reads it back into corresponding objects.
@@ -171,11 +162,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo
+### Undo
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo mechanism is facilitated by `SerializableTempAddressBookStorage`. It extends `TempAddressBookStorage` 
+The undo mechanism is facilitated by `SerializableTempAddressBookStorage`. It extends `TempAddressBookStorage` 
 an interface and is stored and managed at `StorageManager` as `tempAddressBookStorage`.
 
 This mechanism will store previous states of CinnamonBun when a modification or change is made to the data in temporary files.
@@ -245,10 +236,10 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Membership functionality
+### Membership functionality
 
-#### Proposed Implementation
-The proposed membership functionality will be to store all available memberships into a list and allow clients to be assigned a membership.
+#### Implementation
+The membership functionality will be to store all available memberships into a list and allow clients to be assigned a membership.
 
 Membership details will be created by users, user can then assign an existing membership to a client.
 
@@ -264,10 +255,10 @@ Membership details will be created by users, user can then assign an existing me
   * Pros: Easy to implement
   * Cons: Harder to manage individual memberships, functions similar to a tag, but with extra variables.
 
-### \[Proposed\] Transaction functionality
+### Transaction functionality
 
-#### Proposed Implementation
-The proposed Transaction Functionality will allow users to store a transaction and assign it to a client. 
+#### Implementation
+The Transaction Functionality will allow users to store a transaction and assign it to a client. 
 User will have to specify the client the transaction will be assigned to, and input all the transaction's attributes.
 
 The current implementation of `Transaction` class is similar to Person class. Every field/attribute of transaction needs to 
@@ -298,10 +289,10 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
     * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
     in comparison to the `Person` class.
 
-### \[Proposed\] Sort functionality
-**Proposed implementation**
+### Sort functionality
+**Implementation**
 
-The proposed sort mechanism is facilitated by `SortCommand`. It extends `Command` and the main logic of sort is in it's
+The sort mechanism is facilitated by `SortCommand`. It extends `Command` and the main logic of sort is in it's
 `execute` function which returns a `CommandResult` object.
 
 The `SortCommand#execute()` function would first parse the user's inputs. For every field parsed, the function would create a 
