@@ -24,7 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -44,6 +43,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+    private String separator = ",";
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -69,11 +69,11 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + USERNAME_DESC_AMY
             + USERNAME_DESC_BOB + TEAM_DESC_FRIEND + SKILL_DESC_PYTHON, new AddCommand(expectedPerson));
 
-        // multiple teams - all accepted
-        Person expectedPersonMultipleTeams = new PersonBuilder(BOB).withTeams(VALID_TEAM_FRIEND, VALID_TEAM_HUSBAND)
+        // multiple teams - last team accepted
+        Person expectedPersonSingleTeam = new PersonBuilder(BOB).withTeams(VALID_TEAM_FRIEND)
             .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + USERNAME_DESC_BOB
-            + TEAM_DESC_HUSBAND + TEAM_DESC_FRIEND + SKILL_DESC_PYTHON, new AddCommand(expectedPersonMultipleTeams));
+            + TEAM_DESC_HUSBAND + TEAM_DESC_FRIEND + SKILL_DESC_PYTHON, new AddCommand(expectedPersonSingleTeam));
     }
 
     @Test

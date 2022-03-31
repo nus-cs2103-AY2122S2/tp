@@ -136,7 +136,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String skill} into a {@code skill}.'
-     *
+     * <p>
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code skill} is invalid.
@@ -172,6 +172,57 @@ public class ParserUtil {
             teamSet.add(parseTeam(teamName));
         }
         return teamSet;
+    }
+
+
+    /**
+     * Converts userInput of team arguments to {@code Set} of {@code Team}s.
+     *
+     * @param optionalTeamNames The userInput provided. Is empty if the user did not provide any team argument.
+     * @param separator         The Regex used to parse multiple teamNames.
+     * @return Set of teams.
+     * @throws ParseException If a teamName cannot be parsed.
+     */
+    public static Set<Team> parseTeamsWithRegex(Optional<String> optionalTeamNames, String separator)
+        throws ParseException {
+        Set<Team> teamSet = new HashSet<>();
+        if (!optionalTeamNames.isPresent()) {
+            return teamSet;
+        }
+        String teamNames = optionalTeamNames.get();
+        String[] separatedTeamNames = teamNames.split(separator, 0);
+        if (!(separatedTeamNames.length == 1 && separatedTeamNames[0].equals(""))) {
+            for (String teamName : separatedTeamNames) {
+                Team team = ParserUtil.parseTeam(teamName);
+                teamSet.add(team);
+            }
+        }
+        return teamSet;
+    }
+
+    /**
+     * Converts userInput of skills to {@code Set} of {@code Skill}s
+     *
+     * @param optionalSkillNamesWithLvl UserInput of the skills.
+     * @param separator Regex to split the userInput and identify each skill.
+     * @return The {@code Set} of {@code Skill} identified from UserInput.
+     * @throws ParseException If the skill with level specified cannot be parsed.
+     */
+    public static Set<Skill> parseSkillsWithRegex(Optional<String> optionalSkillNamesWithLvl, String separator)
+        throws ParseException {
+        Set<Skill> skillSet = new HashSet<>();
+        if (!optionalSkillNamesWithLvl.isPresent()) {
+            return skillSet;
+        }
+        String skillNamesWithLvl = optionalSkillNamesWithLvl.get();
+        String[] separatedSkillNameWithLvl = skillNamesWithLvl.split(separator, 0);
+        if (!(separatedSkillNameWithLvl.length == 1 && separatedSkillNameWithLvl[0].equals(""))) {
+            for (String skillNameWithLvl : separatedSkillNameWithLvl) {
+                Skill skill = ParserUtil.parseSkill(skillNameWithLvl);
+                skillSet.add(skill);
+            }
+        }
+        return skillSet;
     }
 
     /**
