@@ -113,7 +113,8 @@ public class AddressBookParser {
 
         case ShowEventsCommand.COMMAND_WORD:
         case ShowEventsCommand.COMMAND_ALIAS:
-            return new ShowEventsCommand();
+            return new ShowEventsCommandParser().parse(arguments);
+
 
         case ShowInsightsCommand.COMMAND_WORD:
             return new ShowInsightsCommand();

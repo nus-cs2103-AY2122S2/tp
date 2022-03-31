@@ -3,9 +3,15 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.time.LocalDate;
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDateIsAfterPredicate;
+import seedu.address.model.event.EventFriendNamesContainSubstringPredicate;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 
@@ -68,6 +74,13 @@ public class ShowFriendCommand extends ByIndexByNameCommand {
 
         //updates UI to only show a single person
         model.updateFilteredPersonList(x -> x.isSamePerson(personToShow));
+
+        // updates UI to show upcoming events tied to this person
+        // TODO: Known bug, will show upcoming events for today that have already passed...
+        Predicate<Event> upcomingEventPredicate = new EventDateIsAfterPredicate(LocalDate.now());
+        Predicate<Event> friendPredicate = new EventFriendNamesContainSubstringPredicate(personToShow.getName().toString());
+
+        model.updateFilteredEventList(event -> upcomingEventPredicate.test(event) && friendPredicate.test(event));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToShow.getName()), false,
                 false, false, true, false);

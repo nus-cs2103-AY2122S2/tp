@@ -35,8 +35,17 @@ public class ShowEventsCommandTests {
      * Checks whether showevents executes properly.
      */
     @Test
-    public void execute_showfriends_showsSameList() {
-        assertEventCommandSuccess(new ShowEventsCommand(), model, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_showEvents_showsSameList() {
+        expectedModel.updateFilteredEventList(event -> event.getDateTime().isAfterNow());
+        assertEventCommandSuccess(new ShowEventsCommand(false), model, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    /**
+     * Checks whether showevents executes properly.
+     */
+    @Test
+    public void execute_showAllEvents_showsSameList() {
+        assertEventCommandSuccess(new ShowEventsCommand(true), model, ShowEventsCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 
     /**
@@ -45,7 +54,7 @@ public class ShowEventsCommandTests {
     @Test
     public void execute_noevents_showsEmptyList() {
         Model noEventModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertEventCommandSuccess(new ShowEventsCommand(), noEventModel, ShowEventsCommand.MESSAGE_SUCCESS, noEventModel);
+        assertEventCommandSuccess(new ShowEventsCommand(false), noEventModel, ShowEventsCommand.MESSAGE_SUCCESS, noEventModel);
 
         // Model has persons but no events, thus event list should be empty.
         assertFalse(noEventModel.getFilteredPersonList().isEmpty());
@@ -57,7 +66,7 @@ public class ShowEventsCommandTests {
      */
     @Test
     public void execute_listIsFiltered_showsOrderedList() {
-        assertEventCommandSuccess(new ShowEventsCommand(), model, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertEventCommandSuccess(new ShowEventsCommand(true), model, ShowEventsCommand.MESSAGE_SUCCESS_ALL, expectedModel);
 
         ObservableList<Event> checkSorted = model.getFilteredEventList();
 
