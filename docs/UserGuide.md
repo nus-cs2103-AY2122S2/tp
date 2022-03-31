@@ -428,7 +428,7 @@ Format: `unpay INDEX_TRANSACTION`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Set the status of the transaction at the specified `INDEX_TRANSACTION` to `unpaid`.
-* The index refers to the index number shown in the displayed **transaction list NO the client list**.
+* The index refers to the index number shown in the displayed **transaction list NOT the client list**.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 
 </div>
@@ -544,8 +544,8 @@ Multiple commands can be chained by separating each command with the `|` charact
 * Each command is run sequentially from first to last.
 * Take note of indexes. E.g. `delete 7 | delete 8` may not work as expected as deleting item 7 will in turn cause item 8 to become item 7 which may result in unintended consequences. Instead, run `delete 7 | delete 7` which is what you would do anyway if you wanted to achieve the same effect by running each command individually. This is intended behaviour.
 * If invalid commands and the special commands `help`, `exit` and `undo` are found anywhere in the command chain, the whole chain will be invalidated causing none of the commands in the chain - even valid commands - to execute.
-* Anything bounded by the start of the command, the end of command and the '|' separators will be considered a command. E.g. `find alex | clearFiltered | ` will be considered three commands, namely "find alex", "clearFiltered" and " ". Since the third command, " ", is invalid, the first two will not execute.
-* The user will only receive the command feedback of the last command
+* Anything bounded by the start of the command, the end of command and the `|` separators will be considered a command. E.g. `find alex | clearFiltered |` will be considered three commands, namely "find alex", "clearFiltered" and " ". Since the third command, " ", is empty and thus invalid, the first two will not execute.
+* The user will only receive the command feedback of the last command. E.g. Running `delete 2 | add n/John p/81234567 e/john@email.com a/42 Doe St` will only show `Added John.` in the result box.
 
 </div>
 
@@ -554,15 +554,15 @@ Examples:
 
 * Valid command chain:
 
-`add n/John Doe e/johndoe@email.com | edit 5 p/999 | delete 2`
+`add n/John p/81234567 e/john@email.com a/42 Doe St | edit 5 p/999 | delete 2`
 
 * Invalid command chains:
 
-`add n/John Doe e/johndoe@email.com | invalidCommand | delete 2` (add and delete commands will not execute as an invalid command was found)
+`add n/John p/81234567 e/john@email.com a/42 Doe St | invalidCommand | delete 2` (add and delete commands will not execute as an invalid command was found)
 
-`add n/John Doe e/johndoe@email.com | delete 2 | undo` (add and delete commands will not execute as a special command, in this case `undo`, was found)
+`add n/John p/81234567 e/john@email.com a/42 Doe St | delete 2 | undo` (add and delete commands will not execute as a special command, in this case `undo`, was found)
 
-`add n/John Doe e/johndoe@email.com | ` (add command will not execute as the second command is empty and is thus invalid)
+`add n/John p/81234567 e/john@email.com a/42 Doe St |` (add command will not execute as the second command is empty and is thus invalid)
 
 ### Command History
 
