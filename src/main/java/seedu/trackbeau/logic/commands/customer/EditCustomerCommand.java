@@ -12,6 +12,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
+import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ import seedu.trackbeau.logic.commands.Command;
 import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Birthdate;
 import seedu.trackbeau.model.customer.Customer;
@@ -100,8 +102,18 @@ public class EditCustomerCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
+        List<Booking> lastShownBookingsList = model.getFilteredBookingList();
+        for (int i = 0; i < lastShownBookingsList.size(); i++) {
+            Booking booking = lastShownBookingsList.get(i);
+            if (booking.getCustomer().equals(customerToEdit)) {
+                model.setBooking(booking, new Booking(editedCustomer, booking.getService(),
+                        booking.getBookingDateTime(), booking.getFeedback()));
+            }
+        }
+
         model.setCustomer(customerToEdit, editedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
         return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer), Panel.CUSTOMER_PANEL);
     }
 

@@ -10,6 +10,7 @@ import seedu.trackbeau.commons.exceptions.IllegalValueException;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.booking.BookingDateTime;
+import seedu.trackbeau.model.booking.Feedback;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
 
@@ -23,6 +24,7 @@ class JsonAdaptedBooking {
     private final Integer customerIndex;
     private final Integer serviceIndex;
     private final String bookingDateTime;
+    private final String feedback;
 
     /**
      * Constructs a {@code JsonAdaptedBooking} with the given Booking details.
@@ -30,10 +32,12 @@ class JsonAdaptedBooking {
     @JsonCreator
     public JsonAdaptedBooking(@JsonProperty("nameIndex") Integer customerIndex,
                               @JsonProperty("serviceIndex") Integer serviceIndex,
-                              @JsonProperty("bookingDateTime") String bookingDateTime) {
+                              @JsonProperty("bookingDateTime") String bookingDateTime,
+                              @JsonProperty("feedback") String feedback) {
         this.customerIndex = customerIndex;
         this.serviceIndex = serviceIndex;
         this.bookingDateTime = bookingDateTime;
+        this.feedback = feedback;
     }
 
     /**
@@ -43,6 +47,7 @@ class JsonAdaptedBooking {
         this.customerIndex = customerIndex;
         this.serviceIndex = serviceIndex;
         this.bookingDateTime = source.getBookingDateTime().toString();
+        this.feedback = source.getFeedback().toString();
     }
 
     Integer getModelCustomerID() throws IllegalValueException {
@@ -71,9 +76,22 @@ class JsonAdaptedBooking {
                     BookingDateTime.class.getSimpleName()));
         }
         if (!BookingDateTime.isValidBookingDateTime(bookingDateTime)) {
+
             throw new IllegalValueException(BookingDateTime.MESSAGE_CONSTRAINTS);
         }
+
         return new BookingDateTime(bookingDateTime);
+    }
+
+    Feedback getModelFeedback() throws IllegalValueException {
+        if (feedback == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Feedback.class.getSimpleName()));
+        }
+        if (!Feedback.isValidFeedback(feedback)) {
+            throw new IllegalValueException(Feedback.MESSAGE_CONSTRAINTS);
+        }
+        return new Feedback(feedback);
     }
 
     /**
@@ -87,6 +105,6 @@ class JsonAdaptedBooking {
         Customer customer = customerList.get(getModelCustomerID());
         Service service = serviceList.get(getModelServiceID());
 
-        return new Booking(customer, service, getModelBookingDateTime());
+        return new Booking(customer, service, getModelBookingDateTime(), getModelFeedback());
     }
 }

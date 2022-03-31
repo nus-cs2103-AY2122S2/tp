@@ -5,6 +5,7 @@ import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICEINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.trackbeau.logic.parser.booking.AddBookingCommandParser.EMPTY_FEEDBACK_TYPE;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.booking.BookingDateTime;
+import seedu.trackbeau.model.booking.Feedback;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.ui.Panel;
@@ -43,6 +45,7 @@ public class AddBookingCommand extends Command {
     private final Integer customerIndex;
     private final Integer serviceIndex;
     private final BookingDateTime bookingDateTime;
+    private final Feedback feedback = new Feedback(EMPTY_FEEDBACK_TYPE);
 
     /**
      * Creates an AddBookingCommand to add the specified booking
@@ -61,7 +64,7 @@ public class AddBookingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Customer> customerList = model.getFilteredCustomerList();
-        List<Service> serviceList = model.getFilteredServicesList();
+        List<Service> serviceList = model.getFilteredServiceList();
 
         if (customerIndex >= customerList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
@@ -75,7 +78,7 @@ public class AddBookingCommand extends Command {
         Service service = serviceList.get(serviceIndex);
         requireAllNonNull(customer, service);
 
-        Booking booking = new Booking(customer, service, bookingDateTime);
+        Booking booking = new Booking(customer, service, bookingDateTime, feedback);
 
         if (model.hasBooking(booking)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOKING);

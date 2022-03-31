@@ -44,16 +44,17 @@ import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_SERVICE_BOB;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_AMY;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.VALID_STAFF_BOB;
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 import static seedu.trackbeau.testutil.TypicalCustomers.AMY;
 import static seedu.trackbeau.testutil.TypicalCustomers.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.logic.commands.customer.AddCustomerCommand;
+import seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser;
 import seedu.trackbeau.model.customer.Address;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Email;

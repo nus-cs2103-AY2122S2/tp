@@ -2,6 +2,8 @@ package seedu.trackbeau.model.booking;
 
 import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.model.customer.Name;
 import seedu.trackbeau.model.customer.Phone;
@@ -18,15 +20,17 @@ public class Booking implements UniqueListItem, Comparable<Booking> {
     private final Customer customer;
     private final Service service;
     private final BookingDateTime bookingDateTime;
+    private final Feedback feedback;
 
     /**
      * Every field must be present and not null.
      */
-    public Booking(Customer customer, Service service, BookingDateTime bookingDateTime) {
+    public Booking(Customer customer, Service service, BookingDateTime bookingDateTime, Feedback feedback) {
         requireAllNonNull(bookingDateTime);
         this.customer = customer;
         this.service = service;
         this.bookingDateTime = bookingDateTime;
+        this.feedback = feedback;
     }
 
     public Customer getCustomer() {
@@ -51,6 +55,14 @@ public class Booking implements UniqueListItem, Comparable<Booking> {
 
     public BookingDateTime getBookingDateTime() {
         return bookingDateTime;
+    }
+
+    public LocalDateTime getBookingEndTime() {
+        return bookingDateTime.value.plusHours(service.getDuration().value / 60);
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
     }
 
     /**

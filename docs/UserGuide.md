@@ -121,7 +121,7 @@ It is split into the following subsections:
 1. [Customer management ](#41-customer-management)
 2. [Service management ](#42-service-management)
 3. [Booking management ](#43-booking-management)
-4. [Statistics ](#44-statistics)
+4. [Statistics ](#44-statistics-management)
 5. [Miscellaneous ](#45-miscellaneous)
 
 ### 4.1 Customer management
@@ -212,9 +212,9 @@ Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `john` will not match `joh`
 
 Examples:
-* `find name John` returns `john` and `John Doe`
-* `find allergies nickle` returns customer profiles with nickle allergies
-* `find hairtype oily dry` returns customer profiles that has the hair type of oily or dry
+* `findc n/John` returns `john` and `John Doe`
+* `findc al/Nickel` returns customer profiles with nickle allergies
+* `findc h/Oily h/Dry` returns customer profiles that has the hair type of oily or dry
 
 #### 4.1.6 Deleting customer(s) : `deletec`
 
@@ -301,15 +301,67 @@ The table below shows a list of command parameters that will be used for booking
 |||
 |`INDEX`|The index of the booking in the displayed list. It must be a valid positive index.|
 
-### 4.4 Statistics
+### 4.4 Statistics Management
 
-#### 4.4.1 Statistics command parameters
-The table below shows a list of command parameters that will be used for statistics.
+#### 4.4.1 Design
+The charts will be plotted in a pop-up.   
 
-|Parameter|Description|
-|---------|-----------|
-|||
+#### 4.4.2 Plot all charts: `plot`
+Plots all available chart formats.
 
+Format: `plot`
+
+Examples:
+* `plot`
+   
+#### 4.4.3 Plot chart on popular staff amongst customers: 'plotStaff'
+Plots a pie chart on the most popular staff as indicated by customers as their preferred staff. If there are most than 10 staffs indicated as preferred by customers in TrackBeau, only the top 10 most popular staff will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotStaff`
+
+Examples:
+* `plotStaff`
+
+#### 4.4.4 Plot chart on popular services amongst customers: 'plotService'
+Plots a pie chart on the most popular service as indicated by customers as their preferred service. If there are most than 10 services indicated as preferred by customers in TrackBeau, only the top 10 most popular services will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotService`
+
+Examples:
+* `plotService`
+   
+#### 4.4.5 Plot chart on common allergies amongst customers: 'plotAllergy'
+Plots a pie chart on the most common allergies amongst customers. If there are most than 10 allergies in customer data, only the top 10 most common allergies will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotAllergy`
+
+Examples:
+* `plotAllergy`
+  
+#### 4.4.6 Plot chart on common skin type amongst customers: 'plotSkin'
+Plots a pie chart on the most common allergies amongst customers. If there are most than 10 skin types in customer data, only the top 10 most skin types will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotSkin`
+
+Examples:
+* `plotSkin`   
+
+#### 4.4.7 Plot chart on common hair type amongst customers: 'plotHair'
+Plots a pie chart on the most common hair type amongst customers. If there are most than 10 hair type in customer data, only the top 10 most hair types will be included in the piechart to let the chart be still meaningful.
+
+Format: `plotHair`
+
+Examples:
+* `plotHair`
+   
+#### 4.4.8 Plot chart on monthly customers gained in the current year: 'plotMonthlyCustomer'
+Plots a pie chart on monthly customers gained in the current year.
+
+Format: `plotMonthlyCustomer`
+
+Examples:
+* `plotMonthlyCustomer`
+   
 ### 4.5 Miscellaneous
 
 #### 4.5.1 Viewing help : `help`
@@ -379,9 +431,17 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 ### 5.4 Statistics
 
+The charts plot up to 10 variables at most. For example, in plotStaff, the top 10 most popular staff will be plotted if there are for instance, 15 staff indicated by customers.
+   
 |Action|Format|Examples|
 |------|------|--------|
-|||
+|Plot all charts |`plot`|`plot`|
+|Plot chart of popular staff (popular being customers indicated them as their preferred staff) |`plotStaff`|`plotStaff`|
+|Plot chart on popular services by customers (as indicated in their preferred services) |`plotService`|`plotService`|
+|Plot chart on common allergies amongst customers |`plotAllergy`|`plotAllergy`|
+|Plot chart on common skin type of customers |`plotSkin`|`plotSkin`|
+|Plot chart on common hair type of customers |`plotHair`|`plotHair`|
+|Plot chart on customers gained per month in the current year |`plotMonthlyCustomer`|`plotMonthlyCustomer`|   
 
 ### 5.5 Miscellaneous
 

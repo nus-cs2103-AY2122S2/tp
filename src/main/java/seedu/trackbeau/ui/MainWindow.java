@@ -1,7 +1,7 @@
 package seedu.trackbeau.ui;
 
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -180,7 +180,7 @@ public class MainWindow extends UiPart<Stage> {
             break;
         case SERVICE_PANEL:
             servicesLabel.getStyleClass().add("selected");
-            serviceListPanel = new ServiceListPanel(logic.getFilteredServicesList());
+            serviceListPanel = new ServiceListPanel(logic.getFilteredServiceList());
             detailsPanelPlaceholder.getChildren().add(serviceListPanel.getRoot());
             break;
         case BOOKING_PANEL:
