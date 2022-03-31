@@ -53,7 +53,6 @@ public class Status {
      * Checks whether the current status is Pending.
      */
     public boolean isPendingStatus() {
-
         return value.equals("Pending");
     }
 

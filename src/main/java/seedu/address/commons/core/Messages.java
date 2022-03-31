@@ -16,12 +16,10 @@ public class Messages {
     public static final String MESSAGE_NO_FLAG = "No flag is found!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INTERVIEW_CANNOT_BE_PASSED = "The interview cannot be passed, "
-            + "as the number of current offers will exceed the number of available positions or because the status"
-            + " has been modified and it is not pending";
+            + "as the number of current offers will exceed the number of available positions or because only pending"
+            + " interviews can be passed";
     public static final String MESSAGE_INTERVIEW_CANNOT_BE_FAILED = "The interview cannot be failed, "
-            + "since it's status has already been modified and it is not pending";
-    public static final String MESSAGE_INTERVIEW_CANNOT_BE_ACCEPTED = "The interview cannot be accepted, "
-            + "as it does not have a Passed status!";
-    public static final String MESSAGE_INTERVIEW_CANNOT_BE_REJECTED = "The interview cannot be rejected, "
-            + "as it does not have a Passed status!";
+            + "because only pending interviews can be failed";
+    public static final String MESSAGE_INTERVIEW_CANNOT_BE_ACCEPTED = "Only passed interviews can be accepted!";
+    public static final String MESSAGE_INTERVIEW_CANNOT_BE_REJECTED = "Only passed interviews can be rejected!";
 }
