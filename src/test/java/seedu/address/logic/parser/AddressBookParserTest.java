@@ -62,20 +62,33 @@ public class AddressBookParserTest {
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        AddCommand commandByAlias = (AddCommand) parser.parseCommand(PersonUtil.getAddCommandAlias(person));
         assertEquals(new AddCommand(person), command);
+
+        //to check if command alias works
+        assertEquals(new AddCommand(person), commandByAlias);
     }
 
     @Test
     public void parseCommandByName_deletefriend() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " n/Dummy Name");
+        DeleteCommand commandByAlias = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_ALIAS + " n/Dummy Name");
         assertEquals(new DeleteCommand(new FriendName("Dummy Name")), command);
+
+        //to check if command alias works
+        assertEquals(new DeleteCommand(new FriendName("Dummy Name")), commandByAlias);
     }
 
     @Test
     public void parseCommandByIndex_deletefriend() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
             + INDEX_FIRST_PERSON.getOneBased());
+        DeleteCommand commandByAlias = (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+
+        //to check if command alias works
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), commandByAlias);
     }
 
     @Test
@@ -90,7 +103,14 @@ public class AddressBookParserTest {
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+
+        EditCommand commandByAlias = (EditCommand) parser.parseCommand(EditCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+
+        //to check if command alias works
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), commandByAlias);
     }
 
     @Test
@@ -98,9 +118,18 @@ public class AddressBookParserTest {
         Event event = new EventBuilder().build();
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
         EditEventCommand command = (EditEventCommand) parser.parseCommand(EditEventCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + "n/Default Event " + "dt/12-5-2022 1500 " + "d/Default Description "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + "n/Default Event " + "dt/1-1-2022 1500 " + "d/Default Description "
                 + "af/Amy Koh af/Alex Yeoh");
+
+        EditEventCommand commandByAlias = (EditEventCommand) parser.parseCommand(EditEventCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + "n/Default Event " + "dt/1-1-2022 1500 " + "d/Default Description "
+                + "af/Amy Koh af/Alex Yeoh");
+
         assertEquals(new EditEventCommand(INDEX_FIRST_PERSON, descriptor), command);
+
+        //to check if command alias works
+        assertEquals(new EditEventCommand(INDEX_FIRST_PERSON, descriptor), commandByAlias);
+
     }
 
     @Test
@@ -114,7 +143,14 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+
+        FindCommand commandByAlias = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
+
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+
+        //to check if command alias works
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), commandByAlias);
     }
 
     @Test
@@ -124,9 +160,11 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listfriends() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_ALIAS) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_ALIAS + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -134,8 +172,16 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
                 + " n/" + person.getName().fullName);
+
+        ShowFriendCommand commandByAlias = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_ALIAS
+                + " n/" + person.getName().fullName);
+
         assertEquals(new ShowFriendCommand(person), command);
+
+        //to check if command alias works
+        assertEquals(new ShowFriendCommand(person), commandByAlias);
     }
+
 
     @Test
     public void parseCommand_addLog() throws Exception {
@@ -145,6 +191,10 @@ public class AddressBookParserTest {
         String validAddLogCommand = AddLogCommand.COMMAND_WORD + " "
                 + targetIndex.getOneBased() + LOG_TITLE_DESC + LOG_DESCRIPTION_DESC;
 
+        //command by alias
+        String validAddLogCommandByAlias = AddLogCommand.COMMAND_ALIAS + " "
+                + targetIndex.getOneBased() + LOG_TITLE_DESC + LOG_DESCRIPTION_DESC;
+
         // expected command
         AddLogCommand.AddLogDescriptor descriptor = new AddLogCommand.AddLogDescriptor();
         descriptor.setNewTitle(VALID_LOG_TITLE);
@@ -152,7 +202,9 @@ public class AddressBookParserTest {
         AddLogCommand command = new AddLogCommand(INDEX_FIRST_PERSON, descriptor);
 
         assertEquals(command, parser.parseCommand(validAddLogCommand));
+        assertEquals(command, parser.parseCommand(validAddLogCommandByAlias));
         assertTrue(parser.parseCommand(validAddLogCommand) instanceof AddLogCommand);
+        assertTrue(parser.parseCommand(validAddLogCommandByAlias) instanceof AddLogCommand);
     }
 
     @Test
@@ -170,14 +222,21 @@ public class AddressBookParserTest {
     public void parseCommand_addevent() throws Exception {
         Event event = new EventBuilder().build();
         AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
+        AddEventCommand commandByAlias = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommandAlias(event));
+
         assertEquals(new AddEventCommand(event), command);
+        assertEquals(new AddEventCommand(event), commandByAlias);
     }
 
     @Test
     public void parseCommand_deleteevent() throws Exception {
         DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
                 DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
+        DeleteEventCommand commandByAlias = (DeleteEventCommand) parser.parseCommand(
+                DeleteEventCommand.COMMAND_ALIAS + " " + INDEX_FIRST_EVENT.getOneBased());
         assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), command);
+        assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), commandByAlias);
+
     }
 
     @Test
@@ -188,7 +247,14 @@ public class AddressBookParserTest {
                 FindEventCommand.COMMAND_WORD + " " + PREFIX_NAME + DEFAULT_NAME_SUBSTRING
                 + " " + PREFIX_DATE + DEFAULT_DATE + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_1
                 + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_2);
+
+        FindEventCommand commandByAlias = (FindEventCommand) parser.parseCommand(
+                FindEventCommand.COMMAND_ALIAS + " " + PREFIX_NAME + DEFAULT_NAME_SUBSTRING
+                        + " " + PREFIX_DATE + DEFAULT_DATE + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_1
+                        + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_2);
+
         assertEquals(new FindEventCommand(predicate), command);
+        assertEquals(new FindEventCommand(predicate), commandByAlias);
     }
 
     @Test

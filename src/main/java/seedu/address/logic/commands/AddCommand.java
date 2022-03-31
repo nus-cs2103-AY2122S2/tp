@@ -18,8 +18,10 @@ import seedu.address.model.person.Person;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "addfriend";
+    public static final String COMMAND_ALIAS = "af";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a friend to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Adds a friend to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + "[" + PREFIX_PHONE + "PHONE] "

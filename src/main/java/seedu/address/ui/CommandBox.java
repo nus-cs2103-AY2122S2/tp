@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
-import static javafx.scene.input.KeyCode.ENTER;
-
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
@@ -33,6 +33,17 @@ public class CommandBox extends UiPart<Region> {
         commandTextArea.setWrapText(true);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextArea.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextArea.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.ENTER) && !ke.isShiftDown()) {
+                    handleCommandEntered();
+                    ke.consume();
+                } else if (ke.getCode().equals(KeyCode.ENTER)) {
+                    commandTextArea.insertText(commandTextArea.getCaretPosition(), "\n");
+                }
+            }
+        });
     }
 
     /**
@@ -50,13 +61,6 @@ public class CommandBox extends UiPart<Region> {
             commandTextArea.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
-        }
-    }
-
-    @FXML
-    void keyPressed(KeyEvent event) {
-        if (event.getCode() == ENTER) {
-            handleCommandEntered();
         }
     }
 

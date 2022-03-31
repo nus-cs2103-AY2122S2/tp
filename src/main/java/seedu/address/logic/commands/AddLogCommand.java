@@ -31,8 +31,10 @@ import seedu.address.model.tag.Tag;
 public class AddLogCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "addlog";
+    public static final String COMMAND_ALIAS = "al";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a log to an existing friend in Amigos. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Adds a log to an existing friend in Amigos. "
             + "Parameters: "
             + "INDEX ? " + PREFIX_NAME + "NAME "
             + PREFIX_TITLE + "TITLE"

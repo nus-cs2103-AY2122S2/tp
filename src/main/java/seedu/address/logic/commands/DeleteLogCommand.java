@@ -32,8 +32,10 @@ import seedu.address.model.tag.Tag;
 public class DeleteLogCommand extends ByIndexByNameCommand {
 
     public static final String COMMAND_WORD = "deletelog";
+    public static final String COMMAND_ALIAS = "dl";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a log from an existing friend in Amigos. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
+            + ": Deletes a log from an existing friend in Amigos. "
             + "Parameters: "
             + "[INDEX ? " + PREFIX_NAME + "NAME] ["
             + PREFIX_LOG_INDEX + "LOG_INDEX]"

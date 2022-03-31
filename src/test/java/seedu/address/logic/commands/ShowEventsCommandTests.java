@@ -36,7 +36,7 @@ public class ShowEventsCommandTests {
      */
     @Test
     public void execute_showEvents_showsSameList() {
-        expectedModel.updateFilteredEventList(event -> event.getDateTime().isAfterToday());
+        expectedModel.updateFilteredEventList(event -> event.getDateTime().isAfterNow());
         assertEventCommandSuccess(new ShowEventsCommand(false), model, ShowEventsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

@@ -10,7 +10,8 @@ import seedu.address.model.Model;
  */
 public class ShowEventsCommand extends Command {
 
-    public static final String COMMAND_WORD = "showevents";
+    public static final String COMMAND_WORD = "listevents";
+    public static final String COMMAND_ALIAS = "le";
 
     public static final String MESSAGE_USAGE = "showevents [-a]";
 
@@ -29,7 +30,7 @@ public class ShowEventsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (!showAllEvents) {
-            model.updateFilteredEventList(event -> event.getDateTime().isAfterToday());
+            model.updateFilteredEventList(event -> event.getDateTime().isAfterNow());
             return new CommandResult(MESSAGE_SUCCESS, false, false, true);
         }
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);

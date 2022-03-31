@@ -23,8 +23,9 @@ import seedu.address.model.person.Phone;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "deletefriend";
+    public static final String COMMAND_ALIAS = "df";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " / " + COMMAND_ALIAS
             + ": Deletes the friend identified by index or name.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME (name of a friend who exists in Amigos) OR "

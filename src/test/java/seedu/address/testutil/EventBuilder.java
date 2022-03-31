@@ -20,7 +20,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class EventBuilder {
 
     public static final String DEFAULT_NAME = "Default Event";
-    public static final String DEFAULT_DATE_TIME = "12-5-2022 1500";
+    public static final String DEFAULT_DATE_TIME = "1-1-2022 1500";
     public static final String DEFAULT_DESCRIPTION = "Default Description";
     public static final List<FriendName> DEFAULT_FRIENDLIST =
             List.of(new FriendName(AMY_NAME), new FriendName(ALEX_NAME));
@@ -58,6 +58,7 @@ public class EventBuilder {
         return this;
     }
 
+
     /**
      * Parses the {@code names} into a {@code Set<Name>} and set it to the {@code Event} that we are building.
      */
@@ -67,7 +68,7 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code DateTime} of the {@code Person} that we are building.
      */
     public EventBuilder withDateTime(String dateTime) {
         this.dateTime = new DateTime(dateTime);
