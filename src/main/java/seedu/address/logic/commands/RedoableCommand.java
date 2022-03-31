@@ -54,7 +54,7 @@ public abstract class RedoableCommand extends Command {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    public void saveSuccessMessage(String message){
+    public void saveSuccessMessage(String message) {
         this.saveSuccessMessage = message;
     }
 

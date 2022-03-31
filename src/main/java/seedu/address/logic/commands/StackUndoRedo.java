@@ -11,6 +11,9 @@ public class StackUndoRedo {
     private Stack<RedoableCommand> undoStack;
     private Stack<RedoableCommand> redoStack;
 
+    /**
+     * StackUndoRedo Class to enable storing of commands FIFO
+     */
     public StackUndoRedo() {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
