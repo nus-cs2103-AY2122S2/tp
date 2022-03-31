@@ -128,13 +128,18 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         hustleBook.setPerson(target, editedPerson);
     }
 
     @Override
     public void sortPersonListBy(Comparator<Person> sortComparator) {
         hustleBook.sortPersonBy(sortComparator);
+    }
+
+    @Override
+    public void undoHustleBook() {
+        ReadOnlyHustleBook prevState = HustleBookHistory.getInstance().getPrevState();
+        this.hustleBook.resetData(prevState);
     }
 
     //=========== Filtered Person List Accessors =============================================================
