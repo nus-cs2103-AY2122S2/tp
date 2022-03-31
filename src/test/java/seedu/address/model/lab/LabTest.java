@@ -142,6 +142,47 @@ public class LabTest {
     }
 
     @Test
+    public void hasSameLabStatus_sameLabNumberSameLabStatus_success() {
+        Lab stub1 = new Lab("1").of(LabStatus.SUBMITTED);
+        Lab stub2 = new Lab("1").of(LabStatus.SUBMITTED);
+        assertTrue(stub1.hasSameLabStatus(stub2));
+    }
+
+    @Test
+    public void hasSameLabStatus_differentLabNumberSameLabStatus_success() {
+        Lab stub1 = new Lab("1").of(LabStatus.SUBMITTED);
+        Lab stub2 = new Lab("2").of(LabStatus.SUBMITTED);
+        assertTrue(stub1.hasSameLabStatus(stub2));
+    }
+
+    @Test
+    public void hasSameLabStatus_sameLabNumberDifferentLabStatus_failure() {
+        Lab stub1 = new Lab("1").of(LabStatus.UNSUBMITTED);
+        Lab stub2 = new Lab("1").of(LabStatus.SUBMITTED);
+        assertFalse(stub1.hasSameLabStatus(stub2));
+    }
+
+    @Test
+    public void hasSameLabStatus_differentLabNumberDifferentLabStatus_failure() {
+        Lab stub1 = new Lab("1").of(LabStatus.UNSUBMITTED);
+        Lab stub2 = new Lab("2").of(LabStatus.SUBMITTED);
+        assertFalse(stub1.hasSameLabStatus(stub2));
+    }
+
+    @Test
+    public void hasSameLabStatus_differentLabNumberBothGradedWithDifferentLabMark_success() {
+        Lab stub1 = new Lab("1").of(new LabMark("20"));
+        Lab stub2 = new Lab("2").of(new LabMark("30"));
+        assertTrue(stub1.hasSameLabStatus(stub2));
+    }
+
+    @Test
+    public void hasSameLabStatus_nullInput_throwsNullPointerException() {
+        Lab stub = new Lab("1").of(LabStatus.UNSUBMITTED);
+        assertThrows(NullPointerException.class, () -> stub.hasSameLabStatus(null));
+    }
+
+    @Test
     public void equals_sameLab_success() {
         Lab lab1 = (new Lab("1")).of("SUBMITTED");
         Lab lab2 = (new Lab("1")).of("SUBMITTED");

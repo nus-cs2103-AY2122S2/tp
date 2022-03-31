@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -147,6 +148,16 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void addOnFilteredStudentList(Predicate<Student> predicate) {
+        requireNonNull(predicate);
+
+        Optional<Predicate<? super Student>> prevPredicate = Optional.ofNullable(filteredStudents.getPredicate());
+        Predicate<Student> newPredicate = predicate.and(prevPredicate.orElse(x -> true));
+
+        filteredStudents.setPredicate(newPredicate);
     }
 
     @Override
