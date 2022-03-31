@@ -96,6 +96,11 @@ Format: `exit`
 
 Function: Clears both buyer and seller lists
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Caution:** This action **cannot be undone**! Be careful when changing a buyer's information.
+</div>
+
 Format: `clear-all`
 
 ### Buyer-specific commands
