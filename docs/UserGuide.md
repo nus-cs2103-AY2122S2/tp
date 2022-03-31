@@ -61,7 +61,7 @@ This section lists down all the features available in MMF. You can click on any 
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all contacts. (You are recommended to clear all placeholder contacts before you start using ModuleMate Finder)
 
    * **`exit`** : Exits the app.
 
@@ -100,7 +100,7 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -121,9 +121,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu a/123, Clementi Ave 16, #01-321`
 
-Additionally, if one were to simply use `add`, it would open up a new window to allow you to systematically add a new contact
+Additionally, if you were to simply use `add`, it would open up a new window to allow you to systematically add a new contact
 ![add window](images/addWindow.png)  
-Then, simply fill up the fields as guided in the window. Users can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
+Then, simply fill up the fields as guided in the window. You can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
 ### Adding Module(s) to a Contact : `addmodule`
 
@@ -180,7 +180,8 @@ Annotated image of what a `contact` with `Status`, `Module`, and `Comment`
 
 ### Copy contacts in list : `copy`
 
-Copy the people within address book. Information is automatically copied for you once command is entered.
+Easily copy a contact's information into your clipboard, for easy pasting into a communication app of your choice.
+For example, you can copy a contact's email and then paste it into your email client.
 
 Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT] [f/FORMAT]​`
 
@@ -208,7 +209,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-**Clears all entries** from the address book.
+**Clears all entries** from the contact list.
 
 Format: `clear`
 
@@ -323,7 +324,7 @@ Examples:
 
 ### Sorting contacts in list: `sort`
 
-Sort all people within address book.
+Sort all people within contact list.
 
 Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT]​`
 
@@ -364,7 +365,7 @@ Examples:
 * `find Betsy` followed by `archive 1` archives the 1st contact in the results of the `find` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
-You can only use this command when in the **default address book**. Otherwise, you will get an error that tells you to use the correct command
+You can only use this command when in the **default contact list**. Otherwise, you will get an error that tells you to use the correct command
 </div>
 
 
@@ -382,19 +383,19 @@ Examples:
 * `find Lizzy` followed by `unarchive 1` _unarchives_ the 1st contact in the results of the `find` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
-You can only use this command when in the **archives address book**. Otherwise, you will get an error that tells you to use the correct command
+You can only use this command when in the **archives contact list**. Otherwise, you will get an error that tells you to use the correct command
 </div>
 
-### Switching between default and archives: `switch`
+### Switching between the default and archived contact list: `switch`
 
-Switch between archives or the default address book in ModuleMate Finder.
+Switch between the default contact list or the archived contact list in ModuleMate Finder.
 
 format: `switch`
-* Alternatively, you may use F10 to perform the same command
+* Alternatively, you may use <kbd>F10</kbd> or `File -> Switch...` in the menu to perform the switch
 
 Examples:
-* `switch` changes the view to the other address book. If you are in `Default` mode, then it changes to `Archives`, and vice-versa.
-* Pressing `F10` on your keyboard also does the same as the above.
+* `switch` changes the view to the other contact list. If you are in `Default` mode, then it changes to `Archives`, and vice-versa.
+* Pressing <kbd>F10</kbd> on your keyboard or `File -> Switch...` in the menu also does the same as the above.
 
 ### Undo a command : `undo`
 
