@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-HireLah is a desktop app that helps **recruiters to manage talent and job candidates** by tracking every step of the hiring process, 
+HireLah is a desktop app that helps **recruiters to manage talent and job candidates** by tracking every step of the hiring process,
 from offering positions to scheduling interviews with candidates. It is optimised for Command Line Interface (CLI) users while still offering a GUI, so that power users can accomplish tasks much quicker by using commands
 
 
@@ -151,7 +151,7 @@ Examples:
 Edit an existing interview in HireLah.
 
 Format: `edit -i INTERVIEW_INDEX [d/DATE] [p/POSITION_INDEX]`
-* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the 
+* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the
   last displayed interview list.
 * At least one optional field must be provided.
 * The position index refers to the index number shown in the last displayed interview list.
@@ -243,10 +243,10 @@ Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT]`
   * Note that **both** `FILTER_TYPE` and `FILTER_ARGUMENT` need to be provided to filter data
   * Different data types will accept different `FILTER_TYPE` and `FILTER_ARGUMENT`, as elaborated below
   * `FILTER_TYPE` has to be exactly the same as listed below (not caps-sensitive)
-  
+
 
 ### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT]`
-Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI. 
+Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI.
 
 The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
@@ -286,12 +286,12 @@ Example: `list -i f/date a/2022-05-04`
 
 ## Sort data: `sort`
 
-Arranges applicants, interview and positions in HireLah according to their properties. 
+Arranges applicants, interview and positions in HireLah according to their properties.
 It alters the current display of HireLah and changes the index of the relevant data.
 
 Format: `sort DATA_TYPE SORT_ORDER`
 
-User can specify the order of the sorted data by typing `ASC` (for ascending) 
+User can specify the order of the sorted data by typing `ASC` (for ascending)
 or `DSC` (for descending) in the `REVERSE` part.
 
 | DATA_TYPE | Sorting properties | Description                                            |
@@ -319,7 +319,7 @@ Format: `help COMMAND`
 * Command name is not case-sensitive
 
 Examples:
-* `help add` 
+* `help add`
 * `help del`
 
 ### Exiting the program : `exit`
