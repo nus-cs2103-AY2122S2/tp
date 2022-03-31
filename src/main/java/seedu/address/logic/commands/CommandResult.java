@@ -11,6 +11,9 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** Result display window should be resized. */
+    private final boolean resizeWindow;
+
     /** Pie Chart should be shown to the user. */
     private final boolean summarisePieChart;
 
@@ -23,8 +26,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summarisePieChart) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summarisePieChart,
+            boolean resizeWindow) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.resizeWindow = resizeWindow;
         this.summarisePieChart = summarisePieChart;
         this.showHelp = showHelp;
         this.exit = exit;
@@ -35,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +49,10 @@ public class CommandResult {
 
     public boolean isSummarise() {
         return summarisePieChart;
+    }
+
+    public boolean isResize() {
+        return resizeWindow;
     }
 
     public boolean isShowHelp() {

@@ -66,7 +66,7 @@ public class SummariseCommand extends Command {
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_FAILURE);
         } else {
             return new CommandResult(MESSAGE_SUMMARISE_PERSON_SUCCESS + answer,
-                    false, false, true);
+                    false, false, true, false);
         }
     }
 
