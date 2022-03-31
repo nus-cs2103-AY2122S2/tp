@@ -128,7 +128,7 @@
 }
 
 .status_pane_style {
-    -fx-padding: 2 0 2 0;
+    -fx-padding: 5 0 2 0;
 }
 
 .availability_pane_style {
@@ -507,7 +507,7 @@
 
 // ************* interview panel css *************
 .interview-panel-header {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #407BFF;
 }
 
 .interview-panel-title {

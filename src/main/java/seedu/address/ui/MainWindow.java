@@ -300,15 +300,14 @@ public class MainWindow extends UiPart<Stage> {
      * Refreshes the FocusCard if all schedules are cleared so that the displayed Candidate has the latest information.
      */
     public CommandResult refreshWhenClearAllSchedule(String commandText) throws CommandException, ParseException {
-        int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
         CommandResult commandResult = logic.execute(commandText);
-        if (!focusListPanelPlaceholder.getChildren().isEmpty()) {
+        if (focusListPanel != null && !focusListPanelPlaceholder.getChildren().isEmpty()) {
+            int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
             logger.info(String.valueOf(logic.getFilteredCandidateList().contains(focusListPanel.getCandidate())));
             executeCommand(FocusCommand.COMMAND_WORD + " " + String.valueOf(displayedIndex + 1));
         }
 
         resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-        //to manually clear the commandBox
         commandBoxPlaceholder.getChildren().remove(0);
         commandBoxPlaceholder.getChildren().add(new CommandBox(this::executeCommand).getRoot());
         return commandResult;
