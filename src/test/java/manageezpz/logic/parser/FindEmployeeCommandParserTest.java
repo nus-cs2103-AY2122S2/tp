@@ -25,7 +25,7 @@ class FindEmployeeCommandParserTest {
     private static final String INVALID_NAME_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindEmployeeCommand.INVALID_NAME + FindEmployeeCommand.MESSAGE_USAGE);
     private static final String INVALID_PHONE_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            FindEmployeeCommand.INVALD_PHONE + FindEmployeeCommand.MESSAGE_USAGE);
+            FindEmployeeCommand.INVALID_PHONE + FindEmployeeCommand.MESSAGE_USAGE);
     private static final String INVALID_EMAIL_MESSAGE = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
             FindEmployeeCommand.INVALID_EMAIL + FindEmployeeCommand.MESSAGE_USAGE);
 

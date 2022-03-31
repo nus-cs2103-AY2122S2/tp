@@ -24,7 +24,7 @@ public class UnmarkTaskCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task marked as not done yet: %1$s";
+    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Task set as not done yet: %1$s";
 
     private final Index targetIndex;
 
@@ -36,6 +36,7 @@ public class UnmarkTaskCommand extends Command {
      *                    status back to not done
      */
     public UnmarkTaskCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

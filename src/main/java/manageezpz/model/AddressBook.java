@@ -291,6 +291,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Updates the task with the edited person.
+     * @param task the task to be updated.
+     * @param assigneesIndex the index of the person in List of assignees.
+     * @param editedPerson the edited person.
+     */
+    public void updateTaskWithEditedPerson(Task task, int assigneesIndex, Person editedPerson) {
+        requireAllNonNull(task, assigneesIndex, editedPerson);
+        this.tasks.updateTaskWithEditedPerson(task, assigneesIndex, editedPerson);
+    }
+
+    /**
      * Marks the task in the task list.
      * @param task the task to be marked.
      */
@@ -337,6 +348,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Task untagEmployeeFromTask(Task task, Person person) {
         requireAllNonNull(task, person);
         return this.tasks.untagEmployeeFromTask(task, person);
+    }
+
+    /**
+     * Checks if a given Person is tagged to the task.
+     * Checks if a given Person is tagged to the task.
+     * @param task the task to be checked.
+     * @return true if the person is tagged to the task, false otherwise.
+     */
+    public boolean isEmployeeTaggedToTask(Task task, Person person) {
+        requireAllNonNull(task, person);
+        return task.getAssignees().contains(person);
     }
 
     /**

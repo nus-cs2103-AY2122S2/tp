@@ -43,6 +43,7 @@ public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
         }
 
         String name = argMultimapTag.getValue(PREFIX_NAME).get();
+
         if (name.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_NAME,
                     UntagTaskCommand.MESSAGE_USAGE));

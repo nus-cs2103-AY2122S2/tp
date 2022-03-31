@@ -40,6 +40,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
@@ -108,6 +109,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addPerson(Person person) {
+        requireNonNull(person);
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -115,7 +117,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -201,44 +202,56 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteTask(Task task) {
+        requireNonNull(task);
         addressBook.removeTask(task);
     }
 
     @Override
+    public void updateTaskWithEditedPerson(Task task, int assigneesIndex, Person editedPerson) {
+        requireAllNonNull(task, assigneesIndex, editedPerson);
+        addressBook.updateTaskWithEditedPerson(task, assigneesIndex, editedPerson);
+    }
+
+    @Override
     public Task markTask(Task task) {
+        requireNonNull(task);
         return addressBook.markTask(task);
     }
 
     @Override
     public Task unmarkTask(Task task) {
+        requireNonNull(task);
         return addressBook.unmarkTask(task);
     }
 
     @Override
     public Task tagPriorityToTask(Task task, Priority priority) {
+        requireAllNonNull(task, priority);
         return addressBook.tagPriorityToTask(task, priority);
     }
 
     @Override
     public void findTask(Task task) {
+        requireNonNull(task);
         addressBook.findTask(task);
     }
 
     @Override
     public Task tagEmployeeToTask(Task task, Person person) {
+        requireAllNonNull(task, person);
         return addressBook.tagEmployeeToTask(task, person);
     }
 
     @Override
     public Task untagEmployeeFromTask(Task task, Person person) {
+        requireAllNonNull(task, person);
         return addressBook.untagEmployeeFromTask(task, person);
     }
 
     @Override
-    public boolean isTagged(Task task, Person person) {
-        requireNonNull(task);
-        requireNonNull(person);
-        return task.getAssignees().contains(person);
+    public boolean isEmployeeTaggedToTask(Task task, Person person) {
+        requireAllNonNull(task, person);
+        return addressBook.isEmployeeTaggedToTask(task, person);
     }
 
     @Override
@@ -297,7 +310,6 @@ public class ModelManager implements Model {
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         addressBook.setTask(target, editedTask);
     }
 

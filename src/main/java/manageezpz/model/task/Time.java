@@ -7,9 +7,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Time {
-    public static final String MESSAGE_CONSTRAINTS = "Time should strictly be in the format of HHMM."
-            + " It should only contain numbers, 4 digits long and should not be blank. "
-            + "Time should also be in the range of 0000 and 2359";
+    public static final String MESSAGE_CONSTRAINTS = "Time should strictly be in the format of HHMM.\n"
+            + "It should only contain numbers, 4 digits long and should not be blank.\n"
+            + "Time should also be in the range of 0000 and 2359.";
 
     public static final String VALIDATION_REGEX = "\\d{4}";
 

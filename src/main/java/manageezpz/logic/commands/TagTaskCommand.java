@@ -1,6 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import manageezpz.model.person.Person;
 import manageezpz.model.task.Task;
 
 public class TagTaskCommand extends Command {
+
     public static final String COMMAND_WORD = "tagTask";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -39,6 +41,7 @@ public class TagTaskCommand extends Command {
      * @param name Name of the Employee to tag the Task to
      */
     public TagTaskCommand(Index targetIndex, String name) {
+        requireAllNonNull(targetIndex, name);
         this.targetIndex = targetIndex;
         this.name = name;
     }
@@ -66,12 +69,12 @@ public class TagTaskCommand extends Command {
         }
 
         if (person == null) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_PERSON, name) + "\n" + MESSAGE_USAGE);
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_PERSON, name) + "\n\n" + MESSAGE_USAGE);
         }
 
-        if (model.isTagged(taskToTagEmployee, person)) {
+        if (model.isEmployeeTaggedToTask(taskToTagEmployee, person)) {
             throw new CommandException(String.format(MESSAGE_PERSON_TAGGED_TO_TASK,
-                    person.getName().toString()) + taskToTagEmployee + "\n" + MESSAGE_USAGE);
+                    person.getName().toString()) + taskToTagEmployee + "\n\n" + MESSAGE_USAGE);
         }
 
         Task taggedEmployeeTask = model.tagEmployeeToTask(taskToTagEmployee, person);

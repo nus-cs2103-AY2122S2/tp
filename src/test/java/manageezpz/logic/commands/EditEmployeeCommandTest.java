@@ -7,6 +7,7 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandFailure;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static manageezpz.logic.commands.EditEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
 import static manageezpz.testutil.TypicalPersons.getTypicalAddressBookEmployees;
@@ -29,7 +30,7 @@ import manageezpz.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class EditEmployeeCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
 
@@ -99,10 +100,14 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditEmployeeCommand editCommand = new EditEmployeeCommand(INDEX_SECOND, descriptor);
 
-        assertCommandFailure(editCommand, model, EditEmployeeCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model,
+                String.format(EditEmployeeCommand.MESSAGE_DUPLICATE_PERSON,
+                        firstPerson.getName().toString()) + "\n" + MESSAGE_USAGE);
+
     }
 
     @Test
@@ -114,7 +119,9 @@ public class EditCommandTest {
         EditEmployeeCommand editCommand = new EditEmployeeCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editCommand, model, EditEmployeeCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model,
+                String.format(EditEmployeeCommand.MESSAGE_DUPLICATE_PERSON,
+                        personInList.getName().toString()) + "\n" + MESSAGE_USAGE);
     }
 
     @Test
@@ -123,7 +130,8 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditEmployeeCommand editCommand = new EditEmployeeCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
     }
 
     /**
@@ -140,7 +148,8 @@ public class EditCommandTest {
         EditEmployeeCommand editCommand = new EditEmployeeCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
     }
 
     @Test

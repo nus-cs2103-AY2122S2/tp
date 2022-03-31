@@ -46,6 +46,7 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
         }
 
         String priorityString = argMultimapPriority.getValue(PREFIX_PRIORITY).get();
+
         if (priorityString.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_PRIORITY,
                     TagTaskPriorityCommand.MESSAGE_USAGE));

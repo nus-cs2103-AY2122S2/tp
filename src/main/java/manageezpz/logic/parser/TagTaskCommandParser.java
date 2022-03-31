@@ -46,6 +46,7 @@ public class TagTaskCommandParser implements Parser<TagTaskCommand> {
         }
 
         String name = argMultimapTag.getValue(PREFIX_NAME).get();
+
         if (name.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_NAME,
                     TagTaskCommand.MESSAGE_USAGE));

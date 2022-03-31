@@ -60,6 +60,18 @@ public class Deadline extends Task {
         return this.description;
     }
 
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     @Override
     public String getDateTime() {
         return "by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
