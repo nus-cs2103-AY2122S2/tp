@@ -58,7 +58,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_existingEmptyTag_filterSuccessful() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0) + FilterCommand.MESSAGE_SUCCESS;
         Tag tag = new Tag("family");
 
         //Set up tag in models
@@ -84,11 +84,12 @@ public class FilterCommandTest {
 
     @Test
     public void execute_validTag_filterSuccessful() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3) + FilterCommand.MESSAGE_SUCCESS;
         Tag existingTag = new Tag("friends");
         PersonContainsTagPredicate predicate = new PersonContainsTagPredicate(existingTag);
         FilterCommand command = new FilterCommand(predicate, existingTag);
         expectedModel.updateFilteredPersonList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
