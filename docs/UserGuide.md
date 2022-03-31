@@ -254,10 +254,13 @@ The applicants displayed can be filtered by providing the optional parameters `f
 |-------------|------------------------------------|----------------------------------------------------------|
 | `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s)       |
 | `gender`    | M/F                                | View applicants of the given gender                      |
-| `status`    | available/hired                    | View applicants with the status given.                   |
-| `tag`       | Keyword in the applicant's tag     | View applicants with a tag that matches the keywords(S)  |
+| `status`    | available/hired                    | View applicants with the status given                    |
+| `tag`       | Keyword(s) in the applicant's tag  | View applicants with a tag that matches the keywords(s)  |
 
-Example: `list -a f/name a/John Doe`
+Examples: 
+- `list -a f/name a/John Doe`
+- `list -a f/status a/hired`
+- `list -a f/tag a/Java`
 
 ### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT]`
 
@@ -270,7 +273,9 @@ The positions displayed can be filtered by providing the optional parameters `f/
 | `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
 | `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
 
-Example: `list -p f/name a/Software Engineer`
+Examples: 
+- `list -p f/name a/Software Engineer`
+- `list -p f/req a/Java`
 
 
 ### Listing interviews: `list -i [f/FILTER_TYPE a/FILTER_ARGUMENT]`
@@ -283,11 +288,13 @@ The interviews displayed can be filtered by providing the optional parameters `f
 |-------------|----------------------------------------------------------|----------------------------------------------------------------------|
 | `appl`      | Keyword(s) in the applicant's name                       | View interviews for applicants whose name contains the keyword(s)    |
 | `pos`       | Keyword(s) in the position's name                        | View interviews for position with names that contains the keyword(s) |
-| `date`      | Date the interview is happening<br/>Format: `yyyy-mm-dd` | View interviews which happens on the date provided                   |
-| `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given.                               |
+| `date`      | Date the interview is happening in `yyyy-mm-dd`          | View interviews which happens on the date provided                   |
+| `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given                                |
 
 
-Example: `list -i f/date a/2022-05-04`
+Examples: 
+- `list -i f/date a/2022-05-04`
+- `list -i f/status a/accepted`
 
 ## Sort data: `sort`
 
