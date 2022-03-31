@@ -170,6 +170,7 @@ public class AddCommand extends Command {
             }
 
             model.addSchedule(toAddSchedule);
+            model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ACTIVE_SCHEDULES);
             return new CommandResult(String.format(MESSAGE_ADD_SCHEDULE_SUCCESS, toAddSchedule));
         }
     }

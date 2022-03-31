@@ -256,6 +256,7 @@ public class MainWindow extends UiPart<Stage> {
                     resultDisplay.setFeedbackToUser("MyGM is already in dark mode.");
                 } else {
                     handleToDark();
+                    resultDisplay.setFeedbackToUser("MyGM is now in dark mode.");
                 }
             }
 
@@ -264,6 +265,7 @@ public class MainWindow extends UiPart<Stage> {
                     resultDisplay.setFeedbackToUser("MyGM is already in light mode.");
                 } else {
                     handleToLight();
+                    resultDisplay.setFeedbackToUser("MyGM is now in light mode.");
                 }
             }
 
