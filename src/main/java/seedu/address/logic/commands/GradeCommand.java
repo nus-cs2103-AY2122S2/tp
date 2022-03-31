@@ -42,7 +42,7 @@ public class GradeCommand extends Command {
     public CommandResult execute(Model model) {
         String result = "";
 
-        TaModule module = model.getModule(assessment.getTaModule());
+        TaModule module = model.getModule(assessment.getModule());
         Assessment assessmentToEdit = new Assessment(assessment, module);
         List<Student> notInModule = new ArrayList<>();
         List<Student> toGrade = new ArrayList<>();

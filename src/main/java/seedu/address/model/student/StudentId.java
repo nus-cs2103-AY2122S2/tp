@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student ID can take any values except special characters"
-           + ", and it should not be blank";
-
+    public static final String MESSAGE_CONSTRAINTS = "Student ID should adhere to these requirements:"
+           + "\n\t1. No special characters"
+           + "\n\t2. Should not be blank"
+           + "\n\t3. It should start with an 'E/e' and followed by 7 digits";
     /*
      * The first character of the student ID must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

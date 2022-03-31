@@ -57,7 +57,7 @@ public class Assessment implements Entity {
      * Returns a new copy of the assessment specified.
      */
     public Assessment(Assessment toCopy) {
-        this(toCopy.getAssessmentName(), toCopy.getTaModule(), Optional.of(toCopy.getSimpleName()),
+        this(toCopy.getAssessmentName(), toCopy.getModule(), Optional.of(toCopy.getSimpleName()),
                 FXCollections.observableHashMap());
         attempts.putAll(toCopy.getAttempts());
     }
@@ -82,7 +82,7 @@ public class Assessment implements Entity {
         return simpleName.orElse(new SimpleName(assessmentName.value.replaceAll("\\s", "")));
     }
 
-    public TaModule getTaModule() {
+    public TaModule getModule() {
         return module;
     }
 
@@ -138,7 +138,7 @@ public class Assessment implements Entity {
 
         return otherAssessment != null
                 && otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getTaModule().equals(getTaModule());
+                && otherAssessment.getModule().isSameModule(getModule());
     }
 
     @Override
@@ -162,7 +162,7 @@ public class Assessment implements Entity {
 
         Assessment otherAssessment = (Assessment) other;
         return otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getTaModule().equals(getTaModule())
+                && otherAssessment.getModule().equals(getModule())
                 && otherAssessment.getSimpleName().equals(getSimpleName())
                 && otherAssessment.getAttempts().equals(getAttempts());
     }
@@ -179,7 +179,7 @@ public class Assessment implements Entity {
         builder.append("Assessment Name: ")
                 .append(getAssessmentName())
                 .append("; Module: ")
-                .append(getTaModule().toUniqueRepresentation())
+                .append(getModule().toUniqueRepresentation())
                 .append("; Simple Name: ")
                 .append(getSimpleName());
         return builder.toString();

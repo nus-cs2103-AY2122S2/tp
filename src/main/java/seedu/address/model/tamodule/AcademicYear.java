@@ -20,7 +20,8 @@ public class AcademicYear {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Academic year should start with the last two digit of the year, "
-                    + "end with the semester, and it should not be blank";
+                    + "end with the semester, and it should not be blank"
+                    + "\n\t Semester ranges from S1 to S8.";
     public static final String VALIDATION_REGEX = "([\\p{Digit}]{2})(S[1-8])";
 
     private static final int YEAR_REGEX_GROUP_INDEX = 0;
@@ -51,14 +52,14 @@ public class AcademicYear {
     public AcademicYear(String academicYear) {
         requireNonNull(academicYear);
         checkArgument(isValidAcademicYear(academicYear), MESSAGE_CONSTRAINTS);
-        value = academicYear;
+        value = academicYear.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid academic year.
      */
     public static boolean isValidAcademicYear(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
 
