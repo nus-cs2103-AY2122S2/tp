@@ -252,9 +252,9 @@ Format: `update-all [TAG:VALUE ...]`
 
 Examples:
 
-`update-all c:fruits` updates all products in current displayed list to have category `fruits`.
+* `update-all c:fruits` updates all products in current displayed list to have category `fruits`.
 
-`update-all p:5.00` updates all products in current displayed list to have price `5.00`.
+* `update-all p:5.00` updates all products in current displayed list to have price `5.00`.
 
 #### 3.1.9 Deleting all products : `delete-all`
 
@@ -270,6 +270,11 @@ Format: `delete-all`
 
 Updates an item of a specified product in iBook.
 
+Click the <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item to update it.
+Then, click on the <img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the item.
+
+*Alternatively*, by using command,
+
 Format: `update-item INDEX-INDEX [TAG:VALUE ... ]`
 
 * The first index refers to the index of product.
@@ -278,9 +283,8 @@ Format: `update-item INDEX-INDEX [TAG:VALUE ... ]`
 
 Examples:
 
-`update-item 1-2 q:10` updates the 2nd item of the 1st product in the displayed list to have quantity `10`.
-
-`update-item 2-1 e:2022-08-01` updates the 1st item of the 2nd product in the displayed list to have expiry date `01 Aug 2022`.
+* `update-item 1-2 q:10` updates the 2nd item of the 1st product in the displayed list to have quantity `10`.
+* `update-item 2-1 e:2022-08-01` updates the 1st item of the 2nd product in the displayed list to have expiry date `01 Aug 2022`.
 
 #### 3.2.3 Deleting an item from a product : `delete-item`
 
