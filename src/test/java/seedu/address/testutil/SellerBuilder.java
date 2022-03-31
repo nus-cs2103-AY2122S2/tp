@@ -26,17 +26,17 @@ public class SellerBuilder {
     private Phone phone;
     private Set<Tag> tags;
     private Appointment appointment;
-    private PropertyToSell desiredProperty;
+    private PropertyToSell propertyToSell;
 
     /**
-     * Creates a {@code clientBuilder} with the default details.
+     * Creates a {@code sellerBuilder} with the default details.
      */
     public SellerBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
-        desiredProperty = DEFAULT_PROPERTY;
+        propertyToSell = DEFAULT_PROPERTY;
     }
 
     /**
@@ -47,7 +47,7 @@ public class SellerBuilder {
         phone = sellerToCopy.getPhone();
         appointment = sellerToCopy.getAppointment();
         tags = new HashSet<>(sellerToCopy.getTags());
-        desiredProperty = sellerToCopy.getPropertyToSell();
+        propertyToSell = sellerToCopy.getPropertyToSell();
     }
 
     /**
@@ -86,12 +86,12 @@ public class SellerBuilder {
      * Sets the {@code Properties} of the {@code buyer} that we are building.
      */
     public SellerBuilder withProperty(PropertyToSell property) {
-        this.desiredProperty = property;
+        this.propertyToSell = property;
         return this;
     }
 
     public Seller build() {
-        return new Seller(name, phone, appointment, tags, desiredProperty);
+        return new Seller(name, phone, appointment, tags, propertyToSell);
     }
 
 }

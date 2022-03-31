@@ -7,30 +7,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddBuyerCommand;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.AppointmentBuyerCommand;
 import seedu.address.logic.commands.AppointmentSellerCommand;
 import seedu.address.logic.commands.ClearBuyerCommand;
-//import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearSellerCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.EditBuyerCommand;
 import seedu.address.logic.commands.EditSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindBuyerCommand;
-//import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindSellerCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBuyerCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListSellerCommand;
 import seedu.address.logic.commands.MatchCommand;
+import seedu.address.logic.commands.MatchHouseTypeCommand;
+import seedu.address.logic.commands.MatchLocationCommand;
+import seedu.address.logic.commands.MatchPriceRangeCommand;
 import seedu.address.logic.commands.SortBuyerCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortSellerCommand;
@@ -63,8 +61,8 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddBuyerCommand.COMMAND_WORD:
+            return new AddBuyerCommandParser().parse(arguments);
 
         case AddSellerCommand.COMMAND_WORD:
             return new AddSellerCommandParser().parse(arguments);
@@ -72,14 +70,8 @@ public class AddressBookParser {
         case EditBuyerCommand.COMMAND_WORD:
             return new EditBuyerCommandParser().parse(arguments);
 
-        //case EditCommand.COMMAND_WORD:
-        //    return new EditCommandParser().parse(arguments);
-
         case EditSellerCommand.COMMAND_WORD:
             return new EditSellerCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
 
         case DeleteBuyerCommand.COMMAND_WORD:
             return new DeleteBuyerCommandParser().parse(arguments);
@@ -104,8 +96,8 @@ public class AddressBookParser {
         case FindBuyerCommand.COMMAND_WORD:
             return new FindBuyerCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        //case ListCommand.COMMAND_WORD:
+        //    return new ListCommand();
 
         case ListBuyerCommand.COMMAND_WORD:
             return new ListBuyerCommand();
@@ -134,9 +126,6 @@ public class AddressBookParser {
         case AppointmentSellerCommand.COMMAND_WORD:
             return new AppointmentSellerCommandParser().parse(arguments);
 
-        case AddBuyerCommand.COMMAND_WORD:
-            return new AddBuyerCommandParser().parse(arguments);
-
         case AddPropertyToBuyCommand.COMMAND_WORD:
             return new AddPropertyToBuyCommandParser().parse(arguments);
 
@@ -145,6 +134,15 @@ public class AddressBookParser {
 
         case MatchCommand.COMMAND_WORD:
             return new MatchCommandParser().parse(arguments);
+
+        case MatchHouseTypeCommand.COMMAND_WORD:
+            return new MatchHouseTypeCommandParser().parse(arguments);
+
+        case MatchLocationCommand.COMMAND_WORD:
+            return new MatchLocationCommandParser().parse(arguments);
+
+        case MatchPriceRangeCommand.COMMAND_WORD:
+            return new MatchPriceRangeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

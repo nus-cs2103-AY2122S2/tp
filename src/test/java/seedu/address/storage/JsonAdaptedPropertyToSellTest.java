@@ -8,13 +8,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.Address;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
 import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToSell;
 
 class JsonAdaptedPropertyToSellTest {
     private PriceRange priceRange1 = new PriceRange(1, 100);
-    private House house1 = new House(HouseType.BUNGALOW, "house1_location");
+    private House house1 = new House(HouseType.BUNGALOW, new Location("house1_location"));
 
     private PropertyToSell propertyToSell1 = new PropertyToSell(house1, priceRange1, new Address("house1_address"));
     private JsonAdaptedPropertyToSell jsonAdaptedPropertyToSell1 = new JsonAdaptedPropertyToSell(

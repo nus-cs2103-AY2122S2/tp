@@ -3,7 +3,13 @@ layout: page
 title: User Guide
 ---
 
-AgentSee is a **desktop app for property agents to manage clients.** It optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AgentSee can get your client management tasks done faster than traditional GUI apps.
+AgentSee is a **desktop application for property agents to manage clients.** It is:
+* optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+  - So if you can type fast, AgentSee can get your client management tasks done faster than traditional GUI apps!
+  
+* Easy to use! The User Guide and the application is very easy to navigate!
+
+* ~~Cheap~~ FREE!
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -16,7 +22,7 @@ AgentSee is a **desktop app for property agents to manage clients.** It optimize
 3. Copy the .jar file to any folder which you wish to store the AgentSee application in. It is recommended that the folder is **empty** before copying in the .jar file.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear in a few seconds. Note that sample data will be automatically added when running the .jar file for the first time.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UI.png)
 
 5. Input a command in the command box and press Enter on your keyboard to execute it.
    - E.g. `add-b n/David p/62353535` 
@@ -68,7 +74,9 @@ The Features section will be split into 3 subsections for:
 
 </div>
 
-### `help`
+### General commands
+
+#### Help! `help`
 
 Function: Show a message explaining how to access the help page.
 
@@ -76,40 +84,25 @@ Function: Show a message explaining how to access the help page.
 
 Format: `help`
 
-### `exit`
+#### Exiting. `exit`
 
-Function: Exit the program.
+Function: Exit the program. Don't worry, we will save your data!
 
 Format: `exit`
 
-### `match`
-
-Function: Match the specified buyer's property to any sellers' property.
-
-Format: `match INDEX`
-
-* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
-* A list of all sellers who have properties that are matching the buyer's property requirements will be displayed.
-* A seller will match to the buyer if:
-  * They have the same location & house type.
-  * If a price within the buyer's price range is within the seller's price range.
-* E.g. If a buyer has house type `HDB`, location `Bishan` and price range `400000,500000`, a seller with house type `HDB`, location `Bishan` and price range `490000,600000` will match as the buyer's price range has an **overlap** with the seller's.
-
-Examples:
-
-* `match 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
-
 [back to start of section](#features)
 
-### `list-b`
+### Buyer-specific commands
 
-Function: Show the buyer list.
+#### Listing buyers. `list-b`
+
+Function: Display the buyer list.
 
 Format: `list-b`
 
-### `add-b`
+#### Adding buyers. `add-b`
 
-Function: Add a buyer to the buyer list.
+Function: Add a buyer to the buyer list. This is essential for you to add a buyer's data.
 
 Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 
@@ -120,9 +113,9 @@ Examples:
 * `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
 * `add-b n/Janald p/12345678 t/friend t/criminal` adds a new buyer with name `Janald`, phone number of `12345678`, and tags of `friend` and `criminal`
 
-### `add-ptb`
+#### Adding a property to buy. `add-ptb`
 
-Function: Add a new property for the specified buyer.
+Function: Add a new property for the specified buyer. Add a the conditions of a property that your buyer is interested in!
 
 Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 
@@ -131,8 +124,9 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
 * The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
+### House Type
 * The `HOUSE_TYPE` can be defined as any of the following:
-  * `any`
+  * `unspecified`
   * `apartment`
   * `bungalow`
   * `condominium` or `condo`
@@ -146,9 +140,9 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
 
-### `appt-b`
+#### Adding an appointment with buyer. `appt-b`
 
-Function: Create an appointment with a certain buyer.
+Function: Create an appointment with a certain buyer. Now, you can keep track of your appointments with buyers!
 
 Format: `appt-b INDEX time/TIME`
 
@@ -159,9 +153,75 @@ Format: `appt-b INDEX time/TIME`
 Examples:
 * `appt-b 1 time/2023-01-01-12-12` sets a new appointment for the 1st buyer on the displayed buyer list on 1st January 2023 and 12:12pm.
 
-### `edit-b`
+#### Matching a buyer!
 
-Function: Edit an existing buyer in the displayed buyer list.
+Function: Display potential sellers by matching the demand of a buyer. Now, you can easily find properties that buyers are interested in!
+
+* Want to match using just a certain criterion? Fret not! Here are the different match commands:
+
+###### Matching all fields of buyers to sellers. `match`
+
+Format: `match INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers who have properties that are matching the buyer's property requirements will be displayed.
+* A seller will match to the buyer if:
+  * They have the same location & house type.
+  * If a price within the buyer's price range is within the seller's price range.
+* E.g. If a buyer has house type `HDB`, location `Bishan` and price range `400000,500000`, a seller with house type `HDB`, location `Bishan` and price range `490000,600000` will match as the buyer's price range has an **overlap** with the seller's.
+
+Examples:
+* `match 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+###### Matching House Types of buyers to sellers. `match-h`
+
+Format: `match-h INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers whose housetype matches the buyer's desired house type will be displayed.
+* A seller will match to the buyer if:
+  * They have the same house type.
+  * Buyer's house type is unspecified.
+* E.g. A buyer with house type `UNSPECIFIED` or `HDB_FLAT` will match with a seller with house type `HDB_FLAT`.
+
+Examples:
+* `match-h 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+###### Matching Locations of buyers to sellers. `match-l`
+
+Format: `match-l INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers whose location matches the buyer's desired location will be displayed.
+* A seller will match to the buyer if:
+  * They have the same house location
+* E.g. A buyer with house location `bishan` will match with a seller with house location `bishan`.
+
+Examples:
+* `match-l 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+###### Matching Price Range of buyers to sellers. `match-pr`
+
+Format: `match-pr INDEX`
+
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* A list of all sellers whose price range matches the buyer's desired price range will be displayed.
+* A seller will match to the buyer if:
+  * There is a price at which the buyer is willing to buy a property at, and the seller is willing to sell their property at.
+* E.g. A buyer with price range `20-100` will match with a seller with house price range `100-200`, because `100` is a matching price.
+* Price matches are inclusive, so if a price range is `100-200`, it includes the values `100` and `200` as well.
+
+Examples:
+* `match-pr 1` will match the 1st buyer in the displayed buyer list with all seller's with matching property criteria.
+
+#### Editing a buyer. `edit-b`
+
+Function: Edit an existing buyer's information in the displayed buyer list.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Caution:** This action **cannot be undone**! Be careful when changing a buyer's information.
+</div>
 
 Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]` 
 
@@ -176,9 +236,9 @@ Examples:
 * `edit-b 1 n/Chua` Edits only the name of the 1st buyer in displayed buyer list to be `Chua`.
 * `edit-b 2 n/Betsy Crower t/` Edits the name of the 2nd buyer in displayed buyer list to be `Betsy Crower` and clears all existing tags.
 
-### `find-b`
+#### Finding a buyer. `find-b`
 
-Function: Find buyers whose selected **field** contain any of the given keywords.
+Function: Find buyers whose selected **field** contain any of the given keywords. Use this so that you can find your buyer's information more easily!
 
 
 Format: `find-b field/KEYWORD1 [MORE_KEYWORDS]`
@@ -196,9 +256,14 @@ Format: `find-b field/KEYWORD1 [MORE_KEYWORDS]`
 Examples:
 * `find-b n/John` displays buyers whose names are `john` and `John Doe`.
 
-### `delete-b`
+#### Deleting a buyer. `delete-b`
 
 Function: Delete the specified buyer from the displayed buyer list.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Caution:** This action **cannot be undone**!
+</div>
 
 Format: `delete-b INDEX`
 
@@ -209,13 +274,18 @@ Examples:
 * `list-b` followed by `delete-b 2` deletes the 2nd buyer in the buyer list.
 * `find-b Betsy` followed by `delete-b 1` deletes the 1st buyer in the result of the `find-b` command.
 
-### `clear-b`
+#### Clearing buyer list. `clear-b`
 
 Function: Clear all buyers from the buyer list.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
+</div>
+
 Format: `clear-b`
 
-### `sort-b`
+### Sorting buyers. `sort-b`
 
 Function: Sort all the buyers according to the orders specified.
 
@@ -236,15 +306,17 @@ Examples:
 
 [back to start of section](#features)
 
-### `list-s`
+### Seller-specific commands
 
-Function: Show the seller list.
+#### Listing sellers. `list-s`
+
+Function: Display the seller list.
 
 Format: `list-s`
 
-### `add-s`
+#### `add-s`
 
-Function: Add a seller to the seller list.
+Function: Add a seller to the seller list. This is essential for you to add a seller's data.
 
 Format: `add-s n/NAME p/PHONE_NUMBER [t/TAG]...`
 
@@ -255,9 +327,19 @@ Examples:
 * `add-s n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
 * `add-s n/Janald p/12345678 t/friend t/criminal` adds a new seller with name `Janald`, phone number of `12345678`, and tags of `friend` and `criminal`
 
-### `add-pts`
+#### Adding a property to sell `add-pts`
 
 Function: Add a new property for the specified seller.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note: `add-ptb` and `add-pts` have different fields! **<br>
+
+* `add-pts` has an additional `a/ADDRESS` field.
+
+* A seller has the specific address of the property is selling while a buyer may not! 
+
+</div>
 
 Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 
@@ -282,9 +364,9 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
   Examples:
 * `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Bishan for any price from $800,000 to $900,000.
 
-### `appt-s`
+#### Adding an appointment with seller. `appt-s`
 
-Function: Create an appointment with a certain seller.
+Function: Create an appointment with a certain seller. Now, you can keep track of your appointments with sellers!.
 
 Format: `appt-s INDEX time/TIME`
 
@@ -295,9 +377,14 @@ Format: `appt-s INDEX time/TIME`
 Examples:
 * `appt-s 1 time/2023-01-01-12-12` sets a new appointment for the 1st seller on the displayed seller list on 1st January 2023 and 12:12pm.
 
-### `edit-s`
+#### Editing a seller. `edit-s`
 
-Function: Edit an existing seller in the displayed seller list.
+Function: Edit an existing seller's information in the displayed seller list.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Caution:** This action **cannot be undone**! Be careful when changing your seller's information.
+</div>
 
 Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
 
@@ -313,10 +400,9 @@ Examples:
 * `edit-s 2 n/Betsy Crower t/` Edits the name of the 2nd seller on displayed seller list to be `Betsy Crower` and clears all existing tags.
 
 
-### `find-s`
+#### Finding a seller. `find-s`
 
-Function: Find sellers whose selected **field** contain any of the given keywords.
-
+Function: Find sellers whose selected **field** contain any of the given keywords. Use this so that you can find your seller's information more easily!
 
 Format: `find-s field/KEYWORD1 [MORE_KEYWORDS]`
 
@@ -333,9 +419,14 @@ Format: `find-s field/KEYWORD1 [MORE_KEYWORDS]`
 Examples:
 * `find-s n/John` displays seller whose names are `john` and `John Doe`.
 
-### `delete-s`
+#### Deleting a seller. `delete-s`
 
 Function: Delete the specified seller from the displayed seller list.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Caution:** This action **cannot be undone**!
+</div>
 
 Format: `delete-s INDEX`
 
@@ -346,15 +437,20 @@ Examples:
 * `list-s` followed by `delete-s 2` deletes the 2nd seller in the seller list.
 * `find-s Betsy` followed by `delete-s 1` deletes the 1st seller in the result of the `find-s` command.
 
-### `clear-s`
+#### Clearing seller list. `clear-s`
 
 Function: Clear all sellers from the seller list.
 
 Format: `clear-s`
 
-### `sort-s`
+#### Sorting sellers. `sort-s`
 
 Function: Sort all the sellers according to the orders specified.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
+</div>
 
 Format: `sort-s [o/FIELDS]`
 
@@ -377,13 +473,94 @@ Examples:
 
 AgentSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Editing the data file
+## Editing the data file (For experienced user)
 
-AgentSee data are saved as a JSON file `[JAR file location]/data/agensee.json`. Advanced users are welcome to update data directly by editing that data file.
+AgentSee data are saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
+Advanced users are welcome to update data directly by editing these data files.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run!
+So if you are afraid of losing all the data, please backup your data files somewhere else before attempting to edit the data file by yourself!
 </div>
+
+
+### JSON format of the data
+
+Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
+
+```
+{
+  "buyers" : [ {
+    "name" : "Shi Hong",
+    "phone" : "12345678",
+    "appointment" : "2022-03-31-17-00",
+    "tagged" : [ "smart" ],
+    "propertyToBuy" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Clementi"
+      },
+      "priceRange" : {
+        "lower" : "500000",
+        "upper" : "600000"
+      }
+    }
+  }, {
+    "name" : "Jun Hong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "kind" ],
+    "propertyToBuy" : null
+  }
+}
+```
+And here are the examples of 2 sellers, one has a property and one does not have a property yet.
+
+```
+{
+  "sellers" : [ {
+    "name" : "chua",
+    "phone" : "1234",
+    "appointment" : "",
+    "tagged" : [ "tag1", "tag2" ],
+    "propertyToSell" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Queens Town"
+      },
+      "priceRange" : {
+        "lower" : "24",
+        "upper" : "48"
+      },
+      "address" : "Utown"
+    }
+  }, {
+    "name" : "Ben Leong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "friendly" ],
+    "propertyToSell" : null
+  }
+}
+```
+
+### Some special format of the data
+#### name and phone
+- They cannot be an empty string: `""` ,  otherwise, it will be seen as invalid format and the buyerbook's data will become empty!
+- `phone` be digits string and must have more than 3 digits.
+#### appointment
+- The `appointment` field should be either `""` or `"Year-Month-Day-Hour-Minute"` format, no other format is acceptable. `""` is when the appoinment date is not specified yet
+- When specifying the Month and Day, the data should be specified in exactly 2 digits, i.e. you need to pad 0 for 1 digit date or month.
+
+#### tagged
+- empty tag should be `[]`
+#### propertyToBuy
+- empty property must be `null`, not `"null"` or `'null'`
+- for the `housetype` under `house`, the housetype provided must be one of our [defined houseType](#house-type).
+Otherwise, all other value will be translated to `Unspecified` housetype!
+- Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
+- `pricerange` must be a digit string, and `lower` value must be less than or equal to `upper`
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -392,6 +569,12 @@ If your changes to the data file makes its format invalid, AgentSee will discard
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the json data in your previous AgentSee home folder.
+
+**Q**: How do I edit a property to buy of a buyer or seller?<br>
+**A**: You may use the `edit-b` or `edit-s` command to edit their fields respectively.
+
+**Q**: Will me data be saved if I exit the application?<br>
+**A**: Don't worry! Your data will be automatically saved everytime it is updated. Feel free to type `exit` to exit the program.
 
 --------------------------------------------------------------------------------------------------------------------
 

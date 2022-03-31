@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
 
 public class JsonAdaptedHouse {
 
@@ -36,6 +37,6 @@ public class JsonAdaptedHouse {
      * @throws IllegalValueException if there were any data constraints violated in the adapted house.
      */
     public House toModelType() throws IllegalValueException {
-        return new House(HouseType.getHouseType(houseType), location);
+        return new House(HouseType.getHouseType(houseType), new Location(location));
     }
 }

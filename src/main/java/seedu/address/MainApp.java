@@ -90,38 +90,39 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlySellerAddressBook> sellerAddressBookOptional;
         Optional<ReadOnlyBuyerAddressBook> buyerAddressBookOptional;
-
+        // Create dummy value for initialData
         ReadOnlyAddressBook initialData;
         ReadOnlySellerAddressBook initialSellerData;
         ReadOnlyBuyerAddressBook initialBuyerData;
-
+        //Dummy AddressBook (will be delete later)
+        initialData = new AddressBook();
         try {
-            addressBookOptional = storage.readAddressBook();
-            sellerAddressBookOptional = storage.readSellerAddressBook();
             buyerAddressBookOptional = storage.readBuyerAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            if (!sellerAddressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample SellerAddressBook");
-            }
             if (!buyerAddressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample BuyerAddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialSellerData = sellerAddressBookOptional.orElseGet(SampleDataUtil::getSampleSellerAddressBook);
+
             initialBuyerData = buyerAddressBookOptional.orElseGet(SampleDataUtil::getSampleBuyerAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-            initialSellerData = new SellerAddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty BuyerAddressBook");
             initialBuyerData = new BuyerAddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-            initialSellerData = new SellerAddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty BuyerAddressBook");
             initialBuyerData = new BuyerAddressBook();
+        }
 
+        try {
+            sellerAddressBookOptional = storage.readSellerAddressBook();
+            if (!sellerAddressBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample SellerAddressBook");
+            }
+            initialSellerData = sellerAddressBookOptional.orElseGet(SampleDataUtil::getSampleSellerAddressBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty SellerAddressBook");
+            initialSellerData = new SellerAddressBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty SellerAddressBook");
+            initialSellerData = new SellerAddressBook();
         }
 
         return new ModelManager(initialData, userPrefs, initialSellerData, initialBuyerData);
