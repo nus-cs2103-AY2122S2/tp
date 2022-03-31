@@ -8,16 +8,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.tinner.model.company.Company;
+import seedu.tinner.model.company.ReadOnlyRoleList;
 import seedu.tinner.model.reminder.exceptions.DuplicateReminderException;
+import seedu.tinner.model.role.Role;
 
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
  * A Reminder is considered unique by comparing using {@code Reminder#isSameReminder(Reminder)}. As such, adding and
- * updating of companies uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
+ * updating of reminders uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
  * being added or updated is unique in terms of identity in the UniqueReminderList. However, the removal of a Reminder
  * uses Reminder#equals(Object) so as to ensure that the Reminder with exactly the same fields will be removed.
  * <p>
@@ -86,20 +90,16 @@ public class UniqueReminderList implements Iterable<Reminder> {
         return internalUnmodifiableList;
     }
 
-    /**
-     * Returns an {@cord ObservableList} of {@code LocalDate} of reminders inside the list
-     * sorted in ascending order. Duplicate dates are omitted.
-     */
     public ObservableList<LocalDate> getReminderDates() {
         return FXCollections.unmodifiableObservableList(FXCollections
                 .observableArrayList(new TreeSet<>(dateToReminderMap.keySet())));
     }
 
     /**
-     * Check which reminders have its reminderDate fall on the given argument date.
+     * Returns the list of reminders associated with a specific date.
      *
-     * @param date The date to be checked.
-     * @return {@code ObservableList} of all reminders with the same reminderDate;
+     * @param date The date that which is used to retrieve the list of reminders.
+     * @return the list of reminders mapped from the given date.
      */
     public ObservableList<Reminder> getDateSpecificReminders(LocalDate date) {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
@@ -108,10 +108,34 @@ public class UniqueReminderList implements Iterable<Reminder> {
             return reminderList;
         }
         Collections.sort(retrievedReminders);
-        for (Reminder reminder : retrievedReminders) {
-            reminderList.add(reminder);
-        }
+        reminderList.addAll(retrievedReminders);
         return reminderList;
+    }
+
+    /**
+     * Resets the internal list of reminders using the given list of companies.
+     *
+     * @param companyList The company from which the reminders are to be produced.
+     */
+    public void setReminders(ObservableList<Company> companyList) {
+        for (Company company : companyList) {
+            ReadOnlyRoleList roleList = company.getRoleList();
+            for (Role role : roleList.getRoleList()) {
+                addFromRole(company, role);
+            }
+        }
+    }
+
+    /**
+     * Checks the validity of the role with respect to the reminder window and
+     * adds a new reminder generated from the given company and role.
+     */
+    public void addFromRole(Company company, Role role) {
+        if (role.getReminderDate().isWithinReminderWindow()) {
+            Reminder reminder = new Reminder(company.getName(),
+                    role.getName(), role.getStatus(), role.getReminderDate());
+            add(reminder);
+        }
     }
 
     public Iterator<Reminder> iterator() {
@@ -130,4 +154,17 @@ public class UniqueReminderList implements Iterable<Reminder> {
         return internalList.hashCode();
     }
 
+    /**
+     * Returns true if {@code Reminders} contains only unique companies.
+     */
+    private boolean remindersAreUnique(List<Reminder> reminders) {
+        for (int i = 0; i < reminders.size() - 1; i++) {
+            for (int j = i + 1; j < reminders.size(); j++) {
+                if (reminders.get(i).isSameReminder(reminders.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

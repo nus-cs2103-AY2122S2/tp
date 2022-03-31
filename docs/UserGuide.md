@@ -11,7 +11,7 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 2. **Reminds** important deadlines so that you will not miss anything about your application.
 3. **Reviews** the process and take down notes so that you can ace your next application.
 
-# Table of Contents
+# Table of Contents <a id="toc"></a>
 
   * [Quick start](#quick-start)
   * [About](#about)  
@@ -72,11 +72,43 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 --------------------------------------------------------------------------------------------------------------------
 # About <a id="about"></a>
 
-This section helps you to understand the Graphical User Interface (GUI), commonly used technical terminologies, general symbols and information about the command format. 
-
+The User Guide's primary goal is to assist the user in learning how to use the application Tinner.
+This guide covers everything from what the user sees, how Tinner can help the user, and even its limitations.
 ## Outline of this Guide <a id="outline"></a>
 
+This subsection helps you to understand the [Graphical User Interface (GUI)](#navigation), commonly used [technical terminologies](#technical-terminologies) and [general symbols](#general-symbols) to help you better understand the User Guide.
+
+Following this would be the [Features](#features), detailing the capabilities of Tinner and how to use them. This section can be either read from the start to bottom or by nicely divided segments of Tinner's repertoire in the [Table of Contents](#toc) and learn everything you can do with that specific area.
+
 ## Navigating within Tinner <a id="navigation"></a>
+The GUI of Tinner can be broken down into different segments with different purposes. This section aims to help users who are confused by the GUI get a better understanding of its use and get more comfortable using the application.
+### Main Window
+![Main Window](images/MainWindow.png)
+
+|      Component      | Function                                                                                                                                                                  |
+|:-------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       Tab Bar       | Shortcuts for you to quickly exit Tinner or view help                                                                                                                     |
+|     Command Box     | Text field for users to key in their commands                                                                                                                             |
+|    Response Box     | Tinner's response to user's commands. <br/>If the command was successful, Tinner would respond with what it did. Else it tells you what went wrong and any tips to fix it |
+| Company Result List | List out all the companies tracked by Tinner, or those that you specifically want to find                                                                                 |
+|  Role Result List   | List out all the roles in this company tracked by Tinner, or those that you specifically want to find                                                                     |
+|      Role Tags      | A quick and easy visual aid to check an application's progress, more on this [below](#tags)                                                                               |
+|     Status Bar      | Shows the file path to which your data is being saved at                                                                                                                  |
+
+### Role Tags <a id="tags"></a>
+The role tags are colour coded in order to make use of the GUI to better inform you how far along the internship application process for each role is at a glance.
+
+![Role Tags](images/RoleTags.png)
+
+### Reminder Window
+
+![Reminder Window](images/ReminderWindow.png)
+
+|   Component   | Function                                                                                                             |
+|:-------------:|----------------------------------------------------------------------------------------------------------------------|
+| Reminder List | List of all reminders within the reminder window (defaults to 7 days) in ascending order                             |
+|   Date Card   | With the date denoted at the top, all the reminders within this date card have their date of reminder on the same day |
+| Reminder Card | Describes the Company name and Role name to be reminded of as well as its status and full reminder date and time     |
 
 ## Technical Terminologies <a id="technical-terminologies"></a>
 
@@ -117,7 +149,37 @@ The following points explain the format of a command.
   e.g. if there exists a company named `meta`, adding another company with the name `meta` is not allowed. 
   
 --------------------------------------------------------------------------------------------------------------------
+# Demo Use Cases <a id="demos"></a>
 
+## Use Case #1: Applying to a role in a company <a id="usecase1"></a>
+
+Say you found a company with an opening that you are interested in. You did your research and found relevant information pertaining to the company and the role. Here's how you can input this data in the application:
+
+1. [Add the company](#c-add-c) to the company list.
+![AddCompanyDemo](images/AddCompanyDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful adding of the company.
+
+2. [Add the role](#c-add-c-r) under the added company.
+![AddRoleDemo](images/AddRoleDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful adding of the role.
+
+## Use Case #2: Deleting a company or a role <a id="usecase2"></a>
+
+Perhaps for some reason, you decide not to go through with an application. Maybe you realised the company's mission and vision were  not in line with your values or maybe you realised the role isn't for you. Here's how you can delete these entries from the application:
+
+1. [Delete the role](#c-delete-c-r) from a given company.
+![DeleteRoleDemo](images/DeleteRoleDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful deletion of the role.
+
+2. [Delete the company](#c-delete-c) from the company list.
+![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
+
+:information_source: Note the successful command execution message in the system feedback box upon successful deletion of the company.
+
+--------------------------------------------------------------------------------------------------------------------
 # Features <a id="features"></a>
 
 ## Modifying Companies <a id="c-modifying-companies"></a>
@@ -132,6 +194,7 @@ Examples:
 
 * `addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
 * `addCompany n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937`
+* Refer to [Demo Use Case #1](#usecase1) for an example use case.
 
 ### Editing an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
 
@@ -156,6 +219,8 @@ Format: `deleteCompany COMPANY_INDEX`
 * Deletes the company at the specified `COMPANY_INDEX`.
 * The index refers to the index number shown in the displayed company list.
 * The index must be a positive integer like 1, 2, 3, …
+* Refer to [Demo Use Case #2](#usecase2) for an example use case.
+
 
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
@@ -210,11 +275,9 @@ Examples:
 
 * `addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse data $/4800 `
 * `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
-
-
-Examples:
-
 * `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
+* Refer to [Demo Use Case #1](#usecase1) for an example use case.
+
 
 ### Editing an existing role from company : `editRole` <a id="c-edit-r"></a>
 
@@ -243,6 +306,7 @@ Examples:
 
 * `list` followed by, `deleteRole 1 1` deletes the 1<sup>st</sup> role from the 1<sup>st</sup>
   company in the displayed company list.
+* Refer to [Demo Use Case #2](#usecase2) for an example use case.
 
 ## Retrieving Companies <a id="c-retrieving-companies"></a>
 
@@ -312,16 +376,6 @@ Examples:
 Exits the Tinner application.
 
 Format: `exit`
-
-### Colour code of role tags
-Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
-![img.png](images/tagcolourcode.png)
-* "applying" : white
-* "pending": orange
-* "interview and assessments": purple
-* "rejected": red
-* "offered": green
-* "complete": black
 
 ### Saving the data
 

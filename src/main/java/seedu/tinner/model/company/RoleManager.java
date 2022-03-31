@@ -34,7 +34,7 @@ public class RoleManager {
         requireAllNonNull(roleList);
 
         this.roleList = new RoleList(roleList);
-        this.filteredRoles = new FilteredList<>(this.roleList.getRoles());
+        this.filteredRoles = new FilteredList<>(this.roleList.getRoleList());
     }
 
     public RoleManager() {
@@ -47,6 +47,9 @@ public class RoleManager {
         this.roleList.resetData(roleList);
     }
 
+    /**
+     * Returns the internal list of roles.
+     */
     public ReadOnlyRoleList getRoleList() {
         return roleList;
     }
