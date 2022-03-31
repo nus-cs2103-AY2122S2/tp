@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.exceptions.CandidateNotFoundException;
 import seedu.address.model.candidate.exceptions.DuplicateCandidateException;
 import seedu.address.testutil.CandidateBuilder;
@@ -73,7 +74,7 @@ public class UniqueCandidateListTest {
     }
 
     @Test
-    public void setCandidate_editedCandidateIsSameCandidate_success() {
+    public void setCandidate_editedCandidateIsSameCandidate_success() throws CommandException {
         uniqueCandidateList.add(ALICE);
         uniqueCandidateList.setCandidate(ALICE, ALICE);
         UniqueCandidateList expectedUniqueCandidateList = new UniqueCandidateList();
@@ -82,7 +83,7 @@ public class UniqueCandidateListTest {
     }
 
     @Test
-    public void setCandidate_editedCandidateHasSameIdentity_success() {
+    public void setCandidate_editedCandidateHasSameIdentity_success() throws CommandException {
         uniqueCandidateList.add(ALICE);
         Candidate editedAlice = new CandidateBuilder(ALICE).withCourse(VALID_COURSE_BOB)
                 .build();
@@ -93,7 +94,7 @@ public class UniqueCandidateListTest {
     }
 
     @Test
-    public void setCandidate_editedCandidateHasDifferentIdentity_success() {
+    public void setCandidate_editedCandidateHasDifferentIdentity_success() throws CommandException {
         uniqueCandidateList.add(ALICE);
         uniqueCandidateList.setCandidate(ALICE, BOB);
         UniqueCandidateList expectedUniqueCandidateList = new UniqueCandidateList();

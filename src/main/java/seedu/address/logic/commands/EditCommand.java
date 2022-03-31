@@ -11,11 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SENIORITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CANDIDATES;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -34,7 +31,6 @@ import seedu.address.model.candidate.Remark;
 import seedu.address.model.candidate.Seniority;
 import seedu.address.model.candidate.StudentId;
 import seedu.address.model.interview.Interview;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing candidate in the address book.
@@ -60,9 +56,11 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "E0123456@u.nus.edu";
 
     public static final String MESSAGE_EDIT_CANDIDATE_SUCCESS = "Edited Candidate: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
     public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the system";
-    public static final String MESSAGE_FOCUS_FAIL = "Cannot refresh Candidate Details";
+    public static final String MESSAGE_CONFLICTED_AVAILABILITY =
+            "This candidate already has an interview scheduled on his/her available day that was previously added"
+            + "\nPlease consider re-scheduling the interview before making this change";
 
     private final Index index;
     private final EditCandidateDescriptor editCandidateDescriptor;
@@ -94,6 +92,10 @@ public class EditCommand extends Command {
 
         if (!candidateToEdit.isSameCandidate(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE);
+        }
+
+        if (model.hasInterview(editedCandidate)) {
+            throw new CommandException(MESSAGE_CONFLICTED_AVAILABILITY);
         }
 
         model.setCandidate(candidateToEdit, editedCandidate);
@@ -166,8 +168,6 @@ public class EditCommand extends Command {
         private Email email;
         private Course course;
         private Seniority seniority;
-
-        private Set<Tag> tags;
         private ApplicationStatus applicationStatus;
         private InterviewStatus interviewStatus;
         private Availability availability;
@@ -185,7 +185,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setCourse(toCopy.course);
             setSeniority(toCopy.seniority);
-            setTags(toCopy.tags);
             setApplicationStatus(toCopy.applicationStatus);
             setInterviewStatus(toCopy.interviewStatus);
             setAvailability(toCopy.availability);
@@ -195,7 +194,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, seniority, tags,
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, course, seniority,
                     applicationStatus, availability);
         }
 
@@ -271,23 +270,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(availability);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -309,7 +291,6 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getCourse().equals(e.getCourse())
                     && getSeniority().equals(e.getSeniority())
-                    && getTags().equals(e.getTags())
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getAvailability().equals(e.getAvailability());
         }

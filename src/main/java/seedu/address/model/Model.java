@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 
@@ -107,7 +108,12 @@ public interface Model {
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate
      * in the address book.
      */
-    void setCandidate(Candidate target, Candidate editedCandidate);
+    void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException;
+
+    /**
+     * Checks if {@code editedCandidate} already has an interview when editing {@code availability}
+     */
+    boolean hasInterview(Candidate editedCandidate);
 
     boolean hasInterviewCandidate(Interview interview);
 
@@ -120,6 +126,11 @@ public interface Model {
     void addInterview(Interview interview);
 
     void setInterview(Interview target, Interview editedInterview);
+
+    /**
+     * Gets candidate's scheduled interview if present
+     */
+    Interview getInterview(Candidate target);
 
     //=========== Interview Schedule Accessors =============================================================
 
@@ -144,9 +155,9 @@ public interface Model {
 
     void updateInterviewCandidate(Interview target, Interview editedInterview);
 
-    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime);
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException;
 
-    void resetAllScheduledStatus();
+    void resetAllScheduledStatus() throws CommandException;
 
     List<Candidate> getExpiredInterviewCandidates();
 }

@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
 
@@ -130,14 +131,26 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setCandidate(Candidate target, Candidate editedCandidate) {
+    public void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException {
         requireAllNonNull(target, editedCandidate);
 
         addressBook.setCandidate(target, editedCandidate);
     }
 
     @Override
-    public void resetAllScheduledStatus() {
+    public boolean hasInterview(Candidate editedCandidate) {
+        String availability = editedCandidate.getAvailability().toString();
+        Interview interview = getInterview(editedCandidate);
+
+        if (interview == null) {
+            return false;
+        }
+
+        return !availability.contains(String.valueOf(interview.getInterviewDay()));
+    }
+
+    @Override
+    public void resetAllScheduledStatus() throws CommandException {
         addressBook.resetAllScheduledStatus();
         updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
     }
@@ -145,6 +158,7 @@ public class ModelManager implements Model {
     @Override
     public List<Candidate> getExpiredInterviewCandidates() {
         return interviewSchedule.getExpiredInterviewCandidates();
+
     }
 
     //=========== InterviewSchedule ================================================================================
@@ -208,7 +222,7 @@ public class ModelManager implements Model {
      * @param localDateTime Current date time.
      */
     @Override
-    public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) {
+    public void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException {
         requireNonNull(localDateTime);
         List<Interview> list = interviewSchedule.deletePastInterviews(localDateTime);
         int i = 0;
@@ -228,7 +242,19 @@ public class ModelManager implements Model {
         interviewSchedule.setInterview(target, editedInterview);
     }
 
+    @Override
+    public Interview getInterview(Candidate target) {
+        for (Interview i: interviewSchedule.getInterviewList()) {
+            if (i.getCandidate().getStudentId().toString().equals(target.getStudentId().toString())) {
+                return i;
+            }
+        }
+
+        return null;
+    }
+
     //=========== Interview Schedule Accessors =============================================================
+
     @Override
     public ObservableList<Interview> getFilteredInterviewSchedule() {
         interviewSchedule.sortInterviews();
@@ -241,7 +267,6 @@ public class ModelManager implements Model {
         interviewSchedule.sortInterviews();
         filteredInterviewSchedule.setPredicate(predicate);
     }
-
 
     //=========== Filtered/Sort Candidate List Accessors =============================================================
     /**
@@ -285,5 +310,4 @@ public class ModelManager implements Model {
                 && filteredCandidates.equals(other.filteredCandidates)
                 && filteredInterviewSchedule.equals(other.filteredInterviewSchedule);
     }
-
 }

@@ -58,7 +58,7 @@ public class Interview {
     }
 
     /**
-     * Returns true if the candidate is available on the propsoed interview day
+     * Returns true if the candidate is available on the proposed interview day
      */
     public boolean hasMatchingAvailability() {
         String candidateAvailabilities = this.candidate.getAvailability().toString();
