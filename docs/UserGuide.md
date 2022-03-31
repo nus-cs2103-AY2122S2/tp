@@ -11,7 +11,7 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 2. **Reminds** important deadlines so that you will not miss anything about your application.
 3. **Reviews** the process and take down notes so that you can ace your next application.
 
-# Table of Contents
+# Table of Contents <a id="toc"></a>
 
   * [Quick start](#quick-start)
   * [About](#about)  
@@ -72,11 +72,43 @@ Tinner aims to solve the hassle of managing internship applications though 3 asp
 --------------------------------------------------------------------------------------------------------------------
 # About <a id="about"></a>
 
-This section helps you to understand the Graphical User Interface (GUI), commonly used technical terminologies, general symbols and information about the command format. 
-
+The User Guide's primary goal is to assist the user in learning how to use the application Tinner.
+This guide covers everything from what the user sees, how Tinner can help the user, and even its limitations.
 ## Outline of this Guide <a id="outline"></a>
 
+This subsection helps you to understand the [Graphical User Interface (GUI)](#navigation), commonly used [technical terminologies](#technical-terminologies) and [general symbols](#general-symbols) to help you better understand the User Guide.
+
+Following this would be the [Features](#features), detailing the capabilities of Tinner and how to use them. This section can be either read from the start to bottom or by nicely divided segments of Tinner's repertoire in the [Table of Contents](#toc) and learn everything you can do with that specific area.
+
 ## Navigating within Tinner <a id="navigation"></a>
+The GUI of Tinner can be broken down into different segments with different purposes. This section aims to help users who are confused by the GUI get a better understanding of its use and get more comfortable using the application.
+### Main Window
+![Main Window](images/MainWindow.png)
+
+|      Component      | Function                                                                                                                                                                  |
+|:-------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       Tab Bar       | Shortcuts for you to quickly exit Tinner or view help                                                                                                                     |
+|     Command Box     | Text field for users to key in their commands                                                                                                                             |
+|    Response Box     | Tinner's response to user's commands. <br/>If the command was successful, Tinner would respond with what it did. Else it tells you what went wrong and any tips to fix it |
+| Company Result List | List out all the companies tracked by Tinner, or those that you specifically want to find                                                                                 |
+|  Role Result List   | List out all the roles in this company tracked by Tinner, or those that you specifically want to find                                                                     |
+|      Role Tags      | A quick and easy visual aid to check an application's progress, more on this [below](#tags)                                                                               |
+|     Status Bar      | Shows the file path to which your data is being saved at                                                                                                                  |
+
+### Role Tags <a id="tags"></a>
+The role tags are colour coded in order to make use of the GUI to better inform you how far along the internship application process for each role is at a glance.
+
+![Role Tags](images/RoleTags.png)
+
+### Reminder Window
+
+![Reminder Window](images/ReminderWindow.png)
+
+|   Component   | Function                                                                                                             |
+|:-------------:|----------------------------------------------------------------------------------------------------------------------|
+| Reminder List | List of all reminders within the reminder window (defaults to 7 days) in ascending order                             |
+|   Date Card   | With the date denoted at the top, all the reminders within this date card have their date of reminder on the same day |
+| Reminder Card | Describes the Company name and Role name to be reminded of as well as its status and full reminder date and time     |
 
 ## Technical Terminologies <a id="technical-terminologies"></a>
 
@@ -312,16 +344,6 @@ Examples:
 Exits the Tinner application.
 
 Format: `exit`
-
-### Colour code of role tags
-Colour coding of roles allows users to quickly obtain information about their application statuses at a glance.
-![img.png](images/tagcolourcode.png)
-* "applying" : white
-* "pending": orange
-* "interview and assessments": purple
-* "rejected": red
-* "offered": green
-* "complete": black
 
 ### Saving the data
 
