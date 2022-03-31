@@ -29,44 +29,153 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+            <padding>
+               <Insets bottom="5.0" />
+            </padding>
             </HBox>
+            <FlowPane fx:id="tags">
+            <VBox.margin>
+               <Insets bottom="5.0" />
+            </VBox.margin></FlowPane>
             <HBox>
                 <children>
-                    <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                    <ImageView fitHeight="13.0" fitWidth="13.0" opacity="0.63" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                         <image>
                             <Image url="@../images/phone.png" />
                         </image>
+                  <HBox.margin>
+                     <Insets top="2.0" />
+                  </HBox.margin>
                     </ImageView>
-                    <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+                    <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                 </children>
+            <padding>
+               <Insets bottom="5.0" />
+            </padding>
             </HBox>
             <HBox>
-                <Label text="Type: "></Label>
-                <Label fx:id="propertyType" styleClass="cell_big_label"/>
+                <children>
+                    <ImageView fitHeight="17.0" fitWidth="17.0" opacity="0.63" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" HBox.hgrow="NEVER">
+                        <image>
+                            <Image url="@../images/house.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets top="2.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <Label text="Type: ">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets left="5.0" top="2.0" />
+                  </padding></Label>
+                    <Label fx:id="propertyType" styleClass="cell_small_label">
+                  <padding>
+                     <Insets top="3.0" />
+                  </padding></Label>
+                </children>
+                <padding>
+                    <Insets bottom="5.0" />
+                </padding>
             </HBox>
             <HBox>
-                <Label text="Location: "></Label>
-                <Label fx:id="propertyLocation" styleClass="cell_big_label"/>
+                <children>
+                    <ImageView fitHeight="17.0" fitWidth="17.0" opacity="0.63" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" HBox.hgrow="NEVER">
+                        <image>
+                            <Image url="@../images/location.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets top="2.0" />
+                        </HBox.margin>
+                    </ImageView>
+                <Label text="Location: ">
+                  <padding>
+                     <Insets left="5.0" top="2.0" />
+                  </padding></Label>
+                <Label fx:id="propertyLocation" styleClass="cell_small_label">
+                <padding>
+                    <Insets top="3.0" />
+                </padding></Label>
+                </children>
+            <padding>
+               <Insets bottom="5.0" />
+            </padding>
             </HBox>
             <HBox>
-                <Label text="Address: "></Label>
-                <Label fx:id="propertyAddress" styleClass="cell_big_label"/>
+                <children>
+                    <ImageView fitHeight="17.0" fitWidth="17.0" opacity="0.63" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" HBox.hgrow="NEVER">
+                        <image>
+                            <Image url="@../images/address.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets top="2.0" />
+                        </HBox.margin>
+                    </ImageView>
+                <Label text="Address: ">
+                  <padding>
+                     <Insets left="5.0" top="2.0" />
+                  </padding></Label>
+                <Label fx:id="propertyAddress" styleClass="cell_small_label">
+                  <padding>
+                     <Insets top="3.0" />
+                  </padding></Label>
+                </children>
+            <padding>
+               <Insets bottom="5.0" />
+            </padding>
             </HBox>
             <HBox>
-                <Label text="Price: "></Label>
-                <Label fx:id="propertyLowerPrice" styleClass="cell_big_label"/>
-                <Label text=" - "></Label>
-                <Label fx:id="propertyUpperPrice" styleClass="cell_big_label"/>
+                <children>
+                    <ImageView fitHeight="17.0" fitWidth="17.0" opacity="0.63" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" HBox.hgrow="NEVER">
+                        <image>
+                            <Image url="@../images/pricerange.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets top="2.0" />
+                        </HBox.margin>
+                    </ImageView>
+                <Label text="Price: ($) ">
+                  <padding>
+                     <Insets left="5.0" top="2.0" />
+                  </padding></Label>
+                <Label fx:id="propertyLowerPrice" styleClass="cell_small_label">
+                  <padding>
+                     <Insets top="3.0" />
+                  </padding></Label>
+                <Label text=" - ">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets top="3.0" />
+                  </padding></Label>
+                <Label fx:id="propertyUpperPrice" styleClass="cell_small_label">
+                  <padding>
+                     <Insets top="3.0" />
+                  </padding></Label>
+                </children>
+            <padding>
+               <Insets bottom="5.0" />
+            </padding>
             </HBox>
-            <FlowPane fx:id="tags" />
             <HBox>
                 <children>
                     <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image url="@../images/appointment.png" />
+                            <Image url="@../images/clock2.png" />
                         </image>
+                  <HBox.margin>
+                     <Insets top="3.0" />
+                  </HBox.margin>
                     </ImageView>
-                    <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" />
+                    <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment">
+                  <padding>
+                     <Insets left="5.0" top="3.0" />
+                  </padding></Label>
                 </children>
             </HBox>
 
@@ -82,4 +191,3 @@
         <Insets bottom="5.0" top="5.0" />
     </padding>
 </HBox>
-
