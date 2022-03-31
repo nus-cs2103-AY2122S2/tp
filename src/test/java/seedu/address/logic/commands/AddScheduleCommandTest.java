@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.model.InterviewSchedule;
 import seedu.address.model.Model;
@@ -41,7 +42,7 @@ public class AddScheduleCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new InterviewSchedule(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredList_success() throws CommandException {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         LocalDateTime interviewDateTime = TUESDAY_INTERVIEW_DATE_TIME;
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST_CANDIDATE, interviewDateTime);
@@ -70,7 +71,7 @@ public class AddScheduleCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIndexFilteredList_success() throws CommandException {
         showCandidateAtIndex(model, INDEX_FIRST_CANDIDATE);
         AddScheduleCommand addScheduleCommand =
                 new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TUESDAY_INTERVIEW_DATE_TIME);

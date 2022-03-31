@@ -2,12 +2,14 @@ package seedu.address.model.candidate;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_CANDIDATE;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.exceptions.CandidateNotFoundException;
 import seedu.address.model.candidate.exceptions.DuplicateCandidateException;
 
@@ -54,7 +56,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
      * {@code target} must exist in the list.
      * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the list.
      */
-    public void setCandidate(Candidate target, Candidate editedCandidate) {
+    public void setCandidate(Candidate target, Candidate editedCandidate) throws CommandException {
         requireAllNonNull(target, editedCandidate);
 
         int index = internalList.indexOf(target);
@@ -64,6 +66,14 @@ public class UniqueCandidateList implements Iterable<Candidate> {
 
         if (!target.isSameCandidate(editedCandidate) && contains(editedCandidate)) {
             throw new DuplicateCandidateException();
+        }
+
+        ObservableList<Candidate> internalListCopy = FXCollections.observableArrayList(internalList);
+
+        internalListCopy.set(index, editedCandidate);
+
+        if (!candidatesAreUnique(internalListCopy)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE);
         }
 
         internalList.set(index, editedCandidate);
@@ -139,7 +149,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     /**
      * Resets the interviewStatus of all candidates whose interview statuses are scheduled to not scheduled.
      */
-    public void resetScheduledStatus() {
+    public void resetScheduledStatus() throws CommandException {
         for (Candidate c : internalList) {
             if (c.isScheduled()) {
                 setCandidate(c, c.setNotScheduled());
