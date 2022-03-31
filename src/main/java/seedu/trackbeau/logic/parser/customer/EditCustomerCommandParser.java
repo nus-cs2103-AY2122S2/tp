@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.parser;
+package seedu.trackbeau.logic.parser.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -22,6 +22,10 @@ import java.util.Set;
 import seedu.trackbeau.commons.core.index.Index;
 import seedu.trackbeau.logic.commands.customer.EditCustomerCommand;
 import seedu.trackbeau.logic.commands.customer.EditCustomerCommand.EditCustomerDescriptor;
+import seedu.trackbeau.logic.parser.ArgumentMultimap;
+import seedu.trackbeau.logic.parser.ArgumentTokenizer;
+import seedu.trackbeau.logic.parser.Parser;
+import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.tag.Tag;
 

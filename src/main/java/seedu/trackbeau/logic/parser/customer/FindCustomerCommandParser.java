@@ -1,4 +1,4 @@
-package seedu.trackbeau.logic.parser;
+package seedu.trackbeau.logic.parser.customer;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -12,7 +12,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,13 +20,18 @@ import java.util.Collections;
 import java.util.List;
 
 import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
+import seedu.trackbeau.logic.parser.ArgumentMultimap;
+import seedu.trackbeau.logic.parser.ArgumentTokenizer;
+import seedu.trackbeau.logic.parser.Parser;
+import seedu.trackbeau.logic.parser.ParserUtil;
+import seedu.trackbeau.logic.parser.Prefix;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCustomerCommand object
  */
-public class FindCommandParser implements Parser<FindCustomerCommand> {
+public class FindCustomerCommandParser implements Parser<FindCustomerCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCustomerCommand
@@ -60,7 +65,7 @@ public class FindCommandParser implements Parser<FindCustomerCommand> {
             }
         }
 
-        return new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr));
+        return new FindCustomerCommand(new CustomerSearchContainsKeywordsPredicate(prefixArr));
 
     }
 }

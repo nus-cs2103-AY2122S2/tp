@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -134,11 +135,6 @@ public class AddCustomerCommandTest {
         }
 
         @Override
-        public Integer getCustomerIndex(Customer customer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setTrackBeau(ReadOnlyTrackBeau newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -189,6 +185,11 @@ public class AddCustomerCommandTest {
         }
 
         @Override
+        public void updateFilteredServiceList(Predicate<Service> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasService(Service service) {
             throw new AssertionError("This method should not be called.");
         }
@@ -203,10 +204,6 @@ public class AddCustomerCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public Integer getServiceIndex(Service service) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void setService(Service target, Service editedService) {
@@ -214,12 +211,22 @@ public class AddCustomerCommandTest {
         }
 
         @Override
-        public ObservableList<Service> getFilteredServicesList() {
+        public ObservableList<Service> getFilteredServiceList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateServiceList(Predicate<Service> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public LocalDate getSelectedDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedDate(LocalDate selectedDate) {
             throw new AssertionError("This method should not be called.");
         }
     }

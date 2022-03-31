@@ -3,7 +3,7 @@ package seedu.trackbeau.logic.parser;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.trackbeau.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,11 +13,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.logic.parser.customer.FindCustomerCommandParser;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 
 public class FindCustomerCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindCustomerCommandParser parser = new FindCustomerCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -40,7 +41,7 @@ public class FindCustomerCommandParserTest {
         prefixArr.set(7, Arrays.asList(new String[]{"acne"}));
         prefixArr.set(8, Arrays.asList(new String[]{"nickel"}));
         FindCustomerCommand expectedFindNameCommand =
-                new FindCustomerCommand(new SearchContainsKeywordsPredicate(prefixArr));
+                new FindCustomerCommand(new CustomerSearchContainsKeywordsPredicate(prefixArr));
         assertParseSuccess(parser, "name n/alex yeoh p/87438807 e/alex@example.com"
                 + " a/geylang s/oily h/dry stp/jason sep/acne al/nickel", expectedFindNameCommand);
 

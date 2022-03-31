@@ -10,6 +10,7 @@ import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.service.Service;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Adds a service to trackBeau.
@@ -50,7 +51,7 @@ public class AddServiceCommand extends Command {
         }
 
         model.addService(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), Panel.SERVICE_PANEL);
     }
 
     @Override

@@ -7,17 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.trackbeau.ui.Panel;
+
 public class CommandResultTest {
     @Test
     public void equals() {
-        CommandResult commandResult = new CommandResult("feedback");
+        CommandResult commandResult = new CommandResult("feedback", Panel.NO_CHANGE);
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback")));
+        assertTrue(commandResult.equals(new CommandResult("feedback", Panel.NO_CHANGE)));
         assertTrue(commandResult.equals(
                 new CommandResult("feedback", false, false,
                         false, false,
-                        false, false, false, false)));
+                        false, false, false, false,
+                        Panel.NO_CHANGE)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,36 +32,38 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(0.5f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
+        assertFalse(commandResult.equals(new CommandResult("different", Panel.NO_CHANGE)));
 
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", true, false,
-                false, false, false, false, false, false)));
+                false, false, false, false, false,
+                false, Panel.NO_CHANGE)));
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false,
                 true, false, false, false,
-                false, false, false)));
+                false, false, false, Panel.NO_CHANGE)));
     }
 
     @Test
     public void hashcode() {
-        CommandResult commandResult = new CommandResult("feedback");
+        CommandResult commandResult = new CommandResult("feedback", Panel.NO_CHANGE);
 
         // same values -> returns same hashcode
-        assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
+        assertEquals(commandResult.hashCode(), new CommandResult("feedback", Panel.NO_CHANGE).hashCode());
 
         // different feedbackToUser value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("different", Panel.NO_CHANGE).hashCode());
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false,
                 false, false, false,
-                false, false, false).hashCode());
+                false, false, false, Panel.NO_CHANGE).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true,
                 false, false,
-                false, false, false, false).hashCode());
+                false, false, false,
+                false, Panel.NO_CHANGE).hashCode());
     }
 }

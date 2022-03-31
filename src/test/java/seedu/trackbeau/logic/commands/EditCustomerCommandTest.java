@@ -28,6 +28,7 @@ import seedu.trackbeau.model.UserPrefs;
 import seedu.trackbeau.model.customer.Customer;
 import seedu.trackbeau.testutil.CustomerBuilder;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCustomerCommand.
@@ -48,7 +49,7 @@ public class EditCustomerCommandTest {
         Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
 
-        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
@@ -69,7 +70,7 @@ public class EditCustomerCommandTest {
         Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
         expectedModel.setCustomer(lastCustomer, editedCustomer);
 
-        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
@@ -87,7 +88,7 @@ public class EditCustomerCommandTest {
         Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
         expectedModel.setCustomer(secondCustomer, editedCustomer);
 
-        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
@@ -100,7 +101,7 @@ public class EditCustomerCommandTest {
 
         Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
 
-        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test
@@ -117,7 +118,7 @@ public class EditCustomerCommandTest {
         Model expectedModel = new ModelManager(new TrackBeau(model.getTrackBeau()), new UserPrefs());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
 
-        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
     }
 
     @Test

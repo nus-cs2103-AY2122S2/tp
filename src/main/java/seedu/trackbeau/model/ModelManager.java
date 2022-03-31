@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Service> filteredServices;
     private final FilteredList<Booking> filteredBookings;
+    private LocalDate selectedDate;
 
     /**
      * Initializes a ModelManager with the given trackBeau and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
 
         this.trackBeau = new TrackBeau(trackBeau);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.selectedDate = LocalDate.now();
         filteredCustomers = new FilteredList<>(this.trackBeau.getCustomerList());
         filteredServices = new FilteredList<>(this.trackBeau.getServiceList());
         filteredBookings = new FilteredList<>(this.trackBeau.getBookingList());
@@ -102,27 +105,45 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteCustomer(Customer target) {
-        trackBeau.removeCustomer(target);
-    }
-
-    @Override
     public void addCustomer(Customer customer) {
         trackBeau.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
-    public Integer getCustomerIndex(Customer customer) {
-        return trackBeau.getCustomerIndex(customer);
+    public void deleteCustomer(Customer target) {
+        trackBeau.removeCustomer(target);
     }
 
     @Override
     public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
-
         trackBeau.setCustomer(target, editedCustomer);
+    }
 
+    //=========== Services =============================================================
+
+    @Override
+    public boolean hasService(Service service) {
+        requireNonNull(service);
+        return trackBeau.hasService(service);
+    }
+
+    @Override
+    public void addService(Service service) {
+        trackBeau.addService(service);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    }
+
+    @Override
+    public void deleteService(Service target) {
+        trackBeau.removeService(target);
+    }
+
+    @Override
+    public void setService(Service target, Service editedService) {
+        requireAllNonNull(target, editedService);
+        trackBeau.setService(target, editedService);
     }
 
     //=========== Bookings ================================================================================
@@ -149,6 +170,48 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedBooking);
         trackBeau.setBooking(target, editedBooking);
     }
+
+
+    //=========== Filtered Customer List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
+     * {@code versionedTrackBeau}
+     */
+    @Override
+    public ObservableList<Customer> getFilteredCustomerList() {
+        return filteredCustomers;
+    }
+
+    @Override
+    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
+        requireNonNull(predicate);
+        filteredCustomers.setPredicate(predicate);
+    }
+
+    //=========== Filtered Service List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Service} backed by the internal list of
+     * {@code versionedTrackBeau}
+     */
+    @Override
+    public ObservableList<Service> getFilteredServiceList() {
+        return filteredServices;
+    }
+
+    @Override
+    public void updateFilteredServiceList(Predicate<Service> predicate) {
+        requireNonNull(predicate);
+        filteredServices.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateServiceList(Predicate<Service> predicate) {
+        requireNonNull(predicate);
+        filteredServices.setPredicate(predicate);
+    }
+
     //=========== Filtered Booking List Accessors =============================================================
 
     /**
@@ -166,62 +229,14 @@ public class ModelManager implements Model {
         filteredBookings.setPredicate(predicate);
     }
 
-    //=========== Services =============================================================
-
     @Override
-    public boolean hasService(Service service) {
-        requireNonNull(service);
-        return trackBeau.hasService(service);
+    public LocalDate getSelectedDate() {
+        return this.selectedDate;
     }
 
     @Override
-    public void deleteService(Service target) {
-        trackBeau.removeService(target);
-    }
-
-    @Override
-    public void addService(Service service) {
-        trackBeau.addService(service);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-    }
-
-    @Override
-    public Integer getServiceIndex(Service service) {
-        return trackBeau.getServiceIndex(service);
-    }
-
-    @Override
-    public void setService(Service target, Service editedService) {
-        requireAllNonNull(target, editedService);
-        trackBeau.setService(target, editedService);
-    }
-
-    @Override
-    public ObservableList<Service> getFilteredServicesList() {
-        return filteredServices;
-    }
-
-    @Override
-    public void updateServiceList(Predicate<Service> predicate) {
-        requireNonNull(predicate);
-        filteredServices.setPredicate(predicate);
-    }
-
-    //=========== Filtered Customer List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
-     * {@code versionedTrackBeau}
-     */
-    @Override
-    public ObservableList<Customer> getFilteredCustomerList() {
-        return filteredCustomers;
-    }
-
-    @Override
-    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
-        requireNonNull(predicate);
-        filteredCustomers.setPredicate(predicate);
+    public void setSelectedDate(LocalDate selectedDate) {
+        this.selectedDate = selectedDate;
     }
 
     @Override

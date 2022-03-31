@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW;
 import static seedu.trackbeau.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.TypicalCustomers.CARL;
 import static seedu.trackbeau.testutil.TypicalCustomers.ELLE;
 import static seedu.trackbeau.testutil.TypicalCustomers.FIONA;
@@ -22,7 +22,8 @@ import seedu.trackbeau.logic.commands.customer.FindCustomerCommand;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCustomerCommand}.
@@ -38,11 +39,11 @@ public class FindCustomerCommandTest {
         ArrayList<List<String>> secondPrefixArr2 = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         firstPrefixArr.set(0, Collections.singletonList("first"));
-        SearchContainsKeywordsPredicate firstPredicate =
-                new SearchContainsKeywordsPredicate(firstPrefixArr);
+        CustomerSearchContainsKeywordsPredicate firstPredicate =
+                new CustomerSearchContainsKeywordsPredicate(firstPrefixArr);
         secondPrefixArr2.set(0, Collections.singletonList("second"));
-        SearchContainsKeywordsPredicate secondPredicate =
-                new SearchContainsKeywordsPredicate(secondPrefixArr2);
+        CustomerSearchContainsKeywordsPredicate secondPredicate =
+                new CustomerSearchContainsKeywordsPredicate(secondPrefixArr2);
 
         FindCustomerCommand findFirstCommand = new FindCustomerCommand(firstPredicate);
         FindCustomerCommand findSecondCommand = new FindCustomerCommand(secondPredicate);
@@ -67,30 +68,30 @@ public class FindCustomerCommandTest {
     @Test
     public void execute_zeroKeywords_noCustomerFound() {
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 0);
-        SearchContainsKeywordsPredicate predicate = preparePredicate(" ");
+        CustomerSearchContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
         assertEquals(Collections.emptyList(), model.getFilteredCustomerList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleCustomersFound() {
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 3);
-        SearchContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        CustomerSearchContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, Panel.CUSTOMER_PANEL);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredCustomerList());
     }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private SearchContainsKeywordsPredicate preparePredicate(String userInput) {
+    private CustomerSearchContainsKeywordsPredicate preparePredicate(String userInput) {
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(userInput.split("\\s+")));
-        return new SearchContainsKeywordsPredicate(prefixArr);
+        return new CustomerSearchContainsKeywordsPredicate(prefixArr);
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
@@ -13,7 +14,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -27,8 +28,9 @@ import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.TrackBeau;
 import seedu.trackbeau.model.customer.Customer;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.EditCustomerDescriptorBuilder;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains helper methods for testing commands.
@@ -101,6 +103,9 @@ public class CommandTestUtil {
     public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGIES + VALID_ALLERGY_AMY;
     public static final String ALLERGY_DESC_BOB = " " + PREFIX_ALLERGIES + VALID_ALLERGY_BOB;
 
+    public static final String VALID_DATE1 = " " + PREFIX_DATE + VALID_REG_DATE_AMY;
+    public static final String VALID_DATE2 = " " + PREFIX_DATE + VALID_REG_DATE_BOB;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -110,6 +115,7 @@ public class CommandTestUtil {
     public static final String INVALID_STAFFS_DESC = " " + PREFIX_STAFFS; //empty string not allowed for tags
     public static final String INVALID_SERVICE_DESC = " " + PREFIX_SERVICES; //empty string not allowed for tags
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGIES; //empty string not allowed for tags
+    public static final String INVALID_DATE = " " + PREFIX_DATE + "10-10"; //missing year
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -159,8 +165,8 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+                                            Model expectedModel, Panel expectPanel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, expectPanel);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -192,7 +198,7 @@ public class CommandTestUtil {
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(splitName[0]));
-        model.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
+        model.updateFilteredCustomerList(new CustomerSearchContainsKeywordsPredicate(prefixArr));
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }

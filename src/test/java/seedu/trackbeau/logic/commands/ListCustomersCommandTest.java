@@ -12,6 +12,7 @@ import seedu.trackbeau.logic.commands.customer.ListCustomersCommand;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.ModelManager;
 import seedu.trackbeau.model.UserPrefs;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCustomersCommand.
@@ -29,12 +30,14 @@ public class ListCustomersCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCustomersCommand(), model, ListCustomersCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCustomersCommand(), model, ListCustomersCommand.MESSAGE_SUCCESS, expectedModel,
+                Panel.CUSTOMER_PANEL);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showCustomerAtIndex(model, INDEX_FIRST_CUSTOMER);
-        assertCommandSuccess(new ListCustomersCommand(), model, ListCustomersCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCustomersCommand(), model, ListCustomersCommand.MESSAGE_SUCCESS, expectedModel,
+            Panel.CUSTOMER_PANEL);
     }
 }

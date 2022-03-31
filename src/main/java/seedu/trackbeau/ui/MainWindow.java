@@ -1,7 +1,7 @@
 package seedu.trackbeau.ui;
 
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
-import static seedu.trackbeau.logic.parser.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_HAIR_TYPE;
+import static seedu.trackbeau.logic.parser.customer.AddCustomerCommandParser.EMPTY_SKIN_TYPE;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -68,7 +68,8 @@ public class MainWindow extends UiPart<Stage> {
     private MonthlyCustomerChartWindow monthlyCustomerChartWindow;
     private ServiceListPanel serviceListPanel;
     private BookingListPanel bookingListPanel;
-    private StatisticsPanel statisticsPanel;
+    private SchedulePanel schedulePanel;
+    private Panel currPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -94,6 +95,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Label bookingsLabel;
 
+    @FXML
+    private Label scheduleLabel;
 
     private ArrayList<Label> labels;
 
@@ -118,12 +121,16 @@ public class MainWindow extends UiPart<Stage> {
         allergyChartWindow = new AllergyChartWindow();
         skinChartWindow = new SkinChartWindow();
         hairChartWindow = new HairChartWindow();
-        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow();
+        int maxMonthlyCustomerCount = this
+                .getMonthlyCustomerMaxCount(this.getMonthlyCustomerMap());
+        int totalCustomerCount = this.getCustomerCount();
+        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow(maxMonthlyCustomerCount, totalCustomerCount);
 
         this.labels = new ArrayList<>();
         this.labels.add(customersLabel);
         this.labels.add(servicesLabel);
         this.labels.add(bookingsLabel);
+        this.labels.add(scheduleLabel);
 
         customersLabel.getStyleClass().add("selected");
         for (Label l : this.labels) {
@@ -139,26 +146,52 @@ public class MainWindow extends UiPart<Stage> {
                     l.getStyleClass().remove("selected");
                 }
                 label.getStyleClass().add("selected");
-                switchPanel(label.getId());
+                switchPanel(stringToPanel(label.getId()));
             }
         });
     }
 
-    private void switchPanel(String labelId) {
-        detailsPanelPlaceholder.getChildren().clear();
-
-        switch (labelId) {
+    private Panel stringToPanel(String id) {
+        switch (id) {
         case "customersLabel":
+            return Panel.CUSTOMER_PANEL;
+        case "servicesLabel":
+            return Panel.SERVICE_PANEL;
+        case "bookingsLabel":
+            return Panel.BOOKING_PANEL;
+        case "scheduleLabel":
+            return Panel.SCHEDULE_PANEL;
+        default:
+            return Panel.NO_CHANGE;
+        }
+    }
+
+    private void switchPanel(Panel panel) {
+        detailsPanelPlaceholder.getChildren().clear();
+        for (Label l : labels) {
+            l.getStyleClass().remove("selected");
+        }
+
+        switch (panel) {
+        case CUSTOMER_PANEL:
+            customersLabel.getStyleClass().add("selected");
             customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
             detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
             break;
-        case "servicesLabel":
-            serviceListPanel = new ServiceListPanel(logic.getFilteredServicesList());
+        case SERVICE_PANEL:
+            servicesLabel.getStyleClass().add("selected");
+            serviceListPanel = new ServiceListPanel(logic.getFilteredServiceList());
             detailsPanelPlaceholder.getChildren().add(serviceListPanel.getRoot());
             break;
-        case "bookingsLabel":
+        case BOOKING_PANEL:
+            bookingsLabel.getStyleClass().add("selected");
             bookingListPanel = new BookingListPanel(logic.getFilteredBookingList());
             detailsPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+            break;
+        case SCHEDULE_PANEL:
+            scheduleLabel.getStyleClass().add("selected");
+            schedulePanel = new SchedulePanel(logic.getFilteredBookingList(), logic.getSelectedDate());
+            detailsPanelPlaceholder.getChildren().add(schedulePanel.getRoot());
             break;
         default:
             // nothing to add to details panel placeholder
@@ -210,6 +243,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         detailsPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+        currPanel = Panel.CUSTOMER_PANEL;
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -321,7 +355,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void plotMonthlyCustomerChart() {
         HashMap<Integer, Integer> monthlyCustomerMap = this.getMonthlyCustomerMap();
-        addLineChartData(monthlyCustomerMap,
+        int totalCustomerCount = this.getCustomerCount();
+        int maxMonthlyCustomerCount = this
+                .getMonthlyCustomerMaxCount(monthlyCustomerMap);
+        //update the axis limits manually
+        monthlyCustomerChartWindow = new MonthlyCustomerChartWindow(maxMonthlyCustomerCount,
+                totalCustomerCount);
+        addMonthlyCustomerChartData(monthlyCustomerMap,
                 monthlyCustomerChartWindow.getLineChart(), "Customers Gained This Year");
         if (!monthlyCustomerChartWindow.isShowing()) {
             monthlyCustomerChartWindow.show();
@@ -343,8 +383,9 @@ public class MainWindow extends UiPart<Stage> {
             }
             String detail = key;
             Integer count = map.get(key);
+            String dataLabel = String.format("%s: %d", detail, count);
             pieChart.getData()
-                    .add(new PieChart.Data(detail, count));
+                    .add(new PieChart.Data(dataLabel, count));
             dataCount++;
         }
         //.layout() prevents labels from moving to top left after opening chart a few times
@@ -354,7 +395,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Adds data to a line chart in a specific window.
      */
-    void addLineChartData(HashMap<Integer, Integer> hm, LineChart lineChart, String chartName) {
+    void addMonthlyCustomerChartData(HashMap<Integer, Integer> hm, LineChart lineChart, String chartName) {
         lineChart.getData().clear();
         XYChart.Series series = new XYChart.Series();
         for (int key : hm.keySet()) {
@@ -368,7 +409,31 @@ public class MainWindow extends UiPart<Stage> {
         lineChart.layout();
     }
 
+    /**
+     * Get maximum customer count gained a month in the current year to bound y-axis of chart.
+     */
+    int getMonthlyCustomerMaxCount(HashMap<Integer, Integer> hm) {
+        int maxCount = 0;
+        for (int key : hm.keySet()) {
+            int count = hm.get(key);
+            if (count > maxCount) {
+                maxCount = count;
+            }
+        }
+        return maxCount;
+    }
 
+    /**
+     * Get total customer count in TrackBeau.
+     */
+    int getCustomerCount() {
+        int count = 0;
+        ObservableList<Customer> customerList = logic.getFilteredCustomerList();
+        for (Customer customer : customerList) {
+            count++;
+        }
+        return count;
+    }
 
     /**
      * Returns a hashmap with the staff name as the key and count as the value.
@@ -542,6 +607,7 @@ public class MainWindow extends UiPart<Stage> {
         allergyChartWindow.hide();
         skinChartWindow.hide();
         hairChartWindow.hide();
+        monthlyCustomerChartWindow.hide();
         primaryStage.hide();
     }
 
@@ -590,6 +656,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isPlotHairChart()) {
                 plotHairChart();
+            }
+
+            if (commandResult.getPanel() != Panel.NO_CHANGE) {
+                switchPanel(commandResult.getPanel());
             }
 
             return commandResult;

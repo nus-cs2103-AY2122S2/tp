@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
-import static seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 import static seedu.trackbeau.testutil.TypicalCustomers.ALICE;
 import static seedu.trackbeau.testutil.TypicalCustomers.BENSON;
@@ -19,7 +19,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.trackbeau.commons.core.GuiSettings;
-import seedu.trackbeau.model.customer.SearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate;
 import seedu.trackbeau.testutil.TrackBeauBuilder;
 
 public class ModelManagerTest {
@@ -125,7 +125,7 @@ public class ModelManagerTest {
         ArrayList<List<String>> prefixArr = new ArrayList<List<String>>(Collections
                 .nCopies(FIND_ATTRIBUTE_COUNT, null));
         prefixArr.set(0, Arrays.asList(keywords));
-        modelManager.updateFilteredCustomerList(new SearchContainsKeywordsPredicate(prefixArr));
+        modelManager.updateFilteredCustomerList(new CustomerSearchContainsKeywordsPredicate(prefixArr));
         assertFalse(modelManager.equals(new ModelManager(trackBeau, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

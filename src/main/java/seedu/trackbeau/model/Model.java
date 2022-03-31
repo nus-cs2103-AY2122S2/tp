@@ -1,6 +1,7 @@
 package seedu.trackbeau.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -88,12 +89,6 @@ public interface Model {
     void addCustomer(Customer customer);
 
     /**
-     * Finds the Index of the given customer in the customer list.
-     * {@code customer} must exist in trackBeau.
-     */
-    Integer getCustomerIndex(Customer customer);
-
-    /**
      * Replaces the given customer {@code target} with {@code editedCustomer}.
      * {@code target} must exist in trackBeau.
      * The customer identity of {@code editedCustomer} must not be the same as another existing customer in trackBeau.
@@ -126,6 +121,12 @@ public interface Model {
     void updateFilteredCustomerList(Predicate<Customer> predicate);
 
     /**
+     * Updates the filter of the filtered service list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredServiceList(Predicate<Service> predicate);
+
+    /**
      * Returns true if a service with the same identity as {@code service} exists in trackBeau.
      */
     boolean hasService(Service service);
@@ -143,12 +144,6 @@ public interface Model {
     void addService(Service service);
 
     /**
-     * Finds the Index of the given service in the service list.
-     * {@code service} must exist in trackBeau.
-     */
-    Integer getServiceIndex(Service service);
-
-    /**
      * Replaces the given service {@code target} with {@code editedService}.
      * {@code target} must exist in trackBeau.
      * The service identity of {@code editedService} must not be the same as another existing service in trackBeau.
@@ -156,7 +151,7 @@ public interface Model {
     void setService(Service target, Service editedService);
 
     /** Returns an unmodifiable view of the service list */
-    ObservableList<Service> getFilteredServicesList();
+    ObservableList<Service> getFilteredServiceList();
 
     /**
      * Updates the filter of the filtered service list to filter by the given {@code predicate}.
@@ -168,4 +163,14 @@ public interface Model {
      * Returns true if a booking with the same identity as {@code booking} exists in trackBeau.
      */
     boolean hasBooking(Booking booking);
+
+    /**
+     * Return selected date.
+     */
+    LocalDate getSelectedDate();
+
+    /**
+     * Set the selected date in model.
+     */
+    void setSelectedDate(LocalDate selectedDate);
 }

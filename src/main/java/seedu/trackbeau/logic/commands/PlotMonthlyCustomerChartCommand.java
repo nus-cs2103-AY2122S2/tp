@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Plots a chart that shows the number of customers gained per month.
@@ -18,6 +19,6 @@ public class PlotMonthlyCustomerChartCommand extends Command {
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_CHART_MESSAGE, false,
                 false, false, true,
-                false, false, false, true);
+                false, false, false, true, Panel.NO_CHANGE);
     }
 }

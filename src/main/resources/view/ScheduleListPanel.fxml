@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="5" left="15" right="5" top="5" />
+    </padding>
+    <children>
+        <HBox>
+            <children>
+                <Label fx:id="displayDate" text="\$date" wrapText="true"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label alignment="CENTER_RIGHT" fx:id="bookingCount" styleClass="cell_small_label" text="\$count" wrapText="true"/>
+            </children>
+        </HBox>
+        <ListView fx:id="bookingListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>

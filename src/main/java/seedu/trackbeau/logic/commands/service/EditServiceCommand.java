@@ -22,6 +22,7 @@ import seedu.trackbeau.model.service.Duration;
 import seedu.trackbeau.model.service.Price;
 import seedu.trackbeau.model.service.Service;
 import seedu.trackbeau.model.service.ServiceName;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Edits the details of an existing service in trackBeau.
@@ -64,7 +65,7 @@ public class EditServiceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Service> lastShownServiceList = model.getFilteredServicesList();
+        List<Service> lastShownServiceList = model.getFilteredServiceList();
 
         if (index.getZeroBased() >= lastShownServiceList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
@@ -82,14 +83,14 @@ public class EditServiceCommand extends Command {
             Booking booking = lastShownBookingsList.get(i);
             if (booking.getService().equals(serviceToEdit)) {
                 model.setBooking(booking, new Booking(booking.getCustomer(), editedService,
-                    booking.getBookingDateTime()));
+                    booking.getBookingDateTime(), booking.getFeedback()));
             }
         }
 
         model.setService(serviceToEdit, editedService);
         model.updateServiceList(PREDICATE_SHOW_ALL_SERVICES);
         model.updateFilteredBookingList(PREDICATE_SHOW_ALL_BOOKINGS);
-        return new CommandResult(String.format(MESSAGE_EDIT_SERVICE_SUCCESS, editedService));
+        return new CommandResult(String.format(MESSAGE_EDIT_SERVICE_SUCCESS, editedService), Panel.SERVICE_PANEL);
     }
 
     /**

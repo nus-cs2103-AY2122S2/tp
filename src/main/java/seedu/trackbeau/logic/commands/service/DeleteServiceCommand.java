@@ -16,6 +16,7 @@ import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.booking.Booking;
 import seedu.trackbeau.model.service.Service;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Deletes service(s) identified using it's displayed index from trackBeau.
@@ -65,17 +66,17 @@ public class DeleteServiceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Service> lastShownServicesList = model.getFilteredServicesList();
-        List<Booking> lastShownBookingsList = model.getFilteredBookingList();
+        List<Service> lastShownServiceList = model.getFilteredServiceList();
+        List<Booking> lastShownBookingList = model.getFilteredBookingList();
 
         ArrayList<Service> servicesToDelete = new ArrayList<>();
-        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownServicesList, lastShownBookingsList);
+        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownServiceList, lastShownBookingList);
 
         for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownServicesList.size()) {
+            if (targetIndex.getZeroBased() >= lastShownServiceList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
             }
-            servicesToDelete.add(lastShownServicesList.get(targetIndex.getZeroBased()));
+            servicesToDelete.add(lastShownServiceList.get(targetIndex.getZeroBased()));
         }
 
         StringBuilder sbServices = new StringBuilder();
@@ -97,7 +98,7 @@ public class DeleteServiceCommand extends Command {
             successMessage += String.format(MESSAGE_DELETE_BOOKING_SUCCESS, sbBookings);
         }
 
-        return new CommandResult(successMessage);
+        return new CommandResult(successMessage, Panel.SERVICE_PANEL);
     }
 
     @Override

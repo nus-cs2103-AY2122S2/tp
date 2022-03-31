@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.trackbeau.ui.Panel;
+
 /**
  * Represents the result of a command execution.
  */
@@ -35,6 +37,9 @@ public class CommandResult {
     /** plot monthly customer chart */
     private final boolean plotMonthlyCustomerChart;
 
+    /** Panel to display */
+    private final Panel panel;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -42,8 +47,9 @@ public class CommandResult {
                          boolean exit, boolean plotStaffChart,
                          boolean plotServiceChart, boolean plotAllergyChart,
                          boolean plotSkinChart, boolean plotHairChart,
-                         boolean plotMonthlyCustomerChart) {
+                         boolean plotMonthlyCustomerChart, Panel panel) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.panel = panel;
         this.showHelp = showHelp;
         this.exit = exit;
         this.plotStaffChart = plotStaffChart;
@@ -58,10 +64,14 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false,
+    public CommandResult(String feedbackToUser, Panel panel) {
+        this(feedbackToUser,
                 false, false, false, false,
-                false, false, false);
+                false, false, false, false, panel);
+    }
+
+    public Panel getPanel() {
+        return panel;
     }
 
     public String getFeedbackToUser() {
@@ -120,14 +130,15 @@ public class CommandResult {
                 && plotAllergyChart == otherCommandResult.plotAllergyChart
                 && plotSkinChart == otherCommandResult.plotSkinChart
                 && plotHairChart == otherCommandResult.plotHairChart
-                && plotMonthlyCustomerChart == otherCommandResult.plotMonthlyCustomerChart;
+                && plotMonthlyCustomerChart == otherCommandResult.plotMonthlyCustomerChart
+                && panel == otherCommandResult.panel;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit,
                 plotStaffChart, plotServiceChart, plotAllergyChart,
-                plotSkinChart, plotHairChart, plotMonthlyCustomerChart);
+                plotSkinChart, plotHairChart, plotMonthlyCustomerChart, panel);
     }
 
 }

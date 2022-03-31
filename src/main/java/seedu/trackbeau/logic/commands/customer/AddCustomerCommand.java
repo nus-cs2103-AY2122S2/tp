@@ -18,6 +18,7 @@ import seedu.trackbeau.logic.commands.CommandResult;
 import seedu.trackbeau.logic.commands.exceptions.CommandException;
 import seedu.trackbeau.model.Model;
 import seedu.trackbeau.model.customer.Customer;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Adds a customer to trackBeau.
@@ -71,7 +72,7 @@ public class AddCustomerCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
         model.addCustomer(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), Panel.CUSTOMER_PANEL);
     }
 
     @Override

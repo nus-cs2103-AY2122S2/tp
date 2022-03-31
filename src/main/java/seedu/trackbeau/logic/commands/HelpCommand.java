@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.commands;
 
 import seedu.trackbeau.model.Model;
+import seedu.trackbeau.ui.Panel;
 
 /**
  * Format full help instructions for every command for display.
@@ -17,6 +18,6 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, false,
-                false, false, false, false);
+                false, false, false, false, Panel.NO_CHANGE);
     }
 }
