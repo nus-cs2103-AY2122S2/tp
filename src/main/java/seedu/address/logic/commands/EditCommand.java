@@ -141,15 +141,22 @@ public class EditCommand extends ByIndexByNameCommand {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
+        //state check
+        else if (other instanceof EditCommand) {
+            EditCommand otherEditCommand = (EditCommand) other;
+            if (otherEditCommand.isEditByIndex && this.isEditByIndex) {
+                //assertion to ensure that if it is edit by index, then targetIndex will not be null
+                assert (otherEditCommand.targetIndex != null && this.targetIndex != null);
+                return otherEditCommand.targetIndex.equals(this.targetIndex)
+                        && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+            } else if (!otherEditCommand.isEditByIndex && !this.isEditByIndex) {
+                //assertion to ensure that if it is deletion by name, then name will not be null
+                assert (otherEditCommand.nameOfPersonToEdit != null && this.nameOfPersonToEdit != null);
+                return otherEditCommand.nameOfPersonToEdit.equals(this.nameOfPersonToEdit)
+                        && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+            }
         }
-
-        // state check
-        EditCommand e = (EditCommand) other;
-        return targetIndex.equals(e.targetIndex)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+        return false;
     }
 
     /**

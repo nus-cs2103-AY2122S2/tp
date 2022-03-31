@@ -4,18 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_FRIENDNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_FRIENDNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -81,6 +77,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String CURRENT_NAME_DESC_AMY = " " + PREFIX_CURRENT_NAME + VALID_NAME_AMY;
+    public static final String CURRENT_NAME_DESC_BOB = " " + PREFIX_CURRENT_NAME + VALID_NAME_BOB;
     public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
     public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -103,7 +101,7 @@ public class CommandTestUtil {
     public static final String EVENT_REMOVEFRIEND_DESC_B = " " + PREFIX_REMOVE_FRIENDNAME + VALID_NAME_BOB;
     public static final String EVENT_DATE_DESC_A = " " + PREFIX_DATE + VALID_DATE;
     public static final String EVENT_DATE_DESC_B = " " + PREFIX_DATE + VALID_DATE_OTHER;
-
+    public static final String INVALID_CURRENT_NAME_DESC = " " + PREFIX_CURRENT_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NEW_NAME_DESC = " " + PREFIX_NEW_NAME + "James&";
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
