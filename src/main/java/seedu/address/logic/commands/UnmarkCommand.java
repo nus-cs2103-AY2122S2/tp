@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_UNMARK_SUCCESS = "Successfully unmark given students from %s(%s).";
-    public static final String MESSAGE_MARK_FAILED = "Students: %s are not enrolled\n"
+    public static final String MESSAGE_UNMARK_FAILED = "Students: %s are not enrolled\n"
             + "Successfully unmark other students from %s(%s).";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance(s) of the specified student(s)"
             + "belonging to the class group at the specified CLASS_GROUP_INDEX for the specified week.\n"
@@ -76,7 +76,7 @@ public class UnmarkCommand extends Command {
             return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS,
                     classGroup.getClassGroupId(), classGroup.getClassGroupType()));
         }
-        return new CommandResult(String.format(MESSAGE_MARK_FAILED,
+        return new CommandResult(String.format(MESSAGE_UNMARK_FAILED,
                 notUnmarkedStudents.toString(), classGroup.getClassGroupId(), classGroup.getClassGroupType()));
     }
 }
