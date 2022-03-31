@@ -318,14 +318,13 @@ The following activity diagram summarizes what happens when a user executes a va
 ### Sort command feature
 
 #### What it does
-Sorts the list of shows according to the user's input prefix. If the input contains no prefixes, sort will default to organizing the shows in ascending order by name. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, by default it will sort by name then by status.
-
+Sorts the list of shows according to the user's input prefix. If the input contains no prefixes, sort will default to organizing the shows in ascending order by name. The format for sort is `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`. `ORDER` must be either "asc" or "dsc". If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags. Use `so/` to change the priority. `SEQUENCE` must contain the full name of the prefix used and the user have to list it in the sequence in the order which sort prioritise. 
 #### Implementation
 After entering the sort command, the tokenizer in parser will map any prefixes in the user's input to Trackermon's prefix syntax. Then, the parser will do a check whether there are any prefixes in the input. If prefixes are specified, a `SortCommand` object will be created with `Comparator` according to the specified prefixes. Else, a `NameComparator` will be created which can be used to sort names in ascending order. `SortCommand` is a class that inherits the `Command` abstract class. `SortCommand` implements the `execute()` method from the `Command` abstract class where on execution, sort the model's list of shows according to the `Comparator`. The model is then updated with the sorted show list.
 
 Given below is an example usage scenario and the step-by-step flow of the sort command.
 
-Step 1: The user launches Trackermon and enters `sort sna/ ssd/` to sort the list of shows.
+Step 1: The user launches Trackermon and enters `sort n/asc s/dsc` to sort the list of shows.
 
 Step 2: The sort command parser will check for prefixes and generate the appropriate `Comparator` for the SortCommand. In this case it generate a `NameComparator().thenComparing(StatusComparator().reverse()))`
 
@@ -335,18 +334,20 @@ Step 4: The sorted list in model will apply the Comparator and model will be upd
 
 The following activity diagram summarizes what happens when a user executes a sort command:
 
+After the user input the sort commands, `SortCommandParser` will parse commands arguments. Then a map is used to keep track of what order prefixes (`n/`, `s/`, `t/`, `r/`) are being used and also how they are being ordered. If the user use `so/` it will reorder the Map based on the input `SEQUENCE`. Afterwards a comparator is being built according the Map and passed into SortCommand. SortCommand executes and model will update the list accordingly. 
+
 <img src="images/SortShowDiagram.png">
 
 The following sequence diagram summarizes what happens when a user executes a sort command, in this case sort with no prefix:
 <img src="images/SortSequenceDiagram.png">
 
 #### Design considerations:
-- **Alternative 1 (current choice):** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
+- **Alternative 1:** The `sort` command checks for the optional prefix. If the user's input contains no prefixes, sort will sort by name in ascending order. If both prefixes for ascending and descending are used, it will only sort by ascending. If both prefixes for name and status are used, it will sort by name then by default.
 
   - Pros: No invalid commands input by the user
   - Cons: Users need to get use to the prefixes used.
 
-- **Alternative 2:** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
+- **Alternative 2 (current choice):** The `sort` command checks for the non-optional prefix. Users have to provide valid input to specify which attribute to sort by and by ascending or descending. 
     - Pros: Users have fewer prefixes to remember
     - Cons: Users need to remember valid inputs
 
@@ -1002,30 +1003,42 @@ testers are expected to do more *exploratory* testing.
       Expected: The list of shows will default to being sorted by name in ascending order.
 
 3. Test case: Sort with single prefix 
-   1. Command: `sort sna/` <br>
+   1. Command: `sort n/asc` <br>
       Expected: The list of shows is sorted by name in ascending order.
    
-   2. Command: `sort snd/` <br>
+   2. Command: `sort n/dsc` <br>
       Expected: The list of shows is sorted by name in descending order.
 
-   3. Command: `sort ssa/` <br>
+   3. Command: `sort s/asc` <br>
       Expected: The list of shows is sorted by status in ascending order.
    
-   4. Command: `sort ssd/` <br>
+   4. Command: `sort s/dsc` <br>
       Expected: The list of shows is sorted by status in descending order.
    
+   5. Command: `sort t/asc` <br>
+      Expected: The list of shows is sorted by tag in ascending order.
+
+   6. Command: `sort t/dsc` <br>
+      Expected: The list of shows is sorted by tag in descending order.
+   
+   7. Command: `sort r/asc` <br>
+      Expected: The list of shows is sorted by rating in ascending order.
+
+   8. Command: `sort r/dsc` <br>
+      Expected: The list of shows is sorted by rating in descending order.
+   
 4. Test case: Sort with multiple same prefixes 
-   1. Command: `sort sna/ snd/` <br>
+   1. Command: `sort n/dsc n/asc` <br>
       Expected: The list of shows is sorted by name in ascending order.
    
-   2. Command: `sort ssa/ ssd/` <br>
+   2. Command: `sort s/dsc s/asc` <br>
       Expected: The list of shows is sorted by status in ascending order. 
    
 5. Test case: Sort with multiple different prefixes
-   1. Command: `sort sna/ ssd/` <br>
+   1. Command: `sort n/asc s/dsc` <br>
       Expected: The list of shows is sorted by name in ascending order followed by status in descending order.
    
-   2. Command: `sort sna/ ssd/ so/`<br>
+   2. Command: `sort n/asc s/dsc so/statusname`<br>
       Expected: The list of shows is sorted by status in descending order followed by name in ascending order.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
