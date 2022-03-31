@@ -9,13 +9,13 @@ title: User Guide
 
 As a pet daycare owner, it takes a lot of effort to remember pets by their names,
 as well as remember their owner's names, phone numbers and addresses. In addition, some pets may have special dietary requirements and
-vet appointments that you have to take note off. With WoofAreYou, these things can be taken care
+vet appointments that you have to take note of. With WoofAreYou, these things can be taken care
 of easily, so that you may focus on the things that **truly** matter: taking good care of the pets and ensuring their safety.
 --------------------------------------------------------------------------------------------------------------------
 # WoofAreYou
 
 WoofAreYou is a desktop application for pet daycare owners like you to handle the administrative information of your clients. 
-WoofAreYou is faster than traditional platforms, such as Microsoft Excel or Google Sheets, when you want to consolidate
+WoofAreYou is faster than many traditional platforms, such as Microsoft Excel or Google Sheets, when you want to consolidate
 all your clients' information. You can perform a variety of tasks by typing in a single command using CLI (Command Line
 Interface) syntax. Just tell WoofAreYou what you want to do, and it will get it done quickly and efficiently.
 
@@ -262,7 +262,7 @@ Format: `app INDEX dt/[dd-MM-yyyy HH:mm] at/[location]`
 * Date and time should strictly follow `dd-MM-yyyy HH:mm` format.
 * Location of appointment should be entered after the `at/` prefix.
 * Whitespaces, special characters and alphanumeric characters are allowed for location.
-* Both `date/` and `at/` are **mandatory** fields.
+* Both `dt/` and `at/` are **mandatory** fields.
 
 Examples:
 * `app 1 dt/27-03-2022 09:30 at/ NUS Vet Clinic` will note down that Woofie has an appointment on 27 March 2022, 9:30 am at the NUS Vet Clinic.
