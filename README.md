@@ -6,6 +6,7 @@
 
 ![Ui](docs/images/Ui.png)
 
+
 * This is a brown field **curriculum based project by Software Engineering (SE) students**.<br>
 * The project delivers a desktop application (called _TAlent Assistant™_) used by professors to schedule interviews and
   keep track of applications for teaching assistants.
