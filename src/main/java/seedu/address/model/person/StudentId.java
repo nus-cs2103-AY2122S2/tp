@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentId {
     public static final String MESSAGE_CONSTRAINTS = "Student ID should only contain alphanumeric "
-            + "characters and should not be blank";
+            + "characters and should not be blank.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
 
     public final String id;
