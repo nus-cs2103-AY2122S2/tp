@@ -81,7 +81,13 @@ public class GradeCommandParser implements Parser<GradeCommand> {
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix assessmentIndex,
                                               Prefix moduleIndex, Prefix simpleName, Prefix student) {
-        if (argumentMultimap.getValue(assessmentIndex).isPresent() && argumentMultimap.getValue(student).isPresent()) {
+        if (argumentMultimap.getValue(assessmentIndex).isPresent()
+                && (argumentMultimap.getValue(moduleIndex).isPresent()
+                || argumentMultimap.getValue(simpleName).isPresent())) {
+            return false;
+        }
+        else if (argumentMultimap.getValue(assessmentIndex).isPresent()
+                && argumentMultimap.getValue(student).isPresent()) {
             return true;
         } else if (argumentMultimap.getValue(moduleIndex).isPresent()
                 && argumentMultimap.getValue(simpleName).isPresent()
