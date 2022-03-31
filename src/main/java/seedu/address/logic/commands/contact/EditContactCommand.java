@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,28 +16,31 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing patient in the MedBook.
+ * Edits the details of an existing contact in MedBook
  */
-public class EditCommand extends Command {
-
+public class EditContactCommand extends Command {
     public static final String COMMAND_WORD = "edit";
+    public static final CommandType COMMAND_TYPE = CommandType.CONTACT;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
-            + "by the index number used in the displayed patient list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
+            + "by the index number used in the displayed contact list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "NRIC FIELD CANNOT BE MODIFIED IN THE FUTURE - PLEASE DOUBLE CHECK.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONTACT INSTEAD.\n"
+            + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -48,63 +50,63 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in MedBook.";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified.";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in MedBook.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
+            + "Create a new contact instead.";
 
     private final Index index;
-    private final EditPatientDescriptor editPatientDescriptor;
+    private final EditContactDescriptor editContactDescriptor;
 
     /**
-     * @param index of the patient in the filtered patient list to edit
-     * @param editPatientDescriptor details to edit the patient with
+     * @param index of the contact in the filtered contact list to edit
+     * @param editContactDescriptor details to edit the contact with
      */
-    public EditCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
+    public EditContactCommand(Index index, EditContactDescriptor editContactDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPatientDescriptor);
+        requireNonNull(editContactDescriptor);
 
         this.index = index;
-        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
+        this.editContactDescriptor = new EditContactDescriptor(editContactDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Contact> lastShownList = model.getFilteredContactList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
-        Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPatient = createEditedPerson(patientToEdit, editPatientDescriptor);
+        Contact contactToEdit = lastShownList.get(index.getZeroBased());
+        Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
-        if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
+        if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        model.setPerson(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient));
+        model.setContact(contactToEdit, editedContact);
+
+        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, editedContact), COMMAND_TYPE);
     }
 
     /**
-     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Contact} with the details of {@code contactToEdit}
+     * edited with {@code editContactDescriptor}.
      */
-    private static Patient createEditedPerson(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
-        assert patientToEdit != null;
+    private static Contact createEditedContact(Contact contactToEdit, EditContactDescriptor editContactDescriptor) {
+        assert contactToEdit != null;
 
-        // Nric editing field is retained here for code testing.
-        Nric updatedNric = editPatientDescriptor.getNric().orElse(patientToEdit.getNric());
-        Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
-        Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
+        Nric ownerNric = contactToEdit.getOwnerNric();
+        Name updatedName = editContactDescriptor.getName().orElse(contactToEdit.getName());
+        Phone updatedPhone = editContactDescriptor.getPhone().orElse(contactToEdit.getPhone());
+        Email updatedEmail = editContactDescriptor.getEmail().orElse(contactToEdit.getEmail());
+        Address updatedAddress = editContactDescriptor.getAddress().orElse(contactToEdit.getAddress());
+        Set<Tag> updatedTags = editContactDescriptor.getTags().orElse(contactToEdit.getTags());
 
-        return new Patient(updatedNric, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Contact(ownerNric, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -115,36 +117,34 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditContactCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditContactCommand e = (EditContactCommand) other;
         return index.equals(e.index)
-                && editPatientDescriptor.equals(e.editPatientDescriptor);
+                && editContactDescriptor.equals(e.editContactDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the contact with. Each non-empty field value will replace the
+     * corresponding field value of the contact.
      */
-    public static class EditPatientDescriptor {
-        private Nric nric;
+    public static class EditContactDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPatientDescriptor() {}
+        public EditContactDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPatientDescriptor(EditPatientDescriptor toCopy) {
-            setNric(toCopy.nric);
+        public EditContactDescriptor(EditContactDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -156,15 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(nric, name, phone, email, address, tags);
-        }
-
-        public void setNric(Nric nric) {
-            this.nric = nric;
-        }
-
-        public Optional<Nric> getNric() {
-            return Optional.ofNullable(nric);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -224,19 +216,19 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPatientDescriptor)) {
+            if (!(other instanceof EditContactDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPatientDescriptor e = (EditPatientDescriptor) other;
+            EditContactDescriptor e = (EditContactDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getNric().equals(e.getNric())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }
+
 }

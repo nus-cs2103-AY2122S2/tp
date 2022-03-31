@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.medical.EditMedicalCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -26,7 +27,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new EditMedicalCommand object
  */
-public class EditMedicalCommandParser {
+public class EditMedicalCommandParser implements Parser<EditMedicalCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditMedicalCommand
      * and returns an EditMedicalCommand object for execution.
@@ -51,12 +52,13 @@ public class EditMedicalCommandParser {
 
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
+            if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+                throw new ParseException(EditMedicalCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
+            }
+
             EditMedicalCommand.EditMedicalDescriptor editMedicalDescriptor =
                     new EditMedicalCommand.EditMedicalDescriptor();
 
-            if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-                editMedicalDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
-            }
             if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
                 editMedicalDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
             }

@@ -45,6 +45,11 @@ public class DeleteMedicalCommand extends Command {
 
         Medical medicalToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMedical(medicalToDelete);
+        if (lastShownList.isEmpty()) {
+            CommandType.setViewCommandType(CommandType.DEFAULT);
+            return new CommandResult(String.format(MESSAGE_DELETE_MEDICAL_SUCCESS, medicalToDelete),
+                    CommandType.DEFAULT);
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_MEDICAL_SUCCESS, medicalToDelete), COMMAND_TYPE);
     }
 

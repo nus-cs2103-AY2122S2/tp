@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
     public static final String MESSAGE_CONSTRAINTS =
-            "NRIC should be alphanumeric, starting with either S, T, F, G, M, followed by 7 digits "
+            "NRIC should be a Singapore-registered NRIC which consists alphanumeric, "
+                    + "starting with either S, T, F, G, M, followed by 7 digits "
                     + "and ending with any character.";
     public static final String VALIDATION_REGEX = "^[STFGM]\\d{7}[A-Z]$";
     public final String value;
