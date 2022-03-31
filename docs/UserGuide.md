@@ -418,6 +418,8 @@ After undo (where we undo command `delete 1`):
 
 ------------------------------------------------------------------------------------
 ### Redo previous command: `redo`
+![result after redo](images/redo2UG.png)
+
 <details><summary>Redoes undone command</summary>
 <p>
 
