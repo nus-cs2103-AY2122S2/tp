@@ -50,6 +50,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_HEIGHT, PREFIX_JERSEY_NUMBER, PREFIX_TAG, PREFIX_WEIGHT, PREFIX_LINEUP,
                         PREFIX_SCHEDULE, PREFIX_DATE, PREFIX_DESCRIPTION);
 
+        if (arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_SCHEDULE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
+        }
+
         if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)
                 && !arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_JERSEY_NUMBER, PREFIX_HEIGHT, PREFIX_WEIGHT)) {
