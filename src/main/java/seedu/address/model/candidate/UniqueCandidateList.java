@@ -149,7 +149,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     /**
      * Resets the interviewStatus of all candidates whose interview statuses are scheduled to not scheduled.
      */
-    public void resetScheduledStatus() {
+    public void resetScheduledStatus() throws CommandException {
         for (Candidate c : internalList) {
             if (c.isScheduled()) {
                 setCandidate(c, c.setNotScheduled());

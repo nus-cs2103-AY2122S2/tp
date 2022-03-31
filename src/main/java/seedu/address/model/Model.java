@@ -155,9 +155,9 @@ public interface Model {
 
     void updateInterviewCandidate(Interview target, Interview editedInterview);
 
-    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException;;
+    void deletePastInterviewsForInterviewList(LocalDateTime localDateTime) throws CommandException;
 
-    void resetAllScheduledStatus();
+    void resetAllScheduledStatus() throws CommandException;
 
     List<Candidate> getExpiredInterviewCandidates();
 }

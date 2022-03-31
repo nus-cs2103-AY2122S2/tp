@@ -133,7 +133,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return candidates.hashCode();
     }
 
-    public void resetAllScheduledStatus() {
+    public void resetAllScheduledStatus() throws CommandException {
         candidates.resetScheduledStatus();
     }
 }

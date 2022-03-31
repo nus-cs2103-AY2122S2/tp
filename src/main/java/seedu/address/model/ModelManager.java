@@ -150,7 +150,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void resetAllScheduledStatus() {
+    public void resetAllScheduledStatus() throws CommandException {
         addressBook.resetAllScheduledStatus();
         updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
     }
