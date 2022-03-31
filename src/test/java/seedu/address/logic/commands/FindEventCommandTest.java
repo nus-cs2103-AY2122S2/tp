@@ -30,7 +30,7 @@ public class FindEventCommandTest {
     public static final String UNMATCHING_START_DATE = "19-02-2059";
     public static final String MATCHING_START_DATE = "11-5-2022";
     public static final String UNMATCHING_END_DATE = "11-5-1959";
-    public static final String MATCHING_END_DATE = "12-5-2022";
+    public static final String MATCHING_END_DATE = "11-5-2022";
     public static final String[] UNMATCHING_DATE_RANGE = {"19-2-2045", "12-5-2045"};
     public static final String[] MATCHING_DATE_RANGE = {"12-3-2022", "11-5-2022"};
 
@@ -122,7 +122,7 @@ public class FindEventCommandTest {
     public void execute_filterByOnlyStartDate_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
-                .withStartDate(UNMATCHING_START_DATE).clearFriendNameSubstrings().build();
+                .withStartDate(UNMATCHING_START_DATE).clearEndDate().clearFriendNameSubstrings().build();
 
         assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
@@ -131,7 +131,7 @@ public class FindEventCommandTest {
     public void execute_filterByOnlyStartDate_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
-                .withStartDate(MATCHING_START_DATE).clearFriendNameSubstrings().build();
+                .withStartDate(MATCHING_START_DATE).clearEndDate().clearFriendNameSubstrings().build();
         List<Event> expectedFilteredList =
                 Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION, EVENT_NO_FRIENDS);
         assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
@@ -141,7 +141,7 @@ public class FindEventCommandTest {
     public void execute_filterByOnlyEndDate_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
-                .withEndDate(UNMATCHING_END_DATE).clearFriendNameSubstrings().build();
+                .clearStartDate().withEndDate(UNMATCHING_END_DATE).clearFriendNameSubstrings().build();
 
         assertFindEventCommandSuccess(expectedMessage, predicates, Collections.emptyList());
     }
@@ -150,9 +150,8 @@ public class FindEventCommandTest {
     public void execute_filterByOnlyEndDate_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder().clearNameSubstring()
-                .withEndDate(MATCHING_END_DATE).clearFriendNameSubstrings().build();
-        List<Event> expectedFilteredList =
-                Arrays.asList(EVENT_NO_DESCRIPTION, EVENT_WITH_DIFF_DESCRIPTION, EVENT_NO_FRIENDS);
+                .clearStartDate().withEndDate(MATCHING_END_DATE).clearFriendNameSubstrings().build();
+        List<Event> expectedFilteredList = Arrays.asList(EVENT_NO_FRIENDS, EVENT_WITH_DESCRIPTION);
         assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 
@@ -173,7 +172,7 @@ public class FindEventCommandTest {
                 .withStartDate(MATCHING_DATE_RANGE[0]).withEndDate(MATCHING_DATE_RANGE[1])
                 .clearFriendNameSubstrings().build();
         List<Event> expectedFilteredList =
-                Arrays.asList(EVENT_NO_FRIENDS, EVENT_WITH_DIFF_DESCRIPTION);
+                Arrays.asList(EVENT_NO_FRIENDS, EVENT_WITH_DESCRIPTION);
         assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }
 
@@ -244,8 +243,8 @@ public class FindEventCommandTest {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder()
                 .withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
-                .withStartDate(MATCHING_END_DATE)
-                .withEndDate(MATCHING_END_DATE)
+                .withStartDate(MATCHING_START_DATE)
+                .withEndDate("12-5-2022")
                 .withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
                 .build();
         List<Event> expectedFilteredList = Arrays.asList(EVENT_WITH_DIFF_DESCRIPTION);

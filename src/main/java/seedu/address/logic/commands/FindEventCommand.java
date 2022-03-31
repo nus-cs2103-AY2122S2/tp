@@ -33,7 +33,7 @@ public class FindEventCommand extends Command {
             + PREFIX_FRIEND_NAME + "john "
             + PREFIX_FRIEND_NAME + "joe ";
 
-    private final List<Predicate<Event>> predicates;
+    public final List<Predicate<Event>> predicates;
 
     public FindEventCommand(List<Predicate<Event>> predicates) {
         this.predicates = predicates;

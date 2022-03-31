@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_DESC_B;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_END_DESC_A;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_START_DESC_A;
+import static seedu.address.logic.commands.CommandTestUtil.EVENT_DATE_START_DESC_B;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_FRIEND_NAME_DESC_A;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_FRIEND_NAME_DESC_B;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_NAME_DESC_A;
@@ -52,7 +52,7 @@ public class FindEventCommandParserTest {
                 + EVENT_DATE_END_DESC_A + EVENT_FRIEND_NAME_DESC_A, new FindEventCommand(expectedPredicates));
 
         // multiple dates - last date accepted
-        assertParseSuccess(parser, EVENT_NAME_DESC_A + EVENT_DATE_DESC_B + EVENT_DATE_START_DESC_A
+        assertParseSuccess(parser, EVENT_NAME_DESC_A + EVENT_DATE_START_DESC_B + EVENT_DATE_START_DESC_A
                 + EVENT_DATE_END_DESC_A + EVENT_FRIEND_NAME_DESC_A, new FindEventCommand(expectedPredicates));
 
         // multiple friend names - all accepted
@@ -60,7 +60,7 @@ public class FindEventCommandParserTest {
                 .withNameSubstring(VALID_EVENT_NAME).withStartDate(VALID_DATE_BEFORE).withEndDate(VALID_DATE_AFTER)
                 .withFriendNameSubstrings(VALID_NAME_AMY, VALID_NAME_BOB).build();
 
-        assertParseSuccess(parser, EVENT_NAME_DESC_A + EVENT_DATE_DESC_B + EVENT_DATE_START_DESC_A
+        assertParseSuccess(parser, EVENT_NAME_DESC_A + EVENT_DATE_START_DESC_A
                         + EVENT_DATE_END_DESC_A + EVENT_FRIEND_NAME_DESC_A + EVENT_FRIEND_NAME_DESC_B,
                 new FindEventCommand(expectedPredicatesMultipleFriendNames));
     }

@@ -118,6 +118,8 @@ public class CommandTestUtil {
     public static final String EVENT_DATE_DESC_A = " " + PREFIX_DATE + VALID_DATE;
     public static final String EVENT_DATE_DESC_B = " " + PREFIX_DATE + VALID_DATE_OTHER;
     public static final String EVENT_DATE_START_DESC_A = " " + PREFIX_DATE_START + VALID_DATE_BEFORE;
+    public static final String EVENT_DATE_START_DESC_B = " " + PREFIX_DATE_START + "1-10-2021";
+
     public static final String EVENT_DATE_END_DESC_A = " " + PREFIX_DATE_END + VALID_DATE_AFTER;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

@@ -15,13 +15,17 @@ import seedu.address.model.event.EventFriendNamesContainSubstringPredicate;
 import seedu.address.model.event.EventNameContainsSubstringPredicate;
 
 /**
- * A utility class to help with building a List<Predicate<Event>>.
+ * A utility class to help with building a list of event predicates.
  */
 public class EventPredicateListBuilder {
 
     public static final String DEFAULT_NAME_SUBSTRING = "Default Event";
-    public static final LocalDate DEFAULT_DATE_START = LocalDate.parse("11-5-2022", INPUT_DATE_FORMATTER);
-    public static final LocalDate DEFAULT_DATE_END = LocalDate.parse("12-5-2022", INPUT_DATE_FORMATTER);
+
+    public static final String DEFAULT_DATE_START_STRING = "11-5-2022";
+    public static final String DEFAULT_DATE_END_STRING = "12-5-2022";
+    public static final LocalDate DEFAULT_DATE_START = LocalDate.parse(DEFAULT_DATE_START_STRING, INPUT_DATE_FORMATTER);
+    public static final LocalDate DEFAULT_DATE_END = LocalDate.parse(DEFAULT_DATE_END_STRING, INPUT_DATE_FORMATTER);
+
     public static final String DEFAULT_FRIEND_NAME_SUBSTRING_1 = "Amy";
     public static final String DEFAULT_FRIEND_NAME_SUBSTRING_2 = "Alex";
 
@@ -31,7 +35,7 @@ public class EventPredicateListBuilder {
     private List<String> friendNameSubstrings;
 
     /**
-     * Creates a {@code EventPredicateListBuilder} with the default details, including a valid date.
+     * Creates a {@code EventPredicateListBuilder} with the default details.
      */
     public EventPredicateListBuilder() {
         nameSubstring = DEFAULT_NAME_SUBSTRING;
@@ -48,13 +52,16 @@ public class EventPredicateListBuilder {
         return this;
     }
 
+    /**
+     * Clears the {@code nameSubstring} of the {@code EventPredicateList} that we are building.
+     */
     public EventPredicateListBuilder clearNameSubstring() {
         this.nameSubstring = null;
         return this;
     }
 
     /**
-     * Parses the {@code friendNameSubstrings} into a {@code List<String>} and set it to the
+     * Parses the {@code friendNameSubstrings} into a {@code List} and sets it to the
      * {@code EventPredicateList} that we are building.
      */
     public EventPredicateListBuilder withFriendNameSubstrings(String ... friendNameSubstrings) {
@@ -62,6 +69,9 @@ public class EventPredicateListBuilder {
         return this;
     }
 
+    /**
+     * Clears the {@code friendNameSubstrings} of the {@code EventPredicateList} we are building.
+     */
     public EventPredicateListBuilder clearFriendNameSubstrings() {
         this.friendNameSubstrings = List.of();
         return this;
@@ -75,6 +85,9 @@ public class EventPredicateListBuilder {
         return this;
     }
 
+    /**
+     * Clears the {@code startDate} of the {@code EventPredicateList} that we are building.
+     */
     public EventPredicateListBuilder clearStartDate() {
         this.startDate = null;
         return this;
@@ -88,6 +101,9 @@ public class EventPredicateListBuilder {
         return this;
     }
 
+    /**
+     * Clears the {@code endDate} of the {@code EventPredicateList} that we are building.
+     */
     public EventPredicateListBuilder clearEndDate() {
         this.endDate = null;
         return this;
@@ -102,11 +118,11 @@ public class EventPredicateListBuilder {
             predicates.add(new EventNameContainsSubstringPredicate(nameSubstring));
         }
         if (startDate != null) {
-            predicates.add(new EventDateIsBeforePredicate(startDate));
+            predicates.add(new EventDateIsAfterPredicate(startDate.minusDays(1)));
 
         }
         if (endDate != null) {
-            predicates.add(new EventDateIsAfterPredicate(endDate));
+            predicates.add(new EventDateIsBeforePredicate(endDate.plusDays(1)));
         }
         for (String friendNameSubstring : friendNameSubstrings) {
             predicates.add(new EventFriendNamesContainSubstringPredicate(friendNameSubstring));

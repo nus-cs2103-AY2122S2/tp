@@ -13,8 +13,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE_END;
-import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE_START;
+import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE_END_STRING;
+import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_DATE_START_STRING;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_FRIEND_NAME_SUBSTRING_1;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_FRIEND_NAME_SUBSTRING_2;
 import static seedu.address.testutil.EventPredicateListBuilder.DEFAULT_NAME_SUBSTRING;
@@ -188,8 +188,8 @@ public class AddressBookParserTest {
 
         FindEventCommand command = (FindEventCommand) parser.parseCommand(
                 FindEventCommand.COMMAND_WORD + " " + PREFIX_NAME + DEFAULT_NAME_SUBSTRING
-                + " " + PREFIX_DATE_START + DEFAULT_DATE_START
-                + " " + PREFIX_DATE_END + DEFAULT_DATE_END
+                + " " + PREFIX_DATE_START + DEFAULT_DATE_START_STRING
+                + " " + PREFIX_DATE_END + DEFAULT_DATE_END_STRING
                 + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_1
                 + " " + PREFIX_FRIEND_NAME + DEFAULT_FRIEND_NAME_SUBSTRING_2);
         assertEquals(new FindEventCommand(predicates), command);
