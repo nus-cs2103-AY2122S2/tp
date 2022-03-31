@@ -370,9 +370,11 @@ Sort can help reorder the list!!
 *You cannot undo the sort once you have applied it!
 </div>
 
-**Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
+**Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
-<div markdown="span" class="alert alert-warning">:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)**
+<div markdown="span" class="alert alert-warning">
+
+:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure)**<br>
 * Use `n/` if you want to sort by name 
 * Use `s/` if you want to sort by status
 * Use `t/` if you want to sort by tag
@@ -382,7 +384,8 @@ Sort can help reorder the list!!
 * If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.   
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
 * List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
-* For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "RatingTagStatusName"
+* For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "name status rating tag"
+* `SEQUENCE` input is case-insensitive.
 * If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!  
 </div>
 
@@ -393,7 +396,7 @@ Sort can help reorder the list!!
 * Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
 * The `ORDER` must be asc or dsc!
 * The `SEQUENCE` must contain the full name of all the sort conditions used!
-* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag. 
+* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
 
