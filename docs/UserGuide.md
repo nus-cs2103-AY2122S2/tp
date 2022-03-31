@@ -190,7 +190,7 @@ Format: `clear_emptyTag`
 
 ### Locate person by name: `find`<a name="locate-person-by-name"></a>
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain the keyword exactly.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -212,16 +212,21 @@ Examples:
 
 Grabs person's (single or multiple) attribute.
 
-Format: `grab ATTRIBUTE_PREFIX/[INDEX]`
+Format: `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`
 
 * `INDEX` is optional. If an index is provided, it will grab the attribute of the person with this `INDEX`. If it
 is left blank, it will grab this attribute of all the persons in UNite.
 * The available `ATTRIBUTE_PREFIX` that you can grab are `n/` for name, `p/` for phone number, `e/` for email,
 `a/` for address, `c/` for course, `m/` for matric card, `tele/` for telegram.
+* `TAGS` are optional too. If no tags are provided, it will by default grab the attribute of the person
+  with the `INDEX` or grab from all person if `INDEX` was not present.
+* When `TAGS` is provided, you cannot have `INDEX` present. You will grab the 
+attributes from all person with the `TAG`. 
 
 Examples:
 * `grab e/1` grabs the email address of person with index 1.
-* `grab tele/` grabs the telegram id of everyone inside UNite
+* `grab tele/` grabs the telegram id of everyone inside UNite.
+* `grab tele/ t/friends` grabs the telegram id of everyone tagged as "friends" inside UNite.
 
 ### Delete a person : `delete`<a name="delete-a-person"></a>
 
@@ -330,7 +335,7 @@ To view a profile, click on the person card in the list to view it.
 To add a new profile, click the `Add` button on the menu bar, and select `Add profile`. An **add profile pop up
 window** will appear.
 
-<img src="images/addProfile_popup.png" width="400"/>
+<img src="images/addProfileNew_popup.png" width="400"/>
 
 In the window, simply enter all related information into the spaces provided, and click the
 `save` button to add a new profile. Click `cancel` to stop adding and close the pop up window.
