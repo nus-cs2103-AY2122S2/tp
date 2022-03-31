@@ -76,7 +76,6 @@ public class TransactionCard extends UiPart<Region> {
             image = new Image(STATUS_NOT_PAID_ICON);
         }
         status.setImage(image);
-        centerImage();
     }
 
     @Override
@@ -94,30 +93,5 @@ public class TransactionCard extends UiPart<Region> {
         // state check
         TransactionCard card = (TransactionCard) other;
         return transaction.equals(card.transaction);
-    }
-
-    public void centerImage() {
-        Image img = status.getImage();
-        if (img != null) {
-            double w = 0;
-            double h = 0;
-
-            double ratioX = status.getFitWidth() / img.getWidth();
-            double ratioY = status.getFitHeight() / img.getHeight();
-
-            double reducCoeff = 0;
-            if (ratioX >= ratioY) {
-                reducCoeff = ratioY;
-            } else {
-                reducCoeff = ratioX;
-            }
-
-            w = img.getWidth() * reducCoeff;
-            h = img.getHeight() * reducCoeff;
-
-            status.setX((status.getFitWidth() - w) / 2);
-            status.setY((status.getFitHeight() - h) / 2);
-
-        }
     }
 }
