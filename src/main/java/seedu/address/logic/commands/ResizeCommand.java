@@ -32,4 +32,10 @@ public class ResizeCommand extends Command {
         return RESIZE_WINDOW_MULTIPLIER;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ResizeCommand // instanceof handles nulls
+                && resultWindowDisplaySize.equals(((ResizeCommand) other).resultWindowDisplaySize)); // state check
+    }
 }

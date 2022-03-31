@@ -14,7 +14,7 @@ public class ResizeCommandParserTest {
 
     @Test
     public void parse_validResizeResultWindowSize_returnsResizeCommand() {
-        assertParseSuccess(parser, "1", new ResizeCommand(1.0));
+        assertParseSuccess(parser, "1", new ResizeCommand((double) 1));
         assertParseSuccess(parser, "2", new ResizeCommand(2.0));
         assertParseSuccess(parser, "3", new ResizeCommand(3.0));
         assertParseSuccess(parser, "   1", new ResizeCommand(1.0));
