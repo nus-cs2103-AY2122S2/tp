@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ExportCommand" as ExportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+box Storage STORAGE_COLOR_T1
+participant "jfm:JsonFileManager" as JsonFileManager STORAGE_COLOR
+box
+
+create ExportCommand
+LogicManager -> ExportCommand : parser.parseCommand(commandText)
+activate ExportCommand
+
+ExportCommand --> LogicManager
+deactivate ExportCommand
+
+LogicManager -> ExportCommand : execute(model)
+activate ExportCommand
+
+create JsonFileManager
+ExportCommand -> JsonFileManager :
+activate JsonFileManager
+
+JsonFileManager --> ExportCommand :
+deactivate JsonFileManager
+
+ExportCommand -> JsonFileManager : exportFile(model.getShowListFilePath)
+activate JsonFileManager
+
+JsonFileManager --> ExportCommand : result
+deactivate JsonFileManager
+
+create CommandResult
+ExportCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS, false, false, true)
+activate CommandResult
+
+CommandResult --> ExportCommand
+deactivate CommandResult
+
+ExportCommand --> LogicManager : commandResult
+deactivate ExportCommand
+
+@enduml

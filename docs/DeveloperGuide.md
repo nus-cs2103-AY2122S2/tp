@@ -371,15 +371,20 @@ In `LogicManager`, the new data will be read and converted into an `Optional<Rea
 The old data is stored as another `ReadOnlyShowList`, and `Model#setShowList` is called to update `Model`'s show list with the new data if it exists. 
 If the new data does not exist, the show list will not be updated. Finally, `Storage#saveShowList` is called to update the actual data file.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `LogicManager`, `ImportCommand`, `JsonFileManager`, and `CommandResult`.
+
+<img src="images/ImportSequenceDiagram.png">
+</div>
+
 For `export`:
 
 After the location is selected, `ExportCommand` calls the `JsonFileManager#exportFile(dataPath)` method. 
 This method writes the data file into a file at the selected location provided by dataPath. 
 After the data is written into the new file, `ExportCommand` returns a `CommandResult` to `LogicManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `LogicManager`, `ImportCommand`, `JsonFileManager`, and `CommandResult`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The sequence diagram below illustrates the interaction between `LogicManager`, `ExportCommand`, `JsonFileManager`, and `CommandResult`.
 
-<img src="images/ImportSequenceDiagram.png">
+<img src="images/ExportSequenceDiagram.png">
 </div>
 
 #### Design considerations:
@@ -1062,25 +1067,24 @@ testers are expected to do more *exploratory* testing.
 ### Exporting Trackermon data
 
 1. Prerequisites: None.
-2. Ensure that current Trackermon data is different from data we plan to import.
-3. Launch the app.
-4. Command: `export`
-5. Test case: Exporting data to directory without existing `trackermon.json`
+2. Launch the app.
+3. Command: `export`
+4. Test case: Exporting data to directory without existing `trackermon.json`
     1. Condition: Directory without existing `trackermon.json` exists.
     2. Action: Select directory fulfilling condition to export Trackermon data to.
 
        Expected: Export succeeds, selected directory now has `trackermon.json` file containing exported show data.
-6. Test case: Exporting data to directory with existing `trackermon.json`
+5. Test case: Exporting data to directory with existing `trackermon.json`
     1. Condition: Directory with existing `trackermon.json` exists.
     2. Action: Select directory fulfilling condition to export Trackermon data to.
    
        Expected: Trackermon displays pop-up box informing user that `trackermon.json` exists, and asks if the user wants to replace it.
-7. Test case: Renaming exported data in File Explorer GUI.
+6. Test case: Renaming exported data in File Explorer GUI.
     1. Condition: None.
     2. Action: Replace `trackermon` in File Explorer GUI with `testdata`, and export it to a directory not containing `testdata.json`.
       
        Expected: Export succeeds, selected directory now has `testdata.json` file containing exported show data.
-8. Test case: Cancelling export
+7. Test case: Cancelling export
     1. Condition: None.
     2. Action: Click "Cancel" button in File Explorer GUI.
 

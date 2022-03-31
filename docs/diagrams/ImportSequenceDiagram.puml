@@ -1,9 +1,6 @@
 @startuml
 !include style.puml
 
-mainframe **Import** implementation
-
-
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ImportCommand" as ImportCommand LOGIC_COLOR
@@ -24,7 +21,7 @@ LogicManager -> ImportCommand : execute(model)
 activate ImportCommand
 
 create JsonFileManager
-ImportCommand -> JsonFileManager : new JsonFileManager()
+ImportCommand -> JsonFileManager :
 activate JsonFileManager
 
 JsonFileManager --> ImportCommand :
@@ -37,7 +34,7 @@ JsonFileManager --> ImportCommand : result
 deactivate JsonFileManager
 
 create CommandResult
-ImportCommand -> CommandResult : new CommandResult(MESSAGE_SUCCESS, false, false, true)
+ImportCommand -> CommandResult : CommandResult(MESSAGE_SUCCESS, false, false, true)
 activate CommandResult
 
 CommandResult --> ImportCommand
