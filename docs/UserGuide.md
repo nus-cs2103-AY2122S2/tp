@@ -1,8 +1,6 @@
 # User Guide
 ClientConnect is a **desktop app for managing clients’ contact details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps with the ability to `find` specific clients based on keywords provided.
 
---------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -34,7 +32,6 @@ ClientConnect is a **desktop app for managing clients’ contact details, optimi
 
 6. Refer to the Features below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -63,10 +60,10 @@ ClientConnect is a **desktop app for managing clients’ contact details, optimi
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-
 ### Viewing help : `help`
+<details><summary>Shows a message explaining how to access the ClientConnect help page</summary>
+<p>
 
-Shows a message explaining how to access the ClientConnect help page.
 
 Format: `help`
 
@@ -79,6 +76,24 @@ This also shows that you can press F1 on your keyboard to open the help message.
 On clicking Help, you will see this as a result:
 
 ![Help window image](images/helpWindowUG.png)
+
+</p>
+</details>
+
+### Viewing Packages
+<details><summary>Opens a new window that shows the various insurance packages and their description</summary>
+<p>
+
+Click on the Package button to view a dropdown window displaying a "Package" button.
+
+![Package button image](images/packageButtonUG.png)
+
+On clicking Package, you will see this as a result:
+
+![Package window image](images/packageWindowUG.png)
+
+</p>
+</details>
 
 ### Adding a person: `add`
 
