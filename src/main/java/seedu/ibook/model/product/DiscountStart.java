@@ -14,7 +14,7 @@ public class DiscountStart {
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Start should only be of type integer, and should not be negative";
 
-    public static final String VALIDATION_REGEX = "|(\\d+)";
+    public static final String VALIDATION_REGEX = "|\\d+";
 
     public final Integer discountStart;
 
