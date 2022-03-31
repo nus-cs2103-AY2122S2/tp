@@ -194,7 +194,7 @@ Format: `delete -TYPE`
 * -i will delete an interview
 * -p will delete a position
 
-### Deleting an Applicant : `del -a`
+### Deleting an Applicant : `delete -a`
 
 Deletes the specified Applicant from HireLah.
 
@@ -208,7 +208,7 @@ Examples:
 * `list` followed by `delete -a 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting an Interview: `del -i`
+### Deleting an Interview: `delete -i`
 
 Deletes an existing interview in HireLah.
 
@@ -221,7 +221,7 @@ Examples:
 * `delete -i 3`
 
 
-### Delete positions : `del -p`
+### Delete positions : `delete -p`
 
 Deletes an existing position in HireLah.
 
@@ -324,6 +324,12 @@ Format: `pass INTERVIEW_INDEX`
 * Interview must have status `pending` before it can be passed.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Additional details:
+* A job offer is handed out for the interviewed position when applicant passes interview.
+* Job offer is tracked by the `Position` interviewed for.
+* Job can only be offered if `offered` < `openings`.
+* A job offered will increase `offered` by 1.
+
 Example: `pass 1`
 
 ## Failing Interviews : `fail`
@@ -349,6 +355,12 @@ Format: `accept INTERVIEW_INDEX`
 * Interview must have status `passed` before it can be accepted.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Additional details:
+* Accepting a job offer will decrement number of `openings` and `offers`, as a vacancy in the `Position` is now filled
+* `Applicant` status will be updated to reflect the new job title
+* Note that editing a `Position`'s name after an `Applicant` has been hired will not change the `Applicant`'s job 
+  status.
+
 ## Rejecting Interviews : `reject`
 
 Rejects an existing interview in Hirelah. This command rejects the `passed` interview,
@@ -359,6 +371,9 @@ Format: `reject INTERVIEW_INDEX`
 * Rejects the Interview at the specified `INTERVIEW_INDEX`.
 * Interview must have status `passed` before it can be rejected.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+Additional details:
+* Rejecting a job offer will decrement the number of `offered` in `Position`, as the offer no longer stands.
 
 ## Exporting Data : `export`
 
