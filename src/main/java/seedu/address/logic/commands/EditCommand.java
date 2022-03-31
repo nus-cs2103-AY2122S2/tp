@@ -225,7 +225,7 @@ public class EditCommand extends Command {
             }
 
             model.setSchedule(scheduleToEdit, editedSchedule);
-            model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ALL_SCHEDULES);
+            model.updateFilteredScheduleList(Model.PREDICATE_SHOW_ACTIVE_SCHEDULES);
             return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule));
         }
     }
