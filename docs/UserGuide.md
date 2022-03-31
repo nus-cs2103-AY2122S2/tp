@@ -79,6 +79,9 @@ Now that you have set up the HustleBook, lets take a look at what Hustlebook off
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  
+* The `|` symbol represents or. <br>
+  e.g `list [flag|unflag]` means valid commands are `list flag` and `list unflag`
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -127,9 +130,12 @@ Examples:
 
 ### Listing all clients : `list`
 
-Shows a list of all clients in the HustleBook.
+Shows a list of clients in the HustleBook.
 
-Format: `list`
+Format: `list [flag|unflag]`
+
+* Optional Parameter allows you to view only flagged or only unflagged clients.
+* If the optional parameter is not provided, both flagged and unflagged clients will be displayed.
 
 ### Flagging a client : `flag`
 
@@ -162,7 +168,7 @@ Format: `sort PARAMETER`
 
 
 * `PARAMETER` you can use are: `meeting`,`name`, `prev` and `salary`
-* `PARAMTER` is not case-sensitive. 
+* `PARAMETER` is not case-sensitive. 
 
 Example:
 * `sort salary`
