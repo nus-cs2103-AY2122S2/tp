@@ -114,7 +114,8 @@ public class ViewCommand extends Command {
     }
 
     private void changeSuccessMessage(Model model) {
-        if ((keywords.size() > 1 && keywords.contains("P/")) || keywords.contains("L/")) {
+        if (keywords.size() > 1 && (keywords.contains("P/") || keywords.contains("L/"))) {
+            System.out.println(keywords.size());
             messageViewSuccess = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else if (keywords.contains("S/")) {
