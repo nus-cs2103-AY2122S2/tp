@@ -70,7 +70,6 @@ public class RemarkCommand extends Command {
                 remark);
 
         model.setCandidate(candidateToEdit, editedCandidate);
-        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_CANDIDATES);
 
         for (int i = 0; i < interviewSchedule.size(); i++) {
             if (candidateToEdit.equals(interviewSchedule.get(i).getCandidate())) {
@@ -79,7 +78,6 @@ public class RemarkCommand extends Command {
                 model.updateInterviewCandidate(interviewToUpdate, updatedInterview);
             }
         }
-        model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
         return new CommandResult(generateSuccessMessage(editedCandidate));
     }

@@ -107,7 +107,6 @@ public class EditCommand extends Command {
                 model.updateInterviewCandidate(interviewToUpdate, updatedInterview);
             }
         }
-        model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_CANDIDATE_SUCCESS, editedCandidate));
     }

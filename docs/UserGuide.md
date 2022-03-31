@@ -173,18 +173,17 @@ Format: `list`
 
 Finds and lists candidates whose attribute field(s) contain(s) any of the given keyword(s).
 
-Format: `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`
+Format: `find k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the find format:**<br>
 
-`ATTRIBUTE_FIELD` can take on the following values 
-`appstatus`, `course`, `email`, `intstatus`, `name`, `phone`, `seniority`, `studentid`, `all`, `avail`
+`ATTRIBUTE_FIELD` can take on the following values
+`all`, `avail`, `appstatus`, `course`, `email`, `intstatus`, `name`, `phone`, `seniority`, `studentid`, `remark`
 
-Note: 
-`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
-`avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
+* A candidate's`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
+* A candidate's `avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
 
 </div>
 
@@ -201,7 +200,7 @@ Note:
 
 Examples:
 * `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`
-* `find k/Computer Science f/course` returns candidates with the course field i.e. `computer science`
+* `find k/Computer k/Science f/course` returns candidates with the course field i.e. `computer science` and `computer engineering`
 * `find k/Jane k/Tan f/name` returns candidates with name e.g. `Jane`, `tan` and `John Tan`
 
 ### Sorting candidates by attribute field: `sort`
@@ -240,11 +239,11 @@ Let's reference a default sample list of unique candidates with attribute fields
 3. (`Ben`, `A5588565L`)
 
 
-### Updating a candidate's remarks: `remark`
+### Updating a candidate's remark: `remark`
 
 Updates the `remark` field of a candidate to the user input keyed in.
 
-Format: `remark INDEX r/REMARK`
+Format: `remark INDEX [r/REMARK]`
 
 <div markdown="block" class="alert alert-info">
 
@@ -254,12 +253,12 @@ Format: `remark INDEX r/REMARK`
 
 </div>
 
-* To remove the remark of the first candidate displayed in the system, the user can simply key in `remark 1 r/`, 
+* To remove the remark of the first candidate displayed in the system, the user can simply key in `remark 1` or `remark 1 r/`, 
 which will update the remark of the candidate to be empty.
 
 Examples:
 * `remark 1 r/a good candidate` Updates the candidate's remark field to reflect 'a good candidate'.
-* `remark 1 r/` Removes the candidate's remark field to reflect ''.
+* `remark 1 r/` Removes the candidate's remark field to reflect ``.
 
 ### Deleting a candidate : `delete`
 
@@ -293,7 +292,7 @@ Schedules the specified candidate for an interview.
 
 Format: `schedule add candidate/INDEX at/DATE_TIME`
 
-* Schedules the candidate at the specified `INDEX` for an interview on given `DATE_TIME`.
+* Schedules the candidate at the specified `INDEX` for an interview on given `DATE_TIME`
 * The candidate index refers to the index number shown in the displayed candidate list.
 * The candidate index must be a positive integer 1, 2, 3, …​
 * `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
@@ -350,13 +349,10 @@ Format: `view TIME_PERIOD`
 * Scheduled interviews are automatically sorted from earliest to latest
 
 Examples:
-
-| Example command | Expected Behaviour                                                               |
-|-----------------|----------------------------------------------------------------------------------|
-| `view all`      | returns all scheduled interviews still in system whether in the past or upcoming |
-| `view today`    | returns all scheduled interviews on the same date as the current time            |
-| `view week`     | returns all upcoming scheduled interviews within the next 7 days                 |
-| `view month`    | returns all upcoming scheduled interviews within the next month                  |
+* `view all` returns all scheduled interviews still in system whether in the past or upcoming
+* `view today` returns all scheduled interviews on the same date as the current time
+* `view week` returns all upcoming scheduled interviews within the next 7 days
+* `view month` returns all upcoming scheduled interviews within the next month
 
 ## Miscellaneous commands
 
@@ -403,20 +399,16 @@ If your changes to the data file makes its format invalid, TAlent Assistant™ w
 
 Commands in this section have been organised based on the expected scope of behaviour.
 
-### Candidates List
+### Managing Candidates
 | Action     | Format, Examples                                                                                                                                                                               |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add id/STUDENTID n/NAME e/EMAIL p/PHONE c/COURSE yr/SENIORITY avail/AVAILABILITY`<br> e.g., `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
 | **Edit**   | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE_NUMBER] [c/COURSE] [yr/YEAR] [avail/AVAILABILITY] [as/APPLICATION_STATUS]…​`<br> e.g.,`edit 2 n/James Lee p/98765432 yr/4`                             |
-| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... f/ATTRIBUTE_FIELD`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                   |
+| **Find**   | `find k/KEYWORD [k/MORE_KEYWORDS]... [f/ATTRIBUTE_FIELD]`<br> e.g., `find k/Jane k/Doe f/name`                                                                                                 |
 | **Sort**   | `sort s/ATTRIBUTE_FIELD`<br> e.g., `sort s/name`                                                                                                                                               |
-| **Remark** | `remark INDEX r/REMARKS`<br> e.g., `remark 1 r/a good candidate`                                                                                                                               |
-
-### Candidate Profile
-| Action    | Format, Examples |
-|-----------|------------------|
-| **Focus** | [[PLACEHOLDER]]  |
+| **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 1 r/a good candidate`                                                                                                                              |
+| **Focus**  | [[PLACEHOLDER]]                                                                                                                                                                                |
 
 ### Scheduling Interviews
 | Action                        | Format, Examples                                                                                       |
@@ -424,6 +416,7 @@ Commands in this section have been organised based on the expected scope of beha
 | **Schedule interview**        | `schedule add candidate/INDEX /at DATE_TIME` <br> e.g., `schedule add candidate/2 at/05-05-2022 10:00` |
 | **Reschedule interview**      | `schedule edit SCHEDULE_INDEX at/DATE_TIME` <br> e.g., `schedule edit 1 at/06-06-2022 15:00`           |
 | **Delete interview**          | `schedule delete SCHEDULE_INDEX` <br> e.g., `schedule delete 1`                                        |
+| **Clear all interviews**      | [[PLACEHOLDER]]                                                                                        |
 | **View scheduled interviews** | `view TIME_PERIOD` <br> e.g., `view all`, `view today`                                                 |
 
 ### Miscellaneous commands / Help
