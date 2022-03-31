@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -154,6 +155,11 @@ public interface Model {
      * TO BE FILLED
      */
     Lineup getLineup(seedu.address.model.lineup.LineupName targetName);
+
+    /**
+     * TO BE FILLED
+     */
+    void sortPersonsInMyGM(Comparator<Person> personComparator);
 
     /**
      * Refreshes the model.
