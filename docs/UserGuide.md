@@ -58,11 +58,20 @@ This guide covers everything from what the user sees, how Tinner can help the us
 1. Ensure you have Java 11 or above installed in your computer.
 2. Download the latest tinner.jar.
 3. Copy the file to the folder you want to use as the home folder for your Tinner.
-4. Double-click the file to start the app. The GUI like below should appear in a few seconds. Note how the app contains some sample data.
+
+**For Windows**
+1. Double-click the file to start the app
+
+**For Mac**
+1. Run the following command in the directory containing tinner.jar:
+
+```
+java -jar tinner.jar
+```
 
 ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
+1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 
    Some example commands you can try:
    * **`list`** : Lists all companies and internship roles.
@@ -74,7 +83,7 @@ This guide covers everything from what the user sees, how Tinner can help the us
    * **`deleteRole`**`1 1` : Deletes the 1st role of the 1st company shown in the current list.
    * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Features](#features) below for details of each command.
 
 [Back to Table of Contents](#toc)
 
@@ -198,8 +207,12 @@ The following points explain the format of a command.
     * complete
   * The `DESCRIPTION` can contain alphanumeric characters, spaces and special characters.
   * The `STIPEND` must be a positive integer going up to 10 digits long.
-  
-  Note: Integer is a number which is not a fraction; a whole number.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: An integer is a number which is not a fraction; a whole number.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -212,13 +225,21 @@ Say you found a company with an opening that you are interested in. You did your
 
 1. [Add the company](#c-add-c) to the company list.
 ![AddCompanyDemo](images/AddCompanyDemo.png)
+   
+<div markdown="block" class="alert alert-info">
 
 :information_source: Note the successful command execution message in the system feedback box upon successful adding of the company.
+
+</div>
 
 2. [Add the role](#c-add-c-r) under the added company.
 ![AddRoleDemo](images/AddRoleDemo.png)
 
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful adding of the role.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -229,25 +250,48 @@ Perhaps for some reason, you decide not to go through with an application. Maybe
 1. [Delete the role](#c-delete-c-r) from a given company.
 ![DeleteRoleDemo](images/DeleteRoleDemo.png)
 
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful deletion of the role.
+
+</div>
 
 2. [Delete the company](#c-delete-c) from the company list.
 ![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
 
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful deletion of the company.
+
+</div>
 
 ## Use Case #3: Editing a company or a role <a id="usecase3"></a>
 Say you received an email for an interview and the point of contact's email is different.
 Here's how you can make changes to the application:
 1. [Edit the company](#c-edit-c) from the company list.  
-![EditCompanyDemo](images/EditCompanyDemo.png)  
+![EditCompanyDemo](images/EditCompanyDemo.png)
+   
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful edit of the company.
+
+</div>
 
 Also, you can change the status of your internship application and set the reminder for the interview date by making this entry:
 2. [Edit the role](#c-edit-r) from a given company.  
-![EditRoleDemo](images/EditRoleDemo.png)  
+![EditRoleDemo](images/EditRoleDemo.png)
+   
+<div markdown="block" class="alert alert-info">   
+
 :information_source: Note the successful command execution message in the system feedback box upon successful edit of the role.  
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the change in color of the [role tag](#tags).
+
+</div>
 
 ## Use Case #4: Setting reminder window for reminder list <a id="usecase4"></a>
 Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week from today, upon the next opening of Tinner, you will be able to see a reminder pop-out box like this:   
@@ -256,22 +300,48 @@ Assuming that the reminder date from [USE_CASE_3](#usecase3) is within a week fr
 If you do not see the intended reminder, it is likely that the reminder date is not within the [reminder window](#c-setWindow-c).  
 Thus, you can increase the reminder window by making this entry:  
 1. [Set the reminder window](#c-setWindow-c) for the reminder list.  
-![WindowrDemo](images/WindowDemo.png)    
+![WindowrDemo](images/WindowDemo.png)  
+
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful change of reminder window.
+
+</div>
 
 ## Use Case #5: Favouriting a company <a id="usecase5"></a>
 A scenario where multiple companies have sent you offers and you may want to store these companies in a [list of favourites](#c-listfavourite) for ease of reference.  
 you can favourite a company by making this entry:
 
 1. [Favourite a company](#c-favourite-c) from the company list.  
-![FavouriteDemo](images/FavouriteDemo.png)    
+![FavouriteDemo](images/FavouriteDemo.png)
+   
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful favourite of the company.  
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note that the favourite company will be denoted by the star icon next to the company name.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Note that favouriting companies can be utilized in other ways, and not just to keep track of companies which have sent you offers. 
+
+</div>
 
 You can choose to unfavourite by making this entry:
 2. [Unfavourite a company](#c-favourite-c) from the company list.  
-![UnfavouriteDemo](images/UnfavouriteDemo.png)  
+![UnfavouriteDemo](images/UnfavouriteDemo.png)
+
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note the successful command execution message in the system feedback box upon successful unfavourite of the company.  
+
+</div>
 
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite) command.
 
