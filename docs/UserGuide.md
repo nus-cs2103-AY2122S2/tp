@@ -600,6 +600,9 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **Q**: Will me data be saved if I exit the application?<br>
 **A**: Don't worry! Your data will be automatically saved everytime it is updated. Feel free to type `exit` to exit the program.
 
+**Q**: Why does long text hide the labels and text?<br>
+**A**: The text is hidden as it is too long. We will have plans in the future to restrict the length of text fields.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
