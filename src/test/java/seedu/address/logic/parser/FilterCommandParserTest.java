@@ -9,10 +9,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.lab.Lab;
 import seedu.address.model.lab.StudentHasLabPredicate;
+import seedu.address.model.util.LabTriplet;
 
 public class FilterCommandParserTest {
 
-    private FilterCommandParser parser = new FilterCommandParser();
+    private final FilterCommandParser parser = new FilterCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -21,11 +22,19 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
-        Lab expectedLab = (new Lab("1")).of("SUBMITTED");
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new StudentHasLabPredicate(expectedLab));
+        Lab expectedLab1 = new LabTriplet("1", "SUBMITTED").getLab();
+        Lab expectedLab2 = new LabTriplet("2", "UNSUBMITTED").getLab();
+        Lab expectedLab3 = new LabTriplet("3", "GRADED", "0").getLab();
+        FilterCommand expectedFilterCommand1 =
+                new FilterCommand(new StudentHasLabPredicate(expectedLab1));
+        FilterCommand expectedFilterCommand2 =
+                new FilterCommand(new StudentHasLabPredicate(expectedLab2));
+        FilterCommand expectedFilterCommand3 =
+                new FilterCommand(new StudentHasLabPredicate(expectedLab3));
 
-        assertParseSuccess(parser, " l/1 s/s", expectedFilterCommand);
+        assertParseSuccess(parser, " l/1 s/s", expectedFilterCommand1);
+        assertParseSuccess(parser, " l/2 s/u", expectedFilterCommand2);
+        assertParseSuccess(parser, " l/3 s/g", expectedFilterCommand3);
 
     }
 
@@ -40,4 +49,5 @@ public class FilterCommandParserTest {
         assertParseFailure(parser, "s/1", expectedMessage);
 
     }
+
 }

@@ -7,9 +7,9 @@ import seedu.address.model.lab.LabMark;
 
 public class LabTriplet {
 
-    private String labNumber;
-    private String labStatus;
-    private String labMark;
+    private final String labNumber;
+    private final String labStatus;
+    private final String labMark;
 
     /**
      * Creates a LabTriplet containing String representations of each Lab attribute.

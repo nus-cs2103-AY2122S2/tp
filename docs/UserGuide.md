@@ -115,6 +115,10 @@ Format: `clear`
 #### Filter (by status of individual labs) : `filter`
 Filters students based on the status of their lab tags. LAB_NUMBER must be a positive integer.
 
+Multiple filters can be applied in a conjunctional manner by executing the filter command multiple times
+
+Using the `list` command clears all filters that are currently applied
+
 LAB_STATUS:
 * Unsubmitted = u
 * Submitted = s
@@ -150,6 +154,7 @@ Format: `labrm l/LAB_NUMBER`
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
 
 | Action              | Format, Examples                                                                                                                                        |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|

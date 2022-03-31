@@ -142,7 +142,25 @@ public class Lab {
      */
     public Lab of(LabMark labMark) {
         requireNonNull(labMark);
+        if (labMark.isEmpty()) {
+            throw new InvalidLabStatusException();
+        }
         return new Lab(String.valueOf(labNumber), labMark);
+    }
+
+    /**
+     * Returns a new immutable {@code Lab} with the specified {@code LabStatus} and {@code LabMark}.
+     * {@code LabMark.MARKS_UNKNOWN} is assigned to labs with {@code LabStatus == UNSUBMITTED / SUBMITTED}.
+     */
+    public Lab of(LabStatus labStatus, LabMark labMark) {
+        requireAllNonNull(labStatus, labMark);
+
+        if (labStatus == LabStatus.GRADED) {
+            return of(labMark);
+        } else {
+            return of(labStatus);
+        }
+
     }
 
     /**
@@ -151,10 +169,6 @@ public class Lab {
      */
     public Lab of(String labStatus, String labMark) throws InvalidLabStatusException {
         requireAllNonNull(labStatus, labMark);
-
-        if (labMark.equals(LabMark.MARKS_UNKNOWN) && LabStatus.toLabStatus(labStatus) == LabStatus.GRADED) {
-            throw new InvalidLabStatusException();
-        }
 
         if (labMark.equals(LabMark.MARKS_UNKNOWN)) {
             return (new Lab(String.valueOf(labNumber))).of(labStatus);
@@ -168,11 +182,27 @@ public class Lab {
      * This defines a weaker notion of equality between two Labs.
      */
     public boolean isSameLab(Lab otherLab) {
+        requireNonNull(otherLab);
+
         if (otherLab == this) {
             return true;
         }
 
-        return otherLab != null && otherLab.labNumber == this.labNumber;
+        return otherLab.labNumber == this.labNumber;
+    }
+
+    /**
+     * Returns true if both labs have the same {@code labStatus}
+     */
+    public boolean hasSameLabStatus(Lab otherLab) {
+        requireNonNull(otherLab);
+
+        if (otherLab == this) {
+            return true;
+        }
+
+        return otherLab.labStatus.equals(this.labStatus);
+
     }
 
     @Override
