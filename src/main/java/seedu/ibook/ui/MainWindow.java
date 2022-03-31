@@ -214,6 +214,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Returns true if there are any active filters
+     */
+    public boolean hasActiveFilter() {
+        return !getProductFilters().isEmpty();
+    }
+
+    /**
      * Removes a filter for the product list.
      */
     public void removeProductFilter(AttributeFilter filter) {
