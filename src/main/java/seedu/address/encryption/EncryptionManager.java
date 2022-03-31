@@ -92,7 +92,16 @@ public class EncryptionManager implements Encryption {
             fileIn.read(fileInitializationVector);
             cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileInitializationVector));
 
-            FileUtil.writeToFile(targetFile, decrypt(fileIn));
+            String decryptedContent = decrypt(fileIn);
+
+            // Skip writing decrypted content if there exists a data file
+            if (FileUtil.isFileExists(targetFile)) {
+                logger.info("Reading content from data file");
+                return;
+            }
+
+            logger.info("Reading content from encrypted file");
+            FileUtil.writeToFile(targetFile, decryptedContent);
 
             logger.fine("Contents decrypted");
         }
@@ -103,12 +112,10 @@ public class EncryptionManager implements Encryption {
      *
      * @param fileIn The input stream of the given file.
      * @return The string content of the decrypted file.
-     * @throws InvalidAlgorithmParameterException If decryption algorithm is invalid.
-     * @throws InvalidKeyException If decryption secret key is invalid.
      * @throws IOException If file reading causes error.
      */
-    public String decrypt(FileInputStream fileIn) throws InvalidAlgorithmParameterException,
-            InvalidKeyException, IOException {
+    public String decrypt(FileInputStream fileIn) throws
+            IOException {
         String content;
 
         try (

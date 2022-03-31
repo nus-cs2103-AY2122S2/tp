@@ -4,12 +4,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
@@ -18,35 +17,27 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPatientDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditPatientDescriptor descriptor;
 
     public EditPatientDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditPatientDescriptor();
     }
 
-    public EditPatientDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditPatientDescriptorBuilder(EditPatientDescriptor descriptor) {
+        this.descriptor = new EditPatientDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
     public EditPatientDescriptorBuilder(Patient patient) {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditPatientDescriptor();
         descriptor.setNric(patient.getNric());
         descriptor.setName(patient.getName());
         descriptor.setPhone(patient.getPhone());
         descriptor.setEmail(patient.getEmail());
         descriptor.setAddress(patient.getAddress());
         descriptor.setTags(patient.getTags());
-    }
-
-    /**
-     * Sets the {@code Nric} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPatientDescriptorBuilder withNric(String nric) {
-        descriptor.setNric(new Nric(nric));
-        return this;
     }
 
     /**
@@ -91,7 +82,7 @@ public class EditPatientDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditPatientDescriptor build() {
         return descriptor;
     }
 }

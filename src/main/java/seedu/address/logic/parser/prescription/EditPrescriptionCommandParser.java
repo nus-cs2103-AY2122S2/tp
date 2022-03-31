@@ -11,13 +11,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.prescription.EditPrescriptionCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditPrescriptionCommand object
  */
-public class EditPrescriptionCommandParser {
+public class EditPrescriptionCommandParser implements Parser<EditPrescriptionCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditPrescriptionCommand
@@ -26,35 +27,41 @@ public class EditPrescriptionCommandParser {
      */
     public EditPrescriptionCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_DATE,
+                PREFIX_INSTRUCTION);
+
+        Index index;
+
         try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_DATE,
-                    PREFIX_INSTRUCTION);
-
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-            EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor =
-                    new EditPrescriptionCommand.EditPrescriptionDescriptor();
-
-            if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
-                editPrescriptionDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
-            }
-            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                editPrescriptionDescriptor.setDrugName(ParserUtil.parseDrugName(
-                        argMultimap.getValue(PREFIX_NAME).get()));
-            }
-            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                editPrescriptionDescriptor.setPrescriptionDate(ParserUtil.parsePrescriptionDate(
-                        argMultimap.getValue(PREFIX_DATE).get()));
-            }
-            if (argMultimap.getValue(PREFIX_INSTRUCTION).isPresent()) {
-                editPrescriptionDescriptor
-                        .setResult(ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get()));
-            }
-
-            return new EditPrescriptionCommand(index, editPrescriptionDescriptor);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPrescriptionCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditPrescriptionCommand.MESSAGE_USAGE), pe);
         }
+
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            throw new ParseException(EditPrescriptionCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED);
+        }
+
+        EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor =
+                new EditPrescriptionCommand.EditPrescriptionDescriptor();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPrescriptionDescriptor.setDrugName(ParserUtil.parseDrugName(
+                    argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            editPrescriptionDescriptor.setPrescriptionDate(ParserUtil.parsePrescriptionDate(
+                    argMultimap.getValue(PREFIX_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_INSTRUCTION).isPresent()) {
+            editPrescriptionDescriptor
+                    .setResult(ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get()));
+        }
+
+        if (!editPrescriptionDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditPrescriptionCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditPrescriptionCommand(index, editPrescriptionDescriptor);
     }
 }
