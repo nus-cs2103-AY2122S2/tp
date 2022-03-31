@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_AVAILABILITY + "1,2,3,4,5\n"
             + "Note: Validity checks will need to be met for certain fields. See the user guide for full details.";
 
-    public static final String MESSAGE_SUCCESS = "New candidate added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New candidate added: \n%1$s";
     public static final String MESSAGE_DUPLICATE_CANDIDATE = "This candidate already exists in the system";
 
     private final Candidate toAdd;

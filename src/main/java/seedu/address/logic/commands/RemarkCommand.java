@@ -27,8 +27,8 @@ public class RemarkCommand extends Command {
             + "Note: The candidate index number must be a valid non zero positive integer. Candidate's existing "
             + "remark will be overwritten.\n";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Candidate: \n %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Candidate: \n %1$s";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Candidate: \n%1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Candidate: \n%1$s";
 
     private final Index index;
     private final Remark remark;
