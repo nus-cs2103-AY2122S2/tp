@@ -481,15 +481,15 @@ Format: `plotHair`
 Examples:
 * `plotHair`
    
-#### 4.4.8 Plot chart on monthly customers gained in the current year: `plotMonthlyCustomer`
+#### 4.4.8 Plot chart on monthly customers gained in the current year: `plotMonthlyCustomers`
 ![image](https://user-images.githubusercontent.com/83572953/160984859-f1d0a4f4-00f6-4719-b6ab-02da9a47da8f.png)
 
 Plots a pie chart on monthly customers gained in the current year.
 
-Format: `plotMonthlyCustomer`
+Format: `plotMonthlyCustomers`
 
 Examples:
-* `plotMonthlyCustomer`
+* `plotMonthlyCustomers`
 
 ### 4.5 Schedule management
 
@@ -611,7 +611,7 @@ The charts plot up to 10 variables at most. For example, in plotStaff, the top 1
 | Plot chart on common allergies amongst customers                                              | `plotAllergy`         | `plotAllergy`         |
 | Plot chart on common skin type of customers                                                   | `plotSkin`            | `plotSkin`            |
 | Plot chart on common hair type of customers                                                   | `plotHair`            | `plotHair`            |
-| Plot chart on customers gained per month in the current year                                  | `plotMonthlyCustomer` | `plotMonthlyCustomer` |   
+| Plot chart on customers gained per month in the current year                                  | `plotMonthlyCustomers` | `plotMonthlyCustomers` |   
 
 ### 5.5 Schedule
 
