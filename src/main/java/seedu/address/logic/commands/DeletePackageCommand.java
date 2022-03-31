@@ -13,10 +13,10 @@ public class DeletePackageCommand extends Command {
     public static final String COMMAND_WORD = "deletep";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes an existing insurance package in the address book.\n"
+            + ": Deletes an existing insurance package in the address book. "
             + "Parameters: "
-            + PREFIX_INSURANCE_PACKAGE + "PACKAGE NAME "
-            + "Example: " + COMMAND_WORD
+            + PREFIX_INSURANCE_PACKAGE + "PACKAGE NAME \n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_INSURANCE_PACKAGE + "Golden Package ";
 
     public static final String MESSAGE_DELETE_PACKAGE_SUCCESS = "Deleted Package: %1$s";

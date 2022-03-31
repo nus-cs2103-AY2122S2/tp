@@ -25,7 +25,7 @@ public class AddTagCommand extends Command {
             + "Only one tag can be added at a time. "
             + "Parameters: INDEX (must be a positive integer) "
             + "TAG\n"
-            + "Example: " + COMMAND_WORD + "1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + "owesMoney :p2";
 
     public static final String MESSAGE_SUCCESS = "Added tag to Person: %1$s";

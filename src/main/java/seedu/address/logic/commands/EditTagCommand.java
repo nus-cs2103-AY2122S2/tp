@@ -24,11 +24,11 @@ public class EditTagCommand extends Command {
             + "(identified by the tag's index number) "
             + "of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Only one tag can edited at a time. "
+            + "Only one tag can edited at a time. \n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
             + "TAG_INDEX (must be a positive integer) "
             + "TAG\n"
-            + "Example: " + COMMAND_WORD + "1 " + "2 "
+            + "Example: " + COMMAND_WORD + " 1 2 "
             + "owesMoney :p2";
 
     public static final String MESSAGE_SUCCESS = "Edited tag in Person: %1$s";
