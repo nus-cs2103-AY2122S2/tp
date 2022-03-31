@@ -19,12 +19,11 @@ title: User Guide
   * [Finding a show: `find`](#finding-a-show-find)
     * [General find](#general-find)
     * [Precise find](#precise-find)
-  * [Sorting the shows `sort`](#sorting-the-shows)
+  * [Sorting the shows `sort`](#sorting-the-shows-sort)
   * [Suggesting a show `suggest`](#suggest-a-show-suggest)
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
-  * [Commenting on a show: `comment`](#commenting-on-a-show-comment)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
@@ -173,7 +172,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Example & Output:** `help`
 
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+<img src="images/HelpWindow.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -187,7 +186,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
 
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+<img src="images/AddImage.png">
 
 <div markdown="block" class="alert alert-danger">
 **:exclamation: Caution:**<br>
@@ -208,7 +207,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Example & Output:** `delete 2`
 
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+<img src="images/DeleteImage.png">
 
 <div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
 * Once a show is deleted, you cannot retrieve it back!
@@ -233,7 +232,7 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 **Example & Output:** `edit 2 n/Sailor Moo t/Horror`
 
-[INSERT IMAGE AFTER UI IS DONE COMPLETELY]
+<img src="images/EditImage.png">
 
 <div markdown="block" class="alert alert-info">
 
@@ -443,22 +442,6 @@ Format: `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]…​`
 **Example:** `exit`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
-### Commenting on a show: `comment`
-
-**Description:** Want to write down your comments about a show? Note it down in Trackermon!
-
-**Format:** `comment <INDEX> [c/<COMMENT>]`
-* Edit comment of the show at the specified `<INDEX>`.
-* The index refers to the index number shown in the displayed show list. (not overall)
-* The index **must be a positive integer** 1,2,3,...
-* Omitting the `[c/<COMMENT>]` would remove the comment of that specific show.
-
-**Examples:** `comment 2 c/This is a good show!`
-* `list` followed by `comment 2 c/Not bad` edits 2nd show's comment in Trackermon to "Not bad".
-* `find ghibli` followed by `comment 1` deletes the comment of the 1st show in results of `find` command.
 
 ---
 
