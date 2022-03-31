@@ -29,12 +29,8 @@ public class ShowFriendCommandParser implements Parser<ShowFriendCommand> {
         boolean isShowByIndex = isNumeric(p, args);
 
         if (isShowByIndex) {
-            try {
-                Index index = ParserUtil.parseIndex(args);
-                return new ShowFriendCommand(index);
-            } catch (ParseException pe) {
-                throw new ParseException(MESSAGE_INDEX_IS_NOT_NON_ZERO_UNSIGNED_INTEGER);
-            }
+            Index index = ParserUtil.parseIndex(args);
+            return new ShowFriendCommand(index);
         } else { //deletion by name
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
