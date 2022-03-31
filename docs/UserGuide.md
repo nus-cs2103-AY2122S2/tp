@@ -32,7 +32,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
 The GUI is split into two parts: Players and Schedules. <br>
    ![Ui](images/Ui.png) ![Ui2](images/Ui2.png) <br>
 Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Schedule](images/UiSchedule.png)<br>
