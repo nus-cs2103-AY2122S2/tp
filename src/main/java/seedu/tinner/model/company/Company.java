@@ -59,6 +59,13 @@ public class Company {
     }
 
     /**
+     * Returns the internal list of roles from the {@code RoleManager}.
+     */
+    public ReadOnlyRoleList getRoleList() {
+        return roleManager.getRoleList();
+    }
+
+    /**
      * Returns true if both companies have the same name.
      * This defines a weaker notion of equality between two companies.
      */

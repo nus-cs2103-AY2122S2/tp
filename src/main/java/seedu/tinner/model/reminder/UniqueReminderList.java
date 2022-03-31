@@ -13,11 +13,15 @@ import java.util.TreeSet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.tinner.model.company.Company;
+import seedu.tinner.model.company.ReadOnlyRoleList;
+import seedu.tinner.model.reminder.exceptions.DuplicateReminderException;
+import seedu.tinner.model.role.Role;
 
 /**
  * A list of Reminders that enforces uniqueness between its elements and does not allow nulls.
  * A Reminder is considered unique by comparing using {@code Reminder#isSameReminder(Reminder)}. As such, adding and
- * updating of companies uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
+ * updating of reminders uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the Reminder
  * being added or updated is unique in terms of identity in the UniqueReminderList. However, the removal of a Reminder
  * uses Reminder#equals(Object) so as to ensure that the Reminder with exactly the same fields will be removed.
  * <p>
@@ -69,7 +73,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     public void add(Reminder toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            //throw new DuplicateReminderException(); //need to implement
+            throw new DuplicateReminderException();
         }
         internalList.add(toAdd);
 
@@ -91,6 +95,12 @@ public class UniqueReminderList implements Iterable<Reminder> {
                 .observableArrayList(new TreeSet<>(dateToReminderMap.keySet())));
     }
 
+    /**
+     * Returns the list of reminders associated with a specific date.
+     *
+     * @param date The date that which is used to retrieve the list of reminders.
+     * @return the list of reminders mapped from the given date.
+     */
     public ObservableList<Reminder> getDateSpecificReminders(LocalDate date) {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
         ArrayList<Reminder> retrievedReminders = dateToReminderMap.get(date);
@@ -98,10 +108,34 @@ public class UniqueReminderList implements Iterable<Reminder> {
             return reminderList;
         }
         Collections.sort(retrievedReminders);
-        for (Reminder reminder : retrievedReminders) {
-            reminderList.add(reminder);
-        }
+        reminderList.addAll(retrievedReminders);
         return reminderList;
+    }
+
+    /**
+     * Resets the internal list of reminders using the given list of companies.
+     *
+     * @param companyList The company from which the reminders are to be produced.
+     */
+    public void setReminders(ObservableList<Company> companyList) {
+        for (Company company : companyList) {
+            ReadOnlyRoleList roleList = company.getRoleList();
+            for (Role role : roleList.getRoleList()) {
+                addFromRole(company, role);
+            }
+        }
+    }
+
+    /**
+     * Checks the validity of the role with respect to the reminder window and
+     * adds a new reminder generated from the given company and role.
+     */
+    public void addFromRole(Company company, Role role) {
+        if (role.getReminderDate().isWithinReminderWindow()) {
+            Reminder reminder = new Reminder(company.getName(),
+                    role.getName(), role.getStatus(), role.getReminderDate());
+            add(reminder);
+        }
     }
 
     public Iterator<Reminder> iterator() {

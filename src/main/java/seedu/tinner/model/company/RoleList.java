@@ -55,7 +55,7 @@ public class RoleList implements ReadOnlyRoleList {
     public void resetData(ReadOnlyRoleList newData) {
         requireNonNull(newData);
 
-        setRoles(newData.getRoles());
+        setRoles(newData.getRoleList());
     }
 
     //// company-level operations
@@ -105,7 +105,7 @@ public class RoleList implements ReadOnlyRoleList {
     }
 
     @Override
-    public ObservableList<Role> getRoles() {
+    public ObservableList<Role> getRoleList() {
         return roles.asUnmodifiableObservableList();
     }
 
