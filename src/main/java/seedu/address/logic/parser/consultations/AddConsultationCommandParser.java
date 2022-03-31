@@ -33,13 +33,16 @@ public class AddConsultationCommandParser implements Parser<AddConsultationComma
      * and returns an AddConsultationCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+
+    public static final String EMPTY_PLACEHOLDER = "NIL";
+
     public AddConsultationCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_DATE, PREFIX_TIME, PREFIX_DIAGNOSIS,
                         PREFIX_FEE, PREFIX_NOTES);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC, PREFIX_DATE, PREFIX_TIME, PREFIX_NOTES,
-                PREFIX_DIAGNOSIS, PREFIX_FEE, PREFIX_NOTES)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC, PREFIX_DATE, PREFIX_TIME, PREFIX_DIAGNOSIS,
+                PREFIX_FEE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddConsultationCommand.MESSAGE_USAGE));
@@ -50,7 +53,7 @@ public class AddConsultationCommandParser implements Parser<AddConsultationComma
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         ConsultationDiagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
         ConsultationFee fee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_FEE).get());
-        ConsultationNotes notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).get());
+        ConsultationNotes notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).orElse(EMPTY_PLACEHOLDER));;
         ViewedNric.setViewedNric(ownerNric);
         Consultation consultation = new Consultation(ownerNric, date, time, diagnosis, fee, notes);
 

@@ -47,11 +47,7 @@ public class ConsultationCard extends UiPart<Region> {
         date.setText(consultation.getDate().toString() + ", " + consultation.getTime().toString());
         fee.setText(consultation.getFee().toString());
         diagnosis.setText(consultation.getDiagnosis().toString());
-        if (consultation.getNotes().toString().equals("")) {
-            notes.setText("N/A");
-        } else {
-            notes.setText(consultation.getNotes().toString());
-        }
+        notes.setText(consultation.getNotes().toString());
     }
     @Override
     public boolean equals(Object other) {

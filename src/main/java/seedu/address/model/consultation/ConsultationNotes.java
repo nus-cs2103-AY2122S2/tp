@@ -6,7 +6,7 @@ package seedu.address.model.consultation;
 public class ConsultationNotes {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Test Taken And Results can be blank";
+            "Notes can be blank";
 
     private String consultationNotes;
 
