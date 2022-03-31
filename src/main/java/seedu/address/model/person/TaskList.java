@@ -114,7 +114,13 @@ public class TaskList {
      * @return the number of tasks that were completed.
      */
     public int getNumOfCompletedTasks() {
-        return numOfCompletedTasks;
+        int count = 0;
+        for (Task task : taskList) {
+            if (task.isTaskComplete()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
