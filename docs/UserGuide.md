@@ -244,8 +244,9 @@ Shows all the upcoming events in amigos
 **Format**: `showevents [-a]`
 
 * Switches GUI to the events tab
+* if the `-a` flag is omitted it will only show upcoming events (Events with date and time after the system's date and time)
 * if the `-a` flag is provided it will show all events in Amigos 
-
+  
 **Examples**:
 * `showevents`
 * `showevents -a`
