@@ -212,4 +212,18 @@ public class Position {
         }
         return builder.toString();
     }
+
+    /**
+     * Creates csv output for position
+     */
+    public String convertToCsv() {
+        StringBuilder requirementString = new StringBuilder();
+        for (Requirement requirement : requirements) {
+            requirementString.append(requirement.requirementText);
+            requirementString.append(" | ");
+        }
+
+        return positionName.positionName + "," + description.descriptionText + "," + positionOpenings.toString()
+                + "," + positionOffers.toString() + "," + requirementString;
+    }
 }

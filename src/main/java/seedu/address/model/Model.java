@@ -234,4 +234,8 @@ public interface Model {
     void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
 
     void exportCsvApplicant() throws FileNotFoundException;
+
+    void exportCsvInterview() throws FileNotFoundException;
+
+    void exportCsvPosition() throws FileNotFoundException;
 }

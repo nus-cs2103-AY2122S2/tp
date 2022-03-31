@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -193,12 +194,27 @@ public class AddApplicantCommandTest {
 
         @Override
         public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void exportCsvApplicant() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportCsvInterview() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportCsvPosition() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

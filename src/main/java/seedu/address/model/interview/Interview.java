@@ -189,4 +189,12 @@ public class Interview {
         return builder.toString();
     }
 
+    /**
+     * Creates csv output for interview
+     */
+    public String convertToCsv() {
+        String applicantCsv = this.applicant.convertToCsv();
+        String positionCsv = this.position.convertToCsv();
+        return this.date + "," + this.status + "," + applicantCsv + "," + positionCsv;
+    }
 }
