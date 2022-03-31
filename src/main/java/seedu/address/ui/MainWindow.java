@@ -281,7 +281,7 @@ public class MainWindow extends UiPart<Stage> {
     public CommandResult executeCommandThenRefresh(String commandText) throws CommandException, ParseException {
         CommandResult commandResult = logic.execute(commandText);
 
-        if (focusListPanel.getCandidate().looseEqual(logic
+        if (focusListPanel != null && focusListPanel.getCandidate().looseEqual(logic
                 .getFilteredCandidateList()
                 .get(commandResult.getEditIndex()))) {
             executeCommand(FocusCommand.COMMAND_WORD + " "
