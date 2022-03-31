@@ -1,12 +1,13 @@
-package seedu.address.model.entry;
+package seedu.address.model.entry.predicate;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.entry.Entry;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Entry}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Entry> {
     private final List<String> keywords;
