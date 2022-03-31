@@ -115,11 +115,12 @@ public class ViewImageWindow extends UiPart<Stage> {
         Image displayImage;
         try {
             displayImage = new Image(new FileInputStream(newImage.getFilePath().get()));
+            description.setText(newImage.getDescription());
         } catch (FileNotFoundException e) {
             displayImage = new Image(this.getClass().getResourceAsStream("/images/Missing.png"));
+            description.setText("Missing File: " + newImage.getFilePath().get());
         }
         displayArea.setImage(displayImage);
-        description.setText(newImage.getDescription());
     }
 
     /**
