@@ -74,18 +74,28 @@ public class EditScheduleCommand extends ScheduleCommand {
         if (!editedInterview.hasMatchingAvailability()) {
             throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
         }
-        if (model.hasConflictingInterview(editedInterview)) {
-            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
-        }
-        model.setInterview(interviewToEdit, editedInterview);
-        model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
 
-        int indexCandidate = model.getFilteredCandidateList().indexOf(editedInterview.getCandidate());
-        Logger.getLogger(EditScheduleCommand.class.getName()).log(Level.INFO, String.valueOf(indexCandidate));
-        return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
-                + " to " + editedInterview.getInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                + " " + editedInterview.getInterviewStartTime()),
-                false, false, false, -1, true, indexCandidate);
+        try {
+            model.deleteInterview(interviewToEdit);
+            if (model.hasConflictingInterview(editedInterview)) {
+                throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+            }
+            model.addInterview(editedInterview);
+            model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
+            int indexCandidate = model.getFilteredCandidateList().indexOf(editedInterview.getCandidate());
+            Logger.getLogger(EditScheduleCommand.class.getName()).log(Level.INFO, String.valueOf(indexCandidate));
+            return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
+                    + " to " + editedInterview.getInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    + " " + editedInterview.getInterviewStartTime()),
+                    false, false, false, -1, true, indexCandidate);
+        } catch (CommandException e) {
+            model.addInterview(interviewToEdit);
+            throw e;
+        }
+
+
+
+
     }
 
     @Override
