@@ -44,7 +44,8 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Add, edit, delete students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
     - [Find students](#locating-students-by-name--find)
-    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter-labx-lab-status)
+    - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter)
+    - [View student details](#view-student-details--view)
 
 - [Manage labs](#lab-related-features)
     - [Add labs](#adding-a-lab--labadd)
@@ -169,6 +170,7 @@ Format: `labrm l/LAB_NUMBER`
 | **Edit**            | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
 | **Filter**          | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`                                                                                           |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                              |
+| **View**            | `view INDEX`                                                                                                                                            |
 | **Add lab**         | `labadd l/LAB_NUMBER`                                                                                                                                   |
 | **Edit lab status** | `labstat INDEX l/LAB_NUMBER s/LAB_STATUS`                                                                                                               |
 | **Remove lab**      | `labrm l/LAB_NUMBER`                                                                                                                                    |
