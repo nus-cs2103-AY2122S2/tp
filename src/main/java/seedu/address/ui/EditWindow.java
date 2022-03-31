@@ -138,7 +138,7 @@ public class EditWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the edit window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
@@ -152,7 +152,7 @@ public class EditWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the edit window.
      */
     public void focus() {
         getRoot().requestFocus();
@@ -174,7 +174,7 @@ public class EditWindow extends UiPart<Stage> {
         // First 2 are empty because they are for
         // 0: command word
         // 1: index, which has no prefix.
-        String[] prefixes = {"", "", "n/", "p/", "a/", "e"};
+        String[] prefixes = {"", "", "n/", "p/", "a/", "e/"};
         String[] personFields = {"edit", index, name, phone, address, email};
 
         if (index.equals("")) {

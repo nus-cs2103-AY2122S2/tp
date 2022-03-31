@@ -105,6 +105,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getArchivedAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }

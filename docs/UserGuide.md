@@ -2,8 +2,11 @@
 layout: page
 title: User Guide
 ---
+## Introduction
 
-ModuleMateFinder (MMF) is a **desktop app for managing contacts in your educational organization, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MMF can get your contact management tasks done faster than traditional GUI apps.
+ModuleMate finder (MMF) is a **desktop application for managing contacts and finding ModuleMates**. You can easily keep track of what modules your friends are/will be taking, so you can contact them to form groups.  
+If you can type fast, you can get your contact management tasks done fast, but even if you are not a slow typist -- fret not, you can still use it!
+
 
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -115,7 +118,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu a/123, Clementi Ave 16, #01-321`
 
-Additionally, if one were to simply use `add`, it would open up a new window to allow users to systematically add a new contact
+Additionally, if one were to simply use `add`, it would open up a new window to allow you to systematically add a new contact
 ![add window](images/addWindow.png)  
 Then, simply fill up the fields as guided in the window. Users can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
@@ -133,6 +136,8 @@ Examples:
 * `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd person
 * `addmodule 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd person
 
+_**See below for an example image**_
+
 ### Adding a comment for a contact : `comment`
 
 Adds a comment for the specified person in ModuleMateFinder.
@@ -141,14 +146,15 @@ Format: `comment INDEX c/COMMENT`
 
 * Adds a comment for the person at the specified `INDEX`.
 * `INDEX` must be a **positive integer** 1, 2, 3, ...
-* `COMMENT` cannot be blank.
-* Any existing comments for a person will be overwritten by the new user input.
-* If used with an **empty comment field** (i.e. `comment 1 c/`), the command will be treated as a **delete
+* Any existing comments for a person will be overwritten by the new input.
+* If used with an **empty comment** (i.e. `comment 1 c/`), the command will be treated as a **delete
   command** and removes the comment of the specified person.
 
 Examples:
 * `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd person.
 * `comment 3` will delete the comment for the 3rd person.
+
+_**See below for an example image**_
 
 ### Adding a status for a contact : `status`
 
@@ -165,6 +171,9 @@ Examples:
 - `status 1 s/blacklist` tags the 1st person in ModuleMate Finder as blacklisted.
 - `status 2 s/favourite` tags the 2nd person in ModuleMate Finder as favourite.
 - `status 2 s/` will untag the 2nd person in ModuleMate Finder, leaving them with no `Status`
+
+Annotated image of what a `Person` with `Status`, `Module`, and `Comment`
+![Example of a person with Status and Comment](images/annotated_person.png)
 
 ### Copy contacts in list : `copy`
 
@@ -192,6 +201,7 @@ Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MOD
 Examples:
 * `copy 1 n/ p/ e/ f/json`  will copy name, phone and email of first person in JSON format.
 * `copy f/csv` will copy the entire list in csv format.
+* `copy 1 e/` will copy the email of the first person. You may then go to your mailing app and email the person!
 
 ### Clearing all entries : `clear`
 
@@ -201,6 +211,11 @@ Format: `clear`
 
 Examples:
 - `clear` wipes all data from ModuleMate Finder.
+
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Typing this command will cause you to lose all data. Use with caution!
+</div>
 
 
 ### Clearing all modules for a person : `clearmodules`
@@ -256,8 +271,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * **Modules cannot be edited** through the `edit` command.
+  * Instead, use `deletemodule` to remove the modules first, then `addmodule` to add the modules to a person.
 
-Additionally, if one were to simply use `edit`, it would open up a new window to allow users to systematically edit a chosen contact  
+Additionally, if one were to simply use `edit`, it would open up a new window to allow you to systematically edit a chosen contact  
 ![edit window](images/edit_window.png)  
 Then, simply fill up the fields as guided in the window.
 
@@ -268,15 +284,15 @@ Examples:
 
 ### Locating a person: `find`
 
-Finds a person by the given flag and keyword.
+Finds a person by the given keyword.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g. `hans` will match `Hans`
-- Only the given **flag + keyword** is searched
-- Keyword not matching the indicator is ignored
-- Only **full keywords will be matched** e.g. `CS323` will not match `CS3230`
--Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Only the given **keyword** is searched
+- Words not matching the given keyword is ignored
+- Only **full keywords will be matched** e.g. `Pol` will not match `Police`
+- Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -289,12 +305,18 @@ Finds a person by the given module code.
 
 Format: `filter MODULE`
 
-- Only the **given flag + keyword** is searched
-- Keyword not matching the indicator is ignored
+
+- The search is key insensitive
+- Only the **given keyword** is searched
+- Words not matching the given keyword is ignored
 - Valid module code have 2-3 prefix letters followed by 4 digits and one optional letter.
 
 Examples:
 * `filter CS3230`  will find all persons with the module CS3230
+
+![Filter example](./images/filterExample.png)
+
+
 
 ### Sorting contacts in list: `sort`
 
@@ -374,7 +396,7 @@ ModuleMateFinder data are saved in the hard disk automatically after any command
 
 ### Editing the data file
 
-ModuleMateFinder data are saved as a JSON file `[JAR file location]/data/ModuleMateFinder.json`. Advanced users are welcome to update data directly by editing that data file.
+ModuleMateFinder data are saved as a JSON file `[JAR file location]/data/ModuleMateFinder.json`. If you are an advanced user, you are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModuleMateFinder will discard all data and start with an empty data file at the next run.
