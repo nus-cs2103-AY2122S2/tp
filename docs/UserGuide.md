@@ -396,6 +396,16 @@ Examples:
 Example Usage: `schedule date/10-10-2022`
 ![display schedule](images/user-guide/display_schedule.png)
 
+#### 4.5.3 Viewing next week schedule: `scheduleNext`
+Display the schedule for next week from the last selected date.
+
+Format: `scheduleNext`
+
+#### 4.5.4 Viewing previous week schedule: `schedulePreivous`
+Display the schedule for previous week from the last selected date.
+
+Format: `schedulePrevious`
+
 ### 4.6 Miscellaneous
 
 #### 4.6.1 Viewing help : `help`
