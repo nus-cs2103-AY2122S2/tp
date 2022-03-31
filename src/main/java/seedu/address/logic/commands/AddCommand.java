@@ -71,6 +71,9 @@ public class AddCommand extends Command {
             return new CommandResult(SHOWING_ADD_WINDOW, false, true, false, false, false, false, "");
         }
 
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
         // Note that although we disallow adding in archiveBook, we have to do this still
         // As the moving of data between archiveBook and addressBook uses AddCommand
         if (isArchiveBook()) {
@@ -79,10 +82,6 @@ public class AddCommand extends Command {
             // Disallows adding if such a person already exists in the archives
             if (model.hasArchivedPerson(toAdd)) {
                 throw new CommandException("This person is already in your archives");
-            }
-
-            if (model.hasPerson(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
             model.addPerson(toAdd);
         }

@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 class CommentCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
 
     @Test
@@ -30,7 +30,8 @@ class CommentCommandTest {
         CommentCommand commentCommand = new CommentCommand(INDEX_FIRST_PERSON, new Comment(VALID_COMMENT));
         String expectedMessage = String.format(CommentCommand.MESSAGE_ADD_SUCCESS,
                 firstPerson.getName(), VALID_COMMENT);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new AddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(commentCommand, model, expectedMessage, expectedModel);

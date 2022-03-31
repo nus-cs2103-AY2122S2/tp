@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 class AddModuleCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
     void execute_addModuleUnfilteredList_success() {
@@ -35,7 +35,8 @@ class AddModuleCommandTest {
         AddModuleCommand addModuleCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
 
         String expectedMessage = String.format(AddModuleCommand.MESSAGE_SUCCESS, firstPerson.getName(), modules);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new AddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(addModuleCommand, model, expectedMessage, expectedModel);

@@ -153,7 +153,8 @@ public class LogicManager implements Logic {
             }
         } catch (DuplicatePersonException e) {
             saveBooks();
-            throw new CommandException(String.format(ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
+            throw new CommandException(String.format(
+                    ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
         } catch (DataConversionException | IOException e) {
             System.out.println("Exception caught: " + e);
         }
