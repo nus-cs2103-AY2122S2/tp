@@ -64,7 +64,7 @@ public class GradeCommandParser implements Parser<GradeCommand> {
                 }
                 TaModule module = model.getUnfilteredModuleList().get(moduleIndex.getZeroBased());
                 assessment = model.getUnfilteredAssessmentList().stream()
-                        .filter(a -> a.getTaModule().isSameModule(module)
+                        .filter(a -> a.getModule().isSameModule(module)
                         && a.getSimpleName().equals(simpleName)).findFirst().orElseThrow(() ->
                 new ParseException(MESSAGE_ASSESSMENT_NOT_FOUND));
             }
