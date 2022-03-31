@@ -315,7 +315,11 @@ public class ModelManager implements Model {
                     .map(Interview::convertToCsv)
                     .forEach(pw::println);
         }
-        assert(csvOutputFile.exists());
+        assert (csvOutputFile.exists());
+    }
+    
+    public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+        return addressBook.isSameApplicantPosition(applicant, position);
     }
 
     //=========== Filtered Position List Accessors =============================================================

@@ -148,6 +148,11 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+            return true;
+        }
+
+        @Override
         public void deletePerson(Applicant target) {
             throw new AssertionError("This method should not be called.");
         }

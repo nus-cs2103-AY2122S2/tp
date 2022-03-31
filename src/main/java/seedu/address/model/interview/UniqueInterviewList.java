@@ -141,6 +141,18 @@ public class UniqueInterviewList implements Iterable<Interview> {
         return interviews;
     }
 
+    /**
+     * Checks if the specified applicant has an interview for the specified position.
+     */
+    public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+        for (Interview i : getApplicantsInterviews(applicant)) {
+            if (i.isInterviewForPosition(position)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setInterviews(UniqueInterviewList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
