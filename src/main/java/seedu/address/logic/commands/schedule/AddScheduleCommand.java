@@ -3,6 +3,8 @@ package seedu.address.logic.commands.schedule;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -12,6 +14,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.Interview;
+
+import javax.swing.text.DateFormatter;
 
 /**
  * Schedules a candidate identified using it's displayed index from the address book for an interview
@@ -27,7 +31,7 @@ public class AddScheduleCommand extends ScheduleCommand {
             + "Example: " + COMMAND_WORD + " candidate/1 at/23-09-2022 13:30";
 
     public static final String MESSAGE_SCHEDULED_CANDIDATE_SUCCESS =
-            "Successfully scheduled %1$s %2$s for interview on %3$s %4$s";
+            "Successfully scheduled interview for %1$s %2$s on %3$s %4$s";
 
     public static final String MESSAGE_CANDIDATE_COMPLETED =
             "Candidate has already completed his/her interview.";
@@ -78,7 +82,7 @@ public class AddScheduleCommand extends ScheduleCommand {
         model.setCandidate(candidateToInterview, editedCandidate);
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),
-                toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate(), toAdd.getInterviewStartTime()),
+                toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), toAdd.getInterviewStartTime()),
                 false, false, false, -1, true, targetIndex.getZeroBased());
     }
 
