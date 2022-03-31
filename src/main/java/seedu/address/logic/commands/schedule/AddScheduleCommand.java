@@ -63,24 +63,18 @@ public class AddScheduleCommand extends ScheduleCommand {
         if (candidateToInterview.isCompleted()) {
             throw new CommandException(MESSAGE_CANDIDATE_COMPLETED);
         }
-
         if (model.hasInterviewCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
         }
-
-        if (model.hasConflictingInterview(toAdd)) {
-            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
-        }
-
-        if (!toAdd.hasMatchingAvailability()) {
-            throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
-        }
-
         if (!toAdd.isDuringOfficeHour()) {
             throw new CommandException(MESSAGE_NOT_OFFICE_HOUR);
         }
-
-
+        if (!toAdd.hasMatchingAvailability()) {
+            throw new CommandException(MESSAGE_CANDIDATE_NOT_AVAILABLE);
+        }
+        if (model.hasConflictingInterview(toAdd)) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        }
         model.setCandidate(candidateToInterview, editedCandidate);
         model.addInterview(toAdd);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),

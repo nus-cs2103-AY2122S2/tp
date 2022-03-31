@@ -83,11 +83,12 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Candidate> lastShownList = model.getFilteredCandidateList();
         List<Interview> interviewSchedule = model.getFilteredInterviewSchedule();
-
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NO_CANDIDATES_DISPLAYED));
+        }
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
         }
-
         Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
         Candidate editedCandidate = createEditedCandidate(candidateToEdit, editCandidateDescriptor);
 

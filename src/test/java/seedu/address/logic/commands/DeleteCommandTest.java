@@ -88,7 +88,7 @@ public class DeleteCommandTest {
         model.updateFilteredCandidateList(Model.PREDICATE_SHOW_EMPTY_LIST);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_CANDIDATES_DISPLAYED);
     }
 
     @Test
