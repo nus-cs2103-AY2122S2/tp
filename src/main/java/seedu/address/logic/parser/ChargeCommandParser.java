@@ -6,13 +6,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_NO_CHARGE_SET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE_MONTH_YEAR;
 
+import java.time.YearMonth;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ChargeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.charge.Charge;
-import seedu.address.model.charge.ChargeDate;
 
 
 public class ChargeCommandParser implements Parser<ChargeCommand> {
@@ -27,7 +28,6 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CHARGE_MONTH_YEAR, PREFIX_CHARGE);
-
         boolean isMonthYearMissing = argMultimap.getValue(PREFIX_CHARGE_MONTH_YEAR).isEmpty();
         boolean isChargeMissing = argMultimap.getValue(PREFIX_CHARGE).isEmpty();
         if (isMonthYearMissing && isChargeMissing) {
@@ -47,12 +47,12 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
                     ChargeCommand.MESSAGE_USAGE), ive);
         }
 
-        ChargeDate chargeDate;
+        YearMonth chargeDate;
         try {
             chargeDate = ParserUtil.parseChargeDate(argMultimap.getValue(PREFIX_CHARGE_MONTH_YEAR).get());
         } catch (ParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ChargeDate.MESSAGE_CONSTRAINTS), e);
+                    ChargeCommand.MESSAGE_INVALID_DATE_FORMAT), e);
         }
 
         Charge charge;

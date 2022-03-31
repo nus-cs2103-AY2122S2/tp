@@ -10,6 +10,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PET;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
 
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -20,10 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.charge.Charge;
-import seedu.address.model.charge.ChargeDate;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PetBuilder;
-
 
 
 class ChargeCommandTest {
@@ -37,36 +38,41 @@ class ChargeCommandTest {
     private static final String DATE_STUB_DIFF_MONTH = "2022-02-26";
     private static final String DATE_STUB_DIFF_YEAR = "2021-03-26";
 
-
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-yyyy");
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_computeChargeNoChargeUnfilteredList_success() {
-        ChargeDate chargeDate = new ChargeDate(CHARGE_DATE_STUB);
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        String petName = firstPet.getName().toString();
 
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String month = chargeCommand.getMonthName();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, 0.0));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 0.0, month));
 
         assertCommandSuccess(chargeCommand, model, expectedCommandResult, model);
     }
 
     @Test
     public void execute_computeChargeWithChargeUnfilteredList_success() {
-        ChargeDate chargeDate = new ChargeDate(CHARGE_DATE_STUB);
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
 
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkPresent = new PetBuilder(firstPet)
                 .withPresentAttendanceEntry(DATE_STUB)
                 .build();
+        String petName = petToMarkPresent.getName().toString();
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String month = chargeCommand.getMonthName();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, 200.50));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 200.50, month));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
@@ -75,7 +81,7 @@ class ChargeCommandTest {
 
     @Test
     public void execute_computeChargeWithMoreChargeUnfilteredList_success() {
-        ChargeDate chargeDate = new ChargeDate(CHARGE_DATE_STUB);
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
 
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
@@ -85,11 +91,12 @@ class ChargeCommandTest {
                 .withPresentAttendanceEntry(DATE_STUB_DIFF_MONTH)
                 .withPresentAttendanceEntry(DATE_STUB_DIFF_YEAR)
                 .build();
-
+        String petName = petToMarkPresent.getName().toString();
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String month = chargeCommand.getMonthName();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, 401.00));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
@@ -98,7 +105,7 @@ class ChargeCommandTest {
 
     @Test
     public void execute_computeChargeWithInvalidIndex_failure() {
-        ChargeDate chargeDate = new ChargeDate(CHARGE_DATE_STUB);
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         ChargeCommand chargeCommand = new ChargeCommand(outOfBoundIndex, chargeDate, charge);
@@ -110,21 +117,25 @@ class ChargeCommandTest {
     public void execute_computeChargeNoChargefilteredList_success() throws CommandException {
         showPetAtIndex(model, INDEX_THIRD_PET);
 
-        ChargeDate chargeDate = new ChargeDate(CHARGE_DATE_STUB);
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        String petName = firstPet.getName().toString();
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
 
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String month = chargeCommand.getMonthName();
+
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, 0.0));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 0.0, month));
 
         assertCommandSuccess(chargeCommand, model, expectedCommandResult, model);
     }
 
     @Test
-    public void execute_computeChargeWithChargefilteredList_success() throws CommandException {
+    public void execute_computeChargeWithChargefilteredList_success() {
         showPetAtIndex(model, INDEX_THIRD_PET);
 
-        ChargeDate chargeDate = new ChargeDate(CHARGE_DATE_STUB);
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
 
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
@@ -135,11 +146,12 @@ class ChargeCommandTest {
                 .withPresentAttendanceEntry(DATE_STUB_DIFF_YEAR)
                 .build();
         model.setPet(firstPet, petToMarkPresent);
-
+        String petName = petToMarkPresent.getName().toString();
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String month = chargeCommand.getMonthName();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, 401.00));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month));
 
         assertCommandSuccess(chargeCommand, model, expectedCommandResult, model);
     }
@@ -147,11 +159,14 @@ class ChargeCommandTest {
 
     @Test
     public void equals() {
+        YearMonth chargeDate = YearMonth.parse(CHARGE_DATE_STUB, formatter);
+        YearMonth chargeDateTwo = YearMonth.parse(CHARGE_DATE_STUB_TWO, formatter);
+
         final ChargeCommand standardCommand = new ChargeCommand(INDEX_FIRST_PET,
-                    new ChargeDate(CHARGE_DATE_STUB), new Charge(CHARGE_AMOUNT_STUB));
+                chargeDate, new Charge(CHARGE_AMOUNT_STUB));
         // same values -> returns true
         ChargeCommand commandWithSameValues = new ChargeCommand(INDEX_FIRST_PET,
-                new ChargeDate(CHARGE_DATE_STUB), new Charge(CHARGE_AMOUNT_STUB));
+                chargeDate, new Charge(CHARGE_AMOUNT_STUB));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -161,13 +176,13 @@ class ChargeCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different index -> returns false
         assertFalse(standardCommand.equals(new ChargeCommand(INDEX_SECOND_PET,
-                new ChargeDate(CHARGE_DATE_STUB), new Charge(CHARGE_AMOUNT_STUB))));
+                chargeDate, new Charge(CHARGE_AMOUNT_STUB))));
         // different charge date, same charge amount and total chargeable -> returns false
         assertFalse(standardCommand.equals(new ChargeCommand(INDEX_SECOND_PET,
-                new ChargeDate(CHARGE_DATE_STUB_TWO), new Charge(CHARGE_AMOUNT_STUB_ZERO))));
+                chargeDateTwo, new Charge(CHARGE_AMOUNT_STUB_ZERO))));
         // different charge amount, same charge amount and total chargeable -> returns false
         assertFalse(standardCommand.equals(new ChargeCommand(INDEX_SECOND_PET,
-                new ChargeDate(CHARGE_DATE_STUB_TWO), new Charge(CHARGE_AMOUNT_STUB_ZERO))));
+                chargeDateTwo, new Charge(CHARGE_AMOUNT_STUB_ZERO))));
     }
 
 }
