@@ -382,7 +382,7 @@ After the data is written into the new file, `ExportCommand` returns a `CommandR
 <img src="images/ImportSequenceDiagram.png">
 </div>
 
-### Design considerations:
+#### Design considerations:
 Implementing the FileChooser library allows us to create a File Explorer GUI similar to the user's Operating System's native File Explorer GUI.
 
 ---
