@@ -49,6 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private EmailWindow emailWindow;
     private static HelpWindow helpWindow;
+    private ImportWindow importWindow;
 
     public static File excelFile;
 
@@ -184,13 +185,18 @@ public class MainWindow extends UiPart<Stage> {
             ImportFileParser converter = new ImportFileParser();
             List<String> res = converter.JsonToPerson(selectedFile);
             System.out.println(res);
-
             for(int i = 0; i < res.size(); i++) {
                 executeCommand(res.get(i));
-                //TimeUnit.SECONDS.sleep(1);
             }
-
         }
+    }
+
+    /**
+     * Instantiates a new EmailWindow and shows it.
+     */
+    public void createImportWindow() {
+        importWindow = new ImportWindow();
+        importWindow.show();
     }
 
     /**
