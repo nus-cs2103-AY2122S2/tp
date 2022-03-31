@@ -61,10 +61,20 @@ public class LogicManager implements Logic {
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_SAVE_ERROR_MESSAGE + ioe, ioe);
         } catch (DataConversionException dce) {
+            undoImport();
             throw new CommandException(FILE_OPS_READ_ERROR_MESSAGE, dce);
         }
 
         return commandResult;
+    }
+
+    private void undoImport() throws CommandException {
+        try {
+            // Since model's show list has yet to be updated, we can "undo" the import
+            storage.saveShowList(model.getShowList());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_SAVE_ERROR_MESSAGE + ioe, ioe);
+        }
     }
 
     @Override
