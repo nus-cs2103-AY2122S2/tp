@@ -1,35 +1,34 @@
 @startuml
 !include Style.puml
-'https://plantuml.com/sequence-diagram
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PutCommandParser" as PutCommandParser LOGIC_COLOR
 participant "u:PutCommand" as PutCommand LOGIC_COLOR
 end box
 
 box Model
-participant ":Model" as Model
-participant ":AddressBook" as AddressBook
+participant ":Model" as Model LOGIC_COLOR_T4
+participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
 end box
 
 [-> LogicManager : execute(put)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(put)
-activate AddressBookParser
+LogicManager -> PutCommandParser : parseCommand(put)
+activate PutCommandParser
 
 create PutCommand
-AddressBookParser -> PutCommand
+PutCommandParser -> PutCommand
 activate PutCommand
 
-PutCommand --> AddressBookParser
+PutCommand --> PutCommandParser
 deactivate PutCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+PutCommandParser --> LogicManager : u
+deactivate PutCommandParser
 
-LogicManager -> PutCommand : execute()
+LogicManager -> PutCommand : execute(model)
 activate PutCommand
 
 PutCommand -> Model : putPersonIntoLineup()

@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_SCHEDULE;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;
 
-    private static String MESSAGE_VIEW_SUCCESS = "Listed all information!";
+    private static String messageViewSuccess = "Listed all information!";
 
     private final Predicate<Person> predicate;
     private final Predicate<Schedule> predicateSchedule;
@@ -82,18 +82,18 @@ public class ViewCommand extends Command {
             model.updateFilteredScheduleList(predicateSchedule);
         }
         changeSuccessMessage(model);
-        return new CommandResult(MESSAGE_VIEW_SUCCESS);
+        return new CommandResult(messageViewSuccess);
     }
 
     private void changeSuccessMessage(Model model) {
         if (keywords.size() > 1 && (keywords.contains("L/") || keywords.contains("P/"))) {
-            MESSAGE_VIEW_SUCCESS = String.format(
+            messageViewSuccess = String.format(
                     Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
         } else if (keywords.contains("S/")) {
-            MESSAGE_VIEW_SUCCESS = String.format(
+            messageViewSuccess = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else {
-            MESSAGE_VIEW_SUCCESS = "Listed all persons!";
+            messageViewSuccess = "Listed all persons!";
         }
     }
 

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -88,7 +87,7 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        final List<LineupName> personLineups = new ArrayList<>();
+        final List<seedu.address.model.lineup.LineupName> personLineups = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
@@ -149,7 +148,7 @@ class JsonAdaptedPerson {
         final Weight modelWeight = new Weight(weight);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Set<LineupName> modelLineups = new HashSet<>(personLineups);
+        final Set<seedu.address.model.lineup.LineupName> modelLineups = new HashSet<>(personLineups);
 
         return new Person(modelName, modelPhone, modelEmail,
                 modelHeight, modelJerseyNumber, modelTags, modelWeight, modelLineups);
@@ -157,7 +156,7 @@ class JsonAdaptedPerson {
 
     @Override
     public String toString() {
-        return name + " " + email + " " + height + " " + weight +" " + jerseyNumber + " " + phone + " " + tagged
+        return name + " " + email + " " + height + " " + weight + " " + jerseyNumber + " " + phone + " " + tagged
                 + " " + lineups;
     }
 }

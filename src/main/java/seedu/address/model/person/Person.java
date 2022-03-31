@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +26,7 @@ public class Person {
     private final Height height;
     private final JerseyNumber jerseyNumber;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<LineupName> lineups = new HashSet<>();
+    private final Set<seedu.address.model.lineup.LineupName> lineups = new HashSet<>();
     private final Weight weight;
 
     /**
@@ -50,7 +49,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Height height, JerseyNumber jerseyNumber,
-                  Set<Tag> tags, Weight weight, Set<LineupName> lineups) {
+                  Set<Tag> tags, Weight weight, Set<seedu.address.model.lineup.LineupName> lineups) {
         requireAllNonNull(name, phone, email, height, jerseyNumber, tags, weight, lineups);
         this.name = name;
         this.phone = phone;
@@ -99,11 +98,11 @@ public class Person {
      * Returns an immutable lineup set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<LineupName> getLineupNames() {
+    public Set<seedu.address.model.lineup.LineupName> getLineupNames() {
         return Collections.unmodifiableSet(this.lineups);
     }
 
-    public Set<LineupName> getModifiableLineupNames() {
+    public Set<seedu.address.model.lineup.LineupName> getModifiableLineupNames() {
         return this.lineups;
     }
 
@@ -116,7 +115,8 @@ public class Person {
      * @param oldName The old LineupName
      * @param newName The new LineupName
      */
-    public void replaceLineupName(LineupName oldName, LineupName newName) {
+    public void replaceLineupName(seedu.address.model.lineup.LineupName oldName,
+                                  seedu.address.model.lineup.LineupName newName) {
         this.lineups.remove(oldName);
         this.lineups.add(newName);
     }
@@ -210,7 +210,7 @@ public class Person {
                 .append(getJerseyNumber());
 
         Set<Tag> tags = getTags();
-        Set<LineupName> lineups = getLineupNames();
+        Set<seedu.address.model.lineup.LineupName> lineups = getLineupNames();
 
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");

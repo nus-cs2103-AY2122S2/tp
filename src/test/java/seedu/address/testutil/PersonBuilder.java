@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -33,7 +32,7 @@ public class PersonBuilder {
     private JerseyNumber jerseyNumber;
     private Weight weight;
     private Set<Tag> tags;
-    private Set<LineupName> lineupNames;
+    private Set<seedu.address.model.lineup.LineupName> lineupNames;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.

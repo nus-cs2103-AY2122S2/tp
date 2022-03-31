@@ -1,0 +1,47 @@
+@startuml
+!include Style.puml
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EdotCommandParser" as EditCommandParser LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+box Model
+participant ":Model" as Model LOGIC_COLOR_T4
+participant ":AddressBook" as AddressBook LOGIC_COLOR_T4
+end box
+
+[-> LogicManager : execute(delete)
+activate LogicManager
+
+LogicManager -> EditCommandParser : parseCommand(add)
+activate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser
+deactivate EditCommand
+
+EditCommandParser --> LogicManager : e
+deactivate EditCommandParser
+
+LogicManager -> EditCommand : execute(model)
+activate EditCommand
+
+EditCommand -> Model : editLineup()
+activate Model
+
+Model -> AddressBook : editLineup()
+activate AddressBook
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> EditCommand
+deactivate Model
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+@enduml

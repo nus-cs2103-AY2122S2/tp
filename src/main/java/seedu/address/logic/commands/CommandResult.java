@@ -38,6 +38,9 @@ public class CommandResult {
         this.toLight = false;
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean toDark, boolean toLight) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;

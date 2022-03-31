@@ -70,8 +70,8 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getJerseyNumber().ifPresent(
-                jerseyNumber -> sb.append(PREFIX_JERSEY_NUMBER).append(jerseyNumber.value).append(" "));
+        descriptor.getJerseyNumber().ifPresent(jerseyNumber ->
+                sb.append(PREFIX_JERSEY_NUMBER).append(jerseyNumber.value).append(" "));
         descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.value).append(" "));
         descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.value).append(" "));
         if (descriptor.getTags().isPresent()) {

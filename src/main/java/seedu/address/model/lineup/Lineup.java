@@ -77,6 +77,17 @@ public class Lineup {
         return this.lineupName.equals(otherLineupName);
     }
 
+    /**
+     * Checks two lineup are same
+     */
+    public boolean isSameLineup(Lineup otherLineup) {
+        if (otherLineup == this) {
+            return true;
+        }
+        return otherLineup != null
+                && sameLineupName(otherLineup.lineupName);
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +11,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.JerseyNumber;
@@ -147,13 +148,13 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static LineupName parseLineupName(String lineupName) throws ParseException {
+    public static seedu.address.model.lineup.LineupName parseLineupName(String lineupName) throws ParseException {
         requireNonNull(lineupName);
         String trimmedLineupName = lineupName.trim();
-        if (!LineupName.isValidLineupName(trimmedLineupName)) {
-            throw new ParseException(LineupName.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.lineup.LineupName.isValidLineupName(trimmedLineupName)) {
+            throw new ParseException(seedu.address.model.lineup.LineupName.MESSAGE_CONSTRAINTS);
         }
-        return new LineupName(trimmedLineupName);
+        return new seedu.address.model.lineup.LineupName(trimmedLineupName);
     }
 
     /**
@@ -208,9 +209,12 @@ public class ParserUtil {
     public static ScheduleDateTime parseScheduleDateTime(String scheduleDateTime) throws ParseException {
         requireNonNull(scheduleDateTime);
         String trimmedDateTime = scheduleDateTime.trim();
-        if (!ScheduleDateTime.isValidScheduleDateTime(trimmedDateTime)) {
+        try {
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").parse(trimmedDateTime);
+        } catch (DateTimeParseException e) {
             throw new ParseException(ScheduleDateTime.MESSAGE_CONSTRAINTS);
         }
+
         return new ScheduleDateTime(trimmedDateTime);
     }
 

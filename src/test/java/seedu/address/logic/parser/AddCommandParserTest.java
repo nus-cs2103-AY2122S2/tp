@@ -2,18 +2,22 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.JERSEY_NUMBER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.JERSEY_NUMBER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PF;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_SF;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JERSEY_NUMBER_BOB;
@@ -24,10 +28,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SF;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.JERSEY_NUMBER_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.JERSEY_NUMBER_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_SF;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
@@ -67,34 +67,34 @@ public class AddCommandParserTest {
         assertTrue(true);
 
         // multiple names - last name accepted
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + JERSEY_NUMBER_DESC_BOB + WEIGHT_DESC_BOB
                 + TAG_DESC_SF, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER + PHONE_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + PHONE_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + JERSEY_NUMBER_DESC_BOB + WEIGHT_DESC_BOB
                 + TAG_DESC_SF, new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER + EMAIL_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + EMAIL_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + JERSEY_NUMBER_DESC_BOB + WEIGHT_DESC_BOB
                 + TAG_DESC_SF, new AddCommand(expectedPerson));
 
         // multiple heights - last height accepted
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER + HEIGHT_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + HEIGHT_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + JERSEY_NUMBER_DESC_BOB + WEIGHT_DESC_BOB
                 + TAG_DESC_SF, new AddCommand(expectedPerson));
 
         // multiple weights - last weight accepted
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER + WEIGHT_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + WEIGHT_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + JERSEY_NUMBER_DESC_BOB + WEIGHT_DESC_BOB
                 + TAG_DESC_SF, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_SF, VALID_TAG_PF)
                 .build();
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER + TAG_DESC_PF + NAME_DESC_BOB + PHONE_DESC_BOB
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + TAG_DESC_PF + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + JERSEY_NUMBER_DESC_BOB + WEIGHT_DESC_BOB
                 + TAG_DESC_SF, new AddCommand(expectedPersonMultipleTags));
     }
@@ -103,7 +103,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser,  " " + PREFIX_PLAYER  + NAME_DESC_AMY + PHONE_DESC_AMY
+        assertParseSuccess(parser, " " + PREFIX_PLAYER + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + HEIGHT_DESC_AMY + JERSEY_NUMBER_DESC_AMY + WEIGHT_DESC_AMY,
                 new AddCommand(expectedPerson));
 
@@ -163,18 +163,18 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_Lineup_success() {
+    public void parse_lineup_success() {
         // new lineup with valid values
         Lineup expectedLineup = new LineupBuilder().build();
-        assertParseSuccess(parser,  " " + PREFIX_LINEUP + " " + PREFIX_NAME + DEFAULT_LINEUP_NAME,
+        assertParseSuccess(parser, " " + PREFIX_LINEUP + " " + PREFIX_NAME + DEFAULT_LINEUP_NAME,
                 new AddCommand(expectedLineup));
     }
 
     @Test
-    public void parse_Schedule_success() {
+    public void parse_schedule_success() {
         // new schedule with valid values
         Schedule expectedSchedule = new ScheduleBuilder().build();
-        assertParseSuccess(parser,  " " + PREFIX_SCHEDULE + " " + PREFIX_NAME + DEFAULT_SCHEDULE_NAME + " "
+        assertParseSuccess(parser, " " + PREFIX_SCHEDULE + " " + PREFIX_NAME + DEFAULT_SCHEDULE_NAME + " "
                 + PREFIX_DESCRIPTION + DEFAULT_DESCRIPTION + " " + PREFIX_DATE + DEFAULT_DATETIME,
                 new AddCommand(expectedSchedule));
     }

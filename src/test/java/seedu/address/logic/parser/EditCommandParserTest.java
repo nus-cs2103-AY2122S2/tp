@@ -1,20 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.model.lineup.Lineup;
-import seedu.address.model.lineup.LineupName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.schedule.Schedule;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.EditScheduleDescriptorBuilder;
-import seedu.address.testutil.LineupBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.ScheduleBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.EditCommand.createEditedLineup;
@@ -31,6 +16,21 @@ import static seedu.address.testutil.ScheduleBuilder.DEFAULT_DATETIME;
 import static seedu.address.testutil.ScheduleBuilder.DEFAULT_DESCRIPTION;
 import static seedu.address.testutil.ScheduleBuilder.DEFAULT_SCHEDULE_NAME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
+import seedu.address.testutil.LineupBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ScheduleBuilder;
 
 public class EditCommandParserTest {
     private final EditCommandParser parser = new EditCommandParser();
@@ -57,11 +57,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_editSchedule_success() {
-       Schedule schedule = new ScheduleBuilder().build();
-       EditCommand.EditScheduleDescriptor editedScheduleDescriptor =
+        Schedule schedule = new ScheduleBuilder().build();
+        EditCommand.EditScheduleDescriptor editedScheduleDescriptor =
                 new EditScheduleDescriptorBuilder(schedule).build();
 
-       assertParseSuccess(parser,  EditCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + "1 "
+        assertParseSuccess(parser, EditCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + "1 "
                + PREFIX_NAME + DEFAULT_SCHEDULE_NAME + " " + PREFIX_DESCRIPTION + DEFAULT_DESCRIPTION + " "
                + PREFIX_DATE + DEFAULT_DATETIME, new EditCommand(INDEX_FIRST_SCHEDULE, editedScheduleDescriptor));
     }
