@@ -1,9 +1,11 @@
 package woofareyou.model.pet;
 
+import static java.util.Objects.requireNonNull;
+
 import woofareyou.commons.util.AppUtil;
 
-import static java.util.Objects.requireNonNull;
-import static woofareyou.commons.util.AppUtil.checkArgument;
+
+
 
 /**
  * Represents a Pet's owner name in the address book.

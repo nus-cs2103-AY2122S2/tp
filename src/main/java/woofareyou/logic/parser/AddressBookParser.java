@@ -3,6 +3,7 @@ package woofareyou.logic.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AbsentAttendanceCommand;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.commands.AppointmentCommand;
@@ -21,7 +22,7 @@ import woofareyou.logic.commands.PresentAttendanceCommand;
 import woofareyou.logic.commands.SortCommand;
 import woofareyou.logic.commands.UndoCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.commons.core.Messages;
+
 
 /**
  * Parses user input.

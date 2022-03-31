@@ -1,14 +1,13 @@
 package woofareyou.ui;
 
 import static java.util.Objects.requireNonNull;
-import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javafx.scene.control.Label;
-import woofareyou.model.attendance.AttendanceEntry;
 import woofareyou.commons.util.CollectionUtil;
+import woofareyou.model.attendance.AttendanceEntry;
 
 /**
  * A class that processes and produces transport arrangement tags for the GUI.

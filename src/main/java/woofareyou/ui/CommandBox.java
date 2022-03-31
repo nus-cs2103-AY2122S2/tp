@@ -3,10 +3,11 @@ package woofareyou.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import woofareyou.logic.Logic;
 import woofareyou.logic.commands.CommandResult;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.logic.Logic;
+
 
 /**
  * The UI component that is responsible for receiving user command inputs.

@@ -2,10 +2,11 @@ package woofareyou.logic.parser;
 
 import java.util.Arrays;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.FindCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
-import woofareyou.commons.core.Messages;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object

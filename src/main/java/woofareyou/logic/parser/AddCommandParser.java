@@ -3,6 +3,7 @@ package woofareyou.logic.parser;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.pet.Address;
@@ -14,7 +15,7 @@ import woofareyou.model.pet.OwnerName;
 import woofareyou.model.pet.Pet;
 import woofareyou.model.pet.Phone;
 import woofareyou.model.tag.Tag;
-import woofareyou.commons.core.Messages;
+
 
 
 /**
@@ -29,10 +30,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_OWNER_NAME, CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_OWNER_NAME,
+                        CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OWNER_NAME, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OWNER_NAME, CliSyntax.PREFIX_NAME,
+                CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

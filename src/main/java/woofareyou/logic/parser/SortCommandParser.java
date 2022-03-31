@@ -1,8 +1,8 @@
 package woofareyou.logic.parser;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.SortCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new SortCommand object

@@ -1,7 +1,6 @@
 package woofareyou.model.pet;
 
 import static java.util.Objects.requireNonNull;
-import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -9,12 +8,13 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import woofareyou.commons.util.CollectionUtil;
+import woofareyou.logic.parser.SortUtil;
 import woofareyou.model.pet.comparator.PetDropOffTimeComparator;
 import woofareyou.model.pet.comparator.PetPickUpTimeComparator;
 import woofareyou.model.pet.exceptions.DuplicatePetException;
 import woofareyou.model.pet.exceptions.PetNotFoundException;
-import woofareyou.commons.util.CollectionUtil;
-import woofareyou.logic.parser.SortUtil;
+
 
 /**
  * A list of pets that enforces uniqueness between its elements and does not allow nulls.

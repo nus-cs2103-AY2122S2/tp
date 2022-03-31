@@ -1,9 +1,9 @@
 package woofareyou.logic.parser;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.DeleteCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

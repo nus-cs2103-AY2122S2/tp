@@ -1,14 +1,12 @@
 package woofareyou.model.pet;
 
-import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import woofareyou.model.tag.Tag;
 import woofareyou.commons.util.CollectionUtil;
+import woofareyou.model.tag.Tag;
 
 /**
  * Represents a Pet in the address book.

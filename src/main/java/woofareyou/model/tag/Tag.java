@@ -1,9 +1,8 @@
 package woofareyou.model.tag;
 
-import woofareyou.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static woofareyou.commons.util.AppUtil.checkArgument;
+
+import woofareyou.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.

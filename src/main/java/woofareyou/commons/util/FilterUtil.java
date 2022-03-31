@@ -1,7 +1,5 @@
 package woofareyou.commons.util;
 
-import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Set;
 
 import woofareyou.model.filter.DateContainsFilterDatePredicate;

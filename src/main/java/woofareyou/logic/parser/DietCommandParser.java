@@ -2,12 +2,13 @@ package woofareyou.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
 import woofareyou.commons.exceptions.IllegalValueException;
 import woofareyou.logic.commands.DietCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.pet.Diet;
-import woofareyou.commons.core.Messages;
+
 
 /**
  * Parses input arguments and creates a new DietCommand object

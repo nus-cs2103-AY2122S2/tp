@@ -1,16 +1,15 @@
 package woofareyou.logic.commands;
 
-import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.List;
 
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
+import woofareyou.commons.util.CollectionUtil;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.model.Model;
 import woofareyou.model.pet.Diet;
 import woofareyou.model.pet.Pet;
-import woofareyou.commons.util.CollectionUtil;
+
 
 
 /**

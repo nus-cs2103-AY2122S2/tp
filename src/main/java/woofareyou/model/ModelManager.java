@@ -1,7 +1,6 @@
 package woofareyou.model;
 
 import static java.util.Objects.requireNonNull;
-import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -11,8 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import woofareyou.commons.core.GuiSettings;
 import woofareyou.commons.core.LogsCenter;
-import woofareyou.model.pet.Pet;
 import woofareyou.commons.util.CollectionUtil;
+import woofareyou.model.pet.Pet;
+
 
 /**
  * Represents the in-memory model of the address book data.

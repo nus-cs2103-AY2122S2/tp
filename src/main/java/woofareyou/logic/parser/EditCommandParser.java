@@ -7,11 +7,12 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.EditCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.tag.Tag;
-import woofareyou.commons.core.Messages;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -26,15 +27,16 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_OWNER_NAME, CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_OWNER_NAME,
+                        CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE), pe);
         }
 
         EditCommand.EditPetDescriptor editPetDescriptor = new EditCommand.EditPetDescriptor();
@@ -42,7 +44,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPetDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_OWNER_NAME).isPresent()) {
-            editPetDescriptor.setOwnerName(ParserUtil.parseOwnerName(argMultimap.getValue(CliSyntax.PREFIX_OWNER_NAME).get()));
+            editPetDescriptor.setOwnerName(
+                    ParserUtil.parseOwnerName(argMultimap.getValue(CliSyntax.PREFIX_OWNER_NAME).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_PHONE).isPresent()) {
             editPetDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get()));

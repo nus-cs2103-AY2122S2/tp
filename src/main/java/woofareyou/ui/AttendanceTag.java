@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Optional;
 
 import javafx.scene.control.Label;
-import woofareyou.model.attendance.AttendanceEntry;
 import woofareyou.commons.util.AttendanceUtil;
+import woofareyou.model.attendance.AttendanceEntry;
 
 /**
  * A class that processes and produces attendance tags for the GUI.
