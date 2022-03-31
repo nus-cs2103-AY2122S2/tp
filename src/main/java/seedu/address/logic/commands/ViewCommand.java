@@ -13,12 +13,12 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all scheduled interviews "
-            + " scheduled within a specific time period.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all scheduled interviews in the system"
+            + " scheduled within a specified time period.\n"
             + "Parameters: TIME_PERIOD\n"
             + "Example: " + COMMAND_WORD + " today\n"
-            + "Allowable time periods include today (i.e. the same day), week (i.e. this week), "
-            + "month (i.e. this month)";
+            + "Note: Allowable time periods include `all` (i.e. all scheduled interviews in the system),"
+            + " `today` (i.e. same day), `week` (i.e. next 7 days), month (i.e. period till the next month).";
 
     public static final String MESSAGE_NO_INTERVIEWS_IN_SYSTEM = "No interviews scheduled yet!";
 
