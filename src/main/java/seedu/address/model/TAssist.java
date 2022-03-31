@@ -277,7 +277,8 @@ public class TAssist implements ReadOnlyTAssist {
      */
     public void removeStudentFromModules(Student student) {
         List<TaModule> modulesToModify = new ArrayList<>(modules.asUnmodifiableObservableList());
-        modulesToModify.stream().forEach(module -> module.removeStudent(student));
+        modulesToModify.stream().filter(module -> module.hasStudent(student))
+                .forEach(module -> module.removeStudent(student));
         modules.setModules(modulesToModify);
     }
 
@@ -287,7 +288,8 @@ public class TAssist implements ReadOnlyTAssist {
      */
     public void removeStudentFromClassGroups(Student student) {
         List<ClassGroup> classGroupsToModify = new ArrayList<>(classGroups.asUnmodifiableObservableList());
-        classGroupsToModify.stream().forEach(classGroup -> classGroup.removeStudent(student));
+        classGroupsToModify.stream().filter(classGroup -> classGroup.hasStudent(student))
+                .forEach(classGroup -> classGroup.removeStudent(student));
         classGroups.setClassGroups(classGroupsToModify);
     }
 
