@@ -79,6 +79,7 @@ On clicking Help, you will see this as a result:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Viewing Packages
 ![Package button image](images/packageButtonUG.png)
 <details><summary>Opens a new window that shows the various insurance packages and their description</summary>
@@ -92,6 +93,7 @@ On clicking Package, you will see this as a result:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Adding a person: `add`
 ![result before 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/beforeAddDamithUG.png)
 <details><summary>Adds a person, as well as any details, to ClientConnect</summary>
@@ -112,6 +114,7 @@ Notes:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Adding a tag to a person: `addTag`
 ![result before 'addTag 3 friend of the family'](images/beforeAddTagUG.png)
 <details><summary>Adds a tag to the specified person in ClientConnect</summary>
@@ -133,6 +136,7 @@ Notes:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Listing all persons : `list`
 ![result for 'list'](images/listAllClientsUG.png)
 <details><summary>Displays all your clients in ClientConnect</summary>
@@ -143,6 +147,7 @@ Format: `list`
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Editing a person : `edit`
 ![result before 'edit 1 p/123456'](images/beforeEditUG.png)
 
@@ -166,6 +171,7 @@ Notes:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Editing a tag of a person: `editTag`
 ![result before 'editTag 2 1 owes money :p3'](images/beforeEditTagUG.png)
 <details><summary>Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect</summary>
@@ -188,6 +194,7 @@ Notes:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Locating persons by field: `find`
 ![result for 'find i/undecided'](images/findInsurancePackageUG.png)
 <details><summary>Finds clients whose field contains any of the given keywords</summary>
@@ -226,6 +233,7 @@ After a `find` command:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Deleting a person : `delete`
 ![result after 'delete 2'](images/afterDeleteUG.png)
 
@@ -252,6 +260,7 @@ After `delete 2`:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Deleting a tag of a person: `deleteTag`
 ![result after 'deleteTag 3 1'](images/afterDeleteTagUG.png)
 
@@ -279,6 +288,7 @@ Notes:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Adding an insurance package: `addp`
 ![result after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage1UG.png)
 
@@ -304,6 +314,7 @@ After `addp i/Classic Package d/Classic coverages for your needs`:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Editing an insurance package: `editp`
 ![result1 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage1UG.png)
 
@@ -328,6 +339,7 @@ After `editp i/Golden Package d/Lifetime insurance`:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Deleting an insurance package: `deletep`
 ![result1 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackge1UG.png)
 
@@ -352,6 +364,7 @@ After `deletep i/Golden Package`:
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Shows all insurance package: `listp`
 ![result2 after 'listp'](images/listInsurancePackage2UG.png)
 <details><summary>Displays all your insurance packages in ClientConnect</summary>
@@ -366,7 +379,7 @@ Format: `listp`
 </p>
 </details>
 
-
+------------------------------------------------------------------------------------
 ### Importing ClientConnect CSV data: `import`
 <details><summary>Opens a window to choose a CSV file to load</summary>
 <p>
@@ -375,6 +388,7 @@ Format: `import`
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Exporting ClientConnect data to CSV: `export`
 <details><summary>Opens a window to choose a CSV file to export to</summary>
 <p>
@@ -383,6 +397,7 @@ Format: `export`
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Undo previous command: `undo`
 ![result after undo](images/undo2UG.png)
 <details><summary>Undoes previous command executed</summary>
@@ -401,6 +416,7 @@ After undo (where we undo command `delete 1`):
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Redo previous command: `redo`
 <details><summary>Redoes undone command</summary>
 <p>
@@ -418,6 +434,7 @@ After redo (where we redo `delete 1`):
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Clearing all entries : `clear`
 
 ![result after 'clear'](images/clearUG.png)
@@ -429,8 +446,9 @@ Format: `clear`
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Clipping a client's information to clipboard : `clip`
-![info copied using 'clip 1'](images/afterClip1UG.PNG)
+![info copied using 'clip 1'](images/afterClip1UG.png)
 <details><summary>Copies a client's information onto the system's clipboard</summary>
 <p>
 
@@ -445,15 +463,16 @@ Examples:
 
 Before `clip 1`:
 
-![info copied using 'clip 1'](images/beforeClip1UG.PNG)
+![info copied using 'clip 1'](images/beforeClip1UG.png)
 
 
 Information copied using `clip 1`:
 
-![info copied using 'clip 1'](images/afterClip1UG.PNG)
+![info copied using 'clip 1'](images/afterClip1UG.png)
 </p>
 </details>
 
+------------------------------------------------------------------------------------
 ### Exiting the program : `exit`
 <details><summary>Exits the program</summary>
 <p>
