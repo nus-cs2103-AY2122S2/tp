@@ -81,14 +81,25 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns true if the given {@code date} matches this event's date.
+     * Returns true if this event's date is before the given {@code date}.
      *
      * @param date Date to check this event's date against.
-     * @return True if given date matches this event's date.
+     * @return True if this event's date is before the given date.
      */
-    public boolean isOnDate(LocalDate date) {
+    public boolean isBeforeDate(LocalDate date) {
         requireNonNull(date);
-        return getDateTime().hasSameDate(date);
+        return getDateTime().hasDateBefore(date);
+    }
+
+    /**
+     * Returns true if this event's date is after the given {@code date}.
+     *
+     * @param date Date to check this event's date against.
+     * @return True if this event's date is after the given date.
+     */
+    public boolean isAfterDate(LocalDate date) {
+        requireNonNull(date);
+        return getDateTime().hasDateAfter(date);
     }
 
     /**
