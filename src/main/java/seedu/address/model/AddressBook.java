@@ -222,6 +222,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Checks if the specified applicant has an interview for the specified position.
+     */
+    public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+        return interviews.isSameApplicantPosition(applicant, position);
+    }
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in HireLah.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview
