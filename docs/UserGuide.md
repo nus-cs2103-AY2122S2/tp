@@ -44,7 +44,7 @@ The Features section will be split into 3 subsections for:
 
 * Buyer: Someone who is seeking to purchase property.
 
-* Seller: Seomeone who is seeking to sell their property.
+* Seller: Someone who is seeking to sell their property.
 
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
   e.g. In `add-b n/NAME`, `NAME` is an input such as `add-b n/Chok Hoe`.
@@ -124,6 +124,7 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
 * The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
+### House Type
 * The `HOUSE_TYPE` can be defined as any of the following:
   * `unspecified`
   * `apartment`
@@ -288,20 +289,22 @@ Format: `clear-b`
 
 Function: Sort all the buyers according to the orders specified.
 
-Format: `sort-b [o/FIELDS]`
+Format: `sort-b [by/COMPAREDITEM] [o/ORDER]`
 
-* The `FIELDS` are:
-  * `appointment` time
+* The `COMPAREDITEM` are:
+  * `time`
   * `name`
 
-* If the input is omitted, `sort-b` will simply sort by the **name** of the buyer in **descending alphabetical order**.
-  * E.g. Alex, Bob, Cartman
-* `appointment` will sort by the appointment time, from the earliest appointment first.
+* The `ORDER` are:
+  * `asc`
+  * `desc`
+
+* All entries are compulsory
+* When there's no appointment with certain buyers, those buyers will be put at the bottom of the list, regardless of the sorting order, and only buyers with an appointment time will be sorted.
 
 Examples:
-* `sort-b`
-* `sort-b o/name`
-* `sort-b o/appointment`
+* `sort-b by/time o/asc`
+* `sort-b by/name o/desc`
 
 [back to start of section](#features)
 
@@ -332,7 +335,7 @@ Function: Add a new property for the specified seller.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note: `add-ptb` and `add-pts` have different fields! **<br>
+:information_source: Note: `add-ptb` and `add-pts` have different fields!<br>
 
 * `add-pts` has an additional `a/ADDRESS` field.
 
@@ -451,20 +454,23 @@ Function: Sort all the sellers according to the orders specified.
 :bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
 </div>
 
-Format: `sort-s [o/FIELDS]`
+Format: `sort-s [by/COMPAREDITEM] [o/ORDER]`
 
-* The `FIELDS` are:
-  * `appointment`
+* The `COMPAREDITEM` are:
+  * `time`
   * `name`
+  
+* The `ORDER` are:
+  * `asc`
+  * `desc`
 
-* If the input is omitted, `sort-s` will simply sort by the **name** of the seller in **descending alphabetical order**.
-  * E.g. Alex, Bob, Cartman
-* `appointment` will sort by the appointment time, from the earliest appointment first.
+* All entries are compulsory
+* When there's no appointment with certain sellers, those sellers
+* will be put at the bottom of the list, regardless of the sorting order, and only sellers with an appointment time will be sorted.
 
 Examples:
-* `sort-s`
-* `sort-s o/name`
-* `sort-s o/appointment`
+* `sort-s by/time o/asc`
+* `sort-s by/name o/desc`
 
 [back to start of section](#features)
 
@@ -472,13 +478,94 @@ Examples:
 
 AgentSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Editing the data file
+## Editing the data file (For experienced user)
 
-AgentSee data are saved as a JSON file `[JAR file location]/data/agensee.json`. Advanced users are welcome to update data directly by editing that data file.
+AgentSee data are saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
+Advanced users are welcome to update data directly by editing these data files.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AgentSee will discard all data and start with an empty data file at the next run!
+So if you are afraid of losing all the data, please backup your data files somewhere else before attempting to edit the data file by yourself!
 </div>
+
+
+### JSON format of the data
+
+Below is the example of 2 buyers that are saved under `buyeraddressbook.json` :
+
+```
+{
+  "buyers" : [ {
+    "name" : "Shi Hong",
+    "phone" : "12345678",
+    "appointment" : "2022-03-31-17-00",
+    "tagged" : [ "smart" ],
+    "propertyToBuy" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Clementi"
+      },
+      "priceRange" : {
+        "lower" : "500000",
+        "upper" : "600000"
+      }
+    }
+  }, {
+    "name" : "Jun Hong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "kind" ],
+    "propertyToBuy" : null
+  }
+}
+```
+And here are the examples of 2 sellers, one has a property and one does not have a property yet.
+
+```
+{
+  "sellers" : [ {
+    "name" : "chua",
+    "phone" : "1234",
+    "appointment" : "",
+    "tagged" : [ "tag1", "tag2" ],
+    "propertyToSell" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "Queens Town"
+      },
+      "priceRange" : {
+        "lower" : "24",
+        "upper" : "48"
+      },
+      "address" : "Utown"
+    }
+  }, {
+    "name" : "Ben Leong",
+    "phone" : "87654321",
+    "appointment" : "",
+    "tagged" : [ "friendly" ],
+    "propertyToSell" : null
+  }
+}
+```
+
+### Some special format of the data
+#### name and phone
+- They cannot be an empty string: `""` ,  otherwise, it will be seen as invalid format and the buyerbook's data will become empty!
+- `phone` be digits string and must have more than 3 digits.
+#### appointment
+- The `appointment` field should be either `""` or `"Year-Month-Day-Hour-Minute"` format, no other format is acceptable. `""` is when the appoinment date is not specified yet
+- When specifying the Month and Day, the data should be specified in exactly 2 digits, i.e. you need to pad 0 for 1 digit date or month.
+
+#### tagged
+- empty tag should be `[]`
+#### propertyToBuy
+- empty property must be `null`, not `"null"` or `'null'`
+- for the `housetype` under `house`, the housetype provided must be one of our [defined houseType](#house-type).
+Otherwise, all other value will be translated to `Unspecified` housetype!
+- Currently, the `housetype` cannot put `null` inside it, otherwise the program cannot run (We will solve it in v1.4!)
+- `pricerange` must be a digit string, and `lower` value must be less than or equal to `upper`
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -514,7 +601,7 @@ Action | Format, Examples
 **Find Buyer** | `find-b field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-b n/James Jake`
 **Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
 **Clear Buyers** | `clear-b`
-**Sort Buyers** | `sort-b [o/FIELDS]` <br> e.g., `sort-b o/name`
+**Sort Buyers** | `sort-b [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-b by/name o/desc`
 **List Sellers** | `list-s`
 **Add Seller** | `add-s n/NAME p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add-s n/James Ho p/22224444`
 **Add Seller Property** | `add-pts a/ADDRESS l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE` <br> e.g., `add-pts a/Blk 343, Rika Ave 1 #09-1231 l/Bishan pr/100000,200000 h/hdb`
@@ -523,7 +610,7 @@ Action | Format, Examples
 **Find Seller** | `find-s field/KEYWORD1 [MORE_KEYWORDS]` <br> e.g., `find-s n/James Jake`
 **Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
 **Clear Sellers** | `clear-s`
-**Sort Sellers** | `sort-s [o/FIELDS]` <br> e.g., `sort-s o/name`
+**Sort Sellers** | `sort-s [by/COMPAREDITEM] [o/ORDER]` <br> e.g., `sort-s by/time o/asc`
 
 
 [Back to top](#quick-start)

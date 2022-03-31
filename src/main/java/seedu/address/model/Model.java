@@ -63,6 +63,8 @@ public interface Model {
      */
     Path getSellerAddressBookFilePath();
 
+    void sortFilteredSellerList(String comparator, String order);
+
     /**
      * Sets the user prefs' address book file path.
      */
@@ -94,6 +96,8 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyBuyerAddressBook getBuyerAddressBook();
+
+    void sortFilteredBuyerList(String comparedItem, String order);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

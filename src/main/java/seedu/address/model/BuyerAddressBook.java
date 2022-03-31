@@ -82,8 +82,8 @@ public class BuyerAddressBook implements ReadOnlyBuyerAddressBook {
         buyers.setBuyer(target, editedBuyer);
     }
 
-    public void sortPersons() {
-        buyers.sortPersons();
+    public void sortBuyers(String comparedItem, String order) {
+        buyers.sortBuyers(comparedItem, order);
     }
 
     /**

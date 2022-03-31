@@ -29,7 +29,9 @@ import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.commands.MatchHouseTypeCommand;
 import seedu.address.logic.commands.MatchLocationCommand;
 import seedu.address.logic.commands.MatchPriceRangeCommand;
+import seedu.address.logic.commands.SortBuyerCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -111,6 +113,12 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
+
+        case SortBuyerCommand.COMMAND_WORD:
+            return new SortBuyerCommandParser().parse(arguments);
+
+        case SortSellerCommand.COMMAND_WORD:
+            return new SortSellerCommandParser().parse(arguments);
 
         case AppointmentBuyerCommand.COMMAND_WORD:
             return new AppointmentBuyerCommandParser().parse(arguments);

@@ -190,6 +190,11 @@ public class ModelManager implements Model {
     public ReadOnlyBuyerAddressBook getBuyerAddressBook() {
         return buyerAddressBook;
     }
+
+    @Override
+    public void sortFilteredBuyerList(String comparator, String order) {
+        buyerAddressBook.sortBuyers(comparator, order);
+    }
     //========== For addseller============//
     @Override
     public void addSeller(Seller seller) {
@@ -233,6 +238,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlySellerAddressBook getSellerAddressBook() {
         return sellerAddressBook;
+    }
+
+    @Override
+    public void sortFilteredSellerList(String comparator, String order) {
+        sellerAddressBook.sortSellers(comparator, order);
     }
 
     //=========== Filtered client List Accessors =============================================================

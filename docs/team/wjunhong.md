@@ -10,7 +10,10 @@ AgentSee is a desktop application for property agents to efficiently manage thei
 Given below are my contributions to the project.
 
 * **Code contributed**:
-    * `addbuyer` command
+    * `add-b` command
+    * `add-ptb` and `add-pts` commands
+    * `delete-b` command
+    * `add-ptb` and `add-pts` and `delete-b` parser & associated test classes
     * `Buyer` class
     * `AddBuyerCommandParser` class
     * `BuyerTest` class
@@ -18,14 +21,25 @@ Given below are my contributions to the project.
     * `UniqueBuyerListTest` class
     * `BuyerBuilder` & `TypicalBuyer` class
     * `AddBuyerCommandTest` and `AddBuyerCommandIntegrationTest` class
+    * `BuyerAddressBookStorage` and other buyer related storage classes.
+    * FXML for UI updates
+    * `NullPropertyToBuy` (initial class before enhancements).
 
 * **Enhancements implemented**:
-  * Improved Find Command - Keywords need not exactly match the client name, and can simply be contained in them.
+  * Improved Find Command for v1.2 - Keywords need not exactly match the client name, and can simply be contained in them.
+  * The UI - Decent overhaul to the UI in terms of the organization of the fields, font sizes and icons.
+  * Improved the House Type - Created methods to query the enum using strings, and translate a set of possible strings to a specific enum.
 
 * **Contributions to the UG**:
-  * Added documentation features for `find` command
+  * Added documentation features for `find` command in v1.1.
   * Came up with screenshots shown on the User Guide
-  * Added `addbuyer` command to the list of commands
+  * Added `addbuyer` command to the list of commands in v1.2.
+  * Major overhaul of the UG to enforce consistency and enhance navigability
+    * Change the introduction
+    * Added to the quick start
+    * Added to the important notes
+    * Reorganized and added most of the missing commands and their descriptions for both buyers and sellers
+    * Updated the summary table with all added commands
 
 * **Contributions to the DG**:
     * Added implementation details for `find` command
@@ -36,6 +50,7 @@ Given below are my contributions to the project.
     * Set up milestone [#v1.1](https://github.com/AY2122S2-CS2103T-T11-2/tp/milestone/1)
     * Set up milestone and some issues for [#v1.2](https://github.com/AY2122S2-CS2103T-T11-2/tp/milestone/2)
     * Set up milestone and issues for [#v1.3](https://github.com/AY2122S2-CS2103T-T11-2/tp/milestone/3)
+    * Complete `addbuyer`, `add-pts`, `add-ptb`, UG update and UI update issues.
 
 * **Review contributions**:
   * Made review for multiple Pull Requests such as
