@@ -76,7 +76,8 @@ public class DisenrolCommand extends Command {
         model.setEntity(cgToEdit, newCg);
 
         for (Student s : students) {
-            if (!model.getUnfilteredClassGroupList().stream().anyMatch(cg -> cg.hasStudent(s))) {
+            if (!model.getUnfilteredClassGroupList().stream().filter(cg -> cg.getModule().isSameModule(newModule))
+                    .anyMatch(cg -> cg.hasStudent(s))) {
                 newModule.removeStudent(s);
                 model.removeStudentFromAssessments(s);
             }
