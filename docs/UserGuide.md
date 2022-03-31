@@ -42,15 +42,15 @@ Trackermon is a **desktop application** for **tracking and managing shows, optim
 
 Before you continue reading the rest of our user guide, the table below displays some important syntax to facilitate your reading.
 
-| Syntax                                                                    | Description                                            |
-|---------------------------------------------------------------------------|--------------------------------------------------------|
-| **Bold**                                                                  | Important words to note                                |
-| `Git Flavoured Markdown`                                                  | Command word/prefix/parameter                          |
-| <div markdown="span" class="alert alert-warning">:bulb: </div>            | A small but useful piece of information                |
-| <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                 |
-| <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                 |
-| [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional |
-| \<Instructions for Parameters\>                                                     | Represents certain requirements you will need to follow |
+| Syntax                                                                    | Description                                             |
+|---------------------------------------------------------------------------|---------------------------------------------------------|
+| **Bold**                                                                  | Important words to note                                 |
+| `Git Flavoured Markdown`                                                  | Command word/prefix/parameter                           |
+| <div markdown="span" class="alert alert-warning">:bulb: </div>            | A small but useful piece of information                 |
+| <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                  |
+| <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                  |
+| [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional  |
+| \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
 
 ---
 
@@ -356,7 +356,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 :exclamation:**Multiple of the same prefixes:**<br>
 * find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
-* find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
+* find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` and `RATE` parameter.
 
 </div>
 
