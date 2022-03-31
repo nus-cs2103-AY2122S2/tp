@@ -20,6 +20,7 @@ public class OutOfStockCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.clearProductFilters();
         model.addProductFilter(outOfStockFilter);
         model.updateFilteredItemListForProducts(Product.PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(MESSAGE_SUCCESS
