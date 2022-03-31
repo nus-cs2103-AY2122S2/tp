@@ -35,7 +35,11 @@ public class PopupHandler {
      * @return True if a popup is showing, else false.
      */
     public boolean isShowing() {
-        return showing != null;
+        return popupAddProduct.isShowing()
+                || popupUpdateProduct.isShowing()
+                || popupDeleteProduct.isShowing()
+                || popupAddItem.isShowing()
+                || popupManageItem.isShowing();
     }
 
     /**
@@ -100,6 +104,5 @@ public class PopupHandler {
         if (showing != null) {
             showing.hide();
         }
-        showing = null;
     }
 }

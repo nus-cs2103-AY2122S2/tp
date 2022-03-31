@@ -23,7 +23,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     };
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
+            "Expiry dates should have format such as 03 Apr 2022, 3 Apr 2022 or 2022-04-03";
 
     public static final String DAYS_CONSTRAINTS =
             "Number of days should be non-negative.";
@@ -58,12 +58,12 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     }
 
     /**
-     * Factory method to create an expiryDate {@code days} days from the current day
-     * @param days
-     * @return
+     * Creates an expiryDate {@code days} days from the current day.
+     *
+     * @param days The number of days.
+     * @return An expiryDate exactly {@code days} day from now.
      */
     public static ExpiryDate getDateFromNow(int days) {
-        requireNonNull(days);
         checkArgument(days > 0, DAYS_CONSTRAINTS);
         LocalDate dateNow = LocalDate.now();
         return new ExpiryDate(dateNow.plusDays(days).toString());
@@ -89,7 +89,8 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     }
 
     /**
-     * Find first {@code DateStringManager} object that matches the given date string.
+     * Finds first {@code DateStringManager} object that matches the given date string.
+     *
      * @param date Date string
      * @return First {@code DateStringManager} in {@code ACCEPTED_FORMATS} that matches {@code date}.
      */
@@ -123,9 +124,11 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     }
 
     /**
-     * Checks if the current expiryDate is within the currentDate and {@code toCheck} including those two dates
-     * @param toCheck
-     * @return
+     * Checks if the current expiryDate is within the currentDate and {@code toCheck}
+     * including those two dates
+     *
+     * @param toCheck The later date.
+     * @return A boolean indicating whether the current expiryDate is within the 2 dates.
      */
     public boolean within(ExpiryDate toCheck) {
         return !LocalDate.now().isAfter(this.expiryDate) && !toCheck.expiryDate.isBefore(this.expiryDate);

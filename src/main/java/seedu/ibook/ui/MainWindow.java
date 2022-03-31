@@ -64,6 +64,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setOnCloseRequest(event -> handleExit());
     }
 
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
