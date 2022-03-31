@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COVID_STATUS_BOB;
+import static seedu.address.logic.parser.AddressBookParser.MESSAGE_IRRELEVANT_PARAMETERS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COVID_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -26,7 +27,9 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SummariseCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CovidStatus;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -55,6 +58,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_clear_withExtraArgs() {
+        String userInput = ClearCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
@@ -76,6 +85,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_exit_withExtraArgs() {
+        String userInput = ExitCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
+    }
+
+    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
@@ -89,8 +104,20 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_help_withExtraArgs() {
+        String userInput = HelpCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_list_withExtraArgs() {
+        String userInput = ListCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
 
     @Test
@@ -99,8 +126,20 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_summarise_withExtraArgs() {
+        String userInput = SummariseCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
+    }
+
+    @Test
     public void parseCommand_archive() throws Exception {
         assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
+    }
+
+    @Test
+    public void parseCommand_archive_withExtraArgs() {
+        String userInput = ArchiveCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
 
     @Test
@@ -111,6 +150,28 @@ public class AddressBookParserTest {
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + PREFIX_COVID_STATUS + VALID_COVID_STATUS_BOB);
         assertEquals(new FilterCommand(filterDescriptorTest), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_undo_withExtraArgs() {
+        String userInput = UndoCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo_withExtraArgs() {
+        String userInput = RedoCommand.COMMAND_WORD + " " + VALID_COVID_STATUS_BOB;
+        assertThrows(ParseException.class, MESSAGE_IRRELEVANT_PARAMETERS, () -> parser.parseCommand(userInput));
     }
 
     @Test
