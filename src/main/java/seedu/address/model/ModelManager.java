@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Flag;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
@@ -101,11 +100,6 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         hustleBook.removePerson(target);
-    }
-
-    @Override
-    public void flagPerson(Person target, Flag flag) {
-        hustleBook.flagPerson(target, flag);
     }
 
     @Override

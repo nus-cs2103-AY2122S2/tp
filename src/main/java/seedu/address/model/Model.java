@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Flag;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ScheduledMeeting;
@@ -79,12 +78,6 @@ public interface Model {
      * The person must exist in the hustle book.
      */
     void deletePerson(Person target);
-
-    /**
-     * Flags the given person.
-     * The person must exist in the hustle book.
-     */
-    void flagPerson(Person target, Flag flag);
 
     /**
      * Schedule a meeting with the given person.

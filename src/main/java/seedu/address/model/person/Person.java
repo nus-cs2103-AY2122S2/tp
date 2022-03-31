@@ -108,10 +108,6 @@ public class Person {
         return flag;
     }
 
-    public void setFlag(Flag flag) {
-        this.flag = flag;
-    }
-
     public PrevDateMet getPrevDateMet() {
         return prevDateMet;
     }
