@@ -65,4 +65,22 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents an integer
+     * e.g. {@code Long.MIN_VALUE}, ..., -2, -1, 0, 1, 2, ..., {@code Long.MAX_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isLong(String s) {
+        requireNonNull(s);
+
+        try {
+            Long.parseLong(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
