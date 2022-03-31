@@ -19,10 +19,11 @@ public class DeleteCommand extends ByIndexByNameCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the friend identified by index or name.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME (name of a friend who exists in Amigos) OR "
-            + "INDEX (a positive integer)\n"
-            + "Example 1: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe\n"
-            + "Example 2: " + COMMAND_WORD + " 1";
+            + " INDEX ? "
+            + PREFIX_NAME + "NAME \n"
+            + "Example 1: " + COMMAND_WORD + " 1"
+            + "Example 2: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe\n";
+
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted friend: %1$s";
 

@@ -130,11 +130,19 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_showFriend() throws Exception {
+    public void parseCommand_showFriendByName() throws Exception {
         Person person = new PersonBuilder().build();
         ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
                 + " n/" + person.getName().fullName);
-        assertEquals(new ShowFriendCommand(person), command);
+        assertEquals(new ShowFriendCommand(person.getName()), command);
+    }
+
+    @Test
+    public void parseCommand_showFriendByIndex() throws Exception {
+        Person person = new PersonBuilder().build();
+        ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ShowFriendCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

@@ -32,7 +32,7 @@ public class CommandResultTest {
     @Test
     public void execute_forShowFriend_commandResultIsShowFriend() throws CommandException {
         Person person = model.getFilteredPersonList().get(0);
-        Command showFriendCommand = new ShowFriendCommand(person);
+        Command showFriendCommand = new ShowFriendCommand(person.getName());
         CommandResult commandResult = showFriendCommand.execute(model);
 
         assertTrue(commandResult.isShowFriendCommand());

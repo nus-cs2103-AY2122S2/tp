@@ -41,7 +41,7 @@ public class EditCommand extends ByIndexByNameCommand {
             + "by the name or index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX ? "
-            + PREFIX_CURRENT_NAME + "CURRENT_NAME"
+            + PREFIX_CURRENT_NAME + " CURRENT_NAME"
             + "[" + PREFIX_NEW_NAME + "NEW_NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
