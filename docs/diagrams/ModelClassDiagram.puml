@@ -42,8 +42,8 @@ Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" Address
 Person *--> "*" Module
-Person *--> "0..1     " Comment
-Person *--> "    0..1" Status
+Person *--> "1" Comment
+Person *--> "1" Status
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
