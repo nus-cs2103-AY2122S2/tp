@@ -91,6 +91,7 @@ Follow this tutorial to get started in using MedBook:
    </div>
    <div>
        This password should only be known to you as it will be used to encrypt your MedBook data.
+       See [FAQ](#faq) on how to reset your password.
    </div>
    </div>
 
