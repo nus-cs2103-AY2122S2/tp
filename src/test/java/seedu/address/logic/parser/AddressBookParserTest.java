@@ -168,18 +168,27 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_showFriend() throws Exception {
+    public void parseCommand_showFriendByName() throws Exception {
         Person person = new PersonBuilder().build();
         ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
                 + " n/" + person.getName().fullName);
+        assertEquals(new ShowFriendCommand(person.getName()), command);
+    }
+
+    @Test
+    public void parseCommand_showFriendByIndex() throws Exception {
+        Person person = new PersonBuilder().build();
+        ShowFriendCommand command = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PERSON.getOneBased());
+
+        assertEquals(new ShowFriendCommand(INDEX_FIRST_PERSON), command);
 
         ShowFriendCommand commandByAlias = (ShowFriendCommand) parser.parseCommand(ShowFriendCommand.COMMAND_ALIAS
-                + " n/" + person.getName().fullName);
-
-        assertEquals(new ShowFriendCommand(person), command);
+                + " " + INDEX_FIRST_PERSON.getOneBased());
 
         //to check if command alias works
-        assertEquals(new ShowFriendCommand(person), commandByAlias);
+        assertEquals(new ShowFriendCommand(INDEX_FIRST_PERSON), commandByAlias);
+
     }
 
 
