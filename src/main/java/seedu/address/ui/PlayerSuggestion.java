@@ -27,7 +27,7 @@ public class PlayerSuggestion extends UiPart<Region> {
     public PlayerSuggestion(ObservableList<Person> persons) {
         super(FXML);
         setFeedbackToUser(DataAnalyzer.analyzePlayerPosition(persons));
-        playerSuggestion.setStyle("-fx-control-inner-background: #383838;");
+        // playerSuggestion.setStyle("-fx-control-inner-background: #383838;");
     }
 
     /**
@@ -37,7 +37,7 @@ public class PlayerSuggestion extends UiPart<Region> {
      */
     public void update(ObservableList<Person> persons) {
         setFeedbackToUser(DataAnalyzer.analyzePlayerPosition(persons));
-        playerSuggestion.setStyle("-fx-control-inner-background: #383838;");
+        // playerSuggestion.setStyle("-fx-control-inner-background: #383838;");
     }
 
     /**

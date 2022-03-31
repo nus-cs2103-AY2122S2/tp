@@ -51,7 +51,7 @@
                         <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
                 </StackPane>
-                <VBox prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #383838;" VBox.vgrow="ALWAYS">
+                <VBox prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: derive(#e2e2e2, 30%);" VBox.vgrow="ALWAYS">
                     <children>
 
                         <TabPane fx:id="tabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
@@ -81,7 +81,7 @@
                                                 </padding>
                                                 <StackPane prefHeight="20.0" prefWidth="200.0" styleClass="dark-pane-with-border" VBox.vgrow="NEVER">
                                                     <children>
-                                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Players by Position">
+                                                        <Text fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Players by Position">
                                                             <font>
                                                                 <Font name="Segoe UI SemiBold" size="18.0" />
                                                             </font>
@@ -94,7 +94,7 @@
                                                 <StackPane fx:id="playerStatisticsPanelPlaceholder" VBox.vgrow="NEVER" />
                                                 <StackPane prefHeight="20.0" prefWidth="200.0" styleClass="dark-pane-with-border">
                                                     <children>
-                                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MyGM Suggestion">
+                                                        <Text fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="MyGM Suggestion">
                                                             <font>
                                                                 <Font name="Segoe UI SemiBold" size="18.0" />
                                                             </font>
@@ -132,7 +132,7 @@
                                                 <StackPane fx:id="scheduleListPanelPlaceholder" prefWidth="235.0" VBox.vgrow="ALWAYS" />
                                             </VBox>
 
-                                            <VBox fx:id="scheduleCalendarPanel" alignment="TOP_RIGHT" styleClass="dark-pane-without-border" GridPane.columnIndex="1">
+                                            <VBox fx:id="scheduleCalendarPanel" alignment="TOP_RIGHT" styleClass="darker-pane-without-border" GridPane.columnIndex="1">
                                                 <padding>
                                                     <Insets bottom="10" left="10" right="10" top="10" />
                                                 </padding>
