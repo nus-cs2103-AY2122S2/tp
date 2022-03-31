@@ -19,10 +19,6 @@ import static seedu.address.testutil.EventFilterPredicateBuilder.DEFAULT_NAME_SU
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -44,13 +40,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventFilterPredicate;
 import seedu.address.model.person.FriendName;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventFilterPredicateBuilder;
 import seedu.address.testutil.EventUtil;
+import seedu.address.testutil.FriendFilterPredicateBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -140,17 +136,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo " + PREFIX_NAME + "bar " + PREFIX_NAME + "baz");
+        assertEquals(new FindCommand(new FriendFilterPredicateBuilder()
+                .withNameSubstring("foo").withNameSubstring("bar").withNameSubstring("baz").build()), command);
 
-        FindCommand commandByAlias = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindCommand commandByAlias = (FindCommand) parser.parseCommand(FindCommand.COMMAND_ALIAS + " " + PREFIX_NAME + "foo " + PREFIX_NAME + "bar " + PREFIX_NAME + "baz");
+        assertEquals(new FindCommand(new FriendFilterPredicateBuilder()
+                .withNameSubstring("foo").withNameSubstring("bar").withNameSubstring("baz").build()), command);
 
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-
-        //to check if command alias works
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), commandByAlias);
     }
 
     @Test
