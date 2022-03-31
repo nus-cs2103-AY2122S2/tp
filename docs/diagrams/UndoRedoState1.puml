@@ -3,20 +3,18 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "delete 5"
+title After command "delete 3"
 
-package States {
-    class State1 as "__ab0:AddressBook__"
-    class State2 as "__ab1:AddressBook__"
-    class State3 as "__ab2:AddressBook__"
+package stateChanges {
+    class StateChange1 as "__sc0:StateChange__"
+    class StateChange2 as "__sc1:StateChange__"
+    class StateChange3 as "__sc2:StateChange__"
 }
+StateChange1 -[hidden]right-> StateChange2
+StateChange2 -[hidden]right-> StateChange3
+hide StateChange2
+hide StateChange3
 
-State1 -[hidden]right-> State2
-State2 -[hidden]right-> State3
-
-hide State3
-
-class Pointer as "Current State" #FFFFFF
-
-Pointer -up-> State2
+class Pointer as "currentStateChange" #FFFFFF
+Pointer -up-> StateChange1
 @end

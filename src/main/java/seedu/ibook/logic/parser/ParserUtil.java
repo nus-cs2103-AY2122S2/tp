@@ -10,6 +10,8 @@ import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.DiscountRate;
+import seedu.ibook.model.product.DiscountStart;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 
@@ -18,10 +20,12 @@ import seedu.ibook.model.product.Price;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX =
+            String.format("Index is not a non-zero unsigned integer at most %d.", Integer.MAX_VALUE);
 
-    public static final String MESSAGE_INVALID_COMPOUND_INDEX =
-            "Index is not a non-zero unsigned integer pair separated by \"-\".";
+    public static final String MESSAGE_INVALID_COMPOUND_INDEX = String.format(
+                    "Index is not a non-zero unsigned integer pair separated by \""
+                    + CompoundIndex.SEPARATOR + "\" with values at most %d.", Integer.MAX_VALUE);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -30,9 +34,11 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
@@ -47,7 +53,9 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_COMPOUND_INDEX);
         }
 
-        String[] parts = trimmedIndices.split("-");
+        String[] parts = trimmedIndices.split(CompoundIndex.SEPARATOR);
+
+        assert parts.length == 2;
 
         return CompoundIndex.fromOneBased(
                 Integer.parseInt(parts[0]),
@@ -142,5 +150,56 @@ public class ParserUtil {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String discountRate} into a {@code DiscountRate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code discountRate} is invalid.
+     */
+    public static DiscountRate parseDiscountRate(String discountRate) throws ParseException {
+        requireNonNull(discountRate);
+        String trimmedDiscountRate = discountRate.trim();
+        if (!DiscountRate.isValidDiscountRate(trimmedDiscountRate)) {
+            throw new ParseException(DiscountRate.MESSAGE_CONSTRAINTS);
+        }
+        return new DiscountRate(trimmedDiscountRate);
+    }
+
+    /**
+     * Parses a {@code String discountStart} into a {@code DiscountStart}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code discountStart} is invalid.
+     */
+    public static DiscountStart parseDiscountStart(String discountStart) throws ParseException {
+        requireNonNull(discountStart);
+        String trimmedDiscountStart = discountStart.trim();
+        if (!DiscountStart.isValidDiscountStart(trimmedDiscountStart)) {
+            throw new ParseException(DiscountStart.MESSAGE_CONSTRAINTS);
+        }
+        return new DiscountStart(trimmedDiscountStart);
+    }
+
+    /**
+     * Parses a string of one integer and returns an expiry date that is integer days after the current date
+     * @param numberOfDays the number in string form to add to the current date
+     *
+     * @throws ParseException
+     */
+    public static ExpiryDate parseNumberIntoDate(String numberOfDays) throws ParseException {
+        requireNonNull(numberOfDays);
+        String trimmedDays = numberOfDays.trim();
+        int days;
+        try {
+            days = Integer.parseInt(trimmedDays);
+        } catch (NumberFormatException e) {
+            throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
+        }
+        if (days < 0) {
+            throw new ParseException(ExpiryDate.DAYS_CONSTRAINTS);
+        }
+        return ExpiryDate.getDateFromNow(days);
     }
 }

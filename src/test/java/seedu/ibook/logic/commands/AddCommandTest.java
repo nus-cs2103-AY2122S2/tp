@@ -8,6 +8,7 @@ import static seedu.ibook.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,6 @@ import seedu.ibook.model.ReadOnlyUserPrefs;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class AddCommandTest {
@@ -137,6 +137,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateItem(Product targetProduct, Item targetItem, Item updatedItem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Product> getFilteredProductList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -163,12 +168,47 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateProductFilters(ProductFulfillsFiltersPredicate predicate) {
+        public void updateProductFilters(Predicate<Product> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<AttributeFilter> getProductFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItemListForProducts(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void prepareIBookForChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveIBookChanges() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoIBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoIBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -207,6 +247,16 @@ public class AddCommandTest {
         public void addProduct(Product product) {
             requireNonNull(product);
             productsAdded.add(product);
+        }
+
+        @Override
+        public void prepareIBookForChanges() {
+
+        }
+
+        @Override
+        public void saveIBookChanges() {
+
         }
 
         @Override

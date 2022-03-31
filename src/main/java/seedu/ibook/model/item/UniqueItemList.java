@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import seedu.ibook.commons.core.UniqueList;
+import seedu.ibook.commons.core.exceptions.DuplicateElementException;
 import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
 
 /**
@@ -53,70 +54,29 @@ public class UniqueItemList extends UniqueList<Item> {
     }
 
     /**
-     * Set the quantity of the specified item.
+     * Sets the target to the updated item.
      */
-    public void setItemCount(Item target, Quantity quantity) {
-        requireAllNonNull(target, quantity);
+    public void setItem(Item target, Item updatedItem) {
+        requireAllNonNull(target, updatedItem);
 
-        int index = internalList().indexOf(target);
+        int index = asObservableList().indexOf(target);
         if (index == -1) {
             throw new ElementNotFoundException();
         }
 
-        Item newItem = target.setQuantity(quantity);
-        internalList().set(index, newItem);
-    }
-
-    /**
-     * Increase the quantity of the specified item.
-     */
-    public void incrementItemCount(Item target, Quantity quantity) {
-        requireAllNonNull(target, quantity);
-
-        int index = internalList().indexOf(target);
-        if (index == -1) {
-            throw new ElementNotFoundException();
+        if (!target.isSame(updatedItem) && contains(updatedItem)) {
+            throw new DuplicateElementException();
         }
 
-        Item newItem = target.increment(quantity);
-        internalList().set(index, newItem);
-    }
-
-    /**
-     * Increase the quantity of the specified item by 1.
-     */
-    public void incrementItemCount(Item target) {
-        incrementItemCount(target, new Quantity(1));
-    }
-
-    /**
-     * Decrease the quantity of the specified item.
-     */
-    public void decrementItemCount(Item target, Quantity quantity) {
-        requireAllNonNull(target, quantity);
-
-        int index = internalList().indexOf(target);
-        if (index == -1) {
-            throw new ElementNotFoundException();
-        }
-
-        Item newItem = target.decrement(quantity);
-        if (newItem.isEmpty()) {
+        if (updatedItem.isEmpty()) {
             internalList().remove(index);
         } else {
-            internalList().set(index, newItem);
+            internalList().set(index, updatedItem);
         }
     }
 
-    /**
-     * Decrease the quantity of the specified item by 1.
-     */
-    public void decrementItemCount(Item target) {
-        decrementItemCount(target, new Quantity(1));
-    }
-
-    public Integer getTotalQuantity() {
-        return stream().mapToInt(o -> o.getQuantity().getQuantity()).sum();
+    public Quantity getTotalQuantity() {
+        return stream().map(Item::getQuantity).reduce(new Quantity(0), Quantity::add);
     }
 
     public void setItems(UniqueItemList replacement) {
@@ -126,7 +86,7 @@ public class UniqueItemList extends UniqueList<Item> {
 
     /**
      * Replaces the contents of this list with {@code items}.
-     * @param items
+     * @param items The item list.
      */
     public void setItems(List<Item> items) {
         requireAllNonNull(items);

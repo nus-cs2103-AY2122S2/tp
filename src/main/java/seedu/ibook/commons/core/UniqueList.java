@@ -23,7 +23,7 @@ import seedu.ibook.commons.core.exceptions.ElementNotFoundException;
  * @param <T> Type of element in the list
  * @see Distinguishable#isSame
  */
-public class UniqueList<T extends Distinguishable> implements Iterable<T> {
+public class UniqueList<T extends Distinguishable<T>> implements Iterable<T> {
 
     private final ObservableList<T> internalList = FXCollections.observableArrayList();
     private final ObservableList<T> internalUnmodifiableList =
@@ -58,6 +58,13 @@ public class UniqueList<T extends Distinguishable> implements Iterable<T> {
         if (!internalList.remove(toRemove)) {
             throw new ElementNotFoundException();
         }
+    }
+
+    /**
+     * Gets the size of the list.
+     */
+    public int size() {
+        return internalList.size();
     }
 
     public ObservableList<T> asObservableList() {
@@ -101,7 +108,7 @@ public class UniqueList<T extends Distinguishable> implements Iterable<T> {
         try {
             return other == this // short circuit if same object
                     || (other instanceof UniqueList // instanceof handles nulls
-                    && internalList.equals(((UniqueList<T>) other).internalList));
+                    && internalList.equals(((UniqueList<?>) other).internalList));
         } catch (ClassCastException e) {
             return false; // Differing generic type implies that they are not equal
         }

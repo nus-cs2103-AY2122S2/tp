@@ -2,18 +2,19 @@
 layout: page
 title: User Guide
 ---
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## 1. Introduction
 
 IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
+It is designed for fast use through **command line interface**(CLI), complemented by a **graphical user interface**(GUI)
+for convenience use.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 2. Quick start
+* Table of Contents
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 1. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -29,9 +30,9 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
    * **`list`** : Lists all products.
 
-   * **`add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`** : Adds a product named `Maggie` to iBook.
+   * **`add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
-   * **`delete`** `3` : Deletes the 3rd product shown in the current list.
+   * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
 
    * **`exit`** : Exits the app.
 
@@ -39,17 +40,17 @@ IBook is an inventory recording system for storekeepers to manage incoming and o
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. About
-### 3.1 Structure of the document
+## 2. About
+### 2.1 Structure of the document
 
 This document is structured in a chronological manner so that you would be able to follow through this guide while using the product. If you feel lost at any point in time, you can always refer to the Table of Contents.
 
-### 3.2 Reading the document
+### 2.2 Reading the document
 
 This subsection would introduce you to the different symbols, syntax and technical terms that are used throughout this guide.
 It is important to read this section before proceeding further to avoid getting confused!
 
-#### 3.2.1 Special symbols
+#### 2.2.1 Special symbols
 
 **Additional Information**
 
@@ -73,8 +74,6 @@ Example warnings.
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 **Tip**
 
 Text that appear in a tip box are useful for improving your experience with iBook.
@@ -86,75 +85,63 @@ Example tip.
 
 </div>
 
-#### 3.2.2 Sections of the Application Window
+<div style="page-break-after: always;"></div>
+
+#### 2.2.2 Sections of the Application Window
 
 The application window is divided into a command box, results window as well as a table that includes all the products.
 ![Ui](images/Ui.png)
 
-#### 3.2.3 Navigating around
+#### 2.2.3 Navigating around
 
 The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
 
 Alternatively, you can also interact with the application through buttons, such as the `Add Product` button, where a popup would be displayed for you to enter the different fields once it is clicked.
 
-#### 3.2.4 Command Format
+#### 2.2.4 Command Format
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n:NAME`, `NAME` is a parameter which can be used as `add n:Maggie`.
+* Words in `UPPER_CASE` are additional user inputs supplied to a command.<br>
+  e.g. in `add n:NAME`, `NAME` is an input which can be supplied as `add n:Maggie Mee`.
 
-* Items in square brackets are optional.<br>
-  e.g `n:NAME [t:TAG]` can be used as `n:Maggie c:noodle` or as `n:Maggie`.
+* Inputs in square brackets are optional.<br>
+  e.g. if the command specifies `n:NAME [t:TAG]`, both `n:Maggie Mee c:noodle` and `n:Maggie Mee` are acceptable.
 
-* Parameters can be in any order.<br>
+* Inputs of a command can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
-  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
+* Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
+  e.g. the command `exit 123` will be interpreted as `exit`.
 
 </div>
 
-#### 3.2.5 Command Parameters
+#### 2.2.5 Command inputs
 
-| Parameter      | Description                                               |
+| Input          | Description                                               |
 |:---------------|:----------------------------------------------------------|
-| `NAME`         | Name of the product/item.                                 |
+| `NAME`         | Name of the product.                                      |
 | `CATEGORY`     | Category of the product.                                  |
-| `EXPRIRY_DATE` | Expiry date of the item.                                  |
 | `PRICE`        | Price of the product. A valid price is a positive number. |
 | `DESCRIPTION`  | Description of the product.                               |
+| `EXPRIRY_DATE` | Expiry date of the item.                                  |
+| `QUANTITY`     | Quantity of the item.                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Features
+## 3. Features
 
-### 4.1 Product Commands
+### 3.1 Product Commands
 
-#### 4.1.1 Listing all products : `list`
+#### 3.1.1 Listing all products : `list`
 
 Shows a list of all products in the application.
 
 Format: `list`
 
-*Alternatively*, we are able to show only products that match one or more (tag, value) pairs.
-Values are case-sensitive.
-
-Tags and their values: `n:NAME` `c:CATEGORY` `e:EXPIRY_DATE` `p:PRICE` `d:DESCRIPTION`
-
-Format: `list [TAG:VALUE ...]`
-
-Examples:
-
-`list n:Water` lists all products that has Water as name.
-
-`list n:Bread e:01/04/2022` lists all products that has Bread as name and expiry date on 01/04/2022.
-
-`list e:01/05/2022` lists all products that has expiry date on 01/05/2022.
-
-#### 4.1.2 Adding a product : `add`
+#### 3.1.2 Adding a product : `add`
 
 Adds a new product to the application.
 
@@ -169,9 +156,9 @@ Only a single product would be added at a time
 </div>
 
 Examples:
-* `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles`
+* `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour`
 
-#### 4.1.3 Updating products : `update`
+#### 3.1.3 Updating products : `update`
 
 Updates the product at the specified INDEX.
 
@@ -189,7 +176,7 @@ Examples:
 * `update 2 p:14.99` Updates the price of the 2nd product to be `14.99`.
 * `update 3 c:bread d:ABC brand` Updates the category of the 3rd product to `bread` and its description to `ABC brand`.
 
-#### 4.1.4 Deleting products : `delete`
+#### 3.1.4 Deleting products : `delete`
 
 Deletes the product at a specified INDEX.
 
@@ -215,23 +202,67 @@ Format: `delete [TAG:VALUE ...]`
 
 Example: `delete n:Bread`
 
-### 4.2 Item Commands *[coming soon]*
+#### 3.1.5 Finding certain products : `find`
 
-### 4.3 Miscellaneous Commands
+Finds products that fit a certain filter in the application.
 
-#### 4.3.2 Exiting the program : `exit`
+Format: `find [TAG:VALUE ...]`
+
+Tags and their values: `n:NAME` `c:CATEGORY` `p:PRICE` `d:DESCRIPTION`
+
+Examples:
+
+`find n:Water` lists all products that has Water as name.
+
+`find n:Bread c:Food` lists all products that has Bread as name and category as Food.
+
+`find c:Food` lists all products that has category as Food.
+
+#### 3.1.6 Looking for products having expired items : `expired`
+
+Finds products that contain expired items.
+
+Format: `expired`
+
+#### 3.1.7 Looking for products that are out of stock : `out-of-stock`
+
+Lists products that are out of stock.
+
+Format: `out-of-stock`
+
+#### 3.1.8 Updating all products : `update-all`
+
+#### 3.1.9 Deleting all products : `delete-all`
+
+### 3.2 Item Commands
+
+#### 3.2.1 Adding an item to a product : `add-item`
+
+#### 3.2.2 Updating an item of a product : `update-item`
+
+#### 3.2.3 Deleting an item from a product : `delete-item`
+
+### 3.3 Miscellaneous Commands
+
+#### 3.3.1 Clearing all data : `clear`
+
+#### 3.3.2 Undo most recent changes : `undo`
+
+#### 3.3.3 Redo most recent undone changes : `redo`
+
+#### 3.3.2 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## 5. Storage
+## 4. Storage
 
-### 5.1 Saving the data
+### 4.1 Saving the data
 
 iBook's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 5.2 Editing the data file
+### 4.2 Editing the data file
 
 iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -239,33 +270,47 @@ iBook's data are saved as a JSON file `[JAR file location]/data/ibook.json`. Adv
 If your changes to the data file makes its format invalid, iBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### 5.3 Archiving data files `[coming in v2.0]`
+### 4.3 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous iBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## 6. Glossary
+
+| Term               | Meanings                                                                                     |
+|------------------  |----------------------------------------------------------------------------------------------|
+| **Main stream OS** | `to-be-added`                                                                                |
+| **To be added**    | `to-be-added`                                                                                |
+| **To be added**    | `to-be-added`                                                                                |
+| **To be added**    | `to-be-added`                                                                                |
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## 7. Command summary
 
-### 7.1 Product
+### 7.1 Product Commands
 
-| Action     | Format, Examples                                                                                                                      |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie c:noodles e:01/01/2022 p:3.00 d:Maggie noodles` |
-| **List**   | `list`                                                                                                                                |
-| **Update** | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                       |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                   |
+| Action           | Format, Examples                                                                                                                         |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------   |
+| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION` <br> e.g., `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour` |
+| **List**         | `list`                                                                                                                                   |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                          |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                      |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                       |
+| **Expired**      | `expired`                                                                                                                                |
+| **Out of Stock** | `out-of-stock`                                                                                                                           |
 
-### 7.2 Item *[Coming soon]*
+### 7.2 Item Commands
 
-### 7.3 Miscellaneous
+### 7.3 Miscellaneous Commands
 
 | Action   | Format, Examples |
 |:---------|:-----------------|

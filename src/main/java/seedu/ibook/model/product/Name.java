@@ -20,10 +20,6 @@ public class Name {
 
     public final String fullName;
 
-    private Name() {
-        fullName = "???";
-    }
-
     /**
      * Constructs a {@code Name}.
      *
@@ -45,6 +41,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the name contains the keyword.
+     */
+    public boolean contains(Name keyword) {
+        return fullName.contains(keyword.toString());
+    }
 
     @Override
     public String toString() {

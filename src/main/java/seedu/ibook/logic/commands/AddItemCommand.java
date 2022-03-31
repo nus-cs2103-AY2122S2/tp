@@ -11,15 +11,19 @@ import seedu.ibook.commons.core.Messages;
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
-import seedu.ibook.model.item.Item;
+import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.product.Product;
 
+/**
+ * Represents a command that when executed adds an item to a specified product in the iBook.
+ */
 public class AddItemCommand extends Command {
 
     public static final String COMMAND_WORD = "add-item";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to the IBook by the "
-            + "index number (a positive integer) of a product used in the displayed product list. "
+            + "index number (a positive integer at most " + Integer.MAX_VALUE + ")"
+            + " of a product used in the displayed product list. "
             + "Parameters: INDEX "
             + PREFIX_EXPIRY_DATE + "EXPIRY DATE "
             + PREFIX_QUANTITY + "QUANTITY "
@@ -28,15 +32,15 @@ public class AddItemCommand extends Command {
             + PREFIX_EXPIRY_DATE + "2022-01-01 "
             + PREFIX_QUANTITY + "10";
 
-    public static final String MESSAGE_SUCCESS = "New item added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New item added to %1$s:\n%2$s";
 
     private final Index productIndex;
-    private final Item toAdd;
+    private final ItemDescriptor toAdd;
 
     /**
      * Creates an AddItemCommand to add the specified {@code Item} to a {@code Product}
      */
-    public AddItemCommand(Index index, Item item) {
+    public AddItemCommand(Index index, ItemDescriptor item) {
         requireAllNonNull(index, item);
         productIndex = index;
         toAdd = item;
@@ -53,9 +57,11 @@ public class AddItemCommand extends Command {
 
         Product product = lastShownList.get(productIndex.getZeroBased());
 
-        model.addItem(product, toAdd);
+        model.prepareIBookForChanges();
+        model.addItem(product, toAdd.toItem(product));
+        model.saveIBookChanges();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, product.getName(), toAdd));
     }
 
     @Override

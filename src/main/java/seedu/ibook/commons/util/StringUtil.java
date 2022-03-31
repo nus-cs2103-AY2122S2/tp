@@ -45,7 +45,7 @@ public class StringUtil {
         requireNonNull(t);
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        return t.getMessage() + "\n" + sw;
     }
 
     /**
@@ -82,7 +82,7 @@ public class StringUtil {
         }
 
         String[] parts = s.split("-", 2);
-        assert parts.length >= 2; // Presence of "-" is assured by the guard clause above
+        assert parts.length == 2; // Presence of "-" is assured by the guard clause above
 
         return isNonZeroUnsignedInteger(parts[0])
                 && isNonZeroUnsignedInteger(parts[1]);

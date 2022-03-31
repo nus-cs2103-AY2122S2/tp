@@ -1,5 +1,6 @@
 package seedu.ibook.model.item;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
@@ -22,7 +23,10 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     };
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expiry dates should have format such as 03 May 2022, 3 May 2022 or 2022-05-03";
+            "Expiry dates should have format such as 03 Apr 2022, 3 Apr 2022 or 2022-04-03";
+
+    public static final String DAYS_CONSTRAINTS =
+            "Number of days should be non-negative.";
 
     private static final DateStringManager[] ACCEPTED_FORMATS = {
         new DateStringManager("d MMM yyyy"),
@@ -54,6 +58,18 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     }
 
     /**
+     * Creates an expiryDate {@code days} days from the current day.
+     *
+     * @param days The number of days.
+     * @return An expiryDate exactly {@code days} day from now.
+     */
+    public static ExpiryDate getDateFromNow(int days) {
+        checkArgument(days > 0, DAYS_CONSTRAINTS);
+        LocalDate dateNow = LocalDate.now();
+        return new ExpiryDate(dateNow.plusDays(days).toString());
+    }
+
+    /**
      * Checks if a given {@code LocalDate} is valid as per {@code VALIDATION_REGEX}.
      *
      * @param expiryDate Date to test.
@@ -68,8 +84,13 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
         return expiryDate.isBefore(LocalDate.now());
     }
 
+    public long dayDifference(LocalDate other) {
+        return DAYS.between(other, expiryDate);
+    }
+
     /**
-     * Find first {@code DateStringManager} object that matches the given date string.
+     * Finds first {@code DateStringManager} object that matches the given date string.
+     *
      * @param date Date string
      * @return First {@code DateStringManager} in {@code ACCEPTED_FORMATS} that matches {@code date}.
      */
@@ -103,15 +124,24 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     }
 
     /**
+     * Checks if the current expiryDate is within the currentDate and {@code toCheck}
+     * including those two dates
+     *
+     * @param toCheck The later date.
+     * @return A boolean indicating whether the current expiryDate is within the 2 dates.
+     */
+    public boolean within(ExpiryDate toCheck) {
+        return !LocalDate.now().isAfter(this.expiryDate) && !toCheck.expiryDate.isBefore(this.expiryDate);
+    }
+
+    /**
      * Class that encapsulates date string pattern matching and parsing
      */
     private static class DateStringManager {
 
-        private String format;
-        private DateTimeFormatter dateFormatter;
+        private final DateTimeFormatter dateFormatter;
 
         public DateStringManager(String format) {
-            this.format = format;
             dateFormatter = DateTimeFormatter.ofPattern(format);
         }
 

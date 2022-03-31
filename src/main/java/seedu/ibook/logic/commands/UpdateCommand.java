@@ -1,9 +1,8 @@
 package seedu.ibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ibook.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,27 +15,30 @@ import seedu.ibook.model.Model;
 import seedu.ibook.model.item.UniqueItemList;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
+import seedu.ibook.model.product.DiscountRate;
+import seedu.ibook.model.product.DiscountStart;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.Product;
 
-
 /**
- * Updates the details of an existing product in the ibook.
+ * Represents a command that when executed updates the details of an
+ * existing product in the iBook.
  */
 public class UpdateCommand extends Command {
 
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the details of the product identified "
-            + "by the index number(a positive integer) used in the displayed product list. "
+            + "by the index number (a positive integer at most " + Integer.MAX_VALUE + ")"
+            + " used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX | [TAG:NEW_VALUE ...]\n"
+            + "Parameters: INDEX [TAG:NEW_VALUE ...]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "potato bread "
-            + PREFIX_EXPIRY_DATE + "2022-02-14";
+            + PREFIX_PRICE + "12.70";
 
-    public static final String MESSAGE_UPDATE_PRODUCT_SUCCESS = "Updated Product: %1$s";
+    public static final String MESSAGE_UPDATE_PRODUCT_SUCCESS = "Updated Product:\n%1$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the ibook.";
 
@@ -71,8 +73,11 @@ public class UpdateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
+        model.prepareIBookForChanges();
         model.setProduct(productToUpdate, updatedProduct);
-        model.updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
+        model.saveIBookChanges();
+        model.clearProductFilters();
+
         return new CommandResult(String.format(MESSAGE_UPDATE_PRODUCT_SUCCESS, updatedProduct));
     }
 
@@ -80,7 +85,7 @@ public class UpdateCommand extends Command {
      * Creates and returns a {@code Product} with the details of {@code productToUpdate}
      * updated with {@code updateProductDescriptor}.
      */
-    private static Product createUpdatedProduct(
+    public static Product createUpdatedProduct(
             Product productToUpdate, UpdateProductDescriptor updateProductDescriptor) {
         assert productToUpdate != null;
 
@@ -89,13 +94,18 @@ public class UpdateCommand extends Command {
         Description updatedDescription =
                 updateProductDescriptor.getDescription().orElse(productToUpdate.getDescription());
         Price updatedPrice = updateProductDescriptor.getPrice().orElse(productToUpdate.getPrice());
+        DiscountRate updatedDiscountRate =
+                updateProductDescriptor.getDiscountRate().orElse(productToUpdate.getDiscountRate());
+        DiscountStart updatedDiscountStart =
+                updateProductDescriptor.getDiscountStart().orElse(productToUpdate.getDiscountStart());
 
         UniqueItemList items = updateProductDescriptor.getItems().orElse(productToUpdate.getItems());
 
         // Updates to items via this command is not available
         assert items.equals(productToUpdate.getItems());
 
-        return new Product(updatedName, updatedCategory, updatedDescription, updatedPrice, items.asObservableList());
+        return new Product(updatedName, updatedCategory, updatedDescription, updatedPrice,
+                updatedDiscountRate, updatedDiscountStart, items.asObservableList());
     }
 
     @Override
@@ -125,6 +135,8 @@ public class UpdateCommand extends Command {
         private Category category;
         private Description description;
         private Price price;
+        private DiscountRate discountRate;
+        private DiscountStart discountStart;
         private UniqueItemList items;
 
         public UpdateProductDescriptor() {}
@@ -137,6 +149,8 @@ public class UpdateCommand extends Command {
             setCategory(toCopy.category);
             setDescription(toCopy.description);
             setPrice(toCopy.price);
+            setDiscountRate(toCopy.discountRate);
+            setDiscountStart(toCopy.discountStart);
             setItems(toCopy.items);
         }
 
@@ -179,6 +193,22 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(price);
         }
 
+        public void setDiscountRate(DiscountRate discountRate) {
+            this.discountRate = discountRate;
+        }
+
+        public Optional<DiscountRate> getDiscountRate() {
+            return Optional.ofNullable(discountRate);
+        }
+
+        public void setDiscountStart(DiscountStart discountStart) {
+            this.discountStart = discountStart;
+        }
+
+        public Optional<DiscountStart> getDiscountStart() {
+            return Optional.ofNullable(discountStart);
+        }
+
         public void setItems(UniqueItemList items) {
             this.items = items;
         }
@@ -206,6 +236,8 @@ public class UpdateCommand extends Command {
                     && getCategory().equals(e.getCategory())
                     && getDescription().equals(e.getDescription())
                     && getPrice().equals(e.getPrice())
+                    && getDiscountRate().equals(e.getDiscountRate())
+                    && getDiscountStart().equals(e.getDiscountStart())
                     && getItems().equals(e.getItems());
         }
     }

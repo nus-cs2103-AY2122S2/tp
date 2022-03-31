@@ -1,47 +1,41 @@
 package seedu.ibook.model.item;
 
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
-import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
 import seedu.ibook.commons.core.Distinguishable;
+import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.Product;
 
 /**
  * Encapsulates Product information about {@code ExpiryDate} and {@code Quantity}.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Item implements Comparable<Item>, Distinguishable<Item> {
+public class Item extends ItemDescriptor implements Comparable<Item>, Distinguishable<Item> {
 
     private static final String ITEMS_MUST_BE_EQUAL_CONSTRAINT = "Items must be equal";
 
-    private final ExpiryDate expiryDate;
-    private final Quantity quantity;
+    private final Product product;
 
     /**
      * Every field must be present and not null.
      */
-    public Item(ExpiryDate expiryDate) {
-        requireAllNonNull(expiryDate);
-        this.expiryDate = expiryDate;
-        this.quantity = new Quantity(1);
+    public Item(Product product, ExpiryDate expiryDate) {
+        super(expiryDate);
+        this.product = product;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Item(ExpiryDate expiryDate, Quantity quantity) {
-        requireAllNonNull(expiryDate, quantity);
-        this.expiryDate = expiryDate;
-        this.quantity = quantity;
+    public Item(Product product, ExpiryDate expiryDate, Quantity quantity) {
+        super(expiryDate, quantity);
+        this.product = product;
     }
 
-    public ExpiryDate getExpiryDate() {
-        return expiryDate;
-    }
-
-    public Quantity getQuantity() {
-        return quantity;
+    public Product getProduct() {
+        return product;
     }
 
     /**
@@ -50,42 +44,38 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
      */
     public Item add(Item newItem) {
         checkArgument(this.isSame(newItem), ITEMS_MUST_BE_EQUAL_CONSTRAINT);
-        Quantity newQuantity = quantity.add(newItem.getQuantity());
-        return new Item(expiryDate, newQuantity);
+        Quantity newQuantity = getQuantity().add(newItem.getQuantity());
+        return new Item(getProduct(), getExpiryDate(), newQuantity);
     }
 
     /**
      * Set the quantity of the item.
      */
     public Item setQuantity(Quantity newQuantity) {
-        return new Item(expiryDate, newQuantity);
-    }
-
-    /**
-     * Increase the quantity of the item.
-     */
-    public Item increment(Quantity quantity) {
-        Quantity newQuantity = this.quantity.add(quantity);
-        return setQuantity(newQuantity);
-    }
-
-    /**
-     * Decrease the quantity of the item.
-     */
-    public Item decrement(Quantity quantity) {
-        Quantity newQuantity = this.quantity.subtract(quantity);
-        return setQuantity(newQuantity);
+        return new Item(getProduct(), getExpiryDate(), newQuantity);
     }
 
     /**
      * Checks if the quantity of the item is zero.
      */
     public boolean isEmpty() {
-        return quantity.isEmpty();
+        return getQuantity().isEmpty();
     }
 
+    /**
+     * Checks if the item has expired.
+     * @return true if the item has expired
+     */
     public boolean isExpired() {
-        return expiryDate.isPast();
+        return getExpiryDate().isPast();
+    }
+
+    public Price getDiscountedPrice() {
+        return product.getDiscountedPrice(getExpiryDate());
+    }
+
+    public boolean expiresBefore(ExpiryDate toCheck) {
+        return getExpiryDate().within(toCheck);
     }
 
     /**
@@ -98,6 +88,7 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
         }
 
         return otherItem != null
+            && otherItem.getProduct().equals(getProduct())
             && otherItem.getExpiryDate().equals(getExpiryDate());
     }
 
@@ -116,30 +107,20 @@ public class Item implements Comparable<Item>, Distinguishable<Item> {
         }
 
         Item otherItem = (Item) other;
-        return otherItem.getExpiryDate().equals(getExpiryDate())
+        return otherItem.getProduct().equals(getProduct())
+            && otherItem.getExpiryDate().equals(getExpiryDate())
             && otherItem.getQuantity().equals(getQuantity());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(expiryDate, quantity);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-
-        builder.append("ExpiryDate: ")
-            .append(getExpiryDate())
-            .append("; Quantity: ")
-            .append(getQuantity());
-
-        return builder.toString();
+        return Objects.hash(getProduct(), getExpiryDate(), getQuantity());
     }
 
     @Override
     public int compareTo(Item o) {
-        return expiryDate.compareTo(o.getExpiryDate());
+        return getExpiryDate().compareTo(o.getExpiryDate());
     }
+
 }

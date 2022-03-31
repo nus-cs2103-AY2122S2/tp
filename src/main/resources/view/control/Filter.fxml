@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="filter" alignment="CENTER">
+    <HBox styleClass="filter-type-container" alignment="CENTER">
+        <Label fx:id="type" styleClass="filter-type"/>
+    </HBox>
+    <Label fx:id="value" styleClass="filter-value"/>
+    <Button alignment="CENTER" onMouseClicked="#handleRemove"
+            mnemonicParsing="false" styleClass="filter-action">
+        <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" opacity="0.45"
+                       pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../images/x.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
+</HBox>

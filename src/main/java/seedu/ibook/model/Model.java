@@ -1,20 +1,18 @@
 package seedu.ibook.model;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ibook.commons.core.GuiSettings;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.AttributeFilter;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    ProductFulfillsFiltersPredicate PREDICATE_SHOW_ALL_PRODUCTS = new ProductFulfillsFiltersPredicate();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -60,16 +58,23 @@ public interface Model {
     boolean hasProduct(Product product);
 
     /**
+     * Adds the given product.
+     * {@code product} must not already exist in the IBook.
+     */
+    void addProduct(Product product);
+
+    /**
      * Deletes the given product.
      * The product must exist in the IBook.
      */
     void deleteProduct(Product target);
 
     /**
-     * Adds the given product.
-     * {@code product} must not already exist in the IBook.
+     * Replaces the given product {@code target} with {@code updatedProduct}.
+     * {@code target} must exist in the Ibook.
+     * The product identity of {@code updatedProduct} must not be the same as another existing product in the book.
      */
-    void addProduct(Product product);
+    void setProduct(Product target, Product updatedProduct);
 
     /**
      * Adds the given item to {@code product}.
@@ -78,20 +83,24 @@ public interface Model {
     void addItem(Product product, Item item);
 
     /**
-     * Replaces the given product {@code target} with {@code editedProduct}.
-     * {@code target} must exist in the iBook.
-     * The product identity of {@code editedProduct} must not be the same as another existing product in the book.
-     */
-    void setProduct(Product target, Product editedProduct);
-
-    /**
      * Deletes the given item from the product.
      * The product must exist in the iBook, and the item must exist in the product.
      */
     void deleteItem(Product targetProduct, Item target);
 
+    /**
+     * Updates the given item of a product.
+     * The product must exist in the iBook, and the item must exist in the product.
+     */
+    void updateItem(Product targetProduct, Item targetItem, Item updatedItem);
+
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
+
+    /**
+     * Gets the predicate of the current filter.
+     */
+    ObservableList<AttributeFilter> getProductFilters();
 
     /**
      * Adds a filter to the product list.
@@ -104,7 +113,7 @@ public interface Model {
     void removeProductFilter(AttributeFilter filter);
 
     /**
-     * Clear all filters.
+     * Clears all filters.
      */
     void clearProductFilters();
 
@@ -112,10 +121,41 @@ public interface Model {
      * Updates the filter of the filtered product list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateProductFilters(ProductFulfillsFiltersPredicate predicate);
+    void updateProductFilters(Predicate<Product> predicate);
 
     /**
-     * Gets the predicate of the current filter.
+     * Applies the filter to the filtered item list of every product in the model by the given {@code predicate}
+     * @throws NullPointerException if {@code predicate} is null
      */
-    ObservableList<AttributeFilter> getProductFilters();
+    void updateFilteredItemListForProducts(Predicate<Item> predicate);
+
+    /**
+     * Prepares the iBook for changes.
+     */
+    void prepareIBookForChanges();
+
+    /**
+     * Saves changes made to IBook.
+     */
+    void saveIBookChanges();
+
+    /**
+     * Checks if the current state of iBook can be undone.
+     */
+    boolean canUndoIBook();
+
+    /**
+     * Checks if there is any undone state of iBook that can be redone.
+     */
+    boolean canRedoIBook();
+
+    /**
+     * Reverts the iBook to one state older.
+     */
+    void undoIBook();
+
+    /**
+     * Restores the iBook to one state newer.
+     */
+    void redoIBook();
 }

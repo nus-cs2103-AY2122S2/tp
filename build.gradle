@@ -25,6 +25,7 @@ test {
     finalizedBy jacocoTestReport
 }
 
+
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
@@ -67,6 +68,10 @@ dependencies {
 
 shadowJar {
     archiveName = 'ibook.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

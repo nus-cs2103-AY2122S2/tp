@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
-<TextArea editable="false" wrapText="true"
+<TextArea editable="false" wrapText="true" text="Command Output Window"
           styleClass="result-window" stylesheets="@css/resultWindow.css">
     <VBox.margin>
         <Insets bottom="20.0" left="40.0" right="40.0" top="20.0"/>

@@ -3,7 +3,6 @@ package seedu.ibook.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 import static seedu.ibook.testutil.Assert.assertThrows;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
@@ -14,7 +13,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.ibook.commons.core.GuiSettings;
-import seedu.ibook.model.product.filters.ProductFulfillsFiltersPredicate;
+import seedu.ibook.model.product.filters.ProductFilter;
 import seedu.ibook.testutil.IBookBuilder;
 
 public class ModelManagerTest {
@@ -115,11 +114,11 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentIBook, userPrefs)));
 
         // different filteredList -> returns false
-        modelManager.updateProductFilters(new ProductFulfillsFiltersPredicate(PRODUCT_B));
+        modelManager.updateProductFilters(new ProductFilter(PRODUCT_B));
         assertFalse(modelManager.equals(new ModelManager(iBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateProductFilters(PREDICATE_SHOW_ALL_PRODUCTS);
+        modelManager.clearProductFilters();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
