@@ -7,17 +7,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents a Person's blood type in MedBook.
+ * Represents a patient's blood type in MedBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidBloodType(String)}
  */
 public class BloodType {
 
-    public static final String MESSAGE_CONSTRAINTS = "Blood type must be either A, B, AB or O.";
+    public static final String MESSAGE_CONSTRAINTS = "Blood type can take any values, and it should not be blank.";
 
     /*
-     * Blood type must be either A, B, AB, O, or nil (in case user did not specify it).
+     * Blood type can take any value
      */
-    public static final String VALIDATION_REGEX = "[A|B|O|AB|nil]";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
