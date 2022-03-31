@@ -11,6 +11,7 @@ import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -36,7 +37,7 @@ public class AddressBookParser {
 
     private String[] singleCommandList = {ClearCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, SummariseCommand.COMMAND_WORD,
-        ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD};
+        ArchiveCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, EmailCommand.COMMAND_WORD};
 
     /**
      * Checks whether command that does not require any parameters such as {@Code ListCommand} are input by the user.
@@ -111,6 +112,9 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case EmailCommand.COMMAND_WORD:
+                return new EmailCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
