@@ -17,7 +17,7 @@ public class PayCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Set the status of the transaction at specified index to 'Paid'.\n"
-            + "Parameters: INDEX (must be a positive integer) \n"
+            + "Parameters: INDEX (positive integer up to size of the list) \n"
             + "Format: " + COMMAND_WORD + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Transaction set to paid.";
