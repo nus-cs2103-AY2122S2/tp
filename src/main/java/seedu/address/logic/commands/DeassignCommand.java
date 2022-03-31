@@ -79,11 +79,13 @@ public class DeassignCommand extends Command {
 
         if (!deassignedGroup.personExists(personToDeassign)) {
             throw new CommandException(String.format(
-                    MESSAGE_PERSON_DOES_NOT_EXIST, personToDeassign.getName(), group));
+                    MESSAGE_PERSON_DOES_NOT_EXIST,
+                    personToDeassign.getName() + " [" + personToDeassign.getEmail() + "]", group));
         }
 
         model.deassignPerson(personToDeassign, deassignedGroup);
-        return new CommandResult(String.format(MESSAGE_DEASSIGN_SUCCESS, personToDeassign.getName(), deassignedGroup));
+        return new CommandResult(String.format(MESSAGE_DEASSIGN_SUCCESS,
+                personToDeassign.getName() + " [" + personToDeassign.getEmail() + "]", deassignedGroup));
     }
 
     @Override

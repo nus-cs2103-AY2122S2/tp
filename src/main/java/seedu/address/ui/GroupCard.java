@@ -47,7 +47,10 @@ public class GroupCard extends UiPart<Region> {
         studentContactTitle.setText("Student contacts:");
         group.getPersons().stream()
                 .sorted(Comparator.comparing(person -> person.getName().toString()))
-                .forEach(person -> personName.getChildren().add(new Label(person.getName().toString())));
+                .forEach(person -> {
+                    personName.getChildren().add(new Label(person.getName().toString()
+                            + " [" + person.getEmail().toString() + " ]"));
+                });
 
         taskTitle.setText("Tasks:");
         group.getTaskList().getInternalList().stream()

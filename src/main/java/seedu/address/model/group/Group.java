@@ -130,7 +130,12 @@ public class Group {
             int id = 1;
 
             for (Person person : persons) {
-                builder.append(id).append(". ").append(person.getName()).append("\n");
+                builder.append(id).append(". ")
+                        .append(person.getName())
+                        .append(" [")
+                        .append(person.getEmail())
+                        .append("]")
+                        .append("\n");
                 id++;
             }
         }

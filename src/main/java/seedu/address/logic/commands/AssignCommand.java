@@ -78,11 +78,13 @@ public class AssignCommand extends Command {
 
         if (assignedGroup.personExists(personToAssign)) {
             throw new CommandException(String.format(
-                    MESSAGE_PERSON_ALREADY_EXISTS, personToAssign.getName(), group));
+                    MESSAGE_PERSON_ALREADY_EXISTS,
+                    personToAssign.getName() + " [" + personToAssign.getEmail() + "]", group));
         }
 
         model.assignPerson(personToAssign, assignedGroup);
-        return new CommandResult(String.format(MESSAGE_ASSIGN_SUCCESS, personToAssign.getName(), assignedGroup));
+        return new CommandResult(String.format(MESSAGE_ASSIGN_SUCCESS,
+                personToAssign.getName() + " [" + personToAssign.getEmail() + "]", assignedGroup));
     }
 
     @Override
