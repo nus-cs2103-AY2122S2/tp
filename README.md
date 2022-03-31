@@ -7,11 +7,11 @@
 
 ## About
 
-Small business owners and freelancers may find it difficult to keep track of all of their clients.
+Small business owners and freelancers may find it difficult to keep track of all their clients.
 
-CinnamonBun is an application that helps to keep a record of a large number of clients and business transactions, to allow business owners to focus more on their job and less on worrying about bookkeeping.  
+CinnamonBun is an application that helps to record and manage a large number of clients and business transactions, thus allowing business owners to focus more on their business and less on bookkeeping.
 
-CinnanonBun comes with a beautiful Graphical User Interface (GUI) while being optimized for control via a Command Line Interface (CLI).  
+CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still being optimized for control via a Command Line Interface (CLI).
 
 ![Ui](docs/images/Ui.png)
 
