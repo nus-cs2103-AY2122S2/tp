@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -23,6 +24,15 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_NO_PERSONS = unused -> false;
     Predicate<Company> PREDICATE_SHOW_NO_COMPANIES = unused -> false;
     Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
+
+    /**
+     * {@code Comparator} that compares {@code Entry}s.
+     */
+    Comparator<Person> COMPARATOR_PERSON_BY_NAME = (p1, p2) -> p1.getName().toString()
+                                                        .compareTo(p2.getName().toString());
+    Comparator<Company> COMPARATOR_COMPANY_BY_NAME = (c1, c2) -> c1.getName().toString()
+                                                        .compareTo(c2.getName().toString());
+    Comparator<Event> COMPARATOR_EVENT_BY_DATE = (e1, e2) -> e1.getDate().compareTo(e2.getDate());
 
     static enum ListType { PERSON, COMPANY, EVENT }
 

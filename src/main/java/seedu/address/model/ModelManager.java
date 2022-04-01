@@ -200,8 +200,20 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPersonListByName(boolean ascending) {
-        addressBook.sortPersonListByName(ascending);
+        filteredPersons.sort(ascending ? COMPARATOR_PERSON_BY_NAME : COMPARATOR_PERSON_BY_NAME.reversed());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void sortCompanyListByName(boolean ascending) {
+        filteredCompanies.sort(ascending ? COMPARATOR_COMPANY_BY_NAME : COMPARATOR_COMPANY_BY_NAME.reversed());
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+    }
+
+    @Override
+    public void sortEventListByDate(boolean ascending) {
+        filteredEvents.sort(ascending ? COMPARATOR_EVENT_BY_DATE : COMPARATOR_EVENT_BY_DATE.reversed());
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override

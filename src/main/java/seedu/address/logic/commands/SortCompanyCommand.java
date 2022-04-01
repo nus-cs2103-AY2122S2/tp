@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 /**
  * Sort list of persons by name.
  */
-public class SortPersonCommand extends Command {
+public class SortCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "sortedp";
 
@@ -15,7 +15,7 @@ public class SortPersonCommand extends Command {
 
     private boolean ascending;
 
-    public SortPersonCommand(boolean ascending) {
+    public SortCompanyCommand(boolean ascending) {
         this.ascending = ascending;
     }
 
@@ -24,7 +24,7 @@ public class SortPersonCommand extends Command {
         requireNonNull(model);
 
         //Show all the persons and empty out all the temporary list for events and companies
-        model.sortPersonListByName(ascending);
+        model.sortCompanyListByName(ascending);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }
