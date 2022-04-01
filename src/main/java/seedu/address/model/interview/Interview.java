@@ -195,6 +195,7 @@ public class Interview {
     public String convertToCsv() {
         String applicantCsv = this.applicant.convertToCsv();
         String positionCsv = this.position.convertToCsv();
-        return this.date + "," + this.status + "," + applicantCsv + "," + positionCsv;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        return this.date.format(formatter) + "," + this.status + "," + applicantCsv + "," + positionCsv;
     }
 }
