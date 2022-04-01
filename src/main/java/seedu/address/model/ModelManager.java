@@ -199,6 +199,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortPersonListByName(boolean ascending) {
+        addressBook.sortPersonListByName(ascending);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public Entry deleteEntry(int index) {
         switch (currentlyDisplayedListType) {
         case PERSON:

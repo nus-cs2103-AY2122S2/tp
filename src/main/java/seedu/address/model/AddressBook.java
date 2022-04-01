@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +17,15 @@ import seedu.address.model.entry.UniqueEntryList;
  * Duplicates are not allowed (by .isSameEntry comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
+
+    /**
+     * {@code Comparator} that compares {@code Entry}s.
+     */
+    private static final Comparator<Person> COMPARATOR_PERSON_BY_NAME = (p1, p2) -> p1.getName().toString()
+                                                        .compareTo(p2.getName().toString());
+    private static final Comparator<Company> COMPARATOR_COMPANY_BY_NAME = (c1, c2) -> c1.getName().toString()
+                                                        .compareTo(c2.getName().toString());
+    private static final Comparator<Event> COMPARATOR_EVENT_BY_DATE = (e1, e2) -> e1.getDate().compareTo(e2.getDate());
 
     private final UniqueEntryList<Person> persons;
     private final UniqueEntryList<Company> companies;
@@ -190,6 +200,39 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    /**
+     * Returns sorted list of all {@code Person}s in the address book.
+     */
+    public ObservableList<Person> getSortedPersons(boolean ascending) {
+        if (ascending) {
+            return persons.asSortedList(COMPARATOR_PERSON_BY_NAME);
+        } else {
+            return persons.asReversedSortedList(COMPARATOR_PERSON_BY_NAME);
+        }
+    }
+
+    /**
+     * Returns sorted list of all {@code Company}s in the address book.
+     */
+    public ObservableList<Company> getSortedCompanies(boolean ascending) {
+        if (ascending) {
+            return companies.asSortedList(COMPARATOR_COMPANY_BY_NAME);
+        } else {
+            return companies.asReversedSortedList(COMPARATOR_COMPANY_BY_NAME);
+        }
+    }
+
+    /**
+     * Returns sorted list of all {@code Event}s in the address book.
+     */
+    public ObservableList<Event> getSortedEvents(boolean ascending) {
+        if (ascending) {
+            return events.asSortedList(COMPARATOR_EVENT_BY_DATE);
+        } else {
+            return events.asReversedSortedList(COMPARATOR_EVENT_BY_DATE);
+        }
     }
 
     @Override

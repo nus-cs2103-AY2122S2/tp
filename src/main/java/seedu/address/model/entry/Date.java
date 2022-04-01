@@ -12,7 +12,7 @@ import java.util.Locale;
  * Represents an Event's Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should follow the format YYYY-MM-DD and be a valid date.";
 
@@ -40,6 +40,19 @@ public class Date {
         }
 
         return true;
+    }
+
+    /**
+     * Compares this date with another date.
+     * Returns a negative integer, zero, or a positive integer as this date is less than, equal to, or
+     * greater than the specified date.
+     * <p>
+     * 
+     * @param otherDate the date to be compared.
+    */
+    @Override
+    public int compareTo(Date otherDate) {
+        return this.date.compareTo(otherDate.date);
     }
 
 

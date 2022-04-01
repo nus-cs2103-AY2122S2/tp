@@ -185,6 +185,24 @@ public interface Model {
     void showEventList(Predicate<Event> predicate);
 
     /**
+     * Sort and show the filtered {@code Person} list by name and in ascending order 
+     * if {@code ascending} is true.
+     */
+    void sortPersonListByName(boolean ascending);
+
+    /**
+     * Sort and show the filtered {@code Company} list by name and in ascending order 
+     * if {@code ascending} is true.
+     */
+    void sortCompanyListByName(boolean ascending);
+
+    /**
+     * Sort and show the filtered {@code Event} list by date and in ascending order 
+     * if {@code ascending} is true.
+     */
+    void sortEventListByDate(boolean ascending);
+
+    /**
      * Deletes the entry at the index of the currently displayed list and returns it.
      */
     Entry deleteEntry(int index);
