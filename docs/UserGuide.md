@@ -533,9 +533,9 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Edit Event**     | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…` | `edite 2 n/Resume Screening d/2022-12-11`                                              |
 | **Archive**     | `archive INDEX` | `archive 2`                                              |
 | **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
-| **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find James Jake`                                                                                     |
-| **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find s/unarchived Shopee`                                                                                     |
-| **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find Career Talk`                                                                                |
+| **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
+| **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
+| **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
 | **List Persons**   | `listp [s/ARCHIVED]`                                                                          |`listp s/all`                                                                                      |
 | **List Companies** | `listc [s/ARCHIVED]`                                                                          |`listc`                                                                                      |
 | **List Events**    | `liste [s/ARCHIVED]`                                                                          |`liste s/archived`                                                                                      |
