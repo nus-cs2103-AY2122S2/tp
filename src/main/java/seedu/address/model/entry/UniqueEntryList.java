@@ -65,7 +65,7 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
             throw new DuplicateEntryException();
         }
 
-        if(target.isArchived()) {
+        if (target.isArchived()) {
             editedEntry.setArchived(true);
         }
         internalList.set(index, editedEntry);
