@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
 Tinner (Anagram of Intern) is a desktop app for managing internship applications for students, optimized for use via a
 Command Line Interface (CLI)
