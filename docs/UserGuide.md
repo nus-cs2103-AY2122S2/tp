@@ -21,7 +21,7 @@ If you feel InternBuddy is the solution to your problem and you're interested in
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
    to check.
 
-2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/tag/v1.2.0).
+2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.3.0/internbuddy.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
@@ -230,8 +230,12 @@ adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 ```
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
-`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM.
-E.g. 2022-10-20 and 13:30.
+`DATE` must be in the format:
+- YYYY-MM-DD
+- "Today" (which will get the `DATE` for today)
+- "Today DAY" (which will get the `DATE` for DAY days after today)
+While `TIME` must be in the format HH:MM.
+E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
 </div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
@@ -241,15 +245,24 @@ E.g. 2022-10-20 and 13:30.
 Examples:
 * `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
 * `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
+* `adde n/Practical Test c/ABC d/Today ti/15:00 l/Zoom`
 ### Listing entries
+- The `s/` parameter is an optional parameter that accepts 3 types of argument:
+  - `s/all`: returns all entries
+  - `s/archived`: returns all archived entries
+  - `s/unarchived`: returns all unarchived entries
+- If the `s/` parameter is not provided, the default is `s/unarchived`
 #### Listing all companies : `listc`
 
 Shows a list of all companies in the list of companies.
 
 Format:
 ```
-listc
+listc [s/ARCHIVED]
 ```
+Examples:
+* `listc` (defaults to `s/unarchived`) displays all unarchived companies.
+* `listc s/archived` displays all archived companies.
 
 #### Listing all persons : `listp`
 
@@ -257,8 +270,11 @@ Shows a list of all people in the list of contact people.
 
 Format: 
 ```
-listp
+listp [s/ARCHIVED]
 ```
+Examples:
+* `listp` (defaults to `s/unarchived`) displays all unarchived people.
+* `listp s/archived` displays all archived people.
 
 ### Listing all events : `liste`
 
@@ -266,9 +282,11 @@ Shows a list of all events in the list of events.
 
 Format: 
 ```
-liste
+liste [s/ARCHIVED]
 ```
-
+Examples:
+* `liste` (defaults to `s/unarchived`) displays all unarchived events.
+* `liste s/archived` displays all archived events.
 ### Editing entries
 <div markdown="block" class="alert alert-info">
 
@@ -345,9 +363,32 @@ Examples:
 * `edite 2 n/Resume Screening t/` Edits the name of the 2nd event to be `Resume Screening` and clears all existing tags.
 
 ### Locating entries
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Entries matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+- Same for listing commands, the `s/` parameter is an optional parameter that accepts 3 types of argument:
+  - `s/all`: returns all entries
+  - `s/archived`: returns all archived entries
+  - `s/unarchived`: returns all unarchived entries
+- If the `s/` parameter is not provided, the default is `s/unarchived`
+- `KEYWORD` represents each parameter with the arguments specified after it.
+  i.e. `[n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 #### Locating companies: `findc`
 
-**TODO**
+Finds companies whose names contain any of the given keywords.
+
+Format: 
+```
+findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
+```
+Examples:
+* `findc n/Shopee` returns `Shopee` and `Shopee Express`
+* `findc n/abc google` returns `Google`, `ABC Pte`<br>
 
 #### Locating people by name: `findp`
 
@@ -355,25 +396,58 @@ Finds people whose names contain any of the given keywords.
 
 Format: 
 ```
-findp KEYWORD [MORE_KEYWORDS]
+findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
 ```
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findp n/John` returns `john` and `John Doe`
+* `findp n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### Locating events: `finde`
 
-**TODO**
+Finds events whose names contain any of the given keywords and date is between START_DATE and END_DATE.
+If not provided, START_DATE and END_DATE are set to the earliest and latest date in the list of events respectively.
 
+Format: 
+```
+finde [s/ARCHIVED] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
+```
+Examples:
+* `finde n/online` returns `online interview` and `online assessment`
+* `finde s/all n/online` returns `online interview`, `online assessment`, `online assessment`
+* `finde s/archived n/test` returns `software test`, `practical test`<br> (given both events have been archived)
+* `find sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
+### Archiving entries
+#### Archiving an entry: `archive`
+Archiving an entry will hide it from the list of entries.
+
+Format:
+```
+archive INDEX
+```
+
+Examples:
+* `archive 1` hides the 1st entry from the list of entries.
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+display all unarchived entries first to get the INDEX of the entry you want to archive.
+</div>
+
+#### Unarchiving an entry: `unarchive`
+Unarchiving an entry will show it in the list of entries.
+
+Format:
+```
+unarchive INDEX
+```
+
+Examples:
+* `unarchive 1` shows the 1st entry in the list of entries.
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+display all archived entries first to get the INDEX of the entry you want to unarchive.
+</div>
 ### Removing entries
 #### Deleting an entry : `delete`
 
@@ -440,6 +514,8 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
   GUI stands for Graphical User Interface. Contrary to CLI, GUI is an interface that you can interact with, mainly through clicking interface (i.e. clicking buttons).
 - ### Entry
   An entry is a single entry in a list. In InternBuddy, an entry can be a company, a person, or an event. Entry is a generic term that can be used to refer to any of the three types of entries.
+- ### Parameter
+  A parameter is a keyword that is used to specify a specific action. For example, `listc` is a command that lists all companies. `listc` has a parameter `s/` that specifies the type of entries to be listed.  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -447,7 +523,7 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 | Action             | Format                                                                           | Examples                                                                             |
 |--------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **Add Person**     | `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]… `                    | `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com t\friend t\colleague`       |
+| **Add Person**     | `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]… `                    | `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com t/friend t/colleague`       |
 | **Add Company**    | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… `                         | `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card R #02-03 t/finance` |
 | **Add Event**      | `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]… `                 | `adde n/Career Talk c/Sony d/2022-03-19 ti/10:00 l/22 Clementi Rd t/important`       |
 | **Clear**          | `clear`                                                                          |                                                                                      |
@@ -455,8 +531,12 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Edit Person**    | `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`             | `editp 1 p/91234567 e/johndoe@example.com`                                           |
 | **Edit Company**   | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                  | `editc 2 n/Shoppee t/`                                                               |
 | **Edit Event**     | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…` | `edite 2 n/Resume Screening d/2022-12-11`                                              |
-| **Find Person**    | `findp KEYWORD [MORE_KEYWORDS]`                                                  | `find James Jake`                                                                                     |
-| **List Persons**   | `listp`                                                                          |                                                                                      |
-| **List Companies** | `listc`                                                                          |                                                                                      |
-| **List Events**    | `liste`                                                                          |                                                                                      |
+| **Archive**     | `archive INDEX` | `archive 2`                                              |
+| **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
+| **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find James Jake`                                                                                     |
+| **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find s/unarchived Shopee`                                                                                     |
+| **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find Career Talk`                                                                                |
+| **List Persons**   | `listp [s/ARCHIVED]`                                                                          |`listp s/all`                                                                                      |
+| **List Companies** | `listc [s/ARCHIVED]`                                                                          |`listc`                                                                                      |
+| **List Events**    | `liste [s/ARCHIVED]`                                                                          |`liste s/archived`                                                                                      |
 | **Help**           | `help`                                                                           |                                                                                      |
