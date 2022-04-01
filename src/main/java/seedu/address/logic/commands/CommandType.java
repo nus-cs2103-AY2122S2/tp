@@ -197,7 +197,7 @@ public enum CommandType {
         case CONTACT:
             return new FindContactCommandParser().parse(arguments);
         case MEDICAL:
-            return new FindMedicalCommandParser().parse(arguments);
+            throw new ParseException("Find in Medical is not supported as there is only one record");
         case CONSULTATION:
             return new FindConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:

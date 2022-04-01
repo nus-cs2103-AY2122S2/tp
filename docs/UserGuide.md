@@ -225,9 +225,12 @@ Finds a specified entry (patient, contact, medical information, ...) on the curr
 Format: `find KEYWORD`
 
 * We can find the entry only if the entry is being shown on the display panel.
+* Finding a Patient's information is done through specifying their name as the keyword.
+* Finding all other records matches your keyword with any of the fields in that record.
 
 Examples:
-* `find x-ray` when viewing the test results belonging to a certain patient will filter the test results to only show those which contains the keyword `x-ray`
+* `find John` when viewing all patients shows only patients whose name is John.
+* `find x-ray` when viewing the test results belonging to a certain patient will filter the test results to only show those which contains the keyword `x-ray`.
 ### Adding Contact Information: `add t/contact`
 
 Adds a patient's emergency contact to MedBook.
