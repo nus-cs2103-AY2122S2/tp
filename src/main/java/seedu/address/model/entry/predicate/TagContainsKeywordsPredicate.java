@@ -21,7 +21,7 @@ public class TagContainsKeywordsPredicate implements Predicate<Entry> {
         return keywords.stream()
                 .anyMatch(keyword -> entry.getTags().stream().map(tag -> tag.getPure().toLowerCase())
                         .collect(Collectors.toSet())
-                        .contains(keyword));
+                        .contains(keyword.toLowerCase()));
     }
 
     @Override
