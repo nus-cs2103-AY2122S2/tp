@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -17,9 +16,9 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_THEME);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
-        }
+        //if (!argMultimap.getPreamble().isEmpty()) {
+        //    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
+        //}
 
         if (!arePrefixesPresent(argMultimap, PREFIX_THEME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE));
