@@ -230,8 +230,12 @@ adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 ```
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
-`DATE` must be in the format YYYY-MM-DD, while `TIME` must be in the format HH:MM.
-E.g. 2022-10-20 and 13:30.
+`DATE` must be in the format:
+- YYYY-MM-DD
+- "Today" (which will get the `DATE` for today)
+- "Today DAY" (which will get the `DATE` for DAY days after today)
+While `TIME` must be in the format HH:MM.
+E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
 </div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
@@ -241,6 +245,7 @@ E.g. 2022-10-20 and 13:30.
 Examples:
 * `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
 * `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
+* `adde n/Practical Test c/ABC d/Today ti/15:00 l/Zoom`
 ### Listing entries
 #### Listing all companies : `listc`
 
@@ -345,9 +350,30 @@ Examples:
 * `edite 2 n/Resume Screening t/` Edits the name of the 2nd event to be `Resume Screening` and clears all existing tags.
 
 ### Locating entries
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Entries matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+- The `s/` parameter is an optional parameter that accepts 3 types of argument:
+  - `s/all`: returns all entries
+  - `s/archived`: returns all archived entries
+  - `s/unarchived`: returns all unarchived entries
+- If the `s/` parameter is not provided, the default is `s/unarchived`
 #### Locating companies: `findc`
 
-**TODO**
+Finds companies whose names contain any of the given keywords.
+
+Format: 
+```
+findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
+```
+Examples:
+* `find Shopee` returns `Shopee` and `Shopee Express`
+* `find abc google` returns `Google`, `ABC Pte`<br>
 
 #### Locating people by name: `findp`
 
@@ -355,15 +381,8 @@ Finds people whose names contain any of the given keywords.
 
 Format: 
 ```
-findp KEYWORD [MORE_KEYWORDS]
+findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
 ```
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -372,7 +391,18 @@ Examples:
 
 #### Locating events: `finde`
 
-**TODO**
+Finds events whose names contain any of the given keywords and date is between START_DATE and END_DATE.
+If not provided, START_DATE and END_DATE are set to the earliest and latest date in the list of events respectively.
+
+Format: 
+```
+finde [s/ARCHIVED] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
+```
+Examples:
+* `find online` returns `online interview` and `online assessment`
+* `find s/all online` returns `online interview`, `online assessment`, `online assessment`
+* `find s/archived test` returns `software test`, `practical test`<br> (given both events have been archived)
+* `find sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
 
 ### Removing entries
 #### Deleting an entry : `delete`
