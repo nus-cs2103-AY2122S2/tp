@@ -8,7 +8,12 @@ public class HelpDescription {
             + "2. edit: Edit different types of data in HireLah. \n"
             + "3. delete: Delete different types of data in HireLah. \n"
             + "4. list: List different data types in HireLah. Can also display filter and sort result. \n"
-            + "7. exit: Exits the program";
+            + "5. pass: Mark an interview as passed. \n"
+            + "6. fail: Mark an interview as failed. \n"
+            + "7. accept: Accept a passed interview. \n"
+            + "8. reject: Reject a passed interview. \n"
+            + "9. export: Export data to a CSV file. \n"
+            + "10. exit: Exits the program";
 
     public static final String ADD_COMMAND_DESCRIPTION =
             "1. Adding an applicant: \n"
@@ -144,24 +149,24 @@ public class HelpDescription {
             + "list -p f/req a/Java s/dsc";
 
     public static final String FILTER_COMMAND_DESCRIPTION =
-        "View different applicants, interviews and positions in HireLah through various filters. "
-        + "It alters the current display of HireLah and changes the index of the relevant data. \n"
-        + "Format: 'filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]' \n"
-        + "Notice: \n"
-        + "Different data has different filters available, thus requiring different arguments, as such"
-        + "- Applicant (DATA_TYPE: appl): \n"
-        + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View applicants whose name contains the keyword \n"
-        + " + FILTER_TYPE: tag, ARGUMENT: t/TAG1, [t/TAG2, …]: View applicants who have all the tags specified \n"
-        + "- Interview (DATA_TYPE: intvw): \n"
-        + " + FILTER_TYPE: appl, ARGUMENT: n/NAME: View interviews for applicants whose name is specified \n"
-        + " + FILTER_TYPE: date, ARGUMENT: d/DATE: View interviews happening on the specified date "
-        + "(Date provided must be in format YYYY-MM-DD) \n"
-        + "- Position (DATA_TYPE: pos): \n"
-        + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View positions which has "
-        + "the specified keyword in the position name \n"
-        + "Examples: \n"
-        + "filter appl tag t/school t/friend \n"
-        + "filter intvw date d/2022-03-20";
+            "View different applicants, interviews and positions in HireLah through various filters. "
+            + "It alters the current display of HireLah and changes the index of the relevant data. \n"
+            + "Format: 'filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]' \n"
+            + "Notice: \n"
+            + "Different data has different filters available, thus requiring different arguments, as such"
+            + "- Applicant (DATA_TYPE: appl): \n"
+            + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View applicants whose name contains the keyword \n"
+            + " + FILTER_TYPE: tag, ARGUMENT: t/TAG1, [t/TAG2, …]: View applicants who have all the tags specified \n"
+            + "- Interview (DATA_TYPE: intvw): \n"
+            + " + FILTER_TYPE: appl, ARGUMENT: n/NAME: View interviews for applicants whose name is specified \n"
+            + " + FILTER_TYPE: date, ARGUMENT: d/DATE: View interviews happening on the specified date "
+            + "(Date provided must be in format YYYY-MM-DD) \n"
+            + "- Position (DATA_TYPE: pos): \n"
+            + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View positions which has "
+            + "the specified keyword in the position name \n"
+            + "Examples: \n"
+            + "filter appl tag t/school t/friend \n"
+            + "filter intvw date d/2022-03-20";
 
     public static final String SORT_COMMAND_DESCRIPTION =
             "Arranges applicants, interview and positions in HireLah according to their properties."
@@ -183,6 +188,46 @@ public class HelpDescription {
             + "Examples: \n"
             + "sort APPL ASC \n"
             + "sort POS DSC";
+    
+    public static final String PASS_COMMAND_DESCRIPTION =
+            "Passes an existing interview in Hirelah.\nFormat: pass INTERVIEW_INDEX\n"
+            + "- Passes the Interview at the specified INTERVIEW_INDEX.\n"
+            + "- Interview must have status pending before it can be passed.\n"
+            + "- The index must be a positive integer 1, 2, 3, …\u200B \n"
+            + "Additional details:\n"
+            + "- A job offer is handed out for the interviewed position when applicant passes interview.\n"
+            + "- Job offer is tracked by the Position interviewed for.\n"
+            + "- Job can only be offered if offered < openings.\n"
+            + "- A job offered will increase offered by 1.\n"
+            + "Example: pass 1";
+
+    public static final String FAIL_COMMAND_DESCRIPTION =
+            "Fails an existing interview in Hirelah.\nFormat: fail INTERVIEW_INDEX\n"
+            + "- Passes the Interview at the specified INTERVIEW_INDEX.\n"
+            + "- Interview must have status pending before it can be failed.\n"
+            + "- The index must be a positive integer 1, 2, 3, …\u200B \n"
+            + "Example: fail 1";
+
+    public static final String ACCEPT_COMMAND_DESCRIPTION =
+            "Accepts an existing passed interview in Hirelah. This command accepts the passed interview, meaning"
+            + "that the candidate has accepted the job.\nFormat: accept INTERVIEW_INDEX\n"
+            + "- Accepts the Interview at the specified INTERVIEW_INDEX.\n"
+            + "- Interview must have status passed before it can be accepted.\n"
+            + "- The index must be a positive integer 1, 2, 3, …\u200B";
+
+    public static final String REJECT_COMMAND_DESCRIPTION =
+            "Rejects an existing interview in Hirelah. This command rejects the passed interview, meaning that the "
+            + "candidate has rejected the job.\nFormat: reject INTERVIEW_INDEX\n"
+            + "- Reject the Interview at the specified INTERVIEW_INDEX.\n"
+            + "- Interview must have status passed before it can be accepted.\n"
+            + "- The index must be a positive integer 1, 2, 3, …\u200B \n"
+            + "Additional details:\n"
+            + "- Rejecting a job offer will decrement the number of offered in Position";
+
+    public static final String EXPORT_COMMAND_DESCRIPTION =
+            "Exports all data of the specified typo in HireLah to a CSV file.\n"
+            + "Format: export -TYPE\n"
+            + "TYPE can be a for applicants, p for positions, and i for interviews";
 
     public static final String EXIT_COMMAND_DESCRIPTION =
             "Well its an exit command, of course it going to terminate the program \n"
