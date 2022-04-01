@@ -45,7 +45,6 @@ public class ViewMedicalCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-
         if (nric == null) { // No nric specified, display all medical information
             model.updateFilteredMedicalList(Model.PREDICATE_SHOW_ALL_MEDICALS);
             return new CommandResult(
