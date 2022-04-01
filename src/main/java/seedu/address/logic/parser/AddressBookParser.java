@@ -27,6 +27,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
 import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.ListPersonCommand;
+import seedu.address.logic.commands.SortCompanyCommand;
+import seedu.address.logic.commands.SortEventCommand;
+import seedu.address.logic.commands.SortPersonCommand;
 import seedu.address.logic.commands.UnarchiveAllCommand;
 import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -102,6 +105,15 @@ public class AddressBookParser {
 
         case ListEventCommand.COMMAND_WORD:
             return new ListCommandParser(ListType.EVENT).parse(arguments);
+
+        case SortPersonCommand.COMMAND_WORD:
+            return new SortCommandParser(ListType.PERSON).parse(arguments);
+
+        case SortCompanyCommand.COMMAND_WORD:
+            return new SortCommandParser(ListType.COMPANY).parse(arguments);
+
+        case SortEventCommand.COMMAND_WORD:
+            return new SortCommandParser(ListType.EVENT).parse(arguments);
 
         case ArchiveCommand.COMMAND_WORD:
             return new ArchiveCommandParser().parse(arguments);
