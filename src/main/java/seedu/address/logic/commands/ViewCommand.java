@@ -121,6 +121,8 @@ public class ViewCommand extends Command {
         } else if (keywords.contains("S/")) {
             messageViewSuccess = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
+        } else if (keywords.contains("P/")) {
+            messageViewSuccess = "Listed all persons!";
         } else {
             StringBuilder sb = new StringBuilder();
             int i = 1;

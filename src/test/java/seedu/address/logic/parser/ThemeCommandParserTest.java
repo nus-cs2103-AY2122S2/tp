@@ -16,11 +16,11 @@ public class ThemeCommandParserTest {
     @Test
     public void parse_changeTheme_success() {
         // change to dark theme
-        assertParseSuccess(parser, ThemeCommand.COMMAND_WORD + " " + PREFIX_THEME + " dark",
+        assertParseSuccess(parser, ThemeCommand.COMMAND_WORD + " " + PREFIX_THEME + "dark",
                 new ThemeCommand(true, false));
 
         // change to light theme
-        assertParseSuccess(parser, ThemeCommand.COMMAND_WORD + " " + PREFIX_THEME + " light",
+        assertParseSuccess(parser, ThemeCommand.COMMAND_WORD + " " + PREFIX_THEME + "light",
                 new ThemeCommand(false, true));
     }
 
