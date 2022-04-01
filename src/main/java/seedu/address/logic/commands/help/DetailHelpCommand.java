@@ -21,10 +21,6 @@ public class DetailHelpCommand extends HelpCommand {
             return new CommandResult(HelpDescription.EDIT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "delete":
             return new CommandResult(HelpDescription.DELETE_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
-        case "filter":
-            return new CommandResult(HelpDescription.FILTER_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
-        case "sort":
-            return new CommandResult(HelpDescription.SORT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "list":
             return new CommandResult(HelpDescription.LIST_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "exit":
