@@ -56,8 +56,8 @@ Here are some example commands you can try:
   Thus, the user should input the command `edit 10`, where "10" is the `STUDENT_INDEX` supplied by the user.
 
 * Parameters in square brackets are optional parameters.<br>
-  Example: For the command `edit STUDENT_INDEX [p/PHONE_NUMBER]`, the user must supply the `STUDENT_INDEX` parameter in the input, whereas the `PHONE_NUMBER` parameter is optional.<br>
-  Thus, the user can input the command `edit 10` or `edit 10 p/98765432`.
+  Example: For the command `edit STUDENT_INDEX [p/PHONE_NUMBER] [m/MODULE_CODE]`, the user must supply the `STUDENT_INDEX` parameter in the input, whereas the `PHONE_NUMBER` and `MODULE_CODE` parameters are optional.<br>
+  Thus, the user can input the command `edit 10 p/98765432` (`MODULE_CODE` not specified) or `edit 10 p/98765432 m/CS2103` (`MODULE_CODE` specified).
 
 * Parameters with `…`​ after them can be used multiple times.<br>
   Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (1 `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
