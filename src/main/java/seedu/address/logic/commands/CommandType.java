@@ -19,7 +19,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.medical.AddMedicalCommandParser;
 import seedu.address.logic.parser.medical.DeleteMedicalCommandParser;
 import seedu.address.logic.parser.medical.EditMedicalCommandParser;
-import seedu.address.logic.parser.medical.FindMedicalCommandParser;
 import seedu.address.logic.parser.medical.ViewMedicalCommandParser;
 import seedu.address.logic.parser.prescription.AddPrescriptionCommandParser;
 import seedu.address.logic.parser.prescription.DeletePrescriptionCommandParser;
@@ -197,7 +196,7 @@ public enum CommandType {
         case CONTACT:
             return new FindContactCommandParser().parse(arguments);
         case MEDICAL:
-            return new FindMedicalCommandParser().parse(arguments);
+            throw new ParseException("Find in Medical is not supported as there is only one record");
         case CONSULTATION:
             return new FindConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:
