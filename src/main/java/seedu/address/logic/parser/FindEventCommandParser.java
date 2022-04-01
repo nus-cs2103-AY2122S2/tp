@@ -74,6 +74,7 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         boolean timePresent = argumentMultimap.getValue(PREFIX_TIME).isPresent();
         boolean locationPresent = argumentMultimap.getValue(PREFIX_LOCATION).isPresent();
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
+        boolean searchPresent = argumentMultimap.getValue(PREFIX_SEARCH_TYPE).isPresent();
 
         ParserUtil.parseSearchType(searchTypeString);
 
@@ -117,6 +118,6 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         }
 
         return namePresent || companyNamePresent || startDatePresent || endDatePresent || timePresent
-                || locationPresent || tagPresent;
+                || locationPresent || tagPresent || searchPresent;
     }
 }

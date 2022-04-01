@@ -55,6 +55,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         boolean namePresent = argumentMultimap.getValue(PREFIX_NAME).isPresent();
         boolean companyNamePresent = argumentMultimap.getValue(PREFIX_COMPANY).isPresent();
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
+        boolean searchPresent = argumentMultimap.getValue(PREFIX_SEARCH_TYPE).isPresent();
 
         ParserUtil.parseSearchType(searchTypeString);
 
@@ -77,7 +78,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             }
         }
 
-        return namePresent || companyNamePresent || tagPresent;
+        return namePresent || companyNamePresent || tagPresent || searchPresent;
     }
 }
 

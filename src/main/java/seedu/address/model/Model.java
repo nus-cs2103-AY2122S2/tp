@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
@@ -192,5 +193,5 @@ public interface Model {
     /**
      * Archives the entry at the index of the currently displayed list and returns it.
      */
-    Entry archiveEntry(int index, boolean isArchived);
+    Entry archiveEntry(int index, boolean isArchived) throws CommandException;
 }

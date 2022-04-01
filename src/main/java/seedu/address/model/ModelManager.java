@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ListType;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
@@ -277,7 +278,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Entry archiveEntry(int index, boolean isArchived) {
+    public Entry archiveEntry(int index, boolean isArchived) throws CommandException {
         switch (currentlyDisplayedListType) {
         case PERSON:
             if (index >= filteredPersons.size()) {
@@ -285,6 +286,11 @@ public class ModelManager implements Model {
             }
 
             Person personToArchive = filteredPersons.get(index);
+            if (personToArchive.isArchived() == isArchived) {
+                String status = isArchived ? "Archived" : "not Archived";
+                throw new CommandException("This person is already " + status);
+            }
+
             addressBook.setArchivePerson(personToArchive, isArchived);
             return personToArchive;
         case COMPANY:
@@ -293,6 +299,11 @@ public class ModelManager implements Model {
             }
 
             Company companyToArchive = filteredCompanies.get(index);
+            if (companyToArchive.isArchived() == isArchived) {
+                String status = isArchived ? "Archived" : "not Archived";
+                throw new CommandException("This company is already " + status);
+            }
+
             addressBook.setArchiveCompany(companyToArchive, isArchived);
             return companyToArchive;
         case EVENT:
@@ -301,6 +312,11 @@ public class ModelManager implements Model {
             }
 
             Event eventToArchive = filteredEvents.get(index);
+            if (eventToArchive.isArchived() == isArchived) {
+                String status = isArchived ? "Archived" : "not Archived";
+                throw new CommandException("This event is already " + status);
+            }
+
             addressBook.setArchiveEvent(eventToArchive, isArchived);
             return eventToArchive;
         default:

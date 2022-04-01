@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,8 +29,8 @@ public class FindPersonCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]\n"
+            + "[\" + PREFIX_SEARCH_TYPE + \"SEARCH_TYPE]"
+            + "[\" + PREFIX_TAG + \"TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "alice bob ";
 

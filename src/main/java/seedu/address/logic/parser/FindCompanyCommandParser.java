@@ -49,6 +49,7 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
     private boolean isValid(ArgumentMultimap argumentMultimap, String searchTypeString) throws ParseException {
         boolean namePresent = argumentMultimap.getValue(PREFIX_NAME).isPresent();
         boolean tagPresent = argumentMultimap.getValue(PREFIX_TAG).isPresent();
+        boolean searchPresent = argumentMultimap.getValue(PREFIX_SEARCH_TYPE).isPresent();
 
         ParserUtil.parseSearchType(searchTypeString);
 
@@ -65,6 +66,6 @@ public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
             }
         }
 
-        return namePresent || tagPresent;
+        return namePresent || tagPresent || searchPresent;
     }
 }
