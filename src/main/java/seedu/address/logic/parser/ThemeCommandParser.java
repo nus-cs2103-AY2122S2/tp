@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_THEME;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

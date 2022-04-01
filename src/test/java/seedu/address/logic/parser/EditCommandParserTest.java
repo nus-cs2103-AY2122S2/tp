@@ -1,18 +1,40 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.EditCommand.createEditedLineup;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.LineupBuilder.DEFAULT_LINEUP_NAME;
+import static seedu.address.testutil.LineupBuilder.NEW_LINEUP_NAME;
+import static seedu.address.testutil.ScheduleBuilder.DEFAULT_DATETIME;
+import static seedu.address.testutil.ScheduleBuilder.DEFAULT_DESCRIPTION;
+import static seedu.address.testutil.ScheduleBuilder.DEFAULT_SCHEDULE_NAME;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand;
-
+import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
+import seedu.address.testutil.LineupBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ScheduleBuilder;
 
 public class EditCommandParserTest {
     private final EditCommandParser parser = new EditCommandParser();
-    /*
+
     @Test
     public void parse_editPerson_success() {
         Person person = new PersonBuilder().build();
@@ -43,7 +65,7 @@ public class EditCommandParserTest {
                + PREFIX_NAME + DEFAULT_SCHEDULE_NAME + " " + PREFIX_DESCRIPTION + DEFAULT_DESCRIPTION + " "
                + PREFIX_DATE + DEFAULT_DATETIME, new EditCommand(INDEX_FIRST_SCHEDULE, editedScheduleDescriptor));
     }
-    */
+
     @Test
     public void parse_invalidValue_failure() {
         String expectedMessageLineup = String.format(MESSAGE_INVALID_COMMAND_FORMAT,

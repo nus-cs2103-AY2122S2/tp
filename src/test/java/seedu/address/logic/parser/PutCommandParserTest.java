@@ -1,19 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINEUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.LineupBuilder.DEFAULT_LINEUP_NAME;
 import static seedu.address.testutil.PersonBuilder.DEFAULT_NAME;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.PutCommand;
-
+import seedu.address.model.lineup.LineupName;
+import seedu.address.model.person.Name;
 
 public class PutCommandParserTest {
     private PutCommandParser parser = new PutCommandParser();
 
-    /*
     @Test
     public void parse_putIntoLineup_success() {
         // put P/PLAYER L/LINEUP
@@ -26,7 +29,6 @@ public class PutCommandParserTest {
                         + PREFIX_PLAYER + DEFAULT_NAME,
                 new PutCommand(new Name(DEFAULT_NAME), new LineupName(DEFAULT_LINEUP_NAME)));
     }
-    */
 
     @Test
     public void parse_putIntoLineup_failure() {
