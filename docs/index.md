@@ -6,7 +6,7 @@ title: UNite
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-W12-2/tp/branch/master/graph/badge.svg?token=G2G68OQF9T)](https://codecov.io/gh/AY2122S2-CS2103T-W12-2/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/Main.png)
 
 **UNite** is a desktop application  for university students, school admins and teaching assistants who prefer to use a platform with a simplistic UI to keep track of each other’s contact information.
 
