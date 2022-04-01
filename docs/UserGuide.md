@@ -376,6 +376,8 @@ Examples:
   - `s/archived`: returns all archived entries
   - `s/unarchived`: returns all unarchived entries
 - If the `s/` parameter is not provided, the default is `s/unarchived`
+- `KEYWORD` represents each parameter with the arguments specified after it.
+  i.e. `[n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 #### Locating companies: `findc`
 
 Finds companies whose names contain any of the given keywords.
@@ -385,8 +387,8 @@ Format:
 findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
 ```
 Examples:
-* `find Shopee` returns `Shopee` and `Shopee Express`
-* `find abc google` returns `Google`, `ABC Pte`<br>
+* `findc n/Shopee` returns `Shopee` and `Shopee Express`
+* `findc n/abc google` returns `Google`, `ABC Pte`<br>
 
 #### Locating people by name: `findp`
 
@@ -398,8 +400,8 @@ findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
 ```
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `findp n/John` returns `john` and `John Doe`
+* `findp n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### Locating events: `finde`
@@ -412,9 +414,9 @@ Format:
 finde [s/ARCHIVED] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
 ```
 Examples:
-* `find online` returns `online interview` and `online assessment`
-* `find s/all online` returns `online interview`, `online assessment`, `online assessment`
-* `find s/archived test` returns `software test`, `practical test`<br> (given both events have been archived)
+* `finde n/online` returns `online interview` and `online assessment`
+* `finde s/all n/online` returns `online interview`, `online assessment`, `online assessment`
+* `finde s/archived n/test` returns `software test`, `practical test`<br> (given both events have been archived)
 * `find sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
 ### Archiving entries
 #### Archiving an entry: `archive`
