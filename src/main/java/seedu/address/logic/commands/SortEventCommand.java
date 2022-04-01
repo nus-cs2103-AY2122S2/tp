@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERING;
 
 import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.commons.core.SearchTypeUtil.SearchType;
@@ -11,9 +13,18 @@ import seedu.address.model.Model;
  */
 public class SortEventCommand extends SortCommand {
 
-    public static final String COMMAND_WORD = "sortedp";
+    public static final String COMMAND_WORD = "sorte";
 
-    public static final String MESSAGE_SUCCESS = COMMAND_WORD + ": Sorted list of persons by name";
+    public static final String MESSAGE_SUCCESS = "Sorted all events%s";
+
+    public static final String MESSAGE_USAGE = "Sorts events. The default setting is to sort "
+            + "only unarchived events in ascending order, but you can choose to include archived ones " 
+            + "or sort in descending ordered.\n"
+            + "Parameters: [ " + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
+            + "(must be one of 'unarchived', 'archived', or 'all') "
+            + "[" + PREFIX_ORDERING + "ORDERING] (must be one of 'ascending' or 'descending')\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_SEARCH_TYPE + "unarchived " + PREFIX_ORDERING + "descending";
 
     public SortEventCommand(SearchType searchType, Ordering ordering) {
         super(searchType, ordering);
@@ -23,8 +34,9 @@ public class SortEventCommand extends SortCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        //Show all the persons and empty out all the temporary list for events and companies
+        //Show all the events and empty out all the temporary list for events and companies
         model.sortEventListByDate(getOrdering(), getPredicate());
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, getSuccessMessage()),
+                false, false, false, true, false);
     }
 }
