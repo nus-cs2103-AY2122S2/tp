@@ -450,6 +450,13 @@ Format:
 unarchive INDEX
 ```
 
+Examples:
+* `unarchive 1` shows the 1st entry in the list of entries.
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+display all archived entries first to get the INDEX of the entry you want to unarchive.
+</div>
+
 #### Unarchiving entries in display: `unarchive_all`
 Unarchiving all the entries displayed in the current list (either from a list command or find/locate command).
 
@@ -457,13 +464,6 @@ Format:
 ```
 unarchive_all
 ```
-
-Examples:
-* `unarchive 1` shows the 1st entry in the list of entries.
-
-<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
-display all archived entries first to get the INDEX of the entry you want to unarchive.
-</div>
 ### Removing entries
 #### Deleting an entry : `delete`
 
