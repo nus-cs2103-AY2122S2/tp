@@ -288,7 +288,7 @@ public class ModelManager implements Model {
             Person personToArchive = filteredPersons.get(index);
             if (personToArchive.isArchived() == isArchived) {
                 String status = isArchived ? "Archived" : "not Archived";
-                throw new CommandException("This person is already " + status);
+                throw new CommandException(personToArchive.getName().toString() + " is already " + status);
             }
 
             addressBook.setArchivePerson(personToArchive, isArchived);
@@ -301,7 +301,7 @@ public class ModelManager implements Model {
             Company companyToArchive = filteredCompanies.get(index);
             if (companyToArchive.isArchived() == isArchived) {
                 String status = isArchived ? "Archived" : "not Archived";
-                throw new CommandException("This company is already " + status);
+                throw new CommandException(companyToArchive.getName().toString() + " is already " + status);
             }
 
             addressBook.setArchiveCompany(companyToArchive, isArchived);
@@ -314,7 +314,7 @@ public class ModelManager implements Model {
             Event eventToArchive = filteredEvents.get(index);
             if (eventToArchive.isArchived() == isArchived) {
                 String status = isArchived ? "Archived" : "not Archived";
-                throw new CommandException("This event is already " + status);
+                throw new CommandException(eventToArchive.getName().toString() + " is already " + status);
             }
 
             addressBook.setArchiveEvent(eventToArchive, isArchived);
