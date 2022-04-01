@@ -17,11 +17,11 @@ public class DeleteAllCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        Entry deletedEntry;
+        Entry deletedEntry = model.deleteEntry(0);
 
-        do {
-            deletedEntry = model.deleteEntry(1);
-        } while (deletedEntry != null);
+        while (deletedEntry != null) {
+            deletedEntry = model.deleteEntry(0);
+        }
 
         return new CommandResult(MESSAGE_DELETE_ALL_SUCCESS);
     }

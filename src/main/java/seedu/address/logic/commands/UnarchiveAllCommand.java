@@ -20,11 +20,11 @@ public class UnarchiveAllCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Entry unarchivedEntry;
+        Entry unarchivedEntry = model.archiveEntry(0, false);
 
-        do {
-            unarchivedEntry = model.archiveEntry(1, false);
-        } while (unarchivedEntry != null);
+        for (int index = 1; unarchivedEntry != null; index++) {
+            unarchivedEntry = model.archiveEntry(index, false);
+        }
 
         // If the filteredList's predicate is UNARCHIVED_ONLY it will not update itself to remove the archived
         // entry, so we have to set it to a different predicate first.
