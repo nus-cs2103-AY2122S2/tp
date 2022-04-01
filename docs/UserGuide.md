@@ -211,6 +211,7 @@ Clears all students from TAPA.
 **Format**: `clear`
 
 * All students and their corresponding details will be removed from TAPA.
+* TAPA will request for the user's confirmation before clearing all students.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
 **Example**:
