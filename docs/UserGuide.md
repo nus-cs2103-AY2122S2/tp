@@ -519,7 +519,7 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 
 | Action             | Format                                                                           | Examples                                                                             |
 |--------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **Add Person**     | `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]… `                    | `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com t\friend t\colleague`       |
+| **Add Person**     | `addp n/NAME c/COMPANY_NAME p/PHONE_NUMBER e/EMAIL [t/TAG]… `                    | `addp n/John Doe c/Shopee p/98765432 e/johnd@example.com t/friend t/colleague`       |
 | **Add Company**    | `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… `                         | `addc n/DBS t/bank e/dbs@protonmail.com p/1234567 a/31 Race Card R #02-03 t/finance` |
 | **Add Event**      | `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]… `                 | `adde n/Career Talk c/Sony d/2022-03-19 ti/10:00 l/22 Clementi Rd t/important`       |
 | **Clear**          | `clear`                                                                          |                                                                                      |
@@ -527,8 +527,12 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Edit Person**    | `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`             | `editp 1 p/91234567 e/johndoe@example.com`                                           |
 | **Edit Company**   | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                  | `editc 2 n/Shoppee t/`                                                               |
 | **Edit Event**     | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…` | `edite 2 n/Resume Screening d/2022-12-11`                                              |
-| **Find Person**    | `findp KEYWORD [MORE_KEYWORDS]`                                                  | `find James Jake`                                                                                     |
-| **List Persons**   | `listp`                                                                          |                                                                                      |
-| **List Companies** | `listc`                                                                          |                                                                                      |
-| **List Events**    | `liste`                                                                          |                                                                                      |
+| **Archive**     | `archive INDEX` | `archive 2`                                              |
+| **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
+| **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find James Jake`                                                                                     |
+| **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find s/unarchived Shopee`                                                                                     |
+| **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `find Career Talk`                                                                                |
+| **List Persons**   | `listp [s/ARCHIVED]`                                                                          |`listp s/all`                                                                                      |
+| **List Companies** | `listc [s/ARCHIVED]`                                                                          |`listc`                                                                                      |
+| **List Events**    | `liste [s/ARCHIVED]`                                                                          |`liste s/archived`                                                                                      |
 | **Help**           | `help`                                                                           |                                                                                      |
