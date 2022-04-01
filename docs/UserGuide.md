@@ -61,13 +61,13 @@ MedBook has an intuitive graphical user interface built for you to enjoy easy in
    <img src="images/GUI.png" class="figure-img img-fluid rounded" alt="Graphical User Interface">
 </figure>
 
-| Label | Description |
-| ----- | ----------- |
+| Label | Description                                                                                              |
+| ----- | -------------------------------------------------------------------------------------------------------- |
 | 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window. |
-| 2     | **Command Input**. This is where you type the commands to be executed by the application. |
-| 3     | **Command Result**. This text box displays the response of the  entered commands. |
-| 4     | **List of Patients**. This is the list of patients that are stored in the application. |
-| 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information. |
+| 2     | **Command Input**. This is where you type the commands to be executed by the application.                |
+| 3     | **Command Result**. This text box displays the response of the  entered commands.                        |
+| 4     | **List of Patients**. This is the list of patients that are stored in the application.                   |
+| 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information.                               |
 
 ### Controls
 
@@ -222,10 +222,10 @@ Caution*: Deleting a patient will remove all the associated information (e.g med
 
 Adds a patient's emergency contact to MedBook.
 
-Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
 Examples:
-* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1`
+* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother`
 
 
 ### Viewing Contact Information: `view t/contact`
@@ -242,7 +242,7 @@ Examples:
 Edits an existing contact information entry in MedBook when a patient's list of contact information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Contact Information.
 
-Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
 * Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -400,7 +400,7 @@ If you understood what you are dealing with, you may proceed with cautions. We r
 </div>
 
 | Action                        | Format Example                                                                                                                                                                                |
-|:------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | View Help                     | `help`                                                                                                                                                                                        |
 | Add a Patient                 | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
 | List all Patients             | `view`                                                                                                                                                                                        |
