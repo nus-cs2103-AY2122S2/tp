@@ -21,7 +21,7 @@ If you feel InternBuddy is the solution to your problem and you're interested in
    * If you are not sure which version of Java that you currently have, you can follow [Java Manual](https://www.java.com/en/download/help/version_manual.html)
    to check.
 
-2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.3.0/internbuddy.jar).
+2. Download the latest `InternBuddy.jar` from [here](https://github.com/AY2122S2-CS2103T-W14-3/tp/releases/download/v1.3.1/internbuddy.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ for InternBuddy.
 
@@ -434,6 +434,14 @@ Examples:
 display all unarchived entries first to get the INDEX of the entry you want to archive.
 </div>
 
+#### Archiving entries in display: `archive_all`
+Archiving all the entries displayed in the current list (either from a list command or find/locate command).
+
+Format:
+```
+archive_all
+```
+
 #### Unarchiving an entry: `unarchive`
 Unarchiving an entry will show it in the list of entries.
 
@@ -448,6 +456,14 @@ Examples:
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
 display all archived entries first to get the INDEX of the entry you want to unarchive.
 </div>
+
+#### Unarchiving entries in display: `unarchive_all`
+Unarchiving all the entries displayed in the current list (either from a list command or find/locate command).
+
+Format:
+```
+unarchive_all
+```
 ### Removing entries
 #### Deleting an entry : `delete`
 
@@ -465,6 +481,15 @@ delete INDEX
 Examples:
 * `listc` followed by `delete 2` deletes the 2nd company in the list of comapnies.
 * `findp Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+#### Deleting entries in display : `delete_all`
+
+Deletes all the entries displayed in the current list (either from a list command or find/locate command).
+
+Format: 
+```
+delete_all
+```
 
 #### Clearing all entries : `clear`
 
@@ -528,11 +553,14 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Add Event**      | `adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]… `                 | `adde n/Career Talk c/Sony d/2022-03-19 ti/10:00 l/22 Clementi Rd t/important`       |
 | **Clear**          | `clear`                                                                          |                                                                                      |
 | **Delete**         | `delete INDEX`                                                                   | `delete 3`                                                                           |
+| **Delete all in display**          |`delete_all`                                                                          |                                                                                      |
 | **Edit Person**    | `editp INDEX [n/NAME] [c/COMPANY_NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`             | `editp 1 p/91234567 e/johndoe@example.com`                                           |
 | **Edit Company**   | `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`                  | `editc 2 n/Shoppee t/`                                                               |
 | **Edit Event**     | `edite INDEX [n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…` | `edite 2 n/Resume Screening d/2022-12-11`                                              |
 | **Archive**     | `archive INDEX` | `archive 2`                                              |
+| **Archive all in display**          |`archive_all`                                                                          |                                                                                      |
 | **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
+| **Unarchive all in display**          |`unarchive_all`                                                                          |                                                                                      |
 | **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
 | **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
 | **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
