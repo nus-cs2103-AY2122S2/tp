@@ -1,10 +1,10 @@
 package manageezpz.logic.commands;
 
 import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
 import static manageezpz.commons.core.Messages.MESSAGE_TASK_UPDATE_SUCCESS;
-import static manageezpz.commons.core.Messages.MESSAGE_UNEXPECTED_ERROR;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -54,7 +54,7 @@ public class EditTaskCommand extends Command {
             + "For an event task, a start time and an end time "
             + "separated with an empty space must be provided "
             + "instead of a single time value.\n"
-            + "Examples: \n" + EXAMPLE_ONE + "\n" + EXAMPLE_TWO + "\n" + EXAMPLE_THREE;
+            + "Examples: " + EXAMPLE_ONE + "\n" + EXAMPLE_TWO + "\n" + EXAMPLE_THREE;
 
     private final Index index;
     private final String desc;
@@ -86,7 +86,7 @@ public class EditTaskCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
-        Task currentTask = model.getFilteredTaskList().get(index.getZeroBased());
+        Task currentTask = lastShownList.get(index.getZeroBased());
         Task updatedTask = null;
 
         try {
@@ -98,19 +98,19 @@ public class EditTaskCommand extends Command {
                 updatedTask = updateEvent((Event) currentTask, this.desc, this.date, this.time);
             } else {
                 // Should not reach this as there are only three types of tasks
-                throw new CommandException(MESSAGE_UNEXPECTED_ERROR);
+                assert false : MESSAGE_INVALID_TASK_TYPE;
             }
 
             model.setTask(currentTask, updatedTask);
             return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, updatedTask));
-        } catch (CommandException | ParseException e) {
-            throw new CommandException(e.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, e);
+        } catch (ParseException pe) {
+            throw new CommandException(pe.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, pe);
         } catch (DuplicateTaskException de) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, updatedTask) + "\n" + MESSAGE_USAGE, de);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, this.desc) + MESSAGE_USAGE);
         }
     }
 
-    private Task updateTodo(Todo currentTask, String desc) throws CommandException, ParseException {
+    private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
 
         if (!desc.isEmpty()) {
@@ -121,8 +121,7 @@ public class EditTaskCommand extends Command {
         return updatedToDoTask;
     }
 
-    private Task updateDeadline(Deadline currentTask, String desc, String date, String time)
-            throws CommandException, ParseException {
+    private Task updateDeadline(Deadline currentTask, String desc, String date, String time) throws ParseException {
         Deadline updatedDeadlineTask = new Deadline(currentTask);
 
         if (!desc.isEmpty()) {
@@ -143,8 +142,7 @@ public class EditTaskCommand extends Command {
         return updatedDeadlineTask;
     }
 
-    private Task updateEvent(Event currentTask, String desc, String date, String time)
-            throws CommandException, ParseException {
+    private Task updateEvent(Event currentTask, String desc, String date, String time) throws ParseException {
         Event updatedEventTask = new Event(currentTask);
 
         if (!desc.isEmpty()) {
@@ -161,7 +159,7 @@ public class EditTaskCommand extends Command {
             String[] newStartEndTimeStrParts = time.split(" ");
 
             if (newStartEndTimeStrParts.length != 2) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+                throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
             }
 
             Time newStartTime = ParserUtil.parseTime(newStartEndTimeStrParts[0]);
