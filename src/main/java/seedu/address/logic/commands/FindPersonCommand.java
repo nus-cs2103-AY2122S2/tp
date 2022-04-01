@@ -31,8 +31,8 @@ public class FindPersonCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]\n"
+            + "[\" + PREFIX_SEARCH_TYPE + \"SEARCH_TYPE]"
+            + "[\" + PREFIX_TAG + \"TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "alice bob ";
 

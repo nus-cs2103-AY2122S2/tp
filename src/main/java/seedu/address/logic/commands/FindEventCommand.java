@@ -34,11 +34,12 @@ public class FindEventCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_START_DATE + "START DATE] "
-            + "[" + PREFIX_END_DATE + "START DATE] "
+            + "[" + PREFIX_END_DATE + "END DATE] "
             + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]\n"
+            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
+            + "[" + PREFIX_TAG + "TAG]... \n"
+
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COMPANY + "sgshop "
             + PREFIX_TIME + "zoom";

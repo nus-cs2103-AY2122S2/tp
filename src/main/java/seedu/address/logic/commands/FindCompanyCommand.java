@@ -28,8 +28,8 @@ public class FindCompanyCommand extends Command {
             + "by name and tag.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]\n"
+            + "[\" + PREFIX_SEARCH_TYPE + \"SEARCH_TYPE]"
+            + "[\" + PREFIX_TAG + \"TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "sgshop dbsss ";
 
