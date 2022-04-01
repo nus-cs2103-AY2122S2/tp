@@ -125,7 +125,7 @@ public class ManualMessages {
             + "18. manual \n"
             + "19. help \n"
             + "20. exit \n"
-            + "Use 'manual [COMMAND_NAME] to display the format and a short description for the specified command";
+            + "Use manual [COMMAND_NAME] to display the format and a short description for the specified command";
 
     public static final String MANUAL_MESSAGE_UNKNOWN_COMMANDS = "Unknown command!";
 }
