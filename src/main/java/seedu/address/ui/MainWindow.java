@@ -131,7 +131,6 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
         summaryDisplay = new SummaryDisplay();
-        summaryDisplay.setSummary(logic.getSummary());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -182,7 +181,9 @@ public class MainWindow extends UiPart<Stage> {
             personListPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
             return;
         case SUMMARY:
-            summaryDisplay.setSummary(logic.getSummary());
+            summaryDisplay.setSummary(logic.getFilteredPersonList(), logic.getFilteredMedicalList(),
+                    logic.getFilteredConsultationList(), logic.getFilteredPrescriptionList(),
+                    logic.getFilteredTestResultList(), logic.getFilteredContactList());
             personListPanelPlaceholder.getChildren().remove(0);
             personListPanelPlaceholder.getChildren().add(summaryDisplay.getRoot());
             return;

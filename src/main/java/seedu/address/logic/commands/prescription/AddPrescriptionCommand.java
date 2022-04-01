@@ -33,7 +33,7 @@ public class AddPrescriptionCommand extends Command {
             + PREFIX_INSTRUCTION + "INSTRUCTION \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "prescription "
-            + PREFIX_NRIC + "S1234567P "
+            + PREFIX_NRIC + "S1234567L "
             + PREFIX_NAME + "Acetaminophen "
             + PREFIX_DATE + "2022-02-22 "
             + PREFIX_INSTRUCTION + "2 tablets after meal everyday ";
