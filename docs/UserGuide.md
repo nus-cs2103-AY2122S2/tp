@@ -247,14 +247,22 @@ Examples:
 * `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
 * `adde n/Practical Test c/ABC d/Today ti/15:00 l/Zoom`
 ### Listing entries
+- The `s/` parameter is an optional parameter that accepts 3 types of argument:
+  - `s/all`: returns all entries
+  - `s/archived`: returns all archived entries
+  - `s/unarchived`: returns all unarchived entries
+- If the `s/` parameter is not provided, the default is `s/unarchived`
 #### Listing all companies : `listc`
 
 Shows a list of all companies in the list of companies.
 
 Format:
 ```
-listc
+listc [s/ARCHIVED]
 ```
+Examples:
+* `listc` (defaults to `s/unarchived`) displays all unarchived companies.
+* `listc s/archived` displays all archived companies.
 
 #### Listing all persons : `listp`
 
@@ -262,8 +270,11 @@ Shows a list of all people in the list of contact people.
 
 Format: 
 ```
-listp
+listp [s/ARCHIVED]
 ```
+Examples:
+* `listp` (defaults to `s/unarchived`) displays all unarchived people.
+* `listp s/archived` displays all archived people.
 
 ### Listing all events : `liste`
 
@@ -271,9 +282,11 @@ Shows a list of all events in the list of events.
 
 Format: 
 ```
-liste
+liste [s/ARCHIVED]
 ```
-
+Examples:
+* `liste` (defaults to `s/unarchived`) displays all unarchived events.
+* `liste s/archived` displays all archived events.
 ### Editing entries
 <div markdown="block" class="alert alert-info">
 
@@ -358,7 +371,7 @@ Examples:
 * Entries matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-- The `s/` parameter is an optional parameter that accepts 3 types of argument:
+- Same for listing commands, the `s/` parameter is an optional parameter that accepts 3 types of argument:
   - `s/all`: returns all entries
   - `s/archived`: returns all archived entries
   - `s/unarchived`: returns all unarchived entries
@@ -403,7 +416,36 @@ Examples:
 * `find s/all online` returns `online interview`, `online assessment`, `online assessment`
 * `find s/archived test` returns `software test`, `practical test`<br> (given both events have been archived)
 * `find sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
+### Archiving entries
+#### Archiving an entry: `archive`
+Archiving an entry will hide it from the list of entries.
 
+Format:
+```
+archive INDEX
+```
+
+Examples:
+* `archive 1` hides the 1st entry from the list of entries.
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+display all unarchived entries first to get the INDEX of the entry you want to archive.
+</div>
+
+#### Unarchiving an entry: `unarchive`
+Unarchiving an entry will show it in the list of entries.
+
+Format:
+```
+unarchive INDEX
+```
+
+Examples:
+* `unarchive 1` shows the 1st entry in the list of entries.
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+display all archived entries first to get the INDEX of the entry you want to unarchive.
+</div>
 ### Removing entries
 #### Deleting an entry : `delete`
 
