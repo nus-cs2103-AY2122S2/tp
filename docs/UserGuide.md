@@ -11,6 +11,7 @@ As a pet daycare owner, it takes a lot of effort to remember pets by their names
 as well as remember their owner's names, phone numbers and addresses. In addition, some pets may have special dietary requirements and
 vet appointments that you have to take note of. With WoofAreYou, these things can be taken care
 of easily, so that you may focus on the things that **truly** matter: taking good care of the pets and ensuring their safety.
+
 --------------------------------------------------------------------------------------------------------------------
 # WoofAreYou
 
@@ -27,9 +28,6 @@ Let's get started!
 <p align="center">
   <img src="images/forUserGuide/UpdatedSampleSS.png" alt="WoofForYou sample screenshot"/>
 </p>
-
-* Table of Contents
-  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
