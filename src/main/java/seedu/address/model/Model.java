@@ -199,12 +199,12 @@ public interface Model {
     /**
      * Sort and show the filtered {@code Person} list by date and in {@code ordering} order
      */
-    void sortPersonListByName(Ordering ordering, Predicate<? super Event> predicate);
+    void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate);
 
     /**
      * Sort and show the filtered {@code Company} list by date and in {@code ordering} order
      */
-    void sortCompanyListByName(Ordering ordering, Predicate<? super Event> predicate);
+    void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate);
 
     /**
      * Sort and show the filtered {@code Event} list by date and in {@code ordering} order
