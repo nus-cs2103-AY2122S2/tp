@@ -10,7 +10,7 @@ for convenience use.
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -220,7 +220,7 @@ Finds products that fit a certain filter in the application.
 
 Format: `find [TAG:VALUE ...]`
 
-Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` | `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
+Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` OR `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
 
 * For the name, category and description fields, the value provided can be a substring of the exact product
 * For searching a range of prices, `START_PRICE` and `END_PRICE` should be used instead
