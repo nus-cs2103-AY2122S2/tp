@@ -431,6 +431,8 @@ Examples:
 
 * `find c/meta amazon r/engineer`
 
+:information_source: Note that if you are trying to find 'book' within company names, Tinner would return records named Face Book but not Facebook.
+
 [Back to Table of Contents](#toc)
 
 ## General <a id="c-general"></a>
