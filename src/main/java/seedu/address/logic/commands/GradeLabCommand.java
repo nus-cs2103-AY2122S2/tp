@@ -17,7 +17,7 @@ public class GradeLabCommand extends EditLabCommand {
             + "and initializes the marks to the marks specified.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_LAB + "LAB_NUMBER "
-            + PREFIX_LABMARK + "LAB_MARKS\n"
+            + PREFIX_LABMARK + "LAB_MARK\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_LAB + "1 " + PREFIX_LABMARK + "10";
 
     public static final String MESSAGE_GRADE_LAB_SUCCESS = "Graded Lab %1$s for %2$s";

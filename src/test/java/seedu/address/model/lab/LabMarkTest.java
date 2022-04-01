@@ -45,33 +45,33 @@ public class LabMarkTest {
     }
 
     @Test
-    public void toString_noScoreInitialized_returnsUnknown() {
+    public void toString_noMarkInitialized_returnsUnknown() {
         LabMark marks = new LabMark();
         assertEquals(marks.toString(), LabMark.MARKS_UNKNOWN);
     }
 
     @Test
-    public void toString_scoreInitialized_returnsScore() {
+    public void toString_markInitialized_returnsMark() {
         LabMark marks = new LabMark("10");
         assertEquals(marks.toString(), String.valueOf(10));
     }
 
     @Test
-    public void equals_sameScore_success() {
+    public void equals_sameMark_success() {
         LabMark marks1 = new LabMark("1");
         LabMark marks2 = new LabMark("1");
         assertEquals(marks1, marks2);
     }
 
     @Test
-    public void equals_differentScore_failure() {
+    public void equals_differentMark_failure() {
         LabMark marks1 = new LabMark("1");
         LabMark marks2 = new LabMark("2");
         assertNotEquals(marks1, marks2);
     }
 
     @Test
-    public void equals_oneScoreUninitialized_failure() {
+    public void equals_oneMarkUninitialized_failure() {
         LabMark marks1 = new LabMark("1");
         LabMark marks2 = new LabMark();
         assertNotEquals(marks1, marks2);
