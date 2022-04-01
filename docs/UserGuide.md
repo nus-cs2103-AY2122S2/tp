@@ -17,17 +17,18 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed in your Computer.
 
-1. Download the latest `TAPA.jar` from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
+2. Download the latest `TAPA.jar` from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TAPA.
+3. Copy the file to the folder you want to use as the _home folder_ for TAPA.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the desired command in the command box and press the "Enter" key on your keyboard to execute it. For example, typing **`help`** and pressing "Enter" will open the help window.<br>
+   <br>
+Here are some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students in TAPA.
 
    * **`add`**`i/A0123456Z n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu` : Adds a student named `John` to TAPA.
 
@@ -35,11 +36,11 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
    * **`manual`**`add` : Display the user manual for the command `add`.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students from TAPA.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -48,25 +49,27 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the "Format" section for each command:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
+  Example: For the command `add n/NAME`, `NAME` is a parameter that must be supplied by the user.<br>
+  Thus, the user can input the command `add n/John Doe`, where "John Doe" is the name supplied by the user.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Parameters in square brackets are optional parameters.<br>
+  Example: For the command `add n/NAME [p/PHONE_NUMBER]`, the user must supply the `NAME` parameter in the input, whereas the `PHONE_NUMBER` parameter is optional.<br>
+  Thus, the user can input the command `add n/John Doe` or `add n/John Doe p/98765432`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters with `…`​ after them can be used multiple times.<br>
+  Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (1 `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be inputted in any order.<br>
+  Example: For the command `add n/NAME m/MODULE_CODE`, the user can input `add n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`).
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* If a parameter is expected only once in the command, but the user specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  Example: For the command `add n/NAME`, if the user inputs the command `add n/John n/Mary`, only `n/Mary` will be interpreted by TAPA.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
 
 </div>
 
@@ -76,7 +79,7 @@ Adds a student to TAPA.
 
 **Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
-* The student’s matriculation number, name as well as module code are compulsory fields.
+* The student’s student ID (matriculation number), name as well as module code are compulsory fields.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 **Example**:
