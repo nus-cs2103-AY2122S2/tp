@@ -41,6 +41,8 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label locationName;
     @FXML
+    private FlowPane archive;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,6 +57,9 @@ public class EventCard extends UiPart<Region> {
         date.setText(event.getDate().toString());
         time.setText(event.getTime().toString());
         locationName.setText(event.getLocation().location);
+        if (event.isArchived()) {
+            archive.getChildren().add(new Label("ARCHIVED"));
+        }
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
