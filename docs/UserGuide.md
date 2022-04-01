@@ -462,6 +462,8 @@ companies less clustered and thus more organised.
 
 * `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
 
+:warning: Deleting a company would also delete all roles and information belonging to it. Since there is no undo feature, please double check before using this command.
+
 [Back to Table of Contents](#toc)
 
 ### Favouriting a specific company: `favourite` <a id="c-favourite-c"></a>
@@ -482,6 +484,9 @@ star to let it stand out from the rest.
 * `list` followed by, `favourite 1` favourites the 1<sup>st</sup>
   company in Tinner.
 * Refer to [Demo Use Case #5](#usecase5) for an example use case.
+
+:bulb: Easily track and view your favourite companies by using the [`listFavourite`](#c-listfavourite) command
+
 
 [Back to Table of Contents](#toc)
 
@@ -527,6 +532,12 @@ company.
 
 * `addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse data $/4800 `
 * `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
+
+:bulb: If there are too many companies and you do not know what is the company index, try [searching for keywords](#c-find-c-r) to that company and use the new index shown instead.
+
+:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
+
+:warning: When round brackets are used, they must be in pairs.
 
 [Back to Table of Contents](#toc)
 
@@ -631,6 +642,8 @@ readily identify and track down items!
 
 * `find c/meta amazon r/engineer`
 
+:information_source: Note that if you are trying to find 'book' within company names, Tinner would return records named Face Book but not Facebook.
+
 [Back to Table of Contents](#toc)
 
 ## General <a id="c-general"></a>
@@ -678,6 +691,8 @@ keep better track of upcoming tasks.
 * `setWindow 14` would make Tinner remind you of all upcoming reminders from up to two weeks prior to the associated
   role's reminder date.
 * Refer to [Demo Use Case #4](#usecase4) for an example use case.
+
+:information_source: Changes to the reminder window can be observed after restarting Tinner.
 
 [Back to Table of Contents](#toc)
 
