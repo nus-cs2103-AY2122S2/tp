@@ -27,7 +27,7 @@ import unibook.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
     public static final String MESSAGE_CONSTRAINTS_OPTION =
-        "Options can take only 3 values, module/student/professor.";
+        "Options can take only 6 values, module/student/professor/group/meeting/event.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -131,10 +131,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             dateTime = ParserUtil.parseDateTime(argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get());
             return new AddCommand(moduleCode, keyEvent, dateTime);
         case "student":
-            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)
-                || arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
-                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
+                throw new ParseException(String.format("Missing n/NAME field!\nE.g.,",
                     AddCommand.MESSAGE_USAGE_STUDENT));
+            }
+            if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
+                throw new ParseException(String.format("Student should not have an of/OFFICE field!\nE.g.,",
+                        AddCommand.MESSAGE_USAGE_STUDENT));
             }
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)
                 && !arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MODULE)) {
@@ -173,6 +176,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE_PROFESSOR));
+            }
+            if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
+                throw new ParseException(String.format("Missing n/NAME field!\nE.g.,",
+                        AddCommand.MESSAGE_USAGE_PROFESSOR));
             }
             name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_PHONE)) {

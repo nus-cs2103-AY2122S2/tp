@@ -208,8 +208,16 @@ public class ParserUtil {
         for (String moduleCode : moduleCodesAndGroups) {
             if (moduleCode.contains(" g/")) {
                 String[] strArr = moduleCode.split(" g/");
+                if (strArr[0].contains(" ")) {
+                    throw new ParseException("Module codes should only contain alphanumeric "
+                        + "characters and cannot contain spaces.");
+                }
                 mc = new ModuleCode(strArr[0].toUpperCase());
             } else {
+                if (moduleCode.contains(" ")) {
+                    throw new ParseException("Module codes should only contain alphanumeric "
+                        + "characters and cannot contain spaces.");
+                }
                 mc = new ModuleCode(moduleCode.toUpperCase());
             }
             moduleSet.add(mc);
