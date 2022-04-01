@@ -167,7 +167,7 @@ public class HelpDescription {
             + "Examples: \n"
             + "filter appl tag t/school t/friend \n"
             + "filter intvw date d/2022-03-20";
-
+    
     public static final String SORT_COMMAND_DESCRIPTION =
             "Arranges applicants, interview and positions in HireLah according to their properties."
             + "It alters the current display of HireLah and changes the index of the relevant data. \n"
@@ -200,21 +200,21 @@ public class HelpDescription {
             + "- Job can only be offered if offered < openings.\n"
             + "- A job offered will increase offered by 1.\n"
             + "Example: pass 1";
-
+    
     public static final String FAIL_COMMAND_DESCRIPTION =
             "Fails an existing interview in Hirelah.\nFormat: fail INTERVIEW_INDEX\n"
             + "- Passes the Interview at the specified INTERVIEW_INDEX.\n"
             + "- Interview must have status pending before it can be failed.\n"
             + "- The index must be a positive integer 1, 2, 3, …\u200B \n"
             + "Example: fail 1";
-
+    
     public static final String ACCEPT_COMMAND_DESCRIPTION =
             "Accepts an existing passed interview in Hirelah. This command accepts the passed interview, meaning"
             + "that the candidate has accepted the job.\nFormat: accept INTERVIEW_INDEX\n"
             + "- Accepts the Interview at the specified INTERVIEW_INDEX.\n"
             + "- Interview must have status passed before it can be accepted.\n"
             + "- The index must be a positive integer 1, 2, 3, …\u200B";
-
+    
     public static final String REJECT_COMMAND_DESCRIPTION =
             "Rejects an existing interview in Hirelah. This command rejects the passed interview, meaning that the "
             + "candidate has rejected the job.\nFormat: reject INTERVIEW_INDEX\n"
@@ -223,12 +223,12 @@ public class HelpDescription {
             + "- The index must be a positive integer 1, 2, 3, …\u200B \n"
             + "Additional details:\n"
             + "- Rejecting a job offer will decrement the number of offered in Position";
-
+    
     public static final String EXPORT_COMMAND_DESCRIPTION =
             "Exports all data of the specified typo in HireLah to a CSV file.\n"
             + "Format: export -TYPE\n"
             + "TYPE can be a for applicants, p for positions, and i for interviews";
-
+    
     public static final String EXIT_COMMAND_DESCRIPTION =
             "Well its an exit command, of course it going to terminate the program \n"
             + "Format: 'exit'";
