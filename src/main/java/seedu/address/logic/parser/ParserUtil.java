@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -225,6 +226,26 @@ public class ParserUtil {
             return SearchType.ARCHIVED_ONLY;
         case "all":
             return SearchType.ALL;
+        default:
+            throw new ParseException(MESSAGE_INVALID_SEARCH_TYPE);
+        }
+    }
+
+    /**
+     * Parses a {@code String ordering} into an {@code Ordering}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ordering} is invalid.
+     */
+    public static Ordering parseOrdering(String ordering) throws ParseException {
+        requireNonNull(ordering);
+        String trimmedOrdering = ordering.trim();
+
+        switch (trimmedOrdering) {
+        case "ascending":
+            return Ordering.ASCENDING;
+        case "descending":
+            return Ordering.DESCENDING;
         default:
             throw new ParseException(MESSAGE_INVALID_SEARCH_TYPE);
         }
