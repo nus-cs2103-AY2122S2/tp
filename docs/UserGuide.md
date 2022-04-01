@@ -17,9 +17,9 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed in your Computer.
 
-2. Download the latest `TAPA.jar` from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
+2. Download the latest `TAPA.jar` file from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for TAPA.
+3. Copy the `TAPA.jar` file to the folder you want to use as the _home folder_ for TAPA.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -211,6 +211,7 @@ Clears all students from TAPA.
 **Format**: `clear`
 
 * All students and their corresponding details will be removed from TAPA.
+* TAPA will request for the user's confirmation before clearing all students.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
 **Example**:
