@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ListType;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.OrderingUtil;
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
@@ -246,20 +248,20 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortPersonListByName(boolean ascending, Predicate<? super Person> predicate) {
-        filteredPersons.sort(ascending ? COMPARATOR_PERSON_BY_NAME : COMPARATOR_PERSON_BY_NAME.reversed());
+    public void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate) {
+        filteredPersons.sort(OrderingUtil.orderedComparator(ordering, COMPARATOR_PERSON_BY_NAME));
         showPersonList(predicate);
     }
 
     @Override
-    public void sortCompanyListByName(boolean ascending, Predicate<? super Company> predicate) {
-        filteredCompanies.sort(ascending ? COMPARATOR_COMPANY_BY_NAME : COMPARATOR_COMPANY_BY_NAME.reversed());
+    public void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate) {
+        filteredCompanies.sort(OrderingUtil.orderedComparator(ordering, COMPARATOR_COMPANY_BY_NAME));
         showCompanyList(predicate);
     }
 
     @Override
-    public void sortEventListByDate(boolean ascending, Predicate<? super Event> predicate) {
-        filteredEvents.sort(ascending ? COMPARATOR_EVENT_BY_DATE : COMPARATOR_EVENT_BY_DATE.reversed());
+    public void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate) {
+        filteredEvents.sort(OrderingUtil.orderedComparator(ordering, COMPARATOR_EVENT_BY_DATE));
         showEventList(predicate);
     }
 

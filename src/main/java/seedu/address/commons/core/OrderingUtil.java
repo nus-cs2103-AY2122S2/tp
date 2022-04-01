@@ -9,7 +9,7 @@ public class OrderingUtil {
         ASCENDING, DESCENDING
     }
 
-    public static Comparator<? extends Entry> orderedComparator(Ordering ordering, Comparator<? extends Entry> comparator) {
+    public static <T extends Entry> Comparator<T> orderedComparator(Ordering ordering, Comparator<T> comparator) {
         switch (ordering) {
         case ASCENDING:
             return comparator;

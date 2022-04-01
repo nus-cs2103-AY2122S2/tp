@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
@@ -196,22 +197,19 @@ public interface Model {
     void showEventList(Predicate<? super Event> predicate);
 
     /**
-     * Sort and show the filtered {@code Person} list by name and in ascending order 
-     * if {@code ascending} is true.
+     * Sort and show the filtered {@code Person} list by date and in {@code ordering} order
      */
-    void sortPersonListByName(boolean ascending, Predicate<? super Person> predicate);
+    void sortPersonListByName(Ordering ordering, Predicate<? super Event> predicate);
 
     /**
-     * Sort and show the filtered {@code Company} list by name and in ascending order 
-     * if {@code ascending} is true.
+     * Sort and show the filtered {@code Company} list by date and in {@code ordering} order
      */
-    void sortCompanyListByName(boolean ascending, Predicate<? super Company> predicate);
+    void sortCompanyListByName(Ordering ordering, Predicate<? super Event> predicate);
 
     /**
-     * Sort and show the filtered {@code Event} list by date and in ascending order 
-     * if {@code ascending} is true.
+     * Sort and show the filtered {@code Event} list by date and in {@code ordering} order
      */
-    void sortEventListByDate(boolean ascending, Predicate<? super Event> predicate);
+    void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate);
 
     /**
      * Deletes the entry at the index of the currently displayed list and returns it.
