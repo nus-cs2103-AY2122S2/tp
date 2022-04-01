@@ -512,6 +512,8 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
   GUI stands for Graphical User Interface. Contrary to CLI, GUI is an interface that you can interact with, mainly through clicking interface (i.e. clicking buttons).
 - ### Entry
   An entry is a single entry in a list. In InternBuddy, an entry can be a company, a person, or an event. Entry is a generic term that can be used to refer to any of the three types of entries.
+- ### Parameter
+  A parameter is a keyword that is used to specify a specific action. For example, `listc` is a command that lists all companies. `listc` has a parameter `s/` that specifies the type of entries to be listed.  
 
 --------------------------------------------------------------------------------------------------------------------
 
