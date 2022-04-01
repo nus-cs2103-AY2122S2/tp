@@ -81,17 +81,21 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n9. FILTER student based on health statuses"
             + NEWLINE_AND_INDENTATION
-            + "Format: filter covid-positive\n"
+            + "Format: filter covid-positive"
 
-            + "\n10. UNDO an executed add, edit or delete command."
+            + "\n10. IMPORT excel files"
+            + NEWLINE_AND_INDENTATION
+            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx"
+
+            + "\n11. UNDO an executed add, edit or delete command."
             + NEWLINE_AND_INDENTATION
             + "Format: undo\n"
 
-            + "\n11. REDO an executed undo command.."
+            + "\n12. REDO an executed undo command.."
             + NEWLINE_AND_INDENTATION
             + "Format: redo\n"
 
-            + "\n12. EMAIL addresses of the students in the list are collated"
+            + "\n13. EMAIL addresses of the students in the list are collated"
             + NEWLINE_AND_INDENTATION
             + "Format: email";
 

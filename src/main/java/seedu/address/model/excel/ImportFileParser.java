@@ -29,7 +29,7 @@ public class ImportFileParser {
             String name = person.get("NAME").textValue() + " ";
             String block = person.get("BLOCK").textValue() + " ";
             String facaulty = person.get("FACAULTY").textValue() + " ";
-            String phone = person.get("PHONE").textValue() + " ";
+            String phone = person.get("PHONE").textValue().trim() + " ";
             String email = person.get("EMAIL").textValue() + " ";
             String address = person.get("ADDRESS").textValue() + " ";
             String mc = person.get("MATRICULATION NUMBER").textValue() + " ";
