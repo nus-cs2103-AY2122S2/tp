@@ -52,21 +52,21 @@ Here are some example commands you can try:
 **:information_source: Notes about the "Format" section for each command:**<br>
 
 * Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
-  Example: For the command `add n/NAME`, `NAME` is a parameter that must be supplied by the user.<br>
-  Thus, the user can input the command `add n/John Doe`, where "John Doe" is the name supplied by the user.
+  Example: For the command `edit STUDENT_INDEX`, `STUDENT_INDEX` is a parameter that must be supplied by the user.<br>
+  Thus, the user should input the command `edit 10`, where "10" is the `STUDENT_INDEX` supplied by the user.
 
 * Parameters in square brackets are optional parameters.<br>
-  Example: For the command `add n/NAME [p/PHONE_NUMBER]`, the user must supply the `NAME` parameter in the input, whereas the `PHONE_NUMBER` parameter is optional.<br>
-  Thus, the user can input the command `add n/John Doe` or `add n/John Doe p/98765432`.
+  Example: For the command `edit STUDENT_INDEX [p/PHONE_NUMBER]`, the user must supply the `STUDENT_INDEX` parameter in the input, whereas the `PHONE_NUMBER` parameter is optional.<br>
+  Thus, the user can input the command `edit 10` or `edit 10 p/98765432`.
 
 * Parameters with `…`​ after them can be used multiple times.<br>
   Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (1 `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
 
 * Parameters can be inputted in any order.<br>
-  Example: For the command `add n/NAME m/MODULE_CODE`, the user can input `add n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`).
+  Example: For the command `add i/STUDENT_ID n/NAME m/MODULE_CODE`, the user can input `add i/A0123456B n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add i/A0123456B m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`).
 
 * If a parameter is expected only once in the command, but the user specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  Example: For the command `add n/NAME`, if the user inputs the command `add n/John n/Mary`, only `n/Mary` will be interpreted by TAPA.
+  Example: For the command `find n/NAME`, if the user inputs the command `find n/John n/Mary`, only `n/Mary` will be interpreted by TAPA.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
