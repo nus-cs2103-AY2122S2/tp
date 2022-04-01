@@ -38,13 +38,13 @@ later.">
 
 --------------------------------------------------------------------------------------------------------------------
 
-Welcome to MedBook user guide. This guide serves to equip users with the necessary knowledge to fully utilise all features implemented in MedBook.
+Welcome to MedBook's user guide. This guide serves to equip users with the necessary knowledge to fully utilise all the features implemented in MedBook.
 
 ## Introduction
 
-MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s information. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' emergency contacts, medical information, medical tests, consultations and prescriptions through a simple and easy-to-use platform.
+MedBook is a health monitoring system for healthcare professionals that simplifies tracking patient’s medical information and hospital records. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' emergency contacts, medical information, medical tests, consultations and prescriptions through a simple and easy-to-use platform.
 ## Quick start
-This section includes information you will need to get started with using MedBook.
+This section contains all the necessary information you will need to get started with using MedBook.
 ### Requirement
 - Ensure you have Java 11 or above installed on your computer.
 - Download the latest `MedBook.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-1/tp/releases).
@@ -62,9 +62,9 @@ MedBook has an intuitive graphical user interface built for you to enjoy easy in
 
 | Label | Description |
 | ----- | ----------- |
-| 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window. |
+| 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window are. |
 | 2     | **Command Input**. This is where you type the commands to be executed by the application. |
-| 3     | **Command Result**. This text box displays the response of the  entered commands. |
+| 3     | **Command Result**. This text box displays MedBook's response to the commands entered. |
 | 4     | **List of Patients**. This is the list of patients that are stored in the application. |
 | 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information. |
 
@@ -75,10 +75,10 @@ In order to improve your experience when using the app, we have included the fol
 - Use the `↑` and `↓` arrow keys to navigate between previously entered commands in the command box.
 
 ### Getting Started
-Follow this tutorial to get started in using MedBook:
+Follow this tutorial to get started with using MedBook:
 1. Open MedBook by double clicking `MedBook.jar` located in your MedBook home folder.
-2. If you are first time using MedBook. You will see a prompt window requesting you to set up a new password.
-3. Type in a password and press `enter` to continue.
+2. If this is your first time using MedBook, you will see a prompt window requesting you to set up a new password.
+3. Type in a password which fits the requirements and press `enter` to continue.
 
    <figure class="figure">
        <img src="images/SignUpScreen.png" class="figure-img img-fluid rounded" alt="Password Prompt Display" width="350">
@@ -90,25 +90,25 @@ Follow this tutorial to get started in using MedBook:
        <span class="badge badge-info">INFO</span>
    </div>
    <div>
-       This password should only be known to you as it will be used to encrypt your MedBook data.
+       This password should only be known to you as it will be used to encrypt your MedBook's data.
        See [FAQ](#faq) on how to reset your password.
    </div>
    </div>
 
-4. Once you have set up a password, you will be prompted to enter the same password for every logins.
+4. Once you have set up a password, you will be prompted to enter the same password every time you login.
 
    <figure class="figure">
        <img src="images/LoginScreen.png" class="figure-img img-fluid rounded" alt="Login Prompt Display" width="350">
        <figcaption class="figure-caption">Figure 2: Login Prompt Display</figcaption>
    </figure>
 
-5. After you successfully login, the GUI will load up with sample data and you should see the picture below.
+5. After you have successfully logged in, the GUI will be loaded up with sample data and MedBook should look like the picture below.
 
    <figure class="figure">
        <img src="images/HomeScreen.png" class="figure-img img-fluid rounded" alt="Login Prompt Display" width="500">
        <figcaption class="figure-caption">Figure 3: Main Display</figcaption>
    </figure>
-6. You may refer the command list [here](#features) for the details of each available command.
+6. You may refer the to command list [here](#features) for the details of each available command.
 
 --------------------------------------------------------------------------------------------------------------------
 
