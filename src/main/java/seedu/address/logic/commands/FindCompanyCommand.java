@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,8 +26,8 @@ public class FindCompanyCommand extends Command {
             + "by name and tag.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]\n"
+            + "[\" + PREFIX_SEARCH_TYPE + \"SEARCH_TYPE]"
+            + "[\" + PREFIX_TAG + \"TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "sgshop dbsss ";
 

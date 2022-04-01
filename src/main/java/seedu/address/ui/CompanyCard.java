@@ -39,6 +39,8 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane archive;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -52,6 +54,9 @@ public class CompanyCard extends UiPart<Region> {
         phone.setText(company.getPhone().value);
         address.setText(company.getAddress().value);
         email.setText(company.getEmail().value);
+        if (company.isArchived()) {
+            archive.getChildren().add(new Label("ARCHIVED"));
+        }
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

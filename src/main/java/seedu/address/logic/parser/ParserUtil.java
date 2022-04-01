@@ -170,11 +170,11 @@ public class ParserUtil {
 
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmeddate = date.trim();
-        if (!Date.isValidDate(trimmeddate)) {
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmeddate);
+        return new Date(trimmedDate);
     }
 
     /**
