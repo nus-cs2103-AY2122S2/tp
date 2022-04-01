@@ -13,10 +13,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Event extends Entry {
 
-    //Identity fields
-    private Name companyName;
 
     // Data fields
+    private Name companyName;
     private final Date date;
     private final Time time;
     private final Location location;
@@ -24,13 +23,21 @@ public class Event extends Entry {
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Name companyName, Date date, Time time, Location location, Set<Tag> tags) {
-        super(name, tags);
+    public Event(Name name, Name companyName, Date date, Time time, Location location,
+                 Set<Tag> tags, boolean isArchived) {
+        super(name, tags, isArchived);
         requireAllNonNull(companyName, date, time, location);
         this.companyName = companyName;
         this.date = date;
         this.time = time;
         this.location = location;
+    }
+
+    /**
+     * Constructor if no isArchived value is provided; default value is false.
+     */
+    public Event(Name name, Name companyName, Date date, Time time, Location location, Set<Tag> tags) {
+        this(name, companyName, date, time, location, tags, false);
     }
 
     public Name getCompanyName() {

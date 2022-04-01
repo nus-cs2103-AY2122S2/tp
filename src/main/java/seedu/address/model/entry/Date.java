@@ -8,6 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Represents an Event's Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
@@ -15,6 +17,7 @@ import java.util.Locale;
 public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date should follow the format YYYY-MM-DD and be a valid date.";
+    public static final String TODAY_CONSTANT = "today";
 
     public final LocalDate date;
 
@@ -26,7 +29,32 @@ public class Date implements Comparable<Date> {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date);
+
+        if (date.equals(TODAY_CONSTANT)) {
+            this.date = LocalDate.now();
+        } else if (isRelativeToToday(date)) {
+            String[] dateSplit = date.split(" ");
+            this.date = LocalDate.now().plusDays(Long.parseLong(dateSplit[1]));
+        } else {
+            this.date = LocalDate.parse(date);
+        }
+    }
+
+    /**
+     * Returns true if the string passed follows the form "today [long]".
+     */
+    public static boolean isRelativeToToday(String test) {
+        String[] testSplit = test.split(" ");
+
+        if (testSplit.length != 2) {
+            return false;
+        }
+
+        if (!testSplit[0].equals(TODAY_CONSTANT)) {
+            return false;
+        }
+
+        return StringUtil.isLong(testSplit[1]);
     }
 
     /**
@@ -34,6 +62,9 @@ public class Date implements Comparable<Date> {
      */
     public static boolean isValidDate(String test) {
         try {
+            if (test.equals(TODAY_CONSTANT) || isRelativeToToday(test)) {
+                return true;
+            }
             LocalDate.parse(test);
         } catch (DateTimeParseException e) {
             return false;
@@ -75,6 +106,15 @@ public class Date implements Comparable<Date> {
     @Override
     public int hashCode() {
         return date.hashCode();
+    }
+
+
+    /**
+     * Accesses and returns the date attribute
+     * @return the date attribute as LocalDate
+     */
+    public LocalDate getPure() {
+        return this.date;
     }
 
 }

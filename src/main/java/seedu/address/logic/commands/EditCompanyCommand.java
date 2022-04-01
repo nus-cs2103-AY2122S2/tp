@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
+import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_ONLY;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -81,7 +81,7 @@ public class EditCompanyCommand extends Command {
         }
 
         model.setCompany(companyToEdit, editedCompany);
-        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        model.updateFilteredCompanyList(PREDICATE_SHOW_UNARCHIVED_ONLY);
 
         if (!companyToEdit.getName().equals(editedCompany.getName())) {
             model.getAddressBook().updateCompanyNames(

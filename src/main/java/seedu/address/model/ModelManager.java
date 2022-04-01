@@ -10,7 +10,9 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ListType;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
@@ -44,11 +46,12 @@ public class ModelManager implements Model {
         filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
 
-        currentlyDisplayedListType = ListType.PERSON;
+        currentlyDisplayedListType = ListType.COMPANY;
 
+        filteredCompanies.setPredicate(PREDICATE_SHOW_UNARCHIVED_ONLY);
         // Don't allow deleting/finding/editing on the events or person list at the beginning
-        filteredPersons.setPredicate(PREDICATE_SHOW_NO_PERSONS);
-        filteredEvents.setPredicate(PREDICATE_SHOW_NO_EVENTS);
+        filteredPersons.setPredicate(PREDICATE_SHOW_NONE);
+        filteredEvents.setPredicate(PREDICATE_SHOW_NONE);
     }
 
     public ModelManager() {
@@ -118,7 +121,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL);
     }
 
     @Override
@@ -149,7 +152,7 @@ public class ModelManager implements Model {
     @Override
     public void addCompany(Company company) {
         addressBook.addCompany(company);
-        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL);
     }
 
     /**
@@ -165,6 +168,32 @@ public class ModelManager implements Model {
         addressBook.setCompany(target, editedCompany);
     }
 
+    //=========== For Events =================================================================================
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
+    }
+
     //=========== General Filtered List Modifiers ============================================================
 
     /**
@@ -173,47 +202,65 @@ public class ModelManager implements Model {
      * @param companyPredicate The predicate to apply to the Company list.
      * @param eventPredicate The predicate to apply to the Event list.
      */
-    private void updateFilteredLists(Predicate<Person> personPredicate, Predicate<Company> companyPredicate,
-                                    Predicate<Event> eventPredicate) {
+    private void updateFilteredLists(Predicate<? super Person> personPredicate,
+                                     Predicate<? super Company> companyPredicate,
+                                     Predicate<? super Event> eventPredicate) {
         updateFilteredPersonList(personPredicate);
         updateFilteredCompanyList(companyPredicate);
         updateFilteredEventList(eventPredicate);
     }
 
     @Override
-    public void showPersonList(Predicate<Person> predicate) {
-        updateFilteredLists(predicate, PREDICATE_SHOW_NO_COMPANIES, PREDICATE_SHOW_NO_EVENTS);
+    public void updateCurrentlyDisplayedList(Predicate<Entry> predicate) {
+        switch (currentlyDisplayedListType) {
+        case PERSON:
+            showPersonList(predicate);
+            break;
+        case COMPANY:
+            showCompanyList(predicate);
+            break;
+        case EVENT:
+            showEventList(predicate);
+            break;
+        default:
+            // Should not reach here
+        }
+    }
+
+    @Override
+    public void showPersonList(Predicate<? super Person> predicate) {
+        updateFilteredLists(predicate, PREDICATE_SHOW_NONE, PREDICATE_SHOW_NONE);
         currentlyDisplayedListType = ListType.PERSON;
     }
 
     @Override
-    public void showCompanyList(Predicate<Company> predicate) {
-        updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, predicate, PREDICATE_SHOW_NO_EVENTS);
+    public void showCompanyList(Predicate<? super Company> predicate) {
+        updateFilteredLists(PREDICATE_SHOW_NONE, predicate, PREDICATE_SHOW_NONE);
         currentlyDisplayedListType = ListType.COMPANY;
     }
 
     @Override
-    public void showEventList(Predicate<Event> predicate) {
-        updateFilteredLists(PREDICATE_SHOW_NO_PERSONS, PREDICATE_SHOW_NO_COMPANIES, predicate);
+    public void showEventList(Predicate<? super Event> predicate) {
+        updateFilteredLists(PREDICATE_SHOW_NONE, PREDICATE_SHOW_NONE, predicate);
         currentlyDisplayedListType = ListType.EVENT;
     }
 
     @Override
-    public void sortPersonListByName(boolean ascending) {
+    public void sortPersonListByName(boolean ascending, Predicate<? super Person> predicate) {
         filteredPersons.sort(ascending ? COMPARATOR_PERSON_BY_NAME : COMPARATOR_PERSON_BY_NAME.reversed());
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        showPersonList(predicate);
     }
 
     @Override
-    public void sortCompanyListByName(boolean ascending) {
+    public void sortCompanyListByName(boolean ascending, Predicate<? super Company> predicate) {
         filteredCompanies.sort(ascending ? COMPARATOR_COMPANY_BY_NAME : COMPARATOR_COMPANY_BY_NAME.reversed());
-        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        showCompanyList(predicate);
     }
 
     @Override
-    public void sortEventListByDate(boolean ascending) {
+    public void sortEventListByDate(boolean ascending, Predicate<? super Event> predicate) {
         filteredEvents.sort(ascending ? COMPARATOR_EVENT_BY_DATE : COMPARATOR_EVENT_BY_DATE.reversed());
-        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        showEventList(predicate);
     }
 
     @Override
@@ -243,6 +290,53 @@ public class ModelManager implements Model {
             Event eventToDelete = filteredEvents.get(index);
             deleteEvent(eventToDelete);
             return eventToDelete;
+        default:
+            return null;
+        }
+    }
+
+    @Override
+    public Entry archiveEntry(int index, boolean isArchived) throws CommandException {
+        switch (currentlyDisplayedListType) {
+        case PERSON:
+            if (index >= filteredPersons.size()) {
+                return null;
+            }
+
+            Person personToArchive = filteredPersons.get(index);
+            if (personToArchive.isArchived() == isArchived) {
+                String status = isArchived ? "Archived" : "not Archived";
+                throw new CommandException(personToArchive.getName().toString() + " is already " + status);
+            }
+
+            addressBook.setArchivePerson(personToArchive, isArchived);
+            return personToArchive;
+        case COMPANY:
+            if (index >= filteredCompanies.size()) {
+                return null;
+            }
+
+            Company companyToArchive = filteredCompanies.get(index);
+            if (companyToArchive.isArchived() == isArchived) {
+                String status = isArchived ? "Archived" : "not Archived";
+                throw new CommandException(companyToArchive.getName().toString() + " is already " + status);
+            }
+
+            addressBook.setArchiveCompany(companyToArchive, isArchived);
+            return companyToArchive;
+        case EVENT:
+            if (index >= filteredEvents.size()) {
+                return null;
+            }
+
+            Event eventToArchive = filteredEvents.get(index);
+            if (eventToArchive.isArchived() == isArchived) {
+                String status = isArchived ? "Archived" : "not Archived";
+                throw new CommandException(eventToArchive.getName().toString() + " is already " + status);
+            }
+
+            addressBook.setArchiveEvent(eventToArchive, isArchived);
+            return eventToArchive;
         default:
             return null;
         }
@@ -284,6 +378,19 @@ public class ModelManager implements Model {
         filteredCompanies.setPredicate(predicate);
     }
 
+    //=========== Filtered Event List Accessors =============================================================
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<? super Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -303,44 +410,6 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredCompanies.equals(other.filteredCompanies)
                 && filteredEvents.equals(other.filteredEvents);
-    }
-
-    //=========== For Events =================================================================================
-
-    @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return addressBook.hasEvent(event);
-    }
-
-    @Override
-    public void deleteEvent(Event target) {
-        addressBook.removeEvent(target);
-    }
-
-    @Override
-    public void addEvent(Event event) {
-        addressBook.addEvent(event);
-        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-    }
-
-    @Override
-    public void setEvent(Event target, Event editedEvent) {
-        requireAllNonNull(target, editedEvent);
-
-        addressBook.setEvent(target, editedEvent);
-    }
-
-
-    @Override
-    public ObservableList<Event> getFilteredEventList() {
-        return filteredEvents;
-    }
-
-    @Override
-    public void updateFilteredEventList(Predicate<Event> predicate) {
-        requireNonNull(predicate);
-        filteredEvents.setPredicate(predicate);
     }
 
 }

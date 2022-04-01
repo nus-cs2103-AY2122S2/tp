@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -88,7 +88,7 @@ public class EditEventCommand extends Command {
         }
 
         model.setEvent(eventToEdit, editedEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
 
