@@ -1,6 +1,24 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_HOURS_NEGATIVE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_HOURS_ZERO_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_MINUTES_EXCEEDS_59_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_MINUTES_NEGATIVE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_MINUTES_ZERO_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DATE_DAY_FIELD_OUT_OF_RANGE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DATE_FORMAT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DATE_YEAR_FIELD_TOO_LARGE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_START_TIME_FORMAT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_ADDRESS_DESC_AMK;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_DURATION_HOURS_DESC_2HOUR;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_DURATION_MINUTES_DESC_30MIN;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_NAME_DESC_TRIAL_LESSON;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_START_TIME_DESC_6PM;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_SUBJECT_DESC_BIOLOGY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_ADDRESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.INVALID_DATE_FORMAT_MESSAGE;
