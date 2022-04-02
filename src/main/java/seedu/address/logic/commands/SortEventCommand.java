@@ -18,7 +18,7 @@ public class SortEventCommand extends SortCommand {
     public static final String MESSAGE_SUCCESS = "Sorted all events%s";
 
     public static final String MESSAGE_USAGE = "Sorts events. The default setting is to sort "
-            + "only unarchived events in ascending order, but you can choose to include archived ones " 
+            + "only unarchived events in ascending order, but you can choose to include archived ones "
             + "or sort in descending ordered.\n"
             + "Parameters: [ " + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
             + "(must be one of 'unarchived', 'archived', or 'all') "

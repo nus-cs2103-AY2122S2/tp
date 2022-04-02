@@ -78,7 +78,6 @@ public class Date implements Comparable<Date> {
      * Returns a negative integer, zero, or a positive integer as this date is less than, equal to, or
      * greater than the specified date.
      * <p>
-     * 
      * @param otherDate the date to be compared.
     */
     @Override

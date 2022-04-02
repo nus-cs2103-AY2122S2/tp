@@ -18,7 +18,7 @@ public class SortCompanyCommand extends SortCommand {
     public static final String MESSAGE_SUCCESS = "Sorted all companies%s";
 
     public static final String MESSAGE_USAGE = "Sorts companies. The default setting is to sort "
-            + "only unarchived companies in ascending order, but you can choose to include archived ones " 
+            + "only unarchived companies in ascending order, but you can choose to include archived ones "
             + "or sort in descending ordered.\n"
             + "Parameters: [ " + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
             + "(must be one of 'unarchived', 'archived', or 'all') "

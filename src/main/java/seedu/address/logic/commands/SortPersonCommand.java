@@ -18,7 +18,7 @@ public class SortPersonCommand extends SortCommand {
     public static final String MESSAGE_SUCCESS = "Sorted all people%s";
 
     public static final String MESSAGE_USAGE = "Sorts people. The default setting is to sort "
-            + "only unarchived people in ascending order, but you can choose to include archived ones " 
+            + "only unarchived people in ascending order, but you can choose to include archived ones "
             + "or sort in descending ordered.\n"
             + "Parameters: [ " + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
             + "(must be one of 'unarchived', 'archived', or 'all') "
