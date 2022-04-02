@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.NameContainsModulePredicate;
 
 /**
@@ -14,15 +15,13 @@ import seedu.address.model.person.NameContainsModulePredicate;
 public class FilterCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "filter";
-    public static final String MESSAGE_CONSTRAINTS = "Modules names should have 2-3 letters prefix "
-            + "followed by 4 digits and an optional letter\n";
+    public static final String MESSAGE_CONSTRAINTS = Module.MESSAGE_CONSTRAINTS;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose modules contain any of "
             + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD \n"
             + "Example: " + COMMAND_WORD + " CS3230";
 
     private final NameContainsModulePredicate predicate;
-
     public FilterCommand(NameContainsModulePredicate predicate) {
         this.predicate = predicate;
     }
