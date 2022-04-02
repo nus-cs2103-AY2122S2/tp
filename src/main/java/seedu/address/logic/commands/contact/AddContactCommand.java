@@ -66,6 +66,7 @@ public class AddContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
         if (!model.hasPatient(new NricPredicate(ownerNric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);

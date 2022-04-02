@@ -133,7 +133,7 @@ public class ModelManager implements Model {
     @Override
     public void addPatient(Patient patient) {
         addressBook.addPatient(patient);
-        updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Patient> getPersonList() {
+    public ObservableList<Patient> getPatientList() {
         return addressBook.getPatientList();
     }
 

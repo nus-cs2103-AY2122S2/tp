@@ -67,6 +67,7 @@ public class SummaryDisplay extends UiPart<Region> {
         EmptyCard prescriptionEmptyCard = new EmptyCard();
         EmptyCard testResultEmptyCard = new EmptyCard();
         EmptyCard contactEmptyCard = new EmptyCard();
+        details.getChildren().clear();
         details.getChildren().add(patientCard.getRoot());
         medical.getChildren().clear();
         if (medicals.size() != 0) {
