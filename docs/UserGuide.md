@@ -372,7 +372,7 @@ Format: `resize SIZE`
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
 
 📓`Note:`
-* There is also a `Resize Window` button on the GUI which you can click to cycle between the 3 different resizing options.
+* There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
 
 ![Comparison of 3 resize options](images/resize_options.png) *Figure 11: Comparison of the 3 different resizing options for the result display window.*
 
