@@ -135,6 +135,8 @@ The onboarding guide will cover the following:
 - Delete person
 - List persons
 
+:rotating_light: **Important Note:** Note the order of keywords for `findperson` is only fixed for the Onboarding Guide.
+
 ### Viewing help : `help`
 
 Shows the commands available and the syntax for all of them. It also includes a link to this user guide for further reading.
