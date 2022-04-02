@@ -42,7 +42,7 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Example 2: add f/FOL p/84848002 a/13 Kent Ridge Drive e/danny@yahoo.com "
             + "mc/a0024345h n/Danny cs/positive b/c\n"
-            + "\n3.DELETE a contact at a specific INDEX. The index refers to the index number shown in the "
+            + "\n3. DELETE a contact at a specific INDEX. The index refers to the index number shown in the "
             + "displayed person list."
             + NEWLINE_AND_INDENTATION
             + "Format: delete INDEX"
@@ -81,11 +81,11 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n9. FILTER student based on health statuses"
             + NEWLINE_AND_INDENTATION
-            + "Format: filter covid-positive"
+            + "Format: filter covid-positive\n"
 
             + "\n10. IMPORT excel files"
             + NEWLINE_AND_INDENTATION
-            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx"
+            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx\n"
 
             + "\n11. UNDO an executed add, edit or delete command."
             + NEWLINE_AND_INDENTATION
