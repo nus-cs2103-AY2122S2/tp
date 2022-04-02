@@ -30,8 +30,8 @@ public class AddEmployeeCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New Employee added: %1$s";
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Employee, phone number or "
-            + "Email already exists in manageEZPZ! "
-            + "Please Check again!\n";
+            + "email already exists in manageEZPZ! "
+            + "Please check again!\n";
 
     private final Person toAdd;
 
