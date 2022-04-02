@@ -51,6 +51,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                  |
 | [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional  |
 | \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
+| {Instructions for Parameters}                                             | At least one parameter must be provided                 |
 
 ---
 
@@ -124,7 +125,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | STATUS     | s/     | The status to label a show<br> They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
 | TAG        | t/     | The tag to label a show                                                             |
 | COMMENT    | c/     | The comment to describe a show                                                      |
-| RATE       | r/     | The rating to give a show                                                           |
+| RATING     | r/     | The rating to give a show                                                           |
 
 <div markdown="block" class="alert alert-info">
 
@@ -134,7 +135,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME s/STATUS [r/RATE] [c/COMMENT] [t/TAG]…` can be used as `n/ReZero s/completed r/5 c/What a Simp t/Anime` or as `n/ReZero s/completed`.
+  e.g `n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…` can be used as `n/ReZero s/completed r/5 c/What a Simp t/Anime` or as `n/ReZero s/completed`.
 
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `[t/TAG]…​` can be used as `t/Anime`, `t/Sitcom t/Kdrama` etc.
@@ -183,9 +184,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Description:** Planning to watch a show and want to store its details? Add it to Trackermon's show list!
 
-**Format:** `add n/NAME s/STATUS [r/RATE] [c/COMMENT] [t/TAG]…​`
-
-**Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
+**Format:** `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​`
 
 <img src="images/AddImage.png">
 
@@ -195,6 +194,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
   e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
 
 </div>
+
+**Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -206,8 +207,6 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Format:** `delete INDEX`
 
-**Example & Output:** `delete 2`
-
 <img src="images/DeleteImage.png">
 
 <div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
@@ -217,6 +216,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 </div>
 
+**Example & Output:** `delete 2`
+
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
@@ -225,15 +226,11 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Description:** Wanting to modify a show? Edit it at the specified index shown in Trackermon's show list!
 
-**Format:** `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​`
+**Format:** `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Multiple show [parameters](#command-structure) can be edited at the same time
 </div>
-
-**Example & Output:** `edit 2 n/Sailor Moo t/Horror`
-
-<img src="images/EditImage.png">
 
 <div markdown="block" class="alert alert-info">
 
@@ -264,6 +261,10 @@ Multiple show [parameters](#command-structure) can be edited at the same time
   * `edit INDEX <Specify all other tags in show> t/EDITED_TAG`
 
 </div>
+
+**Example & Output:** `edit 2 n/Sailor Moo t/Horror`
+
+<img src="images/EditImage.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -306,10 +307,6 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
 </div>
 
-**Example & Output:** `find attack on titan`
-
-<img src="images/General_Find_UI.png">
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about General Find:**<br>
@@ -322,30 +319,26 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 </div>
 
+**Example & Output:** `find attack on titan`
+
+<img src="images/General_Find_UI.png">
+
 #### Precise find
 
 **Description (Precise Find):** Searching for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
 
-**Format (Precise Find):** `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`
+**Format (Precise Find):** `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
 </div>
-
-**Example & Output:** `find n/Shutter Island`
-
-<img src="images/Precise_Find_UI.png">
-
-**Example & Output:** `find r/5`
-
-<img src="images/Precise_Find_UI_2.png">
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about Precise Find:**<br>
 * **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
 * `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
-* `find n/Django s/completed r/3 t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, **3** in the `RATE` parameter and **Action** in the `TAG` parameter.
+* `find n/Django s/completed r/3 t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, **3** in the `RATING` parameter and **Action** in the `TAG` parameter.
 
 </div>
 
@@ -355,10 +348,19 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 * There must be at **least one [prefix](#command-structure) followed by a [parameter](#command-structure)** and it **must not be empty**.
 
 :exclamation:**Multiple of the same prefixes:**<br>
-* find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
-* find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` and `RATE` parameter.
+* `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#command-structure)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
+* `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
+* `find r/4 5` does not mean `find r/4 r/5`. The former will find all show ratings that match a 4 star rating and 5 star rating while the latter will find all shows with a 5 star rating. This is only applicable to the `RATING` parameter.
 
 </div>
+
+**Example & Output:** `find n/Shutter Island`
+
+<img src="images/Precise_Find_UI.png">
+
+**Example & Output:** `find r/5`
+
+<img src="images/Precise_Find_UI_2.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -440,6 +442,11 @@ Sort can help reorder the list!!
 
 **Format:** `import`
 
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**Caution:** Import will override the current list if successful! Your previous list data will be lost!
+</div>
+
 **Example & Output:** `import`
 - Step 1. Navigate to the Trackermon data you want to import using your OS' native [GUI](#glossary)!
 - Step 2. Select the file and click "Open"
@@ -448,11 +455,6 @@ Sort can help reorder the list!!
   - If there was an error importing the file, Trackermon will display an error message!
 
 <img src="images/Import.png">
-
-<div markdown="block" class="alert alert-danger">
-
-:exclamation:**Caution:** Import will override the current list if successful! Your previous list data will be lost!
-</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -507,21 +509,21 @@ Sort can help reorder the list!!
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                         |
-|------------------|--------------------------------------------------------------------------------------------------------------------------|
-| **Help**         | `help`                                                                                                                   |
-| **Add**          | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                    |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                      |
-| **Edit**         | `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
-| **List**         | `list`                                                                                                                   |
-| **Clear**        | `clear`                                                                                                                  |
-| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
-| **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             | 
-| **Suggest**      | `suggest`                                                                                                                |
-| **Import**       | `import`                                                                                                                 |
-| **Export**       | `export`                                                                                                                 |
-| **Exit**         | `exit`                                                                                                                   |
+| Action           | Format, Examples                                                                                                           |
+|------------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Help**         | `help`                                                                                                                     |
+| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                    |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                        |
+| **Edit**         | `edit INDEX [n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
+| **List**         | `list`                                                                                                                     |
+| **Clear**        | `clear`                                                                                                                    |
+| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                   |
+| **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                               | 
+| **Suggest**      | `suggest`                                                                                                                  |
+| **Import**       | `import`                                                                                                                   |
+| **Export**       | `export`                                                                                                                   |
+| **Exit**         | `exit`                                                                                                                     |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
