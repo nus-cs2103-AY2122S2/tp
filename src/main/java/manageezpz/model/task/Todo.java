@@ -46,6 +46,10 @@ public class Todo extends Task {
         return null;
     }
 
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
     /**
      * Returns the string representation of a Todo task.
      *

@@ -1,7 +1,9 @@
 package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static manageezpz.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
+import static manageezpz.logic.commands.AddDeadlineTaskCommand.MESSAGE_USAGE;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_BY_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import java.util.stream.Stream;
@@ -22,29 +24,33 @@ public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskComma
      */
     public AddDeadlineTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimapDeadline =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_BY_DATETIME);
 
-        if (!arePrefixesPresent(argMultimapDeadline, PREFIX_DESCRIPTION, PREFIX_DATETIME)
+        if (!arePrefixesPresent(argMultimapDeadline, PREFIX_DESCRIPTION, PREFIX_BY_DATETIME)
                 || !argMultimapDeadline.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
                     AddDeadlineTaskCommand.MESSAGE_USAGE));
         }
 
-        Description desc = ParserUtil.parseDescription(argMultimapDeadline.getValue(PREFIX_DESCRIPTION).get());
-        String byDateTime = argMultimapDeadline.getValue(PREFIX_DATETIME).get();
+        try {
+            Description desc = ParserUtil.parseDescription(argMultimapDeadline.getValue(PREFIX_DESCRIPTION).get());
 
-        String[] parseByDateTime = byDateTime.split(" ");
-        if (parseByDateTime.length != 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddDeadlineTaskCommand.MESSAGE_USAGE));
+            String byDateTime = argMultimapDeadline.getValue(PREFIX_BY_DATETIME).get();
+            String[] parseByDateTime = byDateTime.split(" ");
+
+            if (parseByDateTime.length != 2) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+
+            Date date = ParserUtil.parseDate(parseByDateTime[0]);
+            Time time = ParserUtil.parseTime(parseByDateTime[1]);
+
+            Deadline deadline = new Deadline(desc, date, time);
+            return new AddDeadlineTaskCommand(deadline);
+        } catch (ParseException pe) {
+            throw new ParseException(pe.getMessage() + "\n\n" + MESSAGE_USAGE);
         }
-        Date date = ParserUtil.parseDate(parseByDateTime[0]);
-        Time time = ParserUtil.parseTime(parseByDateTime[1]);
-        Deadline deadline = new Deadline(desc, date, time);
-
-        return new AddDeadlineTaskCommand(deadline);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

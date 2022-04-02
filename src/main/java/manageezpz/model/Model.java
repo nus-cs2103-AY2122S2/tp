@@ -107,6 +107,12 @@ public interface Model {
     void deleteTask(Task task);
 
     /**
+     * Updates the task with the edited person.
+     * The task must exist in the task list.
+     */
+    void updateTaskWithEditedPerson(Task task, int assigneesIndex, Person editedPerson);
+
+    /**
      * Marks the given task.
      * The task must exist in the task list.
      */
@@ -198,7 +204,7 @@ public interface Model {
     /**
      * Returns true if a {@code Task} is tagged.
      */
-    boolean isTagged(Task task, Person p);
+    boolean isEmployeeTaggedToTask(Task task, Person p);
 
     /**
      * Returns a list of all tasks.

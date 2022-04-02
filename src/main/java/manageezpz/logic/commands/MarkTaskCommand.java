@@ -22,7 +22,7 @@ public class MarkTaskCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task marked as done: %1$s";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Task set as done: %1$s";
 
     private final Index targetIndex;
 
@@ -33,6 +33,7 @@ public class MarkTaskCommand extends Command {
      * @param targetIndex Index of the Task to be marked as done
      */
     public MarkTaskCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

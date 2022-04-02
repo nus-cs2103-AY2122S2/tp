@@ -25,9 +25,11 @@ import manageezpz.model.task.TaskMultiplePredicate;
  * A subclass for find command to find all the tasks.
  */
 public class FindTaskCommand extends Command {
+
     public static final String COMMAND_WORD = "findTask";
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Finds all tasks that contains the properties specified.\n"
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all tasks that contains the properties specified.\n"
             + "Task Types:\n"
             + PREFIX_TODO.getPrefix() + ": Todos\n"
             + PREFIX_DEADLINE.getPrefix() + ": Deadlines\n"
@@ -59,15 +61,22 @@ public class FindTaskCommand extends Command {
             + PREFIX_IS_MARKED.getPrefix() + "true";
 
     public static final String NO_OPTIONS = COMMAND_WORD + " needs at least 1 valid option\n";
+
     public static final String INVALID_DESCRIPTION = Description.MESSAGE_CONSTRAINTS + "\n";
+
     public static final String INVALID_DATE = Date.MESSAGE_CONSTRAINTS + "\n";
+
     public static final String INVALID_PRIORITY = "Property should be NONE, LOW, MEDIUM, HIGH\n";
+
     public static final String TODO_AND_DATE_OPTION_TOGETHER = "Todo and Date option are together\n";
+
     public static final String INVALID_BOOLEAN = "Boolean should be true or false\n";
+
     public static final String INVALID_ASSIGNEE = Name.MESSAGE_CONSTRAINTS + "\n";
+
     public static final String MORE_THAN_ONE_TASK_TYPE = "Only one task type is allowed\n";
 
-    private TaskMultiplePredicate predicate;
+    private final TaskMultiplePredicate predicate;
 
     /**
      * The constructor for find task command.

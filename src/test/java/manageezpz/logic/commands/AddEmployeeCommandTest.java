@@ -1,6 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.logic.commands.AddEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -53,8 +54,8 @@ public class AddEmployeeCommandTest {
         AddEmployeeCommand addCommand = new AddEmployeeCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class,
-                AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(AddEmployeeCommand.MESSAGE_DUPLICATE_PERSON,
+                        validPerson.getName().toString()) + "\n" + MESSAGE_USAGE, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -216,7 +217,7 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public boolean isTagged(Task task, Person p) {
+        public boolean isEmployeeTaggedToTask(Task task, Person p) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -242,6 +243,11 @@ public class AddEmployeeCommandTest {
 
         @Override
         public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateTaskWithEditedPerson(Task task, int assigneesIndex, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
