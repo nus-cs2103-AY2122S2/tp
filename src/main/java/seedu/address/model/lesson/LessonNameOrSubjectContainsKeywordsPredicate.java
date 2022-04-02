@@ -3,8 +3,6 @@ package seedu.address.model.lesson;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-
 /**
  * Tests that a {@code Lesson}'s {@code LessonName} or {@code Subject} matches any of the keywords given.
  */
@@ -18,10 +16,10 @@ public class LessonNameOrSubjectContainsKeywordsPredicate implements Predicate<L
     @Override
     public boolean test(Lesson lesson) {
         boolean nameMatch = keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(lesson.getName().fullName, keyword));
+                .anyMatch(keyword -> lesson.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
 
         boolean subjectMatch = keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(lesson.getSubject().subjectName, keyword));
+                .anyMatch(keyword -> lesson.getSubject().subjectName.toLowerCase().contains(keyword.toLowerCase()));
 
         return nameMatch || subjectMatch;
     }

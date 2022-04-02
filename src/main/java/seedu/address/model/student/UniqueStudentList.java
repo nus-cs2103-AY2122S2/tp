@@ -65,7 +65,14 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!target.isSameStudent(editedStudent) && contains(editedStudent)) {
             throw new DuplicateStudentException();
         }
+        for (int i = 0; i < target.getEnrolledLessons().getLessonsList().size(); i++) {
+            target.getEnrolledLessons()
+                    .getLessonsList()
+                    .get(i)
+                    .getEnrolledStudents()
+                    .replaceEditedStudent(target, editedStudent);
 
+        }
         internalList.set(index, editedStudent);
     }
 

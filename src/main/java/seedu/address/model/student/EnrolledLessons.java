@@ -38,6 +38,19 @@ public class EnrolledLessons {
         return lessonsList.contains(lesson);
     }
 
+    /**
+     * Replaces the lesson that is edited to be the edited lesson.
+     * @param target lesson that is edited
+     * @param editedLesson the lesson after the edit
+     */
+    public void replaceEditedLesson(Lesson target, Lesson editedLesson) {
+        for (int i = 0; i < lessonsList.size(); i++) {
+            if (lessonsList.get(i).equals(target)) {
+                lessonsList.set(i, editedLesson);
+            }
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

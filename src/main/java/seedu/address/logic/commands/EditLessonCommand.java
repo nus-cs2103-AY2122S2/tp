@@ -95,6 +95,7 @@ public class EditLessonCommand extends Command {
             model.updateFilteredLessonList(new ConflictingLessonsPredicate(editedLesson));
             throw new CommandException(MESSAGE_CONFLICTING_LESSON, ViewTab.LESSON);
         }
+        // editedLesson.updateEdit(lessonToEdit);
         model.addLesson(editedLesson);
         model.setSelectedLesson(editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);

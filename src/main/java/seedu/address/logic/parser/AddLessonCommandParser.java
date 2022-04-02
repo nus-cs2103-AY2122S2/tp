@@ -34,30 +34,15 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                         PREFIX_DATE, PREFIX_START_TIME, PREFIX_DURATION_HOURS,
                         PREFIX_DURATION_MINUTES, PREFIX_RECURRING);
 
-        if (CheckPrefixes.arePrefixesAbsent(argMultimap, PREFIX_LESSON_NAME, PREFIX_SUBJECT, PREFIX_LESSON_ADDRESS,
-                PREFIX_DATE, PREFIX_START_TIME)
+        if (CheckPrefixes.arePrefixesAbsent(argMultimap, PREFIX_LESSON_NAME, PREFIX_DATE, PREFIX_START_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
-        LessonName name = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LESSON_NAME).get());
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        LessonAddress address = ParserUtil.parseLessonAddress(argMultimap.getValue(PREFIX_LESSON_ADDRESS).get());
-        Integer durationHours = hasDurationHoursField(argMultimap)
-                ? ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get())
-                : 0;
-        Integer durationMinutes = hasDurationMinutesField(argMultimap)
-                ? ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get())
-                : 0;
-
-        ParserUtil.checkDurationIsValid(durationHours, durationMinutes);
-
-        DateTimeSlot dateTimeSlot = ParserUtil.parseDateTimeSlot(
-                argMultimap.getValue(PREFIX_DATE).get(),
-                argMultimap.getValue(PREFIX_START_TIME).get(),
-                durationHours,
-                durationMinutes
-        );
+        LessonName name = getName(argMultimap);
+        Subject subject = getSubject(argMultimap);
+        LessonAddress address = getAddress(argMultimap);
+        DateTimeSlot dateTimeSlot = getDateTimeSlot(argMultimap);
 
         Lesson lesson = isRecurring(argMultimap)
                 ? Lesson.makeRecurringLesson(name, subject, address, dateTimeSlot)
@@ -67,10 +52,109 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
     }
 
     /**
+     * Returns an instance of LessonName.
+     */
+    private static LessonName getName(ArgumentMultimap argumentMultimap) throws ParseException {
+        return ParserUtil.parseLessonName(argumentMultimap.getValue(PREFIX_LESSON_NAME).get());
+    }
+
+    /**
+     * Returns an instance of Subject.
+     */
+    private static Subject getSubject(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (hasSubjectField(argumentMultimap)) {
+            return ParserUtil.parseSubject(argumentMultimap.getValue(PREFIX_SUBJECT).get());
+        }
+
+        return Subject.EMPTY_SUBJECT;
+    }
+
+    /**
+     * Returns an instance of LessonAddress.
+     */
+    private static LessonAddress getAddress(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (hasAddressField(argumentMultimap)) {
+            return ParserUtil.parseLessonAddress(argumentMultimap.getValue(PREFIX_LESSON_ADDRESS).get());
+        }
+
+        return LessonAddress.EMPTY_ADDRESS;
+    }
+
+    /**
+     * Returns an integer representing the hour field of the lesson's duration
+     */
+    private static Integer getDurationHours(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (hasDurationHoursField(argumentMultimap)) {
+            return ParserUtil.parseDurationHours(argumentMultimap.getValue(PREFIX_DURATION_HOURS).get());
+        }
+
+        return 0;
+    }
+
+    /**
+     * Returns an integer representing the minute field of the lesson's duration
+     */
+    private static Integer getDurationMinutes(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (hasDurationMinutesField(argumentMultimap)) {
+            return ParserUtil.parseDurationMinutes(argumentMultimap.getValue(PREFIX_DURATION_MINUTES).get());
+        }
+
+        return 0;
+    }
+
+    /**
+     * Returns an instance of DateTimeSlot.
+     */
+    private static DateTimeSlot getDateTimeSlot(ArgumentMultimap argumentMultimap) throws ParseException {
+        String date = getDate(argumentMultimap);
+        String startTime = getStartTime(argumentMultimap);
+        Integer durationHours = getDurationHours(argumentMultimap);
+        Integer durationMinutes = getDurationMinutes(argumentMultimap);
+
+        // throw exception if the total duration is 0 hours and 0 minutes
+        ParserUtil.checkDurationIsValid(durationHours, durationMinutes);
+
+        return ParserUtil.parseDateTimeSlot(
+                date,
+                startTime,
+                durationHours,
+                durationMinutes
+        );
+    }
+
+    /**
+     * Returns a String representing a lesson's date.
+     */
+    private static String getDate(ArgumentMultimap argumentMultimap) throws ParseException {
+        return argumentMultimap.getValue(PREFIX_DATE).get();
+    }
+
+    /**
+     * Returns a String representing a lesson's starting time.
+     */
+    private static String getStartTime(ArgumentMultimap argumentMultimap) throws ParseException {
+        return argumentMultimap.getValue(PREFIX_START_TIME).get();
+    }
+
+    /**
      * Returns true if the lesson is recurring.
      */
     private static boolean isRecurring(ArgumentMultimap argumentMultimap) {
         return !argumentMultimap.getValue(PREFIX_RECURRING).isEmpty();
+    }
+
+    /**
+     * Returns true if subject is specified
+     */
+    private static boolean hasSubjectField(ArgumentMultimap argumentMultimap) {
+        return !argumentMultimap.getValue(PREFIX_SUBJECT).isEmpty();
+    }
+
+    /**
+     * Returns true if address is specified
+     */
+    private static boolean hasAddressField(ArgumentMultimap argumentMultimap) {
+        return !argumentMultimap.getValue(PREFIX_LESSON_ADDRESS).isEmpty();
     }
 
     /**

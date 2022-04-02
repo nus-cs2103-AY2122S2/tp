@@ -14,11 +14,8 @@ end box
 
 Model -> LessonBook : addLesson(lessonToBeAdded)
 LessonBook -> ConsistentLessonList : add(lessonToBeAdded)
-ConsistentLessonList -> ConsistentLessonList : hasConflictingLesson(lessonToBeAdded)
 
-loop until all existing lessons have been checked
-ConsistentLessonList -> ConsistentLessonList : findLessonConflictingWith(lessonToBeAdded)
-end loop
+ConsistentLessonList -> ConsistentLessonList : hasConflictingLesson(lessonToBeAdded)
 
 opt conflicting lesson found
     ConsistentLessonList -> ConsistentLessonList : findAllLessonsConflictingWith(lessonToBeAdded)
@@ -33,5 +30,7 @@ opt conflicting lesson found
     Model <-- LessonBook : exception
     [<-- Model : exception
 end opt
+
+[<-- Model
 
 @enduml

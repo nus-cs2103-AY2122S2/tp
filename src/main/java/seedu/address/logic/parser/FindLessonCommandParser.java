@@ -25,9 +25,9 @@ public class FindLessonCommandParser implements Parser<FindLessonCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        // String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindLessonCommand(new LessonNameOrSubjectContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindLessonCommand(new LessonNameOrSubjectContainsKeywordsPredicate(Arrays.asList(trimmedArgs)));
     }
 
 }

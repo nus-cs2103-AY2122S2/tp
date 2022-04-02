@@ -6,8 +6,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TeachWhatParser" as TeachWhatParser LOGIC_COLOR
 participant ":AddLessonCommandParser" as AddLessonCommandParser LOGIC_COLOR
 participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant ":CommandException" as CommandException LOGIC_COLOR
 participant ":Lesson" as Lesson LOGIC_COLOR
 end box
 
@@ -47,22 +45,15 @@ alt does not conflict with any existing lessons
     end ref
 
     LogicManager <-- AddLessonCommand : commandResultSuccess
-
     [<--LogicManager : commandResultSuccess
+
 else else
 
     ref over AddLessonCommand, Lesson, Model
         lesson conflicts with existing lesson(s)
     end ref
 
-    create CommandException
-    AddLessonCommand -> CommandException
-    activate CommandException
-    AddLessonCommand <-- CommandException : exception
-    deactivate CommandException
-
     LogicManager <-- AddLessonCommand : exception
-
     [<--LogicManager : exception
 
     deactivate LogicManager
