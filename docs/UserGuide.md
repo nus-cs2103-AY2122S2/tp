@@ -238,7 +238,7 @@ Examples of usage:
 
 💡`Tips:`
 * The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
-* You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+* You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
 * Deletions can be reversed with the `undo` feature.
 
