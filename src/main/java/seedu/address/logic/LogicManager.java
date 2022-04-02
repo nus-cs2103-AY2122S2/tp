@@ -117,27 +117,4 @@ public class LogicManager implements Logic {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
     }
-
-    /**
-     * 1. Remove target from existing addressbook
-     * 2. Switch to alt addressbook
-     * 3. Add target to alt addressbook
-     * 4. Switch back to original addressbook
-     */
-    @Override
-    public void archivePersonByIndex(String oneBasedString) throws CommandException {
-        Index oneBased = Index.fromOneBased(Integer.parseInt(oneBasedString));
-        Person target = model.getFilteredPersonList().get(oneBased.getZeroBased());
-
-        try {
-            // Not in archive, so that means we are archiving someone
-            model.deletePerson(target);
-            model.addArchivedPerson(target);
-            saveBooks();
-        } catch (DuplicatePersonException e) {
-            saveBooks();
-            throw new CommandException(String.format(
-                    ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
-        }
-    }
 }
