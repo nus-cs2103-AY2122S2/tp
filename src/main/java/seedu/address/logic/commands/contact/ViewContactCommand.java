@@ -14,7 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -48,10 +47,9 @@ public class ViewContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
         model.updateFilteredContactList(new ContactWithNricPredicate(ownerNric));
 
-        if (!model.hasPatient(new NricPredicate(ownerNric))) {
+        if (!model.hasPatient(ownerNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

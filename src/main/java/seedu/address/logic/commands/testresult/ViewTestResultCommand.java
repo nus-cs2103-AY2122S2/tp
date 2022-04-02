@@ -13,7 +13,6 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.testresult.TestResultWithNricPredicate;
 
@@ -48,10 +47,9 @@ public class ViewTestResultCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
         model.updateFilteredTestResultList(new TestResultWithNricPredicate(patientNric));
 
-        if (!model.hasPatient(new NricPredicate(patientNric))) {
+        if (!model.hasPatient(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
