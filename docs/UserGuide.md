@@ -86,8 +86,8 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2103`, `m/CS2103 m/CS2100` etc.
 
-* Parameters has to be in order.<br>
-  e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, then it must follow strictly that format.
+* Parameters do not have to be in order.<br>
+  e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, you can do it in any order.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
