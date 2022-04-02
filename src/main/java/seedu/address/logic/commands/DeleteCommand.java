@@ -48,12 +48,13 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> studentList = model.getAddressBook().getPersonList();
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         try {
-            List<Person> lastShownList = model.getFilteredPersonList();
 
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                        + " Only " + lastShownList.size() + " person(s) shown in the list.");
             }
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -68,7 +69,8 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         } catch (Exception ex) {
             logger.severe("Delete Command failed: " + StringUtil.getDetails(ex));
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                    + " Only " + lastShownList.size() + " person(s) shown in the list.");
         }
     }
 

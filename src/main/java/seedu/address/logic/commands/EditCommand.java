@@ -83,7 +83,8 @@ public class EditCommand extends Command {
         ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                    + " Only " + lastShownList.size() + " person(s) shown in the list.");
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
