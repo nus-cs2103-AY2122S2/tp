@@ -36,12 +36,12 @@ A glossary is included at the end to clarify any technical or vague terms used.
 </div>
 
 # Quick start
-1. Ensure you have **Java 11** or above installed in your Computer.
+1. Ensure you have **Java 11** or above installed on your Computer.
    - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
    - To check which version of Java you have installed:
      1. Type "Command Prompt" into the search bar next to your Start menu, and click on it when it appears in the search results.
      2. Type "java -version" into the Command Prompt, then press Enter on your keyboard.
-2. Download the latest **ultimatedivoctracker.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
+2. Download the latest **udt.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
 5. Refer to the Features below for details of each command.
@@ -106,7 +106,7 @@ Adds a student to the tracking list
 <div markdown="span" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
-> - Multiple activity tags can be added to a single student by using multiple `/act` prefixes  
+> - Multiple activity tags can be added to a single student by using multiple `act/` prefixes  
 >   - Eg. `act/choir act/dance`  
 > - A student can also have no activity tags  
 > - User inputs can be in any order
@@ -155,7 +155,7 @@ Find an existing student in the application by their name
 Find an existing student in the application by their Covid-19 Status
 - Format: `findstatus STATUS`
   - Returns a list of students with the specified `STATUS`
-  - `STATUS` is either `positive`, `negative` or `close contact`
+  - `STATUS` is either `positive`, `negative` or `close-contact`
   - `STATUS` is case-insensitive
 - Examples:
   - `findstatus positive` finds all students that are labelled COVID positive
@@ -172,10 +172,6 @@ Finds an existing student in the application by their class
   - `CLASS` is case-insensitive
 - Example:
   - `findclasscode 4A` finds all students in the class 4A
-
-<div markdown="span" class="alert alert-primary" role="alert">
-
-</div>
 
 |![find classcode command](images/user-guide/findclasscode.png)|
 |:--:|
@@ -210,8 +206,9 @@ Edits an existing student's details in the list Index provided and the parts tha
 <div markdown="span" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
-> - Filter the student list via __*find*__ commands to make finding the index easier  
-> - Omitting parts of the student details from the command will leave them unedited
+- Filter the student list via __*find*__ commands to make finding the index easier  
+- Omitting parts of the student details from the command will leave them unedited
+- To clear a student's activities use `edit INDEX act/`
 
 </div>
 
@@ -238,6 +235,10 @@ Deletes the specified person from the application.
 |![delete command](images/user-guide/delete.png)|
 |:--:|
 |*Figure 8 - `delete` Command*|
+
+## Clearing the data: `clear`
+Clears all the data within the application
+- Format: `clear`
 
 ## Exit the application: `exit`
 Exits the program.
@@ -299,6 +300,7 @@ A: An error message colored in red will appear stating that you have typed an un
 | [Find student by activity](#find-student-by-activity-findactivity) | `findactivity ACTIVITY [MORE ACTIVITIES]`                                                                                 | `findactivity choir`                                                                                            |
 | [Edit student details](#edit-student-details-edit)                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cc/CLASS] [s/STATUS] [act/ACTIVITIES] [act/MORE ACTIVITIES]` | `edit 2 n/James Lee e/jameslee@example.com`                                                                     |
 | [Delete a student](#delete-a-student-delete)                       | `delete INDEX`                                                                                                            | `delete 3`                                                                                                      |
+| [Clear](Clear)                                                     | `clear`                                                                                                                   | `clear`                                                                                                         |
 | [Exit the application](#exit-the-application-exit)                 | `exit`                                                                                                                    | `exit`                                                                                                          |
 
 ----------------
