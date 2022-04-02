@@ -138,15 +138,27 @@ application process for each role is at a glance.
 
 [Back to Table of Contents](#toc)
 
-### Reminder Window
+### Reminder Pane
 
-![Reminder Window](images/ReminderWindow.png)
+![Reminder Pane](images/ReminderPane.png)
 
 |   Component   | Function                                                                                                             |
 |:-------------:|----------------------------------------------------------------------------------------------------------------------|
 | Reminder List | List of all reminders within the reminder window (defaults to 7 days) in ascending order                             |
 |   Date Card   | With the date denoted at the top, all the reminders within this date card have their date of reminder on the same day |
 | Reminder Card | Describes the Company name and Role name to be reminded of as well as its status and full reminder date and time     |
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: The Reminder Pane cannot be re-opened after it is closed, until the next restart of the application.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: All changes to Tinner's company list will not be reflected in the Reminder Pane as the application is still running, and will only be reflected after restarting the application.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -175,7 +187,7 @@ application process for each role is at a glance.
 The following points explain the format of a command.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/COMPANY`, `COMPANY` is a parameter* which can be used as `add n/Google`.
+  e.g. in `add n/COMPANY`, `COMPANY` is a parameter which can be used as `add n/Google`.
 
 * Items in square brackets are optional.<br>
   e.g `n/COMPANY [p/PHONE_NUMBER]` can be used as `n/Google P/65427981` or as `n/Google`.
@@ -193,6 +205,18 @@ The following points explain the format of a command.
 
 * Duplicate company names are not allowed.<br>
   e.g. if there exists a company named `meta`, adding another company with the name `meta` is not allowed.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Commands are recognised by their command word. As such, if the command word is incorrect, even if it differs slightly from the correct command word, Tinner's response box will indicate that you have entered an unknown command.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Note that the invalid command messages in the response box will not specify the missing parameters in the command.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -212,7 +236,13 @@ The following points explain the format of a command.
         * end with a domain label at least 2 characters long
         * have each domain label start and end with alphanumeric characters
         * have each domain label consist of alphanumeric characters, separated only by hyphens, if any
-* The `ADDRESS` should not be blank.
+* The `ADDRESS` should not be blank. 
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: In the `ADDRESS` field, if the character / is present, the previous character in the user input should be a space to observe the intended output. If the previous character matches any of these characters, (aenp), excluding the parentheses, the intended output will not be observed.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -220,7 +250,7 @@ The following points explain the format of a command.
 
 * The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
 * The `REMINDER_DATE` should be in format dd-MM-yyyy HH:mm.
-* The `STATUS` can only accept the following inputs:
+* The `STATUS` is case-sensitive and can only accept the following inputs:
     * applying
     * pending
     * interview and assessments
@@ -250,20 +280,13 @@ pertaining to the company and the role. Here's how you can input this data in th
 1. [Add the company](#c-add-c) to the company list.
    ![AddCompanyDemo](images/AddCompanyDemo.png)
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful adding of
-the company.
-
-</div>
-
 2. [Add the role](#c-add-c-r) under the added company.
    ![AddRoleDemo](images/AddRoleDemo.png)
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Note the successful command execution message in the system feedback box upon successful adding of
-the role.
+:information_source: Note the successful command execution message in the response box upon successful adding of
+the role. This applies for this use case and all other use cases listed.
 
 </div>
 
@@ -278,22 +301,8 @@ entries from the application:
 1. [Delete the role](#c-delete-c-r) from a given company.
    ![DeleteRoleDemo](images/DeleteRoleDemo.png)
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful deletion
-of the role.
-
-</div>
-
 2. [Delete the company](#c-delete-c) from the company list.
    ![DeleteCompanyDemo](images/DeleteCompanyDemo.png)
-
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful deletion
-of the company.
-
-</div>
 
 ## Use Case #3: Editing a company or a role <a id="usecase3"></a>
 
@@ -303,25 +312,11 @@ changes to the application:
 1. [Edit the company](#c-edit-c) from the company list.  
    ![EditCompanyDemo](images/EditCompanyDemo.png)
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful edit of
-the company.
-
-</div>
-
 Also, you can change the status of your internship application and set the reminder for the interview date by making
 this entry:
 
 2. [Edit the role](#c-edit-r) from a given company.  
    ![EditRoleDemo](images/EditRoleDemo.png)
-
-<div markdown="block" class="alert alert-info">   
-
-:information_source: Note the successful command execution message in the system feedback box upon successful edit of
-the role.
-
-</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -342,13 +337,6 @@ Thus, you can increase the reminder window by making this entry:
 1. [Set the reminder window](#c-setWindow-c) for the reminder list.  
    ![WindowrDemo](images/WindowDemo.png)
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful change of
-reminder window.
-
-</div>
-
 ## Use Case #5: Favouriting a company <a id="usecase5"></a>
 
 A scenario where multiple companies have sent you offers and you may want to store these companies in
@@ -357,13 +345,7 @@ you can favourite a company by making this entry:
 
 1. [Favourite a company](#c-favourite-c) from the company list.  
    ![FavouriteDemo](images/FavouriteDemo.png)
-
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful favourite
-of the company.
-
-</div>
+   
 
 <div markdown="block" class="alert alert-info">
 
@@ -382,13 +364,6 @@ You can choose to unfavourite by making this entry:
 
 2. [Unfavourite a company](#c-favourite-c) from the company list.  
    ![UnfavouriteDemo](images/UnfavouriteDemo.png)
-
-<div markdown="block" class="alert alert-info">
-
-:information_source: Note the successful command execution message in the system feedback box upon successful
-unfavourite of the company.
-
-</div>
 
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
 command.
@@ -419,6 +394,12 @@ company that may come in handy during the internship application process.
 * `addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 `
 * `addCompany n/Meta p/91234567 e/hr_meta@meta.com a/9 Straits View, Marina One, Singapore 018937`
 * Refer to [Demo Use Case #1](#usecase1) for an example use case.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: The `EMAIL` and `PHONE_NUMBER` are fields to store the contact details belonging to the Point of Contact (POC) after applying for a role at the company. This POC could be a representative from a job seeking agency.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -463,7 +444,11 @@ companies less clustered and thus more organised.
 
 * `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
 
+<div markdown="block" class="alert alert-danger">
+
 :warning: Deleting a company would also delete all roles and information belonging to it. Since there is no undo feature, please double check before using this command.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -486,8 +471,11 @@ star to let it stand out from the rest.
   company in Tinner.
 * Refer to [Demo Use Case #5](#usecase5) for an example use case.
 
+<div markdown="span" class="alert alert-primary">
+
 :bulb: Easily track and view your favourite companies by using the [`listFavourite`](#c-listfavourite) command
 
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -534,11 +522,23 @@ company.
 * `addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse data $/4800 `
 * `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
 
+<div markdown="span" class="alert alert-primary">
+
 :bulb: If there are too many companies and you do not know what is the company index, try [searching for keywords](#c-find-c-r) to that company and use the new index shown instead.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
 
 :information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
 
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
 :warning: When round brackets are used, they must be in pairs.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -548,13 +548,13 @@ Just got invited to an interview? Keep your internship role status and other det
 
 **Function:** Edits the specified role in the specified company within the displayed company list.
 
-**
-Format:** `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
+**Format:** `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]`
 
 * Edits the role at the specified `ROLE_INDEX` of the company at the specified `COMPANY_INDEX`. The indexes refers to
   the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` here can be left blank, allowing you to remove previously added information which may be erroneous.
 * More restrictions for command parameters can be found [here](#c-role-restrictions)
 
 **Examples:**
@@ -643,7 +643,11 @@ readily identify and track down items!
 
 * `find c/meta amazon r/engineer`
 
+<div markdown="block" class="alert alert-info">
+
 :information_source: Note that if you are trying to find 'book' within company names, Tinner would return records named Face Book but not Facebook.
+
+</div>
 
 [Back to Table of Contents](#toc)
 
@@ -682,6 +686,7 @@ keep better track of upcoming tasks.
 * The parameter `REMINDER_WINDOW` specifies the period (in days) in which you will receive reminders before a role's
   reminder date.
 * Sets the reminder window to the specified `REMINDER_WINDOW`.
+* The `REMINDER_WINDOW` is capped at 30 (in days) because Tinner aims to highlight only imminent deadlines.
 * All roles with reminder dates that are within the specified `REMINDER_WINDOW` days away from today will show up in the
   reminders window.
 
@@ -693,7 +698,11 @@ keep better track of upcoming tasks.
   role's reminder date.
 * Refer to [Demo Use Case #4](#usecase4) for an example use case.
 
-:information_source: Changes to the reminder window can be observed after restarting Tinner.
+<div markdown="block" class="alert alert-info">
+
+:information_source: Changes to the reminder window can only be observed after restarting Tinner. 
+
+</div>
 
 [Back to Table of Contents](#toc)
 
