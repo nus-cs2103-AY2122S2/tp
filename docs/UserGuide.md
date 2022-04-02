@@ -337,12 +337,13 @@ Examples:
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
-| Parameter           | Description                                                                                                                                                                                           |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CUSTOMER_INDEX`    | Name of the service. Service name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. It should also be unique such that no two services have the same name. |
-| `SERVICE_INDEX`     | Price of the service. Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.                                                                            |
-| `BOOKING_DATE_TIME` | Duration of the service in minutes. Duration should only contain numbers and have a value that is greater than 0.                                                                                     |
-| `FEEDBACK`          | The index of the service in the displayed list. It must be a valid positive index.                                                                                                                    |
+| Parameter           | Description                                                                                                                                                                                          |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`              | Name of customer or Service. Name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
+| `CUSTOMER_INDEX`    | Customer Index should only contain numbers and have a value that is greater than 0.                                                                                                                  |
+| `SERVICE_INDEX`     | Service Index should only contain numbers and have a value that is greater than 0.                                                                                                                   |
+| `BOOKING_DATE_TIME` | Booking Date Time must be in format dd-MM-yyyy HH:mm.                                                                                                                                                |
+| `FEEDBACK`          | Feedback should only contain alphanumeric characters, hyphens and spaces, and it should not be blank.                                                                                                                                                                                            |
 
 #### 4.3.2 Adding a booking: `addb`
 Adds a booking to the application.
@@ -354,6 +355,7 @@ Examples:
 * `addb c/2 sev/3 st/12-12-2022 10:30`
 
 Example Usage: `addb c/1 sev/1 st/10-10-2022 10:30`
+![Adding a booking example](images/user-guide/add-booking.png)
 
 #### 4.3.3 Listing all bookings : `listb`
 
@@ -381,6 +383,7 @@ Examples:
 * `editb 2 st/10-12-2022 10:30` Edits the booking time of the 1st booking to be `10-12-2022 10:30`.
 
 Example Usage: `editb 1 sev/3 f/Excellent Customer Service`
+![Editing a booking example](images/user-guide/edit-booking.png)
 
 #### 4.3.5 Finding booking' profile by keyword: `findb`
 
@@ -394,9 +397,12 @@ Format: `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `10-10-2022` will not match `10-10-202`
 
 Examples:
-* `finds c/1 sev/2` returns bookings where the customer at Index 1 has the service at Index 2.
-* `finds f/Bad` returns `Bad service` and `Service was bad`.
-* `finds st/10-10-2022` returns bookings that are on `10-10-2022`.
+* `findb n/alex` returns bookings where the customer name or service name match.
+* `findb f/Bad` returns `Bad service` and `Service was bad`.
+* `findb st/10-10-2022` returns bookings that are on `10-10-2022`.
+
+Example Usage: `findb n/alex`
+![Finding a booking example](images/user-guide/find-booking.png)
 
 #### 4.3.6 Deleting booking(s) : `deleteb`
 
@@ -492,12 +498,13 @@ Examples:
 * `plotMonthlyCustomers`
 
 ### 4.5 Schedule management
-
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
 * The indexes of bookings in schedule view is not meaning for deleting bookings. Using them will lead to unexpected behaviour.
 </div>
+
+
 
 #### 4.5.1 Schedule management command parameters
 The table below shows a list of command parameters that will be used for schedule management.
@@ -598,6 +605,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
 | Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             ||
 | Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
+
 
 ### 5.4 Statistics
 

@@ -33,7 +33,7 @@ public class AddBookingCommand extends Command {
             + "Parameters: "
             + PREFIX_CUSTOMERINDEX + "CUSTOMERINDEX (must be a positive integer) "
             + PREFIX_SERVICEINDEX + "SERVICEINDEX (must be a positive integer) "
-            + PREFIX_STARTTIME + "APPOINTMENTTIME \n"
+            + PREFIX_STARTTIME + "APPOINTMENTTIME (In format dd-MM-yyyy HH:mm) \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CUSTOMERINDEX + "1 "
             + PREFIX_SERVICEINDEX + "1 "
