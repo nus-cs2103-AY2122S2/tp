@@ -161,7 +161,7 @@ Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION
 * If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error and you will have to input the details for the keyword again.
 
 Examples of usage:
-* `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343 cs/Negative`
+* `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343z cs/Negative`
 * `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
