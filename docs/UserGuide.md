@@ -131,6 +131,7 @@ Then, simply fill up the fields as guided in the window. You can then press the 
 
 * Adding duplicate names is not allowed as most people will not have the exact same name.
 * Phone number must be at least 3 digits short, and at most 25 digits long.
+* Emails must be of the format `local-part@domain`. For example, a valid email you is `e@e.sg`, invalid email is `e@e.s`
 * When in `archives`, this functionality is disabled.
 </div>
 
