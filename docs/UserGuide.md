@@ -206,9 +206,9 @@ Edits an existing student's details in the list Index provided and the parts tha
 <div markdown="span" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
-- Filter the student list via __*find*__ commands to make finding the index easier  
-- Omitting parts of the student details from the command will leave them unedited
-- To clear a student's activities use `edit INDEX act/`
+> - Filter the student list via __*find*__ commands to make finding the index easier  
+> - Omitting parts of the student details from the command will leave them unedited
+> - To clear a student's activities use `edit INDEX act/`
 
 </div>
 
