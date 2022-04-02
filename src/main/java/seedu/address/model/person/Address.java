@@ -17,7 +17,8 @@ public class Address implements Comparable<Address> {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    public static int ADDRESS_MAX_LENGTH = 60;
+    public static final int ADDRESS_MAX_LENGTH = 60;
+
     public final String value;
 
 
