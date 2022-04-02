@@ -142,7 +142,7 @@ Format: import button
 * Tracey will then store all students from the Excel file into her!
 
 Sample Excel file:
-![Excel_Sample](images/Excel_Sample.png) *Figure 3: Screenshot of Excel file.*
+![Excel_Sample](images/Excelscreenshot.png) *Figure 3: Screenshot of Excel file.*
 
 How to identify import button:
 ![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
@@ -166,8 +166,8 @@ Examples of usage:
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
 |:--------------------:|:-----------------:|
-|     cs/Negative      | cs/Close-contact  | 
-|        f/SoC         |      f/SooC       | 
+|     cs/Negative      | cs/Close-contact  |
+|        f/SoC         |      f/SooC       |
 
 *Table 3: Incorrect usage of **pre-defined constants**. Refer to Table 4 for an exhaustive list of such constants.*
 
@@ -363,14 +363,14 @@ Resizes the result display window to 3 pre-set sizes.
 Format: `resize SIZE`
 * There are 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figures 11 for the comparison for the different result display window sizes. 
+* Refer to figures 11 for the comparison for the different result display window sizes.
 
 💡`Tips:`
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
 
 📓`Note:`
 * There is also a `Resize Window` button on the GUI which you can click to cycle between the 3 different resizing options.
-* 
+
 ![Comparison of 3 resize options](images/resize_options.png) *Figure 11: Comparison of the 3 different resizing options for the result display window.*
 
 ### Clearing all records

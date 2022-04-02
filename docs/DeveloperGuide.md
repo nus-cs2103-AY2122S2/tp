@@ -434,7 +434,7 @@ The exit mechanism implements the following sequence for the method call execute
 
 #### What is the exit feature
 
-The exit feature allows users to exit from Tracey after they finish with it. 
+The exit feature allows users to exit from Tracey after they finish with it.
 
 The `exit` command is as follows:
 
