@@ -185,7 +185,7 @@ Examples:
 - `status 2 s/favourite` tags the 2nd contact in ModuleMate Finder as favourite.
 - `status 2 s/` will untag the 2nd contact in ModuleMate Finder, leaving them with no `Status`
 
-Annotated image of what a `contact` with `Status`, `Module`, and `Comment`
+Annotated image of what a `contact` with `Status`, `Module`, and `Comment`  
 ![Example of a contact with Status and Comment](images/annotated_contact.png)
 
 ### Copy contacts in list : `copy`
@@ -472,9 +472,13 @@ If your changes to the data file makes its format invalid, ModuleMateFinder will
 
 ## FAQ
 
-Q: Are all modules offered by NUS available in ModuleMateFinder
+Q: Are all modules offered by NUS available in ModuleMateFinder?
 
-A: As long as the module offered can be found in NUSmod, it will be available on ModuleMateFinder as well.  
+A: As long as the module offered can be found in NUSMods, it will be available on ModuleMateFinder as well.  
+
+Q: What is the point of archiving?
+
+A: You may have seniors who have graduated, but you would like to seek advise from for certain modules. Archiving helps you to organise your contacts as well!
 
 --------------------------------------------------------------------------------------------------------------------
 
