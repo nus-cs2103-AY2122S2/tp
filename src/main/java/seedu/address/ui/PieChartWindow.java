@@ -93,11 +93,12 @@ public class PieChartWindow extends UiPart<Stage> {
         }
         HBox facChart = new HBox();
         CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis(0, SummariseCommand.getHighestPositiveByFaculty(), 1);
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setTitle("Covid Positive by Faculty");
         xAxis.setLabel("Faculty");
         yAxis.setLabel("Number of Students");
+        yAxis.setMinorTickVisible(false);
         barChart.setBarGap(50);
         barChart.setCategoryGap(150);
 
@@ -183,5 +184,4 @@ public class PieChartWindow extends UiPart<Stage> {
     public void hide() {
         getRoot().hide();
     }
-
 }
