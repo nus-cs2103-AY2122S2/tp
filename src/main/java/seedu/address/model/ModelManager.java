@@ -18,7 +18,6 @@ import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionWithNricPredicate;
@@ -235,7 +234,6 @@ public class ModelManager implements Model {
         updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
         updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
         updateFilteredConsultationList(new ConsultationWithPredicates(nric));
-        updateFilteredPatientList(new NricPredicate(nric));
     }
 
     //=========== Contact ================================================================================

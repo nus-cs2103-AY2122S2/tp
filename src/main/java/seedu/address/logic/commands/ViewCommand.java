@@ -44,7 +44,7 @@ public class ViewCommand extends Command {
             ViewedNric.setViewedNric(null);
             return new CommandResult(MESSAGE_SUCCESS);
         } else { // Nric specified, display summary of patient with given NRIC
-
+            ViewedNric.setViewedNric(nric);
             model.updateSummary(nric);
             return new CommandResult(String.format(Messages.MESSAGE_SUMMARY_SHOWN, nric),
                     SUMMARY_COMMAND_TYPE);
