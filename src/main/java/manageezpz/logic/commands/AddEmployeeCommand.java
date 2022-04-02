@@ -29,7 +29,9 @@ public class AddEmployeeCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New Employee added: %1$s";
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Employee %1$s already exists!\n";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Employee, phone number or "
+            + "Email already exists in manageEZPZ! "
+            + "Please Check again!\n";
 
     private final Person toAdd;
 
@@ -46,8 +48,7 @@ public class AddEmployeeCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON,
-                    toAdd.getName().toString()) + "\n" + MESSAGE_USAGE);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON + "\n" + MESSAGE_USAGE);
         }
 
         model.addPerson(toAdd);

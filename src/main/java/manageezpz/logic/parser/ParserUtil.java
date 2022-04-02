@@ -116,6 +116,7 @@ public class ParserUtil {
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
+        description = description.replaceAll("[\\p{C}]", ""); //this filters the "invisible" characters
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
