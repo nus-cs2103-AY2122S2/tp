@@ -165,7 +165,7 @@ Format: `comment INDEX c/COMMENT`
 
 Examples:
 * `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd contact.
-* `comment 3` will delete the comment for the 3rd contact.
+* `comment 3 c/` will delete the comment for the 3rd contact.
 
 _**See below for an example image**_
 
