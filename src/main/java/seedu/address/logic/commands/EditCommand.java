@@ -142,6 +142,11 @@ public class EditCommand extends RedoableCommand {
         }
 
         if (isArchiveBook()) {
+            // Disable name editing since we can assume that an archived person would not have wrong details, except
+            // for details that can change over time (e.g. address, phone number, email)
+            if (!personToEdit.getName().equals(editedPerson.getName())) {
+                throw new CommandException("A person's name in archives should not change");
+            }
             model.setArchivedPerson(personToEdit, editedPerson);
         } else {
             model.setPerson(personToEdit, editedPerson);

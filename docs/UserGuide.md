@@ -125,6 +125,10 @@ Additionally, if you were to simply use `add`, it would open up a new window to 
 ![add window](images/addWindow.png)  
 Then, simply fill up the fields as guided in the window. You can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
+When in `archives`, this functionality is disabled.
+</div>
+
 ### Adding Module(s) to a Contact : `addmodule`
 
 Adds module(s) to an existing contact
@@ -285,6 +289,10 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 * `edit 5 n/Bob a/Kent Ridge Drive` Edits the name and address of the 5th contact to be `Bob` and `Kent Ridge Drive` 
   respectively.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Important:**
+When in the `archives`, you will not be able to edit a person's name. In general, a person who is archived is assumed have correct details except for details that may change over time (e.g. phone number, email, address)
+</div>
 
 ### Locating a contact: `find`
 
