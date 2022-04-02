@@ -118,35 +118,44 @@ Adds a module/group/student/professor/event/meeting to the UniBook depending on 
 
 Format: `add o/OPTION...`  
 OPTION values:  
-1. module  
+1. **module**  
 Format: `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​`  
-This adds a Module with name: Discrete Mathematics and code: CS1231S to the UniBook. User can also add key events of the module.  
+This adds a Module to the UniBook. User can also add key events of the module.  
 The event types are as follows:  
 `1` - Exam  
 `2` - Quiz  
 `3` - Assignment Release  
 `4` - Assignment Due  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.
+The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+Example: `add o/module n/Discrete Mathematics m/CS1231S ke/1 dt/2022-05-04 13:00`  
+Adds a module "Discrete Mathematics" with module code CS1231S to the UniBook. The module will have a key event of type "Exam" on the datetime specified.
 
 
-2. group  
+2. **group**  
 Format: `add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​`
 This adds a Group to the Module specified.  
-The `dt/DATETIME` represents meeting times of the group, it takes in the format `yyyy-MM-dd HH:mm`.
+The `dt/DATETIME` represents meeting times of the group, it takes in the format `yyyy-MM-dd HH:mm`.  
+Example: `add o/group n/W16-1 m/CS2103 dt/2022-05-01 13:00 dt/2022-05-04 13:00`  
+Adds a group named "W16-1" to module "CS2103". This group will have the specified meeting times.
 
 
-3. student  
-Format: `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [[m/MODULECODE] [g/GROUPNAME]]…​`  
+
+3. **student**  
+Format: `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]…​]…​`  
 This adds a Student to the UniBook, it also adds the student into the student list of the corresponding Module objects.  
-Note that in order to add a student to a group of the specified module, the format of `m/MODULECODE g/GROUPNAME` must be followed. This will allow the program to know which group of which module the user wishes to add the student to.  
+Note that in order to add a student to a group of the specified module, the format of `m/MODULECODE [g/GROUPNAME]…​` must be strictly followed. This will allow the program to know which group of which module the user wishes to add the student to.  
+Example: `add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS1231S g/Project Work m/CS2103`  
+Adds a student named Johnston to the UniBook. The student will be added to the group "Project Work" in Module "CS1231S".
 
 
-4. professor  
+4. **professor**  
 Format: `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  
-This adds a Professor to the UniBook, it also adds the professor into the professor list of the corresponding Module objects.
+This adds a Professor to the UniBook, it also adds the professor into the professor list of the corresponding Module objects.  
+Example: `add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com of/COM2 01-15 t/smart m/CS1231S m/CS2100`  
+Adds a professor named Aaron Tan to the UniBook.
 
 
-5. event  
+5. **event**  
 Format: `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  
 This adds a key event of the respective type and datetime to the module specified.  
 The event types are as follows:  
@@ -154,39 +163,23 @@ The event types are as follows:
 `2` - Quiz  
 `3` - Assignment Release  
 `4` - Assignment Due  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.
+The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+Example: `add o/event m/CS2103 ke/1 dt/2022-05-04 13:00`  
+Adds an event of the specified type and datetime to module "CS2103".
 
 
-7. meeting  
+6. **meeting**  
 Format: `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  
 This adds meetings of the specified datetime to the specified group belonging to the specified module. Multiple `dt/DATETIME` can be entered to add multiple meetings.  
 The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+Example: `add o/meeting m/CS2103 g/W16-1 dt/2022-04-24 13:00 dt/2022-04-30 15:00 dt/2022-05-04 11:00`  
+Add meetings of the specified datetimes to module "CS2103".
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student/professor can have any number of tags and modules (including 0)
 </div>
 
-Examples:  
-`add o/module n/Discrete Mathematics m/CS1231S ke/1 dt/2022-05-04 13:00`  
-Adds a module "Discrete Mathematics" with module code CS1231S to the UniBook.  
-The module will have a key event of type "Exam" on the datetime specified.   
-
-`add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS1231S g/Project Work m/CS2103`  
-Adds a student named Johnston to the UniBook.  
-The student will be added to the group "Project Work" in Module "CS1231S".  
-
-`add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com a/COM2 01-15 t/smart m/CS1231S m/CS2100`  
-Adds a professor named Aaron Tan to the UniBook.  
-
-`add o/group n/W16-1 m/CS2103 dt/2022-05-01 13:00 dt/2022-05-04 13:00`  
-Adds a group named "W16-1" to module "CS2103". This group will have the specified meeting times.
-
-`add o/event m/CS2103 ke/1 dt/2022-05-04 13:00`  
-Adds an event of the specified type and datetime to module "CS2103".  
-
-`add o/meeting m/CS2103 g/W16-1 dt/2022-04-24 13:00 dt/2022-04-30 15:00 dt/2022-05-04 11:00`  
-Add meetings of the specified datetimes to module "CS2103".
 
 ### Listing entries: `list`
 
