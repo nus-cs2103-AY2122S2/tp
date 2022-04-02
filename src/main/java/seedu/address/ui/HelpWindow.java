@@ -82,7 +82,7 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n9. FILTER student based on covid status, block or faculty"
             + NEWLINE_AND_INDENTATION
-            + "Format: filter covid-positive\n"
+            + "Format: filter f/FACULTY cs/COVID_STATUS b/BLOCK"
             + NEWLINE_AND_INDENTATION
             + "Example 1: cs/positive"
             + NEWLINE_AND_INDENTATION
