@@ -219,6 +219,12 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 ### Displaying statistics `stats`
 
 Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+
+**[Future Version]** <br/>
+Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+
 #### By Command: `stats`
 
 # FAQ

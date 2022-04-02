@@ -80,6 +80,11 @@ The `stats` opens a new `StatisticsWindow` that displays a pie chart with the in
 
 This allows the user to be visualize his/her client's data to make better business decisions.
 
+**[Future version]** </br>
+Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+
 # Documentation, logging, testing, configuration, dev-ops
 
 This is how we do our [documentation](https://se-education.org/addressbook-level3/Documentation.html).
