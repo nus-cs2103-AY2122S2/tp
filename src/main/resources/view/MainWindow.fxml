@@ -46,6 +46,9 @@
                 </MenuBar>
                 <HBox VBox.vgrow="ALWAYS">
                     <children>
+                        <!-- @@author flairekq-reused -->
+                        <!-- Reused from https://github.com/AY2122S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml -->
+                        <!-- with minor modifications for side bar -->
                         <VBox id="sideBar" minWidth="150" HBox.hgrow="NEVER">
                             <children>
                                 <StackPane id="logoContainer" VBox.vgrow="NEVER">

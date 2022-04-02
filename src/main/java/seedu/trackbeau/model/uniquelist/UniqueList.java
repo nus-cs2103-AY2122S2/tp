@@ -5,7 +5,6 @@ import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,14 +74,6 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
     public Integer indexOf(T item) {
         requireNonNull(item);
         return internalList.indexOf(item);
-    }
-
-    /**
-     * Removes the items that satisfy the {@code condition}.
-     *
-     */
-    public void removeByCondition(Predicate<T> condition) {
-        internalList.removeIf(condition);
     }
 
 
