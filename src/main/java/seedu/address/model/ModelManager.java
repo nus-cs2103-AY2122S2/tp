@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ListType;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.OrderingUtil;
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Entry;
@@ -243,6 +245,24 @@ public class ModelManager implements Model {
     public void showEventList(Predicate<? super Event> predicate) {
         updateFilteredLists(PREDICATE_SHOW_NONE, PREDICATE_SHOW_NONE, predicate);
         currentlyDisplayedListType = ListType.EVENT;
+    }
+
+    @Override
+    public void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate) {
+        addressBook.sortPersons(OrderingUtil.orderedComparator(ordering, COMPARATOR_PERSON_BY_NAME));
+        showPersonList(predicate);
+    }
+
+    @Override
+    public void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate) {
+        addressBook.sortCompanies(OrderingUtil.orderedComparator(ordering, COMPARATOR_COMPANY_BY_NAME));
+        showCompanyList(predicate);
+    }
+
+    @Override
+    public void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate) {
+        addressBook.sortEvents(OrderingUtil.orderedComparator(ordering, COMPARATOR_EVENT_BY_DATE));
+        showEventList(predicate);
     }
 
     @Override
