@@ -197,7 +197,11 @@ public enum CommandType {
         case CONTACT:
             return new FindContactCommandParser().parse(arguments);
         case MEDICAL:
-            return new FindMedicalCommandParser().parse(arguments);
+            if (ViewedNric.getViewedNric() != null) {
+                throw new ParseException("There is only one medical information for this patient");
+            } else {
+                return new FindMedicalCommandParser().parse(arguments);
+            }
         case CONSULTATION:
             return new FindConsultationCommandParser().parse(arguments);
         case PRESCRIPTION:

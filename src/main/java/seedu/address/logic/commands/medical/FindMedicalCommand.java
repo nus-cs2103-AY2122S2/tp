@@ -35,15 +35,10 @@ public class FindMedicalCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (ViewedNric.getViewedNric() == null) {
-            model.updateFilteredMedicalList(predicate);
-            return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_NO_NRIC,
-                    model.getFilteredMedicalList().size()), COMMAND_TYPE);
-        } else {
-            model.updateFilteredMedicalList(predicate);
-            return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_OVERVIEW,
-                    model.getFilteredMedicalList().size(), ViewedNric.getViewedNric().toString()), COMMAND_TYPE);
-        }
+        model.updateFilteredMedicalList(predicate);
+        return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_NO_NRIC,
+                model.getFilteredMedicalList().size()), COMMAND_TYPE);
+
     }
 
     @Override
