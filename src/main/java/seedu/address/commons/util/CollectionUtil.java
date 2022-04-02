@@ -37,19 +37,4 @@ public class CollectionUtil {
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
     }
-
-    /**
-     * Builds a string representation of an ObservableList.
-     */
-    public static <T> String observableListToIndexedList(ObservableList<T> items) {
-        if (items.size() == 0) {
-            return EMPTY_PLACEHOLDER;
-        }
-
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < items.size(); i++) {
-            result.append(String.format("%d. %s\n", i + 1, items.get(i)));
-        }
-        return result.toString();
-    }
 }
