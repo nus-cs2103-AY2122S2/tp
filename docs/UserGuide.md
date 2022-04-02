@@ -85,10 +85,10 @@ Either a property or preference must be provided when adding a new user.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 - `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 i/living.png:living room`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 
-    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
+    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addJohnDoeResult.png)
 
 ### Listing all clients : `list`
 
