@@ -17,7 +17,6 @@ import seedu.address.commons.core.BookNames;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.List;
 

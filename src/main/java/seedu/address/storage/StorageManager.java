@@ -17,20 +17,13 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private final AddressBookStorage addressBookStorage;
     private AddressBookStorage archivedAddressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
-     */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
-        this.userPrefsStorage = userPrefsStorage;
-    }
-
-    /**
-     * Constructor that intializes an additional archived addressbook
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage},
+     * {@code archivedAddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, AddressBookStorage archivedAddressBookStorage,
                           UserPrefsStorage userPrefsStorage) {

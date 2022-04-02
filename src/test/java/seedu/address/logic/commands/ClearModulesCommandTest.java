@@ -59,6 +59,8 @@ class ClearModulesCommandTest {
         Person personToClear = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(ClearModulesCommand.MESSAGE_SUCCESS, personToClear.getName());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
         Person editedPerson = new PersonBuilder(personToClear).withModules().build();
         expectedModel.setPerson(personToClear, editedPerson);
 

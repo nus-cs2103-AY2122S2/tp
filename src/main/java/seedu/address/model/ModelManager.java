@@ -164,8 +164,8 @@ public class ModelManager implements Model {
     };
 
     @Override
-    public void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook
-            , ReadOnlyAddressBook archiveBook) {
+    public void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook,
+                                      ReadOnlyAddressBook archiveBook) {
         this.isSwapped = isSwapped;
         setAddressBook(addressBook);
         setArchiveBook(archiveBook);
