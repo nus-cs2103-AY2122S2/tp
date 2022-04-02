@@ -32,6 +32,7 @@ public class CommentCommand extends RedoableCommand {
             + PREFIX_COMMENT + "Good at teamwork and programming";
     public static final String MESSAGE_ADD_SUCCESS = "Added comment to %s: %s";
     public static final String MESSAGE_REMOVE_SUCCESS = "Removed comment from %s";
+    public static final String MESSAGE_COMMENT_TOO_LONG = "Comment must be within 60 characters!";
 
     private final Index index;
     private final Comment comment;
@@ -85,6 +86,10 @@ public class CommentCommand extends RedoableCommand {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (comment.getLength() > Comment.MAX_LENGTH) {
+            throw new CommandException(MESSAGE_COMMENT_TOO_LONG);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
