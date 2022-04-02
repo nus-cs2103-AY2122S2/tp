@@ -150,7 +150,7 @@ Examples:
 * `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
 * `addmodule 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd contact
 
-_**See below for an example image**_
+[_**See below for an example image**_](#example-of-a-contact-with-status-and-comment)
 
 ### Adding a comment for a contact : `comment`
 
@@ -168,7 +168,7 @@ Examples:
 * `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd contact.
 * `comment 3 c/` will delete the comment for the 3rd contact.
 
-_**See below for an example image**_
+[_**See below for an example image**_](#example-of-a-contact-with-status-and-comment)
 
 ### Adding a status for a contact : `status`
 
