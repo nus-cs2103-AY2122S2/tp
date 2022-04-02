@@ -20,11 +20,7 @@ public class ClearCommand extends RedoableCommand {
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
 
         requireNonNull(model);
-        if (isArchiveBook()) {
-            model.setArchiveBook(new AddressBook());
-        } else {
-            model.setAddressBook(new AddressBook());
-        }
+        model.setAddressBook(new AddressBook());
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

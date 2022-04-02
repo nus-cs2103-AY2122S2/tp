@@ -93,11 +93,7 @@ public class CommentCommand extends RedoableCommand {
                 personToEdit.getAddress(), personToEdit.getStatus(),
                 personToEdit.getModules(), comment);
 
-        if (isArchiveBook()) {
-            model.setArchivedPerson(personToEdit, editedPerson);
-        } else {
-            model.setPerson(personToEdit, editedPerson);
-        }
+        model.setPerson(personToEdit, editedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));

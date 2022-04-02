@@ -53,13 +53,8 @@ public class SortCommand extends RedoableCommand {
 
     @Override
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
-
         requireNonNull(model);
-        if (isArchiveBook()) {
-            model.sortArchivedPerson(personComparator);
-        } else {
-            model.sortPerson(personComparator);
-        }
+        model.sortPerson(personComparator);
         return new CommandResult(String.format(MESSAGE_SUCCESS, successField));
     }
 

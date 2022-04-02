@@ -34,8 +34,6 @@ public class LogicManager implements Logic {
     private Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private AddressBook addressBook;
-    private AddressBook archiveBook;
     private final StackUndoRedo undoRedoStack;
 
     /**
@@ -48,9 +46,6 @@ public class LogicManager implements Logic {
         this.undoRedoStack = new StackUndoRedo();
 
         addressBookParser = new AddressBookParser();
-
-        this.addressBook = new AddressBook(model.getAddressBook());
-        this.archiveBook = new AddressBook(model.getArchiveBook());
     }
 
     @Override
@@ -100,26 +95,22 @@ public class LogicManager implements Logic {
 
     @Override
     public void switchAddressBook() {
-        if (StatusBarFooter.isArchiveBook()) {
-            model.setAddressBook(addressBook);
-        } else {
-            model.setAddressBook(archiveBook);
-        }
+        model.switchAddressBook();
     }
 
     /**
      * Saves AddressBook and ArchiveBook
      */
     private void saveBooks() throws CommandException {
+        assert((StatusBarFooter.isArchiveBook() && model.isSwapped())
+        || (!StatusBarFooter.isArchiveBook() && !model.isSwapped()));
         try {
             if (StatusBarFooter.isArchiveBook()) {
-                storage.saveArchivedAddressBook(model.getArchiveBook());
-                archiveBook = new AddressBook(model.getArchiveBook());
-                model.setAddressBook(archiveBook);
+                storage.saveAddressBook(model.getArchiveBook());
+                storage.saveArchivedAddressBook(model.getAddressBook());
             } else {
                 storage.saveAddressBook(model.getAddressBook());
-                addressBook = new AddressBook(model.getAddressBook());
-                model.setAddressBook(addressBook);
+                storage.saveArchivedAddressBook(model.getArchiveBook());
             }
         } catch (DataConversionException | IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
@@ -139,32 +130,13 @@ public class LogicManager implements Logic {
 
         try {
             // Not in archive, so that means we are archiving someone
-            if (!StatusBarFooter.isArchiveBook()) {
-                // Delete then save addressBook
-                model.deletePerson(target);
-                storage.saveAddressBook(model.getAddressBook());
-
-                // Add then save archiveBook
-                model.addArchivedPerson(target);
-                storage.saveArchivedAddressBook(model.getArchiveBook());
-
-                archiveBook = new AddressBook(model.getArchiveBook());
-            } else {
-                // Delete then save archiveBook
-                model.deleteArchivedPerson(target);
-                storage.saveArchivedAddressBook(model.getArchiveBook());
-
-                // Add then save addressBook
-                addressBook.addPerson(target);
-                storage.saveAddressBook(addressBook);
-                model.setAddressBook(model.getArchiveBook());
-            }
+            model.deletePerson(target);
+            model.addArchivedPerson(target);
+            saveBooks();
         } catch (DuplicatePersonException e) {
             saveBooks();
             throw new CommandException(String.format(
                     ArchiveCommand.MESSAGE_DUPLICATE_PERSON_ARCHIVE + "\nDeleting the contact instead"));
-        } catch (DataConversionException | IOException e) {
-            System.out.println("Exception caught: " + e);
         }
     }
 }

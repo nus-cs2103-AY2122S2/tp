@@ -94,13 +94,11 @@ public interface Model {
 
     boolean hasArchivedPerson(Person person);
 
-    void deleteArchivedPerson(Person target);
-
     void addArchivedPerson(Person person);
 
-    void setArchivedPerson(Person target, Person editedPerson);
+    void switchAddressBook();
 
-    void sortArchivedPerson(PersonComparator comparator);
+    boolean isSwapped();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

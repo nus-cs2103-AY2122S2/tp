@@ -42,11 +42,8 @@ public class DeleteCommand extends RedoableCommand {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        if (isArchiveBook()) {
-            model.deleteArchivedPerson(personToDelete);
-        } else {
-            model.deletePerson(personToDelete);
-        }
+        model.deletePerson(personToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
