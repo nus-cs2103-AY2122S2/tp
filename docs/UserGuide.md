@@ -54,7 +54,7 @@ This subsection introduces you to the symbols, syntax and technical terms that a
 Getting yourself familiar with this subsection is useful in helping you to better understand this guide.
 
 <!-- @@author flairekq-reused -->
-<!-- Reused from https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html#1-introduction -->
+<!-- Reused from https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html -->
 <!-- with minor modification -->
 #### 3.2.1 Symbols and syntax
 The table below explains the symbols and syntax used throughout the user guide.
@@ -69,7 +69,7 @@ The table below explains the symbols and syntax used throughout the user guide.
 The image below shows the annotated GUI components of TrackBeau.
 ![Annotated GUI](images/user-guide/annotated-gui-v3.png)
 
-<!-- Section below adapted from https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html#1-introduction -->
+<!-- Section below adapted from https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html -->
 #### 3.2.3 Navigating in TrackBeau
 TrackBeau consists of tabs that are toggleable in the tab bar on the left side of the GUI.
 By selecting a tab, it toggles the display panel to showcase the contents related to the tab e.g., by clicking on
@@ -87,7 +87,7 @@ The display panel will then automatically refresh to display the contents of the
 The table below explains the important technical terms to help you understand how to use the commands in TrackBeau.
 
 <!-- @@author flairekq-reused -->
-<!-- Reused from https://ay2021s1-cs2103t-w13-3.github.io/tp/UserGuide.html#1-introduction -->
+<!-- Reused from https://ay2021s1-cs2103t-w13-3.github.io/tp/UserGuide.html -->
 <!-- with minor modifications for the table below -->
 
 | Technical Term | Meaning                                                                                                           | 
