@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tinner.testutil.Assert.assertThrows;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 public class ReminderDateTest {
@@ -24,9 +21,6 @@ public class ReminderDateTest {
 
     @Test
     public void isValidReminderDate() {
-        final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        final LocalDate TODAY = LocalDate.now();
-
         // null reminder date
         assertThrows(NullPointerException.class, () -> ReminderDate.isValidReminderDate(null));
 
