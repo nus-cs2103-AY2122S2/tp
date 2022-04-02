@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Module {
 
     public static final String MESSAGE_CONSTRAINTS = "Modules names should have 2-3 letters prefix "
-            + "followed by 4 digits and an optional letter\n";
+            + "followed by 4 digits and an optional letter\n"
+            + "Example module: CS3230";
 
     public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}\\d{4}[a-zA-Z]?";
 

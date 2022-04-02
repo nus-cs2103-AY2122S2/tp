@@ -15,7 +15,8 @@ public class FilterCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_CONSTRAINTS = "Modules names should have 2-3 letters prefix "
-            + "followed by 4 digits and an optional letter\n";
+            + "followed by 4 digits and an optional letter\n"
+            + "Example format: filter CS1231S";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose modules contain any of "
             + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD \n"
