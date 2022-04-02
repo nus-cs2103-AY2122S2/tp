@@ -193,9 +193,9 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 </div>
 
-<img src="images/AddImage.png">
-
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
+
+<img src="images/AddImage.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -214,9 +214,9 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 </div>
 
-<img src="images/DeleteImage.png">
-
 **Example & Output:** `delete 2`
+
+<img src="images/DeleteImage.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
