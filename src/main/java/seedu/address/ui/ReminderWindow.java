@@ -29,5 +29,6 @@ public class ReminderWindow extends SingleColumnPersonListWindow {
         }
         personListPanel = new PersonListPanel(logic.getReminderPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        setTitle("Reminders");
     }
 }
