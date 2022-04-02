@@ -25,7 +25,7 @@ public class RedoCommand extends Command {
 
         RedoableCommand command = undoRedoStack.popRedo();
         if (command instanceof SwitchCommand) {
-            return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true, "");
+            return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true);
         }
         command.redo(model);
         return new CommandResult(MESSAGE_SUCCESS);

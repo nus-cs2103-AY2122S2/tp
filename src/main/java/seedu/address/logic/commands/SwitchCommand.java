@@ -25,6 +25,6 @@ public class SwitchCommand extends RedoableCommand {
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true, "");
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true);
     }
 }

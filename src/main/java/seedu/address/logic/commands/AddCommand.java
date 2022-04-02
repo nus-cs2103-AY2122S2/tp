@@ -69,7 +69,7 @@ public class AddCommand extends RedoableCommand {
         requireNonNull(model);
 
         if (toAdd == null) {
-            return new CommandResult(SHOWING_ADD_WINDOW, false, true, false, false, false, false, "");
+            return new CommandResult(SHOWING_ADD_WINDOW, false, true, false, false, false, false);
         }
 
         if (model.hasPerson(toAdd)) {
