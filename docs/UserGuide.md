@@ -186,14 +186,14 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Format:** `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​`
 
-<img src="images/AddImage.png">
-
 <div markdown="block" class="alert alert-danger">
 **:exclamation: Caution:**<br>
 * All **show names must be unique**.<br>
   e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
 
 </div>
+
+<img src="images/AddImage.png">
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
 
@@ -207,14 +207,14 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Format:** `delete INDEX`
 
-<img src="images/DeleteImage.png">
-
 <div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
 * Once a show is deleted, you cannot retrieve it back!
 * The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
   e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5. 
 
 </div>
+
+<img src="images/DeleteImage.png">
 
 **Example & Output:** `delete 2`
 
