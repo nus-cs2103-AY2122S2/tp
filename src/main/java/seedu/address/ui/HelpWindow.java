@@ -33,7 +33,7 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n2. ADD a student with relevant details into Tracey."
             + NEWLINE_AND_INDENTATION
-            + "List of tags: n/Name f/Faculty p/Phone Number a/Address e/Email mc/Matriculation Number CS/Covid Status"
+            + "List of tags: n/Name b/BLock f/Faculty p/Phone Number a/Address e/Email mc/Matriculation Number CS/Covid Status"
             + NEWLINE_AND_INDENTATION
             + "Format: add n/NAME p/PHONENUMBER e/EMAIL ..."
             + NEWLINE_AND_INDENTATION
@@ -66,8 +66,8 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: clear\n"
 
-            + "\n6. SUMMARISE the record inside Tracey that an overview of the data,"
-            + " such as number of students who are covid-positive"
+            + "\n6. SUMMARISE the record inside Tracey that to provide an overview of the data,"
+            + " such as the number of students who are Covid Positive"
             + NEWLINE_AND_INDENTATION
             + "Format:summarise\n"
 
@@ -79,9 +79,13 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: help\n"
 
-            + "\n9. FILTER student based on health statuses"
+            + "\n9. FILTER student based on covid status, block or faculty"
             + NEWLINE_AND_INDENTATION
             + "Format: filter covid-positive\n"
+            + NEWLINE_AND_INDENTATION
+            + "Example 1: cs/positive"
+            + NEWLINE_AND_INDENTATION
+            + "Example 2: b/c"
 
             + "\n10. IMPORT excel files"
             + NEWLINE_AND_INDENTATION
