@@ -335,7 +335,8 @@ At least one optional field must be edited in order for person to be successfull
 Format: `edit INDEX o/person [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [t/TAG]`
 * Edits the `name`, `phone` and/or `email` fields of a person at `INDEX`.
 * The `office` field can only be edited if the person is a professor.
-* Editing a tag overrides all previous tags and user only able to edit 1 tag at a time.   
+* Editing a tag overrides all previous tags and user only able to edit tags 1 word at a time. 
+  * E.g. `edit 1 o/person t/helpful t/friend` edits the tag of the first person on the list to helpful and friend.
 * Example: `edit 1 o/person n/Alexa` changes the name of the first person on the list to Alexa.
 
 Format: `edit INDEX o/person [m/MODULE] [g/GROUPNAME]`
