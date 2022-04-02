@@ -157,14 +157,6 @@ public class OnboardingStoryManager {
                 0.2, 0.5, SHOW_COMMAND_BOX,
                 RESULT_DISPLAY_TOP,
                 COMMAND_BOX, 1, "deleteperson 1", null, null, false));
-
-        story.addStory(new OnboardingStep("Great, the record is gone!",
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST,
-                OnboardingStory.PositionOption.PERSON_LIST_MIDDLE, OnboardingStory.HighlightOption.PERSON_LIST,
-                0, null, (model, commandBox) -> {
-            Person lastPerson = OnboardingUtil.getLatestPerson(model);
-            model.deletePerson(lastPerson);
-            return null; }, null, false));
     }
 
     /**
@@ -189,7 +181,10 @@ public class OnboardingStoryManager {
         story.addStory(new OnboardingStep("Now lets try to list all persons." + CLICK_CONTINUE,
                 0.2, 0.5, ALL, CENTER,
                 CLEAR_ALL,
-                0, null, null, null, false));
+                0, null, (model, commandBox) -> {
+            Person lastPerson = OnboardingUtil.getLatestPerson(model);
+            model.deletePerson(lastPerson);
+            return null; }, null, false));
 
         story.addStory(new OnboardingStep("Type 'listpersons' and hit enter",
                 0.2, 0.5, SHOW_COMMAND_BOX,
