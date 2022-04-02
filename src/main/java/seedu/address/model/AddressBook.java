@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -208,38 +209,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.remove(key);
     }
 
-    // /**
-    //  * Returns sorted list of all {@code Person}s in the address book.
-    //  */
-    // public ObservableList<Person> getSortedPersons(boolean ascending) {
-    //     if (ascending) {
-    //         return persons.asSortedList(COMPARATOR_PERSON_BY_NAME);
-    //     } else {
-    //         return persons.asReversedSortedList(COMPARATOR_PERSON_BY_NAME);
-    //     }
-    // }
+    /**
+     * Sort list of {@code Company}s in the address book.
+     */
+    public void sortCompanies(Comparator<? super Company> comparator) {
+        companies.sort(comparator);
+    }
 
-    // /**
-    //  * Returns sorted list of all {@code Company}s in the address book.
-    //  */
-    // public ObservableList<Company> getSortedCompanies(boolean ascending) {
-    //     if (ascending) {
-    //         return companies.asSortedList(COMPARATOR_COMPANY_BY_NAME);
-    //     } else {
-    //         return companies.asReversedSortedList(COMPARATOR_COMPANY_BY_NAME);
-    //     }
-    // }
+    /**
+     * Sort list of {@code Person}s in the address book.
+     */
+    public void sortPersons(Comparator<? super Person> comparator) {
+        persons.sort(comparator);
+    }
 
-    // /**
-    //  * Returns sorted list of all {@code Event}s in the address book.
-    //  */
-    // public ObservableList<Event> getSortedEvents(boolean ascending) {
-    //     if (ascending) {
-    //         return events.asSortedList(COMPARATOR_EVENT_BY_DATE);
-    //     } else {
-    //         return events.asReversedSortedList(COMPARATOR_EVENT_BY_DATE);
-    //     }
-    // }
+    /**
+     * Sort list of {@code Event}s in the address book.
+     */
+    public void sortEvents(Comparator<? super Event> comparator) {
+        events.sort(comparator);
+    }
+
     /**
      * Sets archived state of {@code key} in the event list.
      * {@code key} must exist in the event list.

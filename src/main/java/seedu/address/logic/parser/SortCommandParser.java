@@ -33,7 +33,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_TYPE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_TYPE, PREFIX_ORDERING);
         String searchTypeString = argMultimap.getValue(PREFIX_SEARCH_TYPE).orElse("unarchived");
         String orderingString = argMultimap.getValue(PREFIX_ORDERING).orElse("ascending");
 

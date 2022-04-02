@@ -37,6 +37,6 @@ public class SortEventCommand extends SortCommand {
         //Show all the events and empty out all the temporary list for events and companies
         model.sortEventListByDate(getOrdering(), getPredicate());
         return new CommandResult(String.format(MESSAGE_SUCCESS, getSuccessMessage()),
-                false, false, false, true, false);
+                false, false, false, false, true);
     }
 }

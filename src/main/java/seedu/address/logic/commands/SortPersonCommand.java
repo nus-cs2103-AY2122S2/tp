@@ -37,6 +37,6 @@ public class SortPersonCommand extends SortCommand {
         //Show all the persons and empty out all the temporary list for events and companies
         model.sortPersonListByName(getOrdering(), getPredicate());
         return new CommandResult(String.format(MESSAGE_SUCCESS, getSuccessMessage()),
-                false, false, false, true, false);
+                false, false, true, false, false);
     }
 }

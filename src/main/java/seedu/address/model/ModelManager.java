@@ -249,19 +249,19 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate) {
-        filteredPersons.sort(OrderingUtil.orderedComparator(ordering, COMPARATOR_PERSON_BY_NAME));
+        addressBook.sortPersons(OrderingUtil.orderedComparator(ordering, COMPARATOR_PERSON_BY_NAME));
         showPersonList(predicate);
     }
 
     @Override
     public void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate) {
-        filteredCompanies.sort(OrderingUtil.orderedComparator(ordering, COMPARATOR_COMPANY_BY_NAME));
+        addressBook.sortCompanies(OrderingUtil.orderedComparator(ordering, COMPARATOR_COMPANY_BY_NAME));
         showCompanyList(predicate);
     }
 
     @Override
     public void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate) {
-        filteredEvents.sort(OrderingUtil.orderedComparator(ordering, COMPARATOR_EVENT_BY_DATE));
+        addressBook.sortEvents(OrderingUtil.orderedComparator(ordering, COMPARATOR_EVENT_BY_DATE));
         showEventList(predicate);
     }
 

@@ -97,6 +97,7 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
 
         return null;
     }
+    
 
     /**
      * Archives the equivalent entry from the list.
@@ -152,6 +153,14 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
 
     public ObservableList<T> asReversedSortedList(Comparator<T> comparator) {
         return FXCollections.observableArrayList(internalList.sorted(comparator.reversed()));
+    }
+
+    /**
+     * Sorts the list using the given {@code Comparator comparator}.
+     * @param comparator the comparator to use for sorting
+     */
+    public void sort(Comparator<? super T> comparator) {
+        internalList.sort(comparator);
     }
 
     @Override
