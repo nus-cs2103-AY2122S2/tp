@@ -92,7 +92,7 @@ Additional formatting guidelines:
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
-2. Download the latest **Tracey.jar** from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data. <br>
