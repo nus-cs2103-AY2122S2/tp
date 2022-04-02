@@ -86,12 +86,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code patient} exists in the MedBook.
      */
     public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
         return patients.contains(patient);
     }
+
+    /**
+     * Returns true if a person with the same nric as {@code nric} exists in the MedBook.
+     */
     public boolean hasPatient(Nric nric) {
         requireNonNull(nric);
         return patients.contains(nric);

@@ -35,6 +35,10 @@ public class UniquePatientList implements Iterable<Patient> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePatient);
     }
+
+    /**
+     * Returns true if the list contains a patient with the same nric as { @nric }.
+     */
     public boolean contains(Nric nric) {
         requireNonNull(nric);
         return internalList.stream().anyMatch(p -> p.isSameNic(nric));

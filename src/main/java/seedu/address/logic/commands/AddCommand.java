@@ -56,7 +56,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
         model.addPatient(toAdd);
-        CommandType.setViewCommandType(CommandType.DEFAULT);
+        CommandManager.setViewCommandType(CommandType.DEFAULT);
         ViewedNric.setViewedNric(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

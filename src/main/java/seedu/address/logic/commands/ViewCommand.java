@@ -40,7 +40,7 @@ public class ViewCommand extends Command {
 
         if (nric == null) { // No nric specified, display all patients
             model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-            CommandType.setViewCommandType(CommandType.DEFAULT);
+            CommandManager.setViewCommandType(CommandType.DEFAULT);
             ViewedNric.setViewedNric(null);
             return new CommandResult(MESSAGE_SUCCESS);
         } else { // Nric specified, display summary of patient with given NRIC

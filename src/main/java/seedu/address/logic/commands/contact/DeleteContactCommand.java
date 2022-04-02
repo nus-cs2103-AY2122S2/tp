@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandManager;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,7 +45,8 @@ public class DeleteContactCommand extends Command {
 
         // Display patient screen when current view list is empty
         if (lastShownList.isEmpty()) {
-            CommandType.setViewCommandType(CommandType.DEFAULT);
+            CommandManager.setViewCommandType(CommandType.DEFAULT);
+            model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
             return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, contactToDelete),
                     CommandType.DEFAULT);
         }
