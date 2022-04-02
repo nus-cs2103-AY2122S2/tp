@@ -211,7 +211,7 @@ Format: `sort s/ATTRIBUTE_FIELD`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the sort format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values
 `appstatus`, `course`, `intstatus`, `name`, `seniority`, `studentid`
@@ -247,7 +247,7 @@ Format: `remark INDEX [r/REMARK]`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the remark format:**<br>
 
 `INDEX` must be non-negative
 
@@ -341,7 +341,7 @@ Format: `view TIME_PERIOD`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the view format:**<br>
 
 `TIME_PERIOD` can take on the following values `all`, `today`, `week`, `month`
 
