@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDERING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.commons.core.SearchTypeUtil.SearchType;

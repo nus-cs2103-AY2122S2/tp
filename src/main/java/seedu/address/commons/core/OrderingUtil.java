@@ -9,6 +9,9 @@ public class OrderingUtil {
         ASCENDING, DESCENDING
     }
 
+    /**
+     * Returns a comparator that compares {@code Entry}s based on the given {@code Ordering}.
+     */
     public static <T extends Entry> Comparator<T> orderedComparator(Ordering ordering, Comparator<T> comparator) {
         switch (ordering) {
         case ASCENDING:
