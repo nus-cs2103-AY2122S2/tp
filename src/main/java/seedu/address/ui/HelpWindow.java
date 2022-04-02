@@ -33,7 +33,8 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n2. ADD a student with relevant details into Tracey."
             + NEWLINE_AND_INDENTATION
-            + "List of tags: n/Name b/BLock f/Faculty p/Phone Number a/Address e/Email mc/Matriculation Number CS/Covid Status"
+            + "List of tags: n/Name b/Block f/Faculty p/Phone Number a/Address e/Email "
+            + "mc/Matriculation Number CS/Covid Status"
             + NEWLINE_AND_INDENTATION
             + "Format: add n/NAME p/PHONENUMBER e/EMAIL ..."
             + NEWLINE_AND_INDENTATION
