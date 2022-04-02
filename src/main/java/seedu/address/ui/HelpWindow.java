@@ -20,7 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t12-3.github.io/tp/UserGuide.html";
     public static final String NEWLINE_AND_INDENTATION = "\n     ";
     public static final String HELP_MESSAGE = "Tracey supports the following features: Find, Add, Delete, Edit, Clear, "
-            + "Summarise, List, Help and Filter.\n"
+            + "Summarise, List, Help, Filter, Import, Undo, Redo, Email, Archive and Resize.\n"
             + "This guide aims to showcase the syntax used for the aforementioned features.\n"
             + "For a full comprehensive guide, please refer to " + USERGUIDE_URL
             + "\n"
@@ -33,7 +33,8 @@ public class HelpWindow extends UiPart<Stage> {
 
             + "\n2. ADD a student with relevant details into Tracey."
             + NEWLINE_AND_INDENTATION
-            + "List of tags: n/Name f/Faculty p/Phone Number a/Address e/Email mc/Matriculation Number CS/Covid Status"
+            + "List of tags: n/Name b/Block f/Faculty p/Phone Number a/Address e/Email "
+            + "mc/Matriculation Number CS/Covid Status"
             + NEWLINE_AND_INDENTATION
             + "Format: add n/NAME p/PHONENUMBER e/EMAIL ..."
             + NEWLINE_AND_INDENTATION
@@ -42,7 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Example 2: add f/FOL p/84848002 a/13 Kent Ridge Drive e/danny@yahoo.com "
             + "mc/a0024345h n/Danny cs/positive b/c\n"
-            + "\n3.DELETE a contact at a specific INDEX. The index refers to the index number shown in the "
+            + "\n3. DELETE a contact at a specific INDEX. The index refers to the index number shown in the "
             + "displayed person list."
             + NEWLINE_AND_INDENTATION
             + "Format: delete INDEX"
@@ -66,10 +67,10 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: clear\n"
 
-            + "\n6. SUMMARISE the record inside Tracey that an overview of the data,"
-            + " such as number of students who are covid-positive"
+            + "\n6. SUMMARISE the record inside Tracey that to provide an overview of the data,"
+            + " such as the number of students who are Covid Positive"
             + NEWLINE_AND_INDENTATION
-            + "Format:summarise\n"
+            + "Format: summarise\n"
 
             + "\n7. LIST the full record, which displays all the student’s data that are logged into Tracey"
             + NEWLINE_AND_INDENTATION
@@ -79,13 +80,17 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: help\n"
 
-            + "\n9. FILTER student based on health statuses"
+            + "\n9. FILTER student based on covid status, block or faculty"
             + NEWLINE_AND_INDENTATION
-            + "Format: filter covid-positive"
+            + "Format: filter f/FACULTY cs/COVID_STATUS b/BLOCK"
+            + NEWLINE_AND_INDENTATION
+            + "Example 1: cs/positive"
+            + NEWLINE_AND_INDENTATION
+            + "Example 2: b/c\n"
 
             + "\n10. IMPORT excel files"
             + NEWLINE_AND_INDENTATION
-            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx"
+            + "Format: import C:\\Users\\users\\Documents\\tp.xlsx\n"
 
             + "\n11. UNDO an executed add, edit or delete command."
             + NEWLINE_AND_INDENTATION
@@ -95,9 +100,22 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: redo\n"
 
-            + "\n13. EMAIL addresses of the students in the list are collated"
+            + "\n13. EMAIL addresses of the students in the list are collated."
             + NEWLINE_AND_INDENTATION
-            + "Format: email";
+            + "Format: email\n"
+
+            + "\n14. Archive the current database, saving the data in [ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]."
+            + NEWLINE_AND_INDENTATION
+            + "Format: archive\n"
+
+            + "\n13. RESIZE the display of the response box according to size 1, 2 or 3."
+            + NEWLINE_AND_INDENTATION
+            + "Format: RESIZE SIZE"
+            + NEWLINE_AND_INDENTATION
+            + "Example 1: resize 1"
+            + NEWLINE_AND_INDENTATION
+            + "Example 2: resize 3";
+
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
