@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tinner.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 public class ReminderDateTest {
@@ -21,17 +24,23 @@ public class ReminderDateTest {
 
     @Test
     public void isValidReminderDate() {
+        final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        final LocalDate TODAY = LocalDate.now();
+
         // null reminder date
         assertThrows(NullPointerException.class, () -> ReminderDate.isValidReminderDate(null));
 
         // invalid reminder dates
         assertFalse(ReminderDate.isValidReminderDate(" ")); // spaces only
         assertFalse(ReminderDate.isValidReminderDate("00-00-0000 00:00")); // invalid date format
+        assertFalse(ReminderDate.isValidReminderDate("31-04-2022 00:00")); // nonexistent date
+        assertFalse(ReminderDate.isValidReminderDate("29-02-2022 00:00")); // non-leap year
 
         // valid reminder dates
         assertTrue(ReminderDate.isValidReminderDate("")); // empty string
         assertTrue(ReminderDate.isValidReminderDate("15-06-2001 11:00"));
         assertTrue(ReminderDate.isValidReminderDate("24-02-2022 20:49"));
+        assertTrue(ReminderDate.isValidReminderDate("29-02-2024 00:00")); // leap year
     }
 
 }
