@@ -89,14 +89,14 @@ public class DeleteModuleCommand extends RedoableCommand {
 
         List<Module> modulesToDelete = new ArrayList<>(modules);
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, modules);
+        Person editedPerson = createEditedPerson(personToEdit, modulesToDelete);
 
-        if (modules.size() != 0) {
+        if (modulesToDelete.size() != 0) {
             throw new CommandException(String.format(MESSAGE_FAILURE, modules));
         }
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToDelete));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modules));
     }
 }
