@@ -20,7 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t12-3.github.io/tp/UserGuide.html";
     public static final String NEWLINE_AND_INDENTATION = "\n     ";
     public static final String HELP_MESSAGE = "Tracey supports the following features: Find, Add, Delete, Edit, Clear, "
-            + "Summarise, List, Help and Filter.\n"
+            + "Summarise, List, Help, Filter, Import, Undo, Redo and Email.\n"
             + "This guide aims to showcase the syntax used for the aforementioned features.\n"
             + "For a full comprehensive guide, please refer to " + USERGUIDE_URL
             + "\n"
