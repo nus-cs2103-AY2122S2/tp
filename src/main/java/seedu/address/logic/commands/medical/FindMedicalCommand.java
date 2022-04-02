@@ -38,7 +38,7 @@ public class FindMedicalCommand extends Command {
         if (ViewedNric.getViewedNric() == null) {
             model.updateFilteredMedicalList(predicate);
             return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_NO_NRIC,
-                    model.getFilteredMedicalList().size(), COMMAND_TYPE));
+                    model.getFilteredMedicalList().size()), COMMAND_TYPE);
         } else {
             model.updateFilteredMedicalList(predicate);
             return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_OVERVIEW,
