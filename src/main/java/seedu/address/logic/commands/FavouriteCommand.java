@@ -60,7 +60,7 @@ public class FavouriteCommand extends Command {
      */
     private String generateSuccessMessage(Person personToFavourite) {
         String message = "";
-        if (personToFavourite.getFavourite().getStatus()) {
+        if (!personToFavourite.getFavourite().getStatus()) {
             message = MESSAGE_FAVOURITE_PERSON_SUCCESS;
         } else {
             message = MESSAGE_UNFAVOURITE_PERSON_SUCCESS;

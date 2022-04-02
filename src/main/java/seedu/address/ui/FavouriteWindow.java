@@ -20,7 +20,6 @@ public class FavouriteWindow extends SingleColumnPersonListWindow {
      */
     @Override
     void fillInnerParts() {
-        logger.fine("The person panel has data of favourited clients now!");
         reminderStatus.setVisible(false);
         reminderStatus.setManaged(false);
         personListPanel = new PersonListPanel(super.logic.getFavouritedPersonList());
