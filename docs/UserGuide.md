@@ -115,7 +115,6 @@ Examples:
 2nd person into a `buyer`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
 - `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
-- 
 
 ### Locating clients by name: `find`
 
