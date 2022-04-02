@@ -51,7 +51,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                  |
 | [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional  |
 | \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
-| {Instructions for Parameters}                                             | At least one parameter must be provided                 |
+| {Multiple Optional Parameters}                                            | At least one parameter must be provided                 |
 
 ---
 
