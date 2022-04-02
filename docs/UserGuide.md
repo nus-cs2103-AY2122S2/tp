@@ -79,6 +79,11 @@ Lastly, each information card contains the following details of the student and 
 With UDT, you can update and track COVID-19 Cases in your school, keep track of Close-Contacts, to perform timely updates to parents and Next-of-Kin.
 Filter through the endless list of students with a simple command to extract details on the cases by class, or by activities (CCAs etc.).
 
+### Automation of `Status`
+`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
+- UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
+- UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
+
 # Features
 Below are a set of commands that can be used in the **_UDT_**. Their formats and examples are provided along with each feature.
 
@@ -93,10 +98,14 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 ## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [act/MORE ACTIVITIES]`
-  - `NAME`, `ADDRESS`, `CLASS`, `ACTIVITY` takes in text
-  - `EMAIL` follows the standard email formatting 
-    - eg. `johntan@example.com`
+  - `NAME`, `ADDRESS`, `ACTIVITY` takes in alphanumeric text
+  - `CLASS` takes in a number and alphabet pair
+    - Eg. `4A`
+  - `EMAIL` follows the standard email formatting
+    - Accepts inputs such as alphanumeric inputs, "-", "_", and "+"
+    - Eg. `johntan@example.com`
   - `PHONE_NUMBER` takes a sequence of numbers
+    - Requires at least 3 numbers
   - `STATUS` takes either of these texts `Positive`, `Negative`, `Close-Contact`
     - `STATUS` is case-sensitive and should strictly follow the texts stated above
 - Examples:
@@ -146,7 +155,10 @@ Find an existing student in the application by their name
     - `find john` can find students _"John Tan"_ and _"John Lee"_
 - Example:
   - `find bernice` will find student _"Bernice Yu"_
-  
+
+> :bulb: **Tip:** find multiple students at the same time by inputting their names in the same command
+> - Eg. `find alex bernice` will find students _"Alex Yeoh"_ and _"Bernice Yu"_
+
 |![find command](images/user-guide/find.png)|
 |:--:|
 |*Figure 3 - `find` Command*|
@@ -209,6 +221,11 @@ Edits an existing student's details in the list Index provided and the parts tha
 > - Filter the student list via __*find*__ commands to make finding the index easier  
 > - Omitting parts of the student details from the command will leave them unedited
 > - To clear a student's activities use `edit INDEX act/`
+  
+> :information_source: **Notes:** 
+> - Capitalization of text will be reflected in the User Interface
+> - Editing `Activity` of a student will **replace** all activities with the newly added ones
+>   - Eg. `edit 1 act/tennis` will replace the `Activity` of the 1st student in the list with _"tennis"_
 
 </div>
 
