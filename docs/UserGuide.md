@@ -126,6 +126,7 @@ Additionally, if you were to simply use `add`, it would open up a new window to 
 Then, simply fill up the fields as guided in the window. You can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
+Adding duplicate names is not allowed as most people will not have the exact same name.
 When in `archives`, this functionality is disabled.
 </div>
 
