@@ -42,7 +42,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="nameField" prefHeight="44.0" prefWidth="449.0" promptText="John Doe" />
+                           <TextField fx:id="nameField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="John Doe" />
                         </children>
                      </HBox>
                      <HBox>
@@ -52,7 +52,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="phoneField" prefHeight="44.0" prefWidth="449.0" promptText="91234567" />
+                           <TextField fx:id="phoneField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="91234567" />
                         </children>
                      </HBox>
                      <HBox>
@@ -62,7 +62,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <TextField fx:id="addressField" prefHeight="44.0" prefWidth="449.0" promptText="123, Woodlands Ave 16, #02-123" />
+                           <TextField fx:id="addressField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="123, Woodlands Ave 16, #02-123" />
                         </children>
                      </HBox>
                      <HBox>
