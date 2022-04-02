@@ -382,7 +382,7 @@ Clear all the data inside Tracey.
 Format:`clear`
 
 ⚠️`Warning:`
-* Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+* Use the <a href='#archiving-tracey'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 * This feature cannot be reversed using `undo`.
 
 ### Exiting Tracey
