@@ -18,7 +18,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
     - `list` : Lists all client information.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/buyer` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer in the RealEstatePro app.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pr/north,123 Street,1-room,$300000` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` owns the property `north,123 Street,1-room,$300000`and is a seller in the RealEstatePro app.
     - `delete 3` : Deletes the 3rd client shown in the current list.
     - `clear` : Deletes all client information.
     - `exit` : Exits the app.
@@ -114,7 +114,8 @@ Examples:
 - `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the 
 2nd person into a `buyer`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
-- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images. 
+- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
+- 
 
 ### Locating clients by name: `find`
 
