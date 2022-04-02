@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
@@ -26,7 +25,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackbeau.commons.core.GuiSettings;
@@ -122,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         skinChartWindow = new SkinChartWindow();
         hairChartWindow = new HairChartWindow();
         int maxMonthlyCustomerCount = this
-                .getMonthlyCustomerMaxCount(this.getMonthlyCustomerMap());
+            .getMonthlyCustomerMaxCount(this.getMonthlyCustomerMap());
         int totalCustomerCount = this.getCustomerCount();
         monthlyCustomerChartWindow = new MonthlyCustomerChartWindow(maxMonthlyCustomerCount, totalCustomerCount);
 
@@ -138,16 +136,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    // @@author flairekq-reused
+    // Reused from https://stackoverflow.com/questions/49097747/javafx-determining-which-label-has-been-clicked
+    // with minor modifications
     private void setLabelOnMouseClickEvent(Label label) {
-        label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                for (Label l : labels) {
-                    l.getStyleClass().remove("selected");
-                }
-                label.getStyleClass().add("selected");
-                switchPanel(stringToPanel(label.getId()));
+        label.setOnMouseClicked(event -> {
+            for (Label l : labels) {
+                l.getStyleClass().remove("selected");
             }
+            label.getStyleClass().add("selected");
+            switchPanel(stringToPanel(label.getId()));
         });
     }
 
@@ -209,6 +207,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -357,12 +356,12 @@ public class MainWindow extends UiPart<Stage> {
         HashMap<Integer, Integer> monthlyCustomerMap = this.getMonthlyCustomerMap();
         int totalCustomerCount = this.getCustomerCount();
         int maxMonthlyCustomerCount = this
-                .getMonthlyCustomerMaxCount(monthlyCustomerMap);
+            .getMonthlyCustomerMaxCount(monthlyCustomerMap);
         //update the axis limits manually
         monthlyCustomerChartWindow = new MonthlyCustomerChartWindow(maxMonthlyCustomerCount,
-                totalCustomerCount);
+            totalCustomerCount);
         addMonthlyCustomerChartData(monthlyCustomerMap,
-                monthlyCustomerChartWindow.getLineChart(), "Customers Gained This Year");
+            monthlyCustomerChartWindow.getLineChart(), "Customers Gained This Year");
         if (!monthlyCustomerChartWindow.isShowing()) {
             monthlyCustomerChartWindow.show();
         } else {
@@ -385,7 +384,7 @@ public class MainWindow extends UiPart<Stage> {
             Integer count = map.get(key);
             String dataLabel = String.format("%s: %d", detail, count);
             pieChart.getData()
-                    .add(new PieChart.Data(dataLabel, count));
+                .add(new PieChart.Data(dataLabel, count));
             dataCount++;
         }
         //.layout() prevents labels from moving to top left after opening chart a few times
@@ -438,6 +437,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns a hashmap with the staff name as the key and count as the value.
      * Count refers to the number of customers who chose the staff as their favorite.
+     *
      * @return HashMap
      */
     HashMap<String, Integer> getStaffMap() {
@@ -451,7 +451,8 @@ public class MainWindow extends UiPart<Stage> {
                 } else {
                     staffMap.put(key, 1);
                 }
-            };
+            }
+            ;
         }
         return staffMap;
     }
@@ -459,6 +460,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns a hashmap with the service name as the key and count as the value.
      * Count refers to the number of customers who chose the service as their favorite.
+     *
      * @return HashMap
      */
     HashMap<String, Integer> getServiceMap() {
@@ -472,7 +474,8 @@ public class MainWindow extends UiPart<Stage> {
                 } else {
                     serviceMap.put(key, 1);
                 }
-            };
+            }
+            ;
         }
         return serviceMap;
     }
@@ -480,6 +483,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns a hashmap with the allergy name as the key and count as the value.
      * Count refers to the number of customers who have the allergy.
+     *
      * @return HashMap
      */
     HashMap<String, Integer> getAllergyMap() {
@@ -493,7 +497,8 @@ public class MainWindow extends UiPart<Stage> {
                 } else {
                     allergyMap.put(key, 1);
                 }
-            };
+            }
+            ;
         }
         return allergyMap;
     }
@@ -501,6 +506,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns a hashmap with the skin type name as the key and count as the value.
      * Count refers to the number of customers who have the skin type.
+     *
      * @return HashMap
      */
     HashMap<String, Integer> getSkinTypeMap() {
@@ -522,6 +528,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns a hashmap with the hair type name as the key and count as the value.
      * Count refers to the number of customers who have the hair type.
+     *
      * @return HashMap
      */
     HashMap<String, Integer> getHairTypeMap() {
@@ -543,6 +550,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns a hashmap with the month as the key and count as the value.
      * Count refers to the number of customers who have registered on that month this year.
+     *
      * @return HashMap
      */
     HashMap<Integer, Integer> getMonthlyCustomerMap() {
@@ -570,11 +578,11 @@ public class MainWindow extends UiPart<Stage> {
     //function is taken from https://www.geeksforgeeks.org/sorting-a-hashmap-according-to-values/
     private HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) {
         // Create a list from elements of HashMap
-        List<Map.Entry<String, Integer> > list =
-                new LinkedList<Map.Entry<String, Integer> >(hm.entrySet());
+        List<Map.Entry<String, Integer>> list =
+            new LinkedList<Map.Entry<String, Integer>>(hm.entrySet());
 
         // Sort the list
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1,
                                Map.Entry<String, Integer> o2) {
                 return (o1.getValue()).compareTo(o2.getValue());
@@ -599,7 +607,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         staffChartWindow.hide();
