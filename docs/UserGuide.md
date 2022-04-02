@@ -254,8 +254,12 @@ Deletes the specified person from the application.
 |*Figure 8 - `delete` Command*|
 
 ## Clearing the data: `clear`
-Clears all the data within the application
+Clears and deletes all the data within the application
 - Format: `clear`
+  - Any user input after `clear` is ignored
+    - `clear 12345 john` is the same as `clear`
+
+> :warning: **Warning:** This deletes all data for the application irreversibly. Ensure you save a copy of the data if you intend to restore it at a later date.
 
 ## Exit the application: `exit`
 Exits the program.
