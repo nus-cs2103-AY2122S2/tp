@@ -46,18 +46,19 @@ public class ViewPrescriptionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
         model.updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
 
         if (!model.hasPatient(new NricPredicate(nric))) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
-        ObservableList<Patient> personList = model.getPersonList();
+        ObservableList<Patient> patientList = model.getPatientList();
         String nameAndNric = "";
 
-        for (Patient patient : personList) {
+        for (Patient patient : patientList) {
             if (patient.getNric().equals(nric)) {
-                nameAndNric = patient.getName().toString() + " / " + nric;
+                nameAndNric = patient.getName().toString() + ", " + nric;
             }
         }
 
