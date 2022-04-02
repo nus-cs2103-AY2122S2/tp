@@ -76,8 +76,11 @@ Format: `help`
 
 Adds a client to RealEstatePro.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] i/FILEPATH:DESCRIPTION`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] [i/FILEPATH:DESCRIPTION]`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Either a property or preference must be provided when adding a new user.
+</div>
 **Tip**: A person is either a `buyer`, or `seller` based on whether he has a property or a preference.
 
 Examples:
