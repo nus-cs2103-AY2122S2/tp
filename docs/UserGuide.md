@@ -341,20 +341,23 @@ From Figure 10, when the user inputs the `Summarise` command, the result are mul
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
-* `[ROOT]`: Root directory of Tracey.
+* `[ROOT]`: The folder where the Tracey.jar is in.
 * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
-* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss.
+  * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
+* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
+  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS. 
 
 Format: `archive`
 
 Example:
-* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation).
-* The archived file will be saved **in** `[ROOT]/data/archive/270322`.
+* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (hh:mm:ss:SSS in 24-hour notation).
+* The archived file will be saved **in** `[ROOT]/data/archive/270322123`.
 * The archived file will be saved **as** `270322_152833`.
-* The file path will be `[ROOT]/data/archive/270322/270322_152833`.
+* The file path will be `[ROOT]/data/archive/270322/270322_152833123`.
 
 💡`Tips:`
 * You can rename the archived file in the file path manually for easier reference.
+  * Features for naming of the archived file via the CLI will be available in later releases.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
 ### Resizing the result display window
