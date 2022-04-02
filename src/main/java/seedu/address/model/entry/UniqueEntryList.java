@@ -97,7 +97,6 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
 
         return null;
     }
-    
 
     /**
      * Archives the equivalent entry from the list.
