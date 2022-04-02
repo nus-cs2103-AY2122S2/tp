@@ -183,7 +183,7 @@ Annotated image of what a `contact` with `Status`, `Module`, and `Comment`
 Easily copy a contact's information into your clipboard, for easy pasting into a communication app of your choice.
 For example, you can copy a contact's email and then paste it into your email client.
 
-Format: `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT] [f/FORMAT]​`
+Format: `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`
 
 * Copy contacts using specified field names.​
 * If no fields are specified, **all fields will be copied**.
@@ -326,7 +326,7 @@ Examples:
 
 Sort all people within contact list.
 
-Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT]​`
+Format: `sort [n/ASC|DESC] [p/ASC|DESC] [e/ASC|DESC] [a/ASC|DESC] [s/ASC|DESC] [m/ASC|DESC] [c/ASC|DESC]​`
 
 * Sorts list with specified field(s). For any two contacts, latter fields will only be considered if preceding fields are equal.​
 * Order of fields is important and there must be **at least one field**.
@@ -336,15 +336,15 @@ Format: `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/
 * Parameters are case-insensitive. 
 
 
-| Field   | Prefix | Specification of sort                   | Example                                                           |                                         
-|---------|--------|-----------------------------------------|-------------------------------------------------------------------|
-| Name    | `n/`   | Sorted lexicographically                | `Bob` is larger than `Alice`                                      |
-| Phone   | `p/`   | Sorted numerically                      | `9` is larger than `1`                                            |
-| Email   | `e/`   | Sorted lexicographically                | `bob@gmail.com` is larger than `alice@gmail.com`                  |
-| Address | `a/`   | Sorted lexicographically                | `banana residences` is larger than `apple residences`             |
-| Status  | `s/`   | Sorted lexicographically                | `favourite` is larger than `blacklist` which is larger than `"" ` |                
-| Module  | `m/`   | Sorted numerically by number of modules | A contact with 5 modules is larger than contact with 1              |
-| Comment | `c/`   | Sorted numerically by length of comment | `aaaaaaaaaaaaaaaaaaa` is larger than `a`                          |
+| Field   | Prefix | Specification of sort                   | Example (Ascending)                                            |                                         
+|---------|--------|-----------------------------------------|----------------------------------------------------------------|
+| Name    | `n/`   | Sorted lexicographically                | `Alice` is followed by 'Bob'                                   |
+| Phone   | `p/`   | Sorted numerically                      | `1` is followed by `9`                                         |
+| Email   | `e/`   | Sorted lexicographically                | `alice@gmail.com` is followed by `bob@gmail.com`               |
+| Address | `a/`   | Sorted lexicographically                | `apple residences` is followed by `banana residences`          |
+| Status  | `s/`   | Sorted lexicographically                | `""` is followed by `blacklist` is followed by `favourite `    |                
+| Module  | `m/`   | Sorted numerically by number of modules | A contact with 1 modules is followed by contact with 5 modules |
+| Comment | `c/`   | Sorted numerically by length of comment | `a` is followed by `aaaaaaaaaaaaaaaaaa`                        |
 
 
 Examples:
