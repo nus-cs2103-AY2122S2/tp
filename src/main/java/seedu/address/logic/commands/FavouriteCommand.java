@@ -25,7 +25,7 @@ public class FavouriteCommand extends Command {
             + "If you have your Favourites window opened already, \n"
             + "close it and re-open it (via 'fw' command or 'Favourites' button) to refresh the data!";;
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Favourites a select client "
+            + ": Favourites a selected client "
             + "by the index number used in the last client listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
@@ -42,7 +42,7 @@ public class FavouriteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getFilteredAndSortedPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

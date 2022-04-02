@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Represents a Person in the address book.
@@ -25,14 +26,15 @@ public class Person {
     private final Set<Property> properties;
     private final Optional<Preference> preference;
     private final UserType userType;
+    private final Set<UserImage> userImages;
 
     /**
      * This constructor is used when editing a Client.
      * Favourited clients will remain favourited & unfavourited clients will remain unfavourited
      */
     public Person(Name name, Phone phone, Email email, Favourite favourite, Address address,
-            Set<Property> properties, Optional<Preference> preference, UserType userType) {
-        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType);
+            Set<Property> properties, Optional<Preference> preference, UserType userType, Set<UserImage> userImages) {
+        requireAllNonNull(name, phone, email, favourite, address, properties, preference, userType, userImages);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,6 +43,7 @@ public class Person {
         this.preference = preference;
         this.address = address;
         this.userType = userType;
+        this.userImages = userImages;
     }
 
     /**
@@ -48,8 +51,8 @@ public class Person {
      * This constructor is used for adding a new Client, thus default status is unfavourited(false)
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Property> properties,
-            Optional<Preference> preference, UserType userType) {
-        requireAllNonNull(name, phone, email, address, properties, preference, userType);
+            Optional<Preference> preference, UserType userType, Set<UserImage> userImages) {
+        requireAllNonNull(name, phone, email, address, properties, preference, userType, userImages);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,6 +61,7 @@ public class Person {
         this.properties = properties;
         this.preference = preference;
         this.userType = userType;
+        this.userImages = userImages;
     }
 
     public Name getName() {
@@ -77,11 +81,12 @@ public class Person {
     }
 
     /**
-     * Toggles the favourite status of Person
+     * Returns a copy of the Person with the favourite status toggled.
      */
-    public void toggleFavourite() {
+    public Person toggleFavourite() {
         boolean toggledStatus = !favourite.getStatus();
-        favourite.setStatus(toggledStatus);
+        return new Person(name, phone, email, new Favourite(toggledStatus), address,
+            properties, preference, userType, userImages);
     }
 
     public Address getAddress() {
@@ -102,6 +107,10 @@ public class Person {
 
     public UserType getUserType() {
         return userType;
+    }
+
+    public Set<UserImage> getUserImages() {
+        return userImages;
     }
 
     /**
@@ -159,13 +168,25 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getProperties().equals(getProperties())
                 && otherPerson.getPreference().equals(getPreference())
-                && otherPerson.getUserType().equals(getUserType());
+                && otherPerson.getUserType().equals(getUserType())
+                && otherPerson.getUserImages().equals(getUserImages());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType);
+        return Objects.hash(name, phone, email, favourite, address, properties, preference, userType, userImages);
+    }
+
+    /**
+     * Returns a plain string representation of {@code preference}.
+     */
+    public String preferenceToPlainString() {
+        if (preference.isEmpty()) {
+            return "";
+        } else {
+            return preference.get().toPlainString();
+        }
     }
 
     @Override
@@ -196,6 +217,15 @@ public class Person {
 
         builder.append("; User Type: ").append(getUserType());
 
+        Set<UserImage> userImages = getUserImages();
+        if (!getUserImages().isEmpty()) {
+            for (UserImage image : userImages) {
+                builder.append("; UserImage: ");
+                builder.append(image.getFilePath());
+                builder.append("; Description: ");
+                builder.append(image.getDescription());
+            }
+        }
         return builder.toString();
     }
 }

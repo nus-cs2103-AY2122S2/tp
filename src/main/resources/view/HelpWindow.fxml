@@ -31,8 +31,10 @@
                            <AnchorPane maxWidth="120.0" minHeight="0.0" minWidth="140.0" prefHeight="462.0" prefWidth="197.0">
                               <children>
                                  <Button layoutY="1.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onHomeClick" prefHeight="30.0" prefWidth="86.0" styleClass="paneButton" text="Home" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                 <Button layoutY="31.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onCommandClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="Commands" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
-                                 <Button layoutX="4.0" layoutY="61.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onUiClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="UI" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="61.0" />
+                                 <Button layoutY="91.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onCommandClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="Commands" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0" />
+                                 <Button layoutY="121.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onAction="#onFlagsClick" onMouseClicked="#onFlagsClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="Flags" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0" />
+                                 <Button layoutX="14.0" layoutY="31.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onAction="#onFeaturesClick" onMouseClicked="#onFeaturesClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="Features" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
+                                 <Button layoutX="14.0" layoutY="61.0" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onUiClick" prefHeight="30.0" prefWidth="112.0" styleClass="paneButton" text="UI" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="61.0" />
                               </children>
                            </AnchorPane>
                            <StackPane fx:id="helpPanePlaceHolder" styleClass="stack-pane" />

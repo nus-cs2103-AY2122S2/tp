@@ -22,7 +22,7 @@ class FavouriteCommandTest {
 
     @Test
     void execute_favouriteOnValidIndexUnfilteredList_success() throws CommandException {
-        Person personToFavourite = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToFavourite = model.getFilteredAndSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         CommandResult commandResult = new FavouriteCommand(INDEX_FIRST_PERSON).execute(expectedModel);
@@ -41,7 +41,7 @@ class FavouriteCommandTest {
 
     @Test
     public void execute_favouriteOnInvalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAndSortedPersonList().size() + 1);
         FavouriteCommand favouriteCommand = new FavouriteCommand(outOfBoundIndex);
 
         assertCommandFailure(favouriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

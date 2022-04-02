@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -19,6 +18,9 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
+        <HBox>
+          <Label fx:id="reminder" styleClass="reminder-label" text="\$reminder"/>
+        </HBox>
         <HBox alignment="BASELINE_RIGHT">
           <Label fx:id="favourite" alignment="CENTER" styleClass="cell_small_label" text="\$favourite" />
         </HBox>
@@ -32,8 +34,8 @@
           <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
         </HBox>
         <VBox>
-          <Label fx:id="seller"/>
-          <Label fx:id="buyer"/>
+          <Label fx:id="seller" styleClass="seller-tag" />
+          <Label fx:id="buyer" styleClass="buyer-tag" />
           <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
           <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
           <Label fx:id="email" styleClass="cell_small_label" text="\$email" />

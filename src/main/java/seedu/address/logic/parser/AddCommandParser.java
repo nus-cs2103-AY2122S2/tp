@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROPERTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERIMAGE;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,6 +23,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 import seedu.address.model.util.UserTypeUtil;
 
 /**
@@ -37,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PROPERTY, PREFIX_PREFERENCE);
+                        PREFIX_PROPERTY, PREFIX_PREFERENCE, PREFIX_USERIMAGE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -53,6 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<Preference> preference = preferenceArg.isPresent()
                 ? Optional.of(ParserUtil.parsePreference(preferenceArg.get()))
                 : Optional.empty();
+
         // if the user did not input any properties or preference, throw an error as user needs to be a buyer or seller
         if (properties.isEmpty() && preferenceArg.isEmpty() || !properties.isEmpty() && preferenceArg.isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserType.MESSAGE_USAGE));
@@ -65,8 +68,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             userType = UserTypeUtil.createBuyer();
         }
+        Set<UserImage> userImages = ParserUtil.parseUserImages(argMultimap.getAllValues(PREFIX_USERIMAGE));
 
-        Person person = new Person(name, phone, email, address, properties, preference, userType);
+        Person person = new Person(name, phone, email, address, properties, preference, userType, userImages);
 
         return new AddCommand(person);
     }

@@ -95,6 +95,12 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void execute_invalidGetPersonsBasedOnRegion() {
+        int totalPersons = logic.getPersonsBasedOnRegion("direction");
+        assertEquals(0, totalPersons);
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
