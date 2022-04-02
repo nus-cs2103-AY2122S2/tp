@@ -1,7 +1,6 @@
 package seedu.trackermon.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
@@ -10,18 +9,15 @@ import static seedu.trackermon.logic.commands.CommandTestUtil.RATING_DESC_HIGH;
 import static seedu.trackermon.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
-import static seedu.trackermon.testutil.TypicalShows.HIMYM;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.trackermon.AppParameters;
 import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.logic.commands.AddCommand;
 import seedu.trackermon.logic.commands.CommandResult;
@@ -35,13 +31,8 @@ import seedu.trackermon.model.UserPrefs;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.storage.JsonShowListStorage;
 import seedu.trackermon.storage.JsonUserPrefsStorage;
-import seedu.trackermon.storage.ShowListStorage;
-import seedu.trackermon.storage.Storage;
 import seedu.trackermon.storage.StorageManager;
-import seedu.trackermon.storage.UserPrefsStorage;
-import seedu.trackermon.testutil.Assert;
 import seedu.trackermon.testutil.ShowBuilder;
-import seedu.trackermon.testutil.ShowUtil;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
