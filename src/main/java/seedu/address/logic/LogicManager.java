@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
 
         saveBooks();
         undoRedoStack.push(command);
-        System.out.println(undoRedoStack);
+
         return commandResult;
     }
 
