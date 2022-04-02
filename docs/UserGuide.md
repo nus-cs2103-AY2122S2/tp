@@ -121,18 +121,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu a/123, Clementi Ave 16, #01-321`
 
-Additionally, if you were to simply use `add`, it would open up a new window to allow you to systematically add a new contact
+Additionally, if you were to simply use `add`, it would open up a new window to allow you to systematically add a new contact, with multiple additional fields that would normally require the use of other commands.  
 ![add window](images/addWindow.png)  
 Then, simply fill up the fields as guided in the window. You can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about this command:**<br>
-
 * Adding duplicate names is not allowed as most people will not have the exact same name.
 * Phone number must be at least 3 digits short, and at most 25 digits long.
 * Emails must be of the format `local-part@domain`. For example, a valid email you is `e@e.sg`, invalid email is `e@e.s`
 * When in `archives`, this functionality is disabled.
+* Using `add`, you have the benefit of executing multiple commands (i.e. `comment`, `status`, and `addmodules`) at once.
 </div>
 
 
@@ -187,7 +187,7 @@ Examples:
 - `status 2 s/` will untag the 2nd contact in ModuleMate Finder, leaving them with no `Status`
 
 Annotated image of what a `contact` with `Status`, `Module`, and `Comment`  
-![Example of a contact with Status and Comment](images/annotated_contact.png)
+![Example of a contact with Status and Comment](images/annotated_person.png)
 
 ### Copy contacts in list : `copy`
 
