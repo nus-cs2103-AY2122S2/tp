@@ -27,15 +27,21 @@ import seedu.trackermon.model.show.TagComparator;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    protected static final String VALUE_ASC = "ASC";
+    protected static final String VALUE_DSC = "DSC";
     private static final String VALUE_ORDER_NAME = "NAME";
     private static final String VALUE_ORDER_STATUS = "STATUS";
     private static final String VALUE_ORDER_RATING = "RATING";
     private static final String VALUE_ORDER_TAG = "TAG";
-    private static final String VALUE_ASC = "ASC";
-    private static final String VALUE_DSC = "DSC";
     private static final int NO_VALUE = -1;
+    private static final int ADD_VALUE = 100;
     private static int startingValue = 0;
     private static HashMap<Comparator<Show>, Integer> order = new HashMap<>();
+    private static final String MESSAGE_INVALID_SO = "Invalid input for so/,"
+            + " please provide the exact number of correctly spelt names in a sequence you want."
+            + "For example: sorting status than tags, " + SortCommand.COMMAND_WORD
+            + " " + PREFIX_TAG + VALUE_ASC + " " + PREFIX_STATUS + VALUE_ASC + " "
+            + PREFIX_SORT_ORDER + VALUE_ORDER_STATUS + " " + VALUE_ORDER_TAG;
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -133,12 +139,12 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @return a comparator depending on whether it was reversed.
      */
     private static Comparator<Show> putIntoMap(Comparator<Show> comparator,
-                                               Prefix prefix, ArgumentMultimap argMultimap) {
+                                               Prefix prefix, ArgumentMultimap argMultimap) throws ParseException {
         Comparator<Show> newComparator = comparator;
         if (arePrefixesPresent(argMultimap, prefix)) {
-            String valueName = argMultimap.getValue(prefix).orElse(VALUE_ASC);
-            valueName = valueName.toUpperCase().trim();
-            if (valueName.equals(VALUE_DSC)) {
+            String value = argMultimap.getValue(prefix).orElse(VALUE_ASC);
+            value = ParserUtil.checkOrder(value.toUpperCase().trim());
+            if (value.equals(VALUE_DSC)) {
                 newComparator = comparator.reversed();
             }
             order.put(newComparator, startingValue);
@@ -160,16 +166,12 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Changes -1 to Integer.Max if value is -1.
+     * Add ADD_VALUE to value.
      * @param value integer to change.
      * @return the new value.
      */
-    private static int noValueToMax(int value) {
-        if (value == NO_VALUE) {
-            return Integer.MAX_VALUE;
-        } else {
-            return value;
-        }
+    private static int addValue(int value) {
+        return value + ADD_VALUE;
     }
 
     /**
@@ -177,17 +179,28 @@ public class SortCommandParser implements Parser<SortCommand> {
      * {@code ArgumentMultimap}.
      * @param comparatorString Map that contains the comparator and the string to search.
      */
-    private static void reorderMap(ArgumentMultimap argMultimap, HashMap<Comparator<Show>, String> comparatorString) {
+    private static void reorderMap(ArgumentMultimap argMultimap, HashMap<Comparator<Show>,
+            String> comparatorString) throws ParseException {
         if (arePrefixesPresent(argMultimap, PREFIX_SORT_ORDER)) {
             String valueOrder = argMultimap.getValue(PREFIX_SORT_ORDER).get();
             valueOrder = valueOrder.toUpperCase().trim();
             for (Map.Entry<Comparator<Show>, String> entry : comparatorString.entrySet()) {
                 int index = valueOrder.indexOf(entry.getValue());
-                index = noValueToMax(index);
-                updateMapValues(entry.getKey(), index);
+                if (index != NO_VALUE) {
+                    int newValue = addValue(index);
+                    updateMapValues(entry.getKey(), newValue);
+                }
+            }
+
+            for (Map.Entry<Comparator<Show>, Integer> entry : order.entrySet()) {
+                int value = entry.getValue();
+                if ((value < ADD_VALUE) && value != NO_VALUE) {
+                    throw new ParseException(MESSAGE_INVALID_SO);
+                }
             }
         }
     }
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
