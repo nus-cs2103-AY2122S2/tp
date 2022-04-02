@@ -69,7 +69,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n6. SUMMARISE the record inside Tracey that to provide an overview of the data,"
             + " such as the number of students who are Covid Positive"
             + NEWLINE_AND_INDENTATION
-            + "Format:summarise\n"
+            + "Format: summarise\n"
 
             + "\n7. LIST the full record, which displays all the student’s data that are logged into Tracey"
             + NEWLINE_AND_INDENTATION
