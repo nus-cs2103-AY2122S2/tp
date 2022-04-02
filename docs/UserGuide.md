@@ -274,6 +274,8 @@ Adds a patient's medical information to MedBook.
 Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
+* For blood type parameter, we recommend using ABO blood system, but allow any blood system or special blood type values.
+
 Examples:
 * `add t/medical i/S1234567L bt/O ht/185 cm`
 

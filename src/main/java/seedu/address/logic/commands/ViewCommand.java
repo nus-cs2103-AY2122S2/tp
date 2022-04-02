@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.contact.AddContactCommand.MESSAGE_MISSING_PATIENT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,12 +39,12 @@ public class ViewCommand extends Command {
         }
 
         if (nric == null) { // No nric specified, display all patients
-            model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
             CommandType.setViewCommandType(CommandType.DEFAULT);
             ViewedNric.setViewedNric(null);
             return new CommandResult(MESSAGE_SUCCESS);
         } else { // Nric specified, display summary of patient with given NRIC
-
+            ViewedNric.setViewedNric(nric);
             model.updateSummary(nric);
             return new CommandResult(String.format(Messages.MESSAGE_SUMMARY_SHOWN, nric),
                     SUMMARY_COMMAND_TYPE);

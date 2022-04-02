@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.logic.commands.ViewedNric;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
@@ -53,7 +54,9 @@ public class SummaryDisplay extends UiPart<Region> {
                            ObservableList<Consultation> consultations, ObservableList<Prescription> prescriptions,
                            ObservableList<TestResult> results, ObservableList<Contact> contacts) {
         requireAllNonNull(patients, medicals);
-        Patient patient = patients.get(0);
+        Patient patient = patients.filtered(x -> x.getNric().equals(ViewedNric.getViewedNric())).get(0);
+        assert patient != null;
+
         PatientCard patientCard = new PatientCard(patient, 1);
         SummaryConsultationPanel summaryConsultationPanel = new SummaryConsultationPanel(consultations);
         SummaryPrescriptionPanel summaryPrescriptionPanel = new SummaryPrescriptionPanel(prescriptions);
@@ -64,6 +67,7 @@ public class SummaryDisplay extends UiPart<Region> {
         EmptyCard prescriptionEmptyCard = new EmptyCard();
         EmptyCard testResultEmptyCard = new EmptyCard();
         EmptyCard contactEmptyCard = new EmptyCard();
+        details.getChildren().clear();
         details.getChildren().add(patientCard.getRoot());
         medical.getChildren().clear();
         if (medicals.size() != 0) {

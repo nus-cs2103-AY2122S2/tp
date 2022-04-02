@@ -19,7 +19,7 @@ import seedu.address.model.testresult.TestResult;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
-    Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
     Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<TestResult> PREDICATE_SHOW_ALL_TEST_RESULTS = unused -> true;
@@ -110,7 +110,7 @@ public interface Model {
     ObservableList<Prescription> getFilteredPrescriptionList();
 
     /** Returns the person list **/
-    ObservableList<Patient> getPersonList();
+    ObservableList<Patient> getPatientList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
