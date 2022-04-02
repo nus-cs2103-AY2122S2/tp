@@ -56,6 +56,13 @@ public class StatisticsWindow extends UiPart<Stage> {
     }
 
     /**
+     * Focuses on the statistics window.
+     */
+    public void focus() {
+        getRoot().requestFocus();
+    }
+
+    /**
      * Hides the Statistics window.
      */
     public void hide() {
@@ -73,6 +80,7 @@ public class StatisticsWindow extends UiPart<Stage> {
      * Fills up data into pie chart.
      */
     public void fillPieChart() {
+        pieChart.getData().clear();
         numberOfPersonsInNorth = logic.getPersonsBasedOnRegion("North");
         numberOfPersonsInSouth = logic.getPersonsBasedOnRegion("South");
         numberOfPersonsInEast = logic.getPersonsBasedOnRegion("East");

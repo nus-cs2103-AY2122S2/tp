@@ -22,6 +22,7 @@ public class HelpText extends UiPart<Region> {
      */
     public HelpText(String text) {
         super(FXML);
+        helpMessage.setEditable(false);
         helpMessage.setText(text);
     }
 

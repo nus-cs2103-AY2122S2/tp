@@ -18,7 +18,12 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchCommand;
+import seedu.address.logic.commands.RemindCommand;
+import seedu.address.logic.commands.ReminderWindowCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StatisticsWindowCommand;
+import seedu.address.logic.commands.UploadCommand;
+import seedu.address.logic.commands.ViewImageCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -78,11 +83,26 @@ public class AddressBookParser {
         case StatisticsWindowCommand.COMMAND_WORD:
             return new StatisticsWindowCommand();
 
+        case ReminderWindowCommand.COMMAND_WORD:
+            return new ReminderWindowCommand();
+
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case UploadCommand.COMMAND_WORD:
+            return new UploadCommandParser().parse(arguments);
+
+        case ViewImageCommand.COMMAND_WORD:
+            return new ViewImageCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -4,7 +4,6 @@ import java.util.StringJoiner;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
@@ -17,19 +16,23 @@ public class DoublePersonCard extends UiPart<Region> {
     private Person buyer;
 
     @FXML
-    private Label name;
+    private Label name1;
     @FXML
-    private Label phone;
+    private Label phone1;
     @FXML
-    private Label address;
+    private Label address1;
     @FXML
-    private Label email;
+    private Label email1;
     @FXML
-    private Label property;
+    private Label property1;
     @FXML
-    private Label preference;
+    private Label preference1;
     @FXML
-    private FlowPane userType;
+    private Label favourite1;
+    @FXML
+    private Label tagBuyer1;
+    @FXML
+    private Label tagSeller1;
 
     @FXML
     private Label name2;
@@ -44,50 +47,63 @@ public class DoublePersonCard extends UiPart<Region> {
     @FXML
     private Label preference2;
     @FXML
-    private FlowPane userType2;
+    private Label favourite2;
+    @FXML
+    private Label tagBuyer2;
+    @FXML
+    private Label tagSeller2;
 
     /**
      * Creates a {@code DoublePersonCard} with the given two persons.
      */
     public DoublePersonCard(Person seller, Person buyer) {
         super(FXML);
+
         this.seller = seller;
         this.buyer = buyer;
 
-        // seller card
-        name.setText(seller.getName().fullName);
-        phone.setText(seller.getPhone().value);
-        address.setText(seller.getAddress().value);
-        email.setText(seller.getEmail().value);
+        setPersonToCard(seller, name1, phone1, address1, email1,
+                property1, preference1, favourite1, tagBuyer1, tagSeller1);
+        setPersonToCard(buyer, name2, phone2, address2, email2,
+                property2, preference2, favourite2, tagBuyer2, tagSeller2);
+    }
 
-        StringJoiner propertyJoiner = new StringJoiner("\n");
-        seller.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
-        property.setText(propertyJoiner.toString());
+    private void setPersonToCard(Person person, Label name, Label phone, Label address, Label email,
+                                 Label property, Label preference, Label favourite, Label tagBuyer, Label tagSeller) {
 
-        if (seller.getPreference().isPresent()) {
-            preference.setText(seller.getPreference().get().toString());
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+
+        if (person.getUserType().isBuyer()) {
+            tagBuyer.setText(person.getUserType().value);
+            tagSeller.setVisible(false);
+            tagSeller.setManaged(false);
         } else {
-            preference.setVisible(false);
+            tagSeller.setText(person.getUserType().value);
+            tagBuyer.setVisible(false);
+            tagBuyer.setManaged(false);
         }
 
-        userType.getChildren().add(new Label(seller.getUserType().value));
-
-        // buyer card
-        name2.setText(buyer.getName().fullName);
-        phone2.setText(buyer.getPhone().value);
-        address2.setText(buyer.getAddress().value);
-        email2.setText(buyer.getEmail().value);
-
-        StringJoiner propertyJoiner2 = new StringJoiner("\n");
-        buyer.getProperties().stream().map(Property::toString).forEach(propertyJoiner2::add);
-        property2.setText(propertyJoiner2.toString());
-
-        if (buyer.getPreference().isPresent()) {
-            preference2.setText(buyer.getPreference().get().toString());
+        if (!person.getFavourite().isUnfavourited()) {
+            favourite.setText(person.getFavourite().toString());
         } else {
-            preference2.setVisible(false);
+            favourite.setManaged(false);
         }
 
-        userType2.getChildren().add(new Label(buyer.getUserType().value));
+        if (person.getProperties().isEmpty()) {
+            property.setManaged(false);
+        } else {
+            StringJoiner propertyJoiner = new StringJoiner("\n");
+            person.getProperties().stream().map(Property::toString).forEach(propertyJoiner::add);
+            property.setText(propertyJoiner.toString());
+        }
+
+        if (person.getPreference().isPresent()) {
+            preference.setText(person.getPreference().get().toString());
+        } else {
+            preference.setManaged(false);
+        }
     }
 }

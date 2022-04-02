@@ -26,9 +26,21 @@ public class HelpWindow extends UiPart<Stage> {
                                                 + "To access the user guide please access it via the URL above.\n"
                                                 + "For a simple guide on how to use the app you may access it "
                                                 + "by clicking any of the buttons on the left.";
-    public static final String COMMAND_LIST = "Add add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS "
-                                            + "pr/PROPERTY_SIZE, PROPERTY_LOCATION, PROPERTY_PRICE, t/USER_TYPE\n";
-
+    public static final String FEATURE_MESSAGE = "Main features of  RealEstatePro\n\n"
+                + "Manage clients - Add, edit and delete clients information as you see fit\n"
+                + "Filter clients - find and sort clients easily to find the information you need\n"
+                + "Match clients - Match clients easily based on their properties and preference\n"
+                + "Reminders - Add reminders so you will no longer be late for any meetings with clients\n"
+                + "Favourite - Favourite clients to keep track of those that require your urgent attention.\n"
+                + "Add Images - Upload the house, maps of your clients for easy reference";
+    public static final String FLAGS_MESSAGE = "Flags for Add and Edit commands: "
+                            + "n/ - Name\n"
+                            + "p/ - Phone Number\n"
+                            + "e/ - Email\n"
+                            + "a/ - Address\n"
+                            + "pr/ - Property\n"
+                            + "pf/ - Preference\n"
+                            + "i/ - Upload image\n";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -126,15 +138,14 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Changes the contents of pane in help window to command list page
+     * Changes the contents of pane in help window to features page
      */
     @FXML
-    public void onCommandClick() {
-        HelpTable helpTable = new HelpTable();
+    public void onFeaturesClick() {
+        HelpText helpText = new HelpText(FEATURE_MESSAGE);
         helpPanePlaceHolder.getChildren().clear();
-        helpPanePlaceHolder.getChildren().setAll(helpTable.getRoot());
+        helpPanePlaceHolder.getChildren().setAll(helpText.getRoot());
     }
-
 
     /**
      * Changes the contents of pane in help window to ui guide page
@@ -146,5 +157,26 @@ public class HelpWindow extends UiPart<Stage> {
         helpPanePlaceHolder.getChildren().clear();
         helpPanePlaceHolder.getChildren().setAll(helpImage.getRoot());
     }
+
+    /**
+     * Changes the contents of pane in help window to command list page
+     */
+    @FXML
+    public void onCommandClick() {
+        HelpTable helpTable = new HelpTable();
+        helpPanePlaceHolder.getChildren().clear();
+        helpPanePlaceHolder.getChildren().setAll(helpTable.getRoot());
+    }
+
+    /**
+     * Changes the contents of pane in help window to features page
+     */
+    @FXML
+    public void onFlagsClick() {
+        HelpText helpText = new HelpText(FLAGS_MESSAGE);
+        helpPanePlaceHolder.getChildren().clear();
+        helpPanePlaceHolder.getChildren().setAll(helpText.getRoot());
+    }
+
 }
 

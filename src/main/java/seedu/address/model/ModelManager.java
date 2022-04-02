@@ -5,16 +5,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Pair;
 import seedu.address.model.person.Person;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,7 +29,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
     private List<Pair<Person>> matchList;
+    private Set<UserImage> viewImageSet;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +44,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
         matchList = new ArrayList<>();
     }
 
@@ -127,8 +134,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Set<UserImage> getViewImageSet() {
+        return viewImageSet;
+    }
+
+    @Override
     public void updateMatchList() {
         matchList = addressBook.match();
+    }
+
+    @Override
+    public void updateViewPerson(Set<UserImage> userImages) {
+        viewImageSet = userImages;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -138,15 +155,20 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getFilteredAndSortedPersonList() {
+        return sortedPersons;
     }
-
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        requireAllNonNull(comparator);
+        sortedPersons.setComparator(comparator);
     }
 
     @Override
@@ -165,7 +187,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && sortedPersons.equals(other.sortedPersons);
     }
 
 }

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Preference;
 import seedu.address.model.person.UserType;
 import seedu.address.model.property.Property;
+import seedu.address.model.userimage.UserImage;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -36,6 +38,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedProperty> properties = new ArrayList<>();
     private final JsonAdaptedPreference preference;
     private final String userType;
+    private final List<JsonAdaptedUserImage> userImages = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +48,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("favourite") boolean favourite,
             @JsonProperty("address") String address, @JsonProperty("properties") List<JsonAdaptedProperty> properties,
             @JsonProperty("preference") JsonAdaptedPreference preference,
-            @JsonProperty("userType") String userType) {
+            @JsonProperty("userType") String userType,
+            @JsonProperty("userImage") List<JsonAdaptedUserImage> userImages) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +57,11 @@ class JsonAdaptedPerson {
         this.address = address;
         this.preference = preference;
         this.userType = userType;
+
+        if (userImages != null) {
+            this.userImages.addAll(userImages);
+        }
+
 
         if (properties != null) {
             this.properties.addAll(properties);
@@ -74,6 +83,9 @@ class JsonAdaptedPerson {
         preference = source.getPreference().isPresent()
                 ? new JsonAdaptedPreference(source.getPreference().get()) : null;
         userType = source.getUserType().value;
+        userImages.addAll(source.getUserImages().stream()
+                .map(JsonAdaptedUserImage::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -90,6 +102,16 @@ class JsonAdaptedPerson {
 
         final Optional<Preference> modelPreference =
                 preference != null ? Optional.of(preference.toModelType()) : Optional.empty();
+
+        final Set<UserImage> modelUserImages = new LinkedHashSet<>();
+        UserImage newImage;
+        for (JsonAdaptedUserImage userImage : userImages) {
+            newImage = userImage.toModelType();
+            if (newImage == null) {
+                continue;
+            }
+            modelUserImages.add(userImage.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -136,7 +158,7 @@ class JsonAdaptedPerson {
         final UserType modelUserType = new UserType(userType);
 
         return new Person(modelName, modelPhone, modelEmail, modelFavourite, modelAddress, modelProperties,
-                modelPreference, modelUserType);
+                modelPreference, modelUserType, modelUserImages);
     }
 
 }
