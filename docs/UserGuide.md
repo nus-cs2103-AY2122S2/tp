@@ -276,11 +276,11 @@ ___
 
 Displays the students whose name or tags contain the input provided.
 
-Command word: `findstudent` / `fs`
+Command word: `findstudents` / `fs`
 
-Format: `findstudent <FIND_CRITERIA>`
+Format: `findstudents <FIND_CRITERIA>`
 
-Examples: `findstudent alex friends` searches the student list for students whose
+Examples: `findstudents alex friends` searches the student list for students whose
 tags or name contains with "alex" **or** friends.
 
 ---
@@ -289,11 +289,11 @@ tags or name contains with "alex" **or** friends.
 
 Displays the lessons whose name or subject contains the input provided.
 
-Command word: `findlesson` / `fl`
+Command word: `findlessons` / `fl`
 
-Format: `findlesson <FIND_CRITERIA>`
+Format: `findlessons <FIND_CRITERIA>`
 
-Examples: `findlesson biology` searches the lesson list for lessons which names
+Examples: `findlessons biology` searches the lesson list for lessons which names
  include "biology"
 
 ---
