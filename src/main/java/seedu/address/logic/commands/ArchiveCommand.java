@@ -70,6 +70,7 @@ public class ArchiveCommand extends RedoableCommand {
 
             return new CommandResult(String.format(MESSAGE_UNARCHIVE_PERSON_SUCCESS, targetIndex.getOneBased()));
         } else {
+
             throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }

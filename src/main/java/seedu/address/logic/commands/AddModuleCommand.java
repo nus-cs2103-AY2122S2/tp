@@ -85,8 +85,6 @@ public class AddModuleCommand extends RedoableCommand {
 
         model.setPerson(personToEdit, editedPerson);
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
         return getCommandResult(personToEdit, editedPerson, modulesToAddActual);
     }
 

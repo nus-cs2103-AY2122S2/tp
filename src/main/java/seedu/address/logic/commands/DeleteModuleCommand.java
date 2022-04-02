@@ -98,7 +98,6 @@ public class DeleteModuleCommand extends RedoableCommand {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName(), modulesToDelete));
     }

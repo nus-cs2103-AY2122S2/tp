@@ -50,7 +50,6 @@ public class ClearModulesCommand extends RedoableCommand {
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson.getName()));
     }

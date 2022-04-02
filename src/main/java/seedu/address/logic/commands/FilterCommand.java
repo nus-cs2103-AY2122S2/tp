@@ -12,7 +12,7 @@ import seedu.address.model.person.NameContainsModulePredicate;
  * Searches persons by their corresponding modules. This allows filtering by modules for users within ModuleMateFinder
  * Keyword matching is case insensitive.
  */
-public class FilterCommand extends RedoableCommand {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_CONSTRAINTS = Module.MESSAGE_CONSTRAINTS;
@@ -27,8 +27,7 @@ public class FilterCommand extends RedoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand(Model model) throws CommandException {
-
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
