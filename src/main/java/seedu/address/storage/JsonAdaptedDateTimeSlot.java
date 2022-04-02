@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -60,7 +61,13 @@ class JsonAdaptedDateTimeSlot {
         if (!DateTimeSlot.isValidDate(dateOfLesson)) {
             throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
         }
-        LocalDate modelDateOfLesson = DateTimeSlot.parseLessonDate(dateOfLesson);
+
+        LocalDate modelDateOfLesson;
+        try {
+            modelDateOfLesson = DateTimeSlot.parseLessonDate(dateOfLesson);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
+        }
 
         if (startTime == null) {
             throw new IllegalValueException(

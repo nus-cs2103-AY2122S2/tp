@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
@@ -18,7 +19,8 @@ public class DateTimeSlot {
                     + "\n Hours and minutes must be non-negative integer."
                     + "\n Minutes cannot be more than 60.";
 
-    private static final DateTimeFormatter acceptedDateFormat = DateTimeFormatter.ofPattern("d-M-y");
+    private static final DateTimeFormatter acceptedDateFormat =
+            DateTimeFormatter.ofPattern("d-M-uuuu").withResolverStyle(ResolverStyle.STRICT);
     private static final DateTimeFormatter acceptedStartTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
     private static final DateTimeFormatter displayedDateFormat = DateTimeFormatter.ofPattern("EEEE '['d MMMM yyyy']'");
