@@ -24,5 +24,6 @@ public class FavouriteWindow extends SingleColumnPersonListWindow {
         reminderStatus.setManaged(false);
         personListPanel = new PersonListPanel(super.logic.getFavouritedPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        setTitle("Favourites");
     }
 }

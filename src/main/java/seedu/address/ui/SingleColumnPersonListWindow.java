@@ -21,6 +21,8 @@ public class SingleColumnPersonListWindow extends UiPart<Stage> {
     protected Label reminderStatus;
     @FXML
     protected StackPane personListPanelPlaceholder;
+    @FXML
+    protected Stage stage;
 
     // Independent Ui parts residing in this Ui container
     protected PersonListPanel personListPanel;
@@ -35,6 +37,7 @@ public class SingleColumnPersonListWindow extends UiPart<Stage> {
     public SingleColumnPersonListWindow(Logic logic) {
         super(FXML);
         this.logic = logic;
+        setTitle("Window");
     }
 
     /**
@@ -70,6 +73,13 @@ public class SingleColumnPersonListWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Sets the title of this Window.
+     */
+    protected void setTitle(String title) {
+        stage.setTitle(title);
     }
 
     /**
