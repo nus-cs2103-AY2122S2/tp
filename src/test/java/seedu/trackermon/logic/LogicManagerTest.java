@@ -1,6 +1,7 @@
 package seedu.trackermon.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
@@ -99,7 +100,7 @@ public class LogicManagerTest {
     @Test
     public void testGetters() {
         // Checking showListFilePath
-        assertEquals(Path.of("data", "Trackermon.json"), logic.getShowListFilePath());
+        assertEquals(model.getShowListFilePath(), logic.getShowListFilePath());
 
         // Checking showList
         model.addShow(ALICE_IN_WONDERLAND);

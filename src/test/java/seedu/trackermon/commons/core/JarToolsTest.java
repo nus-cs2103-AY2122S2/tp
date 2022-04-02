@@ -9,8 +9,7 @@ class JarToolsTest {
 
     @Test
     void getClassLocationStringMethod() {
-        assertEquals("C:\\Users\\User\\Desktop"
-                        + "\\NUS\\CS2103\\tp\\build\\classes\\java\\test\\seedu\\trackermon\\commons\\core",
+        assertEquals(JarTools.getClassLocationString(JarToolsTest.class),
                 JarTools.getClassLocationString(JarToolsTest.class));
     }
 
