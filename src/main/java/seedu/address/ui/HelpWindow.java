@@ -86,7 +86,7 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Example 1: cs/positive"
             + NEWLINE_AND_INDENTATION
-            + "Example 2: b/c"
+            + "Example 2: b/c\n"
 
             + "\n10. IMPORT excel files"
             + NEWLINE_AND_INDENTATION
@@ -114,7 +114,7 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Example 1: resize 1"
             + NEWLINE_AND_INDENTATION
-            + "Example 1: resize 3";
+            + "Example 2: resize 3";
 
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
