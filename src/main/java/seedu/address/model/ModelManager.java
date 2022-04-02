@@ -87,18 +87,6 @@ public class ModelManager implements Model {
 
     //=========== AddressBook ================================================================================
 
-    @Override
-    public void switchAddressBook() {
-        isSwapped = !isSwapped;
-        ReadOnlyAddressBook temp = new AddressBook(addressBook);
-        setAddressBook(archiveBook);
-        setArchiveBook(temp);
-    };
-
-    @Override
-    public boolean isSwapped() {
-        return isSwapped;
-    }
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -161,6 +149,27 @@ public class ModelManager implements Model {
         archiveBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
+
+    @Override
+    public boolean isSwapped() {
+        return isSwapped;
+    }
+
+    @Override
+    public void switchAddressBook() {
+        isSwapped = !isSwapped;
+        ReadOnlyAddressBook temp = new AddressBook(addressBook);
+        setAddressBook(archiveBook);
+        setArchiveBook(temp);
+    };
+
+    @Override
+    public void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook
+            , ReadOnlyAddressBook archiveBook) {
+        this.isSwapped = isSwapped;
+        setAddressBook(addressBook);
+        setArchiveBook(archiveBook);
+    };
 
     //=========== Filtered Person List Accessors =============================================================
 

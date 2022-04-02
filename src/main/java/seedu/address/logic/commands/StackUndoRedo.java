@@ -86,4 +86,18 @@ public class StackUndoRedo {
         return undoStack.equals(stack.undoStack)
                 && redoStack.equals(stack.redoStack);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("Undo Stack: \n");
+        for (RedoableCommand command : undoStack) {
+            s.append(command.getClass().getSimpleName()).append(" ");
+        }
+        s.append("\nRedo Stack: \n");
+        for (RedoableCommand command : redoStack) {
+            s.append(command.getClass().getSimpleName()).append(" ");
+        }
+        return s.toString();
+    }
 }

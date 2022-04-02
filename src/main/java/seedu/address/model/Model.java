@@ -100,6 +100,9 @@ public interface Model {
 
     boolean isSwapped();
 
+    void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook
+            , ReadOnlyAddressBook archiveBook);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

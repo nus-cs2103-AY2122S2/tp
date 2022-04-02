@@ -55,11 +55,12 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         command.setData(undoRedoStack);
+
         commandResult = command.execute(model);
 
         saveBooks();
         undoRedoStack.push(command);
-
+        System.out.println(undoRedoStack);
         return commandResult;
     }
 
