@@ -12,7 +12,9 @@ import java.util.regex.Pattern;
  */
 public class BloodType {
 
-    public static final String MESSAGE_CONSTRAINTS = "We recommend using ABO blood system, but allow any blood system or special blood type values. Blood type can take any values, and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "We recommend using ABO blood system, "
+            + "but allow any blood system or special blood type values. "
+            + "Blood type can take any values, and it should not be blank.";
 
     /*
      * Blood type can take any value

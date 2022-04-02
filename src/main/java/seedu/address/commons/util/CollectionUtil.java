@@ -7,15 +7,11 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import javafx.collections.ObservableList;
-
 
 /**
  * Utility methods related to Collections
  */
 public class CollectionUtil {
-    public static final String EMPTY_PLACEHOLDER = "No record found, please add some!\n";
-
 
     /** @see #requireAllNonNull(Collection) */
     public static void requireAllNonNull(Object... items) {
