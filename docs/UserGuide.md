@@ -125,10 +125,15 @@ Additionally, if you were to simply use `add`, it would open up a new window to 
 ![add window](images/addWindow.png)  
 Then, simply fill up the fields as guided in the window. You can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
-Adding duplicate names is not allowed as most people will not have the exact same name.
-When in `archives`, this functionality is disabled.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about this command:**<br>
+
+* Adding duplicate names is not allowed as most people will not have the exact same name.
+* Phone number must be at least 3 digits short, and at most 25 digits long.
+* When in `archives`, this functionality is disabled.
 </div>
+
 
 ### Adding Module(s) to a Contact : `addmodule`
 
