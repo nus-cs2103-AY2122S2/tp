@@ -126,7 +126,7 @@ It includes a summary to briefly explain all the commands.
 
 The pop-up window also offers a button to copy the URL of the User Guide for easy access to the User Guide.
 
-This is a sample screenshot of what you can expect from the `list` command.
+This is a sample screenshot of what you can expect from the `help` command.
 
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
