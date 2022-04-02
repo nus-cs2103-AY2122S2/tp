@@ -51,6 +51,7 @@ Given below are my contributions to the project.
     * Added tips and warnings to multiple sections [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
     * Added feature notes [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
     * Added links to multiple parts of the markdown [\#104](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/104)
+    * Updated and change user guide to have more information and be more user friendly to read [\#109](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/109)
   * Developer Guide:
     * Added use cases for developer guide [\#27](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/27)
     * Added skeleton for DG additions [\#90](https://github.com/AY2122S2-CS2103T-T12-1/tp/pull/90)
