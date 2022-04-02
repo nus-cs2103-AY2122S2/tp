@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Paths;
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
 
 public class ConfigTest {
@@ -23,5 +26,18 @@ public class ConfigTest {
         assertTrue(defaultConfig.equals(defaultConfig));
     }
 
+    @Test
+    public void hashMethod() {
+        Config defaultConfig = new Config();
+        assertNotNull(defaultConfig);
+        assertTrue(defaultConfig.hashCode() == Objects.hash(defaultConfig.getLogLevel(),
+                defaultConfig.getUserPrefsFilePath()));
+    }
+
+    @Test
+    public void getUserPrefsFilePath_fromEditor_success() {
+        Config defaultConfig = new Config();
+        assertEquals(Paths.get("preferences.json"), defaultConfig.getUserPrefsFilePath());
+    }
 
 }

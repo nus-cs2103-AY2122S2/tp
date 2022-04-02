@@ -1,6 +1,7 @@
 package seedu.trackermon.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
@@ -9,14 +10,19 @@ import static seedu.trackermon.logic.commands.CommandTestUtil.RATING_DESC_HIGH;
 import static seedu.trackermon.logic.commands.CommandTestUtil.STATUS_DESC_COMPLETED;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
+import static seedu.trackermon.testutil.TypicalShows.HIMYM;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.trackermon.AppParameters;
+import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.logic.commands.AddCommand;
 import seedu.trackermon.logic.commands.CommandResult;
 import seedu.trackermon.logic.commands.ListCommand;
@@ -29,8 +35,13 @@ import seedu.trackermon.model.UserPrefs;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.storage.JsonShowListStorage;
 import seedu.trackermon.storage.JsonUserPrefsStorage;
+import seedu.trackermon.storage.ShowListStorage;
+import seedu.trackermon.storage.Storage;
 import seedu.trackermon.storage.StorageManager;
+import seedu.trackermon.storage.UserPrefsStorage;
+import seedu.trackermon.testutil.Assert;
 import seedu.trackermon.testutil.ShowBuilder;
+import seedu.trackermon.testutil.ShowUtil;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -44,7 +55,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonShowListStorage showListStorage =
-                new JsonShowListStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonShowListStorage(temporaryFolder.resolve("Trackermon.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(showListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -92,6 +103,20 @@ public class LogicManagerTest {
     @Test
     public void getFilteredShowList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredShowList().remove(0));
+    }
+
+    @Test
+    public void testGetters() {
+        // Checking showListFilePath
+        assertEquals(Path.of("data", "Trackermon.json"), logic.getShowListFilePath());
+
+        // Checking showList
+        model.addShow(ALICE_IN_WONDERLAND);
+
+        assertEquals(Arrays.asList(ALICE_IN_WONDERLAND), logic.getShowList().getShows());
+
+        // Checking GuiSettings
+        assertEquals(new GuiSettings(), logic.getGuiSettings());
     }
 
     /**
