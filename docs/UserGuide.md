@@ -29,7 +29,6 @@ title: User Guide
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
 
----
 
 ## Introduction
 
@@ -164,12 +163,12 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | Parameter  | Prefix | Condition                                                                           |
 |------------|--------|-------------------------------------------------------------------------------------|
 | KEYWORD    | None   | A **single word** that only contains **alphanumeric** characters.<br>Example: `S1` `Attack` `Hero2`
-| INDEX      | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                    |
+| INDEX      | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                            |
 | NAME       | n/     | Show name must be **unique** and contains only **alphanumeric** characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.         |
 | STATUS     | s/     | Status can only contains _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                |
 | TAG        | t/     | Tag must only be a keyword that is **less than 20 characters**.                     |
 | COMMENT    | c/     | Comment ????                                                                        |
-| RATING     | r/     | Rating must be a whole number from 0 to 5                                           |
+| RATING     | r/     | Rating must be a **whole number** from **0 to 5**                                   |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
