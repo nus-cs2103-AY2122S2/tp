@@ -84,8 +84,8 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
     * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-    * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
+    * e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being a low proficiency level and 100.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY]…​` as `[s/Java_90]`
@@ -205,6 +205,8 @@ Format: `filter KEYWORD`
 
 * The search is case-insensitive. e.g `java` will match `Java`
 * Only full words will be matched e.g. `C` will not match `C#`
+* This command accepts multiple skills to be filtered,
+e.g. `filter c java` will filter all those with `C` <b><u>AND</u></b> `Java`.
 
 Examples:
 * `filter C` returns `Alex Teo`, `Lye Jia Yang` and `Toh Zhan Qing`
@@ -221,6 +223,7 @@ Format: `sort SKILL`
 * The search is case-insensitive. e.g `java` will match `Java`
 * Only full words will be matched e.g. `C` will not match `C#`
 * The list will be shown in descending level of skill proficiency
+* This command only accepts <b><u>ONE</u></b> skill as the sorting criteria.
 
 Examples:
 * `sort Python` shows persons with `Python` as a skill in descending order of proficiency
