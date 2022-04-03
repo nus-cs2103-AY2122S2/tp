@@ -134,7 +134,6 @@ public class ProductCard extends UiComponent<HBox> {
     private class EventExpand implements EventHandler<ActionEvent> {
         public void handle(ActionEvent event) {
             if (isShowingItems) {
-                itemTable.removeListener();
                 itemTable = new ItemTable(getMainWindow(), product, index);
                 itemTableContainer.getChildren().add(itemTable.getRoot());
             } else {
