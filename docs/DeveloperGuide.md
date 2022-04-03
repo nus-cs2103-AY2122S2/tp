@@ -347,7 +347,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
 12. Each `Person` that appears in the filtered list will then be deleted by invoking `model#deletePerson(Person person)`.
 13. Lastly, the `DeleteModuleCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
-The following sequence diagram shows how the delete operation works:
+The following sequence diagram shows how the deleteModule operation works:
 
 ![DeleteModuleCommandSequenceDiagram-1](images/DeleteModuleCommandSequenceDiagram-1.png)
 
