@@ -13,8 +13,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -32,7 +31,7 @@ public class PieChartWindow extends UiPart<Stage> {
     private TreeMap<String, TreeMap<String, Integer>> covidStatsDataByBlocks;
     private PieChart pieChart;
     private Scene chartScene;
-    private HBox charts;
+    private VBox charts;
 
     /**
      * Creates a new PieChartWindow.
@@ -50,7 +49,7 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     public PieChartWindow() {
         this(new Stage());
-        charts = new HBox();
+        charts = new VBox();
         covidStatsDataByBlocks = SummariseCommand.getCovidStatsByBlockDataList();
         covidStatsByBlockData = new TreeMap<>();
         positiveStatsByFacultyData = SummariseCommand.getPositiveStatsByFacultyData();
@@ -62,10 +61,8 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     private void execute() {
         collateBlocksChart();
-        HBox facultyChart = createFacultyChartPositive();
-        VBox allPieCharts = new VBox(charts);
-        allPieCharts.getChildren().add(facultyChart);
-        chartScene = makeChartScene(allPieCharts);
+        charts.getChildren().add(createFacultyChartPositive());
+        chartScene = makeChartScene(charts);
         this.getRoot().setScene(chartScene);
     }
 
@@ -87,12 +84,12 @@ public class PieChartWindow extends UiPart<Stage> {
     /**
      * Creates Bar Chart for hall containing Covid Positive statistics only, by Faculty.
      */
-    private HBox createFacultyChartPositive() {
+    private VBox createFacultyChartPositive() {
         if (positiveStatsByFacultyData.isEmpty()) {
             // No positive students to create chart
-            return new HBox();
+            return new VBox();
         }
-        HBox facChart = new HBox();
+        VBox facChart = new VBox();
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis(0, SummariseCommand.getHighestPositiveByFaculty(), 1);
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
@@ -167,7 +164,8 @@ public class PieChartWindow extends UiPart<Stage> {
      * @return Scene containing the pie chart
      */
     private Scene makeChartScene(VBox pieCharts) {
-        chartScene = new Scene(pieCharts);
+        ScrollPane sp = new ScrollPane(pieCharts);
+        chartScene = new Scene(sp, 450, 50);
         return chartScene;
     }
 
