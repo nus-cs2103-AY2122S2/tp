@@ -11,7 +11,7 @@ import unibook.commons.util.AppUtil;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Names should only contain alphabetical characters and spaces, and it should not be blank";
+        "Names should only contain up to 50 alphabetical characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -36,7 +36,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
 
