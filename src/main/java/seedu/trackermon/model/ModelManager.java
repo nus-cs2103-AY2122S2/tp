@@ -113,16 +113,16 @@ public class ModelManager implements Model {
 
     @Override
     public void addShow(Show show) {
-        //this line is to make the show add to last index
-        updateSortedShowList(COMPARATOR_SHOW_ALL_SHOWS);
         showList.addShow(show);
+        sortedShows.setComparator(null);
+        //sortedShows = new SortedList<>(this.showList.getShows());
     }
 
     @Override
     public void setShow(Show target, Show editedShow) {
         requireAllNonNull(target, editedShow);
         showList.setShow(target, editedShow);
-        sortedShows = new SortedList<>(this.showList.getShows());
+        sortedShows.setComparator(null);
     }
 
     //=========== Filtered Show List Accessors =============================================================
