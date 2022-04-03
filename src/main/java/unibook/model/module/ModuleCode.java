@@ -12,10 +12,9 @@ public class ModuleCode {
         "Module codes should only contain up to 10 alphanumeric characters and cannot contain spaces.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * A module code can contain any character that is not a whitespace.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]*$";
+    public static final String VALIDATION_REGEX = "^\\S*$";
 
     public final String moduleCode;
 

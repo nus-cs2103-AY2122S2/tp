@@ -1,6 +1,7 @@
 package unibook.model.module.group;
 
 import static java.util.Objects.requireNonNull;
+import static unibook.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,7 +19,12 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NAME_CONSTRAINT_MESSAGE = "A group name cannot have whitespaces, and also must be" +
+            "limited in length to less than 50 characters.";
+    //Group name can only have alphanumeric characters
+    public static final String VALIDATION_REGEX = "^\\S*$";
+
+    private static final int MAX_GROUP_NAME_LENGTH = 50;
 
     private String name;
     private Module module;
@@ -35,6 +41,7 @@ public class Group {
      */
     public Group(String name, Module module, ObservableList<Student> members,
                  ObservableList<LocalDateTime> meetingTimes) {
+        checkArgument(isValidName(name), NAME_CONSTRAINT_MESSAGE);
         this.name = name;
         this.module = module;
         this.meetingTimes = meetingTimes;
@@ -49,10 +56,7 @@ public class Group {
      * @param meetingTimes meeting times of the group.
      */
     public Group(String name, Module module, ObservableList<LocalDateTime> meetingTimes) {
-        this.name = name;
-        this.module = module;
-        this.meetingTimes = meetingTimes;
-        this.members = FXCollections.observableArrayList();
+        this(name, module, FXCollections.observableArrayList(), meetingTimes);
     }
 
     /**
@@ -62,20 +66,14 @@ public class Group {
      * @param module that the group is in.
      */
     public Group(String name, Module module) {
-        this.name = name;
-        this.module = module;
-        this.meetingTimes = FXCollections.observableArrayList();
-        this.members = FXCollections.observableArrayList();
+        this(name, module, FXCollections.observableArrayList(), FXCollections.observableArrayList());
     }
 
     /**
      * Instantiates a group object with only the name, to be used to match groups to delete
      */
     public Group(String name) {
-        this.name = name;
-        this.module = null;
-        this.meetingTimes = FXCollections.observableArrayList();
-        this.members = FXCollections.observableArrayList();
+        this(name, null, FXCollections.observableArrayList(), FXCollections.observableArrayList());
     }
 
     /**
@@ -123,7 +121,7 @@ public class Group {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
 
