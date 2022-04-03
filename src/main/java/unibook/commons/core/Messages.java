@@ -32,6 +32,7 @@ public class Messages {
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
 
     //ListCommand
+    public static final String MESSAGE_FIELD_EMPTY = "%s field cannot be empty!";
     public static final String MESSAGE_CHANGED_TO_MODULE_PAGE = "Changed page to Module Page!";
     public static final String MESSAGE_CHANGED_TO_PERSON_PAGE = "Changed page to Person Page!";
     public static final String MESSAGE_CHANGED_TO_GROUP_PAGE = "Changed page to Group Page!";
@@ -54,7 +55,6 @@ public class Messages {
     public static final String MESSAGE_GROUP_FIELD_MISSING = "The g/<GROUPNAME> field is missing!";
     public static final String MESSAGE_VIEW_FIELD_MISSING = "The v/<VIEW> field is missing!";
     public static final String MESSAGE_GROUP_NOT_IN_MODULE = "The group %s does not exist in the module!";
-
     public static final String MESSAGE_GROUP_NOT_IN_UNIBOOK = "The group %s does not exist in Unibook!";
     public static final String MESSAGE_DISPLAYED_GROUPS_WITH_NAME = "Displayed group(s) with name %s!";
     public static final String MESSAGE_DISPLAYED_PEOPLE_IN_GROUP = "Displayed people in %s %s!";
