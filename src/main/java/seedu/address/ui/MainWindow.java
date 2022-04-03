@@ -184,7 +184,7 @@ public class MainWindow extends UiPart<Stage> {
             List<String> res;
             res = converter.jsonToPerson(selectedFile);
             for (int i = 0; i < res.size(); i++) {
-               executeCommand(res.get(i));
+                executeCommand(res.get(i));
             }
         }
     }
