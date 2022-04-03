@@ -320,7 +320,7 @@ Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 | Parameter  | Description                              | Constraints                                                                                                                               |
 |------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`.                            |
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`                             |
 | `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                               |
 | `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                               |
 | `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                               |
@@ -366,12 +366,15 @@ Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 * The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
-  * `NAME` must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`.
-  * `DATE` and `TIME` denote the appointment's starting date and time respectively.<br>
-    Both `DATE` and `TIME` **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
-  * `DURATION` is the duration of the appointment in *minutes*, and **must be a positive [integer](#global-input-constraints)**.
-  * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the [index number](#displayed-indexes) shown in the displayed person list.<br>
-    The String `none` is used to dissociate the person associated to the appointment.
+
+| Parameter  | Description                              | Constraints                                                                                                                                                                                                                                                            |
+|------------|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`                                                                                                                                                          |
+| `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                                                                                                                                                            |
+| `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                                                                                                                                                            |
+| `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                                                                                                                                                            |
+| `PERSON`   | A person associated with the appointment | Must be a positive integer or the String `none`.<br> If a positive integer is provided, it refers to the [index number](#displayed-indexes) shown in the displayed person list. <br> The String `none` is used to dissociate the person associated to the appointment. | 
+
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
