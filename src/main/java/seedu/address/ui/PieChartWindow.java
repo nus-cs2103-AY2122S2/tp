@@ -57,11 +57,12 @@ public class PieChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Organises the data into Pie Charts in a new window.
+     * Organises the data into Charts in a new window.
      */
     private void execute() {
         collateBlocksChart();
         charts.getChildren().add(createFacultyChartPositive());
+        charts.setSpacing(70);
         chartScene = makeChartScene(charts);
         this.getRoot().setScene(chartScene);
     }
@@ -90,13 +91,16 @@ public class PieChartWindow extends UiPart<Stage> {
             return new VBox();
         }
         VBox facChart = new VBox();
+        // Makes the x-axis
         CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis(0, SummariseCommand.getHighestPositiveByFaculty(), 1);
-        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setTitle("Covid Positive by Faculty");
         xAxis.setLabel("Faculty");
+        NumberAxis yAxis = new NumberAxis(0, SummariseCommand.getHighestPositiveByFaculty(), 1);
+        // Makes the y-axis
         yAxis.setLabel("Number of Students");
         yAxis.setMinorTickVisible(false);
+        // Combine x-axis and y-axis into a bar chart
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Covid Positive by Faculty");
         barChart.setBarGap(50);
         barChart.setCategoryGap(150);
 
@@ -165,7 +169,7 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     private Scene makeChartScene(VBox pieCharts) {
         ScrollPane sp = new ScrollPane(pieCharts);
-        chartScene = new Scene(sp, 450, 50);
+        chartScene = new Scene(sp, 550, 100);
         return chartScene;
     }
 
