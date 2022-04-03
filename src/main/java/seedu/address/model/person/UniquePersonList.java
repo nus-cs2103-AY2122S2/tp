@@ -45,26 +45,55 @@ public class UniquePersonList implements Iterable<Person> {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < internalList.size(); i++) {
             Person otherPerson = internalList.get(i);
-            if (otherPerson.isSamePerson(toCheck)) {
-                if (otherPerson.getPhone().equals(toCheck.getPhone()) && !stringBuilder.toString().contains("Phone")) {
-                    stringBuilder.append("Phone");
+            if (otherPerson.isSamePerson(toCheck)) { // Unique attributes already exist in the address book.
+                if (otherPerson.getPhone().equals(toCheck.getPhone())) {
+                    appendPhoneAttributeToString(stringBuilder);
                 }
-                if (otherPerson.getMatriculationNumber().equals(toCheck.getMatriculationNumber())
-                        && !stringBuilder.toString().contains("Matriculation Number")) {
-                    if (!stringBuilder.toString().isEmpty()) {
-                        stringBuilder.append(", ");
-                    }
-                    stringBuilder.append("Matriculation Number");
+                if (otherPerson.getMatriculationNumber().equals(toCheck.getMatriculationNumber())) {
+                    appendMatriculationNumberAttributeToString(stringBuilder);
                 }
-                if (otherPerson.getEmail().equals(toCheck.getEmail()) && !stringBuilder.toString().contains("Email")) {
-                    if (!stringBuilder.toString().isEmpty()) {
-                        stringBuilder.append(" and ");
-                    }
-                    stringBuilder.append("Email");
+                if (otherPerson.getEmail().equals(toCheck.getEmail())) {
+                    appendEmailAttributeToString(stringBuilder);
                 }
             }
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * Appends the necessary syntax for the Phone attribute into the non-unique attribute type string.
+     * @param stringBuilder Non-unique attribute type string
+     */
+    private void appendPhoneAttributeToString(StringBuilder stringBuilder) {
+        if (!stringBuilder.toString().contains("Phone")) {
+            stringBuilder.append("Phone");
+        }
+    }
+
+    /**
+     * Appends the necessary syntax for the Matriculation Number attribute into the non-unique attribute type string.
+     * @param stringBuilder Non-unique attribute type string
+     */
+    private void appendMatriculationNumberAttributeToString(StringBuilder stringBuilder) {
+        if (!stringBuilder.toString().contains("Matriculation Number")) {
+            if (!stringBuilder.toString().isEmpty()) {
+                stringBuilder.append(", ");
+            }
+            stringBuilder.append("Matriculation Number");
+        }
+    }
+
+    /**
+     * Appends the necessary syntax for the Email attribute into the non-unique attribute type string.
+     * @param stringBuilder Non-unique attribute type string
+     */
+    private void appendEmailAttributeToString(StringBuilder stringBuilder) {
+        if (!stringBuilder.toString().contains("Email")) {
+            if (!stringBuilder.toString().isEmpty()) {
+                stringBuilder.append(" and ");
+            }
+            stringBuilder.append("Email");
+        }
     }
 
     /**
