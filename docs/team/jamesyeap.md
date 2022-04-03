@@ -12,7 +12,6 @@ It is written in Java, and has about 10 kLoC.
 Given below are my contributions to the project.
 
 # Summary of Contributions
-
 ## Code contributed
 [Click here](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jamesyeap&tabRepo=AY2122S2-CS2103T-W11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false) for a summary of code contributed by me!
 
@@ -52,5 +51,5 @@ Given below are my contributions to the project.
 `to be added soon`
 
 # Contributions beyond the project team
-`to be added soon`
+1. Provided an [alternative solution](https://github.com/nus-cs2103-AY2122S2/forum/issues/58#issuecomment-1025671937) to an issue faced by another student in the iP.
 
