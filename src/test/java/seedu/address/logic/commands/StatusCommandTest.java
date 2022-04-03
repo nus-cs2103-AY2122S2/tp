@@ -101,6 +101,7 @@ public class StatusCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new AddressBook(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(statusCommand, model, expectedMessage, expectedModel);

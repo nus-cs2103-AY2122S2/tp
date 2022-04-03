@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.List;
 
@@ -87,12 +85,9 @@ public class StatusCommand extends RedoableCommand {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), status, personToEdit.getModules(), personToEdit.getComment());
 
-        if (isArchiveBook()) {
-            model.setArchivedPerson(personToEdit, editedPerson);
-        } else {
-            model.setPerson(personToEdit, editedPerson);
-        }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        model.setPerson(personToEdit, editedPerson);
+
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 }

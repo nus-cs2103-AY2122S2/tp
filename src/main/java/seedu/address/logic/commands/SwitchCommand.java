@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 /**
  * Switches AddressBook to the archivedAddressBook
  */
-public class SwitchCommand extends Command {
+public class SwitchCommand extends RedoableCommand {
     public static final String COMMAND_WORD = "switch";
 
     public static final String MESSAGE_SUCCESS = "Switched AddressBook!";
@@ -22,9 +22,9 @@ public class SwitchCommand extends Command {
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true, "");
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true);
     }
 }

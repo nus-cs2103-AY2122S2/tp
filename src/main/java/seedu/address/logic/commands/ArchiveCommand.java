@@ -59,9 +59,25 @@ public class ArchiveCommand extends RedoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        int oneBasedIndex = targetIndex.getOneBased();
-        String oneBasedIndexString = Integer.toString(oneBasedIndex);
-        return new CommandResult(oneBasedIndexString, false, false, false, false, false, false, this.mode);
+        Person targetPerson = lastShownList.get(targetIndex.getZeroBased());
+
+        if (model.hasArchivedPerson(targetPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON_ARCHIVE);
+        }
+
+        model.deletePerson(targetPerson);
+        model.addArchivedPerson(targetPerson);
+
+        if (mode.equals(COMMAND_WORD)) {
+
+            return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, targetIndex.getOneBased()));
+        } else if (mode.equals(ALT_COMMAND_WORD)) {
+
+            return new CommandResult(String.format(MESSAGE_UNARCHIVE_PERSON_SUCCESS, targetIndex.getOneBased()));
+        } else {
+
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+        }
     }
 
     @Override

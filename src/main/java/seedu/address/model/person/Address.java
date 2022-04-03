@@ -56,6 +56,6 @@ public class Address implements Comparable<Address> {
 
     @Override
     public int compareTo(Address address) {
-        return this.value.compareTo(address.value);
+        return this.value.compareToIgnoreCase(address.value);
     }
 }

@@ -11,7 +11,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends RedoableCommand {
+public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -27,7 +27,7 @@ public class FindCommand extends RedoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
 
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);

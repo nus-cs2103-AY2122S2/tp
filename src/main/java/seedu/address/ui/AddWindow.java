@@ -336,8 +336,7 @@ public class AddWindow extends UiPart<Stage> {
 
         if (!isValidModule()) {
             // Cannot use Module.MESSAGE_CONSTRAINTS here as it would be too long to fit within AddWindow
-            errorLabel.setText("Modules names should have 2-3 letters prefix\n"
-                    + "followed by 4 digits and an optional letter\n");
+            errorLabel.setText(Module.MESSAGE_CONSTRAINTS);
             return;
         }
 

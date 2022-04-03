@@ -46,8 +46,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAddressBookStorage archiveBooksStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("archivedAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, archiveBooksStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -74,9 +76,12 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonAddressBookStorage archiveBookStorage =
+                new JsonAddressBookIoExceptionThrowingStub(
+                        temporaryFolder.resolve("ioExceptionArchiveAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, archiveBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
