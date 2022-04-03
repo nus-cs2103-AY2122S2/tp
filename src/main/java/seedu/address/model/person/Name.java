@@ -16,8 +16,11 @@ import java.util.List;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final int MAXIMUM_NAME_CHARACTERS_LENGTH = 60;
+    public static final String MESSAGE_CONSTRAINTS_FORMAT=
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS_CHARACTER_LENGTH =
+            String.format("Names should only not contain more than %d characters", MAXIMUM_NAME_CHARACTERS_LENGTH);
 
     /*
      * The first character of the address must not be a whitespace,
@@ -36,7 +39,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         searchName = addNameFormat(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS_FORMAT);
         fullName = name;
     }
 
@@ -63,6 +66,15 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is a less than the maximum allowed name characters.
+     *
+     * @param test string to be tested to determine if valid name length in characters.
+     * @return boolean where true if a given string is a valid name in characters, false otherwise.
+     */
+    public static boolean isValidNameLength(String test) {
+        return test.length() < MAXIMUM_NAME_CHARACTERS_LENGTH + 1;
+    }
 
     @Override
     public String toString() {
