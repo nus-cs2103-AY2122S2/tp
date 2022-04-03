@@ -24,25 +24,27 @@ We aim to help store keeper to simplify the process of managing inventory and re
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ibook.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-4/tp/releases).
+2. Download the latest `ibook.jar` from [here](https://github.com/AY2122S2-CS2103T-T09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your iBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your iBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app<sup>[1](#applaunch-caveat)</sup>. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all products.
 
    * **`add n:Maggie Mee c:noodles p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
-   * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
+   * **`delete 3`** : Deletes the 3rd product shown in the displayed list.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
+
+<a name="applaunce-caveat">1</a>: For Mac users, if you are having problems with untrusted developers, you may right click on the app and select `Open`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,7 +104,7 @@ The application window is divided into a command box, results window as well as 
 
 The main mode of navigation in iBook is through the Command Line Interface (CLI). You can enter commands into the command box and press `Enter` to execute them. The results window would then display the results from executing the command. The table would also update accordingly based on the command ran.
 
-Alternatively, you can also interact with the application through buttons, such as the `Add Product` button, where a popup would be displayed for you to enter the different fields once it is clicked.
+Alternatively, you can also interact with the application through buttons, such as the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/> button, where a popup would be displayed for you to enter the different fields once it is clicked.
 
 #### 2.2.4 Command Format
 
@@ -114,7 +116,10 @@ Alternatively, you can also interact with the application through buttons, such 
   e.g. in `add n:NAME`, `NAME` is an input which can be supplied as `add n:Maggie Mee`.
 
 * Inputs in square brackets are optional.<br>
-  e.g. if the command specifies `n:NAME [t:TAG]`, both `n:Maggie Mee c:noodle` and `n:Maggie Mee` are acceptable.
+  e.g. if the command specifies `n:NAME [c:CATEGORY]`, both `n:Maggie Mee c:noodle` and `n:Maggie Mee` are acceptable.
+
+* Inputs separated by a vertical bar (`|`) inside brackets denote that either one of them can be provided, *but not both*.<br>
+  e.g. if the command specifies `[p:PRICE | sp:START_PRICE ep:END_PRICE]`, then an empty input, `p:2.00`, and `sp:1.00 ep:5.00` are acceptable. However, `p:2.00 sp:1.00 ep:5.00` is not accepted.
 
 * Inputs of a command can be in any order.<br>
   e.g. if the command specifies `n:NAME c:CATEGORY`, `c:CATEGORY n:NAME` is also acceptable.
@@ -126,27 +131,27 @@ Alternatively, you can also interact with the application through buttons, such 
 
 <div markdown="block" class="alert alert-warning">
 
-**:exclamation: Important notes about inputs**<br>
+**:exclamation: Important notes about inputs:**<br>
 
-Inputs containing a colon (`:`) might cause unexpected behaviour. You are strongly recommended to add `\` before a colon character in your input.<br>
+Inputs containing a colon (`:`) might cause unexpected behaviour. You are strongly recommended to add a backslash (`\`) before a colon character in your input.<br>
 e.g. To provide a product name of `Nescafe: special edition`, you should type `n:Nescafe\: special edition`.
 
 </div>
 
 #### 2.2.5 Command inputs
 
-| Input            | Description                                                            |
-|:-----------------|:-----------------------------------------------------------------------|
-| `NAME`           | Name of the product.                                                   |
-| `CATEGORY`       | Category of the product.                                               |
-| `PRICE`          | Price of the product. A valid price is a positive number.              |
-| `START_PRICE`    | Start price of the product. Used for find command.                     |
-| `END_PRICE`      | End price of the product. Used for find command.                       |
-| `DESCRIPTION`    | Description of the product.                                            |
-| `EXPRIRY_DATE`   | Expiry date of the item.                                               |
-| `QUANTITY`       | Quantity of the item.                                                  |
-| `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date. |
-| `DISCOUNT_START` | Number of days before the expiry date to start the discount.                     |
+| Input            | Description                                                                                  |
+|:-----------------|:---------------------------------------------------------------------------------------------|
+| `NAME`           | Name of the product.                                                                         |
+| `CATEGORY`       | Category of the product.                                                                     |
+| `PRICE`          | Price of the product. A valid price is a positive number, *possibly prepended by a `$` sign* |
+| `START_PRICE`    | Start price of the product. Used for `find` command.                                         |
+| `END_PRICE`      | End price of the product. Used for `find` command.                                           |
+| `DESCRIPTION`    | Description of the product.                                                                  |
+| `EXPRIRY_DATE`   | Expiry date of the item.                                                                     |
+| `QUANTITY`       | Quantity of the item.                                                                        |
+| `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date.                       |
+| `DISCOUNT_START` | Number of days before the expiry date to start the discount.                                 |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -214,7 +219,7 @@ After filling in the required fields, click
 
 #### 3.1.4 Deleting products : `delete`
 
-Deletes the product at a specified INDEX.
+Deletes the product at a specified `INDEX`.
 
 Format: `delete INDEX`
 
@@ -268,7 +273,7 @@ After a valid find command is entered, a filter tag will appear on top of the ta
 Example:
 <img align="center" src = "images/ui-icons/filter-tag.png" alt="Filter" height = "25"/>
 
-Click `X` on the filter tag to remove the filtering.
+Click <img align="center" src = "images/ui-icons/x.png" alt="X" height = "25"/> on the filter tag to remove the filtering.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -383,7 +388,7 @@ Format: `delete-item INDEX-INDEX`
 Examples:
 * `list` followed by `delete-item 1-2` deletes the 2nd item of the 1st product currently shown.
 
-*Alternatively*
+*Alternatively*,
 
 Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
 
@@ -409,7 +414,7 @@ Format: `clear`
 
 #### 3.3.2 Undoing most recent changes : `undo`
 
-Undoes the most recent changes(actions involving add/update/delete product/item) made to iBook.
+Undoes the most recent changes (actions involving `add/update/delete` `product/item`) made to iBook.
 
 Format: `undo`
 
@@ -462,15 +467,15 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ### 7.1 Product Commands
 
-| Action           | Format, Examples                                                                                                                                                                        |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n:NAME c:CATEGORY e:EXPRIRY_DATE p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START` <br> e.g., `add n:Maggie Mee c:noodles e:01/01/2022 p:3.00 d:curry flavour dr:50 ds:10` |
-| **List**         | `list`                                                                                                                                                                                  |
-| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                                                         |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
-| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                                                      |
-| **Expired**      | `expired`                                                                                                                                                                               |
-| **Out of Stock** | `out-of-stock`                                                                                                                                                                          |
+| Action           | Format, Examples                                                                                                                                                           |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START` <br> e.g., `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:50 ds:10` |
+| **List**         | `list`                                                                                                                                                                     |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                                            |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                        |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                                         |
+| **Expired**      | `expired`                                                                                                                                                                  |
+| **Out of Stock** | `out-of-stock`                                                                                                                                                             |
 
 ### 7.2 Item Commands
 
