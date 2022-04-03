@@ -64,7 +64,7 @@ public class ProductCard extends UiComponent<HBox> {
         this.index = index;
         this.product = product;
         this.isShowingItems = false;
-        this.itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
+        this.itemTable = new ItemTable(getMainWindow(), product, index);
         initRotate();
         populateField();
     }
@@ -93,7 +93,6 @@ public class ProductCard extends UiComponent<HBox> {
         price.setText(product.getPrice().toString());
         discount.setText(discountText());
         description.setText(product.getDescription().toString());
-        quantity.setText(product.getTotalQuantity().toString());
     }
 
     private ProductCard getProductCard() {
@@ -136,7 +135,7 @@ public class ProductCard extends UiComponent<HBox> {
         public void handle(ActionEvent event) {
             if (isShowingItems) {
                 itemTable.removeListener();
-                itemTable = new ItemTable(getMainWindow(), getProductCard(), product, index);
+                itemTable = new ItemTable(getMainWindow(), product, index);
                 itemTableContainer.getChildren().add(itemTable.getRoot());
             } else {
                 itemTableContainer.getChildren().clear();
