@@ -520,9 +520,9 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 | Action           | Format, Examples                                                                                                             |
 |------------------|------------------------------------------------------------------------------------------------------------------------------|
 | **Help**         | `help`                                                                                                                       |
-| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                      |
+| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `add n/ReZero s/watching r/3 t/Anime`                                      |
 | **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                          |
-| **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
+| **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `edit 1 n/ReZero s/watching r/3 c/Good show t/Anime` |
 | **List**         | `list`                                                                                                                       |
 | **Clear**        | `clear`                                                                                                                      |
 | **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                     |
