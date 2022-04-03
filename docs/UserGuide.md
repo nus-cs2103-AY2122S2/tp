@@ -162,9 +162,9 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 | Parameter  | Prefix | Condition                                                                           |
 |------------|--------|-------------------------------------------------------------------------------------|
-| KEYWORD    | None   | A **single word** that only contains **alphanumeric** characters.<br>Example: `S1` `Attack` `Hero2`
+| KEYWORD    | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`
 | INDEX      | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                            |
-| NAME       | n/     | Show name must be **unique** and contains only **alphanumeric** characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.         |
+| NAME       | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.|
 | STATUS     | s/     | Status can only contains _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                |
 | TAG        | t/     | Tag must only be a keyword that is **less than 20 characters**.                     |
 | COMMENT    | c/     | Comment ????                                                                        |
@@ -196,10 +196,9 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 **Format:** `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-danger">
-**:exclamation: Caution:**<br>
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
 
+**:exclamation: Caution:**<br>
+* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `INDEX` `STATUS` `TAG` `COMMENT` `RATING`.
 </div>
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
@@ -216,10 +215,11 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Format:** `delete INDEX`
 
-<div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
+<div markdown="block" class="alert alert-danger"> 
+
+**:exclamation: Caution:**<br>
 * Once a show is deleted, you cannot retrieve it back!
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5. 
+* Refer to [parameter conditions](#parameter-conditions) section about `INDEX`.
 
 </div>
 
@@ -252,13 +252,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
-* **An [index](#command-structure)** to edit must be provided.
-* **At least a [prefix](#command-structure) followed by a [parameter](#command-structure)** to edit must be provided.
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-* Editing a `TAG` parameter will cause all the **previous tags of the show to be deleted**.
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
+* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `INDEX` `STATUS` `TAG` `COMMENT` `RATING`.
+* Editing a `TAG` parameter can cause all the **previous tags of the show to be deleted**.
 
 :exclamation:**Adding, Editing and Deleting a Tag:** <br>
 * Doing any of these can result in your tags being deleted if you do not specify existing tags you want to keep. <br>
@@ -268,6 +263,14 @@ Multiple show [parameters](#command-structure) can be edited at the same time
   * `edit INDEX <Specify all tags in show except the tag you want to delete>`
 * Editing a Tag:
   * `edit INDEX <Specify all other tags in show> t/EDITED_TAG`
+  * Example
+  * <img src="images/EditTagExample.png">
+  * Adding a new Tag `Mystery` to show named `Another`
+    * `edit 1 t/Anime t/Horror t/Mystery`
+  * Deleting the Tag `Movie` in show named `Spiderman`
+    * `edit 2 t/Action`
+  * Editing the Tag `Comdy` to `Comedy` to show named `Chicken papa`
+    * `edit 3 t/Anime t/Comedy`
 
 </div>
 
@@ -322,10 +325,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 **:information_source: Notes about General Find:**<br>
 * An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching [parameters](#command-structure) will be returned.
-* The `KEYWORD` refers to the input you enter after `find`.
-* `find` must be followed with a space before entering the `KEYWORD`.
-* The `KEYWORD` **can be a word or number** such as hero, S1,...
-* The `KEYWORD` must contain **at least one word** and it **must not be empty**.
+* Refer to [parameter conditions](#parameter-conditions) section about `KEYWORD`.
 * `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
 
 </div>
@@ -356,9 +356,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 </div>
 
 <div markdown="block" class="alert alert-danger">
-
-:exclamation:**Caution:**<br>
-* There must be at **least one [prefix](#command-structure) followed by a [parameter](#command-structure)** and it **must not be empty**.
 
 :exclamation:**Multiple of the same prefixes:**<br>
 * `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in the notes of [command structure](#command-structure)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
@@ -547,6 +544,6 @@ Sort can help reorder the list!!
 | **OR search**                      | OR search finds one keyword or the other.  For example, `find Shutter Island` returns all results that contain Shutter or Island.                                                    |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
-
+| **Alphanumeric**                   | A character that is either a letter or a number.                  |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
