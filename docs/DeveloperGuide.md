@@ -166,13 +166,13 @@ Classes used by multiple components are in the `unibook.commons` package.
 ## **Implementation**
 
 ### Add feature
-The add feature enables the user to add a module/student/professor/group to the UniBook depending on the option specified by the user. 
+The add feature enables the user to add a module/student/professor/group/event/meeting to the UniBook depending on the option specified by the user. 
 
 Given below is an example of a sequence diagram that shows the flow using the input `add o/module n/Software Engineering m/CS2103`.
 
-The command is first parsed with `execute("add o/module n/Software Engineering m/CS2103", true, false)` where `true` and `false` are boolean variables which indicate whether the `Person` or `Module` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `AddCommandParser`. This instantiates a new `AddCommand` object which is returned to `UniBookParser`. After which, the `AddCommand` is passed to `LogicManager` and the `execute` method will run. The `model` object will be accessed to update the current list of modules in the UniBook. Finally, the `CommandResult` will be returned.
+The command is first parsed with `execute("add o/module n/Software Engineering m/CS2103", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `AddCommandParser`. This instantiates a new `AddCommand` object which is returned to `UniBookParser`. After which, the `AddCommand` is passed to `LogicManager` and the `execute` method will run. The `model` object will be accessed to update the current list of modules in the UniBook. Finally, the `CommandResult` will be returned.
 
-The add command can also add a group/student/professor. In these cases, the flow of the program is still largely similar, except that `model` object will be accessed to update the respective fields of students/professors/groups.
+The add command can also add a group/student/professor/event/meeting. In these cases, the flow of the program is still largely similar, except that `model` object will be accessed to update the respective fields of students/professors/groups.
 ![Implementation of adding a module](images/AddSequenceDiagram.png)
 
 

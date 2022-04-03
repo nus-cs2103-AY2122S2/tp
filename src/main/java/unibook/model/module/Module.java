@@ -10,6 +10,9 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unibook.logic.commands.EditCommand;
+import unibook.logic.commands.EditCommand.EditGroupDescriptor;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.module.exceptions.DuplicateGroupException;
 import unibook.model.module.exceptions.DuplicateKeyEventException;
 import unibook.model.module.exceptions.GroupNotFoundException;
@@ -185,7 +188,6 @@ public class Module {
         return groups;
     }
 
-
     /**
      * Returns true if group has same name as one of the groups in this module
      *
@@ -235,6 +237,34 @@ public class Module {
     }
 
     /**
+     * Edits the information of the group in the respective index
+     */
+    public void editGroupByIndex(int idx, EditGroupDescriptor editGroupDescriptor) throws CommandException {
+        Group group = groups.get(idx);
+        Group newGroup = EditCommand.createEditedGroup(group, editGroupDescriptor);
+        groups.set(idx, newGroup);
+    }
+
+    /**
+     * Returns boolean if student exists in module
+     */
+    public boolean hasStudent(Student s) {
+        return students.contains(s);
+    }
+
+
+
+    /**
+     * Edits the information of the group in the respective index
+     */
+    public void addToGroupByName(String name, Student s) throws CommandException {
+        Group group = getGroupByName(name);
+        int idx = groups.indexOf(group);
+        group.addMember(s);
+        groups.set(idx, group);
+    }
+
+    /**
      * Adds a student {@code s} to the list of the students.
      *
      * @param s
@@ -259,6 +289,7 @@ public class Module {
         }
         professors.add(p);
     }
+
 
     /**
      * Adds a group {@code g} to the list of groups.
@@ -320,8 +351,7 @@ public class Module {
         }
 
         return otherModule != null
-            && otherModule.getModuleCode().equals(getModuleCode())
-            && otherModule.getModuleName().equals(getModuleName());
+            && otherModule.getModuleCode().equals(getModuleCode());
     }
 
     /**

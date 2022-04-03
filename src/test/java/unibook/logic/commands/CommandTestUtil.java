@@ -33,6 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_STUDENT_AMY = "amybee@example.com";
     public static final String VALID_EMAIL_PROFESSOR_CHARLES = "charles@example.com";
     public static final String VALID_OFFICE_2 = "COM2 03-12";
+    public static final String VALID_TAG = "friend";
+
 
     //Option fields
     public static final String VALID_OPTION_MODULE = "module";
@@ -47,6 +49,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_STUDENT_AMY;
     public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_STUDENT_AMY;
     public static final String MODULE_CODE_DESC_CS2100 = " " + CliSyntax.PREFIX_MODULE + VALID_MODULE_CODE_CS2100;
+    public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG;
+
 
     public static final String INVALID_OPTION_DESC = " "
         + CliSyntax.PREFIX_OPTION + "STUDENT"; // only 'student'/'module'/'professor' allowed in option

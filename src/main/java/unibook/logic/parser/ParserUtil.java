@@ -19,6 +19,7 @@ import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleKeyEvent;
+import unibook.model.module.ModuleKeyEvent.KeyEventType;
 import unibook.model.module.ModuleName;
 import unibook.model.module.group.Group;
 import unibook.model.person.Email;
@@ -33,6 +34,9 @@ import unibook.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_WRONG_MT_FORMAT = "To edit meeting times, must include index of meeting time. \n"
+            + "For example, to edit the first index of meeting times to 12th December 2022 4.45pm: "
+            + "mt/1 2020-12-12 16:45";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -121,6 +125,7 @@ public class ParserUtil {
     public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
         String trimmedCode = moduleCode.trim().toUpperCase(Locale.ROOT);
+        System.out.println("parseModuleCode");
         if (!ModuleCode.isValidModuleCode(trimmedCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
@@ -203,8 +208,16 @@ public class ParserUtil {
         for (String moduleCode : moduleCodesAndGroups) {
             if (moduleCode.contains(" g/")) {
                 String[] strArr = moduleCode.split(" g/");
+                if (strArr[0].contains(" ")) {
+                    throw new ParseException("Module codes should only contain alphanumeric "
+                        + "characters and cannot contain spaces.");
+                }
                 mc = new ModuleCode(strArr[0].toUpperCase());
             } else {
+                if (moduleCode.contains(" ")) {
+                    throw new ParseException("Module codes should only contain alphanumeric "
+                        + "characters and cannot contain spaces.");
+                }
                 mc = new ModuleCode(moduleCode.toUpperCase());
             }
             moduleSet.add(mc);
@@ -248,6 +261,42 @@ public class ParserUtil {
     }
 
     /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static List<Object> parseMeetingTime(String meetingTime) throws ParseException {
+        requireNonNull(meetingTime);
+        System.out.println(meetingTime);
+        String trimmedTag = meetingTime.trim();
+        List<Object> list = new ArrayList<>();
+        String[] arr = meetingTime.split(" ");
+
+        //TODO create the parse exception to validate meetingTime to
+        if (arr.length != 3) {
+            throw new ParseException(MESSAGE_WRONG_MT_FORMAT);
+        }
+
+        // TODO parse the index and the meeting time of the input
+
+        int idxOfMeetingTime = Integer.parseInt(meetingTime.substring(0 , 1));
+        String actualMeetingTime = meetingTime.substring(2);
+        LocalDateTime ldt = parseDateTime(actualMeetingTime);
+        list.add(idxOfMeetingTime);
+        list.add(ldt);
+        System.out.println(list);
+        return list;
+    }
+
+
+    /**
+     * Parses a {@code String tag} into a {@code dateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+=======
      * * Parses {@code String groupName} into a {@code Group}.
      */
     public static Group parseGroup(String groupName)
@@ -257,6 +306,17 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String tag} into a {@code dateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+=======
+     * * Parses {@code String groupName} into a {@code Group}.
+     */
+    public static String parseGroupString(String groupName) {
+        return groupName.trim();
+    }
+
+    /**
+>>>>>>> d66aca91cd59f82ab2db82fcd6d4231d99288ae6
      * Parses a date string with YYYY-MM-DD into LocalDate object
      *
      * @param date
@@ -277,6 +337,7 @@ public class ParserUtil {
     }
 
     /**
+>>>>>>> 98d7be2fb745656e469996e1f9555d56584a0fb3
      * Parses {@code Collection<String> keyEventAndDate} and
      * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
      */
@@ -352,4 +413,15 @@ public class ParserUtil {
         return dateTimeList;
     }
 
+    /**
+     * Parses a {@code String } into a {@code keyeventtype}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LocalDateTime} is invalid.
+     */
+    public static KeyEventType parseKeyEventTypeString(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        return KeyEventType.valueOf(trimmedType.toUpperCase());
+    }
 }

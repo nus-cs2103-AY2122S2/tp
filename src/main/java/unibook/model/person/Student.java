@@ -6,8 +6,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import unibook.logic.commands.EditCommand;
+import unibook.logic.commands.EditCommand.EditGroupDescriptor;
+import unibook.logic.commands.exceptions.CommandException;
 import unibook.model.module.Module;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.exceptions.GroupNotFoundException;
 import unibook.model.module.group.Group;
 import unibook.model.tag.Tag;
 
@@ -120,6 +124,33 @@ public class Student extends Person {
      */
     public Set<Group> getGroups() {
         return groups;
+    }
+
+    /**
+     * Edits the information of the group in the respective module
+     */
+    public void editGroupByMod(Module module, EditGroupDescriptor editGroupDescriptor) throws CommandException {
+        for (Group g : groups) {
+            if (g.getModule().equals(module)) {
+                Group group = g;
+                groups.remove(g);
+                Group newGroup = EditCommand.createEditedGroup(g, editGroupDescriptor);
+                groups.add(newGroup);
+            }
+        }
+    }
+
+    /**
+     * Edits the information of the group in the respective module
+     */
+    public Group getGroupByName(Group group) throws GroupNotFoundException {
+        for (Group g : groups) {
+            if (g.equals(group)) {
+                return g;
+            }
+        }
+        // TODO EDIT GROUP NOT FOUND EXCEPTION MSG
+        throw new GroupNotFoundException();
     }
 
     /**
