@@ -292,7 +292,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 9. The `LogicManager` will then call `DeleteCommand#execute(Model model)`.
 10. In the `DeleteCommand`, a new `StudentIdContainsKeywordsPredicate` is created if `StudentId` was used as the input.
 11. If `StudentId` was used, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked, which
-    updates the filter of the person list to filter by the given `StudentIdContainsKeywordsPredicate`, after which the entry (if any) that matches the `StudentIdContainsKeywordsPredicate` will be deleted.
+    updates the filter of the person list to filter by the given `StudentIdContainsKeywordsPredicate`, after which the entry (if any) that matches the `StudentIdContainsKeywordsPredicate` will be deleted by invoking `model#deletePerson(Person person)`.
 12. Otherwise, if an `Index` array was used, a list of `Person`s corresponding to their `Index` in the displayed list will be created, after which they will be processed one by one for deletion.
 13. Lastly, the `DeleteCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
