@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 public class FilterPastTeamCommand extends Command {
 
     public static final String COMMAND_WORD = "filterteam";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all past teammates";
 
     public static final String MESSAGE_SUCCESS = "Listed all past teammates";
 

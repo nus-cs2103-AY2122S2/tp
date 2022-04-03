@@ -5,7 +5,7 @@ title: User Guide
 
 Welcome to the User Guide for **HackNet**, where we will guide you through all you need to know to get started!
 
-**HackNet** is a desktop application that can help you manage contact details of potential team members to work on a technical project or participate in a Hackathon with. It has a simple Graphical User Interface (GUI) which displays details of your potential teammates, and works mainly via a Command Line Interface (GUI) through text commands.
+**HackNet** is a desktop application that can help you manage contact details of potential team members to work on a technical project or participate in a Hackathon with. It has a simple Graphical User Interface (GUI) which displays details of your potential teammates, and works mainly via a Command Line Interface (CLI) through text commands.
 
 ## Table of Contents
 * [Quick Start](#quick-start)
@@ -146,7 +146,7 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 -r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
 * `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
-* `edit 2 3 s/ t/GoogleProject, Hackathon 2022` Does not change the skills of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
+* `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
 * `edit 1 2 3 -r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The exiting teams are cleared as well.
 
 ### Deleting a person: `delete`

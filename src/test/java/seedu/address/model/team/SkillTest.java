@@ -13,7 +13,7 @@ public class SkillTest {
     private Skill copyOfJava100 = new Skill("Java", 100);
     private Skill java90 = new Skill("Java", 90);
     private Skill python100 = new Skill("python", 100);
-    private Skill c0 = new Skill("C");
+    private Skill c1 = new Skill("C");
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -40,7 +40,7 @@ public class SkillTest {
         assertFalse(java100.equals(python100));
 
         //different skill name and proficiency -> false
-        assertFalse(java100.equals(c0));
+        assertFalse(java100.equals(c1));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class SkillTest {
         assertTrue(java100.isSameSkill(java90));
 
         //different skill name with different skill proficiency -> false
-        assertFalse(java100.isSameSkill(c0));
+        assertFalse(java100.isSameSkill(c1));
 
         //different skill name with same skill level -> false
         assertFalse(java100.isSameSkill(python100));
@@ -62,7 +62,7 @@ public class SkillTest {
     @Test
     public void toStringTest() {
         assertEquals(java100.toString(), "[Java, 100]");
-        assertEquals(c0.toString(), "[C, 0]");
+        assertEquals(c1.toString(), "[C, 1]");
     }
 
     @Test
@@ -74,7 +74,7 @@ public class SkillTest {
     @Test void isValidSkillProficiency() {
         assertTrue(Skill.isValidSkillProficiencyRange(100));
         assertTrue(Skill.isValidSkillProficiencyRange(10));
-        assertTrue(Skill.isValidSkillProficiencyRange(0));
+        assertFalse(Skill.isValidSkillProficiencyRange(0));
         assertFalse(Skill.isValidSkillProficiencyRange(101));
         assertFalse(Skill.isValidSkillProficiencyRange(-1));
     }

@@ -15,7 +15,7 @@ public class Skill {
     public static final String NAME_VALIDATION_REGEX = "[\\w|\\d|\\s#+-]+";
     public static final String PROFICIENCY_CONSTRAINTS_RANGE = "Skill proficiency should be within range of 1-100";
     public static final String PROFICIENCY_CONSTRAINTS_INTEGER = "Skill proficiency must be an integer";
-    public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[0-9]$|^[1-9][0-9]$|^(100)$";
+    public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[1-9]$|^[1-9][0-9]$|^(100)$";
     public static final String PROFICIENCY_VALIDATION_ONLY_INTEGERS = "^[0-9]+$";
     public static final String SKILL_INPUT_CONSTRAINTS = "Skill input should be: Skill Name_Skill proficiency. eg: "
         + "Java_50";
@@ -46,7 +46,7 @@ public class Skill {
         requireNonNull(skillName);
         checkArgument(isValidSkillName(skillName), NAME_CONSTRAINTS);
         this.skillName = skillName;
-        this.skillProficiency = 0;
+        this.skillProficiency = 1;
     }
 
     /**

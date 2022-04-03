@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalSkills.SKILL_C_0;
+import static seedu.address.testutil.TypicalSkills.SKILL_C_1;
 import static seedu.address.testutil.TypicalSkills.SKILL_C_20;
 import static seedu.address.testutil.TypicalSkills.SKILL_JAVA_40;
 import static seedu.address.testutil.TypicalSkills.SKILL_JAVA_50;
@@ -20,7 +20,7 @@ class PersonContainsSkillPredicateTest {
     void testEquals() {
         SkillSet skillSet1 = new SkillSet();
         skillSet1.add(SKILL_JAVA_50);
-        skillSet1.add(SKILL_C_0);
+        skillSet1.add(SKILL_C_1);
 
         SkillSet skillSet2 = new SkillSet();
         skillSet2.add(SKILL_JAVA_40);
