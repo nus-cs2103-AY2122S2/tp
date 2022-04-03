@@ -81,7 +81,7 @@ public class AddLessonCommand extends Command {
         }
 
         model.setSelectedLesson(toAdd);
-        return new CommandResult(MESSAGE_SUCCESS, true, InfoPanelTypes.LESSON, ViewTab.LESSON);
+        return new CommandResult(MESSAGE_SUCCESS, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
 
     @Override

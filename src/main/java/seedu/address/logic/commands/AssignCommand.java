@@ -59,9 +59,8 @@ public class AssignCommand extends Command {
         }
         model.setSelectedLesson(lesson);
         model.updateAssignment(student, lesson);
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
-                true, InfoPanelTypes.LESSON, ViewTab.LESSON);
+        String commandResultMessage = String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName());
+        return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }
 
 }

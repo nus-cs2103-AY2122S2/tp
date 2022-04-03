@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
@@ -28,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Lesson> filteredLessons;
     private Student selectedStudent;
     private Lesson selectedLesson;
+    private InfoPanelTypes currentInfoPanel;
 
     /**
      * Initializes a ModelManager with the given studentBook and userPrefs.
@@ -251,6 +253,7 @@ public class ModelManager implements Model {
 
     public void setSelectedStudent(Student student) {
         selectedStudent = student;
+        currentInfoPanel = InfoPanelTypes.STUDENT;
     }
 
     public Student getSelectedStudent() {
@@ -259,10 +262,38 @@ public class ModelManager implements Model {
 
     public void setSelectedLesson(Lesson lesson) {
         selectedLesson = lesson;
+        currentInfoPanel = InfoPanelTypes.LESSON;
     }
 
     public Lesson getSelectedLesson() {
         return selectedLesson;
     }
 
+    /**
+     * Checks if the provided {@code Lesson} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedLesson Lesson to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
+    public boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson) {
+        requireNonNull(deletedLesson);
+        boolean isLessonInfoPanel = currentInfoPanel == InfoPanelTypes.LESSON;
+        boolean isSameLesson = deletedLesson.equals(selectedLesson);
+        return isLessonInfoPanel && isSameLesson;
+    }
+
+    /**
+     * Checks if the provided {@code Student} is the one currently being viewed on the {@code InfoPanel} in
+     * {@code MainWindow}.
+     *
+     * @param deletedStudent Student to be deleted.
+     * @return If InfoPanel should be cleared.
+     */
+    public boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent) {
+        requireNonNull(deletedStudent);
+        boolean isStudentInfoPanel = currentInfoPanel == InfoPanelTypes.STUDENT;
+        boolean isSameStudent = deletedStudent.equals(selectedStudent);
+        return isStudentInfoPanel && isSameStudent;
+    }
 }

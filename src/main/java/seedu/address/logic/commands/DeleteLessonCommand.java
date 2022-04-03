@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.misc.InfoPanelTypes;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 
@@ -43,7 +44,12 @@ public class DeleteLessonCommand extends Command {
 
         Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteLesson(lessonToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete));
+        boolean shouldClearInfoPanel = model.shouldClearLessonInfoPanelOnDelete(lessonToDelete);
+        String commandResultMessage = String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
+        if (shouldClearInfoPanel) {
+            return new CommandResult(commandResultMessage, InfoPanelTypes.EMPTY);
+        }
+        return new CommandResult(commandResultMessage);
     }
 
     @Override

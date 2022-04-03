@@ -41,7 +41,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, false);
+    public static final Version VERSION = new Version(1, 3, 1, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static MainApp mainInstance;
@@ -56,7 +56,8 @@ public class MainApp extends Application {
      * Getter to pass HostServices to UI elements.
      * @return HostServices
      */
-    public static HostServices getInstance() {
+    public static HostServices getHostSvs() {
+        assert mainInstance != null;
         return mainInstance.getHostServices();
     }
 

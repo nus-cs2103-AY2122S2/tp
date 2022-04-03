@@ -44,7 +44,7 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Class to fill TableView for help commands
      */
-    public static class CommandCard {
+    protected static class CommandCard {
 
         public final SimpleStringProperty description;
         public final SimpleStringProperty commandWord;
@@ -57,7 +57,7 @@ public class HelpWindow extends UiPart<Stage> {
          * @param commandWord command word
          * @param commandShortcut command shortcut
          */
-        public CommandCard(String description, String commandWord, String commandShortcut) {
+        protected CommandCard(String description, String commandWord, String commandShortcut) {
             this.description = new SimpleStringProperty(description);
             this.commandWord = new SimpleStringProperty(commandWord);
             this.commandShortcut = new SimpleStringProperty(commandShortcut);
@@ -131,7 +131,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
-        hostServices = MainApp.getInstance();
+        hostServices = MainApp.getHostSvs();
         initCol();
         loadData();
     }
@@ -143,6 +143,9 @@ public class HelpWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
+    /**
+     * Loads the commands into CommandView.
+     */
     private void loadData() {
         list.addAll(
                 new CommandCard(AddStudentCommand.COMMAND_DESCRIPTION, AddStudentCommand.COMMAND_WORD,
@@ -182,6 +185,10 @@ public class HelpWindow extends UiPart<Stage> {
         );
         commandView.getItems().addAll(list);
     }
+
+    /**
+     * Initialise the columns of the tableView.
+     */
     private void initCol () {
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         commandWord.setCellValueFactory(new PropertyValueFactory<>("commandWord"));

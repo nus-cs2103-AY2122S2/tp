@@ -223,6 +223,16 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean shouldClearLessonInfoPanelOnDelete(Lesson deletedLesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean shouldClearStudentInfoPanelOnDelete(Student deletedStudent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean checkStudentListIndex(Index studentId) {
             throw new AssertionError("This method should not be called.");
         }

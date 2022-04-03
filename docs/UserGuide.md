@@ -68,6 +68,9 @@ or lesson in the viewable lists.**
 * **Duplicate prefixes are not allowed unless explicitly stated.**
   * e.g. `assign -s 1 -l 1 -l 2` is not allowed as there are two `-l` prefixes present in the command.
 
+* Where `<START_TIME>` is required, the application requires the 24-hour time format.
+  * e.g 6pm would be 18:00
+
 * In each Feature description, the command word section will tell you what the command words are for each command.
 You may see more than one command word for a command, the second one being the shorter command for more advanced users.
 </div>

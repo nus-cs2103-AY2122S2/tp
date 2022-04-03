@@ -99,8 +99,8 @@ public class EditLessonCommand extends Command {
         model.addLesson(editedLesson);
         model.setSelectedLesson(editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedLesson.getName()), true,
-                InfoPanelTypes.LESSON, ViewTab.NONE);
+        String commandResultMessage = String.format(MESSAGE_SUCCESS, editedLesson.getName());
+        return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON);
     }
 
     private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {

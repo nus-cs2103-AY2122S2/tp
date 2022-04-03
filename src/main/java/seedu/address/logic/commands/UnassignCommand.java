@@ -61,8 +61,8 @@ public class UnassignCommand extends Command {
         }
         model.updateUnassignment(student, lesson);
         model.setSelectedStudent(student);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName()),
-                true, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
+        String commandResultMessage = String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName());
+        return new CommandResult(commandResultMessage, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
 
 }
