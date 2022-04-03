@@ -179,6 +179,14 @@ Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
+| Parameter      | Constraints                                                                                                                                                                                                                                                      |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Must **not be blank**, and contain only alphanumeric characters and spaces                                                                                                                                                                                       |
+| `PHONE_NUMBER` | Must be **at least 3 digits long**. May optionally start with a country code<br>E.g. `1234` and `+6512345678` are both valid                                                                                                                                     |
+| `EMAIL`        | Must follow the format `local-part@domain`.<br> `local-part` must only contain **alphanumeric characters** and the symbols `+_.-`.<br> `domain` is made up of 1 or more parts separated by periods, and must end with a part that is at least 2 characters long. |
+| `ADDRESS`      | No constraints                                                                                                                                                                                                                                                   |
+| `TAG`          | Must contain only **alphanumeric characters** and spaces                                                                                                                                                                                                         |
+
 Examples:
 * `addperson n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addperson n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
@@ -201,6 +209,15 @@ Format: `editperson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* If the parameters are specified, they must conform to the following constraints:
+
+| Parameter      | Constraints                                                                                                                                                                                                                                                      |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Must **not be blank**, and contain only alphanumeric characters and spaces                                                                                                                                                                                       |
+| `PHONE_NUMBER` | Must be **at least 3 digits long**. May optionally start with a country code<br>E.g. `1234` and `+6512345678` are both valid                                                                                                                                     |
+| `EMAIL`        | Must follow the format `local-part@domain`.<br> `local-part` must only contain **alphanumeric characters** and the symbols `+_.-`.<br> `domain` is made up of 1 or more parts separated by periods, and must end with a part that is at least 2 characters long. |
+| `ADDRESS`      | No constraints                                                                                                                                                                                                                                                   |
+| `TAG`          | Must contain only **alphanumeric characters** and spaces                                                                                                                                                                                                         |
 
 Examples:
 *  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
