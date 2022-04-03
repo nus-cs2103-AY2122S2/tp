@@ -135,6 +135,11 @@ The `stats` opens a new `StatisticsWindow` that displays a pie chart with the da
 
 This allows the user to be able to visualize his/her client's data to make better business decisions. (exp. Expand the user's influence in the most popular region for any potential sellers/buyers to contact him/her)
 
+**[Future version]** </br>
+Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+
 ## Sorting
 
 The sorting feature allows the user to sort the list of `Person` displayed.
@@ -162,11 +167,6 @@ Whenever the underlying application data is modified, the `FilteredList<Person>`
 ## Feature `find` enhanced
 In addition to the original `NameContainsKeywordsPredicate`, more predicates concerning each of the attributes in a `Person` are created.
 They can be fed to the `FindCommand` to filter out `Person` with the specified keywords in the specified attribute.
-
-**[Future version]** </br>
-Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
-Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
-Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 
 # Documentation, logging, testing, configuration, dev-ops
 
