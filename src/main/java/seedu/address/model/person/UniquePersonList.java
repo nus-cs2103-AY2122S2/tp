@@ -37,6 +37,66 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns a string of the type of attributes that is unique to a {@code person} that already exist
+     * in the address book.
+     */
+    public String getNonUniqueAttributeType(Person toCheck) {
+        requireNonNull(toCheck);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < internalList.size(); i++) {
+            Person otherPerson = internalList.get(i);
+            if (otherPerson.isSamePerson(toCheck)) { // Unique attributes already exist in the address book.
+                if (otherPerson.getPhone().equals(toCheck.getPhone())) {
+                    appendPhoneAttributeToString(stringBuilder);
+                }
+                if (otherPerson.getMatriculationNumber().equals(toCheck.getMatriculationNumber())) {
+                    appendMatriculationNumberAttributeToString(stringBuilder);
+                }
+                if (otherPerson.getEmail().equals(toCheck.getEmail())) {
+                    appendEmailAttributeToString(stringBuilder);
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Appends the necessary syntax for the Phone attribute into the non-unique attribute type string.
+     * @param stringBuilder Non-unique attribute type string
+     */
+    private void appendPhoneAttributeToString(StringBuilder stringBuilder) {
+        if (!stringBuilder.toString().contains("Phone")) {
+            stringBuilder.append("Phone");
+        }
+    }
+
+    /**
+     * Appends the necessary syntax for the Matriculation Number attribute into the non-unique attribute type string.
+     * @param stringBuilder Non-unique attribute type string
+     */
+    private void appendMatriculationNumberAttributeToString(StringBuilder stringBuilder) {
+        if (!stringBuilder.toString().contains("Matriculation Number")) {
+            if (!stringBuilder.toString().isEmpty()) {
+                stringBuilder.append(", ");
+            }
+            stringBuilder.append("Matriculation Number");
+        }
+    }
+
+    /**
+     * Appends the necessary syntax for the Email attribute into the non-unique attribute type string.
+     * @param stringBuilder Non-unique attribute type string
+     */
+    private void appendEmailAttributeToString(StringBuilder stringBuilder) {
+        if (!stringBuilder.toString().contains("Email")) {
+            if (!stringBuilder.toString().isEmpty()) {
+                stringBuilder.append(" and ");
+            }
+            stringBuilder.append("Email");
+        }
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

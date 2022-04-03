@@ -139,6 +139,7 @@ public class Person {
                 || otherPerson.getMatriculationNumber().equals(getMatriculationNumber())
                 || otherPerson.getEmail().equals(getEmail()));
     }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

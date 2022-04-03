@@ -58,6 +58,12 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns a string of the type of attributes that is unique to a {@code person} that already exist
+     * in the address book.
+     */
+    String getNonUniquePersonAttributeType(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

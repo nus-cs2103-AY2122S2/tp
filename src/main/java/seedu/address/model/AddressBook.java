@@ -73,6 +73,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns a string of person attributes that already exists in the address book.
+     */
+    public String getNonUniquePersonAttributeType(Person person) {
+        requireNonNull(person);
+        return persons.getNonUniqueAttributeType(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
