@@ -46,25 +46,25 @@ public class StackUndoRedo {
     /**
      * Pops and returns the next {@code UndoableCommand} to be undone in the stack.
      */
-    public modelStack popUndo() {
+    public ModelStack popUndo() {
         RedoableCommand toUndo = undoStack.pop();
         String commandText = commandUndoStack.pop();
 
         redoStack.push(toUndo);
         commandRedoStack.push(commandText);
-        return new modelStack(commandText, toUndo);
+        return new ModelStack(commandText, toUndo);
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be redone in the stack.
      */
-    public modelStack popRedo() {
+    public ModelStack popRedo() {
         RedoableCommand toRedo = redoStack.pop();
         String commandText = commandRedoStack.pop();
 
         undoStack.push(toRedo);
         commandUndoStack.push(commandText);
-        return new modelStack(commandText, toRedo);
+        return new ModelStack(commandText, toRedo);
     }
 
     /**
@@ -100,11 +100,11 @@ public class StackUndoRedo {
                 && redoStack.equals(stack.redoStack);
     }
 
-    final class modelStack {
+    final class ModelStack {
         private final String commandText;
         private final RedoableCommand redoableCommand;
 
-        public modelStack(String commandText, RedoableCommand redoableCommand) {
+        public ModelStack(String commandText, RedoableCommand redoableCommand) {
             this.commandText = commandText;
             this.redoableCommand = redoableCommand;
         }

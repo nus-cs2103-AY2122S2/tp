@@ -22,7 +22,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_USAGE_FAILURE);
         }
 
-        StackUndoRedo.modelStack modelStack = undoRedoStack.popUndo();
+        StackUndoRedo.ModelStack modelStack = undoRedoStack.popUndo();
 
         if (modelStack.getRedoableCommand() instanceof SwitchCommand) {
             return new CommandResult(MESSAGE_USAGE_SUCCESS, false, false, false, false, false, true);
