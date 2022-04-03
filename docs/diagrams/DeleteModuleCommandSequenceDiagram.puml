@@ -53,6 +53,8 @@ DeleteModuleCommandParser --> AddressBookParser -- LOGIC_COLOR: DeleteModuleComm
 AddressBookParser --> LogicManager -- LOGIC_COLOR: DeleteModuleCommand
 
 LogicManager -> DeleteModuleCommand ++ LOGIC_COLOR: execute(model)
+DeleteModuleCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(predicate)
+deactivate Model
 DeleteModuleCommand -> Model ++ MODEL_COLOR: deletePerson(person)
 deactivate Model
 
