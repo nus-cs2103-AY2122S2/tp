@@ -1,7 +1,7 @@
 package seedu.contax.commons.core;
 
 /**
- * Container for Date and Time format Strings.
+ * Contains Date and Time format Strings.
  */
 public class DateTimeFormats {
     public static final String DATE_DISPLAY_FORMAT = "dd LLL uuuu";
