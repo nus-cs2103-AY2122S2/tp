@@ -101,6 +101,7 @@ How the `Logic` component works:
 The Sequence Diagrams below illustrate the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew-1.png)
+
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew-2.png)
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
