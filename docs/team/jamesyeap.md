@@ -36,7 +36,7 @@ Given below are my contributions to the project.
 ## Contributions to the DG
 1. Added use-cases for the main user-stories, specifying the actions a user would perform to achieve the intended outcome.
 2. Added [class-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#model-component) for the `Model` component, along with a brief description of the key classes and associations between them 
-3. Added [sequence-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#add-temporaryrecurring-lesson) that explain how the `addlesson` command is parsed and executed.
+3. Added [sequence-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#add-temporaryrecurring-lesson) that explain how the `addlesson` command is implemented.
 
 ## Contributions to team-based tasks
 1. Set up the team's [GitHub repository](https://github.com/orgs/AY2122S2-CS2103T-W11-3/teams/developers)
@@ -48,7 +48,9 @@ Given below are my contributions to the project.
 5. Added issues and corresponding labels for features to be implemented in [Milestone v1.2](https://github.com/AY2122S2-CS2103T-W11-3/tp/milestone/1)
 
 ## Review/mentoring contributions
-`to be added soon`
+1. Helped a teammate fix a bug with a UI in his [pull-request](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68/commits/f9a1e313b5c7ff150fc590e5df98ef6c2ff00664).
+2. Occasionally fixed minor merge-conflicts encountered while merging pull-requests from teammates.
+3. Suggested the use of `FXCollections.sort()` to fix a bug with sorting lessons by date in the UI.
 
 # Contributions beyond the project team
 1. Provided an [alternative solution](https://github.com/nus-cs2103-AY2122S2/forum/issues/58#issuecomment-1025671937) to an issue faced by another student in the iP.
