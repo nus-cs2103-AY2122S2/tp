@@ -343,10 +343,10 @@ The following sequence diagram summarizes what happens when a user executes a so
 
 ### Import and Export feature
 
-### What it does
+#### What it does
 Allows the user to quickly import/export existing Trackermon data for ease of updating multiple copies of Trackermon data across different platforms.
 
-### Implementation
+#### Implementation
 When the import/export command is executed, a `JsonFileManager` is created. The `JsonFileManager` creates the File Explorer GUI using `JavaFx`'s `FileChooser` library, and handles the logic behind import/export. The user can then use the File Explorer GUI to select which file they want to import, or where they want to export Trackermon data.
 
 For `import`: 
@@ -747,12 +747,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
-## Appendix B: Glossary
+## **Appendix B: Glossary**
 
-| Term              | Description                                                                                            |
-|-------------------|--------------------------------------------------------------------------------------------------------|
-| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                                             |
-| **Parameter**     | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`)          |
+| Term              | Description                                                                                   |
+|-------------------|-----------------------------------------------------------------------------------------------|
+| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                                    |
+| **Parameter**     | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`) |
+| **JavaFx**        | 	JavaFX is a set of Java graphics libraries for creating Java GUI applications                |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
