@@ -60,6 +60,11 @@ public class ArchiveCommand extends RedoableCommand {
         }
 
         Person targetPerson = lastShownList.get(targetIndex.getZeroBased());
+
+        if (model.hasArchivedPerson(targetPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON_ARCHIVE);
+        }
+
         model.deletePerson(targetPerson);
         model.addArchivedPerson(targetPerson);
 
