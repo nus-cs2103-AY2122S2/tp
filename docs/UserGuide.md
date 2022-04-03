@@ -108,10 +108,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the 
+- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the
 2nd person into a `buyer`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
-- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images. 
+- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
 
 ### Locating clients by name: `find`
 
