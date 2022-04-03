@@ -52,7 +52,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(AddCommand.MESSAGE_DUPLICATE_PERSON,
+            "DUPLICATE ATTRIBUTE"), () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -194,6 +195,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public String getNonUniquePersonAttributeType(Person person) {
+            requireNonNull(person);
+            return "DUPLICATE ATTRIBUTE";
         }
     }
 
