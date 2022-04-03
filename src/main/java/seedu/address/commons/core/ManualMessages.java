@@ -63,13 +63,13 @@ public class ManualMessages {
 
     public static final String MANUAL_MESSAGE_MARK_COMMAND = "Marks a specific undone task as done for a particular "
             + "student. \n"
-            + "Format : mark i/STUDENT_ID UNDONE_TASK_INDEX \n"
-            + "Example: mark i/A6942069R 1";
+            + "Format : mark i/STUDENT_ID idx/UNDONE_TASK_INDEX \n"
+            + "Example: mark i/A6942069R idx/1";
 
     public static final String MANUAL_MESSAGE_UNMARK_COMMAND = "Marks a specific done task as undone for a particular "
             + "student. \n"
-            + "Format : unmark i/STUDENT_ID DONE_TASK_INDEX \n"
-            + "Example: unmark i/A6942069R 1";
+            + "Format : unmark i/STUDENT_ID idx/DONE_TASK_INDEX \n"
+            + "Example: unmark i/A6942069R idx/1";
 
     public static final String MANUAL_MESSAGE_ARCHIVE_COMMAND = "Saves a copy of the details currently saved in the "
             + "address book into a separate file. \n"
