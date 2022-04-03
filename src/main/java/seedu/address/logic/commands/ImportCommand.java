@@ -48,11 +48,11 @@ public class ImportCommand extends Command {
 
         File f = new File(toFile);
         ImportFileParser converter = new ImportFileParser();
-        List<String> res = converter.jsonToPerson(f);
-        for (int i = 0; i < res.size(); i++) {
+        //List<String> res = converter.jsonToPerson(f);
+        /*for (int i = 0; i < res.size(); i++) {
             Command c = new AddressBookParser().parseCommand(res.get(i));
             c.execute(model);
-        }
+        }*/
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

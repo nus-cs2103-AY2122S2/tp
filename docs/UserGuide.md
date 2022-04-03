@@ -133,7 +133,13 @@ This is a sample screenshot of what you can expect from the `help` command.
 Format: `help`
 
 ### Importing Excel sheet
-Add a list of students from an Excel file into Tracey.
+Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
+
+Format: `import FILE PATH`
+
+Examples of usage:
+* `import C:\Users\Documents\tp.xlsx`
+* `import C:\Users\Documents\Desktop\tp\students.xlsx`
 
 Format: import button
 * Adds a list of students with Relevant Details such as Covid status into Tracey.
@@ -146,6 +152,11 @@ Sample Excel file:
 
 How to identify import button:
 ![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
+
+⚠️`Warning:`
+* The excel file must contain only one sheet named "Sheet1".
+* The column of the table must be capital.
+* The data in the table needs to be ensured no space behind
 
 ### Adding a contact
 Add a student with relevant details into Tracey.

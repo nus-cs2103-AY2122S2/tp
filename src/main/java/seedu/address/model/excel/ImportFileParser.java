@@ -26,16 +26,16 @@ public class ImportFileParser {
         for (int i = 0; i < len; i++) {
             String res = "";
             JsonNode person = data.get("Sheet1").get(i);
-            String name = person.get("NAME").textValue() + " ";
-            String block = person.get("BLOCK").textValue() + " ";
-            String facaulty = person.get("FACAULTY").textValue() + " ";
-            String phone = person.get("PHONE").textValue().trim() + " ";
-            String email = person.get("EMAIL").textValue() + " ";
-            String address = person.get("ADDRESS").textValue() + " ";
-            String mc = person.get("MATRICULATION NUMBER").textValue() + " ";
-            String cs = person.get("COVID STATUS").textValue() + " ";
-            String tag = person.get("TAG").textValue() + " ";
-            res = "add " + name + block + facaulty + phone + email + address + mc + cs + tag;
+            String name = "n/" + person.get("NAME").textValue() + " ";
+            String block = "b/" + person.get("BLOCK").textValue() + " ";
+            String faculty = "f/" + person.get("FACULTY").textValue().toUpperCase() + " ";
+            String phone = "p/" + person.get("PHONE").asInt() + " ";
+            String email = "e/" + person.get("EMAIL").textValue() + " ";
+            String address = "a/" + person.get("ADDRESS").textValue() + " ";
+            String mc = "mc/" + person.get("MATRICULATION NUMBER").textValue() + " ";
+            String cs = "cs/" + person.get("COVID STATUS").textValue() + " ";
+            String tag = "t/" + person.get("TAG").textValue() + " ";
+            res = "add " + name + block + faculty + phone + email + address + mc + cs + tag;
             resultList.add(res);
         }
         return resultList;
