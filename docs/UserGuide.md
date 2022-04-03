@@ -352,7 +352,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 * **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
 * `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
 * `find n/Django s/completed r/3 t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, **3** in the `RATING` parameter and **Action** in the `TAG` parameter.
-* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `STATUS` `TAG` `RATING`.
 
 </div>
 
