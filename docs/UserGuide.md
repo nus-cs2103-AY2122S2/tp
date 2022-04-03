@@ -76,8 +76,16 @@ Adds a student to TAPA.
 
 **Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
-* The student’s matriculation number, name as well as module code are compulsory fields.
+* The student’s student ID (matriculation number), name as well as module code are compulsory fields.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
+
+<div markdown="block" class="alert alert-info">
+> :warning: **Warning!:**
+
+<br>
+
+* The student's student ID (matriculation number) has to be unique.
+* An error message will be displayed to the user if the specified student ID already exists in TAPA.
 
 **Example**:
 * `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
@@ -320,7 +328,9 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 <div markdown="block" class="alert alert-info">
-**:warning: Warning!:**<br>
+> :warning: **Warning!:**
+
+<br>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
 
