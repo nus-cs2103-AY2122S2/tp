@@ -15,8 +15,9 @@ public class ModuleName {
     /**
      * The first character of the Module Name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
-     * A more specific VALIDATION_REGEX would be "[\\p{L}\\p{Digit}'#“][\\p{L}\\p{Digit}‐\\-,:&.()'–\n/“”+?’!‘# ]*",
-     * using a more general one as newer module with other special characters maybe added.
+     * A more specific VALIDATION_REGEX that works for all modules in AY 21/22 would be
+     * "[\\p{L}\\p{Digit}'#“][\\p{L}\\p{Digit}‐\\-,:&.()'–\n/“”+?’!‘# ]*";
+     * However, using a more general regex as newer module with other special characters maybe added.
      */
     public static final String VALIDATION_REGEX = "[^ ].*[\n]?.*";
 
