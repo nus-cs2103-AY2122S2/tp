@@ -48,7 +48,7 @@ Given below are my contributions to the project.
     * Did structural overhaul and improvement to existing documentation [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164)
       * Added Introduction 
       * Added About section which includes the purpose and scope of Trackermon
-      * Added Developer guide navaigation
+      * Added Developer guide navigation
       * Added `find` sequence diagrams 
       * Added Glossary table
 
