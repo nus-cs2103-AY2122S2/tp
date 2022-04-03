@@ -88,7 +88,6 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        System.out.println(Date.isValidDate(date));
         if (!Date.isValidDate(date)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
