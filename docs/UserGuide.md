@@ -429,13 +429,13 @@ Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/EN
 
 </div>
 
-| Parameter   | Description                                                                                 | Default Value      |
-|-------------|---------------------------------------------------------------------------------------------|--------------------|
-| `STARTDATE` | The *starting date* of the period                                                           | *Today*            |
-| `STARTTIME` | The *starting time* on the starting date for the period                                     | `00:00`            |
-| `ENDDATE`   | The *ending date* of the period                                                             | *No upper limit*   |
-| `ENDTIME`   | The *ending time* on the ending date for the period                                         | `23:59`            |
-| `DURATION`  | the minimum duration of the slots listed in *minutes*.<br> It **must be a positive number** | **Required Field** |
+| Parameter   | Description                                                                                                               | Default Value      |
+|-------------|---------------------------------------------------------------------------------------------------------------------------|--------------------|
+| `STARTDATE` | The *starting date* of the period                                                                                         | *Today*            |
+| `STARTTIME` | The *starting time* on the starting date for the period                                                                   | `00:00`            |
+| `ENDDATE`   | The *ending date* of the period                                                                                           | *No upper limit*   |
+| `ENDTIME`   | The *ending time* on the ending date for the period                                                                       | `23:59`            |
+| `DURATION`  | the minimum duration of the slots listed in *minutes*.<br> It **must be a positive [integer](#global-input-constraints)** | **Required Field** |
 
 * The start of the period **must be before or equals to** the end of the period.
 * If any of `STARTDATE`, `STARTTIME`, `ENDDATE` or `ENDTIME` are specified, they **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
