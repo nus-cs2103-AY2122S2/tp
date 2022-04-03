@@ -20,7 +20,7 @@ import seedu.contax.ui.UiPart;
 class AppointmentSlotCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentSlotListCard.fxml";
-    private static final String DATE_FORMAT = "dd LLL yyyy";
+    private static final String DATE_FORMAT = "dd LLL uuuu";
     private static final String TIME_FORMAT = "hh:mm a";
     private static final String PHRASE_NO_UPPER_LIMIT = "Forever";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);

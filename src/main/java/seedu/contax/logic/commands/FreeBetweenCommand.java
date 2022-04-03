@@ -46,7 +46,7 @@ public class FreeBetweenCommand extends Command {
     public static final String MESSAGE_END_BEFORE_START = "The end date time provided is before the"
             + " start date time!";
     public static final String MESSAGE_END_TIME_WITHOUT_DATE = "An end date should be provided with the end time!";
-    private static final String DATETIME_DISPLAY_FORMAT = "dd LLL yyyy hh:mm a";
+    private static final String DATETIME_DISPLAY_FORMAT = "dd LLL uuuu hh:mm a";
 
     private final LocalDateTime rangeStart;
     private final LocalDateTime rangeEnd;

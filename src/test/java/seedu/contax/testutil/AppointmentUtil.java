@@ -29,7 +29,7 @@ public class AppointmentUtil {
      * Returns the part of command string for the given {@code appointment}'s details.
      */
     public static String getAppointmentDetails(Appointment appointment, AddressBook addressBook) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         StringBuilder sb = new StringBuilder();
 
@@ -49,7 +49,7 @@ public class AppointmentUtil {
      * Returns the string parameter inputs for a given {@code EditAppointmentDescriptor}.
      */
     public static String getAppointmentEditDescriptorDetails(EditAppointmentDescriptor descriptor) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         StringBuilder sb = new StringBuilder();
 

@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateInputUtil {
     public static final String TIME_INPUT_PATTERN = "HH:mm";
-    public static final String DATE_INPUT_PATTERN = "dd-MM-yyyy";
+    public static final String DATE_INPUT_PATTERN = "dd-MM-uuuu";
 
     /**
      * Returns {@code date} in a string that can be accepted as command inputs.
