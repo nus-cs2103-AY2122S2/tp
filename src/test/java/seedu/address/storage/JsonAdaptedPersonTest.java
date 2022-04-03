@@ -58,7 +58,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(INVALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
