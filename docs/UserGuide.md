@@ -158,6 +158,16 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+| Parameters | Prefix | Description                                                                         |
+|------------|--------|-------------------------------------------------------------------------------------|
+| KEYWORD    | None   | The input after the command word without a prefix                                   |
+| INDEX      | None   | The index of the show as shown in the show list                                     |
+| NAME       | n/     | The name to use for a show                                                          |
+| STATUS     | s/     | The status to label a show<br> They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
+| TAG        | t/     | The tag to label a show                                                             |
+| COMMENT    | c/     | The comment to describe a show                                                      |
+| RATING     | r/     | The rating to give a show                                                           |
+
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
