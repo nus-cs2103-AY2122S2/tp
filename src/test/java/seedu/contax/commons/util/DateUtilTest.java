@@ -26,6 +26,14 @@ public class DateUtilTest {
         // Successful parsing
         assertEquals(LocalDate.parse("2022-10-20"), DateUtil.parseDate("20-10-2022").get());
 
+        // Test February parsing, 2020 is a leap year, 2021 is not
+        assertEquals(LocalDate.parse("2020-02-29"), DateUtil.parseDate("29-02-2020").get());
+        assertEquals(Optional.empty(), DateUtil.parseDate("29-02-2021"));
+
+        // Test 30 and 31st parsing
+        assertEquals(LocalDate.parse("2022-01-31"), DateUtil.parseDate("31-01-2022").get());
+        assertEquals(Optional.empty(), DateUtil.parseDate("31-04-2022"));
+
         // Different delimiters
         assertEquals(LocalDate.parse("1971-03-30"), DateUtil.parseDate("30/03/1971").get());
         assertEquals(LocalDate.parse("1971-03-30"), DateUtil.parseDate("30/03-1971").get());
