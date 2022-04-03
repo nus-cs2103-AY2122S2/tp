@@ -29,6 +29,7 @@ import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
 import unibook.logic.commands.exceptions.CommandException;
+import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.module.Module;
@@ -843,7 +844,11 @@ public class EditCommand extends Command {
          * Copy constructor.
          */
         public EditGroupDescriptor(EditGroupDescriptor toCopy) {
-            setGroupName(toCopy.name);
+            try {
+                setGroupName(toCopy.name);
+            } catch (ParseException e) {
+                System.out.println("error");
+            }
             this.meetingTimes = toCopy.meetingTimes;
             setStudents(toCopy.members);
             this.module = toCopy.module;
@@ -894,7 +899,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setGroupName(String name) {
+        public void setGroupName(String name) throws ParseException {
+            if (!Group.isValidGroupName(name)) {
+                throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+            }
             this.name = name;
         }
 

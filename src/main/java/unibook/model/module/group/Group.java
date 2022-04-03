@@ -19,6 +19,8 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  */
 public class Group {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_CONSTRAINTS = "Names should only contain up to 50 alphanumeric characters and "
+            + "spaces, and it should not be blank";
 
     private String name;
     private Module module;
@@ -122,8 +124,8 @@ public class Group {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidGroupName(String test) {
+        return test.length() <= 50;
     }
 
 

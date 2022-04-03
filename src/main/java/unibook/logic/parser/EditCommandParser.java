@@ -163,7 +163,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
             return new EditCommand(index, editModuleDescriptor);
-        } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) { // TODO CHANGED HERE
+        } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) {
             if (!argMultimap.getValue(PREFIX_MODULE).isPresent()) {
                 throw new ParseException(EditCommand.MESSAGE_EDIT_MISSING);
             } else {
@@ -269,6 +269,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Set<ModuleCode> moduleSet = new HashSet<ModuleCode>();
         ModuleCode modCode = ParserUtil.parseModuleCode(modules);
+        if (!ModuleCode.isValidModuleCode(modCode.toString())) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
         moduleSet.add(modCode);
         return Optional.of(moduleSet);
     }
