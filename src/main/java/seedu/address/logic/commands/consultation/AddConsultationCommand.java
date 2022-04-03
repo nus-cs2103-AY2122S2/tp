@@ -65,7 +65,7 @@ public class AddConsultationCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPatient(ownerNric)) {
+        if (!model.hasNric(ownerNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

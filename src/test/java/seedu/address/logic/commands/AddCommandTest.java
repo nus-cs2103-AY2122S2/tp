@@ -165,6 +165,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasNric(Nric nric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteConsultation(Consultation target) {
             throw new AssertionError("This method should not be called.");
         }

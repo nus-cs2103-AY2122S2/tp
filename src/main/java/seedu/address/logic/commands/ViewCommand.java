@@ -33,7 +33,7 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (nric != null && !model.hasPatient(nric)) {
+        if (nric != null && !model.hasNric(nric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

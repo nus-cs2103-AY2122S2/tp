@@ -96,9 +96,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same nric as {@code nric} exists in the MedBook.
      */
-    public boolean hasPatient(Nric nric) {
+    public boolean hasNric(Nric nric) {
         requireNonNull(nric);
-        return patients.contains(nric);
+        return patients.containsNric(nric);
     }
 
     /**

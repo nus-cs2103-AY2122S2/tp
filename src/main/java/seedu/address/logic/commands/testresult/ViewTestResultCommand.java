@@ -49,7 +49,7 @@ public class ViewTestResultCommand extends Command {
         requireNonNull(model);
         model.updateFilteredTestResultList(new TestResultWithNricPredicate(patientNric));
 
-        if (!model.hasPatient(patientNric)) {
+        if (!model.hasNric(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

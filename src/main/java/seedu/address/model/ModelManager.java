@@ -127,9 +127,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPatient(Nric nric) {
+    public boolean hasNric(Nric nric) {
         requireNonNull(nric);
-        return addressBook.hasPatient(nric);
+        return addressBook.hasNric(nric);
     }
 
     @Override

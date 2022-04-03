@@ -49,7 +49,7 @@ public class ViewContactCommand extends Command {
         requireNonNull(model);
         model.updateFilteredContactList(new ContactWithNricPredicate(ownerNric));
 
-        if (!model.hasPatient(ownerNric)) {
+        if (!model.hasNric(ownerNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

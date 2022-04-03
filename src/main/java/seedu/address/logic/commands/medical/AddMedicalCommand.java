@@ -83,7 +83,7 @@ public class AddMedicalCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPatient(patientNric)) {
+        if (!model.hasNric(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
