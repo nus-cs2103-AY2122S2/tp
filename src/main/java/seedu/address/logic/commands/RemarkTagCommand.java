@@ -18,7 +18,7 @@ public class RemarkTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the tag identified by\n"
             + " it's tag name. Existing remark will be overwritten by the input.\n"
-            + "Parameters: TAG_NAME r/[REMARK]\n"
+            + "Parameters: t/TAG_NAME r/REMARK\n"
             + "Example: " + COMMAND_WORD + " labGroup1 r/meeting on Wed 8pm";
 
     private final Tag tag;

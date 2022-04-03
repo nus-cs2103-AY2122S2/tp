@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ClearEmptyTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear_emptyTag";
+    public static final String COMMAND_WORD = "clear_emptytag";
 
     public static final String MESSAGE_SUCCESS = "Cleared %d empty tags";
 

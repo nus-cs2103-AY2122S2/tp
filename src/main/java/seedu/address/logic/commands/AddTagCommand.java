@@ -19,7 +19,7 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the address book. "
             + "Parameters: "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "friends ";
 

@@ -64,7 +64,7 @@ Below are the features that can be completed using command line interface (CLI).
 
 <div markdown="block" class="alert alert-info">
 
-**information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -90,7 +90,7 @@ Below are the features that can be completed using command line interface (CLI).
 
 Add a new person to UNite.
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE tele/TELEGRAM m/MATRICCARD t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [c/COURSE] [tele/TELEGRAM] [m/MATRICCARD] [t/TAG]`
 
 * The order of input does not matter.
 * `n/NAME p/PHONE e/EMAIL a/ADDRESS` are the 4 required information that must be present.
@@ -109,7 +109,7 @@ This command will not get executed successfully, because of the missing required
 
 ### Edit a person : `edit`<a name="edit-a-person"></a>
 
-Edit a person in the address book.
+Edit a person in the UNite.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COURSE] [m/MATRICCARD] [tele/TELEGRAM]`
 
@@ -178,16 +178,16 @@ Format: `filter TAG_NAME`
 ### Add remark to a tag: `remark_tag`
 Modifies the remark of an existing tag. The existing remark will be replaced by the new remark entered. 
 
-Format: `remark_tag t/[TAG_NAME] r/[REMARK]` 
+Format: `remark_tag t/TAG_NAME r/REMARK` 
 
 Examples: 
 * `remark_tag t/labGroup1 r/report due 1st May` changes the remark for tag `labGroup1` to 'report due 1st May'.
 * `remark_tag t/labGroup1 r/` clears the remark for tag `labGroup1`.
 
-### Remove all empty tags: `clear_emptyTag`
+### Remove all empty tags: `clear_emptytag`
 Removes all tags that are not attached to any person.
 
-Format: `clear_emptyTag`
+Format: `clear_emptytag`
 
 ### Locate person by name: `find`<a name="locate-person-by-name"></a>
 
@@ -385,6 +385,7 @@ click on the tag to filter the list.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UNite home folder.<br>
 **Q**: How do I clear the "tag filter" after I typed the `filter` command?<br>
 **A**: Use `list` command to clear the filter.
+1
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -394,23 +395,23 @@ Action | Command format, Examples                                               
 --------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------
 **add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | (Menu bar) `Add ` -> `Add Profile`
 **add_tag**| `add_tag t/TAG_NAME`                                                                                                                                              | (Menu bar) `Tags` -> `Tags`, enter tag name in text field and select `Add`.
-**attach** | `attach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                             | -
+**attach** | `attach t/TAGNAME i/PERSON_INDEX`                                                                                                                             | -
 **clear** | `clear`  <br/>                                                                                                                                                    | -
-**clear_emptyTag** | `clear_emptyTag`                                                                                                                                                  | -
+**clear_emptytag** | `clear_emptytag`                                                                                                                                                  | -
 **delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                               | Right click on person card in person list panel, select `Delete`
 **delete_tag**| `delete TAG_INDEX`<br> e.g., `delete_tag 3`                                                                                                                       | (Menu bar) `Tags` -> `Tags`; enable `Select`, select tags and click `Delete`. <br> Or, (Command box) `list_tag` -> right click on tag card to delete
-**detach** | `detach [t/TAGNAME] [i/PERSON_INDEX]`                                                                                                                             | -
+**detach** | `detach t/TAGNAME i/PERSON_INDEX`                                                                                                                             | -
 **disable_mouseUX** | `disable_mouseUX`                                                                                                                                                 | -
-**edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               | -
+**edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COURSE] [m/MATRICCARD] [tele/TELEGRAM]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               | -
 **enable_mouseUX** | `enable_mouseUX`                                                                                                                                                  | -
 **exit** | `exit`                                                                                                                                                            | -
-**filter** | `filter [TAGMAME]`                                                                                                                                                | (Command box) `list_tag` -> click on tag card to filter
+**filter** | `filter TAGMAME`                                                                                                                                                | (Command box) `list_tag` -> click on tag card to filter
 **find** | `find [KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
 **grab** | `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`<br> e.g., `grab e/ t/classmates`                                                                                         | -
 **help** | `help`                                                                                                                                                            | (Menu bar) `Help` -> `Help`
 **list** | `list`                                                                                                                                                            | -
 **list_tag** | `list_tag`                                                                                                                                                        | (Menu bar) `Tags` -> `Tags`. All tags are displayed in the 'Current tags' section.
 **profile** | `profile INDEX`<br> e.g., `profile 3`                                                                                                                             | (Person list panel) Click on person card
-**remark** | `remark_tag t/[TAG_NAME] r/[REMARK]`<br> e.g., `remark t/classmates r/My classmates for CS2103T` | -
+**remark_tag** | `remark_tag t/TAG_NAME r/REMARK`<br> e.g., `remark t/classmates r/My classmates for CS2103T` | -
 **theme** | `theme THEME`<br> e.g., `theme light`                                                                                                                             | -
 
