@@ -24,7 +24,6 @@ public class RedoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
     private final DeleteCommand deleteCommandOne = new DeleteCommand(INDEX_FIRST_PERSON);
-    private final DeleteCommand deleteCommandTwo = new DeleteCommand(INDEX_SECOND_PERSON);
 
     @Test
     public void execute() throws Exception {
@@ -49,10 +48,10 @@ public class RedoCommandTest {
     public static StackUndoRedo prepareStack(List<RedoableCommand> undoElements,
                                              List<RedoableCommand> redoElements) {
         StackUndoRedo undoRedoStack = new StackUndoRedo();
-        undoElements.forEach(undoRedoStack::push);
+        undoElements.forEach(command -> undoRedoStack.push(command, ""));
 
         Collections.reverse(redoElements);
-        redoElements.forEach(undoRedoStack::push);
+        redoElements.forEach(command -> undoRedoStack.push(command, ""));
         redoElements.forEach(unused -> undoRedoStack.popUndo());
 
         return undoRedoStack;
