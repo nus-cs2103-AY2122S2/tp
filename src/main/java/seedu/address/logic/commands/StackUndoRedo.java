@@ -10,7 +10,10 @@ import java.util.Stack;
 
 public class StackUndoRedo {
     private Stack<RedoableCommand> undoStack;
+    private Stack<String> commandUndoStack;
+
     private Stack<RedoableCommand> redoStack;
+    private Stack<String> commandRedoStack;
 
     /**
      * StackUndoRedo Class to enable storing of commands FIFO
@@ -18,40 +21,50 @@ public class StackUndoRedo {
     public StackUndoRedo() {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
+
+        commandRedoStack = new Stack<>();
+        commandUndoStack = new Stack<>();
     }
 
     /**
      * Pushes {@code command} onto the undo-stack if it is of type {@code UndoableCommand}. Clears the redo-stack
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
-    public void push(Command command) {
+    public void push(Command command, String commandName) {
         if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
             redoStack.clear();
+            commandRedoStack.clear();
         }
 
         if (!(command instanceof RedoableCommand)) {
             return;
         }
-
+        commandUndoStack.add(commandName);
         undoStack.add((RedoableCommand) command);
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be undone in the stack.
      */
-    public RedoableCommand popUndo() {
+    public modelStack popUndo() {
         RedoableCommand toUndo = undoStack.pop();
+        String commandText = commandUndoStack.pop();
+
         redoStack.push(toUndo);
-        return toUndo;
+        commandRedoStack.push(commandText);
+        return new modelStack(commandText, toUndo);
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be redone in the stack.
      */
-    public RedoableCommand popRedo() {
+    public modelStack popRedo() {
         RedoableCommand toRedo = redoStack.pop();
+        String commandText = commandRedoStack.pop();
+
         undoStack.push(toRedo);
-        return toRedo;
+        commandUndoStack.push(commandText);
+        return new modelStack(commandText, toRedo);
     }
 
     /**
@@ -87,17 +100,21 @@ public class StackUndoRedo {
                 && redoStack.equals(stack.redoStack);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append("Undo Stack: \n");
-        for (RedoableCommand command : undoStack) {
-            s.append(command.getClass().getSimpleName()).append(" ");
+    final class modelStack {
+        private final String commandText;
+        private final RedoableCommand redoableCommand;
+
+        public modelStack(String commandText, RedoableCommand redoableCommand) {
+            this.commandText = commandText;
+            this.redoableCommand = redoableCommand;
         }
-        s.append("\nRedo Stack: \n");
-        for (RedoableCommand command : redoStack) {
-            s.append(command.getClass().getSimpleName()).append(" ");
+
+        public String getCommandText() {
+            return commandText;
         }
-        return s.toString();
+
+        public RedoableCommand getRedoableCommand() {
+            return redoableCommand;
+        }
     }
 }

@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
-    public static final String MESSAGE_SUCCESS = "Redo success!";
+    public static final String MESSAGE_SUCCESS = "Redo Command : ";
     public static final String MESSAGE_FAILURE = "No more commands to redo!";
 
     @Override
@@ -23,12 +23,12 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        RedoableCommand command = undoRedoStack.popRedo();
-        if (command instanceof SwitchCommand) {
+        StackUndoRedo.modelStack modelStack = undoRedoStack.popRedo();
+        if (modelStack.getRedoableCommand() instanceof SwitchCommand) {
             return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, false, true);
         }
-        command.redo(model);
-        return new CommandResult(MESSAGE_SUCCESS);
+        modelStack.getRedoableCommand().redo(model);
+        return new CommandResult(MESSAGE_SUCCESS + modelStack.getCommandText());
     }
 
     @Override

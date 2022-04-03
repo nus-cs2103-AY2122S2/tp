@@ -86,8 +86,8 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2103`, `m/CS2103 m/CS2100` etc.
 
-* Parameters has to be in order.<br>
-  e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, then it must follow strictly that format.
+* Parameters do not have to be in order.<br>
+  e.g. if the command specifies `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, you can do it in any order.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -121,9 +121,21 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 Examples:
 * `add n/Bob p/87654321 e/bob@u.nus.edu a/123, Clementi Ave 16, #01-321`
 
-Additionally, if you were to simply use `add`, it would open up a new window to allow you to systematically add a new contact
+Additionally, if you were to simply use `add`, it would open up a new window to allow you to systematically add a new contact, with multiple additional fields that would normally require the use of other commands.  
 ![add window](images/addWindow.png)  
 Then, simply fill up the fields as guided in the window. You can then press the `ENTER` key to submit the fields when complete, or press the `Submit` button.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about this command:**<br>
+* Adding duplicate names is not allowed as most people will not have the exact same name.
+* Addresses must be within 60 characters long
+* Phone number must be at least 3 digits short, and at most 25 digits long.
+* Emails must be of the format `local-part@domain`. For example, a valid email you is `e@e.sg`, invalid email is `e@e.s`
+* When in `archives`, this functionality is disabled.
+* Using `add`, you have the benefit of executing multiple commands (i.e. `comment`, `status`, and `addmodules`) at once.
+</div>
+
 
 ### Adding Module(s) to a Contact : `addmodule`
 
@@ -139,7 +151,7 @@ Examples:
 * `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
 * `addmodule 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd contact
 
-_**See below for an example image**_
+[_**See below for an example image of a person with modules**_](#example-of-a-contact-with-status-and-comment)
 
 ### Adding a comment for a contact : `comment`
 
@@ -148,6 +160,7 @@ Adds a comment for the specified contact in ModuleMateFinder.
 Format: `comment INDEX c/COMMENT`
 
 * Adds a comment for the contact at the specified `INDEX`.
+* A comment must be **within 60 characters long**
 * `INDEX` must be a **positive integer** 1, 2, 3, ...
 * Any existing comments for a contact will be overwritten by the new input.
 * If used with an **empty comment** (i.e. `comment 1 c/`), the command will be treated as a **delete
@@ -155,9 +168,9 @@ Format: `comment INDEX c/COMMENT`
 
 Examples:
 * `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd contact.
-* `comment 3` will delete the comment for the 3rd contact.
+* `comment 3 c/` will delete the comment for the 3rd contact.
 
-_**See below for an example image**_
+[_**See below for an example image of a person with a comment**_](#example-of-a-contact-with-status-and-comment)
 
 ### Adding a status for a contact : `status`
 
@@ -175,8 +188,8 @@ Examples:
 - `status 2 s/favourite` tags the 2nd contact in ModuleMate Finder as favourite.
 - `status 2 s/` will untag the 2nd contact in ModuleMate Finder, leaving them with no `Status`
 
-Annotated image of what a `contact` with `Status`, `Module`, and `Comment`
-![Example of a contact with Status and Comment](images/annotated_contact.png)
+Annotated image of what a `contact` with `Status`, `Module`, and `Comment`  
+![Example of a contact with Status and Comment](images/annotated_person.png)
 
 ### Copy contacts in list : `copy`
 
@@ -285,6 +298,10 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 * `edit 5 n/Bob a/Kent Ridge Drive` Edits the name and address of the 5th contact to be `Bob` and `Kent Ridge Drive` 
   respectively.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Important:**
+When in the `archives`, you will not be able to edit a person's name. In general, a person who is archived is assumed have correct details except for details that may change over time (e.g. phone number, email, address)
+</div>
 
 ### Locating a contact: `find`
 
@@ -465,9 +482,13 @@ If your changes to the data file makes its format invalid, ModuleMateFinder will
 
 ## FAQ
 
-Q: Are all modules offered by NUS available in ModuleMateFinder
+Q: Are all modules offered by NUS available in ModuleMateFinder?
 
-A: As long as the module offered can be found in NUSmod, it will be available on ModuleMateFinder as well.  
+A: As long as the module offered can be found in NUSMods, it will be available on ModuleMateFinder as well.  
+
+Q: What is the point of archiving?
+
+A: You may have seniors who have graduated, but you would like to seek advise from for certain modules. Archiving helps you to organise your contacts as well!
 
 --------------------------------------------------------------------------------------------------------------------
 

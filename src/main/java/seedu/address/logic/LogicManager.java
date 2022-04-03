@@ -55,7 +55,10 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         saveBooks();
-        undoRedoStack.push(command);
+
+        if(!commandResult.isShowAdd() && !commandResult.isShowEdit() && !commandResult.isShowHelp()){
+            undoRedoStack.push(command, commandText);
+        }
 
         return commandResult;
     }

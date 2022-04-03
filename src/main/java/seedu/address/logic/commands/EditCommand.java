@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -135,7 +136,18 @@ public class EditCommand extends RedoableCommand {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        if (isArchiveBook()) {
+            // Then don't allow editing of name
+            if (!editedPerson.getName().equals(personToEdit.getName())) {
+                throw new CommandException("Editing of names is not allowed in archives");
+            }
+        }
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasArchivedPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
