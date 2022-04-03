@@ -5,8 +5,7 @@ title: Zachary's Project Portfolio Page
 
 ### Project: Trackermon
 
-Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon allows people who want to track and remember what shows they have watched, are currently watching, or plan to watch.
-
+Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon helps people track and remember what shows they have watched, are currently watching, or plan to watch.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ardentsoul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
