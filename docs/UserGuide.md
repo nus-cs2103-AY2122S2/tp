@@ -238,7 +238,7 @@ Format: `delete INDEX`
 * You can only delete the contact information at an index where there is a student assigned to it.
 
 How to identify `INDEX`:
-![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 8: Screenshot of index location.*
+![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
 
 Examples of usage:
 * `delete 2` removes the 2nd student on the list.
@@ -283,9 +283,9 @@ Examples of usages:
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 9: Screenshot of result of the find command.*
+![find](images/FindScreenshotForUG.png) *Figure 8: Screenshot of result of the find command.*
 
-As seen in the *Figure 9*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 8*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
@@ -306,9 +306,9 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 10: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 9: Example result of `filter` command.*
 
-As seen in *Figure 10*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 9*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 📓`Note:`
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
@@ -320,7 +320,7 @@ Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 11: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 10: Screenshot of list command.*
 
 ### Copying emails
 Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
@@ -330,9 +330,9 @@ Format:`email`
 📓`Note:`
 There is also a `Show Email` button on the GUI which you can click to open the same window.
 
-![Email](images/CopyEmailScreenshot.png) *Figure 12: Screenshot of Copy Email function.*
+![Email](images/CopyEmailScreenshot.png) *Figure 11: Screenshot of Copy Email function.*
 
-From *Figure 12*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
 Summarises the statistics of the student records inside Tracey.
@@ -343,9 +343,9 @@ Format:`summarise`
 Example of usage:
 * `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-![SummariseExample](images/SummariseExample.png) *Figure 13: Example response of Tracey in response to the `summarise` command.*
+![SummariseExample](images/SummariseExample.png) *Figure 12: Example response of Tracey in response to the `summarise` command.*
 
-From *Figure 13*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 12*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
@@ -382,7 +382,7 @@ Format: `resize SIZE`
 📓`Note:`
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 14: Comparison of the 3 different resizing options for the result display window.*
+![Comparison of 3 resize options](images/resize_options.png) *Figure 13: Comparison of the 3 different resizing options for the result display window.*
 
 ### Clearing all records
 Clear all the data inside Tracey.
