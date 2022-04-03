@@ -19,17 +19,16 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
-    public static final String NAME_CONSTRAINT_MESSAGE = "A group name cannot have whitespaces, and also must be" +
-            "limited in length to less than 50 characters.";
+    public static final String NAME_CONSTRAINT_MESSAGE = "A group name cannot have whitespaces, and also must be"
+            + "limited in length to less than 50 characters.";
     //Group name can only have alphanumeric characters
     public static final String VALIDATION_REGEX = "^\\S*$";
 
     private static final int MAX_GROUP_NAME_LENGTH = 50;
-
-    private String name;
-    private Module module;
     private final ObservableList<Student> members;
     private final ObservableList<LocalDateTime> meetingTimes;
+    private String name;
+    private Module module;
 
     /**
      * Instantiates a group object.
@@ -77,6 +76,13 @@ public class Group {
     }
 
     /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidName(String test) {
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
+    }
+
+    /**
      * Returns the group name of the group object.
      *
      * @return group name of the group object.
@@ -118,14 +124,6 @@ public class Group {
     }
 
     /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
-    }
-
-
-    /**
      * Returns the member students of the group.
      *
      * @return members of the group.
@@ -159,7 +157,6 @@ public class Group {
 
     /**
      * Removes the groups in the group list of each student that has this group
-     *
      */
     public void removeStudentsFromThisGroup() {
         for (Student student : members) {
@@ -207,7 +204,7 @@ public class Group {
     /**
      * Edit a meeting datetime from the group.
      *
-     * @param idx index of the meeting time to edit
+     * @param idx         index of the meeting time to edit
      * @param meetingTime meeting datetime to remove.
      */
     public void editMeetingTime(int idx, LocalDateTime meetingTime) {
@@ -232,7 +229,7 @@ public class Group {
      */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
         if (moduleCode.equals(this.module.getModuleCode().toString())
-                && groupName.equalsIgnoreCase(this.getGroupName())) {
+            && groupName.equalsIgnoreCase(this.getGroupName())) {
             return true;
         }
         return false;

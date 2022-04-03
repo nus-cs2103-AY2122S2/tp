@@ -328,6 +328,7 @@ public class EditCommand extends Command {
                     if (p.getModules().contains(mod)) { ((Student) p).editGroupByMod(mod, editGroupDescriptor); }
                 }
             }
+
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             System.out.println("updated person list");
             for (Module m : latestModList) {
