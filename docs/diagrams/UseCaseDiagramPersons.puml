@@ -1,0 +1,29 @@
+@startuml
+
+!include style.puml
+
+:User: as User USER_COLOR
+
+package ContaX {
+    (List Persons) as (UC1)
+    (Add Person) as (UC2)
+    (Delete Person) as (UC3)
+    (Edit Person) as (UC4)
+    (Find Persons) as (UC5)
+    (Find Persons By Tag) as (UC10)
+}
+
+(UC3) ..down.> (UC1) : <<include>>
+(UC3) ..down.> (UC5) : <<include>>
+(UC3) ..down.> (UC10) : <<include>>
+(UC4) ..down.> (UC1) : <<include>>
+(UC4) ..down.> (UC5) : <<include>>
+(UC4) ..down.> (UC10) : <<include>>
+
+User --> (UC1)
+User --> (UC2)
+User --> (UC3)
+User --> (UC4)
+User --> (UC5)
+
+@enduml

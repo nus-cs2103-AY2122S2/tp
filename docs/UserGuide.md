@@ -29,7 +29,7 @@ ContaX is designed with versatility in mind, so it does not place unnecessarily 
      - Navigate to your _home folder_ on Terminal <br>
      - Launch the application using the command `java -jar ContaX.jar`. <br>
    </div>
-  
+
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -433,6 +433,28 @@ Example:
 
 ![Appointments Between Wireframe](images/FreeBetween.png)
 
+### Edit Priority Level of an Appointment : `prioritizeappt`
+
+Edits priority level of an Appointment previously created in the Schedule.
+
+Format: `prioritizeappt INDEX pri/PRIORITY`
+
+* Edits the priority of appointment that is at `INDEX` in the displayed appointment list, setting the priority to the supplied value.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `PRIORITY` parameter must be non-empty, and can only contain below values (case-insensitive):
+  * High
+  * Medium
+  * Low
+  * None
+
+Examples:
+* `prioritizeappt 6 pri/high` Edits the *6th* appointment priority level in the list of appointments to have a status of *high*.
+* `prioritizeappt 2 pri/none` Removes the *second* appointment priority and set status to *none*.
+
+**Example Output:**
+
+![Prioritize Appointments](images/Prioritizeappt.png)
+
 ### Finding Appointment by Name or Person Name : `findappt`
 
 Finds appointments with name or Person name that contains the given keyword.
@@ -472,7 +494,7 @@ Examples:
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes the format invalid, ContaX wil try to read valid objects and import, and will skip objects with attributes that have invalid formats (e.g. having alphabets in a Phone number), and any duplicate Persons. 
+If your changes to the data file makes the format invalid, ContaX wil try to read valid objects and import, and will skip objects with attributes that have invalid formats (e.g. having alphabets in a Phone number), and any duplicate Persons.
 
 However, if the JSON formatting is broken, a blank AddressBook/Schedule will be loaded instead.
 
@@ -517,20 +539,26 @@ Examples:
 
 Performs operations on contacts in the address book that match the given condition.
 
-Format: `batch COMMAND where/CONDITION`
+Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WITH]`
 
-* The allowed operations in `COMMAND` are
-  * list
+* `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
   * edit
   * delete
-* The `CONDITION` field must conform to the following syntax: `TERM OP TERM`
-  * Valid operators for the `OP` field are `>`, `<`, `=`, `!=`, `LIKE`
-  * A `TERM` may be an attribute of a person or a constant value
+* The `FIELD` provided must be provided, and must match one of the following:
+  * `Name`
+  * `Address`
+  * `Phone`
+  * `Email`
+* Exactly one parameter of `EQUALS_VALUE`, `START_WITH`, or `END_WITH` must be provided.
+* A `EQUALS_VALUE` is value matching the exact value in the target field.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* A `START_WITH` is value matching the value in the target field with specific starting value.
+* A `END_WITH` is value matching the value in the target field with specific ending value.
 
 Examples:
-* `batch delete where/name LIKE A%`
+* `batch deleteperson by/name start/A`
   * Deletes all persons whose name start with A (case-sensitive)
-* `batch edit p/87438806 where/phone = 87438807 `
+* `batch editperson p/87438806 by/phone =/87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
 
 ### Operate on Contacts within Range : `range`
@@ -539,35 +567,33 @@ Perform actions on a group of contacts.
 
 Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 
-* Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive
-* `COMMAND` must be a valid command. The allowed operations in `COMMAND` are
-  * list
+* Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive.
+* `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
   * edit
   * delete
 * The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed contact list**
-* `INDEX_FROM` must be less than `INDEX_TO` must be supplied, otherwise the command will perform no operation
-* The resultant effect of the command is dependent on the performed action
+* `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will fail.
+* The resultant effect of the command is dependent on the performed action.
 
 Examples:
-* `range edit e/johndoe@example.com from/6 to/10`
-  * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`
-* `range delete from/2 to/3`
-  * Deletes the 2nd and 3rd contacts in the address book
+* `range editperson e/johndoe@example.com from/6 to/10`
+  * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`.
+* `range deleteperson from/2 to/3`
+  * Deletes the 2nd and 3rd contacts in the address book.
 
-### Chaining Commands: `&&`
+### Chaining Commands: `chain`
 
 Perform multiple actions in a single command.
 
-Format: `COMMAND_A && COMMAND_B`
+Format: `chain COMMAND_A && COMMAND_B [&& COMMAND_C ...]`
 
-* Calls multiple specified commands
-* The syntax of `COMMAND_A` and `COMMAND_B` must be correct
-* A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
+* Calls multiple specified commands.
+* A valid command (i.e. The syntax of `COMMAND` must be correct) must be supplied before and after the `&&` operator, otherwise the command will fail
 
 Examples:
-* `editappt 6 l/360 && listappt`
+* `chain editappt 6 l/360 && listappt`
     * Edits the 6th appointment in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
-* `deleteappt 2 && addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
+* `chain deleteappt 2 && addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
@@ -611,7 +637,7 @@ Action | Format, Examples
 --------|------------------
 **Add Person** | `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Person** | `deleteperson INDEX`<br> e.g., `delete 3`
+**Delete Person** | `deleteperson INDEX`<br> e.g., `deleteperson 3`
 **Edit Person** | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editperson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `findperson James Jake by/name`
 **List Persons** | `listpersons`
@@ -630,6 +656,6 @@ Action | Format, Examples
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
-**Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
+**Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch editperson p/87438806 by/phone =/87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range editperson e/johndoe@example.com from/6 to/10`
 **Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappt 6 l/360 && listappt`

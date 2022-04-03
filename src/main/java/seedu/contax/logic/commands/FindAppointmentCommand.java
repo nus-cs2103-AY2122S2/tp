@@ -30,6 +30,7 @@ public class FindAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.clearDisplayedAppointmentSlots();
         model.updateFilteredAppointmentList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
                 model.getFilteredAppointmentList().size()), GuiListContentType.APPOINTMENT);
