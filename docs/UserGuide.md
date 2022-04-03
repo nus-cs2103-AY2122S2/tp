@@ -74,8 +74,7 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 
 <div markdown="block" class="alert alert-warning">
 
-:rotating_light: **Warning**<br>
-The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
+:rotating_light: **Warning:** The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
 
 </div>
 
