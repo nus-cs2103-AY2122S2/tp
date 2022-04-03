@@ -112,7 +112,7 @@ Adds a student to the tracking list
   - `add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123 #01-01 cc/5A s/Negative`
   - `add n/Betsy Crowe p/99999999 e/betsycrowe@example.com a/Woodlands Street, Block 69 cc/2B s/Positive act/choir`
 
-<div markdown="span" class="alert alert-primary" role="alert">
+<div markdown="block" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
 > - Multiple activity tags can be added to a single student by using multiple `act/` prefixes  
@@ -122,7 +122,7 @@ Adds a student to the tracking list
 
 </div>
 
-<div markdown="span" class="alert alert-info" role="alert">
+<div markdown="block" class="alert alert-info" role="alert">
 
 > :information_source: **Note:** Capitalization of text will be reflected in the User Interface
 
@@ -134,7 +134,7 @@ Shows a list of all students in the application.
   - Any user input after `list` is ignored
     - `list 12345 john` is the same as `list`
 
-<div markdown="span" class="alert alert-primary" role="alert">
+<div markdown="block" class="alert alert-primary" role="alert">
 
 > :bulb: **Tip:** For a filtered list, use the __*find*__ commands
 
@@ -215,7 +215,7 @@ Edits an existing student's details in the list Index provided and the parts tha
   - `edit 1 s/Positive` edits 1st student to be _COVID-19 Positive_
   - `edit 5 p/98641865 e/maryjane@yahoo.com` edits 5th student to a new phone number and email address
 
-<div markdown="span" class="alert alert-primary" role="alert">
+<div markdown="block" class="alert alert-primary" role="alert">
 
 > :bulb: **Tips:**  
 > - Filter the student list via __*find*__ commands to make finding the index easier  
@@ -243,7 +243,7 @@ Deletes the specified person from the application.
   - `list` followed by `delete 2` deletes the 2nd person in the student list
   - `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command
 
-<div markdown="span" class="alert alert-primary" role="alert">
+<div markdown="block" class="alert alert-primary" role="alert">
 
 > :bulb: **Tip:** filter the student list via __*find*__ commands to make finding the index easier
 
@@ -265,7 +265,7 @@ Clears and deletes all the data within the application
 Exits the program.
 Format: `exit`
 
-<div markdown="span" class="alert alert-primary" role="alert">
+<div markdown="block" class="alert alert-primary" role="alert">
 
 > :bulb: **Tip:** You can also close the application directly
 
@@ -279,13 +279,13 @@ UDT data is saved in the hard disk automatically after any command that changes 
 UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 - Data is saved to the same location as the application executable
 
-<div markdown="span" class="alert alert-primary" role="alert">
+<div markdown="block" class="alert alert-primary" role="alert">
 
 > :bulb: **Tip:** Advanced users are welcome to update data directly by editing that data file
 
 </div>
 
-<div markdown="span" class="alert alert-warning" role="alert">
+<div markdown="block" class="alert alert-warning" role="alert">
 
 > :warning: **Warning:** Editing the data file erroneously may result in the entire data file becoming unreadable by UDT
 
