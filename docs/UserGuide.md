@@ -165,7 +165,7 @@ Marks a specific undone task as done for a particular student.
 
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
-    * Marks the first undone task for the student with student ID AXXXXXXXR as done.
+    * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
 
 <br>
 
@@ -181,7 +181,7 @@ Marks a specific done task as undone for a particular student.
 
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
-    * Marks the first done task for the student with student ID AXXXXXXXR as undone.
+    * Marks the first task in the task list for the student with student ID AXXXXXXXR as undone.
 
 <br>
 
