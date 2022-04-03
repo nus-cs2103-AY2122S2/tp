@@ -12,13 +12,13 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
-2. Download the latest `realestatepro.jar` from here **(add link)**.
+2. Download the latest `realestatepro.jar` from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for your RealEstatePro.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
 Some example commands you can try:
     - `list` : Lists all client information.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/buyer` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` and is a buyer in the RealEstatePro app.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pr/north,123 Street,1-room,$300000` : Adds a client named `John Doe` , contact number `98765432`, email `johnd@example.com`, address `street, block 123, #01-01` owns the property `north,123 Street,1-room,$300000`and is a seller in the RealEstatePro app.
     - `delete 3` : Deletes the 3rd client shown in the current list.
     - `clear` : Deletes all client information.
     - `exit` : Exits the app.
@@ -76,16 +76,19 @@ Format: `help`
 
 Adds a client to RealEstatePro.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] i/FILEPATH:DESCRIPTION`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] [i/FILEPATH:DESCRIPTION]`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Either a property or preference must be provided when adding a new user.
+</div>
 **Tip**: A person is either a `buyer`, or `seller` based on whether he has a property or a preference.
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 - `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 i/living.png:living room`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 
-    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
+    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addJohnDoeResult.png)
 
 ### Listing all clients : `list`
 
@@ -102,7 +105,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 - Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- Type of the user can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the user's current `Property` or `Preference`
+- Type of the user can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the user's current `Property` or `Preference`.
 - You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
@@ -111,7 +114,7 @@ Examples:
 - `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the 
 2nd person into a `buyer`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
-- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images. 
+- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
 
 ### Locating clients by name: `find`
 
@@ -119,12 +122,12 @@ Finds clients whose specified attribute contain any of the given keywords.
 
 Format: `find ATTRIBUTE KEYWORD [MORE_KEYWORDS]`
 
-- `ATTRIBUTE` can be one of: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`
+- `ATTRIBUTE` can be one of: `all` `name` `phone` `email` `address` `properties` `preference` `usertype`.
 - If the specified attribute is `all`, search for the keywords in all attributes.
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- clients matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- The search is case-insensitive. e.g `hans` will match `Hans`.
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+- Only full words will be matched e.g. `Han` will not match `Hans`.
+- clients matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 
@@ -139,8 +142,8 @@ Sorts the list of persons displayed according to one or more keywords.
 
 Format: `sort [!]KEYWORD [[!]MORE_KEYWORDS]…`
 
-- `KEYWORD` can be one of `name` `phone` `email` `address` `favourite` `usertype` `num_property` (case-insensitive)
-- Prefixing a keyword with `!` will reverse the sorting order for that keyword
+- `KEYWORD` can be one of `name` `phone` `email` `address` `favourite` `usertype` `num_property` (case-insensitive).
+- Prefixing a keyword with `!` will reverse the sorting order for that keyword.
 - If multiple keywords are specified, the list is sorted according to the order in which the keywords are specified, i.e., subsequent keywords are used to break ties after sorting by the previous keyword.
 
 The following table shows the keywords and the default sorting behaviours:
@@ -156,8 +159,8 @@ The following table shows the keywords and the default sorting behaviours:
 | `num_property` | Sort by number of `Property`        |
 
 Examples:
-- `sort address name phone` will sort the list by `Address` first. If there are entries with equal `Address`, the entries will be sorted by `Name`. If there are entries with equal `Address` and `Name`, they will be sorted by `Phone`
-- `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`
+- `sort address name phone` will sort the list by `Address` first. If there are entries with equal `Address`, the entries will be sorted by `Name`. If there are entries with equal `Address` and `Name`, they will be sorted by `Phone`.
+- `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`.
 - `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
 
 ### Deleting a client: `delete`
@@ -195,12 +198,12 @@ Format: `clear`
 Uploads an image and description to be associated with a client.
 
 Format `upload INDEX [i/FilePath:description]`
-- Adds an image to the person at the specified `INDEX`
+- Adds an image to the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
-  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
-- Description is optional and can be left blank e.g. `upload 1 i/example.png`
-- multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`
+  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png).
+- Description is optional and can be left blank e.g. `upload 1 i/example.png`.
+- multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`.
 
 ### View image of person: `viewimage`
 
@@ -262,7 +265,7 @@ Format: `fw`
 
 1) Navigate to the `File` menu and click on it.
 
-2) Under it, click on `Favourites`
+2) Under it, click on `Favourites`.
 
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
@@ -276,9 +279,9 @@ Format: `help`
 
 <img src="images/user-guide/helpWindowUi.png" width="600px">
 
-1. Link to the full user guide
-2. Buttons to access the different help sections
-3. Help contents
+1. Link to the full user guide.
+2. Buttons to access the different help sections.
+3. Help contents.
 
 ### Saving the data
 
@@ -295,7 +298,7 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 
 ### Displaying statistics `stats`
 
-Opens up a new window that displays a pie chart containing the data of the number of buyers & sellers with preference or properties respectively in a particular region namely {North, South, East, West, Central}
+Opens up a new window that displays a pie chart containing the data of the number of buyers & sellers with preference or properties respectively in a particular region namely {North, South, East, West, Central}.
 
 #### By Command: `stats`
 

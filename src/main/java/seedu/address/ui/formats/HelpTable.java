@@ -40,7 +40,7 @@ public class HelpTable extends UiPart<Region> {
         helpTable.getItems().add(new CommandFormat("edit", "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]"
                             + "[pr/PROPERTY]… [i/FILEPATH[:DESCRIPTION]]"));
         helpTable.getItems().add(new CommandFormat("find", "find ATTRIBUTE KEYWORD [MORE KEYWORDS...]"));
-        helpTable.getItems().add(new CommandFormat("sort", "sort !]KEYWORD [[!]MORE_KEYWORDS]…"));
+        helpTable.getItems().add(new CommandFormat("sort", "sort [!]KEYWORD [[!]MORE_KEYWORDS]…"));
         helpTable.getItems().add(new CommandFormat("remind", "remind INDEX r/reminderDetails "));
         helpTable.getItems().add(new CommandFormat("upload", "upload INDEX i/FilePath[:Description]"));
         helpTable.getItems().add(new CommandFormat("viewimage", "viewimage INDEX"));
