@@ -258,7 +258,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 1. Upon receiving the user input,
    the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "find", `DeleteCommandParser#parse(arguments)` will be called.
+3. Since the first word in the user input matches the word "delete", `DeleteCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("delete").
 4. In the `DeleteCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
@@ -296,11 +296,62 @@ object will be created, and is subsequently executed by the `LogicManager`.
 12. Otherwise, if an `Index` array was used, a list of `Person`s corresponding to their `Index` in the displayed list will be created, after which they will be processed one by one for deletion.
 13. Lastly, the `DeleteCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
-The following sequence diagram shows how the find operation works:
+The following sequence diagram shows how the delete operation works:
 
 ![DeleteCommandSequenceDiagram-1](images/DeleteCommandSequenceDiagram-1.png)
 
 ![DeleteCommandSequenceDiagram-2](images/DeleteCommandSequenceDiagram-2.png)
+
+### DeleteModule Command
+
+#### Description
+
+The `deleteModule` command allows users to delete all students of the inputted `ModuleCode` from TAPA.
+During the execution of the `deleteModule` command, the user's input is being parsed in `AddressBookParser`. 
+After which, a new `DeleteModuleCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "deleteModule", `DeleteModuleCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteModule").
+4. In the `DeleteModuleCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of the compulsory field, `ModuleCode` is missing.
+    </div> 
+
+5. The `DeleteModuleCommandParser` will pass the moduleCode input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseModuleCode(String moduleCode)`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div> 
+
+6. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
+7. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteModuleCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
+
+8. The `DeleteModuleCommandParser` will create a new `ModuleCodeContainsKeywordsPredicate`.
+9. A new `DeleteModuleCommand` will be created (using the `ModuleCodeContainsKeywordsPredicate` returned in Step 8) and returned to the `LogicManager`.
+10. The `LogicManager` will then call `DeleteModuleCommand#execute(Model model)`.
+11. The `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked, which
+    updates the filter of the person list to filter by the given `ModuleIdContainsKeywordsPredicate`.
+12. Each `Person` that appears in the filtered list will then be deleted by invoking `model#deletePerson(Person person)`.
+13. Lastly, the `DeleteModuleCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+The following sequence diagram shows how the delete operation works:
+
+![DeleteModuleCommandSequenceDiagram-1](images/DeleteModuleCommandSequenceDiagram-1.png)
+
+![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
 ### Task Command
 
@@ -366,7 +417,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 
 #### Description
 
-The `find` command allows users to add a particular student into TAPA.
+The `find` command allows users to find a particular student into TAPA.
 Since not all fields are compulsory during the execution of the `find` command,
 the user's input is being parsed in `AddressBookParser`. After which, a new `FindCommand`
 object will be created, and is subsequently executed by the `LogicManager`.
