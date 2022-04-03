@@ -71,7 +71,7 @@ end box
 
 box "Model" MODEL_COLOR_T1
 participant "studentId:StudentId" as StudentId MODEL_COLOR
-participant "index:Index[]" as Index MODEL_COLOR
+participant "index:Index" as Index MODEL_COLOR
 end box
 
 mainframe sd Parsing inputted field
