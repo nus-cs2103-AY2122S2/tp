@@ -5,7 +5,6 @@ title: Developer Guide
 
 ### Table of Contents
 
-* [**Acknowledgements**](#acknowledgements)
 * [**Introduction**](#introduction)
 * [**Setting up, getting started**](#setting-up-getting-started)
 * [**About**](#about)
@@ -52,17 +51,6 @@ title: Developer Guide
   * [Finding a show](#finding-a-show)
   * [Importing Trackermon data](#importing-trackermon-data)
   * [Exporting Trackermon data](#exporting-trackermon-data)
-
-
----
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* The find feature and documentation were adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html), [stackoverflow](https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream) and [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
-* The help window feature was adopted from the video [here](https://youtu.be/vego72w5kPU).
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
