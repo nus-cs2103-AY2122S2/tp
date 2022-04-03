@@ -5,7 +5,7 @@ title: Kaiwei's Project Portfolio Page
 
 ### Project: Trackermon
 
-Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon allows people who want to track and remember what shows they have watched, are currently watching, or plan to watch.
+Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon helps people track and remember what shows they have watched, are currently watching, or plan to watch.
 Given below are my contributions to the project.
 
 **New Feature**: Added the ability to sort the show list.

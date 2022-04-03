@@ -5,7 +5,7 @@ title: Zachary's Project Portfolio Page
 
 ### Project: Trackermon
 
-Trackermon - The app will help to allow the user to track and remember what shows they have watched. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
+Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon helps people track and remember what shows they have watched, are currently watching, or plan to watch.
 
 Given below are my contributions to the project.
 
