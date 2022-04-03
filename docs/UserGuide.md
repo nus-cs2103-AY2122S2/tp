@@ -92,7 +92,7 @@ Additional formatting guidelines:
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
-2. Download the latest **Tracey.jar** from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data. <br>
@@ -161,7 +161,7 @@ Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION
 * If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error and you will have to input the details for the keyword again.
 
 Examples of usage:
-* `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343 cs/Negative`
+* `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343z cs/Negative`
 * `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
@@ -341,20 +341,23 @@ From Figure 10, when the user inputs the `Summarise` command, the result are mul
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
-* `[ROOT]`: Root directory of Tracey.
+* `[ROOT]`: The folder where the Tracey.jar is in.
 * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
-* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmss.
+  * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
+* `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
+  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS. 
 
 Format: `archive`
 
 Example:
-* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33 (hh:mm:ss in 24-hour notation).
-* The archived file will be saved **in** `[ROOT]/data/archive/270322`.
+* Current date and time in which archive command is used: 27/03/2022 (DD/MM/YYYY) 15:28:33:123 (hh:mm:ss:SSS in 24-hour notation).
+* The archived file will be saved **in** `[ROOT]/data/archive/270322123`.
 * The archived file will be saved **as** `270322_152833`.
-* The file path will be `[ROOT]/data/archive/270322/270322_152833`.
+* The file path will be `[ROOT]/data/archive/270322/270322_152833123`.
 
 💡`Tips:`
 * You can rename the archived file in the file path manually for easier reference.
+  * Features for naming of the archived file via the CLI will be available in later releases.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
 ### Resizing the result display window
@@ -369,7 +372,7 @@ Format: `resize SIZE`
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
 
 📓`Note:`
-* There is also a `Resize Window` button on the GUI which you can click to cycle between the 3 different resizing options.
+* There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
 
 ![Comparison of 3 resize options](images/resize_options.png) *Figure 11: Comparison of the 3 different resizing options for the result display window.*
 
