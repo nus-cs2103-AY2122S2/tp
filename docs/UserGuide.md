@@ -9,6 +9,7 @@ title: User Guide
 * [**Quick start**](#quick-start)
 * [**User interface**](#user-interface)
 * [**Command structure**](#command-structure)
+  * [Parameter conditions](#parameter-conditions)
 * [**Features**](#features)
   * [Viewing help: `help`](#viewing-help-help)
   * [Adding a show: `add`](#adding-a-show-add)
@@ -36,7 +37,7 @@ Always accessing MyAnimeList or IMDB to record down the shows you watched? Or fi
 
 Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface ([CLI](#glossary))** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch. You can even review these shows!
 
----
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ## User guide navigation
 
@@ -53,7 +54,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
 | {Multiple Optional Parameters}                                            | At least one parameter must be provided                 |
 
----
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ## Quick start
 
@@ -72,7 +73,6 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## User interface
 
@@ -99,7 +99,6 @@ You can start communicating with Trackermon using the command box. Some example 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Command structure
 
@@ -117,7 +116,7 @@ For example, a command to find a show could look like this:
 
 In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Parameters | Prefix | Description                                                                         |
+| Parameter  | Prefix | Description                                                                         |
 |------------|--------|-------------------------------------------------------------------------------------|
 | KEYWORD    | None   | The input after the command word without a prefix                                   |
 | INDEX      | None   | The index of the show as shown in the show list                                     |
@@ -134,23 +133,14 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…` can be used as `n/ReZero s/completed r/5 c/What a Simp t/Anime` or as `n/ReZero s/completed`.
-
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `[t/TAG]…​` can be used as `t/Anime`, `t/Sitcom t/Kdrama` etc.
 
 * A whitespace must be included before every prefix.<br>
   e.g. `n/Knives Out t/Suspense` is acceptable but `n/Knives Outt/Suspense` is not.
 
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME [t/TAG]…​`, `[t/TAG]…​ n/NAME` is also acceptable.
-
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `n/Batman n/Superman`, only `n/Superman` will be taken.
@@ -158,21 +148,31 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
-| Parameters | Prefix | Description                                                                         |
-|------------|--------|-------------------------------------------------------------------------------------|
-| KEYWORD    | None   | The input after the command word without a prefix                                   |
-| INDEX      | None   | The index of the show as shown in the show list                                     |
-| NAME       | n/     | The name to use for a show                                                          |
-| STATUS     | s/     | The status to label a show<br> They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
-| TAG        | t/     | The tag to label a show                                                             |
-| COMMENT    | c/     | The comment to describe a show                                                      |
-| RATING     | r/     | The rating to give a show                                                           |
-
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+### Parameter conditions
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about parameters:** NAME and STATUS are case-insensitive.
+</div>
+
+| Parameter  | Prefix | Condition                                                                           |
+|------------|--------|-------------------------------------------------------------------------------------|
+| KEYWORD    | None   | A **single word** that only contains **alphanumeric** characters.<br>Example: `S1` `Attack` `Hero2`
+| INDEX      | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                    |
+| NAME       | n/     | Show name must be **unique** and contains only **alphanumeric** characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.         |
+| STATUS     | s/     | Status can only contains _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                |
+| TAG        | t/     | Tag must only be a keyword that is **less than 20 characters**.                     |
+| COMMENT    | c/     | Comment ????                                                                        |
+| RATING     | r/     | Rating must be a whole number from 0 to 5                                           |
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 
 ## Features
 
@@ -304,14 +304,16 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 :exclamation:**Caution:** Clear will delete the current list! Your list data will be lost!
 </div>
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Finding a show: `find`
 #### General find
 
-**Description (General Find):** Searching for a show across all [parameters](#command-structure)? Find shows containing the search words!
+**Description (General Find):** Wanting to search for a show across all [parameters](#command-structure)? Find shows containing the search words!
 
-**Format (General Find):** `find KEYWORD`
+**Format (General Find):** `find KEYWORD…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
@@ -333,9 +335,11 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 <img src="images/General_Find_UI.png">
 
+---
+
 #### Precise find
 
-**Description (Precise Find):** Searching for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
+**Description (Precise Find):** Wanting to search for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
 
 **Format (Precise Find):** `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`
 
@@ -434,7 +438,7 @@ Sort can help reorder the list!!
 
 ### Suggest a Show: `suggest`
 
-**Description:** Want a random show? This suggests a random show from the displayed list!
+**Description:** Wanting to find a random show? This suggests a random show from the displayed list!
 
 **Format:** `suggest`
 
@@ -448,7 +452,7 @@ Sort can help reorder the list!!
 
 ### Importing a show: `import`
 
-**Description:** Want to easily import Trackermon data from other devices? Just use our import function!
+**Description:** Wanting to easily import Trackermon data from other devices? Just use our import function!
 
 **Format:** `import`
 
@@ -472,7 +476,7 @@ Sort can help reorder the list!!
 
 ### Exporting a show: `export`
 
-**Description:** Want to easily export Trackermon data to other devices? Just use our export function!
+**Description:** Wanting to easily export Trackermon data to other devices? Just use our export function!
 
 **Format:** `export`
 
@@ -498,7 +502,6 @@ Sort can help reorder the list!!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## FAQ
 * **Q:** Where is the data of Trackermon saved?<br>
@@ -515,7 +518,6 @@ Sort can help reorder the list!!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Command summary
 
@@ -537,7 +539,6 @@ Sort can help reorder the list!!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Glossary
 
