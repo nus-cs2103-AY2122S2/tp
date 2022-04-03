@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Attack on Titan "
-            + PREFIX_STATUS + "watching"
+            + PREFIX_STATUS + "watching "
             + PREFIX_COMMENT + "This is not bad!";
 
     public static final String MESSAGE_EDIT_SHOW_SUCCESS = "Edited Show: %1$s";

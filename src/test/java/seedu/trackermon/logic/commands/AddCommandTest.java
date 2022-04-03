@@ -164,6 +164,7 @@ public class AddCommandTest {
 
         @Override
         public void updateSortedShowList(Comparator<Show> comparator) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
