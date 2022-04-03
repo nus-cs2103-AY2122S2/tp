@@ -17,7 +17,6 @@ public class ItemTable extends UiComponent<VBox> {
 
     private static final String FXML = "table/item/ItemTable.fxml";
 
-    private final ProductCard productCard;
     private final Product product;
     private final int productIndex;
 
@@ -35,9 +34,8 @@ public class ItemTable extends UiComponent<VBox> {
      * @param product The {@code Product} associated with this table.
      * @param productIndex The index of the product.
      */
-    public ItemTable(MainWindow mainWindow, ProductCard productCard, Product product, int productIndex) {
+    public ItemTable(MainWindow mainWindow, Product product, int productIndex) {
         super(FXML, mainWindow);
-        this.productCard = productCard;
         this.product = product;
         this.productIndex = productIndex;
         this.filteredItem = product.getFilteredItems();
@@ -70,7 +68,6 @@ public class ItemTable extends UiComponent<VBox> {
         @Override
         public void onChanged(Change<? extends Item> c) {
             populateField();
-            productCard.populateField();
         }
     }
 
