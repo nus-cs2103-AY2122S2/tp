@@ -53,13 +53,12 @@ public class PieChartWindow extends UiPart<Stage> {
         covidStatsDataByBlocks = SummariseCommand.getCovidStatsByBlockDataList();
         covidStatsByBlockData = new TreeMap<>();
         positiveStatsByFacultyData = SummariseCommand.getPositiveStatsByFacultyData();
-        execute();
     }
 
     /**
      * Organises the data into Charts in a new window.
      */
-    private void execute() {
+    public void execute() {
         collateBlocksChart();
         charts.getChildren().add(createFacultyChartPositive());
         charts.setSpacing(70);
