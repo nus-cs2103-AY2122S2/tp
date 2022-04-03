@@ -3,9 +3,11 @@ layout: page
 title: User Guide
 ---
 
-ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, allowing you to shift your focus to other more important things.
+ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, enabling you to shift your focus to other more important things.
 
 Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, and a *Schedule* for managing Appointments.
+
+ContaX is designed with versatility in mind, so it does not place unnecessarily strict constraints on your inputs. It accepts all inputs, even those that may remotely have a chance of being valid. For more details, see the [Global Input Constraints](#global-input-constraints) section.
 
 * Table of Contents
 {:toc}
@@ -50,29 +52,29 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Global Input Constraints
+
+ContaX is generally designed to impose as little constraints on inputs as possible. However, there still exists certain limitations that apply throughout all features.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+* **INTEGER** inputs are limited to a maximum value of `2,147,483,647`.<br>
+  Any value above this limit will not be considered an integer.
+* Leading and Trailing **Whitespaces** are ignored for `ALL` user inputs.<br>
+  e.g. `  My Tag   ` is treated simply as `My Tag`.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+</div>
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+### Displayed Indexes
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+The displayed index of a `Person`, `Appointment` or `Tag` refers to the number displayed beside the record in the UI.
+Only positive [integers](#global-input-constraints) are recognised as a **displayed index**.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+![Displayed Person Index Location](images/DisplayedIndex.png)
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+<div markdown="block" class="alert alert-warning">
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+:rotating_light: The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
 
 </div>
 
@@ -80,11 +82,10 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 <div markdown="block" class="alert alert-secondary">
 
-**:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
+**:information_source: Only these format(s) for date and time inputs are allowed.**<br>
 
 * All date inputs must conform to one of the following formats:
-  * `dd-mm-yyyy`
-  * `dd/mm/yyyy`
+  * `dd-mm-yyyy` or `dd/mm/yyyy`, or any combination of `-` and `/` separators
   * `dd MMM yyyy` with the date components appearing in any order
 
 | Field | Description |
@@ -107,13 +108,32 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 </div>
 
-### Viewing help : `help`
+## Features
 
-Displays a window with the commands' usage and a link to access the user guide.
+<div markdown="block" class="alert alert-info">
 
-![help message](images/helpMessage.png)
+**:information_source: Notes about the command format:**<br>
 
-Format: `help`
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
+  See the [Global Input Constraints](#global-input-constraints) section for restrictions on the parameter supplied.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
 
 ### Onboarding guide
 
@@ -142,6 +162,12 @@ Shows the commands available and the syntax for all of them. It also includes a 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Clearing all entries : `clear`
+
+Clears all contacts and tags from the address book and all appointments from the schedule.
+
+Format: `clear`
 
 ### Adding a person: `addperson`
 
@@ -218,12 +244,6 @@ Format: `deleteperson INDEX`
 Examples:
 * `listpersons` followed by `deleteperson 2` deletes the 2nd person in the address book.
 * `findperson Betsy` followed by `deleteperson 1` deletes the 1st person in the results of the `findperson` command.
-
-### Clearing all entries : `clear`
-
-Clears all contacts and tags from the address book and all appointments from the schedule.
-
-Format: `clear`
 
 ### Creating a Tag : `addtag`
 
