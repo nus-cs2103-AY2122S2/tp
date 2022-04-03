@@ -288,7 +288,7 @@ that undone command will be removed from history and can no longer be undone.
 
 Redo the command that was previously undone.
 
-Only these commands that changed HackNet can be undone:
+Only these commands that changed HackNet can be redone:
 * Add
 * Delete
 * Edit
