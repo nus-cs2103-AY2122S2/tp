@@ -64,9 +64,13 @@ public class DeleteTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
     }
 
-    private Person deleteTagFromPerson(Person personToEdit, int tagNumber) {
+    private Person deleteTagFromPerson(Person personToEdit, int tagNumber) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
+        if (tagNumber < 1 || tagNumber > tagList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_NUMBER);
+        }
+
         tagList.remove(tagNumber - 1);
 
         newPerson.setTags(tagList);

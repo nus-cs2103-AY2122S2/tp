@@ -70,11 +70,14 @@ public class EditTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
     }
 
-    private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) {
+    private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
-        tagList.set(tagNumber - 1, tag); // add exception later
+        if (tagNumber < 1 || tagNumber > tagList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_NUMBER);
+        }
 
+        tagList.set(tagNumber - 1, tag); // add exception later
         newPerson.setTags(tagList);
         return newPerson;
     }
