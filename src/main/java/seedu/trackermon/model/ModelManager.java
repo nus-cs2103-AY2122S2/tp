@@ -114,15 +114,12 @@ public class ModelManager implements Model {
     @Override
     public void addShow(Show show) {
         showList.addShow(show);
-        sortedShows.setComparator(null);
-        //sortedShows = new SortedList<>(this.showList.getShows());
     }
 
     @Override
     public void setShow(Show target, Show editedShow) {
         requireAllNonNull(target, editedShow);
         showList.setShow(target, editedShow);
-        sortedShows.setComparator(null);
     }
 
     //=========== Filtered Show List Accessors =============================================================
@@ -174,6 +171,7 @@ public class ModelManager implements Model {
         requireNonNull(comparator);
         sortedShows.setComparator(comparator);
         saveSortedShowList();
+        sortedShows.setComparator(null);
     }
 
     @Override
