@@ -195,7 +195,7 @@ Edits an existing person in the address book.
 
 Format: `editperson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the [index number](#displayed-indexes) shown in the **displayed person list**. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -238,7 +238,7 @@ Deletes the specified person from the address book.
 Format: `deleteperson INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the [index number](#displayed-indexes) shown in the **displayed person list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -265,7 +265,7 @@ Edits an existing tag in ContaX.
 Format: `edittag INDEX t/NEW_TAGNAME`
 
 * All parameters **must** be specified.
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed tag list**.
 * Changes the name of a tag at `INDEX` to `NEW_TAGNAME`.
 * An error will be thrown if either `INDEX` is invalid or `NEW_TAGNAME` already exists in ContaX.
 * An error will be thrown if the tag at `INDEX` has the same name as `NEW_TAGNAME`
@@ -289,7 +289,7 @@ Deletes the specified tag in ContaX.
 
 Format: `deletetag INDEX`
 
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed tag list**.
 * When the tag is deleted, contacts that contain this tag will have the tag removed.
 
 Examples:
@@ -348,7 +348,7 @@ Deletes an Appointment previously created in the Schedule.
 Format: `deleteappt INDEX`
 
 * Deletes the appointment that is at `INDEX` in the displayed appointment list.
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 
 Examples:
 * `deleteappt 2` Deletes the *second* appointment in the list of appointments.
@@ -360,7 +360,7 @@ Edits an Appointment previously created in the Schedule.
 Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 
 * Edits the appointment that is at `INDEX` in the displayed appointment list, setting the supplied parameter(s) to the supplied value(s).
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
     * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
@@ -544,7 +544,7 @@ Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
   * list
   * edit
   * delete
-* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the index number shown in the **displayed contact list**
+* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed contact list**
 * `INDEX_FROM` must be less than `INDEX_TO` must be supplied, otherwise the command will perform no operation
 * The resultant effect of the command is dependent on the performed action
 
