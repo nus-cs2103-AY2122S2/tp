@@ -261,9 +261,6 @@ public class ParserUtil {
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -296,8 +293,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String tag} into a {@code dateTime}.
      * Leading and trailing whitespaces will be trimmed.
-=======
-     * * Parses {@code String groupName} into a {@code Group}.
+     * Parses {@code String groupName} into a {@code Group}.
      */
     public static Group parseGroup(String groupName)
             throws ParseException {
@@ -308,15 +304,13 @@ public class ParserUtil {
     /**
      * Parses a {@code String tag} into a {@code dateTime}.
      * Leading and trailing whitespaces will be trimmed.
-=======
-     * * Parses {@code String groupName} into a {@code Group}.
+     * Parses {@code String groupName} into a {@code Group}.
      */
     public static String parseGroupString(String groupName) {
         return groupName.trim();
     }
 
     /**
->>>>>>> d66aca91cd59f82ab2db82fcd6d4231d99288ae6
      * Parses a date string with YYYY-MM-DD into LocalDate object
      *
      * @param date
@@ -337,7 +331,6 @@ public class ParserUtil {
     }
 
     /**
->>>>>>> 98d7be2fb745656e469996e1f9555d56584a0fb3
      * Parses {@code Collection<String> keyEventAndDate} and
      * {@code Module module}into a {@code ArrayList<ModuleKeyEvent>}.
      */
@@ -363,7 +356,6 @@ public class ParserUtil {
     }
 
     /**
->>>>>>> 69f9bda5ca8dfb47b3a4168a9dba4176c85f29f7
      * Parses {@code String dateTime} into a {@code LocalDateTime}.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
