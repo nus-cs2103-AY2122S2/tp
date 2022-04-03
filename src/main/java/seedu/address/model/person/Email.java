@@ -70,6 +70,6 @@ public class Email implements Comparable<Email> {
 
     @Override
     public int compareTo(Email email) {
-        return value.compareTo(email.value);
+        return value.compareToIgnoreCase(email.value);
     }
 }

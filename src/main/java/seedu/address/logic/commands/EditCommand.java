@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.ui.StatusBarFooter.isArchiveBook;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -127,7 +125,7 @@ public class EditCommand extends RedoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index == null || editPersonDescriptor == null) {
-            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false, false, "");
+            return new CommandResult(SHOWING_EDIT_WINDOW, false, false, true, false, false, false);
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -141,6 +139,7 @@ public class EditCommand extends RedoableCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+
         if (isArchiveBook()) {
             // Disable name editing since we can assume that an archived person would not have wrong details, except
             // for details that can change over time (e.g. address, phone number, email)
@@ -152,7 +151,6 @@ public class EditCommand extends RedoableCommand {
             model.setPerson(personToEdit, editedPerson);
         }
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

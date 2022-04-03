@@ -35,8 +35,8 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
+        Command command = new AddCommand(validPerson);
+        CommandResult commandResult = command.execute(modelStub);
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -175,24 +175,26 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteArchivedPerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addArchivedPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setArchivedPerson(Person target, Person editedPerson) {
+        public void switchAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortArchivedPerson(SortCommand.PersonComparator comparator) {
+        public boolean isSwapped() {
+            return false;
+        }
+
+        @Override
+        public void setSwappedAddressBook(boolean isSwapped,
+                                          ReadOnlyAddressBook addressBook, ReadOnlyAddressBook archiveBook) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
@@ -233,6 +235,11 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+
+        @Override
+        public ReadOnlyAddressBook getArchiveBook() {
             return new AddressBook();
         }
     }

@@ -17,7 +17,6 @@ import seedu.address.commons.core.BookNames;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -240,14 +239,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Function to archive the selected person's information
-     */
-    private void handleArchive(CommandResult result) throws CommandException {
-        String oneBasedTarget = result.getFeedbackToUser();
-        logic.archivePersonByIndex(oneBasedTarget);
-    }
-
-    /**
      * Copy to the clipboard the selected person's information.
      */
     private void handleCopy(CommandResult result) {
@@ -275,16 +266,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isCopyCommand()) {
                 resultDisplay.setFeedbackToUser("Successfully copied to clipboard!\n");
                 handleCopy(commandResult);
-            } else if (commandResult.isArchiveCommand()) {
-                String archiveMode = commandResult.getArchiveMode();
-                if (archiveMode.equals(ArchiveCommand.COMMAND_WORD)) {
-                    resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
-                            commandResult.getFeedbackToUser()));
-                } else if (archiveMode.equals(ArchiveCommand.ALT_COMMAND_WORD)) {
-                    resultDisplay.setFeedbackToUser(String.format(ArchiveCommand.MESSAGE_UNARCHIVE_PERSON_SUCCESS,
-                            commandResult.getFeedbackToUser()));
-                }
-                handleArchive(commandResult);
             } else {
                 resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             }
@@ -304,7 +285,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isSwitchCommand()) {
                 handleSwitch();
             }
-
 
             if (commandResult.isExit()) {
                 handleExit();
