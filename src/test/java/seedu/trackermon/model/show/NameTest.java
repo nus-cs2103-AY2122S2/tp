@@ -1,5 +1,6 @@
 package seedu.trackermon.model.show;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackermon.testutil.Assert.assertThrows;
@@ -36,5 +37,29 @@ public class NameTest {
         assertTrue(Name.isValidName("Peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("YoU")); // with capital letters
         assertTrue(Name.isValidName("The Time I Got Bang Down by Truck kun")); // long names
+    }
+
+    @Test
+    void testToString() {
+        Name testName = new Name("Another");
+        assertEquals("Another", testName.fullName);
+    }
+
+    @Test
+    void testEquals() {
+        Name testName = new Name("Another");
+        assertTrue(testName.equals(testName));
+    }
+
+    @Test
+    void testHashCode() {
+        Name testName = new Name("Another");
+        assertEquals("Another".hashCode(), testName.hashCode());
+    }
+
+    @Test
+    void compareTo() {
+        Name testName = new Name("Another");
+        assertEquals(0, testName.compareTo(new Name("ANOTHER")));
     }
 }
