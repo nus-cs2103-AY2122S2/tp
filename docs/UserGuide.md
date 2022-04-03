@@ -379,8 +379,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ### Sorting the shows `sort`
 
-Your show list is in a mess! Do you need a way to organise your list?
-Sort can help reorder the list!!
+**Description:** Wanting to organise your messy show list? Sort can help reorder the list for you!
 
 <div markdown="block" class="alert alert-danger">
 
