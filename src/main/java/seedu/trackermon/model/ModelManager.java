@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final ShowList showList;
     private final UserPrefs userPrefs;
     private final FilteredList<Show> filteredShows;
-    private SortedList<Show> sortedShows;
+    private final SortedList<Show> sortedShows;
 
     /**
      * Initializes a ModelManager with the given showList and userPrefs.
