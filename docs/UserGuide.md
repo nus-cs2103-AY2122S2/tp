@@ -310,7 +310,9 @@ Examples:
 
 ![Find Tags](images/FindTag.png)
 
-### Creating an Appointment : `addappt`
+### Appointment-Related Actions
+
+#### Creating an Appointment : `addappt`
 
 Creates an Appointment in the Schedule.
 
@@ -331,7 +333,7 @@ Examples:
 * `addappt n/Bi-Weekly Meeting d/14-02-2022 t/11:00 l/60` Creates a *one-hour* appointment named *"Bi-Weekly Meeting"* on *14th Feb 2022* at *11:00 AM*, associated with nobody in the contact list.
 * `addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300` Creates a *5-hour* appointment named *"Contract Signing With Charlie"* on *22nd Oct 2022* at *4:30 PM*, associated with the *first* person in the contact list.
 
-### Listing All Appointments : `listappt`
+#### Listing All Appointments : `listappt`
 
 Shows a list of all Appointments in the Schedule.
 
@@ -341,7 +343,7 @@ Format: `listappt`
 
 ![List Appointments Result](images/ListAppointments.png)
 
-### Deleting an Appointment : `deleteappt`
+#### Deleting an Appointment : `deleteappt`
 
 Deletes an Appointment previously created in the Schedule.
 
@@ -353,7 +355,7 @@ Format: `deleteappt INDEX`
 Examples:
 * `deleteappt 2` Deletes the *second* appointment in the list of appointments.
 
-### Editing an Appointment : `editappt`
+#### Editing an Appointment : `editappt`
 
 Edits an Appointment previously created in the Schedule.
 
@@ -376,7 +378,7 @@ Examples:
 * `editappt 6 l/300 p/none` Edits the *6th* appointment in the list of appointments to have a duration of *5 hours*, and removes the person associated with the appointment. No other properties are changed.
 * `editappt 2 n/Call Juliet t/13:45 p/1` Edits the *second* appointment in the list of appointments to have the name *"Call Juliet"*, changes the time to *1:45 PM* and associates the appointment to the first person in the displayed persons list. No other properties are changed.
 
-### Listing Appointments Within A Period : `apptbetween`
+#### Listing Appointments Within A Period : `apptbetween`
 
 Lists all appointments from a starting time to an ending time inclusive of both ends of the range.
 It will list all appointments that contain any sub-range of the provided period.
@@ -404,7 +406,7 @@ Example:
 
 ![Appointments Between Wireframe](images/AppointmentsBetween.png)
 
-### Listing Empty Slots in Schedule Within A Period : `freebetween`
+#### Listing Empty Slots in Schedule Within A Period : `freebetween`
 
 Lists all empty slots in the schedule of a certain minimum duration, within the specified starting time to ending time.
 An appointment of the specified minimum duration can be inserted into each of the listed slots without causing any overlapping appointments in the schedule.
@@ -433,7 +435,7 @@ Example:
 
 ![Appointments Between Wireframe](images/FreeBetween.png)
 
-### Finding Appointment by Name or Person Name : `findappt`
+#### Finding Appointment by Name or Person Name : `findappt`
 
 Finds appointments with name or Person name that contains the given keyword.
 
