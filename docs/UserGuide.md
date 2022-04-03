@@ -238,7 +238,7 @@ Examples of usage:
 
 💡`Tips:`
 * The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
-* You can use <a href='#finding-a-contact-find'>`find`</a> to get his/her `INDEX` and then apply `delete`.
+* You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
 * Deletions can be reversed with the `undo` feature.
 
@@ -379,7 +379,7 @@ Clear all the data inside Tracey.
 Format:`clear`
 
 ⚠️`Warning:`
-* Use the <a href='#archiving-tracey-archive'>archive command</a> to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
+* Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 * This feature cannot be reversed using `undo`.
 
 ### Exiting Tracey
