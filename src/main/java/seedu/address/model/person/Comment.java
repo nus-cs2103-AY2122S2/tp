@@ -13,6 +13,7 @@ public class Comment implements Comparable<Comment> {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final int MAX_LENGTH = 60;
     public final String value;
 
     /**
@@ -36,6 +37,14 @@ public class Comment implements Comparable<Comment> {
      */
     public static boolean isValidComment(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Gets the length of the comment
+     * @return the length of the comment string
+     */
+    public int getLength() {
+        return this.value.length();
     }
 
     public boolean isEmpty() {
