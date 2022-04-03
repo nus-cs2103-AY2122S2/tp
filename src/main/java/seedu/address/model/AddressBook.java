@@ -11,6 +11,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.UniqueMedicalList;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePatientList;
 import seedu.address.model.prescription.Prescription;
@@ -85,11 +86,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code patient} exists in the MedBook.
      */
-    public boolean hasPerson(Patient patient) {
+    public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
         return patients.contains(patient);
+    }
+
+    /**
+     * Returns true if a person with the same nric as {@code nric} exists in the MedBook.
+     */
+    public boolean hasNric(Nric nric) {
+        requireNonNull(nric);
+        return patients.containsNric(nric);
     }
 
     /**

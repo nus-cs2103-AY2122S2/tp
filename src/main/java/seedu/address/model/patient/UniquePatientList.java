@@ -37,6 +37,14 @@ public class UniquePatientList implements Iterable<Patient> {
     }
 
     /**
+     * Returns true if the list contains a patient with the same nric as { @nric }.
+     */
+    public boolean containsNric(Nric nric) {
+        requireNonNull(nric);
+        return internalList.stream().anyMatch(p -> p.isSameNic(nric));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

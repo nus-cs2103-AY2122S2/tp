@@ -83,6 +83,9 @@ public class Patient {
                 && otherPatient.getNric().equals(getNric());
 
     }
+    public boolean isSameNic(Nric nric) {
+        return nric != null && nric.equals(getNric());
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.

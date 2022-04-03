@@ -23,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 
 public class AddMedicalCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -83,9 +82,8 @@ public class AddMedicalCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
-        if (!model.hasPatient(new NricPredicate(patientNric))) {
+        if (!model.hasNric(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

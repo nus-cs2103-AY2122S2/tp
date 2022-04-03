@@ -14,7 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 
 public class ViewMedicalCommand extends Command {
@@ -55,7 +54,7 @@ public class ViewMedicalCommand extends Command {
                     COMMAND_TYPE);
         } else { // Nric specified, find and display medical details for patient with specifed nric
             model.updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
-            if (!model.hasPatient(new NricPredicate(nric))) {
+            if (!model.hasNric(nric)) {
                 throw new CommandException(MESSAGE_MISSING_PATIENT);
             }
 

@@ -18,6 +18,7 @@ import seedu.address.model.contact.ContactWithNricPredicate;
 import seedu.address.model.medical.Medical;
 import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionWithNricPredicate;
@@ -111,18 +112,18 @@ public class ModelManager implements Model {
     }
 
 
-    //=========== Person ================================================================================
+    //=========== Patient ================================================================================
 
     @Override
     public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
-        return addressBook.hasPerson(patient);
+        return addressBook.hasPatient(patient);
     }
 
     @Override
-    public boolean hasPatient(Predicate<Patient> predicate) {
-        requireNonNull(predicate);
-        return !filteredPatients.filtered(predicate).isEmpty();
+    public boolean hasNric(Nric nric) {
+        requireNonNull(nric);
+        return addressBook.hasNric(nric);
     }
 
     @Override
@@ -234,6 +235,7 @@ public class ModelManager implements Model {
         updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
         updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
         updateFilteredConsultationList(new ConsultationWithPredicates(nric));
+        updateFilteredPatientList(new NricPredicate(nric));
     }
 
     //=========== Contact ================================================================================

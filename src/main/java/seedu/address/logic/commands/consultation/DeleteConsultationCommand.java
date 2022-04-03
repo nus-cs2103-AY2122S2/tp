@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandManager;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -53,7 +54,8 @@ public class DeleteConsultationCommand extends Command {
         Consultation consultationToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteConsultation(consultationToDelete);
         if (lastShownList.isEmpty()) {
-            CommandType.setViewCommandType(CommandType.DEFAULT);
+            CommandManager.setViewCommandType(CommandType.DEFAULT);
+            model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
             return new CommandResult(String.format(MESSAGE_CONSULTATION_DELETE_SUCCESS, targetIndex.getOneBased()),
                     CommandType.DEFAULT);
         }

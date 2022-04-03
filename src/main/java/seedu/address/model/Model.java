@@ -71,7 +71,7 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasPatient(Predicate<Patient> predicate);
+    boolean hasNric(Nric nric);
 
     /**
      * Deletes the given person.
