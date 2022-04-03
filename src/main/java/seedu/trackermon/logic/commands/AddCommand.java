@@ -54,8 +54,6 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_SHOW);
         }
 
-        //this line is to make the show add to last index
-        model.updateSortedShowList(Model.COMPARATOR_SHOW_ALL_SHOWS);
         model.addShow(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), model.getShowListSize() - 1);
     }

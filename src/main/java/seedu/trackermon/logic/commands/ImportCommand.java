@@ -7,7 +7,7 @@ import seedu.trackermon.storage.JsonFileManager;
 
 
 /**
- * Lists all shows in Trackermon to the user.
+ * Imports data into Trackermon.
  */
 public class ImportCommand extends Command {
 

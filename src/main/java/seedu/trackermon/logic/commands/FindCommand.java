@@ -24,6 +24,8 @@ public class FindCommand extends Command {
             + COMMAND_WORD + " n/hero kyojin academia s/completed t/Action";
     public static final String TAG_ERROR = "Tag parameter must only be a single word.\n"
             + "Example: " + COMMAND_WORD + " t/Action";
+    public static final String RATING_ERROR = "Rating parameter must not be empty and must be a whole number ranging "
+        + "from 0 to 5!\nExample: " + COMMAND_WORD + " r/5";
 
     private final Predicate<Show> predicate;
 
