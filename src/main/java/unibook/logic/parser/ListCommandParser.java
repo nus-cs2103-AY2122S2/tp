@@ -6,6 +6,7 @@ import unibook.commons.core.Messages;
 import unibook.logic.commands.ListCommand;
 import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.module.ModuleCode;
+import unibook.model.module.ModuleName;
 
 
 /**
@@ -82,6 +83,10 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_FIELD_EMPTY, "Name"));
         }
 
+        if (!ModuleName.isValidModuleName(name)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_MODULE_NAME));
+        }
+
         return new ListCommand(name, dateString, keyEvent.toUpperCase(),
                 ListCommand.ListCommandType.MODULESWITHDATEANDKEYEVENTANDNAME);
     }
@@ -117,6 +122,10 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_FIELD_EMPTY, "Name"));
         }
 
+        if (!ModuleName.isValidModuleName(name)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_MODULE_NAME));
+        }
+
         return new ListCommand(dateString, name,
                 ListCommand.ListCommandType.MODULESWITHDATEANDNAME);
     }
@@ -134,6 +143,9 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_FIELD_EMPTY, "Key Event"));
         }
 
+        if (!ModuleName.isValidModuleName(name)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_MODULE_NAME));
+        }
 
         return new ListCommand(name, keyEvent,
                 ListCommand.ListCommandType.MODULESWITHNAMEANDKEYEVENT);
@@ -229,6 +241,10 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         if (name.strip().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_FIELD_EMPTY, "Name"));
+        }
+
+        if (!ModuleName.isValidModuleName(name)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_MODULE_NAME));
         }
 
         return new ListCommand(name, ListCommand.ListCommandType.MODULEWITHNAMEMATCH);
