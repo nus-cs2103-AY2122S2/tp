@@ -49,7 +49,10 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!Name.isValidNameLength(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS_CHARACTER_LENGTH);
         }
         return new Name(trimmedName);
     }

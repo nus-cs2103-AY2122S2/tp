@@ -35,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final int MAXIMUM_NAME_CHARACTER_LENGTH = 60;
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -77,6 +78,33 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseName_validCharacterLength_returnsTrimmedName() throws Exception {
+        String nameWithCharacterLengthOneLessThanMaximum = "";
+        for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH - 1; i++) {
+            nameWithCharacterLengthOneLessThanMaximum += "a";
+        }
+        Name expectedNameTestCaseOne = new Name(nameWithCharacterLengthOneLessThanMaximum);
+        assertEquals(expectedNameTestCaseOne, ParserUtil.parseName(nameWithCharacterLengthOneLessThanMaximum));
+
+        String nameWithCharacterLengthEqualsToMaximum = "";
+        for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH; i++) {
+            nameWithCharacterLengthEqualsToMaximum += "a";
+        }
+        Name expectedNameTestCaseTwo = new Name(nameWithCharacterLengthEqualsToMaximum);
+        assertEquals(expectedNameTestCaseTwo, ParserUtil.parseName(nameWithCharacterLengthEqualsToMaximum));
+    }
+
+    @Test
+    public void parseName_invalidCharacterLength_throwsParseException() {
+        String nameWithCharacterLengthOneMoreThanMaximum = "";
+        for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH + 1; i++) {
+            nameWithCharacterLengthOneMoreThanMaximum += "a";
+        }
+        final String invalidName = nameWithCharacterLengthOneMoreThanMaximum;
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(invalidName));
     }
 
     @Test

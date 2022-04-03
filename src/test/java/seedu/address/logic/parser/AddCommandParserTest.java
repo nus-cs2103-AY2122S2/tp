@@ -185,7 +185,7 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + BLOCK_DESC_BOB + FACULTY_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + MATRICULATION_NUMBER_DESC_BOB + COVID_STATUS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS_FORMAT);
 
         // invalid block
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_BLOCK_DESC + FACULTY_DESC_BOB + PHONE_DESC_BOB
@@ -230,7 +230,7 @@ public class AddCommandParserTest {
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + BLOCK_DESC_BOB + FACULTY_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + MATRICULATION_NUMBER_DESC_BOB + COVID_STATUS_DESC_BOB,
-                Name.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS_FORMAT);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + BLOCK_DESC_BOB + FACULTY_DESC_BOB
