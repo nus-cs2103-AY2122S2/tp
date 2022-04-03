@@ -114,6 +114,7 @@ public class ModelManager implements Model {
     @Override
     public void addShow(Show show) {
         showList.addShow(show);
+        updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
     }
 
     @Override
