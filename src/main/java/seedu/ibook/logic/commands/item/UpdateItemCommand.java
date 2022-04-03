@@ -1,7 +1,6 @@
 package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ibook.model.product.Product.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Optional;
 
@@ -64,7 +63,8 @@ public class UpdateItemCommand extends Command {
         model.prepareIBookForChanges();
         model.updateItem(targetProduct, itemToUpdate, updatedItem);
         model.saveIBookChanges();
-        model.updateFilteredItemListForProducts(PREDICATE_SHOW_ALL_ITEMS);
+        model.clearProductFilters();
+
         return new CommandResult(
                 String.format(MESSAGE_UPDATE_ITEM_SUCCESS, targetProduct.getName(), updatedItem));
     }
