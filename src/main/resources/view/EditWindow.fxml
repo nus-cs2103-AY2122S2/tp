@@ -91,7 +91,7 @@
                            <TextField fx:id="emailField" onAction="#handleEnter" prefHeight="44.0" prefWidth="449.0" promptText="[OPTIONAL] johndoe@example.com" />
                         </children>
                      </HBox>
-                     <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="524.0" text="Label">
+                     <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="524.0" text="Label" wrapText="true">
                         <font>
                            <Font size="16.0" />
                         </font>
