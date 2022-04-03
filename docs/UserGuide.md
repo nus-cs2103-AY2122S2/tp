@@ -268,9 +268,42 @@ Only these commands that changed HackNet can be undone:
 * Unteam
 * Clear
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the undo command:**<br>
+
+* The commands executed will be stored in history, please use the `undo` command to restore them.
+* Only the commands as listed above can be undone.
+* If a different command is executed after a command is undone,
+that undone command will be removed from history and can no longer be undone.
+* e.g `Add person 1 -> Add person 2 -> undo -> Add person 3` will have the same persons and history as
+  `Add person 1 ->  Add person 3`
+* <b>IMPORTANT!</b> All commands in history will be removed when the application exits.
+</div>
+
 ### Redo last command: `redo`
 
 Redo the command that was previously undone.
+
+Only these commands that changed HackNet can be undone:
+* Add
+* Delete
+* Edit
+* Team
+* Unteam
+* Clear
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the redo command:**<br>
+
+* This command will revert HackNet back to the state before the last command is executed.
+* Only the commands specified above can be redone.
+* If a command is executed and there are commands in the history,
+those commands that are not redone will be removed from history.
+* <b>IMPORTANT!</b> All commands in history will be removed when the application exits.
+
+</div>
 
 ### Navigating User Input History: `↑`, `↓`
 
