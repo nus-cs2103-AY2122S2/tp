@@ -317,7 +317,7 @@ Creates an Appointment in the Schedule with the specified parameters.
 Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 * All parameters except `PERSON` **must** be specified.
-* `NAME` denotes the appointment's name which must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
+* `NAME` denotes the appointment's name which must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`.
 * `DATE` and `TIME` denote the appointment's starting date and time respectively.<br>
   Both `DATE` and `TIME` **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
 * `DURATION` is the duration of the appointment in *minutes*, and **must be a positive [integer](#global-input-constraints)**.
@@ -362,7 +362,7 @@ Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 * The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
-  * `NAME` must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
+  * `NAME` must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`.
   * `DATE` and `TIME` denote the appointment's starting date and time respectively.<br>
     Both `DATE` and `TIME` **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
   * `DURATION` is the duration of the appointment in *minutes*, and **must be a positive [integer](#global-input-constraints)**.
@@ -383,18 +383,23 @@ It will list all appointments that contain any sub-range of the provided period.
 
 Format: `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
+<div markdown="span" class="alert alert-info">
+
+:information_source: **:** If `ENDTIME` is specified, then `ENDDATE` must be specified.
+
+</div>
+
+| Parameter   | Description                                             | Default Value      |
+|-------------|---------------------------------------------------------|--------------------|
+| `STARTDATE` | The *starting date* of the period                       | **Today**          |
+| `STARTTIME` | The *starting time* on the starting date for the period | `00:00`            |
+| `ENDDATE`   | The *ending date* of the period                         | **No upper limit** |
+| `ENDTIME`   | The *ending time* on the ending date for the period     | `23:59`            |
+
+
 * The starting time **must be before** the ending time.
-* The `STARTDATE` parameter denotes the *starting date* of the period.
-  * `STARTDATE` defaults to **Today** if unspecified.
-* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
-  * `STARTTIME` defaults to `00:00` if unspecified.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-  * No upper limit will be enforced if `ENDDATE` is unspecified
-* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
-  * `ENDTIME` defaults to `23:59` if unspecified.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `ENDTIME` is specified, then `ENDDATE` must be specified.
+* All specified parameters **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
+
 
 Example:
 * `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
@@ -411,6 +416,12 @@ An appointment of the specified minimum duration can be inserted into each of th
 
 Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
+<div markdown="span" class="alert alert-info">
+
+:information_source: **:** If `ENDTIME` is specified, then `ENDDATE` must be specified.
+
+</div>
+
 * The starting time **must be before** the ending time.
 * The `STARTDATE` parameter denotes the *starting date* of the period.
   * `STARTDATE` defaults to **Today** if unspecified.
@@ -422,7 +433,6 @@ Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/EN
   * `ENDTIME` defaults to `23:59` if unspecified.
 * Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
 * Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `ENDTIME` is specified, then `ENDDATE` must be specified.
 * The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
 
 Example:
