@@ -312,17 +312,16 @@ Examples:
 
 ### Creating an Appointment : `addappt`
 
-Creates an Appointment in the Schedule.
+Creates an Appointment in the Schedule with the specified parameters.
 
 Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
-* Creates a new appointment with the specified parameters.
 * All parameters except `PERSON` **must** be specified.
-* The `NAME` parameter must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
-* The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive integer**.
-* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the index number shown in the displayed person list.
+* `NAME` denotes the appointment's name which must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
+* `DATE` and `TIME` denote the appointment's starting date and time respectively.<br>
+  Both `DATE` and `TIME` **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
+* `DURATION` is the duration of the appointment in *minutes*, and **must be a positive [integer](#global-input-constraints)**.
+* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed person list**.
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the appointment **overlaps** with another appointment.
 </div>
@@ -348,7 +347,7 @@ Deletes an Appointment previously created in the Schedule.
 Format: `deleteappt INDEX`
 
 * Deletes the appointment that is at `INDEX` in the displayed appointment list.
-* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
+* `INDEX` **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 
 Examples:
 * `deleteappt 2` Deletes the *second* appointment in the list of appointments.
@@ -363,11 +362,12 @@ Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 * The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
-    * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
-    * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-    * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-    * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the index number shown in the displayed person list. The String `none` is used to dissociate the person associated to the appointment.
-    * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+  * `NAME` must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
+  * `DATE` and `TIME` denote the appointment's starting date and time respectively.<br>
+    Both `DATE` and `TIME` **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
+  * `DURATION` is the duration of the appointment in *minutes*, and **must be a positive [integer](#global-input-constraints)**.
+  * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the [index number](#displayed-indexes) shown in the displayed person list.<br>
+    The String `none` is used to dissociate the person associated to the appointment.
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
