@@ -571,7 +571,7 @@ Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 * `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
   * edit
   * delete
-* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed person list**
+* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed person list**.
 * `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will fail.
 * The resultant effect of the command is dependent on the performed action.
 
