@@ -83,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         emailWindow = new EmailWindow(logic.getFilteredPersonList());
+        pieChartWindow = new PieChartWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -270,6 +271,7 @@ public class MainWindow extends UiPart<Stage> {
         if (SummariseCommand.shouldOpenPieChartWindow()) {
             if (pieChartWindow == null || !pieChartWindow.isShowing()) {
                 pieChartWindow = new PieChartWindow();
+                pieChartWindow.execute();
                 pieChartWindow.show();
                 logger.info("Pie chart window is not yet initialised or not showing!");
             } else {
