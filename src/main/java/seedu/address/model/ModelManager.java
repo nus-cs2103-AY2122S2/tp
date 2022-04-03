@@ -121,12 +121,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPatient(Predicate<Patient> predicate) {
-        requireNonNull(predicate);
-        return !filteredPatients.filtered(predicate).isEmpty();
-    }
-
-    @Override
     public boolean hasNric(Nric nric) {
         requireNonNull(nric);
         return addressBook.hasNric(nric);

@@ -160,11 +160,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPatient(Predicate<Patient> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasNric(Nric nric) {
             throw new AssertionError("This method should not be called.");
         }

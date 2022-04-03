@@ -85,7 +85,6 @@ public class DeleteCommand extends Command {
         }
 
         model.deletePatient(patientToDelete);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete));
     }
 
