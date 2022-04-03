@@ -47,6 +47,11 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid!";
+    public static final String MESSAGE_STUDENT_ARG_INVALID = "Student argument %s is invalid!";
+    public static final String MESSAGE_STUDENT_EMPTY = "Student argument cannot be empty!";
+    public static final String MESSAGE_STUDENT_INDEX_OUT_OF_BOUND = "Student index is out of bounds!";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in the list!";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -387,45 +392,65 @@ public class ParserUtil {
             return model.getUnfilteredStudentList();
         }
 
-        String[] splitS = s.toUpperCase().split(",");
-        if (splitS[0].isEmpty()) {
-            throw new ParseException(MESSAGE_STUDENT_INVALID);
+        if (s.length() == 0) {
+            throw new ParseException("s.length == 0 " + MESSAGE_STUDENT_EMPTY);
         }
-        switch(splitS[0].charAt(0)) {
-        case 'E':
-            List<StudentId> studentIds = new ArrayList<>();
-            for (String i : splitS) {
-                try {
-                    StudentId sid = parseStudentId(i);
-                    if (!studentIds.contains(sid)) {
-                        studentIds.add(sid);
-                    }
-                } catch (ParseException pe) {
-                    throw new ParseException(MESSAGE_STUDENT_INVALID, pe);
-                }
-            }
+
+        String[] splitS = s.toUpperCase().split(",");
+        if (splitS.length == 0
+                || (!StudentId.isValidStudentId(splitS[0]) && !StringUtil.isNonZeroUnsignedInteger(splitS[0].trim()))) {
+            throw new ParseException("Invalid arg " + MESSAGE_STUDENT_INVALID);
+        }
+
+        if (splitS[0].charAt(0) == 'E') {
+            return parseStudentIds(splitS, model);
+        } else {
+            return parseStudentIndexes(splitS, model);
+        }
+    }
+
+    private static ObservableList<Student> parseStudentIds(String[] splitIds, Model model) throws ParseException {
+        List<StudentId> studentIds = new ArrayList<>();
+        for (String i : splitIds) {
             try {
-                return model.getStudentListByStudentIds(studentIds);
-            } catch (StudentNotFoundException e) {
-                throw new ParseException(MESSAGE_STUDENT_INVALID);
-            }
-        default:
-            List<Index> studentIndexes = new ArrayList<>();
-            for (String i : splitS) {
-                try {
-                    Index index = parseIndex(i);
-                    if (!studentIndexes.contains(index)) {
-                        studentIndexes.add(index);
-                    }
-                } catch (ParseException pe) {
-                    throw new ParseException(MESSAGE_STUDENT_INVALID, pe);
+                StudentId sid = parseStudentId(i);
+                // check for duplicates
+                if (!studentIds.contains(sid)) {
+                    studentIds.add(sid);
                 }
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_STUDENT_ARG_INVALID, i), pe);
             }
+        }
+        try {
+            return model.getStudentListByStudentIds(studentIds);
+        } catch (StudentNotFoundException e) {
+            throw new ParseException(MESSAGE_STUDENT_NOT_FOUND);
+        }
+    }
+
+    private static ObservableList<Student> parseStudentIndexes(String[] splitIndexes, Model model)
+            throws ParseException {
+        List<Index> studentIndexes = new ArrayList<>();
+        for (String i : splitIndexes) {
+            Index index;
             try {
-                return model.getStudentListByIndexes(studentIndexes);
-            } catch (StudentNotFoundException e) {
-                throw new ParseException(MESSAGE_STUDENT_INVALID);
+                index = parseIndex(i);
+            } catch (ParseException pe) {
+                throw new ParseException(MESSAGE_INVALID_INDEX, pe);
             }
+            if (!checkValidIndex(index, model.getUnfilteredStudentList().size())) {
+                throw new ParseException(MESSAGE_STUDENT_INDEX_OUT_OF_BOUND);
+            }
+            // check for duplicates
+            if (!studentIndexes.contains(index)) {
+                studentIndexes.add(index);
+            }
+        }
+        try {
+            return model.getStudentListByIndexes(studentIndexes);
+        } catch (StudentNotFoundException e) {
+            throw new ParseException(MESSAGE_STUDENT_NOT_FOUND);
         }
     }
 }
