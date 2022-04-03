@@ -124,6 +124,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String getNonUniquePersonAttributeType(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

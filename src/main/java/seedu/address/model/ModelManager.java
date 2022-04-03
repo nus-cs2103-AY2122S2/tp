@@ -94,6 +94,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getNonUniquePersonAttributeType(Person person) {
+        requireNonNull(person);
+        return addressBook.getNonUniquePersonAttributeType(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.resetOriginal();
         addressBook.saveHistory();

@@ -37,6 +37,37 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns a string of the type of attributes that is unique to a {@code person} that already exist
+     * in the address book.
+     */
+    public String getNonUniqueAttributeType(Person toCheck) {
+        requireNonNull(toCheck);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < internalList.size(); i++) {
+            Person otherPerson = internalList.get(i);
+            if (otherPerson.isSamePerson(toCheck)) {
+                if (otherPerson.getPhone().equals(toCheck.getPhone()) && !stringBuilder.toString().contains("Phone")) {
+                    stringBuilder.append("Phone");
+                }
+                if (otherPerson.getMatriculationNumber().equals(toCheck.getMatriculationNumber())
+                        && !stringBuilder.toString().contains("Matriculation Number")) {
+                    if (!stringBuilder.toString().isEmpty()) {
+                        stringBuilder.append(", ");
+                    }
+                    stringBuilder.append("Matriculation Number");
+                }
+                if (otherPerson.getEmail().equals(toCheck.getEmail()) && !stringBuilder.toString().contains("Email")) {
+                    if (!stringBuilder.toString().isEmpty()) {
+                        stringBuilder.append(" and ");
+                    }
+                    stringBuilder.append("Email");
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
