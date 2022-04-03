@@ -111,7 +111,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the 
+- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the
 2nd person into a `buyer`.
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
 - `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
@@ -297,8 +297,14 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 </aside>
 
 ### Displaying statistics `stats`
+<img src="images/user-guide/stats.png" height="400px">
 
-Opens up a new window that displays a pie chart containing the data of the number of buyers & sellers with preference or properties respectively in a particular region namely {North, South, East, West, Central}.
+Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
+
+**[Future Version]** <br/>
+Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 
 #### By Command: `stats`
 
