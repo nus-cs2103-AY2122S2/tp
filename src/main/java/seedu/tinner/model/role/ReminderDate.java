@@ -15,7 +15,7 @@ import java.time.format.ResolverStyle;
 public class ReminderDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Reminder dates should not have passed and must be in the following format: dd-MM-yyyy HH:mm";
+            "Reminder dates should not have passed and must be a valid date in the following format: dd-MM-yyyy HH:mm";
 
     public static final DateTimeFormatter VALIDATION_FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT);
