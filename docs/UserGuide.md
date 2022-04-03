@@ -509,21 +509,21 @@ Sort can help reorder the list!!
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                           |
-|------------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Help**         | `help`                                                                                                                     |
-| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                    |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                        |
-| **Edit**         | `edit INDEX [n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
-| **List**         | `list`                                                                                                                     |
-| **Clear**        | `clear`                                                                                                                    |
-| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                   |
-| **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                               | 
-| **Suggest**      | `suggest`                                                                                                                  |
-| **Import**       | `import`                                                                                                                   |
-| **Export**       | `export`                                                                                                                   |
-| **Exit**         | `exit`                                                                                                                     |
+| Action           | Format, Examples                                                                                                             |
+|------------------|------------------------------------------------------------------------------------------------------------------------------|
+| **Help**         | `help`                                                                                                                       |
+| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                      |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                          |
+| **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
+| **List**         | `list`                                                                                                                       |
+| **Clear**        | `clear`                                                                                                                      |
+| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                     |
+| **Precise Find** | `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                                 | 
+| **Suggest**      | `suggest`                                                                                                                    |
+| **Import**       | `import`                                                                                                                     |
+| **Export**       | `export`                                                                                                                     |
+| **Exit**         | `exit`                                                                                                                       |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
