@@ -16,7 +16,7 @@ Given below are my contributions to the project.
   * What it does: Allows the user to find and filter through shows with a greater degree of precision.
   * Justification: The ability to easily search for shows in a wide list of shows is vital because it saves time and reduces confusion for the user.
   * Highlights: Allows users to select the field they want to search across the list, as well as combine the specifications for a more tailored search.
-  * Credits: The find feature was adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://github.com/AY2021S2-CS2103T-T12-4/tp), [stackoverflow](https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream) and [AB-3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+  * Credits: The find feature was adopted from imPoster created by team [AY2021S2-CS2103T-T12-4](https://github.com/AY2021S2-CS2103T-T12-4/tp), [stackoverflow](https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream) and [AB-3](https://github.com/se-edu/addressbook-level3).
 
 * **Enhancements to existing features**: Improved on the help window and its UI. ([\#132](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/132), [\#191](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/191))
   * What it does: Allows the user to quickly see the command summary table without accessing the user guide.
@@ -29,19 +29,28 @@ Given below are my contributions to the project.
   * Necessary general code enhancements
     * Morphing the product into Trackermon from AB-3 [\#61](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/61)
   * Updating user/developer docs that are not specific to a feature
-    * Restructuring and reformatting the user/developer docs ([\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164), [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166))
+    * Restructuring and reformatting the user/developer docs to enhance the user centricity of the documentations ([\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164), [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166))
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `find` and `help` [\#85](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/85).
     * Added a command summary table [\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134/files)
     * Did structural overhaul and improvement to existing documentation [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166).
+      * Added Introduction
+      * Added User guide navigation
+      * Added Command structure
+      * Added Glossary table
 
   * Developer Guide:
     * Added implementation details of the `find` feature.
     * Added use cases UC01-UC06 and UC08.
     * Updated documentation and UML diagrams for Architecture and Logic ([\#81](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/81), [\#92](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/92))
-    * Did structural overhaul and improvement to existing documentation such as including a `find` sequence diagram [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164)
+    * Did structural overhaul and improvement to existing documentation [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164)
+      * Added Introduction 
+      * Added About section which includes the purpose and scope of Trackermon
+      * Added Developer guide navaigation
+      * Added `find` sequence diagrams 
+      * Added Glossary table
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#63](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63#issuecomment-1062927666), [\#149](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/149#discussion_r833837438).
+  * PRs reviewed (with non-trivial review comments): [\#149](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/149#discussion_r833837438), [\#155](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/155#discussion_r834350147).
