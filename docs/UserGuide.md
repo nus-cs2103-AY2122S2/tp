@@ -317,11 +317,15 @@ Creates an Appointment in the Schedule with the specified parameters.
 Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
 * All parameters except `PERSON` **must** be specified.
-* `NAME` denotes the appointment's name which must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`.
-* `DATE` and `TIME` denote the appointment's starting date and time respectively.<br>
-  Both `DATE` and `TIME` **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
-* `DURATION` is the duration of the appointment in *minutes*, and **must be a positive [integer](#global-input-constraints)**.
-* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed person list**.
+
+| Parameter  | Description                              | Constraints                                                                                                                               |
+|------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`.                            |
+| `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                               |
+| `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                               |
+| `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                               |
+| `PERSON`   | A person associated with the appointment | If specified, **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed person list** |
+
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the appointment **overlaps** with another appointment.
 </div>
@@ -397,7 +401,7 @@ Format: `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 | `ENDTIME`   | The *ending time* on the ending date for the period     | `23:59`          |
 
 
-* The starting time **must be before** the ending time.
+* The start of the period **must be before or equals to** the end of the period.
 * All specified parameters **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
 
 
@@ -430,7 +434,7 @@ Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/EN
 | `ENDTIME`   | The *ending time* on the ending date for the period                                         | `23:59`            |
 | `DURATION`  | the minimum duration of the slots listed in *minutes*.<br> It **must be a positive number** | **Required Field** |
 
-* The starting time **must be before** the ending time.
+* The start of the period **must be before or equals to** the end of the period.
 * If any of `STARTDATE`, `STARTTIME`, `ENDDATE` or `ENDTIME` are specified, they **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
 
 Example:
