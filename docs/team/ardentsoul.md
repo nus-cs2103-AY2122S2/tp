@@ -28,8 +28,8 @@ Given below are my contributions to the project.
 * **Project management**:
   * Necessary general code enhancements
     * Morphing the product into Trackermon from AB-3 [\#61](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/61)
-  * Updating user/developer docs that are not specific to a feature
-    * Restructuring and reformatting the user/developer docs to enhance the user centricity of the documentations ([\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164), [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166))
+  * Updated user/developer docs that are not specific to a feature
+    * Restructured and reformatted the user/developer docs to enhance the user centricity of the documentations ([\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164), [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166))
 
 * **Documentation**:
   * User Guide:
