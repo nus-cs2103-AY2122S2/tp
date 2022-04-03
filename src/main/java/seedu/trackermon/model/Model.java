@@ -18,6 +18,9 @@ public interface Model {
     /** {@code Comparator} that always evaluate to -1 */
     Comparator<Show> COMPARATOR_SHOW_ALL_SHOWS = (unused, unused2) -> -1;
 
+    /** {@code Comparator} that always evaluate to 0 */
+    Comparator<Show> COMPARATOR_SHOW_ALL_SHOWS_ZERO = null;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

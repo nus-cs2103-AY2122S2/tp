@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final ShowList showList;
     private final UserPrefs userPrefs;
     private final FilteredList<Show> filteredShows;
-    private final SortedList<Show> sortedShows;
+    private SortedList<Show> sortedShows;
 
     /**
      * Initializes a ModelManager with the given showList and userPrefs.
@@ -113,16 +113,16 @@ public class ModelManager implements Model {
 
     @Override
     public void addShow(Show show) {
-        showList.addShow(show);
-        updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
+        //this line is to make the show add to last index
         updateSortedShowList(COMPARATOR_SHOW_ALL_SHOWS);
+        showList.addShow(show);
     }
 
     @Override
     public void setShow(Show target, Show editedShow) {
         requireAllNonNull(target, editedShow);
-
         showList.setShow(target, editedShow);
+        sortedShows = new SortedList<>(this.showList.getShows());
     }
 
     //=========== Filtered Show List Accessors =============================================================
