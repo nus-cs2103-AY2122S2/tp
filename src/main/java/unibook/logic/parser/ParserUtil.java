@@ -350,15 +350,14 @@ public class ParserUtil {
             return moduleKeyEventList;
         }
         for (String eventAndDate : keyEventAndDate) {
-            try {
-                String[] strArr = eventAndDate.split(" dt/");
-                LocalDateTime dateTime = parseDateTime(strArr[1]);
-                ModuleKeyEvent.KeyEventType keyEventType = parseKeyEventType(strArr[0]);
-                ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEventType, dateTime, module);
-                moduleKeyEventList.add(moduleKeyEvent);
-            } catch (Exception e) {
+            if (!eventAndDate.contains(" dt/")) {
                 throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_MISSINGDT);
             }
+            String[] strArr = eventAndDate.split(" dt/");
+            LocalDateTime dateTime = parseDateTime(strArr[1]);
+            ModuleKeyEvent.KeyEventType keyEventType = parseKeyEventType(strArr[0]);
+            ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEventType, dateTime, module);
+            moduleKeyEventList.add(moduleKeyEvent);
         }
         return moduleKeyEventList;
     }
