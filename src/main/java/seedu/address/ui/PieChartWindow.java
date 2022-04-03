@@ -132,7 +132,30 @@ public class PieChartWindow extends UiPart<Stage> {
                     statusType.pieValueProperty().getValue()));
             pieChartData.add(statusType);
         }
+        setPieChartColor(pieChartData);
         return pieChart;
+    }
+
+    /**
+     * Sets each pir chart sections to have a specific colour according to their Covid status.
+     * If it represents positive, it is set to red. If it represents negative, it is set to green.
+     * If it represents HRN, it is set to yellowish-gold.
+     *
+     * @param pieChartData The pie chart that will undergo colouring
+     */
+    private void setPieChartColor(ObservableList<PieChart.Data> pieChartData) {
+        for (PieChart.Data data : pieChartData) {
+            String covidType = data.getName();
+            String color = "";
+            if (covidType.contains("Positive")) {
+                color = "-fx-pie-color: red;";
+            } else if (covidType.contains("Negative")) {
+                color = "-fx-pie-color: green;";
+            } else if (covidType.contains("HRN")) {
+                color = "-fx-pie-color: gold;";
+            }
+            data.getNode().setStyle(color);
+        }
     }
 
     /**
