@@ -475,7 +475,7 @@ public class ListCommand extends Command {
         }
 
         if (isGroupListShowing) {
-            throw new CommandException("You are on group page! No need to specify o/group");
+            throw new CommandException(Messages.MESSAGE_NO_GROUP_FIELD_REQUIRED);
         }
 
         if (modelManager.getFilteredModuleList().size() == 1) {
