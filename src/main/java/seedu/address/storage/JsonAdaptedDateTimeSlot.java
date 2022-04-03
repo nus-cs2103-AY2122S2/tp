@@ -13,7 +13,7 @@ import seedu.address.model.lesson.DateTimeSlot;
  */
 class JsonAdaptedDateTimeSlot {
 
-    public static final String MISSING_FIELD_MESSAGE = "DateTimeSlot has some missing fields!";
+    public static final String MISSING_FIELD_MESSAGE = "DateTimeSlot has some missing/invalid fields!";
 
     private final String dateOfLesson;
     private final String startTime;

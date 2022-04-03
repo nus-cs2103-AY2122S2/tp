@@ -22,7 +22,7 @@ import seedu.address.model.lesson.TemporaryLesson;
  */
 class JsonAdaptedLesson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE = "Lesson has some missing/invalid fields!";
 
     private final String lessonName;
     private final String subject;
@@ -71,49 +71,67 @@ class JsonAdaptedLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted temporary lesson.
      */
     public Lesson toModelType() throws IllegalValueException {
-        if (lessonName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LessonName.class.getSimpleName()));
+        checkFieldsArePresent(lessonName, subject, lessonAddress, dateTimeSlot, isRecurring);
+        checkFieldsAreValid(lessonName, subject, lessonAddress);
+
+        LessonName modelLessonName = new LessonName(lessonName);
+        Subject modelSubject = new Subject(subject);
+        LessonAddress modelLessonAddress = new LessonAddress(lessonAddress);
+        DateTimeSlot modelDateTimeSlot = dateTimeSlot.toModelType();
+        EnrolledStudents modelAssignedStudents = getEnrolledStudents(assignedStudents);
+
+        if (this.isRecurring) {
+            return Lesson.makeRecurringLesson(
+                    modelLessonName, modelSubject, modelLessonAddress,
+                    modelDateTimeSlot, modelAssignedStudents);
+        } else {
+            return Lesson.makeTemporaryLesson(
+                    modelLessonName, modelSubject, modelLessonAddress,
+                    modelDateTimeSlot, modelAssignedStudents);
         }
+    }
+
+    private static void checkFieldsArePresent(Object... toCheck) throws IllegalValueException {
+        for (Object o : toCheck) {
+            if (o == null) {
+                throw new IllegalValueException(MISSING_FIELD_MESSAGE);
+            }
+        }
+    }
+
+    private static void checkFieldsAreValid(String lessonName, String subject, String lessonAddress)
+            throws IllegalValueException {
+        checkNameIsValid(lessonName);
+        checkSubjectIsValid(subject);
+        checkAddressIsValid(lessonAddress);
+    }
+
+    private static void checkNameIsValid(String lessonName) throws IllegalValueException {
         if (!LessonName.isValidName(lessonName)) {
             throw new IllegalValueException(LessonName.MESSAGE_CONSTRAINTS);
         }
-        final LessonName modelLessonName = new LessonName(lessonName);
+    }
 
-        if (subject == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Subject.class.getSimpleName()));
-        }
+    private static void checkSubjectIsValid(String subject) throws IllegalValueException {
         if (!Subject.isValidSubject(subject)) {
             throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
         }
-        final Subject modelSubject = new Subject(subject);
+    }
 
-        if (lessonAddress == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LessonAddress.class.getSimpleName()));
-        }
+    private static void checkAddressIsValid(String lessonAddress) throws IllegalValueException {
         if (!LessonAddress.isValidAddress(lessonAddress)) {
             throw new IllegalValueException(LessonAddress.MESSAGE_CONSTRAINTS);
         }
-        final LessonAddress modelLessonAddress = new LessonAddress(lessonAddress);
+    }
 
-        if (dateTimeSlot == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    DateTimeSlot.class.getSimpleName()));
-        }
-        final DateTimeSlot modelDateTimeSlot = dateTimeSlot.toModelType();
+    private static EnrolledStudents getEnrolledStudents(List<JsonAdaptedStudent> assignedStudents)
+            throws IllegalValueException {
+        EnrolledStudents enrolledStudents = new EnrolledStudents();
 
-        final EnrolledStudents modelAssignedStudents = new EnrolledStudents();
         for (JsonAdaptedStudent student : assignedStudents) {
-            modelAssignedStudents.addStudent(student.toModelType());
+            enrolledStudents.addStudent(student.toModelType());
         }
-        if (this.isRecurring) {
-            return Lesson.makeRecurringLesson(modelLessonName, modelSubject, modelLessonAddress,
-                    modelDateTimeSlot, modelAssignedStudents);
-        } else {
-            return Lesson.makeTemporaryLesson(modelLessonName, modelSubject, modelLessonAddress,
-                    modelDateTimeSlot, modelAssignedStudents);
-        }
+
+        return enrolledStudents;
     }
 }
