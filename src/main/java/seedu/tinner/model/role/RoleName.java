@@ -64,7 +64,8 @@ public class RoleName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RoleName // instanceof handles nulls
-                && value.equals(((RoleName) other).value)); // state check
+                && value.replaceAll("\\s+", "").toLowerCase()
+                .equals(((RoleName) other).value.replaceAll("\\s+", "").toLowerCase())); // state check
     }
 
     @Override

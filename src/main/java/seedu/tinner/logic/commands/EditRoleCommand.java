@@ -39,13 +39,13 @@ public class EditRoleCommand extends Command {
             + "Followed by the index number used by the role in the specified company.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: COMPANY_INDEX ROLE_INDEX (both must be positive integers) "
-            + "[" + PREFIX_NAME + "ROLENAME] "
+            + "[" + PREFIX_NAME + "ROLENAME [(TYPE)]] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_REMINDER_DATE + "REMINDER_DATE] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_STIPEND + "STIPEND]...\n"
             + "Example: " + COMMAND_WORD + " 1 1 "
-            + PREFIX_STATUS + "PENDING "
+            + PREFIX_STATUS + "pending "
             + PREFIX_STIPEND + "3000";
 
     public static final String MESSAGE_EDIT_ROLE_SUCCESS = "Edited Role: %1$s";
