@@ -8,6 +8,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.format.DateTimeFormatter;
 
+import seedu.contax.commons.core.DateTimeFormats;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.contax.model.AddressBook;
@@ -30,7 +31,7 @@ public class AppointmentUtil {
      */
     public static String getAppointmentDetails(Appointment appointment, AddressBook addressBook) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DateTimeFormats.TIME_24H_DISPLAY_FORMAT);
         StringBuilder sb = new StringBuilder();
 
         sb.append(PREFIX_NAME + appointment.getName().name + " ");
@@ -50,7 +51,7 @@ public class AppointmentUtil {
      */
     public static String getAppointmentEditDescriptorDetails(EditAppointmentDescriptor descriptor) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DateTimeFormats.TIME_24H_DISPLAY_FORMAT);
         StringBuilder sb = new StringBuilder();
 
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME + name.name + " "));

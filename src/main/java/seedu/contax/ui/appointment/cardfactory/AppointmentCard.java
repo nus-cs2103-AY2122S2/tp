@@ -1,6 +1,8 @@
 package seedu.contax.ui.appointment.cardfactory;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.contax.commons.core.DateTimeFormats.DATE_DISPLAY_FORMAT;
+import static seedu.contax.commons.core.DateTimeFormats.TIME_12H_DISPLAY_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,10 +22,8 @@ import seedu.contax.ui.UiPart;
 class AppointmentCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentListCard.fxml";
-    private static final String DATE_FORMAT = "dd LLL uuuu";
-    private static final String TIME_FORMAT = "hh:mm a";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_DISPLAY_FORMAT);
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_12H_DISPLAY_FORMAT);
 
     private int displayedIndex;
     private Appointment appointmentModel;
