@@ -298,6 +298,18 @@ Examples: `findlesson biology` searches the lesson list for lessons which names
 
 ---
 
+### Clearing all entries
+
+Clears all lessons and students from `TeachWhat!`.
+
+Format: `clear -f`
+
+<div markdown="block" class="alert alert-info">
+To save you from accidentally deleting everything if you accidentally enter `clear`, we made it mandatory for you to include `-f` together with the command (to get confirmation from you that you indeed wish to do so).
+
+So, remember to include `-f` when typing this command! 
+</div>
+
 ### Help
 
 Opens a pop-up that gives you a link to the User guide.
@@ -362,5 +374,6 @@ An example of such an error would be conflicting lessons being found in the data
 | **View lesson**      | `lesson <LESSON_ID>` e.g. `lesson 2`                                                                                                                                                      |
 | **Find Student**     | `findlesson <FIND_CRITERIA>`                                                                                                                                                              |
 | **Find Lesson**      | `findstudent <FIND_CRITERIA>`                                                                                                                                                             |
+| **Clearing all entries**      | `clear -f`                                                                                                                                                             |
 | **Help**             | `help`                                                                                                                                                                                    |
 | **Exit**             | `exit`                                                                                                                                                                                    |
