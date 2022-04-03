@@ -83,8 +83,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             }
             return new ListCommand(parsedEntityType, filteredEntity, optionalIndex);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format("%s\n\n%s", pe.getMessage(), ListCommand.MESSAGE_USAGE), pe);
         }
     }
 
