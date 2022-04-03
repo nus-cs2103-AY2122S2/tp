@@ -23,6 +23,11 @@
     -fx-background-color: dimgray;
 }
 
+#importButton:hover {
+    -fx-background-color: gray;
+
+}
+
 #importButton {
     -fx-border-radius: 5px;
 }
@@ -33,7 +38,7 @@
 }
 
 #resizeButton {
-    -fx-background-color: xanadu;
+    -fx-background-color: dimgray;
 }
 
 #resizeButton {
