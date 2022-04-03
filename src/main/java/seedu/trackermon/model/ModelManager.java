@@ -115,13 +115,11 @@ public class ModelManager implements Model {
     public void addShow(Show show) {
         showList.addShow(show);
         updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
-        updateSortedShowList(COMPARATOR_SHOW_ALL_SHOWS);
     }
 
     @Override
     public void setShow(Show target, Show editedShow) {
         requireAllNonNull(target, editedShow);
-
         showList.setShow(target, editedShow);
     }
 
@@ -174,6 +172,7 @@ public class ModelManager implements Model {
         requireNonNull(comparator);
         sortedShows.setComparator(comparator);
         saveSortedShowList();
+        sortedShows.setComparator(null);
     }
 
     @Override
