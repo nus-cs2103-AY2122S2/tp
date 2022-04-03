@@ -33,7 +33,7 @@ public class ReminderPersons {
      * @param person The person to be reminded of.
      */
     public Reminder add(Person person, Reminder reminder) {
-        return reminderPersons.reminders.put(person, reminder);
+        return reminders.put(person, reminder);
     }
 
     /**
@@ -41,25 +41,46 @@ public class ReminderPersons {
      * @param person The person to remove from reminders.
      */
     public Reminder remove(Person person) {
-        return reminderPersons.reminders.remove(person);
+        return reminders.remove(person);
     }
 
     /**
      * Returns a shallow copy of the HashMap.
      */
     public HashMap<Person, Reminder> clone() {
-        return new HashMap<>(reminderPersons.reminders);
+        return new HashMap<>(reminders);
     }
 
+    /**
+     * Retrieves the {@code Reminder} associated with the person.
+     * @param person The person to check for reminders.
+     */
+    public Reminder get(Person person) {
+        return reminders.get(person);
+    }
+
+    public Reminder put(Person person, Reminder reminder) {
+        return reminders.put(person, reminder);
+    }
+
+    /**
+     * Retrieves a {@code Set} view of the {@code Person} in this {@code HashMap}.
+     */
     public Set<Person> getKeySet() {
-        return reminderPersons.reminders.keySet();
+        return reminders.keySet();
     }
 
+    /**
+     * Checks if the person has a {@code Reminder}.
+     */
     public boolean containsKey(Person person) {
-        return reminderPersons.reminders.containsKey(person);
+        return reminders.containsKey(person);
     }
 
+    /**
+     * Checks if there are any active {@code Reminder}s.
+     */
     public boolean isEmpty() {
-        return reminderPersons.reminders.isEmpty();
+        return reminders.isEmpty();
     }
 }
