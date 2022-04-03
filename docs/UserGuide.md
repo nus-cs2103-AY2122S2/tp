@@ -263,6 +263,10 @@ Assigns a task to a particular student.
 * `assign m/CS2103T tn/assignment 1`
     * Assigns assignment 1 to students taking module CS2103T.
 
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note**: The name of the assigned task will be converted to Title Case.
+    </div>
+
 <br>
 
 ### Viewing the completion status of a particular task: `progress`
