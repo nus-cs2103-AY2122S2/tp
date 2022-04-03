@@ -84,14 +84,14 @@ public class ParserUtilTest {
     public void parseName_validCharacterLength_returnsTrimmedName() throws Exception {
         String nameWithCharacterLengthOneLessThanMaximum = "";
         for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH - 1; i++) {
-            nameWithCharacterLengthOneLessThanMaximum+="a";
+            nameWithCharacterLengthOneLessThanMaximum += "a";
         }
         Name expectedNameTestCaseOne = new Name(nameWithCharacterLengthOneLessThanMaximum);
         assertEquals(expectedNameTestCaseOne, ParserUtil.parseName(nameWithCharacterLengthOneLessThanMaximum));
 
         String nameWithCharacterLengthEqualsToMaximum = "";
         for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH; i++) {
-            nameWithCharacterLengthEqualsToMaximum+="a";
+            nameWithCharacterLengthEqualsToMaximum += "a";
         }
         Name expectedNameTestCaseTwo = new Name(nameWithCharacterLengthEqualsToMaximum);
         assertEquals(expectedNameTestCaseTwo, ParserUtil.parseName(nameWithCharacterLengthEqualsToMaximum));
@@ -101,7 +101,7 @@ public class ParserUtilTest {
     public void parseName_invalidCharacterLength_throwsParseException() {
         String nameWithCharacterLengthOneMoreThanMaximum = "";
         for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH + 1; i++) {
-            nameWithCharacterLengthOneMoreThanMaximum+="a";
+            nameWithCharacterLengthOneMoreThanMaximum += "a";
         }
         final String invalidName = nameWithCharacterLengthOneMoreThanMaximum;
         assertThrows(ParseException.class, () -> ParserUtil.parseName(invalidName));

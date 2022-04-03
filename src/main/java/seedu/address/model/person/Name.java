@@ -17,7 +17,7 @@ import java.util.List;
 public class Name {
 
     public static final int MAXIMUM_NAME_CHARACTERS_LENGTH = 60;
-    public static final String MESSAGE_CONSTRAINTS_FORMAT=
+    public static final String MESSAGE_CONSTRAINTS_FORMAT =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String MESSAGE_CONSTRAINTS_CHARACTER_LENGTH =
             String.format("Names should only not contain more than %d characters", MAXIMUM_NAME_CHARACTERS_LENGTH);

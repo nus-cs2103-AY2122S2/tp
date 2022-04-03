@@ -43,6 +43,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_MATRICULATION_NUMBER = BENSON.getMatriculationNumber().toString();
     private static final String VALID_COVID_STATUS = BENSON.getStatus().toString();
 
+    private static final int MAXIMUM_NAME_CHARACTER_LENGTH = 60;
+
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -59,6 +61,20 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(INVALID_NAME, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNameLength_throwsIllegalValueException() {
+        String invalidNameLength = "";
+        for (int i = 0; i < MAXIMUM_NAME_CHARACTER_LENGTH + 1; i++) {
+            invalidNameLength += "a";
+        }
+        final String invalidNameCharacterLength = invalidNameLength;
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(invalidNameCharacterLength, VALID_BLOCK, VALID_FACULTY, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_MATRICULATION_NUMBER, VALID_COVID_STATUS, VALID_TAGS);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS_CHARACTER_LENGTH;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
