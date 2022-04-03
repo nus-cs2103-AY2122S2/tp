@@ -131,6 +131,8 @@ The `viewImageWindow` is then launched after it retrieves the set from `model`
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
 ## Statistics feature/Window
+<img src="images/user-guide/stats.png" height="400px">
+
 The `stats` opens a new `StatisticsWindow` that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
 
 This allows the user to be able to visualize his/her client's data to make better business decisions. (exp. Expand the user's influence in the most popular region for any potential sellers/buyers to contact him/her)

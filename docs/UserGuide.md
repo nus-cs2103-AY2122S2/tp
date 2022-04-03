@@ -294,6 +294,7 @@ RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestat
 </aside>
 
 ### Displaying statistics `stats`
+<img src="images/user-guide/stats.png" height="400px">
 
 Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
 
