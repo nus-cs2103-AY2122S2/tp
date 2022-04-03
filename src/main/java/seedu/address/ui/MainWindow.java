@@ -254,6 +254,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         emailWindow.hide();
+        pieChartWindow.hide();
         primaryStage.hide();
     }
 

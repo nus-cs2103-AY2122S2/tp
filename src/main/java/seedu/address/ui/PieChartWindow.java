@@ -13,7 +13,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -31,7 +31,7 @@ public class PieChartWindow extends UiPart<Stage> {
     private TreeMap<String, TreeMap<String, Integer>> covidStatsDataByBlocks;
     private PieChart pieChart;
     private Scene chartScene;
-    private HBox charts;
+    private VBox charts;
 
     /**
      * Creates a new PieChartWindow.
@@ -49,7 +49,7 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     public PieChartWindow() {
         this(new Stage());
-        charts = new HBox();
+        charts = new VBox();
         covidStatsDataByBlocks = SummariseCommand.getCovidStatsByBlockDataList();
         covidStatsByBlockData = new TreeMap<>();
         positiveStatsByFacultyData = SummariseCommand.getPositiveStatsByFacultyData();
@@ -57,14 +57,13 @@ public class PieChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Organises the data into Pie Charts in a new window.
+     * Organises the data into Charts in a new window.
      */
     private void execute() {
         collateBlocksChart();
-        HBox facultyChart = createFacultyChartPositive();
-        VBox allPieCharts = new VBox(charts);
-        allPieCharts.getChildren().add(facultyChart);
-        chartScene = makeChartScene(allPieCharts);
+        charts.getChildren().add(createFacultyChartPositive());
+        charts.setSpacing(70);
+        chartScene = makeChartScene(charts);
         this.getRoot().setScene(chartScene);
     }
 
@@ -86,18 +85,22 @@ public class PieChartWindow extends UiPart<Stage> {
     /**
      * Creates Bar Chart for hall containing Covid Positive statistics only, by Faculty.
      */
-    private HBox createFacultyChartPositive() {
+    private VBox createFacultyChartPositive() {
         if (positiveStatsByFacultyData.isEmpty()) {
             // No positive students to create chart
-            return new HBox();
+            return new VBox();
         }
-        HBox facChart = new HBox();
+        VBox facChart = new VBox();
+        // Makes the x-axis
         CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Faculty");
+        NumberAxis yAxis = new NumberAxis(0, SummariseCommand.getHighestPositiveByFaculty(), 1);
+        // Makes the y-axis
+        yAxis.setLabel("Number of Students");
+        yAxis.setMinorTickVisible(false);
+        // Combine x-axis and y-axis into a bar chart
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setTitle("Covid Positive by Faculty");
-        xAxis.setLabel("Faculty");
-        yAxis.setLabel("Number of Students");
         barChart.setBarGap(50);
         barChart.setCategoryGap(150);
 
@@ -131,7 +134,31 @@ public class PieChartWindow extends UiPart<Stage> {
                     statusType.pieValueProperty().getValue()));
             pieChartData.add(statusType);
         }
+        setPieChartColor(pieChartData);
+        pieChart.setLegendVisible(false);
         return pieChart;
+    }
+
+    /**
+     * Sets each pir chart sections to have a specific colour according to their Covid status.
+     * If it represents positive, it is set to red. If it represents negative, it is set to green.
+     * If it represents HRN, it is set to yellowish-gold.
+     *
+     * @param pieChartData The pie chart that will undergo colouring
+     */
+    private void setPieChartColor(ObservableList<PieChart.Data> pieChartData) {
+        for (PieChart.Data data : pieChartData) {
+            String covidType = data.getName();
+            String color = "";
+            if (covidType.contains("Positive")) {
+                color = "-fx-pie-color: red;";
+            } else if (covidType.contains("Negative")) {
+                color = "-fx-pie-color: green;";
+            } else if (covidType.contains("HRN")) {
+                color = "-fx-pie-color: gold;";
+            }
+            data.getNode().setStyle(color);
+        }
     }
 
     /**
@@ -141,7 +168,8 @@ public class PieChartWindow extends UiPart<Stage> {
      * @return Scene containing the pie chart
      */
     private Scene makeChartScene(VBox pieCharts) {
-        chartScene = new Scene(pieCharts);
+        ScrollPane sp = new ScrollPane(pieCharts);
+        chartScene = new Scene(sp, 550, 100);
         return chartScene;
     }
 
@@ -183,5 +211,4 @@ public class PieChartWindow extends UiPart<Stage> {
     public void hide() {
         getRoot().hide();
     }
-
 }

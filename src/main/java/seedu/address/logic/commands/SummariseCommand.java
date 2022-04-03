@@ -50,12 +50,14 @@ public class SummariseCommand extends Command {
     private static final Predicate<Person> BY_HRN = person -> person.getStatusAsString().equals("HRN");
     private static TreeMap<String, TreeMap<String, Integer>> covidStatsByBlockDataList;
     private static TreeMap<String, Integer> positiveStatsByFacultyData;
+    private static int highestPositiveByFaculty;
 
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         covidStatsByBlockDataList = new TreeMap<>();
         positiveStatsByFacultyData = new TreeMap<>();
+        highestPositiveByFaculty = 0;
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -131,6 +133,9 @@ public class SummariseCommand extends Command {
             // Collating this faculty's covid statuses in a TreeMap used for making of PieCharts.
             positiveStatsByFacultyData.put(facultyName, numberOfPositive);
         }
+        if (numberOfPositive > highestPositiveByFaculty) {
+            highestPositiveByFaculty = numberOfPositive;
+        }
         return String.format(FACULTY_SUMMARY_FORM, facultyName, totalNumberOfStudents, numberOfPositive,
                 numberOfNegative, numberOfHrn, percentagePositive);
     }
@@ -200,11 +205,21 @@ public class SummariseCommand extends Command {
     }
 
     /**
-     * Returns true if both tree map are not empty and the pie chart window should be open, returns false otherwise.
+     * Returns true if both tree map are not empty and the pie chart window should be open, returns false otherwise
+     *
      * @return boolean for whether the pie chart window should be opened
      */
     public static boolean shouldOpenPieChartWindow() {
         return !(positiveStatsByFacultyData.isEmpty() && covidStatsByBlockDataList.isEmpty());
+    }
+
+    /**
+     * Returns the highest number of students with Covid categorised by Faculty.
+     *
+     * @return an integer value of the highest number of Covid positive students by Faculty
+     */
+    public static int getHighestPositiveByFaculty() {
+        return highestPositiveByFaculty;
     }
 }
 
