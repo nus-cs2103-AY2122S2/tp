@@ -82,6 +82,7 @@ class JsonAdaptedDateTimeSlot {
         if (!DateTimeSlot.isValidDurationHours(durationHours)) {
             throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
         }
+
         Integer modelDurationHours = DateTimeSlot.parseLessonDurationHours(durationHours);
 
         if (durationMinutes == null) {
@@ -94,6 +95,13 @@ class JsonAdaptedDateTimeSlot {
         }
         Integer modelDurationMinutes = DateTimeSlot.parseLessonDurationMinutes(durationMinutes);
 
-        return new DateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
+        DateTimeSlot d;
+        try {
+            d = new DateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
+        }
+
+        return d;
     }
 }
