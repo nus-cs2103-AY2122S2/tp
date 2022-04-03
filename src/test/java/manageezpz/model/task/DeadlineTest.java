@@ -1,7 +1,5 @@
 package manageezpz.model.task;
 
-import manageezpz.model.person.Email;
-
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
