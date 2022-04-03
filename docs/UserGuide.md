@@ -385,16 +385,16 @@ Format: `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **:** If `ENDTIME` is specified, then `ENDDATE` must be specified.
+:information_source: If `ENDTIME` is specified, then `ENDDATE` must be specified.
 
 </div>
 
-| Parameter   | Description                                             | Default Value      |
-|-------------|---------------------------------------------------------|--------------------|
-| `STARTDATE` | The *starting date* of the period                       | **Today**          |
-| `STARTTIME` | The *starting time* on the starting date for the period | `00:00`            |
-| `ENDDATE`   | The *ending date* of the period                         | **No upper limit** |
-| `ENDTIME`   | The *ending time* on the ending date for the period     | `23:59`            |
+| Parameter   | Description                                             | Default Value    |
+|-------------|---------------------------------------------------------|------------------|
+| `STARTDATE` | The *starting date* of the period                       | *Today*          |
+| `STARTTIME` | The *starting time* on the starting date for the period | `00:00`          |
+| `ENDDATE`   | The *ending date* of the period                         | *No upper limit* |
+| `ENDTIME`   | The *ending time* on the ending date for the period     | `23:59`          |
 
 
 * The starting time **must be before** the ending time.
@@ -418,22 +418,20 @@ Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/EN
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **:** If `ENDTIME` is specified, then `ENDDATE` must be specified.
+:information_source: If `ENDTIME` is specified, then `ENDDATE` must be specified.
 
 </div>
 
+| Parameter   | Description                                                                                 | Default Value      |
+|-------------|---------------------------------------------------------------------------------------------|--------------------|
+| `STARTDATE` | The *starting date* of the period                                                           | *Today*            |
+| `STARTTIME` | The *starting time* on the starting date for the period                                     | `00:00`            |
+| `ENDDATE`   | The *ending date* of the period                                                             | *No upper limit*   |
+| `ENDTIME`   | The *ending time* on the ending date for the period                                         | `23:59`            |
+| `DURATION`  | the minimum duration of the slots listed in *minutes*.<br> It **must be a positive number** | **Required Field** |
+
 * The starting time **must be before** the ending time.
-* The `STARTDATE` parameter denotes the *starting date* of the period.
-  * `STARTDATE` defaults to **Today** if unspecified.
-* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
-  * `STARTTIME` defaults to `00:00` if unspecified.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-  * No upper limit will be enforced if `ENDDATE` is unspecified
-* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
-  * `ENDTIME` defaults to `23:59` if unspecified.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
+* If any of `STARTDATE`, `STARTTIME`, `ENDDATE` or `ENDTIME` are specified, they **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
 
 Example:
 * `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60` Lists all empty slots in the schedule that are at least *60 minutes (1 hour)* long between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
