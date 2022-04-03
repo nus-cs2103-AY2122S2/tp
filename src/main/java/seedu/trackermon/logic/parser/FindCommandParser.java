@@ -44,10 +44,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] keywordsArr;
 
         List<Predicate<Show>> predicateArrayList = new ArrayList<>();
-
-        // Based on prefix, add user input as keywords into predicateArrayList
-        // PredicateArrayList.add -> AND Operator
-        // Whole list of keywords -> OR Operator
         if (hasNamePrefix) {
             hasPrefix = true;
             String input = argumentMultimap.getValue(PREFIX_NAME).get();
@@ -78,17 +74,16 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (hasRatingPrefix) {
             hasPrefix = true;
             String input = argumentMultimap.getValue(PREFIX_RATING).get();
+            input = input.replaceFirst("^0+(?!$)", "");
             keywordsArr = getRatingKeywords(input);
             for (int i = 0; i < keywordsArr.length; i++) {
+                keywordsArr[i] = keywordsArr[i].replaceFirst("^0+(?!$)", "");
                 if (!Rating.isValidScore(keywordsArr[i])) {
                     throw new ParseException(String.format(MESSAGE_INDEX_OUT_OF_BOUNDS, FindCommand.RATING_ERROR));
                 }
                 predicateArrayList.add(new RatingContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
             }
         }
-
-        // if no prefix, find acts as a general search based on 1 keyword,
-        // otherwise it acts as a precise search based on prefix and keywords and implements an AND search
         if (!hasPrefix) {
             keywordsArr = getKeywords(args);
             return new FindCommand(new ShowContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
