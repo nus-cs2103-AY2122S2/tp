@@ -116,11 +116,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
+        requireNonNull(person);
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -128,7 +130,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -146,6 +147,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addArchivedPerson(Person person) {
+        requireNonNull(person);
         archiveBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -166,6 +168,7 @@ public class ModelManager implements Model {
     @Override
     public void setSwappedAddressBook(boolean isSwapped, ReadOnlyAddressBook addressBook,
                                       ReadOnlyAddressBook archiveBook) {
+        requireAllNonNull(isSwapped, addressBook, archiveBook);
         this.isSwapped = isSwapped;
         setAddressBook(addressBook);
         setArchiveBook(archiveBook);

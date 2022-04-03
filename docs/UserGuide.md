@@ -403,13 +403,19 @@ Undoes the most recent command.
 
 At the moment, the command that can be undone are the following:   
 
--  `add`
--  `edit`
--  `delete`
--  `clear`
--  `find`
--  `filter`
--  `comment`
+- `add`
+- `addmodule`
+- `archive`
+- `unarchive`
+- `clear`
+- `clearmodules`
+- `comment`
+- `delete`
+- `deletemodule`
+- `edit`
+- `sort`
+- `status`
+- `switch`
 
 Format: `undo`
 
@@ -422,7 +428,8 @@ After deleting a contact at index 5, `undo` will reverse the delete command and 
 
 ### Redo a command : `redo`
 
-Restores most recent command that was undone using `undo`.
+Restores most recent command that was undone using `undo`. If you use a command that is not undo or redo, 
+while in the midst of undoing, there will no longer be commands to redo.
 
 Format: `redo`
 
