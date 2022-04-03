@@ -7,7 +7,7 @@ ContaX is a **desktop application for managing your Contacts and Schedule**. It 
 
 Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, and a *Schedule* for managing Appointments.
 
-ContaX is designed with versatility in mind, so it does not place unnecessarily strict constraints on your inputs. It accepts all inputs, even those that may remotely have a chance of being valid. For more details, see the [Global Input Constraints](#global-input-constraints) section.
+ContaX is designed with versatility in mind, so it does not place unnecessarily strict constraints on your inputs. It accepts all inputs, even those that remotely have a chance of being valid. For more details, see the [Global Input Constraints](#global-input-constraints) section.
 
 * Table of Contents
 {:toc}
@@ -60,21 +60,22 @@ ContaX is generally designed to impose as little constraints on inputs as possib
 
 * **INTEGER** inputs are limited to a maximum value of `2,147,483,647`.<br>
   Any value above this limit will not be considered an integer.
-* Leading and Trailing **Whitespaces** are ignored for `ALL` user inputs.<br>
-  e.g. `  My Tag   ` is treated simply as `My Tag`.
+* Leading and Trailing **Whitespaces** are ignored for ***ALL*** user inputs.<br>
+  e.g. `  My Tag   &nbsp;` is treated simply as `My Tag`.
 
 </div>
 
 ### Displayed Indexes
 
-The displayed index of a `Person`, `Appointment` or `Tag` refers to the number displayed beside the record in the UI.
+The displayed index of a `Person`, `Appointment` or `Tag` refers to the number displayed beside the record in the GUI.
 Only positive [integers](#global-input-constraints) are recognised as a **displayed index**.
 
 ![Displayed Person Index Location](images/DisplayedIndex.png)
 
 <div markdown="block" class="alert alert-warning">
 
-:rotating_light: The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
+:rotating_light: **Warning**<br>
+The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
 
 </div>
 
