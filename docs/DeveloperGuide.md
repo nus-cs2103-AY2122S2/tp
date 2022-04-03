@@ -57,6 +57,8 @@ title: Developer Guide
 
 Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface (CLI)** while still having the **benefits of a Graphical User Interface (GUI)**. Trackermon allows people who want to track and remember what shows they have watched, are currently watching, or plan to watch.
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 
 ## **Setting up, getting started**
 
@@ -83,6 +85,8 @@ The developer guide allows developers who want to work on Trackermon to gain a b
 | <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                  |
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to take note                      |
 | \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 
 ## **Design**
@@ -376,6 +380,8 @@ After the data is written into the new file, `ExportCommand` returns a `CommandR
 
 #### Design considerations:
 Implementing the FileChooser library allows us to create a File Explorer GUI similar to the user's Operating System's native File Explorer GUI.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
