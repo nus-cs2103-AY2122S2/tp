@@ -13,10 +13,10 @@ import seedu.address.model.person.Person;
 public class ReminderPersons {
 
     private static ReminderPersons reminderPersons;
-    private static HashMap<Person, Reminder> reminders;
+    private static HashMap<Person, Reminder> personReminderHashMap;
 
     private ReminderPersons() {
-        reminders = new HashMap<>();
+        personReminderHashMap = new HashMap<>();
     }
 
     public static ReminderPersons getInstance() {
@@ -33,7 +33,7 @@ public class ReminderPersons {
      * @param person The person to be reminded of.
      */
     public Reminder add(Person person, Reminder reminder) {
-        return reminders.put(person, reminder);
+        return personReminderHashMap.put(person, reminder);
     }
 
     /**
@@ -41,14 +41,14 @@ public class ReminderPersons {
      * @param person The person to remove from reminders.
      */
     public Reminder remove(Person person) {
-        return reminders.remove(person);
+        return personReminderHashMap.remove(person);
     }
 
     /**
      * Returns a shallow copy of the HashMap.
      */
     public HashMap<Person, Reminder> clone() {
-        return new HashMap<>(reminders);
+        return new HashMap<>(personReminderHashMap);
     }
 
     /**
@@ -56,31 +56,31 @@ public class ReminderPersons {
      * @param person The person to check for reminders.
      */
     public Reminder get(Person person) {
-        return reminders.get(person);
+        return personReminderHashMap.get(person);
     }
 
     public Reminder put(Person person, Reminder reminder) {
-        return reminders.put(person, reminder);
+        return personReminderHashMap.put(person, reminder);
     }
 
     /**
      * Retrieves a {@code Set} view of the {@code Person} in this {@code HashMap}.
      */
     public Set<Person> getKeySet() {
-        return reminders.keySet();
+        return personReminderHashMap.keySet();
     }
 
     /**
      * Checks if the person has a {@code Reminder}.
      */
     public boolean containsKey(Person person) {
-        return reminders.containsKey(person);
+        return personReminderHashMap.containsKey(person);
     }
 
     /**
      * Checks if there are any active {@code Reminder}s.
      */
     public boolean isEmpty() {
-        return reminders.isEmpty();
+        return personReminderHashMap.isEmpty();
     }
 }
