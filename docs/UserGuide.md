@@ -234,24 +234,24 @@ Examples:
 * `delete -p Senior Frontend Software Engineer`
 
 ## List
-General command to list different data type in HireLah. User can provide optional parameters to filter and sort the data to display.
-If there are no parameters provided, HireLah will display all data of that type by default. User can either display as default, filter only,
-sort only, or filter and sort.
+General command to list different data types in HireLah. Users can provide optional parameters to filter and sort the data to display.
+Users can either display all data, with filter only, with sort only, or with both filter and sort.
 
-Note: This command may change the index of the displayed items, and all other commands that accepts an index will follow the latest index shown in HireLah.
+Note: This command may change the index of the displayed items, and all other commands that accepts an index will follow the latest index shown.
 
 Format: `list -TYPE [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 * `TYPE` must take the form of `a`, `i`, `p`
   * `-a` will list all applicants
   * `-i` will list all interview
   * `-p` will list all position
+* If there are no parameters provided, HireLah will display all data of that type by default
 * `FILTER_TYPE` and `FILTER_ARGUMENT` are optional parameters to filter the data displayed
   * Note that **both** `FILTER_TYPE` and `FILTER_ARGUMENT` need to be provided to filter data
   * Different data types will accept different `FILTER_TYPE` and `FILTER_ARGUMENT`, as elaborated below
   
 * `SORT_ARGUMENT` is the optional parameter to sort the data displayed
   * Can either be `asc` or `dsc`
-  * Different data types will be sorted according to different properties, as elaborated below
+  * Sorting only works based on one property, and different data types will be sorted according to different properties, as elaborated below
 
 ### List Applicants: `list -a [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 Lists all applicants by default. Automatically toggles view to the applicant tab on the GUI.
@@ -262,8 +262,8 @@ The applicants displayed can be filtered by providing the optional parameters `f
 | FILTER_TYPE | FILTER_ARGUMENT                    | Description                                              |
 |-------------|------------------------------------|----------------------------------------------------------|
 | `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s)       |
-| `gender`    | M/F                                | View applicants of the given gender                      |
-| `status`    | available/hired                    | View applicants with the status given                    |
+| `gender`    | M / F (Case-sensitive)             | View applicants of the given gender                      |
+| `status`    | available / hired                  | View applicants with the status given                    |
 | `tag`       | Keyword(s) in the applicant's tag  | View applicants with a tag that matches the keywords(s)  |
 
 The applicants displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`. 
@@ -431,7 +431,3 @@ Upon exiting HireLah, the data in the application will automatically be saved, i
 
 **Q**: A position has been filled, what do I do with the position created in the app?<br>
 **A**: You can either mark the position as not open, or delete the position from HireLah according to your requirement and preference.
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HireLah home folder.
-
