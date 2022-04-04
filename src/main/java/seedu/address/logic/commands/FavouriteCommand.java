@@ -20,11 +20,11 @@ public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
     public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS =
             "Favourited Client %1$s! Open up Favourites window to see if he/she is in it!\n"
-            + "If you have your Favourites window opened already, "
+            + "If you have your Favourites window opened already, \n"
             + "close it and re-open it (via 'fw' command or 'Favourites' button) to refresh the data!";
     public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
             "Unfavourited client %1$s! Check that he/she is removed from the Favourites window!\n"
-            + "If you have your Favourites window opened already, "
+            + "If you have your Favourites window opened already, \n"
             + "close it and re-open it (via 'fw' command or 'Favourites' button) to refresh the data!";;
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Favourites a selected client "
@@ -69,7 +69,7 @@ public class FavouriteCommand extends Command {
      */
     private String generateSuccessMessage(Person personToFavourite) {
         String message = "";
-        if (personToFavourite.getFavourite().getStatus()) {
+        if (!personToFavourite.getFavourite().getStatus()) {
             message = MESSAGE_FAVOURITE_PERSON_SUCCESS;
         } else {
             message = MESSAGE_UNFAVOURITE_PERSON_SUCCESS;
