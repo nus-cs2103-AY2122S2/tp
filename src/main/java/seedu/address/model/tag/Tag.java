@@ -9,8 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should contain alphanumeric or spaces";
+    public static final int MAX_CHARACTER_LENGTH = 100;
+    public static final String MESSAGE_CONSTRAINTS_LENGTH = String.format("Tags can only contain no more "
+            + "than %d characters.", MAX_CHARACTER_LENGTH);
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9 ]+";
 
     public final String tagName;
 
@@ -22,6 +25,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagLength(tagName), MESSAGE_CONSTRAINTS_LENGTH);
         this.tagName = tagName;
     }
 
@@ -30,6 +34,13 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string has more than 100 characters in length.
+     */
+    public static boolean isValidTagLength(String test) {
+        return test.length() <= MAX_CHARACTER_LENGTH;
     }
 
     @Override
