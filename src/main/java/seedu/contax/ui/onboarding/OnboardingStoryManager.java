@@ -20,7 +20,7 @@ import seedu.contax.model.person.Person;
 
 public class OnboardingStoryManager {
 
-    private static final String CLICK_CONTINUE = "\n\nClick any where to continue...";
+    private static final String CLICK_CONTINUE = "\n\nClick anywhere to continue...";
     private static final String CLICK_EXIT = "\n\nClick any where to exit Quick Tour...";
     private static final String INVALID_COMMAND = "Invalid format! "
             + "Follow the format 'addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
