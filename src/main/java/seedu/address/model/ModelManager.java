@@ -152,7 +152,7 @@ public class ModelManager implements Model {
         Predicate<Pet> predicate = this.lastUsedPredicate == null ? PREDICATE_SHOW_ALL_PETS : this.lastUsedPredicate;
         filteredPets.setPredicate(predicate);
     }
-    
+
     @Override
     public void updateFilteredPetListToFullPetList() {
         this.lastUsedPredicate = null;
