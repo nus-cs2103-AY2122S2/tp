@@ -477,7 +477,7 @@ ModuleMateFinder data are saved in the hard disk automatically after any command
 
 ### Editing the data file
 
-ModuleMateFinder data are saved as a JSON file `[JAR file location]/data/ModuleMateFinder.json`. If you are an advanced user, you are welcome to update data directly by editing that data file.
+ModuleMateFinder data are saved as JSON files `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/archivedAddressBook.json`. If you are an advanced user, you are welcome to update data directly by editing the respective data files.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ModuleMateFinder will discard all data and start with an empty data file at the next run.
