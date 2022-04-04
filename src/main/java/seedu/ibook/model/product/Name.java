@@ -46,7 +46,8 @@ public class Name {
      * Checks if the name contains the keyword.
      */
     public boolean contains(Name keyword) {
-        return fullName.contains(keyword.toString());
+        String key = keyword.fullName.toLowerCase();
+        return fullName.toLowerCase().contains(key);
     }
 
     @Override
