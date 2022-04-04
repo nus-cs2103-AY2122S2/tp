@@ -116,7 +116,7 @@ same email as `Example@u.nus.edu` as in the real-word, emails are usually not ca
 
 </div>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
