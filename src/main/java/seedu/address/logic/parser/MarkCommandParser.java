@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ERROR_MESSAGE_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
@@ -31,7 +32,8 @@ public class MarkCommandParser implements Parser<MarkCommand> {
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_WEEK, PREFIX_STUDENT)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_ERROR_MESSAGE_FORMAT,
+                    MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkCommand.MESSAGE_USAGE));
         }
 
@@ -42,7 +44,8 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                     argMultimap.getValue(PREFIX_STUDENT).get(), model);
             return new MarkCommand(classGroupIndex, weekIndex, students);
         } catch (ParseException pe) {
-            throw new ParseException(String.format("%s\n%s", pe.getMessage(), MarkCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_ERROR_MESSAGE_FORMAT, pe.getMessage(), MarkCommand.MESSAGE_USAGE), pe);
         }
     }
 }

@@ -46,11 +46,11 @@ import seedu.address.model.tamodule.TaModule;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid!";
-    public static final String MESSAGE_STUDENT_ARG_INVALID = "Student argument %s is invalid!";
-    public static final String MESSAGE_STUDENT_EMPTY = "Student argument cannot be empty!";
-    public static final String MESSAGE_STUDENT_INDEX_OUT_OF_BOUND = "Student index is out of bounds!";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in the list!";
+    public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid.";
+    public static final String MESSAGE_STUDENT_ARG_INVALID = "Student argument '%s' is invalid.";
+    public static final String MESSAGE_STUDENT_EMPTY = "Student argument cannot be empty.";
+    public static final String MESSAGE_STUDENT_INDEX_OUT_OF_BOUND = "Student index is out of bounds.";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in the list.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -382,33 +382,41 @@ public class ParserUtil {
 
     //@@author jxt00
     /**
-     * Parses a {@code String s} into an {@code ObservableList<Student>}.
-     * No mix of student IDs and indexes is allowed.
+     * Parses a {@code String args} into an {@code ObservableList<Student>}.
+     * Determines if the {@code args} should be parsed as student IDs or indexes.
      *
-     * @throws ParseException if the student IDs or indexes are invalid.
+     * @throws ParseException if {@code args} is empty or invalid.
      */
-    public static ObservableList<Student> parseStudents(String s, Model model) throws ParseException {
-        if (s.equals(PARAM_ALL_STUDENTS)) {
+    public static ObservableList<Student> parseStudents(String args, Model model) throws ParseException {
+        if (args.equals(PARAM_ALL_STUDENTS)) {
             return model.getUnfilteredStudentList();
         }
 
-        if (s.length() == 0) {
-            throw new ParseException("s.length == 0 " + MESSAGE_STUDENT_EMPTY);
+        if (args.length() == 0) {
+            throw new ParseException(MESSAGE_STUDENT_EMPTY);
         }
 
-        String[] splitS = s.toUpperCase().split(",");
-        if (splitS.length == 0
-                || (!StudentId.isValidStudentId(splitS[0]) && !StringUtil.isNonZeroUnsignedInteger(splitS[0].trim()))) {
-            throw new ParseException("Invalid arg " + MESSAGE_STUDENT_INVALID);
+        String[] splitArgs = args.toUpperCase().split(",");
+        if (splitArgs.length == 0
+                || (!StudentId.isValidStudentId(splitArgs[0])
+                && !StringUtil.isNonZeroUnsignedInteger(splitArgs[0].trim()))) {
+            throw new ParseException(MESSAGE_STUDENT_INVALID);
         }
 
-        if (splitS[0].charAt(0) == 'E') {
-            return parseStudentIds(splitS, model);
+        if (splitArgs[0].charAt(0) == 'E') {
+            return parseStudentIds(splitArgs, model);
         } else {
-            return parseStudentIndexes(splitS, model);
+            return parseStudentIndexes(splitArgs, model);
         }
     }
 
+    //@@author jxt00
+    /**
+     * Parses a {@code String[] splitIds} into an {@code ObservableList<Student>}.
+     * No mix of student IDs and indexes is allowed.
+     *
+     * @throws ParseException if the student IDs are invalid.
+     */
     private static ObservableList<Student> parseStudentIds(String[] splitIds, Model model) throws ParseException {
         List<StudentId> studentIds = new ArrayList<>();
         for (String i : splitIds) {
@@ -429,6 +437,13 @@ public class ParserUtil {
         }
     }
 
+    //@@author jxt00
+    /**
+     * Parses a {@code String[] splitIndexes} into an {@code ObservableList<Student>}.
+     * No mix of student IDs and indexes is allowed.
+     *
+     * @throws ParseException if the student indexes are invalid.
+     */
     private static ObservableList<Student> parseStudentIndexes(String[] splitIndexes, Model model)
             throws ParseException {
         List<Index> studentIndexes = new ArrayList<>();
