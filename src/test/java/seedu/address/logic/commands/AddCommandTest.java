@@ -154,6 +154,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredPetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPetListToFullPetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook undo() {
             throw new AssertionError("This method should not be called.");
         }

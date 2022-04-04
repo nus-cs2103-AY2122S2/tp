@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Pet> filteredPets;
-    private Predicate<Pet> lastUsedPredicate = null;
+    private Predicate<Pet> lastUsedPredicate;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +36,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.versionedAddressBook = new VersionedAddressBook(this.addressBook);
         filteredPets = new FilteredList<>(this.addressBook.getPetList());
+        this.lastUsedPredicate = PREDICATE_SHOW_ALL_PETS;
     }
 
     public ModelManager() {
@@ -144,19 +145,18 @@ public class ModelManager implements Model {
     public void updateFilteredPetList(Predicate<Pet> predicate) {
         requireNonNull(predicate);
         this.lastUsedPredicate = predicate;
-        filteredPets.setPredicate(predicate);
+        filteredPets.setPredicate(lastUsedPredicate);
     }
 
     @Override
     public void updateFilteredPetList() {
-        Predicate<Pet> predicate = this.lastUsedPredicate == null ? PREDICATE_SHOW_ALL_PETS : this.lastUsedPredicate;
-        filteredPets.setPredicate(predicate);
+        filteredPets.setPredicate(lastUsedPredicate);
     }
 
     @Override
     public void updateFilteredPetListToFullPetList() {
-        this.lastUsedPredicate = null;
-        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
+        this.lastUsedPredicate = PREDICATE_SHOW_ALL_PETS;
+        filteredPets.setPredicate(lastUsedPredicate);
     }
 
     @Override
