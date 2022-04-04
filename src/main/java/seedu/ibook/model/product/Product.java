@@ -127,6 +127,13 @@ public class Product implements Distinguishable<Product> {
     }
 
     /**
+     * Returns the item in current item list that is similar to the specified item.
+     */
+    public Item getExistingItem(Item i) {
+        return items.getExisting(i);
+    }
+
+    /**
      * Removes {@code key} from this {@code items}.
      * {@code key} must exist in items.
      */

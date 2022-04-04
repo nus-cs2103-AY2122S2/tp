@@ -31,7 +31,6 @@ public class UpdateItemCommand extends Command {
 
     public static final String MESSAGE_UPDATE_ITEM_SUCCESS = "Updated Item in %1$s:\n%2$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
-    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the iBook.";
 
     private final CompoundIndex targetIndex;
     private final UpdateItemDescriptor updateItemDescriptor;
@@ -57,12 +56,17 @@ public class UpdateItemCommand extends Command {
         Item itemToUpdate = model.getItem(targetIndex);
         Item updatedItem = createUpdatedItem(targetProduct, itemToUpdate, updateItemDescriptor);
 
+        model.prepareIBookForChanges();
+
         if (!itemToUpdate.isSame(updatedItem) && targetProduct.hasItem(updatedItem)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
+            // There is an item in targetProduct which has same expiry date as the updatedItem
+            Item existingItem = targetProduct.getExistingItem(updatedItem);
+            model.deleteItem(targetProduct, itemToUpdate);
+            model.updateItem(targetProduct, existingItem, existingItem.add(updatedItem));
+        } else {
+            model.updateItem(targetProduct, itemToUpdate, updatedItem);
         }
 
-        model.prepareIBookForChanges();
-        model.updateItem(targetProduct, itemToUpdate, updatedItem);
         model.saveIBookChanges();
         model.updateFilteredItemListForProducts(PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(
