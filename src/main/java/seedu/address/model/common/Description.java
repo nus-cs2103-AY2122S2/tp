@@ -44,7 +44,7 @@ public class Description {
 
     @Override
     public String toString() {
-        return value;
+        return value == null ? "-" : value;
     }
 
     @Override

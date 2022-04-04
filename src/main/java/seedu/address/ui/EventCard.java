@@ -62,7 +62,7 @@ public class EventCard extends UiPart<Region> {
         dateTime.getChildren().addAll(dateTimeLabel, dateTimeText);
 
 
-        Text descriptionText = new Text(" : " + event.getDescription().value);
+        Text descriptionText = new Text(" : " + event.getDescription());
         Text descriptionLabel = new Text("Event description");
         descriptionText.setFill(Color.WHITE);
         descriptionLabel.setFill(Color.WHITE);
@@ -81,8 +81,15 @@ public class EventCard extends UiPart<Region> {
         colon.setFont(font);
         friends.getChildren().addAll(friendsText, colon);
         friends.setHgap(4);
-        event.getFriendNames().stream()
-                .forEach(friend -> friends.getChildren().add(new Label(friend.fullName)));
+        if (event.getFriendNames().size() == 0 ){
+            Text empty = new Text("-");
+            empty.setFill(Color.WHITE);
+            empty.setFont(font);
+            friends.getChildren().add(empty);
+        } else {
+            event.getFriendNames().stream()
+                    .forEach(friend -> friends.getChildren().add(new Label(friend.fullName)));
+        }
     }
 
     @Override

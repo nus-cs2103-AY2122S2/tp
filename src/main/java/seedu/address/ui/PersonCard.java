@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         colon2.setFont(font);
 
 
-        Text phoneNumText = new Text(" : " + (person.getPhone().value == null ? "" : person.getPhone().value));
+        Text phoneNumText = new Text(" : " + (person.getPhone().value == null ? "-" : person.getPhone().value));
         Text phoneLabel = new Text("Phone");
         phoneNumText.setFill(Color.WHITE);
         phoneLabel.setFill(Color.WHITE);
@@ -76,7 +76,7 @@ public class PersonCard extends UiPart<Region> {
         phoneLabel.setUnderline(true);
         phone.getChildren().addAll(phoneLabel, phoneNumText);
 
-        Text addressText = new Text(" : " + (person.getAddress().value == null ? "" : person.getAddress().value));
+        Text addressText = new Text(" : " + (person.getAddress().value == null ? "-" : person.getAddress().value));
         Text addressLabel = new Text("Address");
         addressLabel.setFill(Color.WHITE);
         addressText.setFill(Color.WHITE);
@@ -85,7 +85,7 @@ public class PersonCard extends UiPart<Region> {
         addressLabel.setUnderline(true);
         address.getChildren().addAll(addressLabel, addressText);
 
-        Text emailText = new Text(" : " + (person.getEmail().value == null ? "" : person.getEmail().value));
+        Text emailText = new Text(" : " + (person.getEmail().value == null ? "-" : person.getEmail().value));
         Text emailLabel = new Text("Email");
         emailLabel.setFill(Color.WHITE);
         emailText.setFill(Color.WHITE);
@@ -99,19 +99,33 @@ public class PersonCard extends UiPart<Region> {
         tagsText.setFont(font);
         tagsText.setUnderline(true);
         tags.getChildren().addAll(tagsText, colon1);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person.getTags().size() == 0) {
+            Text empty = new Text("-");
+            empty.setFill(Color.WHITE);
+            empty.setFont(font);
+            tags.getChildren().add(empty);
+        } else {
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        }
         logs.setHgap(4);
         Text logsText = new Text("Logs");
         logsText.setFill(Color.WHITE);
         logsText.setFont(font);
         logsText.setUnderline(true);
         logs.getChildren().addAll(logsText, colon2);
-        int index = 1;
-        for (Log log: person.getLogs()) {
-            logs.getChildren().add(new Label(index + ". " + log.getTitle()));
-            index++;
+        if (person.getLogs().size() == 0) {
+            Text empty = new Text("-");
+            empty.setFill(Color.WHITE);
+            empty.setFont(font);
+            logs.getChildren().add(empty);
+        } else {
+            int index = 1;
+            for (Log log : person.getLogs()) {
+                logs.getChildren().add(new Label(index + ". " + log.getTitle()));
+                index++;
+            }
         }
     }
 
