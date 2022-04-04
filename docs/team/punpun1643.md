@@ -40,7 +40,7 @@ and `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/p
   * Justification: This feature is critical to the product, and without it the product would not function as a task management application.
 
 * **Enhancements to existing feature**: `GUI` (PR: [\#51](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/51), [\#102](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/102), 
-[\#104](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/105 and [\#111](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/111)))
+[\#104](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/105) and [\#111](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/111)))
   * What it does: Revamp the UI of AB3 to ArchDuke.
   * Justification: This implementation changes the UI of the app greatly compared to that of AB3.
   * Highlights: This feature requires an in-depth understanding of the observer design patterns, 
@@ -62,10 +62,6 @@ and `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/p
   on how the app functions. The `Person` is then changed to uniquely identified by `EMAIL` and/or `PHONE` instead 
   as no two persons can have the same of these attributes. This enhances the usage of the app greatly as it now allows 
   the addition of contacts with same name and different attributes, which is a likely situation in the real-world.
-
-* **Enhancements to existing feature**: modify case insensitivity of `Group` and `Task` (PR: [\#117](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/117))
-  * Justification: Initially `Group` and `Task` are case-sensitive which hindered the user experience as it 
-  increases the chance of typo errors. The enhancements allow fast typists to be able to use the app in a more convenient way.
 
 * **Project management**:
   * Managed all releases: [v1.3trial](https://github.com/AY2122S2-CS2103-W16-3/tp/releases/tag/v1.3trial), 
