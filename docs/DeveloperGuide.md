@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,24 +69,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,15 +114,15 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data and their representations as insights i.e. all `Person` and `Event` objects (which are contained in their respective `Unique{Object}List` object) and `PersonInsight` objects (encapsulating `Insight`) objects.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The implementation is analogous for `Event` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -153,6 +153,32 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### 0. Accessing friends by name or by index
+
+To improve CLI comfort, _Amigos_ supports accessing of persons by both index in the list and by name, so that users who know names by heart/can remember indices as they switch between tabs would have an easy time.
+
+This by-index-by-name feature is supported for: 
+- Add/Edit/Delete friend
+- Add/Edit/Delete log
+
+#### 0.1 Implementation
+
+To support adding logs by the name of a friend or the index in _Amigos_, `ByIndexByNameCommand` is implemented as
+a parent class that encapsulates methods useful to find the specified `Person` in the model.
+
+#### 0.2 Main design consideration: in `Model` or `Command`?
+
+There were two main approaches considered to "grouping" the by-index-by-name nature of these commands. The first was to do what we did and use a parent `Command` class to encapsulate the methods,
+or to implement methods at the `Model` level. Both have arguments for that are valid. 
+
+Using a parent class was chosen primarily for error handling - having a model-based method of retrieval by name or index would mean that the respective commands would have to handle errors thrown by 
+the model. This made less sense (in our view) for two reasons. 
+
+* The first is that the errors occur at command execution time, and it would make most sense to be thrown directly by an object of the command class, so
+doing it by the model entailed creating model exception classes, which would be thrown by the model, caught by the command, then thrown again by the command - tedious! 
+
+* The second reason is the duplication of code - each command would individually have to catch and handle and call methods. Seemed unnecessary.
 
 ### 1. Friends Feature
 
@@ -307,22 +333,14 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ### 3. Logs Feature
 
-- Add log
-- Delete log
-- Edit log
+_Amigos_ supports logs, via `addlog`, `deletelog` and `editlog` features.
 
+In this section we will go through the high-level design details and notes to take about the implementatio for these features.
 
+#### 3.1 Log's representation in the model and storage
 
-#### 3.1 Add Log
-
-##### Implementation
-
-
-The mechanism for adding logs is facilitated by the 'ByIndexByNameCommand', 'AddLogCommand', 'AddLogCommandParser' in the `Logic` component,
-`UniqueLogList` and `Person` classes in the `Model` component, and `JsonAdaptedLog` in the `Storage` component.
-In particular:
 1. In the model, `Person` now has an additional `UniqueLogList` field encapsulating some number
-   of `Log` objects.
+   of `Log` objects. 
 
 ![LogFeaturesModelClassDiagram](images/LogFeaturesModelClassDiagram.png)
 
@@ -331,74 +349,68 @@ In particular:
 
 ![LogFeaturesStorageClassDiagram](images/LogFeaturesStorageClassDiagram.png)
 
-3. To support adding logs by the name of a friend or the index in `Amigos`, `ByIndexByNameCommand` is implemented as
-   a parent class that encapsulates methods useful to find the specified `Person` in the model to add logs to.
-4. As in `AB3`, `AddLogCommand` executes the logic of adding a specified log to a specified person, while `AddLogCommandParser`
-   parses the user input to create a relevant `AddLogCommand` object. Note that `AddLogCommand` has a nested class that encapsulates
-   most of the logic of adding a new log to the specified person.
+#### 3.2 Execution of a log-related command 
 
+All three (add, edit, delete) log commands work the same at a high level. 
 
+1. `Parser` parses input
+2. Details wrapped into `{Type}LogDescriptor`
+3. `{Type}LogCommand` takes in descriptor and executes with model
+
+##### 3.2.1 Choice of using descriptors
+As with a general command, the log-related commands could have put all the logic into the `Command::execute` method. 
+
+A conscious choice to use `Descriptor` objects arose from the complexity of the features, as users had multiple permutations 
+that were possible. e.g. `deletelog` allows a user to delete all logs, delete a specifc log, or all logs of a user. 
+Having a parser decipher the specific action and wrapping error-handling logic to a `Descriptor` object allowed the 
+implementation to be clean and easily extendable.
+
+##### 3.2.2 A concrete example: `addlog`
 
 Given below is an example usage scenario and how the `Logic`, `Model` and `Storage` components behave at every
-step.
-
-1. User keys in a valid `addlog` command.`e.g. addlog JOHN DOE ttl/some log title`
-2. `AddressBookParser` calls `AddLogCommandParser::parse` and parses the input. 
-   1. `AddLogCommandParser::parse`wraps the log title and (optional) log description into an `AddLogDescriptor` object 
-   and instantiates a new `AddLogCommand` object with it.
-3. When `AddLogCommand::execute` is called, the parent method `getPersonByName` or `getPersonByIndex` is called, 
-    returning the specified `Person` object.
-   1. `AddLogCommand::createAddedLogPerson` is called, which calls `AddLogCommandDescriptor::getLogsAfterAdd`, and the 
-   latter takes the specified person and duplicates him, instantiates a new `Log` and appends it to the existing list, 
-   before returning it.
-   2. Then the new `Person` object with the new `Log` is set in the `model`.
-
-A sequence diagram shows, clearly, the interactions between `AddLogCommand`, `AddLogCommandParser`, `AddLogDescriptor` and `model`.
+step. In particular, take note how the parent `ByIndexByNameCommand` is involved.
 
 ![AddLogSequenceDiagram](images/AddLogSequenceDiagram.png)
 
-#### Design considerations
 
-**Aspect: How `Log` objects should be represented in `Amigos`:**
+1. User keys in a valid `addlog` command.`e.g. addlog JOHN DOE ttl/some log title`
+2. `AddressBookParser` calls `AddLogCommandParser::parse` and parses the input.
+    1. `AddLogCommandParser::parse`wraps the log title and (optional) log description into an `AddLogDescriptor` object
+       and instantiates a new `AddLogCommand` object with it.
+3. When `AddLogCommand::execute` is called, the parent method `getPersonByName` or `getPersonByIndex` is called,
+   returning the specified `Person` object.
+    1. `AddLogCommand::createAddedLogPerson` is called, which calls `AddLogCommandDescriptor::getLogsAfterAdd`, and the
+       latter takes the specified person and duplicates him, instantiates a new `Log` and appends it to the existing list,
+       before returning it.
+    2. Then the new `Person` object with the new `Log` is set in the `model`.
+
+A sequence diagram shows, clearly, the interactions between `AddLogCommand`, `AddLogCommandParser`, `AddLogDescriptor` and `model`.
+
+
+#### 3.3 Some considerations in designing Log's representation
+
+**Aspect: How should `Log` objects should be implemented in `Amigos`?**
 * **Alternative 1 (current choice):** Store `Log` objects inside a `List`, inside a `Person`.
     * Pros: Easy to implement, intuitive, easy to maintain and test.
     * Cons: Downstream features such as `find` applied to logs may be more tedious, having to iterate through all `Person` objects.
 * **Alternative 2:** Store `Log` objects inside a `List`, in some global data field part of the `AddressBook`.
     * Pros: Easier access to logs, since searching through a unified list in a single location.
     * Cons: Tedious to implement and maintain, higher degree of coupling.
+* **Resolution:** Alternative 1 was chosen since no "global" level features e.g. logs tied to events were on the horizon.
 
-**Aspect: Uniqueness of a `Log` object:**
+
+**Aspect: Uniqueness of a `Log` object**
 * Intuitively, it makes sense that a `Log` has a title and description.
-* **Alternative 1 (current choice):** No two logs can have the same title.
+* **Alternative 1 (current choice):** No two logs can have the same title (case-sensitive).
     * Pros: Easy to implement, intuitive, easy to maintain and test.
     * Cons: Some users may want logs with the same title, but different descriptions.
 * **Alternative 2:** No two logs can have the same title and same description
     * Pros: Stricter notion of equality that makes intuitive sense.
     * Cons: Checks for uniqueness require two degrees of checking, and user is less likely to be able to
       look at and find logs easily.
+* **Resolution:** Alternative 1 was chosen since at the end of the day, so long as a user can distinguish two logs
+it is functional. So we consider logs duplicates if they have the same title case-sensitively.
 
-**Aspect: How to support `Index` and `Name` based addition of logs:**
-* **Alternative 1 (current choice):** Implement a parent class that has methods for retrieving specified person
-  based on `Index` or `Name` from the model.
-    * Pros: Easy to implement, intuitive, easy to maintain and test.
-    * Cons: Lower degree of freedom for downstream changes, if desired.
-* **Alternative 2:** Implement selection of `Person` from model at the command level.
-    * Pros: Command-specific implementation of searching for people allows for later changes if switching from `Index` or
-      `Name` based search to some other basis.
-    * Cons: Duplication of code.
-
-**Aspect: How to implement `AddLogCommand`:**
-* **Alternative 1 (current choice):** Implement a nested class to encapsulate details of the new log.
-    * Pros: Better encapsulation, easier to understand.
-    * Cons: Longer code, higher complexity.
-* **Alternative 2:** Implement logic within `Command::execute`.
-    * Pros: Easy to implement.
-    * Cons: Verbose code, poor extendability.
-
-#### 3.2 Delete log
-
-##### Implementation
-##### Design considerations
 
 ### 4. Tabs Feature
 
@@ -476,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | New User       | undo a command                                                                          | revert back accidental commands                                                                             | 
 | `* *`    | New User       | reset the application to its default state                                              | properly experiment with the application before using it properly                                           |
 | `* *`    | Forgetful User | use a keyword search to find a note written about someone                               | find out who I spoke to about a certain issue                                                               |
-| `* *`    | Amateur User   | shorten command lengths                                                                 | increase my efficiency while using this application                                                         |
+| `* *`    | Seasoned User  | shorten command lengths                                                                 | increase my efficiency while using this application                                                         |
 | `* *`    | Seasoned User  | see which of my friends I am closest to and which of them I have not visited in a while | reflect more about how I spend my time with my friend and maybe catch up with ones I have not met in awhile | 
 | `* *`    | Seasoned User  | chain commands                                                                          | reduce the number of commands I need to type thereby increasing efficiency                                  |
 | `*`      | New User       | know which features of the application I am not using as often                          | fully utilise the application to its maximum capability                                                     | 
