@@ -88,7 +88,7 @@ Adds a student to TAPA.
 * An error message will be displayed to the user if the specified student ID already exists in TAPA.
 
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note**: The name of the added `STUDENT_NAME` will be converted to Title Case.
+    **Note**: The name of the added student will be converted to Title Case.
     </div>
 
 **Example**:
