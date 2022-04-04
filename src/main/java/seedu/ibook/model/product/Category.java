@@ -47,7 +47,8 @@ public class Category {
      * Checks if the category contains the keyword.
      */
     public boolean contains(Category keyword) {
-        return fullCategoryName.contains(keyword.toString());
+        String key = keyword.fullCategoryName.toLowerCase();
+        return fullCategoryName.toLowerCase().contains(key);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class Category {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Category // instanceof handles nulls
-                && fullCategoryName.equals(((Category) other).fullCategoryName)); // state check
+                && fullCategoryName.equalsIgnoreCase(((Category) other).fullCategoryName)); // state check
     }
 
     @Override
