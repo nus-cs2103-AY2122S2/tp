@@ -138,6 +138,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         expandedPersonListPanel =
                 new ExpandedPersonListPanel(logic.getFilteredPersonList(), logic.getFilteredEventList());
+        System.out.println("size of filteredperson list should be 1" + logic.getFilteredPersonList().size());
+        System.out.println("size of filteredevent list should be 1" + logic.getFilteredEventList().size());
+
         expandedPersonListPanelPlaceholder.getChildren();
         expandedPersonListPanelPlaceholder.getChildren().add(expandedPersonListPanel.getRoot());
 
@@ -213,8 +216,11 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             tabs.getSelectionModel().select(personListTab);
             if (isExpandedCard) {
+                expandedPersonListPanel = new ExpandedPersonListPanel(logic.getFilteredPersonList(), logic.getFilteredEventList());
+                expandedPersonListPanelPlaceholder.getChildren().set(0, expandedPersonListPanel.getRoot());
                 expandedPersonListPanelPlaceholder.requestFocus();
                 expandedPersonListPanelPlaceholder.toFront();
+
             } else {
                 personListPanelPlaceholder.requestFocus();
                 personListPanelPlaceholder.toFront();

@@ -47,7 +47,11 @@ public class ExpandedPersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label eventsHeader;
+    @FXML
     private StackPane upcomingEventsPanelPlaceholder;
+    @FXML
+    private Label logsHeader;
     @FXML
     private Label logs;
 
@@ -57,7 +61,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
     public ExpandedPersonCard(Person person, ObservableList<Event> eventList) {
         super(FXML);
         this.person = person;
-        name.setText(person.getName().fullName);
+        name.setText("1. " + person.getName().fullName);
         phone.setText(person.getPhone().value == null ? "" : "Phone: " + person.getPhone().value);
         address.setText(person.getAddress().value == null ? "" : "Address: " + person.getAddress().value);
         email.setText(person.getEmail().value == null ? "" : "Email: " + person.getEmail().value);
@@ -69,18 +73,33 @@ public class ExpandedPersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
+        // displaying upcoming events
         upcomingEventsPanel = new EventListPanel(eventList);
         upcomingEventsPanelPlaceholder.getChildren().add(upcomingEventsPanel.getRoot());
 
-        //displaying each log
-        StringBuilder sb = new StringBuilder();
-        List<Log> logList = person.getLogs();
-        int numberOfLogs = logList.size();
-
-        for (int i = 1; i <= numberOfLogs; i++) {
-            sb.append(i + ". " + logList.get(i - 1).toString() + "\n");
+        if (eventList.size() > 0) {
+            eventsHeader.setText("Upcoming Events:");
+        } else {
+            eventsHeader.setText("");
+            upcomingEventsPanelPlaceholder.setMaxHeight(0);
+            upcomingEventsPanelPlaceholder.setMaxWidth(0);
         }
-        logs.setText(sb.toString());
+
+        //displaying each log
+        List<Log> logList = person.getLogs();
+
+        if (logList.size() > 0) {
+            logsHeader.setText("Logs:");
+            StringBuilder sb = new StringBuilder();
+            int numberOfLogs = logList.size();
+            for (int i = 1; i <= numberOfLogs; i++) {
+                sb.append(i + ". " + logList.get(i - 1).toString() + "\n");
+            }
+            logs.setText(sb.toString());
+        } else {
+            logsHeader.setText("");
+            logs.setText("");
+        }
     }
 
     @Override
