@@ -25,12 +25,12 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Favourite a client: `favourite`](#favourite-a-client-favourite)
   - [Open Favourites window: `fw`](#open-favourites-window-fw)
   - [Locating clients by name: `find`](#locating-clients-by-name-find)
-  - [Sorting persons: `sort`](#sorting-persons-sort)
+  - [Sorting clients: `sort`](#sorting-clients-sort)
 - [Tools](#tools)
   - [Matching properties and preferences: `match`](#matching-properties-and-preferences-match)
-  - [Upload and image: `upload`](#upload-an-image--upload)
-  - [View image of person: `viewimage`](#view-image-of-person-viewimage)
-  - [Setting a reminder for a person: `remind`](#setting-a-reminder-for-a-person-remind)
+  - [Upload an image: `upload`](#upload-an-image--upload)
+  - [View image of client: `viewimage`](#view-image-of-client-viewimage)
+  - [Setting a reminder for a client: `remind`](#setting-a-reminder-for-a-client-remind)
   - [Open Reminder window: `rm`](#open-reminder-window)
   - [Displaying statistics: `stats`](#displaying-statistics-stats)
 - [Future Features](#future-features-coming-soon)
@@ -70,7 +70,7 @@ e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
 - Inputting information after `pr/` & `p/` indicates the type of property a user is selling or buying.<br>
-e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this person is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
+e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this client is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
 
 - client parameters can be in any order.<br>
 e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
@@ -147,7 +147,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFER
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Either a property or preference must be provided when adding a new user and only one of either type can be provided.
 </div>
-**Tip**: A person is either a `buyer`, or `seller` based on whether he has a property or a preference.
+**Tip**: A client is either a `buyer`, or `seller` based on whether he has a property or a preference.
 
 Examples:
 
@@ -166,15 +166,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - Type of the user can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the user's current `Property` or `Preference`.
-- You can remove all the person’s properties by typing `pr/` without specifying any properties after it.
+- You can remove all the client’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd person to be `Betsy Crower` and updates the 2nd person to have a `preference` turning the
-2nd person into a `buyer`.
-- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
-- `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
+- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower p/1234567 pf/West, 1-room, $100000, $200000` Edits the name of the 2nd client to be `Betsy Crower` and updates the 2nd client to have a `preference` turning the
+2nd client into a `buyer`.
+- `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing properties.
+- `edit 2 i/Living.png:living room` Edits 2nd client to only have `Living.png` and removes all other images.
 
 
 ### Deleting a client: `delete`
@@ -241,9 +241,9 @@ Examples:
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
-### Sorting persons: `sort`
+### Sorting clients: `sort`
 
-Sorts the list of persons displayed according to one or more keywords.
+Sorts the list of clients displayed according to one or more keywords.
 
 Format: `sort [!]KEYWORD [[!]MORE_KEYWORDS]…`
 
@@ -280,27 +280,27 @@ Format: `match`
 Uploads an image and description to be associated with a client.
 
 Format `upload INDEX [i/FilePath:description]`
-- Adds an image to the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- Adds an image to the client at the specified `INDEX`.
+- The index refers to the index number shown in the displayed client list.
 - File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
   ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png).
 - Description is optional and can be left blank e.g. `upload 1 i/example.png`.
 - multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`.
 
-### View image of person: `viewimage`
+### View image of client: `viewimage`
 
-View images that are associated with a person in another window.
+View images that are associated with a client in another window.
 
 Format `viewimage INDEX`
 
 
-### Setting a Reminder for a person: `remind`
+### Setting a Reminder for a client: `remind`
 
 Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the Reminder window.
 
 Format: `remind INDEX r/ReminderDetails`
-- Sets a Reminder for the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- Sets a Reminder for the client at the specified `INDEX`.
+- The index refers to the index number shown in the displayed client list.
 - The index **must be a postive integer** 1, 2, 3, ...
 - The `ReminderDetails` must be a non-empty String, e.g. `arrange home viewing`.
 
@@ -314,7 +314,7 @@ Format: `rm`
 
 1) Navigate to the `File` menu and click on it.
 2) Under it, click on `Reminders`.
-3) The system will launc the `Reminders` window that contains a list of Persons the user has set Reminders for.
+3) The system will launch the `Reminders` window that contains a list of clients the user has set Reminders for.
 
 
 ### Displaying statistics: `stats`
