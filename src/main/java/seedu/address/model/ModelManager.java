@@ -30,6 +30,11 @@ public class ModelManager implements Model {
     private static final String APPLICANT_CSV_FILE = "applicant.csv";
     private static final String INTERVIEW_CSV_FILE = "interview.csv";
     private static final String POSITION_CSV_FILE = "position.csv";
+    private static final String APPLICANT_CSV_HEADER = "Name,Phone,Email,Age,Address,Gender,Hire status,Tags";
+    private static final String INTERVIEW_CSV_HEADER = "Date,Interview Status,Name,Phone,Email,Age,Address,"
+            + "Gender,Hire status,Tags,Position,Description,Number of openings,Number of offers,Requirements";
+    private static final String POSITION_CSV_HEADER = "Position,Description,Number of openings,Number of offers"
+            + "Requirements";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -259,6 +264,7 @@ public class ModelManager implements Model {
     public void exportCsvApplicant() throws FileNotFoundException {
         File csvOutputFile = new File(APPLICANT_CSV_FILE);
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            pw.println(APPLICANT_CSV_HEADER);
             filteredApplicants.stream()
                     .map(Applicant::convertToCsv)
                     .forEach(pw::println);
@@ -311,6 +317,7 @@ public class ModelManager implements Model {
     public void exportCsvInterview() throws FileNotFoundException {
         File csvOutputFile = new File(INTERVIEW_CSV_FILE);
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            pw.println(INTERVIEW_CSV_HEADER);
             filteredInterviews.stream()
                     .map(Interview::convertToCsv)
                     .forEach(pw::println);
@@ -353,6 +360,7 @@ public class ModelManager implements Model {
     public void exportCsvPosition() throws FileNotFoundException {
         File csvOutputFile = new File(POSITION_CSV_FILE);
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            pw.println(POSITION_CSV_HEADER);
             filteredPositions.stream()
                     .map(Position::convertToCsv)
                     .forEach(pw::println);

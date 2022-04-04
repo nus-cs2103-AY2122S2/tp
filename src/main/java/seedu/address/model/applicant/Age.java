@@ -5,8 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain numbers, and it should be at least 2 digits long";
-    public static final String VALIDATION_REGEX = "\\d{2,}";
+            "Age should only contain numbers, and it should be 2 or 3 digits long";
+    public static final String VALIDATION_REGEX = "[\\d]{2,3}";
     public final String value;
 
     /**
