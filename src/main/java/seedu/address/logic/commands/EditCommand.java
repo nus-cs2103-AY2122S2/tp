@@ -119,14 +119,13 @@ public class EditCommand extends Command {
      */
     private static void batchUpdateNegativeToPositive(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.getStatus().toString().equals(Status.NEGATIVE)
-                && editedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+        if (personToEdit.isNegative() && editedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(editedPerson)
                             || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson)
-                            && !student.getStatus().toString().equals(Status.POSITIVE))
+                            && !student.isPositive())
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
@@ -145,12 +144,10 @@ public class EditCommand extends Command {
      */
     private static void batchUpdatePositiveToNegative(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
-                && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
+        if (personToEdit.isPositive() && editedPerson.isNegative()) {
 
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                            .equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(editedPerson)
                             || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson))
                     .collect(Collectors.toList());
@@ -159,11 +156,10 @@ public class EditCommand extends Command {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
 
                 List<Person> positiveRelatedToPerson = studentList.stream()
-                        .filter(student -> (student.getClassCode().toString()
-                                .equals(currentPerson.getClassCode().toString())
+                        .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
                                 && !student.isSamePerson(editedPerson)
-                                && student.getStatus().toString().equals(Status.POSITIVE))
+                                && student.isPositive())
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {

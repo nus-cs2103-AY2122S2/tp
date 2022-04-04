@@ -90,6 +90,14 @@ public class Person {
     }
 
     /**
+     * Returns true if a person has the same ClassCode
+     * as the other
+     */
+    public boolean hasSameClassCode(Person otherStudent) {
+        return classCode.toString().equals(otherStudent.getClassCode().toString());
+    }
+
+    /**
      * Returns true if a person is in the same
      * activity as the other.
      */
@@ -109,6 +117,27 @@ public class Person {
      */
     public boolean hasActivity(Activity activity) {
         return activities.contains(activity);
+    }
+
+    /**
+     * Returns true if a person has the status Positive.
+     */
+    public boolean isPositive() {
+        return status.toString().equals(Status.POSITIVE);
+    }
+
+    /**
+     * Returns true if a person has the status Negative.
+     */
+    public boolean isNegative() {
+        return status.toString().equals(Status.NEGATIVE);
+    }
+
+    /**
+     * Returns true if a person has the status Close-contact
+     */
+    public boolean isCloseContact() {
+        return status.toString().equals(Status.CLOSE_CONTACT);
     }
 
     /**
