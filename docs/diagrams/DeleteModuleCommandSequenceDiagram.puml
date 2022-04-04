@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+
+title DeleteModuleCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteModuleCommandParser" as DeleteModuleCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":DeleteModuleCommand" as DeleteModuleCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "predicate:ModuleCodeContainsKeywordsPredicate" as Predicate MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create DeleteModuleCommandParser
+AddressBookParser -> DeleteModuleCommandParser
+activate DeleteModuleCommandParser LOGIC_COLOR
+DeleteModuleCommandParser --> AddressBookParser
+deactivate DeleteModuleCommandParser
+
+AddressBookParser -> DeleteModuleCommandParser : parse(arguments)
+activate DeleteModuleCommandParser LOGIC_COLOR
+
+DeleteModuleCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> DeleteModuleCommandParser -- LOGIC_COLOR: argMultimap
+
+ref over DeleteModuleCommandParser: Parsing module code
+
+create Predicate
+DeleteModuleCommandParser -> Predicate
+activate Predicate MODEL_COLOR
+Predicate --> DeleteModuleCommandParser
+deactivate Predicate
+
+create DeleteModuleCommand
+DeleteModuleCommandParser -> DeleteModuleCommand
+activate DeleteModuleCommand LOGIC_COLOR
+DeleteModuleCommand --> DeleteModuleCommandParser
+deactivate DeleteModuleCommand
+
+DeleteModuleCommandParser --> AddressBookParser -- LOGIC_COLOR: DeleteModuleCommand
+AddressBookParser --> LogicManager -- LOGIC_COLOR: DeleteModuleCommand
+
+LogicManager -> DeleteModuleCommand ++ LOGIC_COLOR: execute(model)
+DeleteModuleCommand -> Model ++ MODEL_COLOR: updateFilteredPersonList(predicate)
+deactivate Model
+DeleteModuleCommand -> Model ++ MODEL_COLOR: deletePerson(person)
+deactivate Model
+
+create CommandResult
+DeleteModuleCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --> DeleteModuleCommand
+deactivate CommandResult
+
+DeleteModuleCommand --> LogicManager -- LOGIC_COLOR: commandResult
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":DeleteModuleCommandParser" as DeleteModuleCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "moduleCode:ModuleCode" as ModuleCode MODEL_COLOR
+end box
+
+mainframe sd Parsing module code
+
+DeleteModuleCommandParser -> ParserUtil ++ LOGIC_COLOR: parseModuleCode(moduleCode)
+create ModuleCode
+ParserUtil -> ModuleCode
+activate ModuleCode MODEL_COLOR
+ModuleCode --> ParserUtil
+deactivate ModuleCode
+ParserUtil --> DeleteModuleCommandParser -- LOGIC_COLOR: moduleCode
+
+@enduml
