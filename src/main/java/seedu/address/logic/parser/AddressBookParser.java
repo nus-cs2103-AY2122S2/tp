@@ -117,7 +117,9 @@ public class AddressBookParser {
 
 
         case ShowInsightsCommand.COMMAND_WORD:
+        case ShowInsightsCommand.COMMAND_ALIAS:
             return new ShowInsightsCommand();
+
         case FindEventCommand.COMMAND_WORD:
         case FindEventCommand.COMMAND_ALIAS:
             return new FindEventCommandParser().parse(arguments);

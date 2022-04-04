@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 public class ShowInsightsCommand extends Command {
 
     public static final String COMMAND_WORD = "showinsights";
+    public static final String COMMAND_ALIAS = "si";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows insights about friends in Amigos.\n";
 
