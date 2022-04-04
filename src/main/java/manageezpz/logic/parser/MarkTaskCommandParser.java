@@ -1,7 +1,5 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
-
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.MarkTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -22,9 +20,7 @@ public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new MarkTaskCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    MarkTaskCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + MarkTaskCommand.MESSAGE_USAGE, pe);
         }
     }
-
 }

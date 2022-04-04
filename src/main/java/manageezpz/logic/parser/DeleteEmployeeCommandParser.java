@@ -1,7 +1,5 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
-
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.DeleteEmployeeCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -22,8 +20,7 @@ public class DeleteEmployeeCommandParser implements Parser<DeleteEmployeeCommand
             Index index = ParserUtil.parseIndex(args);
             return new DeleteEmployeeCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    DeleteEmployeeCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + DeleteEmployeeCommand.MESSAGE_USAGE, pe);
         }
     }
 

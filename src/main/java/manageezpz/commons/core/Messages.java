@@ -14,7 +14,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_TASK_NUMBER = "Task number field cannot be empty! \n\n%1$s";
 
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
-            "The person index provided is invalid as it exceeds the amount of tasks in the displayed list! \n\n%1$s";
+            "The person index provided is invalid as it exceeds the amount of persons in the displayed list! \n\n%1$s";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX =
             "The task index provided is invalid as it exceeds the amount of tasks in the displayed list! \n\n%1$s";
     public static final String MESSAGE_INVALID_PRIORITY =
@@ -26,7 +26,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_TASK_TYPE = "Task is an invalid Task Type!";
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time format!";
     public static final String MESSAGE_INVALID_TIME_RANGE =
-            "The time range you provided is invalid! End time should be after start time!";
-    public static final String MESSAGE_TASK_UPDATE_SUCCESS = "Update Task success: %1$s";
+            "The time range you provided is invalid as end time should be after start time!";
+    public static final String MESSAGE_EMPTY_START_TIME_END_TIME =
+            "Please enter a start time and end time for the event!";
+
     public static final String MESSAGE_DUPLICATE_TASK = "Task with the same description '%1$s' already exists! \n\n";
+
+    public static final String MESSAGE_FIELD_NOT_EDITED = "At least one field to edit must be provided.\n\n";
 }

@@ -40,9 +40,7 @@ public class EditEmployeeCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
-
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Update Employee success: %1$s";
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Employee %1$s already exists!\n";
 

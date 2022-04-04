@@ -31,8 +31,7 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
         try {
             index = ParserUtil.parseIndex(argMultimapPriority.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    TagTaskPriorityCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + TagTaskPriorityCommand.MESSAGE_USAGE, pe);
         }
 
         if (!arePrefixesPresent(argMultimapPriority, PREFIX_PRIORITY)) {

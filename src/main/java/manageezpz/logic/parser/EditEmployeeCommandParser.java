@@ -1,8 +1,7 @@
 package manageezpz.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
-import static manageezpz.logic.commands.EditEmployeeCommand.MESSAGE_USAGE;
+import static manageezpz.commons.core.Messages.MESSAGE_FIELD_NOT_EDITED;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -34,7 +33,7 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND, MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + EditEmployeeCommand.MESSAGE_USAGE, pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -50,11 +49,11 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
                 editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
             }
         } catch (ParseException pe) {
-            throw new ParseException(pe.getMessage() + "\n" + MESSAGE_USAGE, pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + EditEmployeeCommand.MESSAGE_USAGE, pe);
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditEmployeeCommand.MESSAGE_NOT_EDITED + "\n" + MESSAGE_USAGE);
+            throw new ParseException(MESSAGE_FIELD_NOT_EDITED + EditEmployeeCommand.MESSAGE_USAGE);
         }
 
         return new EditEmployeeCommand(index, editPersonDescriptor);

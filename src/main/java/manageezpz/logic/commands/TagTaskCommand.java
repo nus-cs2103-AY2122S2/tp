@@ -26,7 +26,7 @@ public class TagTaskCommand extends Command {
 
     public static final String MESSAGE_TAG_TASK_SUCCESS = "Employee %1$s is tagged to the task: ";
 
-    public static final String MESSAGE_NO_SUCH_PERSON = "There is no employee with the name %1$s!";
+    public static final String MESSAGE_NO_SUCH_PERSON = "There is no employee with the full name %1$s!";
 
     public static final String MESSAGE_PERSON_TAGGED_TO_TASK = "Employee %1$s is already tagged to the task: ";
 

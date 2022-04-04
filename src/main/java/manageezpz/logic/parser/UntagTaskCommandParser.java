@@ -1,5 +1,6 @@
 package manageezpz.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_NAME;
 import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
@@ -20,6 +21,8 @@ public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public UntagTaskCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+
         ArgumentMultimap argMultimapTag =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
@@ -28,8 +31,7 @@ public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimapTag.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    UntagTaskCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + UntagTaskCommand.MESSAGE_USAGE, pe);
         }
 
         if (!arePrefixesPresent(argMultimapTag, PREFIX_NAME)) {
@@ -45,13 +47,11 @@ public class UntagTaskCommandParser implements Parser<UntagTaskCommand> {
         String name = argMultimapTag.getValue(PREFIX_NAME).get();
 
         if (name.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_NAME,
-                    UntagTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_EMPTY_NAME, UntagTaskCommand.MESSAGE_USAGE));
         }
 
         return new UntagTaskCommand(index, name);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

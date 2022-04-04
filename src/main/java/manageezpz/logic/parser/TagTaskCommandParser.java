@@ -31,8 +31,7 @@ public class TagTaskCommandParser implements Parser<TagTaskCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimapTag.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    TagTaskCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + TagTaskCommand.MESSAGE_USAGE, pe);
         }
 
         if (!arePrefixesPresent(argMultimapTag, PREFIX_NAME)) {
@@ -48,13 +47,11 @@ public class TagTaskCommandParser implements Parser<TagTaskCommand> {
         String name = argMultimapTag.getValue(PREFIX_NAME).get();
 
         if (name.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_NAME,
-                    TagTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_EMPTY_NAME, TagTaskCommand.MESSAGE_USAGE));
         }
 
         return new TagTaskCommand(index, name);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

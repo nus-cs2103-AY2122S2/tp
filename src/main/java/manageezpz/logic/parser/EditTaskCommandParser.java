@@ -6,6 +6,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
@@ -33,15 +34,18 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    EditTaskCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, pe);
         }
+
+        System.out.println(argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty());
+        System.out.println(argMultimap.getValue(PREFIX_DATE).isEmpty());
+        System.out.println(argMultimap.getValue(PREFIX_AT_DATETIME).isEmpty());
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty()
                 && argMultimap.getValue(PREFIX_DATE).isEmpty()
                 && argMultimap.getValue(PREFIX_AT_DATETIME).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    EditTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(Messages.MESSAGE_FIELD_NOT_EDITED +
+                    EditTaskCommand.MESSAGE_USAGE);
         }
 
         String desc = argMultimap.getValue(PREFIX_DESCRIPTION).orElse("");

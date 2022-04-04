@@ -2,6 +2,7 @@ package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
 import static manageezpz.logic.commands.AddEventTaskCommand.MESSAGE_USAGE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -45,8 +46,10 @@ public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
             Time startTime = ParserUtil.parseTime(parseAtDateTime[1]);
             Time endTime = ParserUtil.parseTime(parseAtDateTime[2]);
 
-            if (endTime.getParsedTime().compareTo(startTime.getParsedTime()) < 0) {
-                throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+            System.out.println(endTime.getParsedTime().compareTo(startTime.getParsedTime()));
+
+            if (endTime.getParsedTime().compareTo(startTime.getParsedTime()) < 1) {
+                throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
             }
 
             Event event = new Event(desc, date, startTime, endTime);
