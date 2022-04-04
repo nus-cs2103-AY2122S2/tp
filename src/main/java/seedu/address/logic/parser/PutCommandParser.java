@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PLAYER;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.PutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -24,9 +23,9 @@ public class PutCommandParser implements Parser<PutCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PutCommand.MESSAGE_USAGE));
-        }
+        //if (!argMultimap.getPreamble().isEmpty()) {
+        //    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PutCommand.MESSAGE_USAGE));
+        //}
 
         if (arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_LINEUP)) {
             // delete player from lineup

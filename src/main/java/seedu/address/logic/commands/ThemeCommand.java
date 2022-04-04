@@ -10,7 +10,7 @@ public class ThemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme of MyGM.\n"
             + "Parameters: " + PREFIX_THEME + "THEME\n"
-            + "Example: " + COMMAND_WORD + PREFIX_THEME + "light";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_THEME + "light";
 
     public static final String MESSAGE_EDIT_THEME_DARK = "Changed to dark mode successfully";
 
