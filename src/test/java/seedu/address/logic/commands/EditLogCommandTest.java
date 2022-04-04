@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LOG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.KAREN;
-import static seedu.address.testutil.TypicalPersons.LAUREN;
 import static seedu.address.testutil.TypicalPersons.MAVIS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
