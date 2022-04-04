@@ -43,6 +43,7 @@ public class EditInterviewCommand extends EditCommand {
             + " a current interview in the address book. Interviews must be "
             + "at least 1 hour apart for the same candidate.";
     public static final String MESSAGE_APPLICANT_SAME_POSITION = "%1$s already has an interview for %2$s.";
+    public static final String MESSAGE_NOT_PENDING = "Only interviews that are pending can be edited.";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -108,6 +109,11 @@ public class EditInterviewCommand extends EditCommand {
         }
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
+
+        if (!interviewToEdit.getStatus().isPendingStatus()) {
+            throw new CommandException(MESSAGE_NOT_PENDING);
+        }
+
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor, model);
 
         boolean applicantEdited = !(interviewToEdit.getApplicant().equals(editedInterview.getApplicant()));
