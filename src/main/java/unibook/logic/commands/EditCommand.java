@@ -78,6 +78,7 @@ public class EditCommand extends Command {
             + "E.g. edit 1 o/person m/cs2103 g/T2 adds the first person on the index list to group T2 of module CS2103";
     public static final String MESSAGE_KEYEVENT_INDEX_MISSING = "Index of key event to be changed must be included. "
             + "E.g. ke/1 edits the fields of 1st key event";
+    public static final String MESSAGE_WRONG_FIELDS = "Wrong fields used for given option. \n";
 
 
     public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD

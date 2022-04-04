@@ -3,6 +3,7 @@ package unibook.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
+import static unibook.logic.commands.EditCommand.MESSAGE_WRONG_FIELDS;
 import static unibook.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static unibook.logic.parser.CliSyntax.PREFIX_GROUP;
@@ -92,9 +93,6 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         }
 
-        // Checks if index provided <= 0
-
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         EditGroupDescriptor editGroupDescriptor = new EditGroupDescriptor();
@@ -105,6 +103,12 @@ public class EditCommandParser implements Parser<EditCommand> {
 
 
         if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
+            if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()
+            || argMultimap.getValue(PREFIX_DATETIME).isPresent() || argMultimap.getValue(PREFIX_KEYEVENT).isPresent()) {
+                throw new ParseException(MESSAGE_WRONG_FIELDS + EditCommand.PERSON_MESSAGE_USAGE);
+            }
+
+
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
@@ -151,6 +155,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             return new EditCommand(index, editPersonDescriptor);
         } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
+            if (argMultimap.getValue(PREFIX_PHONE).isPresent()
+                    || argMultimap.getValue(PREFIX_EMAIL).isPresent()
+                    || argMultimap.getValue(PREFIX_OFFICE).isPresent()
+                    || argMultimap.getValue(PREFIX_NEWMOD).isPresent()) {
+                throw new ParseException(MESSAGE_WRONG_FIELDS + EditCommand.MODULE_MESSAGE_USAGE);
+            }
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get()));
             }
@@ -164,6 +174,16 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             return new EditCommand(index, editModuleDescriptor);
         } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()
+                    || argMultimap.getValue(PREFIX_DATETIME).isPresent()
+                    || argMultimap.getValue(PREFIX_KEYEVENT).isPresent()
+                    || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                    || argMultimap.getValue(PREFIX_EMAIL).isPresent()
+                    || argMultimap.getValue(PREFIX_OFFICE).isPresent()
+                    || argMultimap.getValue(PREFIX_NEWMOD).isPresent()) {
+                throw new ParseException(MESSAGE_WRONG_FIELDS + EditCommand.GROUP_MESSAGE_USAGE);
+            }
+
             if (!argMultimap.getValue(PREFIX_MODULE).isPresent()) {
                 throw new ParseException(EditCommand.MESSAGE_EDIT_MISSING);
             } else {
@@ -197,6 +217,17 @@ public class EditCommandParser implements Parser<EditCommand> {
                 return new EditCommand(index, editPersonDescriptor, editModuleDescriptor);
             }
         } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("keyevent")) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()
+                    || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                    || argMultimap.getValue(PREFIX_EMAIL).isPresent()
+                    || argMultimap.getValue(PREFIX_OFFICE).isPresent()
+                    || argMultimap.getValue(PREFIX_NEWMOD).isPresent()
+                    || argMultimap.getValue(PREFIX_GROUP).isPresent()
+                    || argMultimap.getValue(PREFIX_MODULE).isPresent()
+                    || argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()) {
+                throw new ParseException(MESSAGE_WRONG_FIELDS + EditCommand.KEYEVENT_MESSAGE_USAGE);
+            }
+
             ModuleKeyEvent mod = new ModuleKeyEvent();
             Optional<ModuleKeyEvent.KeyEventType> eventType = Optional.empty();
             Optional<LocalDateTime> dt = Optional.empty();

@@ -311,7 +311,7 @@ Format: `list mt/YYYY-MM-DD`
 
 Edits an existing person in UniBook.
 
-General Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [t/TAG] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME]`
+General Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [t/TAG] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME] [ke/KEYEVENT] [dt/DATETIME]`
 * Fields required differs based on the `o/OPTION` chosen. 
 
 
