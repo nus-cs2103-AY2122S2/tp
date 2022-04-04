@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE_MONTH_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWNER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -62,7 +65,13 @@ public class CommandTestUtil {
             + VALID_CHARGEDATE_AMY + " " + PREFIX_CHARGE + INVALID_CHARGEAMT_AMY;
     public static final String INVALID_CHARGE_AMY_INVALID_ARGS = " " + PREFIX_CHARGE_MONTH_YEAR
             + INVALID_CHARGEDATE_AMY + " " + PREFIX_CHARGE + INVALID_CHARGEAMT_AMY;
-
+    public static final String VALID_ATTENDANCE_DATE_AMY = "27-03-2022";
+    public static final String VALID_ATTENDANCE_DATE_BOB = "28-03-2022";
+    public static final String VALID_ATTENDANCE_DATE_CHARLIE = "27-03-2022";
+    public static final String VALID_PICKUP_TIME_AMY = "09:00";
+    public static final String VALID_PICKUP_TIME_BOB = "10:00";
+    public static final String VALID_DROPOFF_TIME_AMY = "17:30";
+    public static final String VALID_DROPOFF_TIME_BOB = "18:30";
 
 
 
@@ -77,6 +86,15 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ATTENDANCE_DATE_DESC_AMY = " " + PREFIX_DATE + VALID_ATTENDANCE_DATE_AMY;
+    public static final String ATTENDANCE_DATE_DESC_BOB = " " + PREFIX_DATE + VALID_ATTENDANCE_DATE_BOB;
+    public static final String ATTENDANCE_DATE_DESC_CHARLIE = " " + PREFIX_DATE + VALID_ATTENDANCE_DATE_CHARLIE;
+    public static final String PICKUP_TIME_DESC_AMY = " " + PREFIX_PICKUP + VALID_PICKUP_TIME_AMY;
+    public static final String PICKUP_TIME_DESC_BOB = " " + PREFIX_PICKUP + VALID_PICKUP_TIME_BOB;
+
+    public static final String DROPOFF_TIME_DESC_AMY = " " + PREFIX_DROPOFF + VALID_DROPOFF_TIME_AMY;
+    public static final String DROPOFF_TIME_DESC_BOB = " " + PREFIX_DROPOFF + VALID_DROPOFF_TIME_BOB;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -91,8 +109,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPetDescriptor DESC_AMY;
     public static final EditCommand.EditPetDescriptor DESC_BOB;
 
-    public static final PresentAttendanceDescriptor DESC_WITH_TRANSPORT_ARRANGEMENT;
-    public static final PresentAttendanceDescriptor DESC_WITHOUT_TRANSPORT_ARRANGEMENT;
+    public static final PresentAttendanceDescriptor DESC_WITH_TRANSPORT_ARRANGEMENT_AMY;
+    public static final PresentAttendanceDescriptor DESC_WITH_TRANSPORT_ARRANGEMENT_BOB;
+    public static final PresentAttendanceDescriptor DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE;
 
     static {
         DESC_AMY = new EditPetDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -101,10 +120,13 @@ public class CommandTestUtil {
         DESC_BOB = new EditPetDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_WITH_TRANSPORT_ARRANGEMENT = new PresentAttendanceDescriptorBuilder()
+        DESC_WITH_TRANSPORT_ARRANGEMENT_AMY = new PresentAttendanceDescriptorBuilder()
             .withDate("2022-03-27").withPickUpTime("09:00").withDropOffTime("17:30")
             .build();
-        DESC_WITHOUT_TRANSPORT_ARRANGEMENT = new PresentAttendanceDescriptorBuilder()
+        DESC_WITH_TRANSPORT_ARRANGEMENT_BOB = new PresentAttendanceDescriptorBuilder()
+            .withDate("2022-03-28").withPickUpTime("10:00").withDropOffTime("18:30")
+            .build();
+        DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE = new PresentAttendanceDescriptorBuilder()
             .withDate("2022-03-27")
             .build();
     }

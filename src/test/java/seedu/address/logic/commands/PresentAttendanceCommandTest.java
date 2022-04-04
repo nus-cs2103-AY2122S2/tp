@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_WITHOUT_TRANSPORT_ARRANGEMENT;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_WITH_TRANSPORT_ARRANGEMENT;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_WITH_TRANSPORT_ARRANGEMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
@@ -329,10 +329,10 @@ public class PresentAttendanceCommandTest {
     @Test
     public void equals() {
         final PresentAttendanceCommand standardCommand = new PresentAttendanceCommand(INDEX_FIRST_PET,
-            DESC_WITH_TRANSPORT_ARRANGEMENT);
+            DESC_WITH_TRANSPORT_ARRANGEMENT_AMY);
 
         // same values -> returns true
-        PresentAttendanceDescriptor copyDescriptor = new PresentAttendanceDescriptor(DESC_WITH_TRANSPORT_ARRANGEMENT);
+        PresentAttendanceDescriptor copyDescriptor = new PresentAttendanceDescriptor(DESC_WITH_TRANSPORT_ARRANGEMENT_AMY);
         PresentAttendanceCommand commandWithSameValues = new PresentAttendanceCommand(INDEX_FIRST_PET, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -347,10 +347,10 @@ public class PresentAttendanceCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(
-            new PresentAttendanceCommand(INDEX_SECOND_PET, DESC_WITH_TRANSPORT_ARRANGEMENT)));
+            new PresentAttendanceCommand(INDEX_SECOND_PET, DESC_WITH_TRANSPORT_ARRANGEMENT_AMY)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(
-            new PresentAttendanceCommand(INDEX_FIRST_PET, DESC_WITHOUT_TRANSPORT_ARRANGEMENT)));
+            new PresentAttendanceCommand(INDEX_FIRST_PET, DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE)));
     }
 }
