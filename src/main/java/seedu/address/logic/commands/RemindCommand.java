@@ -34,7 +34,7 @@ public class RemindCommand extends Command {
             + "If the Reminders window is already open, close it and re-open it \n"
             + "(via 'rm' command, 'Reminders' button from the 'File' tab, or press 'F4' key) to refresh the data!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets a Reminder for the client "
+            + ": Add/Edit/Remove a Reminder for the client "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMINDER + "REMINDER\n"
