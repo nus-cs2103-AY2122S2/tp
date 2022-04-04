@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
+import com.google.common.io.Files;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -180,6 +182,10 @@ public class MainWindow extends UiPart<Stage> {
         int returnValue = fileChooser.showOpenDialog(dialog);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            String fileType = selectedFile.toString();
+            if (!Files.getFileExtension(fileType).equals("xlsx") && !Files.getFileExtension(fileType).equals("xls")) {
+                resultDisplay.setFeedbackToUser("Imported file is not in excel format");
+            }
             ImportFileParser converter = new ImportFileParser();
             List<String> res;
             res = converter.jsonToPerson(selectedFile);
@@ -187,11 +193,11 @@ public class MainWindow extends UiPart<Stage> {
                 try {
                     executeCommand(res.get(i));
                 } catch (ParseException e) {
-                    throw new ParseException("haha");
+                    resultDisplay.setFeedbackToUser("Some of the entry are not in correct format");
                 }
             }
         }
-
+        resultDisplay.setFeedbackToUser("File successfully imported");
     }
 
     /**
