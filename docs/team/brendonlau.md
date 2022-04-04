@@ -3,7 +3,7 @@ layout: page
 title: Brendon Lau's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Tinner
 
 Tinner (Anagram of Intern) is a desktop app for managing internship applications, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Tinner allows you to easily sort through and retrieve the relevant information faster than traditional GUI apps.
 

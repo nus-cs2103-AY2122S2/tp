@@ -73,6 +73,12 @@ from what the user sees, how Tinner can help the user, and even its limitations.
 java -jar tinner.jar
 ```
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: On Mac devices, the above command  `java -jar tinner.jar` must be invoked rather than double-clicking the file to start the application or else the application will be unable to run as expected.
+
+</div>
+
 ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the
@@ -341,7 +347,7 @@ Thus, you can increase the reminder window by making this entry:
 
 A scenario where multiple companies have sent you offers and you may want to store these companies in
 a [list of favourites](#c-listfavourite) for ease of reference.  
-you can favourite a company by making this entry:
+You can favourite a company by making this entry:
 
 1. [Favourite a company](#c-favourite-c) from the company list.  
    ![FavouriteDemo](images/FavouriteDemo.png)
