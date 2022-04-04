@@ -69,7 +69,7 @@ e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe
 - Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
-- Inputting information after `pr/` & `p/` indicates the type of property a user is selling or buying.<br>
+- Inputting information after `pr/` & `p/` indicates the type of property a client is selling or buying.<br>
 e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this client is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
 
 - client parameters can be in any order.<br>
@@ -145,7 +145,7 @@ Adds a client to RealEstatePro.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] [i/FILEPATH:DESCRIPTION]`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Either a property or preference must be provided when adding a new user and only one of either type can be provided.
+Either a property or preference must be provided when adding a new client and only one of either type can be provided.
 </div>
 **Tip**: A client is either a `buyer`, or `seller` based on whether he has a property or a preference.
 
@@ -165,7 +165,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [
 - Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- Type of the user can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the user's current `Property` or `Preference`.
+- Type of the client can be changed from `buyer` to `seller` & vice versa by adding a `Property` or a `Preference` which removes the client's current `Property` or `Preference`.
 - You can remove all the client’s properties by typing `pr/` without specifying any properties after it.
 
 Examples:
@@ -193,7 +193,7 @@ Examples:
 - `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 **Note**:
-- Images associated with the user are not deleted and remains in the OS file system.
+- Images associated with the client are not deleted and remains in the OS file system.
 
 ### Favourite a client: `favourite`
 
