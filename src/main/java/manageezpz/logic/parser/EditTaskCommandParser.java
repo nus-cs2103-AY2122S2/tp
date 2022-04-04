@@ -1,7 +1,6 @@
 package manageezpz.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -44,8 +43,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty()
                 && argMultimap.getValue(PREFIX_DATE).isEmpty()
                 && argMultimap.getValue(PREFIX_AT_DATETIME).isEmpty()) {
-            throw new ParseException(Messages.MESSAGE_FIELD_NOT_EDITED +
-                    EditTaskCommand.MESSAGE_USAGE);
+            throw new ParseException(Messages.MESSAGE_FIELD_NOT_EDITED + EditTaskCommand.MESSAGE_USAGE);
         }
 
         String desc = argMultimap.getValue(PREFIX_DESCRIPTION).orElse("");
