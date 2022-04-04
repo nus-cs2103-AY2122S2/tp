@@ -30,8 +30,14 @@ public class Messages {
             + "Command to change to group page: list o/view v/groups";
     public static final String MESSAGE_MODULE_CODE_NOT_EXIST = "Module Code does not exist: %1$s";
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
+    public static final String MESSAGE_INVALID_MODULE_CODE = "Invalid Module Code! Module Codes must contain 1-10 "
+            + "alphanumeric characters.";
+    public static final String MESSAGE_INVALID_MODULE_NAME = "Invalid Module Name! Module Names must contain 1-50 "
+            + "alphanumeric characters.";
+
 
     //ListCommand
+    public static final String MESSAGE_FIELD_EMPTY = "%s field cannot be empty!";
     public static final String MESSAGE_CHANGED_TO_MODULE_PAGE = "Changed page to Module Page!";
     public static final String MESSAGE_CHANGED_TO_PERSON_PAGE = "Changed page to Person Page!";
     public static final String MESSAGE_CHANGED_TO_GROUP_PAGE = "Changed page to Group Page!";
@@ -54,7 +60,6 @@ public class Messages {
     public static final String MESSAGE_GROUP_FIELD_MISSING = "The g/<GROUPNAME> field is missing!";
     public static final String MESSAGE_VIEW_FIELD_MISSING = "The v/<VIEW> field is missing!";
     public static final String MESSAGE_GROUP_NOT_IN_MODULE = "The group %s does not exist in the module!";
-
     public static final String MESSAGE_GROUP_NOT_IN_UNIBOOK = "The group %s does not exist in Unibook!";
     public static final String MESSAGE_DISPLAYED_GROUPS_WITH_NAME = "Displayed group(s) with name %s!";
     public static final String MESSAGE_DISPLAYED_PEOPLE_IN_GROUP = "Displayed people in %s %s!";
@@ -65,6 +70,7 @@ public class Messages {
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_DATE = "Displayed modules with key event(s) on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_DATE = "No modules have key events on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_NAME = "No modules have names containing %s!";
+    public static final String MESSAGE_NO_GROUP_FIELD_REQUIRED = "You are on group page! No need to specify o/group!";
     public static final String MESSAGE_INVALID_KEY_EVENT = "Invalid Key Event: %s. Acceptable arguments are "
         + "EXAM, ASSIGNMENT_DUE, ASSIGNMENT_RELEASE or QUIZ.";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_EVENT_AND_DATE =

@@ -13,7 +13,9 @@ import unibook.model.module.ModuleCode;
 import unibook.model.module.ModuleKeyEvent;
 import unibook.model.module.ModuleList;
 import unibook.model.module.group.Group;
+import unibook.model.person.Email;
 import unibook.model.person.Person;
+import unibook.model.person.Phone;
 import unibook.model.person.Professor;
 import unibook.model.person.Student;
 import unibook.model.person.UniquePersonList;
@@ -86,6 +88,22 @@ public class UniBook implements ReadOnlyUniBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if unibook contains a person with given phone number.
+     */
+    public boolean phoneNumberBeingUsed(Phone phone) {
+        requireNonNull(phone);
+        return persons.phoneNumberBeingUsed(phone);
+    }
+
+    /**
+     * Returns true if unibook contains a person with given email.
+     */
+    public boolean emailBeingUsed(Email email) {
+        requireNonNull(email);
+        return persons.emailBeingUsed(email);
     }
 
     /**
