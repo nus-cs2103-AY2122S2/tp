@@ -97,21 +97,28 @@ public class Interview {
      * Checks if the given interview can be passed based on the number of offers given for its position.
      */
     public boolean isPassableInterview() {
-        return this.position.canExtendOffer();
+        return status.isPendingStatus() && this.position.canExtendOffer();
     }
 
     /**
      * Checks if the given interview can be passed based on the number of offers given for its position.
      */
     public boolean isAcceptableInterview() {
-        return this.position.canAcceptOffer();
+        return status.isPassedStatus() && this.position.canAcceptOffer();
+    }
+
+    /**
+     * Checks if the current interview can be failed.
+     */
+    public boolean isFailableInterview() {
+        return status.isPendingStatus();
     }
 
     /**
      * Checks if the given interview can be rejected based on the number of offers.
      */
     public boolean isRejectableInterview() {
-        return this.position.canRejectOffer();
+        return status.isPassedStatus() && this.position.canRejectOffer();
     }
 
 
@@ -182,4 +189,13 @@ public class Interview {
         return builder.toString();
     }
 
+    /**
+     * Creates csv output for interview
+     */
+    public String convertToCsv() {
+        String applicantCsv = this.applicant.convertToCsv();
+        String positionCsv = this.position.convertToCsv();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        return this.date.format(formatter) + "," + this.status + "," + applicantCsv + "," + positionCsv;
+    }
 }

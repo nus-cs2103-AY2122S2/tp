@@ -3,6 +3,7 @@ package seedu.address.logic.commands.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ import seedu.address.model.interview.InterviewApplicantPredicate;
 import seedu.address.model.interview.InterviewDateComparator;
 import seedu.address.model.interview.InterviewDatePredicate;
 import seedu.address.model.interview.InterviewPositionPredicate;
+import seedu.address.model.interview.InterviewStatusPredicate;
 
 /**
  * Lists interviews in HireLah to the user.
@@ -32,9 +34,11 @@ public class ListInterviewCommand extends ListCommand {
             + "\nOptional parameters: "
             + PREFIX_FILTER_TYPE + "FILTER_TYPE "
             + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
+            + PREFIX_SORT_ARGUMENT + "[asc/dsc] "
             + "\nExample: " + COMMAND_WORD + " -i "
-            + PREFIX_FILTER_TYPE + "name "
-            + PREFIX_FILTER_ARGUMENT + "John Doe ";
+            + PREFIX_FILTER_TYPE + "appl "
+            + PREFIX_FILTER_ARGUMENT + "John Doe "
+            + PREFIX_SORT_ARGUMENT + "asc ";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$d interviews";
 
@@ -76,39 +80,12 @@ public class ListInterviewCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (filterType != null && filterArgument != null && sortArgument != null) {
+            Predicate<Interview> predicate = getFilterPredicate(filterType, filterArgument);
             Comparator<Interview> comparator = new InterviewDateComparator(sortArgument.toString());
-
-            if (filterType.type.equals("appl")) {
-                String[] applicantNameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Interview> predicateApplicantName =
-                        new InterviewApplicantPredicate(Arrays.asList(applicantNameKeywords));
-                model.updateFilterAndSortInterviewList(predicateApplicantName, comparator);
-            } else if (filterType.type.equals("pos")) {
-                String[] positionNameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Interview> predicatePositionName =
-                        new InterviewPositionPredicate(Arrays.asList(positionNameKeywords));
-                model.updateFilterAndSortInterviewList(predicatePositionName, comparator);
-            } else if (filterType.type.equals("date")) {
-                Predicate<Interview> predicateDate =
-                        new InterviewDatePredicate(LocalDate.parse(filterArgument.toString()));
-                model.updateFilterAndSortInterviewList(predicateDate, comparator);
-            }
+            model.updateFilterAndSortInterviewList(predicate, comparator);
         } else if (filterType != null && filterArgument != null) {
-            if (filterType.type.equals("appl")) {
-                String[] applicantNameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Interview> predicateApplicantName =
-                        new InterviewApplicantPredicate(Arrays.asList(applicantNameKeywords));
-                model.updateFilteredInterviewList(predicateApplicantName);
-            } else if (filterType.type.equals("pos")) {
-                String[] positionNameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Interview> predicatePositionName =
-                        new InterviewPositionPredicate(Arrays.asList(positionNameKeywords));
-                model.updateFilteredInterviewList(predicatePositionName);
-            } else if (filterType.type.equals("date")) {
-                Predicate<Interview> predicateDate =
-                        new InterviewDatePredicate(LocalDate.parse(filterArgument.toString()));
-                model.updateFilteredInterviewList(predicateDate);
-            }
+            Predicate<Interview> predicate = getFilterPredicate(filterType, filterArgument);
+            model.updateFilteredInterviewList(predicate);
         } else if (sortArgument != null) {
             Comparator<Interview> comparator = new InterviewDateComparator(sortArgument.toString());
             model.updateSortInterviewList(comparator);
@@ -123,5 +100,25 @@ public class ListInterviewCommand extends ListCommand {
     @Override
     public DataType getCommandDataType() {
         return DataType.INTERVIEW;
+    }
+
+    /**
+     * Returns the suitable {@code Predicate} based on the given {@code filterType} and {@code filterArgument}
+     */
+    public Predicate<Interview> getFilterPredicate(FilterType filterType, FilterArgument filterArgument) {
+        if (filterType.type.equals("appl")) {
+            String[] applicantNameKeywords = filterArgument.toString().split("\\s+");
+            return new InterviewApplicantPredicate(Arrays.asList(applicantNameKeywords));
+        } else if (filterType.type.equals("pos")) {
+            String[] positionNameKeywords = filterArgument.toString().split("\\s+");
+            return new InterviewPositionPredicate(Arrays.asList(positionNameKeywords));
+        } else if (filterType.type.equals("date")) {
+            return new InterviewDatePredicate(LocalDate.parse(filterArgument.toString()));
+        } else if (filterType.type.equals("status")) {
+            return new InterviewStatusPredicate(filterArgument.toString());
+        }
+
+        assert true : "Filter type should be valid";
+        return null;
     }
 }

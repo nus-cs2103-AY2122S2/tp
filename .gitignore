@@ -14,6 +14,9 @@ src/main/resources/docs/
 /preferences.json
 /*.log.*
 
+# Csv export files
+*.csv
+
 # Test sandbox files
 src/test/data/sandbox/
 

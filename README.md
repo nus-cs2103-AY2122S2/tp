@@ -8,14 +8,14 @@
 * Usage:
   * Schedule interviews with potential applicants
   * Track job candidates through the hiring process
-  
+
 
 * The application is optimised for Command Line Interface (_CLI_) users. However, a graphic user interface (_GUI_) is
   also offered. 
-  
+
 
 * This is done to allow power users to accomplish tasks much quicker through the use of commands
-  
+
 
 * It is named `HireLah` because it should make the recruiter utter these words when they are using it `"aiyo just 
   HireLah!"` 

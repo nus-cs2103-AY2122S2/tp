@@ -10,14 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class PositionName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Position name should start with an alphanumeric character, "
-                    + "can contain spaces and special characters, and it should not be blank";
+            "Position name can contain any characters and spaces, and it should not be blank.\n"
+                    + "Position name should contain at least one alphanumeric character (e.g. \"1\" or \"a\")\n"
+                    + "Length of position name is restricted to a maximum of 100 characters.";
 
     /*
      * The first character of the position must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "(?=.*[\\p{Alnum}].*)([^\\s].*)";
+    public static final String VALIDATION_REGEX = "(?=.*[\\p{Alnum}].*)[^\\s].{0,99}";
 
     public final String positionName;
 

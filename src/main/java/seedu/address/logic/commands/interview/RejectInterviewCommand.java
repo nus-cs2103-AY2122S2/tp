@@ -41,7 +41,7 @@ public class RejectInterviewCommand extends Command {
         Interview interviewToReject = lastShownList.get(targetIndex.getZeroBased());
 
         if (!model.isRejectableInterview(interviewToReject)) {
-            throw new CommandException(Messages.MESSAGE_INTERIVEW_CANNOT_BE_REJECTED);
+            throw new CommandException(Messages.MESSAGE_INTERVIEW_CANNOT_BE_REJECTED);
         }
 
         // Should this be extracted out to a method

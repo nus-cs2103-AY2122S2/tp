@@ -42,7 +42,7 @@ public class AcceptInterviewCommand extends Command {
         Interview interviewToAccept = lastShownList.get(targetIndex.getZeroBased());
 
         if (!model.isAcceptableInterview(interviewToAccept)) {
-            throw new CommandException(Messages.MESSAGE_INTERIVEW_CANNOT_BE_ACCEPTED);
+            throw new CommandException(Messages.MESSAGE_INTERVIEW_CANNOT_BE_ACCEPTED);
         }
 
         // Should this be extracted out to a method

@@ -19,6 +19,12 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ListInterviewCommandParser extends GenericListParser<ListInterviewCommand> {
+
+    public static final String STATUS_REGEX = "pending|passed|failed|accepted|rejected";
+
+    public static final String MESSAGE_INVALID_STATUS =
+            "Interview status should only be pending/passed/failed/accepted/rejected (case-sensitive)";
+
     @Override
     public ListInterviewCommand returnFullList() {
         return new ListInterviewCommand();
@@ -33,13 +39,8 @@ public class ListInterviewCommandParser extends GenericListParser<ListInterviewC
         SortArgument sortArgument =
                 ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
 
-        if (filterType.type.equals("date")) {
-            try {
-                LocalDate.parse(filterArgument.toString());
-            } catch (DateTimeParseException e) {
-                throw new ParseException(Messages.MESSAGE_INVALID_DATE);
-            }
-        }
+        checkFilterTypeArgument(filterType, filterArgument);
+
         return new ListInterviewCommand(filterType, filterArgument, sortArgument);
     }
 
@@ -72,14 +73,23 @@ public class ListInterviewCommandParser extends GenericListParser<ListInterviewC
         FilterArgument filterArgument =
                 ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
 
+        checkFilterTypeArgument(filterType, filterArgument);
+
+        return new ListInterviewCommand(filterType, filterArgument);
+    }
+
+    /**
+     * Checks if the given {@code FilterArgument} if valid for the given {@code FilterType}.
+     */
+    public void checkFilterTypeArgument(FilterType filterType, FilterArgument filterArgument) throws ParseException {
         if (filterType.type.equals("date")) {
             try {
                 LocalDate.parse(filterArgument.toString());
             } catch (DateTimeParseException e) {
                 throw new ParseException(Messages.MESSAGE_INVALID_DATE);
             }
+        } else if (filterType.type.equals("status") && !filterArgument.toString().matches(STATUS_REGEX)) {
+            throw new ParseException(MESSAGE_INVALID_STATUS);
         }
-
-        return new ListInterviewCommand(filterType, filterArgument);
     }
 }

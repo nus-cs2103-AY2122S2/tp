@@ -12,7 +12,7 @@ import seedu.address.model.ImmutableCounter;
 public class PositionOpenings implements ImmutableCounter {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Number of openings should be a valid non-negative integer.";
+            "Number of openings should only contain numbers, and it should be between 1 to 5 digits.";
 
     /*
      * Number of openings must be a valid integer with 1 to 5 digits.

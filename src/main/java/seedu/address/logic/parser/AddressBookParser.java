@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCsvCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.help.HelpCommand;
 import seedu.address.logic.commands.interview.AcceptInterviewCommand;
@@ -84,7 +85,8 @@ public class AddressBookParser {
 
         case RejectInterviewCommand.COMMAND_WORD:
             return new RejectInterviewCommandParser().parse(arguments);
-
+        case ExportCsvCommand.COMMAND_WORD:
+            return new ExportCsvCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
@@ -17,8 +18,11 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantGenderPredicate;
 import seedu.address.model.applicant.ApplicantNameComparator;
 import seedu.address.model.applicant.ApplicantNamePredicate;
+import seedu.address.model.applicant.ApplicantStatusPredicate;
+import seedu.address.model.applicant.ApplicantTagPredicate;
 
 /**
  * Lists applicants in HireLah to the user.
@@ -29,9 +33,11 @@ public class ListApplicantCommand extends ListCommand {
             + "\nOptional parameters: "
             + PREFIX_FILTER_TYPE + "FILTER_TYPE "
             + PREFIX_FILTER_ARGUMENT + "FILTER_TYPE "
+            + PREFIX_SORT_ARGUMENT + "[asc/dsc] "
             + "\nExample: " + COMMAND_WORD + " -a "
-            + PREFIX_FILTER_TYPE + "name "
-            + PREFIX_FILTER_ARGUMENT + "John Doe ";
+            + PREFIX_FILTER_TYPE + "gender "
+            + PREFIX_FILTER_ARGUMENT + "M "
+            + PREFIX_SORT_ARGUMENT + "dsc ";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$d applicants";
 
@@ -73,18 +79,12 @@ public class ListApplicantCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (filterType != null && filterArgument != null && sortArgument != null) {
-            if (filterType.type.equals("name")) {
-                String[] nameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-                Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
-                model.updateFilterAndSortApplicantList(predicate, comparator);
-            }
+            Predicate<Applicant> predicate = getFilterPredicate(filterType, filterArgument);
+            Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
+            model.updateFilterAndSortApplicantList(predicate, comparator);
         } else if (filterType != null && filterArgument != null) {
-            if (filterType.type.equals("name")) {
-                String[] nameKeywords = filterArgument.toString().split("\\s+");
-                Predicate<Applicant> predicate = new ApplicantNamePredicate(Arrays.asList(nameKeywords));
-                model.updateFilteredApplicantList(predicate);
-            }
+            Predicate<Applicant> predicate = getFilterPredicate(filterType, filterArgument);
+            model.updateFilteredApplicantList(predicate);
         } else if (sortArgument != null) {
             Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
             model.updateSortApplicantList(comparator);
@@ -99,5 +99,25 @@ public class ListApplicantCommand extends ListCommand {
     @Override
     public DataType getCommandDataType() {
         return DataType.APPLICANT;
+    }
+
+    /**
+     * Returns the suitable {@code Predicate} based on the given {@code filterType} and {@code filterArgument}
+     */
+    public Predicate<Applicant> getFilterPredicate(FilterType filterType, FilterArgument filterArgument) {
+        if (filterType.type.equals("name")) {
+            String[] nameKeywords = filterArgument.toString().split("\\s+");
+            return new ApplicantNamePredicate(Arrays.asList(nameKeywords));
+        } else if (filterType.type.equals("gender")) {
+            return new ApplicantGenderPredicate(filterArgument.toString());
+        } else if (filterType.type.equals("status")) {
+            return new ApplicantStatusPredicate(filterArgument.toString());
+        } else if (filterType.type.equals("tag")) {
+            String[] tagKeywords = filterArgument.toString().split("\\s+");
+            return new ApplicantTagPredicate(Arrays.asList(tagKeywords));
+        }
+
+        assert true : "Filter type should be valid";
+        return null;
     }
 }

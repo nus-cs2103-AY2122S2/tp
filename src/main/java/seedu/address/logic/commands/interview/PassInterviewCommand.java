@@ -41,7 +41,7 @@ public class PassInterviewCommand extends Command {
         Interview interviewToPass = lastShownList.get(targetIndex.getZeroBased());
 
         if (!model.isPassableInterview(interviewToPass)) {
-            throw new CommandException(Messages.MESSAGE_INTERIVEW_CANNOT_BE_PASSED);
+            throw new CommandException(Messages.MESSAGE_INTERVIEW_CANNOT_BE_PASSED);
         }
 
         // Should this be extracted out to a method

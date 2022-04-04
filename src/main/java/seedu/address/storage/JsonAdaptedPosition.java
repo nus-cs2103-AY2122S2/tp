@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.PositionName;
+import seedu.address.model.position.PositionOffers;
 import seedu.address.model.position.PositionOpenings;
 import seedu.address.model.position.Requirement;
 
@@ -23,6 +24,7 @@ public class JsonAdaptedPosition {
     private final String description;
     private final String positionOpening;
     private final List<JsonAdaptedRequirement> requirements = new ArrayList<>();
+    private final String positionOffers;
 
     /**
      * Constructs a {@code JsonAdaptedPosition} with the given position details.
@@ -30,10 +32,12 @@ public class JsonAdaptedPosition {
     @JsonCreator
     public JsonAdaptedPosition(@JsonProperty("positionName") String positionName,
             @JsonProperty("description") String description, @JsonProperty("positionOpening") String positionOpening,
-            @JsonProperty("requirements") List<JsonAdaptedRequirement> requirements) {
+            @JsonProperty("requirements") List<JsonAdaptedRequirement> requirements,
+            @JsonProperty("positionOffers") String positionOffers) {
         this.positionName = positionName;
         this.description = description;
         this.positionOpening = positionOpening;
+        this.positionOffers = positionOffers;
 
         if (requirements != null) {
             this.requirements.addAll(requirements);
@@ -47,6 +51,7 @@ public class JsonAdaptedPosition {
         positionName = source.getPositionName().positionName;
         description = source.getDescription().descriptionText;
         positionOpening = source.getPositionOpenings().toString();
+        positionOffers = source.getPositionOffers().toString();
 
         requirements.addAll(source.getRequirements().stream()
                 .map(JsonAdaptedRequirement::new)
@@ -69,8 +74,11 @@ public class JsonAdaptedPosition {
 
         final PositionOpenings modelPositionOpenings = new PositionOpenings(positionOpening);
 
+        final PositionOffers modelPositionOffers = new PositionOffers(positionOffers);
+
         final Set<Requirement> modelRequirement = new HashSet<>(positionRequirements);
 
-        return new Position(modelPositionName, modelDescription, modelPositionOpenings, modelRequirement);
+        return new Position(modelPositionName, modelDescription, modelPositionOpenings, modelPositionOffers,
+                modelRequirement);
     }
 }
