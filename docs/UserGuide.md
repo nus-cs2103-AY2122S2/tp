@@ -27,6 +27,9 @@ As Tracey is a Command Line Interface, these are the aspects that highlight the 
 3. **Scalability** <br>
    Simple command functions in Tracey allows it to handle various complex features. Additionally, the CLI of Tracey allows easier integration of newer features that may be added in future iterations, compared to GUIs which require rendering and creation of graphical components.
 
+This [video](https://www.youtube.com/watch?v=wXzl7e9JGag) illustrates the power of using CLI over GUI in performing the same task. <br>
+(The video is produced by the developers of the FAST app, and has been approved for reuse.)
+
 </details>
 
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
@@ -35,28 +38,8 @@ We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
-* [Navigating the User Guide](#how-to-navigate-the-user-guide)
-* [Quick Start](#quick-start)
-* [Features](#features)
-    * <a href='#viewing-help'>Help</a>
-    * <a href='#importing-excel-sheet'>Importing Excel data</a>
-    * <a href='#adding-a-contact'>Adding a contact</a>
-    * <a href='#editing-an-existing-contact'>Editing an existing contact</a>
-    * <a href='#deleting-a-contact'>Deleting a contact</a>
-    * <a href='#undoing-an-action'>Undoing an action</a>
-    * <a href='#redoing-an-action'>Redoing an action</a>
-    * <a href='#finding-a-contact'>Finding a contact</a>
-    * <a href='#filtering-contacts'>Filtering contacts</a>
-    * <a href='#listing-the-records'>Listing the records</a>
-    * <a href='#copying-emails'>Copying Emails</a>
-    * <a href='#summarising-the-records'>Summarising the records</a>
-    * <a href='#archiving-tracey'>Archiving Tracey</a>
-    * <a href='#clearing-all-records'>Clearing all records</a>
-    * <a href='#exiting-tracey'>Exiting Tracey</a>
-    * <a href='#saving'>Saving</a>
-* <a href='#faq'>FAQ</a>
-* <a href='#command-summary'>Command Summary</a>
-* <a href='#glossary'>Glossary</a>
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to navigate the User Guide
