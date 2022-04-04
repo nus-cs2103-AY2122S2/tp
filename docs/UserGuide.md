@@ -495,13 +495,19 @@ delete_all
 
 Clears all entries from all lists.
 
-Format: `clear`
+Format: 
+```
+clear
+```
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+Format: 
+```
+exit
+```
 
 ### Saving the data
 
