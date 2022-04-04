@@ -65,10 +65,14 @@ public class RemindCommand extends Command {
             // the RemindCommand does not have a Reminder, remove the Reminder for this current person
             if (reminder.isEmpty()) {
                 reminderPersons.remove(personToRemind);
+                // update the model with the latest instance of the person with a reminder
+                model.setPerson(personToRemind, personToRemind);
                 return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind));
             }
             // the RemindCommand contains a Reminder, edit the current Reminder to be this new one
             reminderPersons.add(personToRemind, reminder.get());
+            // update the model with the latest instance of the person with a reminder
+            model.setPerson(personToRemind, personToRemind);
             return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind));
         }
 
@@ -78,6 +82,9 @@ public class RemindCommand extends Command {
         } else {
             reminderPersons.add(personToRemind, reminder.get());
         }
+
+        // update the model with the latest instance of the person with a reminder
+        model.setPerson(personToRemind, personToRemind);
 
         return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind));
     }

@@ -9,7 +9,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
+import seedu.address.storage.ReminderPersons;
 
 /**
  * Favourites an existing client in the address book by their index number
@@ -47,7 +49,14 @@ public class FavouriteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        // retrieve the person whose favourite status will be toggled
         Person personToFavourite = lastShownList.get(index.getZeroBased());
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Reminder previousReminder = reminderPersons.remove(personToFavourite);
+        if (previousReminder != null) {
+            reminderPersons.add(personToFavourite.toggleFavourite(), previousReminder);
+        }
+
         model.setFavouriteStatus(personToFavourite);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(personToFavourite));

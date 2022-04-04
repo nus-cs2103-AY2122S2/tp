@@ -22,6 +22,8 @@ public class ReminderWindow extends SingleColumnPersonListWindow {
     @Override
     void fillInnerParts() {
         if (ReminderPersons.getInstance().isEmpty()) {
+            reminderStatus.setVisible(true);
+            reminderStatus.setManaged(true);
             reminderStatus.setText("No Reminders set!");
         } else {
             reminderStatus.setVisible(false);
