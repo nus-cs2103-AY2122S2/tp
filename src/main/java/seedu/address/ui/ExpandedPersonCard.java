@@ -84,8 +84,8 @@ public class ExpandedPersonCard extends UiPart<Region> {
         } else {
             eventsHeader.setText("");
             //forces the size of eventsHeader to be (0, 0)
-            eventsHeader.setMaxSize(0,0);
-            eventsHeader.setMinSize(0,0);
+            eventsHeader.setMaxSize(0, 0);
+            eventsHeader.setMinSize(0, 0);
             //forces the size of upcomingEventsPanelPlaceholder to be (0, 0)
             upcomingEventsPanelPlaceholder.setMaxSize(0, 0);
             upcomingEventsPanelPlaceholder.setMinSize(0, 0);
