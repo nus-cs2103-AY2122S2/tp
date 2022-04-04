@@ -25,12 +25,9 @@ My contributions can be accessed via [RepoSense link](https://nus-cs2103-ay2122s
 
 * **New Feature**: `delgroup` command (PR: [\#65](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/65))
   * What it does: Allows users to delete a group in ArchDuke.
-  * Justification: This feature is critical to the product, and without it the product would not function.
-  The command allows users to delete a student group. This is one of the main value propositions of ArchDuke.
 
 * **New Feature**: `deassign` command (PR: [\#91](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/91) and [\#114](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/114))
-  * What it does: Allows users to deassign a student contact from an existing group. 
-  * Justification: This feature is critical to the product, and without it the product would not function.
+  * What it does: Allows users to deassign a student contact from an existing group.
 
 * **New Feature**: `viewcontact` command (PR: [\#92](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/92))
   * What it does: Allows users to view student contacts in an existing group.
@@ -44,8 +41,6 @@ My contributions can be accessed via [RepoSense link](https://nus-cs2103-ay2122s
 
 * **New Feature**: `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/73) and [\#90](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/90))
   * What it does: Allows users to view tasks from an existing group.
-  * Justification: This command is mainly to increase the user experience especially for the fast typists. Users could view the tasks
-  in the group without having to scroll through the GUI.
 
 * **Enhancements to existing feature**: `GUI` (PR: [\#51](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/51), [\#102](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/102), 
 [\#104](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/105 and [\#111](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/111)))
@@ -60,7 +55,6 @@ My contributions can be accessed via [RepoSense link](https://nus-cs2103-ay2122s
   * Justification: Enhance the user experience greatly as users would not have to copy-paste link to access the user guide.
 
 * **Enhancements to existing feature**: `add` command (PR: [\#43](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/43))
-  * Justification: Modify the existing add command to support ArchDuke student contact.
 
 * **Enhancements to existing feature**: `delete` command (PR: [\#103](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/103))
   * What it does: Allows users to remove a student contact from ArchDuke, which also removes all the contact from all pre-existing 
