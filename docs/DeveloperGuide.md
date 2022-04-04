@@ -318,11 +318,11 @@ The following activity diagram summarizes what happens when a user executes a li
 
 ![ListActivityDiagram](images/ListActivityDiagram.png)
 
-### \[Proposed\] Enrol Feature
+### Enrol Feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is only for student entity. Additionally, it implements the following operations:
+The enrol mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is only for student entity. Additionally, it implements the following operations:
 
 * `EnrolCommandParser#parse()` — Parses the command arguments.
 * `EnrolCommand#execute()` — Executes `ModelManager#enrolStudent()` with given student(s) and class group.
@@ -347,11 +347,11 @@ Step 2. The user executes `enrol` command to enrol student(s) to a `ClassGroup`.
 <br> 2. If a command fails its execution, it will not call `EnrolCommand#execute()`, instead a `CommandException` will be thrown and no student(s) will be enrolled to the given class group.
 </div>
 
-### \[Proposed\] Grading Assessment Feature
+### Grading Assessment Feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed grading assessment mechanism is facilitated by `TAssist`. Since there are various gradable components, a new entity `Assessment` will benefit the application. This entity will allow tutors to customize what are the different gradable components, from assignments to class participations. Tutors can add, delete and list this entity like the other entities. On top of that, they will be able to grade the assessment, using the `grade` command. The following operations will be implemented for the `grade` command:
+The grading assessment mechanism is facilitated by `TAssist`. Since there are various gradable components, a new entity `Assessment` will benefit the application. This entity will allow tutors to customize what are the different gradable components, from assignments to class participations. Tutors can add, delete and list this entity like the other entities. On top of that, they will be able to grade the assessment, using the `grade` command. The following operations will be implemented for the `grade` command:
 
 * `GradeCommandParser#parse()` — Parses the command arguments.
 * `GradeCommand#execute()` — Executes `ModelManager#gradeAssessment()` with the specified assessment, students and the grade they get.
@@ -401,11 +401,11 @@ The following activity diagram summarizes what happens when a user executes a gr
     * Pros: All module related data are in one class.
     * Cons: Duplicate data in storage, hard to display assessments attempts.
 
-### \[Proposed\] Mark/Unmark feature
+### Mark/Unmark feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed mark/unmark mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is currently exclusive to `StudentAttendance`. Additionally, it implements the following operations:
+The mark/unmark mechanism is facilitated by `TAssist`. Its functionality, usage and behaviour is currently exclusive to `StudentAttendance`. Additionally, it implements the following operations:
 
 * `MarkCommandParser#parse()` — Parses the command arguments.
 * `MarkCommand#execute()` — Executes `ModelManager#markAttendance()` or `ModelManager#unmarkAttendance` based on a specified class group index and week number.
