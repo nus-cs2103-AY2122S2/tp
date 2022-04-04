@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ViewedNric;
 
 /**
  * Tests that a {@code Person}'s {@code Medical} matches any of the keywords given.
