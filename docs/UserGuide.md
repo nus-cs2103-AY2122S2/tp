@@ -143,8 +143,8 @@ Adds module(s) to an existing contact
 
 Format: `addmodule INDEX m/MODULE [m/MODULE]...`
 
-* Adds modules represented by each module code `m/MODULE` to a contact at index `INDEX`
-* The `Index` refers to the index number shown in the displayed contact list.
+* Adds modules represented by each module code `m/MODULE` to a contact at Index `INDEX`
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
@@ -168,7 +168,7 @@ Format: `comment INDEX c/COMMENT`
 
 * Adds a comment for the contact at the specified `INDEX`.
 * A comment must be **within 60 characters long**
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * Any existing comments for a contact will be overwritten by the new input.
 * If used with an **empty comment** (i.e. `comment 1 c/`), the command will be treated as a **delete
@@ -187,7 +187,7 @@ Sets a contact's status as favourite or blacklisted.
 Format: `status INDEX s/STATUS`
 - Gives a status to the contact at specified `INDEX`
 - Status can either be a `blacklist` or `favourite`, a contact can have no status tagged.
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 - If used with an **empty status field** (i.e. `status 1 s/`), the command will be treated as a **delete
   command** and removes the status of the specified contact.
@@ -210,7 +210,7 @@ Format: `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`
 * Copy contacts using specified field names.​
 * If no fields are specified, **all fields will be copied**.
 * Choose `INDEX` to copy a specific contact.
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * If no `INDEX` is specified, **all contacts will be copied**.
 * Choice of format is default, csv and json.
@@ -248,16 +248,16 @@ Typing this command will cause you to lose all data. Use with caution!
 
 ### Clearing all modules for a contact : `clearmodules`
 
-**Clears all modules** based on the given index from ModuleMate Finder.
+**Clears all modules** based on the given Index from ModuleMate Finder.
 
 Format: `clearmodules INDEX`
 
 * Deletes all modules from the contact at the specified `INDEX`.
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
-- `clearmodules 5` wipes all modules for contact in index 5.
+- `clearmodules 5` wipes all modules for contact in Index 5.
 
 ### Deleting a contact : `delete`
 
@@ -266,7 +266,7 @@ Deletes the specified contact from ModuleMate Finder.
 Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
@@ -280,8 +280,8 @@ Deletes the specified module from contact in ModuleMate Finder.
 Format: `deletemodule INDEX m/MODULE [m/MODULE]...`
 
 * Deletes modules for the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The Index refers to the Index number shown in the displayed contact list.
+* The Index **must be a positive integer** 1, 2, 3, …​
 * The modules will be deleted only if the contact has the specified modules.
 * **One or more** modules must be specified.
 
@@ -295,8 +295,8 @@ Edits an existing contact in ModuleMate Finder.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
-* The `Index` refers to the index number shown in the displayed contact list.
+* Edits the contact at the specified `INDEX`. The Index refers to the Index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -387,7 +387,7 @@ You can archive contacts into a separate contact list. Archiving a contact can k
 
 format: `archive INDEX`
 * Archives the contact at the specified `INDEX`.
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
@@ -405,7 +405,7 @@ You can also bring contacts back from the archives if necessary.
 
 format: `unarchive INDEX`
 * _Unarchives_ the contact at the specified `INDEX`.
-* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
@@ -454,7 +454,7 @@ Examples:
 - `delete 5`  
 `undo`
 
-After deleting a contact at index 5, `undo` will reverse the delete command and bring the contact back at index 5.
+After deleting a contact at Index 5, `undo` will reverse the delete command and bring the contact back at Index 5.
 
 ### Redo a command : `redo`
 
@@ -469,7 +469,7 @@ Examples:
 `undo`  
 `redo`
 
- After editing a contact's name at index 3 from `George` to `Adam` and using `undo` to reverse the contact's name back to `George`, using `redo` will restore the contact's name back to `Adam`.
+ After editing a contact's name at Index 3 from `George` to `Adam` and using `undo` to reverse the contact's name back to `George`, using `redo` will restore the contact's name back to `Adam`.
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -520,7 +520,7 @@ A: You may have seniors who have graduated, but you would like to seek advise fr
 | **Clear Module(s) From Contact**                     | `clearmodules INDEX`                                                                                 | `clearmodules 3`                       |
 | **Delete Contact**                                   | `delete INDEX`                                                                                       | `delete 3`                             |
 | **Delete Module(s) from Contact**                    | `deletemodule INDEX m/MODULE [m/MODULE]...`                                                          | `deletemodule 1 m/CS1231 m/CS2102`     |
-| **Edit**                                             | `edit index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                | `edit 1 n/Alice`                       |
+| **Edit**                                             | `edit Index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                | `edit 1 n/Alice`                       |
 | **Find**                                             | `find KEYWORD [MORE_KEYWORDS]`                                                                       | `find James Jake`                      |
 | **Filter**                                           | `filter MODULE`                                                                                      | `filter CS3230`                        |
 | **Sort**                                             | `sort [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/status] [m/MODULE] [c/COMMENT]`                    | `sort n/asc p/ a/asc`                  |
