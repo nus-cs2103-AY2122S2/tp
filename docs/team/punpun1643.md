@@ -71,9 +71,20 @@ My contributions can be accessed via [RepoSense link](https://nus-cs2103-ay2122s
   increases the chance of typo errors. The enhancements allow fast typists to be able to use the app in a more convenient way.
 
 * **Project management**:
-  * to be added soon
-
-
+  * Managed all releases: [v1.3trial](https://github.com/AY2122S2-CS2103-W16-3/tp/releases/tag/v1.3trial), 
+  [v1.3](https://github.com/AY2122S2-CS2103-W16-3/tp/releases/tag/v1.3), [v1.3.1](https://github.com/AY2122S2-CS2103-W16-3/tp/releases/tag/v1.3.1) 
+  and [v1.3.2](https://github.com/AY2122S2-CS2103-W16-3/tp/releases/tag/v1.3.2)
+  * Maintained the issue tracker and milestones for the team repo and created every issue for the team.
+  * Recorded all demo screenshots and videos.
+  
+* **Contributions to team-based tasks**:
+  * Set up the GitHub team org/repo.
+  * Renamed the product and changed the product icon.
+  * Set up tools e.g., GitHub, Gradle, CI/CD.
+  * Maintained the issue tracker.
+  * Release management.
+  * Updated all UG/DG that are not specific to a feature.
+  * Automated GitHub Projects for task management.
 
 * **Documentation**:
   * User Guide:
