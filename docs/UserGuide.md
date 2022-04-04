@@ -329,17 +329,20 @@ Examples:
 
 ### Creating an Appointment : `addappt`
 
-Creates an Appointment in the Schedule.
+Creates an Appointment in the Schedule with the specified parameters.
 
 Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
-* Creates a new appointment with the specified parameters.
 * All parameters except `PERSON` **must** be specified.
-* The `NAME` parameter must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
-* The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive integer**.
-* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the index number shown in the displayed person list.
+
+| Parameter  | Description                              | Constraints                                                                                                                               |
+|------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`                             |
+| `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                               |
+| `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                               |
+| `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                               |
+| `PERSON`   | A person associated with the appointment | If specified, **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed person list** |
+
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the appointment **overlaps** with another appointment.
 </div>
@@ -365,7 +368,7 @@ Deletes an Appointment previously created in the Schedule.
 Format: `deleteappt INDEX`
 
 * Deletes the appointment that is at `INDEX` in the displayed appointment list.
-* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
+* `INDEX` **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 
 Examples:
 * `deleteappt 2` Deletes the *second* appointment in the list of appointments.
@@ -380,11 +383,15 @@ Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 * The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
-    * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
-    * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-    * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-    * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the index number shown in the displayed person list. The String `none` is used to dissociate the person associated to the appointment.
-    * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+
+| Parameter  | Description                              | Constraints                                                                                                                                                                                                                                                                                                     |
+|------------|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`                                                                                                                                                                                                   |
+| `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                                                                                                                                                                                                     |
+| `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                                                                                                                                                                                                     |
+| `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                                                                                                                                                                                                     |
+| `PERSON`   | A person associated with the appointment | Must be a **positive [integer](#global-input-constraints)** or the String `none`.<br> If a **positive integer** is provided, it refers to the [index number](#displayed-indexes) shown in the **displayed person list**. <br> The String `none` is used to dissociate the person associated to the appointment. | 
+
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
@@ -400,18 +407,23 @@ It will list all appointments that contain any sub-range of the provided period.
 
 Format: `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
-* The starting time **must be before** the ending time.
-* The `STARTDATE` parameter denotes the *starting date* of the period.
-  * `STARTDATE` defaults to **Today** if unspecified.
-* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
-  * `STARTTIME` defaults to `00:00` if unspecified.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-  * No upper limit will be enforced if `ENDDATE` is unspecified
-* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
-  * `ENDTIME` defaults to `23:59` if unspecified.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `ENDTIME` is specified, then `ENDDATE` must be specified.
+<div markdown="span" class="alert alert-info">
+
+:information_source: If `ENDTIME` is specified, then `ENDDATE` must be specified.
+
+</div>
+
+| Parameter   | Description                                             | Default Value    |
+|-------------|---------------------------------------------------------|------------------|
+| `STARTDATE` | The *starting date* of the period                       | *Today*          |
+| `STARTTIME` | The *starting time* on the starting date for the period | `00:00`          |
+| `ENDDATE`   | The *ending date* of the period                         | *No upper limit* |
+| `ENDTIME`   | The *ending time* on the ending date for the period     | `23:59`          |
+
+
+* The start of the period **must be before or equals to** the end of the period.
+* All specified parameters **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
+
 
 Example:
 * `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
@@ -428,19 +440,22 @@ An appointment of the specified minimum duration can be inserted into each of th
 
 Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
-* The starting time **must be before** the ending time.
-* The `STARTDATE` parameter denotes the *starting date* of the period.
-  * `STARTDATE` defaults to **Today** if unspecified.
-* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
-  * `STARTTIME` defaults to `00:00` if unspecified.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-  * No upper limit will be enforced if `ENDDATE` is unspecified
-* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
-  * `ENDTIME` defaults to `23:59` if unspecified.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `ENDTIME` is specified, then `ENDDATE` must be specified.
-* The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
+<div markdown="span" class="alert alert-info">
+
+:information_source: If `ENDTIME` is specified, then `ENDDATE` must be specified.
+
+</div>
+
+| Parameter   | Description                                                                                                               | Default Value      |
+|-------------|---------------------------------------------------------------------------------------------------------------------------|--------------------|
+| `STARTDATE` | The *starting date* of the period                                                                                         | *Today*            |
+| `STARTTIME` | The *starting time* on the starting date for the period                                                                   | `00:00`            |
+| `ENDDATE`   | The *ending date* of the period                                                                                           | *No upper limit*   |
+| `ENDTIME`   | The *ending time* on the ending date for the period                                                                       | `23:59`            |
+| `DURATION`  | the minimum duration of the slots listed in *minutes*.<br> It **must be a positive [integer](#global-input-constraints)** | **Required Field** |
+
+* The start of the period **must be before or equals to** the end of the period.
+* If any of `STARTDATE`, `STARTTIME`, `ENDDATE` or `ENDTIME` are specified, they **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
 
 Example:
 * `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60` Lists all empty slots in the schedule that are at least *60 minutes (1 hour)* long between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
