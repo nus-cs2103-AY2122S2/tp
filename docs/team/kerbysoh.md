@@ -14,8 +14,8 @@ Given below are my contributions to the project.
   * Justification: This feature is necessary for the user to track and manage specific internship applications, allowing users to achieve more flexibility.
   * Highlights: This enhancement required a major revamp to filtering predicates, and it was challenging as there were many edge cases to consider.
 
-* **New Feature**: Added the `faourite`, `unfavourite` and `listFavourite` commands to favourite and unfavourite specific companies, and to view favourited companies.
-  * What it does: allows the user to mark specific companies as their favourite, following which these companies will have a star indicated beside their name in the Graphical User Interface (GUI). Following which, users can unfavourite these companies and view all favourited companies in a separate view.
+* **New Feature**: Added the `favourite`, `unfavourite` and `listFavourite` commands to favourite and unfavourite specific companies, and to view favourited companies.
+  * What it does: allows the user to mark specific companies as their favourite, following which these companies will have a star indicated beside their name in the Graphical User Interface (GUI). Then, users can unfavourite these companies and view all favourited companies in a separate view.
   * Justification: This feature is necessary for users to highlight specific companies that they are more interested in, and view these companies separately from the rest.
   * Highlights: This feature required major changes to components in the `Storage` class.
 
