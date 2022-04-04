@@ -277,27 +277,25 @@ ___
 
 ### Finding a Student
 
-Displays the students whose name or tags contain the input provided.
+Displays the students whose names or tags contain the input provided.
 
-Command word: `findstudent` / `fs`
+Command word: `findstudents` / `fs`
 
-Format: `findstudent <FIND_CRITERIA>`
+Format: `findstudents <FIND_CRITERIA>`
 
-Examples: `findstudent alex friends` searches the student list for students whose
-tags or name contains with "alex" **or** friends.
+Examples: `findstudents alex friends` searches the student list for students whose names or tags contain the keyword "alex" **or** "friends".
 
 ---
 
 ### Finding a Lesson
 
-Displays the lessons whose name or subject contains the input provided.
+Displays the lessons whose names or subjects contain the any of the keywords provided.
 
-Command word: `findlesson` / `fl`
+Command word: `findlessons` / `fl`
 
-Format: `findlesson <FIND_CRITERIA>`
+Format: `findlessons <FIND_CRITERIA>`
 
-Examples: `findlesson biology` searches the lesson list for lessons which names
- include "biology"
+Examples: `findlesson biology` searches the lesson list for lessons with names or subjects that contain the keyword "biology".
 
 ---
 
