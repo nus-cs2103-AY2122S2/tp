@@ -37,6 +37,7 @@ public class WeekIdTest {
         assertFalse(WeekId.isValidWeekId("14")); // out-of-bounds
 
         // valid week IDs
+        assertTrue(WeekId.isValidWeekId("01"));
         assertTrue(WeekId.isValidWeekId("1"));
         assertTrue(WeekId.isValidWeekId("13"));
     }
