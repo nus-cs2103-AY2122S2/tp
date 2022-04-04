@@ -161,7 +161,7 @@ Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION
 * Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the <a href='#glossary'>glossary</a>).
 * If any values for faculty, Covid status and block is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error. You will have to input the details for the keyword again.
 * If you added duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
-  i.e. `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive` is the same as `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
+  i.e. `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive` is the same as `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`.
 
 Examples of usage:
 * `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343z cs/Negative`
@@ -210,6 +210,8 @@ Format: `edit INDEX n/NAME ...`
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
 * You can remove all tags of the student by typing `t/` without specifying any details after it.
+* If you have included duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
+  i.e. `edit 1 p/98090042 p/81812424` is the same as `edit 1 p/81812424`.
 
 How to identify `INDEX`:
 ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
