@@ -5,9 +5,9 @@ title: Wei Xin's Project Portfolio Page
 
 ### Project: ContaX
 
-ContacX is for professionals who have many clients, current and prospective, who may possibly work with sensitive personal information and documents related to each of those clients. They have busy schedules with many appointments & meetings, and must be able to find available time slots in their schedules quickly.
-
-ContacX will allow for efficient management of a large list of contacts, allowing the mental workload of remembering people and related scheduled tasks to be offloaded. It will also provide an efficient way of efficiently organizing resources, while having minimal downtime with seamless transition from existing solutions.
+ContaX is an integrated solution designed for busy professionals who work with many clients and frequently interact with other people. It assists those who have packed schedules in efficiently scheduling appointments, while also being able to respond to volatile changing schedules. 
+ 
+ContaX allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information. Built with efficiency in mind, ContaX promises a seamless transition from existing solutions for minimal downtime.
 
 Given below are my contributions to the project.
 
@@ -15,20 +15,26 @@ Given below are my contributions to the project.
   * What it does: Provides a step-by-step guide for new users to learn the basic functions of ContaX
   * Justification: ContaX's extensive feature set may set a learning curve for new users. The Onboarding guide serves as starting point for new users by introducing the basic functions in a manner that is simple to understand.
 
-* **Code contributed**:
-  * Functionality, documentation and tests for Onboarding Guide
-
-* **Project management**:
-  * `to be added soon`
+* **New Feature**: Added the ability to find appointments by name
+  * What it does: Allows users to find quickly find appointments using either the appointment name or person name
+  * Justification: This feature expands the ways in which a user can locate a specific appointment, allowing for more efficient management.
 
 * **Enhancements to existing features**:
-  * `to be added soon`
+  * Revamped Help Window to display meaningful information on all commands in ContaX
 
+* **Code contributed**:
+  * 3000+ LoC contributed to the project
+  * Worked on the Onboarding Guide and Help Window component
+    * Includes components in `UI` and `Models`
+
+* **Project management**:
+  * Code reviews
+  
 * **Documentation**:
   * User Guide:
-    * Added documentation for onboarding guide
+    * Added documentation for Onbarding Guide, Help Window and Find Appointment command
   * Developer Guide:
-    * Added documentation on the implementation of onboarding guide
+    * Added documentation on the implementation of Onboarding Guide and Find Appointment command
 
 * **Community**:
   * `to be added soon`
