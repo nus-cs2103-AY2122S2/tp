@@ -26,7 +26,7 @@ public class EditTagCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Only one tag can edited at a time. \n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TAG_INDEX (must be a positive integer) "
+            + "TAG_NUMBER (must be a positive integer) "
             + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 2 "
             + "owesMoney :p2";
