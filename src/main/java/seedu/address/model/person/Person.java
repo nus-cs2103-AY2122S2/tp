@@ -94,10 +94,15 @@ public class Person {
      * activity as the other.
      */
     public boolean hasSameActivity(Person otherStudent) {
+        Set<String> activitiesString = new HashSet<>();
+        Iterator<Activity> studentIterator = activities.iterator();
+        while (studentIterator.hasNext()) {
+            activitiesString.add(studentIterator.next().toString().toLowerCase());
+        }
         Set<Activity> otherStudentActivities = otherStudent.getActivities();
-        Iterator<Activity> iterator = otherStudentActivities.iterator();
-        while (iterator.hasNext()) {
-            if (activities.contains(iterator.next())) {
+        Iterator<Activity> otherStudentIterator = otherStudentActivities.iterator();
+        while (otherStudentIterator.hasNext()) {
+            if (activitiesString.contains(otherStudentIterator.next().toString().toLowerCase())) {
                 return true;
             }
         }
