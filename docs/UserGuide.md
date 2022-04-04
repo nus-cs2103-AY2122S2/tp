@@ -66,7 +66,7 @@ Adds a new friend to Amigos. A friend has:
 
 **Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
 
-* Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` `t/` flags and their arguments are optional.
+* Note that `NAME` field is minimally compulsory. `p/`, `e/`, `a/` and `d/` `t/` flags and their arguments are optional.
 * Note that there can be no duplicate friends having the same name.
 
 **Examples**:
@@ -106,11 +106,17 @@ Deletes a friend in Amigos.
 
 ### Show a specific friend: `showfriend` / `sf`
 
-Shows page containing the full details related to an existing friend in Amigos.
+Shows expanded page containing the full details related to an existing friend in Amigos.
 
 **Format**: `showfriend INDEX ? n/NAME`
 
 * Either a specified `INDEX` or `NAME` of an existing friend in Amigos must be provided.
+* When viewing the page containing the full details related to an existing friend, other commands dependent on `INDEX`
+  will refer to the `INDEX` of the friend/event shown on the expanded friend page. For example, when viewing the
+  expanded friend page of `Charlotte Tan`, entering `editevent 2 n/Dinner with Bernice`
+  will update the name of `Charlotte Tan`'s current 2nd upcoming event to `Dinner with Bernice`. Similarly, `deletefriend 1`
+  will remove `Charlotte Tan` from Amigos, since `Charlotte Tan` is the only friend currently being viewed on the 
+  expanded friend page.
 
 **Examples**:
 * `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
