@@ -87,5 +87,11 @@ public class DateParserTest {
         assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("2022 Oct 20").get());
         assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("2022 20 Oct").get());
         assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("20 2022 Oct").get());
+
+        // Duplicate Removal, only accept last appearance of component
+        assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("20 2022 Mar Oct").get());
+        assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("21 20 2022 Oct").get());
+        assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("20 2020 2022 Oct").get());
+        assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("21 20 2021 2022 Apr Oct").get());
     }
 }

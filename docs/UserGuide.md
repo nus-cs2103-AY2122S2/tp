@@ -85,7 +85,8 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 * All date inputs must conform to one of the following formats:
   * `dd-mm-yyyy`
   * `dd/mm/yyyy`
-  * `dd MMM yyyy` with the date components appearing in any order
+  * `dd MMM yyyy` with the date components appearing in any order.<br>
+    If a component appears more than once, **only the last** appearance will be taken.
 
 | Field | Description |
 | - | - |

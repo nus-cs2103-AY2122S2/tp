@@ -92,7 +92,7 @@ public class DateParser {
     private static Optional<LocalDate> parseNaturalFormat(Matcher match) {
         try {
             int day = Integer.parseInt(match.group(1));
-            int month = DateParserPatternProvider.monthStringToDecimal(match.group(2));
+            int month = DateParserPatternProvider.convertMonthStringToDecimal(match.group(2));
             int year = Integer.parseInt(match.group(3));
 
             if (month < 1) {

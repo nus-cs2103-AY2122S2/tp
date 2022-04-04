@@ -23,7 +23,10 @@ class DateParserPatternProvider {
     /** Matches dd-MM-yyyy and dd/MM/yyyy formats. **/
     private static final String STANDARD_DATE_PATTERN_STRING = "(\\d{2})[/-](\\d{2})[/-](\\d{4})";
 
-    /** Matches human-readable date formats like 10 Jan 2022 and 2011 Feb 20. **/
+    /**
+     * Matches human-readable date formats like 10 Jan 2022 and 2011 Feb 20.
+     * If the same component appears twice (e.g. 10 Jan Feb 2022), only the last appearance will be taken.
+     */
     private static final String NATURAL_DATE_PATTERN_STRING =
             String.format("^%s.*$", DAY_OF_MONTH_PATTERN + MONTH_PATTERN + YEAR_PATTERN);
 
@@ -44,7 +47,7 @@ class DateParserPatternProvider {
      * @param monthString The month in String format to convert.
      * @return The integer representation of the month if recognised, or -1 otherwise.
      */
-    static int monthStringToDecimal(String monthString) {
+    static int convertMonthStringToDecimal(String monthString) {
         int index = List.of(MONTH_STRINGS).indexOf(monthString);
         if (index < 0) {
             return -1;
