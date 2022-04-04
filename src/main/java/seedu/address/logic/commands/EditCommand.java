@@ -119,7 +119,7 @@ public class EditCommand extends Command {
      */
     private static void batchUpdateNegativeToPositive(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.isNegative() && editedPerson.isPositive()) {
+        if ((personToEdit.isNegative() || personToEdit.isCloseContact()) && editedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
                     .filter(student -> (student.hasSameClassCode(editedPerson)
