@@ -168,8 +168,8 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
 * The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
 * The specified keywords are **case-insensitive**. 
 * The attributes could be accessed by adding prefixes before the keywords.
-* The result must match the **exact wording**, partial words will not match (e.g. `n/Dav` will not match the student contact
-`David` or `David Li`).
+* The result must match the **exact word**, partial word will not match (e.g. `n/Dav` will not match the student contact
+`David` or `David Li` as there is no word `Dav`).
 * The command will list out all student contacts that matches the keyword.
   * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`.
   * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`.
@@ -344,7 +344,7 @@ followed by words will be treated as if there is no preceding white spaces. E.g.
 
 A task can only be added if it **has yet to exist** in the particular group. The task
 is uniquely identified by a `TASK_NAME` with **no regards to case sensitivity**. E.g. `MEETING` would be the
-same task as `Meeting` and `meeting`
+same task as `Meeting` and `meeting`.
 
 </div>
 
@@ -354,7 +354,7 @@ same task as `Meeting` and `meeting`
 
 Due to the limitation of the command format, a task name cannot contain the string `g/` in the task if there are spaces before `g/`.
 
-Examples of invalid `TASK_NAME`:
+Examples of invalid `TASK_NAME`
 * `create a group g/exco` is not possible as there is a space before `g/`.
 * `create a group g/ exco` is not possible as there are spaces before `g/`.
 
@@ -436,14 +436,14 @@ that contains the data of your previous ArchDuke home folder.
 let the new user experiment with the data while getting familiar with ArchDuke. If you wish to start using ArchDuke
 fresh from the start, you could use the `clear` command to clear all the sample data.
 
-**Q**: What is an academic major?<br>
+**Q**: What is an **academic major**?<br>
 **A**: An academic major is simply the major that the student is studying in university.
 
-**Q**: What does an index refer to?<br>
+**Q**: What does an **index** refer to?<br>
 **A**: An index is simply the number in front of the student contact's name. It specifies the order 
 in which the student contact appears in the list.
 
-**Q**: What is an unsigned integer?<br>
+**Q**: What is an **unsigned integer**?<br>
 **A**: An unsigned integer is an integer that ranges from 0 to 4294967295 inclusive.
 
 --------------------------------------------------------------------------------------------------------------------
