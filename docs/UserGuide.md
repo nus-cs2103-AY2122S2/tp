@@ -35,6 +35,7 @@ A glossary is included at the end to clarify any technical or vague terms used.
 
 </div>
 
+----------------
 # Quick start
 1. Ensure you have **Java 11** or above installed on your Computer.
    - You can download **Java 11** from [this link](https://www.oracle.com/java/technologies/downloads/#java11).
@@ -44,6 +45,10 @@ A glossary is included at the end to clarify any technical or vague terms used.
 2. Download the latest **udt.jar** from [our GitHub repository](https://github.com/AY2122S2-CS2103T-T12-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Ultimate DivocTracker application.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
+   - Alternatively, running the file via command line can also start the app. (In the event double-click does not work)
+     1. Navigate to the folder containing the udt.jar file.
+     2. Type "cmd" into the navigation bar in Windows Explorer, and press Enter to launch Command Prompt in that folder location.
+     3. Type "java -jar udt.jar" to launch UDT from the Command Prompt.
 5. Refer to the Features below for details of each command.
 
 <div markdown="block" class="alert alert-info">
@@ -84,6 +89,20 @@ Filter through the endless list of students with a simple command to extract det
 - UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
 - UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
 
+<div markdown="block" class="alert alert-info">
+
+> :information_source: **Note:**  UDT tracks COVID statuses of those listed in the tracker only, and does not account for external cases.
+
+</div>
+
+#### Limitations of automation
+UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
+
+### Graphical User Interface
+Graphical User Interface (GUI) has a **locked aspect ratio** to prevent the GUI elements from producing any unintended cosmetic problems
+- This also applies to maximising of application to full screen
+
+----------------
 # Features
 Below are a set of commands that can be used in the **_UDT_**. Their formats and examples are provided along with each feature.
 
@@ -148,6 +167,7 @@ Shows a list of all students in the application.
 Find an existing student in the application by their name
 - Format: `find NAME`
   - Returns a list of students with the specified `NAME`
+    - If no one with the specified `NAME` is found, an empty list will be shown
   - `NAME` is case-insensitive
   - Order of words in `NAME` is irrelevant
     - `find yeoh alex` can find student _"Alex Yeoh"_
