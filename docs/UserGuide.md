@@ -21,7 +21,24 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Adding a client: `add`](#adding-a-client-add)
   - [Editing a client: `edit`](#editing-a-client-edit)
   - [Deleting a client: `delete`](#deleting-a-client-delete)
-  - [Favourite a client `favourite`](#favourite-a-client-favourite)
+  - [Favourite a client: `favourite`](#favourite-a-client-favourite)
+  - [Open Favourites window: `fw`](#open-favourites-window-fw)
+  - [Locating clients by name: `find`](#locating-clients-by-name-find)
+  - [Sorting persons: `sort`](#sorting-persons-sort)
+- [Tools](#tools)
+  - [Matching properties and preferences: `match`](#matching-properties-and-preferences-match)
+  - [Upload and image: `upload`](#upload-an-image--upload)
+  - [View image of person: `viewimage`](#view-image-of-person-viewimage)
+  - [Setting a reminder for a person: `remind`](#setting-a-reminder-for-a-person-remind)
+  - [Open Reminder window: `rm`](#open-reminder-window)
+  - [Displaying statistics: `stats`](#displaying-statistics-stats)
+  - [Future Features](#future-features-coming-soon)
+- [Storage](#storage)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
 
 ## Quick start
 
@@ -189,13 +206,11 @@ Format: `favourite INDEX`
 - The index refers to the index number shown in the displayed client list.
 - The index **must be a positive integer** 1, 2, 3, …
 
-#### Open Favourites window:
+### Open Favourites window: `fw`
 
 Opens a new window that displays the compacted list of clients that have been favourited.
 
-#### By Command: `fw`
-
-Format: `fw`
+Format:  `fw`
 
 #### By Ui:
 
@@ -225,7 +240,7 @@ Examples:
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
-### Sorting persons
+### Sorting persons: `sort`
 
 Sorts the list of persons displayed according to one or more keywords.
 
@@ -288,11 +303,9 @@ Format: `remind INDEX r/ReminderDetails`
 - The index **must be a postive integer** 1, 2, 3, ...
 - The `ReminderDetails` must be a non-empty String, e.g. `arrange home viewing`.
 
-### Open Reminder window:
+### Open Reminder window: `rm`
 
 Opens a new window that displays compacted list of clients that have Reminders set.
-
-#### By Command: `rm`
 
 Format: `rm`
 
@@ -303,12 +316,12 @@ Format: `rm`
 3) The system will launc the `Reminders` window that contains a list of Persons the user has set Reminders for.
 
 
-### Displaying statistics `stats`
+### Displaying statistics: `stats`
 <img src="images/user-guide/Stats.png" height="400px">
 
 Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
 
-#### By Command: `stats`
+Format: `stats`
 
 ### Future Features **[Coming soon]**
 1. More types of sizes and increased details such as floor size, landed properties.
