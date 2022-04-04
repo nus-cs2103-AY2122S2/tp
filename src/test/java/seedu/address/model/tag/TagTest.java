@@ -77,5 +77,4 @@ public class TagTest {
         assertTrue(Tag.isValidTagLength(validTagWithEqualsMaxCharacters));
         assertFalse(Tag.isValidTagLength(invalidTagWithOneMoreThanMaxCharacters));
     }
-    
 }
