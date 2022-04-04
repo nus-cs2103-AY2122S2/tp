@@ -19,15 +19,15 @@ public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
     public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS =
             "Favourited Client %1$s! Open up Favourites window to see if he/she is in it!\n"
-            + "If you have your Favourites window opened already, \n"
-            + "close it and re-open it (via 'fw' command or 'Favourites' button) to refresh the data!";
+            + "If the Favourites window is already open, close it and re-open it\n"
+            + "(via 'fw' command or 'Favourites' button from the 'File' tab, or press 'F3' key) to refresh the data!";
     public static final String MESSAGE_UNFAVOURITE_PERSON_SUCCESS =
-            "Unfavourited client %1$s! Check that he/she is removed from the Favourites window!\n"
-            + "If you have your Favourites window opened already, \n"
-            + "close it and re-open it (via 'fw' command or 'Favourites' button) to refresh the data!";;
+            "Unfavourited Client %1$s! Check that he/she is removed from the Favourites window!\n"
+            + "If the Favourites window is already open, close it and re-open it\n"
+            + "(via 'fw' command or 'Favourites' button from the 'File' tab , or press 'F3' key) to refresh the data!";;
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Favourites a selected client "
-            + "by the index number used in the last client listing.\n"
+            + ": Favourite/Unfavourite a selected client "
+            + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
