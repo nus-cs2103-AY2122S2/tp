@@ -103,7 +103,8 @@ There is no need to save manually.
 ### Add student contact information: `add`
 
 Adds a student contact information to ArchDuke. `add` must be followed by the student’s `NAME`, 
-`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional and is one word consisting of letters and/or numerals. 
+`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional and is one word consisting of letters and/or numerals (alphanumeric). 
+`TAG` is case-sensitive.
 
 <div markdown="block" class="alert alert-info">
 
@@ -115,7 +116,7 @@ same email as `Example@u.nus.edu` as in the real-word, emails are usually not ca
 
 </div>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
@@ -136,9 +137,9 @@ Expected outcome:
 
 ### Delete student contact information: `delete`
 
-Deletes a student contact information at the specified `INDEX` from ArchDuke.
+Deletes a student's contact information at the specified `INDEX` from ArchDuke.
 The `INDEX` refers to the index number shown in the **currently displayed** student contact list. 
-The `INDEX` **must be a positive integer** not exceeding the total number of student contacts. The deleted student contact would also be 
+The `INDEX` **must be a positive unsigned integer** not exceeding the total number of student contacts. The deleted student contact would also be 
 deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
@@ -175,18 +176,18 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
   * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`.
   
 
-* The attributes supported **multiple findings** at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`.
+* The attributes that support **multiple findings** at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`.
   * `find n/Alex David` is possible and would show two results as `Alex Yeoh` and `David Li`, assuming that these are the only matching contacts.
-  * `find a/Computer Science Business` is possible and would show contacts that has the following major: `Computer Science`, `Business`, `Business Analytics`
+  * `find a/Computer Science Business` is possible and would show contacts that have the following major: `Computer Science`, `Business`, `Business Analytics`
   , assuming that these majors are the exhaustive majors in the student contacts.
-  * `find t/friends colleagues` is possible and would show contacts that has the at least one of the 2 tags: `friends` and `colleagues`.
+  * `find t/friends colleagues` is possible and would show contacts that have the at least one of the 2 tags: `friends` and `colleagues`.</br>
 
 
-* The attributes **not supported multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
+* The attributes that **does not support multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
   * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`).
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`).
 
-Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]` for these `PREFIX`: `n/`, `a/`, `t/`
+Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]...` for these `PREFIX`: `n/`, `a/`, `t/`
 
 Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
 
@@ -212,8 +213,8 @@ Find result for the command `find n/alex david`:
 ### Create a group: `addgroup`
 
 Creates a group in ArchDuke. `addgroup` must be followed by `GROUP_NAME`, which can take any values, 
-and it **should not be blank** and **should not have preceeding whitespaces**. `GROUP_NAME` with preceeding white spaces
-followed by words will be treated as if there is no preceeding white spaces. E.g. `<whitespaces>Group` is the same as `Group`.
+and it **should not be blank** and **should not have preceding whitespaces**. `GROUP_NAME` with preceeding white spaces
+followed by words will be treated as if there is no preceding white spaces. E.g. `<whitespaces>Group` is the same as `Group`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -261,9 +262,8 @@ Expected outcome:
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the `INDEX` at which the student is 
 in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
-The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive integer** not 
-exceeding the total number of student contacts. The student contact **must 
-has yet to be currently assigned** to the group. 
+The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive unsigned integer** 
+exceeding the total number of student contacts. The student contact **must have yet to be currently assigned** to the group. 
 
 Format: `assign INDEX g/GROUP_NAME`
 
@@ -289,7 +289,7 @@ After assigning:
 
 Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the `INDEX` at which the student
 is in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
-The group must **already exist** in ArchDuke, and the index must be a **positive integer** not 
+The group must **already exist** in ArchDuke, and the index must be a **positive unsigned integer** not 
 exceeding the total number of student contacts. The student contact **must have 
 currently been assigned** to the group.  
 
@@ -322,7 +322,7 @@ Expected outcome:
 
 * Displays all the student contacts from the specified group.
 
-Result of viewing contact in a group:
+Result of viewing student contacts in a group:
 
 ![](images/ViewcontactResult.png)
 
@@ -332,9 +332,9 @@ Result of viewing contact in a group:
 
 Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
 The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group ArchDuke.
-`TASK_NAME` can take any values,
-and it **should not be blank** and **should not have preceeding whitespaces**. `TASK_NAME` with preceeding white spaces
-followed by words will be treated as if there is no preceeding white spaces. E.g. `<whitespaces>Meeting` is the same as `Meeting`.
+`TASK_NAME` can take any values **except for that stated below in the limitation box**,
+and it **should not be blank** and **should not have preceding whitespaces**. `TASK_NAME` with preceding white spaces
+followed by words will be treated as if there is no preceding white spaces. E.g. `<whitespaces>Meeting` is the same as `Meeting`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -343,6 +343,23 @@ followed by words will be treated as if there is no preceeding white spaces. E.g
 A task can only be added if it **has yet to exist** in the particular group. The task
 is uniquely identified by a `TASK_NAME` with **no regards to case sensitivity**. E.g. `MEETING` would be the
 same task as `Meeting` and `meeting`
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Limitation of task name:**<br>
+
+Due to the limitation of the command format, a task name cannot contain the string `g/` in the task if there are spaces before `g/`.
+
+Examples of invalid `TASK_NAME`:
+* `create a group g/exco` is not possible as there is a space before `g/`.
+* `create a group g/ exco` is not possible as there are spaces before `g/`.
+
+Examples of valid `TASK_NAME` 
+* `create a groupg/ exco` is possible as there is no space before `g/`.
+* `taskg/` is possible as there is no space before `g/`.
+* `g/task` is possible as there is no space before `g/`.
 
 </div>
 
@@ -390,7 +407,7 @@ The group must **already exist** in ArchDuke.
 
 Format: `viewtask g/GROUP_NAME`
 
-* Views all task in the group called `GROUP_NAME`
+* Views all tasks in the group called `GROUP_NAME`
 
 Example:
 
@@ -409,7 +426,7 @@ Result of viewing task in the group NUS Fintech Society:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file 
+**A**: Install the app in the other computer and overwrite (i.e. replace) the empty data file it creates with the file 
 that contains the data of your previous ArchDuke home folder.
 
 **Q**: When and why does ArchDuke use sample data?<br>
@@ -421,8 +438,11 @@ fresh from the start, you could use the `clear` command to clear all the sample 
 **A**: An academic major is simply the major that the student is studying in university.
 
 **Q**: What does an index refer to?<br>
-**A**: An index is simply the number in front of the student contact's name or the group's name. It specifies the order 
-in which the student contact or the group appears in the list.
+**A**: An index is simply the number in front of the student contact's name. It specifies the order 
+in which the student contact appears in the list.
+
+**Q**: What is an unsigned integer?<br>
+**A**: An unsigned integer is an integer that ranges from 0 to 4294967295 inclusive.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -434,11 +454,11 @@ Action | Format, Examples
 --------|------------------
 **View help** | `help`
 **List all student contacts** | `list`
-**Find name** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
-**Find academic major** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find a/Computer Science`
-**Find tag** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friends colleagues`
-**Find phone number** | `find KEYWORD`<br> e.g., `find p/12345678`
-**Find email** | `find KEYWORD`<br> e.g., `find e/example@u.nus.edu`
+**Find name** | `find n/KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find n/James Jake`
+**Find academic major** | `find a/KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find a/Computer Science`
+**Find tag** | `find t/KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find t/friends colleagues`
+**Find phone number** | `find p/KEYWORD`<br> e.g., `find p/12345678`
+**Find email** | `find e/KEYWORD`<br> e.g., `find e/example@u.nus.edu`
 **Clear entries** | `clear`
 **Exit** | `exit`
 
@@ -446,7 +466,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends`
+**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]...` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends`
 **Delete student contact information** | `delete INDEX` <br> e.g., `delete 1`
 **Display the student contacts in a group** | `viewcontact g/GROUP_NAME` <br> e.g., `viewcontact g/CS2103-W16-3`
 
