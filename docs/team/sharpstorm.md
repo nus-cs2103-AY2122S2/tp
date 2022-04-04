@@ -42,11 +42,11 @@ Given below are my contributions to the project.
 * **Project management**:
   * Served as the **overall project lead** in organizing meetings and working with the entire team to ensure that integration of components proceed smoothly.
   * Served as the **project schedule manager** to manage internal deadlines across all team members to ensure that the project milestone deadlines can be met.
-  * Upkeep of code quality and coverage across all members
+  * Upkeep of code quality and coverage across all members.
 
 * **Team Based Tasks**
-  * Upkeep shared team components in the Developer and User Guides, including User Stories and Product Scope
-  * Assisted in the management of the team's issue tracker
+  * Upkeep shared team components in the Developer and User Guides, including User Stories and Product Scope.
+  * Assisted in the management of the team's issue tracker.
 
 * **Documentation**:
   * User Guide:
@@ -64,5 +64,5 @@ Given below are my contributions to the project.
     * Added use cases for Appointments
 
 * **Community**:
-  * Reviewed a significant amount of PRs within the team ([347 comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [60+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr+is%3Aclosed))
-  * Reported a total of [27 issues](https://github.com/sharpstorm/ped/issues) during the PE dry run
+  * Reviewed a significant amount of PRs within the team ([347 comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [60+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Asharpstorm)).
+  * Reported a total of [27 issues](https://github.com/sharpstorm/ped/issues) during the PE dry run.
