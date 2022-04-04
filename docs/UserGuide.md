@@ -202,7 +202,7 @@ Format: `edit INDEX n/NAME ...`
 * To edit a student's details, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
 * The correct prefixes must be used in order for Tracey to know what you intend to edit.
-* Refer to Table 2 in the <a href='#glossary'>glossary</a> for the correct format and pre-defined constants to be used for each input field.
+* Refer to Table 4 in the <a href='#glossary'>glossary</a> for the correct format and pre-defined constants to be used for each input field.
 * Existing information of the student will be replaced with the newly inputted values.
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
@@ -271,10 +271,10 @@ Find a particular contact in Tracey and retrieve their specific details.
 
 Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
-* The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+* A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
 * A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
 * The search is case-insensitive. e.g `johnDoe` will match `Johndoe`.
-* The search does not require full name. e.g. `jo` will match `Joe` and `John`.
+* The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
 
 Examples of usages:
 
@@ -293,7 +293,7 @@ Filter students based on faculties, health statuses and/or blocks.
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
 * Returns a list of students that fit the criteria given by the user in the form of pre-defined constants in the categories of faculty, covid status and block.
-* Refer to Table 2 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
+* Refer to Table 4 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
 * The search is case-insensitive. e.g `Positive` will match `positive`.
 * The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
 * At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
