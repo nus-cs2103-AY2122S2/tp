@@ -10,7 +10,7 @@ import static seedu.tinner.commons.util.AppUtil.checkArgument;
 public class Stipend {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Stipends should only contain numbers, and it should be at most 10 digits long";
+            "Stipends should only contain positive number, and input should be at most 10 digits long";
     public static final String VALIDATION_REGEX = "\\d{1,10}";
     public final String value;
 
@@ -21,15 +21,16 @@ public class Stipend {
      */
     public Stipend(String stipend) {
         requireNonNull(stipend);
-        checkArgument(isValidStipend(stipend), MESSAGE_CONSTRAINTS);
-        value = stipend;
+        String stipendNoTrailZeros = stipend.replaceFirst ("^0*", "");
+        checkArgument(isValidStipend(stipendNoTrailZeros), MESSAGE_CONSTRAINTS);
+        value = stipendNoTrailZeros;
     }
 
     /**
      * Returns true if a given string is a valid stipend or is empty.
      */
     public static boolean isValidStipend(String test) {
-        return test.matches(VALIDATION_REGEX) || test.isEmpty();
+        return test.matches(VALIDATION_REGEX) && Integer.parseInt(test) > 0 || test.isEmpty();
     }
 
     @Override

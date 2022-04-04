@@ -6,6 +6,19 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+## **Acknowledgements**
+
+* This project is created based on the AddressBook-Level3 project by the [SE-EDU initiative](https://se-education.org).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Setting up, getting started**
+
+Refer to the guide [Setting up and getting started](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Design**
 
 ### Architecture
@@ -137,9 +150,8 @@ The `Storage` component,
 
 The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>` format, as show in the class diagram above.
 
-### Common Classes
+--------------------------------------------------------------------------------------------------------------------
 
----
 ## **Implementation**
 
 ### Find feature
@@ -222,8 +234,19 @@ The following sequence diagram shows how the `deleteRole` command operation work
 6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
 7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
+--------------------------------------------------------------------------------------------------------------------
 
-## Requirements
+## **Documentation, logging, testing, configuration, dev-ops**
+
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Requirements**
 
 ### Product scope
 

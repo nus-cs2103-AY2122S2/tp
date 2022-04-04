@@ -45,11 +45,11 @@ public class ReminderTest {
                 .build();
         assertFalse(APPLE_ML_ENGINEER.isSameReminder(diffNames));
 
-        // company name differs in case, all other attributes same -> returns false
+        // company name differs in case, all other attributes same -> returns true
         Reminder lowerCaseCompanyName = new ReminderBuilder(APPLE_ML_ENGINEER)
                 .withCompanyName(VALID_NAME_APPLE.toLowerCase())
                 .build();
-        assertFalse(APPLE_ML_ENGINEER.isSameReminder(lowerCaseCompanyName));
+        assertTrue(APPLE_ML_ENGINEER.isSameReminder(lowerCaseCompanyName));
 
         // company name has trailing spaces, all other attributes same -> returns false
         Reminder nameWithTrailingSpaces = new ReminderBuilder(APPLE_ML_ENGINEER)

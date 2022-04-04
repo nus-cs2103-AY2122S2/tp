@@ -65,8 +65,7 @@ public class Role {
             return false;
         }
 
-        return otherRole.getName().toString().replaceAll("\\s+", "")
-                .equals(getName().toString().replaceAll("\\s+", ""));
+        return otherRole.getName().equals(getName());
     }
 
     /**

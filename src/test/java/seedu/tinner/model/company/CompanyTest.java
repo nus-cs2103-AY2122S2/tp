@@ -32,9 +32,9 @@ public class CompanyTest {
         editedAlice = new CompanyBuilder(META).withName(VALID_NAME_WHATSAPP).build();
         assertFalse(META.isSameCompany(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Company editedBob = new CompanyBuilder(WHATSAPP).withName(VALID_NAME_WHATSAPP.toLowerCase()).build();
-        assertFalse(WHATSAPP.isSameCompany(editedBob));
+        assertTrue(WHATSAPP.isSameCompany(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_WHATSAPP + " ";

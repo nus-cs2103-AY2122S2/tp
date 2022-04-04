@@ -6,6 +6,7 @@ import static seedu.tinner.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Role's reminder date in the role list.
@@ -14,10 +15,11 @@ import java.time.format.DateTimeParseException;
 public class ReminderDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Reminder dates should not have passed and must be in the following format: dd-MM-yyyy HH:mm";
+            "Reminder dates should not be in the past and must be a valid date in the "
+                    + "following format: dd-MM-yyyy HH:mm";
 
     public static final DateTimeFormatter VALIDATION_FORMATTER =
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT);
     public static final DateTimeFormatter STRING_REPRESENTATION_FORMATTER =
             DateTimeFormatter.ofPattern("E, MMM dd yyyy, hh:mm a");
 
