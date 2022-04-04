@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.tinner.logic.parser.CliSyntax.PREFIX_ROLE_NAME;
 
-import seedu.tinner.commons.core.Messages;
 import seedu.tinner.model.Model;
 import seedu.tinner.model.company.CompanyNameContainsKeywordsPredicate;
 import seedu.tinner.model.role.RoleNameContainsKeywordsPredicate;
@@ -31,6 +30,10 @@ public class FindCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " c/amazon r/engineer";
 
+    public static final String MESSAGE_FIND_SUCCESS = "%1$d companies listed!\n"
+            + "Company keyword(s) entered: %2$s\n"
+            + "Role keyword(s) entered: %3$s";
+
     private final CompanyNameContainsKeywordsPredicate companyPredicate;
     private final RoleNameContainsKeywordsPredicate rolePredicate;
 
@@ -49,7 +52,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCompanyList(companyPredicate, rolePredicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW, model.getFilteredCompanyList().size()));
+                String.format(MESSAGE_FIND_SUCCESS, model.getFilteredCompanyList().size(), companyPredicate,
+                        rolePredicate));
     }
 
     @Override

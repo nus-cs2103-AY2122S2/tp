@@ -3,8 +3,8 @@ package seedu.tinner.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tinner.commons.core.Messages.MESSAGE_COMPANIES_LISTED_OVERVIEW;
 import static seedu.tinner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tinner.logic.commands.FindCommand.MESSAGE_FIND_SUCCESS;
 import static seedu.tinner.testutil.TypicalCompanies.APPLE;
 import static seedu.tinner.testutil.TypicalCompanies.GOVTECH;
 import static seedu.tinner.testutil.TypicalCompanies.ZOOM;
@@ -66,10 +66,10 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleCompaniesFound() {
-        String expectedMessage = String.format(MESSAGE_COMPANIES_LISTED_OVERVIEW, 3);
         CompanyNameContainsKeywordsPredicate companyPredicate =
                 prepareCompanyPredicate("zoom apple tech", "engineer");
         RoleNameContainsKeywordsPredicate rolePredicate = prepareRolePredicate("engineer");
+        String expectedMessage = String.format(MESSAGE_FIND_SUCCESS, 3, companyPredicate, rolePredicate);
         FindCommand command = new FindCommand(companyPredicate, rolePredicate);
         expectedModel.updateFilteredCompanyList(companyPredicate, rolePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
