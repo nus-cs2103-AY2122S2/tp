@@ -53,18 +53,19 @@ public class ShowDetailsCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code ShowCard} with the given {@code Show} and index to display.
+     * Creates a default {@code ShowDetailsCard} that has no show to display.
      */
     public ShowDetailsCard() {
         this(null);
     }
 
     /**
-     * Creates a {@code ShowCard} with the given {@code Show} and index to display.
+     * Creates a {@code ShowDetailsCard} with the given {@code Show} to display.
      */
     public ShowDetailsCard(Show show) {
         super(FXML);
         this.show = show;
+        updateShowDetails(show);
     }
 
     /**

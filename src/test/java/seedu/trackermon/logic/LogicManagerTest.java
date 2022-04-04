@@ -12,11 +12,13 @@ import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.logic.commands.AddCommand;
 import seedu.trackermon.logic.commands.CommandResult;
 import seedu.trackermon.logic.commands.ListCommand;
@@ -44,7 +46,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonShowListStorage showListStorage =
-                new JsonShowListStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonShowListStorage(temporaryFolder.resolve("Trackermon.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(showListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -92,6 +94,20 @@ public class LogicManagerTest {
     @Test
     public void getFilteredShowList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredShowList().remove(0));
+    }
+
+    @Test
+    public void testGetters() {
+        // Checking showListFilePath
+        assertEquals(model.getShowListFilePath(), logic.getShowListFilePath());
+
+        // Checking showList
+        model.addShow(ALICE_IN_WONDERLAND);
+
+        assertEquals(Arrays.asList(ALICE_IN_WONDERLAND), logic.getShowList().getShows());
+
+        // Checking GuiSettings
+        assertEquals(new GuiSettings(), logic.getGuiSettings());
     }
 
     /**
