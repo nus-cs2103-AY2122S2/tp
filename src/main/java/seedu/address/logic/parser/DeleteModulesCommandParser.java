@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteModulesCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 
@@ -47,6 +48,9 @@ public class DeleteModulesCommandParser implements Parser<DeleteModulesCommand> 
         }
 
         modules.addAll(parseModulesForEdit(argMultimap.getAllValues(PREFIX_MODULE)));
+        if (modules.isEmpty()) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
+        }
 
         return new DeleteModulesCommand(index, modules);
     }
