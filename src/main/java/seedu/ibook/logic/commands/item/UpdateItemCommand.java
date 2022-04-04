@@ -1,6 +1,7 @@
 package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.ibook.model.product.Product.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Optional;
@@ -23,14 +24,18 @@ public class UpdateItemCommand extends Command {
     public static final String COMMAND_WORD = "update-item";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates the item identified by the index number used in the displayed list.\n"
-            + "Parameters: INDEX (must be a positive integer pair separated by '"
-            + CompoundIndex.SEPARATOR
-            + "' at most " + Integer.MAX_VALUE + ")\n"
-            + "Example: " + COMMAND_WORD + " 2" + CompoundIndex.SEPARATOR + "1";
+            + ": Updates the details of item identified by the index number used in the displayed list.\n"
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX [TAG:NEW_VALUE ...]\n"
+            + "INDEX must be a positive integer pair separated by '"
+            + CompoundIndex.SEPARATOR + "' at most " + Integer.MAX_VALUE + "\n"
+            + "Example: " + COMMAND_WORD + " 2" + CompoundIndex.SEPARATOR + "1 "
+            + PREFIX_QUANTITY + "100";
 
     public static final String MESSAGE_UPDATE_ITEM_SUCCESS = "Updated Item in %1$s:\n%2$s";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
+    public static final String MESSAGE_EXCESS_QUANTITY =
+            "Total quantity of an item cannot be larger than " + Quantity.MAX_QUANTITY;
 
     private final CompoundIndex targetIndex;
     private final UpdateItemDescriptor updateItemDescriptor;
@@ -59,12 +64,13 @@ public class UpdateItemCommand extends Command {
         model.prepareIBookForChanges();
 
         if (!itemToUpdate.isSame(updatedItem) && targetProduct.hasItem(updatedItem)) {
-            // There is an item in targetProduct which has same expiry date as the updatedItem
-            Item existingItem = targetProduct.getExistingItem(updatedItem);
-            updatedItem = existingItem.add(updatedItem);
+            // There is an item in targetProduct which has same expiry date as the updatedItem.
+            // Checks if merging them is allowed.
+            if (!targetProduct.canAddItem(updatedItem)) {
+                throw new CommandException(MESSAGE_EXCESS_QUANTITY);
+            }
 
-            model.deleteItem(targetProduct, itemToUpdate);
-            model.updateItem(targetProduct, existingItem, updatedItem);
+            model.addItem(targetProduct, updatedItem);
         } else {
             model.updateItem(targetProduct, itemToUpdate, updatedItem);
         }
