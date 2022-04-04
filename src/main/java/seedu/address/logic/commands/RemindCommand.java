@@ -21,26 +21,35 @@ import seedu.address.storage.ReminderPersons;
 public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "remind";
-    public static final String MESSAGE_REMIND_PERSON_WARNING = "";
-    public static final String MESSAGE_UNREMIND_PERSON_WARNING = "If you're trying to remove a Reminder for a Person, "
-            + "type \"remind INDEX\"";
-    public static final String MESSAGE_REMIND_PERSON_SUCCESS = "Created Reminder for Person: %1$s";
-    public static final String MESSAGE_UNREMIND_PERSON_SUCCESS = "Removed Reminder for Person: %1$s";
-    public static final String MESSAGE_EDIT_REMIND_PERSON_SUCCESS = "Edited Reminder for Person: %1$s";
+    public static final String MESSAGE_REMIND_PERSON_SUCCESS =
+            "Created Reminder for Client %1$s. He/she is added to the Reminders window.\n"
+            + "If the Reminders window is already open, close it and re-open it \n"
+            + "(via 'rm' command, 'Reminders' button from the 'File' tab, or press 'F4' key) to refresh the data!";
+    public static final String MESSAGE_UNREMIND_PERSON_SUCCESS =
+            "Removed Reminder for Client %1$s. He/She is removed the Reminders window.\n"
+            + "If the Reminders window is already open, close it and re-open it \n"
+            + "(via 'rm' command, 'Reminders' button from the 'File' tab, or press 'F4' key) to refresh the data!";
+    public static final String MESSAGE_EDIT_REMIND_PERSON_SUCCESS =
+            "Edited Reminder for Client %1$s.\n"
+            + "If the Reminders window is already open, close it and re-open it \n"
+            + "(via 'rm' command, 'Reminders' button from the 'File' tab, or press 'F4' key) to refresh the data!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets a Reminder for the client "
+            + ": Add/Edit/Remove a Reminder for the client "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMINDER + "REMINDER\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REMINDER + "meet client for home viewing.";
+            + "Example: \n"
+            + "To create a reminder: \"" + COMMAND_WORD + " 1 " + PREFIX_REMINDER + "meet client for home viewing.\"\n"
+            + "To edit an existing reminder: \"" + COMMAND_WORD + " 3 " + PREFIX_REMINDER + "sign contract.\"\n"
+            + "To remove an existing reminder: \"" + COMMAND_WORD + " 2\"";
+
     private static ReminderPersons reminderPersons;
     private final Index index;
     private final Optional<Reminder> reminder;
 
     /**
      * @param index of the person in the filtered person list to remind of.
-     * @param reminder
+     * @param reminder reminder message to set for the person.
      */
     public RemindCommand(Index index, Optional<Reminder> reminder) {
         requireAllNonNull(index, reminder);
@@ -67,13 +76,13 @@ public class RemindCommand extends Command {
                 reminderPersons.remove(personToRemind);
                 // update the model with the latest instance of the person with a reminder
                 model.setPerson(personToRemind, personToRemind);
-                return new CommandResult(String.format(MESSAGE_UNREMIND_PERSON_SUCCESS, personToRemind));
+                return new CommandResult(generateSuccessMessage(personToRemind, false));
             }
             // the RemindCommand contains a Reminder, edit the current Reminder to be this new one
             reminderPersons.add(personToRemind, reminder.get());
             // update the model with the latest instance of the person with a reminder
             model.setPerson(personToRemind, personToRemind);
-            return new CommandResult(String.format(MESSAGE_EDIT_REMIND_PERSON_SUCCESS, personToRemind));
+            return new CommandResult(generateSuccessMessage(personToRemind, true));
         }
 
         // a reminder is being added to this person for the first time
@@ -86,7 +95,27 @@ public class RemindCommand extends Command {
         // update the model with the latest instance of the person with a reminder
         model.setPerson(personToRemind, personToRemind);
 
-        return new CommandResult(String.format(MESSAGE_REMIND_PERSON_SUCCESS, personToRemind));
+        return new CommandResult(generateSuccessMessage(personToRemind, false));
+    }
+
+    /**
+     * Generates a command execution success message based on whether the
+     * client has a reminder set, edited or removed.
+     * @param personToRemind the person to set a reminder message for.
+     * @param isReminderForPersonEdited whether the reminder message of this person was edited.
+     */
+    private String generateSuccessMessage(Person personToRemind, boolean isReminderForPersonEdited) {
+        String message;
+
+        if (ReminderPersons.getInstance().get(personToRemind) == null) {
+            message = MESSAGE_UNREMIND_PERSON_SUCCESS;
+        } else if (isReminderForPersonEdited) {
+            message = MESSAGE_EDIT_REMIND_PERSON_SUCCESS;
+        } else {
+            message = MESSAGE_REMIND_PERSON_SUCCESS;
+        }
+
+        return String.format(message, personToRemind.getName());
     }
 
     public Index getIndex() {
