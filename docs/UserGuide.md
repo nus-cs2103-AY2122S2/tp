@@ -111,7 +111,7 @@ Adds a student contact information to ArchDuke. `add` must be followed by the st
 **:information_source: Note:**<br>
 
 A student contact can only be added if it **has yet to exist** in ArchDuke. The student contact 
-is uniquely identified by his `PHONE_NUMER` and or `EMAIL` with **no regards to case sensitivity**. E.g. `example@u.nus.edu` would be the 
+is uniquely identified by his `PHONE_NUMER` and/or `EMAIL` with **no regards to case sensitivity**. E.g. `example@u.nus.edu` would be the 
 same email as `Example@u.nus.edu` as in the real-word, emails are usually not case-sensitive.
 
 </div>
@@ -183,13 +183,13 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
   , assuming that these majors are the exhaustive majors in the student contacts.
   * `find t/friends colleagues` is possible and would show contacts that have the at least one of the 2 tags: `friends` and `colleagues`.
 
+Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]...` for these `PREFIX`: `n/`, `a/`, `t/`
+
 #### Attributes that does not support multiple findings
 
 * The attributes that **does not support multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
   * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`).
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`).
-
-Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]...` for these `PREFIX`: `n/`, `a/`, `t/`
 
 Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
 
