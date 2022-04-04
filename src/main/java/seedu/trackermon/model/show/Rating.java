@@ -10,6 +10,8 @@ public class Rating implements Comparable<Rating> {
 
     public static final int MAX_RATING = 5;
 
+    public static final String VALIDATION_REGEX_RATING = "[0-9]";
+
     public final int rating;
 
     /**
@@ -49,11 +51,14 @@ public class Rating implements Comparable<Rating> {
      */
     public static boolean isValidScore(String rating) {
         try {
-            int parsedScore = Integer.parseInt(rating);
-            return isValidScore(parsedScore);
+            if (rating.matches(VALIDATION_REGEX_RATING)) {
+                int parsedScore = Integer.parseInt(rating);
+                return isValidScore(parsedScore);
+            }
         } catch (NumberFormatException e) {
             return false;
         }
+        return false;
     }
 
     @Override
