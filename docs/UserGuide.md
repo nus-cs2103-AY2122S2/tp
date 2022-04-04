@@ -453,9 +453,11 @@ there are changes to Tracey.
 | 7.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
 | 8.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
 | 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/HEALTH_STATUS f/FACULTY`                                                                                                    |
-| 10. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
-| 11. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
-| 12. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                              |
+| 10. | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `filter cs/HEALTH_STATUS f/FACULTY`                                                                                                    |
+| 11. | `redo`      | Reverse an `undo` command                                                                 | `filter cs/HEALTH_STATUS f/FACULTY`                                                                                                    |
+| 12. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 13. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
+| 14. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                              |
 
 
 --------------------------------------------------------------------------------------------------------------------
