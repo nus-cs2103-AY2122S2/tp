@@ -61,8 +61,10 @@ public class UpdateItemCommand extends Command {
         if (!itemToUpdate.isSame(updatedItem) && targetProduct.hasItem(updatedItem)) {
             // There is an item in targetProduct which has same expiry date as the updatedItem
             Item existingItem = targetProduct.getExistingItem(updatedItem);
+            updatedItem = existingItem.add(updatedItem);
+
             model.deleteItem(targetProduct, itemToUpdate);
-            model.updateItem(targetProduct, existingItem, existingItem.add(updatedItem));
+            model.updateItem(targetProduct, existingItem, updatedItem);
         } else {
             model.updateItem(targetProduct, itemToUpdate, updatedItem);
         }
@@ -72,6 +74,7 @@ public class UpdateItemCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_UPDATE_ITEM_SUCCESS, targetProduct.getName(), updatedItem));
     }
+
     /**
      * Creates and returns an {@code Item} with the details of {@code itemToUpdate}
      * updated with {@code updateItemDescriptor}.
