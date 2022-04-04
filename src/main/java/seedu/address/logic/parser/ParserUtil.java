@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -161,11 +162,12 @@ public class ParserUtil {
     public static LocalDate parseAttendanceDate(String attendanceDate) throws ParseException {
         requireNonNull(attendanceDate);
         String trimmedAttendanceDate = attendanceDate.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDate.parse(trimmedAttendanceDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Attendance date should be in dd-MM-yyyy format!");
+            throw new ParseException("Attendance date should be valid and in dd-MM-yyyy format!");
         }
     }
 
