@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LOG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.KAREN;
+import static seedu.address.testutil.TypicalPersons.MAVIS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -343,11 +344,10 @@ public class EditLogCommandTest {
         // ===== WITH NAME =====
         // command
         EditLogCommand.EditLogDescriptor descriptor = new EditLogCommand.EditLogDescriptor();
-        descriptor.setNewTitle(KAREN.getLogs().get(0).getTitle().toString()); // has one log
-        descriptor.setNewDescription(KAREN.getLogs().get(0).getDescription().toString());
+        descriptor.setNewTitle(MAVIS.getLogs().get(2).getTitle().toString()); // has three logs, get third
         EditLogCommand command = new EditLogCommand(
-                KAREN.getName(), // ninth person in typical address book
-                Index.fromOneBased(1), // first log
+                MAVIS.getName(), // ninth person in typical address book
+                Index.fromOneBased(1), // try to edit 1st log to be same as 3rd log
                 descriptor);
 
         assertCommandFailure(command, model, MESSAGE_DUPLICATE_LOG);
@@ -355,13 +355,14 @@ public class EditLogCommandTest {
         // ===== WITH INDEX =====
         // command
         descriptor = new EditLogCommand.EditLogDescriptor();
-        descriptor.setNewTitle(KAREN.getLogs().get(0).getTitle().toString()); // has one log
-        descriptor.setNewDescription(KAREN.getLogs().get(0).getDescription().toString());
+        descriptor.setNewTitle(MAVIS.getLogs().get(2).getTitle().toString()); // has three logs, get third
         command = new EditLogCommand(
-                Index.fromOneBased(9), // ninth person in typical address book
-                Index.fromOneBased(1), // first log
+                Index.fromOneBased(11), // ninth person in typical address book
+                Index.fromOneBased(1), // try to edit 1st log to be same as 3rd log
                 descriptor);
         assertCommandFailure(command, model, MESSAGE_DUPLICATE_LOG);
+
+
     }
 
     @Test

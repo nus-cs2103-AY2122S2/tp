@@ -213,7 +213,7 @@ Adds a new event, which can be optionally linked to any number of existing frien
 ### Editing an event: `editevent` / `ee`
 Edits an existing event.
 
-**Format**: `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...`
+**Format**: `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... [rf/REMOVE_FRIEND_NAME]...`
 
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed events list. The index **must be a positive integer** 1, 2, 3, ...
 * At least one of the optional fields must be provided.

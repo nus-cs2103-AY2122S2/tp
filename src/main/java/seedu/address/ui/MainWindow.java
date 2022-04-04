@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -39,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ExpandedPersonListPanel expandedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -92,6 +95,17 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        commandBox = new CommandBox(this::executeCommand);
+
+        tabs.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+                if (newTab.equals (personInsightsListTab)) {
+                    personInsightListPanel = new PersonInsightListPanel(logic.getInsightsList());
+                    personInsightListPanelPlaceholder.getChildren().add(personInsightListPanel.getRoot());
+                }
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -156,8 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        commandBoxPlaceholder.getChildren().add(this.commandBox.getRoot());
     }
 
     /**
@@ -206,6 +219,9 @@ public class MainWindow extends UiPart<Stage> {
         boolean isExpandedCard = commandResult.isShowFriendCommand();
         if (showInsight) {
             tabs.getSelectionModel().select(personInsightsListTab);
+            // dynamically reload component
+            personInsightListPanel = new PersonInsightListPanel(logic.getInsightsList());
+            personInsightListPanelPlaceholder.getChildren().set(0, personInsightListPanel.getRoot());
             personInsightListPanelPlaceholder.requestFocus();
         } else if (event) {
             tabs.getSelectionModel().select(eventsListTab);
@@ -242,6 +258,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            this.commandBox.requestTextAreaFocus();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
@@ -249,5 +266,6 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 
 }
