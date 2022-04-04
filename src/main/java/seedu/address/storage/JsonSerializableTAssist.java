@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTAssist;
 import seedu.address.model.TAssist;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
@@ -24,10 +25,12 @@ class JsonSerializableTAssist {
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate students(s).";
     public static final String MESSAGE_DUPLICATE_MODULE = "Modules list contains duplicate modules(s).";
     public static final String MESSAGE_DUPLICATE_CLASS_GROUP = "Class groups list contains duplicate classes(s).";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Assessments list contains duplicate assessment(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedTaModule> modules = new ArrayList<>();
     private final List<JsonAdaptedClassGroup> classGroups = new ArrayList<>();
+    private final List<JsonAdaptedAssessment> assessments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableTAssist} with the given TAssist entities.
@@ -35,10 +38,12 @@ class JsonSerializableTAssist {
     @JsonCreator
     public JsonSerializableTAssist(@JsonProperty("students") List<JsonAdaptedStudent> students,
                                    @JsonProperty("modules") List<JsonAdaptedTaModule> modules,
-                                   @JsonProperty("classGroups") List<JsonAdaptedClassGroup> classGroups) {
+                                   @JsonProperty("classGroups") List<JsonAdaptedClassGroup> classGroups,
+                                   @JsonProperty("assessments") List<JsonAdaptedAssessment> assessments) {
         this.students.addAll(students);
         this.modules.addAll(modules);
         this.classGroups.addAll(classGroups);
+        this.assessments.addAll(assessments);
     }
 
     /**
@@ -50,6 +55,8 @@ class JsonSerializableTAssist {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedTaModule::new).collect(Collectors.toList()));
         classGroups.addAll(source.getClassGroupList().stream().map(JsonAdaptedClassGroup::new)
+                .collect(Collectors.toList()));
+        assessments.addAll(source.getAssessmentList().stream().map(JsonAdaptedAssessment::new)
                 .collect(Collectors.toList()));
     }
 
@@ -69,7 +76,7 @@ class JsonSerializableTAssist {
         }
 
         for (JsonAdaptedTaModule jsonAdaptedTaModule : modules) {
-            TaModule module = jsonAdaptedTaModule.toModelType();
+            TaModule module = jsonAdaptedTaModule.toModelType(tAssist.getStudentList());
             if (tAssist.hasModule(module)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
             }
@@ -77,11 +84,21 @@ class JsonSerializableTAssist {
         }
 
         for (JsonAdaptedClassGroup jsonAdaptedClassGroup : classGroups) {
-            ClassGroup classGroup = jsonAdaptedClassGroup.toModelType(tAssist.getModuleList());
+            ClassGroup classGroup = jsonAdaptedClassGroup.toModelType(
+                    tAssist.getModuleList(), tAssist.getStudentList());
             if (tAssist.hasClassGroup(classGroup)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS_GROUP);
             }
             tAssist.addClassGroup(classGroup);
+        }
+
+        for (JsonAdaptedAssessment jsonAdaptedAssessment : assessments) {
+            Assessment assessments = jsonAdaptedAssessment.toModelType(
+                    tAssist.getModuleList(), tAssist.getStudentList());
+            if (tAssist.hasAssessment(assessments)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ASSESSMENT);
+            }
+            tAssist.addAssessment(assessments);
         }
 
         return tAssist;

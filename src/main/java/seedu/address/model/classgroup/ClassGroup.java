@@ -1,10 +1,15 @@
 package seedu.address.model.classgroup;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.WeekId;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.TaModule;
@@ -16,10 +21,12 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class ClassGroup implements Entity {
     // Identity fields
+    private static final int NUM_OF_WEEKS = 13;
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
     private final TaModule taModule;
     private final UniqueStudentList uniqueStudentList;
+    private final List<Lesson> lessons;
 
     /**
      * Constructs a {@code ClassGroup}.
@@ -49,9 +56,52 @@ public class ClassGroup implements Entity {
         this.classGroupType = classGroupType;
         this.taModule = taModule;
         this.uniqueStudentList = uniqueStudentList;
+
+        // initialize the 13 lessons
+        Lesson[] arr = new Lesson[NUM_OF_WEEKS];
+        for (int i = 0; i < NUM_OF_WEEKS; i++) {
+            arr[i] = new Lesson(new WeekId(Integer.toString(i + 1)));
+        }
+        this.lessons = Arrays.asList(arr);
     }
 
+    /**
+     * Construct a {@code ClassGroup} by copying all the provided fields.
+     */
+    public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
+                       UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
+        this.classGroupId = classGroupId;
+        this.classGroupType = classGroupType;
+        this.taModule = taModule;
+        this.uniqueStudentList = uniqueStudentList;
+        this.lessons = lessons;
+    }
 
+    /**
+     * Constructs a {@code ClassGroup} with a new module.
+     * Every field must be present and not null.
+     * Used to initialize a class group for enrollment.
+     *
+     * @param toCopy A valid class group.
+     */
+    public ClassGroup(ClassGroup toCopy, TaModule newModule) {
+        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(), newModule, new UniqueStudentList(),
+                toCopy.lessons);
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
+    }
+
+    /**
+     * Constructs a {@code ClassGroup}.
+     * Every field must be present and not null.
+     * Used to initialize a class group from storage file.
+     *
+     * @param toCopy A valid class group.
+     */
+    public ClassGroup(ClassGroup toCopy) {
+        this(toCopy.getClassGroupId(), toCopy.getClassGroupType(), toCopy.getModule(), new UniqueStudentList(),
+                toCopy.lessons);
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
+    }
 
     public ClassGroupId getClassGroupId() {
         return classGroupId;
@@ -65,21 +115,65 @@ public class ClassGroup implements Entity {
         return taModule;
     }
 
-
+    /**
+     * Adds a student to the {@code uniqueStudentList} and initialize his/her
+     * attendance for all lessons.
+     */
     public void addStudent(Student s) {
         uniqueStudentList.add(s);
+        for (Lesson lesson : lessons) {
+            lesson.addStudent(s);
+        }
     }
 
     public boolean hasStudent(Student s) {
         return uniqueStudentList.contains(s);
     }
 
+    /**
+     * Removes a student from the {@code uniqueStudentList} as well as
+     * all the lessons under the current class group.
+     */
     public void removeStudent(Student s) {
         uniqueStudentList.remove(s);
+        for (Lesson lesson : lessons) {
+            lesson.removeStudent(s);
+        }
     }
 
     public ObservableList<Student> getStudents() {
         return uniqueStudentList.asUnmodifiableObservableList();
+    }
+
+    //@@author EvaderFati
+    /**
+     * Finds the lesson according to the specified weekIndex and marks attendance
+     * for all students in the given student list.
+     */
+    public List<Student> markAttendance(Index weekIndex, List<Student> students) {
+        Lesson toMark = findLessonByIndex(weekIndex);
+        return toMark.markAttendance(students);
+    }
+
+    //@@author EvaderFati
+    /**
+     * Finds the lesson according to the specified weekIndex and unmarks attendance
+     * for all students in the given student list.
+     */
+    public List<Student> unmarkAttendance(Index weekIndex, List<Student> students) {
+        Lesson toUnmark = findLessonByIndex(weekIndex);
+        return toUnmark.unmarkAttendance(students);
+    }
+
+    /**
+     * Finds the lesson in the lesson list by the provided weekIndex.
+     */
+    private Lesson findLessonByIndex(Index weekIndex) {
+        return lessons.get(weekIndex.getZeroBased());
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             + "\tParameters: " + TYPE_CLASS
             + " INDEX (must be a positive integer)\n"
             + "\tExample: " + COMMAND_WORD + " "
-            + TYPE_CLASS + " 1"
+            + TYPE_CLASS + " 1\n"
             + "4. Deletes an assessment:\n"
             + "\tParameters: " + TYPE_ASSESSMENT
             + " INDEX (must be a positive integer)\n"

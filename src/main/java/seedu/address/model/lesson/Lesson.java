@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.student.Student;
+import seedu.address.model.studentattendance.Attendance;
 import seedu.address.model.studentattendance.StudentAttendance;
 
 //@@author jxt00
@@ -26,22 +28,20 @@ public class Lesson {
      * @param weekId A valid week ID.
      */
     public Lesson(WeekId weekId) {
-        requireAllNonNull(weekId);
-        this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<StudentAttendance>();
+        this(weekId, new ArrayList<>());
     }
 
     /**
      * Constructs a {@code Lesson}.
-     * {@code weekId} and {@code studentAttendanceList} must be present and not null.
+     * {@code weekId} must be present and not null.
      *
      * @param weekId A valid week ID.
-     * @param studentAttendanceList A valid student attendance list.
+     * @param studentAttendanceList A list of {@code StudentAttendance} objects.
      */
     public Lesson(WeekId weekId, List<StudentAttendance> studentAttendanceList) {
-        requireAllNonNull(weekId, studentAttendanceList);
+        requireAllNonNull(weekId);
         this.weekId = weekId;
-        this.studentAttendanceList = new ArrayList<StudentAttendance>(studentAttendanceList);
+        this.studentAttendanceList = studentAttendanceList;
     }
 
     public WeekId getWeekId() {
@@ -50,6 +50,61 @@ public class Lesson {
 
     public List<StudentAttendance> getStudentAttendanceList() {
         return studentAttendanceList;
+    }
+
+    public void addStudent(Student student) {
+        studentAttendanceList.add(new StudentAttendance(student, new Attendance(false)));
+    }
+
+    /**
+     * Removes a student from the lesson as well as all the related attendance information.
+     */
+    public void removeStudent(Student student) {
+        StudentAttendance objToDelete = studentAttendanceList.stream().filter(sa -> sa.getStudent().equals(student))
+                .findFirst().get();
+        studentAttendanceList.remove(objToDelete);
+    }
+
+    //@@author EvaderFati
+    /**
+     * Iterate through all the student in the specified student list and update the studentAttendanceList
+     * if there is a {@code StudentAttendance} representing the attendance for the specified student.
+     *
+     * @param students A list of students to mark attendance
+     */
+    public List<Student> markAttendance(List<Student> students) {
+        List<Student> studentsCopy = new ArrayList<>(students);
+        for (StudentAttendance sa : studentAttendanceList) {
+            for (Student s : students) {
+                if (sa.getStudent().equals(s)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.markAttendance());
+                    studentsCopy.remove(s);
+                    break;
+                }
+            }
+        }
+        return studentsCopy;
+    }
+
+    //@@author EvaderFati
+    /**
+     * Iterate through all the student in the specified student list and update the studentAttendanceList
+     * if there is a {@code StudentAttendance} representing the attendance for the specified student.
+     *
+     * @param students A list of students to unmark attendance
+     */
+    public List<Student> unmarkAttendance(List<Student> students) {
+        List<Student> studentsCopy = new ArrayList<>(students);
+        for (StudentAttendance sa : studentAttendanceList) {
+            for (Student s : students) {
+                if (sa.getStudent().isSameStudent(s)) {
+                    studentAttendanceList.set(studentAttendanceList.indexOf(sa), sa.unmarkAttendance(s));
+                    studentsCopy.remove(s);
+                    break;
+                }
+            }
+        }
+        return studentsCopy;
     }
 
     /**

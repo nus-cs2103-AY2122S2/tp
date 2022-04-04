@@ -68,6 +68,13 @@ public class Student implements Entity {
                 && otherStudent.getStudentId().equals(getStudentId());
     }
 
+    /**
+     * Returns true if the student has the same studentId as the specified studentId.
+     */
+    public boolean isSameStudent(StudentId studentId) {
+        return studentId.equals(getStudentId());
+    }
+
     @Override
     public EntityType getEntityType() {
         return EntityType.STUDENT;

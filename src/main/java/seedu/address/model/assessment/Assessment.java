@@ -53,15 +53,36 @@ public class Assessment implements Entity {
         this.attempts = FXCollections.observableMap(attempts);
     }
 
+    /**
+     * Returns a new copy of the assessment specified.
+     */
+    public Assessment(Assessment toCopy) {
+        this(toCopy.getAssessmentName(), toCopy.getModule(), Optional.of(toCopy.getSimpleName()),
+                FXCollections.observableHashMap());
+        attempts.putAll(toCopy.getAttempts());
+    }
+
+    /**
+     * Returns a new copy of the assessment with an updated module.
+     * Every field must be present and not null.
+     * Used to initialize an assessment for grading.
+     */
+    public Assessment(Assessment toCopy, TaModule module) {
+        this(toCopy.getAssessmentName(), module, Optional.of(toCopy.getSimpleName()),
+                FXCollections.observableHashMap());
+        attempts.putAll(toCopy.getAttempts());
+    }
+
+
     public AssessmentName getAssessmentName() {
         return assessmentName;
     }
 
-    public Optional<SimpleName> getSimpleName() {
-        return simpleName;
+    public SimpleName getSimpleName() {
+        return simpleName.orElse(new SimpleName(assessmentName.value.replaceAll("\\s", "")));
     }
 
-    public TaModule getTaModule() {
+    public TaModule getModule() {
         return module;
     }
 
@@ -69,9 +90,38 @@ public class Assessment implements Entity {
         return FXCollections.unmodifiableObservableMap(attempts);
     }
 
-    public void addAttempt(Student student, Grade grade) {
-        attempts.put(student, grade);
+
+    /**
+     * Adds student attempt to the assessment with the optional grade.
+     * If grade is empty, it will increment the grade stored with the student.
+     * If the student does not exist, it will store a new attempt with Grade value 1.
+     *
+     * @param student A student to mark the attempt for
+     * @param optionalGrade An optional grade value, if empty, it will increment the previous grade.
+     */
+    public void addAttempt(Student student, Optional<Grade> optionalGrade) {
+        optionalGrade.ifPresentOrElse(
+            grade -> attempts.put(student, grade), () -> {
+                if (attempts.containsKey(student)) {
+                    attempts.put(student, attempts.get(student).increment());
+                } else {
+                    attempts.put(student, new Grade(1));
+                }
+            }
+        );
     }
+
+    /**
+     * Removes student from the assessment.
+     * @param student The student to remove.
+     */
+    public void removeStudent(Student student) {
+        attempts.remove(student);
+        if (module.hasStudent(student)) {
+            module.removeStudent(student);
+        }
+    }
+
 
     public Optional<Grade> getAttemptOfStudent(Student student) {
         return Optional.ofNullable(attempts.get(student));
@@ -88,7 +138,7 @@ public class Assessment implements Entity {
 
         return otherAssessment != null
                 && otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getTaModule().equals(getTaModule());
+                && otherAssessment.getModule().isSameModule(getModule());
     }
 
     @Override
@@ -112,7 +162,7 @@ public class Assessment implements Entity {
 
         Assessment otherAssessment = (Assessment) other;
         return otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getTaModule().equals(getTaModule())
+                && otherAssessment.getModule().equals(getModule())
                 && otherAssessment.getSimpleName().equals(getSimpleName())
                 && otherAssessment.getAttempts().equals(getAttempts());
     }
@@ -120,7 +170,7 @@ public class Assessment implements Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(assessmentName, simpleName, module);
+        return Objects.hash(assessmentName, simpleName, module, attempts);
     }
 
     @Override
@@ -129,10 +179,9 @@ public class Assessment implements Entity {
         builder.append("Assessment Name: ")
                 .append(getAssessmentName())
                 .append("; Module: ")
-                .append(getTaModule().toUniqueRepresentation());
-        getSimpleName().ifPresent(simpleName ->
-                builder.append("; Simple Name: ")
-                .append(simpleName));
+                .append(getModule().toUniqueRepresentation())
+                .append("; Simple Name: ")
+                .append(getSimpleName());
         return builder.toString();
     }
 

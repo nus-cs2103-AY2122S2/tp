@@ -1,23 +1,28 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PARAM_ALL_STUDENTS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.Grade;
 import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
@@ -25,8 +30,10 @@ import seedu.address.model.entity.EntityType;
 import seedu.address.model.person.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.Telegram;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
@@ -39,7 +46,7 @@ import seedu.address.model.tamodule.TaModule;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid!";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -51,6 +58,22 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses optional {@code oneBasedIndex} into an {@code Optional<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Optional<Index> parseOptionalIndex(Optional<String> oneBasedIndex) throws ParseException {
+        if (oneBasedIndex.isEmpty()) {
+            return Optional.empty();
+        }
+        String trimmedIndex = oneBasedIndex.get().trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Optional.of(Index.fromOneBased(Integer.parseInt(trimmedIndex)));
     }
 
     //@@author EvaderFati
@@ -243,16 +266,15 @@ public class ParserUtil {
      */
     public static EntityType parseEntity(String entityType) throws ParseException {
         String trimmedEntityType = entityType.trim();
-        switch(trimmedEntityType) {
-        case TYPE_STUDENT:
+        if (TYPE_STUDENT.startsWith(trimmedEntityType)) {
             return EntityType.STUDENT;
-        case TYPE_MODULE:
+        } else if (TYPE_MODULE.startsWith(trimmedEntityType)) {
             return EntityType.TA_MODULE;
-        case TYPE_CLASS:
+        } else if (TYPE_CLASS.startsWith(trimmedEntityType)) {
             return EntityType.CLASS_GROUP;
-        case TYPE_ASSESSMENT:
+        } else if (TYPE_ASSESSMENT.startsWith(trimmedEntityType)) {
             return EntityType.ASSESSMENT;
-        default:
+        } else {
             throw new ParseException(Messages.MESSAGE_UNKNOWN_ENTITY);
         }
     }
@@ -291,6 +313,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a optional {@code String grade} into a {@code Optional<Grade>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static Optional<Grade> parseGrade(Optional<String> grade) throws ParseException {
+        if (grade.isEmpty()) {
+            return Optional.empty();
+        }
+        requireNonNull(grade);
+        String trimmedGrade = grade.get().trim();
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Grade(trimmedGrade));
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -315,5 +355,77 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if the index size is smaller than the list size
+     */
+    public static boolean checkValidIndex(Index index, int listSize) {
+        if (index.getZeroBased() >= listSize) {
+            return false;
+        }
+        return true;
+    }
+
+    //@@author jxt00
+    /**
+     * Parses a {@code String s} into an {@code ObservableList<Student>}.
+     * No mix of student IDs and indexes is allowed.
+     *
+     * @throws ParseException if the student IDs or indexes are invalid.
+     */
+    public static ObservableList<Student> parseStudents(String s, Model model) throws ParseException {
+        if (s.equals(PARAM_ALL_STUDENTS)) {
+            return model.getUnfilteredStudentList();
+        }
+
+        String[] splitS = s.toUpperCase().split(",");
+        if (splitS[0].isEmpty()) {
+            throw new ParseException(MESSAGE_STUDENT_INVALID);
+        }
+        switch(splitS[0].charAt(0)) {
+        case 'E':
+            List<StudentId> studentIds = new ArrayList<>();
+            for (String i : splitS) {
+                try {
+                    StudentId sid = parseStudentId(i);
+                    if (!studentIds.contains(sid)) {
+                        studentIds.add(sid);
+                    }
+                } catch (ParseException pe) {
+                    throw new ParseException(MESSAGE_STUDENT_INVALID, pe);
+                }
+            }
+            try {
+                return model.getStudentListByStudentIds(studentIds);
+            } catch (StudentNotFoundException e) {
+                throw new ParseException(MESSAGE_STUDENT_INVALID);
+            }
+        default:
+            List<Index> studentIndexes = new ArrayList<>();
+            for (String i : splitS) {
+                try {
+                    Index index = parseIndex(i);
+                    if (!studentIndexes.contains(index)) {
+                        studentIndexes.add(index);
+                    }
+                } catch (ParseException pe) {
+                    throw new ParseException(MESSAGE_STUDENT_INVALID, pe);
+                }
+            }
+            try {
+                return model.getStudentListByIndexes(studentIndexes);
+            } catch (StudentNotFoundException e) {
+                throw new ParseException(MESSAGE_STUDENT_INVALID);
+            }
+        }
     }
 }

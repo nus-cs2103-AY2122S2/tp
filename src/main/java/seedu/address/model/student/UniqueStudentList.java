@@ -33,6 +33,9 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Returns true if the list contains an equivalent student as the given argument.
+     *
+     * @param toCheck A student object.
+     * @return True if student exists in list. False otherwise.
      */
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
@@ -41,6 +44,9 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Returns true if the list contains Student with the same StudentId.
+     *
+     * @param toCheck A student ID.
+     * @return True if student ID exists in list. False otherwise.
      */
     public boolean contains(StudentId toCheck) {
         requireNonNull(toCheck);
@@ -50,6 +56,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Adds a student to the list.
      * The student must not already exist in the list.
+     *
+     * @param toAdd A student object.
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
@@ -63,6 +71,9 @@ public class UniqueStudentList implements Iterable<Student> {
      * Replaces the student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
+     *
+     * @param target A student object that will be replaced.
+     * @param editedStudent A student object that will be added to the list.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
@@ -82,6 +93,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Removes the equivalent student from the list.
      * The student must exist in the list.
+     *
+     * @param toRemove A student object.
      */
     public void remove(Student toRemove) {
         requireNonNull(toRemove);
@@ -90,6 +103,11 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     *
+     * @param replacement A list of students.
+     */
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -98,6 +116,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Replaces the contents of this list with {@code students}.
      * {@code students} must not contain duplicate students.
+     *
+     * @param students A list of students.
      */
     public void setStudents(List<Student> students) {
         requireAllNonNull(students);

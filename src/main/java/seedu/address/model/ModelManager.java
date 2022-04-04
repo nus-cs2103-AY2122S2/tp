@@ -22,6 +22,7 @@ import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.tamodule.TaModule;
+import seedu.address.model.tamodule.exceptions.ModuleNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -242,6 +243,17 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Assessment> getUnfilteredAssessmentList() {
         return tAssist.getAssessmentList();
+    }
+
+    @Override
+    public TaModule getModule(TaModule module) {
+        return getUnfilteredModuleList().stream().filter(mod -> mod.isSameModule(module)).findFirst()
+                .orElseThrow(() -> new ModuleNotFoundException());
+    }
+
+    @Override
+    public void removeStudentFromAssessments(Student student) {
+        tAssist.removeStudentFromAssessments(student);
     }
 
     @Override

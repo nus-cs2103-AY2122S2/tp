@@ -44,6 +44,18 @@ public class TaModule implements Entity {
         this.uniqueStudentList = uniqueStudentList;
     }
 
+    /**
+     * Constructs a {@code TaModule}.
+     * Every field must be present and not null.
+     * Used to initialize a module from storage file.
+     *
+     * @param toCopy A valid class group.
+     */
+    public TaModule(TaModule toCopy) {
+        this(toCopy.getModuleName(), toCopy.getModuleCode(), toCopy.getAcademicYear(), new UniqueStudentList());
+        uniqueStudentList.setStudents(toCopy.uniqueStudentList);
+    }
+
     public ModuleName getModuleName() {
         return moduleName;
     }
@@ -87,6 +99,14 @@ public class TaModule implements Entity {
     }
 
     /**
+     * Returns true if module has the same moduleCode and academicYear specified.
+     */
+    public boolean isSameModule(ModuleCode moduleCode, AcademicYear academicYear) {
+        return moduleCode.equals(getModuleCode())
+                && academicYear.equals(getAcademicYear());
+    }
+
+    /**
      * Returns a String representation of the module code and academic year.
      * These are the minimum fields required to uniquely represent a module class.
      */
@@ -104,8 +124,8 @@ public class TaModule implements Entity {
     }
 
     /**
-     * Returns true if both modules have the same identity and data fields.
-     * This defines a stronger notion of equality between two modules.
+     * Returns true if both modules have the same identity, including module name.
+     * This defines a normal notion of equality between two modules.
      */
     @Override
     public boolean equals(Object other) {
@@ -120,8 +140,18 @@ public class TaModule implements Entity {
         TaModule otherTaModule = (TaModule) other;
         return otherTaModule.getModuleName().equals(getModuleName())
                 && otherTaModule.getAcademicYear().equals(getAcademicYear())
+                && otherTaModule.getModuleCode().equals(getModuleCode());
+    }
+
+    /**
+     * Returns true if both modules have the same identity and data fields.
+     * This defines the strongest notion of equality between two modules.
+     */
+    public boolean isExactSame(TaModule otherTaModule) {
+        return otherTaModule.getModuleName().equals(getModuleName())
+                && otherTaModule.getAcademicYear().equals(getAcademicYear())
                 && otherTaModule.getModuleCode().equals(getModuleCode())
-                && otherTaModule.getStudents().equals(getStudents());
+                && otherTaModule.uniqueStudentList.equals(uniqueStudentList);
     }
 
 

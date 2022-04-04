@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,9 +10,15 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DisenrolCommand;
+import seedu.address.logic.commands.EnrolCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
@@ -51,8 +56,25 @@ public class TAssistParser {
             return new DeleteCommandParser().parse(arguments, model);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(ParserUtil.parseEntity(arguments.trim().split("\\s")[0]), Optional.empty(),
-                    Optional.empty());
+            return new ListCommandParser().parse(arguments, model);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments, model);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return new UnmarkCommandParser().parse(arguments, model);
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments, model);
+
+        case EnrolCommand.COMMAND_WORD:
+            return new EnrolCommandParser().parse(arguments, model);
+
+        case DisenrolCommand.COMMAND_WORD:
+            return new DisenrolCommandParser().parse(arguments, model);
+
+        case GradeCommand.COMMAND_WORD:
+            return new GradeCommandParser().parse(arguments, model);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

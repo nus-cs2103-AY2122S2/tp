@@ -14,6 +14,7 @@ import seedu.address.logic.parser.TAssistParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTAssist;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
@@ -74,6 +75,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<ClassGroup> getFilteredClassGroupList() {
         return model.getFilteredClassGroupList();
+    }
+
+    @Override
+    public ObservableList<Assessment> getFilteredAssessmentList() {
+        return model.getFilteredAssessmentList();
     }
 
     @Override

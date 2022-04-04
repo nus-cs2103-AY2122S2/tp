@@ -11,15 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SIMPLE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
-import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
-import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
-import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,6 +25,7 @@ import seedu.address.model.assessment.SimpleName;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.classgroup.ClassGroupId;
 import seedu.address.model.classgroup.ClassGroupType;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -62,13 +58,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         final String entityType = matcher.group("entityType");
         final String arguments = matcher.group("arguments");
         ArgumentMultimap argMultimap;
+        EntityType parsedEntityType = ParserUtil.parseEntity(entityType);
+        switch(parsedEntityType) {
 
-        switch(entityType) {
-
-        case TYPE_STUDENT:
+        case STUDENT:
             argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_ID, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_EMAIL);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_EMAIL)
+            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_NAME, PREFIX_EMAIL)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_STUDENT_USAGE));
@@ -83,10 +79,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             return new AddCommand(student);
 
-        case TYPE_MODULE:
+        case TA_MODULE:
             argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_ACADEMIC_YEAR);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_ACADEMIC_YEAR)
+            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_ACADEMIC_YEAR)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_MODULE_USAGE));
@@ -100,10 +96,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             return new AddCommand(module);
 
-        case TYPE_CLASS:
+        case CLASS_GROUP:
             argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_ID, PREFIX_TYPE, PREFIX_MODULE_INDEX);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_TYPE, PREFIX_MODULE_INDEX)
+            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_TYPE, PREFIX_MODULE_INDEX)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_CLASS_USAGE));
@@ -117,10 +113,10 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             return new AddCommand(classGroup);
 
-        case TYPE_ASSESSMENT:
+        case ASSESSMENT:
             argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_MODULE_INDEX, PREFIX_SIMPLE_NAME);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_INDEX)
+            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE_INDEX)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_ASSESSMENT_USAGE));
@@ -139,11 +135,4 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
 }

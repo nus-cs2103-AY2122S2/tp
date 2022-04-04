@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -18,19 +19,22 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
+      <HBox spacing="5" alignment="TOP_LEFT">
+        <Label fx:id="id" styleClass="cell-big-num">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="classId" text="\$first" styleClass="cell_big_label" />
+        <VBox>
+            <Label fx:id="classId" text="\$first" styleClass="cell_big_label" />
+            <Label fx:id="classType" styleClass="cell_small_label" text="\$classType" />
+            <Label fx:id="moduleCode" styleClass="cell_small_label" text="\$moduleCode" />
+            <Label fx:id="moduleName" styleClass="cell_small_label" text="\$moduleName" />
+            <Label fx:id="academicYear" styleClass="cell_small_label" text="\$academicYear" />
+            <Button fx:id="attendanceButton" text="Check Absentees" onAction="#handleAttendance"/>
+        </VBox>
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="classType" styleClass="cell_small_label" text="\$classType" />
-      <Label fx:id="moduleCode" styleClass="cell_small_label" text="\$moduleCode" />
-      <Label fx:id="moduleName" styleClass="cell_small_label" text="\$moduleName" />
     </VBox>
   </GridPane>
 </HBox>

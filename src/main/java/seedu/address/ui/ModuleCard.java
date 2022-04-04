@@ -31,6 +31,8 @@ public class ModuleCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label code;
+    @FXML
+    private Label academicYear;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -38,9 +40,10 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(TaModule module, int displayedIndex) {
         super(FXML);
         this.module = module;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         code.setText(module.getModuleCode().value);
         name.setText(module.getModuleName().value);
+        academicYear.setText(module.getAcademicYear().value);
     }
 
     @Override

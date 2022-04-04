@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -136,7 +137,11 @@ public class TAssist implements ReadOnlyTAssist {
      * {@code key} must exist in the TAssist.
      */
     public void removeStudent(Student key) {
+        removeStudentFromClassGroups(key);
+        removeStudentFromAssessments(key);
+        removeStudentFromModules(key);
         students.remove(key);
+
     }
 
     //// module-level operations
@@ -176,6 +181,10 @@ public class TAssist implements ReadOnlyTAssist {
         List<ClassGroup> lst = classGroups.findClassesOfModule(key);
         for (ClassGroup classGroup : lst) {
             this.removeClassGroup(classGroup);
+        }
+        List<Assessment> assessmentList = assessments.findAssessmentsOfModule(key);
+        for (Assessment assessment : assessmentList) {
+            this.removeAssessment(assessment);
         }
         modules.remove(key);
     }
@@ -255,6 +264,38 @@ public class TAssist implements ReadOnlyTAssist {
      */
     public void removeAssessment(Assessment key) {
         assessments.remove(key);
+    }
+
+    /**
+     * Removes the student from all the assessments.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromAssessments(Student student) {
+        List<Assessment> assessmentsToModify = new ArrayList<>(assessments.asUnmodifiableObservableList());
+        assessmentsToModify.stream().forEach(assessment -> assessment.removeStudent(student));
+        assessments.setAssessments(assessmentsToModify);
+    }
+
+    /**
+     * Removes the student from all the modules.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromModules(Student student) {
+        List<TaModule> modulesToModify = new ArrayList<>(modules.asUnmodifiableObservableList());
+        modulesToModify.stream().filter(module -> module.hasStudent(student))
+                .forEach(module -> module.removeStudent(student));
+        modules.setModules(modulesToModify);
+    }
+
+    /**
+     * Removes the student from all the class groups.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromClassGroups(Student student) {
+        List<ClassGroup> classGroupsToModify = new ArrayList<>(classGroups.asUnmodifiableObservableList());
+        classGroupsToModify.stream().filter(classGroup -> classGroup.hasStudent(student))
+                .forEach(classGroup -> classGroup.removeStudent(student));
+        classGroups.setClassGroups(classGroupsToModify);
     }
 
     //// util methods

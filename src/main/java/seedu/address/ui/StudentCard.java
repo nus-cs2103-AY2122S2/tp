@@ -42,7 +42,7 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + "");
         name.setText(student.getName().fullName);
         student.getTelegram()
             .ifPresentOrElse(teleOptional -> telegram.setText(teleOptional.value), () -> telegram.setVisible(false));

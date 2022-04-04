@@ -37,6 +37,28 @@ public class StudentAttendance {
     }
 
     /**
+     * Marks the attendance of the given student if the student match the
+     * student identity in this {@code StudentAttendance}.
+     */
+    public StudentAttendance markAttendance() {
+        if (this.attendance.getValue()) {
+            return this;
+        }
+        return new StudentAttendance(this.student, new Attendance(true));
+    }
+
+    /**
+     * Unmarks the attendance of the given student if the student match the
+     * student identity in this {@code StudentAttendance}.
+     */
+    public StudentAttendance unmarkAttendance(Student s) {
+        if (this.attendance.getValue()) {
+            return new StudentAttendance(student, new Attendance(false));
+        }
+        return this;
+    }
+
+    /**
      * Returns true if both student attendances have the same student.
      * This defines a weaker notion of equality between two student attendances.
      */
@@ -47,6 +69,11 @@ public class StudentAttendance {
 
         return otherStudentAttendance != null
                 && otherStudentAttendance.getStudent().equals(getStudent());
+    }
+
+    @Override
+    public String toString() {
+        return student.toString() + ": " + attendance.getValue().toString();
     }
 
     /**
