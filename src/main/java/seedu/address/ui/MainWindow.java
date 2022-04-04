@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ExpandedPersonListPanel expandedPersonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -94,6 +95,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        commandBox = new CommandBox(this::executeCommand);
 
         tabs.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
@@ -168,8 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        commandBoxPlaceholder.getChildren().add(this.commandBox.getRoot());
     }
 
     /**
@@ -254,6 +255,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            this.commandBox.requestTextAreaFocus();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
