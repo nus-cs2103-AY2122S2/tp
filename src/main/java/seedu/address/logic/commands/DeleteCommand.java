@@ -81,11 +81,10 @@ public class DeleteCommand extends Command {
     private static void batchUpdateDeletedPerson(Person deletedPerson,
                                                       ObservableList<Person> studentList,
                                                       Model model) {
-        if (deletedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+        if (deletedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                            .equals(deletedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(deletedPerson)
                             || student.hasSameActivity(deletedPerson))
                             && !student.isSamePerson(deletedPerson))
                     .collect(Collectors.toList());
@@ -94,11 +93,10 @@ public class DeleteCommand extends Command {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
 
                 List<Person> positiveRelatedToPerson = studentList.stream()
-                        .filter(student -> (student.getClassCode().toString()
-                                .equals(currentPerson.getClassCode().toString())
+                        .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
                                 && !student.isSamePerson(deletedPerson)
-                                && student.getStatus().toString().equals(Status.POSITIVE))
+                                && student.isPositive())
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
