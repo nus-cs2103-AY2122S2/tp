@@ -103,7 +103,7 @@ There is no need to save manually.
 ### Add student contact information: `add`
 
 Adds a student contact information to ArchDuke. `add` must be followed by the student’s `NAME`, 
-`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional and is one word consisting of letters and/or numerals. 
+`PHONE_NUMBER`, `EMAIL`, and `ACADEMIC_MAJOR`. `TAG` is optional and is one word consisting of letters and/or numerals (alphanumeric). 
 
 <div markdown="block" class="alert alert-info">
 
