@@ -19,12 +19,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
 import seedu.address.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.pet.NameContainsKeywordsPredicate;
 import seedu.address.model.pet.Pet;
+import seedu.address.testutil.AbsentAttendanceDescriptorBuilder;
 import seedu.address.testutil.EditPetDescriptorBuilder;
 import seedu.address.testutil.PresentAttendanceDescriptorBuilder;
 
@@ -109,9 +111,13 @@ public class CommandTestUtil {
     public static final EditCommand.EditPetDescriptor DESC_AMY;
     public static final EditCommand.EditPetDescriptor DESC_BOB;
 
-    public static final PresentAttendanceDescriptor DESC_WITH_TRANSPORT_ARRANGEMENT_AMY;
-    public static final PresentAttendanceDescriptor DESC_WITH_TRANSPORT_ARRANGEMENT_BOB;
-    public static final PresentAttendanceDescriptor DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE;
+    public static final PresentAttendanceDescriptor PRESENT_DESC_WITH_TRANSPORT_AMY;
+    public static final PresentAttendanceDescriptor PRESENT_DESC_WITH_TRANSPORT_BOB;
+    public static final PresentAttendanceDescriptor PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE;
+
+    public static final AbsentAttendanceDescriptor ABSENT_DESC_AMY;
+    public static final AbsentAttendanceDescriptor ABSENT_DESC_BOB;
+    public static final AbsentAttendanceDescriptor ABSENT_DESC_CHARLIE;
 
     static {
         DESC_AMY = new EditPetDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -120,13 +126,22 @@ public class CommandTestUtil {
         DESC_BOB = new EditPetDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_WITH_TRANSPORT_ARRANGEMENT_AMY = new PresentAttendanceDescriptorBuilder()
+        PRESENT_DESC_WITH_TRANSPORT_AMY = new PresentAttendanceDescriptorBuilder()
             .withDate("2022-03-27").withPickUpTime("09:00").withDropOffTime("17:30")
             .build();
-        DESC_WITH_TRANSPORT_ARRANGEMENT_BOB = new PresentAttendanceDescriptorBuilder()
+        PRESENT_DESC_WITH_TRANSPORT_BOB = new PresentAttendanceDescriptorBuilder()
             .withDate("2022-03-28").withPickUpTime("10:00").withDropOffTime("18:30")
             .build();
-        DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE = new PresentAttendanceDescriptorBuilder()
+        PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE = new PresentAttendanceDescriptorBuilder()
+            .withDate("2022-03-27")
+            .build();
+        ABSENT_DESC_AMY = new AbsentAttendanceDescriptorBuilder()
+            .withDate("2022-03-27")
+            .build();
+        ABSENT_DESC_BOB = new AbsentAttendanceDescriptorBuilder()
+            .withDate("2022-03-28")
+            .build();
+        ABSENT_DESC_CHARLIE = new AbsentAttendanceDescriptorBuilder()
             .withDate("2022-03-27")
             .build();
     }

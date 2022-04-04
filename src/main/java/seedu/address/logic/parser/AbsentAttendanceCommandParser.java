@@ -30,7 +30,7 @@ public class AbsentAttendanceCommandParser implements Parser<AbsentAttendanceCom
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PresentAttendanceCommand.MESSAGE_USAGE));
+                AbsentAttendanceCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());

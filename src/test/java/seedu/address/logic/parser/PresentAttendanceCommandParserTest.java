@@ -4,8 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DATE_DESC_CHARLIE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_WITH_TRANSPORT_ARRANGEMENT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.PRESENT_DESC_WITH_TRANSPORT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DROPOFF_TIME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DROPOFF_TIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PICKUP_TIME_DESC_AMY;
@@ -34,11 +34,11 @@ public class PresentAttendanceCommandParserTest {
     private static final String ALPHABET_INDEX_STUB = "two";
     private static final String SYMBOL_INDEX_STUB = "%^&";
 
-    private PresentAttendanceCommandParser parser = new PresentAttendanceCommandParser();
+    private final PresentAttendanceCommandParser parser = new PresentAttendanceCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        PresentAttendanceDescriptor expectedDescriptor = DESC_WITH_TRANSPORT_ARRANGEMENT_BOB;
+        PresentAttendanceDescriptor expectedDescriptor = PRESENT_DESC_WITH_TRANSPORT_BOB;
 
         // no multiple fields
         assertParseSuccess(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_BOB
@@ -63,7 +63,7 @@ public class PresentAttendanceCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        PresentAttendanceDescriptor expectedDescriptor = DESC_WITHOUT_TRANSPORT_ARRANGEMENT_CHARLIE;
+        PresentAttendanceDescriptor expectedDescriptor = PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE;
 
         // no pick-up AND drop-off times
         assertParseSuccess(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_CHARLIE,
