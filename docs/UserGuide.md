@@ -56,7 +56,7 @@ If you can type fast, ArchDuke can get your contact management, group management
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command but you specified it multiple times, **only the last occurrence of the parameter will be taken**.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -168,20 +168,22 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
 * The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
 * The specified keywords are **case-insensitive**. 
 * The attributes could be accessed by adding prefixes before the keywords.
-* The result must match the **exact wording**, partial words will not match (e.g. `n/Dav` will not match the student contact
-`David` or `David Li`).
+* The result must match the **exact word**, partial word will not match (e.g. `n/Dav` will not match the student contact
+`David` or `David Li` as there is no word `Dav`).
 * The command will list out all student contacts that matches the keyword.
   * `find n/Alex` would match with `Alex Yeoh` and `Alex Yu`.
   * `find n/Alex Yeoh` would match with `Alex Yeoh` and `Alex Yu`.
   * `find n/Alex Yu` would match with `Alex Yeoh`, `Alex Yu`, and `Bernice Yu`.
   
+#### Attributes that support multiple findings
 
 * The attributes that support **multiple findings** at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`.
   * `find n/Alex David` is possible and would show two results as `Alex Yeoh` and `David Li`, assuming that these are the only matching contacts.
   * `find a/Computer Science Business` is possible and would show contacts that have the following major: `Computer Science`, `Business`, `Business Analytics`
   , assuming that these majors are the exhaustive majors in the student contacts.
-  * `find t/friends colleagues` is possible and would show contacts that have the at least one of the 2 tags: `friends` and `colleagues`.</br>
+  * `find t/friends colleagues` is possible and would show contacts that have the at least one of the 2 tags: `friends` and `colleagues`.
 
+#### Attributes that does not support multiple findings
 
 * The attributes that **does not support multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
   * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`).
@@ -342,7 +344,7 @@ followed by words will be treated as if there is no preceding white spaces. E.g.
 
 A task can only be added if it **has yet to exist** in the particular group. The task
 is uniquely identified by a `TASK_NAME` with **no regards to case sensitivity**. E.g. `MEETING` would be the
-same task as `Meeting` and `meeting`
+same task as `Meeting` and `meeting`.
 
 </div>
 
@@ -352,7 +354,7 @@ same task as `Meeting` and `meeting`
 
 Due to the limitation of the command format, a task name cannot contain the string `g/` in the task if there are spaces before `g/`.
 
-Examples of invalid `TASK_NAME`:
+Examples of invalid `TASK_NAME`
 * `create a group g/exco` is not possible as there is a space before `g/`.
 * `create a group g/ exco` is not possible as there are spaces before `g/`.
 
@@ -434,14 +436,14 @@ that contains the data of your previous ArchDuke home folder.
 let the new user experiment with the data while getting familiar with ArchDuke. If you wish to start using ArchDuke
 fresh from the start, you could use the `clear` command to clear all the sample data.
 
-**Q**: What is an academic major?<br>
+**Q**: What is an **academic major**?<br>
 **A**: An academic major is simply the major that the student is studying in university.
 
-**Q**: What does an index refer to?<br>
+**Q**: What does an **index** refer to?<br>
 **A**: An index is simply the number in front of the student contact's name. It specifies the order 
 in which the student contact appears in the list.
 
-**Q**: What is an unsigned integer?<br>
+**Q**: What is an **unsigned integer**?<br>
 **A**: An unsigned integer is an integer that ranges from 0 to 4294967295 inclusive.
 
 --------------------------------------------------------------------------------------------------------------------
