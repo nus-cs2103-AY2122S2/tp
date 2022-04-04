@@ -253,7 +253,6 @@ public class Module {
     }
 
 
-
     /**
      * Edits the information of the group in the respective index
      */
