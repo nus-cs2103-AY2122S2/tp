@@ -1,6 +1,7 @@
 package seedu.trackbeau.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -88,6 +89,14 @@ public class TrackBeau implements ReadOnlyTrackBeau {
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
         return customers.contains(customer);
+    }
+
+    /**
+     * Returns true if a customer, other than itself, has same phone or email.
+     */
+    public boolean hasAnotherCustomerWithClashingIdentity(Customer originalCustomer, Customer editedCustomer) {
+        requireAllNonNull(originalCustomer, editedCustomer);
+        return customers.checkIfClash(originalCustomer, editedCustomer);
     }
 
     /**

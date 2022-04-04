@@ -105,6 +105,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAnotherCustomerWithClashingIdentity(Customer originalCustomer, Customer editedCustomer) {
+        requireAllNonNull(originalCustomer, editedCustomer);
+        return trackBeau.hasAnotherCustomerWithClashingIdentity(originalCustomer, editedCustomer);
+    }
+
+    @Override
     public void addCustomer(Customer customer) {
         trackBeau.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);

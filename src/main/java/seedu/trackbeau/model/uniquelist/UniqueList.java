@@ -25,6 +25,25 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
     }
 
     /**
+     * Returns true if the list, other than item to skip, is same item as item toCheck in argument.
+     */
+    public boolean checkIfClash(T toSkip, T toCheck) {
+        //we skip the original customer and check the edited customer against the rest of the list
+        requireAllNonNull(toSkip, toCheck);
+        int indexOfToSkip = internalList.indexOf(toSkip);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (i == indexOfToSkip) {
+                continue;
+            } else {
+                if (internalList.get(i).isSameItem(toCheck)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a item to the list.
      * The item must not already exist in the list.
      */
