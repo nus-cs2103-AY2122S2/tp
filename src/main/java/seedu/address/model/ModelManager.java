@@ -148,15 +148,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPetListToFullPetList() {
-        this.lastUsedPredicate = null;
-        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
-    }
-
-    @Override
     public void updateFilteredPetList() {
         Predicate<Pet> predicate = this.lastUsedPredicate == null ? PREDICATE_SHOW_ALL_PETS : this.lastUsedPredicate;
         filteredPets.setPredicate(predicate);
+    }
+    
+    @Override
+    public void updateFilteredPetListToFullPetList() {
+        this.lastUsedPredicate = null;
+        filteredPets.setPredicate(PREDICATE_SHOW_ALL_PETS);
     }
 
     @Override

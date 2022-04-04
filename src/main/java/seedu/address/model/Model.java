@@ -87,15 +87,15 @@ public interface Model {
     void updateFilteredPetList(Predicate<Pet> predicate);
 
     /**
-     * Updates filtered pet list to display the entire pet list.
-     */
-    public void updateFilteredPetListToFullPetList() ;
-
-    /**
      * Updates the filter of the filtered pet list to filter by the last given {@code predicate}.
      * If no last used predicate is found, uses Predicate to display full Pet list.
      */
     void updateFilteredPetList();
+
+    /**
+     * Updates filtered pet list to display the entire pet list.
+     */
+    void updateFilteredPetListToFullPetList();
 
     /**
      * Sorts the pet list based on the field provided.
