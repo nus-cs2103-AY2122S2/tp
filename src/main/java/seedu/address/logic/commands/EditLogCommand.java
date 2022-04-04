@@ -219,8 +219,8 @@ public class EditLogCommand extends ByIndexByNameCommand {
                     this.newDescription != null ? this.newDescription : initialLog.getDescription()); // create log to be added
 
             // another sanity check
-            if (personToEdit.containsLogExactly(editedLog)) {
-                throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure not a duplicate log being inserted
+            if (personToEdit.containsLog(editedLog) && !initialLog.isSameLog(editedLog)) {
+                throw new CommandException(MESSAGE_DUPLICATE_LOG); // ensure edited log does not duplicate with existing
             }
 
             // set log
