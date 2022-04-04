@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should contain alphanumeric or spaces";
-    public static final int MAX_CHARACTER_LENGTH = 100;
+    public static final int MAX_CHARACTER_LENGTH = 30;
     public static final String MESSAGE_CONSTRAINTS_LENGTH = String.format("Tags can only contain no more "
             + "than %d characters.", MAX_CHARACTER_LENGTH);
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9 ]+";
@@ -37,7 +37,7 @@ public class Tag {
     }
 
     /**
-     * Returns true if a given string has more than 100 characters in length.
+     * Returns false if a given string has more than 30 characters in length.
      */
     public static boolean isValidTagLength(String test) {
         return test.length() <= MAX_CHARACTER_LENGTH;

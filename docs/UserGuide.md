@@ -31,7 +31,7 @@ As Tracey is a Command Line Interface, these are the aspects that highlight the 
 
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
-We hope you enjoy Tracey as much as we did developing it!
+We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +94,7 @@ Additional formatting guidelines:
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data. <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
    📓`Note:`
@@ -148,21 +148,24 @@ How to identify import button:
 ![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
 
 ### Adding a contact
-Add a student with relevant details into Tracey.
+Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
-* Adds a student with the specified details. Tags are optional, and you can add as many tags as you like.
+* Adds a student with the specified details.
+* Tags are optional. You can add as many tags as you like.
     * Duplicate tags will be displayed as a single tag.
 * The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey.
 * Phone Number, email and matriculation number must be **unique** to each student.
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
 * Tracey will acknowledge that the student has been added.
-* Values for faculty, covid status and block need to be pre-defined constants in the table below (refer to Table 4 below or in the <a href='#glossary'>glossary</a>).
-* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error and you will have to input the details for the keyword again.
+* Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the <a href='#glossary'>glossary</a>).
+* If any values for faculty, Covid status and block is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error. You will have to input the details for the keyword again.
+* If you added duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
+  i.e. `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive` is the same as `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`.
 
 Examples of usage:
 * `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343z cs/Negative`
-* `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
+* `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive t/level2`
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
 |:--------------------:|:-----------------:|
@@ -183,7 +186,7 @@ Examples of usage:
 | `mc/` | Matriculation Number | None                                                                                                  |                                                                                                                                                                                                                          Can only start with an "A", followed by 7 digits, ending with a letter.                                                                                                                                                                                                                          |
 | `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       |                                                                                                                                                                                                                          Can only be one of the pre-defined constants, and is case-insensitive.                                                                                                                                                                                                                           |
 | `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               |                                                                                                                                                                                                                          Can only be one of the pre-defined constants, and is case-insensitive.                                                                                                                                                                                                                           |
-| `t/`  | Optional tag(s)      | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 100 characters.                                                                                                                                                                                                                 |
+| `t/`  | Optional tag(s)      | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 30 characters.                                                                                                                                                                                                                 |
 
 *Table 4: Table showing list of possible prefixes and the Pre-defined constants.*
 
@@ -207,6 +210,8 @@ Format: `edit INDEX n/NAME ...`
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
 * You can remove all tags of the student by typing `t/` without specifying any details after it.
+* If you have included duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
+  i.e. `edit 1 p/98090042 p/81812424` is the same as `edit 1 p/81812424`.
 
 How to identify `INDEX`:
 ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
@@ -273,7 +278,7 @@ Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
 * A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
 * A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
-* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`.
+* The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
 * The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
 
 Examples of usages:
@@ -294,7 +299,7 @@ Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
 * Returns a list of students that fit the criteria given by the user in the form of pre-defined constants in the categories of faculty, covid status and block.
 * Refer to Table 4 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
-* The search is case-insensitive. e.g `Positive` will match `positive`.
+* The search is case-insensitive. e.g. `Positive` will match `positive`.
 * The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
 * At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
 
@@ -338,14 +343,15 @@ From *Figure 11*, this function is beneficial for administrators as you may want
 Summarises the statistics of the student records inside Tracey.
 
 Format:`summarise`
-* You can get an overview of the students in Tracey if you want to get an idea of the location where covid is more prevalent.
+* You can get an overview of the students in Tracey if you want to get an idea of the location where Covid is more prevalent.
+* You can see which faculty has the highest number of Covid cases.
 
 Example of usage:
 * `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-![SummariseExample](images/SummariseExample.png) *Figure 12: Example response of Tracey in response to the `summarise` command.*
+![SummariseExample](images/SummariseExample.png) *Figure 12a: Example pie charts of Tracey in response to the `summarise` command.* ![SummariseExample2](images/SummariseExample2.png) *Figure 12b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 12*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
@@ -425,11 +431,11 @@ there are changes to Tracey.
    **A**: They can be found in the numbers located beside each individual student. <br>
    ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
 
-5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `delete` on? <br>
+5. **Q**: The `delete` feature only allow me to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student I want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `delete`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
 
-6. **Q**: The `edit` feature only allow us to edit via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `edit` on? <br>
+6. **Q**: The `edit` feature only allow me to edit via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student I want to use `edit` on? <br>
    **A**: The `INDEX` used for `edit` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `edit`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
 
@@ -477,9 +483,9 @@ there are changes to Tracey.
 | `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
 | `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
-| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                           | Can only be one of the pre-defined constants, and is case-insensitive.  |
-| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                                   | Can only be one of the pre-defined constants, and is case-insensitive.  |
-| `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
+| `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `t/`  | Optional tag(s)      | None                                                                                                  | Can only contain alphanumeric characters and spaces. Must be no more than 30 characters. |
 
 *Table 6: Specific terminology used.*
 
