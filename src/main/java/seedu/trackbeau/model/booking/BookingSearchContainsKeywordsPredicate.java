@@ -31,7 +31,7 @@ public class BookingSearchContainsKeywordsPredicate implements Predicate<Booking
 
         try {
             List<String> keywords = keywordsList.get(0);
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
                 searchString = booking.getClass().getDeclaredMethod(find[i]).invoke(booking).toString();
 
                 if (keywords == null) {
