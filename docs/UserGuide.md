@@ -332,7 +332,7 @@ Result of viewing contact in a group:
 
 Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` and a `GROUP_NAME`. 
 The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group ArchDuke.
-`TASK_NAME` can take any values,
+`TASK_NAME` can take any values **except for that stated below in the limitation box**,
 and it **should not be blank** and **should not have preceeding whitespaces**. `TASK_NAME` with preceeding white spaces
 followed by words will be treated as if there is no preceeding white spaces. E.g. `<whitespaces>Meeting` is the same as `Meeting`.
 
@@ -343,6 +343,23 @@ followed by words will be treated as if there is no preceeding white spaces. E.g
 A task can only be added if it **has yet to exist** in the particular group. The task
 is uniquely identified by a `TASK_NAME` with **no regards to case sensitivity**. E.g. `MEETING` would be the
 same task as `Meeting` and `meeting`
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Limitation of task name:**<br>
+
+Due to the limitation of the command format, a task name cannot contain the string `g/` in the task if there are spaces before `g/`.
+
+Examples of invalid `TASK_NAME`:
+* `create a group g/exco` is not possible as there is a space before `g/`.
+* `create a group g/ exco` is not possible as there are spaces before `g/`.
+
+Examples of valid `TASK_NAME` 
+* `create a groupg/ exco` is possible as there is no space before `g/`.
+* `taskg/` is possible as there is no space before `g/`.
+* `g/task` is possible as there is no space before `g/`.
 
 </div>
 
