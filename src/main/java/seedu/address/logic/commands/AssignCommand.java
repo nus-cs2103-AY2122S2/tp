@@ -24,7 +24,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a student contact to "
             + "an existing group in ArchDuke. "
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
+            + "INDEX (must be a positive unsigned integer) "
             + PREFIX_GROUP_NAME + "GROUP_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GROUP_NAME + "CS2103-W16-3";
