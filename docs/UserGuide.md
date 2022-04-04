@@ -158,7 +158,7 @@ Examples:
 * Examples of valid Modules: `CS1231`, `CS2103T`, `NUR1107B`, `MUT2022`
 </div>
 
-[_**See below for an example image of a person with modules**_](#example-of-a-contact-with-status-and-comment)
+[_**See below for an example image of a person with modules**_](#annotated-image-of-what-a-contact-with-status-module-and-comment)
 
 ### Adding a comment for a contact : `comment`
 
@@ -177,7 +177,7 @@ Examples:
 * `comment 2 c/Good at math.` will add the comment `Good at math` to the 2nd contact.
 * `comment 3 c/` will delete the comment for the 3rd contact.
 
-[_**See below for an example image of a person with a comment**_](#example-of-a-contact-with-status-and-comment)
+[_**See below for an example image of a person with a comment**_](#annotated-image-of-what-a-contact-with-status-module-and-comment)
 
 ### Adding a status for a contact : `status`
 
@@ -195,7 +195,7 @@ Examples:
 - `status 2 s/favourite` tags the 2nd contact in ModuleMate Finder as favourite.
 - `status 2 s/` will untag the 2nd contact in ModuleMate Finder, leaving them with no `Status`
 
-Annotated image of what a `contact` with `Status`, `Module`, and `Comment`  
+##### Annotated image of what a `contact` with `Status`, `Module`, and `Comment`  
 ![Example of a contact with Status and Comment](images/annotated_person.png)
 
 ### Copy contacts in list : `copy`
