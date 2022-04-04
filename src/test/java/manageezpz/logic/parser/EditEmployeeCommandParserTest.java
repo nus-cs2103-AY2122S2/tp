@@ -1,5 +1,6 @@
 package manageezpz.logic.parser;
 
+import static manageezpz.commons.core.Messages.MESSAGE_FIELD_NOT_EDITED;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -31,7 +32,7 @@ import manageezpz.model.person.Name;
 import manageezpz.model.person.Phone;
 import manageezpz.testutil.EditPersonDescriptorBuilder;
 
-public class EditCommandParserTest {
+public class EditEmployeeCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND, MESSAGE_USAGE);
@@ -45,7 +46,7 @@ public class EditCommandParserTest {
 
         // no field specified
         assertParseFailure(parser, "1",
-                EditEmployeeCommand.MESSAGE_NOT_EDITED + "\n" + MESSAGE_USAGE);
+                MESSAGE_FIELD_NOT_EDITED + "\n" + MESSAGE_USAGE);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
