@@ -17,12 +17,12 @@ public class ArchiveCommand extends RedoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Archives the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer and less than Integer.MAX_INT)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String ALT_MESSAGE_USAGE = ALT_COMMAND_WORD
             + ": Unarchives the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer and less than Integer.MAX_INT)\n"
             + "Example: " + ALT_COMMAND_WORD + " 1";
 
 

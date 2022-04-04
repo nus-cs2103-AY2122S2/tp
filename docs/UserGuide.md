@@ -95,6 +95,21 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Below is a table depicting the parameters used in Module Mate Finder and their respective constraints
+
+| Parameter | Constraint                                                                                 | Example             |
+|-----------|--------------------------------------------------------------------------------------------|---------------------|
+| Index     | Index must be a positive integer and be less than Integer.MAX_VALUE                        | 1, 2, 3             |
+| Name      | Names should only contain alphanumeric characters and spaces                               | Jerry Lee           |
+| Phone     | Phone number must be at least 3 digits short, and at most 25 digits long                   | 82309 1234          |    
+| Address   | Addresses must be within 60 characters long                                                | 57 Kent Ridge Drive | 
+| Email     | Emails must be of the format `local-part@domain`                                           | berniceYu@email.com |
+| Module    | Module names have 2-3 letters prefix followed by 4 digits and at most two optional letters | CS1101S             |
+| Status    | Status must either be `favourite`, `blacklist` or blank                                    | favourite           |
+| Comment   | Comments must be within 60 characters long                                                 | Good at teamwork    |
+| Format    | Format must either be `default`, `csv` or `json`                                           | csv                 |
+
+
 </div>
 
 

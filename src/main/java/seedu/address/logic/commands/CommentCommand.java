@@ -24,7 +24,7 @@ public class CommentCommand extends RedoableCommand {
             + "by the index number used in the displayed person list. "
             + "Existing comments will be overwritten by the input.\n"
             + "Use an empty value after c/ to delete the comment.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer and less than Integer.MAX_INT) "
             + PREFIX_COMMENT + "COMMENT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COMMENT + "Good at teamwork and programming";

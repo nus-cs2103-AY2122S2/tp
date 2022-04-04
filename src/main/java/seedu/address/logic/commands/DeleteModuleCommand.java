@@ -27,7 +27,7 @@ public class DeleteModuleCommand extends RedoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Clear specified modules of the person identified by the index "
             + "number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer and less than Integer.MAX_INT) "
             + "[" + PREFIX_MODULE + "MODULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE + "CS3230 " + PREFIX_MODULE + "CS1231S\n";
 
