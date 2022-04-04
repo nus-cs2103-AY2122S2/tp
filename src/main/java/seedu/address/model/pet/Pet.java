@@ -112,8 +112,6 @@ public class Pet {
                 && otherPet.getOwnerName().equals(getOwnerName())
                 && otherPet.getPhone().equals(getPhone())
                 && otherPet.getAddress().equals(getAddress())
-                && otherPet.getDiet().equals(getDiet())
-                && otherPet.getAppointment().equals(getAppointment())
                 && otherPet.getTags().equals(getTags());
     }
 
