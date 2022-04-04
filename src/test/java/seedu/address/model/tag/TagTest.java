@@ -46,7 +46,7 @@ public class TagTest {
 
         // valid name
         assertTrue(Tag.isValidTagName((" "))); // spaces only
-        assertTrue(Tag.isValidTagName(("  peter jack"  ))); // alphabets only
+        assertTrue(Tag.isValidTagName(("  peter jack  "))); // alphabets only
         assertTrue(Tag.isValidTagName(("12345"))); // numbers only
         assertTrue(Tag.isValidTagName(("peter the 2nd"))); // alphanumeric characters
         assertTrue(Tag.isValidTagName(("Capital Tan"))); // with capital letters
@@ -77,5 +77,5 @@ public class TagTest {
         assertTrue(Tag.isValidTagLength(validTagWithEqualsMaxCharacters));
         assertFalse(Tag.isValidTagLength(invalidTagWithOneMoreThanMaxCharacters));
     }
-
+    
 }
