@@ -3,11 +3,25 @@ layout: page
 title: User Guide
 ---
 
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of properties.
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of HDB properties.
 
 # Reference
 
 Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
+
+#Table of contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [General Commands](#general-commands)
+  - [Open Help Window: `help`](#open-help-window-help)
+  - [Listing all clients: `list`](#listing-all-clients--list)
+  - [Clearing all entries: `clear`](#clearing-all-entries--clear)
+  - [Exiting the program: `exit`](#exiting-the-program--exit)
+- [Client Management](#client-management)
+  - [Adding a client: `add`](#adding-a-client-add)
+  - [Editing a client: `edit`](#editing-a-client-edit)
+  - [Deleting a client: `delete`](#deleting-a-client-delete)
+  - [Favourite a client `favourite`](#favourite-a-client-favourite)
 
 ## Quick start
 
@@ -66,11 +80,45 @@ Parameter formats:
 - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
 - PRICE: `$` followed by a positive integer. e.g. `$150000`
 
-### Viewing help : `help`
+##General Commands
 
-Shows a message explaining how to access the help page.
+### Open Help Window: `help`
+
+Opens a new window that displays information on how to use the app and a URL to the user guide of the app.
 
 Format: `help`
+
+#### Navigating the help window
+
+<img src="images/user-guide/helpWindowUi.png" width="600px">
+
+1. Link to the full user guide.
+2. Buttons to access the different help sections.
+3. Help contents.
+
+### Listing all clients : `list`
+
+Shows a list of all clients in the address book.
+
+Format: `list`
+
+### Clearing all entries : `clear`
+
+Deletes all clients from the address book.
+
+Format: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All clients will be deleted! Use with caution.
+</div>
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+##Client Management
 
 ### Adding a client: `add`
 
@@ -79,7 +127,7 @@ Adds a client to RealEstatePro.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFERENCE] [i/FILEPATH:DESCRIPTION]`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Either a property or preference must be provided when adding a new user.
+Either a property or preference must be provided when adding a new user and only one of either type can be provided.
 </div>
 **Tip**: A person is either a `buyer`, or `seller` based on whether he has a property or a preference.
 
@@ -89,12 +137,6 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 
     ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addJohnDoeResult.png)
-
-### Listing all clients : `list`
-
-Shows a list of all clients in the address book.
-
-Format: `list`
 
 ### Editing a client: `edit`
 
@@ -116,6 +158,53 @@ Examples:
 - `edit 2 n/Betsy Crower pr/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing properties.
 - `edit 2 i/Living.png:living room` Edits 2nd person to only have `Living.png` and removes all other images.
 
+
+### Deleting a client: `delete`
+
+Deletes the specified client from the address book.
+
+Format: `delete INDEX`
+
+- Deletes the client at the specified `INDEX`.
+- The index refers to the index number shown in the displayed client list.
+- The index **must be a positive integer** 1, 2, 3, …
+
+Examples:
+
+- `list` followed by `delete 2` deletes the 2nd client in the address book.
+- `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+
+**Note**:
+- Images associated with the user are not deleted and remains in the OS file system.
+
+### Favourite a client: `favourite`
+
+Favourites the specified client in the RealEstatePro represented by a star as show below. The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
+
+![images/Favouritestar.png](images/Favouritestar.png)
+
+Format: `favourite INDEX`
+
+- Favourites the client at the specified `INDEX`.
+- The index refers to the index number shown in the displayed client list.
+- The index **must be a positive integer** 1, 2, 3, …
+
+#### Open Favourites window:
+
+Opens a new window that displays the compacted list of clients that have been favourited.
+
+#### By Command: `fw`
+
+Format: `fw`
+
+#### By Ui:
+
+1) Navigate to the `File` menu and click on it.
+
+2) Under it, click on `Favourites`.
+
+3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
+
 ### Locating clients by name: `find`
 
 Finds clients whose specified attribute contain any of the given keywords.
@@ -136,7 +225,7 @@ Examples:
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
-## Sorting persons
+### Sorting persons
 
 Sorts the list of persons displayed according to one or more keywords.
 
@@ -163,35 +252,12 @@ Examples:
 - `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`.
 - `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
 
-### Deleting a client: `delete`
-
-Deletes the specified client from the address book.
-
-Format: `delete INDEX`
-
-- Deletes the client at the specified `INDEX`.
-- The index refers to the index number shown in the displayed client list.
-- The index **must be a positive integer** 1, 2, 3, …
-
-Examples:
-
-- `list` followed by `delete 2` deletes the 2nd client in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
-
-**Note**:
-- Images associated with the user are not deleted and remains in the OS file system.
-
+##Tools
 ### Matching properties and preferences: `match`
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
 
 Format: `match`
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
 
 ### Upload an Image : `upload`
 
@@ -211,11 +277,6 @@ View images that are associated with a person in another window.
 
 Format `viewimage INDEX`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Setting a Reminder for a person: `remind`
 
@@ -241,48 +302,22 @@ Format: `rm`
 2) Under it, click on `Reminders`.
 3) The system will launc the `Reminders` window that contains a list of Persons the user has set Reminders for.
 
-### Favourite a client: `favourite`
 
-Favourites the specified client in the RealEstatePro represented by a star as show below. The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
+### Displaying statistics `stats`
+<img src="images/user-guide/Stats.png" height="400px">
 
-![images/Favouritestar.png](images/Favouritestar.png)
+Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
 
-Format: `favourite INDEX`
+#### By Command: `stats`
 
-- Favourites the client at the specified `INDEX`.
-- The index refers to the index number shown in the displayed client list.
-- The index **must be a positive integer** 1, 2, 3, …
+### Future Features **[Coming soon]**
+1. More types of sizes and increased details such as floor size, landed properties.
+2. Display statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
+3. Display statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
+4. Display statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
+5. Allow images to be associated with properties or preferences to allow for better organization
 
-### Open Favourites window:
-
-Opens a new window that displays the compacted list of clients that have been favourited.
-
-#### By Command: `fw`
-
-Format: `fw`
-
-#### By Ui:
-
-1) Navigate to the `File` menu and click on it.
-
-2) Under it, click on `Favourites`.
-
-3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
-
-### Open Help Window: `help`
-
-Opens a new window that displays information on how to use the app and a URL to the user guide of the app.
-
-Format: `help`
-
-## Navigating the help window
-
-<img src="images/user-guide/helpWindowUi.png" width="600px">
-
-1. Link to the full user guide.
-2. Buttons to access the different help sections.
-3. Help contents.
-
+##Storage
 ### Saving the data
 
 RealEstatePro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -291,22 +326,9 @@ RealEstatePro data are saved in the hard disk automatically after any command th
 
 RealEstatePro data are saved as a JSON file `[JAR file location]/data/realestatepro.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<aside>
-❗ **Caution:** If your changes to the data file makes its format invalid, RealEstatePro will discard all data and start with an empty data file at the next run.
-
-</aside>
-
-### Displaying statistics `stats`
-<img src="images/user-guide/stats.png" height="400px">
-
-Opens up a new window that shows a pie chart of the number of buyers & sellers with preference or properties respectively in a particular region.
-
-**[Future Version]** <br/>
-Displaying statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
-Displaying statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
-Displaying statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
-
-#### By Command: `stats`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, RealEstatePro will discard all data and start with an empty data file at the next run.
+</div>
 
 # FAQ
 
@@ -330,3 +352,14 @@ Displaying statistics of lower price and higher price of preferences of clients 
 | Favourites window | fw                                                                                                     | -                                                                                                                                    |
 | Statistics window | stats                                                                                                  | -                                                                                                                                    |
 | Reminder window   | rm                                                                                                     | -                                                                                                                                    |
+
+#Keyboard Shortcuts
+
+| Key | Function                |
+|-----|-------------------------|
+| F1  | Opens Help Window       |
+| F2  | Opens stats Window      |
+| F3  | Opens favourties Window |
+| F4  | Opens reminders Window  |
+
+
