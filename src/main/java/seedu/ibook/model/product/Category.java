@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Product's category in the ibook.
+ * Represents a Product's category in the iBook. Categories are case insensitive.
  * Guarantees: immutable; is valid as declared in {@link #isValidCategoryName(String)}
  */
 public class Category {

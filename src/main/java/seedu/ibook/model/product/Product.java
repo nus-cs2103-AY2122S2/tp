@@ -20,7 +20,7 @@ import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.item.UniqueItemList;
 
 /**
- * Represents a Product in the ibook.
+ * Represents a Product in the iBook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Product implements Distinguishable<Product> {
