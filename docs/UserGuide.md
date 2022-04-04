@@ -144,8 +144,8 @@ Adds module(s) to an existing contact
 Format: `addmodule INDEX m/MODULE [m/MODULE]...`
 
 * Adds modules represented by each module code `m/MODULE` to a contact at index `INDEX`
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 * `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
@@ -168,7 +168,8 @@ Format: `comment INDEX c/COMMENT`
 
 * Adds a comment for the contact at the specified `INDEX`.
 * A comment must be **within 60 characters long**
-* `INDEX` must be a **positive integer** 1, 2, 3, ...
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * Any existing comments for a contact will be overwritten by the new input.
 * If used with an **empty comment** (i.e. `comment 1 c/`), the command will be treated as a **delete
   command** and removes the comment of the specified contact.
@@ -186,7 +187,8 @@ Sets a contact's status as favourite or blacklisted.
 Format: `status INDEX s/STATUS`
 - Gives a status to the contact at specified `INDEX`
 - Status can either be a `blacklist` or `favourite`, a contact can have no status tagged.
-- `INDEX` must be a **positive integer** 1, 2, 3, ...
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 - If used with an **empty status field** (i.e. `status 1 s/`), the command will be treated as a **delete
   command** and removes the status of the specified contact.
 
@@ -207,8 +209,10 @@ Format: `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`
 
 * Copy contacts using specified field names.​
 * If no fields are specified, **all fields will be copied**.
-* Choose INDEX to copy a specific contact.
-* If no INDEX is specified, **all contacts will be copied**.
+* Choose `INDEX` to copy a specific contact.
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* If no `INDEX` is specified, **all contacts will be copied**.
 * Choice of format is default, csv and json.
 * **Default simply displays attribute line by line**, while csv format separates attributes via a `|` delimiter.
 * JSON format is a JSON object with attribute names as keys and attribute values as values, similar to application's save file.
@@ -249,8 +253,8 @@ Typing this command will cause you to lose all data. Use with caution!
 Format: `clearmodules INDEX`
 
 * Deletes all modules from the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 - `clearmodules 5` wipes all modules for contact in index 5.
@@ -262,8 +266,8 @@ Deletes the specified contact from ModuleMate Finder.
 Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in ModuleMate Finder.
@@ -291,7 +295,9 @@ Edits an existing contact in ModuleMate Finder.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * **Modules cannot be edited** through the `edit` command.
@@ -381,8 +387,8 @@ You can archive contacts into a separate contact list. Archiving a contact can k
 
 format: `archive INDEX`
 * Archives the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 * `list` followed by `archive 2` archives the 2nd contact in ModuleMate Finder.
@@ -399,8 +405,8 @@ You can also bring contacts back from the archives if necessary.
 
 format: `unarchive INDEX`
 * _Unarchives_ the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `Index` refers to the index number shown in the displayed contact list.
+* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 * `list` followed by `unarchive 5` _unarchives_ the 5th contact in ModuleMate Finder.
