@@ -193,7 +193,7 @@ application process for each role is at a glance.
 The following points explain the format of a command.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/COMPANY`, `COMPANY` is a parameter which can be used as `add n/Google`.
+  e.g. in `addCompany n/COMPANY e/EMAIL`, `COMPANY` and `EMAIL` represent parameters which can be used like `addCompany n/Google e/hr@google.com`.
 
 * Items in square brackets are optional.<br>
   e.g `n/COMPANY [p/PHONE_NUMBER]` can be used as `n/Google P/65427981` or as `n/Google`.
