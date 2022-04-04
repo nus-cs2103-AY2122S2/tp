@@ -2,7 +2,6 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
-import static unibook.commons.core.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static unibook.logic.commands.EditCommand.MESSAGE_WRONG_FIELDS;
 import static unibook.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -80,7 +79,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 throw new ParseException((MESSAGE_INVALID_INDEX + "\n" + EditCommand.MESSAGE_OPTION_NOT_FOUND));
             } else {
                 if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
-                    throw new ParseException(MESSAGE_INVALID_INDEX +  "\n" + EditCommand.PERSON_MESSAGE_USAGE, pe);
+                    throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.PERSON_MESSAGE_USAGE, pe);
                 } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
                     throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.MODULE_MESSAGE_USAGE, pe);
                 } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) {
@@ -104,7 +103,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
             if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()
-            || argMultimap.getValue(PREFIX_DATETIME).isPresent() || argMultimap.getValue(PREFIX_KEYEVENT).isPresent()) {
+                    || argMultimap.getValue(PREFIX_DATETIME).isPresent()
+                    || argMultimap.getValue(PREFIX_KEYEVENT).isPresent()) {
                 throw new ParseException(MESSAGE_WRONG_FIELDS + EditCommand.PERSON_MESSAGE_USAGE);
             }
 
