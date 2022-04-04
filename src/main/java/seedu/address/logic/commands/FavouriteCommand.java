@@ -9,7 +9,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.Reminder;
 import seedu.address.model.person.Person;
 import seedu.address.storage.ReminderPersons;
 
@@ -51,11 +50,8 @@ public class FavouriteCommand extends Command {
 
         // retrieve the person whose favourite status will be toggled
         Person personToFavourite = lastShownList.get(index.getZeroBased());
-        ReminderPersons reminderPersons = ReminderPersons.getInstance();
-        Reminder previousReminder = reminderPersons.remove(personToFavourite);
-        if (previousReminder != null) {
-            reminderPersons.add(personToFavourite.toggleFavourite(), previousReminder);
-        }
+        // update the Favourite status of a person with a Reminder
+        ReminderPersons.toggleFavouriteForReminder(personToFavourite);
 
         model.setFavouriteStatus(personToFavourite);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -28,6 +28,18 @@ public class ReminderPersons {
     }
 
     /**
+     * Updates the Favourite status of a {@code Person} with a Reminder.
+     */
+    public static void toggleFavouriteForReminder(Person personToFavourite) {
+        //
+        ReminderPersons reminderPersons = ReminderPersons.getInstance();
+        Reminder previousReminder = reminderPersons.remove(personToFavourite);
+        if (previousReminder != null) {
+            reminderPersons.add(personToFavourite.toggleFavourite(), previousReminder);
+        }
+    }
+
+    /**
      * Adds a person to the list of persons to be reminded of,
      * returns a boolean indicating if this person is in this list or not.
      * @param person The person to be reminded of.
