@@ -31,6 +31,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
     * Modified the constraints for `Phone` to allow country codes within the numbers. It is common that other contact management apps use this, and can cause problems when importing, so we decided to allow it.
     * Modified all existing error messages to have a specific format. i.e. `monospaced` for the command words, *italics* for parameters, etc.
+    * Modified existing `json` import to be more forgiving, i.e. skipping any invalid entries instead of completely wiping records if there exists an invalid entry. 
 
 * **Documentation**:
     * User Guide:
