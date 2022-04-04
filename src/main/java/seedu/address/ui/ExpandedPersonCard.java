@@ -75,14 +75,21 @@ public class ExpandedPersonCard extends UiPart<Region> {
 
         // displaying upcoming events
         upcomingEventsPanel = new EventListPanel(eventList);
-        upcomingEventsPanelPlaceholder.getChildren().add(upcomingEventsPanel.getRoot());
 
         if (eventList.size() > 0) {
             eventsHeader.setText("Upcoming Events:");
+            eventsHeader.setUnderline(true);
+            upcomingEventsPanelPlaceholder.getChildren().add(upcomingEventsPanel.getRoot());
+
         } else {
             eventsHeader.setText("");
-            upcomingEventsPanelPlaceholder.setMaxHeight(0);
-            upcomingEventsPanelPlaceholder.setMaxWidth(0);
+            //forces the size of eventsHeader to be (0, 0)
+            eventsHeader.setMaxSize(0,0);
+            eventsHeader.setMinSize(0,0);
+            //forces the size of upcomingEventsPanelPlaceholder to be (0, 0)
+            upcomingEventsPanelPlaceholder.setMaxSize(0, 0);
+            upcomingEventsPanelPlaceholder.setMinSize(0, 0);
+
         }
 
         //displaying each log
@@ -90,6 +97,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
 
         if (logList.size() > 0) {
             logsHeader.setText("Logs:");
+            logsHeader.setUnderline(true);
             StringBuilder sb = new StringBuilder();
             int numberOfLogs = logList.size();
             for (int i = 1; i <= numberOfLogs; i++) {

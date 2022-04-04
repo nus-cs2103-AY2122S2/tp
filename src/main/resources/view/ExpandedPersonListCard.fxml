@@ -51,18 +51,18 @@
             <font>
                <Font name="System Bold" size="13.0" />
             </font></Label>
-         <Label fx:id="eventsHeader" styleClass="cell_big_label" text="\$Upcoming Events:" wrapText="true">
+         <Label fx:id="eventsHeader" styleClass="cell_header_label" text="\$Upcoming Events:" wrapText="true">
             <VBox.margin>
-               <Insets top="30.0" />
+               <Insets top="10.0" />
             </VBox.margin>
             <font>
                <Font size="19.0" />
             </font>
          </Label>
          <StackPane fx:id="upcomingEventsPanelPlaceholder" minHeight="-Infinity" prefHeight="100.0" />
-         <Label fx:id="logsHeader" styleClass="cell_big_label" text="\$Logs:" wrapText="true">
+         <Label fx:id="logsHeader" styleClass="cell_header_label" text="\$Logs:" wrapText="true">
             <VBox.margin>
-               <Insets top="30.0" />
+               <Insets top="10.0" />
             </VBox.margin>
             <font>
                <Font size="19.0" />
