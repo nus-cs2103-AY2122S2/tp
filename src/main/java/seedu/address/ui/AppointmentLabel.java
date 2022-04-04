@@ -7,7 +7,7 @@ import seedu.address.model.pet.Appointment;
 
 public class AppointmentLabel {
     private static final String LABEL = "Appointment:";
-    private static final String LABEL_COLOR = "-fx-background-color: #FFFF00";
+    private static final String LABEL_COLOR = "-fx-background-color: #f9c74f";
 
     private AppointmentLabel() {}
 
