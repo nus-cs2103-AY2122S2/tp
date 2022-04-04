@@ -74,13 +74,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (hasRatingPrefix) {
             hasPrefix = true;
             String input = argumentMultimap.getValue(PREFIX_RATING).get();
-            input = input.replaceFirst("^0+(?!$)", "");
             keywordsArr = getRatingKeywords(input);
             for (int i = 0; i < keywordsArr.length; i++) {
-                keywordsArr[i] = keywordsArr[i].replaceAll("[^A-Za-z0-9]", "");
                 keywordsArr[i] = keywordsArr[i].replaceFirst("^0+(?!$)", "");
                 if (!Rating.isValidScore(keywordsArr[i])) {
-                    throw new ParseException(String.format(MESSAGE_INDEX_OUT_OF_BOUNDS, FindCommand.RATING_ERROR));
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.RATING_ERROR));
                 }
                 predicateArrayList.add(new RatingContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
             }
