@@ -102,7 +102,7 @@ public class JsonAdaptedModule {
             ModuleKeyEvent moduleKeyEvent = jsonKeyEvent.toModelType(module);
             if (module.hasEvent(moduleKeyEvent.getKeyEventType(), moduleKeyEvent.getKeyEventTiming())) {
                 throw new IllegalValueException(String.format(KEY_EVENT_ALREADY_IN_MODULE_MESSAGE_FORMAT,
-                        moduleKeyEvent.getKeyEventType(), moduleKeyEvent.getKeyEventDate(), module.getModuleCode()));
+                        moduleKeyEvent.getKeyEventType(), moduleKeyEvent.getKeyEventTiming(), module.getModuleCode()));
             }
             module.addKeyEvent(moduleKeyEvent);
         }

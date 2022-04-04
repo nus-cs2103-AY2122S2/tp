@@ -27,8 +27,9 @@ import unibook.storage.adaptedmodeltypes.JsonAdaptedStudent;
 @JsonRootName(value = "unibook")
 class JsonSerializableUniBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s).";
+    public static final String MESSAGE_DUPLICATE_PHONE = "Duplicate phone(s) found in storage.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Duplicate email(s) found in storage.";
+    public static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s)";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
@@ -82,10 +83,13 @@ class JsonSerializableUniBook {
         //add all stored people to unibook
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType(uniBook);
-            if (uniBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            if (uniBook.phoneNumberBeingUsed(person.getPhone())) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PHONE);
+            } else if (uniBook.emailBeingUsed(person.getEmail())) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EMAIL);
+            } else {
+                uniBook.addPerson(person);
             }
-            uniBook.addPerson(person);
         }
 
         //add all stored people to their associated modules in unibook

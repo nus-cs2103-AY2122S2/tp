@@ -6,25 +6,8 @@
       "phone": "87438807",
       "email": "alexyeoh@example.com",
       "tagged": [
-        "friends"
-      ],
-      "modules": [
-        "CS2106"
-      ],
-      "groups": [
-        {
-          "moduleCode": "CS2103",
-          "groupName": "W16-1"
-        }
-      ]
-    },
-    {
-      "type": "Student",
-      "name": "Alex Yeoh",
-      "phone": "87438807",
-      "email": "alexyeoh@example.com",
-      "tagged": [
-        "friends"
+        "friend",
+        "roommate"
       ],
       "modules": [
         "CS2106"
@@ -42,8 +25,7 @@
       "phone": "99272758",
       "email": "berniceyu@example.com",
       "tagged": [
-        "colleagues",
-        "friends"
+        "friend"
       ],
       "modules": [
         "CS2103"
@@ -61,7 +43,7 @@
       "phone": "93210283",
       "email": "charlotte@example.com",
       "tagged": [
-        "neighbours"
+        "helpful"
       ],
       "modules": [
         "CS2103"
@@ -78,14 +60,15 @@
         {
           "groupName": "W16-1",
           "meetingTimes": [
+            "2022-05-04T13:00:00",
             "2022-05-04T13:00:00"
           ]
         }
       ],
       "keyEvents" : [ {
-      "keyEventType" : "EXAM",
-      "keyEventTiming" : "2022-05-04T14:00:00"
-    } ]
+        "keyEventType" : "EXAM",
+        "keyEventTiming" : "2022-05-04T14:00:00"
+      } ]
     },
     {
       "moduleName": "Introduction to Operating Systems",
