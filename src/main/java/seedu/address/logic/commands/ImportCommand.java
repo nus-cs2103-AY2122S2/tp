@@ -30,7 +30,10 @@ public class ImportCommand extends Command {
     /**
      * Creates an ImportCommand to add the specified
      */
-    public ImportCommand(String filePath) {
+    public ImportCommand(String filePath) throws IllegalArgumentException {
+        if (filePath == null) {
+            throw new IllegalArgumentException("filepath is not specified");
+        }
         requireNonNull(filePath);
         toFile = filePath;
     }
@@ -45,8 +48,10 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException, ParseException {
         requireNonNull(model);
-
         File f = new File(toFile);
+        if (!f.exists()) {
+            throw new CommandException("the file cannot be found!");
+        }
         ImportFileParser converter = new ImportFileParser();
         List<String> res = converter.jsonToPerson(f);
         for (int i = 0; i < res.size(); i++) {
