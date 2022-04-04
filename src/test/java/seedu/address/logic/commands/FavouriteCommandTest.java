@@ -30,11 +30,11 @@ class FavouriteCommandTest {
         /* Runs test based on the starting favourite status of the first person in the address book */
         if (!personToFavourite.getFavourite().getStatus()) {
             assertEquals(
-                    String.format(FavouriteCommand.MESSAGE_UNFAVOURITE_PERSON_SUCCESS, personToFavourite.getName()),
+                    String.format(FavouriteCommand.MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite.getName()),
                     commandResult.getFeedbackToUser());
         } else {
             assertEquals(
-                    String.format(FavouriteCommand.MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite.getName()),
+                    String.format(FavouriteCommand.MESSAGE_UNFAVOURITE_PERSON_SUCCESS, personToFavourite.getName()),
                     commandResult.getFeedbackToUser());
         }
     }

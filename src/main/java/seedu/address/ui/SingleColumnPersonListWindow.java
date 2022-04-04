@@ -86,6 +86,7 @@ public class SingleColumnPersonListWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        logger.fine("The person panel has data of favourited clients now!");
         reminderStatus.setVisible(false);
         reminderStatus.setManaged(false);
         personListPanel = new PersonListPanel(logic.getFavouritedPersonList());
