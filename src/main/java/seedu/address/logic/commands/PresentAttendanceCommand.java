@@ -98,7 +98,7 @@ public class PresentAttendanceCommand extends Command {
                 petToEdit.getAppointment(), targetAttendanceHashMap);
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, presentAttendance));
     }

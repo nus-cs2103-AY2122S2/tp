@@ -59,7 +59,7 @@ public class DietCommand extends Command {
                 petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet));
     }

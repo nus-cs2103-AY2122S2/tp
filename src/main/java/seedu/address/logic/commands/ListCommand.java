@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetListToFullPetList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

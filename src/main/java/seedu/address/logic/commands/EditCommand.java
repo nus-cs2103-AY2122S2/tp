@@ -85,7 +85,7 @@ public class EditCommand extends Command {
         }
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
         return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet));
     }
 
