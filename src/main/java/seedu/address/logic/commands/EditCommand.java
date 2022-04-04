@@ -94,6 +94,14 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        model.deletePerson(personToEdit);
+
+        if (personToEdit.isDifferentPerson(editedPerson) && model.hasPerson(editedPerson)) {
+            model.addPerson(personToEdit);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.addPerson(personToEdit);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));

@@ -141,6 +141,21 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have different phone numbers or matriculation numbers or emails
+     * This helps to identify if any of the unique details of a person has been altered.
+     */
+    public boolean isDifferentPerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return false;
+        }
+        return otherPerson != null
+                && !(otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getMatriculationNumber().equals(getMatriculationNumber())
+                && otherPerson.getEmail().equals(getEmail()));
+    }
+
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
