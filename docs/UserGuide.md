@@ -205,7 +205,7 @@ The following points explain the format of a command.
   the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be
+* Additional parameters for commands that do not take in parameters (such as `help`, `list`, `exit`) will be
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -408,6 +408,11 @@ company that may come in handy during the internship application process.
 
 </div>
 
+<div markdown="block" class="alert alert-danger">
+:warning: If a prefix is specified, even for optional fields, the value after the prefix cannot be blank. e.g. `p/` only is not valid but `p/94442222` is valid.  
+</div>
+
+
 [Back to Table of Contents](#toc)
 
 ### Editing an existing company in the company list : `editCompany` <a id="c-edit-c"></a>
@@ -423,12 +428,13 @@ not, `editCompany` has got you covered. Simply edit the parts of the company det
   The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The `PHONE_NUMBER`, `EMAIL` and `ADDRESS` here can be left blank, allowing you to remove previously added information which may be erroneous.
 * More restrictions for command parameters can be found [here](#c-company-restrictions)
 
 **Examples:**
 
-* `list` followed by `editCompany 1 p/91234567 e/johndoe@example.com`edits the 1<sup>st</sup> company in the displayed
-  company list.
+* `list` followed by `editCompany 1 p/91234567 e/johndoe@example.com` edits the 1<sup>st</sup> company in the displayed company list.
+* `list` followed by `editCompany 1 p/ e/` removes `PHONE_NUMBER` and `EMAIL` from the 1<sup>st</sup> company in the displayed company list.
 * Refer to [Demo Use Case #3](#usecase3) for an example use case.
 
 [Back to Table of Contents](#toc)
@@ -547,6 +553,14 @@ company.
 
 </div>
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: If a prefix is specified, even for optional fields, the value after the prefix cannot be blank. e.g. `$/` only is not valid but `$/1000` is valid.
+
+</div>
+
+
+
 [Back to Table of Contents](#toc)
 
 ### Editing an existing role from company : `editRole` <a id="c-edit-r"></a>
@@ -566,7 +580,9 @@ Just got invited to an interview? Keep your internship role status and other det
 
 **Examples:**
 
-* `list` followed by `editRole 1 1 [s/offered] [$/3000]` edits the 1<sup>st</sup> role from the 1<sup>st</sup> company
+* `list` followed by `editRole 1 1 s/offered $/3000` edits the 1<sup>st</sup> role from the 1<sup>st</sup> company
+  in the displayed company list.
+* `list` followed by `editRole 1 1 r/ d/ $/` removes `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` from the 1<sup>st</sup> role from the 1<sup>st</sup> company
   in the displayed company list.
 * Refer to [Demo Use Case #3](#usecase3) for an example use case.
 
