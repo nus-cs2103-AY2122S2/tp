@@ -129,7 +129,7 @@ public class UpdateCommandTest {
 
     /**
      * Update filtered list where index is larger than size of filtered list,
-     * but smaller than size of ibook
+     * but smaller than size of iBook.
      */
     @Test
     public void execute_invalidProductIndexFilteredList_failure() {
