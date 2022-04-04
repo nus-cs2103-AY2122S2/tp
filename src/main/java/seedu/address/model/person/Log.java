@@ -65,8 +65,7 @@ public class Log {
     @Override
     public String toString() {
         return this.title + "\n"
-                + (this.description.value == null ? "" : this.description)
-                + "\n\n";
+                + (this.description.value == null ? "" : this.description + "\n");
     }
 
     @Override

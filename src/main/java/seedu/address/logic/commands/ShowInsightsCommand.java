@@ -20,7 +20,8 @@ public class ShowInsightsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model); // sanity check
-        // simply directs UI to show
+
+        // simply directs UI to show, since UI handles updating
         return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
     }
 

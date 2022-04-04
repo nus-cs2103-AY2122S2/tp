@@ -206,6 +206,9 @@ public class MainWindow extends UiPart<Stage> {
         boolean isExpandedCard = commandResult.isShowFriendCommand();
         if (showInsight) {
             tabs.getSelectionModel().select(personInsightsListTab);
+            // dynamically reload component
+            personInsightListPanel = new PersonInsightListPanel(logic.getInsightsList());
+            personInsightListPanelPlaceholder.getChildren().set(0, personInsightListPanel.getRoot());
             personInsightListPanelPlaceholder.requestFocus();
         } else if (event) {
             tabs.getSelectionModel().select(eventsListTab);
