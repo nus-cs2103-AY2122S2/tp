@@ -44,7 +44,6 @@ public class JsonAdaptedLessonTest {
         assertEquals(TEMPORARY_LESSON, lesson.toModelType());
     }
 
-
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
