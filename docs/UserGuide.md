@@ -187,7 +187,7 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
   * `find e/example@u.nus.edu student@u.nus.edu` is not possible as `find` command only supports finding one `EMAIL` at a time (e.g. `find e/example@u.nus.edu` or `find e/student@u.nus.edu`).
   * `find p/12345678 87654321` is not possible as `find` command only supports finding one `PHONE_NUMBER` at a time (e.g. `find p/12345678` or `find p/87654321`).
 
-Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]` for these `PREFIX`: `n/`, `a/`, `t/`
+Format: `find PREFIX/KEYWORD [MORE_KEYWORDS]...` for these `PREFIX`: `n/`, `a/`, `t/`
 
 Format: `find PREFIX/KEYWORD` for these `PREFIX`: `e/`, `p/`
 
@@ -454,9 +454,9 @@ Action | Format, Examples
 --------|------------------
 **View help** | `help`
 **List all student contacts** | `list`
-**Find name** | `find n/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
-**Find academic major** | `find a/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find a/Computer Science`
-**Find tag** | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friends colleagues`
+**Find name** | `find n/KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find n/James Jake`
+**Find academic major** | `find a/KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find a/Computer Science`
+**Find tag** | `find t/KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find t/friends colleagues`
 **Find phone number** | `find p/KEYWORD`<br> e.g., `find p/12345678`
 **Find email** | `find e/KEYWORD`<br> e.g., `find e/example@u.nus.edu`
 **Clear entries** | `clear`
@@ -466,7 +466,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends`
+**Add student contact information** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC_MAJOR [t/TAG]...` <br> e.g., `add n/John Doe p/12345678 e/johndoe@u.nus.edu a/Computer Science t/friends`
 **Delete student contact information** | `delete INDEX` <br> e.g., `delete 1`
 **Display the student contacts in a group** | `viewcontact g/GROUP_NAME` <br> e.g., `viewcontact g/CS2103-W16-3`
 
