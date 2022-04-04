@@ -94,7 +94,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        
+
         tabs.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
             public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
@@ -104,7 +104,6 @@ public class MainWindow extends UiPart<Stage> {
                 }
             }
         });
-        
     }
 
     public Stage getPrimaryStage() {
