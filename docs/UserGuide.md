@@ -86,7 +86,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
   * `dd-mm-yyyy`
   * `dd/mm/yyyy`
   * `dd MMM yyyy` with the date components appearing in any order.<br>
-    If a component appears more than once, **only the last** appearance will be taken.
+    If a component appears more than once, the date is considered invalid.
 
 | Field | Description |
 | - | - |

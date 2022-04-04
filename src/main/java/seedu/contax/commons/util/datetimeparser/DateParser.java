@@ -74,6 +74,22 @@ public class DateParser {
      */
     private static Optional<Matcher> matchNaturalFormat(String input) {
         final String paddedLowerCaseInput = " " + input.toLowerCase() + " ";
+
+        // Check if there are duplicates
+        Matcher dayMatch = DateParserPatternProvider.NATURAL_DAY_OF_MONTH_PATTERN.matcher(paddedLowerCaseInput);
+        Matcher monthMatch = DateParserPatternProvider.NATURAL_MONTH_PATTERN.matcher(paddedLowerCaseInput);
+        Matcher yearMatch = DateParserPatternProvider.NATURAL_YEAR_PATTERN.matcher(paddedLowerCaseInput);
+
+        // There is < 1 occurrence of the component.
+        if (!dayMatch.find() || !monthMatch.find() || !yearMatch.find()) {
+            return Optional.empty();
+        }
+        // There is > 1 occurrence of the component. It takes end - 1 because they may share the space
+        if (dayMatch.find(dayMatch.end() - 1) || monthMatch.find(monthMatch.end() - 1)
+                || yearMatch.find(yearMatch.end() - 1)) {
+            return Optional.empty();
+        }
+
         Matcher match = DateParserPatternProvider.NATURAL_DATE_PATTERN.matcher(paddedLowerCaseInput);
         if (!match.matches()) {
             return Optional.empty();
