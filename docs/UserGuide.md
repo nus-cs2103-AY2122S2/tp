@@ -9,20 +9,6 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 * Table of Contents
 {:toc}
-  * Quick Start
-  * Features
-    * Getting help : help
-    * Adding a player/ lineup/ schedule: add
-    * Deleting a player/ lineup/ schedule: delete
-    * Putting a player to a lineup: put
-    * Viewing player/schedule/lineup: view
-    * Sort players by height/ jersey number/ weight: sort
-    * Edit a player/ lineup/ schedule information : edit
-    * Clearing all entries : clear
-    * Changing the theme of the UI: theme
-    * Exiting the program : exit
-  * FAQ
-  * Command Summary
 
 --------------------------------------------------------------------------------------------------------------------
 
