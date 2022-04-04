@@ -183,10 +183,9 @@ Click <img align="center" src = "images/ui-icons/add-product.png" alt="Add Produ
 A pop-up window will appear, allowing you to fill in the details for name, price, description. 
 Optionally, you can also fill in the category, discount rate and discount start. 
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-:bulb: **Tip:**
-Required field has a red asterisk `*` beside the label
+:information_source: Required fields have a red asterisk `*` beside its label.
 
 </div>
 
@@ -275,10 +274,9 @@ Example:
 
 Click <img align="center" src = "images/ui-icons/x.png" alt="X" height = "25"/> on the filter tag to remove the filtering.
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-:bulb: **Tip:**
-A filter tag will always appear whenever a command that involves filtering is entered.
+:information_source: A filter tag will always appear whenever a command that involves filtering is entered.
 
 </div>
 
@@ -321,8 +319,7 @@ Format: `delete-all`
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**
-If you accidentally used this command, you can use `undo` command to undone `delete-all`
+:bulb: If you accidentally used this command, you can use `undo` command to recover back to the previous state.
 
 </div>
 
@@ -350,6 +347,12 @@ A pop-up window will appear, allowing you to fill in the details for expiry date
 
 After filling in the required fields, click
 <img align="center" src = "images/ui-icons/add-icon.png" alt="Add Item" height = "25"/>
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can add already expired items by inputting expiry dates in the past!
+
+</div>
 
 #### 3.2.2 Updating an item of a product : `update-item`
 
