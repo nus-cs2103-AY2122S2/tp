@@ -11,6 +11,7 @@ The app also includes various tools which aims to help agents in their work.
 Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
 
 #Table of contents
+- [Glossary](#glossary)
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [General Commands](#general-commands)
@@ -40,6 +41,12 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
+
+## Glossary
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property.
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 ## Quick start
 
