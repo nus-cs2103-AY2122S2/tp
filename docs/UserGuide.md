@@ -379,8 +379,8 @@ If your changes to the data file makes its format invalid, RealEstatePro will di
 | Key | Function                |
 |-----|-------------------------|
 | F1  | Opens Help Window       |
-| F2  | Opens stats Window      |
-| F3  | Opens favourties Window |
-| F4  | Opens reminders Window  |
+| F2  | Opens Statistics Window |
+| F3  | Opens Favourites Window |
+| F4  | Opens Reminders Window  |
 
 
