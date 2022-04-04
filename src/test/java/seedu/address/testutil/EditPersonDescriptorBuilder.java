@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -55,8 +56,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code ModuleCode} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withModuleCode(String name) {
-        descriptor.setName(new Name(name));
+    public EditPersonDescriptorBuilder withModuleCode(String moduleCode) {
+        descriptor.setModuleCode(new ModuleCode(moduleCode));
         return this;
     }
 
