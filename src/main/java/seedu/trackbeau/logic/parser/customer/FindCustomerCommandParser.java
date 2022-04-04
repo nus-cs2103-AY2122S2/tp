@@ -13,6 +13,7 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
 import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.NON_TAG_ATTRIBUTE_COUNT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,11 +58,9 @@ public class FindCustomerCommandParser implements Parser<FindCustomerCommand> {
 
         for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                //parseAddress is used because it allows for all formats except for empty strings
-                //using add will cause the size of the list to be wrong
                 prefixArr.set(i,
                     Arrays.asList(ParserUtil
-                        .parseAddress(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                        .parseFindValues(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
             }
         }
 

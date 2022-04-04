@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackbeau.model.customer.Address.VALIDATION_REGEX;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,7 +31,7 @@ import seedu.trackbeau.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
+    private final static String FIND_MESSAGE_CONSTRAINTS = "Find Command can take any values, but it should not be blank";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -290,4 +291,14 @@ public class ParserUtil {
         }
         return new Feedback(trimmedFeedback);
     }
+
+    public static String parseFindValues(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+        if (!value.matches(VALIDATION_REGEX)) {
+            throw new ParseException(FIND_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedValue;
+    }
+
 }

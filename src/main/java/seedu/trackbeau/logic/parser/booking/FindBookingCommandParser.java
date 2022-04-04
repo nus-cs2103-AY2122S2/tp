@@ -1,9 +1,11 @@
 package seedu.trackbeau.logic.parser.booking;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.trackbeau.model.booking.BookingSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
+import static seedu.trackbeau.model.customer.Address.VALIDATION_REGEX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.logic.parser.Prefix;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.booking.BookingSearchContainsKeywordsPredicate;
+import seedu.trackbeau.model.customer.Address;
 
 /**
  * Parses input arguments and creates a new FindBookingCommand object
@@ -44,15 +47,15 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
 
         for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                //parseAddress is used because it allows for all formats except for empty strings
                 //using add will cause the size of the list to be wrong
                 prefixArr.set(i,
                         Arrays.asList(ParserUtil
-                                .parseAddress(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                                .parseFindValues(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
             }
         }
 
         return new FindBookingCommand(new BookingSearchContainsKeywordsPredicate(prefixArr));
 
     }
+
 }

@@ -14,7 +14,7 @@ import seedu.trackbeau.model.tag.Tag;
  */
 public class CustomerSearchContainsKeywordsPredicate implements Predicate<Customer> {
     public static final int FIND_ATTRIBUTE_COUNT = 11;
-    private static final int NON_TAG_ATTRIBUTE_COUNT = 8;
+    public static final int NON_TAG_ATTRIBUTE_COUNT = 8;
     private final ArrayList<List<String>> keywordsList;
     /**
      * Constructs a {@code Predicate}.
@@ -31,12 +31,23 @@ public class CustomerSearchContainsKeywordsPredicate implements Predicate<Custom
     public boolean test(Customer customer) {
         String[] find = {"getName", "getPhone", "getEmail", "getAddress", "getSkinType",
             "getHairType", "getBirthdate", "getRegDate", "getStaffs", "getServices", "getAllergies"};
-        String searchString = "";
 
         try {
             for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
+                //keywords contains the information that user wants to find for a particular attribute
                 List<String> keywords = keywordsList.get(i);
+
+                //customer is not searching about this attribute
+                if (keywords == null) {
+                    continue;
+                }
+
+                //else if customer is searching about the attribute, we check if there is a match with customer info
+                boolean isCustomerInformationMatchKeyword = false;
+
+                String searchString = ""; //searchString contains the existing customer information
                 if (i < NON_TAG_ATTRIBUTE_COUNT) {
+                    //get customer detail
                     searchString = customer.getClass().getDeclaredMethod(find[i]).invoke(customer).toString();
                 } else {
                     // Will always return type Set<Tag> from the 3 possible methods in the Customer class.
@@ -47,15 +58,18 @@ public class CustomerSearchContainsKeywordsPredicate implements Predicate<Custom
                     }
                 }
 
-                if (keywords == null) {
-                    continue;
-                }
-
+                //loop through the keywords individually to check if match with customer information
                 for (String keyword : keywords) {
-                    if (StringUtil.containsWordIgnoreCase(searchString, keyword)) {
-                        return true;
+                    //if find stp/Jason, stp/Jessica, return customers who like either
+                    searchString = searchString.toLowerCase();
+                    keyword = keyword.toLowerCase();
+                    if (searchString.contains(keyword)) {
+                        isCustomerInformationMatchKeyword = true;
                     }
                 }
+
+                return isCustomerInformationMatchKeyword;
+
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
@@ -82,4 +96,5 @@ public class CustomerSearchContainsKeywordsPredicate implements Predicate<Custom
         }
         return true;
     }
+
 }
