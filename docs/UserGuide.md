@@ -186,7 +186,7 @@ Edits an existing log of an existing friend in _Amigos_.
 
 Deletes an existing log or logs of an existing friend in _Amigos_.
 
-**Format**: `deletelog INDEX ? n/NAME id/LOG_INDEX` or `deletelog INDEX ? n/NAME -a` or `deletelog -a`
+**Format**: `deletelog INDEX ? n/NAME id/LOG_INDEX ? -a` or `deletelog -a`
 
 There are three cases of usage: 
 * If `INDEX` or `NAME` is provided as well as `LOG_INDEX`, then that specific log will be deleted.
