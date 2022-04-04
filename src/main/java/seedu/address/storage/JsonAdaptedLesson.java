@@ -28,7 +28,7 @@ class JsonAdaptedLesson {
     private final String subject;
     private final String lessonAddress;
     private final JsonAdaptedDateTimeSlot dateTimeSlot;
-    private final boolean isRecurring;
+    private final Boolean isRecurring;
     private final List<JsonAdaptedStudent> assignedStudents = new ArrayList<>();
 
     /**
@@ -71,7 +71,7 @@ class JsonAdaptedLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted temporary lesson.
      */
     public Lesson toModelType() throws IllegalValueException {
-        checkFieldsArePresent(lessonName, subject, lessonAddress, dateTimeSlot, isRecurring);
+        checkFieldsArePresent(lessonName, subject, lessonAddress, dateTimeSlot, isRecurring, assignedStudents);
         checkFieldsAreValid(lessonName, subject, lessonAddress);
 
         LessonName modelLessonName = new LessonName(lessonName);

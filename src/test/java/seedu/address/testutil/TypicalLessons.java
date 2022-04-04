@@ -10,4 +10,5 @@ public class TypicalLessons {
     public static final Lesson RECURRING_LESSON = new RecurringLessonBuilder().build();
 
     private TypicalLessons() {} // prevents instantiation
+
 }
