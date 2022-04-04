@@ -24,7 +24,7 @@ public class AddTestResultCommand extends Command {
             + PREFIX_TYPE + "test"
             + ": Adds the results of a test taken for a patient in the MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "test"
+            + PREFIX_TYPE + "test "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
