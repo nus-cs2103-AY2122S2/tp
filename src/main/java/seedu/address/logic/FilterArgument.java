@@ -16,7 +16,7 @@ public class FilterArgument {
      */
     public FilterArgument(String argument) {
         requireNonNull(argument);
-        checkArgument(argument.isEmpty(), MESSAGE_CONSTRAINTS);
+        checkArgument(!argument.isEmpty(), MESSAGE_CONSTRAINTS);
         this.argument = argument;
     }
 
