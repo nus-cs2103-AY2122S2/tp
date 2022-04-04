@@ -31,7 +31,7 @@ As Tracey is a Command Line Interface, these are the aspects that highlight the 
 
 Sounds exciting? Proceed on to the next section to learn more about Tracey!
 
-We hope you enjoy Tracey as much as we did developing it!
+We hope you enjoy Tracey as much as we did when developing it!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,7 +205,7 @@ Format: `edit INDEX n/NAME ...`
 * To edit a student's details, you can use the command `edit` with the student's `INDEX` and the corresponding field prefix (mentioned in Figure 3 above).
   The index **must be a positive integer** 1, 2, 3, …
 * The correct prefixes must be used in order for Tracey to know what you intend to edit.
-* Refer to Table 2 in the <a href='#glossary'>glossary</a> for the correct format and pre-defined constants to be used for each input field.
+* Refer to Table 4 in the <a href='#glossary'>glossary</a> for the correct format and pre-defined constants to be used for each input field.
 * Existing information of the student will be replaced with the newly inputted values.
 * When editing tags, all existing tags will be replaced with the newly inputted tag(s). <br>
   i.e. Adding tags is not cumulative. All new tags will replace all old tags.
@@ -276,10 +276,10 @@ Find a particular contact in Tracey and retrieve their specific details.
 
 Format: `find NAME`
 * Returns the student(s) whose name(s) contain the input keyword `NAME` with their **details**.
-* The **details** provided are the student's `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+* A list of students will be returned along with their **details** including their `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` and `Covid Status`.
 * A screenshot (Figure 6) is provided below to demonstrate what the find function returns.
-* The search is case-insensitive. e.g `johnDoe` will match `Johndoe`.
-* The search does not require full name. e.g. `jo` will match `Joe` and `John`.
+* The search is case-insensitive. e.g. `johnDoe` will match `Johndoe`.
+* The input keyword does not need to be a full name. e.g. `jo` will match `Joe` and `John`.
 
 Examples of usages:
 
@@ -298,8 +298,8 @@ Filter students based on faculties, health statuses and/or blocks.
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
 
 * Returns a list of students that fit the criteria given by the user in the form of pre-defined constants in the categories of faculty, covid status and block.
-* Refer to Table 2 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
-* The search is case-insensitive. e.g `Positive` will match `positive`.
+* Refer to Table 4 in the <a href='#glossary'>glossary</a> for the list of pre-defined constants to be used for these 3 categories.
+* The search is case-insensitive. e.g. `Positive` will match `positive`.
 * The order of fields specified does not matter e.g. `filter f/soc cs/positive` and `filter cs/positive f/soc` will return the same result.
 * At least one field has to be specified, but not all need to be e.g. `filter` is invalid, but `filter b/A` is valid.
 
@@ -431,11 +431,11 @@ there are changes to Tracey.
    **A**: They can be found in the numbers located beside each individual student. <br>
    ![FAQ_IndexLocation](images/FAQ_IndexLocation.png) *Figure 5: Screenshot of index location.*
 
-5. **Q**: The `delete` feature only allow us to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `delete` on? <br>
+5. **Q**: The `delete` feature only allow me to delete via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student I want to use `delete` on? <br>
    **A**: The `INDEX` used for `delete` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `delete`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
 
-6. **Q**: The `edit` feature only allow us to edit via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student i want to use `edit` on? <br>
+6. **Q**: The `edit` feature only allow me to edit via the `INDEX` assigned to each particular student. How do I know the `INDEX` of the student I want to use `edit` on? <br>
    **A**: The `INDEX` used for `edit` is not fixed. It relies on the number in which the displayed list of students will assign.
    You can use `find` `STUDENT` to get his/her `INDEX` and then apply `edit`. This can save you time scrolling down an entire list to get his/her `INDEX`! <br>
 
@@ -450,18 +450,22 @@ there are changes to Tracey.
 
 | No. | Command     | Description                                                                               | Example                                                                                                                                |
 |-----|-------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| 1.  | `find`      | Find a particular student                                                                 | `find alex` \n `find j`                                                                                                                |
-| 2.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/level1 t/leader` |
-| 3.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 1.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
+| 2.  | `import`    | Add a list of students from an Excel file into Tracey                                     | -                                                                                                                                      |
+| 3.  | `add`       | Add a student to the Tracey Database                                                      | `add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` |
 | 4.  | `edit`      | Change particulars of a student                                                           | `edit 1 p/91234567 e/johndoe@example.com`                                                                                              |
-| 5.  | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
-| 6.  | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
-| 7.  | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
-| 8.  | `help`      | In-app support to understand how the commands work in Tracey                              | `help`                                                                                                                                 |
-| 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/HEALTH_STATUS f/FACULTY`                                                                                                    |
-| 10. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 5.  | `delete`    | Remove a student from Tracey                                                              | `delete 2`                                                                                                                             |
+| 6.  | `undo`      | Undo a `add`, `edit` or `delete` command                                                  | `undo`                                                                                                                                 |
+| 7.  | `redo`      | Reverse an `undo` command                                                                 | `redo`                                                                                                                                 |
+| 8.  | `find`      | Find a particular student                                                                 | `find alex` <br> `find j`                                                                                                              |
+| 9.  | `filter`    | Retrieve list of people based on tags                                                     | `filter cs/positive f/soc b/e`                                                                                                         |
+| 10. | `list`      | Get a list of everyone in Tracey                                                          | `list`                                                                                                                                 |
 | 11. | `email`     | Opens a window of all student's in the current list which can be copied to your clipboard | `email`                                                                                                                                |
-| 12. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                              |
+| 12. | `summarise` | Summarise data into a list and pie charts for an overview                                 | `summarise`                                                                                                                            |
+| 13. | `archive`   | Archives the Tracey Database                                                              | `archive`                                                                                                                              |
+| 14. | `clear`     | Format the Tracey Database                                                                | `clear`                                                                                                                                |
+| 15. | `resize`    | Resizes the result display window                                                         | `resize 1`                                                                                                                             |
+| 16. | `exit`      | Closes the application                                                                    | `exit`                                                                                                                                 |
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -471,13 +475,13 @@ there are changes to Tracey.
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
-| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                          | Constraints |
-|:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:--------------------:|
-| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces. |
-| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long. |
+| **Prefix** | **Meaning** |    **Pre-defined constants**                                                                              | Constraints                                                             |
+|:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
+| `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
+| `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
 | `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
-| `a/`  | Address              | None                                                                                                  | Cannot be blank. |
-| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS` | Can only be one of the pre-defined constants, and is case-insensitive. |
+| `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
+| `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
 | `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
 | `cs/` | Covid Status         | `Positive` `Negative` `HRN`                                                                       | Can only be one of the pre-defined constants, and is case-insensitive. |
 | `b/`  | Block                | `A` `B` `C` `D` `E`                                                                               | Can only be one of the pre-defined constants, and is case-insensitive. |

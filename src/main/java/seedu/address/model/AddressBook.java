@@ -122,6 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void restoreHistory() {
         this.persons.setPersons(this.personsHistory);
+        resetHistory();
     }
 
     /**
@@ -129,6 +130,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public UniquePersonList getHistory() {
         return this.personsHistory;
+    }
+
+    /**
+     * Resets personsOriginal to null.
+     */
+    public void resetHistory() {
+        this.personsHistory = null;
     }
 
     /**
@@ -144,6 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void restoreOriginal() {
         this.persons.setPersons(this.personsOriginal);
+        resetOriginal();
     }
 
     /**
