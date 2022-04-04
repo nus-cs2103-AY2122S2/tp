@@ -4,6 +4,7 @@ title: User Guide
 ---
 
 RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of HDB properties.
+The app also includes various tools which aims to help agents in their work.
 
 # Reference
 
@@ -32,7 +33,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
   - [Setting a reminder for a person: `remind`](#setting-a-reminder-for-a-person-remind)
   - [Open Reminder window: `rm`](#open-reminder-window)
   - [Displaying statistics: `stats`](#displaying-statistics-stats)
-  - [Future Features](#future-features-coming-soon)
+- [Future Features](#future-features-coming-soon)
 - [Storage](#storage)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
@@ -323,7 +324,7 @@ Opens up a new window that shows a pie chart of the number of buyers & sellers w
 
 Format: `stats`
 
-### Future Features **[Coming soon]**
+## Future Features **[Coming soon]**
 1. More types of sizes and increased details such as floor size, landed properties.
 2. Display statistics of the number of properties being sold/bought categorized by their room size to provide insight on the most popular number of rooms in a property.
 3. Display statistics of the prices of properties sold/bought to provide insight on the average property price sold/bought.
