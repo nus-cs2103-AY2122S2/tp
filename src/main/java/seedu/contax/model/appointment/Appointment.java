@@ -15,7 +15,7 @@ import seedu.contax.model.person.Person;
  */
 public class Appointment extends ScheduleItem {
 
-    // Appointment identification fields
+    // Appointment is identified by its starting Date-Time.
     private final StartDateTime startDateTime;
 
     // Data fields
@@ -71,6 +71,10 @@ public class Appointment extends ScheduleItem {
         return this.startDateTime.value;
     }
 
+    /**
+     * Returns the {@link StartDateTime} of this Appointment.
+     * Note that this is different from {@link #getStartDateTime()}, which returns a {@code LocalDateTime}.
+     */
     public StartDateTime getStartDateTimeObject() {
         return this.startDateTime;
     }
@@ -118,7 +122,7 @@ public class Appointment extends ScheduleItem {
     }
 
     /**
-     * Returns true if both appointments have the same name and data fields.
+     * Returns true if both appointments have the same starting Date-Time and data fields.
      * This defines a stronger notion of equality between two appointments.
      */
     @Override
@@ -160,7 +164,7 @@ public class Appointment extends ScheduleItem {
     }
 
     /**
-     * Extracts the LocalDateTime object from the supplied StartDateTime object.
+     * Extracts the encapsulated LocalDateTime object from the supplied StartDateTime object.
      *
      * @param startDateTimeObject The StartDateTime container to extract from.
      * @return The extracted LocalDateTime object.

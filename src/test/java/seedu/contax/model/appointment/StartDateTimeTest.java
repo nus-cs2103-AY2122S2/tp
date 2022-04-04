@@ -22,7 +22,7 @@ public class StartDateTimeTest {
     public void stringConversion() {
         LocalDateTime referenceTime = LocalDateTime.parse("2020-10-30T12:34:56");
         LocalDateTime referenceNow = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(StartDateTime.DATETIME_FORMAT);
+        DateTimeFormatter formatter = StartDateTime.DATETIME_FORMATTER;
 
         assertEquals("30-10-2020 12:34", new StartDateTime(referenceTime).toString());
         assertEquals(referenceNow.format(formatter), new StartDateTime(referenceNow).toString());

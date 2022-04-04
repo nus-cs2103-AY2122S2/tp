@@ -4,7 +4,7 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 
 /**
- * Represents an empty slot in the schedule. Time related functionality is handled in the superclass
+ * Represents an empty slot in the Schedule. Time related functionality is handled in the superclass
  * {@link ScheduleItem}.
  */
 public class AppointmentSlot extends ScheduleItem {
