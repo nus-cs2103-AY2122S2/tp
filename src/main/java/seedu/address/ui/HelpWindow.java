@@ -108,7 +108,7 @@ public class HelpWindow extends UiPart<Stage> {
             + NEWLINE_AND_INDENTATION
             + "Format: archive\n"
 
-            + "\n13. RESIZE the display of the response box according to size 1, 2 or 3."
+            + "\n15. RESIZE the display of the response box according to size 1, 2 or 3."
             + NEWLINE_AND_INDENTATION
             + "Format: RESIZE SIZE"
             + NEWLINE_AND_INDENTATION
