@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddModulesCommandParser" as AddModulesCommandParser LOGIC_COLOR
+participant "a:AddModulesCommand" as AddModulesCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addmodules 1 m/CS2103T")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addmodules 1 m/CS2103T")
+activate AddressBookParser
+
+create AddModulesCommandParser
+AddressBookParser -> AddModulesCommandParser
+activate AddModulesCommandParser
+
+AddModulesCommandParser --> AddressBookParser
+deactivate AddModulesCommandParser
+
+AddressBookParser -> AddModulesCommandParser : parse("1 m/CS2103T")
+activate AddModulesCommandParser
+
+create AddModulesCommand
+AddModulesCommandParser -> AddModulesCommand
+activate AddModulesCommand
+
+AddModulesCommand --> AddModulesCommandParser : a
+deactivate AddModulesCommand
+
+AddModulesCommandParser --> AddressBookParser : a
+deactivate AddModulesCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddModulesCommandParser -[hidden]-> AddressBookParser
+destroy AddModulesCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddModulesCommand : execute()
+activate AddModulesCommand
+
+AddModulesCommand -> Model : setPerson()
+activate Model
+
+Model --> AddModulesCommand
+deactivate Model
+
+create CommandResult
+AddModulesCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddModulesCommand
+deactivate CommandResult
+
+AddModulesCommand --> LogicManager : result
+deactivate AddModulesCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

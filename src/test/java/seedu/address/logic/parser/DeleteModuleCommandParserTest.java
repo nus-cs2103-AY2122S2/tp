@@ -16,15 +16,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteModuleCommand;
+import seedu.address.logic.commands.DeleteModulesCommand;
 import seedu.address.model.module.Module;
 
-class DeleteModuleCommandParserTest {
+class DeleteModulesCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModulesCommand.MESSAGE_USAGE);
 
-    private DeleteModuleCommandParser parser = new DeleteModuleCommandParser();
+    private DeleteModulesCommandParser parser = new DeleteModulesCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -32,7 +32,7 @@ class DeleteModuleCommandParserTest {
         assertParseFailure(parser, VALID_MODULE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", DeleteModuleCommandParser.MESSAGE_EMPTY);
+        assertParseFailure(parser, "1", DeleteModulesCommandParser.MESSAGE_EMPTY);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -66,7 +66,7 @@ class DeleteModuleCommandParserTest {
         List<Module> expectedModules = new ArrayList<>();
         expectedModules.add(new Module(VALID_MODULE_SWE));
         expectedModules.add(new Module(VALID_MODULE));
-        DeleteModuleCommand expectedCommand = new DeleteModuleCommand(targetIndex, expectedModules);
+        DeleteModulesCommand expectedCommand = new DeleteModulesCommand(targetIndex, expectedModules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

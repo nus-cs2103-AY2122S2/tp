@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddModuleCommand;
+import seedu.address.logic.commands.AddModulesCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearModulesCommand;
@@ -15,7 +15,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommentCommand;
 import seedu.address.logic.commands.CopyCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteModuleCommand;
+import seedu.address.logic.commands.DeleteModulesCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -63,8 +63,8 @@ public class AddressBookParser {
             }
             return new AddCommandParser().parse(arguments);
 
-        case AddModuleCommand.COMMAND_WORD:
-            return new AddModuleCommandParser().parse(arguments);
+        case AddModulesCommand.COMMAND_WORD:
+            return new AddModulesCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -78,8 +78,8 @@ public class AddressBookParser {
         case ClearModulesCommand.COMMAND_WORD:
             return new ClearModuleCommandParser().parse(arguments);
 
-        case DeleteModuleCommand.COMMAND_WORD:
-            return new DeleteModuleCommandParser().parse(arguments);
+        case DeleteModulesCommand.COMMAND_WORD:
+            return new DeleteModulesCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
