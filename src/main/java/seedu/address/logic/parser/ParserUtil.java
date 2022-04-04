@@ -254,7 +254,7 @@ public class ParserUtil {
             ClassGroupType type = ClassGroupType.valueOf(trimmedUpperCaseType);
             return type;
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(Messages.MESSAGE_INVALID_CLASS_GROUP_TYPE);
         }
     }
 

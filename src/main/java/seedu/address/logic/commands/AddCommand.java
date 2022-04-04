@@ -15,9 +15,11 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_MODULE;
 import static seedu.address.logic.parser.CliSyntax.TYPE_STUDENT;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.exceptions.UnknownEntityException;
 
 //@@author EvaderFati
 public class AddCommand extends Command {
@@ -91,7 +93,14 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasEntity(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ENTITY); // TODO: Update Command Exception
+            switch (toAdd.getEntityType()) {
+            case STUDENT:
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_STUDENT);
+            case TA_MODULE:
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_MODULE);
+            case CLASS_GROUP:
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_CLASS_GROUP);
+            }
         }
 
         model.addEntity(toAdd);
