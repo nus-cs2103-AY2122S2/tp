@@ -94,7 +94,7 @@ Additional formatting guidelines:
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data. <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
    📓`Note:`
@@ -148,21 +148,24 @@ How to identify import button:
 ![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
 
 ### Adding a contact
-Add a student with relevant details into Tracey.
+Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
-* Adds a student with the specified details. Tags are optional, and you can add as many tags as you like.
+* Adds a student with the specified details.
+* Tags are optional. You can add as many tags as you like.
     * Duplicate tags will be displayed as a single tag.
 * The student name is case-sensitive e.g. `add n/johnDoe` will be logged as `johnDoe` and not `JohnDoe` in Tracey.
 * Phone Number, email and matriculation number must be **unique** to each student.
 * Order of the tags does not matter e.g. `add n/NAME p/PHONENUMBER` is the same as `add p/PHONENUMBER n/NAME`.
 * Tracey will acknowledge that the student has been added.
-* Values for faculty, covid status and block need to be pre-defined constants in the table below (refer to Table 4 below or in the <a href='#glossary'>glossary</a>).
-* If the inputted keyword is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error and you will have to input the details for the keyword again.
+* Values for faculty, Covid status and block need to be of a pre-defined constant as shown in the table below (refer to Table 4 below or in the <a href='#glossary'>glossary</a>).
+* If any values for faculty, Covid status and block is not one of those defined in the **Pre-defined constants** as described in Table 4, there will be an error. You will have to input the details for the keyword again.
+* If you added duplicate `n/`, `p/`, `e/`, `a/`, `f/`, `mc/`, `cs/` or `b/` prefixes, Tracey will record the latest of the duplicates. <br>
+  i.e. `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive` is the same as `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
 
 Examples of usage:
 * `add n/Melvin b/c f/SOC p/84440808 e/melvin@nus.edu.sg a/12 Kent Ridge Drive mc/a0211343z cs/Negative`
-* `add e/student69@u.nus.edu n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive`
+* `add n/Martin b/e f/fol e/martiniser@gmail.com p/98090042 a/74 Pasir Ris Avenue mc/a1223213h cs/positive t/level2`
 
 | Correct Usage :white_check_mark: | Incorrect Usage  :x: |
 |:--------------------:|:-----------------:|
