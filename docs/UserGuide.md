@@ -359,7 +359,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 :exclamation:**Multiple of the same prefixes:**<br>
 * `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in the notes of [command structure](#command-structure)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
-* `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show with both **Anime** and **Action** tags in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
+* `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find all shows with both **Anime** and **Action** tags in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
 * `find r/4 5` does not mean `find r/4 r/5`. The former will find all shows with both **4 star rating and 5 star rating** while the latter will find all shows with a **5 star rating**. This is only applicable to the `RATING` parameter.
 * `find s/completed watching` does not mean `find s/completed s/watching`. The former will find all shows with both **completed and watching** status while the latter will find all shows with a **watching** status. This is only applicable to the `STATUS` parameter.
 
