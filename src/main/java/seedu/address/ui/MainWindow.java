@@ -31,6 +31,7 @@ import seedu.address.model.excel.ImportFileParser;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String MESSAGE_SUCCESS = "wrong";
     private static HelpWindow helpWindow;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -179,14 +180,18 @@ public class MainWindow extends UiPart<Stage> {
         int returnValue = fileChooser.showOpenDialog(dialog);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            assert (selectedFile != null);
             ImportFileParser converter = new ImportFileParser();
             List<String> res;
             res = converter.jsonToPerson(selectedFile);
             for (int i = 0; i < res.size(); i++) {
-                executeCommand(res.get(i));
+                try {
+                    executeCommand(res.get(i));
+                } catch (ParseException e) {
+                    throw new ParseException("haha");
+                }
             }
         }
+
     }
 
     /**
