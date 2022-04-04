@@ -18,13 +18,9 @@ public class MedicalContainsKeywordsPredicate implements Predicate<Medical> {
 
     @Override
     public boolean test(Medical medical) {
-        boolean nricMatches = true;
-        if (ViewedNric.getViewedNric() != null) {
-            nricMatches = ViewedNric.getViewedNric() == medical.getPatientNric();
-        }
-
-        return nricMatches
-                && keywords.stream()
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getPatientNric().toString(), keyword))
+                || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getAge().toString(), keyword))
                 || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getBloodType().toString(), keyword))
