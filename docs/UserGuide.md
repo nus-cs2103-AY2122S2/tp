@@ -160,15 +160,15 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 **:information_source: Notes about parameters:** NAME and STATUS are case-insensitive.
 </div>
 
-| Parameter  | Prefix | Condition                                                                           |
-|------------|--------|-------------------------------------------------------------------------------------|
-| KEYWORD    | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`
-| INDEX      | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                            |
-| NAME       | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.|
-| STATUS     | s/     | Status can only contains _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                |
-| TAG        | t/     | Tag must only be a keyword that is **less than 20 characters**.                     |
-| COMMENT    | c/     | Comment ????                                                                        |
-| RATING     | r/     | Rating must be a **whole number** from **0 to 5**                                   |
+| Parameter | Prefix | Condition                                                                                                                                                                                                                                                                                                                          |
+|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`                                                                                                                                                                                                                   |
+| INDEX     | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                                                                                                                                                    |
+| NAME      | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead. |
+| STATUS    | s/     | Status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                                                                                                                                                                                                                                                                |
+| TAG       | t/     | Tag must only be a keyword that is **less than 20 characters**.                                                                                                                                                                                                                                                                    |
+| COMMENT   | c/     | Comment ????                                                                                                                                                                                                                                                                                                                       |
+| RATING    | r/     | Rating must be a **whole number** from **0 to 5**                                                                                                                                                                                                                                                                                  |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -198,7 +198,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
-* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `INDEX` `STATUS` `TAG` `COMMENT` `RATING`.
+* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `STATUS` `TAG` `COMMENT` `RATING`.
 </div>
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
@@ -361,6 +361,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 * `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in the notes of [command structure](#command-structure)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
 * `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
 * `find r/4 5` does not mean `find r/4 r/5`. The former will find all show ratings with a **4 star rating and 5 star rating** while the latter will find all shows with a **5 star rating**. This is only applicable to the `RATING` parameter.
+* `find s/completed watching` does not mean `find s/completed s/watching`. The former will find all show statuses with a **completed and watching label** while the latter will find all shows with a **watching label**. This is only applicable to the `STATUS` parameter.
 
 </div>
 
@@ -516,21 +517,21 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                             |
-|------------------|------------------------------------------------------------------------------------------------------------------------------|
-| **Help**         | `help`                                                                                                                       |
-| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `add n/ReZero s/watching r/3 t/Anime`                                      |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                          |
+| Action           | Format, Examples                                                                                                                    |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**         | `help`                                                                                                                              |
+| **Add**          | `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​` <br> e.g., `add n/ReZero s/watching r/3 t/Anime`                             |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
 | **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `edit 1 n/ReZero s/watching r/3 c/Good show t/Anime` |
-| **List**         | `list`                                                                                                                       |
-| **Clear**        | `clear`                                                                                                                      |
-| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                     |
-| **Precise Find** | `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                                 | 
-| **Suggest**      | `suggest`                                                                                                                    |
-| **Import**       | `import`                                                                                                                     |
-| **Export**       | `export`                                                                                                                     |
-| **Exit**         | `exit`                                                                                                                       |
+| **List**         | `list`                                                                                                                              |
+| **Clear**        | `clear`                                                                                                                             |
+| **General Find** | `find KEYWORD…​`<br> e.g., `find hero`<br>                                                                                          |
+| **Precise Find** | `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`              |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                                        | 
+| **Suggest**      | `suggest`                                                                                                                           |
+| **Import**       | `import`                                                                                                                            |
+| **Export**       | `export`                                                                                                                            |
+| **Exit**         | `exit`                                                                                                                              |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
