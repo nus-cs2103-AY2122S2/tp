@@ -21,6 +21,7 @@
 }
 
 .list-cell .label, #optionalFields .label {
+    -fx-wrap-text: "true";
     -fx-font-size: 13px;
 }
 
