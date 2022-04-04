@@ -76,8 +76,20 @@ Adds a student to TAPA.
 
 **Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
-* The student’s matriculation number, name as well as module code are compulsory fields.
+* The student’s student ID (matriculation number), name as well as module code are compulsory fields.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
+
+<div markdown="block" class="alert alert-info">
+> :warning: **Warning!:**
+
+<br>
+
+* The student's student ID (matriculation number) has to be unique.
+* An error message will be displayed to the user if the specified student ID already exists in TAPA.
+
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note**: The name of the added student will be converted to Title Case.
+    </div>
 
 **Example**:
 * `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
@@ -165,7 +177,7 @@ Marks a specific undone task as done for a particular student.
 
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
-    * Marks the first undone task for the student with student ID AXXXXXXXR as done.
+    * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
 
 <br>
 
@@ -181,7 +193,7 @@ Marks a specific done task as undone for a particular student.
 
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
-    * Marks the first done task for the student with student ID AXXXXXXXR as undone.
+    * Marks the first task in the task list for the student with student ID AXXXXXXXR as undone.
 
 <br>
 
@@ -255,6 +267,17 @@ Assigns a task to a particular student.
 * `assign m/CS2103T tn/assignment 1`
     * Assigns assignment 1 to students taking module CS2103T.
 
+<div markdown="block" class="alert alert-info">
+> :warning: **Warning!:**
+
+<br>
+
+* As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
+
+  <div markdown="span" class="alert alert-info">:information_source:
+    **Note**: The name of the assigned task will be converted to Title Case.
+    </div>
+
 <br>
 
 ### Viewing the completion status of a particular task: `progress`
@@ -320,7 +343,9 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 <div markdown="block" class="alert alert-info">
-**:warning: Warning!:**<br>
+> :warning: **Warning!:**
+
+<br>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
 
