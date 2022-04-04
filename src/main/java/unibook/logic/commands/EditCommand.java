@@ -905,7 +905,7 @@ public class EditCommand extends Command {
 
         public void setGroupName(String name) throws ParseException {
             if (!Group.isValidGroupName(name)) {
-                throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
             }
             this.name = name;
         }

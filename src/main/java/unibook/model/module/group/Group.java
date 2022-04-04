@@ -19,9 +19,11 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String MESSAGE_CONSTRAINTS = "Names should only contain up to 50 alphanumeric characters and "
-            + "spaces, and it should not be blank";
+    public static final String NAME_CONSTRAINT_MESSAGE = "A group name cannot have whitespaces, and also must be"
+            + "limited in length to less than 50 characters.";
+    //Group name can only have alphanumeric characters
+    public static final String VALIDATION_REGEX = "^\\S*$";
+
 
     private static final int MAX_GROUP_NAME_LENGTH = 50;
     private final ObservableList<Student> members;
@@ -39,7 +41,7 @@ public class Group {
      */
     public Group(String name, Module module, ObservableList<Student> members,
                  ObservableList<LocalDateTime> meetingTimes) {
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), NAME_CONSTRAINT_MESSAGE);
         this.name = name;
         this.module = module;
         this.meetingTimes = meetingTimes;

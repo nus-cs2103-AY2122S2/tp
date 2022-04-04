@@ -2,6 +2,7 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
+import static unibook.commons.core.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static unibook.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static unibook.logic.parser.CliSyntax.PREFIX_GROUP;
@@ -15,6 +16,7 @@ import static unibook.logic.parser.CliSyntax.PREFIX_OPTION;
 import static unibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static unibook.logic.parser.CliSyntax.PREFIX_TAG;
 import static unibook.logic.parser.CliSyntax.PREFIX_TYPE;
+import static unibook.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -74,26 +76,24 @@ public class EditCommandParser implements Parser<EditCommand> {
             logger.info(index.toString());
         } catch (ParseException pe) {
             if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
-                throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.MESSAGE_OPTION_NOT_FOUND));
+                throw new ParseException((MESSAGE_INVALID_INDEX + "\n" + EditCommand.MESSAGE_OPTION_NOT_FOUND));
             } else {
                 if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.PERSON_MESSAGE_USAGE, pe);
+                    throw new ParseException(MESSAGE_INVALID_INDEX +  "\n" + EditCommand.PERSON_MESSAGE_USAGE, pe);
                 } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.MODULE_MESSAGE_USAGE, pe);
+                    throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.MODULE_MESSAGE_USAGE, pe);
                 } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) {
                     // TODO CHANGED HERE
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.GROUP_MESSAGE_USAGE, pe);
+                    throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.GROUP_MESSAGE_USAGE, pe);
                 } else {
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.KEYEVENT_MESSAGE_USAGE, pe);
+                    throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.KEYEVENT_MESSAGE_USAGE, pe);
                 }
             }
 
         }
 
         // Checks if index provided <= 0
-        if (index.getOneBased() <= 0) {
-            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.PERSON_MESSAGE_USAGE));
-        }
+
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
