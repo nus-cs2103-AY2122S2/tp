@@ -8,12 +8,15 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.model.event.Event;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
 public class EventCard extends UiPart<Region> {
+
+    private static final Font font = new Font("Segoe UI Semibold", 13);
 
     private static final String FXML = "EventListCard.fxml";
 
@@ -34,9 +37,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label dateTime;
+    private TextFlow dateTime;
     @FXML
-    private Label description;
+    private TextFlow description;
     @FXML
     private FlowPane friends;
 
@@ -48,12 +51,35 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        dateTime.setText("Event Date: " + event.getDateTime().toString());
-        description.setText("Event Description: " + event.getDescription().value);
-        Text friendsText = new Text("Friends: ");
+
+        Text dateTimeText = new Text(" : " + event.getDateTime().toString());
+        Text dateTimeLabel = new Text("Event Date");
+        dateTimeText.setFill(Color.WHITE);
+        dateTimeLabel.setFill(Color.WHITE);
+        dateTimeText.setFont(font);
+        dateTimeLabel.setFont(font);
+        dateTimeLabel.setUnderline(true);
+        dateTime.getChildren().addAll(dateTimeLabel, dateTimeText);
+
+
+        Text descriptionText = new Text(" : " + event.getDescription().value);
+        Text descriptionLabel = new Text("Event description");
+        descriptionText.setFill(Color.WHITE);
+        descriptionLabel.setFill(Color.WHITE);
+        descriptionText.setFont(font);
+        descriptionLabel.setFont(font);
+        descriptionLabel.setUnderline(true);
+        description.getChildren().addAll(descriptionLabel, descriptionText);
+
+
+        Text friendsText = new Text("Friends");
+        Text colon = new Text(" : ");
+        friendsText.setUnderline(true);
         friendsText.setFill(Color.WHITE);
-        friendsText.setFont(new Font("Segoe UI", 13));
-        friends.getChildren().add(friendsText);
+        friendsText.setFont(font);
+        colon.setFill(Color.WHITE);
+        colon.setFont(font);
+        friends.getChildren().addAll(friendsText, colon);
         friends.setHgap(4);
         event.getFriendNames().stream()
                 .forEach(friend -> friends.getChildren().add(new Label(friend.fullName)));
