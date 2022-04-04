@@ -24,11 +24,13 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // this will check if the previous command was undo
         if (model.checkOriginal() == false) {
             throw new CommandException(MESSAGE_REDO_FAILURE);
         }
 
         model.restoreOriginal();
+        // clear original to avoid multiple redo
         return new CommandResult(MESSAGE_REDO_SUCCESS);
     }
 
