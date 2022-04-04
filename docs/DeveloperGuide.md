@@ -332,12 +332,10 @@ command. This command  will call `CommandType#parseDeleteCommandType` to parse w
 prescription. It will then delete the 2nd prescription from prescription model and save to storage
 
 
-<!-- Si Binh -->
 ### Find
 The `Find` command is used to find the patient whose names contain any of the given keywords. 
 
-
-
+<!-- Joey -->
 #### Design Consideration
 WIP
 
@@ -358,7 +356,28 @@ WIP - Insert UML and activity diagram
 #### Usage
 WIP
 
+<!-- Si Binh -->
 ### Summary
+
+#### Design Consideration
+Alternative 1 (current choice): Reuse the existing `updateFilteredXXXList()` methods in the model. When the summary command is executed, update all existing filtered lists using NRIC predicate. Then update the UI using the existing filtered list.
+
+Pros:
+- Easy to implement
+- Less code duplication as we can reuse the logic that is used for filtering other entities
+
+Cons:
+- Increased coupling. For example, originally, the `Add` command looks for the patient in the latest filtered list of patients to add new entities to. As at the summary screen the list is in filtered state, we cannot add to other patients apart from one being viewed. The `Add` command had to be modified as a result.
+
+Alternative 2: Having a dedicated model class `Summary`. A Summary object holds all needed information to be displayed. The Summary object is to be created by iterating over all available unfiltered lists.
+
+Pros:
+- No coupling and dependence on the state of other filtered lists
+
+Cons:
+- The logic to retrieve the needed entities is a bit of a duplicate
+- One would need to manage the flow of the `Summary` object and parse it for display, so more tedious
+
 #### Implementation
 WIP - Insert UML and activity diagram
 
