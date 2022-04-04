@@ -17,7 +17,7 @@ import seedu.address.model.entry.Company;
 public class AddCompanyCommand extends Command {
     public static final String COMMAND_WORD = "addc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the list of companies.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -33,7 +33,7 @@ public class AddCompanyCommand extends Command {
             + PREFIX_TAG + "hiring";
 
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";
-    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the list of companies.";
 
     private final Company toAdd;
 
