@@ -138,7 +138,7 @@ Expected outcome:
 
 Deletes a student contact information at the specified `INDEX` from ArchDuke.
 The `INDEX` refers to the index number shown in the **currently displayed** student contact list. 
-The `INDEX` **must be a positive integer** not exceeding the total number of student contacts. The deleted student contact would also be 
+The `INDEX` **must be a positive unsigned integer** not exceeding the total number of student contacts. The deleted student contact would also be 
 deleted from all his currently assigned groups.
 
 Format: `delete INDEX`
@@ -261,7 +261,7 @@ Expected outcome:
 
 Assigns a student to an existing group in ArchDuke. `assign` is followed by the `INDEX` at which the student is 
 in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be assigned. 
-The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive integer** not 
+The group must **already exist** in ArchDuke, and the `INDEX` must be a **positive unsigned integer** not 
 exceeding the total number of student contacts. The student contact **must 
 has yet to be currently assigned** to the group. 
 
@@ -289,7 +289,7 @@ After assigning:
 
 Deassigns a student from an existing group in ArchDuke. `deassign` is followed by the `INDEX` at which the student
 is in the **currently displayed** ArchDuke student contact list and the `GROUP_NAME` in which the student would be deassigned. 
-The group must **already exist** in ArchDuke, and the index must be a **positive integer** not 
+The group must **already exist** in ArchDuke, and the index must be a **positive unsigned integer** not 
 exceeding the total number of student contacts. The student contact **must have 
 currently been assigned** to the group.  
 
@@ -421,8 +421,8 @@ fresh from the start, you could use the `clear` command to clear all the sample 
 **A**: An academic major is simply the major that the student is studying in university.
 
 **Q**: What does an index refer to?<br>
-**A**: An index is simply the number in front of the student contact's name or the group's name. It specifies the order 
-in which the student contact or the group appears in the list.
+**A**: An index is simply the number in front of the student contact's name. It specifies the order 
+in which the student contact appears in the list.
 
 --------------------------------------------------------------------------------------------------------------------
 
