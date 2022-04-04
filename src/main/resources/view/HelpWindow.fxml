@@ -126,6 +126,23 @@
             </Label>
           </children>
         </HBox>
+        <HBox fx:id="findCommandContainer">
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+          </padding>
+          <children>
+            <Label fx:id="findCommandDesc" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+            <Label fx:id="findCommand" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+          </children>
+        </HBox>
         <HBox fx:id="addGroupCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -194,6 +211,23 @@
             </Label>
           </children>
         </HBox>
+        <HBox fx:id="viewContactCommandContainer">
+          <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+          </padding>
+          <children>
+            <Label fx:id="viewContactCommandDesc" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+            <Label fx:id="viewContactCommand" text="Label" style="-fx-font-weight: bold">
+              <HBox.margin>
+                <Insets right="10.0" />
+              </HBox.margin>
+            </Label>
+          </children>
+        </HBox>
         <HBox fx:id="addTaskCommandContainer">
           <padding>
             <Insets top="5" right="5" bottom="5" left="15" />
@@ -239,40 +273,6 @@
               </HBox.margin>
             </Label>
             <Label fx:id="viewTaskCommand" text="Label" style="-fx-font-weight: bold">
-              <HBox.margin>
-                <Insets right="10.0" />
-              </HBox.margin>
-            </Label>
-          </children>
-        </HBox>
-        <HBox fx:id="viewContactCommandContainer">
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <children>
-            <Label fx:id="viewContactCommandDesc" text="Label" style="-fx-font-weight: bold">
-              <HBox.margin>
-                <Insets right="10.0" />
-              </HBox.margin>
-            </Label>
-            <Label fx:id="viewContactCommand" text="Label" style="-fx-font-weight: bold">
-              <HBox.margin>
-                <Insets right="10.0" />
-              </HBox.margin>
-            </Label>
-          </children>
-        </HBox>
-        <HBox fx:id="findCommandContainer">
-          <padding>
-            <Insets top="5" right="5" bottom="5" left="15" />
-          </padding>
-          <children>
-            <Label fx:id="findCommandDesc" text="Label" style="-fx-font-weight: bold">
-              <HBox.margin>
-                <Insets right="10.0" />
-              </HBox.margin>
-            </Label>
-            <Label fx:id="findCommand" text="Label" style="-fx-font-weight: bold">
               <HBox.margin>
                 <Insets right="10.0" />
               </HBox.margin>
