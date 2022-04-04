@@ -138,8 +138,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         expandedPersonListPanel =
                 new ExpandedPersonListPanel(logic.getFilteredPersonList(), logic.getFilteredEventList());
-        System.out.println("size of filteredperson list should be 1" + logic.getFilteredPersonList().size());
-        System.out.println("size of filteredevent list should be 1" + logic.getFilteredEventList().size());
 
         expandedPersonListPanelPlaceholder.getChildren();
         expandedPersonListPanelPlaceholder.getChildren().add(expandedPersonListPanel.getRoot());
