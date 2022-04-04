@@ -96,13 +96,13 @@ public class AddCommand extends Command {
                                                       ObservableList<Person> studentList,
                                                       Model model) {
 
-        if (addedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+        if (addedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString().equals(addedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(addedPerson)
                             || student.hasSameActivity(addedPerson))
                             && !student.isSamePerson(addedPerson)
-                            && !student.getStatus().toString().equals(Status.POSITIVE))
+                            && !student.isPositive())
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
@@ -114,8 +114,7 @@ public class AddCommand extends Command {
             }
         } else {
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                            .equals(addedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(addedPerson)
                             || student.hasSameActivity(addedPerson))
                             && !student.isSamePerson(addedPerson))
                     .collect(Collectors.toList());
@@ -124,11 +123,10 @@ public class AddCommand extends Command {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
 
                 List<Person> positiveRelatedToPerson = studentList.stream()
-                        .filter(student -> (student.getClassCode().toString()
-                                .equals(currentPerson.getClassCode().toString())
+                        .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
                                 && !student.isSamePerson(addedPerson)
-                                && student.getStatus().toString().equals(Status.POSITIVE))
+                                && student.isPositive())
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
