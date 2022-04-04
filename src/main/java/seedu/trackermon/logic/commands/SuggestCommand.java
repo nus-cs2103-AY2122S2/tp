@@ -48,7 +48,7 @@ public class SuggestCommand extends Command {
         Random rn = new Random();
         List<Show> currList = model.getFilteredShowList();
         Integer sizeOfShowList = currList.size();
-        Integer randomIndex = rn.nextInt(sizeOfShowList - 1);
+        Integer randomIndex = rn.nextInt(sizeOfShowList);
         return currList.get(randomIndex);
     }
 }
