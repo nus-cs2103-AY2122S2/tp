@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -92,6 +94,16 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        tabs.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+            @Override
+            public void changed(ObservableValue<? extends Tab> observable, Tab oldTab, Tab newTab) {
+                if (newTab.equals (personInsightsListTab)) {
+                    personInsightListPanel = new PersonInsightListPanel(logic.getInsightsList());
+                    personInsightListPanelPlaceholder.getChildren().add(personInsightListPanel.getRoot());
+                }
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -249,5 +261,6 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 
 }
