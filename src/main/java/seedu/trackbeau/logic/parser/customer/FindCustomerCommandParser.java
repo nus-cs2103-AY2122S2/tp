@@ -58,9 +58,15 @@ public class FindCustomerCommandParser implements Parser<FindCustomerCommand> {
 
         for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                prefixArr.set(i,
-                    Arrays.asList(ParserUtil
-                        .parseFindValues(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                if (i < NON_TAG_ATTRIBUTE_COUNT) {
+                    prefixArr.set(i,
+                            Arrays.asList(ParserUtil
+                                    .parseFindValues(argMultimap.getValue(prefixList[i]).get()).toString()));
+                } else {
+                    prefixArr.set(i,
+                            Arrays.asList(ParserUtil
+                                    .parseFindValues(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                }
             }
         }
 

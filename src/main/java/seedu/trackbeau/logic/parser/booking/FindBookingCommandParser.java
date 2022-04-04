@@ -1,11 +1,9 @@
 package seedu.trackbeau.logic.parser.booking;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.trackbeau.model.booking.BookingSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
-import static seedu.trackbeau.model.customer.Address.VALIDATION_REGEX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +18,6 @@ import seedu.trackbeau.logic.parser.ParserUtil;
 import seedu.trackbeau.logic.parser.Prefix;
 import seedu.trackbeau.logic.parser.exceptions.ParseException;
 import seedu.trackbeau.model.booking.BookingSearchContainsKeywordsPredicate;
-import seedu.trackbeau.model.customer.Address;
 
 /**
  * Parses input arguments and creates a new FindBookingCommand object

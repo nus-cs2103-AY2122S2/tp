@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.trackbeau.commons.util.StringUtil;
 import seedu.trackbeau.model.tag.Tag;
 
 /**
@@ -42,16 +41,11 @@ public class CustomerSearchContainsKeywordsPredicate implements Predicate<Custom
                     continue;
                 }
 
-                //else if customer is searching about the attribute, we check if there is a match with customer info
-                boolean isCustomerInformationMatchKeyword = false;
-
                 String searchString = ""; //searchString contains the existing customer information
                 if (i < NON_TAG_ATTRIBUTE_COUNT) {
                     //get customer detail
                     searchString = customer.getClass().getDeclaredMethod(find[i]).invoke(customer).toString();
                 } else {
-                    // Will always return type Set<Tag> from the 3 possible methods in the Customer class.
-                    @SuppressWarnings("unchecked")
                     Set<Tag> tagList = (Set<Tag>) customer.getClass().getDeclaredMethod(find[i]).invoke(customer);
                     for (Tag tag : tagList) {
                         searchString = searchString + tag.tagName + " ";
@@ -59,17 +53,13 @@ public class CustomerSearchContainsKeywordsPredicate implements Predicate<Custom
                 }
 
                 //loop through the keywords individually to check if match with customer information
+                searchString = searchString.toLowerCase();
                 for (String keyword : keywords) {
-                    //if find stp/Jason, stp/Jessica, return customers who like either
-                    searchString = searchString.toLowerCase();
                     keyword = keyword.toLowerCase();
                     if (searchString.contains(keyword)) {
-                        isCustomerInformationMatchKeyword = true;
+                        return true;
                     }
                 }
-
-                return isCustomerInformationMatchKeyword;
-
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
