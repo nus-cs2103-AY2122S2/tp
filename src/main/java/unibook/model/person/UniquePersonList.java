@@ -175,6 +175,31 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if {@code persons} contains person with given phone number.
+     */
+    public boolean phoneNumberBeingUsed(Phone phone) {
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getPhone().equals(phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Returns true if {@code persons} contains person with given email.
+     */
+    public boolean emailBeingUsed(Email email) {
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Delete the specified Group from all persons in person list
      *
      * @param moduleCode
