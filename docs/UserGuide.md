@@ -343,14 +343,15 @@ From *Figure 11*, this function is beneficial for administrators as you may want
 Summarises the statistics of the student records inside Tracey.
 
 Format:`summarise`
-* You can get an overview of the students in Tracey if you want to get an idea of the location where covid is more prevalent.
+* You can get an overview of the students in Tracey if you want to get an idea of the location where Covid is more prevalent.
+* You can see which faculty has the highest number of Covid cases.
 
 Example of usage:
 * `summarise` will summarise the records of everyone in Tracey. The result is a graphical analysis the `Covid Status` of the individuals in each block. Additionally, an overview of the `Covid Status` of the Hall population is also provided (refer to figure 4).
 
-![SummariseExample](images/SummariseExample.png) *Figure 12: Example response of Tracey in response to the `summarise` command.*
+![SummariseExample](images/SummariseExample.png) *Figure 12a: Example pie charts of Tracey in response to the `summarise` command.* ![SummariseExample2](images/SummariseExample2.png) *Figure 12b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 12*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
