@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 * **Code contributed**:
   * 3000+ LoC contributed to the project
   * Worked on the Onboarding Guide and Help Window component
-    * Includes components in `UI` and `Models`
+    * Includes components in `UI` and `Model`
 
 * **Project management**:
   * Code reviews
