@@ -77,6 +77,8 @@ public class DeleteCommand extends Command {
             + "from Group: %2$s";
     public static final String MESSAGE_DELETE_KEY_EVENT_FROM_MODULE_SUCCESS = "Successfully deleted Key Event: %1$s "
             + "from Module: %2$s";
+    public static final String MESSAGE_CANNOT_REMOVE_TRAIT = "Cannot remove these traits as there will be a "
+            + "duplicate person";
 
     private Index targetIndex;
     private boolean indexOnly = false;
@@ -318,8 +320,13 @@ public class DeleteCommand extends Command {
                 newPerson = ((Professor) newPerson).deleteOffice();
             }
 
+            if (model.hasPerson(newPerson)) {
+                throw new CommandException(MESSAGE_CANNOT_REMOVE_TRAIT);
+            }
+
             personToDeleteTrait.removePersonFromAllTheirModules();
             model.deletePerson(personToDeleteTrait);
+
             newPerson.addPersonToAllTheirModules();
             if (personToDeleteTrait instanceof Student) {
                 Student studentToDeleteTrait = (Student) personToDeleteTrait;
