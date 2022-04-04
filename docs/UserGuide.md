@@ -417,7 +417,58 @@ Examples:
 * `finde n/online` returns `online interview` and `online assessment`
 * `finde s/all n/online` returns `online interview`, `online assessment`, `online assessment`
 * `finde s/archived n/test` returns `software test`, `practical test`<br> (given both events have been archived)
-* `find sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
+* `finde sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
+
+### Sorting entries
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the Sort Commands:**<br>
+
+* Sort commands can take an optional parameter `Ordering` which can be `ascending` or `descending`. If not provided, `Ordering` defaults to `ascending`.
+* The parameter  `Ordering` can be passed by using `o/` followed by `ascending` or `descending`.
+* Similar to list commands, the `s/` parameter is an optional parameter that accepts 3 types of argument:
+  - `s/all`: returns all entries
+  - `s/archived`: returns all archived entries
+  - `s/unarchived`: returns all unarchived entries
+
+#### Sorting companies by name: `sortc`
+Sort companies by name. The default is in `ascending` order. To sort in `descending` order, use `sortc o/descending`.
+
+Format:
+```
+sortc [s/ARCHIVED] [o/ORDERING]
+```
+Examples:
+* `sortc` returns all unarchived companies in ascending order
+* `sortc o/descending` returns all unarchived companies in descending order
+* `sortc s/all o/descending` returns all companies in descending order
+
+#### Sorting people by name: `sortp`
+Sort people by name. The default is in `ascending` order. To sort in `descending` order, use `sortp o/descending`.
+
+Format:
+```
+sortp [s/ARCHIVED] [o/ORDERING]
+```
+Examples:
+* `sortp` returns all unarchived people in ascending order
+* `sortp o/descending` returns all unarchived people in descending order
+* `sortp s/all o/descending` returns all people in descending order
+
+#### Sorting events by date: `sorte`
+Sort events by date. The default is in `ascending` order. To sort in `descending` order, use `sorte o/descending`.
+
+Format:
+```
+sorte [s/ARCHIVED] [o/ORDERING]
+```
+Examples:
+* `sorte` returns all unarchived events in ascending order
+* `sorte o/descending` returns all unarchived events in descending order
+* `sorte s/all o/descending` returns all events in descending order
+
+</div>
+
 ### Archiving entries
 #### Archiving an entry: `archive`
 Archiving an entry will hide it from the list of entries.
