@@ -100,6 +100,7 @@ public class UpdateAllCommand extends Command {
         }
 
         model.saveIBookChanges();
+        model.clearProductFilters();
 
         return new CommandResult(MESSAGE_UPDATE_ALL_PRODUCT_SUCCESS + updatedProductDescription);
     }
