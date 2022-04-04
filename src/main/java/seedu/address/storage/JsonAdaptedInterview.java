@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.Status;
 import seedu.address.model.position.Position;
 
 public class JsonAdaptedInterview {
@@ -16,16 +17,19 @@ public class JsonAdaptedInterview {
     private final JsonAdaptedApplicant applicant;
     private final LocalDateTime date;
     private final JsonAdaptedPosition position;
+    private String status;
 
     /**
      * Constructs a {@code JsonAdaptedInterview} with the given interview details.
      */
     @JsonCreator
     public JsonAdaptedInterview(@JsonProperty("applicant") JsonAdaptedApplicant applicant,
-            @JsonProperty("date") LocalDateTime date, @JsonProperty("position") JsonAdaptedPosition position) {
+            @JsonProperty("date") LocalDateTime date, @JsonProperty("position") JsonAdaptedPosition position,
+            @JsonProperty("status") String status) {
         this.applicant = applicant;
         this.date = date;
         this.position = position;
+        this.status = status;
     }
 
     /**
@@ -35,6 +39,7 @@ public class JsonAdaptedInterview {
         applicant = new JsonAdaptedApplicant(source.getApplicant());
         date = source.getDate();
         position = new JsonAdaptedPosition(source.getPosition());
+        status = source.getStatus().toString();
     }
 
     /**
@@ -61,6 +66,13 @@ public class JsonAdaptedInterview {
         }
         final Position modelPosition = position.toModelType();
 
-        return new Interview(modelApplicant, modelDate, modelPosition);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Status.class.getSimpleName()));
+        }
+
+        final Status status = new Status(this.status);
+
+        return new Interview(modelApplicant, modelDate, modelPosition, status);
     }
 }

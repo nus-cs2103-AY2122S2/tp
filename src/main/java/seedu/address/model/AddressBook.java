@@ -1,11 +1,16 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.UniqueInterviewList;
@@ -86,7 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// applicant-level operations
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
      */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
@@ -94,7 +99,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a applicant to the address book.
+     * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithEmail(Email email) {
+        requireNonNull(email);
+        return applicants.getApplicantWithEmail(email);
+    }
+
+    /**
+     * Returns the {@code Applicant} with the {@code phone} provided if exists; or null if no such applicant.
+     */
+    public Applicant getApplicantWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return applicants.getApplicantWithPhone(phone);
+    }
+
+    /**
+     * Adds an applicant to the address book.
      * The applicant must not already exist in the address book.
      */
     public void addApplicant(Applicant p) {
@@ -121,6 +142,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         applicants.remove(key);
     }
 
+    /**
+     * Sorts list of applicant using comparator
+     */
+    public void sortApplicant(Comparator<Applicant> comparator) {
+        applicants.sort(comparator);
+    }
+
     //// interview-level operations
 
     /**
@@ -129,6 +157,38 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasInterview(Interview i) {
         requireNonNull(i);
         return interviews.contains(i);
+    }
+
+    /**
+     * Returns true if an interview has a conflict in timing as {@code interview} exists in the address book.
+     */
+    public boolean hasConflictingInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.containsConflict(i);
+    }
+
+    /**
+     * Returns true if an interview is passable based on the number of extended offers and openings.
+     */
+    public boolean isPassableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isPassableInterview(i);
+    }
+
+    /**
+     * Returns true if an interview is acceptable based on the status of the interview.
+     */
+    public boolean isAcceptableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isAcceptableInterview(i);
+    }
+
+    /**
+     * Returns true if an interview is rejectable based on the status of the interview.
+     */
+    public boolean isRejectableInterview(Interview i) {
+        requireNonNull(i);
+        return interviews.isRejectableInterview(i);
     }
 
     /**
@@ -148,6 +208,27 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns interview(s) which are for the specified applicant.
+     */
+    public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+        return interviews.getApplicantsInterviews(applicant);
+    }
+
+    /**
+     * Returns interview(s) which are for the specified position.
+     */
+    public ArrayList<Interview> getPositionsInterview(Position position) {
+        return interviews.getPositionsInterview(position);
+    }
+
+    /**
+     * Checks if the specified applicant has an interview for the specified position.
+     */
+    public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+        return interviews.isSameApplicantPosition(applicant, position);
+    }
+
+    /**
      * Replaces the given interview {@code target} with {@code editedInterview}.
      * {@code target} must exist in HireLah.
      * The interview identity of {@code editedInterview} must not be the same as another existing interview
@@ -155,8 +236,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setInterview(Interview target, Interview editedInterview) {
         requireNonNull(editedInterview);
-
         interviews.setInterview(target, editedInterview);
+    }
+
+    /**
+     * Sorts list of interview using comparator
+     */
+    public void sortInterview(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        interviews.sort(comparator);
     }
 
     //// position-level operations
@@ -186,6 +274,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Updates all old instances of {@code positionToBeUpdated} with {@code newPosition}.
+     * Existence of {@code positionToBeUpdated} and uniqueness of {@code newPosition} will be checked at
+     * {@link #setPosition(Position, Position)}.
+     */
+    public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+        requireAllNonNull(positionToBeUpdated, newPosition);
+        setPosition(positionToBeUpdated, newPosition);
+        interviews.updatePositions(positionToBeUpdated, newPosition);
+    }
+
+    /**
+     * Updates all old instances of {@code applicantToBeUpdated} with {@code newApplicant}.
+     * Existence of {@code applicantToBeUpdated} and uniqueness of {@code newApplicant} will be checked at
+     * {@link #setApplicant(Applicant, Applicant)}.
+     */
+    public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
+        requireAllNonNull(applicantToBeUpdated, newApplicant);
+        setApplicant(applicantToBeUpdated, newApplicant);
+        interviews.updateApplicants(applicantToBeUpdated, newApplicant);
+    }
+
+    /**
      * Replaces the given position {@code target} in the list with {@code editedPosition}.
      * {@code target} must exist in the address book.
      * The position identity of {@code editedPosition} must not be the same as another existing position
@@ -197,6 +307,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         positions.setPosition(target, editedPosition);
     }
 
+    /**
+     * Sorts list of interview using comparator
+     */
+    public void sortPosition(Comparator<Position> comparator) {
+        requireNonNull(comparator);
+        positions.sort(comparator);
+    }
     //// util methods
 
     @Override
@@ -230,5 +347,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return applicants.hashCode();
+    }
+
+    public Applicant getApplicantUsingStorage(Applicant interviewApplicant) {
+        return applicants.getApplicant(interviewApplicant);
+    }
+
+    public Position getPositionUsingStorage(Position interviewPosition) {
+        return positions.getPosition(interviewPosition);
     }
 }

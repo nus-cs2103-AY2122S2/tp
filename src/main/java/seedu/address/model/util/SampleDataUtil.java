@@ -19,6 +19,7 @@ import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.PositionName;
+import seedu.address.model.position.PositionOffers;
 import seedu.address.model.position.PositionOpenings;
 import seedu.address.model.position.Requirement;
 import seedu.address.model.tag.Tag;
@@ -31,26 +32,28 @@ public class SampleDataUtil {
         return new Applicant[]{
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Age("21"), new Address("Blk 30 Geylang Street 29, #06-40"), new Gender("M"),
-                    getTagSet("friends")),
+                    getTagSet(">=5 years of exp", "1st Class Honours", "Computer Science")),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Age("22"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Gender("F"),
-                    getTagSet("colleagues", "friends")),
+                    getTagSet("Marketing", "Referred by manager")),
             new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Age("23"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Gender("F"),
-                    getTagSet("neighbours")),
+                    getTagSet("Ex-Google")),
             new Applicant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Age("24"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Gender("M"),
-                    getTagSet("family")),
+                    getTagSet("NUS Alumni", "National Athlete")),
             new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Age("25"), new Address("Blk 47 Tampines Street 20, #17-35"), new Gender("M"),
-                    getTagSet("classmates")),
+                    getTagSet("Ex Senior Engineer @ Amazon")),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Age("26"), new Address("Blk 45 Aljunied Street 85, #11-31"), new Gender("M"),
-                    getTagSet("colleagues"))
+                    getTagSet("ICPC Winner"))
         };
     }
 
     public static Position[] getSamplePositions() {
+        PositionOffers samplePos = new PositionOffers();
+        samplePos.increment();
         return new Position[]{
             new Position(new PositionName("Senior Software Developer"),
                     new Description("The highest paying job in the company\nMore than 5 years experience"),
@@ -66,7 +69,7 @@ public class SampleDataUtil {
             new Position(new PositionName("Admin Officer"),
                     new Description("Degree or Postgraduate holder with Major in Information Technology, "
                             + "Computer Science, or other similar focus, and a cumulative GPA of 3.5 and above"),
-                    new PositionOpenings("1"), getRequirementSet("Hardworking", "Good with people"))
+                    new PositionOpenings("2"), samplePos, getRequirementSet("Hardworking", "Good with people"))
         };
     }
 

@@ -44,6 +44,8 @@ public class ApplicantCard extends UiPart<Region> {
     private Label age;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label applicantstatus;
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
@@ -61,6 +63,14 @@ public class ApplicantCard extends UiPart<Region> {
         applicant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String status = applicant.getStatus().toString();
+        applicantstatus.setText(status);
+        if (status.equals("Available")) {
+            applicantstatus.setStyle("-fx-background-color: #247a32;");
+        } else {
+            applicantstatus.setStyle("-fx-background-color: #9f8331;");
+        }
     }
 
     @Override

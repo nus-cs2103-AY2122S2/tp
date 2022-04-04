@@ -39,6 +39,10 @@ public class EditInterviewCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field in Interview to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in HireLah.";
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited interview: %1$s";
+    public static final String MESSAGE_CONFLICTING_INTERVIEW = "This interview would cause a conflict of timings with"
+            + " a current interview in the address book. Interviews must be "
+            + "at least 1 hour apart for the same candidate.";
+    public static final String MESSAGE_APPLICANT_SAME_POSITION = "%1$s already has an interview for %2$s";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -105,6 +109,20 @@ public class EditInterviewCommand extends EditCommand {
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor, model);
+
+        boolean applicantEdited = !(interviewToEdit.getApplicant().equals(editedInterview.getApplicant()));
+        boolean positionEdited = !(interviewToEdit.getPosition().equals(editedInterview.getPosition()));
+
+        if ((applicantEdited || positionEdited)
+                && model.isSameApplicantPosition(editedInterview.getApplicant(), editedInterview.getPosition())) {
+            throw new CommandException(String.format(MESSAGE_APPLICANT_SAME_POSITION,
+                    editedInterview.getApplicant().getName().fullName,
+                    editedInterview.getPosition().getPositionName().positionName));
+        }
+
+        if (model.hasConflictingInterview(editedInterview)) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
+        }
 
         if (!interviewToEdit.equals(editedInterview) && model.hasInterview(editedInterview)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);

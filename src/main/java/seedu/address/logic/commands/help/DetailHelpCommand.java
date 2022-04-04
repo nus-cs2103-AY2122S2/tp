@@ -21,12 +21,18 @@ public class DetailHelpCommand extends HelpCommand {
             return new CommandResult(HelpDescription.EDIT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "delete":
             return new CommandResult(HelpDescription.DELETE_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
-        case "filter":
-            return new CommandResult(HelpDescription.FILTER_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
-        case "sort":
-            return new CommandResult(HelpDescription.SORT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "list":
             return new CommandResult(HelpDescription.LIST_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
+        case "pass":
+            return new CommandResult(HelpDescription.PASS_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
+        case "fail":
+            return new CommandResult(HelpDescription.FAIL_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
+        case "accept":
+            return new CommandResult(HelpDescription.ACCEPT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
+        case "reject":
+            return new CommandResult(HelpDescription.REJECT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
+        case "export":
+            return new CommandResult(HelpDescription.EXPORT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "exit":
             return new CommandResult(HelpDescription.EXIT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         default:

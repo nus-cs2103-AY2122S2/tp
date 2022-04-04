@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.NameContainsKeywordsPredicate;
+import seedu.address.model.applicant.ApplicantNamePredicate;
 import seedu.address.testutil.EditApplicantDescriptorBuilder;
 
 /**
@@ -92,7 +93,7 @@ public class CommandTestUtil {
     public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "twenty"; // characters not allowed in age
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "T"; // 'T is not a valid gender'
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "***"; // only special chars not allowed for tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -126,6 +127,8 @@ public class CommandTestUtil {
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -164,7 +167,7 @@ public class CommandTestUtil {
 
         Applicant applicant = model.getFilteredApplicantList().get(targetIndex.getZeroBased());
         final String[] splitName = applicant.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredApplicantList(new ApplicantNamePredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredApplicantList().size());
     }

@@ -10,14 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
-    public static final String MESSAGE_CONSTRAINTS = "Description text should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Description can contain any characters and spaces, and it should not be blank.\n"
+                    + "Description should contain at least one alphanumeric character (e.g. \"1\" or \"a\")\n"
+                    + "Length of description is restricted to a maximum of 200 characters.";
 
     /*
      * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * After the first non-whitespace character, all characters are valid, including newline character.
      */
-    public static final String VALIDATION_REGEX = "[^\\s][\\s\\S]*";
+    public static final String VALIDATION_REGEX = "[^\\s][\\s\\S]{0,199}";
 
     public final String descriptionText;
 

@@ -162,24 +162,24 @@ An applicant in HireLah is represented by `Applicant`. `Applicant` is implemente
 Additionally, `Applicant` implements two new attributes which are represented by the following two new classes:
 
 * `Gender` — M refers to male, and F refers to female. Only the value M or F is allowed.
-* `Age` —  Numerical representation of the age of the applicant. Only values with two digits or more are allowed. 
+* `Age` —  Numerical representation of the age of the applicant. Only values with two digits or more are allowed.
 
-`Gender` and `Age` class highly resemble other existing attribute classes such as `Address`, `Email`, `Name`, and 
+`Gender` and `Age` class highly resemble other existing attribute classes such as `Address`, `Email`, `Name`, and
 `Phone`.
 
 These classes are contained in the `applicant` package which belongs to the `model` package.
 
-Applicant is implemented this way as for HireLah, we require new attributes such as `Gender` and `Age` to aid in the 
-recruitment process. the `Person` class did not contain such attributes. 
+Applicant is implemented this way as for HireLah, we require new attributes such as `Gender` and `Age` to aid in the
+recruitment process. the `Person` class did not contain such attributes.
 
-Adding Gender and Age as tags using the existing functionality is not ideal as we do not want these attributes to be 
+Adding Gender and Age as tags using the existing functionality is not ideal as we do not want these attributes to be
 optional.
 
-A new `Applicant` class had to be created to support the functionality. It is also not ideal to keep the existing 
-`Person` class as it should not be instantiated by users in HireLah. 
+A new `Applicant` class had to be created to support the functionality. It is also not ideal to keep the existing
+`Person` class as it should not be instantiated by users in HireLah.
 
-Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to 
-support the needs of HireLah. 
+Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
+support the needs of HireLah.
 
 ### Adding of Data 
 
@@ -202,6 +202,49 @@ There are 3 levels to the parsing of the add command from user input.
 * **Alternative 2:** An individual command for each data type that can be added
     * Pros: Fewer levels of parsers is required.
     * Cons: We must ensure that the implementation of each individual command are correct.
+
+### Deleting of Data
+
+#### Implementation
+The implementation of deleting data is similar to adding data, where deleting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
+
+The parsing of a delete command from user input is also done through the 3 levels system, with `AddressBookParser`, `DeleteCommandParser`, and `DeleteXYZCommandParser` which eventually creates the `DeleteXYZCommand`.
+
+However, when deleting an applicant or a position, an additional step of cascading to delete interview is required. Since every interview is associated with an applicant and a position, we cannot have an interview exist without the corresponding applicant or position.
+Hence, it is important to delete the associated interview(s) when deleting an applicant or a position.
+
+#### Design considerations:
+
+#### Aspect: How to cascade when deleting applicant/position to delete interview:
+
+* **Alternative 1 (current choice):** Loop through all interviews in `DeleteXYZCommand`
+    * Pros: Less coupling as a data type does not store another data type as an attribute.
+    * Cons: May be less efficient as we have to loop through the whole list of interviews everytime when deleting applicant/position.
+
+
+* **Alternative 2:** Keep relevant list of interviews for each applicant and position.
+    * Pros: More efficient when deleting since all the associated interviews are already available.
+    * Cons: Increased coupling between applicant, position, and interview which make it more bug-prone.
+
+### Sorting of Data
+
+#### Implementation
+The implementation of sorting data is similar to list data, where sorting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
+
+The parsing of a sorting command from user input is also done through the 3 levels system, with `AddressBookParser`, `SortCommandParser`, and `SortXYZCommandParser` which eventually creates the `SortXYZCommand`.
+
+#### Design considerations:
+
+#### Aspect: How to sort data without affect the original dataset
+
+* **Alternative 1 (current choice):** Store an additional full dataset in `ModelManager`
+    * Pros: Easier to implement, less chance of error occurs when modify the displayed data.
+    * Cons: Less optimal in space as we need to store a copy of the database
+
+
+* **Alternative 2:** Mark an integer represent the position of the original data
+    * Pros: More efficient in memory space
+    * Cons: Increased the complexity of the relevant code, which make it more bug-prone.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -312,7 +355,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 * manage contacts faster than a typical mouse/GUI driven app
 * One command and the email will be sent to all recipient
 * Stores all correspondence with the candidate for easy access and viewing
@@ -331,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | recruiter   | access information of candidates                            | I can contact them                                              |
 | `* *`    | recruiter   | access status (OA/first interview etc) of candidates        | I can easily identify where they are in the recruiting pipeline |
 | `*`      | expert user | access previous commands which I have sent to the interface | I can work faster                                               |
- 
+
 
 *{More to be added}*
 
@@ -385,6 +428,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 *{More to be added}*
+
+**Use case 03: Editing position**
+
+**MSS**
+1. User requests to list positions
+2. HireLah shows a list of positions
+3. User chooses to edit a position based on the index from the visible list, and provide the fields to edit.
+4. HireLah refreshes the list of positions to display the newly edited position.
+    <br/><br/>
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is not a valid index in the list.
+* 3a1. HireLah informs user that the index is not valid.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 3b. The new position name provided is the same as another position.
+* 3b1. HireLah informs user that the new position name is not valid.
+  <br/><br/>
+  Use case ends.
 
 ### Non-Functional Requirements
 

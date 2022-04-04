@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.applicant;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.applicant.ListApplicantCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,12 +28,14 @@ public class ListApplicantCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListApplicantCommand(), model, ListApplicantCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListApplicantCommand(), model, String.format(ListApplicantCommand.MESSAGE_SUCCESS,
+                expectedModel.getFilteredApplicantList().size()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListApplicantCommand(), model, ListApplicantCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListApplicantCommand(), model, String.format(ListApplicantCommand.MESSAGE_SUCCESS,
+                expectedModel.getFilteredApplicantList().size()), expectedModel);
     }
 }

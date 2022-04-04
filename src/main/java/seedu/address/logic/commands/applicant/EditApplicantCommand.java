@@ -30,6 +30,7 @@ import seedu.address.model.applicant.Age;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Gender;
+import seedu.address.model.applicant.HiredStatus;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.tag.Tag;
@@ -58,6 +59,8 @@ public class EditApplicantCommand extends EditCommand {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the address book.";
+    private static final String MESSAGE_DUPLICATE_EMAIL = "The email is already used by %1$s";
+    private static final String MESSAGE_DUPLICATE_PHONE = "The phone number is already used by %1$s";
 
     private final Index index;
     private final EditApplicantDescriptor editApplicantDescriptor;
@@ -90,8 +93,26 @@ public class EditApplicantCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(applicantToEdit, editedApplicant);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        boolean emailNotEdited = applicantToEdit.getEmail().equals(editedApplicant.getEmail());
+        if (!emailNotEdited) {
+            Applicant applicantWithEmail = model.getApplicantWithEmail(editedApplicant.getEmail());
+            if (applicantWithEmail != null) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_EMAIL,
+                        applicantWithEmail.getName().fullName));
+            }
+        }
+
+        boolean phoneNotEdited = applicantToEdit.getPhone().equals(editedApplicant.getPhone());
+        if (!phoneNotEdited) {
+            Applicant applicantWithPhone = model.getApplicantWithPhone(editedApplicant.getPhone());
+            if (applicantWithPhone != null) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE,
+                        applicantWithPhone.getName().fullName));
+            }
+        }
+
+        model.updateApplicant(applicantToEdit, editedApplicant);
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant), getCommandDataType());
     }
 
@@ -114,10 +135,11 @@ public class EditApplicantCommand extends EditCommand {
         Age updatedAge = editApplicantDescriptor.getAge().orElse(applicantToEdit.getAge());
         Address updatedAddress = editApplicantDescriptor.getAddress().orElse(applicantToEdit.getAddress());
         Gender updatedGender = editApplicantDescriptor.getGender().orElse(applicantToEdit.getGender());
+        HiredStatus updatedHiredStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
         Set<Tag> updatedTags = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAge, updatedAddress,
-                updatedGender, updatedTags);
+                updatedGender, updatedHiredStatus, updatedTags);
     }
 
     @Override
@@ -149,6 +171,7 @@ public class EditApplicantCommand extends EditCommand {
         private Age age;
         private Address address;
         private Gender gender;
+        private HiredStatus hiredStatus;
         private Set<Tag> tags;
 
         public EditApplicantDescriptor() {}
@@ -164,6 +187,7 @@ public class EditApplicantCommand extends EditCommand {
             setAge(toCopy.age);
             setAddress(toCopy.address);
             setGender(toCopy.gender);
+            setStatus(toCopy.hiredStatus);
             setTags(toCopy.tags);
         }
 
@@ -220,6 +244,14 @@ public class EditApplicantCommand extends EditCommand {
 
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
+        }
+
+        public void setStatus(HiredStatus hiredStatus) {
+            this.hiredStatus = hiredStatus;
+        }
+
+        public Optional<HiredStatus> getStatus() {
+            return Optional.ofNullable(hiredStatus);
         }
 
         /**

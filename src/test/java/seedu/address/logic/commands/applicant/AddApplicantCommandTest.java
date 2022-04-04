@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.applicant;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,22 +6,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.applicant.AddApplicantCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.PersonBuilder;
@@ -134,6 +138,21 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public Applicant getApplicantWithEmail(Email email) {
+            return null;
+        }
+
+        @Override
+        public Applicant getApplicantWithPhone(Phone phone) {
+            return null;
+        }
+
+        @Override
+        public boolean isSameApplicantPosition(Applicant applicant, Position position) {
+            return true;
+        }
+
+        @Override
         public void deletePerson(Applicant target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,7 +178,52 @@ public class AddApplicantCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Applicant> predicate) {
+        public void updateSortApplicantList(Comparator<Applicant> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortInterviewList(Comparator<Interview> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortPositionList(Comparator<Position> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilterAndSortApplicantList(Predicate<Applicant> predicate, Comparator<Applicant> comparator) {
+
+        }
+
+        @Override
+        public void updateFilterAndSortInterviewList(Predicate<Interview> predicate, Comparator<Interview> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportCsvApplicant() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportCsvInterview() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void exportCsvPosition() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -167,6 +231,40 @@ public class AddApplicantCommandTest {
         public void addInterview(Interview interview) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean isPassableInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isAcceptableInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRejectableInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+        //        @Override
+        //        public void passInterview(Interview interview) {
+        //            throw new AssertionError("This method should not be called.");
+        //        }
+        //
+        //        @Override
+        //        public void failInterview(Interview interview) {
+        //            throw new AssertionError("This method should not be called.");
+        //        }
+        //
+        //        @Override
+        //        public void acceptInterview(Interview interview) {
+        //            throw new AssertionError("This method should not be called.");
+        //        }
+        //
+        //        @Override
+        //        public void rejectInterview(Interview interview) {
+        //            throw new AssertionError("This method should not be called.");
+        //        }
 
         @Override
         public void setInterview(Interview target, Interview editedInterview) {
@@ -184,6 +282,16 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public ArrayList<Interview> getApplicantsInterviews(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Interview> getPositionsInterviews(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePosition(Position target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,7 +302,22 @@ public class AddApplicantCommandTest {
         }
 
         @Override
+        public boolean hasConflictingInterview(Interview interview) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPosition(Position target, Position editedPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePosition(Position positionToBeUpdated, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateApplicant(Applicant applicantToBeUpdated, Applicant newApplicant) {
             throw new AssertionError("This method should not be called.");
         }
 

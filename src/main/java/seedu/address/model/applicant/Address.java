@@ -9,13 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
-
+    public static final String MESSAGE_CONSTRAINTS =
+            "Address can contain any characters and spaces, and it should not be blank.\n"
+                    + "Address should contain at least one alphanumeric character (e.g. \"1\" or \"a\")\n"
+                    + "Length of address is restricted to a maximum of 100 characters.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[^\\s].{0,99}";
 
     public final String value;
 
