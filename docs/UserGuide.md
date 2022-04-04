@@ -177,9 +177,9 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
 
 * The attributes that support **multiple findings** at the same time are `n/NAME`, `a/ACADEMIC_MAJOR`, and `t/TAG`.
   * `find n/Alex David` is possible and would show two results as `Alex Yeoh` and `David Li`, assuming that these are the only matching contacts.
-  * `find a/Computer Science Business` is possible and would show contacts that has the following major: `Computer Science`, `Business`, `Business Analytics`
+  * `find a/Computer Science Business` is possible and would show contacts that have the following major: `Computer Science`, `Business`, `Business Analytics`
   , assuming that these majors are the exhaustive majors in the student contacts.
-  * `find t/friends colleagues` is possible and would show contacts that has the at least one of the 2 tags: `friends` and `colleagues`.</br>
+  * `find t/friends colleagues` is possible and would show contacts that have the at least one of the 2 tags: `friends` and `colleagues`.</br>
 
 
 * The attributes that **does not support multiple findings** at the same time are `p/PHONE_NUMBER` and `e/EMAIL`
@@ -437,11 +437,11 @@ Action | Format, Examples
 --------|------------------
 **View help** | `help`
 **List all student contacts** | `list`
-**Find name** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
-**Find academic major** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find a/Computer Science`
-**Find tag** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friends colleagues`
-**Find phone number** | `find KEYWORD`<br> e.g., `find p/12345678`
-**Find email** | `find KEYWORD`<br> e.g., `find e/example@u.nus.edu`
+**Find name** | `find n/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`
+**Find academic major** | `find a/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find a/Computer Science`
+**Find tag** | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friends colleagues`
+**Find phone number** | `find p/KEYWORD`<br> e.g., `find p/12345678`
+**Find email** | `find e/KEYWORD`<br> e.g., `find e/example@u.nus.edu`
 **Clear entries** | `clear`
 **Exit** | `exit`
 
