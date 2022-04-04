@@ -8,12 +8,12 @@ import java.util.function.Predicate;
 import seedu.contax.commons.util.DateUtil;
 
 /**
- * Tests that a {@code ScheduleItem} falls between the given date time range.
+ * Tests if a {@code ScheduleItem} falls between the given date time range.
  * It returns true if the ScheduleItem being tested contains some sub-range of the predicate's date range.
  */
 public class DateRangePredicate implements Predicate<ScheduleItem> {
-    private final LocalDateTime start;
-    private final LocalDateTime end;
+    private final LocalDateTime rangeStart;
+    private final LocalDateTime rangeEnd;
 
     /**
      * Constructs a DateRangePredicate object.
@@ -25,18 +25,19 @@ public class DateRangePredicate implements Predicate<ScheduleItem> {
         requireNonNull(start);
         requireNonNull(end);
 
-        this.start = start;
-        this.end = end;
+        this.rangeStart = start;
+        this.rangeEnd = end;
     }
 
     @Override
     public boolean test(ScheduleItem scheduleItem) {
-        LocalDateTime appointmentStart = scheduleItem.getStartDateTime();
-        LocalDateTime appointmentEnd = scheduleItem.getEndDateTime();
+        LocalDateTime targetStart = scheduleItem.getStartDateTime();
+        LocalDateTime targetEnd = scheduleItem.getEndDateTime();
 
-        return (DateUtil.isBeforeOrEqual(appointmentStart, start) && DateUtil.isAfterOrEqual(appointmentEnd, end))
-                || (DateUtil.isAfterOrEqual(appointmentStart, start) && DateUtil.isBeforeOrEqual(appointmentEnd, end))
-                || (DateUtil.isAfterOrEqual(appointmentStart, start) && DateUtil.isBeforeOrEqual(appointmentStart, end))
-                || (DateUtil.isAfterOrEqual(appointmentEnd, start) && DateUtil.isBeforeOrEqual(appointmentEnd, end));
+        return (DateUtil.isBeforeOrEqual(targetStart, rangeStart) && DateUtil.isAfterOrEqual(targetEnd, rangeEnd))
+                || (DateUtil.isAfterOrEqual(targetStart, rangeStart) && DateUtil.isBeforeOrEqual(targetEnd, rangeEnd))
+                || (DateUtil.isAfterOrEqual(targetStart, rangeStart)
+                    && DateUtil.isBeforeOrEqual(targetStart, rangeEnd))
+                || (DateUtil.isAfterOrEqual(targetEnd, rangeStart) && DateUtil.isBeforeOrEqual(targetEnd, rangeEnd));
     }
 }
