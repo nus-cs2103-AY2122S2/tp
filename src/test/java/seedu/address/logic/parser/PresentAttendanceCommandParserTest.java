@@ -4,12 +4,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DATE_DESC_CHARLIE;
-import static seedu.address.logic.commands.CommandTestUtil.PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE;
-import static seedu.address.logic.commands.CommandTestUtil.PRESENT_DESC_WITH_TRANSPORT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DROPOFF_TIME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DROPOFF_TIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PICKUP_TIME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PICKUP_TIME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE;
+import static seedu.address.logic.commands.CommandTestUtil.PRESENT_DESC_WITH_TRANSPORT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DROPOFF_TIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PICKUP_TIME_AMY;
@@ -133,15 +133,15 @@ public class PresentAttendanceCommandParserTest {
 
         // wrong format
         for (String s : wrongFormatUserInput) {
-            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY +
-                    createPickUpTimeDesc(s) + DROPOFF_TIME_DESC_AMY,
+            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY
+                    + createPickUpTimeDesc(s) + DROPOFF_TIME_DESC_AMY,
                 ParserUtil.MESSAGE_INVALID_PICKUP_TIME);
         }
 
         // invalid times
         for (String s : invalidTimesUserInput) {
-            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY +
-                    createPickUpTimeDesc(s) + DROPOFF_TIME_DESC_AMY,
+            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY
+                    + createPickUpTimeDesc(s) + DROPOFF_TIME_DESC_AMY,
                 ParserUtil.MESSAGE_INVALID_PICKUP_TIME);
         }
     }
@@ -153,15 +153,15 @@ public class PresentAttendanceCommandParserTest {
 
         // wrong format
         for (String s : wrongFormatUserInput) {
-            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY +
-                    PICKUP_TIME_DESC_AMY + createDropOffTimeDesc(s),
+            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY
+                    + PICKUP_TIME_DESC_AMY + createDropOffTimeDesc(s),
                 ParserUtil.MESSAGE_INVALID_DROPOFF_TIME);
         }
 
         // invalid times
         for (String s : invalidTimesUserInput) {
-            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY +
-                    PICKUP_TIME_DESC_AMY + createDropOffTimeDesc(s),
+            assertParseFailure(parser, TARGET_PET_INDEX.getOneBased() + ATTENDANCE_DATE_DESC_AMY
+                    + PICKUP_TIME_DESC_AMY + createDropOffTimeDesc(s),
                 ParserUtil.MESSAGE_INVALID_DROPOFF_TIME);
         }
     }

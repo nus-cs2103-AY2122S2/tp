@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbsentAttendanceCommand;
 import seedu.address.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
-import seedu.address.logic.commands.PresentAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,7 +25,7 @@ public class AbsentAttendanceCommandParser implements Parser<AbsentAttendanceCom
     public AbsentAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+            ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -35,10 +34,10 @@ public class AbsentAttendanceCommandParser implements Parser<AbsentAttendanceCom
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         AbsentAttendanceDescriptor absentAttendanceDescriptor =
-                new AbsentAttendanceDescriptor();
+            new AbsentAttendanceDescriptor();
 
         absentAttendanceDescriptor.setAttendanceDate(
-                ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get()));
+            ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get()));
 
         return new AbsentAttendanceCommand(index, absentAttendanceDescriptor);
     }
