@@ -424,6 +424,9 @@ fresh from the start, you could use the `clear` command to clear all the sample 
 **A**: An index is simply the number in front of the student contact's name. It specifies the order 
 in which the student contact appears in the list.
 
+**Q**: What is an unsigned integer?<br>
+**A**: An unsigned integer is an integer that ranges from 0 to 4294967295 inclusive.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
