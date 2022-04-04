@@ -14,33 +14,30 @@ Given below are my contributions to the project.
 * **Code contributed**: Wrote up to 80% of the total code written in the project. 
 My contributions can be accessed via [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=punpun1643&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=Punpun1643&tabRepo=AY2122S2-CS2103-W16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
 
-* **New Feature**: `addgroup` command (PR: [\#46](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/46), [\#86](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/86) and [\#97](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/97))
-  * What it does: Allows users to create a group in ArchDuke.
+* **New Features**: `addgroup` command (PR: [\#46](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/46), 
+[\#86](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/86) 
+and [\#97](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/97)) and `delgroup` command (PR: [\#65](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/65))
+  * What it does: Allows users to create/delete a group in ArchDuke.
   * Justification: This feature is critical to the product, and without it the product would not function.
-  The command allows users to create a student group. This is one of the main value propositions of ArchDuke.
+  The command allows users to create/delete a student group. This is one of the main value propositions of ArchDuke.
   * Highlights: This is the first newly added command in ArchDuke, which requires the in-depth understanding of how 
   the application parses user inputs and execute commands. It requires an understanding of how the application is designed 
   and how various classes and methods interact. It also provides skeleton for other commands to be developed. 
   A change to the structure of the code base was also made in this command implementation.
 
-* **New Feature**: `delgroup` command (PR: [\#65](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/65))
-  * What it does: Allows users to delete a group in ArchDuke.
-
 * **New Feature**: `deassign` command (PR: [\#91](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/91) and [\#114](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/114))
   * What it does: Allows users to deassign a student contact from an existing group.
 
-* **New Feature**: `viewcontact` command (PR: [\#92](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/92))
-  * What it does: Allows users to view student contacts in an existing group.
-  * Justification: This command is mainly to increase the user experience especially for the fast typists. Users could view the contact list
+* **New Features**: `viewcontact` command (PR: [\#92](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/92))
+and `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/73) and [\#90](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/90))
+  * What it does: Allows users to view student contacts/tasks in an existing group.
+  * Justification: This command is mainly to increase the user experience especially for the fast typists. Users could view the contacts/tasks
   in the group without having to scroll through the GUI.
   * Highlights: This feature requires an understanding of data storage and data retrieval from AB3.
 
 * **New Feature**: `deltask` command (PR: [\#69](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/69))
   * What it does: Allows users to remove tasks from the existing group.
   * Justification: This feature is critical to the product, and without it the product would not function as a task management application.
-
-* **New Feature**: `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/73) and [\#90](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/90))
-  * What it does: Allows users to view tasks from an existing group.
 
 * **Enhancements to existing feature**: `GUI` (PR: [\#51](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/51), [\#102](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/102), 
 [\#104](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/105 and [\#111](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/111)))
