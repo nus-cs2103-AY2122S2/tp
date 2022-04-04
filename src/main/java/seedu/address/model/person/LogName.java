@@ -21,7 +21,7 @@ public class LogName extends Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct}\\s]{1," + (TITLE_LENGTH_CONSTRAINT - 1) + "}";
+    public static final String VALIDATION_REGEX = "^[\\p{Graph}][\\p{Alnum}\\p{Punct}\\s]{0," + (TITLE_LENGTH_CONSTRAINT - 1) + "}";
 
     /**
      * Constructs a {@code FriendName}.

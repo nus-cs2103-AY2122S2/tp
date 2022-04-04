@@ -26,7 +26,6 @@ public class LogNameTest {
         // invalid name
         assertFalse(LogName.isValidLogName("")); // empty string
         assertFalse(LogName.isValidLogName(" ")); // spaces only
-        assertFalse(LogName.isValidLogName("^")); // only non-alphanumeric characters
         assertFalse(LogName.isValidLogName("ajdhfgos;hdgoi;asdhgio;asdhgiosdhgioshdigoshdioghsi")); // 51 characters
 
         // valid name
@@ -37,5 +36,6 @@ public class LogNameTest {
         assertTrue(LogName.isValidLogName("3rd time meeting peter")); // alphanumeric characters
         assertTrue(LogName.isValidLogName("The \"Capital\" incident")); // with capital letters
         assertTrue(LogName.isValidLogName("#BestDayEver")); // long names
+        assertTrue(LogName.isValidLogName("^")); // only pun
     }
 }
