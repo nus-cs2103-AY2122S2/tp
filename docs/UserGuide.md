@@ -151,6 +151,13 @@ Examples:
 * `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
 * `addmodule 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd contact
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Accepted Module Formats:**<br>
+* Module names have 2-3 letters prefix followed by 4 digits and at most two optional letters.
+* Examples of valid Modules: `CS1231`, `CS2103T`, `NUR1107B`, `MUT2022`
+</div>
+
 [_**See below for an example image of a person with modules**_](#example-of-a-contact-with-status-and-comment)
 
 ### Adding a comment for a contact : `comment`
