@@ -31,7 +31,7 @@ public class AddEventCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Interview "
             + PREFIX_COMPANY + "ABC "
-            + PREFIX_DATE + "12-12-2022 "
+            + PREFIX_DATE + "2022-10-31 "
             + PREFIX_TIME + "13:30 "
             + PREFIX_LOCATION + "zoom "
             + PREFIX_TAG + "technical "
