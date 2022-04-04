@@ -12,7 +12,7 @@ ContaX allows efficient management of a large list of contacts together with a s
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to create and manage Appointments in a Schedule
-  * *What it does*: Allows users to create, view, edit and delete Appointments in the application.
+  * *What it does*: Allows users to create, view, edit and delete Appointments.
   * *Justification*: Since the target user profile focuses on busy professionals, this is a key feature that the entire application is built around, allowing users to offload the management of their busy schedules to ContaX.
   * *Highlights* The Schedule is designed to be sorted chronologically, and features a highly defensive design that is further detailed in the Developer Guide. This feature necessitated adding code across all 4 major components, and also involved adding a significant amount of test code complimenting the entire system.
 
