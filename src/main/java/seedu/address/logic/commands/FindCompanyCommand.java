@@ -24,8 +24,8 @@ public class FindCompanyCommand extends Command {
     public static final String COMMAND_WORD = "findc";
     public static final String MESSAGE_NOT_QUERIED = "At least one field to find must be provided.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies with given details of the company "
-            + "by name and tag.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies with the same details as the "
+            + "given parameters.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]"
