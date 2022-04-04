@@ -3,6 +3,8 @@ package seedu.tinner.model.role;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tinner.testutil.Assert.assertThrows;
+import static seedu.tinner.testutil.TypicalRoles.ML_ENGINEER;
+import static seedu.tinner.testutil.TypicalRoles.MOBILE_ENGINEER;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,4 +49,14 @@ public class RoleNameTest {
         assertTrue(RoleName.isValidName("SWE ()")); // alphanumeric and brackets
         assertTrue(RoleName.isValidName("SWE (Backend)")); // alphanumeric and brackets
     }
+
+    @Test
+    public void equals() {
+        // same role name but diff case -> return true
+        assertTrue(new RoleName(MOBILE_ENGINEER.getName().toString().toLowerCase()).equals(MOBILE_ENGINEER.getName()));
+
+        // diff role name -> return false
+        assertFalse(ML_ENGINEER.getName().equals(MOBILE_ENGINEER.getName()));
+    }
+
 }

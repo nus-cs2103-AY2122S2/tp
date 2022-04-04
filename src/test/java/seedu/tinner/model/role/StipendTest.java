@@ -30,11 +30,25 @@ public class StipendTest {
         assertFalse(Stipend.isValidStipend("stipend")); // non-numeric
         assertFalse(Stipend.isValidStipend("22e22")); // alphabets within digits
         assertFalse(Stipend.isValidStipend("22 22")); // spaces within digits
+        assertFalse(Stipend.isValidStipend("22.22"));
+        assertFalse(Stipend.isValidStipend("0"));
+        assertFalse(Stipend.isValidStipend("000000"));
 
         // valid stipends
         assertTrue(Stipend.isValidStipend("")); // empty string
         assertTrue(Stipend.isValidStipend("1000"));
         assertTrue(Stipend.isValidStipend("1")); // one number
         assertTrue(Stipend.isValidStipend("100000000")); // ten numbers
+        assertTrue(Stipend.isValidStipend("000000001")); // all zeros
     }
+
+    @Test
+    public void equals() {
+        assertTrue(new Stipend("000001").toString().equals("1"));
+
+        assertTrue(new Stipend("101").equals(new Stipend("000101")));
+
+        assertFalse(new Stipend("101").equals(new Stipend("010")));
+    }
+
 }

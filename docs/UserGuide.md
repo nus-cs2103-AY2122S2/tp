@@ -249,7 +249,8 @@ The following points explain the format of a command.
 ### Role Restrictions <a id="c-role-restrictions"></a>
 
 * The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
-* The `REMINDER_DATE` should be in format dd-MM-yyyy HH:mm.
+* The `REMINDER_DATE` should not be in the past and must be a valid date 
+in the following format: dd-MM-yyyy HH:mm.
 * The `STATUS` is case-sensitive and can only accept the following inputs:
     * applying
     * pending
