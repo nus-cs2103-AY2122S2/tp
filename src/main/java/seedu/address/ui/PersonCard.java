@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
@@ -52,13 +55,27 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value == null ? "" : person.getPhone().value);
-        address.setText(person.getAddress().value == null ? "" : person.getAddress().value);
-        email.setText(person.getEmail().value == null ? "" : person.getEmail().value);
+        String phoneNumText = person.getPhone().value == null ? "" : person.getPhone().value;
+        phoneNumText = "Phone number: " + phoneNumText;
+        phone.setText(phoneNumText);
+        String addressText = person.getAddress().value == null ? "" : person.getAddress().value;
+        addressText = "Address :";
+        address.setText(addressText);
+        String emailText = person.getEmail().value == null ? "" : person.getEmail().value;
+        emailText = "Email: " + emailText;
+        email.setText(emailText);
+        Text tagsText = new Text("Tags: ");
+        tagsText.setFill(Color.WHITE);
+        tagsText.setFont(new Font("Segoe UI", 13));
+        tags.getChildren().add(tagsText);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         logs.setHgap(4);
+        Text logsText = new Text("Logs: ");
+        logsText.setFill(Color.WHITE);
+        logsText.setFont(new Font("Segoe UI", 13));
+        logs.getChildren().add(logsText);
         int index = 1;
         for (Log log: person.getLogs()) {
             logs.getChildren().add(new Label(index + ". " + log.getTitle()));

@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import seedu.address.model.event.Event;
 
 /**
@@ -45,8 +48,12 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        dateTime.setText(event.getDateTime().toString());
-        description.setText(event.getDescription().value);
+        dateTime.setText("Event Date: " + event.getDateTime().toString());
+        description.setText("Event Description: " + event.getDescription().value);
+        Text friendsText = new Text("Friends: ");
+        friendsText.setFill(Color.WHITE);
+        friendsText.setFont(new Font("Segoe UI", 13));
+        friends.getChildren().add(friendsText);
         friends.setHgap(4);
         event.getFriendNames().stream()
                 .forEach(friend -> friends.getChildren().add(new Label(friend.fullName)));
