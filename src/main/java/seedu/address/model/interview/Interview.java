@@ -189,4 +189,13 @@ public class Interview {
         return builder.toString();
     }
 
+    /**
+     * Creates csv output for interview
+     */
+    public String convertToCsv() {
+        String applicantCsv = this.applicant.convertToCsv();
+        String positionCsv = this.position.convertToCsv();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        return this.date.format(formatter) + "," + this.status + "," + applicantCsv + "," + positionCsv;
+    }
 }

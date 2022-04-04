@@ -16,27 +16,31 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
+2. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * `list -i`: Switches to interview tab and displays all interviews.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `list -a s/asc`: Switches to applicants tab and displays all applicants sorted by name in ascending order.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`: Adds an applicant named `Benedict` to the Address Book.
 
-   * **`clear`** : Deletes all contacts.
+   * `delete -i 2`: Deletes the 2nd interview shown in the current interview list.
 
-   * **`exit`** : Exits the app.
+   * `pass 1`: Passes the 1st interview shown in the current interview list.
+   
+   * `export -a`: Exports the data of all applicants in HireLah to a CSV file.
+   
+   * `exit`: Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,7 +51,7 @@ from offering positions to scheduling interviews with candidates. It is optimise
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add -a n/NAME`, `NAME` is a parameter which can be used as `add n/Benedict`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -61,8 +65,8 @@ from offering positions to scheduling interviews with candidates. It is optimise
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+* Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
 
@@ -87,7 +91,8 @@ An applicant can have any number of tags (including 0)
 </div>
 
 * Age provided must be at least two digits eg: “23”
-* Gender must be M/F
+* Phone number and email must be unique 
+* Gender must be M/F (case-sensitive)
 
 Examples:
 * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
@@ -189,7 +194,7 @@ Format: `delete -TYPE`
 * -i will delete an interview
 * -p will delete a position
 
-### Deleting an Applicant : `del -a`
+### Deleting an Applicant : `delete -a`
 
 Deletes the specified Applicant from HireLah.
 
@@ -203,7 +208,7 @@ Examples:
 * `list` followed by `delete -a 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting an Interview: `del -i`
+### Deleting an Interview: `delete -i`
 
 Deletes an existing interview in HireLah.
 
@@ -216,7 +221,7 @@ Examples:
 * `delete -i 3`
 
 
-### Delete positions : `del -p`
+### Delete positions : `delete -p`
 
 Deletes an existing position in HireLah.
 
@@ -253,13 +258,21 @@ Lists all applicants by default. Automatically toggles view to the applicant tab
 
 The applicants displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| FILTER_TYPE | FILTER_ARGUMENT                    | Description                                        |
-|-------------|------------------------------------|----------------------------------------------------|
-| `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s) |
+
+| FILTER_TYPE | FILTER_ARGUMENT                    | Description                                              |
+|-------------|------------------------------------|----------------------------------------------------------|
+| `name`      | Keyword(s) in the applicant's name | View applicants whose name contains the keyword(s)       |
+| `gender`    | M/F                                | View applicants of the given gender                      |
+| `status`    | available/hired                    | View applicants with the status given                    |
+| `tag`       | Keyword(s) in the applicant's tag  | View applicants with a tag that matches the keywords(s)  |
 
 The applicants displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`. 
 
-Examples: `list -a f/name a/John Doe`
+Examples: 
+- `list -a s/asc`
+- `list -a f/name a/John Doe`
+- `list -a f/tag a/Java`
+- `list -a f/status a/hired s/dsc`
 
 ### List Positions : `list -p [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 
@@ -267,14 +280,17 @@ Lists all existing positions by default. Automatically toggles view to the posit
 
 The positions displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| FILTER_TYPE | FILTER_ARGUMENT                 | Description                                            |
-|-------------|---------------------------------|--------------------------------------------------------|
-| `name`      | Keyword(s) in the position name | View positions with names that contains the keyword(s) |
+| FILTER_TYPE | FILTER_ARGUMENT                 | Description                                                     |
+|------------|---------------------------------|-----------------------------------------------------------------|
+| `name`     | Keyword(s) in the position name | View positions with names that contains the keyword(s)          |
+| `req`       | Keyword(s) in the requirement   | View positions with a requirement that contains the keywords(s) |
 
 The positions displayed can be sorted by their **name** using the parameter `s/SORT_ARGUMENT`.
 
-Example: `list -p f/name a/Software Engineer`
-
+Examples: 
+- `list -p s/asc`
+- `list -p f/name a/Software Engineer`
+- `list -p f/req a/Java s/dsc`
 
 ### Listing interviews: `list -i [f/FILTER_TYPE a/FILTER_ARGUMENT] [s/SORT_ARGUMENT]`
 
@@ -282,15 +298,90 @@ Lists all existing interviews by default. Automatically toggles view to the inte
 
 The interviews displayed can be filtered by providing the optional parameters `f/FILTER_TYPE` and `a/FILTER_ARGUMENT`:
 
-| FILTER_TYPE | FILTER_ARGUMENT                                           | Description                                                          |
-|-------------|-----------------------------------------------------------|----------------------------------------------------------------------|
-| `appl`      | Keyword(s) in the applicant's name                        | View interviews for applicants whose name contains the keyword(s)    |
-| `pos`       | Keyword(s) in the position's name                         | View interviews for position with names that contains the keyword(s) |
-| `date`      | Date the interview is happening<br/>Format: `yyyy-mm-dd`  | View interviews which happens on the date provided                   |
-
-The positions displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
+| FILTER_TYPE | FILTER_ARGUMENT                                          | Description                                                          |
+|-------------|----------------------------------------------------------|----------------------------------------------------------------------|
+| `appl`      | Keyword(s) in the applicant's name                       | View interviews for applicants whose name contains the keyword(s)    |
+| `pos`       | Keyword(s) in the position's name                        | View interviews for position with names that contains the keyword(s) |
+| `date`      | Date the interview is happening in `yyyy-mm-dd`          | View interviews which happens on the date provided                   |
+| `status`    | pending / passed / failed / accepted / rejected          | View interviews with the status given                                |
 
 Example: `list -i f/date a/2022-05-04`
+
+The interviews displayed can be sorted by their **date** using the parameter `s/SORT_ARGUMENT`.
+
+Examples: 
+- `list -i s/dsc`
+- `list -i f/date a/2022-05-04`
+- `list -i f/status a/accepted s/asc`
+
+## Passing Interviews : `pass`
+
+Passes an existing interview in Hirelah.
+
+Format: `pass INTERVIEW_INDEX`
+
+* Passes the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `pending` before it can be passed.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Additional details:
+* A job offer is handed out for the interviewed position when applicant passes interview.
+* Job offer is tracked by the `Position` interviewed for.
+* Job can only be offered if `offered` < `openings`.
+* A job offered will increase `offered` by 1.
+
+Example: `pass 1`
+
+## Failing Interviews : `fail`
+
+Fails an existing interview in Hirelah.
+
+Format: `fail INTERVIEW_INDEX`
+
+* Passes the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `pending` before it can be failed.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example: `fail 1`
+
+## Accepting Interviews : `accept`
+
+Accepts an existing `passed` interview in Hirelah. This command accepts the `passed` interview,
+meaning that the candidate has accepted the job.
+
+Format: `accept INTERVIEW_INDEX`
+
+* Accepts the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `passed` before it can be accepted.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Additional details:
+* Accepting a job offer will decrement number of `openings` and `offers`, as a vacancy in the `Position` is now filled
+* `Applicant` status will be updated to reflect the new job title
+* Note that editing a `Position`'s name after an `Applicant` has been hired will not change the `Applicant`'s job 
+  status.
+
+## Rejecting Interviews : `reject`
+
+Rejects an existing interview in Hirelah. This command rejects the `passed` interview,
+meaning that the candidate has rejected the job.
+
+Format: `reject INTERVIEW_INDEX`
+
+* Rejects the Interview at the specified `INTERVIEW_INDEX`.
+* Interview must have status `passed` before it can be rejected.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Additional details:
+* Rejecting a job offer will decrement the number of `offered` in `Position`, as the offer no longer stands.
+
+## Exporting Data : `export`
+
+Exports all data of the specified typo in HireLah to a CSV file. 
+
+Format: `export -TYPE`
+
+`TYPE` can be `a` for applicants, `p` for positions, and `i` for interviews
 
 ## Viewing help: `help`
 
@@ -310,13 +401,13 @@ Examples:
 * `help add`
 * `help del`
 
-### Exiting the program : `exit`
+## Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Saving the data
 
 Upon exiting HireLah, the data in the application will automatically be saved, including the positions, applicants, and interviews. There is no need to save manually.
 

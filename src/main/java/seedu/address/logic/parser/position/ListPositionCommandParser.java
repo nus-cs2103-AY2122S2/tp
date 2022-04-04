@@ -29,6 +29,7 @@ public class ListPositionCommandParser extends GenericListParser<ListPositionCom
                 ParserUtil.parseFilterArgument(args.getValue(PREFIX_FILTER_ARGUMENT).get());
         SortArgument sortArgument =
                 ParserUtil.parseSortArgument(args.getValue(PREFIX_SORT_ARGUMENT).get());
+
         return new ListPositionCommand(filterType, filterArgument, sortArgument);
     }
 

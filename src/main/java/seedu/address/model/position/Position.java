@@ -212,4 +212,30 @@ public class Position {
         }
         return builder.toString();
     }
+
+    /**
+     * Creates csv output for position
+     */
+    public String convertToCsv() {
+        StringBuilder requirementString = new StringBuilder();
+        for (Requirement requirement : requirements) {
+            requirementString.append(requirement.requirementText);
+            requirementString.append(" | ");
+        }
+
+        return positionName.positionName + "," + escapeSpecialCharacters(description.descriptionText) + ","
+                + positionOpenings.toString() + "," + positionOffers.toString() + "," + requirementString;
+    }
+
+    /**
+     * Eliminates special characters from csv string
+     */
+    private String escapeSpecialCharacters(String data) {
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
+    }
 }
