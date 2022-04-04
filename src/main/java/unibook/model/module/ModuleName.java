@@ -8,14 +8,14 @@ import static unibook.commons.util.AppUtil.checkArgument;
  */
 public class ModuleName {
 
-    public static final String MESSAGE_CONSTRAINTS =
-        "Names should only contain up to 50 alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = " Module Names "
+                    + "should only contain up to 50 alphabetical characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
     public final String moduleName;
 

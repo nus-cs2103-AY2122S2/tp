@@ -1,6 +1,7 @@
 package unibook.model.module.group;
 
 import static java.util.Objects.requireNonNull;
+import static unibook.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,10 +23,11 @@ public class Group {
     public static final String MESSAGE_CONSTRAINTS = "Names should only contain up to 50 alphanumeric characters and "
             + "spaces, and it should not be blank";
 
-    private String name;
-    private Module module;
+    private static final int MAX_GROUP_NAME_LENGTH = 50;
     private final ObservableList<Student> members;
     private final ObservableList<LocalDateTime> meetingTimes;
+    private String name;
+    private Module module;
 
     /**
      * Instantiates a group object.
@@ -37,6 +39,7 @@ public class Group {
      */
     public Group(String name, Module module, ObservableList<Student> members,
                  ObservableList<LocalDateTime> meetingTimes) {
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.module = module;
         this.meetingTimes = meetingTimes;
@@ -51,10 +54,7 @@ public class Group {
      * @param meetingTimes meeting times of the group.
      */
     public Group(String name, Module module, ObservableList<LocalDateTime> meetingTimes) {
-        this.name = name;
-        this.module = module;
-        this.meetingTimes = meetingTimes;
-        this.members = FXCollections.observableArrayList();
+        this(name, module, FXCollections.observableArrayList(), meetingTimes);
     }
 
     /**
@@ -64,20 +64,21 @@ public class Group {
      * @param module that the group is in.
      */
     public Group(String name, Module module) {
-        this.name = name;
-        this.module = module;
-        this.meetingTimes = FXCollections.observableArrayList();
-        this.members = FXCollections.observableArrayList();
+        this(name, module, FXCollections.observableArrayList(), FXCollections.observableArrayList());
     }
 
     /**
      * Instantiates a group object with only the name, to be used to match groups to delete
      */
     public Group(String name) {
-        this.name = name;
-        this.module = null;
-        this.meetingTimes = FXCollections.observableArrayList();
-        this.members = FXCollections.observableArrayList();
+        this(name, null, FXCollections.observableArrayList(), FXCollections.observableArrayList());
+    }
+
+    /**
+     * Returns true if a given string is a valid name.
+     */
+    public static boolean isValidName(String test) {
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
     /**
@@ -122,6 +123,7 @@ public class Group {
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidGroupName(String test) {
@@ -130,6 +132,8 @@ public class Group {
 
 
     /**
+=======
+>>>>>>> 160fc4d1baa066b25a0282d3815a042948678de6
      * Returns the member students of the group.
      *
      * @return members of the group.
@@ -163,7 +167,6 @@ public class Group {
 
     /**
      * Removes the groups in the group list of each student that has this group
-     *
      */
     public void removeStudentsFromThisGroup() {
         for (Student student : members) {
@@ -211,7 +214,7 @@ public class Group {
     /**
      * Edit a meeting datetime from the group.
      *
-     * @param idx index of the meeting time to edit
+     * @param idx         index of the meeting time to edit
      * @param meetingTime meeting datetime to remove.
      */
     public void editMeetingTime(int idx, LocalDateTime meetingTime) {
@@ -236,7 +239,7 @@ public class Group {
      */
     public boolean sameGroupNameAndModule(String moduleCode, String groupName) {
         if (moduleCode.equals(this.module.getModuleCode().toString())
-                && groupName.equalsIgnoreCase(this.getGroupName())) {
+            && groupName.equalsIgnoreCase(this.getGroupName())) {
             return true;
         }
         return false;

@@ -408,8 +408,8 @@ On Person Page:
 * The GUI will display the index before the person
 
 `delete [INDEX] p/ e/ t/[TAG] of/`
-* p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put p/ and e/
-* At least 1 of the 4 tags must be entered, otherwise the command above will be executed instead
+* p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put `p/` and `e/`
+* At least 1 of {`p/`, `e/`, `t/[TAG]`, `of/`} must be entered, otherwise the `delete [INDEX]` command will be executed instead
 * Only 0 or 1 of each tag must be provided
 
 On Module Page:
@@ -449,7 +449,7 @@ For the following commands, if more than 1 of the following tags are provided, t
 * The second index (after stu/) represents the index for which student to delete
 * For example, `delete 2 stu/1` would delete the student at index 1 for the group at index 2
 
-`delete [INDEX] mt/1`
+`delete [INDEX] mt/[INDEX]`
 * Delete meeting time from group
 * The first index represents the index for which group to remove the meeting time for
 * The second index (after mt/) represents the index for which meeting time to delete
@@ -508,8 +508,12 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​` <br> e.g., `add o/module n/Software Engineering m/CS2103 ke/1 dt/2022-05-04 13:00` <br>`add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​` <br> e.g., `add o/group n/W16-1 m/CS2103 dt/2022-04-24 13:00` <br>`add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [[m/MODULECODE] [g/GROUPNAME]]…​`  <br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 g/W16-1` <br>`add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  <br>e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com of/123 Clementi Rd S123466 m/cs2103` <br>`add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  <br>e.g., `add o/event m/CS2103 ke/4 dt/2022-04-28 13:00` <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  <br>e.g., `add o/meeting m/CS2103 g/W16-1 dt/2022-04-29 13:00`
 **Clear** | `clear`
+<<<<<<< HEAD
 **Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
 **Edit** |  Editing person: `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG] `<br> e.g. `edit 1 o/person p/91234567 e/prof@email.com of/COM1 nm/CS2103 ` <br><br> Editing Module: `edit INDEX o/module [n/NAME] [m/MODCODE]` e.g. `edit 1 o/module m/CS2103 n/Software Engineering` <br><br> Editing Groups: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]` e.g. `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` <br><br> Editing Key Events: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]` e.g. `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45`
+=======
+**Delete** | Any Page: <br> `delete [INDEX]` <br><br> Person Page: <br> `delete [INDEX] p/ e/ t/[TAG] of/` <br> eg. `delete 1 p/ e/` <br> eg. `delete 2 t/friend` <br><br> Module Page: <br>`delete [INDEX] stu/[INDEX]` <br> `delete [INDEX] prof/[INDEX]` <br> `delete [INDEX] g/[GROUPNAME]` <br> `delete [INDEX] ke/[INDEX]` <br><br> Group Page: <br> `delete [INDEX] mt/[INDEX]` <br> `delete o/module m/[MODULECODE]` <br> eg. `delete o/module m/CS2103` <br> `delete o/group m/[MODULECODE] g/[GROUPNAME]` <br> eg. `delete o/group m/CS2103 g/Team Project`
+**Edit** | `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list CRITERIA` <br> e.g. `list type/professors` <br> e.g. `list m/CS2103` <br> e.g. `list ke/EXAM` <br> e.g. `list dt/2022-05-04` <br> e.g. `list n/Software Engineering` <br> `list o/OPTION [criteria]` <br> e.g. `list o/group g/W16-1` <br> e.g. `list o/module m/CS2103 type/students`
 **Help** | `help`

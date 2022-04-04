@@ -10,13 +10,12 @@ import static unibook.commons.util.AppUtil.checkArgument;
 public class Office {
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
-
     /*
      * The first character of the office must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
-
+    private static final int NAME_MAX_LENGTH = 20;
     public final String value;
 
     /**
@@ -41,7 +40,7 @@ public class Office {
      * Returns true if a given string is a valid office.
      */
     public static boolean isValidOffice(String test) {
-        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
+        return test.matches(VALIDATION_REGEX) && test.length() <= NAME_MAX_LENGTH;
     }
 
     @Override
