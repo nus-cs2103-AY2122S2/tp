@@ -53,7 +53,7 @@ title: Developer Guide
   * [Editing a show](#editing-a-show)
   * [Saving data](#saving-data)
   * [Finding a show](#finding-a-show)
-  * [Suggesting a show](#suggest-show)
+  * [Suggesting a show](#suggesting-a-show)
   * [Importing Trackermon data](#importing-trackermon-data)
   * [Exporting Trackermon data](#exporting-trackermon-data)
 
@@ -802,7 +802,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC11 - Suggest shows**
+**Use case: UC11 - Suggesting a show**
 
 **Preconditions: Trackermon application is started.**
 
