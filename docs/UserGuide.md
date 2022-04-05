@@ -36,7 +36,7 @@ We aim to help store keeper to simplify the process of managing inventory and re
 
    * **`list`** : Lists all products.
 
-   * **`add n:Maggie Mee c:noodles e:2022-01-01 p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
+   * **`add n:Maggie Mee c:noodles p:3.00 d:curry flavour`** : Adds a product named `Maggie Mee` to iBook.
 
    * **`delete`** `3` : Deletes the 3rd product shown in the displayed list.
 
@@ -124,6 +124,15 @@ Alternatively, you can also interact with the application through buttons, such 
 
 </div>
 
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Important notes about inputs**<br>
+
+Inputs containing a colon (`:`) might cause unexpected behaviour. You are strongly recommended to add `\` before a colon character in your input.<br>
+e.g. To provide a product name of `Nescafe: special edition`, you should type `n:Nescafe\: special edition`.
+
+</div>
+
 #### 2.2.5 Command inputs
 
 | Input            | Description                                                            |
@@ -164,7 +173,7 @@ Examples:
 
 *Alternatively*, 
 
-Click the <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button above the table to add a new product.
+Click <img align="center" src = "images/ui-icons/add-product.png" alt="Add Product" height = "25"/>  button above the table to add a new product.
 
 A pop-up window will appear, allowing you to fill in the details for name, price, description. 
 Optionally, you can also fill in the category, discount rate and discount start. 
@@ -172,7 +181,7 @@ Optionally, you can also fill in the category, discount rate and discount start.
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:**
-Required field has a red asterisk "*" beside the label
+Required field has a red asterisk `*` beside the label
 
 </div>
 
@@ -218,7 +227,7 @@ Examples:
 
 *Alternatively*, 
 
-click the <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete" height = "25"/> on the right side of each product to delete the product.
+Click <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete" height = "25"/> on the right side of each product to delete the product.
 
 A pop-up window will appear, requiring you to confirm the deletion. 
 
@@ -330,7 +339,7 @@ Examples:
 
 *Alternatively*,
 
-Click the <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add Item" height = "25"/>  button on the left of the product to add a new item.
+Click <img align="center" src = "images/ui-icons/file-plus-color.png" alt="Add Item" height = "25"/>  button on the left of the product to add a new item.
 
 A pop-up window will appear, allowing you to fill in the details for expiry date and quantity.
 
@@ -354,7 +363,7 @@ Examples:
 
 *Alternatively*,
 
-Click the <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item to update it.
+Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of the item to update it.
 
 A pop-up window will appear, allowing you to update the details for expiry date and quantity.
 
@@ -374,7 +383,9 @@ Format: `delete-item INDEX-INDEX`
 Examples:
 * `list` followed by `delete-item 1-2` deletes the 2nd item of the 1st product currently shown.
 
-*Alternatively*, click the <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
+*Alternatively*
+
+Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" height = "25"/> on the right side of each item to edit it.
 
 A pop-up window will appear.
 
