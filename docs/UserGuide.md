@@ -10,7 +10,7 @@ The app also includes various tools which aims to help agents in their work.
 
 Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
 
-#Table of contents
+# Table of contents
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [General Commands](#general-commands)
@@ -113,7 +113,7 @@ Some example commands you can try:
 
 
 
-##General Commands
+## General Commands
 
 ### Open Help Window: `help`
 
@@ -151,7 +151,7 @@ Exits the program.
 
 Format: `exit`
 
-##Client Management
+## Client Management
 
 ### Adding a client: `add`
 
@@ -301,7 +301,7 @@ To sort by number of properties in the default order, but with buyers shifted to
 ![images/user-guide/sortReverseUserTypeNumPropertiesResult.png](images/user-guide/sortReverseUserTypeNumPropertiesResult.png)
 </div>
 
-##Tools
+## Tools
 ### Matching properties and preferences: `match`
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
@@ -364,7 +364,7 @@ Format: `stats`
 4. Display statistics of lower price and higher price of preferences of clients to provide insight on the average asking price of a property.
 5. Allow images to be associated with properties or preferences to allow for better organization
 
-##Storage
+## Storage
 ### Saving the data
 
 RealEstatePro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -400,7 +400,7 @@ If your changes to the data file makes its format invalid, RealEstatePro will di
 | Statistics window | stats                                                                                                  | -                                                                                                                                    |
 | Reminder window   | rm                                                                                                     | -                                                                                                                                    |
 
-#Keyboard Shortcuts
+# Keyboard Shortcuts
 
 | Key | Function                |
 |-----|-------------------------|
