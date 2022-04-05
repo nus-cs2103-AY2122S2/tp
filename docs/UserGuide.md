@@ -132,7 +132,8 @@ Format: `view INDEX`
 #### Adding a Lab : `labadd`
 Adds a Lab to every student. Shows up as a `LabLabel` on each student’s entry. By default, the `LabLabel` will be colored red for “UNSUBMITTED”.
 The `LabLabel` can subsequently be colored differently to represent different statuses e.g. “UNSUBMITTED” = red, "SUBMITTED" = yellow, "GRADED" = green.
-LAB_NUMBER must be a positive integer.
+LAB_NUMBER must be an integer between 0 and 20 inclusive.<br>
+Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
 
 Format: `labadd l/LAB_NUMBER`
 
