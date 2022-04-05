@@ -109,6 +109,10 @@ If the data loaded is different from the data JSON, refer to [FAQ Q2](#faq).
 #### Adding a student : `add`
 Adds a student to the address book with the necessary attributes.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A student can have any number of tags (including 0)
+</div>
+
 Format: `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
 
 #### Listing all students : `list`
@@ -117,9 +121,20 @@ Lists all the students
 Format: `list`
 
 #### Editing a student : `edit`
-Edits an existing student in the TAddress book. At least one of the optional fields must be provided.
+Edits an existing student in the TAddress book
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit 1 g/johnedit e/johndoe@example.com` Edits the github username and email address of the 1st student to be `johnedit` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 #### Locating students by name : `find`
 Finds students whose names contain any of the given keywords. At least one keyword must be specified.
