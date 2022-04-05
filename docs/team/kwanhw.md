@@ -19,19 +19,21 @@ Given below are my contributions to the project.
   * What it does: Allows the user to manage tags in the address book.
   * Justification: This improves the usability of the application, as it provides more options for the user to search for contacts.
 
+* **New Feature**: Tabbed User Interface
+  * What it does: Allows the user to view persons, appointments and tags simultaneously using tabbed panels
+  * Justification: This improves the usability of the application, as the user need can easily switch between tabs to search for information.
+
 * **Code contributed**:
-  * 2800+ LoC contributed to the project
+  * 3500+ LoC contributed to the project. See [Reposense](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=kwanhw).
   * Test cases for the tags subsystem
 
 * **Project management**:
-    * Reviewed Pull Requests
     * Review pull requests submitted by the team
 
 * **Enhancements to existing features**:
     * Extraction of Tags into its own list for management
     * Abstraction of `Tag` by moving the name attribute as its own class
     * Enhancement of `Person` related commands to support cascading on tag modification
-    * Implemented tabbed user interface
 
 * **Documentation**:
     * User Guide:
@@ -49,5 +51,5 @@ Given below are my contributions to the project.
         * Added use cases for tags
 
 * **Community**:
-    * Reviewed PRs within the team ([20+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [50+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Akwanhw))
+    * Reviewed PRs within the team ([90+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [50+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Akwanhw))
     * Reviewed a total of [7 issues](https://github.com/KwanHW/ped/issues) during PE dry run
