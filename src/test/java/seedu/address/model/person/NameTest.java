@@ -30,6 +30,7 @@ public class NameTest {
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
         assertFalse(Name.isValidName("pEter Jack")); // first letter is not capitalised
+        assertFalse(Name.isValidName("12A")); // Capitalised letter not in the first letter
 
         // valid name
         assertTrue(Name.isValidName("Peter Jack")); // alphabets only

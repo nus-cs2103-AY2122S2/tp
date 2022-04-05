@@ -114,9 +114,13 @@ Adds a client to the HustleBook.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [i/INFO] [d/DATE] [f/FLAG] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client's data can be added in the future through edit command
+A client's meeting can be scheduled through meet command after add the client into the HustleBook
 </div>
 
+* HustleBook does not allow duplicate clients to be stored.
+  * Duplicate is found when two clients have the exact `NAME`.
+* `n/NAME` can only contain letters and numbers and only the first letter of the name can be capitalised.
+  * `William B J` and `John The 2nd` is acceptable. `ClaRa Tan` is not acceptable.
 * `d/DATE` will be set to today's date by default if not specified.
   * `DATE` has to be in the format **YYYY-MM-DD**.
 * `i/INFO` will be set to `No further info` by default if not specified.

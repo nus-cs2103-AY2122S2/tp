@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces where the first" +
+                    "letter is capitalised or a number, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -60,7 +61,7 @@ public class Name {
                 return false;
             }
             for (int j = 1; j < word.length(); j++) {
-                if (!Character.isLowerCase(word.charAt(j)) && !Character.isDigit(word.charAt(0))) {
+                if (!Character.isLowerCase(word.charAt(j)) && !Character.isDigit(word.charAt(j))) {
                     return false;
                 }
             }
