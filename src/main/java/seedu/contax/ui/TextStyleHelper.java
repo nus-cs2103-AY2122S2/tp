@@ -20,8 +20,9 @@ public class TextStyleHelper {
 
     /**
      * Parser to identify bold/italic/monospaced components within a string.
-     * @param text String to parse
-     * @return List of Javafx Text elements
+     *
+     * @param text String to parse.
+     * @return List of Javafx Text elements.
      */
     public static List<Text> formattedTextParser(String text) {
         ArrayList<Text> resultingList = new ArrayList<>();
@@ -64,6 +65,9 @@ public class TextStyleHelper {
         return resultingList;
     }
 
+    /**
+     * Helper function to do index skipping from the result.
+     */
     private static int skipNumbers(boolean bold, boolean boldAndItalic, int i) {
         if (bold) {
             i += 1;
@@ -72,6 +76,10 @@ public class TextStyleHelper {
         }
         return i;
     }
+
+    /**
+     * Helper function to process monospaced text.
+     */
     private static boolean processMonospaced(boolean currentState, List<Text> currentList,
                                              String text, int start, int current) {
         if (currentState) {
@@ -83,6 +91,9 @@ public class TextStyleHelper {
         }
     }
 
+    /**
+     * Helper function to create individual Text elements.
+     */
     private static Text createTextElement(String text, boolean bold, boolean italic) {
         Text newText = new Text(text);
         if (bold && italic) {
@@ -98,6 +109,9 @@ public class TextStyleHelper {
         return newText;
     }
 
+    /**
+     * Helper function to create monospaced Text elements.
+     */
     private static Text createMonospacedText(String text) {
         Text newText = new Text(text);
         newText.setFill(Color.WHITE);
