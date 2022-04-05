@@ -15,7 +15,7 @@ Given below are my contributions to the project.
     * Justification: As our target audience is professionals, it is very common that they will have contacts in Excel in some form. By designing an Import CSV command with flexibility of column numbers, professionals can easily migrate their existing contacts with minimal modifications.
 * **New Feature**: Internal parser to style text components with a Markdown-like syntax
     * What it does: Allows for dynamically generated styled text, through Bold/Italic/Monospaced text, mainly used in command usage messages. e.g. a String of `**Bold**` will display as **Bold**, similar to in Markdown. 
-    * Justification: In order to allow for developers to easily create styled text as feedback to users. Some text components can get very long, especially command usage messages. Through the use of this parser, information can be presented to the users in a more organised manner, making it easier to read.
+    * Justification: Allows developers to easily create styled text as feedback to users in a familiar syntax. Some text components can get very long, especially command usage messages. Through the use of this parser, information can be presented to the users in a more organised manner, making it easier to read.
 
 * **Code contributed**:
     * 2000+ LoC contributed to the project. See [Reposense](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=dandaandaaaaaan) for more details.
@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 * **Project management**:
     * Established the overall team workflow.
     * Ensuring code quality through reviews.
-    * Creation of releases, ensuring CI passing.
+    * Creating and Managing the lifecycle of releases, including version number maintenance in code.
 
 * **Enhancements to existing features**:
     * Modified the constraints for `Phone` to allow country codes within the numbers. It is common that other contact management apps use this, and can cause problems when importing, so we decided to allow it.
