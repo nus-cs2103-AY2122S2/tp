@@ -2,7 +2,7 @@
 layout: page
 title: Wei Jie's Project Portfolio Page
 ---
-# Skeleton of the Project Portfolio Page for Wei Jie
+# Project Portfolio Page for Wei Jie
 
 ### Project: ModuleMateFinder
 
