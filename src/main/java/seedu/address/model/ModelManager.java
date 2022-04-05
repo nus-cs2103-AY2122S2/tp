@@ -39,6 +39,22 @@ public class ModelManager implements Model {
         this.lastUsedPredicate = PREDICATE_SHOW_ALL_PETS;
     }
 
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs and predicate.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Predicate<Pet> predicate) {
+        requireAllNonNull(addressBook, userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs +
+                " and predicate " + predicate);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        this.versionedAddressBook = new VersionedAddressBook(this.addressBook);
+        filteredPets = new FilteredList<>(this.addressBook.getPetList());
+        this.lastUsedPredicate = predicate;
+        updateFilteredPetList(lastUsedPredicate);
+    }
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -119,6 +135,7 @@ public class ModelManager implements Model {
     /** Method that sorts the pet list via the sortPets() command in addressBook. **/
     @Override
     public void sortPetList(String field) {
+        requireNonNull(field);
         addressBook.sortPets(field);
         this.versionedAddressBook.commit(this.getAddressBook());
     }
@@ -131,6 +148,11 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Pet List Accessors =============================================================
+
+    @Override
+    public Predicate<Pet> getLastUsedPredicate() {
+        return lastUsedPredicate;
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of

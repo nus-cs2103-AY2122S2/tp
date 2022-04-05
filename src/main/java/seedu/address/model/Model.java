@@ -76,6 +76,8 @@ public interface Model {
      */
     void setPet(Pet target, Pet editedPet);
 
+    /** Returns the last used predicate to filter pet list by the model. */
+    Predicate<Pet> getLastUsedPredicate();
 
     /** Returns an unmodifiable view of the filtered pet list */
     ObservableList<Pet> getFilteredPetList();
