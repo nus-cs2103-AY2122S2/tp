@@ -308,10 +308,11 @@ Deletes a task from a particular student's list of tasks.
 
 **Format**: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
 
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
-* An error message will be displayed if the student with the given student ID does not exist.
-* An error message will be displayed if none of the students taking the module had previously been assigned the task with the given task name.
-* An error message will be displayed if none of the students are taking a module with the given module code.
+An error message will be displayed if: 
+* the specified index is a negative number or larger than the number of tasks for that particular student.
+* the student with the given student ID does not exist.
+* none of the students taking the module had previously been assigned the task with the given task name.
+* none of the students are taking a module with the given module code.
 
 **Example**:
 * `deleteTask i/AXXXXXXXR idx/3`
