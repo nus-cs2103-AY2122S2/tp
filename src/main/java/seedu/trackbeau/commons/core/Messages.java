@@ -13,4 +13,5 @@ public class Messages {
     public static final String MESSAGE_CUSTOMERS_LISTED_OVERVIEW = "%1$d customer(s) listed!";
     public static final String MESSAGE_SERVICES_LISTED_OVERVIEW = "%1$d service(s) listed!";
     public static final String MESSAGE_BOOKING_LISTED_OVERVIEW = "%1$d booking(s) listed!";
+    public static final String MESSAGE_DUPLICATED_INDEX = "Duplicate index found!";
 }
