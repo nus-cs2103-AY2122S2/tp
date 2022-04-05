@@ -39,5 +39,12 @@ Given below are my contributions to the project.
     * Added use cases for `removetag`, `find`, `delete` multiple contacts, viewing all upcoming events
     * Added implementation for delete multiple contacts and UML diagrams
 
+* **Test Case Implementation**:
+  * DeleteCommand
+  * DeleteCommandParser
+  * TagCommandParser
+  * RemoveTagCommand
+  * RemoveTagCommandParser
+
 * **Tools**:
   * Integrated Codecov into team repo

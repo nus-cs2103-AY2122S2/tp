@@ -15,7 +15,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.person.Cca;
 import seedu.address.model.person.Education;
@@ -24,7 +23,7 @@ import seedu.address.model.person.Module;
 import seedu.address.model.tag.Tag;
 
 public class TagCommandParserTest {
-    private TagCommandParser parser = new TagCommandParser();
+    private final TagCommandParser parser = new TagCommandParser();
     private final String nonEmptyEducation = "Some education";
     private final String nonEmptyModule = "Some module";
     private final String nonEmptyInternship = "Some internship";
