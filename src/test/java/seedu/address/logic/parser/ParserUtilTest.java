@@ -26,12 +26,12 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ACTIVITY = "#friend";
-    private static final String INVALID_ADDRESS_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj \n" +
-            " sdhfklajsdhflkajsdhflkasdfas asdf";
-    private static final String INVALID_EMAIL_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj@\n" +
-            "sdhfklajsdhflkajsdhflkasdfasaasadfadfasdfdf";
-    private static final String INVALID_ACTIVITY_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj@\n" +
-            "sdhfklajsdhflkajsdhflkasdfasaasadfadfasdfdf";
+    private static final String INVALID_ADDRESS_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj \n"
+            + " sdhfklajsdhflkajsdhflkasdfas asdf";
+    private static final String INVALID_EMAIL_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj@\n"
+            + "sdhfklajsdhflkajsdhflkasdfasaasadfadfasdfdf";
+    private static final String INVALID_ACTIVITY_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj@\n"
+            + "sdhfklajsdhflkajsdhflkasdfasaasadfadfasdfdf";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
