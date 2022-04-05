@@ -1,12 +1,11 @@
 package seedu.address.testutil;
 
-
-import seedu.address.model.MedBook;
-import seedu.address.model.prescription.Prescription;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.MedBook;
+import seedu.address.model.prescription.Prescription;
 
 /**
  * A utility class containing a list of {@code Prescription} objects to be used in tests.
