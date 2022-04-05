@@ -107,9 +107,9 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 ## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [act/MORE ACTIVITIES]`
-  - `NAME` takes in alphabetical characters and have a character limit of up to 50 characters 
-  - `ADDRESS` takes in alphanumeric text and have a character limit of up to 70 characters
-  - `ACTIVITY` takes in alphanumeric text and have a character limit of up to 50 characters
+  - `NAME` takes in alphabetical characters and have a character limit of 50  
+  - `ADDRESS` takes in any characters and have a character limit of 70 
+  - `ACTIVITY` takes in alphanumeric text and have a character limit of 50 
   - `CLASS` takes in a number and alphabet pair
     - Eg. `4A`
   - `EMAIL` follows the standard email formatting

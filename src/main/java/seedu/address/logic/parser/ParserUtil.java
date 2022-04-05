@@ -98,8 +98,6 @@ public class ParserUtil {
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        } else if (trimmedEmail.length() > Email.EMAIL_SIZE_MAX_LIMIT) {
-            throw new ParseException(String.format(Email.MESSAGE_EMAIL_LIMIT));
         }
         return new Email(trimmedEmail);
     }

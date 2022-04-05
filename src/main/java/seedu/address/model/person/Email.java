@@ -30,9 +30,6 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
-    public static final int EMAIL_SIZE_MAX_LIMIT = 70;
-    public static final String MESSAGE_EMAIL_LIMIT = "An email cannot be longer than " + EMAIL_SIZE_MAX_LIMIT
-            + " characters. ";
 
     public final String value;
 
