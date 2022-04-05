@@ -53,21 +53,25 @@ public class DeleteCommand extends Command {
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         Nric nric = patientToDelete.getNric();
+
         model.updateFilteredContactList(new ContactWithNricPredicate(nric));
         model.updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
         model.updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
         model.updateFilteredConsultationList(new ConsultationWithPredicates(nric));
         model.updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
+
         List<Contact> contactList = model.getFilteredContactList();
         List<Medical> medicalList = model.getFilteredMedicalList();
         List<Prescription> prescriptionList = model.getFilteredPrescriptionList();
         List<Consultation> consultationList = model.getFilteredConsultationList();
         List<TestResult> testResultList = model.getFilteredTestResultList();
+
         int contactSize = contactList.size();
         int medicalSize = medicalList.size();
         int prescriptionSize = prescriptionList.size();
         int consultationSize = consultationList.size();
         int testResultSize = testResultList.size();
+
         for (int i = 0; i < contactSize; i++) {
             model.deleteContact(contactList.get(0));
         }

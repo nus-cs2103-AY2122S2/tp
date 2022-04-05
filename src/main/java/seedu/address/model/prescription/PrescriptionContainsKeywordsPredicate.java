@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ViewedNric;
 
 /**
- * Tests that a {@code Person}'s {@code Prescription} matches any of the keywords given.
+ * Tests that a {@code Patient}'s {@code Prescription} matches any of the keywords given.
  */
 public class PrescriptionContainsKeywordsPredicate implements Predicate<Prescription> {
     private final List<String> keywords;

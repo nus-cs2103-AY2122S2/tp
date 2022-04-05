@@ -11,7 +11,7 @@ import seedu.address.model.testresult.TestResult;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyMedBook {
 
     /**
      * Returns an unmodifiable view of the persons list.
