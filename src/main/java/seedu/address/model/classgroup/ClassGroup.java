@@ -21,7 +21,7 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class ClassGroup implements Entity {
     // Identity fields
-    private static final int NUM_OF_WEEKS = 13;
+    public static final int NUM_OF_WEEKS = 13;
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
     private final TaModule taModule;
