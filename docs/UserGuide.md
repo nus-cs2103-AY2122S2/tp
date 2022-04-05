@@ -406,12 +406,12 @@ Examples:
 
 #### Locating events: `finde`
 
-Finds events whose names contain any of the given keywords and date is between START_DATE and END_DATE.
-If not provided, START_DATE and END_DATE are set to the earliest and latest date in the list of events respectively.
+Finds events whose names contain any of the given keywords and date is between START DATE and END DATE.
+If not provided, START DATE and END DATE are set to the earliest and latest date in the list of events respectively.
 
 Format: 
 ```
-finde [s/SEARCH_TYPE] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
+finde [s/SEARCH_TYPE] [sd/START DATE] [ed/END DATE] [MORE_KEYWORDS]
 ```
 Examples:
 * `finde n/online` returns `online interview` and `online assessment`
