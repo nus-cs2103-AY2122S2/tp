@@ -41,7 +41,9 @@ public class ProgressCommandParserTest {
 
     @Test
     public void parse_validModuleCodeAndTaskName_returnsProgressCommand() {
-        Person amy = new PersonBuilder(AMY).withTaskList("Task A", true).build();
+        Person amy = new PersonBuilder(AMY).build();
+        amy.addTask(new Task("Task A"));
+        amy.markTaskAsComplete(0);
         Task task = amy.getTaskList().getTaskList().get(0);
         String taskName = " tn/" + task.getTaskName();
 
