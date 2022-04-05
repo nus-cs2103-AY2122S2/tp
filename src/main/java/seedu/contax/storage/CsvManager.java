@@ -46,7 +46,7 @@ public class CsvManager {
 
     /**
      * Imports a given {@code IndexedCsvFile} to a {@code model}.
-     * 
+     *
      * @param csvFile File to be imported.
      * @return CommandResult upon success.
      * @throws IOException If reading from file fails.
