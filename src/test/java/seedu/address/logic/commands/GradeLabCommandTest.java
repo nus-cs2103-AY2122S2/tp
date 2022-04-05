@@ -60,7 +60,7 @@ public class GradeLabCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         GradeLabCommand command = new GradeLabCommand(outOfBoundIndex, VALID_LABNUMBER, VALID_LABMARK);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class GradeLabCommandTest {
 
         GradeLabCommand command = new GradeLabCommand(outOfBoundIndex, VALID_LABNUMBER, VALID_LABMARK);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
