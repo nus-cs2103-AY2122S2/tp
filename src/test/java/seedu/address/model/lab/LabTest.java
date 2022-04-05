@@ -34,9 +34,10 @@ public class LabTest {
         assertFalse(Lab.isValidLab(" ")); // spaces only
 
         // invalid lab
-        assertFalse(Lab.isValidLab("1a")); // invalid lab number
+        assertFalse(Lab.isValidLab("1a")); // invalid lab number, includes characters
         assertFalse(Lab.isValidLab("123456789")); // larger than 20
         assertFalse(Lab.isValidLab("21")); // larger than 20
+        assertFalse(Lab.isValidLab("2147483648")); // larger than max int value
 
         // valid lab
         assertTrue(Lab.isValidLab("1")); // valid integer
