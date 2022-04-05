@@ -130,10 +130,7 @@ public class EditCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
-                EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
-                Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                model.setPerson(currentPerson, editedPersonStatus);
+                editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         }
     }
@@ -163,10 +160,7 @@ public class EditCommand extends Command {
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
-                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                    model.setPerson(currentPerson, editedPersonStatus);
+                    editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 }
             }
         }
@@ -190,6 +184,17 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus,
                 updatedClassCode, updatedActivity);
     }
+
+    /**
+     * A method to update a person's status
+     */
+    public static void editPersonStatus(Person person, Status status, Model model) {
+        EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+        tempDescriptor.setStatus(status);
+        Person editedPersonStatus = createEditedPerson(person, tempDescriptor);
+        model.setPerson(person, editedPersonStatus);
+    }
+
 
     @Override
     public boolean equals(Object other) {
