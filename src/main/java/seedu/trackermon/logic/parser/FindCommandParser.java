@@ -1,6 +1,5 @@
 package seedu.trackermon.logic.parser;
 
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INDEX_OUT_OF_BOUNDS;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
