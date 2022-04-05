@@ -287,7 +287,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         Appointment target = appointments.get(index);
         int otherIndex = index - 1;
         while (otherIndex >= 0 && target.compareTo(appointments.get(otherIndex)) < 0) {
-            appointments.set(otherIndex + 1, appointments.get(otherIndex)); // Right shift other appointment
+            // Right shift other appointment.
+            appointments.set(otherIndex + 1, appointments.get(otherIndex));
             otherIndex--;
         }
         appointments.set(otherIndex + 1, target);
@@ -302,7 +303,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         Appointment target = appointments.get(index);
         int otherIndex = index + 1;
         while (otherIndex < appointments.size() && target.compareTo(appointments.get(otherIndex)) > 0) {
-            appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift other appointment
+            // Left Shift other appointment.
+            appointments.set(otherIndex - 1, appointments.get(otherIndex));
             otherIndex++;
         }
         appointments.set(otherIndex - 1, target);

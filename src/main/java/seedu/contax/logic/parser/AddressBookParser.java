@@ -145,19 +145,15 @@ public class AddressBookParser {
         //@@author sharpstorm
         case AddAppointmentCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
-
         case ListAppointmentCommand.COMMAND_WORD:
             return new ListAppointmentCommand();
-
         case EditAppointmentCommand.COMMAND_WORD:
             return new EditAppointmentCommandParser().parse(arguments);
-
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);
 
         case AppointmentsBetweenCommand.COMMAND_WORD:
             return new AppointmentsBetweenCommandParser().parse(arguments);
-
         case FreeBetweenCommand.COMMAND_WORD:
             return new FreeBetweenCommandParser().parse(arguments);
 
