@@ -31,7 +31,7 @@ public class AddModulesCommand extends RedoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add specified modules to the person identified "
             + "by the index number used in the displayed person list. "
             + "Input values will be added on to existing modules.\n"
-            + "Parameters: INDEX (must be a positive integer and less than Integer.MAX_INT) "
+            + "Parameters: INDEX (must be a positive integer and less than 2,147,483,647) "
             + "[" + PREFIX_MODULE + "MODULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE + "CS3230 " + PREFIX_MODULE + "CS1231S\n";
 

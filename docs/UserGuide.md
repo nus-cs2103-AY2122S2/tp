@@ -99,7 +99,7 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 
 | Parameter | Constraint                                                                                 | Example             |
 |-----------|--------------------------------------------------------------------------------------------|---------------------|
-| Index     | Index must be a positive integer and be less than Integer.MAX_VALUE                        | 1, 2, 3             |
+| Index     | Index must be a positive integer and be less than 2,147,483,647                            | 1, 2, 3             |
 | Name      | Names should only contain alphanumeric characters and spaces                               | Jerry Lee           |
 | Phone     | Phone number must be at least 3 digits short, and at most 25 digits long                   | 82309 1234          |    
 | Address   | Addresses must be within 60 characters long                                                | 57 Kent Ridge Drive | 
