@@ -6,9 +6,11 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
 public class Rating implements Comparable<Rating> {
 
-    public static final String INVALID_RATING = "Rating should be between 0 to 5";
+    public static final String INVALID_RATING = "Rating should be a whole number between 0 to 5";
 
     public static final int MAX_RATING = 5;
+
+    public static final String VALIDATION_REGEX_RATING = "[0-5]";
 
     public final int rating;
 
@@ -48,12 +50,7 @@ public class Rating implements Comparable<Rating> {
      * Return true if a given rating is a valid rating.
      */
     public static boolean isValidScore(String rating) {
-        try {
-            int parsedScore = Integer.parseInt(rating);
-            return isValidScore(parsedScore);
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return rating.matches(VALIDATION_REGEX_RATING);
     }
 
     @Override

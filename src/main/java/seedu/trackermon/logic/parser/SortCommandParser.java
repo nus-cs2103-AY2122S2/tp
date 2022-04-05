@@ -41,7 +41,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             + " please provide the exact number of correctly spelt names in a sequence you want."
             + "For example: sorting status than tags, " + SortCommand.COMMAND_WORD
             + " " + PREFIX_TAG + VALUE_ASC + " " + PREFIX_STATUS + VALUE_ASC + " "
-            + PREFIX_SORT_ORDER + VALUE_ORDER_STATUS + VALUE_ORDER_TAG;
+            + PREFIX_SORT_ORDER + VALUE_ORDER_STATUS + " " + VALUE_ORDER_TAG;
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
