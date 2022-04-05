@@ -18,7 +18,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_TITLE = "User Guide";
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103-f11-1.github.io/tp/UserGuide.html";
 
-    public static final String COPY_CLIPBOARD_FEATURE_TITLE = "Copy Employee Details to Computer Clipboard";
+    public static final String COPY_CLIPBOARD_FEATURE_TITLE = "About Copying Employee Details to Computer Clipboard";
     public static final String COPY_CLIPBOARD_FEATURE_CONTENT = "ManageEZPZ allows the user to copy an employee's "
             + "name, phone number or email to the Computer Clipboard. To copy any of the details, "
             + "use the mouse cursor and right-click on the employee in the employees list.";
