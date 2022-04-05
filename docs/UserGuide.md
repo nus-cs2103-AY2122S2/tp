@@ -54,6 +54,31 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Edit labs](#editing-individual-labs--labedit)
     - [Remove labs](#removing-a-lab-labrm)
 
+### Things to note
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME g/GITHUB`, `g/GITHUB n/NAME` is also acceptable.
+
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
+
 ### System-related features
 
 #### Viewing help : `help`
@@ -72,7 +97,11 @@ TAddress Book data are saved in the hard disk automatically after any command th
 #### Editing the data file
 TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit that data file.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`'s `Lab`s.
+
+If your changes to the JSON data file makes its format invalid, TAddressBook will discard all data and start with an empty data file at the next run.
+</div>
 
 If the data loaded is different from the data JSON, refer to [FAQ Q2](#faq).
 
