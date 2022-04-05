@@ -22,7 +22,7 @@ public class DeleteCommand extends ByIndexByNameCommand {
             + "Parameters: "
             + " INDEX ? "
             + PREFIX_NAME + "NAME \n"
-            + "Example 1: " + COMMAND_WORD + " 1"
+            + "Example 1: " + COMMAND_WORD + " 1" + "\n"
             + "Example 2: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe\n";
 
 
