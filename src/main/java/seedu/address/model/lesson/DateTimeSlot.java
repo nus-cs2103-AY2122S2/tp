@@ -1,10 +1,5 @@
 package seedu.address.model.lesson;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import seedu.address.logic.commands.exceptions.CommandException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
