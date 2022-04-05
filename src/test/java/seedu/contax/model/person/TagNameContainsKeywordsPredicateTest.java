@@ -3,8 +3,13 @@ package seedu.contax.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
+import static seedu.contax.testutil.TypicalPersons.getTypicalTags;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.contax.model.tag.Tag;
 
 public class TagNameContainsKeywordsPredicateTest {
 
@@ -30,6 +35,28 @@ public class TagNameContainsKeywordsPredicateTest {
         // extra characters of an existing valid keyword
         predicate = new TagNameContainsKeywordsPredicate("ssssfriendsssss");
         assertFalse(predicate.test(ALICE));
+    }
+
+    @Test
+    public void existsInTagList_exactKeyword_returnsTrue() {
+        List<Tag> tags = getTypicalTags();
+        TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
+
+        assertTrue(predicate.existsInTagList(tags));
+    }
+
+    @Test
+    public void existsInTagList_keywordNotExist_returnsFalse() {
+        List<Tag> tags = getTypicalTags();
+
+        // Partial keywords
+        TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("fri");
+
+        assertFalse(predicate.existsInTagList(tags));
+
+        // Unrelated keywords
+        predicate = new TagNameContainsKeywordsPredicate("does not exist");
+        assertFalse(predicate.existsInTagList(tags));
     }
 
     @Test

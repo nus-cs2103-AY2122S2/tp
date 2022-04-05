@@ -1,5 +1,6 @@
 package seedu.contax.model.person;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -30,6 +31,13 @@ public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         return false;
+    }
+
+    /**
+     * Returns true if the keyword exists in the tag list.
+     */
+    public boolean existsInTagList(List<Tag> tagList) {
+        return tagList.stream().anyMatch(tag -> tag.getTagNameString().equals(keyword));
     }
 
     @Override
