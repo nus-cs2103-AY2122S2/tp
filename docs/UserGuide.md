@@ -40,10 +40,18 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 
 --------------------------------------------------------------------------------------------------------------------
 ## Feature List
+- [General](#system-related-features)
+  - [View help page](#viewing-help--help)
+  - [Exit TAddressBook](#exiting-the-program--exit)
+  - [Save data](#saving-the-data)
+  - [Edit data](#editing-the-data-file)
+
 - [Manage students](#student-related-features)
-    - [Add, edit, delete students](#adding-a-student--add)
+    - [Add students](#adding-a-student--add)
     - [List students](#listing-all-students--list)
+    - [Edit students](#editing-a-student--edit)
     - [Find students](#locating-students-by-name--find)
+    - [Delete students](#deleting-a-student--delete)
     - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter)
     - [View student details](#view-student-details--view)
 
