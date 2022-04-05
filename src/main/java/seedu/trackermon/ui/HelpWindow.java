@@ -148,12 +148,13 @@ public class HelpWindow extends UiPart<Stage> {
                         + " [t/TAG]…"),
                 new CommandBuilder("Delete", "delete INDEX"),
                 new CommandBuilder("Clear", "clear"),
-                new CommandBuilder("Edit", "edit INDEX [n/NAME] [s/STATUS] [r/RATING] "
-                        + "[c/COMMENT] [t/TAG]…"),
+                new CommandBuilder("Edit", "edit INDEX {[n/NAME] [s/STATUS] [r/RATING] "
+                        + "[c/COMMENT] [t/TAG]…}"),
                 new CommandBuilder("Exit", "exit"),
                 new CommandBuilder("Export", "export"),
-                new CommandBuilder("Find", "find KEYWORD\nfind [n/NAME] [s/STATUS]"
-                        + " [r/RATING] [t/TAG]…"),
+                new CommandBuilder("General Find", "find KEYWORD…"),
+                new CommandBuilder("Precise Find", "find {[n/NAME] [s/STATUS]"
+                        + " [r/RATING] [t/TAG]…}"),
                 new CommandBuilder("Help", "help"),
                 new CommandBuilder("Import", "import"),
                 new CommandBuilder("List", "list"),

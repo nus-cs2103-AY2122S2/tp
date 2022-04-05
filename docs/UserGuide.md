@@ -9,6 +9,7 @@ title: User Guide
 * [**Quick start**](#quick-start)
 * [**User interface**](#user-interface)
 * [**Command structure**](#command-structure)
+  * [Parameter conditions](#parameter-conditions)
 * [**Features**](#features)
   * [Viewing help: `help`](#viewing-help-help)
   * [Adding a show: `add`](#adding-a-show-add)
@@ -28,7 +29,6 @@ title: User Guide
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
 
----
 
 ## Introduction
 
@@ -36,7 +36,7 @@ Always accessing MyAnimeList or IMDB to record down the shows you watched? Or fi
 
 Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface ([CLI](#glossary))** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch. You can even review these shows!
 
----
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ## User guide navigation
 
@@ -53,7 +53,7 @@ Before you continue reading the rest of our user guide, the table below displays
 | \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
 | {Multiple Optional Parameters}                                            | At least one parameter must be provided                 |
 
----
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ## Quick start
 
@@ -72,7 +72,6 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## User interface
 
@@ -99,7 +98,6 @@ You can start communicating with Trackermon using the command box. Some example 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Command structure
 
@@ -117,7 +115,7 @@ For example, a command to find a show could look like this:
 
 In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Parameters | Prefix | Description                                                                         |
+| Parameter  | Prefix | Description                                                                         |
 |------------|--------|-------------------------------------------------------------------------------------|
 | KEYWORD    | None   | The input after the command word without a prefix                                   |
 | INDEX      | None   | The index of the show as shown in the show list                                     |
@@ -134,23 +132,14 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…` can be used as `n/ReZero s/completed r/5 c/What a Simp t/Anime` or as `n/ReZero s/completed`.
-
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `[t/TAG]…​` can be used as `t/Anime`, `t/Sitcom t/Kdrama` etc.
 
 * A whitespace must be included before every prefix.<br>
   e.g. `n/Knives Out t/Suspense` is acceptable but `n/Knives Outt/Suspense` is not.
 
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME [t/TAG]…​`, `[t/TAG]…​ n/NAME` is also acceptable.
-
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `n/Batman n/Superman`, only `n/Superman` will be taken.
@@ -163,6 +152,26 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+### Parameter conditions
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about parameters:** NAME and STATUS are case-insensitive.
+</div>
+
+| Parameter | Prefix | Condition                                                                                                                                                                                                                                                                                                                          |
+|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`                                                                                                                                                                                                                   |
+| INDEX     | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                                                                                                                                                    |
+| NAME      | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead. |
+| STATUS    | s/     | Status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                                                                                                                                                                                                                                                                |
+| TAG       | t/     | Tag must only be a keyword that is **less than 20 characters**.                                                                                                                                                                                                                                                                    |
+| COMMENT   | c/     | Comment ????                                                                                                                                                                                                                                                                                                                       |
+| RATING    | r/     | Rating must be a **whole number** from **0 to 5**                                                                                                                                                                                                                                                                                  |
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 
 ## Features
 
@@ -187,10 +196,9 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 **Format:** `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-danger">
-**:exclamation: Caution:**<br>
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
 
+**:exclamation: Caution:**<br>
+* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `STATUS` `TAG` `COMMENT` `RATING`.
 </div>
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
@@ -207,10 +215,11 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Format:** `delete INDEX`
 
-<div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
+<div markdown="block" class="alert alert-danger"> 
+
+**:exclamation: Caution:**<br>
 * Once a show is deleted, you cannot retrieve it back!
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5. 
+* Refer to [parameter conditions](#parameter-conditions) section about `INDEX`.
 
 </div>
 
@@ -243,13 +252,8 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
-* **An [index](#command-structure)** to edit must be provided.
-* **At least a [prefix](#command-structure) followed by a [parameter](#command-structure)** to edit must be provided.
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-* Editing a `TAG` parameter will cause all the **previous tags of the show to be deleted**.
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
+* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `INDEX` `STATUS` `TAG` `COMMENT` `RATING`.
+* Editing a `TAG` parameter can cause all the **previous tags of the show to be deleted**.
 
 :exclamation:**Adding, Editing and Deleting a Tag:** <br>
 * Doing any of these can result in your tags being deleted if you do not specify existing tags you want to keep. <br>
@@ -259,6 +263,14 @@ Multiple show [parameters](#command-structure) can be edited at the same time
   * `edit INDEX <Specify all tags in show except the tag you want to delete>`
 * Editing a Tag:
   * `edit INDEX <Specify all other tags in show> t/EDITED_TAG`
+* Example<br>
+  <img src="images/EditTagExample.png">
+  * Adding a new Tag `Mystery` to show named `Another`
+    * `edit 1 t/Anime t/Horror t/Mystery`
+  * Deleting the Tag `Movie` in show named `Spiderman`
+    * `edit 2 t/Action`
+  * Editing the Tag `Comdy` to `Comedy` to show named `Chicken papa`
+    * `edit 3 t/Anime t/Comedy`
 
 </div>
 
@@ -294,14 +306,16 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 :exclamation:**Caution:** Clear will delete the current list! Your list data will be lost!
 </div>
 
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 ---
 
 ### Finding a show: `find`
 #### General find
 
-**Description (General Find):** Searching for a show across all [parameters](#command-structure)? Find shows containing the search words!
+**Description (General Find):** Wanting to search for a show across all [parameters](#command-structure)? Find shows containing the search words!
 
-**Format (General Find):** `find KEYWORD`
+**Format (General Find):** `find KEYWORD…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
@@ -311,10 +325,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 **:information_source: Notes about General Find:**<br>
 * An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching [parameters](#command-structure) will be returned.
-* The `KEYWORD` refers to the input you enter after `find`.
-* `find` must be followed with a space before entering the `KEYWORD`.
-* The `KEYWORD` **can be a word or number** such as hero, S1,...
-* The `KEYWORD` must contain **at least one word** and it **must not be empty**.
+* Refer to [parameter conditions](#parameter-conditions) section about `KEYWORD`.
 * `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
 
 </div>
@@ -323,9 +334,11 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 <img src="images/General_Find_UI.png">
 
+---
+
 #### Precise find
 
-**Description (Precise Find):** Searching for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
+**Description (Precise Find):** Wanting to search for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
 
 **Format (Precise Find):** `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`
 
@@ -344,13 +357,11 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 <div markdown="block" class="alert alert-danger">
 
-:exclamation:**Caution:**<br>
-* There must be at **least one [prefix](#command-structure) followed by a [parameter](#command-structure)** and it **must not be empty**.
-
 :exclamation:**Multiple of the same prefixes:**<br>
 * `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in the notes of [command structure](#command-structure)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
-* `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
-* `find r/4 5` does not mean `find r/4 r/5`. The former will find all show ratings with a **4 star rating and 5 star rating** while the latter will find all shows with a **5 star rating**. This is only applicable to the `RATING` parameter.
+* `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find all shows with both **Anime** and **Action** tags in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
+* `find r/4 5` does not mean `find r/4 r/5`. The former will find all shows with both **4 star rating and 5 star rating** while the latter will find all shows with a **5 star rating**. This is only applicable to the `RATING` parameter.
+* `find s/completed watching` does not mean `find s/completed s/watching`. The former will find all shows with both **completed and watching** status while the latter will find all shows with a **watching** status. This is only applicable to the `STATUS` parameter.
 
 </div>
 
@@ -368,8 +379,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 ### Sorting the shows `sort`
 
-Your show list is in a mess! Do you need a way to organise your list?
-Sort can help reorder the list!!
+**Description:** Wanting to organise your messy show list? Sort can help reorder the list for you!
 
 <div markdown="block" class="alert alert-danger">
 
@@ -424,7 +434,7 @@ Sort can help reorder the list!!
 
 ### Suggest a Show: `suggest`
 
-**Description:** Want a random show? This suggests a random show from the displayed list!
+**Description:** Wanting to find a random show? This suggests a random show from the displayed list!
 
 **Format:** `suggest`
 
@@ -438,7 +448,7 @@ Sort can help reorder the list!!
 
 ### Importing a show: `import`
 
-**Description:** Want to easily import Trackermon data from other devices? Just use our import function!
+**Description:** Wanting to easily import Trackermon data from other devices? Just use our import function!
 
 **Format:** `import`
 
@@ -462,7 +472,7 @@ Sort can help reorder the list!!
 
 ### Exporting a show: `export`
 
-**Description:** Want to easily export Trackermon data to other devices? Just use our export function!
+**Description:** Wanting to easily export Trackermon data to other devices? Just use our export function!
 
 **Format:** `export`
 
@@ -488,7 +498,6 @@ Sort can help reorder the list!!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## FAQ
 * **Q:** Where is the data of Trackermon saved?<br>
@@ -505,29 +514,27 @@ Sort can help reorder the list!!
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                             |
-|------------------|------------------------------------------------------------------------------------------------------------------------------|
-| **Help**         | `help`                                                                                                                       |
-| **Add**          | `add n/NAME s/STATUS [r/RATING] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                      |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                          |
-| **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
-| **List**         | `list`                                                                                                                       |
-| **Clear**        | `clear`                                                                                                                      |
-| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                     |
-| **Precise Find** | `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                                 | 
-| **Suggest**      | `suggest`                                                                                                                    |
-| **Import**       | `import`                                                                                                                     |
-| **Export**       | `export`                                                                                                                     |
-| **Exit**         | `exit`                                                                                                                       |
+| Action           | Format, Examples                                                                                                                    |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**         | `help`                                                                                                                              |
+| **Add**          | `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​` <br> e.g., `add n/ReZero s/watching r/3 t/Anime`                             |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
+| **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `edit 1 n/ReZero s/watching r/3 c/Good show t/Anime` |
+| **List**         | `list`                                                                                                                              |
+| **Clear**        | `clear`                                                                                                                             |
+| **General Find** | `find KEYWORD…​`<br> e.g., `find hero`<br>                                                                                          |
+| **Precise Find** | `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`              |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                                        | 
+| **Suggest**      | `suggest`                                                                                                                           |
+| **Import**       | `import`                                                                                                                            |
+| **Export**       | `export`                                                                                                                            |
+| **Exit**         | `exit`                                                                                                                              |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Glossary
 
@@ -537,6 +544,6 @@ Sort can help reorder the list!!
 | **OR search**                      | OR search finds one keyword or the other.  For example, `find Shutter Island` returns all results that contain Shutter or Island.                                                    |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
-
+| **Alphanumeric**                   | A character that is either a letter or a number.                  |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
