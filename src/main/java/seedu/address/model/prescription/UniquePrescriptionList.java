@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.patient.exceptions.PersonNotFoundException;
 import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
 import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
 
@@ -43,7 +42,7 @@ public class UniquePrescriptionList implements Iterable<Prescription> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new PrescriptionNotFoundException();
         }
 
         if (!target.equals(editedPrescription) && contains(editedPrescription)) {
@@ -100,7 +99,7 @@ public class UniquePrescriptionList implements Iterable<Prescription> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code prescriptions} contains only unique prescriptions.
      */
     private boolean prescriptionAreUnique(List<Prescription> prescriptions) {
         for (int i = 0; i < prescriptions.size() - 1; i++) {
