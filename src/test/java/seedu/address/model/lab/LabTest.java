@@ -25,12 +25,6 @@ public class LabTest {
     }
 
     @Test
-    public void constructor_startsWithZero_throwsIllegalArgumentException() {
-        String invalidLabNumber = "012";
-        assertThrows(IllegalArgumentException.class, () -> new Lab(invalidLabNumber));
-    }
-
-    @Test
     public void isValidLab() {
         // null lab
         assertThrows(NullPointerException.class, () -> Lab.isValidLab(null));
@@ -41,12 +35,14 @@ public class LabTest {
 
         // invalid lab
         assertFalse(Lab.isValidLab("1a")); // invalid lab number
-        assertFalse(Lab.isValidLab("01")); // invalid lab number
+        assertFalse(Lab.isValidLab("123456789")); // larger than 20
+        assertFalse(Lab.isValidLab("21")); // larger than 20
 
         // valid lab
         assertTrue(Lab.isValidLab("1")); // valid integer
         assertTrue(Lab.isValidLab("2")); // valid integer
-        assertTrue(Lab.isValidLab("123456789")); // valid integer
+        assertTrue(Lab.isValidLab("001")); // valid lab number
+        assertTrue(Lab.isValidLab("00")); // valid lab number
     }
 
     @Test

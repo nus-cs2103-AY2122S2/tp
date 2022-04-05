@@ -15,12 +15,12 @@ import seedu.address.model.util.SampleDataUtil;
 public class Lab {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lab number should be a valid positive integer";
+            "Lab number should be an integer between 0 and 20 inclusive.";
 
     /*
      * Lab number has to be a positive Integer.
      */
-    public static final String VALIDATION_REGEX = "[1-9]\\d*";
+    public static final String VALIDATION_REGEX = "[0-9]\\d*";
 
     public final int labNumber;
 
@@ -77,7 +77,16 @@ public class Lab {
      * Returns true if a given string is a valid lab number.
      */
     public static boolean isValidLab(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        try {
+            int labNum = Integer.parseInt(test);
+            return labNum >= 0 && labNum <= 20;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**

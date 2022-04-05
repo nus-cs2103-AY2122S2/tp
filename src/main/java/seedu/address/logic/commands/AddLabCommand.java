@@ -16,7 +16,7 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lab to all students in the TAddressBook. \n"
             + "Parameters: "
-            + PREFIX_LAB + "LAB_NUMBER \n"
+            + PREFIX_LAB + "LAB_NUMBER (has to be between 0 and 20 inclusive)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LAB + "1";
 
