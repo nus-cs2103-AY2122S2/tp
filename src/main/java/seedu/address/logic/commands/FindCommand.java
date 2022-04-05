@@ -14,13 +14,13 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
+            + "Parameters: find FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
     public static final String MESSAGE_NO_KEYWORD = "Field must contain a keyword. \n"
-            + "Parameters: FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
+            + "Parameters: find FIELD KEYWORD [MORE_FIELD] [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/alice bob i/Undecided";
 
     private final CombineContainsKeywordsPredicate predicate;
