@@ -17,16 +17,15 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all companies whose names "
-            + "contain any of "
-            + "the specified keywords (case-insensitive) and roles contains any of the specified keywords"
-            + "(case-insensitive).\n"
-            + "Displays them as a list with index numbers.\n"
-            + "Parameters: "
-            + PREFIX_COMPANY_NAME
-            + "COMPANY_NAME "
-            + PREFIX_ROLE_NAME
-            + "ROLE_NAME"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + "\n"
+            + "Function: Finds all companies whose names contain any of the specified keywords (case-insensitive) and"
+            + " roles contains any of the specified keywords (case-insensitive). Displays them as a list with index "
+            + "numbers."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + PREFIX_COMPANY_NAME + "COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] "
+            + PREFIX_ROLE_NAME + "ROLE_KEYWORD [MORE_ROLE_KEYWORDS] "
             + "\n"
             + "Example: " + COMMAND_WORD + " c/amazon r/engineer";
 

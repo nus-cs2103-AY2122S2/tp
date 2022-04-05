@@ -27,8 +27,12 @@ public class FavouriteCompanyCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Favourites the company identified by the index number used in the displayed company list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "\n"
+            + "Function: Favourites the company identified by the index number used in the displayed company list."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + "COMPANY_INDEX (must be a positive integer)"
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_FAVOURITE_COMPANY_SUCCESS = "Favourited Company: %1$s";
