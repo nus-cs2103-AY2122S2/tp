@@ -39,34 +39,34 @@ public class ProgressCommandParserTest {
                 ProgressCommand.MESSAGE_USAGE));
     }
 
-    @Test
-    public void parse_validModuleCodeAndTaskName_returnsProgressCommand() {
-        Person amy = new PersonBuilder(AMY).build();
-        amy.addTask(new Task("Task A"));
-        amy.markTaskAsComplete(0);
-        Task task = amy.getTaskList().getTaskList().get(0);
-        String taskName = " tn/" + task.getTaskName();
-
-        // valid moduleCode and taskName
-        ProgressCommand expectedProgressCommand =
-                new ProgressCommand(amy.getModuleCode(), task);
-
-        // moduleCode followed by taskName (no whitespace before moduleCode)
-        assertParseSuccess(parser, MODULE_CODE_DESC_AMY + taskName,
-                expectedProgressCommand);
-
-        // moduleCode followed by taskName (whitespace before moduleCode)
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_AMY + taskName,
-                expectedProgressCommand);
-
-        // taskName followed by moduleCode (no whitespace before taskName)
-        assertParseSuccess(parser, taskName + MODULE_CODE_DESC_AMY,
-                expectedProgressCommand);
-
-        // taskName followed by moduleCode (whitespace before taskName)
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + taskName + MODULE_CODE_DESC_AMY,
-                expectedProgressCommand);
-    }
+//    @Test
+//    public void parse_validModuleCodeAndTaskName_returnsProgressCommand() {
+//        Person amy = new PersonBuilder(AMY).build();
+//        amy.addTask(new Task("Task A"));
+//        amy.markTaskAsComplete(0);
+//        Task task = amy.getTaskList().getTaskList().get(0);
+//        String taskName = " tn/" + task.getTaskName();
+//
+//        // valid moduleCode and taskName
+//        ProgressCommand expectedProgressCommand =
+//                new ProgressCommand(amy.getModuleCode(), task);
+//
+//        // moduleCode followed by taskName (no whitespace before moduleCode)
+//        assertParseSuccess(parser, MODULE_CODE_DESC_AMY + taskName,
+//                expectedProgressCommand);
+//
+//        // moduleCode followed by taskName (whitespace before moduleCode)
+//        assertParseSuccess(parser, PREAMBLE_WHITESPACE + MODULE_CODE_DESC_AMY + taskName,
+//                expectedProgressCommand);
+//
+//        // taskName followed by moduleCode (no whitespace before taskName)
+//        assertParseSuccess(parser, taskName + MODULE_CODE_DESC_AMY,
+//                expectedProgressCommand);
+//
+//        // taskName followed by moduleCode (whitespace before taskName)
+//        assertParseSuccess(parser, PREAMBLE_WHITESPACE + taskName + MODULE_CODE_DESC_AMY,
+//                expectedProgressCommand);
+//    }
 
     @Test
     public void parse_invalidFields_throwsParseException() {
