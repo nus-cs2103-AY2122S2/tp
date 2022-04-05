@@ -15,7 +15,7 @@ import seedu.contax.model.IndexedCsvFile;
 import seedu.contax.model.Model;
 
 /**
- * Manager to handle import/export csv logic
+ * Manager to handle import/export csv logic.
  */
 public class CsvManager {
     private static final String CSV_HEADER = "Name,Phone,Email,Address,Tagged";
@@ -29,7 +29,7 @@ public class CsvManager {
     }
 
     /**
-     * Creates a CsvManager to import to specified {@code model}
+     * Creates a CsvManager to import to specified {@code model}.
      */
     public CsvManager(Model model, BiFunction<Integer, String[], Boolean> lineAction) {
         this.model = model;
@@ -37,7 +37,7 @@ public class CsvManager {
     }
 
     /**
-     * Creates a CsvManager to import to specified {@code model}
+     * Creates a CsvManager to import to specified {@code model}.
      */
     public CsvManager(Model model, UnaryOperator<List<String[]>> csvLines) {
         this.model = model;
@@ -45,11 +45,11 @@ public class CsvManager {
     }
 
     /**
-     * Imports a given {@code IndexedCsvFile} to a {@code model}
-     *
-     * @param csvFile File to be imported
-     * @return CommandResult upon success
-     * @throws IOException if reading from file fails
+     * Imports a given {@code IndexedCsvFile} to a {@code model}.
+     * 
+     * @param csvFile File to be imported.
+     * @return CommandResult upon success.
+     * @throws IOException If reading from file fails.
      */
     // Return list of skipped lines
     public List<Integer> importCsv(IndexedCsvFile csvFile) throws IOException {
@@ -72,9 +72,9 @@ public class CsvManager {
     }
 
     /**
-     * Exports the current address book into a pre-defined CSV file
+     * Exports the current address book into a pre-defined CSV file.
      *
-     * @return True if operation is successful, false otherwise
+     * @return True if operation is successful, false otherwise.
      */
     public boolean exportCsv(String filePath) {
         try {
