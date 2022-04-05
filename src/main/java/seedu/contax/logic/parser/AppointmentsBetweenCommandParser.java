@@ -22,6 +22,10 @@ import seedu.contax.logic.parser.exceptions.ParseException;
  */
 public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetweenCommand> {
 
+    private static final LocalTime DEFAULT_START_TIME = LocalTime.of(0, 0);
+    private static final LocalTime DEFAULT_END_TIME = LocalTime.of(23, 59);
+    private static final LocalDate DEFAULT_END_DATE = LocalDate.MAX;
+
     /**
      * Parses the given {@code String} of arguments in the context of the AppointmentsBetweenCommand
      * and returns an AppointmentsBetweenCommand object for execution.
@@ -42,11 +46,11 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
 
         LocalDate startDate = getArgumentOrElse(LocalDate.now(), argMultimap.getValue(PREFIX_DATE_START),
                 DateUtil::parseDate, AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID);
-        LocalTime startTime = getArgumentOrElse(LocalTime.of(0, 0), argMultimap.getValue(PREFIX_TIME_START),
+        LocalTime startTime = getArgumentOrElse(DEFAULT_START_TIME, argMultimap.getValue(PREFIX_TIME_START),
                 DateUtil::parseTime, AppointmentsBetweenCommand.MESSAGE_START_TIME_INVALID);
-        LocalDate endDate = getArgumentOrElse(LocalDate.MAX, argMultimap.getValue(PREFIX_DATE_END),
+        LocalDate endDate = getArgumentOrElse(DEFAULT_END_DATE, argMultimap.getValue(PREFIX_DATE_END),
                 DateUtil::parseDate, AppointmentsBetweenCommand.MESSAGE_END_DATE_INVALID);
-        LocalTime endTime = getArgumentOrElse(LocalTime.of(23, 59), argMultimap.getValue(PREFIX_TIME_END),
+        LocalTime endTime = getArgumentOrElse(DEFAULT_END_TIME, argMultimap.getValue(PREFIX_TIME_END),
                 DateUtil::parseTime, AppointmentsBetweenCommand.MESSAGE_END_TIME_INVALID);
 
         LocalDateTime startDateTime = DateUtil.combineDateTime(startDate, startTime);

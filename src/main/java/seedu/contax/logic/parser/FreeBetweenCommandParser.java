@@ -23,6 +23,10 @@ import seedu.contax.logic.parser.exceptions.ParseException;
  */
 public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
 
+    private static final LocalTime DEFAULT_START_TIME = LocalTime.of(0, 0);
+    private static final LocalTime DEFAULT_END_TIME = LocalTime.of(23, 59);
+    private static final LocalDate DEFAULT_END_DATE = LocalDate.MAX;
+
     /**
      * Parses the given {@code String} of arguments in the context of the FreeBetweenCommand
      * and returns an FreeBetweenCommand object for execution.
@@ -38,7 +42,6 @@ public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FreeBetweenCommand.MESSAGE_USAGE));
         }
-
         if (argMultimap.getValue(PREFIX_TIME_END).isPresent() && argMultimap.getValue(PREFIX_DATE_END).isEmpty()) {
             throw new ParseException(FreeBetweenCommand.MESSAGE_END_TIME_WITHOUT_DATE);
         }
@@ -46,20 +49,18 @@ public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
         int duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()).value;
         LocalDate startDate = getArgumentOrElse(LocalDate.now(), argMultimap.getValue(PREFIX_DATE_START),
                 DateUtil::parseDate, FreeBetweenCommand.MESSAGE_START_DATE_INVALID);
-        LocalTime startTime = getArgumentOrElse(LocalTime.of(0, 0), argMultimap.getValue(PREFIX_TIME_START),
+        LocalTime startTime = getArgumentOrElse(DEFAULT_START_TIME, argMultimap.getValue(PREFIX_TIME_START),
                 DateUtil::parseTime, FreeBetweenCommand.MESSAGE_START_TIME_INVALID);
-        LocalDate endDate = getArgumentOrElse(LocalDate.MAX, argMultimap.getValue(PREFIX_DATE_END),
+        LocalDate endDate = getArgumentOrElse(DEFAULT_END_DATE, argMultimap.getValue(PREFIX_DATE_END),
                 DateUtil::parseDate, FreeBetweenCommand.MESSAGE_END_DATE_INVALID);
-        LocalTime endTime = getArgumentOrElse(LocalTime.of(23, 59), argMultimap.getValue(PREFIX_TIME_END),
+        LocalTime endTime = getArgumentOrElse(DEFAULT_END_TIME, argMultimap.getValue(PREFIX_TIME_END),
                 DateUtil::parseTime, FreeBetweenCommand.MESSAGE_END_TIME_INVALID);
-
         LocalDateTime startDateTime = DateUtil.combineDateTime(startDate, startTime);
         LocalDateTime endDateTime = DateUtil.combineDateTime(endDate, endTime);
 
         if (endDateTime.isBefore(startDateTime)) {
             throw new ParseException(FreeBetweenCommand.MESSAGE_END_BEFORE_START);
         }
-
         return new FreeBetweenCommand(startDateTime, endDateTime, duration);
     }
 
