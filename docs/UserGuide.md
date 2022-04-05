@@ -39,7 +39,7 @@ We hope you enjoy Tracey as much as we did when developing it!
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to navigate the User Guide
@@ -379,7 +379,7 @@ Resizes the result display window to 3 pre-set sizes.
 Format: `resize SIZE`
 * There are 3 options for `SIZE` which are 1, 2 and 3.
 * The default result display window size is option 1.
-* Refer to figures 11 for the comparison for the different result display window sizes.
+* Refer to figure 13 for the comparison for the different result display window sizes.
 
 💡`Tips:`
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
