@@ -231,9 +231,9 @@ adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
 `DATE` must be in the format:
-- YYYY-MM-DD
-- "Today" (which will get the `DATE` for today)
-- "Today DAY" (which will get the `DATE` for DAY days after today)
+* YYYY-MM-DD
+* "today" (which will get the `DATE` for today)
+* "today DAY" (which will get the `DATE` for DAY days after today)
 While `TIME` must be in the format HH:MM.
 E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
 </div>
