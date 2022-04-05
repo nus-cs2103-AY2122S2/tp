@@ -17,17 +17,18 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 1. Ensure you have [Java `11`](https://www.oracle.com/java/technologies/downloads/#java11) or above installed in your Computer.
 
-1. Download the latest `TAPA.jar` from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
+2. Download the latest `TAPA.jar` file from [here](https://github.com/AY2122S2-CS2103T-W09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TAPA.
+3. Copy the `TAPA.jar` file to the folder you want to use as the _home folder_ for TAPA.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the desired command in the command box and press the "Enter" key on your keyboard to execute it. For example, typing **`help`** and pressing "Enter" will open the help window.<br>
+   <br>
+Here are some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students in TAPA.
 
    * **`add`**`i/A0123456Z n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu` : Adds a student named `John` to TAPA.
 
@@ -35,11 +36,11 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
    * **`manual`**`add` : Display the user manual for the command `add`.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students from TAPA.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -48,25 +49,27 @@ who are teaching multiple classes/modules at the same time. It is optimised for 
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the "Format" section for each command:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
+  Example: For the command `edit STUDENT_INDEX`, `STUDENT_INDEX` is a parameter that must be supplied by the user.<br>
+  Thus, the user should input the command `edit 10`, where "10" is the `STUDENT_INDEX` supplied by the user.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Parameters in square brackets are optional parameters.<br>
+  Example: For the command `edit STUDENT_INDEX [p/PHONE_NUMBER] [m/MODULE_CODE]`, the user must supply the `STUDENT_INDEX` parameter in the input, whereas the `PHONE_NUMBER` and `MODULE_CODE` parameters are optional.<br>
+  Thus, the user can input the command `edit 10 p/98765432` (`MODULE_CODE` not specified) or `edit 10 p/98765432 m/CS2103` (`MODULE_CODE` specified).
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters with `…`​ after them can be used multiple times.<br>
+  Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (one `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be inputted in any order.<br>
+  Example: For the command `add i/STUDENT_ID n/NAME m/MODULE_CODE`, the user can input `add i/A0123456B n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add i/A0123456B m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`).
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* If a parameter is expected only once in the command, but the user specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  Example: For the command `find n/NAME`, if the user inputs the command `find n/John n/Mary`, only `n/Mary` will be interpreted by TAPA.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
 
 </div>
 
@@ -76,8 +79,20 @@ Adds a student to TAPA.
 
 **Format**: `add i/STUDENT_ID n/STUDENT_NAME m/MODULE_CODE [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
-* The student’s matriculation number, name as well as module code are compulsory fields.
+* The student’s student ID (matriculation number), name as well as module code are compulsory fields.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
+
+<div markdown="block" class="alert alert-info">
+> :warning: **Warning!:**
+
+<br>
+
+* The student's student ID (matriculation number) has to be unique.
+* An error message will be displayed to the user if the specified student ID already exists in TAPA.
+
+    <div markdown="span" class="alert alert-info">:information_source:
+    **Note**: The name of the added student will be converted to Title Case.
+    </div>
 
 **Example**:
 * `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
@@ -165,7 +180,7 @@ Marks a specific undone task as done for a particular student.
 
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
-    * Marks the first undone task for the student with student ID AXXXXXXXR as done.
+    * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
 
 <br>
 
@@ -181,7 +196,7 @@ Marks a specific done task as undone for a particular student.
 
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
-    * Marks the first done task for the student with student ID AXXXXXXXR as undone.
+    * Marks the first task in the task list for the student with student ID AXXXXXXXR as undone.
 
 <br>
 
@@ -208,6 +223,7 @@ Clears all students from TAPA.
 **Format**: `clear`
 
 * All students and their corresponding details will be removed from TAPA.
+* TAPA will request for the user's confirmation before clearing all students.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
 **Example**:
@@ -254,6 +270,17 @@ Assigns a task to a particular student.
     * Assigns assignment 1 to student with id AXXXXXXXR.
 * `assign m/CS2103T tn/assignment 1`
     * Assigns assignment 1 to students taking module CS2103T.
+
+<div markdown="block" class="alert alert-info">
+> :warning: **Warning!:**
+
+<br>
+
+* As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
+
+  <div markdown="span" class="alert alert-info">:information_source:
+    **Note**: The name of the assigned task will be converted to Title Case.
+    </div>
 
 <br>
 
@@ -320,7 +347,9 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 <div markdown="block" class="alert alert-info">
-**:warning: Warning!:**<br>
+> :warning: **Warning!:**
+
+<br>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
 
