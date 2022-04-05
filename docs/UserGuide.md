@@ -634,7 +634,8 @@ Examples:
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
-The `batch` `range` `chain` operation is executed sequentially, it will fail if one of given command executed failed and the error message of that error command will show, but the successful command before will be saved.
+The `batch` `range` `chain` operation is executed sequentially, it will fail if one of given command executed failed and the error message of that error command will show, but the successful command before will be saved. 
+(e.g. in `batch editperson n/New Name by/name start/R` the first occurrence of person with name starting with "R" will be edited, but following one will fail due to duplicated name and error message will show)
 </div>
 
 ### Exiting the program : `exit`
