@@ -1,8 +1,3 @@
----
-layout: page
-title: User Guide
----
-
 ClientConnect is a **desktop app for managing clients’ contact details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps with the ability to `find` specific clients based on keywords provided.
 
 ![result for 'list'](images/listAllClientsUG.png)
