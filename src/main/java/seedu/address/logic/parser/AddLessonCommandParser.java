@@ -111,9 +111,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Integer durationHours = getDurationHours(argumentMultimap);
         Integer durationMinutes = getDurationMinutes(argumentMultimap);
 
-        // throw exception if the total duration is 0 hours and 0 minutes
-        ParserUtil.checkDurationIsValid(durationHours, durationMinutes);
-
         return ParserUtil.parseDateTimeSlot(
                 date,
                 startTime,

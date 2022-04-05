@@ -1,5 +1,8 @@
 package seedu.address.model.lesson;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -18,6 +21,11 @@ public class DateTimeSlot {
     public static final String MESSAGE_CONSTRAINTS = "Lessons can only be created with a valid date."
                     + "\n Hours and minutes must be non-negative integer."
                     + "\n Minutes cannot be more than 60.";
+
+    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
+
+    public static final String EXCESSIVE_DURATION_MESSAGE =
+            "Duration of lesson cannot be more than or equals to 24 hours!";
 
     private static final DateTimeFormatter acceptedDateFormat =
             DateTimeFormatter.ofPattern("d-M-uuuu").withResolverStyle(ResolverStyle.STRICT);
@@ -81,6 +89,31 @@ public class DateTimeSlot {
         dateOfLesson = lessonDateTime;
         this.hours = hours;
         this.minutes = minutes;
+    }
+
+    public static DateTimeSlot makeDateTimeSlot(LocalDateTime startingDateTime, Integer hours, Integer minutes)
+            throws CommandException {
+        checkLessonDurationIsGreaterThanZeroMinutes(hours, minutes);
+        checkLessonDurationIsLessThan24Hours(hours, minutes);
+
+        return new DateTimeSlot(startingDateTime, hours, minutes);
+    }
+
+    private static void checkLessonDurationIsGreaterThanZeroMinutes(Integer hours, Integer minutes)
+            throws CommandException {
+        if (hours == 0 && minutes == 0) {
+            throw new CommandException(INVALID_DURATION_MESSAGE);
+        }
+    }
+
+    private static void checkLessonDurationIsLessThan24Hours(Integer hours, Integer minutes)
+            throws CommandException {
+        Integer totalDurationInMinutes = (hours * 60) + minutes;
+        Integer twentyFourHoursInMinutes = 24 * 60;
+
+        if (totalDurationInMinutes >= twentyFourHoursInMinutes) {
+            throw new CommandException(EXCESSIVE_DURATION_MESSAGE);
+        }
     }
 
     public static DateTimeFormatter getAcceptedDateFormat() {
