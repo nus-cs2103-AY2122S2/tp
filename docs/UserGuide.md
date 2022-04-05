@@ -71,6 +71,8 @@ Here are some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
 
+* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 characters. The characters can either be alphanumeric or underscore. However, the first and last character of the handle should not be an underscore.
+
 </div>
 
 ### Adding a student: `add`
@@ -83,16 +85,16 @@ Adds a student to TAPA.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 <div markdown="block" class="alert alert-info">
-> :warning: **Warning!:**
-
-<br>
+:warning: **Warning!:**
 
 * The student's student ID (matriculation number) has to be unique.
 * An error message will be displayed to the user if the specified student ID already exists in TAPA.
 
-    <div markdown="span" class="alert alert-info">:information_source:
-    **Note**: The name of the added student will be converted to Title Case.
-    </div>
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source:
+**Note**: The name of the added student will be converted to Title Case.
+</div>
 
 **Example**:
 * `add i/AXXXXXXXR n/john m/CS2103T p/98765432 t/johnnn e/e0123456@u.nus.edu`
@@ -272,15 +274,15 @@ Assigns a task to a particular student.
     * Assigns assignment 1 to students taking module CS2103T.
 
 <div markdown="block" class="alert alert-info">
-> :warning: **Warning!:**
-
-<br>
+:warning: **Warning!:**
 
 * As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
 
-  <div markdown="span" class="alert alert-info">:information_source:
-    **Note**: The name of the assigned task will be converted to Title Case.
-    </div>
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source:
+**Note**: The name of the assigned task will be converted to Title Case.
+</div>
 
 <br>
 
@@ -349,8 +351,6 @@ Reverts the changes made by the previously executed command.
 
 <div markdown="block" class="alert alert-info">
 > :warning: **Warning!:**
-
-<br>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
 
