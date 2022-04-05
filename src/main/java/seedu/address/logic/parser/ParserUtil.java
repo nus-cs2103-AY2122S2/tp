@@ -32,7 +32,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format! Date must be in DD-MM-YYYY\n"
+    public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format!"
+            + " Date must be in DD-MM-YYYY and day-field cannot exceed the maximum day of the month\n"
+            + "(e.g. 30-02-2022 would be invalid as 30 Feb 2022 does not exist in the calendar)\n\n"
             + "[EXAMPLE]: to specify that a lesson is on 25th March 2022, include the following\n"
             + "-d 25-03-2022";
 
@@ -41,6 +43,7 @@ public class ParserUtil {
             + "[EXAMPLE] to specify that the hours field in the lesson's duration is 2 hours, "
             + "include the following\n"
             + "-h 2";
+
     public static final String NEGATIVE_HOURS_MESSAGE = "Hours cannot be lesser than 0.";
 
     public static final String INVALID_START_TIME_MESSAGE = "Invalid start time format! Start time must be in HH:mm\n"
