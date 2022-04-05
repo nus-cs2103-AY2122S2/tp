@@ -1,5 +1,6 @@
 package seedu.address.model.transaction;
 
+import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -74,6 +75,6 @@ public class Amount extends TransactionField {
 
     @Override
     public int hashCode() {
-        return new Double(value).hashCode();
+        return hash(value);
     }
 }
