@@ -29,7 +29,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`**<br>Lists all contacts and upcoming events.
+    * **`list`**<br>Lists all contacts.
 
     * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01`<br>Adds a contact named `fred` to NUSocials.
 
