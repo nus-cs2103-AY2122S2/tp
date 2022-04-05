@@ -31,16 +31,22 @@ public class CommandTestUtil {
 
     public static final String VALID_ID_AMY = "A1111111Z";
     public static final String VALID_ID_BOB = "A2222222Z";
+    public static final String VALID_ID_ANDY = "A0000001Z";
     public static final String VALID_NAME_AMY = "Amy";
     public static final String VALID_NAME_BOB = "Bob";
+    public static final String VALID_NAME_ANDY = "Andy";
     public static final String VALID_MODULE_CODE_AMY = "CS1111";
     public static final String VALID_MODULE_CODE_BOB = "CS2222";
+    public static final String VALID_MODULE_CODE_ANDY = "CS2101";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_ANDY = "10000000";
     public static final String VALID_TELEGRAM_HANDLE_AMY = "amyyy";
     public static final String VALID_TELEGRAM_HANDLE_BOB = "bobbb";
+    public static final String VALID_TELEGRAM_HANDLE_ANDY = "andyyy";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_ANDY = "andyyy@u.nus.edu";
     public static final String VALID_TASK_AMY = "Task A";
     public static final String VALID_TASK_BOB = "Task B";
     public static final String VALID_INDEX = "1";

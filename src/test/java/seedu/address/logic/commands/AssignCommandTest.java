@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ANDY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -30,11 +31,9 @@ import seedu.address.testutil.TypicalPersons;
 public class AssignCommandTest {
 
     private final StudentId studentIdAlice = TypicalPersons.ALICE.getStudentId();
-    private final StudentId studentIdBenson = TypicalPersons.BENSON.getStudentId();
     private final StudentId notPresentStudentId = new StudentId("A0000000Z");
 
     private final ModuleCode moduleCodeAlice = TypicalPersons.ALICE.getModuleCode();
-    private final ModuleCode moduleCodeBenson = TypicalPersons.BENSON.getModuleCode();
     private final ModuleCode invalidModuleCode = new ModuleCode("CSGO");
 
     private final Task taskAlice = ALICE.getTaskList().getTaskList().get(0);
@@ -137,23 +136,9 @@ public class AssignCommandTest {
     @Test
     public void execute_partialDuplicateTaskException_success() {
 
-        Person andy = new PersonBuilder()
-                .withStudentId("A1111111Z")
-                .withName("Andy")
-                .withModuleCode("CS2101")
-                .withPhone("10000000")
-                .withTelegramHandle("andyyy")
-                .withEmail("andyyy@u.nus.edu")
-                .build();
+        Person andy = new PersonBuilder(ANDY).build();
 
-        Person andyCopy = new PersonBuilder()
-                .withStudentId("A1111111Z")
-                .withName("Andy")
-                .withModuleCode("CS2101")
-                .withPhone("10000000")
-                .withTelegramHandle("andyyy")
-                .withEmail("andyyy@u.nus.edu")
-                .build();
+        Person andyCopy = new PersonBuilder(ANDY).build();
 
         Person alice = new PersonBuilder(ALICE).build();
 
@@ -163,6 +148,7 @@ public class AssignCommandTest {
         Model model = new ModelManager(andyAndAmyAb, new UserPrefs());
         Model expectedModel = new ModelManager(andyAndAmyAbCopy, new UserPrefs());
 
+        // Assign task that has already been assigned to some students will throw exception, but will still return.
         try {
             expectedModel.assignTaskToAllInModule(moduleCodeAlice, taskAlice);
         } catch (PartialDuplicateTaskException e) {
@@ -202,24 +188,10 @@ public class AssignCommandTest {
     public void execute_assignTaskByModuleCode_success() {
 
         // Creates new Person with same Module Code as Alice, but does was not assigned the task: Cry
-        Person andy = new PersonBuilder()
-                .withStudentId("A1111111Z")
-                .withName("Andy")
-                .withModuleCode("CS2101")
-                .withPhone("10000000")
-                .withTelegramHandle("andyyy")
-                .withEmail("andyyy@u.nus.edu")
-                .build();
+        Person andy = new PersonBuilder(ANDY).build();
 
-        // Creates a copy of andy, which has been assigned the task: Cry
-        Person andyCopy = new PersonBuilder()
-                .withStudentId("A1111111Z")
-                .withName("Andy")
-                .withModuleCode("CS2101")
-                .withPhone("10000000")
-                .withTelegramHandle("andyyy")
-                .withEmail("andyyy@u.nus.edu")
-                .build();
+        // Creates a copy of andy, which will be assigned the task: Cry
+        Person andyCopy = new PersonBuilder(ANDY).build();
 
         Person alice = new PersonBuilder(ALICE).build();
 
