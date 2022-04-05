@@ -43,20 +43,15 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label diet;
+    private HBox dietTag;
+    @FXML
+    private HBox appointmentTag;
     @FXML
     private FlowPane tags;
     @FXML
     private FlowPane attendanceTags;
     @FXML
     private FlowPane transportTags;
-    @FXML
-    private FlowPane dietLabel;
-    @FXML
-    private FlowPane appLabel;
-    @FXML
-    private FlowPane appointment;
-
 
     /**
      * Creates a {@code PetCode} with the given {@code Pet} and index to display.
@@ -69,28 +64,35 @@ public class PetCard extends UiPart<Region> {
         ownerName.setText(pet.getOwnerName().value);
         phone.setText(pet.getPhone().value);
         address.setText(pet.getAddress().value);
-        diet.setText(pet.getDiet().value);
+        if (!pet.getDiet().value.isEmpty()) {
+            dietTag.getChildren().add(DietTag.createDietLabel(pet.getDiet().value));
+        }
+        if (!pet.getAppointment().value.isEmpty()) {
+            appointmentTag.getChildren().add(AppointmentTag.createAppointmentTag(pet.getAppointment()));
+        }
         pet.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         AttendanceHashMap attendanceHashMap = pet.getAttendanceHashMap();
         getPastWeekAttendance(attendanceHashMap)
-                .forEach(attendance -> {
-                    attendanceTags
-                            .getChildren()
-                            .add(AttendanceTag.createAttendanceTag(attendance));
-                });
+            .forEach(attendance -> {
+                attendanceTags
+                    .getChildren()
+                    .add(AttendanceTag.createAttendanceTag(attendance));
+            });
         AttendanceUtil.getNextTwoDaysTransport(attendanceHashMap)
             .forEach(attendance -> {
                 transportTags
                     .getChildren()
                     .add(TransportTag.createTransportTag(attendance));
             });
-        dietLabel.getChildren().add(DietLabel.createDietLabel(pet.getDiet()));
-        appLabel.getChildren().add(AppointmentLabel.createAppointmentLabel(pet.getAppointment()));
-        appointment.getChildren().add(AppointmentInfoLabel.createAppointmentLabel(pet.getAppointment()));
     }
 
+    /**
+     * Sets the colour of the pet list cell in WoofAreYou.
+     *
+     * @param colour the colour of the pet list cell to be set.
+     */
     public void setColour(String colour) {
         cardPane.setStyle("-fx-background-color: " + colour);
     }
@@ -110,6 +112,6 @@ public class PetCard extends UiPart<Region> {
         // state check
         PetCard card = (PetCard) other;
         return id.getText().equals(card.id.getText())
-                && pet.equals(card.pet);
+            && pet.equals(card.pet);
     }
 }

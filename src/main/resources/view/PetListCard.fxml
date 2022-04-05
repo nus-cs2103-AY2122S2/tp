@@ -37,28 +37,15 @@
                 <Label fx:id="ownerName" styleClass="cell_small_label" text="\$ownerName"/>
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
                 <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
-                <HBox>
+                <HBox fx:id="dietTag">
                     <padding>
-                        <Insets bottom="1.5"/>
+                        <Insets bottom="1" top="2"/>
                     </padding>
-                    <FlowPane fx:id="dietLabel" prefHeight="2.0" prefWidth="0.0">
-                        <padding>
-                            <Insets right="5.0"/>
-                        </padding>
-                    </FlowPane>
-                    <Label fx:id="diet" styleClass="cell_small_label" text="\$diet"/>
                 </HBox>
-                <HBox VBox.vgrow="SOMETIMES">
-                    <VBox prefHeight="17.0" prefWidth="76.0">
-                        <FlowPane fx:id="appLabel">
-                            <padding>
-                                <Insets right="5.0"/>
-                            </padding>
-                        </FlowPane>
-                    </VBox>
-                    <VBox>
-                        <FlowPane fx:id="appointment" prefWrapLength="200.0"/>
-                    </VBox>
+                <HBox fx:id="appointmentTag">
+                    <padding>
+                        <Insets bottom="3" top="5"/>
+                    </padding>
                 </HBox>
             </VBox>
             <GridPane.margin>
