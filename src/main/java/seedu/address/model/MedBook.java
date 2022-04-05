@@ -24,7 +24,7 @@ import seedu.address.model.testresult.UniqueTestResultList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class MedBook implements ReadOnlyMedBook {
 
     private final UniquePatientList patients;
     private final UniqueContactList contacts;
@@ -50,12 +50,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     }
 
-    public AddressBook() {}
+    public MedBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public MedBook(ReadOnlyMedBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -73,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyMedBook newData) {
         requireNonNull(newData);
         setPatients(newData.getPatientList());
         setContacts(newData.getContactList());
@@ -330,11 +330,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && patients.equals(((AddressBook) other).patients))
-                && contacts.equals(((AddressBook) other).contacts)
-                && consultations.equals(((AddressBook) other).consultations)
-                && testResults.equals(((AddressBook) other).testResults);
+                || (other instanceof MedBook // instanceof handles nulls
+                && patients.equals(((MedBook) other).patients))
+                && contacts.equals(((MedBook) other).contacts)
+                && consultations.equals(((MedBook) other).consultations)
+                && testResults.equals(((MedBook) other).testResults);
     }
 
     @Override

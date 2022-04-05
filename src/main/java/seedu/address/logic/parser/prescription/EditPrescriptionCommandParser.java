@@ -55,7 +55,7 @@ public class EditPrescriptionCommandParser implements Parser<EditPrescriptionCom
         }
         if (argMultimap.getValue(PREFIX_INSTRUCTION).isPresent()) {
             editPrescriptionDescriptor
-                    .setResult(ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get()));
+                    .setInstruction(ParserUtil.parseInstruction(argMultimap.getValue(PREFIX_INSTRUCTION).get()));
         }
 
         if (!editPrescriptionDescriptor.isAnyFieldEdited()) {

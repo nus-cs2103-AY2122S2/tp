@@ -15,12 +15,12 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Patient.
  */
-public class PersonUtil {
+public class PatientUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code patient}.
      */
     public static String getAddCommand(Patient patient) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(patient);

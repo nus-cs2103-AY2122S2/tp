@@ -124,7 +124,7 @@ public class EditPrescriptionCommand extends Command {
         public EditPrescriptionDescriptor(EditPrescriptionCommand.EditPrescriptionDescriptor toCopy) {
             setDrugName(toCopy.drugName);
             setPrescriptionDate(toCopy.date);
-            setResult(toCopy.instruction);
+            setInstruction(toCopy.instruction);
         }
 
         public boolean isAnyFieldEdited() {
@@ -151,7 +151,7 @@ public class EditPrescriptionCommand extends Command {
             return Optional.ofNullable(instruction);
         }
 
-        public void setResult(Instruction instruction) {
+        public void setInstruction(Instruction instruction) {
             this.instruction = instruction;
         }
 
