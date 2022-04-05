@@ -46,6 +46,17 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: If double-clicking doesn't work:**<br>
+
+This could be a problem with Windows. You can alternatively start **HackNet** by:
+1. Starting a terminal session on your computer
+2. Change the directory to the folder containing the file using `cd path/to/HackNet_home_folder`
+3. Start HackNet using `java -jar HackNet.jar`
+
+</div>
+
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -320,7 +331,7 @@ Action | Format, Examples
 **Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/friend t/colleague s/java_70`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Make Team** | `team`, `unteam` <br> e.g., `team 1`
+**Mark/unmark contacts** | `team`, `unteam` <br> e.g., `team 1`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **List** | `list`
