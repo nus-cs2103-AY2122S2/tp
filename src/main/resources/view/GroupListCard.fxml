@@ -39,7 +39,7 @@
                 <Insets top="10" right="5" bottom="5" left="15" />
             </padding>
             <ScrollPane prefWidth="600" prefViewportHeight="80">
-            <FlowPane fx:id="personName" maxHeight="200" vgap="10" style="-fx-font-size: 14px; "/>
+                <FlowPane fx:id="personName" maxHeight="200" vgap="10" style="-fx-font-size: 14px; "/>
             </ScrollPane>
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
@@ -58,8 +58,8 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <ScrollPane fx:id="taskContainer" fitToWidth="true"  prefWidth="600" prefViewportHeight="100">
-                    <FlowPane fx:id="taskName" orientation="vertical"  vgap="10" style="-fx-font-size: 14px; "/>
+                <ScrollPane fx:id="taskContainer" fitToWidth="true" prefWidth="600" prefViewportHeight="100" HBox.hgrow="ALWAYS">
+                    <FlowPane fx:id="taskName" orientation="vertical"  vgap="10" style="-fx-font-size: 14px; " prefWrapLength="1000"/>
                 </ScrollPane>
             </HBox>
         </VBox>
