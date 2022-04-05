@@ -15,8 +15,8 @@ import seedu.contax.ui.RecyclableCard;
  * of it.
  */
 class ScheduleItemCard implements RecyclableCard<ScheduleItem> {
-    private final AppointmentCard apptCard;
-    private final AppointmentSlotCard apptRowCard;
+    private final AppointmentCard appointmentCard;
+    private final AppointmentSlotCard appointmentSlotCard;
     private final Function<Integer, Integer> displayedIndexMapper;
 
     /**
@@ -26,8 +26,8 @@ class ScheduleItemCard implements RecyclableCard<ScheduleItem> {
      *                             that should be displayed.
      */
     ScheduleItemCard(Function<Integer, Integer> displayedIndexMapper) {
-        apptCard = new AppointmentCard();
-        apptRowCard = new AppointmentSlotCard();
+        appointmentCard = new AppointmentCard();
+        appointmentSlotCard = new AppointmentSlotCard();
         this.displayedIndexMapper = displayedIndexMapper;
     }
 
@@ -40,11 +40,12 @@ class ScheduleItemCard implements RecyclableCard<ScheduleItem> {
      */
     public Node updateModel(ScheduleItem scheduleItem, int displayedIndex) {
         if (scheduleItem instanceof Appointment) {
-            this.apptCard.updateModel((Appointment) scheduleItem, displayedIndexMapper.apply(displayedIndex));
-            return this.apptCard.getRoot();
+            int actualIndex = displayedIndexMapper.apply(displayedIndex);
+            this.appointmentCard.updateModel((Appointment) scheduleItem, actualIndex);
+            return this.appointmentCard.getRoot();
         } else if (scheduleItem instanceof AppointmentSlot) {
-            this.apptRowCard.updateModel((AppointmentSlot) scheduleItem);
-            return this.apptRowCard.getRoot();
+            this.appointmentSlotCard.updateModel((AppointmentSlot) scheduleItem);
+            return this.appointmentSlotCard.getRoot();
         } else {
             return null;
         }
