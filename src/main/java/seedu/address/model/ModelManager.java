@@ -44,8 +44,8 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Predicate<Pet> predicate) {
         requireAllNonNull(addressBook, userPrefs);
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs +
-                " and predicate " + predicate);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+                + " and predicate " + predicate);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
