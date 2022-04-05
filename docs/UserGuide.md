@@ -105,6 +105,11 @@ Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]...`
   * If a pet is a Golden Dachshund, you can use `t/Golden Retriever t/Dachshund` or just `t/Golden Dachshund`.
 * Each particular entered must strictly correspond to its legal prefix. e.g: `p/Address` is considered as invalid.
 * Phone number **must only contain numbers**.
+* `NAME_OF_PET` (pet name) and `OWNER_NAME` (owner name) **must only contain alphabets or spaces**.
+* `PHONE_NUMBER` (phone number) should be a valid Singapore phone number. It should start with **6,7,8** and should be 
+**8 digits** long.
+  * You can include an optional country code in front of the phone number. `p/+6581234567` There should be no spaces
+    between `+65` and the corresponding phone number.
 
 Examples:
 * `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog` will show a screenshot as below.
