@@ -65,15 +65,22 @@ public class RangeCommand extends Command {
         List<CommandResult> commandResultList = new ArrayList<>();
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
+            commandResultList.add(
+                    new CommandResult("[ Batch Result on index " + i + " ]"));
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
 
                 logger.info("----------------[RANGE COMMAND][" + commandText + "]");
 
                 Command command = addressBookParser.parseCommand(commandText);
-                commandResultList.add(command.execute(model));
+
+                try {
+                    commandResultList.add(command.execute(model));
+                } catch (CommandException ce) {
+                    commandResultList.add(new CommandResult(ce.getMessage()));
+                }
             } catch (ParseException pe) {
-                return new CommandResult(pe.getMessage());
+                commandResultList.add(new CommandResult(pe.getMessage()));
             }
         }
         StringBuilder resultOutput = new StringBuilder();
@@ -82,7 +89,6 @@ public class RangeCommand extends Command {
         }
         return new CommandResult(resultOutput.toString());
     }
-
 
 
     @Override
