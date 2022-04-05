@@ -26,7 +26,7 @@ Given below are my contributions to the project.
   - **Credits**: Main idea of implementing `filter` is derived from `find`
 
 - **New Feature**: Added the ability to unarchive users from `archiveBook`, revamped underlying architecture of `archive` command. [(PR #135)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/135)
-  - **What it does**: Allows you to archive/unarchive contacts in ModuleMate Finder.
+  - **What it does**: Allows you to archive/unarchive contacts in ModuleMateFinder.
   - **Justification**: This features improves the product as it allows users to organise their contacts better. For example, they can put all graduate students in `archive`, and keep them in mind in the event they want to contact them for module feedback.
   - **Highlights**: This was a tough feature to implement. I had to modify the underlying architecture (in `Model`) in order to fit another `AddressBook`. This additional `AddressBook` is used as a reference for `archiveBook`. With these changes, methods have to be made with respect to `archiveBook`, and then we need a way to identify which `AddressBook` we're currently in. This is retrieved through GUI methods.
   - **Enhancements**: I binded the `switch`, which allows you to switch between `archiveBook` or `addressBook` to `F10` key. [(PR #)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/122) I also disabled `add`, `archive` when in `archiveBook`, and disabled `unarchive` when in `addressBook`.
