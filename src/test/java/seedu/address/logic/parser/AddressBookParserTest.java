@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -23,8 +24,8 @@ import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.entry.NameContainsKeywordsPredicate;
 import seedu.address.model.entry.Person;
+import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -71,9 +72,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String test = FindPersonCommand.COMMAND_WORD + " n/ " + keywords.stream().collect(Collectors.joining(" "));
         FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
-                FindPersonCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPersonCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                test);
+
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(
+                keywords, List.<String>of(""), List.<String>of(""),
+                SearchTypeUtil.getPredicate(SearchTypeUtil.SearchType.UNARCHIVED_ONLY)
+        );
+        assertEquals(new FindPersonCommand(predicate), command);
     }
 
     @Test

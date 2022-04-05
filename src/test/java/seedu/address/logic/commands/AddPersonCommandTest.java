@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -189,17 +190,22 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void showPersonList(Predicate<Person> predicate) {
+        public void updateCurrentlyDisplayedList(Predicate<Entry> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void showCompanyList(Predicate<Company> predicate) {
+        public void showPersonList(Predicate<? super Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void showEventList(Predicate<Event> predicate) {
+        public void showCompanyList(Predicate<? super Company> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showEventList(Predicate<? super Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -229,12 +235,32 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void updateFilteredEventList(Predicate<Event> predicate) {
+        public void updateFilteredEventList(Predicate<? super Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Entry deleteEntry(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Entry archiveEntry(int index, boolean isArchived) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

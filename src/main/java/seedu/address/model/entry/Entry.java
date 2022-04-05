@@ -11,16 +11,18 @@ import seedu.address.model.tag.Tag;
 public abstract class Entry {
     private final Name name;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isArchived;
 
     /**
      * Constructs a new Entry object given the name and tags.
      * @param name Name of the entry.
      * @param tags Tags associated with the entry.
      */
-    public Entry(Name name, Set<Tag> tags) {
+    public Entry(Name name, Set<Tag> tags, boolean isArchived) {
         requireAllNonNull(name, tags);
         this.name = name;
         this.tags.addAll(tags);
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
@@ -33,6 +35,14 @@ public abstract class Entry {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public void setArchived(boolean newArchived) {
+        isArchived = newArchived;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
     }
 
     /**

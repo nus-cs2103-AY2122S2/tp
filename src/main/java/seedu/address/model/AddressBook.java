@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -118,6 +119,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sets archived state of {@code key} in the person list.
+     * {@code key} must exist in the person list.
+     */
+    public void setArchivePerson(Person key, boolean isArchived) {
+        persons.setArchived(key, isArchived);
+    }
+
     //// company-level operations
 
     /**
@@ -149,11 +158,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from the company list.
+     * {@code key} must exist in the company list.
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+    }
+
+    /**
+     * Sets archived state of {@code key} in the company list.
+     * {@code key} must exist in the company list.
+     */
+    public void setArchiveCompany(Company key, boolean isArchived) {
+        companies.setArchived(key, isArchived);
     }
 
     //// event-level operations
@@ -185,11 +202,40 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from the event list.
+     * {@code key} must exist in the event list.
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    /**
+     * Sort list of {@code Company}s in the address book.
+     */
+    public void sortCompanies(Comparator<? super Company> comparator) {
+        companies.sort(comparator);
+    }
+
+    /**
+     * Sort list of {@code Person}s in the address book.
+     */
+    public void sortPersons(Comparator<? super Person> comparator) {
+        persons.sort(comparator);
+    }
+
+    /**
+     * Sort list of {@code Event}s in the address book.
+     */
+    public void sortEvents(Comparator<? super Event> comparator) {
+        events.sort(comparator);
+    }
+
+    /**
+     * Sets archived state of {@code key} in the event list.
+     * {@code key} must exist in the event list.
+     */
+    public void setArchiveEvent(Event key, boolean isArchived) {
+        events.setArchived(key, isArchived);
     }
 
     @Override

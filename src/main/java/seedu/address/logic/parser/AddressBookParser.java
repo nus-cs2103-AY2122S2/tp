@@ -6,11 +6,15 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.ListType;
 import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.ArchiveAllCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAllCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCompanyCommand;
 import seedu.address.logic.commands.EditEventCommand;
@@ -23,6 +27,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCompanyCommand;
 import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.ListPersonCommand;
+import seedu.address.logic.commands.SortCompanyCommand;
+import seedu.address.logic.commands.SortEventCommand;
+import seedu.address.logic.commands.SortPersonCommand;
+import seedu.address.logic.commands.UnarchiveAllCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -73,6 +82,9 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteAllCommand.COMMAND_WORD:
+            return new DeleteAllCommand();
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -86,13 +98,34 @@ public class AddressBookParser {
             return new FindPersonCommandParser().parse(arguments);
 
         case ListPersonCommand.COMMAND_WORD:
-            return new ListPersonCommand();
+            return new ListCommandParser(ListType.PERSON).parse(arguments);
 
         case ListCompanyCommand.COMMAND_WORD:
-            return new ListCompanyCommand();
+            return new ListCommandParser(ListType.COMPANY).parse(arguments);
 
         case ListEventCommand.COMMAND_WORD:
-            return new ListEventCommand();
+            return new ListCommandParser(ListType.EVENT).parse(arguments);
+
+        case SortPersonCommand.COMMAND_WORD:
+            return new SortCommandParser(ListType.PERSON).parse(arguments);
+
+        case SortCompanyCommand.COMMAND_WORD:
+            return new SortCommandParser(ListType.COMPANY).parse(arguments);
+
+        case SortEventCommand.COMMAND_WORD:
+            return new SortCommandParser(ListType.EVENT).parse(arguments);
+
+        case ArchiveCommand.COMMAND_WORD:
+            return new ArchiveCommandParser().parse(arguments);
+
+        case ArchiveAllCommand.COMMAND_WORD:
+            return new ArchiveAllCommand();
+
+        case UnarchiveCommand.COMMAND_WORD:
+            return new UnarchiveCommandParser().parse(arguments);
+
+        case UnarchiveAllCommand.COMMAND_WORD:
+            return new UnarchiveAllCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

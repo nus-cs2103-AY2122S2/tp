@@ -3,12 +3,14 @@
     "name": "Valid Person",
     "companyName": "Janice street",
     "phone": "9482424",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "isArchived": false
   }, {
     "name": "Person With Invalid Phone Field",
     "companyName": "DBSSS",
     "phone": "948asdf2424",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "isArchived": false
   } ],
   "companies": [],
   "events": []

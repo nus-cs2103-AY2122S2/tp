@@ -56,4 +56,12 @@ public class Location {
     public int hashCode() {
         return location.hashCode();
     }
+
+    /**
+     * Accesses and returns the location attribute
+     * @return the date attribute as String
+     */
+    public String getPure() {
+        return this.location;
+    }
 }

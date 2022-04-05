@@ -3,6 +3,7 @@ package seedu.address.model.entry;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,6 +66,9 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
             throw new DuplicateEntryException();
         }
 
+        if (target.isArchived()) {
+            editedEntry.setArchived(true);
+        }
         internalList.set(index, editedEntry);
     }
 
@@ -76,6 +80,36 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new EntryNotFoundException();
+        }
+    }
+
+    /**
+     * Returns the element in the list that is equal to {@code toFind}, if it exists.
+     */
+    public T find(T toFind) {
+        requireNonNull(toFind);
+        for (int i = 0; i < internalList.size(); i++) {
+            T entry = internalList.get(i);
+            if (entry.equals(toFind)) {
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Archives the equivalent entry from the list.
+     * The entry must exist in the list.
+     */
+    public void setArchived(T toArchive, boolean isArchived) {
+        requireNonNull(toArchive);
+        T match = find(toArchive);
+
+        if (match == null) {
+            throw new EntryNotFoundException();
+        } else {
+            match.setArchived(isArchived);
         }
     }
 
@@ -110,6 +144,22 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
      */
     public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public ObservableList<T> asSortedList(Comparator<T> comparator) {
+        return FXCollections.observableArrayList(internalList.sorted(comparator));
+    }
+
+    public ObservableList<T> asReversedSortedList(Comparator<T> comparator) {
+        return FXCollections.observableArrayList(internalList.sorted(comparator.reversed()));
+    }
+
+    /**
+     * Sorts the list using the given {@code Comparator comparator}.
+     * @param comparator the comparator to use for sorting
+     */
+    public void sort(Comparator<? super T> comparator) {
+        internalList.sort(comparator);
     }
 
     @Override
