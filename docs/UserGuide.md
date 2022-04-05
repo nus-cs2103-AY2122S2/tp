@@ -21,6 +21,7 @@ later.">
   - [Editing Patient Information: `edit`](#editing-patient-information-edit)
   - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
+  - [Finding any Entry: `find`](#finding-any-entry-find)  
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
   - [Editing Contact Information: `edit`](#editing-contact-information-edit)
@@ -231,6 +232,7 @@ Format: `find KEYWORD`
 Examples:
 * `find John` when viewing all patients shows only patients whose name is John.
 * `find x-ray` when viewing the test results belonging to a certain patient will filter the test results to only show those which contains the keyword `x-ray`.
+
 ### Adding Contact Information: `add t/contact`
 
 Adds a patient's emergency contact to MedBook.
@@ -422,6 +424,7 @@ If you understood what you are dealing with, you may proceed with cautions. We r
 | Edit a Patient                | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
 | View Summary of a Patient     | `view i/NRIC`                                                                                                                                                                                 |
 | Delete any Entry              | `delete INDEX`                                                                                                                                                                                |
+| Finding any Entry             | `find KEYWORD`                                                                                                                                                                                |
 | Add Contact Information       | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                     |
 | View Contact Information      | `view t/contact i/NRIC`                                                                                                                                                                       |
 | Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                                                                                                                  |
