@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PARAM_ALL_STUDENTS;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.TYPE_CLASS;
@@ -49,7 +50,6 @@ public class ParserUtil {
     public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid.";
     public static final String MESSAGE_STUDENT_ARG_INVALID = "Student argument '%s' is invalid.";
     public static final String MESSAGE_STUDENT_EMPTY = "Student argument cannot be empty.";
-    public static final String MESSAGE_STUDENT_INDEX_OUT_OF_BOUND = "Student index is out of bounds.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in the list.";
 
     /**
@@ -455,7 +455,7 @@ public class ParserUtil {
                 throw new ParseException(MESSAGE_INVALID_INDEX, pe);
             }
             if (!checkValidIndex(index, model.getUnfilteredStudentList().size())) {
-                throw new ParseException(MESSAGE_STUDENT_INDEX_OUT_OF_BOUND);
+                throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
             // check for duplicates
             if (!studentIndexes.contains(index)) {
