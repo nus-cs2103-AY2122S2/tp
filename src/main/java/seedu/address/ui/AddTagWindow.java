@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,9 +24,10 @@ import seedu.address.model.tag.Tag;
 public class AddTagWindow extends UiPart<Stage> {
 
     private static final String FXML = "AddTagWindow.fxml";
-    private Logic logic;
-    private ResultDisplay resultDisplay;
-    private ArrayList<String> selectedTags = new ArrayList<>();
+    private final Stage secondaryStage;
+    private final Logic logic;
+    private final ResultDisplay resultDisplay;
+    private final ArrayList<String> selectedTags = new ArrayList<>();
     private boolean selectButtonPressed;
 
     @FXML
@@ -42,21 +42,19 @@ public class AddTagWindow extends UiPart<Stage> {
     /**
      * Creates a new AddTagWindow.
      *
-     * @param root Stage to use as the root of the AddTagWindow.
+     * @param secondaryStage Stage to use as the root of the AddTagWindow.
      */
-    public AddTagWindow(Stage root, Logic logic) {
-        super(FXML, root);
+    public AddTagWindow(Stage secondaryStage, Logic logic) {
+        super(FXML, secondaryStage);
+        this.secondaryStage = secondaryStage;
         this.logic = logic;
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         selectButtonPressed = false;
     }
 
-    /**
-     * Creates a new AddTagWindow.
-     */
-    public AddTagWindow(Logic logic) throws FileNotFoundException {
-        this(new Stage(), logic);
+    public Stage getSecondaryStage() {
+        return secondaryStage;
     }
 
     /**
@@ -173,8 +171,7 @@ public class AddTagWindow extends UiPart<Stage> {
      */
     private class TagBar extends UiPart<Region> {
         private static final String FXML = "Tag.fxml";
-        private Tag tag;
-        private int tagIndex;
+        private final int tagIndex;
 
         @FXML
         private ToggleButton tagBar;
@@ -184,7 +181,6 @@ public class AddTagWindow extends UiPart<Stage> {
          */
         public TagBar(Tag tag, int t) {
             super(FXML);
-            this.tag = tag;
             tagBar.setText(tag.getTagName());
             tagBar.setDisable(!selectButtonPressed);
             tagIndex = t;
@@ -198,7 +194,7 @@ public class AddTagWindow extends UiPart<Stage> {
             if (tagBar.isSelected()) {
                 selectedTags.add(Integer.toString(tagIndex));
             } else {
-                selectedTags.remove((Object) tagIndex);
+                selectedTags.remove(Integer.toString(tagIndex));
             }
         }
     }

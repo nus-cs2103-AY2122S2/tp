@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import seedu.address.ui.AddProfileWindow;
+import seedu.address.ui.AddTagWindow;
 
 /**
  * Represents a Light Theme.
@@ -13,6 +15,10 @@ public class LightTheme extends Theme {
             .toExternalForm();
     private final String lightExtensionsResource = requireNonNull(getClass()
             .getResource("/view/ExtensionsLight.css")).toExternalForm();
+    private final String lightAddTagWindow = requireNonNull(getClass()
+            .getResource("/view/AddTagWindowLight.css")).toExternalForm();
+    private final String lightAddProfileWindow = requireNonNull(getClass()
+            .getResource("/view/AddProfileWindowLight.css")).toExternalForm();
 
     public LightTheme() {}
 
@@ -21,10 +27,14 @@ public class LightTheme extends Theme {
      */
     @Override
     @FXML
-    public void applyTheme(Stage stage) {
+    public void applyTheme(Stage stage, AddTagWindow addTagWindow, AddProfileWindow addProfileWindow) {
         stage.getScene().getStylesheets().clear();
         stage.getScene().getStylesheets().add(this.lightThemeResource);
         stage.getScene().getStylesheets().add(this.lightExtensionsResource);
+        addTagWindow.getSecondaryStage().getScene().getStylesheets().clear();
+        addTagWindow.getSecondaryStage().getScene().getStylesheets().add(this.lightAddTagWindow);
+        addProfileWindow.getSecondaryStage().getScene().getStylesheets().clear();
+        addProfileWindow.getSecondaryStage().getScene().getStylesheets().add(this.lightAddProfileWindow);
     }
 
     @Override

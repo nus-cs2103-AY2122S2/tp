@@ -90,11 +90,11 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        addTagWindow = new AddTagWindow(logic);
+        addTagWindow = new AddTagWindow(new Stage(), logic);
         addTagWindow.getRoot().initOwner(primaryStage);
         addTagWindow.getRoot().initModality(Modality.WINDOW_MODAL);
 
-        addProfileWindow = new AddProfileWindow(logic);
+        addProfileWindow = new AddProfileWindow(new Stage(), logic);
         addProfileWindow.getRoot().initOwner(primaryStage);
         addProfileWindow.getRoot().initModality(Modality.WINDOW_MODAL);
 
@@ -214,7 +214,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchDarkTheme() {
-        new DarkTheme().applyTheme(primaryStage);
+        new DarkTheme().applyTheme(primaryStage, addTagWindow, addProfileWindow);
     }
 
     /**
@@ -222,7 +222,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchLightTheme() {
-        new LightTheme().applyTheme(primaryStage);
+        new LightTheme().applyTheme(primaryStage, addTagWindow, addProfileWindow);
     }
 
     void show() {
@@ -250,7 +250,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            System.out.println(logic.getModel().isMouseUxEnabled());
             if (logic.getModel().isMouseUxEnabled()) {
                 addMenu.setVisible(true);
                 newTagMenu.setVisible(true);
@@ -279,7 +278,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isSwitchTheme()) {
-                commandResult.getTheme().applyTheme(primaryStage);
+                commandResult.getTheme().applyTheme(primaryStage, addTagWindow, addProfileWindow);
             }
 
             if (commandResult.isShowGrabResult()) {
