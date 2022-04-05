@@ -6,7 +6,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.ViewedNric;
 import seedu.address.model.Model;
 import seedu.address.model.medical.MedicalContainsKeywordsPredicate;
 
@@ -36,8 +35,9 @@ public class FindMedicalCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredMedicalList(predicate);
-        return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_OVERVIEW,
-                        model.getFilteredMedicalList().size(), ViewedNric.getViewedNric().toString()), COMMAND_TYPE);
+        return new CommandResult(String.format(Messages.MESSAGE_MEDICALS_LISTED_NO_NRIC,
+                model.getFilteredMedicalList().size()), COMMAND_TYPE);
+
     }
 
     @Override

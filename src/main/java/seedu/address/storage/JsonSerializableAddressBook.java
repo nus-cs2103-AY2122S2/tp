@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.MedBook;
+import seedu.address.model.ReadOnlyMedBook;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
@@ -72,7 +72,7 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableAddressBook(ReadOnlyMedBook source) {
         persons.addAll(source.getPatientList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         medicals.addAll(source.getMedicalList().stream().map(JsonAdaptedMedical::new).collect(Collectors.toList()));
@@ -89,51 +89,51 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public MedBook toModelType() throws IllegalValueException {
+        MedBook medBook = new MedBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Patient patient = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(patient)) {
+            if (medBook.hasPatient(patient)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPatient(patient);
+            medBook.addPatient(patient);
         }
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
-            if (addressBook.hasContact(contact)) {
+            if (medBook.hasContact(contact)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
-            addressBook.addContact(contact);
+            medBook.addContact(contact);
         }
         for (JsonAdaptedMedical jsonAdaptedMedical: medicals) {
             Medical medical = jsonAdaptedMedical.toModelType();
-            if (addressBook.hasMedical(medical)) {
+            if (medBook.hasMedical(medical)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MEDICAL);
             }
-            addressBook.addMedical(medical);
+            medBook.addMedical(medical);
         }
         for (JsonAdaptedPrescription jsonAdaptedPrescription : prescriptions) {
             Prescription prescription = jsonAdaptedPrescription.toModelType();
-            if (addressBook.hasPrescription(prescription)) {
+            if (medBook.hasPrescription(prescription)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PRESCRIPTION);
             }
-            addressBook.addPrescription(prescription);
+            medBook.addPrescription(prescription);
         }
         for (JsonAdaptedConsultation jsonAdaptedConsultation : consultations) {
             Consultation consultation = jsonAdaptedConsultation.toModelType();
-            if (addressBook.hasConsultation(consultation)) {
+            if (medBook.hasConsultation(consultation)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONSULTATION);
             }
-            addressBook.addConsultation(consultation);
+            medBook.addConsultation(consultation);
         }
         for (JsonAdaptedTestResult jsonAdaptedTestResult : testResults) {
             TestResult testResult = jsonAdaptedTestResult.toModelType();
-            if (addressBook.hasTestResult(testResult)) {
+            if (medBook.hasTestResult(testResult)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TEST_RESULT);
             }
-            addressBook.addTestResult(testResult);
+            medBook.addTestResult(testResult);
         }
-        return addressBook;
+        return medBook;
     }
 
 }

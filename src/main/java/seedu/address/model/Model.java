@@ -19,7 +19,7 @@ import seedu.address.model.testresult.TestResult;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
-    Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
     Predicate<Prescription> PREDICATE_SHOW_ALL_PRESCRIPTIONS = unused -> true;
     Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<TestResult> PREDICATE_SHOW_ALL_TEST_RESULTS = unused -> true;
@@ -46,92 +46,113 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' MedBook file path.
      */
-    Path getAddressBookFilePath();
+    Path getMedBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' MedBook file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setMedBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces MedBook data with the data in {@code medBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setMedBook(ReadOnlyMedBook medBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyMedBook getMedBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a patient with the same identity as {@code patient} exists in the MedBook.
      */
     boolean hasPatient(Patient patient);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a patient with the same identity as {@code patient} exists in the MedBook.
      */
-    boolean hasPatient(Predicate<Patient> predicate);
+    boolean hasNric(Nric nric);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given patient.
+     * The patient must exist in the MedBook.
      */
     void deletePatient(Patient target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given patient.
+     * {@code patient} must not already exist in the MedBook.
      */
     void addPatient(Patient patient);
 
+    /**
+     * Updates summary with given nric.
+     * @param nric
+     */
     void updateSummary(Nric nric);
 
+    /**
+     * Adds the given prescription.
+     * {@code prescription} must not already exist in the MedBook.
+     */
     void addPrescription(Prescription prescription);
 
+    /**
+     * Deletes the given prescription.
+     * The prescription must exist in the MedBook.
+     */
     void deletePrescription(Prescription target);
 
+    /**
+     * Returns true if a prescription with the same identity as {@code prescription} exists in the MedBook.
+     */
     boolean hasPrescription(Prescription prescription);
-
-    void setPrescription(Prescription target, Prescription editedPrescription);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Patient target, Patient editedPatient);
+    void setPrescription(Prescription target, Prescription editedPrescription);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Replaces the given patient {@code target} with {@code editedPatient}.
+     * {@code target} must exist in the MedBook.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the MedBook.
+     */
+    void setPatient(Patient target, Patient editedPatient);
+
+    /** Returns an unmodifiable view of the filtered patient list */
     ObservableList<Patient> getFilteredPatientList();
 
     ObservableList<Medical> getFilteredMedicalList();
 
+    /** Returns an unmodifiable view of the filtered prescription list*/
     ObservableList<Prescription> getFilteredPrescriptionList();
 
-    /** Returns the person list **/
-    ObservableList<Patient> getPersonList();
+    /** Returns the patient list **/
+    ObservableList<Patient> getPatientList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
 
     /**
-     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the MedBook.
      */
     boolean hasContact(Contact contact);
 
     /**
      * Deletes the given contact.
-     * The contact must exist in the address book.
+     * The contact must exist in the MedBook.
      */
     void deleteContact(Contact target);
 
     /**
      * Adds the given contact.
-     * {@code contact} must not already exist in the address book.
+     * {@code contact} must not already exist in the MedBook.
      */
     void addContact(Contact contact);
 
@@ -152,27 +173,26 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
-
-    // Consultation
-
+    /**
+     * Updates the filter of the filtered prescription list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredPrescriptionList(Predicate<Prescription> predicate);
 
-    // Consultation
-
     /**
-     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the MedBook.
      */
     boolean hasConsultation(Consultation consultation);
 
     /**
      * Deletes the given consultation.
-     * The consultation must exist in the address book.
+     * The consultation must exist in the MedBook.
      */
     void deleteConsultation(Consultation target);
 
     /**
      * Adds the given consultation.
-     * {@code consultation} must not already exist in the address book.
+     * {@code consultation} must not already exist in the MedBook.
      */
     void addConsultation(Consultation consultation);
 

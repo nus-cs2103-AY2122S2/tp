@@ -32,7 +32,7 @@ import seedu.address.model.testresult.TestResultWithNricPredicate;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final MedBook medBook;
     private final UserPrefs userPrefs;
 
     private final FilteredList<Contact> filteredContacts;
@@ -45,23 +45,23 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyMedBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-        this.addressBook = new AddressBook(addressBook);
+        this.medBook = new MedBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
 
-        filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
-        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
-        filteredPrescription = new FilteredList<>(this.addressBook.getPrescriptionList());
-        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
-        filteredTestResults = new FilteredList<>(this.addressBook.getTestResultList());
-        filteredMedicals = new FilteredList<>(this.addressBook.getMedicalList());
+        filteredConsultations = new FilteredList<>(this.medBook.getConsultationList());
+        filteredPatients = new FilteredList<>(this.medBook.getPatientList());
+        filteredPrescription = new FilteredList<>(this.medBook.getPrescriptionList());
+        filteredContacts = new FilteredList<>(this.medBook.getContactList());
+        filteredTestResults = new FilteredList<>(this.medBook.getTestResultList());
+        filteredMedicals = new FilteredList<>(this.medBook.getMedicalList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new MedBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -89,12 +89,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getMedBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setMedBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
@@ -102,90 +102,63 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setMedBook(ReadOnlyMedBook medBook) {
+        this.medBook.resetData(medBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyMedBook getMedBook() {
+        return medBook;
     }
 
 
-    //=========== Person ================================================================================
+    //=========== Patient ================================================================================
 
     @Override
     public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
-        return addressBook.hasPerson(patient);
+        return medBook.hasPatient(patient);
     }
 
     @Override
-    public boolean hasPatient(Predicate<Patient> predicate) {
-        requireNonNull(predicate);
-        return !filteredPatients.filtered(predicate).isEmpty();
+    public boolean hasNric(Nric nric) {
+        requireNonNull(nric);
+        return medBook.hasNric(nric);
     }
 
     @Override
     public void deletePatient(Patient target) {
-        addressBook.removePatient(target);
+        medBook.removePatient(target);
     }
 
     @Override
     public void addPatient(Patient patient) {
-        addressBook.addPatient(patient);
-        updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void addPrescription(Prescription prescription) {
-        addressBook.addPrescription(prescription);
-        updateFilteredPrescriptionList(PREDICATE_SHOW_ALL_PRESCRIPTIONS);
-    }
-    @Override
-    public void deletePrescription(Prescription prescription) {
-        addressBook.removePrescription(prescription);
-    }
-
-    @Override
-    public boolean hasPrescription(Prescription prescription) {
-        requireNonNull(prescription);
-        return addressBook.hasPrescription(prescription);
-    }
-    @Override
-    public void setPrescription(Prescription target, Prescription editedPrescription) {
-        requireAllNonNull(target, editedPrescription);
-        addressBook.setPrescription(target, editedPrescription);
-    }
-
-    @Override
-    public ObservableList<Prescription> getFilteredPrescriptionList() {
-        return filteredPrescription;
+        medBook.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
     @Override
     public void addMedical(Medical medical) {
-        addressBook.addMedical(medical);
+        medBook.addMedical(medical);
         updateFilteredMedicalList(PREDICATE_SHOW_ALL_MEDICALS);
     }
 
     @Override
     public boolean hasMedical(Medical medical) {
         requireNonNull(medical);
-        return addressBook.hasMedical(medical);
+        return medBook.hasMedical(medical);
     }
-
 
     @Override
     public void deleteMedical(Medical target) {
-        addressBook.removeMedical(target);
+        medBook.removeMedical(target);
     }
 
     @Override
     public void setMedical(Medical target, Medical editedMedical) {
         requireAllNonNull(target, editedMedical);
 
-        addressBook.setMedical(target, editedMedical);
+        medBook.setMedical(target, editedMedical);
     }
 
     @Override
@@ -194,13 +167,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPatient(target, editedPatient);
+        medBook.setPatient(target, editedPatient);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Patient List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -212,8 +185,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Patient> getPersonList() {
-        return addressBook.getPatientList();
+    public ObservableList<Patient> getPatientList() {
+        return medBook.getPatientList();
     }
 
     @Override
@@ -222,38 +195,22 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
     }
 
-    /**
-     * Updates summary with given nric.
-     *
-     * @param nric
-     */
-    @Override
-    public void updateSummary(Nric nric) {
-        // Update all internal lists with Nric predicates
-        updateFilteredContactList(new ContactWithNricPredicate(nric));
-        updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
-        updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
-        updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
-        updateFilteredConsultationList(new ConsultationWithPredicates(nric));
-        updateFilteredPatientList(new NricPredicate(nric));
-    }
-
     //=========== Contact ================================================================================
 
     @Override
     public boolean hasContact(Contact contact) {
         requireNonNull(contact);
-        return addressBook.hasContact(contact);
+        return medBook.hasContact(contact);
     }
 
     @Override
     public void deleteContact(Contact target) {
-        addressBook.removeContact(target);
+        medBook.removeContact(target);
     }
 
     @Override
     public void addContact(Contact contact) {
-        addressBook.addContact(contact);
+        medBook.addContact(contact);
         updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
@@ -261,7 +218,7 @@ public class ModelManager implements Model {
     public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
 
-        addressBook.setContact(target, editedContact);
+        medBook.setContact(target, editedContact);
     }
 
     //=========== Filtered Contact List Accessors =============================================================
@@ -281,22 +238,60 @@ public class ModelManager implements Model {
         filteredContacts.setPredicate(predicate);
     }
 
+    //=========== Prescription ======================================================
+
+    @Override
+    public void addPrescription(Prescription prescription) {
+        medBook.addPrescription(prescription);
+        updateFilteredPrescriptionList(PREDICATE_SHOW_ALL_PRESCRIPTIONS);
+    }
+
+    @Override
+    public void deletePrescription(Prescription prescription) {
+        medBook.removePrescription(prescription);
+    }
+
+    @Override
+    public boolean hasPrescription(Prescription prescription) {
+        requireNonNull(prescription);
+        return medBook.hasPrescription(prescription);
+    }
+
+    @Override
+    public void setPrescription(Prescription target, Prescription editedPrescription) {
+        requireAllNonNull(target, editedPrescription);
+        medBook.setPrescription(target, editedPrescription);
+    }
+
+    //=========== Filtered Prescription List Accessors ======================================================
+
+    @Override
+    public ObservableList<Prescription> getFilteredPrescriptionList() {
+        return filteredPrescription;
+    }
+
+    @Override
+    public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
+        requireNonNull(predicate);
+        filteredPrescription.setPredicate(predicate);
+    }
+
     //=========== TestResult ================================================================================
 
     @Override
     public boolean hasTestResult(TestResult testResult) {
         requireNonNull(testResult);
-        return addressBook.hasTestResult(testResult);
+        return medBook.hasTestResult(testResult);
     }
 
     @Override
     public void deleteTestResult(TestResult target) {
-        addressBook.removeTestResult(target);
+        medBook.removeTestResult(target);
     }
 
     @Override
     public void addTestResult(TestResult testResult) {
-        addressBook.addTestResult(testResult);
+        medBook.addTestResult(testResult);
         updateFilteredTestResultList(PREDICATE_SHOW_ALL_TEST_RESULTS);
     }
 
@@ -304,7 +299,7 @@ public class ModelManager implements Model {
     public void setTestResult(TestResult target, TestResult editedTestResult) {
         requireAllNonNull(target, editedTestResult);
 
-        addressBook.setTestResults(target, editedTestResult);
+        medBook.setTestResults(target, editedTestResult);
     }
 
 
@@ -325,28 +320,22 @@ public class ModelManager implements Model {
         filteredTestResults.setPredicate(predicate);
     }
 
-    @Override
-    public void updateFilteredPrescriptionList(Predicate<Prescription> predicate) {
-        requireNonNull(predicate);
-        filteredPrescription.setPredicate(predicate);
-    }
-
     //=========== Consultation ================================================================================
 
     @Override
     public boolean hasConsultation(Consultation consultation) {
         requireNonNull(consultation);
-        return addressBook.hasConsultation(consultation);
+        return medBook.hasConsultation(consultation);
     }
 
     @Override
     public void deleteConsultation(Consultation target) {
-        addressBook.removeConsultation(target);
+        medBook.removeConsultation(target);
     }
 
     @Override
     public void addConsultation(Consultation consultation) {
-        addressBook.addConsultation(consultation);
+        medBook.addConsultation(consultation);
         updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
     }
 
@@ -354,7 +343,7 @@ public class ModelManager implements Model {
     public void setConsultation(Consultation target, Consultation editedConsultation) {
         requireAllNonNull(target, editedConsultation);
 
-        addressBook.setConsultation(target, editedConsultation);
+        medBook.setConsultation(target, editedConsultation);
     }
 
 
@@ -373,6 +362,19 @@ public class ModelManager implements Model {
     public void updateFilteredConsultationList(Predicate<Consultation> predicate) {
         requireNonNull(predicate);
         filteredConsultations.setPredicate(predicate);
+    }
+
+    //=========== Summary ======================================================================================
+
+    @Override
+    public void updateSummary(Nric nric) {
+        // Update all internal lists with Nric predicates
+        updateFilteredContactList(new ContactWithNricPredicate(nric));
+        updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
+        updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
+        updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
+        updateFilteredConsultationList(new ConsultationWithPredicates(nric));
+        updateFilteredPatientList(new NricPredicate(nric));
     }
 
     //=========== Other Accessors ==============================================================================
@@ -397,7 +399,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return medBook.equals(other.medBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredContacts.equals(other.filteredContacts)
                 && filteredConsultations.equals(other.filteredConsultations)

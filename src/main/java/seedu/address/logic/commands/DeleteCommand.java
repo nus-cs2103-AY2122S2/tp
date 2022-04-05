@@ -22,18 +22,18 @@ import seedu.address.model.testresult.TestResult;
 import seedu.address.model.testresult.TestResultWithNricPredicate;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a patient identified using its displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the patient identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 
     private final Index targetIndex;
 
@@ -53,21 +53,25 @@ public class DeleteCommand extends Command {
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         Nric nric = patientToDelete.getNric();
+
         model.updateFilteredContactList(new ContactWithNricPredicate(nric));
         model.updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
         model.updateFilteredPrescriptionList(new PrescriptionWithNricPredicate(nric));
         model.updateFilteredConsultationList(new ConsultationWithPredicates(nric));
         model.updateFilteredTestResultList(new TestResultWithNricPredicate(nric));
+
         List<Contact> contactList = model.getFilteredContactList();
         List<Medical> medicalList = model.getFilteredMedicalList();
         List<Prescription> prescriptionList = model.getFilteredPrescriptionList();
         List<Consultation> consultationList = model.getFilteredConsultationList();
         List<TestResult> testResultList = model.getFilteredTestResultList();
+
         int contactSize = contactList.size();
         int medicalSize = medicalList.size();
         int prescriptionSize = prescriptionList.size();
         int consultationSize = consultationList.size();
         int testResultSize = testResultList.size();
+
         for (int i = 0; i < contactSize; i++) {
             model.deleteContact(contactList.get(0));
         }
@@ -85,7 +89,7 @@ public class DeleteCommand extends Command {
         }
 
         model.deletePatient(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, patientToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete));
     }
 
     @Override

@@ -27,25 +27,25 @@ import seedu.address.model.prescription.Prescription;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.testutil.PatientBuilder;
 
-public class AddressBookTest {
+public class MedBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final MedBook medBook = new MedBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPatientList());
+        assertEquals(Collections.emptyList(), medBook.getPatientList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> medBook.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        MedBook newData = getTypicalAddressBook();
+        medBook.resetData(newData);
+        assertEquals(newData, medBook);
     }
 
     @Test
@@ -54,44 +54,44 @@ public class AddressBookTest {
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPatients);
+        MedBookStub newData = new MedBookStub(newPatients);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> medBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> medBook.hasPatient(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(medBook.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPatient(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        medBook.addPatient(ALICE);
+        assertTrue(medBook.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPatient(ALICE);
+        medBook.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(medBook.hasPatient(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPatientList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> medBook.getPatientList().remove(0));
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class MedBookStub implements ReadOnlyMedBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
         private final ObservableList<TestResult> testResults = FXCollections.observableArrayList();
@@ -99,7 +99,7 @@ public class AddressBookTest {
         private final ObservableList<Prescription> prescriptions = FXCollections.observableArrayList();
         private final ObservableList<Consultation> consultations = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Patient> patients) {
+        MedBookStub(Collection<Patient> patients) {
             this.patients.setAll(patients);
         }
 

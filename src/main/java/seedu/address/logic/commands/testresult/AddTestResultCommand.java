@@ -13,7 +13,6 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.testresult.TestResult;
 import seedu.address.model.testresult.TestResultWithNricPredicate;
 
@@ -25,7 +24,7 @@ public class AddTestResultCommand extends Command {
             + PREFIX_TYPE + "test"
             + ": Adds the results of a test taken for a patient in the MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "test"
+            + PREFIX_TYPE + "test "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
@@ -61,7 +60,7 @@ public class AddTestResultCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPatient(new NricPredicate(patientNric))) {
+        if (!model.hasNric(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

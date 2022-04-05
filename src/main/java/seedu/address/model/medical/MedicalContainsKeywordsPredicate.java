@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ViewedNric;
 
 /**
  * Tests that a {@code Person}'s {@code Medical} matches any of the keywords given.
@@ -18,9 +17,9 @@ public class MedicalContainsKeywordsPredicate implements Predicate<Medical> {
 
     @Override
     public boolean test(Medical medical) {
-        return StringUtil.containsWordIgnoreCase(medical.getPatientNric().toString(),
-                    ViewedNric.getViewedNric().toString())
-                && (keywords.stream()
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getPatientNric().toString(), keyword))
+                || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getAge().toString(), keyword))
                 || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getBloodType().toString(), keyword))
@@ -42,7 +41,7 @@ public class MedicalContainsKeywordsPredicate implements Predicate<Medical> {
                 || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getSurgeries().toString(), keyword))
                 || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getWeight().toString(), keyword)));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medical.getWeight().toString(), keyword));
     }
 
     @Override

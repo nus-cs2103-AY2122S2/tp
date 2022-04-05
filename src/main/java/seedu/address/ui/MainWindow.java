@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -122,16 +122,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        patientListPanel = new PatientListPanel(logic.getFilteredPersonList());
+        patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
         contactListPanel = new ContactListPanel(logic.getFilteredContactList());
         consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
         medicalListPanel = new MedicalListPanel(logic.getFilteredMedicalList());
         prescriptionListPanel = new PrescriptionListPanel(logic.getFilteredPrescriptionList());
         testResultListPanel = new TestResultListPanel(logic.getFilteredTestResultList());
-
-        personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
         summaryDisplay = new SummaryDisplay();
-        summaryDisplay.setSummary(logic.getSummary());
+
+        listPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -160,35 +159,31 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void setDisplayListPane(CommandType commandType) {
 
+        listPanelPlaceholder.getChildren().clear();
         switch (commandType) {
         case CONTACT:
-            personListPanelPlaceholder.getChildren().clear();
-            personListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
             return;
         case CONSULTATION:
-            personListPanelPlaceholder.getChildren().clear();
-            personListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
             return;
         case MEDICAL:
-            personListPanelPlaceholder.getChildren().remove(0);
-            personListPanelPlaceholder.getChildren().add(medicalListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(medicalListPanel.getRoot());
             return;
         case PRESCRIPTION:
-            personListPanelPlaceholder.getChildren().remove(0);
-            personListPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(prescriptionListPanel.getRoot());
             return;
         case TEST:
-            personListPanelPlaceholder.getChildren().remove(0);
-            personListPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(testResultListPanel.getRoot());
             return;
         case SUMMARY:
-            summaryDisplay.setSummary(logic.getSummary());
-            personListPanelPlaceholder.getChildren().remove(0);
-            personListPanelPlaceholder.getChildren().add(summaryDisplay.getRoot());
+            summaryDisplay.setSummary(logic.getFilteredPatientList(), logic.getFilteredMedicalList(),
+                    logic.getFilteredConsultationList(), logic.getFilteredPrescriptionList(),
+                    logic.getFilteredTestResultList(), logic.getFilteredContactList());
+            listPanelPlaceholder.getChildren().add(summaryDisplay.getRoot());
             return;
         default:
-            personListPanelPlaceholder.getChildren().remove(0);
-            personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
         }
     }
 
@@ -220,7 +215,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PatientListPanel getPersonListPanel() {
+    public PatientListPanel getPatientListPanel() {
         return patientListPanel;
     }
 

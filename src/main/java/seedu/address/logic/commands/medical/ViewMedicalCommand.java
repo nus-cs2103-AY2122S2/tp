@@ -14,7 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.medical.MedicalWithNricPredicate;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 
 public class ViewMedicalCommand extends Command {
@@ -44,6 +43,7 @@ public class ViewMedicalCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
 
         if (nric == null) { // No nric specified, display all medical information
@@ -54,16 +54,16 @@ public class ViewMedicalCommand extends Command {
                     COMMAND_TYPE);
         } else { // Nric specified, find and display medical details for patient with specifed nric
             model.updateFilteredMedicalList(new MedicalWithNricPredicate(nric));
-            if (!model.hasPatient(new NricPredicate(nric))) {
+            if (!model.hasNric(nric)) {
                 throw new CommandException(MESSAGE_MISSING_PATIENT);
             }
 
-            ObservableList<Patient> personList = model.getPersonList();
+            ObservableList<Patient> patientList = model.getPatientList();
             String nameAndNric = "";
 
-            for (Patient patient : personList) {
+            for (Patient patient : patientList) {
                 if (patient.getNric().equals(nric)) {
-                    nameAndNric = patient.getName().toString() + " / " + nric;
+                    nameAndNric = patient.getName().toString() + ", " + nric;
                 }
             }
 

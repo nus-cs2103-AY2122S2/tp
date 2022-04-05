@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.MedBook;
+import seedu.address.model.ReadOnlyMedBook;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
@@ -27,27 +27,27 @@ public class SampleDataUtil {
             new Patient(new Nric("S1234567L"), new Name("Alex Yeoh"),
                     new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
+                getTagSet("Cancer")),
             new Patient(new Nric("S1234568L"), new Name("Bernice Yu"),
                     new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("ICU", "Surgery")),
             new Patient(new Nric("S1234569L"), new Name("Charlotte Oliveiro"),
                     new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
+                getTagSet("Diabetic", "Medication")),
             new Patient(new Nric("S1234560L"), new Name("David Li"),
                     new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
+                getTagSet("Critical", "ICU")),
             new Patient(new Nric("S1234561L"), new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
+                getTagSet("Room2A")),
             new Patient(new Nric("S1234562L"), new Name("Roy Balakrishnan"), new Phone("92624417"),
                     new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+                getTagSet("Room3B"))
         };
     }
 
@@ -62,8 +62,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyMedBook getSampleAddressBook() {
+        MedBook sampleAb = new MedBook();
         for (Patient samplePatient : getSamplePersons()) {
             sampleAb.addPatient(samplePatient);
         }

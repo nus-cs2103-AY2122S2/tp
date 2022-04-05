@@ -13,7 +13,6 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionWithNricPredicate;
 
@@ -33,7 +32,7 @@ public class AddPrescriptionCommand extends Command {
             + PREFIX_INSTRUCTION + "INSTRUCTION \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "prescription "
-            + PREFIX_NRIC + "S1234567P "
+            + PREFIX_NRIC + "S1234567L "
             + PREFIX_NAME + "Acetaminophen "
             + PREFIX_DATE + "2022-02-22 "
             + PREFIX_INSTRUCTION + "2 tablets after meal everyday ";
@@ -60,7 +59,7 @@ public class AddPrescriptionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPatient(new NricPredicate(nric))) {
+        if (!model.hasNric(nric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 

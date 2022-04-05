@@ -7,14 +7,13 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.MedBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMedBook;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.medical.Medical;
@@ -33,7 +32,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final MedBookParser medBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -41,7 +40,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        medBookParser = new MedBookParser();
 
     }
 
@@ -50,11 +49,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = medBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAddressBook(model.getMedBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -63,12 +62,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyMedBook getAddressBook() {
+        return model.getMedBook();
     }
 
     @Override
-    public ObservableList<Patient> getFilteredPersonList() {
+    public ObservableList<Patient> getFilteredPatientList() {
         return model.getFilteredPatientList();
     }
 
@@ -98,24 +97,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public String getSummary() {
-        return "======[ PATIENT'S DETAILS ]======\n"
-                + CollectionUtil.observableListToIndexedList(getFilteredPersonList()) + "\n"
-                + "======[ EMERGENCY CONTACTS ]======\n"
-                + CollectionUtil.observableListToIndexedList(getFilteredContactList()) + "\n"
-                + "======[ MEDICAL DETAILS ]======\n"
-                + CollectionUtil.observableListToIndexedList(getFilteredMedicalList()) + "\n"
-                + "======[ CONSULTATIONS ]======\n"
-                + CollectionUtil.observableListToIndexedList(getFilteredConsultationList()) + "\n"
-                + "======[ PRESCRIPTIONS ]======\n"
-                + CollectionUtil.observableListToIndexedList(getFilteredPrescriptionList()) + "\n"
-                + "======[ TEST RESULTS ]======\n"
-                + CollectionUtil.observableListToIndexedList(getFilteredTestResultList());
-    }
-
-    @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getMedBookFilePath();
     }
 
     @Override

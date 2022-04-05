@@ -14,7 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.ConsultationWithPredicates;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.NricPredicate;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -51,16 +50,16 @@ public class ViewConsultationCommand extends Command {
         requireNonNull(model);
         model.updateFilteredConsultationList(new ConsultationWithPredicates(ownerNric));
 
-        if (!model.hasPatient(new NricPredicate(ownerNric))) {
+        if (!model.hasNric(ownerNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
-        ObservableList<Patient> personList = model.getPersonList();
+        ObservableList<Patient> patientList = model.getPatientList();
         String nameAndNric = "";
 
-        for (Patient patient : personList) {
+        for (Patient patient : patientList) {
             if (patient.getNric().equals(ownerNric)) {
-                nameAndNric = patient.getName().toString() + " / " + ownerNric;
+                nameAndNric = patient.getName().toString() + ", " + ownerNric;
             }
         }
 
