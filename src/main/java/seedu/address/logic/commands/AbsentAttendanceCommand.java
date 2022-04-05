@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.AttendanceUtil.ATTENDANCE_DATE_FORMATTER;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -81,7 +80,7 @@ public class AbsentAttendanceCommand extends Command {
                 petToEdit.getAppointment(), targetAttendanceHashMap);
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, absentAttendance));
     }
