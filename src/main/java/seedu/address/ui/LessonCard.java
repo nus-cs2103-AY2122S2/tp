@@ -64,7 +64,7 @@ public class LessonCard extends UiPart<Region> {
     private Predicate<StudentAttendance> filterAbsentees() {
         return (StudentAttendance studentAttendance) -> {
             Attendance attendance = studentAttendance.getAttendance();
-            boolean isPresent = attendance.getValue();
+            boolean isPresent = attendance.value;
             return !isPresent;
         };
     }
