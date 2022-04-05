@@ -137,7 +137,6 @@ public class AssignCommandTest {
     @Test
     public void execute_partialDuplicateTaskException_success() {
 
-        // Creates new Person with same Module Code as Alice, but does was not assigned her task (TASK A).
         Person andy = new PersonBuilder()
                 .withStudentId("A1111111Z")
                 .withName("Andy")
@@ -147,7 +146,6 @@ public class AssignCommandTest {
                 .withEmail("andyyy@u.nus.edu")
                 .build();
 
-        // Creates a copy of andy, which has been assigned the task, Task A.
         Person andyCopy = new PersonBuilder()
                 .withStudentId("A1111111Z")
                 .withName("Andy")
@@ -164,6 +162,7 @@ public class AssignCommandTest {
 
         Model model = new ModelManager(andyAndAmyAb, new UserPrefs());
         Model expectedModel = new ModelManager(andyAndAmyAbCopy, new UserPrefs());
+
         try {
             expectedModel.assignTaskToAllInModule(moduleCodeAlice, taskAlice);
         } catch (PartialDuplicateTaskException e) {
@@ -174,8 +173,6 @@ public class AssignCommandTest {
 
         String expectedMessage = String.format(MESSAGE_SUCCESS, taskAlice.getTaskName())
                 + ", to some students with Module Code: " + moduleCodeAlice.toString();
-
-        System.out.println(expectedMessage);
 
         assertCommandSuccess(assignCommand, model, expectedMessage, expectedModel);
     }
@@ -231,6 +228,7 @@ public class AssignCommandTest {
         AddressBook andyAndAmyAb = new AddressBookBuilder().withPerson(andy).withPerson(alice).build();
         AddressBook andyAndAmyAbCopy = new AddressBookBuilder().withPerson(andyCopy).withPerson(expectedAliceCopy)
                 .build();
+
         Model model = new ModelManager(andyAndAmyAb, new UserPrefs());
         Model expectedModel = new ModelManager(andyAndAmyAbCopy, new UserPrefs());
         expectedModel.assignTaskToAllInModule(moduleCodeAlice, new Task("Cry"));
@@ -239,8 +237,6 @@ public class AssignCommandTest {
 
         String expectedMessage = String.format(MESSAGE_SUCCESS, validTask.getTaskName()
                 + ", to all students with Module Code: " + moduleCodeAlice);
-
-        System.out.println(expectedMessage);
 
         assertCommandSuccess(assignCommand, model, expectedMessage, expectedModel);
     }
