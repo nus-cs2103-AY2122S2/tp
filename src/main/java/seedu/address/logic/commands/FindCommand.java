@@ -2,8 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CCA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -33,16 +36,17 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Use find -s to find all person where fields must contain all the keywords provided.\n"
+            + "Only 1 prefix for basic particular (n/, p/, e/, a/) can be provided\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EDUCATION + "EDUCATION]"
             + "[" + PREFIX_INTERNSHIP + "INTERNSHIP]"
-            + "Example: " + COMMAND_WORD + " n/alice e/gmail.com i/Facebook"
-            + "Note: "
-            + COMMAND_WORD + " n/Alex Yeoh returns the same result as "
-            + COMMAND_WORD + " n/Alex Yeoh";
+            + "[" + PREFIX_MODULE + "MODULE]"
+            + "[" + PREFIX_CCA + "CCA]\n"
+            + "Example: " + COMMAND_WORD + " n/alice e/gmail.com i/Facebook";
 
     public static final String MESSAGE_NO_PARAMETERS = "At least one field must be provided.";
     public static final String MESSAGE_TOO_MANY_PREFIXES = "At most one prefix for basic particulars can be provided";

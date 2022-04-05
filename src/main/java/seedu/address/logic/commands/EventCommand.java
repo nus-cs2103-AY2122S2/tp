@@ -27,10 +27,10 @@ import seedu.address.model.person.Person;
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags an event to the person identified by the index "
-            + "number. \nEach prefix should only be used once!"
+            + "number. \nAll prefix must be used and each prefix must be used only once!"
             + "\nParameters: INDEX (must be a positive integer) " + PREFIX_EVENT_NAME + "EVENT NAME " + PREFIX_INFO
             + "EVENT DETAILS " + PREFIX_DATE + "yyyy-MM-dd " + PREFIX_TIME + "HH:mm";
-    public static final String MESSAGE_ARGUMENTS = "Tagged following event to %1$s:" + "\n%2$s";
+    public static final String MESSAGE_ARGUMENTS = "TAGGED THE FOLLOWING EVENT TO %1$s:" + "\n%2$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
     public static final String MESSAGE_TOO_MANY_PREFIXES = "At most one prefix for basic particulars can be provided";
 

@@ -7,7 +7,7 @@ NUSocials is a **desktop app for university students to maintain a professional 
 It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -20,16 +20,16 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 3. Copy the file to the folder you want to use as the _home folder_ for NUSocials.
 
 4. To start the app:
-    - Windows: Double-click on `NUSocials.jar`.
-    - MacOS: On terminal, navigate to the directory containing `NUSocials.jar` and run `java -jar NUSocials.jar`.
-
+   - Windows: Double-click on `NUSocials.jar`.
+   - MacOS: On terminal, navigate to the directory containing `NUSocials.jar` and run `java -jar NUSocials.jar`.
+   
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![img.png](images/UiSampleAddressBook.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`**<br>Lists all contacts.
+    * **`list`**<br>Lists all contacts and upcoming events.
 
     * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01`<br>Adds a contact named `fred` to NUSocials.
 
@@ -56,11 +56,11 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
   e.g `n/NAME [edu/EDUCATION]` can be used as `n/Kim Lai edu/computer science` or as `n/Kim Lai`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
+  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
 * If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
   e.g. if you specify `p/12345678 p/87654321`, both will be rejected.
-
+  
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -104,7 +104,7 @@ Constraints:
 Example:
 * `add n/Alisson Becker p/12345678 e/alisson111@example.com a/VVD street, block 123, #01-01`
   Adds a person with the following fields:
-    - Name: Alisson Becker
+    - Name: Alisson Becker 
     - Phone Number: 12345678
     - Email: alisson111@example.com
     - Address: VVD street, block 123, #01-01
@@ -120,10 +120,10 @@ Example:
 * `add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 190, #01-23`<br>
 
 Not allowed as `n/` prefix is used more than once.
-
+  
 * `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 190, #01-23`<br>
 
-Not allowed as `PHONE_NUMBER` is blank.
+Not allowed as `PHONE_NUMBER` is blank. 
 </div>
 
 
@@ -216,11 +216,11 @@ Example:
 * `tag 1`<br>
 
 Not allowed as no prefix provided.
-
+  
 * `tag 1 i/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
-
+  
 * `tag 0 i/xyz company m/CS2103T`<br>
 
 Not allowed as there `INDEX` 0 does not exist in the contact list.
@@ -242,7 +242,7 @@ Constraints:
 
 Example:
 * `removetag 1 i/abc company m/CS2100 m/CS2030S`<br>
-  Removes the internship company tag and the 2 modules tags from the 1st person in the currently shown contact list.
+Removes the internship company tag and the 2 modules tags from the 1st person in the currently shown contact list.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -273,12 +273,12 @@ Constraints:
 
 Examples:
 * `find m/cs2030s m/cs2040s`<br>
-  Returns anyone tagged with either `cs2030s` or `cs2040s` or both
+Returns anyone tagged with either `cs2030s` or `cs2040s` or both
 * `find n/Hans m/cs2100`<br>
-  Returns `Hans` and `Bo Yang` (i.e. Bo Yang is tagged with cs2100)
+Returns `Hans` and `Bo Yang` (i.e. Bo Yang is tagged with cs2100)
 * `find i/Shopee m/cs2040s m/cs2030s`<br>
-  Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
-
+Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
+  
 | Before | After |
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find i/Shopee m/cs2040s cs2030s'](images/screenshots/findShopeeCS2040sCS2030sResult.png) |
@@ -290,7 +290,7 @@ Examples:
 * `find n/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
-
+  
 * `find n/Hans n/Chewbacca`<br>
 
 Not allowed as the `n/` prefix is used more than once.
@@ -313,10 +313,10 @@ Constraints:
 Examples:
 * `find -s n/Bo Yang m/cs2040s`<br>
   Returns `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
-
+  
 * `find -s i/Shopee m/cs2040s m/cs2030s`<br>
   Returns `Alex Yeoh` (as shown below)
-
+  
 | Before | After |
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/screenshots/find-sShopeeCS2040sCS2030s.png) |
@@ -374,7 +374,7 @@ Constraints:
 
 Example:
 * `event 2 3 name/Movie marathon info/Harry Potter movies d/2022-08-15 t/14:00`<br>
-  Creates the Event and adds into NUSocials. (as shown below)
+Creates the Event and adds into NUSocials. (as shown below)
 
 | Before | After |
 :---:|:---:
@@ -387,7 +387,7 @@ Example:
 * `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`<br>
 
 Not allowed as there is no input after a prefix is used.
-
+  
 * `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`<br>
 
 Not allowed as the `name/` prefix is more than once.

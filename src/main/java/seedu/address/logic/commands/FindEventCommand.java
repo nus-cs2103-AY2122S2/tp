@@ -24,8 +24,6 @@ public class FindEventCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " name/lunch appointment";
 
-    public static final String MESSAGE_NO_PARAMETERS = "At least one field must be provided.";
-
     private final Predicate<Event> predicate;
 
     public FindEventCommand(Predicate<Event> predicate) {

@@ -176,20 +176,21 @@ public class Person implements Comparable<Person> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+        builder.append("Name: ")
+                .append(getName())
+                .append("\nPhone: ")
                 .append(getPhone())
-                .append("; Email: ")
+                .append("\nEmail: ")
                 .append(getEmail())
-                .append("; Address: ")
+                .append("\nAddress: ")
                 .append(getAddress())
-                .append("; Educations: ")
+                .append("\nEducations: ")
                 .append(getEducations())
-                .append("; Internships: ")
+                .append("\nInternships: ")
                 .append(getInternships())
-                .append("; Modules: ")
+                .append("\nModules: ")
                 .append(getModules())
-                .append("; Ccas: ")
+                .append("\nCcas: ")
                 .append(getCcas());
 
         return builder.toString();

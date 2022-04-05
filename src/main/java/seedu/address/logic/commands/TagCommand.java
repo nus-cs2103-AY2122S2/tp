@@ -36,10 +36,9 @@ public class TagCommand extends Command {
             + PREFIX_CCA + "Bouldering "
             + PREFIX_INTERNSHIP + "GIC "
             + PREFIX_MODULE + "CS2040S";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
     public static final String MESSAGE_NO_PARAMETERS = "At least 1 field must be used and not blank.";
-    public static final String MESSAGE_ARGUMENTS = "Name: %1$s, Education: %2$s, Internship: %3$s, Module: %4$s, "
-            + "CCA: %5$s";
+    public static final String MESSAGE_ARGUMENTS = "TAGGED TO %1$s \n-Current Tags- \nEducation: %2$s"
+            + "\nInternship: %3$s " + "\nModule: %4$s " + "\nCCA: %5$s";
 
     private final Index index;
     private final List<Tag> educations;
