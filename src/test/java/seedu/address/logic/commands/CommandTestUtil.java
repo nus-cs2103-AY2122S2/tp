@@ -75,7 +75,7 @@ public class CommandTestUtil {
     public static final String INVALID_COMMAND_NAME = "poop";
     public static final String INVALID_INDEX = " " + PREFIX_INDEX + "index"; // alphabets and symbols not allowed
     public static final String INVALID_TASKNAME_DESC = " " + PREFIX_TASK_NAME + "T@sk"; // '@' not allowed in names
-    
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
