@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
@@ -42,58 +43,84 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public String getNonUniqueAttributeType(Person toCheck) {
         requireNonNull(toCheck);
-        StringBuilder stringBuilder = new StringBuilder();
+        ArrayList<String> nonUniqueAttributeTypes = new ArrayList<>();
         for (int i = 0; i < internalList.size(); i++) {
             Person otherPerson = internalList.get(i);
             if (otherPerson.isSamePerson(toCheck)) { // Unique attributes already exist in the address book.
                 if (otherPerson.getPhone().equals(toCheck.getPhone())) {
-                    appendPhoneAttributeToString(stringBuilder);
-                }
-                if (otherPerson.getMatriculationNumber().equals(toCheck.getMatriculationNumber())) {
-                    appendMatriculationNumberAttributeToString(stringBuilder);
+                    addNonUniqueAttributeType(nonUniqueAttributeTypes, 0);
                 }
                 if (otherPerson.getEmail().equals(toCheck.getEmail())) {
-                    appendEmailAttributeToString(stringBuilder);
+                    addNonUniqueAttributeType(nonUniqueAttributeTypes, 1);
+                }
+                if (otherPerson.getMatriculationNumber().equals(toCheck.getMatriculationNumber())) {
+                    addNonUniqueAttributeType(nonUniqueAttributeTypes, 2);
                 }
             }
         }
-        return stringBuilder.toString();
+        return getNonUniqueAttributeTypesMessage(nonUniqueAttributeTypes);
     }
 
     /**
-     * Appends the necessary syntax for the Phone attribute into the non-unique attribute type string.
-     * @param stringBuilder Non-unique attribute type string
+     * Adds a non-unique attribute type to the list if it is not yet added.
+     *
+     * @param nonUniqueAttributeTypes   The list containing the non-unique attribute types
+     * @param uniqueAttributeTypesIndex The index of the unique attributes specified by the {@code Person} class
      */
-    private void appendPhoneAttributeToString(StringBuilder stringBuilder) {
-        if (!stringBuilder.toString().contains("Phone")) {
-            stringBuilder.append("Phone");
+    private void addNonUniqueAttributeType(ArrayList<String> nonUniqueAttributeTypes, int uniqueAttributeTypesIndex) {
+        assert uniqueAttributeTypesIndex >= 0 && uniqueAttributeTypesIndex <= 2 : false;
+        String attributeType = Person.UNIQUE_ATTRIBUTE_TYPES[uniqueAttributeTypesIndex];
+        if (!nonUniqueAttributeTypes.contains(attributeType)) {
+            nonUniqueAttributeTypes.add(attributeType);
         }
     }
 
     /**
-     * Appends the necessary syntax for the Matriculation Number attribute into the non-unique attribute type string.
-     * @param stringBuilder Non-unique attribute type string
+     * Returns the message for non-unique attribute types. This message needs further processing as there is a
+     * white space before a comma.
+     *
+     * @param nonUniqueAttributeTypes The types of non-unique attribute
      */
-    private void appendMatriculationNumberAttributeToString(StringBuilder stringBuilder) {
-        if (!stringBuilder.toString().contains("Matriculation Number")) {
-            if (!stringBuilder.toString().isEmpty()) {
-                stringBuilder.append(", ");
+    private String getNonUniqueAttributeTypesMessage(ArrayList<String> nonUniqueAttributeTypes) {
+        if (nonUniqueAttributeTypes.isEmpty()) {
+            return "";
+        }
+        StringBuilder stringBuilder = new StringBuilder(); // to store all the non-unique attribute types
+        if (nonUniqueAttributeTypes.size() == 1) { // only have one non-unique attribute types
+            stringBuilder.append(nonUniqueAttributeTypes.get(0));
+            return stringBuilder.toString();
+        } else {
+            for (int i = 0; i < nonUniqueAttributeTypes.size(); i++) {
+                if (i == 0) { // first attribute type in the list
+                    stringBuilder.append(nonUniqueAttributeTypes.get(0) + " ");
+                } else if (i + 1 == nonUniqueAttributeTypes.size()) { // last attribute type in the list
+                    stringBuilder.append("and ");
+                    stringBuilder.append(nonUniqueAttributeTypes.get(i));
+                } else { // neither first nor last
+                    stringBuilder.append(", ");
+                    stringBuilder.append(nonUniqueAttributeTypes.get(i) + " ");
+                }
             }
-            stringBuilder.append("Matriculation Number");
         }
+        return removeWhiteSpaceBeforeComma(stringBuilder);
     }
 
     /**
-     * Appends the necessary syntax for the Email attribute into the non-unique attribute type string.
-     * @param stringBuilder Non-unique attribute type string
+     * Removes white space before a comma for the non-unique attribute type message.
+     *
+     * @param stringBuilder The non-unique attribute type message with a whitespace before comma
+     * @return Trimmed non-unique attribute type message
      */
-    private void appendEmailAttributeToString(StringBuilder stringBuilder) {
-        if (!stringBuilder.toString().contains("Email")) {
-            if (!stringBuilder.toString().isEmpty()) {
-                stringBuilder.append(" and ");
+    private String removeWhiteSpaceBeforeComma(StringBuilder stringBuilder) {
+        StringBuilder stringBuilderTrimmed = new StringBuilder();
+        String message = stringBuilder.toString();
+        for (int i = 0; i < message.length(); i++) {
+            // if there is no white space before a comma
+            if (!(message.charAt(i) == ' ' && message.charAt(i + 1) == ',')) {
+                stringBuilderTrimmed.append(message.charAt(i));
             }
-            stringBuilder.append("Email");
         }
+        return stringBuilderTrimmed.toString();
     }
 
     /**
@@ -173,7 +200,7 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                && internalList.equals(((UniquePersonList) other).internalList));
     }
 
     @Override
