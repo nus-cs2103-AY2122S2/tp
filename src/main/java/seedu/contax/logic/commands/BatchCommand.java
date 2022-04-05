@@ -91,9 +91,15 @@ public class BatchCommand extends Command {
                         commandInput, Integer.toString(index.getOneBased()));
                 logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
-                commandResultList.add(command.execute(model));
+                try {
+                    commandResultList.add(command.execute(model));
+                }  catch (CommandException ce) {
+                    commandResultList.clear();
+                    commandResultList.add(new CommandResult(ce.getMessage()));
+                }
             } catch (ParseException pe) {
-                throw new CommandException(pe.getMessage());
+                commandResultList.clear();
+                commandResultList.add(new CommandResult(pe.getMessage()));
             }
         }
         StringBuilder resultOutput = new StringBuilder();
