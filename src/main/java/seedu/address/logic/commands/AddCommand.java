@@ -71,6 +71,8 @@ public class AddCommand extends Command {
 
         ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
+        assert toAdd != null : "A person should not be null";
+
         model.addPerson(toAdd);
 
         try {
@@ -88,6 +90,9 @@ public class AddCommand extends Command {
     private static void batchUpdateNegativeToPositive(Person addedPerson,
                                                       ObservableList<Person> studentList,
                                                       Model model) {
+        assert addedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
 
         if (addedPerson.isPositive()) {
 
@@ -100,6 +105,7 @@ public class AddCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
+                assert currentPerson != null : "A person should not be null";
                 EditCommand.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         } else {
@@ -111,7 +117,7 @@ public class AddCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
-
+                assert currentPerson != null : "A person should not be null";
                 List<Person> positiveRelatedToPerson = studentList.stream()
                         .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
