@@ -162,7 +162,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFER
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Either a property or preference must be provided when adding a new client and only one of either type can be provided.
 </div>
-**Tip**: A client is either a `buyer`, or `seller` based on whether he has a property or a preference.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+A client is either a `buyer`, or `seller` based on whether he has a property or a preference.
+</div>
 
 Examples:
 
