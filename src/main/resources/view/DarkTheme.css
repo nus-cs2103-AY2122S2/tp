@@ -389,4 +389,5 @@
 
 #labCard .list-cell {
     -fx-background-color: transparent;
+    -fx-padding: 1;
 }
