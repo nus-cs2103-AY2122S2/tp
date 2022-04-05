@@ -11,18 +11,26 @@ This application is a variation of the above original project, tailored for scho
 ## Features
 
 Below are the current and upcoming features of the UDT
+
+**Current Features**:
 * Adding a student into the list of students
 * Listing all students
 * Finding students by name
 * Finding student by status
 * Finding student by class
+* Finding students by activity
 * Deleting a student from the list
 * Updating COVID-19 status
+* Editing student’s personal details
 * Exiting the program
-* Editing student’s personal details (coming in v1.3)
+
+**Upcoming Features**:
+* Importing students from csv files
+* Automated contacting of Next-of-Kin for Close-Contact students
+
 
 ## Miscellaneous
 
-* Refer to our Tracey website here: **[Ultimate Divoc Tracker](https://ay2122s2-cs2103t-t12-1.github.io/tp/)**.
+* Refer to our Ultimate Divoc Tracker (UDT) website here: **[Ultimate Divoc Tracker](https://ay2122s2-cs2103t-t12-1.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * This project was adopted from the existing AB3 se-education.org project. Refer to the AB3 product website **[here](https://se-education.org/addressbook-level3/)**.
