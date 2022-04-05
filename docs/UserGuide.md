@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-NUSocials is a **desktop app for university students to maintain a professional contact list, where users can keep track information about friends/acquaintances easily in one single platform.
+NUSocials is a **desktop app for university students to maintain a professional contact list, where users can keep track of information about friends/acquaintances easily in one single platform.
 It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
@@ -29,7 +29,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`**<br>Lists all contacts and upcoming events.
+    * **`list`**<br>Lists all contacts.
 
     * **`add`**`n/fred p/99998888 e/fred@example.com a/fred street, block 123, #01-01`<br>Adds a contact named `fred` to NUSocials.
 
@@ -64,7 +64,9 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If an `INDEX` is used, it **must be a positive integer** (i.e. 1, 2, 3…​)
+* If an `INDEX` is used, it **must be a positive integer** (i.e. 1, 2, 3…​).
+
+* If multiple `INDEX`s are used, each of the `INDEX` **must be separated by a single whitespace and must be unique** (i.e 1 2 3).
 
 * All commands are case-sensitive.
 
@@ -98,6 +100,13 @@ Constraints:
 * `NAME` has to be alphanumeric not blank.
 * `PHONE_NUMBER` has to be between 3 and 10 digits long and not blank.
 * `EMAIL` has to be in a valid email format and not blank.
+  * The local part of the `EMAIL` should be alphnumeric and these special characters, excluding the parentheses, (+-._)
+  * The local part should not start and end with any of the mentioned special characters
+  * "@" comes right after the local part, followed by a domain name
+  * The domain name must:
+    * end with a domain label at least 2 characters long\n"
+    * have each domain label start and end with alphanumeric characters\n"
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any."
 * `ADDRESS` has to not be blank.
 * All fields must be used.
 
@@ -194,7 +203,9 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUC
 
 * Tags the relevant information to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
+* Alphabets in the input tag values will be converted to lowercase.
 * Input tag values will be added to the existing tags in their respective fields.
+* If the new input tag values are the same as existing tags, then nothing will be added.
 
 Constraints:
 * At least one of the prefixes must be provided.
@@ -265,7 +276,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…�
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
-* Persons matching at least one of the fields or tags will be returned (i.e. `OR` search).
+* Persons matching at least one of the fields or tags will be returned.
 
 Constraints:
 * At least one of the optional fields must be provided.
@@ -304,7 +315,7 @@ Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]�
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
-* Only persons matching all fields and tags will be returned (i.e. `AND` search).
+* Only persons matching all fields and tags will be returned.
 
 Constraints:
 * At least one of the optional fields must be provided.
@@ -432,7 +443,7 @@ Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPA
 
 * The search is case-insensitive. e.g `lunch` will match `Lunch`
 * The matching is done by character sequence. e.g. `lun` will match `lunch`
-* Events matching at least one of the fields will be returned (i.e. `OR` search).
+* Events matching at least one of the fields will be returned.
 
 Constraints:
 * At least one of the optional fields must be provided.
@@ -475,7 +486,7 @@ NUSocials data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-NUSocials data are saved as a JSON file `[JAR file location]/data/nusocials.json`. Advanced users are welcome to update data directly by editing that data file.
+NUSocials data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -483,16 +494,12 @@ NUSocials data are saved as a JSON file `[JAR file location]/data/nusocials.json
 If your changes to the data file makes its format invalid, NUSocials will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSocials home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -502,15 +509,15 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
-**Removetag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
+**Remove Tag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
 **Event** | `event INDEX…​ name/EVENT NAME info/INFORMATION d/DATE t/TIME` <br> e.g., `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
-**Cancelevent** | `cancelevent INDEX…​` <br> e.g.,`cancelevent 1 2 3`
+**Cancel Event** | `cancelevent INDEX…​` <br> e.g.,`cancelevent 1 2 3`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​` <br> e.g. `delete 1 3 5`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
 **Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
-**Find -s** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
-**Find -e** | `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICIPANT]…​ [dt/DATE AND TIME]…​`<br> e.g., `find -e name/Dinner info/Candice's birthday dt/2022-05-12 19:30`
+**Find specific match** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
+**Find Event** | `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICIPANT]…​ [dt/DATE AND TIME]…​`<br> e.g., `find -e name/Dinner info/Candice's birthday dt/2022-05-12 19:30`
 **List** | `list`
-**Showevents** | `showevents` `showevents -upcoming` `showevents -past`
+**Show Events** | `showevents` `showevents -upcoming` `showevents -past`
 **Help** | `help`
