@@ -107,6 +107,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithPhoneOrEmail(Person person) {
+        requireNonNull(person);
+        return uniBook.phoneNumberBeingUsed(person.getPhone()) || uniBook.emailBeingUsed(person.getEmail());
+    }
+
+    @Override
     public void deletePerson(Person target) {
         uniBook.removePerson(target);
     }

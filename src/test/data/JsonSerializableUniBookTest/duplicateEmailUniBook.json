@@ -20,6 +20,24 @@
     },
     {
       "type": "Student",
+      "name": "Alexa Yeoh",
+      "phone": "98438807",
+      "email": "alexyeoh@example.com",
+      "tagged": [
+        "friends"
+      ],
+      "modules": [
+        "CS2106"
+      ],
+      "groups": [
+        {
+          "moduleCode": "CS2103",
+          "groupName": "W16-1"
+        }
+      ]
+    },
+    {
+      "type": "Student",
       "name": "Bernice Yu",
       "phone": "99272758",
       "email": "berniceyu@example.com",
@@ -60,13 +78,7 @@
         {
           "groupName": "W16-1",
           "meetingTimes": [
-            "2022-05-04T14:00:00"
-          ]
-        },
-        {
-          "groupName": "W16-1",
-          "meetingTimes": [
-            "2022-05-04T12:00:00"
+            "2022-05-04T13:00:00"
           ]
         }
       ],

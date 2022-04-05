@@ -70,8 +70,10 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
 
         //Multiple persons matching predicate
-        Student john = new StudentBuilder().withName("John Anes").build();
-        Student johnb = new StudentBuilder().withName("John Bones").build();
+        Student john = new StudentBuilder().withName("John Anes").withPhone("12345678")
+                .withEmail("abc@g.com").build();
+        Student johnb = new StudentBuilder().withName("John Bones").withPhone("23456789")
+                .withEmail("abs@t.com").build();
         List<Student> multipleStudents = new ArrayList<>();
         multipleStudents.add(john);
         model.addPerson(john);
