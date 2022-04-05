@@ -239,10 +239,11 @@ public class Module {
     /**
      * Edits the information of the group in the respective index
      */
-    public void editGroupByIndex(int idx, EditGroupDescriptor editGroupDescriptor) throws CommandException {
+    public Group editGroupByIndex(int idx, EditGroupDescriptor editGroupDescriptor) throws CommandException {
         Group group = groups.get(idx);
         Group newGroup = EditCommand.createEditedGroup(group, editGroupDescriptor);
         groups.set(idx, newGroup);
+        return newGroup;
     }
 
     /**

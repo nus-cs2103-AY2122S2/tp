@@ -83,7 +83,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("module")) {
                     throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.MODULE_MESSAGE_USAGE, pe);
                 } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("group")) {
-                    // TODO CHANGED HERE
                     throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.GROUP_MESSAGE_USAGE, pe);
                 } else {
                     throw new ParseException(MESSAGE_INVALID_INDEX + "\n" + EditCommand.KEYEVENT_MESSAGE_USAGE, pe);
@@ -128,7 +127,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             Optional<String> groupName;
             if (argMultimap.getValue(PREFIX_MODULE).isPresent() && argMultimap.getValue(PREFIX_GROUP).isEmpty()
                 || argMultimap.getValue(PREFIX_GROUP).isPresent() && argMultimap.getValue(PREFIX_MODULE).isEmpty()) {
-                // TODO add error command to show that need both module and group
                 throw new ParseException(EditCommand.MESSAGE_ADDTOGROUP_WRONG_FORMAT);
             } else if (argMultimap.getValue(PREFIX_MODULE).isPresent()
                     && argMultimap.getValue(PREFIX_GROUP).isPresent()) {
@@ -150,7 +148,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
 
             if (module.isPresent()) {
-                System.out.println(module.get().iterator().next().getClass().getName());
                 return new EditCommand(index, editPersonDescriptor, module.get().iterator().next());
             }
             return new EditCommand(index, editPersonDescriptor);
@@ -188,7 +185,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 throw new ParseException(EditCommand.MESSAGE_EDIT_MISSING);
             } else {
                 ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE).get());
-                System.out.println(modCode.toString());
                 editGroupDescriptor.setModuleCode(modCode);
 
                 if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
@@ -208,12 +204,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                     throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
                 }
 
-                // TODO CHANGED HERE
                 editModuleDescriptor.setGroups(editGroupDescriptor);
                 editPersonDescriptor.setGroups(editGroupDescriptor);
 
                 // this index is for the index of the group within the module
-                System.out.println("created edit command");
                 return new EditCommand(index, editPersonDescriptor, editModuleDescriptor);
             }
         } else if (argMultimap.getValue(PREFIX_OPTION).get().equals("keyevent")) {
@@ -232,18 +226,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             Optional<ModuleKeyEvent.KeyEventType> eventType = Optional.empty();
             Optional<LocalDateTime> dt = Optional.empty();
 
-
             if (!argMultimap.getValue(PREFIX_KEYEVENT).isPresent()) {
                 throw new ParseException(EditCommand.MESSAGE_KEYEVENT_INDEX_MISSING);
             } else {
-                logger.info("hello");
                 logger.info(argMultimap.getValue(PREFIX_KEYEVENT).get());
                 Index i = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_KEYEVENT).get());
-                logger.info("bye");
                 int integer = i.getZeroBased();
-                System.out.println(integer);
                 editModuleDescriptor.setIdx(integer);
-                System.out.println(editModuleDescriptor.getIdx());
             }
 
             if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
@@ -265,7 +254,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 mod.setKeyDateType(eventType.get());
                 editModuleDescriptor.setKeyEvents(mod);
             }
-            System.out.println(editModuleDescriptor.getIdx() + "help");
             return new EditCommand(index, editModuleDescriptor);
 
         } else {

@@ -241,10 +241,8 @@ public class EditCommand extends Command {
         ObservableList<Professor> profs = moduleToEdit.getProfessors();
         ObservableList<Student> students = moduleToEdit.getStudents();
 
-        // TODO ASSUME THAT UPDATEFILTEREDMODULELIST WORKS
         ObservableList<Group> groups = moduleToEdit.getGroups();
 
-        // TODO changed for editing of key events
         ObservableList<ModuleKeyEvent> keyEvents;
         if (editModuleDescriptor.getKeyEvents().isPresent()) {
             int i = editModuleDescriptor.getIdx();
@@ -307,9 +305,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Module> latestModList = model.getFilteredModuleList();
 
-        // TODO MAIN LOGIC FOR EDIT GROUP CROSS FINGER UPDATE...LIST WORKS
         if (this.editModuleDescriptor != null && this.editPersonDescriptor != null) {
-            System.out.println("entered correct logic");
             if (!isGroupListShowing && !isModuleListShowing) {
                 throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
             }
@@ -335,23 +331,19 @@ public class EditCommand extends Command {
             }
 
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            System.out.println("updated person list");
             for (Module m : latestModList) {
                 if (m.equals(mod)) {
-                    System.out.println("true");
                     if (this.index.getZeroBased() >= m.getGroups().size()) {
                         throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                     }
-                    m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
+                    Group group = m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
                     System.out.println(m.getModuleName().toString());
-                    groups = m.getGroups();
+                    groups.add(group);
                 }
             }
             ModelManager mm = (ModelManager) model;
             mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-            System.out.println("updated module list");
-            // TODO make the command result for editing success more elaborate
             return new CommandResult(MESSAGE_EDIT_GROUP_SUCCESS);
         }
         // Edit person
@@ -391,7 +383,6 @@ public class EditCommand extends Command {
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-            // TODO checks if person alr in module
             if (!personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
@@ -436,8 +427,6 @@ public class EditCommand extends Command {
                 }
             }
 
-            System.out.println(editPersonDescriptor.getModCode().isPresent() + "there");
-            System.out.println(editPersonDescriptor.getGroupName().isPresent() + "there");
 
             // If adding existing person to an existing group
             if (editPersonDescriptor.getModCode().isPresent() && editPersonDescriptor.getGroupName().isPresent()) {
