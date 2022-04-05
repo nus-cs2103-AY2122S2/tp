@@ -25,6 +25,7 @@ title: User Guide
   * [Import a show: `import`](#importing-a-show-import)
   * [Exporting a show: `export`](#exporting-a-show-export)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
+* [**Modifying `Trackermon.json`**](#modifying-trackermonjson)
 * [**FAQ**](#faq)
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
@@ -58,13 +59,16 @@ Before you continue reading the rest of our user guide, the table below displays
 ## Quick start
 
 1. Ensure you have `Java 11` or above installed in your Computer.
-
+   * For Windows, open Command Prompt and key in `java -version`
+   * For MacOS, open Terminal and key in `javac -version`
+   * For Linux, open Terminal and key in `java -version`
 2. Download the latest version of **Trackermon** [here](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
-4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
-   * Do note that for Linux OS, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! <br><br>
+4. Double-click the file to start the app. The layout of **Trackermon**'s [GUI](#glossary) is shown in the [section below](#user-interface).
+   * Do note that for Linux, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! 
+   * Do note that if double-clicking fails to start **Trackermon**, open a Command Prompt/Terminal in **Trackermon**'s _home folder_ and input `java -jar Trackermon.jar` to start **Trackermon**<br><br>
    
 5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
@@ -147,6 +151,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `list` ) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+* Parameters 
+
 </div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -166,8 +172,8 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | INDEX     | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: A show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                                                                                                                                                    |
 | NAME      | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead. |
 | STATUS    | s/     | Status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                                                                                                                                                                                                                                                                |
-| TAG       | t/     | Tag must only be a keyword that is **less than 20 characters**.                                                                                                                                                                                                                                                                    |
-| COMMENT   | c/     | Comment ????                                                                                                                                                                                                                                                                                                                       |
+| TAG       | t/     | Tag must only be a keyword that is **less than 20 [**alphanumeric**](#glossary) characters**.                                                                                                                                                                                                                                                                    |
+| COMMENT   | c/     | A comment can contain any text, but emojis will be removed from input.                                                                                                                                                                                                                                                                                                                         |
 | RATING    | r/     | Rating must be a **whole number** from **0 to 5**                                                                                                                                                                                                                                                                                  |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -460,9 +466,10 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 **Example & Output:** `import`
 - Step 1. Navigate to the Trackermon data you want to import using your OS' native [GUI](#glossary)!
 - Step 2. Select the file and click "Open"
-  - Do note that only JSON files can be imported!
+  - Do note that only [JSON](#glossary) files can be imported!
 - Step 3. Trackermon will import the selected file and display the imported show list!
   - If there was an error importing the file, Trackermon will display an error message!
+  - For advanced users, feel free to modify Trackermon.json directly!
 
 <img src="images/Import.png">
 
@@ -479,7 +486,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 **Example & Output:** `export`
 - Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native [GUI](#glossary)!
 - Step 2. Click "Save"
-- Step 3. Trackermon will export the Trackermon data as a JSON file to your selected location. It's that easy!
+- Step 3. Trackermon will export the Trackermon data as a [JSON](#glossary) file to your selected location. It's that easy!
   - If there was an error exporting the file, Trackermon will display an error message!
 
 <img src="images/Export.png">
@@ -498,19 +505,42 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+---
+
+## Modifying `trackermon.json`
+
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Caution:**<br>
+* Incorrectly modifying `trackermon.json` **WILL** lead to data loss!
+* Refer to [parameter conditions](#parameter-conditions) section about `name` `status` `tag` `comment` `rating`.
+* Any changes made while Trackermon is active will be discarded!
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about `trackermon.json`:**<br>
+* Take note of the curly `{}` and square `[]` braces! Extra or missing braces will render `trackermon.json` invalid!
+</div>
+
+<img src="images/JsonFormat.png">
+
+* Show information are kept within curly braces `{}`
+* When editing information, refer to the [parameter conditions](#parameter-conditions) section!
+  * Invalid information will result in an empty show list!
+* Missing quotation marks `"` will render `trackermon.json` invalid!
+* Ensure that no additional braces `{}[]` or quotation marks `"` are added into the file.
+* Ensure that existing braces `{}[]` and quotation marks `"` are not deleted from the file.
+
+---
 
 ## FAQ
-* **Q:** Where is the data of Trackermon saved?<br>
-**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data! There is no need for you to save manually.<br><br>
 
-* **Q:** How is my data being saved in Trackermon?<br>
-**A:** Your data will be stored as a JSON file called `trackermon.json`! You can find it in the "data" folder in Trackermon's _home folder_.<br><br>
-
-* **Q:** How do I transfer my data to another computer?<br>
-  **A:** 
-  * Firstly, `export` your data to an external storage device. 
-  * Next, on your other Computer, simply start up Trackermon and `import` the data from the previous step!
-  * Congratulations! You've just transferred your data across different computers!
+| Question | Answer |
+| -------- | ------ |
+| Where is the data of Trackermon saved? | Trackermon data is saved in the hard disk automatically after any command that changes the data! There is no need for you to save manually. |
+| How is my data being saved in Trackermon? | Your data will be stored as a [JSON](#glossary) file called `trackermon.json`! You can find it in the "data" folder in Trackermon's _home folder_.|
+| How do I transfer my data to another computer? | 1. `export` your data to an external storage device or send it via email. <br> 2. On your other computer, simply start up Trackermon and `import` the data from the previous step! <br> 3. Congratulations! You've just transferred your data across different computers! |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -545,5 +575,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
 | **Alphanumeric**                   | A character that is either a letter or a number.                  |
+| **JSON**                           | [JavaScript Object Notation](https://www.json.org/json-en.html). The format in which Trackermon data is stored. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)

@@ -1,11 +1,13 @@
 package seedu.trackermon.model.show;
 
+import com.vdurmont.emoji.EmojiParser;
+
 public class Comment {
 
     public final String comment;
 
     public Comment(String comment) {
-        this.comment = comment;
+        this.comment = EmojiParser.removeAllEmojis(comment);
     }
 
     @Override
