@@ -26,7 +26,7 @@ public class DeleteTagCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Only one tag can be deleted at a time. \n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TAG_INDEX (must be a positive integer) \n"
+            + "TAG_NUMBER (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 3 " + "2";
 
     public static final String MESSAGE_SUCCESS = "Deleted tag in Person: %1$s";
@@ -64,9 +64,13 @@ public class DeleteTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
     }
 
-    private Person deleteTagFromPerson(Person personToEdit, int tagNumber) {
+    private Person deleteTagFromPerson(Person personToEdit, int tagNumber) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
+        if (tagNumber < 1 || tagNumber > tagList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_NUMBER);
+        }
+
         tagList.remove(tagNumber - 1);
 
         newPerson.setTags(tagList);
