@@ -128,7 +128,7 @@ public class OnboardingStoryManager {
                 RESULT_DISPLAY_TOP, COMMAND_BOX,
                 1, "findperson %s", null, (model) -> {
             this.modifyCurrentStepCommand(String.format("findperson %s", OnboardingUtil.getLatestPersonName(model)));
-            return String.format("Type 'findperson %s' and hit enter!" + CLICK_CONTINUE,
+            return String.format("Type 'findperson %s' and hit enter!",
                     OnboardingUtil.getLatestPersonName(model));
         }, false));
 
