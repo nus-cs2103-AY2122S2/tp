@@ -224,7 +224,9 @@ Original list:
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 ![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
 
-📓`Note:` Tracey shows the entire edited database after the edit command is applied.
+📓`Notes:` 
+* Tracey shows the entire edited database after the edit command is applied.
+* After every edit command, the student at the specified index will be shifted to the bottom of the list.
 
 💡`Tip`:
 * Edits can be reversed with the `undo` feature.
