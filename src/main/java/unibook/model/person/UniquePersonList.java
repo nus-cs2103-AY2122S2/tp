@@ -200,6 +200,9 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns true if {@code persons} contains person with given phone number.
      */
     public boolean phoneNumberBeingUsed(Phone phone) {
+        if (phone.isEmpty()) {
+            return false;
+        }
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getPhone().equals(phone)) {
                 return true;
@@ -213,6 +216,9 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns true if {@code persons} contains person with given email.
      */
     public boolean emailBeingUsed(Email email) {
+        if (email.isEmpty()) {
+            return false;
+        }
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getEmail().equals(email)) {
                 return true;
