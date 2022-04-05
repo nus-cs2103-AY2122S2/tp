@@ -22,6 +22,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Task;
+import seedu.address.model.person.exceptions.PartialDuplicateTaskException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
@@ -133,7 +134,6 @@ public class AssignCommandTest {
         assertCommandFailure(assignCommand, model, MESSAGE_DUPLICATE_TASK);
     }
 
-    // Fix this test case
     @Test
     public void execute_partialDuplicateTaskException_success() {
 
@@ -155,7 +155,6 @@ public class AssignCommandTest {
                 .withPhone("10000000")
                 .withTelegramHandle("andyyy")
                 .withEmail("andyyy@u.nus.edu")
-                .withTaskList("Task A", false)
                 .build();
 
         Person alice = new PersonBuilder(ALICE).build();
@@ -165,6 +164,11 @@ public class AssignCommandTest {
 
         Model model = new ModelManager(andyAndAmyAb, new UserPrefs());
         Model expectedModel = new ModelManager(andyAndAmyAbCopy, new UserPrefs());
+        try {
+            expectedModel.assignTaskToAllInModule(moduleCodeAlice, taskAlice);
+        } catch (PartialDuplicateTaskException e) {
+            // Do nothing
+        }
 
         AssignCommand assignCommand = new AssignCommand(moduleCodeAlice, taskAlice);
 
@@ -182,24 +186,16 @@ public class AssignCommandTest {
 
         Person alice = new PersonBuilder(ALICE).build();
 
-        Person expectedAliceCopy = new PersonBuilder()
-                .withStudentId(ALICE.getStudentId().id)
-                .withName(ALICE.getName().toString())
-                .withModuleCode(ALICE.getModuleCode().moduleCode)
-                .withPhone(ALICE.getPhone().value)
-                .withTelegramHandle(ALICE.getTelegramHandle().telegramHandle)
-                .withEmail((ALICE.getEmail().value))
-                .withTaskList("Task A", false)
-                .withTaskList("Cry", false) // This is validTask
-                .build();
+        Person expectedAliceCopy = new PersonBuilder(ALICE).build();
 
         AddressBook aliceAb = new AddressBookBuilder().withPerson(alice).build();
         AddressBook expectedAliceCopAb = new AddressBookBuilder().withPerson(expectedAliceCopy).build();
 
         Model model = new ModelManager(aliceAb, new UserPrefs());
         Model expectedModel = new ModelManager(expectedAliceCopAb, new UserPrefs());
+        expectedModel.assignTaskToPerson(ALICE.getStudentId(), new Task("Cry"));
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS, taskAlice.getTaskName() + ", to student with ID: "
+        String expectedMessage = String.format(MESSAGE_SUCCESS, "Cry" + ", to student with ID: "
                 + studentIdAlice);
 
         assertCommandSuccess(assignCommand, model, expectedMessage, expectedModel);
@@ -226,29 +222,18 @@ public class AssignCommandTest {
                 .withPhone("10000000")
                 .withTelegramHandle("andyyy")
                 .withEmail("andyyy@u.nus.edu")
-                .withTaskList("Cry", false)
                 .build();
 
         Person alice = new PersonBuilder(ALICE).build();
 
-        Person expectedAliceCopy = new PersonBuilder()
-                .withStudentId(ALICE.getStudentId().id)
-                .withName(ALICE.getName().toString())
-                .withModuleCode(ALICE.getModuleCode().moduleCode)
-                .withPhone(ALICE.getPhone().value)
-                .withTelegramHandle(ALICE.getTelegramHandle().telegramHandle)
-                .withEmail((ALICE.getEmail().value))
-                .withTaskList("Task A", false)
-                .withTaskList("Cry", false) // This is validTask
-                .build();
-
+        Person expectedAliceCopy = new PersonBuilder(ALICE).build();
 
         AddressBook andyAndAmyAb = new AddressBookBuilder().withPerson(andy).withPerson(alice).build();
         AddressBook andyAndAmyAbCopy = new AddressBookBuilder().withPerson(andyCopy).withPerson(expectedAliceCopy)
                 .build();
-
         Model model = new ModelManager(andyAndAmyAb, new UserPrefs());
         Model expectedModel = new ModelManager(andyAndAmyAbCopy, new UserPrefs());
+        expectedModel.assignTaskToAllInModule(moduleCodeAlice, new Task("Cry"));
 
         AssignCommand assignCommand = new AssignCommand(moduleCodeAlice, validTask);
 
@@ -259,4 +244,5 @@ public class AssignCommandTest {
 
         assertCommandSuccess(assignCommand, model, expectedMessage, expectedModel);
     }
+
 }

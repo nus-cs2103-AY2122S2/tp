@@ -32,6 +32,7 @@ public class AssignCommandParserTest {
     private final ModuleCode moduleCodeBob = TypicalPersons.BOB.getModuleCode();
 
     private final Task validTask = new Task("Cry");
+    private final String validTaskDesc = " tn/" + validTask.getTaskName();
 
     private AssignCommandParser parser = new AssignCommandParser();
 
@@ -103,14 +104,14 @@ public class AssignCommandParserTest {
     @Test
     public void parse_allFieldsPresentByStudentId_success() {
         AssignCommand expectedAssignCommand = new AssignCommand(studentIdBob, validTask);
-        String userInputValid = ID_DESC_BOB + TASK_DESC_BOB;
+        String userInputValid = ID_DESC_BOB + validTaskDesc;
         assertParseSuccess(parser, userInputValid, expectedAssignCommand);
     }
 
     @Test
     public void parse_allFieldsPresentByModuleCode_success() {
         AssignCommand expectedAssignCommand = new AssignCommand(moduleCodeBob, validTask);
-        String userInputValid = MODULE_CODE_DESC_BOB + TASK_DESC_BOB;
+        String userInputValid = MODULE_CODE_DESC_BOB + validTaskDesc;
         assertParseSuccess(parser, userInputValid, expectedAssignCommand);
     }
 }
