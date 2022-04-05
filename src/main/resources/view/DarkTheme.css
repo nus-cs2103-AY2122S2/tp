@@ -326,6 +326,7 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-prompt-text-fill: white
 }
 
 #searchTextField {
@@ -430,18 +431,17 @@
 }
 
 .tag-list-count {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
     -fx-padding: 0 2 0 2;
     -fx-border-radius: 2;
+    -fx-background-color: white;
     -fx-background-radius: 2;
-    -fx-border-color: #3e7b91;
-    -fx-font-weight: bold;
-    -fx-font-size: 13;
+    -fx-border-color: white;
 }
 
 #personInTagCount {
-    -fx-text-fill: white;
+    -fx-text-fill: #3e7b91;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
 }
 
 #grabResult {
