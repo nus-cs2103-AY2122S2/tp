@@ -367,7 +367,7 @@ Adds a test result taken by a patient in MedBook.
 Format: `add t/test i/NRIC dt/DATE mt/MEDICAL_TEST r/RESULT`
 
 Examples:
-* `add t/test i/S1234567L dt/2019-09-15 mt/CT Scan r/Brain Cancer`
+* `add t/test i/S1234567L td/2019-09-15 mt/CT Scan r/Brain Cancer`
 
 ### Viewing Test Result: `view t/test`
 
