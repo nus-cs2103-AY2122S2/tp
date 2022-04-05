@@ -16,7 +16,7 @@ public class Information {
      * otherwise " " (a blank string becomes a valid input.
      * There is also a 300 characters constraint.
      */
-    public static final String VALIDATION_REGEX = "[^\\s]{1,300}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0,299}";
 
     public final String value;
 
