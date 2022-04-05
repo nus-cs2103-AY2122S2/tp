@@ -122,7 +122,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ACADEMIC MAJOR [t/TAG]...`
 
 **:information_source: Tip:**<br>
 
-A student contact can have any number of tags (including 0).
+A student contact can have any number of tags (including 0). Same tags (case-sensitive) can only be added to a particular student contact once.
 
 </div>
 
