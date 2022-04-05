@@ -38,6 +38,7 @@ public class LabTest {
         assertFalse(Lab.isValidLab("123456789")); // larger than 20
         assertFalse(Lab.isValidLab("21")); // larger than 20
         assertFalse(Lab.isValidLab("2147483648")); // larger than max int value
+        assertFalse(Lab.isValidLab("-1")); // includes '-', which is not allowed
 
         // valid lab
         assertTrue(Lab.isValidLab("1")); // valid integer
