@@ -98,8 +98,7 @@ TAddress Book data are saved in the hard disk automatically after any command th
 TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`'s `Lab`s.
-
+We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`'s `Lab`s.<br>
 If your changes to the JSON data file makes its format invalid, TAddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
