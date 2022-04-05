@@ -86,6 +86,16 @@ public abstract class Person {
 
 
     /**
+     * Returns true if the given person has same email or phone
+     * @return
+     */
+    public boolean hasSameEmailOrPhone(Person person) {
+        return (!person.getPhone().isEmpty() && phone.equals(person.getPhone()))
+            || (!person.getEmail().isEmpty() && email.equals(person.getEmail()));
+    }
+
+
+    /**
      * Returns a modifiable module set.
      */
     public Set<Module> getModules() {
