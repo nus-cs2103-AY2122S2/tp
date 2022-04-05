@@ -9,10 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable;
  */
 public class Attendance {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Attendance should only be false or true";
-
-    private final Boolean value;
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should only be false or true";
+    public final Boolean value;
 
     /**
      * Constructs a {@code Attendance}.
@@ -31,29 +29,8 @@ public class Attendance {
      */
     public Attendance(String attendance) {
         requireNonNull(attendance);
-        checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAttendance(attendance.toLowerCase()), MESSAGE_CONSTRAINTS);
         this.value = Boolean.valueOf(attendance);
-    }
-
-    public Boolean getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Attendance // instanceof handles nulls
-                && value.equals(((Attendance) other).value)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
     }
 
     /**
@@ -64,5 +41,22 @@ public class Attendance {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Attendance
+                && value.equals(((Attendance) other).value));
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
     }
 }
