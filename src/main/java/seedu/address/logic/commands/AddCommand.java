@@ -28,14 +28,19 @@ public class AddCommand extends Command {
         + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME "
         + "[" + PREFIX_TEAM + "TEAM...]\n"
         + "[" + PREFIX_SKILL + "SKILLNAME_SKILLPROFICENCY...]\n"
-        + "Example: " + COMMAND_WORD + " "
+        + "Example1: " + COMMAND_WORD + " "
         + PREFIX_NAME + "John Doe "
         + PREFIX_PHONE + "98765432 "
         + PREFIX_EMAIL + "johnd@example.com "
         + PREFIX_GITHUB_USERNAME + "johndoe-123 "
-        + PREFIX_TEAM + "friends "
-        + PREFIX_TEAM + "owesMoney"
-        + PREFIX_SKILL + "Java_90";
+        + PREFIX_TEAM + "HackNet, WhiteHackers"
+        + PREFIX_SKILL + "Java_90\n"
+        + "Example2: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "Joe King "
+        + PREFIX_PHONE + "98765432 "
+        + PREFIX_EMAIL + "joking@example.com "
+        + PREFIX_GITHUB_USERNAME + "joking-123 "
+        + PREFIX_TEAM + "Google Serach Engine, Vim plugin";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in HackNet.";
