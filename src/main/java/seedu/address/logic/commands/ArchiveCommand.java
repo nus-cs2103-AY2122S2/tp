@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-public class ArchiveCommand extends Command {
+public class ArchiveCommand extends RedoableCommand {
 
     public static final String COMMAND_WORD = "archive";
     public static final String ALT_COMMAND_WORD = "unarchive";
@@ -51,7 +51,7 @@ public class ArchiveCommand extends Command {
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
