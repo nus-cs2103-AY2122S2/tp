@@ -71,6 +71,7 @@ public class TypicalPersons {
     public static final Person BOB = new PersonBuilder().withStudentId(VALID_ID_BOB).withName(VALID_NAME_BOB)
             .withModuleCode(VALID_MODULE_CODE_BOB).withPhone(VALID_PHONE_BOB)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withEmail(VALID_EMAIL_BOB).build();
+    // Given same module code as Alice to test for duplicate task assignment when assigning task by module code
     public static final Person ANDY = new PersonBuilder().withStudentId(VALID_ID_ANDY).withName(VALID_NAME_ANDY)
             .withModuleCode(VALID_MODULE_CODE_ANDY).withPhone(VALID_PHONE_ANDY)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_ANDY).withEmail(VALID_EMAIL_ANDY).build();
