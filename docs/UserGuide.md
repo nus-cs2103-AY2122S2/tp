@@ -167,7 +167,7 @@ And that's all there is to it! Now that you have a basic understanding of the co
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follows a certain command format. If you haven't read it, please refer to the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
+Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
