@@ -71,7 +71,7 @@ Here are some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
 
-* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 alphanumeric characters. The telegram handle cannot contain an underscore.
+* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 alphanumeric characters. The telegram handle cannot have any symbols (such as underscore) as well as whitespaces.
 </div>
 
 ### Adding a student: `add`
