@@ -40,15 +40,15 @@ public class CompositeObservableListTest {
         AppointmentSlot slot = new AppointmentSlot(
                 new TimeRange(refTime.plusMinutes(120), refTime.plusMinutes(180)));
 
-        assertEquals(List.of(), compositeList.getUnmodifiableList());
+        assertEquals(List.of(), compositeList.getUnmodifiableResultList());
         appointmentList.add(APPOINTMENT_ALONE);
         slotList.add(slot);
-        assertEquals(List.of(APPOINTMENT_ALONE, slot), compositeList.getUnmodifiableList());
+        assertEquals(List.of(APPOINTMENT_ALONE, slot), compositeList.getUnmodifiableResultList());
 
         AppointmentSlot slotBefore = new AppointmentSlot(
                 new TimeRange(refTime.minusMinutes(120), refTime.minusMinutes(20)));
         slotList.set(0, slotBefore);
-        assertEquals(List.of(slotBefore, APPOINTMENT_ALONE), compositeList.getUnmodifiableList());
+        assertEquals(List.of(slotBefore, APPOINTMENT_ALONE), compositeList.getUnmodifiableResultList());
     }
 
     @Test

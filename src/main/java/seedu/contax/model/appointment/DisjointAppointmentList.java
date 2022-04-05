@@ -19,10 +19,10 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 
 /**
- * A list of appointments that enforces that its elements cannot have overlapping periods and does not allow
- * nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)}, and will be performed
- * upon any modification to the list. It also enforces a chronological ordering of the appointments in the
- * list, done by sorting {@link Appointment#getStartDateTime()} since appointments are disjoint.
+ * A list of {@link Appointment} objects s that enforces that its elements cannot have overlapping periods and
+ * does not allow nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)}, and
+ * will be performed upon any modification to the list. It also enforces a chronological ordering of the
+ * appointments in the list, done using the {@code Comparable} interface that {@code Appointment} implements.
  *
  * Note that {@link #remove(Appointment)} uses {@link Appointment#equals(Object)} to find the target
  * appointment to remove.
@@ -32,6 +32,7 @@ import seedu.contax.model.chrono.TimeRange;
 
 public class DisjointAppointmentList implements Iterable<Appointment> {
 
+    private static final String ERROR_POSITIVE_DURATION = "Duration has to be a positive integer";
     private final ObservableList<Appointment> appointments;
     private final ObservableList<Appointment> readOnlyAppointments;
 
@@ -109,11 +110,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         }
 
         // Check for overlapping appointments
-        long overlappingAppointmentCount = appointments.stream()
-                .filter((appointment) -> (appointment.isOverlapping(target)))
-                .count();
-
-        if (overlappingAppointmentCount > 0) {
+        if (containsOverlapping(target)) {
             throw new OverlappingAppointmentException();
         }
 
@@ -138,6 +135,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
             throw new AppointmentNotFoundException();
         }
 
+        // Cannot use containsOverlapping here because it needs to ignore target.
         long clashing = appointments.stream().filter((appointment) -> (
                 appointment.isOverlapping(newAppointment) && !appointment.equals(target))).count();
 
@@ -196,7 +194,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     public List<TimeRange> findAvailableSlotsInRange(LocalDateTime start, LocalDateTime end,
                                                      int minimumDuration) {
         requireAllNonNull(start, end, minimumDuration);
-        checkArgument(minimumDuration > 0, "Duration has to be a positive integer");
+        checkArgument(minimumDuration > 0, ERROR_POSITIVE_DURATION);
 
         ArrayList<TimeRange> slotsFound = new ArrayList<>();
         if (!(start.isBefore(end))) {
@@ -212,11 +210,11 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         Appointment lastAppointment = appointments.get(size() - 1);
 
         if (Duration.between(start, firstAppointment.getStartDateTime()).toMinutes() >= minimumDuration) {
-            slotsFound.add(new TimeRange(start, getEarlier(firstAppointment.getStartDateTime(), end)));
+            slotsFound.add(new TimeRange(start, getEarlierOf(firstAppointment.getStartDateTime(), end)));
         }
         findAvailableSlotsBetweenAppointments(slotsFound, start, end, minimumDuration);
         if (Duration.between(lastAppointment.getEndDateTime(), end).toMinutes() >= minimumDuration) {
-            slotsFound.add(new TimeRange(getLater(start, lastAppointment.getEndDateTime()), end));
+            slotsFound.add(new TimeRange(getLaterOf(start, lastAppointment.getEndDateTime()), end));
         }
 
         return slotsFound;
@@ -257,8 +255,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Performs the shifting operation in insertion sort, omitting the insert into list component of
-     * insertion sort. It shifts the appointment at the given {@code index} into its sorted position in the list.
+     * Shifts the appointment in {@code index} either rightwards or leftwards into its sorted position in the
+     * list. This algorithm is similar to the shifting operation in insertion sort.
      * Note that this function will only guarantee a sorted list after its completion if the given appointment
      * at {@code index} is the only element out of position.
      *
@@ -272,16 +270,16 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
         // Determine direction
         if (index - 1 >= 0 && target.compareTo(appointments.get(index - 1)) < 0) {
-            // target < index - 1, shift left
+            // index < index - 1, shift left
             shiftAppointmentLeft(index);
         } else if (index + 1 < appointments.size() && target.compareTo(appointments.get(index + 1)) > 0) {
-            // target > index + 1, shift right
+            // index > index + 1, shift right
             shiftAppointmentRight(index);
         }
     }
 
     /**
-     * Shifts the appointment at {@code index} left into its sorted position.
+     * Shifts the appointment at {@code index} left repeatedly until it is in its sorted position.
      */
     private void shiftAppointmentLeft(int index) {
         assert (index >= 0 && index < appointments.size());
@@ -296,7 +294,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Shifts the appointment at {@code index} right into its sorted position.
+     * Shifts the appointment at {@code index} right repeatedly until it is in its sorted position.
      */
     private void shiftAppointmentRight(int index) {
         assert (index >= 0 && index < appointments.size());
@@ -304,7 +302,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         Appointment target = appointments.get(index);
         int otherIndex = index + 1;
         while (otherIndex < appointments.size() && target.compareTo(appointments.get(otherIndex)) > 0) {
-            appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift
+            appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift other appointment
             otherIndex++;
         }
         appointments.set(otherIndex - 1, target);
@@ -312,7 +310,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
 
     /**
      * Returns a list of slots between appointments, within the supplied start and end DateTime search window,
-     * that are of at least {@code minimumDuration} minutes.
+     * that are of at least {@code minimumDuration} minutes. Note that it does not consider slots beyond the
+     * first and last appointments.
      *
      * @param resultList The list that slots found should be added to.
      * @param start The start of the search window.
@@ -324,18 +323,20 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         assert (resultList != null) && (start != null) && (end != null);
 
         for (int i = 0; i < size() - 1; i++) {
-            LocalDateTime gapStart = getLater(appointments.get(i).getEndDateTime(), start);
-            LocalDateTime gapEnd = getEarlier(appointments.get(i + 1).getStartDateTime(), end);
+            LocalDateTime slotStart = getLaterOf(appointments.get(i).getEndDateTime(), start);
+            LocalDateTime slotEnd = getEarlierOf(appointments.get(i + 1).getStartDateTime(), end);
 
-            if (!(gapEnd.isAfter(start))) {
+            if (!(slotEnd.isAfter(start))) {
+                // Search period starts after this appointment
                 continue;
-            } else if (gapStart.isAfter(end)) {
+            } else if (slotStart.isAfter(end)) {
+                // Search period ends before this appointment, short circuit because list is chronological.
                 return;
             }
 
-            long minutesBetween = gapStart.until(gapEnd, ChronoUnit.MINUTES);
+            long minutesBetween = slotStart.until(slotEnd, ChronoUnit.MINUTES);
             if (minutesBetween >= minimumDuration) {
-                resultList.add(new TimeRange(gapStart, gapEnd));
+                resultList.add(new TimeRange(slotStart, slotEnd));
             }
         }
     }
@@ -343,7 +344,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     /**
      * Returns the earlier of the 2 supplied {@code LocalDateTime} objects.
      */
-    private LocalDateTime getEarlier(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+    private LocalDateTime getEarlierOf(LocalDateTime dateTime1, LocalDateTime dateTime2) {
         requireNonNull(dateTime1);
         requireNonNull(dateTime2);
         if (dateTime1.isAfter(dateTime2)) {
@@ -355,7 +356,7 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
     /**
      * Returns the later of the 2 supplied {@code LocalDateTime} objects.
      */
-    private LocalDateTime getLater(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+    private LocalDateTime getLaterOf(LocalDateTime dateTime1, LocalDateTime dateTime2) {
         requireNonNull(dateTime1);
         requireNonNull(dateTime2);
         if (dateTime1.isAfter(dateTime2)) {

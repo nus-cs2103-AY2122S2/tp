@@ -9,7 +9,7 @@ import java.util.Objects;
 import seedu.contax.commons.core.GuiSettings;
 
 /**
- * Represents User's preferences.
+ * Represents the User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
@@ -45,6 +45,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return guiSettings;
     }
 
+    /**
+     * Sets the Gui Settings to {@code guiSettings}.
+     */
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
@@ -60,11 +63,17 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return scheduleFilePath;
     }
 
+    /**
+     * Sets the Address Book data file path to {@code guiSettings}.
+     */
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    /**
+     * Sets the Schedule data file path to {@code guiSettings}.
+     */
     public void setScheduleFilePath(Path scheduleFilePath) {
         requireNonNull(scheduleFilePath);
         this.scheduleFilePath = scheduleFilePath;

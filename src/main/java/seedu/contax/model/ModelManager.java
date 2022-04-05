@@ -21,7 +21,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the both the AddressBook and Schedule.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -53,6 +53,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
         displayedAppointmentSlots = new AppointmentSlotList(this.schedule);
         scheduleItemList = new CompositeObservableList<>(filteredAppointments,
                 displayedAppointmentSlots.getSlotList());
@@ -271,8 +272,8 @@ public class ModelManager implements Model {
     //=========== Filtered Appointment List Accessors ========================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Appointments} backed by the internal list of
-     * {@code schedule}
+     * Returns an unmodifiable view of the list of {@code Appointments} backed by the appointments list of
+     * {@code Schedule}
      */
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {
@@ -305,7 +306,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<ScheduleItem> getScheduleItemList() {
-        return this.scheduleItemList.getUnmodifiableList();
+        return this.scheduleItemList.getUnmodifiableResultList();
     }
 
     @Override

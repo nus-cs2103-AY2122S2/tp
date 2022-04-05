@@ -8,7 +8,7 @@ import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.chrono.TimeRange;
 
 /**
- * Unmodifiable view of a schedule.
+ * Represents an unmodifiable view of a schedule.
  */
 public interface ReadOnlySchedule {
 
@@ -29,15 +29,15 @@ public interface ReadOnlySchedule {
     boolean hasAppointment(Appointment target);
 
     /**
-     * Returns a list of appointments that can allow another appointment of {@code minimumDuration} to be
-     * slotted between it and the subsequent appointment in the schedule, subject to the supplied start and
-     * end DateTime search window.
+     * Returns a list of {@code TimeRanges} in the Schedule that can allow an appointment of
+     * {@code minimumDuration} to be added within it , subject to the supplied start and end DateTime search
+     * window.
      *
      * @param start The start of the search window.
      * @param end The end of the search window.
      * @param minimumDuration The minimum size of the empty slot.
-     * @return A list of appointments that can allow another appointment of {@code minimumDuration} to be
-     *         slotted between it and the subsequent appointment.
+     * @return A list of {@code TimeRanges} that can allow another appointment of {@code minimumDuration} to
+     *         be added between it and the subsequent appointment.
      */
     List<TimeRange> findSlotsBetweenAppointments(LocalDateTime start, LocalDateTime end,
                                                  int minimumDuration);
