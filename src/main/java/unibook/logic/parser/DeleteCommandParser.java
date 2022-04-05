@@ -1,5 +1,6 @@
 package unibook.logic.parser;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import unibook.commons.core.Messages;
@@ -19,6 +20,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             + "Example: m/modulecode g/groupname";
     private static final String WRONG_OPTION = "Only o/module or o/group is allowed";
     private static final String GROUP_MISSING = "Group name is missing! Example: g/groupname";
+    private static final String EXTRA_ARGUMENTS_PROVIDED = "Unknown parameter given after command delete [INDEX] !";
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
@@ -83,7 +85,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     && !stuIndexPresent && !keyEventPresent && indexPresent;
 
             // delete index case
-            if (onlyIndexPresent) {
+            if (onlyIndexPresent && args.trim().split(" ").length > 1) {
+                throw new ParseException(EXTRA_ARGUMENTS_PROVIDED);
+            } else if (onlyIndexPresent) {
                 Index index = ParserUtil.parseIndex(args.trim().split(" ")[0]);
                 return new DeleteCommand(index);
 

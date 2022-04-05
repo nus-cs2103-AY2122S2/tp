@@ -320,10 +320,6 @@ public class DeleteCommand extends Command {
                 newPerson = ((Professor) newPerson).deleteOffice();
             }
 
-            if (model.hasPerson(newPerson)) {
-                throw new CommandException(MESSAGE_CANNOT_REMOVE_TRAIT);
-            }
-
             personToDeleteTrait.removePersonFromAllTheirModules();
             model.deletePerson(personToDeleteTrait);
 
