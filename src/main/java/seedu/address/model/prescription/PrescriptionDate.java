@@ -4,14 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 
 public class PrescriptionDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Prescription Date can only be in the format: YYYY-MM-DD";
-            "Prescription Date should not be blank, and should be in the format YYY-MM-DD";
-
-    public static final String VALIDATION_REGEX = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
+            "Invalid date! Please ensure that the format is YYYY-MM-DD and the value is valid";
 
     public final LocalDate date;
 
@@ -26,13 +26,28 @@ public class PrescriptionDate {
         date = LocalDate.parse(value);
     }
 
+    /**
+     * To validate the date
+     * @param test String to be validated
+     * @return true if the date is valid, false otherwise.
+     */
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDate.parse(test);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public String toDefaultString() {
+        return date.toString();
     }
 
     @Override
     public String toString() {
-        return date.toString();
+        String formattedDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        return formattedDate;
     }
 
     @Override
