@@ -5,9 +5,9 @@ title: Kwan Hao Wei's Project Portfolio Page
 
 ### Project: ContaX
 
-ContacX is for professionals who have many clients, current and prospective, who may possibly work with sensitive personal information and documents related to each of those clients. They have busy schedules with many appointments & meetings, and must be able to find available time slots in their schedules quickly.
+ContaX is an integrated solution designed for busy professionals who work with many clients and frequently interact with other people. It assists those who have packed schedules in efficiently scheduling appointments, while also being able to respond to volatile changing schedules.
 
-ContacX will allow for efficient management of a large list of contacts, allowing the mental workload of remembering people and related scheduled tasks to be offloaded. It will also provide an efficient way of efficiently organizing resources, while having minimal downtime with seamless transition from existing solutions.
+ContaX allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information. Built with efficiency in mind, ContaX promises a seamless transition from existing solutions for minimal downtime.
 
 Given below are my contributions to the project.
 
@@ -20,15 +20,16 @@ Given below are my contributions to the project.
   * Justification: This improves the usability of the application, as it provides more options for the user to search for contacts.
    
 * **Code contributed**:
-  * 2000+ LoC contributed to the project
+  * 2800+ LoC contributed to the project
   * Test cases for the tags subsystem
 
 * **Project management**:
-    * `to be added soon`
+    * Reviewed Pull Requests
 
 * **Enhancements to existing features**:
     * Extraction of Tags into its own list for management
     * Abstraction of `Tag` by moving the name attribute as its own class
+    * Enhancement of `Person` related commands to support cascading on tag modification
 
 * **Documentation**:
     * User Guide:
@@ -44,7 +45,5 @@ Given below are my contributions to the project.
         * Added section for tag inflation and serialisation
 
 * **Community**:
-    * `to be added soon`
-
-* **Tools**:
-    * `to be added soon`
+    * Reviewed PRs within the team ([20+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [50+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Akwanhw))
+    * Reviewed a total of [7 issues](https://github.com/KwanHW/ped/issues) during PE dry run
