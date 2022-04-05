@@ -39,12 +39,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if any person in the list contains same email or phone as checked person.
+     */
+    public boolean hasSameEmailOrPhoneInList(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameEmailOrPhone);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (hasSameEmailOrPhoneInList(toAdd)) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -130,7 +138,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPersons(List<Person> persons) {
         CollectionUtil.requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+        if (!personsPhoneAndEmailsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
 
@@ -176,9 +184,26 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if {@code persons} contains no duplicate phones or emails.
+     */
+    private boolean personsPhoneAndEmailsAreUnique(List<Person> persons) {
+        for (int i = 0; i < persons.size() - 1; i++) {
+            for (int j = i + 1; j < persons.size(); j++) {
+                if (persons.get(i).hasSameEmailOrPhone(persons.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * Returns true if {@code persons} contains person with given phone number.
      */
     public boolean phoneNumberBeingUsed(Phone phone) {
+        if (phone.isEmpty()) {
+            return false;
+        }
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getPhone().equals(phone)) {
                 return true;
@@ -187,17 +212,46 @@ public class UniquePersonList implements Iterable<Person> {
         return false;
     }
 
+    /**
+     * Returns true if {@code persons} contains person with given phone number.
+     */
+    public int getIdxOfPhoneNumberBeingUsed(Phone phone) {
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getPhone().equals(phone)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
     /**
      * Returns true if {@code persons} contains person with given email.
      */
     public boolean emailBeingUsed(Email email) {
+        if (email.isEmpty()) {
+            return false;
+        }
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getEmail().equals(email)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if {@code persons} contains person with given email.
+     */
+    public int getIdxOfEmailBeingUsed(Email email) {
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getEmail().equals(email)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**

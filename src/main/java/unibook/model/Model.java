@@ -1,6 +1,7 @@
 package unibook.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -77,6 +78,11 @@ public interface Model {
      * Returns true if a person with the same phone or email as {@code person} exists in the UniBook.
      */
     boolean hasPersonWithPhoneOrEmail(Person person);
+
+    /**
+     * Returns index of a person with the same phone or email as {@code person} exists in the UniBook.
+     */
+    ArrayList<Integer> getIdxPersonWithDuplicatePhoneOrEmail(Person person);
 
     /**
      * Deletes the given person.

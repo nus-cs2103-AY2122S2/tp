@@ -271,7 +271,7 @@ public class Module {
      */
     public void addStudent(Student s) {
         requireNonNull(s);
-        if (students.contains(s)) {
+        if (students.stream().anyMatch(s::hasSameEmailOrPhone)) {
             throw new DuplicatePersonException();
         }
         students.add(s);
@@ -284,7 +284,7 @@ public class Module {
      */
     public void addProfessor(Professor p) {
         requireNonNull(p);
-        if (professors.contains(p)) {
+        if (professors.stream().anyMatch(p::hasSameEmailOrPhone)) {
             throw new DuplicatePersonException();
         }
         professors.add(p);

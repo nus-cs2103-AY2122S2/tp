@@ -343,6 +343,8 @@ public class EditCommand extends Command {
             ModelManager mm = (ModelManager) model;
             mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+
+            // TODO make the command result for editing success more elaborate
             return new CommandResult(MESSAGE_EDIT_GROUP_SUCCESS);
         }
         // Edit person
@@ -383,8 +385,11 @@ public class EditCommand extends Command {
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-            if (model.hasPersonWithPhoneOrEmail(editedPerson)
-            || !personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
+
+            if ((model.hasPersonWithPhoneOrEmail(editedPerson)
+                    && (model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0) != index.getZeroBased()
+                        || model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1) != index.getZeroBased()))
+                    || !personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
 

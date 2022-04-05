@@ -99,6 +99,22 @@ public class UniBook implements ReadOnlyUniBook {
     }
 
     /**
+     * Returns index of person in unibook contains a person with given phone number.
+     */
+    public int getIdxOfPhoneNumberBeingUsed(Phone phone) {
+        requireNonNull(phone);
+        return persons.getIdxOfPhoneNumberBeingUsed(phone);
+    }
+
+    /**
+     * Returns index of person in unibook contains a person with given email.
+     */
+    public int getIdxOfEmailBeingUsed(Email email) {
+        requireNonNull(email);
+        return persons.getIdxOfEmailBeingUsed(email);
+    }
+
+    /**
      * Returns true if unibook contains a person with given email.
      */
     public boolean emailBeingUsed(Email email) {
