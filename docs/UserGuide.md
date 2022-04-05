@@ -275,6 +275,19 @@ Examples:
 - `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`.
 - `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about sorting:**<br>
+
+- Capitalization of alphabets is ignored, i.e., `Aiken` and `aiken` have the same priority when sorting alphabetically.
+- When sorting by number of properties in the default order, buyers will be listed first since they have no properties.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To sort by number of properties in the default order, but with buyers shifted to the bottom of the list, sort by user type in reverse order, followed by number of properties in default order, i.e., `sort !usertype num_property`
+</div>
+
 ##Tools
 ### Matching properties and preferences: `match`
 
