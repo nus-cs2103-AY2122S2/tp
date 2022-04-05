@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class BloodType {
 
-    public static final String MESSAGE_CONSTRAINTS = "Blood type can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Blood type can take any values, and it should not be blank.";
 
     /*
      * Blood type can take any value
