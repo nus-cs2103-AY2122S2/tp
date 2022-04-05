@@ -47,10 +47,11 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.checkStudentListIndex(studentIndex)) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonIndex.getOneBased()));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentIndex.getOneBased()));
         }
         if (model.checkLessonListIndex(lessonIndex)) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentIndex.getOneBased()));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonIndex.getOneBased()));
+
         }
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());

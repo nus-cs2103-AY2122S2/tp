@@ -48,10 +48,11 @@ public class UnassignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.checkStudentListIndex(studentId)) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonId.getOneBased()));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentId.getOneBased()));
         }
         if (model.checkLessonListIndex(lessonId)) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentId.getOneBased()));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonId.getOneBased()));
+
         }
 
         Student student = model.getFilteredStudentList().get(studentId.getZeroBased());
