@@ -245,7 +245,7 @@ E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
 Examples:
 * `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
 * `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
-* `adde n/Practical Test c/ABC d/Today ti/15:00 l/Zoom`
+* `adde n/Practical Test c/ABC d/today ti/15:00 l/Zoom`
 ### Listing entries
 - The `s/` parameter is an optional parameter that accepts 3 types of argument:
   - `s/all`: returns all entries
