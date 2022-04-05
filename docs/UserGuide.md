@@ -60,7 +60,7 @@ Here are some example commands you can try:
   Thus, the user can input the command `edit 10 p/98765432` (`MODULE_CODE` not specified) or `edit 10 p/98765432 m/CS2103` (`MODULE_CODE` specified).
 
 * Parameters with `…`​ after them can be used multiple times.<br>
-  Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (1 `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
+  Example: For the command `delete STUDENT_INDEX…​`, the user can input `delete 10` (one `STUDENT_INDEX` parameter) or `delete 10 11 12 13` (multiple `STUDENT_INDEX` parameters).
 
 * Parameters can be inputted in any order.<br>
   Example: For the command `add i/STUDENT_ID n/NAME m/MODULE_CODE`, the user can input `add i/A0123456B n/John Doe m/CS2103` (`NAME` followed by `MODULE_CODE`) or `add i/A0123456B m/CS2103 n/John Doe` (`MODULE_CODE` followed by `NAME`).
