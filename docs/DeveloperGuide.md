@@ -33,6 +33,7 @@ title: Developer Guide
     - [Implementation](#implementation-5)
     - [Usage](#usage-3)
   - [Summary](#summary)
+    - [Design Consideration](#design-consideration-5)
     - [Implementation](#implementation-6)
     - [Usage](#usage-4)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
