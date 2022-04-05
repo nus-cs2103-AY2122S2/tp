@@ -18,9 +18,9 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     private static final Map<Priority, String> fxmlColorMapper = Map.of(
             Priority.PRIORITY_1, "-fx-background-color: red;",
-            Priority.PRIORITY_2, "-fx-background-color: lightred;",
-            Priority.PRIORITY_3, "-fx-background-color: orange;",
-            Priority.PRIORITY_4, "-fx-background-color: yellow;"
+            Priority.PRIORITY_2, "-fx-background-color: orange;",
+            Priority.PRIORITY_3, "-fx-background-color: gold;",
+            Priority.PRIORITY_4, "-fx-background-color: peachpuff;"
     );
 
     /**
