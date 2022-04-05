@@ -407,17 +407,21 @@ group mates easier by consolidating important information such as modules taken.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                 | So that I can…​                                                        |
-| -------- |-------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | student                                   | add modules that I am taking | keep track of the modules                                              |
-| `* * *`  | new user                                  | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                      | add a new person             |                                                                        |
-| `* * *`  | user                                      | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                      | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                      | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​               | I want to …​                                 | So that I can…​                                                        |
+|----------|-----------------------|----------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | student               | add modules that I am taking                 | keep track of the modules                                              |
+| `* * *`  | conscientious student | add comments to my contacts                  | know what my contacts are like                                         |
+| `* * *`  | student               | highlight certain contacts                   | know whether I would like to work with them or not                     |
+| `* * *`  | new user              | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                  | add a new contact                            |                                                                        |
+| `* * *`  | user                  | delete a contact                             | remove entries that I no longer need                                   |
+| `* * *`  | user                  | find a person by name                        | locate details of persons without having to go through the entire list |
+| `* * *`  | organised student     | sort my contacts                             | properly track my contacts                                             |
+| `* *`    | inexperienced user    | have an easy way to use complicated commands | use the commands easily                                                |
+| `* *`    | organised student     | archive graduated students                   | separate current and past students                                     |
+| `* *`    | user                  | hide private contact details                 | minimize chance of someone else seeing them by accident                |
+| ` * `    | competitive student   | see the CAP of other students                | see my own standing                                                    |
+| ` * `    | student               | keep future modules in a wishlist            | show my friends the modules I want to take in the future               |
 
 ### Use cases
 
@@ -563,14 +567,14 @@ to the context of ModuleMateFinder. The Use Cases listed below demonstrate their
       Use case ends.
       <br/><br/>
 
-**Use case: UC08 - Filter contacts by name**
+**Use case: UC08 - Find contacts by name**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
 2. ModuleMateFinder shows a list of persons.
 3. User requests to filter the list by a certain name (e.g. `Hans`).
 4. ModuleMateFinder finds all persons with the module `Hans`.
-5. ModuleMateFinder shows a list of persons with the module `Hans`.
+5. ModuleMateFinder shows a list of persons with the module `Hans`.  
    Use case ends.
 
 **Extensions**
