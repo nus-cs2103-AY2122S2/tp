@@ -53,6 +53,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
+    //@@author LapisRaider
     public Path getTempAddressBookFileDirectoryPath() {
         return tempAddressBookFileDirectoryPath;
     }
@@ -66,6 +67,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(tempAddressBookFileDirectoryPath);
         this.tempAddressBookFileDirectoryPath = tempAddressBookFileDirectoryPath;
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
