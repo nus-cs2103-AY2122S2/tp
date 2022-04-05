@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.patient.exceptions.PatientNotFoundException;
 import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
 import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
 
