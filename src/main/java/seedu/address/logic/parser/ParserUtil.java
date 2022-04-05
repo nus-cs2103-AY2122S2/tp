@@ -213,11 +213,11 @@ public class ParserUtil {
             throws ParseException {
         LocalDate lessonDate = parseDate(dateOfLesson);
         LocalTime lessonStartTime = parseStartTime(startTime);
-        LocalDateTime lessonStartDateTime = lessonDate.atTime(lessonStartTime);
+        LocalDateTime startingDateTime = lessonDate.atTime(lessonStartTime);
 
         DateTimeSlot dateTimeSlot;
         try {
-            dateTimeSlot = DateTimeSlot.makeDateTimeSlot(lessonStartDateTime, durationHours, durationMinutes);
+            dateTimeSlot = DateTimeSlot.makeDateTimeSlot(startingDateTime, durationHours, durationMinutes);
         } catch (CommandException e) {
             throw new ParseException(e.getMessage());
         }
