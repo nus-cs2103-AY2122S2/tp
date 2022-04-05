@@ -1,8 +1,5 @@
 package seedu.address.model.lesson;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -13,6 +10,8 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.format.TextStyle;
 import java.util.Locale;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents the time in which a lesson takes place in the LessonBook.
@@ -88,6 +87,15 @@ public class DateTimeSlot {
         this.minutes = minutes;
     }
 
+    /**
+     * Constructs a {@code DateTimeSlot}.
+     *
+     * @param startingDateTime Starting date and time of the lesson.
+     * @param hours Duration of the lesson, hours.
+     * @param minutes Duration of the lesson, minutes.
+     *
+     * @throws CommandException if the lesson takes place over more than one day (i.e. starts on Monday, ends on Friday)
+     */
     public static DateTimeSlot makeDateTimeSlot(LocalDateTime startingDateTime, Integer hours, Integer minutes)
             throws CommandException {
         LocalDateTime endingDateTime = startingDateTime.plusHours(hours).plusMinutes(minutes);
