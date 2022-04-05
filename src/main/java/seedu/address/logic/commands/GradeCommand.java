@@ -16,7 +16,7 @@ public class GradeCommand extends Command {
     public static final String COMMAND_WORD = "grade";
     public static final String GRADED_STUDENTS = "Student %s (%s) has been successfully given the grade %d\n";
     public static final String UNGRADED_STUDENTS = "Student %s (%s) is not enrolled to the module\n";
-    public static final String INVALID_INCREMENT = "Student %s (%s) has reach the maximum possible grade. Incrementing"
+    public static final String INVALID_INCREMENT = "Student %s (%s) has reached the maximum possible grade. Incrementing"
             + " it would result in integer overflow\n";
     public static final String RESULT_FORMAT = "%s\n%s\n%s";
 
