@@ -147,8 +147,9 @@ Command word: `addlesson` / `al`
 Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES> -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
 
 <div markdown="block" class="alert alert-info">
-- **Adding recurring lessons:**
-    - to specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! if it is a temporary lesson, simply leave it out.
+
+* **ℹ Adding Recurring Lessons:** to specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! if it is a temporary lesson, simply leave it out.
+
 </div>
 
 **Note that:**
@@ -196,6 +197,7 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 **Note that:**
 
 * Editing of the lesson's type is not allowed. Recurring lessons cannot be edited to become temporary lessons and vice-versa.
+* If you are changing the lesson's date and/or duration, take note that lessons cannot be overnight (i.e. lessons that start at 9pm and end at 1am on the following-day)
 
 ---
 
