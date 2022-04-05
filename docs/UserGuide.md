@@ -193,7 +193,7 @@ application process for each role is at a glance.
 The following points explain the format of a command.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/COMPANY`, `COMPANY` is a parameter which can be used as `add n/Google`.
+  e.g. in `addCompany n/COMPANY e/EMAIL`, `COMPANY` and `EMAIL` represent parameters which can be used like `addCompany n/Google e/hr@google.com`.
 
 * Items in square brackets are optional.<br>
   e.g `n/COMPANY [p/PHONE_NUMBER]` can be used as `n/Google P/65427981` or as `n/Google`.
@@ -534,6 +534,8 @@ company.
 
 * `addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse data $/4800 `
 * `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
+* `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
+* Refer to [Demo Use Case #1](#usecase1) for an example use case.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -562,6 +564,7 @@ company.
 
 
 [Back to Table of Contents](#toc)
+
 
 ### Editing an existing role from company : `editRole` <a id="c-edit-r"></a>
 
