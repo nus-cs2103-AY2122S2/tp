@@ -9,9 +9,9 @@ for convenience use.
 
 ## Target User
 
-IBook is specially designed for small scale groceries store keeper, who are having issues with product organization and keeping track on expiring items.
+IBook is specially designed for small scale groceries storekeepers, who are having issues with product organization and keeping track on expiring items.
 
-We aim to help store keeper to simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
+We aim to help storekeepers simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,7 +146,7 @@ e.g. To provide a product name of `Nescafe: special edition`, you should type `n
 | `EXPRIRY_DATE`   | Expiry date of the item.                                               |
 | `QUANTITY`       | Quantity of the item.                                                  |
 | `DISCOUNT_RATE`  | Percentage of discount given to an item once it nears the expiry date. |
-| `DISCOUNT_START` | Number of days before the expiry date to start the discount.                     |
+| `DISCOUNT_START` | Number of days before the expiry date to start the discount.           |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -167,6 +167,7 @@ Adds a new product to iBook.
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
 * Only a single product would be added at a time
+* The new product added must not be of the same `NAME` and `CATEGORY`
 
 Examples:
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`

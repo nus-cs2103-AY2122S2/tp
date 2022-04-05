@@ -17,11 +17,13 @@ import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
 import seedu.ibook.model.product.Price;
+import seedu.ibook.model.product.PriceRange;
 import seedu.ibook.model.product.filters.AttributeFilter;
 import seedu.ibook.model.product.filters.CategoryFilter;
 import seedu.ibook.model.product.filters.DescriptionFilter;
 import seedu.ibook.model.product.filters.NameFilter;
 import seedu.ibook.model.product.filters.PriceFilter;
+import seedu.ibook.model.product.filters.PriceRangeFilter;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -35,14 +37,14 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION, PREFIX_PRICE,
+                PREFIX_START_PRICE, PREFIX_END_PRICE);
 
         Name name;
         Category category;
         Description description;
         Price price;
-        Price startPrice;
-        Price endPrice;
+        PriceRange priceRange;
 
         List<AttributeFilter> filterList = new ArrayList<>();
 
@@ -66,9 +68,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             filterList.add(new PriceFilter(price));
         } else if (argMultimap.getValue(PREFIX_START_PRICE).isPresent()
             && argMultimap.getValue(PREFIX_END_PRICE).isPresent()) {
-            startPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_START_PRICE).get());
-            endPrice = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_END_PRICE).get());
-            filterList.add(new PriceFilter(startPrice, endPrice));
+            priceRange = ParserUtil.parsePriceRange(argMultimap.getValue(PREFIX_START_PRICE).get(),
+                argMultimap.getValue(PREFIX_END_PRICE).get());
+            filterList.add(new PriceRangeFilter(priceRange));
+        } else if (argMultimap.getValue(PREFIX_START_PRICE).isPresent()
+            || argMultimap.getValue(PREFIX_END_PRICE).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_REQUIRE_START_END_PRICE));
         }
 
         if (filterList.size() == 0) {
