@@ -1,13 +1,13 @@
 package seedu.trackermon.model.show;
 
-import com.vdurmont.emoji.EmojiParser;
-
 public class Comment {
 
     public final String comment;
 
     public Comment(String comment) {
-        this.comment = EmojiParser.removeAllEmojis(comment);
+        String emojiFilter = "[(\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|"
+                + "\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff])]";
+        this.comment = comment.replaceAll(emojiFilter, "");
     }
 
     @Override
