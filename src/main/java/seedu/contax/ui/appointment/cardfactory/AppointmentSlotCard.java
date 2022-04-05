@@ -26,6 +26,8 @@ class AppointmentSlotCard extends UiPart<Region> {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
+    private static final LocalDateTime FOREVER_DATE_TIME = LocalDate.MAX.atTime(23, 59);
+
     private AppointmentSlot appointmentSlotModel;
 
     @FXML
@@ -63,14 +65,14 @@ class AppointmentSlotCard extends UiPart<Region> {
         LocalDateTime endDateTime = appointmentSlotModel.getEndDateTime();
         startDate.setText(startDateTime.format(DATE_FORMATTER));
         startTime.setText(startDateTime.format(TIME_FORMATTER));
-        if (endDateTime.equals(LocalDate.MAX.atTime(23, 59))) {
+
+        if (endDateTime.equals(FOREVER_DATE_TIME)) {
             endDate.setText(PHRASE_NO_UPPER_LIMIT);
             endTime.setText("");
         } else {
             endDate.setText(endDateTime.format(DATE_FORMATTER));
             endTime.setText(endDateTime.format(TIME_FORMATTER));
         }
-
 
         long minutes = Duration.between(startDateTime, endDateTime).toMinutes();
         duration.setText(getReadableDuration(minutes));
