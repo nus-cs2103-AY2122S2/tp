@@ -119,22 +119,18 @@ public class EditCommand extends Command {
      */
     private static void batchUpdateNegativeToPositive(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.getStatus().toString().equals(Status.NEGATIVE)
-                && editedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+        if ((personToEdit.isNegative() || personToEdit.isCloseContact()) && editedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString().equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(editedPerson)
                             || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson)
-                            && !student.getStatus().toString().equals(Status.POSITIVE))
+                            && !student.isPositive())
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
-                EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
-                Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                model.setPerson(currentPerson, editedPersonStatus);
+                editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         }
     }
@@ -145,12 +141,10 @@ public class EditCommand extends Command {
      */
     private static void batchUpdatePositiveToNegative(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
-        if (personToEdit.getStatus().toString().equals(Status.POSITIVE)
-                && editedPerson.getStatus().toString().equals(Status.NEGATIVE)) {
+        if (personToEdit.isPositive() && editedPerson.isNegative()) {
 
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                            .equals(editedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(editedPerson)
                             || student.hasSameActivity(editedPerson))
                             && !student.isSamePerson(editedPerson))
                     .collect(Collectors.toList());
@@ -159,18 +153,14 @@ public class EditCommand extends Command {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
 
                 List<Person> positiveRelatedToPerson = studentList.stream()
-                        .filter(student -> (student.getClassCode().toString()
-                                .equals(currentPerson.getClassCode().toString())
+                        .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
                                 && !student.isSamePerson(editedPerson)
-                                && student.getStatus().toString().equals(Status.POSITIVE))
+                                && student.isPositive())
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
-                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                    model.setPerson(currentPerson, editedPersonStatus);
+                    editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 }
             }
         }
@@ -194,6 +184,17 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus,
                 updatedClassCode, updatedActivity);
     }
+
+    /**
+     * A method to update a person's status
+     */
+    public static void editPersonStatus(Person person, Status status, Model model) {
+        EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
+        tempDescriptor.setStatus(status);
+        Person editedPersonStatus = createEditedPerson(person, tempDescriptor);
+        model.setPerson(person, editedPersonStatus);
+    }
+
 
     @Override
     public boolean equals(Object other) {

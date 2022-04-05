@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -19,13 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.activity.Activity;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.ClassCode;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
 /**
@@ -96,26 +89,22 @@ public class AddCommand extends Command {
                                                       ObservableList<Person> studentList,
                                                       Model model) {
 
-        if (addedPerson.getStatus().toString().equals(Status.POSITIVE)) {
+        if (addedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString().equals(addedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(addedPerson)
                             || student.hasSameActivity(addedPerson))
                             && !student.isSamePerson(addedPerson)
-                            && !student.getStatus().toString().equals(Status.POSITIVE))
+                            && !student.isPositive())
                     .collect(Collectors.toList());
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
-                EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
-                tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
-                Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                model.setPerson(currentPerson, editedPersonStatus);
+                EditCommand.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         } else {
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
-                    .filter(student -> (student.getClassCode().toString()
-                            .equals(addedPerson.getClassCode().toString())
+                    .filter(student -> (student.hasSameClassCode(addedPerson)
                             || student.hasSameActivity(addedPerson))
                             && !student.isSamePerson(addedPerson))
                     .collect(Collectors.toList());
@@ -124,46 +113,19 @@ public class AddCommand extends Command {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
 
                 List<Person> positiveRelatedToPerson = studentList.stream()
-                        .filter(student -> (student.getClassCode().toString()
-                                .equals(currentPerson.getClassCode().toString())
+                        .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
                                 && !student.isSamePerson(addedPerson)
-                                && student.getStatus().toString().equals(Status.POSITIVE))
+                                && student.isPositive())
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
-                    tempDescriptor.setStatus(new Status(Status.NEGATIVE));
-                    Person editedPersonStatus = createEditedPerson(currentPerson, tempDescriptor);
-                    model.setPerson(currentPerson, editedPersonStatus);
+                    EditCommand.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 } else {
-                    EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
-                    tempDescriptor.setStatus(new Status(Status.CLOSE_CONTACT));
-                    Person editedPersonStatus = createEditedPerson(addedPerson, tempDescriptor);
-                    model.setPerson(addedPerson, editedPersonStatus);
+                    EditCommand.editPersonStatus(addedPerson, new Status(Status.CLOSE_CONTACT), model);
                 }
             }
         }
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit,
-                                             EditCommand.EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(personToEdit);
-
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
-        ClassCode updatedClassCode = editPersonDescriptor.getClassCode().orElse(personToEdit.getClassCode());
-        Set<Activity> updatedActivity = editPersonDescriptor.getActivities().orElse(personToEdit.getActivities());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus,
-                updatedClassCode, updatedActivity);
     }
 
     @Override
