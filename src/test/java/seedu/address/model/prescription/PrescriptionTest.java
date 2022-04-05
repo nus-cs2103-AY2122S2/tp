@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPrescriptions.PRESCRIPTION_A;
 import static seedu.address.testutil.TypicalPrescriptions.PRESCRIPTION_B;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.PrescriptionBuilder;
 
 public class PrescriptionTest {

@@ -17,22 +17,22 @@ public class PrescriptionDateTest {
     @Test
     public void constructor_invalidPrescriptionDate_throwsIllegalArgumentException() {
         String invalidPrescriptionDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPrescriptionDate));
+        assertThrows(IllegalArgumentException.class, () -> new PrescriptionDate(invalidPrescriptionDate));
     }
 
     @Test
     public void isValidPrescriptionDate() {
-        // null phone number
+        // null date
         assertThrows(NullPointerException.class, () -> PrescriptionDate.isValidDate(null));
 
-        // invalid phone numbers
+        // invalid date
         assertFalse(PrescriptionDate.isValidDate("")); // empty string
         assertFalse(PrescriptionDate.isValidDate(" ")); // space
         assertFalse(PrescriptionDate.isValidDate("hey")); // string
         assertFalse(PrescriptionDate.isValidDate("29-02-2021")); // non leap year
         assertFalse(PrescriptionDate.isValidDate("23456")); // number
 
-        // valid phone numbers
+        // valid date
         assertTrue(PrescriptionDate.isValidDate("2012-12-12")); // valid date
         assertTrue(PrescriptionDate.isValidDate("2022-12-12")); // valid date
     }

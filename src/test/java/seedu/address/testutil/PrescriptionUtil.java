@@ -42,10 +42,10 @@ public class PrescriptionUtil {
     public static String getEditPrescriptionDescriptorDetails(EditPrescriptionDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getDrugName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.drugName).append(" "));
-        descriptor.getPrescriptionDate().ifPresent(date -> sb.append(PREFIX_DATE).
-                append(date.toDefaultString()).append(" "));
-        descriptor.getInstruction().ifPresent(instruction -> sb.append(PREFIX_INSTRUCTION).
-                append(instruction.value).append(" "));
+        descriptor.getPrescriptionDate().ifPresent(date -> sb.append(PREFIX_DATE)
+                .append(date.toDefaultString()).append(" "));
+        descriptor.getInstruction().ifPresent(instruction -> sb.append(PREFIX_INSTRUCTION)
+                .append(instruction.value).append(" "));
         return sb.toString();
     }
 }
