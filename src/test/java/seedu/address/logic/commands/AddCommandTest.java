@@ -69,6 +69,15 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePetDifferentAppointment_throwsCommandException() {
+        Pet validPet = new PetBuilder().withAppointment("05-05-2022 09:00", "NUS Vet Clinic").build();
+        AddCommand addCommand = new AddCommand(new PetBuilder().build());
+        ModelStub modelStub = new ModelStubWithPet(validPet);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Pet alice = new PetBuilder().withName("Alice").build();
         Pet bob = new PetBuilder().withName("Bob").build();
