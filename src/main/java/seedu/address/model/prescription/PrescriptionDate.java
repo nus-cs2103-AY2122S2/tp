@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class PrescriptionDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Prescription Date can only be in the format: YYYY-MM-DD";
+            "Prescription Date should not be blank, and should be in the format YYY-MM-DD";
 
     public static final String VALIDATION_REGEX = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$";
 

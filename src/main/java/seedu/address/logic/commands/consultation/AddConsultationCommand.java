@@ -37,7 +37,7 @@ public class AddConsultationCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "S1234567L "
-            + PREFIX_DATE + "19-09-2020 "
+            + PREFIX_DATE + "2020-09-19 "
             + PREFIX_TIME + "19-00 "
             + PREFIX_DIAGNOSIS + "Upper respiratory infection. Patient was having cough, sneezing fits. "
             + PREFIX_FEE + "54.00 ";

@@ -52,38 +52,43 @@ public class AddressBookParser {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(arguments, PREFIX_TYPE);
 
-        switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-            if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-                return parseAddCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
+        try {
+            switch (commandWord) {
+            case AddCommand.COMMAND_WORD:
+                if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
+                    return parseAddCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
+                }
+                return new AddCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return parseEditCommandType(arguments);
+
+            case DeleteCommand.COMMAND_WORD:
+                return parseDeleteCommandType(arguments);
+
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
+
+            case FindCommand.COMMAND_WORD:
+                return parseFindCommandType(arguments);
+
+            case ViewCommand.COMMAND_WORD:
+                if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
+                    return parseViewCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
+                }
+                return new ViewCommandParser().parse(arguments);
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-            return new AddCommandParser().parse(arguments);
-        case EditCommand.COMMAND_WORD:
-            return parseEditCommandType(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return parseDeleteCommandType(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return parseFindCommandType(arguments);
-
-        case ViewCommand.COMMAND_WORD:
-            if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-                return parseViewCommandType(argMultimap.getValue(PREFIX_TYPE).get(), arguments);
-            }
-            return new ViewCommandParser().parse(arguments);
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage());
         }
     }
 
