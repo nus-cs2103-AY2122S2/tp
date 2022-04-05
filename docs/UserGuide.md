@@ -107,7 +107,7 @@ Some example commands you can try:
 
 **:information_source: Notes about the image format:**<br>
 
-- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from  the directory the jar file is run. Description is optional and can be omitted.
+- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted.
 
 </div>
 
