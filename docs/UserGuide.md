@@ -279,13 +279,14 @@ Examples:
 
 **:information_source: Notes about sorting:**<br>
 
+- Sorting is integrated with the find feature, i.e., sorting clients after using the `find` command will sort the filtered list. To sort the unfiltered list, reset the filter using the `list` command before using the `sort` command.
 - Capitalization of alphabets is ignored, i.e., `Aiken` and `aiken` have the same priority when sorting alphabetically.
 - When sorting by number of properties in the default order, buyers will be listed first since they have no properties.
 
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To sort by number of properties in the default order, but with buyers shifted to the bottom of the list, sort by user type in reverse order, followed by number of properties in default order, i.e., `sort !usertype num_property`
+To sort by number of properties in the default order, but with buyers shifted to the bottom of the list, sort by user type in reverse order, followed by number of properties in default order, i.e., `sort !usertype num_property`.
 </div>
 
 ##Tools
