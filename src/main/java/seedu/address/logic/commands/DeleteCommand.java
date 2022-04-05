@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 
@@ -93,7 +94,7 @@ public class DeleteCommand extends Command {
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditCommand.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
+                    ModelManager.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 }
             }
         }
