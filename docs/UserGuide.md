@@ -66,8 +66,6 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 
 * If an `INDEX` is used, it **must be a positive integer** (i.e. 1, 2, 3…​).
 
-* If multiple `INDEX`s are used, each of the `INDEX` **must be separated by a single whitespace and must be unique** (i.e 1 2 3).
-
 * All commands are case-sensitive.
 
 </div>
@@ -87,11 +85,20 @@ Shows a list of all persons in NUSocials.
 Format: `list`
 
 * All existing persons and upcoming events are automatically rendered when the application is launched.
-* The different tags are listed as follows: yellow for education, teal for modules, orange for CCAs and red for internships.
-* Personal details are listed in the following order: Phone number, Address, Email.
+* The different tags are listed as follows: 
+  * Yellow for education
+  * Teal for modules
+  * Orange for CCAs
+  * Red for internships
+* Personal details are listed in the following order:
+  * Phone number
+  * Address
+  * Email
+
+![Sample Person Card.png](images/screenshots/samplePersonCard.png)
 
 #### Adding a person: `add`
-Adds a person to NUSocials.
+Adds a person to NUSocials and lists all upcoming events.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
@@ -160,7 +167,7 @@ Format: `delete INDEX…​`
 
 * Deletes multiple persons at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed person list.
-* Each index **must be separated by a whitespace**.
+* Each index **must be separated by a whitespace** and **must be unique**.
 
 Constraints:
 * All `INDEX` numbers provided has to be on the currently shown contact list.
@@ -373,6 +380,7 @@ Format: `event INDEX…​ name/EVENT NAME info/EVENT DETAILS d/DATE t/TIME`
 
 * Tags the participating persons to the events based on the specified `INDEX…​`.
 * The index refers to the index number shown in the displayed person list.
+* Each index **must be separated by a whitespace** and **must be unique**.
 
 Constraints:
 * All fields must be provided.
@@ -427,7 +435,7 @@ Format: `cancelevent INDEX…​`
 
 * Deletes multiple events at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed event list.
-* Each index **must be separated by a whitespace**
+* Each index **must be separated by a whitespace** and **must be unique**. 
 
 Constraints:
 * All `INDEX` numbers provided has to be on the currently shown contact list.
