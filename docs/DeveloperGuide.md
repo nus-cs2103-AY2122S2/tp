@@ -9,11 +9,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is based on the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org/)
+* This project is based on the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org/).
 * The following libraries were also used in the project.
-  * [JavaFX](https://openjfx.io/) for the Graphical User Interface (GUI)
-  * [Jackson](https://github.com/FasterXML/jackson) for JSON Parsing
-  * [JUnit5](https://github.com/junit-team/junit5) for Testing
+  * [JavaFX](https://openjfx.io/) for the Graphical User Interface (GUI).
+  * [Jackson](https://github.com/FasterXML/jackson) for JSON Parsing.
+  * [JUnit5](https://github.com/junit-team/junit5) for Testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,14 +23,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **Application Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### Overall System Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -46,12 +46,18 @@ A quick overview of main components and how they interact with each other is pro
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of four major components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+<div markdown="span" class="alert alert-info">
+
+:bulb: **Quick Note:** The following sections will focus on the four major components `UI`, `Logic`, `Model`, `Storage`.
+
+</div>
 
 **How the architecture components interact with each other**
 
@@ -80,14 +86,20 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
-There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. One of the `ListPanel<T>` is a subclass `ScheduleItemListPanel`, which handles the display logic specific to `Appointment` models. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
-
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** One of the `ListPanel<T>` is a subclass `ScheduleItemListPanel`, which specifically handles alternating between displaying `Appointment` and `AppointmentSlot` models.
+
+</div>
 
 The `Card` component of the `UI` class diagram has been omitted from the overall view for brevity. The detailed view of the component is as follows.
 
