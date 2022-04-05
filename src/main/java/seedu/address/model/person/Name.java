@@ -35,7 +35,37 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isFirstLetterCapitalised(test);
+    }
+
+    /**
+     * Validity check to ensure first letter is capitalised
+     * @param test The name to be tested.
+     * @return true if first letter for each name is capitalised.
+     */
+    private static boolean isFirstLetterCapitalised(String test) {
+        String[] name = test.split(" ");
+        return checkEachName(name);
+    }
+
+    /**
+     * Method helper to check for validity of name
+     * @param name An array containing each part of the name.
+     * @return True if name is valid.
+     */
+    private static boolean checkEachName(String[] name) {
+        for (int i = 0; i < name.length; i++) {
+            String word = name[i];
+            if (!Character.isUpperCase(word.charAt(0)) && !Character.isDigit(word.charAt(0))) {
+                return false;
+            }
+            for (int j = 1; j < word.length(); j++) {
+                if (!Character.isLowerCase(word.charAt(j)) && !Character.isDigit(word.charAt(0))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public int compare(Name otherName) {
