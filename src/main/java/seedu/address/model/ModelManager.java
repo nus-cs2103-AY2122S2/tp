@@ -185,6 +185,13 @@ public class ModelManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
 
+    @Override
+    public void deleteFriendFromEvent(Person personToDelete) {
+        for (Event e: getFilteredEventList()) {
+            e.removeFriendNameIfPresent(personToDelete.getName());
+        }
+    }
+
     //=========== Misc ===========================================================================
 
     /**

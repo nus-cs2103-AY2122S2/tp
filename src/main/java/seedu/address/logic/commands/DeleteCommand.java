@@ -68,6 +68,7 @@ public class DeleteCommand extends ByIndexByNameCommand {
         }
         assert(personToDelete != null);
         model.deletePerson(personToDelete);
+        model.deleteFriendFromEvent(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 

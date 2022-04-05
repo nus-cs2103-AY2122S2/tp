@@ -128,4 +128,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    void deleteFriendFromEvent(Person personToDelete) ;
 }
