@@ -3,6 +3,7 @@ package seedu.contax.logic.parser;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,8 +61,35 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
+        return getNonNullCommandOrElseThrow(() -> new ParseException(MESSAGE_UNKNOWN_COMMAND),
+                parseGeneralCommands(commandWord, arguments),
+                parsePersonCommands(commandWord, arguments),
+                parseTagCommands(commandWord, arguments),
+                parseAppointmentCommands(commandWord, arguments),
+                parseCsvCommands(commandWord, arguments)
+        );
+    }
+
+    /**
+     * Iterates through the supplied {@code commands} and returns the first non-null Command.
+     * If all supplied commands are null, it throws an exception supplied by {@code allNullExceptionSupplier}.
+     */
+    private <E extends Exception> Command getNonNullCommandOrElseThrow(Supplier<E> allNullExceptionSupplier,
+                                                                         Command... commands)
+            throws E {
+        for (Command command : commands) {
+            if (command != null) {
+                return command;
+            }
+        }
+        throw allNullExceptionSupplier.get();
+    }
+
+    /** Performs parsing of all person commands. */
+    private Command parsePersonCommands(String commandWord, String arguments) throws ParseException {
+        //@@author kwanhw
+        switch(commandWord) {
         case AddPersonCommand.COMMAND_WORD:
             return new AddPersonCommandParser().parse(arguments);
 
@@ -74,30 +102,47 @@ public class AddressBookParser {
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindPersonCommand.COMMAND_WORD:
             return new FindPersonCommandParser().parse(arguments);
 
         case ListPersonCommand.COMMAND_WORD:
             return new ListPersonCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        //@@author
+        default:
+            return null;
+        }
+    }
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+    /** Performs parsing of all tag commands. */
+    private Command parseTagCommands(String commandWord, String arguments) throws ParseException {
+        //@@author kwanhw
+        switch (commandWord) {
+        case AddTagCommand.COMMAND_WORD:
+            return new AddTagCommandParser().parse(arguments);
 
-        // Import CSV Command
-        case ImportCsvCommand.COMMAND_WORD:
-            return new ImportCsvParser().parse(arguments);
+        case ListTagCommand.COMMAND_WORD:
+            return new ListTagCommand();
 
-        // Export CSV Command
-        case ExportCsvCommand.COMMAND_WORD:
-            return new ExportCsvCommand();
+        case EditTagCommand.COMMAND_WORD:
+            return new EditTagCommandParser().parse(arguments);
 
-        // Appointment commands
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
+
+        case FindByTagCommand.COMMAND_WORD:
+            return new FindByTagCommandParser().parse(arguments);
+
+        //@@author
+        default:
+            return null;
+        }
+    }
+
+    /** Performs parsing of all appointment commands. */
+    private Command parseAppointmentCommands(String commandWord, String arguments) throws ParseException {
+        switch(commandWord) {
+        //@@author sharpstorm
         case AddAppointmentCommand.COMMAND_WORD:
             return new AddAppointmentCommandParser().parse(arguments);
 
@@ -116,28 +161,53 @@ public class AddressBookParser {
         case FreeBetweenCommand.COMMAND_WORD:
             return new FreeBetweenCommandParser().parse(arguments);
 
+        //@@author hanjiyao
         case EditPriorityCommand.COMMAND_WORD:
             return new EditPriorityCommandParser().parse(arguments);
 
-        // Tag management commands
-        case AddTagCommand.COMMAND_WORD:
-            return new AddTagCommandParser().parse(arguments);
-
-        case ListTagCommand.COMMAND_WORD:
-            return new ListTagCommand();
-
-        case EditTagCommand.COMMAND_WORD:
-            return new EditTagCommandParser().parse(arguments);
-
-        case DeleteTagCommand.COMMAND_WORD:
-            return new DeleteTagCommandParser().parse(arguments);
-
-        case FindByTagCommand.COMMAND_WORD:
-            return new FindByTagCommandParser().parse(arguments);
-
+        //@@author wei-xinn
         case FindAppointmentCommand.COMMAND_WORD:
             return new FindAppointmentCommandParser().parse(arguments);
+        //@@author
 
+        default:
+            return null;
+        }
+    }
+
+    /** Performs parsing of all csv commands. */
+    private Command parseCsvCommands(String commandWord, String arguments) throws ParseException {
+        //@@author dandaandaaaaaan
+        switch(commandWord) {
+
+        // Import CSV Command
+        case ImportCsvCommand.COMMAND_WORD:
+            return new ImportCsvParser().parse(arguments);
+
+        // Export CSV Command
+        case ExportCsvCommand.COMMAND_WORD:
+            return new ExportCsvCommand();
+
+        //@@author
+        default:
+            return null;
+        }
+    }
+
+    /** Performs parsing of all commands that do not fall into a specific functional category. */
+    private Command parseGeneralCommands(String commandWord, String arguments) throws ParseException {
+        switch(commandWord) {
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        //@@author hanjiyao
         // Command chaining
         case ChainCommand.COMMAND_WORD:
             return new ChainCommandParser().parse(arguments);
@@ -145,10 +215,10 @@ public class AddressBookParser {
         // Batch Command
         case BatchCommand.COMMAND_WORD:
             return new BatchCommandParser().parse(arguments);
+        //@@author
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            return null;
         }
     }
-
 }

@@ -2,6 +2,7 @@ package seedu.contax.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.logic.commands.BatchCommand.MESSAGE_PREFIX_NOT_EQUALS_ONE;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_END_WITH;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
@@ -29,12 +30,24 @@ public class BatchCommandParser implements Parser<BatchCommand> {
         BatchType batchType = BatchType.EQUALS;
         String searchType;
 
+        int emptyCounter = 0;
+        if (argMultimap.getValue(PREFIX_EQUALS).isEmpty()) {
+            emptyCounter++;
+        }
+        if (argMultimap.getValue(PREFIX_START_WITH).isEmpty()) {
+            emptyCounter++;
+        }
+        if (argMultimap.getValue(PREFIX_END_WITH).isEmpty()) {
+            emptyCounter++;
+        }
+
         if (argMultimap.getValue(PREFIX_SEARCH_TYPE).isEmpty() || argMultimap.getPreamble().isEmpty()
-            || (argMultimap.getValue(PREFIX_EQUALS).isEmpty()
-                && argMultimap.getValue(PREFIX_START_WITH).isEmpty()
-                && argMultimap.getValue(PREFIX_END_WITH).isEmpty())) {
+            || (emptyCounter == 3)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchCommand.MESSAGE_USAGE));
+        }
+        if (emptyCounter != 2) {
+            throw new ParseException(MESSAGE_PREFIX_NOT_EQUALS_ONE);
         }
 
         searchType = argMultimap.getValue(PREFIX_SEARCH_TYPE).get().toLowerCase();

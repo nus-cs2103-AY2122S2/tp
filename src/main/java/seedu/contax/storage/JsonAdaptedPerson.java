@@ -59,6 +59,10 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
     }
 
+    public String getPersonNameString() {
+        return name;
+    }
+
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *

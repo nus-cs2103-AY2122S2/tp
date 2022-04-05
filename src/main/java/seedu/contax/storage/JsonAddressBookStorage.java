@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.DataConversionException;
-import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.commons.util.FileUtil;
 import seedu.contax.commons.util.JsonUtil;
 import seedu.contax.model.ReadOnlyAddressBook;
@@ -51,12 +50,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
             return Optional.empty();
         }
 
-        try {
-            return Optional.of(jsonAddressBook.get().toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
-        }
+        return Optional.of(jsonAddressBook.get().toModelType());
     }
 
     @Override

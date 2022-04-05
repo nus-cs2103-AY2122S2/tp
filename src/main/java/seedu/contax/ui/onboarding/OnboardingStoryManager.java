@@ -20,7 +20,7 @@ import seedu.contax.model.person.Person;
 
 public class OnboardingStoryManager {
 
-    private static final String CLICK_CONTINUE = "\n\nClick any where to continue...";
+    private static final String CLICK_CONTINUE = "\n\nClick anywhere to continue...";
     private static final String CLICK_EXIT = "\n\nClick any where to exit Quick Tour...";
     private static final String INVALID_COMMAND = "Invalid format! "
             + "Follow the format 'addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
@@ -128,7 +128,7 @@ public class OnboardingStoryManager {
                 RESULT_DISPLAY_TOP, COMMAND_BOX,
                 1, "findperson %s", null, (model) -> {
             this.modifyCurrentStepCommand(String.format("findperson %s", OnboardingUtil.getLatestPersonName(model)));
-            return String.format("Type 'findperson %s' and hit enter!" + CLICK_CONTINUE,
+            return String.format("Type 'findperson %s' and hit enter!",
                     OnboardingUtil.getLatestPersonName(model));
         }, false));
 
@@ -157,14 +157,6 @@ public class OnboardingStoryManager {
                 0.2, 0.5, SHOW_COMMAND_BOX,
                 RESULT_DISPLAY_TOP,
                 COMMAND_BOX, 1, "deleteperson 1", null, null, false));
-
-        story.addStory(new OnboardingStep("Great, the record is gone!",
-                0.2, 0.5, OnboardingStory.OverlayOption.SHOW_PERSON_LIST,
-                OnboardingStory.PositionOption.PERSON_LIST_MIDDLE, OnboardingStory.HighlightOption.PERSON_LIST,
-                0, null, (model, commandBox) -> {
-            Person lastPerson = OnboardingUtil.getLatestPerson(model);
-            model.deletePerson(lastPerson);
-            return null; }, null, false));
     }
 
     /**
@@ -189,7 +181,10 @@ public class OnboardingStoryManager {
         story.addStory(new OnboardingStep("Now lets try to list all persons." + CLICK_CONTINUE,
                 0.2, 0.5, ALL, CENTER,
                 CLEAR_ALL,
-                0, null, null, null, false));
+                0, null, (model, commandBox) -> {
+            Person lastPerson = OnboardingUtil.getLatestPerson(model);
+            model.deletePerson(lastPerson);
+            return null; }, null, false));
 
         story.addStory(new OnboardingStep("Type 'listpersons' and hit enter",
                 0.2, 0.5, SHOW_COMMAND_BOX,

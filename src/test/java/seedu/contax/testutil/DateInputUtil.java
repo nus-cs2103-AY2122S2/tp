@@ -10,12 +10,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.contax.commons.core.DateTimeFormats;
+
 /**
  * Provides conversion service from java datetime objects to String inputs for parsing tests.
  */
 public class DateInputUtil {
-    public static final String TIME_INPUT_PATTERN = "HH:mm";
-    public static final String DATE_INPUT_PATTERN = "dd-MM-yyyy";
+    public static final String TIME_INPUT_PATTERN = DateTimeFormats.TIME_24H_DISPLAY_FORMAT;
+    public static final String DATE_INPUT_PATTERN = "dd-MM-uuuu";
 
     /**
      * Returns {@code date} in a string that can be accepted as command inputs.

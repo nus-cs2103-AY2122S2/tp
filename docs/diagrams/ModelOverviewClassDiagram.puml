@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package "Model\n\n" as Model <<Rectangle>>{
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlySchedule" as ReadOnlySchedule
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+
+Class AppointmentSlotList
+Class CompositeObservableList
+
+Package "Address Book Models\n" as AddressBookModels {
+Class AddressBook
+Class Person
+Class Tag
+}
+
+Package "Schedule Models\n" as ScheduleModels {
+Class Schedule
+Class Appointment
+Class AppointmentSlot
+}
+Class ModelManager
+Class UserPrefs
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+AddressBook .up.|> ReadOnlyAddressBook
+Schedule ..up.|> ReadOnlySchedule
+
+ModelManager ..up.|> Model
+Model .left.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlySchedule
+ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" UserPrefs
+ModelManager -right-> "1" Schedule
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+ModelManager -right-> "1" AppointmentSlotList
+ModelManager -right-> "1" CompositeObservableList
+CompositeObservableList -right-> AppointmentSlotList
+ReadOnlySchedule -[hidden]-> CompositeObservableList
+
+Schedule -[hidden]right- Appointment
+Schedule -[hidden]left-> AppointmentSlot
+Tag -[hidden]left- AddressBook
+
+Appointment -> Person
+
+ModelManager --down->"~* filtered" Person
+ModelManager --down->"~* filtered" Tag
+ModelManager --down->"~* filtered" Appointment
+AppointmentSlotList -down>"*" AppointmentSlot
+
+@enduml

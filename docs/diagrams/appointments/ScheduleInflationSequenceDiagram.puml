@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 
 participant ":MainApp" as MainApp #000000
 
@@ -21,7 +21,7 @@ MainApp -> Storage : readSchedule(initialAddressBook)
 activate Storage
 Storage -> ScheduleStorage : readSchedule(initialAddressBook)
 activate ScheduleStorage
-ScheduleStorage -> JsonSerializableStorage : toModelType(initialAddressBook)
+ScheduleStorage -> JsonSerializableStorage : toModelType(initialAddressBook.getPersonList())
 activate JsonSerializableStorage
 JsonSerializableStorage -> JsonSerializableAppointment : toModelType(initialAddressBook)
 activate JsonSerializableAppointment

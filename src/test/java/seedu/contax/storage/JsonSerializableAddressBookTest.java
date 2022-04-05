@@ -1,14 +1,12 @@
 package seedu.contax.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.contax.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.commons.util.JsonUtil;
 import seedu.contax.model.AddressBook;
 import seedu.contax.testutil.TypicalPersons;
@@ -44,18 +42,21 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidPersonFile_recordSkipped() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        assertEquals(0, addressBookFromFile.getPersonList().size());
+        assertEquals(0, addressBookFromFile.getTagList().size());
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicatePersons_recordSkipped() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
-                dataFromFile::toModelType);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        assertEquals(1, addressBookFromFile.getPersonList().size());
+        assertEquals(1, addressBookFromFile.getTagList().size());
     }
 
     @Test
@@ -69,10 +70,10 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_duplicateTags_throwIllegalValueException() throws Exception {
+    public void toModelType_duplicateTags_tagsSkipped() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_TAGS_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
-
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        assertEquals(1, addressBookFromFile.getTagList().size());
     }
 }

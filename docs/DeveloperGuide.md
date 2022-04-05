@@ -9,7 +9,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org/)
+* The following libraries were also used in the project.
+  * [JavaFX](https://openjfx.io/) for the Graphical User Interface (GUI)
+  * [Jackson](https://github.com/FasterXML/jackson) for JSON Parsing
+  * [JUnit5](https://github.com/junit-team/junit5) for Testing
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,9 +34,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** above provides a high-level view of the Application design and structure.
 
-Given below is a quick overview of main components and how they interact with each other.
+A quick overview of main components and how they interact with each other is provided below, while further details can be found in the subsequent sections.
 
 **Main components of the architecture**
 
@@ -51,7 +55,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteperson 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -74,7 +78,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
+
+There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. One of the `ListPanel<T>` is a subclass `ScheduleItemListPanel`, which handles the display logic specific to `Appointment` models. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
 The `UI` component,
 
@@ -82,6 +88,14 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+The `Card` component of the `UI` class diagram has been omitted from the overall view for brevity. The detailed view of the component is as follows.
+
+![Structure of the UI Component](images/UiCardClassDiagram.png)
+
+The structure roughly follows the factory design pattern, with modifications in `ScheduleItemCardFactory` to handle the logic specific to the composition hidden by `ScheduleItemCard`. The factories for `TagCard` and `PersonCard` are implemented as anonymous lambda functions, so they are omitted from the class diagram.
+
+Each `{model}Card` depends on the corresponding `{model}` in the Model component for populating data onto the UI.
 
 ### Logic component
 
@@ -93,13 +107,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPersonCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteperson 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteperson 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -115,23 +129,32 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelOverviewClassDiagram.png" width="600" />
 
+The high-level partial class diagram above shows how the model component is structured, without showing the details of the inner-workings of the `AddressBook` and `Schedule` models. Separate detailed diagrams for each of the `AddressBook` and `Schedule` subcomponents are shown further below.
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the schedule data i.e., all `Appointment` objects (which are contained in a `DisjointAppointmentList` object).
 * store the tag data i.e., all `Tag` objects (which are contained in a `UniqueTagList` object).
+* stores the schedule data i.e., all `Appointment` objects (which are contained in a `DisjointAppointmentList` object).
+* stores the currently 'selected' objects for each of the above types (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<ScheduleItem>` and `ObservableList<Tag>` which can be 'observed'. For example, the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<img src="images/ModelAddressBookClassDiagram.png" width="600" />
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+The class diagram above illustrates how the `AddressBook` subcomponent is structured, including how `Tag` and `Person` are stored internally.
 
-</div>
+<img src="images/ModelScheduleClassDiagram.png" width="600" />
+
+The class diagram above illustrates how the `Schedule` subcomponent is structured. The Schedule subcomponent is structured such that:
+
+* The bulk of the time-related functionality is centralized to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
+* `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
+* The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
+
+For further details of how the `Schedule` subcomponent works together to expose a unified `ObservableList<ScheduleItem>` list, see the [implementation](#implementation) section.
 
 Within the `model` package, there also exists an `IndexedCsvFile` model that helps with the parsing of CSV files for the Import CSV function. However, the class does not maintain any persistent instances, and does not fit within the model component diagram, serving solely as a helper model.
 
@@ -142,8 +165,8 @@ Within the `model` package, there also exists an `IndexedCsvFile` model that hel
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, schedule data and user preference data in json format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `ScheduleStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 Within the `storage` package, there also exists a `CsvManager` class that is a helper that provides file IO related operations for working with CSV files. It is used in the Import CSV or Export CSV features. This class does not fit within the storage component diagram as it does not interact with any other classes, serving solely as a helper class.
@@ -159,12 +182,12 @@ These subsystems are namely the:
 
 * Address Book Subsystem
 * Schedule Subsystem
-* Command Parsing, Processing and Display Subsystem
+* Command Parsing, Processing and Display Subsystem (or Simply the Driver Subsystem)
 
 <img src="images/FunctionalSubsystemDiagram.png" width="600" />
 
 Functionally, the Address Book and Schedule subsystem are near identical copies of each other, with the exception being the type of data being managed and the
-logic specific to each type of data. They serve the the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
+logic specific to each type of data. They serve the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
 
 As such, the detailed descriptions for the Address Book subsystem above can be translated to equivalents for the Schedule subsystem.
 
@@ -214,16 +237,35 @@ A helper method `JSONSerializableAddressBook#addMissingTags()` is implemented to
 
 ![AddMissingTags](images/AddMissingTagsSequenceDiagram.png)
 
-### The Appointments Model
+### The Schedule and Appointment Models
 
-This section will describe the implementation of the models used by the appointments subsystem. An overview is shown in the partial class diagram below.
+This section will describe the implementation of the models used by the Schedule subsystem for storing and managing `Appointment` objects. The overall *design goal* of the Schedule subsystem is to expose a **single** `ObservableList<ScheduleItem>` through the `Model#getScheduleItemList()` method for the Logic and UI Components to access and display. This list includes both `Appointment` and `AppointmentSlot` objects sorted in chronological order so that it can be directly displayed in-order by the UI, unifying the ordering maintenance to the Model component.
+
+An overview is shown in the partial class diagram below.
 
 ![Appointment Models](images/AppointmentModelClassDiagram.png)
+
+#### The `ScheduleItem` Class
+
+The data models `Appointment` and `AppointmentSlot` models inherit from the `ScheduleItem` class. The classes are structured such that common logic related to time are mostly handled in the `ScheduleItem` class, while subclasses `Appointment` and `AppointmentSlot` handle the data-related logic.
+
+![Appointment Models](images/ScheduleItemClassDiagram.png)
+
+In particular, the `ScheduleItem` class implements the `TemporalComparable` interface, which allows the sorting of `Appointment` and `AppointmentSlot` through a unified natural ordering used by both `CompositeObservableList` and `DisjointAppointmentList`.
+
+The time-related methods of note implemented by `ScheduleItem` are:
+
+* Getters `getStartDateTime()` and `getEndDateTime()`
+* Comparator helper method `getComparableDateTime()`
+* Comparable method `compareTo(ScheduleItem)`
+* Helper method `isOverlapping(ScheduleItem)` for checking if the `ScheduleItem` overlaps with another `ScheduleItem`
+  * Two `ScheduleItem` objects are said to be overlapping if `S1.getStartDateTime() < S2.getEndDateTime()` or `A2.getStartDateTime() < A1.getEndDateTime()`
 
 #### The `DisjointAppointmentList` Class
 
 All persistent `Appointment` objects in the system are stored in a `DisjointAppointmentList` object at the lowest level. `DisjointAppointmentList` is a partial implementation of a `List`, supporting only a minimal set of list operations including `add()`, `set()`, `remove()` and `contains()`. It enforces the following constraints upon the `Appointment` objects contained in the list:
-* All `Appointment` objects in the list must not have overlapping periods, that is, for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.startDateTime >= A2.endDateTime` or `A2.startStartTime >= A1.endDateTime`.
+* All `Appointment` objects in the list *must not* have overlapping periods, enforced through the `ScheduleItem#isOverlapping(ScheduleItem)` method.
+  * This means that for all distinct `Appointment` objects `A1` and `A2` in the list, `A1.getStartDateTime() >= A2.getEndDateTime()` or `A2.getStartDateTime() >= A1.getEndDateTime()`.
 * All `Appointment` objects are chronologically sorted by `startDateTime` within the list.
 
 |<img src="images/DisjointAppointmentListStateAllowed.png" width="550" />|
@@ -236,13 +278,13 @@ The no-overlap constraint is enforced at such a low level as a defensive measure
 While chronological ordering can arguably be enforced in `ModelManager` or even the `UI` component, the decision to implement it at such a low level is due to the fact that `DisjointAppointmentList` is the only class that has direct access to the underlying list of appointments.
 Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
 
-In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance. 
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
 
 |<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
 | - |
 |<img src="images/DisjointAppointmentListSortAfter.png" width="550" />|
 
-*Merge Sort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
+The built-in Java *QuickSort* is however still used in the initial construction of the `DisjointAppointmentList`, where there is no such guarantee that **only one** `Appointment` object is out of position.
 
 #### The `Schedule` Wrapper Class
 
@@ -257,6 +299,22 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 #### Defensive `Schedule`
 
 `Schedule` implements the `ReadOnlySchedule` interface, which exposes only the getter method `Schedule#getAppointmentList()` for the underlying `DisjointAppointmentList`. While `ModelManager` maintains a mutable copy of `Schedule`, all other classes accessing `Schedule` through `Model#getSchedule()` use a defensive version of `Schedule` to prevent unintended modifications to the list of `Appointment` objects.
+
+#### Appointment Slot List
+
+The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
+
+Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically, abstracting the underlying dependency to external classes.
+
+#### Appointment and AppointmentSlot List Composition
+
+Since there are 2 separately maintained `ScheduleItem` lists, namely a filtered `DisjointAppointmentList` and `AppointmentSlotList`, there is a need to aggregate them into a single unified list for classes external to the Model component to use. The list must:
+
+* contain all elements from both lists
+* be chronologically sorted
+* be chronologically disjoint
+
+This is done using the `CompositeObservableList`, which takes 2 backing **sorted** `ObservableList` objects and merges them into a single **sorted** `ObservableList`, which is then exposed by the `Model` interface to external classes. `CompositeObservableList` also watches the backing lists for changes, and updates its aggregated list according to any changes made to the underlying list to guarantee the 3 constraints listed above.
 
 ### Appointments Filtering Feature - `appointmentsbetween`
 
@@ -275,6 +333,9 @@ The sequence diagram below illustrates an example of both `Parser` and `UI` acce
 ### Schedule Serialization and Inflation
 
 `Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
+
+The inflation process is also designed to be forgiving, and will skip corrupted records instead of invalidating the entire data file.
+
 Subsequent sections will describe how the dependence on `AddressBook` is handled during the process of serializing and inflating `Schedule`.
 
 #### Serialization of Schedule
@@ -287,11 +348,34 @@ This operation is particularly tricky as the dependency requires the data in `Ad
 
 ![Appointment Filter](images/ScheduleInflationSequenceDiagram.png)
 
+It is important to note the design consideration that the coupling of `AddressBook` to the inflation methods stops at the `JsonScheduleStorage` component, as deeper levels work with the type `List<Person>` instead.
+
 #### Schedule Data as a Separate JSON File
 
 The data for `Schedule`, containing multiple `Appointment` objects is stored in a file separate from `AddressBook`. This is a conscious decision after considering the usability requirement that the JSON data file should be user-editable. Clustering both AddressBook and Schedule data into a single file would have made the JSON file extremely large and cluttered, reducing the ease of editing it manually should the user choose. Separating Schedule and AddressBook allows the user to quickly narrow down the area to edit, making the task slightly easier.
 
 However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
+
+### Edit Appointment Priority Feature - `prioritizeappt`
+
+The priority feature is similar to the edit for `Appointment` but specifically changes the appointment's priority to one of the `Priority` values.
+The `Priority` enum values provide the display name of the enum denoting priority level, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
+### Date Time Input Parsing
+
+The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
+
+A high-level overview of the organization of the package is shown below.
+
+![DateUtil Architecture](images/DateTimeUtilArchitecture.png)
+
+The organization of the time parser mirrors the date parser, and their purposes are as follows:
+
+* `TimeParser` / `DateParser`: Contains the actual parsing logic for determining the input format and the parsing logic to use
+* `TimeParserPatternProvider` / `DateParserPatternProvider`: Contains the Regex patterns required for parsing
+
+A flow of a client class using the parsing services provided by `DateUtil` for a dateTime input is as follows (Note that all classes and methods are static):
+
+![Parser Flow](images/DateTimeParsingSequenceDiagram.png)
 
 ### Result List Model Type Switching Feature
 
@@ -347,6 +431,30 @@ Throughout the onboarding guide, Overlays and Highlights are used to direct the 
 
 ##### The `Overlay` Class
 The Overlay class is implemented using 2 translucent panes binded to the top and bottom of the OnboardingWindow. This makes it possible to create an desired area of focus by leaving only an area uncovered.
+
+### Markdown-like Text Processing
+The `TextStyleHelper` class contains a text processor that processes common text modifications into UI elements. This is mainly used in the `ResultDisplay` UI component, where it shows text output each time a command is executed. In particular, it is used in the error messages, in order to present error messages better.
+
+Example of styled text:
+![StyledTextExample](images/StyledTextExample.png)
+
+It can be easily used in other components of ContaX if the need arises.
+
+It currently supports:
+- Italics
+  - Enclosing text with `*`
+- Bold
+  - Enclosing text with `**`
+- Bold and Italics
+  - Enclosing text with `***`
+- Monospaced
+  - Enclosing text with `` ` ``
+
+This was done by changing the `ResultDisplay` to use a `TextFlow` object, and dynamically generating a List of styled `Text` objects to add to the `ResultDisplay`.
+
+A partial sequence diagram showing the process of how the UI uses the text styler is as follows:
+![MarkdownTextStylerDiagram](images/MarkdownTextStylerDiagram.png)
+
 
 ### Import and Export CSV Features
 
@@ -408,6 +516,7 @@ This extension allows the user to perform range of commands based on `index`. Du
 #### Batch Command
 
 This extension allows the editing of `Person` objects that have attributes matching a specific value. Since this matching requires the objects to already exist, only edit and delete operations can be performed. The command translates the `Person` objects matching the condition into a series of indexes and executes the specified command on them sequentially.
+The field of Batch Command parameters are checked in a defensive way that only one equal, start or end can be accepted.
 
 The sequence diagram is as follows:
 ![Input to Index](images/BatchCommandInputToIndexSequenceDiagram.png)
@@ -528,16 +637,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: Allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information.
 
-
 ### User stories
+
+This section lists the user stories that were both implemented in the system and considered but dropped in favour of other user stories.
+
+#### Implemented User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                     | I want to …​                                                                         | So that I can…​                                                     |
-| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | beginner user                              | see usage instructions and tutorials                                                | remember how to perform certain tasks                                  |
+|----------| ------------------------------------------ | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user on my first run of the App        | see examples and onboarding guides                                                  | quickly learn how to use the application                               |
-| `*    `  | beginner user                              | see examples for all commands that can be used                                      | learn from them and modify them for my needs                           |
+| `* * *`  | beginner user                              | see examples for all commands that can be used                                      | learn from them and modify them for my needs                           |
 | `* * *`  | user                                       | add a new person to my address book                                                 | record their information                                               |
 | `* * *`  | user                                       | list all the people in my address book                                              | see everyone in my address book                                        |
 | `* * *`  | user                                       | find a person by name                                                               | locate details of persons without having to go through the entire list |
@@ -548,307 +659,492 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *  `  | power user                                 | find a person by tags                                                               | easily find subgroups of persons within my address book                |
 | `* * *`  | new user                                   | import data from an Excel compatible format                                         | transfer my current list of persons from an Excel document             |
 | `* *  `  | seasoned user                              | export my address book to an Excel compatible format                                | share my address book in a widely known document format                |
-| `*    `  | power user                                 | link documents to a person                                                          | easily locate related documents for a person                           |
-| `*    `  | power user                                 | unlink documents from a person                                                      | remove documents no longer required for a person                       |
 | `* * *`  | user                                       | create a new appointment in my schedule                                             | keep track of things that I need to do at different times              |
 | `* * *`  | user                                       | list all appointments in my schedule                                                | have an overview of all scheduled events                               |
 | `* *  `  | user                                       | edit the details of an appointment                                                  | respond to any changes in my schedule                                  |
 | `* * *`  | user                                       | delete an appointment                                                               | free up my schedule if events are cancelled                            |
 | `* * *`  | user                                       | find appointments within a range of dates                                           | plan my day(s) ahead of time                                           |
-| `*    `  | user                                       | view all appointments on a calendar interface                                       | get an overview of all my appointments in the month                    |
 | `* *  `  | user                                       | search for appointments by a person's name                                          | find all appointments related to a particular person                   |
-| `* *  `  | user                                       | be reminded of things that are happening on a particular day                        | remember to attend them                                                |
-| `* *  `  | power user                                 | add a to-do list to an appointment                                                  | be reminded to make preparations for that appointment                  |
-| `* *  `  | power user                                 | view the to-do list of an appointment                                               | ensure that I am fully prepared for the appointment                    |
-| `* *  `  | power user                                 | indicate if a task in the to-do list of an appointment is done                      | keep track of the things that are already done                         |
-| `* *  `  | power user                                 | search for appointments by tags and other filters                                   | easily find appointments amongst my large address book                 |
-| `* *  `  | power user                                 | link documents to an appointment                                                    | easily find them to prepare for my appointment                         |
-| `*    `  | seasoned user                              | export contact information to PDF                                                   | easily print mailing labels for contacts                               |
 | `* * *`  | seasoned user                              | directly edit the .json data file to add/edit persons                               | manage the address book faster                                         |
 | `* * *`  | seasoned user                              | export and import the .json file                                                    | easily transfer the data in ContaX across multiple users or devices    |
-| `*    `  | seasoned user                              | export all my data files as backup                                                  | have a copy of the contact list and import it in case of data loss     |
 | `* * *`  | seasoned user                              | enter commands that perform an action on multiple contacts in a single step         | efficiently manage my address book                                     |
 | `* *  `  | seasoned user                              | enter commands that perform an action on multiple appointments in a single step     | efficiently manage my schedule                                         |
-| `*    `  | seasoned user                              | customise the names and format of text-based commands                               | easily remember and use commands I need                                |
 | `* * *`  | seasoned user                              | batch multiple commands together                                                    | perform complex tasks in a single action                               |
-| `*    `  | seasoned user                              | add macros to chain multiple actions together as custom command                     | perform complex actions that I need in 1 command                       |
+
+
+#### User Stories Not Implemented
+
+The following user stories were considered but ultimately not implemented. Some reasons for not implementing are listed below.
+
+* The UI was made intuitive with only 1 text field for input so that there is no ambiguity for the user
+* Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fiels
+* A To-Do list does not add value to the problem that is being tackled
+* Custom commands add significant complexity without much value. It was decided that keeping the commands simple and short would eliminate the need for this entirely.
+
+| Priority | As a …​     | I want to …​                                                     | So that I can…​                                                     |
+|----------|----------------|------------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `*    `  | beginner user  | see usage instructions and tutorials                             | remember how to perform certain tasks                                  |
+| `*    `  | power user     | link documents to a person                                       | easily locate related documents for a person                           |
+| `*    `  | power user     | unlink documents from a person                                   | remove documents no longer required for a person                       |
+| `*    `  | user           | view all appointments on a calendar interface                    | get an overview of all my appointments in the month                    |
+| `* *  `  | user           | be reminded of things that are happening on a particular day     | remember to attend them                                                |
+| `* *  `  | power user     | add a to-do list to an appointment                               | be reminded to make preparations for that appointment                  |
+| `* *  `  | power user     | view the to-do list of an appointment                            | ensure that I am fully prepared for the appointment                    |
+| `* *  `  | power user     | indicate if a task in the to-do list of an appointment is done   | keep track of the things that are already done                         |
+| `* *  `  | power user     | search for appointments by tags and other filters                | easily find appointments amongst my large address book                 |
+| `* *  `  | power user     | link documents to an appointment                                 | easily find them to prepare for my appointment                         |
+| `*    `  | seasoned user  | export contact information to PDF                                | easily print mailing labels for contacts                               |
+| `*    `  | seasoned user  | export all my data files as backup                               | have a copy of the contact list and import it in case of data loss     |
+| `*    `  | seasoned user  | customise the names and format of text-based commands            | easily remember and use commands I need                                |
+| `*    `  | seasoned user  | add macros to chain multiple actions together as custom command  | perform complex actions that I need in 1 command                       |
 
 
 ### Use cases
 
 (For all use cases below, the **System** is the `ContaX` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: List persons**
+Note that since underline is not allowed in markdown, included use cases are **bolded** instead.
+
+#### Person-Related Use Cases
+![Person Use Case](images/UseCaseDiagramPersons.png)
+
+**UC1: List Persons**
 
 **MSS**
 
-1. User requests to list persons
-2. ContaX shows a list of persons
-
+1. User requests to list persons.
+2. ContaX shows a list of persons.
     Use case ends.
 
-**Use case: Add a person**
+**UC2: Add Person**
 
 **MSS**
 
-1. User requests to add a person
-2. ContaX adds the person
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-* 1b. A parameter given is in an invalid format
-
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
-
-    * Use case ends.
-
-* 1c. The person already exists
-
-    * 1c1. ContaX shows an error message indicating that the person already exists.
-
-    * Use case ends.
-
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  ContaX shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  ContaX deletes the person
-
+1. User requests to add a person.
+2. User enters details of the new person.
+3. ContaX adds the new person.
+4. ContaX shows that the person has been added successfully.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 2a. ContaX detects that a required person attribute was not supplied.
+    * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
 
-  Use case ends.
+* 2b. ContaX detects that a supplied attribute has an invalid value.
+    * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 2b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
 
-* 3a. The command given is in an invalid format
+* 2c. ContaX detects that the person already exists.
+    * 2c1. ContaX shows an error message indicating that the person already exists.
+    * Use case ends.<br>&nbsp;
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case resumes at step 2.
-
-**Use case: Edit a person**
+**UC3: Delete Person**
 
 **MSS**
 
-1. User requests to list persons
-2. ContaX shows a list of persons
-3. User requests to modify a specific person and enters new values
-4. ContaX edits the person accordingly
-
+1. User requests to **list persons (UC1)**.
+2. ContaX displays a list of persons.
+3. User requests to delete a person.
+4. User selects the person to delete.
+5. ContaX deletes the person.
+6. ContaX displays a message indicating that the person was successfully deleted.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User filters person by attribute.
+  * 1a1. User **finds person (UC5)**.
+  * Use case resumes from step 2.<br>&nbsp;
 
-  Use case ends.
+* 1b. User filters persons by tag keyword.
+  * 1b1. User **finds person by tag (UC10)**.
+  * Use case resumes from step 2.<br>&nbsp;
 
-* 3a. The command given is in an invalid format
+* 2a. ContaX has no persons to list.
+  * Use case ends.<br>&nbsp;
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 3a. ContaX cannot find the requested person to delete.
+  * 3a1. ContaX shows an error message indicating that no such person exists.
+  * Use case ends.<br>&nbsp;
 
-    * Use case resumes at step 2.
-
-* 3b. A parameter given is in an invalid format
-
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
-
-    * Use case resumes at step 2.
-
-
-**Use case: List appointments**
+**UC4: Edit Person**
 
 **MSS**
 
-1. User requests to list appointments
-2. ContaX shows a list of appointments
-
-    Use case ends.
-
-**Use case: Add an appointment**
-
-**MSS**
-
-1. User requests to add an appointment
-2. ContaX adds the appointment
-
+1. User requests to **list persons (UC1)**.
+2. ContaX shows a list of persons.
+3. User requests to edit person.
+4. User enters details to modify a specific person.
+5. ContaX updates the specified person.
+6. ContaX displays a message indicating that the person was successfully edited.
     Use case ends.
 
 **Extensions**
 
-* 1a. The command given is in an invalid format
+* 1a. User filters person by attribute.
+    * 1a1. User **finds person (UC5)**.
+    * Use case resumes from step 2.<br>&nbsp;
 
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 1b. User filters persons by tag keyword.
+    * 1b1. User **finds person by tag (UC10)**.
+    * Use case resumes from step 2.<br>&nbsp;
 
-    * Use case ends.
-* 1b. A parameter given is in an invalid format
+* 2a. ContaX has no persons to list.
+  * Use case ends.<br>&nbsp;
 
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
+* 4a. ContaX detects that a required person attribute was not supplied.
+    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
 
-    * Use case ends.
+* 4b. ContaX detects that a supplied attribute has an invalid value
+    * 4b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 4b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
 
-* 1c. The appointment timing overlaps with another appointment
+* 5a. ContaX cannot find the requested person to edit.
+    * 5a1. ContaX shows an error message indicating that no such person exists.
+    * Use case ends.<br>&nbsp;
 
-    * 1c1. ContaX shows an error message indicating that the appointment cannot be created due to overlaps.
+* 5b. ContaX detects that a person with the same name already exists.
+    * 5b1. ContaX shows an error message indicating that the person already exists.
+    * Use case ends.<br>&nbsp;
 
-    * Use case ends.
-
-**Use case: Delete an appointment**
-
-**MSS**
-
-1.  User requests to list appointments
-2.  ContaX shows a list of appointments
-3.  User requests to delete a specific appointments in the list
-4.  ContaX deletes the appointment
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The command given is in an invalid format
-
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case resumes at step 2.
-
-**Use case: Edit an appointment**
+**UC5: Find Persons**
 
 **MSS**
 
-1. User requests to list appointments
-2. ContaX shows a list of appointments
-3. User requests to modify a specific appointment and enters new values
-4. ContaX edits the appointment.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The command given is in an invalid format
-
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case resumes at step 2.
-
-* 3b. A parameter given is in an invalid format
-
-    * 3b1. ContaX shows an error message indicating that the given parameter is of invalid format.
-
-    * Use case resumes at step 2.
-
-**Use case: Export address book**
-
-**MSS**
-
-1. User requests to export address book as file for ContaX
-2. ContaX saves a CSV file to the disk according to the format requested by the user
-
+1. User requests to find persons.
+2. User enters details to find person by.
+3. ContaX shows a list of persons that matches the specified details.
    Use case ends.
 
 **Extensions**
 
-* 1a. User requests to export address book as file for Google Contacts
+* 2a. ContaX detects that a required person attribute was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * Use case ends.<br>&nbsp;
 
-  Use case resumes at step 2.
+* 2b. ContaX detects that a supplied attribute has an invalid value
+  * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+  * 2b2. ContaX shows the expected allowed values.
+  * Use case ends.<br>&nbsp;
 
-* 1b. User requests to export address book as file for Microsoft Outlook
+* 3a. ContaX has no persons to list.
+  * 3a1. Use case ends.<br>&nbsp;
 
-  Use case resumes at step 2.
+#### Tag-Related Use Cases
+![Tag Use Case](images/UseCaseDiagramTags.png)
 
-**Use Case: Import CSV file**
+**UC6: List All Tags**
 
 **MSS**
 
-1. User requests to import a CSV file
-2. User selects the CSV file to import
-3. ContactX imports the given CSV file
+1. User requests to list tags.
+2. ContaX shows a list of tags
+    Use case ends.
 
+**UC7: Add Person Tag**
+
+**MSS**
+
+1. User requests to add tag.
+2. User enters details to add tag.
+3. ContaX adds new tag.
+4. ContaX shows that the appointment has been added successfully.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that the required tag attributed was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that invalid characters were supplied.
+  * 2b1. ContaX shows an error message indicating that an invalid character was found.
+  * 2b2. ContaX shows the expected allowed values.
+  * Use case ends.<br>&nbsp;
+
+* 3a. ContaX detects that the tag already exists.
+  * 3a1. ContaX shows an error message indicating that the tag already exists in the system.
+  * Use case ends.<br>&nbsp;
+
+**UC8: Edit Person Tag**
+
+**MSS**
+
+1. User **lists all tags (UC6)**.
+2. User requests to edit tag.
+3. User enters details to edit tag.
+4. ContaX updates the specified tag.
+5. ContaX shows that the tag has been edited successfully.
+   Use case ends.
+
+**Extensions**
+
+* 3a. ContaX detects that the required tag attributed was not supplied.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
+
+* 3b. ContaX detects that invalid characters were supplied.
+    * 3b1. ContaX shows an error message indicating that an invalid character was found.
+    * 3b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
+
+* 4a. ContaX cannot find the requested tag to edit.
+  * 4a1. ContaX shows an error message indicating that no such tag exists.
+  * Use case ends.<br>&nbsp;
+
+* 4b. ContaX detects that the updated tag already exists.
+  * 4b1. Contax shows an error message indicating that the tag already exists in the system.
+  * Use case ends.<br>&nbsp;
+
+**UC9: Delete Person Tag**
+
+**MSS**
+
+1. User **list All Tags (UC6)**.
+2. User requests to delete tag.
+3. User enters details to delete tag.
+4. ContaX deletes the specified tag.
+5. ContaX shows that the tag has been deleted successfully.
+   Use case ends.
+
+**Extensions**
+
+* 3a. ContaX detects that the required tag attributed was not supplied.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
+
+* 4a. ContaX cannot find the requested tag to delete.
+    * 4a1. ContaX shows an error message indicating that no such tag exists.
+    * Use case ends.<br>&nbsp;
+
+**UC10: Find Persons By Tag**
+
+**MSS**
+
+1. User requests to find persons by tag.
+2. User enters keyword to search by.
+3. ContaX shows a list of persons whose tags contain the specified keyword.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that the keyword was not supplied.
+  * 2a1. ContaX shows an error message prompting for the keyword.
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that invalid characters were supplied.
+    * 2b1. ContaX shows an error message indicating that an invalid character was found.
+    * 2b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
+
+* 3a. ContaX has no persons to list.
+  * Use case ends.<br>&nbsp;
+
+#### Appointment-Related Use Cases
+![Appointment Use Case](images/UseCaseDiagramAppointments.png)
+
+**UC11: List All Appointments**
+
+**MSS**
+
+1. User requests to list appointments.
+2. ContaX shows a list of all appointments.<br><br>
+   Use case ends.
+
+**UC12: Add Appointment**
+
+**MSS**
+
+1. User requests to add an appointment.
+2. User enters details of the new appointment.
+3. ContaX saves the new appointment.
+4. ContaX shows that the appointment has been added successfully.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that a required appointment attribute was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.<br>&nbsp;
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that a supplied attribute has an invalid value.
+  * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+  * 2b2. ContaX shows the expected allowed values.<br>&nbsp;
+  *  Use case ends.<br>&nbsp;
+
+* 2c. ContaX detects that the appointment details supplied overlaps with another appointment already in ContaX.
+  * 2c1. ContaX shows an error message indicating that the appointment cannot be created due to overlapping appointments.<br>&nbsp;
+  * Use case ends.<br>&nbsp;
+
+**UC13: Delete Appointment**
+
+**MSS**
+
+1. User **lists all appointments (UC11)**.
+2. ContaX displays a list of appointments.
+3. User requests to delete a specific appointments in the list.
+4. ContaX deletes the appointment.
+5. ContaX displays a message indicating that the appointment was deleted.<br><br>
     Use case ends.
 
 **Extensions**
+
+* 1a. User filters appointments by condition.
+  * 1a1. User **finds appointments (UC15)**<br>&nbsp;
+  * Use Case resumes from step 2.<br>&nbsp;
+
+* 1b. User lists appointments with available slots in the schedule.
+  * 1b1. User **finds schedule slots (UC16)**<br>&nbsp;
+  * 1b2. Use Case resumes from step 2.<br>&nbsp;
+
+* 2a. ContaX has no appointments to list.<br>&nbsp;
+  * Use case ends.<br>&nbsp;
+
+* 3a. ContaX cannot find the requested appointment to delete.
+    * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
+
+**UC14: Edit Appointment**
+
+**MSS**
+
+1. User **lists all appointments (UC11)**.
+2. ContaX displays a list of appointments.
+3. User requests to modify a specific appointment.
+4. User enters the new attributes for the appointment.
+5. ContaX saves the modified appointment.
+6. ContaX displays a message indicating that the appointment was successfully edited.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. User filters appointments by condition.
+    * 1a1. User **finds appointments (UC15)**<br>&nbsp;
+    * Use Case resumes from step 2.<br>&nbsp;
+
+* 1b. User lists appointments with available slots in the schedule.
+    * 1b1. User **finds schedule slots (UC16)**<br>&nbsp;
+    * 1b2. Use Case resumes from step 2.<br>&nbsp;
+
+* 2a. ContaX has no appointments to list.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
+
+* 3a. ContaX cannot find the requested appointment to edit.
+    * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
+
+* 4a. ContaX detects that a supplied attribute has an invalid value.
+    * 4a1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 4a2. ContaX shows the expected allowed values.<br>&nbsp;
+    *  Use case resumes at step 2.<br>&nbsp;
+
+* 4b. ContaX detects that the appointment details supplied overlaps with another appointment already in ContaX.
+    * 4b1. ContaX shows an error message indicating that the appointment cannot be edited due to overlapping appointments.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
+
+**UC15: Find Appointments**
+
+**MSS**
+
+1. User decides to search by keyword.
+2. User enters a keyword to search by.
+3. ContaX shows a list of all appointments with names containing the keyword.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. User decides to search for appointments by date range.
+    * 1a1. User enters the start and end date to search between.
+    * 1a2. ContaX shows a list of all appointments between the specified start and end date.<br>&nbsp;
+    * Use Case ends.<br>&nbsp;
+
+* 2a. User searches by a specific appointment attribute.
+    * 2a1. User enters the attribute to search by.
+    * 2a2. ContaX shows a list of all appointments with keyword contained in the specified attribute.<br>&nbsp;
+    * Use Case ends.<br>&nbsp;
+
+**UC16: Find Schedule Slots**
+
+**MSS**
+
+1. User enters the properties of the slots to search for and a time period to search between.
+2. ContaX shows a list of appointments within the time period.
+3. ContaX shows a list of all slots in the schedule within the time period.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters invalid slot properties.
+    * 1a1. ContaX shows an error message that the properties entered are invalid.<br>&nbsp;
+    * Use Case ends.<br>&nbsp;
+
+**UC17: Edit Appointment Priority**
+
+**MSS**
+
+1. User **lists all appointments (UC11)**.
+2. ContaX displays a list of appointments.
+3. User requests to modify the priority level of a specific appointment.
+4. User enters the new priority for the appointment.
+5. ContaX saves the modified appointment.
+6. ContaX displays a message indicating that the appointment was successfully edited.<br><br>
+   Use case ends.
+
+**Extensions**
+
+* 1a. User filters appointments by condition.
+    * 1a1. User **finds appointments (UC15)**<br>&nbsp;
+    * Use Case resumes from step 2.<br>&nbsp;
+
+* 1b. User lists appointments with available slots in the schedule.
+    * 1b1. User **finds schedule slots (UC16)**<br>&nbsp;
+    * 1b2. Use Case resumes from step 2.<br>&nbsp;
+
+* 2a. ContaX has no appointments to list.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
+
+* 3a. ContaX cannot find the requested appointment to edit.
+    * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
+
+* 4a. User enters invalid priority.
+    * 4a1. ContaX shows an error message indicating that the supplied priority is invalid<br>&nbsp;
+    * Use case resumes at step 2.<br>&nbsp;
+
+#### Import/Export CSV UseCases
+
+![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
+
+**UC18: Export CSV File**
+
+**MSS**
+
+1. User requests to export address book as file for ContaX
+2. ContaX saves a CSV file to the disk<br><br>
+   Use case ends.
+
+**UC19: Import CSV file**
+
+**MSS**
+
+1. User requests to import a CSV file from a specified file path
+2. ContactX imports the contacts from given CSV file<br><br>
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters custom column definitions<br>&nbsp;
+    * Use case resumes at step 2<br>&nbsp;
 
 * 2a. Invalid CSV file selected
-
-    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.
-
-    * Use case ends.
-
-**Use case: User requests to perform a batch command**
-
-**MSS**
-
-1. User requests to perform a batch command which includes a condition
-2. ContaX executes the command based on the given condition
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-* 1b. There are no entries that matches the given condition
-
-    * Use case ends.
-
-**Use case: User requests to perform a command on a specified range**
-
-**MSS**
-
-1. User requests to perform a command to a specified range
-2. ContaX executes the command based on the given range
-
-    Use case ends.
-
-**Extensions**
-
-* * 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-**Use case: User requests to chain multiple commands**
-
-**MSS**
-
-1. User requests to perform multiple commands by chaining them
-2. ContaX starts from the first command
-3. ContaX executes the command
-4. If there is a subsequent chained command, ContaX repeats from step 3 on the next command
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
+    * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
+    * Use case ends.<br>&nbsp;
+    
 
 ### Non-Functional Requirements
 
@@ -870,6 +1166,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Address Book**: The part of ContaX that keeps track of a list of Persons
 * **Schedule**: The part of ContaX that keeps track of Appointments
+* **CSV**: Comma-separated values. Common file format used for data spreadsheets, compatible with Microsoft Excel and other similar spreadsheet applications.
+* **Onboarding Guide**: The quick start guide to ContaX
 
 --------------------------------------------------------------------------------------------------------------------
 

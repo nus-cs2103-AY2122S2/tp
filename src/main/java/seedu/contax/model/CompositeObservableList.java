@@ -66,22 +66,27 @@ public class CompositeObservableList<T extends Comparable<? super T>> {
         int list2Index = 0;
         ArrayList<T> mergedList = new ArrayList<>(backingList1.size() + backingList2.size());
 
-        while (list1Index < backingList1.size() && list2Index < backingList2.size()) {
-            if (backingList1.get(list1Index).compareTo(backingList2.get(list2Index)) < 0) {
-                mergedList.add(backingList1.get(list1Index));
-                list1Index++;
-            } else {
-                mergedList.add(backingList2.get(list2Index));
-                list2Index++;
+        try {
+            while (list1Index < backingList1.size() && list2Index < backingList2.size()) {
+                if (backingList1.get(list1Index).compareTo(backingList2.get(list2Index)) < 0) {
+                    mergedList.add(backingList1.get(list1Index));
+                    list1Index++;
+                } else {
+                    mergedList.add(backingList2.get(list2Index));
+                    list2Index++;
+                }
             }
-        }
-        for (; list1Index < backingList1.size(); list1Index++) {
-            mergedList.add(backingList1.get(list1Index));
-        }
-        for (; list2Index < backingList2.size(); list2Index++) {
-            mergedList.add(backingList2.get(list2Index));
-        }
+            for (; list1Index < backingList1.size(); list1Index++) {
+                mergedList.add(backingList1.get(list1Index));
+            }
+            for (; list2Index < backingList2.size(); list2Index++) {
+                mergedList.add(backingList2.get(list2Index));
+            }
 
-        scheduleItemList.setAll(mergedList);
+            scheduleItemList.setAll(mergedList);
+        } catch (IndexOutOfBoundsException ignored) {
+            // Iterator changed during merging, abort the merge. A new call to this function is on the way
+            // since the list has changed.
+        }
     }
 }

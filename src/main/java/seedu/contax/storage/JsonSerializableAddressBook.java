@@ -2,12 +2,14 @@ package seedu.contax.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.commons.exceptions.IllegalValueException;
 import seedu.contax.model.AddressBook;
 import seedu.contax.model.ReadOnlyAddressBook;
@@ -22,6 +24,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TAG = "Tag list contains duplicate tag(s).";
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -49,26 +52,32 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
+    public AddressBook toModelType() {
         AddressBook addressBook = new AddressBook();
-
         for (JsonAdaptedTag jsonAdaptedTag: tags) {
-            Tag tag = jsonAdaptedTag.toModelType();
-            if (addressBook.hasTag(tag)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            try {
+                Tag tag = jsonAdaptedTag.toModelType();
+                if (addressBook.hasTag(tag)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+                }
+                addressBook.addTag(tag);
+            } catch (IllegalValueException e) {
+                logger.info("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
             }
-            addressBook.addTag(tag);
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            try {
+                Person person = jsonAdaptedPerson.toModelType();
+                if (addressBook.hasPerson(person)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                }
+                // Load tags that were not added from tag list
+                addMissingTags(person, addressBook);
+                addressBook.addPerson(person);
+            } catch (IllegalValueException e) {
+                logger.info("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
             }
-
-            // Load tags that were not added from tag list
-            addMissingTags(person, addressBook);
-            addressBook.addPerson(person);
         }
         return addressBook;
     }

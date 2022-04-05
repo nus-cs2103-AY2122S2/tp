@@ -3,9 +3,11 @@ layout: page
 title: User Guide
 ---
 
-ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, allowing you to shift your focus to other more important things.
+ContaX is a **desktop application for managing your Contacts and Schedule**. It is a powerful tool *optimized for use via a Command Line Interface* (CLI), while incorporating Graphical User Interface (GUI) elements to make it user-friendly. If you are able to type fast, ContaX is capable of helping you manage your contacts and schedule more efficiently than traditional GUI applications, enabling you to shift your focus to other more important things.
 
 Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, and a *Schedule* for managing Appointments.
+
+ContaX is designed with versatility in mind, so it does not place unnecessarily strict constraints on your inputs. It accepts all inputs, even those that remotely have a chance of being valid. For more details, see the [Global Input Constraints](#global-input-constraints) section.
 
 * Table of Contents
 {:toc}
@@ -27,7 +29,7 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
      - Navigate to your _home folder_ on Terminal <br>
      - Launch the application using the command `java -jar ContaX.jar`. <br>
    </div>
-  
+
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -50,29 +52,29 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Global Input Constraints
+
+ContaX is generally designed to impose as little constraints on inputs as possible. However, there still exists certain limitations that apply throughout all features.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+* **INTEGER** inputs are limited to a maximum value of `2,147,483,647`.<br>
+  Any value above this limit will not be considered an integer.
+* Leading and Trailing **Whitespaces** are ignored for ***ALL*** user inputs.<br>
+  e.g. `  My Tag   &nbsp;` is treated simply as `My Tag`.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+</div>
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+### Displayed Indexes
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+The displayed index of a `Person`, `Appointment` or `Tag` refers to the number displayed beside the record in the GUI.
+Only positive [integers](#global-input-constraints) are recognised as a **displayed index**.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+![Displayed Person Index Location](images/DisplayedIndex.png)
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+<div markdown="block" class="alert alert-warning">
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+:rotating_light: **Warning:** The displayed index for a record may change with find and list commands. Always check the displayed index before using it in a command.
 
 </div>
 
@@ -80,12 +82,12 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 <div markdown="block" class="alert alert-secondary">
 
-**:information_source: This section details the format(s) that date and time inputs are expected to be in.**<br>
+**:information_source: Only these format(s) for date and time inputs are allowed.**<br>
 
 * All date inputs must conform to one of the following formats:
-  * `dd-mm-yyyy`
-  * `dd/mm/yyyy`
-  * `dd MMM yyyy` with the date components appearing in any order
+  * `dd-mm-yyyy` or `dd/mm/yyyy`, or any combination of `-` and `/` separators
+  * `dd MMM yyyy` with the date components appearing in any order.<br>
+    If a component appears more than once, the date is considered invalid.
 
 | Field | Description |
 | - | - |
@@ -107,13 +109,32 @@ Broadly speaking, ContaX consists of an *Address Book* for managing Contacts, an
 
 </div>
 
-### Viewing help : `help`
+## Features
 
-Displays a window with the commands' usage and a link to access the user guide.
+<div markdown="block" class="alert alert-info">
 
-![help message](images/helpMessage.png)
+**:information_source: Notes about the command format:**<br>
 
-Format: `help`
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
+  See the [Global Input Constraints](#global-input-constraints) section for restrictions on the parameter supplied.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
 
 ### Onboarding guide
 
@@ -135,6 +156,8 @@ The onboarding guide will cover the following:
 - Delete person
 - List persons
 
+:rotating_light: **Important Note:** The order of keywords for `findperson` is only fixed for the Onboarding Guide.
+
 ### Viewing help : `help`
 
 Shows the commands available and the syntax for all of them. It also includes a link to this user guide for further reading.
@@ -142,6 +165,12 @@ Shows the commands available and the syntax for all of them. It also includes a 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Clearing all entries : `clear`
+
+Clears all contacts and tags from the address book and all appointments from the schedule.
+
+Format: `clear`
 
 ### Adding a person: `addperson`
 
@@ -152,6 +181,14 @@ Format: `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+
+| Parameter      | Constraints                                                                                                                                                                                                                                                                                                                |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Must **not be blank**, and contain only alphanumeric characters and spaces                                                                                                                                                                                                                                                 |
+| `PHONE_NUMBER` | Must be **at least 3 digits long**. May optionally start with a country code<br>E.g. `1234` and `+6512345678` are both valid                                                                                                                                                                                               |
+| `EMAIL`        | Must follow the format `local-part@domain`.<br> `local-part` must only contain **alphanumeric characters** and the symbols `+_.-`.<br> `domain` is made up of 1 or more parts separated by periods, and must end with a part that is at least 2 characters long.<br> E.g. `john@piserver` and `john2@email.com` are valid. |
+| `ADDRESS`      | No constraints                                                                                                                                                                                                                                                                                                             |
+| `TAG`          | Must contain only **alphanumeric characters** and spaces                                                                                                                                                                                                                                                                   |
 
 Examples:
 * `addperson n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -169,12 +206,21 @@ Edits an existing person in the address book.
 
 Format: `editperson INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the [index number](#displayed-indexes) shown in the **displayed person list**. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* If the parameters are specified, they must conform to the following constraints:
+
+| Parameter      | Constraints                                                                                                                                                                                                                                                                                                                |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Must **not be blank**, and contain only alphanumeric characters and spaces                                                                                                                                                                                                                                                 |
+| `PHONE_NUMBER` | Must be **at least 3 digits long**. May optionally start with a country code<br>E.g. `1234` and `+6512345678` are both valid                                                                                                                                                                                               |
+| `EMAIL`        | Must follow the format `local-part@domain`.<br> `local-part` must only contain **alphanumeric characters** and the symbols `+_.-`.<br> `domain` is made up of 1 or more parts separated by periods, and must end with a part that is at least 2 characters long.<br> E.g. `john@piserver` and `john2@email.com` are valid. |
+| `ADDRESS`      | No constraints                                                                                                                                                                                                                                                                                                             |
+| `TAG`          | Must contain only **alphanumeric characters** and spaces                                                                                                                                                                                                                                                                   |
 
 Examples:
 *  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -212,18 +258,12 @@ Deletes the specified person from the address book.
 Format: `deleteperson INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the [index number](#displayed-indexes) shown in the **displayed person list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `listpersons` followed by `deleteperson 2` deletes the 2nd person in the address book.
 * `findperson Betsy` followed by `deleteperson 1` deletes the 1st person in the results of the `findperson` command.
-
-### Clearing all entries : `clear`
-
-Clears all contacts and tags from the address book and all appointments from the schedule.
-
-Format: `clear`
 
 ### Creating a Tag : `addtag`
 
@@ -245,7 +285,7 @@ Edits an existing tag in ContaX.
 Format: `edittag INDEX t/NEW_TAGNAME`
 
 * All parameters **must** be specified.
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed tag list**.
 * Changes the name of a tag at `INDEX` to `NEW_TAGNAME`.
 * An error will be thrown if either `INDEX` is invalid or `NEW_TAGNAME` already exists in ContaX.
 * An error will be thrown if the tag at `INDEX` has the same name as `NEW_TAGNAME`
@@ -269,7 +309,7 @@ Deletes the specified tag in ContaX.
 
 Format: `deletetag INDEX`
 
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed tag list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed tag list**.
 * When the tag is deleted, contacts that contain this tag will have the tag removed.
 
 Examples:
@@ -292,17 +332,20 @@ Examples:
 
 ### Creating an Appointment : `addappt`
 
-Creates an Appointment in the Schedule.
+Creates an Appointment in the Schedule with the specified parameters.
 
 Format: `addappt n/NAME d/DATE t/TIME l/DURATION [p/PERSON]`
 
-* Creates a new appointment with the specified parameters.
 * All parameters except `PERSON` **must** be specified.
-* The `NAME` parameter must be **non-empty**, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`.
-* The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive integer**.
-* The `PERSON` parameter, if specified, **must be a positive integer**, and refers to the index number shown in the displayed person list.
+
+| Parameter  | Description                              | Constraints                                                                                                                               |
+|------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`                             |
+| `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                               |
+| `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                               |
+| `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                               |
+| `PERSON`   | A person associated with the appointment | If specified, **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed person list** |
+
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the appointment **overlaps** with another appointment.
 </div>
@@ -328,7 +371,7 @@ Deletes an Appointment previously created in the Schedule.
 Format: `deleteappt INDEX`
 
 * Deletes the appointment that is at `INDEX` in the displayed appointment list.
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* `INDEX` **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 
 Examples:
 * `deleteappt 2` Deletes the *second* appointment in the list of appointments.
@@ -340,14 +383,18 @@ Edits an Appointment previously created in the Schedule.
 Format: `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [l/DURATION] [p/PERSON]`
 
 * Edits the appointment that is at `INDEX` in the displayed appointment list, setting the supplied parameter(s) to the supplied value(s).
-* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `INDEX` parameter **must be a positive integer**, and refers to the [index number](#displayed-indexes) shown in the **displayed appointment list**.
 * At least one of the optional parameters must be supplied, otherwise the command will be ignored.
 * If supplied, the optional parameters must conform to the following rules:
-    * The `NAME` parameter must be non-empty, and can only contain alphanumeric characters and the symbols `.,!@#$%&*()-_=+`..
-    * The `DATE` parameter denotes the starting date, and **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-    * The `TIME` parameter denotes the starting time, and **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-    * The `PERSON` parameter must be a positive integer or the String `none`. If a positive integer is provided, it refers to the index number shown in the displayed person list. The String `none` is used to dissociate the person associated to the appointment.
-    * The `DURATION` parameter is the duration of the appointment in *minutes*, and **must be a positive number**.
+
+| Parameter  | Description                              | Constraints                                                                                                                                                                                                                                                                                                     |
+|------------|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`     | The appointment's name                   | Must be **non-empty**, and can only contain alphanumeric characters, spaces and the symbols `.,!@#$%&*()-_=+`                                                                                                                                                                                                   |
+| `DATE`     | The appointment's starting date          | Must conform to the **[Common Date Formats](#common-date-and-time-syntax)**                                                                                                                                                                                                                                     |
+| `TIME`     | The appointment's starting time          | Must conform to the **[Common Time Formats](#common-date-and-time-syntax)**                                                                                                                                                                                                                                     |
+| `DURATION` | The appointment's duration in *minutes*  | Must be a **positive [integer](#global-input-constraints)**                                                                                                                                                                                                                                                     |
+| `PERSON`   | A person associated with the appointment | Must be a **positive [integer](#global-input-constraints)** or the String `none`.<br> If a **positive integer** is provided, it refers to the [index number](#displayed-indexes) shown in the **displayed person list**. <br> The String `none` is used to dissociate the person associated to the appointment. | 
+
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
 The operation will fail if the modified appointment **overlaps** with another appointment.
 </div>
@@ -363,18 +410,23 @@ It will list all appointments that contain any sub-range of the provided period.
 
 Format: `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
-* The starting time **must be before** the ending time.
-* The `STARTDATE` parameter denotes the *starting date* of the period.
-  * `STARTDATE` defaults to **Today** if unspecified.
-* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
-  * `STARTTIME` defaults to `00:00` if unspecified.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-  * No upper limit will be enforced if `ENDDATE` is unspecified
-* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
-  * `ENDTIME` defaults to `23:59` if unspecified.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `ENDTIME` is specified, then `ENDDATE` must be specified.
+<div markdown="span" class="alert alert-info">
+
+:information_source: If `ENDTIME` is specified, then `ENDDATE` must be specified.
+
+</div>
+
+| Parameter   | Description                                             | Default Value    |
+|-------------|---------------------------------------------------------|------------------|
+| `STARTDATE` | The *starting date* of the period                       | *Today*          |
+| `STARTTIME` | The *starting time* on the starting date for the period | `00:00`          |
+| `ENDDATE`   | The *ending date* of the period                         | *No upper limit* |
+| `ENDTIME`   | The *ending time* on the ending date for the period     | `23:59`          |
+
+
+* The start of the period **must be before or equals to** the end of the period.
+* All specified parameters **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
+
 
 Example:
 * `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00` Lists all appointments from *21 October 2022, 12 PM* to *23 October 2022, 5PM*.
@@ -391,19 +443,22 @@ An appointment of the specified minimum duration can be inserted into each of th
 
 Format: `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]`
 
-* The starting time **must be before** the ending time.
-* The `STARTDATE` parameter denotes the *starting date* of the period.
-  * `STARTDATE` defaults to **Today** if unspecified.
-* The `STARTTIME` parameter denotes the *starting time* on the starting date for the period.
-  * `STARTTIME` defaults to `00:00` if unspecified.
-* The `ENDDATE` parameter denotes the *ending date* of the period.
-  * No upper limit will be enforced if `ENDDATE` is unspecified
-* The `ENDTIME` parameter denotes the *ending time* on the ending date for the period.
-  * `ENDTIME` defaults to `23:59` if unspecified.
-* Both `STARTDATE` and `ENDDATE` **must conform to the [Common Date Formats](#common-date-and-time-syntax)**.
-* Both `STARTTIME` and `ENDTIME` **must conform to the [Common Time Formats](#common-date-and-time-syntax)**.
-* If `ENDTIME` is specified, then `ENDDATE` must be specified.
-* The `DURATION` parameter is the minimum duration of the slots listed in *minutes*, and **must be a positive number**.
+<div markdown="span" class="alert alert-info">
+
+:information_source: If `ENDTIME` is specified, then `ENDDATE` must be specified.
+
+</div>
+
+| Parameter   | Description                                                                                                               | Default Value      |
+|-------------|---------------------------------------------------------------------------------------------------------------------------|--------------------|
+| `STARTDATE` | The *starting date* of the period                                                                                         | *Today*            |
+| `STARTTIME` | The *starting time* on the starting date for the period                                                                   | `00:00`            |
+| `ENDDATE`   | The *ending date* of the period                                                                                           | *No upper limit*   |
+| `ENDTIME`   | The *ending time* on the ending date for the period                                                                       | `23:59`            |
+| `DURATION`  | the minimum duration of the slots listed in *minutes*.<br> It **must be a positive [integer](#global-input-constraints)** | **Required Field** |
+
+* The start of the period **must be before or equals to** the end of the period.
+* If any of `STARTDATE`, `STARTTIME`, `ENDDATE` or `ENDTIME` are specified, they **must conform to the [Common Date and Time Formats](#common-date-and-time-syntax)**.
 
 Example:
 * `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60` Lists all empty slots in the schedule that are at least *60 minutes (1 hour)* long between *21 October 2022, 12 PM* and *23 October 2022, 5PM*.
@@ -412,6 +467,47 @@ Example:
 **Example Output:**
 
 ![Appointments Between Wireframe](images/FreeBetween.png)
+
+### Edit Priority Level of an Appointment : `prioritizeappt`
+
+Edits priority level of an Appointment previously created in the Schedule.
+
+Format: `prioritizeappt INDEX pri/PRIORITY`
+
+* Edits the priority of appointment that is at `INDEX` in the displayed appointment list, setting the priority to the supplied value.
+* The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `PRIORITY` parameter must be non-empty, and can only contain below values (case-insensitive):
+  * High
+  * Medium
+  * Low
+  * None
+
+Examples:
+* `prioritizeappt 6 pri/high` Edits the *6th* appointment priority level in the list of appointments to have a status of *high*.
+* `prioritizeappt 2 pri/none` Removes the *second* appointment priority and set status to *none*.
+
+**Example Output:**
+
+![Prioritize Appointments](images/Prioritizeappt.png)
+
+### Finding Appointment by Name or Person Name : `findappt`
+
+Finds appointments with name or Person name that contains the given keyword.
+
+Format: `findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]`
+
+* The search is case-insensitive. e.g `Meeting` will match `meeting`
+* The order of the keywords does not matter. e.g. `Meeting Here` will match `Here Meeting`
+* Only full words will be matched e.g. `Meeting` will not match `Meetings`
+* Appointments matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Meeting Here` will return `Meeting There`, `Meeting Now`
+* If `by/person` is included, the appointments will be matched based on the person name.
+* If `by/name` is included, the appointments will be matched based on the appointment name.
+* If neither `by/name` nor `by/person` are specified, the appointments will to default to match based on the appointment name.
+
+Example:
+* `findappt Meeting` Lists all appointments with name that contains `Meeting`.
+* `findappt Johnny by/person` Lists all appointments with person name that contains `Johnny`.
 
 ### Saving the data
 
@@ -423,7 +519,7 @@ Appointment data are saved in the hard disk automatically after any command that
 Exports the current list of contacts as a CSV file that can be imported through ContaX or viewed separately via Microsoft Excel
 
 Format: `exportcsv`
-* Exports CSV as per ContaX format. This file can be imported by other instances of ContaX
+* Exports CSV as per ContaX format. This file can be imported by other instances of ContaX.
 * File will be saved on the directory `[JAR file location]/data/addressbook.csv`
 
 Examples:
@@ -433,7 +529,11 @@ Examples:
 ContaX contacts and appointments data are saved in the hard disk automatically after any command that changes contact data in JSON format at `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/schedule.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ContaX will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes the format invalid, ContaX wil try to read valid objects and import, and will skip objects with attributes that have invalid formats (e.g. having alphabets in a Phone number), and any duplicate Persons.
+
+However, if the JSON formatting is broken, a blank AddressBook/Schedule will be loaded instead.
+
+Refer to the [FAQ](#faq) for more details
 </div>
 
 ### Importing data
@@ -441,25 +541,26 @@ If your changes to the data file makes its format invalid, ContaX will discard a
 In order to import data from external sources into ContaX, there are the following options:
 
 * Replacing `addressbook.json` or `schedule.json` file with a valid ContaX formatted generated by another system with ContaX
-* [Simple CSV import (GUI-based option)](#simple-csv-import)
-* [Advanced CSV import (Command based)](#advanced-csv-import--importcsv)
+* [Importing CSV Files](#importing-csv-files-importcsv)
 
 ### Importing CSV Files: `importcsv`
 
-Format: `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]`
+Format: `importcsv f/FILEPATH [n/COLUMN_NAME] [p/COLUMN_PHONE] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]`
 
 * Imported contacts will be appended to the current address book.
 * Each argument represents the corresponding attribute for a person.
-  * n = Name
-  * p = Phone
-  * e = Email
-  * a = Address
-  * t = Tagged
+  * `COLUMN_NAME` - specifies column number for Name
+  * `COLUMN_PHONE` - specifies column number for Phone
+  * `COLUMN_EMAIL` - specifies column number for Email
+  * `COLUMN_ADDRESS` - specifies column number for Address
+  * `COLUMN_TAGS` - specifies column number for Tags
 * If any argument is omitted, it will follow the next available column based on the default sequence of
-  Name - Phone - Email - Address - Tagged
-* This user guide will be updated later on with templates for importing for the following contact csv formats:
-  * Google Contacts
-  * Outlook Contacts
+  Name - Phone - Email - Address - Tags
+* Fields should comply with existing field restrictions, e.g. no alphabets in Phone.
+* Tags should be in the delimited by `;` e.g. `tag1;tag2;tag3;`, in the imported CSV file.
+* If the specified rows clash, the command will fail.
+* If there are lines with illegal characters or invalid formatting, ContaX will skip importing the affected line
+* This is designed with flexibility in mind, such that users will be able to export CSV files from any other format and do minimal data organisation before importing into ContaX
 
 Examples:
 * `importcsv f/file.csv n/2 p/3 e/5 a/6 t/4`
@@ -473,20 +574,26 @@ Examples:
 
 Performs operations on contacts in the address book that match the given condition.
 
-Format: `batch COMMAND where/CONDITION`
+Format: `batch COMMAND by/FIELD [=/EQUALS_VALUE] [start/START_WITH] [end/END_WITH]`
 
-* The allowed operations in `COMMAND` are
-  * list
+* `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
   * edit
   * delete
-* The `CONDITION` field must conform to the following syntax: `TERM OP TERM`
-  * Valid operators for the `OP` field are `>`, `<`, `=`, `!=`, `LIKE`
-  * A `TERM` may be an attribute of a person or a constant value
+* The `FIELD` provided must be provided, and must match one of the following:
+  * `Name`
+  * `Address`
+  * `Phone`
+  * `Email`
+* Exactly one parameter of `EQUALS_VALUE`, `START_WITH`, or `END_WITH` must be provided.
+* A `EQUALS_VALUE` is value matching the exact value in the target field.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* A `START_WITH` is value matching the value in the target field with specific starting value.
+* A `END_WITH` is value matching the value in the target field with specific ending value.
 
 Examples:
-* `batch delete where/name LIKE A%`
+* `batch deleteperson by/name start/A`
   * Deletes all persons whose name start with A (case-sensitive)
-* `batch edit p/87438806 where/phone = 87438807 `
+* `batch editperson p/87438806 by/phone =/87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
 
 ### Operate on Contacts within Range : `range`
@@ -495,35 +602,33 @@ Perform actions on a group of contacts.
 
 Format: `range COMMAND from/INDEX_FROM to/INDEX_TO`
 
-* Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive
-* `COMMAND` must be a valid command. The allowed operations in `COMMAND` are
-  * list
+* Performs the specified `COMMAND` on all contacts between the specified range of `INDEX_FROM` to `INDEX_TO` inclusive.
+* `COMMAND` must be a valid command without `INDEX`. The allowed operations in `COMMAND` are:
   * edit
   * delete
-* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the index number shown in the **displayed contact list**
-* `INDEX_FROM` must be less than `INDEX_TO` must be supplied, otherwise the command will perform no operation
-* The resultant effect of the command is dependent on the performed action
+* The `INDEX_FROM` and `INDEX_TO` parameters must be **positive integers**, and refer to the [index number](#displayed-indexes) shown in the **displayed person list**.
+* `INDEX_FROM` must be less than `INDEX_TO` supplied, otherwise the command will fail.
+* The resultant effect of the command is dependent on the performed action.
 
 Examples:
-* `range edit e/johndoe@example.com from/6 to/10`
-  * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`
-* `range delete from/2 to/3`
-  * Deletes the 2nd and 3rd contacts in the address book
+* `range editperson e/johndoe@example.com from/6 to/10`
+  * Sets the email address of the 6th to 10th contacts in the address book to `johndoe@example.com`.
+* `range deleteperson from/2 to/3`
+  * Deletes the 2nd and 3rd contacts in the address book.
 
-### Chaining Commands: `&&`
+### Chaining Commands: `chain`
 
 Perform multiple actions in a single command.
 
-Format: `COMMAND_A && COMMAND_B`
+Format: `chain COMMAND_A && COMMAND_B [&& COMMAND_C ...]`
 
-* Calls multiple specified commands
-* The syntax of `COMMAND_A` and `COMMAND_B` must be correct
-* A valid command must be supplied before and after the `&&` operator, otherwise the command will fail
+* Calls multiple specified commands.
+* A valid command (i.e. The syntax of `COMMAND` must be correct) must be supplied before and after the `&&` operator, otherwise the command will fail
 
 Examples:
-* `editappt 6 l/360 && listappt`
+* `chain editappt 6 l/360 && listappt`
     * Edits the 6th appointment in the list of appointments to have a duration of 6 hours. Then list all appointments in the Schedule
-* `deleteappt 2 && addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
+* `chain deleteappt 2 && addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
@@ -567,7 +672,7 @@ Action | Format, Examples
 --------|------------------
 **Add Person** | `addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `addperson n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Person** | `deleteperson INDEX`<br> e.g., `delete 3`
+**Delete Person** | `deleteperson INDEX`<br> e.g., `deleteperson 3`
 **Edit Person** | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editperson 2 n/James Lee e/jameslee@example.com`
 **Find Person** | `findperson KEYWORD [MORE_KEYWORDS] [by/SEARCH_TYPE]`<br> e.g., `findperson James Jake by/name`
 **List Persons** | `listpersons`
@@ -582,9 +687,10 @@ Action | Format, Examples
 **Edit Appointment** | `editappt INDEX [n/NAME] [d/DATE] [t/TIME] [p/PERSON] [l/DURATION]`<br> e.g., `editappt 2 n/Call Juliet t/13:45`
 **List Appointments Within Period** | `apptbetween [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `apptbetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00`
 **List Available Slots Within Period** | `freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME] [ed/ENDDATE [et/ENDTIME]]` <br> e.g. `freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60`
+**Find Appointment** | `findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]` <br> e.g `findappt Meeting`
 **Help** | `help`
 **Export CSV** | `exportcsv`
 **Import CSV** | `importcsv f/FILEPATH [n/COLUMNNUM] [p/COLUMN_PERSON] [e/COLUMN_EMAIL] [a/COLUMN_ADDRESS] [t/COLUMN_TAGS]` <br> e.g., `importCSV n/2 p/3 e/5 a/6 t/4`
-**Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch Edit p/87438806 where/ p/Phone = 87438807`
+**Operate on Contacts by Conditional Clause** | `batch COMMAND where/CONDITION` <br> e.g., `batch editperson p/87438806 by/phone =/87438807`
 **Operate on Contacts within Range** | `range COMMAND from/INDEX to/INDEX` <br> e.g., `range editperson e/johndoe@example.com from/6 to/10`
 **Chaining Commands** | `chain COMMAND_A && COMMAND_B` <br> e.g., `chain editappt 6 l/360 && listappt`

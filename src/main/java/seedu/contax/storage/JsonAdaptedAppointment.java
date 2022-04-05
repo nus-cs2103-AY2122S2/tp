@@ -26,7 +26,7 @@ class JsonAdaptedAppointment {
     public static final String INVALID_DURATION_MESSAGE = "Appointment's Duration is not a positive integer!";
     public static final String INVALID_PERSON_MESSAGE = "Appointment's person cannot be found!";
     public static final String INVALID_PRIORITY_MESSAGE = "Appointment's priority is invalid!";
-    public static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"; // ISO-8601 Specification
+    public static final String DATETIME_FORMAT = "uuuu-MM-dd'T'HH:mm:ss"; // ISO-8601 Specification
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
     private final String name;

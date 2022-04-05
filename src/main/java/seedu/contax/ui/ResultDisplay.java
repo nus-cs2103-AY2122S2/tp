@@ -20,8 +20,8 @@ public class ResultDisplay extends UiPart<Region> {
     private TextFlow resultDisplay;
 
     /**
-     * Construct the ResultDisplay UI component
-     * Used to set initial properties of resultDisplay TextFlow
+     * Construct the ResultDisplay UI component.
+     * Used to set initial properties of resultDisplay TextFlow.
      */
     public ResultDisplay() {
         super(FXML);

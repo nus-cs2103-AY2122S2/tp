@@ -197,6 +197,8 @@ public class HelpWindow extends UiPart<Stage> {
         insertRow("List Available Slots Within Period", "freebetween l/DURATION [sd/STARTDATE] [st/STARTTIME]"
                         + "[ed/ENDDATE [et/ENDTIME]]", "freebetween sd/21-10-2022 st/12:00 ed/23-10-2022 et/17:00 l/60",
                 appointmentsPage);
+        insertRow("Find Appointment", "findappt KEYWORD [MORE_KEYWORDS] [by/(person OR name)]", "findappt Meeting",
+                appointmentsPage);
         insertRow("Prioritize Appointment", "prioritizeappt INDEX pri/PRIORITY",
                 "prioritizeappt 2 pri/low", appointmentsPage);
     }
