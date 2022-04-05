@@ -32,20 +32,20 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withStatus(Status.NEGATIVE).withClassCode("4A")
-            .withActivities("friends").build();
+            .withActivities("Badminton").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withStatus(Status.POSITIVE).withClassCode("4B")
-            .withActivities("owesMoney", "friends").build();
+            .withActivities("Basketball", "Dance").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withStatus(Status.NEGATIVE).withClassCode("4A")
-            .build();
+            .withActivities("Dance").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withStatus(Status.NEGATIVE).withClassCode("4A")
-            .withActivities("friends").build();
+            .withActivities("Badminton", "Dance").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withStatus(Status.CLOSE_CONTACT).withClassCode("4B")
