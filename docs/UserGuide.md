@@ -233,14 +233,14 @@ A pop-up window will appear, requiring you to confirm the deletion.
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: You can delete all items that match one or more (tag, value) pairs.
+:bulb: You can delete all products that match one or more (tag, value) pairs.
 
-Format: `delete [TAG:VALUE ...]`
+Format: `delete-all [TAG:VALUE ...]`
 
 * Deletes all products that match the (tag, value) pair.
 * Must include at least one (tag, value) pair.
 
-Example: `delete n:Bread`
+Example: `delete-all n:Bread`
 
 </div>
 
@@ -317,7 +317,7 @@ Format: `delete-all`
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:**
-If you accidentally used this command, you can use `undo` command to undone `delete-all`
+If you accidentally used this command, you can use `undo` command to undo `delete-all`.
 
 </div>
 
