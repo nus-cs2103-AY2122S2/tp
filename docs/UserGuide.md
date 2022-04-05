@@ -391,23 +391,24 @@ Examples:
   i.e. `[n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 #### Locating companies: `findc`
 
-Finds companies whose names contain any of the given keywords.
+Finds companies with given details of the company by name and tag.
 
 Format: 
 ```
-findc [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]
+findc [n/NAME] [s/SEARCH_TYPE] [t/TAG]
 ```
 Examples:
+* `findc n/sgshop dbsss` returns `sgshop` and `sgshop sop` and `dbsss`
 * `findc n/Shopee` returns `Shopee` and `Shopee Express`
 * `findc n/abc google` returns `Google`, `ABC Pte`<br>
 
-#### Locating people by name: `findp`
+#### Locating people: `findp`
 
-Finds people whose names contain any of the given keywords.
+Finds all persons whose name, companyName, and tags contain any of the specified keywords (case-insensitive)  and displays them as a list with index numbers.
 
 Format: 
 ```
-findp [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]
+findp [n/NAME] [c/COMPANY] [s/SEARCH_TYPE] [t/TAG]
 ```
 
 Examples:
@@ -417,12 +418,11 @@ Examples:
 
 #### Locating events: `finde`
 
-Finds events whose names contain any of the given keywords and date is between START DATE and END DATE.
-If not provided, START DATE and END DATE are set to the earliest and latest date in the list of events respectively.
+Finds events with given details of the event by name, company, start date, end date, time, location and tag
 
 Format: 
 ```
-finde [s/SEARCH_TYPE] [sd/START DATE] [ed/END DATE] [MORE_KEYWORDS]
+finde [n/NAME] [c/COMPANY] [sd/START DATE] [ed/END DATE] [ti/TIME] [l/LOCATION] [s/SEARCH_TYPE] [MORE_KEYWORDS]
 ```
 Examples:
 * `finde n/online` returns `online interview` and `online assessment`

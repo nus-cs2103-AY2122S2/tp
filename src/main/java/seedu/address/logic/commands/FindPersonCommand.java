@@ -34,7 +34,7 @@ public class FindPersonCommand extends Command {
             + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "alice bob ";
+            + PREFIX_NAME + "alex david ";
 
     private final PersonContainsKeywordsPredicate predicate;
 
