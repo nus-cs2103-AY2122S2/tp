@@ -1,4 +1,16 @@
-ClientConnect is a **desktop app for managing clients’ contact details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps with the ability to `find` specific clients based on keywords provided.
+---
+layout: page
+title: User Guide
+---
+
+* Table of Contents
+{:toc}
+
+ClientConnect is a client-management app for tech-savvy insurance agents to **manage clients’ in the midst of massive lists of clients that have various needs and priorities**. 
+
+Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps. Add Tags with varying levels of priorities to keep track of utmost important tasks to utilize your time efficiently, sort your clients by priority so you won't miss out urgent tasks to be done, conveniently import and export your client contacts, and easily find the client details you want through our `find` command.
+
+The package tab allows for quick reference of package details in the event that a client has to be contacted regarding their package.
 
 ![result for 'list'](images/listAllClientsUG.png)
 
