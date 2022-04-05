@@ -95,8 +95,8 @@ This could be a problem with Windows. You can alternatively start **HackNet** by
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
     * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-    * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
+    * e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
 * For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being a low proficiency level and 100.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY]…​` as `[s/Java_90]`
@@ -216,6 +216,8 @@ Format: `filter KEYWORD`
 
 * The search is case-insensitive. e.g `java` will match `Java`
 * Only full words will be matched e.g. `C` will not match `C#`
+* This command accepts multiple skills to be filtered,
+e.g. `filter c java` will filter all those with `C` <b><u>AND</u></b> `Java`.
 
 Examples:
 * `filter C` returns `Alex Teo`, `Lye Jia Yang` and `Toh Zhan Qing`
@@ -232,6 +234,7 @@ Format: `sort SKILL`
 * The search is case-insensitive. e.g `java` will match `Java`
 * Only full words will be matched e.g. `C` will not match `C#`
 * The list will be shown in descending level of skill proficiency
+* This command only accepts <b><u>ONE</u></b> skill as the sorting criteria.
 
 Examples:
 * `sort Python` shows persons with `Python` as a skill in descending order of proficiency
@@ -270,7 +273,7 @@ This section contains some commands/shortcuts that can improve your work efficie
 
 ### Undo last command: `undo`
 
-Undo the last command that changed HackNet. <br>
+Undo the last command that changes HackNet. <br>
 Only these commands that changed HackNet can be undone:
 * Add
 * Delete
@@ -279,9 +282,42 @@ Only these commands that changed HackNet can be undone:
 * Unteam
 * Clear
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the undo command:**<br>
+
+* The commands executed will be stored in history, please use the `undo` command to restore them.
+* Only the commands as listed above can be undone.
+* If a different command is executed after a command is undone,
+that undone command will be removed from history and can no longer be undone.
+* e.g `Add person 1 -> Add person 2 -> undo -> Add person 3` will have the same persons and history as
+  `Add person 1 ->  Add person 3`
+* <b>IMPORTANT!</b> All commands in history will be removed when the application exits.
+</div>
+
 ### Redo last command: `redo`
 
 Redo the command that was previously undone.
+
+Only these commands that changes HackNet can be redone:
+* Add
+* Delete
+* Edit
+* Team
+* Unteam
+* Clear
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the redo command:**<br>
+
+* This command will revert HackNet back to the state before the last command is executed.
+* Only the commands specified above can be redone.
+* If a command is executed and there are commands in the history,
+those commands that are not redone will be removed from history.
+* <b>IMPORTANT!</b> All commands in history will be removed when the application exits.
+
+</div>
 
 ### Navigating User Input History: `↑`, `↓`
 
