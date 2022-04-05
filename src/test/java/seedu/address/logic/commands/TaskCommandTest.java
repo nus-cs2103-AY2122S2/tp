@@ -98,7 +98,7 @@ public class TaskCommandTest {
     }
 
     @Test
-    public void execute_emptyTaskList() {
+    public void execute_emptyTaskList_throwsCommandException() {
         Person bensonCopy = new PersonBuilder()
                 .withStudentId(BENSON.getStudentId().id)
                 .withName(BENSON.getName().toString())
