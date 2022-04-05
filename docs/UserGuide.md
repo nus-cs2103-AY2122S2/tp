@@ -258,7 +258,7 @@ Shows a list of all companies in the list of companies.
 
 Format:
 ```
-listc [s/ARCHIVED]
+listc [s/SEARCH_TYPE]
 ```
 Examples:
 * `listc` (defaults to `s/unarchived`) displays all unarchived companies.
@@ -270,7 +270,7 @@ Shows a list of all people in the list of contact people.
 
 Format: 
 ```
-listp [s/ARCHIVED]
+listp [s/SEARCH_TYPE]
 ```
 Examples:
 * `listp` (defaults to `s/unarchived`) displays all unarchived people.
@@ -282,7 +282,7 @@ Shows a list of all events in the list of events.
 
 Format: 
 ```
-liste [s/ARCHIVED]
+liste [s/SEARCH_TYPE]
 ```
 Examples:
 * `liste` (defaults to `s/unarchived`) displays all unarchived events.
@@ -384,7 +384,7 @@ Finds companies whose names contain any of the given keywords.
 
 Format: 
 ```
-findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
+findc [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]
 ```
 Examples:
 * `findc n/Shopee` returns `Shopee` and `Shopee Express`
@@ -396,7 +396,7 @@ Finds people whose names contain any of the given keywords.
 
 Format: 
 ```
-findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
+findp [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]
 ```
 
 Examples:
@@ -411,7 +411,7 @@ If not provided, START_DATE and END_DATE are set to the earliest and latest date
 
 Format: 
 ```
-finde [s/ARCHIVED] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
+finde [s/SEARCH_TYPE] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
 ```
 Examples:
 * `finde n/online` returns `online interview` and `online assessment`
@@ -436,7 +436,7 @@ Sort companies by name. The default is in `ascending` order. To sort in `descend
 
 Format:
 ```
-sortc [s/ARCHIVED] [o/ORDERING]
+sortc [s/SEARCH_TYPE] [o/ORDERING]
 ```
 Examples:
 * `sortc` returns all unarchived companies in ascending order
@@ -448,7 +448,7 @@ Sort people by name. The default is in `ascending` order. To sort in `descending
 
 Format:
 ```
-sortp [s/ARCHIVED] [o/ORDERING]
+sortp [s/SEARCH_TYPE] [o/ORDERING]
 ```
 Examples:
 * `sortp` returns all unarchived people in ascending order
@@ -460,7 +460,7 @@ Sort events by date. The default is in `ascending` order. To sort in `descending
 
 Format:
 ```
-sorte [s/ARCHIVED] [o/ORDERING]
+sorte [s/SEARCH_TYPE] [o/ORDERING]
 ```
 Examples:
 * `sorte` returns all unarchived events in ascending order
@@ -618,10 +618,10 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Archive all in display**          |`archive_all`                                                                          |                                                                                      |
 | **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
 | **Unarchive all in display**          |`unarchive_all`                                                                          |                                                                                      |
-| **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
-| **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
-| **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
-| **List Persons**   | `listp [s/ARCHIVED]`                                                                          |`listp s/all`                                                                                      |
-| **List Companies** | `listc [s/ARCHIVED]`                                                                          |`listc`                                                                                      |
-| **List Events**    | `liste [s/ARCHIVED]`                                                                          |`liste s/archived`                                                                                      |
+| **Find Person**    | `findp [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
+| **Find Company**    | `findc [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
+| **Find Event**     | `finde [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
+| **List Persons**   | `listp [s/SEARCH_TYPE]`                                                                          |`listp s/all`                                                                                      |
+| **List Companies** | `listc [s/SEARCH_TYPE]`                                                                          |`listc`                                                                                      |
+| **List Events**    | `liste [s/SEARCH_TYPE]`                                                                          |`liste s/archived`                                                                                      |
 | **Help**           | `help`                                                                           |                                                                                      |
