@@ -23,7 +23,7 @@ Given below are my contributions to the project.
   * Revamped Help Window to display meaningful information on all commands in ContaX
 
 * **Code contributed**:
-  * 3000+ LoC contributed to the project
+  * 3000+ LoC contributed to the project. See [Reposense](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=wei-xinn) for more details.
   * Worked on the Onboarding Guide and Help Window component
     * Includes components in `UI` and `Model`
 
