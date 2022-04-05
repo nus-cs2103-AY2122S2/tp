@@ -88,4 +88,20 @@ public class DateParserTest {
         assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("2022 20 Oct").get());
         assertEquals(LocalDate.parse("2022-10-20"), DateParser.parseDate("20 2022 Oct").get());
     }
+
+    @Test
+    public void parseNaturalDate_duplicateComponent_emptyOptional() {
+        // Alternate cases between sharing a whitespace and fully disjoint sections
+        assertEquals(Optional.empty(), DateParser.parseDate("20 2022 Mar Oct"));
+        assertEquals(Optional.empty(), DateParser.parseDate("20 Oct 2022 Mar"));
+
+        assertEquals(Optional.empty(), DateParser.parseDate("21 20 2022 Oct"));
+        assertEquals(Optional.empty(), DateParser.parseDate("20 2022 21 Oct"));
+
+        assertEquals(Optional.empty(), DateParser.parseDate("20 2020 2022 Oct"));
+        assertEquals(Optional.empty(), DateParser.parseDate("2020 20 Oct 2022"));
+
+        assertEquals(Optional.empty(), DateParser.parseDate("21 20 2021 2022 Apr Oct"));
+        assertEquals(Optional.empty(), DateParser.parseDate("21 Apr 2021 2022 30 Oct"));
+    }
 }
