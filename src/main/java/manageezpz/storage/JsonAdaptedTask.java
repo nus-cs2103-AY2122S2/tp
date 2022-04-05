@@ -9,13 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.collections.ObservableList;
 import manageezpz.commons.exceptions.IllegalValueException;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.Date;
-import manageezpz.model.task.Deadline;
-import manageezpz.model.task.Description;
-import manageezpz.model.task.Event;
-import manageezpz.model.task.Task;
-import manageezpz.model.task.Time;
-import manageezpz.model.task.Todo;
+import manageezpz.model.task.*;
 import manageezpz.model.tasktag.Tag;
 
 /**
@@ -92,6 +86,53 @@ class JsonAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Task toModelType(ObservableList<Person> persons) throws IllegalValueException {
+        handleGeneralNullChecks(description, type, status, tag, priority);
+        Description desc = new Description(description);
+        boolean isDone = status.equals("X");
+        if (type.equals("todo")) {
+            Todo newTodo = new Todo(desc);
+            handleLoad(newTodo, isDone, priority, tag, persons);
+            return newTodo;
+        } else if (type.equals("deadline")) {
+            handleDeadlineNullChecks(date, deadlineTime);
+            Date currDeadlineDate = new Date(date);
+            Time currDeadlineTime = new Time(deadlineTime);
+            Deadline newDeadline = new Deadline(desc, currDeadlineDate, currDeadlineTime);
+            handleLoad(newDeadline, isDone, priority, tag, persons);
+            return newDeadline;
+        } else {
+            handleEventNullChecks(date, eventStartTime, eventEndTime);
+            Date currEventDate = new Date(date);
+            Time currEventStartTime = new Time(eventStartTime);
+            Time currEventEndTime = new Time(eventEndTime);
+            Event newEvent = new Event(desc, currEventDate, currEventStartTime, currEventEndTime);
+            handleLoad(newEvent, isDone, priority, tag, persons);
+            return newEvent;
+        }
+    }
+
+    public void handleLoad(Task task, boolean isDone, String priority,
+                               String tag, ObservableList<Person> persons) {
+        if (isDone) {
+            task.setTaskDone();
+        }
+        if (priority != null && !priority.isEmpty()) {
+            task.setPriority(priority);
+        }
+        String[] tagList = tag.split(",");
+        for (int i = 0; i < tagList.length; i++) {
+            String currentTag = tagList[i].trim();
+            for (int j = 0; j < persons.size(); j++) {
+                Person matchedPerson;
+                if (persons.get(j).getName().toString().equals(currentTag)) {
+                    matchedPerson = persons.get(j);
+                    task.addAssignees(matchedPerson);
+                }
+            }
+        }
+    }
+    public void handleGeneralNullChecks(String description, String type, String status, String tag, String priority)
+            throws IllegalValueException {
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
@@ -105,76 +146,29 @@ class JsonAdaptedTask {
         if (tag == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
         }
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
+        }
+    }
 
-        Description desc = new Description(description);
-        boolean isDone = status.equals("X");
+    public void handleDeadlineNullChecks(String date, String deadlineTime) throws IllegalValueException {
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        if (deadlineTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
+        }
+    }
 
-        if (type.equals("todo")) {
-            Todo newTodo = new Todo(desc);
-            if (isDone) {
-                newTodo.setTaskDone();
-            }
-            if (priority != null && !priority.isEmpty()) {
-                newTodo.setPriority(priority);
-            }
-            String[] tagList = tag.split(",");
-            for (int i = 0; i < tagList.length; i++) {
-                String currentTag = tagList[i].trim();
-                for (int j = 0; j < persons.size(); j++) {
-                    Person matchedPerson = null;
-
-                    if (persons.get(j).getName().toString().equals(currentTag)) {
-                        matchedPerson = persons.get(j);
-                        newTodo.addAssignees(matchedPerson);
-                    }
-                }
-            }
-            return newTodo;
-        } else if (type.equals("deadline")) {
-            Date currDeadlineDate = new Date(date);
-            Time currDeadlineTime = new Time(deadlineTime);
-            Deadline newDeadline = new Deadline(desc, currDeadlineDate, currDeadlineTime);
-            if (isDone) {
-                newDeadline.setTaskDone();
-            }
-            if (priority != null && !priority.isEmpty()) {
-                newDeadline.setPriority(priority);
-            }
-            String[] tagList = tag.split(",");
-            for (int i = 0; i < tagList.length; i++) {
-                String currentTag = tagList[i].trim();
-                for (int j = 0; j < persons.size(); j++) {
-                    Person matchedPerson = null;
-                    if (persons.get(j).getName().toString().equals(currentTag)) {
-                        matchedPerson = persons.get(j);
-                        newDeadline.addAssignees(matchedPerson);
-                    }
-                }
-            }
-            return newDeadline;
-        } else {
-            Date currEventDate = new Date(date);
-            Time currEventStartTime = new Time(eventStartTime);
-            Time currEventEndTime = new Time(eventEndTime);
-            Event newEvent = new Event(desc, currEventDate, currEventStartTime, currEventEndTime);
-            if (isDone) {
-                newEvent.setTaskDone();
-            }
-            if (priority != null && !priority.isEmpty()) {
-                newEvent.setPriority(priority);
-            }
-            String[] tagList = tag.split(",");
-            for (int i = 0; i < tagList.length; i++) {
-                String currentTag = tagList[i].trim();
-                for (int j = 0; j < persons.size(); j++) {
-                    Person matchedPerson = null;
-                    if (persons.get(j).getName().toString().equals(currentTag)) {
-                        matchedPerson = persons.get(j);
-                        newEvent.addAssignees(matchedPerson);
-                    }
-                }
-            }
-            return newEvent;
+    public void handleEventNullChecks(String date, String eventStartTime, String eventEndTime) throws IllegalValueException {
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        if (eventStartTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
+        }
+        if (eventEndTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
     }
 }
