@@ -86,7 +86,8 @@ Only positive [integers](#global-input-constraints) are recognised as a **displa
 
 * All date inputs must conform to one of the following formats:
   * `dd-mm-yyyy` or `dd/mm/yyyy`, or any combination of `-` and `/` separators
-  * `dd MMM yyyy` with the date components appearing in any order
+  * `dd MMM yyyy` with the date components appearing in any order.<br>
+    If a component appears more than once, the date is considered invalid.
 
 | Field | Description |
 | - | - |

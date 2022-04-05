@@ -13,7 +13,7 @@ import seedu.contax.model.chrono.TemporalComparable;
  */
 public class StartDateTime implements TemporalComparable {
     public static final String MESSAGE_CONSTRAINTS = "Date and Time have to be valid";
-    private static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
+    private static final String DATETIME_FORMAT = "dd-MM-uuuu HH:mm";
 
     // This is intentionally package private to limit visibility.
     static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
