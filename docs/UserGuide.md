@@ -169,8 +169,6 @@ Adds a recurring lesson with the following attributes:
 * starting at: 6pm
 * duration: 1 hour and 50 minutes
 
->**⚠️ Note:** If no type is given then the lesson is assumed to be temporary.
-
 <div markdown="block" class="alert alert-info">
 
 * **❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
