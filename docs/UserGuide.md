@@ -375,6 +375,26 @@ You can choose to unfavourite by making this entry:
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
 command.
 
+## Use Case #6: Finding a company and/or role <a id="usecase6"></a>
+In the future where you have many applications, finding specific applications can be daunting. The
+[find command](#c-find-c-r) allows you to search for applications easily with keywords matching `COMPANY_NAME` and `ROLE_NAME`.
+
+Say you are interested in finding out what are the roles you applied to at Google,
+you can make this entry:
+1. [Finding a company](#c-find-c-r) from the company list.
+   ![FindCompanyDemo](images/FindCompanyDemo.png)
+
+Then after seeing that you have an interview for a backend role with Google, you want to check out the progress of similar roles.
+You can search for other backend roles by making this entry:
+2. [Finding all roles](#c-find-c-r) from the company list.
+   ![FindRoleDemo](images/FindRoleDemo.png)
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: Find a specific role in a specific company by providing both `COMPANY_NAME` and `ROLE_NAME`. E.g. `find c/google r/backend engineer`.
+
+</div>
+
 [Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -665,6 +685,7 @@ readily identify and track down items!
 **Examples:**
 
 * `find c/meta amazon r/engineer`
+* Refer to [Demo Use Case #6](#usecase6) for an example use case.
 
 <div markdown="block" class="alert alert-info">
 
