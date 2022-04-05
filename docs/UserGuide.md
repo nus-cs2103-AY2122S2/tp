@@ -28,7 +28,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`deleteTask`**`3` : Deletes the 3rd Task shown in the Task list.
 
-   * **`clear`** : Deletes everything from ManageEZPZ.
+   * **`clear`** : Deletes **ALL** data from ManageEZPZ.
    
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
@@ -78,6 +78,9 @@ Format: `help`
 
 Adds an employee to ManageEZPZ.
 
+Note:
+- Adding a duplicated Employee will result in an error.
+
 Format: `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Examples:
@@ -97,6 +100,7 @@ Finds employee(s) based on multiple conditions provided.
 Note:
 * Parameters for finding employees can be entered together in any order.
 * You must enter at least one parameter.
+* Names are case-insensitive 
 
 Format: `findEmployee n/NAMES p/PHONE_NUMBER e/EMAIL`
 * `findEmployee n/[LIST OF NAMES]` finds employees whose names contain any of the words in [LIST OF NAMES].
@@ -146,7 +150,7 @@ Adds a task to ManageEZPZ.
 Format:
 * `addTodo desc/TASK_DESCRIPTION`
 * `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
-* `addEvent desc/TASK_DESCRIPTION at/[DATE] START_TIME END_TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 Examples:
 * `addTodo desc/Powerpoint Slides for Company XYZ`
@@ -157,9 +161,16 @@ Examples:
 
 **:bulb: Take Note:**
 
-For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format).
+For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track.
+
+For deadline and event, the DATE must be in this format: YYYY-MM-DD 
+
+For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+and mm should only be between 00 and 59.
 
 For event, the START_TIME must be earlier than the END_TIME.
+
+Adding a duplicated Task will result in an error.
 
 </div>
 
@@ -177,7 +188,8 @@ Note:
 * Parameters for finding tasks can be entered together in any order.
 * You must enter at least one parameter from either Task Type or the valid options.
 * Task Type is optional, however, when entered, only one task type is allowed.
-* Any other invalid options not stated below will be ignored.
+* The first option must be valid.
+* After the first valid option, any other invalid options that is not stated below will be ignored.
 
 Task Type Available:
 * `todo/`: Todos
@@ -199,7 +211,8 @@ Format:
 * `findTask date/YYYY-MM-DD` finds all deadlines and events with the date
 * `findTask priority/PRIORITY` find all tasks with the given PRIORITY [HIGH, MEDIUM, LOW, NONE]
 * `findTask assignees/ASSIGNEE FULL NAME` finds all tasks assigned to the stated assignee (in full name)
-* `findTask isMarked/BOOLEAN` finds all tasks that is already marked as done (`true`) or unmarked i.e., not done (`false`)
+* `findTask isMarked/true` finds all tasks that is already marked as done.
+* `findTask isMarked/false` finds all tasks that is already marked as not done.
 
 Example:
 * `findTask desc/homework`
@@ -245,8 +258,21 @@ Given a task list as follows... <br/>
 3. Type: `Event`, Description: `Final Exam`, Date: `2022-06-04`, Time: `1700 2000`
 
 * `editTask 1 desc/Drink Water` edits the task description of a `Todo` task.
-* `editTask 2 date/2022-05-10 at/ 2000` edits the date and the time of a `Deadline` task.
+* `editTask 2 date/2022-05-10 at/2000` edits the date and the time of a `Deadline` task.
 * `editTask 3 at/1800 2100` edits the time of an `Event` task.
+
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Take Note:**
+
+For deadline and event, the DATE must be in this format: YYYY-MM-DD
+
+For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+and mm should only be between 00 and 59.
+
+For event, the START_TIME must be earlier than the END_TIME.
+
+</div>
 
 ### Marking a Task : `markTask`
 
@@ -299,9 +325,10 @@ Assigns the specified task to an employee.
 
 Format: `tagTask INDEX n/NAME`
 * Assigns the task at the specified `INDEX` to the employee with the specified `NAME`.
-* The index refers to the index number shown in the displayed task list. 
+* The index refers to the index number shown in the current displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The name must be a valid employee name in ManageEZPZ.
+* The employee you are tagging **must** be in the current displayed employees list.
+* The name must be a valid employee **full name** in ManageEZPZ.
 
 Example: `tagTask 1 n/Alex Yeoh`
 * `tagTask 1 n/Alex Yeoh` assigns the 1st task in the displayed task list to the employee with the name Alex Yeoh.
@@ -314,9 +341,10 @@ Deallocates the specified task from an employee.
 
 Format: `untagTask INDEX n/NAME`
 * Deallocates the task at the specified `INDEX` from the employee with the specified `NAME`.
-* The index refers to the index number shown in the displayed task list.
+* The index refers to the index number shown in the current displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The name must be a valid employee name in ManageEZPZ.
+* The employee you are tagging **must** be in the current displayed employees list.
+* The name must be a valid employee **full name** in ManageEZPZ.
 
 Example:
 * `untagTask 1 n/Alex Yeoh` deallocates the 1st task in the displayed task list from the employee with the name Alex Yeoh.
@@ -343,7 +371,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the employee list and task list.
+Delete all entries from the employee list and task list.
 
 Format: `clear`
 
@@ -385,7 +413,7 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 |---------------------|------------------------------------------------------------------------------------------------------------------|
 | **Add Employee**    | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com` |
 | **List Employees**  | `listEmployee`                                                                                                   |
-| **Find Employee**   | `findEmployee OPTIONS` <br> `findEmployee n/Alex Yeoh`                                                           |
+| **Find Employee**   | `findEmployee OPTIONS` <br> e.g. `findEmployee n/Alex Yeoh`                                                      |
 | **Edit Employee**   | `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`        |
 | **Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`                                                             |
 
