@@ -633,6 +633,10 @@ Examples:
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The `batch` `range` `chain` operation is executed sequentially, it will fail if one of given command executed failed and the error message of that error command will show, but the successful command before will be saved.
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
