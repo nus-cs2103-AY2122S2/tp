@@ -336,7 +336,6 @@ public class EditCommand extends Command {
             System.out.println("updated person list");
             for (Module m : latestModList) {
                 if (m.equals(mod)) {
-                    System.out.println("true");
                     if (this.index.getZeroBased() >= m.getGroups().size()) {
                         throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                     }
@@ -348,7 +347,6 @@ public class EditCommand extends Command {
             ModelManager mm = (ModelManager) model;
             mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-            System.out.println("updated module list");
             // TODO make the command result for editing success more elaborate
             return new CommandResult(MESSAGE_EDIT_GROUP_SUCCESS);
         }

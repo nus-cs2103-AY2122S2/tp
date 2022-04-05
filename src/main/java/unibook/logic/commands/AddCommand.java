@@ -225,6 +225,9 @@ public class AddCommand extends Command {
         + " does not exist in the UniBook";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "One or more of the groups entered"
         + " does not exist in the UniBook";
+    private static final String MESSAGE_DUPLICATE_PHONE_AND_EMAIL = "The phone number or email entered already belongs"
+            + " to an existing person in the UniBook.\nPlease ensure that the phone number or"
+            + " email for each person is unique!";
 
     private Person personToAdd;
     private Module moduleToAdd;
@@ -328,8 +331,8 @@ public class AddCommand extends Command {
             model.addModule(moduleToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_MODULE, moduleToAdd));
         } else if (personToAdd != null) {
-            if (model.hasPerson(personToAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            if (model.hasPersonWithPhoneOrEmail(personToAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PHONE_AND_EMAIL);
             } else if (!model.isModuleExist(moduleCodeSet)) {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
