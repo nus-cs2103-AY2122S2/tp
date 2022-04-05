@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class FilterArgument {
 
@@ -15,6 +16,7 @@ public class FilterArgument {
      */
     public FilterArgument(String argument) {
         requireNonNull(argument);
+        checkArgument(!argument.isEmpty(), MESSAGE_CONSTRAINTS);
         this.argument = argument;
     }
 

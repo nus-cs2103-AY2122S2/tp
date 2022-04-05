@@ -279,8 +279,11 @@ public class ParserUtil {
      * Parses a {@code String filterArgument} into a {@code FilterArgument}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static FilterArgument parseFilterArgument(String filterArgument) {
+    public static FilterArgument parseFilterArgument(String filterArgument) throws ParseException {
         requireNonNull(filterArgument);
+        if (filterArgument.trim().isEmpty()) {
+            throw new ParseException(FilterArgument.MESSAGE_CONSTRAINTS);
+        }
         return new FilterArgument(filterArgument.trim());
     }
 
