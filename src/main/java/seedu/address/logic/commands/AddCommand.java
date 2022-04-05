@@ -19,7 +19,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Entity;
-import seedu.address.model.entity.exceptions.UnknownEntityException;
 
 //@@author EvaderFati
 public class AddCommand extends Command {
@@ -100,6 +99,8 @@ public class AddCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_DUPLICATE_MODULE);
             case CLASS_GROUP:
                 throw new CommandException(Messages.MESSAGE_DUPLICATE_CLASS_GROUP);
+            default:
+                throw new CommandException(Messages.MESSAGE_UNKNOWN_ENTITY);
             }
         }
 
