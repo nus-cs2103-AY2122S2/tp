@@ -154,10 +154,10 @@ public class UniBook implements ReadOnlyUniBook {
      * {@code target} must exist in the UniBook.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the UniBook.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(int idx, Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(idx, target, editedPerson);
     }
 
 

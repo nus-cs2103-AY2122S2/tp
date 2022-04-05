@@ -74,6 +74,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same phone or email as {@code person} exists in the UniBook.
+     */
+    boolean hasPersonWithPhoneOrEmail(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the UniBook.
      */
@@ -90,7 +95,7 @@ public interface Model {
      * {@code target} must exist in the UniBook.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the UniBook.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(int idx, Person target, Person editedPerson);
 
     //=========== Groups =====================================================================================
     void addGroup(Group group);

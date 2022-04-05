@@ -337,7 +337,6 @@ public class EditCommand extends Command {
                         throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                     }
                     Group group = m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
-                    System.out.println(m.getModuleName().toString());
                     groups.add(group);
                 }
             }
@@ -366,6 +365,7 @@ public class EditCommand extends Command {
             }
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
+            int idx = index.getZeroBased();
             Module checkMod = null;
             if (this.editPersonDescriptor.getOffice().isPresent() && personToEdit instanceof Student) {
                 throw new CommandException(MESSAGE_NOT_PROFESSOR);
@@ -383,7 +383,8 @@ public class EditCommand extends Command {
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-            if (!personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
+            if (model.hasPersonWithPhoneOrEmail(editedPerson)
+            || !personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
 
@@ -472,7 +473,7 @@ public class EditCommand extends Command {
                     }
                 } else { }
 
-                model.setPerson(personToEdit, editedPerson);
+                model.setPerson(idx, personToEdit, editedPerson);
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_EDIT_PERSON_GROUP_SUCCESS, editedPerson, groupName));
 
@@ -487,7 +488,7 @@ public class EditCommand extends Command {
                 }
             } else { }
 
-            model.setPerson(personToEdit, editedPerson);
+            model.setPerson(idx, personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
 

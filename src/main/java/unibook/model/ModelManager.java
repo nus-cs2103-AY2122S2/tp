@@ -107,6 +107,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithPhoneOrEmail(Person person) {
+        requireNonNull(person);
+        return uniBook.phoneNumberBeingUsed(person.getPhone()) || uniBook.emailBeingUsed(person.getEmail());
+    }
+
+    @Override
     public void deletePerson(Person target) {
         uniBook.removePerson(target);
     }
@@ -117,10 +123,10 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    public void setPerson(Person target, Person editedPerson) {
-        CollectionUtil.requireAllNonNull(target, editedPerson);
+    public void setPerson(int idx, Person target, Person editedPerson) {
+        CollectionUtil.requireAllNonNull(idx, target, editedPerson);
 
-        uniBook.setPerson(target, editedPerson);
+        uniBook.setPerson(idx, target, editedPerson);
     }
 
     @Override

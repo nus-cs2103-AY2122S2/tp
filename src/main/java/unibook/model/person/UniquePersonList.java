@@ -55,9 +55,10 @@ public class UniquePersonList implements Iterable<Person> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(int idx, Person target, Person editedPerson) {
         CollectionUtil.requireAllNonNull(target, editedPerson);
 
+        // TODO PROBLEM ABOUT FIRST PERSON HERE and changed here a lot
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
@@ -67,7 +68,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(idx, editedPerson);
     }
 
     /**
