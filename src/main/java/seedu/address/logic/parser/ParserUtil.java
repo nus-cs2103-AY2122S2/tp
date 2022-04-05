@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.LessonAddress;
@@ -221,11 +223,20 @@ public class ParserUtil {
      * @throws ParseException if the given {@code startTime} is invalid.
      */
     public static DateTimeSlot parseDateTimeSlot(String dateOfLesson, String startTime,
-                                                 int durationHours, int durationMinutes) throws ParseException {
+                                                 Integer durationHours, Integer durationMinutes)
+            throws ParseException {
         LocalDate lessonDate = parseDate(dateOfLesson);
         LocalTime lessonStartTime = parseStartTime(startTime);
+        LocalDateTime startingDateTime = lessonDate.atTime(lessonStartTime);
 
-        return new DateTimeSlot(lessonDate.atTime(lessonStartTime), durationHours, durationMinutes);
+        DateTimeSlot dateTimeSlot;
+        try {
+            dateTimeSlot = DateTimeSlot.makeDateTimeSlot(startingDateTime, durationHours, durationMinutes);
+        } catch (CommandException e) {
+            throw new ParseException(e.getMessage());
+        }
+
+        return dateTimeSlot;
     }
 
     /**

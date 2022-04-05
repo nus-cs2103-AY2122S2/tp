@@ -1,5 +1,8 @@
 package seedu.address.model.lesson;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -18,6 +21,8 @@ public class DateTimeSlot {
     public static final String MESSAGE_CONSTRAINTS = "Lessons can only be created with a valid date."
                     + "\n Hours and minutes must be non-negative integer."
                     + "\n Minutes cannot be more than 60.";
+
+    public static final String EXCESSIVE_DURATION_MESSAGE = "Lesson must start and end on the same day!";
 
     private static final DateTimeFormatter acceptedDateFormat =
             DateTimeFormatter.ofPattern("d-M-uuuu").withResolverStyle(ResolverStyle.STRICT);
@@ -81,6 +86,17 @@ public class DateTimeSlot {
         dateOfLesson = lessonDateTime;
         this.hours = hours;
         this.minutes = minutes;
+    }
+
+    public static DateTimeSlot makeDateTimeSlot(LocalDateTime startingDateTime, Integer hours, Integer minutes)
+            throws CommandException {
+        LocalDateTime endingDateTime = startingDateTime.plusHours(hours).plusMinutes(minutes);
+
+        if (!startingDateTime.toLocalDate().equals(endingDateTime.toLocalDate())) {
+            throw new CommandException(EXCESSIVE_DURATION_MESSAGE);
+        }
+
+        return new DateTimeSlot(startingDateTime, hours, minutes);
     }
 
     public static DateTimeFormatter getAcceptedDateFormat() {
