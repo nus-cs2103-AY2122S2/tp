@@ -20,12 +20,18 @@ title: Developer Guide
     * [Delete role feature](#delete-role-feature)
       * [Implementation](#implementation-delete)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-* [Requirements](#requirements)
+* [Appendix: Requirements](#requirements)
   * [Product scope](#product-scope)
   * [User stories](#user-stories)
   * [Use cases](#use-cases)
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#instructions-for-manual-testing)
+  * [Start and exit the application](#start-and-exit-the-application)
+  * [Adding a company](#adding-a-company)
+  * [Editing a company](#editing-a-company)
+  * [Deleting a company](#deleting-a-company)
+  * [Editing a role](#editing-a-role)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +41,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started** Setting up, getting started
+## **Setting up, getting started** <a id="setting-up-getting-started"></a>
 
 Refer to the guide [Setting up and getting started](SettingUp.md).
 
@@ -459,3 +465,66 @@ Guarantees: every company stored in Tinner will be shown
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Command Line Interface
 * **MSS**: Main Success Scenario
+
+## Appendix: Instructions for manual testing <a id="instructions-for-manual-testing"></a>
+
+### Start and exit the application <a id="start-and-exit-the-application"></a>
+1. To start the application
+   1. Download the tinner.jar file and copy into an empty folder. 
+   2. On the command terminal, run the following command in the directory containing tinner.jar: `java -jar tinner.jar`  
+   Expected: Shows the GUI with internship application examples. 
+2. To exit the application
+   1. Enter `exit` in the command box.   
+   Expected: The application will close shortly. 
+   
+
+### Adding a company <a id="adding-a-company"></a>
+1. Test case: `addCompany n/Govtech p/9222222 e/xyz@gov.com a/10 Pasir Panjang Rd, #10-01 Mapletree Business City, Singapore 117438`
+   1. Expected: Company list is updated with the addition of "GovTech". The response box shows the details of all the fields added.
+2. Test case: `addCompany n/Tik Tok e/xyz@tiktok.com`
+   1. Expected: Company list is updated with the addition of "Tik Tok". The response box shows the details of the fields added.
+3. Test case: `addCompany e/t@tesla.com p/99944426 n/Tesla`
+   1. Expected: Company list is updated with the addition of "Tesla". The response box shows the details of the fields added.
+4. Test case: `addCompany n/Tinner p/ e/t@tinner.com a/fairy land`
+   1. Expected: Company list is not updated. The response box shows error message that there must be a value after a prefix.
+5. Other incorrect test cases to try: `addCompany`, and other prefixes without value e.g. `add n/`.
+   1. Expected: Company list is not updated. The response box shows error message that it is an invalid command with additional information of the correct format. 
+
+### Editing a company <a id="editing-a-company"></a>
+1. Prerequisites: At least 2 companies must exist and listed using the `list` command
+2. Test case: `editCompany 1 1 n/Tik Tok`
+    1. Expected: The name of 1<sup>st</sup> company is changed to "TikTok".
+       The response box shows the updated details of all the fields of the edited company. The company list is updated with the changes.
+3. Test case: `editCompany 2 n/Tik Tok`
+    1. Expected: The name 2<sup>nd</sup> company is not updated.
+       The response box shows error message that the company already exists in the company list.
+4. Other incorrect test cases to try: `editCompany x n/VAlID_COMPANY_NAME` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: The intended company with index `x` is not updated.
+   The response box shows error message that company/ role index is invalid
+
+### deleting a company <a id="deleting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist and listed using the `list` command
+2. Test case: `deleteCompany 1`
+   1. Expected: First company with its roles included if any, is removed from the company list. 
+   The response box shows the details of the deleted company.
+3. Other incorrect test cases to try: `deleteCompany x` where x is an integer larger than the size of the company list or negative integer values.
+   1. Expected: Company with index `x` is not deleted. The response box shows error message that the company index provided is invalid.
+
+### Editing a role <a id="editing-a-role"></a>
+1. Prerequisites: At least 1 companies with 2 roles must exist and listed using the `list` command
+2. Test case: `editRole 1 1 n/Frontend Engineer`
+   1. Expected: The name of 1<sup>st</sup> role from the 1<sup>st</sup> company is changed to "Frontend Engineer".
+   The response box shows the updated details of all the fields of the edited role. The company list is updated with the changes. 
+3. Test case: `editRole 1 2 n/Frontend Engineer`
+   1. Expected: The name of 2<sup>nd</sup> role from the 1<sup>st</sup> company is not updated.
+   The response box shows error message that the role already exists in the company. 
+4. Test case: `editRole 1 1 $/0`
+   1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
+      The response box shows error message that stipend must be a positive number.
+5. Test case: `editRole 1 1 $/10000000000` or `editRole 1 1 $/0`
+   1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
+   The response box shows error message that stipend must be a positive value and input of stipend should be at most 10 digits long.
+6. Other incorrect test cases to try: `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
+   1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
+   The response box shows error message that company/ role index is invalid
+
