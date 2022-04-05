@@ -371,7 +371,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Delete all entries from the employee list and task list.
+Deletes all entries from the employee list and task list.
 
 Format: `clear`
 
