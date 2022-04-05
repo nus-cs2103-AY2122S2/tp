@@ -11,10 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class WeekId {
     public static final String MESSAGE_CONSTRAINTS =
             "Week IDs should only contain numbers between 1 and 13 inclusive, and it should not be blank";
-
     public static final String VALIDATION_REGEX = "^(0?[1-9]|1[0123])$";
-
-    public final String value;
+    public final Integer value;
 
     /**
      * Constructs a {@code WeekId}.
@@ -24,26 +22,34 @@ public class WeekId {
     public WeekId(String weekId) {
         requireNonNull(weekId);
         checkArgument(isValidWeekId(weekId), MESSAGE_CONSTRAINTS);
-        this.value = weekId;
+        this.value = Integer.valueOf(weekId);
     }
 
     /**
      * Returns true if a given string is a valid week ID.
      */
     public static boolean isValidWeekId(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test.matches(VALIDATION_REGEX)) {
+            try {
+                Integer.valueOf(test);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof WeekId // instanceof handles nulls
-                && value.equals(((WeekId) other).value)); // state check
+        return other == this
+                || (other instanceof WeekId
+                && value.equals(((WeekId) other).value));
     }
 
     @Override

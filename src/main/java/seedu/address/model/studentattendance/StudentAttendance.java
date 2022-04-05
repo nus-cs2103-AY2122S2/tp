@@ -41,7 +41,7 @@ public class StudentAttendance {
      * student identity in this {@code StudentAttendance}.
      */
     public StudentAttendance markAttendance() {
-        if (this.attendance.getValue()) {
+        if (this.attendance.value) {
             return this;
         }
         return new StudentAttendance(this.student, new Attendance(true));
@@ -52,7 +52,7 @@ public class StudentAttendance {
      * student identity in this {@code StudentAttendance}.
      */
     public StudentAttendance unmarkAttendance(Student s) {
-        if (this.attendance.getValue()) {
+        if (this.attendance.value) {
             return new StudentAttendance(student, new Attendance(false));
         }
         return this;
@@ -73,7 +73,7 @@ public class StudentAttendance {
 
     @Override
     public String toString() {
-        return student.toString() + ": " + attendance.getValue().toString();
+        return student.toString() + ": " + attendance.value.toString();
     }
 
     /**
