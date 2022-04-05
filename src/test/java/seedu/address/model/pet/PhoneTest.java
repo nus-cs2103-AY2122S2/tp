@@ -34,6 +34,7 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("911")); // exactly 3 numbers
 
         // valid phone numbers
+        assertTrue(Phone.isValidPhone("+6585123456")); // starts with country code (+65)
         assertTrue(Phone.isValidPhone("93121534")); // starts with 9
         assertTrue(Phone.isValidPhone("81234567")); // starts with 8
         assertTrue(Phone.isValidPhone("61234567")); // starts with 6
