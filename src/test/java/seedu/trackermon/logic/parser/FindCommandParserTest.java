@@ -26,7 +26,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new ShowContainsKeywordsPredicate(Arrays.asList("Gone")));
         assertParseSuccess(parser, "Gone", expectedFindCommand);
-
+        assertParseSuccess(parser, " Gone ", expectedFindCommand);
     }
 
 }

@@ -22,13 +22,14 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STATUS + "STATUS "
-            + "[" + PREFIX_RATING + "Rating]...\n"
+            + "[" + PREFIX_RATING + "RATING] "
+            + "[" + PREFIX_COMMENT + "COMMENT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Boku no Hero "
             + PREFIX_STATUS + "completed "
-            + PREFIX_COMMENT + "This is about kids fighting "
             + PREFIX_RATING + "2 "
+            + PREFIX_COMMENT + "This is about kids fighting "
             + PREFIX_TAG + "Anime "
             + PREFIX_TAG + "Action";
 
@@ -55,7 +56,7 @@ public class AddCommand extends Command {
         }
 
         model.addShow(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), model.getShowListSize() - 1);
     }
 
     @Override

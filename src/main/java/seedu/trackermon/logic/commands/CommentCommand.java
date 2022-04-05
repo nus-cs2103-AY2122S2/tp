@@ -62,7 +62,7 @@ public class CommentCommand extends Command {
         model.setShow(showToEdit, editedShow);
         model.updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
 
-        return new CommandResult(generateSuccessMessage(editedShow));
+        return new CommandResult(generateSuccessMessage(editedShow), index.getZeroBased());
     }
 
     /**
