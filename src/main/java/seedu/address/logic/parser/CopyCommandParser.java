@@ -44,13 +44,8 @@ public class CopyCommandParser implements Parser<CopyCommand> {
                     PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_MODULE, PREFIX_COMMENT));
         }
 
-        FormatPersonUtil fp = new FormatPersonUtil();
-        if (argMultimap.getValue(PREFIX_FORMAT).isPresent()) {
-            fp = ParserUtil.parseFormat(argMultimap.getValue(PREFIX_FORMAT).get());
-        }
-
         if (argMultimap.getPreamble().equals("")) {
-            return new CopyCommand(prefixes, fp);
+            return new CopyCommand(prefixes, getFormatPersonUtil(argMultimap));
         }
 
         try {
@@ -59,6 +54,14 @@ public class CopyCommandParser implements Parser<CopyCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CopyCommand.MESSAGE_USAGE), pe);
         }
 
-        return new CopyCommand(index, prefixes, fp);
+        return new CopyCommand(index, prefixes, getFormatPersonUtil(argMultimap));
+    }
+
+    private FormatPersonUtil getFormatPersonUtil(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_FORMAT).isPresent()) {
+            return ParserUtil.parseFormat(argMultimap.getValue(PREFIX_FORMAT).get());
+        } else {
+            return new FormatPersonUtil();
+        }
     }
 }
