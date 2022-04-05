@@ -8,8 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TelegramHandle {
     // Telegram handle has a limit of 5 to 32 characters excluding the @symbol at the front.
-    public static final String MESSAGE_CONSTRAINTS = "Telegram handles should contain 5 to 32 alphanumeric characters.";
-    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]{5,32}";
+    public static final String MESSAGE_CONSTRAINTS = "Telegram handles should contain 5 to 32 characters. "
+            + "The characters can either be alphanumeric characters or underscore. "
+            + "However, the handle cannot start or end with an underscore.";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9][a-zA-Z0-9_]{3,30}[a-zA-Z0-9]";
 
     public final String telegramHandle;
 
