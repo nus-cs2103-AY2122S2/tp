@@ -3,13 +3,11 @@ package seedu.contax.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.contax.model.appointment.Appointment;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.model.tag.Tag;
