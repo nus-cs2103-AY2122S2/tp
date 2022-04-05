@@ -35,6 +35,11 @@ public class FormatPersonUtil {
         this.format = DEFAULT_FORMAT;
     }
 
+    /**
+     * Constructor for FormatPersonUtil
+     * @param format
+     * @throws IllegalArgumentException
+     */
     public FormatPersonUtil(String format) throws IllegalArgumentException {
         if (!isValidFormat(format)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
