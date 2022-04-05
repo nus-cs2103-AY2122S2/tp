@@ -1,12 +1,12 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
@@ -21,7 +21,7 @@ public class TagTaskCommand extends Command {
             + ": Tags the specified employee to the task identified by the "
             + "index number used in the displayed task list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "EMPLOYEE_NAME\n"
+            + PREFIX_NAME + "EMPLOYEE_FULL_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Alex Yeoh";
 
     public static final String MESSAGE_TAG_TASK_SUCCESS = "Employee %1$s is tagged to the task: ";
@@ -54,7 +54,7 @@ public class TagTaskCommand extends Command {
         List<Person> lastShownPersonList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task taskToTagEmployee = lastShownTaskList.get(targetIndex.getZeroBased());

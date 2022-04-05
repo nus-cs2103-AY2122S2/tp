@@ -1,7 +1,7 @@
 package manageezpz.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_FIELD_NOT_EDITED;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -12,7 +12,7 @@ import manageezpz.logic.commands.EditEmployeeCommand.EditPersonDescriptor;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditEmployeeCommand object
  */
 public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
 
@@ -23,22 +23,22 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditEmployeeCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(pe.getMessage() + "\n\n" + EditEmployeeCommand.MESSAGE_USAGE, pe);
+        // Invalid command if getPreamble() is empty or contains other whitespaces
+        if (argMultimap.getPreamble().isEmpty() || argMultimap.getPreamble().contains(" ")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
+                    EditEmployeeCommand.MESSAGE_USAGE));
         }
+
+        Index index;
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
             }
@@ -48,6 +48,8 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
             }
+
+
         } catch (ParseException pe) {
             throw new ParseException(pe.getMessage() + "\n\n" + EditEmployeeCommand.MESSAGE_USAGE, pe);
         }

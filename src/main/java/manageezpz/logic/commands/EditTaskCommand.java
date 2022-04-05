@@ -2,6 +2,7 @@ package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
@@ -12,7 +13,6 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import java.util.List;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.ParserUtil;
@@ -61,8 +61,6 @@ public class EditTaskCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Update Task success: %1$s";
 
-    public static final String MESSAGE_TODO_SHOULD_NOT_HAVE_DATETIME = "Todo Task should not have date or time!";
-
     private final Index index;
     private final String desc;
     private final String date;
@@ -93,7 +91,7 @@ public class EditTaskCommand extends Command {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task currentTask = lastShownList.get(index.getZeroBased());
