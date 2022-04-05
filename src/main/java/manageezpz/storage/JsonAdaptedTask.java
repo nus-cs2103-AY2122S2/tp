@@ -9,7 +9,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.collections.ObservableList;
 import manageezpz.commons.exceptions.IllegalValueException;
 import manageezpz.model.person.Person;
-import manageezpz.model.task.*;
+import manageezpz.model.task.Date;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Description;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Priority;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Time;
+import manageezpz.model.task.Todo;
 import manageezpz.model.tasktag.Tag;
 
 /**
@@ -147,7 +154,8 @@ class JsonAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
         }
         if (priority == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Priority.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Priority.class.getSimpleName()));
         }
     }
 
@@ -160,7 +168,8 @@ class JsonAdaptedTask {
         }
     }
 
-    public void handleEventNullChecks(String date, String eventStartTime, String eventEndTime) throws IllegalValueException {
+    public void handleEventNullChecks(String date, String eventStartTime, String eventEndTime)
+            throws IllegalValueException {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
