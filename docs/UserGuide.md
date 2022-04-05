@@ -155,8 +155,8 @@ Format: `present INDEX date/dd-MM-yyyy [pu/HH:mm do/HH:mm]`
 **:information_source: About `present` command:**<br>
 
 This command is designed to enable you to mark the attendance of pets for **any** date. If you have forgotten to mark
-the attendance a few weeks back, you can do so. If you want to mark the attendance of a pet for future dates because
-the pet has a regular schedule, you can do so as well.
+the attendance a few weeks back, you may do so. If you wish to mark the attendance of a pet for future dates because
+the pet has a regular schedule, you may do so as well.
 
 </div>
 
@@ -361,7 +361,7 @@ Examples:
 
 * `sort app` will sort the pets by their appointment dates and times, listing the pets starting from the pet with the earliest appointment to the latest appointment.
 * `sort pick up` and `sort drop off` will sort the pets by their pick-up and drop-off times for transport arrangements **for today only**, listing the pets starting from the pet with the earliest time to the latest time.<br>
-  i.e. If there are no pets to pick up and drop off today, WoofAreYou will not display any change.
+  i.e. if there are no pets to pick up and drop off today, WoofAreYou will not display any change.
 
 ### Filter pet list: `filter`
 
