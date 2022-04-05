@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 public class ShowCommand extends Command {
 
     public static final String COMMAND_WORD = "show";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all potential teammates.";
 
     public static final String MESSAGE_SUCCESS = "Listed your potential teammate(s)!";
 

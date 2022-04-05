@@ -156,7 +156,7 @@ The 'SkillSet' class,
 ### Skill class
 
 The `Skill` class,
-* can store an alphanumeric skill name value and an integer ranging from 0 to 100 for skill proficiency value
+* can store an alphanumeric skill name value and an integer ranging from 1 to 100 for skill proficiency value
 * is a field of the `Person` class
 * is used for sorting by `Skill` proficiency level
 

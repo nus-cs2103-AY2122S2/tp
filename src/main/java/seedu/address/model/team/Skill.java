@@ -3,11 +3,16 @@ package seedu.address.model.team;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  * Represents a Skill in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSkillName(String)}
  */
 public class Skill {
+
 
     public static final String NAME_CONSTRAINTS =
         "Skill names should be alphanumeric word(s) that can contain special characters #, +, and -";
@@ -15,13 +20,15 @@ public class Skill {
     public static final String NAME_VALIDATION_REGEX = "[\\w|\\d|\\s#+-]+";
     public static final String PROFICIENCY_CONSTRAINTS_RANGE = "Skill proficiency should be within range of 1-100";
     public static final String PROFICIENCY_CONSTRAINTS_INTEGER = "Skill proficiency must be an integer";
-    public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[0-9]$|^[1-9][0-9]$|^(100)$";
+    public static final String PROFICIENCY_VALIDATION_BETWEEN_0_TO_100 = "^[1-9]$|^[1-9][0-9]$|^(100)$";
     public static final String PROFICIENCY_VALIDATION_ONLY_INTEGERS = "^[0-9]+$";
     public static final String SKILL_INPUT_CONSTRAINTS = "Skill input should be: Skill Name_Skill proficiency. eg: "
         + "Java_50";
+    private static Logger logger = Logger.getLogger("Skill");
 
     public final String skillName;
     public final int skillProficiency;
+
 
     /**
      * Constructs a {@code Skill}.
@@ -35,6 +42,9 @@ public class Skill {
         checkArgument(isValidSkillProficiencyRange(skillProficiency), PROFICIENCY_CONSTRAINTS_RANGE);
         this.skillName = skillName;
         this.skillProficiency = skillProficiency;
+        assert skillProficiency <= 100 && skillProficiency > 0 : "Skill proficiency is between 1 to 100";
+        assert skillName != null : "Skill name is not null";
+        logger.log(Level.INFO, String.format("Created %s with proficiency of %d", skillName, skillProficiency));
     }
 
     /**
@@ -46,7 +56,9 @@ public class Skill {
         requireNonNull(skillName);
         checkArgument(isValidSkillName(skillName), NAME_CONSTRAINTS);
         this.skillName = skillName;
-        this.skillProficiency = 0;
+        this.skillProficiency = 1;
+        assert skillName != null : "Skill name is not null";
+        logger.log(Level.INFO, String.format("Created %s with proficiency of 0", skillName));
     }
 
     /**

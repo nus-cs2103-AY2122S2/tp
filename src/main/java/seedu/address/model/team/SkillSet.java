@@ -125,7 +125,7 @@ public class SkillSet {
      * @return Skill in SkillSet
      */
     public Skill getSkill(Skill skillToGet) {
-        if (!this.hasSkill(skillToGet)) {
+        if (this.hasSkill(skillToGet)) {
             for (Skill s : skillSet) {
                 if (skillToGet.isSameSkill(s)) {
                     return s;

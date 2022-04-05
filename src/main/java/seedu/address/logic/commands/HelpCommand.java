@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
     public static final Set<String> AVAILABLE_HELP_TOPICS = Set.of("add", "delete", "find", "filter", "list", "skill",
-            "team", "unteam", "sort", "", "batchedit", "clear", "exit");
+            "team", "unteam", "sort", "", "batchedit", "clear", "exit", "edit", "redo", "undo", "filterteam");
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions. Usage: <Help> "
             + "to get link to user guide or <Help> <Topic> to get help for particular topic \n"
             + "Example: " + COMMAND_WORD + "\nExample: " + COMMAND_WORD + " list\n";
@@ -28,6 +28,11 @@ public class HelpCommand extends Command {
     public static final String HELP_MESSAGE_UNTEAM = MakeTeamCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_CLEAR = ClearCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_EXIT = ExitCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_EDIT = EditCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_REDO = RedoCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_UNDO = UndoCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_SHOW = ShowCommand.MESSAGE_USAGE;
+    public static final String HELP_MESSAGE_FILTERTEAM = FilterPastTeamCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_SKILL = "Skill stores a Skill Name and Skill proficiency. Usage: "
             + "<Command> s/<Skill Name>_<Skill Proficiency> \nExample: edit 1 s/Java_50\n ";
 
@@ -61,6 +66,16 @@ public class HelpCommand extends Command {
             return new CommandResult(HELP_MESSAGE_CLEAR, false, false);
         case "exit":
             return new CommandResult(HELP_MESSAGE_EXIT, false, false);
+        case "edit":
+            return new CommandResult(HELP_MESSAGE_EDIT, false, false);
+        case "undo":
+            return new CommandResult(HELP_MESSAGE_UNDO, false, false);
+        case "redo":
+            return new CommandResult(HELP_MESSAGE_REDO, false, false);
+        case "show":
+            return new CommandResult(HELP_MESSAGE_SHOW, false, false);
+        case "filterteam":
+            return new CommandResult(HELP_MESSAGE_FILTERTEAM, false, false);
         default:
             return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         }
