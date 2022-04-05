@@ -487,6 +487,25 @@ Examples:
 `redo`
 
  After editing a contact's name at Index 3 from `George` to `Adam` and using `undo` to reverse the contact's name back to `George`, using `redo` will restore the contact's name back to `Adam`.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Commands that you can undo/redo:**<br>
+* `add` after successfully adding a contact
+* `addmodules`
+* `comment`
+* `status`
+* `clear`
+* `clearmodules`
+* `delete`
+* `deletemodules`
+* `sort`
+* `switch`
+* `archive`
+* `unarchive`
+* `undo`/`redo` i.e. you can `undo` a `redo`, and you can `redo` an `undo`
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
