@@ -34,7 +34,7 @@ User ..> UI
 legend
  |    **Arrow Type** |         **Meaning** |
  |  Dashed Arrow  |  Indirect dependency  |
- |  Solid Arrow   |  Direct Dependency  |
+ |  Solid Arrow   |  Direct dependency  |
 end legend
 
 @enduml

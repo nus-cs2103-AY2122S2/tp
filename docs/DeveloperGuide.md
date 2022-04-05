@@ -97,7 +97,7 @@ There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type o
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** One of the `ListPanel<T>` is a subclass `ScheduleItemListPanel`, which specifically handles alternating between displaying `Appointment` and `AppointmentSlot` models.
+:information_source: **Note:** One of the `ListPanel<T>` is a subclass `ScheduleItemListPanel`, which specifically handles displaying both `Appointment` and `AppointmentSlot` models in a single list.
 
 </div>
 
@@ -143,7 +143,7 @@ How the parsing works:
 
 <img src="images/ModelOverviewClassDiagram.png" width="600" />
 
-The high-level partial class diagram above shows how the model component is structured, without showing the details of the inner-workings of the `AddressBook` and `Schedule` models. Separate detailed diagrams for each of the `AddressBook` and `Schedule` subcomponents are shown further below.
+The **high-level partial class diagram** above shows how the model component is structured, without showing the details of the inner-workings of the `AddressBook` and `Schedule` models. Separate detailed diagrams for each of the `AddressBook` and `Schedule` subcomponents are shown further below.
 
 The `Model` component,
 
@@ -162,7 +162,7 @@ The class diagram above illustrates how the `AddressBook` subcomponent is struct
 
 The class diagram above illustrates how the `Schedule` subcomponent is structured. The Schedule subcomponent is structured such that:
 
-* The bulk of the time-related functionality is centralized to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
+* The bulk of the time-related functionality is abstracted to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
 * `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
 * The `DisjointAppointmentList` only stores `Appointment` and not `AppointmentSlot` objects.
 
@@ -187,7 +187,7 @@ Within the `storage` package, there also exists a `CsvManager` class that is a h
 
 Classes used by multiple components are in the `seedu.contax.commons` package.
 
-### AddressBook and Schedule Subsystems
+### Alternate Architectural View By Functionality
 
 Departing from the 4-component architectural view of the system, the App can also be logically partitioned into 3 distinct subsystems based on functionality.
 These subsystems are namely the:
