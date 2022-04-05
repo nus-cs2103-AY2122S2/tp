@@ -476,6 +476,7 @@ Format: `prioritizeappt INDEX pri/PRIORITY`
 
 * Edits the priority of appointment that is at `INDEX` in the displayed appointment list, setting the priority to the supplied value.
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `PRIORITY` parameter **must not be same as existing priority level** for appointment at `INDEX` in the **displayed appointment list**.
 * The `PRIORITY` parameter must be non-empty, and can only contain below values (case-insensitive):
   * High
   * Medium
