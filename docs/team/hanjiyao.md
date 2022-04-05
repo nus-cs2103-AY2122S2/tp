@@ -5,24 +5,26 @@ title: Jiyao's Project Portfolio Page
 
 ### Project: ContaX
 
-ContacX is for professionals who have many clients, current and prospective, who may possibly work with sensitive personal information and documents related to each of those clients. They have busy schedules with many appointments & meetings, and must be able to find available time slots in their schedules quickly.
+ContaX is an integrated solution designed for busy professionals who work with many clients and frequently interact with other people. It assists those who have packed schedules in efficiently scheduling appointments, while also being able to respond to volatile changing schedules.
 
-ContacX will allow for efficient management of a large list of contacts, allowing the mental workload of remembering people and related scheduled tasks to be offloaded. It will also provide an efficient way of efficiently organizing resources, while having minimal downtime with seamless transition from existing solutions.
+ContaX allows efficient management of a large list of contacts together with a schedule, providing an integrated solution for tracking work-related information. Built with efficiency in mind, ContaX promises a seamless transition from existing solutions for minimal downtime.
 
 Given below are my contributions to the project.
 
 * **New Feature**: Mass Operations (Chain, Range and Batch)
   * What it does: Allow user to create multiple commands together by range chain, range or batch command
   * Justification: As part of target user profile, this feature improves the usability of the application, it allows seasoned user to quickly perform different multiple commands base which suit for different situation.
-  * Highlights: `To be added soon`
-  * Credits: `To be added soon`
+
+* **New Feature**: Priority
+  * What it does: Allows user to edit the priority level of appointment in the appointment list.
+  * Justification: This improves the usability of the application, as it provide a visual aid to prioritize the appointment in the appointment list, and allow the user organize the appointment more efficiently.
 
 * **Code contributed**:
-  * 2400+ LoC contributed (by version 1.2)
-  * Add relevant testcases
+  * 2800+ LoC contributed to the project. See [Reposense](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jiyao).
+  * Add relevant testcases for mass operations and priority
 
 * **Project management**:
-  * Perform code reviews
+  * Perform code reviews on some pull requests submitted by the team.
 
 * **Enhancements to existing features**:
   * Modify find feature to accept more fields
@@ -30,15 +32,15 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
   * Added documentation for all tag related functionalities, including:
-    * findperson by/
-    * batch by/ =/
-    * chain &&
-    * range from/ to/
+    * `findperson by/`
+    * `batch by/ [=/] [start/] [end/]`
+    * `chain &&`
+    * `range from/ to/`
+    * `prioritizeappt`
   * Developer Guide:
-    * Documentation on how multiple commands bind together
+    * Add documentation section on how multiple commands bind together
+    * Add documentation section on priority
 
 * **Community**:
-  * `to be added soon`
-
-* **Tools**:
-  * `to be added soon`
+  * Provided [100+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [26 PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Ahanjiyao)
+  * Reviewed a total of [24 issues](https://github.com/HanJiyao/ped/issues) during PE dry run  
