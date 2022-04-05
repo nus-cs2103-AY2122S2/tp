@@ -44,5 +44,6 @@ Given below are my contributions to the project.
         * Added sequence diagram and explanation of how the Markdown-like text styler works
 
 * **Community**:
-    * Reviewed many of PRs within the team ([50+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [90+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Adandaandaaaaaan))
+    * Provided [140+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) in PRs and Issues
+    * Reviewed [90+ PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Adandaandaaaaaan) within the team.
     * Reported a total of [10 issues](https://github.com/dandaandaaaaaan/ped/issues) during the PE dry run
