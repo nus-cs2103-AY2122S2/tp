@@ -623,6 +623,9 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **Q** Why have location and address, aren't they the same thing? <br>
 **A** Location refers to the area/town/city the property can/does reside in. Address is the exact location. We decided to separate them as it allows you to more easily match properties where the exact address may not necessarily contain the location name. E.g. 36 College Ave E, North Tower can be considered to be in Clementi/Dover/NUS but does not contain the location name.
 
+**Q** How do I "reset" my property fields like location to "No location"?
+**A** Once you have added a property, you cannot remove a specific field, only edit it. Basically, we do not allow a property to have missing fields, except when the client is first added and all the fields are empty. We have plans in the future to allow users to remove a property completely.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
