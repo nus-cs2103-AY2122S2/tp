@@ -29,7 +29,7 @@ public class FindByTagCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
 
     @Test
-    public void execute_validName_tagFound() {
+    public void execute_validName_personFound() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3),
                 GuiListContentType.PERSON);
 
@@ -39,17 +39,10 @@ public class FindByTagCommandTest {
         expectedModel.updateFilteredPersonList(friendsPredicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
-
-        // Partial keyword
-        TagNameContainsKeywordsPredicate friendsPartialPredicate = new TagNameContainsKeywordsPredicate("fri");
-        FindByTagCommand command2 = new FindByTagCommand(friendsPartialPredicate);
-        expectedModel.updateFilteredPersonList(friendsPredicate);
-        assertCommandSuccess(command2, model, expectedResult, expectedModel);
-        assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_validName_noTagFound() {
+    public void execute_validName_noPersonFound() {
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
                 GuiListContentType.PERSON);
 
@@ -58,6 +51,20 @@ public class FindByTagCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(List.of(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_partialName_noPersonFound() {
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0),
+                GuiListContentType.PERSON);
+
+        // Partial keyword
+        TagNameContainsKeywordsPredicate friendsPartialPredicate = new TagNameContainsKeywordsPredicate("fri");
+        FindByTagCommand command2 = new FindByTagCommand(friendsPartialPredicate);
+        expectedModel.updateFilteredPersonList(friendsPartialPredicate);
+        assertCommandSuccess(command2, model, expectedResult, expectedModel);
+        assertEquals(List.of(), model.getFilteredPersonList());
+
     }
 
     @Test

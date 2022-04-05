@@ -13,18 +13,21 @@ public class TagNameContainsKeywordsPredicateTest {
         // complete words
         TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
         assertTrue(predicate.test(ALICE));
-
-        // partial words
-        predicate = new TagNameContainsKeywordsPredicate("fri");
-        assertTrue(predicate.test(ALICE));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("not the same");
         assertFalse(predicate.test(ALICE));
+    }
 
-        // extra characters of an existing keyword
+    @Test
+    public void test_partialKeywords_returnsFalse() {
+        // partial words
+        TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("fri");
+        assertFalse(predicate.test(ALICE));
+
+        // extra characters of an existing valid keyword
         predicate = new TagNameContainsKeywordsPredicate("ssssfriendsssss");
         assertFalse(predicate.test(ALICE));
     }
