@@ -107,4 +107,29 @@ public class AssignCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        boolean isEquals = false;
+
+        if (other == this) {
+            isEquals = true;
+        } else {
+            boolean isInstanceOf = other instanceof AssignCommand;
+            if (!isInstanceOf) {
+                return false;
+            }
+            AssignCommand commandToCompare = (AssignCommand) other;
+
+            // check student id and task name
+            if (this.studentId != null && this.task != null) {
+                isEquals = studentId.equals(commandToCompare.studentId) && task.equals(commandToCompare.task);
+            }
+
+            // check module code and task name
+            if (this.moduleCode != null && this.task != null) {
+                isEquals = moduleCode.equals(commandToCompare.moduleCode) && task.equals(commandToCompare.task);
+            }
+        }
+        return isEquals;
+    }
 }
