@@ -21,13 +21,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
-public class DeleteModuleCommand extends RedoableCommand {
-    public static final String COMMAND_WORD = "deletemodule";
+public class DeleteModulesCommand extends RedoableCommand {
+    public static final String COMMAND_WORD = "deletemodules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Clear specified modules of the person identified by the index "
             + "number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer and less than 2,147,483,647) "
             + "[" + PREFIX_MODULE + "MODULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE + "CS3230 " + PREFIX_MODULE + "CS1231S\n";
 
@@ -42,7 +42,7 @@ public class DeleteModuleCommand extends RedoableCommand {
      * @param targetIndex of the person in the filtered person list
      * @param modules     modules to be deleted
      */
-    public DeleteModuleCommand(Index targetIndex, List<Module> modules) {
+    public DeleteModulesCommand(Index targetIndex, List<Module> modules) {
         this.targetIndex = targetIndex;
         this.modules = modules;
     }
@@ -72,9 +72,9 @@ public class DeleteModuleCommand extends RedoableCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteModuleCommand // instanceof handles nulls
-                        && targetIndex.equals(((DeleteModuleCommand) other).targetIndex)) // state check
-                        && modules.equals(((DeleteModuleCommand) other).modules);
+                || (other instanceof DeleteModulesCommand // instanceof handles nulls
+                        && targetIndex.equals(((DeleteModulesCommand) other).targetIndex)) // state check
+                        && modules.equals(((DeleteModulesCommand) other).modules);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class StatusCommand extends RedoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing status will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer and less than 2,147,483,647) "
             + PREFIX_STATUS + "[STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STATUS + "blacklist";

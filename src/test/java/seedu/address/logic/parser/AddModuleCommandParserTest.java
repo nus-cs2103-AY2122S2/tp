@@ -16,15 +16,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddModuleCommand;
+import seedu.address.logic.commands.AddModulesCommand;
 import seedu.address.model.module.Module;
 
-class AddModuleCommandParserTest {
+class AddModulesCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModuleCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModulesCommand.MESSAGE_USAGE);
 
-    private final AddModuleCommandParser parser = new AddModuleCommandParser();
+    private final AddModulesCommandParser parser = new AddModulesCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -32,7 +32,7 @@ class AddModuleCommandParserTest {
         assertParseFailure(parser, VALID_MODULE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", AddModuleCommandParser.MESSAGE_EMPTY);
+        assertParseFailure(parser, "1", AddModulesCommandParser.MESSAGE_EMPTY);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -66,7 +66,7 @@ class AddModuleCommandParserTest {
         List<Module> expectedModules = new ArrayList<>();
         expectedModules.add(new Module(VALID_MODULE_SWE));
         expectedModules.add(new Module(VALID_MODULE));
-        AddModuleCommand expectedCommand = new AddModuleCommand(targetIndex, expectedModules);
+        AddModulesCommand expectedCommand = new AddModulesCommand(targetIndex, expectedModules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

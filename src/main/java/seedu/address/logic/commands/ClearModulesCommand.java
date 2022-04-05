@@ -24,7 +24,7 @@ public class ClearModulesCommand extends RedoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Clear all modules of the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer and less than 2,147,483,647)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "%s's modules have been cleared";

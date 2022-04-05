@@ -21,14 +21,14 @@ This section lists down all the features available in MMF. You can click on any 
 - [Help](#viewing-help--help)
 - [List](#listing-all-contacts--list)
 - [Add Contact](#adding-a-contact--add)
-- [Add Module(s) to Contact](#adding-modules-to-a-contact--addmodule)
+- [Add Module(s) to Contact](#adding-modules-to-a-contact--addmodules)
 - [Comment on a Contact](#adding-a-comment-for-a-contact--comment)
 - [Status of a Contact](#adding-a-status-for-a-contact--status)
 - [Copy](#copy-contacts-in-list--copy)
 - [Clear All Data](#clearing-all-entries--clear)
 - [Clear all Modules from Contact](#clearing-all-modules-for-a-contact--clearmodules)
 - [Delete Contact](#deleting-a-contact--delete)
-- [Delete Module(s) from Contact](#deleting-a-module--deletemodule)
+- [Delete Module(s) from Contact](#deleting-a-module--deletemodules)
 - [Edit](#editing-a-contact--edit)
 - [Find](#locating-a-contact-find)
 - [Filter](#locating-a-contact-by-their-module-filter)
@@ -95,6 +95,21 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Below is a table depicting the parameters used in Module Mate Finder and their respective constraints
+
+| Parameter | Constraint                                                                                 | Example             |
+|-----------|--------------------------------------------------------------------------------------------|---------------------|
+| Index     | Index must be a positive integer and be less than 2,147,483,647                            | 1, 2, 3             |
+| Name      | Names should only contain alphanumeric characters and spaces                               | Jerry Lee           |
+| Phone     | Phone number must be at least 3 digits short, and at most 25 digits long                   | 82309 1234          |    
+| Address   | Addresses must be within 60 characters long                                                | 57 Kent Ridge Drive | 
+| Email     | Emails must be of the format `local-part@domain`                                           | berniceYu@email.com |
+| Module    | Module names have 2-3 letters prefix followed by 4 digits and at most two optional letters | CS1101S             |
+| Status    | Status must either be `favourite`, `blacklist` or blank                                    | favourite           |
+| Comment   | Comments must be within 60 characters long                                                 | Good at teamwork    |
+| Format    | Format must either be `default`, `csv` or `json`                                           | csv                 |
+
+
 </div>
 
 
@@ -137,19 +152,19 @@ Then, simply fill up the fields as guided in the window. You can then press the 
 </div>
 
 
-### Adding Module(s) to a Contact : `addmodule`
+### Adding Module(s) to a Contact : `addmodules`
 
 Adds module(s) to an existing contact
 
-Format: `addmodule INDEX m/MODULE [m/MODULE]...`
+Format: `addmodules INDEX m/MODULE [m/MODULE]...`
 
 * Adds modules represented by each module code `m/MODULE` to a contact at Index `INDEX`
 * The `Index` refers to the Index number shown in the displayed contact list.
 * The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
-* `addmodule 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
-* `addmodule 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd contact
+* `addmodules 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
+* `addmodules 2 m/CS1231 m/CS2103T` Adds two modules, `CS1231` and `CS2103T` to the 2nd contact
 
 <div markdown="block" class="alert alert-info">
 
@@ -273,11 +288,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in ModuleMate Finder.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
-### Deleting a module : `deletemodule`
+### Deleting a module : `deletemodules`
 
 Deletes the specified module from contact in ModuleMate Finder.
 
-Format: `deletemodule INDEX m/MODULE [m/MODULE]...`
+Format: `deletemodules INDEX m/MODULE [m/MODULE]...`
 
 * Deletes modules for the contact at the specified `INDEX`.
 * The Index refers to the Index number shown in the displayed contact list.
@@ -286,8 +301,8 @@ Format: `deletemodule INDEX m/MODULE [m/MODULE]...`
 * **One or more** modules must be specified.
 
 Examples:
-* `list` followed by `deletemodule 2 m/CS3230` deletes the module CS3230 for the 2nd contact in ModuleMate Finder.
-* `find Betsy` followed by `deletemodule 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st contact in the results of the `find` command.
+* `list` followed by `deletemodules 2 m/CS3230` deletes the module CS3230 for the 2nd contact in ModuleMate Finder.
+* `find Betsy` followed by `deletemodules 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st contact in the results of the `find` command.
 
 ### Editing a contact : `edit`
 
@@ -301,7 +316,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * **Modules cannot be edited** through the `edit` command.
-  * Instead, use `deletemodule` to remove the modules first, then `addmodule` to add the modules to a contact.
+  * Instead, use `deletemodules` to remove the modules first, then `addmodules` to add the modules to a contact.
 
 Additionally, if one were to simply use `edit`, it would open up a new window to allow you to systematically edit a chosen contact  
 ![edit window](images/edit_window.png)  
@@ -434,14 +449,14 @@ Undoes the most recent command.
 At the moment, the command that can be undone are the following:   
 
 - `add`
-- `addmodule`
+- `addmodules`
 - `archive`
 - `unarchive`
 - `clear`
 - `clearmodules`
 - `comment`
 - `delete`
-- `deletemodule`
+- `deletemodules`
 - `edit`
 - `sort`
 - `status`
@@ -512,14 +527,14 @@ A: You may have seniors who have graduated, but you would like to seek advise fr
 | **Help**                                             | `help`                                                                                               | `help`                                 |
 | **List**                                             | `list`                                                                                               | `list`                                 |
 | **Add Contact**                                      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                                        | `add n/Bob p/87654321 e/bob@u.nus.edu` |
-| **Add Module(s)**                                    | `addmodule INDEX m/MODULE`                                                                           | `addmodule 4 m/CS2100`                 |
+| **Add Module(s)**                                    | `addmodules INDEX m/MODULE`                                                                          | `addmodules 4 m/CS2100`                |
 | **Comment on a Contact**                             | `comment INDEX c/COMMENT`                                                                            | `comment 1 c/Good at math`             |
 | **Status of a Contact**                              | `status INDEX s/STATUS`                                                                              | `status 2 s/favourite`                 |
 | **Copy**                                             | `copy [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [m/MODULE] [c/COMMENT] [f/FORMAT]` | `copy 3 n/ e/ f/csv`                   |
 | **Clear All Data**                                   | `clear`                                                                                              | `clear`                                |
 | **Clear Module(s) From Contact**                     | `clearmodules INDEX`                                                                                 | `clearmodules 3`                       |
 | **Delete Contact**                                   | `delete INDEX`                                                                                       | `delete 3`                             |
-| **Delete Module(s) from Contact**                    | `deletemodule INDEX m/MODULE [m/MODULE]...`                                                          | `deletemodule 1 m/CS1231 m/CS2102`     |
+| **Delete Module(s) from Contact**                    | `deletemodules INDEX m/MODULE [m/MODULE]...`                                                         | `deletemodules 1 m/CS1231 m/CS2102`    |
 | **Edit**                                             | `edit Index [n/NAME] [c/CODE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                | `edit 1 n/Alice`                       |
 | **Find**                                             | `find KEYWORD [MORE_KEYWORDS]`                                                                       | `find James Jake`                      |
 | **Filter**                                           | `filter MODULE`                                                                                      | `filter CS3230`                        |

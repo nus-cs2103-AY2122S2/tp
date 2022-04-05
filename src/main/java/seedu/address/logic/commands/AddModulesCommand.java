@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.DeleteModuleCommand.MESSAGE_FAILURE;
+import static seedu.address.logic.commands.DeleteModulesCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.ArrayList;
@@ -24,14 +24,14 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Status;
 
 
-public class AddModuleCommand extends RedoableCommand {
+public class AddModulesCommand extends RedoableCommand {
 
-    public static final String COMMAND_WORD = "addmodule";
+    public static final String COMMAND_WORD = "addmodules";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add specified modules to the person identified "
             + "by the index number used in the displayed person list. "
             + "Input values will be added on to existing modules.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer and less than 2,147,483,647) "
             + "[" + PREFIX_MODULE + "MODULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_MODULE + "CS3230 " + PREFIX_MODULE + "CS1231S\n";
 
@@ -51,7 +51,7 @@ public class AddModuleCommand extends RedoableCommand {
      * @param targetIndex of the person in the filtered person list
      * @param modulesToAdd modules to be added
      */
-    public AddModuleCommand(Index targetIndex, List<Module> modulesToAdd) {
+    public AddModulesCommand(Index targetIndex, List<Module> modulesToAdd) {
         this.targetIndex = targetIndex;
         this.modulesToAdd = modulesToAdd;
     }
@@ -111,9 +111,9 @@ public class AddModuleCommand extends RedoableCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddModuleCommand // instanceof handles nulls
-                && targetIndex.equals(((AddModuleCommand) other).targetIndex)) // state check
-                && modulesToAdd.equals(((AddModuleCommand) other).modulesToAdd);
+                || (other instanceof AddModulesCommand // instanceof handles nulls
+                && targetIndex.equals(((AddModulesCommand) other).targetIndex)) // state check
+                && modulesToAdd.equals(((AddModulesCommand) other).modulesToAdd);
     }
 
     /**

@@ -162,7 +162,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Modules Feature
 #### Implementation
 
-The add modules mechanism is facilitated by `AddModuleCommand`. Its functionality is implemented in the `AddModuleCommand.java` class which follows the `Command` interface. It extends `Command` with a list of modules `List<Module>` that is to be added to an existing person, as well as the index of the person to add the modules to, stored internally as `modulesToAdd` and `targetIndex` respectively.
+The add modules mechanism is facilitated by `AddModulesCommand`. Its functionality is implemented in the `AddModulesCommand.java` class which follows the `Command` interface. It extends `Command` with a list of modules `List<Module>` that is to be added to an existing person, as well as the index of the person to add the modules to, stored internally as `modulesToAdd` and `targetIndex` respectively.
 
 Additionally, it implements the following operations: 
 * `Command#execute(Model model)` - Returns the feedback message containing information about module(s) added to a target person, for eventual displays in the GUI.
@@ -173,7 +173,7 @@ Additionally, it implements the following operations:
 
 Below is a sequence diagram showing the overview of how add modules works:
 
-![AddModuleSequenceDiagram](images/AddModuleSequenceDiagram.png)
+![AddModulesSequenceDiagram](images/AddModulesSequenceDiagram.png)
 
 Each `Person` has a `Set<Module>` that represents the Collection of `Modules` associated with that `Person`.
 Hence, we utilize the behaviour of the `Set` data structure to both store and add modules to a person, automatically adding any new unique Modules while ignoring Modules that already exist, without requiring any further duplicate-checking on our part.
@@ -259,7 +259,7 @@ Implement a separate command to handle the removal of `comment`.
 - Pros: 
   - An empty comment command (`comment 1`) will show an error message, which is more intuitive.
 - Cons: 
-  - Results in excessive code duplication, as `delete` and `deletemodule` are implemented in a very similar way 
+  - Results in excessive code duplication, as `delete` and `deletemodules` are implemented in a very similar way 
     to how a proposed `deletecomment` command will be implemented.
     <br /><br />
 
@@ -276,11 +276,11 @@ Step 2: User input is strung together to follow the proper `Command` format, whi
 the rest of the execution.  
 
 Step 3: `AddWindow` allows for the execution of multiple commands within a single window. Executing multiple 
-commands (`status`, `addmodule`) is done by checking if the given inputs are valid. 
+commands (`status`, `addmodules`) is done by checking if the given inputs are valid. 
 
 Step 4: If they are valid, we pass the execution to `Logic` to handle the adding of a `Person`. 
 
-Step 5: After a `Person` is added, retrieve the last index from `PersonList`, then pass the user inputs for `status` and/or `addmodule` into `Logic` again to execute the commands
+Step 5: After a `Person` is added, retrieve the last index from `PersonList`, then pass the user inputs for `status` and/or `addmodules` into `Logic` again to execute the commands
 
 The following activity diagram shows how a `Person` with `Status` and `Module` is added when the given command is `add` or when the user opens `AddWindow`
 ![GuiAddActivityDiagram](images/GuiAddActivityDiagram.png)

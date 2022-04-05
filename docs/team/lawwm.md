@@ -47,7 +47,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   - User Guide:
-    - Added documentation for the features `deletemodule`, `clearmodules`, `sort` and `copy`.
+    - Added documentation for the features `deletemodules`, `clearmodules`, `sort` and `copy`.
 
   - Developer Guide:
     - Added implementation details of the `sort` feature [(PR #86)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/86/files).

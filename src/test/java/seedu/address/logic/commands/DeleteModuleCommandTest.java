@@ -25,16 +25,16 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-class DeleteModuleCommandTest {
+class DeleteModulesCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Module> modules = new ArrayList<>(personToDelete.getModules());
-        DeleteModuleCommand deleteCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON, modules);
+        DeleteModulesCommand deleteCommand = new DeleteModulesCommand(INDEX_FIRST_PERSON, modules);
 
-        String expectedMessage = String.format(DeleteModuleCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(DeleteModulesCommand.MESSAGE_SUCCESS,
                 personToDelete.getName(), personToDelete.getModules());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new AddressBook(), new UserPrefs());
@@ -48,7 +48,7 @@ class DeleteModuleCommandTest {
     public void execute_invalidIndexUnfilteredList_failure() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Module> modules = new ArrayList<>(personToDelete.getModules());
-        DeleteModuleCommand deleteCommand = new DeleteModuleCommand(Index.fromOneBased(1000), modules);
+        DeleteModulesCommand deleteCommand = new DeleteModulesCommand(Index.fromOneBased(1000), modules);
 
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
@@ -70,9 +70,9 @@ class DeleteModuleCommandTest {
             modulesPersonDoesNotHave.add(new Module(alteredModuleName));
         }
 
-        DeleteModuleCommand deleteCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON, modulesPersonDoesNotHave);
+        DeleteModulesCommand deleteCommand = new DeleteModulesCommand(INDEX_FIRST_PERSON, modulesPersonDoesNotHave);
 
-        String expectedMessage = String.format(DeleteModuleCommand.MESSAGE_FAILURE, modulesPersonDoesNotHave);
+        String expectedMessage = String.format(DeleteModulesCommand.MESSAGE_FAILURE, modulesPersonDoesNotHave);
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
@@ -83,13 +83,13 @@ class DeleteModuleCommandTest {
         List<Module> modules = first.getModules().stream()
                 .collect(Collectors.toList());
 
-        DeleteModuleCommand deleteFirstCommand = new DeleteModuleCommand(INDEX_FIRST_PERSON, modules);
+        DeleteModulesCommand deleteFirstCommand = new DeleteModulesCommand(INDEX_FIRST_PERSON, modules);
 
         // same object -> returns true
         assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
-        DeleteModuleCommand deleteFirstCommandCopy = new DeleteModuleCommand(INDEX_FIRST_PERSON, modules);
+        DeleteModulesCommand deleteFirstCommandCopy = new DeleteModulesCommand(INDEX_FIRST_PERSON, modules);
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
@@ -102,7 +102,7 @@ class DeleteModuleCommandTest {
         Person second = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         List<Module> modulesCopy = second.getModules().stream()
                 .collect(Collectors.toList());
-        DeleteModuleCommand deleteSecondCommand = new DeleteModuleCommand(INDEX_SECOND_PERSON, modulesCopy);
+        DeleteModulesCommand deleteSecondCommand = new DeleteModulesCommand(INDEX_SECOND_PERSON, modulesCopy);
         assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
 }

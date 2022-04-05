@@ -22,7 +22,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-class AddModuleCommandTest {
+class AddModulesCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
 
     @Test
@@ -32,9 +32,9 @@ class AddModuleCommandTest {
 
         List<Module> modules = new ArrayList<>();
         modules.add(new Module(VALID_MODULE_PM1));
-        AddModuleCommand addModuleCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
+        AddModulesCommand addModuleCommand = new AddModulesCommand(INDEX_FIRST_PERSON, modules);
 
-        String expectedMessage = String.format(AddModuleCommand.MESSAGE_SUCCESS, firstPerson.getName(), modules);
+        String expectedMessage = String.format(AddModulesCommand.MESSAGE_SUCCESS, firstPerson.getName(), modules);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new AddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -47,13 +47,13 @@ class AddModuleCommandTest {
         Person first = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Module> modules = new ArrayList<>(first.getModules());
 
-        AddModuleCommand addFirstCommand = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
+        AddModulesCommand addFirstCommand = new AddModulesCommand(INDEX_FIRST_PERSON, modules);
 
         // same object -> returns true
         assertEquals(addFirstCommand, addFirstCommand);
 
         // same values -> returns true
-        AddModuleCommand deleteFirstCommandCopy = new AddModuleCommand(INDEX_FIRST_PERSON, modules);
+        AddModulesCommand deleteFirstCommandCopy = new AddModulesCommand(INDEX_FIRST_PERSON, modules);
         assertEquals(addFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
@@ -65,7 +65,7 @@ class AddModuleCommandTest {
         // different person -> returns false
         Person second = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         List<Module> modulesCopy = new ArrayList<>(second.getModules());
-        AddModuleCommand addSecondCommand = new AddModuleCommand(INDEX_SECOND_PERSON, modulesCopy);
+        AddModulesCommand addSecondCommand = new AddModulesCommand(INDEX_SECOND_PERSON, modulesCopy);
         assertNotEquals(addFirstCommand, addSecondCommand);
     }
 }

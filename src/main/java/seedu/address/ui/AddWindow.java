@@ -219,7 +219,7 @@ public class AddWindow extends UiPart<Stage> {
      */
     private void addModulesForNewPerson() {
         int lastIndex = getAbLastIndex();
-        StringBuilder commandText = new StringBuilder("addmodule ").append(lastIndex);
+        StringBuilder commandText = new StringBuilder("addmodules ").append(lastIndex);
         String[] modules = modulesField.getText().split(" ");
 
         if (!modules[0].equals("")) {
@@ -233,7 +233,7 @@ public class AddWindow extends UiPart<Stage> {
                 }
             }
 
-            // Then, execute the addmodule command.
+            // Then, execute the addmodules command.
             commandText.append(" ").append(modsToAdd);
             try {
                 executeCommand(commandText.toString());
