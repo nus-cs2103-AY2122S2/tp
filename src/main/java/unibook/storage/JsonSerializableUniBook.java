@@ -83,9 +83,9 @@ class JsonSerializableUniBook {
         //add all stored people to unibook
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType(uniBook);
-            if (uniBook.phoneNumberBeingUsed(person.getPhone())) {
+            if (!person.getPhone().isEmpty() && uniBook.phoneNumberBeingUsed(person.getPhone())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PHONE);
-            } else if (uniBook.emailBeingUsed(person.getEmail())) {
+            } else if (!person.getEmail().isEmpty() && uniBook.emailBeingUsed(person.getEmail())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EMAIL);
             } else {
                 uniBook.addPerson(person);

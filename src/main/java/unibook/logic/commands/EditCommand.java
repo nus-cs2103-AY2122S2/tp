@@ -345,7 +345,7 @@ public class EditCommand extends Command {
                 }
             }
             ModelManager mm = (ModelManager) model;
-            //mm.getUi().setGroupListPanel(groups);
+            mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
             // TODO make the command result for editing success more elaborate
             return new CommandResult(MESSAGE_EDIT_GROUP_SUCCESS);
