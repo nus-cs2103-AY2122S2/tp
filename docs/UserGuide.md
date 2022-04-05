@@ -58,10 +58,10 @@ The Features section will be split into 3 subsections for:
 * Input can be in any order.<br>
   e.g. Even if the command specifies `n/NAME p/PHONE_NUMBER` in the documentation, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If an input is expected only once in the command, but you specified it multiple times, only the **last occurrence** of the parameter will be taken.<br>
+* If an input is expected only once in the command, but you specified it multiple times, only the **last occurrence** of the input will be taken.<br>
   e.g. If you specify `add-b n/Chok Hoe p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Additional input for single-word commands (such as `help`, `list-s`, `exit` and `clear-b`) will be ignored.<br>
+* Additional input for single-word commands (such as `help`, `list-s`, `exit` and `clear-b`) will be ignored and the application will continue executing the command.<br>
   e.g. If the input specifies `help 123`, it will be interpreted as `help`.
 
 * **Property** refers to different things dependent on whether it is used under a Buyer-specific or Seller-specific command.
@@ -69,6 +69,22 @@ The Features section will be split into 3 subsections for:
   * For Seller-specific commands, it refers to the **exact property they are looking to sell**. E.g. "A HDB at Blk 333, Kent Ridge Drive #03-3333 for $700,000 to $710,000".
   * Both property types include a **Location**, **Price range** and **House type**. E.g. In the 1st example, HDB is the house type, Serangoon is the location, and $500,000 to $600,000 (inclusive) is the price range.
   * However, Seller-specific property has an **Address** defining the exact address their property is located. E.g. In the 2nd example, address is Blk 333, Kent Ridge Drive #03-3333.
+  * To learn more about **formatting** your property inputs see below. To see more **requirements** for inputs, refer to `add-ptb` and `add-pts` commands.
+* Formatting your Property inputs:
+  * **House type** can be inputted as any of the following (case-insensitive):
+    1. **Unspecified**: `unspecified` or `any`
+    2. **Apartment**: `apartment`
+    3. **Bungalow**: `bungalow`
+    4. **Condominium**: `condominium` or `condo`
+    5. **Colonia**: `colonia`
+    6. **HDB**: `hdb` or `hdb_flat`
+    7. **Semi-detached**: `semi-detached` or `semi-d` or `semidetached` or `semid`
+    8. **Mansion**: `mansion` 
+    - Any other house type is not accepted.
+  * **Location** & **Address** must be non-empty, and can contain **alphabets**, **numerics** and **special symbols**. E.g. `Kent Ridge 1/2`. 
+    * However, inputs like `l/Bishan h/hdb` will be treated as `l/Bishan` & `h/hdb` (see above).
+    * Typing `l/Bishanh/abcpr/0,2` is still acceptable and will treat `Bishanh/abcpr/0,2` as the input.
+  * **Price range** must be in a `lower,upper` format. E.g. `1000,2000`
 * The **displayed seller list** & **displayed buyer list** are the sellers and buyers shown on the UI of the application respectively. They do not refer to the entire list of buyers & sellers.
 * If we do refer to the whole list of buyers or sellers, we will just use **buyer list** or **seller list** respectively.
 
@@ -118,7 +134,12 @@ Function: Add a buyer to the buyer list. This is essential for you to add a buye
 Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 
 * The order of inputs can be in any order.
-* The `NAME` and `PHONE_NUMBER` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
+* The `NAME`, `PHONE_NUMBER` and `TAG` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
+* `NAME` should only contain **alphanumeric** characters. E.g. `John 1` or `John 2` if you are using numbers to differentiate buyers with the same name.
+* `NAME` cannot be repeated for different buyers. E.g. `John` & `John`. However, we allow for different cases. E.g. `John` & `john`.
+* `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
+* Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
+* When a buyer is initially added, they will default to having **no** Property. Use `add-ptb` to add a respective property.
 
 Examples:
 * `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
@@ -126,27 +147,15 @@ Examples:
 
 #### Adding a property to buy. `add-ptb`
 
-Function: Add a new property for the specified buyer. Add a the conditions of a property that your buyer is interested in!
+Function: Add a new property for the specified buyer. Add all the conditions of a property that your buyer is interested in!
 
 Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 
 * Adds a new property that the buyer at `INDEX` is hoping to buy. The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
 * The order of the inputs can be in any order.
-* None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
-* The `PRICE_RANGE` is specified in the following format: `lower,upper`.
-* The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
-### House Type
-* The `HOUSE_TYPE` can be defined as any of the following:
-  * `unspecified`
-  * `apartment`
-  * `bungalow`
-  * `condominium` or `condo`
-  * `colonia`
-  * `hdb` or `hdb_flat`
-  * `semi-detached` or `semi-d` or `semidetached` or `semid`
-  * `mansion`
-* Any other `HOUSE_TYPE` will not be accepted.
-* `LOCATION` can be any non-empty input, but do use appropriate locations for your own utility. E.g. `Bishan` or `Marymount`
+* The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
+* The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
+* Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
 
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
@@ -339,7 +348,12 @@ Function: Add a seller to the seller list. This is essential for you to add a se
 Format: `add-s n/NAME p/PHONE_NUMBER [t/TAG]...`
 
 * The order of inputs can be in any order.
-* The `NAME` and `PHONE_NUMBER` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
+* The `NAME`, `PHONE_NUMBER` and `TAG` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
+* `NAME` should only contain **alphanumeric** characters. E.g. `John 1` or `John 2` if you are using numbers to differentiate sellers with the same name.
+* `NAME` cannot be repeated for different sellers. E.g. `John` & `John`. However, we allow for different cases. E.g. `John` & `john`.
+* `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
+* Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
+* When a seller is initially added, they will default to having **no** Property. Use `add-pts` to add a respective property.
 
 Examples:
 * `add-s n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
@@ -363,24 +377,16 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 
 * Adds a new property that the seller at `INDEX` is hoping to sell. The index refers to the index number shown in the displayed seller list. The index **must be a positive whole number** 1, 2, 3, …​
 * The order of the inputs can be in any order.
-* None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
-* The `PRICE_RANGE` is specified in the following format: `lower,upper`.
-* The `PRICE_RANGE` must be a valid **positive whole number** with `lower` being less than or equal to `upper`.
-* The `HOUSE_TYPE` can be defined as any of the following:
-  * `any`
-  * `apartment`
-  * `bungalow`
-  * `condominium` or `condo`
-  * `colonia`
-  * `hdb` or `hdb_flat`
-  * `semi-detached` or `semi-d` or `semidetached` or `semid`
-  * `mansion`
-* Any other `HOUSE_TYPE` will not be accepted.
-* `LOCATION` can be any non-empty input, but do use appropriate locations to maximize your own utility. E.g. `Bishan` or `Marymount`
-* `ADDRESS` can be any non-empty input, but do use appropriate address to maximize your own utility. E.g. `Blk 343, Ajax Ave 1121`
+* The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
+* The `PRICE_RANGE` can include `0` since the seller might be generous and give their house away for free.
+* Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
+* Do use appropriate `ADDRESS` to maximize your own utility. E.g. `Blk 343, Ajax Ave 1121`. The application will not check if it is an actual location in Singapore or elsewhere.
+* The application will not check if the `LOCATION` actually contains a property with the given `ADDRESS`. It is up to your due diligence to ensure `ADDRESS` is at `LOCATION` stated.
+* It is possible for multiple different sellers to sell same `ADDRESS` properties. This is for cases that you are storing information about separate residents of the property.
+* Similarly, it is possible for sellers with the same `ADDRESS` to have different `LOCATION`, `PRICE_RANGE` & `HOUSE_TYPE` since they might each have their own perspectives of where each property resides, its type, or what its worth.
 
   Examples:
-* `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Bishan for any price from $800,000 to $900,000.
+* `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Ajax at Ajax Ave 1, 02-100 for any price from $800,000 to $900,000.
 
 #### Adding an appointment with seller. `appt-s`
 
@@ -604,6 +610,15 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 
 **Q**: Why does long text hide the labels and text?<br>
 **A**: The text is hidden as it is too long. We will have plans in the future to restrict the length of text fields.
+
+**Q** Why does my house type on UI not match the one I just entered, even though it's correct? <br>
+**A** Certain inputs like `MaNsIoN` are also accepted, but are not visually appealing, hence, we default each input for a house type to a certain displayed text.
+
+**Q** Why is `add-b n/goutham s/o karthik p/3456789` not accepted in `add-b` or `add-s`? <br>
+**A** Your name contains non-alphanumeric characters `/`. Even if it is an actual name, it does not conform to our requirements.
+
+**Q** My phone number be ridiculously long `238223212393288...` even though it's not possible!
+**A** We do not set a hard limit to the length of your phone number since they can be of different lengths.
 
 --------------------------------------------------------------------------------------------------------------------
 
