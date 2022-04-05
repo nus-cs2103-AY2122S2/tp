@@ -48,7 +48,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePets_throwsDuplicatePetException() {
         // Two pets with the same identity fields
-        Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOBA).withTags(VALID_TAG_FRIEND)
                 .build();
         List<Pet> newPets = Arrays.asList(BOBA, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPets);
