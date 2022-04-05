@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_BOB_WITH_SPACES = "Bob    Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "81234567";
+    public static final String VALID_PHONE_BOB = "61234567";
     public static final String VALID_OWNER_NAME_AMY = "Sarah Lee";
     public static final String VALID_OWNER_NAME_BOB = "Bob Lee";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
