@@ -144,7 +144,18 @@ Adds a lesson to TeachWhat!
 
 Command word: `addlesson` / `al`
 
-Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`
+Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>
+[-s <LESSON_SUBJECT> ]
+[-a <ADDRESS_OF_LESSON>]
+[-r <IF_LESSON_IS_RECURRING]
+`
+
+<div markdown="block" class="alert alert-info">
+- to specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! if it is a temporary lesson, simply leave it out.
+- also, it is also okay to leave out the lesson's subject and address fields empty!
+</div>
+
+
 
 Supported Types: Recurring `-r` and Temporary
 
