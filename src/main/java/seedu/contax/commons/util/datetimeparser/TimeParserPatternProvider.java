@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
  * the {@code datetimeparser} package.
  */
 class TimeParserPatternProvider {
-    static final String TIME_MODIFIER_AM = "am";
     static final String TIME_MODIFIER_PM = "pm";
 
     /** Matches the HH:mm or HH-mm 24-hour time format. **/

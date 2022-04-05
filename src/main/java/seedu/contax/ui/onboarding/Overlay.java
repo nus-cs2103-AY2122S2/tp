@@ -93,6 +93,7 @@ public class Overlay extends UiPart<Region> {
         case TOP:
             showOverlay(topOverlay);
             hideOverlay(bottomOverlay);
+            bottomOverlay.setVisible(true);
             break;
         default:
             break;

@@ -55,7 +55,8 @@ public class DateParser {
             int day = Integer.parseInt(match.group(1));
             int month = Integer.parseInt(match.group(2));
             int year = Integer.parseInt(match.group(3));
-            return Optional.of(LocalDate.of(year, month, day));
+
+            return Optional.of(makeDateObject(day, month, year));
         } catch (NumberFormatException | DateTimeException ex) {
             return Optional.empty();
         }
@@ -73,6 +74,22 @@ public class DateParser {
      */
     private static Optional<Matcher> matchNaturalFormat(String input) {
         final String paddedLowerCaseInput = " " + input.toLowerCase() + " ";
+
+        // Check if there are duplicates
+        Matcher dayMatch = DateParserPatternProvider.NATURAL_DAY_OF_MONTH_PATTERN.matcher(paddedLowerCaseInput);
+        Matcher monthMatch = DateParserPatternProvider.NATURAL_MONTH_PATTERN.matcher(paddedLowerCaseInput);
+        Matcher yearMatch = DateParserPatternProvider.NATURAL_YEAR_PATTERN.matcher(paddedLowerCaseInput);
+
+        // There is < 1 occurrence of the component.
+        if (!dayMatch.find() || !monthMatch.find() || !yearMatch.find()) {
+            return Optional.empty();
+        }
+        // There is > 1 occurrence of the component. It takes end - 1 because they may share the space
+        if (dayMatch.find(dayMatch.end() - 1) || monthMatch.find(monthMatch.end() - 1)
+                || yearMatch.find(yearMatch.end() - 1)) {
+            return Optional.empty();
+        }
+
         Matcher match = DateParserPatternProvider.NATURAL_DATE_PATTERN.matcher(paddedLowerCaseInput);
         if (!match.matches()) {
             return Optional.empty();
@@ -91,16 +108,38 @@ public class DateParser {
     private static Optional<LocalDate> parseNaturalFormat(Matcher match) {
         try {
             int day = Integer.parseInt(match.group(1));
-            int month = DateParserPatternProvider.monthStringToDecimal(match.group(2));
+            int month = DateParserPatternProvider.convertMonthStringToDecimal(match.group(2));
             int year = Integer.parseInt(match.group(3));
 
             if (month < 1) {
                 return Optional.empty();
             }
 
-            return Optional.of(LocalDate.of(year, month, day));
+            return Optional.of(makeDateObject(day, month, year));
         } catch (NumberFormatException | DateTimeException ex) {
             return Optional.empty();
         }
+    }
+
+    /**
+     * Creates a {@code LocalDate} object with the supplied day, month and year values.
+     * Checks if the created object was automatically adjusted by java into another value during the
+     * conversion process of {@code LocalDate}.
+     *
+     * @param day The day-of-month of the created LocalDate.
+     * @param month The month of the created LocalDate.
+     * @param year The year of the created LocalDate.
+     * @return A LocalDate with the specified values.
+     * @throws DateTimeException If any of the year, month or day values were invalid.
+     */
+    private static LocalDate makeDateObject(int day, int month, int year) throws DateTimeException {
+        LocalDate parsedDate = LocalDate.of(year, month, day);
+
+        // Detect if Java performed any auto-adjustments to the date object
+        if (parsedDate.getDayOfMonth() != day || parsedDate.getMonthValue() != month
+                || parsedDate.getYear() != year) {
+            throw new DateTimeException("Invalid day, month or year");
+        }
+        return parsedDate;
     }
 }

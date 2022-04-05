@@ -278,7 +278,7 @@ The no-overlap constraint is enforced at such a low level as a defensive measure
 While chronological ordering can arguably be enforced in `ModelManager` or even the `UI` component, the decision to implement it at such a low level is due to the fact that `DisjointAppointmentList` is the only class that has direct access to the underlying list of appointments.
 Although manipulation using the public methods can be done, they do not provide index-level manipulation, and are hence less efficient due to the extra `List#indexOf` operation required. The solution of implementing additional index-based operations exists, but would result in highly specialized methods that are only used by the sorting function, unnecessarily complicating the class.
 
-In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance. 
+In order to efficiently maintain chronological ordering upon list modification, `DisjointAppointmentList` implements the shifting operation of *Insertion Sort* in the private method `DisjointAppointmentList#shiftAppointmentToPosition(index)`. *Insertion Sort* is **significantly faster** than the default Java list sort function, which uses *Quick Sort*, when only 1 element is out of place. For list modifications, this is always the case, and the implementation will result in better sorting performance.
 
 |<img src="images/DisjointAppointmentListSortBefore.png" width="550" />|
 | - |
@@ -302,7 +302,7 @@ A call of `Model#addAppointment()` is shown below to illustrate how a call is pr
 
 #### Appointment Slot List
 
-The `freebetween` feature requires the display the available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
+The `freebetween` feature requires the display of available slots chronologically between `Appointment` objects in the schedule. In order to support this, available slots in the `Schedule` are modelled as `AppointmentSlot` objects. However, since `AppointmentSlot` objects are dependent on and change with the `Schedule`, it is not possible to maintain a separate independent list of `AppointmentSlot` objects.
 
 Instead, the design of the system uses a wrapper `AppointmentSlotList` class that automatically computes the available slots in the `Schedule`. The `AppointmentSlotList` watches the backing `Schedule` for changes, and updates itself automatically, abstracting the underlying dependency to external classes.
 
@@ -332,7 +332,7 @@ The sequence diagram below illustrates an example of both `Parser` and `UI` acce
 
 ### Schedule Serialization and Inflation
 
-`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated. 
+`Schedule` serialization and inflation is handled by the `Storage` component in a simliar fashion to the serialization and inflation of `AddressBook`. Importantly, because appointments depend on the existence of persons in the `AddressBook`, the `AddressBook` **must** be inflated **before** `Schedule` is inflated.
 
 The inflation process is also designed to be forgiving, and will skip corrupted records instead of invalidating the entire data file.
 
@@ -356,6 +356,10 @@ The data for `Schedule`, containing multiple `Appointment` objects is stored in 
 
 However, this implementation comes with the increased risk of desynchronization between the AddressBook and Schedule data files. This is deemed an acceptable risk, but is also mitigated by validation checks during the inflation process to discard invalid appointment data, ensuring that the application only works with valid appointments.
 
+### Edit Appointment Priority Feature - `prioritizeappt`
+
+The priority feature is similar to the edit for `Appointment` but specifically changes the appointment's priority to one of the `Priority` values.
+The `Priority` enum values provide the display name of the enum denoting priority level, and the static `Priority#getFromDisplayName()` method handles the case-insensitive String to enum conversion.
 ### Date Time Input Parsing
 
 The app accepts multiple date and time formats to make it easier for users to input. This functionality is implemented by the `DateUtil` class, supported by the `commons.util.datetimeparser` package.
@@ -364,7 +368,7 @@ A high-level overview of the organization of the package is shown below.
 
 ![DateUtil Architecture](images/DateTimeUtilArchitecture.png)
 
-The organization of the time parser mirrors the date parsers, and their purposes are as follows:
+The organization of the time parser mirrors the date parser, and their purposes are as follows:
 
 * `TimeParser` / `DateParser`: Contains the actual parsing logic for determining the input format and the parsing logic to use
 * `TimeParserPatternProvider` / `DateParserPatternProvider`: Contains the Regex patterns required for parsing
@@ -512,6 +516,7 @@ This extension allows the user to perform range of commands based on `index`. Du
 #### Batch Command
 
 This extension allows the editing of `Person` objects that have attributes matching a specific value. Since this matching requires the objects to already exist, only edit and delete operations can be performed. The command translates the `Person` objects matching the condition into a series of indexes and executes the specified command on them sequentially.
+The field of Batch Command parameters are checked in a defensive way that only one equal, start or end can be accepted.
 
 The sequence diagram is as follows:
 ![Input to Index](images/BatchCommandInputToIndexSequenceDiagram.png)
@@ -700,98 +705,247 @@ The following user stories were considered but ultimately not implemented. Some 
 
 Note that since underline is not allowed in markdown, included use cases are **bolded** instead.
 
-**Use case: List persons**
+#### Person-Related Use Cases
+![Person Use Case](images/UseCaseDiagramPersons.png)
+
+**UC1: List Persons**
 
 **MSS**
 
-1. User requests to list persons
-2. ContaX shows a list of persons
-
+1. User requests to list persons.
+2. ContaX shows a list of persons.
     Use case ends.
 
-**Use case: Add a person**
+**UC2: Add Person**
 
 **MSS**
 
-1. User requests to add a person
-2. ContaX adds the person
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-* 1b. A parameter given is in an invalid format
-
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
-
-    * Use case ends.
-
-* 1c. The person already exists
-
-    * 1c1. ContaX shows an error message indicating that the person already exists.
-
-    * Use case ends.
-
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  ContaX shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  ContaX deletes the person
-
+1. User requests to add a person.
+2. User enters details of the new person.
+3. ContaX adds the new person.
+4. ContaX shows that the person has been added successfully.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 2a. ContaX detects that a required person attribute was not supplied.
+    * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
 
-  Use case ends.
+* 2b. ContaX detects that a supplied attribute has an invalid value.
+    * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 2b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
 
-* 3a. The command given is in an invalid format
+* 2c. ContaX detects that the person already exists.
+    * 2c1. ContaX shows an error message indicating that the person already exists.
+    * Use case ends.<br>&nbsp;
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case resumes at step 2.
-
-**Use case: Edit a person**
+**UC3: Delete Person**
 
 **MSS**
 
-1. User requests to list persons
-2. ContaX shows a list of persons
-3. User requests to modify a specific person and enters new values
-4. ContaX edits the person accordingly
-
+1. User requests to **list persons (UC1)**.
+2. ContaX displays a list of persons.
+3. User requests to delete a person.
+4. User selects the person to delete.
+5. ContaX deletes the person.
+6. ContaX displays a message indicating that the person was successfully deleted.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User filters person by attribute.
+  * 1a1. User **finds person (UC5)**.
+  * Use case resumes from step 2.<br>&nbsp;
 
-  Use case ends.
+* 1b. User filters persons by tag keyword.
+  * 1b1. User **finds person by tag (UC10)**.
+  * Use case resumes from step 2.<br>&nbsp;
 
-* 3a. The command given is in an invalid format
+* 2a. ContaX has no persons to list.
+  * Use case ends.<br>&nbsp;
 
-    * 3a1. ContaX shows an error message indicating that the given command is of invalid format.
+* 3a. ContaX cannot find the requested person to delete.
+  * 3a1. ContaX shows an error message indicating that no such person exists.
+  * Use case ends.<br>&nbsp;
 
-    * Use case resumes at step 2.
+**UC4: Edit Person**
 
-* 3b. A parameter given is in an invalid format
+**MSS**
 
-    * 1b1. ContaX shows an error message indicating that the given parameter is of invalid format.
+1. User requests to **list persons (UC1)**.
+2. ContaX shows a list of persons.
+3. User requests to edit person.
+4. User enters details to modify a specific person.
+5. ContaX updates the specified person.
+6. ContaX displays a message indicating that the person was successfully edited.
+    Use case ends.
 
-    * Use case resumes at step 2.
+**Extensions**
+
+* 1a. User filters person by attribute.
+    * 1a1. User **finds person (UC5)**.
+    * Use case resumes from step 2.<br>&nbsp;
+
+* 1b. User filters persons by tag keyword.
+    * 1b1. User **finds person by tag (UC10)**.
+    * Use case resumes from step 2.<br>&nbsp;
+
+* 2a. ContaX has no persons to list.
+  * Use case ends.<br>&nbsp;
+
+* 4a. ContaX detects that a required person attribute was not supplied.
+    * 4a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
+
+* 4b. ContaX detects that a supplied attribute has an invalid value
+    * 4b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+    * 4b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
+
+* 5a. ContaX cannot find the requested person to edit.
+    * 5a1. ContaX shows an error message indicating that no such person exists.
+    * Use case ends.<br>&nbsp;
+
+* 5b. ContaX detects that a person with the same name already exists.
+    * 5b1. ContaX shows an error message indicating that the person already exists.
+    * Use case ends.<br>&nbsp;
+
+**UC5: Find Persons**
+
+**MSS**
+
+1. User requests to find persons.
+2. User enters details to find person by.
+3. ContaX shows a list of persons that matches the specified details.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that a required person attribute was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that a supplied attribute has an invalid value
+  * 2b1. ContaX shows an error message indicating that the supplied parameter is invalid.
+  * 2b2. ContaX shows the expected allowed values.
+  * Use case ends.<br>&nbsp;
+
+* 3a. ContaX has no persons to list.
+  * 3a1. Use case ends.<br>&nbsp;
+
+#### Tag-Related Use Cases
+![Tag Use Case](images/UseCaseDiagramTags.png)
+
+**UC6: List All Tags**
+
+**MSS**
+
+1. User requests to list tags.
+2. ContaX shows a list of tags
+    Use case ends.
+
+**UC7: Add Person Tag**
+
+**MSS**
+
+1. User requests to add tag.
+2. User enters details to add tag.
+3. ContaX adds new tag.
+4. ContaX shows that the appointment has been added successfully.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that the required tag attributed was not supplied.
+  * 2a1. ContaX shows an error message indicating that there is a missing required attribute.
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that invalid characters were supplied.
+  * 2b1. ContaX shows an error message indicating that an invalid character was found.
+  * 2b2. ContaX shows the expected allowed values.
+  * Use case ends.<br>&nbsp;
+
+* 3a. ContaX detects that the tag already exists.
+  * 3a1. ContaX shows an error message indicating that the tag already exists in the system.
+  * Use case ends.<br>&nbsp;
+
+**UC8: Edit Person Tag**
+
+**MSS**
+
+1. User **lists all tags (UC6)**.
+2. User requests to edit tag.
+3. User enters details to edit tag.
+4. ContaX updates the specified tag.
+5. ContaX shows that the tag has been edited successfully.
+   Use case ends.
+
+**Extensions**
+
+* 3a. ContaX detects that the required tag attributed was not supplied.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
+
+* 3b. ContaX detects that invalid characters were supplied.
+    * 3b1. ContaX shows an error message indicating that an invalid character was found.
+    * 3b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
+
+* 4a. ContaX cannot find the requested tag to edit.
+  * 4a1. ContaX shows an error message indicating that no such tag exists.
+  * Use case ends.<br>&nbsp;
+
+* 4b. ContaX detects that the updated tag already exists.
+  * 4b1. Contax shows an error message indicating that the tag already exists in the system.
+  * Use case ends.<br>&nbsp;
+
+**UC9: Delete Person Tag**
+
+**MSS**
+
+1. User **list All Tags (UC6)**.
+2. User requests to delete tag.
+3. User enters details to delete tag.
+4. ContaX deletes the specified tag.
+5. ContaX shows that the tag has been deleted successfully.
+   Use case ends.
+
+**Extensions**
+
+* 3a. ContaX detects that the required tag attributed was not supplied.
+    * 3a1. ContaX shows an error message indicating that there is a missing required attribute.
+    * Use case ends.<br>&nbsp;
+
+* 4a. ContaX cannot find the requested tag to delete.
+    * 4a1. ContaX shows an error message indicating that no such tag exists.
+    * Use case ends.<br>&nbsp;
+
+**UC10: Find Persons By Tag**
+
+**MSS**
+
+1. User requests to find persons by tag.
+2. User enters keyword to search by.
+3. ContaX shows a list of persons whose tags contain the specified keyword.
+   Use case ends.
+
+**Extensions**
+
+* 2a. ContaX detects that the keyword was not supplied.
+  * 2a1. ContaX shows an error message prompting for the keyword.
+  * Use case ends.<br>&nbsp;
+
+* 2b. ContaX detects that invalid characters were supplied.
+    * 2b1. ContaX shows an error message indicating that an invalid character was found.
+    * 2b2. ContaX shows the expected allowed values.
+    * Use case ends.<br>&nbsp;
+
+* 3a. ContaX has no persons to list.
+  * Use case ends.<br>&nbsp;
 
 #### Appointment-Related Use Cases
-
 ![Appointment Use Case](images/UseCaseDiagramAppointments.png)
 
 **UC11: List All Appointments**
@@ -966,7 +1120,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 ![Import/Export CSV Use Cases](images/UseCaseDiagramImportExportCsv.png)
 
-**UC19: Export CSV File**
+**UC18: Export CSV File**
 
 **MSS**
 
@@ -974,7 +1128,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. ContaX saves a CSV file to the disk<br><br>
    Use case ends.
 
-**UC20: Import CSV file**
+**UC19: Import CSV file**
 
 **MSS**
 
@@ -990,64 +1144,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 2a. Invalid CSV file selected
     * 2a1. ContaX shows an error message indicating that the CSV file selected is invalid.<br>&nbsp;
     * Use case ends.<br>&nbsp;
-
-
-**Use case: User requests to perform a batch command**
-
-**MSS**
-
-1. User requests to perform a batch command which includes a condition
-2. ContaX executes the command based on the given condition
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-* 1b. There are no entries that matches the given condition
-
-    * Use case ends.
-
-**Use case: User requests to perform a command on a specified range**
-
-**MSS**
-
-1. User requests to perform a command to a specified range
-2. ContaX executes the command based on the given range
-
-    Use case ends.
-
-**Extensions**
-
-* * 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
-
-**Use case: User requests to chain multiple commands**
-
-**MSS**
-
-1. User requests to perform multiple commands by chaining them
-2. ContaX starts from the first command
-3. ContaX executes the command
-4. If there is a subsequent chained command, ContaX repeats from step 3 on the next command
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The command given is in an invalid format
-
-    * 1a1. ContaX shows an error message indicating that the given command is of invalid format.
-
-    * Use case ends.
+    
 
 ### Non-Functional Requirements
 
