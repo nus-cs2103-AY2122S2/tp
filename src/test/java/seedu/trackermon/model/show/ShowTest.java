@@ -1,5 +1,6 @@
 package seedu.trackermon.model.show;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_HANCOCK;
@@ -10,9 +11,14 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
 import static seedu.trackermon.testutil.TypicalShows.WEATHERING_WITH_YOU;
 
+import java.util.Objects;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.trackermon.model.tag.Tag;
 import seedu.trackermon.testutil.ShowBuilder;
+
 
 public class ShowTest {
 
@@ -80,4 +86,37 @@ public class ShowTest {
         assertFalse(ALICE_IN_WONDERLAND.equals(editedAlice));
     }
 
+    @Test
+    void testGetters() {
+        // test name getter
+        assertEquals(new Name("Alice in WonderLand"), ALICE_IN_WONDERLAND.getName());
+
+        // test status getter
+        assertEquals(Status.COMPLETED, ALICE_IN_WONDERLAND.getStatus());
+
+        // test tag getter
+        assertEquals(Set.of(new Tag("movie")), ALICE_IN_WONDERLAND.getTags());
+
+        // test comment getter
+        assertEquals(new Comment("bad"), ALICE_IN_WONDERLAND.getComment());
+
+        // test rating getter
+        assertEquals(new Rating(5), ALICE_IN_WONDERLAND.getRating());
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals(Objects.hash(new Name("Alice in WonderLand"),
+                Set.of(new Tag("movie"))), ALICE_IN_WONDERLAND.hashCode());
+    }
+
+    @Test
+    void testToString() {
+
+        String expectedString = "Alice in WonderLand; Status: " + Status.COMPLETED
+                + "; Rating: " + new Rating(5) + "; Comment: "
+                + new Comment("bad") + "; Tags: " + new Tag("movie");
+
+        assertEquals(expectedString, ALICE_IN_WONDERLAND.toString());
+    }
 }

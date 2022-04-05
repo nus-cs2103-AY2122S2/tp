@@ -25,6 +25,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final double TITLE_COLUMN_RATIO = 0.2;
+    private static final double COMMAND_INPUT_RATIO = 0.795;
 
     private TableView<CommandBuilder> commandSummaryTableView;
 
@@ -126,8 +128,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         table.setItems(commands);
 
-        titleColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
-        commandInputColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.795));
+        titleColumn.prefWidthProperty().bind(table.widthProperty().multiply(TITLE_COLUMN_RATIO));
+        commandInputColumn.prefWidthProperty().bind(table.widthProperty().multiply(COMMAND_INPUT_RATIO));
 
         table.getColumns().add(titleColumn);
         table.getColumns().add(commandInputColumn);
@@ -142,13 +144,23 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private static ObservableList<CommandBuilder> getCommandSummary() {
         return FXCollections.observableArrayList(
-                new CommandBuilder("Add", "add n/<NAME> s/<STATUS> [t/<TAG>]..."),
-                new CommandBuilder("Delete", "delete <INDEX>"),
-                new CommandBuilder("Edit", "edit <INDEX> [n/<NAME>] [s/<STATUS>] [t/<TAG>]…"),
+                new CommandBuilder("Add", "add n/NAME s/STATUS [r/RATING] [c/COMMENT] "
+                        + " [t/TAG]…"),
+                new CommandBuilder("Delete", "delete INDEX"),
+                new CommandBuilder("Clear", "clear"),
+                new CommandBuilder("Edit", "edit INDEX {[n/NAME] [s/STATUS] [r/RATING] "
+                        + "[c/COMMENT] [t/TAG]…}"),
                 new CommandBuilder("Exit", "exit"),
-                new CommandBuilder("Find", "find <KEYWORD> OR find [n/NAME] [s/STATUS]"
-                        + "[t/TAG]"),
-                new CommandBuilder("List", "list")
+                new CommandBuilder("Export", "export"),
+                new CommandBuilder("General Find", "find KEYWORD…"),
+                new CommandBuilder("Precise Find", "find {[n/NAME] [s/STATUS]"
+                        + " [r/RATING] [t/TAG]…}"),
+                new CommandBuilder("Help", "help"),
+                new CommandBuilder("Import", "import"),
+                new CommandBuilder("List", "list"),
+                new CommandBuilder("Sort", "sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER]"
+                        + " [so/SEQUENCE]"),
+                new CommandBuilder("Suggest", "suggest")
         );
     }
 

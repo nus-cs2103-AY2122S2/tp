@@ -8,6 +8,7 @@ import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -18,8 +19,10 @@ import seedu.trackermon.model.tag.Tag;
 public class SampleDataUtil {
     public static Show[] getSampleShows() {
         return new Show[] {
-            new Show(new Name("Attack on Titan"), Status.WATCHING, getTagSet("Anime"), new Comment("Levi")),
-            new Show(new Name("Another"), Status.COMPLETED, getTagSet("Anime", "Horror"), new Comment("WTF"))
+            new Show(new Name("Attack on Titan"), Status.WATCHING, getTagSet("Anime"), new Comment("Levi"),
+                    new Rating(3)),
+            new Show(new Name("Another"), Status.COMPLETED, getTagSet("Anime", "Horror"), new Comment("WTF"),
+                    new Rating(3))
         };
     }
 

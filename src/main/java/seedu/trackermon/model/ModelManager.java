@@ -37,8 +37,8 @@ public class ModelManager implements Model {
 
         this.showList = new ShowList(showList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredShows = new FilteredList<>(this.showList.getShows());
-        sortedShows = new SortedList<>(filteredShows);
+        sortedShows = new SortedList<>(this.showList.getShows());
+        filteredShows = new FilteredList<>(sortedShows);
     }
 
     public ModelManager() {
@@ -92,6 +92,14 @@ public class ModelManager implements Model {
         return showList;
     }
 
+    /**
+     * Returns the ShowList size
+     */
+    @Override
+    public int getShowListSize() {
+        return showList.getShows().size();
+    }
+
     @Override
     public boolean hasShow(Show show) {
         requireNonNull(show);
@@ -107,13 +115,11 @@ public class ModelManager implements Model {
     public void addShow(Show show) {
         showList.addShow(show);
         updateFilteredShowList(PREDICATE_SHOW_ALL_SHOWS);
-        updateSortedShowList(COMPARATOR_SHOW_ALL_SHOWS);
     }
 
     @Override
     public void setShow(Show target, Show editedShow) {
         requireAllNonNull(target, editedShow);
-
         showList.setShow(target, editedShow);
     }
 
@@ -165,7 +171,17 @@ public class ModelManager implements Model {
     public void updateSortedShowList(Comparator<Show> comparator) {
         requireNonNull(comparator);
         sortedShows.setComparator(comparator);
-        sortedShows.setComparator(COMPARATOR_SHOW_ALL_SHOWS);
+        saveSortedShowList();
+        sortedShows.setComparator(null);
+    }
+
+    @Override
+    public void saveSortedShowList() {
+        ShowList newShowList = new ShowList();
+        for (int i = 0; i < sortedShows.size(); i++) {
+            newShowList.addShow(sortedShows.get(i));
+        }
+        showList.resetData(newShowList);
     }
 
 }

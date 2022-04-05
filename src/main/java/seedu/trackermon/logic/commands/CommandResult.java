@@ -9,6 +9,8 @@ import java.util.Objects;
  */
 public class CommandResult {
 
+    public static final int DEFAULT_INDEX = -1;
+
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -17,17 +19,46 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean isExit;
 
-    /** The list will be modified **/
-    private final boolean isModifyList;
+    /** The application is importing a file. */
+    private final boolean isImport;
+
+    /** The index information of commands */
+    private final int indexAffected;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with all specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isModifyList) {
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport,
+                         int indexAffected) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowHelp = isShowHelp;
         this.isExit = isExit;
-        this.isModifyList = isModifyList;
+        this.isImport = isImport;
+        this.indexAffected = indexAffected;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code isShowHelp},
+     * {@code isExit}, {@code isImport}, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isImport) {
+        this(feedbackToUser, isShowHelp, isExit, isImport, DEFAULT_INDEX);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code isShowHelp},
+     * {@code isExit}, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit) {
+        this(feedbackToUser, isShowHelp, isExit, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code indexAffected},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, int indexAffected) {
+        this(feedbackToUser, false, false, false, indexAffected);
     }
 
     /**
@@ -35,15 +66,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * , modifying the list and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser, boolean isModifyList) {
-        this(feedbackToUser, false, false, isModifyList);
+        this(feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -54,12 +77,16 @@ public class CommandResult {
         return isShowHelp;
     }
 
-    public boolean isModifyList() {
-        return isModifyList;
-    }
-
     public boolean isExit() {
         return isExit;
+    }
+
+    public boolean isImport() {
+        return isImport;
+    }
+
+    public int getIndexAffected() {
+        return indexAffected;
     }
 
     @Override
@@ -83,5 +110,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, isShowHelp, isExit);
     }
-
 }
