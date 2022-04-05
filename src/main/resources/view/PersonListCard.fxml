@@ -33,7 +33,8 @@
          <TextFlow fx:id="phone" />
          <TextFlow fx:id="address" layoutX="25.0" layoutY="46.0" />
          <TextFlow fx:id="email" layoutX="25.0" layoutY="46.0" />
-         <FlowPane fx:id="logs" layoutX="25.0" layoutY="46.0" />
+         <TextFlow fx:id="description" layoutX="25.0" layoutY="46.0" />
+      <FlowPane fx:id="logs" layoutX="25.0" layoutY="46.0" />
     </VBox>
       <rowConstraints>
          <RowConstraints />

@@ -10,6 +10,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
@@ -20,6 +24,7 @@ import seedu.address.model.person.Person;
 public class ExpandedPersonCard extends UiPart<Region> {
 
     private static final String FXML = "ExpandedPersonListCard.fxml";
+    private static final Font font = new Font("Segoe UI Semibold", 16);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -37,17 +42,19 @@ public class ExpandedPersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label phone;
+    private TextFlow phone;
     @FXML
-    private Label address;
+    private TextFlow address;
     @FXML
-    private Label email;
+    private TextFlow email;
     @FXML
-    private Label description;
+    private TextFlow description;
     @FXML
     private FlowPane tags;
     @FXML
     private Label eventsHeader;
+    @FXML
+    private Label noEventsText;
     @FXML
     private StackPane upcomingEventsPanelPlaceholder;
     @FXML
@@ -62,30 +69,80 @@ public class ExpandedPersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText("1. " + person.getName().fullName);
-        phone.setText(person.getPhone().value == null ? "" : "Phone: " + person.getPhone().value);
-        address.setText(person.getAddress().value == null ? "" : "Address: " + person.getAddress().value);
-        email.setText(person.getEmail().value == null ? "" : "Email: " + person.getEmail().value);
-        description.setText(person.getDescription().value == null
-                ? ""
-                : person.getDescription().value);
 
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        Text colon1 = new Text(" : ");
+        colon1.setFill(Color.WHITE);
+        colon1.setFont(font);
+
+
+        Text phoneNumText = new Text("           : " + (person.getPhone().value == null ? "  -" : person.getPhone().value));
+        Text phoneLabel = new Text("Phone");
+        phoneNumText.setFill(Color.WHITE);
+        phoneLabel.setFill(Color.WHITE);
+        phoneNumText.setFont(font);
+        phoneLabel.setFont(font);
+        phoneLabel.setUnderline(true);
+        phone.getChildren().addAll(phoneLabel, phoneNumText);
+
+        Text addressText = new Text("       : " + (person.getAddress().value == null ? "  -" : person.getAddress().value));
+        Text addressLabel = new Text("Address");
+        addressLabel.setFill(Color.WHITE);
+        addressText.setFill(Color.WHITE);
+        addressText.setFont(font);
+        addressLabel.setFont(font);
+        addressLabel.setUnderline(true);
+        address.getChildren().addAll(addressLabel, addressText);
+
+        Text emailText = new Text("             : " + (person.getEmail().value == null ? "  -" : person.getEmail().value));
+        Text emailLabel = new Text("Email");
+        emailLabel.setFill(Color.WHITE);
+        emailText.setFill(Color.WHITE);
+        emailText.setFont(font);
+        emailLabel.setFont(font);
+        emailLabel.setUnderline(true);
+        email.getChildren().addAll(emailLabel, emailText);
+
+        Text descriptionText = new Text(" : " + (person.getDescription().value == null ? "  -" : person.getDescription().value));
+        Text descriptionLabel = new Text("Description");
+        descriptionLabel.setFill(Color.WHITE);
+        descriptionText.setFill(Color.WHITE);
+        descriptionText.setFont(font);
+        descriptionLabel.setFont(font);
+        descriptionLabel.setUnderline(true);
+        description.getChildren().addAll(descriptionLabel, descriptionText);
+
+        Text tagsText = new Text("Tags");
+        tagsText.setFill(Color.WHITE);
+        tagsText.setFont(font);
+        tagsText.setUnderline(true);
+        tags.getChildren().addAll(tagsText, new Text("           "), colon1);
+        if (person.getTags().size() == 0) {
+            Text empty = new Text("-");
+            empty.setFill(Color.WHITE);
+            empty.setFont(font);
+            tags.getChildren().add(empty);
+        } else {
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag ->
+                            tags.getChildren().add(new Label(tag.tagName)));
+        }
 
         // displaying upcoming events
         upcomingEventsPanel = new EventListPanel(eventList);
 
         if (eventList.size() > 0) {
-            eventsHeader.setText("Upcoming Events:");
+            eventsHeader.setText("Upcoming Events :");
             eventsHeader.setUnderline(true);
+            noEventsText.setMaxSize(0, 0);
+            noEventsText.setMinSize(0, 0);
             upcomingEventsPanelPlaceholder.getChildren().add(upcomingEventsPanel.getRoot());
 
         } else {
-            eventsHeader.setText("");
-            //forces the size of eventsHeader to be (0, 0)
-            eventsHeader.setMaxSize(0, 0);
-            eventsHeader.setMinSize(0, 0);
+            eventsHeader.setText("Upcoming Events : ");
+            eventsHeader.setUnderline(true);
+            noEventsText.setText("No upcoming events!");
+
             //forces the size of upcomingEventsPanelPlaceholder to be (0, 0)
             upcomingEventsPanelPlaceholder.setMaxSize(0, 0);
             upcomingEventsPanelPlaceholder.setMinSize(0, 0);
@@ -96,7 +153,7 @@ public class ExpandedPersonCard extends UiPart<Region> {
         List<Log> logList = person.getLogs();
 
         if (logList.size() > 0) {
-            logsHeader.setText("Logs:");
+            logsHeader.setText("Logs :");
             logsHeader.setUnderline(true);
             StringBuilder sb = new StringBuilder();
             int numberOfLogs = logList.size();
@@ -105,8 +162,9 @@ public class ExpandedPersonCard extends UiPart<Region> {
             }
             logs.setText(sb.toString());
         } else {
-            logsHeader.setText("");
-            logs.setText("");
+            logsHeader.setText("Logs : ");
+            logsHeader.setUnderline(true);
+            logs.setText("No logs!");
         }
     }
 
