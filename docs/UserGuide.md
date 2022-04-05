@@ -272,7 +272,7 @@ Assigns a task to a particular student.
     * Assigns assignment 1 to students taking module CS2103T.
 
 <div markdown="block" class="alert alert-info">
-> :warning: **Warning!:**
+:warning: **Warning!:**
 
 * As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
 
