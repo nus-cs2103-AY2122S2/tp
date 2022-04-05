@@ -100,7 +100,10 @@ Filter through the endless list of students with a simple command to extract det
 </div>
 
 #### Limitations of automation
-UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
+UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
+`Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
+changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
+in the *next iteration (v1.5)*.
 
 ### Graphical User Interface
 Graphical User Interface (GUI) has a **locked aspect ratio** to prevent the GUI elements from producing any unintended cosmetic problems
@@ -180,7 +183,7 @@ Find an existing student in the application by their name
 - Example:
   - `find bernice` will find student _"Bernice Yu"_
 
-> :bulb: **Tip:** find multiple students at the same time by inputting their names in the same command
+> :bulb: **Tip:** find multiple students at the same time by typing their names in the same command
 > - Eg. `find alex bernice` will find students _"Alex Yeoh"_ and _"Bernice Yu"_
 
 |![find command](images/user-guide/find.png)|
