@@ -3,10 +3,8 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOBA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPets.BOBA;
 import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
@@ -49,7 +47,7 @@ public class AddressBookTest {
     public void resetData_withDuplicatePets_throwsDuplicatePetException() {
         // Two pets with the same identity fields
         Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOBA).withTags(VALID_TAG_FRIEND)
-                .build();
+            .build();
         List<Pet> newPets = Arrays.asList(BOBA, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPets);
 
@@ -76,7 +74,7 @@ public class AddressBookTest {
     public void hasPet_petWithSameIdentityFieldsInWoofAreYou_returnsTrue() {
         addressBook.addPet(BOBA);
         Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOBA).withTags(VALID_TAG_FRIEND)
-                .build();
+            .build();
         assertTrue(addressBook.hasPet(editedAlice));
     }
 
