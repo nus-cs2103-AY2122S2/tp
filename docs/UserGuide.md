@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-NUSocials is a **desktop app for university students to maintain a professional contact list, where users can keep track information about friends/acquaintances easily in one single platform.
+NUSocials is a **desktop app for university students to maintain a professional contact list, where users can keep track of information about friends/acquaintances easily in one single platform.
 It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). The value of the app is to facilitate a convenient way for university students to manage their professional networks with fellow acquaintances.
 
 * Table of Contents
@@ -64,7 +64,9 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If an `INDEX` is used, it **must be a positive integer** (i.e. 1, 2, 3…​)
+* If an `INDEX` is used, it **must be a positive integer** (i.e. 1, 2, 3…​).
+
+* If multiple `INDEX`s are used, each of the `INDEX` **must be separated by a single whitespace and must be unique** (i.e 1 2 3).
 
 * All commands are case-sensitive.
 
@@ -98,6 +100,13 @@ Constraints:
 * `NAME` has to be alphanumeric not blank.
 * `PHONE_NUMBER` has to be between 3 and 10 digits long and not blank.
 * `EMAIL` has to be in a valid email format and not blank.
+  * The local part of the `EMAIL` should be alphnumeric and these special characters, excluding the parentheses, (+-._)
+  * The local part should not start and end with any of the mentioned special characters
+  * "@" comes right after the local part, followed by a domain name
+  * The domain name must:
+    * end with a domain label at least 2 characters long\n"
+    * have each domain label start and end with alphanumeric characters\n"
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any."
 * `ADDRESS` has to not be blank.
 * All fields must be used.
 
@@ -194,7 +203,9 @@ Format: `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUC
 
 * Tags the relevant information to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
+* Alphabets in the input tag values will be converted to lowercase.
 * Input tag values will be added to the existing tags in their respective fields.
+* If the new input tag values are the same as existing tags, then nothing will be added.
 
 Constraints:
 * At least one of the prefixes must be provided.
@@ -265,7 +276,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]…�
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
-* Persons matching at least one of the fields or tags will be returned (i.e. `OR` search).
+* Persons matching at least one of the fields or tags will be returned.
 
 Constraints:
 * At least one of the optional fields must be provided.
@@ -304,7 +315,7 @@ Format: `find -s [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INTERNSHIP]�
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The matching is done by character sequence. e.g. `ha` or `ns` will match `Hans`
-* Only persons matching all fields and tags will be returned (i.e. `AND` search).
+* Only persons matching all fields and tags will be returned.
 
 Constraints:
 * At least one of the optional fields must be provided.
@@ -432,7 +443,7 @@ Format: `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICPA
 
 * The search is case-insensitive. e.g `lunch` will match `Lunch`
 * The matching is done by character sequence. e.g. `lun` will match `lunch`
-* Events matching at least one of the fields will be returned (i.e. `OR` search).
+* Events matching at least one of the fields will be returned.
 
 Constraints:
 * At least one of the optional fields must be provided.
