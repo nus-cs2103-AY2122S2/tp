@@ -1,20 +1,22 @@
 package seedu.address.model.prescription;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
-import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
-import seedu.address.testutil.PrescriptionBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPrescriptions.PRESCRIPTION_A;
+import static seedu.address.testutil.TypicalPrescriptions.PRESCRIPTION_B;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
 
-import static seedu.address.testutil.TypicalPrescriptions.PRESCRIPTION_A;
-import static seedu.address.testutil.TypicalPrescriptions.PRESCRIPTION_B;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.prescription.exceptions.DuplicatePrescriptionException;
+import seedu.address.model.prescription.exceptions.PrescriptionNotFoundException;
+import seedu.address.testutil.PrescriptionBuilder;
 
 public class UniquePrescriptionListTest {
 
@@ -50,20 +52,20 @@ public class UniquePrescriptionListTest {
 
     @Test
     public void setPrescription_nullTargetPrescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePrescriptionList.
-                setPrescription(null, PRESCRIPTION_A));
+        assertThrows(NullPointerException.class, () -> uniquePrescriptionList
+                .setPrescription(null, PRESCRIPTION_A));
     }
 
     @Test
     public void setPrescription_nullEditedPrescription_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePrescriptionList.
-                setPrescription(PRESCRIPTION_A, null));
+        assertThrows(NullPointerException.class, () -> uniquePrescriptionList
+                .setPrescription(PRESCRIPTION_A, null));
     }
 
     @Test
     public void setPrescription_targetPrescriptionNotInList_throwsPrescriptionNotFoundException() {
-        assertThrows(PrescriptionNotFoundException.class, () -> uniquePrescriptionList.
-                setPrescription(PRESCRIPTION_A, PRESCRIPTION_A));
+        assertThrows(PrescriptionNotFoundException.class, () -> uniquePrescriptionList
+                .setPrescription(PRESCRIPTION_A, PRESCRIPTION_A));
     }
 
     @Test
@@ -162,7 +164,7 @@ public class UniquePrescriptionListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniquePrescriptionList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniquePrescriptionList
+                .asUnmodifiableObservableList().remove(0));
     }
 }

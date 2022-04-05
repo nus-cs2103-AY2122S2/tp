@@ -1,19 +1,10 @@
 package seedu.address.testutil;
 
-
-import seedu.address.model.contact.Address;
-import seedu.address.model.contact.Email;
-import seedu.address.model.contact.Phone;
-import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.Patient;
 import seedu.address.model.prescription.DrugName;
 import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionDate;
-import seedu.address.model.util.SampleDataUtil;
-
-import java.util.HashSet;
 
 /**
  * A utility class to help with building Prescription objects.
