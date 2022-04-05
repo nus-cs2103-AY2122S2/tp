@@ -76,8 +76,7 @@ public class RangeCommand extends Command {
                     commandResultList.add(new CommandResult(ce.getMessage()));
                 }
             } catch (ParseException pe) {
-                commandResultList.clear(); // only for the purpose of not changing output in feature freeze
-                commandResultList.add(new CommandResult(pe.getMessage()));
+                throw new CommandException(pe.getMessage());
             }
         }
         StringBuilder resultOutput = new StringBuilder();

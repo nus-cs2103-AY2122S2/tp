@@ -93,13 +93,12 @@ public class BatchCommand extends Command {
                 Command command = addressBookParser.parseCommand(commandText);
                 try {
                     commandResultList.add(command.execute(model));
-                }  catch (CommandException ce) {
+                } catch (CommandException ce) {
                     commandResultList.clear();
                     commandResultList.add(new CommandResult(ce.getMessage()));
                 }
             } catch (ParseException pe) {
-                commandResultList.clear();
-                commandResultList.add(new CommandResult(pe.getMessage()));
+                throw new CommandException(pe.getMessage());
             }
         }
         StringBuilder resultOutput = new StringBuilder();
