@@ -51,6 +51,24 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicatePetDifferentTag_throwsCommandException() {
+        Pet validPet = new PetBuilder().withTags("Poodle").build();
+        AddCommand addCommand = new AddCommand(new PetBuilder().build());
+        ModelStub modelStub = new ModelStubWithPet(validPet);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePetDifferentDiet_throwsCommandException() {
+        Pet validPet = new PetBuilder().withDiet("Vegetarian").build();
+        AddCommand addCommand = new AddCommand(new PetBuilder().build());
+        ModelStub modelStub = new ModelStubWithPet(validPet);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Pet alice = new PetBuilder().withName("Alice").build();
         Pet bob = new PetBuilder().withName("Bob").build();
