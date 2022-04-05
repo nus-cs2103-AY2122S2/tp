@@ -262,7 +262,7 @@ This section contains some commands/shortcuts that can improve your work efficie
 
 ### Undo last command: `undo`
 
-Undo the last command that changed HackNet. <br>
+Undo the last command that changes HackNet. <br>
 Only these commands that changed HackNet can be undone:
 * Add
 * Delete
@@ -288,7 +288,7 @@ that undone command will be removed from history and can no longer be undone.
 
 Redo the command that was previously undone.
 
-Only these commands that changed HackNet can be redone:
+Only these commands that changes HackNet can be redone:
 * Add
 * Delete
 * Edit
