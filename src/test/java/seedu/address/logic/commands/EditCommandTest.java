@@ -120,6 +120,26 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_duplicatePetDifferentTagUnfilteredList_failure() {
+        Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder(firstPet).withTags("poodle").build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PET, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PET);
+    }
+
+    @Test
+    public void execute_duplicatePetDifferentTagFilteredList_failure() {
+        showPetAtIndex(model, INDEX_FIRST_PET);
+
+        Pet petInList = model.getAddressBook().getPetList().get(INDEX_SECOND_PET.getZeroBased());
+        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder(petInList).withTags("poodle").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PET, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PET);
+    }
+
+    @Test
     public void execute_invalidPetIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
         EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_BOB).build();
