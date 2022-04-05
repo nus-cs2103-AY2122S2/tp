@@ -22,7 +22,7 @@ public class AddDeadlineTaskCommand extends Command {
             + PREFIX_DESCRIPTION + "Do Daily Commissions "
             + PREFIX_BY_DATETIME + "2022-03-15 0400";
 
-    public static final String MESSAGE_SUCCESS = "New Deadline task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New Deadline Task added: %1$s";
 
     private final Deadline toAdd;
 

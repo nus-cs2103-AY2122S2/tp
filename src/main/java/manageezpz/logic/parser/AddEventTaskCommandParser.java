@@ -46,8 +46,6 @@ public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
             Time startTime = ParserUtil.parseTime(parseAtDateTime[1]);
             Time endTime = ParserUtil.parseTime(parseAtDateTime[2]);
 
-            System.out.println(endTime.getParsedTime().compareTo(startTime.getParsedTime()));
-
             if (endTime.getParsedTime().compareTo(startTime.getParsedTime()) < 1) {
                 throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
             }
