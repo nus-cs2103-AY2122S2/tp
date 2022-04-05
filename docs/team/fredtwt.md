@@ -34,6 +34,12 @@ Given below are my contributions to the project.
     * basic particulars' prefixes can only be used once for each field
     * search inputs can take in multiple strings now  (i.e edu/computer science)
   
+* **Test cases implemented:**
+  * EventCommand
+  * EventCommandParser
+  * CancelEventCommand
+  * CancelEventCommandParser
+  * All the event field types
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `event`, `tag`, `cancelevent`.
