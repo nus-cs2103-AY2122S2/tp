@@ -154,7 +154,7 @@ Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTI
 
 **Note that:**
 - The subject and address are optional fields and can be omitted so that the tutor only keeps the most vital information of the lesson.
-- You cannot add overnight lessons (i.e. lessons that start at 9pm and end at 1am on the following-day)
+- Lesson durations cannot be greater than 24 hours!
 
 Supported Types: Recurring `-r` and Temporary
 
@@ -197,7 +197,7 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 **Note that:**
 
 * Editing of the lesson's type is not allowed. Recurring lessons cannot be edited to become temporary lessons and vice-versa.
-* If you are changing the lesson's date and/or duration, take note that lessons cannot be overnight (i.e. lessons that start at 9pm and end at 1am on the following-day)
+* If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than 24 hours!
 
 ---
 
