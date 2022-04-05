@@ -6,29 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.Email;
-import seedu.address.model.applicant.Phone;
-import seedu.address.model.interview.Interview;
-import seedu.address.model.position.Position;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddApplicantCommandTest {

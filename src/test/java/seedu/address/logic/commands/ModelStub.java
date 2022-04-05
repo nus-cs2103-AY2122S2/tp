@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -10,12 +16,6 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.position.Position;
-
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.function.Predicate;
 
 /**
  * A default model stub that have all of the methods failing.
