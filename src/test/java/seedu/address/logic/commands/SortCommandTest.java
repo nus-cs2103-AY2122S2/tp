@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPets.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -21,7 +22,8 @@ public class SortCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
     }
 
     /**
@@ -29,8 +31,9 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByOwnerName() {
-        expectedModel.sortPetList("owner");
-        assertCommandSuccess(new SortCommand("owner"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        String field = "owner";
+        expectedModel.sortPetList(field);
+        assertCommandSuccess(new SortCommand(field), model, SortCommand.MESSAGE_SUCCESS + field, expectedModel);
     }
 
     /**
@@ -38,8 +41,9 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetName() {
-        expectedModel.sortPetList("name");
-        assertCommandSuccess(new SortCommand("name"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        String field = "name";
+        expectedModel.sortPetList(field);
+        assertCommandSuccess(new SortCommand(field), model, SortCommand.MESSAGE_SUCCESS + field, expectedModel);
     }
 
     /**
@@ -47,8 +51,9 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetAppointment() {
-        expectedModel.sortPetList("app");
-        assertCommandSuccess(new SortCommand("app"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        String field = "app";
+        expectedModel.sortPetList(field);
+        assertCommandSuccess(new SortCommand(field), model, SortCommand.MESSAGE_SUCCESS + field, expectedModel);
     }
 
     /**
@@ -56,8 +61,9 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetDropOffTime() {
-        expectedModel.sortPetList("drop off");
-        assertCommandSuccess(new SortCommand("drop off"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        String field = "drop off";
+        expectedModel.sortPetList(field);
+        assertCommandSuccess(new SortCommand(field), model, SortCommand.MESSAGE_SUCCESS + field, expectedModel);
     }
 
     /**
@@ -65,8 +71,9 @@ public class SortCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSortedListByPetPickUpTime() {
-        expectedModel.sortPetList("pick up");
-        assertCommandSuccess(new SortCommand("pick up"), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        String field = "pick up";
+        expectedModel.sortPetList(field);
+        assertCommandSuccess(new SortCommand(field), model, SortCommand.MESSAGE_SUCCESS + field, expectedModel);
     }
 
 }

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class AppointmentCommand extends Command {
                 petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet));
     }
