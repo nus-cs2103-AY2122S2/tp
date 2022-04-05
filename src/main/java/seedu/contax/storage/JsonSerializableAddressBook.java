@@ -64,7 +64,7 @@ class JsonSerializableAddressBook {
                 }
                 addressBook.addTag(tag);
             } catch (IllegalValueException e) {
-                logger.fine("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
+                logger.info("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
                 continue;
             }
         }
@@ -81,7 +81,7 @@ class JsonSerializableAddressBook {
                 addMissingTags(person, addressBook);
                 addressBook.addPerson(person);
             } catch (IllegalValueException e) {
-                logger.fine("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
+                logger.info("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
                 continue;
             }
         }
