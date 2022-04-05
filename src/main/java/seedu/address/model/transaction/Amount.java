@@ -32,7 +32,7 @@ public class Amount extends TransactionField {
         double number = Double.parseDouble(value);
         String formattedNumber = String.format("%.2f", number);
         number = Double.parseDouble(formattedNumber);
-        this.value = number;
+        this.value = Math.abs(number);
     }
 
     private String generateStringRep() {
