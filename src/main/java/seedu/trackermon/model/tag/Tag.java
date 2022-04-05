@@ -9,8 +9,8 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and no more than"
-            + " 20 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Tag must be a keyword that is no more than"
+            + " 20 alphanumeric characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}{1,20}?";
 
     public final String tagName;
