@@ -51,7 +51,7 @@
               </Label>
               <ImageView fitHeight="375.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                 <image>
-                  <Image url="@../images/right_click_copy_clipboard_demo.png" />
+                  <Image url="@../images/right_click_copy_to_clipboard.png" />
                 </image>
                 <GridPane.margin>
                   <Insets bottom="10.0" top="5.0" />
