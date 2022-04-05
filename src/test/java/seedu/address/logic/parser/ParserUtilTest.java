@@ -26,6 +26,12 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ACTIVITY = "#friend";
+    private static final String INVALID_ADDRESS_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj \n" +
+            " sdhfklajsdhflkajsdhflkasdfas asdf";
+    private static final String INVALID_EMAIL_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj@\n" +
+            "sdhfklajsdhflkajsdhflkasdfasaasadfadfasdfdf";
+    private static final String INVALID_ACTIVITY_TOO_LONG = "fakjsdhfklasdjhflkadsjhflkasdjhfkalj@\n" +
+            "sdhfklajsdhflkajsdhflkasdfasaasadfadfasdfdf";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -195,5 +201,20 @@ public class ParserUtilTest {
                         new Activity(VALID_ACTIVITY_2)));
 
         assertEquals(expectedActivitySet, actualActivitySet);
+    }
+
+    @Test
+    public void parseActivity_invalidValueTooLong_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseActivity(INVALID_ACTIVITY_TOO_LONG));
+    }
+
+    @Test
+    public void parseEmail_invalidValueTooLong_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL_TOO_LONG));
+    }
+
+    @Test
+    public void parseAddress_invalidValueTooLong_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS_TOO_LONG));
     }
 }

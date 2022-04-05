@@ -46,8 +46,11 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        int trimNameLen = trimmedName.length();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        } else if (trimNameLen > Name.NAME_SIZE_MAX_LIMIT || trimNameLen < Name.NAME_SIZE_MIN_LIMIT) {
+            throw new ParseException(String.format(Name.MESSAGE_NAME_LIMIT));
         }
         return new Name(trimmedName);
     }
@@ -78,6 +81,8 @@ public class ParserUtil {
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        } else if (trimmedAddress.length() > Address.ADDRESS_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(Address.MESSAGE_ADDRESS_LIMIT));
         }
         return new Address(trimmedAddress);
     }
@@ -93,6 +98,8 @@ public class ParserUtil {
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        } else if (trimmedEmail.length() > Email.EMAIL_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(Email.MESSAGE_EMAIL_LIMIT));
         }
         return new Email(trimmedEmail);
     }
@@ -138,6 +145,8 @@ public class ParserUtil {
         String trimmedActivity = activity.trim();
         if (!Activity.isValidActivityName(trimmedActivity)) {
             throw new ParseException(Activity.MESSAGE_CONSTRAINTS);
+        } else if (trimmedActivity.length() > Activity.ACTIVITY_SIZE_MAX_LIMIT) {
+            throw new ParseException(String.format(Activity.MESSAGE_ACTIVITY_LIMIT));
         }
         return new Activity(trimmedActivity);
     }

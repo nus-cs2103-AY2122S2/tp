@@ -11,6 +11,9 @@ public class Activity {
 
     public static final String MESSAGE_CONSTRAINTS = "Activity names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final int ACTIVITY_SIZE_MAX_LIMIT = 50;
+    public static final String MESSAGE_ACTIVITY_LIMIT = "An Activity cannot be longer than " + ACTIVITY_SIZE_MAX_LIMIT
+            + " characters. ";
 
     public final String activityName;
 

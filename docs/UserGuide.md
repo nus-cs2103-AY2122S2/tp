@@ -88,20 +88,6 @@ Lastly, each information card contains the following details of the student and 
 With UDT, you can update and track COVID-19 Cases in your school, keep track of Close-Contacts, to perform timely updates to parents and Next-of-Kin.
 Filter through the endless list of students with a simple command to extract details on the cases by class, or by activities (CCAs etc.).
 
-### Automation of `Status`
-`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
-- UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
-- UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
-
-<div markdown="block" class="alert alert-info">
-
-> :information_source: **Note:**  UDT tracks COVID statuses of those listed in the tracker only, and does not account for external cases.
-
-</div>
-
-#### Limitations of automation
-UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
-
 ### Graphical User Interface
 Graphical User Interface (GUI) has a **locked aspect ratio** to prevent the GUI elements from producing any unintended cosmetic problems
 - This also applies to maximising of application to full screen
@@ -121,7 +107,9 @@ Below are a set of commands that can be used in the **_UDT_**. Their formats and
 ## Add a student: `add`
 Adds a student to the tracking list
 - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​ cc/CLASS s/STATUS [act/ACTIVITY] [act/MORE ACTIVITIES]`
-  - `NAME`, `ADDRESS`, `ACTIVITY` takes in alphanumeric text
+  - `NAME` takes in alphabetical characters and have a character limit of up to 50 characters 
+  - `ADDRESS` takes in alphanumeric text and have a character limit of up to 70 characters
+  - `ACTIVITY` takes in alphanumeric text and have a character limit of up to 50 characters
   - `CLASS` takes in a number and alphabet pair
     - Eg. `4A`
   - `EMAIL` follows the standard email formatting
@@ -139,7 +127,7 @@ Adds a student to the tracking list
 
 > :bulb: **Tips:**  
 > - Multiple activity tags can be added to a single student by using multiple `act/` prefixes  
->   - Eg. `act/choir act/dance`  
+>   - Eg. `act/choir act/dance`
 > - A student can also have no activity tags  
 > - User inputs can be in any order
 
@@ -272,6 +260,21 @@ Deletes the specified person from the application.
 > :bulb: **Tip:** filter the student list via __*find*__ commands to make finding the index easier
 
 </div>
+
+## Automation of `Status`
+`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.
+- UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
+- UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
+
+<div markdown="block" class="alert alert-info">
+
+> :information_source: **Note:**  UDT tracks COVID statuses of those listed in the tracker only, and does not account for external cases.
+
+</div>
+
+### Limitations of automation
+UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
+
 
 |![delete command](images/user-guide/delete.png)|
 |:--:|
