@@ -68,7 +68,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the user guide and copying employee details to Computer Clipboard.
 
 ![help message](images/helpMessage_new.png)
 
