@@ -59,9 +59,9 @@ Before you continue reading the rest of our user guide, the table below displays
 ## Quick start
 
 1. Ensure you have `Java 11` or above installed in your Computer.
-   * For Windows, open Command Prompt and key in `java -version`
-   * For MacOS, open Terminal and key in `javac -version`
-   * For Linux, open Terminal and key in `java -version`
+   * For Windows, open Command Prompt and input `java -version`
+   * For MacOS, open Terminal and input `javac -version`
+   * For Linux, open Terminal and input `java -version`
 2. Download the latest version of **Trackermon** [here](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
@@ -468,8 +468,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 - Step 2. Select the file and click "Open"
   - Do note that only [JSON](#glossary) files can be imported!
 - Step 3. Trackermon will import the selected file and display the imported show list!
-  - If there was an error importing the file, Trackermon will display an error message!
-  - For advanced users, feel free to modify Trackermon.json directly!
+  - Trackermon will throw an error message if the JSON file is corrupted!
 
 <img src="images/Import.png">
 
@@ -504,33 +503,6 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 **Example:** `exit`
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
-
----
-
-## Modifying `trackermon.json`
-
-<div markdown="block" class="alert alert-danger">
-
-**:exclamation: Caution:**<br>
-* Incorrectly modifying `trackermon.json` **WILL** lead to data loss!
-* Refer to [parameter conditions](#parameter-conditions) section about `name` `status` `tag` `comment` `rating`.
-* Any changes made while Trackermon is active will be discarded!
-</div>
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about `trackermon.json`:**<br>
-* Take note of the curly `{}` and square `[]` braces! Extra or missing braces will render `trackermon.json` invalid!
-</div>
-
-<img src="images/JsonFormat.png">
-
-* Show information are kept within curly braces `{}`
-* When editing information, refer to the [parameter conditions](#parameter-conditions) section!
-  * Invalid information will result in an empty show list!
-* Missing quotation marks `"` will render `trackermon.json` invalid!
-* Ensure that no additional braces `{}[]` or quotation marks `"` are added into the file.
-* Ensure that existing braces `{}[]` and quotation marks `"` are not deleted from the file.
 
 ---
 
