@@ -56,9 +56,9 @@ Given below are my contributions to the project.
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=bakano98&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=bakano98&tabRepo=AY2122S2-CS2103T-T13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code&authorshipIsBinaryFileTypeChecked=false)
 - **Project Management**:
   - Made new commits and PRs weekly -- and never missed a deadline.
-  - Ensure team was on track
-  - Ensure I kept everyone up to date with what I was doing
-  - Tried to keep up and help with features that were lagging behind
+  - Ensure team was on track.
+  - Ensure I kept everyone up to date with what I was doing.
+  - Tried to keep up and help with features that were lagging behind.
 
 - **Documentation**:
   - User Guide:
@@ -70,10 +70,14 @@ Given below are my contributions to the project.
     - Updated UG according to peer feedback [(PR #100)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/100)
     - Updated UG according to CS2101 feedback [(PR #112)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/112/commits/f1ec6be1bdb557101201b979c440d769ff4cff61)
   - Developer Guide:
-    - Add MSS for `status` and `filter` [(PR #27)](https://github.com/AY2122S2-CS2103T-T13-4/tp/commit/a13e9b086d85dd607421835135e742ff67b542cd)
+    - Add use cases for `status` and `filter` [(PR #27)](https://github.com/AY2122S2-CS2103T-T13-4/tp/commit/a13e9b086d85dd607421835135e742ff67b542cd)
+    - Add use cases for `archive`, `unarchive`, `switch`, `deletemodules`, and `clearmodules` [(PR #203)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/203)
+    - Reordered use cases to follow the format in the user guide.
     - Updated UML diagram for Ui component and add information regarding the additions (`EditWindow`, `AddWindow`), also added an activity diagram, sequence diagram for `add` [(PR #84)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/84)
+    - 
   - README:
     - Did the mockup UI and the description of ModuleMateFinder [here](https://github.com/AY2122S2-CS2103T-T13-4/tp/commit/f054e1d2871e6e5904d473b9203e7874340f0633)
+  
 
 **Bugfixes**
 - See [here](https://github.com/AY2122S2-CS2103T-T13-4/tp/issues?q=assignee%3Abakano98+label%3Atype.Bug+)
