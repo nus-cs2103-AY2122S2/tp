@@ -13,7 +13,7 @@ import seedu.contax.model.ReadOnlyUserPrefs;
 import seedu.contax.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of AddressBook and Schedule data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -108,6 +108,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveSchedule(ReadOnlySchedule schedule, Path filePath) throws IOException {
+        logger.fine("Attempting to write to schedule data file: " + filePath);
         scheduleStorage.saveSchedule(schedule, filePath);
     }
 }

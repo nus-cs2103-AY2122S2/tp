@@ -20,10 +20,15 @@ import seedu.contax.model.ReadOnlySchedule;
  */
 public class JsonScheduleStorage implements ScheduleStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonScheduleStorage.class);
+    private static final Logger LOGGER = LogsCenter.getLogger(JsonScheduleStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
+    /**
+     * Constructs a {@code JsonScheduleStorage} referencing the supplied {@code filePath}.
+     *
+     * @param filePath The location of the Schedule Json data file on disk.
+     */
     public JsonScheduleStorage(Path filePath) {
         this.filePath = filePath;
     }
@@ -35,7 +40,6 @@ public class JsonScheduleStorage implements ScheduleStorage {
     @Override
     public Optional<ReadOnlySchedule> readSchedule(ReadOnlyAddressBook addressBook)
             throws DataConversionException {
-        requireNonNull(addressBook);
         return readSchedule(filePath, addressBook);
     }
 
@@ -61,7 +65,7 @@ public class JsonScheduleStorage implements ScheduleStorage {
         try {
             return Optional.of(jsonSchedule.get().toModelType(addressBook.getPersonList()));
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            LOGGER.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }

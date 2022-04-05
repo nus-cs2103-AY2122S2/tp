@@ -70,7 +70,6 @@ class JsonAdaptedAppointment {
      * @throws IllegalValueException If there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType(List<Person> personsList) throws IllegalValueException {
-
         final Name modelName = parseNameModel();
         final StartDateTime modelStartDateTime = parseStartDateTimeModel();
         final Duration modelDuration = parseDurationModel();
@@ -126,12 +125,12 @@ class JsonAdaptedAppointment {
      * {@code Person} model from the supplied personsList.
      */
     private Person parsePersonModel(List<Person> personsList) throws IllegalValueException {
-        if (person != null) {
-            return personsList.stream()
-                    .filter(x -> x.getName().fullName.equals(person))
-                    .findFirst().orElseThrow(() -> new IllegalValueException(INVALID_PERSON_MESSAGE));
+        if (person == null) {
+            return null;
         }
-        return null;
+        return personsList.stream()
+                .filter(x -> x.getName().fullName.equals(person))
+                .findFirst().orElseThrow(() -> new IllegalValueException(INVALID_PERSON_MESSAGE));
     }
     /**
      * Performs the validation and parsing of Appointment priority into a {@code Priority} model.
