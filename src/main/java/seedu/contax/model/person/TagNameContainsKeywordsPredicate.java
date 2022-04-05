@@ -24,7 +24,7 @@ public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
         Set<Tag> tags = person.getTags();
 
         for (Tag tag : tags) {
-            if (tag.getTagNameString().contains(keyword)) {
+            if (tag.getTagNameString().equals(keyword)) {
                 return true;
             }
         }
