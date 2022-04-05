@@ -40,14 +40,14 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="200" prefHeight="200" style="-fx-background-color: ffffff;" styleClass="pane-with-border" VBox.vgrow="SOMETIMES">
+        <StackPane fx:id="resultDisplayPlaceholder" minHeight="200" prefHeight="200" maxHeight="400" style="-fx-background-color: ffffff;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
         <SplitPane dividerPositions="0.5" style="-fx-background-color: e6ecf0;">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+          <VBox fx:id="personList" minWidth="340" prefWidth="340" prefHeight="600" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
             <Label fx:id="personListTitle" styleClass="cell_big_label" style="-fx-font-size: 20px;" text="Student Contacts"/>
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
@@ -55,7 +55,7 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
-          <VBox fx:id="groupList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+          <VBox fx:id="groupList" minWidth="340" prefWidth="340" prefHeight="600" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
             <Label fx:id="groupListTitle" styleClass="cell_big_label" style="-fx-font-size: 20px;" text="Student Groups"/>
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
