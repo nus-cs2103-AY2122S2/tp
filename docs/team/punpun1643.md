@@ -40,7 +40,7 @@ and `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/p
   * Justification: This feature is critical to the product, and without it the product would not function as a task management application.
 
 * **Enhancements to existing feature**: `GUI` (PR: [\#51](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/51), [\#102](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/102), 
-[\#104](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/105) and [\#111](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/111)))
+[\#104](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/105) and [\#111](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/111))
   * What it does: Revamp the UI of AB3 to ArchDuke.
   * Justification: This implementation changes the UI of the app greatly compared to that of AB3.
   * Highlights: This feature requires an in-depth understanding of the observer design patterns, 
@@ -79,20 +79,29 @@ and `viewtask` command (PR: [\#73](https://github.com/AY2122S2-CS2103-W16-3/tp/p
   * Updated all UG/DG that are not specific to a feature.
   * Automated GitHub Projects for task management.
 
+* **Review/mentoring contributions**:
+  * PRs reviewed (with non-trivial review comments): [\#62](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/62#discussion_r827346201)
+  , [\#62](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/62#discussion_r827349826), 
+  [\#74](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/74#discussion_r831356836), 
+  [\#58](https://github.com/AY2122S2-CS2103-W16-3/tp/pull/58#discussion_r826721361)
+  * Helped team members to debug their code and explained the rationale behind it through text messages and video recording.
+  
 * **Documentation**:
   * User Guide:
-    * (to be updated) Added documentation for the features `delete` and `find` [\#72]()
-    * (to be updated) Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * The UG was written solely by me. Added documentation for the features `help`, `add`, `delete`, 
+    `find`, `addgroup`, `delgroup`, `assign`, `deassign`, `viewcontact`, `addtask`, `deltask`, `viewtask`.
+    * Added all screenshots in the UG.
+    * Wrote all the FAQs.
+    * Wrote all notes, tips, and limitations.
+    
   * Developer Guide:
     * to be added soon
 
 * **Community**:
-  * (to be updated) PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * (to be updated) Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * (to be updated) Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * (to be updated) Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * to be added soon
-
-* _{you can add/remove categories in the list above}_
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/227), 
+  [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/212), 
+  [3](https://github.com/nus-cs2103-AY2122S2/forum/issues/171), 
+  [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/68#issuecomment-1026547436))
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Punpun1643/ped/issues/9), 
+  [2](https://github.com/Punpun1643/ped/issues/13), 
+  [3](https://github.com/Punpun1643/ped/issues/15))
