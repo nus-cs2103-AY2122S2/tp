@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to find appointments by name
   * What it does: Allows users to find quickly find appointments using either the appointment name or person name
-  * Justification: This feature expands the ways in which a user can locate a specific appointment, allowing for more efficient management.
+  * Justification: This feature expands on the ways in which a user can locate specific appointments, allowing for more efficient access and subsequent management of Appointments.
 
 * **Enhancements to existing features**:
   * Revamped Help Window to display meaningful information on all commands in ContaX
@@ -32,7 +32,7 @@ Given below are my contributions to the project.
   
 * **Documentation**:
   * User Guide:
-    * Added documentation for Onbarding Guide, Help Window and Find Appointment command
+    * Added documentation for Onboarding Guide, Help Window and Find Appointment command
   * Developer Guide:
     * Added documentation on the implementation of Onboarding Guide and Find Appointment command
 
