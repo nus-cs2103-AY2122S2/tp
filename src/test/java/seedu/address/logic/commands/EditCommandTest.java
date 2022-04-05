@@ -92,7 +92,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(model.getFilteredPetList().get(0), editedPet);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

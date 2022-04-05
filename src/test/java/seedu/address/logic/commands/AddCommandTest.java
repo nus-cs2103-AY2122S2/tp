@@ -144,6 +144,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Predicate<Pet> getLastUsedPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Pet> getFilteredPetList() {
             throw new AssertionError("This method should not be called.");
         }
