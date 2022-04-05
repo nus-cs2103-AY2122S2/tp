@@ -22,17 +22,17 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit a tag "
             + "(identified by the tag's index number) "
-            + "of the person identified "
+            + "of the client identified "
             + "by the index number used in the displayed person list. "
             + "Only one tag can edited at a time. \n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) "
+            + "Parameters: CLIENT_INDEX (must be a positive integer) "
             + "TAG_NUMBER (must be a positive integer) "
             + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 2 "
             + "owesMoney :p2";
 
-    public static final String MESSAGE_SUCCESS = "Edited tag in Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "Edited tag in Client: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
 
     private final Index index;
     private final int tagNumber;
