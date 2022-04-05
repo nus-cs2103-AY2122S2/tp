@@ -24,10 +24,12 @@ public class TypicalLessons {
             .withStudentAttendances(TypicalStudentAttendances.DANIEL_ATTENDANCE)
             .withWeekId("11").build();
     public static final Lesson LESSON12 = new LessonBuilder()
-            .withStudentAttendances(TypicalStudentAttendances.ELLE_ATTENDANCE)
+            .withStudentAttendances(TypicalStudentAttendances.CARL_ATTENDANCE,
+                    TypicalStudentAttendances.DANIEL_ATTENDANCE)
             .withWeekId("12").build();
     public static final Lesson LESSON13 = new LessonBuilder()
-            .withStudentAttendances(TypicalStudentAttendances.FIONA_ATTENDANCE)
+            .withStudentAttendances(TypicalStudentAttendances.ELLE_ATTENDANCE,
+                    TypicalStudentAttendances.FIONA_ATTENDANCE)
             .withWeekId("13").build();
 
     private TypicalLessons() {} // prevents instantiation
