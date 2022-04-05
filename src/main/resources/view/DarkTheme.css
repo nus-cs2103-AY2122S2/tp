@@ -354,6 +354,7 @@
 #labCard {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-padding: 2;
 }
 
 #labCard .label {
@@ -379,7 +380,7 @@
 .list-view .scroll-bar:horizontal .decrement-button {
     -fx-scale-x: 0;
     -fx-opacity: 0;
-    -fx-padding:-7;
+    -fx-padding: -4;
 }
 
 #labCard.list-view {
