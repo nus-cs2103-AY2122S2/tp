@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.OrderingUtil.Ordering;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -245,6 +246,21 @@ public class AddPersonCommandTest {
 
         @Override
         public Entry archiveEntry(int index, boolean isArchived) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonListByName(Ordering ordering, Predicate<? super Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortCompanyListByName(Ordering ordering, Predicate<? super Company> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortEventListByDate(Ordering ordering, Predicate<? super Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
