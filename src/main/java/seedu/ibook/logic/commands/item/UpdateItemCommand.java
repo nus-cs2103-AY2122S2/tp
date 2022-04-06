@@ -69,6 +69,7 @@ public class UpdateItemCommand extends Command {
                 throw new CommandException(MESSAGE_EXCESS_QUANTITY);
             }
 
+            model.deleteItem(targetProduct, itemToUpdate);
             model.addItem(targetProduct, updatedItem);
         } else {
             model.updateItem(targetProduct, itemToUpdate, updatedItem);
