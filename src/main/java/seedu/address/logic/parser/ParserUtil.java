@@ -50,6 +50,7 @@ public class ParserUtil {
     public static final String MESSAGE_STUDENT_INVALID = "Student argument is invalid.";
     public static final String MESSAGE_STUDENT_ARG_INVALID = "Student argument '%s' is invalid.";
     public static final String MESSAGE_STUDENT_EMPTY = "Student argument cannot be empty.";
+    public static final String MESSAGE_STUDENT_ARG_NOT_FOUND = "Student with ID '%s' does not exist in the list.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student does not exist in the list.";
 
     /**
@@ -399,7 +400,8 @@ public class ParserUtil {
         String[] splitArgs = args.toUpperCase().split(",");
         if (splitArgs.length == 0
                 || (!StudentId.isValidStudentId(splitArgs[0])
-                && !StringUtil.isNonZeroUnsignedInteger(splitArgs[0].trim()))) {
+                && !StringUtil.isNonZeroUnsignedInteger(splitArgs[0].trim())
+                && !splitArgs[0].trim().startsWith("E"))) {
             throw new ParseException(MESSAGE_STUDENT_INVALID);
         }
 
@@ -420,14 +422,18 @@ public class ParserUtil {
     private static ObservableList<Student> parseStudentIds(String[] splitIds, Model model) throws ParseException {
         List<StudentId> studentIds = new ArrayList<>();
         for (String i : splitIds) {
+            StudentId sid;
             try {
-                StudentId sid = parseStudentId(i);
-                // check for duplicates
-                if (!studentIds.contains(sid)) {
-                    studentIds.add(sid);
-                }
+                sid = parseStudentId(i);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_STUDENT_ARG_INVALID, i), pe);
+            }
+            if (!model.hasStudent(sid)) {
+                throw new ParseException(String.format(MESSAGE_STUDENT_ARG_NOT_FOUND, sid));
+            }
+            // check for duplicates
+            if (!studentIds.contains(sid)) {
+                studentIds.add(sid);
             }
         }
         try {
