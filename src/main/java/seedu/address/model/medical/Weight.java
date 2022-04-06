@@ -12,7 +12,7 @@ public class Weight {
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid height input. "
             + "We recommend inputting height using kilograms (eg. 70 kg), "
-            + "but allow any other unit or special weight values (eg. using other units). "
+            + "but we allow any other unit or special weight values (eg. using other units). "
             + "Weight parameter can take any values, and it should not be blank.";
 
     /*
