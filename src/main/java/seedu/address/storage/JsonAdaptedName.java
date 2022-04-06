@@ -35,7 +35,7 @@ public class JsonAdaptedName {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted name.
      */
-    public Name toModelType(String name) throws IllegalValueException {
+    public Name toModelType() throws IllegalValueException {
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
