@@ -11,7 +11,6 @@ The app also includes various tools which aims to help agents in their work.
 Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/UserGuide.html)
 
 # Table of contents
-- [Glossary](#glossary)
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [General Commands](#general-commands)
@@ -41,12 +40,7 @@ Original AB3 User Guide: [link](https://se-education.org/addressbook-level3/User
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
-
-## Glossary
-- **Users**: Real estate agents.
-- **Clients**: Customers of the real estate agents looking to buy or sell property.
-- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
-- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
+- [Glossary](#glossary)
 
 ## Quick start
 
@@ -65,10 +59,12 @@ Some example commands you can try:
 
 ## Features
 
-Notes about the command format:
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
   e.g. `n/NAME [pr/PROPERTY]` can be used as `n/John Doe pr/north,123 Street,1-room,$300000` or as `n/John Doe`.
@@ -77,33 +73,45 @@ e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
 - Inputting information after `pr/` & `p/` indicates the type of property a client is selling or buying.<br>
-e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this client is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
+  e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` means this client is a seller looking to sell a 2-room property at Block 123 which is located in the East, with a price of $550000.<br>More information about the required format of properties can be found in the next section.
 
 - client parameters can be in any order.<br>
-e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER pr/PROPERTY`, `p/PHONE_NUMBER pr/PROPERTY n/NAME` is also acceptable.
 
 - If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-Notes about the property format:
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the property and preference format:**<br>
+
 - Properties must be specified in the following format: `pr/REGION,ADDRESS,SIZE,PRICE`. Whitespace between parameters is ignored.<br>
   e.g. Both `pr/East,Pasir Ris Drive 1 Block 123,2-room,$550000` and `pr/East, Pasir Ris Drive 1 Block 123, 2-room, $550000` are acceptable. `pr/Pasir Ris Drive 1 Block 123, East, 2-room, $550000` is not acceptable.
 
-Notes about the preference format:
 - Preference must be specified in the following format: `pf/REGION,SIZE,LOWPRICE,HIGHPRICE`. Whitespace between parameters is ignored.<br>
 
-Notes about the image format:
-- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from  the directory the jar file is run. Description
-is optional and can be omitted.
+- Parameter formats:
+  - REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
+  - ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
+  - SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
+  - PRICE: `$` followed by a positive integer. e.g. `$150000`
 
-Parameter formats:
-- REGION: One of [`North`, `South`, `East`, `West`, `Central`] (Non case-sensitive).
-- ADDRESS: Any non-empty string that does not contain `,`. e.g. `Pasir Ris Drive 1 Block 123`
-- SIZE: One of [`1-room`,`2-room`, `3-room`, `4-room`, `5-room`] (Non case-sensitive).
-- PRICE: `$` followed by a positive integer. e.g. `$150000`
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the image format:**<br>
+
+- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted.
+
+</div>
+
+
 
 ## General Commands
 
@@ -154,7 +162,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]… [pf/PREFER
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Either a property or preference must be provided when adding a new client and only one of either type can be provided.
 </div>
-**Tip**: A client is either a `buyer`, or `seller` based on whether he has a property or a preference.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+A client is either a `buyer`, or `seller` based on whether he has a property or a preference.
+</div>
 
 Examples:
 
@@ -274,6 +285,21 @@ Examples:
 - `sort address name phone` will sort the list by `Address` first. If there are entries with equal `Address`, the entries will be sorted by `Name`. If there are entries with equal `Address` and `Name`, they will be sorted by `Phone`.
 - `sort !name` will sort the list according to `Name` in reverse alphabetical order, i.e., `Sam Yeo` will be listed before `Elon Musk`.
 - `sort favourite !name` will sort the list according to `Favourite`, with favourites being listed first, followed by non-favourites. Within each group, entries are sorted according to `Name` in reverse alphabetical order.
+- `sort num_property` will sort the list according to the number of properties a client has. Buyers will be listed first since they have no properties.![images/user-guide/sortNumPropertiesResult.png](images/user-guide/sortNumPropertiesResult.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about sorting:**<br>
+
+- Sorting is integrated with the find feature, i.e., sorting clients after using the `find` command will sort the filtered list. To sort the unfiltered list, reset the filter using the `list` command before using the `sort` command.
+- Capitalization of alphabets is ignored, i.e., `Aiken` and `aiken` have the same priority when sorting alphabetically.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To sort by number of properties in the default order, but with buyers shifted to the bottom of the list, sort by user type in reverse order, followed by number of properties in default order, i.e., `sort !usertype num_property`.
+![images/user-guide/sortReverseUserTypeNumPropertiesResult.png](images/user-guide/sortReverseUserTypeNumPropertiesResult.png)
+</div>
 
 ## Tools
 ### Matching properties and preferences: `match`
@@ -355,24 +381,24 @@ If your changes to the data file makes its format invalid, RealEstatePro will di
 
 # Command Summary
 
-| Action            | Format                                                                                                 | Examples                                                                                                                             |
-|-------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] i/FILEPATH[:DESCRIPTION]… | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/2-room, East, SGD$200K, i/living.png:Living room |
-| Clear             | clear                                                                                                  | -                                                                                                                                    |
-| Delete            | delete INDEX                                                                                           | e.g. delete 3                                                                                                                        |
-| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [i/FILEPATH[:DESCRIPTION]]…         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                                       |
-| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                              | e.g. find name James Jake                                                                                                            |
-| Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                                    | e.g. sort name !phone email                                                                                                          |
-| Remind            | remind INDEX r/reminderDetails                                                                         | e.g. remind 1 r/home viewing                                                                                                         |
-| Upload            | upload INDEX i/FilePath[:Description]…                                                                 | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                                            |
-| viewimage         | viewimage INDEX                                                                                        | e.g. viewimage 1                                                                                                                     |
-| List              | list                                                                                                   | -                                                                                                                                    |
-| Help              | help                                                                                                   | -                                                                                                                                    |
-| Match             | match                                                                                                  | -                                                                                                                                    |
-| Favourite         | favourite INDEX                                                                                        | e.g., favourite 3                                                                                                                    |
-| Favourites window | fw                                                                                                     | -                                                                                                                                    |
-| Statistics window | stats                                                                                                  | -                                                                                                                                    |
-| Reminder window   | rm                                                                                                     | -                                                                                                                                    |
+| Action            | Format                                                                                                 | Examples                                                                                                                                                         |
+|-------------------|--------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add               | add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [pr/PROPERTY]... [pf/PREFERENCE] i/FILEPATH[:DESCRIPTION]… | e.g. add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pr/East, John street block 123 #01-01, 2-room, $200000 i/living.png:Living room |
+| Clear             | clear                                                                                                  | -                                                                                                                                                                |
+| Delete            | delete INDEX                                                                                           | e.g. delete 3                                                                                                                                                    |
+| Edit              | edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PROPERTY]… [i/FILEPATH[:DESCRIPTION]]…         | e.g. edit 2 n/James Lee e/jameslee@example.com                                                                                                                   |
+| Find              | find ATTRIBUTE KEYWORD [MORE KEYWORDS...]                                                              | e.g. find name James Jake                                                                                                                                        |
+| Sort              | sort [!]KEYWORD [[!]MORE_KEYWORDS]…                                                                    | e.g. sort name !phone email                                                                                                                                      |
+| Remind            | remind INDEX r/reminderDetails                                                                         | e.g. remind 1 r/home viewing                                                                                                                                     |
+| Upload            | upload INDEX i/FilePath[:Description]…                                                                 | e.g. Upload 1 i/livingroom.png:Living room of 4-room flat                                                                                                        |
+| viewimage         | viewimage INDEX                                                                                        | e.g. viewimage 1                                                                                                                                                 |
+| List              | list                                                                                                   | -                                                                                                                                                                |
+| Help              | help                                                                                                   | -                                                                                                                                                                |
+| Match             | match                                                                                                  | -                                                                                                                                                                |
+| Favourite         | favourite INDEX                                                                                        | e.g., favourite 3                                                                                                                                                |
+| Favourites window | fw                                                                                                     | -                                                                                                                                                                |
+| Statistics window | stats                                                                                                  | -                                                                                                                                                                |
+| Reminder window   | rm                                                                                                     | -                                                                                                                                                                |
 
 # Keyboard Shortcuts
 
@@ -383,4 +409,8 @@ If your changes to the data file makes its format invalid, RealEstatePro will di
 | F3  | Opens Favourites Window |
 | F4  | Opens Reminders Window  |
 
-
+## Glossary
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property.
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
