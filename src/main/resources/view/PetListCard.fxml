@@ -33,7 +33,11 @@
                         </font>
                     </Label>
                 </HBox>
-                <FlowPane fx:id="tags"/>
+                <FlowPane fx:id="tags">
+                    <padding>
+                        <Insets bottom="3" top="3"/>
+                    </padding>
+                </FlowPane>
                 <Label fx:id="ownerName" styleClass="cell_small_label" text="\$ownerName"/>
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
                 <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
@@ -44,7 +48,7 @@
                 </HBox>
                 <HBox fx:id="appointmentTag">
                     <padding>
-                        <Insets bottom="3" top="5"/>
+                        <Insets bottom="2" top="5"/>
                     </padding>
                 </HBox>
             </VBox>
