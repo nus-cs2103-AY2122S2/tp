@@ -33,6 +33,7 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_PRICE_RANGE + "PRICE RANGE "
             + PREFIX_LOCATION + "LOCATION"
             + "Must include: index h/ a/ pr/ l/ \n"
+            + "Ensure INDEX is positive integer & less than or equal to size of displayed seller list \n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_HOUSE_TYPE + "HDB "
             + PREFIX_ADDRESS + "Blk 123, Serangoon Ave 1 #09-369 "
@@ -62,7 +63,7 @@ public class AddPropertyToSellCommand extends Command {
         List<Seller> lastShownList = model.getFilteredSellerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
         }
 
         Seller sellerToUpdate = lastShownList.get(index.getZeroBased());
