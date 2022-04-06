@@ -132,11 +132,11 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(moduleCode, keyEvent, dateTime);
         case "student":
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
-                throw new ParseException(String.format("Missing n/NAME field!\nE.g.,",
+                throw new ParseException(String.format("Missing n/NAME field!\n%s",
                     AddCommand.MESSAGE_USAGE_STUDENT));
             }
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OFFICE)) {
-                throw new ParseException(String.format("Student should not have an of/OFFICE field!\nE.g.,",
+                throw new ParseException(String.format("Student should not have an of/OFFICE field!\n%s",
                         AddCommand.MESSAGE_USAGE_STUDENT));
             }
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GROUP)
@@ -178,7 +178,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     AddCommand.MESSAGE_USAGE_PROFESSOR));
             }
             if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME)) {
-                throw new ParseException(String.format("Missing n/NAME field!\nE.g.,",
+                throw new ParseException(String.format("Missing n/NAME field!\n%s",
                         AddCommand.MESSAGE_USAGE_PROFESSOR));
             }
             name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
