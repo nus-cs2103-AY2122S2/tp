@@ -72,7 +72,7 @@ public class Interview {
      * Checks if the interview is for the specified applicant.
      */
     public boolean isInterviewForApplicant(Applicant a) {
-        return applicant.isSamePerson(a);
+        return applicant.isSameApplicant(a);
     }
 
     /**

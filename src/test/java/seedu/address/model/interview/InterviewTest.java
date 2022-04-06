@@ -3,7 +3,7 @@ package seedu.address.model.interview;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalInterviews.QA_ENGINEER_INTERVIEW;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalApplicants.ALICE;
 import static seedu.address.testutil.TypicalPositions.SR_FE_SOFTWARE_ENGINEER;
 
 import java.time.LocalDateTime;
