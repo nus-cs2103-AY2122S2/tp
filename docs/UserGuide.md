@@ -206,7 +206,8 @@ Format: `delete -a CANDIDATE_INDEX`
 
 Examples:
 * `list` followed by `delete -a 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete -a 1` deletes the 1st person in the results of the `find` command.
+* `list -a f/name a/Betsy` followed by `delete -a 1` deletes the 1st person name Betsy in the results of the
+`list -a f/name a/Betsy` command.
 
 ### Deleting an Interview: `delete -i`
 

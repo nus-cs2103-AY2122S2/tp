@@ -86,7 +86,8 @@ public class HelpDescription {
             + "- The index refers to the index number shown in the displayed Applicant list. \n"
             + "- The index must be a positive integer 1, 2, 3,… \n"
             + "Examples: \n"
-            + "'find Betsy' followed by 'delete -a 1' deletes the 1st person in the results of the find command.\n"
+            + "'list -a f/name a/Betsy' followed by 'delete -a 1' deletes the 1st person name Betsy"
+            + " in the results of the 'list -a f/name a/Betsy' command.\n"
             + "\n 2. Deleting an Interview: \n"
             + "Format: 'del -i CANDIDATE_INDEX ROLE' \n"
             + "Some notice: \n"
@@ -148,47 +149,6 @@ public class HelpDescription {
             + "list -p f/name a/Software Engineer \n"
             + "list -p f/req a/Java s/dsc";
 
-    public static final String FILTER_COMMAND_DESCRIPTION =
-            "View different applicants, interviews and positions in HireLah through various filters. "
-            + "It alters the current display of HireLah and changes the index of the relevant data. \n"
-            + "Format: 'filter DATA_TYPE b/FILTER_TYPE [ARGUMENT]' \n"
-            + "Notice: \n"
-            + "Different data has different filters available, thus requiring different arguments, as such"
-            + "- Applicant (DATA_TYPE: appl): \n"
-            + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View applicants whose name contains the keyword \n"
-            + " + FILTER_TYPE: tag, ARGUMENT: t/TAG1, [t/TAG2, …]: View applicants who have all the tags specified \n"
-            + "- Interview (DATA_TYPE: intvw): \n"
-            + " + FILTER_TYPE: appl, ARGUMENT: n/NAME: View interviews for applicants whose name is specified \n"
-            + " + FILTER_TYPE: date, ARGUMENT: d/DATE: View interviews happening on the specified date "
-            + "(Date provided must be in format YYYY-MM-DD) \n"
-            + "- Position (DATA_TYPE: pos): \n"
-            + " + FILTER_TYPE: name, ARGUMENT: n/KEYWORD: View positions which has "
-            + "the specified keyword in the position name \n"
-            + "Examples: \n"
-            + "filter appl tag t/school t/friend \n"
-            + "filter intvw date d/2022-03-20";
-
-    public static final String SORT_COMMAND_DESCRIPTION =
-            "Arranges applicants, interview and positions in HireLah according to their properties."
-            + "It alters the current display of HireLah and changes the index of the relevant data. \n"
-            + "Format: 'sort DATA_TYPE SORT_ORDER'"
-            + "Notice: \n"
-            + "User can specify the order of the sorted data by typing ASC (for ascending) or DSC (for descending) "
-            + "in the REVERSE part. \n"
-            + "Type of data and what the sorting based on"
-            + "- Applicant (DATA_TYPE: appl): \n"
-            + " + Sorting properties: Name \n"
-            + " + Description: \tSort and view applicants based on their name \n"
-            + "- Interview (DATA_TYPE: intvw): \n"
-            + " + Sorting properties: Date \n"
-            + " + Description: Sort and view interviews based on their occurring date \n"
-            + "- Position (DATA_TYPE: pos): \n"
-            + " + Sorting properties: Name \n"
-            + " + Description: Sort and view positions based on the position name \n"
-            + "Examples: \n"
-            + "sort APPL ASC \n"
-            + "sort POS DSC";
-
     public static final String PASS_COMMAND_DESCRIPTION =
             "Passes an existing interview in Hirelah.\nFormat: pass INTERVIEW_INDEX\n"
             + "- Passes the Interview at the specified INTERVIEW_INDEX.\n"
@@ -225,7 +185,8 @@ public class HelpDescription {
             + "- Rejecting a job offer will decrement the number of offered in Position";
 
     public static final String EXPORT_COMMAND_DESCRIPTION =
-            "Exports all data of the specified typo in HireLah to a CSV file.\n"
+            "Exports all data of the specified typo in HireLah to a CSV file."
+            + " The export csv file will be stored at export_csv folder. \n"
             + "Format: export -TYPE\n"
             + "TYPE can be a for applicants, p for positions, and i for interviews";
 
