@@ -39,7 +39,7 @@ Given below are my contributions to the project.
     * `prioritizeappt`
   * Developer Guide:
     * Add documentation section on how multiple commands bind together
-    * Add documentation section on priority
+    * Add documentation section on appointment priority
 
 * **Community**:
   * Provided [100+ comments](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html) across [26 PRs](https://github.com/AY2122S2-CS2103-W17-1/tp/pulls?q=is%3Apr++is%3Aclosed+reviewed-by%3Ahanjiyao)
