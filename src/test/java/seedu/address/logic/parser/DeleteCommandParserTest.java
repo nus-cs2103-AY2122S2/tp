@@ -45,7 +45,7 @@ public class DeleteCommandParserTest {
         // Contains non-zero integer in the multiple case -> Fail
         assertParseFailure(parser, "1 -1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
-        // Contains than 1 white space between 2 integers -> Fail
+        // Contains more than 1 white space between 2 integers -> Fail
         assertParseFailure(parser, "1  2 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
         // Contains zero -> Fail
