@@ -10,7 +10,8 @@ UniBook is a **desktop app for students to manage their university contacts rela
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## Quick start
+
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -40,7 +41,7 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -66,7 +67,7 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
 </div>
 
-### Core function of UniBook
+## Core function of UniBook
 
 * To serve its purpose as useful desktop app for University students to manage their university contacts for their studies in an organised manner, UniBook supports the following types of entries:
   * 2 types of people - Students and Professors
@@ -83,7 +84,7 @@ UniBook is a **desktop app for students to manage their university contacts rela
     * A group is also associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed. 
 * UniGroup is thus an app that displays and stores the above entries for easy reference by users, with smart commands that help to manage entries of them.
 
-### User Interface
+## User Interface
 
 * UniBook consists of 3 main pages that a user can navigate through - the _people page_, _modules page_ and _groups page_.
   * The _people page_ displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names. (ref: `add` command)
@@ -104,7 +105,7 @@ UniBook is a **desktop app for students to manage their university contacts rela
 * On _module page_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
 * On _group page_, showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
 
-### Viewing help : `help`
+## Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -113,7 +114,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding an entry: `add`
+## Adding an entry: `add`
 
 Adds a module/group/student/professor/event/meeting to the UniBook depending on the value defined in `o/OPTION`.
 
@@ -182,7 +183,7 @@ A student/professor can have any number of tags and modules (including 0)
 </div>
 
 
-### Listing entries: `list`
+## Listing entries: `list`
 
 Lists entries in UniBook according to a specified listing criteria. Behaves differently depending
 on currently active view.
@@ -316,7 +317,7 @@ Format: `list mt/YYYY-MM-DD`
 - Example: `list mt/2022-05-04` lists all groups that have meetings on `May 4th 2022`.
 
 
-### Editing a person : `edit`
+## Editing a person : `edit`
 
 Edits an existing person in UniBook.
 
@@ -383,12 +384,11 @@ Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
 * `DATETIME` must be in `YYYY-MM-DD HH:mm` format.
 * Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
 
-### Locating persons by name: `find`
+## Locating persons by name: `find`
 
-**Only meant to be used on the person page**
+### On Any Page
 
-Finds persons whose names contain any of the given keywords.
-
+#### Find person whose names contain any of the given keywords
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -403,96 +403,108 @@ Examples:
 * `find alex` returns `Alex Yeoh`, `Alex Teo`<br>
   ![result for 'find alex david'](images/findCommandResult.png)
 
-### Deleting specific entries : `delete`
+## Deleting specific entries : `delete`
 
 Removes the specified modules, module subgroup, student or professor profile from the system.
 
-Format:
-(Note: Commands under the sub header Person page can only be used on person page, and likewise for other pages)
+(Note: Commands under the sub header Person view can only be used on person page, and likewise for other view)
 
-On Person Page:
+### On Any View:
 
-`delete [INDEX]`
+#### :bulb: Delete module by module code
+Format: `delete o/module m/[MODULECODE]`
+* Deletes the module with the specified `MODULECODE`.
+* The module must already exist in the system.
+* For example, `delete o/module m/CS2103` removes the module with module code CS2103
+
+#### :bulb: Delete group by module code and group name
+Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
+* Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
+* Both the module and the subgroup must already exist in the system.
+* For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
+
+### On People View:
+
+#### :bulb: Delete a person by index
+Format: `delete [INDEX]`
 * Deletes the person at that index
 * The GUI will display the index before the person
 
-`delete [INDEX] p/ e/ t/[TAG] of/`
+#### :bulb: Delete a person's information
+Format: `delete [INDEX] p/ e/ t/[TAG] of/`
 * p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put `p/` and `e/`
 * At least 1 of {`p/`, `e/`, `t/[TAG]`, `of/`} must be entered, otherwise the `delete [INDEX]` command will be executed instead
 * Only 0 or 1 of each tag must be provided
 
-On Module Page:
+### On Module View:
 
-`delete [INDEX]`
+#### :bulb: Delete a module by Index
+Format: `delete [INDEX]`
 * Deletes the module at that index
 * The GUI will display the index before the module
 
 For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `prof/1` and `stu/1` is both provided, `delete 1 prof/1` will be prioritised because `prof/` is higher than `stu/` on this list.
 
-`delete [INDEX] prof/[INDEX]`
+#### :bulb: Remove a professor from a module by index
+Format: `delete [INDEX] prof/[INDEX]`
 * Delete professor from module (The original person is not deleted, only removed from the module)
 * The first index represents the index for which module to remove a professor from
 * The second index (after prof/) represents the index for which professor to remove
 * For example, `delete 2 prof/1` would delete the professor at index 1 from the module at index 2
 
-`delete [INDEX] stu/[INDEX]`
+#### :bulb: Remove a student from a module by index
+Format: `delete [INDEX] stu/[INDEX]`
 * Same as the above command, but index after stu/ represents the student list index to be deleted
 
-`delete [INDEX] g/[GROUPNAME]`
+#### :bulb: Delete a group from a module by index
+Format: `delete [INDEX] g/[GROUPNAME]`
 * same as the above command, but group name has to be specified to delete the group with that name
 
-`delete [INDEX] ke/[INDEX]`
+#### :bulb: Delete a key event from a module by index
+Format: `delete [INDEX] ke/[INDEX]`
 * same as the above command, but index after ke/ represents the key event index to be deleted
 
-On Group page:
+### On Group view:
 
-`delete [INDEX]`
+#### :bulb: Delete group by index
+Format: `delete [INDEX]`
 * Deletes the group at that index
 * The GUI will display the index before the group
 
 For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `mt/1` and `stu/1` is both provided, `delete 1 stu/1` will be prioritised because `stu/` is higher than `mt/` on this list.
 
-`delete [INDEX] stu/[INDEX]`
+#### :bulb: Remove student from group by index
+Format: `delete [INDEX] stu/[INDEX]`
 * Delete student from group
 * The first index represents the index for which group to remove the student from
 * The second index (after stu/) represents the index for which student to delete
 * For example, `delete 2 stu/1` would delete the student at index 1 for the group at index 2
 
-`delete [INDEX] mt/[INDEX]`
+#### :bulb: Delete meeting time from group by index
+Format: `delete [INDEX] mt/[INDEX]`
 * Delete meeting time from group
 * The first index represents the index for which group to remove the meeting time for
 * The second index (after mt/) represents the index for which meeting time to delete
 * For example, `delete 2 mt/1` would delete the meeting time at index 1 for the group at index 2
 
-On Any Page:
 
-`delete o/module m/[MODULECODE]`
-* Deletes the module with the specified `MODULECODE`.
-* The module must already exist in the system.
-* For example, `delete o/module m/CS2103` removes the module with module code CS2103
-
-`delete o/group m/[MODULECODE] g/[GROUPNAME]`
-* Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
-* Both the module and the subgroup must already exist in the system.
-* For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
-
-### Clearing all entries : `clear`
+## Clearing all entries : `clear`
 
 Clears all entries from UniBook.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+## Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Saving the data
 
 UniBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+## Editing the data file
 
 UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -500,28 +512,26 @@ UniBook data are saved as a JSON file `[JAR file location]/data/unibook.json`. A
 If your changes to the data file makes its format invalid, UniBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+## Archiving data files `[coming in v2.0]`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UniBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command summary
 
 
 Action | Format
 --------|------------------
 **Add** | `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​` <br> e.g., `add o/module n/Software Engineering m/CS2103 ke/1 dt/2022-05-04 13:00` <br>`add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​` <br> e.g., `add o/group n/W16-1 m/CS2103 dt/2022-04-24 13:00` <br>`add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [[m/MODULECODE] [g/GROUPNAME]]…​`  <br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 g/W16-1` <br>`add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  <br>e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com of/123 Clementi Rd S123466 m/cs2103` <br>`add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  <br>e.g., `add o/event m/CS2103 ke/4 dt/2022-04-28 13:00` <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  <br>e.g., `add o/meeting m/CS2103 g/W16-1 dt/2022-04-29 13:00`
 **Clear** | `clear`
-**Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
 **Edit** |  Editing person: `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG] `<br> e.g. `edit 1 o/person p/91234567 e/prof@email.com of/COM1 nm/CS2103 ` <br><br> Editing Module: `edit INDEX o/module [n/NAME] [m/MODCODE]` e.g. `edit 1 o/module m/CS2103 n/Software Engineering` <br><br> Editing Groups: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]` e.g. `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` <br><br> Editing Key Events: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]` e.g. `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45`
 **Delete** | Any Page: <br> `delete [INDEX]` <br><br> People Page: <br> `delete [INDEX] p/ e/ t/[TAG] of/` <br> eg. `delete 1 p/ e/` <br> eg. `delete 2 t/friend` <br><br> Module Page: <br>`delete [INDEX] stu/[INDEX]` <br> `delete [INDEX] prof/[INDEX]` <br> `delete [INDEX] g/[GROUPNAME]` <br> `delete [INDEX] ke/[INDEX]` <br><br> Group Page: <br> `delete [INDEX] mt/[INDEX]` <br> `delete o/module m/[MODULECODE]` <br> eg. `delete o/module m/CS2103` <br> `delete o/group m/[MODULECODE] g/[GROUPNAME]` <br> eg. `delete o/group m/CS2103 g/Team Project`
-**Edit** | `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | **Any View**:<br> `list` [(example)](#list-everything) <br> `list o/view v/VIEWTYPE` [(example)](#change-view)<br><br> **People View:** <br> `list type/PERSONTYPE` [(example)](#list-people-of-a-specific-type) <br> `list o/module m/MODULECODE [type/PERSONTYPE]` [(example)](#list-people-in-a-specific-module) <br> `list o/group m/MODULECODE g/GROUPNAME` [(example)](#list-people-in-a-specific-group-of-a-specific-module) <br><br> **Modules View:** <br> `list m/MODULECODE` [(example)](#list-a-module-with-a-specific-code) <br> `list [n/KEYWORD] [ke/KEYEVENT] [dt/YYYY-MM-DD]` [(example)](#list-a-module-with-a-name-containing-a-keyword)  <br> `list o/group g/GROUPNAME` [(example)](#list-groups-with-specific-group-name-module-page) <br><br> **Groups View:**<br> `list g/GROUPNAME [m/MODULECODE]` [(example)](#list-groups-with-specific-group-name-group-page) <br> `list mt/YYYY-MM-DD` [(example)](#list-groups-with-specific-meeting-date)
 **Help** | `help`
