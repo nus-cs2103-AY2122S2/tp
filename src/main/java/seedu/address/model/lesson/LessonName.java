@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's name in the student book.
+ * Represents a Lesson's name in the lesson book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class LessonName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Lesson names should only contain alphanumeric characters, spaces and are limited to 50 characters."
+                    + "Lesson names should not be blank.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,7 +36,7 @@ public class LessonName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
 
