@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -17,7 +16,6 @@ import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.team.Skill;
-import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
 /**
@@ -223,48 +221,6 @@ public class ParserUtil {
             }
         }
         return skillSet;
-    }
-
-    /**
-     * Parses {@code Collection<String> skill} into a {@code Set<Skill>}.
-     */
-    public static SkillSet parseSkillSet(Collection<String> skills) throws ParseException {
-        requireNonNull(skills);
-        final SkillSet skillSet = new SkillSet();
-        for (String skill : skills) {
-            skillSet.add(parseSkill(skill));
-        }
-        return skillSet;
-    }
-
-    /**
-     * Parses {@code Collection<String> teams} into a {@code Set<Team>} if {@code teams} is non-empty.
-     * If {@code teams} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Team>} containing zero teams.
-     */
-    public static Optional<Set<Team>> parseTeamsForEdit(Collection<String> teams) throws ParseException {
-        assert teams != null;
-
-        if (teams.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> set = teams.size() == 1 && teams.contains("") ? Collections.emptySet() : teams;
-        return Optional.of(ParserUtil.parseTeams(set));
-    }
-
-    /**
-     * Parses {@code Collection<String> skillset} into a {@code Set<Skill>} if {@code skill} is non-empty.
-     * If {@code skill} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Skill>} containing zero tags.
-     */
-    public static Optional<SkillSet> parseSkillSetForEdit(Collection<String> skill) throws ParseException {
-        assert skill != null;
-
-        if (skill.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> skillSet = skill.size() == 1 && skill.contains("") ? Collections.emptySet() : skill;
-        return Optional.of(ParserUtil.parseSkillSet(skillSet));
     }
 
 }
