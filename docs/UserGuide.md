@@ -375,7 +375,7 @@ You can choose to unfavourite by making this entry:
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
 command.
 
-## Use Case #6: Finding a company and/or role <a id="usecase6"></a>
+## Use Case #6: Finding a role <a id="usecase6"></a>
 In the future when you have many applications, finding specific applications can be daunting. The
 [find command](#c-find-c-r) allows you to search for applications easily with keywords matching `COMPANY_NAME` and `ROLE_NAME`.
 
@@ -672,19 +672,19 @@ Keep your priorities straight with `listFavourite`. It's `list` but for your `fa
 
 [Back to Table of Contents](#toc)
 
-### Finding companies or internship roles by name: `find` <a id="c-find-c-r"></a>
+### Finding internship roles by name: `find` <a id="c-find-c-r"></a>
 
-If you're having trouble locating a specific company or internship role, consider `find`. Save time by using keywords to
+If you're having trouble locating an internship role, consider `find`. Save time by using keywords to
 readily identify and track down items!
 
-**Function:** Find companies or/and roles depending on the format given.
+**Function:** Find specific roles depending on the format given.
 
 * If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all
   their roles.
 * If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be
   displayed.
 * If both keywords are entered, only companies whose names match any of the company keywords, while containing one or
-  more roles whose names match any of the role keywords, are displayed.
+  more roles whose names match any of the role keywords, are displayed. In this scenario, only the matched roles within these companies are displayed.
 
 **Format:** `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 
