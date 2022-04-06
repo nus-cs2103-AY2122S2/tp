@@ -57,6 +57,8 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
             public Label apply(Group group) {
                 Label label = new Label(group.getGroupName());
                 label.getStyleClass().add("mini-pane-group-name-label");
+                label.setWrapText(true);
+                label.setMaxWidth(80);
                 //handler to navigate to the specific module
                 label.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     @Override

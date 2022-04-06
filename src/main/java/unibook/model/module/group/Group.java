@@ -20,7 +20,7 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  */
 public class Group {
     public static final String NAME_CONSTRAINT_MESSAGE = "A group name cannot have whitespaces, and also must be"
-            + "limited in length to less than 50 characters.";
+            + "limited in length to within 50 characters.";
     //Group name can only have alphanumeric characters
     public static final String VALIDATION_REGEX = "^\\S*$";
 
