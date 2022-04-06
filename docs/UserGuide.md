@@ -6,11 +6,16 @@ title: User Guide
 * Table of Contents
 {:toc}
 
-ClientConnect is a client-management app for tech-savvy insurance agents to **manage clients’ in the midst of massive lists of clients that have various needs and priorities**. 
+ClientConnect is a client-management app for tech-savvy insurance agents to **manage clients’ in the midst of 
+massive lists of clients that have various needs and priorities**. 
 
-Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps. Add Tags with varying levels of priorities to keep track of utmost important tasks to utilize your time efficiently, sort your clients by priority so you won't miss out urgent tasks to be done, conveniently import and export your client contacts, and easily find the client details you want through our `find` command.
+Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps. 
+Add Tags with varying levels of priorities to keep track of utmost important tasks to utilize your time efficiently, 
+sort your clients by priority so you won't miss out urgent tasks to be done, conveniently import and export your client contacts, and easily find the client details you want through our `find` command.
 
-The package tab allows for quick reference of package details in the event that a client has to be contacted regarding their package.
+The package tab allows for quick reference of package details in the event that a client has to be contacted 
+regarding their package. It contains a list of all packages that have been added before, not necessarily 
+only packages that existing people in ClientConnect have.
 
 ![result for 'list'](images/listAllClientsUG.png)
 
@@ -115,7 +120,10 @@ After adding:
 
 Notes:
 * Any tags are optional.
-* Email domain must contain only **one period** and minimally ends with 2 letters: e.g jackson5@example.co is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
+* Email domain must contain only **one period** and minimally ends with 2 letters: 
+  e.g jackson5@example.com is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
+* For the insurance package indicated in the `i/` field, if an existing package with the same name does not 
+  exist, a new one will be automatically created.
 
 ------------------------------------------------------------------------------------
 ### Adding a tag to a person: `addTag`
@@ -323,13 +331,15 @@ After `deletep i/Golden Package`:
 
 ![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
 
-Note: If the packages window was open before a package was deleted, you will have to close and reopen the window 
+Note: 
+* If the packages window was open before a package is deleted, you will have to close and reopen the window 
 to view the change.
+* If a package to be deleted is used by at least one person, it will not be deleted.
 
 ------------------------------------------------------------------------------------
 ### Shows all insurance package: `listp`
 Displays all your insurance packages in ClientConnect
-s
+
 Format: `listp`
 
 ![result1 after 'listp'](images/listInsurancePackage1UG.png)
