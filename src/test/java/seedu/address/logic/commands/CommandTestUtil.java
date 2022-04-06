@@ -45,6 +45,9 @@ public class CommandTestUtil {
     public static final ArrayList<Tag> VALID_TAG_FRIEND = new ArrayList<Tag>(Arrays.asList(
                 new Tag("Friend", Priority.PRIORITY_4)));
     public static final String VALID_TAG_COMMAND_FRIEND = "Friend :p4";
+    public static final ArrayList<Tag> VALID_MULTIPLE_TAGS = new ArrayList<Tag>(Arrays.asList(
+            new Tag("Husband", Priority.PRIORITY_3), new Tag("Friend", Priority.PRIORITY_4)));
+    public static final ArrayList<Tag> VALID_NO_TAGS = new ArrayList<Tag>();
 
     public static final String NAME_FIND_ALICE_BOB = " " + PREFIX_NAME + "Alice Bob";
     public static final String NAME_FIND_ALICE_BOB_WHITESPACE = " " + PREFIX_NAME + "  \n Alice \n \t Bob  \t";
@@ -71,6 +74,10 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_EMAIL_DOMAIN_NO_PERIOD = " " + PREFIX_EMAIL + "bob@yahoo"; // missing one period
+    public static final String INVALID_EMAIL_DOMAIN_MANY_PERIOD = " "
+            + PREFIX_EMAIL + "bob@yahoo.com.sg"; // more than one period
+
     public static final String INVALID_INSURANCE_PACKAGE_DESC =
             " " + PREFIX_INSURANCE_PACKAGE; // empty string not allowed for insurance packages
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
