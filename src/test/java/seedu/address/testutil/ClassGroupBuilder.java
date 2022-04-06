@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.model.classgroup.ClassGroup.NUM_OF_WEEKS;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,6 +15,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.WeekId;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.studentattendance.StudentAttendance;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
@@ -95,38 +97,49 @@ public class ClassGroupBuilder {
         return this;
     }
 
+    //@@author jxt00
     /**
      * Sets the {@code UniqueStudentList} of the {@code ClassGroup} that we are building.
      * Initializes his/her attendance for all lessons.
      */
     public ClassGroupBuilder withUniqueStudentList(UniqueStudentList uniqueStudentList) {
+        this.uniqueStudentList = new UniqueStudentList();
         this.uniqueStudentList.setStudents(uniqueStudentList);
         for (Student s : this.uniqueStudentList) {
             for (Lesson lesson : this.lessons) {
                 if (!lesson.getStudents().contains(s)) {
                     lesson.addStudent(s);
                 }
+                lesson.getStudents().stream()
+                        .filter(s1 -> !uniqueStudentList.contains(s1))
+                        .forEach(s1 -> lesson.removeStudent(s1));
             }
         }
         return this;
     }
 
+    //@@author jxt00
     /**
      * Sets the {@code UniqueStudentList} of the {@code ClassGroup} that we are building.
      * Initializes his/her attendance for all lessons.
      */
     public ClassGroupBuilder withUniqueStudentList(Student... students) {
+        this.uniqueStudentList = new UniqueStudentList();
         for (Student s : students) {
             this.uniqueStudentList.add(s);
             for (Lesson lesson : this.lessons) {
                 if (!lesson.getStudents().contains(s)) {
                     lesson.addStudent(s);
                 }
+                lesson.getStudents().stream()
+                        .filter(s1 -> !uniqueStudentList.contains(s1))
+                        .forEach(s1 -> lesson.removeStudent(s1));
             }
         }
         return this;
     }
 
+    //@@author jxt00
     /**
      * Sets the {@code Lesson} of the {@code ClassGroup} that we are building.
      * Adds the students to the uniqueStudentList as well.
@@ -137,17 +150,43 @@ public class ClassGroupBuilder {
                     .filter(l -> l.getWeekId().equals(lessonToCopy.getWeekId()))
                     .findFirst()
                     .orElse(null);
-            this.lessons.set(this.lessons.indexOf(lesson), lessonToCopy);
-            List<Student> students = lessonToCopy.getStudents();
-            for (Student s : students) {
-                if (!this.uniqueStudentList.contains(s)) {
-                    this.uniqueStudentList.add(s);
+
+            for (StudentAttendance sa : lessonToCopy.getStudentAttendanceList()) {
+                // update attendance
+                if (lesson.getStudents().contains(sa.getStudent())) {
+                    if (sa.getAttendance().value) {
+                        lesson.markAttendance(new ArrayList<>(Arrays.asList(sa.getStudent())));
+                    } else {
+                        lesson.unmarkAttendance(new ArrayList<>(Arrays.asList(sa.getStudent())));
+                    }
+                }
+                // add students to lessons
+                List<Lesson> lessonsToChange = this.lessons.stream()
+                        .filter(l -> !l.getStudents().contains(sa.getStudent()))
+                        .collect(Collectors.toList());
+                for (Lesson l : lessonsToChange) {
+                    l.addStudent(sa.getStudent());
+                }
+
+                // add students to uniqueStudentList
+                if (!this.uniqueStudentList.contains(sa.getStudent())) {
+                    this.uniqueStudentList.add(sa.getStudent());
                 }
             }
         }
+        // remove students from lessons if they don't exist in the uniqueStudentList
+        this.lessons.stream()
+                .forEach(l -> {
+                    l.getStudents().stream().forEach(student -> {
+                        if (!this.uniqueStudentList.contains(student)) {
+                            l.removeStudent(student);
+                        }
+                    });
+                });
         return this;
     }
 
+    //@@author jxt00
     /**
      * Sets the {@code Lesson} of the {@code ClassGroup} that we are building.
      * Adds the students to the uniqueStudentList as well.
@@ -158,14 +197,39 @@ public class ClassGroupBuilder {
                     .filter(l -> l.getWeekId().equals(lessonToCopy.getWeekId()))
                     .findFirst()
                     .orElse(null);
-            this.lessons.set(this.lessons.indexOf(lesson), lessonToCopy);
-            List<Student> students = lessonToCopy.getStudents();
-            for (Student s : students) {
-                if (!this.uniqueStudentList.contains(s)) {
-                    this.uniqueStudentList.add(s);
+
+            for (StudentAttendance sa : lessonToCopy.getStudentAttendanceList()) {
+                // update attendance
+                if (lesson.getStudents().contains(sa.getStudent())) {
+                    if (sa.getAttendance().value) {
+                        lesson.markAttendance(new ArrayList<>(Arrays.asList(sa.getStudent())));
+                    } else {
+                        lesson.unmarkAttendance(new ArrayList<>(Arrays.asList(sa.getStudent())));
+                    }
+                }
+                // add students to lessons
+                List<Lesson> lessonsToChange = this.lessons.stream()
+                        .filter(l -> !l.getStudents().contains(sa.getStudent()))
+                        .collect(Collectors.toList());
+                for (Lesson l : lessonsToChange) {
+                    l.addStudent(sa.getStudent());
+                }
+
+                // add students to uniqueStudentList
+                if (!this.uniqueStudentList.contains(sa.getStudent())) {
+                    this.uniqueStudentList.add(sa.getStudent());
                 }
             }
         }
+        // remove students from lessons if they don't exist in the uniqueStudentList
+        this.lessons.stream()
+                .forEach(l -> {
+                    l.getStudents().stream().forEach(student -> {
+                        if (!this.uniqueStudentList.contains(student)) {
+                            l.removeStudent(student);
+                        }
+                    });
+                });
         return this;
     }
 
