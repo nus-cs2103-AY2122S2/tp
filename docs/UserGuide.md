@@ -377,16 +377,16 @@ Additional details:
 
 ## Exporting Data : `export`
 
-Exports all data of the specified typo in HireLah to a CSV file. 
+Exports all current displayed data of the specified typo in HireLah to a CSV file. 
 The export csv file will be stored at export_csv folder.
-
+* The export csv file only contain data that are currently displayed in HireLah
 Format: `export -TYPE`
 
 `TYPE` can be `a` for applicants, `p` for positions, and `i` for interviews
 
 Examples:
-* `export -p` to export csv file containing all positions.
-* `export -a` to export csv file containing all applicants.
+* `export -p` will export all positions to the corresponding csv file.
+* `list -a f/name a/Betsy` then `export -a` will export csv all applicants name Betsy to the corresponding csv file.
 
 ## Viewing help: `help`
 

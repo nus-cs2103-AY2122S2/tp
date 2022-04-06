@@ -185,13 +185,14 @@ public class HelpDescription {
             + "- Rejecting a job offer will decrement the number of offered in Position";
 
     public static final String EXPORT_COMMAND_DESCRIPTION =
-            "Exports all data of the specified typo in HireLah to a CSV file."
+            "Exports all current displayed data of the specified typo in HireLah to a CSV file."
             + " The export csv file will be stored at export_csv folder. \n"
             + "Format: export -TYPE\n"
             + "TYPE can be a for applicants, p for positions, and i for interviews. \n"
             + "Examples:\n"
-            + "'export -p' to export csv file containing all positions.\n"
-            + "'export -a' to export csv file containing all applicants.";
+            + "'export -p' will export all positions to the corresponding csv file.\n"
+            + "'list -a f/name a/Betsy' then 'export -a' will export csv all applicants"
+            + " name Betsy to the corresponding csv file.";
 
     public static final String EXIT_COMMAND_DESCRIPTION =
             "Well its an exit command, of course it going to terminate the program \n"
