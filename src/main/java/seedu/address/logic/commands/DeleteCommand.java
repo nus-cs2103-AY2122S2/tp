@@ -27,8 +27,10 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list "
             + "or Student ID.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "or " + PREFIX_ID + " STUDENT_ID\n"
+            + "Multiple indices can be supplied, each separated by a whitespace, to delete multiple students.\n"
+            + "Parameters: INDEX (must be a positive integer, can have multiple) " + "or " + PREFIX_ID + "STUDENT_ID\n"
             + "Example: " + COMMAND_WORD + " 1"
+            + " or " + COMMAND_WORD + " 1 2 3 7"
             + " or " + COMMAND_WORD + " " + PREFIX_ID + "A0123456Z\n";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student:\n%1$s";
