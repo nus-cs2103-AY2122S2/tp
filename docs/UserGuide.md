@@ -9,6 +9,7 @@ title: User Guide
 * [**Quick start**](#quick-start)
 * [**User interface**](#user-interface)
 * [**Command structure**](#command-structure)
+  * [Parameter conditions](#parameter-conditions)
 * [**Features**](#features)
   * [Viewing help: `help`](#viewing-help-help)
   * [Adding a show: `add`](#adding-a-show-add)
@@ -28,7 +29,6 @@ title: User Guide
 * [**Command Summary**](#command-summary)
 * [**Glossary**](#glossary)
 
----
 
 ## Introduction
 
@@ -36,7 +36,7 @@ Always accessing MyAnimeList or IMDB to record down the shows you watched? Or fi
 
 Trackermon is a **desktop application** for **tracking and managing shows, optimized for use via a Command Line Interface ([CLI](#glossary))** while still having the **benefits of a Graphical User Interface ([GUI](#glossary))**. Trackermon allows you to track and remember what shows you have watched, are currently watching, or plan to watch. You can even review these shows!
 
----
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ## User guide navigation
 
@@ -49,21 +49,25 @@ Before you continue reading the rest of our user guide, the table below displays
 | <div markdown="span" class="alert alert-warning">:bulb: </div>            | A small but useful piece of information                 |
 | <div markdown="span" class="alert alert-info">:information_source: </div> | Additional information                                  |
 | <div markdown="span" class="alert alert-danger">:exclamation: </div>      | Important information to watch out for                  |
-| [Optional Parameters]                                                     | Indicates the parameters/prefixes that may be optional  |
+| [Optional Parameters]                                                     | Indicates the parameters that may be optional  |
 | \<Instructions for Parameters\>                                           | Represents certain requirements you will need to follow |
+| {Multiple Optional Parameters}                                            | At least one parameter must be provided                 |
 
----
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ## Quick start
 
 1. Ensure you have `Java 11` or above installed in your Computer.
-
+   * For Windows, open Command Prompt and input `java -version`
+   * For MacOS, open Terminal and input `javac -version`
+   * For Linux, open Terminal and input `java -version`
 2. Download the latest version of **Trackermon** [here](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
 
 3. Move the file to the folder you want to use as the _home folder_ for **Trackermon**.
 
-4. Double-click the file to start the app. The layout of Trackermon's [GUI](#glossary) is shown in the [section below](#user-interface).
-   * Do note that for Linux OS, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! <br><br>
+4. Double-click the file to start the app. The layout of **Trackermon**'s [GUI](#glossary) is shown in the [section below](#user-interface).
+   * Do note that for Linux, you may have to [enable double-click to run JAR files](https://askubuntu.com/a/270175) first! 
+   * Do note that if double-clicking fails to start **Trackermon**, open a Command Prompt/Terminal in **Trackermon**'s _home folder_ and input `java -jar Trackermon.jar` to start **Trackermon**<br><br>
    
 5. For a quick overview of all available commands, please refer to our [command summary](#command-summary).
 
@@ -71,7 +75,6 @@ Before you continue reading the rest of our user guide, the table below displays
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## User interface
 
@@ -98,7 +101,6 @@ You can start communicating with Trackermon using the command box. Some example 
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Command structure
 
@@ -108,15 +110,15 @@ Let us look at what makes up a command:
 |--------------|-------------------------------------------------------------------------------|
 | Command Word | The word representing the action of the command                               |
 | Prefix       | The identifier used to recognise command parameters                           |
-| Parameters   | Follows directly behind a prefix and contains the information provided by you |
+| Parameters   | Contains the information provided by you and can lead with a specified prefix |
 
 For example, a command to find a show could look like this:
 
-`find n/ Django` 
+`find n/Django` 
 
-In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Djanjo` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
+In the example above , `find` is the **command word** while `n/` is the **prefix** of the `Django` **parameter**. A list of parameters along with their prefixes and descriptions have been included below for your convenience.
 
-| Parameters | Prefix | Description                                                                         |
+| Parameter  | Prefix | Description                                                                         |
 |------------|--------|-------------------------------------------------------------------------------------|
 | KEYWORD    | None   | The input after the command word without a prefix                                   |
 | INDEX      | None   | The index of the show as shown in the show list                                     |
@@ -124,7 +126,7 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 | STATUS     | s/     | The status to label a show<br> They are _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_ |
 | TAG        | t/     | The tag to label a show                                                             |
 | COMMENT    | c/     | The comment to describe a show                                                      |
-| RATE       | r/     | The rating to give a show                                                           |
+| RATING     | r/     | The rating to give a show                                                           |
 
 <div markdown="block" class="alert alert-info">
 
@@ -133,23 +135,14 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 * Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Sex and the City`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME s/STATUS [r/RATE] [c/COMMENT] [t/TAG]…` can be used as `n/ReZero s/completed r/5 c/What a Simp t/Anime` or as `n/ReZero s/completed`.
-
 * Items with `…`​ after them can be used multiple times.<br>
   e.g. `[t/TAG]…​` can be used as `t/Anime`, `t/Sitcom t/Kdrama` etc.
 
 * A whitespace must be included before every prefix.<br>
   e.g. `n/Knives Out t/Suspense` is acceptable but `n/Knives Outt/Suspense` is not.
 
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME [t/TAG]…​`, `[t/TAG]…​ n/NAME` is also acceptable.
-
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `n/Batman n/Superman`, only `n/Superman` will be taken.
@@ -162,6 +155,26 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
+
+### Parameter conditions
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about parameters:** NAME and STATUS are case-insensitive.
+</div>
+
+| Parameter | Prefix | Condition                                                                                                                                                                                                                                                                                                                          |
+|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| KEYWORD   | None   | A **single word** that only contains [**alphanumeric**](#glossary) characters.<br>Example: `S1` `Attack` `Hero2`                                                                                                                                                                                                                   |
+| INDEX     | None   | An **positive whole number** that is **within the bounds** of the show list.<br>Example: For a show list containing **5 shows**, valid INDEX ranges from **1 to 5**                                                                                                                                                                    |
+| NAME      | n/     | Show name must be **unique** and contains only [**alphanumeric**](#glossary) characters.<br>Example: If you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You can name it as `n/Stranger Things S2` instead. |
+| STATUS    | s/     | Status can only contain _COMPLETED_, _WATCHING_ and _PLAN-TO-WATCH_                                                                                                                                                                                                                                               |
+| RATING    | r/     | Rating must be a **whole number** from **0 to 5**.                                                                                                                                                                                                                                                                    |
+| COMMENT   | c/     | A comment can contain **any text**, but **emojis will be removed** from input.                                                                                                                                                                                                                                                                                                                      |
+| TAG       | t/     |  Tag must be a KEYWORD that is **no more than 20** [**alphanumeric**](#glossary) characters.                                                         |
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
 
 ## Features
 
@@ -183,18 +196,17 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 **Description:** Planning to watch a show and want to store its details? Add it to Trackermon's show list!
 
-**Format:** `add n/NAME s/STATUS [r/RATE] [c/COMMENT] [t/TAG]…​`
+**Format:** `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​`
+
+<div markdown="block" class="alert alert-danger">
+
+**:exclamation: Caution:**<br>
+* Refer to [parameter conditions](#parameter-conditions) section about `NAME` `STATUS` `RATING` `COMMENT` `TAG`.
+</div>
 
 **Example & Output:** `add n/All of us are dead s/plan-to-watch t/Horror`
 
 <img src="images/AddImage.png">
-
-<div markdown="block" class="alert alert-danger">
-**:exclamation: Caution:**<br>
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-
-</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -202,20 +214,21 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ### Deleting a show: `delete`
 
-**Description:** Wanting to remove an unwanted show? Delete it at the specified index shown in Trackermon's show list!
+**Description:** Wanting to delete a show? Delete it at the specified index shown in Trackermon's show list!
 
 **Format:** `delete INDEX`
+
+<div markdown="block" class="alert alert-danger"> 
+
+**:exclamation: Caution:**<br>
+* Once a show is deleted, you cannot retrieve it back!
+* Refer to [parameter conditions](#parameter-conditions) section about `INDEX`.
+
+</div>
 
 **Example & Output:** `delete 2`
 
 <img src="images/DeleteImage.png">
-
-<div markdown="block" class="alert alert-danger"> **:exclamation: Caution:** 
-* Once a show is deleted, you cannot retrieve it back!
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5. 
-
-</div>
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -223,36 +236,28 @@ In the example above , `find` is the **command word** while `n/` is the **prefix
 
 ### Editing a show: `edit`
 
-**Description:** Wanting to modify a show? Edit it at the specified index shown in Trackermon's show list!
+**Description:** Made a mistake? Edit it at the specified index shown in Trackermon's show list!
 
-**Format:** `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​`
+**Format:** `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Multiple show [parameters](#command-structure) can be edited at the same time
 </div>
 
-**Example & Output:** `edit 2 n/Sailor Moo t/Horror`
-
-<img src="images/EditImage.png">
-
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the Rating and Comment feature:** <br>
+**:information_source: Notes about the Rating, Comment, and Tag features:** <br>
 * Reset the rating of a show: `edit INDEX r/0`
 * Removing a comment: `edit INDEX c/`
+* Removing all tags: `edit INDEX t/`
 
 </div>
 
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
-* **An [index](#command-structure)** to edit must be provided.
-* **At least a [prefix](#command-structure) followed by a [parameter](#command-structure)** to edit must be provided.
-* All **show names must be unique**.<br>
-  e.g. if you try to add `n/Stranger Things` into the show list that already contains that show, there will be a message telling you that this show already exists in the list. You could name it as `n/Stranger Things S2` instead.
-* Editing a `TAG` parameter will cause all the **previous tags of the show to be deleted**.
-* The **index** parameter you provide should be a positive whole-number. On top of that, it should be within the bounds of the show list.<br>
-  e.g. If there are 5 shows saved in the show list, then the valid index ranges from 1 to 5.
+* Refer to [parameter conditions](#parameter-conditions) section about `INDEX` `NAME` `STATUS` `RATING` `COMMENT` `TAG`.
+* Editing a `TAG` parameter can cause all the **previous tags of the show to be deleted**.
 
 :exclamation:**Adding, Editing and Deleting a Tag:** <br>
 * Doing any of these can result in your tags being deleted if you do not specify existing tags you want to keep. <br>
@@ -262,8 +267,20 @@ Multiple show [parameters](#command-structure) can be edited at the same time
   * `edit INDEX <Specify all tags in show except the tag you want to delete>`
 * Editing a Tag:
   * `edit INDEX <Specify all other tags in show> t/EDITED_TAG`
+* Example<br>
+  <img src="images/EditTagExample.png">
+  * Adding a new Tag `Mystery` to show named `Another`
+    * `edit 1 t/Anime t/Horror t/Mystery`
+  * Deleting the Tag `Movie` in show named `Spiderman`
+    * `edit 2 t/Action`
+  * Editing the Tag `Comdy` to `Comedy` to show named `Chicken papa`
+    * `edit 3 t/Anime t/Comedy`
 
 </div>
+
+**Example & Output:** `edit 2 n/Sailor Moo t/Horror`
+
+<img src="images/EditImage.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -287,49 +304,71 @@ Multiple show [parameters](#command-structure) can be edited at the same time
 
 **Format:** `clear`
 
-**Example:** `clear`
 <div markdown="block" class="alert alert-danger">
 
-:exclamation:**Caution:** Clear will delete the current list! Your list data will be lost!
+:exclamation:**Caution:**<br>
+* Clear will delete the current list! Your list data will be lost!
 </div>
+
+**Example:** `clear`
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Finding a show: `find`
 #### General find
 
-**Description (General Find):** Searching for a show across all [parameters](#command-structure)? Find shows containing the search words!
+**Description (General Find):** Wanting to search for a show across all [parameters](#command-structure)? Find shows containing the search words!
 
-**Format (General Find):** `find KEYWORD`
+**Format (General Find):** `find KEYWORD…​`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about General Find:**<br>
+* An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching [parameters](#command-structure) will be returned.
+* Refer to [parameter conditions](#parameter-conditions) section about `KEYWORD`.
+* `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
+
 </div>
 
 **Example & Output:** `find attack on titan`
 
 <img src="images/General_Find_UI.png">
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about General Find:**<br>
-* An [**OR search**](#glossary) is executed across Trackermon's show list and all shows with matching [parameters](#command-structure) will be returned.
-* The `KEYWORD` refers to the input you enter after `find`.
-* `find` must be followed with a space before entering the `KEYWORD`.
-* The `KEYWORD` **can be a word or number** such as hero, S1,...
-* The `KEYWORD` must contain **at least one word** and it **must not be empty**.
-* `find attack on titan` displays all the shows in the list that contain the keywords `attack`, `on` or `titan`, whether it is a name, status or tag.
-
-</div>
+---
 
 #### Precise find
 
-**Description (Precise Find):** Searching for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
+**Description (Precise Find):** Wanting to search for a show across specific [parameters](#command-structure)? Find shows containing the search words based on [prefix](#command-structure)!
 
-**Format (Precise Find):** `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`
+**Format (Precise Find):** `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`
 
 <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
 Find is case-insensitive, and the order in which the keywords are entered is irrelevant. Partial words **will** be matched as well. e.g., `attac` will match `attack`.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Precise Find:**<br>
+* **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list, and only shows with matching [parameters](#command-structure) will be returned.
+* `find n/Shutter Island` displays all the shows in Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
+* `find n/Django s/completed r/3 t/Action` displays all the shows in Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, **3** in the `RATING` parameter, and **Action** in the `TAG` parameter.
+
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+:exclamation:**Multiple of the same prefixes:**<br>
+* `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in the notes of [command structure](#command-structure)), while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
+* `find t/Anime t/Action` does not mean `find t/Anime Action`. The former will find all shows with both **Anime** and **Action** tags in the `TAG` parameter, while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` parameter.
+* `find r/4 5` does not mean `find r/4 r/5`. The former will find all shows with both **4 star rating and 5 star rating**, while the latter will find all shows with a **5 star rating**. This is only applicable to the `RATING` parameter.
+* `find s/completed watching` does not mean `find s/completed s/watching`. The former will find all shows with both **completed and watching** status, while the latter will find all shows with a **watching** status. This is only applicable to the `STATUS` parameter.
+
 </div>
 
 **Example & Output:** `find n/Shutter Island`
@@ -340,34 +379,13 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 <img src="images/Precise_Find_UI_2.png">
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about Precise Find:**<br>
-* **Within a single [prefix](#command-structure)** and **across multiple [prefixes](#command-structure)**, an [**AND search**](#glossary) is executed across Trackermon's show list and only shows with matching [parameters](#command-structure) will be returned.
-* `find n/Shutter Island` displays all the shows in the Trackermon's show list that contain **Shutter** and **Island** in the `NAME` parameter.
-* `find n/Django s/completed r/3 t/Action` displays all the shows in the Trackermon's show list that contain **Django** in the `NAME` parameter, **completed** in the `STATUS` parameter, **3** in the `RATE` parameter and **Action** in the `TAG` parameter.
-
-</div>
-
-<div markdown="block" class="alert alert-danger">
-
-:exclamation:**Caution:**<br>
-* There must be at **least one [prefix](#command-structure) followed by a [parameter](#command-structure)** and it **must not be empty**.
-
-:exclamation:**Multiple of the same prefixes:**<br>
-* find `find n/attack n/on n/titan n/S2` does not mean `find n/attack on titan S2`. The former will only find show names that match with **S2** (as mentioned in [features](#features)) while the latter will find all show names that match **attack, on, titan, and S2**. This is only applicable to the `NAME` parameter.
-* find `t/Anime t/Action` does not mean `find t/Anime Action`. The former will find show tags that match with **Anime** and **Action** in the `TAG` parameter while the latter will show you that it is an **invalid command format**. This is only applicable to the `TAG` and `RATE` parameter.
-
-</div>
-
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ---
 
 ### Sorting the shows `sort`
 
-Your show list is in a mess! Do you need a way to organise your list?
-Sort can help reorder the list!!
+**Description:** Wanting to organise your messy show list? Sort can help reorder the list for you!
 
 <div markdown="block" class="alert alert-danger">
 
@@ -422,7 +440,7 @@ Sort can help reorder the list!!
 
 ### Suggest a Show: `suggest`
 
-**Description:** Want a random show? This suggests a random show from the displayed list!
+**Description:** Wanting to find a random show? This suggests a random show from the displayed list!
 
 **Format:** `suggest`
 
@@ -436,23 +454,24 @@ Sort can help reorder the list!!
 
 ### Importing a show: `import`
 
-**Description:** Want to easily import Trackermon data from other devices? Just use our import function!
+**Description:** Wanting to easily import Trackermon data from other devices? Just use our import function!
 
 **Format:** `import`
 
-**Example & Output:** `import`
-- Step 1. Navigate to the Trackermon data you want to import using your OS' native [GUI](#glossary)!
-- Step 2. Select the file and click "Open"
-  - Do note that only JSON files can be imported!
-- Step 3. Trackermon will import the selected file and display the imported show list!
-  - If there was an error importing the file, Trackermon will display an error message!
-
-<img src="images/Import.png">
-
 <div markdown="block" class="alert alert-danger">
 
-:exclamation:**Caution:** Import will override the current list if successful! Your previous list data will be lost!
+:exclamation:**Caution:**<br>
+* Import will override the current list if successful! Your previous list data will be lost!
 </div>
+
+**Example & Output:** `import`
+- Step 1. Navigate to the Trackermon data file you want to import using your OS' native [GUI](#glossary)!
+- Step 2. Select the file and click "Open"
+  - Do note that only [JSON](#glossary) files can be imported!
+- Step 3. Trackermon will import the selected file and display the imported show list!
+  - Trackermon will display an error message if the data file is corrupted!
+
+<img src="images/Import.png">
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -460,14 +479,14 @@ Sort can help reorder the list!!
 
 ### Exporting a show: `export`
 
-**Description:** Want to easily export Trackermon data to other devices? Just use our export function!
+**Description:** Wanting to easily export Trackermon data to other devices? Just use our export function!
 
 **Format:** `export`
 
 **Example & Output:** `export`
 - Step 1. Navigate to the location you wish to export Trackermon data to using your OS' native [GUI](#glossary)!
 - Step 2. Click "Save"
-- Step 3. Trackermon will export the Trackermon data as a JSON file to your selected location. It's that easy!
+- Step 3. Trackermon will export the Trackermon data as a [JSON](#glossary) file to your selected location. It's that easy!
   - If there was an error exporting the file, Trackermon will display an error message!
 
 <img src="images/Export.png">
@@ -489,43 +508,36 @@ Sort can help reorder the list!!
 ---
 
 ## FAQ
-* **Q:** Where is the data of Trackermon saved?<br>
-**A:** Trackermon data is saved in the hard disk automatically after any command that changes the data! There is no need for you to save manually.<br><br>
 
-* **Q:** How is my data being saved in Trackermon?<br>
-**A:** Your data will be stored as a JSON file called `trackermon.json`! You can find it in the "data" folder in Trackermon's _home folder_.<br><br>
-
-* **Q:** How do I transfer my data to another computer?<br>
-  **A:** 
-  * Firstly, `export` your data to an external storage device. 
-  * Next, on your other Computer, simply start up Trackermon and `import` the data from the previous step!
-  * Congratulations! You've just transferred your data across different computers!
+| Question | Answer |
+| -------- | ------ |
+| Where is the data of Trackermon saved? | Trackermon data is saved in the hard disk automatically after any command that changes the data! There is no need for you to save manually. |
+| How is my data being saved in Trackermon? | Your data will be stored as a [JSON](#glossary) file called `trackermon.json`! You can find it in the "data" folder in Trackermon's _home folder_.|
+| How do I transfer my data to another computer? | 1. `export` your data to an external storage device or send it via email. <br> 2. On your other computer, simply start up Trackermon and `import` the data from the previous step! <br> 3. Congratulations! You've just transferred your data across different computers! |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                         |
-|------------------|--------------------------------------------------------------------------------------------------------------------------|
-| **Help**         | `help`                                                                                                                   |
-| **Add**          | `add n/NAME s/STATUS [r/RATE] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 t/Anime`                                    |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                      |
-| **Edit**         | `edit INDEX [n/NAME] [s/STATUS] [r/RATE] [c/COMMENT] [t/TAG]…​` <br> e.g., `n/ReZero s/watching r/3 c/Good show t/Anime` |
-| **List**         | `list`                                                                                                                   |
-| **Clear**        | `clear`                                                                                                                  |
-| **General Find** | `find KEYWORD`<br> e.g., `find hero`<br>                                                                                 |
-| **Precise Find** | `find [n/NAME] [s/STATUS] [r/RATE] [t/TAG]…​`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`       |
-| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                             | 
-| **Suggest**      | `suggest`                                                                                                                |
-| **Import**       | `import`                                                                                                                 |
-| **Export**       | `export`                                                                                                                 |
-| **Exit**         | `exit`                                                                                                                   |
+| Action           | Format, Examples                                                                                                                    |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**         | `help`                                                                                                                              |
+| **Add**          | `add n/NAME s/STATUS [r/RATING] [c/COMMENT] [t/TAG]…​` <br> e.g., `add n/ReZero s/watching r/3 t/Anime`                             |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                 |
+| **Edit**         | `edit INDEX {[n/NAME] [s/STATUS] [r/RATING] [c/COMMENT] [t/TAG]…​}` <br> e.g., `edit 1 n/ReZero s/watching r/3 c/Good show t/Anime` |
+| **List**         | `list`                                                                                                                              |
+| **Clear**        | `clear`                                                                                                                             |
+| **General Find** | `find KEYWORD…​`<br> e.g., `find hero`<br>                                                                                          |
+| **Precise Find** | `find {[n/NAME] [s/STATUS] [r/RATING] [t/TAG]…​}`<br>e.g., `find n/Shingeki no kyojin s/watching r/5 t/Anime t/Seinen`              |
+| **Sort**         | `sort [n/ORDER] [s/ORDER] [r/ORDER] [t/ORDER] [so/SEQUENCE]`                                                                        | 
+| **Suggest**      | `suggest`                                                                                                                           |
+| **Import**       | `import`                                                                                                                            |
+| **Export**       | `export`                                                                                                                            |
+| **Exit**         | `exit`                                                                                                                              |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
----
 
 ## Glossary
 
@@ -535,6 +547,7 @@ Sort can help reorder the list!!
 | **OR search**                      | OR search finds one keyword or the other.  For example, `find Shutter Island` returns all results that contain Shutter or Island.                                                    |
 | **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).      | 
 | **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation. |
-
+| **Alphanumeric**                   | A character that is either a letter or a number.                  |
+| **JSON**                           | [JavaScript Object Notation](https://www.json.org/json-en.html). The format in which Trackermon data is stored. |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
