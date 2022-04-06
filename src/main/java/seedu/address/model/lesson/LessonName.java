@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LessonName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lesson names should only contain alphanumeric characters, spaces and are limited to 50 characters."
+            "Lesson names should only contain alphanumeric characters and spaces."
                     + "Lesson names should not be blank.";
 
     /*
