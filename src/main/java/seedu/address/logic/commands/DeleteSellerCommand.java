@@ -16,7 +16,7 @@ public class DeleteSellerCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the seller identified by the index number used in the displayed seller list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer less than or equal to size of displayed seller list)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_SELLER_SUCCESS = "Deleted seller: %1$s";
