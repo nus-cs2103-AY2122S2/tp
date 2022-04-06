@@ -17,16 +17,20 @@ public class AddCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "addCompany";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the company list. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_PHONE + "PHONE] "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + "\n"
+            + "Function: Adds a company to the company list."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "COMPANY_NAME "
+            + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "Meta "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "hr@meta.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";

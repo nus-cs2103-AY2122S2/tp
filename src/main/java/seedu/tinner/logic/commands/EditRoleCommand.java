@@ -33,17 +33,20 @@ import seedu.tinner.model.role.Stipend;
 public class EditRoleCommand extends Command {
     public static final String COMMAND_WORD = "editRole";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Role"
-            + " identified "
-            + "by the index number of the company used in the displayed company list.\n"
-            + "Followed by the index number used by the role in the specified company.\n"
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: COMPANY_INDEX ROLE_INDEX (both must be positive integers) "
-            + "[" + PREFIX_NAME + "ROLENAME [(TYPE)]] "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + "\n"
+            + "Function: Edits the details of the role identified by the index number of the company used in the "
+            + "displayed company list, followed by the index number used by the role in the specified company. "
+            + "Existing values will be overwritten by the input values."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + "COMPANY_INDEX ROLE_INDEX (both must be positive integers) "
+            + "[" + PREFIX_NAME + "ROLE_NAME [(TYPE)]] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_REMINDER_DATE + "REMINDER_DATE] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_STIPEND + "STIPEND]...\n"
+            + "[" + PREFIX_STIPEND + "STIPEND] "
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1 1 "
             + PREFIX_STATUS + "pending "
             + PREFIX_STIPEND + "3000";
@@ -103,7 +106,7 @@ public class EditRoleCommand extends Command {
      * edited with {@code editRoleDescriptor}.
      */
     private static Role createEditedRole(Role roleToEdit,
-                                               EditRoleCommand.EditRoleDescriptor editRoleDescriptor) {
+                                         EditRoleCommand.EditRoleDescriptor editRoleDescriptor) {
         assert roleToEdit != null;
 
         RoleName updatedName = editRoleDescriptor.getName().orElse(roleToEdit.getName());

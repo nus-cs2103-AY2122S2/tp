@@ -375,6 +375,32 @@ You can choose to unfavourite by making this entry:
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
 command.
 
+## Use Case #6: Finding a company and/or role <a id="usecase6"></a>
+In the future when you have many applications, finding specific applications can be daunting. The
+[find command](#c-find-c-r) allows you to search for applications easily with keywords matching `COMPANY_NAME` and `ROLE_NAME`.
+
+Say you are interested in finding out what are the roles you had applied to at Google,
+you can make this entry:
+1. [Finding a company](#c-find-c-r) from the company list.
+   ![FindCompanyDemo](images/FindCompanyDemo.png)
+
+Then after realising that you have an interview for a backend role at Google, you want to check out the progress of similar roles.
+You can search for other backend roles by making this entry:
+2. [Finding all roles](#c-find-c-r) from the company list.
+   ![FindRoleDemo](images/FindRoleDemo.png)
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: Find a specific role in a specific company by providing both `COMPANY_NAME` and `ROLE_NAME`. E.g. `find c/google r/backend engineer`.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: After performing the find command, the response box will contain role and company keywords which you have previously entered.
+
+</div>
+
 [Back to Table of Contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -545,9 +571,14 @@ company.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.<br>
-:information_source: Roles in a Company are listed based on the order in which they are added to the Company.
+:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
 
+</div>
+
+<div markdown="block" class="alert alert-info">
+   
+:information_source: Roles in a Company are listed based on the order in which they are added to the Company.
+   
 </div>
 
 <div markdown="block" class="alert alert-danger">
@@ -669,6 +700,7 @@ readily identify and track down items!
 **Examples:**
 
 * `find c/meta amazon r/engineer`
+* Refer to [Demo Use Case #6](#usecase6) for an example use case.
 
 <div markdown="block" class="alert alert-info">
 
@@ -781,19 +813,19 @@ There are currently no features to revert the `clear` command.
 
 | Action                        | Format, Examples                                                                                                                                                                                                   |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add company**               | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` |
-| **Edit company**              | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g.,`editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`                                                                         |
-| **Delete company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g.,`deleteCompany 3 `                                                                                                                                                     |
+| **Add company**               | `addCompany n/COMPANY_NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g., `addCompany n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371`|
+| **Edit company**              | `editCompany COMPANY_INDEX [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br><br> e.g., `editCompany 1 n/Google p/98765432 e/hr_google@gmail.com`                                                                        |
+| **Delete company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g., `deleteCompany 3 `                                                                                                                                                    |
 | **Favourite company**         | `favourite COMPANY_INDEX` <br><br> e.g., `favourite 1`                                                                                                                                                             |
 | **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
-| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
-| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g.,` editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
-| **Delete role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g.,`deleteRole 3 1 `                                                                                                                                              |
+| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g., `addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
+| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g., `editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
+| **Delete role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g., `deleteRole 3 1 `                                                                                                                                             |
 | **List companies**            | `list`                                                                                                                                                                                                             |
 | **List favourited companies** | `listFavourite`                                                                                                                                                                                                    |
 | **Find company or role**      | `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]` <br><br> e.g., `find c/google r/mobile software`                                                                              |
 | **Set reminder window**       | `setWindow REMINDER_WINDOW` <br><br> e.g., `setWindow 14`                                                                                                                                                          |
-| **Clear**                     | `clear`                                                                                                                                                                                                             |
+| **Clear**                     | `clear`                                                                                                                                                                                                            |
 | **Help**                      | `help`                                                                                                                                                                                                             |
 | **Exit Tinner**               | `exit`                                                                                                                                                                                                             |
 

@@ -2,26 +2,54 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+# **Table of Contents** <a id="toc"></a>
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+* [Implementation](#implementation)
+    * [Find feature](#find-feature)
+        * [Implementation](#implementation-find)
+    * [Edit role feature](#edit-role-feature)
+        * [Implementation](#implementation-edit)
+        * [Design considerations](#design-considerations-edit)
+    * [Delete role feature](#delete-role-feature)
+      * [Implementation](#implementation-delete)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Requirements](#requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#instructions-for-manual-testing)
+  * [Start and exit the application](#start-and-exit-the-application)
+  * [Adding a company](#adding-a-company)
+  * [Editing a company](#editing-a-company)
+  * [Deleting a company](#deleting-a-company)
+  * [Editing a role](#editing-a-role)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **Acknowledgements** <a id="acknowledgements"></a>
 
 * This project is created based on the AddressBook-Level3 project by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, getting started** <a id="setting-up-getting-started"></a>
 
 Refer to the guide [Setting up and getting started](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **Design** <a id="design"></a>
 
-### Architecture
+### Architecture <a id="architecture"></a>
 ![Architecture Diagram of the Tinner](images/ArchitectureDiagram.png)
 
 The Architecture Diagram given above explains the high-level design of the Tinner. Tinner follows a multi-layered architecture where the lower layers are independent of higher layers. For example, `Main` can use methods found in `Storage` but not the other way around.
@@ -58,7 +86,7 @@ The _Sequence Diagram_ below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
-### UI Component
+### UI Component <a id="ui-component"></a>
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -83,7 +111,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Company` and `Role` objects residing in the `Model`.
 
-### Logic Component
+### Logic Component <a id="logic-component"></a>
 
 
 **API** :
@@ -114,7 +142,7 @@ How the parsing works:
 * When called upon to parse a user command, the `CompanyListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCompanyCommandParser`) which uses the other classes shown above (e.g. `ArgumentMultimap`, `ParserUtil`, etc.) to parse the user command and create a `XYZCommand` object (e.g., `AddCompanyCommand`) which the `CompanyListParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCompanyCommandParser`, `DeleteCompanyCommandParser`, …) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model Component
+### Model Component <a id="model-component"></a>
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -132,7 +160,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * the `Reminder` objects store data of a role in a company that has a reminder date that is within the reminder window.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-### Storage Component
+
+### Storage Component <a id="storage"></a>
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
@@ -153,13 +182,13 @@ The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation** <a id="implementation"></a>
 
-### Find feature
+### Find feature <a id="find-feature"></a>
 
 The `find` feature allows users to filter the company list by specifying company name keywords and role name keywords.
 
-#### Implementation
+#### Implementation <a id="implementation-find"></a>
 The `find` command is primarily implemented by `FindCommandParser` a class that extends `Parser`, and `FindCommand`, which is a class that extends `Command`. For each `find` command, a `Predicate<Company>` object and a `Predicate<Role>` object will be created. Both `Predicate` objects contain a `test` function to determine whether the given company or role matches the keywords provided in the user input.
 
 * Upon a valid user's input using the `find` command, the `FindCommandParser#parse()`creates a `CompanyNameContainsKeywordsPredicate` which extends `Predicate<Company>`, and a `RoleNameContainsKeywordsPredicate` which extends `Predicate<Role>`.
@@ -185,37 +214,51 @@ Note that the lifeline of FindCommandParser should end at the destroy marker but
 8. Similarly, the `Model#updateFilteredRoleList()` also filters the list of roles within each company to display only roles which match the role name keywords.  
 9. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
-### Edit role feature
+### Edit role feature <a id="edit-role-feature"></a>
 The `editRole` command for the `Role` item allows the user to update any fields by specifying
 the company index, role index and prefixes of the fields to be updated.
 
-#### Implementation
-The `editRole` command is primarily implemented by `EditRoleCommandParser` a class that extends `Parser`, and `EditRoleCommand`, which is a class that extends `Command`. The `EditRoleCommand` has an inner class `EditRoleDescriptor` that holds the changes to the `Role`.
+The aforementioned fields of the `Role` that can be modified are as follows:
+* `RoleName`
+* `Status`
+* `ReminderDate`
+* `Description`
+* `Stipend`
 
-* Upon a valid user's input using the `editRole` command, the `EditRoleCommandParser#parse()`
-  creates an `EditRoleDescriptor` with the edited changes to the `Role` fields.
-* The `EditRoleCommandParser#parse()` then use the `EditRoleDescriptor` object to instantiate the `EditRoleCommand`.
-* Then invoking the `EditRoleCommand#execute()` method will update the `Role` with the new changes.
+#### Implementation <a id="implementation-edit"></a>
 
+![UML diagram of the EditRole feature](images/EditRoleDiagram.png)  
+The `editRole` command is primarily implemented by `EditRoleCommandParser` a class that
+extends `Parser`, and `EditRoleCommand`, which is a class that extends `Command`. The `EditRoleCommand` has
+an inner class `EditRoleDescriptor` that holds the changes to fields of the `Role` to be modified.
 
-![UML diagram of the EditRole feature](images/EditRoleDiagram.png)
+Given below is an example usage scenario and how the edit role feature behaves at each step:
+1. The user executes the command `editRole 1 1 d/react js` to edit the description in the 1<sup>st</sup> role from the 1<sup>st</sup> company.
+2. Then the `EditRoleCommandParser#parse()` creates an `EditRoleDescriptor` object with fields to be modified such as the description `react js` for the `EditRoleCommand`.
+3. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
 
-The following sequence diagram shows how the `editRole` command operation works with the user input `editRole 1 1 d/react js`:
+The following sequence diagram shows how the `editRole` command operation works with the valid user input `editRole 1 1 d/react js`:
+![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)  
 
-![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)
+#### Design considerations <a id="design-considerations-edit"></a>
+* Alternative 1 (current choice): Logic components interact with the `Model` interface solely and not directly with model’s internal components: `Company`, `RoleManager`, `UniqueRoleList`.
+    * Pros:
+      * The `Model` interface acts as a Façade to allow clients such as `Logic` to access to the functionalities of its internal components without exposing the implementation details.
+      Thus, reducing coupling between `Model` and other components as all functionalities of modifying `Role` can be accessed via the `Model` interface.
+      * This increases maintainability as `EditRoleCommand` will only interact with `Model` interface with little concern to any changes in the implementation details of the internal components of `Model`.
+    * Cons:
+      * This requires additional code within `Model` as more methods are needed for other components to access the functionality of its internal components.
+* Alternative 2 (used in v1.2): `Model` allows clients to access its internal components directly such as `Company`, `RoleManager`, `UniqueRoleList` to modify `Role`.
+  * Pros:
+    * No additional code is needed as clients can operate directly on the internals of `Model`.
+  * Cons:
+    * This exposes the internal implementation of `Model` and increases coupling between `EditRoleCommand` and, `Company`, `RoleManager` and `UniqueRoleList`.
+    * It is harder to maintain as any changes to the internal implementation of `Model` will affect the implementation of `EditRoleCommand`.
 
-1. The user will first enter the input `editRole 1 1 d/react js`, the `CompayListParser#parseCommand()` method will parse the information `1 1 d/react js` to `EditRoleCommandParser` using the method `parse()` based on the keyword `editRole`.
-2. The `EditRoleCommandParser#parse()` method will create an `EditRoleDescriptor` object with all the non-empty fields with the fields' prefixes that are specified by the user such as `s/`,  `r/`, `d/`, etc. In this example, `EditRoleDescriptor#setDescription()` will be used as the description `d/` is a non-empty field with `react js`.
-3. Then the `EditRoleCommandParser#parse()` method will create an `EditRoleCommand` object with the company index `1`, role index `1` and the `EditRoleDescriptor` object.
-4. The `EditRoleCommand` object will be returned to the `LogicManager` and will then invoke the `EditRoleCommand#execute()` method to implement the changes.
-5. The  `EditRoleCommand#execute()` will check the validity of both the indexes, and invoke the `Model#setRole()` method.
-6. The  `Model#setRole()` with the company index will set the role to be edited with a new role containing the changes. Then the `Model#updateFilteredRoleList()` filters the list of roles such that the application only displays the edited `Role` to the User.
-7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
-
-### Delete role feature
+### Delete role feature <a id="delete-role-feature"></a>
 The `deleteRole` command for the `Role` item allows the user to delete any role under a `Company` item by specifying the company index and role index that which are associated with the `Role` item to be deleted.
 
-#### Implementation
+#### Implementation <a id="implementation-delete"></a>
 The `deleteRole` command relies on the `DeleteRoleCommandParser`, a class that extends `Parser`, as well as `DeleteRoleCommand`, which is a class that extends `Command`. The `DeleteRoleCommand`, upon execution, dynamically updates the displayed list of roles accordingly.
 
 * Upon a valid user's input using the `deleteRole` command, the `DeleteRoleCommandParser#parse()` retrieves the indices of the role to be deleted from the parsed user input.
@@ -251,11 +294,11 @@ Given below is an example scenario on how the reminder feature works:
 2. Assuming that the reminder window is at its default of 7 days, and today is within 7 days from 30th April 2022, when the user opens the application, the reminder pane will display the given role and its relevant fields as mentioned above.
 
 The following sequence diagram shows how the reminder feature works:
-![Sequence diagram of the Reminder feature](images/ReminderDiagram.png)as
+![Sequence diagram of the Reminder feature](images/ReminderDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, logging, testing, configuration, dev-ops** <a id="documentation-logging-testing-configuration-dev-ops"></a>
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -265,9 +308,9 @@ The following sequence diagram shows how the reminder feature works:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Requirements**
+## **Requirements** <a id="requirements"></a>
 
-### Product scope
+### Product scope <a id="product-scope"></a>
 
 **Target user profile**:
 
@@ -286,7 +329,7 @@ Students who...
 * Remind (Be reminded of your upcoming assessments)
 * Review (Comment on each stage of the application process for future self-improvement or review the company’s hiring process)
 
-### User stories
+### User stories <a id="user-stories"></a>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -311,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### Use cases <a id="use-cases"></a>
 
 (For all use cases below, the **System** is the `Tinner` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -424,9 +467,21 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
+**Use case: UC06 - Adding or editing a role with a reminder date**
+
+Precondition: there exist at least one company stored in Tinner
+
+Guarantees: every role in companies that have reminder dates within the reminder window from today will be shown
+
+1. The user [adds a role(UC02)]() or [edits a role(UCXX)]() that has a reminder date.
+2. Tinner shows success message and adds/edits the role.
+3. The user closes the application and opens it up again immediately or some time in the future
+4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date/
+    Use case ends
+
 *{More to be added}*
 
-### Non-Functional Requirements
+### Non-Functional Requirements <a id="non-functional-requirements"></a>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
 2. Should be able to hold up to 1000 items (companies and internship roles) without a noticeable sluggishness in performance for typical usage
@@ -434,10 +489,83 @@ Guarantees: every company stored in Tinner will be shown
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. Should be responsive and have a latency of less than 3 seconds
 
+
+
 *{More to be added}*
 
-### Glossary
+### Glossary <a id="glossary"></a>
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Command Line Interface
 * **MSS**: Main Success Scenario
+
+## Appendix: Instructions for manual testing <a id="instructions-for-manual-testing"></a>
+
+### Start and exit the application <a id="start-and-exit-the-application"></a>
+1. To start the application
+   1. Download the tinner.jar file and copy into an empty folder. 
+   2. On the command terminal, run the following command in the directory containing tinner.jar: `java -jar tinner.jar`  
+   Expected: Shows the GUI with internship application examples. 
+2. To exit the application
+   1. Enter `exit` in the command box.   
+   Expected: The application will close shortly. 
+   
+
+### Adding a company <a id="adding-a-company"></a>
+1. Test case: `addCompany n/Govtech p/9222222 e/xyz@gov.com a/10 Pasir Panjang Rd, #10-01 Mapletree Business City, Singapore 117438`
+   1. Expected: Company list is updated with the addition of "GovTech". The response box shows the details of all the fields added.
+2. Test case: `addCompany n/Tik Tok e/xyz@tiktok.com`
+   1. Expected: Company list is updated with the addition of "Tik Tok". The response box shows the details of the fields added.
+3. Test case: `addCompany e/t@tesla.com p/99944426 n/Tesla`
+   1. Expected: Company list is updated with the addition of "Tesla". The response box shows the details of the fields added.
+4. Test case: `addCompany n/Tinner p/ e/t@tinner.com a/fairy land`
+   1. Expected: Company list is not updated. The response box shows error message that there must be a value after a prefix.
+5. Other incorrect test cases to try: `addCompany`, and other prefixes without value e.g. `add n/`.
+   1. Expected: Company list is not updated. The response box shows error message that it is an invalid command with additional information of the correct format. 
+
+### Editing a company <a id="editing-a-company"></a>
+1. Prerequisites: At least 2 companies must exist and listed using the `list` command
+2. Test case: `editCompany 1 1 n/Tik Tok`
+    1. Expected: The name of 1<sup>st</sup> company is changed to "TikTok".
+       The response box shows the updated details of all the fields of the edited company. The company list is updated with the changes.
+3. Test case: `editCompany 2 n/Tik Tok`
+    1. Expected: The name 2<sup>nd</sup> company is not updated.
+       The response box shows error message that the company already exists in the company list.
+4. Other incorrect test cases to try: `editCompany x n/VAlID_COMPANY_NAME` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: The intended company with index `x` is not updated.
+   The response box shows error message that company/ role index is invalid
+
+### deleting a company <a id="deleting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist and listed using the `list` command
+2. Test case: `deleteCompany 1`
+   1. Expected: First company with its roles included if any, is removed from the company list. 
+   The response box shows the details of the deleted company.
+3. Other incorrect test cases to try: `deleteCompany x` where x is an integer larger than the size of the company list or negative integer values.
+   1. Expected: Company with index `x` is not deleted. The response box shows error message that the company index provided is invalid.
+
+### Editing a role <a id="editing-a-role"></a>
+1. Prerequisites: At least 1 companies with 2 roles must exist and listed using the `list` command
+2. Test case: `editRole 1 1 n/Frontend Engineer`
+   1. Expected: The name of 1<sup>st</sup> role from the 1<sup>st</sup> company is changed to "Frontend Engineer".
+   The response box shows the updated details of all the fields of the edited role. The company list is updated with the changes. 
+3. Test case: `editRole 1 2 n/Frontend Engineer`
+   1. Expected: The name of 2<sup>nd</sup> role from the 1<sup>st</sup> company is not updated.
+   The response box shows error message that the role already exists in the company. 
+4. Test case: `editRole 1 1 $/0`
+   1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
+      The response box shows error message that stipend must be a positive number.
+5. Test case: `editRole 1 1 $/10000000000` or `editRole 1 1 $/0`
+   1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
+   The response box shows error message that stipend must be a positive value and input of stipend should be at most 10 digits long.
+6. Other incorrect test cases to try: `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
+   1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
+   The response box shows error message that company/ role index is invalid
+
+### Using the reminder feature <a id="using-reminders"></a>
+1. Prerequisites: At least 1 company with one role must exist and is listed on index 1 using the `list` command, test cases assume default reminder window of 7 days is used
+2. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS WITHIN 7 DAYS FROM TODAY>` (e.g. if today is 06-04-2022, test case should use any date between 06-04-2022 to 13-04-2022)
+   1. Expected: When you close and reopen the application, the reminder pane will show the added role.
+3. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS IN THE PAST>` (e.g. if today is 06-04-2022 , use any date before then like 05-04-2022)
+   1. Expected: The response box shows an error message that the reminder date should not be in the past.
+4. Test case: `editRole 1 n/Software Engineer r/<INSERT INVALID DATE>` (e.g. 31-04-2022)
+   1. Expected: THe response box shows an error message that the reminder date should be a valid date.

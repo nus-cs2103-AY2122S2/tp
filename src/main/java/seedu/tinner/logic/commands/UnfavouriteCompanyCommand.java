@@ -27,8 +27,12 @@ public class UnfavouriteCompanyCommand extends Command {
     public static final String COMMAND_WORD = "unfavourite";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unfavourites the company identified by the index number used in the displayed company list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "\n"
+            + "Function: Unfavourites the company identified by the index number used in the displayed company list."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + "COMPANY_INDEX (must be a positive integer)"
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNFAVOURITE_COMPANY_SUCCESS = "Unfavourited Company: %1$s";

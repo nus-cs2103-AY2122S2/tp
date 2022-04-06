@@ -24,18 +24,22 @@ public class AddRoleCommand extends Command {
 
     public static final String COMMAND_WORD = "addRole";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a role to the company listed. "
-            + "Parameters: "
-            + "companyIndex "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + "\n"
+            + "Function: Adds a role to a specified company. "
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + "COMPANY_INDEX "
             + PREFIX_NAME + "ROLE_NAME [(TYPE)] "
             + PREFIX_STATUS + "STATUS "
             + "[" + PREFIX_REMINDER_DATE + "REMINDER_DATE] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_STIPEND + "STIPEND]\n"
-            + "Example: " + COMMAND_WORD + " " + "1 "
+            + "[" + PREFIX_STIPEND + "STIPEND] "
+            + "\n"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Software Engineer "
             + PREFIX_STATUS + "pending "
-            + PREFIX_REMINDER_DATE + "31-01-2022 23:59 "
+            + PREFIX_REMINDER_DATE + "01-01-2023 23:59 "
             + PREFIX_DESCRIPTION + "Frontend "
             + PREFIX_STIPEND + "1000 ";
 

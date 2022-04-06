@@ -17,9 +17,13 @@ public class DeleteRoleCommand extends Command {
     public static final String COMMAND_WORD = "deleteRole";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the role identified by the index number used in the displayed company list \n"
-            + "followed by the index number used by the role in the specified company.\n"
-            + "Parameters: COMPANY_INDEX ROLE_INDEX (both must be positive integers)\n"
+            + "\n"
+            + "Function: Deletes the role identified by the index number used in the displayed company list followed "
+            + "by the index number used by the role in the specified company."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + "COMPANY_INDEX ROLE_INDEX (both must be positive integers)"
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
     public static final String MESSAGE_DELETE_ROLE_SUCCESS = "Deleted Role: %1$s %1$s";
