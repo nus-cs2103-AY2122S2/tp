@@ -17,8 +17,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REQUIREMENT_EXP
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -101,7 +101,7 @@ public class EditPositionCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_APPLICANT;
         String userInput = targetIndex.getOneBased() + POSITION_DESC_JR_SWE + REQUIREMENT_DESC_EXPERIENCE
                 + DESCRIPTION_DESC_JR_SWE + OPENING_DESC_JR_SWE;
 
@@ -116,7 +116,7 @@ public class EditPositionCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_APPLICANT;
         String userInput = targetIndex.getOneBased() + POSITION_DESC_JR_SWE + REQUIREMENT_DESC_EXPERIENCE;
 
         EditPositionCommand.EditPositionDescriptor descriptor = new EditPositionDescriptorBuilder()

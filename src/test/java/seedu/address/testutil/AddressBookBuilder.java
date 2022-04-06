@@ -6,7 +6,7 @@ import seedu.address.model.applicant.Applicant;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withApplicant("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
@@ -23,7 +23,7 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Applicant} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Applicant applicant) {
+    public AddressBookBuilder withApplicant(Applicant applicant) {
         addressBook.addApplicant(applicant);
         return this;
     }
