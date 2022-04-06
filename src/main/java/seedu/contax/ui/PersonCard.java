@@ -74,9 +74,18 @@ public class PersonCard extends UiPart<Region> implements RecyclableCard<Person>
         tags.getChildren().clear();
         person.getTags().stream()
                 .sorted(Comparator.comparing(Tag::getTagNameString))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagNameString())));
-
+                .forEach(tag -> tags.getChildren().add(createLabel(tag.getTagNameString())));
         return this.getRoot();
+    }
+
+    /**
+     * Creates a label using the specified {@code tagName} with text wrapping and responsive resizing.
+     */
+    private Label createLabel(String tagName) {
+        Label label = new Label(tagName);
+        label.setWrapText(true);
+        label.maxWidthProperty().bind(cardPane.widthProperty());
+        return label;
     }
 
     @Override

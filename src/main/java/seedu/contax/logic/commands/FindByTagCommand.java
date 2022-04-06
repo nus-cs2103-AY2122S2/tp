@@ -28,7 +28,14 @@ public class FindByTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        // If tag does not exist in the list, just show empty list
+        if (!predicate.existsInTagList(model.getFilteredTagList())) {
+            model.updateFilteredPersonList(x -> false);
+        } else {
+            model.updateFilteredPersonList(predicate);
+        }
+
         return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
                 model.getFilteredPersonList().size()), GuiListContentType.PERSON);
     }
