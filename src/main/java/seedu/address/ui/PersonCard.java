@@ -65,7 +65,6 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        favourite.setText(person.getFavourite().toString());
         // create the buyer/seller label, depending on the user's type
         if (person.getUserType().isBuyer()) {
             buyer.setText(person.getUserType().value);
