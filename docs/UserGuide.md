@@ -446,23 +446,7 @@ Examples:
 
 ### Undo a command : `undo`
 
-Undoes the most recent command. 
-
-At the moment, the command that can be undone are the following:   
-
-- `add`
-- `addmodules`
-- `archive`
-- `unarchive`
-- `clear`
-- `clearmodules`
-- `comment`
-- `delete`
-- `deletemodules`
-- `edit`
-- `sort`
-- `status`
-- `switch`
+Undoes the previously executed command.
 
 Format: `undo`
 
@@ -472,6 +456,8 @@ Examples:
 `undo`
 
 After deleting a contact at Index 5, `undo` will reverse the delete command and bring the contact back at Index 5.
+
+_See below for a list of commands that `undo` applies to_
 
 ### Redo a command : `redo`
 
