@@ -114,13 +114,13 @@ Examples:
 ### Adding positions : `add -p`
 
 Adds a new open position to HireLah.
-Format: `add -p POSITION_NAME n/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+Format: `add -p p/POSITION_NAME o/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
 * Positions must have a **unique name**.
 * Name provided is case-insensitive.
 * Number of openings in the position must be **0 or more** 0, 1, 2, …​
 
 Examples:
-* `add -p Senior Software Engineer n/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+* `add -p p/Senior Software Engineer o/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
 
 ## Edit
 General command to edit different types into HireLah.
@@ -172,18 +172,17 @@ Examples:
 ### Edit positions : `edit -p`
 
 Edit an existing position in HireLah.
-Format: `edit -p POSITION_NAME [n/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
+Format: `edit -p POSITION_INDEX [p/POSITION_NAME] [o/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
 
-* Edits the available position with POSITION_NAME.
-* Position name provided is case-insensitive.
+* Edits the available position with POSITION_INDEX.
 * At least one optional field must be provided.
 * Existing attributes of the position will be updated to the input value.
 * When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
 * Requirements can be removed by providing an empty requirement field. i.e. r/
 
 Examples:
-* `edit -p Senior Frontend Software Engineer n/5`
-* `edit -p Senior Frontend Software Engineer r/JavaScript r/React`
+* `edit -p 1 p/Senior Frontend Software Engineer o/5`
+* `edit -p 3 p/Senior Frontend Software Engineer r/JavaScript r/React`
 
 ## Delete
 General command to delete different data type in HireLah.
@@ -215,7 +214,7 @@ Deletes an existing interview in HireLah.
 
 Format: `delete -i INTERVIEW_INDEX`
 * Deletes the Interview at the specified `INTERVIEW_INDEX`.
-* The index refers to the index number shown in the displayed Applicant list.
+* The index refers to the index number shown in the displayed Interview list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -226,13 +225,13 @@ Examples:
 
 Deletes an existing position in HireLah.
 
-Format: `delete -p ROLE`
-* Existing position with the specified name is deleted.
-* The position name has to match with the position that is to be deleted.
-* Position name provided is case-insensitive.
+Format: `delete -p POSITION_INDEX`
+* Deletes the Position at the specified `POSITION_INDEX`.
+* The index refers to the index number shown in the displayed Position list
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete -p Senior Frontend Software Engineer`
+* `delete -p 3`
 
 ## List
 General command to list different data types in HireLah. Users can provide optional parameters to filter and sort the data to display.
