@@ -93,17 +93,6 @@ public class Person {
     }
 
     /**
-     * Returns true if the person contains the skill, false otherwise.
-     *
-     * @param skill The skill to check if the person possess.
-     * @return True if the person has the skill, false otherwise.
-     */
-    public boolean hasSkill(Skill skill) {
-        requireAllNonNull(skill);
-        return skillSet.hasSkill(skill);
-    }
-
-    /**
      * Returns the skill proficiency of the person for the given skill,
      * or 0 if the person does not have the skill.
      *
