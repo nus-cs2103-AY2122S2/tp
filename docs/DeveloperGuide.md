@@ -685,7 +685,7 @@ After which, a new `SortCommand` object will be created, and is subsequently exe
 6. The `LogicManager` calls `SortCommand#execute(Model model)`.
 7. In `SortCommand`, the current list of students in TAPA will be sorted by the number of incomplete tasks in **descending** order  by calling `model#sortFilteredPersonListByTaskLeft()`.
 8. In `SortCommand`, the current list of students in TAPA will be updated to reflect the changes to the list, after the sort by calling `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
-9. Lastly, the `ArchiveCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+9. Lastly, the `SortCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
 
 ![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
 
