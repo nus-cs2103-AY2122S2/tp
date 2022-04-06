@@ -295,15 +295,17 @@ in the *next iteration (v1.5)*.
 |:--:|
 |*Figure 10 - Right-Click Help Menu*|
 
+The following few features can be achieved through right-clicking the Command Line.
+Some features have keyboard shortcuts as well, so do read on to find out more.
+
 ### Undo/Redo: 
-Undo or redo what you have been typing in the command box **BEFORE** it has been executed/entered, 
+Undo or redo what you have been typing in the Command Line **BEFORE** it has been executed/entered, 
 allowing you to make any edits as required.
 Refer to **_Figure 10_** above to see the menu.
 
 Using a Mouse:
-- Right-click on the command box to open the menu containing the `undo` and `redo` buttons
+- Right-click on the Command Line to open the menu containing the `undo` and `redo` buttons
 - Click on the respective buttons to undo/redo what you have typed
-
 
 **OR**
 
