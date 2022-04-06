@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
@@ -210,7 +212,7 @@ public class ParserUtil {
         requireNonNull(scheduleDateTime);
         String trimmedDateTime = scheduleDateTime.trim();
         try {
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm").parse(trimmedDateTime);
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm").withResolverStyle(ResolverStyle.STRICT).parse(trimmedDateTime);
         } catch (DateTimeParseException e) {
             throw new ParseException(ScheduleDateTime.MESSAGE_CONSTRAINTS);
         }

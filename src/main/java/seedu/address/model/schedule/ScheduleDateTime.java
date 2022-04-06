@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents the date and time of a schedule
@@ -14,8 +15,10 @@ public class ScheduleDateTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Please check the format of schedule date and time, and it should not be blank";
 
-    private static final String DATE_TIME_FORMATTER = "[dd/MM/yyyy HHmm]";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER);
+    private static final String DATE_TIME_FORMATTER = "[dd/MM/uuuu HHmm]";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+            .ofPattern(DATE_TIME_FORMATTER)
+            .withResolverStyle(ResolverStyle.STRICT);
     private final LocalDateTime scheduleDateTime;
 
     /**
@@ -23,6 +26,7 @@ public class ScheduleDateTime {
      */
     public ScheduleDateTime(String scheduleDateTime) {
         requireNonNull(scheduleDateTime);
+        System.out.println(scheduleDateTime);
         checkArgument(isValidScheduleDateTime(scheduleDateTime), MESSAGE_CONSTRAINTS);
         this.scheduleDateTime = LocalDateTime.parse(scheduleDateTime, FORMATTER);
     }
@@ -37,8 +41,10 @@ public class ScheduleDateTime {
     public static boolean isValidScheduleDateTime(String test) {
         try {
             LocalDateTime.parse(test, FORMATTER);
+            System.out.println("valid");
             return true;
         } catch (DateTimeParseException pe) {
+            System.out.println("Invalid");
             return false;
         }
     }

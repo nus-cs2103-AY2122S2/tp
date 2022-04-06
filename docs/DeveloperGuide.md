@@ -181,6 +181,15 @@ The following sequence diagram shows how the undo operation works:
 #### 1.3 Add schedule
 #### Proposed implementation
 #### Design Consideration
+**Aspect: Are multiple schedules allowed on the same day:**
+
+* **Alternative 1 (current choice):** Allow multiple schedules on the same date.
+  * Pros: Easy to implement. No need to check for duplicate of dates.
+  * Cons: NA
+
+* **Alternative 2:** Disallow multiple schedules on the same date.
+  * Pros: NA
+  * Cons: Some more implementations needed.
 
 ### 2. Delete feature
 
