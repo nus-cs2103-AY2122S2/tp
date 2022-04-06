@@ -230,7 +230,6 @@ public class EditCommand extends Command {
         model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // Throwing error after editing for valid indices allows the successful edit for least the valid indices.
-        String executionStatus;
         if (!isAllIndicesValid) {
             return new CommandResult(
                 String.format(

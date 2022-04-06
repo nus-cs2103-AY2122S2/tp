@@ -55,6 +55,7 @@ public class ParserUtil {
         for (String number : numbers) {
             number = number.trim();
             Index indexToAdd = parseIndex(number);
+            // ignore duplicate indexes
             if (indices.contains(indexToAdd)) {
                 continue;
             }
