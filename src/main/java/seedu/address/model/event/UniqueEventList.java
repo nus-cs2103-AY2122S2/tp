@@ -70,7 +70,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public void removeFriendName(FriendName toRemove) {
         requireNonNull(toRemove);
-        internalUnmodifiableList.forEach(event -> event.removeFriendNameIfPresent(toRemove));
+        internalList.forEach(event -> event.removeFriendNameIfPresent(toRemove));
     }
 
     /**
@@ -81,7 +81,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public void changeFriendName(FriendName original, FriendName replacement) {
         requireAllNonNull(original, replacement);
-        internalUnmodifiableList.forEach(event -> event.changeFriendNameIfPresent(original, replacement));
+        internalList.forEach(event -> event.changeFriendNameIfPresent(original, replacement));
     }
 
     /**
