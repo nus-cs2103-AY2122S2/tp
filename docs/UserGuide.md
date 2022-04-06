@@ -133,7 +133,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 
 * A person can have any number of teams or skills(including 0)
 * teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.
-
+* `t/      ` and `s/        ` is treated as `t/` and `s/` as HackNet ignores whitespaces. Therefore, a name of a team cannot be consisting solely of whitespaces.
 </div>
 
 Examples:
