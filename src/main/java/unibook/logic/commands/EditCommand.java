@@ -374,6 +374,8 @@ public class EditCommand extends Command {
             }
 
 
+
+
             // Checks if module that want to add to person is valid
             if (!editPersonDescriptor.getModules().equals(Optional.empty()) && latestModList.size() != 0) {
                 checkMod = editPersonDescriptor.getModules().get().iterator().next();
