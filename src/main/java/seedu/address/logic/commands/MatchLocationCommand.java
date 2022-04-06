@@ -35,7 +35,7 @@ public class MatchLocationCommand extends Command {
         ObservableList<Buyer> buyerList = model.getFilteredBuyerList();
 
         if (index.getZeroBased() >= buyerList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
         }
 
         Buyer buyer = buyerList.get(index.getZeroBased());

@@ -9,7 +9,7 @@ import seedu.address.model.property.Location;
  */
 public class HouseBuilder {
 
-    public static final HouseType DEFAULT_HOUSE_TYPE= HouseType.BUNGALOW;
+    public static final HouseType DEFAULT_HOUSE_TYPE = HouseType.BUNGALOW;
     public static final String DEFAULT_LOCATION = "Clementi";
 
     private HouseType houseType;
@@ -18,10 +18,10 @@ public class HouseBuilder {
     /**
      * Creates a {@code houseBuilder} with the default details.
      */
-     public HouseBuilder() {
-        houseType = DEFAULT_HOUSE_TYPE;
-        location = new Location(DEFAULT_LOCATION);
-     }
+    public HouseBuilder() {
+        this.houseType = DEFAULT_HOUSE_TYPE;
+        this.location = new Location(DEFAULT_LOCATION);
+    }
 
     /**
      * Initializes the houseBuilder with the data of {@code clientToCopy}.
@@ -39,6 +39,9 @@ public class HouseBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Location} of the {@code House}.
+     */
     public HouseBuilder withLocation(Location location) {
         this.location = location;
         return this;
