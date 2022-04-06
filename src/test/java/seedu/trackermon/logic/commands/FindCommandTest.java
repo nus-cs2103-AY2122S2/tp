@@ -141,16 +141,8 @@ public class FindCommandTest {
         return new ShowContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
-    private NameContainsKeywordsPredicate preparePredicateName(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
-
     private StatusContainsKeywordsPredicate preparePredicateStatus(String userInput) {
         return new StatusContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
-    }
-
-    private TagsContainsKeywordsPredicate preparePredicateTags(String userInput) {
-        return new TagsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     private RatingContainsKeywordsPredicate preparePredicateRating(String userInput) {
