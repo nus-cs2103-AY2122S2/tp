@@ -128,8 +128,9 @@ Breakdown of the Company and RoleManager packages:
 The `Model` component,
 
 * stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object).
-* stores the currently selected `Company` and `Role` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently selected `Company`, `Role` and `Reminder` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* the `Reminder` objects store data of a role in a company that has a reminder date that is within the reminder window.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 ### Storage Component
 
@@ -233,6 +234,24 @@ The following sequence diagram shows how the `deleteRole` command operation work
 5. The  `DeleteRoleCommand#execute()` checks the validity of both the indexes, and invokes the `Model#deleteRole()` method using the stored company index and role index.
 6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
 7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
+
+### Reminder feature <a id="reminder-feature"></a>
+Whenever the user starts up the application, a reminder pane will automatically open along with the main window, showing all roles and their respective companies that have reminder dates that are within the reminder window.
+
+The fields of the `Reminder` that will be shown are as follows:
+* `Company Name`
+* `RoleName`
+* `ReminderDate`
+* `Status`
+
+####Implementation <a id="implementation-reminder"></a>
+
+Given below is an example scenario on how the reminder feature works:
+1. The user has a role in a company with a reminder date of 30-04-2022 23:59.
+2. Assuming that the reminder window is at its default of 7 days, and today is within 7 days from 30th April 2022, when the user opens the application, the reminder pane will display the given role and its relevant fields as mentioned above.
+
+The following sequence diagram shows how the reminder feature works:
+![Sequence diagram of the Reminder feature](images/ReminderDiagram.png)as
 
 --------------------------------------------------------------------------------------------------------------------
 
