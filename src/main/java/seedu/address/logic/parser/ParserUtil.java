@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -168,22 +169,32 @@ public class ParserUtil {
 
         String dateInput = dateTimeInfo[0];
         String timeInput = dateTimeInfo[1];
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         LocalDate date;
         LocalTime time;
 
+        LocalDate today = LocalDate.now();
+
         try {
             date = LocalDate.parse(dateInput, dateFormatter);
         } catch (Exception e) {
-            throw new ParseException("Appointment date is an invalid entry.");
+            throw new ParseException("Appointment date is an invalid entry.\n"
+                    + "Please ensure Appointment date is valid and entered in dd-MM-yyyy format.");
+        }
+
+        if (date.isBefore(today)) {
+            throw new ParseException("Appointment date is over.\n"
+                    + "Please enter a future appointment date is valid and entered in dd-MM-yyyy format.");
         }
 
         try {
             time = LocalTime.parse(timeInput, timeFormatter);
         } catch (Exception e) {
-            throw new ParseException("Appointment time is an invalid entry.");
+            throw new ParseException("Appointment time is an invalid entry.\n"
+                    + "Please ensure Appointment time is valid and entered in HH:mm format.");
         }
 
         return LocalDateTime.of(date, time);
