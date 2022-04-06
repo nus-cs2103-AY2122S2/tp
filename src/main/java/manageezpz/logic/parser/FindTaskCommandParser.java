@@ -12,9 +12,11 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import manageezpz.commons.core.LogsCenter;
 import manageezpz.logic.commands.FindTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.person.Name;
@@ -30,6 +32,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private static final Prefix[] TASK_TYPES = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT};
     private static final Prefix[] VALID_OPTIONS = {PREFIX_TODO, PREFIX_DEADLINE, PREFIX_EVENT, PREFIX_DATE,
         PREFIX_DESCRIPTION, PREFIX_PRIORITY, PREFIX_ASSIGNEES, PREFIX_IS_MARKED};
+    private static final Logger logger = LogsCenter.getLogger(FindTaskCommandParser.class);
 
     private String errorMessage = "";
     private boolean hasError = false;
@@ -61,14 +64,20 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private void checkIfHaveAtLeastOneOption(ArgumentMultimap argMultiMap) {
+        String noOptionEnteredMessage = "No option entered for find task command.";
+
         if (!isAtLeastOnePrefixPresent(argMultiMap, VALID_OPTIONS) || !argMultiMap.getPreamble().isEmpty()) {
+            logger.warning(noOptionEnteredMessage);
             addErrorMessage(FindTaskCommand.NO_OPTIONS);
         }
     }
 
     private void checkIfTodoAndDateTogether(ArgumentMultimap argMultiMapProperties, Prefix taskTypes) {
         boolean isContainsTodo = taskTypes instanceof Prefix && taskTypes.equals(PREFIX_TODO);
+        String todoAndDateOptionTogetherMessage = "todo/ and date/ are together";
+
         if (isContainsTodo && argMultiMapProperties.isPrefixExist(PREFIX_DATE)) {
+            logger.warning(todoAndDateOptionTogetherMessage);
             addErrorMessage(FindTaskCommand.TODO_AND_DATE_OPTION_TOGETHER);
         }
     }
@@ -78,20 +87,30 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
                 .filter(prefix -> argMultiMap.isPrefixExist(prefix)).collect(Collectors.toList());
         if (currentPrefixes.size() > 1) {
             // If the user enters more than 1 task type
+            String moreThanOneTaskTypeMessage = "More than one task type entered as options";
+            logger.warning(moreThanOneTaskTypeMessage);
             addErrorMessage(FindTaskCommand.MORE_THAN_ONE_TASK_TYPE);
             return null;
         } else if (currentPrefixes.isEmpty()) {
             return null;
         } else {
-            return currentPrefixes.get(0);
+            String prefixPresentMessage = "Specific prefix selected:";
+            Prefix currentPrefix = currentPrefixes.get(0);
+            String currentPrefixString = currentPrefix.getPrefix().replaceFirst("/","").toUpperCase();
+            logger.info(String.join(" ", prefixPresentMessage, currentPrefixString));
+
+            return currentPrefix;
         }
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
         List<String> descriptions = null;
         if (argMultiMap.isPrefixExist(PREFIX_DESCRIPTION)) {
+            String namesMessage = "Description:";
+
             String descriptionString = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
             descriptions = List.of(descriptionString.split("\\s+"));
+            logger.info(String.join(" ", namesMessage, descriptions.toString()));
             checkIfValidDescription(descriptions);
         }
         return descriptions;
@@ -100,6 +119,8 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private void checkIfValidDescription(List<String> description) {
         boolean isValid = description.stream().allMatch(name -> Description.isValidDescription(name));
         if (!isValid) {
+            String invalidDescriptionFoundMessage = "Invalid Description found.";
+            logger.warning(invalidDescriptionFoundMessage);
             addErrorMessage(FindTaskCommand.INVALID_DESCRIPTION);
         }
     }
