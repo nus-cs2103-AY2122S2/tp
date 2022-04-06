@@ -19,10 +19,10 @@ public class CommentTest {
         String testClean = "laugh";
 
         Comment testCleanComment = new Comment(testClean);
-        Comment testEmojiComment = new Comment("laugh\uD83D\uDE00"); //removal of emojis
+        Comment testEmojiComment = new Comment(testEmoji); //removal of emojis
 
-        assertNotEquals("laugh\uD83D\uDE00", testEmojiComment.comment); //Emoji should be removed
-        assertEquals("laugh", testCleanComment.comment);
+        assertNotEquals(testEmoji, testEmojiComment.comment); //Emoji should be removed
+        assertEquals(testClean, testCleanComment.comment);
     }
 
     @Test
