@@ -254,6 +254,9 @@ Examples:
 
 ### Mark/unmark contact as potential teammates: `team/unteam`
 
+This feature selects/deselect specified persons as potential members. If a person is selected as a potential teammate,
+the contact box will be highlighted in a shade of turquoise.
+
 Format:
 * `team INDEX`
 * `unteam INDEX`
