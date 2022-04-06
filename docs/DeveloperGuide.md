@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-# **Table of Contents** <a id="toc"></a>
+# Table of Contents <a id="toc"></a>
 * [Acknowledgements](#acknowledgements)
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
@@ -14,11 +14,16 @@ title: Developer Guide
 * [Implementation](#implementation)
     * [Find feature](#find-feature)
         * [Implementation](#implementation-find)
+        * [Design considerations](#design-considerations-find)
     * [Edit role feature](#edit-role-feature)
         * [Implementation](#implementation-edit)
         * [Design considerations](#design-considerations-edit)
     * [Delete role feature](#delete-role-feature)
-      * [Implementation](#implementation-delete)
+        * [Implementation](#implementation-delete)
+        * [Design considerations](#design-considerations-delete)
+  * [Favourite role feature](#favourite-role-feature)
+        * [Implementation](#implementation-favourite)
+        * [Design considerations](#design-considerations-favourite)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#requirements)
   * [Product scope](#product-scope)
@@ -35,19 +40,19 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements** <a id="acknowledgements"></a>
+## Acknowledgements <a id="acknowledgements"></a>
 
 * This project is created based on the AddressBook-Level3 project by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started** <a id="setting-up-getting-started"></a>
+## Setting up, getting started <a id="setting-up-getting-started"></a>
 
 Refer to the guide [Setting up and getting started](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design** <a id="design"></a>
+## Design <a id="design"></a>
 
 ### Architecture <a id="architecture"></a>
 ![Architecture Diagram of the Tinner](images/ArchitectureDiagram.png)
@@ -181,37 +186,42 @@ The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation** <a id="implementation"></a>
+## Implementation <a id="implementation"></a>
 
 ### Find feature <a id="find-feature"></a>
 
-The `find` feature allows users to filter the company list by specifying company name keywords and role name keywords.
+The `find` feature allows users to filter the company list to find roles by specifying company name keywords and role name keywords.
 
 #### Implementation <a id="implementation-find"></a>
-The `find` command is primarily implemented by `FindCommandParser` a class that extends `Parser`, and `FindCommand`, which is a class that extends `Command`. For each `find` command, a `Predicate<Company>` object and a `Predicate<Role>` object will be created. Both `Predicate` objects contain a `test` function to determine whether the given company or role matches the keywords provided in the user input.
-
-* Upon a valid user's input using the `find` command, the `FindCommandParser#parse()`creates a `CompanyNameContainsKeywordsPredicate` which extends `Predicate<Company>`, and a `RoleNameContainsKeywordsPredicate` which extends `Predicate<Role>`.
-* The `FindCommandParser#parse()` then uses the `CompanyNameContainsKeywordsPredicate` object and the `RoleNameContainsKeywordsPredicate` object to instantiate the `FindCommand`.
-* Then invoking the `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredRoleList()` method, displaying only companies and roles that match the user input.
-
 
 ![UML diagram of the Find feature](images/FindDiagram.png)
+
+Given below is an example usage scenario and how the find feature behaves at each step:
+1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
+2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
+4. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
+5. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
 
 The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
 
 ![UML diagram of the Find feature](images/FindSequenceDiagram.png)
 
-Note that the lifeline of FindCommandParser should end at the destroy marker but due to the limitations of PlantUML, we are unable to depict it.
+The following activity diagram summarises what happens when a user executes the `find` command:
 
-1. The user will first enter the input `find c/meta r/software mobile`, the `CompayListParser#parseCommand()` method will parse the information `c/meta r/software mobile` to `FindCommandParser` using the method `parse()` based on the keyword `find`.
-2. The `FindCommandParser#parse()` method will create a `CompanyNameContainsKeywordsPredicate` object with the company name keywords specified after the prefix `c/` and the role name keywords specified after the prefix `r/`. The `RoleNameContainsKeywordsPredicate` is also created using the role name keywords specified after the prefix `r/`. If a prefix is present, keywords that follow the prefix must be present or else it would be deemed an invalid command.
-3. Note that the `CompanyNameContainsKeywordsPredicate` is created using both company name keywords and role name keywords because companies are only displayed if they contain at least one role which matches the role name keywords
-4. Either prefix `c/` or `r/` can be absent. Both cannot be absent within the same command or else it would give rise to an invalid command. If absent, an empty array with no keywords is passed as input in the creation of either or both `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
-5. Then the `FindCommandParser#parse()` method will create an `FindCommand` object with the `CompanyNameContainsKeywordsPredicate` object and the `RoleNameContainsKeywordsPredicate` object.  
-6. The `FindCommand` object will be returned to the `LogicManager` and will then invoke the `FindCommand#execute()` method to implement the changes.
-7. The `Model#updateFilteredCompanyList()` is invoked and filters the list of companies to display only companies which match the company name keywords.
-8. Similarly, the `Model#updateFilteredRoleList()` also filters the list of roles within each company to display only roles which match the role name keywords.  
-9. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
+![UML diagram of the Find feature](images/FindActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-find"></a>
+
+* Alternative 1 (current choice): The use of one unified `find` command with prefixes `c/` and `r/` to concurrently filter the company list by role name and company name.
+    * Pros:
+        * Users are able to quickly sieve through the company list to find the specific roles.
+    * Cons:
+        * Increased dependencies and coupling between components, as `model` now depends on both classes `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
+* Alternative 2 (used in v1.2): `find` only allows users to filter the company list by company name keywords and not role name keywords.
+    * Pros:
+        * Reduced coupling between components as `model` depends on `CompanyNameContainsKeywordsPredicate` but not `RoleNameContainsKeywordsPredicate`.
+    * Cons:
+        * Users have less flexibility in searching for specific roles, especially when they have applied for multiple roles within the same company. They can only find all roles which belong to specific companies.
 
 ### Edit role feature <a id="edit-role-feature"></a>
 The `editRole` command for the `Role` item allows the user to update any fields by specifying
@@ -277,9 +287,47 @@ The following sequence diagram shows how the `deleteRole` command operation work
 6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
 7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
+### Favourite feature <a id="favourite-feature"></a>
+
+The `favourite` feature allows users to highlight specific companies. Favourited companies are indicated using a star beside their company name in the GUI.
+
+#### Implementation <a id="implementation-favourite"></a>
+
+![UML diagram of the Favourite feature](images/FavouriteDiagram.png)
+
+Given below is an example usage scenario and how the find feature behaves at each step:
+1. The user executes the command `favourite 1` to favourite the first company within the displayed company list.
+2. Then the `FavouriteCompanyCommandParser#parse()` creates an instance of `FavouriteCompanyCommand` by passing the company index to be favourited.
+4. The `FavouriteCompanyCommand#execute()` method will update the `model` using the `Model#setCompany()` method, updated the model with the favourited company, replacing the previously unfavourited company.
+5. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
+6. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+
+The following sequence diagram shows how the `favourite` command operation works with the user input `favourite 1`:
+
+![UML diagram of the Favourite feature](images/FavouriteSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `favourite` command:
+
+![UML diagram of the Favourite feature](images/FavouriteActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-favourite"></a>
+
+* Alternative 1 (current choice): Although both `favourite` and `editCompany` commands edits fields within a specified company, we decided to make them two separate commands.
+    * Pros:
+        * Users are able to favourite roles much more easily by just providing the index.
+        * More intuitive to users to use `favourite` rather than `editCompany` to favourite a company.
+    * Cons:
+        * This feature was more challenging to implement as compared to simply integrating the functionality of `favourite` into `editCompany`.
+* Alternative 2: Making the favourite status field of a company another field that can be modified through `editCompany`.
+    * Pros:
+        * Users can modify all fields within a company, including the favourite status, with the use of one single command. 
+    * Cons:
+        * It is less straightforward for users to use `editCompany` to favourite a company. This also means that the favourite status field will not stand out to users.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops** <a id="documentation-logging-testing-configuration-dev-ops"></a>
+## Documentation, logging, testing, configuration, dev-ops <a id="documentation-logging-testing-configuration-dev-ops"></a>
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -289,7 +337,7 @@ The following sequence diagram shows how the `deleteRole` command operation work
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Requirements** <a id="requirements"></a>
+## Requirements <a id="requirements"></a>
 
 ### Product scope <a id="product-scope"></a>
 
@@ -488,7 +536,7 @@ Guarantees: every company stored in Tinner will be shown
 4. Test case: `addCompany n/Tinner p/ e/t@tinner.com a/fairy land`
    1. Expected: Company list is not updated. The response box shows error message that there must be a value after a prefix.
 5. Other incorrect test cases to try: `addCompany`, and other prefixes without value e.g. `add n/`.
-   1. Expected: Company list is not updated. The response box shows error message that it is an invalid command with additional information of the correct format. 
+   1. Expected: Company list is not updated. The response box shows an error message that it is an invalid command with additional information of the correct command format. 
 
 ### Editing a company <a id="editing-a-company"></a>
 1. Prerequisites: At least 2 companies must exist and listed using the `list` command
@@ -502,13 +550,36 @@ Guarantees: every company stored in Tinner will be shown
     1. Expected: The intended company with index `x` is not updated.
    The response box shows error message that company/ role index is invalid
 
-### deleting a company <a id="deleting-a-company"></a>
+### Deleting a company <a id="deleting-a-company"></a>
 1. Prerequisites: At least 2 companies must exist and listed using the `list` command
 2. Test case: `deleteCompany 1`
    1. Expected: First company with its roles included if any, is removed from the company list. 
    The response box shows the details of the deleted company.
 3. Other incorrect test cases to try: `deleteCompany x` where x is an integer larger than the size of the company list or negative integer values.
    1. Expected: Company with index `x` is not deleted. The response box shows error message that the company index provided is invalid.
+
+### Favouriting a company <a id="favouriting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist with the first company in the company list already favourited (indicated with a star beside its name in the GUI), and listed using the `list` command
+2. Test case: `favourite 2`
+    1. Expected: Second company in the displayed company list is favourited.
+       The response box shows the details of the favourited company.
+3. Test case: `favourite 1`
+    1. Expected: First company in the displayed company list is not favourited again as it is already favourited.
+       The response box shows a message indicating that the company is already favourited.
+3. Other incorrect test cases to try: `favourite x` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: Company with index `x` is not favourited. The response box shows error message that the company index provided is invalid.
+
+### Unfavouriting a company <a id="unfavouriting-a-company"></a>
+1. Prerequisites: At least 2 companies must exist with the first company in the company list already favourited (indicated with a star beside its name in the GUI), and listed using the `list` command
+2. Test case: `unfavourite 1`
+    1. Expected: First company in the displayed company list is unfavourited.
+       The response box shows the details of the unfavourited company.
+3. Test case: `unfavourite 2`
+    1. Expected: Second company in the displayed company list is not unfavourited as it is already unfavourited.
+       The response box shows a message indicating that the company is already unfavourited.
+3. Other incorrect test cases to try: `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: Company with index `x` is not favourited. The response box shows error message that the company index provided is invalid.
+
 
 ### Editing a role <a id="editing-a-role"></a>
 1. Prerequisites: At least 1 companies with 2 roles must exist and listed using the `list` command
@@ -528,3 +599,22 @@ Guarantees: every company stored in Tinner will be shown
    1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
    The response box shows error message that company/ role index is invalid
 
+### Finding a role <a id="finding-a-role"></a>
+1. Prerequisites: There must be 2 companies which are listed using the `list` command. The first company must have the name `meta` containing a role with the name `software engineer` followed by another role with the name `data engineer`. The second company must have the name `google` containing a role with the name `mobile engineer` followed by another role with the name `data engineer`.
+2. Test case: `find c/meta`
+    1. Expected: Only the first company is displayed with both its roles.
+3. Test case: `find r/engineer`
+    1. Expected: Both companies are displayed with all their roles.
+4. Test case: `find c/google r/data`
+    1. Expected: Only the second company is displayed with only its `data engineer` role shown.
+5. Test case: `find r/data`
+    1. Expected: Both companies are displayed with only their respective `data engineer` roles shown.
+6. Test case: `find c/meta r/engineer`
+    1. Expected: Only the first company is displayed with both its roles.    
+7. Test case: `find r/hardware`    
+    1. Expected: No companies are displayed.
+8. Test case: `find c/meta r/mobile`  
+    1. Expected: No companies are displayed.
+9. Other incorrect test cases to try: `find`, `find c/`, `find c/ r/`, `find test`, `find a/ b/`
+    1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format. 
+    
