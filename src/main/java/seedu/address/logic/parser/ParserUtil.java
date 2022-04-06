@@ -52,7 +52,12 @@ public class ParserUtil {
         LinkedList<Index> indices = new LinkedList<>();
         for (String number : numbers) {
             number = number.trim();
-            indices.add(parseIndex(number));
+            Index indexToAdd = parseIndex(number);
+            // ignore duplicate indexes
+            if (indices.contains(indexToAdd)) {
+                continue;
+            }
+            indices.add(indexToAdd);
         }
         return indices;
     }
