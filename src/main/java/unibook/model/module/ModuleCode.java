@@ -9,7 +9,7 @@ import static unibook.commons.util.AppUtil.checkArgument;
  */
 public class ModuleCode {
     public static final String MESSAGE_CONSTRAINTS =
-        "Module codes should only contain up to 10 alphanumeric characters and cannot contain spaces.";
+        "Module codes should only contain up to 10 characters and cannot contain spaces.";
 
     /*
      * A module code can contain any character that is not a whitespace.

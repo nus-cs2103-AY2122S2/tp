@@ -8,6 +8,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_1 = "Invalid command format! \n";
+    public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "Index provided must be a positive integer.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_MODULE_DISPLAYED_INDEX = "The module index provided is invalid";
     public static final String MESSAGE_INVALID_KEYEVENT_DISPLAYED_INDEX = "The key event index provided is invalid";
