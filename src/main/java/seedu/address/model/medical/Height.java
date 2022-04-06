@@ -10,7 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Height {
 
-    public static final String MESSAGE_CONSTRAINTS = "Height can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid height input. "
+                + "We recommend inputting height using centimeters (eg. 185 cm), "
+                + "but allow any other height input values (eg. using other units). "
+                + "Height parameter can take any values, and it should not be blank.";
 
     /*
      * The first character of the height must not be a whitespace,
