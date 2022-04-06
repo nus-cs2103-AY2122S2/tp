@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import seedu.address.model.lineup.LineupName;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.lineup.Lineup;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.tag.Tag;
 
 /**
