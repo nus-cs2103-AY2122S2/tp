@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Subject {
     public static final String MESSAGE_CONSTRAINTS =
-            "Subject should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Subject should only contain alphanumeric characters and spaces."
+                    + "\nSubject should not be blank and is capped at 50 characters.";
 
     /*
      * The first character of the subject must not be a whitespace,
@@ -43,7 +44,7 @@ public class Subject {
      * Returns true if a given string is a valid subject.
      */
     public static boolean isValidSubject(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
     @Override
