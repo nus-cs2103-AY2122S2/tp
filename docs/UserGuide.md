@@ -369,7 +369,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Help** | `help [TOPIC]`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/friend t/colleague s/java_70`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/hackathon2021, hackathon2022 s/java_70`
 **Edit** | `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Mark/unmark contacts** | `team`, `unteam` <br> e.g., `team 1`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
