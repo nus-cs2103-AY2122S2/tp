@@ -82,7 +82,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE_GROUP));
             }
-            groupName = argMultimap.getValue(CliSyntax.PREFIX_NAME).get();
+            groupName = argMultimap.getValue(CliSyntax.PREFIX_NAME).get().trim();
+            if (groupName.length() == 0) {
+                throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
+            }
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
             if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME)) {
                 dateTimeList = ParserUtil.parseAllDateTimes(argMultimap.getAllValues(CliSyntax.PREFIX_DATETIME));
@@ -114,7 +117,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                     AddCommand.MESSAGE_USAGE_MEETING));
             }
             moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(CliSyntax.PREFIX_MODULE).get());
-            groupName = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get();
+            groupName = argMultimap.getValue(CliSyntax.PREFIX_GROUP).get().trim();
+            if (groupName.length() == 0) {
+                throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
+            }
             dateTimeList = ParserUtil.parseAllDateTimes(argMultimap.getAllValues(CliSyntax.PREFIX_DATETIME));
             return new AddCommand(moduleCode, groupName, dateTimeList);
         case "event":

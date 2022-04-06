@@ -188,6 +188,9 @@ public class ParserUtil {
             return moduleSet;
         }
         for (String moduleCode : moduleCodes) {
+            if (!ModuleCode.isValidModuleCode(moduleCode)) {
+                throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+            }
             ModuleCode mc = new ModuleCode(moduleCode.toUpperCase());
             moduleSet.add(mc);
         }
@@ -208,15 +211,13 @@ public class ParserUtil {
         for (String moduleCode : moduleCodesAndGroups) {
             if (moduleCode.contains(" g/")) {
                 String[] strArr = moduleCode.split(" g/");
-                if (strArr[0].contains(" ")) {
-                    throw new ParseException("Module codes should only contain alphanumeric "
-                        + "characters and cannot contain spaces.");
+                if (!ModuleCode.isValidModuleCode(strArr[0])) {
+                    throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
                 }
                 mc = new ModuleCode(strArr[0].toUpperCase());
             } else {
-                if (moduleCode.contains(" ")) {
-                    throw new ParseException("Module codes should only contain alphanumeric "
-                        + "characters and cannot contain spaces.");
+                if (!ModuleCode.isValidModuleCode(moduleCode)) {
+                    throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
                 }
                 mc = new ModuleCode(moduleCode.toUpperCase());
             }
@@ -251,7 +252,13 @@ public class ParserUtil {
             LinkedHashSet<String> groupNamesSet = new LinkedHashSet<>();
             if (moduleCodeAndGroup.contains("g/")) {
                 String[] strArr = moduleCodeAndGroup.split(" g/");
+                if (strArr.length == 1) {
+                    throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
+                }
                 for (int i = 1; i < strArr.length; i++) {
+                    if (!Group.isValidName(strArr[i])) {
+                        throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
+                    }
                     groupNamesSet.add(strArr[i]);
                 }
             }
@@ -343,12 +350,15 @@ public class ParserUtil {
             return moduleKeyEventList;
         }
         for (String eventAndDate : keyEventAndDate) {
-            if (!eventAndDate.contains(" dt/")) {
+            if (!eventAndDate.contains("dt/")) {
                 throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_MISSINGDT);
             }
-            String[] strArr = eventAndDate.split(" dt/");
-            LocalDateTime dateTime = parseDateTime(strArr[1]);
+            String[] strArr = eventAndDate.split("dt/");
+            if (strArr.length == 1 || strArr.length == 0) {
+                throw new ParseException(ModuleKeyEvent.MESSAGE_CONSTRAINTS_TYPE);
+            }
             ModuleKeyEvent.KeyEventType keyEventType = parseKeyEventType(strArr[0]);
+            LocalDateTime dateTime = parseDateTime(strArr[1]);
             ModuleKeyEvent moduleKeyEvent = new ModuleKeyEvent(keyEventType, dateTime, module);
             moduleKeyEventList.add(moduleKeyEvent);
         }
