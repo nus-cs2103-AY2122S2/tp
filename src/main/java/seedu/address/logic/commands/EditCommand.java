@@ -90,6 +90,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // Bug fix: update tags accordingly
+        Set<Tag> newTags = editedPerson.getTags();
+        for (Tag newTag : newTags) {
+            if (!model.hasTag(newTag)) {
+                model.addTag(newTag);
+            }
+        }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
