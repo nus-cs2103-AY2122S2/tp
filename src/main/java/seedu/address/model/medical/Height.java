@@ -12,7 +12,7 @@ public class Height {
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid height input. "
                 + "We recommend inputting height using centimeters (eg. 185 cm), "
-                + "but allow any other height input values (eg. using other units). "
+                + "but we allow any other height input values (eg. using other units). "
                 + "Height parameter can take any values, and it should not be blank.";
 
     /*
