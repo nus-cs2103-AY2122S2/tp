@@ -230,7 +230,7 @@ The following points explain the format of a command.
 
 ### Company Restrictions <a id="c-company-restrictions"></a>
 
-* The `COMPANY_NAME` should only contain alphanumeric characters and spaces, but not blank, and have a character limit of at most 30.
+* The `COMPANY_NAME` should only contain alphanumeric characters and spaces, and have a character limit of at most 30.
 * The `PHONE_NUMBER` should only contain numbers, and be at least 3 digits long and at most 14 digits.
 * The `EMAIL` should be of the format local-part@domain and adhere to the following constraints:
     * The local-part should only contain alphanumeric characters and these special characters, excluding the
@@ -254,7 +254,7 @@ The following points explain the format of a command.
 
 ### Role Restrictions <a id="c-role-restrictions"></a>
 
-* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets, but not blank, and have a character limit of at most 30.
+* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets and have a character limit of at most 30.
 * The `REMINDER_DATE` should not be in the past and must be a valid date 
 in the following format: dd-MM-yyyy HH:mm.
 * The `STATUS` is case-sensitive and can only accept the following inputs:
@@ -454,7 +454,7 @@ not, `editCompany` has got you covered. Simply edit the parts of the company det
   The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The `PHONE_NUMBER`, `EMAIL` and `ADDRESS` here can be left blank, allowing you to remove previously added information which may be erroneous.
+  * `PHONE_NUMBER`, `EMAIL` and `ADDRESS` fields can be left blank, allowing you to remove previously added information which may be erroneous.
 * More restrictions for command parameters can be found [here](#c-company-restrictions)
 
 **Examples:**
@@ -587,11 +587,7 @@ company.
 
 </div>
 
-<div markdown="block" class="alert alert-danger">
 
-:warning: If a prefix is specified, even for optional fields, the value after the prefix cannot be blank. e.g. `$/` only is not valid but `$/1000` is valid.
-
-</div>
 
 
 
@@ -610,8 +606,9 @@ Just got invited to an interview? Keep your internship role status and other det
   the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` here can be left blank, allowing you to remove previously added information which may be erroneous.
+  * `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` fields can be left blank, allowing you to remove previously added information which may be erroneous.
 * More restrictions for command parameters can be found [here](#c-role-restrictions)
+
 
 **Examples:**
 
