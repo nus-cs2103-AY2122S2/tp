@@ -9,22 +9,22 @@ import java.util.function.Predicate;
  * case-insensitive.
  */
 public class EventNameContainsSubstringPredicate implements Predicate<Event> {
-    private final String substring;
+    private final EventName nameSubstring;
 
     /**
      * Creates an EventNameContainsSubstringPredicate object with the given substring. If empty
      * string provided, this will return true for all Events.
      *
-     * @param substring Substring to check event name for.
+     * @param nameSubstring Substring to check event name for.
      */
-    public EventNameContainsSubstringPredicate(String substring) {
-        requireNonNull(substring);
-        this.substring = substring;
+    public EventNameContainsSubstringPredicate(EventName nameSubstring) {
+        requireNonNull(nameSubstring);
+        this.nameSubstring = nameSubstring;
     }
 
     @Override
     public boolean test(Event event) {
-        return event.hasNameSubstring(substring);
+        return event.hasNameSubstring(nameSubstring);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class EventNameContainsSubstringPredicate implements Predicate<Event> {
         }
 
         EventNameContainsSubstringPredicate otherPredicate = (EventNameContainsSubstringPredicate) other;
-        return otherPredicate.substring.equals(substring);
+        return otherPredicate.nameSubstring.equals(nameSubstring);
     }
 }

@@ -265,6 +265,7 @@ Find events in Amigos whose properties match the given search criteria.
   * For each search field, an event is a match if the search substring matches
     * e.g n/Birthday will match events with names John's Birthday, Bob's Birthday
     * e.g. f/joe will match events containing either Joe Maggio or Joe Allen in the friends list.
+    * Any leading or trailing whitespace in the search substring will be trimmed.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`

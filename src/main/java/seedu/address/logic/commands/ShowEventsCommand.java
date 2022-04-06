@@ -15,9 +15,9 @@ public class ShowEventsCommand extends Command {
 
     public static final String MESSAGE_USAGE = "showevents [-a]";
 
-    public static final String MESSAGE_SUCCESS = "Listed upcoming events";
+    public static final String MESSAGE_SUCCESS = "Listed all upcoming events. To see past events use the -a flag";
 
-    public static final String MESSAGE_SUCCESS_ALL = "Listed all events";
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all events, including past ones";
 
     private final boolean isShowAllEvents;
 

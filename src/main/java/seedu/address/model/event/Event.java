@@ -57,27 +57,27 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns true if the given {@code substring} is contained within this event's name.
+     * Returns true if the given {@code nameSubstring} is contained within this event's name.
      * Case-insensitive.
      *
-     * @param substring Substring to search for in this event's name.
-     * @return True if given substring is contained within this event's name.
+     * @param nameSubstring Name substring to search for in this event's name.
+     * @return True if given name substring is contained within this event's name.
      */
-    public boolean hasNameSubstring(String substring) {
-        requireNonNull(substring);
-        return getName().containsIgnoreCase(substring);
+    public boolean hasNameSubstring(EventName nameSubstring) {
+        requireNonNull(nameSubstring);
+        return getName().containsIgnoreCase(nameSubstring);
     }
 
     /**
-     * Returns true if the given {@code substring} is contained within this event's friend names.
+     * Returns true if the given {@code nameSubstring} is contained within this event's friend names.
      * Case-insensitive.
      *
-     * @param substring Substring to search for in this event's friend names.
-     * @return True if the given substring is contained within this event's friend names.
+     * @param nameSubstring Substring to search for in this event's friend names.
+     * @return True if the given name substring is contained within this event's friend names.
      */
-    public boolean hasFriendNameSubstring(String substring) {
-        requireNonNull(substring);
-        return getFriendNames().stream().anyMatch(name -> name.containsIgnoreCase(substring));
+    public boolean hasFriendNameSubstring(FriendName nameSubstring) {
+        requireNonNull(nameSubstring);
+        return getFriendNames().stream().anyMatch(name -> name.containsIgnoreCase(nameSubstring));
     }
 
     /**
