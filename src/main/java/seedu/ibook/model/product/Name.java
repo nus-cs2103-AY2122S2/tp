@@ -10,8 +10,7 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces (except the first character)"
-            + ", and it should not be blank";
+            "Name should not be blank and the first character should not be a space";
 
     /*
      * The first character of the name must not be a whitespace,

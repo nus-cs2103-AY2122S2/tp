@@ -12,7 +12,7 @@ public class Category {
     public static final String DEFAULT_CATEGORY = "Miscellaneous";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Categories (if given) should only contain alphanumeric characters and spaces";
+            "Categories (if given) should not have a space as the first character";
 
     /*
      * Empty strings are allowed. Otherwise, the first character of the description
