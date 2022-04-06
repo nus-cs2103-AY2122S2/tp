@@ -575,6 +575,12 @@ company.
 
 </div>
 
+<div markdown="block" class="alert alert-info">
+   
+:information_source: Roles in a Company are listed based on the order in which they are added to the Company.
+   
+</div>
+
 <div markdown="block" class="alert alert-danger">
 
 :warning: When round brackets are used, they must be in pairs.
