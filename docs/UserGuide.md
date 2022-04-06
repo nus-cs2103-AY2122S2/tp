@@ -147,6 +147,7 @@ Allows the user to look up the details of a particular student.
 **Format**: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`
 
 * The student whose name, student id or module code is specified after the `find` command will appear in the resulting list.
+* Search fields must be exact matches in order for the `find` command to display the result. For example, given a student John in TAPA, `find n/John` will successfully display this student but not `find n/Joh` or `find n/Jo`.
 
 **Example**:
 * `find n/John`
