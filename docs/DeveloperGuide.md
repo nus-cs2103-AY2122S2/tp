@@ -299,7 +299,7 @@ Step 4. The filtered list of persons is displayed to the user.
 
 The following sequence diagram shows how the `findstatus` operation works:
 
-![UndoSequenceDiagram](images/FindStatusSequenceDiagram.png)
+![FindStatusSequenceDiagram](images/FindStatusSequenceDiagram.png)
 
 <div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStatusCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -355,7 +355,7 @@ Step 4. The filtered list of perons is displayed to the user.
 
 The following sequence diagram shows how the `findclasscode` operation works:
 
-![UndoSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
+![FindClassCodeSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
 
 <div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindClassCodeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -431,7 +431,7 @@ Step 4. The filtered list of perons is displayed to the user.
 
 The following sequence diagram shows how the `findactivity` operation works:
 
-![UndoSequenceDiagram](images/FindActivitySequenceDiagram.png)
+![FindActivitySequenceDiagram](images/FindActivitySequenceDiagram.png)
 
 <div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindActivityCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
