@@ -23,6 +23,7 @@ import seedu.ibook.model.product.filters.ProductFilter;
 
 public class TypicalProductFilters {
     public static final NameFilter NAME_FILTER_KAYA = new NameFilter(new Name("Kaya Bread"));
+    public static final CategoryFilter CATEGORY_FILTER_BREAD = new CategoryFilter(new Category("Bread"));
 
     public static final NameFilter NAME_FILTER_A = new NameFilter(new Name(VALID_NAME_A));
     public static final NameFilter NAME_FILTER_B = new NameFilter(new Name(VALID_NAME_B));
