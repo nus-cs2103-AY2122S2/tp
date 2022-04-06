@@ -24,26 +24,21 @@ public class AddBookingCommandParser implements Parser<AddBookingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddBookingCommand parse(String args) throws ParseException {
-        try {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME);
 
-            if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddBookingCommand.MESSAGE_USAGE));
-            }
-
-            Integer customerIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CUSTOMERINDEX)
-                    .get()).getZeroBased();
-            Integer serviceIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SERVICEINDEX)
-                    .get()).getZeroBased();
-            BookingDateTime bookingDateTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_STARTTIME).get());
-
-            return new AddBookingCommand(customerIndex, serviceIndex, bookingDateTime);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBookingCommand.MESSAGE_USAGE), pe);
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddBookingCommand.MESSAGE_USAGE));
         }
+
+        Integer customerIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CUSTOMERINDEX)
+                .get()).getZeroBased();
+        Integer serviceIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SERVICEINDEX)
+                .get()).getZeroBased();
+        BookingDateTime bookingDateTime = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_STARTTIME).get());
+
+        return new AddBookingCommand(customerIndex, serviceIndex, bookingDateTime);
     }
 }

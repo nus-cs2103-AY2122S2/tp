@@ -2,6 +2,8 @@ package seedu.trackbeau.model.util;
 
 import static seedu.trackbeau.logic.parser.booking.AddBookingCommandParser.EMPTY_FEEDBACK_TYPE;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -78,13 +80,24 @@ public class SampleDataUtil {
     }
 
     public static Booking[] getSampleBookings() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+
         return new Booking[] {
             new Booking(getSampleCustomers()[0], getSampleServices()[0],
-                    new BookingDateTime("10-10-2022 10:30"), new Feedback(EMPTY_FEEDBACK_TYPE)),
+                new BookingDateTime(dateTimeNow.format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE)),
+            new Booking(getSampleCustomers()[0], getSampleServices()[3],
+                new BookingDateTime(dateTimeNow.plusDays(1).format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE)),
             new Booking(getSampleCustomers()[1], getSampleServices()[1],
-                    new BookingDateTime("11-11-2022 11:30"), new Feedback(EMPTY_FEEDBACK_TYPE)),
+                new BookingDateTime(dateTimeNow.plusDays(2).format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE)),
             new Booking(getSampleCustomers()[2], getSampleServices()[2],
-                    new BookingDateTime("12-12-2022 12:30"), new Feedback(EMPTY_FEEDBACK_TYPE))
+                new BookingDateTime(dateTimeNow.plusDays(3).format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE)),
+            new Booking(getSampleCustomers()[0], getSampleServices()[2],
+                new BookingDateTime(dateTimeNow.minusDays(1).format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE)),
+            new Booking(getSampleCustomers()[1], getSampleServices()[2],
+                new BookingDateTime(dateTimeNow.minusDays(2).format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE)),
+            new Booking(getSampleCustomers()[2], getSampleServices()[2],
+                new BookingDateTime(dateTimeNow.minusDays(3).format(formatter)), new Feedback(EMPTY_FEEDBACK_TYPE))
         };
     }
 

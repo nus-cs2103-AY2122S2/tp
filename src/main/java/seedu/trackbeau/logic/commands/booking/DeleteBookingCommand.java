@@ -44,7 +44,11 @@ public class DeleteBookingCommand extends Command {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX);
             }
-            bookingsToDelete.add(lastShownList.get(targetIndex.getZeroBased()));
+            Booking bookingToDelete = lastShownList.get(targetIndex.getZeroBased());
+            if (bookingsToDelete.contains(bookingToDelete)) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATED_INDEX);
+            }
+            bookingsToDelete.add(bookingToDelete);
         }
 
         StringBuilder sb = new StringBuilder();

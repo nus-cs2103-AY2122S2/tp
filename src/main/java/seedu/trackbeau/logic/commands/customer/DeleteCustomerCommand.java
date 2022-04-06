@@ -70,14 +70,18 @@ public class DeleteCustomerCommand extends Command {
         List<Booking> lastShownBookingsList = model.getFilteredBookingList();
 
         ArrayList<Customer> customersToDelete = new ArrayList<>();
-        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownCustomersList, lastShownBookingsList);
 
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownCustomersList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
             }
-            customersToDelete.add(lastShownCustomersList.get(targetIndex.getZeroBased()));
+            Customer customerToDelete = lastShownCustomersList.get(targetIndex.getZeroBased());
+            if (customersToDelete.contains(customerToDelete)) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATED_INDEX);
+            }
+            customersToDelete.add(customerToDelete);
         }
+        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownCustomersList, lastShownBookingsList);
 
         StringBuilder sbCustomers = new StringBuilder();
         StringBuilder sbBookings = new StringBuilder();

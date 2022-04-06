@@ -70,14 +70,19 @@ public class DeleteServiceCommand extends Command {
         List<Booking> lastShownBookingList = model.getFilteredBookingList();
 
         ArrayList<Service> servicesToDelete = new ArrayList<>();
-        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownServiceList, lastShownBookingList);
 
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownServiceList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
             }
-            servicesToDelete.add(lastShownServiceList.get(targetIndex.getZeroBased()));
+            Service serviceToDelete = lastShownServiceList.get(targetIndex.getZeroBased());
+            if (servicesToDelete.contains(serviceToDelete)) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATED_INDEX);
+            }
+            servicesToDelete.add(serviceToDelete);
         }
+
+        ArrayList<Booking> bookingsToDelete = bookingsToDelete(lastShownServiceList, lastShownBookingList);
 
         StringBuilder sbServices = new StringBuilder();
         StringBuilder sbBookings = new StringBuilder();
