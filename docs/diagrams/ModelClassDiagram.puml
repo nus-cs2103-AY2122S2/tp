@@ -20,9 +20,11 @@ Class Name
 Class GithubUsername
 Class StudentId
 Class Tag
-Class LabList
-Class MasterLabList
-Class Lab
+Package lab {
+    Class LabList
+    Class MasterLabList
+    Class Lab
+    }
 }
 
 Class HiddenOutside #FFFFFF
