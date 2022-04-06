@@ -41,7 +41,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException, FileNotFoundException {
+    public CommandResult execute(String commandText) throws CommandException, FileNotFoundException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;

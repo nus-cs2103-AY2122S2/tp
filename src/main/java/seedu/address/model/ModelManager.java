@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Phone;
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
             + "Gender,Hire status,Tags,Position,Description,Number of openings,Number of offers,Requirements";
     private static final String POSITION_CSV_HEADER = "Position,Description,Number of openings,Number of offers"
             + "Requirements";
+    private static final String MESSAGE_CLOSE_CSV = "Please close the opened CSV before export";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -244,15 +247,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvApplicant() throws FileNotFoundException {
-        File csvOutputFile = new File(APPLICANT_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(APPLICANT_CSV_HEADER);
-            filteredApplicants.stream()
-                    .map(Applicant::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert(csvOutputFile.exists());
+    public void exportCsvApplicant() throws FileNotFoundException, ParseException {
+        exportCsv(APPLICANT_CSV_FILE, APPLICANT_CSV_HEADER, filteredApplicants.stream()
+                .map(Applicant::convertToCsv));
     }
 
     //=========== Filtered Interview List Accessors =============================================================
@@ -297,15 +294,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvInterview() throws FileNotFoundException {
-        File csvOutputFile = new File(INTERVIEW_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(INTERVIEW_CSV_HEADER);
-            filteredInterviews.stream()
-                    .map(Interview::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert (csvOutputFile.exists());
+    public void exportCsvInterview() throws FileNotFoundException, ParseException {
+        exportCsv(INTERVIEW_CSV_FILE, INTERVIEW_CSV_HEADER, filteredInterviews.stream()
+                .map(Interview::convertToCsv));
     }
 
     @Override
@@ -340,15 +331,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvPosition() throws FileNotFoundException {
-        File csvOutputFile = new File(POSITION_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(POSITION_CSV_HEADER);
-            filteredPositions.stream()
-                    .map(Position::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert(csvOutputFile.exists());
+    public void exportCsvPosition() throws FileNotFoundException, ParseException {
+        exportCsv(POSITION_CSV_FILE, POSITION_CSV_HEADER, filteredPositions.stream()
+                .map(Position::convertToCsv));
     }
 
     //=========== Utility methods =============================================================
@@ -369,5 +354,17 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplicants.equals(other.filteredApplicants);
+    }
+
+    private void exportCsv(String csvFile, String csvHeader, Stream<String> stringStream) throws ParseException {
+        File csvOutputFile = new File(csvFile);
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            pw.println(csvHeader);
+            stringStream
+                    .forEach(pw::println);
+            assert (csvOutputFile.exists());
+        } catch (FileNotFoundException exception) {
+            throw new ParseException(MESSAGE_CLOSE_CSV);
+        }
     }
 }
