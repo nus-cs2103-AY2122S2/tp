@@ -392,7 +392,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 :exclamation: **Caution:** 
 * You cannot undo the sort once you have applied it! 
 * Sort will not affect the list permanently. Trackermon rearranges the show list one time after a successful sort command! 
-* After a successful sort command followed by an add command will still add the new show to the last index!  
+* A successful sort command followed by an add command will still result in the new show being added to the last index!  
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
@@ -462,7 +462,7 @@ So, use the "tagratingstatusname" as the `SEQUENCE` if you want to swap the orde
 4. name
 
 Additionally, when using `so/` prefix, Trackermon will check if the required criteria is presented in your `SEQUENCE`.
-So if you use `sort n/asc s/asc so/haha`, the required criteria are name and status. As name and status are not spelt in full for `SEQUENCE`, Trackermon will tell you the input is invalid!
+So if you use `sort n/asc s/asc so/haha`, the required criteria are name and status. As name and status are not provided, Trackermon will tell you the input is invalid!
 </div>
 
 <div markdown="block" class="alert alert-warning">
@@ -480,7 +480,7 @@ So if you use `sort n/asc s/asc so/haha`, the required criteria are name and sta
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
 * List the `SEQUENCE` by listing out the full name of the criteria used in the order you want.
 * For example: you want to sort by rating, then status, followed by name, and finally tag, `SEQUENCE` will be "ratingstatusnametag"
-* `SEQUENCE` input is case-insensitive and space inbetween the criteria does not matter. So the input "RaTing Status NAMETag" works too!
+* `SEQUENCE` input is case-insensitive and spaces between the criteria does not matter. So the input "RaTing Status NAMETag" works too!
 * If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!
 </div>
 
@@ -488,7 +488,7 @@ So if you use `sort n/asc s/asc so/haha`, the required criteria are name and sta
 
 **:information_source: Notes about Sort:**<br>
 * By not entering any prefixes, it will sort by name in ascending order.
-* Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
+* Enter the right amount of prefixes! For example: use only s/ if you are sorting by status.
 * The `ORDER` must be asc or dsc!
 * The `SEQUENCE` must contain the full name of all the criteria used!
 * For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.

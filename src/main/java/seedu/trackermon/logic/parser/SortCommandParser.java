@@ -40,7 +40,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     private static HashMap<Comparator<Show>, Integer> order = new HashMap<>();
     public static final String MESSAGE_INVALID_SO = "Invalid input for so/,"
             + " please provide the exact number of correctly spelt names in a sequence you want."
-            + " For example: sorting status than tags, " + SortCommand.COMMAND_WORD
+            + " For example: sorting status then tags, " + SortCommand.COMMAND_WORD
             + " " + PREFIX_TAG + VALUE_ASC.toLowerCase() + " " + PREFIX_STATUS + VALUE_ASC.toLowerCase() + " "
             + PREFIX_SORT_ORDER + VALUE_ORDER_STATUS.toLowerCase() + VALUE_ORDER_TAG.toLowerCase();
 
