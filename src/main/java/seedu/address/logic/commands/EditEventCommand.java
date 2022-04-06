@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
+import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_ONLY;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -48,7 +48,8 @@ public class EditEventCommand extends Command {
             + PREFIX_DATE + "2022-04-20 "
             + PREFIX_TIME + "12:20";
 
-    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s.\n"
+            + "Listing all unarchived events.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the list of events.";
 
     private final Index index;
@@ -88,7 +89,7 @@ public class EditEventCommand extends Command {
         }
 
         model.setEvent(eventToEdit, editedEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL);
+        model.showEventList(PREDICATE_SHOW_UNARCHIVED_ONLY);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
 
