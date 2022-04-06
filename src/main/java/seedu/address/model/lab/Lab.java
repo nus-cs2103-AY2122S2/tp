@@ -77,10 +77,14 @@ public class Lab {
      * Returns true if a given string is a valid lab number.
      */
     public static boolean isValidLab(String test) {
-        if (!test.matches(VALIDATION_REGEX)) {
-            return false;
-        }
+        return isValidString(test) && isIntegerInBounds(test);
+    }
 
+    private static boolean isValidString(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    private static boolean isIntegerInBounds(String test) {
         try {
             int labNum = Integer.parseInt(test);
             return labNum >= 0 && labNum <= 20;
