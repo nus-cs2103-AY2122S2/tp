@@ -114,7 +114,7 @@ Adds a client to the HustleBook.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SALARY] [i/INFO] [d/DATE] [f/FLAG] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client's meeting can be scheduled through meet command after add the client into the HustleBook
+A client's meeting can be scheduled through meet command after adding the client into the HustleBook
 </div>
 
 * HustleBook does not allow duplicate clients to be stored.
