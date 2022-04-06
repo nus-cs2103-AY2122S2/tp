@@ -276,7 +276,7 @@ Adds a patient's medical information to MedBook.
 Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
-* We recommend inputting blood type using ABO blood system (eg. AB), height using centimeters (eg. 185 cm), weight using kilograms (eg. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
+* We recommend inputting blood type using ABO blood group system (eg. AB), height using centimeters (eg. 185 cm), weight using kilograms (eg. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
 
 
 Examples:

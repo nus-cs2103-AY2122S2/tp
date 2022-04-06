@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 public class BloodType {
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid blood type input. "
-            + "We recommend inputting blood type using ABO blood system (eg. AB), "
-            + "but we allow any other blood type input values (eg. other blood system). "
+            + "We recommend inputting blood type using ABO blood group system (eg. AB), "
+            + "but we allow any other blood type input values (eg. other blood group system). "
             + "Blood type parameter can take any values, and it should not be blank.";
 
     /*
