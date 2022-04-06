@@ -64,7 +64,6 @@ public class ProductCard extends UiComponent<HBox> {
         this.index = index;
         this.product = product;
         this.isShowingItems = false;
-        this.itemTable = new ItemTable(getMainWindow(), product, index);
         initRotate();
         populateField();
     }
