@@ -308,6 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA      | update status of a lab when a student has submitted it           | keep track of which labs students have submitted                                                            |
 | `* * *`  | TA      | update status of a lab and add marks to it when I have graded it | keep track of what labs I have graded and how I have graded them                                            |
 | `* * *`  | TA      | edit status and marks of a lab                                   | edit lab statuses and marks I changed or entered by mistake                                                 |
+| `* * *`  | TA      | remove a lab assignment from the TAddressBook                    | delete any labs that i've previously inputted by accident                                                   |
 | `* *`    | TA      | add students without filling in all attributes                   | keep track of students even if I do not know all their details                                              |
 
 *{More to be added}*
