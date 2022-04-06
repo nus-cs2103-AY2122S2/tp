@@ -36,6 +36,8 @@ public class AddItemCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New item added to %1$s:\n%2$s";
     public static final String MESSAGE_EXCESS_QUANTITY =
             "Total quantity of an item cannot be larger than " + Quantity.MAX_QUANTITY;
+    public static final String MESSAGE_MINIMUM_QUANTITY =
+            "Total quantity of an item must be larger than 0";
 
     private final Index productIndex;
     private final ItemDescriptor toAdd;
@@ -57,6 +59,9 @@ public class AddItemCommand extends Command {
 
         model.prepareIBookForChanges();
 
+        if (newItem.isEmpty()) {
+            throw new CommandException(MESSAGE_MINIMUM_QUANTITY);
+        }
         if (!product.canAddItem(newItem)) {
             throw new CommandException(MESSAGE_EXCESS_QUANTITY);
         }

@@ -14,7 +14,7 @@ public class Quantity {
     /*
      * Must be a non-negative integer at most Quantity.MAX_QUANTITY.
      */
-    public static final String VALIDATION_REGEX = "\\d{1,6}";
+    public static final String VALIDATION_REGEX = "0*\\d{1,6}";
 
     public final Integer quantity;
 
