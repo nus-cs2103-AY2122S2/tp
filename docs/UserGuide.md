@@ -119,6 +119,7 @@ A client's data can be added in the future through edit command
 
 * `d/DATE` will be set to today's date by default if not specified.
   * `DATE` has to be in the format **YYYY-MM-DD**.
+  * `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
 * `i/INFO` will be set to `No further info` by default if not specified.
 * `t/TAG` will be empty by default if not specified.
 * `f/FLAG` will be set to `false` by default if not specified.
@@ -181,6 +182,7 @@ The same command can be used to reschedule a meeting with the client.
 Format: `meet NAME d/DATE t/TIME`
 
 * `DATE` input must be in `YYYY-MM-DD` format
+* `DATE` accepts any date (past or future) as long as it is valid. For example, `2022-02-29` is invalid as 2022 is not a leap year.
 * `TIME` input must be in 24-hr format of `HHmm`.
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
     of the list shown.
