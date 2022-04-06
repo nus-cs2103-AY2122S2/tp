@@ -44,6 +44,7 @@ public class AddTagCommand extends Command {
      */
     public AddTagCommand(Index index, ArrayList<Tag> tags) {
         requireNonNull(index);
+        requireNonNull(tags);
         this.index = index;
         tagsToAdd = tags;
     }
@@ -72,7 +73,6 @@ public class AddTagCommand extends Command {
             tagList.add(tag);
         }
 
-        System.out.println(tagList);
         newPerson.setTags(tagList);
         return newPerson;
     }
@@ -81,6 +81,7 @@ public class AddTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddTagCommand // instanceof handles nulls
+                && index.equals(((AddTagCommand) other).index)
                 && tagsToAdd.equals(((AddTagCommand) other).tagsToAdd));
     }
 }
