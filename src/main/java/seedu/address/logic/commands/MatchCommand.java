@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.seller.AllFieldsMatchBuyerPredicate;
 
 
@@ -39,6 +40,10 @@ public class MatchCommand extends Command {
         }
 
         Buyer buyer = buyerList.get(index.getZeroBased());
+
+        if (buyer.getPropertyToBuy() instanceof NullPropertyToBuy) {
+            throw new CommandException(Messages.MESSAGE_NO_PROPERTY_ADDED);
+        }
 
         model.updateFilteredSellerList(new AllFieldsMatchBuyerPredicate(buyer));
 

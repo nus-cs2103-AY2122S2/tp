@@ -3,11 +3,7 @@ package seedu.address.model.seller;
 import java.util.function.Predicate;
 
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.property.House;
-import seedu.address.model.property.HouseType;
-import seedu.address.model.property.PriceRange;
-import seedu.address.model.property.PropertyToBuy;
-import seedu.address.model.property.PropertyToSell;
+import seedu.address.model.property.*;
 
 /**
  * Tests that a {@code Seller}'s {@code PropertyToSell} matches the demand
@@ -32,7 +28,9 @@ public class AllFieldsMatchBuyerPredicate implements Predicate<Seller> {
      */
     @Override
     public boolean test(Seller seller) {
+
         PropertyToBuy propertyToBuy = getPropertyToBuy();
+
         PropertyToSell propertyToSell = getPropertyToSell(seller);
 
         PriceRange buyRange = getBuyRange(propertyToBuy);
@@ -42,10 +40,13 @@ public class AllFieldsMatchBuyerPredicate implements Predicate<Seller> {
 
         House houseToBuy = propertyToBuy.getHouse();
         House houseToSell = propertyToSell.getHouse();
-        boolean isEqualHouse = houseToBuy.equals(houseToSell)
-                || houseToBuy.getHouseType().equals(HouseType.UNSPECIFIED);
 
-        return isMatchedPrices && isEqualHouse;
+        //either the houses are exactly the same or, buyer house type is unspecified and the location matches.
+        boolean isMatchedHouse = houseToBuy.equals(houseToSell)
+                || (houseToBuy.getHouseType().equals(HouseType.UNSPECIFIED)
+                        && houseToBuy.getLocation().equals(houseToSell.getLocation()));
+
+        return isMatchedPrices && isMatchedHouse;
     }
 
     public PropertyToBuy getPropertyToBuy() {
