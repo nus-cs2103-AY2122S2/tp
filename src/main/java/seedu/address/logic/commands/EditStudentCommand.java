@@ -40,14 +40,14 @@ public class EditStudentCommand extends Command {
             + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_STUDENT_NAME + "NAME] "
-            + "[" + PREFIX_STUDENT_PHONE + "PHONE] "
-            + "[" + PREFIX_STUDENT_EMAIL + "EMAIL] "
-            + "[" + PREFIX_STUDENT_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_STUDENT_TAG + "TAG]...\n"
+            + "[" + PREFIX_STUDENT_NAME + " NAME] "
+            + "[" + PREFIX_STUDENT_PHONE + " PHONE] "
+            + "[" + PREFIX_STUDENT_EMAIL + " EMAIL] "
+            + "[" + PREFIX_STUDENT_ADDRESS + " ADDRESS] "
+            + "[" + PREFIX_STUDENT_TAG + " TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENT_PHONE + "91234567 "
-            + PREFIX_STUDENT_EMAIL + "johndoe@example.com";
+            + PREFIX_STUDENT_PHONE + " 91234567 "
+            + PREFIX_STUDENT_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

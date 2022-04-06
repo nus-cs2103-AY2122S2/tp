@@ -56,6 +56,10 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
   * e.g. in `addstudent -n <STUDENT_NAME>`, `<STUDENT_NAME>` is a parameter which 
   can be used as `addstudent -n John Doe`.
 
+* **Words in `[SQUARE BRACKETS]` are parameters that are optional.**
+  * e.g. in the command `editstudent INDEX [-n NAME] [-p PHONE]...`, `[-n NAME]` and `[-p PHONE]` are optional 
+  parameters.
+
 * **Parameters can be in any order.**
   * e.g. if the command specifies `-n <LESSON_NAME> -d <DATE/START_DATE> -t <START_TIME>`, <br>
   `-d <DATE / START_DATE> -t <START_TIME> -n <lesson_NAME>` is also acceptable.
