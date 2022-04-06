@@ -116,21 +116,6 @@ public interface Model {
     boolean hasConflictingInterview(Interview interview);
 
     /**
-     * Returns true if an interview can be passed.
-     */
-    boolean isPassableInterview(Interview interview);
-
-    /**
-     * Returns true if an interview can be rejected.
-     */
-    boolean isRejectableInterview(Interview interview);
-
-    /**
-     * Returns true if an interview can be accepted.
-     */
-    boolean isAcceptableInterview(Interview interview);
-
-    /**
      * Deletes the given interview.
      * The interview must exist in the address book.
      */
