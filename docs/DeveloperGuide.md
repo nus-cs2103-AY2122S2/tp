@@ -19,6 +19,8 @@ title: Developer Guide
         * [Design considerations](#design-considerations-edit)
     * [Delete role feature](#delete-role-feature)
       * [Implementation](#implementation-delete)
+    * [Reminder feature](#reminder-feature)
+      * [Implementation](#implementation-reminder)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#requirements)
   * [Product scope](#product-scope)
@@ -32,6 +34,7 @@ title: Developer Guide
   * [Editing a company](#editing-a-company)
   * [Deleting a company](#deleting-a-company)
   * [Editing a role](#editing-a-role)
+  * [Using the reminder feature](#using-reminders)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -295,6 +298,9 @@ Given below is an example scenario on how the reminder feature works:
 
 The following sequence diagram shows how the reminder feature works:
 ![Sequence diagram of the Reminder feature](images/ReminderDiagram.png)
+
+The following activity diagram summarises what happens when the user opens the application to see upcoming reminders:
+![Activity diagram of the Reminder feature](images/ReminderActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 

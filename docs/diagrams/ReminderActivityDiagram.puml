@@ -1,0 +1,18 @@
+@startuml
+start
+:User starts up the application;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+:Tinner runs through Company List and adds upcoming roles
+and associated companies to the reminder list that have
+reminder dates that are within the reminder window;
+if () then ([reminder list is not empty])
+    :Reminder pane displays the relevant reminder objects
+    in chronological order;
+else ([else])
+    :Reminder pane notifies user that there are
+    no upcoming reminders;
+endif
+stop
+@enduml
