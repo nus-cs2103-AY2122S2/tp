@@ -10,10 +10,10 @@ import static seedu.tinner.commons.util.AppUtil.checkArgument;
 public class RoleName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, spaces and an optional pair of round brackets, "
-                    + "and it should not be blank";
+            "Role names should only contain alphanumeric characters, spaces and an optional pair of round brackets, "
+                    + "but not blank, and have a character limit of at most 30";
 
-    /*
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -36,7 +36,7 @@ public class RoleName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX) && areValidBrackets(test);
+        return (test.length() <= 30) && (test.matches(VALIDATION_REGEX)) && areValidBrackets(test);
     }
 
     private static boolean areValidBrackets(String test) {
