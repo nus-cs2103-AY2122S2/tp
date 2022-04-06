@@ -130,7 +130,7 @@ Given below are my contributions to the project.
 
 * Refactored project's Java package to manageezpz ([#60](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/60))
 * Updated the GUI of the Help Window to replace the user guide URL and showcase the feature of copying Employee Details to Computer Clipboard ([#247](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/247))
-* PRs reviewed (with non-trivial review comments) : [#108](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/108), [#145](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/145), [#156](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/156), [#161](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/161) 
+* PRs reviewed (with non-trivial review comments) : [#108](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/108), [#145](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/145), [#156](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/156), [#161](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/161), [#257](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/257)
 * Reported bugs and suggestions for other team in the same CS2103/T class : [PE Dry Run](https://github.com/dannytayjy/ped/issues)
 
 --------------------------------------------------------------------------------------------------------------------
