@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_INDEX_OR_PREFIX_PROVIDED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
@@ -22,7 +23,7 @@ public class AssignCommandParser implements Parser<AssignCommand> {
             Index studentIndex = ParserUtil.parseIndex(argMultiMap.getValue(PREFIX_STUDENT).get());
             return new AssignCommand(studentIndex, lessonIndex);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_NO_INDEX_OR_PREFIX_PROVIDED, AssignCommand.MESSAGE_USAGE));
         }
     }
 }
