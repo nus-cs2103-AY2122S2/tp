@@ -48,10 +48,10 @@
                     </VBox>
                     <VBox HBox.hgrow="ALWAYS">
                        <HBox spacing="3.0">
-                          <Label styleClass="field-label" text="Price"/>
+                          <Label styleClass="field-label" text="Category"/>
                           <Label alignment="CENTER" text="*" styleClass="alert"/>
                        </HBox>
-                       <TextField fx:id="price" promptText="3.33">
+                       <TextField fx:id="category" promptText="Noodles">
                           <VBox.margin>
                              <Insets top="5.0"/>
                           </VBox.margin>
@@ -59,9 +59,10 @@
                     </VBox>
                     <VBox HBox.hgrow="ALWAYS">
                        <HBox spacing="3.0">
-                          <Label styleClass="field-label" text="Category"/>
+                          <Label styleClass="field-label" text="Price"/>
+                          <Label alignment="CENTER" text="*" styleClass="alert"/>
                        </HBox>
-                       <TextField fx:id="category" promptText="Noodles">
+                       <TextField fx:id="price" promptText="3.33">
                           <VBox.margin>
                              <Insets top="5.0"/>
                           </VBox.margin>

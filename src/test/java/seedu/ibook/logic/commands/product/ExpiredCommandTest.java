@@ -50,12 +50,12 @@ public class ExpiredCommandTest {
         assertEquals(model.getFilteredProductList(), Arrays.asList(KAYA_BREAD, PEANUT_BUTTER_BREAD));
         for (Product p: model.getFilteredProductList()) {
             if (p.equals(KAYA_BREAD)) {
-                assertEquals(p.getFilteredItems().getInternalList(),
+                assertEquals(p.getFilteredItems(),
                         Arrays.asList(Q5_2020_01_01.toItem(p), Q5_2022_03_01.toItem(p)));
             }
 
             if (p.equals(PEANUT_BUTTER_BREAD)) {
-                assertEquals(p.getFilteredItems().getInternalList(),
+                assertEquals(p.getFilteredItems(),
                         Arrays.asList(Q5_2020_01_01.toItem(p), Q5_2022_03_01.toItem(p)));
             }
 

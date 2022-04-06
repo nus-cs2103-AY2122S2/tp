@@ -10,16 +10,17 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.ibook.commons.core.Distinguishable;
 import seedu.ibook.model.item.ExpiryDate;
-import seedu.ibook.model.item.FilteredItemList;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.ItemDescriptor;
 import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.item.UniqueItemList;
 
 /**
- * Represents a Product in the iBook.
+ * Represents a Product in the ibook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Product implements Distinguishable<Product> {
@@ -36,7 +37,7 @@ public class Product implements Distinguishable<Product> {
     private final DiscountRate discountRate;
     private final DiscountStart discountStart;
     private final UniqueItemList items = new UniqueItemList();
-    private final FilteredItemList filteredItems;
+    private final FilteredList<Item> filteredItems;
 
     /**
      * Every field must be present and not null.
@@ -60,7 +61,7 @@ public class Product implements Distinguishable<Product> {
         this.discountRate = discountRate;
         this.discountStart = discountStart;
         this.items.setItems(linkItemToProduct(items));
-        filteredItems = new FilteredItemList(this.items);
+        filteredItems = new FilteredList<>(this.items.asUnmodifiableObservableList());
     }
 
     private List<Item> linkItemToProduct(List<? extends ItemDescriptor> items) {
@@ -95,7 +96,7 @@ public class Product implements Distinguishable<Product> {
         return items;
     }
 
-    public FilteredItemList getFilteredItems() {
+    public ObservableList<Item> getFilteredItems() {
         return filteredItems;
     }
 

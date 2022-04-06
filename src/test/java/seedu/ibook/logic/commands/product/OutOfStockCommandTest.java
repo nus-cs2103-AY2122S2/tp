@@ -49,7 +49,7 @@ public class OutOfStockCommandTest {
         assertEquals(model.getFilteredProductList(), Arrays.asList(PEANUT_BUTTER_BREAD));
         for (Product p: model.getFilteredProductList()) {
             assertEquals(p, PEANUT_BUTTER_BREAD);
-            assertEquals(p.getFilteredItems().getInternalList(),
+            assertEquals(p.getFilteredItems(),
                     Arrays.asList(Q0_2022_03_01.toItem(PEANUT_BUTTER_BREAD),
                             Q0_2022_03_02.toItem(PEANUT_BUTTER_BREAD)));
         }

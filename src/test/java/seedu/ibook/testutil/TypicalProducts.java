@@ -55,7 +55,6 @@ public class TypicalProducts {
             .withPrice("2.50")
             .withDiscountRate("30")
             .withDiscountStart("4").build();
-
     public static final Product KAYA_BREAD_WITH_ITEMS = new ProductBuilder().withName("Kaya Bread")
             .withCategory("Bread")
             .withDescription("Kaya on bread")

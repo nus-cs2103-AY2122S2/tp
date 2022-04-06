@@ -40,16 +40,5 @@ public class Filter extends UiComponent<HBox> {
     @FXML
     private void handleRemove() {
         getMainWindow().removeProductFilter(filter);
-        getMainWindow().setFeedbackToUser(removeFeedback());
-    }
-
-    private String removeFeedback() {
-        if (filter.getValue().isEmpty()) {
-            return String.format("The filter for %s has been removed",
-                    type.getText());
-        } else {
-            return String.format("The filter for %s : %s has been removed",
-                    type.getText(), value.getText());
-        }
     }
 }

@@ -42,7 +42,6 @@ public class DeleteItemCommand extends Command {
         model.prepareIBookForChanges();
         model.deleteItem(targetProduct, itemToDelete);
         model.saveIBookChanges();
-        model.clearProductFilters();
 
         return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete));
     }

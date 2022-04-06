@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Product's name in the iBook. Names are case insensitive.
+ * Represents a Product's name in the ibook.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
@@ -46,8 +46,7 @@ public class Name {
      * Checks if the name contains the keyword.
      */
     public boolean contains(Name keyword) {
-        String key = keyword.fullName.toLowerCase();
-        return fullName.toLowerCase().contains(key);
+        return fullName.contains(keyword.toString());
     }
 
     @Override
@@ -59,7 +58,7 @@ public class Name {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
+                && fullName.equals(((Name) other).fullName)); // state check
     }
 
     @Override

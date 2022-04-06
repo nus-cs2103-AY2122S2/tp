@@ -2,7 +2,6 @@ package seedu.ibook.model.product.filters;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_A;
 import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_B;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
@@ -24,22 +23,6 @@ class NameFilterTest {
     void test_partialName_match() {
         NameFilter partialNameA = new NameFilter(new Name("A"));
         assertTrue(partialNameA.test(PRODUCT_A));
-    }
-
-    @Test
-    void test_caseInsensitiveExactName_match() {
-        NameFilter lowerNameA = new NameFilter(new Name(VALID_NAME_A.toLowerCase()));
-        NameFilter upperNameA = new NameFilter(new Name(VALID_NAME_A.toUpperCase()));
-        assertTrue(lowerNameA.test(PRODUCT_A));
-        assertTrue(upperNameA.test(PRODUCT_A));
-    }
-
-    @Test
-    void test_caseInsensitivePartialName_match() {
-        NameFilter upperPartial = new NameFilter(new Name("ITE"));
-        NameFilter randomPartial = new NameFilter(new Name("iTeM"));
-        assertTrue(upperPartial.test(PRODUCT_A));
-        assertTrue(randomPartial.test(PRODUCT_A));
     }
 
     @Test

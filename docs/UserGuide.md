@@ -233,14 +233,14 @@ A pop-up window will appear, requiring you to confirm the deletion.
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: You can delete all products that match one or more (tag, value) pairs.
+:bulb: You can delete all items that match one or more (tag, value) pairs.
 
-Format: `delete-all [TAG:VALUE ...]`
+Format: `delete [TAG:VALUE ...]`
 
 * Deletes all products that match the (tag, value) pair.
 * Must include at least one (tag, value) pair.
 
-Example: `delete-all n:Bread`
+Example: `delete n:Bread`
 
 </div>
 
@@ -317,7 +317,7 @@ Format: `delete-all`
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:**
-If you accidentally used this command, you can use `undo` command to undo `delete-all`.
+If you accidentally used this command, you can use `undo` command to undone `delete-all`
 
 </div>
 
@@ -409,27 +409,15 @@ Format: `clear`
 
 #### 3.3.2 Undoing most recent changes : `undo`
 
-Undoes the most recent changes made to iBook.
+Undoes the most recent changes(actions involving add/update/delete product/item) made to iBook.
 
 Format: `undo`
-
-<div markdown="block" class="alert alert-primary">
-
-:bulb: You can only undo commands that made changes to the data in iBook (i.e., commands involving add/update/delete product/item).
-
-</div>
 
 #### 3.3.3 Redoing most recent undone changes : `redo`
 
 Redoes the most recent undone changes made to iBook.
 
 Format: `redo`
-
-<div markdown="block" class="alert alert-primary">
-
-:bulb: You can redo changes that have been undone accidentally by the `undo` command.
-
-</div>
 
 #### 3.3.2 Exiting the program : `exit`
 
