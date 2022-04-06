@@ -378,6 +378,7 @@ Additional details:
 ## Exporting Data : `export`
 
 Exports all data of the specified typo in HireLah to a CSV file. 
+The export csv file will be stored at export_csv folder.
 
 Format: `export -TYPE`
 

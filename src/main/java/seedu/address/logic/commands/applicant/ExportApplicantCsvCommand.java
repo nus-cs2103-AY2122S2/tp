@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 
 
 public class ExportApplicantCsvCommand extends ExportCsvCommand {
-    public static final String MESSAGE_SUCCESS = "Applicant CSV is successfully exported at applicant.csv";
+    public static final String MESSAGE_SUCCESS = "Applicant CSV is successfully exported at export_csv/applicant.csv";
 
     @Override
     public CommandResult execute(Model model) throws CommandException, FileNotFoundException, ExportCsvOpenException {

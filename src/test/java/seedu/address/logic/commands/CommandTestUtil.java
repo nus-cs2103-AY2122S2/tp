@@ -129,11 +129,7 @@ public class CommandTestUtil {
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (ExportCsvOpenException e) {
+        } catch (FileNotFoundException | ExportCsvOpenException | ParseException e) {
             e.printStackTrace();
         }
     }
