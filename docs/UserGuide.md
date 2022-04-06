@@ -297,6 +297,9 @@ Format: `out-of-stock`
 
 Click on the menu bar `Actions` > `Find out of stock items`
 
+:information_source: Filters cannot be stacked with subsequent commands. 
+Thus, expired and out of stock filters cannot be stacked with other filters.
+
 #### 3.1.8 Updating all products : `update-all`
 
 Updates all products in the displayed list.
@@ -462,11 +465,13 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ## 6. Glossary
 
-| Term               | Meanings                                                         |
-|--------------------|------------------------------------------------------------------|
-| **Main stream OS** | `Windows, Linux, Unix, MacOS`                                    |
-| **Products**       | `Goods that are unique in name, price, category and description` |
-| **Items**          | `Copies of products that have different expiry dates`            |
+| Term                              | Meanings                                                                             |
+|-----------------------------------|--------------------------------------------------------------------------------------|
+| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                        |
+| **Products**                      | `Goods that are unique in name, price, category and description`                     |
+| **Items**                         | `Copies of products that have different expiry dates`                                |
+| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`       |
+| **Graphical user interface(GUI)** | `An interface where users interact with graphical icons to interact with the program` |
 
 --------------------------------------------------------------------------------------------------------------------
 
