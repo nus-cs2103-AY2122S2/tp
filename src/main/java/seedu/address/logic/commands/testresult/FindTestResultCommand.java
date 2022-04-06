@@ -11,8 +11,8 @@ import seedu.address.model.Model;
 import seedu.address.model.testresult.TestResultContainsKeywordsPredicate;
 
 /**
- * Finds and lists all test results in address book in the current view whose information contains any of the argument
- * keywords.
+ * Finds and lists all test results in MedBook belonging to the currently viewed patient whose information contains any
+ * of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindTestResultCommand extends Command {
@@ -21,7 +21,7 @@ public class FindTestResultCommand extends Command {
     public static final CommandType COMMAND_TYPE = CommandType.TEST;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all test results in the current page whose information contain any of "
+            + ": Finds all test results belonging to the currently viewed patient whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " CT Scan";

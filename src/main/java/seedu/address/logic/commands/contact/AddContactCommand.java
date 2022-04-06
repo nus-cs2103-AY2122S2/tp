@@ -24,9 +24,8 @@ public class AddContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + PREFIX_TYPE + "contact"
-            + ": Adds a contact to patient in MedBook. \n"
+            + ": Adds a contact to a patient in MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -44,8 +43,8 @@ public class AddContactCommand extends Command {
             + PREFIX_TAG + "father";
 
     public static final String MESSAGE_SUCCESS = "New contact added: \n%1$s";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in patient contact list";
-    public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in this patient's contact list";
+    public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in MedBook";
 
     // Identifier
     private final Nric ownerNric;

@@ -34,23 +34,23 @@ public class ViewConsultationCommand extends Command {
             + PREFIX_TYPE + "consultation "
             + PREFIX_NRIC + "S1234567L";
 
-    private final Nric ownerNric;
+    private final Nric patientNric;
 
     /**
      * Creates an ViewConsultationCommand to view the specified {@code Patient}
      */
-    public ViewConsultationCommand(Nric ownerNric) {
-        requireNonNull(ownerNric);
-        this.ownerNric = ownerNric;
+    public ViewConsultationCommand(Nric patientNric) {
+        requireNonNull(patientNric);
+        this.patientNric = patientNric;
     }
 
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredConsultationList(new ConsultationWithPredicates(ownerNric));
+        model.updateFilteredConsultationList(new ConsultationWithPredicates(patientNric));
 
-        if (!model.hasNric(ownerNric)) {
+        if (!model.hasNric(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
@@ -58,8 +58,8 @@ public class ViewConsultationCommand extends Command {
         String nameAndNric = "";
 
         for (Patient patient : patientList) {
-            if (patient.getNric().equals(ownerNric)) {
-                nameAndNric = patient.getName().toString() + ", " + ownerNric;
+            if (patient.getNric().equals(patientNric)) {
+                nameAndNric = patient.getName().toString() + ", " + patientNric;
             }
         }
 
