@@ -10,9 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,8 +75,8 @@ public class EditApplicantCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST_PERSON, new EditApplicantDescriptor());
-        Applicant editedApplicant = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST, new EditApplicantDescriptor());
+        Applicant editedApplicant = model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
 
@@ -87,11 +87,11 @@ public class EditApplicantCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Applicant applicantInFilteredList = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Applicant applicantInFilteredList = model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased());
         Applicant editedApplicant = new PersonBuilder(applicantInFilteredList).withName(VALID_NAME_BOB).build();
-        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST_PERSON,
+        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST,
                 new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditApplicantCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
@@ -104,20 +104,20 @@ public class EditApplicantCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Applicant firstApplicant = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Applicant firstApplicant = model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased());
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(firstApplicant).build();
-        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_SECOND_PERSON, descriptor);
+        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, EditApplicantCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
         // edit applicant in filtered list into a duplicate in address book
-        Applicant applicantInList = model.getAddressBook().getApplicantList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST_PERSON,
+        Applicant applicantInList = model.getAddressBook().getApplicantList().get(INDEX_SECOND.getZeroBased());
+        EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_FIRST,
                 new EditApplicantDescriptorBuilder(applicantInList).build());
 
         assertCommandFailure(editCommand, model, EditApplicantCommand.MESSAGE_DUPLICATE_PERSON);
@@ -139,8 +139,8 @@ public class EditApplicantCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showPersonAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getApplicantList().size());
 
@@ -152,11 +152,11 @@ public class EditApplicantCommandTest {
 
     @Test
     public void equals() {
-        final EditApplicantCommand standardCommand = new EditApplicantCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditApplicantCommand standardCommand = new EditApplicantCommand(INDEX_FIRST, DESC_AMY);
 
         // same values -> returns true
         EditApplicantDescriptor copyDescriptor = new EditApplicantDescriptor(DESC_AMY);
-        EditApplicantCommand commandWithSameValues = new EditApplicantCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditApplicantCommand commandWithSameValues = new EditApplicantCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -169,10 +169,10 @@ public class EditApplicantCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditApplicantCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditApplicantCommand(INDEX_SECOND, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditApplicantCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditApplicantCommand(INDEX_FIRST, DESC_BOB)));
     }
 
 }
