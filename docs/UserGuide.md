@@ -257,7 +257,7 @@ Function: Find buyers whose selected **field** contain any of the given keywords
 
 Format: `find-b field/KEYWORD1 [MORE_KEYWORDS]`
 
-* The **fields**` are:
+* The **fields** are:
   * name `n/`
   * phone `p/`
   * location `l/`
