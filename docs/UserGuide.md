@@ -166,8 +166,9 @@ Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
-* Only a single product would be added at a time
-* The new product added must not be of the same `NAME` and `CATEGORY`
+* Only a single product would be added at a time.
+* The new product added must not be of the same `NAME` and `CATEGORY`.
+* The `NAME` and the `PRICE` fields cannot be empty.
 
 Examples:
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
