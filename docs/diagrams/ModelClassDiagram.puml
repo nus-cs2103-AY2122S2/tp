@@ -48,7 +48,7 @@ Person *-down--> LabList
 
 LabList -down-> "~*" Lab
 
-MasterLabList .left.|> LabList
+MasterLabList -left-|> LabList
 AddressBook *--> "1" MasterLabList
 
 Name -[hidden]right-> Phone

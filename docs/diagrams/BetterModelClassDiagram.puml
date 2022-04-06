@@ -6,9 +6,12 @@ skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
 AddressBook *-right-> "1" UniqueTagList
+AddressBook *-down-> "1" MasterLabList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
+MasterLabList -down-|> LabList
+LabList *--> "~*" Lab
 UniqueTagList *-right-> "*" Tag
 UniquePersonList -right-> Person
 
@@ -18,4 +21,5 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> LabList
 @enduml
