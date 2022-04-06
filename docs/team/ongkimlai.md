@@ -43,9 +43,11 @@ Given below are my contributions to the project.
 * **Test Case Implementation**:
   * DeleteCommand
   * DeleteCommandParser
+  * TagCommand
   * TagCommandParser
   * RemoveTagCommand
   * RemoveTagCommandParser
+  * JsonAdaptedName
 
 * **Tools**:
   * Integrated Codecov into team repo

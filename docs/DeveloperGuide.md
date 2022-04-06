@@ -328,7 +328,9 @@ the descriptor and simply changes the persons attribute values to the values sta
 #### Current Implementation
 The edit command has now been upgraded to support the functionality for multiple tags. Existing tags of a person will not be affected.
 
+
 ### Find feature
+![The following sequence diagram shows how the removetag operation works:](images/RemoveTagSequenceDiagram.png)
 
 #### Original Implementation
 The existing Find feature in AB3 only allowed contacts to be searched for by name. We added additional functionalities
