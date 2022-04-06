@@ -213,7 +213,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void changeInterface(CommandResult commandResult) {
+    private void changeInterface(CommandResult commandResult) throws CommandException, ParseException {
         boolean event = commandResult.isEvent();
         boolean showInsight = commandResult.isShowInsights();
         boolean isExpandedCard = commandResult.isShowFriendCommand();
@@ -224,6 +224,9 @@ public class MainWindow extends UiPart<Stage> {
             personInsightListPanelPlaceholder.getChildren().set(0, personInsightListPanel.getRoot());
             personInsightListPanelPlaceholder.requestFocus();
         } else if (event) {
+            logic.execute("lf");
+            personListPanelPlaceholder.requestFocus();
+            personListPanelPlaceholder.toFront();
             tabs.getSelectionModel().select(eventsListTab);
             eventListPanelPlaceholder.requestFocus();
         } else {
