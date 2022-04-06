@@ -103,6 +103,24 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Returns true if this event's date and time is before the system's date and time.
+     *
+     * @return True if this event's date and time is before the system's date and time.
+     */
+    public boolean isBeforeNow() {
+        return getDateTime().isBeforeNow();
+    }
+
+    /**
+     * Returns true if this event's date and time is after the system's date and time.
+     *
+     * @return True if this event's date and time is after the system's date and time.
+     */
+    public boolean isAfterNow() {
+        return getDateTime().isAfterNow();
+    }
+
+    /**
      * Changes the given FriendName from {@code original} to {@code replacement} if
      * it is present in this Event's set of friend names.
      *

@@ -273,6 +273,7 @@ Find events in Amigos whose properties match the given search criteria.
   * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
+* All events, including past ones, will be checked for matches.
 
 **Examples**:
 * `findevent n/dinner ds/20-03-2022` returns events starting from 20 Mar 2022 with an event name containing 'dinner' 
