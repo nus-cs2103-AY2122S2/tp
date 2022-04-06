@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows updated list of all clients.\n"
             + "Optional Parameters: [flag|unflag]";
 
-    public static final String MESSAGE_SUCCESS = "Desired clients are now listed";
+    public static final String MESSAGE_SUCCESS = "Clients are now listed";
 
     private final Predicate<Person> listFilterPredicate;
     public ListCommand(Predicate<Person> listFilterPredicate) {
