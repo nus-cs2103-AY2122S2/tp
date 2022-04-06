@@ -391,7 +391,7 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 :exclamation: **Caution:** 
 * You cannot undo the sort once you have applied it! 
-* Sort will not affect the list permanently, Trackermon rearranges the show list one time after a successful sort command! 
+* Sort will not affect the list permanently. Trackermon rearranges the show list one time after a successful sort command! 
 * After a successful sort command followed by an add command will still add the new show to the last index!  
 </div>
 
