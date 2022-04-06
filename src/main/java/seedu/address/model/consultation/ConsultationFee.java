@@ -9,13 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ConsultationFee {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Fee cannot be blank, and has to have the format: XX.YY, where XX is dollars, YY is cents.";
+            "Fee cannot be blank, and has to have either format: \n"
+                    + "XX.YY, where XX is dollars, YY is cents, OR; \n"
+                    + "XX, where XX is dollars with no cents";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    private static final String VALIDATION_REGEX = "^([0-9][0-9]).([0-9][0-9])$";
+    private static final String VALIDATION_REGEX = "^\\-?[0-9]+(?:\\.[0-9]{2})?$";
 
     private String consultationFee;
 
