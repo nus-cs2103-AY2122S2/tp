@@ -15,7 +15,7 @@ public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     public String getKeyword() {
-        return this.keyword;
+        return this.keyword.toLowerCase();
     }
 
     /**
