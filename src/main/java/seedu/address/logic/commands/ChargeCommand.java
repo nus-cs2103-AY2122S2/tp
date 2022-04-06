@@ -33,7 +33,7 @@ public class ChargeCommand extends Command {
             + "m/03-2022 c/200";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Charge date should be formatted as MM-yyyy!";
 
-    public static final String MESSAGE_COMPUTE_CHARGE_SUCCESS = "%s should be charged $%.2f for the month of %s.";
+    public static final String MESSAGE_COMPUTE_CHARGE_SUCCESS = "%s should be charged $%.2f for %s %d.";
     private final Index index;
     private final YearMonth chargeDate;
     private final Charge charge;
@@ -81,7 +81,7 @@ public class ChargeCommand extends Command {
 
         model.updateFilteredPetList();
         return new CommandResult(generateSuccessMessage(petToCharge.getName(),
-                amountChargeable, getMonthName()));
+                amountChargeable, getMonthName(), chargeDate.getYear()));
     }
 
     /**
@@ -97,8 +97,8 @@ public class ChargeCommand extends Command {
      * Generates a command execution success message
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Name petName, double amountChargeable, String month) {
-        return String.format(MESSAGE_COMPUTE_CHARGE_SUCCESS, petName.toString(), amountChargeable, month);
+    private String generateSuccessMessage(Name petName, double amountChargeable, String month, int year) {
+        return String.format(MESSAGE_COMPUTE_CHARGE_SUCCESS, petName.toString(), amountChargeable, month, year);
     }
 
     @Override
