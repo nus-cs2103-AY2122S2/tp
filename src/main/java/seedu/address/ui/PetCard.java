@@ -93,7 +93,7 @@ public class PetCard extends UiPart<Region> {
      */
     private void setDietTag(Diet diet) {
         if (!pet.getDiet().value.isEmpty()) {
-            dietTag.getChildren().add(DietTag.createDietLabel(pet.getDiet().value));
+            dietTag.getChildren().add(new DietTag(pet.getDiet().value));
         }
     }
 
