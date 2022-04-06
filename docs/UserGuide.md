@@ -73,6 +73,7 @@ or lesson in the viewable lists.**
 
 * In each Feature description, the command word section will tell you what the command words are for each command.
 You may see more than one command word for a command, the second one being the shorter command for more advanced users.
+* Integer refers to a maximum value of 2147483647.
 </div>
 
 ---
@@ -100,6 +101,8 @@ Adds a student with the following attributes:
 * The address, email and tag are optional and can be omitted so that the tutor only keeps the most vital 
 information which is the student's name and phone number.
 * There can be **multiple tags** assigned to one student, as demonstrated in the example above.
+* Student name cannot contain all numbers.
+* Tags are limited to 30 alphanumeric characters with no spaces allowed.
 
 ---
 
