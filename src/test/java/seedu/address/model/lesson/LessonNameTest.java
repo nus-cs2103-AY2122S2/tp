@@ -17,7 +17,8 @@ public class LessonNameTest {
         assertTrue(LessonName.isValidName("Biology 1301")); // alphanumeric w space
         assertTrue(LessonName.isValidName("9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWX")); // 50 characters
         assertTrue(LessonName.isValidName("99999999999999999999999999999999999999999999999999")); // 50 numbers
-        assertTrue(LessonName.isValidName("999999999999999999999ABC99999999999999999999999999"));// 50 alphanumeric
+        assertTrue(LessonName.isValidName("999999999999999999999ABC9999999999999999999"
+                + "9999999")); // 50 alphanumeric
         assertTrue(LessonName.isValidName("999999999999999999999ABC9"
                 + " 999999999999999999999999")); // 50 alphanumeric w space
 

@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.lesson.LessonName;
-
 public class StudentNameTest {
 
     @Test
@@ -28,7 +26,7 @@ public class StudentNameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
         assertTrue(Name.isValidName("9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWX")); // 50 characters
-        assertTrue(Name.isValidName("999999999999999999999ABC99999999999999999999999999"));// 50 alphanumeric
+        assertTrue(Name.isValidName("999999999999999999999ABC99999999999999999999999999")); // 50 alphanumeric
         assertTrue(Name.isValidName("999999999999999999999ABC9"
                 + " 999999999999999999999999")); // 50 alphanumeric w space
 
