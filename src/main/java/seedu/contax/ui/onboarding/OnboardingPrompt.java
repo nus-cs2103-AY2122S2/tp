@@ -43,8 +43,12 @@ public class OnboardingPrompt extends UiPart<Stage> {
         this.mainWindow = mainWindow;
         onboardingWindow = new OnboardingWindow(mainWindow);
         displayMessage.setMinHeight(Region.USE_PREF_SIZE);
-        displayMessage.minHeightProperty().bind(mainWindow.heightProperty().multiply(0.1));
-        displayMessage.minWidthProperty().bind(mainWindow.widthProperty().multiply(0.3));
+        // displayMessage.minHeightProperty().bind(mainWindow.heightProperty().multiply(0.1));
+        // displayMessage.minWidthProperty().bind(mainWindow.widthProperty().multiply(0.3));
+        // root.minHeightProperty().bind(mainWindow.heightProperty().multiply(0.1));
+        // root.minWidthProperty().bind(mainWindow.widthProperty().multiply(0.3));
+        root.setMinHeight(100.0);
+        root.setMinWidth(500.0);
 
 
         displayMessage.setAlignment(Pos.CENTER);
