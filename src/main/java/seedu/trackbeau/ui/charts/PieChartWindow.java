@@ -9,39 +9,44 @@ import javafx.stage.Stage;
 import seedu.trackbeau.commons.core.LogsCenter;
 import seedu.trackbeau.ui.UiPart;
 
-public class SkinChartWindow extends UiPart<Stage> {
-    private static final Logger logger = LogsCenter.getLogger(SkinChartWindow.class);
+public class PieChartWindow extends UiPart<Stage> {
+    private static final Logger logger = LogsCenter.getLogger(PieChartWindow.class);
     private static final String FXML = "PieChartWindow.fxml";
+    private final String loggingValue;
 
     @javafx.fxml.FXML
     private PieChart pieChart;
+
     /**
-     * Creates a new Skin Chart Window.
+     * Creates a new Allergy Chart Window.
      *
-     * @param root Stage to use as the root of the SkinChartWindow.
+     * @param root Stage to use as the root of the AllergyChartWindow.
      */
-    public SkinChartWindow(Stage root) {
+    public PieChartWindow(Stage root, String rootTitle, String chartTitle, String loggingValue) {
         super(FXML, root);
+        this.loggingValue = loggingValue;
         //referenced from https://docs.oracle.com/javafx/2/charts/pie-chart.htm
         Scene scene = new Scene(new Group());
-        root.setTitle("Skin Type Chart");
+        root.setTitle(rootTitle);
         root.setWidth(500);
         root.setHeight(500);
         pieChart.setLabelLineLength(10);
-        pieChart.setTitle("Common Skin Type Amongst Customers"); (
+        pieChart.setTitle(chartTitle); (
                 (Group) scene.getRoot()).getChildren().add(pieChart);
+        pieChart.setLegendVisible(false);
+        pieChart.setMinSize(500, 500);
         root.setScene(scene);
     }
 
     /**
-     * Creates a new SkinChartWindow.
+     * Creates a new AllergyChartWindow.
      */
-    public SkinChartWindow() {
-        this(new Stage());
+    public PieChartWindow(String rootTitle, String chartTitle, String loggingValue) {
+        this(new Stage(), rootTitle, chartTitle, loggingValue);
     }
 
     /**
-     * Shows the SkinChart window.
+     * Shows the AllergyChart window.
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -59,7 +64,7 @@ public class SkinChartWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing allergy chart.");
+        logger.fine(String.format("Showing %s chart.", loggingValue));
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -69,24 +74,23 @@ public class SkinChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the SkinChart window is currently being shown.
+     * Returns true if the AllergyChart window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the SkinChart window.
+     * Hides the AllergyChart window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the SkinChart window.
+     * Focuses on the AllergyChart window.
      */
     public void focus() {
         getRoot().requestFocus();
     }
 }
-
