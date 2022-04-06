@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -15,6 +17,7 @@ public class JsonAdaptedName {
      */
     @JsonCreator
     public JsonAdaptedName(String name) {
+        requireNonNull(name);
         this.name = name;
     }
 
