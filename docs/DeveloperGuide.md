@@ -618,3 +618,4 @@ Guarantees: every company stored in Tinner will be shown
 9. Other incorrect test cases to try: `find`, `find c/`, `find c/ r/`, `find test`, `find a/ b/`
     1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format. 
     
+    
