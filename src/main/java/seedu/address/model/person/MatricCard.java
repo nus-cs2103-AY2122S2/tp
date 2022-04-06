@@ -48,8 +48,7 @@ public class MatricCard {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MatricCard // instanceof handles nulls
-                && value.equals(((MatricCard) other).value) // state check
-                && !value.equals(""));
+                && value.equals(((MatricCard) other).value)); // state check
     }
 
     @Override
