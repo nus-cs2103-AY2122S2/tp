@@ -1,7 +1,6 @@
 package seedu.trackbeau.ui;
 
 import java.text.NumberFormat;
-import java.time.Duration;
 import java.util.Locale;
 
 import javafx.fxml.FXML;
