@@ -45,11 +45,9 @@ public class FindServiceCommandParser implements Parser<FindServiceCommand> {
 
         for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                //parseAddress is used because it allows for all formats except for empty strings
-                //using add will cause the size of the list to be wrong
                 prefixArr.set(i,
                         Arrays.asList(ParserUtil
-                                .parseAddress(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                                .parseFindValues(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
             }
         }
 
