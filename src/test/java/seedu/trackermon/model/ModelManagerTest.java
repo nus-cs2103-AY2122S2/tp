@@ -18,6 +18,9 @@ import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
 import seedu.trackermon.testutil.ShowListBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code ModelManager}.
+ */
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();

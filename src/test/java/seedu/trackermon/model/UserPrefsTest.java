@@ -4,6 +4,9 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code UserPrefs}.
+ */
 public class UserPrefsTest {
 
     @Test
