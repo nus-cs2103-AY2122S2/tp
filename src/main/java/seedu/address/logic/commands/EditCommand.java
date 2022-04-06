@@ -40,8 +40,6 @@ import seedu.address.model.schedule.ScheduleDescription;
 import seedu.address.model.schedule.ScheduleName;
 import seedu.address.model.tag.Tag;
 
-import javax.sound.sampled.Line;
-
 /**
  * Edits the details of an existing person in MyGM.
  */
