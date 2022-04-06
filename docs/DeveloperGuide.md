@@ -55,7 +55,7 @@ The rest of the App consists of four major components.
 
 <div markdown="span" class="alert alert-info">
 
-:bulb: **Quick Note:** The following sections will focus on the four major components `UI`, `Logic`, `Model`, `Storage`.
+:bulb: **Quick Note:** The following sections will focus primarily on the four major components `UI`, `Logic`, `Model`, `Storage`.
 
 </div>
 
@@ -78,20 +78,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/Ui.java)
+The `UI` component,
+
+* executes user commands using the `Logic` component.
+* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Person`, `Tag`, `Appointment` and `AppointmentSlot` objects residing in the `Model`.
+
+<div markdown="span" class="alert alert-secondary">
+
+:information_source: The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/Ui.java).
+
+</div>
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/resources/view/MainWindow.fxml).
-
-The `UI` component,
-
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 There are exactly 3 `ListPanel<T>` in `MainWindow`, corresponding to each type of `Person`, `Appointment` and `Tag`. Each child of a `ListPanel<T>` implements the `RecyclableCard<T>` interface of the same type.
 
@@ -111,7 +115,17 @@ Each `{model}Card` depends on the corresponding `{model}` in the Model component
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/logic/Logic.java)
+The `Logic` component,
+
+* maintains references to both `Model` and `Storage`.
+* parses user inputs into `Command` objects.
+* executes `Command` objects to perform some action.
+
+<div markdown="span" class="alert alert-secondary">
+
+:information_source: The **API** of this component is specified in: [`Logic.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/logic/Logic.java)
+
+</div>
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -139,20 +153,33 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/model/Model.java)
+
+The `Model` component,
+
+* stores and organizes all data entities used within the application in multiple *container classes*.
+* stores the currently 'selected' objects for each data entity in separate _filtered_ lists.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed externally as a `ReadOnlyUserPref` object.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div markdown="span" class="alert alert-secondary">
+
+:information_source: The **API** of this component is specified in: [`Model.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/model/Model.java)
+
+</div>
 
 <img src="images/ModelOverviewClassDiagram.png" width="600" />
 
 The **high-level partial class diagram** above shows how the model component is structured, without showing the details of the inner-workings of the `AddressBook` and `Schedule` models. Separate detailed diagrams for each of the `AddressBook` and `Schedule` subcomponents are shown further below.
 
-The `Model` component,
+The following table summarizes how different data entity objects are organized in `Model`.
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* store the tag data i.e., all `Tag` objects (which are contained in a `UniqueTagList` object).
-* stores the schedule data i.e., all `Appointment` objects (which are contained in a `DisjointAppointmentList` object).
-* stores the currently 'selected' objects for each of the above types (e.g., results of a search query) as separate _filtered_ lists which is exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<ScheduleItem>` and `ObservableList<Tag>` which can be 'observed'. For example, the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+| Data Stored  | Entity        | Container Class           | Exposed Filtered List Getter   |
+|--------------|---------------|---------------------------|--------------------------------|
+| Address Book | `Person`      | `UniquePersonList`        | `getFilteredPersonList()`      |
+| Tag          | `Tag`         | `UniqueTagList`           | `getFilteredTagList()`         |
+| Schedule     | `Appointment` | `DisjointAppointmentList` | `getFilteredAppointmentList()` |
+
+For each of the data entities, 'selected' objects (e.g., results of a search query) of each type is exposed externally as unmodifiable `ObservableList<{Entity}>` lists which can be 'observed'. For example, the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
 <img src="images/ModelAddressBookClassDiagram.png" width="600" />
 
@@ -160,7 +187,13 @@ The class diagram above illustrates how the `AddressBook` subcomponent is struct
 
 <img src="images/ModelScheduleClassDiagram.png" width="600" />
 
-The class diagram above illustrates how the `Schedule` subcomponent is structured. The Schedule subcomponent is structured such that:
+The class diagram above illustrates how the `Schedule` subcomponent is structured.
+
+In addition to the `Appointment` objects in the Schedule, empty slots in the Schedule are also modelled as `AppointmentSlot` objects, contained in `AppointmentSlotList`. This list dynamically generates itself based on the Schedule and provided filter conditions.
+
+Both the `DisjointAppointmentList` and `AppointmentSlotList` are further combined into a single unified list of `ScheduleItem` objects that is separately exposed externally.
+
+The Schedule subcomponent is structured such that:
 
 * The bulk of the time-related functionality is abstracted to `ScheduleItem`, which is the supertype of `Appointment` and `AppointmentSlot`.
 * `ScheduleItem` implements the `TemporalComparable` interface, which allows `Appointment` and `AppointmentSlot` to be compared.
@@ -172,14 +205,20 @@ Within the `model` package, there also exists an `IndexedCsvFile` model that hel
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/storage/Storage.java)
+The `Storage` component,
+
+* can save address book data, schedule data and user preference data in json format, and read them back into corresponding objects.
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<div markdown="span" class="alert alert-secondary">
+
+:information_source: The **API** of this component is specified in: [`Storage.java`](https://github.com/AY2122S2-CS2103-W17-1/tp/tree/master/src/main/java/seedu/contax/storage/Storage.java)
+
+</div>
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save address book data, schedule data and user preference data in json format, and read them back into corresponding objects.
-* inherits from `AddressBookStorage`, `ScheduleStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+Note that in the class diagram `Storage` inherits from `AddressBookStorage`, `ScheduleStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 
 Within the `storage` package, there also exists a `CsvManager` class that is a helper that provides file IO related operations for working with CSV files. It is used in the Import CSV or Export CSV features. This class does not fit within the storage component diagram as it does not interact with any other classes, serving solely as a helper class.
 
