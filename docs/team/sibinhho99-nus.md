@@ -3,7 +3,7 @@ layout: page
 title: Si Binh's Project Portfolio Page
 ---
 # Overview
-MedBook is a health monitoring system for healthcare professionals that simplifies tracking a patient’s information. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' emergency contacts, medical information and visits through a simple and easy-to-use platform.
+MedBook is a health monitoring system for healthcare professionals that simplifies tracking patient’s medical information and hospital records. MedBook delivers a seamless workflow for doctors and healthcare professionals to search for or update patients' emergency contacts, medical information, medical tests, consultations and prescriptions through a simple and easy-to-use platform.
 # Summary of Contributions
 ## Code Contributed: to be added soon
 ## Enhancements Implemented: to be added soon
