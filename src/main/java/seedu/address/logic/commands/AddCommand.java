@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 
@@ -100,7 +101,7 @@ public class AddCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
-                EditCommand.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
+                ModelManager.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         } else {
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
@@ -120,9 +121,9 @@ public class AddCommand extends Command {
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditCommand.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
+                    ModelManager.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 } else {
-                    EditCommand.editPersonStatus(addedPerson, new Status(Status.CLOSE_CONTACT), model);
+                    ModelManager.editPersonStatus(addedPerson, new Status(Status.CLOSE_CONTACT), model);
                 }
             }
         }
