@@ -16,11 +16,12 @@ import seedu.trackermon.model.show.Show;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_FORMAT = "Parameters: INDEX";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the show identified by the index number used in the displayed Trackermon.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + COMMAND_FORMAT + "\n" + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_SHOW_SUCCESS = "Deleted Show: %1$s";
 
@@ -36,7 +37,7 @@ public class DeleteCommand extends Command {
         List<Show> lastShownList = model.getFilteredShowList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Show showToDelete = lastShownList.get(targetIndex.getZeroBased());

@@ -9,8 +9,8 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and no more than"
-            + " 20 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Tag must be a keyword that is no more than"
+            + " 20 alphanumeric characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}{1,20}?";
 
     public final String tagName;
@@ -23,7 +23,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = tagName.toLowerCase();
     }
 
     /**
@@ -49,7 +49,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName.substring(0, 1).toUpperCase() + tagName.substring(1);
     }
 
 }
