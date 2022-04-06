@@ -11,7 +11,7 @@ for convenience use.
 
 IBook is specially designed for small scale groceries store keeper, who are having issues with product organization and keeping track on expiring items.
 
-We aim to help store keeper to simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
+We aim to help store keepers to simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ We aim to help store keeper to simplify the process of managing inventory and re
 
 3. Copy the file to the folder you want to use as the _home folder_ for your iBook.
 
-4. Double-click the file to start the app<sup>[1](#applaunch-caveat)</sup>. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app<sup>[1](#applaunch-caveat)</sup>, or type in `java -jar ibook.jar` in a terminal in the same directory as `ibook.jar`. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -470,15 +470,15 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ### 7.1 Product Commands
 
-| Action           | Format, Examples                                                                                                                                                           |
-|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action           | Format, Examples                                                                                                                                            |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START` <br> e.g., `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:50 ds:10` |
-| **List**         | `list`                                                                                                                                                                     |
-| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                                            |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                        |
-| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                                         |
-| **Expired**      | `expired`                                                                                                                                                                  |
-| **Out of Stock** | `out-of-stock`                                                                                                                                                             |
+| **List**         | `list`                                                                                                                                                      |
+| **Update**       | `update INDEX [TAG:NEW_VALUE ...]` <br> e.g.,`update 2 n:Apple`                                                                                             |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                         |
+| **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                          |
+| **Expired**      | `expired`                                                                                                                                                   |
+| **Out of Stock** | `out-of-stock`                                                                                                                                              |
 
 ### 7.2 Item Commands
 
