@@ -384,6 +384,10 @@ Format: `export -TYPE`
 
 `TYPE` can be `a` for applicants, `p` for positions, and `i` for interviews
 
+Examples:
+* `export -p` to export csv file containing all positions.
+* `export -a` to export csv file containing all applicants.
+
 ## Viewing help: `help`
 
 Lists all the command keywords with their general descriptions
