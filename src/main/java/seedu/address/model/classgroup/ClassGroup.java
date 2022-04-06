@@ -3,6 +3,8 @@ package seedu.address.model.classgroup;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -58,11 +60,9 @@ public class ClassGroup implements Entity {
         this.uniqueStudentList = uniqueStudentList;
 
         // initialize the 13 lessons
-        Lesson[] arr = new Lesson[NUM_OF_WEEKS];
-        for (int i = 0; i < NUM_OF_WEEKS; i++) {
-            arr[i] = new Lesson(new WeekId(Integer.toString(i + 1)));
-        }
-        this.lessons = Arrays.asList(arr);
+        this.lessons = IntStream.rangeClosed(1, NUM_OF_WEEKS)
+                .mapToObj(entry -> new Lesson(new WeekId(String.valueOf(entry))))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -165,11 +165,16 @@ public class ClassGroup implements Entity {
         return toUnmark.unmarkAttendance(students);
     }
 
+    //@@author jxt00
     /**
      * Finds the lesson in the lesson list by the provided weekIndex.
+     * weekIndex will always be correct.
      */
     private Lesson findLessonByIndex(Index weekIndex) {
-        return lessons.get(weekIndex.getZeroBased());
+        return lessons.stream()
+                .filter(lesson -> lesson.getWeekId().value.equals(weekIndex.getOneBased()))
+                .findFirst()
+                .orElse(null);
     }
 
     public List<Lesson> getLessons() {
