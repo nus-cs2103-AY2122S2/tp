@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_PACKAGE;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.InsurancePackage;
+import seedu.address.model.person.Person;
 
 
 public class DeletePackageCommand extends Command {
@@ -21,6 +22,8 @@ public class DeletePackageCommand extends Command {
 
     public static final String MESSAGE_DELETE_PACKAGE_SUCCESS = "Deleted Package: %1$s";
     public static final String MESSAGE_INVALID_PACKAGE = "This package does not exist in the address book.";
+    public static final String MESSAGE_PACKAGE_IN_USE = "This package is in use by someone, "
+            + "perhaps set his/her package as another one before deleting this package.";
 
     public final String packageName;
 
@@ -36,9 +39,23 @@ public class DeletePackageCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PACKAGE);
         }
 
-        model.deleteInsurancePackage(new InsurancePackage(packageName));
+        InsurancePackage packageToDelete = new InsurancePackage(packageName);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PACKAGE_SUCCESS, packageName));
+        boolean canDelete = true;
+
+        for (Person p : model.getAddressBook().getPersonList()) {
+            if (p.getInsurancePackage().equals(packageToDelete)) {
+                canDelete = false;
+                break;
+            }
+        }
+
+        if (canDelete) {
+            model.deleteInsurancePackage(packageToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PACKAGE_SUCCESS, packageName));
+        } else {
+            return new CommandResult(MESSAGE_PACKAGE_IN_USE);
+        }
     }
 
     @Override

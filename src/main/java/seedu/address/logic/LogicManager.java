@@ -102,7 +102,13 @@ public class LogicManager implements Logic {
         try {
             Optional<ReadOnlyAddressBook> ab = storage.readAddressBookFromCsv(csvFilePath);
             if (ab.isPresent()) {
-                model.setAddressBook(ab.get());
+                ReadOnlyAddressBook readOnlyAb = ab.get();
+                model.setAddressBook(readOnlyAb);
+
+                for (Person p: readOnlyAb.getPersonList()) {
+                    model.addInsurancePackage(p.getInsurancePackage());
+                }
+
                 logger.info("Successfully set address book, without saving.");
             } else {
                 logger.info("No change to address book after attempting to read from CSV.");
