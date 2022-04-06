@@ -239,14 +239,16 @@ Formats:
 * `editTask INDEX date/DATE at/TIME`
 * `editTask INDEX at/TIME`
 
-Editing tasks is flexible in ManageEZPZ. 
+Editing tasks is flexible in ManageEZPZ.
 For example, you can update just the task description or perhaps
-just the date and time of the task only. 
-However, you are not allowed to edit a task with no input supplied.
+just the date and time of the task only.
+However, you are not allowed to edit a task with no prefix supplied.
 Either `desc/NAME`, `date/DATE` or `at/TIME` must have a value.
 
-<b>Note:</b> For an `Event` task, a start time and an end time separated with an empty space must be provided 
-instead of a single time value.
+<b>Note:</b> 
+* For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+  and mm should only be between 00 and 59.
+* When supplying empty NAME, DATE or TIME, it will not change the state of the Task.
 
 
 Examples: <br/>
@@ -283,6 +285,7 @@ Format: `markTask INDEX`
 * Marks the task at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Marking a marked task (i.e., that is already set as done) will not change its physical state.
 
 Examples:
 * `markTask 2` marks the 2nd task in the displayed task list as done.
@@ -298,6 +301,7 @@ Format: `unmarkTask INDEX`
 * Unmarks the task at the specified `INDEX` to change the status back to not done.
 * The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Unmarking an unmarked task (i.e., that is already set as not done) will not change its physical state.
 
 Examples:
 * `unmarkTask 2` changes the 2nd task in the displayed task list back to not done.
@@ -362,6 +366,7 @@ Format: `tagPriority INDEX priority/PRIORITY`
 * The priority must be either `HIGH`, `MEDIUM`, `LOW`, or `NONE`.
 * The priority is case-insensitive, e.g., `high`, `HIGH`, `HiGh` or `hIgH` will match as `HIGH`.
 * A task with the priority of `NONE` will not have the priority reflected in the displayed task list.
+* Tagging the same priority to the Task, will not change its physical state.
 
 Example: 
 * `tagPriority 1 priority/HIGH`
