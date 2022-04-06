@@ -545,9 +545,14 @@ company.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.<br>
-:information_source: Roles in a Company are listed based on the order in which they are added to the Company.
+:information_source: Role name is special as it does not just accept alphanumeric symbols, but also round brackets too.
 
+</div>
+
+<div markdown="block" class="alert alert-info">
+   
+:information_source: Roles in a Company are listed based on the order in which they are added to the Company.
+   
 </div>
 
 <div markdown="block" class="alert alert-danger">
