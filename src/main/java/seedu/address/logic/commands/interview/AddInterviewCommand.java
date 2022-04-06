@@ -51,7 +51,7 @@ public class AddInterviewCommand extends AddCommand {
         List<Applicant> lastShownApplicantList = model.getFilteredApplicantList();
 
         if (applicantIndex.getZeroBased() >= lastShownApplicantList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Applicant applicantInInterview = lastShownApplicantList.get(applicantIndex.getZeroBased());
 

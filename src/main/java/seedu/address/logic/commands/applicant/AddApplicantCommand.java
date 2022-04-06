@@ -41,7 +41,7 @@ public class AddApplicantCommand extends AddCommand {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the address book";
     private static final String MESSAGE_DUPLICATE_EMAIL = "The email is already used by %1$s";
     private static final String MESSAGE_DUPLICATE_PHONE = "The phone number is already used by %1$s";
 
@@ -59,8 +59,8 @@ public class AddApplicantCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasApplicant(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         Applicant applicantWithEmail = model.getApplicantWithEmail(toAdd.getEmail());
@@ -73,7 +73,7 @@ public class AddApplicantCommand extends AddCommand {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_PHONE, applicantWithPhone.getName().fullName));
         }
 
-        model.addApplicant(toAdd);
+        model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getCommandDataType());
     }
 
