@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHARGE_MONTH_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,8 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_BOB_WITH_SPACES = "Bob    Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "81234567";
+    public static final String VALID_PHONE_BOB = "61234567";
     public static final String VALID_OWNER_NAME_AMY = "Sarah Lee";
     public static final String VALID_OWNER_NAME_BOB = "Bob Lee";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
@@ -47,7 +48,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOBA = "123, Jurong West Ave 6, #08-111";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friends";
-    public static final String VALID_DIET_AMY = "No meat for Amy for one month.";
+    public static final String VALID_DIET_AMY = "No meat for Amy for one month";
     public static final String VALID_DIET_BOB = "No dietary restrictions";
     public static final String VALID_CHARGEAMT_AMY = "200.50";
     public static final String VALID_CHARGEAMT_BOB = "400.50";
@@ -55,6 +56,7 @@ public class CommandTestUtil {
     public static final String VALID_CHARGEDATE_BOB = "03-2021";
     public static final String INVALID_CHARGEDATE_AMY = "22-22";
     public static final String INVALID_CHARGEAMT_AMY = "200.509";
+    public static final String INVALID_DIET_AMY = "&&&&";
     public static final String VALID_CHARGE_AMY = " " + PREFIX_CHARGE_MONTH_YEAR + VALID_CHARGEDATE_AMY
             + " " + PREFIX_CHARGE + VALID_CHARGEAMT_AMY;
     public static final String INVALID_CHARGE_AMY_NO_CHARGE_DATE = " " + PREFIX_CHARGE_MONTH_YEAR
@@ -80,6 +82,7 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String DIET_DESC_AMY = " " + PREFIX_DIET + VALID_DIET_AMY;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String OWNER_NAME_DESC_AMY = " " + PREFIX_OWNER_NAME + VALID_OWNER_NAME_AMY;
@@ -100,6 +103,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_DIET_DESC = " " + PREFIX_DIET + INVALID_DIET_AMY; // special characters
+    // not allowed
+
     // '!' not allowed in ownerNames
     public static final String INVALID_OWNER_NAME_DESC = " " + PREFIX_OWNER_NAME + "bob!yahoo";
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses

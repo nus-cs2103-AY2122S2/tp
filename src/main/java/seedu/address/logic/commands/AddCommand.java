@@ -18,17 +18,17 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to WoofAreYou database."
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_OWNER_NAME + "OWNERNAME "
+            + PREFIX_NAME + "NAME_OF_PET "
+            + PREFIX_OWNER_NAME + "OWNER_NAME "
+            + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "BREED]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Pee Pee "
+            + PREFIX_OWNER_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_OWNER_NAME + "John Doe  "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "Mini Beagle ";
 

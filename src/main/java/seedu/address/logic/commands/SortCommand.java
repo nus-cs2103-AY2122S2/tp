@@ -6,14 +6,14 @@ import seedu.address.model.Model;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_SUCCESS = "Sorted all pets!";
+    public static final String MESSAGE_SUCCESS = "Sorted all pets by ";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the pet list by the input field specified.\n"
             + "Note the input fields are case sensitive.\n"
             + "The following are the 5 valid input fields:\n"
             + "1. owner\n 2. name\n 3. app\n 4. pick up\n 5. drop off\n"
             + "Parameters: FIELD_TO_SORT_BY\n"
-            + "Example: " + COMMAND_WORD + "owner";
+            + "Example: " + COMMAND_WORD + " owner";
 
     private final String field;
 
@@ -28,7 +28,8 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortPetList(field);
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.updateFilteredPetList();
+        return new CommandResult(MESSAGE_SUCCESS + field);
     }
 
 }

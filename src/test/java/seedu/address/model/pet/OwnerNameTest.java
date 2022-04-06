@@ -33,13 +33,14 @@ public class OwnerNameTest {
         assertFalse(OwnerName.isValidOwnerName(" ")); // spaces only
         assertFalse(OwnerName.isValidOwnerName("^")); // only non-alphanumeric characters
         assertFalse(OwnerName.isValidOwnerName("peter*")); // contains non-alphanumeric characters
+        assertFalse(OwnerName.isValidOwnerName("12345")); // numbers only
+        assertFalse(OwnerName.isValidOwnerName("peter the 2nd")); // alphanumeric characters
+
 
         // valid ownerName
         assertTrue(OwnerName.isValidOwnerName("peter jack")); // alphabets only
-        assertTrue(OwnerName.isValidOwnerName("12345")); // numbers only
-        assertTrue(OwnerName.isValidOwnerName("peter the 2nd")); // alphanumeric characters
         assertTrue(OwnerName.isValidOwnerName("Capital Tan")); // with capital letters
-        assertTrue(OwnerName.isValidOwnerName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(OwnerName.isValidOwnerName("David Roger Jackson Ray Jr")); // long names
     }
 
     @Test

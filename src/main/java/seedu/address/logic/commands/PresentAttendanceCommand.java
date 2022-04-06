@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -98,7 +97,7 @@ public class PresentAttendanceCommand extends Command {
                 petToEdit.getAppointment(), targetAttendanceHashMap);
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, presentAttendance));
     }
