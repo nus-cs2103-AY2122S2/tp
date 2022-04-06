@@ -37,6 +37,8 @@ public class EditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT_1
             + EditCommand.PERSON_MESSAGE_USAGE;
+    private static final String MESSAGE_INVALID_INDEX = ParserUtil.MESSAGE_INVALID_INDEX + "\n"
+            + EditCommand.PERSON_MESSAGE_USAGE;
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -53,16 +55,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "edit -5" + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "edit -5" + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "edit 0" + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "edit 0" + " o/person " + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "edit 1 some random string o/person", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "edit 1 some random string o/person", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "edit 1 i/ string o/person", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "edit 1 i/ string o/person", MESSAGE_INVALID_INDEX);
     }
 
     @Test
