@@ -1,7 +1,14 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.commons.core.Messages.*;
+import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
+import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TASK_NO_EMPTY_VALUES;
+import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES;
+import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_DESCRIPTION;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
@@ -15,7 +22,13 @@ import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.ParserUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
-import manageezpz.model.task.*;
+import manageezpz.model.task.Date;
+import manageezpz.model.task.Deadline;
+import manageezpz.model.task.Description;
+import manageezpz.model.task.Event;
+import manageezpz.model.task.Task;
+import manageezpz.model.task.Time;
+import manageezpz.model.task.Todo;
 import manageezpz.model.task.exceptions.DuplicateTaskException;
 
 /**
@@ -68,8 +81,8 @@ public class EditTaskCommand extends Command {
      * @param date New date of the Task
      * @param time New time of the Task
      */
-    public EditTaskCommand(Index index, String desc, String date, String time, HashMap<String, Boolean> prefixStatusHash) {
-        requireAllNonNull(index, desc, date, time);
+    public EditTaskCommand(Index index, String desc, String date, String time,
+                           HashMap<String, Boolean> prefixStatusHash) {
         this.index = index;
         this.desc = desc;
         this.date = date;
@@ -136,6 +149,14 @@ public class EditTaskCommand extends Command {
         return isFormatOkay;
     }
 
+    /**
+     * Updates a Todo task.
+     *
+     * @param currentTask Current Todo task that is to be updated
+     * @param desc New description of the Todo Task
+     * @return Updated Todo task
+     */
+
     private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
         if (prefixStatusHash.get("date") || prefixStatusHash.get("datetime")) {
@@ -151,6 +172,16 @@ public class EditTaskCommand extends Command {
 
         return updatedToDoTask;
     }
+
+    /**
+     * Updates a Deadline task.
+     *
+     * @param currentTask Current Deadline task that is to be updated
+     * @param desc New description of the Deadline Task
+     * @param date New date of the Deadline Task
+     * @param time New time of the Deadline Task
+     * @return Updated Deadline task
+     */
 
     private Task updateDeadline(Deadline currentTask, String desc, String date, String time) throws ParseException {
         Deadline updatedDeadlineTask = new Deadline(currentTask);
@@ -176,6 +207,17 @@ public class EditTaskCommand extends Command {
 
         return updatedDeadlineTask;
     }
+
+    /**
+     * Updates an Event task.
+     *
+     * @param currentTask Current Event task that is to be updated
+     * @param desc New description of the Event Task
+     * @param date New date of the Event Task
+     * @param startTime New start time of the Event Task
+     * @param endTime New end time of the Event Task
+     * @return Updated Event task
+     */
 
     private Task updateEvent(Event currentTask, String desc, String date, String time) throws ParseException {
         Event updatedEventTask = new Event(currentTask);

@@ -6,12 +6,13 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.HashMap;
+
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
-import java.util.Arrays;
-import java.util.HashMap;
+
 
 /**
  * Parses input arguments and creates a new EditTaskCommand object.
@@ -22,7 +23,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
      * Parses the given {@code String} of arguments in the context of the EditTaskCommand
      * and returns a EditTaskCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     @Override
     public EditTaskCommand parse(String args) throws ParseException {
