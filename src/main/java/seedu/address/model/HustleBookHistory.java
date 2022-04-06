@@ -55,12 +55,19 @@ public class HustleBookHistory {
 
     /**
      * Updates the History with new updated data state of HustleBook.
+     * When HustleBook data is updated, not through undo/redo command and new info is added or existing info modified,
+     * all previously existed possible info that could have been redo will be cleared.
+     * No further redo can be done.
+     *
      * @param readOnlyHustleBook The new modified data state of HustleBook.
      */
     public void update(ReadOnlyHustleBook readOnlyHustleBook) {
         ReadOnlyHustleBook cloneBook = new HustleBook(readOnlyHustleBook);
         currStatePointer++;
         historyList.add(currStatePointer, cloneBook);
+        int size = historyList.size();
+        // Clears all possible future redo by clearing the elements in the sublist
+        historyList.subList(currStatePointer + 1, size).clear();
     }
 
     /**
