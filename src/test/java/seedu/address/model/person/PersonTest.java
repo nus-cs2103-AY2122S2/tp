@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_GOOGLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -33,7 +33,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withGithubUsername(VALID_USERNAME_BOB).withTeams(VALID_TEAM_HUSBAND).build();
+                .withGithubUsername(VALID_USERNAME_BOB).withTeams(VALID_TEAM_GOOGLE).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -89,7 +89,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different s -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTeams(VALID_TEAM_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withTeams(VALID_TEAM_GOOGLE).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
