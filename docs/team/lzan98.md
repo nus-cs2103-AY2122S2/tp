@@ -14,29 +14,36 @@ GUI applications.
 
 Given below are my contributions to the project.
 
-* **New Feature**: To be added
+* **New Feature**:
+  * `schedule add`
+  * `schedule edit`
+  * `schedule delete`
+  * `schedule clear`
+  
 
-
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: Click on the following 
+[RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=lzan98&tabRepo=AY2122S2-CS2103-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+to view the detailed breakdown of my code contribution!
 
 
 * **Project management**: To be added
 
 
-* **Enhancements to existing features**: To be added
-
-
 * **Documentation**:
   * User Guide:
-    * Added documentation for Motivation and Quick Start [\#18]()
-    * Added documentation for the feature `delete` [\#33]()
+    * Added documentation for Motivation and Quick Start
+    * Enhanced documentation for the feature `delete` 
+    * Added documentation for the new features `schedule add`, `schedule edit`, `schedule delete` and `schedule clear`.
+    
+
+
   * Developer Guide:
-    * To be added
+    * To be added.
 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): (To be added)
-    * Contributed to forum discussions (To be added)
-
-
-* **Tools**: To be added
+    * PRs reviewed (with non-trivial review comments): [\#135](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/135),
+  [\#200](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/200), [\#167](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/167) and more.
+  
+    * Contributed to forum discussions: [\#52](https://github.com/nus-cs2103-AY2122S2/forum/issues/57), [\#142](https://github.com/nus-cs2103-AY2122S2/forum/issues/142), 
+  [\#194](https://github.com/nus-cs2103-AY2122S2/forum/issues/194) and more.
