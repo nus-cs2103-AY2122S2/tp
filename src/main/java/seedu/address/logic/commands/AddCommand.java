@@ -26,7 +26,7 @@ public class AddCommand extends Command {
         + PREFIX_PHONE + "PHONE "
         + PREFIX_EMAIL + "EMAIL "
         + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME "
-        + "[" + PREFIX_TEAM + "TEAM...]\n"
+        + "[" + PREFIX_TEAM + "TEAM...]"
         + "[" + PREFIX_SKILL + "SKILLNAME_SKILLPROFICENCY...]\n"
         + "Example1: " + COMMAND_WORD + " "
         + PREFIX_NAME + "John Doe "
