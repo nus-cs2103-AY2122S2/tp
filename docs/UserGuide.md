@@ -303,7 +303,7 @@ Function: Clear all buyers from the buyer list.
 
 Format: `clear-b`
 
-### Sorting buyers. `sort-b`
+#### Sorting buyers. `sort-b`
 
 Function: Sort all the buyers according to the orders specified.
 
