@@ -37,13 +37,12 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
+        String trimmedIndex = oneBasedIndex.replaceAll("\\s{2,}", " ").trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
@@ -52,7 +51,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = name.replaceAll("\\s{2,}", " ").trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -67,7 +66,7 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
-        String trimmedPhone = phone.trim();
+        String trimmedPhone = phone.replaceAll("\\s{2,}", " ").trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
@@ -82,7 +81,7 @@ public class ParserUtil {
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
+        String trimmedAddress = address.replaceAll("\\s{2,}", " ").trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
@@ -97,7 +96,7 @@ public class ParserUtil {
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
+        String trimmedEmail = email.replaceAll("\\s{2,}", " ").trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -112,7 +111,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.replaceAll("\\s{2,}", " ").trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -155,7 +154,7 @@ public class ParserUtil {
 
     public static Name parseCompanyName(String companyName) throws ParseException {
         requireNonNull(companyName);
-        String trimmedCompanyName = companyName.trim();
+        String trimmedCompanyName = companyName.replaceAll("\\s{2,}", " ").trim();
         if (!Name.isValidName(trimmedCompanyName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -171,7 +170,7 @@ public class ParserUtil {
 
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
+        String trimmedDate = date.replaceAll("\\s{2,}", " ").trim();
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
@@ -187,7 +186,7 @@ public class ParserUtil {
 
     public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
-        String trimmedTime = time.trim();
+        String trimmedTime = time.replaceAll("\\s{2,}", " ").trim();
         if (!Time.isValidTime(trimmedTime)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
@@ -202,7 +201,7 @@ public class ParserUtil {
      */
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
-        String trimmedLocation = location.trim();
+        String trimmedLocation = location.replaceAll("\\s{2,}", " ").trim();
         if (!Location.isValidLocation(trimmedLocation)) {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
@@ -217,7 +216,7 @@ public class ParserUtil {
      */
     public static SearchType parseSearchType(String searchType) throws ParseException {
         requireNonNull(searchType);
-        String trimmedSearchType = searchType.trim();
+        String trimmedSearchType = searchType.replaceAll("\\s{2,}", " ").trim();
 
         switch (trimmedSearchType) {
         case "unarchived":
@@ -239,7 +238,7 @@ public class ParserUtil {
      */
     public static Ordering parseOrdering(String ordering) throws ParseException {
         requireNonNull(ordering);
-        String trimmedOrdering = ordering.trim();
+        String trimmedOrdering = ordering.replaceAll("\\s{2,}", " ").trim();
 
         switch (trimmedOrdering) {
         case "ascending":
