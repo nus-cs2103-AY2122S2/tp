@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.DateTimeSlot;
 import seedu.address.model.lesson.LessonAddress;
@@ -30,17 +32,18 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format! Date must be in DD-MM-YYYY\n"
+    public static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format!"
+            + " Date must be in DD-MM-YYYY and day-field cannot exceed the maximum day of the month\n"
+            + "(e.g. 30-02-2022 would be invalid as 30 Feb 2022 does not exist in the calendar)\n\n"
             + "[EXAMPLE]: to specify that a lesson is on 25th March 2022, include the following\n"
             + "-d 25-03-2022";
-
-    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
 
     public static final String INVALID_HOURS_FORMAT_MESSAGE = "Invalid duration in hours format! "
             + "Hours must be a non-negative integer.\n"
             + "[EXAMPLE] to specify that the hours field in the lesson's duration is 2 hours, "
             + "include the following\n"
             + "-h 2";
+
     public static final String NEGATIVE_HOURS_MESSAGE = "Hours cannot be lesser than 0.";
 
     public static final String INVALID_START_TIME_MESSAGE = "Invalid start time format! Start time must be in HH:mm\n"
@@ -202,18 +205,6 @@ public class ParserUtil {
     }
 
     /**
-     * Checks that the lesson has does not have a total duration of zero minutes.
-     */
-    public static void checkDurationIsValid(int hours, int minutes) throws ParseException {
-        boolean isValidHoursAndMinutes = ((hours > 0 && minutes >= 0 && minutes <= 60)
-                || (hours == 0 && minutes > 0 && minutes <= 60));
-
-        if (!isValidHoursAndMinutes) {
-            throw new ParseException(INVALID_DURATION_MESSAGE);
-        }
-    }
-
-    /**
      * Parses a {@code String dateOfLesson}, a {@code startTime}, a {@code duration hour-field}
      * and a {@code duration minute-field} into a {@code DateTimeSlot}
      *
@@ -221,11 +212,20 @@ public class ParserUtil {
      * @throws ParseException if the given {@code startTime} is invalid.
      */
     public static DateTimeSlot parseDateTimeSlot(String dateOfLesson, String startTime,
-                                                 int durationHours, int durationMinutes) throws ParseException {
+                                                 Integer durationHours, Integer durationMinutes)
+            throws ParseException {
         LocalDate lessonDate = parseDate(dateOfLesson);
         LocalTime lessonStartTime = parseStartTime(startTime);
+        LocalDateTime startingDateTime = lessonDate.atTime(lessonStartTime);
 
-        return new DateTimeSlot(lessonDate.atTime(lessonStartTime), durationHours, durationMinutes);
+        DateTimeSlot dateTimeSlot;
+        try {
+            dateTimeSlot = DateTimeSlot.makeDateTimeSlot(startingDateTime, durationHours, durationMinutes);
+        } catch (CommandException e) {
+            throw new ParseException(e.getMessage());
+        }
+
+        return dateTimeSlot;
     }
 
     /**

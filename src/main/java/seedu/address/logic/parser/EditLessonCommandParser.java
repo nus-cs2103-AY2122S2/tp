@@ -58,14 +58,10 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DURATION_HOURS).isPresent()) {
-            ParserUtil.checkDurationIsValid(
-                    getDurationHours(argMultimap).get(), 0);
             editLessonDescriptor.setDurationHours(
                     ParserUtil.parseDurationHours(argMultimap.getValue(PREFIX_DURATION_HOURS).get()));
         }
         if (argMultimap.getValue(PREFIX_DURATION_MINUTES).isPresent()) {
-            ParserUtil.checkDurationIsValid(
-                    0, getDurationMinutes(argMultimap).get());
             editLessonDescriptor.setDurationMinutes(
                     ParserUtil.parseDurationMinutes(argMultimap.getValue(PREFIX_DURATION_MINUTES).get()));
         }

@@ -99,7 +99,8 @@ public class EditLessonCommand extends Command {
         return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON);
     }
 
-    private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+    private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor)
+            throws CommandException {
         requireAllNonNull(toEdit, editLessonDescriptor);
         LessonName updatedName = editLessonDescriptor.getName().orElse(toEdit.getName());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(toEdit.getSubject());
@@ -118,7 +119,7 @@ public class EditLessonCommand extends Command {
             durationHours = toEdit.getDateTimeSlot().getHours();
             durationMinutes = toEdit.getDateTimeSlot().getMinutes();
         }
-        DateTimeSlot updatedDateTimeSlot = new DateTimeSlot(updatedStartDate.atTime(updatedStartTime),
+        DateTimeSlot updatedDateTimeSlot = DateTimeSlot.makeDateTimeSlot(updatedStartDate.atTime(updatedStartTime),
                 durationHours, durationMinutes);
 
         return toEdit instanceof RecurringLesson

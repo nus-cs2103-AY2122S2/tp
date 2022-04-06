@@ -42,7 +42,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         LessonName name = getName(argMultimap);
         Subject subject = getSubject(argMultimap);
         LessonAddress address = getAddress(argMultimap);
-        DateTimeSlot dateTimeSlot = getDateTimeSlot(argMultimap);
+        DateTimeSlot dateTimeSlot;
+        dateTimeSlot = getDateTimeSlot(argMultimap);
+
 
         Lesson lesson = isRecurring(argMultimap)
                 ? Lesson.makeRecurringLesson(name, subject, address, dateTimeSlot)
@@ -105,14 +107,12 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
     /**
      * Returns an instance of DateTimeSlot.
      */
-    private static DateTimeSlot getDateTimeSlot(ArgumentMultimap argumentMultimap) throws ParseException {
+    private static DateTimeSlot getDateTimeSlot(ArgumentMultimap argumentMultimap)
+            throws ParseException {
         String date = getDate(argumentMultimap);
         String startTime = getStartTime(argumentMultimap);
         Integer durationHours = getDurationHours(argumentMultimap);
         Integer durationMinutes = getDurationMinutes(argumentMultimap);
-
-        // throw exception if the total duration is 0 hours and 0 minutes
-        ParserUtil.checkDurationIsValid(durationHours, durationMinutes);
 
         return ParserUtil.parseDateTimeSlot(
                 date,
