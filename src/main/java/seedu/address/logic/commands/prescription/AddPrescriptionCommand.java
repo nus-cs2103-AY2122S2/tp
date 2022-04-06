@@ -25,8 +25,7 @@ public class AddPrescriptionCommand extends Command {
             + PREFIX_TYPE + "prescription "
             + ": Adds a medical prescription of a patient in Medbook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "prescription "
-            + PREFIX_NRIC + "OWNER_NRIC "
+            + PREFIX_NRIC + "NRIC "
             + PREFIX_NAME + "DRUG_NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_INSTRUCTION + "INSTRUCTION \n"
@@ -38,8 +37,9 @@ public class AddPrescriptionCommand extends Command {
             + PREFIX_INSTRUCTION + "2 tablets after meal everyday ";
 
     public static final String MESSAGE_SUCCESS = "New medical prescription added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "This medical prescription already exist";
-    public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
+    public static final String MESSAGE_DUPLICATE_PRESCRIPTION =
+            "This medical prescription already exist in this patient's prescription list";
+    public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in MedBook";
 
     private final Nric nric;
 
