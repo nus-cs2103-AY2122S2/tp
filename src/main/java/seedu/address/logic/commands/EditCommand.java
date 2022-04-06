@@ -36,12 +36,15 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String RESET_ARG = "r";
+    public static final String MESSAGE_USAGE_OPTIONS =
+        "The symbol '-' is used to declare options for edit command, and can be declared only once in the command.\n"
+            + "The only available option is 'r', which makes the edit command execute in reset mode.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person(s) identified "
         + "by the index number(s) used in the displayed person list.\n"
         + "Existing values will be overwritten by the input values.\n"
         + "Index numbers should be separated by a white space,"
-        + "as opposed to other teams and skill values that are separated by a comma."
+        + "as opposed to other teams and skill values that should be separated by a comma."
         + "\n"
         + "By default, Teams will be appended.\n"
         + "However in reset mode, editing Teams will purge all previous data.\n"
@@ -228,7 +231,12 @@ public class EditCommand extends Command {
 
         // Throwing error after editing for valid indices allows the successful edit for least the valid indices.
         if (!isAllIndicesValid) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_FOR_SOME_PERSON);
+            return new CommandResult(
+                String.format(
+                    Messages.MESSAGE_INVALID_INDEX_FOR_SOME_PERSON
+                        + "\n"
+                        + MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS,
+                    editedNames));
         }
         return new CommandResult(String.format(MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames));
     }
