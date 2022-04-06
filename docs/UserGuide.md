@@ -215,8 +215,8 @@ Find result for the command `find n/alex david`:
 ### Create a group: `addgroup`
 
 Creates a group in ArchDuke. `addgroup` must be followed by `GROUP_NAME`, which can take any values, 
-and it **should not be blank** and **should not have preceding whitespaces**. `GROUP_NAME` with preceeding white spaces
-followed by words will be treated as if there is no preceding white spaces. E.g. `<whitespaces>Group` is the same as `Group`.
+and it **should not be blank** and **should not have preceding whitespaces**. `GROUP_NAME` with preceding white spaces
+followed by words will be treated as if there is no preceding white spaces. E.g. <code>&nbsp;&nbsp;&nbsp;&nbsp;Group</code> is the same as `Group`.
 
 <div markdown="block" class="alert alert-info">
 
