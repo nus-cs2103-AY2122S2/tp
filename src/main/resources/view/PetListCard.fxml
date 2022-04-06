@@ -17,7 +17,7 @@
         </columnConstraints>
         <VBox alignment="CENTER" GridPane.columnIndex="0">
             <padding>
-                <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                <Insets bottom="5.0" left="15.0" right="5.0" top="5.0"/>
             </padding>
             <VBox alignment="CENTER_LEFT" VBox.vgrow="SOMETIMES">
                 <HBox alignment="CENTER_LEFT" spacing="5">
@@ -35,7 +35,7 @@
                 </HBox>
                 <FlowPane fx:id="tags">
                     <padding>
-                        <Insets bottom="1" top="1"/>
+                        <Insets bottom="1" top="2"/>
                     </padding>
                 </FlowPane>
                 <Label fx:id="ownerName" styleClass="cell_small_label" text="\$ownerName">
@@ -55,12 +55,12 @@
                 </Label>
                 <HBox fx:id="dietTag">
                     <padding>
-                        <Insets bottom="1" top="2"/>
+                        <Insets bottom="2" top="2"/>
                     </padding>
                 </HBox>
                 <HBox fx:id="appointmentTag">
                     <padding>
-                        <Insets bottom="2" top="5"/>
+                        <Insets bottom="4" top="2"/>
                     </padding>
                 </HBox>
             </VBox>
