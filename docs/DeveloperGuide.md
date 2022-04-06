@@ -352,6 +352,122 @@ The following sequence diagram shows how the deleteModule operation works:
 
 ![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
+
+### deleteTask Command
+
+### Description
+
+The `deleteTask` command allows users to delete to task that was previously assigned to students.
+During the execution of the `deleteTask` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `deleteTaskCommand` object will be created, and is subsequently executed by the LogicManager.
+
+### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "deleteTask", `DeleteTaskCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteTask").
+4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of `StudentId`, `Index`, `ModuleCode`, and `TaskName` is missing.
+    Either `StudentId` and `Index` must be provided or `ModuleCode` and `TaskName` must be provided.   
+   </div>
+
+
+5. If either `Index` or `StudentId` is given, the `indexOrStudentIdGiven(ArgumentMultimap argMultimap)` method is invoked.
+   
+    <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A ParseException will be thrown if the prefix of `StudentId`, or `Index` is missing.
+     Both `StudentId` and `Index` must be provided.   
+    </div>
+   
+    1. The `indexOrStudentIdGiven` method will pass the studentId input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId).`
+   
+    <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+    2. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+    3. `StudentId#isValidId(String studentId)` method will then be invoked,
+    which checks if the trimmed argument is valid (according to the Regex supplied).
+    If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
+    If the argument is not valid, a `ParseException` will be thrown.
+    4. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into 
+    into `ParserUtil#parseIndex(String oneBasedIndex).`
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+   
+    5.  In `ParserUtil#parseIndex(String oneBasedIndex)`, the supplied argument will be trimmed using `String#trim()`.
+    6. `Index#isValidId(String Index)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). 
+    If the argument is valid, a new `Index` object will be created and returned to the `DeleteTaskCommandParser`.
+    If the argument is not valid, a `ParseException` will be thrown.
+    7. A new `DeleteTaskCommand(StudentId studentId, Index index)` will be created (using the `StudentId` and `Index` object created in Step 3 and 6) and returned to the `LogicManager`.
+   
+
+6. If either `ModuleCode` or `TaskName` is given, the `moduleCodeOrTaskNameGiven(ArgumentMultimap argMultimap)` method is invoked.
+   
+    <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A ParseException will be thrown if the prefix of `ModuleCode`, or `TaskName` is missing.
+    Both `ModuleCode` and `TaskName` must be provided.   
+    </div>
+   
+    1. The `moduleCodeOrTaskNameGiven` method will pass the moduleCode input (found in the `ArgumentMultimap`) into `ParserUtil#parseModuleCode(String moduleCode).`
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+   
+    2. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
+    3. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
+    which checks if the trimmed argument is valid (according to the Regex supplied).
+    If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
+    If the argument is not valid, a `ParseException` will be thrown.
+    4. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into
+    into `ParserUtil#parseTask(String task).`
+
+    <div markdown="span" class="alert alert-info">:information_source: 
+     **Note:** A NullException will be thrown if the supplied string argument is null.
+    </div>
+
+    5. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+    6. `Task#isValidTaskName(String test)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied).
+      If the argument is valid, a new `Task` object will be created and returned to the `DeleteTaskCommandParser`.
+      If the argument is not valid, a `ParseException` will be thrown.
+    7. A new `DeleteTaskCommand(ModuleCode moduleCode, Task task)` will be created (using the `ModuleCode` and `Task` object created in Step 3 and 6) and returned to the `LogicManager`.
+
+7. The `LogicManager` will then call `DeleteTaskCommand#execute(Model model)`.
+8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
+   1. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
+   2. This method will iterate through each `Person` object in and check for matching `studentId`.
+      If found, the method will get a copy of the person by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`. 
+      If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method. 
+      If no student with matching studentId is found, `PersonNotFoundException()` will be thrown. 
+   3. The updated person will be replaced the person.
+   4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
+      updates the filter of the person list to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+   
+9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
+   1. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
+   2. This method will iterate through each `Person` object in and check for matching `moduleCode`.
+      If found, the method will get a copy of the person by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
+      If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
+      If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
+   3. The updated person will replace the person.
+   4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
+      updates the filter of the person list to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+   
+10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`
+
+![DeleteTaskCommandSequenceDiagram-1](images/DeleteTaskCommandSequenceDiagram-1.png)
+
+![DeleteTaskCommandSequenceDiagram-2](images/DeleteTaskCommandSequenceDiagram-2.png)
+
+
 ### Task Command
 
 #### Description
@@ -368,7 +484,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 3. Since the first word in the user input matches the word "task", `TaskCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("task").
 4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
-   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
     **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
