@@ -163,16 +163,16 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String price} into a {@code Price}.
+     * Parses a {@code String startPrice} and {@code String endPrice} into a {@code PriceRange}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code price} is invalid.
+     * @throws ParseException if the given {@code startPrice} or {@code endPrice} is invalid.
      */
     public static PriceRange parsePriceRange(String startPrice, String endPrice) throws ParseException {
         requireAllNonNull(startPrice, endPrice);
-        String trimmedStartPrice = strip(startPrice);
-        String trimmedEndPrice = strip(endPrice);
-        if (!PriceRange.isValidPriceRange(trimmedStartPrice, trimmedEndPrice)) {
+        Price parsedStartPrice = parsePrice(startPrice);
+        Price parsedEndPrice = parsePrice(endPrice);
+        if (!PriceRange.isValidPriceRange(parsedStartPrice, parsedEndPrice)) {
             throw new ParseException(PriceRange.MESSAGE_CONSTRAINTS);
         }
         return new PriceRange(startPrice, endPrice);

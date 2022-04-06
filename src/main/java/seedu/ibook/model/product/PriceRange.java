@@ -5,7 +5,7 @@ import static seedu.ibook.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a price range in the iBook.
- * Guarantees: immutable; is valid as declared in {@link #isValidPriceRange(String, String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriceRange(Price, Price)}
  */
 public class PriceRange {
 
@@ -21,10 +21,12 @@ public class PriceRange {
      */
     public PriceRange(String startPrice, String endPrice) {
         requireAllNonNull(startPrice, endPrice);
+        Price parsedStartPrice = new Price(startPrice);
+        Price parsedEndPrice = new Price(endPrice);
+        checkArgument(isValidPriceRange(parsedStartPrice, parsedEndPrice), MESSAGE_CONSTRAINTS);
 
-        checkArgument(isValidPriceRange(startPrice, endPrice), MESSAGE_CONSTRAINTS);
-        this.startPrice = new Price(startPrice);
-        this.endPrice = new Price(endPrice);
+        this.startPrice = parsedStartPrice;
+        this.endPrice = parsedEndPrice;
     }
 
     /**
@@ -53,19 +55,14 @@ public class PriceRange {
     }
 
     /**
-     * Checks if the string is valid.
+     * Checks if the start price and end price is valid.
      *
-     * @param startPrice String to test.
-     * @param endPrice String to test.
+     * @param startPrice price to check.
+     * @param endPrice price to check.
      * @return Result of test.
      */
-    public static boolean isValidPriceRange(String startPrice, String endPrice) {
-        if (!Price.isValidPrice(startPrice) || !Price.isValidPrice(endPrice)) {
-            return false;
-        }
-        Price parsedStartPrice = new Price(startPrice);
-        Price parsedEndPrice = new Price(endPrice);
-        return !parsedStartPrice.moreThan(parsedEndPrice);
+    public static boolean isValidPriceRange(Price startPrice, Price endPrice) {
+        return !startPrice.moreThan(endPrice);
     }
 
     @Override
