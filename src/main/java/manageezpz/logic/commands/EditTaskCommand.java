@@ -1,17 +1,20 @@
 package manageezpz.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
+import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TASK_NO_EMPTY_VALUES;
+import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
-import static manageezpz.commons.core.Messages.MESSAGE_TASK_UPDATE_SUCCESS;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.HashMap;
 import java.util.List;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.ParserUtil;
@@ -33,7 +36,7 @@ public class EditTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "editTask";
 
-    public static final String EXAMPLE_ONE = COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION + " Eat bananas";
+    public static final String EXAMPLE_ONE = COMMAND_WORD + " 1 " + PREFIX_DESCRIPTION + "Eat bananas";
 
     public static final String EXAMPLE_TWO = COMMAND_WORD + " 2 " + PREFIX_DESCRIPTION + "Eat Apple "
             + PREFIX_DATE + "2022-09-05 " + PREFIX_AT_DATETIME + "1800";
@@ -46,20 +49,25 @@ public class EditTaskCommand extends Command {
             + "by the index number used in the displayed task list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must exist in the Address Book) "
-            + PREFIX_DESCRIPTION + " NAME "
-            + PREFIX_DATE + " DATE "
-            + PREFIX_AT_DATETIME + " TIME\n"
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_AT_DATETIME + "TIME\n"
             + "At least one of " + PREFIX_DESCRIPTION + " " + PREFIX_DATE
             + " " + PREFIX_AT_DATETIME + " must have a value.\n"
             + "For an event task, a start time and an end time "
             + "separated with an empty space must be provided "
             + "instead of a single time value.\n"
-            + "Examples: " + EXAMPLE_ONE + "\n" + EXAMPLE_TWO + "\n" + EXAMPLE_THREE;
+            + "Example 1: " + EXAMPLE_ONE + "\n"
+            + "Example 2: " + EXAMPLE_TWO + "\n"
+            + "Example 3: " + EXAMPLE_THREE;
+
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Update Task success: %1$s";
 
     private final Index index;
     private final String desc;
     private final String date;
     private final String time;
+    private final HashMap<String, Boolean> prefixStatusHash;
 
     /**
      * Constructor to initialize an instance of EditTaskCommand class
@@ -71,23 +79,27 @@ public class EditTaskCommand extends Command {
      * @param date New date of the Task
      * @param time New time of the Task
      */
-    public EditTaskCommand(Index index, String desc, String date, String time) {
+    public EditTaskCommand(Index index, String desc, String date, String time,
+                           HashMap<String, Boolean> prefixStatusHash) {
         this.index = index;
         this.desc = desc;
         this.date = date;
         this.time = time;
+        this.prefixStatusHash = prefixStatusHash;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task currentTask = lastShownList.get(index.getZeroBased());
-        Task updatedTask = null;
+        Task updatedTask;
 
         try {
             if (currentTask.getType().equalsIgnoreCase("todo")) {
@@ -98,31 +110,79 @@ public class EditTaskCommand extends Command {
                 updatedTask = updateEvent((Event) currentTask, this.desc, this.date, this.time);
             } else {
                 // Should not reach this as there are only three types of tasks
-                assert false : MESSAGE_INVALID_TASK_TYPE;
+                throw new CommandException(MESSAGE_INVALID_TASK_TYPE);
             }
-
             model.setTask(currentTask, updatedTask);
-            return new CommandResult(String.format(MESSAGE_TASK_UPDATE_SUCCESS, updatedTask));
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, updatedTask));
         } catch (ParseException pe) {
             throw new CommandException(pe.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, pe);
         } catch (DuplicateTaskException de) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, this.desc) + MESSAGE_USAGE);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, this.desc) + MESSAGE_USAGE, de);
         }
     }
 
+    /**
+     * If the value after a prefix is empty, return false.
+     * Else, return true.
+     */
+
+    private boolean ensureFormatCompliance(HashMap<String, Boolean> prefixStatusHash,
+                                   String desc, String date, String time) {
+        boolean isFormatOkay = true;
+        HashMap<String, String> inputStatusHash = new HashMap<>();
+        inputStatusHash.put("description", desc);
+        inputStatusHash.put("date", date);
+        inputStatusHash.put("datetime", time);
+
+        String[] statusArr = {"description", "date", "datetime"};
+
+        for (String s : statusArr) {
+            boolean status = prefixStatusHash.get(s);
+            String input = inputStatusHash.get(s).trim();
+            if (status && input.isEmpty()) {
+                isFormatOkay = false;
+                break;
+            }
+        }
+        return isFormatOkay;
+    }
+
+    /**
+     * Updates a Todo task.
+     *
+     * @param currentTask Current Todo task that is to be updated
+     * @param desc New description of the Todo Task
+     * @return Updated Todo task
+     */
+
     private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
-
-        if (!desc.isEmpty()) {
-            Description newDesc = ParserUtil.parseDescription(desc);
-            updatedToDoTask.setDescription(newDesc);
+        if (prefixStatusHash.get("date") || prefixStatusHash.get("datetime")) {
+            throw new ParseException(MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES);
         }
+
+        Description newDesc = ParserUtil.parseDescription(desc);
+        updatedToDoTask.setDescription(newDesc);
 
         return updatedToDoTask;
     }
 
+    /**
+     * Updates a Deadline task.
+     *
+     * @param currentTask Current Deadline task that is to be updated
+     * @param desc New description of the Deadline Task
+     * @param date New date of the Deadline Task
+     * @param time New time of the Deadline Task
+     * @return Updated Deadline task
+     */
+
     private Task updateDeadline(Deadline currentTask, String desc, String date, String time) throws ParseException {
         Deadline updatedDeadlineTask = new Deadline(currentTask);
+
+        if (!ensureFormatCompliance(prefixStatusHash, desc, date, time)) {
+            throw new ParseException(MESSAGE_EDIT_TASK_NO_EMPTY_VALUES);
+        }
 
         if (!desc.isEmpty()) {
             Description newDesc = ParserUtil.parseDescription(desc);
@@ -142,8 +202,23 @@ public class EditTaskCommand extends Command {
         return updatedDeadlineTask;
     }
 
+    /**
+     * Updates an Event task.
+     *
+     * @param currentTask Current Event task that is to be updated
+     * @param desc New description of the Event Task
+     * @param date New date of the Event Task
+     * @param startTime New start time of the Event Task
+     * @param endTime New end time of the Event Task
+     * @return Updated Event task
+     */
+
     private Task updateEvent(Event currentTask, String desc, String date, String time) throws ParseException {
         Event updatedEventTask = new Event(currentTask);
+
+        if (!ensureFormatCompliance(prefixStatusHash, desc, date, time)) {
+            throw new ParseException(MESSAGE_EDIT_TASK_NO_EMPTY_VALUES);
+        }
 
         if (!desc.isEmpty()) {
             Description newDesc = ParserUtil.parseDescription(desc);
@@ -165,7 +240,7 @@ public class EditTaskCommand extends Command {
             Time newStartTime = ParserUtil.parseTime(newStartEndTimeStrParts[0]);
             Time newEndTime = ParserUtil.parseTime(newStartEndTimeStrParts[1]);
 
-            if (newEndTime.getParsedTime().compareTo(newStartTime.getParsedTime()) < 0) {
+            if (newEndTime.getParsedTime().compareTo(newStartTime.getParsedTime()) < 1) {
                 throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
             }
 

@@ -1,12 +1,12 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.List;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
@@ -49,7 +49,7 @@ public class TagTaskPriorityCommand extends Command {
         List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task taskToTagPriority = lastShownList.get(targetIndex.getZeroBased());

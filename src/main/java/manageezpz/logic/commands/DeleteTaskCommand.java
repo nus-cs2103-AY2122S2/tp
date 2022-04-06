@@ -1,10 +1,10 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import java.util.List;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
@@ -45,7 +45,7 @@ public class DeleteTaskCommand extends Command {
         List<Task> lastShownTaskList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Task taskToDelete = lastShownTaskList.get(targetIndex.getZeroBased());
