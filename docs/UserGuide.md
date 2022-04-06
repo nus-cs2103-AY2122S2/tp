@@ -376,15 +376,15 @@ Finally, you can make a quick reference by listing all favourite companies using
 command.
 
 ## Use Case #6: Finding a company and/or role <a id="usecase6"></a>
-In the future where you have many applications, finding specific applications can be daunting. The
+In the future when you have many applications, finding specific applications can be daunting. The
 [find command](#c-find-c-r) allows you to search for applications easily with keywords matching `COMPANY_NAME` and `ROLE_NAME`.
 
-Say you are interested in finding out what are the roles you applied to at Google,
+Say you are interested in finding out what are the roles you had applied to at Google,
 you can make this entry:
 1. [Finding a company](#c-find-c-r) from the company list.
    ![FindCompanyDemo](images/FindCompanyDemo.png)
 
-Then after seeing that you have an interview for a backend role with Google, you want to check out the progress of similar roles.
+Then after realising that you have an interview for a backend role at Google, you want to check out the progress of similar roles.
 You can search for other backend roles by making this entry:
 2. [Finding all roles](#c-find-c-r) from the company list.
    ![FindRoleDemo](images/FindRoleDemo.png)
@@ -392,6 +392,12 @@ You can search for other backend roles by making this entry:
 <div markdown="span" class="alert alert-primary">
 
 :bulb: Find a specific role in a specific company by providing both `COMPANY_NAME` and `ROLE_NAME`. E.g. `find c/google r/backend engineer`.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: After performing the find command, the response box will contain role and company keywords which you have previously entered.
 
 </div>
 
