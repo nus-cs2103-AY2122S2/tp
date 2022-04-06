@@ -24,7 +24,7 @@ public class HouseBuilder {
     }
 
     /**
-     * Initializes the houseBuilder with the data of {@code clientToCopy}.
+     * Initializes the houseBuilder with the data of {@code houseToCopy}.
      */
     public HouseBuilder(House houseToCopy) {
         houseType = houseToCopy.getHouseType();
