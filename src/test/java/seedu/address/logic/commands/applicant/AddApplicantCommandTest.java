@@ -17,41 +17,41 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicantBuilder;
 
 public class AddApplicantCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullApplicant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddApplicantCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Applicant validApplicant = new PersonBuilder().build();
+    public void execute_applicantAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingApplicantAdded modelStub = new ModelStubAcceptingApplicantAdded();
+        Applicant validApplicant = new ApplicantBuilder().build();
 
         CommandResult commandResult = new AddApplicantCommand(validApplicant).execute(modelStub);
 
         assertEquals(String.format(AddApplicantCommand.MESSAGE_SUCCESS, validApplicant),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validApplicant), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validApplicant), modelStub.applicantsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Applicant validApplicant = new PersonBuilder().build();
+    public void execute_duplicateApplicant_throwsCommandException() {
+        Applicant validApplicant = new ApplicantBuilder().build();
         AddApplicantCommand addApplicantCommand = new AddApplicantCommand(validApplicant);
-        ModelStub modelStub = new ModelStubWithPerson(validApplicant);
+        ModelStub modelStub = new ModelStubWithApplicant(validApplicant);
 
         assertThrows(CommandException.class,
-                AddApplicantCommand.MESSAGE_DUPLICATE_PERSON, () -> addApplicantCommand.execute(modelStub));
+                AddApplicantCommand.MESSAGE_DUPLICATE_APPLICANT, () -> addApplicantCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Applicant alice = new PersonBuilder().withName("Alice").build();
-        Applicant bob = new PersonBuilder().withName("Bob").build();
+        Applicant alice = new ApplicantBuilder().withName("Alice").build();
+        Applicant bob = new ApplicantBuilder().withName("Bob").build();
         AddApplicantCommand addAliceCommand = new AddApplicantCommand(alice);
         AddApplicantCommand addBobCommand = new AddApplicantCommand(bob);
 
@@ -75,37 +75,37 @@ public class AddApplicantCommandTest {
     /**
      * A Model stub that contains a single applicant.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithApplicant extends ModelStub {
         private final Applicant applicant;
 
-        ModelStubWithPerson(Applicant applicant) {
+        ModelStubWithApplicant(Applicant applicant) {
             requireNonNull(applicant);
             this.applicant = applicant;
         }
 
         @Override
-        public boolean hasPerson(Applicant applicant) {
+        public boolean hasApplicant(Applicant applicant) {
             requireNonNull(applicant);
-            return this.applicant.isSamePerson(applicant);
+            return this.applicant.isSameApplicant(applicant);
         }
     }
 
     /**
      * A Model stub that always accept the applicant being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Applicant> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingApplicantAdded extends ModelStub {
+        final ArrayList<Applicant> applicantsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Applicant applicant) {
+        public boolean hasApplicant(Applicant applicant) {
             requireNonNull(applicant);
-            return personsAdded.stream().anyMatch(applicant::isSamePerson);
+            return applicantsAdded.stream().anyMatch(applicant::isSameApplicant);
         }
 
         @Override
-        public void addPerson(Applicant applicant) {
+        public void addApplicant(Applicant applicant) {
             requireNonNull(applicant);
-            personsAdded.add(applicant);
+            applicantsAdded.add(applicant);
         }
 
         @Override
