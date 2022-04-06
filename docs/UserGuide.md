@@ -56,6 +56,10 @@ Note how the app contains some sample data.<br> ![Ui](images/Ui.png)
   * e.g. in `addstudent -n <STUDENT_NAME>`, `<STUDENT_NAME>` is a parameter which 
   can be used as `addstudent -n John Doe`.
 
+* **Words in `[SQUARE BRACKETS]` are parameters that are optional.**
+  * e.g. in the command `editstudent INDEX [-n NAME] [-p PHONE]...`, `[-n NAME]` and `[-p PHONE]` are optional 
+  parameters.
+
 * **Parameters can be in any order.**
   * e.g. if the command specifies `-n <LESSON_NAME> -d <DATE/START_DATE> -t <START_TIME>`, <br>
   `-d <DATE / START_DATE> -t <START_TIME> -n <lesson_NAME>` is also acceptable.
@@ -69,12 +73,54 @@ or lesson in the viewable lists.**
   * e.g. `assign -s 1 -l 1 -l 2` is not allowed as there are two `-l` prefixes present in the command.
 
 * Where `<START_TIME>` is required, the application requires the 24-hour time format.
-  * e.g 6pm would be 18:00
+  * e.g. 6pm would be 18:00
+
+* When a `<DATE>` needs to be specified, it should have the format `DD-MM-YYYY`.
+  * e.g. 21st March 2022 should have entered as `21-03-2022`.
 
 * In each Feature description, the command word section will tell you what the command words are for each command.
 You may see more than one command word for a command, the second one being the shorter command for more advanced users.
 * Integer refers to a maximum value of 2147483647.
 </div>
+
+---
+
+### Viewing a student
+
+Displays the details for the student with the specified student ID.
+
+Command word: `student`
+
+Format: `student <STUDENT_ID>`
+
+Examples: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
+
+___
+
+### Viewing a lesson
+Displays the details for the lesson with the specified lesson ID.
+
+Command word: `lesson`
+
+Format: `lesson <LESSON_ID>`
+
+Example: `lesson 3` displays the details of the lesson with `LESSON_ID` of **3**.
+
+---
+
+### Viewing all students
+
+Format: `liststudents` / `ls`
+
+Example: `liststudents` would display a list of all the students that a tutor has.
+
+---
+
+### Viewing all lessons
+
+Format: `listlessons` / `ll`
+
+Example: `listlessons` would display a list of all the lessons that a tutor has.
 
 ---
 
@@ -112,7 +158,7 @@ Edits an existing student in TeachWhat!.
 
 Command word: `editstudent` / `es`
 
-Format: `editstudent <STUDENT_ID> -n <NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>`
+Format: `editstudent <STUDENT_ID> -n [NAME] -p [PHONE_NO] -e [EMAIL] -a [ADDRESS] -t [TAG]`
 
 Example: `editstudent 2 -n Sammy -p 123 -t codinggod -t extrageeky -t extrahansum`
 
@@ -147,7 +193,7 @@ Adds a lesson to TeachWhat!
 
 Command word: `addlesson` / `al`
 
-Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES> -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
+Format: `addlesson [-r] -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES] -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
 
 <div markdown="block" class="alert alert-info">
 
@@ -157,7 +203,8 @@ Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTI
 
 **Note that:**
 - The subject and address are optional fields and can be omitted so that the tutor only keeps the most vital information of the lesson.
-- Lesson durations cannot be greater than 24 hours!
+- Lesson durations cannot be greater than **24 hours**!
+- You can use `-h` and `-m` together to specify a more precise duration
 
 Supported Types: Recurring `-r` and Temporary
 
@@ -187,7 +234,7 @@ Edits an existing lesson in TeachWhat!.
 
 Command word: `editlesson` / `el`
 
-Format: `editlesson <LESSON_ID> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`
+Format: `editlesson <LESSON_ID> -n [LESSON_NAME] -s [SUBJECT] -a [ADDRESS_OF_LESSON] -d [DATE_OF_LESSON] -t [STARTING_TIME] -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES]`
 
 Example: `editlesson 2 -n Bio Make Up Session -t 17:00 -h 2`
 
@@ -200,8 +247,8 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 **Note that:**
 
 * Editing of the lesson's type is not allowed. Recurring lessons cannot be edited to become temporary lessons and vice-versa.
-* If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than 24 hours!
-
+* If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than **24 hours**!
+* You can use `-h` and `-m` together to specify a more precise duration
 ---
 
 ### Deleting a lesson
@@ -247,45 +294,6 @@ Example: `liststudents` followed by `unassign -s 5 -l 11` unassigns the student 
 to the lesson with `<LESSON_ID>` of **11**.
 
 ---
-
-### Viewing all lessons
-
-Format: `listlessons` / `ll`
-
-Example: `listlessons` would display a list of all the lessons that a tutor has.
-
----
-
-### Viewing all students
-
-Format: `liststudents` / `ls`
-
-Example: `liststudents` would display a list of all the students that a tutor has.
-
----
-
-### Viewing a lesson
-Displays the details for the lesson with the specified lesson ID.
-
-Command word: `lesson`
-
-Format: `lesson <LESSON_ID>` 
-
-Example: `lesson 3` displays the details of the lesson with `LESSON_ID` of **3**.
-
----
-
-### Viewing a student
-
-Displays the details for the student with the specified student ID.
-
-Command word: `student`
-
-Format: `student <STUDENT_ID>`
-
-Examples: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
-
-___
 
 ### Finding a Student
 
