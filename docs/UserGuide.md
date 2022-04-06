@@ -15,7 +15,7 @@ of easily, so that you may focus on the things that **truly** matter: taking goo
 --------------------------------------------------------------------------------------------------------------------
 # WoofAreYou
 
-WoofAreYou is a desktop application for pet daycare owners like you to handle the administrative information of your clients. 
+WoofAreYou is a desktop application for pet daycare owners like you to handle the administrative information of your clients.
 WoofAreYou is faster than many traditional platforms, such as Microsoft Excel or Google Sheets, when you want to consolidate
 all your clients' information. You can perform a variety of tasks by typing in a single command using CLI (Command Line
 Interface) syntax. Just tell WoofAreYou what you want to do, and it will get it done quickly and efficiently.
@@ -247,7 +247,7 @@ This subsection covers the features that you may encounter when taking care of a
 
 ### Add pets' dietary requirements: `diet` ###
 
-Your clients may provide you with instructions on what their pets can or cannot consume, in the event that their pets suffer 
+Your clients may provide you with instructions on what their pets can or cannot consume, in the event that their pets suffer
 from health issues. You may wish to include a diet remark along with such pets in WoofAreYou to take note.
 
 Format: `diet INDEX d/REMARK`
@@ -266,7 +266,7 @@ Examples:
 
 ### Add / Clear pets' appointment details: `app` ###
 
-In the event that your client tasks you with bringing their pets out for their vet or grooming appointments, you may wish 
+In the event that your client tasks you with bringing their pets out for their vet or grooming appointments, you may wish
 to note down the relevant details of such appointments, such as the date, time and location.
 
 <div markdown="block" class="alert alert-info">
@@ -312,7 +312,7 @@ Examples:
 **:information_source: Pro-tip about the command:**<br>
 
 You may have observed that the appointment label for the appointment has turned <span style="color:lime">green</span> for
-Woofie. This happens if the appointment you keyed in is happening **today**. If the appointment has passed, the label will 
+Woofie. This happens if the appointment you keyed in is happening **today**. If the appointment has passed, the label will
 turn <span style="color:red">red</span> and you may want to clear the appointment. If the appointment has yet to happen,
 the label will be <span style="color:grey">grey</span>.
 
@@ -322,15 +322,15 @@ This can serve as a visual cue for you if you need a reminder for the pet's appo
 
 ## _Efficiency Enhancement_
 
-You may have noticed that a handful of commands require `INDEX`, and that it is troublesome to scroll through WoofAreYou 
+You may have noticed that a handful of commands require `INDEX`, and that it is troublesome to scroll through WoofAreYou
 to find that one pet's `INDEX` if you have many clients. Hence, this subsection covers the features that will make your
 life easier when using the features previously introduced.
 
 ### Find pet details: `find`
 
-In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names, you can use this function to find pets with a particular name. 
+In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names, you can use this function to find pets with a particular name.
 
-If there are multiple pets with the same name, all such pets will be displayed. 
+If there are multiple pets with the same name, all such pets will be displayed.
 
 You can also find multiple pets by providing multiple pet names as keywords.
 
@@ -348,15 +348,15 @@ Examples:
 
 ### Sort pets: `sort`
 
-You may also find sorting pets in WoofAreYou useful during your daily administration. 
+You may also find sorting pets in WoofAreYou useful during your daily administration.
 
-The command returns a sorted list of pets according to the parameter chosen. 
+The command returns a sorted list of pets according to the parameter chosen.
 
-You can choose to either sort pets alphabetically, 
+You can choose to either sort pets alphabetically,
 * By the pets' names
 * By the owners' names
 
-You can also sort pets chronologically, 
+You can also sort pets chronologically,
 * By their appointment dates
 * By their transport pick-up times
 * By their transport drop-off times
@@ -380,9 +380,9 @@ Examples:
 ### Filter pet list: `filter`
 
 If you just want to know common information about some pets, you can filter the pets in WoofAreYou by a specified field.
-* You can filter by date, to find out which pets are present on a given date. 
-* You can filter by appointment, to find out which pets have appointments on a given date. 
-* You can filter by owner's name, to find all pets with the same owner. 
+* You can filter by date, to find out which pets are present on a given date.
+* You can filter by appointment, to find out which pets have appointments on a given date.
+* You can filter by owner's name, to find all pets with the same owner.
 * You can also filter by tags, to find all pets of a common breed.
 
 Format: `filter f/KEYWORD`
@@ -433,7 +433,7 @@ Format: `help`
 
 ## Command Summary
 
-The table below summarises all the commands and features in the order that we have discussed above. You can refer to this nifty table if you do not 
+The table below summarises all the commands and features in the order that we have discussed above. You can refer to this nifty table if you do not
 wish to deal with the nitty-gritty details of each feature.
 
 | Action        | Format                                                                                | Example                                                                                                               | Function                                                                                                              |

@@ -501,7 +501,7 @@ Use case ends.
 * 1b. User keyed in a duplicate pet.
 
     * 1b1. System shows and error message.
-    
+
       Use case resumes at step 1.
 
 **Use case: Delete a pet**
@@ -562,7 +562,7 @@ Use case ends.
 * 1b. User included special characters in dietary requirement.
 
   * 1b1. System shows an error message that dietary requirements only can consist of alphanumeric characters and spacing.
-    
+
     Use case resumes at step 1.
 
 
@@ -612,7 +612,7 @@ Use case ends.
 * 1b. User keyed in a date format that is of invalid format.
 
     * 1b1. System shows an error message.
-      
+
       User case resumes at step 1.
 
 * 1c. User keyed in a time format that is of invalid format.
@@ -724,7 +724,7 @@ Use case ends.
     * 1a1. System will not the previous command.
 
       Use case resumes at step 1.
-    
+
 
 **Use case: Exit**
 
