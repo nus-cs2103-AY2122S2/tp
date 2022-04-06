@@ -266,4 +266,4 @@ In which case, if the user wants to fix the data JSON, the user should exit the 
 | **Submit lab** | `labsub INDEX l/LAB_NUMBER`                                                                                                                             |
 | **Grade lab**  | `labgrad INDEX l/LAB_NUMBER m/LAB_MARK`                                                                                                                 |
 | **Edit lab**   | `labedit INDEX l/LAB_NUMBER [s/LAB_STATUS] [m/LAB_MARK]`                                                                                                |
-| **Remove lab** | `labrm l/LAB_NUMBER`                                                                                                                                    |                                                                                                                                                 
+| **Remove lab** | `labrm l/LAB_NUMBER`                                                                                                                                    |
