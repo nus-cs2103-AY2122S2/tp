@@ -7,7 +7,6 @@ import static seedu.trackermon.model.Model.PREDICATE_SHOW_ALL_SHOWS;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalShows.ALICE_IN_WONDERLAND;
 import static seedu.trackermon.testutil.TypicalShows.HIMYM;
-import static seedu.trackermon.testutil.TypicalShows.WEATHERING_WITH_YOU;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
