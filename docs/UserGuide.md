@@ -403,53 +403,53 @@ Format:
 
 On Person Page:
 
-`delete [INDEX]`
+Format: `delete [INDEX]`
 * Deletes the person at that index
 * The GUI will display the index before the person
 
-`delete [INDEX] p/ e/ t/[TAG] of/`
+Format: `delete [INDEX] p/ e/ t/[TAG] of/`
 * p/, e/, t/[TAG], of/ can be entered in any combination, for example, to delete only phone and email, the user can put `p/` and `e/`
 * At least 1 of {`p/`, `e/`, `t/[TAG]`, `of/`} must be entered, otherwise the `delete [INDEX]` command will be executed instead
 * Only 0 or 1 of each tag must be provided
 
 On Module Page:
 
-`delete [INDEX]`
+Format: `delete [INDEX]`
 * Deletes the module at that index
 * The GUI will display the index before the module
 
 For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `prof/1` and `stu/1` is both provided, `delete 1 prof/1` will be prioritised because `prof/` is higher than `stu/` on this list.
 
-`delete [INDEX] prof/[INDEX]`
+Format: `delete [INDEX] prof/[INDEX]`
 * Delete professor from module (The original person is not deleted, only removed from the module)
 * The first index represents the index for which module to remove a professor from
 * The second index (after prof/) represents the index for which professor to remove
 * For example, `delete 2 prof/1` would delete the professor at index 1 from the module at index 2
 
-`delete [INDEX] stu/[INDEX]`
+Format: `delete [INDEX] stu/[INDEX]`
 * Same as the above command, but index after stu/ represents the student list index to be deleted
 
-`delete [INDEX] g/[GROUPNAME]`
+Format: `delete [INDEX] g/[GROUPNAME]`
 * same as the above command, but group name has to be specified to delete the group with that name
 
-`delete [INDEX] ke/[INDEX]`
+Format: `delete [INDEX] ke/[INDEX]`
 * same as the above command, but index after ke/ represents the key event index to be deleted
 
 On Group page:
 
-`delete [INDEX]`
+Format: `delete [INDEX]`
 * Deletes the group at that index
 * The GUI will display the index before the group
 
 For the following commands, if more than 1 of the following tags are provided, the priority will be in this order. For example, if `mt/1` and `stu/1` is both provided, `delete 1 stu/1` will be prioritised because `stu/` is higher than `mt/` on this list.
 
-`delete [INDEX] stu/[INDEX]`
+Format: `delete [INDEX] stu/[INDEX]`
 * Delete student from group
 * The first index represents the index for which group to remove the student from
 * The second index (after stu/) represents the index for which student to delete
 * For example, `delete 2 stu/1` would delete the student at index 1 for the group at index 2
 
-`delete [INDEX] mt/[INDEX]`
+Format: `delete [INDEX] mt/[INDEX]`
 * Delete meeting time from group
 * The first index represents the index for which group to remove the meeting time for
 * The second index (after mt/) represents the index for which meeting time to delete
@@ -457,12 +457,12 @@ For the following commands, if more than 1 of the following tags are provided, t
 
 On Any Page:
 
-`delete o/module m/[MODULECODE]`
+Format: `delete o/module m/[MODULECODE]`
 * Deletes the module with the specified `MODULECODE`.
 * The module must already exist in the system.
 * For example, `delete o/module m/CS2103` removes the module with module code CS2103
 
-`delete o/group m/[MODULECODE] g/[GROUPNAME]`
+Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
 * Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
 * For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
