@@ -7,9 +7,9 @@ public enum Status {
     PLAN_TO_WATCH("plan-to-watch");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Status should only be completed or watching or plan to watch!";
+            "Status should only be completed, watching, or plan-to-watch!";
 
-    private static final String PATTERN = "PLAN[^/]*TO[^/]*WATCH";
+    private static final String PATTERN = "PLAN-TO-WATCH";
 
     private final String status;
 
