@@ -35,9 +35,10 @@ Given below are my contributions to the project.
     * Added all the screenshots in User Guide
     * Added constraints for features
   * Developer Guide:
-    * Added user stories for `removetag`, `delete` multiple contacts, viewing all upcoming events
-    * Added use cases for `removetag`, `find`, `delete` multiple contacts, viewing all upcoming events
-    * Added implementation for delete multiple contacts and UML diagrams
+    * Added user stories for `removetag`, `delete` multiple contacts, viewing events
+    * Added use cases for `removetag`, `find`, `delete` multiple contacts, viewing events
+    * Added implementation for delete multiple contacts and its UML diagrams
+    * Added implementation for remove tags and its UML diagrams
 
 * **Test Case Implementation**:
   * DeleteCommand

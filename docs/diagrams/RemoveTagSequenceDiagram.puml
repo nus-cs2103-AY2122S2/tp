@@ -11,14 +11,14 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "p1:Person" as Person MODEL_COLOR
+participant "p2:Person" as Person MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("removetag 2 edu/info sec \nm/cs2100 m/cs2107")
+[-> LogicManager : execute("removetag 2 \nm/cs2100 m/cs2107")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("removetag 2 edu/info sec \nm/cs2100 m/cs2107")
+LogicManager -> AddressBookParser : parseCommand("removetag 2 \nm/cs2100 m/cs2107")
 activate AddressBookParser
 
 create RemoveTagCommandParser
@@ -31,9 +31,8 @@ deactivate RemoveTagCommandParser
 AddressBookParser -> RemoveTagCommandParser : parse("2")
 activate RemoveTagCommandParser
 
-RemoveTagCommandParser -> ParserUtil : parseTags("info sec")
-activate ParserUtil
 RemoveTagCommandParser -> ParserUtil : parseTags("cs2100, cs2107")
+activate ParserUtil
 create RemoveTagCommand
 ParserUtil -> RemoveTagCommand
 activate RemoveTagCommand
@@ -58,15 +57,15 @@ activate RemoveTagCommand
 create Person
 RemoveTagCommand -> Person
 activate Person
-Person --> RemoveTagCommand : p1
+Person --> RemoveTagCommand : p2
 deactivate Person
 
-RemoveTagCommand -> RemoveTagCommand : remove matching tags from p1
+RemoveTagCommand -> RemoveTagCommand : remove matching tags from p2
 activate RemoveTagCommand
-RemoveTagCommand --> RemoveTagCommand : new_p1
+RemoveTagCommand --> RemoveTagCommand : new_p2
 deactivate RemoveTagCommand
 
-RemoveTagCommand -> Model : setPerson(p1, new_p1)
+RemoveTagCommand -> Model : setPerson(p2, new_p2)
 activate Model
 Model --> RemoveTagCommand
 deactivate Model

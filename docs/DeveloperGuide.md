@@ -211,24 +211,49 @@ allow subclasses of `Tag` to be tagged to a person. Currently, there are 4 of su
 
 Below is an example usage scenario and how the tagging mechanism behaves at each step:
 
-Step 1. The user enters the following valid `TagCommand`: `tag 1 edu/computer science m/cs2030s m/cs2040s` and `LogicManager`
+**Step 1.** The user enters the following valid `TagCommand`: `tag 1 edu/computer science m/cs2030s m/cs2040s` and `LogicManager`
 would execute it.
 
-Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as a `TagCommand`.
+**Step 2.** `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as a `TagCommand`.
 It will then pass the arguments to `TagCommandParser` to handle the parsing for the identified `TagCommand`.
 
-Step 3. `TagCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to.
+**Step 3.** `TagCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to.
 Afterwards, `TagCommandParser` would parse the tag arguments provided using `ParserUtil#parseTags()` to identify the individual
 tag types for the arguments provided.
 
-Step 4. After parsing the arguments, the control is handed over to `TagCommand` where it will return a `TagCommand` object. It
+**Step 4.** After parsing the arguments, the control is handed over to `TagCommand` where it will return a `TagCommand` object. It
 will eventually return to `LogicManager` which will call `TagCommand#execute()` to execute the command.
 
-Step 5. Upon execution, the person will be fetched and tagged using `Model#setPerson`. The edited person would then be updated
-and stored in the addressbook.`CommandResult` would then generate a success message to inform the user the person has been tagged
+**Step 5.** Upon execution, the person will be fetched and tagged using `Model#setPerson`. The edited person would then be updated
+and stored in the addressbook. `CommandResult` would then generate a success message to inform the user the person has been tagged
 successfully.
 
-![The following sequence diagram shows how the tag operation works:](images/TagSequenceDiagram.png)
+The following sequence diagram shows how the tag operation works:
+![Tag Sequence Diagram](images/TagSequenceDiagram.png)
+
+### Remove Tag feature
+
+#### Current implementation
+The `removetag` command creates and copies the target `Person` into a new `Person` object, except all tags are stored in hashsets instead. <br>
+Hashsets allow the application to perform fast searches and checks, such as checking if all provided tags are existing tags in the target `Person` and to utilize the `removeAll()` function.
+`removetag` will not allow user to remove a non-existent tag.
+
+Given below is an example scenario of how the `removetag` command works.
+
+**Step 1:** User inputs the following valid `removetag` command: `removetag 2 m/cs2107 m/cs2100`.
+
+**Step 2:** The second person on the contact list happens to be David, and he has 4 tags. Below is an object diagram of David during the command execution, before any removal of tags.
+
+<img src="images/RemoveTagState0.png" width="450" />
+
+**Step 3:** After checking that David indeed has the module tags `cs2107` and `cs2100` given by the command input, the command will execute the removal of tags.
+
+**Step 4:** The removal of tags is successful, and a success message will be generated.
+
+<img src="images/RemoveTagState1.png" width="450" />
+
+The following sequence diagram shows how the `removetag` operation works: <br>
+![Removetag Sequence Diagram](images/RemoveTagSequenceDiagram.png)
 
 ### Event feature
 
@@ -244,25 +269,26 @@ For each `Event`, the user is able to indicate which of the following persons wi
 `Delete` and `Edit` have dependencies on `Event` where changes in the participants' names would have to be changed and reflected
 accordingly for the respective events that are affected.
 
-Below is an example usage scenario and how the tagging mechanism behaves at each step:
+Below is an example usage scenario and how the event mechanism behaves at each step:
 
-Step 1. The user enters the valid `EventCommand` : `event 1 name/Lunch Appt info/Having lunch at Hai Di Lao d/2023-02-20 t/12:15` and
+**Step 1.** The user enters the valid `EventCommand` : `event 1 name/Lunch Appt info/Having lunch at Hai Di Lao d/2023-02-20 t/12:15` and
 `LogicManager` would execute it.
 
-Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `EventCommand`.
+**Step 2.** `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `EventCommand`.
 It will then pass the arguments to `EventCommandParser` to handle the parsing for the identified `EventCommand`.
 
-Step 3. `EventCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to the event.
+**Step 3.** `EventCommandParser` would first parse the index using `ParserUtil#parseIndex()` to identify the person to tag to the event.
 Afterwards, `EventCommandParser` would parse the event arguments provided using `ParserUtil#parseEventName()` to identify the event name,
 `ParserUtil#parseInfo()` to identify the event details and `ParserUtil#parseDateTime()` to identify the event date and time.
 
-Step 4. After parsing the arguments, the control is handed over to `EventCommand` where it will return an `EventCommand` object. It
+**Step 4.** After parsing the arguments, the control is handed over to `EventCommand` where it will return an `EventCommand` object. It
 will eventually return to `LogicManager` which will call `EventCommand#execute()` to execute the command.
 
-Step 5. Upon execution, the event will be created and added into the `AddressBook` using `Model#addEvent`. 
+**Step 5.** Upon execution, the event will be created and added into the `AddressBook` using `Model#addEvent`.
 `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
-![The following sequence diagram shows how the tag operation works:](images/EventSequenceDiagram.png)
+The following sequence diagram shows how the tag operation works:
+![Event Sequence Diagram](images/EventSequenceDiagram.png)
 
 ### Cancelevent feature
 
@@ -288,7 +314,8 @@ will eventually return to `LogicManager` which will call `CancelEventCommand#exe
 notifying the user later. Afterwards, the events will be deleted from the `AddressBook` using `Model#deleteEvent` within `CancelEventCommand#deleteFromList`.
 Finally, `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
-![The following sequence diagram shows how the tag operation works:](images/CancelEventSequenceDiagram.png)
+The following sequence diagram shows how the tag operation works:
+![Cancel Event Sequence Diagram](images/CancelEventSequenceDiagram.png)
 
 ### Edit Feature
 
@@ -299,19 +326,11 @@ are copied over from the existing person and the fields to be overwritten are ch
 the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
 
 #### Current Implementation
-The edit command has now been upgraded to support the functionality for overwriting multiple tag lists.
+The edit command has now been upgraded to support the functionality for multiple tags. Existing tags of a person will not be affected.
 
 
-### Removetag feature
-
-#### Current implementation
-The `removetag` command creates and copies the target `Person` into a new `Person` object, except all tags are stored in hashsets instead. <br>
-Hashsets allow the application to perform fast searches and checks, such as checking if all provided tags are existing tags in the target `Person` and to utilize the `removeAll()` function. 
-`removetag` will not allow user to remove a non-existent tag. 
-
+### Find feature
 ![The following sequence diagram shows how the removetag operation works:](images/RemoveTagSequenceDiagram.png)
-
-### Find features
 
 #### Original Implementation
 The existing Find feature in AB3 only allowed contacts to be searched for by name. We added additional functionalities
@@ -338,15 +357,15 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Step 1.** The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+**Step 2.** The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -354,7 +373,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+**Step 4.** The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -377,11 +396,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Step 5.** The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+**Step 6.** The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -592,11 +611,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1a. User specifies past or upcoming events.
 
     Use case resumes at step 2.
-    
+
 2a. NUSocials displays past or upcoming events instead.
 
     Use case ends.
-    
+
 2b. The given find command is invalid.
 
     - 2b1. NUSocials shows an error message.
@@ -802,6 +821,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. To simulate a missing or corrupted file, navigate to the `data` folder and delete `addressbook.json` or modify some data to be invalid (such as changing an event's date to 31st February or making someone's phone number exceed 10 digits).
+    1. Open the application, you will be greeted with an empty addressbook.
+    1. To recover, simply edit the `addressbook.json` again and reverse the changes made.
+    1. **Caution:** Deleting the whole `addresbook.json` fixes the issue as well. However, all previous data will be lost, and a sample addressbook will be loaded.
 
-1. _{ more test cases …​ }_
+2. How to save
+
+    1. NUSocials saves to any changes right away, there is no need for a manual save.
