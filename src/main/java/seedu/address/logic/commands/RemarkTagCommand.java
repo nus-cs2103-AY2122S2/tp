@@ -15,10 +15,11 @@ public class RemarkTagCommand extends Command {
 
     public static final String COMMAND_WORD = "remark_tag";
     public static final String MESSAGE_SUCCESS = "Modify remark success on tag %1$s";
+    public static final String MESSAGE_NO_SUCH_TAG = "Tag does not exist";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the tag identified by\n"
             + " it's tag name. Existing remark will be overwritten by the input.\n"
-            + "Parameters: t/TAG_NAME r/REMARK\n"
+            + "Parameters: t/TAG_NAME r/[REMARK]\n"
             + "Example: " + COMMAND_WORD + " labGroup1 r/meeting on Wed 8pm";
 
     private final Tag tag;
@@ -39,7 +40,7 @@ public class RemarkTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
 
         if (!model.hasTag(tag)) {
-            throw new CommandException("tag does not exist");
+            throw new CommandException(MESSAGE_NO_SUCH_TAG);
         }
 
         ObservableList<Tag> allTags = model.getTagList();

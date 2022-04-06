@@ -16,32 +16,31 @@
    <scene>
       <Scene>
          <stylesheets>
-            <URL value="@AddTagWindow.css" />
+            <URL value="@AddTagWindowDark.css" />
          </stylesheets>
          <HBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0">
-            <children>
-               <AnchorPane prefHeight="500.0" prefWidth="410.0" style="-fx-background-color: derive(#1d1d1d, 20%);">
-                  <children>
-                     <StackPane fx:id="resultDisplayPlaceholder" layoutX="50.0" layoutY="109.0" maxHeight="100" minHeight="29.0" prefHeight="29.0" prefWidth="301.0" HBox.hgrow="NEVER">
-                     </StackPane>
-                     <Text layoutX="43.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: white; -fx-font-family: Segoe UI Light;" text="Current Tags:" wrappingWidth="200.21630859375" />
-                     <ScrollPane layoutX="37.0" layoutY="172.0" prefWidth="327.0" style="-fx-background-color: derive(#1d1d1d, 20%);">
-                       <content>
-                         <AnchorPane prefHeight="198.0" prefWidth="325.0" style="-fx-background-color: derive(#1d1d1d, 20%);">
-                              <children>
-                                 <FlowPane fx:id="tagsPane" alignment="TOP_CENTER" layoutX="8.0" maxHeight="200.0" maxWidth="326.0" prefHeight="0.0" prefWidth="309.0">
+            <AnchorPane prefHeight="500.0" prefWidth="410.0" styleClass="background">
+               <StackPane fx:id="resultDisplayPlaceholder" layoutX="50.0" layoutY="109.0" maxHeight="100"
+                          minHeight="29.0" prefHeight="29.0" prefWidth="301.0" HBox.hgrow="NEVER">
+               </StackPane>
+               <Text layoutX="43.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                     styleClass="currentTagsText" text="Current Tags:"
+                     wrappingWidth="200.21630859375"/>
+               <ScrollPane layoutX="37.0" layoutY="172.0" prefWidth="327.0" styleClass="background">
+                  <AnchorPane prefHeight="198.0" prefWidth="325.0" styleClass="background">
+                     <FlowPane fx:id="tagsPane" alignment="TOP_CENTER" layoutX="8.0" maxHeight="200.0"
+                               maxWidth="326.0" prefHeight="0.0" prefWidth="309.0">
                      </FlowPane>
-                              </children>
-                           </AnchorPane>
-                       </content>
-                     </ScrollPane>
-                     <Button layoutX="50.0" layoutY="407.0" mnemonicParsing="false" onAction="#addTagHandler" text="Add" />
-                     <Button layoutX="272.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete"/>
-                     <TextField fx:id="tagNameInput" layoutX="102.0" layoutY="66.0" prefHeight="34.0" prefWidth="197.0" promptText="Enter tag name..." style="-fx-font-family: Segoe UI Semibold;" />
-                     <Button layoutX="157.0" layoutY="407.0" mnemonicParsing="false" onAction="#selectButtonHandler" text="Select" />
-                  </children>
-               </AnchorPane>
-            </children>
+                  </AnchorPane>
+               </ScrollPane>
+               <Button layoutX="50.0" layoutY="407.0" mnemonicParsing="false" onAction="#addTagHandler" text="Add"/>
+               <Button layoutX="272.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleDelete"
+                       text="Delete"/>
+               <TextField fx:id="tagNameInput" layoutX="102.0" layoutY="66.0" prefHeight="34.0" prefWidth="197.0"
+                          promptText="Enter tag name..."/>
+               <Button layoutX="157.0" layoutY="407.0" mnemonicParsing="false" onAction="#selectButtonHandler"
+                       text="Select"/>
+            </AnchorPane>
          </HBox>
       </Scene>
    </scene>

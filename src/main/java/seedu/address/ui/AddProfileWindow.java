@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddProfileWindow extends UiPart<Stage> {
 
     private static final String FXML = "AddProfileWindow.fxml";
+    private Stage secondaryStage;
     private Logic logic;
     private ResultDisplay resultDisplay;
 
@@ -39,20 +40,18 @@ public class AddProfileWindow extends UiPart<Stage> {
     /**
      * Creates a new AddProfileWindow.
      *
-     * @param root Stage to use as the root of the AddTagWindow.
+     * @param secondaryStage Stage to use as the root of the AddTagWindow.
      */
-    public AddProfileWindow(Stage root, Logic logic) {
-        super(FXML, root);
+    public AddProfileWindow(Stage secondaryStage, Logic logic) {
+        super(FXML, secondaryStage);
         this.logic = logic;
+        this.secondaryStage = secondaryStage;
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
 
-    /**
-     * Creates a new addProfile Window.
-     */
-    public AddProfileWindow(Logic logic) {
-        this(new Stage(), logic);
+    public Stage getSecondaryStage() {
+        return secondaryStage;
     }
 
     /**

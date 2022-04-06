@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import seedu.address.ui.AddProfileWindow;
+import seedu.address.ui.AddTagWindow;
 
 /**
  * Represents a Dark Theme.
@@ -13,6 +15,10 @@ public class DarkTheme extends Theme {
             .toExternalForm();
     private final String darkExtensionsResource = requireNonNull(getClass()
             .getResource("/view/ExtensionsDark.css")).toExternalForm();
+    private final String darkAddTagWindow = requireNonNull(getClass()
+            .getResource("/view/AddTagWindowDark.css")).toExternalForm();
+    private final String darkAddProfileWindow = requireNonNull(getClass()
+            .getResource("/view/AddProfileWindowDark.css")).toExternalForm();
 
     public DarkTheme() {}
 
@@ -21,10 +27,14 @@ public class DarkTheme extends Theme {
      */
     @Override
     @FXML
-    public void applyTheme(Stage stage) {
+    public void applyTheme(Stage stage, AddTagWindow addTagWindow, AddProfileWindow addProfileWindow) {
         stage.getScene().getStylesheets().clear();
         stage.getScene().getStylesheets().add(this.darkThemeResource);
         stage.getScene().getStylesheets().add(this.darkExtensionsResource);
+        addTagWindow.getSecondaryStage().getScene().getStylesheets().clear();
+        addTagWindow.getSecondaryStage().getScene().getStylesheets().add(this.darkAddTagWindow);
+        addProfileWindow.getSecondaryStage().getScene().getStylesheets().clear();
+        addProfileWindow.getSecondaryStage().getScene().getStylesheets().add(this.darkAddProfileWindow);
     }
 
     @Override

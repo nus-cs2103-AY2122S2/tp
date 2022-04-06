@@ -38,7 +38,7 @@ public class TagCard extends UiPart<Region> {
         this.personInTag = personInTag;
         id.setText(displayedIndex + ". ");
         tagName.setText(tag.getTagName());
-        personInTagCount.setText(String.valueOf(personInTag));
+        personInTagCount.setText(personInTag + " " + (personInTag > 1 ? "people" : "person"));
         remark.setText(tag.getRemark().toString());
     }
 
