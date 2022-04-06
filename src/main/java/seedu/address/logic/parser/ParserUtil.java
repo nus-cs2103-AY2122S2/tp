@@ -159,12 +159,34 @@ public class ParserUtil {
     public static LocalDateTime parseAppointmentDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        try {
-            return LocalDateTime.parse(trimmedDateTime, formatter);
-        } catch (Exception e) {
-            throw new ParseException("Appointment date and time should be entered in dd-MM-yyyy HH:mm format!");
+        String[] dateTimeInfo = trimmedDateTime.split(" ");
+
+        if (dateTimeInfo.length != 2) {
+            throw new ParseException("Please ensure both Appointment date and time are entered in "
+                    + "dd-MM-yyyy HH:mm format.");
         }
+
+        String dateInput = dateTimeInfo[0];
+        String timeInput = dateTimeInfo[1];
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalDate date;
+        LocalTime time;
+
+        try {
+            date = LocalDate.parse(dateInput, dateFormatter);
+        } catch (Exception e) {
+            throw new ParseException("Appointment date is an invalid entry.");
+        }
+
+        try {
+            time = LocalTime.parse(timeInput, timeFormatter);
+        } catch (Exception e) {
+            throw new ParseException("Appointment time is an invalid entry.");
+        }
+
+        return LocalDateTime.of(date, time);
     }
 
     /**
