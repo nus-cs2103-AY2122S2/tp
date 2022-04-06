@@ -12,8 +12,6 @@ public class Diet {
      * Diet should not contain special characters.
     */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]*$";
-    public final String value;
-
     public static final String MESSAGE_CONSTRAINTS =
             "Diet description can be empty but should only contain alphanumeric characters or spaces.";
 

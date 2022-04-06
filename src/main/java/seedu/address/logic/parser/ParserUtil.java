@@ -17,7 +17,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ChargeCommand;
-import seedu.address.logic.commands.DietCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.charge.Charge;
 import seedu.address.model.pet.Address;
@@ -61,22 +60,6 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
-
-    /**
-     * Parses a {@code String diet} into a {@code Diet}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code diet} is invalid.
-     */
-    public static Diet parseDiet(String diet) throws ParseException {
-        requireNonNull(diet);
-        String trimmedDiet = diet.trim();
-        if (!Diet.isValidDiet(trimmedDiet)) {
-            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
-        }
-        return new Diet(trimmedDiet);
-    }
-
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -148,11 +131,10 @@ public class ParserUtil {
         requireNonNull(diet);
         String trimmedDiet = diet.trim();
         if (!Diet.isValidDiet(trimmedDiet)) {
-            throw new ParseException(DietCommand.MESSAGE_USAGE);
+            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
         }
         return new Diet(trimmedDiet);
     }
-
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */

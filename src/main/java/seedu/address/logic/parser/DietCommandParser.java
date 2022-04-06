@@ -34,7 +34,7 @@ public class DietCommandParser implements Parser<DietCommand> {
         try {
             diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).orElse(""));
         } catch (ParseException e) {
-            throw new ParseException(DietCommand.MESSAGE_USAGE);
+            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
         }
 
         Index index;
