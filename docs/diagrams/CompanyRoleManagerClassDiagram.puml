@@ -26,6 +26,9 @@ Class Description
 Class Stipend
 }
 
+Package Reminder\n <<Rectangle>> {
+Class Reminder
+}
 
 Class HiddenOutside #FFFFFF
 HiddenOutside --> "~* all" Company
@@ -45,5 +48,12 @@ Role *--> "1" Description
 Role *--> "1" ReminderDate
 Role *--> "1" Status
 Role *--> "1" Stipend
+
+Reminder *-up-> "1"CompanyName
+Reminder *-up-> "1"ReminderDate
+Reminder *-up-> "1"RoleName
+Reminder *-up-> "1"Status
+
+
 
 @enduml

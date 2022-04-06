@@ -21,7 +21,9 @@ title: Developer Guide
     * [Delete role feature](#delete-role-feature)
         * [Implementation](#implementation-delete)
         * [Design considerations](#design-considerations-delete)
-  * [Favourite role feature](#favourite-role-feature)
+    * [Reminder feature](#reminder-feature)
+        * [Implementation](#implementation-reminder)
+    * [Favourite feature](#favourite-feature)
         * [Implementation](#implementation-favourite)
         * [Design considerations](#design-considerations-favourite)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -37,6 +39,7 @@ title: Developer Guide
   * [Editing a company](#editing-a-company)
   * [Deleting a company](#deleting-a-company)
   * [Editing a role](#editing-a-role)
+  * [Using the reminder feature](#using-reminders)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,8 +164,9 @@ Breakdown of the Company and RoleManager packages:
 The `Model` component,
 
 * stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object).
-* stores the currently selected `Company` and `Role` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently selected `Company`, `Role` and `Reminder` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* the `Reminder` objects store data of a role in a company that has a reminder date that is within the reminder window.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage Component <a id="storage"></a>
@@ -287,6 +291,28 @@ The following sequence diagram shows how the `deleteRole` command operation work
 6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
 7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
+
+### Reminder feature <a id="reminder-feature"></a>
+Whenever the user starts up the application, a reminder pane will automatically open along with the main window, showing all roles and their respective companies that have reminder dates that are within the reminder window.
+
+The fields of the `Reminder` that will be shown are as follows:
+* `Company Name`
+* `RoleName`
+* `ReminderDate`
+* `Status`
+
+#### Implementation <a id="implementation-reminder"></a>
+
+Given below is an example scenario on how the reminder feature works:
+1. The user has a role in a company with a reminder date of 30-04-2022 23:59.
+2. Assuming that the reminder window is at its default of 7 days, and today is within 7 days from 30th April 2022, when the user opens the application, the reminder pane will display the given role and its relevant fields as mentioned above.
+
+The following sequence diagram shows how the reminder feature works:
+![Sequence diagram of the Reminder feature](images/ReminderDiagram.png)
+
+The following activity diagram summarises what happens when the user opens the application to see upcoming reminders:
+![Activity diagram of the Reminder feature](images/ReminderActivityDiagram.png)
+
 ### Favourite feature <a id="favourite-feature"></a>
 
 The `favourite` feature allows users to highlight specific companies. Favourited companies are indicated using a star beside their company name in the GUI.
@@ -323,7 +349,6 @@ The following activity diagram summarises what happens when a user executes the 
         * Users can modify all fields within a company, including the favourite status, with the use of one single command. 
     * Cons:
         * It is less straightforward for users to use `editCompany` to favourite a company. This also means that the favourite status field will not stand out to users.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -496,6 +521,18 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
+**Use case: UC06 - Adding or editing a role with a reminder date**
+
+Precondition: there exist at least one company stored in Tinner
+
+Guarantees: every role in companies that have reminder dates within the reminder window from today will be shown
+
+1. The user [adds a role(UC02)]() or [edits a role(UCXX)]() that has a reminder date.
+2. Tinner shows success message and adds/edits the role.
+3. The user closes the application and opens it up again immediately or some time in the future
+4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date/
+    Use case ends
+
 *{More to be added}*
 
 ### Non-Functional Requirements <a id="non-functional-requirements"></a>
@@ -505,6 +542,8 @@ Guarantees: every company stored in Tinner will be shown
 3. Should require no installation
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. Should be responsive and have a latency of less than 3 seconds
+
+
 
 *{More to be added}*
 
@@ -598,6 +637,16 @@ Guarantees: every company stored in Tinner will be shown
 6. Other incorrect test cases to try: `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
    1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
    The response box shows error message that company/ role index is invalid
+
+
+### Using the reminder feature <a id="using-reminders"></a>
+1. Prerequisites: At least 1 company with one role must exist and is listed on index 1 using the `list` command, test cases assume default reminder window of 7 days is used
+2. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS WITHIN 7 DAYS FROM TODAY>` (e.g. if today is 06-04-2022, test case should use any date between 06-04-2022 to 13-04-2022)
+   1. Expected: When you close and reopen the application, the reminder pane will show the added role.
+3. Test case: `editRole 1 n/Software Engineer r/<INSERT DATE THAT IS IN THE PAST>` (e.g. if today is 06-04-2022 , use any date before then like 05-04-2022)
+   1. Expected: The response box shows an error message that the reminder date should not be in the past.
+4. Test case: `editRole 1 n/Software Engineer r/<INSERT INVALID DATE>` (e.g. 31-04-2022)
+   1. Expected: THe response box shows an error message that the reminder date should be a valid date.
 
 ### Finding a role <a id="finding-a-role"></a>
 1. Prerequisites: There must be 2 companies which are listed using the `list` command. The first company must have the name `meta` containing a role with the name `software engineer` followed by another role with the name `data engineer`. The second company must have the name `google` containing a role with the name `mobile engineer` followed by another role with the name `data engineer`.

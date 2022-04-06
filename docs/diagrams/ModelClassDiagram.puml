@@ -12,16 +12,21 @@ Class "<<interface>>\nModel" as Model
 Class CompanyList
 Class ModelManager
 Class UserPrefs
+Class UniqueReminderList
 
 Package Company\n <<Rectangle>>{
 Class Company
 }
 Class UniqueCompanyList
 
+
 Package RoleManager\n <<Rectangle>> {
 Class RoleManager
 }
 
+Package Reminder\n <<Rectangle>> {
+Class Reminder
+}
 }
 
 Class HiddenOutside #FFFFFF
@@ -33,12 +38,15 @@ ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyCompanyList
 ModelManager -left-> "1" CompanyList
+ModelManager -down-> "1" UniqueReminderList
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 CompanyList *--> "1" UniqueCompanyList
-UniqueCompanyList --> "~* all" Company
+UniqueCompanyList --> "     ~*all" Company
 Company *-right-> "1" RoleManager
+UniqueReminderList -right-> Reminder
+
 
 
 
