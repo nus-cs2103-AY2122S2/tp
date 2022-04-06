@@ -43,8 +43,8 @@ public class Name implements Comparable<Name> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.trackermon.model.show.Name // instanceof handles nulls
-                && fullName.equals(((seedu.trackermon.model.show.Name) other).fullName)); // state check
+                || (other instanceof Name // instanceof handles nulls
+                && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Name implements Comparable<Name> {
 
     @Override
     public int compareTo(Name other) {
-        return this.fullName.compareTo(other.fullName);
+        return this.fullName.toUpperCase().compareTo(other.fullName.toUpperCase());
     }
 }
 

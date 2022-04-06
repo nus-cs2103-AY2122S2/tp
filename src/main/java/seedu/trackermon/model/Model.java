@@ -15,9 +15,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Show> PREDICATE_SHOW_ALL_SHOWS = unused -> true;
 
-    /** {@code Comparator} that always evaluate to 0 */
-    Comparator<Show> COMPARATOR_SHOW_ALL_SHOWS = (unused, unused2) -> 0;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -55,6 +52,9 @@ public interface Model {
 
     /** Returns the ShowList */
     ReadOnlyShowList getShowList();
+
+    /** Returns the ShowList size */
+    int getShowListSize();
 
     /**
      * Returns true if a show with the same name as {@code show} exists in the show list.
@@ -97,5 +97,8 @@ public interface Model {
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedShowList(Comparator<Show> comparator);
-
+    /**
+     * Saves the ordering of the sorted show list.
+     */
+    void saveSortedShowList();
 }

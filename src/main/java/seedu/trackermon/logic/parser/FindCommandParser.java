@@ -2,6 +2,7 @@ package seedu.trackermon.logic.parser;
 
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -13,6 +14,8 @@ import java.util.function.Predicate;
 import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 import seedu.trackermon.model.show.NameContainsKeywordsPredicate;
+import seedu.trackermon.model.show.Rating;
+import seedu.trackermon.model.show.RatingContainsKeywordsPredicate;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.ShowContainsKeywordsPredicate;
 import seedu.trackermon.model.show.StatusContainsKeywordsPredicate;
@@ -30,18 +33,16 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
+                args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG, PREFIX_RATING);
         boolean hasPrefix = false;
         boolean hasNamePrefix = argumentMultimap.arePrefixesPresent(PREFIX_NAME);
         boolean hasStatusPrefix = argumentMultimap.arePrefixesPresent(PREFIX_STATUS);
         boolean hasTagPrefix = argumentMultimap.arePrefixesPresent(PREFIX_TAG);
+        boolean hasRatingPrefix = argumentMultimap.arePrefixesPresent(PREFIX_RATING);
         String[] keywordsArr;
 
         List<Predicate<Show>> predicateArrayList = new ArrayList<>();
-
-        // Based on prefix, add user input as keywords into predicateArrayList
-        // PredicateArrayList.add -> AND Operator
-        // Whole list of keywords -> OR Operator
         if (hasNamePrefix) {
             hasPrefix = true;
             String input = argumentMultimap.getValue(PREFIX_NAME).get();
@@ -69,8 +70,18 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
 
-        // if no prefix, find acts as a general search based on 1 keyword,
-        // otherwise it acts as a precise search based on prefix and keywords and implements an AND search
+        if (hasRatingPrefix) {
+            hasPrefix = true;
+            String input = argumentMultimap.getValue(PREFIX_RATING).get();
+            keywordsArr = getRatingKeywords(input);
+            for (int i = 0; i < keywordsArr.length; i++) {
+                keywordsArr[i] = keywordsArr[i].replaceFirst("^0+(?!$)", "");
+                if (!Rating.isValidScore(keywordsArr[i])) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.RATING_ERROR));
+                }
+                predicateArrayList.add(new RatingContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
+            }
+        }
         if (!hasPrefix) {
             keywordsArr = getKeywords(args);
             return new FindCommand(new ShowContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
@@ -84,6 +95,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        return trimmedArgs.split("\\s+");
+    }
+
+    public String[] getRatingKeywords(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.RATING_ERROR));
         }
         return trimmedArgs.split("\\s+");
     }

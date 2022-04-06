@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.trackermon.testutil.Assert.assertThrows;
@@ -36,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_HIMYM = "HIMYM";
     public static final String VALID_NAME_GONE = "gone";
     public static final String VALID_NAME_HANCOCK = "Hancock";
+    public static final String VALID_RATING_LOW = "1";
+    public static final String VALID_RATING_HIGH = "5";
     public static final String VALID_STATUS_COMPLETED = "completed";
     public static final String VALID_STATUS_WATCHING = "watching";
     public static final String VALID_TAG_MOVIE = "movie";
@@ -48,6 +51,8 @@ public class CommandTestUtil {
     public static final String COMMENT_DESC_BAD = " " + PREFIX_COMMENT + VALID_COMMENT_BAD;
     public static final String NAME_DESC_ALICE_IN_WONDERLAND = " " + PREFIX_NAME + VALID_NAME_ALICE_IN_WONDERLAND;
     public static final String NAME_DESC_GONE = " " + PREFIX_NAME + VALID_NAME_GONE;
+    public static final String RATING_DESC_HIGH = " " + PREFIX_RATING + VALID_RATING_HIGH;
+    public static final String RATING_DESC_LOW = " " + PREFIX_RATING + VALID_RATING_LOW;
     public static final String STATUS_DESC_COMPLETED = " " + PREFIX_STATUS + VALID_STATUS_COMPLETED;
     public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING;
     public static final String TAG_DESC_MOVIE = " " + PREFIX_TAG + VALID_TAG_MOVIE;
@@ -58,16 +63,18 @@ public class CommandTestUtil {
     public static final String INVALID_STATUS_DESC = " "
             + PREFIX_STATUS + "Watch"; // Status have to be completed or watching
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_RATING_DESC = " " + PREFIX_TAG + "A"; // 'A' not allowed in rating
 
     public static final EditCommand.EditShowDescriptor DESC_ALICE_IN_WONDERLAND;
     public static final EditCommand.EditShowDescriptor DESC_GONE;
 
     static {
         DESC_ALICE_IN_WONDERLAND = new EditShowDescriptorBuilder().withName(VALID_NAME_ALICE_IN_WONDERLAND)
-                .withStatus(VALID_STATUS_COMPLETED).withTags(VALID_TAG_MOVIE).withComment(VALID_COMMENT_BAD).build();
+                .withStatus(VALID_STATUS_COMPLETED).withTags(VALID_TAG_MOVIE).withComment(VALID_COMMENT_BAD)
+                .withRating(VALID_RATING_HIGH).build();
         DESC_GONE = new EditShowDescriptorBuilder().withName(VALID_NAME_GONE)
                 .withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_SERIES, VALID_TAG_HENTAI)
-                .withComment(VALID_COMMENT_BAD).build();
+                .withComment(VALID_COMMENT_BAD).withRating(VALID_RATING_LOW).build();
     }
 
     /**
@@ -76,7 +83,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
