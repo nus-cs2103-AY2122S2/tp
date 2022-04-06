@@ -8,45 +8,50 @@ import java.time.LocalDateTime;
 import javafx.scene.control.Label;
 import seedu.address.model.pet.Appointment;
 
-public class AppointmentTag {
+public class AppointmentTag extends Label {
     private static final String APPOINTMENT_TAG_PREFIX = "Appointment: ";
     private static final String APPOINTMENT_AFTER_TODAY_STYLE = "-fx-background-color: #c4c4c4";
     private static final String APPOINTMENT_BEFORE_TODAY_STYLE = "-fx-background-color: #ff595e";
     private static final String APPOINTMENT_TODAY_STYLE = "-fx-background-color: #90be6d";
     private static final LocalDate NOW = LocalDate.now();
 
-    private AppointmentTag() {
+    /**
+     * Creates a new pet appointment tag.
+     */
+    public AppointmentTag(Appointment appointment) {
+        super(getTagDetails(appointment));
+        super.setStyle(getTagStyle(appointment));
     }
 
     /**
-     * Create an appointment info label containing information of appointment for GUI if there is any.
-     * If appointment date is today label will be green,
-     * else if appointment date is in the future it will be grey,
-     * else red to signify appointment date is over.
+     * Retrieves the details of the pet's appointment to be displayed in the tag.
      *
-     * @param appointment Pet appointment
-     * @return Label with appropriate color
+     * @param appointment the pet's appointment.
+     * @return the details of the pet's appointment.
      */
-    public static Label createAppointmentTag(Appointment appointment) {
+    public static String getTagDetails(Appointment appointment) {
         requireNonNull(appointment);
 
-        Label appLabel = new Label();
+        return APPOINTMENT_TAG_PREFIX + appointment;
+    }
 
-        if (appointment.getDateTime() == null) {
-            return appLabel;
+    /**
+     * Retrieves the style to be applied to the appointment tag.
+     *
+     * @param appointment the pet's appointment.
+     * @return the style of the appointment tag to be applied.
+     */
+    private static String getTagStyle(Appointment appointment) {
+        requireNonNull(appointment);
+        LocalDateTime appDateTime = appointment.getDateTime();
+        LocalDate appDate = appDateTime.toLocalDate();
+
+        if (appDate.equals(NOW)) {
+            return APPOINTMENT_TODAY_STYLE; // appointment is today, green tag
+        } else if (appDate.isBefore(NOW)) {
+            return APPOINTMENT_BEFORE_TODAY_STYLE; // appointment has already past, red tag
         } else {
-            LocalDateTime appDateTime = appointment.getDateTime();
-            LocalDate appDate = appDateTime.toLocalDate();
-            appLabel.setText(APPOINTMENT_TAG_PREFIX + appointment);
-
-            if (appDate.equals(NOW)) {
-                appLabel.setStyle(APPOINTMENT_TODAY_STYLE); // appointment is today
-            } else if (appDate.isBefore(NOW)) {
-                appLabel.setStyle(APPOINTMENT_BEFORE_TODAY_STYLE); // appointment has already past
-            } else {
-                appLabel.setStyle(APPOINTMENT_AFTER_TODAY_STYLE); // appointment is before today
-            }
+            return APPOINTMENT_AFTER_TODAY_STYLE; // appointment is upcoming, grey tag
         }
-        return appLabel;
     }
 }

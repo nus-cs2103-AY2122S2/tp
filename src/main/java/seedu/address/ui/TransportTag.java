@@ -21,17 +21,17 @@ public class TransportTag extends Label {
      * Creates a new pet transport tag.
      */
     public TransportTag(AttendanceEntry attendanceEntry) {
-        super(getTransportTagDetails(attendanceEntry));
+        super(getTagDetails(attendanceEntry));
         super.setStyle(getTagStyle(attendanceEntry));
     }
 
     /**
      * Retrieves the details of the transport arrangements, if any, to be displayed in the tag.
      *
-     * @param attendanceEntry the incoming attendance entry.
-     * @return Pick-up and drop-off times of the transport arrangements if available, "No Arrangement" otherwise.
+     * @param attendanceEntry the pet's attendance entry.
+     * @return pick-up and drop-off times of the transport arrangements if available, "No Arrangement" otherwise.
      */
-    private static String getTransportTagDetails(AttendanceEntry attendanceEntry) {
+    private static String getTagDetails(AttendanceEntry attendanceEntry) {
         requireNonNull(attendanceEntry);
         LocalDate attendanceDate = attendanceEntry.getAttendanceDate();
 
@@ -48,10 +48,10 @@ public class TransportTag extends Label {
     /**
      * Retrieves the style to be applied to the transport tag.
      *
-     * @param attendanceEntry the incoming attendance entry.
+     * @param attendanceEntry the pet's attendance entry
      * @return the style of the transport tag to be applied.
      */
-    private String getTagStyle(AttendanceEntry attendanceEntry) {
+    private static String getTagStyle(AttendanceEntry attendanceEntry) {
         requireNonNull(attendanceEntry);
         if (!attendanceEntry.hasTransportArrangement()) {
             return NO_TRANSPORT_ARRANGEMENT_TAG_STYLE;

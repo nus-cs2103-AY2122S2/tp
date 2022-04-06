@@ -18,7 +18,7 @@ import seedu.address.model.pet.Pet;
 import seedu.address.model.tag.Tag;
 
 /**
- * An UI component that displays information of a {@code Pet}.
+ * A UI component that displays information of a {@code Pet}.
  */
 public class PetCard extends UiPart<Region> {
 
@@ -104,7 +104,8 @@ public class PetCard extends UiPart<Region> {
      */
     private void setAppointmentTag(Appointment appointment) {
         if (!pet.getAppointment().value.isEmpty()) {
-            appointmentTag.getChildren().add(AppointmentTag.createAppointmentTag(pet.getAppointment()));
+            appointmentTag.getChildren()
+                .add(new AppointmentTag(pet.getAppointment()));
         }
     }
 
@@ -118,7 +119,7 @@ public class PetCard extends UiPart<Region> {
             .forEach(attendance -> {
                 attendanceTags
                     .getChildren()
-                    .add(AttendanceTag.createAttendanceTag(attendance));
+                    .add(new AttendanceTag(attendance));
             });
     }
 
