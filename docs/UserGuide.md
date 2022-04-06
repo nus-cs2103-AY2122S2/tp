@@ -113,7 +113,7 @@ Deletes a student from TAPA.
   * the specified index is a negative number
   * the specified index is larger than the number of students in TAPA
   * there is no student with the specified matriculation number
-* Multiple indices can be inputted in order to delete multiple students.
+* Multiple indices can be inputted in order to delete multiple students. All inputted indices must be valid in order for the command to execute successfully.
 
 **Example**:
 * `delete 10`
