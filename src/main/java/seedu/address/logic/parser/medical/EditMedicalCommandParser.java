@@ -1,10 +1,6 @@
 package seedu.address.logic.parser.medical;
 
 import static java.util.Objects.requireNonNull;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.medical.EditMedicalCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETHNICITY;
@@ -17,6 +13,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SURGERIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.medical.EditMedicalCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
