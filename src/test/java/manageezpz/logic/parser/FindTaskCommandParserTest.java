@@ -161,7 +161,7 @@ class FindTaskCommandParserTest {
 
     @Test
     void findTaskCommandParser_invalidAssignee_throwParseException() {
-        String userInput = String.join(" ", EMPTY_STRING, PREFIX_ASSIGNEES.toString(), "James&");
+        String userInput = String.join(" ", EMPTY_STRING, PREFIX_ASSIGNEES.toString(), " ");
         assertParseFailure(parser, userInput, INVALID_ASSIGNEE_COMMAND_MESSAGE);
     }
 

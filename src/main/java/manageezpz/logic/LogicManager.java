@@ -3,6 +3,8 @@ package manageezpz.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
@@ -23,6 +25,9 @@ import manageezpz.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+
+    public static final String INPUT_CONTAINS_SPECIAL_CHARACTERS = "Please do not use invisible characters!";
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -41,6 +46,14 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        Pattern pattern = Pattern.compile("[\\p{C}]");
+        Matcher matcher = pattern.matcher(commandText);
+        boolean isInvalid = matcher.find();
+
+        if (isInvalid) {
+            throw new ParseException(INPUT_CONTAINS_SPECIAL_CHARACTERS);
+        }
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
