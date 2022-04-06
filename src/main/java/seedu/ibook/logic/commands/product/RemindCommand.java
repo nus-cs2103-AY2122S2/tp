@@ -20,7 +20,7 @@ public class RemindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists products with their items that are expiring "
             + "within the specified number of days\n"
             + "Parameters: DAYS (Must be non negative)\n"
-            + "Example: reminder 10";
+            + "Example: remind 10";
 
     private final AttributeFilter expiringFilter;
 
