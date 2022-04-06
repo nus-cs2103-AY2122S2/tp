@@ -30,11 +30,11 @@ TAssist is a **desktop app for managing students and their participation in less
 
    * **`delete student`**`3`: Deletes the 3rd student shown in the listing of the entity.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the 5rr below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Features & Walkthrough
 
 <div markdown="block" class="alert alert-info">
 
@@ -64,9 +64,11 @@ TAssist is a **desktop app for managing students and their participation in less
 </div>
 
 
-### Add modules: `add module`
+### Managing Modules
 
-Adds a module to TAssist.
+#### Add a module: `add module`
+
+Start using TAssist by adding modules you're teaching.
 
 Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 
@@ -88,9 +90,32 @@ Examples:
 * `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `21S1` (academic year 2021 Semester 1).
 
 
-### Add assessments: `add assessment`
+#### Listing all modules: `list module`
 
-Adds an assessment to TAssist.
+View a list of all your modules using the list command.
+
+Format: `list module`
+
+
+#### Deleting a module: `delete module`
+
+You can always delete a module from TAssist. Deleting the module will also delete associated class group(s) and assessment(s).
+
+Format: `delete module INDEX`
+
+* Deletes the module at the specified `INDEX`.
+* The index refers to the index number shown in the displayed module list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list module` followed by `delete module 2` deletes the 2nd module and its associated class group(s) and assessment(s) in TAssist.
+
+
+### Managing Assessments
+
+#### Add an assessment: `add assessment`
+
+TAssist lets you create and grade module-wide assessments. Assessments can represent any gradable component including exams, participation, labs, and homework assignments.
 
 Format: `add assessment n/ASSESSMENT_NAME m/MODULE_INDEX [sn/SIMPLE_NAME]`
 
@@ -98,9 +123,42 @@ Examples:
 * `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
 
 
-### Add your classes: `add class`
+#### Deleting an assessment: `delete assessment`
 
-Adds a class group to TAssist.
+Delete any assessment from TAssist by specifying its index.
+
+Format: `delete assessment INDEX`
+
+* Deletes the assessment at the specified `INDEX`.
+* The index refers to the index number shown in the displayed class groups list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
+
+
+#### Listing all assessments: `list assessment`
+
+Show a list of all assessments.
+
+Format: `list assessment`
+
+
+##### Filtering assessments
+
+Show a list of all assessments belonging to a particular module.
+
+Format: `list assessment m/MODULE_INDEX`
+
+Examples:
+* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
+
+
+### Managing Classes
+
+#### Add a class: `add class`
+
+Add class groups to modules you've created. Class groups refer to tutorials, labs, and sectionals you personally teach.
 
 Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
@@ -110,11 +168,46 @@ Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
 
 
-### Add students to your classes
+#### Listing all class groups: `list class`
+
+Show a list of all class groups.
+
+Format: `list class`
+
+
+##### Filtering class groups
+
+Show a list of class groups belonging to a module.
+
+Format: `list class m/MODULE_INDEX`
+
+* Displays the class groups belonging to the module at the specified `MODULE_INDEX`.
+* The index refers to the index number shown in the displayed module list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
+
+
+#### Deleting a class group: `delete class`
+
+Delete the specified class group from TAssist.
+
+Format: `delete class INDEX`
+
+* Deletes the class group at the specified `INDEX`.
+* The index refers to the index number shown in the displayed class groups list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
+
+
+### Managing students
 
 #### Creating students: `add student`
 
-Adds a student to TAssist.
+Create a student to record their contact details. You can enrol this student in class groups later.
 
 Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
 
@@ -123,9 +216,62 @@ Examples:
 * `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
 
 
+#### Listing all students: `list student`
+
+Show a list of all students.
+
+Format: `list student`
+
+
+##### Filtering students
+
+Show a list of students belonging to either module or class group.
+
+Format: `list student {m/MODULE_INDEX | c/CLASS_GROUP_INDEX}`
+
+* Displays the students belonging to the module at the specified `MODULE_INDEX` or the class group at the specified `CLASS_GROUP_INDEX`.
+* The index refers to the index number shown in the displayed module or class group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list student m/1` displays the students belonging to the 1st module shown when `list module` is run.
+* `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
+
+
+#### Finding students: `find`
+
+Find students whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+
+Examples:
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh`, `David Li`.
+
+
+#### Deleting a student: `delete student`
+
+Delete the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
+
+Format: `delete student INDEX`
+
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list student` followed by `delete student 2` deletes the 2nd student and their assessment(s)' attempt(s) in TAssist.
+
+
 #### Enrolling student: `enrol`
 
-Enrols 1 or more students to a class group.
+Once you've created some students, enrol them into class groups. You can enrol the same student into multiple class groups. 
 
 Format: `enrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -143,7 +289,7 @@ Examples:
 
 #### Disenrolling students: `disenrol`
 
-Disenrols 1 or more students from a class group.
+Disenrol 1 or more students from a class group.
 
 Format: `disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -158,11 +304,12 @@ Examples:
 * `disenrol c/1 s/1,2,3,4,5,6` disenrols the 1st 6 students belonging to the 1st class group shown when `list class` is run.
 * `disenrol c/1 s/e0123456,e0234567` disenrols the students with student IDs `E0123456` and `E0234567` from the 1st class group shown when `list class` is run.
 
+
 ### Taking student attendance
 
-#### Marking attendance: `mark`
+#### Mark attendance: `mark`
 
-Marks student(s)' attendance(s).
+Record attendance for any class group by marking a student(s) "present" for a given week. Currently, TAssist assumes that each class group meets at most once per week from week 1 to week 13.
 
 Format: `mark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -177,9 +324,10 @@ Examples:
 * `mark c/1 w/3 s/1,2,3,4,5,6` marks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `mark c/1 w/3 s/e0123456,e0234567` marks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
-#### Unmarking attendance: `unmark`
 
-Unmarks student(s)' attendance(s).
+#### Unmark attendance: `unmark`
+
+Unmark student(s)' attendance(s).
 
 Format: `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -194,9 +342,10 @@ Examples:
 * `unmark c/1 w/3 s/1,2,3,4,5,6` unmarks the attendances of the 1st 6 students belonging to the 1st class group for week 3.
 * `unmark c/1 w/3 s/e0123456,e0234567` unmarks the attendances of the students with student IDs `E0123456` and `E0234567` belonging to the 1st class group for week 3.
 
-### Grading assessments: `grade`
 
-Grades student's assessment.
+### Grade assessments: `grade`
+
+Grade a student's attempt at a specified module assessment.
 
 Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDENT_INDEXES|STUDENT_IDS [g/GRADE]`
 
@@ -212,167 +361,36 @@ Examples:
 * `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students enrolled in the module tied to the 1st assessment shown when `list assessment` is run.
 * `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is run.
 
-### Listing entries
+### Managing data
 
-#### Listing all students: `list student`
+#### Clear all entries: `clear`
 
-Shows a list of all students.
-
-Format: `list student`
-
-#### Listing all modules: `list module`
-
-Shows a list of all modules.
-
-Format: `list module`
-
-#### Listing all class groups: `list class`
-
-Shows a list of all class groups.
-
-Format: `list class`
-
-#### Listing all assessments: `list assessment`
-
-Shows a list of all assessments.
-
-Format: `list assessment`
-
-#### Filtering entries
-
-##### Filtering students
-
-Shows a list of students belonging to either module or class group.
-
-Format: `list student {m/MODULE_INDEX | c/CLASS_GROUP_INDEX}`
-
-* Displays the students belonging to the module at the specified `MODULE_INDEX` or the class group at the specified `CLASS_GROUP_INDEX`.
-* The index refers to the index number shown in the displayed module or class group list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list student m/1` displays the students belonging to the 1st module shown when `list module` is run.
-* `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
-
-##### Filtering class groups
-
-Shows a list of class groups belonging to a module.
-
-Format: `list class m/MODULE_INDEX`
-
-* Displays the class groups belonging to the module at the specified `MODULE_INDEX`.
-* The index refers to the index number shown in the displayed module list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
-
-##### Filtering assessments
-
-Shows a list of all assessments belonging to a particular module.
-
-Format: `list assessment m/MODULE_INDEX`
-
-Examples:
-* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
-
-### Finding students: `find`
-
-Finds students whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-
-Examples:
-* `find John` returns `john` and `John Doe`.
-* `find alex david` returns `Alex Yeoh`, `David Li`.
-
-### Deleting entries
-
-#### Deleting a student: `delete student`
-
-Deletes the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
-
-Format: `delete student INDEX`
-
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list student` followed by `delete student 2` deletes the 2nd student and their assessment(s)' attempt(s) in TAssist.
-
-#### Deleting a module: `delete module`
-
-Deletes the specified module from TAssist as well as its associated class group(s) and assessment(s).
-
-Format: `delete module INDEX`
-
-* Deletes the module at the specified `INDEX`.
-* The index refers to the index number shown in the displayed module list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list module` followed by `delete module 2` deletes the 2nd module and its associated class group(s) and assessment(s) in TAssist.
-
-#### Deleting a class group: `delete class`
-
-Deletes the specified class group from TAssist.
-
-Format: `delete class INDEX`
-
-* Deletes the class group at the specified `INDEX`.
-* The index refers to the index number shown in the displayed class groups list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list class` followed by `delete class 2` deletes the 2nd class group in TAssist.
-
-#### Deleting an assessment: `delete assessment`
-
-Deletes the specified assessment from TAssist.
-
-Format: `delete assessment INDEX`
-
-* Deletes the assessment at the specified `INDEX`.
-* The index refers to the index number shown in the displayed class groups list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
-
-### Clearing all entries: `clear`
-
-Clears all entries from TAssist.
+Clear all entries from TAssist.
 
 Format: `clear`
 
-### Exiting the program: `exit`
+#### Saving the data
 
-Exits the program.
+TAssist saves data in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-Format: `exit`
+#### Editing the data file
 
-### Saving the data
-
-TAssist data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-TAssist data are saved as a JSON file `[JAR file location]/data/tassist.json`. Advanced users are welcome to update data directly by editing that data file.
+TAssist saves data as a JSON file `[JAR file location]/data/tassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAssist will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+#### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+
+### Exiting the program: `exit`
+
+Exit the program.
+
+Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
