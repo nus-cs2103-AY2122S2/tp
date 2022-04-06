@@ -205,7 +205,7 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 32px;
     -fx-text-fill: #333333;
-    -fx-border-style: hidden hidden hidden solid;
+    -fx-border-style: hidden hidden hidden hidden;
     -fx-border-width: 2;
     -fx-border-color: #333333
 
@@ -226,11 +226,23 @@
 
 .mini-pane-module-code {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 28px;
     -fx-text-fill: #333333;
-    -fx-padding: 3 24 3 24;
+    -fx-padding: 3 3 3 3;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+}
+
+.mini-pane-module-code-short {
+    -fx-font-size: 28px;
+}
+
+
+.mini-pane-module-code-long {
+    -fx-font-size: 16px;
+}
+
+.mini-pane-module-code-medium {
+    -fx-font-size: 22px;
 }
 
 .mini-pane-module-code:hover {
@@ -257,6 +269,7 @@
     -fx-border-style: hidden hidden hidden solid;
     -fx-border-width: 2;
     -fx-border-color: #333333;
+    -fx-padding: 5;
 }
 
 .mini-pane {

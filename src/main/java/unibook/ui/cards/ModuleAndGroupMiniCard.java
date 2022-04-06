@@ -14,6 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import unibook.commons.core.LogsCenter;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
@@ -50,7 +51,7 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
             module.getModuleCode()));
         this.mainWindow = mainWindow;
         this.module = module;
-        moduleCode.setText(module.getModuleCode().toString());
+        setUpModuleCodeLabel();
 
         //common function to use in generating group name vboxes containing labels
         //vboxes are to ensure flowpane wraps the labels properly
@@ -106,6 +107,23 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
                     }
                 }
             });
+    }
+
+    /**
+     * Sets up the module code label.
+     */
+    private void setUpModuleCodeLabel() {
+        moduleCode.setText(module.getModuleCode().toString());
+        //adjust the styling of the label depending on its size
+        //long labels will have a smaller text size
+        int lengthOfModuleCode = module.getModuleCode().toString().length();
+        if (lengthOfModuleCode >= 8) {
+            moduleCode.getStyleClass().add("mini-pane-module-code-long");
+        } else if (lengthOfModuleCode >= 6) {
+            moduleCode.getStyleClass().add("mini-pane-module-code-medium");
+        } else {
+            moduleCode.getStyleClass().add("mini-pane-module-code-short");
+        }
     }
 
 
