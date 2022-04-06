@@ -21,7 +21,7 @@ public class DeleteModuleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all students identified by the module code inputted.\n"
-            + "Parameters: m/MODULE_CODE\n"
+            + "Parameters: " + PREFIX_MODULE_CODE + " MODULE_CODE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE_CODE + "CS2100\n";
 
     public static final String MESSAGE_DELETE_MULTIPLE_PERSONS_SUCCESS = "%s student(s) deleted.";
