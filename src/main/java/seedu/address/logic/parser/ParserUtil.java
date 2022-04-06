@@ -211,7 +211,9 @@ public class ParserUtil {
         requireNonNull(scheduleDateTime);
         String trimmedDateTime = scheduleDateTime.trim();
         try {
-            DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm").withResolverStyle(ResolverStyle.STRICT).parse(trimmedDateTime);
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT)
+                    .parse(trimmedDateTime);
         } catch (DateTimeParseException e) {
             throw new ParseException(ScheduleDateTime.MESSAGE_CONSTRAINTS);
         }
