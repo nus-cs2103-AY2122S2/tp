@@ -1,6 +1,10 @@
 package unibook.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unibook.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.model.Model;
@@ -15,9 +19,6 @@ import unibook.testutil.builders.ProfessorBuilder;
 import unibook.testutil.builders.StudentBuilder;
 import unibook.testutil.typicalclasses.TypicalIndexes;
 import unibook.testutil.typicalclasses.TypicalUniBook;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static unibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.TODO
