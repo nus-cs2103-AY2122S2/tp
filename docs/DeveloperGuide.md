@@ -1,4 +1,4 @@
----
+ ---
 layout: page
 title: Developer Guide
 ---
@@ -156,10 +156,6 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 1. Friends Feature
 
-- Add friend
-- Delete friend
-- 
-
 #### 1.1 Add friend
 
 ##### Implementation
@@ -238,8 +234,7 @@ Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set.
 Key Consideration: How to implement the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
 
 * **Current Implementation**
-  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. Validity checks
-  * are performed on initializing an `Event`, editing an `Event`, and when editing/deleting a `Person` to make sure that all `FriendName` objects in `Event` refer to actual `Person` objects in the `AddressBook`.
+  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. Validity checks are performed on initializing an `Event`, editing an `Event`, and when editing/deleting a `Person` to make sure that all `FriendName` objects in `Event` refer to actual `Person` objects in the `AddressBook`.
   * Pros:
     * Reduce coupling between the `Event` and `Person` classes by making it a one-way dependency.
     * Reduce dependency further by only storing the `FriendName` object and not the entire `Person` object.
@@ -258,60 +253,34 @@ Key Consideration: How to implement the relationship between `Event` and `Person
     * Additional overhead as new class(es) will have to be created and tested.
     * If implemented using a `EventPersonAssociation` list, will not be very efficient as well when making queries/changes,especially if there are a large number of associations in the list
 
-#### 2.2 Show event
+#### 2.2 Implementing List event
 
-#### Implementation
+Key Consideration: How to implement `showevents` when there exists multiple tabs and other `show` commands such as `listfriends` and `showinsights`.
 
-The following is a detailed explanation of the operations which take place when the `showevents` command is called
-
-1. After successfully parsing of user input the `ShowEventCommand#exeucte(Model model)` method is called.
-2. Since all events are stored in a `FilteredList`, a `PREDICATE_SHOW_ALL_EVENTS` is passed to the list so that it now contains all the events in the addressbook. The `PREDICATE_SHOW_EVENTS` essentially returns `true` for every entry in the `FilteredList` i.e no item is being filtered out, thus all the events in the addressbook can be accessed through the list.
-3. The GUI contains a pointer to the `FilteredList` present in the `ModelManager`, thus it is able to retrieve all the events present in the addressbook and represent them as a `EventCard` class which is a JavaFX UI feature which visually depicts the event's name, date and time, description and the names of any friends associated with the event.
-4. The `MainWindow` class receives the `CommandResult` after `ShowEventsCommand::execute` is done executing, a boolean `event` within `CommandResult` decides whether `MainWindow::changeInterface` is called which changes the tab from `Friends` tab to `Events` or vice versa.
-
-The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`
+The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`, the sequence diagram is similar for the other types of `show` commands which exist in Amigos.
 
 ![ShowEventSequenceDiagram.png](images\ShowEventsSequenceDiagram.png)
 
-#### Design Considerations
+* **Current Implementation**
+  * Using a `FilteredList` we are able to segregate events into past events and future events and display these events according to user's preference, this is largely similar to AB3's implementation of `list`, however we need to add the ability to automatically change tabs once this command is called, thus the `CommandResult` class was modified to contain a boolean `isEvent` which is `true` for any command related to events and enables the seamless switching between tabs.
+  * Pros
+    * Allows for easy traversal between the Friends, Events and insights tab.
+    * It is easily extendable, for any new features we simply need to add a boolean which represents that feature, and create an overloaded constructor to initialize that variable to `true`
+    * Enforces the abstraction barrier between the UI component and Logic component
+  * Cons
+    * Although easily extendable, to ensure backward compatibility we need to ensure that the old constructor initialize the boolean for this new feature as `false`
+    * If many features are added, can lead to many overloaded constructor which will make the entire `CommandResult` class convoluted
 
-- Current Implementation
-  - The current implementation fits very well with AB3 and is backward compatible as well. 
-
-- Alternate Implementations
-  - Another possibility is to have a list representing which commands refer to the Friends tab and which commands refer to the Events tab, this list can be checked once a command is entered and the tab can accordingly be switched. However, this implementation involves a lot of maintenance as everytime a new commands is created it will need to be added here, thus we did not choose to proceed with this implementation.
-
-#### 2.3 Edit event
-
-##### Implementation
-
-The following is a detailed explanations of the operations which take place for an event to be executed.
-
-1. After successful parsing of arguments by the `EditEventCommandParser` all the edited fields are passed to a descriptor object `EditEventDescriptor`. This object stores the details of all edited and non-edited fields of event.
-2. A `EditEventCommand` instance is then created which contains the index of the event to be edited and the descriptor of the edited event.
-3. Upon calling `EditEventCommand::execute`, first the index will verified, next the `UniqueEventList` will be checked for any duplicate events which may arise from the edit, if this is the case the transaction will be aborted. Lastly the friend list of the edited event will be verified as well.
-4. A new `Event` is created by `createEditedEvent` method from the details provided by the `EditEventDescriptor`
-5. Lastly the method `setEvent` from model is called which replaces the event at the specified index with the new event containing the edited fields.
-
-The following activity diagram summarizes what happens when a user executes the `EditEventCommand`:
-
-![EditEventActivityDiagram.png](images\EditEvent.png)
-
-#### Design Considerations
-
-- Current implementation 
-  - The current implementation relies on the index for identifying which event is to be edited.
-
-- Alternative implementation Considered
-  - We considered using the `EventName` and `EventDate` to be used to identify the event to be edited. However, we realised that some events can have a very long name thus it is impractical for the user to have to type out the entire event name out, rather using the `showevents` command to identify the index of the event would be much more practical.
-
+* **Alternate Implementation**
+  * We can implement a check in `MainWindow` which uses switch cases to detect which command is executed and accordingly switch tabs. The implementation of the representation of `Events` using a `FilteredList` remains the same.
+  * Pros
+    * This is very similar to the implementation in `AddressBookParser`, it easily extendable, as we simply need to add new switch statements for new features and commands
+  * Cons
+    * Violates the Law of Demeter as the UI does not need to know exactly which command is executed, it simply needs to know whether to switch tabs to event or not
+    * Increases the coupling between the `Commands` classes and the `MainWindow` since now we need to add a new switch case for every new command created.
+    * Involves a lot of code duplication as well
+    
 ### 3. Logs Feature
-
-- Add log
-- Delete log
-- Edit log
-
-
 
 #### 3.1 Add Log
 
@@ -402,29 +371,31 @@ A sequence diagram shows, clearly, the interactions between `AddLogCommand`, `Ad
 
 ### 4. Tabs Feature
 
-Since our application had two primary classes `Friends` and `Events` we needed to be able to view instances of both of these classes without the GUI being cluttered with details. Thus, we decided to implement a Tab Pane with one `Friends` tab and an `Events` tab. 
+Key consideration: How to display information about Friends, Events and insights
 
-The following images show how the Tabs feature look when the `Friends` tab is selected and when the `Events` tabs is selected
+* **Current Implementation**
+  * Since our application had three primary classes Friends, Events and Insights we needed to be able to view instances of all of these classes without the GUI being cluttered with details. Thus, we decided to implement a Tab Pane with one tab for each of our features.
+  * Pros
+    * All the features displayed in an organised fashion, since each feature is represented by their own tabs.
+    * It is highly extendable, any new feature can easily be incorporated by the addition of new tabs
+    * It is very intuitive, allowing user to change their view by clicking on the tab they wish to view (Interactive)
+    * Aesthetically pleasing
+  * Cons
+    * Changing of tabs can create issues with updating of lists
+    * Increases complexity of GUI
 
-![friendsTab.png](images\friendsTab.png) ![eventsTab.png](images\eventsTab.png)
+* **Alternate Implementation**
+  * Superimpose all the scenes for each feature and call `requestFocus()` to bring the specific feature we want to observe to the forefront.
+  * Pros
+    * Easy implementation
+  * Cons
+    * Can get messy very fast, since the fxml doc will have multiple `FeaturePlaceHolders` on top of each other
+    * Not easily extendable, only suitable for a few features
+    * Can get very cluttered
 
-#### 4.1 Automatically Change tabs (By Command)
+The following images show how the Tabs feature look when the tab for each feature is selected.
 
-1. `CommandResult` class was modified to contain a boolean called `event`. This boolean indicates whether the command which was just executed requires us to switch to the events tab or not.
-2. If `event` is true the GUI will switch to the events tabs by `MainWindow::changeInterface` otherwise this method will switch over to the `Friends` tab.
-
-#### 4.2 Manually Change tabs (By Clicking)
-
-1. Apart from commands automatically switching, since the `TabPane` class was used a user can click on the respective tab they want to view as well.
-
-#### Design Consideration
-
-- Current implementation
-  - The current implementation uses the `TabPane` class to hold the `Friends` and `Events` tabs which hold their respective `eventList` and `personList`. This allowed us to seamlessly switch between views our friends and upcoming events. 
-
-- Alternative implementation Considered
-  - Create a new window for `Friends` and `Events`, however we decided against this as it would result in duplication of the commandBox and other artifacts in the mainwindow.
-
+![friendsTab.png](images\friendsTab.png) ![eventsTab.png](images\eventsTab.png) ![insights.png](images\insightsTab.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
