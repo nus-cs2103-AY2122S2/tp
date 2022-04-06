@@ -61,7 +61,7 @@ ContaX is generally designed to impose as little constraints on inputs as possib
 * **INTEGER** inputs are limited to a maximum value of `2,147,483,647`.<br>
   Any value above this limit will not be considered an integer.
 * Leading and Trailing **Whitespaces** are ignored for ***ALL*** user inputs.<br>
-  e.g. `  My Tag   &nbsp;` is treated simply as `My Tag`.
+  e.g. `My Tag   &nbsp;` is treated simply as `My Tag`.
 
 </div>
 
