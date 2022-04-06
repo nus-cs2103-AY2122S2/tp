@@ -399,53 +399,53 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 **Explanation** 
 
-Let's say you want to sort by name in ascending order,
-use `sort n/asc`.
+Let's say you want to sort by name in ascending order.
+Use `sort n/asc`.
 
-Let's say you want to sort by name in descending order,
-use `sort n/dsc`.
+Let's say you want to sort by name in descending order.
+Use `sort n/dsc`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note** We sort name lexicographically, in other words, we sort it by comparing alphabets and numbers. We do not compare by combining the numbers into a unit. For example, in ascending order, 100Doggy comes before 69Doggy!   
 </div>
 
 
-Let's say you want to sort by status in ascending order,
-use `sort s/asc`. 
+Let's say you want to sort by status in ascending order.
+Use `sort s/asc`. 
 
-Let's say you want to sort by status in descending order,
-use `sort s/dsc`.
+Let's say you want to sort by status in descending order.
+Use `sort s/dsc`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note** We sort status in this ascending order: `completed`, `watching`, `plan-to-watch`.
 </div>
 
 
-Let's say you want to sort by number of tags in ascending order,
-use `sort t/asc`.
+Let's say you want to sort by number of tags in ascending order.
+Use `sort t/asc`.
 
-Let's say you want to sort by number of tags in descending order,
-use `sort t/dsc`.
+Let's say you want to sort by number of tags in descending order.
+Use `sort t/dsc`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note** We sort tags by number of tags and not by comparing the names of tags.
 </div>
 
-Let's say you want to sort by rating in ascending order,
-use `sort r/asc`.
+Let's say you want to sort by rating in ascending order.
+Use `sort r/asc`.
 
-Let's say you want to sort by rating in descending order,
-use `sort r/dsc`.
+Let's say you want to sort by rating in descending order.
+Use `sort r/dsc`.
 
-Let's say you want to sort by name in ascending order then by status in ascending order,
-use `sort n/asc s/asc`.
+Let's say you want to sort by name in ascending order then by status in ascending order.
+Use `sort n/asc s/asc`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order
 </div>
 
-Therefore, let's say you want to sort by status in ascending order then by name in ascending order,
-use `sort n/asc s/asc so/statusname`.
+Therefore, let's say you want to sort by status in ascending order then by name in ascending order.
+Use `sort n/asc s/asc so/statusname`.
 
 <div markdown="block" class="alert alert-warning">
 :exclamation: **Take note** We use `so/SEQUENCE` to swap the priority of the sorting criteria! By default, Trackermon always prioritises sorting in the following order if the criteria are used:
