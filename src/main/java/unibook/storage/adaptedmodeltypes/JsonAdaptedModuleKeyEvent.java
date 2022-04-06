@@ -51,12 +51,14 @@ public class JsonAdaptedModuleKeyEvent {
      * @throws IllegalValueException
      */
     public ModuleKeyEvent toModelType(Module module) throws IllegalValueException {
-        if (keyEventType == null || keyEventTiming == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
+        if (keyEventType == null && keyEventTiming == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "key event"));
+        } else if (keyEventType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "key event type"));
+        } else if (keyEventTiming == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "key event timing"));
+        } else {
+            return new ModuleKeyEvent(ModuleKeyEvent.KeyEventType.valueOf(keyEventType), keyEventTiming, module);
         }
-
-        return new ModuleKeyEvent(ModuleKeyEvent.KeyEventType.valueOf(keyEventType), keyEventTiming, module);
     }
-
-
 }

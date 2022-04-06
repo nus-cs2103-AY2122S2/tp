@@ -1,5 +1,8 @@
 package unibook.storage.adaptedmodeltypes;
 
+import static unibook.model.module.group.Group.NAME_CONSTRAINT_MESSAGE;
+import static unibook.model.module.group.Group.isValidName;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -68,6 +71,9 @@ public class JsonAdaptedGroup {
         }
         if (meetingTimes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!isValidName(groupName)) {
+            throw new IllegalValueException(String.format(NAME_CONSTRAINT_MESSAGE));
         }
 
         Group group = new Group(groupName, module);

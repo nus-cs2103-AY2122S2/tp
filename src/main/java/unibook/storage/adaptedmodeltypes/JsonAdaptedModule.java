@@ -1,5 +1,8 @@
 package unibook.storage.adaptedmodeltypes;
 
+import static unibook.model.module.ModuleCode.isValidModuleCode;
+import static unibook.model.module.ModuleName.isValidModuleName;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -88,6 +91,13 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Key Events"));
         }
 
+        //checks on field validity
+        if (!isValidModuleName(moduleName)) {
+            throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        if (!isValidModuleCode(moduleCode)) {
+            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
 
         Module module = new Module(new ModuleName(moduleName), new ModuleCode(moduleCode));
         for (JsonAdaptedGroup jsonGroup : groups) {

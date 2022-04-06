@@ -9,12 +9,12 @@ import static unibook.commons.util.AppUtil.checkArgument;
  */
 public class ModuleCode {
     public static final String MESSAGE_CONSTRAINTS =
-        "Module codes should only contain up to 10 characters and cannot contain spaces.";
+        "Module codes should only contain up to 10 characters, cannot be blank and cannot contain spaces";
 
     /*
      * A module code can contain any character that is not a whitespace.
      */
-    public static final String VALIDATION_REGEX = "^\\S*$";
+    public static final String VALIDATION_REGEX = "\\S+";
 
     public final String moduleCode;
 
