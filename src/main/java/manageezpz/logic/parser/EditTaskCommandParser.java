@@ -54,9 +54,13 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         String time = argMultimap.getValue(PREFIX_AT_DATETIME).orElse("");
         HashMap<String, Boolean> prefixStatusHash = prefixStatusCheck(argMultimap);
 
-
         return new EditTaskCommand(index, desc, date, time, prefixStatusHash);
     }
+
+    /**
+     * Initialize a hashmap that contains the status of a prefix.
+     * By status, it means whether a prefix has been inputted by a user or not.
+     */
 
     private HashMap<String, Boolean> initPrefixStatusHash() {
         HashMap<String, Boolean> prefixStatusHash = new HashMap<>();
@@ -65,6 +69,14 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         prefixStatusHash.put("datetime", true);
         return prefixStatusHash;
     }
+
+    /**
+     * Check if a prefix has been inputted by a user or not.
+     * If yes, the boolean value of the corresponding prefix is true.
+     * Else, it is false.
+     * Note that it only checks if the prefix has been inputted.
+     * It does not check if there's a value attached to the prefix.
+     */
 
     private HashMap<String, Boolean> prefixStatusCheck (ArgumentMultimap argMultimap) {
         HashMap<String, Boolean> prefixStatusHash = initPrefixStatusHash();

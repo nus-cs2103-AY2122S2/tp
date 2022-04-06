@@ -101,7 +101,6 @@ public class EditTaskCommand extends Command {
                 // Should not reach this as there are only three types of tasks
                 throw new CommandException(MESSAGE_INVALID_TASK_TYPE);
             }
-
             model.setTask(currentTask, updatedTask);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, updatedTask));
         } catch (ParseException pe) {
@@ -110,6 +109,11 @@ public class EditTaskCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, this.desc) + MESSAGE_USAGE);
         }
     }
+
+    /**
+     * If the value after a prefix is empty, return false.
+     * Else, return true.
+     */
 
     boolean ensureFormatCompliance(HashMap<String, Boolean> prefixStatusHash,
                                    String desc, String date, String time) {
@@ -134,7 +138,7 @@ public class EditTaskCommand extends Command {
 
     private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
-        if (prefixStatusHash.get("date") || prefixStatusHash.get("datetime") ) {
+        if (prefixStatusHash.get("date") || prefixStatusHash.get("datetime")) {
             throw new ParseException(MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES);
         }
 
