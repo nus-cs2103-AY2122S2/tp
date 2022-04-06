@@ -51,7 +51,7 @@ public class EditCommand extends Command {
         + "Only Teams and Skills will be changed when editing multiple persons in batch."
         + "Other changes such as Name and Email will be silently ignored, if provided."
         + "\n"
-        + "Parameters: INDEX... (must be a positive integer) "
+        + "Parameters: INDEX... (indices must be a positive integer) "
         + "[-r](activates reset mode)"
         + "[" + PREFIX_NAME + "NAME] "
         + "[" + PREFIX_PHONE + "PHONE] "
