@@ -47,7 +47,7 @@ public class EditConsultationCommand extends Command {
             + PREFIX_NOTES + "NOTES \n"
             + "Example: " + COMMAND_WORD
             + " 1 "
-            + PREFIX_DATE + "19-09-2020 "
+            + PREFIX_DATE + "2020-09-20 "
             + PREFIX_TIME + "19-00 ";
 
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: \n%1$s";
