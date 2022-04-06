@@ -312,8 +312,9 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
 * If the day `dd` provided in `DATE_TIME` is not compatible with the month `MM` and year `yyyy`, the nearest valid date will be matched.
   (e.g. `29-02-2023` will be mapped as `28-02-2023`).
 * Interviews must be scheduled within the office hours, defined as Monday to Friday, 8AM - 6PM (i.e. The last interview for the day allowed is at 5:30PM).
-* Attempts to schedule an interview within the duration of another interview will
-  result in an error. (e.g. Interview A starts at 10AM on a given day. Scheduling an interview from 9:31AM up to 10:29AM is prohibited.)
+* Attempts to schedule an interview within the duration of another interview will result in an error.
+(e.g. Interview A starts at 10AM on a given day. Scheduling an interview from 9:31AM up to 10:29AM is prohibited). A new feature
+to pinpoint the exact interview in conflict to the user is being considered for future versions of TAlent Assistant™.
 
 Examples:
 * `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
