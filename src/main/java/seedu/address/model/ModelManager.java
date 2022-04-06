@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasApplicant(Applicant applicant) {
+    public boolean hasPerson(Applicant applicant) {
         requireNonNull(applicant);
         return addressBook.hasApplicant(applicant);
     }
@@ -126,18 +126,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteApplicant(Applicant target) {
+    public void deletePerson(Applicant target) {
         addressBook.removeApplicant(target);
     }
 
     @Override
-    public void addApplicant(Applicant applicant) {
+    public void addPerson(Applicant applicant) {
         addressBook.addApplicant(applicant);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setApplicant(Applicant target, Applicant editedApplicant) {
+    public void setPerson(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
         addressBook.setApplicant(target, editedApplicant);
@@ -233,7 +233,7 @@ public class ModelManager implements Model {
     public void updateSortApplicantList(Comparator<Applicant> comparator) {
         requireNonNull(comparator);
         addressBook.sortApplicant(comparator);
-        filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_APPLICANTS);
+        filteredApplicants.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalApplicants.ALICE;
-import static seedu.address.testutil.TypicalApplicants.BOB;
-import static seedu.address.testutil.TypicalApplicants.CARL;
-import static seedu.address.testutil.TypicalApplicants.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPositions.JR_PROJECT_MANAGER;
 import static seedu.address.testutil.TypicalPositions.JR_SOFTWARE_ENGINEER;
 import static seedu.address.testutil.TypicalPositions.QA_ENGINEER;

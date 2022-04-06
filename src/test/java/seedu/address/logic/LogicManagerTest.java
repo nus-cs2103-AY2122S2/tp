@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplicants.AMY;
+import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -34,7 +34,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.ApplicantBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -85,7 +85,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddApplicantCommand.COMMAND_WORD + FLAG_APPLICANT + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + AGE_DESC_AMY + ADDRESS_DESC_AMY + GENDER_DESC_AMY;
-        Applicant expectedApplicant = new ApplicantBuilder(AMY).withTags().build();
+        Applicant expectedApplicant = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addApplicant(expectedApplicant);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -93,7 +93,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredApplicantList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 

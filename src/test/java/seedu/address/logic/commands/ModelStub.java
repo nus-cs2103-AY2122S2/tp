@@ -52,7 +52,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addApplicant(Applicant applicant) {
+    public void addPerson(Applicant applicant) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -67,7 +67,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasApplicant(Applicant applicant) {
+    public boolean hasPerson(Applicant applicant) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -87,12 +87,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void deleteApplicant(Applicant target) {
+    public void deletePerson(Applicant target) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setApplicant(Applicant target, Applicant editedApplicant) {
+    public void setPerson(Applicant target, Applicant editedApplicant) {
         throw new AssertionError("This method should not be called.");
     }
 

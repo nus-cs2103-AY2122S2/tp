@@ -17,7 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Applicant objects.
  */
-public class ApplicantBuilder {
+public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -36,9 +36,9 @@ public class ApplicantBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code ApplicantBuilder} with the default details.
+     * Creates a {@code PersonBuilder} with the default details.
      */
-    public ApplicantBuilder() {
+    public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -50,9 +50,9 @@ public class ApplicantBuilder {
     }
 
     /**
-     * Initializes the ApplicantBuilder with the data of {@code applicantToCopy}.
+     * Initializes the PersonBuilder with the data of {@code applicantToCopy}.
      */
-    public ApplicantBuilder(Applicant applicantToCopy) {
+    public PersonBuilder(Applicant applicantToCopy) {
         name = applicantToCopy.getName();
         phone = applicantToCopy.getPhone();
         email = applicantToCopy.getEmail();
@@ -66,7 +66,7 @@ public class ApplicantBuilder {
     /**
      * Sets the {@code Name} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withName(String name) {
+    public PersonBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -74,7 +74,7 @@ public class ApplicantBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -82,7 +82,7 @@ public class ApplicantBuilder {
     /**
      * Sets the {@code Age} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withAge(String age) {
+    public PersonBuilder withAge(String age) {
         this.age = new Age(age);
         return this;
     }
@@ -90,7 +90,7 @@ public class ApplicantBuilder {
     /**
      * Sets the {@code Address} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withAddress(String address) {
+    public PersonBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -98,7 +98,7 @@ public class ApplicantBuilder {
     /**
      * Sets the {@code Gender} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withGender(String gender) {
+    public PersonBuilder withGender(String gender) {
         this.gender = new Gender(gender);
         return this;
     }
@@ -106,7 +106,7 @@ public class ApplicantBuilder {
     /**
      * Sets the {@code Phone} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withPhone(String phone) {
+    public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -114,7 +114,7 @@ public class ApplicantBuilder {
     /**
      * Sets the {@code Email} of the {@code Applicant} that we are building.
      */
-    public ApplicantBuilder withEmail(String email) {
+    public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }

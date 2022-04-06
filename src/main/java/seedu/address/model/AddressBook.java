@@ -19,7 +19,7 @@ import seedu.address.model.position.UniquePositionList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameApplicant comparison)
+ * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
