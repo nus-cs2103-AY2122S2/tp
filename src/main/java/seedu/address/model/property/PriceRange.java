@@ -11,8 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class PriceRange {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "PriceRange: lower should be lower than upper(inclusive), all values should be non-negative, and please"
-                + "use numerical values";
+        "PriceRange: lower should be lower than upper(inclusive), all values should be non-negative integers";
 
     /**
      * The lower and upper bounds are inclusive, meaning the lower bound includes the lower and higher value itself,

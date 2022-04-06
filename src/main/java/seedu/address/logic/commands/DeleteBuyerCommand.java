@@ -16,7 +16,7 @@ public class DeleteBuyerCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the buyer identified by the index number used in the displayed buyer list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer less than or equal to size of displayed buyer list)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Deleted buyer: %1$s";
@@ -33,7 +33,7 @@ public class DeleteBuyerCommand extends Command {
         List<Buyer> lastShownList = model.getFilteredBuyerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
         }
 
         Buyer buyerToDelete = lastShownList.get(targetIndex.getZeroBased());

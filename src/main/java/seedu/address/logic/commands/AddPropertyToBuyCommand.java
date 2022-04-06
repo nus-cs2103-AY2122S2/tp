@@ -31,7 +31,7 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_PRICE_RANGE + "PRICE RANGE "
             + "Must include: index h/ l/ pr/ \n"
-            + "Ensure INDEX is positive integer & less than or equal size of displayed buyer list \n"
+            + "Ensure INDEX is positive integer & less than or equal to size of displayed buyer list \n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_HOUSE_TYPE + "HDB "
             + PREFIX_LOCATION + "Bishan "

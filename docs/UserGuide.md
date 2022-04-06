@@ -46,6 +46,8 @@ The Features section will be split into 3 subsections for:
 
 * Seller: Someone who is seeking to sell their property.
 
+* Leading zeros will be ignored in **index-based** inputs. E.g. `delete-b 1` and `delete-b 00001` are equivalent.
+
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
   e.g. In `add-b n/NAME`, `NAME` is an input such as `add-b n/Chok Hoe`.
 
@@ -627,8 +629,11 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **Q** Why have location and address, aren't they the same thing? <br>
 **A** Location refers to the area/town/city the property can/does reside in. Address is the exact location. We decided to separate them as it allows you to more easily match properties where the exact address may not necessarily contain the location name. E.g. 36 College Ave E, North Tower can be considered to be in Clementi/Dover/NUS but does not contain the location name.
 
-**Q** How do I "reset" my property fields like location to "No location"?
+**Q** How do I "reset" my property fields like location to "No location"? <br>
 **A** Once you have added a property, you cannot remove a specific field, only edit it. Basically, we do not allow a property to have missing fields, except when the client is first added and all the fields are empty. We have plans in the future to allow users to remove a property completely.
+
+**Q** Why does typing `delete-b 0` and `delete-b 999999` return 2 different error messages even though they are both violating the same condition? <br>
+**A** We check whether you have first inputted a positive integer first. If not, we will throw the error message seen in `delete-b 0`. If you have typed in a positive integer, but it was larger than the displayed list size, it will inform you to check the range again with the other error message.
 
 --------------------------------------------------------------------------------------------------------------------
 
