@@ -242,6 +242,7 @@ public class MainWindow extends UiPart<Stage> {
      * Copy to the clipboard the selected person's information.
      */
     private void handleCopy(CommandResult result) {
+        logger.info("Copied to clipboard!");
         String copiedText = result.getFeedbackToUser();
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent content = new ClipboardContent();

@@ -44,6 +44,8 @@ public class SortCommand extends RedoableCommand {
      * @param fields modules to be deleted
      */
     public SortCommand(List<Prefix> fields, List<String> orders, String successField) {
+        assert orders.size() == fields.size();
+        assert orders.size() != 0;
         this.successField = successField;
         this.orders = orders;
         this.fields = fields;

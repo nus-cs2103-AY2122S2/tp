@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.LogsCenter;
+
 import java.util.Stack;
+import java.util.logging.Logger;
 
 /**
  * @@author zhixianggg reused
@@ -11,9 +14,10 @@ import java.util.Stack;
 public class StackUndoRedo {
     private Stack<RedoableCommand> undoStack;
     private Stack<RedoableCommand> redoStack;
+    private static final Logger logger = LogsCenter.getLogger(StackUndoRedo.class);
 
     /**
-     * StackUndoRedo Class to enable storing of commands FIFO
+     * StackUndoRedo Class to enable storing of commands LIFO
      */
     public StackUndoRedo() {
         undoStack = new Stack<>();
@@ -42,6 +46,7 @@ public class StackUndoRedo {
     public RedoableCommand popUndo() {
         RedoableCommand toUndo = undoStack.pop();
         redoStack.push(toUndo);
+        logger.info(this.toString());
         return toUndo;
     }
 
@@ -51,6 +56,7 @@ public class StackUndoRedo {
     public RedoableCommand popRedo() {
         RedoableCommand toRedo = redoStack.pop();
         undoStack.push(toRedo);
+        logger.info(this.toString());
         return toRedo;
     }
 
