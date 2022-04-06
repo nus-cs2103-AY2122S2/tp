@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_FRIENDS;
+import static seedu.address.logic.commands.AddEventCommand.MESSAGE_PAST_EVENT_WARNING;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -24,9 +25,22 @@ class AddEventCommandTest {
     }
 
     @Test
-    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_pastEventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
-        Event validEvent = new EventBuilder().build();
+        Event validEvent = new EventBuilder().withDateTime("01-12-1995 1230").build();
+
+        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+        String expectedOutput = String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent)
+                + "\n" + MESSAGE_PAST_EVENT_WARNING;
+
+        assertEquals(expectedOutput, commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
+    }
+
+    @Test
+    public void execute_futureEventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().withDateTime("12-05-3030 1459").build();
 
         CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
 
