@@ -464,16 +464,16 @@ Examples:
 
 Function: Clear all sellers from the seller list.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
+</div>
+
 Format: `clear-s`
 
 #### Sorting sellers. `sort-s`
 
 Function: Sort all the sellers according to the orders specified.
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
-</div>
 
 Format: `sort-s [by/COMPAREDITEM] [o/ORDER]`
 

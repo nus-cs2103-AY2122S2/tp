@@ -32,6 +32,11 @@ public class MatchHouseTypeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Buyer> buyerList = model.getFilteredBuyerList();
+
+        if (index.getZeroBased() >= buyerList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        }
+
         Buyer buyer = buyerList.get(index.getZeroBased());
 
         model.updateFilteredSellerList(new HouseTypeMatchBuyerPredicate(buyer));
