@@ -17,11 +17,13 @@ import java.util.List;
 
 import seedu.ibook.commons.core.index.Index;
 import seedu.ibook.logic.commands.exceptions.CommandException;
-import seedu.ibook.logic.commands.product.UpdateCommand;
+import seedu.ibook.logic.commands.item.UpdateItemCommand.UpdateItemDescriptor;
+import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
 import seedu.ibook.model.IBook;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.ProductFilter;
+import seedu.ibook.testutil.UpdateItemDescriptorBuilder;
 import seedu.ibook.testutil.UpdateProductDescriptorBuilder;
 
 /**
@@ -79,23 +81,31 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final UpdateCommand.UpdateProductDescriptor DESC_A;
-    public static final UpdateCommand.UpdateProductDescriptor DESC_B;
+    public static final UpdateProductDescriptor PRODUCT_DESCRIPTOR_A;
+    public static final UpdateProductDescriptor PRODUCT_DESCRIPTOR_B;
+    public static final UpdateItemDescriptor ITEM_DESCRIPTOR_A;
+    public static final UpdateItemDescriptor ITEM_DESCRIPTOR_B;
 
     static {
-        DESC_A = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
+        PRODUCT_DESCRIPTOR_A = new UpdateProductDescriptorBuilder().withName(VALID_NAME_A)
                 .withCategory(VALID_CATEGORY_A)
                 .withDescription(VALID_DESCRIPTION_A)
                 .withPrice(VALID_PRICE_A)
                 .withDiscountRate(VALID_DISCOUNTRATE_A)
                 .withDiscountStart(VALID_DISCOUNTSTART_A)
                 .build();
-        DESC_B = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
+        PRODUCT_DESCRIPTOR_B = new UpdateProductDescriptorBuilder().withName(VALID_NAME_B)
                 .withCategory(VALID_CATEGORY_B)
                 .withDescription(VALID_DESCRIPTION_B)
                 .withPrice(VALID_PRICE_B)
                 .withDiscountRate(VALID_DISCOUNTRATE_B)
                 .withDiscountStart(VALID_DISCOUNTSTART_B)
+                .build();
+        ITEM_DESCRIPTOR_A = new UpdateItemDescriptorBuilder().withExpiryDate(VALID_EXPIRY_DATE_A)
+                .withQuantity(VALID_QUANTITY_A)
+                .build();
+        ITEM_DESCRIPTOR_B = new UpdateItemDescriptorBuilder().withExpiryDate(VALID_EXPIRY_DATE_B)
+                .withQuantity(VALID_QUANTITY_B)
                 .build();
     }
 
