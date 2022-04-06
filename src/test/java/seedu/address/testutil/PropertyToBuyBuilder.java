@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 
-import seedu.address.model.property.*;
+import seedu.address.model.property.House;
+import seedu.address.model.property.PriceRange;
+import seedu.address.model.property.PropertyToBuy;
 
 /**
  * A utility class to help with building PropertyToBuy objects.

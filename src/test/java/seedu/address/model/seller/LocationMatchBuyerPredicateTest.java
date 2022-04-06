@@ -19,19 +19,11 @@ import seedu.address.testutil.PropertyToBuyBuilder;
 import seedu.address.testutil.PropertyToSellBuilder;
 import seedu.address.testutil.SellerBuilder;
 
-class HouseTypeMatchBuyerPredicateTest {
+class LocationMatchBuyerPredicateTest {
 
     //property to buy
     private PropertyToBuy ptbStub1 = new PropertyToBuyBuilder()
-            .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-            .withPriceRange(new PriceRange(0, 100)).build();
-
-    private PropertyToBuy ptbStub2 = new PropertyToBuyBuilder()
-        .withHouse(new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).build();
-
-    private PropertyToBuy ptbStub3 = new PropertyToBuyBuilder()
-        .withHouse(new HouseBuilder().withHouseType(HouseType.APARTMENT).withLocation("Kranji").build())
+        .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
         .withPriceRange(new PriceRange(0, 100)).build();
 
     //property to sell
@@ -40,57 +32,39 @@ class HouseTypeMatchBuyerPredicateTest {
         .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
 
     private PropertyToSell ptsStub2 = new PropertyToSellBuilder()
-        .withHouse(new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("Kranji").build())
+        .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Crunchy").build())
         .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
 
     private PropertyToSell ptsStub3 = new PropertyToSellBuilder()
-        .withHouse(new HouseBuilder().withHouseType(HouseType.APARTMENT).withLocation("Kranji").build())
+        .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("kranji").build())
         .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
 
     private PropertyToSell ptsStub4 = new PropertyToSellBuilder()
-        .withHouse(new HouseBuilder().withHouseType(HouseType.COLONIA).withLocation("Kranji").build())
+        .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("kRaNji").build())
         .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
 
-    private PropertyToSell ptsStub5 = new PropertyToSellBuilder()
-        .withHouse(new HouseBuilder().withHouseType(HouseType.CONDOMINIUM).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 100)).withAddress(new Address("ANY ADDRESS")).build();
+
 
     private Buyer buyer1 = new BuyerBuilder().withProperty(ptbStub1).build();
-    private Buyer buyer2 = new BuyerBuilder().withProperty(ptbStub2).build();
-    private Buyer buyer3 = new BuyerBuilder().withProperty(ptbStub3).build();
 
     private Seller seller1 = new SellerBuilder().withProperty(ptsStub1).build();
     private Seller seller2 = new SellerBuilder().withProperty(ptsStub2).build();
     private Seller seller3 = new SellerBuilder().withProperty(ptsStub3).build();
     private Seller seller4 = new SellerBuilder().withProperty(ptsStub4).build();
-    private Seller seller5 = new SellerBuilder().withProperty(ptsStub5).build();
 
-    private HouseTypeMatchBuyerPredicate predicate1 = new HouseTypeMatchBuyerPredicate(buyer1);
-    private HouseTypeMatchBuyerPredicate predicate2 = new HouseTypeMatchBuyerPredicate(buyer2);
-    private HouseTypeMatchBuyerPredicate predicate3 = new HouseTypeMatchBuyerPredicate(buyer3);
+    private LocationMatchBuyerPredicate predicate1 = new LocationMatchBuyerPredicate(buyer1);
 
     @Test
     void test1() {
-        //exactly the same.
+        //exactly same
         assertTrue(predicate1.test(seller1));
-        assertTrue(predicate3.test(seller3));
 
-        //buyer is unspecified house type
-        assertTrue(predicate2.test(seller1));
-        assertTrue(predicate2.test(seller2));
-        assertTrue(predicate2.test(seller3));
-        assertTrue(predicate2.test(seller4));
-        assertTrue(predicate2.test(seller5));
+        //Case INSENSITIVE.
+        assertTrue(predicate1.test(seller3));
+        assertTrue(predicate1.test(seller4));
 
-        //wrong house type
-        assertFalse(predicate1.test(seller3));
-        assertFalse(predicate1.test(seller4));
-        assertFalse(predicate1.test(seller5));
-
-        assertFalse(predicate3.test(seller1));
-        assertFalse(predicate3.test(seller2));
-        assertFalse(predicate3.test(seller4));
-        assertFalse(predicate3.test(seller5));
+        //Different location
+        assertFalse(predicate1.test(seller2));
     }
 
     @Test
