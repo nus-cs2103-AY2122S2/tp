@@ -10,9 +10,9 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
 public class Price {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Prices should only be of type double, and should not be negative";
+            "Prices should only have at most two decimal places, and should not be negative";
 
-    public static final String VALIDATION_REGEX = "\\$?\\d+(?:\\.\\d{1,2})?";
+    public static final String VALIDATION_REGEX = "\\$?(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?";
 
     public final Double price;
 

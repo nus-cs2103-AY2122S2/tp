@@ -41,7 +41,7 @@ public class TypicalProducts {
             .withCategory("Bread")
             .withDescription("Chocolate on bread")
             .withPrice("8.99")
-            .withDiscountRate("30.75")
+            .withDiscountRate("30")
             .withDiscountStart("1").build();
     public static final Product VANILLA_CAKE = new ProductBuilder().withName("Vanilla Cake")
             .withCategory("Cake")
@@ -72,7 +72,7 @@ public class TypicalProducts {
             .withCategory("Bread")
             .withDescription("Chocolate on bread")
             .withPrice("8.99")
-            .withDiscountRate("30.75")
+            .withDiscountRate("30")
             .withDiscountStart("1").buildWithItems(getTypicalItems());
     public static final Product VANILLA_CAKE_WITH_ITEMS = new ProductBuilder().withName("Vanilla Cake")
             .withCategory("Cake")
