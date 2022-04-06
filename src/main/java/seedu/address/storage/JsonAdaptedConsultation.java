@@ -50,7 +50,7 @@ class JsonAdaptedConsultation {
      */
     public JsonAdaptedConsultation(Consultation source) {
         ownerNric = source.getNric().value;
-        date = source.getDate().value().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        date = source.getDate().value().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         time = source.getTime().value().format(DateTimeFormatter.ofPattern("HH-mm"));
         diagnosis = source.getDiagnosis().value();
         fee = source.getFee().value();
