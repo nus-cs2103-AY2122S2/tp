@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added attendance functionality [#80](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/80)
     * What it does:
         * Allows the user to mark pets as `absent` or `present` on specified dates. Users are able to mark pets'
-          attendance for dates in the past, as well as dates in the future (in advance). 
+          attendance for dates in the past, as well as dates in the future (in advance).
         * Dates within the past seven
           days that the pet were marked present or absent are also reflected in the GUI as green-coloured or
           red-coloured date tags.

@@ -54,4 +54,3 @@ Given below are my contributions to the project.
 2. Reported bugs spotted. [#106](https://github.com/AY2122S2-CS2103T-T13-1/tp/issues/106) [#110](https://github.com/AY2122S2-CS2103T-T13-1/tp/issues/110)
 
 
-  
