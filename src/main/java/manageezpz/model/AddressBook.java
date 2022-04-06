@@ -327,9 +327,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.tasks.tagPriorityToTask(task, priority);
     }
 
-    public void findTask(Task task) {
-    }
-
     /**
      * Tags the task in the task list to a person in the address book.
      * @param task the task to be tagged.

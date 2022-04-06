@@ -231,12 +231,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void findTask(Task task) {
-        requireNonNull(task);
-        addressBook.findTask(task);
-    }
-
-    @Override
     public Task tagEmployeeToTask(Task task, Person person) {
         requireAllNonNull(task, person);
         return addressBook.tagEmployeeToTask(task, person);

@@ -125,12 +125,7 @@ public interface Model {
     Task unmarkTask(Task task);
 
     Task tagPriorityToTask(Task task, Priority priority);
-
-    /**
-     * Finds the given task.
-     * The task must exist in the task list.
-     */
-    void findTask(Task task);
+    
 
     /**
      * Tags the given task.
