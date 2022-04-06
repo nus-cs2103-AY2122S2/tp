@@ -14,7 +14,7 @@ public class DiscountStart {
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Start should be a non-negative integer at most 999999";
 
-    public static final String VALIDATION_REGEX = "|0*(?:[1-9]\\d{0,5})?";
+    public static final String VALIDATION_REGEX = "|0*(?:0|[1-9]\\d{0,5})";
 
     public final Integer discountStart;
 
