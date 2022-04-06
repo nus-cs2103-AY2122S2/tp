@@ -78,7 +78,7 @@ Format: `help`
 
 Adds a player/ lineup/ schedule to MyGM.
 
-**To add a player:**
+**To add a player:**<br>
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
@@ -90,7 +90,7 @@ and email of johnd@example.com to the player list.`
 
 ![AddPlayer_SS](images/AddPlayer_SS.png)
 
-**To add a lineup:**
+**To add a lineup:**<br>
 Format: `add L/ n/LINEUP_NAME`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
 
@@ -99,7 +99,7 @@ Examples:
 
 ![AddLineup_SS](images/AddLineup_SS.png)
 
-**To add a schedule:**
+**To add a schedule:**<br>
 Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a dd/mm/yyyy hhmm format.
@@ -115,7 +115,7 @@ Examples:
 ### deleting a player/ lineup/ schedule :  `delete`
 deletes a player/ lineup/ schedule from MyGM
 
-**To delete a player:**
+**To delete a player:**<br>
 Format: `delete P/PLAYER [L/LINEUP]`
 
 * Deletes the player from the player list.
@@ -126,14 +126,14 @@ Example:
 *`delete P/James Soften` `L/Starting 5` will delete player `James Soften` from the lineup `Starting 5`.
 
 
-**To delete a lineup:**
+**To delete a lineup:**<br>
 Format: `delete L/LINEUP`
 * Delete the lineup.
 
 Example:
 * `delete L/Starting 5` will delete the lineup `Starting 5` from MyGM.
 
-**To delete a schedule:**
+**To delete a schedule:**<br>
 Format: `delete S/INDEX_SCHEDULE`
 * Delete the i-th schedule of MyGM.
 
@@ -274,7 +274,6 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
 
-
 **To edit a lineup:**
 
 Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
@@ -343,7 +342,6 @@ Format: `load PATH`
 
 Example:
 * `load ./Documents/data.txt`
-
 
 ### Editing the data file `[coming in v2.0]`
 
