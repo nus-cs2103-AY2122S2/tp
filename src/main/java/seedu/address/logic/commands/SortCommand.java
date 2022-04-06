@@ -15,7 +15,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all clients based on parameters given.\n"
             + "Parameters available: meeting, name, prev, salary \n"
-            + "Example: " + COMMAND_WORD + " John Doe";
+            + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Clients are now sorted";
     private final Comparator<Person> sortComparator;

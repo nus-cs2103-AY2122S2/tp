@@ -164,14 +164,13 @@ Format: `unflag NAME`
 Sorts clients such that flagged clients are displayed before unflagged clients.
 It then sorts all clients in HustleBook based on the parameter provided.
 
-Format: `sort PARAMETER`
+Format: `sort [meeting|name|prev|salary]`
 
-
-* `PARAMETER` you can use are: `meeting`,`name`, `prev` and `salary`
-* `PARAMETER` is not case-sensitive. 
-
-Example:
-* `sort salary`
+* `sort meeting` sorts clients by the date and time of the meeting. The next upcoming meeting will be displayed first.
+* `sort name` sorts clients by name in alphabetical order.
+* `sort prev` sorts clients by previous date met. The client you have not met for the longest will be displayed at the top.
+* `sort salary` sorts clients by their salary in descending order.
+* Arguments are not case-sensitive.
 
 ### Scheduling / Rescheduling a meeting: `meet`
 
