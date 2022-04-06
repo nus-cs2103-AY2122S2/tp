@@ -39,6 +39,103 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
+     * Adds a lesson to the list.
+     * The time slot of the lesson must not conflict with any of the existing lessons in the list.
+     */
+    public void add(Lesson toAdd) {
+        requireNonNull(toAdd);
+
+        if (hasConflictingLesson(toAdd)) {
+            throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
+        }
+
+        internalList.add(toAdd);
+        sortList();
+    }
+
+    /**
+     * Assigns the lesson to the student's enrolled lessons.
+     * @param student the student that is enrolling in the lesson
+     * @param lesson the lesson that the student is enrolling in
+     */
+    public void assignStudent(Student student, Lesson lesson) {
+        requireAllNonNull(student, lesson);
+        assert internalList.contains(lesson) : "Cannot find lesson object in internal list.";
+
+        internalList.get(internalList.indexOf(lesson)).assignStudent(student);
+    }
+
+    /**
+     * Unassigns the student from the lesson's enrolled students.
+     * @param student the student that is being deleted
+     */
+    public void unassignStudent(Student student) {
+        requireNonNull(student);
+
+        for (Lesson lesson: internalList) {
+            if (lesson.hasAlreadyAssigned(student)) {
+                lesson.unassignStudent(student);
+            }
+        }
+    }
+
+    /**
+     * Replaces the lesson {@code target} in the list with {@code editedLesson}.
+     * {@code target} must exist in the list.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
+     */
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new LessonNotFoundException();
+        }
+
+        if (hasConflictingLessonExcluding(index, editedLesson)) {
+            throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
+        }
+
+        internalList.set(index, editedLesson);
+        sortList();
+    }
+
+    /**
+     * Removes the equivalent lesson from the list.
+     * The lesson must exist in the list.
+     */
+    public void remove(Lesson toRemove) {
+        requireNonNull(toRemove);
+
+        if (!internalList.remove(toRemove)) {
+            throw new LessonNotFoundException();
+        }
+    }
+
+    /**
+     * Replaces the contents of this list with {@code lessons}.
+     * {@code lessons} must not contain lessons with overlapping timeslots.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
+
+        if (lessonsDoConflict(lessons)) {
+            List<Lesson> conflictingLessons = findConflictingLessons(lessons);
+            throw new ContainsConflictingLessonsException(conflictingLessons);
+        }
+
+        internalList.setAll(lessons);
+        sortList();
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Lesson> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    /**
      * Returns true if some lesson in the list conflicts with the specified lesson
      */
     public boolean hasConflictingLesson(Lesson toCheck) {
@@ -95,123 +192,6 @@ public class ConsistentLessonList implements Iterable<Lesson> {
         return conflictingLessons;
     }
 
-    private void sortList() {
-        FXCollections.sort(internalList, Comparator.comparing(lesson ->
-                lesson.getDateTimeSlot().getDateOfLesson()));
-    }
-
-    /**
-     * Adds a lesson to the list.
-     * The time slot of the lesson must not conflict with any of the existing lessons in the list.
-     */
-    public void add(Lesson toAdd) {
-        requireNonNull(toAdd);
-        if (hasConflictingLesson(toAdd)) {
-            throw new ConflictsWithLessonsException(toAdd, findAllLessonsConflictingWith(toAdd));
-        }
-        internalList.add(toAdd);
-        sortList();
-    }
-
-    /**
-     * Assigns the lesson to the student's enrolled lessons.
-     * @param student the student that is enrolling in the lesson
-     * @param lesson the lesson that the student is enrolling in
-     */
-    public void assignStudent(Student student, Lesson lesson) {
-        requireAllNonNull(student, lesson);
-        assert internalList.contains(lesson) : "Cannot find lesson object in internal list.";
-        internalList.get(internalList.indexOf(lesson)).assignStudent(student);
-    }
-
-    /**
-     * Unassigns the student from the lesson's enrolled students.
-     * @param student the student that is being deleted
-     */
-    public void unassignStudent(Student student) {
-        requireNonNull(student);
-        for (Lesson lesson: internalList) {
-            if (lesson.hasAlreadyAssigned(student)) {
-                lesson.unassignStudent(student);
-            }
-        }
-    }
-
-    /**
-     * Replaces the lesson {@code target} in the list with {@code editedLesson}.
-     * {@code target} must exist in the list.
-     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
-     */
-    public void setLesson(Lesson target, Lesson editedLesson) {
-        requireAllNonNull(target, editedLesson);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new LessonNotFoundException();
-        }
-
-        if (hasConflictingLessonExcluding(index, editedLesson)) {
-            throw new ConflictsWithLessonsException(editedLesson, findAllLessonsConflictingWith(editedLesson));
-        }
-        internalList.set(index, editedLesson);
-        sortList();
-    }
-
-    /**
-     * Removes the equivalent lesson from the list.
-     * The lesson must exist in the list.
-     */
-    public void remove(Lesson toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new LessonNotFoundException();
-        }
-    }
-
-    public void setLessons(ConsistentLessonList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
-     * Replaces the contents of this list with {@code lessons}.
-     * {@code lessons} must not contain lessons with overlapping timeslots.
-     */
-    public void setLessons(List<Lesson> lessons) {
-        requireAllNonNull(lessons);
-        if (lessonsDoConflict(lessons)) {
-            List<Lesson> conflictingLessons = findConflictingLessons(lessons);
-            throw new ContainsConflictingLessonsException(conflictingLessons);
-        }
-
-        internalList.setAll(lessons);
-        sortList();
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Lesson> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-
-    @Override
-    public Iterator<Lesson> iterator() {
-        return internalList.iterator();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ConsistentLessonList // instanceof handles nulls
-                        && internalList.equals(((ConsistentLessonList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
-    }
-
     /**
      * Returns false if {@code lessons} contains only non-conflicting lessons.
      */
@@ -227,7 +207,7 @@ public class ConsistentLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns a list containing two instances of conflicting lessons in {@code lessons}, if any.
+     * Returns a list containing instances of conflicting lessons in a list of {@code lessons}, if any.
      */
     private List<Lesson> findConflictingLessons(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
@@ -238,5 +218,27 @@ public class ConsistentLessonList implements Iterable<Lesson> {
             }
         }
         return null;
+    }
+
+    private void sortList() {
+        FXCollections.sort(internalList, Comparator.comparing(lesson ->
+                lesson.getDateTimeSlot().getDateOfLesson()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ConsistentLessonList // instanceof handles nulls
+                        && internalList.equals(((ConsistentLessonList) other).internalList));
+    }
+
+    @Override
+    public Iterator<Lesson> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
     }
 }

@@ -7,8 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.time.format.TextStyle;
 import java.util.Locale;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents the time in which a lesson takes place in the LessonBook.
@@ -18,7 +21,13 @@ public class DateTimeSlot {
                     + "\n Hours and minutes must be non-negative integer."
                     + "\n Minutes cannot be more than 60.";
 
-    private static final DateTimeFormatter acceptedDateFormat = DateTimeFormatter.ofPattern("d-M-y");
+    public static final String INVALID_DURATION_MESSAGE = "Duration of lesson cannot be zero.";
+
+    public static final String EXCESSIVE_DURATION_MESSAGE =
+            "Duration of lesson cannot be more than or equals to 24 hours!";
+
+    private static final DateTimeFormatter acceptedDateFormat =
+            DateTimeFormatter.ofPattern("d-M-uuuu").withResolverStyle(ResolverStyle.STRICT);
     private static final DateTimeFormatter acceptedStartTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
     private static final DateTimeFormatter displayedDateFormat = DateTimeFormatter.ofPattern("EEEE '['d MMMM yyyy']'");
@@ -79,6 +88,40 @@ public class DateTimeSlot {
         dateOfLesson = lessonDateTime;
         this.hours = hours;
         this.minutes = minutes;
+    }
+
+    /**
+     * Constructs a {@code DateTimeSlot}.
+     *
+     * @param startingDateTime Starting date and time of the lesson.
+     * @param hours Duration of the lesson, hours.
+     * @param minutes Duration of the lesson, minutes.
+     *
+     * @throws CommandException if the lesson takes place over more than one day (i.e. starts on Monday, ends on Friday)
+     */
+    public static DateTimeSlot makeDateTimeSlot(LocalDateTime startingDateTime, Integer hours, Integer minutes)
+            throws CommandException {
+        checkLessonDurationIsGreaterThanZeroMinutes(hours, minutes);
+        checkLessonDurationIsLessThan24Hours(hours, minutes);
+
+        return new DateTimeSlot(startingDateTime, hours, minutes);
+    }
+
+    private static void checkLessonDurationIsGreaterThanZeroMinutes(Integer hours, Integer minutes)
+            throws CommandException {
+        if (hours == 0 && minutes == 0) {
+            throw new CommandException(INVALID_DURATION_MESSAGE);
+        }
+    }
+
+    private static void checkLessonDurationIsLessThan24Hours(Integer hours, Integer minutes)
+            throws CommandException {
+        Integer totalDurationInMinutes = (hours * 60) + minutes;
+        Integer twentyFourHoursInMinutes = 24 * 60;
+
+        if (totalDurationInMinutes >= twentyFourHoursInMinutes) {
+            throw new CommandException(EXCESSIVE_DURATION_MESSAGE);
+        }
     }
 
     public static DateTimeFormatter getAcceptedDateFormat() {

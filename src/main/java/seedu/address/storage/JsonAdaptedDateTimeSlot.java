@@ -13,7 +13,7 @@ import seedu.address.model.lesson.DateTimeSlot;
  */
 class JsonAdaptedDateTimeSlot {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "DateTimeSlot's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE = "DateTimeSlot has some missing/invalid fields!";
 
     private final String dateOfLesson;
     private final String startTime;
@@ -50,50 +50,60 @@ class JsonAdaptedDateTimeSlot {
      * @throws IllegalValueException if there were any data constraints violated in the adapted date timeslot.
      */
     public DateTimeSlot toModelType() throws IllegalValueException {
-        // TODO: make specific error-messages here for each null or incorrect format field
+        checkFieldsArePresent(dateOfLesson, startTime, durationHours, durationMinutes);
+        checkDateIsValid(dateOfLesson);
+        checkStartTimeIsValid(startTime);
+        checkDurationHoursIsValid(durationHours);
+        checkDurationMinutesIsValid(durationMinutes);
 
-        if (dateOfLesson == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTimeSlot.class.getSimpleName())
-            );
+        LocalDate modelDateOfLesson = DateTimeSlot.parseLessonDate(dateOfLesson);
+        String modelStartTime = startTime;
+        Integer modelDurationHours = DateTimeSlot.parseLessonDurationHours(durationHours);
+        Integer modelDurationMinutes = DateTimeSlot.parseLessonDurationMinutes(durationMinutes);
+
+        return getDateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
+    }
+
+    private static void checkFieldsArePresent(Object... toCheck) throws IllegalValueException {
+        for (Object o : toCheck) {
+            if (o == null) {
+                throw new IllegalValueException(MISSING_FIELD_MESSAGE);
+            }
         }
-        if (!DateTimeSlot.isValidDate(dateOfLesson)) {
+    }
+
+    private static void checkDateIsValid(String date) throws IllegalValueException {
+        if (!DateTimeSlot.isValidDate(date)) {
             throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
         }
-        LocalDate modelDateOfLesson = DateTimeSlot.parseLessonDate(dateOfLesson);
+    }
 
-        if (startTime == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTimeSlot.class.getSimpleName())
-            );
-        }
+    private static void checkStartTimeIsValid(String startTime) throws IllegalValueException {
         if (!DateTimeSlot.isValidStartTime(startTime)) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTimeSlot.class.getSimpleName())
-            );
+            throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
         }
-        String modelStartTime = startTime;
+    }
 
-        if (durationHours == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTimeSlot.class.getSimpleName())
-            );
-        }
+    private static void checkDurationHoursIsValid(String durationHours) throws IllegalValueException {
         if (!DateTimeSlot.isValidDurationHours(durationHours)) {
             throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
         }
-        Integer modelDurationHours = DateTimeSlot.parseLessonDurationHours(durationHours);
+    }
 
-        if (durationMinutes == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTimeSlot.class.getSimpleName())
-            );
-        }
+    private static void checkDurationMinutesIsValid(String durationMinutes) throws IllegalValueException {
         if (!DateTimeSlot.isValidDurationMinutes(durationMinutes)) {
             throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
         }
-        Integer modelDurationMinutes = DateTimeSlot.parseLessonDurationMinutes(durationMinutes);
+    }
 
-        return new DateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
+    private static DateTimeSlot getDateTimeSlot(LocalDate modelDateOfLesson, String modelStartTime,
+                                                Integer modelDurationHours, Integer modelDurationMinutes)
+            throws IllegalValueException {
+
+        try {
+            return new DateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
+        }
     }
 }

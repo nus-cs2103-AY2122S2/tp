@@ -41,6 +41,9 @@ public class RecurringLesson extends Lesson {
             return false;
         }
         if (otherLesson instanceof TemporaryLesson) {
+            if (otherLesson.getDateTimeSlot().getDateOfLesson().isBefore(super.getDateTimeSlot().getDateOfLesson())) {
+                return false;
+            }
             LocalDateTime tempDate = LocalDateTime.of(otherLesson.getDateTimeSlot().getDateOfLesson().toLocalDate(),
                     this.getDateTimeSlot().getDateOfLesson().toLocalTime());
             DateTimeSlot temp = new DateTimeSlot(tempDate,

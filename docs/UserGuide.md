@@ -144,7 +144,17 @@ Adds a lesson to TeachWhat!
 
 Command word: `addlesson` / `al`
 
-Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`
+Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES> -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
+
+<div markdown="block" class="alert alert-info">
+
+* **ℹ Adding Recurring Lessons:** to specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! if it is a temporary lesson, simply leave it out.
+
+</div>
+
+**Note that:**
+- The subject and address are optional fields and can be omitted so that the tutor only keeps the most vital information of the lesson.
+- Lesson durations cannot be greater than 24 hours!
 
 Supported Types: Recurring `-r` and Temporary
 
@@ -157,8 +167,6 @@ Adds a recurring lesson with the following attributes:
 * on date: 27 February 2022
 * starting at: 6pm
 * duration: 1 hour and 50 minutes
-
->**⚠️ Note:** If no type is given then the lesson is assumed to be temporary.
 
 <div markdown="block" class="alert alert-info">
 
@@ -189,6 +197,7 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 **Note that:**
 
 * Editing of the lesson's type is not allowed. Recurring lessons cannot be edited to become temporary lessons and vice-versa.
+* If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than 24 hours!
 
 ---
 
@@ -277,29 +286,42 @@ ___
 
 ### Finding a Student
 
-Displays the students whose name or tags contain the input provided.
+Displays the students whose names or tags contain the input provided.
 
-Command word: `findstudent` / `fs`
+Command word: `findstudents` / `fs`
 
-Format: `findstudent <FIND_CRITERIA>`
+Format: `findstudents <FIND_CRITERIA>`
 
-Examples: `findstudent alex friends` searches the student list for students whose
-tags or name contains with "alex" **or** friends.
+Examples: `findstudents alex friends` searches the student list for students whose names or tags contain the keyword "alex" **or** "friends".
 
 ---
 
 ### Finding a Lesson
 
-Displays the lessons whose name or subject contains the input provided.
+Displays the lessons whose names or subjects contain the any of the keywords provided.
 
-Command word: `findlesson` / `fl`
+Command word: `findlessons` / `fl`
 
-Format: `findlesson <FIND_CRITERIA>`
+Format: `findlessons <FIND_CRITERIA>`
 
-Examples: `findlesson biology` searches the lesson list for lessons which names
+Examples: `findlesson biology` searches the lesson list for lessons with names or subjects that contain the keyword "biology".
+
+Examples: `findlessons biology` searches the lesson list for lessons which names
  include "biology"
 
 ---
+
+### Clearing all entries
+
+Clears all lessons and students from `TeachWhat!`.
+
+Format: `clear -f`
+
+<div markdown="block" class="alert alert-info">
+To save you from accidentally deleting everything if you accidentally enter `clear`, we made it mandatory for you to include `-f` together with the command (to get confirmation from you that you indeed wish to do so).
+
+So, remember to include `-f` when typing this command! 
+</div>
 
 ### Help
 
@@ -349,21 +371,22 @@ An example of such an error would be conflicting lessons being found in the data
 
 ## Command summary
 
-| Action               | Command        | Shortcut | Format, Examples                                                                                                                                                                          |
-|----------------------|----------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**      | `addstudent`   | `as`     | `addstudent <STUDENT_NAME>` e.g. `addstudent sammy boyo`                                                                                                                                  |
-| **Add lesson**       | `addlesson`    | `al`     | `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>` |
-| **Delete Student**   | `rmstudent`    | `rms`    | `rmstudent <STUDENT_ID>` e.g. `rmstudent 13`                                                                                                                                              |
-| **Delete lesson**    | `rmlesson`     | `rml`    | `rmlesson <LESSON_ID>` e.g.`rmlesson 5`                                                                                                                                                   |
-| **Edit Student**     | `editstudent`  | `es`     | `editstudent <STUDENT_ID> -n <NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>`                                                                                                       |
-| **Edit lesson**      | `editlesson`   | `el`     | `editlesson <LESSON_ID> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`  |
-| **Assign Student**   | `assign`       |          | `assign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`assign -s 5 -l 11`                                                                                                                           |
-| **Unassign Student** | `unassign`     |          | `unassign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`unassign -s 5 -l 11`                                                                                                                       |
-| **List Students**    | `liststudents` | `ls`     | `liststudents`                                                                                                                                                                            |
-| **List lesson**      | `listlessons`  | `ll`     | `listlessons`                                                                                                                                                                             |
-| **View Student**     | `student`      |          | `student <STUDENT_ID>` e.g. `student 5`                                                                                                                                                   |
-| **View lesson**      | `lesson`       |          | `lesson <LESSON_ID>` e.g. `lesson 2`                                                                                                                                                      |
-| **Find Student**     | `findstudent`  | `fs`     | `findstudent <FIND_CRITERIA>`                                                                                                                                                             |
-| **Find Lesson**      | `findlesson`   | `fl`     | `findlesson <FIND_CRITERIA>`                                                                                                                                                              |
-| **Help**             | `help`         |          | `help`                                                                                                                                                                                    |
-| **Exit**             | `exit`         |          | `exit`                                                                                                                                                                                    |
+| Action               | Format, Examples                                                                                                                                                                          |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**      | `addstudent <STUDENT_NAME>` e.g. `addstudent sammy boyo`                                                                                                                                  |
+| **Add lesson**       | `addlesson <LESSON_TYPE> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>` |
+| **Delete Student**   | `rmstudent <STUDENT_ID>` e.g. `rmstudent 13`                                                                                                                                              |
+| **Delete lesson**    | `rmlesson <LESSON_ID>` e.g.`rmlesson 5`                                                                                                                                                   |
+| **Edit Student**     | `editstudent <STUDENT_ID> -n <NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>`                                                                                                       |
+| **Edit lesson**      | `editlesson <LESSON_ID> -n <LESSON_NAME> -s <SUBJECT> -a <ADDRESS_OF_LESSON> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h <DURATION_OF_LESSON_IN_HOURS> -m <DURATION_OF_LESSON_IN_MINUTES>`  |
+| **Assign Student**   | `assign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`assign -s 5 -l 11`                                                                                                                           |
+| **Unassign Student** | `unassign -s <STUDENT_ID> -l <LESSON_ID>` e.g.`unassign -s 5 -l 11`                                                                                                                       |
+| **List Students**    | `liststudents`                                                                                                                                                                            |
+| **List lesson**      | `listlessons`                                                                                                                                                                             |
+| **View Student**     | `student <STUDENT_ID>` e.g. `student 5`                                                                                                                                                   |
+| **View lesson**      | `lesson <LESSON_ID>` e.g. `lesson 2`                                                                                                                                                      |
+| **Find Student**     | `findlesson <FIND_CRITERIA>`                                                                                                                                                              |
+| **Find Lesson**      | `findstudent <FIND_CRITERIA>`                                                                                                                                                             |
+| **Clearing all entries**      | `clear -f`                                                                                                                                                             |
+| **Help**             | `help`                                                                                                                                                                                    |
+| **Exit**             | `exit`                                                                                                                                                                                    |

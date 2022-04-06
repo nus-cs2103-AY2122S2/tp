@@ -51,17 +51,6 @@ class JsonSerializableLessonBook {
         LessonBook lessonBook = new LessonBook();
         List<Lesson> lessonList = new ArrayList<>();
 
-        /*
-        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
-            Lesson lesson = jsonAdaptedLesson.toModelType();
-            if (lessonBook.hasConflictingLesson(lesson)) {
-                throw new IllegalValueException(MESSAGE_CONFLICTING_LESSONS);
-            }
-
-            lessonBook.addLesson(lesson);
-        }
-        */
-
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             lessonList.add(jsonAdaptedLesson.toModelType());
         }
