@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import javafx.scene.control.Label;
 import seedu.address.model.attendance.AttendanceEntry;
@@ -12,7 +10,7 @@ import seedu.address.model.attendance.AttendanceEntry;
 /**
  * A class that processes and produces transport arrangement tags for the GUI.
  */
-public class TransportTag {
+public class TransportTag extends Label {
     private static final String TODAY_TRANSPORT_ARRANGEMENT_TAG_STYLE = "-fx-background-color: #f9c74f";
     private static final String TOMORROW_TRANSPORT_ARRANGEMENT_TAG_STYLE = "-fx-background-color: #f9844a";
     private static final String NO_TRANSPORT_ARRANGEMENT_TAG_STYLE = "-fx-background-color: #c4c4c4";
@@ -20,34 +18,60 @@ public class TransportTag {
     private static final String TRANSPORT_TAG_NO_ARRANGEMENT = "%1$s | No Arrangement";
 
     /**
-     * Private constructor to prevent creation.
+     * Creates a new pet transport tag.
      */
-    private TransportTag() {
-    };
+    public TransportTag(AttendanceEntry attendanceEntry) {
+        super(getTransportTagDetails(attendanceEntry));
+        super.setStyle(getTagStyle(attendanceEntry));
+    }
 
     /**
-     * Produces a transport arrangement tag to be added to {@code PetCard}.
+     * Retrieves the details of the transport arrangements, if any, to be displayed in the tag.
      *
-     * @param attendanceEntry the attendance to be converted to a transport tag.
-     * @return a yellow label for today's arrangements,
-     * an orange label for tomorrow's arrangements,
-     * and a grey label if no transport arrangements were made that day.
+     * @param attendanceEntry the incoming attendance entry.
+     * @return Pick-up and drop-off times of the transport arrangements if available, "No Arrangement" otherwise.
      */
-    public static Label createTransportTag(AttendanceEntry attendanceEntry) {
+    private static String getTransportTagDetails(AttendanceEntry attendanceEntry) {
         requireNonNull(attendanceEntry);
-        LocalDate tagDate = attendanceEntry.getAttendanceDate();
+        LocalDate attendanceDate = attendanceEntry.getAttendanceDate();
 
         if (!attendanceEntry.hasTransportArrangement()) {
-            return createTagWithNoArrangement(tagDate);
+            return String.format(TRANSPORT_TAG_NO_ARRANGEMENT, dateToDay(attendanceDate));
         }
 
-        return createTagWithArrangement(tagDate,
+        // has transport arrangements
+        return String.format(TRANSPORT_TAG_ARRANGEMENT, dateToDay(attendanceDate),
             attendanceEntry.getPickUpTime().get(),
             attendanceEntry.getDropOffTime().get());
     }
 
     /**
+     * Retrieves the style to be applied to the transport tag.
+     *
+     * @param attendanceEntry the incoming attendance entry.
+     * @return the style of the transport tag to be applied.
+     */
+    private String getTagStyle(AttendanceEntry attendanceEntry) {
+        requireNonNull(attendanceEntry);
+        if (!attendanceEntry.hasTransportArrangement()) {
+            return NO_TRANSPORT_ARRANGEMENT_TAG_STYLE;
+        }
+
+        // has transport arrangements
+        LocalDate attendanceDate = attendanceEntry.getAttendanceDate();
+        if (attendanceDate.isEqual(LocalDate.now())) {
+            return (TODAY_TRANSPORT_ARRANGEMENT_TAG_STYLE);
+        } else if (attendanceDate.isEqual(LocalDate.now().plusDays(1))) {
+            return (TOMORROW_TRANSPORT_ARRANGEMENT_TAG_STYLE);
+        }
+
+        assert false; // should not reach this point
+        return ""; // should not reach this point
+    }
+
+    /**
      * Converts a given date into a string relative to today.
+     *
      * @param date the given date.
      * @return a {@code String} representing the date, relative to today.
      */
@@ -58,45 +82,8 @@ public class TransportTag {
         } else if (date.isEqual(LocalDate.now().plusDays(1))) {
             return "Tomorrow";
         }
+
+        assert false; // should not reach this point
         return ""; // should not reach this point
-    }
-
-    /**
-     * Creates a transport tag in the context with no transport arrangements.
-     * @param date the date of the transport arrangement.
-     * @return a tag without any transport arrangement details.
-     */
-    private static Label createTagWithNoArrangement(LocalDate date) {
-        requireNonNull(date);
-        Label transportTag = new Label(
-            String.format(TRANSPORT_TAG_NO_ARRANGEMENT, dateToDay(date))
-        );
-
-        transportTag.setStyle(NO_TRANSPORT_ARRANGEMENT_TAG_STYLE);
-
-        return transportTag;
-    }
-
-    /**
-     * Creates a transport tag in the context with transport arrangements.
-     * @param date the date of the transport arrangement.
-     * @param pickUpTime the pick-up time of the transport arrangement.
-     * @param dropOffTime the drop-off time of the transport arrangement.
-     * @return a tag with the details of the transport arrangement.
-     */
-    private static Label createTagWithArrangement(LocalDate date, LocalTime pickUpTime, LocalTime dropOffTime) {
-        requireAllNonNull(date, pickUpTime, dropOffTime);
-        String style = date.isEqual(LocalDate.now())
-            ? TODAY_TRANSPORT_ARRANGEMENT_TAG_STYLE
-            : TOMORROW_TRANSPORT_ARRANGEMENT_TAG_STYLE;
-
-        Label transportTag = new Label(
-            String.format(TRANSPORT_TAG_ARRANGEMENT, dateToDay(date),
-                pickUpTime, dropOffTime)
-        );
-
-        transportTag.setStyle(style);
-
-        return transportTag;
     }
 }

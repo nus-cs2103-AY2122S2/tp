@@ -132,7 +132,7 @@ public class PetCard extends UiPart<Region> {
             .forEach(attendance -> {
                 transportTags
                     .getChildren()
-                    .add(TransportTag.createTransportTag(attendance));
+                    .add(new TransportTag(attendance));
             });
     }
 
