@@ -110,6 +110,11 @@ Features relating to the display of information within these panels are describe
 | `yr`                | seniority          |
 | `avail`             | availability       |
 
+**:information_source: Notes about the entities' values:**<br>
+
+* A candidate's `course` can only be either of the 5 computing courses in NUS School of Computing i.e. Business Analytics, Computer Engineering, Computer Science, Information Security or Information Systems.
+  * Reason being, our **Target User Profile** is restricted to NUS SoC.
+
 </div>
 
 ## Viewing help
