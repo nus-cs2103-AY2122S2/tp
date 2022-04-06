@@ -46,7 +46,6 @@ public class OnboardingPrompt extends UiPart<Stage> {
         displayMessage.minHeightProperty().bind(mainWindow.heightProperty().multiply(0.1));
         displayMessage.minWidthProperty().bind(mainWindow.widthProperty().multiply(0.3));
 
-
         displayMessage.setAlignment(Pos.CENTER);
     }
 
