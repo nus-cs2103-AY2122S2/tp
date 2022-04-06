@@ -4,7 +4,7 @@ title: User Guide
 ---
 ## Introduction
 
-ModuleMate finder (MMF) is a **desktop application for managing contacts and finding ModuleMates**. You can easily keep track of what modules your friends are/will be taking, so you can contact them to form groups.  
+ModuleMateFinder (MMF) is a **desktop application for managing contacts and finding ModuleMates**. You can easily keep track of what modules your friends are/will be taking, so you can contact them to form groups.  
 If you can type fast, you can get your contact management tasks done fast, but even if you are not a slow typist -- fret not, you can still use it!
 
 
@@ -57,11 +57,11 @@ This section lists down all the features available in MMF. You can click on any 
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ModuleMate Finder.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ModuleMateFinder.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts. (You are recommended to clear all placeholder contacts before you start using ModuleMate Finder)
+   * **`clear`** : Deletes all contacts. (You are recommended to clear all placeholder contacts before you start using ModuleMateFinder)
 
    * **`exit`** : Exits the app.
 
@@ -71,7 +71,7 @@ This section lists down all the features available in MMF. You can click on any 
 
 ## Features
 
-ModuleMate Finder is a desktop app that allows contacts to find people taking the same modules as them, easily and efficiently
+ModuleMateFinder is a desktop app that allows contacts to find people taking the same modules as them, easily and efficiently
 
 <div markdown="block" class="alert alert-info">
 
@@ -95,7 +95,9 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Below is a table depicting the parameters used in Module Mate Finder and their respective constraints
+* Below is a table depicting the parameters used in ModuleMateFinder and their respective constraints
+
+</div>
 
 | Parameter | Constraint                                                                                 | Example             |
 |-----------|--------------------------------------------------------------------------------------------|---------------------|
@@ -110,7 +112,7 @@ ModuleMate Finder is a desktop app that allows contacts to find people taking th
 | Format    | Format must either be `default`, `csv` or `json`                                           | csv                 |
 
 
-</div>
+
 
 
 ### Viewing help : `help`
@@ -123,13 +125,13 @@ Format: `help`
 
 ### Listing all contacts : `list`
 
-Shows a list of all contacts in ModuleMate Finder.
+Shows a list of all contacts in ModuleMateFinder.
 
 Format: `list`
 
 ### Adding a Contact : `add`
 
-Adds a contact to ModuleMate Finder.
+Adds a contact to ModuleMateFinder.
  
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS​`
 
@@ -142,13 +144,13 @@ Then, simply fill up the fields as guided in the window. You can then press the 
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about this command:**<br>
+**:information_source: Extra information about this command:**<br>
 * Adding duplicate names is not allowed as most people will not have the exact same name.
 * Addresses must be within 60 characters long
 * Phone number must be at least 3 digits short, and at most 25 digits long.
 * Emails must be of the format `local-part@domain`. For example, a valid email you is `e@e.sg`, invalid email is `e@e.s`
-* When in `archives`, this functionality is disabled.
-* Using `add`, you have the benefit of executing multiple commands (i.e. `comment`, `status`, and `addmodules`) at once.
+* When in `archives`, the `add` functionality is disabled.
+* Using the popup window `add`, you have the benefit of executing multiple commands (i.e. `comment`, `status`, and `addmodules`) at once.
 </div>
 
 
@@ -159,8 +161,8 @@ Adds module(s) to an existing contact
 Format: `addmodules INDEX m/MODULE [m/MODULE]...`
 
 * Adds modules represented by each module code `m/MODULE` to a contact at Index `INDEX`
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 * `addmodules 2 m/CS1231` Adds a module, `CS1231` to the 2nd contact
@@ -183,8 +185,8 @@ Format: `comment INDEX c/COMMENT`
 
 * Adds a comment for the contact at the specified `INDEX`.
 * A comment must be **within 60 characters long**
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * Any existing comments for a contact will be overwritten by the new input.
 * If used with an **empty comment** (i.e. `comment 1 c/`), the command will be treated as a **delete
   command** and removes the comment of the specified contact.
@@ -202,15 +204,15 @@ Sets a contact's status as favourite or blacklisted.
 Format: `status INDEX s/STATUS`
 - Gives a status to the contact at specified `INDEX`
 - Status can either be a `blacklist` or `favourite`, a contact can have no status tagged.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 - If used with an **empty status field** (i.e. `status 1 s/`), the command will be treated as a **delete
   command** and removes the status of the specified contact.
 
 Examples:
-- `status 1 s/blacklist` tags the 1st contact in ModuleMate Finder as blacklisted.
-- `status 2 s/favourite` tags the 2nd contact in ModuleMate Finder as favourite.
-- `status 2 s/` will untag the 2nd contact in ModuleMate Finder, leaving them with no `Status`
+- `status 1 s/blacklist` tags the 1st contact in ModuleMateFinder as blacklisted.
+- `status 2 s/favourite` tags the 2nd contact in ModuleMateFinder as favourite.
+- `status 2 s/` will untag the 2nd contact in ModuleMateFinder, leaving them with no `Status`
 
 ##### Annotated image of what a `contact` with `Status`, `Module`, and `Comment`  
 ![Example of a contact with Status and Comment](images/annotated_person.png)
@@ -225,8 +227,8 @@ Format: `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`
 * Copy contacts using specified field names.​
 * If no fields are specified, **all fields will be copied**.
 * Choose `INDEX` to copy a specific contact.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * If no `INDEX` is specified, **all contacts will be copied**.
 * Choice of format is default, csv and json.
 * **Default simply displays attribute line by line**, while csv format separates attributes via a `|` delimiter.
@@ -253,7 +255,7 @@ Examples:
 Format: `clear`
 
 Examples:
-- `clear` wipes all data from ModuleMate Finder.
+- `clear` wipes all data from ModuleMateFinder.
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -263,34 +265,34 @@ Typing this command will cause you to lose all data. Use with caution!
 
 ### Clearing all modules for a contact : `clearmodules`
 
-**Clears all modules** based on the given Index from ModuleMate Finder.
+**Clears all modules** based on the given Index from ModuleMateFinder.
 
 Format: `clearmodules INDEX`
 
 * Deletes all modules from the contact at the specified `INDEX`.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
 - `clearmodules 5` wipes all modules for contact in Index 5.
 
 ### Deleting a contact : `delete`
 
-Deletes the specified contact from ModuleMate Finder.
+Deletes the specified contact from ModuleMateFinder.
 
 Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in ModuleMate Finder.
+* `list` followed by `delete 2` deletes the 2nd contact in ModuleMateFinder.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 ### Deleting a module : `deletemodules`
 
-Deletes the specified module from contact in ModuleMate Finder.
+Deletes the specified module from contact in ModuleMateFinder.
 
 Format: `deletemodules INDEX m/MODULE [m/MODULE]...`
 
@@ -301,18 +303,18 @@ Format: `deletemodules INDEX m/MODULE [m/MODULE]...`
 * **One or more** modules must be specified.
 
 Examples:
-* `list` followed by `deletemodules 2 m/CS3230` deletes the module CS3230 for the 2nd contact in ModuleMate Finder.
+* `list` followed by `deletemodules 2 m/CS3230` deletes the module CS3230 for the 2nd contact in ModuleMateFinder.
 * `find Betsy` followed by `deletemodules 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st contact in the results of the `find` command.
 
 ### Editing a contact : `edit`
 
-Edits an existing contact in ModuleMate Finder.
+Edits an existing contact in ModuleMateFinder.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
 * Edits the contact at the specified `INDEX`. The Index refers to the Index number shown in the displayed contact list.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * **Modules cannot be edited** through the `edit` command.
@@ -398,15 +400,15 @@ Examples:
 
 ### Archiving contacts: `archive`
 
-You can archive contacts into a separate contact list. Archiving a contact can keep ModuleMate Finder more organised by hiding individuals (such as those whom have graduated) away from your contact list.
+You can archive contacts into a separate contact list. Archiving a contact can keep ModuleMateFinder more organised by hiding individuals (such as those whom have graduated) away from your contact list.
 
 format: `archive INDEX`
 * Archives the contact at the specified `INDEX`.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
-* `list` followed by `archive 2` archives the 2nd contact in ModuleMate Finder.
+* `list` followed by `archive 2` archives the 2nd contact in ModuleMateFinder.
 * `find Betsy` followed by `archive 1` archives the 1st contact in the results of the `find` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
@@ -420,11 +422,11 @@ You can also bring contacts back from the archives if necessary.
 
 format: `unarchive INDEX`
 * _Unarchives_ the contact at the specified `INDEX`.
-* The `Index` refers to the Index number shown in the displayed contact list.
-* The `Index` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
+* The `INDEX` refers to the Index number shown in the displayed contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 
 Examples:
-* `list` followed by `unarchive 5` _unarchives_ the 5th contact in ModuleMate Finder.
+* `list` followed by `unarchive 5` _unarchives_ the 5th contact in ModuleMateFinder.
 * `find Lizzy` followed by `unarchive 1` _unarchives_ the 1st contact in the results of the `find` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Alert:**
@@ -433,7 +435,7 @@ You can only use this command when in the **archives contact list**. Otherwise, 
 
 ### Switching between the default and archived contact list: `switch`
 
-Switch between the default contact list or the archived contact list in ModuleMate Finder.
+Switch between the default contact list or the archived contact list in ModuleMateFinder.
 
 format: `switch`
 * Alternatively, you may use <kbd>F10</kbd> or `File -> Switch...` in the menu to perform the switch
@@ -444,23 +446,7 @@ Examples:
 
 ### Undo a command : `undo`
 
-Undoes the most recent command. 
-
-At the moment, the command that can be undone are the following:   
-
-- `add`
-- `addmodules`
-- `archive`
-- `unarchive`
-- `clear`
-- `clearmodules`
-- `comment`
-- `delete`
-- `deletemodules`
-- `edit`
-- `sort`
-- `status`
-- `switch`
+Undoes the previously executed command.
 
 Format: `undo`
 
@@ -470,6 +456,8 @@ Examples:
 `undo`
 
 After deleting a contact at Index 5, `undo` will reverse the delete command and bring the contact back at Index 5.
+
+_See below for a list of commands that `undo` applies to_
 
 ### Redo a command : `redo`
 
@@ -485,6 +473,25 @@ Examples:
 `redo`
 
  After editing a contact's name at Index 3 from `George` to `Adam` and using `undo` to reverse the contact's name back to `George`, using `redo` will restore the contact's name back to `Adam`.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Commands that you can undo/redo:**<br>
+* `add` after successfully adding a contact
+* `addmodules`
+* `comment`
+* `status`
+* `clear`
+* `clearmodules`
+* `delete`
+* `deletemodules`
+* `sort`
+* `switch`
+* `archive`
+* `unarchive`
+* `undo`/`redo` i.e. you can `undo` a `redo`, and you can `redo` an `undo`
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.

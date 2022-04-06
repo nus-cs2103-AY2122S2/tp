@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* Code reused from [tutorial](https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html) for implementing `Remark`
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -119,7 +119,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -407,17 +407,21 @@ group mates easier by consolidating important information such as modules taken.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                 | So that I can…​                                                        |
-| -------- |-------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | student                                   | add modules that I am taking | keep track of the modules                                              |
-| `* * *`  | new user                                  | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                      | add a new person             |                                                                        |
-| `* * *`  | user                                      | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                      | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                      | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​               | I want to …​                                 | So that I can…​                                                        |
+|----------|-----------------------|----------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | student               | add modules that I am taking                 | keep track of the modules                                              |
+| `* * *`  | conscientious student | add comments to my contacts                  | know what my contacts are like                                         |
+| `* * *`  | student               | highlight certain contacts                   | know whether I would like to work with them or not                     |
+| `* * *`  | new user              | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                  | add a new contact                            |                                                                        |
+| `* * *`  | user                  | delete a contact                             | remove entries that I no longer need                                   |
+| `* * *`  | user                  | find a person by name                        | locate details of persons without having to go through the entire list |
+| `* * *`  | organised student     | sort my contacts                             | properly track my contacts                                             |
+| `* *`    | inexperienced user    | have an easy way to use complicated commands | use the commands easily                                                |
+| `* *`    | organised student     | archive graduated students                   | separate current and past students                                     |
+| `* *`    | user                  | hide private contact details                 | minimize chance of someone else seeing them by accident                |
+| ` * `    | competitive student   | see the CAP of other students                | see my own standing                                                    |
+| ` * `    | student               | keep future modules in a wishlist            | show my friends the modules I want to take in the future               |
 
 ### Use cases
 
@@ -459,49 +463,7 @@ to the context of ModuleMateFinder. The Use Cases listed below demonstrate their
       Use case resumes at step 2.
       <br/><br/>
 
-
-**Use case: UC03 - Favourite a contact**
-
-**MSS**
-
-1. User requests to <u>list contacts (UC01)</u>.
-2. ModuleMateFinder shows a list of persons.
-3. User requests to favourite a person in the list.
-4. ModuleMateFinder favourites the person.
-
-   Use case ends.
-
-**Extensions**
-
-- 2a. The list is empty.  
-  Use case ends.
-- 3a. The given index is invalid.
-    - 3a1. ModuleMateFinder shows an error message.  
-      Use case resumes at step 2.
-      <br/><br/>
-
-
-**Use case: UC04 - Blacklisting a contact**
-
-**MSS**
-1. User requests to <u>list contacts (UC01)</u>.
-2. ModuleMateFinder shows a list of persons.
-3. User requests to blacklist a person in the list.
-4. ModuleMateFinder blacklist the person. 
-   
-   Use case ends.
-
-**Extensions**
-- 2a. The list is empty.  
-  Use case ends.
-- 3a. The given index is invalid.
-    - 3a1. ModuleMateFinder shows an error message.  
-      
-      Use case resumes at step 2.
-      <br/><br/>
-
-
-**Use case: UC05 - Adding modules to a contact**
+**Use case: UC03 - Adding modules to a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -525,7 +487,7 @@ to the context of ModuleMateFinder. The Use Cases listed below demonstrate their
       <br/><br/>
 
 
-**Use case: UC06 - Adding a comment to a contact**
+**Use case: UC04 - Adding a comment to a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -545,44 +507,128 @@ to the context of ModuleMateFinder. The Use Cases listed below demonstrate their
       <br/><br/>
 
 
-**Use case: UC07 - Filter contacts by modules**
+**Use case: UC05 - Favourite a contact**
+
+**MSS**
+
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to favourite a person in the list.
+4. ModuleMateFinder favourites the person.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The given index is invalid.
+    - 3a1. ModuleMateFinder shows an error message.  
+      Use case resumes at step 2.
+      <br/><br/>
+
+
+**Use case: UC06 - Blacklisting a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
 2. ModuleMateFinder shows a list of persons.
-3. User requests to filter the list by a certain module (e.g. `CS3230`).
-4. ModuleMateFinder finds all persons with the module `CS3230`.
-5. ModuleMateFinder shows a list of persons with the module `CS3230`.  
+3. User requests to blacklist a person in the list.
+4. ModuleMateFinder blacklist the person. 
+   
    Use case ends.
 
 **Extensions**
 - 2a. The list is empty.  
   Use case ends.
-- 3a. No persons has a matching module.
-    - 3a1. ModuleMateFinder shows an empty list.  
-      Use case ends.
+- 3a. The given index is invalid.
+    - 3a1. ModuleMateFinder shows an error message.  
+      
+      Use case resumes at step 2.
       <br/><br/>
+    
 
-**Use case: UC08 - Filter contacts by name**
+**Use case: UC07 - Copying contacts**
+
+**MSS**
+1. User requests to copy contact's information.
+2. ModuleMateFinder copies the contacts into the user's desired format.
+
+   Use case ends.
+   <br/><br/>
+
+
+**Use case: UC08 - Clearing all entries**
+
+**MSS**
+
+1. User requests to clear all entries in ModuleMateFinder.
+2. ModuleMateFinder removes all saved data and displays a success
+   message.
+   <br/><br/>
+
+**Use case: UC09 - Clearing all Modules from a contact**
+
+**MSS**
+
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to clear modules from a person at a given index.
+4. ModuleMateFinder clears all modules from the person at given index.  
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+Use case ends.
+- 3a. The provided index is invalid.
+  - 3a1. ModuleMateFinder displays an error message.  
+    Use case resumes at step 2.
+
+
+**Use case: UC10 - Deleting a contact**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
 2. ModuleMateFinder shows a list of persons.
-3. User requests to filter the list by a certain name (e.g. `Hans`).
-4. ModuleMateFinder finds all persons with the module `Hans`.
-5. ModuleMateFinder shows a list of persons with the module `Hans`.
+3. User requests to delete a contact at a given index.
+4. ModuleMateFinder deletes the contact at the index.
+
    Use case ends.
 
 **Extensions**
 - 2a. The list is empty.  
   Use case ends.
-- 3a. No persons has a matching name.
-    - 3a1. ModuleMateFinder shows an empty list.  
-      Use case ends.
+- 3a. The provided index is invalid.
+    - 3a1. ModuleMateFinder displays an error message.
+
+      Use case resumes at step 2.
       <br/><br/>
 
+      
+**Use case: UC11 - Deleting modules a contact**
 
-**Use case: UC09 - Editing a contact's details**
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to delete modules from a contact at a given index.
+4. ModuleMateFinder deletes the given modules from the contact at the index.
+
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. The provided index is invalid.
+    - 3a1. ModuleMateFinder displays an error message.
+
+      Use case resumes at step 2.
+      <br/><br/>
+- 3b. The provided module(s) do not exist.
+  - 3b1. ModuleMateFinder displays an error message.  
+    Use case resumes at step 2.
+
+
+**Use case: UC12 - Editing a contact's details**
 
 **MSS**
 
@@ -599,41 +645,50 @@ to the context of ModuleMateFinder. The Use Cases listed below demonstrate their
   Use case ends.
 - 3a. The provided index is invalid.
     - 3a1. ModuleMateFinder displays an error message.
-      
+
       Use case resumes at step 2.
       <br/><br/>
 
-**Use case: UC10 - Deleting a contact**
+
+**Use case: UC13 - Find contacts by name**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
 2. ModuleMateFinder shows a list of persons.
-3. User requests to delete a contact at a given index.
-4. ModuleMateFinder deletes the contact at the index.
-   
+3. User requests to filter the list by a certain name (e.g. `Hans`).
+4. ModuleMateFinder finds all persons with the module `Hans`.
+5. ModuleMateFinder shows a list of persons with the module `Hans`.  
    Use case ends.
 
 **Extensions**
 - 2a. The list is empty.  
   Use case ends.
-- 3a. The provided index is invalid.
-    - 3a1. ModuleMateFinder displays an error message.
-      
-      Use case resumes at step 2.
+- 3a. No persons has a matching name.
+    - 3a1. ModuleMateFinder shows an empty list.  
+      Use case ends.
       <br/><br/>
 
 
-**Use case: UC11 - Clearing all entries**
+**Use case: UC14 - Filter contacts by modules**
 
 **MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to filter the list by a certain module (e.g. `CS3230`).
+4. ModuleMateFinder finds all persons with the module `CS3230`.
+5. ModuleMateFinder shows a list of persons with the module `CS3230`.  
+   Use case ends.
 
-1. User requests to clear all entries in ModuleMateFinder.
-2. ModuleMateFinder removes all saved data and displays a success 
-message.
-   <br/><br/>
-
-
-**Use case: UC12 - Sorting contacts**
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. No persons has a matching module.
+    - 3a1. ModuleMateFinder shows an empty list.  
+      Use case ends.
+      <br/><br/>
+    
+      
+**Use case: UC15 - Sorting contacts**
 
 **MSS**
 1. User requests to <u>list contacts (UC01)</u>.
@@ -652,18 +707,58 @@ message.
       Use case resumes at step 2.
       <br/><br/>
 
-
-**Use case: UC13 - Copying contacts**
+**Use case: UC16 - Switching between books**
 
 **MSS**
-1. User requests to copy contact's information.
-2. ModuleMateFinder copies the contacts into the user's desired format.
+1. User types `switch` or presses `F10`.
+2. ModuleMateFinder switches to the other book.  
+   Use case ends.
+
+**Extensions**:
+- 1a. User is in the default book.
+  - 1a1. ModuleMateFinder switches to the archives.  
+    Use case ends.
+- 1b. User is in the archives.
+  - 1b1. ModuleMateFinder switches back to the default.  
+    Use case ends.
+
+**Use case: UC17 - Archiving a contact**
+
+**MSS**
+1. User requests to <u>list contacts (UC01)</u>.
+2. ModuleMateFinder shows a list of persons.
+3. User requests to archive a contact at a given index.
+4. ModuleMateFinder archives the contact at the given index.
 
    Use case ends.
-   <br/><br/>
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. User is in archives.
+  - 3a1. ModuleMateFinder displays an error message.  
+    Use case resumes at step 2.
 
 
-**Use case: UC14 - Exiting the application**
+**Use case: UC18 - Unarchiving a contact**
+
+**MSS**
+1. User requests to <u>switch to archives (UC16)</u>.
+2. ModuleMateFinder shows a list of persons in the archives.
+3. User requests to unarchive a contact at a given index.
+4. ModuleMateFinder unarchives the contact at the given index.
+
+   Use case ends.
+
+**Extensions**
+- 2a. The list is empty.  
+  Use case ends.
+- 3a. User is the default book.
+    - 3a1. ModuleMateFinder displays an error message.  
+      Use case resumes at step 2.
+    
+
+**Use case: UC19 - Exiting the application**
 
 **MSS**
 
