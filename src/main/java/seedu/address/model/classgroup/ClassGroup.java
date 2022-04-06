@@ -1,5 +1,10 @@
 package seedu.address.model.classgroup;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.entity.Entity;
@@ -9,11 +14,6 @@ import seedu.address.model.lesson.WeekId;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.TaModule;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 //@@author jxt00
 /**
