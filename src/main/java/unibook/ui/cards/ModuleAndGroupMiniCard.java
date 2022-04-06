@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import unibook.commons.core.LogsCenter;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
@@ -49,14 +50,19 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
             module.getModuleCode()));
         this.mainWindow = mainWindow;
         this.module = module;
-        moduleCode.setText(module.getModuleCode().toString());
+        setUpModuleCodeLabel();
 
-        //common function to use in generating group name labels
-        Function<Group, Label> f = new Function<Group, Label>() {
+        //common function to use in generating group name vboxes containing labels
+        //vboxes are to ensure flowpane wraps the labels properly
+        Function<Group, VBox> f = new Function<>() {
             @Override
-            public Label apply(Group group) {
+            public VBox apply(Group group) {
+                VBox vbox = new VBox();
                 Label label = new Label(group.getGroupName());
                 label.getStyleClass().add("mini-pane-group-name-label");
+                label.setWrapText(true);
+                label.setMaxWidth(80);
+                vbox.getChildren().add(label);
                 //handler to navigate to the specific module
                 label.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     @Override
@@ -69,7 +75,7 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
                         }
                     }
                 });
-                return label;
+                return vbox;
             }
         };
 
@@ -100,6 +106,23 @@ public class ModuleAndGroupMiniCard extends UiPart<Region> {
                     }
                 }
             });
+    }
+
+    /**
+     * Sets up the module code label.
+     */
+    private void setUpModuleCodeLabel() {
+        moduleCode.setText(module.getModuleCode().toString());
+        //adjust the styling of the label depending on its size
+        //long labels will have a smaller text size
+        int lengthOfModuleCode = module.getModuleCode().toString().length();
+        if (lengthOfModuleCode >= 8) {
+            moduleCode.getStyleClass().add("mini-pane-module-code-long");
+        } else if (lengthOfModuleCode >= 6) {
+            moduleCode.getStyleClass().add("mini-pane-module-code-medium");
+        } else {
+            moduleCode.getStyleClass().add("mini-pane-module-code-short");
+        }
     }
 
 
