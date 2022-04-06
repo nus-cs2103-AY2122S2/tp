@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class TestDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Test Date should not be blank, "
-                                                    + "and should be in the format YYY-MM-DD";
+                                                    + "and should be in the format YYYY-MM-DD";
 
     public final LocalDate date;
 
