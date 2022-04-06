@@ -21,8 +21,8 @@ public class Description {
 
     /**
      * Checks if a given string is a valid description.
-     *
-     * @return true if a given string is a valid description, false otherwise
+     * @param test the string to be checked.
+     * @return true if a given string is a valid description, false otherwise.
      */
     public static boolean isValidDescription(String test) {
         return !(test.trim().isEmpty());

@@ -84,8 +84,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Increase the given person number of task by 1.
+     * @param person the person that is going to increment the number of task/s.
+     */
     void increaseNumOfTasks(Person person);
 
+    /**
+     * Decrease the given person number of task by 1.
+     * @param person the person that is going to decrement the number of task/s.
+     */
     void decreaseNumOfTasks(Person person);
 
     /** Returns an unmodifiable view of the filtered person list */
@@ -125,21 +133,20 @@ public interface Model {
     Task unmarkTask(Task task);
 
     Task tagPriorityToTask(Task task, Priority priority);
-    
 
     /**
      * Tags the given task.
      * The task must exist in the task list.
-     * @param task
-     * @param person
+     * @param task the task to be tagged.
+     * @param person the person to be tagged to the task.
      */
     Task tagEmployeeToTask(Task task, Person person);
 
     /**
      * Untags the given task.
      * The task must exist in the task list.
-     * @param task
-     * @param person
+     * @param task the task to be untagged.
+     * @param person the person to be untagged to the task.
      */
     Task untagEmployeeFromTask(Task task, Person person);
 

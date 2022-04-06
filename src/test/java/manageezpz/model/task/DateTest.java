@@ -44,7 +44,7 @@ public class DateTest {
     }
 
     @Test
-    public void testGetters() {
+    public void getTodayDate_validDate_success() {
         Date testDate = new Date(LocalDate.now().toString());
         assertEquals(testDate, Date.getTodayDate());
     }

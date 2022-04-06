@@ -141,22 +141,4 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
     }
 
-    @Test
-    public void markTask_nullTask_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.markTask(null));
-    }
-
-    @Test
-    public void markTask_validTask_success() {
-        addressBook.addTask(READ_BOOK);
-        Task markedTask = addressBook.markTask(READ_BOOK);
-        assertTrue(markedTask.isDone());
-    }
-
-    @Test
-    public void unmarkTask_validTask_success() {
-        addressBook.addTask(READ_BOOK);
-        Task unmakredTask = addressBook.unmarkTask(READ_BOOK);
-        assertFalse(unmakredTask.isDone());
-    }
 }

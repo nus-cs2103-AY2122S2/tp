@@ -321,6 +321,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Tags a priority to the task.
+     * @param task the task to be tagged.
+     * @param priority the priority to be tagged to the task.
+     * @return the tagged Task.
      */
     public Task tagPriorityToTask(Task task, Priority priority) {
         requireAllNonNull(task, priority);
@@ -331,6 +334,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Tags the task in the task list to a person in the address book.
      * @param task the task to be tagged.
      * @param person the person to be tagged to the task.
+     * @return the tagged Task.
      */
     public Task tagEmployeeToTask(Task task, Person person) {
         requireAllNonNull(task, person);
@@ -341,6 +345,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Remove the Person from the Task, also decreasing the person's task count.
      * @param task the task affected
      * @param person the person to be untagged from task
+     * @return the untagged Task.
      */
     public Task untagEmployeeFromTask(Task task, Person person) {
         requireAllNonNull(task, person);
@@ -374,6 +379,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return returnValue;
     }
 
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the Task List.
+     * The Task identity of {@code editedTask} must not be the same as another existing Task in the Task List.
+     */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
         tasks.setTask(target, editedTask);

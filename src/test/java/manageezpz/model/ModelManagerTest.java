@@ -16,11 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.GuiSettings;
+import manageezpz.model.person.Person;
 import manageezpz.model.person.PersonMultiplePredicate;
+import manageezpz.model.task.Priority;
+import manageezpz.model.task.Task;
 import manageezpz.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -96,6 +100,13 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void deletePerson_personInaddressBook_returnTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.deletePerson(ALICE);
+        assertTrue(!modelManager.getFilteredPersonList().contains(ALICE));
     }
 
     @Test
@@ -197,5 +208,42 @@ public class ModelManagerTest {
         modelManager.addTask(READ_BOOK);
         modelManager.deleteTask(READ_BOOK);
         assertTrue(!modelManager.hasTask(READ_BOOK));
+    }
+
+    @Test
+    public void tagEmployeeToTask_employeeAndTaskInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.addTask(READ_BOOK);
+        modelManager.tagEmployeeToTask(READ_BOOK, ALICE);
+        assertTrue(modelManager.isEmployeeTaggedToTask(READ_BOOK, ALICE));
+    }
+
+    @Test
+    public void untagEmployeeToTask_employeeAndTaskInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        modelManager.addTask(READ_BOOK);
+        modelManager.untagEmployeeFromTask(READ_BOOK, ALICE);
+        assertTrue(!modelManager.isEmployeeTaggedToTask(READ_BOOK, ALICE));
+    }
+
+    @Test
+    public void tagPriorityToTask_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(READ_BOOK);
+        modelManager.tagPriorityToTask(READ_BOOK, Priority.HIGH);
+        assertTrue(modelManager.hasPriority(READ_BOOK));
+    }
+
+    @Test
+    public void markTask_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(READ_BOOK);
+        Task updatedTask = modelManager.markTask(READ_BOOK);
+        assertTrue(updatedTask.isDone());
+    }
+
+    @Test
+    public void unmarkTask_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(READ_BOOK);
+        Task updatedTask = modelManager.unmarkTask(READ_BOOK);
+        assertTrue(!updatedTask.isDone());
     }
 }
