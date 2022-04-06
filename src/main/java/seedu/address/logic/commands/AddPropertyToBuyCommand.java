@@ -31,6 +31,7 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_PRICE_RANGE + "PRICE RANGE "
             + "Must include: index h/ l/ pr/ \n"
+            + "Ensure INDEX is positive integer & less than or equal size of displayed buyer list \n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_HOUSE_TYPE + "HDB "
             + PREFIX_LOCATION + "Bishan "
@@ -59,7 +60,7 @@ public class AddPropertyToBuyCommand extends Command {
         List<Buyer> lastShownList = model.getFilteredBuyerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
         }
 
         Buyer buyerToUpdate = lastShownList.get(index.getZeroBased());
