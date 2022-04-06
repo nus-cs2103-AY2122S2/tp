@@ -297,6 +297,9 @@ Format: `out-of-stock`
 
 Click on the menu bar `Actions` > `Find out of stock items`
 
+:information_source: Filters cannot be stacked with subsequent commands. 
+Thus, expired and out of stock filters cannot be stacked with other filters.
+
 #### 3.1.8 Updating all products : `update-all`
 
 Updates all products in the displayed list.
