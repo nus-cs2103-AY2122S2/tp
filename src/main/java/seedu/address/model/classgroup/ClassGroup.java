@@ -21,7 +21,7 @@ import seedu.address.model.tamodule.TaModule;
  */
 public class ClassGroup implements Entity {
     // Identity fields
-    private static final int NUM_OF_WEEKS = 13;
+    public static final int NUM_OF_WEEKS = 13;
     private final ClassGroupId classGroupId;
     private final ClassGroupType classGroupType;
     private final TaModule taModule;
@@ -69,7 +69,7 @@ public class ClassGroup implements Entity {
      * Construct a {@code ClassGroup} by copying all the provided fields.
      */
     public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
-                       UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
+                      UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.taModule = taModule;
@@ -167,9 +167,13 @@ public class ClassGroup implements Entity {
 
     /**
      * Finds the lesson in the lesson list by the provided weekIndex.
+     * weekIndex will always be correct.
      */
     private Lesson findLessonByIndex(Index weekIndex) {
-        return lessons.get(weekIndex.getZeroBased());
+        return lessons.stream()
+                .filter(lesson -> lesson.getWeekId().value.equals(weekIndex.getOneBased()))
+                .findFirst()
+                .orElse(null);
     }
 
     public List<Lesson> getLessons() {

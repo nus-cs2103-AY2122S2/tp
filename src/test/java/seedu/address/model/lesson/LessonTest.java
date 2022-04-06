@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLessons.LESSON1;
 import static seedu.address.testutil.TypicalLessons.LESSON11;
 import static seedu.address.testutil.TypicalLessons.LESSON12;
+import static seedu.address.testutil.TypicalLessons.LESSON13;
 import static seedu.address.testutil.TypicalLessons.LESSON2;
 import static seedu.address.testutil.TypicalStudentAttendances.ALICE_ATTENDANCE;
 import static seedu.address.testutil.TypicalStudentAttendances.BENSON_ATTENDANCE;
@@ -20,6 +21,7 @@ import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalStudents.CARL;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
 import static seedu.address.testutil.TypicalStudents.ELLE;
+import static seedu.address.testutil.TypicalStudents.FIONA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,16 @@ public class LessonTest {
     public void asObservableList_modifyList_throwsIndexOutOfBoundsException() {
         Lesson lesson = new LessonBuilder().build();
         assertThrows(IndexOutOfBoundsException.class, () -> lesson.getStudentAttendanceList().remove(0));
+    }
+
+    /**
+     * No need to check for duplicate students as these are handled by the commands and parsers.
+     */
+    @Test
+    public void getStudents() {
+        Lesson lesson13Copy = new LessonBuilder(LESSON13).build();
+        assertTrue(lesson13Copy.getStudents().contains(ELLE));
+        assertTrue(lesson13Copy.getStudents().contains(FIONA));
     }
 
     /**
