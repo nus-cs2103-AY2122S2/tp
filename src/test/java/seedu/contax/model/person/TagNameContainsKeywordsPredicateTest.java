@@ -18,6 +18,13 @@ public class TagNameContainsKeywordsPredicateTest {
         // complete words
         TagNameContainsKeywordsPredicate predicate = new TagNameContainsKeywordsPredicate("friends");
         assertTrue(predicate.test(ALICE));
+
+        // lower case adjustment
+        predicate = new TagNameContainsKeywordsPredicate("Friends");
+        assertTrue(predicate.test(ALICE));
+
+        predicate = new TagNameContainsKeywordsPredicate("FRIENDS");
+        assertTrue(predicate.test(ALICE));
     }
 
     @Test

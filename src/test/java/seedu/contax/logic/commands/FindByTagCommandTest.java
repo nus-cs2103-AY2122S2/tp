@@ -12,6 +12,7 @@ import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.core.GuiListContentType;
@@ -36,6 +37,14 @@ public class FindByTagCommandTest {
         // Complete keyword
         TagNameContainsKeywordsPredicate friendsPredicate = new TagNameContainsKeywordsPredicate("friends");
         FindByTagCommand command = new FindByTagCommand(friendsPredicate);
+        expectedModel.updateFilteredPersonList(friendsPredicate);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
+        assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+
+        // Case insensitivity test
+        model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
+        friendsPredicate = new TagNameContainsKeywordsPredicate("Friends");
+        command = new FindByTagCommand(friendsPredicate);
         expectedModel.updateFilteredPersonList(friendsPredicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
