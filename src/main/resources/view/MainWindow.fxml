@@ -77,9 +77,11 @@
               </padding>
           </StackPane>
 
-
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER">
+              <padding>
+                  <Insets left="10" right="10" />
+              </padding>
+          </StackPane>
       </VBox>
     </Scene>
   </scene>

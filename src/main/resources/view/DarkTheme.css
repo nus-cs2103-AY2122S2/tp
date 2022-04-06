@@ -165,7 +165,9 @@
 
 .status-bar .label {
     -fx-font-family: "sans-serif";
-    -fx-text-fill: white;
+    -fx-text-fill: derive(#2B2B2B, 90%);
+    -fx-font-style: italic;
+    -fx-font-size: 11pt;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -326,7 +328,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: #2B2B2B;
+    -fx-background-color: #222222;
 }
 
 .scroll-bar .thumb {
@@ -432,4 +434,8 @@
     -fx-border-radius: 3;
     -fx-background-radius: 3;
     -fx-font-size: 12;
+}
+
+#statusbarPlaceholder {
+    -fx-background-color: #2B2B2B;
 }
