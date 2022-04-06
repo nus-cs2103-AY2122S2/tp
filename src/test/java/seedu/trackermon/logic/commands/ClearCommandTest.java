@@ -13,7 +13,7 @@ import seedu.trackermon.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyShowList_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyShowList_success() {
         Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalShowList(), new UserPrefs());
         expectedModel.setShowList(new ShowList());
