@@ -438,7 +438,7 @@ Let's say you want to sort by name in ascending order then by status in ascendin
 use `sort n/asc s/asc`.
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, it will still sort by name in ascending order then by status in ascending order
+:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order
 </div>
 
 Therefore, let's say you want to sort by status in ascending order then by name in ascending order,
@@ -458,7 +458,7 @@ So, use the "tagratingstatusname" as the `SEQUENCE` if you want to swap the orde
 3. status
 4. name
 
-Additionally, when using `so/` prefixes, Trackermon will check if the required criteria is presented in your `SEQUENCE`.
+Additionally, when using `so/` prefix, Trackermon will check if the required criteria is presented in your `SEQUENCE`.
 So if you use `sort n/asc s/asc so/haha`, the required criteria are name and status. As name and status are not spelt in full for `SEQUENCE`, Trackermon will tell you the input is invalid!
 </div>
 
