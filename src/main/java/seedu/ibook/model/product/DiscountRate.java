@@ -9,12 +9,12 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class DiscountRate {
 
-    public static final String DEFAULT_DISCOUNT_RATE = "0.00";
+    public static final String DEFAULT_DISCOUNT_RATE = "0";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Rate should only be a positive double, and at most 100";
 
-    public static final String VALIDATION_REGEX = "|\\d+(?:\\.\\d{1,2})?%?";
+    public static final String VALIDATION_REGEX = "|\\d{1,3}%?";
 
     public final Double discountRate;
 
@@ -41,14 +41,11 @@ public class DiscountRate {
      * @return Result of test.
      */
     public static boolean isValidDiscountRate(String test) {
-        if (test.equals("")) {
-            return true;
-        }
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
         test = removePercentage(test);
-        double testDouble = Double.parseDouble(test);
+        Integer testDouble = Integer.parseInt(test);
         return testDouble <= 100;
     }
 
