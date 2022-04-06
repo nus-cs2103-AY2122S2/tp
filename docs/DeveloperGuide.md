@@ -162,6 +162,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+## `labadd`: Add Lab Command Feature
+The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. Its implementation introduces the following classes:
+- `AddLabCommand` that extends `Command`
+- ``
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
