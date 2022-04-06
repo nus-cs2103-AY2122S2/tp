@@ -28,5 +28,4 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "Gone", expectedFindCommand);
         assertParseSuccess(parser, " Gone ", expectedFindCommand);
     }
-
 }
