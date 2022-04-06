@@ -115,6 +115,7 @@ After adding:
 
 Notes:
 * Any tags are optional.
+* Email domain must contain only **one period** and minimally ends with 2 letters: e.g jackson5@example.co is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
 
 ------------------------------------------------------------------------------------
 ### Adding a tag to a person: `addTag`
