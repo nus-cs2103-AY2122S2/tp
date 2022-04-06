@@ -133,7 +133,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 
 * A person can have any number of teams or skills(including 0)
 * teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.
-* `t/      ` and `s/        ` is treated as `t/` and `s/` as HackNet ignores whitespaces. Therefore, a name of a team cannot be consisting solely of whitespaces.
+* Consecutive white spaces right after `t/` and `s/` are ignored.
+* A name of a team or skill cannot be consisting solely of whitespaces.
 </div>
 
 Examples:
@@ -149,14 +150,16 @@ Format: `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERN
 * Edits the person(s) at the specified `INDEX [INDEX…]`. The index refers to the index number shown in the displayed person list. Indices must be separated by a whitespace as opposed to teams and skills. All index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided besides `[-r]`.
 * team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.
-* `t/      ` and `s/        ` is treated as `t/` and `s/` as HackNet ignores whitespaces. Therefore, a name of a team cannot be consisting solely of whitespaces.
+* Consecutive white spaces right after `t/` and `s/` are ignored.
+* A name of a team or skill cannot be consisting solely of whitespaces.
 * Existing values will be updated to the input values.
 * In default mode, editing teams appends the new team to the person.
 * `-r` option activates reset mode.
 * In reset mode, editing teams edits the teams of a person from scratch. i.e adding of teams is not cumulative. You can remove all the person’s teams by typing `t/` without
   specifying any teams after it.
 * The concept of default and reset mode applies with skills as well.
-* when editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `Name` and `Phone` will be silently ignored.
+* When editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `NAME` and `PHONE` will be silently ignored.
+* When at least one of the indices provided are invalid for batch edit, HackNet informs that there was an error in the indices, but still delivers the modification for the indices that are valid.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
