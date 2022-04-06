@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 public abstract class ExportCsvCommand extends Command {
