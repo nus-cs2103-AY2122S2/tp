@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.ibook.testutil.TypicalProductFilters.CATEGORY_FILTER_BREAD;
 import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_A;
 import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_B;
 import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_KAYA;
@@ -19,6 +20,10 @@ import seedu.ibook.logic.commands.product.FindCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;
+import seedu.ibook.model.product.Category;
+import seedu.ibook.model.product.Name;
+import seedu.ibook.model.product.filters.CategoryFilter;
+import seedu.ibook.model.product.filters.NameFilter;
 
 
 /**
@@ -67,5 +72,41 @@ public class FindCommandTest {
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(KAYA_BREAD), model.getFilteredProductList());
+    }
+
+    @Test
+    public void execute_differentCasesName_productFound() {
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 1);
+        expectedModel.addProductFilter(NAME_FILTER_KAYA);
+
+        NameFilter upperNameFilter = new NameFilter(new Name("KAYA BREAD"));
+        FindCommand upperNameCommand = new FindCommand(List.of(upperNameFilter));
+        assertCommandSuccess(upperNameCommand, model, expectedMessage, expectedModel);
+
+        NameFilter lowerNameFilter = new NameFilter(new Name("kaya bread"));
+        FindCommand lowerNameCommand = new FindCommand(List.of(lowerNameFilter));
+        assertCommandSuccess(lowerNameCommand, model, expectedMessage, expectedModel);
+
+        NameFilter randomNameFilter = new NameFilter(new Name("kAYa BrEAd"));
+        FindCommand randomNameCommand = new FindCommand(List.of(randomNameFilter));
+        assertCommandSuccess(randomNameCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_differentCasesCategory_productFound() {
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 3);
+        expectedModel.addProductFilter(CATEGORY_FILTER_BREAD);
+
+        CategoryFilter upperCategoryFilter = new CategoryFilter(new Category("BREAD"));
+        FindCommand upperCategoryCommand = new FindCommand(List.of(upperCategoryFilter));
+        assertCommandSuccess(upperCategoryCommand, model, expectedMessage, expectedModel);
+
+        CategoryFilter lowerCategoryFilter = new CategoryFilter(new Category("bread"));
+        FindCommand lowerCategoryCommand = new FindCommand(List.of(lowerCategoryFilter));
+        assertCommandSuccess(lowerCategoryCommand, model, expectedMessage, expectedModel);
+
+        CategoryFilter randomCategoryFilter = new CategoryFilter(new Category("BrEAd"));
+        FindCommand randomCategoryCommand = new FindCommand(List.of(randomCategoryFilter));
+        assertCommandSuccess(randomCategoryCommand, model, expectedMessage, expectedModel);
     }
 }
