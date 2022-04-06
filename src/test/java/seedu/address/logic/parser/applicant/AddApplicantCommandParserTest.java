@@ -61,34 +61,34 @@ public class AddApplicantCommandParserTest {
                 new AddApplicantCommand(expectedApplicant));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_FRIEND,
                 new AddApplicantCommand(expectedApplicant));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
                         + EMAIL_DESC_BOB + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_FRIEND,
                 new AddApplicantCommand(expectedApplicant));
 
         // multiple ages - last age accepted
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + AGE_DESC_AMY + ADDRESS_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_FRIEND,
                 new AddApplicantCommand(expectedApplicant));
 
         // multiple addresses - last address accepted
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_AMY + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_FRIEND,
                 new AddApplicantCommand(expectedApplicant));
 
         // multiple genders - last gender accepted
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + AGE_DESC_BOB + GENDER_DESC_AMY + GENDER_DESC_BOB + TAG_DESC_FRIEND,
                 new AddApplicantCommand(expectedApplicant));
 
         // multiple tags - all accepted
         Applicant expectedApplicantMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddApplicantCommand(expectedApplicantMultipleTags));
     }
@@ -97,7 +97,7 @@ public class AddApplicantCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Applicant expectedApplicant = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser,  NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + AGE_DESC_AMY + ADDRESS_DESC_AMY + GENDER_DESC_AMY,
                 new AddApplicantCommand(expectedApplicant));
     }
@@ -111,28 +111,27 @@ public class AddApplicantCommandParserTest {
                         + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser,  NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
                         + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
                         + AGE_DESC_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB, expectedMessage);
 
         // missing age prefix
-        assertParseFailure(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + VALID_AGE_BOB + ADDRESS_DESC_BOB + GENDER_DESC_BOB, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + AGE_DESC_BOB + VALID_ADDRESS_BOB + GENDER_DESC_BOB, expectedMessage);
 
         // missing gender prefix
-        assertParseFailure(parser,  NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + AGE_DESC_BOB + ADDRESS_DESC_BOB + VALID_GENDER_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser,
-                VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_AGE_BOB
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_AGE_BOB
                         + VALID_ADDRESS_BOB + VALID_GENDER_BOB, expectedMessage);
     }
 
@@ -154,7 +153,7 @@ public class AddApplicantCommandParserTest {
                         + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid age
-        assertParseFailure(parser,NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + INVALID_AGE_DESC + ADDRESS_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND, Age.MESSAGE_CONSTRAINTS);
 
