@@ -6,7 +6,7 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
 public class Rating implements Comparable<Rating> {
 
-    public static final String INVALID_RATING = "Rating should be a whole number between 0 to 5";
+    public static final String INVALID_RATING = "Rating must be a whole number from 0 to 5";
 
     public static final int MAX_RATING = 5;
 

@@ -15,7 +15,7 @@
 
 <fx:root minHeight="675.0" minWidth="900.0" onCloseRequest="#handleExit" title="Trackermon" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/trackermon_icon.png" />
   </icons>
   <scene>
     <Scene>

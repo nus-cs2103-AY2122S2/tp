@@ -1,6 +1,5 @@
 package seedu.trackermon.logic.parser;
 
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INDEX_OUT_OF_BOUNDS;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
@@ -74,12 +73,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (hasRatingPrefix) {
             hasPrefix = true;
             String input = argumentMultimap.getValue(PREFIX_RATING).get();
-            input = input.replaceFirst("^0+(?!$)", "");
             keywordsArr = getRatingKeywords(input);
             for (int i = 0; i < keywordsArr.length; i++) {
                 keywordsArr[i] = keywordsArr[i].replaceFirst("^0+(?!$)", "");
                 if (!Rating.isValidScore(keywordsArr[i])) {
-                    throw new ParseException(String.format(MESSAGE_INDEX_OUT_OF_BOUNDS, FindCommand.RATING_ERROR));
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.RATING_ERROR));
                 }
                 predicateArrayList.add(new RatingContainsKeywordsPredicate(Arrays.asList(keywordsArr)));
             }
