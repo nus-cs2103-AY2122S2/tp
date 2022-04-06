@@ -32,7 +32,7 @@ public class EditPrescriptionCommand extends Command {
             + ": Edits the details of the prescription identified "
             + "by the index number used in the displayed prescription information list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW PRESCRIPTION INSTEAD.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW PRESCRIPTION WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "DRUG_NAME "
             + PREFIX_DATE + "DATE "
@@ -43,8 +43,8 @@ public class EditPrescriptionCommand extends Command {
     public static final String MESSAGE_EDIT_PRESCRIPTION_SUCCESS = "Edited Prescription Information: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PRESCRIPTION = "This prescription already exists in MedBook.";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
-            + "Create a new prescription instead.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
+            "NRIC field cannot be modified. Create a new prescription with the correct NRIC instead.";
 
     private final Index targetIndex;
     private final EditPrescriptionCommand.EditPrescriptionDescriptor editPrescriptionDescriptor;
@@ -124,7 +124,7 @@ public class EditPrescriptionCommand extends Command {
         public EditPrescriptionDescriptor(EditPrescriptionCommand.EditPrescriptionDescriptor toCopy) {
             setDrugName(toCopy.drugName);
             setPrescriptionDate(toCopy.date);
-            setResult(toCopy.instruction);
+            setInstruction(toCopy.instruction);
         }
 
         public boolean isAnyFieldEdited() {
@@ -151,7 +151,7 @@ public class EditPrescriptionCommand extends Command {
             return Optional.ofNullable(instruction);
         }
 
-        public void setResult(Instruction instruction) {
+        public void setInstruction(Instruction instruction) {
             this.instruction = instruction;
         }
 

@@ -38,7 +38,7 @@ public class EditConsultationCommand extends Command {
             + ": Edits the details of the consultation identified "
             + "by the index number used in the displayed consultation list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONSULTATION INSTEAD.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONSULTATION WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
@@ -54,7 +54,7 @@ public class EditConsultationCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already exists in MedBook.";
     public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
-            "NRIC field cannot be modified. Create a new consultation instead.";
+            "NRIC field cannot be modified. Create a new consultation with the correct NRIC instead.";
 
     private final Index targetIndex;
     private final EditConsultationDescriptor editConsultationDescriptor;
@@ -79,10 +79,6 @@ public class EditConsultationCommand extends Command {
 
         Consultation consultation = lastShownList.get(targetIndex.getZeroBased());
         Consultation editedConsultation = createEditedConsultation(consultation, editConsultationDescriptor);
-
-        if (consultation.equals(editedConsultation) && model.hasConsultation(editedConsultation)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONSULTATION);
-        }
 
         model.setConsultation(consultation, editedConsultation);
 

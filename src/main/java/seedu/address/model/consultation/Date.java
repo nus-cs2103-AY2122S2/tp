@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should not be blank, and should be in the format dd-MM-yyyy";
+            "Consultation Date should not be blank, and should be in the format YYY-MM-DD";
 
     private LocalDate date;
 
@@ -26,7 +26,7 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public LocalDate value() {
@@ -38,7 +38,7 @@ public class Date {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            LocalDate.parse(test, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException e) {
             return false;
         }

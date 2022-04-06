@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Patient objects.
  */
 public class PatientBuilder {
 
@@ -35,7 +35,6 @@ public class PatientBuilder {
      */
     public PatientBuilder() {
         nric = new Nric(DEFAULT_NRIC);
-        name = new Name(DEFAULT_NAME);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);

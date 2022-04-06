@@ -56,17 +56,21 @@ public class SummaryDisplay extends UiPart<Region> {
 
         Patient patient = patients.get(0);
         PatientCard patientCard = new PatientCard(patient, 1);
+
         SummaryConsultationPanel summaryConsultationPanel = new SummaryConsultationPanel(consultations);
         SummaryPrescriptionPanel summaryPrescriptionPanel = new SummaryPrescriptionPanel(prescriptions);
         SummaryTestResultPanel summaryTestResultPanel = new SummaryTestResultPanel(results);
         SummaryContactPanel summaryContactPanel = new SummaryContactPanel(contacts);
+
         EmptyCard medicalEmptyCard = new EmptyCard();
         EmptyCard consultationEmptyCard = new EmptyCard();
         EmptyCard prescriptionEmptyCard = new EmptyCard();
         EmptyCard testResultEmptyCard = new EmptyCard();
         EmptyCard contactEmptyCard = new EmptyCard();
+
         details.getChildren().clear();
         details.getChildren().add(patientCard.getRoot());
+
         medical.getChildren().clear();
         if (medicals.size() != 0) {
             SummaryMedicalCard summaryMedicalCard = new SummaryMedicalCard(medicals.get(0));
@@ -74,24 +78,28 @@ public class SummaryDisplay extends UiPart<Region> {
         } else {
             medical.getChildren().add(medicalEmptyCard.getRoot());
         }
+
         consultation.getChildren().clear();
         if (consultations.size() != 0) {
             consultation.getChildren().add(summaryConsultationPanel.getRoot());
         } else {
             consultation.getChildren().add(consultationEmptyCard.getRoot());
         }
+
         prescription.getChildren().clear();
         if (prescriptions.size() != 0) {
             prescription.getChildren().add(summaryPrescriptionPanel.getRoot());
         } else {
             prescription.getChildren().add(prescriptionEmptyCard.getRoot());
         }
+
         test.getChildren().clear();
         if (results.size() != 0) {
             test.getChildren().add(summaryTestResultPanel.getRoot());
         } else {
             test.getChildren().add(testResultEmptyCard.getRoot());
         }
+
         contact.getChildren().clear();
         if (contacts.size() != 0) {
             contact.getChildren().add(summaryContactPanel.getRoot());

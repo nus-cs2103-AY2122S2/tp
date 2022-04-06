@@ -33,6 +33,7 @@ title: Developer Guide
     - [Implementation](#implementation-5)
     - [Usage](#usage-3)
   - [Summary](#summary)
+    - [Design Consideration](#design-consideration-5)
     - [Implementation](#implementation-6)
     - [Usage](#usage-4)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
@@ -332,12 +333,10 @@ command. This command  will call `CommandType#parseDeleteCommandType` to parse w
 prescription. It will then delete the 2nd prescription from prescription model and save to storage
 
 
-<!-- Si Binh -->
 ### Find
 The `Find` command is used to find the patient whose names contain any of the given keywords. 
 
-
-
+<!-- Joey -->
 #### Design Consideration
 WIP
 
@@ -358,12 +357,54 @@ WIP - Insert UML and activity diagram
 #### Usage
 WIP
 
+<!-- Si Binh -->
 ### Summary
+
+#### Design Consideration
+Alternative 1 (current choice): Use the existing `updateFilteredXXXList()` methods in the model. When the summary command is executed, update all existing filtered lists with NRIC predicate. Then update the `UI` using the existing filtered lists.
+
+Pros:
+- Easy to implement
+- Less code duplication as we can reuse the logic that is used for filtering other entities
+
+Cons:
+- Increased coupling. For example, originally, the `add` command looks for the patient in the latest filtered list of patients to add new entities to. As at the summary screen the list is in filtered state, we cannot add to other patients apart from one being viewed. The `Add` command had to be modified as a result.
+
+Alternative 2: Having a dedicated model class `Summary`. A `Summary` object holds all needed information to be displayed. The `Summary` object is to be created by iterating over all existing unfiltered lists in `MedBook`.
+
+Pros:
+- No coupling. Summary is not dependent on the state of other filtered lists
+
+Cons:
+- The logic to retrieve the needed entities is a bit of a duplicate
+- One would need to manage the construction and flow of the `Summary` object and parse it for display, so more tedious to implement
+
 #### Implementation
-WIP - Insert UML and activity diagram
+The viewing summary mechanism is implemented by modifying the existing `ViewCommand` and reusing the existing `Model#updateFilteredXXXList()` operations.
+
+The `ViewCommand` command is augmented with an additional `nric` parameter, which displays the summary screen if the NRIC parameter is specified. `ViewCommandParser` is augmented to parse NRIC parameter.
+An additional operation `Model#updateSummary()` was implemented, which invokes the existing `Model#updateFilteredXXXList()` operations to update the state of the filtered lists in `Model`. The `UI` is then updated accordingly.
+
+The following sequence diagram shows how the summary feature works:
+
+<img src="images/SummarySequenceDiagram.png" />
+
+The following activity diagram summarizes what happens when a user attempts to view a patient's summary
+
+<img src="images/ViewSummaryActivityDiagram.png" width="550" />
 
 #### Usage
-WIP
+Given below is an example usage scenario of how summary feature works:
+
+Step 1: The user types in `view i/S1234567L`. This command will call `CommandType#parseViewCommandType`
+
+Step 2: It then creates a new instance of `ViewCommandParser` and passes the arguments into the new instance
+
+Step 3: This creates a new instance of `ViewCommand` with `nric` parameter
+
+Step 4: `Model#updateSummary()` is invoked, which updates all filtered lists for the entities in `Model`
+
+Step 5: `UI` is then updated accordingly, displaying the patient's summary
 
 ---
 ## **Documentation, logging, testing, configuration, dev-ops**

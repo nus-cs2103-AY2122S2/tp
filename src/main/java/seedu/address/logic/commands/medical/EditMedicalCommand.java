@@ -49,7 +49,7 @@ public class EditMedicalCommand extends Command {
             + ": Edits the details of the medical information identified "
             + "by the index number used in the displayed medical information list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW MEDICAL INFORMATION INSTEAD.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW MEDICAL INFORMATION WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_AGE + "AGE "
             + PREFIX_BLOODTYPE + "BLOODTYPE "
@@ -66,8 +66,8 @@ public class EditMedicalCommand extends Command {
             + PREFIX_BLOODTYPE + "B";
 
     public static final String MESSAGE_EDIT_MEDICAL_SUCCESS = "Edited Medical Information: %1$s";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
-            + "Create a new medical information instead.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
+            "NRIC field cannot be modified. Create a new medical information with the correct NRIC instead.";
 
     private final Index targetIndex;
     private final EditMedicalDescriptor editMedicalDescriptor;

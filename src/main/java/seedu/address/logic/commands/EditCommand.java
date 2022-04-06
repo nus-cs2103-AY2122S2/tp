@@ -84,7 +84,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.setPerson(patientToEdit, editedPatient);
+        model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient));
     }

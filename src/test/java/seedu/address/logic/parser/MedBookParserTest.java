@@ -30,17 +30,17 @@ import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.PatientUtil;
 
-public class AddressBookParserTest {
+public class MedBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final MedBookParser parser = new MedBookParser();
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void parseCommand_add() throws Exception {
         Patient patient = new PatientBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(patient));
+        AddCommand command = (AddCommand) parser.parseCommand(PatientUtil.getAddCommand(patient));
         assertEquals(new AddCommand(patient), command);
     }
 
@@ -58,7 +58,7 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, EditCommand.MESSAGE_NRIC_EDIT_NOT_ALLOWED, () ->
                 parser.parseCommand(EditCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PersonUtil.getEditPersonDescriptorDetails(descriptor)));
+                        + PatientUtil.getEditPersonDescriptorDetails(descriptor)));
     }
 
     @Test
