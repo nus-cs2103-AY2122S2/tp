@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +68,46 @@ public class AddTagCommandTest {
     }
 
     @Test
+    public void execute_duplicateTagAlreadyExists_throwsException() throws Exception {
+        ArrayList<Tag> personTagList = new ArrayList<>(List.of(TagListBuilder.ADD_TAG_1, TagListBuilder.ADD_TAG_2));
+        Person person = new PersonBuilder().withTags(personTagList).build();
+        AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
+        Index index = Index.fromOneBased(1);
+
+        ArrayList<Tag> tagList = new ArrayList<>();
+        Tag alreadyPresentTag = TagListBuilder.ADD_TAG_2;
+        boolean b = tagList.add(alreadyPresentTag);
+
+        ModelManager modelManager = new ModelManager();
+        modelManager.setAddressBook(addressBookBuilder.build());
+
+        AddTagCommand addTagCommand = new AddTagCommand(index, tagList);
+
+        assertThrows(CommandException.class, AddTagCommand.MESSAGE_DUPLICATE_TAG, () ->
+                addTagCommand.execute(modelManager));
+    }
+
+    @Test
+    public void execute_duplicateTagInUserInput_throwsException() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
+        Index index = Index.fromOneBased(1);
+
+        ArrayList<Tag> tagList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            tagList.add(TagListBuilder.ADD_TAG_1); // two duplicates
+        }
+
+        ModelManager modelManager = new ModelManager();
+        modelManager.setAddressBook(addressBookBuilder.build());
+
+        AddTagCommand addTagCommand = new AddTagCommand(index, tagList);
+
+        assertThrows(CommandException.class, AddTagCommand.MESSAGE_DUPLICATE_TAG, () ->
+                addTagCommand.execute(modelManager));
+    }
+
+    @Test
     public void equals() {
         Index index1 = Index.fromZeroBased(1);
         Index index2 = Index.fromZeroBased(5);
@@ -82,5 +123,4 @@ public class AddTagCommandTest {
         assertNotEquals(new AddTagCommand(index1, tagList1),
                 new AddTagCommand(index1, tagList2)); //different tagList
     }
-
 }

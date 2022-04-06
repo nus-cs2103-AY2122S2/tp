@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -23,7 +24,7 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tags to the person identified "
             + "by the index number used in the displayed person list. "
-            + "At least one tag should be specified. "
+            + "At least one tag should be specified. Does not allow for duplicates."
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -31,7 +32,8 @@ public class AddTagCommand extends Command {
             + PREFIX_TAG + "friends and family";;
 
     public static final String MESSAGE_SUCCESS = "Added tag(s) to Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TAG = "One of the tags listed is already present,"
+            + " either in the existing tags or in your input.";
 
     private final Index index;
     private final ArrayList<Tag> tagsToAdd;
@@ -66,11 +68,18 @@ public class AddTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson));
     }
 
-    private Person addTagsToPerson(Person personToEdit, ArrayList<Tag> tagsToAdd) {
+    private Person addTagsToPerson(Person personToEdit, ArrayList<Tag> tagsToAdd) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
+        HashSet<Tag> setForCheckingDuplicates = new HashSet<>(tagList);
+
         for (Tag tag: tagsToAdd) {
-            tagList.add(tag);
+            if (!setForCheckingDuplicates.contains(tag)) {
+                tagList.add(tag);
+                setForCheckingDuplicates.add(tag);
+            } else {
+                throw new CommandException(MESSAGE_DUPLICATE_TAG);
+            }
         }
 
         newPerson.setTags(tagList);
