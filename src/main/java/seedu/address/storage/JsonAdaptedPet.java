@@ -136,6 +136,11 @@ class JsonAdaptedPet {
         if (diet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Diet.class.getSimpleName()));
         }
+
+        if (!Diet.isValidDiet(diet)) {
+            throw new IllegalValueException(Diet.MESSAGE_CONSTRAINTS);
+        }
+
         final Diet modelDiet = new Diet(diet);
 
         if (appointment == null) {

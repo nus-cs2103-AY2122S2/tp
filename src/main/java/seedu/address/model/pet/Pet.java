@@ -82,8 +82,7 @@ public class Pet {
     }
 
     /**
-     * Returns true if both pets have the same name.
-     * This defines a weaker notion of equality between two pets.
+     * Returns true if both pets have the same name, owner's name, contact number and tags.
      */
     public boolean isSamePet(Pet otherPet) {
         if (otherPet == this) {
@@ -91,7 +90,10 @@ public class Pet {
         }
 
         return otherPet != null
-                && otherPet.getName().equals(getName());
+            && otherPet.getName().equals(getName())
+            && otherPet.getOwnerName().equals(getOwnerName())
+            && otherPet.getPhone().equals(getPhone())
+            && otherPet.getAddress().equals(getAddress());
     }
 
     /**
@@ -110,12 +112,9 @@ public class Pet {
 
         Pet otherPet = (Pet) other;
         return otherPet.getName().equals(getName())
-                && otherPet.getOwnerName().equals(getOwnerName())
-                && otherPet.getPhone().equals(getPhone())
-                && otherPet.getAddress().equals(getAddress())
-                && otherPet.getDiet().equals(getDiet())
-                && otherPet.getAppointment().equals(getAppointment())
-                && otherPet.getTags().equals(getTags());
+            && otherPet.getOwnerName().equals(getOwnerName())
+            && otherPet.getPhone().equals(getPhone())
+            && otherPet.getAddress().equals(getAddress());
     }
 
     @Override
@@ -128,16 +127,16 @@ public class Pet {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; OwnerName: ")
-                .append(getOwnerName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Diet: ")
-                .append(getDiet())
-                .append("; Appointment: ")
-                .append(getAppointment());
+            .append("; OwnerName: ")
+            .append(getOwnerName())
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Address: ")
+            .append(getAddress())
+            .append("; Diet: ")
+            .append(getDiet())
+            .append("; Appointment: ")
+            .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

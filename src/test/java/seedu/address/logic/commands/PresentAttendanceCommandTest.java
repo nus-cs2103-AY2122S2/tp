@@ -98,7 +98,8 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -146,7 +147,8 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, descriptorWithoutTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -195,7 +197,8 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, alternateDescriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(secondPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -282,7 +285,8 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(fourthPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
