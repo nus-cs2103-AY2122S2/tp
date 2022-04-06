@@ -239,6 +239,9 @@ Given below is an example usage scenario and how the edit role feature behaves a
 The following sequence diagram shows how the `editRole` command operation works with the valid user input `editRole 1 1 d/react js`:
 ![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)  
 
+The following activity diagram summarizes what happens when a user executes an edit role command:    
+![Activity diagram of the EditRole feature](images/EditRoleActivityDiagram.png)
+
 #### Design considerations <a id="design-considerations-edit"></a>
 * Alternative 1 (current choice): Logic components interact with the `Model` interface solely and not directly with model’s internal components: `Company`, `RoleManager`, `UniqueRoleList`.
     * Pros:
@@ -465,6 +468,8 @@ Guarantees: every company stored in Tinner will be shown
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Command Line Interface
 * **MSS**: Main Success Scenario
+* **[Command Box](https://ay2122s2-cs2103t-t17-1.github.io/tp/UserGuide.html#navigation)**: Text field for users to key in their commands                                                                                                                             
+* **[Response Box](https://ay2122s2-cs2103t-t17-1.github.io/tp/UserGuide.html#navigation)**:  Tinner's response to user's commands. <br/>If the command was successful, Tinner would respond with what it did. Else it tells you what went wrong and any tips to fix it
 
 ## Appendix: Instructions for manual testing <a id="instructions-for-manual-testing"></a>
 
