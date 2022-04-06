@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.model.property.NullPropertyToBuy;
 import seedu.address.model.seller.LocationMatchBuyerPredicate;
 
 /**
@@ -32,7 +33,16 @@ public class MatchLocationCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Buyer> buyerList = model.getFilteredBuyerList();
+
+        if (index.getZeroBased() >= buyerList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
+        }
+
         Buyer buyer = buyerList.get(index.getZeroBased());
+
+        if (buyer.getPropertyToBuy() instanceof NullPropertyToBuy) {
+            throw new CommandException(Messages.MESSAGE_NO_PROPERTY_ADDED);
+        }
 
         model.updateFilteredSellerList(new LocationMatchBuyerPredicate(buyer));
 
