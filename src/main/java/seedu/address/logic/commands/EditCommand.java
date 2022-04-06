@@ -196,17 +196,31 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_SINGLE_PERSON_SUCCESS, editedPerson));
     }
 
+    private EditPersonDescriptor extractOnlyTeamsAndSkillSet(EditPersonDescriptor editPersonDescriptor) {
+        EditPersonDescriptor editOnlyTeamsAndSkills = new EditPersonDescriptor();
+
+        if (editPersonDescriptor.getTeams().isPresent()) {
+            editOnlyTeamsAndSkills.setTeams(editPersonDescriptor.getTeams().get());
+        }
+        if (editPersonDescriptor.getSkillSet().isPresent()) {
+            editOnlyTeamsAndSkills.setSkillSet(editPersonDescriptor.getSkillSet().get());
+        }
+        return editOnlyTeamsAndSkills;
+    }
+
     private CommandResult executeBatchEdit(Model model, List<Person> lastShownList) throws CommandException {
 
         boolean isAllIndicesValid = true;
         List<Name> editedNames = new ArrayList<Name>();
+        EditPersonDescriptor onlyTeamAndSkillsetDescriptor = extractOnlyTeamsAndSkillSet(editPersonDescriptor);
         for (Index index : indicesToEdit) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 isAllIndicesValid = false;
                 continue;
             }
             Person personToEdit = lastShownList.get(index.getZeroBased());
-            Person editedPerson = EditCommand.createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
+            Person editedPerson =
+                EditCommand.createEditedPerson(personToEdit, onlyTeamAndSkillsetDescriptor, isResetMode);
             editedNames.add(personToEdit.getName());
             model.setPerson(personToEdit, editedPerson);
         }

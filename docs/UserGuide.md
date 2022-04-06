@@ -86,8 +86,8 @@ This could be a problem with Windows. You can alternatively start **HackNet** by
 * Items in square brackets are optional.<br>
     * e.g `n/NAME [t/TEAM]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can have multiple values including 0, separated by a comma.<br>
-    * e.g. `[t/TEAM…]​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend, family` etc.
+* Items with `…`​ after them can have multiple values including 0.<br>
+    * e.g. `[t/TEAM…]​` can be used as ` ` (i.e. 0 times), `t/`, `t/friend, family` etc.
 
 * Parameters can be in any order.<br>
     * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -98,8 +98,8 @@ This could be a problem with Windows. You can alternatively start **HackNet** by
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
     * e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
-* For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being a low proficiency level and 100.
-    * e.g. `[s/SKILLNAME_SKILLPROFICENCY]…​` as `[s/Java_90]`
+* For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level.
+    * e.g. `[s/SKILLNAME_SKILLPROFICENCY…]​` as `s/Java_90`
 
 </div>
 
@@ -107,13 +107,13 @@ This could be a problem with Windows. You can alternatively start **HackNet** by
 
 Shows a message explaining how to access the help page.
 
-Format: `help [topic]` or `help`
+Format: `help [TOPIC]`
 
 Simply calling `help` will bring up a prompt linking to the user guide.
 
 ![help message](images/helpMessage.png)
 
-Calling `help [topic]` with `topic` being a relevant keyword such as `add` will bring up a brief description and usage
+Passing in a relevant keyword as the `TOPIC` parameter such as `add` will bring up a brief description and usage
 of the topic.
 
 ![help add message](images/helpAdd.png)
@@ -129,21 +129,25 @@ Adds a person to HackNet.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of teams or skills(including 0)
+
+* A person can have any number of teams or skills(including 0)
+* teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma.
+
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
-* `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/entrepeneur, friend  s/`
+* `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/gmail plugin, Sublime Text dev s/`
 
 ### Editing any number of person(s): `edit`
 
 Edits any number of existing person(s) in HackNet.
 
-Format: `edit INDEX… [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
+Format: `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
-* Edits the person(s) at the specified `INDEX...`. The index refers to the index number shown in the displayed person list. All index **must be a positive integer** 1, 2, 3, …​
+* Edits the person(s) at the specified `INDEX [INDEX…]`. The index refers to the index number shown in the displayed person list. Indices must be separated by a whitespace as opposed to teams and skills. All index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided besides `[-r]`.
+* team and skill values in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma.
 * Existing values will be updated to the input values.
 * In default mode, editing teams appends the new team to the person.
 * `-r` option activates reset mode.
@@ -151,13 +155,12 @@ Format: `edit INDEX… [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/
   specifying any teams after it.
 * The concept of default and reset mode applies with skills as well.
 * when editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `Name` and `Phone` will be silently ignored.
-* Arguments in `TEAM…` and `SKILLNAME_SKILLPROFICENCY…` are separated by commas.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 -r n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing teams.
 * `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
-* `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and marks them to be in the team `GoogleProject` and `Hackathon2022`.
+* `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and appends`GoogleProject` and `Hackathon2022` to the list of teams they belong to.
 * `edit 1 2 3 -r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The exiting teams are cleared as well.
 
 ### Deleting a person: `delete`
@@ -289,7 +292,7 @@ Only these commands that changed HackNet can be undone:
 * The commands executed will be stored in history, please use the `undo` command to restore them.
 * Only the commands as listed above can be undone.
 * If a different command is executed after a command is undone,
-that undone command will be removed from history and can no longer be undone.
+the undone command will be removed from history and can no longer be redone.
 * e.g `Add person 1 -> Add person 2 -> undo -> Add person 3` will have the same persons and history as
   `Add person 1 ->  Add person 3`
 * <b>IMPORTANT!</b> All commands in history will be removed when the application exits.
@@ -298,7 +301,6 @@ that undone command will be removed from history and can no longer be undone.
 ### Redo last command: `redo`
 
 Redo the command that was previously undone.
-
 Only these commands that changes HackNet can be redone:
 * Add
 * Delete
@@ -364,9 +366,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/friend t/colleague s/java_70`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [g/GITHUB_USERNAME] [t/Team]…​ [s/SKILLNAME_SKILLPROFICENCY]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Help** | `help [TOPIC]`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/jameshooo t/friend t/colleague s/java_70`
+**Edit** | `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERNAME] [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Mark/unmark contacts** | `team`, `unteam` <br> e.g., `team 1`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
