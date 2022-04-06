@@ -2,6 +2,7 @@ package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
+import static unibook.commons.core.Messages.MESSAGE_MISSING_OPTION;
 import static unibook.logic.commands.EditCommand.MESSAGE_WRONG_FIELDS;
 import static unibook.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unibook.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -96,7 +97,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditGroupDescriptor editGroupDescriptor = new EditGroupDescriptor();
 
         if (argMultimap.getValue(PREFIX_OPTION).equals(Optional.empty())) {
-            throw new ParseException((MESSAGE_INVALID_COMMAND_FORMAT_1 + EditCommand.PERSON_MESSAGE_USAGE));
+            throw new ParseException((MESSAGE_MISSING_OPTION));
         }
 
 
