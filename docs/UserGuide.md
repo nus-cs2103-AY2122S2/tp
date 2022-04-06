@@ -376,10 +376,9 @@ Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
 
 ## Locating persons by name: `find`
 
-**Only meant to be used on the person page**
+### On Any Page
 
-Finds persons whose names contain any of the given keywords.
-
+#### Find person whose names contain any of the given keywords
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -398,8 +397,21 @@ Examples:
 
 Removes the specified modules, module subgroup, student or professor profile from the system.
 
-Format:
-(Note: Commands under the sub header Person page can only be used on person page, and likewise for other pages)
+(Note: Commands under the sub header Person view can only be used on person page, and likewise for other view)
+
+### On Any View:
+
+#### Delete module by module code
+Format: `delete o/module m/[MODULECODE]`
+* Deletes the module with the specified `MODULECODE`.
+* The module must already exist in the system.
+* For example, `delete o/module m/CS2103` removes the module with module code CS2103
+
+### Delete group by module code and group name
+Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
+* Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
+* Both the module and the subgroup must already exist in the system.
+* For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ### On People View:
 
@@ -465,19 +477,6 @@ Format: `delete [INDEX] mt/[INDEX]`
 * The second index (after mt/) represents the index for which meeting time to delete
 * For example, `delete 2 mt/1` would delete the meeting time at index 1 for the group at index 2
 
-### On Any Page:
-
-#### Delete module by module code
-Format: `delete o/module m/[MODULECODE]`
-* Deletes the module with the specified `MODULECODE`.
-* The module must already exist in the system.
-* For example, `delete o/module m/CS2103` removes the module with module code CS2103
-
-### Delete group by module code and group name
-Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
-* Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
-* Both the module and the subgroup must already exist in the system.
-* For example, `delete o/group m/CS2107 g/T04` removes the T04 subgroup from the CS2107 module.
 
 ## Clearing all entries : `clear`
 
