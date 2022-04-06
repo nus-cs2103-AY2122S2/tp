@@ -261,6 +261,7 @@ Format: `diet INDEX d/REMARK`
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Entering `diet INDEX d/` will remove the dietary requirements of pet at `INDEX`.
+* The description of diet should only contain **alphanumeric characters, spaces and empty strings**. 
 
 Examples:
 * `diet 1 d/Only feed dry kibble` will store a dietary remark for Woofie indicating to "Only feed dry kibble" as shown below.
