@@ -1,9 +1,7 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_PRIORITY;
-import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PRIORITY;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.stream.Stream;
@@ -15,6 +13,16 @@ import manageezpz.model.task.Priority;
 
 public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityCommand> {
 
+    public static final String MESSAGE_TAG_PRIORITY_TO_TASK_INSTRUCTIONS =
+            "Tag a priority to a task by specifying prefix priority/ "
+                    + "followed by the priority values (NONE/LOW/MEDIUM/HIGH)!\n\n%1$s";
+
+    public static final String MESSAGE_EMPTY_PRIORITY = "Priority field cannot be empty! "
+            + "Valid priority values are NONE/LOW/MEDIUM/HIGH.\n\n%1$s";
+
+    public static final String MESSAGE_INVALID_PRIORITY =
+            "Invalid priority! " + "Valid priority values are NONE/LOW/MEDIUM/HIGH. \n\n%1$s";
+
     /**
      * Parses the given {@code String} of arguments in the context of the TagTaskPriorityCommand
      * and returns a TagTaskPriorityCommand object for execution.
@@ -22,30 +30,35 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagTaskPriorityCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimapPriority =
-                ArgumentTokenizer.tokenize(args, PREFIX_PRIORITY);
+        ArgumentMultimap argMultimapTagPriority = ArgumentTokenizer.tokenize(args, PREFIX_PRIORITY);
+
+        // Invalid command if getPreamble() is empty
+        if (argMultimapTagPriority.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
+                    TagTaskPriorityCommand.MESSAGE_USAGE));
+        }
+
+        // Invalid command if getPreamble() contains whitespaces
+        if (argMultimapTagPriority.getPreamble().contains(" ")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT + " "
+                    + MESSAGE_TAG_PRIORITY_TO_TASK_INSTRUCTIONS, TagTaskPriorityCommand.MESSAGE_USAGE));
+        }
 
         Index index;
         Priority priority;
 
         try {
-            index = ParserUtil.parseIndex(argMultimapPriority.getPreamble());
+            index = ParserUtil.parseIndex(argMultimapTagPriority.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    TagTaskPriorityCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + TagTaskPriorityCommand.MESSAGE_USAGE, pe);
         }
 
-        if (!arePrefixesPresent(argMultimapPriority, PREFIX_PRIORITY)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
+        if (!arePrefixesPresent(argMultimapTagPriority, PREFIX_PRIORITY)) {
+            throw new ParseException(String.format(MESSAGE_TAG_PRIORITY_TO_TASK_INSTRUCTIONS,
                     TagTaskPriorityCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimapPriority.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_TASK_NUMBER,
-                    TagTaskPriorityCommand.MESSAGE_USAGE));
-        }
-
-        String priorityString = argMultimapPriority.getValue(PREFIX_PRIORITY).get();
+        String priorityString = argMultimapTagPriority.getValue(PREFIX_PRIORITY).get();
 
         if (priorityString.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_PRIORITY,
@@ -61,7 +74,6 @@ public class TagTaskPriorityCommandParser implements Parser<TagTaskPriorityComma
 
         return new TagTaskPriorityCommand(index, priority);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

@@ -1,6 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.commons.util.CollectionUtil;
 import manageezpz.logic.commands.exceptions.CommandException;
@@ -40,9 +40,7 @@ public class EditEmployeeCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
-
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Update Employee success: %1$s";
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Employee %1$s already exists!\n";
 
@@ -72,8 +70,7 @@ public class EditEmployeeCommand extends Command {
         List<Task> fullTaskList = model.getAddressBook().getTaskList();
 
         if (index.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownPersonList.get(index.getZeroBased());

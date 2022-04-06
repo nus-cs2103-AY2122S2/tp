@@ -56,8 +56,7 @@ class FindEmployeeCommandParserTest {
 
     @Test
     void findEmployeeCommandParser_invalidNamesUsed_throwParseException() {
-        String userInput = String.join(" ", EMPTY_STRING, PREFIX_NAME.getPrefix(),
-                VALID_NAME_AMY, "James&");
+        String userInput = String.join(" ", EMPTY_STRING, PREFIX_NAME.getPrefix(), " ");
         assertParseFailure(parser, userInput, INVALID_NAME_MESSAGE);
     }
 
