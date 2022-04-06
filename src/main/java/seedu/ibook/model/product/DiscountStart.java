@@ -12,9 +12,9 @@ public class DiscountStart {
     public static final String DEFAULT_DISCOUNT_START = "0";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Discount Start should only be of type integer, and should not be negative";
+            "Discount Start should be a non-negative integer at most 99999";
 
-    public static final String VALIDATION_REGEX = "|\\d+";
+    public static final String VALIDATION_REGEX = "|0|[1-9]\\d{0,4}";
 
     public final Integer discountStart;
 
