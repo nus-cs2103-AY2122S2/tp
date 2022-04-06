@@ -12,7 +12,7 @@ public class DiscountRate {
     public static final String DEFAULT_DISCOUNT_RATE = "0";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Discount Rate should only be a positive double, and at most 100";
+            "Discount Rate should only be a positive integer, and at most 100";
 
     public static final String VALIDATION_REGEX = "|\\d{1,3}%?";
 
