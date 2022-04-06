@@ -33,7 +33,7 @@ public class DietCommandParser implements Parser<DietCommand> {
                     DietCommand.MESSAGE_USAGE), ive);
         }
 
-        Diet diet = new Diet(argMultimap.getValue(PREFIX_DIET).orElse(""));
+        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get());
 
         return new DietCommand(index, diet);
     }
