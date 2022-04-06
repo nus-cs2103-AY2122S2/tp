@@ -79,7 +79,7 @@ public class ParserUtil {
         String trimmedAppointment = appointment.trim();
         if (trimmedAppointment.equals("reset")) {
             return new Appointment("");
-        } else if (!Appointment.isValidAppointment(trimmedAppointment)) {
+        } else if (appointment.equals("") || !Appointment.isValidAppointment(trimmedAppointment)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         } else {
             return new Appointment(trimmedAppointment);
