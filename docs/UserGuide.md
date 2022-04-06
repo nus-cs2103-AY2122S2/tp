@@ -210,6 +210,8 @@ Adds a new event, which can be optionally linked to any number of existing frien
 
 * There **cannot** be any duplicate events with the same name and date.
 * The `DATE_TIME` must be given in the following format: `DD-MM-YYYY hhmm`
+  * Individual fields are parsed intelligently where possible.
+  * e.g. A day-of-month that is out of range for the given month will be automatically corrected to the last valid day-of-month.
 * All given `FRIEND_NAME` values must match the `NAME` of an existing friend in Amigos.
 
 **Examples**:
@@ -268,6 +270,7 @@ Find events in Amigos whose properties match the given search criteria.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
+  * The date is interpreted intelligently where possible, similar to `DATE_TIME` in `addevent`
   * It is acceptable to provide only the `DATE_START` or `DATE_END`, if desired.
   * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
