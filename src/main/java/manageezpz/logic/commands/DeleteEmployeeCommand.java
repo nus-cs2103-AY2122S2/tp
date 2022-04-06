@@ -1,11 +1,11 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import manageezpz.commons.core.Messages;
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.model.Model;
@@ -46,7 +46,7 @@ public class DeleteEmployeeCommand extends Command {
         List<Task> fullTaskList = model.getAddressBook().getTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
+            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Person personToDelete = lastShownPersonList.get(targetIndex.getZeroBased());
