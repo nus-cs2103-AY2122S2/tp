@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.ui.UiManager;
@@ -18,21 +19,19 @@ public class Profile extends UiPart<Region> {
     private Person person;
 
     @FXML
-    private Label name;
+    private Text name;
     @FXML
-    private Label id;
+    private Text phone;
     @FXML
-    private Label phone;
+    private Text address;
     @FXML
-    private Label address;
+    private Text email;
     @FXML
-    private Label email;
+    private Text telegram;
     @FXML
-    private Label telegram;
+    private Text matriculation;
     @FXML
-    private Label matriculation;
-    @FXML
-    private Label course;
+    private Text course;
     @FXML
     private FlowPane tags;
 

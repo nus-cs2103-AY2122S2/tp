@@ -35,15 +35,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-    private AddTagWindow addTagWindow;
-    private AddProfileWindow addProfileWindow;
+    private final HelpWindow helpWindow;
+    private final AddTagWindow addTagWindow;
+    private final AddProfileWindow addProfileWindow;
     private GeneralDisplay generalDisplay;
 
     @FXML
@@ -254,10 +254,14 @@ public class MainWindow extends UiPart<Stage> {
                 addMenu.setVisible(true);
                 newTagMenu.setVisible(true);
                 themeMenu.setVisible(true);
+                personListPanel.toggleRightClick(true);
+                generalDisplay.getTagList().toggleRightClick(true);
             } else {
                 addMenu.setVisible(false);
                 newTagMenu.setVisible(false);
                 themeMenu.setVisible(false);
+                personListPanel.toggleRightClick(false);
+                generalDisplay.getTagList().toggleRightClick(false);
             }
 
             if (commandResult.isRemoveProfile() && this.generalDisplay.getProfile().getPerson() != null

@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ProfileCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.UiManager;
 
 /**
  * Parses input arguments and creates a new ProfileCommand object
@@ -20,7 +19,6 @@ public class ProfileCommandParser implements Parser<ProfileCommand> {
     public ProfileCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            UiManager.getMainWindow().getPersonListPanel().getPersonListView().scrollTo(index.getZeroBased());
             return new ProfileCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

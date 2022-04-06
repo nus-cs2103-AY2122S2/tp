@@ -15,9 +15,9 @@ import seedu.address.ui.UiPart;
  */
 public class GeneralDisplay extends UiPart<Region> {
     private static final String FXML = "GeneralDisplay.fxml";
-    private Profile profile;
-    private TagList tagList;
-    private GrabResult grabResult;
+    private final Profile profile;
+    private final TagList tagList;
+    private final GrabResult grabResult;
 
     @FXML
     private StackPane profileDisplayPlaceholder;
@@ -78,6 +78,10 @@ public class GeneralDisplay extends UiPart<Region> {
 
     public Profile getProfile() {
         return profile;
+    }
+
+    public TagList getTagList() {
+        return tagList;
     }
 
     public void resetProfile() {
