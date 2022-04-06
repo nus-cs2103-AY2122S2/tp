@@ -1,0 +1,13 @@
+@startuml
+start
+:User executes Delete command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if (Command is Valid)
+    :ManageEZPZ deletes the [Task];
+else ([else])
+endif
+stop
+@enduml
