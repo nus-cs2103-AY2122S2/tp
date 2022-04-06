@@ -62,7 +62,7 @@ public class ShowCard extends UiPart<Region> {
         status.setText(statusMessage);
         show.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         for (int i = 0; i < Rating.MAX_RATING; i++) {
             if (i < show.getRating().rating) {

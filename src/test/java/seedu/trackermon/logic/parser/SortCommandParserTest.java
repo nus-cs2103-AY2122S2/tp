@@ -10,6 +10,7 @@ import static seedu.trackermon.logic.parser.SortCommandParser.VALUE_ASC;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.logic.commands.SortCommand;
 import seedu.trackermon.model.show.NameComparator;
 import seedu.trackermon.model.show.StatusComparator;
@@ -22,14 +23,16 @@ public class SortCommandParserTest {
     @Test
     public void parse_wrongArg_throwsParseException() {
         //checking for asc or dsc
-        assertParseFailure(parser, COMMAND_WORD + SPACE + PREFIX_NAME, ParserUtil.MESSAGE_INVALID_ORDER);
+        assertParseFailure(parser, COMMAND_WORD + SPACE + PREFIX_NAME,
+                String.format(Messages.MESSAGE_INVALID_INPUT, Messages.MESSAGE_INVALID_ORDER));
     }
 
     @Test
     public void parse_wrongSO_throwsParseException() {
         //checking for number of full name for so
         assertParseFailure(parser, COMMAND_WORD + SPACE
-                + PREFIX_NAME + VALUE_ASC + SPACE + PREFIX_SORT_ORDER, SortCommandParser.MESSAGE_INVALID_SO);
+                + PREFIX_NAME + VALUE_ASC + SPACE + PREFIX_SORT_ORDER,
+                String.format(Messages.MESSAGE_INVALID_INPUT, SortCommandParser.MESSAGE_INVALID_SO));
     }
 
     @Test

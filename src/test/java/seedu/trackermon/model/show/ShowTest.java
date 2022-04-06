@@ -115,7 +115,7 @@ public class ShowTest {
 
         String expectedString = "Alice in WonderLand; Status: " + Status.COMPLETED
                 + "; Rating: " + new Rating(5) + "; Comment: "
-                + new Comment("bad") + "; Tags: " + new Tag("movie");
+                + new Comment("bad") + "; Tags: [" + new Tag("movie") + "];";
 
         assertEquals(expectedString, ALICE_IN_WONDERLAND.toString());
     }
