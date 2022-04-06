@@ -135,6 +135,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 * teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.
 * Consecutive white spaces right after `t/` and `s/` are ignored.
 * A name of a team or skill cannot be consisting solely of whitespaces.
+* Please check that yopu have correctly entered the skill proficiency level.
+There is currently no way of viewing the exact number that you entered.
+You may use the `edit` function to change it if it is wrong. 
+* The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).
 </div>
 
 Examples:
