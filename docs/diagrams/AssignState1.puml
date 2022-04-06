@@ -6,10 +6,14 @@ skinparam ClassBorderColor #000000
 title Final state
 
 package State {
-    class Student as "__Student : David__"
-    class Lesson as "__Lesson: Sec 2 Math__"
-    class enrolledStudents as "__EnrolledStudents: enrolledStudents__"
-    class enrolledLessons as "__EnrolledLessons: enrolledLessons__"
+    object "__Student : David__" as Student
+    object "__Lesson: Sec 2 Math__" as Lesson
+    object "__EnrolledStudents: enrolledStudents__" as enrolledStudents {
+        List<Student> : enrolledStudents
+    }
+    object "__EnrolledLessons: enrolledLessons__" as enrolledLessons {
+        List<Lesson> : enrolledLessons
+    }
 }
 Student -down-> enrolledLessons
 enrolledLessons -up-> Lesson
