@@ -33,7 +33,7 @@ public class EditTestResultCommand extends Command {
             + ": Edits the details of the test result identified "
             + "by the index number used in the displayed test result information list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW TEST RESULT INSTEAD.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW TEST RESULT WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
@@ -44,8 +44,8 @@ public class EditTestResultCommand extends Command {
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Test Result Information: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TEST_RESULT = "This test result already exists in MedBook.";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
-            + "Create a new test result instead.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
+            "NRIC field cannot be modified. Create a new test result with the correct NRIC instead.";
 
     private final Index targetIndex;
     private final EditTestResultDescriptor editTestResultDescriptor;
