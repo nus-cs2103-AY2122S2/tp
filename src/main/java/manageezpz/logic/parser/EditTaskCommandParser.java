@@ -26,8 +26,6 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_AT_DATETIME, PREFIX_DATE);
 
-        System.out.println(argMultimap.getPreamble());
-
         // Invalid command if getPreamble() is empty or contains whitespaces
         if (argMultimap.getPreamble().isEmpty() || argMultimap.getPreamble().contains(" ")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
