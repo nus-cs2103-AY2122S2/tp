@@ -9,7 +9,7 @@ import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.model.Model;
 
 /**
- * Sort list of persons by name.
+ * Sort list of companies by name.
  */
 public class SortCompanyCommand extends SortCommand {
 
@@ -19,7 +19,7 @@ public class SortCompanyCommand extends SortCommand {
 
     public static final String MESSAGE_USAGE = "Sorts companies. The default setting is to sort "
             + "only unarchived companies in ascending order, but you can choose to include archived ones "
-            + "or sort in descending ordered.\n"
+            + "or sort in descending order.\n"
             + "Parameters: [ " + PREFIX_SEARCH_TYPE + "SEARCH_TYPE] "
             + "(must be one of 'unarchived', 'archived', or 'all') "
             + "[" + PREFIX_ORDERING + "ORDERING] (must be one of 'ascending' or 'descending')\n"

@@ -20,10 +20,10 @@ public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "adde";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the list of events.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_COMPANY + "COMPANY "
+            + PREFIX_COMPANY + "COMPANY_NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
             + PREFIX_LOCATION + "LOCATION "
@@ -31,14 +31,14 @@ public class AddEventCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Interview "
             + PREFIX_COMPANY + "ABC "
-            + PREFIX_DATE + "12-12-2022 "
+            + PREFIX_DATE + "2022-10-31 "
             + PREFIX_TIME + "13:30 "
             + PREFIX_LOCATION + "zoom "
             + PREFIX_TAG + "technical "
             + PREFIX_TAG + "coding";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the list of events.";
 
     private final Event toAdd;
 
