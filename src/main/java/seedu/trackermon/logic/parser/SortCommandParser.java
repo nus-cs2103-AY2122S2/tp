@@ -27,6 +27,7 @@ import seedu.trackermon.model.show.TagComparator;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+
     protected static final String VALUE_ASC = "ASC";
     protected static final String VALUE_DSC = "DSC";
     private static final String VALUE_ORDER_NAME = "NAME";
@@ -37,11 +38,12 @@ public class SortCommandParser implements Parser<SortCommand> {
     private static final int ADD_VALUE = 100;
     private static int startingValue = 0;
     private static HashMap<Comparator<Show>, Integer> order = new HashMap<>();
-    private static final String MESSAGE_INVALID_SO = "Invalid input for so/,"
+    public static final String MESSAGE_INVALID_SO = "Invalid input for so/,"
             + " please provide the exact number of correctly spelt names in a sequence you want."
             + "For example: sorting status than tags, " + SortCommand.COMMAND_WORD
             + " " + PREFIX_TAG + VALUE_ASC + " " + PREFIX_STATUS + VALUE_ASC + " "
             + PREFIX_SORT_ORDER + VALUE_ORDER_STATUS + " " + VALUE_ORDER_TAG;
+
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand

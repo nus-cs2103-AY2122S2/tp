@@ -16,4 +16,9 @@ public class StatusComparator implements Comparator<Show> {
         return show.compareStatus(other);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof StatusComparator);
+    }
+
 }
