@@ -178,15 +178,15 @@ of those deleted, so in order to show them in the same order as the input, all t
 **For example:** <br>
 Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
-Step 1. User enters `delete 1 2 3` and `LogicManager` would execute it.
+**Step 1.** User enters `delete 1 2 3` and `LogicManager` would execute it.
 
-Step 2. `LogicManager` would pass the arguments to `AddressBookParser` to parse the command as a `DeleteCommand`.
+**Step 2.** `LogicManager` would pass the arguments to `AddressBookParser` to parse the command as a `DeleteCommand`.
 
-Step 3. The arguments `1 2 3` would be passed into `DeleteCommandParser` to detect if the deletion is for multiple persons using `ParserUtil`.
+**Step 3.** The arguments `1 2 3` would be passed into `DeleteCommandParser` to detect if the deletion is for multiple persons using `ParserUtil`.
 
-Step 4. Information about Person 1, Person 2 and Person 3 will be extracted according to the last shown list.<br>
+**Step 4.** Information about Person 1, Person 2 and Person 3 will be extracted according to the last shown list.<br>
 
-Step 5. The deletion process starts sequentially. Person 3 gets deleted followed by Person 2, then Person 1. This ensures correctness in the deletion process.
+**Step 5.** The deletion process starts sequentially. Person 3 gets deleted followed by Person 2, then Person 1. This ensures correctness in the deletion process.
 
 
 The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("delete 1 2 3")` API call.
@@ -194,6 +194,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 ![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
 
 ### Tag feature
+
 #### Current Implementation
 The current tagging feature is originally a functionality in the `Add` command. However, it was extracted out and made
 into its own command in order to help facilitate a clearer distinction between those features. The `Tag` command would
@@ -230,6 +231,7 @@ successfully.
 ![The following sequence diagram shows how the tag operation works:](images/TagSequenceDiagram.png)
 
 ### Event feature
+
 #### Current Implementation
 The event command allows the user to create an event which will be stored in the address book. Each `Event` has the following
 fields:
@@ -263,6 +265,7 @@ Step 5. Upon execution, the event will be created and added into the `AddressBoo
 ![The following sequence diagram shows how the tag operation works:](images/EventSequenceDiagram.png)
 
 ### Cancelevent feature
+
 #### Current Implementation
 The cancelevent command would allow the user to cancel and remove an event from the address book. The index specified by the user would
 lead to the deletion of the corresponding event in the event list, as long as it is a valid index. The user also has the option of specifying
@@ -270,18 +273,18 @@ multiple indexes if multiple deletions are required.
 
 Below is an example usage scenario and how the tagging mechanism behaves at each step:
 
-Step 1. The user enters the valid `CancelEventCommand` : `cancelevent 1 2` and `LogicManager` would execute it.
+**Step 1.** The user enters the valid `CancelEventCommand` : `cancelevent 1 2` and `LogicManager` would execute it.
 
-Step 2. `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `CancelEventCommand`.
+**Step 2.** `LogicManger` would pass the argument to `AddressBookParser` to parse the command and identify it as an `CancelEventCommand`.
 It will then pass the arguments to `CancelEventCommandParser` to handle the parsing for the identified `CancelEventCommand`.
 
-Step 3. `CancelEventCommandParser` would first parse the string of indexes using `ParserUtil#parseIndexes()` to identify the events
+**Step 3.** `CancelEventCommandParser` would first parse the string of indexes using `ParserUtil#parseIndexes()` to identify the events
 and ensure the indexes are unique and positive integers.
 
-Step 4. After parsing the arguments, the control is handed over to `CancelEventCommand` where it will return a `CancelEventCommand` object. It
+**Step 4.** After parsing the arguments, the control is handed over to `CancelEventCommand` where it will return a `CancelEventCommand` object. It
 will eventually return to `LogicManager` which will call `CancelEventCommand#execute()` to execute the command.
 
-Step 5. Upon execution, the information of the events will be extracted using `CancelEventCommand#extractDeletedInfo()` that will be use as output for the
+**Step 5.** Upon execution, the information of the events will be extracted using `CancelEventCommand#extractDeletedInfo()` that will be use as output for the
 notifying the user later. Afterwards, the events will be deleted from the `AddressBook` using `Model#deleteEvent` within `CancelEventCommand#deleteFromList`.
 Finally, `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
@@ -308,7 +311,7 @@ Hashsets allow the application to perform fast searches and checks, such as chec
 
 ![The following sequence diagram shows how the removetag operation works:](images/RemoveTagSequenceDiagram.png)
 
-### Find/Find -s/Find -e feature
+### Find features
 
 #### Original Implementation
 The existing Find feature in AB3 only allowed contacts to be searched for by name. We added additional functionalities
@@ -320,8 +323,6 @@ specific tags.
 The `Find` command searches for contacts that satisfy any of the given predicates while the `Find -s` command searches
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
-
-### Event feature
 
 ### \[Proposed\] Undo/redo feature
 
