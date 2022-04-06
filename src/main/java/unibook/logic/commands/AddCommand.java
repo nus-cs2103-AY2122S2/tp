@@ -383,10 +383,10 @@ public class AddCommand extends Command {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
             Module moduleGroupIsIn = model.getModuleByCode(moduleCode);
-            Group groupToUpdate = moduleGroupIsIn.getGroupByName(groupName);
-            if (groupToUpdate == null) {
+            if (!moduleGroupIsIn.hasGroupName(groupName)) {
                 throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
             }
+            Group groupToUpdate = moduleGroupIsIn.getGroupByName(groupName);
             for (LocalDateTime dateTime : dateTimeList) {
                 try {
                     groupToUpdate.addMeetingTime(dateTime);

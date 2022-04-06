@@ -12,6 +12,7 @@ import unibook.model.module.group.Group;
 import unibook.model.person.Student;
 
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
+    public static final String MESSAGE_DUPLICATE_GROUP = "Group %s is duplicated";
     private Set<JsonAdaptedGroupCode> groups;
 
     /**
@@ -51,7 +52,11 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public Set<Group> getModelGroups(UniBook uniBook) throws IllegalValueException {
         Set<Group> modelGroups = new HashSet<>();
         for (JsonAdaptedGroupCode groupCode : groups) {
-            modelGroups.add(groupCode.toModelType(uniBook));
+            Group group = groupCode.toModelType(uniBook);
+            if (modelGroups.contains(group)) {
+                throw new IllegalValueException(String.format(MESSAGE_DUPLICATE_GROUP, group.getGroupName()));
+            }
+            modelGroups.add(group);
         }
         return modelGroups;
     }
