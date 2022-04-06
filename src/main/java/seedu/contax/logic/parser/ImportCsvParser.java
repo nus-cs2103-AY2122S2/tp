@@ -16,14 +16,15 @@ import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.IndexedCsvFile;
 
 /**
- * Parses input arguments and creates a new ImportCsvCommand object
+ * Parses input arguments and creates a new ImportCsvCommand object.
  */
 public class ImportCsvParser implements Parser<ImportCsvCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCsvCommand
      * and returns a ImportCsvCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public ImportCsvCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
@@ -53,8 +54,8 @@ public class ImportCsvParser implements Parser<ImportCsvCommand> {
     }
 
     /**
-     * Checks if the integer doesn't exist, add to {@code HashSet}, else throw {@code ParseException}
-     * Used to check for duplicate positions
+     * Checks if the integer doesn't exist, add to {@code HashSet}, else throw {@code ParseException}.
+     * Used to check for duplicate positions.
      */
     private void checkDuplicateAndAdd(HashSet<Integer> hashSet, int position) throws ParseException {
         if (!hashSet.contains(position)) {

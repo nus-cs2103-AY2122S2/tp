@@ -61,7 +61,6 @@ public class DeleteTagCommandTest {
     // Checks for cascading deletion
     @Test
     public void execute_deleteTagPersonsWithTag_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new Schedule(), new UserPrefs());
         Tag tagToDelete = getTypicalTags().get(0);
         DeleteTagCommand deleteCommand = new DeleteTagCommand(Index.fromZeroBased(0));
 

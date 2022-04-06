@@ -150,8 +150,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     private void removeTagFromPersons(Tag tagToDelete) {
         requireNonNull(tagToDelete);
-        List<Person> persons = new ArrayList<>(getPersonList().filtered(person -> person.hasTag(tagToDelete)));
-        persons.forEach(oldPerson -> setPerson(oldPerson, oldPerson.withoutTag(tagToDelete)));
+        List<Person> persons = getPersonList().filtered(person -> person.hasTag(tagToDelete));
+        for (int i = 0; i < persons.size(); i++) {
+            Person oldPerson = persons.get(i);
+            setPerson(oldPerson, oldPerson.withoutTag(tagToDelete));
+        }
     }
 
     /**
