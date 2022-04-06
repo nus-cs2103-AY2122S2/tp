@@ -7,6 +7,7 @@ import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.HashMap;
 import java.util.List;
 
 import manageezpz.commons.core.index.Index;
@@ -14,13 +15,7 @@ import manageezpz.logic.commands.exceptions.CommandException;
 import manageezpz.logic.parser.ParserUtil;
 import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
-import manageezpz.model.task.Date;
-import manageezpz.model.task.Deadline;
-import manageezpz.model.task.Description;
-import manageezpz.model.task.Event;
-import manageezpz.model.task.Task;
-import manageezpz.model.task.Time;
-import manageezpz.model.task.Todo;
+import manageezpz.model.task.*;
 import manageezpz.model.task.exceptions.DuplicateTaskException;
 
 /**
@@ -61,7 +56,7 @@ public class EditTaskCommand extends Command {
     private final String desc;
     private final String date;
     private final String time;
-    private final boolean[] prefixStatusArr;
+    private final HashMap<String, Boolean> prefixStatusHash;
 
     /**
      * Constructor to initialize an instance of EditTaskCommand class
@@ -73,13 +68,13 @@ public class EditTaskCommand extends Command {
      * @param date New date of the Task
      * @param time New time of the Task
      */
-    public EditTaskCommand(Index index, String desc, String date, String time, boolean[] prefixStatusArr) {
+    public EditTaskCommand(Index index, String desc, String date, String time, HashMap<String, Boolean> prefixStatusHash) {
         requireAllNonNull(index, desc, date, time);
         this.index = index;
         this.desc = desc;
         this.date = date;
         this.time = time;
-        this.prefixStatusArr = prefixStatusArr;
+        this.prefixStatusHash = prefixStatusHash;
     }
 
     @Override
@@ -116,10 +111,31 @@ public class EditTaskCommand extends Command {
         }
     }
 
+    boolean ensureFormatCompliance(HashMap<String, Boolean> prefixStatusHash,
+                                   String desc, String date, String time) {
+        boolean isFormatOkay = true;
+        HashMap<String, String> inputStatusHash = new HashMap<>();
+        inputStatusHash.put("description", desc);
+        inputStatusHash.put("date", date);
+        inputStatusHash.put("datetime", time);
+
+        String[] statusArr = {"description", "date", "datetime"};
+
+        for (String s : statusArr) {
+            boolean status = prefixStatusHash.get(s);
+            String input = inputStatusHash.get(s).trim();
+            if (status && input.isEmpty()) {
+                isFormatOkay = false;
+                break;
+            }
+        }
+        return isFormatOkay;
+    }
+
     private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
-        if (prefixStatusArr[1] || prefixStatusArr[2]) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        if (prefixStatusHash.get("date") || prefixStatusHash.get("datetime") ) {
+            throw new ParseException(MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES);
         }
 
         if (!desc.isEmpty()) {
@@ -134,6 +150,10 @@ public class EditTaskCommand extends Command {
 
     private Task updateDeadline(Deadline currentTask, String desc, String date, String time) throws ParseException {
         Deadline updatedDeadlineTask = new Deadline(currentTask);
+
+        if (!ensureFormatCompliance(prefixStatusHash, desc, date, time)) {
+            throw new ParseException(MESSAGE_EDIT_TASK_NO_EMPTY_VALUES);
+        }
 
         if (!desc.isEmpty()) {
             Description newDesc = ParserUtil.parseDescription(desc);
@@ -155,6 +175,10 @@ public class EditTaskCommand extends Command {
 
     private Task updateEvent(Event currentTask, String desc, String date, String time) throws ParseException {
         Event updatedEventTask = new Event(currentTask);
+
+        if (!ensureFormatCompliance(prefixStatusHash, desc, date, time)) {
+            throw new ParseException(MESSAGE_EDIT_TASK_NO_EMPTY_VALUES);
+        }
 
         if (!desc.isEmpty()) {
             Description newDesc = ParserUtil.parseDescription(desc);

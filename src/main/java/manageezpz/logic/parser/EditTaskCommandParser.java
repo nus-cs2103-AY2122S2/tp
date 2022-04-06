@@ -11,6 +11,7 @@ import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Parses input arguments and creates a new EditTaskCommand object.
@@ -51,30 +52,34 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         String desc = argMultimap.getValue(PREFIX_DESCRIPTION).orElse("");
         String date = argMultimap.getValue(PREFIX_DATE).orElse("");
         String time = argMultimap.getValue(PREFIX_AT_DATETIME).orElse("");
-        boolean[] prefixStatusArr = prefixStatusCheck(argMultimap);
+        HashMap<String, Boolean> prefixStatusHash = prefixStatusCheck(argMultimap);
 
-        for (int i  = 0; i < prefixStatusArr.length; i++){
-            System.out.println(prefixStatusArr[i]);
-        }
 
-        return new EditTaskCommand(index, desc, date, time, prefixStatusArr);
+        return new EditTaskCommand(index, desc, date, time, prefixStatusHash);
     }
 
-    private boolean[] prefixStatusCheck (ArgumentMultimap argMultimap) {
-        boolean[] prefixStatusArr = new boolean[3];
-        Arrays.fill(prefixStatusArr, true);
+    private HashMap<String, Boolean> initPrefixStatusHash() {
+        HashMap<String, Boolean> prefixStatusHash = new HashMap<>();
+        prefixStatusHash.put("description", true);
+        prefixStatusHash.put("date", true);
+        prefixStatusHash.put("datetime", true);
+        return prefixStatusHash;
+    }
+
+    private HashMap<String, Boolean> prefixStatusCheck (ArgumentMultimap argMultimap) {
+        HashMap<String, Boolean> prefixStatusHash = initPrefixStatusHash();
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty()) {
-            prefixStatusArr[0] = false;
+            prefixStatusHash.replace("description", false);
         }
 
         if (argMultimap.getValue(PREFIX_DATE).isEmpty()) {
-            prefixStatusArr[1] = false;
+            prefixStatusHash.replace("date", false);
         }
 
         if (argMultimap.getValue(PREFIX_AT_DATETIME).isEmpty()) {
-            prefixStatusArr[2] = false;
+            prefixStatusHash.replace("datetime", false);
         }
 
-        return prefixStatusArr;
+        return prefixStatusHash;
     }
 }
