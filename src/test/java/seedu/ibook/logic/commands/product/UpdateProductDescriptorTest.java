@@ -6,8 +6,8 @@ import static seedu.ibook.logic.commands.CommandTestUtil.PRODUCT_DESCRIPTOR_A;
 import static seedu.ibook.logic.commands.CommandTestUtil.PRODUCT_DESCRIPTOR_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_CATEGORY_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DESCRIPTION_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNTRATE_B;
-import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNTSTART_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNT_RATE_B;
+import static seedu.ibook.logic.commands.CommandTestUtil.VALID_DISCOUNT_START_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
 
@@ -55,12 +55,12 @@ public class UpdateProductDescriptorTest {
 
         // different discount rate -> returns false
         editedA = new UpdateProductDescriptorBuilder(PRODUCT_DESCRIPTOR_A)
-                .withDiscountRate(VALID_DISCOUNTRATE_B).build();
+                .withDiscountRate(VALID_DISCOUNT_RATE_B).build();
         assertFalse(PRODUCT_DESCRIPTOR_A.equals(editedA));
 
         // different discount start -> returns false
         editedA = new UpdateProductDescriptorBuilder(PRODUCT_DESCRIPTOR_A)
-                .withDiscountStart(VALID_DISCOUNTSTART_B).build();
+                .withDiscountStart(VALID_DISCOUNT_START_B).build();
         assertFalse(PRODUCT_DESCRIPTOR_A.equals(editedA));
     }
 
