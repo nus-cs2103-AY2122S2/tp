@@ -20,7 +20,7 @@ Given below are my contributions to the project.
   * What it does : The feature unmarks the task identified by the index number used in the displayed task list, which changes the status back to not done.
 
 * **Delete Task** : `deleteTask` ([#89](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/89))
-  * What it does : The feature deletes the task identified by the index number used in the displayed task list. It also decreases the number of assigned tasks of the employees who were assigned to the task by 1.
+  * What it does : The feature deletes the task identified by the index number used in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 
 * **Copying Employee Details to Computer Clipboard** ([#181](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/181))
   * What it does : The feature enables the user to right-click on an employee to copy the full name, phone number and email to Computer Clipboard.
@@ -52,13 +52,13 @@ Given below are my contributions to the project.
   * Modified based on the Edit Person feature of the original AddressBook-Level3 code base
   * What it does :
     * The feature edits the details of the employee identified by the index number used in the displayed employee list.
-    * The feature edits the details of all the tasks that are assigned to the said employee to reflect the updated employee.
+    * All tasks that are assigned to the edited employee will be updated to reflect the new changes of the employee.
 
 * **Delete Employee** : `deleteEmployee` ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170), [#182](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/182))
   * Modified based on the Delete Person feature of the original AddressBook-Level3 code base
   * What it does :
     * The feature deletes the employee identified by the index number used in the displayed employee list.
-    * The feature removes the employee from the tasks that has the employee assigned.
+    * All tasks that are assigned to the deleted employee will be updated to remove the employee from the respective tasks.
 
 * **Edit Task** : `editTask`
   * Modified the feature implemented by team member [Aaron Loke](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/docs/team/aaron-ljx.md)
@@ -69,7 +69,7 @@ Given below are my contributions to the project.
   * Modifications made to original implementation :
     * Tweaked implementation ([#179](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/179), [#182](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/182), [#185](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/185))
       * to handle edge cases such as IndexOutOfBounds for invalid task index of the displayed task list.
-      * to ensure that task type, assignees, priority and completion status remain unchanged and are not discarded after editing the task.
+      * to ensure that `type`, `assignees`, `priority` and `isDone` remain unchanged and are not discarded after editing the task.
       * to ensure that exception messages are thrown correctly and appropriately.
     * Guided team member Aaron on the approach of resolving the bugs so that the advertised behaviour in the UG will be consistent with the actual behaviour ([#256](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/256)).
 
@@ -78,21 +78,23 @@ Given below are my contributions to the project.
   * What it does :
     * The feature assigns the specified task to an employee.
   * Modifications made to original implementation : ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170), [#247](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/247))
-    * The implementation has been tweaked to ensure that the GUI reflects that the task is assigned to the employee and the number of assigned tasks of the employee is increased by 1 and updated synchronously.
+    * The implementation has been tweaked to ensure that the GUI is updated synchronously to show that the task is assigned to the employee in the displayed employee list.
+    * The number of assigned tasks of the employee is increased by 1 and the employee's full name is reflected under the assignees of the task.
 
 * **Untag Task to an Employee** : `untagTask`
   * Modified the feature implemented by team member [Alfred Koh](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/docs/team/alfredkohhh.md)
   * What it does :
     * The feature deallocates the specified task from an employee.
   * Modifications made to original implementation : ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170), [#247](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/247))
-    * The implementation has been tweaked to ensure that the GUI reflects that the task is deallocated from the employee and the number of assigned tasks of the employee is decreased by 1 and updated synchronously.
+    * The implementation has been tweaked to ensure that the GUI is updated synchronously to show that the task is deallocated from the employee in the displayed employee list.
+    * The number of assigned tasks of the employee is decreased by 1 and the employee's full name is removed from the assignees of the task.
 
 * **Tag a Priority to a Task** : `tagPriority`
   * Modified feature implemented by team member [Alfred Koh](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/docs/team/alfredkohhh.md)
   * What it does :
     * The feature assigns the specified task with a `priority` of either `HIGH`, `MEDIUM`, `LOW` or `NONE`.
   * Modifications made to original implementation : ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170))
-    * The implementation has been tweaked to ensure that the GUI reflects that the task is assigned to the specified `priority` and updated synchronously.
+    * The implementation has been tweaked to ensure that the GUI is updated synchronously to show that the task is assigned with the specified `priority`.
 
 --------------------------------------------------------------------------------------------------------------------
 
