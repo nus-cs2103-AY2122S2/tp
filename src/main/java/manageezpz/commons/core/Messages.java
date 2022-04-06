@@ -10,7 +10,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_BIND = "Invalid command format! \n\n%1$s";
 
     public static final String MESSAGE_EMPTY_NAME = "Name field cannot be empty! \n\n%1$s";
-    public static final String MESSAGE_EMPTY_DESCRIPTION = "Description cannot be empty!";
     public static final String MESSAGE_EDIT_TASK_NO_EMPTY_VALUES =
             "Either desc/ date/ or at/ must have a value after it!";
     public static final String MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES =

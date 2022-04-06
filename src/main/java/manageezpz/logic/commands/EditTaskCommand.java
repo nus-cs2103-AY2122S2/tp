@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
 import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TASK_NO_EMPTY_VALUES;
 import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES;
-import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_DESCRIPTION;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
