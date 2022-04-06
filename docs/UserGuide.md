@@ -214,7 +214,7 @@ Adds a new event, which can be optionally linked to any number of existing frien
 
 **Examples**:
 * `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
-* `addevent n/Christmas Party dt/25-12-2022`
+* `addevent n/Christmas Party dt/25-12-2022 1930`
 
 ### Editing an event: `editevent` / `ee`
 Edits an existing event.
