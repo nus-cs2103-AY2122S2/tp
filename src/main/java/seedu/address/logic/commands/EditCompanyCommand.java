@@ -81,7 +81,7 @@ public class EditCompanyCommand extends Command {
         }
 
         model.setCompany(companyToEdit, editedCompany);
-        model.updateFilteredCompanyList(PREDICATE_SHOW_UNARCHIVED_ONLY);
+        model.showCompanyList(PREDICATE_SHOW_UNARCHIVED_ONLY);
 
         if (!companyToEdit.getName().equals(editedCompany.getName())) {
             model.getAddressBook().updateCompanyNames(
