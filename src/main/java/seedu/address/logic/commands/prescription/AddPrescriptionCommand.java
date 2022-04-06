@@ -25,7 +25,6 @@ public class AddPrescriptionCommand extends Command {
             + PREFIX_TYPE + "prescription "
             + ": Adds a medical prescription of a patient in Medbook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "prescription "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "DRUG_NAME "
             + PREFIX_DATE + "DATE "

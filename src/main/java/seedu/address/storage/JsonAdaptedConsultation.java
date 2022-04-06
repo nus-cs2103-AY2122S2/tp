@@ -21,7 +21,7 @@ import seedu.address.model.patient.Nric;
 class JsonAdaptedConsultation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Consultation's %s field is missing!";
 
-    private final String ownerNric;
+    private final String patientNric;
     private final String date;
     private final String time;
     private final String diagnosis;
@@ -32,12 +32,12 @@ class JsonAdaptedConsultation {
      * Constructs a {@code JsonAdaptedConsultation} with the given consultation details.
      */
     @JsonCreator
-    public JsonAdaptedConsultation(@JsonProperty("ownerNric") String ownerNric, @JsonProperty("date") String date,
-                              @JsonProperty("time") String time, @JsonProperty("diagnosis") String diagnosis,
-                              @JsonProperty("fee") String fee, @JsonProperty("notes")
+    public JsonAdaptedConsultation(@JsonProperty("patientNric") String patientNric, @JsonProperty("date") String date,
+                                   @JsonProperty("time") String time, @JsonProperty("diagnosis") String diagnosis,
+                                   @JsonProperty("fee") String fee, @JsonProperty("notes")
                                                String notes) {
 
-        this.ownerNric = ownerNric;
+        this.patientNric = patientNric;
         this.date = date;
         this.time = time;
         this.diagnosis = diagnosis;
@@ -49,7 +49,7 @@ class JsonAdaptedConsultation {
      * Converts a given {@code Consultation} into this class for Jackson use.
      */
     public JsonAdaptedConsultation(Consultation source) {
-        ownerNric = source.getNric().value;
+        patientNric = source.getNric().value;
         date = source.getDate().value().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         time = source.getTime().value().format(DateTimeFormatter.ofPattern("HH-mm"));
         diagnosis = source.getDiagnosis().value();
@@ -64,13 +64,13 @@ class JsonAdaptedConsultation {
      */
     public Consultation toModelType() throws IllegalValueException {
 
-        if (ownerNric == null) {
+        if (patientNric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
-        if (!Nric.isValidNric(ownerNric)) {
+        if (!Nric.isValidNric(patientNric)) {
             throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final String modelOwnerNric = ownerNric;
+        final String modelOwnerNric = patientNric;
 
 
         if (date == null) {

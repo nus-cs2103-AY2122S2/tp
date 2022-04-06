@@ -24,7 +24,6 @@ public class AddTestResultCommand extends Command {
             + PREFIX_TYPE + "test"
             + ": Adds the results of a test taken for a patient in the MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "test "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + PREFIX_TESTDATE + "TEST_DATE "
             + PREFIX_MEDICALTEST + "MEDICAL_TEST "
@@ -38,7 +37,7 @@ public class AddTestResultCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New test result added: %1$s";
     public static final String MESSAGE_DUPLICATE_TESTRESULT =
-            "This test result already exists in patient test results list";
+            "This test result already exists in this patient's test results list";
     public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in MedBook";
 
     // Identifier

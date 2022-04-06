@@ -26,7 +26,6 @@ public class AddContactCommand extends Command {
             + PREFIX_TYPE + "contact"
             + ": Adds a contact to patient in MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "OWNER_NRIC "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
