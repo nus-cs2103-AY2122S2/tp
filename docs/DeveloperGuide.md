@@ -154,9 +154,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Sorting feature
+### Sorting feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed sorting mechanism is facilitated by `SortCommand` class. It extends `Command`
 and takes in a field that the user wishes to sort the Address Book by. The field is parsed by
@@ -186,9 +186,9 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: Contributes to more lines of code. Harder to set up initially.
 
 
-### \[Proposed\] Charge feature
+### Charge feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed charge mechanism is facilitated by `ChargeCommand` class. It extends `Command`. It takes in a pet and month the user would like to charge. These fields are parsed by `ChargeCommandParser`. Additionally, it implements the following operations:
 
@@ -206,7 +206,7 @@ The following sequence diagram shows how the charge operation works:
 ![ChargeSequenceDiagram](images/charge.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ChargeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+</div>
 
 #### Design considerations:
 
@@ -221,9 +221,9 @@ The following sequence diagram shows how the charge operation works:
     * Cons: Will use more memory and require more code to maintain it.
 
 
-### \[Proposed\] Appointment feature
+### Appointment feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed appointment feature is facilitated by the `AppointmentCommand` class which extends `Command` class. The
 `AppointmentCommand` takes in a valid mandatory index which specifics the pet that the command is to be used on,
@@ -256,9 +256,9 @@ by the prefixes / augments.
     * Pros: Better for future scalability.
     * Cons: Complex implementation. More lines of code. Harder to set up initially.
 
-### \[Proposed\] Filter feature
+### Filter feature
 
-#### Proposed Implementation
+#### Implementation
 The proposed filter mechanism is facilitated by `FilterCommand` class.
 It extends `Command` and takes in a field that the user wishes to filter the Address Book by followed by
 a given filter word. The field is parsed by `FilterCommandParser`. A filter word will follow after the keyword to
@@ -270,15 +270,17 @@ entered.
 
 `FilterCommandParser` parses the arguments and classifies the fields into the three different classes as represented by
 `DateContainsFilterDatePredicate`, `OwnerNameContainsFilterWordPredicate` and `TagContainsFilterWordPredicate` classes.
+
+The class diagram below shows the relationship between the classes and `FilterByContainsFilterWordPredicate`.
+
+![FilterPredicatesClassDiagram](images/FilterPredicatesClassDiagram.png)
+
 Each class extends the `FilterByContainsFilterWordPredicate` class, which implements the `Predicate<Pet>` interface,
 in order for `FindCommand` to handle different fields appropriately and consequently test each pet differently for a
 match in the specified field.
 
 `FindCommand` then updates the address book using one of the three classes (`Predicates`). Each class has a different
-way of testing `Pet`. If user filters by date, test will go through attendance of pet and determines if pet is present
-on the specified date (entered as `filterWord` by user). If user filters by owner name, test will go through owner name
-of pet and finds a partial/ full match with `filterWord` provided. Similarly, if user filters by tags, test will go
-through tags of pet and find match with `filterWord` provided.
+way of testing `Pet`.
 
 The following sequence diagram shows how the filter operation works when `filter byTags/ beagle` is called:
 
@@ -299,9 +301,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: Requires more lines of code. Harder to set up initially. Risk being messy if not careful.
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -377,9 +379,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Attendance feature
+### Attendance feature
 
-#### Proposed Implementation
+#### Implementation
 The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
 `PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
 on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off
@@ -438,52 +440,42 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Pet daycare centre owners and employees
+* Pet daycare centre owners
 * has a need to manage administrative details of pets on a daily basis
 * prefer desktop apps over other types
-* can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage administrative details of pets faster than a typical mouse/GUI driven app
+**Value proposition**: manage administrative duties faster than a typical mouse/GUI driven app and Excel
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                        |
-|----------|-------------------|---------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | pet daycare owner | retrieve pet owner's contact                                        | contact pet owners                                                     |
-| `* * *`  | pet daycare owner | tag different types of pets                                         | easily differentiate between the types of pets                         |
-| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                          | schedule the school bus for each day                                   |
-| `* * *`  | pet daycare owner | track the different food preferences required by different pets     | make sure the pets are served the right foods                          |
-| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                   | charge pet owners the correct amount depending on pets attendanceEntry |
-| `* * *`  | pet daycare owner | add pets in the daycare to system                                   | I have a consolidated information sheet                                |
-| `* * *`  | pet daycare owner | retrieve the pets addresses                                         | inform the school bus driver correctly                                 |
-| `* * *`  | pet daycare owner | find pets bu their ID                                               | retrieve the pet information accordingly                               |
-| `* * *`  | pet daycare owner | delete pet's information from the system                            | information of pets that are in the system will be up to date          |
-| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                            | bill owners accordingly                                                |
-| `* *`    | pet daycare owner | track the times that the pets will arrive                           | plan out my manpower allocation for the day                            |
-| `* *`    | pet daycare owner | track the weight of pets                                            | inform the owner of any changes in weight                              |
-| `* *`    | pet daycare owner | track pets' grooming appointments                                   | remember to bring them for grooming                                    |
-| `* *`    | pet daycare owner | track the allergies that each pet has                               | avoid giving them food they may be allergic to                         |
-| `* *`    | pet daycare owner | order pets chronologically by there name                            | easily search for their name in the system                             |
-| `* *`    | pet daycare owner | order pets' appointments chronologically                            | know what is the next appointment I should take note of                |
-| `* *`    | pet daycare owner | keep track of pets' birthdays                                       | throw a celebration with their friends                                 |
-| `* *`    | pet daycare owner | alert when it is time to feed the pets                              | ensure pets are well-fed and healthy                                   |
-| `* *`    | pet daycare owner | keep track of basic logistics like leash and waste bags             | replace when they are running low                                      |
-| `* *`    | pet daycare owner | alert one day before appointment                                    | remember a particular pet's appointment schedule                       |
-| `* *`    | pet daycare owner | alert when pets arrive                                              | prepare relevant logistics needed to take care of the pet              |
-| `*`      | pet daycare owner | track the vet appointments of pets                                  | make sure pets do not miss their medical appointments                  |
-| `*`      | pet daycare owner | sort the pets by their type                                         | order their necessary supplies accordingly                             |
-| `*`      | pet daycare owner | track the medicine that pets need to take                           | i can feed them medicine appropriately                                 |
-| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                   | I can allow for last minute scheduling                                 |
-| `*`      | pet daycare owner | update pet's information                                            |                                                                        |
-| `*`      | pet daycare owner | update pet owner's information                                      |                                                                        |
-| `*`      | pet daycare owner | access the previous attendanceEntry of pets                         | update owners if they were to enquire                                  |
-| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day          | arrange the necessary manpower                                         |
-| `*`      | pet daycare owner | get a list of pets which will be staying overnight in the daycare   | arrange the necessary manpower                                         |
+| Priority | As a …​           | I want to …​                                                      | So that I can…​                                                        |
+|----------|-------------------|-------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | pet daycare owner | retrieve pet owner's contact                                      | contact pet owners                                                     |
+| `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                         |
+| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                                   |
+| `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                          |
+| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                 | charge pet owners the correct amount depending on pets attendanceEntry |
+| `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                                |
+| `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                                 |
+| `* * *`  | pet daycare owner | find pets by their INDEX                                          | retrieve the pet information accordingly                               |
+| `* * *`  | pet daycare owner | delete pet's information from the system                          | information of pets that are in the system will be up to date          |
+| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                          | bill owners accordingly                                                |
+| `* *`    | pet daycare owner | track pets' grooming appointments                                 | remember to bring them for grooming                                    |
+| `* *`    | pet daycare owner | track the allergies that each pet has                             | avoid giving them food they may be allergic to                         |
+| `* *`    | pet daycare owner | order pets chronologically by there name                          | easily search for their name in the system                             |
+| `* *`    | pet daycare owner | order pets' appointments chronologically                          | know what is the next appointment I should take note of                |
+| `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments                  |
+| `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                                 |
+| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                 | I can allow for last minute scheduling                                 |
+| `*`      | pet daycare owner | update pet's information                                          |                                                                        |
+| `*`      | pet daycare owner | update pet owner's information                                    |                                                                        |
+| `*`      | pet daycare owner | access the previous attendanceEntry of pets                       | update owners if they were to enquire                                  |
+| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                         |
 
 ### Use cases
 
@@ -506,12 +498,17 @@ Use case ends.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
+* 1b. User keyed in a duplicate pet.
+
+    * 1b1. System shows and error message.
+    
+      Use case resumes at step 1.
 
 **Use case: Delete a pet**
 
 **MSS**
 
-1.  User deletes a pet with pet ID
+1.  User deletes a pet with `INDEX`
 2.  System shows confirmation message that pet details are deleted
 
 Use case ends.
@@ -519,18 +516,18 @@ Use case ends.
 
 **Extensions**
 
-* 1a. User keyed in missing/ invalid pet ID.
+* 1a. User keyed in invalid `INDEX`.
 
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: Get pet ID**
+**Use case: Find pet**
 
 **MSS**
 
-1.  User get pet ID with name of pet.
-2.  System shows a list of pet IDs with the specified name.
+1.  User finds a pet using `NAME_OF_PET`.
+2.  System shows a list of pets with names matching `NAME_OF_PET`.
 
 Use case ends.
 
@@ -544,61 +541,190 @@ Use case ends.
       Use case resumes at step 1.
 
 
-**Use case: Get pet dietary requirements**
+**Use case: Key in pet dietary requirements**
 
 **MSS**
 
-1.  User keys in pet ID.
-2.  System shows the dietary requirement of the pet with specified ID.
+1.  User keys in a requirement for pet at `INDEX`.
+2.  System shows success message for diet added.
 
 Use case ends.
 
 
 **Extensions**
 
-* 1a. User keyed in invalid pet ID.
+* 1a. User keyed in invalid `INDEX`.
 
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
 
+* 1b. User included special characters in dietary requirement.
 
-**Use case: Get pet owner details**
+  * 1b1. System shows an error message that dietary requirements only can consist of alphanumeric characters and spacing.
+    
+    Use case resumes at step 1.
+
+
+**Use case: Key in pet appointment**
 
 **MSS**
 
-1.  User keys in pet ID.
-2.  System shows the pet owner's details of the pet with specified ID.
+1.  User keys in a requirement for pet at `INDEX` followed by date, time and location.
+2.  System shows success message for diet added.
 
 Use case ends.
 
 
 **Extensions**
 
-* 1a. User keyed in invalid pet ID.
+* 1a. User keyed in invalid `INDEX`.
 
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
 
+* 1b. User keyed in invalid format for date and time.
 
-**Use case: Get pet pickup and drop-off time**
+    * 1b1. System shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: Mark pet as present**
 
 **MSS**
 
-1.  User keys in pet ID.
-2.  System shows the pickup and drop-off time of the pet with specified ID.
+1.  User keys in `INDEX`, date, pick up and drop off time.
+2.  System shows success message in marking a pet as present.
 
 Use case ends.
 
 
 **Extensions**
 
-* 1a. User keyed in invalid pet ID.
+* 1a. User keyed in invalid `INDEX`.
 
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
+
+* 1b. User keyed in a date format that is of invalid format.
+
+    * 1b1. System shows an error message.
+      
+      User case resumes at step 1.
+
+* 1c. User keyed in a time format that is of invalid format.
+
+    * 1c1. System shows an error message.
+
+      User case resumes at step 1.
+
+
+**Use case: Mark pet as absent**
+
+**MSS**
+
+1.  User keys in `INDEX`.
+2.  System shows success message in marking a pet as absent.
+
+Use case ends.
+
+
+**Extensions**
+
+* 1a. User keyed in invalid `INDEX`.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: Sort pet list**
+
+**MSS**
+
+1.  User keys in `sort` followed by the parameter they want to sort by.
+2.  System shows a sorted list of pets.
+
+Use case ends.
+
+
+**Extensions**
+
+* 1a. User keyed in invalid parameter to sort by.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Filter pet list**
+
+**MSS**
+
+1.  User keys in `filter` followed by a field to filter by.
+2.  System shows a filtered pet list.
+
+Use case ends.
+
+
+**Extensions**
+
+* 1a. User keyed in invalid parameter.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. User keyed in a date format that is of invalid format for parameter `byDate/` or `byApp/`.
+
+    * 1b1. System shows an error message.
+
+      User case resumes at step 1.
+
+
+**Use case: Charge a pet**
+
+**MSS**
+
+1.  User keys in `INDEX` a month and cost to charge per day.
+2.  System shows message of how much to charge the pet for that month.
+
+Use case ends.
+
+
+**Extensions**
+
+* 1a. User keyed in invalid `INDEX`.
+
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. User keyed in a cost that is of invalid format.
+
+    * 1b1. System shows an error message.
+
+      User case resumes at step 1.
+
+**Use case: Undo**
+
+**MSS**
+
+1.  User keys undo.
+2.  System undoes the previous command executed.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. Previous command was `clear`, `list`, `find` or `help` and user tries to undo.
+
+    * 1a1. System will not the previous command.
+
+      Use case resumes at step 1.
+    
 
 **Use case: Exit**
 
@@ -616,7 +742,6 @@ Use case ends.
 2.  Should be able to hold up to 1000 pets without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -628,8 +753,13 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.</div>
+<div markdown="span" class="alert alert-info">
+
+**:information_source: **Note:****
+These instructions only provide a starting point for testers to work on;
+testers are expected to do more *exploratory* testing.
+
+</div>
 
 ### Launch and shutdown
 
@@ -639,36 +769,211 @@ testers are expected to do more *exploratory* testing.</div>
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a pet
 
-### Deleting a pet
+1. Adding a pet
+   1. Test case: `add n/Hazel o/Romeo Tan p/91234567 a/30 East Coast Road t/Golden Dachshund`
+      Expected: A pet with all the details will be added to the pet list and success message shown in the status message.
+   2. Test case: `add`
+      Expected: No pet will be added. Error details shown in the status message. Pet list remains the same.
 
-1. Deleting a pet while all pets are being shown
+### Editing a pet
 
-   1. Prerequisites: List all pets using the `list` command. Multiple pets in the list.
+1. Editing a pet
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `edit 1 p/92345678`
+       Expected: Pet at index 1 will have the owner's phone number changed to 92345678. Success message shown in the
+       status message.
+    3. Test case: `edit 0 n/Woofie`
+       Expected: No pet is edited. Error details shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Marking attendance of a pet
 
-   1. Test case: `delete 0`<br>
-      Expected: No pet is deleted. Error details shown in the status message. Status bar remains the same.
+1. Marking a pet as present
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `present 1 date/22-03-2022 pu/09:00 do/18:00`
+       Expected: Pet at index 1 will be marked as present on 22 March 2022 with pick up time at 9am and drop off time at
+       6pm. Success message shown in status message. If date is within past 7 days, attendance tag in GUI will turn green.
+    3. Test case: `present 1 date/04-31-2022`
+       Expected: Attendance of pet at index 1 will not be marked. Error details shown in the status message.
+    4. Test case: `present 0 date/22-03-2022`
+       Expected: No pet will be marked as present. Error message will be shown in status message.
+2. Marking a pet as absent
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `absent 1 date/22-03-2022`
+       Expected: Pet at index 1 will be marked as absent on 22 March 2022. Success message shown in status message. If
+       date is within past 7 days, attendance tag in GUI will turn red.
+    3. Test case: `absent 0 date/22-03-2022`
+       Expected: No pet will be marked as absent. Error message shown in status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Charging a pet
 
-1. _{ more test cases …​ }_
+1. Charging a pet for the month
+   1. Prerequisites: Pet list must have at least 1 pet in it.
+   2. Test case: `charge 1 m/03-2022 c/100.00`
+      Expected: Total chargeable amount for pet at index 1 for the month of March 2022 will be shown in status message.
+   3. Test case: `charge 1 m/2022-03 c/100.00`
+      Expected: No chargeable amount will be calculated. Error message shown in status message.
+   4. Test case: `charge 1 m/03-2022 c/100.0101`
+      Expected: No chargeable amount will be calculated. Error message shown in status message.
 
-### Saving data
+### Adding a pet's dietary requirement
 
-1. Dealing with missing/corrupted data files
+1. Adding a dietary requirement
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `diet 1 d/Only feed dry kibble`
+       Expected: Dietary requirement is added to pet at index 1. Description of dietary requirement shown on pet card
+       with a purple label. Success message shown in status message.
+    3. Test case: `diet 0 d/Only feed dry kibble`
+       Expected: No dietary requirement is added. Error message shown in status message.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Adding an appointment for pet
 
-1. _{ more test cases …​ }_
+1. Adding an appointment
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `app 1 dt/22-03-2022 09:00 at/NUS Vet`
+       Expected: Appointment on 22 March 2022 at NUS Vet added for pet at index 1. Appointment details shown on pet card.
+       If appointment date is today, the appointment label will turn green. If the appointment date has passed, the label
+       will turn red, and if the appointment is in the future the label will be grey. Success message shown in status message.
+    3. Test case: `app 1 dt/04-31-2022 09:00 at/NUS Vet`
+       Expected: No appointment added. Error message shown in status message
+    4. Test case: `app 0 dt/22-03-2022 09:00 at/NUS Vet`
+       Expected: No appointment added. Error message shown in status message.
+2. Clearing an appointment:
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `app 1 clear`
+       Expected: Appointment for pet at index 1 cleared. GUI will not display any appointment details.
+    3. Test case: `app 0 clear`
+       Expected: No appointment cleared. Error message shown in status message.
+
+### Sorting pet list
+
+1. Sorting pet list
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `sort owner`
+       Expected: Pet list sorted alphabetically by owners' name
+    3. Test case: `sort somethingElse`
+       Expected: Pet list not sorted. Error message shown in status message.
+
+### Filtering pet list
+
+1. Filtering pet list
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `filter byOwner/Alice`
+       Expected: Pet list only shows pets with owner name similar to Alice after filtering.
+    3. Test case: `filter byDate/22-03-2022`
+       Expected: Pet list only shows pets which are present for daycare on 22 March 2022
+    4. Test case: `filter byApp/04-31-2022`
+       Expected: Pet list not filtered. Error message shown in status message.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+## Model
+
+WoofAreYou's `Model` draws inspiration from original [AB3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+However, WoofAreYou's model is more complicated because it is specifically adapted to handle pets' attributes instead of
+just Person objects.
+
+In WoofAreYou, it is essential to keep track of pets' attendance. Hence, the `AttendanceEntry` class in WoofAreYou is
+essential for many of the functionalities. Not only does `AttendanceEntry` need to modify the database directly to store
+potentially large amount of attendance entries for each pet, it has to ensure that these data are easily retrievable.
+Similarly, the `Appointment` class has to be flexible to cater to the ever-changing nature of pets' appointments.
+These 2 classes utilised Java's `LocalDate`, `LocalTime` and `LocalDateTime` libraries to facilitate parsing of arguments
+which saved significant amount of time in handling invalid inputs.
+
+Complex attributes such as `Charge` is also implemented to calculate the specific cost every month for each pet. The
+`Model` of WoofAreYou support higher level features and commands like sorting, filtering and undoing to increase efficiency
+that were not present in AB3.
+
+All the different classes in WoofAreYou `Model` have to interact with one another to ensure cohesiveness and efficient
+navigability for the user. For instance, filtering and sort have to access the `AttendaceEntry` or `Appointment` class
+to retrieve the relevant dates. There are many ways of implementing these commands and a lot of effort is put into
+the design consideration as discussed in the previous sections.
+
+After many rounds of refinement, the current `Model` of WoofAreYou is one of the more efficient and scalable model
+catered for its purpose.
+
+## Logic
+
+WoofAreYou's `Logic` is more advanced than that of AB3. WoofAreYou supports many more commands such as `sort`,
+`filter`, `undo`, `diet`, `app`, and the different commands for marking attendance. Existing commands of AB3 like
+`edit` and `find` were also enhanced and adapted to handle the complex `Model` of WoofAreYou.
+
+Significant effort was placed in implementing the `Logic` for WoofAreYou. It encompasses the logic for pets'
+`AttendanceEntry`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which were adapted
+for WoofAreYou.
+
+A huge amount of time was dedicated in validating user input for different commands. This is to ensure that WoofAreYou
+is user-friendly enough to support inputs that are both intuitive for users and manageable for developers. Additional
+effort was put into crafting error messages to ensure smooth handling of invalid input.
+
+## Storage
+
+WoofAreYou's `Storage` extends that of AB3 to increase functionality and store the variety of attributes that pets may
+have. `AttendanceEntry`, `Appointment`, `Diet` and `Tags` were carefully organised and stored as separate entries in a
+JSON file. This ensures that these attributes are unique to each pet and can be retrieved easily for other implementations.
+
+More time and effort were spent in crating the JSON entries of `AttendanceEntry` as it needed to store dates that
+the pet was present and absent, and also the pick-up and drop off timings of different pets. All these needed to be
+encapsulated in an organised format in the JSON file for easy retrieval.
+
+## UI
+
+WoofAreYou's `UI` is designed to be very dependent on visual cues to enhance user-friendliness. Every command that the
+user execute will be accompanied by a status message at the very least. This status message appears at the top of
+WoofAreYou to help users understand what is going on after each execution. In the event of any invalid input, error
+messages shown are crafted to be intuitive and easily understandable so that users can rectify their mistakes.
+
+### Attendance Visual Cues
+
+WoofAreYou has a dedicated column on the right to indicate a pet's attendance. Significant amount of effort is put into
+the design of this feature as attendance is the crux of a daycare's operation. Different coloring of date labels
+serves as visual cues for absent and present attendance entries of each pet. It is designed this way so that daycare
+owners rely on WoofAreYou for any form of attendance recollection rather than on their memory.
+
+### Appointment Visual Cues
+
+WoofAreYou has a dedicated label for appointments that pets may have. Similarly, a lot of thought were put into its design
+to allow daycare owners to rely less on memory. A great amount of effort is spent synchronising the dates with the
+different color codes of the appointment label. This visual cue informs daycare owners when an appointment has already
+passed, is ongoing or yet to happen.
+
+### Diet Visual Cues
+
+WoofAreYou also has a dedicated label for dietary requirements of pets. It is meant to emphasise any important request
+that a pet may have in terms of its diet. Hence, more consideration were put into making this feature more prominent in
+the GUI.
+
+### Challenges
+
+Since WoofAreYou handles a lot more information and data compared to AB3, the GUI may be more cluttered. In order to
+make the GUI neater, more VBox and HBox were introduced to accommodate more information displayed. This led to formatting
+issues of certain fields like addresses or tags being truncated and the GUI being less user-friendly. Character limit
+was introduced to ensure that input will not exceed its allocated space but this led to other bugs. Eventually, a hybrid
+of increased character limit and resizable components was adopted to enhance user-friendliness.
+
+
+## Overall
+
+In conclusion, WoofAreYou was a challenging project for the team. The team started off ambitiously, coming up with
+features that could make a huge impact on daycare owners' lives. Unfortunately, given the limited time period, some
+features had to be sacrificed for more essential ones.
+
+The team members all put in equal amount of effort into making WoofAreYou a success. Effort levels since the first
+iteration has been consistently increasing. Despite our busy schedules, all members made a conscious effort to meet
+weekly and work rigorously on WoofAreYou. Pull requests were generated every other day and reviews were followed shortly.
+The team showed immense responsiveness when dealing with issues and worked at a very high level.
+
+From understanding the original code, implemented new features to conducting rigorous testing, the team ensured that
+every piece of work they had to do was of a high standard. With the given time constraints, the team has put in all the
+effort they can to make WoofAreYou a viable and concrete product that can already be used in the industry. Although
+WoofAreYou may not be perfect, there is always room for improvement and the team is proud of the end product.
