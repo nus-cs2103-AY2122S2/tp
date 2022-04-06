@@ -2,16 +2,12 @@ package seedu.ibook.model.product.filters;
 
 import seedu.ibook.model.product.Product;
 
+/**
+ * Filter that checks if the product has expired items.
+ */
 public class ExpiredFilter extends AttributeFilter {
     private static final String TYPE = "expired";
-
     private final String value = "";
-
-    /**
-     * Creates a predicate that checks if the product has expired.
-     */
-    public ExpiredFilter() {
-    }
 
     @Override
     public String getType() {

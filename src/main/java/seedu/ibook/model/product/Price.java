@@ -71,8 +71,22 @@ public class Price {
     /**
      * Checks that the price is within a specified range.
      */
-    public boolean isWithin(Price startPrice, Price endPrice) {
-        return price >= startPrice.price && price <= endPrice.price;
+    public boolean isWithin(PriceRange priceRange) {
+        return !lessThan(priceRange.getStartPrice()) && !moreThan(priceRange.getEndPrice());
+    }
+
+    /**
+     * Checks that the price is less than another price.
+     */
+    public boolean lessThan(Price otherPrice) {
+        return price < otherPrice.price;
+    }
+
+    /**
+     * Checks that the price is more than another price.
+     */
+    public boolean moreThan(Price otherPrice) {
+        return price > otherPrice.price;
     }
 
     @Override

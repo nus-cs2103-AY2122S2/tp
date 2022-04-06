@@ -24,7 +24,7 @@ public class ParserUtilTest {
     private static final String VALID_PRICE = "4.95";
     private static final String VALID_QUANTITY = "100";
 
-    private static final String INVALID_NAME = "";
+    private static final String INVALID_NAME = " ";
     private static final String INVALID_EXPIRY_DATE = "2020-99-10";
     private static final String INVALID_PRICE = "-1.2";
     private static final String INVALID_QUANTITY = "1!!";
@@ -53,7 +53,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCategory_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory(null));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseExpiryDate_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseExpiryDate((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExpiryDate(null));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDescription_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
     }
 
     @Test
@@ -135,12 +135,22 @@ public class ParserUtilTest {
 
     @Test
     public void parsePrice_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePrice((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePrice(null));
     }
 
     @Test
     public void parsePrice_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePrice(INVALID_PRICE));
+    }
+
+    @Test
+    public void parsePriceRange_invalidStartPrice_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriceRange(INVALID_PRICE, VALID_PRICE));
+    }
+
+    @Test
+    public void parsePrice_invalidEndPrice_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriceRange(VALID_PRICE, INVALID_PRICE));
     }
 
     @Test
@@ -150,7 +160,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePrice_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+    public void parsePrice_validValueWithWhitespace_returnsTrimmedPrice() throws Exception {
         String priceWithWhitespace = WHITESPACE + VALID_PRICE + WHITESPACE;
         Price expectedPrice = new Price(VALID_PRICE);
         assertEquals(expectedPrice, ParserUtil.parsePrice(priceWithWhitespace));
