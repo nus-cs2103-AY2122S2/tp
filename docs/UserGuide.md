@@ -187,6 +187,9 @@ Format: `meet NAME d/DATE t/TIME`
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
     of the list shown.
 
+Example:
+* `meet John Doe d/2022-03-12 t/1430` Schedules a meeting with client named `John Doe` at 12 March 2022, 2:30pm.
+
 ### Canceling a meeting: `meet`
 
 Schedules a meeting with the `NAME` given of the client with the `DATE` and `TIME` specified.
@@ -197,6 +200,9 @@ Format: `meet NAME c/`
   * If `c/WORDS` is input, eg. `meet John Doe c/abcdef`,HustleBook will still clear the meeting with the given `NAME`.
 * In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
   of the list shown.
+
+Example:
+* `meet John Doe c/` Cancels the meeting with client name `John Doe`.
 
 ### Editing a client : `edit`
 
