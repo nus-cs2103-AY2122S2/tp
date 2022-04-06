@@ -27,26 +27,33 @@ public class DeleteCommandParserTest {
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
         assertParseSuccess(parser, " 1 ", new DeleteCommand(INDEX_FIRST_PERSON));
-        assertParseSuccess(parser, "  1 2 3   ", new DeleteCommand(new Index[]{INDEX_FIRST_PERSON,
-                INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
+        assertParseSuccess(parser, "  1 2 3   ",
+                new DeleteCommand(new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Contains non-zero integer -> Fail
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         // "+1" can be parsed into 1, should be detected and rejected -> Fail
-        assertParseFailure(parser, "+1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "+1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         // Contains non-zero integer in the multiple case -> Fail
-        assertParseFailure(parser, "1 a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         // Contains non-zero integer in the multiple case -> Fail
-        assertParseFailure(parser, "1 -1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 -1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         // Contains than 1 white space between 2 integers -> Fail
-        assertParseFailure(parser, "1  2 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1  2 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         // Contains zero -> Fail
-        assertParseFailure(parser, "1 0 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 0 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         // Contains duplicate integer -> Fail
-        assertParseFailure(parser, "1 1 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 1 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
 
     }
 }
