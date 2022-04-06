@@ -138,14 +138,22 @@ It is split into the following subsections:
 #### 4.1.1 Customer management command parameters
 The table below shows a list of command parameters that will be used for customer management.
 
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* Service preference refers to services feedbacked by customers that they would enjoy. As this is feedback, the service could be in the current service list offered by the salon or it could yet to be offered as salons may choose to offer when there is sufficient demand.
+   
+</div>
+
+
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAME`               | Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `PHONE_NUMBER`       | Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `ADDRESS`            | Address of the customer. Addresses can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `EMAIL`              | Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: {::nomarkdown}<ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>{:/} |
-| `STAFF_PREFERENCE`   | The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `SERVICE_PREFERENCE` | The name of the services that the customer prefers. Services' name can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `STAFF_PREFERENCE`   | The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank.    |
+| `SERVICE_PREFERENCE` | The name of the services that the customer feedbacked that they would like to have. Services' name can be any values, and it should not be blank. Note that the service a customer prefers may not be present in the service list as the salon may not be offering the service yet.            |
 | `HAIR_TYPE`          | The hair type of the customer. Hair types can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `SKIN_TYPE`          | The skin type of the customer. Skin types can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `ALLERGY`            | The allergy that the customer has. Allergies can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -157,7 +165,7 @@ The table below shows a list of command parameters that will be used for custome
 
 Adds a customer to the application.
 
-Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
+Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`
 
 <div markdown="block" class="alert alert-primary">
 
@@ -220,15 +228,17 @@ Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
 <div markdown="block" class="alert alert-warning">
    
 **:exclamation: Caution:**<br>
+* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`
 * For tags, using two tags of the same type will lead to only the latest one being searched for. For instance, `findc h/Oily h/Dry` will search for only customers with dry hair type.<br>
-* The search is case-insensitive. e.g, `john` will match `john`
-* Only full words will be matched e.g. `john` will not match `joh`
+* For tags, using `findc h/Oily Dry` will search for customers that either have oily or dry hair.
+* The search is case-insensitive. e.g, `John` will match `john`
+* Only full words will be matched e.g. `findc n/Alex Yeoh` will not match customers who are `Alex Tan`, even if they both are called `Alex`
 
 </div>
 
 Examples:
-* `findc n/John` returns `john` and `John Doe`
-* `findc al/Nickel` returns customer profiles with nickle allergies
+* `findc n/John stp/Jason` returns customers who have `john` in their name and customers who like `Jason`
+* `findc al/Nickel` returns customer profiles with Nickel allergies
 * `findc h/Oily` returns customer profiles that has the hair type of oily
 
 #### 4.1.6 Deleting customer(s) : `deletec`
@@ -592,11 +602,11 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 | Action                 | Format                                                                                                                                                                                             | Examples                     |
 |------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
-| Add a customer         | `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`              ||
-| List all customers     | `listc`                                                                                                                                                                                            ||
-| Edit a customer        | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]` | `editc 2 n/Betsy Crower al/` |
-| Find customer profiles | `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                                                                                                                                       ||
-| Delete customer(s)     | `deletec INDEX,[MORE INDEXES]`                                                                                                                                                                     ||
+| Add a customer         | `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]` | `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/06-04-2022 al/Aloe Vera sep/facial sep/massage`
+| List all customers     | `listc`| `listc`
+| Edit a customer        | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]` | `editc 1 n/Betsy Crower stp/Jason` |
+| Find customer profiles | `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]` |  `findc n/Alex Yeoh`
+| Delete customer(s)     | `deletec INDEX,[MORE INDEXES]` | `deletec 1,2`
 
 ### 5.2 Service
 
