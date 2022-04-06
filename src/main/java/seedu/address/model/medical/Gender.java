@@ -11,7 +11,7 @@ public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid gender input. "
             + "We recommend inputting gender as Male, Female or Non-binary, "
-            + "but allow any other gender input values. "
+            + "but we allow any other gender input values. "
             + "Gender parameter can take any values, and it should not be blank.";
 
     /*
