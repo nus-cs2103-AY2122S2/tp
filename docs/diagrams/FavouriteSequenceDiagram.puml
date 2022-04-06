@@ -69,4 +69,4 @@ deactivate FavouriteCompanyCommand
 
 [<--LogicManager
 deactivate LogicManager
-@endum
+@enduml
