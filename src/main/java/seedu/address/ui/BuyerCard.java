@@ -67,8 +67,8 @@ public class BuyerCard extends UiPart<Region> {
         String houseLowerPrice = buyer.getPropertyToBuy().getPriceRange().getLowerToString();
         String houseUpperPrice = buyer.getPropertyToBuy().getPriceRange().getUpperToString();
         if (buyer.getPropertyToBuy() instanceof NullPropertyToBuy) {
-            propertyType.setText("No Property");
-            propertyLocation.setText("No Location");
+            propertyType.setText("no property added yet");
+            propertyLocation.setText("-");
             propertyLowerPrice.setText("");
         } else {
             propertyType.setText(houseType);

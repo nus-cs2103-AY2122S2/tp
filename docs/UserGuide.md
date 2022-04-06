@@ -46,6 +46,8 @@ The Features section will be split into 3 subsections for:
 
 * Seller: Someone who is seeking to sell their property.
 
+* Leading zeros will be ignored in **index-based** inputs. E.g. `delete-b 1` and `delete-b 00001` are equivalent.
+
 * Words in `UPPER_CASE` are inputs to be supplied by the user.<br>
   e.g. In `add-b n/NAME`, `NAME` is an input such as `add-b n/Chok Hoe`.
 
@@ -60,6 +62,10 @@ The Features section will be split into 3 subsections for:
 
 * If an input is expected only once in the command, but you specified it multiple times, only the **last occurrence** of the input will be taken.<br>
   e.g. If you specify `add-b n/Chok Hoe p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* If an input type not specified for a command is used E.g. `pr/` in `add-b`, it will be treated as part of the preceding input. E.g. `add-b n/David pr/1,2 Gareth p/12345` will see `NAME` as `David pr/1,2 Gareth`, which is invalid.
+
+* Respect the spacing used in **all** command formats. E.g. `add-b n/Chok Hoep/12345 p/123467` will treat `NAME` as `Chok Hoep/12345`, which is invalid.
 
 * Additional input for single-word commands (such as `help`, `list-s`, `exit` and `clear-b`) will be ignored and the application will continue executing the command.<br>
   e.g. If the input specifies `help 123`, it will be interpreted as `help`.
@@ -83,7 +89,7 @@ The Features section will be split into 3 subsections for:
     - Any other house type is not accepted.
   * **Location** & **Address** must be non-empty, and can contain **alphabets**, **numerics** and **special symbols**. E.g. `Kent Ridge 1/2`. 
     * However, inputs like `l/Bishan h/hdb` will be treated as `l/Bishan` & `h/hdb` (see above).
-    * Typing `l/Bishanh/abcpr/0,2` is still acceptable and will treat `Bishanh/abcpr/0,2` as the input.
+    * Typing `l/Bishanh/abcpr/0,2` is still acceptable and will treat `Bishanh/abcpr/0,2` as the location input.
   * **Price range** must be in a `lower,upper` format. E.g. `1000,2000`
 * The **displayed seller list** & **displayed buyer list** are the sellers and buyers shown on the UI of the application respectively. They do not refer to the entire list of buyers & sellers.
 * If we do refer to the whole list of buyers or sellers, we will just use **buyer list** or **seller list** respectively.
@@ -151,11 +157,27 @@ Function: Add a new property for the specified buyer. Add all the conditions of 
 
 Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 
-* Adds a new property that the buyer at `INDEX` is hoping to buy. The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* Adds a new property that the buyer at `INDEX` is hoping to buy. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The order of the inputs can be in any order.
+
+* None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
+* The `HOUSE_TYPE` can be defined as any of the following:
+  * `unspecified`
+  * `apartment`
+  * `bungalow`
+  * `condominium` or `condo`
+  * `colonia`
+  * `hdb` or `hdb_flat`
+  * `semi-detached` or `semi-d` or `semidetached` or `semid`
+  * `mansion`
+* Any other `HOUSE_TYPE` will not be accepted.
+* The default `HOUSE_TYPE` after adding a client is none of the above. After a property has been added, you cannot reset it back to this default.
+* `LOCATION` can be any non-empty input, but do use appropriate locations for your own utility. E.g. `Bishan` or `Marymount`
+* The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
 * Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
+
 
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
@@ -166,7 +188,7 @@ Function: Create an appointment with a certain buyer. Now, you can keep track of
 
 Format: `appt-b INDEX time/TIME`
 
-* Create an appointment with the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* Create an appointment with the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
 * To delete an appointment with a buyer, use the keyword `reset` after the `time/` prefix
@@ -178,13 +200,14 @@ Examples:
 
 Function: Display potential sellers by matching the demand of a buyer. Now, you can easily find properties that buyers are interested in!
 
-* Want to match using just a certain criterion? Fret not! Here are the different match commands:
+* Note: You can match a buyer only if his/her property has been added!
+* Want to match using just a certain criterion? Fret not! Below are the different match commands.
 
 ###### Matching all fields of buyers to sellers. `match`
 
 Format: `match INDEX`
 
-* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * A list of all sellers who have properties that are matching the buyer's property requirements will be displayed.
 * A seller will match to the buyer if:
   * They have the same location & house type.
@@ -198,7 +221,7 @@ Examples:
 
 Format: `match-h INDEX`
 
-* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * A list of all sellers whose housetype matches the buyer's desired house type will be displayed.
 * A seller will match to the buyer if:
   * They have the same house type.
@@ -212,7 +235,7 @@ Examples:
 
 Format: `match-l INDEX`
 
-* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * A list of all sellers whose location matches the buyer's desired location will be displayed.
 * A seller will match to the buyer if:
   * They have the same house location
@@ -225,7 +248,7 @@ Examples:
 
 Format: `match-pr INDEX`
 
-* The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * A list of all sellers whose price range matches the buyer's desired price range will be displayed.
 * A seller will match to the buyer if:
   * There is a price at which the buyer is willing to buy a property at, and the seller is willing to sell their property at.
@@ -246,7 +269,7 @@ Function: Edit an existing buyer's information in the displayed buyer list.
 
 Format: `edit-b INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE]` 
 
-* Edit the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* Edit the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * At least one of the optional inputs must be provided.
 * The order of the inputs can be in any order.
 * Existing values will be updated to the input values.
@@ -264,7 +287,7 @@ Function: Find buyers whose selected **field** contain any of the given keywords
 
 Format: `find-b field/KEYWORD1 [MORE_KEYWORDS]`
 
-* The **fields**` are:
+* The **fields** are:
   * name `n/`
   * phone `p/`
   * location `l/`
@@ -292,7 +315,7 @@ Function: Delete the specified buyer from the displayed buyer list.
 
 Format: `delete-b INDEX`
 
-* Deletes the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive whole number** 1, 2, 3, …​
+* Deletes the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The displayed list refers to the buyer list shown after a `list-b`, `sort-b` or `find-b` was previously executed.
 
 Examples:
@@ -310,7 +333,7 @@ Function: Clear all buyers from the buyer list.
 
 Format: `clear-b`
 
-### Sorting buyers. `sort-b`
+#### Sorting buyers. `sort-b`
 
 Function: Sort all the buyers according to the orders specified.
 
@@ -375,7 +398,7 @@ Function: Add a new property for the specified seller.
 
 Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 
-* Adds a new property that the seller at `INDEX` is hoping to sell. The index refers to the index number shown in the displayed seller list. The index **must be a positive whole number** 1, 2, 3, …​
+* Adds a new property that the seller at `INDEX` is hoping to sell. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * The order of the inputs can be in any order.
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the seller might be generous and give their house away for free.
@@ -394,7 +417,7 @@ Function: Create an appointment with a certain seller. Now, you can keep track o
 
 Format: `appt-s INDEX time/TIME`
 
-* Create an appointment with the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive whole number** 1, 2, 3, …​
+* Create an appointment with the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * The input `TIME` is in a `yyyy-mm-dd-hh-mm` format of: the year, month, day of the month, hour and minute. Use the example below for reference.
 * The time entered must be a time in the future.
 * * To delete an appointment with a seller, use the keyword `reset` after the `time/` prefix
@@ -413,7 +436,7 @@ Function: Edit an existing seller's information in the displayed seller list.
 
 Format: `edit-s INDEX [n/NAME] [p/PHONE] [t/TAG]…​ [time/APPOINTMENT] [h/HOUSE_TYPE] [l/LOCATION] [pr/PRICE_RANGE] [a/ADDRESS]`
 
-* Edit the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive whole number** 1, 2, 3, …​
+* Edit the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * At least one of the optional inputs must be provided.
 * The order of the inputs can be in any order.
 * Existing values will be updated to the input values.
@@ -459,7 +482,7 @@ Function: Delete the specified seller from the displayed seller list.
 
 Format: `delete-s INDEX`
 
-* Deletes the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive whole number** 1, 2, 3, …​
+* Deletes the seller at the specified `INDEX`. The index refers to the index number shown in the displayed seller list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed seller list.
 * The displayed list refers to the seller list shown after a `list-b`, `sort-b` or `find-b` was previously executed.
 
 Examples:
@@ -470,16 +493,16 @@ Examples:
 
 Function: Clear all sellers from the seller list.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
+</div>
+
 Format: `clear-s`
 
 #### Sorting sellers. `sort-s`
 
 Function: Sort all the sellers according to the orders specified.
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
-</div>
 
 Format: `sort-s [by/COMPAREDITEM] [o/ORDER]`
 
@@ -505,9 +528,9 @@ Examples:
 
 AgentSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Editing the data file (For experienced user)
+## Editing the data file (For experienced users)
 
-AgentSee data are saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
+AgentSee data is saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
 Advanced users are welcome to update data directly by editing these data files.
 
 <div markdown="span" class="alert alert-warning">
@@ -623,8 +646,11 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **Q** Why have location and address, aren't they the same thing? <br>
 **A** Location refers to the area/town/city the property can/does reside in. Address is the exact location. We decided to separate them as it allows you to more easily match properties where the exact address may not necessarily contain the location name. E.g. 36 College Ave E, North Tower can be considered to be in Clementi/Dover/NUS but does not contain the location name.
 
-**Q** How do I "reset" my property fields like location to "No location"?
+**Q** How do I "reset" my property fields like location to "No location"? <br>
 **A** Once you have added a property, you cannot remove a specific field, only edit it. Basically, we do not allow a property to have missing fields, except when the client is first added and all the fields are empty. We have plans in the future to allow users to remove a property completely.
+
+**Q** Why does typing `delete-b 0` and `delete-b 999999` return 2 different error messages even though they are both violating the same condition? <br>
+**A** We check whether you have first inputted a positive integer first. If not, we will throw the error message seen in `delete-b 0`. If you have typed in a positive integer, but it was larger than the displayed list size, it will inform you to check the range again with the other error message.
 
 --------------------------------------------------------------------------------------------------------------------
 
