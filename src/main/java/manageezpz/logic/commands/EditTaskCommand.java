@@ -118,7 +118,7 @@ public class EditTaskCommand extends Command {
         } catch (ParseException pe) {
             throw new CommandException(pe.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, pe);
         } catch (DuplicateTaskException de) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, this.desc) + MESSAGE_USAGE);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK, this.desc) + MESSAGE_USAGE, de);
         }
     }
 
@@ -127,7 +127,7 @@ public class EditTaskCommand extends Command {
      * Else, return true.
      */
 
-    boolean ensureFormatCompliance(HashMap<String, Boolean> prefixStatusHash,
+    private boolean ensureFormatCompliance(HashMap<String, Boolean> prefixStatusHash,
                                    String desc, String date, String time) {
         boolean isFormatOkay = true;
         HashMap<String, String> inputStatusHash = new HashMap<>();
@@ -162,12 +162,8 @@ public class EditTaskCommand extends Command {
             throw new ParseException(MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES);
         }
 
-        if (!desc.isEmpty()) {
-            Description newDesc = ParserUtil.parseDescription(desc);
-            updatedToDoTask.setDescription(newDesc);
-        } else {
-            throw new ParseException(MESSAGE_EMPTY_DESCRIPTION);
-        }
+        Description newDesc = ParserUtil.parseDescription(desc);
+        updatedToDoTask.setDescription(newDesc);
 
         return updatedToDoTask;
     }
