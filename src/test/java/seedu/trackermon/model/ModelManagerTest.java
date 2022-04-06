@@ -83,7 +83,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInShowList_returnsTrue() {
         modelManager.addShow(ALICE_IN_WONDERLAND);
         assertTrue(modelManager.hasShow(ALICE_IN_WONDERLAND));
     }
