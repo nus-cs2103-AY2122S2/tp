@@ -38,19 +38,17 @@ public class EditCommand extends Command {
     public static final String RESET_ARG = "r";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person(s) identified "
-        + "by the index number(s) used in the displayed person list. "
+        + "by the index number(s) used in the displayed person list.\n"
         + "Existing values will be overwritten by the input values.\n"
         + "Index numbers should be separated by a white space,"
-        + "as opposed to other ... objects that are separated by a comma."
+        + "as opposed to other teams and skill values that are separated by a comma."
         + "\n"
-        + "By default, Teams will be appended."
-        + "However in reset mode, editing Teams will purge all previous data."
-        + "This means declaring t/ with no values in reset mode deletes all teams from the person(s) in reset mode."
-        + "The concept of reset mode applies the same to Skills."
-        + "\n"
-        + "Only Teams and Skills will be changed when editing multiple persons in batch."
-        + "Other changes such as Name and Email will be silently ignored, if provided."
-        + "\n"
+        + "By default, Teams will be appended.\n"
+        + "However in reset mode, editing Teams will purge all previous data.\n"
+        + "This means declaring t/ with no values in reset mode deletes all teams from the person(s) in reset mode.\n"
+        + "The concept of reset mode applies the same to Skills.\n"
+        + "Only Teams and Skills will be changed when editing multiple persons in batch.\n"
+        + "Other changes such as Name and Email will be silently ignored, if provided.\n"
         + "Parameters: INDEX... (must be a positive integer) "
         + "[-r](activates reset mode)"
         + "[" + PREFIX_NAME + "NAME] "
@@ -59,9 +57,12 @@ public class EditCommand extends Command {
         + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
         + "[" + PREFIX_TEAM + "TEAM...]"
         + "[" + PREFIX_SKILL + "SKILL NAME_SKILL PROFICIENCY...]\n"
-        + "Example: " + COMMAND_WORD + " 1 "
+        + "Example 1: " + COMMAND_WORD + " 1 "
         + PREFIX_PHONE + "91234567 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+        + PREFIX_EMAIL + "johndoe@example.com" + "\n"
+        + "Example 2: " + COMMAND_WORD + " 1 "
+        + PREFIX_TEAM + "System Maintenance, Python"
+        + PREFIX_SKILL;
 
     public static final String MESSAGE_EDIT_SINGLE_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS = "Edited Persons: %1$s";
