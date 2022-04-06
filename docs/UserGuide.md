@@ -407,7 +407,7 @@ Format: `delete o/module m/[MODULECODE]`
 * The module must already exist in the system.
 * For example, `delete o/module m/CS2103` removes the module with module code CS2103
 
-### :bulb: Delete group by module code and group name
+#### :bulb: Delete group by module code and group name
 Format: `delete o/group m/[MODULECODE] g/[GROUPNAME]`
 * Deletes the group specified by `GROUPNAME`, within the module specified by `MODULECODE`.
 * Both the module and the subgroup must already exist in the system.
