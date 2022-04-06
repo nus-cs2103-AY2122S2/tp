@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL;
-import static seedu.address.model.Model.PREDICATE_SHOW_UNARCHIVED_ONLY;
+import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_ONLY;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,7 +14,7 @@ public class ArchiveAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Archives all entries in the displayed entry list.";
 
-    public static final String MESSAGE_ARCHIVE_ALL_SUCCESS = "Archived all entries";
+    public static final String MESSAGE_ARCHIVE_ALL_SUCCESS = "Archived all entries.\nListing all archived entries.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -29,7 +29,7 @@ public class ArchiveAllCommand extends Command {
         // If the filteredList's predicate is UNARCHIVED_ONLY it will not update itself to remove the archived
         // entry, so we have to set it to a different predicate first.
         model.updateCurrentlyDisplayedList(PREDICATE_SHOW_ALL);
-        model.updateCurrentlyDisplayedList(PREDICATE_SHOW_UNARCHIVED_ONLY);
+        model.updateCurrentlyDisplayedList(PREDICATE_SHOW_ARCHIVED_ONLY);
 
         return new CommandResult(MESSAGE_ARCHIVE_ALL_SUCCESS);
     }
