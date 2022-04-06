@@ -15,13 +15,13 @@ Given below are my contributions to the project.
   * What it does: Allow user to create multiple commands together by range chain, range or batch command
   * Justification: As part of target user profile, this feature improves the usability of the application, it allows seasoned user to quickly perform different multiple commands base which suit for different situation.
 
-* **New Feature**: Priority
+* **New Feature**: Appointment Priority
   * What it does: Allows user to edit the priority level of appointment in the appointment list.
-  * Justification: This improves the usability of the application, as it provide a visual aid to prioritize the appointment in the appointment list, and allow the user organize the appointment more efficiently.
+  * Justification: This improves the usability of the application, as it provide a visual aid to prioritize the appointment in the appointment list.
 
 * **Code contributed**:
-  * 2800+ LoC contributed to the project. See [Reposense](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jiyao).
-  * Add relevant testcases for mass operations and priority
+  * 2800+ LoC contributed to the project. See [Response](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jiyao).
+  * Add relevant testcases for mass operations and appointment priority
 
 * **Project management**:
   * Perform code reviews on some pull requests submitted by the team.
