@@ -14,7 +14,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import unibook.commons.core.LogsCenter;
 import unibook.logic.commands.exceptions.CommandException;
 import unibook.logic.parser.exceptions.ParseException;
