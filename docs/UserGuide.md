@@ -52,6 +52,7 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
     - [Edit students](#editing-a-student--edit)
     - [Find students](#locating-students-by-name--find)
     - [Delete students](#deleting-a-student--delete)
+    - [Clear students](#clearing-all-entries--clear)
     - [Filter students based on status of lab tags](#filter-by-status-of-individual-labs--filter)
     - [View student details](#view-student-details--view)
 
@@ -251,18 +252,18 @@ In which case, if the user wants to fix the data JSON, the user should exit the 
 
 | Action         | Format, Examples                                                                                                                                        |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**       | `help`                                                                                                                                                  |
+| **Exit**       | `exit`                                                                                                                                                  |
 | **Add**        | `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` |
-| **Clear**      | `clear`                                                                                                                                                 |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| **List**       | `list`                                                                                                                                                  |
 | **Edit**       | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
-| **Filter**     | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`                                                                                           |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                              |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                     |
+| **Clear**      | `clear`                                                                                                                                                 |
+| **Filter**     | `filter l/LAB_NUMBER s/LAB_STATUS`<br> e.g., `filter l/1 s/u`                                                                                           |
 | **View**       | `view INDEX`                                                                                                                                            |
 | **Add lab**    | `labadd l/LAB_NUMBER`                                                                                                                                   |
 | **Submit lab** | `labsub INDEX l/LAB_NUMBER`                                                                                                                             |
 | **Grade lab**  | `labgrad INDEX l/LAB_NUMBER m/LAB_MARK`                                                                                                                 |
 | **Edit lab**   | `labedit INDEX l/LAB_NUMBER [s/LAB_STATUS] [m/LAB_MARK]`                                                                                                |
-| **Remove lab** | `labrm l/LAB_NUMBER`                                                                                                                                    |
-| **List**       | `list`                                                                                                                                                  |
-| **Help**       | `help`                                                                                                                                                  |
-| **Exit**       | `exit`                                                                                                                                                  |
+| **Remove lab** | `labrm l/LAB_NUMBER`                                                                                                                                    |                                                                                                                                                 
