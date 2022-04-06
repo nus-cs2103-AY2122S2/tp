@@ -81,6 +81,10 @@ Lastly, each information card contains the following details of the student and 
 6. Class
 7. COVID-19 Status
 
+|![Information Card](images/user-guide/infocardwithlabel.png)|
+|:--:|
+|*Figure 2 - Information Card*|
+
 With UDT, you can update and track COVID-19 Cases in your school, keep track of Close-Contacts, to perform timely updates to parents and Next-of-Kin.
 Filter through the endless list of students with a simple command to extract details on the cases by class, or by activities (CCAs etc.).
 
@@ -96,7 +100,10 @@ Filter through the endless list of students with a simple command to extract det
 </div>
 
 #### Limitations of automation
-UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
+UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
+`Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
+changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
+in the *next iteration (v1.5)*.
 
 ### Graphical User Interface
 Graphical User Interface (GUI) has a **locked aspect ratio** to prevent the GUI elements from producing any unintended cosmetic problems
@@ -121,10 +128,10 @@ Adds a student to the tracking list
   - `CLASS` takes in a number and alphabet pair
     - Eg. `4A`
   - `EMAIL` follows the standard email formatting
-    - Accepts inputs such as alphanumeric inputs, "-", "_", and "+"
+    - Accepts input such as alphanumeric inputs, "-", "_", and "+"
     - Eg. `johntan@example.com`
   - `PHONE_NUMBER` takes a sequence of numbers
-    - Requires at least 3 numbers
+    - Requires at least 3 numbers up to a maximum of 15 numbers
   - `STATUS` takes either of these texts `Positive`, `Negative`, `Close-Contact`
     - `STATUS` is case-sensitive and should strictly follow the texts stated above
 - Examples:
@@ -161,7 +168,7 @@ Shows a list of all students in the application.
 
 |![list command](images/user-guide/list.png)|
 |:--:|
-|*Figure 2 - `list` Command*|
+|*Figure 3 - `list` Command*|
 
 ## Find student by name: `find`
 Find an existing student in the application by their name
@@ -176,12 +183,12 @@ Find an existing student in the application by their name
 - Example:
   - `find bernice` will find student _"Bernice Yu"_
 
-> :bulb: **Tip:** find multiple students at the same time by inputting their names in the same command
+> :bulb: **Tip:** find multiple students at the same time by typing their names in the same command
 > - Eg. `find alex bernice` will find students _"Alex Yeoh"_ and _"Bernice Yu"_
 
 |![find command](images/user-guide/find.png)|
 |:--:|
-|*Figure 3 - `find` Command*|
+|*Figure 4 - `find` Command*|
 
 ## Find student by status: `findstatus`
 Find an existing student in the application by their Covid-19 Status
@@ -195,7 +202,7 @@ Find an existing student in the application by their Covid-19 Status
   
 |![find status command](images/user-guide/findstatus.png)|
 |:--:|
-|*Figure 4 - `findstatus` Command*|
+|*Figure 5 - `findstatus` Command*|
 
 ## Find student by class: `findclasscode`
 Finds an existing student in the application by their class
@@ -207,7 +214,7 @@ Finds an existing student in the application by their class
 
 |![find classcode command](images/user-guide/findclasscode.png)|
 |:--:|
-|*Figure 5 - `findclasscode` Command*|
+|*Figure 6 - `findclasscode` Command*|
 
 ## Find student by activity: `findactivity`
 Finds an existing student in the application by the activities they are participating in
@@ -222,7 +229,7 @@ Finds an existing student in the application by the activities they are particip
 
 |![find activity command](images/user-guide/findactivity.png)|
 |:--:|
-|*Figure 6 - `findactivity` Command*|
+|*Figure 7 - `findactivity` Command*|
 
 ## Edit student details: `edit`
 Edits an existing student's details in the list Index provided and the parts that you want to edit
@@ -251,7 +258,7 @@ Edits an existing student's details in the list Index provided and the parts tha
 
 |![edit command](images/user-guide/edit.png)|
 |:--:|
-|*Figure 7 - `edit` Command*|
+|*Figure 8 - `edit` Command*|
 
 ## Delete a student: `delete`
 Deletes the specified person from the application.
@@ -271,7 +278,7 @@ Deletes the specified person from the application.
 
 |![delete command](images/user-guide/delete.png)|
 |:--:|
-|*Figure 8 - `delete` Command*|
+|*Figure 9 - `delete` Command*|
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
@@ -351,3 +358,4 @@ A: An error message colored in red will appear stating that you have typed an un
 |-----------|-----------------------------------------|
 | Parameter | Input supplied after the command        |
 | JSON      | A file type that UDT uses to store data |
+| csv       | A common file type used to store data   |

@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Status;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -145,6 +147,16 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    /**
+     * A method to update a person's status
+     */
+    public static void editPersonStatus(Person person, Status status, Model model) {
+        EditCommand.EditPersonDescriptor tempDescriptor = new EditCommand.EditPersonDescriptor();
+        tempDescriptor.setStatus(status);
+        Person editedPersonStatus = EditCommand.createEditedPerson(person, tempDescriptor);
+        model.setPerson(person, editedPersonStatus);
     }
 
 }

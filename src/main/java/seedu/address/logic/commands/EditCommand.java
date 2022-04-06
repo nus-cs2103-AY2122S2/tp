@@ -26,6 +26,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassCode;
@@ -139,7 +140,7 @@ public class EditCommand extends Command {
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
                 assert currentPerson != null : "A person should not be null";
-                editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
+                ModelManager.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         }
     }
@@ -174,7 +175,7 @@ public class EditCommand extends Command {
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
+                    ModelManager.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 }
             }
         }
@@ -184,7 +185,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -198,21 +199,6 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus,
                 updatedClassCode, updatedActivity);
     }
-
-    /**
-     * A method to update a person's status
-     */
-    public static void editPersonStatus(Person person, Status status, Model model) {
-        assert person != null : "A person should not be null";
-        assert status != null : "Status should not be null";
-        assert model != null : "Model should not be null";
-
-        EditPersonDescriptor tempDescriptor = new EditPersonDescriptor();
-        tempDescriptor.setStatus(status);
-        Person editedPersonStatus = createEditedPerson(person, tempDescriptor);
-        model.setPerson(person, editedPersonStatus);
-    }
-
 
     @Override
     public boolean equals(Object other) {
