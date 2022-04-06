@@ -22,7 +22,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 4. To start the app:
    - Windows: Double-click on `NUSocials.jar`.
    - MacOS: On terminal, navigate to the directory containing `NUSocials.jar` and run `java -jar NUSocials.jar`.
-   
+
 5. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![img.png](images/UiSampleAddressBook.png)
 
@@ -60,7 +60,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 
 * If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
   e.g. if you specify `p/12345678 p/87654321`, both will be rejected.
-  
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -85,7 +85,7 @@ Shows a list of all persons in NUSocials.
 Format: `list`
 
 * All existing persons and upcoming events are automatically rendered when the application is launched.
-* The different tags are listed as follows: 
+* The different tags are listed as follows:
   * Yellow for education
   * Teal for modules
   * Orange for CCAs
@@ -120,7 +120,7 @@ Constraints:
 Example:
 * `add n/Alisson Becker p/12345678 e/alisson111@example.com a/VVD street, block 123, #01-01`
   Adds a person with the following fields:
-    - Name: Alisson Becker 
+    - Name: Alisson Becker
     - Phone Number: 12345678
     - Email: alisson111@example.com
     - Address: VVD street, block 123, #01-01
@@ -136,10 +136,10 @@ Example:
 * `add n/Kim Lai n/Fred Tang p/12345678 e/kimlai222@example.com a/KL street, block 190, #01-23`<br>
 
 Not allowed as `n/` prefix is used more than once.
-  
+
 * `add n/Kim Lai p/ e/kimlai222@example.com a/KL street, block 190, #01-23`<br>
 
-Not allowed as `PHONE_NUMBER` is blank. 
+Not allowed as `PHONE_NUMBER` is blank.
 </div>
 
 
@@ -234,11 +234,11 @@ Example:
 * `tag 1`<br>
 
 Not allowed as no prefix provided.
-  
+
 * `tag 1 i/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
-  
+
 * `tag 0 i/xyz company m/CS2103T`<br>
 
 Not allowed as there `INDEX` 0 does not exist in the contact list.
@@ -296,7 +296,7 @@ Returns anyone tagged with either `cs2030s` or `cs2040s` or both
 Returns `Hans` and `Bo Yang` (i.e. Bo Yang is tagged with cs2100)
 * `find i/Shopee m/cs2040s m/cs2030s`<br>
 Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
-  
+
 | Before | After |
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find i/Shopee m/cs2040s cs2030s'](images/screenshots/findShopeeCS2040sCS2030sResult.png) |
@@ -308,7 +308,7 @@ Returns `Alex Yeoh` and `Bernice Yu` (as shown below)
 * `find n/ m/`<br>
 
 Not allowed as there is no input given after a prefix is used.
-  
+
 * `find n/Hans n/Chewbacca`<br>
 
 Not allowed as the `n/` prefix is used more than once.
@@ -331,10 +331,10 @@ Constraints:
 Examples:
 * `find -s n/Bo Yang m/cs2040s`<br>
   Returns `Bo Yang` (i.e. Bo Yang is tagged with cs2040s)
-  
+
 * `find -s i/Shopee m/cs2040s m/cs2030s`<br>
   Returns `Alex Yeoh` (as shown below)
-  
+
 | Before | After |
 :---:|:---:
 | ![before command execution.png](images/screenshots/beforeCommand.png) | ![result for 'find -s i/Shopee m/cs2040s cs2030s'](images/screenshots/find-sShopeeCS2040sCS2030s.png) |
@@ -406,7 +406,7 @@ Creates the Event and adds into NUSocials. (as shown below)
 * `event 1 2 name/ info/At Michael's d/2022-08-22 t/19:00`<br>
 
 Not allowed as there is no input after a prefix is used.
-  
+
 * `event 1 2 name/Dinner appointment name/Game night info/At Michael's d/2022-08-22 t/19:00`<br>
 
 Not allowed as the `name/` prefix is more than once.
@@ -435,7 +435,7 @@ Format: `cancelevent INDEX…​`
 
 * Deletes multiple events at the specified `INDEX` numbers.
 * The index refers to the index number shown in the displayed event list.
-* Each index **must be separated by a whitespace** and **must be unique**. 
+* Each index **must be separated by a whitespace** and **must be unique**.
 
 Constraints:
 * All `INDEX` numbers provided has to be on the currently shown contact list.

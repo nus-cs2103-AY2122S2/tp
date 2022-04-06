@@ -240,13 +240,13 @@ Hashsets allow the application to perform fast searches and checks, such as chec
 
 Given below is an example scenario of how the `removetag` command works.
 
-**Step 1:** User inputs the following valid `removetag` command: `removetag 2 m/cs2107 m/cs2100`. 
+**Step 1:** User inputs the following valid `removetag` command: `removetag 2 m/cs2107 m/cs2100`.
 
 **Step 2:** The second person on the contact list happens to be David, and he has 4 tags. Below is an object diagram of David during the command execution, before any removal of tags.
 
 <img src="images/RemoveTagState0.png" width="450" />
 
-**Step 3:** After checking that David indeed has the module tags `cs2107` and `cs2100` given by the command input, the command will execute the removal of tags. 
+**Step 3:** After checking that David indeed has the module tags `cs2107` and `cs2100` given by the command input, the command will execute the removal of tags.
 
 **Step 4:** The removal of tags is successful, and a success message will be generated.
 
@@ -284,7 +284,7 @@ Afterwards, `EventCommandParser` would parse the event arguments provided using 
 **Step 4.** After parsing the arguments, the control is handed over to `EventCommand` where it will return an `EventCommand` object. It
 will eventually return to `LogicManager` which will call `EventCommand#execute()` to execute the command.
 
-**Step 5.** Upon execution, the event will be created and added into the `AddressBook` using `Model#addEvent`. 
+**Step 5.** Upon execution, the event will be created and added into the `AddressBook` using `Model#addEvent`.
 `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
 The following sequence diagram shows how the tag operation works:
@@ -326,7 +326,7 @@ are copied over from the existing person and the fields to be overwritten are ch
 the descriptor and simply changes the persons attribute values to the values stated in the descriptor.
 
 #### Current Implementation
-The edit command has now been upgraded to support the functionality for multiple tags. Existing tags of a person will not be affected. 
+The edit command has now been upgraded to support the functionality for multiple tags. Existing tags of a person will not be affected.
 
 ### Find feature
 
@@ -609,11 +609,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1a. User specifies past or upcoming events.
 
     Use case resumes at step 2.
-    
+
 2a. NUSocials displays past or upcoming events instead.
 
     Use case ends.
-    
+
 2b. The given find command is invalid.
 
     - 2b1. NUSocials shows an error message.
@@ -822,9 +822,8 @@ testers are expected to do more *exploratory* testing.
     1. To simulate a missing or corrupted file, navigate to the `data` folder and delete `addressbook.json` or modify some data to be invalid (such as changing an event's date to 31st February or making someone's phone number exceed 10 digits).
     1. Open the application, you will be greeted with an empty addressbook.
     1. To recover, simply edit the `addressbook.json` again and reverse the changes made.
-    1. **Caution:** Deleting the whole `addresbook.json` fixes the issue as well. However, all previous data will be lost, and a sample addressbook will be loaded. 
+    1. **Caution:** Deleting the whole `addresbook.json` fixes the issue as well. However, all previous data will be lost, and a sample addressbook will be loaded.
 
 2. How to save
-   
+
     1. NUSocials saves to any changes right away, there is no need for a manual save.
-    

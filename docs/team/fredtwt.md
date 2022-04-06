@@ -18,10 +18,10 @@ Given below are my contributions to the project.
     * What it does: allows the user to add events and tag them to contacts that are participating.
     * Justification: This feature improves the product significantly because a user can keep track of upcoming events they have with their contacts.
     * Highlights: This enhancement affects the existing UI layout. It required an in-depth analysis of how the event information should be displayed alongside the contact list in the application.
-    
+
 * **New Feature**: Added the ability to cancel events and delete them from the address book.
     * What it does: allows the user to cancel events and delete them from the address book.
-    * Justification: This feature improves the product significantly because a user can remove unwanted events and reduce clutter in their event list. 
+    * Justification: This feature improves the product significantly because a user can remove unwanted events and reduce clutter in their event list.
     * Highlights: This enhancement requires an in-depth analysis of how the UI layout of the event list should be altered after an event has been deleted.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=fredtwt&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=fredtwt&tabRepo=AY2122S2-CS2103T-W11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
@@ -33,7 +33,7 @@ Given below are my contributions to the project.
   * Contributed to the logic for `find` command to handle the following cases:
     * basic particulars' prefixes can only be used once for each field
     * search inputs can take in multiple strings now  (i.e edu/computer science)
-  
+
 * **Test cases implemented:**
   * EventCommand
   * EventCommandParser
