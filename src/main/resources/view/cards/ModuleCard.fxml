@@ -12,9 +12,9 @@
         </columnConstraints>
         <VBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="module-code"/>
-                <Label fx:id="moduleCode" text="\$moduleCode" styleClass="module-code"/>
-                <Label fx:id="moduleName" styleClass="module-name" text="\$moduleCode"/>
+                <Label fx:id="id" styleClass="module-code" minWidth="50"/>
+                <Label fx:id="moduleCode" text="\$moduleCode" styleClass="module-code" wrapText="true" minWidth="200" alignment="CENTER"/>
+                <Label fx:id="moduleName" styleClass="module-name" text="\$moduleCode" wrapText="true"/>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                 <Label fx:id="professorsTab" styleClass="module-professor-list-heading" text="Professors"/>
