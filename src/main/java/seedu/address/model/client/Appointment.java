@@ -48,7 +48,41 @@ public class Appointment {
         } catch (DateTimeParseException e) {
             return false;
         }
-        return true;
+
+        //Handles February, they are guaranteed to be parsed as int as they passed the above parse test
+        String[] timeArr = time.split("-");
+        int year = Integer.parseInt(timeArr[0]);
+        int month = Integer.parseInt(timeArr[1]);
+        int day = Integer.parseInt(timeArr[2]);
+        return isValidDate(year, month, day);
+    }
+
+    /**
+     * Checks whether the input year is a leap year
+     */
+    private static boolean isLeapYear(int year) {
+        if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks whether the input date is a valid date
+     */
+
+    private static boolean isValidDate(int year, int month, int day) {
+        if (month == 2 && isLeapYear(year)) {
+            return 1 <= day && day <= 29;
+        } else if (month == 2 && !isLeapYear(year)){
+            return 1 <= day && day <= 28;
+        } else if ((month == 1) || (month == 3) || (month == 5) || (month == 7)
+            || (month == 8) || (month == 10) || (month == 12)) {
+        return 1 <= day && day <= 31;
+        } else {
+            return 1 <= day && day <= 30;
+        }
     }
 
     /**
