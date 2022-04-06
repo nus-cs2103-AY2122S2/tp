@@ -4,37 +4,54 @@ title: Yeap Yi Sheng James's Project Portfolio Page
 ---
 
 ## Project: TeachWhat!
-TeachWhat! is a desktop address book application used for private tutors in managing their class. The user interacts 
+TeachWhat! is a desktop address book application used for private tutors in managing their class. The user interacts
 with it using a CLI, and it has a GUI created with JavaFX.
 
 It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-# Overview
-`to be added soon`
-
 # Summary of Contributions
-`to be added soon`
-
 ## Code contributed
-`to be added soon`
+[Click here](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=jamesyeap&tabRepo=AY2122S2-CS2103T-W11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false) for a summary of code contributed by me!
 
 ## Enhancements implemented
-`to be added soon`
+1. Implemented a feature allowing users to add temporary lessons, which includes
+    - creating a UI representation of a lesson
+    - creating the relevant models for a lesson and the abstraction of a list of lessons
+    - adding logic to handle the parsing of the command
+2. Added logic to check for any conflicts between temporary lessons
+    - to prevent a user from adding a lesson that clashes with one that he/she already has.
+3. Implemented a feature that refreshes the UI to display a list of lessons that conflict with the one that the user is trying to add
+4. Implemented a feature to search for lessons by name and/or subject
+5. Implemented a feature to search for students by name and/or tags
+6. Added persistence for lessons added, which includes
+    - adding logic to write to convert data into their respective `JSON` representations and write them into `JSON` files
+    - adding logic to read and parse data from `JSON` files on program start-up
 
 ## Contributions to the UG
-`to be added soon`
+1. Contributed to the UG for `addlesson` command
+   - how `TeachWhat!` would inform the user if the lesson added is conflicting with existing ones and what he/she can do.
 
 ## Contributions to the DG
-`to be added soon`
+1. Added use-cases for the main user-stories, specifying the actions a user would perform to achieve the intended outcome.
+2. Added [class-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#model-component) for the `Model` component, along with a brief description of the key classes and associations between them 
+3. Added [sequence-diagrams](https://github.com/jamesyeap/tp/blob/master/docs/DeveloperGuide.md#add-temporaryrecurring-lesson) that explain how the `addlesson` command is implemented.
 
 ## Contributions to team-based tasks
-`to be added soon`
+1. Set up the team's [GitHub repository](https://github.com/orgs/AY2122S2-CS2103T-W11-3/teams/developers)
+2. Set up code-coverage tracking on [CodeCov](https://app.codecov.io/gh/AY2122S2-CS2103T-W11-3/tp/)
+3. Set up and updated the [Index page](https://ay2122s2-cs2103t-w11-3.github.io/tp/) of the project's website, including
+    - changing the header to `TeachWhat!`
+    - updating the links to the **Java-CI** and **CodeCov** status-banners
+    - updating the link to the project's GitHub repository
+5. Added issues and corresponding labels for features to be implemented in [Milestone v1.2](https://github.com/AY2122S2-CS2103T-W11-3/tp/milestone/1)
 
 ## Review/mentoring contributions
-`to be added soon`
+1. Helped a teammate fix a bug with a UI in his [pull-request](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/68/commits/f9a1e313b5c7ff150fc590e5df98ef6c2ff00664).
+2. Occasionally fixed minor merge-conflicts encountered while merging pull-requests from teammates.
+3. Suggested the use of `FXCollections.sort()` to fix a bug with sorting lessons by date in the UI.
 
 # Contributions beyond the project team
-`to be added soon`
+1. Provided an [alternative solution](https://github.com/nus-cs2103-AY2122S2/forum/issues/58#issuecomment-1025671937) to an issue faced by another student in the iP.
 
