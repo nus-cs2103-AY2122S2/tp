@@ -11,7 +11,7 @@ public class Price {
 
     public static final Double MAX_PRICE = 999999.99;
     public static final String MESSAGE_CONSTRAINTS =
-            "Prices should only have at most two decimal places, non-negative integers and at most " + MAX_PRICE;
+            "Prices should only have at most two decimal places, non-negative and at most " + MAX_PRICE;
 
     public static final String VALIDATION_REGEX = "\\$?0*(?:0|[1-9]\\d{0,5})(?:\\.\\d{1,2})?";
 
