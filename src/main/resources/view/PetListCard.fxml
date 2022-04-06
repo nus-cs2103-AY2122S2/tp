@@ -35,12 +35,24 @@
                 </HBox>
                 <FlowPane fx:id="tags">
                     <padding>
-                        <Insets bottom="3" top="3"/>
+                        <Insets bottom="1" top="1"/>
                     </padding>
                 </FlowPane>
-                <Label fx:id="ownerName" styleClass="cell_small_label" text="\$ownerName"/>
-                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
-                <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
+                <Label fx:id="ownerName" styleClass="cell_small_label" text="\$ownerName">
+                    <padding>
+                        <Insets bottom="1" top="1"/>
+                    </padding>
+                </Label>
+                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
+                    <padding>
+                        <Insets bottom="1" top="1"/>
+                    </padding>
+                </Label>
+                <Label fx:id="address" styleClass="cell_small_label" text="\$address">
+                    <padding>
+                        <Insets bottom="1" top="1"/>
+                    </padding>
+                </Label>
                 <HBox fx:id="dietTag">
                     <padding>
                         <Insets bottom="1" top="2"/>
