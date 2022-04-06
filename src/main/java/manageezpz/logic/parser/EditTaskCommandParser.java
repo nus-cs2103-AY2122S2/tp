@@ -1,6 +1,6 @@
 package manageezpz.logic.parser;
 
-import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.core.Messages.MESSAGE_FIELD_NOT_EDITED;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
@@ -23,25 +23,27 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
      */
     @Override
     public EditTaskCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_AT_DATETIME, PREFIX_DATE);
+
+        // Invalid command if getPreamble() is empty or contains whitespaces
+        if (argMultimap.getPreamble().isEmpty() || argMultimap.getPreamble().contains(" ")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
+                    EditTaskCommand.MESSAGE_USAGE));
+        }
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    EditTaskCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + EditTaskCommand.MESSAGE_USAGE, pe);
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty()
                 && argMultimap.getValue(PREFIX_DATE).isEmpty()
                 && argMultimap.getValue(PREFIX_AT_DATETIME).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    EditTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_FIELD_NOT_EDITED + EditTaskCommand.MESSAGE_USAGE);
         }
 
         String desc = argMultimap.getValue(PREFIX_DESCRIPTION).orElse("");
