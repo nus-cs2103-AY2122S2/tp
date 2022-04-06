@@ -1,7 +1,7 @@
 package manageezpz.logic.commands;
 
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static manageezpz.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static manageezpz.logic.commands.HelpCommand.MESSAGE_SHOWING_HELP;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SHOWING_HELP, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

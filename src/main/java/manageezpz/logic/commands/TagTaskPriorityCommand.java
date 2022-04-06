@@ -1,6 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import manageezpz.model.task.Priority;
 import manageezpz.model.task.Task;
 
 public class TagTaskPriorityCommand extends Command {
+
     public static final String COMMAND_WORD = "tagPriority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -22,7 +24,7 @@ public class TagTaskPriorityCommand extends Command {
             + PREFIX_PRIORITY + "PRIORITY_VALUE " + "(must be either NONE/LOW/MEDIUM/HIGH)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PRIORITY + "HIGH";
 
-    public static final String MESSAGE_TAG_PRIORITY_SUCCESS = "Task is tagged with %1$s priority: ";
+    public static final String MESSAGE_TAG_PRIORITY_SUCCESS = "Task tagged with %1$s priority: ";
 
     private final Index targetIndex;
     private final Priority priority;
@@ -35,6 +37,7 @@ public class TagTaskPriorityCommand extends Command {
      * @param priority Priority level of the Task
      */
     public TagTaskPriorityCommand(Index targetIndex, Priority priority) {
+        requireAllNonNull(targetIndex, priority);
         this.targetIndex = targetIndex;
         this.priority = priority;
     }

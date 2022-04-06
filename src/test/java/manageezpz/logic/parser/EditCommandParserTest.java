@@ -1,6 +1,6 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -14,6 +14,7 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static manageezpz.logic.commands.EditEmployeeCommand.MESSAGE_USAGE;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
@@ -33,9 +34,9 @@ import manageezpz.testutil.EditPersonDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEmployeeCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND, MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditEmployeeCommandParser parser = new EditEmployeeCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -43,7 +44,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditEmployeeCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1",
+                EditEmployeeCommand.MESSAGE_NOT_EDITED + "\n" + MESSAGE_USAGE);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -66,19 +68,25 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS + "\n" + MESSAGE_USAGE); // invalid name
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS + "\n" + MESSAGE_USAGE); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC,
+                Email.MESSAGE_CONSTRAINTS + "\n" + MESSAGE_USAGE); // invalid email
+
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                Phone.MESSAGE_CONSTRAINTS + "\n" + MESSAGE_USAGE);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS + "\n" + MESSAGE_USAGE);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS + "\n" + MESSAGE_USAGE);
     }
 
     @Test
