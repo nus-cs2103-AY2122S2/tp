@@ -9,31 +9,49 @@ TAPA is a desktop contact management application used to manage students' contac
 
 Given below are my contributions to the project.
 
-* **New Feature**:
-  * to be added soon
+* **New Feature**: **Manual Command** (Pull Requests [#43](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/43), [#84](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/84), [#112](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/112))
+  * What it does: Display the format and a short description for a specified command.
+  * Justification: This feature allows users to find out more about existing commands, and helps them understand how to use these commands.
+  * Highlights: This feature was fairly easy to implement, however, it required constant updates whenever a new feature is added into our application.
 
-* **New Feature**:
-  * to be added soon
+* **New Feature**: **Mark Command** (Pull Requests [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69), [#77](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/77), [#117](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/117))
+  * What it does: Marks a specific undone task as done for a particular student.
+  * Justification: This feature allows users update the progress of a student's task.
+  * Highlights: 
+
+* **New Feature**: **Unmark Command** (Pull Requests [#69](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/69), [#77](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/77), [#117](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/117))
+  * What it does: Marks a specific done task as undone for a particular student.
+  * Justification: This feature allows users update the progress of a student's task.
+  * Highlights:
+
+* **New Feature**: **Sort Command** (Pull Requests [#134](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/134), [#199](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/199))
+  * What it does: Sorts and displays the students in TAPA by the number of undone tasks in **descending** order.
+  * Justification: This features allows the TAs to view which students are lacking behind in terms of number of incomplete tasks.
+  * Highlights: This feature was slightly tricky to implement as the original implementation relied on counters whenever a task is marked as complete or incomplete. However, the counter resets everytime the application is rebooted. Hence, there was a need to ensure that the number of incomplete tasks would be counted everytime the `sort` command is run, instead of relying on counters.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benjykoh&breakdown=true)
 
 * **Project management**:
-  * to be added soon
+  * Shared effort in renaming the product to "TAPA"
+  * Shared effort in creating "TAPA" icon
+  * Shared effort in morphing product into "TAPA" by removing unused fields
+  * Kept track of issues and team's progress
+  * Updated Developer Guide by adding and editing user stories
 
-* **Enhancements to existing features**:
-  * to be added soon
+* **Enhancements to existing features**: **Assign Command** (Pull Requests [#102](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/102), [#196](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/196))
+  * What it does: Assigns a task to all students whom are taking a particular module.
+  * Justification: This feature allows TAs to assign a task to all students in the module, rather than assigning the tasks one by one.
+  * Highlights: This feature was slightly tricky to implement as we had to consider the possibility of the task being already assigned to some students.
 
 * **Documentation**:
   * User Guide:
     * to be added soon
   * Developer Guide:
-    * to be added soon
+    * Added and updated user stories (Pull Requests [#91](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/91), [#93](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/93))
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): to be added soon
-  * Contributed to forum discussions (examples: to be added soon)
-  * Reported bugs and suggestions for other teams in the class (examples: to be added soon)
-  * Some parts of the history feature I added was adopted by several other class mates (to be added soon)
+  * PRs reviewed (with non-trivial review comments): [#40](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/40), [#41](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/41), [#144](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/144), [#205](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/205)
+  * Reported bugs and suggestions for other teams in the class [1](https://github.com/Benjykoh/ped/issues/13), [2](https://github.com/Benjykoh/ped/issues/10), [3](https://github.com/Benjykoh/ped/issues/3)
 
 * **Tools**:
   * to be added soon
