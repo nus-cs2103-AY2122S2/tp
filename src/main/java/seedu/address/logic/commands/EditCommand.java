@@ -91,6 +91,9 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        assert personToEdit != null : "A person should not be null";
+        assert editedPerson != null : "An edited person should not be null";
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -120,6 +123,11 @@ public class EditCommand extends Command {
      */
     private static void batchUpdateNegativeToPositive(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
+        assert personToEdit != null : "A person should not be null";
+        assert editedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
+
         if ((personToEdit.isNegative() || personToEdit.isCloseContact()) && editedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeList = studentList.stream()
@@ -131,6 +139,7 @@ public class EditCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
+                assert currentPerson != null : "A person should not be null";
                 ModelManager.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         }
@@ -142,6 +151,11 @@ public class EditCommand extends Command {
      */
     private static void batchUpdatePositiveToNegative(Person personToEdit, Person editedPerson,
                                                       ObservableList<Person> studentList, Model model) {
+        assert personToEdit != null : "A person should not be null";
+        assert editedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
+
         if (personToEdit.isPositive() && editedPerson.isNegative()) {
 
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
@@ -152,7 +166,7 @@ public class EditCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
-
+                assert currentPerson != null : "A person should not be null";
                 List<Person> positiveRelatedToPerson = studentList.stream()
                         .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
@@ -185,7 +199,6 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedStatus,
                 updatedClassCode, updatedActivity);
     }
-
 
     @Override
     public boolean equals(Object other) {

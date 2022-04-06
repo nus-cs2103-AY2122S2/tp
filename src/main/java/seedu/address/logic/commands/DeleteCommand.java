@@ -52,6 +52,9 @@ public class DeleteCommand extends Command {
             }
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+            assert personToDelete != null : "A person should not be null";
+
             model.deletePerson(personToDelete);
 
             try {
@@ -75,6 +78,10 @@ public class DeleteCommand extends Command {
     private static void batchUpdateDeletedPerson(Person deletedPerson,
                                                       ObservableList<Person> studentList,
                                                       Model model) {
+        assert deletedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
+
         if (deletedPerson.isPositive()) {
 
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
@@ -85,7 +92,7 @@ public class DeleteCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
-
+                assert currentPerson != null : "A person should not be null";
                 List<Person> positiveRelatedToPerson = studentList.stream()
                         .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
