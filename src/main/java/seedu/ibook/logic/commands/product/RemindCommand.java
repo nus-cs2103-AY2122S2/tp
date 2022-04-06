@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+import seedu.ibook.commons.core.Messages;
 import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.model.Model;
@@ -15,7 +16,7 @@ import seedu.ibook.model.product.filters.ExpiringFilter;
 public class RemindCommand extends Command {
     public static final String COMMAND_WORD = "remind";
 
-    public static final String MESSAGE_SUCCESS = "Listed expiring products";
+    public static final String MESSAGE_SUCCESS = "Listed expiring products.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists products with their items that are expiring "
             + "within the specified number of days\n"
@@ -47,6 +48,7 @@ public class RemindCommand extends Command {
         model.clearProductFilters();
         model.addProductFilter(expiringFilter);
         model.updateFilteredItemListForProducts(itemPredicate);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS
+                + String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
     }
 }
