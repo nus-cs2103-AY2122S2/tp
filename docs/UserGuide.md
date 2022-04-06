@@ -146,6 +146,7 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
   * `semi-detached` or `semi-d` or `semidetached` or `semid`
   * `mansion`
 * Any other `HOUSE_TYPE` will not be accepted.
+* The default `HOUSE_TYPE` after adding a client is none of the above. After a property has been added, you cannot reset it back to this default.
 * `LOCATION` can be any non-empty input, but do use appropriate locations for your own utility. E.g. `Bishan` or `Marymount`
 
 Examples:
@@ -500,9 +501,9 @@ Examples:
 
 AgentSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Editing the data file (For experienced user)
+## Editing the data file (For experienced users)
 
-AgentSee data are saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
+AgentSee data is saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
 Advanced users are welcome to update data directly by editing these data files.
 
 <div markdown="span" class="alert alert-warning">
