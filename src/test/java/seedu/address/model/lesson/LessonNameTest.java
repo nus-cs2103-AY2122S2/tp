@@ -25,11 +25,12 @@ public class LessonNameTest {
 
     @Test
     public void isInvalidLessonName() {
-        assertThrows(NullPointerException.class, () -> LessonName.isValidName(null));
+        assertThrows(NullPointerException.class, () -> LessonName.isValidName(null)); // null lesson name
+        assertFalse(LessonName.isValidName("")); // empty lesson name
+        assertFalse(LessonName.isValidName(" ")); // whitespaces only
         assertFalse(LessonName.isValidName("^")); // only non-alphanumeric characters
         assertFalse(LessonName.isValidName("peter*")); // contains non-alphanumeric characters
-        assertFalse(LessonName.isValidName("")); // empty name
-        assertFalse(LessonName.isValidName(" ")); // whitespace only
+
         assertFalse(LessonName.isValidName("ABCDEFGHIJKLMNOPQRSTUVWYXZabcdefghijklmnopqrstuvwxy")); // 51 chars
         assertFalse(LessonName.isValidName("ABCDEFGHIJKLMNOPQRSTUVWY "
                 + "XZabcdefghijklmnopqrstuvwx")); // 51 chars inc. whitespace
