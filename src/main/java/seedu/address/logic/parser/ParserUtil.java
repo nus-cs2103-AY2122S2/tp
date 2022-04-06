@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.ChargeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.charge.Charge;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Phone;
@@ -58,6 +60,22 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String diet} into a {@code Diet}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code diet} is invalid.
+     */
+    public static Diet parseDiet(String diet) throws ParseException {
+        requireNonNull(diet);
+        String trimmedDiet = diet.trim();
+        if (!Diet.isValidDiet(trimmedDiet)) {
+            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
+        }
+        return new Diet(trimmedDiet);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -142,12 +160,44 @@ public class ParserUtil {
     public static LocalDateTime parseAppointmentDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        try {
-            return LocalDateTime.parse(trimmedDateTime, formatter);
-        } catch (Exception e) {
-            throw new ParseException("Appointment date and time should be entered in dd-MM-yyyy HH:mm format!");
+        String[] dateTimeInfo = trimmedDateTime.split(" ");
+
+        if (dateTimeInfo.length != 2) {
+            throw new ParseException("Please ensure both Appointment date and time are entered in "
+                    + "dd-MM-yyyy HH:mm format.");
         }
+
+        String dateInput = dateTimeInfo[0];
+        String timeInput = dateTimeInfo[1];
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalDate date;
+        LocalTime time;
+
+        LocalDate today = LocalDate.now();
+
+        try {
+            date = LocalDate.parse(dateInput, dateFormatter);
+        } catch (Exception e) {
+            throw new ParseException("Appointment date is an invalid entry.\n"
+                    + "Please ensure Appointment date is valid and entered in dd-MM-yyyy format.");
+        }
+
+        if (date.isBefore(today)) {
+            throw new ParseException("Appointment date is over.\n"
+                    + "Please enter a future appointment date is valid and entered in dd-MM-yyyy format.");
+        }
+
+        try {
+            time = LocalTime.parse(timeInput, timeFormatter);
+        } catch (Exception e) {
+            throw new ParseException("Appointment time is an invalid entry.\n"
+                    + "Please ensure Appointment time is valid and entered in HH:mm format.");
+        }
+
+        return LocalDateTime.of(date, time);
     }
 
     /**

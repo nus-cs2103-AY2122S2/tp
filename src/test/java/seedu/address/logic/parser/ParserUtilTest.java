@@ -19,20 +19,23 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.pet.Address;
+import seedu.address.model.pet.Diet;
 import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
+    private static final String INVALID_DIET = "%%%%%";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_OWNERNAME = "S@rah";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String VALID_DIET = "Test abc";
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "82345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_OWNERNAME = "Sarah";
     private static final String VALID_TAG_1 = "friend";
@@ -82,6 +85,25 @@ public class ParserUtilTest {
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
+
+    @Test
+    public void parseDiet_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDiet(INVALID_DIET));
+    }
+
+    @Test
+    public void parseDiet_validValueWithoutWhitespace_returnsDiet() throws Exception {
+        Diet expectedDiet = new Diet(VALID_DIET);
+        assertEquals(expectedDiet, ParserUtil.parseDiet(VALID_DIET));
+    }
+
+    @Test
+    public void parseDiet_validValueWithWhitespace_returnsTrimmedDiet() throws Exception {
+        String dietWithWhitespace = WHITESPACE + VALID_DIET + WHITESPACE;
+        Diet expectedDiet = new Diet(VALID_DIET);
+        assertEquals(expectedDiet, ParserUtil.parseDiet(dietWithWhitespace));
+    }
+
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
@@ -209,8 +231,8 @@ public class ParserUtilTest {
     @Test
     public void parseAppointmentDateTime_returnsLocalDateTime() throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime expectedLocalDateTime = LocalDateTime.parse("22-03-2022 09:00", formatter);
-        assertEquals(ParserUtil.parseAppointmentDateTime("22-03-2022 09:00"), expectedLocalDateTime);
+        LocalDateTime expectedLocalDateTime = LocalDateTime.parse("22-08-2024 09:00", formatter);
+        assertEquals(ParserUtil.parseAppointmentDateTime("22-08-2024 09:00"), expectedLocalDateTime);
         assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("2022-03-22 0830"));
     }
 

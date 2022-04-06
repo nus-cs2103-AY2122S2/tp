@@ -32,10 +32,10 @@ public class PetTest {
         // null -> returns false
         assertFalse(BOBA.isSamePet(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Pet editedAlice = new PetBuilder(BOBA).withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(BOBA.isSamePet(editedAlice));
+        assertFalse(BOBA.isSamePet(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PetBuilder(BOBA).withName(VALID_NAME_BOB).build();
@@ -90,8 +90,8 @@ public class PetTest {
         editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(BOBA.equals(editedAlice));
 
-        // different tags -> returns false
+        // different tags -> returns true
         editedAlice = new PetBuilder(BOBA).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(BOBA.equals(editedAlice));
+        assertTrue(BOBA.equals(editedAlice));
     }
 }
