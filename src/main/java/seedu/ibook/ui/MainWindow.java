@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultWindow.setFeedbackToUser(commandResult.getFeedbackToUser());
+            setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 menuToolbar.handleHelp();
@@ -151,6 +151,15 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             setError(e.getMessage());
         }
+    }
+
+    /**
+     * Sets feedback To {@code ResultWindow}.
+     *
+     * @param feedback The corresponding feedback.
+     */
+    public void setFeedbackToUser(String feedback) {
+        resultWindow.setFeedbackToUser(feedback);
     }
 
     /**
