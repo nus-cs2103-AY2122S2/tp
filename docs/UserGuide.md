@@ -9,18 +9,6 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 * Table of Contents
 {:toc}
-  * Quick Start
-  * Features
-    * Adding a player/ team/ lineup/ schedule: add
-    * Deleting a player/ team/ lineup/ schedule: delete
-    * Tagging players by their position: tag
-    * Viewing the summary: view
-    * Putting a player to a team/ lineup: put
-    * Updating a player/ team/ lineup/ schedule: edit
-    * Changing the theme of the UI: theme
-    * Clearing all data: clear
-  * FAQ
-  * Command Summary
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +29,9 @@ Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Sched
    Some example commands you can try:
 
    * **`add`**`P/ n/John Doe p/98765432 e/johnd@example.com h/183 w/70 j/24 t/PG` : Adds a player named `John Doe` to MyGM.
-   
+
    * **`add`**`S/ n/training r/shooting training d/01/01/2023 1800` : Adds a schedule called `training` to MyGM.
-   
+
    * **`delete`**`P/John Doe` : Deletes John Doe from MyGM.
 
    * **`clear`** : Deletes all players, lineup and schedule.
@@ -180,9 +168,9 @@ Views the information of lineup/ player/ schedule.
 
 Format: `view P/[NAMES_IN_PLAYERNAME] [w/OPWEIGHT] [h/OPHEIGHT] [t/POSITIONS]`
 * Filters the existing players to display only the players matching the criteria specified.
-* Parameters `[NAMES_IN_PLAYERNAME]` and `[POSITIONS]` will only find players that contain 
+* Parameters `[NAMES_IN_PLAYERNAME]` and `[POSITIONS]` will only find players that contain
 the specific word that is specified. <br> e.g. `view P/John` will not display players with the name
-"Johnson" in their name. However, it will display players with name such as "John Cena", "Stockton John" if 
+"Johnson" in their name. However, it will display players with name such as "John Cena", "Stockton John" if
 players with such name exists.
 * "OP" in the parameters `[OPWEIGHT]` and `[OPHEIGHT]` must be either `gte`, `lte`, `gt`, `lt`, `eq`. On the other hand,
 "WEIGHT" and "HEIGHT" must be integers. <br> e.g. `gte180`, `lt90` can be a potential `OPWEIGHT` or `OPHEIGHT`
@@ -191,7 +179,7 @@ players with such name exists.
 Examples:
 * `view P/` Displays all the players
 * `view P/Kelvin Darent` Displays all the players that have "Kelvin" **or** "Darent" in their name
-* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is 
+* `view P/ h/gt180 w/gte80` Displays all the players who have height that is greater than 180cm **and** weight that is
 greater than or equals to 80kg
 * `view P/James h/lt213 w/eq100 t/SG SF` Displays all the players that have "James" in their name **and** a height that
 is lesser than 213cm **and** weight equals to 100kg **and** plays the position of "SG" or "SF"
@@ -204,7 +192,7 @@ Format: `view L/[NAMES_IN_LINEUPNAME]`
 * Filters players who are in the lineup that corresponds to the criteria specified.
 * Parameters `[NAMES_IN_LINEUPNAME]` will only find players that are in the lineup which contains the lineup name that
 matches the specific word that is specified. <br> e.g. `view L/super` will not display players in the lineup
-with the lineup name of "superstars". However, it will display players in the lineup with the lineup name of "super" 
+with the lineup name of "superstars". However, it will display players in the lineup with the lineup name of "super"
 or "super idol" provided that lineup with this lineup name exists and there are players in this lineup as well.
 * If no `NAMES_IN_LINEUPNAME` is provided, all the players that are in a lineup will be displayed and all current lineups.
 * Words in `NAMES_IN_LINEUPNAME` are case **insensitive**.
@@ -244,7 +232,7 @@ Examples:
 * `view S/drills` Displays all the upcoming schedules that have the name of "drills"
 * `view S/drills shooting` Displays all the upcoming schedules that have the name of "drills" **or** "shooting"
 * `view S/ a/all` Displays the all schedules which includes upcoming and archived schedules
-* `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules 
+* `view S/ a/archive` Displays the all schedules that **only** includes the archived schedules
 * `view S/ d/22/02/2023` Displays all the schedules that falls on the date "22/02/2023"
 
 * ![viewSchedule](images/viewSchedule.png)
@@ -255,7 +243,7 @@ The `sort` command allows you to sort the displayed players based on the criteri
 
 Format: `sort PREFIX/ORDER`
 * Sorts all the players based on the specified `PREFIX` and `ORDER`.
-* The parameter `PREFIX` must be specified only as `h/`, `j/` or `w/` for height, jersey number and weight respectively. 
+* The parameter `PREFIX` must be specified only as `h/`, `j/` or `w/` for height, jersey number and weight respectively.
 Other `PREFIX` will not be accepted.
 * The parameter `ORDER` must be specified only as `asc` or `desc` for ascending and
 descending respectively. Other `ORDER` will not be accepted.
@@ -273,7 +261,7 @@ Example:
 
 ### Edit a player/ lineup/ schedule information : `edit`
 
-Update the details of a player, team, lineup or schedule.
+Update the details of a player, lineup or schedule.
 
 **To edit a player:**
 
@@ -362,7 +350,7 @@ Example:
 MyGM data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, MyGM will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -379,15 +367,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                           |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                               |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`<br>e.g. `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG`<br>`add L/ n/LINEUP_NAME`<br>e.g. `add L/ n/starting five`<br>`add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`<br>e.g. `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` |
-| **Delete** | `delete P/PLAYER`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/ i/INDEX`<br>e.g. `delete S/INDEX`                                                                                                                                                                                                         |
-| **View**   | `view L/[LINEUP]`<br>e.g. `view L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view S/ i/[INDEX]`<br>e.g. `view S/1`                                                                                                                                                                                                              |
-| **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                      
-| **Sort**   | `sort PREFIX/ORDER`                                                                                                                                                                                                                                                                                                                                     |
-| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/SCHEDULE NAME] [r/DESCRIPTION] [d/DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                |
-| **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                    
-| **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                 |
-| **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                  |
+| **Delete** | `delete P/PLAYER`<br>e.g.`delete P/John Doe`<br>`delete L/LINEUP`<br>e.g. `delete L/Starting 5`<br>`delete S/ i/INDEX`<br>e.g. `delete S/INDEX`                                                                                                                                                                                                                                |
+| **View**   | `view L/[LINEUP]`<br>e.g. `view L/starting five`<br>`view P/[PLAYER]`<br>e.g. `view P/Blue Blue`<br>`view S/ i/[INDEX]`<br>e.g. `view S/1`                                                                                                                                                                                                                                     |
+| **Put**    | `put P/PLAYER L/LINEUP`<br> e.g.`put P/John Doe L/Starting 5`                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                      
+| **Sort**   | `sort PREFIX/ORDER` <br> e.g. `sort h/asc`                                                                                                                                                                                                                                                                                                                                     |
+| **Edit**   | `edit P/PLAYER [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSY_NUMBER]`<br> e.g. `edit P/John Doe a/22`<br>`edit L/LINEUP_NAME n/NEW_LINEUP_NAME`<br> e.g. `edit L/HAHA n/HEIHEI`<br>`edit S/INDEX SCHEDULE [n/SCHEDULE NAME] [r/DESCRIPTION] [d/DATETIME]`<br> e.g. `edit S/1 n/competition d/22/02/2022 0900`                                                       |
+| **Theme**  | `theme T/THEME`<br> e.g.`theme T/light`                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                    
+| **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                        |
+| **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                         |
 
