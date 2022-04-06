@@ -104,6 +104,15 @@ public class RecurringLessonBuilder {
     }
 
     /**
+     * Sets the {@code DateTimeSlot} of the {@code Lesson} that we are building.
+     */
+    public RecurringLessonBuilder withDateTimeSlot(LocalDateTime lessonDateTime,
+                                                   Integer durationHours, Integer durationMinutes) {
+        this.dateTimeSlot = new DateTimeSlot(lessonDateTime, durationHours, durationMinutes);
+        return this;
+    }
+
+    /**
      * Sets the duration of the {@code DateTimeSlot} of the {@code Lesson} that we are building
      */
     public RecurringLessonBuilder withDuration(Integer hours, Integer minutes) {
