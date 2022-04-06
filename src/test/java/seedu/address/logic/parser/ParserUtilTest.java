@@ -231,8 +231,8 @@ public class ParserUtilTest {
     @Test
     public void parseAppointmentDateTime_returnsLocalDateTime() throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime expectedLocalDateTime = LocalDateTime.parse("22-03-2022 09:00", formatter);
-        assertEquals(ParserUtil.parseAppointmentDateTime("22-03-2022 09:00"), expectedLocalDateTime);
+        LocalDateTime expectedLocalDateTime = LocalDateTime.parse("22-08-2024 09:00", formatter);
+        assertEquals(ParserUtil.parseAppointmentDateTime("22-08-2024 09:00"), expectedLocalDateTime);
         assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("2022-03-22 0830"));
     }
 
