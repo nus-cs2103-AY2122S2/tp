@@ -77,6 +77,45 @@ You may see more than one command word for a command, the second one being the s
 
 ---
 
+### Viewing a student
+
+Displays the details for the student with the specified student ID.
+
+Command word: `student`
+
+Format: `student <STUDENT_ID>`
+
+Examples: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
+
+___
+
+### Viewing a lesson
+Displays the details for the lesson with the specified lesson ID.
+
+Command word: `lesson`
+
+Format: `lesson <LESSON_ID>`
+
+Example: `lesson 3` displays the details of the lesson with `LESSON_ID` of **3**.
+
+---
+
+### Viewing all students
+
+Format: `liststudents` / `ls`
+
+Example: `liststudents` would display a list of all the students that a tutor has.
+
+---
+
+### Viewing all lessons
+
+Format: `listlessons` / `ll`
+
+Example: `listlessons` would display a list of all the lessons that a tutor has.
+
+---
+
 ### Adding a student
 
 Adds a student to TeachWhat!
@@ -244,45 +283,6 @@ Example: `liststudents` followed by `unassign -s 5 -l 11` unassigns the student 
 to the lesson with `<LESSON_ID>` of **11**.
 
 ---
-
-### Viewing all lessons
-
-Format: `listlessons` / `ll`
-
-Example: `listlessons` would display a list of all the lessons that a tutor has.
-
----
-
-### Viewing all students
-
-Format: `liststudents` / `ls`
-
-Example: `liststudents` would display a list of all the students that a tutor has.
-
----
-
-### Viewing a lesson
-Displays the details for the lesson with the specified lesson ID.
-
-Command word: `lesson`
-
-Format: `lesson <LESSON_ID>` 
-
-Example: `lesson 3` displays the details of the lesson with `LESSON_ID` of **3**.
-
----
-
-### Viewing a student
-
-Displays the details for the student with the specified student ID.
-
-Command word: `student`
-
-Format: `student <STUDENT_ID>`
-
-Examples: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
-
-___
 
 ### Finding a Student
 
