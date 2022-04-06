@@ -164,8 +164,11 @@ This section describes some noteworthy details on how certain features are imple
 
 ## `labadd`: Add Lab Command Feature
 The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. Its implementation introduces the following classes:
-- `AddLabCommand` that extends `Command`
-- ``
+- `Lab` that models a Lab
+- `LabList` that stores all the labs of a student
+- `MasterLabList` that extends `LabList` and acts as a control `LabList` for the `TAddressBook` application
+- `AddLabCommand` that extends `Command` and encapsulates information regarding adding labs
+- `AddLabCommandParser` that extends `Parser<AddLabCommand>` and parses user commands into a `AddLabCommand`
 
 
 
