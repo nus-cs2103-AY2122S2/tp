@@ -84,7 +84,7 @@ Adds a student to TAPA.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 <div markdown="block" class="alert alert-info">
-:warning: **Warning!:**
+:warning: <b>Warning!:</b>
 
 * The student's student ID (matriculation number) has to be unique.
 * An error message will be displayed to the user if the specified student ID already exists in TAPA.
@@ -92,7 +92,7 @@ Adds a student to TAPA.
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-**Note**: The name of the added student will be converted to Title Case.
+<b>Note:</b> The name of the added student will be converted to Title Case.
 </div>
 
 **Example**:
@@ -287,14 +287,14 @@ Assigns a task to a particular student.
     * Assigns assignment 1 to students taking module CS2103T.
 
 <div markdown="block" class="alert alert-info">
-:warning: **Warning!:**
+:warning: <b>Warning!:</b>
 
 * As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
 
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-**Note**: The name of the assigned task will be converted to Title Case.
+<b>Note:</b> The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
@@ -344,7 +344,7 @@ An error message will be displayed if:
 Displays a list of previous commands that were executed successfully.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Quick Tip!:**<br>
+:information_source: <b>Quick Tip!:</b><br>
 
 * Aside from the `history` command, you can also use the :arrow_up_small: Up and :arrow_down_small: Down arrow keys on your keyboard to navigate through your previously executed commands.
 
@@ -365,7 +365,7 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 <div markdown="block" class="alert alert-info">
-> :warning: **Warning!:**
+> :warning: <b>Warning!:</b>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
 
