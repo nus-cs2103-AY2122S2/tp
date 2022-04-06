@@ -328,6 +328,7 @@ General Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [of
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
   * Options available are person, module, keyevent or group.
 * All indexes must be positive integers.
+* `INDEX` refers to the index of the person / module / group / key event listed on the viewing page.
 * Existing values will be updated to the input values.    
 * Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
   * `list o/view v/modules` : To display list of modules with respective indexes
@@ -337,49 +338,51 @@ General Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [of
   * `module` page: Able to edit module, keyevent or group fields
   * `group`  page: Able to edit keyevent or group fields
   * `person` page: Able to edit person
-    
-**Commands while on `People` view**
+
+
+### On People view:
 
 At least one optional field must be edited in order for person to be successfully edited.
 
+#### :bulb: Edit person's name, phone, email, office and/or tag.
 Format: `edit INDEX o/person [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [t/TAG]`
-* Edits the `name`, `phone` and/or `email` fields of a person at `INDEX`.
 * The `office` field can only be edited if the person is a professor.
 * Editing a tag overrides all previous tags and user only able to edit tags 1 word at a time. 
   * E.g. `edit 1 o/person t/helpful t/friend` edits the tag of the first person on the list to helpful and friend.
 * Example: `edit 1 o/person n/Alexa` changes the name of the first person on the list to Alexa.
 
+#### :bulb: Add person to a specific group in the module.
 Format: `edit INDEX o/person [m/MODULE] [g/GROUPNAME]`
-* Adds person at `INDEX` to the group named `GROUPNAME` in the stated `MODULE`.
 * Both `[m/MODULE]` and `[g/GROUPNAME]` fields are compulsory for successful edit.
 * Example: `edit 1 o/person m/CS2103 g/T2` adds the first person to the `group` named T2 in the CS2103 `module`.
 
+#### :bulb: Add person to a new module. 
 Format: `edit INDEX o/person [nm/NEWMOD]`
-* Adds person at `INDEX` to the stated `MODULE`.
 * Example: `edit 1 o/person nm/CS2103` adds the first person to the CS2103 `module`.
 
-**Commands while on `Modules` view**
+### On Modules view:
 
 At least one optional field must be edited in order for module to be successfully edited.
 
+#### :bulb: Edit module's name and/or module code.
 Format: `edit INDEX o/module [n/NAME] [m/MODCODE]`
 * Edits the `name` and/or `modcode` fields of a module at `INDEX`.
 * Example: `edit 1 o/module n/Software Engineering m/CS2103` changes the name and module code of the first module on the list to Software Engineering and CS2103 respectively.
 
+#### :bulb: Edit group's group name and/or meeting times.
 Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
-* Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
 * `DATETIME` must be in `YYYY-MM-DD HH:mm` format.  
 * Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
 
+#### :bulb: Edit key event of module's type and/or date time.
 Format: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]`
-* Edits  `type` and/or `datetime` of the keyevent at module at `INDEX`.
-* Example: `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45` adds the second key event's type and date time in the first module in the list to exam and 12th December 2022 4:45pm respectively.
+* Example: `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45` adds the second key event's type and date time in the first module in the list to exam and 12th December 2022 4:45pm respectively. 
 
-**Commands while on `Groups` view**
+### On Groups view:
 
 At least one optional field must be edited in order for module to be successfully edited.
 
-Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
+#### :bulb: Edit group's group name and/or meeting times.
 * Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
 * `DATETIME` must be in `YYYY-MM-DD HH:mm` format.
 * Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
