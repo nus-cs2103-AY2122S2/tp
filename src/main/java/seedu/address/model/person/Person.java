@@ -94,8 +94,7 @@ public class Person {
                 || (otherPerson.getTelegram()).equals(getTelegram())
                 || (otherPerson.getMatricCard()).equals(getMatricCard())
                 || (otherPerson.getAddress()).equals(getAddress())
-                || (otherPerson.getEmail()).equals(getEmail())
-        );
+                || (otherPerson.getEmail()).equals(getEmail()));
     }
 
     /**
