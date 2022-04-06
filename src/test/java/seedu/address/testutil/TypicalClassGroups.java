@@ -1,11 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.address.model.classgroup.ClassGroup;
-
 import static seedu.address.testutil.TypicalLessons.LESSON1;
 import static seedu.address.testutil.TypicalLessons.LESSON12;
 import static seedu.address.testutil.TypicalLessons.LESSON13;
@@ -14,6 +8,12 @@ import static seedu.address.testutil.TypicalStudents.CARL;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
 import static seedu.address.testutil.TypicalStudents.ELLE;
 import static seedu.address.testutil.TypicalStudents.FIONA;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.classgroup.ClassGroup;
 
 /**
  * A utility class containing a list of {@code ClassGroup} objects to be used in tests.
