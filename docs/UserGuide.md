@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+
+
 UniBook is a **desktop app for students to manage their university contacts related to their studies in an organised manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
 * Table of Contents
 {:toc}
@@ -186,9 +188,15 @@ A student/professor can have any number of tags and modules (including 0)
 Lists entries in UniBook according to a specified listing criteria. Behaves differently depending
 on currently active view.
 
-**Changing UniBook views**
+### All Views:
 
-This command applies for all `views`.
+#### List everything
+
+Format: `list`
+
+* Lists all the `people`, `module` or `group` entries depending on the current active view.
+
+#### Change View
 
 Format: `list o/view v/VIEWTYPE`
 
@@ -196,76 +204,78 @@ Format: `list o/view v/VIEWTYPE`
 `VIEWTYPE` are `people`/`groups`/`modules`.
 * Example: `list o/view v/modules` switches the `UniBook` to the `modules` view.  
 
-**Commands while in the `People` view**
+**`People` view:**
 
-These commands apply while in the `People` view.
-
-Format: `list`
-
-* Lists all people in the UniBook.
-
+#### List people of a specific type
 Format: `list type/PERSONTYPE`
 
 * Lists all people of a specific type. Available arguments for `PERSONTYPE` are `students`/`professors`.
 * Example: `list type/professors` lists every `Professor` in the `UniBook`.
 
+
+#### List people in a specific module
 Format: `list o/module m/MODULECODE`
 
 * Lists all people in a given `Module`.
 * Example: `list o/module m/CS2103` displays all people who are in the module `CS2103`.
 
+
+#### List people in a specific module of a specific type
 Format: `list o/module m/MODULECODE type/PERSONTYPE`
 
 * Lists all people in a given `Module` who are of a specific type.
 * Example: `list o/module m/cs2103 type/students` lists all `students` who are in the module `CS2103`.
 
+#### List people in a specific group of a specific module
 Format: `list o/group m/MODULECODE g/GROUPNAME`
 
 * Lists all students who are in a given `Group` of a given `Module`.
 * Example: `list o/group m/CS2103 g/W16-1` lists all students in group `W16-1` of module `CS2103`.
 
-**Commands while in the `Modules` view**
+**`Modules` view:**
 
-These commands apply while in the `Modules` view.
-
-Format: `list`
-
-- Lists all modules.
-
+#### List a module with a specific code
 Format: `list m/MODULECODE`
 
 - Lists a module with a given module code.
 - Example: `list m/CS2103` lists the module `CS2103`.
 
+#### List a module with a name containing a keyword
 Format: `list n/KEYWORD`
 
 - Lists modules which have module names containing the given keyword.
 - Example: `list n/Software` will display all modules that contain `Software` in their module name.
 
+#### List a module with a specific type of key event
 Format: `list ke/KEYEVENT`
 
 - Lists modules which has a specific type of key event. Acceptable arguments for `KEYEVENT` are 
   `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
 - Example: `list ke/EXAM` will display all modules that have key event(s) of type `EXAM`.
 
+#### List a module with key event(s) falling on a specific date
 Format: `list dt/YYYY-MM-DD`
 
 - Lists modules which has any type of key event(s) falling on a given date.
 - Example: `list dt/2022-05-04` displays all modules with any key event(s) falling on `May 4th 2022`.
 
+#### List a module with a specific type of key event(s) falling on a specific date
 Format: `list dt/YYYY-MM-DD ke/KEYEVENT`
 
 - Lists all modules which has a specific type of key event falling on a given date. Acceptable arguments for `KEYEVENT` are
   `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
 - Example: `list dt/2022-05-04 ke/QUIZ` displays all modules with key event(s) `Quiz` falling on `May 4th 2022`.
 
+#### List a module with a name matching a keyword with key event(s) on a given date
 Format: `list dt/YYYY-MM-DD n/KEYWORD`
 
 - Lists all modules which have a module name containing a given name and any type of key event(s) 
   falling on a given date.
 - Example: `list dt/2022-05-04 n/Network` displays all modules that have `Network` in their module name and
 have key events falling on `May 4th 2022`.
-  
+
+#### List a module with a name matching a keyword with a specific type of key event(s)
+
 Format: `list n/KEYWORD ke/KEYEVENT`
 - Lists all modules which has a module containing a given name and a specific type of key event.
   Acceptable arguments for `KEYEVENT` are
@@ -273,12 +283,14 @@ Format: `list n/KEYWORD ke/KEYEVENT`
 - Example: `list n/Software ke/ASSIGNMENT_DUE` displays all modules that have `Software` in their module name and
 have key event(s) of type `ASSIGNMENT_DUE`.
   
+#### List a module with a name matching a keyword with a specific type of key event on a given date
 Format: `list n/KEYWORD ke/KEYEVENT dt/YYYY-MM-DD`
 - Lists all modules which has a module containing a given name and a specific type of key event falling
 on a given date. Acceptable arguments for `KEYEVENT` are `EXAM/QUIZ/ASSIGNMENT_DUE/ASSIGNMENT_RELEASE`.
 - Example: `list n/Software ke/ASSIGNMENT_DUE dt/2022-05-04` displays all modules that have `Software` 
   in their module name and have key event(s) of type `ASSIGNMENT_DUE` which fall on `May 4th 2022`.
   
+#### List groups with specific group name (module page)
 Format: `list o/group g/GROUPNAME`
 - If the module list currently has `1` module showing, UniBook switches to `Groups` view automatically and displays
 the specific group with the given group name, from the given module.
@@ -287,21 +299,19 @@ the specific group with the given group name, from the given module.
   When the command `list o/group g/W16-1` is run, if only `CS2103` was visible then the specific `W16-1` in `CS2103` 
   is displayed in the group view. Otherwise all groups with name `W16-1` from all modules are displayed.
   
-**Commands while in the `Groups` view**
+**`Groups` view:**
 
-These commands apply while in the `Groups` view.
-
-Format: `list`
-- Lists all groups.
-
+#### List groups with specific group name (group page)
 Format: `list g/GROUPNAME`
 - Lists all groups with a given group name.
 - Example: `list g/W16-1` lists all groups with the name `W16-1`.
 
+#### List group(s) with specific group name and module code
 Format: `list g/GROUPNAME m/MODULECODE`
 - Lists all groups with a given group name in a specific module.
 - Example: `list g/W16-1 m/CS2103` lists group `W16-1` of `CS2103`.
 
+#### List group(s) with specific meeting date
 Format: `list mt/YYYY-MM-DD`
 - Lists all groups with a meeting times falling on a given date.
 - Example: `list mt/2022-05-04` lists all groups that have meetings on `May 4th 2022`.
@@ -515,16 +525,13 @@ If your changes to the data file makes its format invalid, UniBook will discard 
 
 # Command summary
 
-Action | Format, Examples
+
+Action | Format
 --------|------------------
 **Add** | `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​` <br> e.g., `add o/module n/Software Engineering m/CS2103 ke/1 dt/2022-05-04 13:00` <br>`add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​` <br> e.g., `add o/group n/W16-1 m/CS2103 dt/2022-04-24 13:00` <br>`add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [[m/MODULECODE] [g/GROUPNAME]]…​`  <br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 g/W16-1` <br>`add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  <br>e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com of/123 Clementi Rd S123466 m/cs2103` <br>`add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  <br>e.g., `add o/event m/CS2103 ke/4 dt/2022-04-28 13:00` <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  <br>e.g., `add o/meeting m/CS2103 g/W16-1 dt/2022-04-29 13:00`
 **Clear** | `clear`
-<<<<<<< HEAD
-**Delete** | `delete m/MODULECODE [o/OPTION]` <br> e.g. `delete m/CS2103` <br> e.g. `delete m/CS2103 o/PROF` <br> `delete m/MODULECODE g/GROUPCODE [o/OPTION]` <br> e.g. `delete m/CS2105 g/G04` <br> e.g. `delete m/CS2105 g/04 o/ALL` <br> `delete n/STUDENTNAME` <br> e.g. `delete n/Alan Tan` <br> `delete n/PROFNAME` <br> e.g. `delete n/Ooi Wei Tsang`
 **Edit** |  Editing person: `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG] `<br> e.g. `edit 1 o/person p/91234567 e/prof@email.com of/COM1 nm/CS2103 ` <br><br> Editing Module: `edit INDEX o/module [n/NAME] [m/MODCODE]` e.g. `edit 1 o/module m/CS2103 n/Software Engineering` <br><br> Editing Groups: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]` e.g. `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` <br><br> Editing Key Events: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]` e.g. `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45`
-=======
-**Delete** | Any Page: <br> `delete [INDEX]` <br><br> Person Page: <br> `delete [INDEX] p/ e/ t/[TAG] of/` <br> eg. `delete 1 p/ e/` <br> eg. `delete 2 t/friend` <br><br> Module Page: <br>`delete [INDEX] stu/[INDEX]` <br> `delete [INDEX] prof/[INDEX]` <br> `delete [INDEX] g/[GROUPNAME]` <br> `delete [INDEX] ke/[INDEX]` <br><br> Group Page: <br> `delete [INDEX] mt/[INDEX]` <br> `delete o/module m/[MODULECODE]` <br> eg. `delete o/module m/CS2103` <br> `delete o/group m/[MODULECODE] g/[GROUPNAME]` <br> eg. `delete o/group m/CS2103 g/Team Project`
-**Edit** | `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [nm/NEWMODULE] [g/GROUP] [mt/INDEX DATETIME] `<br> e.g. `edit o/person 1 p/91234567 e/prof@email.com` <br> e.g. `edit o/module m/CS2103 n/Software Engineering`
+**Delete** | Any Page: <br> `delete [INDEX]` <br><br> People Page: <br> `delete [INDEX] p/ e/ t/[TAG] of/` <br> eg. `delete 1 p/ e/` <br> eg. `delete 2 t/friend` <br><br> Module Page: <br>`delete [INDEX] stu/[INDEX]` <br> `delete [INDEX] prof/[INDEX]` <br> `delete [INDEX] g/[GROUPNAME]` <br> `delete [INDEX] ke/[INDEX]` <br><br> Group Page: <br> `delete [INDEX] mt/[INDEX]` <br> `delete o/module m/[MODULECODE]` <br> eg. `delete o/module m/CS2103` <br> `delete o/group m/[MODULECODE] g/[GROUPNAME]` <br> eg. `delete o/group m/CS2103 g/Team Project`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list CRITERIA` <br> e.g. `list type/professors` <br> e.g. `list m/CS2103` <br> e.g. `list ke/EXAM` <br> e.g. `list dt/2022-05-04` <br> e.g. `list n/Software Engineering` <br> `list o/OPTION [criteria]` <br> e.g. `list o/group g/W16-1` <br> e.g. `list o/module m/CS2103 type/students`
+**List** | **Any View**:<br> `list` [(example)](#list-everything) <br> `list o/view v/VIEWTYPE` [(example)](#change-view)<br><br> **People View:** <br> `list type/PERSONTYPE` [(example)](#list-people-of-a-specific-type) <br> `list o/module m/MODULECODE [type/PERSONTYPE]` [(example)](#list-people-in-a-specific-module) <br> `list o/group m/MODULECODE g/GROUPNAME` [(example)](#list-people-in-a-specific-group-of-a-specific-module) <br><br> **Modules View:** <br> `list m/MODULECODE` [(example)](#list-a-module-with-a-specific-code) <br> `list [n/KEYWORD] [ke/KEYEVENT] [dt/YYYY-MM-DD]` [(example)](#list-a-module-with-a-name-containing-a-keyword)  <br> `list o/group g/GROUPNAME` [(example)](#list-groups-with-specific-group-name-module-page) <br><br> **Groups View:**<br> `list g/GROUPNAME [m/MODULECODE]` [(example)](#list-groups-with-specific-group-name-group-page) <br> `list mt/YYYY-MM-DD` [(example)](#list-groups-with-specific-meeting-date)
 **Help** | `help`
