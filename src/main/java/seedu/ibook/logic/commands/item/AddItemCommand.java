@@ -63,6 +63,7 @@ public class AddItemCommand extends Command {
         model.addItem(product, newItem);
 
         model.saveIBookChanges();
+        model.clearProductFilters();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, product.getName(), toAdd));
     }
