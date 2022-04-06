@@ -420,34 +420,31 @@ Returns a single show from the current displayed list of shows
 
 #### Implementation
 
-After executing the suggest command, it would create a SuggestCommand object is created.
-Then, LogicManager will then execute the given SuggestCommand. Upon execution of the SuggestCommand's execute method,
-it will obtain the currently displayed list of show via the model's `getFilteredShowList()`method.
-from the `model` object.
+After executing the suggest command, it would create a SuggestCommand object.
+Then, LogicManager will execute the given SuggestCommand. Upon execution of the SuggestCommand's execute method,
+it will obtain the currently displayed list of shows via the model's `getFilteredShowList()`method.
 
-In the event that the list is empty, this would cause an error message. Informing users that
-there are no shows currently in the displayed show list. Similarly, if there is only 1 show 
-present in the list, it would inform the user that there is only 1 show in the current displayed 
+In the event that the list is empty, this would cause an error message which informs users that
+there are no shows currently in the displayed show list. Similarly, if there is only one show 
+present in the list, it would inform the user that there is only one show in the current displayed 
 show list.
 
-Else a random integer n, would be generated based on the size of the currently displayed show list.
-The Show object at the n index would be selected as the random show. After which the model is then 
-updated displaying only the random show.
+A random show is then selected from the list of displayed shows and displayed in the show list.
 
 Below is the example usage scenario and the step-by-step flow of the suggest command.
 
-Step 1: The user launches Trackermon is presented with a list of all shows retrieved from
-local storage Trackermon.json.
+Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from
+local storage trackermon.json.
 
 Step 2: The user executes suggest command to get a random show from the currently displayed 
 list of shows.
 
 Step 3: The suggest command will then check to ensure that the current displayed list of shows
-contains 2 or more shows.
+contains two or more shows.
 
-Step 4: In the event that there is 1 or 0 show currently being displayed, Trackermon would return 
-a error message. Else, a random show would then be selected from the currently displayed list 
-of show.
+Step 4: In the event that there is no show or one show currently being displayed, Trackermon would return 
+an error message. Else, a random show would then be selected from the currently displayed list 
+of shows.
 
 Step 5: Model#updateFilteredShowList will then be called and model will be updated with the 
 random show.
@@ -456,9 +453,9 @@ random show.
 
 - **Alternative 1 (current choice):** Returns a random show from the currently displayed list.
   - Pros: - Simple and easy to use.
-  - Cons: - If user wants to get another suggestion, they have to call the list command to get a full list of shows again
+  - Cons: - If the user wants to get another suggestion, they have to call the list command to get a full list of shows again.
 - **Alternative 2 :** Returns a random show from the list of all shows currently in Trackermon.
-  - Pros: - If user wants to get another suggestion, they can just call suggest another time.
+  - Pros: - If the user wants to get another suggestion, they can just call suggest another time.
   - Cons: - Users are unable to get a suggestion from a filtered list of show.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
@@ -812,7 +809,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list shows.
 2. Trackermon shows a list of shows.
-3. User request a Suggestion from Trackermon.
+3. User requests a suggestion from Trackermon.
 4. Trackermon returns a random show.
 
    Use case ends.
@@ -821,13 +818,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The displayed list is empty.
 
-  * 2a1. Trackermon shows an error message to user, indicating that there are no shows in the currently displayed list.
+  * 2a1. Trackermon shows an error message to the user, indicating that there are no shows in the currently displayed list.
 
     Use case ends.
 
-* 3a. The displayed list contains only 1 show.
+* 3a. The displayed list contains only one show.
 
-  * 3a1. Trackermon shows an error message to user, indicating that there is only 1 show in the currently displayed list.
+  * 3a1. Trackermon shows an error message to the user, indicating that there is only one show in the currently displayed list.
     
     Use case ends.
 
@@ -1094,15 +1091,12 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: None.
 2. Launch the app.
 3. Command: `suggest`
-  1. Test case:
-    1. Condition: Displayed list of show is empty.
-    2. Expected: Trackermon returns an error message informing user that displayed list of show is empty.
-  2. Test case:
-    1. Condition: Displayed list of show only contains 1 show.
-    2. Expected: Trackermon returns an error message informing user that there is only 1 show in the displayed list of show.
-  3. Test case:
-    1. Condition: Displayed list of show with 2 or more show.
-    2. Expected: Trackermon returns a random show from the displayed list of show.
+  1. Test case: Displayed list of shows is empty.
+    2. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.
+  2. Test case: Displayed list of shows only contains one show.
+    2. Expected: Trackermon returns an error message informing user that there is only one show in the displayed list of shows.
+  3. Test case: Displayed list of shows with two or more show.
+    2. Expected: Trackermon returns a random show from the displayed list of shows.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
