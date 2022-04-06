@@ -65,7 +65,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      * @return An expiryDate exactly {@code days} day from now.
      */
     public static ExpiryDate getDateFromNow(int days) {
-        checkArgument(days > 0, DAYS_CONSTRAINTS);
+        checkArgument(days >= 0, DAYS_CONSTRAINTS);
         LocalDate dateNow = LocalDate.now();
         return new ExpiryDate(dateNow.plusDays(days).toString());
     }
