@@ -504,20 +504,43 @@ The flow of saving and loading the data storage is updated to accommodate the ad
 
 #### Enhancements
 
-The purpose of the batch update enhancement is update all students by `ClassCode` when the `Status` of a student in that `ClassCode` changes from `Negative` -> `Positive` and vice-versa.
+The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
 
-The batch update enhancement is facilitated by using `execute()` command in the `EditCommand` class.
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, and `DeleteCommand` class.
 
 Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
 
 How the batch update works:
 
-* When `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
-  * If true, a filtered `List` of students with the same `ClassCode`, students who are not `Positive`, not the current student being edited would be created.
-  * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
-* Conversely, when a student's `Status` changes from `Positive` -> `Negative`, `execute()` will check the current student being edited that there are no `Positive` statuses in `ClassCode`.
-  * If true, all students `Status` in the filtered `List`will be switched to `Negative`.
-  
+* **EditCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
+    * If true, a filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being edited would be created.
+    * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+  * Conversely, `batchUpdatePositiveToNegative()` under `execute()` in `EditCommand` checks if a student's `Status` changes from `Positive` -> `Negative`.
+    * If true, a filtered `List` of students with the same `ClassCode` or `Activity` who are not the current student edited would be created.
+    * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+      * If the `List` is empty, edit A's status to `Negative`
+      * Else, do nothing.
+
+* **AddCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `AddCommand` checks for the `Status` of the student added,
+    * If the student to be added is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being added would be created.
+      * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+    * If the student to be added is `Negative` or `Close-Contact`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being added would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, edit the added student's status to `Close-Contact`.
+    
+* **DeleteCommand**:
+  * When `batchUpdateDeletedPerson()` under `execute()` in DeleteCommand checks for the `Status` of the student deleted,
+    * If the student to be deleted is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being deleted would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, do nothing.
+
 ### \[Proposed Enhancement\] Implementing CSV compatibility
 The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
 from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes

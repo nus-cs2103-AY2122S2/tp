@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
 
 **Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
@@ -26,6 +27,8 @@ A glossary is included at the end to clarify any technical or vague terms used.
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-a-student-delete): `delete`
+  - [Viewing help window](#viewing-the-help-window-help): `help`
+  - [Clearing the data](#clearing-the-data-clear): `clear`
   - [Exit the application](#exit-the-application-exit): `exit`
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
@@ -261,6 +264,10 @@ Deletes the specified person from the application.
 
 </div>
 
+|![delete command](images/user-guide/delete.png)|
+|:--:|
+|*Figure 9 - `delete` Command*|
+
 ### Automation of `Status`
 `Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
 - UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
@@ -273,15 +280,22 @@ Deletes the specified person from the application.
 </div>
 
 #### Limitations of automation
-UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
+- UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
 `Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
 changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
 in the *next iteration (v1.5)*.
+- If student A recovers from COVID-19 (`Status` is changed from `Positive` to `Negative`), A's status will be `Negative` even though there are still `Positive` cases
+related to A. However, if a student related to A by `ClassCode` or `Activity` becomes COVID-19 positive after A recovers, A's status will be listed as `Close-Contact`
 
+## Viewing the help window: `help`
+Displays a list of commands to use and a link to our user guide. A `Copy URL` button is provided to copy the link.
+- Format: `help`
+  - Any user input after `help` is ignored
+    - `help 12345 john` is the same as `help`
 
-|![delete command](images/user-guide/delete.png)|
+|![help command](images/user-guide/help.png)|
 |:--:|
-|*Figure 9 - `delete` Command*|
+|*Figure 10 - `help` Command*|
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
