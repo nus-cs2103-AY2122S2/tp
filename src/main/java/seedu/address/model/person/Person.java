@@ -89,7 +89,13 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getName().toString()).equalsIgnoreCase(getName().toString())
+                && ((otherPerson.getPhone()).equals(getPhone())
+                || (otherPerson.getTelegram()).equals(getTelegram())
+                || (otherPerson.getMatricCard()).equals(getMatricCard())
+                || (otherPerson.getAddress()).equals(getAddress())
+                || (otherPerson.getEmail()).equals(getEmail())
+        );
     }
 
     /**

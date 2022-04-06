@@ -48,7 +48,8 @@ public class Telegram {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Telegram // instanceof handles nulls
-                && id.equals(((Telegram) other).id)); // state check
+                && id.equals(((Telegram) other).id)) // state check
+                && !id.equals("");
     }
 
     @Override
