@@ -295,7 +295,15 @@ Given below is an example usage scenario and how the find by status mechanism be
 Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
 Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
 Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
-Step 4. The filtered list of perons is displayed to the user.
+Step 4. The filtered list of persons is displayed to the user.
+
+The following sequence diagram shows how the `findstatus` operation works:
+
+![UndoSequenceDiagram](images/FindStatusSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStatusCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 #### Design considerations:
 
@@ -344,6 +352,14 @@ Step 1. The user launches the application. The full list of `Person`s will be sh
 Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
 Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
 Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findclasscode` operation works:
+
+![UndoSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindClassCodeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 #### Design considerations:
 
@@ -412,6 +428,14 @@ Step 1. The user launches the application. The full list of `Person`s will be sh
 Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
 Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
 Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findactivity` operation works:
+
+![UndoSequenceDiagram](images/FindActivitySequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindActivityCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 #### Design considerations:
 
