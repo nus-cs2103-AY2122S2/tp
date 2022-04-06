@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ibook.logic.parser.exceptions.ParseException;
 import seedu.ibook.model.item.ExpiryDate;
+import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
@@ -21,10 +22,12 @@ public class ParserUtilTest {
     private static final String VALID_EXPIRY_DATE = "2022-05-05";
     private static final String VALID_DESCRIPTION = "import from South Africa";
     private static final String VALID_PRICE = "4.95";
+    private static final String VALID_QUANTITY = "100";
 
     private static final String INVALID_NAME = " ";
     private static final String INVALID_EXPIRY_DATE = "2020-99-10";
     private static final String INVALID_PRICE = "-1.2";
+    private static final String INVALID_QUANTITY = "1!!";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -51,6 +54,11 @@ public class ParserUtilTest {
     @Test
     public void parseName_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
+    }
+
+    @Test
+    public void parseName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
     }
 
     @Test
@@ -161,5 +169,28 @@ public class ParserUtilTest {
         String priceWithWhitespace = WHITESPACE + VALID_PRICE + WHITESPACE;
         Price expectedPrice = new Price(VALID_PRICE);
         assertEquals(expectedPrice, ParserUtil.parsePrice(priceWithWhitespace));
+    }
+
+    @Test
+    public void parseQuantity_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity((String) null));
+    }
+
+    @Test
+    public void parseQuantity_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseQuantity(INVALID_QUANTITY));
+    }
+
+    @Test
+    public void parseQuantity_validValueWithoutWhitespace_returnsExpiryDate() throws Exception {
+        Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(VALID_QUANTITY));
+    }
+
+    @Test
+    public void parseQuantity_validValueWithWhitespace_returnsTrimmedExpiryDate() throws Exception {
+        String quantityWithWhitespace = WHITESPACE + VALID_QUANTITY + WHITESPACE;
+        Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(quantityWithWhitespace));
     }
 }

@@ -235,14 +235,14 @@ A pop-up window will appear, requiring you to confirm the deletion.
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: You can delete all items that match one or more (tag, value) pairs.
+:bulb: You can delete all products that match one or more (tag, value) pairs.
 
-Format: `delete [TAG:VALUE ...]`
+Format: `delete-all [TAG:VALUE ...]`
 
 * Deletes all products that match the (tag, value) pair.
 * Must include at least one (tag, value) pair.
 
-Example: `delete n:Bread`
+Example: `delete-all n:Bread`
 
 </div>
 
@@ -299,6 +299,9 @@ Format: `out-of-stock`
 
 Click on the menu bar `Actions` > `Find out of stock items`
 
+:information_source: Filters cannot be stacked with subsequent commands. 
+Thus, expired and out of stock filters cannot be stacked with other filters.
+
 #### 3.1.8 Updating all products : `update-all`
 
 Updates all products in the displayed list.
@@ -319,7 +322,7 @@ Format: `delete-all`
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:**
-If you accidentally used this command, you can use `undo` command to undone `delete-all`
+If you accidentally used this command, you can use `undo` command to undo `delete-all`.
 
 </div>
 
@@ -411,15 +414,27 @@ Format: `clear`
 
 #### 3.3.2 Undoing most recent changes : `undo`
 
-Undoes the most recent changes(actions involving add/update/delete product/item) made to iBook.
+Undoes the most recent changes made to iBook.
 
 Format: `undo`
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can only undo commands that made changes to the data in iBook (i.e., commands involving add/update/delete product/item).
+
+</div>
 
 #### 3.3.3 Redoing most recent undone changes : `redo`
 
 Redoes the most recent undone changes made to iBook.
 
 Format: `redo`
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can redo changes that have been undone accidentally by the `undo` command.
+
+</div>
 
 #### 3.3.2 Exiting the program : `exit`
 
@@ -452,11 +467,13 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ## 6. Glossary
 
-| Term               | Meanings                                                         |
-|--------------------|------------------------------------------------------------------|
-| **Main stream OS** | `Windows, Linux, Unix, MacOS`                                    |
-| **Products**       | `Goods that are unique in name, price, category and description` |
-| **Items**          | `Copies of products that have different expiry dates`            |
+| Term                              | Meanings                                                                             |
+|-----------------------------------|--------------------------------------------------------------------------------------|
+| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                        |
+| **Products**                      | `Goods that are unique in name, price, category and description`                     |
+| **Items**                         | `Copies of products that have different expiry dates`                                |
+| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`       |
+| **Graphical user interface(GUI)** | `An interface where users interact with graphical icons to interact with the program` |
 
 --------------------------------------------------------------------------------------------------------------------
 

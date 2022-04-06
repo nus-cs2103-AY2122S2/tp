@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Product's discount rate in the ibook.
+ * Represents a Product's discount rate in the iBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidDiscountRate(String)}
  */
 public class DiscountRate {
