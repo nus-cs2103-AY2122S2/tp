@@ -14,7 +14,7 @@ public class ArchiveAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Archives all entries in the displayed entry list.";
 
-    public static final String MESSAGE_ARCHIVE_ALL_SUCCESS = "Archived all entries.\nListing all archived entries.";
+    public static final String MESSAGE_ARCHIVE_ALL_SUCCESS = "Archived all entries";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

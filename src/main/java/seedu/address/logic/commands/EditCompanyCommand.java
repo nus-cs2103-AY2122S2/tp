@@ -46,8 +46,7 @@ public class EditCompanyCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s.\n"
-        + "Listing all unarchived companies.";
+    public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s";
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the list of companies.";
 
     private final Index index;

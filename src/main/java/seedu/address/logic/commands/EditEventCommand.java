@@ -48,8 +48,7 @@ public class EditEventCommand extends Command {
             + PREFIX_DATE + "2022-04-20 "
             + PREFIX_TIME + "12:20";
 
-    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s.\n"
-            + "Listing all unarchived events.";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the list of events.";
 
     private final Index index;

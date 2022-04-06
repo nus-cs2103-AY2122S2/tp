@@ -18,7 +18,7 @@ public class ArchiveCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ARCHIVE_ENTRY_SUCCESS = "Archived Entry: %1$s.\nListing all unarchived entries.";
+    public static final String MESSAGE_ARCHIVE_ENTRY_SUCCESS = "Archived Entry: %1$s";
 
     private final Index targetIndex;
 
