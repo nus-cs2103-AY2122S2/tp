@@ -462,11 +462,13 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ## 6. Glossary
 
-| Term               | Meanings                                                         |
-|--------------------|------------------------------------------------------------------|
-| **Main stream OS** | `Windows, Linux, Unix, MacOS`                                    |
-| **Products**       | `Goods that are unique in name, price, category and description` |
-| **Items**          | `Copies of products that have different expiry dates`            |
+| Term                              | Meanings                                                                             |
+|-----------------------------------|--------------------------------------------------------------------------------------|
+| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                        |
+| **Products**                      | `Goods that are unique in name, price, category and description`                     |
+| **Items**                         | `Copies of products that have different expiry dates`                                |
+| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`       |
+| **Graphical user interface(GUI)** | `An interface where users interact with graphical icons to interact with the program` |
 
 --------------------------------------------------------------------------------------------------------------------
 
