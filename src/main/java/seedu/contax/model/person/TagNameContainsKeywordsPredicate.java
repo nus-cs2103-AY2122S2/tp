@@ -11,11 +11,11 @@ public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
     private String keyword;
 
     public TagNameContainsKeywordsPredicate(String keyword) {
-        this.keyword = keyword;
+        this.keyword = keyword.toLowerCase();
     }
 
     public String getKeyword() {
-        return this.keyword.toLowerCase();
+        return this.keyword;
     }
 
     /**
