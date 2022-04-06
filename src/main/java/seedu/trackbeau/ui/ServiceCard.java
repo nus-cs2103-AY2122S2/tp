@@ -56,10 +56,8 @@ public class ServiceCard extends UiPart<Region> {
         String priceString = formatter.format(service.getPrice().value);
         price.setText("Price: " + priceString);
 
-
-        Duration durationFormatter = Duration.ofMinutes(service.getDuration().value);
-        int hours = durationFormatter.toHoursPart();
-        int minutes = durationFormatter.toMinutesPart();
+        int hours = service.getDuration().value / 60;
+        int minutes = service.getDuration().value % 60;
         String displayDuration = "Duration: ";
         if (hours > 0) {
             displayDuration += (hours + "hr");
