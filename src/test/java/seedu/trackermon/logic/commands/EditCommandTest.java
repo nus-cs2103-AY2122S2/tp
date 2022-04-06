@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackermon.logic.commands.CommandTestUtil.DESC_ALICE_IN_WONDERLAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.DESC_GONE;
+import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_COMMENT_BAD;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_ALICE_IN_WONDERLAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_GONE;
 import static seedu.trackermon.logic.commands.CommandTestUtil.VALID_NAME_WEATHERING_WITH_YOU;
@@ -57,10 +58,10 @@ public class EditCommandTest {
 
         ShowBuilder showInList = new ShowBuilder(lastShow);
         Show editedShow = showInList.withName(VALID_NAME_WEATHERING_WITH_YOU).withStatus(VALID_STATUS_WATCHING)
-                .withTags(VALID_TAG_SERIES).build();
+                .withTags(VALID_TAG_SERIES).withComment(VALID_COMMENT_BAD).build();
 
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder().withName(VALID_NAME_WEATHERING_WITH_YOU)
-                .withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_SERIES).build();
+                .withStatus(VALID_STATUS_WATCHING).withTags(VALID_TAG_SERIES).withComment(VALID_COMMENT_BAD).build();
         EditCommand editCommand = new EditCommand(indexLastShow, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_SHOW_SUCCESS, editedShow);
@@ -95,7 +96,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new ShowList(model.getShowList()), new UserPrefs());
         expectedModel.setShow(model.getFilteredShowList().get(0), editedShow);
-
+        model.updateFilteredShowList(Model.PREDICATE_SHOW_ALL_SHOWS);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -105,7 +106,7 @@ public class EditCommandTest {
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder(firstShow).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_SHOW, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_SHOW);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 
     @Test
@@ -117,7 +118,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SHOW,
                 new EditShowDescriptorBuilder(showInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_SHOW);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 
     @Test
@@ -126,7 +127,7 @@ public class EditCommandTest {
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder().withName(VALID_NAME_GONE).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
     /**
@@ -143,7 +144,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditShowDescriptorBuilder().withName(VALID_NAME_GONE).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
     @Test

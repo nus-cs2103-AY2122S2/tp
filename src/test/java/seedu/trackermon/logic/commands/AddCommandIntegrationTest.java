@@ -7,6 +7,7 @@ import static seedu.trackermon.testutil.TypicalShows.getTypicalShowList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ModelManager;
 import seedu.trackermon.model.UserPrefs;
@@ -39,6 +40,6 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateShow_throwsCommandException() {
         Show showInList = model.getShowList().getShows().get(0);
-        assertCommandFailure(new AddCommand(showInList), model, AddCommand.MESSAGE_DUPLICATE_SHOW);
+        assertCommandFailure(new AddCommand(showInList), model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 }

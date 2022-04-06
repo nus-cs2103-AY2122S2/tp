@@ -1,6 +1,9 @@
 package seedu.trackermon.testutil;
 
+
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -10,6 +13,7 @@ import seedu.trackermon.logic.commands.AddCommand;
 import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.tag.Tag;
+
 
 /**
  * A utility class for show.
@@ -29,7 +33,9 @@ public class ShowUtil {
     public static String getShowDetails(Show show) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + show.getName().fullName + " ");
+        sb.append(PREFIX_COMMENT + show.getComment().comment + " ");
         sb.append(PREFIX_STATUS + show.getStatus().name() + " ");
+        sb.append(PREFIX_RATING + show.getRating().toString() + " ");
         show.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -43,6 +49,9 @@ public class ShowUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.name()).append(" "));
+        descriptor.getComment().ifPresent(status -> sb.append(PREFIX_COMMENT).append(status.comment).append(" "));
+        descriptor.getRating().ifPresent(status -> sb.append(PREFIX_RATING)
+                .append(status.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

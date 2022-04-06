@@ -34,6 +34,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of shows */
     ObservableList<Show> getFilteredShowList();
 
+    /** Returns an unmodifiable view of the sorted list of shows */
+    ObservableList<Show> getSortedShowList();
+
     /**
      * Returns the user prefs' show list file path.
      */

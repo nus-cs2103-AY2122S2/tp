@@ -13,7 +13,7 @@ import seedu.trackermon.logic.parser.exceptions.ParseException;
  */
 public class CommandBox extends UiPart<Region> {
 
-    public static final String ERROR_STYLE_CLASS = "error";
+    public static final String ERROR_STYLE_CLASS = "error-message";
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;

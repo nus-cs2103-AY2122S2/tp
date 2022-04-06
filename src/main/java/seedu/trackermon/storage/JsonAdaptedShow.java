@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.trackermon.commons.exceptions.IllegalValueException;
+import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -25,18 +27,22 @@ class JsonAdaptedShow {
     private final String name;
     private final String status;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-
+    private final String comment;
+    private final String rating;
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedShow(@JsonProperty("name") String name, @JsonProperty("status") String status,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                           @JsonProperty("comment") String comment, @JsonProperty("rating") String rating) {
         this.name = name;
         this.status = status;
+        this.rating = rating;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.comment = comment;
     }
 
     /**
@@ -45,9 +51,11 @@ class JsonAdaptedShow {
     public JsonAdaptedShow(Show source) {
         name = source.getName().fullName;
         status = source.getStatus().name();
+        rating = source.getRating().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().comment;
     }
 
     /**
@@ -57,6 +65,7 @@ class JsonAdaptedShow {
      */
     public Show toModelType() throws IllegalValueException {
         final List<Tag> showTags = new ArrayList<>();
+
         for (JsonAdaptedTag tag : tagged) {
             showTags.add(tag.toModelType());
         }
@@ -75,10 +84,22 @@ class JsonAdaptedShow {
         if (!Status.isValidStatus(status)) {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
-        final Status modelStatus = Status.valueOf(status.toUpperCase());
+        final Status modelStatus = Status.getStatus(status.toUpperCase());
+
+        final Comment modelComment = new Comment(comment);
+
+        if (rating == null) {
+            throw new IllegalValueException("Rating Failed");
+        }
+
+        if (!Rating.isValidScore(rating)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+
+        final Rating modelRating = new Rating(rating);
 
         final Set<Tag> modelTags = new HashSet<>(showTags);
-        return new Show(modelName, modelStatus, modelTags);
+        return new Show(modelName, modelStatus, modelTags, modelComment, modelRating);
     }
 
 }

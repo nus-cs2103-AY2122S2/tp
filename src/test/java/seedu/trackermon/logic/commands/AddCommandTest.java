@@ -9,12 +9,14 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.trackermon.commons.core.GuiSettings;
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ReadOnlyShowList;
@@ -47,7 +49,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validShow);
         ModelStub modelStub = new ModelStubWithShow(validShow);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_SHOW, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_SHOW, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -104,7 +106,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setShowListFilePath(Path addressBookFilePath) {
+        public void setShowListFilePath(Path showListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +116,20 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setShowList(ReadOnlyShowList newData) {
+        public void setShowList(ReadOnlyShowList showList) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyShowList getShowList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the ShowList size
+         */
+        @Override
+        public int getShowListSize() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +155,21 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredShowList(Predicate<Show> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Show> getSortedShowList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedShowList(Comparator<Show> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveSortedShowList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -189,6 +214,10 @@ public class AddCommandTest {
         public ReadOnlyShowList getShowList() {
             return new ShowList();
         }
-    }
 
+        @Override
+        public int getShowListSize() {
+            return showsAdded.size();
+        }
+    }
 }
