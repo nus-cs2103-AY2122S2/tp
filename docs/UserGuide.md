@@ -168,7 +168,7 @@ Find an existing student in the application by their name
 - Example:
   - `find bernice` will find student _"Bernice Yu"_
 
-> :bulb: **Tip:** find multiple students at the same time by inputting their names in the same command
+> :bulb: **Tip:** find multiple students at the same time by typing their names in the same command
 > - Eg. `find alex bernice` will find students _"Alex Yeoh"_ and _"Bernice Yu"_
 
 |![find command](images/user-guide/find.png)|
@@ -261,8 +261,8 @@ Deletes the specified person from the application.
 
 </div>
 
-## Automation of `Status`
-`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.
+### Automation of `Status`
+`Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
 - UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
 - UDT will also **automatically** label individuals as `Negative` from `Close-contact` if they are not close-contacts to any individuals labelled `Positive` anymore.
 
@@ -272,8 +272,11 @@ Deletes the specified person from the application.
 
 </div>
 
-### Limitations of automation
-UDT may not properly automate `Status` changes of individuals if multiple complex edits are done to change `ClassCode` and `Activity` along with changes to `Status`
+#### Limitations of automation
+UDT may not automatically update students' `Status` if complex edits are executed. e.g. Changing a COVID-19 **Positive** student's `ClassCode` or
+`Activity` will not effectively update their previous **Close-Contact** list. Instead, they would remain **Close-Contact** until someone else in the class
+changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
+in the *next iteration (v1.5)*.
 
 
 |![delete command](images/user-guide/delete.png)|

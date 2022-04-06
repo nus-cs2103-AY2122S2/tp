@@ -34,6 +34,8 @@ public class FindStatusCommandParser implements Parser<FindStatusCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStatusCommand.ERRMSG_STATUS));
         }
 
+        assert statusKeywords.length == 1 : "Keywords for findstatus command should be one";
+
         return new FindStatusCommand(new StatusContainsKeywordsPredicate(Arrays.asList(statusKeywords)));
     }
 

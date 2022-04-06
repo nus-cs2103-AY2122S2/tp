@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Status;
 
@@ -71,6 +72,8 @@ public class AddCommand extends Command {
 
         ObservableList<Person> studentList = model.getAddressBook().getPersonList();
 
+        assert toAdd != null : "A person should not be null";
+
         model.addPerson(toAdd);
 
         try {
@@ -88,6 +91,9 @@ public class AddCommand extends Command {
     private static void batchUpdateNegativeToPositive(Person addedPerson,
                                                       ObservableList<Person> studentList,
                                                       Model model) {
+        assert addedPerson != null : "A person should not be null";
+        assert studentList != null : "The student list should not be null";
+        assert model != null : "A model should not be null";
 
         if (addedPerson.isPositive()) {
 
@@ -100,7 +106,8 @@ public class AddCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeList.size(); i++) {
                 Person currentPerson = filteredByClassCodeList.get(i);
-                EditCommand.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
+                assert currentPerson != null : "A person should not be null";
+                ModelManager.editPersonStatus(currentPerson, new Status(Status.CLOSE_CONTACT), model);
             }
         } else {
             List<Person> filteredByClassCodeAndActivityList = studentList.stream()
@@ -111,7 +118,7 @@ public class AddCommand extends Command {
 
             for (int i = 0; i < filteredByClassCodeAndActivityList.size(); i++) {
                 Person currentPerson = filteredByClassCodeAndActivityList.get(i);
-
+                assert currentPerson != null : "A person should not be null";
                 List<Person> positiveRelatedToPerson = studentList.stream()
                         .filter(student -> (student.hasSameClassCode(currentPerson)
                                 || student.hasSameActivity(currentPerson))
@@ -120,9 +127,9 @@ public class AddCommand extends Command {
                         .collect(Collectors.toList());
 
                 if (positiveRelatedToPerson.size() == 0) {
-                    EditCommand.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
+                    ModelManager.editPersonStatus(currentPerson, new Status(Status.NEGATIVE), model);
                 } else {
-                    EditCommand.editPersonStatus(addedPerson, new Status(Status.CLOSE_CONTACT), model);
+                    ModelManager.editPersonStatus(addedPerson, new Status(Status.CLOSE_CONTACT), model);
                 }
             }
         }
