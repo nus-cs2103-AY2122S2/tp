@@ -14,7 +14,7 @@ public class BloodType {
 
     public static final String MESSAGE_CONSTRAINTS = "Invalid blood type input. "
             + "We recommend inputting blood type using ABO blood system (eg. AB), "
-            + "but allow any other blood type input values (eg. other blood system). "
+            + "but we allow any other blood type input values (eg. other blood system). "
             + "Blood type parameter can take any values, and it should not be blank.";
 
     /*
