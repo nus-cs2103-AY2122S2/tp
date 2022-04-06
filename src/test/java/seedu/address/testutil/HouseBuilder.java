@@ -42,8 +42,8 @@ public class HouseBuilder {
     /**
      * Sets the {@code Location} of the {@code House}.
      */
-    public HouseBuilder withLocation(Location location) {
-        this.location = location;
+    public HouseBuilder withLocation(String location) {
+        this.location = new Location(location);
         return this;
     }
 
