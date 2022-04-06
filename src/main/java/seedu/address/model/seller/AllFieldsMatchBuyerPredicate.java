@@ -3,7 +3,12 @@ package seedu.address.model.seller;
 import java.util.function.Predicate;
 
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.property.*;
+import seedu.address.model.property.House;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.PriceRange;
+import seedu.address.model.property.PropertyToBuy;
+import seedu.address.model.property.PropertyToSell;
+
 
 /**
  * Tests that a {@code Seller}'s {@code PropertyToSell} matches the demand

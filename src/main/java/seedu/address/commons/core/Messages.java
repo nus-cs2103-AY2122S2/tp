@@ -14,7 +14,7 @@ public class Messages {
     public static final String MESSAGE_BUYERS_LISTED_OVERVIEW = "%1$d buyers found!";
     public static final String MESSAGE_SELLERS_LISTED_OVERVIEW = "%1$d sellers found!";
 
-    public static final String MESSAGE_NO_PROPERTY_ADDED = "You can only match a buyer only after a property has " +
-     "been added!\nUse: add-ptb to add a property first.";
+    public static final String MESSAGE_NO_PROPERTY_ADDED = "You can only match a buyer only after a property has "
+            + "been added!\nUse: add-ptb to add a property first.";
 
 }
