@@ -41,7 +41,8 @@ public class CustomerTest {
         assertTrue(ALICE.isSameItem(editedAlice));
 
         // different phone, all other attributes same -> returns false
-        editedAlice = new CustomerBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new CustomerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .build();
         assertFalse(ALICE.isSameItem(editedAlice));
     }
 

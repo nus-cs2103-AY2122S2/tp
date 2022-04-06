@@ -150,6 +150,11 @@ public class AddCustomerCommandTest {
         }
 
         @Override
+        public boolean hasAnotherCustomerWithClashingIdentity(Customer originalCustomer, Customer editedCustomer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteBooking(Booking target) {
             throw new AssertionError("This method should not be called.");
         }
