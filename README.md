@@ -12,6 +12,7 @@
 * Example usages:
   * Keep track of how and where you met each contact
   * Search for contacts
+  * Plan and view events involving your contacts
 * It is named `NUSocials` because we envision an application that helps NUS students maintain a professional contact list to help them stay socially connected.
 * For the detailed documentation of this project, see the **[NUSocials Product Website](https://ay2122s2-cs2103t-w11-1.github.io/tp/)**.
 
