@@ -3,6 +3,7 @@ package unibook.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -112,6 +113,34 @@ public class ModelManager implements Model {
         return uniBook.phoneNumberBeingUsed(person.getPhone()) || uniBook.emailBeingUsed(person.getEmail());
     }
 
+    /**
+     * Returns index of a person with the same phone or email as {@code person} exists in the UniBook.
+     */
+    @Override
+    public ArrayList<Integer> getIdxPersonWithDuplicatePhoneOrEmail(Person person) {
+        requireNonNull(person);
+        ArrayList<Integer> list = new ArrayList<>();
+        int idxPhone = uniBook.getIdxOfPhoneNumberBeingUsed(person.getPhone());
+        int idxEmail = uniBook.getIdxOfEmailBeingUsed(person.getEmail());
+        if (idxPhone == -1 && idxEmail != -1) {
+            list.add(-1);
+            list.add(idxEmail);
+            return list;
+        } else if (idxEmail == -1 && idxPhone != -1) {
+            list.add(idxPhone);
+            list.add(-1);
+            return list;
+        } else if (idxEmail != -1 && idxPhone != -1) {
+            list.add(idxPhone);
+            list.add(idxEmail);
+            return list;
+        } else {
+            list.add(-1);
+            list.add(-1);
+            return list;
+        }
+    }
+
     @Override
     public void deletePerson(Person target) {
         uniBook.removePerson(target);
@@ -123,10 +152,10 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    public void setPerson(Person target, Person editedPerson) {
-        CollectionUtil.requireAllNonNull(target, editedPerson);
+    public void setPerson(int idx, Person target, Person editedPerson) {
+        CollectionUtil.requireAllNonNull(idx, target, editedPerson);
 
-        uniBook.setPerson(target, editedPerson);
+        uniBook.setPerson(idx, target, editedPerson);
     }
 
     @Override
