@@ -28,7 +28,11 @@ A glossary is included at the end to clarify any technical or vague terms used.
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-a-student-delete): `delete`
-  - [Undo/Redo](#undo-redo)
+  - [Right-Click Help Menu](#right-click-help-menu)
+    - [Undo/Redo](#undoredo)
+    - [Cut/Copy/Paste](#cutcopypaste)
+    - [Delete](#delete)
+    - [Select All](#select-all)
   - [Exit the application](#exit-the-application-exit): `exit`
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
@@ -285,8 +289,17 @@ UDT may not automatically update students' `Status` if complex edits are execute
 changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
 in the *next iteration (v1.5)*.
 
-## Undo/Redo: 
-Undo or redo what you have been typing in the command box **BEFORE** it has been executed/entered, allowing you to make any edits as required.
+##Right-Click Help Menu
+
+|![RightClick](images/user-guide/rightclick.png)|
+|:--:|
+|*Figure 10 - Right-Click Help Menu*|
+
+### Undo/Redo: 
+Undo or redo what you have been typing in the command box **BEFORE** it has been executed/entered, 
+allowing you to make any edits as required.
+Refer to **_Figure 10_** above to see the menu.
+
 Using a Mouse:
 - Right-click on the command box to open the menu containing the `undo` and `redo` buttons
 - Click on the respective buttons to undo/redo what you have typed
@@ -300,6 +313,39 @@ Using a Keyboard:
 
 > :information_source: **Note:**  Undo and redo can only be used on commands that have yet to be executed/entered (before hitting enter).
 
+### Cut/Copy/Paste:
+`Cut` any text that has been highlighted.
+
+`Copy` any text that has been highlighted.
+
+`Paste` any text that is currently stored in your clipboard.
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Keyboard Shortcuts
+> - `ctrl+x` to cut
+> - `ctrl+c` to copy
+> - `ctrl+v` to paste
+
+</div>
+
+### Delete:
+Removes any text that has been highlighted.
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Use the `Backspace` key or `del` key on your keyboard to perform the same command
+
+</div>
+
+### Select All:
+Highlights all the text that is currently in the Command Box
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Use this to highlight everything so that you can follow up with a `cut`, `copy` or `delete` command.
+
+</div>
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
