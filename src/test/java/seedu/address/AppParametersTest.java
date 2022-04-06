@@ -39,13 +39,13 @@ public class AppParametersTest {
     }
 
     @Test
-    public void equals_SameObject_success() {
+    public void equals_sameObject_success() {
         AppParameters ap = AppParameters.parse(parametersStub);
         assertEquals(ap, ap);
     }
 
     @Test
-    public void equals_DifferentClass_success() {
+    public void equals_differentClass_success() {
         AppParameters ap = AppParameters.parse(parametersStub);
         assertFalse(ap.equals("x"));
     }
