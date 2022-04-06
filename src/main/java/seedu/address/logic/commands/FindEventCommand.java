@@ -58,7 +58,7 @@ public class FindEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredEventList(predicate);
+        model.showEventList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()),
                 false, false, false, false, true);
