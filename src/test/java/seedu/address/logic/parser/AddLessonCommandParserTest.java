@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_HOURS_NEGATIVE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_HOURS_ZERO_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_MINUTES_EXCEEDS_59_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_MINUTES_NEGATIVE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DURATION_MINUTES_ZERO_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DATE_DAY_FIELD_OUT_OF_RANGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DATE_FORMAT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DATE_YEAR_FIELD_TOO_LARGE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_START_TIME_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_ADDRESS_DESC_AMK;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DATE_DESC;
@@ -20,7 +20,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.INVALID_DATE_FORMAT_MESSAGE;
-import static seedu.address.logic.parser.ParserUtil.INVALID_DURATION_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.INVALID_START_TIME_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.MINUTES_GREATER_THAN_59_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.NEGATIVE_HOURS_MESSAGE;
@@ -61,21 +60,30 @@ public class AddLessonCommandParserTest {
     }
 
     @Test
+    public void addLessonCommand_withOutOfRangeDayField_throwsParseException() {
+        assertParseFailure(parser, LESSON_NAME_DESC_TRIAL_LESSON + LESSON_SUBJECT_DESC_BIOLOGY
+                        + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + INVALID_LESSON_DATE_DAY_FIELD_OUT_OF_RANGE
+                        + LESSON_START_TIME_DESC_6PM
+                        + LESSON_DURATION_HOURS_DESC_2HOUR + LESSON_DURATION_MINUTES_DESC_30MIN,
+                INVALID_DATE_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void addLessonCommand_withExcessiveYearField_throwsParseException() {
+        assertParseFailure(parser, LESSON_NAME_DESC_TRIAL_LESSON + LESSON_SUBJECT_DESC_BIOLOGY
+                        + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + INVALID_LESSON_DATE_YEAR_FIELD_TOO_LARGE
+                        + LESSON_START_TIME_DESC_6PM
+                        + LESSON_DURATION_HOURS_DESC_2HOUR + LESSON_DURATION_MINUTES_DESC_30MIN,
+                INVALID_DATE_FORMAT_MESSAGE);
+    }
+
+    @Test
     public void addLessonCommand_withInvalidStartTimeFormat_throwsParseException() {
         assertParseFailure(parser, LESSON_NAME_DESC_TRIAL_LESSON + LESSON_SUBJECT_DESC_BIOLOGY
                 + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC
                 + INVALID_LESSON_START_TIME_FORMAT_DESC
                 + LESSON_DURATION_HOURS_DESC_2HOUR + LESSON_DURATION_MINUTES_DESC_30MIN,
                 INVALID_START_TIME_MESSAGE);
-    }
-
-    @Test
-    public void addLessonCommand_withZeroHoursAndZeroMinutes_throwsParseException() {
-        assertParseFailure(parser, LESSON_NAME_DESC_TRIAL_LESSON + LESSON_SUBJECT_DESC_BIOLOGY
-                + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + LESSON_START_TIME_DESC_6PM
-                + INVALID_DURATION_HOURS_ZERO_DESC
-                + INVALID_DURATION_MINUTES_ZERO_DESC,
-                INVALID_DURATION_MESSAGE);
     }
 
     @Test

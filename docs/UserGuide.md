@@ -306,6 +306,9 @@ Format: `findlessons <FIND_CRITERIA>`
 
 Examples: `findlesson biology` searches the lesson list for lessons with names or subjects that contain the keyword "biology".
 
+Examples: `findlessons biology` searches the lesson list for lessons which names
+ include "biology"
+
 ---
 
 ### Clearing all entries

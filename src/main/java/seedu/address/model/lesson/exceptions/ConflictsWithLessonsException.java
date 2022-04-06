@@ -41,6 +41,10 @@ public class ConflictsWithLessonsException extends RuntimeException {
         return message.toString();
     }
 
+    public List<Lesson> getConflictingLessons() {
+        return List.copyOf(this.conflictingLessons);
+    }
+
     private String getPadding() {
         return System.getProperty("line.separator") + System.getProperty("line.separator");
     }
