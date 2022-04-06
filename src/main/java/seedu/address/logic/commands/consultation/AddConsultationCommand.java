@@ -24,10 +24,9 @@ public class AddConsultationCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + PREFIX_TYPE + "consultation "
-            + ": Adds a consultation of patient in Medbook. \n"
+            + ": Adds a consultation of a patient in MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "consultation "
-            + PREFIX_NRIC + "OWNER_NRIC "
+            + PREFIX_NRIC + "NRIC "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
             + PREFIX_DIAGNOSIS + "DIAGNOSIS "
@@ -42,30 +41,30 @@ public class AddConsultationCommand extends Command {
             + PREFIX_FEE + "54.00 ";
 
     public static final String MESSAGE_SUCCESS = "New consultation added:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already "
-                                                                + "exists in patient consultation list";
-    public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in Medbook";
+    public static final String MESSAGE_DUPLICATE_CONSULTATION =
+            "This consultation already exists in this patient's consultation list";
+    public static final String MESSAGE_MISSING_PATIENT = "This patient does not exists in MedBook";
 
     // Identifier
-    private final Nric ownerNric;
+    private final Nric patientNric;
 
     private final Consultation toAdd;
 
     /**
      * Creates an AddConsultationCommand to add the specified {@code Consultation}
      */
-    public AddConsultationCommand(Nric ownerNric, Consultation consultation) {
-        requireNonNull(ownerNric);
+    public AddConsultationCommand(Nric patientNric, Consultation consultation) {
+        requireNonNull(patientNric);
         requireNonNull(consultation);
         toAdd = consultation;
-        this.ownerNric = ownerNric;
+        this.patientNric = patientNric;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasNric(ownerNric)) {
+        if (!model.hasNric(patientNric)) {
             throw new CommandException(MESSAGE_MISSING_PATIENT);
         }
 
@@ -74,7 +73,7 @@ public class AddConsultationCommand extends Command {
         }
 
         model.addConsultation(toAdd);
-        model.updateFilteredConsultationList(new ConsultationWithPredicates(ownerNric));
+        model.updateFilteredConsultationList(new ConsultationWithPredicates(patientNric));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), COMMAND_TYPE);
     }

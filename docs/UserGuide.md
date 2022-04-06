@@ -330,7 +330,7 @@ This is with the exception of the NRIC field, which cannot be modified after cre
 Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
 
 Examples:
-* `view t/consultation` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
+* `view t/consultation i/S1234567L` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
 
 
 
@@ -360,7 +360,7 @@ This is with the exception of the NRIC field, which cannot be modified after cre
 Format:  `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`
 
 Examples:
-* `view t/prescription` followed by `edit 1 s/1 tablet everyday` updates instruction of first prescription entry displayed on the screen.
+* `view t/prescription i/S1234567L` followed by `edit 1 s/1 tablet everyday` updates instruction of first prescription entry displayed on the screen.
 
 ### Adding Test Result: `add t/test`
 

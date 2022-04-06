@@ -38,7 +38,7 @@ public class EditConsultationCommand extends Command {
             + ": Edits the details of the consultation identified "
             + "by the index number used in the displayed consultation list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONSULTATION INSTEAD.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONSULTATION WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
@@ -53,8 +53,8 @@ public class EditConsultationCommand extends Command {
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONSULTATION = "This consultation already exists in MedBook.";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
-            + "Create a new consultation instead.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
+            "NRIC field cannot be modified. Create a new consultation with the correct NRIC instead.";
 
     private final Index targetIndex;
     private final EditConsultationDescriptor editConsultationDescriptor;
