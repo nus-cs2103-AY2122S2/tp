@@ -40,9 +40,11 @@ public class RoleNameTest {
         assertFalse(RoleName.isValidName("teacher (test.)")); // alphanumeric, brackets and dot
         assertFalse(RoleName.isValidName("staff (.)  ( admin")); //alphanumeric, wrong order brackets and dot
         assertFalse(RoleName.isValidName("(Backend)")); // brackets containing alphanumeric only
+        assertFalse(RoleName.isValidName("Database Management and Server Integration")); // long names exceed max
 
         // valid name
-        assertTrue(RoleName.isValidName("Database Management and Server Integration")); // long names
+        assertTrue(RoleName.isValidName("Database and Server Management")); // long names within max
+        assertTrue(RoleName.isValidName("D(abase and Server Management)")); // long names within max with brackets
         assertTrue(RoleName.isValidName("12345")); // numbers only
         assertTrue(RoleName.isValidName("data analyst 2")); // alphanumeric characters
         assertTrue(RoleName.isValidName("Frontend Developer")); // with capital letters

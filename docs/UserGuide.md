@@ -230,8 +230,8 @@ The following points explain the format of a command.
 
 ### Company Restrictions <a id="c-company-restrictions"></a>
 
-* The `COMPANY_NAME` should only contain alphanumeric characters and spaces, and it should not be blank.
-* The `PHONE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+* The `COMPANY_NAME` should only contain alphanumeric characters and spaces, but not blank, and have a character limit of at most 30.
+* The `PHONE_NUMBER` should only contain numbers, and be at least 3 digits long and at most 14 digits.
 * The `EMAIL` should be of the format local-part@domain and adhere to the following constraints:
     * The local-part should only contain alphanumeric characters and these special characters, excluding the
       parentheses, (+_.-).
@@ -254,7 +254,7 @@ The following points explain the format of a command.
 
 ### Role Restrictions <a id="c-role-restrictions"></a>
 
-* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
+* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets, but not blank, and have a character limit of at most 30.
 * The `REMINDER_DATE` should not be in the past and must be a valid date 
 in the following format: dd-MM-yyyy HH:mm.
 * The `STATUS` is case-sensitive and can only accept the following inputs:
