@@ -53,8 +53,8 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
         assertFalse(Email.isValidEmail("peterpeterpeterpeterpeterpeterpeterpeterpeterpeterpet"
                 + "erpeterpeterpeterpeterpeterpeterpeter123@example")); // 101 chars
-        assertFalse(Email.isValidEmail("peterpeterpeterpeterpeterpeterpeterpeterpeterpeterpetpeterpeterpeterpet" +
-                "erpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeter123@example")); // 154 chars
+        assertFalse(Email.isValidEmail("peterpeterpeterpeterpeterpeterpeterpeterpeterpeterpetpeterpeterpeterpet"
+                + "erpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeterpeter123@example")); // 154 chars
 
         // valid email
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
