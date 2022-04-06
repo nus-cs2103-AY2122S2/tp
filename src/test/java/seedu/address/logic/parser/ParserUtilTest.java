@@ -243,7 +243,10 @@ public class ParserUtilTest {
         // missing date and time
         assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime(" "));
         // leap year
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("30-02-2024 0900"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("30-02-2024 09:00"));
+        // previous dates
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("04-04-2022 09:00"));
+
     }
 
     @Test
