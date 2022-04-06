@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Phone;
@@ -247,7 +247,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvApplicant() throws FileNotFoundException, ParseException {
+    public void exportCsvApplicant() throws FileNotFoundException, ExportCsvOpenException {
         exportCsv(APPLICANT_CSV_FILE, APPLICANT_CSV_HEADER, filteredApplicants.stream()
                 .map(Applicant::convertToCsv));
     }
@@ -294,7 +294,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvInterview() throws FileNotFoundException, ParseException {
+    public void exportCsvInterview() throws FileNotFoundException, ExportCsvOpenException {
         exportCsv(INTERVIEW_CSV_FILE, INTERVIEW_CSV_HEADER, filteredInterviews.stream()
                 .map(Interview::convertToCsv));
     }
@@ -331,7 +331,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvPosition() throws FileNotFoundException, ParseException {
+    public void exportCsvPosition() throws FileNotFoundException, ExportCsvOpenException {
         exportCsv(POSITION_CSV_FILE, POSITION_CSV_HEADER, filteredPositions.stream()
                 .map(Position::convertToCsv));
     }
@@ -356,7 +356,8 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(other.filteredApplicants);
     }
 
-    private void exportCsv(String csvFile, String csvHeader, Stream<String> stringStream) throws ParseException {
+    private void exportCsv(String csvFile, String csvHeader, Stream<String> stringStream)
+            throws ExportCsvOpenException {
         File csvOutputFile = new File(csvFile);
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
             pw.println(csvHeader);
@@ -364,7 +365,7 @@ public class ModelManager implements Model {
                     .forEach(pw::println);
             assert (csvOutputFile.exists());
         } catch (FileNotFoundException exception) {
-            throw new ParseException(MESSAGE_CLOSE_CSV);
+            throw new ExportCsvOpenException(MESSAGE_CLOSE_CSV);
         }
     }
 }

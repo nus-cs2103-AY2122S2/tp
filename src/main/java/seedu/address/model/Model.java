@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Phone;
@@ -224,9 +224,9 @@ public interface Model {
 
     void updateFilterAndSortPositionList(Predicate<Position> predicate, Comparator<Position> comparator);
 
-    void exportCsvApplicant() throws FileNotFoundException, ParseException;
+    void exportCsvApplicant() throws FileNotFoundException, ExportCsvOpenException;
 
-    void exportCsvInterview() throws FileNotFoundException, ParseException;
+    void exportCsvInterview() throws FileNotFoundException, ExportCsvOpenException;
 
-    void exportCsvPosition() throws FileNotFoundException, ParseException;
+    void exportCsvPosition() throws FileNotFoundException, ExportCsvOpenException;
 }

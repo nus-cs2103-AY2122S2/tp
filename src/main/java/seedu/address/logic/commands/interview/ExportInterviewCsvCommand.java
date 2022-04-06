@@ -3,6 +3,7 @@ package seedu.address.logic.commands.interview;
 import java.io.FileNotFoundException;
 
 import seedu.address.commons.core.DataType;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ExportCsvCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,7 +15,7 @@ public class ExportInterviewCsvCommand extends ExportCsvCommand {
     public static final String MESSAGE_SUCCESS = "Interview CSV is successfully exported at interview.csv";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, FileNotFoundException, ParseException {
+    public CommandResult execute(Model model) throws CommandException, FileNotFoundException, ExportCsvOpenException {
         model.exportCsvInterview();
         return new CommandResult(MESSAGE_SUCCESS, getCommandDataType());
     }
