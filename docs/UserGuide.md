@@ -322,6 +322,9 @@ After `deletep i/Golden Package`:
 
 ![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
 
+Note: If the packages window was open before a package was deleted, you will have to close and reopen the window 
+to view the change.
+
 ------------------------------------------------------------------------------------
 ### Shows all insurance package: `listp`
 Displays all your insurance packages in ClientConnect
