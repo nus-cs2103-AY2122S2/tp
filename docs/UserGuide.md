@@ -194,7 +194,7 @@ Examples:
 
 Function: Display potential sellers by matching the demand of a buyer. Now, you can easily find properties that buyers are interested in!
 
-* Note: You can match a buyer only if a property has been added!
+* Note: You can match a buyer only if his/her property has been added!
 * Want to match using just a certain criterion? Fret not! Below are the different match commands.
 
 ###### Matching all fields of buyers to sellers. `match`
