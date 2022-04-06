@@ -109,9 +109,8 @@ public class Show {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(x -> builder.append("[" + x + "]"));
-        } else {
-            builder.append(";");
         }
+        builder.append(";");
         return builder.toString();
     }
 
