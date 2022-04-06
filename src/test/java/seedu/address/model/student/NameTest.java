@@ -25,16 +25,29 @@ public class NameTest {
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
         // invalid name
-        assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("12345")); // numbers only
+
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+
+    @Test
+    public void boundaryValues() {
+        assertFalse(Name.isValidName("")); // empty string
+
+        assertFalse(Name.isValidName(" 1 ")); // 1 number only
+        assertFalse(Name.isValidName("99999999999999999999999999999999999999999999999999")); // 50 numbers
+        assertFalse(Name.isValidName("999999999999999999999999999999999999999999999999990")); // 51 numbers
+
+        assertTrue(Name.isValidName("9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWX")); // 50 characters
+        assertFalse(Name.isValidName("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY")); // 51 characters
+        assertFalse(Name.isValidName("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZa"
+                + "slkjhdnaosjbfajkshbfasdsas123d")); // 80 characters, max is 50
     }
 }
