@@ -43,7 +43,7 @@ public class Address {
      * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX)  && test.length() <= 100 || test.equals("");
+        return test.matches(VALIDATION_REGEX) && test.length() <= 100 || test.equals("");
     }
 
     @Override
