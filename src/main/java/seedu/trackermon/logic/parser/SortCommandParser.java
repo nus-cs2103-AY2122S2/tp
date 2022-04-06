@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.logic.commands.SortCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 import seedu.trackermon.model.show.NameComparator;
@@ -27,7 +28,6 @@ import seedu.trackermon.model.show.TagComparator;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-
     protected static final String VALUE_ASC = "ASC";
     protected static final String VALUE_DSC = "DSC";
     private static final String VALUE_ORDER_NAME = "NAME";
@@ -38,12 +38,14 @@ public class SortCommandParser implements Parser<SortCommand> {
     private static final int ADD_VALUE = 100;
     private static int startingValue = 0;
     private static HashMap<Comparator<Show>, Integer> order = new HashMap<>();
-    public static final String MESSAGE_INVALID_SO = "Invalid input for so/,"
-            + " please provide the exact number of correctly spelt names in a sequence you want."
-            + "For example: sorting status than tags, " + SortCommand.COMMAND_WORD
-            + " " + PREFIX_TAG + VALUE_ASC + " " + PREFIX_STATUS + VALUE_ASC + " "
-            + PREFIX_SORT_ORDER + VALUE_ORDER_STATUS + " " + VALUE_ORDER_TAG;
 
+    public static final String COMMAND_EXAMPLE = "Example: To sort by rating in ascending order, "
+            + "followed by status in descending order, " + SortCommand.COMMAND_WORD + " "
+            + PREFIX_STATUS + VALUE_DSC.toLowerCase() + " "
+            + PREFIX_RATING + VALUE_ASC.toLowerCase() + " "
+            + PREFIX_SORT_ORDER + VALUE_ORDER_RATING.toLowerCase() + VALUE_ORDER_STATUS.toLowerCase();
+    public static final String MESSAGE_INVALID_SO = "Sort order should be given a sequence "
+            + "parameter made up of prefix names, in the order sort will arrange the shows.\n" + COMMAND_EXAMPLE;
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -197,12 +199,11 @@ public class SortCommandParser implements Parser<SortCommand> {
             for (Map.Entry<Comparator<Show>, Integer> entry : order.entrySet()) {
                 int value = entry.getValue();
                 if ((value < ADD_VALUE) && value != NO_VALUE) {
-                    throw new ParseException(MESSAGE_INVALID_SO);
+                    throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, MESSAGE_INVALID_SO));
                 }
             }
         }
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
