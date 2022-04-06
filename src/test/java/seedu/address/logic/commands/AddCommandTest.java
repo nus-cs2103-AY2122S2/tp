@@ -48,7 +48,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -76,12 +76,20 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing other than getDuplicateField
      */
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Always return duplicated field as phone
+         */
+        @Override
+        public String getDuplicateField(Person person) {
+            return "Phone";
         }
 
         @Override
@@ -131,6 +139,11 @@ public class AddCommandTest {
 
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void safeDeletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 

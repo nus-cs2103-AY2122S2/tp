@@ -93,12 +93,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Removes person from this {@code AddressBook}.
+     * There must be a person with the same user name, email or phone number in the address book.
+     */
+    public void safeRemovePerson(Person person) {
+        persons.safeRemove(person);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
     }
 
     @Override
@@ -116,5 +123,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public String getDuplicateField(Person person) {
+        return persons.getDuplicateField(person);
     }
 }

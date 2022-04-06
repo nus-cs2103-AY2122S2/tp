@@ -70,10 +70,20 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns duplicate field that given {@code person} have as another {@code person} inside the address book.
+     */
+    String getDuplicateField(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Deletes the given person by comparing person::equals
+     */
+    void safeDeletePerson(Person target);
 
     /**
      * Adds the given person.

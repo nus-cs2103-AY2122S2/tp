@@ -106,9 +106,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void safeDeletePerson(Person target) {
+        addressBook.safeRemovePerson(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public String getDuplicateField(Person person) {
+        return addressBook.getDuplicateField(person);
     }
 
     @Override
