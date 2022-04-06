@@ -160,6 +160,7 @@ Format: `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERN
 * The concept of default and reset mode applies with skills as well.
 * When editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `NAME` and `PHONE` will be silently ignored.
 * When at least one of the indices provided are invalid for batch edit, HackNet informs that there was an error in the indices, but still delivers the modification for the indices that are valid.
+* In the unlikely case that same index is present multiple times for `INDEX [INDEX…]`, HackNet will still successfully execute the edit command as long as the index is valid.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
