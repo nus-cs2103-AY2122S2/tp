@@ -41,6 +41,9 @@ public class ReversibleSetItemAction extends ReversibleIBookAction {
     public void performBackwardAction(IBook iBook) {
         requireNonNull(iBook);
 
+        if (updatedItem.isEmpty()) {
+            iBook.addItem(updatedItem.getProduct(), updatedItem);
+        }
         iBook.setItem(product, updatedItem, itemToUpdate);
     }
 

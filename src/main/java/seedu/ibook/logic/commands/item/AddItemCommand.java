@@ -10,7 +10,9 @@ import seedu.ibook.logic.commands.Command;
 import seedu.ibook.logic.commands.CommandResult;
 import seedu.ibook.logic.commands.exceptions.CommandException;
 import seedu.ibook.model.Model;
+import seedu.ibook.model.item.Item;
 import seedu.ibook.model.item.ItemDescriptor;
+import seedu.ibook.model.item.Quantity;
 import seedu.ibook.model.product.Product;
 
 /**
@@ -32,6 +34,10 @@ public class AddItemCommand extends Command {
             + PREFIX_QUANTITY + "10";
 
     public static final String MESSAGE_SUCCESS = "New item added to %1$s:\n%2$s";
+    public static final String MESSAGE_EXCESS_QUANTITY =
+            "Total quantity of an item cannot be larger than " + Quantity.MAX_QUANTITY;
+    public static final String MESSAGE_MINIMUM_QUANTITY =
+            "Total quantity of an item must be larger than 0";
 
     private final Index productIndex;
     private final ItemDescriptor toAdd;
@@ -49,9 +55,18 @@ public class AddItemCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Product product = model.getProduct(productIndex);
+        Item newItem = toAdd.toItem(product);
 
         model.prepareIBookForChanges();
-        model.addItem(product, toAdd.toItem(product));
+
+        if (newItem.isEmpty()) {
+            throw new CommandException(MESSAGE_MINIMUM_QUANTITY);
+        }
+        if (!product.canAddItem(newItem)) {
+            throw new CommandException(MESSAGE_EXCESS_QUANTITY);
+        }
+        model.addItem(product, newItem);
+
         model.saveIBookChanges();
         model.clearProductFilters();
 

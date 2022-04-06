@@ -9,9 +9,9 @@ for convenience use.
 
 ## Target User
 
-IBook is specially designed for small scale groceries store keeper, who are having issues with product organization and keeping track on expiring items.
+IBook is specially designed for small scale groceries storekeepers, who are having issues with product organization and keeping track on expiring items.
 
-We aim to help store keepers to simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
+We aim to help storekeepers simplify the process of managing inventory and reduce their losses by minimizing groceries wastage due to expiry. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,7 +171,9 @@ Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
-* Only a single product would be added at a time
+* Only a single product would be added at a time.
+* The new product added must not be of the same `NAME` and `CATEGORY`.
+* The `NAME` and the `PRICE` fields cannot be empty.
 
 Examples:
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
@@ -299,6 +301,9 @@ Format: `out-of-stock`
 *Alternatively*, 
 
 Click on the menu bar `Actions` > `Find out of stock items`
+
+:information_source: Filters cannot be stacked with subsequent commands. 
+Thus, expired and out of stock filters cannot be stacked with other filters.
 
 #### 3.1.8 Updating all products : `update-all`
 
@@ -470,11 +475,13 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ## 6. Glossary
 
-| Term               | Meanings                                                         |
-|--------------------|------------------------------------------------------------------|
-| **Main stream OS** | `Windows, Linux, Unix, MacOS`                                    |
-| **Products**       | `Goods that are unique in name, price, category and description` |
-| **Items**          | `Copies of products that have different expiry dates`            |
+| Term                              | Meanings                                                                             |
+|-----------------------------------|--------------------------------------------------------------------------------------|
+| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                        |
+| **Products**                      | `Goods that are unique in name, price, category and description`                     |
+| **Items**                         | `Copies of products that have different expiry dates`                                |
+| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`       |
+| **Graphical user interface(GUI)** | `An interface where users interact with graphical icons to interact with the program` |
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -5,9 +5,9 @@ import seedu.ibook.model.product.Product;
 
 public class CategoryFilter extends AttributeFilter {
     private static final String TYPE = "category";
+    private final String value;
 
     private final Category category;
-    private final String value;
 
     /**
      * Creates a predicate that checks if the product has the same parameters.
