@@ -4,7 +4,6 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
 import static manageezpz.testutil.TypicalTasks.GET_A_DRINK;
 import static manageezpz.testutil.TypicalTasks.READ_BOOK;
 import static manageezpz.testutil.TypicalTasks.RETURN_BOOK;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

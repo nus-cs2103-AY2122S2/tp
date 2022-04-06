@@ -16,12 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.GuiSettings;
-import manageezpz.model.person.Person;
 import manageezpz.model.person.PersonMultiplePredicate;
 import manageezpz.model.task.Priority;
 import manageezpz.model.task.Task;
