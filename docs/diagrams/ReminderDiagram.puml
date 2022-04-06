@@ -7,14 +7,6 @@ box Main STORAGE_COLOR_T1
 participant ":MainApp" as MainApp STORAGE_COLOR
 end box
 
-
-'box Logic LOGIC_COLOR_T1
-'
-'participant ":ModelManager" as ModelManager LOGIC_COLOR
-'participant ":AddressBook" as AddressBook LOGIC_COLOR
-'
-'end box
-
 box Model MODEL_COLOR_T1
 participant "reminderList:UniqueReminderList" as UniqueReminderList MODEL_COLOR
 participant "reminder:Reminder" as Reminder MODEL_COLOR
@@ -24,8 +16,6 @@ end box
 
 box Storage LOGIC_COLOR_T1
 participant ":Storage" as Storage LOGIC_COLOR
-'participant ":JsonSerializableCompanyList" as JsonCompanyList LOGIC_COLOR
-'participant ":JsonAdaptedCompany" as JsonAdaptedCompany LOGIC_COLOR
 end box
 
 MainApp -> MainApp : initModelManager(Storage, ReadOnlyUserPrefs)
@@ -76,93 +66,5 @@ UniqueReminderList -> ModelManager :ModelManager(ReadOnlyCompanyList, ReadOnlyUs
 activate ModelManager
 deactivate UniqueReminderList
 ModelManager --> MainApp :ModelManager
-
-
-
-
-
-
-'
-'Storage -> JsonCompanyList :toModelType()
-'deactivate Storage
-'activate JsonCompanyList
-'
-'create CompanyList
-'JsonCompanyList -> CompanyList : CompanyList()
-'activate CompanyList
-'deactivate JsonCompanyList
-'
-'CompanyList --> JsonCompanyList :companyList
-'deactivate CompanyList
-'
-'activate JsonCompanyList
-'loop companyListSize
-'JsonCompanyList -> JsonAdaptedCompany :toModelType()
-'deactivate JsonCompanyList
-'activate JsonAdaptedCompany
-'
-'loop
-'JsonAdaptedCompany ->
-'JsonAdaptedCompany --> JsonCompanyList :company
-'deactivate JsonAdaptedCompany
-'end
-
-
-'create ModelManager
-'MainApp -> ModelManager
-'activate ModelManager
-'
-'
-'create Summary
-'ModelManager -> Summary : Summary(ReadOnlyAddressBook)
-'activate Summary
-'
-'Summary -> AddressBook : getContactList()
-'activate AddressBook
-'
-'AddressBook --> Summary : contactList
-'deactivate AddressBook
-'
-'Summary -> Summary : setNumberOfContacts()
-'activate Summary
-'
-'Summary --> Summary
-'deactivate Summary
-'
-'Summary -> Summary : setPercentageRatings()
-'activate Summary
-'
-'loop addressBookSize
-'Summary -> Contact : getRating()
-'activate Contact
-'
-'Contact --> Summary
-'deactivate Contact
-'end
-'Summary --> Summary
-'deactivate Summary
-'
-'Summary -> Summary : setPercentageCategory()
-'activate Summary
-'
-'loop addressBookSize
-'Summary -> Contact : getCategoryCode()
-'activate Contact
-'
-'Contact --> Summary
-'deactivate Contact
-'end
-'
-'Summary --> Summary
-'deactivate Summary
-'
-'Summary --> ModelManager : summary
-'deactivate Summary
-'
-'ModelManager --> MainApp : model
-'deactivate ModelManager
-
-
-
 
 @enduml
