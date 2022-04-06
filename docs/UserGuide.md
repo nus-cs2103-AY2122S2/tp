@@ -102,6 +102,10 @@ Adds a student with the following attributes:
 information which is the student's name and phone number.
 * There can be **multiple tags** assigned to one student, as demonstrated in the example above.
 * Student name cannot contain all numbers.
+* Student name is limited to 50 alphanumeric characters with spaces allowed.
+* Phone number is limited to 20 digits.
+* Address is limited to 100 characters.
+* Email is limited to 100 characters.
 * Tags are limited to 30 alphanumeric characters with no spaces allowed.
 
 ---
@@ -158,6 +162,8 @@ Format: `addlesson <LESSON_TYPE> -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTI
 **Note that:**
 - The subject and address are optional fields and can be omitted so that the tutor only keeps the most vital information of the lesson.
 - Lesson durations cannot be greater than 24 hours!
+- Lesson name is limited to 50 alphanumeric characters with spaces allowed.
+- Address is limited to 100 characters.
 
 Supported Types: Recurring `-r` and Temporary
 
