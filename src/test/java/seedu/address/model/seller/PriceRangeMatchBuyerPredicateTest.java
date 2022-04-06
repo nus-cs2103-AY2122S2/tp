@@ -85,25 +85,25 @@ class PriceRangeMatchBuyerPredicateTest {
     void getPropertyToBuy() {
         assertTrue(predicate1.getPropertyToBuy().equals(new PropertyToBuy(
             new House(HouseType.BUNGALOW, new Location("Kranji")),
-            new PriceRange(0, 100))));
+            new PriceRange(20, 100))));
 
         assertFalse(predicate1.getPropertyToBuy().equals(new PropertyToBuy(
             new House(HouseType.BUNGALOW, new Location("Kranji")),
             new PriceRange(0, 200))));
 
         assertFalse(predicate1.getPropertyToBuy().equals(new PropertyToBuy(
-            new House(HouseType.BUNGALOW, new Location("Crunchy")),
+            new House(HouseType.BUNGALOW, new Location("Kranji")),
             new PriceRange(0, 100))));
 
         assertFalse(predicate1.getPropertyToBuy().equals(new PropertyToBuy(
-            new House(HouseType.COLONIA, new Location("Kranji")),
-            new PriceRange(0, 100))));
+            new House(HouseType.BUNGALOW, new Location("Kranji")),
+            new PriceRange(0, 20))));
     }
 
     @Test
     void getPropertyToSell() {
         assertTrue(predicate1.getPropertyToSell(seller1).equals(new PropertyToSell(
             new House(HouseType.BUNGALOW, new Location("Kranji")),
-            new PriceRange(0, 100), new Address("ANY ADDRESS"))));
+            new PriceRange(20, 100), new Address("ANY ADDRESS"))));
     }
 }
