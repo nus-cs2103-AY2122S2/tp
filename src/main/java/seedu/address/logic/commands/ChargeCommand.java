@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -63,6 +64,7 @@ public class ChargeCommand extends Command {
         if (this.charge.getCharge() == null) {
             throw new CommandException(String.format(Messages.MESSAGE_NO_CHARGE_SET, ChargeCommand.MESSAGE_USAGE));
         }
+
         // calculate charge based on number of days in month
         AttendanceHashMap map = petToCharge.getAttendanceHashMap();
         LocalDate day = this.chargeDate.atDay(1);
@@ -81,7 +83,39 @@ public class ChargeCommand extends Command {
 
         model.updateFilteredPetList();
         return new CommandResult(generateSuccessMessage(petToCharge.getName(),
-                amountChargeable, getMonthName(), chargeDate.getYear()));
+                amountChargeable, getMonthName(), chargeDate.getYear(), getAttendance(petToCharge)));
+    }
+
+    /**
+     * Returns the attendance the charge on the pet is based on
+     * @return attendance as a String.
+     */
+    public String getAttendance(Pet pet) {
+        double amountChargeable = 0.0;
+        String attendance = "\nHere are the days " + pet.getName().toString() + " was present: ";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        AttendanceHashMap map = pet.getAttendanceHashMap();
+        LocalDate day = this.chargeDate.atDay(1);
+        LocalDate firstDayNextMonth = this.chargeDate.atEndOfMonth().plusDays(1);
+        while (day.isBefore(firstDayNextMonth)) {
+            boolean hasAttendance = map.getAttendance(day).isPresent();
+            if (hasAttendance) {
+                AttendanceEntry entry = map.getAttendance(day).get();
+                boolean isPresent = entry.getIsPresent().orElse(false);
+                if (isPresent) {
+                    amountChargeable += this.charge.getCharge();
+                    attendance += "\n" + entry.getAttendanceDate().format(formatter);
+                }
+            }
+            day = day.plusDays(1);
+        }
+        if (amountChargeable == 0) {
+            attendance = "\n" + pet.getName().toString() + " was not present on any day.";
+        }
+        if (amountChargeable == this.charge.getCharge()) {
+            attendance = attendance.replace("are the days", "is the day");
+        }
+        return attendance;
     }
 
     /**
@@ -97,8 +131,10 @@ public class ChargeCommand extends Command {
      * Generates a command execution success message
      * {@code petToEdit}.
      */
-    private String generateSuccessMessage(Name petName, double amountChargeable, String month, int year) {
-        return String.format(MESSAGE_COMPUTE_CHARGE_SUCCESS, petName.toString(), amountChargeable, month, year);
+    private String generateSuccessMessage(Name petName, double amountChargeable, String month, int year,
+                                          String attendance) {
+        return String.format(MESSAGE_COMPUTE_CHARGE_SUCCESS, petName.toString(), amountChargeable, month, year)
+                + attendance;
     }
 
     @Override
