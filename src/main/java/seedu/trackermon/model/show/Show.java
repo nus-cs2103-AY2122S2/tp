@@ -108,7 +108,9 @@ public class Show {
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            tags.forEach(x -> builder.append("[" + x + "]"));
+        } else {
+            builder.append(";");
         }
         return builder.toString();
     }

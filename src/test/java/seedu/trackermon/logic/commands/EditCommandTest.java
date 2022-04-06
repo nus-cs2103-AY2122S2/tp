@@ -106,7 +106,7 @@ public class EditCommandTest {
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder(firstShow).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_SHOW, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_SHOW);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 
     @Test
@@ -118,7 +118,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SHOW,
                 new EditShowDescriptorBuilder(showInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_SHOW);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class EditCommandTest {
         EditShowDescriptor descriptor = new EditShowDescriptorBuilder().withName(VALID_NAME_GONE).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
     /**
@@ -144,7 +144,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditShowDescriptorBuilder().withName(VALID_NAME_GONE).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
     @Test

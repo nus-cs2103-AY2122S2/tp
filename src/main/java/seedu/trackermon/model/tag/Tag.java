@@ -1,5 +1,7 @@
 package seedu.trackermon.model.tag;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 
@@ -23,7 +25,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = tagName.toLowerCase();
     }
 
     /**
@@ -49,7 +51,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName.substring(0, 1).toUpperCase() + tagName.substring(1);
     }
 
 }

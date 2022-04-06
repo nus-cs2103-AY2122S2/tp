@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.trackermon.commons.core.index.Index;
+import seedu.trackermon.logic.commands.DeleteCommand;
 import seedu.trackermon.logic.commands.EditCommand;
 import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
@@ -34,34 +35,35 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG, PREFIX_COMMENT, PREFIX_RATING);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        String indexArg = argMultimap.getPreamble();
+        if (args.isBlank()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(indexArg);
 
         EditCommand.EditShowDescriptor editShowDescriptor = new EditShowDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editShowDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
+
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editShowDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
-        }
-
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editShowDescriptor::setTags);
-
-        if (argMultimap.getValue(PREFIX_COMMENT).isPresent()) {
-            editShowDescriptor.setComment(ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get()));
         }
 
         if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
             editShowDescriptor.setRating(ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get()));
         }
 
+        if (argMultimap.getValue(PREFIX_COMMENT).isPresent()) {
+            editShowDescriptor.setComment(ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get()));
+        }
+
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editShowDescriptor::setTags);
+
         if (!editShowDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         return new EditCommand(index, editShowDescriptor);

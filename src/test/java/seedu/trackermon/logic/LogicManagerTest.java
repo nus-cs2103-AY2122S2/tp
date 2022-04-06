@@ -1,7 +1,7 @@
 package seedu.trackermon.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
 import static seedu.trackermon.logic.commands.CommandTestUtil.NAME_DESC_ALICE_IN_WONDERLAND;
@@ -61,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_INDEX);
     }
 
     @Test

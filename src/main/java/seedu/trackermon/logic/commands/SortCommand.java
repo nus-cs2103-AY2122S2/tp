@@ -14,7 +14,7 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_SUCCESS = "sort success!!";
+    public static final String MESSAGE_SUCCESS = "Show list has been sorted!";
 
     private final Comparator<Show> comparator;
 

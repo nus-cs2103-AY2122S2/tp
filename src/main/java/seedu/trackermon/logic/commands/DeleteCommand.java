@@ -1,12 +1,18 @@
 package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
 import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.commons.core.index.Index;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
+import seedu.trackermon.logic.parser.ParserUtil;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.show.Show;
 
@@ -16,11 +22,12 @@ import seedu.trackermon.model.show.Show;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_FORMAT = "Parameters: INDEX";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the show identified by the index number used in the displayed Trackermon.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + COMMAND_FORMAT + "\n" + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_SHOW_SUCCESS = "Deleted Show: %1$s";
 
@@ -36,7 +43,7 @@ public class DeleteCommand extends Command {
         List<Show> lastShownList = model.getFilteredShowList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Show showToDelete = lastShownList.get(targetIndex.getZeroBased());
