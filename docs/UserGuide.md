@@ -91,7 +91,7 @@ An applicant can have any number of tags (including 0)
 </div>
 
 * Age provided must be at least two digits eg: “23”
-* Phone number and email must be unique 
+* Name, Phone number and email must be unique 
 * Gender must be M/F (case-sensitive)
 
 Examples:
