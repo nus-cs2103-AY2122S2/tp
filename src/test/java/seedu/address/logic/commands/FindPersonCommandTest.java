@@ -80,7 +80,7 @@ public class FindPersonCommandTest {
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, false, false);
         FindPersonCommand command = new FindPersonCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.showPersonList(predicate);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
