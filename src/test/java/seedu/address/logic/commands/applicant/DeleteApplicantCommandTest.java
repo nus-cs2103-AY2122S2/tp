@@ -3,7 +3,7 @@ package seedu.address.logic.commands.applicant;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showApplicantAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -34,7 +34,7 @@ public class DeleteApplicantCommandTest {
     //                        + String.format(DeleteApplicantCommand.MESSAGE_DELETE_INTERVIEWS, 0);
     //
     //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        expectedModel.deletePerson(applicantToDelete);
+    //        expectedModel.deleteApplicant(applicantToDelete);
     //
     //        assertCommandSuccess(deleteApplicantCommand, model, expectedMessage, expectedModel);
     //    }
@@ -44,12 +44,12 @@ public class DeleteApplicantCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicantList().size() + 1);
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteApplicantCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteApplicantCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     //    @Test
     //    public void execute_validIndexFilteredList_success() {
-    //        showPersonAtIndex(model, INDEX_FIRST);
+    //        showApplicantAtIndex(model, INDEX_FIRST);
     //
     //        Applicant applicantToDelete = model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased());
     //        DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(INDEX_FIRST);
@@ -59,15 +59,15 @@ public class DeleteApplicantCommandTest {
     //                        + String.format(DeleteApplicantCommand.MESSAGE_DELETE_INTERVIEWS, 0);
     //
     //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        expectedModel.deletePerson(applicantToDelete);
-    //        showNoPerson(expectedModel);
+    //        expectedModel.deleteApplicant(applicantToDelete);
+    //        showNoApplicant(expectedModel);
     //
     //        assertCommandSuccess(deleteApplicantCommand, model, expectedMessage, expectedModel);
     //    }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showApplicantAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -75,7 +75,7 @@ public class DeleteApplicantCommandTest {
 
         DeleteApplicantCommand deleteApplicantCommand = new DeleteApplicantCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteApplicantCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteApplicantCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class DeleteApplicantCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoApplicant(Model model) {
         model.updateFilteredApplicantList(p -> false);
 
         assertTrue(model.getFilteredApplicantList().isEmpty());

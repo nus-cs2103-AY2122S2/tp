@@ -194,7 +194,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ApplicantListPanel getPersonListPanel() {
+    public ApplicantListPanel getApplicantListPanel() {
         return applicantListPanel;
     }
 
