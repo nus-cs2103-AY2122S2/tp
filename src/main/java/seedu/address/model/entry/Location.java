@@ -1,5 +1,7 @@
 package seedu.address.model.entry;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -49,7 +51,7 @@ public class Location {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Location // instanceof handles nulls
-                && location.equals(((Location) other).location)); // state check
+                && location.equalsIgnoreCase(((Location) other).location)); // state check
     }
 
     @Override
