@@ -133,7 +133,7 @@ public class UniqueLineupList {
      * @param lineup The target lineup
      */
     public void replacePlayerInLineup(Person removedPlayer, Person addedPlayer, Lineup lineup) {
-        if (containsLineup(lineup)) {
+        if (removedPlayer.isInLineup(lineup)) {
             deletePlayerFromLineup(removedPlayer, lineup);
             putPlayerToLineup(addedPlayer, lineup);
         }
