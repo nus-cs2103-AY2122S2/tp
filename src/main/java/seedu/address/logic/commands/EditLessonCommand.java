@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION_MINUTES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -52,7 +51,7 @@ public class EditLessonCommand extends Command {
             + "[EXAMPLE]: "
             + "\n     "
             + COMMAND_WORD + " "
-            + PREFIX_LESSON + " 2 "
+            + " 2 "
             + PREFIX_DATE + " 19-12-2022 "
             + PREFIX_START_TIME + " 18:00 "
             + PREFIX_DURATION_HOURS + " 2 "
@@ -86,9 +85,6 @@ public class EditLessonCommand extends Command {
         }
         Lesson lessonToEdit = lastShownList.get(lessonId.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        if (lessonToEdit.equals(editedLesson)) {
-            throw new CommandException(String.format(MESSAGE_DID_NOT_EDIT, lessonToEdit.getName()));
-        }
         model.deleteLesson(lessonToEdit);
         if (model.hasConflictingLesson(editedLesson)) {
             model.addLesson(lessonToEdit);
@@ -103,7 +99,8 @@ public class EditLessonCommand extends Command {
         return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON);
     }
 
-    private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+    private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor)
+            throws CommandException {
         requireAllNonNull(toEdit, editLessonDescriptor);
         LessonName updatedName = editLessonDescriptor.getName().orElse(toEdit.getName());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(toEdit.getSubject());
@@ -122,7 +119,7 @@ public class EditLessonCommand extends Command {
             durationHours = toEdit.getDateTimeSlot().getHours();
             durationMinutes = toEdit.getDateTimeSlot().getMinutes();
         }
-        DateTimeSlot updatedDateTimeSlot = new DateTimeSlot(updatedStartDate.atTime(updatedStartTime),
+        DateTimeSlot updatedDateTimeSlot = DateTimeSlot.makeDateTimeSlot(updatedStartDate.atTime(updatedStartTime),
                 durationHours, durationMinutes);
 
         return toEdit instanceof RecurringLesson

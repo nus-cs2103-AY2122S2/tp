@@ -69,8 +69,6 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_DURATION_HOURS = "2";
     public static final String VALID_LESSON_DURATION_MINUTES = "30";
     public static final String VALID_LESSON_ADDRESS = "Blk 11 Ang Mo Kio Street 74, #11-04";
-    // TODO: create a function to generate valid lesson date for next Monday as logic will be implemented to
-    //       prevent new lessons from being created in past dates
     public static final String VALID_LESSON_DATE = "1-12-2022";
 
     public static final String LESSON_NAME_DESC_TRIAL_LESSON = " " + PREFIX_LESSON_NAME + VALID_LESSON_NAME;
@@ -93,6 +91,8 @@ public class CommandTestUtil {
             + PREFIX_DATE + "25 March 2022";
     public static final String INVALID_LESSON_START_TIME_FORMAT_DESC = " " // start time must be given in "HH:mm" format
             + PREFIX_START_TIME + "6pm";
+    public static final String INVALID_LESSON_DATE_DAY_FIELD_OUT_OF_RANGE = "30-02-2022"; // there is no 30th February
+    public static final String INVALID_LESSON_DATE_YEAR_FIELD_TOO_LARGE = "19-12-2022442"; // year cannot be >4 digits
 
     // hours and minutes cannot both be zero as the duration of a lesson should not be zero
     public static final String INVALID_DURATION_MINUTES_ZERO_DESC = " "

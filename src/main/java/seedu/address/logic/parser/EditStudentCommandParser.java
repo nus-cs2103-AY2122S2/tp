@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_INDEX_OR_PREFIX_PROVIDED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
@@ -40,8 +40,8 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE),
-                    pe);
+            throw new ParseException(String.format(MESSAGE_NO_INDEX_OR_PREFIX_PROVIDED,
+                    EditStudentCommand.MESSAGE_USAGE));
         }
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
