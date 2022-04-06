@@ -241,15 +241,16 @@ Formats:
 
 Editing tasks is flexible in ManageEZPZ.
 For example, you can update just the task description or perhaps
-just the date and time of the task only.
-However, you are not allowed to edit a task with no prefix supplied.
-Either `desc/NAME`, `date/DATE` or `at/TIME` must have a value.
+just the date and time of the task only. <br/>
+However, you are not allowed to edit a task with no prefix supplied or if you have supplied a prefix, 
+a corresponding input after the prefix must exist. <br/>
+Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 
 <b>Note:</b> 
 * For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
   and mm should only be between 00 and 59.
-* When supplying empty NAME, DATE or TIME, it will not change the state of the Task.
-
+* For todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
+and time field to be edited.
 
 Examples: <br/>
 
