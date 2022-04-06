@@ -18,7 +18,7 @@ public class Lab {
             "Lab number should be an integer between 0 and 20 inclusive.";
 
     /*
-     * Lab number has to be a positive Integer.
+     * Lab number has to contain only digits.
      */
     public static final String VALIDATION_REGEX = "\\d*";
 
@@ -74,7 +74,10 @@ public class Lab {
     }
 
     /**
-     * Returns true if a given string is a valid lab number.
+     * Returns true if a given string contains only digits and the Integer it parses to is between 0 and 20 inclusive.
+     *
+     * @param test The string to be checked and parsed.
+     * @return True if the string is a valid Integer between 0 and 20 inclusive and false otherwise.
      */
     public static boolean isValidLab(String test) {
         return isValidString(test) && isIntegerInBounds(test);
@@ -89,6 +92,7 @@ public class Lab {
             int labNum = Integer.parseInt(test);
             return labNum >= 0 && labNum <= 20;
         } catch (NumberFormatException e) {
+            // can't be parsed to Integer so return false.
             return false;
         }
     }
