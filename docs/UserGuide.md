@@ -184,6 +184,19 @@ Shows a list of all customers in the application.
 
 Format: `listc`
 
+![Listing all customers](images/user-guide/list-customers.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>Turquoise coloured tag (below the name) is used to represent the staffs that the customer prefers.</li>
+    <li>Yellow coloured tag (below staff preferences) is used to represent services that the customer prefers.</li>
+    <li>Pink coloured tag (below service preferences) is used to represent allergies that the customer has.</li>
+</ul>
+
+</div>
+
 #### 4.1.4 Editing a customer : `editc`
 
 Edits an existing customer in the application.
@@ -661,7 +674,13 @@ The charts plot up to 10 variables at most. For example, in plotStaff, the top 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. Glossary
+## 6. Known Limitations
+
+* Inputting very long values for fields like the price of a Service might cause it to be round off at certain significant number due to the size limitation of the data type used for the field.                                                                                                       
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 7. Glossary
 
 | Term                              | Definition                                                                                                                                                              |
 |-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -673,7 +692,7 @@ The charts plot up to 10 variables at most. For example, in plotStaff, the top 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. FAQ
+## 8. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackBeau home folder.       
