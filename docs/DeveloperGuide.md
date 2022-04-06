@@ -383,7 +383,7 @@ Cons:
 The viewing summary mechanism is implemented by modifying the existing `ViewCommand` and reusing the existing `Model#updateFilteredXXXList()` operations.
 
 The `ViewCommand` command is augmented with an additional `nric` parameter, which displays the summary screen if the `nric` parameter is specified. `ViewCommandParser` is augmented to parse the NRIC parameter the user enters.
-An additional operation `Model#updateSummary()` was implemented, which invokes the existing `Model#updateFilteredXXXList()` operations to update the state of the filtered lists in `Model`. The `UI` is then updated accordingly.
+An additional operation `Model#updateSummary()` is implemented, which invokes the existing `Model#updateFilteredXXXList()` operations to update the state of the filtered lists in `Model`. The `UI` is then updated accordingly.
 
 The following sequence diagram shows how the summary feature works:
 
