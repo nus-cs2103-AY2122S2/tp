@@ -2,10 +2,12 @@
 layout: page title: User Guide
 ---
 
-**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, 
+optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
 Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps. 
 
-School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, 
+the education of the students.
 
 Through this user guide, you will learn how to use UDT effectively and efficiently, to manage COVID-19 cases in your schools.
 Features below are accompanied by instructions, figures and examples to help you understand how to use them.
@@ -26,6 +28,7 @@ A glossary is included at the end to clarify any technical or vague terms used.
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-a-student-delete): `delete`
+  - [Undo/Redo](#undo-redo)
   - [Exit the application](#exit-the-application-exit): `exit`
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
@@ -261,6 +264,10 @@ Deletes the specified person from the application.
 
 </div>
 
+|![delete command](images/user-guide/delete.png)|
+|:--:|
+|*Figure 9 - `delete` Command*|
+
 ### Automation of `Status`
 `Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
 - UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
@@ -278,10 +285,21 @@ UDT may not automatically update students' `Status` if complex edits are execute
 changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
 in the *next iteration (v1.5)*.
 
+## Undo/Redo: 
+Undo or redo what you have been typing in the command box **BEFORE** it has been executed/entered, allowing you to make any edits as required.
+Using a Mouse:
+- Right-click on the command box to open the menu containing the `undo` and `redo` buttons
+- Click on the respective buttons to undo/redo what you have typed
 
-|![delete command](images/user-guide/delete.png)|
-|:--:|
-|*Figure 9 - `delete` Command*|
+
+**OR**
+
+Using a Keyboard:
+- `ctrl+z` to undo
+- `ctrl+y` to red
+
+> :information_source: **Note:**  Undo and redo can only be used on commands that have yet to be executed/entered (before hitting enter).
+
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
