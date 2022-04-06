@@ -361,7 +361,7 @@ WIP
 ### Summary
 
 #### Design Consideration
-Alternative 1 (current choice): Use the existing `updateFilteredXXXList()` methods in the model. When the summary command is executed, update all existing filtered lists with NRIC predicate. Then update the `UI` using the existing filtered lists.
+Alternative 1 (current choice): Use the existing `updateFilteredXXXList()` methods in the `Model`. When the summary command is executed, update all existing filtered lists with NRIC predicate. Then update the `UI` using the existing filtered lists.
 
 Pros:
 - Easy to implement
