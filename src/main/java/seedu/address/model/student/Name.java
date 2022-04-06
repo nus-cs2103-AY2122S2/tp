@@ -36,7 +36,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX) && !test.matches("[0-9]+") && test.length() <= 50;
+        return test.matches(VALIDATION_REGEX) && !test.matches("[0-9]+");
     }
 
 

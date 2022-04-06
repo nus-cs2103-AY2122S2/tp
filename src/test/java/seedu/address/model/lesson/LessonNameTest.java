@@ -15,12 +15,8 @@ public class LessonNameTest {
         assertTrue(LessonName.isValidName("1301")); // all numbers
         assertTrue(LessonName.isValidName("Biology1301")); // alphanumeric
         assertTrue(LessonName.isValidName("Biology 1301")); // alphanumeric w space
-        assertTrue(LessonName.isValidName("9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWX")); // 50 characters
-        assertTrue(LessonName.isValidName("99999999999999999999999999999999999999999999999999")); // 50 numbers
-        assertTrue(LessonName.isValidName("999999999999999999999ABC9999999999999999999"
-                + "9999999")); // 50 alphanumeric
         assertTrue(LessonName.isValidName("999999999999999999999ABC9"
-                + " 999999999999999999999999")); // 50 alphanumeric w space
+                + " 999999999999999999999999ABC DEFG")); // 58 alphanumeric w space
 
     }
 
@@ -31,11 +27,5 @@ public class LessonNameTest {
         assertFalse(LessonName.isValidName(" ")); // whitespaces only
         assertFalse(LessonName.isValidName("^")); // only non-alphanumeric characters
         assertFalse(LessonName.isValidName("peter*")); // contains non-alphanumeric characters
-
-        assertFalse(LessonName.isValidName("ABCDEFGHIJKLMNOPQRSTUVWYXZabcdefghijklmnopqrstuvwxy")); // 51 chars
-        assertFalse(LessonName.isValidName("ABCDEFGHIJKLMNOPQRSTUVWY "
-                + "XZabcdefghijklmnopqrstuvwx")); // 51 chars inc. whitespace
-        assertFalse(LessonName.isValidName("ABCDEFGHIJKLMNOPQRSTUVWYXZabcdefghijklmnopqrstuvwxyz"
-                + "ABCDEFGHIJKLMNOPQRSTUVWYXZabcdefghijklmnopqrstuvwxyz")); // 104 chars
     }
 }
