@@ -55,7 +55,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [edu/EDUCATION]` can be used as `n/Kim Lai edu/computer science` or as `n/Kim Lai`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used zero or more times.<br>
   e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2040S`, `m/CS2030S m/CS2100` etc.
 
 * If a parameter is expected only once in the command but you specified it multiple times, they will all be rejected.<br>
@@ -515,17 +515,17 @@ If your changes to the data file makes its format invalid, NUSocials will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
-**Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g.,`tag 1 m/CS2105 m/CS2106`
-**Remove Tag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g.,`removetag 1 c/Bouldering m/CS2105 m/CS2106`
-**Event** | `event INDEX…​ name/EVENT NAME info/INFORMATION d/DATE t/TIME` <br> e.g., `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
-**Cancel Event** | `cancelevent INDEX…​` <br> e.g.,`cancelevent 1 2 3`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
+**Tag** | `tag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g. `tag 1 m/CS2105 m/CS2106`
+**Remove Tag** | `removetag INDEX [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​` <br> e.g. `removetag 1 c/Bouldering m/CS2105 m/CS2106`
+**Event** | `event INDEX…​ name/EVENT NAME info/INFORMATION d/DATE t/TIME` <br> e.g. `event 1 name/Dinner Date info/Having Dinner at Bread Street Kitchen by Gordon Ramsay d/2022-12-20 t/20:15`
+**Cancel Event** | `cancelevent INDEX…​` <br> e.g. `cancelevent 1 2 3`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3` <br> `delete INDEX…​` <br> e.g. `delete 1 3 5`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/Fred e/fred111@example.com`
-**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find n/john edu/computer science`
-**Find specific match** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g., `find -s n/john i/bytedance edu/computer science`
-**Find Event** | `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICIPANT]…​ [dt/DATE AND TIME]…​`<br> e.g., `find -e name/Dinner info/Candice's birthday dt/2022-05-12 19:30`
+**Delete** | `delete INDEX`<br> e.g. `delete 3` <br> `delete INDEX…​` <br> e.g. `delete 1 3 5`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g. `edit 2 n/Fred e/fred111@example.com`
+**Find** | `find [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g. `find n/john edu/computer science`
+**Find specific match** | `find -s [n/NAME]…​ [i/INTERNSHIP]…​ [m/MODULE]…​ [c/CCA]…​ [edu/EDUCATION]…​`<br> e.g. `find -s n/john i/bytedance edu/computer science`
+**Find Event** | `find -e [name/EVENT NAME]…​ [info/INFORMATION]…​ [part/PARTICIPANT]…​ [dt/DATE AND TIME]…​`<br> e.g. `find -e name/Dinner info/Candice's birthday dt/2022-05-12 19:30`
 **List** | `list`
 **Show Events** | `showevents` `showevents -upcoming` `showevents -past`
 **Help** | `help`

@@ -1,0 +1,29 @@
+@startuml
+
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Before removetag()
+
+object "__David:Person__" as Person {
+    name = "David Choo"
+    address = "Example Street"
+    phone = 81234567
+    email = "david@example.com"
+}
+
+object "__nus:Education__" as nusTag
+object "__dso:Internship__" as dsoTag
+object "__cs2100:Module__" as cs2100Tag
+object "__cs2107:Module__" as cs2107Tag
+
+Person -down-> nusTag
+Person -down-> dsoTag
+Person -down-> cs2100Tag
+Person -down-> cs2107Tag
+
+nusTag -[hidden]right- dsoTag
+dsoTag -[hidden]right- cs2100Tag
+cs2100Tag -[hidden]right- cs2107Tag
+
+@enduml
