@@ -35,6 +35,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_FORMAT = "Parameters: INDEX "
             + "{[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_RATING + "RATING] "
             + "[" + PREFIX_COMMENT + "COMMENT] "
             + "[" + PREFIX_TAG + "TAG]…\u200B}";
 

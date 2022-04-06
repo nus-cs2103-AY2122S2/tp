@@ -1,7 +1,5 @@
 package seedu.trackermon.model.tag;
 
-import java.util.Locale;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 

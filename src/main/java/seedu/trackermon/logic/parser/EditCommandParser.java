@@ -14,7 +14,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.trackermon.commons.core.index.Index;
-import seedu.trackermon.logic.commands.DeleteCommand;
 import seedu.trackermon.logic.commands.EditCommand;
 import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.trackermon.logic.parser.exceptions.ParseException;

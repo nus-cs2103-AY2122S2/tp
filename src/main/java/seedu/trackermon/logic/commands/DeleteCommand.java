@@ -1,18 +1,12 @@
 package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
 import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.commons.core.index.Index;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
-import seedu.trackermon.logic.parser.ParserUtil;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.show.Show;
 

@@ -1,6 +1,5 @@
 package seedu.trackermon.logic.parser;
 
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
