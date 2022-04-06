@@ -59,6 +59,6 @@ Given below are my contributions to the project.
     , [#18](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/80)
   * Reported bugs and suggestions for other teams in the class (example: [1](https://github.com/AY2122S2-CS2103-W16-3/tp/issues/144))
     , [2](https://github.com/AY2122S2-CS2103-W16-3/tp/issues/153), [3](https://github.com/AY2122S2-CS2103-W16-3/tp/issues/167)
-  
+
 * **Tools**:
   * Integrated CodeCov to the team repo
