@@ -16,9 +16,9 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10" percentWidth="30"/>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10" percentWidth="60"/>
             </columnConstraints>
-            <Label fx:id="id" styleClass="module-key-event-index" GridPane.columnIndex="0"/>
-            <Label fx:id="moduleKeyEventType" styleClass="module-key-event-type" GridPane.columnIndex="1"/>
-            <Label fx:id="moduleKeyEventTime" styleClass="module-key-event-time" GridPane.columnIndex="2"/>
+            <Label fx:id="id" styleClass="module-key-event-index" GridPane.columnIndex="0" wrapText="true"/>
+            <Label fx:id="moduleKeyEventType" styleClass="module-key-event-type" GridPane.columnIndex="1" wrapText="true"/>
+            <Label fx:id="moduleKeyEventTime" styleClass="module-key-event-time" GridPane.columnIndex="2" wrapText="true"/>
         </GridPane>
         <rowConstraints>
             <RowConstraints/>

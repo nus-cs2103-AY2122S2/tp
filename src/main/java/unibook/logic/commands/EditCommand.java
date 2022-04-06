@@ -29,6 +29,7 @@ import unibook.commons.core.Messages;
 import unibook.commons.core.index.Index;
 import unibook.commons.util.CollectionUtil;
 import unibook.logic.commands.exceptions.CommandException;
+import unibook.logic.parser.exceptions.ParseException;
 import unibook.model.Model;
 import unibook.model.ModelManager;
 import unibook.model.module.Module;
@@ -77,6 +78,7 @@ public class EditCommand extends Command {
             + "E.g. edit 1 o/person m/cs2103 g/T2 adds the first person on the index list to group T2 of module CS2103";
     public static final String MESSAGE_KEYEVENT_INDEX_MISSING = "Index of key event to be changed must be included. "
             + "E.g. ke/1 edits the fields of 1st key event";
+    public static final String MESSAGE_WRONG_FIELDS = "Wrong fields used for given option. \n";
 
 
     public static final String PERSON_MESSAGE_USAGE = COMMAND_WORD
@@ -239,10 +241,8 @@ public class EditCommand extends Command {
         ObservableList<Professor> profs = moduleToEdit.getProfessors();
         ObservableList<Student> students = moduleToEdit.getStudents();
 
-        // TODO ASSUME THAT UPDATEFILTEREDMODULELIST WORKS
         ObservableList<Group> groups = moduleToEdit.getGroups();
 
-        // TODO changed for editing of key events
         ObservableList<ModuleKeyEvent> keyEvents;
         if (editModuleDescriptor.getKeyEvents().isPresent()) {
             int i = editModuleDescriptor.getIdx();
@@ -305,9 +305,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Module> latestModList = model.getFilteredModuleList();
 
-        // TODO MAIN LOGIC FOR EDIT GROUP CROSS FINGER UPDATE...LIST WORKS
         if (this.editModuleDescriptor != null && this.editPersonDescriptor != null) {
-            System.out.println("entered correct logic");
             if (!isGroupListShowing && !isModuleListShowing) {
                 throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
             }
@@ -333,20 +331,19 @@ public class EditCommand extends Command {
             }
 
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            System.out.println("updated person list");
             for (Module m : latestModList) {
                 if (m.equals(mod)) {
                     if (this.index.getZeroBased() >= m.getGroups().size()) {
                         throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                     }
-                    m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
-                    System.out.println(m.getModuleName().toString());
-                    groups = m.getGroups();
+                    Group group = m.editGroupByIndex(this.index.getZeroBased(), editGroupDescriptor);
+                    groups.add(group);
                 }
             }
             ModelManager mm = (ModelManager) model;
             mm.getUi().setGroupListPanel(groups);
             model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+
             // TODO make the command result for editing success more elaborate
             return new CommandResult(MESSAGE_EDIT_GROUP_SUCCESS);
         }
@@ -370,6 +367,7 @@ public class EditCommand extends Command {
             }
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
+            int idx = index.getZeroBased();
             Module checkMod = null;
             if (this.editPersonDescriptor.getOffice().isPresent() && personToEdit instanceof Student) {
                 throw new CommandException(MESSAGE_NOT_PROFESSOR);
@@ -387,8 +385,11 @@ public class EditCommand extends Command {
 
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-            // TODO checks if person alr in module
-            if (!personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
+
+            if ((model.hasPersonWithPhoneOrEmail(editedPerson)
+                    && (model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0) != index.getZeroBased()
+                        || model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1) != index.getZeroBased()))
+                    || !personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
 
@@ -432,8 +433,6 @@ public class EditCommand extends Command {
                 }
             }
 
-            System.out.println(editPersonDescriptor.getModCode().isPresent() + "there");
-            System.out.println(editPersonDescriptor.getGroupName().isPresent() + "there");
 
             // If adding existing person to an existing group
             if (editPersonDescriptor.getModCode().isPresent() && editPersonDescriptor.getGroupName().isPresent()) {
@@ -479,7 +478,7 @@ public class EditCommand extends Command {
                     }
                 } else { }
 
-                model.setPerson(personToEdit, editedPerson);
+                model.setPerson(idx, personToEdit, editedPerson);
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_EDIT_PERSON_GROUP_SUCCESS, editedPerson, groupName));
 
@@ -494,7 +493,7 @@ public class EditCommand extends Command {
                 }
             } else { }
 
-            model.setPerson(personToEdit, editedPerson);
+            model.setPerson(idx, personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
 
@@ -845,7 +844,11 @@ public class EditCommand extends Command {
          * Copy constructor.
          */
         public EditGroupDescriptor(EditGroupDescriptor toCopy) {
-            setGroupName(toCopy.name);
+            try {
+                setGroupName(toCopy.name);
+            } catch (ParseException e) {
+                System.out.println("error");
+            }
             this.meetingTimes = toCopy.meetingTimes;
             setStudents(toCopy.members);
             this.module = toCopy.module;
@@ -896,7 +899,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setGroupName(String name) {
+        public void setGroupName(String name) throws ParseException {
+            if (!Group.isValidGroupName(name)) {
+                throw new ParseException(Group.NAME_CONSTRAINT_MESSAGE);
+            }
             this.name = name;
         }
 

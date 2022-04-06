@@ -14,9 +14,9 @@
         </columnConstraints>
         <VBox fx:id="groupDetailsPane" VBox.vgrow="ALWAYS">
             <HBox HBox.hgrow="ALWAYS">
-                <Label fx:id="id" styleClass="group-headings" text="\$id"/>
-                <Label fx:id="moduleCode" styleClass="group-module-code" text="\$moduleCode"/>
-                <Label fx:id="groupName" styleClass="group-name" text="\$groupName"/>
+                <Label fx:id="id" styleClass="group-headings" text="\$id" minWidth="40" wrapText="true"/>
+                <Label fx:id="moduleCode" styleClass="group-module-code" text="\$moduleCode" alignment="CENTER" minWidth="200" wrapText="true"/>
+                <Label fx:id="groupName" styleClass="group-name" text="\$groupName" wrapText="true"/>
             </HBox>
             <GridPane fx:id="moreGroupDetails">
                 <columnConstraints>
@@ -32,7 +32,7 @@
                 </ScrollPane>
                 <ScrollPane fitToWidth="true" prefHeight="200" GridPane.columnIndex="1">
                     <VBox fx:id="meetingTimes" spacing="5">
-                        <Label fx:id="meetingTimesHeading" styleClass="group-subheadings" text="Meetings"/>
+                        <Label fx:id="meetingTimesHeading" styleClass="group-subheadings" text="Meetings" wrapText="true"/>
                         <VBox fx:id="meetingTimesList" spacing="5" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </ScrollPane>

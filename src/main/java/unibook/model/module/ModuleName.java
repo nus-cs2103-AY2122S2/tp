@@ -8,8 +8,7 @@ import static unibook.commons.util.AppUtil.checkArgument;
  */
 public class ModuleName {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            " Module Names "
+    public static final String MESSAGE_CONSTRAINTS = " Module Names "
                     + "should only contain up to 50 alphabetical characters and spaces, and it should not be blank";
 
     /*
