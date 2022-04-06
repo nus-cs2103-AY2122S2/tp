@@ -15,8 +15,12 @@ public class SetReminderWindowCommand extends Command {
     public static final String COMMAND_WORD = "setWindow";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets the reminder window to the given argument (in days).\n"
-            + "Parameters: WINDOW (must be a positive integer that is between 1 and 30 inclusive)\n"
+            + "\n"
+            + "Function: Sets the reminder window to the given argument (in days)."
+            + "\n"
+            + "Format: " + COMMAND_WORD + " "
+            + "REMINDER_WINDOW (must be a positive integer that is between 1 and 30 inclusive) "
+            + "\n"
             + "Example: " + COMMAND_WORD + " 7";
 
     public static final String MESSAGE_SET_REMINDER_WINDOW_SUCCESS = "Set reminder window to %d days";
