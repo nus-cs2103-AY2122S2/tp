@@ -19,11 +19,8 @@ import unibook.model.person.exceptions.PersonNotFoundException;
  * Represents a group of students within a module.
  */
 public class Group {
-    public static final String NAME_CONSTRAINT_MESSAGE = "A group name cannot have whitespaces, and also must be"
-            + "limited in length to less than 50 characters.";
+    public static final String NAME_CONSTRAINT_MESSAGE = "A group name is limited in length to less than 50 characters.";
     //Group name can only have alphanumeric characters
-    public static final String VALIDATION_REGEX = "^\\S*$";
-
 
     private static final int MAX_GROUP_NAME_LENGTH = 50;
     private final ObservableList<Student> members;
@@ -80,7 +77,7 @@ public class Group {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
+        return test.length() <= 50;
     }
 
     /**
