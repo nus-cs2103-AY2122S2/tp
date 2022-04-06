@@ -10,6 +10,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_BIND = "Invalid command format! \n\n%1$s";
 
     public static final String MESSAGE_EMPTY_NAME = "Name field cannot be empty! \n\n%1$s";
+    public static final String MESSAGE_EMPTY_DESCRIPTION = "Description cannot be empty! \n\n%1$s";
+
 
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
             "The person index provided is invalid as it exceeds the amount of persons in the displayed list! \n\n%1$s";

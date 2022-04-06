@@ -1,11 +1,7 @@
 package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
+import static manageezpz.commons.core.Messages.*;
 import static manageezpz.commons.util.CollectionUtil.requireAllNonNull;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
@@ -65,6 +61,7 @@ public class EditTaskCommand extends Command {
     private final String desc;
     private final String date;
     private final String time;
+    private final boolean[] prefixStatusArr;
 
     /**
      * Constructor to initialize an instance of EditTaskCommand class
@@ -76,12 +73,13 @@ public class EditTaskCommand extends Command {
      * @param date New date of the Task
      * @param time New time of the Task
      */
-    public EditTaskCommand(Index index, String desc, String date, String time) {
+    public EditTaskCommand(Index index, String desc, String date, String time, boolean[] prefixStatusArr) {
         requireAllNonNull(index, desc, date, time);
         this.index = index;
         this.desc = desc;
         this.date = date;
         this.time = time;
+        this.prefixStatusArr = prefixStatusArr;
     }
 
     @Override
@@ -120,10 +118,15 @@ public class EditTaskCommand extends Command {
 
     private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
+        if (prefixStatusArr[1] || prefixStatusArr[2]) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
 
         if (!desc.isEmpty()) {
             Description newDesc = ParserUtil.parseDescription(desc);
             updatedToDoTask.setDescription(newDesc);
+        } else {
+            throw new ParseException(MESSAGE_EMPTY_DESCRIPTION);
         }
 
         return updatedToDoTask;
