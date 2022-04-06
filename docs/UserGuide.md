@@ -279,7 +279,8 @@ Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT
 * For blood type parameter, we recommend using ABO blood system, but allow any blood system or special blood type values.
 
 Examples:
-* `add t/medical i/S1234567L bt/O ht/185 cm`
+* `add t/medical i/S1234567L bt/AB ht/175 cm`
+* `add t/medical i/S1234567L a/22 bt/O md/Paracetamol 500mg twice a day; Atarvastatin 20mg once a day ht/185 cm wt/70 kg il/Mild fever; High cholesterol su/Appendectomy fh/Has family history of high blood pressure ih/MMR; 6 in 1; Hepatitis B gd/Male et/Chinese`
 
 ### Viewing Medical Information: `view t/medical`
 

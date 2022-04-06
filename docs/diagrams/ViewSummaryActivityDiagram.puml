@@ -1,0 +1,10 @@
+@startuml
+(*) --> "User enters view i/S1234567L command"
+if "Patient with given NRIC exists in MedBook" then
+    --> "Update internal filtered lists in Model"
+    --> "Display summary to user"
+  --> [Ending Process] (*)
+else
+  --> "No patient with given NRIC found, don't display summary"
+  --> [Ending Process] (*)
+@enduml
