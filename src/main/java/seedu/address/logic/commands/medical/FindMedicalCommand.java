@@ -10,8 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.medical.MedicalContainsKeywordsPredicate;
 
 /**
- * Finds and lists all medical records in the address book's current page whose information contains any of the argument
- * keywords.
+ * Finds and lists all medical records in MedBook whose information contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindMedicalCommand extends Command {
@@ -20,7 +19,7 @@ public class FindMedicalCommand extends Command {
     public static final CommandType COMMAND_TYPE = CommandType.MEDICAL;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all medical records in the current page whose information contain any of "
+            + ": Finds all medical records in MedBook whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " diabetes";

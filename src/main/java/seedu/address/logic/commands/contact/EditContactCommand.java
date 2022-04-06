@@ -39,7 +39,7 @@ public class EditContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the contact identified "
             + "by the index number used in the displayed contact list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONTACT INSTEAD.\n"
+            + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW CONTACT WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -53,8 +53,8 @@ public class EditContactCommand extends Command {
     public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in MedBook.";
-    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED = "NRIC field cannot be modified. "
-            + "Create a new contact instead.";
+    public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
+            "NRIC field cannot be modified. Create a new contact with the correct NRIC instead.";
 
     private final Index index;
     private final EditContactDescriptor editContactDescriptor;
