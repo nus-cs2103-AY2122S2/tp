@@ -1,7 +1,6 @@
 package unibook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
 import static unibook.commons.core.Messages.MESSAGE_MISSING_OPTION;
 import static unibook.logic.commands.EditCommand.MESSAGE_WRONG_FIELDS;
 import static unibook.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -100,14 +99,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException((MESSAGE_MISSING_OPTION));
         }
 
-
         if (argMultimap.getValue(PREFIX_OPTION).get().equals("person")) {
             if (argMultimap.getValue(PREFIX_MEETINGTIME).isPresent()
                     || argMultimap.getValue(PREFIX_DATETIME).isPresent()
                     || argMultimap.getValue(PREFIX_KEYEVENT).isPresent()) {
                 throw new ParseException(MESSAGE_WRONG_FIELDS + EditCommand.PERSON_MESSAGE_USAGE);
             }
-
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));

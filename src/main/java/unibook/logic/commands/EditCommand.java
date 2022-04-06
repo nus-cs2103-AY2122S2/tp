@@ -382,7 +382,6 @@ public class EditCommand extends Command {
                 }
             }
 
-
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             int phoneIdx = model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0);
