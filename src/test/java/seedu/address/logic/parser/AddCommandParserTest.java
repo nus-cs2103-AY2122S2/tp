@@ -223,9 +223,4 @@ public class AddCommandParserTest {
             new AddCommand(expectedPersonWithSkills));
     }
 
-    @Test
-    public void parse_invalidSeparator_failure() {
-        //invalid separator for teams
-        //invalid separator for skills
-    }
 }
