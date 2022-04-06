@@ -228,7 +228,7 @@ Classes used by multiple components are in the `seedu.contax.commons` package.
 
 ### Alternate Architectural View By Functionality
 
-Departing from the 4-component architectural view of the system, the App can also be logically partitioned into 3 distinct subsystems based on functionality.
+Departing from the 4-component architectural view of the system, the App can also be logically partitioned into **3 distinct subsystems** based on **functionality**.
 These subsystems are namely the:
 
 * Address Book Subsystem
@@ -240,7 +240,7 @@ These subsystems are namely the:
 Functionally, the Address Book and Schedule subsystem are near identical copies of each other, with the exception being the type of data being managed and the
 logic specific to each type of data. They serve the same purpose of storing and managing data related to Contacts and Appointments respectively, and are hence structured similarly across the 4 architectural components, with similar flows for equivalent operations (E.g. `deletePerson` and `deleteAppointment`).
 
-As such, the detailed descriptions for the Address Book subsystem above can be translated to equivalents for the Schedule subsystem.
+As such, detailed descriptions for the Address Book subsystem can be easily translated to equivalents for the Schedule subsystem.
 
 --------------------------------------------------------------------------------------------------------------------
 
