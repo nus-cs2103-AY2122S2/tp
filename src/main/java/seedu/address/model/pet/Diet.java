@@ -7,7 +7,9 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Diet {
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]*$";
     public final String value;
+
 
     /**
      * Constructs a {@code Diet}.
@@ -17,6 +19,13 @@ public class Diet {
     public Diet(String diet) {
         requireNonNull(diet);
         value = diet.trim().replaceAll(" +", " ");
+    }
+
+    /**
+     * Returns true if a given string is a valid diet.
+     */
+    public static boolean isValidDiet(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

@@ -39,14 +39,6 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
             throw new ParseException(MESSAGE_NO_CHARGE_SET);
         }
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ChargeCommand.MESSAGE_USAGE), ive);
-        }
-
         YearMonth chargeDate;
         try {
             chargeDate = ParserUtil.parseChargeDate(argMultimap.getValue(PREFIX_CHARGE_MONTH_YEAR).get());
@@ -61,6 +53,13 @@ public class ChargeCommandParser implements Parser<ChargeCommand> {
         } catch (ParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     Charge.MESSAGE_INVALID_CHARGE_FORMAT), e);
+        }
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
 
         return new ChargeCommand(index, chargeDate, charge);
