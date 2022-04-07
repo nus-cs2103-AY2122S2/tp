@@ -1,7 +1,6 @@
 package seedu.trackbeau.ui;
 
 import java.text.NumberFormat;
-import java.time.Duration;
 import java.util.Locale;
 
 import javafx.fxml.FXML;
@@ -47,13 +46,17 @@ public class ServiceCard extends UiPart<Region> {
         this.service = service;
         id.setText(displayedIndex + ". ");
         name.setText(service.getName().fullName);
+
+        // @@author flairekq-reused
+        // Reused from https://stackoverflow.com/questions/2379221/how-to-format-decimals-in-a-currency-format
+        // with minor modifications
         Locale locale = new Locale("en", "SG");
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
         String priceString = formatter.format(service.getPrice().value);
         price.setText("Price: " + priceString);
-        Duration durationFormatter = Duration.ofMinutes(service.getDuration().value);
-        int hours = durationFormatter.toHoursPart();
-        int minutes = durationFormatter.toMinutesPart();
+
+        int hours = service.getDuration().value / 60;
+        int minutes = service.getDuration().value % 60;
         String displayDuration = "Duration: ";
         if (hours > 0) {
             displayDuration += (hours + "hr");
@@ -79,6 +82,6 @@ public class ServiceCard extends UiPart<Region> {
         // state check
         ServiceCard card = (ServiceCard) other;
         return id.getText().equals(card.id.getText())
-                && service.equals(card.service);
+            && service.equals(card.service);
     }
 }
