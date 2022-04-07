@@ -27,7 +27,8 @@ public class TelegramTest {
         // invalid telegram id
         assertFalse(Telegram.isValidTelegramId("@")); // symbols
         assertFalse(Telegram.isValidTelegramId("alice test")); // two words
-
+        assertFalse(Telegram.isValidTelegramId("_alice")); // start with underscore
+        assertFalse(Telegram.isValidTelegramId("  alice_test_1234")); // space in front
 
         // valid telegram id
         assertTrue(Telegram.isValidTelegramId("")); // blank spaces (after trimmed)

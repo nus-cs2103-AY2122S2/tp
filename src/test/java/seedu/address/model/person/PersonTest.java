@@ -46,20 +46,36 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name differs in case, address same -> returns true
+        // address same -> returns true
         editedBob = new PersonBuilder(BOB).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name differs in case, email same -> returns true
+        // address same with different case -> returns true
+        editedBob = new PersonBuilder(BOB).withAddress(VALID_ADDRESS_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // email same -> returns true
         editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name differs in case, telegram same -> returns true
+        // email same with different case -> returns true
+        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // telegram same -> returns true
         editedBob = new PersonBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
-        // name differs in case, matricCard same -> returns true
+        // telegram same with different case-> returns true
+        editedBob = new PersonBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // matricCard same -> returns true
         editedBob = new PersonBuilder(BOB).withMatricCard(VALID_MATRICCARD_BOB).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // matricCard same with different case -> returns true
+        editedBob = new PersonBuilder(BOB).withMatricCard(VALID_MATRICCARD_BOB.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
