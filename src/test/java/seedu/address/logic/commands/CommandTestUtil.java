@@ -48,6 +48,8 @@ public class CommandTestUtil {
     public static final ArrayList<Tag> VALID_MULTIPLE_TAGS = new ArrayList<Tag>(Arrays.asList(
             new Tag("Husband", Priority.PRIORITY_3), new Tag("Friend", Priority.PRIORITY_4)));
     public static final ArrayList<Tag> VALID_NO_TAGS = new ArrayList<Tag>();
+    public static final ArrayList<Tag> VALID_TAG_NULL_PRIO = new ArrayList<Tag>(Arrays.asList(
+        new Tag("Null Priority", null)));
 
     public static final String NAME_FIND_ALICE_BOB = " " + PREFIX_NAME + "Alice Bob";
     public static final String NAME_FIND_ALICE_BOB_WHITESPACE = " " + PREFIX_NAME + "  \n Alice \n \t Bob  \t";

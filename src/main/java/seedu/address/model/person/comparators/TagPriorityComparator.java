@@ -27,18 +27,49 @@ public class TagPriorityComparator implements Comparator<Person> {
         //Treats the priority of a person's tags as the highest priority
         //out of all their tags.
         Priority maxPrio1 = Priority.PRIORITY_4;
+        boolean hasNonNull1 = false;
+        boolean hasNull1 = false;
         Priority maxPrio2 = Priority.PRIORITY_4;
+        boolean hasNonNull2 = false;
+        boolean hasNull2 = false;
+
         for (Tag currTag : tags1) {
-            if (maxPrio1.compareTo(currTag.getPriority()) > 0) {
-                maxPrio1 = currTag.getPriority();
+            Priority currPrio = currTag.getPriority();
+            if (currPrio == null) {
+                hasNull1 = true;
+                continue;
             }
-        }
-        for (Tag currTag : tags2) {
-            if (maxPrio2.compareTo(currTag.getPriority()) > 0) {
-                maxPrio2 = currTag.getPriority();
+
+            hasNonNull1 = true;
+            if (maxPrio1.compareTo(currPrio) > 0) {
+                maxPrio1 = currPrio;
             }
         }
 
-        return maxPrio1.compareTo(maxPrio2);
+        for (Tag currTag : tags2) {
+            Priority currPrio = currTag.getPriority();
+            if (currPrio == null) {
+                hasNull2 = true;
+                continue;
+            }
+
+            hasNonNull2 = true;
+            if (maxPrio2.compareTo(currPrio) > 0) {
+                maxPrio2 = currPrio;
+            }
+        }
+
+        boolean isNull1 = hasNull1 && !hasNonNull1;
+        boolean isNull2 = hasNull2 && !hasNonNull2;
+
+        if (isNull1 && isNull2) {
+            return 0;
+        } else if (isNull1) {
+            return 1;
+        } else if (isNull2) {
+            return -1;
+        } else {
+            return maxPrio1.compareTo(maxPrio2);
+        }
     }
 }
