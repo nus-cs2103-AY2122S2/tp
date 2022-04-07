@@ -254,7 +254,8 @@ Given below is an example scenario of how the `removetag` command works.
 
 The following sequence diagram shows how the `removetag` operation works: <br>
 
-<img src="images/RemoveTagSequenceDiagram.png" width="2000" />
+<img src="images/RemoveTagSequenceDiagram0.png" />
+<img src="images/RemoveTagSequenceDiagram1.png" />
 
 ### Event feature
 
