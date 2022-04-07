@@ -10,8 +10,6 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 Given below are my contributions to the project.
 
-## To be filled with proper details in the future.
-
 * **New Feature**: Added the ability to schedule and cancel meetings with clients through `meet` command.
     * What it does: allows the user to schedule a meeting date and time with a client. Users can also cancel meetings with the client.
     * Justification: This feature improves the product significantly because the user has to schedule meetings with clients and more often than not, clients cancel meetings on them. 
