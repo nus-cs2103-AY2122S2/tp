@@ -39,6 +39,7 @@ MainWindow --> "0..1" PackageWindow
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+PackageWindow -down-> "*" PackageCard
 
 MainWindow -left-|> UiPart
 
@@ -48,8 +49,11 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+PackageWindow --|> UiPart
+PackageCard --|> UiPart
 
 PersonCard ..> Model
+PackageCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
