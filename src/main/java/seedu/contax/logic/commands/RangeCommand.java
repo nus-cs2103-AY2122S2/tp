@@ -75,7 +75,8 @@ public class RangeCommand extends Command {
                 } catch (CommandException ce) {
                     commandResultList.clear(); // only for the purpose of not changing output in feature freeze
                     // special case: duplicated name editing, restore to previous name
-                    if (fromIndex.getZeroBased() != toIndex.getZeroBased() && commandText.startsWith("editperson")) {
+                    if (fromIndex.getZeroBased() != toIndex.getZeroBased()
+                            && commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
                         model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
                     }
                     commandResultList.add(new CommandResult(ce.getMessage()));

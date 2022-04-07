@@ -96,7 +96,7 @@ public class BatchCommand extends Command {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
                     commandResultList.clear();
-                    if (commandText.startsWith("editperson")) {
+                    if (commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
                         model.setPerson(model.getFilteredPersonList().get(indexList.get(0).getZeroBased()),
                                 restorePerson);
                     }
