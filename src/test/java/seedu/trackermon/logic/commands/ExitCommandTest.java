@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ModelManager;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code ExitCommand}.
+ */
 public class ExitCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
