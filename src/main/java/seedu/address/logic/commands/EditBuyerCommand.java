@@ -88,7 +88,7 @@ public class EditBuyerCommand extends Command {
         Buyer buyerToEdit = lastShownList.get(index.getZeroBased());
         Buyer editedBuyer = createEditedBuyer(buyerToEdit, editBuyerDescriptor);
 
-        if (!buyerToEdit.isSameclient(editedBuyer) && model.hasClient(editedBuyer)) {
+        if (!buyerToEdit.isSameclient(editedBuyer) && model.hasBuyer(editedBuyer)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
 
@@ -163,7 +163,7 @@ public class EditBuyerCommand extends Command {
         private Phone phone;
         private Set<Tag> tags;
         private Appointment appointment;
-        //private PropertyToBuy propertyToBuy;
+        private PropertyToBuy propertyToBuy;
         private HouseType houseType;
         private Location location;
         private PriceRange priceRange;
@@ -178,9 +178,11 @@ public class EditBuyerCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setTags(toCopy.tags);
+            setAppointment(toCopy.appointment);
             setHouseType(toCopy.houseType);
             setLocation(toCopy.location);
             setPriceRange(toCopy.priceRange);
+            setPropertyToBuy(toCopy.propertyToBuy);
         }
 
 
@@ -246,6 +248,14 @@ public class EditBuyerCommand extends Command {
             return Optional.ofNullable(priceRange);
         }
 
+        public void setPropertyToBuy(PropertyToBuy propertyToBuy) {
+            this.propertyToBuy = propertyToBuy;
+        }
+
+        public Optional<PropertyToBuy> getPropertyToBuy() {
+            return Optional.ofNullable(propertyToBuy);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -282,6 +292,7 @@ public class EditBuyerCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getTags().equals(e.getTags())
+                    && getAppointment().equals(e.getAppointment())
                     && getHouseType().equals(e.getHouseType())
                     && getLocation().equals(e.getLocation())
                     && getPriceRange().equals(e.getPriceRange());
