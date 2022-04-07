@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Product's discount start in the ibook.
+ * Represents a Product's discount start in the iBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidDiscountStart(String)}
  */
 public class DiscountStart {
@@ -12,9 +12,9 @@ public class DiscountStart {
     public static final String DEFAULT_DISCOUNT_START = "0";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Discount Start should only be of type integer, and should not be negative";
+            "Discount Start should be a non-negative integer at most 999999";
 
-    public static final String VALIDATION_REGEX = "|\\d+";
+    public static final String VALIDATION_REGEX = "|0*(?:0|[1-9]\\d{0,5})";
 
     public final Integer discountStart;
 

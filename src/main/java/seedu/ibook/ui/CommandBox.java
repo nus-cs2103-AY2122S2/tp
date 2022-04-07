@@ -32,6 +32,7 @@ public class CommandBox extends UiComponent<TextField> {
             return;
         }
 
+        getMainWindow().hidePopup();
         getMainWindow().executeCommand(commandText);
         commandTextField.setText("");
     }

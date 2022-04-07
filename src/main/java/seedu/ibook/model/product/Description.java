@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Product's description in the ibook.
+ * Represents a Product's description in the iBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {

@@ -1,14 +1,13 @@
 package seedu.ibook.ui.table.item;
 
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
+import seedu.ibook.model.item.FilteredItemList;
 import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.ui.MainWindow;
 import seedu.ibook.ui.UiComponent;
-import seedu.ibook.ui.table.ProductCard;
 
 /**
  * The {@code ItemTable} that is containing {@code ItemCard}
@@ -17,11 +16,10 @@ public class ItemTable extends UiComponent<VBox> {
 
     private static final String FXML = "table/item/ItemTable.fxml";
 
-    private final ProductCard productCard;
     private final Product product;
     private final int productIndex;
 
-    private final ObservableList<Item> filteredItem;
+    private final FilteredItemList filteredItem;
 
     private final Listener listener = new Listener();
 
@@ -35,21 +33,13 @@ public class ItemTable extends UiComponent<VBox> {
      * @param product The {@code Product} associated with this table.
      * @param productIndex The index of the product.
      */
-    public ItemTable(MainWindow mainWindow, ProductCard productCard, Product product, int productIndex) {
+    public ItemTable(MainWindow mainWindow, Product product, int productIndex) {
         super(FXML, mainWindow);
-        this.productCard = productCard;
         this.product = product;
         this.productIndex = productIndex;
         this.filteredItem = product.getFilteredItems();
         filteredItem.addListener(listener);
         populateField();
-    }
-
-    /**
-     * Removes listener from the table.
-     */
-    public void removeListener() {
-        filteredItem.removeListener(listener);
     }
 
     private void populateField() {
@@ -70,7 +60,6 @@ public class ItemTable extends UiComponent<VBox> {
         @Override
         public void onChanged(Change<? extends Item> c) {
             populateField();
-            productCard.populateField();
         }
     }
 

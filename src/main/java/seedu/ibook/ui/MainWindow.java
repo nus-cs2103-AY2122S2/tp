@@ -62,6 +62,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Register event handler for stage close
         primaryStage.setOnCloseRequest(event -> handleExit());
+
     }
 
 
@@ -136,7 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultWindow.setFeedbackToUser(commandResult.getFeedbackToUser());
+            setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 menuToolbar.handleHelp();
@@ -151,6 +152,15 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             setError(e.getMessage());
         }
+    }
+
+    /**
+     * Sets feedback To {@code ResultWindow}.
+     *
+     * @param feedback The corresponding feedback.
+     */
+    public void setFeedbackToUser(String feedback) {
+        resultWindow.setFeedbackToUser(feedback);
     }
 
     /**
@@ -229,7 +239,10 @@ public class MainWindow extends UiPart<Stage> {
         populateFilters();
     }
 
-    private void hidePopup() {
+    /**
+     * Hide the popup window
+     */
+    public void hidePopup() {
         popupHandler.hidePopup();
     }
 
