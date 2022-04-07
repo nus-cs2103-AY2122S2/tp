@@ -151,13 +151,17 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+
+        // Strictly only allow one tag.
         if (tags.size() > 1) {
             throw new ParseException(MESSAGE_INVALID_NUMBER_OF_TAGS);
         }
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+
         return tagSet;
     }
 
