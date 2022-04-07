@@ -37,7 +37,7 @@ public class DeleteTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Tag> lastShownList = model.getTagList();
-        List<Person> personList = model.getFilteredPersonList();
+        List<Person> personList = model.getFullPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TAG_DISPLAYED_INDEX);
         }
