@@ -2,7 +2,7 @@ package seedu.trackermon.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackermon.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
 

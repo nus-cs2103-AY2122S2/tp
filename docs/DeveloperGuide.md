@@ -35,6 +35,10 @@ title: Developer Guide
       * [What it does](#what-it-does-3)
       * [Implementation](#implementation-4)
       * [Design considerations](#design-considerations-3)
+    * [Suggest show](#suggest-show)
+        * [What it does](#what-it-does-4)
+        * [Implementation](#implementation-5)
+        * [Design considerations](#design-considerations-4)
 * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 * [**Appendix A: Requirements**](#appendix-a-requirements)
   * [Product scope](#product-scope)
@@ -49,6 +53,7 @@ title: Developer Guide
   * [Editing a show](#editing-a-show)
   * [Saving data](#saving-data)
   * [Finding a show](#finding-a-show)
+  * [Suggesting a show](#suggesting-a-show)
   * [Importing Trackermon data](#importing-trackermon-data)
   * [Exporting Trackermon data](#exporting-trackermon-data)
 
@@ -406,6 +411,56 @@ Implementing the FileChooser library allows us to create a File Explorer GUI sim
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+---
+### Suggest Show
+
+#### What it does
+
+Returns a single show from the current displayed list of shows
+
+#### Implementation
+
+After executing the suggest command, it would create a SuggestCommand object.
+Then, LogicManager will execute the given SuggestCommand. Upon execution of the SuggestCommand's execute method,
+it will obtain the currently displayed list of shows via the model's `getFilteredShowList()`method.
+
+In the event that the list is empty, this would cause an error message which informs users that
+there are no shows currently in the displayed show list. Similarly, if there is only one show 
+present in the list, it would inform the user that there is only one show in the current displayed 
+show list.
+
+A random show is then selected from the list of displayed shows and displayed in the show list.
+
+Below is the example usage scenario and the step-by-step flow of the suggest command.
+
+Step 1: The user launches Trackermon and is presented with a list of all shows retrieved from
+local storage trackermon.json.
+
+Step 2: The user executes suggest command to get a random show from the currently displayed 
+list of shows.
+
+Step 3: The suggest command will then check to ensure that the current displayed list of shows
+contains two or more shows.
+
+Step 4: In the event that there is no show or one show currently being displayed, Trackermon would return 
+an error message. Else, a random show would then be selected from the currently displayed list 
+of shows.
+
+Step 5: Model#updateFilteredShowList will then be called and model will be updated with the 
+random show.
+
+#### Design considerations:
+
+- **Alternative 1 (current choice):** Returns a random show from the currently displayed list.
+  - Pros: - Simple and easy to use.
+  - Cons: - If the user wants to get another suggestion, they have to call the list command to get a full list of shows again.
+- **Alternative 2 :** Returns a random show from the list of all shows currently in Trackermon.
+  - Pros: - If the user wants to get another suggestion, they can just call suggest another time.
+  - Cons: - Users are unable to get a suggestion from a filtered list of show.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -744,6 +799,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use case: UC11 - Suggesting a show**
+
+**Preconditions: Trackermon application is started.**
+
+**Guarantees: -. **
+
+**MSS**
+
+1. User requests to list shows.
+2. Trackermon shows a list of shows.
+3. User requests a suggestion from Trackermon.
+4. Trackermon returns a random show.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The displayed list is empty.
+
+  * 2a1. Trackermon shows an error message to the user, indicating that there are no shows in the currently displayed list.
+
+    Use case ends.
+
+* 3a. The displayed list contains only one show.
+
+  * 3a1. Trackermon shows an error message to the user, indicating that there is only one show in the currently displayed list.
+    
+    Use case ends.
+
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any [_Mainstream OS_](#glossary) as long as it has Java `11` or above installed.
@@ -992,6 +1081,22 @@ testers are expected to do more *exploratory* testing.
    
    2. Command: `sort n/asc s/dsc so/statusname`<br>
       Expected: The list of shows is sorted by status in descending order followed by name in ascending order.
+
+[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
+
+---
+
+### Suggesting a show
+
+1. Prerequisites: None.
+2. Launch the app.
+3. Command: `suggest`
+  1. Test case: Displayed list of shows is empty.
+    2. Expected: Trackermon returns an error message informing user that displayed list of shows is empty.
+  2. Test case: Displayed list of shows only contains one show.
+    2. Expected: Trackermon returns an error message informing user that there is only one show in the displayed list of shows.
+  3. Test case: Displayed list of shows with two or more show.
+    2. Expected: Trackermon returns a random show from the displayed list of shows.
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 

@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.commons.core.index.Index;
 import seedu.trackermon.commons.util.StringUtil;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
@@ -22,8 +23,6 @@ import seedu.trackermon.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_ORDER = "Invalid value!! Need to asc or dsc. For example: n/asc";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -32,8 +31,9 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -48,7 +48,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
         }
         return new Name(trimmedName);
     }
@@ -63,23 +63,9 @@ public class ParserUtil {
         requireNonNull(status);
         String trimmedStatus = status.trim().toUpperCase();
         if (!Status.isValidStatus(trimmedStatus)) {
-            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Status.MESSAGE_CONSTRAINTS));
         }
         return Status.getStatus(trimmedStatus);
-    }
-
-    /**
-     * Parses a {@code String rating} into a {@code Rating}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code rating} is invalid.
-     */
-    public static Rating parseRating(int rating) throws ParseException {
-        requireNonNull(rating);
-        if (!Rating.isValidScore(rating)) {
-            throw new ParseException(Rating.INVALID_RATING);
-        }
-        return new Rating(rating);
     }
 
     /**
@@ -91,7 +77,7 @@ public class ParserUtil {
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
         if (!Rating.isValidScore(rating)) {
-            throw new ParseException(Rating.INVALID_RATING);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Rating.INVALID_RATING));
         }
         return new Rating(rating);
     }
@@ -107,7 +93,7 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Tag.MESSAGE_CONSTRAINTS));
         }
         return new Tag(trimmedTag);
     }
@@ -142,7 +128,7 @@ public class ParserUtil {
     public static String checkOrder(String order) throws ParseException {
         requireNonNull(order);
         if (!order.equals(VALUE_ASC) && !order.equals(VALUE_DSC)) {
-            throw new ParseException(MESSAGE_INVALID_ORDER);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_INPUT, Messages.MESSAGE_INVALID_ORDER));
         }
         return order;
     }
