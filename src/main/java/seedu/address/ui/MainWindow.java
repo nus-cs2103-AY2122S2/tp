@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
@@ -264,21 +263,23 @@ public class MainWindow extends UiPart<Stage> {
                 generalDisplay.getTagList().toggleRightClick(false);
             }
 
-            if (commandResult.isRemoveProfile() && this.generalDisplay.getProfile().getPerson() != null
-                    && this.generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
-                this.generalDisplay.resetProfile();
+            // when the command is a delete command, and the current profile is displaying the person being deleted,
+            // the profile will reset and the current selection after deletion is cleared.
+            if (commandResult.isRemoveProfile() && generalDisplay.getProfile().getPerson() != null
+                    && generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
+                generalDisplay.resetProfile();
+                personListPanel.getPersonListView().getSelectionModel().clearSelection();
             }
 
             if (commandResult.isShowProfile()) {
-                this.generalDisplay.setProfile(commandResult.getPerson());
-                this.personListPanel.getPersonListView().scrollTo(this.generalDisplay
-                        .getProfile().getIndex().getZeroBased());
-                this.personListPanel.getPersonListView().getSelectionModel().select(this.generalDisplay
+                generalDisplay.setProfile(commandResult.getPerson());
+                personListPanel.getPersonListView().scrollTo(generalDisplay.getProfile().getIndex().getZeroBased());
+                personListPanel.getPersonListView().getSelectionModel().select(generalDisplay
                         .getProfile().getIndex().getZeroBased());
             }
 
             if (commandResult.isShowTagList()) {
-                this.generalDisplay.setTagList(logic.getModel().getTagList());
+                generalDisplay.setTagList(logic.getModel().getTagList());
             }
 
             if (commandResult.isSwitchTheme()) {
@@ -286,7 +287,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowGrabResult()) {
-                this.generalDisplay.setGrabResult(commandResult.getGrabResult());
+                generalDisplay.setGrabResult(commandResult.getGrabResult());
             }
 
             if (commandResult.isShowHelp()) {

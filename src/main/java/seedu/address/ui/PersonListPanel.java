@@ -118,8 +118,24 @@ public class PersonListPanel extends UiPart<Region> {
         delete.setOnAction(event -> {
             try {
                 Index personToDeleteIndex = Index.fromZeroBased(personListView.getSelectionModel().getSelectedIndex());
+                Person personToDelete = personListView.getSelectionModel().getSelectedItem();
                 DeleteCommand deleteCommand = new DeleteCommand(personToDeleteIndex);
                 CommandResult commandResult = deleteCommand.execute(logic.getModel());
+
+                // if the current profile is displaying the person being deleted, the profile will reset and the
+                // current selection after deletion is cleared.
+                Person currentPersonInProfile = UiManager.getMainWindow().getGeneralDisplay().getProfile().getPerson();
+                if (currentPersonInProfile != null && currentPersonInProfile.isSamePerson(commandResult.getPerson())) {
+                    UiManager.getMainWindow().getGeneralDisplay().resetProfile();
+                    personListView.getSelectionModel().clearSelection();
+                } else if (currentPersonInProfile != null && !currentPersonInProfile.isSamePerson(personToDelete)) {
+                    // otherwise, select the person that is currently being displayed in profile.
+                    personListView.getSelectionModel().select(currentPersonInProfile);
+                } else {
+                    // if the current profile is empty, clear the default selection.
+                    personListView.getSelectionModel().clearSelection();
+                }
+
                 UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
             } catch (CommandException e) {
                 UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
