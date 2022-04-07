@@ -45,6 +45,7 @@ Given below are my contributions to the project.
   * TagCommandParser
   * RemoveTagCommand
   * RemoveTagCommandParser
+  * JsonAdaptedName
 
 * **Tools**:
   * Integrated Codecov into team repo
