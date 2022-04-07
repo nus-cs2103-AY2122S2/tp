@@ -1,6 +1,9 @@
 ---
 layout: page
 title: Developer Guide
+
+* Table of Contents
+  {:toc}
 ---
 
 # Acknowledgements
@@ -9,7 +12,7 @@ This is a brownfield project that bases from the Project template [AddressBook L
 
 # Setting up, getting started
 
-Get started by following these instructions from our [guide](https://www.notion.so/Setting-up-and-getting-started-28e77333ad24494093cc39f79194a1e2).
+Get started by following these instructions from our [guide](https://ay2122s2-cs2103-w16-4.github.io/tp/SettingUp.html).
 
 # Design
 
@@ -18,8 +21,21 @@ Take a look at our design which is mostly based off [AddressBook Level 3 (AB3)](
 
 ##Architecture
 
-##UI Component
+###UI Component
+
+The **API** of this component is specified in `Ui.java`
+
 <img src="images/developer-guide/UiArchitecture.png" width="800px">
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the src/main/resources/view folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
+The `UI` component,
+- executes user commands using the `Logic` component. 
+- listens for changes to `Model` data so that the UI can be updated with the modified data. 
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands. 
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+Several user commands also involve the display and creation of `XYZWindows` (`matchwindow`, `statswindow`, `viewimagewindow`, `reminderwindow`, `favouritewindow`) which relies on the logic component in order to execute and display the information returned from the commands.
 
 # Implementation
 
@@ -214,6 +230,7 @@ Manage Persons faster that a typical mouse/GUI driven app.
 | High | User | Match my clients (e.g. buyer with seller)                                                                                                                                          | Spot if there are any properties being sold by a seller that a buyer has a preference for.          |
 | High | User | Be able to understand how the app works from start to end                                                                                                                          | Able to provide the necessary inputs to perform a particular action on the app                      |
 | High | User | display data of the number of sellers & buyers based on the particular region that the seller has properties in or the buyer having a preference of when looking to buy properties | Be able to make the better business decision to look for more clients in the most popular region    |
+| High | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
 
 ## Use cases
 
@@ -226,10 +243,10 @@ Manage Persons faster that a typical mouse/GUI driven app.
 5. The application will not be able to prevent any data privacy violated by other programs.
 
 ## Glossary
-
-**Buyer** - client that is looking to buy a property based on some preference
-
-**Seller -** client that is looking to sell a property for a particular price
+- **Users**: Real estate agents.
+- **Clients**: Customers of the real estate agents looking to buy or sell property each represented as an instance of `Person`
+- **Buyers**: Clients that have engaged the real estate agent to help them buy a property.
+- **Sellers**: Clients that have engaged the real estate agent to help them sell their property.
 
 # Appendix: Instructions for manual testing
 
@@ -260,3 +277,39 @@ Given below are instructions to test the app manually.
     3. Test case: `delete 0`Expected: No Person is deleted. Error details shown in the status message. Status bar remains the same.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
 
+## Uploading an Image
+
+1. Uploading an Image to an existing client
+   1. Prerequisites: 
+      1. There must be at least a client in the list.
+      2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+   2. Test case: `upload 1 i/success.png:successful upload` Expected: an image is successfully associated to the first client with successful upload message.
+   3. Test case: `upload 1 i/test.txt:Fail upload` Expected: upload fails and error message is shown.
+   4. Other incorrect upload commands to try: `upload` `upload i/fail.png`, `...` Expected: Incorrect command format or invalid file error messages.
+
+## Viewing an Image
+
+1.Uploading an Image to an existing client
+1. Prerequisites:
+   1. There must be at least a client in the list.
+   2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
+   3. client must have at least one image associated with
+2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
+3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+
+# Effort
+
+## Difficulty level
+RealEstatePro was developed from morphing the existing AB3 app
+
+## Challenges
+Challenges faced were the following:
+- Understanding and refactoring the existing AB3 code base.
+
+## Effort Required
+
+
+## Achievements
+RealEstatePro has been developed to become a fully functioning app that is fully capable fo fufilling the needs of a real estate agent in organising clients and is capable of
+managing the different types of information that a real estate agent will need about a client.
+RealEstatePro also boasts a range of tools that would improve the efficiency of the real estate agent by providing tools such as reminders and matching of clients which makes it easier identify trends and fulfill the needs of clients.
