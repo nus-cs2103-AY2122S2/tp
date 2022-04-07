@@ -222,6 +222,16 @@ This also required changes to `CLISyntax` to include the new prefixes for the ad
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
+**Class Diagram of AddCommand class is shown below:**
+![AddClassDiagram](images/AddClassDiagram.png)
+
+Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand
+
+1. `MESSAGE_SUCCESS`:
+   - Scenario: Adding of the specified `Person` to the database is successful 
+2. `MESSAGE_DUPLICATE_PERSON`:
+   - Scenario: Specified `Person` already exists in the database due to conflicting Matriculation Number, Phone or Email.
+
 **Sequence Diagram of Add Feature is shown below:**
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
 
