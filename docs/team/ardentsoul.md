@@ -5,8 +5,7 @@ title: Zachary's Project Portfolio Page
 
 ### Project: Trackermon
 
-Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon allows people who want to track and remember what shows they have watched, are currently watching, or plan to watch.
-
+Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon helps people track and remember what shows they have watched, are currently watching, or plan to watch.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ardentsoul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
@@ -43,7 +42,7 @@ Given below are my contributions to the project.
 
   * Developer Guide:
     * Added implementation details of the `find` feature.
-    * Added use cases UC01-UC06 and UC08.
+    * Added use cases UC01-UC07.
     * Updated documentation and UML diagrams for Architecture and Logic ([\#81](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/81), [\#92](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/92))
     * Did structural overhaul and improvement to existing documentation [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164)
       * Added Introduction 

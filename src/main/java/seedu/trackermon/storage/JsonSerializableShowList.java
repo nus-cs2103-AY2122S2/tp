@@ -14,7 +14,7 @@ import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.Show;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ShowList that is serializable to JSON format.
  */
 @JsonRootName(value = "showlist")
 class JsonSerializableShowList {
