@@ -52,7 +52,7 @@ public class EditLessonCommand extends Command {
             + "Example: "
             + "\n     "
             + COMMAND_WORD + " "
-            + " 2 "
+            + "2 "
             + PREFIX_DATE + " 19-12-2022 "
             + PREFIX_START_TIME + " 18:00 "
             + PREFIX_DURATION_HOURS + " 2 "
