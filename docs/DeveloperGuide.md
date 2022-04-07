@@ -253,10 +253,10 @@ Given below is an example scenario of how the `removetag` command works.
 
 <img src="images/RemoveTagState1.png" width="450" />
 
-The following sequence diagram shows how the `removetag` operation works: <br>
+The following sequence diagrams shows how the `removetag` operation works: <br>
 
 <img src="images/RemoveTagSequenceDiagram0.png" />
-<img src="images/RemoveTagSequenceDiagram1.png" width="450"/>
+<img src="images/RemoveTagSequenceDiagram1.png" width="500"/>
 
 ### Event feature
 
@@ -293,7 +293,7 @@ will eventually return to `LogicManager` which will call `EventCommand#execute()
 The following sequence diagram shows how the tag operation works:
 ![Event Sequence Diagram](images/EventSequenceDiagram.png)
 
-### Cancelevent feature
+### Cance Event feature
 
 #### Current Implementation
 The cancelevent command would allow the user to cancel and remove an event from the address book. The index specified by the user would
