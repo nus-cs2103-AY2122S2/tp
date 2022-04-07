@@ -97,6 +97,7 @@ public class AddPropertyToBuyCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPropertyToBuyCommand // instanceof handles nulls
-                && propertyToBuy.equals(((AddPropertyToBuyCommand) other).propertyToBuy));
+                && propertyToBuy.equals(((AddPropertyToBuyCommand) other).propertyToBuy))
+                && index.equals(((AddPropertyToBuyCommand) other).index);
     }
 }
