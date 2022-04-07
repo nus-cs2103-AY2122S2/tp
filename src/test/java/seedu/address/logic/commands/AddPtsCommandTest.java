@@ -48,7 +48,7 @@ public class AddPtsCommandTest {
     }
 
     @Test
-    public void execute_buyerAlreadyHasProperty_failure() {
+    public void execute_sellerAlreadyHasProperty_failure() {
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_ONE).build();
         AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, testProperty);
         Seller testSeller = model.getFilteredSellerList().get(INDEX_FIRST_SELLER.getZeroBased());
@@ -71,8 +71,8 @@ public class AddPtsCommandTest {
         showSellerAtIndex(model, INDEX_FIRST_SELLER);
 
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_TWO).build();
-        Seller testSeller = model.getFilteredSellerList().get(INDEX_FIRST_SELLER.getZeroBased());
-        AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, testProperty);
+        Seller testSeller = model.getFilteredSellerList().get(INDEX_SEVENTH_SELLER.getZeroBased());
+        AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
 
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
