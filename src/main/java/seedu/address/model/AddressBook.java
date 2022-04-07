@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.insights.PersonInsight;
@@ -130,8 +132,33 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a event to the address book.
      * The event must not already exist in the address book.
      */
-    public void addEvent(Event p) {
-        events.add(p);
+    public void addEvent(Event toAdd) {
+        alignFriendNames(toAdd);
+        events.add(toAdd);
+    }
+
+    private FriendName getExactName(FriendName name) {
+        requireNonNull(name);
+
+        FriendName exactName = persons.getExactName(name);
+        requireNonNull(exactName);
+        return exactName;
+    }
+
+    /**
+     * Aligns event's friend names to be exactly the same as actual friend names, including capitalisation.
+     * Assumes that all event friend names are valid.
+     *
+     * @param event Event object containing friend names to be aligned.
+     */
+    private void alignFriendNames(Event event) {
+        requireNonNull(event);
+        List<FriendName> originalNames = new ArrayList<>(event.getFriendNames());
+
+        for (FriendName originalName : originalNames) {
+            FriendName actualName = getExactName(originalName);
+            event.changeFriendNameIfPresent(originalName, actualName);
+        }
     }
 
     /**
@@ -149,6 +176,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
+        alignFriendNames(editedEvent);
 
         events.setEvent(target, editedEvent);
     }

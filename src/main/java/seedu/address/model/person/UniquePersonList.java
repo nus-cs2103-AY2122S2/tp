@@ -102,6 +102,24 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Return the exact name used by a person in the list that matches the given name.
+     * Assumes that the given friend name matches the name of a person in the list.
+     *
+     * @param name Name to match with.
+     * @return Exact name used by a person in the list that matches the given name.
+     */
+    public FriendName getExactName(FriendName name) {
+        requireNonNull(name);
+
+        for (Person person : internalList) {
+            if (person.getName().equals(name)) {
+                return person.getName();
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

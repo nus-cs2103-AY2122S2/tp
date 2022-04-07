@@ -47,12 +47,13 @@ public class TypicalEvents {
 
     public static AddressBook getTypicalAddressBookWithEvents() {
         AddressBook ab = new AddressBook();
-        for (Event event: getTypicalEvents()) {
-            ab.addEvent(event);
-        }
         // So that friend name check does not fail
         ab.addPerson(AMY);
         ab.addPerson(ALEX);
+
+        for (Event event: getTypicalEvents()) {
+            ab.addEvent(event);
+        }
         return ab;
     }
 
