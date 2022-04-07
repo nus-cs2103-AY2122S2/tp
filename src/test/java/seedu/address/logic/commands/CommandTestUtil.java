@@ -128,10 +128,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPetDescriptorBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withOwnerName(VALID_OWNER_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTag(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPetDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTag(VALID_TAG_HUSBAND).build();
         PRESENT_DESC_WITH_TRANSPORT_AMY = new PresentAttendanceDescriptorBuilder()
             .withDate("2022-03-27").withPickUpTime("09:00").withDropOffTime("17:30")
             .build();
