@@ -190,14 +190,14 @@ public class EditCommandParserTest {
         EditCommand expectedMultipleResetTeamChangeCommand =
             new EditCommand(targetIndices, changeTeamDescriptor, true);
         assertParseSuccess(parser,
-            INDEX_FIRST_PERSON.getOneBased() + INDEX_SECOND_PERSON.getOneBased() + EDIT_OPTION_R
+            INDEX_FIRST_PERSON.getOneBased() + " " + INDEX_SECOND_PERSON.getOneBased() + EDIT_OPTION_R
                 + TEAM_DESC_GOOGLE_N_YAHOO, expectedMultipleResetTeamChangeCommand);
 
         //multiple edits for teams
         EditCommand expectedMultipleResetSkillChangeCommand =
             new EditCommand(targetIndices, changeSkillDescriptor, true);
         assertParseSuccess(parser,
-            INDEX_FIRST_PERSON.getOneBased() + INDEX_SECOND_PERSON.getOneBased() + EDIT_OPTION_R
+            INDEX_FIRST_PERSON.getOneBased() + " " + INDEX_SECOND_PERSON.getOneBased() + EDIT_OPTION_R
                 + SKILL_DESC_C_N_PYTHON, expectedMultipleResetSkillChangeCommand);
         //parse default mode is not tested separately as all success cases that are not reset mode are default mode
         // and they are tested in methods such as {@code parse_allFieldsSpecified_success}

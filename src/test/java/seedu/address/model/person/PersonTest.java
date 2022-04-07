@@ -101,7 +101,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different s -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTeams(VALID_TEAM_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withTeams(VALID_TEAM_GOOGLE).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
