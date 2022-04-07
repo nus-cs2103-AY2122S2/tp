@@ -288,16 +288,11 @@ Format: `focus INDEX`
 ## Scheduling interviews
 **:information_source: Note:** 
 
-* The duration of an interview is fixed at 30 minutes. A new feature to allow the user to schedule interviews of flexible duration is
-under consideration for future versions of TAlent Assistant™.
-* Interviews that have expired will automatically be deleted from the interview schedule. An interview is considered
-to be expired once its duration has fully passed. (e.g. If an interview is scheduled at 5PM, the interview is deemed to have expired from 5:31PM onwards).
-If the application is open during the transition of an interview from ongoing to expired, a manual refresh (exit and re-open)
-of the application is required for the changes in the schedule to be reflected.
+* The duration of an interview is fixed at 30 minutes.
+* Interviews that have expired will automatically be deleted from the interview schedule upon a restart of the application. An interview is considered
+to be expired once its duration has fully passed. (e.g. If an interview is scheduled at 5PM, the interview is deemed to have expired from 5:30PM onwards).
 * The `Interview Status` of a candidate is automatically set to `Scheduled` upon a successful scheduling of interview. 
-Likewise, the `Interview Status` is set to `Completed` once an interview has expired. If the application is open during the 
-transition of an interview from ongoing to expired, a manual refresh (exit and re-open) of the application is required for the changes in
-the schedule to be reflected.
+Once the candidate's scheduled interview has expired, the `Interview Status` will be set to `Completed` upon a restart of the application. 
 ### Scheduling a candidate for interview: `schedule add`
 
 Schedules the specified candidate for an interview.
@@ -313,8 +308,7 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
   (e.g. `29-02-2023` will be mapped as `28-02-2023`).
 * Interviews must be scheduled within the office hours, defined as Monday to Friday, 8AM - 6PM (i.e. The last interview for the day allowed is at 5:30PM).
 * Attempts to schedule an interview within the duration of another interview will result in an error.
-(e.g. Interview A starts at 10AM on a given day. Scheduling an interview from 9:31AM up to 10:29AM is prohibited). A new feature
-to pinpoint the exact interview in conflict to the user is being considered for future versions of TAlent Assistant™.
+(e.g. Interview A starts at 10AM on a given day. Scheduling an interview from 9:31AM up to 10:29AM is prohibited).
 
 Examples:
 * `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
@@ -349,6 +343,8 @@ Format: `schedule delete SCHEDULE_INDEX`
 Examples:
 * `view all` followed by `schedule delete 2` deletes the second interview in the interview schedule.
 
+**:information_source: Note:** Deleting an interview will automatically trigger the associated candidate's 
+`Interview Status` to `Not Scheduled`, regardless of the state of the deleted interview (upcoming, ongoing or expired).
 ### Viewing scheduled interviews `view`
 
 Returns the list of scheduled interviews within the specified time period.
@@ -426,6 +422,15 @@ to your desired outcome (scheduled or not completed).
 *Format is considered to be invalid when either one of the JSON files are missing, or if the JSON files are edited to contain duplicate candidates
 and/or (conflicting) interviews.
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## New features to be added (Coming Soon!)
+
+* The following features are being considered for future versions of TAlent Assistant™:
+  * A new feature to pinpoint the exact interview in conflict (if any) when a user attempts to schedule an interview
+  * A new feature to allow the user to schedule interviews of flexible duration is
+    under consideration for future versions of TAlent Assistant™.
 
 --------------------------------------------------------------------------------------------------------------------
 
