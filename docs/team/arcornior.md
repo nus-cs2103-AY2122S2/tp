@@ -22,11 +22,11 @@ Given below are my contributions to the project.
   * Fixed storage system on MacOS and Linux not saving to the correct location.
     * Details: MacOS and Linux did not store Trackermon files in Trackermon's home folder. Worked together with [JonathanHoshi](https://github.com/JonathanHoshi) to test fixes.
       * Issues: Bug report [\#168](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/168)
-    * Morphed AB3 Storage to fit Trackermon.
-      * Details: Refactored Storage classes to fit Trackermon.
-      * Issues: Modify Storage Components [\#55](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/55)
-      * PRs: ([\#64](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/64), [\#67](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/67))
-        <br><br>
+  * Morphed AB3 Storage to fit Trackermon.
+    * Details: Refactored Storage classes to fit Trackermon.
+    * Issues: Modify Storage Components [\#55](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/55)
+    * PRs: ([\#64](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/64), [\#67](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/67))
+      <br><br>
 
 * **Project management**:
   * Necessary general code enhancements
