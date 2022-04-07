@@ -10,6 +10,7 @@ Given below are my contributions to the project.
 
 * **New Feature**:
   * Implemented JsonAdaptedTask. In which, handled, maintained and enhanced all Storage related matters for ManageEZPZ.
+    * What it does: The creation of `JsonAdaptedTask` allows ManageEZPZ to have a centralised area to handle all Task-Storage matters.
   * Completed full implementation of add Todo Task, Command, Logic, Storage as a full template for team to follow. [#72](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/72) 
   * Implemented Storage functionality for Mark and Unmark Tasks. [#83](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/83)
   * Completed full implementation of Tag Task Command, Logic, Storage. [#108](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/108)
@@ -25,10 +26,14 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Refactored existing add command to addEmployee command. [#67](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/67)
   * Fix and standardise all AddTask commands, added 'type' field for Task model. [#75](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/75)
+    * Justification: By having a 'type' field, it allows for better identification and loading of Tasks.
   * Enhanced storage to handle different fields for the different types of Tasks. [#77](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/77)
+    * Justification: With the different types of Task having different fields, it is important for the JsonAdaptedTask to handle and load the different fields of each Task.
   * Added error-prevention for AddDeadlineTaskParser, AddEventTaskCommandParser for the length of arguments. [#94](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/94)
   * Enhanced Logic for DeleteEmployee, deleting an Employee will untag all tasks that employee is assigned to, then proceeds to delete. [#141](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/141)
+    * Justification: Deleting an employee should also update all associations related to that employee.
   * Supported Storage by adding Defensive Programming logic to counter Json being modified. [#249](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/249)
+    * Justification: In cases where the Number of Tasks / other fields are being edited, we should check if the loaded details matches with our current state.
 
 * **Documentation**:
   * Developer Guide:
@@ -42,7 +47,12 @@ Given below are my contributions to the project.
     * Added tagTask, untagTask, tagPriority. [#162](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/162)
     
 * **Community**:
-  * to be added soon
+  * PR Reviewed & Merged: [#64](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/64), 
+                 [#73](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/73), 
+                 [#87](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/87), 
+                 [#89](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/89),
+                 [#96](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/96),
+                 [#107](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/107),
+                 [#123](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/123),
+                 [#145](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/145)
 
-* **Tools**:
-  * to be added soon
