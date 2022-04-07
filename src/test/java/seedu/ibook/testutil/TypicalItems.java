@@ -36,6 +36,9 @@ public class TypicalItems {
             new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_0).build(KAYA_BREAD);
     public static final Item Q5_TODAY =
             new ItemBuilder().withExpiryDate(LocalDate.now().toString()).withQuantity(QUANTITY_5).build(KAYA_BREAD);
+    public static final Item Q5_TEN_DAYS =
+            new ItemBuilder().withExpiryDate(
+                    LocalDate.now().plusDays(10).toString()).withQuantity(QUANTITY_5).build(KAYA_BREAD);
 
     public static final Item ITEM_A =
         new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build(PRODUCT_A);
@@ -79,6 +82,14 @@ public class TypicalItems {
 
     public static List<Item> getOnlyNonExpiringItems() {
         return new ArrayList<>(Arrays.asList(Q5_2020_01_01, Q5_2200_01_01));
+    }
+
+    public static List<Item> getItemToday() {
+        return new ArrayList<>(Arrays.asList(Q5_TODAY));
+    }
+
+    public static List<Item> getItemTenDays() {
+        return new ArrayList<>(Arrays.asList(Q5_TEN_DAYS));
     }
 
 }

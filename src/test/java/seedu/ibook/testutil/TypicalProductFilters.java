@@ -11,6 +11,9 @@ import static seedu.ibook.logic.commands.CommandTestUtil.VALID_PRICE_B;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
 
+import java.time.LocalDate;
+
+import seedu.ibook.model.item.ExpiryDate;
 import seedu.ibook.model.product.Category;
 import seedu.ibook.model.product.Description;
 import seedu.ibook.model.product.Name;
@@ -18,6 +21,7 @@ import seedu.ibook.model.product.Price;
 import seedu.ibook.model.product.PriceRange;
 import seedu.ibook.model.product.filters.CategoryFilter;
 import seedu.ibook.model.product.filters.DescriptionFilter;
+import seedu.ibook.model.product.filters.ExpiringFilter;
 import seedu.ibook.model.product.filters.NameFilter;
 import seedu.ibook.model.product.filters.PriceFilter;
 import seedu.ibook.model.product.filters.PriceRangeFilter;
@@ -41,6 +45,10 @@ public class TypicalProductFilters {
         new PriceRangeFilter(new PriceRange(new Price(0.0), new Price(0.0)));
     public static final PriceRangeFilter PRICE_FILTER_0_100 =
         new PriceRangeFilter(new PriceRange(new Price(0.0), new Price(100.0)));
+    public static final ExpiringFilter EXPIRING_FILTER_TODAY =
+            new ExpiringFilter(new ExpiryDate(LocalDate.now().toString()));
+    public static final ExpiringFilter EXPIRING_FILTER_TEN_DAYS =
+            new ExpiringFilter(new ExpiryDate(LocalDate.now().plusDays(10).toString()));
 
     public static ProductFilter getProductFilterA() {
         return new ProductFilter(PRODUCT_A);
@@ -49,4 +57,5 @@ public class TypicalProductFilters {
     public static ProductFilter getProductFilterB() {
         return new ProductFilter(PRODUCT_B);
     }
+
 }
