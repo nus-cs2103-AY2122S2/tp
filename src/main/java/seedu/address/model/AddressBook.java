@@ -134,6 +134,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event toAdd) {
         alignFriendNames(toAdd);
+        assert(areFriendNamesValid(toAdd));
         events.add(toAdd);
     }
 
@@ -153,6 +154,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
         alignFriendNames(editedEvent);
+        assert(areFriendNamesValid(editedEvent));
 
         events.setEvent(target, editedEvent);
     }
