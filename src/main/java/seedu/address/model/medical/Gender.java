@@ -9,7 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
 
-    public static final String MESSAGE_CONSTRAINTS = "Gender can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid gender input. "
+            + "We recommend inputting gender as Male, Female or Non-binary, "
+            + "but we allow any other gender input values. "
+            + "Gender parameter can take any values, and it should not be blank.";
 
     /*
      * The first character of the familyHistory must not be a whitespace,
