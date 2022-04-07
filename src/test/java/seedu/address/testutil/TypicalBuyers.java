@@ -77,6 +77,6 @@ public class TypicalBuyers {
     }
 
     public static List<Buyer> getTypicalBuyers() {
-        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, BENSON, JANALD, DARA, RICHARD, YUQI));
+        return new ArrayList<>(Arrays.asList(YUQI, BENSON, JUNHENG, JUNHONG, JANALD, DARA, RICHARD));
     }
 }

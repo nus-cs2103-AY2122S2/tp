@@ -120,7 +120,7 @@ public class UniqueSellerList implements Iterable<Seller> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueClientList // instanceof handles nulls
+                || (other instanceof UniqueSellerList // instanceof handles nulls
                 && internalList.equals(((UniqueSellerList) other).internalList));
     }
 
