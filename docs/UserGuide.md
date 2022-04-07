@@ -97,6 +97,8 @@ Shows a list of all employees in ManageEZPZ.
 
 Format: `listEmployee`
 
+<div style="page-break-after: always;"></div>
+
 ### Finding Employees by multiple options : `findEmployee`
 
 Finds employee(s) based on multiple conditions provided.
@@ -132,6 +134,8 @@ Format: `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL`
 Examples:
 * `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. All tasks that are assigned to the 1st employee will be updated to reflect the new changes of the employee.
 * `editEmployee 2 n/Betsy Crower` edits the name of the 2nd employee to be Betsy Crower. All tasks that are assigned to the 2nd employee will be updated to reflect the new changes of the employee.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an Employee : `deleteEmployee`
 
@@ -186,6 +190,8 @@ Shows a list of all tasks in ManageEZPZ.
 
 Format: `listTask`
 
+<div style="page-break-after: always;"></div>
+
 ### Finding Tasks by multiple options : `findTask`
 
 Finds task(s) based on multiple conditions provided.
@@ -232,6 +238,8 @@ Example:
         * priority high,
         * assigned to Alex Yeoh,
         * and is marked as done.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a Task : `editTask`
 
@@ -285,6 +293,8 @@ For event, the START_TIME must be earlier than the END_TIME.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Marking a Task : `markTask`
 
 Marks the specified task in ManageEZPZ as done.
@@ -332,6 +342,8 @@ Examples:
 * `deleteTask 2` deletes the 2nd task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 * `listTask` followed by `deleteTask 2` sets the displayed task list to show all tasks in ManageEZPZ and deletes the 2nd task in ManageEZPZ. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 * `findTask desc/slides` followed by `deleteTask 1` sets the displayed task list with the results from the findTask command and deletes the 1st task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
+
+<div style="page-break-after: always;"></div>
 
 ### Tagging a Task to an Employee : `tagTask`
 
@@ -383,6 +395,8 @@ Example:
 * `tagPriority 1 priority/HIGH` assigns the 1st task in the displayed task list with the priority of `HIGH`.
 * `listTask` followed by `tagPriority 1 priority/HIGH` sets the displayed task list to show all tasks in ManageEZPZ and assigns the 1st task in ManageEZPZ with the priority of `HIGH`.
 * `findTask desc/slides` followed by `tagPriority 1 priority/HIGH` sets the displayed task list with the results from the findTask command and assigns the 1st task in the displayed task list with the priority of `HIGH`.
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
