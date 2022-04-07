@@ -17,16 +17,37 @@ application is through command-line, so, business owners who are familiar with u
 command-line will have a great time using CinnamonBun!. 
 
 Given below are my contributions to the project.
-* **New Feature**: Add the ability to add transaction to clients.
+* **New Feature**: Add the ability to add transaction to clients. [\#57](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/57)
     * Functionality: Allow the user to add transactions to clients by specifying the client,
     amount, transaction date, due date, notes, and the status of the transaction of whether it
     has been paid. 
-    * Justification: This function is necessary for users to add notes about the client that may not fit into any of the other fields.
+    * Justification: This function is necessary for users to add clients' transaction as this application 
+    is intended to help business owners manage clients as well as their transactions. 
+  
+* **New Feature**: Add the ability to delete transactions. [\#87](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/87)
+    * Functionality: Allow the user to delete transactions.
+    * Justification: Expired transactions that will not be needed anymore (e.g. paid transactions from 5 years ago)
+    are better to be deleted. Another use case is when the user input the incorrect parameter, the transaction
+    could be deleted.
+
+* **New Feature**: Find and List transactions. [\#87](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/87)
+    * Functionality: Allow the user to list all transactions and find client-specific transactions.
+    * Justification: Users will need to look at a particular client's transactions to check for
+    overdue transactions, unpaid transactions, etc. 
+
+* **New Feature**: Pay and Unpay transactions. [\#125](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/125)
+    * Functionality: Allow the user to change the status of a transaction to paid or unpaid.
+    * Justification: When a client paid a transaction, the status of the transaction need to change
+    to paid. If the user mistakenly set the status to paid, they can change the status back to unpaid.
+
+
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=zunedz&breakdown=true)
 
 * **Project management**:
-    * To be added soon
+    * Help managing milestones from `v1.1` to `v1.4`.
+    * Add todo features/user story, tasks, bugs, and enhancement as Github Issues.
+    * Help reviewing pull requests and give feedback for improvement.
 
 * **Enhancements to existing features**:
     * added transaction
