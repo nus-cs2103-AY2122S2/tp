@@ -41,7 +41,8 @@ public class AddPropertyToSellCommandParser implements Parser<AddPropertyToSellC
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ADDRESS, PREFIX_PRICE_RANGE, PREFIX_HOUSE_TYPE, PREFIX_LOCATION)) {
-            throw new ParseException(AddPropertyToSellCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddPropertyToSellCommand.MESSAGE_USAGE));
         }
         HouseType houseType = ParserUtil.parseHouseType(argMultimap.getValue(PREFIX_HOUSE_TYPE).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());

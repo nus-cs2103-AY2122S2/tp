@@ -159,9 +159,25 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 
 * Adds a new property that the buyer at `INDEX` is hoping to buy. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The order of the inputs can be in any order.
+
+* None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
+* The `HOUSE_TYPE` can be defined as any of the following:
+  * `unspecified`
+  * `apartment`
+  * `bungalow`
+  * `condominium` or `condo`
+  * `colonia`
+  * `hdb` or `hdb_flat`
+  * `semi-detached` or `semi-d` or `semidetached` or `semid`
+  * `mansion`
+* Any other `HOUSE_TYPE` will not be accepted.
+* The default `HOUSE_TYPE` after adding a client is none of the above. After a property has been added, you cannot reset it back to this default.
+* `LOCATION` can be any non-empty input, but do use appropriate locations for your own utility. E.g. `Bishan` or `Marymount`
+* The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
 * Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
+
 
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
@@ -184,7 +200,8 @@ Examples:
 
 Function: Display potential sellers by matching the demand of a buyer. Now, you can easily find properties that buyers are interested in!
 
-* Want to match using just a certain criterion? Fret not! Here are the different match commands:
+* Note: You can match a buyer only if his/her property has been added!
+* Want to match using just a certain criterion? Fret not! Below are the different match commands.
 
 ###### Matching all fields of buyers to sellers. `match`
 
@@ -270,7 +287,7 @@ Function: Find buyers whose selected **field** contain any of the given keywords
 
 Format: `find-b field/KEYWORD1 [MORE_KEYWORDS]`
 
-* The **fields**` are:
+* The **fields** are:
   * name `n/`
   * phone `p/`
   * location `l/`
@@ -316,11 +333,11 @@ Function: Clear all buyers from the buyer list.
 
 Format: `clear-b`
 
-### Sorting buyers. `sort-b`
+#### Sorting buyers. `sort-b`
 
 Function: Sort all the buyers according to the orders specified.
 
-Format: `sort-b [by/COMPAREDITEM] [o/ORDER]`
+Format: `sort-b by/COMPAREDITEM o/ORDER`
 
 * The `COMPAREDITEM` are:
   * `time`
@@ -476,18 +493,18 @@ Examples:
 
 Function: Clear all sellers from the seller list.
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
+</div>
+
 Format: `clear-s`
 
 #### Sorting sellers. `sort-s`
 
 Function: Sort all the sellers according to the orders specified.
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **WARNING:** This action clears your entire list and it **cannot be undone**. Take extra caution before doing this!
-</div>
-
-Format: `sort-s [by/COMPAREDITEM] [o/ORDER]`
+Format: `sort-s by/COMPAREDITEM o/ORDER`
 
 * The `COMPAREDITEM` are:
   * `time`
@@ -511,9 +528,9 @@ Examples:
 
 AgentSee data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## Editing the data file (For experienced user)
+## Editing the data file (For experienced users)
 
-AgentSee data are saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
+AgentSee data is saved as a JSON file `[JAR file location]/data/buyeraddressbook.json` and `[JAR file location]/data/selleraddressbook.json`.
 Advanced users are welcome to update data directly by editing these data files.
 
 <div markdown="span" class="alert alert-warning">
