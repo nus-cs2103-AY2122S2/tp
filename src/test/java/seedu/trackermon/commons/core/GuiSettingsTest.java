@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public class GuiSettingsTest {
 
     /**
-     * Test method to test the string of a default {@code Config} object.
+     * Tests the string of a default {@code Config} object.
      */
     @Test
     void testToString() {
@@ -25,7 +25,7 @@ public class GuiSettingsTest {
     }
 
     /**
-     * Test method to test the equals method of {@code GuiSettingsTest}.
+     * Tests the equals method of {@code GuiSettingsTest}.
      */
     @Test
     void equalsMethod() {
@@ -35,7 +35,7 @@ public class GuiSettingsTest {
     }
 
     /**
-     * Test method to test the hash method of {@code GuiSettingsTest}.
+     * Tests the hash method of {@code GuiSettingsTest}.
      */
     @Test
     public void hashMethod() {

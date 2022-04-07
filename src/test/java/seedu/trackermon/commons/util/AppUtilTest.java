@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class AppUtilTest {
 
     /**
-     * Test method to test getting image of a valid image file path.
+     * Tests getting image of a valid image file path.
      */
     @Test
     public void getImage_exitingImage() {
@@ -19,7 +19,7 @@ public class AppUtilTest {
     }
 
     /**
-     * Test method to test getting image of a null image file path.
+     * Tests getting image of a null image file path.
      */
     @Test
     public void getImage_nullGiven_throwsNullPointerException() {
@@ -27,7 +27,7 @@ public class AppUtilTest {
     }
 
     /**
-     * Test method to test the checking of a true condition.
+     * Tests the checking of a true condition.
      */
     @Test
     public void checkArgument_true_nothingHappens() {
@@ -36,7 +36,7 @@ public class AppUtilTest {
     }
 
     /**
-     * Test method to test the checking of a false condition without
+     * Tests the checking of a false condition without
      * an error message where a IllegalArgumentException will be thrown.
      */
     @Test
@@ -45,7 +45,7 @@ public class AppUtilTest {
     }
 
     /**
-     * Test method to test the checking of a false condition with
+     * Tests the checking of a false condition with
      * an error message where a IllegalArgumentException will be thrown.
      */
     @Test

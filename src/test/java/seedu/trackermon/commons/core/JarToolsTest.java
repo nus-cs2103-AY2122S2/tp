@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class JarToolsTest {
 
     /**
-     * Test method to test getting classLocationString of the {@code JarToolstest} class.
+     * Tests getting classLocationString of the {@code JarToolstest} class.
      */
     @Test
     void getClassLocationStringMethod() {
@@ -19,7 +19,7 @@ public class JarToolsTest {
     }
 
     /**
-     * Test method to check that test should not be running in the jar file.
+     * Checks that test should not be running in the jar file.
      */
     @Test
     void runningFromJarFileMethod() {

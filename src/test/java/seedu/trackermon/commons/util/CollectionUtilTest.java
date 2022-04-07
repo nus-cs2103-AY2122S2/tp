@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 public class CollectionUtilTest {
 
     /**
-     * Test method to test the requireAllNonNull method with an argument list.
+     * Tests the requireAllNonNull method with an argument list.
      */
     @Test
     public void requireAllNonNullVarargs() {
@@ -52,7 +52,7 @@ public class CollectionUtilTest {
     }
 
     /**
-     * Test method to test the requireAllNonNull method with a collection list.
+     * Tests the requireAllNonNull method with a collection list.
      */
     @Test
     public void requireAllNonNullCollection() {
@@ -84,7 +84,7 @@ public class CollectionUtilTest {
     }
 
     /**
-     * Test method to test the isAnyNonNull method.
+     * Tests the isAnyNonNull method.
      */
     @Test
     public void isAnyNonNull() {

@@ -16,7 +16,7 @@ public class StringUtilTest {
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
 
     /**
-     * Test method to test the isNonZeroUnsignedInteger method.
+     * Tests the isNonZeroUnsignedInteger method.
      */
     @Test
     public void isNonZeroUnsignedInteger() {
@@ -61,7 +61,7 @@ public class StringUtilTest {
      */
 
     /**
-     * Test method to test the containsWordIgnoreCase method when given a null word.
+     * Tests the containsWordIgnoreCase method when given a null word.
      */
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
@@ -69,7 +69,7 @@ public class StringUtilTest {
     }
 
     /**
-     * Test method to test the containsWordIgnoreCase method when given an empty word.
+     * Tests the containsWordIgnoreCase method when given an empty word.
      */
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
@@ -78,7 +78,7 @@ public class StringUtilTest {
     }
 
     /**
-     * Test method to test the containsWordIgnoreCase method when given multiple words.
+     * Tests the containsWordIgnoreCase method when given multiple words.
      */
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
@@ -87,7 +87,7 @@ public class StringUtilTest {
     }
 
     /**
-     * Test method to test the containsWordIgnoreCase method when given a null sentence.
+     * Tests the containsWordIgnoreCase method when given a null sentence.
      */
     @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
@@ -120,7 +120,7 @@ public class StringUtilTest {
      */
 
     /**
-     * Test method to test the containsWordIgnoreCase method when given valid inputs.
+     * Tests the containsWordIgnoreCase method when given valid inputs.
      */
     @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
@@ -151,7 +151,7 @@ public class StringUtilTest {
      */
 
     /**
-     * Test method to test getting details of an exception.
+     * Tests getting details of an exception.
      */
     @Test
     public void getDetails_exceptionGiven() {
@@ -160,7 +160,7 @@ public class StringUtilTest {
     }
 
     /**
-     * Test method to test getting details of null Exception.
+     * Tests getting details of null Exception.
      */
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {

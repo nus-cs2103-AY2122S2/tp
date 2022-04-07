@@ -18,7 +18,7 @@ public class JsonUtilTest {
     private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
 
     /**
-     * Test method to test a successful serializing object to Json file.
+     * Tests a successful serializing object to Json file.
      */
     @Test
     public void serializeObjectToJsonFile_noExceptionThrown() throws IOException {
@@ -31,7 +31,7 @@ public class JsonUtilTest {
     }
 
     /**
-     * Test method to test a successful deserializing object to Json file.
+     * Tests a successful deserializing object to Json file.
      */
     @Test
     public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {

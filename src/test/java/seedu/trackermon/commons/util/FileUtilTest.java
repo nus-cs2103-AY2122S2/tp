@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public class FileUtilTest {
 
     /**
-     * Test method to test the isValidPath method.
+     * Tests the isValidPath method.
      */
     @Test
     public void isValidPath() {

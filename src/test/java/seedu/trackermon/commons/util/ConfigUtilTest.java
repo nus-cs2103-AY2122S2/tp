@@ -27,7 +27,7 @@ public class ConfigUtilTest {
     public Path tempDir;
 
     /**
-     * Test method to test reading of a null config file.
+     * Tests reading of a null config file.
      */
     @Test
     public void read_null_throwsNullPointerException() {
@@ -35,7 +35,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test a non-existent file boolean method isPresent.
+     * Tests a non-existent file boolean method isPresent.
      */
     @Test
     public void read_missingFile_emptyResult() throws DataConversionException {
@@ -43,7 +43,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test whether the file is in a JSON format.
+     * Tests whether the file is in a JSON format.
      */
     @Test
     public void read_notJsonFormat_exceptionThrown() {
@@ -51,7 +51,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test whether file has been successfully read.
+     * Tests whether file has been successfully read.
      */
     @Test
     public void read_fileInOrder_successfullyRead() throws DataConversionException {
@@ -63,7 +63,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test whether default values of config fill is used when reading from a file with missing values.
+     * Tests whether default values of config fill is used when reading from a file with missing values.
      */
     @Test
     public void read_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
@@ -72,7 +72,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test whether values are ignored when reading from a file with extra values.
+     * Tests whether values are ignored when reading from a file with extra values.
      */
     @Test
     public void read_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
@@ -95,7 +95,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test saving of a null config file.
+     * Tests saving of a null config file.
      */
     @Test
     public void save_nullConfig_throwsNullPointerException() {
@@ -103,7 +103,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test saving of a null file.
+     * Tests saving of a null file.
      */
     @Test
     public void save_nullFile_throwsNullPointerException() {
@@ -111,7 +111,7 @@ public class ConfigUtilTest {
     }
 
     /**
-     * Test method to test whether files has been successfully saved.
+     * Tests whether files has been successfully saved.
      */
     @Test
     public void saveConfig_allInOrder_success() throws DataConversionException, IOException {

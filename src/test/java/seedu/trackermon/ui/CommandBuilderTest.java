@@ -13,7 +13,7 @@ class CommandBuilderTest {
     private CommandBuilder commandBuilder = new CommandBuilder("Delete", "delete INDEX");
 
     /**
-     * Test method to test the command title getter of the {@code CommandBuilder}.
+     * Tests the command title getter of the {@code CommandBuilder}.
      */
     @Test
     void getCommandTitle() {
@@ -21,7 +21,7 @@ class CommandBuilderTest {
     }
 
     /**
-     * Test method to test the command input getter of the {@code CommandBuilder}.
+     * Tests the command input getter of the {@code CommandBuilder}.
      */
     @Test
     void getCommandInput() {
@@ -29,7 +29,7 @@ class CommandBuilderTest {
     }
 
     /**
-     * Test method to test the command title property of the {@code CommandBuilder}.
+     * Tests the command title property of the {@code CommandBuilder}.
      */
     @Test
     void commandTitleProperty() {
@@ -37,7 +37,7 @@ class CommandBuilderTest {
     }
 
     /**
-     * Test method to test the command input property of the {@code CommandBuilder}.
+     * Tests the command input property of the {@code CommandBuilder}.
      */
     @Test
     void commandInputProperty() {

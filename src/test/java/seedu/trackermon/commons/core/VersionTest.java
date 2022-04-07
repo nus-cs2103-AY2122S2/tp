@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public class VersionTest {
 
     /**
-     * Test method to test acceptable version numbers being parsed.
+     * Tests acceptable version numbers being parsed.
      */
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
@@ -22,7 +22,7 @@ public class VersionTest {
     }
 
     /**
-     * Test method to test invalid version numbers being parsed.
+     * Tests invalid version numbers being parsed.
      */
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
@@ -30,7 +30,7 @@ public class VersionTest {
     }
 
     /**
-     * Test method to test getting major, minor, patch and isEarlyAccess numbers and statuses.
+     * Tests getting major, minor, patch and isEarlyAccess numbers and statuses.
      */
     @Test
     public void versionConstructor_correctParameter_valueAsExpected() {
@@ -43,7 +43,7 @@ public class VersionTest {
     }
 
     /**
-     * Test method to test the string of a default {@code Version} object.
+     * Tests the string of a default {@code Version} object.
      */
     @Test
     public void versionToString_validVersion_correctStringRepresentation() {
@@ -61,7 +61,7 @@ public class VersionTest {
     }
 
     /**
-     * Test method to test the compareTo method of {@code Version}.
+     * Tests the compareTo method of {@code Version}.
      */
     @Test
     public void versionComparable_validVersion_compareToIsCorrect() {
@@ -124,7 +124,7 @@ public class VersionTest {
     }
 
     /**
-     * Test method to test the hash method of {@code Config}.
+     * Tests the hash method of {@code Config}.
      */
     @Test
     public void versionComparable_validVersion_hashCodeIsCorrect() {
@@ -136,7 +136,7 @@ public class VersionTest {
     }
 
     /**
-     * Test method to test the equals method of {@code Version}.
+     * Tests the equals method of {@code Version}.
      */
     @Test
     public void versionComparable_validVersion_equalIsCorrect() {

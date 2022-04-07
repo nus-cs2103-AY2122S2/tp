@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public class ConfigTest {
 
     /**
-     * Test method to test the string of a default {@code Config} object.
+     * Tests the string of a default {@code Config} object.
      */
     @Test
     public void toString_defaultObject_stringReturned() {
@@ -26,7 +26,7 @@ public class ConfigTest {
     }
 
     /**
-     * Test method to test the equals method of {@code Config}.
+     * Tests the equals method of {@code Config}.
      */
     @Test
     public void equalsMethod() {
@@ -36,7 +36,7 @@ public class ConfigTest {
     }
 
     /**
-     * Test method to test the hash method of {@code Config}.
+     * Tests the hash method of {@code Config}.
      */
     @Test
     public void hashMethod() {
@@ -47,7 +47,7 @@ public class ConfigTest {
     }
 
     /**
-     * Test method to test getting userPrefsFilePath of a default {@code Config} object.
+     * Tests getting userPrefsFilePath of a default {@code Config} object.
      */
     @Test
     public void getUserPrefsFilePath_fromEditor_success() {

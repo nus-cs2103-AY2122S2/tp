@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class IndexTest {
 
     /**
-     * Test method to test oneBasedIndex being parsed.
+     * Tests oneBasedIndex being parsed.
      */
     @Test
     public void createOneBasedIndex() {
@@ -30,7 +30,7 @@ public class IndexTest {
     }
 
     /**
-     * Test method to test zeroBasedIndex being parsed.
+     * Tests zeroBasedIndex being parsed.
      */
     @Test
     public void createZeroBasedIndex() {
@@ -47,7 +47,7 @@ public class IndexTest {
     }
 
     /**
-     * Test method to test the equals method of {@code Index}.
+     * Tests the equals method of {@code Index}.
      */
     @Test
     public void equals() {
