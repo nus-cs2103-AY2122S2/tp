@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Consultation Date should not be blank, and should be in the format YYY-MM-DD";
+            "Consultation Date should not be blank, and should be in the format YYYY-MM-DD";
 
     private LocalDate date;
 
