@@ -21,11 +21,11 @@ import seedu.address.model.position.Position;
 @JsonRootName(value = "HireLah")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate applicant(s).";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate applicant(s).";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
     public static final String MESSAGE_DUPLICATE_POSITION = "Positions list contains duplicate position(s).";
 
-    private final List<JsonAdaptedApplicant> persons = new ArrayList<>();
+    private final List<JsonAdaptedApplicant> applicants = new ArrayList<>();
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
     private final List<JsonAdaptedPosition> positions = new ArrayList<>();
 
@@ -33,10 +33,10 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedApplicant> persons,
+    public JsonSerializableAddressBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants,
             @JsonProperty("interviews") List<JsonAdaptedInterview> interviews,
             @JsonProperty("positions") List<JsonAdaptedPosition> positions) {
-        this.persons.addAll(persons);
+        this.applicants.addAll(applicants);
         this.interviews.addAll(interviews);
         this.positions.addAll(positions);
     }
@@ -47,7 +47,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
+        applicants.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new)
+                .collect(Collectors.toList()));
         interviews.addAll(source.getInterviewList().stream().map(JsonAdaptedInterview::new)
                 .collect(Collectors.toList()));
         positions.addAll(source.getPositionList().stream().map(JsonAdaptedPosition::new)
@@ -61,10 +62,10 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedApplicant jsonAdaptedApplicant : persons) {
+        for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
             Applicant applicant = jsonAdaptedApplicant.toModelType();
             if (addressBook.hasApplicant(applicant)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICANT);
             }
             addressBook.addApplicant(applicant);
         }

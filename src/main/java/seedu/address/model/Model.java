@@ -20,7 +20,7 @@ import seedu.address.model.position.Position;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Applicant> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
     Predicate<Interview> PREDICATE_SHOW_ALL_INTERVIEWS = unused -> true;
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
 
@@ -65,7 +65,7 @@ public interface Model {
     /**
      * Returns true if a applicant with the same identity as {@code applicant} exists in the address book.
      */
-    boolean hasPerson(Applicant applicant);
+    boolean hasApplicant(Applicant applicant);
 
     /**
      * Returns the {@code Applicant} with the {@code email} provided if exists; or null if no such applicant.
@@ -81,13 +81,13 @@ public interface Model {
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      */
-    void deletePerson(Applicant target);
+    void deleteApplicant(Applicant target);
 
     /**
      * Adds the given applicant.
      * {@code applicant} must not already exist in the address book.
      */
-    void addPerson(Applicant applicant);
+    void addApplicant(Applicant applicant);
 
     /**
      * Replaces the given applicant {@code target} with {@code editedApplicant}.
@@ -95,7 +95,7 @@ public interface Model {
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant
      * in the address book.
      */
-    void setPerson(Applicant target, Applicant editedApplicant);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();

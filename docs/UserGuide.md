@@ -114,13 +114,17 @@ Examples:
 ### Adding positions : `add -p`
 
 Adds a new open position to HireLah.
+
 Format: `add -p p/POSITION_NAME o/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
 * Positions must have a **unique name**.
 * Name provided is case-insensitive.
-* Number of openings in the position must be **0 or more** 0, 1, 2, …​
+* Number of openings in the position must be between **1 and 5 digits**.
+* Description must be between **1 and 200** characters.
+* Name must be between **1 and 100** characters.
 
 Examples:
 * `add -p p/Senior Software Engineer o/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
+
 
 ## Edit
 General command to edit different types into HireLah.
@@ -172,6 +176,7 @@ Examples:
 ### Edit positions : `edit -p`
 
 Edit an existing position in HireLah.
+
 Format: `edit -p POSITION_INDEX [p/POSITION_NAME] [o/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
 
 * Edits the available position with POSITION_INDEX.
@@ -179,10 +184,14 @@ Format: `edit -p POSITION_INDEX [p/POSITION_NAME] [o/NUM_OPENINGS] [d/DESCRIPTIO
 * Existing attributes of the position will be updated to the input value.
 * When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
 * Requirements can be removed by providing an empty requirement field. i.e. r/
+* Number of openings in the position must be between **1 and 5 digits**.
+* Description must be between **1 and 200** characters.
+* Name must be between **1 and 100** characters.
 
 Examples:
 * `edit -p 1 p/Senior Frontend Software Engineer o/5`
 * `edit -p 3 p/Senior Frontend Software Engineer r/JavaScript r/React`
+
 
 ## Delete
 General command to delete different data type in HireLah.
