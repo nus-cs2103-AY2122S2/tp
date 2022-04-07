@@ -51,10 +51,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         seedu.address.model.lineup.LineupName targetLineupName;
         Index index;
 
-        //if (!argMultimap.getPreamble().isEmpty()) {
-        //    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        //}
-
         if (argMultimap.getValue(PREFIX_LINEUP).isPresent()) {
             if (argMultimap.getValue(PREFIX_PLAYER).isPresent()) {
                 throw new ParseException(String.format(
@@ -80,6 +76,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             try {
                 targetPlayerName = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
+                System.out.println(targetPlayerName);
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditCommand.MESSAGE_USAGE_PLAYER), e);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PLAYER), pe);
@@ -106,8 +106,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
                 editPersonDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT).get()));
             }
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                editPersonDescriptor.setTags(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
+            }
             if (!editPersonDescriptor.isAnyFieldEdited()) {
                 throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
             }
@@ -115,32 +116,36 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         //Schedule level
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SCHEDULE).get());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+        if (arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SCHEDULE).get());
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SCHEDULE), pe);
+            }
+
+            EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                editScheduleDescriptor.setScheduleName(
+                        ParserUtil.parseScheduleName(argMultimap.getValue(PREFIX_NAME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+                editScheduleDescriptor.setScheduleDescription(
+                        ParserUtil.parseScheduleDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+            }
+            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+                editScheduleDescriptor.setScheduleDateTime(
+                        ParserUtil.parseScheduleDateTime(argMultimap.getValue(PREFIX_DATE).get()));
+            }
+
+            if (!editScheduleDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            }
+
+            return new EditCommand(index, editScheduleDescriptor);
         }
 
-        EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editScheduleDescriptor.setScheduleName(
-                    ParserUtil.parseScheduleName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            editScheduleDescriptor.setScheduleDescription(
-                    ParserUtil.parseScheduleDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editScheduleDescriptor.setScheduleDateTime(
-                    ParserUtil.parseScheduleDateTime(argMultimap.getValue(PREFIX_DATE).get()));
-        }
-
-        if (!editScheduleDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new EditCommand(index, editScheduleDescriptor);
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     /**

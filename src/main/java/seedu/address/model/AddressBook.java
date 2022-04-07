@@ -97,7 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
         persons.setPerson(target, editedPerson);
-        lineups.replacePlayerInAllLineups(editedPerson, target);
+        lineups.replacePlayerInAllLineups(target, editedPerson);
     }
 
     /**

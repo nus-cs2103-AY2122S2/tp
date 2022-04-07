@@ -41,7 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      *
-     * @returns an AddCommand object for execution.
+     * @return an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
@@ -65,10 +65,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 seedu.address.model.lineup.LineupName name = ParserUtil
                         .parseLineupName(argMultimap.getValue(PREFIX_NAME).get());
                 Lineup lineup = new Lineup(name);
-                if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
-                    // to be added later
-                    // need to parse all players and put them into lineup
-                }
                 return new AddCommand(lineup);
             }
         }
@@ -117,6 +113,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             ScheduleName scheduleName = ParserUtil.parseScheduleName(argMultimap.getValue(PREFIX_NAME).get());
             ScheduleDescription scheduleDescription = ParserUtil.parseScheduleDescription(
                     argMultimap.getValue(PREFIX_DESCRIPTION).get());
+
+            System.out.println("Trying to create a new schedule");
             ScheduleDateTime scheduleDateTime = ParserUtil.parseScheduleDateTime(
                     argMultimap.getValue(PREFIX_DATE).get());
             Schedule schedule = new Schedule(scheduleName, scheduleDescription, scheduleDateTime);
