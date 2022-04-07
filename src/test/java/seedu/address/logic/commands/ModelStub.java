@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -52,7 +51,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addPerson(Applicant applicant) {
+    public void addApplicant(Applicant applicant) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -67,7 +66,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasPerson(Applicant applicant) {
+    public boolean hasApplicant(Applicant applicant) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -87,12 +86,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void deletePerson(Applicant target) {
+    public void deleteApplicant(Applicant target) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setPerson(Applicant target, Applicant editedApplicant) {
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -142,17 +141,17 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void exportCsvApplicant() throws FileNotFoundException {
+    public void exportCsvApplicant() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void exportCsvInterview() throws FileNotFoundException {
+    public void exportCsvInterview() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void exportCsvPosition() throws FileNotFoundException {
+    public void exportCsvPosition() {
         throw new AssertionError("This method should not be called.");
     }
 

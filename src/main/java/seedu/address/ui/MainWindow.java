@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -50,7 +51,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane applicantListPanelPlaceholder;
 
     @FXML
     private StackPane positionListPanelPlaceholder;
@@ -128,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         applicantListPanel = new ApplicantListPanel(logic.getFilteredApplicantList());
-        personListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
+        applicantListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
 
         positionListPanel = new PositionListPanel(logic.getFilteredPositionList());
         positionListPanelPlaceholder.getChildren().add(positionListPanel.getRoot());
@@ -194,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ApplicantListPanel getPersonListPanel() {
+    public ApplicantListPanel getApplicantListPanel() {
         return applicantListPanel;
     }
 
@@ -204,7 +205,7 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException,
-            FileNotFoundException {
+            FileNotFoundException, ExportCsvOpenException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -230,7 +231,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ExportCsvOpenException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

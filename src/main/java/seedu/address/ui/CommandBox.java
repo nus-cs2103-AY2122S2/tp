@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -80,7 +81,7 @@ public class CommandBox extends UiPart<Region> {
 
             previousCommands.add(commandText);
             commandIndex = previousCommands.size() - 1;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ExportCsvOpenException e) {
             setStyleToIndicateCommandFailure();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -117,7 +118,8 @@ public class CommandBox extends UiPart<Region> {
          *
          * @see seedu.address.logic.Logic#execute(String)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException, FileNotFoundException;
+        CommandResult execute(String commandText) throws CommandException, ParseException, FileNotFoundException,
+                ExportCsvOpenException;
     }
 
 }

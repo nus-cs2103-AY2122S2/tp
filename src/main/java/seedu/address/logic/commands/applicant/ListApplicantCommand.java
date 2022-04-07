@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_ARGUMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ARGUMENT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -89,7 +89,7 @@ public class ListApplicantCommand extends ListCommand {
             Comparator<Applicant> comparator = new ApplicantNameComparator(sortArgument.toString());
             model.updateSortApplicantList(comparator);
         } else {
-            model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
         }
 
         return new CommandResult(

@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalApplicants.getTypicalApplicants;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviews;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.applicant.Applicant;
@@ -14,7 +14,7 @@ public class TypicalAddressBook {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Applicant applicant : getTypicalPersons()) {
+        for (Applicant applicant : getTypicalApplicants()) {
             ab.addApplicant(applicant);
         }
 

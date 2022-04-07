@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_NAME_S
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_OPENINGS_SR_FE_SWE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REQUIREMENT_EXPERIENCE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalApplicants.ALICE;
 import static seedu.address.testutil.TypicalPositions.JR_SOFTWARE_ENGINEER;
 import static seedu.address.testutil.TypicalPositions.SR_FE_SOFTWARE_ENGINEER;
 

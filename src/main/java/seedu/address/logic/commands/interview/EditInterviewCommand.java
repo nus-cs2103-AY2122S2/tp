@@ -70,7 +70,7 @@ public class EditInterviewCommand extends EditCommand {
         } else {
             List<Applicant> lastShownApplicantList = model.getFilteredApplicantList();
             if (updatedApplicantIndex.getZeroBased() >= lastShownApplicantList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
             }
             updatedApplicant = lastShownApplicantList.get(updatedApplicantIndex.getZeroBased());
         }

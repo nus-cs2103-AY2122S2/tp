@@ -45,7 +45,7 @@
              <tabs>
                <Tab fx:id="applicantsTab" text="Applicants">
                     <content>
-                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="applicantListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                     </content>
                </Tab>
 
