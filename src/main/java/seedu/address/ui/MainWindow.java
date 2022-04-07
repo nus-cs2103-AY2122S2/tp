@@ -340,6 +340,12 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Clearing InfoPanel");
             clearInfoPanel();
             break;
+        case REFRESH:
+            logger.info("Refreshing InfoPanel");
+            if (!infoPanelPlaceholder.getChildren().isEmpty()) {
+                refreshInfoPanel();
+            }
+            break;
         default:
             logger.severe("Something went wrong with handling the InfoPanels");
             assert false;
@@ -348,6 +354,16 @@ public class MainWindow extends UiPart<Stage> {
 
     private void clearInfoPanel() {
         infoPanelPlaceholder.getChildren().clear();
+    }
+
+    private void refreshInfoPanel() {
+        if (infoPanel instanceof RecurringLessonInfoPanel || infoPanel instanceof LessonInfoPanel) {
+            Lesson lesson = logic.getSelectedLesson();
+            populateInfoPanelWithLesson(lesson);
+        } else {
+            Student student = logic.getSelectedStudent();
+            populateInfoPanelWithStudent(student);
+        }
     }
 
     private void populateInfoPanelWithStudent(Student selectedStudent) {
