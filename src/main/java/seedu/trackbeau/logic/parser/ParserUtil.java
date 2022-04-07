@@ -162,7 +162,7 @@ public class ParserUtil {
         requireNonNull(regDate);
         String trimmedRegDate = regDate.trim();
         if (!RegistrationDate.isValidRegistrationDate(trimmedRegDate)) {
-            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+            throw new ParseException(RegistrationDate.MESSAGE_CONSTRAINTS);
         }
         return new RegistrationDate(regDate);
     }

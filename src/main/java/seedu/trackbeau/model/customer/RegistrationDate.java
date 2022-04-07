@@ -6,10 +6,12 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
-public class RegistrationDate {
+public class RegistrationDate extends Date {
     public static final String MESSAGE_CONSTRAINTS = "RegistrationDate should follow dd-MM-yyyy and be valid date.";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
     private static final String EMPTY_DATE = "01-01-1000"; //impossible date
     public final LocalDate value;
 
@@ -29,9 +31,7 @@ public class RegistrationDate {
      * Returns true if a given string is a valid RegistrationDate.
      */
     public static boolean isValidRegistrationDate(String test) {
-        try {
-            LocalDate.parse(test, formatter);
-        } catch (DateTimeParseException e) {
+        if (!isSatisfyDateRequirements(test,formatter)) {
             return false;
         }
         return true;

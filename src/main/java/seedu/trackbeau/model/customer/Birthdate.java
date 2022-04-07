@@ -10,7 +10,8 @@ import java.time.format.ResolverStyle;
 
 public class Birthdate extends Date {
     public static final String MESSAGE_CONSTRAINTS = "Birthdate should follow dd-MM-yyyy and be valid date.";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
     public final LocalDate value;
 
     /**
