@@ -61,6 +61,8 @@ Given below are my contributions to the project.
     * Count: // To update
 
 * **Community**:
+  * Non-trivial PRs reviewed
+    * An e.g. [1](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/184)
   * Contributed to forum discussions
     * Some e.g. [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/131), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/212), [3](https://github.com/nus-cs2103-AY2122S2/forum/issues/166), [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/124), [5](https://github.com/nus-cs2103-AY2122S2/forum/issues/121).
   * Helped solve issues that classmates faced
