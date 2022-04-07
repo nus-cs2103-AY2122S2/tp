@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -66,6 +67,7 @@ public class EditMedicalCommand extends Command {
             + PREFIX_BLOODTYPE + "B";
 
     public static final String MESSAGE_EDIT_MEDICAL_SUCCESS = "Edited Medical Information: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
             "NRIC field cannot be modified. Create a new medical information with the correct NRIC instead.";
 
@@ -181,6 +183,14 @@ public class EditMedicalCommand extends Command {
             setImmunizationHistory(toCopy.immunizationHistory);
             setGender(toCopy.gender);
             setEthnicity(toCopy.ethnicity);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(age, bloodType, medication, height, weight, illnesses, surgeries,
+                    familyHistory, immunizationHistory, gender, ethnicity);
         }
 
         public Optional<Age> getAge() {
