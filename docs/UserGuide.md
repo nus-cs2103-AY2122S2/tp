@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to professors for managing
+TAlent Assistant™ is a **desktop, lightweight and centralized management system** catered to NUS School of Computing professors for managing
 the interview scheduling process of candidates applying to be undergraduate Teaching Assistants (TA). 
 Professors will be able to access the candidates’ application data easily and review their general availability for 
 scheduling interviews during office hours.
@@ -109,6 +109,11 @@ Features relating to the display of information within these panels are describe
 | `as` or `appstatus` | application status |
 | `yr`                | seniority          |
 | `avail`             | availability       |
+
+**:information_source: Notes about the entities' values:**<br>
+
+* A candidate's `course` can only be either of the 5 computing courses in NUS School of Computing i.e. Business Analytics, Computer Engineering, Computer Science, Information Security or Information Systems.
+  * Reason being, our **Target User Profile** is restricted to NUS SoC.
 
 </div>
 
