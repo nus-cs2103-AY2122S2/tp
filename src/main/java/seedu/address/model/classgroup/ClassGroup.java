@@ -11,6 +11,7 @@ import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.WeekId;
+import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.TaModule;
@@ -173,7 +174,7 @@ public class ClassGroup implements Entity {
         return lessons.stream()
                 .filter(lesson -> lesson.getWeekId().value.equals(weekIndex.getOneBased()))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new LessonNotFoundException());
     }
 
     public List<Lesson> getLessons() {
