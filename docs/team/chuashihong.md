@@ -36,6 +36,12 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Update documentation for the command `add`
+        * Update documentation for the file system, explain about the data structure of our JSON format in details
+        * Made some changes so that it is updated to our current version.
+    * Developer Guide:
+        * Add a documentation about `EditBuyer` and `EditSeller` command
+        * Add a detailed UML diagram about the sequence diagram of `EditBuyerCommand` and `EditSellerCommand` class
+        * Add a detailed explanation when executing `EditBuyer` and `EditSeller` command
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#72](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/72), where I give some commands on the code and potential typo and give approval.
