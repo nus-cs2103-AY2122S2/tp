@@ -535,6 +535,14 @@ Examples:
 * `plotMonthlyCustomers`
 
 ### 4.5 Schedule management
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>Bookings that start and end on different dates will fall under its start date.</li>
+</ul>
+
+</div>
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
@@ -615,13 +623,13 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 ### 5.1 Customer
 
-| Action                 | Format                                                                                                                                                                                             | Examples                     |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
-| Add a customer         | `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]` | `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/06-04-2022 al/Aloe Vera sep/facial sep/massage`
-| List all customers     | `listc`| `listc`
-| Edit a customer        | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]` | `editc 1 n/Betsy Crower stp/Jason` |
-| Find customer profiles | `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]` |  `findc n/Alex Yeoh`
-| Delete customer(s)     | `deletec INDEX,[MORE INDEXES]` | `deletec 1,2`
+| Action                 | Format                                                                                                                                                                                             | Examples                                                                                                                 |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Add a customer         | `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`                | `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/06-04-2022 al/Aloe Vera sep/facial sep/massage` |
+| List all customers     | `listc`                                                                                                                                                                                            | `listc`                                                                                                                  |
+| Edit a customer        | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]` | `editc 1 n/Betsy Crower stp/Jason`                                                                                       |
+| Find customer profiles | `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                                                                                                                                       | `findc n/Alex Yeoh`                                                                                                      |
+| Delete customer(s)     | `deletec INDEX,[MORE INDEXES]`                                                                                                                                                                     | `deletec 1,2`                                                                                                            |
 
 ### 5.2 Service
 
