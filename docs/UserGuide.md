@@ -265,7 +265,7 @@ Update the details of a player, lineup or schedule.
 
 **To edit a player:**
 
-Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [T/TAGS]`
+Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_NUMBER] [t/TAG]…​`
 
 * Edit the details of a player from the player list.
 * If any fields are specified, it will change accordingly.
