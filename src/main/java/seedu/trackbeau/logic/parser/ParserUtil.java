@@ -288,7 +288,7 @@ public class ParserUtil {
         requireNonNull(feedback);
         String trimmedFeedback = feedback.trim();
         if (!Feedback.isValidFeedback(trimmedFeedback)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Feedback.MESSAGE_CONSTRAINTS);
         }
         return new Feedback(trimmedFeedback);
     }
