@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,15 +21,15 @@
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label">
+                <Label fx:id="packageName" styleClass="cell_big_label" text="\$insurancepackage">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="packageName" styleClass="cell_small_label" text="\$insurancepackage" />
             </HBox>
             <FlowPane fx:id="tags" />
+            <Label fx:id="packageDesc" styleClass="cell_small_label" text="\$desc" />
         </VBox>
     </GridPane>
 </HBox>

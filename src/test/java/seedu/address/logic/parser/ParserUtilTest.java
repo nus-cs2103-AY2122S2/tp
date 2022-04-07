@@ -14,6 +14,8 @@ import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -59,6 +61,38 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseOutIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOutIndex("a b"));
+    }
+
+    @Test
+    public void parseOutIndex_validInput_success() throws Exception {
+        // No whitespaces
+        Pair<Index, String> expectedPair = new Pair<>(INDEX_FIRST_PERSON, VALID_TAG_NAME_1);
+        assertEquals(expectedPair, ParserUtil.parseOutIndex("1 " + VALID_TAG_NAME_1));
+
+        // Leading and trailing whitespaces
+        assertEquals(expectedPair, ParserUtil.parseOutIndex("  1     " + VALID_TAG_NAME_1));
+        assertEquals(new Pair<>(INDEX_FIRST_PERSON, ""), ParserUtil.parseOutIndex("1     "));
+    }
+
+    @Test
+    public void parseOutNumber_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseOutNumber("a b"));
+    }
+
+    @Test
+    public void parseOutNumber_validInput_success() throws Exception {
+        // No whitespaces
+        Pair<Integer, String> expectedPair = new Pair<>(1, VALID_TAG_NAME_1);
+        assertEquals(expectedPair, ParserUtil.parseOutNumber("1 " + VALID_TAG_NAME_1));
+
+        // Leading and trailing whitespaces
+        assertEquals(expectedPair, ParserUtil.parseOutNumber("  1     " + VALID_TAG_NAME_1));
+        assertEquals(new Pair<>(1, ""), ParserUtil.parseOutNumber("1     "));
     }
 
     @Test

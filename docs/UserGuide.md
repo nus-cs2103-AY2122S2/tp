@@ -418,6 +418,21 @@ Information copied using `clip 1`:
 ![info copied using 'clip 1'](images/afterClip1UG.png)
 
 ------------------------------------------------------------------------------------
+### Listing contact list by priority level of their tags: `prioList`
+![listedByPriority](images/listedByPriority.PNG)
+<details><summary>Contacts with multiple tags have the priority level of the highest priority out of all of their tags. </summary>
+<p>
+
+Format: `prioList`
+
+
+Examples:
+1. `clip n/John Doe`
+2. `clip 1`
+
+</details>
+
+------------------------------------------------------------------------------------
 ### Exiting the program : `exit`
 Exits the program
 
