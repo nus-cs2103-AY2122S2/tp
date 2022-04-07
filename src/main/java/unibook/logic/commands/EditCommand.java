@@ -307,7 +307,7 @@ public class EditCommand extends Command {
 
         if (this.editModuleDescriptor != null && this.editPersonDescriptor != null) {
             if (!isGroupListShowing && !isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_VIEW);
             }
             EditGroupDescriptor editGroupDescriptor = this.editModuleDescriptor.getGroups().get();
             editGroupDescriptor.setModel(model);
@@ -350,7 +350,7 @@ public class EditCommand extends Command {
         // Edit person
         if (this.editModuleDescriptor == null) {
             if (!isPersonListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_VIEW);
             }
 
 
@@ -382,13 +382,18 @@ public class EditCommand extends Command {
                 }
             }
 
-
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+            int phoneIdx = model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0);
+            boolean isPhoneIdxDiff =
+                    model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0) != index.getZeroBased();
+            int emailIdx = model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1);
+            boolean isEmailIdxDiff =
+                    model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1) != index.getZeroBased();
 
             if ((model.hasPersonWithPhoneOrEmail(editedPerson)
-                    && (model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0) != index.getZeroBased()
-                        || model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1) != index.getZeroBased()))
+                    && (phoneIdx != -1 && isPhoneIdxDiff)
+                        || (emailIdx != -1 && isEmailIdxDiff))
                     || !personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
@@ -502,7 +507,7 @@ public class EditCommand extends Command {
             // Edit module
 
             if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_VIEW);
             }
 
             if (index.getZeroBased() >= lastShownList.size()) {

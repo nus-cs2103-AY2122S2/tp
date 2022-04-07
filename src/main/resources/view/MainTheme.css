@@ -296,6 +296,8 @@
 
 .scroll-bar {
     -fx-background-color: derive(#787276, 20%);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
 
 .scroll-bar .thumb {

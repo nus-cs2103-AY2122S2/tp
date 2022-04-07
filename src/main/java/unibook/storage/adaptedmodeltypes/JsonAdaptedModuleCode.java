@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import unibook.commons.exceptions.IllegalValueException;
 import unibook.model.module.ModuleCode;
-import unibook.model.tag.Tag;
 
 public class JsonAdaptedModuleCode {
     private final String moduleCode;
@@ -37,7 +36,7 @@ public class JsonAdaptedModuleCode {
      */
     public ModuleCode toModelType() throws IllegalValueException {
         if (!ModuleCode.isValidModuleCode(moduleCode)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
         return new ModuleCode(moduleCode);
     }

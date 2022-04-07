@@ -283,7 +283,7 @@ public class DeleteCommand extends Command {
         } else if (phone || email || tag != null || office) { // delete person attributes
 
             if (!isPersonListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_VIEW);
             }
 
             List<Person> lastShownPersonList = model.getFilteredPersonList();
@@ -343,7 +343,7 @@ public class DeleteCommand extends Command {
         } else if (targetIndex != null && profIndex != null) { // delete prof from module
 
             if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_VIEW);
             }
 
             List<Module> lastShownModuleList = model.getFilteredModuleList();
@@ -416,12 +416,12 @@ public class DeleteCommand extends Command {
 
             }
 
-            throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
+            throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_VIEW);
 
         } else if (targetIndex != null && group != null) { // delete group from module
 
             if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_VIEW);
             }
 
             List<Module> lastShownModuleList = model.getFilteredModuleList();
@@ -446,7 +446,7 @@ public class DeleteCommand extends Command {
         } else if (targetIndex != null && meetingTimeIndex != null) { // delete meeting time from group page
 
             if (!isGroupListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_GROUP_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_GROUP_VIEW);
             }
 
             List<Group> lastShownGroupList = model.getShowingGroupList();
@@ -472,7 +472,7 @@ public class DeleteCommand extends Command {
         } else if (targetIndex != null && keyEventIndex != null) {
 
             if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_VIEW);
             }
 
             List<Module> lastShownModuleList = model.getFilteredModuleList();

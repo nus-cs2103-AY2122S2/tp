@@ -35,10 +35,8 @@ public class AddCommand extends Command {
         + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
         + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
         + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
-        + "[[" + CliSyntax.PREFIX_MODULE + "MODULE] "
-        + "[" + CliSyntax.PREFIX_GROUP + "GROUP]]... "
-        + "[[" + CliSyntax.PREFIX_KEYEVENT + "TYPE] "
-        + "[" + CliSyntax.PREFIX_DATETIME + "DATETIME]]...\n"
+        + "[" + CliSyntax.PREFIX_MODULE + "MODULE "
+        + "[" + CliSyntax.PREFIX_GROUP + "GROUP]...]...\n"
         + "To add a professor: "
         + CliSyntax.PREFIX_OPTION + "professor "
         + CliSyntax.PREFIX_NAME + "NAME "
@@ -131,13 +129,14 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_MODULE + "CS2100\n";
     public static final String MESSAGE_USAGE_STUDENT = COMMAND_WORD
         + ": To add a student to the UniBook, use the following format.\n"
-        + "Parameters: "
+        + "Parameters: add "
         + CliSyntax.PREFIX_OPTION + "student "
         + CliSyntax.PREFIX_NAME + "NAME "
-        + CliSyntax.PREFIX_PHONE + "PHONE "
-        + CliSyntax.PREFIX_EMAIL + "EMAIL "
+        + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
+        + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
         + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
-        + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
+        + "[" + CliSyntax.PREFIX_MODULE + "MODULE "
+        + "[" + CliSyntax.PREFIX_GROUP + "GROUP]...]...\n"
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "student "
         + CliSyntax.PREFIX_NAME + "John Doe "
@@ -149,12 +148,12 @@ public class AddCommand extends Command {
         + CliSyntax.PREFIX_MODULE + "CS2105\n";
     public static final String MESSAGE_USAGE_PROFESSOR = COMMAND_WORD
         + ": To add a professor to the UniBook, use the following format.\n"
-        + "Parameters: "
+        + "Parameters: add "
         + CliSyntax.PREFIX_OPTION + "professor "
         + CliSyntax.PREFIX_NAME + "NAME "
-        + CliSyntax.PREFIX_PHONE + "PHONE "
-        + CliSyntax.PREFIX_EMAIL + "EMAIL "
-        + CliSyntax.PREFIX_OFFICE + "OFFICE "
+        + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
+        + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
+        + "[" + CliSyntax.PREFIX_OFFICE + "OFFICE] "
         + "[" + CliSyntax.PREFIX_TAG + "TAG]... "
         + "[" + CliSyntax.PREFIX_MODULE + "MODULE]...\n"
         + "Example: " + COMMAND_WORD + " "
@@ -384,10 +383,10 @@ public class AddCommand extends Command {
                 throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
             }
             Module moduleGroupIsIn = model.getModuleByCode(moduleCode);
-            Group groupToUpdate = moduleGroupIsIn.getGroupByName(groupName);
-            if (groupToUpdate == null) {
+            if (!moduleGroupIsIn.hasGroupName(groupName)) {
                 throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
             }
+            Group groupToUpdate = moduleGroupIsIn.getGroupByName(groupName);
             for (LocalDateTime dateTime : dateTimeList) {
                 try {
                     groupToUpdate.addMeetingTime(dateTime);

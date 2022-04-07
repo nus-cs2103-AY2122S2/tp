@@ -1,7 +1,7 @@
 package unibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static unibook.commons.core.Messages.MESSAGE_CHANGE_TO_PERSON_PAGE;
+import static unibook.commons.core.Messages.MESSAGE_CHANGE_TO_PERSON_VIEW;
 
 import unibook.commons.core.Messages;
 import unibook.logic.commands.exceptions.CommandException;
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         //disallow use of this commmand on any other page other than person page
         if (!isPersonListShowing) {
-            throw new CommandException(MESSAGE_CHANGE_TO_PERSON_PAGE);
+            throw new CommandException(MESSAGE_CHANGE_TO_PERSON_VIEW);
         }
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
