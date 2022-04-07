@@ -9,24 +9,23 @@ HireLah is a desktop address book application used for managing interview applic
 
 Given below are my contributions to the project.
 
-* **New Feature**: To be added
-* **New Feature**: To be added
-* **Code contributed**: [RepoSense link]()
-
+* **New Feature**: Applicant
+  * New Applicant data type to represent job applicants in HireLah
+  * contains new Gender and Age attributes
+  * contains new HiredStatus property used for other features
+  
+* **Code contributed**: 
+  * Contributed over 1300+ Loc [RepoSense link]()
+  
 * **Project management**:
   * To be added
-
-* **Enhancements to existing features**:
-  * To be added
-
+  
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features appladd, appledit, appldel, appllist
+    * Added documentation for the features add -a, edit -a, del -a
   * Developer Guide:
     * To be added
 
 * **Community**:
-  * To be added
-
-* **Tools**:
-  * To be added
+  * Reviewed PRs for the team (Over 20 PRs)
+  
