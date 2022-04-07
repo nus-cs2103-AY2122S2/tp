@@ -97,6 +97,12 @@ public class AddToClipboardCommand extends Command {
 
         // state check
         AddToClipboardCommand e = (AddToClipboardCommand) other;
-        return predicate.equals(e.predicate);
+        if ((predicate == null && e.predicate != null) || (targetIndex == null && e.targetIndex != null)) {
+            return false;
+        } else if (predicate != null) {
+            return predicate.equals(e.predicate);
+        } else {
+            return targetIndex.equals(e.targetIndex);
+        }
     }
 }
