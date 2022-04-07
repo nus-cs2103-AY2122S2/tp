@@ -27,11 +27,21 @@ Given below are my contributions to the project.
   * ```JsonAdaptedPropertyToSell``` Class
   * ```JsonAdaptedBuyer``` Class
   * ```JsonAdaptedSeller``` Class 
+  * ...and a lot more in test cases Class
 
-
+* **Enhancement** :
+    * Improve code quality in the project by reviewing teammate's code and improve them for easier readability and less bug prone
+    * Make initial changes about FXML and FXML related classes to make sense in rendering information in UI
+    * Improve the Storage system of the project by adding a lot of JSON related classes
+    * Removing the unused classess and the old Addressbook classes.
+    * Add more test cases into the project to cover more code and minimize the bug possiblity
 
 * **Project management**:
     * Fixed a bug on the project [\#84](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/84)
+    * Give ideas to teammates while planning on the next iteration
+    * Actively discuss with teammates in order to maintain the consistency in our project
+    * Increase code coverage by adding more test cases.
+    * Add issues in the Github to keep track of the progress in out project.
 
 * **Documentation**:
     * User Guide:
