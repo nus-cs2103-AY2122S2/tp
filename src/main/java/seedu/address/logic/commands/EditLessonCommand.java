@@ -24,6 +24,7 @@ import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.ConflictingLessonsPredicate;
 import seedu.address.model.lesson.DateTimeSlot;
+import seedu.address.model.lesson.EnrolledStudents;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
@@ -122,12 +123,14 @@ public class EditLessonCommand extends Command {
         DateTimeSlot updatedDateTimeSlot = DateTimeSlot.makeDateTimeSlot(updatedStartDate.atTime(updatedStartTime),
                 durationHours, durationMinutes);
 
+        EnrolledStudents enrolledStudents = toEdit.getEnrolledStudents();
+
         if (toEdit instanceof RecurringLesson) {
             return Lesson.makeRecurringLesson(updatedName, updatedSubject,
-                    updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents());
+                    updatedAddress, updatedDateTimeSlot, enrolledStudents);
         } else if (toEdit instanceof TemporaryLesson) {
             return Lesson.makeTemporaryLesson(updatedName, updatedSubject,
-                    updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents());
+                    updatedAddress, updatedDateTimeSlot, enrolledStudents);
         }
         // Code shouldn't get to this point, as a Lesson can only be Recurring or Temporary
         assert false;
@@ -136,7 +139,7 @@ public class EditLessonCommand extends Command {
 
     /**
      * Gets the Updated Name.
-     * If there's no new name, return the original.
+     * If there's no new Name, return the original.
      */
     private LessonName getUpdatedName(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
         return editLessonDescriptor.getName().orElse(toEdit.getName());
@@ -175,11 +178,11 @@ public class EditLessonCommand extends Command {
     }
 
     private Duration getUpdatedDuration(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
-        boolean isHourPrefixPresent = editLessonDescriptor.getDurationHours().isPresent();
-        boolean isMinutesPrefixPresent = editLessonDescriptor.getDurationMinutes().isPresent();
-
         int durationHours;
         int durationMinutes;
+
+        boolean isHourPrefixPresent = editLessonDescriptor.getDurationHours().isPresent();
+        boolean isMinutesPrefixPresent = editLessonDescriptor.getDurationMinutes().isPresent();
 
         if (isHourPrefixPresent || isMinutesPrefixPresent) {
             durationHours = editLessonDescriptor.getDurationHours().orElse(0);

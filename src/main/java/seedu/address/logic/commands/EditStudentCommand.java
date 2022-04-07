@@ -23,6 +23,7 @@ import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
+import seedu.address.model.student.EnrolledLessons;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
@@ -82,12 +83,16 @@ public class EditStudentCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        boolean isNotSameStudent = !studentToEdit.isSameStudent(editedStudent);
+        boolean hasStudentInModel = model.hasStudent(editedStudent);
+        if (isNotSameStudent && hasStudentInModel) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT, ViewTab.STUDENT);
         }
+
         model.setSelectedStudent(editedStudent);
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
         String commandResultMessage = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
         return new CommandResult(commandResultMessage, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }
@@ -96,17 +101,57 @@ public class EditStudentCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
 
-        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
-        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Name updatedName = getUpdatedName(studentToEdit, editStudentDescriptor);
+        Phone updatedPhone = getUpdatedPhone(studentToEdit, editStudentDescriptor);
+        Email updatedEmail = getUpdatedEmail(studentToEdit, editStudentDescriptor);
+        Address updatedAddress = getUpdatedAddress(studentToEdit, editStudentDescriptor);
+        Set<Tag> updatedTags = getUpdatedTags(studentToEdit, editStudentDescriptor);
+        EnrolledLessons enrolledLessons = studentToEdit.getEnrolledLessons();
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                studentToEdit.getEnrolledLessons());
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, enrolledLessons);
+    }
+
+    /**
+     * Gets the Updated Name.
+     * If there's no new Name, return the original.
+     */
+    private Name getUpdatedName(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        return editStudentDescriptor.getName().orElse(studentToEdit.getName());
+    }
+
+    /**
+     * Gets the Updated Phone.
+     * If there's no new Phone, return the original.
+     */
+    private Phone getUpdatedPhone(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        return editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
+    }
+
+    /**
+     * Gets the Updated Email.
+     * If there's no new Email, return the original.
+     */
+    private Email getUpdatedEmail(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        return editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+    }
+
+    /**
+     * Gets the Updated Address.
+     * If there's no new Address, return the original.
+     */
+    private Address getUpdatedAddress(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        return editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
+    }
+
+    /**
+     * Gets the Updated Tags.
+     * If there's no new Tags, return the original.
+     */
+    private Set<Tag> getUpdatedTags(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        return editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
     }
 
     @Override
