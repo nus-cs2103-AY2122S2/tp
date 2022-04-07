@@ -283,6 +283,7 @@ public class ModelManager implements Model {
 
             Company companyToDelete = filteredCompanies.get(index);
             deleteCompany(companyToDelete);
+            addressBook.removeMatchingCompanyName(companyToDelete.getName().toString());
             return companyToDelete;
         case EVENT:
             if (index >= filteredEvents.size()) {

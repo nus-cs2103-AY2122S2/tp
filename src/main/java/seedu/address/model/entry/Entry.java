@@ -57,4 +57,10 @@ public abstract class Entry {
      * Note: This only applies for Person and Event. Company does not have any defined functionality for this.
      */
     public abstract void updateCompanyName(String oldName, String newName);
+
+    /**
+     * Returns true if the given companyName matches {@code testName}.
+     * Note: This only applies for Person and Event. Company does not have any defined functionality for this.
+     */
+    public abstract boolean hasCompanyName(String testName);
 }

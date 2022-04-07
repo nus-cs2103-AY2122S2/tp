@@ -84,6 +84,11 @@ public class Event extends Entry {
         }
     }
 
+    @Override
+    public boolean hasCompanyName(String testName) {
+        return testName.equals(companyName.toString());
+    }
+
     /**
      * Returns true if both events have the same identity and data fields.
      * This defines a stronger notion of equality between two events.

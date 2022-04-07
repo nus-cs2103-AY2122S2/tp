@@ -68,9 +68,14 @@ public class Person extends Entry {
 
     @Override
     public void updateCompanyName(String oldName, String newName) {
-        if (oldName.equals(this.companyName.toString())) {
-            this.companyName = new Name(newName);
+        if (oldName.equals(companyName.toString())) {
+            companyName = new Name(newName);
         }
+    }
+
+    @Override
+    public boolean hasCompanyName(String testName) {
+        return testName.equals(companyName.toString());
     }
 
     /**
