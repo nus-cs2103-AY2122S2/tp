@@ -79,7 +79,7 @@ public class EditPetDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPetDescriptor}
      * that we are building.
      */
-    public EditPetDescriptorBuilder withTags(String... tags) {
+    public EditPetDescriptorBuilder withTag(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;

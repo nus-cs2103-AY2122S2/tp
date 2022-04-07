@@ -32,6 +32,15 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ATTENDANCE_DATE =
+        "Attendance date should be valid and in dd-MM-yyyy format!";
+    public static final String MESSAGE_INVALID_PICKUP_TIME =
+        "Pick up time should be valid and in HH:mm format!";
+    public static final String MESSAGE_INVALID_DROPOFF_TIME =
+        "Drop off time should be valid and in HH:mm format!";
+    public static final String MESSAGE_INVALID_NUMBER_OF_TAGS =
+            "User should only be able to key in one tag!";
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -140,10 +149,17 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+
+        // Strictly only allow one tag.
+        if (tags.size() > 1) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_TAGS);
+        }
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+
         return tagSet;
     }
 
@@ -209,11 +225,12 @@ public class ParserUtil {
     public static LocalDate parseAttendanceDate(String attendanceDate) throws ParseException {
         requireNonNull(attendanceDate);
         String trimmedAttendanceDate = attendanceDate.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDate.parse(trimmedAttendanceDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Attendance date should be in dd-MM-yyyy format!");
+            throw new ParseException(MESSAGE_INVALID_ATTENDANCE_DATE);
         }
     }
 
@@ -280,7 +297,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(trimmedPickUpTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Pick up time should be in HH:mm format!");
+            throw new ParseException(MESSAGE_INVALID_PICKUP_TIME);
         }
     }
 
@@ -298,7 +315,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(trimmedDropOffTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Drop off time should be in HH:mm format!");
+            throw new ParseException(MESSAGE_INVALID_DROPOFF_TIME);
         }
     }
 

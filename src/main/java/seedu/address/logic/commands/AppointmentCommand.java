@@ -13,7 +13,7 @@ import seedu.address.model.pet.Pet;
 
 
 /**
- * Adds appointment details to a pet identified using it's displayed index from the address book.
+ * Adds appointment details to a pet identified using it's displayed index from WoofAreYou.
  */
 public class AppointmentCommand extends Command {
 

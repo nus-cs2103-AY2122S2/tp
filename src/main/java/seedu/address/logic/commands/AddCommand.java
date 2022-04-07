@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.pet.Pet;
 
 /**
- * Adds a pet to the address book.
+ * Adds a pet to WoofAreYou.
  */
 public class AddCommand extends Command {
 
@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + PREFIX_OWNER_NAME + "OWNER_NAME "
             + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "BREED]...\n"
+            + "[" + PREFIX_TAG + "BREED] ... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Pee Pee "
             + PREFIX_OWNER_NAME + "John Doe "
