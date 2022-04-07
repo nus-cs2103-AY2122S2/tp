@@ -335,6 +335,7 @@ public class MainWindow extends UiPart<Stage> {
                     logger.info("Result: " + commandResult.getFeedbackToUser());
                     resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
                     clearFocusCard();
+                    return commandResult;
                 } catch (CommandException e) {
                     throw e;
                 }
