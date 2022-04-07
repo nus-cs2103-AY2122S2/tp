@@ -67,8 +67,9 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
 </div>
 
-#Main Function of UniBook
-## To store and provide easy viewing and modification of the following types of entities:
+# Main Function of UniBook
+To store and provide easy viewing and management of 3 types of entities relating to a student'ss studies in University.
+## Entities
 ### Person - Student or Professor 
 * Contains 3 basic details - name, phone and email. Phone and Email details can be left blank.
 * A Professor can contain one additional detail - office, the office in the University they are located in. This can also be left blank.
@@ -88,23 +89,25 @@ UniBook is a **desktop app for students to manage their university contacts rela
 1. Complement the CLI by providing the User an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
 2. Provide basic ease-of-use features to enhance the user experience. 
 
-## The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
-###Each view has its own variations of the basic command types.
-### People View:
+## Views 
+The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
+
+**Each view has its own variations of the basic command types.**
+### People View
 Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
 
 ![Ui](images/Ui.png)
-### Module View: 
+### Module View
 Displays all modules stored in UniBook, with all their individual details.
 
 ![ModulesPage](images/modulesPage.png)
-### Groups View: 
+### Groups View 
 Displays all the groups stored in UniBook, with all their individual details.
 
 ![GroupsPage](images/groupsPage.png)
 
 ## Navigation
-### Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
+Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
 
 **However, some basic intuitive features are available for quick navigation**:
   * On _people view_, click on a module code to enter the _module view_ displaying all the details of the module with the given module code.
