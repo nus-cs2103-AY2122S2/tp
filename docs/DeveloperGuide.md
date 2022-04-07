@@ -259,7 +259,7 @@ Key Consideration: How to implement `showevents` when there exists multiple tabs
 
 The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`, the sequence diagram is similar for the other types of `show` commands which exist in Amigos.
 
-![ShowEventSequenceDiagram.png](images\ShowEventsSequenceDiagram.png)
+![ShowEventSequenceDiagram.png](images\ListEventsSequenceDiagram.png)
 
 * **Current Implementation**
   * Using a `FilteredList` we are able to segregate events into past events and future events and display these events according to user's preference, this is largely similar to AB3's implementation of `list`, however we need to add the ability to automatically change tabs once this command is called, thus the `CommandResult` class was modified to contain a boolean `isEvent` which is `true` for any command related to events and enables the seamless switching between tabs.

@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("listevents")
+[-> LogicManager : execute("listevents -a")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("showevents")
+LogicManager -> AddressBookParser : parseCommand("listevents -a")
 activate AddressBookParser
 
 create ShowEventsCommand
