@@ -53,6 +53,9 @@ instructions on how to use them.
 This subsection introduces you to the symbols, syntax and technical terms that are used throughout this guide.
 Getting yourself familiar with this subsection is useful in helping you to better understand this guide.
 
+<!-- @@author flairekq-reused -->
+<!-- Reused from https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html -->
+<!-- with minor modification -->
 #### 3.2.1 Symbols and syntax
 The table below explains the symbols and syntax used throughout the user guide.
 
@@ -66,6 +69,7 @@ The table below explains the symbols and syntax used throughout the user guide.
 The image below shows the annotated GUI components of TrackBeau.
 ![Annotated GUI](images/user-guide/annotated-gui-v3.png)
 
+<!-- Section below adapted from https://ay2122s1-cs2103t-f13-2.github.io/tp/UserGuide.html -->
 #### 3.2.3 Navigating in TrackBeau
 TrackBeau consists of tabs that are toggleable in the tab bar on the left side of the GUI.
 By selecting a tab, it toggles the display panel to showcase the contents related to the tab e.g., by clicking on
@@ -81,6 +85,10 @@ The display panel will then automatically refresh to display the contents of the
 
 #### 3.2.4 Command Format
 The table below explains the important technical terms to help you understand how to use the commands in TrackBeau.
+
+<!-- @@author flairekq-reused -->
+<!-- Reused from https://ay2021s1-cs2103t-w13-3.github.io/tp/UserGuide.html -->
+<!-- with minor modifications for the table below -->
 
 | Technical Term | Meaning                                                                                                           | 
 |----------------|-------------------------------------------------------------------------------------------------------------------|
@@ -130,17 +138,25 @@ It is split into the following subsections:
 #### 4.1.1 Customer management command parameters
 The table below shows a list of command parameters that will be used for customer management.
 
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Caution:**<br>
+* Service preference refers to services feedbacked by customers that they would enjoy. As this is feedback, the service could be in the current service list offered by the salon or it could yet to be offered as salons may choose to offer when there is sufficient demand.
+   
+</div>
+
+
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAME`               | Name of the customer. Names should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `PHONE_NUMBER`       | Phone number of the customer. Phone numbers should only contain numbers, and it should be at least 3 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `ADDRESS`            | Address of the customer. Addresses can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `EMAIL`              | Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: {::nomarkdown}<ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>{:/} |
-| `STAFF_PREFERENCE`   | The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `SERVICE_PREFERENCE` | The name of the services that the customer prefers. Services' name can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `HAIR_TYPE`          | The hair type of the customer. Hair types can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `SKIN_TYPE`          | The skin type of the customer. Skin types can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `ALLERGY`            | The allergy that the customer has. Allergies can be any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `EMAIL`              | Email of the customer. Emails should be of the format local-part@domain and adhere to the following constraints: <ol><li>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.</li><li>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: <ul><li>end with a domain label at least 2 characters long</li><li>have each domain label start and end with alphanumeric characters</li><li>have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li><ul></li></ol>|
+| `STAFF_PREFERENCE`   | The name of the staffs that the customer prefers. Staffs' name can be any values, and it should not be blank if inputed. Else, it is an optional value.      |
+| `SERVICE_PREFERENCE` | The name of the services that the customer feedbacked that they would like to have. Services' name can be any values, and it should not be blank if inputed. Else, it is an optional value. Note that the service a customer prefers may not be present in the service list as the salon may not be offering the service yet.            |
+| `HAIR_TYPE`          | The hair type of the customer. Hair types can be any values, and it should not be blank if inputed. Else, it is an optional value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `SKIN_TYPE`          | The skin type of the customer. Skin types can be any values, and it should not be blank if inputed. Else, it is an optional value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `ALLERGY`            | The allergy that the customer has. Allergies can be any values, and it should not be blank if inputed. Else, it is an optional value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `BIRTHDATE`          | The birthdate of the customer. Birthdate should follow dd-MM-yyyy and be valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `REGISTRATION_DATE`  | The registration date of the customer. Registration date should follow dd-MM-yyyy and be valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `INDEX`              | The index of the customer in the displayed list. It must be a valid positive index.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -149,7 +165,7 @@ The table below shows a list of command parameters that will be used for custome
 
 Adds a customer to the application.
 
-Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`
+Format: `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`
 
 <div markdown="block" class="alert alert-primary">
 
@@ -167,6 +183,19 @@ Examples:
 Shows a list of all customers in the application.
 
 Format: `listc`
+
+![Listing all customers](images/user-guide/list-customers.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+<ul>
+    <li>Turquoise coloured tag (below the name) is used to represent the staffs that the customer prefers.</li>
+    <li>Yellow coloured tag (below staff preferences) is used to represent services that the customer prefers.</li>
+    <li>Pink coloured tag (below service preferences) is used to represent allergies that the customer has.</li>
+</ul>
+
+</div>
 
 #### 4.1.4 Editing a customer : `editc`
 
@@ -208,15 +237,21 @@ Example Usage: `editc 2 n/Betsy Crower al/`
 Finds customers whose parameters contain any of the given keywords.
 
 Format: `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`
+
+<div markdown="block" class="alert alert-warning">
    
 **:exclamation: Caution:**<br>
+* KEYWORD_TYPE is specific to customer prefixes: `n/` `a/` `p/` `e/` `rd/` `bd/` `s/` `h/` `stp/` `sep/` `al/`
 * For tags, using two tags of the same type will lead to only the latest one being searched for. For instance, `findc h/Oily h/Dry` will search for only customers with dry hair type.<br>
-* The search is case-insensitive. e.g, `john` will match `john`
-* Only full words will be matched e.g. `john` will not match `joh`
+* For tags, using `findc h/Oily Dry` will search for customers that either have oily or dry hair.
+* The search is case-insensitive. e.g, `John` will match `john`
+* Only full words will be matched e.g. `findc n/Alex Yeoh` will not match customers who are `Alex Tan`, even if they both are called `Alex`
+
+</div>
 
 Examples:
-* `findc n/John` returns `john` and `John Doe`
-* `findc al/Nickel` returns customer profiles with nickle allergies
+* `findc n/John stp/Jason` returns customers who have `john` in their name and customers who like `Jason`
+* `findc al/Nickel` returns customer profiles with Nickel allergies
 * `findc h/Oily` returns customer profiles that has the hair type of oily
 
 #### 4.1.6 Deleting customer(s) : `deletec`
@@ -337,12 +372,13 @@ Examples:
 #### 4.3.1 Booking management command parameters
 The table below shows a list of command parameters that will be used for booking management.
 
-| Parameter           | Description                                                                                                                                                                                           |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CUSTOMER_INDEX`    | Name of the service. Service name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. It should also be unique such that no two services have the same name. |
-| `SERVICE_INDEX`     | Price of the service. Price should only contain numbers, at most 2 decimal places and have a value that is greater than 0.                                                                            |
-| `BOOKING_DATE_TIME` | Duration of the service in minutes. Duration should only contain numbers and have a value that is greater than 0.                                                                                     |
-| `FEEDBACK`          | The index of the service in the displayed list. It must be a valid positive index.                                                                                                                    |
+| Parameter           | Description                                                                                                                                                                                          |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`              | Name of customer or Service. Name should only contain alphanumeric characters, hyphens and spaces, and it should not be blank. |
+| `CUSTOMER_INDEX`    | Customer Index should only contain numbers and have a value that is greater than 0.                                                                                                                  |
+| `SERVICE_INDEX`     | Service Index should only contain numbers and have a value that is greater than 0.                                                                                                                   |
+| `BOOKING_DATE_TIME` | Booking Date Time must be in format dd-MM-yyyy HH:mm.                                                                                                                                                |
+| `FEEDBACK`          | Feedback should only contain alphanumeric characters, hyphens and spaces, and it should not be blank.                                                                                                                                                                                            |
 
 #### 4.3.2 Adding a booking: `addb`
 Adds a booking to the application.
@@ -373,6 +409,8 @@ Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIM
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
+    <li>Feedback can only be given if the current date is after booking date.</li>
+    <li>Editing booking date to be after current date will remove any feedback.</li>
 </ul>
 
 </div>
@@ -511,6 +549,8 @@ Examples:
 * The indexes of bookings in schedule view is not meaning for deleting bookings. Using them will lead to unexpected behaviour.
 </div>
 
+
+
 #### 4.5.1 Schedule management command parameters
 The table below shows a list of command parameters that will be used for schedule management.
 
@@ -583,13 +623,13 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 
 ### 5.1 Customer
 
-| Action                 | Format                                                                                                                                                                                             | Examples                     |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
-| Add a customer         | `addc n/NAME p/PHONE_NUMBER a/ADDRESS [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]`              ||
-| List all customers     | `listc`                                                                                                                                                                                            ||
-| Edit a customer        | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]` | `editc 2 n/Betsy Crower al/` |
-| Find customer profiles | `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                                                                                                                                       ||
-| Delete customer(s)     | `deletec INDEX,[MORE INDEXES]`                                                                                                                                                                     ||
+| Action                 | Format                                                                                                                                                                                             | Examples                                                                                                                 |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Add a customer         | `addc n/NAME p/PHONE_NUMBER a/ADDRESS rd/REGISTRATION_DATE [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE]`                | `addc n/Betsy Crow e/betsycrow@example.com a/Newgate Prison p/1234568 rd/06-04-2022 al/Aloe Vera sep/facial sep/massage` |
+| List all customers     | `listc`                                                                                                                                                                                            | `listc`                                                                                                                  |
+| Edit a customer        | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [e/EMAIL] [stp/STAFF_PREFERENCE]…​ [sep/SERVICE_PREFERENCE]…​ [h/HAIR_TYPE] [s/SKIN_TYPE] [al/ALLERGY]…​ [bd/BIRTHDATE] [rd/REGISTRATION_DATE]` | `editc 1 n/Betsy Crower stp/Jason`                                                                                       |
+| Find customer profiles | `findc KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                                                                                                                                       | `findc n/Alex Yeoh`                                                                                                      |
+| Delete customer(s)     | `deletec INDEX,[MORE INDEXES]`                                                                                                                                                                     | `deletec 1,2`                                                                                                            |
 
 ### 5.2 Service
 
@@ -610,6 +650,7 @@ If your changes to the data file makes its format invalid, TrackBeau will discar
 | Edit a booking        | `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIME] [f/FEEDBACK]` | `editb 1 sev/3 f/Excellent Customer Service` |
 | Find booking profiles | `findb KEYWORD_TYPE KEYWORD [MORE_KEYWORDS]`                                             ||
 | Delete booking(s)     | `deleteb INDEX,[MORE INDEXES]`                                                           | `deleteb 1,2,3`                              |
+
 
 ### 5.4 Statistics
 
@@ -643,7 +684,13 @@ The charts plot up to 10 variables at most. For example, in plotStaff, the top 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. Glossary
+## 6. Known Limitations
+
+* Inputting very long values for fields like the price of a Service might cause it to be round off at certain significant number due to the size limitation of the data type used for the field.                                                                                                       
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 7. Glossary
 
 | Term                              | Definition                                                                                                                                                              |
 |-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -655,7 +702,7 @@ The charts plot up to 10 variables at most. For example, in plotStaff, the top 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. FAQ
+## 8. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackBeau home folder.       

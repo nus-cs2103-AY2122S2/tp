@@ -5,8 +5,10 @@ import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICEINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
+import static seedu.trackbeau.logic.parser.booking.AddBookingCommandParser.EMPTY_FEEDBACK_TYPE;
 import static seedu.trackbeau.model.Model.PREDICATE_SHOW_ALL_BOOKINGS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,11 +74,34 @@ public class EditBookingCommand extends Command {
         List<Service> lastShownServiceList = model.getFilteredServiceList();
         List<Booking> lastShownBookingList = model.getFilteredBookingList();
 
+        Index customerIndex = editBookingDescriptor.getCustomerIndex();
+        Index serviceIndex = editBookingDescriptor.getServiceIndex();
+        Optional<Feedback> feedback = editBookingDescriptor.getFeedback();
+
+        Booking bookingToEdit = lastShownBookingList.get(index.getZeroBased());
+        BookingDateTime updatedDateTime = editBookingDescriptor.getBookingDateTime()
+                .orElse(bookingToEdit.getBookingDateTime());
+
         if (index.getZeroBased() >= lastShownBookingList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX);
+        }
+
+        if (customerIndex != null && customerIndex.getOneBased() >= lastShownCustomerList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+        }
+
+        if (serviceIndex != null && serviceIndex.getOneBased() >= lastShownServiceList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SERVICE_DISPLAYED_INDEX);
         }
 
-        Booking bookingToEdit = lastShownBookingList.get(index.getZeroBased());
+        if ((LocalDateTime.now().compareTo(updatedDateTime.value) < 0)) {
+            if (feedback.isPresent()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_FEEDBACK_TIME);
+            } else {
+                editBookingDescriptor.setFeedback(new Feedback(EMPTY_FEEDBACK_TYPE));
+            }
+        }
+
         Booking editedBooking = createEditedBooking(bookingToEdit, editBookingDescriptor,
                 lastShownCustomerList, lastShownServiceList);
 

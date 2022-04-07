@@ -98,7 +98,9 @@ public class EditCustomerCommand extends Command {
         Customer customerToEdit = lastShownCustomerList.get(index.getZeroBased());
         Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
-        if (!customerToEdit.isSameItem(editedCustomer) && model.hasCustomer(editedCustomer)) {
+        //if different customer, check the customer list to see if this new customer will clash with an existing one
+        if (customerToEdit.hasDifferentIdentityFieldsFrom(editedCustomer)
+                && model.hasAnotherCustomerWithClashingIdentity(customerToEdit, editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 

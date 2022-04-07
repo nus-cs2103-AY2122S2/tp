@@ -1,5 +1,6 @@
 package seedu.trackbeau.logic.parser.booking;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_FEEDBACK;
@@ -27,6 +28,7 @@ public class EditBookingCommandParser implements Parser<EditBookingCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditBookingCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMERINDEX, PREFIX_SERVICEINDEX, PREFIX_STARTTIME,
                         PREFIX_FEEDBACK);
@@ -36,8 +38,9 @@ public class EditBookingCommandParser implements Parser<EditBookingCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditBookingCommand.MESSAGE_USAGE), pe);
+                EditBookingCommand.MESSAGE_USAGE), pe);
         }
 
         EditBookingDescriptor editBookingDescriptor = new EditBookingDescriptor();

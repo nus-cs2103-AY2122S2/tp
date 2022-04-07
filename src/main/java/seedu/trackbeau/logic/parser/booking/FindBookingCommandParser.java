@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.parser.booking;
 
 import static seedu.trackbeau.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_FEEDBACK;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.trackbeau.model.booking.BookingSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
@@ -31,8 +32,8 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
      */
     public FindBookingCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_STARTTIME);
-        Prefix[] prefixList = { PREFIX_NAME, PREFIX_STARTTIME };
+                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_STARTTIME, PREFIX_FEEDBACK);
+        Prefix[] prefixList = { PREFIX_NAME, PREFIX_STARTTIME, PREFIX_FEEDBACK };
 
         if (userInput.isEmpty()) {
             throw new ParseException(
@@ -44,15 +45,15 @@ public class FindBookingCommandParser implements Parser<FindBookingCommand> {
 
         for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
             if (argMultimap.getValue(prefixList[i]).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                //parseAddress is used because it allows for all formats except for empty strings
-                //using add will cause the size of the list to be wrong
                 prefixArr.set(i,
                         Arrays.asList(ParserUtil
-                                .parseAddress(argMultimap.getValue(prefixList[i]).get()).toString().split(" ")));
+                                .parseFindValues(argMultimap.getValue(prefixList[i]).get())
+                                .toString().split(" ")));
             }
         }
 
         return new FindBookingCommand(new BookingSearchContainsKeywordsPredicate(prefixArr));
 
     }
+
 }

@@ -65,6 +65,11 @@ public interface Model {
     boolean hasCustomer(Customer customer);
 
     /**
+     * Returns true if a edited customer has the same identity as another customer in trackBeau.
+     */
+    boolean hasAnotherCustomerWithClashingIdentity(Customer originalCustomer, Customer editedCustomer);
+
+    /**
      * Deletes the given booking.
      * The booking must exist in trackBeau.
      */

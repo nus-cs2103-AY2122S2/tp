@@ -5,7 +5,6 @@ import static seedu.trackbeau.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +22,25 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameItem);
+    }
+
+    /**
+     * Returns true if the list, other than item to skip, is same item as item toCheck in argument.
+     */
+    public boolean checkIfClash(T toSkip, T toCheck) {
+        //we skip the original customer and check the edited customer against the rest of the list
+        requireAllNonNull(toSkip, toCheck);
+        int indexOfToSkip = internalList.indexOf(toSkip);
+        for (int i = 0; i < internalList.size(); i++) {
+            if (i == indexOfToSkip) {
+                continue;
+            } else {
+                if (internalList.get(i).isSameItem(toCheck)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -75,14 +93,6 @@ public class UniqueList<T extends UniqueListItem> implements Iterable<T> {
     public Integer indexOf(T item) {
         requireNonNull(item);
         return internalList.indexOf(item);
-    }
-
-    /**
-     * Removes the items that satisfy the {@code condition}.
-     *
-     */
-    public void removeByCondition(Predicate<T> condition) {
-        internalList.removeIf(condition);
     }
 
 

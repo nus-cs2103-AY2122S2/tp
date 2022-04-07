@@ -1,6 +1,7 @@
 package seedu.trackbeau.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackbeau.model.customer.Address.VALIDATION_REGEX;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,8 +31,9 @@ import seedu.trackbeau.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String FIND_MESSAGE_CONSTRAINTS = "Find Command can take any values, "
+            + "but it should not be blank";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -162,7 +164,7 @@ public class ParserUtil {
         requireNonNull(regDate);
         String trimmedRegDate = regDate.trim();
         if (!RegistrationDate.isValidRegistrationDate(trimmedRegDate)) {
-            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+            throw new ParseException(RegistrationDate.MESSAGE_CONSTRAINTS);
         }
         return new RegistrationDate(regDate);
     }
@@ -286,8 +288,23 @@ public class ParserUtil {
         requireNonNull(feedback);
         String trimmedFeedback = feedback.trim();
         if (!Feedback.isValidFeedback(trimmedFeedback)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Feedback.MESSAGE_CONSTRAINTS);
         }
         return new Feedback(trimmedFeedback);
     }
+
+    /**
+     * Parses keywords given by user in Find Command Parser.
+     * @param value keyword given by user
+     * @throws ParseException
+     */
+    public static String parseFindValues(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+        if (!value.matches(VALIDATION_REGEX)) {
+            throw new ParseException(FIND_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedValue;
+    }
+
 }

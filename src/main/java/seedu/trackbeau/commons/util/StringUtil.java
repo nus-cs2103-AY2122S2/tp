@@ -38,6 +38,7 @@ public class StringUtil {
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 
+
     /**
      * Returns a detailed message of the t, including the stack trace.
      */
