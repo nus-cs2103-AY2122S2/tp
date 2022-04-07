@@ -15,7 +15,8 @@ import seedu.address.testutil.TypicalBuyers;
 
 public class JsonSerializableBuyerAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableBuyerAddressBookTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonSerializableBuyerAddressBookTest");
     private static final Path TYPICAL_BUYER_FILE = TEST_DATA_FOLDER.resolve("typicalBuyerAddressBook.json");
     private static final Path INVALID_BUYER_FILE = TEST_DATA_FOLDER.resolve("invalidBuyerAddressBook.json");
     private static final Path DUPLICATE_BUYER_FILE = TEST_DATA_FOLDER.resolve("duplicateBuyerAddressBook.json");

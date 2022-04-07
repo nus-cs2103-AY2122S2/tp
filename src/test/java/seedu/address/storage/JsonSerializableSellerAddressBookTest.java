@@ -1,22 +1,22 @@
 package seedu.address.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.BuyerAddressBook;
-import seedu.address.model.SellerAddressBook;
-import seedu.address.testutil.TypicalBuyers;
-import seedu.address.testutil.TypicalSellers;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.SellerAddressBook;
+import seedu.address.testutil.TypicalSellers;
 
 public class JsonSerializableSellerAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableSellerAddressBookTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonSerializableSellerAddressBookTest");
     private static final Path TYPICAL_SELLER_FILE = TEST_DATA_FOLDER.resolve("typicalSellerAddressBook.json");
     private static final Path INVALID_SELLER_FILE = TEST_DATA_FOLDER.resolve("invalidSellerAddressBook.json");
     private static final Path DUPLICATE_SELLER_FILE = TEST_DATA_FOLDER.resolve("duplicateSellerAddressBook.json");
