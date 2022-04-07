@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LessonName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lesson names should only contain alphanumeric characters, spaces and are limited to 50 characters."
-                    + "Lesson names should not be blank.";
+            "Lesson names should only contain alphanumeric characters and spaces."
+                    + "\nLesson names should not be blank and is capped at 50 characters.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -36,7 +36,7 @@ public class LessonName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 50;
     }
 
 

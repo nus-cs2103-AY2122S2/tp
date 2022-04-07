@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values and are capped at 100 characters.";
     public static final Address EMPTY_ADDRESS = new Address();
 
     /*
@@ -43,7 +43,7 @@ public class Address {
      * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX) || test.equals("");
+        return test.matches(VALIDATION_REGEX) && test.length() <= 100 || test.equals("");
     }
 
     @Override

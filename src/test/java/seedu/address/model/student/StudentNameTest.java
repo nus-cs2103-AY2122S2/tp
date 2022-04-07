@@ -45,5 +45,9 @@ public class StudentNameTest {
         assertFalse(Name.isValidName(" 1 ")); // 1 number only w whitespace
         assertFalse(Name.isValidName("1234")); // only numbers
         assertFalse(Name.isValidName("99999999999999999999999999999999999999999999999999")); // 50 numbers
+        assertFalse(Name.isValidName("9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWXY")); // 51 alphanumeric
+        assertFalse(Name.isValidName("9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWXY"
+                + "9bcdefghijklmnopqrstuvwxyzA1CDEFGHIJKLMNO3QRSTUVWXY")); // 102 alphanumeric
+
     }
 }
