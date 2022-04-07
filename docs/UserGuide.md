@@ -138,13 +138,15 @@ Adds a candidate into the system.
 
 Format: `add id/STUDENT_ID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`
 
-* `STUDENT_ID` is sensitive and it will be validated.
-* `NAME` should only contain alphabets, `A-Z` or `a-z`.
-* `EMAIL` should only be in this format. i.e. `EXXXXXXX@u.nus.edu`
-* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
-* `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
-* `SENIORITY` is a number range from 1 to 4.
-* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
+All fields of a `candidate` below should not be blank and will be validated.
+
+* `STUDENT_ID` is sensitive, and in this format `AXXXXXXXX` e.g. `A0123456B`.
+* `NAME` should only contain alphanumeric characters and spaces.
+* `EMAIL` is sensitive, and should only be in this format `EXXXXXXX@u.nus.edu`.
+* `PHONE` is sensitive, and should only be a local Singapore number. i.e. Starting number of Singapore's common phone/telephone numbers - 6, 8, 9.
+* `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems.
+* `SENIORITY` is a number range from only 1 to 4.
+* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to an availability of `Monday`, `Tuesday` and `Wednesday`. It accepts a number range from only 1 to 5.
 
 Examples:
 * `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, **A0123456B**, named John Doe.
