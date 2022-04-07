@@ -48,4 +48,7 @@ had to be updated and new tests had to be created for the new class and commands
 [#32](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/32),
 [#38](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/38),
 [#57](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/57),
-[#63](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/63)
+[#63](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/63),
+[#154](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/154),
+[#164](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/164)
+
