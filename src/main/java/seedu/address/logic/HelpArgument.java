@@ -208,7 +208,7 @@ public class HelpArgument {
 
     public static final String HELP_COMMAND_DESCRIPTION =
             "Well what do you expect? New version of help? Here you are, welcome to our new help."
-                    + "Now please type the 'help' to get the real help.";
+                    + " Now please type 'help' to get the real help.";
 
     private static final HashMap<String, String> HELP_ARGUMENT_WITH_DESCRIPTION = loadHelpArgument();
 
