@@ -68,11 +68,12 @@ Represents a person in university. The person must be a student or a professor.
 
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |
 | ----- | ------ | ---- | ------ | -------- | :-------: | ----- | --- |
-| Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ |
-| Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: | | _91234859_ |
-| Email | Person's email address| 0 - 1 | [Email Format](#email-address-format) |  4 - 320 characters | :heavy_check_mark:| | _johndoe@example.com_ |
-| Office | Professor's office location in university campus | 0 - 1 |Any character except whitespaces | 1 - 20 characters | :x: | Only Professor has this field| _COM2-02-57_ |
-| Tag |  A one word piece of information to attach to a person - similar to a hashtag on social media | 0 - * | Alphanumeric | 1 - 20 characters | :x: | Among the tags of a person, 1 specific tag can only appear once| _friend_ | 
+| Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: |  |_John Doe_ |
+| Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: |  | _91234859_ |
+| Email | Person's email address| 0 - 1 | [Email Format](#email-address-format) |  4 - 320 characters | :heavy_check_mark:|  | _johndoe@example.com_ |
+| Office | Professor's office location in university campus | 0 - 1 | Any character except whitespaces | 1 - 20 characters | :x: | Only Professor has this field | _COM2-02-57_ |
+| Tag |  A one word piece of information to attach to a person - similar to a hashtag on social media | 0 - * | Alphanumeric | 1 - 20 characters | :x: | Among the tags of a person, 1 specific tag can only appear once | _friend_ | 
+
 ### Module
 Represents a university module.
 Can have both Professors and Students associated with it.
