@@ -6,12 +6,12 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
-public class Birthdate {
+public class Birthdate extends Date {
     public static final String MESSAGE_CONSTRAINTS = "Birthdate should follow dd-MM-yyyy and be valid date.";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
     public final LocalDate value;
-
 
     /**
      * Constructs an {@code Birthdate}.
@@ -29,9 +29,7 @@ public class Birthdate {
      * Returns true if a given string is a valid Birthdate.
      */
     public static boolean isValidBirthdate(String test) {
-        try {
-            LocalDate.parse(test, formatter);
-        } catch (DateTimeParseException e) {
+        if (!isSatisfyDateRequirements(test,formatter)) {
             return false;
         }
         return true;
