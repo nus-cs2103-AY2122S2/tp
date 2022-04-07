@@ -87,7 +87,7 @@ public class EditApplicantCommand extends EditCommand {
         }
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
-        Applicant editedApplicant = createEditedPerson(applicantToEdit, editApplicantDescriptor);
+        Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
@@ -125,8 +125,8 @@ public class EditApplicantCommand extends EditCommand {
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      */
-    private static Applicant createEditedPerson(Applicant applicantToEdit,
-                                                EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedApplicant(Applicant applicantToEdit,
+                                                   EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());

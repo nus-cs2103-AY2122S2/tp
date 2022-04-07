@@ -107,7 +107,6 @@ public class EditApplicantCommandTest {
         Applicant firstApplicant = model.getFilteredApplicantList().get(INDEX_FIRST.getZeroBased());
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(firstApplicant).build();
         EditApplicantCommand editCommand = new EditApplicantCommand(INDEX_SECOND, descriptor);
-
         assertCommandFailure(editCommand, model, EditApplicantCommand.MESSAGE_DUPLICATE_APPLICANT);
     }
 
