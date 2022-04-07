@@ -28,7 +28,7 @@ public class MatricCard {
     public MatricCard(String cardNumber) {
         requireNonNull(cardNumber);
         checkArgument(isValidMatricCard(cardNumber), MESSAGE_CONSTRAINTS);
-        value = cardNumber.toUpperCase();
+        value = cardNumber;
     }
 
     /**
