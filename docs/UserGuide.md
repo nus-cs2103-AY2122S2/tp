@@ -146,7 +146,8 @@ Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 * `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a buyer is initially added, they will default to having **no** Property. Use `add-ptb` to add a respective property.
-* `TAG` must be **alphanumeric** with no spaces
+* `TAG` must be **alphanumeric** with no spaces between the words. E.g. `great` is ok but `great client` is not.
+* If there are **leading** or **trailing** whitespace for `NAME`, `PHONE_NUMBER` or `TAG`, it will be ignored. E.g. `____David_____` where `_` is whitespace is `David`.
 
 Examples:
 * `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
@@ -163,7 +164,8 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
 * Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
-
+* You cannot add a new property to buy once one has already been added.
+* If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE` or `HOUSE_TYPE`, it will be ignored. E.g. `____hdb_____` where `_` is whitespace will be treated as `hdb`.
 
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
@@ -363,6 +365,8 @@ Format: `add-s n/NAME p/PHONE_NUMBER [t/TAG]...`
 * `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a seller is initially added, they will default to having **no** Property. Use `add-pts` to add a respective property.
+* `TAG` must be **alphanumeric** with no spaces between the words. E.g. `great` is ok but `great client` is not.
+* If there are **leading** or **trailing** whitespace for `NAME`, `PHONE_NUMBER` or `TAG`, it will be ignored. E.g. `____David_____` where `_` is whitespace is `David`.
 
 Examples:
 * `add-s n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
@@ -393,6 +397,8 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 * The application will not check if the `LOCATION` actually contains a property with the given `ADDRESS`. It is up to your due diligence to ensure `ADDRESS` is at `LOCATION` stated.
 * It is possible for multiple different sellers to sell same `ADDRESS` properties. This is for cases that you are storing information about separate residents of the property.
 * Similarly, it is possible for sellers with the same `ADDRESS` to have different `LOCATION`, `PRICE_RANGE` & `HOUSE_TYPE` since they might each have their own perspectives of where each property resides, its type, or what its worth.
+* You cannot add a new property to sell once one has already been added.
+* If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE`, `HOUSE_TYPE` or `ADDRESS`, it will be ignored. E.g. `____Colonia_____` where `_` is whitespace is `Colonia`.
 
   Examples:
 * `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Ajax at Ajax Ave 1, 02-100 for any price from $800,000 to $900,000.
