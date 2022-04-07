@@ -289,7 +289,7 @@ UDT may not automatically update students' `Status` if complex edits are execute
 changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
 in the *next iteration (v1.5)*.
 
-##Right-Click Help Menu
+## Right-Click Help Menu
 
 |![RightClick](images/user-guide/rightclick.png)|
 |:--:|
