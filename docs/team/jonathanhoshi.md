@@ -37,6 +37,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide: 
     * Update basic information of Trackermon at the start of the project. [[\#19](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/19)]
+    * Add initial Table of content and return to top links. [[\#93](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/93)]
     * Add a section of Parameter conditions to consolidate all commands conditions regarding their parameters. [[\#258](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/258)]
   * Developer Guide: [[\#148](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/148)]
     * Update documentation and UML diagrams for UI.
