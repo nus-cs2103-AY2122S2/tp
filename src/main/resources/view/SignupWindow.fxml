@@ -45,7 +45,7 @@
                         <Insets top="5" right="10" bottom="5" left="10" />
                     </padding>
                     <PasswordField fx:id="userRepeatPassword" onAction="#handleSignup"
-                                   promptText="Enter password here" onKeyTyped="#handleOnKeyPressed"/>
+                                   promptText="Enter same password here" onKeyTyped="#handleOnKeyPressed"/>
                 </StackPane>
 
                 <VBox fx:id="responseDisplayPane" alignment="CENTER" maxWidth="425">
