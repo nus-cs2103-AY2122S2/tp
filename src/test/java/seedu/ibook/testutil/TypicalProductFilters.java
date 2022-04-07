@@ -23,6 +23,7 @@ import seedu.ibook.model.product.filters.CategoryFilter;
 import seedu.ibook.model.product.filters.DescriptionFilter;
 import seedu.ibook.model.product.filters.ExpiringFilter;
 import seedu.ibook.model.product.filters.NameFilter;
+import seedu.ibook.model.product.filters.OutOfStockFilter;
 import seedu.ibook.model.product.filters.PriceFilter;
 import seedu.ibook.model.product.filters.PriceRangeFilter;
 import seedu.ibook.model.product.filters.ProductFilter;
