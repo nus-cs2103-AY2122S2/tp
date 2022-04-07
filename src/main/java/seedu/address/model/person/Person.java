@@ -87,9 +87,13 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getName().toString()).equalsIgnoreCase(getName().toString())
+                && ((otherPerson.getPhone()).equals(getPhone())
+                || (!getTelegram().toString().equals("") && (otherPerson.getTelegram()).equals(getTelegram()))
+                || (!getMatricCard().toString().equals("") && (otherPerson.getMatricCard()).equals(getMatricCard()))
+                || (otherPerson.getAddress()).equals(getAddress())
+                || (otherPerson.getEmail()).equals(getEmail()));
     }
 
     /**

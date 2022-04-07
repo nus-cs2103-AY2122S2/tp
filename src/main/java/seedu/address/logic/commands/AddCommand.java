@@ -45,7 +45,13 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Duplicate person in the address book. \n"
+            + "Person are considered as duplicated if \n"
+            + "i) They have the same name (case-insensitive)\n"
+            + "ii) At least one of these fields (phone, email, address, \n"
+            + "    matric card, telegram) is the same \n"
+            + "Consider using the edit command to edit the fields instead";
+
 
     private final Person toAdd;
 

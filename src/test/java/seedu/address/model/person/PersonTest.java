@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MATRICCARD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -40,9 +42,41 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // address same -> returns true
+        editedBob = new PersonBuilder(BOB).withAddress(VALID_ADDRESS_BOB).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // address same with different case -> returns true
+        editedBob = new PersonBuilder(BOB).withAddress(VALID_ADDRESS_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // email same -> returns true
+        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // email same with different case -> returns true
+        editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // telegram same -> returns true
+        editedBob = new PersonBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // telegram same with different case-> returns true
+        editedBob = new PersonBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // matricCard same -> returns true
+        editedBob = new PersonBuilder(BOB).withMatricCard(VALID_MATRICCARD_BOB).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // matricCard same with different case -> returns true
+        editedBob = new PersonBuilder(BOB).withMatricCard(VALID_MATRICCARD_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
