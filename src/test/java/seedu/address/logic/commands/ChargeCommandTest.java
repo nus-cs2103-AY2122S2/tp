@@ -50,10 +50,13 @@ class ChargeCommandTest {
         String petName = firstPet.getName().toString();
 
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String attendance = chargeCommand.getAttendance(firstPet);
         String month = chargeCommand.getMonthName();
+        int year = chargeDate.getYear();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 0.0, month));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 0.0, month, year)
+                        + attendance);
 
         assertCommandSuccess(chargeCommand, model, expectedCommandResult, model);
     }
@@ -69,10 +72,13 @@ class ChargeCommandTest {
                 .build();
         String petName = petToMarkPresent.getName().toString();
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String attendance = chargeCommand.getAttendance(petToMarkPresent);
         String month = chargeCommand.getMonthName();
+        int year = chargeDate.getYear();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 200.50, month));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 200.50, month, year)
+                        + attendance);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
@@ -93,10 +99,13 @@ class ChargeCommandTest {
                 .build();
         String petName = petToMarkPresent.getName().toString();
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String attendance = chargeCommand.getAttendance(petToMarkPresent);
         String month = chargeCommand.getMonthName();
+        int year = chargeDate.getYear();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month, year)
+                        + attendance);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
@@ -123,10 +132,13 @@ class ChargeCommandTest {
         Charge charge = new Charge(CHARGE_AMOUNT_STUB);
 
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String attendance = chargeCommand.getAttendance(firstPet);
         String month = chargeCommand.getMonthName();
+        int year = chargeDate.getYear();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 0.0, month));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 0.0, month, year)
+                        + attendance);
 
         assertCommandSuccess(chargeCommand, model, expectedCommandResult, model);
     }
@@ -148,10 +160,13 @@ class ChargeCommandTest {
         model.setPet(firstPet, petToMarkPresent);
         String petName = petToMarkPresent.getName().toString();
         ChargeCommand chargeCommand = new ChargeCommand(INDEX_FIRST_PET, chargeDate, charge);
+        String attendance = chargeCommand.getAttendance(petToMarkPresent);
         String month = chargeCommand.getMonthName();
+        int year = chargeDate.getYear();
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month));
+                String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month, year)
+                        + attendance);
 
         assertCommandSuccess(chargeCommand, model, expectedCommandResult, model);
     }
