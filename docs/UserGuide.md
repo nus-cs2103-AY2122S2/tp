@@ -155,7 +155,7 @@ Examples:
 
 Edits a candidate in the system.
 
-Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
+Format: `edit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -165,8 +165,8 @@ Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
 
 </div>
 
-* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​ .
+* At least one field must be provided and the rest are optional fields.
 * Existing values will be updated to the input values.
 * `as` prefix short for Application Status should only be either `Pending`, `Accepted` or `Rejected`.
 
