@@ -5,7 +5,7 @@ title: User Guide
 
 
 
-UniBook is a **desktop app for students to manage their university contacts related to their studies in an organised manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
+UniBook is a **desktop app for students to manage university contacts related to their studies in an organised manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
 * Table of Contents
 {:toc}
 
@@ -63,7 +63,7 @@ Constraint Types:
 ### Person - Student or Professor 
 Represents a person in university. The person **must be a student or a professor.**
 
-|Field|Description|Number of entries|Acceptable Values|Length Constraint|Unique Constraint|Additional Constraints|Example|
+|Field|Description|Number of entries|Acceptable Values|Length Constraint|Unique Constraint|Additional Constraints|Example|  
 |-----|------|----|------|--------|-------|-----|---|
 | Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ |
 | Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: | | _91234859_ |
@@ -76,7 +76,7 @@ Can have both Professors and Students associated with it.
 * Association with Professor implies that the professor is involved in the teaching of the module.
 * Association with student implies student is taking the module.
 
-|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints|Example|
+|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints|Example|  
 |-----|------|----|------|--------|-------|-----|---|
 |Code| Module code| 1 |Any character except whitespaces | 1 - 10 characters| :heavy_check_mark: | A module code is case insensitive, e.g. _cs2103_ and _CS2103_ are considered the same. The case stored in UniBook is the case of the first module entered with the given module code. Future additions of the same module code with different case will not be allowed. | _CS2103_ |
 |Name| Name of the module | 1 | Alphanumeric with whitespaces| 1 - 50 characters | :x: | | _Software Engineering_ |
@@ -87,8 +87,8 @@ Can have both Professors and Students associated with it.
 * Can contain multiple students, implying they are members of the group.
 * Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed.
 
-|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints |Example|
-|-----|------|----|------|--------|-------|-----|---|
+|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints |Example|  
+|-----|------|----|------|--------|-------|-----|---|  
 |Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
 |Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
 
