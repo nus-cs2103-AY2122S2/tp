@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + PREFIX_OWNER_NAME + "OWNER_NAME "
             + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "BREED]"
+            + "[" + PREFIX_TAG + "BREED] ... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Pee Pee "
             + PREFIX_OWNER_NAME + "John Doe "
