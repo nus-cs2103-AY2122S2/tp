@@ -32,6 +32,8 @@ public class ModelManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     * @param addressBook the provided addressBook.
+     * @param userPrefs the specified user preferences.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -45,6 +47,9 @@ public class ModelManager implements Model {
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
+    /**
+     * Initializes a ModelManager with an empty addressBook and default user preferences.
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }

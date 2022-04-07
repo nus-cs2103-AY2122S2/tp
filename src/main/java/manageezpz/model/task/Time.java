@@ -27,7 +27,8 @@ public class Time {
 
     /**
      * Checks if a given string is a valid time.
-     * @return true if a given string is a valid time, false otherwise
+     * @param time the time to be checked.
+     * @return true if a given string is a valid time, false otherwise.
      */
     public static boolean isValidTime(String time) {
         return time.matches(VALIDATION_REGEX) && time.matches("([01]?[0-9]|2[0-3])[0-5][0-9]");
@@ -43,6 +44,11 @@ public class Time {
         return parsedTime;
     }
 
+    /**
+     * Formats the given time.
+     * @param dtf the DateTimeFormatter to be used to format the time.
+     * @return the formatted time.
+     */
     public String format(DateTimeFormatter dtf) {
         return getParsedTime().format(dtf);
     }

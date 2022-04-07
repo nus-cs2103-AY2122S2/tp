@@ -1,5 +1,8 @@
 package manageezpz.model.task;
 
+/**
+ * An enum class that represents the priority of a given Task.
+ */
 public enum Priority {
     HIGH(0),
     MEDIUM(1),

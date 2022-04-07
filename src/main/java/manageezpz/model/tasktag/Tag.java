@@ -26,7 +26,9 @@ public class Tag {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Check if a given string is a valid tag name.
+     * @param test the tag name to be checked.
+     * @return true if the tag is valid, false otherwise.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);

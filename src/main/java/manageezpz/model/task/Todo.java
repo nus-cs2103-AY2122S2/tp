@@ -18,10 +18,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructor to initialize an instance of Todo class with an existing
-     * Todo object.
+     * Constructor to initialize an instance of Todo class with an existing Todo object.
      *
-     * @param todo Todo task
+     * @param todo Todo task.
      */
     public Todo(Todo todo) {
         this.type = todo.getType();
@@ -54,7 +53,7 @@ public class Todo extends Task {
      * Returns the string representation of a Todo task.
      *
      * @return The string representation of the Todo task, consisting of its
-     * description
+     * description.
      */
     @Override
     public String toString() {

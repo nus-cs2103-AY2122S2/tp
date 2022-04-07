@@ -14,9 +14,9 @@ import manageezpz.model.person.exceptions.PersonNotFoundException;
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * persons uses Person#isSamePerson(Person) for equality to ensure that the person being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object)
+ * to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -29,7 +29,9 @@ public class UniquePersonList implements Iterable<Person> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Checks if the list contains an equivalent person as the given argument.
+     * @param toCheck the person to be checked.
+     * @return true if the list contains the specified person, false otherwise.
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
@@ -39,6 +41,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
+     * @param toAdd the person to be added.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
@@ -52,6 +55,8 @@ public class UniquePersonList implements Iterable<Person> {
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * @param target the person to be replaced.
+     * @param editedPerson the new person to replace the target.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -70,6 +75,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Increases the number of tasks by one.
+     * @param person the person to increment the number of tasks.
      */
     public void increaseNumOfTasks(Person person) {
         requireNonNull(person);
@@ -83,6 +89,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Decreases the number of tasks by one.
+     * @param person the person to decrement the number of tasks.
      */
     public void decreaseNumOfTasks(Person person) {
         requireNonNull(person);
@@ -97,6 +104,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
+     * @param toRemove the person to be removed.
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
@@ -105,6 +113,10 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Replaces the current person list with the provided list.
+     * @param replacement the list to replace the current person list.
+     */
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -113,6 +125,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+     * @param persons the list to replace the old list.
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
@@ -125,6 +138,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
+     * @return the unmodifiable persons list.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
@@ -147,9 +161,6 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.hashCode();
     }
 
-    /**
-     * Returns true if {@code persons} contains only unique persons.
-     */
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {

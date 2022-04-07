@@ -26,7 +26,9 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Checks if a given string is a valid name.
+     * @param test the name to be checked.
+     * @return true if the name is valid, false otherwise.
      */
     public static boolean isValidName(String test) {
         return !test.trim().isEmpty();

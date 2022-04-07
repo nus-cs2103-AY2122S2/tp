@@ -47,6 +47,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * @param toBeCopied the provided addressBook.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -185,14 +186,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+     * @param persons the list of persons to replace the old list.
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
 
-
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * @param newData the new addressBook to replace the old one.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
@@ -215,25 +217,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a Task to the task list.
      * The task must not already exist in the task list.
+     * @param task the task to be added.
      */
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     /**
      * Replaces the contents of the task list with {@code task}.
      * {@code task} must not contain duplicate tasks.
+     * @param task the list of tasks to replace the old one.
      */
     public void setTasks(List<Task> task) {
         this.tasks.setTasks(task);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code task} from this {@code AddressBook}.
+     * {@code task} must exist in the address book.
+     * @param task the task to be removed.
      */
-    public void removeTask(Task key) {
-        tasks.remove(key);
+    public void removeTask(Task task) {
+        tasks.remove(task);
     }
 
     /**
@@ -265,7 +270,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a Event to the task list.
+     * Adds an Event to the task list.
      * @param event a valid Event task.
      */
     public void addEvent(Event event) {
@@ -304,6 +309,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Marks the task in the task list.
      * @param task the task to be marked.
+     * @return the marked task.
      */
     public Task markTask(Task task) {
         requireNonNull(task);
@@ -311,8 +317,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Unmarks the task in the task list.
+     * unMarks the task in the task list.
      * @param task the task to be unmarked.
+     * @return the unmarked task.
      */
     public Task unmarkTask(Task task) {
         requireNonNull(task);
@@ -321,6 +328,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Tags a priority to the task.
+     * @param task the task to be tagged.
+     * @param priority the priority to be tagged to the task.
+     * @return the tagged task.
      */
     public Task tagPriorityToTask(Task task, Priority priority) {
         requireAllNonNull(task, priority);
@@ -334,6 +344,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Tags the task in the task list to a person in the address book.
      * @param task the task to be tagged.
      * @param person the person to be tagged to the task.
+     * @return the tagged task.
      */
     public Task tagEmployeeToTask(Task task, Person person) {
         requireAllNonNull(task, person);
@@ -342,8 +353,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Remove the Person from the Task, also decreasing the person's task count.
-     * @param task the task affected
+     * @param task the task affected.
      * @param person the person to be untagged from task
+     * @return the untagged task.
      */
     public Task untagEmployeeFromTask(Task task, Person person) {
         requireAllNonNull(task, person);
@@ -352,8 +364,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Checks if a given Person is tagged to the task.
-     * Checks if a given Person is tagged to the task.
      * @param task the task to be checked.
+     * @param person the person to be checked against.
      * @return true if the person is tagged to the task, false otherwise.
      */
     public boolean isEmployeeTaggedToTask(Task task, Person person) {
@@ -364,7 +376,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Checks if a given task has a priority tagged to it.
      * @param task the task to be checked.
-     * @return true if the task is tagged with a prioirity, false otherwise.
+     * @return true if the task is tagged with a priority, false otherwise.
      */
     public boolean hasPriority(Task task) {
         requireNonNull(task);
@@ -377,6 +389,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return returnValue;
     }
 
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the task list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
+     * @param target the task to be replaced.
+     * @param editedTask the new task to replace the target.
+     */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
         tasks.setTask(target, editedTask);
@@ -385,7 +404,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Checks if a person with the same identity as {@code person} exists in the address book.
+     * @param person the person to be checked.
+     * @return true if a person has the same identity as the person specified, false otherwise.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -395,15 +416,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
+     * @param person the person to be added.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addPerson(Person person) {
+        persons.add(person);
     }
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * @param target the person to be replaced.
+     * @param editedPerson the new person to replace the target.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -411,7 +435,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Increases the number of tasks by one.
+     * Increments the number of task associated with the person.
+     * @param person the person whose number of task is to be incremented.
      */
     public void increaseNumOfTasks(Person person) {
         requireNonNull(person);
@@ -419,7 +444,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Decreases the number of tasks by one.
+     * Decrements the number of task associated with the person.
+     * @param person the person whose number of task is to be decremented.
      */
     public void decreaseNumOfTasks(Person person) {
         requireNonNull(person);
@@ -429,6 +455,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
+     * @param key the person to be removed.
      */
     public void removePerson(Person key) {
         persons.remove(key);

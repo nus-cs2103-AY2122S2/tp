@@ -16,10 +16,10 @@ public class Event extends Task {
      * Constructor to initialize an instance of Event class with task
      * description, date, start time and end time.
      *
-     * @param taskDescription Description of the task
-     * @param date Date at which the Event task is taking place
-     * @param startTime Start time of the Event task
-     * @param endTime End time of the Event task
+     * @param taskDescription Description of the task.
+     * @param date Date at which the Event task is taking place.
+     * @param startTime Start time of the Event task.
+     * @param endTime End time of the Event task.
      */
     public Event(Description taskDescription, Date date, Time startTime, Time endTime) {
         this.type = "event";
@@ -95,7 +95,7 @@ public class Event extends Task {
      * Returns the string representation of an Event task.
      *
      * @return The string representation of the event, consisting of its
-     * description, formatted date and formatted start and end time
+     * description, formatted date and formatted start and end time.
      */
     @Override
     public String toString() {

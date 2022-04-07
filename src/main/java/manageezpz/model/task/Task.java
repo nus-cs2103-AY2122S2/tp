@@ -79,8 +79,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns true if both Task have the same Description.
-     * This defines a weaker notion of equality between two Task.
+     * Checks if both Task have the same Description.
+     * @param otherTask the task to be checked against.
+     * @return true if both task are the same, false otherwise.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -121,12 +122,6 @@ public abstract class Task {
                 .anyMatch(person -> person.getName().fullName.equals(assignee));
     }
 
-    /**
-     * Returns the string representation of the task.
-     *
-     * @return The string representation of the task, consisting of whether
-     * it is done or not
-     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] ";

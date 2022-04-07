@@ -23,6 +23,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
+     * @param userPrefs the provided user preferences.
      */
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
@@ -31,6 +32,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
+     * @param newUserPrefs the new user preferences.
      */
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);

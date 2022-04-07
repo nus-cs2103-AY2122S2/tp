@@ -31,23 +31,24 @@ public class Date {
         return date;
     }
 
-    public static boolean isValidDate(String date) {
-        return date.matches(VALIDATION_REGEX) && validCheckDate(date);
-    }
-
     public LocalDate getParsedDate() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(date, dtf);
         return parsedDate;
     }
 
-    /**
-     * Gets today's date.
-     * @return Today's date
-     */
     public static Date getTodayDate() {
         LocalDate todayDate = LocalDate.now();
         return new Date(todayDate.toString());
+    }
+
+    /**
+     * Checks if a given string is a valid date.
+     * @param date the date to be checked.
+     * @return true if the date is valid, false otherwise.
+     */
+    public static boolean isValidDate(String date) {
+        return date.matches(VALIDATION_REGEX) && validCheckDate(date);
     }
 
     /**
@@ -66,6 +67,11 @@ public class Date {
         }
     }
 
+    /**
+     * Formats the given date.
+     * @param dtf the DateTimeFormatter to be used to format the date.
+     * @return the formatted date.
+     */
     public String format(DateTimeFormatter dtf) {
         return getParsedDate().format(dtf);
     }

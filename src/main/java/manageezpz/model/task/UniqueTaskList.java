@@ -13,12 +13,26 @@ import manageezpz.model.task.exceptions.DuplicateTaskException;
 import manageezpz.model.task.exceptions.InvalidTaskTypeException;
 import manageezpz.model.task.exceptions.TaskNotFoundException;
 
+/**
+ * A list of Task that enforces uniqueness between its elements and does not allow nulls.
+ * A task is considered unique by comparing using {@code Task#isSameTask(Task)}. As such, adding and updating of
+ * Task uses Task#isSameTask(Task) for equality to ensure that the task being added or updated is
+ * unique in terms of identity in the UniqueTaskList. However, the removal of a Task uses Task#equals(Object)
+ * to ensure that the Task with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Task#isSameTask(Task)
+ */
 public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
     /**
-     * Returns true if the list contains an equivalent Task as the given argument.
+     * Checks if the list contains an equivalent Task as the given argument.
+     * @param toCheck the task to be checked.
+     * @return true if the list contains the specified task, false otherwise.
      */
     public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
@@ -28,6 +42,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Adds a task to the list.
      * The task must not already exist in the list.
+     * @param toAdd the task to be added.
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
@@ -41,6 +56,8 @@ public class UniqueTaskList implements Iterable<Task> {
      * Replaces the task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
      * The task identity of {@code editedTask} must not be the same as another existing task in the list.
+     * @param target the task to be replaced.
+     * @param editedTask the new task to replace target.
      */
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -75,6 +92,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Marks a task in the list as done.
      * The task must already exist in the list.
+     * @param toMark the task to be marked.
+     * @return the marked task.
      */
     public Task markTask(Task toMark) {
         requireNonNull(toMark);
@@ -87,9 +106,12 @@ public class UniqueTaskList implements Iterable<Task> {
         return markedTask;
     }
 
+
     /**
-     * Unmarks a task in the list as not done yet.
+     * unMarks a task in the list as not done yet.
      * The task must already exist in the list.
+     * @param toUnmark the task to be unmarked.
+     * @return the unamrked task.
      */
     public Task unmarkTask(Task toUnmark) {
         requireNonNull(toUnmark);
@@ -104,6 +126,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Tags a priority to the task.
+     * @param toTagPriority the task to be tagged.
+     * @param priority the priority specified to be tagged to the task.
+     * @return the tagged task.
      */
     public Task tagPriorityToTask(Task toTagPriority, Priority priority) {
         requireNonNull(toTagPriority);
@@ -119,6 +144,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Tags an employee to the task.
+     * @param toTagEmployee the task to be tagged.
+     * @param person the employee to be tagged to the task.
+     * @return the tagged task.
      */
     public Task tagEmployeeToTask(Task toTagEmployee, Person person) {
         requireNonNull(toTagEmployee);
@@ -133,7 +161,10 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Untags an employee to the task.
+     * * Untags an employee to the task.
+     * @param toUntagEmployee the task to be untagged.
+     * @param person the person to be untagged from the task.
+     * @return the untagged task.
      */
     public Task untagEmployeeFromTask(Task toUntagEmployee, Person person) {
         requireNonNull(toUntagEmployee);
@@ -164,6 +195,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Removes the equivalent task from the list.
      * The task must exist in the list.
+     * @param toRemove the task to be removed.
      */
     public void remove(Task toRemove) {
         requireNonNull(toRemove);
@@ -180,6 +212,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Replaces the contents of this list with {@code tasks}.
      * {@code tasks} must not contain duplicate tasks.
+     * @param tasks the content of the new list.
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
@@ -192,6 +225,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
+     * @return the unmodifiable task list.
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
