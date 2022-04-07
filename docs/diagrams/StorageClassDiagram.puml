@@ -39,8 +39,10 @@ StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
 StorageManager -down-> "1" ScheduleStorage
 
-Storage -left-|> UserPrefsStorage
+Storage -left-|> ScheduleStorage
 Storage -right-|> AddressBookStorage
+Storage -right-|> UserPrefsStorage
+
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
