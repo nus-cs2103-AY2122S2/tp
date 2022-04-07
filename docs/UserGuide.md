@@ -281,7 +281,7 @@ View more details about the Candidate in the middle panel.
 Format: `focus INDEX`
 
 * Additional details of the Candidate will be displayed on the center panel in the application.
-* To switch to another Candidate's information, user will just need to type the new command and the new index of the candidate.
+* To switch to another Candidate's information, user can enter a new `focus` command and the new `index` of the candidate.
 * If a `Candidate` is in focus and the user decides to `delete` the candidate, the middle panel will be cleared. 
 
 
