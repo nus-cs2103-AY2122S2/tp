@@ -15,6 +15,9 @@ import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code StorageManager}.
+ */
 public class StorageManagerTest {
 
     @TempDir

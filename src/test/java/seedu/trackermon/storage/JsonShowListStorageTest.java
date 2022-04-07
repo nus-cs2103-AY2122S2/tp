@@ -18,6 +18,9 @@ import seedu.trackermon.commons.exceptions.DataConversionException;
 import seedu.trackermon.model.ReadOnlyShowList;
 import seedu.trackermon.model.ShowList;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code JsonShowListStorage}.
+ */
 public class JsonShowListStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonShowListStorageTest");
 

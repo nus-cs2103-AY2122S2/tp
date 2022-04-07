@@ -16,6 +16,9 @@ import seedu.trackermon.commons.core.GuiSettings;
 import seedu.trackermon.commons.exceptions.DataConversionException;
 import seedu.trackermon.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code JsonUserPrefsStorage}.
+ */
 public class JsonUserPrefsStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");

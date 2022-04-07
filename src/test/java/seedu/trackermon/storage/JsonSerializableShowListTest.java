@@ -13,6 +13,9 @@ import seedu.trackermon.commons.util.JsonUtil;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.testutil.TypicalShows;
 
+/**
+ * Contains integration tests (interaction with the Storage) for {@code JsonSerializableShowList}.
+ */
 public class JsonSerializableShowListTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableShowListTest");
