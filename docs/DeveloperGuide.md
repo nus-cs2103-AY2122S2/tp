@@ -132,13 +132,14 @@ The `Model` component,
 
 </div>
 
-#### Lab Component
+#### Lab Component (Subcomponent of Model)
 
 The `Lab` Component is a subcomponent of the `Model` component.
 
 * stores all Lab related data.
 * stores all `Lab` objects related to a `Student` object in `LabList`. (each `Student` object has its own copy of a `LabList`).
 * the `MasterLabList` stores all the labs added into the system thus far to act as a control list (there should only be 1 `MasterLabList` in the system at any one time).
+* `LabList` is exposed to outsiders as an `ObservableList<Lab>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 
 
 ### Storage component
