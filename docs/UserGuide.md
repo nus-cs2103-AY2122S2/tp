@@ -277,7 +277,7 @@ Examples:
 
 ### Filter for past teammates: `filterteam`
 
-Shows a list of past teammates in HackNet.
+Shows a list of past teammates that have been tagged with `/t` in HackNet.
 
 Format: `filterteam`
 
@@ -376,6 +376,15 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HackNet home folder.
+
+**Q**: Why does HackNet not show the proficiency of individual's skills?<br>
+**A**: This is because how everyone perceives their own skill proficiency is only a rough gauge and the numbers may not accurately reflect in real life. Therefore, to reduce bias, HackNet distinguishes between different level of skill proficiencies with different hues of green, with brighter green as more proficient in that particular skill.
+
+**Q**: I am colour blind and cannot differentiate between skill proficiency colours. What should I do?<br>
+**A**: You can use the feature `sort` to list out contacts with that particular skill in descending order. (eg. `sort Java`) 
+
+**Q**: What is the difference between `list`, `show` and `filterteam`?<br>
+**A**: `list` displays _all_ of your contacts while `show` will only display contacts that you have marked with `team`. Lastly, `filterteam` will display those contacts that you have marked with `/t` (the blue tags)
 
 --------------------------------------------------------------------------------------------------------------------
 
