@@ -80,6 +80,12 @@ Commands in CinnamonBun can be broken down into several components.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Any invalid parameters for commands will be regarded as part of the value of the preceding parameter. For example:
+  * In `addTransaction 1 a/123 td/2020-11-11 n/this is a note --not paid`, `--not paid` will be regarded 
+  as part of the note `n/this is a note --not paid` since `--not paid` is not a valid attribute. 
+  * In `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendor c/not a prefix t/owesMoney`, 
+  `c/not a prefix` will be regarded as part of the preceding tag `t/vendor c/not a prefix` since `c/not a prefix` is 
+  not a valid attribute/prefix.
 
 </div>
 
