@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
 **Enhancements to existing features**:
 * Designed mock-up of user interface.
-  * Details : Created the nock-up of the user interface on figma for [@JonathanHoshi](https://github.com/JonathanHoshi)
+  * Details : Created the nock-up of the user interface on figma for [JonathanHoshi](https://github.com/JonathanHoshi)
   * Issues: [[\#18]](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/18)
   * PRs: [[\#44]](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/44)
 * Refactor and morph AB3 code into a working product for Trackermon:
