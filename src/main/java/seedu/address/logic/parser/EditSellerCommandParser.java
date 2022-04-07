@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -35,7 +36,7 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_TAG,
-                        PREFIX_APPOINTMENT, PREFIX_HOUSE_TYPE, PREFIX_LOCATION, PREFIX_PRICE_RANGE);
+                        PREFIX_APPOINTMENT, PREFIX_HOUSE_TYPE, PREFIX_LOCATION, PREFIX_ADDRESS, PREFIX_PRICE_RANGE);
 
         Index index;
 
@@ -61,6 +62,9 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editSellerDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editSellerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE_RANGE).isPresent()) {
             editSellerDescriptor.setPriceRange(ParserUtil.parsePriceRange(

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
@@ -140,5 +141,24 @@ public class UniqueSellerList implements Iterable<Seller> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the sellers in according to the field {@code comparedItem} and in the {@order} order.
+     */
+    public void sortSellers(String comparedItem, String order) {
+        if (comparedItem.equals("name")) {
+            if (order.equals("asc")) {
+                internalList.sort(ComparatorUtil.NAME_COMPARATOR_ASC);
+            } else {
+                internalList.sort(ComparatorUtil.NAME_COMPARATOR_DESC);
+            }
+        } else {
+            if (order.equals("asc")) {
+                internalList.sort(ComparatorUtil.TIME_COMPARATOR_ASC);
+            } else {
+                internalList.sort(ComparatorUtil.TIME_COMAPRATOR_DESC);
+            }
+        }
     }
 }

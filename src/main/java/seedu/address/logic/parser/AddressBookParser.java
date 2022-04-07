@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.AppointmentBuyerCommand;
 import seedu.address.logic.commands.AppointmentSellerCommand;
 import seedu.address.logic.commands.ClearBuyerCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearSellerCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
@@ -26,7 +27,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBuyerCommand;
 import seedu.address.logic.commands.ListSellerCommand;
 import seedu.address.logic.commands.MatchCommand;
-import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.MatchHouseTypeCommand;
+import seedu.address.logic.commands.MatchLocationCommand;
+import seedu.address.logic.commands.MatchPriceRangeCommand;
+import seedu.address.logic.commands.SortBuyerCommand;
+import seedu.address.logic.commands.SortSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -73,8 +78,9 @@ public class AddressBookParser {
 
         case DeleteSellerCommand.COMMAND_WORD:
             return new DeleteSellerCommandParser().parse(arguments);
-        //case ClearCommand.COMMAND_WORD:
-        //    return new ClearCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         case ClearBuyerCommand.COMMAND_WORD:
             return new ClearBuyerCommand();
@@ -106,8 +112,11 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case SortCommand.COMMAND_WORD:
-            return new SortCommand();
+        case SortBuyerCommand.COMMAND_WORD:
+            return new SortBuyerCommandParser().parse(arguments);
+
+        case SortSellerCommand.COMMAND_WORD:
+            return new SortSellerCommandParser().parse(arguments);
 
         case AppointmentBuyerCommand.COMMAND_WORD:
             return new AppointmentBuyerCommandParser().parse(arguments);
@@ -123,6 +132,15 @@ public class AddressBookParser {
 
         case MatchCommand.COMMAND_WORD:
             return new MatchCommandParser().parse(arguments);
+
+        case MatchHouseTypeCommand.COMMAND_WORD:
+            return new MatchHouseTypeCommandParser().parse(arguments);
+
+        case MatchLocationCommand.COMMAND_WORD:
+            return new MatchLocationCommandParser().parse(arguments);
+
+        case MatchPriceRangeCommand.COMMAND_WORD:
+            return new MatchPriceRangeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

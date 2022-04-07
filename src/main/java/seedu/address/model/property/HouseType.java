@@ -6,7 +6,7 @@ import java.util.HashMap;
  * All types of houses are listed here
  */
 public enum HouseType {
-    UNSPECIFIED("any", "unspecified") {
+    UNSPECIFIED( "unspecified", "any") {
         @Override
         public String toString() {
             return "Unspecified";
@@ -57,18 +57,18 @@ public enum HouseType {
     NULLHOUSETYPE("nullhouse") {
         @Override
         public String toString() {
-            return "nullhouse";
+            return "-";
         }
     };
 
     public static final String MESSAGE_CONSTRAINTS = "Only the following house types are available: "
-            + HouseType.UNSPECIFIED + " "
-            + HouseType.APARTMENT + " "
-            + HouseType.BUNGALOW + " "
-            + HouseType.COLONIA + " "
-            + HouseType.CONDOMINIUM + " "
-            + HouseType.HDB_FLAT + " "
-            + HouseType.MANSION + " "
+            + HouseType.UNSPECIFIED + "\n"
+            + HouseType.APARTMENT + "\n"
+            + HouseType.BUNGALOW + "\n"
+            + HouseType.COLONIA + "\n"
+            + HouseType.CONDOMINIUM + "\n"
+            + HouseType.HDB_FLAT + "\n"
+            + HouseType.MANSION + "\n"
             + HouseType.SEMIDETACHED;
 
     /**

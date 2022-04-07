@@ -7,8 +7,8 @@ package seedu.address.model.property;
 public class NullPropertyToSell extends PropertyToSell {
 
     private static final NullPropertyToSell nullPropertyToSell =
-            new NullPropertyToSell(new House(HouseType.NULLHOUSETYPE, new Location("nan")),
-                    new PriceRange(0, 0), new Address("nan"));
+            new NullPropertyToSell(new House(HouseType.NULLHOUSETYPE, new Location("-")),
+                    new PriceRange(0, 0), new Address("-"));
 
     public NullPropertyToSell(House house, PriceRange priceRange, Address address) {
         super(house, priceRange, address);

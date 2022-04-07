@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
@@ -41,13 +44,22 @@ public class EditBuyerCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_HOUSE_TYPE + "HOUSETYPE] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_PRICE_RANGE + "PRICERANGE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 ";
+            + PREFIX_PHONE + "91234567 \n"
+            + "Note: You can only edit the property fields ("
+            + PREFIX_HOUSE_TYPE + PREFIX_LOCATION + PREFIX_PRICE_RANGE + ") "
+            + "after a property has been added!";
 
     public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited buyer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book.";
+    public static final String MESSAGE_NO_PROPERTY_YET = "You cannot edit a property until you have added one!\n"
+        + "Use \"add-ptb\" command to add a property first.";
+
 
     private final Index index;
     private final EditBuyerDescriptor editBuyerDescriptor;
@@ -70,7 +82,7 @@ public class EditBuyerCommand extends Command {
         List<Buyer> lastShownList = model.getFilteredBuyerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
         }
 
         Buyer buyerToEdit = lastShownList.get(index.getZeroBased());
@@ -89,42 +101,38 @@ public class EditBuyerCommand extends Command {
      * Creates and returns a {@code client} with the details of {@code buyerToEdit}
      * edited with {@code editBuyerDescriptor}.
      */
-    private static Buyer createEditedBuyer(Buyer buyerToEdit, EditBuyerDescriptor editBuyerDescriptor) {
+    private static Buyer createEditedBuyer(Buyer buyerToEdit, EditBuyerDescriptor editBuyerDescriptor)
+            throws CommandException {
+
         assert buyerToEdit != null;
+
+        //Todo: add property
+        //PropertyToBuy updatedPropertyToBuy = editBuyerDescriptor.getPropertyToBuy()
+        //        .orElse(NullPropertyToBuy.getNullPropertyToBuy());
+        if (editBuyerDescriptor.isAnyPropertyFieldEdited()
+            && buyerToEdit.getPropertyToBuy() instanceof NullPropertyToBuy) {
+            throw new CommandException(MESSAGE_NO_PROPERTY_YET);
+        }
+
+        //The Buyer already has a property just update it with new values
+        HouseType updatedHouseType = editBuyerDescriptor.getHouseType().orElse(
+            buyerToEdit.getPropertyToBuy().getHouse().getHouseType());
+        Location updatedLocation = editBuyerDescriptor.getLocation().orElse(
+            buyerToEdit.getPropertyToBuy().getHouse().getLocation());
+        PriceRange updatedPriceRange = editBuyerDescriptor.getPriceRange().orElse(
+            buyerToEdit.getPropertyToBuy().getPriceRange());
+        PropertyToBuy updatedPropertyToBuy = buyerToEdit.getPropertyToBuy().updatePropertyToBuy(
+            updatedHouseType,
+            updatedLocation,
+            updatedPriceRange
+        );
 
         Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
         Appointment updatedAppointment = editBuyerDescriptor.getAppointment().orElse(buyerToEdit.getAppointment());
-        //Todo: add property
-        //PropertyToBuy updatedPropertyToBuy = editBuyerDescriptor.getPropertyToBuy()
-        //        .orElse(NullPropertyToBuy.getNullPropertyToBuy());
-        if (buyerToEdit.getPropertyToBuy() instanceof NullPropertyToBuy) {
-            //The buyer do not have property yet,
-            /*
-            Todo:
-             Option 1: throw error to user ;
-             Option 2: addProperty for user(more dangerous and harder: what if user miss out some fields?
-             */
-            //Current way: dont do update to property first
-            return new Buyer(updatedName, updatedPhone, updatedAppointment, updatedTags,
-                    NullPropertyToBuy.getNullPropertyToBuy());
-        } else {
-            //The Buyer already has a property just update it with new values
-            HouseType updatedHouseType = editBuyerDescriptor.getHouseType().orElse(
-                    buyerToEdit.getPropertyToBuy().getHouse().getHouseType());
-            Location updatedLocation = editBuyerDescriptor.getLocation().orElse(
-                    buyerToEdit.getPropertyToBuy().getHouse().getLocation());
-            PriceRange updatedPriceRange = editBuyerDescriptor.getPriceRange().orElse(
-                    buyerToEdit.getPropertyToBuy().getPriceRange());
-            PropertyToBuy updatedPropertyToBuy = buyerToEdit.getPropertyToBuy().updatePropertyToBuy(
-                    updatedHouseType,
-                    updatedLocation,
-                    updatedPriceRange
-            );
-            return new Buyer(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToBuy);
-        }
 
+        return new Buyer(updatedName, updatedPhone, updatedAppointment, updatedTags, updatedPropertyToBuy);
 
     }
 
@@ -181,6 +189,13 @@ public class EditBuyerCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, tags, houseType, location, priceRange);
+        }
+
+        /**
+         * Returns true if at least one Property field is edited.
+         */
+        public boolean isAnyPropertyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(houseType, location, priceRange);
         }
 
         public void setName(Name name) {

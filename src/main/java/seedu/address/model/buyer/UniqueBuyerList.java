@@ -3,12 +3,12 @@ package seedu.address.model.buyer;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
@@ -100,8 +100,23 @@ public class UniqueBuyerList implements Iterable<Buyer> {
         internalList.setAll(buyers);
     }
 
-    public void sortPersons() {
-        internalList.sort(Comparator.comparing(p -> p.getName().fullName));
+    /**
+     * Sorts the buyer according to {@code comparator} and in {@code order} order.
+     */
+    public void sortBuyers(String comparator, String order) {
+        if (comparator.equals("name")) {
+            if (order.equals("asc")) {
+                internalList.sort(ComparatorUtil.NAME_COMPARATOR_ASC);
+            } else {
+                internalList.sort(ComparatorUtil.NAME_COMPARATOR_DESC);
+            }
+        } else {
+            if (order.equals("asc")) {
+                internalList.sort(ComparatorUtil.TIME_COMPARATOR_ASC);
+            } else {
+                internalList.sort(ComparatorUtil.TIME_COMAPRATOR_DESC);
+            }
+        }
     }
 
     /**

@@ -153,17 +153,19 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortFilteredBuyerList(String comparedItem, String order) {
+            throw new AssertionError("This method should not be called");
+        }
+
+
+
+        @Override
         public ObservableList<Client> getFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredClientList(Predicate<Client> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -215,6 +217,11 @@ public class AddCommandTest {
         @Override
         public void updateFilteredSellerList(Predicate<Seller> predicate) {
 
+        }
+
+        @Override
+        public void sortFilteredSellerList(String comparator, String order) {
+            throw new AssertionError("This method should not be called");
         }
 
         // buyer //

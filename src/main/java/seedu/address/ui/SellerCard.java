@@ -15,7 +15,7 @@ import seedu.address.model.seller.Seller;
  */
 public class SellerCard extends UiPart<Region> {
 
-    private static final String FXML = "sellerListCard.fxml";
+    private static final String FXML = "SellerListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -69,11 +69,10 @@ public class SellerCard extends UiPart<Region> {
         String houseUpperPrice = seller.getPropertyToSell().getPriceRange().getUpperToString();
         String houseAddress = seller.getPropertyToSell().getAddress().toString();
         if (seller.getPropertyToSell() instanceof NullPropertyToSell) {
-            propertyType.setText("No Property added");
-            propertyLocation.setText("No Location added");
-            propertyAddress.setText("No Address added");
+            propertyType.setText("no property added yet");
+            propertyLocation.setText("-");
+            propertyAddress.setText("-");
             propertyLowerPrice.setText("");
-            propertyUpperPrice.setText("");
         } else {
             propertyType.setText(houseType);
             propertyLocation.setText(houseLocation);

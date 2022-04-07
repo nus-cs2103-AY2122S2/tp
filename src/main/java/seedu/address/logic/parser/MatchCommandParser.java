@@ -14,7 +14,7 @@ public class MatchCommandParser implements Parser<MatchCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param userInput
+     * @param userInput full user input string
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
