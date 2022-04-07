@@ -169,69 +169,81 @@ Format: `help`
 
 Adds a module/group/student/professor/event/meeting to the UniBook depending on the value defined in `o/OPTION`.
 
-Format: `add o/OPTION...`  
-OPTION values:  
-1. **module**  
+### On Any View:  
+
+#### :bulb: Add a module  
+
 Format: `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​`  
-This adds a Module to the UniBook. User can also add key events of the module.  
-The event types are as follows:  
+* This adds a Module to the UniBook. User can also add key events of the module.  
+* The event types are as follows:  
 `1` - Exam  
 `2` - Quiz  
 `3` - Assignment Release  
 `4` - Assignment Due  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-Example: `add o/module n/Discrete Mathematics m/CS1231S ke/1 dt/2022-05-04 13:00`  
-Adds a module "Discrete Mathematics" with module code CS1231S to the UniBook. The module will have a key event of type "Exam" on the datetime specified.
+* The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+* The format of `ke/KEYEVENTTYPE dt/DATETIME` has to be **strictly followed**.
+* Duplicate Module Codes are **not allowed**, however duplicate Module Names are allowed as modules may have same names.
+* Example: `add o/module n/Computer Organisation m/CS2100 ke/1 dt/2022-05-04 13:00`  
+* Adds a module "Computer Organisation" with module code CS2100 to the UniBook. The module will have a key event of type "Exam" on the datetime specified.
 
 
-2. **group**  
+#### :bulb: Add a group
+
 Format: `add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​`
-This adds a Group to the Module specified.  
-The `dt/DATETIME` represents meeting times of the group, it takes in the format `yyyy-MM-dd HH:mm`.  
-Example: `add o/group n/W16-1 m/CS2103 dt/2022-05-01 13:00 dt/2022-05-04 13:00`  
-Adds a group named "W16-1" to module "CS2103". This group will have the specified meeting times.
+* This adds a Group to the Module specified.  
+* `dt/DATETIME` represents meeting times of the group, and it takes in the format `yyyy-MM-dd HH:mm`.
+* The module specified **must** exist in the UniBook, otherwise add the module first.
+* Example: `add o/group n/Project Work m/CS2100 dt/2022-05-01 13:00 dt/2022-05-04 15:00`  
+* Adds a group named "Project Work" to module "CS2100". This group will have the specified meeting times.
 
 
+#### :bulb: Add a student
 
-3. **student**  
-Format: `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]…​]…​`  
-This adds a Student to the UniBook, it also adds the student into the student list of the corresponding Module objects.  
-Note that in order to add a student to a group of the specified module, the format of `m/MODULECODE [g/GROUPNAME]…​` must be strictly followed. This will allow the program to know which group of which module the user wishes to add the student to.  
-Example: `add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS1231S g/Project Work m/CS2103`  
-Adds a student named Johnston to the UniBook. The student will be added to the group "Project Work" in Module "CS1231S".
-
-
-4. **professor**  
-Format: `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  
-This adds a Professor to the UniBook, it also adds the professor into the professor list of the corresponding Module objects.  
-Example: `add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com of/COM2 01-15 t/smart m/CS1231S m/CS2100`  
-Adds a professor named Aaron Tan to the UniBook.
+Format: `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]…​]…​`
+* This adds a Student to the UniBook.  
+* Duplicate names are allowed, but duplicate phone numbers and emails are not.
+* The student can have any number of tags and modules including 0.
+* The student can also belong to any number of groups within the module including 0.
+* Note that in order to add a student to a group of the specified module, the format of `m/MODULECODE [g/GROUPNAME]…​` must be **strictly followed**.  
+* The module and group specified **must** exist in the UniBook, otherwise add the module and group first!
+* Example: `add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS2100 g/Project Work m/CS2103`  
+* Adds a student named Johnston to the UniBook. The student will be added to the group "Project Work" in Module "CS1231S".
 
 
-5. **event**  
-Format: `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  
-This adds a key event of the respective type and datetime to the module specified.  
-The event types are as follows:  
+#### :bulb: Add a professor
+
+Format: `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`
+* This adds a Professor to the UniBook.
+* Duplicate names are **allowed**, but duplicate phone numbers and emails are **not allowed**.
+* Professors can have **any number** of tags and modules including 0.
+* The module specified **must** exist in the UniBook, otherwise add the module first.
+* Example: `add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com of/COM2 01-15 t/smart m/CS2100`  
+* Adds a professor named Aaron Tan to the UniBook.
+
+
+#### :bulb: Add an event
+
+Format: `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`
+* This adds a key event of the respective type and datetime to the module specified.  
+* The event types are as follows:
 `1` - Exam  
 `2` - Quiz  
 `3` - Assignment Release  
 `4` - Assignment Due  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-Example: `add o/event m/CS2103 ke/1 dt/2022-05-04 13:00`  
-Adds an event of the specified type and datetime to module "CS2103".
+* The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+* Different event types with same datetimes are **allowed**, but same event types with the same datetimes are **not allowed** within the same module.
+* Example: `add o/event m/CS2100 ke/2 dt/2022-05-04 13:00`  
+* Adds an event of the specified type and datetime to module "CS2100".
 
 
-6. **meeting**  
+#### :bulb: Add a meeting
+
 Format: `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  
-This adds meetings of the specified datetime to the specified group belonging to the specified module. Multiple `dt/DATETIME` can be entered to add multiple meetings.  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-Example: `add o/meeting m/CS2103 g/W16-1 dt/2022-04-24 13:00 dt/2022-04-30 15:00 dt/2022-05-04 11:00`  
-Add meetings of the specified datetimes to module "CS2103".
-
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student/professor can have any number of tags and modules (including 0)
-</div>
+* This adds meetings to the specified group belonging to the specified module. Multiple `dt/DATETIME` can be entered to add multiple meetings.  
+* The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+* Duplicate meeting times are **not allowed** within the same group.
+* Example: `add o/meeting m/CS2103 g/W16-1 dt/2022-04-24 13:00 dt/2022-04-30 15:00 dt/2022-05-04 11:00`  
+* Add meetings of the specified datetimes to module "CS2103".
 
 
 ## Listing entries: `list`
@@ -582,7 +594,7 @@ If your changes to the data file makes its format invalid, UniBook will discard 
 
 Action | Format
 --------|------------------
-**Add** | `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​` <br> e.g., `add o/module n/Software Engineering m/CS2103 ke/1 dt/2022-05-04 13:00` <br>`add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​` <br> e.g., `add o/group n/W16-1 m/CS2103 dt/2022-04-24 13:00` <br>`add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [[m/MODULECODE] [g/GROUPNAME]]…​`  <br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 g/W16-1` <br>`add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  <br>e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com of/123 Clementi Rd S123466 m/cs2103` <br>`add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  <br>e.g., `add o/event m/CS2103 ke/4 dt/2022-04-28 13:00` <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  <br>e.g., `add o/meeting m/CS2103 g/W16-1 dt/2022-04-29 13:00`
+**Add** | **Any View** <br> `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​`[(example)](#bulb-add-a-module) <br> `add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​`[(example)](#bulb-add-a-group) <br> `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]]…​`[(example)](#bulb-add-a-student) <br> `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`[(example)](#bulb-add-a-professor) <br> `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`[(example)](#bulb-add-an-event) <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`[(example)](#bulb-add-a-meeting)
 **Clear** | `clear`
 **Edit** |  Editing person: `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG] `<br> e.g. `edit 1 o/person p/91234567 e/prof@email.com of/COM1 nm/CS2103 ` <br><br> Editing Module: `edit INDEX o/module [n/NAME] [m/MODCODE]` e.g. `edit 1 o/module m/CS2103 n/Software Engineering` <br><br> Editing Groups: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]` e.g. `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` <br><br> Editing Key Events: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]` e.g. `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45`
 **Delete** | **Any View** <br> `delete o/module m/[MODULECODE]`[(example)](#bulb-delete-module-by-module-code)<br> `delete o/group m/[MODULECODE] g/[GROUPNAME]`[(example)](#bulb-delete-group-by-module-code-and-group-name)<br><br> **People View:** <br> `delete [INDEX]`[(example)](#bulb-delete-a-person-by-index) <br>`delete [INDEX] p/ e/ t/[TAG] of/`[(example)](#bulb-delete-information-from-person) <br><br> **Modules View:**<br>`delete [INDEX]`[(example)](#bulb-delete-a-module-by-index) <br> `delete [INDEX] prof/[INDEX]`[(example)](#bulb-remove-a-professor-from-a-module-by-index) <br>`delete [INDEX] stu/[INDEX]`[(example)](#bulb-remove-a-student-from-a-module-by-index)<br> `delete [INDEX] g/[GROUPNAME]`[(example)](#bulb-delete-a-group-from-a-module-by-index) <br> `delete [INDEX] ke/[INDEX]`[(example)](#bulb-delete-a-key-event-from-a-module-by-index) <br><br> **Groups View**: <br>`delete [INDEX]`[(example)](#bulb-delete-group-by-index) <br>`delete [INDEX] stu/[INDEX]`[(example)](#bulb-remove-student-from-group-by-index) <br> `delete [INDEX] mt/[INDEX]`[(example)](#bulb-delete-meeting-time-from-group-by-index) <br> 
