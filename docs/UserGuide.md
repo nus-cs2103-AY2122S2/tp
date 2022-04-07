@@ -71,8 +71,7 @@ Here are some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
 
-* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 characters. The characters can either be alphanumeric or underscore. However, the first and last character of the handle should not be an underscore.
-
+* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 alphanumeric characters. The telegram handle cannot have any symbols (such as underscore) as well as whitespaces.
 </div>
 
 ### Adding a student: `add`
@@ -85,7 +84,7 @@ Adds a student to TAPA.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 <div markdown="block" class="alert alert-info">
-:warning: **Warning!:**
+:warning: <b>Warning!:</b>
 
 * The student's student ID (matriculation number) has to be unique.
 * An error message will be displayed to the user if the specified student ID already exists in TAPA.
@@ -93,7 +92,7 @@ Adds a student to TAPA.
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-**Note**: The name of the added student will be converted to Title Case.
+<b>Note:</b> The name of the added student will be converted to Title Case.
 </div>
 
 **Example**:
@@ -108,8 +107,12 @@ Deletes a student from TAPA.
 
 **Format**: `delete STUDENT_INDEX...` (or) `delete i/STUDENT_ID`
 
-* The student corresponding to the index or matriculation number (specified after the `delete` command) will be removed from TAPA.
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA, or there is no student with the specified matriculation number.
+* The student corresponding to the index or student ID (matriculation number) specified after the `delete` command, will be removed from TAPA.
+* An error message will be displayed to the user if:
+  * the specified index is 0
+  * the specified index is a negative number
+  * the specified index is larger than the number of students in TAPA
+  * there is no student with the specified matriculation number
 * Multiple indices can be inputted in order to delete multiple students.
 
 **Example**:
@@ -177,8 +180,11 @@ Marks a specific undone task as done for a particular student.
 **Format**: `mark i/STUDENT_ID idx/UNDONE_TASK_INDEX`
 
 * The undone task corresponding to the index or the particular student will be marked as done in the TAPA.
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
-* An error message will be displayed to the user if the task with that specified index for the particular student is already marked as done.
+* An error message will be displayed to the user if:
+  * the specified index is 0
+  * the specified index is a negative number 
+  * the specified index is larger than the number of tasks for that particular student
+  * the task with that specified index for the particular student is already marked as done
 
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
@@ -192,8 +198,11 @@ Marks a specific done task as undone for a particular student.
 **Format**: `unmark i/STUDENT_ID idx/DONE_TASK_INDEX`
 
 * The done task corresponding to the index for the particular student will be marked as undone in the TAPA.
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of tasks for that particular student.
-* An error message will be displayed to the user if the task with that specified index for the particular student is already marked as undone.
+* An error message will be displayed to the user if:
+  * the specified index is 0
+  * the specified index is a negative number
+  * the specified index is larger than the number of tasks for that particular student.
+  * the task with that specified index for the particular student is already marked as undone.
 
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
@@ -209,8 +218,12 @@ Edits a student's information in TAPA.
 
 * The index of the student to be edited is a compulsory field.
 * The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
-* An error message will be displayed to the user if the specified index is a negative number or larger than the number of students in TAPA.
-
+* An error message will be displayed to the user if:
+    * the specified index is 0
+    * the specified index is a negative number
+    * the specified index is larger than the number of students in TAPA
+    * the field to be edited is in an invalid format
+    
 **Example**:
 * `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
     * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
@@ -251,7 +264,7 @@ Displays all the students enrolled in a list.
 
 **Format**: `list`
 
-* Displays the students from the list of students in alphabetical order.
+* Displays the students from the list of students in alphabetical order (sorted using the `Name` field).
 * The students are indexed as 1, 2, 3, ......
 
 **Example**:
@@ -273,14 +286,14 @@ Assigns a task to a particular student.
     * Assigns assignment 1 to students taking module CS2103T.
 
 <div markdown="block" class="alert alert-info">
-:warning: **Warning!:**
+:warning: <b>Warning!:</b>
 
 * As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
 
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-**Note**: The name of the assigned task will be converted to Title Case.
+<b>Note:</b> The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
@@ -310,10 +323,12 @@ Deletes a task from a particular student's list of tasks.
 **Format**: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
 
 An error message will be displayed if: 
-* the specified index is a negative number or larger than the number of tasks for that particular student.
-* the student with the given student ID does not exist.
-* none of the students taking the module had previously been assigned the task with the given task name.
-* none of the students are taking a module with the given module code.
+* the specified index is 0
+* the specified index is a negative number 
+* the specified index is larger than the number of tasks for that particular student
+* the student with the given student ID does not exist
+* none of the students taking the module had previously been assigned the task with the given task name
+* none of the students are taking a module with the given module code
 
 **Example**:
 * `deleteTask i/AXXXXXXXR idx/3`
@@ -327,7 +342,7 @@ An error message will be displayed if:
 Displays a list of previous commands that were executed successfully.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Quick Tip!:**<br>
+:information_source: <b>Quick Tip!:</b><br>
 
 * Aside from the `history` command, you can also use the :arrow_up_small: Up and :arrow_down_small: Down arrow keys on your keyboard to navigate through your previously executed commands.
 
@@ -348,7 +363,7 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 <div markdown="block" class="alert alert-info">
-> :warning: **Warning!:**
+> :warning: <b>Warning!:</b>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
 
