@@ -187,7 +187,8 @@ The add lab mechanism is implemented as follows:
 The sequence for parsing the input is similar to the one shown in [this](#logic-component) sequence diagram above.
 
 The following UML sequence diagrams shows how the execution of the `labadd` command to aid understanding:
-<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
+The method `addLabToAll` in `UniqueStudentList` will call `addLab` for all `Student`s in the list. 
 </div>
 
 <img src="images/AddLabCommandSequenceDiagram.png" width="550" />
