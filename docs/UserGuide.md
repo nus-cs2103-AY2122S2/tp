@@ -68,7 +68,7 @@ Commands in CinnamonBun can be broken down into several components.
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------|
  | `COMMAND_WORD` | Trigger for the command to be executed.                                                                                              |
  | `PREAMBLE`     | Text before the first valid parameter prefix in the command. Certain commands may require a preamble.                                | 
-| `PREFIX`       | Commands may have one more or arguments. The prefix specifies which arguments to map to the parameters. All prefixes end with a `/`. |
+| `PREFIX`       | Commands may have one or more arguments. The prefix specifies which arguments to map to the parameters. All prefixes end with a `/`. |
  | `ARGUMENT`     | The argument to pass to the command.                                                                                                 |
 
 <div markdown="1" class="alert alert-primary">:bangbang: **Attention**
@@ -104,15 +104,21 @@ Commands in CinnamonBun can be broken down into several components.
 
 A client can have many fields & tags, including both optional and compulsory ones.
 
-| Field    | Prefix   | Constraints                                                                                                                                | Compulsory         | Example                                   |
-|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------------------------------------------|
-| Name     | `n/`     | Alphanumeric and spaces only.                                                                                                              | :heavy_check_mark: | `n/Regina Lee`                            |
-| Email    | `e/`     | Must be in *username@domain.suffix* format and unique to each client.<br/><br/> Alphanumeric and special characters, *+_.-* only.          | :heavy_check_mark: | `n/lovelee@mailinator.com`                |
-| Phone    | `p/`     | Minimum 3 numeric characters.                                                                                                              | :heavy_check_mark: | `p/81312224`                              |
-| Address  | `a/`     | No constraints.                                                                                                                            | :heavy_check_mark: | `a/123 Sesame Street`                     |
-| Birthday | `b/`     | Must be in *YYYY-MM-DD* format and a valid date.                                                                                           |                    | `b/2022-03-12`                            |
-| Remark   | `r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`         |       
-| Tags     | `t/`     | Alphanumeric only.<br/><br/> No spaces allowed.<br/><br/> Multiple tags are allowed per client.                                            |                    | `t/Frequentclient t/AppointmentOverdue`   | 
+<div markdown="1" class="alert alert-primary">:bangbang: **Attention**
+
+* Multiple clients can have the same data (e.g. same name, phone number, address, etc.), **except** emails. Emails must be unique to the client. 
+
+</div>
+
+| Field    | Prefix   | Constraints                                                                                                                                | Compulsory         | Example                                 |
+|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-----------------------------------------|
+| Name     | `n/`     | Alphanumeric and spaces only.                                                                                                              | :heavy_check_mark: | `n/Regina Lee`                          |
+| Email    | `e/`     | Must be in *username@domain.suffix* format and unique to each client.<br/><br/> Alphanumeric and special characters, *+_.-* only.          | :heavy_check_mark: | `e/lovelee@mailinator.com`              |
+| Phone    | `p/`     | Minimum 3 numeric characters.                                                                                                              | :heavy_check_mark: | `p/81312224`                            |
+| Address  | `a/`     | No constraints.                                                                                                                            | :heavy_check_mark: | `a/123 Sesame Street`                   |
+| Birthday | `b/`     | Must be in *YYYY-MM-DD* format and a valid date.                                                                                           |                    | `b/2022-03-12`                          |
+| Remark   | `r/`     | No constraints.                                                                                                                            |                    | `r/Foreman of Project Zero Dawn.`       |       
+| Tags     | `t/`     | Alphanumeric only.<br/><br/> No spaces allowed.<br/><br/> Multiple tags are allowed per client.                                            |                    | `t/Frequentclient t/AppointmentOverdue` | 
 
 A transaction also have compulsory and optional fields.
 
@@ -186,8 +192,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTH
 * Existing values will be updated to the input values.
     * Note: Editing email value to an existing email in the addressBook is not allowed.
 * When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
-* You can remove all the client’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the client’s tags by typing `t/` without specifying any other tags.
 * You can also remove a client's remarks by typing `r/` without anything else.
 
 </div>
@@ -223,7 +228,7 @@ Format: `append INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIR
 * The index refers to the index number shown in the displayed client list.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * Fields and tags that did not previously exist in the client will be added. Fields and tags that already existed will be replaced.
-* Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
+* Unlike `edit`, typing `t/` without anything else is invalid.
 
 </div>
 
@@ -239,8 +244,7 @@ Format: `remove INDEX [r/] [b/] [t/TAG]…​`
 * Edits the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
-* Fields and tags that did not previously exist in the client will be added. Fields that already existed will be replaced.
-* Unlike `edit`, typing `t/` without anything else will not remove all tags. Instead, this does nothing.
+* Unlike `edit`, typing `t/` without anything else is invalid.
 
 </div>
 
