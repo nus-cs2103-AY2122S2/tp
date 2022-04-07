@@ -266,7 +266,9 @@ Examples:
 
 ### Filter for past teammates: `filterteam`
 
-Shows a list of past teammates in HackNet.
+Shows a list of past teammates in HackNet. 
+This command will only show contacts that have been tagged as teammates. 
+Potential teammates marked using the `team` command will **NOT** be shown using the `filterteam` command.
 
 Format: `filterteam`
 
