@@ -63,7 +63,7 @@ public class FilterUtilTest {
         assertEquals("date", FilterUtil.successMessageMatch(datePredicate));
         assertEquals("appointment date", FilterUtil.successMessageMatch(appPredicate));
         assertEquals("owner's name", FilterUtil.successMessageMatch(ownerPredicate));
-        assertEquals("tags", FilterUtil.successMessageMatch(tagPredicate));
+        assertEquals("breed", FilterUtil.successMessageMatch(tagPredicate));
     }
 
     //---------------- Tests for tagContainsFilterWord --------------------------------------
