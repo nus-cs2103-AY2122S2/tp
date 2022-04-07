@@ -18,10 +18,6 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class MatriculationNumber
-Class CovidStatus
-Class Block
-Class Faculty
 Class Tag
 
 }
@@ -40,16 +36,11 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-
-Person *---> CovidStatus
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *---> Faculty
-Person *---> "*" Tag
-Person *---> Block
-Person *---> MatriculationNumber
+Person *--> "*" Tag
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

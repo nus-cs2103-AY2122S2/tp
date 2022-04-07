@@ -194,17 +194,18 @@ All 9 features extends from the `abstract` `Command` class.  <br>
 
 The table below summarises the 9 different tracking commands:
 
-| Command      | Command Word | Purpose |
-| ----------- | ----------- | ----- |
-| `add student` | `add` | Adds a new student profile. |
-| `edit student data` | `edit` | Edits an existing student. |
-| `delete student` | `delete` | Delete an existing student.|
-| `find student` | `find` | Find an existing student.|
-| `filter statuses` | `filter` | Filter out a list of students by covid status. |
-| `summarise all data` | `summarise` | Make pie charts out of the data. |
-| `help user` | `help` | Provide a how-to-use on this app. |
-| `list all data` | `list` | List out all students in Tracey. |
-| `clear all data` | `clear` | Empty the database. |
+| Command              | Command Word | Purpose                                        |
+|----------------------|--------------|------------------------------------------------|
+| `add student`        | `add`        | Adds a new student profile.                    |
+| `edit student data`  | `edit`       | Edits an existing student.                     |
+| `delete student`     | `delete`     | Delete an existing student.                    |
+| `find student`       | `find`       | Find an existing student.                      |
+| `filter statuses`    | `filter`     | Filter out a list of students by covid status. |
+| `summarise all data` | `summarise`  | Make pie charts out of the data.               |
+| `help user`          | `help`       | Provide a how-to-use on this app.              |
+| `list all data`      | `list`       | List out all students in Tracey.               |
+| `clear all data`     | `clear`      | Empty the database.                            |
+| `show email`         | `email`      | Open email window to copy list of emails.      |
 
 ### Add feature
 
@@ -231,7 +232,7 @@ Modelling the workflow of the `Add` Command, when the user inputs an **Add Comma
 
 When a user inputs an add command, the `execute()` method of `LogicManager` will be called and this will trigger a parsing process by `AddressBookParser`, `AddCommandParser` and `ParserUtil` to check the validity of the input prefixes and parameters. If the input is valid, a `Person` object is instantiated and this object is subsequently used as a parameter to instantiate an `AddCommand` object.
 
-Following this, `Logic Manager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.
+Following this, `LogicManager` will call the `execute()` method of the `AddCommand` object. In this method, the `hasPerson()` method of the `Model` class will be called, checking to see if this person exists in the database. If the person exists, a **CommandException** is thrown. Else, the `addPerson()` method of the `model` is called. Finally, it returns a new `CommandResult` object containing a string that indicates success of Add Command.
 
 
 ### Summarise feature
@@ -427,6 +428,43 @@ Subsequently, the `parseCommand` method in `LogicManager` will continue to creat
 The `ArgumentMultimap` class is used to parse the user input and store the filtering criteria, based on the respective prefixes of the different fields. This was used so that the input criteria of each field can be taken from the user input irregardless of the order that they typed it in.
 
 The `FilterDescriptor` takes in the filter criteria and returns a single predicate encompassing all the criteria on its `getFilters` method, so that this predicate can be used as an argument for the `updateFilteredPersonsList` method of the `Model` object, displaying a list of students that were filtered by this predicate.
+
+### Email Feature
+
+The email mechanism implements the following sequence for the method call execute("email").
+
+#### What is the email feature
+
+The email feature opens up a separate window containing the emails of the current list displayed in Tracey. The email feature allows a user to copy the email list to their clipboard to paste in their email platform of choice.
+
+The `email` command is as follows:
+
+`email`
+
+The user can choose when to execute the email command.
+
+The activity diagram shows the possible execution paths for the `email` command.
+
+**Path Execution of Email Feature Activity Diagram is shown below:**
+![EmailActivityDiagram](images/EmailActivityDiagram.png)
+
+There are two possible execution paths for this command.
+1. User inputs `email` command. After the Email Window opens, the user can choose copy the emails in the list by clicking on the copy email button. After which, the user can close the Email Window.
+2. User inputs `email` command. After the Email Window opens, the user chooses not to copy the emails in the list. After which, the user can close the Email Window.
+
+The sequence diagram below shows the interactions between objects during the execution of a `email` command.
+![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
+
+
+When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object. 
+
+Following this, the `LogicManager` will call the `execute()` method of the `EmailCommand` object. In this method, a `CommandResult` object will be instantiated.
+
+Back in the `MainWindow`'s `executeCommand()` method, it will then call the `handleEmailWindow()` method which will then instantiate an `EmailWindow` object.
+
+Afterwards, the `LogicManager` calls the `show()` method of `EmailWindow` and the `EmailWindow` will be shown to the user.
+
+
 
 ### Exit Feature
 

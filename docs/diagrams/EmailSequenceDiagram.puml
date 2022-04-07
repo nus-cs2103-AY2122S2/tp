@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":EmailWindow" as EmailWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:EmailCommand" as EmailCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+
+
+[-> MainWindow : executeCommand("email")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("email")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("email")
+activate AddressBookParser
+
+create EmailCommand
+AddressBookParser -> EmailCommand
+activate EmailCommand
+
+EmailCommand --> AddressBookParser
+deactivate EmailCommand
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> EmailCommand : execute()
+activate EmailCommand
+
+create CommandResult
+EmailCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EmailCommand
+deactivate CommandResult
+
+EmailCommand --> LogicManager
+deactivate EmailCommand
+
+LogicManager --> MainWindow
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleEmailWindow()
+activate MainWindow
+
+create EmailWindow
+MainWindow -> EmailWindow
+activate EmailWindow
+
+MainWindow -> EmailWindow : show()
+
+EmailWindow --> MainWindow
+deactivate EmailWindow
+
+[<--MainWindow
+deactivate MainWindow
+@enduml
