@@ -9,7 +9,7 @@ Trackermon is a desktop application for tracking and managing shows, optimized f
 
 Given below are my contributions to the project.
 
-**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ardentsoul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ardentsoul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
 * **Enhancements to existing features**: Added the ability to search through specific parameters in a show through the `find` command. ([\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134), [\#176](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/176))
   * What it does: Allows the user to find and filter through shows with a greater degree of precision.
