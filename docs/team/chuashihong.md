@@ -14,6 +14,8 @@ Given below are my contributions to the project.
   * ```Location``` Class
   * ```HouseTest``` Class
   * ```PriceRangeTest``` Class
+  * ```EditSellerCommand``` Class and its Test cases
+  * ```JsonAdaptedBuyer``` Class
 
 
 * **Project management**:
