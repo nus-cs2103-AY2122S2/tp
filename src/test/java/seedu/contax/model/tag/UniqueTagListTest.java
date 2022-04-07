@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
-import static seedu.contax.testutil.TypicalPersons.ALICE;
-import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.COLLEAGUES;
@@ -18,8 +16,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.model.person.Person;
-import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.model.tag.exceptions.DuplicateTagException;
 
 class UniqueTagListTest {

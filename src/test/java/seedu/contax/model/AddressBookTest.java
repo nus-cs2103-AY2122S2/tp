@@ -10,8 +10,11 @@ import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
+import static seedu.contax.testutil.TypicalPersons.FIONA;
 import static seedu.contax.testutil.TypicalPersons.FRIENDS;
+import static seedu.contax.testutil.TypicalPersons.GEORGE;
 import static seedu.contax.testutil.TypicalPersons.HOON;
+import static seedu.contax.testutil.TypicalPersons.OWES_MONEY;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.COLLEAGUES;
@@ -25,7 +28,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.contax.model.person.Address;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
@@ -107,6 +109,40 @@ public class AddressBookTest {
 
         AddressBook expectedAddressBook =
                 new AddressBookBuilder().withTag(FRIENDS).withPerson(CARL).withPerson(BOB).build();
+        assertEquals(expectedAddressBook, addressBook);
+    }
+
+    @Test
+    public void setPersons_hasMissingTag_success() {
+        // AddressBook should add the missing tag that exists in the person
+        Tag newTag = new TagBuilder().withName("new tag").build();
+        Person hoonWithTag = HOON.withTag(newTag);
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withTag(newTag).withPerson(hoonWithTag).build();
+
+        List<Person> personList = List.of(hoonWithTag);
+        addressBook.setPersons(personList);
+        assertEquals(expectedAddressBook, addressBook);
+
+    }
+
+    @Test
+    public void setPersons_tagsExist_success() {
+        // AddressBook should not add any tag in the address book
+        AddressBook addressBook = getTypicalAddressBook();
+
+        // FRIENDS and OWES_MONEY already exists in the address book
+        // FIONA and GEORGE chosen as they do not have any tags
+        Person fiona = FIONA.withTag(FRIENDS).withTag(OWES_MONEY);
+        Person george = GEORGE.withTag(FRIENDS);
+
+        List<Person> personList = List.of(fiona, george);
+
+        AddressBook expectedAddressBook =
+                new AddressBookBuilder().withTag(FRIENDS).withTag(OWES_MONEY).withTag(COLLEAGUES)
+                        .withPerson(fiona).withPerson(george).build();
+
+        addressBook.setPersons(personList);
         assertEquals(expectedAddressBook, addressBook);
     }
 

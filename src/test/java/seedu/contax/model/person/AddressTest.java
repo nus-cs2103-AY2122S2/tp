@@ -40,7 +40,7 @@ public class AddressTest {
         Address address2 = new Address("Blk 456, Den Road, #01-355");
 
         assertTrue(address1.equals(address1));
-        assertTrue(address1.equals(new Address("13 Computing Drive Singapore 117417")))
+        assertTrue(address1.equals(new Address("13 Computing Drive Singapore 117417")));
 
         assertFalse(address1.equals(address2));
         assertFalse(address1.equals(null));

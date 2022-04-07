@@ -9,7 +9,6 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
-import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
-import seedu.contax.model.tag.UniqueTagList;
 import seedu.contax.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
