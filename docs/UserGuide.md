@@ -421,7 +421,7 @@ Format: `pay INDEX_TRANSACTION`
 
 Examples:
 * `pay 2`
-* `find 1 | pay 1` will set the first transaction of the first client to `paid`
+* `findTransaction 1 | pay 1` will set the first transaction of the first client to `paid`
 
 ### Unpay Transaction (`unpay`)
 
@@ -439,7 +439,7 @@ Format: `unpay INDEX_TRANSACTION`
 
 Examples:
 * `unpay 2`
-* `find 1 | unpay 1` will set the first transaction of the first client to `unpaid`
+* `findTransaction 1 | unpay 1` will set the first transaction of the first client to `unpaid`
 
 ### Add Membership (`addMembership`)
 
