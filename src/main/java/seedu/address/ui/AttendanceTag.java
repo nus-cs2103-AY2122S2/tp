@@ -11,44 +11,48 @@ import seedu.address.model.attendance.AttendanceEntry;
 /**
  * A class that processes and produces attendance tags for the GUI.
  */
-public class AttendanceTag {
+public class AttendanceTag extends Label {
     private static final String MISSING_ATTENDANCE_TAG_STYLE = "-fx-background-color: #c4c4c4";
     private static final String PRESENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #90be6d";
     private static final String ABSENT_ATTENDANCE_TAG_STYLE = "-fx-background-color: #ff595e";
 
     /**
-     * Private constructor to prevent creation.
+     * Creates a new pet attendance tag.
      */
-    private AttendanceTag() {
+    public AttendanceTag(AttendanceEntry attendanceEntry) {
+        super(getAttendanceTagDetails(attendanceEntry));
+        super.setStyle(getTagStyle(attendanceEntry));
     }
 
     /**
-     * Produces an attendance tag to be added to {@code PetCard}.
+     * Retrieves the style to be applied to the attendance tag.
      *
-     * @param attendanceEntry the attendance to be converted to an attendance tag.
-     * @return a green label if the pet is present on the given date,
-     * a red label if the pet is absent,
-     * and a grey label if no attendance was marked on that day.
+     * @param attendanceEntry the incoming attendance entry.
+     * @return the style of the attendance tag to be applied.
      */
-    public static Label createAttendanceTag(AttendanceEntry attendanceEntry) {
+    private static String getTagStyle(AttendanceEntry attendanceEntry) {
         requireNonNull(attendanceEntry);
         Optional<Boolean> isPresent = attendanceEntry.getIsPresent();
-        String dateString = attendanceEntry.getAttendanceDate()
-            .format(ATTENDANCE_DATE_GUI_FORMATTER);
-
-        Label attendanceTag = new Label(dateString);
 
         if (isPresent.isEmpty()) {
-            attendanceTag.setStyle(MISSING_ATTENDANCE_TAG_STYLE);
-        } else {
-            boolean present = isPresent.get();
-            attendanceTag.setStyle(
-                present
-                    ? PRESENT_ATTENDANCE_TAG_STYLE
-                    : ABSENT_ATTENDANCE_TAG_STYLE
-            );
+            return MISSING_ATTENDANCE_TAG_STYLE; // missing attendance entry, grey tag
         }
 
-        return attendanceTag;
+        return isPresent.get()
+            ? PRESENT_ATTENDANCE_TAG_STYLE // pet is present, green tag
+            : ABSENT_ATTENDANCE_TAG_STYLE; // pet is absent, red tag
+    }
+
+    /**
+     * Retrieves the attendance date to be displayed in the tag.
+     *
+     * @param attendanceEntry the incoming attendance entry.
+     * @return the attendance date, formatted into a string in GUI format.
+     */
+    private static String getAttendanceTagDetails(AttendanceEntry attendanceEntry) {
+        requireNonNull(attendanceEntry);
+        return attendanceEntry
+            .getAttendanceDate()
+            .format(ATTENDANCE_DATE_GUI_FORMATTER);
     }
 }
