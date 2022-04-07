@@ -41,7 +41,7 @@ public class Messages {
     public static final String MESSAGE_FIELD_EMPTY = "%s field cannot be empty!";
     public static final String MESSAGE_CHANGED_TO_MODULE_VIEW = "Changed to Modules view!";
     public static final String MESSAGE_CHANGED_TO_PERSON_VIEW = "Changed to People view!";
-    public static final String MESSAGE_CHANGED_TO_GROUP_VIEW = "Changed to Group view!";
+    public static final String MESSAGE_CHANGED_TO_GROUP_VIEW = "Changed to Groups view!";
     public static final String MESSAGE_ALREADY_ON_PEOPLE_VIEW = "You are already on the People view!";
     public static final String MESSAGE_ALREADY_ON_MODULE_VIEW = "You are already on the Modules view!";
     public static final String MESSAGE_ALREADY_ON_GROUP_VIEW = "You are already on the Groups view!";
