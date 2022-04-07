@@ -27,6 +27,9 @@ public class JsonShowListStorageTest {
     @TempDir
     public Path testFolder;
 
+    /**
+     * Tests the error thrown when {@code readShowList} reads a null {@code FilePath}.
+     */
     @Test
     public void readShowList_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readShowList(null));
@@ -42,6 +45,9 @@ public class JsonShowListStorageTest {
                 : null;
     }
 
+    /**
+     * Tests that the {@code ReadOnlyShowList} obtained after {@code ShowList} reading a non-existent file will not be present.
+     */
     @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readShowList("NonExistentFile.json").isPresent());
