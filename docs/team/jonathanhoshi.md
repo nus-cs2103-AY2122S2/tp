@@ -20,7 +20,7 @@ Given below are my contributions to the project.
     * Issues: General GUI [[\#74](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/74)], Rating GUI [[\#70](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/70)], Comment GUI [[\#73](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/73)]
     * PRs: [[\#130](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/130)], [[\#170](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/170)], [[\#165](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/165)]
 
-    <img src="images/Ui.png">
+    <img src="../images/Ui.png">
   
   * Fix storage system on mac and linux not saving to the correct location
     * Details: Mac and Linux data file path does not store together with the jar file. Work together with [arcornior](arcornior.md) as he tested the storage system on mac and linux.
