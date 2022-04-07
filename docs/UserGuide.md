@@ -267,7 +267,8 @@ Examples:
 ### Filter for past teammates: `filterteam`
 
 Shows a list of past teammates in HackNet. 
-This command will only show contacts that have been tagged as teammates. 
+This command will only show contacts that have been tagged as teammates using the `edit INDEX [t/TEAM]` command or 
+the `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM]` command.
 Potential teammates marked using the `team` command will **NOT** be shown using the `filterteam` command.
 
 Format: `filterteam`
