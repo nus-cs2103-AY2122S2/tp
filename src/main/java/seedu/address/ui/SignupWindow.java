@@ -24,7 +24,7 @@ public class SignupWindow extends UiPart<Stage> {
     private static final String FXML = "SignupWindow.fxml";
     private static final String SCREEN_TITLE = "Welcome to MedBook\nPlease type in a new password to get started";
     private static final String PASSWORD_DOES_NOT_MEET_REQUIREMENTS_MESSAGE = "Oops. Your password format does not meet"
-            + "the following requirements\nPlease double check again";
+            + "the following requirements. Please double check again.";
     private static final String PASSWORD_EMPTY_MESSAGE = "Oops. Your password is empty";
 
     private static final Image APPROVE_IMAGE = new Image("/images/approve.png");
