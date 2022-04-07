@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 * Morph and implement Clear feature for Trackermon [\#147] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/147)
 
 **Documentation**:
-* In charge of Sort, Edit sections [\#192] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/192/files) [#\102] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102/files)
+* In charge of Sort, Edit sections [\#192] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/192/files) [\#102] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102/files)
 
 **Community**:
 * PRs reviewed (with non-trivial review comments):[\#149] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/149#discussion_r833837438) [\#175] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/175) [\#130] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/130)
