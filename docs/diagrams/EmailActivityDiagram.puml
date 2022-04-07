@@ -5,10 +5,11 @@ start
 :User input email command;
 :Email Window opens;
 
-If () then ([User wishes to copy email to clipboard])
+If () then ([User wishes to copy emails])
     :Click on copy email button;
+    :Student emails copied to clipboard;
 
-    else ([User does not wish to copy emails])
+    else ([Else])
     :User does nothing;
 
     endif

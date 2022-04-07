@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.SummariseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.excel.ImportFileParser;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -243,7 +245,8 @@ public class MainWindow extends UiPart<Stage> {
      * Instantiates a new EmailWindow and shows it.
      */
     public void createEmailWindow() {
-        emailWindow = new EmailWindow(logic.getFilteredPersonList());
+        ObservableList<Person> filteredList = logic.getFilteredPersonList();
+        emailWindow = new EmailWindow(filteredList);
         emailWindow.show();
     }
 

@@ -54,11 +54,21 @@ deactivate LogicManager
 MainWindow -> MainWindow : handleEmailWindow()
 activate MainWindow
 
+MainWindow -> LogicManager : getFilteredPersonList()
+activate LogicManager
+
+LogicManager --> MainWindow : filteredList
+deactivate LogicManager
+
 create EmailWindow
-MainWindow -> EmailWindow
+MainWindow -> EmailWindow : EmailWindow(filteredList)
 activate EmailWindow
 
+EmailWindow --> MainWindow
+deactivate EmailWindow
+
 MainWindow -> EmailWindow : show()
+activate EmailWindow
 
 EmailWindow --> MainWindow
 deactivate EmailWindow
