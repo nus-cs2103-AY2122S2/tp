@@ -24,7 +24,7 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tags to the client identified "
             + "by the index number used in the displayed person list. "
-            + "At least one tag should be specified. Does not allow for duplicates."
+            + "At least one tag should be specified. Does not allow for duplicates. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
