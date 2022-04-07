@@ -23,10 +23,7 @@ public class SkillSetTest {
 
     @Test
     public void equals() {
-        //
-        skillSet1.add(SKILL_JAVA_40);
         skillSet2.add(SKILL_PYTHON_30);
-        skillSet3.add(SKILL_JAVA_50);
         SkillSet copyOfSkillSet1 = new SkillSet(skillSet1);
         assertFalse(skillSet3.equals(skillSet1));
         assertTrue(copyOfSkillSet1.equals(skillSet1));
@@ -35,7 +32,6 @@ public class SkillSetTest {
 
     @Test
     public void addSkill() {
-        //
         skillSet1.add(SKILL_BASH_70);
         assertTrue(skillSet1.hasSkill(SKILL_BASH_70));
         assertTrue(skillSet1.hasSkill(SKILL_JAVA_40));
