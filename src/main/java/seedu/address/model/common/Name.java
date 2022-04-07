@@ -17,15 +17,15 @@ public abstract class Name implements Comparable<Name> {
     }
 
     /**
-     * Returns true if given {@code substring} is part of this {@code Name}.
+     * Returns true if given {@code nameSubstring} is part of this {@code Name}.
      * This method is case-insensitive.
      *
-     * @param substring Substring to match this Name against.
-     * @return True if given substring is part of this Name.
+     * @param nameSubstring Name substring to match this Name against.
+     * @return True if given name substring is part of this Name.
      */
-    public boolean containsIgnoreCase(String substring) {
-        requireNonNull(substring);
-        return fullName.toLowerCase().contains(substring.toLowerCase());
+    public boolean containsIgnoreCase(Name nameSubstring) {
+        requireNonNull(nameSubstring);
+        return fullName.toLowerCase().contains(nameSubstring.fullName.toLowerCase());
     }
 
     public String toString() {

@@ -61,7 +61,7 @@ public class CommandTestUtil {
     public static final String VALID_EVENT_NAME_OTHER = "Some other valid event";
     public static final String VALID_EVENT_DATETIME_AMY = "10-10-2020 1835";
     public static final String VALID_EVENT_DATETIME_AMY_DIFF_TIME = "10-10-2020 1830";
-    public static final String VALID_EVENT_DATETIME = "15-12-2000 2201";
+    public static final String VALID_EVENT_DATETIME = "15-12-3000 2201";
     public static final String VALID_EVENT_DATETIME_OTHER = "15-12-2020 1400";
     public static final String VALID_EVENT_DESCRIPTION = "Some valid description";
     public static final String VALID_EVENT_DESCRIPTION_OTHER = "Some other valid description";

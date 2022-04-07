@@ -46,11 +46,11 @@
     -fx-min-height: 0;
     -fx-max-height: 0;
     -fx-alignment: center;
-    -fx-background-color: #383838;
 }
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 1;
+    -fx-background-color: #63615c;
 }
 
 .tab-pane .tab {
@@ -59,7 +59,7 @@
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #383838;
+    -fx-background-color: #63615c;
 }
 
 .tab:selected .tab-label {
@@ -173,7 +173,14 @@
 
 .cell_name_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 40px;
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
+.cell_header_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-font-style: bold;
     -fx-text-fill: #010504;
 }
 
@@ -195,6 +202,7 @@
 
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-radius: 20;
 }
 
 .result-display {
@@ -359,8 +367,13 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 1;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+}
+
+#cardPane:hover {
+    -fx-border-color: #05d1e8;
 }
 
 #commandTypeLabel {
@@ -376,6 +389,8 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
 }
 
 #filterField, #personListPanel, #personWebpage {

@@ -45,6 +45,7 @@ public class ShowEventsCommandTests {
      */
     @Test
     public void execute_showAllEvents_showsSameList() {
+        expectedModel.updateFilteredEventList(event -> true);
         assertEventCommandSuccess(new ShowEventsCommand(true), model, ShowEventsCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 
@@ -66,6 +67,7 @@ public class ShowEventsCommandTests {
      */
     @Test
     public void execute_listIsFiltered_showsOrderedList() {
+        expectedModel.updateFilteredEventList(event -> true);
         assertEventCommandSuccess(new ShowEventsCommand(true), model, ShowEventsCommand.MESSAGE_SUCCESS_ALL, expectedModel);
 
         ObservableList<Event> checkSorted = model.getFilteredEventList();

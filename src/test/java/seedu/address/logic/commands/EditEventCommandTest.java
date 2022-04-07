@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DESCRIPTI
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertEventCommandSuccess;
+import static seedu.address.logic.commands.EditEventCommand.MESSAGE_PAST_EVENT_WARNING;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBookWithEvents;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -34,7 +35,8 @@ public class EditEventCommandTest {
 
     @Test
     public void execute_allFieldsSpecified_success() {
-        Event editedEvent = new EventBuilder().build();
+        // Edited event set in the future, no warning.
+        Event editedEvent = new EventBuilder().withDateTime("15-02-3030 1200").build();
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
         descriptor.setRemoveFriendNames(model.getFilteredEventList().get(0).getFriendNames());
 
@@ -45,6 +47,19 @@ public class EditEventCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
 
+        assertEventCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        // Check that warning is present if event being edited is in the past
+        editedEvent = new EventBuilder().withDateTime("15-02-1950 1200").build();
+        descriptor = new EditEventDescriptorBuilder(editedEvent).build();
+        descriptor.setRemoveFriendNames(model.getFilteredEventList().get(0).getFriendNames());
+
+        editCommand = new EditEventCommand(INDEX_FIRST_PERSON, descriptor);
+
+        expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent)
+                + "\n" + MESSAGE_PAST_EVENT_WARNING;
+
+        expectedModel.setEvent(model.getFilteredEventList().get(0), editedEvent);
         assertEventCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

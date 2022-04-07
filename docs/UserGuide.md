@@ -68,8 +68,8 @@ Adds a new friend to _Amigos_. A friend has:
 
 **Format**: `addfriend n/NAME  [p/PHONE_NUMBER] [e/EMAIL]  [a/ADDRESS] [d/DESCRIPTION] [t/TAG]…`
 
-* Note that `NAME` field is minimally compulsory. `p/`, `em/`, `a/` and `d/` `t/` flags and their arguments are optional.
-* Note that there can be no duplicate friends having the same name (case-insensitive).
+* Note that `NAME` field is minimally compulsory. `p/`, `e/`, `a/` and `d/` `t/` flags and their arguments are optional.
+* Note that there can be no duplicate friends having the same name.
 
 **Examples**:
 * `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
@@ -108,11 +108,17 @@ Deletes a friend in _Amigos_.
 
 ### Show a specific friend: `showfriend` or `sf`
 
-Shows page containing the full details related to an existing friend in _Amigos_.
+Shows expanded page containing the full details related to an existing friend in Amigos.
 
 **Format**: `showfriend INDEX ? n/NAME`
 
 * Either a specified `INDEX` or `NAME` of an existing friend in _Amigos_ must be provided.
+* When viewing the page containing the full details related to an existing friend, other commands dependent on `INDEX`
+  will refer to the `INDEX` of the friend/event shown on the expanded friend page. For example, when viewing the expanded
+  friend page of `Charlotte Tan`, entering `editevent 2 n/Dinner with Bernice`
+  will update the name of `Charlotte Tan`'s current 2nd upcoming event to `Dinner with Bernice`. Similarly, `deletefriend 1`
+  will remove `Charlotte Tan` from Amigos, since `Charlotte Tan` is the only friend currently being viewed on the 
+  expanded friend page.
 
 **Examples**:
 * `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
@@ -214,12 +220,12 @@ Adds a new event, which can be optionally linked to any number of existing frien
 
 **Examples**:
 * `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
-* `addevent n/Christmas Party dt/25-12-2022`
+* `addevent n/Christmas Party dt/25-12-2022 1930`
 
 ### Editing an event: `editevent` or `ee`
 Edits an existing event.
 
-**Format**: `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... rf/[REMOVE_FRIEND_NAME]...`
+**Format**: `editevent INDEX [n/EVENT_NAME] [dt/DATE_TIME] [d/DESCRIPTION] [af/ADD_FRIEND_NAME]... [rf/REMOVE_FRIEND_NAME]...`
 
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed events list. The index **must be a positive integer** 1, 2, 3, ...
 * At least one of the optional fields must be provided.
@@ -265,6 +271,7 @@ Find events in _Amigos_ whose properties match the given search criteria.
   * For each search field, an event is a match if the search substring matches
     * e.g n/Birthday will match events with names John's Birthday, Bob's Birthday
     * e.g. f/joe will match events containing either Joe Maggio or Joe Allen in the friends list.
+    * Any leading or trailing whitespace in the search substring will be trimmed.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
@@ -272,6 +279,7 @@ Find events in _Amigos_ whose properties match the given search criteria.
   * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
+* All events, including past ones, will be checked for matches.
 
 **Examples**:
 * `findevent n/dinner ds/20-03-2022` returns events starting from 20 Mar 2022 with an event name containing 'dinner' 
