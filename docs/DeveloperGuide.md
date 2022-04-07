@@ -253,7 +253,8 @@ Given below is an example scenario of how the `removetag` command works.
 <img src="images/RemoveTagState1.png" width="450" />
 
 The following sequence diagram shows how the `removetag` operation works: <br>
-![Removetag Sequence Diagram](images/RemoveTagSequenceDiagram.png)
+
+<img src="images/RemoveTagSequenceDiagram.png" width="2000" />
 
 ### Event feature
 
@@ -451,7 +452,10 @@ _{more aspects and alternatives to be added}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: 
+* `* * *` - High (must have)
+* `* *` - Medium (nice to have)
+* `*` - Low (unlikely to have)
 
 | Priority | As a …​                                                  | I want to …​                                             | So that I can…​                                                                                   |
 |----------|----------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------------------------------------------|

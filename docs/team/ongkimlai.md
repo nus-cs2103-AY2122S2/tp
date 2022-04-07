@@ -48,3 +48,4 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Integrated Codecov into team repo
+  * Update site-wide settings [#18](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/18)
