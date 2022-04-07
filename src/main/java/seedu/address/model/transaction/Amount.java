@@ -1,19 +1,23 @@
 package seedu.address.model.transaction;
 
+import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.logic.parser.Prefix;
 
+
 public class Amount extends TransactionField {
 
     public static final String FIELD_NAME = "Amount";
+
+    public static final Double MAXIMUM_INPUT = 9999999.99;
 
     public static final Prefix PREFIX = new Prefix("a/", true);
 
     public static final String MESSAGE_CONSTRAINT = "Transaction amount must be "
             + "numeric and the number specified "
-            + "must be greater than 0 (zero)";
+            + "must be between 0 (zero) and 9999999.99 inclusive";
 
     private final double value;
 
@@ -26,7 +30,10 @@ public class Amount extends TransactionField {
         super(PREFIX);
         requireNonNull(value);
         checkArgument(isValid(value), MESSAGE_CONSTRAINT);
-        this.value = Double.parseDouble(value);
+        double number = Double.parseDouble(value);
+        String formattedNumber = String.format("%.2f", number);
+        number = Double.parseDouble(formattedNumber);
+        this.value = Math.abs(number);
     }
 
     private String generateStringRep() {
@@ -51,7 +58,8 @@ public class Amount extends TransactionField {
      */
     public static boolean isValid(String value) {
         try {
-            return Double.parseDouble(value) > 0;
+            double number = Double.parseDouble(value);
+            return number >= 0 && number <= MAXIMUM_INPUT;
         } catch (Exception e) {
             return false;
         }
@@ -67,6 +75,6 @@ public class Amount extends TransactionField {
 
     @Override
     public int hashCode() {
-        return new Double(value).hashCode();
+        return hash(value);
     }
 }
