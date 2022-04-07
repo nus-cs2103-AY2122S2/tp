@@ -108,10 +108,13 @@ public class ParserUtil {
      * Parses a {@code String flag} into an {@code Flag}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Flag parseFlag(String flag) {
+    public static Flag parseFlag(String flag) throws ParseException {
         requireNonNull(flag);
         String trimmedFlag = flag.trim();
-        return new Flag(trimmedFlag.equals("flag"));
+        if (!Flag.isValidFlag(trimmedFlag)) {
+            throw new ParseException(Flag.MESSAGE_CONSTRAINTS);
+        }
+        return new Flag(trimmedFlag);
     }
 
     /**
