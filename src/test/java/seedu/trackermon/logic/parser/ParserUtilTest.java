@@ -18,6 +18,9 @@ import seedu.trackermon.model.show.Name;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 
+/**
+ * Contains unit tests for {@code ParserUtil}.
+ */
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STATUS = " ";

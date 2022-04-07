@@ -15,6 +15,9 @@ import seedu.trackermon.logic.commands.SortCommand;
 import seedu.trackermon.model.show.NameComparator;
 import seedu.trackermon.model.show.StatusComparator;
 
+/**
+ * Contains unit tests for {@code SortCommandParser}.
+ */
 public class SortCommandParserTest {
 
     private static final String SPACE = " ";

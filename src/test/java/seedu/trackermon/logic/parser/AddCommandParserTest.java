@@ -39,6 +39,9 @@ import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Contains unit tests for {@code AddCommandParser}.
+ */
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 

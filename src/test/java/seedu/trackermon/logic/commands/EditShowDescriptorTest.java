@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import seedu.trackermon.logic.commands.EditCommand.EditShowDescriptor;
 import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 
+/**
+ * Contains unit tests for {@code EditShowDescriptor}.
+ */
 public class EditShowDescriptorTest {
 
     @Test
