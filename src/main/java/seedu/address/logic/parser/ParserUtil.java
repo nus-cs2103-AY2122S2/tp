@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.schedule.ScheduleCommand.MESSAGE_INVA
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -252,7 +253,8 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dateTime} is in the past or has an invalid format.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+                .withResolverStyle(ResolverStyle.STRICT);;
         LocalDateTime formattedDateTime;
         try {
             formattedDateTime = LocalDateTime.parse(dateTime, formatter);

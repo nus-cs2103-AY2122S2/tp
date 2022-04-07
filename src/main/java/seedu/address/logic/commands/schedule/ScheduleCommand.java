@@ -26,7 +26,7 @@ public abstract class ScheduleCommand extends Command {
                     + "is to be scheduled at 5.30PM";
 
     public static final String MESSAGE_INVALID_FORMAT_DATETIME =
-            "Date and/or Time is not in the following format: dd-MM-yyyy HH:mm";
+            "Date and/or Time is either invalid or not in the following format: dd-MM-yyyy HH:mm";
 
     public static final String MESSAGE_INVALID_PAST_DATETIME =
             "Date and/or Time must not be in the past!";
