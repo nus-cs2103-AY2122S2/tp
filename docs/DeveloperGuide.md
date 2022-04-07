@@ -121,7 +121,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Pet` objects (which are contained in a `UniquePetList` object).
+* stores WoofAreYou data i.e., all `Pet` objects (which are contained in a `UniquePetList` object).
 * stores the currently 'selected' `Pet` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Pet>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -140,7 +140,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both WoofAreYou data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -159,7 +159,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Proposed Implementation
 
 The proposed sorting mechanism is facilitated by `SortCommand` class. It extends `Command`
-and takes in a field that the user wishes to sort the Address Book by. The field is parsed by
+and takes in a field that the user wishes to sort WoofAreYou by. The field is parsed by
 `SortCommandParser`.
 
 The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
@@ -260,11 +260,11 @@ by the prefixes / augments.
 
 #### Proposed Implementation
 The proposed filter mechanism is facilitated by `FilterCommand` class.
-It extends `Command` and takes in a field that the user wishes to filter the Address Book by followed by
+It extends `Command` and takes in a field that the user wishes to filter WoofAreYou by followed by
 a given filter word. The field is parsed by `FilterCommandParser`. A filter word will follow after the keyword to
 indicate what the user wants to filter out specifically.
 
-Currently, pet list can be filtered by date, owner name and tag. Users can only filter the address book by one field at
+Currently, pet list can be filtered by date, owner name and tag. Users can only filter WoofAreYou by one field at
 a time only. `FilterCommandParser` ensure this by throwing a `ParseException` when more than one filter field is
 entered.
 
@@ -274,13 +274,13 @@ Each class extends the `FilterByContainsFilterWordPredicate` class, which implem
 in order for `FindCommand` to handle different fields appropriately and consequently test each pet differently for a
 match in the specified field.
 
-`FindCommand` then updates the address book using one of the three classes (`Predicates`). Each class has a different
+`FindCommand` then updates WoofAreYou using one of the three classes (`Predicates`). Each class has a different
 way of testing `Pet`. If user filters by date, test will go through attendance of pet and determines if pet is present
 on the specified date (entered as `filterWord` by user). If user filters by owner name, test will go through owner name
-of pet and finds a partial/ full match with `filterWord` provided. Similarly, if user filters by tags, test will go
-through tags of pet and find match with `filterWord` provided.
+of pet and finds a partial/ full match with `filterWord` provided. Similarly, if user filters by tag, test will go
+through the tag of the pets and find a match using the `filterWord` provided.
 
-The following sequence diagram shows how the filter operation works when `filter byTags/ beagle` is called:
+The following sequence diagram shows how the filter operation works when `filter byTag/ beagle` is called:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
@@ -305,31 +305,31 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current WoofAreYou state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous WoofAreYou state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone WoofAreYou state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th pet in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted WoofAreYou state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitAddressBook()`, causing another modified WoofAreYou state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the WoofAreYou state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -346,17 +346,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores WoofAreYou to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest WoofAreYou state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -368,7 +368,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entirety of WoofAreYou.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
