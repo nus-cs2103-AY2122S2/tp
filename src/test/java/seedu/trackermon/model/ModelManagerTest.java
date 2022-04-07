@@ -25,6 +25,9 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    /**
+     * Test method to test the constructor of {@code ModelManager}.
+     */
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
@@ -32,11 +35,17 @@ public class ModelManagerTest {
         assertEquals(new ShowList(), new ShowList(modelManager.getShowList()));
     }
 
+    /**
+     * Test method to test exception thrown when setting a null {@code UserPrefs}.
+     */
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
 
+    /**
+     * Test method to test setting of a valid {@code UserPrefs}.
+     */
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
@@ -51,11 +60,17 @@ public class ModelManagerTest {
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
+    /**
+     * Test method to test exception thrown when setting a null {@code UserPrefs}.
+     */
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
+    /**
+     * Test method to test setting of a valid {@code GuiSettings}.
+     */
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
@@ -63,11 +78,17 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
+    /**
+     * Test method to test exception thrown when setting a null showListFilePath.
+     */
     @Test
     public void setShowListFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setShowListFilePath(null));
     }
 
+    /**
+     * Test method to test setting of a valid showListFilePath.
+     */
     @Test
     public void setShowListFilePath_validPath_setsShowListFilePath() {
         Path path = Paths.get("show/list/file/path");
@@ -75,27 +96,42 @@ public class ModelManagerTest {
         assertEquals(path, modelManager.getShowListFilePath());
     }
 
+    /**
+     * Test method to test exception thrown when checking for a null {@code Show}.
+     */
     @Test
     public void hasShow_nullShow_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasShow(null));
     }
 
+    /**
+     * Test method to test the {@code Show} is not in the show list.
+     */
     @Test
-    public void hasPerson_showNotInShowList_returnsFalse() {
+    public void hasShow_showNotInShowList_returnsFalse() {
         assertFalse(modelManager.hasShow(ALICE_IN_WONDERLAND));
     }
 
+    /**
+     * Test method to test the {@code Show} is in the show list.
+     */
     @Test
-    public void hasPerson_personInShowList_returnsTrue() {
+    public void hasShow_showInShowList_returnsTrue() {
         modelManager.addShow(ALICE_IN_WONDERLAND);
         assertTrue(modelManager.hasShow(ALICE_IN_WONDERLAND));
     }
 
+    /**
+     * Test method to test exception thrown when removing in the FilterShowList.
+     */
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredShowList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredShowList().remove(0));
     }
 
+    /**
+     * Test methods to test out the interaction of {@code ModelManager} objects.
+     */
     @Test
     public void equals() {
         ShowList showList = new ShowListBuilder().withShow(ALICE_IN_WONDERLAND)
