@@ -66,7 +66,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_nonemptyPreamble_throwsParseException() {
+    public void parse_nonEmptyPreamble_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
