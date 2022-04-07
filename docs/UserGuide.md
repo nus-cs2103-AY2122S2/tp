@@ -17,7 +17,7 @@ title: User Guide
 - [Features](#features)
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
-  - [Listing all Patients: `view`](#listing-all-patients-view)
+  - [Viewing all Patients: `view`](#viewing-all-patients-view)
   - [Editing Patient Information: `edit`](#editing-patient-information-edit)
   - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
@@ -159,7 +159,7 @@ Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
        <span class="badge badge-info">INFO</span>
    </div>
    <div markdown="block">
-       Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
+      Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
        1. NRIC consists alphanumeric characters only.
        2. NRIC starts with either S, T, F, G, M character.
@@ -178,7 +178,7 @@ Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add i/S1234568L n/Jane Doe p/98763488 e/janed@example.com a/311, Clementi Ave 2, #02-25 tg/diabetic tg/hypertension`
 
-### Listing all Patients: `view`
+### Viewing all Patients: `view`
 
 Shows a list of patients in MedBook.
 
@@ -201,8 +201,8 @@ Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 Examples:
 * `view` followed by `edit 1 n/John` updates name of first patient information entry displayed on the screen.
 
-<div class="notecard warning">
-    **Caution**: Editing a contact will overwrite the old data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a contact will overwrite the old data.
 </div>
 
 ### View Summary of a Patient: `view i/NRIC`
@@ -229,8 +229,8 @@ Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
 * `view` followed by `delete 1` deletes the first patient displayed on the screen.
 
-<div class="notecard warning">
-    **Caution**: Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
 </div>
 
 ### Finding any Entry: `find`
@@ -456,14 +456,14 @@ If you understood what you are dealing with, you may proceed with cautions. We r
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | View Help                     | `help`                                                                                                                                                                                        |
 | Add a Patient                 | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
-| List all Patients             | `view`                                                                                                                                                                                        |
+| View all Patients             | `view`                                                                                                                                                                                        |
 | Edit a Patient                | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
 | View Summary of a Patient     | `view i/NRIC`                                                                                                                                                                                 |
 | Delete any Entry              | `delete INDEX`                                                                                                                                                                                |
 | Finding any Entry             | `find KEYWORD`                                                                                                                                                                                |
 | Add Contact Information       | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                     |
 | View Contact Information      | `view t/contact i/NRIC`                                                                                                                                                                       |
-| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                                                                                                                  |
+| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`                                                                                                                                  |
 | Add Medical Information       | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | View Medical Information      | `view t/medical [i/NRIC]`                                                                                                                                                                     |
 | Edit Medical Information      | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`           |
