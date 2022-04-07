@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01;
 import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02;
-import static seedu.ibook.testutil.TypicalItems.getAllItemsOOS;
-import static seedu.ibook.testutil.TypicalItems.getNonZeroItemsOOS;
-import static seedu.ibook.testutil.TypicalItems.getZeroItemsOOS;
+import static seedu.ibook.testutil.TypicalItems.getAllItemsOut;
+import static seedu.ibook.testutil.TypicalItems.getNonZeroItems;
+import static seedu.ibook.testutil.TypicalItems.getZeroItems;
 import static seedu.ibook.testutil.TypicalProducts.CHOCOLATE_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PEANUT_BUTTER_BREAD;
@@ -25,11 +25,11 @@ import seedu.ibook.model.product.filters.OutOfStockFilter;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class OutOfStockCommandTest {
-    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getAllItemsOOS());
+    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getAllItemsOut());
     private final Product peanutButterBreadWithAllExpired =
-            new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getZeroItemsOOS());
+            new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getZeroItems());
     private final Product chocolateBreadWithAllNotExpired =
-            new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(getNonZeroItemsOOS());
+            new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(getNonZeroItems());
     private final List<Product> products = Arrays.asList(kayaBreadWithAllItems,
             peanutButterBreadWithAllExpired, chocolateBreadWithAllNotExpired);
 

@@ -8,6 +8,7 @@ import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_B;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,8 @@ public class TypicalItems {
             new ItemBuilder().withExpiryDate("2022-03-01").withQuantity(QUANTITY_0).build(KAYA_BREAD);
     public static final Item Q0_2022_03_02 =
             new ItemBuilder().withExpiryDate("2022-03-02").withQuantity(QUANTITY_0).build(KAYA_BREAD);
+    public static final Item Q5_TODAY =
+            new ItemBuilder().withExpiryDate(LocalDate.now().toString()).withQuantity(QUANTITY_5).build(KAYA_BREAD);
 
     public static final Item ITEM_A =
         new ItemBuilder().withExpiryDate(VALID_EXPIRY_DATE_A).withQuantity(VALID_QUANTITY_A).build(PRODUCT_A);
@@ -54,16 +57,28 @@ public class TypicalItems {
         return new ArrayList<>(Arrays.asList(Q5_2200_01_01));
     }
 
-    public static List<Item> getAllItemsOOS() {
+    public static List<Item> getAllItemsOut() {
         return new ArrayList<>(Arrays.asList(Q0_2022_03_01, Q0_2022_03_02, Q5_2020_01_01));
     }
 
-    public static List<Item> getZeroItemsOOS() {
+    public static List<Item> getZeroItems() {
         return new ArrayList<>(Arrays.asList(Q0_2022_03_01, Q0_2022_03_02));
     }
 
-    public static List<Item> getNonZeroItemsOOS() {
+    public static List<Item> getNonZeroItems() {
         return new ArrayList<>(Arrays.asList(Q5_2020_01_01));
+    }
+
+    public static List<Item> getAllItemsRemind() {
+        return new ArrayList<>(Arrays.asList(Q5_2020_01_01, Q5_TODAY, Q5_2200_01_01));
+    }
+
+    public static List<Item> getOnlyExpiringItems() {
+        return new ArrayList<>(Arrays.asList(Q5_TODAY));
+    }
+
+    public static List<Item> getOnlyNonExpiringItems() {
+        return new ArrayList<>(Arrays.asList(Q5_2020_01_01, Q5_2200_01_01));
     }
 
 }
