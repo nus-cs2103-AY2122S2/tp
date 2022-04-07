@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_BUYER;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +28,9 @@ class MatchLocationCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_THIRD_BUYER.getZeroBased());
 
-        MatchLocationCommand matchCommand = new MatchLocationCommand(INDEX_FIRST_CLIENT);
+        MatchLocationCommand matchCommand = new MatchLocationCommand(INDEX_THIRD_BUYER);
 
         LocationMatchBuyerPredicate predicate = new LocationMatchBuyerPredicate(buyerToMatch);
 

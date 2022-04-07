@@ -18,4 +18,12 @@ public class NullPropertyToSell extends PropertyToSell {
         return nullPropertyToSell;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof NullPropertyToSell) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

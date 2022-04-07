@@ -1,0 +1,15 @@
+{
+  "sellers" : [ {
+    "name" : "Chua",
+    "phone" : "1234",
+    "appointment" : "",
+    "tagged" : [ "good" ],
+    "propertyToBuy" : null
+  }, {
+    "name" : "Chua",
+    "phone" : "1234",
+    "appointment" : "",
+    "tagged" : [ ],
+    "propertyToBuy" : null
+  } ]
+}
