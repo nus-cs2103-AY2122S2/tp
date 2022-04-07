@@ -148,13 +148,12 @@ public class EditCommand extends Command {
         private Rating rating;
 
         /**
-         * A default constructor.
+         * Creates a default constructor.
          */
         public EditShowDescriptor() {}
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Creates a defensive copy of {@code tags} and it is used internally. It is a copy constructor.
          * @param toCopy the constructor to be copied.
          */
         public EditShowDescriptor(EditShowDescriptor toCopy) {
