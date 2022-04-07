@@ -57,7 +57,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    /**
+     * Replaces the contents of the tag list with {@code tags} and strips tags in persons that are not in {@code tags}.
+     */
     public void setTags(List<Tag> tags) {
+        persons.forEach(p -> stripTagsFromPerson(p, tags));
         this.tags.setTags(tags);
     }
 
@@ -190,6 +194,21 @@ public class AddressBook implements ReadOnlyAddressBook {
             Person editedPerson = person.withoutTag(target).withTag(editedTag);
             setPerson(person, editedPerson);
         }
+    }
+
+    /**
+     * Removes all tags from {@code person} if the tag does not exist in {@code tagList}.
+     */
+    private void stripTagsFromPerson(Person person, List<Tag> tagList) {
+        Set<Tag> personTags = person.getTags();
+
+        Person newPerson = person;
+        for (Tag pTag : personTags) {
+            if (!tagList.contains(pTag)) {
+                newPerson = newPerson.withoutTag(pTag);
+            }
+        }
+        setPerson(person, newPerson);
     }
 
     //// util methods

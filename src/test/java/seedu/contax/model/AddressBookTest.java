@@ -8,6 +8,7 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
+import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
 import static seedu.contax.testutil.TypicalPersons.FIONA;
@@ -16,6 +17,7 @@ import static seedu.contax.testutil.TypicalPersons.GEORGE;
 import static seedu.contax.testutil.TypicalPersons.HOON;
 import static seedu.contax.testutil.TypicalPersons.OWES_MONEY;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.contax.testutil.TypicalPersons.getTypicalTags;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.COLLEAGUES;
 
@@ -143,6 +145,53 @@ public class AddressBookTest {
                         .withPerson(fiona).withPerson(george).build();
 
         addressBook.setPersons(personList);
+        assertEquals(expectedAddressBook, addressBook);
+    }
+
+    @Test
+    public void setTags_personTagsDoesNotExist_stripTag() {
+        // Empty tag list - Strip all
+        AddressBook addressBook = new AddressBookBuilder().withTag(FRIENDS).withPerson(ALICE).build();
+        List<Tag> emptyList = List.of();
+        addressBook.setTags(emptyList);
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(ALICE.withoutTag(FRIENDS)).build();
+
+        assertEquals(expectedAddressBook, addressBook);
+
+
+        // Strip only missing tags
+        addressBook =
+                new AddressBookBuilder().withTag(FRIENDS).withTag(OWES_MONEY)
+                        .withPerson(ALICE).withPerson(BENSON).build();
+
+        List<Tag> tagList = List.of(FRIENDS);
+
+        // OWES_MONEY should be removed
+        addressBook.setTags(tagList);
+        expectedAddressBook =
+                new AddressBookBuilder().withTag(FRIENDS).withPerson(ALICE)
+                        .withPerson(BENSON.withoutTag(OWES_MONEY)).build();
+
+        assertEquals(expectedAddressBook, addressBook);
+    }
+
+    @Test
+    public void setTags_allTagsExist_noStripping() {
+        // Exactly the same as previous address book
+        AddressBook addressBook = getTypicalAddressBook();
+        List<Tag> tagList = getTypicalTags();
+
+        addressBook.setTags(tagList);
+        AddressBook expectedAddressBook = getTypicalAddressBook();
+        assertEquals(expectedAddressBook, addressBook);
+
+        // Tag not associated with any persons
+        addressBook = getTypicalAddressBook();
+        tagList = List.of(FRIENDS, OWES_MONEY);
+        addressBook.setTags(tagList);
+
+        expectedAddressBook = getTypicalAddressBook();
+        expectedAddressBook.removeTag(COLLEAGUES);
         assertEquals(expectedAddressBook, addressBook);
     }
 
