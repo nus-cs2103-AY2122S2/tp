@@ -22,6 +22,8 @@ Given below are my contributions to the project.
 * Only change the command from `list` to `listEmployees` to reflect on listing down all the employees.
 * Functionalities remain the same from AB3.
 
+<div style="page-break-after: always;"></div>
+
 `findTask` command:
 * To allow users to find tasks which was a new model added into our project.
 * Allowed users to search tasks using multiple properties of a task.
