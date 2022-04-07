@@ -36,7 +36,7 @@ public class Telegram {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidTelegramId(String telegram) {
-        return telegram.equals("") ||((telegram.matches(VALIDATION_REGEX) && !(telegram.charAt(0) == '_')));
+        return telegram.equals("") || ((telegram.matches(VALIDATION_REGEX) && !(telegram.charAt(0) == '_')));
     }
 
 
