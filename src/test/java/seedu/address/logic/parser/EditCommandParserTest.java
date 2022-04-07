@@ -118,7 +118,7 @@ public class EditCommandParserTest {
 
         EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withOwnerName(VALID_OWNER_NAME_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTag(VALID_TAG_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -165,7 +165,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPetDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditPetDescriptorBuilder().withTag(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -181,7 +181,7 @@ public class EditCommandParserTest {
                 .withPhone(VALID_PHONE_BOB)
                 .withOwnerName(VALID_OWNER_NAME_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_FRIEND)
+                .withTag(VALID_TAG_FRIEND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -211,7 +211,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PET;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withTags().build();
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder().withTag().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
