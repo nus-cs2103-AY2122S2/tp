@@ -79,7 +79,7 @@ public class OnboardingStoryManager {
      * Creates and adds OnboardingSteps for add person
      */
     private void createAddPersonSequence() {
-        addGeneralDisplayStep(story, "Now lets try adding a person." + CLICK_CONTINUE);
+        addGeneralDisplayStep(story, "Now let's try adding a person." + CLICK_CONTINUE);
         story.addStory(new OnboardingStep("Follow the format 'addperson n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS'"
                         + "\n\nExample: addperson n/Johnny p/91234567 e/Johnny@j.com a/Johnny street"
                         + "\n\nHit enter when you are done",
@@ -116,10 +116,10 @@ public class OnboardingStoryManager {
      * Creates and adds OnboardingSteps for find person
      */
     private void createFindPersonSequence() {
-        story.addStory(new OnboardingStep("Lets try to find %s's record!" + CLICK_CONTINUE,
+        story.addStory(new OnboardingStep("Let's try to find %s's record!" + CLICK_CONTINUE,
                 0.2, 0.5, ALL, CENTER,
                 CLEAR_ALL, 0,
-                null, null, (model) -> String.format("Lets try to find %s's record!" + CLICK_CONTINUE,
+                null, null, (model) -> String.format("Let's try to find %s's record!" + CLICK_CONTINUE,
                 OnboardingUtil.getLatestPersonName(model)), false));
 
 
@@ -147,10 +147,10 @@ public class OnboardingStoryManager {
      * Creates and adds OnboardingSteps for remove person
      */
     private void createRemovePersonSequence() {
-        story.addStory(new OnboardingStep("Now lets try to remove %s's record!" + CLICK_CONTINUE,
+        story.addStory(new OnboardingStep("Now let's try to remove %s's record!" + CLICK_CONTINUE,
                 0.2, 0.5, ALL, CENTER,
                 CLEAR_ALL, 0, null, null, (
-                model) -> String.format("Now lets try to remove %s's record!!" + CLICK_CONTINUE,
+                model) -> String.format("Now let's try to remove %s's record!!" + CLICK_CONTINUE,
                 OnboardingUtil.getLatestPersonName(model)), false));
 
         story.addStory(new OnboardingStep("Type 'deleteperson 1' and hit enter",
@@ -178,7 +178,7 @@ public class OnboardingStoryManager {
      * Create and adds OnboardingSteps for list persons
      */
     private void createListPersonsSequence() {
-        story.addStory(new OnboardingStep("Now lets try to list all persons." + CLICK_CONTINUE,
+        story.addStory(new OnboardingStep("Now let's try to list all persons." + CLICK_CONTINUE,
                 0.2, 0.5, ALL, CENTER,
                 CLEAR_ALL,
                 0, null, (model, commandBox) -> {

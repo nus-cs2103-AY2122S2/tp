@@ -3,10 +3,8 @@ package seedu.contax.ui.onboarding;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.contax.commons.core.LogsCenter;
 import seedu.contax.ui.HelpWindow;
@@ -42,11 +40,6 @@ public class OnboardingPrompt extends UiPart<Stage> {
         displayMessage.setText(DISPLAY_MESSAGE);
         this.mainWindow = mainWindow;
         onboardingWindow = new OnboardingWindow(mainWindow);
-        displayMessage.setMinHeight(Region.USE_PREF_SIZE);
-        displayMessage.minHeightProperty().bind(mainWindow.heightProperty().multiply(0.1));
-        displayMessage.minWidthProperty().bind(mainWindow.widthProperty().multiply(0.3));
-
-        displayMessage.setAlignment(Pos.CENTER);
     }
 
     /**
