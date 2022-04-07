@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.assertSellerCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showSellerAtIndex;
+import static seedu.address.logic.commands.SellerCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.SellerCommandTestUtil.assertSellerCommandFailure;
+import static seedu.address.logic.commands.SellerCommandTestUtil.showSellerAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SELLER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SELLER;
 
