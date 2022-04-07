@@ -93,7 +93,7 @@ public class ChargeCommand extends Command {
      */
     public String getAttendance(Pet pet) {
         double amountChargeable = 0.0;
-        String attendance = String.format(MESSAGE_ATTENDANCE, pet.getName().toString());//"\nHere are the days " + pet.getName().toString() + " was present: ";
+        String attendance = String.format(MESSAGE_ATTENDANCE, pet.getName().toString());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         AttendanceHashMap map = pet.getAttendanceHashMap();
         LocalDate day = this.chargeDate.atDay(1);
@@ -109,7 +109,8 @@ public class ChargeCommand extends Command {
             day = day.plusDays(1);
         }
         if (amountChargeable == 0) {
-            attendance = String.format(MESSAGE_NO_ATTENDANCE, pet.getName().toString());}
+            attendance = String.format(MESSAGE_NO_ATTENDANCE, pet.getName().toString());
+        }
         if (amountChargeable == this.charge.getCharge()) {
             attendance = attendance.replace("are the days", "is the day");
         }
