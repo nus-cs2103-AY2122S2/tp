@@ -3,6 +3,8 @@ package seedu.address.model.transaction;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
+import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_TWO;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +49,25 @@ public class TransactionDateTest {
         assertTrue(TransactionDate.isValid("2020-11-11"));
         assertTrue(TransactionDate.isValid("2020-12-26"));
         assertTrue(TransactionDate.isValid("2020-01-01"));
+    }
+
+
+    @Test
+    public void equalsTest() {
+        TransactionDate firstTransactionDate = new TransactionDate(VALID_TRANSACTION_DATE_ONE);
+        TransactionDate secondTransactionDate = new TransactionDate(VALID_TRANSACTION_DATE_TWO);
+        TransactionDate firstTransactionDateCopy = new TransactionDate(firstTransactionDate.getValue());
+
+        // compare with itself -> returns true
+        assertTrue(firstTransactionDate.equals(firstTransactionDate));
+
+        // compare with object with same constructor args
+        assertTrue(firstTransactionDate.equals(firstTransactionDateCopy));
+
+        //compare with different date
+        assertFalse(firstTransactionDate.equals(secondTransactionDate));
+
+        //compare with different object
+        assertFalse(firstTransactionDate.equals("2021-11-11"));
     }
 }

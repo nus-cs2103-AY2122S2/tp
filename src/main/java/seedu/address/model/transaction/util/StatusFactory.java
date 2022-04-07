@@ -6,8 +6,9 @@ import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.UnpayCommand;
 import seedu.address.model.transaction.Status;
 
-public class StatusFactory {
-    public static Status getStatus(Class<? extends Command> command) {
+public class StatusFactory implements StatusFactoryInterface {
+    @Override
+    public Status getStatus(Class<? extends Command> command) {
         if (command.equals(PayCommand.class)) {
             return new Status(Status.STATUS_PAID);
         } else if (command.equals(UnpayCommand.class)) {
