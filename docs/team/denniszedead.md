@@ -11,13 +11,9 @@ Given below are my contributions to the project.
 
 ### Enhancement implemented
 
-#### `findEmployee` command:
+####`findEmployee` command:
 * Change  from `find` command to `findEmployee` command to reflect and differentiate this find command to find all employees.
 * Create a new predicate `PersonMultiplePredicate` to filter out employees based on multiple properties entered by user.
-* Unit test for the new `findEmployee` command include:
-  * `findEmployeeCommandParser` to check on different user inputs.
-  * `findEmployeeCommand` to show different outcome on the `finteredPersonList` for different user inputs.
-  * `PersonMultiplePredicate` to ensure that only employees that satisfy the options given to the users return true.
 
 #### `listEmployee` command
 * Only change the command from `list` to `listEmployees` to reflect on listing down all the employees.
@@ -27,16 +23,9 @@ Given below are my contributions to the project.
 * To allow users to find tasks which was a new model added into our project.
 * Allowed users to search tasks using multiple properties of a task.
 * Created a new predicate `TaskMultiplePredicate` to filter out tasks based on multiple properties entered by users
-* Added unit testing for:
-  * `findTaskCommandParser` to check on different user inputs.
-  * `findTaskCommand` to show different outcome on the `finteredTaskList` for different user inputs.
-  * `TaskMultiplePredicate` to ensure that only tasks that satisfy the options given to the users return true.
 
 #### `listTask` command
 * List down all the tasks in the filteredList.
-* Unit test for `listTask` to use the following test cases:
-  * When the current task list is already filtered.
-  * When the user task list already shows all task in the task list.
 
 ### Code contributed
 
@@ -68,18 +57,18 @@ Repo sense link: [Repo sense link](https://nus-cs2103-ay2122s2.github.io/tp-dash
 
 #### `listEmployee` command
 
-![`listEmployee` command](../images/UGListEmployee.png)
+<img src="../images/UGListEmployee.png" width="450">
 
 #### `findEmployee` command
 
-![`findEmployee` command](../images/UGFindEmployee.png)
+<img src="../images/UGFindEmployee.png" width="450">
 
 #### `listTask` command
 
-![`listTask` command](../images/UGListTask.png)
+<img src="../images/UGListTask.png" width="450">
 
 #### `findTask` command
 
-![`findTask` command](../images/UGFindTask.png)
+<img src="../images/UGFindTask.png" width="450">
 
 ## Contribution to the developers guide
