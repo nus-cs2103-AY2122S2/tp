@@ -99,6 +99,8 @@ public class AddCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_DUPLICATE_MODULE);
             case CLASS_GROUP:
                 throw new CommandException(Messages.MESSAGE_DUPLICATE_CLASS_GROUP);
+            case ASSESSMENT:
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_ASSESSMENT);
             default:
                 throw new CommandException(Messages.MESSAGE_UNKNOWN_ENTITY);
             }

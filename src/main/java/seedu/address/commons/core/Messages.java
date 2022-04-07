@@ -6,11 +6,16 @@ package seedu.address.commons.core;
 public class Messages {
 
     public static final String MESSAGE_DUPLICATE_CLASS_GROUP = "This class already exists in TAssist!\n"
-            + "Classes of the same module are identified by their CLASS_GROUP_IDs, which are case-insensitive";
+            + "Classes of the same module are identified by their CLASS_GROUP_IDs and MODULE_INDEXs, "
+            + "which are case-insensitive";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in TAssist!\n"
-            + "Modules in the same academic year are identified by their MODULE_CODEs, which are case-insensitive";
+            + "Modules in the same academic year are identified by their MODULE_CODEs and ACADEMIC_YEARs,"
+            + "which are case-insensitive";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAssist!\n"
             + "Students are identified by their STUDENT_IDs, which are case-insensitive";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in TAssist!\n"
+            + "Assessments are identified either by their ASSESSMENT_NAMEs + MODULE_INDEXs"
+            + "OR by their SIMPLE_NAMEs + MODULE_INDEXs";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_UNKNOWN_ENTITY = "Unknown entity!\n"
             + "Available entities: student | module | class | assessment";
