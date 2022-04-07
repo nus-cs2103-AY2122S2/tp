@@ -62,4 +62,22 @@ public class Seller extends Client {
                 && otherSeller.getTags().equals(getTags());
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+            .append("\nPhone: ")
+            .append(getPhone())
+            .append("\n")
+            .append(getPropertyToSell())
+            .append("\nAppointment: ")
+            .append(getAppointment());
+
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
+        return builder.toString();
+    }
 }

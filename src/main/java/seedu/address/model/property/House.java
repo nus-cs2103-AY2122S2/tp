@@ -57,4 +57,9 @@ public class House {
         return Objects.hash(houseType, location);
     }
 
+    @Override
+    public String toString() {
+        return "HouseType: " + getHouseTypeToString() + "\n" + "Location: " + getLocationToString();
+    }
+
 }
