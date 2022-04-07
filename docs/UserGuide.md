@@ -172,14 +172,14 @@ Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
 
 
-#### Listing all class groups: `list class`
+#### List all class groups: `list class`
 
 Show a list of all class groups.
 
 Format: `list class`
 
 
-##### Filtering class groups
+##### Filter class groups
 
 Show a list of class groups belonging to a module.
 
@@ -221,14 +221,14 @@ Examples:
 * `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
 
 
-#### Listing all students: `list student`
+#### List all students: `list student`
 
 Show a list of all students.
 
 Format: `list student`
 
 
-##### Filtering students
+##### Filter students
 
 Show a list of students belonging to either module or class group.
 
@@ -243,7 +243,7 @@ Examples:
 * `list student c/2` displays the students belonging to the 2nd class group shown when `list class` is run.
 
 
-#### Finding students: `find`
+#### Find students: `find`
 
 Find students whose names contain any of the given keywords.
 
@@ -636,6 +636,38 @@ Format: `exit`
                 <li>syntax: <code>exit</code></li>
             </ul>
         </td>
+    </tr>
+</tbody>
+</table>
+
+## Command Shortcodes
+
+To save you time, TAssist supports shorthand commands for each entity. When entering commands, a shortcode (single letter) can be used in place of the full entity name.
+
+* Example: `list a` is equivalent to `list assessment`
+* Example: `delete s 2` is equivalent to `delete student 2`
+
+<table>
+<tbody>
+    <tr>
+        <th>Entity</th>
+        <th>Shorthand</th>
+    </tr>
+    <tr>
+        <td><code>module</code></td>
+        <td><code>m</code></td>
+    </tr>
+    <tr>
+        <td><code>assessment</code></td>
+        <td><code>a</code></td>
+    </tr>
+    <tr>
+        <td><code>class</code></td>
+        <td><code>c</code></td>
+    </tr>
+    <tr>
+        <td><code>student</code></td>
+        <td><code>s</code></td>
     </tr>
 </tbody>
 </table>
