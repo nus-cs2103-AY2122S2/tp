@@ -142,6 +142,14 @@ public class AddBuyerCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
+        // last occurrence of name invalid and valid phone, fail at invalid name
+        assertParseFailure(parser, NAME_DESC_AMY + INVALID_NAME_DESC + PHONE_DESC_AMY,
+                Name.MESSAGE_CONSTRAINTS);
+
+        // last occurrence of phone invalid and valid name, fail at invalid phone
+        assertParseFailure(parser, NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS);
+
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
