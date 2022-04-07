@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 
 * **Bug fixes**:
   * Fix input validation of regex to exclude values from `Skill proficiency` [#136](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/136)
-  * Fix bug that causes duplicates in `Skill`s tag and hence `Sort` feature to have unexpected output [#130](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/130) 
+  * Fix bug that causes duplicates in `Skill`s tag and hence `Sort` feature to have unexpected output [#130](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/130)
   * Add more topics that `help` is able to search for such as `filterteam` [#107](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/107)
   * Add input validation for `Github username` such that it complies with actual Github username rules [#147](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/147)
   * Change HackNet to allow for duplicate `name` fields but reject any command that try to add/edit a duplicate or existing `Github username`, `phone number` or `email` [#154](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/154)
@@ -42,4 +42,3 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PR reviewed [#62](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/62), [#73](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/73), [#79](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79), [#141](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/141)
-  
