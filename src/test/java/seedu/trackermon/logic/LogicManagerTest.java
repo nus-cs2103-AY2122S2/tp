@@ -35,6 +35,9 @@ import seedu.trackermon.storage.JsonUserPrefsStorage;
 import seedu.trackermon.storage.StorageManager;
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code LogicManager}.
+ */
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
 
@@ -76,13 +79,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup LogicManager with JsonShowListIoExceptionThrowingStub
 
-        JsonShowListStorage addressBookStorage =
-                new JsonShowListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonShowListStorage showListStorage =
+                new JsonShowListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionShowList.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(showListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

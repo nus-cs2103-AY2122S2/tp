@@ -10,6 +10,9 @@ import seedu.trackermon.model.ModelManager;
 import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code ClearCommand}.
+ */
 public class ClearCommandTest {
 
     @Test
