@@ -100,7 +100,7 @@ This could be a problem with Windows. You can alternatively start **HackNet** by
 
 * For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY…]​` as `s/Java_90`
-    
+
 
 </div>
 
@@ -139,7 +139,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 * A name of a team or skill cannot be consisting solely of whitespaces.
 * Please check that you have correctly entered the skill proficiency level.
 There is currently no way of viewing the exact number that you entered.
-You may use the `edit` function to change it if it is wrong. 
+You may use the `edit` function to change it if it is wrong.
 * The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).
 </div>
 
@@ -393,7 +393,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
-**Filter Past Teammates** | `filterteam` 
+**Filter Past Teammates** | `filterteam`
 **Show potential teammates** | `show`
 **Exit HackNet** | `exit`
 **Navigate User Input History** | `↑`, `↓`

@@ -205,7 +205,7 @@ This command is used to display a list of people who has the skill specified in 
 
 #### Execution
 
-Below is a sequence diagram showing the execution path when this command is entered. 
+Below is a sequence diagram showing the execution path when this command is entered.
 
 ![FilterSkillCommand](images/FilterSkillSequenceDiagram.png)
 
