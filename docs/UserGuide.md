@@ -375,7 +375,7 @@ If you just want to know common information about some pets, you can filter the 
 * You can filter by date, to find out which pets are present on a given date.
 * You can filter by appointment, to find out which pets have appointments on a given date.
 * You can filter by owner's name, to find all pets with the same owner.
-* You can also filter by tags, to find all pets of a common breed.
+* You can also filter by tag, to find all pets of a common breed.
 
 Format: `filter f/KEYWORD`
 
@@ -383,12 +383,12 @@ Format: `filter f/KEYWORD`
 * Specified `f/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
 * If you use `byDate/` or `byApp/`, `KEYWORD` has to be in `dd-MM-yyyy` format, or `today`.
 * If you use `byOwner/`, `KEYWORD` can be any length.
-* If you use `byTags/`, `KEYWORD` can be any length.
+* If you use `byTag/`, `KEYWORD` can be any length.
     * Can filter with a partial match in `Keyword`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
 
 Examples:
 * `filter byOwner/Lily` shows pets owned by all Lily(s).
-* `filter byTags/Retriever` shows pets with `Retriever` in their tags.
+* `filter byTag/Retriever` shows pets with `Retriever` in their tags.
 * `filter byDate/30-03-2022` show pets present on 30 March 2022 as shown below.
 
 <p align="center">

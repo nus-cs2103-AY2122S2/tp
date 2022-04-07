@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_OWNER_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_TAGS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER_BY_TAG;
 
 import seedu.address.commons.util.FilterUtil;
 import seedu.address.logic.commands.FilterCommand;
@@ -41,14 +41,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FILTER_BY_DATE, PREFIX_FILTER_BY_TAGS,
+                ArgumentTokenizer.tokenize(args, PREFIX_FILTER_BY_DATE, PREFIX_FILTER_BY_TAG,
                         PREFIX_FILTER_BY_OWNER_NAME, PREFIX_FILTER_BY_APPOINTMENT);
 
         String keyword = ParserUtil.parseFilterArgs(trimmedArgs);
 
         if (argMultimap.getValue(PREFIX_FILTER_BY_DATE).isPresent()) {
             return new FilterCommand(new DateContainsFilterDatePredicate(keyword));
-        } else if (argMultimap.getValue(PREFIX_FILTER_BY_TAGS).isPresent()) {
+        } else if (argMultimap.getValue(PREFIX_FILTER_BY_TAG).isPresent()) {
             return new FilterCommand(new TagContainsFilterWordPredicate(keyword));
         } else if (argMultimap.getValue(PREFIX_FILTER_BY_OWNER_NAME).isPresent()) {
             return new FilterCommand(new OwnerNameContainsFilterWordPredicate(keyword));

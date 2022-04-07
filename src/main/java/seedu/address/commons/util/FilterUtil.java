@@ -53,7 +53,7 @@ public class FilterUtil {
         if (predicate instanceof DateContainsFilterDatePredicate) {
             return "date";
         } else if (predicate instanceof TagContainsFilterWordPredicate) {
-            return "tags";
+            return "breed";
         } else if (predicate instanceof OwnerNameContainsFilterWordPredicate) {
             return "owner's name";
         } else {
