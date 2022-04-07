@@ -92,14 +92,14 @@ public class InterviewSchedule implements ReadOnlyInterviewSchedule {
 
     /**
      * Deletes past interviews from the list if the scheduled interview time is 31 minutes ago.
-     * @param localDateTime Current date time.
+     * @param currentDateTime Current date time.
      */
-    public List<Interview> deletePastInterviews(LocalDateTime localDateTime) {
-        localDateTime = localDateTime.minusMinutes(30).withSecond(0).withNano(0);
+    public List<Interview> deletePastInterviews(LocalDateTime currentDateTime) {
+        LocalDateTime currentDateTimeMinusThirty = currentDateTime.minusMinutes(30);
 
         List<Interview> list = new ArrayList<>();
         for (Interview i: getInterviewList()) {
-            if (i.getInterviewDateTime().isBefore(localDateTime)) {
+            if (i.getInterviewDateTime().isBefore(currentDateTimeMinusThirty)) {
                 list.add(i);
             }
         }
