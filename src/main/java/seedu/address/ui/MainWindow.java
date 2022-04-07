@@ -303,9 +303,7 @@ public class MainWindow extends UiPart<Stage> {
 
         int displayedIndex = -1;
 
-        if (focusListPanel != null
-                && !focusListPanelPlaceholder.getChildren().isEmpty()
-                && !logic.getFilteredInterviewSchedule().isEmpty()) {
+        if (focusListPanel != null && !focusListPanelPlaceholder.getChildren().isEmpty()) {
             displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
         }
 
