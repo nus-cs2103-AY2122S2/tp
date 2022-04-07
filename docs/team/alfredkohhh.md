@@ -23,6 +23,7 @@ Given below are my contributions to the project.
 * **Project management**:
   * Ensured the team's completion of weekly deliverables (Handled with Wei Jie)
   
+
 * **Enhancements to existing features**:
   * Refactored existing add command to addEmployee command. [#67](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/67)
   * Fix and standardise all AddTask commands, added 'type' field for Task model. [#75](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/75)
@@ -30,6 +31,9 @@ Given below are my contributions to the project.
   * Enhanced storage to handle different fields for the different types of Tasks. [#77](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/77)
     * Justification: With the different types of Task having different fields, it is important for the JsonAdaptedTask to handle and load the different fields of each Task.
   * Added error-prevention for AddDeadlineTaskParser, AddEventTaskCommandParser for the length of arguments. [#94](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/94)
+
+  <div style="page-break-after: always;"></div>
+
   * Enhanced Logic for DeleteEmployee, deleting an Employee will untag all tasks that employee is assigned to, then proceeds to delete. [#141](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/141)
     * Justification: Deleting an employee should also update all associations related to that employee.
   * Supported Storage by adding Defensive Programming logic to counter Json being modified. [#249](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/249)
