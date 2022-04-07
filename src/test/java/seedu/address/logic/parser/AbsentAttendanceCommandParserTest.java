@@ -8,11 +8,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_DATE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbsentAttendanceCommand;
 import seedu.address.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
@@ -59,19 +59,19 @@ public class AbsentAttendanceCommandParserTest {
     public void parse_invalidIndex_failure() {
         // negative index
         assertParseFailure(parser, NEGATIVE_INDEX_STUB + ATTENDANCE_DATE_DESC_AMY,
-            MESSAGE_INVALID_INDEX);
+            Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
 
         // zero index
         assertParseFailure(parser, ZERO_INDEX_STUB + ATTENDANCE_DATE_DESC_AMY,
-            MESSAGE_INVALID_INDEX);
+            Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
 
         // alphabetical index
         assertParseFailure(parser, ALPHABET_INDEX_STUB + ATTENDANCE_DATE_DESC_AMY,
-            MESSAGE_INVALID_INDEX);
+            Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
 
         // symbol index
         assertParseFailure(parser, SYMBOL_INDEX_STUB + ATTENDANCE_DATE_DESC_AMY,
-            MESSAGE_INVALID_INDEX);
+            Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
