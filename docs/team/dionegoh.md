@@ -66,4 +66,3 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): PR reviewed (with non-trivial review comments): [#74](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/74)
-    
