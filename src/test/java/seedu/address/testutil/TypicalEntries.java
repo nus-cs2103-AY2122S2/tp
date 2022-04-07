@@ -17,12 +17,13 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalEntries {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withCompanyName("DBSSS")
             .withEmail("alice@example.com").withPhone("94351253").withTags("friends").build();
@@ -46,6 +47,14 @@ public class TypicalPersons {
     public static final Company JANICE_STREET = new CompanyBuilder().withName("Janice Street").withPhone("89245223")
             .withEmail("janicestreet@example.com").withAddress("21 Marina Bay Sands").build();
 
+    public static final Event INTERVIEW_A = new EventBuilder().withName("DBSSS Interview").withCompanyName("DBSSS")
+            .withDate("2022-05-01").withTime("10:00").withLocation("Zoom").withTags("Technical").build();
+    public static final Event INTERVIEW_B = new EventBuilder().withName("BB Interview").withCompanyName("Big Bank")
+            .withDate("2022-06-05").withTime("12:30").withLocation("16 Race Course Road").build();
+    public static final Event ONLINE_ASSESSMENT = new EventBuilder().withName("Online Assessment")
+            .withCompanyName("Janice Street").withDate("2022-04-30").withTime("18:00").withLocation("Hackerrank")
+            .withTags("Difficult").build();
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withCompanyName("Janice Street")
             .withPhone("8482424").withEmail("stefan@example.com").build();
@@ -61,7 +70,7 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalEntries() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -74,11 +83,18 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        for (Event event : getTypicalEvents()) {
+            ab.addEvent(event);
+        }
         return ab;
     }
 
     public static List<Company> getTypicalCompanies() {
         return new ArrayList<>(Arrays.asList(DBSSS, BIG_BANK, JANICE_STREET));
+    }
+
+    public static List<Event> getTypicalEvents() {
+        return new ArrayList<>(Arrays.asList(INTERVIEW_A, INTERVIEW_B, ONLINE_ASSESSMENT));
     }
 
     public static List<Person> getTypicalPersons() {
