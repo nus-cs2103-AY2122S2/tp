@@ -307,7 +307,7 @@ Examples:
 
 Adds a consultation report of a patient to MedBook.
 
-Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE nt/NOTES`
+Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE [nt/NOTES]`
 
 Examples:
 * `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 dg/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. fe/54.00 nt/Patient is having fever.`
@@ -324,12 +324,13 @@ Examples:
 ### Editing Consultation Information: `edit`
 
 Edits an existing consultation entry in MedBook when a list of consultation entries is being displayed.
-This is with the exception of the NRIC field, which cannot be modified after creation of Consultation.
+This is with the exception of the NRIC field, which cannot be modified after creation of Consultation. 
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
 
 Examples:
-* `view t/consultation i/S1234567L` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
+* `view t/consultation i/S1234567L` followed by `edit 1 dt/2019-08-10 tm/19-00` updates date and time of first consultation entry displayed on the screen.
 
 
 
