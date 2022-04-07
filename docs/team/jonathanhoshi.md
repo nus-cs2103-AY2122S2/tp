@@ -19,29 +19,29 @@ Given below are my contributions to the project.
 
     <img src="../images/Ui.png" width="500px">>
   
-  * _Fix storage system on mac and linux not saving to the correct location_
-    * Details: Mac and Linux data file path does not store together with the jar file. Work together with [arcornior](arcornior.md) as he tested the storage system on mac and linux.
+  * _Fixed storage system on Mac and Linux not saving to the correct location_
+    * Details: Mac and Linux data file path did not store together with the jar file. Worked together with [arcornior](arcornior.md) as he tested the storage system on Mac and Linux.
     * Issues: Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)], Editor Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)]
     * PRs: [[\#167](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/167)], [[\#177](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/177)]
 
-  * _Morph AB3 UI components to fit Trackermon's components_
-    * Details: Refactor all Person classes of UI components to Show instead as Trackermon is used to track shows. 
+  * _Morphed AB3 UI components to fit Trackermon's components_
+    * Details: Refactored all Person classes of UI components to Show instead as Trackermon is used to track shows. 
     * Issues: UI Morph [[\#56](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/56)]
     * PRs: [[\#65](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/65)], [[\#66](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/66)]
 
 * **Project management**:
-  * Managed Trackermon's [releases](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) for v1.2, v1.3.trial, and v1.3.
-  * Maintaining the issue tracker regarding assigning assignees, linking PRs to issues, and created these [issues](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues?q=is%3Aissue+author%3AJonathanHoshi+) on Github.
-  * Manage deadlines and plan team tasks schedules.
+  * Managed Trackermon's v1.2, v1.3.trial, and v1.3 [releases](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
+  * Maintained the issue tracker by assigning assignees, linking PRs to issues, and creating these [issues](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues?q=is%3Aissue+author%3AJonathanHoshi+) on Github.
+  * Managed deadlines and planned team's tasks schedules.
 
 * **Documentation**:
   * User Guide: 
-    * Update basic information of Trackermon at the start of the project. [[\#19](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/19)]
-    * Add initial Table of content and return to top links. [[\#93](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/93)]
-    * Add a section of Parameter conditions to consolidate all commands conditions regarding their parameters. [[\#258](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/258)]
+    * Updated basic information of Trackermon at the start of the project. [[\#19](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/19)]
+    * Added initial Table of Content and return to top links. [[\#93](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/93)]
+    * Added a section of Parameter conditions to consolidate all conditions regarding commands' parameters. [[\#258](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/258)]
   * Developer Guide: [[\#148](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/148)]
-    * Update documentation and UML diagrams for UI.
-    * Format manual testing section.
+    * Updated documentation and UML diagrams for UI.
+    * Formatted the structure of the manual testing section.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [[\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134)], [[\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166)]
