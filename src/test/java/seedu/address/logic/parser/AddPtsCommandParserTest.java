@@ -24,6 +24,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPropertyToSell.PROPERTY_TO_SELL_ONE;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.model.property.Address;
@@ -76,7 +77,7 @@ public class AddPtsCommandParserTest {
                 + PR_DESC_1 + ADDRESS_DESC_1, new AddPropertyToSellCommand(stubIndex, validProperty));
 
         // All inputs present, multiple addresses, last one taken
-        assertParseSuccess(parser, index + HOUSE_TYPE_DESC_1 + LOCATION_DESC_1  + PR_DESC_1 + ADDRESS_DESC_2
+        assertParseSuccess(parser, index + HOUSE_TYPE_DESC_1 + LOCATION_DESC_1 + PR_DESC_1 + ADDRESS_DESC_2
                 + ADDRESS_DESC_1, new AddPropertyToSellCommand(stubIndex, validProperty));
     }
 
@@ -130,13 +131,13 @@ public class AddPtsCommandParserTest {
         assertParseFailure(parser, index + INVALID_PR_DESC_1 + LOCATION_DESC_1 + HOUSE_TYPE_DESC_1
                 + ADDRESS_DESC_1, PriceRange.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, index + INVALID_PR_DESC_2 + LOCATION_DESC_1 + HOUSE_TYPE_DESC_1
-                + ADDRESS_DESC_1,PriceRange.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_1, PriceRange.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, index + INVALID_PR_DESC_3 + LOCATION_DESC_1 + HOUSE_TYPE_DESC_1
-                + ADDRESS_DESC_1,PriceRange.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_1, PriceRange.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, index + INVALID_PR_DESC_4 + LOCATION_DESC_1 + HOUSE_TYPE_DESC_1
-                + ADDRESS_DESC_1,PriceRange.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_1, PriceRange.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, index + INVALID_PR_DESC_5 + LOCATION_DESC_1 + HOUSE_TYPE_DESC_1
-                + ADDRESS_DESC_1,PriceRange.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_1, PriceRange.MESSAGE_CONSTRAINTS);
 
         // valid + empty location
         assertParseFailure(parser, index + HOUSE_TYPE_DESC_1 + LOCATION_DESC_1 + " " + PREFIX_LOCATION

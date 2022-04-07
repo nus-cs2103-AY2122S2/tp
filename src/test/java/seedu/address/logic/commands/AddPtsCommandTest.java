@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPropertyToSell.PROPERTY_TO_SELL_ONE;
 import static seedu.address.testutil.TypicalPropertyToSell.PROPERTY_TO_SELL_TWO;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.BuyerAddressBook;
@@ -102,7 +103,8 @@ public class AddPtsCommandTest {
 
         AddPropertyToSellCommand addPropertyCommandOne = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, propertyOne);
         AddPropertyToSellCommand addPropertyCommandTwo = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, propertyTwo);
-        AddPropertyToSellCommand addPropertyCommandThree = new AddPropertyToSellCommand(INDEX_SECOND_SELLER, propertyTwo);
+        AddPropertyToSellCommand addPropertyCommandThree = new AddPropertyToSellCommand(INDEX_SECOND_SELLER,
+                propertyTwo);
 
         // same object -> returns true
         assertEquals(addPropertyCommandOne, addPropertyCommandOne);

@@ -21,6 +21,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPropertyToBuy.PROPERTY_TO_BUY_ONE;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.model.property.HouseType;
@@ -95,7 +96,7 @@ public class AddPtbCommandParserTest {
         assertParseFailure(parser, index + PREFIX_LOCATION + HOUSE_TYPE_DESC_1 + PR_DESC_1,
                 Location.MESSAGE_CONSTRAINTS);
         // Empty price range
-        assertParseFailure(parser, index + PREFIX_PRICE_RANGE+ HOUSE_TYPE_DESC_1 + LOCATION_DESC_1,
+        assertParseFailure(parser, index + PREFIX_PRICE_RANGE + HOUSE_TYPE_DESC_1 + LOCATION_DESC_1,
                 PriceRange.MESSAGE_CONSTRAINTS);
         // Empty house type
         assertParseFailure(parser, index + PREFIX_HOUSE_TYPE + LOCATION_DESC_1 + PR_DESC_1,
