@@ -2,10 +2,12 @@
 layout: page title: User Guide
 ---
 
-**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration, 
+optimized for use via interacting with the application through easy-to-use commands on a user-centric interface. 
 Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps. 
 
-School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, the education of the students.
+School administrators _(like teachers)_ in charge of managing COVID-19 can use UDT to easily track COVID-19 cases amongst the student population with ease and concentrate on what matters most, 
+the education of the students.
 
 Through this user guide, you will learn how to use UDT effectively and efficiently, to manage COVID-19 cases in your schools.
 Features below are accompanied by instructions, figures and examples to help you understand how to use them.
@@ -26,6 +28,11 @@ A glossary is included at the end to clarify any technical or vague terms used.
   - [Find student by activity](#find-student-by-activity-findactivity): `findactivity`
   - [Edit student’s personal details](#edit-student-details-edit): `edit`
   - [Delete a student](#delete-a-student-delete): `delete`
+  - [Right-Click Help Menu](#right-click-help-menu)
+    - [Undo/Redo](#undoredo)
+    - [Cut/Copy/Paste](#cutcopypaste)
+    - [Delete](#delete)
+    - [Select All](#select-all)
   - [Exit the application](#exit-the-application-exit): `exit`
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
@@ -261,6 +268,10 @@ Deletes the specified person from the application.
 
 </div>
 
+|![delete command](images/user-guide/delete.png)|
+|:--:|
+|*Figure 9 - `delete` Command*|
+
 ### Automation of `Status`
 `Status` denotes the COVID status of an individual, and can take either `Positive`, `Negative` or `Close-contact` states.  
 - UDT will **automatically** label individuals as `Close-contact` from `Negative` if they are in the same class or activity as another person who is labelled `Positive`
@@ -278,10 +289,65 @@ UDT may not automatically update students' `Status` if complex edits are execute
 changes their status from **Positive** to **Negative**. A remedy for this is to re-enter all student entries or use the **import function** that will be released
 in the *next iteration (v1.5)*.
 
+## Right-Click Help Menu
 
-|![delete command](images/user-guide/delete.png)|
+|![RightClick](images/user-guide/rightclick.png)|
 |:--:|
-|*Figure 9 - `delete` Command*|
+|*Figure 10 - Right-Click Help Menu*|
+
+The following few features can be achieved through right-clicking the Command Line.
+Some features have keyboard shortcuts as well, so do read on to find out more.
+
+### Undo/Redo: 
+Undo or redo what you have been typing in the Command Line **BEFORE** it has been executed/entered, 
+allowing you to make any edits as required.
+Refer to **_Figure 10_** above to see the menu.
+
+Using a Mouse:
+- Right-click on the Command Line to open the menu containing the `undo` and `redo` buttons
+- Click on the respective buttons to undo/redo what you have typed
+
+**OR**
+
+Using a Keyboard:
+- `ctrl+z` to undo
+- `ctrl+y` to red
+
+> :information_source: **Note:**  Undo and redo can only be used on commands that have yet to be executed/entered (before hitting enter).
+
+### Cut/Copy/Paste:
+`Cut` any text that has been highlighted.
+
+`Copy` any text that has been highlighted.
+
+`Paste` any text that is currently stored in your clipboard.
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Keyboard Shortcuts
+> - `ctrl+x` to cut
+> - `ctrl+c` to copy
+> - `ctrl+v` to paste
+
+</div>
+
+### Delete:
+Removes any text that has been highlighted.
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Use the `Backspace` key or `del` key on your keyboard to perform the same command
+
+</div>
+
+### Select All:
+Highlights all the text that is currently in the Command Box
+
+<div markdown="block" class="alert alert-primary" role="alert">
+
+> :bulb: **Tips:** Use this to highlight everything so that you can follow up with a `cut`, `copy` or `delete` command.
+
+</div>
 
 ## Clearing the data: `clear`
 Clears and deletes all the data within the application
