@@ -42,8 +42,12 @@ Given below are my contributions to the project.
 
 * **Documentation - User Guide**:
   * Worked on the `add`, `edit` commands.
+  * TODO
 
 * **Documentation - Developer Guide**:
+  * Worked on `Candidate` model, `Add` command.
+  * Re-ordered `Implementation` section.
+  * TODO
 
 * **Team-based tasks**:
   * Setting up the GitHub team repository.
