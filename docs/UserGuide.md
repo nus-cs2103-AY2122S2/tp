@@ -117,6 +117,8 @@ Shows expanded page containing the full details related to an existing friend in
   will update the name of `Charlotte Tan`'s current 2nd upcoming event to `Dinner with Bernice`. Similarly, `deletefriend 1`
   will remove `Charlotte Tan` from Amigos, since `Charlotte Tan` is the only friend currently being viewed on the 
   expanded friend page.
+* Clicking on the `Events` tab directly after entering the `showfriend` command would only show events related to the 
+  friend currently being viewed on the expanded friend page. 
 
 **Examples**:
 * `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
