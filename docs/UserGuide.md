@@ -67,6 +67,8 @@ faster than traditional GUI applications.
 
 * **Scheduled Interviews** : Bottom rightmost panel displays the list of scheduled interviews.
 
+The three bottom panels can be resized based on user preferences, by dragging the shared vertical borders.
+
 Features relating to the display of information within these panels are described below.
 
 </div>
@@ -187,26 +189,26 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]…​ [f/ATTRIBUTE_FIELD]`
 `ATTRIBUTE_FIELD` can take on the following values
 `all`, `avail`, `appstatus`, `course`, `email`, `intstatus`, `name`, `phone`, `seniority`, `studentid`, `remark`
 
-* A candidate's`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`
-* A candidate's `avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THUR` or `FRI`
+* A candidate's`seniority` may match any case variation of `COM1`, `COM2`, `COM3` or `COM4`.
+* A candidate's `avail` may match any case variation of days in the format of `MON`, `TUE`, `WED`, `THU` or `FRI`.
 
 </div>
 
-* The keyword search is case-insensitive. e.g `hans` will match `Hans`
-* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
+* The keyword search is case-insensitive. e.g `hans` will match `Hans`.
+* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`.
 * The search will return a list of all candidates containing any of the specified keyword(s) in the specified attribute field.
 * For `f/all`, the search will find keywords across all attribute fields of the candidate records.
 * Only full keywords will be matched
-  e.g. `k/jane doe f/name` will not match candidates with name `jane koe` or just `jane`
+  e.g. `k/jane doe f/name` will not match candidates with name `jane koe` or just `jane`.
 * Candidates matching at least one full keyword (in the specified attribute field) will be returned i.e. OR search,
-  e.g. `k/Jane k/Doe f/name` will return candidates with name e.g. `Jane Koe`, `John Doe`
+  e.g. `k/Jane k/Doe f/name` will return candidates with name `Jane Koe`, `John Doe`.
 * If multiple `ATTRIBUTE_FIELD`s are provided, only the last field will be used.
 * If no `ATTRIBUTE_FIELD` is provided, the search will be conducted across all fields by default.
 
 Examples:
-* `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`
-* `find k/Computer k/Science f/course` returns candidates with the course field i.e. `computer science` and `computer engineering`
-* `find k/Jane k/Tan f/name` returns candidates with name e.g. `Jane`, `tan` and `John Tan`
+* `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`.
+* `find k/Computer k/science f/course` returns candidates with the course field i.e. `Computer Science` and `Computer Engineering`.
+* `find k/Jane k/Tan f/name` returns candidates with name e.g. `Jane`, `tan` and `John Tan`.
 
 ### Sorting candidates by attribute field: `sort`
 
@@ -216,19 +218,19 @@ Format: `sort s/ATTRIBUTE_FIELD`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the sort format:**<br>
 
 `ATTRIBUTE_FIELD` can take on the following values
 `appstatus`, `course`, `intstatus`, `name`, `seniority`, `studentid`
 
 </div>
 
-* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`
-* The search will return a list of all candidates sorted in ascending order
+* The attribute field is case-insensitive. e.g. `NAME` is equivalent to `name`.
+* The search will return a list of all candidates sorted in ascending order.
   (i.e. A-Z, 0-9) with regard to the specified attribute field.
 
 Examples:
-Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `studentid`).
+Let's reference a default sample list of unique candidates with attribute fields stated as (`name`, `studentid`):
 1. (`Ben`, `A5588565L`)
 2. (`Alice`, `A2344567B`)
 3. (`Charlie`, `A0188565L`)
@@ -252,9 +254,9 @@ Format: `remark INDEX [r/REMARK]`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the remark format:**<br>
 
-`INDEX` must be non-negative
+`INDEX` must be valid within the range of candidates in the system and non-negative.
 
 </div>
 
@@ -346,20 +348,20 @@ Format: `view TIME_PERIOD`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit format:**<br>
+**:information_source: Notes about the view format:**<br>
 
-`TIME_PERIOD` can take on the following values `all`, `today`, `week`, `month`
+`TIME_PERIOD` can take on the following values `all`, `today`, `week`, `month`.
 
 </div>
 
-* The attribute field is case-insensitive. e.g. `ALL` is equivalent to `all`
-* Scheduled interviews are automatically sorted from earliest to latest
+* The attribute field is case-insensitive. e.g. `ALL` is equivalent to `all`.
+* Scheduled interviews are automatically sorted from earliest to latest.
 
 Examples:
-* `view all` returns all scheduled interviews still in system whether in the past or upcoming
-* `view today` returns all scheduled interviews on the same date as the current time
-* `view week` returns all upcoming scheduled interviews within the next 7 days
-* `view month` returns all upcoming scheduled interviews within the next month
+* `view all` returns all scheduled interviews still in system whether in the past or upcoming.
+* `view today` returns all scheduled interviews on the same date as the current time.
+* `view week` returns all upcoming scheduled interviews within the next 7 days.
+* `view month` returns all upcoming scheduled interviews within the next month period.
 
 ### Clearing interview schedule `schedule clear`
 
