@@ -28,31 +28,31 @@ class PriceRangeMatchBuyerPredicateTest {
 
     private PropertyToSell ptsStub1 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(20, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(20, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub2 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 200)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 200)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub3 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(50, 50)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(50, 50)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub4 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(18, 20)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(18, 20)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub5 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(100, 100)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(100, 100)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub6 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(0, 19)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(0, 19)).withAddress("ANY ADDRESS").build();
 
     private PropertyToSell ptsStub7 = new PropertyToSellBuilder()
         .withHouse(new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Kranji").build())
-        .withPriceRange(new PriceRange(101, 200)).withAddress(new Address("ANY ADDRESS")).build();
+        .withPriceRange(new PriceRange(101, 200)).withAddress("ANY ADDRESS").build();
 
     private Buyer buyer1 = new BuyerBuilder().withProperty(ptbStub1).build();
 
