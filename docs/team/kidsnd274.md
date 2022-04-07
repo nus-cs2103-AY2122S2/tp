@@ -38,10 +38,10 @@ to see the code I've contributed.
    - What it does: Allows users to view previously entered commands using the arrow keys
    - <kbd>↑</kbd> key to go back in history and
    - <kbd>↓</kbd> key to go forward in history
-   - Justification: Since the program is simulating a CLI, having access to previously entered commands is a basic 
-   feature in a terminal program.
+   - Justification: Since CLIs have command history as a basic feature, adding it to TeachWhat not only improves user
+   experience but is also fitting as we are trying to target CLI users.
    - Highlights: Retyping an entire command can be troublesome, especially when executing something similar. This
-   enhancement would allow someone to easily refer to their previously entered command.
+   enhancement would allow someone to easily refer to and edit their previously entered command.
    - Can store multiple previous commands.
 
 ### Enhancements to existing features
