@@ -181,14 +181,15 @@ This section describes some noteworthy details on how certain features are imple
 
 The addition of the clip feature is facilitated by the `AddToClipboardCommand`, `AddToClipboardCommandParser`, and `NameExistsPredicate` classes.
 
-`AddToClipboardCommandParser` parses the input to obtain the name of the contact that the user wishes to clip. It then creates a `NameExistsPredicate`, which it passes to a `AddToClipboardCommand`. When `Commmand#execute` is called, `AddToClipboardCommand` uses the `NameExistsPredicate` to filter out exact matches to the given name via the `Model#getFilteredPersonList()` method.
+`AddToClipboardCommandParser` parses the input to obtain the name/index of the client that the user wishes to clip. It then creates a `NameExistsPredicate`, which it passes to a `AddToClipboardCommand`. When `Commmand#execute` is called, `AddToClipboardCommand` uses the `NameExistsPredicate` to filter out exact matches to the given name via the `Model#getFilteredPersonList()` method.
 
 ![Clip Command Sequence Diagram](images/ClipCommandSeqMain.PNG)
+
+If a name is specified:
 ![Clip Command Sequence Diagram](images/ClipCommandSeqSD.PNG)
 
-**Aspect: TBD:**
-
-Currently, the user must specify the exact name of the contact they wish to clip. We want to allow the user to specify an index as an alternative.
+If an index is specified:
+![Clip Command Sequence Diagram](images/ClipCommandSeqSD2.PNG)
 
 ### Adding Priority Level feature
 
@@ -213,8 +214,8 @@ Currently, there are 4 priority levels that a tag can have, as provided by the `
 
 _{more aspects and alternatives to be added}_
 #### Listing by priority
-The PriorityList() command. facilitated by `PriorityListCommand` and `TagPriorityComparator`, allows users to sort and display their contact list by the priority level of their contact's tags. 
-The priority level of a person with multiple tags will be treated as the highest priority out of all his/her tags.
+The PriorityList() command. facilitated by `PriorityListCommand` and `TagPriorityComparator`, allows users to sort and display their client list by the priority level of their contact's tags. 
+A client with multiple tags will have the priority level of the highest priority out of all of his/her tags.
 
 **Aspect: How prioList executes:**
 ![PrioListSeq](images/PrioListCommandSeq.PNG)
