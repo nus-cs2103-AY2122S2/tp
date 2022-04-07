@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalSellers.ALICE;
 import static seedu.address.testutil.TypicalSellers.BOB;
-import static seedu.address.testutil.TypicalSellers.YUQI;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,18 +33,18 @@ public class SellerTest {
     @Test
     public void isSameSeller() {
         // same object -> returns true
-        assertTrue(YUQI.isSameclient(YUQI));
+        assertTrue(ALICE.isSameclient(ALICE));
 
         // null -> returns false
-        assertFalse(YUQI.isSameclient(null));
+        assertFalse(ALICE.isSameclient(null));
 
         // same name, all other attributes different -> returns true
-        Seller editedYuqi = new SellerBuilder(YUQI).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(YUQI.isSameclient(editedYuqi));
+        Seller editedYuqi = new SellerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSameclient(editedYuqi));
 
         // different name, all other attributes same -> returns false
-        editedYuqi = new SellerBuilder(YUQI).withName(VALID_NAME_BOB).build();
-        assertFalse(YUQI.isSameclient(editedYuqi));
+        editedYuqi = new SellerBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSameclient(editedYuqi));
 
         // name differs in case, all other attributes same -> returns false
         Seller editedBob = new SellerBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
@@ -59,32 +59,32 @@ public class SellerTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Seller yuqiCopy = new SellerBuilder(YUQI).build();
-        assertEquals(YUQI, yuqiCopy);
+        Seller yuqiCopy = new SellerBuilder(ALICE).build();
+        assertEquals(ALICE, yuqiCopy);
 
         // same object -> returns true
-        assertEquals(YUQI, YUQI);
+        assertEquals(ALICE, ALICE);
 
         // null -> returns false
-        assertNotEquals(null, YUQI);
+        assertNotEquals(null, ALICE);
 
         // different type -> returns false
-        assertNotEquals(5, YUQI);
+        assertNotEquals(5, ALICE);
 
         // different client -> returns false
-        assertNotEquals(YUQI, BOB);
+        assertNotEquals(ALICE, BOB);
 
         // different name -> returns false
-        Seller editedYuqi = new SellerBuilder(YUQI).withName(VALID_NAME_BOB).build();
-        assertNotEquals(YUQI, editedYuqi);
+        Seller editedYuqi = new SellerBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertNotEquals(ALICE, editedYuqi);
 
         // different phone -> returns false
-        editedYuqi = new SellerBuilder(YUQI).withPhone(VALID_PHONE_BOB).build();
-        assertNotEquals(YUQI, editedYuqi);
+        editedYuqi = new SellerBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertNotEquals(ALICE, editedYuqi);
 
         // different tags -> returns false
-        editedYuqi = new SellerBuilder(YUQI).withTags(VALID_TAG_HUSBAND).build();
-        assertNotEquals(YUQI, editedYuqi);
+        editedYuqi = new SellerBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertNotEquals(ALICE, editedYuqi);
 
 
         PriceRange pr1;
