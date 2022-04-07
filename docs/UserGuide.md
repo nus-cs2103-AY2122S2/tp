@@ -183,7 +183,6 @@ Marks a specific undone task as done for a particular student.
 **Example**:
 * `mark i/AXXXXXXXR idx/1`
     * Marks the first task in the task list for the student with student ID AXXXXXXXR as done.
-
 <br>
 
 ### Marking a done task as undone for a student: `unmark`
@@ -321,7 +320,6 @@ An error message will be displayed if:
     * Deletes task at index 3 from the student's list of assigned task, provided that a task exists at that index.
 * `deleteTask m/cs2030 tn/Assignment 1`
     * Deletes Assignment 1 that was previously assigned to any of the students taking CS2030 module.
-
 <br>
 
 ### Viewing previously executed commands: `history`

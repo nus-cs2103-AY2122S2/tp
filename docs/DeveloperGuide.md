@@ -204,7 +204,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    **Note:** A NullException will be thrown if the supplied string argument is null.
-    </div> 
+   </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked,
@@ -217,12 +217,11 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
 
-
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
-   the extra parsing process in steps 5 to 7 will be skipped. 
+   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap),
+   the extra parsing process in steps 5 to 7 will be skipped.
    Instead, the respective object will be created and initialized to `null`.
-    </div> 
+    </div>
 
 9. The `AddCommandParser` will create a new `Person`.
 10. A new `AddCommand` will be created (using the `Person` in Step 9) and returned to the `LogicManager`.
@@ -230,9 +229,9 @@ object will be created, and is subsequently executed by the `LogicManager`.
 12. In the `AddCommand`, the `model#hasPerson(Person person)` will be invoked. If the `Person` already exist
     in TAPA, a `CommandException` will be thrown.
 
-    <div markdown="span" class="alert alert-info">:information_source: 
+    <div markdown="span" class="alert alert-info">:information_source:
     **Note:** In TAPA, two Person are equal only if they have the same studentId.
-    </div> 
+    </div>
 
 13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
 14. Lastly, the `AddCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
@@ -262,16 +261,15 @@ object will be created, and is subsequently executed by the `LogicManager`.
 4. In the `DeleteCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-    <div markdown="span" class="alert alert-info">:information_source: 
+    <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
-    </div> 
-
+    </div>
 5. The `DeleteCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId)`
 
-   <div markdown="span" class="alert alert-info">:information_source: 
+   <div markdown="span" class="alert alert-info">:information_source:
    **Note:** A NullException will be thrown if the supplied string argument is null.
-    </div> 
+    </div>
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked,
@@ -279,11 +277,11 @@ object will be created, and is subsequently executed by the `LogicManager`.
    If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
 
-   <div markdown="span" class="alert alert-info">:information_source: 
+   <div markdown="span" class="alert alert-info">:information_source:
    **Note:** The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
-   Depending on the type of input field used (studentId or indices), Steps 5 to 7 will 
+   Depending on the type of input field used (studentId or indices), Steps 5 to 7 will
    be executed using the parse methods in `ParserUtil` that are specific to the field. In the case of indices, an `Index` array is created in place of the `StudentId`.
-    </div> 
+    </div>
 
 ![ParserUtilClassDiagram](images/ParserUtilClassDiagram.png)
 
@@ -306,7 +304,7 @@ The following sequence diagram shows how the delete operation works:
 #### Description
 
 The `deleteModule` command allows users to delete all students of the inputted `ModuleCode` from TAPA.
-During the execution of the `deleteModule` command, the user's input is being parsed in `AddressBookParser`. 
+During the execution of the `deleteModule` command, the user's input is being parsed in `AddressBookParser`.
 After which, a new `DeleteModuleCommand` object will be created, and is subsequently executed by the `LogicManager`.
 
 #### Implementation
@@ -319,16 +317,16 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
 4. In the `DeleteModuleCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-    <div markdown="span" class="alert alert-info">:information_source: 
+    <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A ParseException will be thrown if the prefix of the compulsory field, `ModuleCode` is missing.
-    </div> 
+    </div>
 
 5. The `DeleteModuleCommandParser` will pass the moduleCode input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseModuleCode(String moduleCode)`
 
-   <div markdown="span" class="alert alert-info">:information_source: 
+   <div markdown="span" class="alert alert-info">:information_source:
    **Note:** A NullException will be thrown if the supplied string argument is null.
-    </div> 
+    </div>
 
 6. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
 7. `ModuleCode#isValidModuleCode(String moduleCode)` will then be invoked,
@@ -371,17 +369,17 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
 
-   <div markdown="span" class="alert alert-info">:information_source: 
+   <div markdown="span" class="alert alert-info">:information_source:
     **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
-   </div>
+   </div> 
 
 5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId).`
 
-   <div markdown="span" class="alert alert-info">:information_source: 
+   <div markdown="span" class="alert alert-info">:information_source:
    **Note:** A NullException will be thrown if the supplied string argument is null.
-   </div>
-   
+   </div> 
+
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked,
    which checks if the trimmed argument is valid (according to the Regex supplied).
@@ -391,7 +389,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseTask(String task).`
 
-   <div markdown="span" class="alert alert-info">:information_source: 
+   <div markdown="span" class="alert alert-info">:information_source:
    **Note:** A NullException will be thrown if the supplied string argument is null.
    </div>
 
@@ -403,11 +401,11 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 11. A new `AssignCommand` will be created (using the `StudentId` object and `Task` object created in Step 7 and 10) and returned to the `LogicManager`.
 12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
 13. `model#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked, which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method
-    and `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. 
+    and `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method.
 14. `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called which will iterate through each `Person` object and check for matching `studentId`.
-    If no student with a matching `studentId` is found, then `PersonNotFoundException()` exception will be thrown. 
+    If no student with a matching `studentId` is found, then `PersonNotFoundException()` exception will be thrown.
 15. If a `Student` object with matching `studentId` is found the method uses `Person#isTaskAlreadyPresent(Task task)` method to check if the `task` is assigned.
-    If it is already assigned a `DuplicateTaskException()` exception is thrown. 
+    If it is already assigned a `DuplicateTaskException()` exception is thrown.
     If no similar `task` is found, the following step will take place.
 16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
 17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
