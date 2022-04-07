@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters a FindCommand;
+:FindCommandParser parses the inputs provided by user;
+if () then ([Inputs are valid])
+    :Inputs are grouped into Set<FriendName>, \nSet<Tag>, Set<LogName>;
+    :FindCommmandParser generates a FriendFilterPredicate;
+    :FindCommandParser returns a FindCommand;
+    while () is ([else])
+
+     if () then ([Substring of friend's \nname OR tags OR log \ntitles matches user input])
+     :Friend is shown on the filtered list;
+
+     else ([else])
+     :Friend is not shown on the filtered list;
+
+     endif
+
+     endwhile ([All friends in Amigos \nhave been processed])
+
+else ([Inputs are invalid])
+    :Show parse error message;
+endif
+stop
+
+@enduml

@@ -154,17 +154,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 1. Friends Feature
+### 1. Friends Feature 
 
 - Add friend
-- Delete friend
-- 
+- Find friend
+- Show friend
+
 
 #### 1.1 Add friend
 
 ##### Implementation
 
-The implementation of adding a friend into Amigos is facilitated by the 'AddCommand', 'AddCommandParser' in the `Logic` component,
+The implementation of adding a friend into Amigos is facilitated by the `AddCommand`, `AddCommandParser` in the `Logic` component,
 `UniquePersonList` and `Person` classes in the `Model` component, and `JsonAdaptedPerson` in the `Storage` component.
 
 A friend is a `Person` containing attributes - `FriendName`, `Phone`, `Address`, `Email`, `Description`, `Set<Tag>`
@@ -204,7 +205,10 @@ about certain particulars (e.g `Address`/ `Email`) of a friend.
 * Alternative implementation
   - An alternative way is to simply pass `null` directly into the `Person` attributes. For example, if an address is not given,
     then simply make `p.address` to be `null`. 
-  - While this may seem more convenient, it is error-prone because we would be passing null values around which
+  - Pros:
+    - More convenient and less hassle required to wrap `null` in the value. 
+  - Cons:
+    - It is error-prone because we would be passing null values around which
     makes the occurrence of exceptions such as `NullPointerException` highly likely.
  
 **Aspect**: How to check that a `Person` already exists in Amigos
@@ -213,7 +217,7 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
 * Current implementation
   - We check whether a `Person` is already in Amigos by `Person::isSamePerson` which makes use of `FriendName::equals`.
     Furthermore, we made `FriendName::equals` case-insensitive, thus disallowing users from adding a person with the same 
-    name but in different capitalisation. 
+    name but in different capitalisation.
 
 * Alternative implementations 
   - An alternative way is to define equality of 2 `Person` objects in a stricter way - to make sure that all the attributes
@@ -221,12 +225,108 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
     checks must be done. 
   - Another alternative way to define equality of 2 `Person` objects would be by using case-sensitive `FriendName`, but
     we decided that our current implementation makes more logical sense. 
+  
 
-    
-
-#### 1.2 Delete friend
+#### 1.2 Find friend
 
 ##### Implementation
+
+The implementation of searching for friends in Amigos is facilitated by the `FindCommand`, `FindCommandParser` in the `Logic`
+component and `FriendFilterPredicate` class in the `Model` component.
+
+Given below is an example usage scenario and how the `Logic` and `Model` components behave at every step. 
+
+1. User keys in a valid `FindCommand` `e.g findfriend n/Alex t/Friend ttl/Dinner` into the command box of the GUI. 
+2. `AddressBookParser` calls `FindCommandParser::parse` and parses the input.
+
+   - `FindCommandParser::parse` converts the arguments entered by the user into a `FriendFilterPredicate` by 
+      grouping the user inputs into `Set<FriendName>`, `Set<Tag>` and `Set<LogName>` based on the input prefixes. Next, 
+      a `FindCommand` is created with the new `FriendFilterPredicate` passed into it.
+   
+   - `FriendFilterPredicate::test(Person person)` performs three checks and returns `true` if any of the checks are met:
+      - For each name keyword entered by the user, whether the person's name contains the keyword.
+      - For each tag keyword entered by the user, whether any of the person's tags contains the keyword.
+      - For each log title keyword entered by the user, whether any of the person's log title contains the keyword.
+   
+      - When `FindCommand::execute` is called, the `FilteredList<Person>` in `ModelManager` will be updated to only contain
+        friends who have passed the predicate test.
+      
+An activity diagram showing the implementation of the feature:  
+![FindFriendActivityDiagram](images/FindFriendActivityDiagram.png)
+
+##### Design Considerations
+
+**Aspect**: Whether to store the user inputs as `String` or attribute.
+
+* Current implementation
+    - The user inputs are stored as attributes.
+    - Inputs beginning with `n/`, `t/`, `ttl` are converted to `FriendName`, `Tag`, `LogName` respectively.
+    - Pros:
+       - Each of the `FriendName`, `Tag` , `LogName` inputs would be subject to their respective regex constraints.
+       - Any invalid input will throw an error. For example, `findfriend n/!` would throw an error because a `FriendName`
+         should only contain alphanumeric characters and spaces.
+    - Cons:
+       - Overhead required to wrap the user input in their respective objects, and then extracting out their values again
+         for the check comparison.
+      
+* Alternative implementation
+    - An alternative way would be to store the inputs as `String` without converting them to their respective attributes.
+    - Pros:
+      - This reduces the amount of code needed, and possible errors due to conversion.
+    - Cons:
+      - The user would be allowed to search for invalid keywords.
+      
+
+#### 1.3 Show friend
+
+##### Implementation
+
+The implementation of showing a specific friend in Amigos is facilitated by `ShowFriendCommand`, `ShowFriendCommandParser`, and `CommandResult`
+in the `Logic`component, as well as `ExpandedPersonCard`, `ExpandedPersonListPanel`, and `MainWindow` in the `UI` component.
+
+Given below is how the different classes work together in an example usage scenario.
+
+1. User keys in a valid `ShowFriendCommand` `e.g showfriend n/Alex Yeoh` into the command box of the GUI.
+2. `AddressBookParser` calls `ShowFriendCommandParser::parse` and parses the input, creating a `ShowFriendCommand`.
+    - `ShowFriendCommand` extends from `ByIndexByNameCommand` and accepts either an `Index` or a `FriendName` in its constructors
+       to identify the particular friend.
+3. `ShowFriendCommand` filters the friend list on the GUI to be of length 1, only showing the friend requested by the user.
+    It also filters the event list on the GUI to only show upcoming events for the particular friend.
+    - A `CommandResult` is returned, with a boolean field `showDetails` in its constructor instantiated to be `True`.
+
+4. `MainWindow` switches the view on the GUI to the `ExpandedPersonListPanel` in the Friends tab.
+    This is done by calling `StackPane::requestFocus()` and `StackPane::toFront()`, bringing the `ExpandedPersonListPanel`
+    to the front.
+    As the list panel has already been filtered in `ShowFriendCommand::execute`, only a single `ExpandedPersonCard` 
+    would be shown.
+    The following are details displayed on the `ExpandedPersonCard`:
+    - `FriendName`, `Address`, `Email`, `Phone` 
+    - `Description`
+    - Upcoming `Event`s related to the friend, wrapped in a `StackPane`
+    - All `Log`s of the friend
+
+##### Design Considerations
+
+**Aspect**: Switching view from `PersonCard` to `ExpandedPersonCard`
+
+* Current implementation
+    - Both `PersonListPanel` and `ExpandedPersonListPanel` are superimposed on each other and
+      `StackPane::toFront()` is called to bring the selected list to the front based on the command entered by 
+      the user.
+    - Pros: 
+       - User will be able to see all details pertaining to the particular friend in full view.
+    - Cons: 
+       - Overhead required as both lists are running simultaneously in the foreground/background.
+       - May not be extendable to larger features with a large number of lists.
+
+* Alternative implementation
+    - Have a SplitPane, with the left pane showing the `PersonListPanel` and the right pane showing the
+      `ExpandedPersonListPanel`.
+    - Pros:
+       - Do not have to keep calling `StackPane::toFront()` each time a friend-related command is called.
+    - Cons:
+       - Have to fill the `ExpandedPersonListPanel` with something to display upon start up.
+       - There will be duplicate information on both the left and right pane when `ShowFriend` is called.
 
 ### 2. Events Feature
 
