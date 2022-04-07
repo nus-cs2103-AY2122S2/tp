@@ -251,6 +251,7 @@ Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` | `sp:START_PRICE` `
 * For the name, category and description fields, the value provided can be a substring of the exact product
 * For searching a range of prices, `START_PRICE` and `END_PRICE` should be used instead
 * If the `START_PRICE` is provided, the `END_PRICE` must also be provided, vice versa
+* At least one tag must be specified
 
 Examples:
 
@@ -496,7 +497,7 @@ If your changes to the data file makes its format invalid, iBook will discard al
 | **Expired**      | `expired`                                                                                                                                                   |
 | **Out of Stock** | `out-of-stock`                                                                                                                                              |
 | **Update All**   | `update-all [TAG:NEW_VALUE ...]` <br> e.g. `update-all p:3.00 d:Very tasty`                                                                                 |
-| **Delete All**   | `delete-all`                                                                                                                                                 |
+| **Delete All**   | `delete-all`                                                                                                                                                |
 
 ### 7.2 Item Commands
 
