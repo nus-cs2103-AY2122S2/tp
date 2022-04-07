@@ -13,6 +13,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
+    public static final String[] UNIQUE_ATTRIBUTE_TYPES = {"Phone", "Email", "Matriculation Number"};
+
     // Identity fields
     private final Name name;
     private final Block block;

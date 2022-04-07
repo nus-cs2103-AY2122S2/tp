@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -169,5 +170,47 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void getNonUniqueAttributeTypesMessage() {
+        String nonUniquePhoneMessage = "Phone";
+        String nonUniqueEmailMessage = "Email";
+        String nonUniqueMatriculationNumberMessage = "Matriculation Number";
+        String nonUniquePhoneAndEmailMessage = "Phone and Email";
+        String nonUniquePhoneAndMatriculationNumberMessage = "Phone and Matriculation Number";
+        String nonUniqueEmailAndMatriculationNumberMessage = "Email and Matriculation Number";
+        String nonUniqueAllMessage = "Phone, Email and Matriculation Number";
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        ArrayList<String> arrayList = new ArrayList<>();
+        // case 1: non-unique phone message
+        arrayList.add("Phone");
+        assertEquals(nonUniquePhoneMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+        arrayList.clear();
+        arrayList.add("Email");
+        assertEquals(nonUniqueEmailMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+        arrayList.clear();
+        arrayList.add("Matriculation Number");
+        assertEquals(nonUniqueMatriculationNumberMessage,
+                uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+        arrayList.clear();
+        arrayList.add("Phone");
+        arrayList.add("Email");
+        assertEquals(nonUniquePhoneAndEmailMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+        arrayList.clear();
+        arrayList.add("Phone");
+        arrayList.add("Matriculation Number");
+        assertEquals(nonUniquePhoneAndMatriculationNumberMessage,
+                uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+        arrayList.clear();
+        arrayList.add("Email");
+        arrayList.add("Matriculation Number");
+        assertEquals(nonUniqueEmailAndMatriculationNumberMessage,
+                uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
+        arrayList.clear();
+        arrayList.add("Phone");
+        arrayList.add("Email");
+        arrayList.add("Matriculation Number");
+        assertEquals(nonUniqueAllMessage, uniquePersonList.getNonUniqueAttributeTypesMessage(arrayList));
     }
 }
