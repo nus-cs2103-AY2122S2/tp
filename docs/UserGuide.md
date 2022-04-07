@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-MyGM is a **desktop app for high school basketball team trainers to manage players’ contacts and data, optimized for use
+MyGM is a **desktop app for high school basketball team trainers to manage players’ data and schedules, optimized for use
 via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, MyGM can get your contact management tasks done faster than traditional GUI apps.
 
@@ -47,19 +47,18 @@ Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Sched
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**<br>
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+  e.g. in `add L/ n/LINEUP_NAME`, `LINEUP_NAME` is a parameter which can be used as `add L/ n/allstars`.
 * Items in square brackets are optional.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
-* Commands are case sensitive. `Add` is considered as invalid commands, the correct command should be in lower case.
-* Parameters are case sensitive. `John Doe` and `joHN dOE` are considered as different person.
+* Commands are case-sensitive. `Add` is considered as invalid commands, the correct command should be `add` which is in lower case.
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
-* If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
+* If a parameter is expected only once in the command, but you have specified it multiple times, only the last occurrence of the parameter will be taken.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as help.
@@ -82,6 +81,7 @@ Adds a player/ lineup/ schedule to MyGM.
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
+* `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
 * The first character of every word in `NAME` should be capitalized. For example:`John Doe`
 
 Examples:
@@ -93,6 +93,7 @@ and email of johnd@example.com to the player list.`
 **To add a lineup:**<br>
 Format: `add L/ n/LINEUP_NAME`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
+* `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
@@ -110,7 +111,6 @@ Examples:
 * `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
 
 ![AddSchedule_SS](images/AddSchedule_SS.png)
-
 
 ### deleting a player/ lineup/ schedule :  `delete`
 deletes a player/ lineup/ schedule from MyGM
@@ -273,6 +273,16 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: Notes about `t/TAG` in the `edit` Command.
+
+* When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
+* You can remove all the tags of the specified player by typing `t/` without specifying any tags after it.<br>
+e.g `edit P/Anthony Glass t/`
+
+</div>
 
 **To edit a lineup:**
 
