@@ -135,8 +135,6 @@ Examples:
 * `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. All tasks that are assigned to the 1st employee will be updated to reflect the new changes of the employee.
 * `editEmployee 2 n/Betsy Crower` edits the name of the 2nd employee to be Betsy Crower. All tasks that are assigned to the 2nd employee will be updated to reflect the new changes of the employee.
 
-<div style="page-break-after: always;"></div>
-
 ### Deleting an Employee : `deleteEmployee`
 
 Deletes the specified employee from ManageEZPZ.
@@ -152,6 +150,8 @@ Examples:
 * `deleteEmployee 2` deletes the 2nd employee in the displayed employee list. All tasks that are assigned to the 2nd employee will be updated to remove the employee from the respective tasks.
 * `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ. All tasks that are assigned to the 2nd employee will be updated to remove the employee from the respective tasks.
 * `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list. All tasks that are assigned to the 1st employee will be updated to remove the employee from the respective tasks.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Task : `addTodo`, `addEvent`, `addDeadline`
 
@@ -267,6 +267,7 @@ Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 and time field to be edited. 
 * Editing Tasks with the same Description, Date, Time will not change the physical state of the Task.
 
+<div style="page-break-after: always;"></div>
 
 Examples: <br/>
 
@@ -361,6 +362,8 @@ Example: `tagTask 1 n/Alex Yeoh`
 * `listTask` followed by `tagTask 1 n/Alex Yeoh` sets the displayed task list to show all tasks in ManageEZPZ and assigns the 1st task in ManageEZPZ to the employee with the name Alex Yeoh.
 * `findTask desc/slides` followed by `tagTask 1 n/Alex Yeoh` sets the displayed task list with the results from the findTask command and assigns the 1st task in the displayed task list to the employee with the name Alex Yeoh.
 
+<div style="page-break-after: always;"></div>
+
 ### Untagging a Task from an Employee : `untagTask`
 
 Deallocates the specified task from an employee.
@@ -376,6 +379,8 @@ Example:
 * `untagTask 1 n/Alex Yeoh` deallocates the 1st task in the displayed task list from the employee with the name Alex Yeoh.
 * `listTask` followed by `untagTask 1 n/Alex Yeoh` sets the displayed task list to show all tasks in ManageEZPZ and deallocates the 1st task in ManageEZPZ from the employee with the name Alex Yeoh.
 * `findTask desc/slides` followed by `untagTask 1 n/Alex Yeoh` sets the displayed task list with the results from the findTask command and deallocates the 1st task in the displayed task list from the employee with the name Alex Yeoh.
+
+<div style="page-break-after: always;"></div>
 
 ### Tagging a Priority to a Task : `tagPriority`
 
@@ -425,6 +430,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -433,6 +440,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManageEZPZ home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -445,6 +454,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | **Find Employee**   | `findEmployee OPTIONS` <br> e.g. `findEmployee n/Alex Yeoh`                                                      |
 | **Edit Employee**   | `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`        |
 | **Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`                                                             |
+
+<div style="page-break-after: always;"></div>
 
 ### Task Related Commands
 
