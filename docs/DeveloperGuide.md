@@ -689,6 +689,8 @@ After which, a new `SortCommand` object will be created, and is subsequently exe
 
 ![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
 
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -767,11 +769,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+*{More features to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -789,17 +787,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: Teaching Assistants who
+**Target user profile** <br>
+Teaching Assistants who:
+* Need to manage a significant number of students (especially across multiple modules)
+* Prefer desktop apps over other platforms
+* Can type fast
+* Prefer typing to mouse interactions
+* Are reasonably comfortable using CLI apps
 
-* has a need to manage a significant number of students (especially across multiple modules)
-* prefers desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**:  better manage the student’s contact and progress,
-especially for those who are teaching multiple classes/modules at the same time.
-It is optimised for use on CLI.
+**Value proposition** <br>
+TAPA will allow TAs to better manage their student’s contact and progress,
+especially for TAs who are teaching multiple classes/modules at the same time.
+It is optimised for use on CLI, and allows for more efficient student detail management for TAs who can type fast.
 
 
 
@@ -850,7 +849,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a student**
+####**Use case UC01 - Add a student**
 
 **MSS**
 
@@ -885,7 +884,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-**Use case: UC02 - List all students**
+####**Use case UC02 - List all students**
 
 **MSS**
 
@@ -900,7 +899,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC03 - Delete a student**
+####**Use case UC03 - Delete a student**
 
 **MSS**
 
@@ -929,7 +928,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC04 - Edit a student**
+####**Use case UC04 - Edit a student**
 
 **MSS**
 
@@ -979,9 +978,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Module**: A specific class that a student is taking
-* **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
+* **Mainstream OS**: Most widely used operating systems including Windows, Linux, Unix, OS-X.
+* **Module**: A specific class that a student is taking.
 
 --------------------------------------------------------------------------------------------------------------------
 
