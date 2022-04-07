@@ -19,6 +19,13 @@ public class DetailHelpCommand extends HelpCommand {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DetailHelpCommand // instanceof handles nulls
+                && helpArgument.equals(((DetailHelpCommand) other).helpArgument)); // state check
+    }
+
+    @Override
     public DataType getCommandDataType() {
         return null;
     }
