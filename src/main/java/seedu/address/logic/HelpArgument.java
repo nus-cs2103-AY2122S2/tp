@@ -210,7 +210,7 @@ public class HelpArgument {
             "Well what do you expect? New version of help? Here you are, welcome to our new help."
                     + " Now please type 'help' to get the real help.";
 
-    private static final HashMap<String, String> HELP_ARGUMENT_WITH_DESCRIPTION = loadHelpArgument();
+    public static final HashMap<String, String> HELP_ARGUMENT_WITH_DESCRIPTION = loadHelpArgument();
 
     private final String argument;
 
@@ -254,10 +254,5 @@ public class HelpArgument {
         return other == this // short circuit if same object
                 || (other instanceof HelpArgument // instanceof handles nulls
                 && argument.equals(((HelpArgument) other).argument)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return argument.hashCode();
     }
 }
