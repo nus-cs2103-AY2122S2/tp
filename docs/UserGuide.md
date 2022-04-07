@@ -82,11 +82,6 @@ From the assessment list, click the "See Attempts" button to open a popup window
 
 ![Ui](images/Ui_See_Attempts.jpg)
 
-### Managing Modules
-
-#### Add a module: `add module`
-
-Start using TAssist by adding modules you're teaching.
 ### Command Parameters
 
 <table>
@@ -222,11 +217,12 @@ Start using TAssist by adding modules you're teaching.
 
 
 ## Features
-### Adding entries
 
-#### Adding a module: `add module`
+### Managing Modules
 
-Adds a module to TAssist.
+#### Add a module: `add module`
+
+Start using TAssist by adding modules you're teaching.
 
 Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 
@@ -282,6 +278,13 @@ Examples:
 * `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
 
 
+#### List all assessments: `list assessment`
+
+Show a list of all assessments.
+
+Format: `list assessment`
+
+
 #### Delete an assessment: `delete assessment`
 
 Delete any assessment from TAssist by specifying its index.
@@ -295,13 +298,6 @@ Format: `delete assessment INDEX`
 
 Examples:
 * `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
-
-
-#### Listing all assessments: `list assessment`
-
-Show a list of all assessments.
-
-Format: `list assessment`
 
 
 ##### Filter assessments
@@ -431,7 +427,7 @@ Examples:
 * `list module` followed by `delete module 2` deletes the 2nd module in the whole module list and its associated class group(s) and assessment(s) in TAssist.
 
 
-#### Enrolling student: `enrol`
+#### Enrol a student: `enrol`
 
 Once you've created some students, enrol them into class groups. You can enrol the same student into multiple class groups. 
 
@@ -449,7 +445,7 @@ Examples:
 * `enrol c/1 s/e0123456,e0234567` enrols the students with student IDs `E0123456` and `E0234567` to the 1st class group shown when `list class` is run.
 
 
-#### Disenrolling students: `disenrol`
+#### Disenrol a student: `disenrol`
 
 Disenrol 1 or more students from a class group.
 
