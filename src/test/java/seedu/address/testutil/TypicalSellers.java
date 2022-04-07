@@ -28,7 +28,7 @@ public class TypicalSellers {
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
             .withTags("friends").withProperty(
                     new PropertyToSellBuilder().withHouse(
-                            new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Bishan").build())
+                            new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("bishan").build())
                                     .withAddress("Bishan Street 5")
                                             .withPriceRange(new PriceRange(10, 20)).build()).build();
 
@@ -36,35 +36,35 @@ public class TypicalSellers {
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").withProperty(
             new PropertyToSellBuilder().withHouse(
-                new HouseBuilder().withHouseType(HouseType.HDB_FLAT).withLocation("Bishan").build())
+                new HouseBuilder().withHouseType(HouseType.HDB_FLAT).withLocation("bishan").build())
                 .withAddress("Bishan Ave 3 Blk 123")
                 .withPriceRange(new PriceRange(10, 20)).build()).build();
 
     public static final Seller JUNHENG = new SellerBuilder().withName("Carl Kurz")
             .withPhone("95352563").withProperty(
             new PropertyToSellBuilder().withHouse(
-                new HouseBuilder().withHouseType(HouseType.COLONIA).withLocation("Clementi").build())
+                new HouseBuilder().withHouseType(HouseType.COLONIA).withLocation("clementi").build())
                 .withAddress("Clementi Town block 7")
                 .withPriceRange(new PriceRange(10, 20)).build()).build();
 
     public static final Seller JUNHONG = new SellerBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").withProperty(
             new PropertyToSellBuilder().withHouse(
-                new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Bishan").build())
+                new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("bishan").build())
                 .withAddress("Bishan District 8")
                 .withPriceRange(new PriceRange(30, 50)).build()).build();
 
     public static final Seller JANALD = new SellerBuilder().withName("Elle Meyer")
             .withPhone("9482224").withProperty(
             new PropertyToSellBuilder().withHouse(
-                new HouseBuilder().withHouseType(HouseType.APARTMENT).withLocation("Ang Mo Kio").build())
+                new HouseBuilder().withHouseType(HouseType.APARTMENT).withLocation("ang mo kio").build())
                 .withAddress("Ang Mo Kio Ave 3")
                 .withPriceRange(new PriceRange(10, 20)).build()).build();
 
     public static final Seller DARA = new SellerBuilder().withName("Fiona Kunz")
             .withPhone("9482427").withProperty(
             new PropertyToSellBuilder().withHouse(
-                new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("Bishan").build())
+                new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("bishan").build())
                 .withAddress("Bishan Street 11")
                 .withPriceRange(new PriceRange(20, 25)).build()).build();
 
@@ -102,6 +102,6 @@ public class TypicalSellers {
 
 
     public static List<Seller> getTypicalSellers() {
-        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, BENSON, JANALD, DARA, RICHARD, YUQI));
+        return new ArrayList<>(Arrays.asList(YUQI, BENSON, JUNHENG, JUNHONG, JANALD, DARA, RICHARD));
     }
 }
