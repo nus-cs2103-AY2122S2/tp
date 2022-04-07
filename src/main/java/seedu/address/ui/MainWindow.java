@@ -174,7 +174,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens file manager for import window
      */
     @FXML
-    public void handleImport () throws CommandException {
+    public void handleImport () throws CommandException, ParseException {
         FileChooser fileChooser = new FileChooser();
         Stage stage = new Stage();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -185,15 +185,15 @@ public class MainWindow extends UiPart<Stage> {
         }
         ImportFileParser converter = new ImportFileParser();
         List<String> res;
-        res = converter.jsonToPerson(selectedFile);
-        for (int i = 0; i < res.size(); i++) {
-            try {
+        try {
+            res = converter.jsonToPerson(selectedFile);
+            for (int i = 0; i < res.size(); i++) {
                 executeCommand(res.get(i));
-            } catch (ParseException e) {
-                resultDisplay.setFeedbackToUser("Some of the entry are not in correct format");
             }
+            resultDisplay.setFeedbackToUser("File successfully imported");
+        } catch (NullPointerException e) {
+            resultDisplay.setFeedbackToUser("Wrong format! Please refer to our user guide for correct format");
         }
-        resultDisplay.setFeedbackToUser("File successfully imported");
     }
 
     /**

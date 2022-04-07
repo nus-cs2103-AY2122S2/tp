@@ -133,7 +133,8 @@ This is a sample screenshot of what you can expect from the `help` command.
 Format: `help`
 
 ### Importing Excel sheet
-Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
+Add a list of students from an Excel file into existing student records in Tracey. 
+Import feature can be used in the command line or import button.
 
 Format: `import FILE PATH`
 

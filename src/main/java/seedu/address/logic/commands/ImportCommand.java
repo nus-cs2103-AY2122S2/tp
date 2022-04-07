@@ -27,7 +27,6 @@ public class ImportCommand extends Command {
             + ":C//Users//Documents/students.xlsx ";
 
     public static final String MESSAGE_SUCCESS = "New file added!";
-    public static final String MESSAGE_FAIL = "New file added!";
 
     private static String toFile;
     /**
@@ -53,10 +52,14 @@ public class ImportCommand extends Command {
         }
         File f = new File(toFile);
         ImportFileParser converter = new ImportFileParser();
-        List<String> res = converter.jsonToPerson(f);
-        for (int i = 0; i < res.size(); i++) {
-            Command c = new AddressBookParser().parseCommand(res.get(i));
-            c.execute(model);
+        try {
+            List<String> res = converter.jsonToPerson(f);
+            for (int i = 0; i < res.size(); i++) {
+                Command c = new AddressBookParser().parseCommand(res.get(i));
+                c.execute(model);
+            }
+        } catch (NullPointerException e) {
+            return new CommandResult("Wrong format! Please refer to our user guide for correct format");
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

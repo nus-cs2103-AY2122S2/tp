@@ -18,7 +18,7 @@ public class ImportFileParser {
      * @param file
      * @return list of command for adding student records
      */
-    public List<String> jsonToPerson(File file) {
+    public List<String> jsonToPerson(File file) throws NullPointerException {
         resultList = new ArrayList<>();
         ExcelToJsonConverter converter = new ExcelToJsonConverter();
         JsonNode data = converter.excelToJson(file);
