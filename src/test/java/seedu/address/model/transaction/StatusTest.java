@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 
 public class StatusTest {
-    public Status statusPaid;
+    private Status statusPaid;
     @BeforeEach
     public void setUp() {
         statusPaid = new Status("true");

@@ -1,6 +1,7 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_ONE;
 import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_TWO;

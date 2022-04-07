@@ -1,28 +1,35 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TransactionUtil.*;
-import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_TWO;
+import static seedu.address.testutil.TransactionUtil.INVALID_TRANSACTION;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_ONE_INCOMPLETE;
+import static seedu.address.testutil.TransactionUtil.TRANSACTION_TWO;
+import static seedu.address.testutil.TransactionUtil.VALID_AMOUNT_ONE;
+import static seedu.address.testutil.TransactionUtil.VALID_DUE_DATE_ONE;
+import static seedu.address.testutil.TransactionUtil.VALID_ID;
+import static seedu.address.testutil.TransactionUtil.VALID_TRANSACTION_DATE_ONE;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.PayCommand;
 import seedu.address.model.transaction.util.StatusFactoryInterface;
 
 public class TransactionTest {
-    public Amount amount;
-    public TransactionDate transactionDate;
-    public DueDate dueDate;
-    public Transaction transaction;
-    public long validId;
+    private Amount amount;
+    private TransactionDate transactionDate;
+    private DueDate dueDate;
+    private Transaction transaction;
+    private long validId;
 
     @BeforeEach
     public void setUp() {
