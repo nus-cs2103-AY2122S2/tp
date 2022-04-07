@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * Highlights : This enhancement required me to constantly update the methods that are required by my teammates as the methods in the `Task` Model changes as more commands are being added. As well as the importance of abstraction principles in the implementation of the new `Task` class.
 
 
-* **Enhancement** : Creation of Enum class `Priority`.
+* **Enhancement**: Creation of Enum class `Priority`.
   * What it does : The Enum class `Priority` allows the different types of Task to be assigned with a Priority.
   * Justification : This enhancement is important as the tagPriority command relies on Tasks having priorities.
   * Highlights : Creating a separate enum class for `Priority` makes the `Task` class more readable as opposed to clustering them together
