@@ -79,7 +79,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup LogicManager with JsonShowListIoExceptionThrowingStub
 
         JsonShowListStorage showListStorage =
                 new JsonShowListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionShowList.json"));
