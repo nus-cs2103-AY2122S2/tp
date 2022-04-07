@@ -348,32 +348,65 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `HackNet` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add contact**
 
 **MSS**
+1. User adds a contact specifying personal details and technical skills.
+2. HackNet displays list of persons with new contact added.
 
-1.  User requests to list persons
-2.  HackNet shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  HackNet deletes the person
+   Use case ends.
+
+**Extensions**
+* 1a. Data entered is invalid.
+    * 1a1. HackNet shows an error message.
+
+      Use case ends.
+
+**Use case: UC02 - View contact's portfolio**
+
+**MSS**
+1. User <ins>adds a contact (UC01)</ins> with a specific GitHub username.
+2. User requests to view the GitHub portfolio of contact.
+3. HackNet shows the GitHub profile associated with stored username.
+
+   Use case ends.
+
+**Extensions**
+* 3a. GitHub username does not exist.
+  * 3a1. HackNet shows an error page.
+
+    Use case ends.
+
+**Use case: UC03 - Form potential team**
+
+**MSS**
+1. User requests to see list of persons with a specific technical skill.
+2. HackNet shows a list of persons with the specified skill.
+3. User chooses specified person to be potential teammate.
+4. HackNet marks chosen person as potential teammate.
+
+    Steps 1 - 4 are repeated until user has chosen all potential teammates to form his team.
+5. User requests to see list of potential teammates.
+6. HackNet shows the list of all persons marked as potential teammates.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The person is already marked as potential teammate previously.
+  * 3a1. HackNet shows an error message.
 
-  Use case ends.
+    Use case resumes from step 2.
 
-* 3a. The given index is invalid.
+**Use case: UC04 - See past teammates**
 
-    * 3a1. HackNet shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+**MSS**
+1. User tags specified person to a past project team.
+2. HackNet links person to the specified project team.
+3. User requests to show a list of persons tagged to his past project team.
+4. HackNet shows the list of all persons linked with a past project team.
 
 ### Non-Functional Requirements
 
