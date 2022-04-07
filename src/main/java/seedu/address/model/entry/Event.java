@@ -79,9 +79,14 @@ public class Event extends Entry {
 
     @Override
     public void updateCompanyName(String oldName, String newName) {
-        if (oldName.equals(this.companyName.toString())) {
+        if (hasCompanyName(oldName)) {
             this.companyName = new Name(newName);
         }
+    }
+
+    @Override
+    public boolean hasCompanyName(String testName) {
+        return testName.equals(companyName.toString());
     }
 
     /**

@@ -140,6 +140,14 @@ public class UniqueEntryList<T extends Entry> implements Iterable<T> {
     }
 
     /**
+     * Removes all entries whose companyName attribute has the same string as the given {@code companyName}.
+     * Note: Thie function should only be called for Person and Event lists.
+     */
+    public void removeMatchingCompanyName(String companyName) {
+        internalList.removeIf(entry -> entry.hasCompanyName(companyName));
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<T> asUnmodifiableObservableList() {

@@ -244,6 +244,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.updateCompanyNames(oldName, newName);
     }
 
+    /**
+     * Removes all entries whose companyName attribute has the same string as the given {@code companyName}.
+     * Note: Thie function should only be called for Person and Event lists.
+     */
+    public void removeMatchingCompanyName(String companyName) {
+        persons.removeMatchingCompanyName(companyName);
+        events.removeMatchingCompanyName(companyName);
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
