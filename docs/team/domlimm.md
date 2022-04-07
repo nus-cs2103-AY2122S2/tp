@@ -24,7 +24,10 @@ Given below are my contributions to the project.
 * **Project management**:
   * Managed deadlines and deliverables for the team whenever/wherever necessary.
     * E.g. Briefly: Updating milestones, managing issues on GitHub.
-  * Beautified releases' description. 
+  * Beautified releases' description.
+  * Enhanced team's workflow with suggestion on branch naming i.e. `ISSUE_NO-ANY-OTHER-DESC`.
+    * To name each branch in the format with issue as the starting portion followed with dashes and other relevant description. Helps in the clarity of referring back to the linked issue when reviewing the PR.
+  * Drove team meetings.
 
 * **Enhancements to existing features**:
   * Heavy refactors were consistently done to existing features throughout the entire development period of our program.
