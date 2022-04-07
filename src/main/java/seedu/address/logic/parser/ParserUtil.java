@@ -45,6 +45,7 @@ public class ParserUtil {
      */
     public static Pair<Index, String> parseOutIndex(String indexAndWords) throws ParseException {
         String trimmedInput = indexAndWords.trim();
+
         // splitIndexAndRemainingString[0] contains index no., splitIndexAndRemainingString[2] contains remaining string
         String[] splitIndexAndRemainingString;
         Index index;
@@ -55,7 +56,7 @@ public class ParserUtil {
         } catch (Exception e) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return new Pair<>(index, splitIndexAndRemainingString.length > 1 ? splitIndexAndRemainingString[1] : "");
+        return new Pair<>(index, splitIndexAndRemainingString.length > 1 ? splitIndexAndRemainingString[1].trim() : "");
     }
 
     /**
@@ -76,7 +77,8 @@ public class ParserUtil {
         } catch (Exception e) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return new Pair<>(number, splitIndexAndRemainingString.length > 1 ? splitIndexAndRemainingString[1] : "");
+        return new Pair<>(number, splitIndexAndRemainingString.length > 1
+                ? splitIndexAndRemainingString[1].trim() : "");
     }
 
     /**
