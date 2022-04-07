@@ -36,7 +36,7 @@ public class StatusContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different endpoint -> returns false
+        // different status -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

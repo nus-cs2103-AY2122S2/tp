@@ -36,7 +36,7 @@ public class RatingContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different endpoint -> returns false
+        // different rating -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

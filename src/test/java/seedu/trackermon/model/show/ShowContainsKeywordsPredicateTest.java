@@ -36,7 +36,7 @@ public class ShowContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different endpoint -> returns false
+        // different show -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

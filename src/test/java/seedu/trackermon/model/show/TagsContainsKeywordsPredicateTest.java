@@ -36,7 +36,7 @@ public class TagsContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different endpoint -> returns false
+        // different tags -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
