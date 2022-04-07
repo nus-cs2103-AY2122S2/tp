@@ -90,7 +90,7 @@ Format: `add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRES
 An applicant can have any number of tags (including 0)
 </div>
 
-* Age provided must be at least two digits eg: “23”
+* Age provided must be exactly two digits and should not start with 0 eg: “23”
 * Name, Phone number and email must be unique 
 * Gender must be M/F (case-sensitive)
 
