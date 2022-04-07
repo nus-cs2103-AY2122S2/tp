@@ -202,7 +202,7 @@ Format: `find k/KEYWORD [k/MORE_KEYWORDS]…​ [f/ATTRIBUTE_FIELD]`
 
 Examples:
 * `find k/Jane f/name` returns candidates with name e.g. `jane` and `jane doe`.
-* `find k/Computer k/Science f/course` returns candidates with the course field i.e. `computer science` and `computer engineering`.
+* `find k/Computer k/science f/course` returns candidates with the course field i.e. `Computer Science` and `Computer Engineering`.
 * `find k/Jane k/Tan f/name` returns candidates with name e.g. `Jane`, `tan` and `John Tan`.
 
 ### Sorting candidates by attribute field: `sort`
