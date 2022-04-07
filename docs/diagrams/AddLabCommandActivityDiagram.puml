@@ -6,7 +6,7 @@ start
 if () then ([valid Lab Number])
   if () then ([duplicate lab])
     :Displays error message;
-  else
+  else ([else])
     :Adds a new Lab with the specified Lab Number
     to every student in the list and displays it;
   endif

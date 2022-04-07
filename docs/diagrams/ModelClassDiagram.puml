@@ -20,7 +20,7 @@ Class Name
 Class GithubUsername
 Class StudentId
 Class Tag
-Package lab {
+Package Lab {
     Class LabList
     Class MasterLabList
     Class Lab
