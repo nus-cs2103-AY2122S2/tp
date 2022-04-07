@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.ExportCsvOpenException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Phone;
@@ -27,14 +29,16 @@ import seedu.address.model.position.Position;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final String APPLICANT_CSV_FILE = "applicant.csv";
-    private static final String INTERVIEW_CSV_FILE = "interview.csv";
-    private static final String POSITION_CSV_FILE = "position.csv";
+    private static final String EXPORT_CSV_FOLDER = "export_csv\\";
+    private static final String APPLICANT_CSV_FILE = EXPORT_CSV_FOLDER + "applicant.csv";
+    private static final String INTERVIEW_CSV_FILE = EXPORT_CSV_FOLDER + "interview.csv";
+    private static final String POSITION_CSV_FILE = EXPORT_CSV_FOLDER + "position.csv";
     private static final String APPLICANT_CSV_HEADER = "Name,Phone,Email,Age,Address,Gender,Hire status,Tags";
     private static final String INTERVIEW_CSV_HEADER = "Date,Interview Status,Name,Phone,Email,Age,Address,"
             + "Gender,Hire status,Tags,Position,Description,Number of openings,Number of offers,Requirements";
     private static final String POSITION_CSV_HEADER = "Position,Description,Number of openings,Number of offers"
             + "Requirements";
+    private static final String MESSAGE_CLOSE_CSV = "Please close the opened CSV before export";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -244,15 +248,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvApplicant() throws FileNotFoundException {
-        File csvOutputFile = new File(APPLICANT_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(APPLICANT_CSV_HEADER);
-            filteredApplicants.stream()
-                    .map(Applicant::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert(csvOutputFile.exists());
+    public void exportCsvApplicant() throws FileNotFoundException, ExportCsvOpenException {
+        exportCsv(APPLICANT_CSV_FILE, APPLICANT_CSV_HEADER, filteredApplicants.stream()
+                .map(Applicant::convertToCsv));
     }
 
     //=========== Filtered Interview List Accessors =============================================================
@@ -297,15 +295,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvInterview() throws FileNotFoundException {
-        File csvOutputFile = new File(INTERVIEW_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(INTERVIEW_CSV_HEADER);
-            filteredInterviews.stream()
-                    .map(Interview::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert (csvOutputFile.exists());
+    public void exportCsvInterview() throws FileNotFoundException, ExportCsvOpenException {
+        exportCsv(INTERVIEW_CSV_FILE, INTERVIEW_CSV_HEADER, filteredInterviews.stream()
+                .map(Interview::convertToCsv));
     }
 
     @Override
@@ -340,15 +332,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportCsvPosition() throws FileNotFoundException {
-        File csvOutputFile = new File(POSITION_CSV_FILE);
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            pw.println(POSITION_CSV_HEADER);
-            filteredPositions.stream()
-                    .map(Position::convertToCsv)
-                    .forEach(pw::println);
-        }
-        assert(csvOutputFile.exists());
+    public void exportCsvPosition() throws FileNotFoundException, ExportCsvOpenException {
+        exportCsv(POSITION_CSV_FILE, POSITION_CSV_HEADER, filteredPositions.stream()
+                .map(Position::convertToCsv));
     }
 
     //=========== Utility methods =============================================================
@@ -369,5 +355,22 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplicants.equals(other.filteredApplicants);
+    }
+
+    private void exportCsv(String csvFile, String csvHeader, Stream<String> stringStream)
+            throws ExportCsvOpenException {
+        File csvOutputFile = new File(csvFile);
+        File directory = new File(EXPORT_CSV_FOLDER);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            pw.println(csvHeader);
+            stringStream
+                    .forEach(pw::println);
+            assert (csvOutputFile.exists());
+        } catch (FileNotFoundException exception) {
+            throw new ExportCsvOpenException(MESSAGE_CLOSE_CSV);
+        }
     }
 }

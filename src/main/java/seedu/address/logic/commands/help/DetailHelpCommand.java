@@ -35,6 +35,8 @@ public class DetailHelpCommand extends HelpCommand {
             return new CommandResult(HelpDescription.EXPORT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         case "exit":
             return new CommandResult(HelpDescription.EXIT_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
+        case "help":
+            return new CommandResult(HelpDescription.HELP_COMMAND_DESCRIPTION, getCommandDataType(), true, false);
         default:
             throw new CommandException(HelpDescription.COMMAND_NOT_FOUND_DESCRIPTION);
         }
