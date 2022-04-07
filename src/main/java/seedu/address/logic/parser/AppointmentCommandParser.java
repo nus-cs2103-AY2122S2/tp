@@ -31,24 +31,20 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
                 PREFIX_APPOINTMENT_DATE_TIME, PREFIX_APPOINTMENT_LOCATION, PREFIX_CLEAR);
 
         Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE), pe);
-        }
 
         Boolean isClearPresent = argMultimap.getValue(PREFIX_CLEAR).isPresent();
         Boolean areDateTimeAndLocationPresent = arePrefixesPresent(argMultimap,
                 PREFIX_APPOINTMENT_DATE_TIME, PREFIX_APPOINTMENT_LOCATION);
         if (isClearPresent && !areDateTimeAndLocationPresent) {
             Appointment clearAppointment = new Appointment();
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
             return new AppointmentCommand(index, clearAppointment);
         } else if (areDateTimeAndLocationPresent && !isClearPresent) {
             LocalDateTime dateTime = ParserUtil.parseAppointmentDateTime(
                     argMultimap.getValue(PREFIX_APPOINTMENT_DATE_TIME).get());
             String location = argMultimap.getValue(PREFIX_APPOINTMENT_LOCATION).get();
             Appointment appointment = new Appointment(dateTime, location);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
             return new AppointmentCommand(index, appointment);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

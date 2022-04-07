@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ChargeCommand;
@@ -24,7 +25,6 @@ import seedu.address.model.pet.Name;
 import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Phone;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -50,7 +50,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -69,22 +69,6 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
-
-    /**
-     * Parses a {@code String diet} into a {@code Diet}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code diet} is invalid.
-     */
-    public static Diet parseDiet(String diet) throws ParseException {
-        requireNonNull(diet);
-        String trimmedDiet = diet.trim();
-        if (!Diet.isValidDiet(trimmedDiet)) {
-            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
-        }
-        return new Diet(trimmedDiet);
-    }
-
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -146,6 +130,20 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+    /**
+     * Parses a {@code String diet} into a {@code Diet}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code diet} is invalid.
+     */
+    public static Diet parseDiet(String diet) throws ParseException {
+        requireNonNull(diet);
+        String trimmedDiet = diet.trim();
+        if (!Diet.isValidDiet(trimmedDiet)) {
+            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
+        }
+        return new Diet(trimmedDiet);
+    }
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -352,6 +350,7 @@ public class ParserUtil {
         requireNonNull(charge);
 
         String trimmedCharge = charge.trim();
+        System.out.println(trimmedCharge);
         if (!Charge.isValidCharge(trimmedCharge)) {
             throw new ParseException(Charge.MESSAGE_INVALID_CHARGE_FORMAT);
         }

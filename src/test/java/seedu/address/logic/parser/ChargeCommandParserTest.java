@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ChargeCommand;
 import seedu.address.model.charge.Charge;
@@ -42,8 +43,7 @@ public class ChargeCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_CHARGE_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ChargeCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_CHARGE_AMY, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
 
         // no charge date and amount specified
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
