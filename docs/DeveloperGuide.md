@@ -228,11 +228,11 @@ Modelling the workflow of the `Add` Command, when the user inputs an **Add Comma
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
-   - Scenario: Adding of the specified `Person` to the database is successful
-   - Message: "New person added: %1$s" where "%1$s" is the added person's details
+   - Scenario: Adding of the specified `Person` to the database is successful.
+   - Message: "New person added: %1$s" where "%1$s" is the added person's details.
 2. `MESSAGE_DUPLICATE_PERSON`:
    - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
-   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`
+   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
 **Sequence Diagram of Add Feature is shown below:**
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
