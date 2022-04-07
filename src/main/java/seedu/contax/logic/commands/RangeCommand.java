@@ -63,7 +63,7 @@ public class RangeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         List<CommandResult> commandResultList = new ArrayList<>();
-        Person restorePerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
+        Person restorePerson = model.getFilteredPersonList().get(toIndex.getZeroBased());
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
@@ -93,9 +93,9 @@ public class RangeCommand extends Command {
 
 
     private void setFirstOccurrencePerson(Model model, Person restorePerson) {
-        Person lastPerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
-        model.setPerson(model.getAddressBook().getPersonList().get(toIndex.getZeroBased()), restorePerson);
-        model.setPerson(model.getAddressBook().getPersonList().get(fromIndex.getZeroBased()), lastPerson);
+        Person lastPerson = model.getFilteredPersonList().get(toIndex.getZeroBased());
+        model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
+        model.setPerson(model.getFilteredPersonList().get(fromIndex.getZeroBased()), lastPerson);
     }
 
 
