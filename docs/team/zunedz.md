@@ -41,11 +41,9 @@ Given below are my contributions to the project.
     to paid. If the user mistakenly set the status to paid, they can change the status back to unpaid.
 
 
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=zunedz&breakdown=true)
 
 * **Project management**:
-    * Help managing milestones from `v1.1` to `v1.4`.
     * Add todo features/user story, tasks, bugs, and enhancement as Github Issues.
     * Help reviewing pull requests and give feedback for improvement.
 
@@ -58,19 +56,17 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the `addTransaction` feature
-        * Added documentation for the `deleteTransaction` feature
-        * Added documentation for the `listTransaction` feature
-        * Added documentation for the `findTransaction` feature
-        * Added documentation for the `pay` feature
-        * Added documentation for the `unpay` feature
+        * Added documentation for the `addTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
+        * Added documentation for the `deleteTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
+        * Added documentation for the `listTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
+        * Added documentation for the `findTransaction` feature. [\#113](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/113/files)
+        * Added documentation for the `pay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
+        * Added documentation for the `unpay` feature. [\#153](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/153/files)
     
     * Developer Guide:
         * Added implementation details of the `addTransaction` feature
-
-* **Community**:
-    * To be added soon
-
-* **Tools**:
-    * To be added soon
     
+* **Tests**:
+  * Add test cases for various transaction features. [\#78](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/78),
+    [\#138](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/138), 
+    [\#144](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/144)
