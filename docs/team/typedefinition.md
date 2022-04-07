@@ -11,7 +11,7 @@ CinnamonBun is an application that helps to record and manage a large number of 
 
 CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still being optimized for control via a Command Line Interface (CLI).
 
-Given below are my contributions to the project.
+### My Contributions
 
 * **New Feature**: Add the ability to add remarks to clients.
   * Functionality: Allow the user to add remarks to clients so that they can note down things about the client.
