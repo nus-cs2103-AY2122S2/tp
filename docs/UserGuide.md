@@ -21,7 +21,7 @@ title: User Guide
   - [Editing Patient Information: `edit`](#editing-patient-information-edit)
   - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
-  - [Finding any Entry: `find`](#finding-any-entry-find)  
+  - [Finding any Entry: `find`](#finding-any-entry-find)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
   - [Editing Contact Information: `edit`](#editing-contact-information-edit)
@@ -87,7 +87,7 @@ Follow this tutorial to get started with using MedBook:
        <figcaption class="figure-caption">Figure 1: Password Prompt Display</figcaption>
    </figure>
 
-   <div class="d-flex alert alert-info">
+   <div markdown="block" class="d-flex alert alert-info">
    <div class="mr-2">
         **:information_source: Notes about password:**<br>
    </div>
@@ -158,8 +158,17 @@ Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
    <div class="mr-2">
        <span class="badge badge-info">INFO</span>
    </div>
-   <div>
-       Patient's NRIC must be a valid Singapore-issued NRIC. See <a href="https://en.wikipedia.org/wiki/National_Registration_Identity_Card" target="_blank">here</a> for more information about the valid format.
+   <div markdown="block">
+       Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
+
+       1. NRIC consists alphanumeric characters only.
+       2. NRIC starts with either S, T, F, G, M character.
+       3. NRIC consists 7 digits after the first character.
+       4. NRIC ends with any character.
+      
+       Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
+
+       See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
 
        NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
    </div>
@@ -255,7 +264,7 @@ Views a patient’s emergency contacts from MedBook.
 Format: `view t/contact i/NRIC`
 
 Examples:
-* `/view t/contact i/S1234567L`
+* `view t/contact i/S1234567L`
 
 ### Editing Contact Information: `edit`
 
