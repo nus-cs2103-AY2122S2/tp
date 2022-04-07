@@ -117,6 +117,9 @@ Features relating to the display of information within these panels are describe
 * A candidate's `course` can only be either of the 5 computing courses in NUS School of Computing i.e. Business Analytics, Computer Engineering, Computer Science, Information Security or Information Systems.
   * Reason being, our **Target User Profile** is restricted to NUS SoC.
 
+* A candidate's `seniority` ranges as such [1, 4], i.e. 1, 2, 3 or 4. It will be displayed as `COMX` where X is [1, 4].
+  * To address seniority of students in double-degree programmes, it has been discussed that `COM5` has not been seen in NUS SoC system. Thus, the restriction of the range [1, 4].
+
 </div>
 
 ## Viewing help
@@ -135,13 +138,21 @@ Adds a candidate into the system.
 
 Format: `add id/STUDENT_ID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AVAILABILITY`
 
-* `STUDENT_ID` is sensitive and it will be validated.
-* `NAME` should only contain alphabets, `A-Z` or `a-z`.
-* `EMAIL` should only be in this format. i.e. `EXXXXXXX@u.nus.edu`
-* `PHONE` should only be a local number. i.e. Starting number of Singapore's common numbers - 6, 8, 9
-* `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems
-* `SENIORITY` is a number range from 1 to 4.
-* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to available on `Monday`, `Tuesday`, `Wednesday`
+All fields of a `candidate` below should not be blank and will be validated.
+
+* `STUDENT_ID` is format-sensitive with ease of case sensitivity i.e. Allowing lower caps, and in this format `AXXXXXXXX` e.g. `A0123456B`.
+  * The first character has to be `A` or `a`.
+  * Followed by 7 digits.
+  * The last character with any alphabet is allowed.
+* `NAME` should only contain alphanumeric characters and spaces.
+* `EMAIL` is format-sensitive, and should only be in this format `EXXXXXXX@u.nus.edu`.
+* `PHONE` is format-sensitive, and should only be a local Singapore number. i.e. Starting number of Singapore's common phone/telephone numbers - 6, 8, 9.
+* `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems.
+  * The first character of each word in the course i.e. `C` in `Computer` and `S` in `Science` for `Computer Science` is case-sensitive.
+* `SENIORITY` is a single integer ranging from 1 to 4. i.e. 1 to 4 inclusive.
+  * This attribute field serves as a gauge for the SoC professor (user) on which year the candidate is in to better understand how far along they are in their undergraduate studies. It follows the faculty classification from `COM1` to `COM4`, and does not differentiate beyond `COM4` following the faculty system classification.
+* `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to an availability of `Monday`, `Tuesday` and `Wednesday`. It accepts a number range from only 1 to 5.
+  * Each available day represented by the corresponding integer number should be comma-separated. It does not matter how the days are ordered in the user input.
 
 Examples:
 * `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, **A0123456B**, named John Doe.
@@ -150,7 +161,7 @@ Examples:
 
 Edits a candidate in the system.
 
-Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
+Format: `edit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -160,8 +171,8 @@ Format: `edit INDEX [PREFIX/VALUE] [MORE_PREFIX/VALUE]…​`
 
 </div>
 
-* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​ .
+* At least one field must be provided and the rest are optional fields.
 * Existing values will be updated to the input values.
 * `as` prefix short for Application Status should only be either `Pending`, `Accepted` or `Rejected`.
 
