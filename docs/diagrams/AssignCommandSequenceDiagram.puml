@@ -93,10 +93,10 @@ end box
 
 mainframe sd Parsing inputted field
 
-AssignCommandParser -> ParserUtil : parseStudentId(studentId)
-activate ParserUtil LOGIC_COLOR
 
 alt user inputs studentId and task
+    AssignCommandParser -> ParserUtil : parseStudentId(studentId)
+    activate ParserUtil LOGIC_COLOR
     create StudentId
     ParserUtil -> StudentId
     activate StudentId MODEL_COLOR
@@ -114,8 +114,12 @@ alt user inputs studentId and task
     Task --> ParserUtil
     deactivate
     ParserUtil --> AssignCommandParser : task
+    deactivate
 
 else user inputs moduleCode and task
+
+    AssignCommandParser -> ParserUtil : parseModuleCode(moduleCode)
+    activate ParserUtil LOGIC_COLOR
     create ModuleCode
     ParserUtil -> ModuleCode
     activate ModuleCode MODEL_COLOR
@@ -133,6 +137,7 @@ else user inputs moduleCode and task
     Task --> ParserUtil
     deactivate
     ParserUtil --> AssignCommandParser : task
+    deactivate
 end
 
 @enduml
