@@ -6,7 +6,6 @@
     "email": "E0123456@u.nus.edu",
     "course": "Business Analytics",
     "seniority": "2",
-    "tagged": [ "friends" ],
     "applicationStatus": "Pending",
     "interviewStatus": "Not Scheduled",
     "availability": "1,2,3,4,5",
