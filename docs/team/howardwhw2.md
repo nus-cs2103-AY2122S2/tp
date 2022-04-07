@@ -10,11 +10,9 @@ RealEstatePro is a desktop address book application used by real estate agents t
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to upload and view images.
-  * What it does: allows the user to upload multiple images at once from the user's file system to be associated with clients. 
-  * Justification: This feature improves the product significantly because a user can associate images depicting how the client's flat looks like or the map to the client's flat. 
+  * What it does: allows the user to upload multiple images at once from the user's file system to be associated with clients.
+  * Justification: This feature improves the product significantly because a user can associate images depicting how the client's flat looks like or the map to the client's flat.
   * Highlights: This enhancement affects existing commands. The implementation was challenging as it required interaction with the user's file system which provided more aspects to take note of such as file format and file path.  The implementation was also challenging as it required additions and changes to existing commands.
-
-* **New Feature**: 
 
 * **New Feature**: Added Keyboard shortcuts to existing commands that required opening of another window within the app.
 
