@@ -58,22 +58,22 @@ public class AddAppointmentCommand extends Command {
         requireNonNull(model);
 
         List<Person> lastShownPersonList = model.getFilteredPersonList();
-        Appointment updatedAppointment = toAdd;
+        Appointment appointmentWithPerson = toAdd;
 
         if (personIndex != null) {
             if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person person = lastShownPersonList.get(personIndex.getZeroBased());
-            updatedAppointment = toAdd.withPerson(person);
+            appointmentWithPerson = toAdd.withPerson(person);
         }
 
-        if (model.hasOverlappingAppointment(updatedAppointment)) {
+        if (model.hasOverlappingAppointment(appointmentWithPerson)) {
             throw new CommandException(Messages.MESSAGE_APPOINTMENTS_OVERLAPPING);
         }
 
-        model.addAppointment(updatedAppointment);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, updatedAppointment));
+        model.addAppointment(appointmentWithPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentWithPerson));
     }
 
     @Override

@@ -3,9 +3,8 @@ package seedu.contax.model.appointment;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents an {@link Appointment}'s priority
+ * Represents an {@link Appointment}'s priority.
  **/
-
 public enum Priority {
     LOW("Low"),
     MEDIUM("Medium"),

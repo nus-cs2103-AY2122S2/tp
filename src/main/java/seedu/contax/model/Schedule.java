@@ -14,6 +14,7 @@ import seedu.contax.model.chrono.TimeRange;
 /**
  * Wraps all data at the Schedule level.
  * Overlapping appointments are not allowed, which is enforced by {@link DisjointAppointmentList}.
+ * Appointments in the Schedule are sorted chronologically, enforced by {@link DisjointAppointmentList}.
  */
 public class Schedule implements ReadOnlySchedule {
 
@@ -36,9 +37,11 @@ public class Schedule implements ReadOnlySchedule {
 
     /**
      * Replaces the contents of the appointment list with {@code appointments}.
+     *
      * {@code appointments} must not contain overlapping appointments.
      */
     public void setAppointments(List<Appointment> appointments) {
+        requireNonNull(appointments);
         this.appointments.setAppointments(appointments);
     }
 
@@ -55,6 +58,7 @@ public class Schedule implements ReadOnlySchedule {
      * There must not exist any appointment in the schedule that overlaps with {@code target}.
      */
     public void addAppointment(Appointment target) {
+        requireNonNull(target);
         appointments.add(target);
     }
 
@@ -65,9 +69,7 @@ public class Schedule implements ReadOnlySchedule {
      * schedule.
      */
     public void setAppointment(Appointment target, Appointment editedAppointment) {
-        requireNonNull(target);
-        requireNonNull(editedAppointment);
-
+        requireAllNonNull(target, editedAppointment);
         appointments.set(target, editedAppointment);
     }
 
@@ -76,6 +78,7 @@ public class Schedule implements ReadOnlySchedule {
      * {@code target} must exist in the schedule.
      */
     public void removeAppointment(Appointment target) {
+        requireNonNull(target);
         appointments.remove(target);
     }
 

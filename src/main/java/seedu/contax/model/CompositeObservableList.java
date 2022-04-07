@@ -16,11 +16,11 @@ public class CompositeObservableList<T extends Comparable<? super T>> {
 
     private final ObservableList<? extends T> backingList1;
     private final ObservableList<? extends T> backingList2;
-    private final ObservableList<T> scheduleItemList;
-    private final ObservableList<T> unmodifiableScheduleItemList;
+    private final ObservableList<T> mergedList;
+    private final ObservableList<T> unmodifiableMergedList;
 
     /**
-     * Constructs a CompositeObservableList.
+     * Constructs a {@code CompositeObservableList}.
      *
      * @param backingList1 The first backing ObservableList.
      * @param backingList2 The second backing ObservableList.
@@ -31,8 +31,8 @@ public class CompositeObservableList<T extends Comparable<? super T>> {
         requireNonNull(backingList2);
         this.backingList1 = backingList1;
         this.backingList2 = backingList2;
-        this.scheduleItemList = FXCollections.observableArrayList();
-        this.unmodifiableScheduleItemList = FXCollections.unmodifiableObservableList(scheduleItemList);
+        this.mergedList = FXCollections.observableArrayList();
+        this.unmodifiableMergedList = FXCollections.unmodifiableObservableList(mergedList);
 
         refreshCombinedList();
         attachListeners();
@@ -41,8 +41,8 @@ public class CompositeObservableList<T extends Comparable<? super T>> {
     /**
      * Returns the aggregated ObservableList.
      */
-    public ObservableList<T> getUnmodifiableList() {
-        return this.unmodifiableScheduleItemList;
+    public ObservableList<T> getUnmodifiableResultList() {
+        return this.unmodifiableMergedList;
     }
 
     /**
@@ -64,28 +64,28 @@ public class CompositeObservableList<T extends Comparable<? super T>> {
         // Merge sorted lists
         int list1Index = 0;
         int list2Index = 0;
-        ArrayList<T> mergedList = new ArrayList<>(backingList1.size() + backingList2.size());
+        ArrayList<T> newList = new ArrayList<>(backingList1.size() + backingList2.size());
 
         try {
             while (list1Index < backingList1.size() && list2Index < backingList2.size()) {
                 if (backingList1.get(list1Index).compareTo(backingList2.get(list2Index)) < 0) {
-                    mergedList.add(backingList1.get(list1Index));
+                    newList.add(backingList1.get(list1Index));
                     list1Index++;
                 } else {
-                    mergedList.add(backingList2.get(list2Index));
+                    newList.add(backingList2.get(list2Index));
                     list2Index++;
                 }
             }
             for (; list1Index < backingList1.size(); list1Index++) {
-                mergedList.add(backingList1.get(list1Index));
+                newList.add(backingList1.get(list1Index));
             }
             for (; list2Index < backingList2.size(); list2Index++) {
-                mergedList.add(backingList2.get(list2Index));
+                newList.add(backingList2.get(list2Index));
             }
 
-            scheduleItemList.setAll(mergedList);
+            this.mergedList.setAll(newList);
         } catch (IndexOutOfBoundsException ignored) {
-            // Iterator changed during merging, abort the merge. A new call to this function is on the way
+            // List changed during merging, abort the merge. A new call to this function is on the way
             // since the list has changed.
         }
     }

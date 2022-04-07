@@ -7,5 +7,7 @@ package seedu.contax.ui;
  */
 @FunctionalInterface
 public interface CardFactory<T> {
+
+    /** Creates a {@link seedu.contax.ui.RecyclableCard} instance of type {@code T>} */
     RecyclableCard<T> createCard();
 }

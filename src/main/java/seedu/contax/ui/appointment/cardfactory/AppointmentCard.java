@@ -76,19 +76,13 @@ class AppointmentCard extends UiPart<Region> {
             endDate.setText(endDateTime.format(DATE_FORMATTER));
             endTime.setText(endDateTime.format(TIME_FORMATTER));
 
-            if (appointmentModel.getPerson() != null) {
-                withLabel.setVisible(true);
-                Person p = appointmentModel.getPerson();
-                personName.setText(p.getName().fullName);
-                personAddress.setText(p.getAddress().value);
-            } else {
-                withLabel.setVisible(false);
-                personName.setText("");
-                personAddress.setText("");
-            }
+            Person person = appointmentModel.getPerson();
+            boolean hasPerson = person != null;
+            withLabel.setVisible(hasPerson);
+            personName.setText(hasPerson ? person.getName().fullName : "");
+            personAddress.setText(hasPerson ? person.getAddress().value : "");
 
             updatePriorityStyle(appointmentModel.getPriority());
-
         }
 
         if (displayedIndex != this.displayedIndex) {
@@ -97,26 +91,31 @@ class AppointmentCard extends UiPart<Region> {
         }
     }
 
+    /** Updates the displayed priority label to match the supplied {@code Priority}. */
     private void updatePriorityStyle(Priority modelPriority) {
         priority.getStyleClass().remove("high");
         priority.getStyleClass().remove("medium");
         priority.getStyleClass().remove("low");
 
-        if (appointmentModel.getPriority() != null) {
-            priority.setText(modelPriority.toString());
-            switch (appointmentModel.getPriority()) {
-            case HIGH:
-                priority.getStyleClass().add("high");
-                break;
-            case MEDIUM:
-                priority.getStyleClass().add("medium");
-                break;
-            default:
-                priority.getStyleClass().add("low");
-                break;
-            }
-        } else {
+        if (modelPriority == null) {
             priority.setText("");
+            return;
+        }
+
+        priority.setText(modelPriority.toString());
+        switch (appointmentModel.getPriority()) {
+        case HIGH:
+            priority.getStyleClass().add("high");
+            break;
+        case MEDIUM:
+            priority.getStyleClass().add("medium");
+            break;
+        case LOW:
+            priority.getStyleClass().add("low");
+            break;
+        default:
+            // Unknown priority styling, use default style.
+            break;
         }
     }
 

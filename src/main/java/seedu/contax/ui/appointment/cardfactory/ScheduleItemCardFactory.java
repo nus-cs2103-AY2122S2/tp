@@ -45,11 +45,11 @@ public class ScheduleItemCardFactory implements CardFactory<ScheduleItem> {
      */
     private void populateIndexMap() {
         indexMap.clear();
-        int slotCount = 0;
+        int appointmentSlotCount = 0;
         for (int i = 0; i < scheduleItemList.size(); i++) {
-            indexMap.add(i - slotCount);
+            indexMap.add(i - appointmentSlotCount);
             if (scheduleItemList.get(i) instanceof AppointmentSlot) {
-                slotCount++;
+                appointmentSlotCount++;
             }
         }
     }

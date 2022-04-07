@@ -3,6 +3,7 @@ package seedu.contax.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.contax.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -14,16 +15,19 @@ import seedu.contax.model.appointment.AppointmentSlot;
 import seedu.contax.model.chrono.TimeRange;
 
 /**
- * Generates a list of slots from the backing Schedule between the specified time range.
+ * Generates a list of available slots from the backing Schedule between the specified time range.
  */
 public class AppointmentSlotList {
 
-    private TimeRange filteredRange;
-    private int minimumDuration;
+    private static final String ERROR_POSITIVE_DURATION = "The minimum duration should be positive";
+
     private final Schedule backingSchedule;
     private final ObservableList<AppointmentSlot> resultList;
     private final ObservableList<AppointmentSlot> readOnlyResultList;
     private final InvalidationListener sourceChangeListener;
+
+    private TimeRange filteredRange;
+    private int minimumDuration;
 
     /**
      * Constructs an {@code AppointmentSlotList}.
@@ -57,7 +61,7 @@ public class AppointmentSlotList {
             return;
         }
 
-        checkArgument(minimumDuration > 0, "The minimum duration should be positive");
+        checkArgument(minimumDuration > 0, ERROR_POSITIVE_DURATION);
         this.minimumDuration = minimumDuration;
 
         updateResultList();
@@ -114,8 +118,10 @@ public class AppointmentSlotList {
      * Updates the result list with the generated list of slots.
      */
     private void updateResultList() {
-        List<TimeRange> slotsFound = backingSchedule.findSlotsBetweenAppointments(
-                filteredRange.getStartDateTime(), filteredRange.getEndDateTime(), minimumDuration);
+        LocalDateTime rangeStart = filteredRange.getStartDateTime();
+        LocalDateTime rangeEnd = filteredRange.getEndDateTime();
+        List<TimeRange> slotsFound =
+                backingSchedule.findSlotsBetweenAppointments(rangeStart, rangeEnd, minimumDuration);
         this.resultList.setAll(slotsFound.stream()
                 .map(AppointmentSlot::new)
                 .collect(Collectors.toList()));
