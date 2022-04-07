@@ -179,6 +179,7 @@ Format: `view`
 
 Edits an existing patient information entry in MedBook when a list of patient's information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Patient Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -260,6 +261,7 @@ Examples:
 
 Edits an existing contact information entry in MedBook when a patient's list of contact information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Contact Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
@@ -301,6 +303,7 @@ Examples:
 
 Edits an existing medical information entry in MedBook when a patient's list of medical information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Medical Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
@@ -312,7 +315,7 @@ Examples:
 
 Adds a consultation report of a patient to MedBook.
 
-Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE nt/NOTES`
+Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE [nt/NOTES]`
 
 Examples:
 * `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 dg/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. fe/54.00 nt/Patient is having fever.`
@@ -329,12 +332,13 @@ Examples:
 ### Editing Consultation Information: `edit`
 
 Edits an existing consultation entry in MedBook when a list of consultation entries is being displayed.
-This is with the exception of the NRIC field, which cannot be modified after creation of Consultation.
+This is with the exception of the NRIC field, which cannot be modified after creation of Consultation. 
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
 
 Examples:
-* `view t/consultation i/S1234567L` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
+* `view t/consultation i/S1234567L` followed by `edit 1 dt/2019-08-10 tm/19-00` updates date and time of first consultation entry displayed on the screen.
 
 
 
@@ -365,6 +369,7 @@ Examples:
 
 Edits an existing prescription entry in MedBook when a list of prescription entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Prescription.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`
 
@@ -388,6 +393,17 @@ Format: `view t/test i/NRIC`
 
 Examples:
 * `view t/test i/S1234567L`
+
+### Editing Test Result: `edit`
+
+Edits an existing test result entry in MedBook when a list of test result entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Test Result.
+At least one field must be filled for edit command to be valid.
+
+Format:  `edit INDEX [td/TEST_DATE] [mt/MEDICAL_TEST] [r/TEST_RESULT]`
+
+Examples:
+* `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates result field of first test result entry displayed on the screen.
 
 
 

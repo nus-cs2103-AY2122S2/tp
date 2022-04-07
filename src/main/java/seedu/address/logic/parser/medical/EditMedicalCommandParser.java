@@ -99,6 +99,10 @@ public class EditMedicalCommandParser implements Parser<EditMedicalCommand> {
                     ParserUtil.parseEthnicity(argMultimap.getValue(PREFIX_ETHNICITY).get()));
         }
 
+        if (!editMedicalDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditMedicalCommand.MESSAGE_NOT_EDITED);
+        }
+
         return new EditMedicalCommand(index, editMedicalDescriptor);
     }
 }
