@@ -276,11 +276,17 @@ Example:
 
 <div markdown="block" class="alert alert-info">
 
-:bulb: Notes about `t/TAG` in the `edit` Command.
+:information_source: Notes about `t/TAG` in the `edit` Command.
 
 * When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
 * You can remove all the tags of the specified player by typing `t/` without specifying any tags after it.<br>
 e.g `edit P/Anthony Glass t/`
+
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Tip: Cannot find your player after edit? Players in the GUI are arranged in lexicographical order (i.e in the order of A to Z followed by a to z), use this property to your advantage!
 
 </div>
 
