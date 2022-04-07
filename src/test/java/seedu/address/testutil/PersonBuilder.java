@@ -67,15 +67,27 @@ public class PersonBuilder {
     /**
      * Parses the {@code teams} into a {@code Set<Team>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTeams(String ... teams) {
+    public PersonBuilder withTeams(String... teams) {
         this.teams = SampleDataUtil.getTeamSet(teams);
+        return this;
+    }
+
+    /**
+     * Parses the {@code teams} into a {@code Set<Team>} and add them to the {@code Person} that we are building.
+     *
+     * @param teams the teams to be appended to the current list of teams of a person
+     * @return the set of teams this person is in
+     */
+    public PersonBuilder addTeams(String... teams) {
+        Set<Team> teamsToAdd = SampleDataUtil.getTeamSet(teams);
+        this.teams.addAll(teamsToAdd);
         return this;
     }
 
     /**
      * Parses the {@code skill} into a {@code Set<Skill>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withSkillSet(String ... skillSet) {
+    public PersonBuilder withSkillSet(String... skillSet) {
         this.skillSet = SampleDataUtil.getSkillSet(skillSet);
         return this;
     }

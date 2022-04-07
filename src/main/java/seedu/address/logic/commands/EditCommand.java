@@ -160,6 +160,7 @@ public class EditCommand extends Command {
         } else {
             commandResult = executeBatchEdit(model, lastShownList);
         }
+        model.commitAddressBook();
         return commandResult;
     }
 
