@@ -6,11 +6,15 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
-public class BookingDateTime {
+import seedu.trackbeau.model.customer.Date;
+
+public class BookingDateTime extends Date {
     public static final String MESSAGE_CONSTRAINTS =
             "BookingDateTime should follow dd-MM-yyyy HH:mm, and it should not be blank";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
     public final LocalDateTime value;
 
     /**
