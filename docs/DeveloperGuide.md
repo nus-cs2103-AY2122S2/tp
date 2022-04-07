@@ -321,8 +321,6 @@ The `Find` command searches for contacts that satisfy any of the given predicate
 for contacts that satisfy all the given predicates. Do note that the conjunction and disjunction also applies within
 each tag field (see User Guide for more details).
 
-### Event feature
-
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
