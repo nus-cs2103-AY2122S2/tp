@@ -18,7 +18,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 2. Download the latest `MyGM.jar` from [here](https://github.com/AY2122S2-CS2103-F09-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your MyGM.
+3. Copy the file to the folder you want to use as the _home folder_ for your MyGM. **Put the JAR file in an empty folder in which the app is allowed to create files (i.e., do not use a write-protected folder). You can copy it to your desktop or just leave it in your Downloads folder.**
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
 The GUI is split into two parts: Players and Schedules. <br>
