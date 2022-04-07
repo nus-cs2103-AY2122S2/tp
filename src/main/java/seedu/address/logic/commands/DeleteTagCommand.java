@@ -57,11 +57,11 @@ public class DeleteTagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person tagAddedPerson = deleteTagFromPerson(personToEdit, tagNumber);
+        Person tagDeletedPerson = deleteTagFromPerson(personToEdit, tagNumber);
 
-        model.setPerson(personToEdit, tagAddedPerson);
+        model.setPerson(personToEdit, tagDeletedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tagDeletedPerson));
     }
 
     private Person deleteTagFromPerson(Person personToEdit, int tagNumber) throws CommandException {
@@ -81,6 +81,7 @@ public class DeleteTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTagCommand // instanceof handles nulls
+                && index.equals(((DeleteTagCommand) other).index)
                 && tagNumber == ((DeleteTagCommand) other).tagNumber);
     }
 }
