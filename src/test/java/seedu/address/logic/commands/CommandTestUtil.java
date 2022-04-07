@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -30,17 +31,29 @@ public class CommandTestUtil {
 
     public static final String VALID_ID_AMY = "A1111111Z";
     public static final String VALID_ID_BOB = "A2222222Z";
+    public static final String VALID_ID_ANDY = "A0000001Z";
     public static final String VALID_NAME_AMY = "Amy";
     public static final String VALID_NAME_BOB = "Bob";
+    public static final String VALID_NAME_ANDY = "Andy";
     public static final String VALID_MODULE_CODE_AMY = "CS1111";
     public static final String VALID_MODULE_CODE_BOB = "CS2222";
+    public static final String VALID_MODULE_CODE_ANDY = "CS2101";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_ANDY = "10000000";
     public static final String VALID_TELEGRAM_HANDLE_AMY = "amyyy";
     public static final String VALID_TELEGRAM_HANDLE_BOB = "bobbb";
+    public static final String VALID_TELEGRAM_HANDLE_ANDY = "andyyy";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_ANDY = "andyyy@u.nus.edu";
+    public static final String VALID_TASK_AMY = "Task A";
+    public static final String VALID_TASK_BOB = "Task B";
     public static final String VALID_INDEX = "1";
+    public static final String VALID_INDEX_TWO = "2";
+    public static final String VALID_INDEX_THREE = "3";
+    public static final String VALID_INDEX_MULTIPLE = "1 2 3";
+    public static final String VALID_TASK_NAME = "Valid Task";
 
     public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID_AMY;
     public static final String ID_DESC_BOB = " " + PREFIX_ID + VALID_ID_BOB;
@@ -54,7 +67,10 @@ public class CommandTestUtil {
     public static final String TELEGRAM_HANDLE_DESC_BOB = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String TASK_DESC_AMY = " " + PREFIX_TASK_NAME + VALID_TASK_AMY;
+    public static final String TASK_DESC_BOB = " " + PREFIX_TASK_NAME + VALID_TASK_BOB;
     public static final String INDEX_DESC = " " + PREFIX_INDEX + VALID_INDEX;
+    public static final String TASK_NAME_DESC = " " + PREFIX_TASK_NAME + VALID_TASK_NAME;
 
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "A&&&&&&&Z"; // '&' not allowed in studentId
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -64,8 +80,10 @@ public class CommandTestUtil {
     public static final String INVALID_TELEGRAM_HANDLE_DESC = " " + PREFIX_TELEGRAM_HANDLE
             + "xxx"; // telegramHandles should have 5 to 32 characters
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_NAME + "*"; // '*' not allowed in task name
     public static final String INVALID_COMMAND_NAME = "poop";
     public static final String INVALID_INDEX = " " + PREFIX_INDEX + "index"; // alphabets and symbols not allowed
+    public static final String INVALID_TASKNAME_DESC = " " + PREFIX_TASK_NAME + "T@sk"; // '@' not allowed in names
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -88,7 +106,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -103,7 +121,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
