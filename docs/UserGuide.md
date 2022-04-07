@@ -67,7 +67,7 @@ Represents a person in university. The person must be a student or a professor.
 
 
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |
-| ----- | ------ | ---- | ------ | -------- | ------- | ----- | --- |
+| ----- | ------ | ---- | ------ | -------- | :------- | ----- | --- |
 | Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ |
 | Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: | | _91234859_ |
 | Email | Person's email address| 0 - 1 | [Email Format](#email-address-format) |  4 - 320 characters | :heavy_check_mark:| | _johndoe@example.com_ |
@@ -80,7 +80,7 @@ Can have both Professors and Students associated with it.
 * Association with student implies student is taking the module.
 
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |  
-| ----- | ------ | ---- | ------ | -------- | ------- | ----- | --- |
+| ----- | ------ | ---- | ------ | -------- | :------- | ----- | --- |
 |Code| Module code| 1 |Any character except whitespaces | 1 - 10 characters| :heavy_check_mark: | A module code is case insensitive, e.g. _cs2103_ and _CS2103_ are considered the same. The case stored in UniBook is the case of the first module entered with the given module code. Future additions of the same module code with different case will not be allowed. | _CS2103_ |
 |Name| Name of the module | 1 | Alphanumeric with whitespaces| 1 - 50 characters | :x: | | _Software Engineering_ |
 |Key Event| A key event of the module that is occurring at a specific time and date. Consists of two subfields, key event type and key event datetime.| 0 - * | **Key event type**: <br>4 possible values: <br>1. `exam`<br>2. `quiz` <br>3.`assignment_release`<br>4. `assignment_due`<br> **Key event datetime**: [Date-Time Format](#date-time-format)| Not relevant as acceptable values covers this | :x: | Duplicate key events of exact same type and datetime cannot exist within the same module. <br> Case of characters for key event type does not matter. e.g. `exam` and `EXAM`mean the same thing.| Key event type: _Exam_<br> Key event datetime: _2022-12-02 13:30_|
@@ -91,7 +91,7 @@ Can have both Professors and Students associated with it.
 * Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed.
 
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |  
-| ----- | ------ | ---- | ------ | -------- | ------- | ----- | --- |
+| ----- | ------ | ---- | ------ | -------- | :------- | ----- | --- |
 |Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
 |Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
 
