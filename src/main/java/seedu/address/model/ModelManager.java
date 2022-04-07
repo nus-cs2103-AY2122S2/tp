@@ -137,44 +137,8 @@ public class ModelManager implements Model {
         updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
-    @Override
-    public void addMedical(Medical medical) {
-        medBook.addMedical(medical);
-        updateFilteredMedicalList(PREDICATE_SHOW_ALL_MEDICALS);
-    }
-
-    @Override
-    public boolean hasMedical(Medical medical) {
-        requireNonNull(medical);
-        return medBook.hasMedical(medical);
-    }
-
-    @Override
-    public void deleteMedical(Medical target) {
-        medBook.removeMedical(target);
-    }
-
-    @Override
-    public void setMedical(Medical target, Medical editedMedical) {
-        requireAllNonNull(target, editedMedical);
-
-        medBook.setMedical(target, editedMedical);
-    }
-
-    @Override
-    public ObservableList<Medical> getFilteredMedicalList() {
-        return filteredMedicals;
-    }
-
-    @Override
-    public void setPatient(Patient target, Patient editedPatient) {
-        requireAllNonNull(target, editedPatient);
-
-        medBook.setPatient(target, editedPatient);
-    }
-
     //=========== Filtered Patient List Accessors =============================================================
-
+    //@@author
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -190,13 +154,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setPatient(Patient target, Patient editedPatient) {
+        requireAllNonNull(target, editedPatient);
+
+        medBook.setPatient(target, editedPatient);
+    }
+
+    @Override
     public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
     }
 
     //=========== Contact ================================================================================
-
+    //@@author clement0010
     @Override
     public boolean hasContact(Contact contact) {
         requireNonNull(contact);
@@ -238,8 +209,45 @@ public class ModelManager implements Model {
         filteredContacts.setPredicate(predicate);
     }
 
-    //=========== Prescription ======================================================
+    //=========== Medical ================================================================================
+    //@@author sibinhho99-nus
+    @Override
+    public void addMedical(Medical medical) {
+        medBook.addMedical(medical);
+        updateFilteredMedicalList(PREDICATE_SHOW_ALL_MEDICALS);
+    }
 
+    @Override
+    public boolean hasMedical(Medical medical) {
+        requireNonNull(medical);
+        return medBook.hasMedical(medical);
+    }
+
+    @Override
+    public void deleteMedical(Medical target) {
+        medBook.removeMedical(target);
+    }
+
+    @Override
+    public void setMedical(Medical target, Medical editedMedical) {
+        requireAllNonNull(target, editedMedical);
+
+        medBook.setMedical(target, editedMedical);
+    }
+
+    @Override
+    public ObservableList<Medical> getFilteredMedicalList() {
+        return filteredMedicals;
+    }
+
+    @Override
+    public void updateFilteredMedicalList(Predicate<Medical> predicate) {
+        requireNonNull(predicate);
+        filteredMedicals.setPredicate(predicate);
+    }
+
+    //=========== Prescription ======================================================
+    //@@author cheekean5848
     @Override
     public void addPrescription(Prescription prescription) {
         medBook.addPrescription(prescription);
@@ -277,7 +285,7 @@ public class ModelManager implements Model {
     }
 
     //=========== TestResult ================================================================================
-
+    //@@author joey-chance
     @Override
     public boolean hasTestResult(TestResult testResult) {
         requireNonNull(testResult);
@@ -321,7 +329,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Consultation ================================================================================
-
+    //@@author juslam19
     @Override
     public boolean hasConsultation(Consultation consultation) {
         requireNonNull(consultation);
@@ -365,7 +373,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Summary ======================================================================================
-
+    //@@author sibinhho99-nus
     @Override
     public void updateSummary(Nric nric) {
         // Update all internal lists with Nric predicates
@@ -378,13 +386,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Other Accessors ==============================================================================
-
-    @Override
-    public void updateFilteredMedicalList(Predicate<Medical> predicate) {
-        requireNonNull(predicate);
-        filteredMedicals.setPredicate(predicate);
-    }
-
+    //@@author
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
