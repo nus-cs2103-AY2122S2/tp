@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/aaron-ljx.png" width="200px">
 
 [[github](http://github.com/aaron-ljx)]
-[[portfolio](team/aaronljx.md)]
+[[portfolio](team/aaron-ljx.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines

@@ -26,7 +26,8 @@ public class UntagTaskCommand extends Command {
 
     public static final String MESSAGE_UNTAG_TASK_SUCCESS = "Employee %1$s is untagged from the task: ";
 
-    public static final String MESSAGE_NO_SUCH_PERSON = "There is no employee with the full name %1$s!";
+    public static final String MESSAGE_NO_SUCH_PERSON = "There is no employee with the full name %1$s "
+            + "in the current displayed task list!";
 
     public static final String MESSAGE_PERSON_NOT_TAGGED_TO_TASK = "Employee %1$s is not tagged to the task: ";
 

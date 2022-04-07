@@ -2,11 +2,8 @@ package manageezpz.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
-import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TASK_NO_EMPTY_VALUES;
-import static manageezpz.commons.core.Messages.MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TASK_TYPE;
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_TIME_RANGE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
@@ -45,7 +42,7 @@ public class EditTaskCommand extends Command {
             + PREFIX_DATE + "2022-04-06 " + PREFIX_AT_DATETIME + "1800 2000";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the details of the task identified "
+            + ": Edits the details of the Task identified "
             + "by the index number used in the displayed task list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must exist in the Address Book) "
@@ -54,7 +51,7 @@ public class EditTaskCommand extends Command {
             + PREFIX_AT_DATETIME + "TIME\n"
             + "At least one of " + PREFIX_DESCRIPTION + " " + PREFIX_DATE
             + " " + PREFIX_AT_DATETIME + " must have a value.\n"
-            + "For an event task, a start time and an end time "
+            + "For an Event Task, a start time and an end time "
             + "separated with an empty space must be provided "
             + "instead of a single time value.\n"
             + "Example 1: " + EXAMPLE_ONE + "\n"
@@ -62,6 +59,15 @@ public class EditTaskCommand extends Command {
             + "Example 3: " + EXAMPLE_THREE;
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Update Task success: %1$s";
+
+    public static final String MESSAGE_EDIT_TASK_NO_EMPTY_VALUES =
+            "For Deadline Task or Event Task, either desc/ date/ or at/ must have a value after it!";
+
+    public static final String MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES =
+            "A Todo Task does not have a date or time to be edited!";
+
+    public static final String MESSAGE_INVALID_TIME_DETAILS_EVENT_TASK =
+            "Invalid time details for Event Task! Event Task should have start time and end time!";
 
     private final Index index;
     private final String desc;
@@ -78,6 +84,7 @@ public class EditTaskCommand extends Command {
      * @param desc New description of the Task
      * @param date New date of the Task
      * @param time New time of the Task
+     * @param prefixStatusHash To fill up
      */
     public EditTaskCommand(Index index, String desc, String date, String time,
                            HashMap<String, Boolean> prefixStatusHash) {
@@ -112,6 +119,7 @@ public class EditTaskCommand extends Command {
                 // Should not reach this as there are only three types of tasks
                 throw new CommandException(MESSAGE_INVALID_TASK_TYPE);
             }
+
             model.setTask(currentTask, updatedTask);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, updatedTask));
         } catch (ParseException pe) {
@@ -125,10 +133,10 @@ public class EditTaskCommand extends Command {
      * If the value after a prefix is empty, return false.
      * Else, return true.
      */
-
     private boolean ensureFormatCompliance(HashMap<String, Boolean> prefixStatusHash,
                                    String desc, String date, String time) {
         boolean isFormatOkay = true;
+
         HashMap<String, String> inputStatusHash = new HashMap<>();
         inputStatusHash.put("description", desc);
         inputStatusHash.put("date", date);
@@ -154,9 +162,9 @@ public class EditTaskCommand extends Command {
      * @param desc New description of the Todo Task
      * @return Updated Todo task
      */
-
     private Task updateTodo(Todo currentTask, String desc) throws ParseException {
         Todo updatedToDoTask = new Todo(currentTask);
+
         if (prefixStatusHash.get("date") || prefixStatusHash.get("datetime")) {
             throw new ParseException(MESSAGE_EDIT_TODO_TASK_NO_DATE_AND_TIME_VALUES);
         }
@@ -176,7 +184,6 @@ public class EditTaskCommand extends Command {
      * @param time New time of the Deadline Task
      * @return Updated Deadline task
      */
-
     private Task updateDeadline(Deadline currentTask, String desc, String date, String time) throws ParseException {
         Deadline updatedDeadlineTask = new Deadline(currentTask);
 
@@ -208,11 +215,9 @@ public class EditTaskCommand extends Command {
      * @param currentTask Current Event task that is to be updated
      * @param desc New description of the Event Task
      * @param date New date of the Event Task
-     * @param startTime New start time of the Event Task
-     * @param endTime New end time of the Event Task
+     * @param time New time of the Event Task
      * @return Updated Event task
      */
-
     private Task updateEvent(Event currentTask, String desc, String date, String time) throws ParseException {
         Event updatedEventTask = new Event(currentTask);
 
@@ -234,7 +239,7 @@ public class EditTaskCommand extends Command {
             String[] newStartEndTimeStrParts = time.split(" ");
 
             if (newStartEndTimeStrParts.length != 2) {
-                throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
+                throw new ParseException(MESSAGE_INVALID_TIME_DETAILS_EVENT_TASK);
             }
 
             Time newStartTime = ParserUtil.parseTime(newStartEndTimeStrParts[0]);
