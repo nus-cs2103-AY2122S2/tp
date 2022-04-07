@@ -61,4 +61,9 @@ public class PropertyToBuy {
             && house.equals(((PropertyToBuy) other).house)
             && priceRange.equals(((PropertyToBuy) other).priceRange)); // state check
     }
+
+    @Override
+    public String toString() {
+        return getHouse().toString() + "\n" + "Price Range: " + getPriceRange().toString();
+    }
 }

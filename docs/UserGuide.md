@@ -159,21 +159,6 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 
 * Adds a new property that the buyer at `INDEX` is hoping to buy. The index refers to the index number shown in the displayed buyer list. The index **must be a positive integer** 1, 2, 3, …​ within the size of the displayed buyer list.
 * The order of the inputs can be in any order.
-
-* None of the inputs can be empty. E.g. Typing `l/` instead of `l/Bishan` will result in an error.
-* The `HOUSE_TYPE` can be defined as any of the following:
-  * `unspecified`
-  * `apartment`
-  * `bungalow`
-  * `condominium` or `condo`
-  * `colonia`
-  * `hdb` or `hdb_flat`
-  * `semi-detached` or `semi-d` or `semidetached` or `semid`
-  * `mansion`
-* Any other `HOUSE_TYPE` will not be accepted.
-* The default `HOUSE_TYPE` after adding a client is none of the above. After a property has been added, you cannot reset it back to this default.
-* `LOCATION` can be any non-empty input, but do use appropriate locations for your own utility. E.g. `Bishan` or `Marymount`
-* The `PRICE_RANGE` is specified in the following format: `lower,upper`.
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
 * Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
@@ -601,16 +586,17 @@ And here are the examples of 2 sellers, one has a property and one does not have
 ```
 
 ### Some special format of the data
-#### name and phone
+#### Name and Phone
 - They cannot be an empty string: `""` ,  otherwise, it will be seen as invalid format and the buyerbook's data will become empty!
 - `phone` be digits string and must have more than 3 digits.
-#### appointment
+
+#### Appointment
 - The `appointment` field should be either `""` or `"Year-Month-Day-Hour-Minute"` format, no other format is acceptable. `""` is when the appoinment date is not specified yet
 - When specifying the Month and Day, the data should be specified in exactly 2 digits, i.e. you need to pad 0 for 1 digit date or month.
 
-#### tagged
+#### Tag
 - empty tag should be `[]`
-#### propertyToBuy
+#### PropertyToBuy
 - empty property must be `null`, not `"null"` or `'null'`
 - for the `housetype` under `house`, the housetype provided must be one of our [defined houseType](#house-type).
 Otherwise, all other value will be translated to `Unspecified` housetype!
