@@ -84,7 +84,7 @@ Adds a student to TAPA.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 <div markdown="block" class="alert alert-info">
-:warning: <b>Warning!:</b>
+:warning: <b>Warning!</b>
 
 * The student's student ID (matriculation number) has to be unique.
 * An error message will be displayed to the user if the specified student ID already exists in TAPA.
@@ -92,7 +92,12 @@ Adds a student to TAPA.
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b> The name of the added student will be converted to Title Case.
+<b>Notes:</b> 
+
+* Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
+* The name of the student to be added will be converted to Title Case.
+* The current version of TAPA expects that a TA will only teach each student in, at most, one module. Thus, each student to be added can only have one module code.
+
 </div>
 
 **Example**:
@@ -218,7 +223,7 @@ Edits a student's information in TAPA.
 **Format**: `edit STUDENT_INDEX [i/STUDENT_ID] [n/STUDENT_NAME] [m/MODULE_CODE] [p/PHONE_NUMBER] [t/TELEGRAM_HANDLE] [e/EMAIL_ADDRESS]​`
 
 * The index of the student to be edited is a compulsory field.
-* The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded.
+* The student’s matriculation number, name, module code, phone number, telegram handle, and email address fields are optional and can be excluded. However, at least one field to be edited must be included to execute the `edit` command.
 * An error message will be displayed to the user if:
     * the specified index is 0
     * the specified index is a negative number
@@ -241,9 +246,19 @@ Clears all students from TAPA.
 * TAPA will request for the user's confirmation before clearing all students.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
+<div markdown="span" class="alert alert-info">:information_source:
+<b>Notes:</b><br>
+
+* Inputting the `clear` command puts TAPA in the "clear confirmation" mode. In this mode, TAPA will not recognise any command other than `confirm`. Inputting any command other than `confirm` will cause TAPA to exit the "clear confirmation" mode and resume its normal operation.
+* As clearing TAPA cannot be undone, you will have to click the commandBox again to input `confirm`. (This is an additional measure to ensure a user does not clear TAPA accidentally.) After inputting `confirm`, you can click the commandBox again, then continue to use TAPA as per normal.
+</div>
+
 **Example**:
 * `clear`
-    * All students cleared from TAPA.
+    * TAPA enters its "clear confirmation" mode, where a user can input `confirm` to clear all students from TAPA.
+
+* `confirm`
+  * All students cleared from TAPA.
 
 <br>
 
@@ -287,14 +302,14 @@ Assigns a task to a particular student.
     * Assigns assignment 1 to students taking module CS2103T.
 
 <div markdown="block" class="alert alert-info">
-:warning: <b>Warning!:</b>
+:warning: <b>Warning!</b>
 
 * As `MODULE_CODE` is case-sensitive, the user should ensure that the capitalisation of the module should be correct, or else the task would not be assigned properly.
 
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b> The name of the assigned task will be converted to Title Case.
+<b>Note:</b>The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
@@ -365,9 +380,17 @@ Reverts the changes made by the previously executed command.
 **Format**: `undo`
 
 <div markdown="block" class="alert alert-info">
-> :warning: <b>Warning!:</b>
+:warning: <b>Warning!</b>
 
 * The effects of the [`clear` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#deleting-all-students-clear) and the [`undo` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#undoing-the-previous-command-undo) cannot be undone!
+
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source:
+<b>Notes:</b><br>
+
+* While other apps may only allow the undoing of commands that alter stored details, TAPA's `undo` command can revert the changes of almost every command other than `clear` and `undo` itself. (This would include commands like `list`, `sort`, and `add`.) This feature is intended to aid the user in undoing their intended command, since it can be difficult to remember which commands can be undone, or to keep track of the last command that made changes to stored details.
+* Inputting `undo` after the [`archive` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#archiving-details-in-the-address-book-archive) will not delete the copy of TAPA that has been saved in a separate file.
 
 </div>
 
