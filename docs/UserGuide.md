@@ -617,6 +617,10 @@ Examples:
 * `range deleteperson from/2 to/3`
   * Deletes the 2nd and 3rd contacts in the address book.
 
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The `batch` `range` operation are transactions, it will fail due to one command executed failed and the error message of that error command will show, no data will modify or save. 
+</div>
+
 ### Chaining Commands: `chain`
 
 Perform multiple actions in a single command.
@@ -634,8 +638,7 @@ Examples:
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
-The `batch` `range` `chain` operation is executed sequentially, it will fail if one of given command executed failed and the error message of that error command will show, but the successful command before will be saved. 
-(e.g. in `batch editperson n/New Name by/name start/R` the first occurrence of person with name starting with "R" will be edited, but following one will fail due to duplicated name and error message will show)
+The `chain` operation is executed sequentially, it will fail until a given command executed failed and the error message of that error command will show, the previous successful command before will be saved. 
 </div>
 
 ### Exiting the program : `exit`

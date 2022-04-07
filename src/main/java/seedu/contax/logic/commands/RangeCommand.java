@@ -74,8 +74,9 @@ public class RangeCommand extends Command {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
                     commandResultList.clear(); // only for the purpose of not changing output in feature freeze
+                    // special case: duplicated name editing, restore to previous name
                     if (fromIndex.getZeroBased() != toIndex.getZeroBased() && commandText.startsWith("editperson")) {
-                        setFirstOccurrencePerson(model, restorePerson);
+                        model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
                     }
                     commandResultList.add(new CommandResult(ce.getMessage()));
                     break;
@@ -89,13 +90,6 @@ public class RangeCommand extends Command {
             resultOutput.append(result.getFeedbackToUser()).append("\n");
         }
         return new CommandResult(resultOutput.toString());
-    }
-
-
-    private void setFirstOccurrencePerson(Model model, Person restorePerson) {
-        Person lastPerson = model.getFilteredPersonList().get(toIndex.getZeroBased());
-        model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
-        model.setPerson(model.getFilteredPersonList().get(fromIndex.getZeroBased()), lastPerson);
     }
 
 
