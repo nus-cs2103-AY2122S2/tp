@@ -43,6 +43,9 @@ public class Name {
         return this.fullName.compareToIgnoreCase(otherName.fullName);
     }
 
+    /**
+     * Returns true the full name matches a given string.
+     */
     public boolean containsKeyword(String test) {
         if (test.equals("")) {
             return false;
