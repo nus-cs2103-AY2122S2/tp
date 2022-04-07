@@ -80,6 +80,11 @@ public class ShowCard extends UiPart<Region> {
         return imageNode;
     }
 
+    /**
+     * Returns whether the other object specified is equals this object.
+     * @param other object to be checked against this object.
+     * @return true if the other object is equal to this object.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

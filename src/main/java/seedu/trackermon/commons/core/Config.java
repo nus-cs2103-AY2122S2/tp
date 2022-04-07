@@ -36,6 +36,11 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
+    /**
+     * Returns whether the other object specified is equals this object.
+     * @param other object to be checked against this object.
+     * @return true if the other object is equal to this object.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,11 +56,19 @@ public class Config {
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
     }
 
+    /**
+     * Returns the hash code of the {@code Config} object.
+     * @return a hash code of the object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(logLevel, userPrefsFilePath);
     }
 
+    /**
+     * Returns a string representation of the {@code Config} object.
+     * @return the string of the object.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

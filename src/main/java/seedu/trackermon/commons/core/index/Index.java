@@ -49,6 +49,11 @@ public class Index {
         return new Index(oneBasedIndex - 1);
     }
 
+    /**
+     * Returns whether the other object specified is equals this object.
+     * @param other object to be checked against this object.
+     * @return true if the other object is equal to this object.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

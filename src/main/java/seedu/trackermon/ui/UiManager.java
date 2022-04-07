@@ -33,6 +33,10 @@ public class UiManager implements Ui {
         this.logic = logic;
     }
 
+    /**
+     * Executes the method during the startup of the window.
+     * @param primaryStage the stage provided to display the UI.
+     */
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
