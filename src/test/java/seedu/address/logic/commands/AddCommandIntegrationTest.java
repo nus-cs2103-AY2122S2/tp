@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        String errorMessage = "Error: Operation would result in person with same Phone.";
+        String errorMessage = "Error: Operation would result in persons with same Phone.";
         assertCommandFailure(new AddCommand(personInList), model, errorMessage);
     }
 
