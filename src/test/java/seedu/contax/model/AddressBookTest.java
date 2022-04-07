@@ -11,8 +11,10 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
 import static seedu.contax.testutil.TypicalPersons.FRIENDS;
+import static seedu.contax.testutil.TypicalPersons.HOON;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
+import static seedu.contax.testutil.TypicalTags.COLLEAGUES;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,12 +25,14 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.contax.model.person.Address;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
 import seedu.contax.model.tag.Tag;
 import seedu.contax.testutil.AddressBookBuilder;
 import seedu.contax.testutil.PersonBuilder;
+import seedu.contax.testutil.TagBuilder;
 
 public class AddressBookTest {
 
@@ -58,6 +62,18 @@ public class AddressBookTest {
         AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void resetData_personHasMissingTag_replacesData() {
+        AddressBook newAB = getTypicalAddressBook();
+        Tag newTag = new TagBuilder().withName("brand new tag").build();
+        Person hoonWithTag = HOON.withTag(newTag);
+        newAB.addTag(newTag);
+        newAB.addPerson(hoonWithTag);
+
+        addressBook.resetData(newAB);
+        assertEquals(newAB, addressBook);
     }
 
     @Test

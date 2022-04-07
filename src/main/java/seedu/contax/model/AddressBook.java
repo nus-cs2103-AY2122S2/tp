@@ -3,6 +3,7 @@ package seedu.contax.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -47,10 +48,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
+     * Replaces the contents of the person list with {@code persons} and adds any tags that does not exist in the tag
+     * list.
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
+        persons.forEach(this::addTagsNotInList);
+
         this.persons.setPersons(persons);
     }
 
@@ -64,8 +68,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        // Duplicate check not required as ReadOnlyAddressBook ensures unique tags and persons
+        // Ensures all tags are added first.
         setTags(newData.getTagList());
+        setPersons(newData.getPersonList());
     }
 
     //// person-level operations
