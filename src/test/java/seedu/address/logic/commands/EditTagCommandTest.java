@@ -123,7 +123,8 @@ public class EditTagCommandTest {
         Tag tag1 = TagListBuilder.ADD_TAG_1;
         Tag tag2 = TagListBuilder.ADD_TAG_2;
 
-        assertEquals(new EditTagCommand(index1, tagNumber1, tag1), new EditTagCommand(index1, tagNumber1, tag1)); // same values
+        assertEquals(new EditTagCommand(index1, tagNumber1, tag1),
+                new EditTagCommand(index1, tagNumber1, tag1)); // same values
 
         assertNotEquals(new EditTagCommand(index1, tagNumber1, tag1), "1"); //different types
         assertNotEquals(new EditTagCommand(index1, tagNumber1, tag1),

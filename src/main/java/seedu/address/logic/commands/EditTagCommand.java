@@ -93,7 +93,7 @@ public class EditTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditTagCommand // instanceof handles nulls
-                && index == ((EditTagCommand) other).index
+                && index.equals(((EditTagCommand) other).index)
                 && tagNumber == ((EditTagCommand) other).tagNumber
                 && toAdd.equals(((EditTagCommand) other).toAdd));
     }
