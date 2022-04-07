@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAssist is a **desktop app for managing students and their participation in lessons, optimized for typing usage**. If you are someone who prefers **Command Line Interface** (CLI) to **Graphical User Interface** (GUI) while having a GUI to view the student data, TAssist is the app for you.
+TAssist is a desktop app designed to **help teaching assistants manage their classes and students.** TAssist lets you save student contact data and group students into class groups and modules. Record attendance, mark assessments, and more by typing commands. TAssist combines its text command-based system with an intuitive interface to help you work quickly while displaying information in a clear and organized manner. If you are someone who prefers **Command Line Interface** (CLI) to **Graphical User Interface** (GUI) while having a GUI to view student data, TAssist is the app for you.
 
 * Table of Contents
 {:toc}
