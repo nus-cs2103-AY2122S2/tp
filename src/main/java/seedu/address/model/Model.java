@@ -82,8 +82,9 @@ public interface Model {
 
     /**
      * Deletes the given person by comparing person::equals
+     * Returns true if successfully removed person, else return false
      */
-    void safeDeletePerson(Person target);
+    boolean safeDeletePerson(Person target);
 
     /**
      * Adds the given person.

@@ -143,7 +143,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void safeDeletePerson(Person target) {
+        public boolean safeDeletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 

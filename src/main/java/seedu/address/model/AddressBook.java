@@ -95,10 +95,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes person from this {@code AddressBook}.
-     * There must be a person with the same user name, email or phone number in the address book.
+     * Checks for person with the same user name, email or phone number in the address book.
+     * Reruns true if successfully removed person
      */
-    public void safeRemovePerson(Person person) {
-        persons.safeRemove(person);
+    public boolean safeRemovePerson(Person person) {
+        assert persons.contains(person) : "person should be inside address book";
+        return persons.safeRemove(person);
     }
 
     //// util methods

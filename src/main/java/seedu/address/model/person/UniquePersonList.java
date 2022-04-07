@@ -100,14 +100,16 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Removes the person with same username or email or phone number from the list.
      * The person may exist in the list.
+     * Returns true if successfully removed person
      */
-    public void safeRemove(Person toRemove) {
+    public boolean safeRemove(Person toRemove) {
         for (Person p : internalList) {
             if (p.isSamePerson(toRemove)) {
                 internalList.remove(p);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public void setPersons(UniquePersonList replacement) {

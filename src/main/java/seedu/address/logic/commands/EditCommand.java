@@ -187,10 +187,13 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
         Model modelToCheckAgainst = new ModelManager(model.getAddressBook(), model.getUserPrefs());
-        modelToCheckAgainst.safeDeletePerson(personToEdit);
+        boolean isSuccessfullyRemoved = modelToCheckAgainst.safeDeletePerson(personToEdit);
+        if (!isSuccessfullyRemoved) {
+            throw new CommandException("Error: Unable to edit; please contact the developers");
+        }
         if (modelToCheckAgainst.hasPerson(editedPerson)) {
             String duplicatedField = modelToCheckAgainst.getDuplicateField(editedPerson);
-            throw new CommandException("Error: Operation would result in person with same " + duplicatedField + ".");
+            throw new CommandException("Error: Operation would result in persons with same " + duplicatedField + ".");
         }
 
         model.setPerson(personToEdit, editedPerson);

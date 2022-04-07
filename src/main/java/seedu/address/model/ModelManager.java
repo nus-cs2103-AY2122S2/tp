@@ -106,8 +106,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void safeDeletePerson(Person target) {
-        addressBook.safeRemovePerson(target);
+    public boolean safeDeletePerson(Person target) {
+        return addressBook.safeRemovePerson(target);
     }
 
     @Override

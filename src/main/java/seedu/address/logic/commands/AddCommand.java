@@ -61,7 +61,7 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             String duplicatedField = model.getDuplicateField(toAdd);
-            throw new CommandException("Error: Operation would result in person with same " + duplicatedField + ".");
+            throw new CommandException("Error: Operation would result in persons with same " + duplicatedField + ".");
         }
 
 
