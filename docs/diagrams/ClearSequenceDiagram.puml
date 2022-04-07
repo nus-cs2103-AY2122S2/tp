@@ -44,11 +44,11 @@ activate CommandResult
 CommandResult --> ClearCommand
 deactivate CommandResult
 
-ClearCommand --> LogicManager : result
+ClearCommand --> LogicManager : commandResult
 deactivate ClearCommand
 
 ClearCommand -[hidden]-> AddressBookParser
-destroy ClearCommand
+deactivate ClearCommand
 
 [<--LogicManager
 deactivate LogicManager

@@ -225,12 +225,14 @@ Modelling the workflow of the `Add` Command, when the user inputs an **Add Comma
 **Class Diagram of AddCommand class is shown below:**
 ![AddClassDiagram](images/AddClassDiagram.png)
 
-Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand
+Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
 
 1. `MESSAGE_SUCCESS`:
-   - Scenario: Adding of the specified `Person` to the database is successful 
+   - Scenario: Adding of the specified `Person` to the database is successful
+   - Message: "New person added: %1$s" where "%1$s" is the added person's details
 2. `MESSAGE_DUPLICATE_PERSON`:
-   - Scenario: Specified `Person` already exists in the database due to conflicting Matriculation Number, Phone or Email.
+   - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
+   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`
 
 **Sequence Diagram of Add Feature is shown below:**
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
@@ -327,10 +329,20 @@ The clear mechanism implements the following sequence and interactions for the m
 The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
 user to replace the list of students with an empty one. Previous data are swiped away.
 
-**Path Execution of Clear Feature Activity Diagram is shown below:**
+**Path Execution of ClearCommand Activity Diagram is shown below:**
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
-**Sequence Diagram of Clear Feature is shown below:**
+**Class Diagram of ClearCommand is shown below:**
+![ClearClassDiagram](images/ClearClassDiagram.png)
+
+Additionally, there is a static final static message to be displayed to the user when utilising the ClearCommand:
+
+1. `MESSAGE_SUCCESS`
+   - Scenario: Tracey database successfully cleared.
+   - Message: "Tracey has been cleared!".
+
+
+**Sequence Diagram of ClearCommand is shown below:**
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
