@@ -126,6 +126,8 @@ Alternatively, you can also interact with the application through buttons, such 
 
 * Extra inputs for commands that do not take in any (such as `exit`, `list`, `expired`, `out-of-stock`) will be ignored.<br>
   e.g. the command `exit 123` will be interpreted as `exit`.
+* If two inputs of the same tag are given, the latter will be taken. <br> 
+  e.g. the command `add n:Maggie Curry n:Maggie Chicken p:3.00 p:3.50` will add a product with the name Maggie Chicken and with a price of 3.50.
 
 </div>
 
@@ -237,19 +239,6 @@ Click <img align="center" src = "images/ui-icons/trash-2-color.png" alt="Delete"
 
 A pop-up window will appear, requiring you to confirm the deletion. 
 
-<div markdown="block" class="alert alert-primary">
-
-:bulb: You can delete all products that match one or more (tag, value) pairs.
-
-Format: `delete-all [TAG:VALUE ...]`
-
-* Deletes all products that match the (tag, value) pair.
-* Must include at least one (tag, value) pair.
-
-Example: `delete-all n:Bread`
-
-</div>
-
 #### 3.1.5 Finding certain products : `find`
 
 Finds products that fit certain filters given by the user.
@@ -355,7 +344,7 @@ After filling in the required fields, click
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: You can add already expired items by inputting expiry dates in the past!
+:bulb: You can add items that have expired by inputting their expiry dates in the past!
 
 </div>
 
@@ -381,6 +370,8 @@ Click <img align="center" src = "images/ui-icons/manage-item.png" alt="Edit" hei
 A pop-up window will appear, allowing you to update the details for expiry date and quantity.
 
 Then, click on the <img align="center" src = "images/ui-icons/update-item.png" alt="Update" height = "25"/> to update the item.
+
+:bulb: If the quantity of the item is updated to 0, it is deleted.
 
 #### 3.2.3 Deleting an item from a product : `delete-item`
 
@@ -412,6 +403,8 @@ Format: `remind NUMBER_OF_DAYS`
 
 Examples: `remind 10` lists items that are expiring 10 days from now.
 
+:information_source: To find items that are expiring today, use `remind 0`!
+
 ### 3.3 Miscellaneous Commands
 
 #### 3.3.1 Clearing all data : `clear`
@@ -430,6 +423,7 @@ Format: `undo`
 
 :bulb: You can only undo commands that made changes to the data in iBook (i.e., commands involving add/update/delete product/item).
 
+:exclamation: Undo does not preserve the order of the list, thus an item that is deleted and undone may have a different index
 </div>
 
 #### 3.3.3 Redoing most recent undone changes : `redo`
@@ -475,13 +469,15 @@ If your changes to the data file makes its format invalid, iBook will discard al
 
 ## 6. Glossary
 
-| Term                              | Meanings                                                                             |
-|-----------------------------------|--------------------------------------------------------------------------------------|
-| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                        |
-| **Products**                      | `Goods that are unique in name, price, category and description`                     |
-| **Items**                         | `Copies of products that have different expiry dates`                                |
-| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`       |
+| Term                              | Meanings                                                                              |
+|-----------------------------------|---------------------------------------------------------------------------------------|
+| **Main stream OS**                | `Windows, Linux, Unix, MacOS`                                                         |
+| **Products**                      | `Goods that are unique in name, price, category and description`                      |
+| **Items**                         | `Copies of products that have different expiry dates`                                 |
+| **Command line interface(CLI)**   | `An interface where users type in text(commands) to interact with the program`        |
 | **Graphical user interface(GUI)** | `An interface where users interact with graphical icons to interact with the program` |
+| **String**                        | `A sequence of characters that can have whitespace in between`                        |
+| **Substring**                     | `A contiguous sequence of characters inside a string`                                 |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -498,6 +494,8 @@ If your changes to the data file makes its format invalid, iBook will discard al
 | **Find**         | `find [TAG:VALUE]` <br> e.g., `find n:Maggie` `find c:noodles` <br>`find n:Chocolate Bread p:3.00`                                                          |
 | **Expired**      | `expired`                                                                                                                                                   |
 | **Out of Stock** | `out-of-stock`                                                                                                                                              |
+| **Update All**   | `update-all [TAG:NEW_VALUE ...]` <br> e.g. `update-all p:3.00 d:Very tasty`                                                                                 |
+| **Delete All**   | `delete-all`                                                                                                                                                 |
 
 ### 7.2 Item Commands
 
