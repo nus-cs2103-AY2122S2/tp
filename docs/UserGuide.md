@@ -304,8 +304,6 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
 * The candidate index must be a positive integer 1, 2, 3, …​
 * `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
 * `DATE_TIME` must not be earlier than the present date and time.
-* If the day `dd` provided in `DATE_TIME` is not compatible with the month `MM` and year `yyyy`, the nearest valid date will be matched.
-  (e.g. `29-02-2023` will be mapped as `28-02-2023`).
 * Interviews must be scheduled within the office hours, defined as Monday to Friday, 8AM - 6PM (i.e. The last interview for the day allowed is at 5:30PM).
 * Attempts to schedule an interview within the duration of another interview will result in an error.
 (e.g. Interview A starts at 10AM on a given day. Scheduling an interview from 9:31AM up to 10:29AM is prohibited).
