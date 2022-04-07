@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 

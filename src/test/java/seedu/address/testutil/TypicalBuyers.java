@@ -19,6 +19,8 @@ import java.util.List;
 
 import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.PriceRange;
 
 /**
  * A utility class containing a list of {@code client} objects to be used in tests.
@@ -33,7 +35,10 @@ public class TypicalBuyers {
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").build();
     public static final Buyer JUNHENG = new BuyerBuilder().withName("Carl Kurz")
-            .withPhone("95352563").build();
+            .withPhone("95352563").withProperty(
+            new PropertyToBuyBuilder().withHouse(
+                new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("Bishan").build())
+                    .withPriceRange(new PriceRange(0, 20)).build()).build();
     public static final Buyer JUNHONG = new BuyerBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").build();
     public static final Buyer JANALD = new BuyerBuilder().withName("Elle Meyer")
