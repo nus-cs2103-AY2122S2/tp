@@ -593,8 +593,11 @@ Action | Format
 # Appendix
 
 ## Special Formats
+
 These are various fields that have special formats to be followed.
+
 ### Email address format
+
 * Format: `local-part@domain`
 * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
 * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
@@ -602,7 +605,9 @@ These are various fields that have special formats to be followed.
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
 ### Date-Time Format
+
 * Date and time must be entered into UniBook in the following format : `YYYY-MM-DD HH-MM`, e.g. `2022-12-02 13:30`
     * `YYYY` is the year, e.g. `2022`
     * `MM` is the month, e.g. `12`
