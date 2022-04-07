@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalApplicants.CARL;
 import static seedu.address.testutil.TypicalApplicants.ELLE;
 import static seedu.address.testutil.TypicalApplicants.FIONA;
-import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
