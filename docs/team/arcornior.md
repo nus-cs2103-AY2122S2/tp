@@ -9,6 +9,9 @@ Trackermon is a desktop application for tracking and managing shows, optimized f
 
 Given below are my contributions to the project.
 
+**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=arcornior&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=arcornior&tabRepo=AY2122S2-CS2103T-T09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+
 * **New Features**: `import` and `export`
   * What it does: `import` and `export` allows the user to quickly import/export Trackermon data to another location.
   * Justification: Without the feature, users would have to manually locate Trackermon data and transfer it themselves. This provides a layer of abstraction over the process, making it more convenient for the users.
@@ -16,34 +19,30 @@ Given below are my contributions to the project.
   * Credits: [JonathanHoshi](https://github.com/JonathanHoshi) for assistance in implementing the features.
 
 
-
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=arcornior&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=arcornior&tabRepo=AY2122S2-CS2103T-T09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
-
 * **Project management**:
   * Necessary general code enhancements
     * Morphing the product into Trackermon from AB-3.([\#64](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/64), [\#67](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/67))
-    * Managed issues relating to Import and Export ([\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199), [\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156))
+    * Managed issues relating to Import and Export. ([\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199), [\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156))
     * Updated user/developer docs that are not specific to a feature.
       * Updated Quick Start, FAQ, Table of Contents to enhance reader experience. ([\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197), [\#98](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197))
-  * Managed issues relating to `import` and `export` ([\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156), [\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199))
+  * Managed issues relating to `import` and `export`. ([\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156), [\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199))
   * Performed smoke testing on Windows, Linux, MacOS to ensure usability of features across different OS.
   * Performed vetting on documentation.
-
+  * Managed Trackermon's v1.3.1 [release](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
 
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for features `import` and `export`, and FAQ answers [\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197/files)
-    * Updated Quick Start, expanding on different OS ([\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197/files), [\#271](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/271)) 
-    * Added FAQ table [\#271](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/271)
+    * Added documentation for features `import` and `export`, and FAQ answers. [\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197/files)
+    * Updated Quick Start, expanding on different OS. ([\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197/files), [\#271](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/271)) 
+    * Added FAQ table. [\#271](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/271)
   * Developer Guide:
-    * Added Table of Contents [\#98](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/98)
-    * Added use cases UC09-UC10
-    * Updated documentation and UML diagrams for Storage [\#89](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/89)
+    * Added Table of Contents. [\#98](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/98)
+    * Added use cases UC09-UC10.
+    * Updated documentation and UML diagrams for Storage. [\#89](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/89)
     * Added implementation details of `import` and `export` feature. ([\#155](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/155), [\#160](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/160))
-
-
+    
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): ([\#63](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63#issuecomment-1062925638), [\#xxx]())
-  * Reported [bugs and suggestions](https://github.com/arcornior/ped/issues) for other teams in the class
+  * PRs reviewed (with non-trivial review comments): ([\#63](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63#issuecomment-1062925638), [\#182](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/182#discussion_r837057450))
+  * Reported [bugs and suggestions](https://github.com/arcornior/ped/issues) for other teams in the class.
