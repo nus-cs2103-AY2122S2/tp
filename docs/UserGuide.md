@@ -104,9 +104,16 @@ Adds a new interview to HireLah.
 
 Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
 * Date provided must be in format YYYY-MM-DD HH:MM.
-* The index refers to the index number shown in the last displayed Applicant
-  list and Position list.
-* Index provided must be positive.
+* All interviews added have a duration of 1 hour. 
+* An applicant can only have interviews if they are at least 1 hour (60 minutes) apart. For example, 
+  applicant A can have an interview at `2022-01-01 13:00` and again at `2022-01-01 14:00`,
+  but applicant A cannot have another interview at `2022-01-01 14:50`.
+* A candidate can only have at most one interview for each unique position in the position list.
+* The `APPLICANT_INDEX` refers to the index number shown in the last displayed Applicant
+  list.
+* The `POSITION_INDEX` refers to the index number shown in the last displayed Position
+  list.
+* Index provided **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `add -i 1 d/2022-01-01 14:00 p/2`
