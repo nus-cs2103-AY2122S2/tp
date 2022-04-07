@@ -7,9 +7,9 @@ title: Zachary's Project Portfolio Page
 
 Trackermon is a desktop application for tracking and managing shows, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Trackermon helps people track and remember what shows they have watched, are currently watching, or plan to watch.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ardentsoul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
-
 Given below are my contributions to the project.
+
+**Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=ardentsoul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
 * **Enhancements to existing features**: Added the ability to search through specific parameters in a show through the `find` command. ([\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134), [\#176](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/176))
   * What it does: Allows the user to find and filter through shows with a greater degree of precision.
@@ -27,14 +27,15 @@ Given below are my contributions to the project.
 * **Project management**:
   * Necessary general code enhancements
     * Morphing the product into Trackermon from AB-3 [\#61](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/61)
+  * Managed issues relating to find and help window ([\#128](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/128), [\#131](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/131))
   * Updated user/developer docs that are not specific to a feature
-    * Restructured and reformatted the user/developer docs to enhance the user centricity of the documentations ([\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164), [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166))
+    * Restructured and reformatted the user/developer docs to enhance the user centricity of the documentations in the initial phase ([\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164), [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166))
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `find` and `help` [\#85](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/85).
     * Added a command summary table [\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134/files)
-    * Did structural overhaul and improvement to existing documentation [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166).
+    * Did initial structural overhaul and improvement to existing documentation [\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166).
       * Added Introduction
       * Added User guide navigation
       * Added Command structure
@@ -44,7 +45,7 @@ Given below are my contributions to the project.
     * Added implementation details of the `find` feature.
     * Added use cases UC01-UC07.
     * Updated documentation and UML diagrams for Architecture and Logic ([\#81](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/81), [\#92](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/92))
-    * Did structural overhaul and improvement to existing documentation [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164)
+    * Did initial structural overhaul and improvement to existing documentation [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164)
       * Added Introduction 
       * Added About section which includes the purpose and scope of Trackermon
       * Added Developer guide navigation
