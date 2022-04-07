@@ -75,7 +75,6 @@ public class AddCommand extends Command {
             + PREFIX_SIMPLE_NAME + "part ";
 
     public static final String MESSAGE_SUCCESS = "New entity added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ENTITY = "This entity already exists in TAssist";
 
     private final Entity toAdd;
 
