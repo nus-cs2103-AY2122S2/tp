@@ -68,7 +68,8 @@ public class UniquePersonList implements Iterable<Person> {
      * @param uniqueAttributeTypesIndex The index of the unique attributes specified by the {@code Person} class
      */
     private void addNonUniqueAttributeType(ArrayList<String> nonUniqueAttributeTypes, int uniqueAttributeTypesIndex) {
-        assert uniqueAttributeTypesIndex >= 0 && uniqueAttributeTypesIndex <= 2 : false;
+        assert uniqueAttributeTypesIndex >= 0 && uniqueAttributeTypesIndex <= Person.UNIQUE_ATTRIBUTE_TYPES.length
+            : false;
         String attributeType = Person.UNIQUE_ATTRIBUTE_TYPES[uniqueAttributeTypesIndex];
         if (!nonUniqueAttributeTypes.contains(attributeType)) {
             nonUniqueAttributeTypes.add(attributeType);
@@ -76,51 +77,35 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns the message for non-unique attribute types. This message needs further processing as there is a
-     * white space before a comma.
+     * Returns the message for non-unique attribute types.
      *
      * @param nonUniqueAttributeTypes The types of non-unique attribute
      */
-    private String getNonUniqueAttributeTypesMessage(ArrayList<String> nonUniqueAttributeTypes) {
+    public String getNonUniqueAttributeTypesMessage(ArrayList<String> nonUniqueAttributeTypes) {
         if (nonUniqueAttributeTypes.isEmpty()) {
             return "";
         }
-        StringBuilder stringBuilder = new StringBuilder(); // to store all the non-unique attribute types
+        StringBuilder message = new StringBuilder(); // to store all the non-unique attribute types
         if (nonUniqueAttributeTypes.size() == 1) { // only have one non-unique attribute types
-            stringBuilder.append(nonUniqueAttributeTypes.get(0));
-            return stringBuilder.toString();
+            message.append(nonUniqueAttributeTypes.get(0));
+            return message.toString();
+        } else if (nonUniqueAttributeTypes.size() == 2) {
+            message.append(nonUniqueAttributeTypes.get(0) + " and ");
+            message.append(nonUniqueAttributeTypes.get(1));
         } else {
             for (int i = 0; i < nonUniqueAttributeTypes.size(); i++) {
                 if (i == 0) { // first attribute type in the list
-                    stringBuilder.append(nonUniqueAttributeTypes.get(0) + " ");
+                    message.append(nonUniqueAttributeTypes.get(0));
                 } else if (i + 1 == nonUniqueAttributeTypes.size()) { // last attribute type in the list
-                    stringBuilder.append("and ");
-                    stringBuilder.append(nonUniqueAttributeTypes.get(i));
+                    message.append("and ");
+                    message.append(nonUniqueAttributeTypes.get(i));
                 } else { // neither first nor last
-                    stringBuilder.append(", ");
-                    stringBuilder.append(nonUniqueAttributeTypes.get(i) + " ");
+                    message.append(", ");
+                    message.append(nonUniqueAttributeTypes.get(i) + " ");
                 }
             }
         }
-        return removeWhiteSpaceBeforeComma(stringBuilder);
-    }
-
-    /**
-     * Removes white space before a comma for the non-unique attribute type message.
-     *
-     * @param stringBuilder The non-unique attribute type message with a whitespace before comma
-     * @return Trimmed non-unique attribute type message
-     */
-    private String removeWhiteSpaceBeforeComma(StringBuilder stringBuilder) {
-        StringBuilder stringBuilderTrimmed = new StringBuilder();
-        String message = stringBuilder.toString();
-        for (int i = 0; i < message.length(); i++) {
-            // if there is no white space before a comma
-            if (!(message.charAt(i) == ' ' && message.charAt(i + 1) == ',')) {
-                stringBuilderTrimmed.append(message.charAt(i));
-            }
-        }
-        return stringBuilderTrimmed.toString();
+        return message.toString();
     }
 
     /**
