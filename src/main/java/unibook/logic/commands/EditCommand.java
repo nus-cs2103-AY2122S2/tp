@@ -382,13 +382,18 @@ public class EditCommand extends Command {
                 }
             }
 
-
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+            int phoneIdx = model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0);
+            boolean isPhoneIdxDiff =
+                    model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0) != index.getZeroBased();
+            int emailIdx = model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1);
+            boolean isEmailIdxDiff =
+                    model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1) != index.getZeroBased();
 
             if ((model.hasPersonWithPhoneOrEmail(editedPerson)
-                    && (model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(0) != index.getZeroBased()
-                        || model.getIdxPersonWithDuplicatePhoneOrEmail(editedPerson).get(1) != index.getZeroBased()))
+                    && (phoneIdx != -1 && isPhoneIdxDiff)
+                        || (emailIdx != -1 && isEmailIdxDiff))
                     || !personToEdit.equals(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }

@@ -29,11 +29,11 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
    * **`add`**`o/student n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to UniBook.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the current list of people.
 
-   * **`edit`**`o/person 1 p/91234567 e/prof@email.com` : Edits the 1st contact's phone number and email shown in the current list.
+   * **`edit`**`1 o/person p/91234567 e/prof@email.com` : Edits the 1st person's phone number and email shown in the current list of people.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all information stored in UniBook. (be careful!)
 
    * **`exit`** : Exits the app.
 
@@ -67,43 +67,52 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
 </div>
 
-## Core function of UniBook
+#Main Function of UniBook
+## To store and provide easy viewing and modification of the following types of entities:
+### Person - Student or Professor 
+* Contains 3 basic details - name, phone and email. Phone and Email details can be left blank.
+* A Professor can contain one additional detail - office, the office in the University they are located in. This can also be left blank.
+### Module
+* Represents a University module, storing 4 basic details - module name, module code, groups of the module and key events of the module. Key Events represent events such as exams or assignment due dates, storing the associated date.
+* Can have both Professors and Students associated with it. 
+  * Association with Professor implies that the professor is involved in the teaching of the module.
+  * Association with student implies student is taking the module.
+### Group
+* Represents any kind of group related to a university module that a student is in - a study group, project grp etc. It stores meeting times for the group.
+* Can contain multiple students, implying they are members of the group.
+* Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed. 
 
-* To serve its purpose as useful desktop app for University students to manage their university contacts for their studies in an organised manner, UniBook supports the following types of entries:
-  * 2 types of people - Students and Professors
-    * All people contain 3 basic details - name, phone and email. Phone and Email details can be left blank.
-    * Professors can contain one additional detail - office, the office in the University they are located in. This can also be left blank.
-  * Modules
-    * A module represents a University module, storing 4 basic details - module name, module code, groups of the module and key events of the module. Key Events represent events such as exams or assignment due dates, storing the associated date.
-    * A module can have both Professors and Students associated with it. 
-      * Association with Professor implies that the professor is involved in the teaching of the module.
-      * Association with student implies student is taking the module.
-  * Groups
-    * A group can represent any kind of group related to a university module that a student is in - a study group, project grp etc. It stores meeting times for the group.
-    * A group can contain multiple students implying they are members of the group.
-    * A group is also associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed. 
-* UniGroup is thus an app that displays and stores the above entries for easy reference by users, with smart commands that help to manage entries of them.
 
-## User Interface
+# Graphical User Interface
+## Main Functions of the GUI:
+1. Complement the CLI by providing the User an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
+2. Provide basic ease-of-use features to enhance the user experience. 
 
-* UniBook consists of 3 main pages that a user can navigate through - the _people page_, _modules page_ and _groups page_.
-  * The _people page_ displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names. (ref: `add` command)
-  ![Ui](images/Ui.png) 
-  * The _module page_ displays all modules stored in UniBook, and all their individual details.
-  ![ModulesPage](images/modulesPage.png)
-  * The _groups page_ displays all the groups stored in UniBook, and all their individual details.
-  ![GroupsPage](images/groupsPage.png)
-  
-* A User can navigate between pages with the `list` command.
+## The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
+###Each view has its own variations of the basic command types.
+### People View:
+Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
 
-* Different variations of CLI commands can be run depending on the page user is currently on.
+![Ui](images/Ui.png)
+### Module View: 
+Displays all modules stored in UniBook, with all their individual details.
 
-* While UniBook is primarily optimized for the command-line interface (CLI), some basic intuitive navigation is available for quick navigation across pages to improve ease-of-use :
-  * On _people page_, a user can click on a module code to enter the _module page_ displaying all the details of the module with the given module code.
-  * On _people page_, a user can click on a group name to enter the _group page_ displaying all the details of the group with the given group name.
+![ModulesPage](images/modulesPage.png)
+### Groups View: 
+Displays all the groups stored in UniBook, with all their individual details.
 
-* On _module page_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
-* On _group page_, showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
+![GroupsPage](images/groupsPage.png)
+
+## Navigation
+### Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
+
+**However, some basic intuitive features are available for quick navigation**:
+  * On _people view_, click on a module code to enter the _module view_ displaying all the details of the module with the given module code.
+  * On _people view_, click on a group name to enter the _group view_ displaying all the details of the group with the given group name.
+
+## Other GUI features
+  * On _module view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
+  * On _group view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
 
 ## Viewing help : `help`
 
@@ -328,6 +337,7 @@ General Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [of
 * Edits the entity type defined by `o/OPTION`. This is a compulsory field.
   * Options available are person, module, keyevent or group.
 * All indexes must be positive integers.
+* `INDEX` refers to the index of the person / module / group / key event listed on the viewing page.
 * Existing values will be updated to the input values.    
 * Before choosing to edit module or person, user can see which `INDEX` to edit by changing the UI to show the relevant list. User will not be allowed to edit if not on the correct page. 
   * `list o/view v/modules` : To display list of modules with respective indexes
@@ -337,49 +347,51 @@ General Format: `edit INDEX o/OPTION [m/MODULE] [n/NAME] [p/PHONE] [e/EMAIL] [of
   * `module` page: Able to edit module, keyevent or group fields
   * `group`  page: Able to edit keyevent or group fields
   * `person` page: Able to edit person
-    
-**Commands while on `People` view**
+
+
+### On People view:
 
 At least one optional field must be edited in order for person to be successfully edited.
 
+#### :bulb: Edit person's name, phone, email, office and/or tag.
 Format: `edit INDEX o/person [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [t/TAG]`
-* Edits the `name`, `phone` and/or `email` fields of a person at `INDEX`.
 * The `office` field can only be edited if the person is a professor.
 * Editing a tag overrides all previous tags and user only able to edit tags 1 word at a time. 
   * E.g. `edit 1 o/person t/helpful t/friend` edits the tag of the first person on the list to helpful and friend.
 * Example: `edit 1 o/person n/Alexa` changes the name of the first person on the list to Alexa.
 
+#### :bulb: Add person to a specific group in the module.
 Format: `edit INDEX o/person [m/MODULE] [g/GROUPNAME]`
-* Adds person at `INDEX` to the group named `GROUPNAME` in the stated `MODULE`.
 * Both `[m/MODULE]` and `[g/GROUPNAME]` fields are compulsory for successful edit.
 * Example: `edit 1 o/person m/CS2103 g/T2` adds the first person to the `group` named T2 in the CS2103 `module`.
 
+#### :bulb: Add person to a new module. 
 Format: `edit INDEX o/person [nm/NEWMOD]`
-* Adds person at `INDEX` to the stated `MODULE`.
 * Example: `edit 1 o/person nm/CS2103` adds the first person to the CS2103 `module`.
 
-**Commands while on `Modules` view**
+### On Modules view:
 
 At least one optional field must be edited in order for module to be successfully edited.
 
+#### :bulb: Edit module's name and/or module code.
 Format: `edit INDEX o/module [n/NAME] [m/MODCODE]`
 * Edits the `name` and/or `modcode` fields of a module at `INDEX`.
 * Example: `edit 1 o/module n/Software Engineering m/CS2103` changes the name and module code of the first module on the list to Software Engineering and CS2103 respectively.
 
+#### :bulb: Edit group's group name and/or meeting times.
 Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
-* Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
 * `DATETIME` must be in `YYYY-MM-DD HH:mm` format.  
 * Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
 
+#### :bulb: Edit key event of module's type and/or date time.
 Format: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]`
-* Edits  `type` and/or `datetime` of the keyevent at module at `INDEX`.
-* Example: `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45` adds the second key event's type and date time in the first module in the list to exam and 12th December 2022 4:45pm respectively.
+* Example: `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45` adds the second key event's type and date time in the first module in the list to exam and 12th December 2022 4:45pm respectively. 
 
-**Commands while on `Groups` view**
+### On Groups view:
 
 At least one optional field must be edited in order for module to be successfully edited.
 
-Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
+#### :bulb: Edit group's group name and/or meeting times.
 * Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
 * `DATETIME` must be in `YYYY-MM-DD HH:mm` format.
 * Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.

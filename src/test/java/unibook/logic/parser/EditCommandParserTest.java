@@ -1,6 +1,7 @@
 package unibook.logic.parser;
 
 import static unibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_1;
+import static unibook.commons.core.Messages.MESSAGE_MISSING_OPTION;
 import static unibook.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static unibook.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static unibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -49,7 +50,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, " 1 o/person ", EditCommand.MESSAGE_NOT_EDITED);
 
         // no option and no field specified
-        assertParseFailure(parser, " 1 ", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " 1 ", MESSAGE_MISSING_OPTION);
     }
 
     @Test
