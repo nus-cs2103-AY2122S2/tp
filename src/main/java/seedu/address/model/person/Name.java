@@ -47,8 +47,11 @@ public class Name {
      * Returns true the full name matches a given string.
      */
     public boolean containsKeyword(String test) {
-        checkArgument(isValidName(test), MESSAGE_CONSTRAINTS);
-        return this.fullName.toLowerCase().contains(test);
+        if (test.equals("")) {
+            return false;
+        } else {
+            return this.fullName.toLowerCase().contains(test);
+        }
     }
 
     @Override
