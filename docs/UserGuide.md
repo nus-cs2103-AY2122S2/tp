@@ -26,7 +26,7 @@ faster than traditional GUI applications.
 1. Copy the file to the folder you want to use as the _home folder_ for your TAlent Assistant™.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/startupui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -288,7 +288,12 @@ View more details about the Candidate in the middle panel.
 Format: `focus INDEX`
 
 * Additional details of the Candidate will be displayed on the center panel in the application.
-* To switch to another Candidate's information, user will just need to type the new command and the new index of the candidate.
+* To switch to another Candidate's information, user can enter a new `focus` command and the new `index` of the candidate.
+* If a `Candidate` is in focus and the user decides to `delete` the candidate, the middle panel will be cleared. 
+
+
+  ![Ui](images/focusui.png)
+
 
 ## Scheduling interviews
 
