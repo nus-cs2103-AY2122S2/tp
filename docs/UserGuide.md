@@ -144,7 +144,7 @@ Find friends in _Amigos_ whose name, tags or logs' title matches ANY of the give
 
 **Examples**:
 * `findfriend n/John t/neighbour` returns all friends with 'John' in the name and 'neighbour' in any of the tags.
-* `findfriend n/John n/Emily n/Russell`returns all friends with 'John' or 'Emily' or 'Russel' in the name.
+* `findfriend n/John n/Emily n/Russel`returns all friends with 'John' or 'Emily' or 'Russel' in the name.
 
 
 ## Logs management

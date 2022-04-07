@@ -335,7 +335,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 _Amigos_ supports logs, via `addlog`, `deletelog` and `editlog` features.
 
-In this section we will go through the high-level design details and notes to take about the implementatio for these features.
+In this section we will go through the high-level design details and notes to take about the implementation for these features.
 
 #### 3.1 Log's representation in the model and storage
 
@@ -860,6 +860,7 @@ Use case ends
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Log**: Details of interaction between user and friend
 * **Event**: Upcoming meeting/ date of significance for a friend
+* **Insight**: Some summary statistic(s) about a friend
 
 --------------------------------------------------------------------------------------------------------------------
 
