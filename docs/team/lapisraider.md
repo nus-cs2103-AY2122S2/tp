@@ -5,10 +5,13 @@ title: Angie's Project Portfolio Page
 
 ### Project: CinnamonBun
 
-CinnamonBun is an address book aimed at business owners to help keep track of their 
-clients information while still having the benefit of a GUI (Graphic User Interface).
+Small business owners and freelancers may find it difficult to keep track of all their clients.
 
-Given below are my contributions to the project.
+CinnamonBun is an application that helps to record and manage a large number of clients and business transactions, thus allowing business owners to focus more on their business and less on bookkeeping.
+
+CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still being optimized for control via a Command Line Interface (CLI).
+
+### My Contributions
 
 * **New Feature**: Add ability to undo modifications made to the clients list. [\#80](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/80)
   * Functionality: Allows the user to undo previous modifications made to the clients list in the event they realized they made a mistake.
