@@ -45,6 +45,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation details of the `find` feature.
     * Added use cases UC01-UC07.
+    * Added instructions for manual testing for `find`.
     * Updated documentation and UML diagrams for Architecture and Logic ([\#81](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/81), [\#92](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/92)).
     * Did initial structural overhaul and improvement to existing documentation [\#164](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/164).
       * Added Introduction 
