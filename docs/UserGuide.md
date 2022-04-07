@@ -149,47 +149,48 @@ Format: `edit -TYPE …​`
 
 Edits an existing Applicant in HireLah.
 
-Format: `edit -a INDEX [n/APPLICANT_NAME] [ag/AGE] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit -a APPLICANT_INDEX [n/APPLICANT_NAME] [ag/AGE] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the Applicant at the specified `INDEX`. The index refers to the index number shown in the displayed Applicant
-  list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
+* Edits the Applicant at the specified `APPLICANT_INDEX`. 
+* The `APPLICANT_INDEX` refers to the index number shown in the last displayed applicant list
+* The `APPLICANT_INDEX` **must be a positive integer** 1, 2, 3, …​
+* **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
 * You can remove all the Applicant’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
-*  `edit -a 1 n/Belle ag/43 g/F p/81234567` Edits the name, age, gender and phone number of the 1st applicant
-   to be `Belle`, `1960-03-04`, `F` and `81234567` respectively.
-*  `edit -a 2 e/belle@yahoo.com a/13 Computing Drive 612345 t/` Edits the email and address of the 2nd applicant to be
-   `belle@yahoo.com` and `13 Computing Drive 612345` respectively, and clears all existing tags.
+*  `edit -a 1 n/Belle ag/43 g/F p/81234567` 
+*  `edit -a 2 e/cedric@yahoo.com a/13 Computing Drive 612345 t/`
 
 ### Editing an Interview : `edit -i`
 
-Edit an existing interview in HireLah.
+Edits an existing interview in HireLah.
 
-Format: `edit -i INTERVIEW_INDEX [d/DATE] [p/POSITION_INDEX]`
-* Edits the interview at the specified INTERVIEW_INDEX. The interview index refers to the index number shown in the
-  last displayed interview list.
-* At least one optional field must be provided.
-* The position index refers to the index number shown in the last displayed interview list.
+Format: `edit -i INTERVIEW_INDEX [a/APPLICANT_INDEX] [d/DATE] [p/POSITION_INDEX]`
+* Date provided must be in format YYYY-MM-DD HH:MM.
+* Edits the interview at the specified `INTERVIEW_INDEX`. 
+* Only interviews with `Pending` status can be edited.
+* The `INTERVIEW_INDEX` refers to the index number shown in the last displayed interview list.
+* The `APPLICANT_INDEX` refers to the index number shown in the last displayed applicant list.
+* The `POSITION_INDEX` refers to the index number shown in the last displayed position list.
+* **At least one** optional field must be provided.
 * Existing attribute of the interview will be updated to the input value.
-* When editing requirements, the existing requirements of the interview will be removed. i.e.
-  adding requirements is not cumulative.
 
 Examples:
 * `edit -i 1 d/2022-01-01 15:00`
-* `edit -i 3 d/2022-01-01 15:00 p/1`
+* `edit -i 3 a/1 d/2022-01-01 15:00 p/1`
 
 
 ### Edit positions : `edit -p`
 
-Edit an existing position in HireLah.
+Edits an existing position in HireLah.
 
 Format: `edit -p POSITION_INDEX [p/POSITION_NAME] [o/NUM_OPENINGS] [d/DESCRIPTION] [r/REQUIREMENTS]`
 
-* Edits the available position with POSITION_INDEX.
+* Edits the available position at the specified `POSITION_INDEX`.
+* The `POSITION_INDEX` refers to the index number shown in the last displayed position list.
 * At least one optional field must be provided.
 * Existing attributes of the position will be updated to the input value.
 * When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
