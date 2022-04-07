@@ -20,10 +20,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.INVALID_DATE_FORMAT_MESSAGE;
+import static seedu.address.logic.parser.ParserUtil.INVALID_HOURS_FORMAT_MESSAGE;
+import static seedu.address.logic.parser.ParserUtil.INVALID_MINUTES_FORMAT_MESSAGE;
 import static seedu.address.logic.parser.ParserUtil.INVALID_START_TIME_MESSAGE;
-import static seedu.address.logic.parser.ParserUtil.MINUTES_GREATER_THAN_59_MESSAGE;
-import static seedu.address.logic.parser.ParserUtil.NEGATIVE_HOURS_MESSAGE;
-import static seedu.address.logic.parser.ParserUtil.NEGATIVE_MINUTES_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -92,7 +91,7 @@ public class AddLessonCommandParserTest {
                 + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + LESSON_START_TIME_DESC_6PM
                 + INVALID_DURATION_HOURS_NEGATIVE_DESC
                 + LESSON_DURATION_MINUTES_DESC_30MIN,
-                NEGATIVE_HOURS_MESSAGE);
+                INVALID_HOURS_FORMAT_MESSAGE);
     }
 
     @Test
@@ -101,7 +100,7 @@ public class AddLessonCommandParserTest {
                 + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + LESSON_START_TIME_DESC_6PM
                 + LESSON_DURATION_HOURS_DESC_2HOUR
                 + INVALID_DURATION_MINUTES_NEGATIVE_DESC,
-                NEGATIVE_MINUTES_MESSAGE);
+                INVALID_MINUTES_FORMAT_MESSAGE);
     }
 
     @Test
@@ -110,6 +109,6 @@ public class AddLessonCommandParserTest {
                 + LESSON_ADDRESS_DESC_AMK + LESSON_DATE_DESC + LESSON_START_TIME_DESC_6PM
                 + LESSON_DURATION_HOURS_DESC_2HOUR
                 + INVALID_DURATION_MINUTES_EXCEEDS_59_DESC,
-                MINUTES_GREATER_THAN_59_MESSAGE);
+                INVALID_MINUTES_FORMAT_MESSAGE);
     }
 }

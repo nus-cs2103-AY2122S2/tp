@@ -1,11 +1,14 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.lesson.DateTimeSlot;
 
 /**
@@ -57,11 +60,12 @@ class JsonAdaptedDateTimeSlot {
         checkDurationMinutesIsValid(durationMinutes);
 
         LocalDate modelDateOfLesson = DateTimeSlot.parseLessonDate(dateOfLesson);
-        String modelStartTime = startTime;
+        LocalTime modelStartTime = ParserUtil.parseStartTime(startTime);
+        LocalDateTime modelStartingDateTime = modelDateOfLesson.atTime(modelStartTime);
         Integer modelDurationHours = DateTimeSlot.parseLessonDurationHours(durationHours);
         Integer modelDurationMinutes = DateTimeSlot.parseLessonDurationMinutes(durationMinutes);
 
-        return getDateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
+        return getDateTimeSlot(modelStartingDateTime, modelDurationHours, modelDurationMinutes);
     }
 
     private static void checkFieldsArePresent(Object... toCheck) throws IllegalValueException {
@@ -96,14 +100,9 @@ class JsonAdaptedDateTimeSlot {
         }
     }
 
-    private static DateTimeSlot getDateTimeSlot(LocalDate modelDateOfLesson, String modelStartTime,
+    private static DateTimeSlot getDateTimeSlot(LocalDateTime modelDateTime,
                                                 Integer modelDurationHours, Integer modelDurationMinutes)
             throws IllegalValueException {
-
-        try {
-            return new DateTimeSlot(modelDateOfLesson, modelStartTime, modelDurationHours, modelDurationMinutes);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalValueException(DateTimeSlot.MESSAGE_CONSTRAINTS);
-        }
+        return DateTimeSlot.makeDateTimeSlotFromJson(modelDateTime, modelDurationHours, modelDurationMinutes);
     }
 }

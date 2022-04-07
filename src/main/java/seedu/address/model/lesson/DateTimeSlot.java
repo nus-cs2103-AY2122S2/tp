@@ -1,7 +1,6 @@
 package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,6 +10,7 @@ import java.time.format.ResolverStyle;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -60,34 +60,6 @@ public class DateTimeSlot {
      */
     public DateTimeSlot(LocalDateTime date, int hours) {
         this(date, hours, 0);
-    }
-
-    /**
-     * Constructs a {@code DateTimeSlot}.
-     *
-     * @param date Date of the lesson.
-     * @param startTime Starting time of the lesson.
-     * @param hours Duration of the lesson, hours.
-     * @param minutes Duration of the lesson, minutes.
-     */
-    public DateTimeSlot(LocalDate date, String startTime, int hours, int minutes) {
-        requireNonNull(date);
-        checkArgument((hours > 0 && minutes >= 0 && minutes <= 60)
-                        || (hours == 0 && minutes > 0 && minutes <= 60),
-                MESSAGE_CONSTRAINTS);
-
-        String[] hourAndMinuteOfStartTime = startTime.split(":");
-        Integer hour;
-        Integer minute;
-        LocalDateTime lessonDateTime;
-
-        hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
-        minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
-        lessonDateTime = date.atTime(hour, minute);
-
-        dateOfLesson = lessonDateTime;
-        this.hours = hours;
-        this.minutes = minutes;
     }
 
     /**
@@ -246,6 +218,24 @@ public class DateTimeSlot {
         }
 
         return true;
+    }
+
+    /**
+     * Returns an instance of DateTimeSlot from information stored in JSON representation.
+     *
+     * @throws IllegalValueException
+     */
+    public static DateTimeSlot makeDateTimeSlotFromJson(LocalDateTime lessonDateTime, Integer hours, Integer minutes)
+            throws IllegalValueException {
+        DateTimeSlot dateTimeSlot;
+
+        try {
+            dateTimeSlot = makeDateTimeSlot(lessonDateTime, hours, minutes);
+        } catch (CommandException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+
+        return dateTimeSlot;
     }
 
     /**

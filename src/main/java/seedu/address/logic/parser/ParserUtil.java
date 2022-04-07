@@ -44,19 +44,15 @@ public class ParserUtil {
             + "include the following\n"
             + "-h 2";
 
-    public static final String NEGATIVE_HOURS_MESSAGE = "Hours cannot be lesser than 0.";
-
     public static final String INVALID_START_TIME_MESSAGE = "Invalid start time format! Start time must be in HH:mm\n"
             + "[EXAMPLE] to specify that a lesson starts at 6:30PM, include the following\n"
             + "-t 18:30";
 
     public static final String INVALID_MINUTES_FORMAT_MESSAGE = "Invalid duration in minutes format! "
-            + "Minutes must be a non-negative integer.\n"
+            + "Minutes must be a non-negative integer between 0-59.\n"
             + "[EXAMPLE] to specify that the minutes field in the lesson's duration is 25 minutes, "
             + "include the following\n"
             + "-m 25";
-    public static final String NEGATIVE_MINUTES_MESSAGE = "Minutes cannot be lesser than 0.";
-    public static final String MINUTES_GREATER_THAN_59_MESSAGE = "Minutes cannot be greater than 59.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -290,7 +286,7 @@ public class ParserUtil {
         }
 
         if (hours < 0) {
-            throw new ParseException(NEGATIVE_HOURS_MESSAGE);
+            throw new ParseException(INVALID_HOURS_FORMAT_MESSAGE);
         }
 
         return hours;
@@ -312,12 +308,8 @@ public class ParserUtil {
             throw new ParseException(INVALID_MINUTES_FORMAT_MESSAGE);
         }
 
-        if (minutes < 0) {
-            throw new ParseException(NEGATIVE_MINUTES_MESSAGE);
-        }
-
-        if (minutes > 59) {
-            throw new ParseException(MINUTES_GREATER_THAN_59_MESSAGE);
+        if (minutes < 0 || minutes > 59) {
+            throw new ParseException(INVALID_MINUTES_FORMAT_MESSAGE);
         }
 
         return minutes;
