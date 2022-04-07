@@ -5,6 +5,7 @@ title: Tiew Wei Jian's Project Portfolio Page
 
 ### Project: TAlent Assistant™
 
+### Overview ###
 TAlent Assistant™ is a desktop lightweight and centralized management system catered to professors for managing the
 process of hiring undergraduate/graduate Teaching Assistants (TA). They will be able to access the TAs’ application
 data easily and review qualifications or availability for scheduling interviews. It is optimized for use via a Command
