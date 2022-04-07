@@ -7,7 +7,7 @@ import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.model.entry.Entry;
 
 public abstract class ListCommand extends Command {
-    private final SearchType searchType;
+    protected final SearchType searchType;
 
     public ListCommand(SearchType searchType) {
         this.searchType = searchType;
