@@ -29,7 +29,8 @@ Given below are my contributions to the project.
   * Ensured the team's completion of weekly deliverables and its deadlines.
   * Managed releases `v1.2` - `v1.4` on GitHub
   * Delegated team members what functionalities each of us had to implement to prevent any conflict and provide a better workflow.
-  
+
+<div style="page-break-after: always;"></div>
 
 * **Enhancements to existing features**:
   * Changed the Employee class to not have `address` & `tag` fields. [#62](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/62)
