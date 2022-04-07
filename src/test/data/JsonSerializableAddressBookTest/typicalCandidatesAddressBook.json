@@ -10,7 +10,7 @@
       "applicationStatus": "Pending",
       "interviewStatus": "Scheduled",
       "availability": "1,2,3,4,5",
-    "remark" : ""
+      "remark" : ""
   }, {
     "studentId": "A0123451B",
     "name" : "Alice Pauline",
