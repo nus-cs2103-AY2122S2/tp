@@ -56,18 +56,18 @@ Constraint Types:
 * _Length Constraint_ : The minimum - maximum length of a field. 
   * A number >0 for minimum means that if the field has been filled, then the value it was been filled with cannot be blank.
   * \* for maximum means that the field is unbounded.
-* _Unique Constraint_ : If he field must be unique among all other entities of its type.
+* _Unique Constraint_ : If the field must be unique among all other entities of its type.
   * :heavy_check_mark: - yes 
   * :x: - no
 * _Additional Constraints_ : Any additional constraints on the field.
 ### Person - Student or Professor 
 Represents a person in university. The person **must be a student or a professor.**
 
-|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints|Example|
+|Field|Description|Number of entries|Acceptable Values|Length Constraint|Unique Constraint|Additional Constraints|Example|
 |-----|------|----|------|--------|-------|-----|---|
-| Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ | :heavy_check_mark: |
+| Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ |
 | Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: | | _91234859_ |
-| Email | Person's email address| 0 - 1 | [Email Format](###email-address-format) |  4 - 320 characters | :heavy_check_mark:| | _tomjones@gmail.com_ |
+| Email | Person's email address| 0 - 1 | [Email Format](#email-address-format) |  4 - 320 characters | :heavy_check_mark:| | _tomjones@gmail.com_ |
 | Office | Professor's office location in university campus | 0 - 1 |Any character except whitespaces | 1 - 20 characters | :x: | Only Professor has this field| _COM2-02-57_ |
 | Tag |  A one word piece of information to attach to a person - similar to a hashtag on social media | 0 - * | Alphanumeric | 1 - 20 characters | :x: | Among the tags of a person, 1 specific tag can only appear once| _friend_ | 
 ### Module
@@ -78,9 +78,9 @@ Can have both Professors and Students associated with it.
 
 |Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints|Example|
 |-----|------|----|------|--------|-------|-----|---|
-|Code| Module code| 1 |Any character except whitespaces | 1 - 10 characters| :heavy_check_mark: | A module code is case insensitive, e.g. _cs2103_ and _CS2103_ are considered the same. The case stored in UniBook is the case of the first module entered with the given module code. Future additions of the same module code with different case will not be allowed. | _CS2103_ | :heavy_check_mark:|
-|Name| Name of the module | 1 | Alphanumeric with whitespaces| 1 - 50 characters | :x: | | _Software Engineering_ | :heavy_check_mark: |
-|Key Event| A key event of the module that is occurring at a specific time and date. Consists of two subfields, key event type and key event datetime.| 0 - * | **Key event type**: <br>4 possible values: <br>1. `exam`<br>2. `quiz` <br>3.`assignment_release`<br>4. `assignment_due`<br> **Key event datetime**: [Date-Time Format](###datetime-format)| Not relevant as acceptable values covers this | :x: | Duplicate key events of exact same type and datetime cannot exist within the same module. <br> Case of characters for key event type does not matter. e.g. `exam ` and `EXAM`mean the same thing.| Key event type: _Exam_<br> Key event datetime: _2022-12-02 13:30_|
+|Code| Module code| 1 |Any character except whitespaces | 1 - 10 characters| :heavy_check_mark: | A module code is case insensitive, e.g. _cs2103_ and _CS2103_ are considered the same. The case stored in UniBook is the case of the first module entered with the given module code. Future additions of the same module code with different case will not be allowed. | _CS2103_ |
+|Name| Name of the module | 1 | Alphanumeric with whitespaces| 1 - 50 characters | :x: | | _Software Engineering_ |
+|Key Event| A key event of the module that is occurring at a specific time and date. Consists of two subfields, key event type and key event datetime.| 0 - * | **Key event type**: <br>4 possible values: <br>1. `exam`<br>2. `quiz` <br>3.`assignment_release`<br>4. `assignment_due`<br> **Key event datetime**: [Date-Time Format](#date-time-format)| Not relevant as acceptable values covers this | :x: | Duplicate key events of exact same type and datetime cannot exist within the same module. <br> Case of characters for key event type does not matter. e.g. `exam ` and `EXAM`mean the same thing.| Key event type: _Exam_<br> Key event datetime: _2022-12-02 13:30_|
 
 ### Group
 * Represents any kind of group related to a university module that a student is in - a study group, project group etc. 
@@ -89,12 +89,12 @@ Can have both Professors and Students associated with it.
 
 |Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints |Example|
 |-----|------|----|------|--------|-------|-----|---|
-|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy-check-mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
-|Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](###datetime-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
+|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
+|Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
 
 # Graphical User Interface
 ## Main Function
-1. Complement the CLI by providing the User an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
+1. Complement the CLI by providing the user an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
 2. Provide basic ease-of-use features to enhance the user experience. 
 
 ## Views 
@@ -105,7 +105,7 @@ The GUI consists of 3 main views that a user can navigate through - the _people 
 Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
 
 ![PeopleView](images/peopleView.png)
-### Module View
+### Modules View
 Displays all modules stored in UniBook, with all their individual details.
 
 ![ModulesView](images/modulesView.png)
@@ -122,8 +122,8 @@ Navigation between views is done primarily with the `list` command, as UniBook i
   * On _people view_, click on a group name to enter the _group view_ displaying all the details of the group with the given group name.
 
 ## Other GUI features
-  * On _module view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
-  * On _group view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
+  * On _modules view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
+  * On _groups view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
 
 
 # Commands
@@ -599,7 +599,7 @@ These are various fields that have special formats to be followed.
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-### DateTime Format
+### Date-Time Format
 * Date and time must be entered into UniBook in the following format : `YYYY-MM-DD HH-MM`, e.g. `2022-12-02 13:30`
     * `YYYY` is the year, e.g. `2022`
     * `MM` is the month, e.g. `12`
