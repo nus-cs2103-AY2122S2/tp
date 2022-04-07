@@ -24,15 +24,16 @@ Given below are my contributions to the project.
 * Justification: This feature is an important addition to Trackermon. The feature allows users to keep track of watch status fo the shows.
 
 * **Project management**:
-* Managed issues relating to Model's components, etc. [\#118](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/118) [\#103](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/103)
-* Tested for bugs and fixed bugs related to components [\#145](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/241) [\#256](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/256)
+* Managed issues relating to Model's components, etc. 
+* Tested for bugs and fixed bugs related to components.
+  * [/#261](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/261)
 
 **Documentation**:
 * User Guide: 
-  * Added documentation for features `suggest`
+  * Added documentation for features `suggest`[\#194](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/194)
 * Developer Guide:
-  * Added implementation details of the Status feature.
-  * Added implementation details of the suggest feature.
+  * Added implementation details of the Status feature.[\#60](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/60)
+  * Added implementation details of the suggest feature.[\#194](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/194)
 
 **Community**:
 * PRs reviewed (with non-trival review comments):
@@ -40,6 +41,6 @@ Given below are my contributions to the project.
 * Reported bugs and suggestions:
 
 **Enhancements to existing features**:
-* Refactor and morph AB3 code into a working product for Trackermon [\#77]
-* Morph and implement Remark feature into the Comment feature for Trackermon  [\#102] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102)
-* Morph and implement Tag feature for Trackermon [\#147] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/147)
+* Refactor and morph AB3 code into a working product for Trackermon [\#60](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/60)
+* Morph and implement Remark feature into the Comment feature for Trackermon [\#102](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102)
+* Morph and implement Tag feature for Trackermon [\#147](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/147)
