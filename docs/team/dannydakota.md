@@ -31,7 +31,10 @@ Given below are my contributions to the project.
         * Added documentation for the features `delete` and `find` [\#72]()
         * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `Add` feature.
+        * Edited the sequence diagram for Add feature [\#89]()
+        * Add Activity diagram for Add feature [\#89]()
+        * Added class diagrams for Add and Clear Feature [\#268]()
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
