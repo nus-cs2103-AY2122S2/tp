@@ -85,6 +85,12 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     private Prefix getPrefix(ArgumentMultimap argMultiMap) {
         List<Prefix> currentPrefixes = Arrays.stream(TASK_TYPES)
                 .filter(prefix -> argMultiMap.isPrefixExist(prefix)).collect(Collectors.toList());
+        String prefixEnteredMessage = "Prefix entered:";
+
+        if (!currentPrefixes.isEmpty()) {
+            logger.info(String.join(" ", prefixEnteredMessage, currentPrefixes.toString()));
+        }
+
         if (currentPrefixes.size() > 1) {
             // If the user enters more than 1 task type
             String moreThanOneTaskTypeMessage = "More than one task type entered as options";
@@ -94,20 +100,15 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         } else if (currentPrefixes.isEmpty()) {
             return null;
         } else {
-            String prefixPresentMessage = "Specific prefix selected:";
             Prefix currentPrefix = currentPrefixes.get(0);
-            String currentPrefixString = currentPrefix.getPrefix().replaceFirst("/","").toUpperCase();
-            logger.info(String.join(" ", prefixPresentMessage, currentPrefixString));
-
             return currentPrefix;
         }
     }
 
     private List<String> getDescriptions(ArgumentMultimap argMultiMap) {
+        String namesMessage = "Description:";
         List<String> descriptions = null;
         if (argMultiMap.isPrefixExist(PREFIX_DESCRIPTION)) {
-            String namesMessage = "Description:";
-
             String descriptionString = argMultiMap.getValue(PREFIX_DESCRIPTION).get();
             descriptions = List.of(descriptionString.split("\\s+"));
             logger.info(String.join(" ", namesMessage, descriptions.toString()));
@@ -117,18 +118,20 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private void checkIfValidDescription(List<String> description) {
+        String invalidDescriptionFoundMessage = "Invalid Description found.";
         boolean isValid = description.stream().allMatch(name -> Description.isValidDescription(name));
         if (!isValid) {
-            String invalidDescriptionFoundMessage = "Invalid Description found.";
             logger.warning(invalidDescriptionFoundMessage);
             addErrorMessage(FindTaskCommand.INVALID_DESCRIPTION);
         }
     }
 
     private Date getTaskDate(ArgumentMultimap argMultiMap) {
+        String dateMessage = "Date:";
         Date date = null;
         if (argMultiMap.isPrefixExist(PREFIX_DATE)) {
             String dateString = argMultiMap.getValue(PREFIX_DATE).get().trim();
+            logger.info(String.join(" ", dateMessage, dateString));
             boolean isDateValid = checkIfDateIsValid(dateString);
             if (isDateValid) {
                 date = new Date(dateString);
@@ -138,8 +141,10 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private boolean checkIfDateIsValid(String dateString) {
+        String invalidDateMessage = "Invalid date entered";
         boolean isValidDate = Date.isValidDate(dateString);
         if (!isValidDate) {
+            logger.warning(invalidDateMessage);
             addErrorMessage(FindTaskCommand.INVALID_DATE);
             return false;
         }
@@ -147,15 +152,18 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private Priority getTaskPriority(ArgumentMultimap argMultiMap) {
+        String prioritySelectedMessage = "Priority selected:";
         Priority priority = null;
         if (argMultiMap.isPrefixExist(PREFIX_PRIORITY)) {
             String priorityString = argMultiMap.getValue(PREFIX_PRIORITY).get().trim().toUpperCase();
+            logger.info(String.join(" ", prioritySelectedMessage, priorityString));
             priority = checkPriority(priorityString);
         }
         return priority;
     }
 
     private Priority checkPriority(String priorityString) {
+        String invalidPriorityStringMessage = "Invalid Priority String";
         switch (priorityString) {
         case "HIGH":
             return Priority.HIGH;
@@ -166,31 +174,38 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         case "NONE":
             return Priority.NONE;
         default:
+            logger.warning(invalidPriorityStringMessage);
             addErrorMessage(FindTaskCommand.INVALID_PRIORITY);
             return null;
         }
     }
 
     private String getAssignee(ArgumentMultimap argMultiMap) {
+        String assigneeMessage = "Assignee:";
         String assignee = null;
         if (argMultiMap.isPrefixExist(PREFIX_ASSIGNEES)) {
             assignee = argMultiMap.getValue(PREFIX_ASSIGNEES).get().trim();
+            logger.info(String.join(" ", assigneeMessage, assignee));
             checkedIfNameValid(assignee);
         }
         return assignee;
     }
 
     private void checkedIfNameValid(String assignee) {
+        String invalidNameMessage = "Invalid name";
         boolean isNameValid = Name.isValidName(assignee);
         if (!isNameValid) {
+            logger.warning(invalidNameMessage);
             addErrorMessage(FindTaskCommand.INVALID_ASSIGNEE);
         }
     }
 
     private Boolean getIsMarked(ArgumentMultimap argMultiMap) {
+        String booleanMessage = "Boolean entered:";
         Boolean isMarked = null;
         if (argMultiMap.isPrefixExist(PREFIX_IS_MARKED)) {
             String booleanString = argMultiMap.getValue(PREFIX_IS_MARKED).get().trim().toLowerCase();
+            logger.info(String.join(" ", booleanMessage, booleanString));
             boolean isEitherTrueOrFalse = checkIfEitherTrueOrFalse(booleanString);
             if (isEitherTrueOrFalse) {
                 isMarked = Boolean.valueOf(booleanString);
@@ -200,9 +215,11 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
     }
 
     private boolean checkIfEitherTrueOrFalse(String booleanString) {
+        String invalidBooleanMessage = "Invalid boolean";
         if (booleanString.equals("true") || booleanString.equals("false")) {
             return true;
         } else if (!booleanString.equals("true") && !booleanString.equals("false")) {
+            logger.warning(invalidBooleanMessage);
             addErrorMessage(FindTaskCommand.INVALID_BOOLEAN);
             return false;
         }
