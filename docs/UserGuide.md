@@ -370,6 +370,8 @@ Additional details:
 * Note that editing a `Position`'s name after an `Applicant` has been hired will not change the `Applicant`'s job 
   status.
 
+Example: `accept 1`
+
 ## Rejecting Interviews : `reject`
 
 Rejects an existing interview in Hirelah. This command rejects the `passed` interview,
@@ -383,6 +385,8 @@ Format: `reject INTERVIEW_INDEX`
 
 Additional details:
 * Rejecting a job offer will decrement the number of `offered` in `Position`, as the offer no longer stands.
+
+Example: `reject 1`
 
 ## Exporting Data : `export`
 
