@@ -21,6 +21,8 @@ TAssist is a **desktop app for managing students and their participation in less
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+1. When you open TAssist for the first time, the app displays sample data. A data file will be saved to your device only after you issue your first command.
+
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`list student`** and pressing Enter will list all students added.<br>
    Some example commands you can try:
 
@@ -90,14 +92,14 @@ Examples:
 * `add module n/Software Engineering Project c/CS2103T a/21S1` creates a new module named `Software Engineering Project` with a module code of `CS2103T` for the academic year `21S1` (academic year 2021 Semester 1).
 
 
-#### Listing all modules: `list module`
+#### List all modules: `list module`
 
 View a list of all your modules using the list command.
 
 Format: `list module`
 
 
-#### Deleting a module: `delete module`
+#### Delete a module: `delete module`
 
 You can always delete a module from TAssist. Deleting the module will also delete associated class group(s) and assessment(s).
 
@@ -105,6 +107,7 @@ Format: `delete module INDEX`
 
 * Deletes the module at the specified `INDEX`.
 * The index refers to the index number shown in the displayed module list.
+* The module is removed from both the displayed list and the original list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -123,14 +126,15 @@ Examples:
 * `add assessment n/Test m/1` creates a new assessment that is tied to the 1st module shown when `list module` is run.
 
 
-#### Deleting an assessment: `delete assessment`
+#### Delete an assessment: `delete assessment`
 
 Delete any assessment from TAssist by specifying its index.
 
 Format: `delete assessment INDEX`
 
 * Deletes the assessment at the specified `INDEX`.
-* The index refers to the index number shown in the displayed class groups list.
+* The index refers to the index number shown in the displayed assessments list.
+* The assessment is removed from both the displayed list and the original list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -162,7 +166,7 @@ Add class groups to modules you've created. Class groups refer to tutorials, lab
 
 Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
-* TAssist supports the following `CLASS_GROUP_TYPE`: `LAB`, `RECITATION`, `SECTIONAL` and `TUTORIAL`.
+* You can create 4 different types of class groups: labs, recitations, sectionals, and tutorials. Specify `CLASS_GROUP_TYPE` using one of the following values: `LAB`, `RECITATION`, `SECTIONAL` and `TUTORIAL`.
 
 Examples:
 * `add class id/T13 t/tutorial m/1` creates a new class group that is tied to the 1st module shown when `list module` is run.
@@ -189,7 +193,7 @@ Examples:
 * `list class m/1` displays the class groups belonging to the 1st module shown when `list module` is run.
 
 
-#### Deleting a class group: `delete class`
+#### Delete a class group: `delete class`
 
 Delete the specified class group from TAssist.
 
@@ -197,6 +201,7 @@ Format: `delete class INDEX`
 
 * Deletes the class group at the specified `INDEX`.
 * The index refers to the index number shown in the displayed class groups list.
+* The class group is removed from both the displayed list and the original list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -205,7 +210,7 @@ Examples:
 
 ### Managing students
 
-#### Creating students: `add student`
+#### Create a student: `add student`
 
 Create a student to record their contact details. You can enrol this student in class groups later.
 
@@ -255,7 +260,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`.
 
 
-#### Deleting a student: `delete student`
+#### Delete a student: `delete student`
 
 Delete the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
 
@@ -263,6 +268,7 @@ Format: `delete student INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
+* The student is removed from both the displayed list and the original list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -345,7 +351,7 @@ Examples:
 
 ### Grade assessments: `grade`
 
-Grade a student's attempt at a specified module assessment.
+Grade a student's attempt at a specified module assessment. You can assign the same grade to multiple students at once.
 
 Format: `grade {a/ASSESSMENT_INDEX | sn/SIMPLE_NAME m/MODULE_INDEX} s/all|STUDENT_INDEXES|STUDENT_IDS [g/GRADE]`
 
@@ -361,11 +367,16 @@ Examples:
 * `grade a/1 s/1,2,3,4,5,6` increments the grades of the 1st 6 students enrolled in the module tied to the 1st assessment shown when `list assessment` is run.
 * `grade a/1 s/e0123456,e0234567 g/1` adds a grade of value `1` for the students with student IDs `E0123456` and `E0234567` to the 1st assessment shown when `list assessment` is run.
 
+
 ### Managing data
 
 #### Clear all entries: `clear`
 
-Clear all entries from TAssist.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command is destructive.
+</div>
+
+Clear all entries from TAssist including modules, assessments, class groups, and students. You will not be able to restore this data.
 
 Format: `clear`
 
