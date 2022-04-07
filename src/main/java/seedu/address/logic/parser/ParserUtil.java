@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.FilterArgument;
 import seedu.address.logic.FilterType;
+import seedu.address.logic.HelpArgument;
 import seedu.address.logic.SortArgument;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
@@ -298,5 +299,18 @@ public class ParserUtil {
             throw new ParseException(SortArgument.MESSAGE_CONSTRAINTS);
         }
         return new SortArgument(trimmedSortArgument);
+    }
+
+    /**
+     * Parses a {@code String helpArgument} into a {@code HelpArgument}.
+     * All whitespaces will be trimmed, and argument will be converted to lower case.
+     */
+    public static HelpArgument parseHelpArgument(String helpArgument) throws ParseException {
+        requireNonNull(helpArgument);
+        String trimmedHelpArgument = helpArgument.replaceAll("\\s+", "").toLowerCase();
+        if (!HelpArgument.isValidHelpArgument(trimmedHelpArgument)) {
+            throw new ParseException(HelpArgument.COMMAND_NOT_FOUND_DESCRIPTION);
+        }
+        return new HelpArgument(trimmedHelpArgument);
     }
 }
