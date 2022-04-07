@@ -49,7 +49,6 @@ public class GradeLabCommandParserTest {
         // invalid lab
         assertParseFailure(parser, VALID_INDEX + "l/a " + VALID_LABMARK_DESC, Lab.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, VALID_INDEX + "l/-1 " + VALID_LABMARK_DESC, Lab.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_INDEX + "l/0001 " + VALID_LABMARK_DESC, Lab.MESSAGE_CONSTRAINTS);
 
         // invalid marks
         assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/-1", LabMark.MESSAGE_CONSTRAINTS);

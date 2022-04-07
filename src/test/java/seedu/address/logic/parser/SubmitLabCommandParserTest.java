@@ -41,7 +41,6 @@ public class SubmitLabCommandParserTest {
         // invalid lab
         assertParseFailure(parser, VALID_INDEX + "l/a ", Lab.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, VALID_INDEX + "l/-1 ", Lab.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_INDEX + "l/0001 ", Lab.MESSAGE_CONSTRAINTS);
 
         // invalid index and lab
         assertParseFailure(parser, "-1 " + "l/a ", MESSAGE_INVALID_FORMAT);
