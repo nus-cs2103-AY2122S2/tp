@@ -5,15 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.contax.testutil.Assert.assertThrows;
+import static seedu.contax.testutil.TypicalPersons.ALICE;
+import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
+import static seedu.contax.testutil.TypicalTags.COLLEAGUES;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.contax.model.person.Person;
+import seedu.contax.model.person.UniquePersonList;
 import seedu.contax.model.tag.exceptions.DuplicateTagException;
 
 class UniqueTagListTest {
@@ -128,5 +134,21 @@ class UniqueTagListTest {
         assertEquals(list2.hashCode(), list3.hashCode());
 
         assertNotEquals(refList.hashCode(), list2.hashCode());
+    }
+
+    @Test
+    public void iterator() {
+        UniqueTagList refList = new UniqueTagList();
+
+        refList.add(FRIENDS);
+        refList.add(COLLEAGUES);
+
+        HashSet<Tag> result = new HashSet<>();
+        for (Tag x : refList) {
+            result.add(x);
+        }
+
+        assertTrue(result.contains(FRIENDS));
+        assertTrue(result.contains(COLLEAGUES));
     }
 }

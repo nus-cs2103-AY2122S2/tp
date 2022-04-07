@@ -9,6 +9,7 @@ import static seedu.contax.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.contax.testutil.Assert.assertThrows;
 import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
+import static seedu.contax.testutil.TypicalPersons.FRIENDS;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.contax.model.person.exceptions.DuplicatePersonException;
 import seedu.contax.model.person.exceptions.PersonNotFoundException;
+import seedu.contax.model.tag.UniqueTagList;
 import seedu.contax.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -199,6 +201,26 @@ public class UniquePersonListTest {
 
         assertTrue(result.contains(BOB));
         assertTrue(result.contains(ALICE));
+    }
+
+    @Test
+    public void equals() {
+        UniquePersonList personList = new UniquePersonList();
+        UniquePersonList list2 = new UniquePersonList();
+        list2.add(ALICE);
+
+        UniquePersonList list3 = new UniquePersonList();
+        list3.add(ALICE);
+
+        // Same tag list
+        assertTrue(personList.equals(personList));
+        assertTrue(personList.equals(new UniquePersonList()));
+        assertTrue(list2.equals(list3));
+
+        // Null checking
+        assertFalse(personList.equals(null));
+        assertFalse(personList.equals(list2));
+        assertFalse(personList.equals(0));
     }
 
 }

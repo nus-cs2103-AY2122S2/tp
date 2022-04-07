@@ -54,6 +54,7 @@ public class NameTest {
         Name reference1 = new Name("Work Meeting");
         Name reference2 = new Name("Work Meeting 2");
 
+        assertTrue(reference1.equals(reference1));
         assertTrue(reference1.equals(new Name("Work Meeting")));
         assertTrue(reference2.equals(new Name("Work Meeting 2")));
         assertTrue(reference1.equals(reference1));
