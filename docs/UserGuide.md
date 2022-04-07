@@ -18,7 +18,7 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 2. Download the latest `HireLah.jar` from [here](https://github.com/AY2122S2-CS2103-W17-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your HireLah.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -30,13 +30,11 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
    * `list -a s/asc`: Switches to applicants tab and displays all applicants sorted by name in ascending order.
 
-   * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`: Adds an applicant named `Benedict` to the Address Book.
+   * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`: Adds an applicant named `Benedict` to the HireLah.
 
    * `delete -i 2`: Deletes the 2nd interview shown in the current interview list.
-
-   * `pass 1`: Passes the 1st interview shown in the current interview list.
    
-   * `export -a`: Exports the data of all applicants in HireLah to a CSV file.
+   * `export -a`: Exports the displayed data of all applicants in HireLah to a CSV file.
    
    * `exit`: Exits the app.
 
@@ -54,10 +52,10 @@ from offering positions to scheduling interviews with candidates. It is optimise
   e.g. in `add -a n/NAME`, `NAME` is a parameter which can be used as `add n/Benedict`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/C++` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/C++`, `t/Java t/C++` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -72,13 +70,13 @@ from offering positions to scheduling interviews with candidates. It is optimise
 
 
 ## Add
-General command to add different types into HireLah.
+General command to add different data types into HireLah.
 
-Format: `add -TYPE`
+Format: `add -TYPE …​`
 * TYPE must take the form of `a`, `i`, `p`
-* -a will add an applicant
-* -i will add an interview
-* -p will add a position
+   * `-a` to indicate adding an applicant
+   * `-i` to indicate adding an interview
+   * `-p` to indicate adding a position
 
 ### Adding an Applicant: `add -a`
 
@@ -90,9 +88,9 @@ Format: `add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRES
 An applicant can have any number of tags (including 0)
 </div>
 
-* Age provided must be exactly two digits and should not start with 0 eg: “23”
-* Name, Phone number and email must be unique 
-* Gender must be M/F (case-sensitive)
+* Age provided must be **exactly two digits** and should not start with 0 eg: “23”
+* Two applicants cannot have the same Name, Phone Number or Email 
+* Gender **must be M/F** (case-sensitive)
 
 Examples:
 * `add -a n/Benedict ag/20 g/M p/98123456 e/ben@gmail.com a/12 Kent Ridge Drive, 119243`
@@ -104,11 +102,11 @@ Adds a new interview to HireLah.
 
 Format: `add -i APPLICANT_INDEX d/DATE p/POSITION_INDEX`
 * Date provided must be in format YYYY-MM-DD HH:MM.
-* All interviews added have a duration of 1 hour. 
-* An applicant can only have interviews if they are at least 1 hour (60 minutes) apart. For example, 
-  applicant A can have an interview at `2022-01-01 13:00` and again at `2022-01-01 14:00`,
-  but applicant A cannot have another interview at `2022-01-01 14:50`.
-* A candidate can only have at most one interview for each unique position in the position list.
+* All interviews added have a **duration of 1 hour**. 
+* An applicant can only have interviews if they are **at least 1 hour (60 minutes) apart**. For example, 
+  an applicant can have an interview at `2022-01-01 13:00` and again at `2022-01-01 14:00`,
+  but not at `2022-01-01 13:50`.
+* A candidate can only have **at most one interview for each unique position** in the position list.
 * The `APPLICANT_INDEX` refers to the index number shown in the last displayed Applicant
   list.
 * The `POSITION_INDEX` refers to the index number shown in the last displayed Position
@@ -122,12 +120,17 @@ Examples:
 
 Adds a new open position to HireLah.
 
-Format: `add -p p/POSITION_NAME o/NUM_OPENINGS [d/DESCRIPTION] [r/REQUIREMENTS]`
+Format: `add -p p/POSITION_NAME o/NUM_OPENINGS d/DESCRIPTION [r/REQUIREMENTS]`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A position can have any number of requirements (including 0)
+</div>
+
 * Positions must have a **unique name**.
 * Name provided is case-insensitive.
 * Number of openings in the position must be between **1 and 5 digits**.
-* Description must be between **1 and 200** characters.
-* Name must be between **1 and 100** characters.
+* Description must be between **1 and 200 characters**.
+* Name must be between **1 and 100 characters**.
 
 Examples:
 * `add -p p/Senior Software Engineer o/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS`
@@ -136,11 +139,11 @@ Examples:
 ## Edit
 General command to edit different types into HireLah.
 
-Format: `edit -TYPE`
+Format: `edit -TYPE …​`
 * TYPE must take the form of `a`, `i`, `p`
-* -a will edit an applicant
-* -i will edit an interview
-* -p will edit a position
+   * `-a` to indicate editing an applicant
+   * `-i` to indicate editing an interview
+   * `-p` to indicate editing a position
 
 ### Editing an Applicant : `edit -a`
 
@@ -192,8 +195,8 @@ Format: `edit -p POSITION_INDEX [p/POSITION_NAME] [o/NUM_OPENINGS] [d/DESCRIPTIO
 * When editing requirements, the existing requirements of the position will be removed. i.e. adding requirements is not cumulative.
 * Requirements can be removed by providing an empty requirement field. i.e. r/
 * Number of openings in the position must be between **1 and 5 digits**.
-* Description must be between **1 and 200** characters.
-* Name must be between **1 and 100** characters.
+* Description must be between **1 and 200 characters**.
+* Name must be between **1 and 100 characters**.
 
 Examples:
 * `edit -p 1 p/Senior Frontend Software Engineer o/5`
