@@ -5,7 +5,6 @@ import static seedu.trackbeau.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 public class Birthdate extends Date {
@@ -30,7 +29,7 @@ public class Birthdate extends Date {
      * Returns true if a given string is a valid Birthdate.
      */
     public static boolean isValidBirthdate(String test) {
-        if (!isSatisfyDateRequirements(test,formatter)) {
+        if (!isSatisfyDateRequirements(test, formatter)) {
             return false;
         }
         return true;
