@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.property.House;
 import seedu.address.model.property.Location;
+import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.property.PropertyToBuy;
 import seedu.address.model.property.PropertyToSell;
 
@@ -41,7 +42,9 @@ public class LocationMatchBuyerPredicate implements Predicate<Seller> {
         Location buyLocation = houseToBuy.getLocation();
         Location sellLocation = houseToSell.getLocation();
 
-        return buyLocation.equals(sellLocation);
+        boolean isNotNullProperty = !(propertyToSell instanceof NullPropertyToSell);
+
+        return buyLocation.equals(sellLocation) && isNotNullProperty;
     }
 
     public PropertyToBuy getPropertyToBuy() {
