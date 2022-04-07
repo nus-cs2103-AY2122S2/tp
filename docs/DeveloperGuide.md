@@ -125,12 +125,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -164,7 +163,7 @@ The `manual` command displays the format and a short description for a particula
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "manual", `ManualCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "manual".
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A ParseException will be thrown if the argument is invalid.
+    <b>Note:</b> A ParseException will be thrown if the argument is invalid.
     </div>
 
 4. The supplied argument will be trimmed using `String#trim()`.
@@ -196,14 +195,14 @@ object will be created, and is subsequently executed by the `LogicManager`.
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+    <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory fields are missing.
     </div> 
 
 5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId)`
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
@@ -219,7 +218,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
+   <b>Note:</b> If an optional field is not supplied (i.e. not found in the ArgumentMultimap), 
    the extra parsing process in steps 5 to 7 will be skipped. 
    Instead, the respective object will be created and initialized to `null`.
     </div> 
@@ -231,7 +230,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
     in TAPA, a `CommandException` will be thrown.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** In TAPA, two Person are equal only if they have the same studentId.
+    <b>Note:</b> In TAPA, two Person are equal only if they have the same studentId.
     </div> 
 
 13. The `AddCommand` will call `model.addPerson(Person person)`, which adds the `Person` into the `AddressBook`.
@@ -263,14 +262,14 @@ object will be created, and is subsequently executed by the `LogicManager`.
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+    <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory fields are missing.
     </div> 
 
 5. The `DeleteCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId)`
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
@@ -280,7 +279,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
    If the argument is not valid, a `ParseException` will be thrown.
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
+   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
    Depending on the type of input field used (studentId or indices), Steps 5 to 7 will 
    be executed using the parse methods in `ParserUtil` that are specific to the field. In the case of indices, an `Index` array is created in place of the `StudentId`.
     </div> 
@@ -320,14 +319,14 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of the compulsory field, `ModuleCode` is missing.
+    <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory field, `ModuleCode` is missing.
     </div> 
 
 5. The `DeleteModuleCommandParser` will pass the moduleCode input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseModuleCode(String moduleCode)`
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div> 
 
 6. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
@@ -371,14 +370,14 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
    by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
+    <b>Note:</b> A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
    </div>
 
 5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId).`
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
    </div>
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
@@ -395,7 +394,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
     If the size is equals to 0, a `CommandException` will be thrown.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** The studentId is a UNIQUE field in TAPA.
+    <b>Note:</b> The studentId is a UNIQUE field in TAPA.
     </div>
 
 13. The `Person` object in the filtered list is then extracted out using `model#getFilteredPersonList().get(0)`.
@@ -432,14 +431,14 @@ object will be created, and is subsequently executed by the `LogicManager`.
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+    <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory fields are missing.
     </div> 
 
 5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId)`
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
@@ -449,7 +448,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
    If the argument is not valid, a `ParseException` will be thrown.
 
    <div markdown="span" class="alert alert-info">:information_source: 
-   **Note:** The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
+   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
    Depending on the type of input field used (studentId, name, moduleCode), Steps 5 to 7 will 
    be executed using the parse methods in `ParserUtil` that are specific to the field.
     </div> 
@@ -481,19 +480,19 @@ The `mark` command marks a specific undone task as done for a particular student
 3. Since the first word in the user input matches the word "mark", `MarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "mark".
 4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
+    <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
     </div>
 
 5. The `MarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A NullException will be thrown if the supplied string argument is null.
+    <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div>
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `MarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
 8. The `MarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A NullException will be thrown if the supplied string argument is null.
+    <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div>
 
 9. In `ParserUtil#parseStudentId(Index index)`, the supplied argument will be trimmed using `String#trim()`.
@@ -502,7 +501,7 @@ The `mark` command marks a specific undone task as done for a particular student
 12. The `LogicManager` will then call `MarkCommand#execute(Model model)`.
 13. The `MarkCommand` will call `model#markTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as done.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as completed.
+    <b>Note:</b> A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as completed.
     </div>
     
 14. Lastly, the `MarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
@@ -525,19 +524,19 @@ The `unmark` command marks a specific done task as undone for a particular stude
 3. Since the first word in the user input matches the word "unmark", `UnmarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "unmark".
 4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
+    <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
     </div>
 
 5. The `UnmarkCommandParser` will pass the studentId input (found in the `ArgumentMultiMap`) into `ParserUtil#parseStudentId(String studentId)`.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A NullException will be thrown if the supplied string argument is null.
+    <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div>
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
 7. `StudentId#isValidId(String studentId)` will then be invoked, which checks if the trimmed argument is valid (according to the Regex supplied). If the argument is valid, a new `StudentId` object will be created and returned to the `UnmarkCommandParser`. If the argument is not valid, a `ParseException` will be thrown.
 8. The `UnmarkCommandParser` will pass the index input (found in the `ArgumentMultiMap`) into `ParserUtil#parseIndex(Index index)`.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A NullException will be thrown if the supplied string argument is null.
+    <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
     </div>
 
 9. In `ParserUtil#parseStudentId(Index index)`, the supplied argument will be trimmed using `String#trim()`.
@@ -546,7 +545,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 12. The `LogicManager` will then call `UnmarkCommand#execute(Model model)`.
 13. The `UnmarkCommand` will call `model#unmarkTaskOfPerson(Student studentId, Index index)`, which marks the task (corresponding to the supplied index) of the given student as undone.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as not complete.
+    <b>Note:</b> A CommandException will be thrown if the supplied index or studentId is invalid, or if the task is already marked as not complete.
     </div>
 
 14. Lastly, the `UnmarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
@@ -570,7 +569,7 @@ The `clear` command deletes all students currently stored in TAPA. During the ex
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
 5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
     <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A CommandException will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` then returns to accepting all commands as described in the user guide.
+    <b>Note:</b> A CommandException will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` then returns to accepting all commands as described in the user guide.
     </div>
 6. If the user inputs `confirm`, `LogicManager` parses the given input text using `AddressBookParser#parseCommand()` and a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
 7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
@@ -634,14 +633,14 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
-      **Note:** A ParseException will be thrown if the prefix of the compulsory fields are missing.
+      <b>Note:</b> A ParseException will be thrown if the prefix of the compulsory fields are missing.
    </div>
 
 5. The `ProgressCommandParser` will pass the moduleCode input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseModuleCode(String moduleCode)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
-     **Note:** A NullException will be thrown if the supplied string argument is null.
+     <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
    </div>
 
 6. In `ParserUtil#parseModuleCode(String moduleCode)`, the supplied argument will be trimmed using `String#trim()`.
@@ -665,6 +664,30 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
 ![ProgressCommandSequenceDiagram-1](images/ProgressCommandSequenceDiagram-1.png)
 
 ![ProgressCommandSequenceDiagram-2](images/ProgressCommandSequenceDiagram-2.png)
+
+### Sort Command
+
+#### Description
+
+The `sort` command allows the users to view the list of students in TAPA, sorted by the number of incomplete tasks in **descending** order.
+During the execution of the `sort` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `SortCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "sort", `SortCommand()` will be called.
+4. As `SortCommand` utilizes the default constructor, it simply returns a new `SortCommand` object to
+   the `AddressBookParser`.
+5. This `SortCommand` object will then be subsequently returned to the `LogicManager`.
+6. The `LogicManager` calls `SortCommand#execute(Model model)`.
+7. In `SortCommand`, the current list of students in TAPA will be sorted by the number of incomplete tasks in **descending** order by calling `model#sortFilteredPersonListByTaskLeft()`.
+8. In `SortCommand`, the current list of students in TAPA will be updated to reflect the changes to the list, after the sort by calling `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
+9. Lastly, the `SortCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
+
+![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -692,7 +715,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
@@ -700,7 +723,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -709,13 +732,13 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -966,7 +989,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
