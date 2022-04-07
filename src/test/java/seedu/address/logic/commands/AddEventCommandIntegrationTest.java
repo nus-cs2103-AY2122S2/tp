@@ -29,7 +29,8 @@ public class AddEventCommandIntegrationTest {
 
     @Test
     public void execute_newEvent_success() {
-        Event validEvent = new EventBuilder().withNames(TypicalEvents.ALEX_NAME).build();
+        Event validEvent = new EventBuilder().withNames(TypicalEvents.ALEX_NAME)
+                .withDateTime("15-02-3030 1230").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
         expectedModel.addEvent(validEvent);

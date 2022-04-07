@@ -10,8 +10,8 @@ import seedu.address.model.common.Name;
  */
 public class EventName extends Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters, "
-            + "special characters and spaces, and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Event names should only contain alphanumeric characters, "
+            + "special characters and spaces, and it should not be blank or consisting only of whitespace.";
 
     /*
      * The first character of the name must not be a whitespace,

@@ -18,7 +18,9 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDateIsAfterPredicate;
 import seedu.address.model.event.EventDateIsBeforePredicate;
 import seedu.address.model.event.EventFriendNamesContainSubstringPredicate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventNameContainsSubstringPredicate;
+import seedu.address.model.person.FriendName;
 
 /**
  * Parses input arguments and creates a new FindEventCommand object
@@ -48,7 +50,7 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
         ArrayList<Predicate<Event>> eventPredicates = new ArrayList<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String eventNameSubstring = argMultimap.getValue(PREFIX_NAME).get();
+            EventName eventNameSubstring = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
             eventPredicates.add(new EventNameContainsSubstringPredicate(eventNameSubstring));
         }
 
@@ -73,7 +75,8 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
 
         List<String> friendNameSubstrings = argMultimap.getAllValues(PREFIX_FRIEND_NAME);
         for (String substring : friendNameSubstrings) {
-            eventPredicates.add(new EventFriendNamesContainSubstringPredicate(substring));
+            FriendName friendNameSubstring = ParserUtil.parseFriendName(substring);
+            eventPredicates.add(new EventFriendNamesContainSubstringPredicate(friendNameSubstring));
         }
 
         return new FindEventCommand(Collections.unmodifiableList(eventPredicates));

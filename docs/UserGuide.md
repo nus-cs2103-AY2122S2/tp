@@ -214,7 +214,7 @@ Adds a new event, which can be optionally linked to any number of existing frien
 
 **Examples**:
 * `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
-* `addevent n/Christmas Party dt/25-12-2022`
+* `addevent n/Christmas Party dt/25-12-2022 1930`
 
 ### Editing an event: `editevent` / `ee`
 Edits an existing event.
@@ -265,6 +265,7 @@ Find events in Amigos whose properties match the given search criteria.
   * For each search field, an event is a match if the search substring matches
     * e.g n/Birthday will match events with names John's Birthday, Bob's Birthday
     * e.g. f/joe will match events containing either Joe Maggio or Joe Allen in the friends list.
+    * Any leading or trailing whitespace in the search substring will be trimmed.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
@@ -272,6 +273,7 @@ Find events in Amigos whose properties match the given search criteria.
   * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
+* All events, including past ones, will be checked for matches.
 
 **Examples**:
 * `findevent n/dinner ds/20-03-2022` returns events starting from 20 Mar 2022 with an event name containing 'dinner' 
