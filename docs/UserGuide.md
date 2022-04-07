@@ -66,6 +66,8 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the user guide and copying employee details to Computer Clipboard.
@@ -73,6 +75,8 @@ Shows a message explaining how to access the user guide and copying employee det
 ![help message](images/helpMessage_new.png)
 
 Format: `help`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Employee : `addEmployee`
 
