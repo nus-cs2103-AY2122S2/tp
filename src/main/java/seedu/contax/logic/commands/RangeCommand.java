@@ -63,6 +63,7 @@ public class RangeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         List<CommandResult> commandResultList = new ArrayList<>();
+        Person restorePerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
@@ -73,8 +74,8 @@ public class RangeCommand extends Command {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
                     commandResultList.clear(); // only for the purpose of not changing output in feature freeze
-                    if (fromIndex.getZeroBased() != toIndex.getZeroBased() && commandInput.startsWith("edit")) {
-                        setFirstOccurrencePerson(model);
+                    if (fromIndex.getZeroBased() != toIndex.getZeroBased() && commandText.startsWith("editperson")) {
+                        setFirstOccurrencePerson(model, restorePerson);
                     }
                     commandResultList.add(new CommandResult(ce.getMessage()));
                     break;
@@ -91,8 +92,7 @@ public class RangeCommand extends Command {
     }
 
 
-    private void setFirstOccurrencePerson(Model model) {
-        Person restorePerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
+    private void setFirstOccurrencePerson(Model model, Person restorePerson) {
         Person lastPerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
         model.setPerson(model.getAddressBook().getPersonList().get(toIndex.getZeroBased()), restorePerson);
         model.setPerson(model.getAddressBook().getPersonList().get(fromIndex.getZeroBased()), lastPerson);
