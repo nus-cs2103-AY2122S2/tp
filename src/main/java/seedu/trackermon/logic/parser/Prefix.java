@@ -19,11 +19,20 @@ public class Prefix {
         return getPrefix();
     }
 
+    /**
+     * Returns the hashcode of the prefix.
+     * @return the hashcode of the prefix.
+     */
     @Override
     public int hashCode() {
         return prefix == null ? 0 : prefix.hashCode();
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param obj the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Prefix)) {

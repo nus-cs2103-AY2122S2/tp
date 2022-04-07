@@ -38,10 +38,19 @@ public class FindCommand extends Command {
 
     private final Predicate<Show> predicate;
 
+    /**
+     * Creates a find constructor to search for matching shows.
+     * @param predicate the show to be stored as a Predicate.
+     */
     public FindCommand(Predicate<Show> predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -50,6 +59,11 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_SHOWS_LISTED_OVERVIEW, model.getFilteredShowList().size()));
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

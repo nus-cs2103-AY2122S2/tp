@@ -23,6 +23,12 @@ public class SuggestCommand extends Command {
 
     public static final String MESSAGE_FAILURE_ONE_SHOW = "There is only one show in the list";
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an invalid index.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

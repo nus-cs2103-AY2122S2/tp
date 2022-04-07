@@ -27,10 +27,20 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand to delete the specified {@code Show}
+     * @param targetIndex the index of the show to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an invalid index.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -45,6 +55,11 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_SHOW_SUCCESS, showToDelete));
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

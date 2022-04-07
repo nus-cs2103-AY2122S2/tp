@@ -22,6 +22,11 @@ public class SortCommand extends Command {
         this.comparator = comparator;
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -29,6 +34,11 @@ public class SortCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -48,7 +58,4 @@ public class SortCommand extends Command {
         SortCommand e = (SortCommand) other;
         return comparator.equals(e.comparator);
     }
-
-
 }
-
