@@ -300,9 +300,18 @@ public class MainWindow extends UiPart<Stage> {
      * Refreshes the FocusCard if all schedules are cleared so that the displayed Candidate has the latest information.
      */
     public CommandResult refreshWhenClearAllSchedule(String commandText) throws CommandException, ParseException {
+
+        int displayedIndex = -1;
+
+        if (focusListPanel != null
+                && !focusListPanelPlaceholder.getChildren().isEmpty()
+                && !logic.getFilteredInterviewSchedule().isEmpty()) {
+            displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+        }
+
         CommandResult commandResult = logic.execute(commandText);
-        if (focusListPanel != null && !focusListPanelPlaceholder.getChildren().isEmpty()) {
-            int displayedIndex = logic.getFilteredCandidateList().indexOf(focusListPanel.getCandidate());
+
+        if (displayedIndex != -1) {
             logger.info(String.valueOf(logic.getFilteredCandidateList().contains(focusListPanel.getCandidate())));
             executeCommand(FocusCommand.COMMAND_WORD + " " + String.valueOf(displayedIndex + 1));
         }
