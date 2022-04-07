@@ -47,7 +47,7 @@ public class EditConsultationCommand extends Command {
             + PREFIX_NOTES + "NOTES \n"
             + "Example: " + COMMAND_WORD
             + " 1 "
-            + PREFIX_DATE + "19-09-2020 "
+            + PREFIX_DATE + "2020-09-20 "
             + PREFIX_TIME + "19-00 ";
 
     public static final String MESSAGE_EDIT_TEST_RESULT_SUCCESS = "Edited Consultation Information: \n%1$s";
@@ -73,12 +73,16 @@ public class EditConsultationCommand extends Command {
         requireNonNull(model);
         List<Consultation> lastShownList = model.getFilteredConsultationList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONSULTATION_INDEX);
         }
 
         Consultation consultation = lastShownList.get(targetIndex.getZeroBased());
         Consultation editedConsultation = createEditedConsultation(consultation, editConsultationDescriptor);
+
+        if (!consultation.equals(editedConsultation) && model.hasConsultation(editedConsultation)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONSULTATION);
+        }
 
         model.setConsultation(consultation, editedConsultation);
 
