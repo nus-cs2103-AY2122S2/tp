@@ -4,8 +4,6 @@ import java.awt.Desktop;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +12,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -228,27 +227,22 @@ public class MainWindow extends UiPart<Stage> {
     public Path handleLoadFile() {
 
         // initialise the file chooser
-        JFileChooser chooser = new JFileChooser();
+        FileChooser fileChooser = new FileChooser();
 
         // current working directory
         File cwd = new java.io.File(".");
 
         // chooser settings
-        chooser.setCurrentDirectory(cwd);
-        chooser.setDialogTitle("Select a ClientConnect CSV file...");
-        chooser.setAcceptAllFileFilterUsed(false); // disable allowing acceptance of all files
+        fileChooser.setInitialDirectory(cwd);
+        fileChooser.setTitle("Select a ClientConnect CSV file...");
 
         // only allow CSV files
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("ClientConnect CSV files", "csv");
-        chooser.setFileFilter(filter);
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("ClientConnect CSV files", "*.csv"));
 
         // opens the dialog
-        int returnVal = chooser.showOpenDialog(null);
-        Path chosenFilePath = null;
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            chosenFilePath = chooser.getSelectedFile().toPath().toAbsolutePath();
-        }
-        return chosenFilePath;
+        File fileChosen = fileChooser.showOpenDialog(primaryStage);
+        return fileChosen == null ? null : fileChosen.toPath();
 
     }
 
@@ -260,22 +254,17 @@ public class MainWindow extends UiPart<Stage> {
     public Path handleSaveFile() {
 
         // initialise the file chooser
-        JFileChooser chooser = new JFileChooser();
-
-        chooser.setSelectedFile(new File("ClientConnectData.csv"));
+        FileChooser chooser = new FileChooser();
 
         // chooser settings
-        chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle("Save CSV file to ...");
-        chooser.setSelectedFile(new File("ClientConnectData.csv"));
+        chooser.setInitialDirectory(new java.io.File("."));
+        chooser.setTitle("Save CSV file to ...");
+        chooser.setInitialFileName("ClientConnectData.csv");
+        chooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("ClientConnect CSV files", "*.csv"));
 
-        // opens the dialog
-        int returnVal = chooser.showSaveDialog(null);
-        Path chosenDirectoryPath = null;
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            chosenDirectoryPath = chooser.getSelectedFile().toPath().toAbsolutePath();
-        }
-        return chosenDirectoryPath;
+        File fileChosen = chooser.showSaveDialog(primaryStage);
+        return fileChosen == null ? null : fileChosen.toPath();
     }
 
     void show() {

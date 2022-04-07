@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.Map;
 
 import javafx.fxml.FXML;
@@ -19,9 +18,9 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     private static final Map<Priority, String> fxmlColorMapper = Map.of(
             Priority.PRIORITY_1, "-fx-background-color: red;",
-            Priority.PRIORITY_2, "-fx-background-color: lightred;",
-            Priority.PRIORITY_3, "-fx-background-color: orange;",
-            Priority.PRIORITY_4, "-fx-background-color: yellow;"
+            Priority.PRIORITY_2, "-fx-background-color: orange;",
+            Priority.PRIORITY_3, "-fx-background-color: gold;",
+            Priority.PRIORITY_4, "-fx-background-color: peachpuff;"
     );
 
     /**
@@ -64,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
+                // .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label label = new Label(tag.tagName);
                     if (tag.tagPriority != null) {

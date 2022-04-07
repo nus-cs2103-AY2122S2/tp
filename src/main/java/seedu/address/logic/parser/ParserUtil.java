@@ -46,11 +46,16 @@ public class ParserUtil {
     public static Pair<Index, String> parseOutIndex(String indexAndWords) throws ParseException {
         String trimmedInput = indexAndWords.trim();
         // splitIndexAndRemainingString[0] contains index no., splitIndexAndRemainingString[2] contains remaining string
-        String[] splitIndexAndRemainingString = trimmedInput.split(" ", 2);
-        assert splitIndexAndRemainingString.length == 2;
+        String[] splitIndexAndRemainingString;
+        Index index;
 
-        Index index = parseIndex(splitIndexAndRemainingString[0]);
-        return new Pair<>(index, splitIndexAndRemainingString[1]);
+        try {
+            splitIndexAndRemainingString = trimmedInput.split(" ", 2);
+            index = parseIndex(splitIndexAndRemainingString[0]);
+        } catch (Exception e) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Pair<>(index, splitIndexAndRemainingString.length > 1 ? splitIndexAndRemainingString[1] : "");
     }
 
     /**
@@ -62,10 +67,15 @@ public class ParserUtil {
     public static Pair<Integer, String> parseOutNumber(String numberAndWords) throws ParseException {
         String trimmedInput = numberAndWords.trim();
         // splitIndexAndRemainingString[0] contains number, splitIndexAndRemainingString[2] contains remaining string
-        String[] splitIndexAndRemainingString = trimmedInput.split(" ", 2);
+        String[] splitIndexAndRemainingString;
+        Integer number;
 
-        // Edit this to handle NumberFormatException
-        Integer number = Integer.valueOf(splitIndexAndRemainingString[0].trim());
+        try {
+            splitIndexAndRemainingString = trimmedInput.split(" ", 2);
+            number = Integer.valueOf(splitIndexAndRemainingString[0].trim());
+        } catch (Exception e) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
         return new Pair<>(number, splitIndexAndRemainingString.length > 1 ? splitIndexAndRemainingString[1] : "");
     }
 

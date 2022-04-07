@@ -19,11 +19,11 @@ import seedu.address.model.person.predicates.NameExistsPredicate;
 public class AddToClipboardCommand extends Command {
     public static final String COMMAND_WORD = "clip";
 
-    public static final String MESSAGE_SUCCESS = "Added the following contact's information to clipboard!";
-    public static final String MESSAGE_FAILURE = "No such contact found!";
+    public static final String MESSAGE_SUCCESS = "Added the following client's information to clipboard!";
+    public static final String MESSAGE_FAILURE = "No such client found!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds the information of the person identified "
+            + ": Adds the information of the client identified "
             + "by index or their full name (case-insensitive) to the user's clipboard. "
             + "If both an index and name is specified, the index will be used to select the contact to clip.\n"
             + "Parameters: index OR n/ Full name of intended contact\n"

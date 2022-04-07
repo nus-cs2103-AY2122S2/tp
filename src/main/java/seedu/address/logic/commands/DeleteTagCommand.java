@@ -22,15 +22,15 @@ public class DeleteTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a tag "
             + "(identified by the tag's index number) "
-            + "of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "of the client identified "
+            + "by the index number used in the displayed client list. "
             + "Only one tag can be deleted at a time. \n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TAG_INDEX (must be a positive integer) \n"
+            + "Parameters: CLIENT_INDEX (must be a positive integer) "
+            + "TAG_NUMBER (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 3 " + "2";
 
-    public static final String MESSAGE_SUCCESS = "Deleted tag in Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "Deleted tag in Client: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
 
     private final Index index;
     private final int tagNumber;
@@ -64,9 +64,13 @@ public class DeleteTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
     }
 
-    private Person deleteTagFromPerson(Person personToEdit, int tagNumber) {
+    private Person deleteTagFromPerson(Person personToEdit, int tagNumber) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
+        if (tagNumber < 1 || tagNumber > tagList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_NUMBER);
+        }
+
         tagList.remove(tagNumber - 1);
 
         newPerson.setTags(tagList);

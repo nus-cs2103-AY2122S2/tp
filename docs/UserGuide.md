@@ -1,5 +1,21 @@
-# User Guide
-ClientConnect is a **desktop app for managing clients’ contact details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps with the ability to `find` specific clients based on keywords provided.
+---
+layout: page
+title: User Guide
+---
+
+* Table of Contents
+{:toc}
+
+ClientConnect is a client-management app for tech-savvy insurance agents to **manage clients’ in the midst of 
+massive lists of clients that have various needs and priorities**. 
+
+Are you a fast typer? ClientConnect can get your client management tasks done faster than traditional GUI apps. 
+Add Tags with varying levels of priorities to keep track of utmost important tasks to utilize your time efficiently, 
+sort your clients by priority so you won't miss out urgent tasks to be done, conveniently import and export your client contacts, and easily find the client details you want through our `find` command.
+
+The package tab allows for quick reference of package details in the event that a client has to be contacted 
+regarding their package. It contains a list of all packages that have been added before, not necessarily 
+only packages that existing people in ClientConnect have.
 
 ![result for 'list'](images/listAllClientsUG.png)
 
@@ -64,8 +80,7 @@ ClientConnect is a **desktop app for managing clients’ contact details, optimi
 
 ### Viewing help : `help`
 ![Help button image](images/helpButtonUG.png)
-<details><summary>Shows a message explaining how to access the ClientConnect help page</summary>
-<p>
+Shows a message explaining how to access the ClientConnect help page
 
 Format: `help`
 
@@ -76,28 +91,22 @@ This also shows that you can press F1 on your keyboard to open the help message.
 On clicking Help, you will see this as a result:
 
 ![Help window image](images/helpWindowUG.png)
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Viewing Packages
 ![Package button image](images/packageButtonUG.png)
-<details><summary>Opens a new window that shows the various insurance packages and their description</summary>
-<p>
+Opens a new window that shows the various insurance packages and their description
 
 Click on the Package button to view a dropdown window displaying a "Package" button.
 
 On clicking Package, you will see this as a result:
 
 ![Package window image](images/packageWindowUG.png)
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Adding a person: `add`
 ![result before 'add n/Damith p/99998888 e/damith@damith.com a/Blk 123 i/package 1'](images/beforeAddDamithUG.png)
-<details><summary>Adds a person, as well as any details, to ClientConnect</summary>
-<p>
+Adds a person, as well as any details, to ClientConnect
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
@@ -111,14 +120,15 @@ After adding:
 
 Notes:
 * Any tags are optional.
-</p>
-</details>
+* Email domain must contain only **one period** and minimally ends with 2 letters: 
+  e.g jackson5@example.com is acceptable, jackson5@example.com.sg and jackson5@example is not acceptable
+* For the insurance package indicated in the `i/` field, if an existing package with the same name does not 
+  exist, a new one will be automatically created.
 
 ------------------------------------------------------------------------------------
 ### Adding a tag to a person: `addTag`
 ![result before 'addTag 3 friend of the family'](images/beforeAddTagUG.png)
-<details><summary>Adds a tag to the specified person in ClientConnect</summary>
-<p>
+Adds a tag to the specified person in ClientConnect
 
 Format: `addTag INDEX TAG …​`
 
@@ -133,26 +143,19 @@ After adding:
 Notes:
 * Adds tag to the person at the specified `INDEX`.
 * Only one tag can be added at a time
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Listing all persons : `list`
 ![result for 'list'](images/listAllClientsUG.png)
-<details><summary>Displays all your clients in ClientConnect</summary>
-<p>
+Displays all your clients in ClientConnect
 
 Format: `list`
-
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Editing a person : `edit`
 ![result before 'edit 1 p/123456'](images/beforeEditUG.png)
 
-<details><summary>Edits an existing client in ClientConnect, similar to adding a new client</summary>
-<p>
+Edits an existing client in ClientConnect, similar to adding a new client
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INSURANCE_PACKAGE] [t/TAG]…​`
 
@@ -168,14 +171,11 @@ Notes:
 * You can look for a client’s index by using the `list` command.
 * At least one of the fields must be provided.
 * Existing values will be updated to the input values.
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Editing a tag of a person: `editTag`
 ![result before 'editTag 2 1 owes money :p3'](images/beforeEditTagUG.png)
-<details><summary>Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect</summary>
-<p>
+Edits the specified tag of the specified person by replacing it with the new tag given in ClientConnect
 
 Format: `editTag INDEX TAG_NUMBER TAG …​`
 
@@ -191,14 +191,11 @@ Notes:
 * Edits person at the specified `INDEX`.
 * Edits person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be edited at a time.
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Locating persons by field: `find`
 ![result for 'find i/undecided'](images/findInsurancePackageUG.png)
-<details><summary>Finds clients whose field contains any of the given keywords</summary>
-<p>
+Finds clients whose field contains any of the given keywords
 
 Format: `find FIELD KEYWORD [MORE_KEYWORDS] [MORE_FIELD] [MORE_KEYWORDS]`
 
@@ -230,15 +227,10 @@ After a `find` command:
 * `find i/undecided n/david` returns `David Li`
 
 ![result for 'find i/undecided n/david'](images/findUndecidedDavid.png)
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Deleting a person : `delete`
-![result after 'delete 2'](images/afterDeleteUG.png)
-
-<details><summary>Deletes an existing client from ClientConnect</summary>
-<p>
+Deletes an existing client from ClientConnect
 
 Format: `delete INDEX`
 
@@ -257,15 +249,10 @@ Before a delete command:
 After `delete 2`:
 
 ![result after 'delete 2'](images/afterDeleteUG.png)
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Deleting a tag of a person: `deleteTag`
-![result after 'deleteTag 3 1'](images/afterDeleteTagUG.png)
-
-<details><summary>Deletes the specified tag of the specified person in ClientConnect</summary>
-<p>
+Deletes the specified tag of the specified person in ClientConnect
 
 Format: `deleteTag INDEX TAG_NUMBER …​`
 
@@ -285,15 +272,10 @@ Notes:
 * Deletes person at the specified `INDEX`.
 * Deletes person's tag at the specified `TAG_NUMBER`.
 * Only one tag can be deleted at a time.
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Adding an insurance package: `addp`
-![result after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage1UG.png)
-
-<details><summary>Adds an insurance package to ClientConnect</summary>
-<p>
+Adds an insurance package to ClientConnect
 
 Format: `addp i/PACKAGE_NAME d/PACKAGE_DESC`
 
@@ -311,15 +293,9 @@ After `addp i/Classic Package d/Classic coverages for your needs`:
 
 ![result2 after 'addp i/Classic Package d/Classic coverages for your needs'](images/afterAddInsurancePackage2UG.png)
 
-</p>
-</details>
-
 ------------------------------------------------------------------------------------
 ### Editing an insurance package: `editp`
-![result1 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage1UG.png)
-
-<details><summary>Edits an existing insurance package in ClientConnect</summary>
-<p>
+Edits an existing insurance package in ClientConnect
 
 Format: `editp i/PACKAGE_NAME d/PACKAGE_DESC`
 
@@ -336,15 +312,9 @@ After `editp i/Golden Package d/Lifetime insurance`:
 
 ![result2 before 'editp i/Golden Package d/Lifetime insurance'](images/afterEditInsurancePackage2UG.png)
 
-</p>
-</details>
-
 ------------------------------------------------------------------------------------
 ### Deleting an insurance package: `deletep`
-![result1 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackge1UG.png)
-
-<details><summary>Deletes an existing insurance package in ClientConnect</summary>
-<p>
+Deletes an existing insurance package in ClientConnect
 
 Format: `deletep i/PACKAGE_NAME`
 
@@ -361,14 +331,14 @@ After `deletep i/Golden Package`:
 
 ![result2 before 'deletep i/Golden Package'](images/afterDeleteInsurancePackage2UG.png)
 
-</p>
-</details>
+Note: 
+* If the packages window was open before a package is deleted, you will have to close and reopen the window 
+to view the change.
+* If a package to be deleted is used by at least one person, it will not be deleted.
 
 ------------------------------------------------------------------------------------
 ### Shows all insurance package: `listp`
-![result2 after 'listp'](images/listInsurancePackage2UG.png)
-<details><summary>Displays all your insurance packages in ClientConnect</summary>
-<p>
+Displays all your insurance packages in ClientConnect
 
 Format: `listp`
 
@@ -376,32 +346,21 @@ Format: `listp`
 
 ![result2 after 'listp'](images/listInsurancePackage2UG.png)
 
-</p>
-</details>
-
 ------------------------------------------------------------------------------------
 ### Importing ClientConnect CSV data: `import`
-<details><summary>Opens a window to choose a CSV file to load</summary>
-<p>
+Opens a window to choose a CSV file to load
 
 Format: `import`
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Exporting ClientConnect data to CSV: `export`
-<details><summary>Opens a window to choose a CSV file to export to</summary>
-<p>
+Opens a window to choose a CSV file to export to
 
 Format: `export`
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Undo previous command: `undo`
-![result after undo](images/undo2UG.png)
-<details><summary>Undoes previous command executed</summary>
-<p>
+Undoes previous command executed
 
 Format: `undo`
 
@@ -413,15 +372,9 @@ After undo (where we undo command `delete 1`):
 
 ![result after undo](images/undo2UG.png)
 
-</p>
-</details>
-
 ------------------------------------------------------------------------------------
 ### Redo previous command: `redo`
-![result after redo](images/redo2UG.png)
-
-<details><summary>Redoes undone command</summary>
-<p>
+Redoes undone command
 
 Format: `redo`
 
@@ -433,26 +386,18 @@ After redo (where we redo `delete 1`):
 
 ![result after redo](images/redo2UG.png)
 
-</p>
-</details>
-
 ------------------------------------------------------------------------------------
 ### Clearing all entries : `clear`
 
 ![result after 'clear'](images/clearUG.png)
 
-<details><summary>Clears all entries from the address book</summary>
-<p>
+Clears all entries from the address book
 
 Format: `clear`
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Clipping a client's information to clipboard : `clip`
-![info copied using 'clip 1'](images/afterClip1UG.png)
-<details><summary>Copies a client's information onto the system's clipboard</summary>
-<p>
+Copies a client's information onto the system's clipboard
 
 Format: `clip n/NAME` or `clip INDEX`
 
@@ -471,8 +416,6 @@ Before `clip 1`:
 Information copied using `clip 1`:
 
 ![info copied using 'clip 1'](images/afterClip1UG.png)
-</p>
-</details>
 
 ------------------------------------------------------------------------------------
 ### Listing contact list by priority level of their tags: `prioList`
@@ -491,12 +434,9 @@ Examples:
 
 ------------------------------------------------------------------------------------
 ### Exiting the program : `exit`
-<details><summary>Exits the program</summary>
-<p>
+Exits the program
 
 Format: `exit`
-</p>
-</details>
 
 --------------------------------------------------------------------------------------------------------------------
 

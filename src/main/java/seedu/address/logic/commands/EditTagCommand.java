@@ -22,17 +22,17 @@ public class EditTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit a tag "
             + "(identified by the tag's index number) "
-            + "of the person identified "
+            + "of the client identified "
             + "by the index number used in the displayed person list. "
             + "Only one tag can edited at a time. \n"
-            + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TAG_INDEX (must be a positive integer) "
+            + "Parameters: CLIENT_INDEX (must be a positive integer) "
+            + "TAG_NUMBER (must be a positive integer) "
             + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 2 "
             + "owesMoney :p2";
 
-    public static final String MESSAGE_SUCCESS = "Edited tag in Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "Edited tag in Client: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
 
     private final Index index;
     private final int tagNumber;
@@ -70,11 +70,14 @@ public class EditTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
     }
 
-    private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) {
+    private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
-        tagList.set(tagNumber - 1, tag); // add exception later
+        if (tagNumber < 1 || tagNumber > tagList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_NUMBER);
+        }
 
+        tagList.set(tagNumber - 1, tag); // add exception later
         newPerson.setTags(tagList);
         return newPerson;
     }
