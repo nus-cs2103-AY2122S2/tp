@@ -50,13 +50,23 @@ Given below are my contributions to the project.
     * Help reviewing pull requests and give feedback for improvement.
 
 * **Enhancements to existing features**:
-    * added transaction
+    * Improve the UI of the application by adding one more panel to display the list
+    of transactions. Also implement the transaction card to display each transaction's information.
+    * Find and fix bugs from existing features such as handling of invalid input date.
+    * Implement the base feature of clickable person card. 
+    * Refactor the whole `transaction` feature to follow the same patterns in `client` feature. 
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the `list` feature
+        * Added documentation for the `addTransaction` feature
+        * Added documentation for the `deleteTransaction` feature
+        * Added documentation for the `listTransaction` feature
+        * Added documentation for the `findTransaction` feature
+        * Added documentation for the `pay` feature
+        * Added documentation for the `unpay` feature
+    
     * Developer Guide:
-        * Added implementation details of the `list` feature
+        * Added implementation details of the `addTransaction` feature
 
 * **Community**:
     * To be added soon
