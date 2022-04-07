@@ -5,6 +5,7 @@ package seedu.trackermon.commons.exceptions;
  */
 public class DataConversionException extends Exception {
     /**
+     * Creates a DataConversionException with the given cause.
      * @param cause of the main exception.
      */
     public DataConversionException(Exception cause) {

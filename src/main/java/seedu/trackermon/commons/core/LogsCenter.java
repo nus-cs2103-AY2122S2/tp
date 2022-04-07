@@ -78,7 +78,7 @@ public class LogsCenter {
     }
 
     /**
-     * Remove all the handlers from {@code logger}.
+     * Removes all the handlers from {@code logger}.
      */
     private static void removeHandlers(Logger logger) {
         Arrays.stream(logger.getHandlers())

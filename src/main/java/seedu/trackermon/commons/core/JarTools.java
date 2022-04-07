@@ -73,7 +73,7 @@ public class JarTools {
     }
 
     /**
-     * Check if application is running from a Jar file
+     * Returns the status of the application is running from a Jar file
      * @return whether application is running from a Jar file
      */
     public static boolean runningFromJarFile() {
