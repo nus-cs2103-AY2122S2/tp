@@ -191,7 +191,8 @@ Similarly, in a list with only 3 contacts, `delete 1 2 3` will now be allowed.
 
 The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("delete 1 2 3")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1 2 3` Command](images/DeleteMultipleSequenceDiagram.png)
+<img src="images/DeleteMultipleSequenceDiagram0.png" />
+<img src="images/DeleteMultipleSequenceDiagram1.png" width="400"/>
 
 ### Tag feature
 
@@ -255,7 +256,7 @@ Given below is an example scenario of how the `removetag` command works.
 The following sequence diagram shows how the `removetag` operation works: <br>
 
 <img src="images/RemoveTagSequenceDiagram0.png" />
-<img src="images/RemoveTagSequenceDiagram1.png" />
+<img src="images/RemoveTagSequenceDiagram1.png" width="450"/>
 
 ### Event feature
 
@@ -332,7 +333,6 @@ The edit command has now been upgraded to support the functionality for multiple
 
 
 ### Find feature
-![The following sequence diagram shows how the removetag operation works:](images/RemoveTagSequenceDiagram.png)
 
 #### Original Implementation
 The existing Find feature in AB3 only allowed contacts to be searched for by name. We added additional functionalities
