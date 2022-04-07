@@ -54,6 +54,6 @@ Given below are my contributions to the project.
   * Setting up the GitHub team org & repo
   * Necessary general code enhancements such as renaming the product: [#175](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/175), [#176](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/176)
   * PRs reviewed (with non-trivial review comments): [#73](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/73), [#30](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/30)
-  * Reported bugs and suggestions for other teams in the same CS2103T class: [Dry run PE](https://github.com/ChanWeiJie/ped/issues)
+  * Reported bugs and suggestions for other teams: [Dry run PE](https://github.com/ChanWeiJie/ped/issues)
   
 
