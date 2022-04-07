@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **Enhancement**: Creation of the model component for `Task` as a baseline for the use by other teammates. [#64](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/64), [#81](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/81)
   * What it does : The creation of the `Task` component allows for smoother creation of the different types of Task related commands.
   * Justification : This enhancement is important as the different type of Task related command such as adding, deleting, editing and even finding. All relies on the methods created in the `Task` model.  
-  * Highlights : This enhancement required me to constantly update the methods that are required by my teamamates as the methods in the `Task` Model changes as more commands are being added. As well as the importance of abstraction principles in the implementation of the new `Task` class.
+  * Highlights : This enhancement required me to constantly update the methods that are required by my teammates as the methods in the `Task` Model changes as more commands are being added. As well as the importance of abstraction principles in the implementation of the new `Task` class.
 
 
 * **Enhancement** : Creation of Enum class `Priority`.
