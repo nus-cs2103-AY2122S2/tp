@@ -3,7 +3,11 @@ package seedu.address.model.property;
 import java.util.HashMap;
 
 /**
- * All types of houses are listed here
+ * Enum of house types accepted in AgentSee.
+ *
+ * @author WJunHong-reused
+ * Reused from https://github.com/WJunHong/ip/blob/master/src/main/java/chibot/commands/Keywords.java
+ * with some modifications
  */
 public enum HouseType {
     UNSPECIFIED("unspecified", "any") {
