@@ -120,6 +120,14 @@ Features relating to the display of information within these panels are describe
 * A candidate's `seniority` ranges as such [1, 4], i.e. 1, 2, 3 or 4. It will be displayed as `COMX` where X is [1, 4].
   * To address seniority of students in double-degree programmes, it has been discussed that `COM5` has not been seen in NUS SoC system. Thus, the restriction of the range [1, 4].
 
+**:information_source: Notes about duplicate candidate:**<br>
+
+* A candidate is said to be a duplicate when any of the following input fields `STUDENT_ID`, `EMAIL` or `PHONE` exists in the system.
+* e.g. The system contains `candidate A` with the following details:
+  * `STUDENT_ID`: A0234567B
+  * `EMAIL`: E0123456@u.nus.edu
+  * `PHONE`: 87438807 </br>
+Adding or editing `candidate B` with any of these 3 fields as `candidate A` constitutes as a duplicate candidate. 
 </div>
 
 ## Viewing help
