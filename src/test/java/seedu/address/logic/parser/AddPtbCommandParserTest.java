@@ -27,4 +27,12 @@ public class AddPtbCommandParserTest {
         assertParseFailure(parser, "This is weird", MESSAGE_INVALID_FORMAT);
     }
 
+    @Test
+    public void parse_allFieldsPresent_success() {
+        //PropertyToBuy validProperty = new PropertyToBuyBuilder().withHouse()
+
+        //assertParseSuccess(parser, PREAMBLE_WHITESPACE + HOUSE_TYPE_DESC_1 + LOCATION_DESC_1
+          //      + PR_DESC_1, new AddPropertyToBuyCommand())
+    }
+
 }
