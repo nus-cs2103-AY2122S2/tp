@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_CHAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BUY_CHAD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_APPOINTMENT_CHAD;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_NAME_CHAD;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_PHONE_CHAD;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_PROPERTY_BUY_CHAD;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;

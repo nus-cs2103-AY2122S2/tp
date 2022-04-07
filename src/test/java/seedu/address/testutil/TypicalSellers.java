@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_APPOINTMENT_BOB;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.SellerCommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;

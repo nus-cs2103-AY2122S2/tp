@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,12 +45,12 @@ public class TypicalClients {
             .withPhone("8482131").build();
 
     // Manually added - client's details found in {@code CommandTestUtil}
-    public static final Client AMY = new ClientBuilder()
-            .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withAppointment(VALID_APPOINTMENT_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Client BOB = new ClientBuilder()
-            .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withAppointment(VALID_APPOINTMENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    //public static final Client AMY = new ClientBuilder()
+    //        .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    //        .withAppointment(VALID_APPOINTMENT_AMY).withTags(VALID_TAG_FRIEND).build();
+    //public static final Client BOB = new ClientBuilder()
+    //        .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    //        .withAppointment(VALID_APPOINTMENT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
