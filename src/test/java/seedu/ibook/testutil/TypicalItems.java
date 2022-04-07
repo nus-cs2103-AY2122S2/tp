@@ -53,4 +53,17 @@ public class TypicalItems {
     public static List<Item> getOnlyNonExpiredItems() {
         return new ArrayList<>(Arrays.asList(Q5_2200_01_01));
     }
+
+    public static List<Item> getAllItemsOOS() {
+        return new ArrayList<>(Arrays.asList(Q0_2022_03_01, Q0_2022_03_02, Q5_2020_01_01));
+    }
+
+    public static List<Item> getZeroItemsOOS() {
+        return new ArrayList<>(Arrays.asList(Q0_2022_03_01, Q0_2022_03_02));
+    }
+
+    public static List<Item> getNonZeroItemsOOS() {
+        return new ArrayList<>(Arrays.asList(Q5_2020_01_01));
+    }
+
 }

@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01;
 import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02;
-import static seedu.ibook.testutil.TypicalItems.Q5_2020_01_01;
+import static seedu.ibook.testutil.TypicalItems.getAllItemsOOS;
+import static seedu.ibook.testutil.TypicalItems.getNonZeroItemsOOS;
+import static seedu.ibook.testutil.TypicalItems.getZeroItemsOOS;
 import static seedu.ibook.testutil.TypicalProducts.CHOCOLATE_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PEANUT_BUTTER_BREAD;
@@ -18,20 +20,16 @@ import org.junit.jupiter.api.Test;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;
-import seedu.ibook.model.item.Item;
 import seedu.ibook.model.product.Product;
 import seedu.ibook.model.product.filters.OutOfStockFilter;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class OutOfStockCommandTest {
-    private final List<Item> allItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02, Q5_2020_01_01);
-    private final List<Item> onlyZeroItems = Arrays.asList(Q0_2022_03_01, Q0_2022_03_02);
-    private final List<Item> onlyNonZeroItems = Arrays.asList(Q5_2020_01_01);
-    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(allItems);
+    private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getAllItemsOOS());
     private final Product peanutButterBreadWithAllExpired =
-            new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(onlyZeroItems);
+            new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getZeroItemsOOS());
     private final Product chocolateBreadWithAllNotExpired =
-            new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(onlyNonZeroItems);
+            new ProductBuilder(CHOCOLATE_BREAD).buildWithItems(getNonZeroItemsOOS());
     private final List<Product> products = Arrays.asList(kayaBreadWithAllItems,
             peanutButterBreadWithAllExpired, chocolateBreadWithAllNotExpired);
 
