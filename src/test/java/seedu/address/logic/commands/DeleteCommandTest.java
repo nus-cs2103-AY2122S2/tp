@@ -28,7 +28,6 @@ import seedu.address.model.person.StudentId;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final StudentId NONEXISTENT_ID = new StudentId("A234Z");
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -145,7 +144,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidStudentId_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(NONEXISTENT_ID);
+        StudentId nonExistentId = new StudentId("A234Z");
+
+        DeleteCommand deleteCommand = new DeleteCommand(nonExistentId);
 
         String expectedMessage = Messages.MESSAGE_NONEXISTENT_STUDENTID;
 
