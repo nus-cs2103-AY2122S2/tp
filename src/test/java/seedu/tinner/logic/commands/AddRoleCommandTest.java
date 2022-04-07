@@ -4,78 +4,98 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
+import static seedu.tinner.logic.commands.AddRoleCommand.MESSAGE_DUPLICATE_ROLE;
 import static seedu.tinner.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tinner.commons.core.GuiSettings;
 import seedu.tinner.commons.core.index.Index;
 import seedu.tinner.logic.commands.exceptions.CommandException;
-import seedu.tinner.model.CompanyList;
 import seedu.tinner.model.Model;
 import seedu.tinner.model.ReadOnlyCompanyList;
 import seedu.tinner.model.ReadOnlyUserPrefs;
 import seedu.tinner.model.company.Company;
+import seedu.tinner.model.company.RoleManager;
 import seedu.tinner.model.role.Role;
 import seedu.tinner.testutil.CompanyBuilder;
+import seedu.tinner.testutil.RoleBuilder;
 
 public class AddRoleCommandTest {
 
     @Test
-    public void constructor_nullCompany_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCompanyCommand(null));
+    public void constructor_nullRole_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddRoleCommand(Index.fromOneBased(1), null));
     }
 
     @Test
-    public void execute_companyAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
-        Company validCompany = new CompanyBuilder().build();
+    public void execute_roleAcceptedByModel_addSuccessful() throws Exception {
+        Company meta = new CompanyBuilder().withName("Meta").build();
+        Role softwareEngineer = new RoleBuilder().withName("Software Engineer").build();
+        Index firstIndex = Index.fromOneBased(1);
+        ModelStub modelStub = new ModelStubWithCompanyAcceptingRoleAdded(meta);
 
-        CommandResult commandResult = new AddCompanyCommand(validCompany).execute(modelStub);
+        CommandResult commandResult = new AddRoleCommand(firstIndex, softwareEngineer).execute(modelStub);
 
-        assertEquals(String.format(AddCompanyCommand.MESSAGE_SUCCESS, validCompany),
+        assertEquals(String.format(AddRoleCommand.MESSAGE_SUCCESS, softwareEngineer),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validCompany), modelStub.companiesAdded);
     }
 
     @Test
-    public void execute_duplicateCompany_throwsCommandException() {
-        Company validCompany = new CompanyBuilder().build();
-        AddCompanyCommand addCompanyCommand = new AddCompanyCommand(validCompany);
-        ModelStub modelStub = new ModelStubWithCompany(validCompany);
+    public void execute_invalidCompanyIndex_throwsCommandException() {
+        Company meta = new CompanyBuilder().withName("Meta").build();
+        Role softwareEngineer = new RoleBuilder().withName("Software Engineer").build();
+        Index secondIndex = Index.fromOneBased(2);
+        AddRoleCommand addRoleCommand = new AddRoleCommand(secondIndex, softwareEngineer);
+        ModelStub modelStub = new ModelStubWithCompanyAcceptingRoleAdded(meta);
 
-        assertThrows(CommandException.class, AddCompanyCommand.MESSAGE_DUPLICATE_COMPANY, () ->
-                addCompanyCommand.execute(modelStub));
+        assertThrows(CommandException.class, MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX, () ->
+                addRoleCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateRole_throwsCommandException() {
+        Company meta = new CompanyBuilder().withName("Meta").build();
+        Role softwareEngineer = new RoleBuilder().withName("Software Engineer").build();
+        Role softwareEngineerCopy = new RoleBuilder().withName("Software Engineer").build();
+        meta.getRoleManager().addRole(softwareEngineer);
+        Index firstIndex = Index.fromOneBased(1);
+        AddRoleCommand addRoleCommand = new AddRoleCommand(firstIndex, softwareEngineerCopy);
+        ModelStub modelStub = new ModelStubWithCompanyAcceptingRoleAdded(meta);
+
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_ROLE, () ->
+                addRoleCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Company amazon = new CompanyBuilder().withName("Amazon").build();
-        Company netflix = new CompanyBuilder().withName("Netflix").build();
-        AddCompanyCommand addAmazonCommand = new AddCompanyCommand(amazon);
-        AddCompanyCommand addNetflixCommand = new AddCompanyCommand(netflix);
+        Role softwareEngineer = new RoleBuilder().withName("Software Engineer").build();
+        Role mobileEngineer = new RoleBuilder().withName("Mobile Engineer").build();
+        Index firstIndex = Index.fromOneBased(1);
+        AddRoleCommand addSoftwareEngineerCommand = new AddRoleCommand(firstIndex, softwareEngineer);
+        AddRoleCommand addMobileEngineerCommand = new AddRoleCommand(firstIndex, mobileEngineer);
 
         // same object -> returns true
-        assertTrue(addAmazonCommand.equals(addAmazonCommand));
+        assertTrue(addSoftwareEngineerCommand.equals(addSoftwareEngineerCommand));
 
         // same values -> returns true
-        AddCompanyCommand addAmazonCommandCopy = new AddCompanyCommand(amazon);
-        assertTrue(addAmazonCommand.equals(addAmazonCommandCopy));
+        AddRoleCommand addSoftwareEngineerCommandCopy = new AddRoleCommand(firstIndex, softwareEngineer);
+        assertTrue(addSoftwareEngineerCommand.equals(addSoftwareEngineerCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAmazonCommand.equals(1));
+        assertFalse(addSoftwareEngineerCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAmazonCommand.equals(null));
+        assertFalse(addSoftwareEngineerCommand.equals(null));
 
         // different company -> returns false
-        assertFalse(addAmazonCommand.equals(addNetflixCommand));
+        assertFalse(addSoftwareEngineerCommand.equals(addMobileEngineerCommand));
     }
 
     /**
@@ -189,14 +209,20 @@ public class AddRoleCommandTest {
     }
 
     /**
-     * A Model stub that contains a single company.
+     * A Model stub that contains a single company that accepts roles being added
      */
-    private class ModelStubWithCompany extends ModelStub {
+    private class ModelStubWithCompanyAcceptingRoleAdded extends ModelStub {
         private final Company company;
 
-        ModelStubWithCompany(Company company) {
+        ModelStubWithCompanyAcceptingRoleAdded(Company company) {
             requireNonNull(company);
             this.company = company;
+        }
+
+        @Override
+        public boolean hasRole(Index companyIndex, Role role) {
+            RoleManager roleManager = company.getRoleManager();
+            return roleManager.hasRole(role);
         }
 
         @Override
@@ -204,29 +230,20 @@ public class AddRoleCommandTest {
             requireNonNull(company);
             return this.company.isSameCompany(company);
         }
-    }
-
-    /**
-     * A Model stub that always accept the company being added.
-     */
-    private class ModelStubAcceptingCompanyAdded extends ModelStub {
-        final ArrayList<Company> companiesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasCompany(Company company) {
-            requireNonNull(company);
-            return companiesAdded.stream().anyMatch(company::isSameCompany);
+        public ObservableList<Company> getFilteredCompanyList() {
+            ObservableList<Company> filteredCompanyList = FXCollections.observableArrayList();
+            filteredCompanyList.add(company);
+            return filteredCompanyList;
         }
 
         @Override
-        public void addCompany(Company company) {
-            requireNonNull(company);
-            companiesAdded.add(company);
-        }
-
-        @Override
-        public ReadOnlyCompanyList getCompanyList() {
-            return new CompanyList();
+        public void addRole(Index companyIndex, Role role) {
+            assert (companyIndex.getZeroBased() < 1);
+            requireNonNull(role);
+            RoleManager roleManager = company.getRoleManager();
+            roleManager.addRole(role);
         }
     }
 

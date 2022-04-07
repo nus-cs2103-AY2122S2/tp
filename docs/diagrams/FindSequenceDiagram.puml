@@ -61,7 +61,7 @@ destroy FindCommandParser
 CompanyListParser --> LogicManager : FindCommand
 deactivate CompanyListParser
 
-LogicManager -> FindCommand : execute()
+LogicManager -> FindCommand : execute(model)
 activate FindCommand
 
 FindCommand -> Model : updateFilteredCompanyList(\ncompanyPredicate, rolePredicate)

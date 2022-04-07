@@ -10,9 +10,9 @@ import static seedu.tinner.commons.util.AppUtil.checkArgument;
 public class CompanyName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Company names should only contain alphanumeric characters and spaces, with character length at most 30";
 
-    /*
+    /**
      * The first character of the Name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -32,10 +32,10 @@ public class CompanyName {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid name and it is within the maximum length of 30.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return (test.length() <= 30) && (test.matches(VALIDATION_REGEX));
     }
 
 

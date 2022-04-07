@@ -230,8 +230,8 @@ The following points explain the format of a command.
 
 ### Company Restrictions <a id="c-company-restrictions"></a>
 
-* The `COMPANY_NAME` should only contain alphanumeric characters and spaces, and it should not be blank.
-* The `PHONE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+* The `COMPANY_NAME` should only contain alphanumeric characters and spaces, and have a character limit of at most 30.
+* The `PHONE_NUMBER` should only contain numbers, and be at least 3 digits long and at most 14 digits.
 * The `EMAIL` should be of the format local-part@domain and adhere to the following constraints:
     * The local-part should only contain alphanumeric characters and these special characters, excluding the
       parentheses, (+_.-).
@@ -254,7 +254,7 @@ The following points explain the format of a command.
 
 ### Role Restrictions <a id="c-role-restrictions"></a>
 
-* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets.
+* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets and have a character limit of at most 30.
 * The `REMINDER_DATE` should not be in the past and must be a valid date 
 in the following format: dd-MM-yyyy HH:mm.
 * The `STATUS` is case-sensitive and can only accept the following inputs:
@@ -375,7 +375,7 @@ You can choose to unfavourite by making this entry:
 Finally, you can make a quick reference by listing all favourite companies using the [listFavourite](#c-listfavourite)
 command.
 
-## Use Case #6: Finding a company and/or role <a id="usecase6"></a>
+## Use Case #6: Finding a role <a id="usecase6"></a>
 In the future when you have many applications, finding specific applications can be daunting. The
 [find command](#c-find-c-r) allows you to search for applications easily with keywords matching `COMPANY_NAME` and `ROLE_NAME`.
 
@@ -454,7 +454,7 @@ not, `editCompany` has got you covered. Simply edit the parts of the company det
   The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The `PHONE_NUMBER`, `EMAIL` and `ADDRESS` here can be left blank, allowing you to remove previously added information which may be erroneous.
+  * `PHONE_NUMBER`, `EMAIL` and `ADDRESS` fields can be left blank, allowing you to remove previously added information which may be erroneous.
 * More restrictions for command parameters can be found [here](#c-company-restrictions)
 
 **Examples:**
@@ -587,11 +587,7 @@ company.
 
 </div>
 
-<div markdown="block" class="alert alert-danger">
 
-:warning: If a prefix is specified, even for optional fields, the value after the prefix cannot be blank. e.g. `$/` only is not valid but `$/1000` is valid.
-
-</div>
 
 
 
@@ -610,8 +606,9 @@ Just got invited to an interview? Keep your internship role status and other det
   the index number shown in the displayed company list. The indexes must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` here can be left blank, allowing you to remove previously added information which may be erroneous.
+  * `REMINDER_DATE`, `DESCRIPTION` and `STIPEND` fields can be left blank, allowing you to remove previously added information which may be erroneous.
 * More restrictions for command parameters can be found [here](#c-role-restrictions)
+
 
 **Examples:**
 
@@ -672,19 +669,19 @@ Keep your priorities straight with `listFavourite`. It's `list` but for your `fa
 
 [Back to Table of Contents](#toc)
 
-### Finding companies or internship roles by name: `find` <a id="c-find-c-r"></a>
+### Finding internship roles by name: `find` <a id="c-find-c-r"></a>
 
-If you're having trouble locating a specific company or internship role, consider `find`. Save time by using keywords to
+If you're having trouble locating an internship role, consider `find`. Save time by using keywords to
 readily identify and track down items!
 
-**Function:** Find companies or/and roles depending on the format given.
+**Function:** Find specific roles depending on the format given.
 
 * If only company keywords are entered, companies whose names match any of the given keywords will be displayed with all
   their roles.
 * If only role keywords are entered, roles across all companies whose role names match any of the given keywords will be
   displayed.
 * If both keywords are entered, only companies whose names match any of the company keywords, while containing one or
-  more roles whose names match any of the role keywords, are displayed.
+  more roles whose names match any of the role keywords, are displayed. In this scenario, only the matched roles within these companies are displayed.
 
 **Format:** `find c/COMPANY_KEYWORD [MORE_COMPANY_KEYWORDS] r/ROLE_KEYWORD [MORE_ROLE_KEYWORDS]`
 

@@ -12,7 +12,7 @@ Class EditRoleCommand {
     -Index roleIndex
     +EditRoleCommand(Index companyIndex, Index roleIndex, EditRoleDescriptor editRoleDescriptor)
     + CommandResult execute(Model model)
-    +{static} Role createEditedRole(Role roleToEdit, EditRoleCommand.EditRoleDescriptor editRoleDescriptor)
+    -{static} Role createEditedRole(Role roleToEdit, EditRoleCommand.EditRoleDescriptor editRoleDescriptor)
 }
 Class EditRoleDescriptor
 Class "<<interface>>\nParser" as Parser
