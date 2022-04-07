@@ -56,6 +56,8 @@ public class Messages {
     public static final String MESSAGE_WRONG_TYPE = "The type field must be professors or students.";
     public static final String MESSAGE_INVALID_VIEW = "The view field must be modules or people.\n";
     public static final String MESSAGE_INVALID_LIST_OPTION = "The option field must be view, module, or group.";
+    public static final String MESSAGE_MISSING_OPTION = "Missing o/OPTION field. "
+            + "Options can be either person, module, group or keyevent \n";
     public static final String MESSAGE_MODULE_FIELD_MISSING = "The m/<MODULECODE> field is missing!";
     public static final String MESSAGE_TYPE_FIELD_MISSING = "The ty/<TYPE> field is missing!";
     public static final String MESSAGE_GROUP_FIELD_MISSING = "The g/<GROUPNAME> field is missing!";

@@ -11,6 +11,7 @@ public class Office {
 
     public static final String MESSAGE_CONSTRAINTS = "Office address can take any character up to 20 characters, "
             + "and it should not be blank";
+
     /*
      * The first character of the office must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
