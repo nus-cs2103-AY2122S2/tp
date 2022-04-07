@@ -133,8 +133,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The event must not already exist in the address book.
      */
     public void addEvent(Event toAdd) {
-        alignFriendNames(toAdd);
+        requireNonNull(toAdd);
         assert(areFriendNamesValid(toAdd));
+        alignFriendNames(toAdd);
+        
         events.add(toAdd);
     }
 
@@ -153,20 +155,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
-        alignFriendNames(editedEvent);
         assert(areFriendNamesValid(editedEvent));
+        alignFriendNames(editedEvent);
 
         events.setEvent(target, editedEvent);
     }
 
     //=========== Person-Event Consistency Methods ================================================
-    private FriendName getExactName(FriendName name) {
-        requireNonNull(name);
-
-        FriendName exactName = persons.getExactName(name);
-        requireNonNull(exactName);
-        return exactName;
-    }
 
     /**
      * Aligns event's friend names to be exactly the same as actual friend names, including capitalisation.
@@ -179,7 +174,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         List<FriendName> originalNames = new ArrayList<>(event.getFriendNames());
 
         for (FriendName originalName : originalNames) {
-            FriendName actualName = getExactName(originalName);
+            FriendName actualName = persons.getExactName(originalName);
             event.changeFriendNameIfPresent(originalName, actualName);
         }
     }
