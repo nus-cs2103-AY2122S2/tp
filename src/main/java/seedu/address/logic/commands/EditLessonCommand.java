@@ -92,16 +92,18 @@ public class EditLessonCommand extends Command {
         Lesson lessonToEdit = lastShownList.get(lessonId.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
         requireNonNull(editedLesson);
+
         model.deleteLesson(lessonToEdit);
         if (model.hasConflictingLesson(editedLesson)) {
             model.addLesson(lessonToEdit);
             model.updateFilteredLessonList(new ConflictingLessonsPredicate(editedLesson));
             throw new CommandException(MESSAGE_CONFLICTING_LESSON, ViewTab.LESSON);
         }
-        // editedLesson.updateEdit(lessonToEdit);
+
         model.addLesson(editedLesson);
         model.setSelectedLesson(editedLesson);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+
         String commandResultMessage = String.format(MESSAGE_SUCCESS, editedLesson.getName());
         return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON);
     }

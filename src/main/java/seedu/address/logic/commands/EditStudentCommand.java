@@ -82,6 +82,7 @@ public class EditStudentCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+        requireNonNull(editedStudent);
 
         boolean isNotSameStudent = !studentToEdit.isSameStudent(editedStudent);
         boolean hasStudentInModel = model.hasStudent(editedStudent);
