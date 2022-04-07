@@ -389,25 +389,98 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 <div markdown="block" class="alert alert-danger">
 
-:exclamation: **Caution:** You cannot undo the sort once you have applied it!
+:exclamation: **Caution:** 
+* You cannot undo the sort once you have applied it! 
+* Sort will not affect the list permanently. Trackermon rearranges the show list one time after a successful sort command! 
+* A successful sort command followed by an add command will still result in the new show being added to the last index!  
 </div>
 
 **Format:** `sort [n/ORDER] [s/ORDER] [t/ORDER] [r/ORDER] [so/SEQUENCE]`
 
+**Explanation** 
+
+Let's say you want to sort by name in ascending order.
+Use `sort n/asc`.
+
+Let's say you want to sort by name in descending order.
+Use `sort n/dsc`.
+
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Take note** We sort name lexicographically, in other words, we sort it by comparing alphabets and numbers. We do not compare by combining the numbers into a unit. For example, in ascending order, 100Doggy comes before 69Doggy!   
+</div>
+
+
+Let's say you want to sort by status in ascending order.
+Use `sort s/asc`. 
+
+Let's say you want to sort by status in descending order.
+Use `sort s/dsc`.
+
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Take note** We sort status in this ascending order: `completed`, `watching`, `plan-to-watch`.
+</div>
+
+
+Let's say you want to sort by number of tags in ascending order.
+Use `sort t/asc`.
+
+Let's say you want to sort by number of tags in descending order.
+Use `sort t/dsc`.
+
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Take note** We sort tags by number of tags and not by comparing the names of tags.
+</div>
+
+Let's say you want to sort by rating in ascending order.
+Use `sort r/asc`.
+
+Let's say you want to sort by rating in descending order.
+Use `sort r/dsc`.
+
+Let's say you want to sort by name in ascending order then by status in ascending order.
+Use `sort n/asc s/asc`.
+
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order
+</div>
+
+Therefore, let's say you want to sort by status in ascending order then by name in ascending order.
+Use `sort n/asc s/asc so/statusname`.
+
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Take note** We use `so/SEQUENCE` to swap the priority of the sorting criteria! By default, Trackermon always prioritises sorting in the following order if the criteria are used:
+
+  1. name
+  2. status
+  3. rating
+  4. tag
+
+So, use the "tagratingstatusname" as the `SEQUENCE` if you want to swap the ordering to:
+1. tag
+2. rating
+3. status
+4. name
+
+Additionally, when using `so/` prefix, Trackermon will check if the required criteria is presented in your `SEQUENCE`.
+So if you use `sort n/asc s/asc so/haha`, the required criteria are name and status. As name and status are not provided, Trackermon will tell you the input is invalid!
+</div>
+
 <div markdown="block" class="alert alert-warning">
 
-:bulb: **Tip:** `Sort` will sort according to the [prefixes](#command-structure).<br>
+:bulb: **Tip:** Summary:
+* `Sort` will sort according to the [prefixes](#command-structure).<br>
 * Use `n/` if you want to sort by name.
-* Use `s/` if you want to sort by status.
-* Use `t/` if you want to sort by tag.
+* Use `s/` if you want to sort by status. We sort status in this ascending order: `completed`, `watching`, `plan-to-watch`.
+* Use `t/` if you want to sort by number of tags.
 * Use `r/` if you want to sort by rating.
 * For the above prefixes, you have to specify the `ORDER` right after the prefix.
 * `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending!
-* If two or more of the above prefixes are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
+* The criteria are name, status, tag, rating
+* If two or more of the above criteria are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
 * Use `so/` if you want to reorder the priority and state the `SEQUENCE`
-* List the `SEQUENCE` by listing out the full name of the prefix used in the order you want.
-* For example: you want to sort by name, then status, followed by rating, and finally tags, `SEQUENCE` will be "name status rating tag"
-* `SEQUENCE` input is case-insensitive.
+* List the `SEQUENCE` by listing out the full name of the criteria used in the order you want.
+* For example: you want to sort by rating, then status, followed by name, and finally tag, `SEQUENCE` will be "ratingstatusnametag"
+* `SEQUENCE` input is case-insensitive and spaces between the criteria does not matter. So the input "RaTing Status NAMETag" works too!
 * If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!
 </div>
 
@@ -415,10 +488,10 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 **:information_source: Notes about Sort:**<br>
 * By not entering any prefixes, it will sort by name in ascending order.
-* Enter the right amount of prefixes! For example: if you only sort by status, use only `s/`. 
+* Enter the right amount of prefixes! For example: use only s/ if you are sorting by status.
 * The `ORDER` must be asc or dsc!
-* The `SEQUENCE` must contain the full name of all the sort conditions used!
-* For `SEQUENCE`, if the full name of a sort condition is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
+* The `SEQUENCE` must contain the full name of all the criteria used!
+* For `SEQUENCE`, if the full name of a criteria is being used multiple times, it will only consider the first instance of the full name. For example: "RatingTagRating" will sort by rating then tag.
 * If the same prefix is being used multiple times, only the last prefix will be considered by the program! For example: `sort n/asc n/dsc` will sort name by descending order.
 </div>
 
