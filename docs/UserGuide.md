@@ -292,6 +292,8 @@ Examples:
 * `list` followed by delete 2 deletes the 2nd candidate in the candidate list.
 * `find k/bernice k/alex f/name` followed by delete 1 deletes the 1st candidate in the results of the find command.
 
+**:information_source: Note:** Deleting a candidate from the system deletes his or her scheduled interview (if any) as well.
+
 ### Bringing a Candidate's Information to the Center Panel : `focus`
 
 View more details about the Candidate in the middle panel.
@@ -307,7 +309,13 @@ Format: `focus INDEX`
 
 
 ## Scheduling interviews
+**:information_source: Note:** 
 
+* The duration of an interview is fixed at 30 minutes.
+* Interviews that have expired will automatically be deleted from the interview schedule upon a restart of the application. An interview is considered
+to be expired once its duration has fully passed. (e.g. If an interview is scheduled at 5PM, the interview is deemed to have expired from 5:30PM onwards).
+* The `Interview Status` of a candidate is automatically set to `Scheduled` upon a successful scheduling of interview. 
+Once the candidate's scheduled interview has expired, the `Interview Status` will be set to `Completed` upon a restart of the application. 
 ### Scheduling a candidate for interview: `schedule add`
 
 Schedules the specified candidate for an interview.
@@ -319,9 +327,9 @@ Format: `schedule add candidate/INDEX at/DATE_TIME`
 * The candidate index must be a positive integer 1, 2, 3, …​
 * `DATE_TIME` must be specified in the format `dd-MM-yyyy HH:mm`.
 * `DATE_TIME` must not be earlier than the present date and time.
-* Interview duration is fixed at 30 minutes. Attempts to schedule an interview within the duration of another interview will
-result in an error. (e.g. Interview A starts at 10AM on a given day. Attempts to schedule an interview from 9:31AM up to 10:29AM is prohibited.)
 * Interviews must be scheduled within the office hours, defined as Monday to Friday, 8AM - 6PM (i.e. The last interview for the day allowed is at 5:30PM).
+* Attempts to schedule an interview within the duration of another interview will result in an error.
+(e.g. Interview A starts at 10AM on a given day. Scheduling an interview from 9:31AM up to 10:29AM is prohibited).
 
 Examples:
 * `list` followed by `schedule add candidate/2 at/05-05-2022 10:00` schedules the second candidate in the candidate list
@@ -356,6 +364,8 @@ Format: `schedule delete SCHEDULE_INDEX`
 Examples:
 * `view all` followed by `schedule delete 2` deletes the second interview in the interview schedule.
 
+**:information_source: Note:** Deleting an interview will automatically trigger the associated candidate's 
+`Interview Status` to `Not Scheduled`, regardless of the state of the deleted interview (upcoming, ongoing or expired).
 ### Viewing scheduled interviews `view`
 
 Returns the list of scheduled interviews within the specified time period.
@@ -416,7 +426,8 @@ TAlent Assistant™ data are saved in the hard disk automatically after any comm
 
 ### Editing the data file
 
-TAlent Assistant™ data are saved as a JSON file `[JAR file location]/data/talentassistant.json`. Advanced users are welcome to update data directly by editing that data file.
+TAlent Assistant™ candidate and interview data are saved as JSON files `[JAR file location]/data/talentassistant.json`
+and `[JAR file location]/data/interviewlist.json` respectively. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 
@@ -432,6 +443,15 @@ to your desired outcome (scheduled or not completed).
 *Format is considered to be invalid when either one of the JSON files are missing, or if the JSON files are edited to contain duplicate candidates
 and/or (conflicting) interviews.
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## New features to be added (Coming Soon!)
+
+* The following features are being considered for future versions of TAlent Assistant™:
+  * A new feature to pinpoint the exact interview in conflict (if any) when a user attempts to schedule an interview
+  * A new feature to allow the user to schedule interviews of flexible duration is
+    under consideration for future versions of TAlent Assistant™.
 
 --------------------------------------------------------------------------------------------------------------------
 
