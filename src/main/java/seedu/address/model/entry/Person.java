@@ -68,7 +68,7 @@ public class Person extends Entry {
 
     @Override
     public void updateCompanyName(String oldName, String newName) {
-        if (oldName.equals(companyName.toString())) {
+        if (hasCompanyName(oldName)) {
             companyName = new Name(newName);
         }
     }
