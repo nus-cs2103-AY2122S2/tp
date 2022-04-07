@@ -18,6 +18,7 @@ Given below are my contributions to the project.
     * As an overall to help the team.
   * UI refactors wherever necessary.
     * E.g. Changing of styles i.e. `CSS`.
+  * Ideated `HelpWindow`'s design layout.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=domlimm&breakdown=true)
 
