@@ -28,7 +28,7 @@ TAssist is a **desktop app for managing students and their participation in less
 
    * **`list student`**: Lists all students.
 
-   * **`add student`**`id/E0123456 n/John Doe e/johnd@example.com`: Adds a student named `John Doe` to TAssist.
+   * **`add student`**`id/E0123456 n/John Doe e/johnd@u.nus.edu`: Adds a student named `John Doe` to TAssist.
 
    * **`delete student`**`3`: Deletes the 3rd student shown in the listing of the entity.
 
@@ -133,7 +133,7 @@ Delete any assessment from TAssist by specifying its index.
 Format: `delete assessment INDEX`
 
 * Deletes the assessment at the specified `INDEX`.
-* The index refers to the index number shown in the displayed assessments list.
+* The index refers to the index number shown in the displayed assessment list.
 * The assessment is removed from both the displayed list and the original list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -148,11 +148,11 @@ Show a list of all assessments.
 Format: `list assessment`
 
 
-##### Filtering assessments
+##### Filter assessments
 
 Show a list of all assessments belonging to a particular module.
 
-Format: `list assessment m/MODULE_INDEX`
+Format: `list assessment [m/MODULE_INDEX]`
 
 Examples:
 * `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
@@ -200,7 +200,7 @@ Delete the specified class group from TAssist.
 Format: `delete class INDEX`
 
 * Deletes the class group at the specified `INDEX`.
-* The index refers to the index number shown in the displayed class groups list.
+* The index refers to the index number shown in the displayed class group list.
 * The class group is removed from both the displayed list and the original list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -217,8 +217,8 @@ Create a student to record their contact details. You can enrol this student in 
 Format: `add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]`
 
 Examples:
-* `add student id/E0123456 n/John Doe e/johnd@example.com` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@example.com`.
-* `add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@example.com` and telegram handle `john_doe`.
+* `add student id/E0123456 n/John Doe e/johnd@u.nus.edu` creates a new student named `John Doe` with a student ID of `E0123456` and email `johnd@u.nus.edu`.
+* `add student id/E0123456 n/John Doe e/johnd@u.nus.edu t/john_doe` creates a new student named `John Doe` with a student ID of `E0123456`, email `johnd@u.nus.edu` and telegram handle `john_doe`.
 
 
 #### List all students: `list student`
@@ -426,7 +426,7 @@ Format: `exit`
         <td>
             <ul>
                 <li>syntax: <code>add student id/STUDENT_ID n/NAME e/EMAIL [t/TELEGRAM_ID]</code></li>
-                <li>e.g., <code>add student id/E0123456 n/John Doe e/johnd@example.com t/john_doe</code></li>
+                <li>e.g., <code>add student id/E0123456 n/John Doe e/johnd@u.nus.edu t/john_doe</code></li>
             </ul>
         </td>
     </tr>
