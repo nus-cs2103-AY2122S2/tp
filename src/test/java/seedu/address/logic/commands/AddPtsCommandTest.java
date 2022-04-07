@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.SellerCommandTestUtil.assertCommandSu
 import static seedu.address.logic.commands.SellerCommandTestUtil.showSellerAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SELLER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SELLER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_SELLER;
 import static seedu.address.testutil.TypicalPropertyToSell.PROPERTY_TO_SELL_FIVE;
 import static seedu.address.testutil.TypicalPropertyToSell.PROPERTY_TO_SELL_ONE;
 import static seedu.address.testutil.TypicalPropertyToSell.PROPERTY_TO_SELL_TWO;
@@ -35,8 +36,8 @@ public class AddPtsCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_ONE).build();
-        AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, testProperty);
-        Seller testSeller = model.getFilteredSellerList().get(INDEX_FIRST_SELLER.getZeroBased());
+        AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
+        Seller testSeller = model.getFilteredSellerList().get(INDEX_SEVENTH_SELLER.getZeroBased());
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
 
