@@ -60,11 +60,14 @@ Constraint Types:
   * :heavy_check_mark: - yes 
   * :x: - no
 * _Additional Constraints_ : Any additional constraints on the field.
+
 ### Person - Student or Professor 
+
 Represents a person in university. The person must be a student or a professor.
 
+
 | Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |
-| ----- | ------ | ---- | ------ | -------- |------- | ----- | --- |
+| ----- | ------ | ---- | ------ | -------- | ------- | ----- | --- |
 | Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ |
 | Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: | | _91234859_ |
 | Email | Person's email address| 0 - 1 | [Email Format](#email-address-format) |  4 - 320 characters | :heavy_check_mark:| | _johndoe@example.com_ |
