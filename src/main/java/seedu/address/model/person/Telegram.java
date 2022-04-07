@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Telegram {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Telegram ID should only contain alphanumeric characters and underscore, and it should be one word";
+    public static final String MESSAGE_CONSTRAINTS = "Telegram ID should only contain "
+            + "alphanumeric characters and underscore. "
+            + "It should be one word and must not start with an underscore.";
 
     /*
      * Input can be blank space, if you input blank spaces,
@@ -34,8 +35,8 @@ public class Telegram {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidTelegramId(String test) {
-        return test.equals("") || test.matches(VALIDATION_REGEX);
+    public static boolean isValidTelegramId(String telegram) {
+        return telegram.equals("") ||((telegram.matches(VALIDATION_REGEX) && !(telegram.charAt(0) == '_')));
     }
 
 
@@ -48,7 +49,7 @@ public class Telegram {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Telegram // instanceof handles nulls
-                && id.equals(((Telegram) other).id)); // state check
+                && id.equalsIgnoreCase(((Telegram) other).id)); // state check
 
     }
 
