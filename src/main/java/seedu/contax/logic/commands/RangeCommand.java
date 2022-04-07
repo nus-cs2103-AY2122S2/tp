@@ -59,8 +59,6 @@ public class RangeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // special case: to edit first occurrence person with duplicated name
-        Person restorePerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
         if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -75,7 +73,9 @@ public class RangeCommand extends Command {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
                     commandResultList.clear(); // only for the purpose of not changing output in feature freeze
-                    setFirstOccurrencePerson(model, restorePerson);
+                    if (fromIndex.getZeroBased() != toIndex.getZeroBased() && commandInput.startsWith("edit")) {
+                        setFirstOccurrencePerson(model);
+                    }
                     commandResultList.add(new CommandResult(ce.getMessage()));
                     break;
                 }
@@ -91,7 +91,8 @@ public class RangeCommand extends Command {
     }
 
 
-    private void setFirstOccurrencePerson(Model model, Person restorePerson) {
+    private void setFirstOccurrencePerson(Model model) {
+        Person restorePerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
         Person lastPerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
         model.setPerson(model.getAddressBook().getPersonList().get(toIndex.getZeroBased()), restorePerson);
         model.setPerson(model.getAddressBook().getPersonList().get(fromIndex.getZeroBased()), lastPerson);
