@@ -26,7 +26,7 @@ LogicManager -> AddressBookParser : parseCommand("email")
 activate AddressBookParser
 
 create EmailCommand
-AddressBookParser -> EmailCommand
+AddressBookParser -> EmailCommand :EmailCommand()
 activate EmailCommand
 
 EmailCommand --> AddressBookParser
@@ -39,7 +39,7 @@ LogicManager -> EmailCommand : execute()
 activate EmailCommand
 
 create CommandResult
-EmailCommand -> CommandResult
+EmailCommand -> CommandResult : CommandResult()
 activate CommandResult
 
 CommandResult --> EmailCommand
