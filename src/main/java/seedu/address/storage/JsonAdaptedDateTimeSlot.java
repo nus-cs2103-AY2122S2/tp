@@ -103,7 +103,6 @@ class JsonAdaptedDateTimeSlot {
     private static DateTimeSlot getDateTimeSlot(LocalDateTime modelDateTime,
                                                 Integer modelDurationHours, Integer modelDurationMinutes)
             throws IllegalValueException {
-
-            return DateTimeSlot.makeDateTimeSlotFromJson(modelDateTime, modelDurationHours, modelDurationMinutes);
+        return DateTimeSlot.makeDateTimeSlotFromJson(modelDateTime, modelDurationHours, modelDurationMinutes);
     }
 }

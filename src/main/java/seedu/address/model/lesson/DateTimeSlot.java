@@ -65,31 +65,6 @@ public class DateTimeSlot {
     /**
      * Constructs a {@code DateTimeSlot}.
      *
-     * @param date Date of the lesson.
-     * @param startTime Starting time of the lesson.
-     * @param hours Duration of the lesson, hours.
-     * @param minutes Duration of the lesson, minutes.
-     */
-    public DateTimeSlot(LocalDate date, String startTime, int hours, int minutes) {
-        requireNonNull(date);
-
-        String[] hourAndMinuteOfStartTime = startTime.split(":");
-        Integer hour;
-        Integer minute;
-        LocalDateTime lessonDateTime;
-
-        hour = Integer.parseInt(hourAndMinuteOfStartTime[0]);
-        minute = Integer.parseInt(hourAndMinuteOfStartTime[1]);
-        lessonDateTime = date.atTime(hour, minute);
-
-        dateOfLesson = lessonDateTime;
-        this.hours = hours;
-        this.minutes = minutes;
-    }
-
-    /**
-     * Constructs a {@code DateTimeSlot}.
-     *
      * @param startingDateTime Starting date and time of the lesson.
      * @param hours Duration of the lesson, hours.
      * @param minutes Duration of the lesson, minutes.

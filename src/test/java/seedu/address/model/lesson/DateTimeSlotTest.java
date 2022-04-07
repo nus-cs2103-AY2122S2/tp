@@ -22,7 +22,7 @@ public class DateTimeSlotTest {
         assertNotNull(new DateTimeSlot(dt, 0, 50));
 
         // valid inputs given to the constructor
-        assertNotNull(new DateTimeSlot(d, "18:00", 1, 30));
+        assertNotNull(new DateTimeSlot(dt, 1, 30));
     }
 
     @Test
@@ -44,10 +44,12 @@ public class DateTimeSlotTest {
 
     @Test
     public void getDateOfLesson() {
+        // with only hours specified for lesson duration
         DateTimeSlot dateTimeSlot1 = new DateTimeSlot(dt, 1);
         assertEquals(dateTimeSlot1.getDateOfLesson(), dt);
 
-        DateTimeSlot dateTimeSlot2 = new DateTimeSlot(d, "18:00", 1, 30);
+        // with both hours and minutes specified for lesson duration
+        DateTimeSlot dateTimeSlot2 = new DateTimeSlot(d.atTime(18, 0), 1, 30);
         LocalDateTime dateTimeOfDateTimeSlot2 = d.atTime(18, 0);
         assertEquals(dateTimeSlot2.getDateOfLesson(), dateTimeOfDateTimeSlot2);
     }
@@ -208,10 +210,9 @@ public class DateTimeSlotTest {
 
     @Test
     public void getJsonStartTime() {
-        LocalDate date = LocalDate.of(2022, 1, 1);
-        String startTime = "18:00";
+        LocalDateTime date = LocalDateTime.of(2022, 1, 1, 18, 00);
         String expectedJsonString = "18:00";
-        DateTimeSlot dateTimeSlot = new DateTimeSlot(date, startTime, 1, 30);
+        DateTimeSlot dateTimeSlot = new DateTimeSlot(date, 1, 30);
 
         assertEquals(dateTimeSlot.getJsonStartTime(), expectedJsonString);
     }
