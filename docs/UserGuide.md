@@ -261,15 +261,15 @@ Finds clients whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Names of clients should be separated by commas
+  * Example: `find alex, david li` will match clients whose name contain `Alex` or `David Li`
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * Example: If your HustleBook contains a client named `David` but not `Goliath`, 
+    `find David, Goliath` will show only `David`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex, david` returns `Alex Yeoh`, `David Li`<br>
 
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)

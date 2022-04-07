@@ -43,6 +43,14 @@ public class Name {
         return this.fullName.compareToIgnoreCase(otherName.fullName);
     }
 
+    public boolean containsKeyword(String test) {
+        if (test.equals("")) {
+            return false;
+        } else {
+            return this.fullName.toLowerCase().contains(test);
+        }
+    }
+
     @Override
     public String toString() {
         return fullName;
