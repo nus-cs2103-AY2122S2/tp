@@ -282,6 +282,11 @@ Format: `focus INDEX`
 
 * Additional details of the Candidate will be displayed on the center panel in the application.
 * To switch to another Candidate's information, user will just need to type the new command and the new index of the candidate.
+* If a `Candidate` is in focus and the user decides to `delete` the candidate, the middle panel will be cleared. 
+
+
+  ![Ui](images/focusui.png)
+
 
 ## Scheduling interviews
 
