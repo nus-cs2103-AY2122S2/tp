@@ -435,7 +435,7 @@ The email mechanism implements the following sequence for the method call execut
 
 #### What is the email feature
 
-The email feature opens up a separate window containing the emails of the current list displayed in Tracey. The email feature allows a user to copy the email list to their clipboard to paste in their email platform of choice.
+The email feature opens up a separate window containing the emails of the students found in the current list displayed. The email feature allows a user to copy the email list to their clipboard to paste in their email platform of choice.
 
 The `email` command is as follows:
 
