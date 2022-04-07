@@ -76,7 +76,7 @@ public class BuyerTest {
         assertNotEquals(5, YUQI);
 
         // different client type -> returns false
-        assertNotEquals(yuqiSeller, YUQI);
+        assertNotEquals(YUQI, yuqiSeller);
 
         // different client -> returns false
         assertNotEquals(YUQI, BOB);
