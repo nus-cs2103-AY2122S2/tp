@@ -12,9 +12,10 @@ import java.util.regex.Pattern;
  */
 public class BloodType {
 
-    public static final String MESSAGE_CONSTRAINTS = "We recommend using ABO blood system, "
-            + "but allow any blood system or special blood type values. "
-            + "Blood type can take any values, and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid blood type input. "
+            + "We recommend inputting blood type using ABO blood group system (eg. AB), "
+            + "but we allow any other blood type input values (eg. other blood group system). "
+            + "Blood type parameter can take any values, and it should not be blank.";
 
     /*
      * Blood type can take any value
@@ -26,12 +27,12 @@ public class BloodType {
     /**
      * Constructs an {@code BloodType}.
      *
-     * @param address A valid address.
+     * @param bloodType A valid blood type.
      */
-    public BloodType(String address) {
-        requireNonNull(address);
-        checkArgument(isValidBloodType(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public BloodType(String bloodType) {
+        requireNonNull(bloodType);
+        checkArgument(isValidBloodType(bloodType), MESSAGE_CONSTRAINTS);
+        value = bloodType;
     }
 
     /**

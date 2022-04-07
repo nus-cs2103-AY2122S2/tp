@@ -15,6 +15,13 @@ public class MedicalContainsKeywordsPredicate implements Predicate<Medical> {
         this.keywords = keywords;
     }
 
+    /**
+     * Checks if the specified {@code Medical} from the entire list of medical information matches any of the specified
+     * keywords.
+     *
+     * @param medical Medical record to test against the keywords
+     * @return true if this Medical record contains any of the specified keywords
+     */
     @Override
     public boolean test(Medical medical) {
         return keywords.stream()

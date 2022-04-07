@@ -10,7 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight {
 
-    public static final String MESSAGE_CONSTRAINTS = "Weight can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Invalid height input. "
+            + "We recommend inputting height using kilograms (eg. 70 kg), "
+            + "but we allow any other unit or special weight values (eg. using other units). "
+            + "Weight parameter can take any values, and it should not be blank.";
 
     /*
      * The first character of the Weight must not be a whitespace,

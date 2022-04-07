@@ -11,7 +11,7 @@ import java.time.format.FormatStyle;
 public class PrescriptionDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Prescription Date should not be blank, "
-                                                    + "and should be in the format: YYYY-MM-DD";
+        + "and should be in the format: YYYY-MM-DD";
 
     public final LocalDate date;
 

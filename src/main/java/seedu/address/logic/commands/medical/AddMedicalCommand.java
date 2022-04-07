@@ -32,7 +32,6 @@ public class AddMedicalCommand extends Command {
             + PREFIX_TYPE + "medical "
             + ": Adds medical information of a patient to MedBook. \n"
             + "Parameters: "
-            + PREFIX_TYPE + "medical "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_AGE + "AGE "
             + PREFIX_BLOODTYPE + "BLOODTYPE "
