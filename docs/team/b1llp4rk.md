@@ -15,7 +15,7 @@ Given below are my contributions to the project.
     * Enable editing multiple persons with `edit` command[batch edit](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79)
       * **What it does:** This feature allows user to edit multiple persons in HackNet at once, for teams and skills fields.
       * **Justification:** A student who uses HackNet might need to edit multiple persons at once. For example, the student might have learned about a team project that 5 of his friends are working on. After adding friends that were not present in the HackNet data, the student would prefer one command to `edit` the team info for all five of them, instead of having to type the `edit` command five times for each persons.
-      * **Highlights:** [`batch edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command was created initially to enable editing multiple persons. However later the command and its features were [assimilated to `edit` command](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/84). The decision was made as an attempt to minimize the types of commands that user has to learn.
+      * **Highlights:** [`batchedit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command was created initially to enable editing multiple persons. However later the command and its features were [assimilated to `edit` command](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/84). The decision was made as an attempt to minimize the types of commands that user has to learn.
 
     * Establish reset and [default mode](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/82)
       * **What it does:** Reset and default modes can be chosen by the user when using the `edit` command. When using the reset mode, the team and skills value that the user provides as parameter of `edit` completely replaces the previous values for teams and skills of the person(s) that the user is editing. In default mode, the team and skills value that the user provides gets appended to the pre-existing teams and skills of the person(s) being edited.
@@ -27,19 +27,31 @@ Given below are my contributions to the project.
       * **Justification:** The previous design of passing in multiple values of teams and skills required user to start each value with `t/` or `s/`. This is very inconvinient compared to comma, especially when having to pass a large number of teams or skills. This feature was first implemented on [`edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command, and was later expanded to [`add`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/87) command.
       * **Highlights:** Consecutive whitespaces before and after the commas are ignored. This is an attempt to take into account that normal use of comma is followed by a space, and to be generous towards mistakes where multiple spaces are used instead of one space.
 
-* **Contributions to the UG**:
-  * to be added soon
+* **Bug Fixes**
+  * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills, as UserGuide states. This is to prevent cases such as when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
+  * [Inability to redo some edit commands](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/156) was discovered while reinforcing integration test of edit command, and was fixed.
+    * Commands that alter the data of HackNet has to commit the new changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
 
+
+* **Contributions to the UG**:
+  * Reinforce documentation for `edit` comamnd. Information regarding editing multiple persons, and reset and defualt mode was added.
+  * Reinforce documentation for `edit` and `add` command regarding the use of commas to separate multiple values.
+  
 * **Contributions to the DG**:
-  * to be added soon
+  * Class diagram for EditCommand
+  * Sequence diagram for `edit` command
 
 * **Contributions to the team-based tasks**:
-  * to be added soon
+  * Taking demo screenshots of v1.2 features
+  * Polishing the UserGuide and converting to pdf in v1.2
+  * [Adapting user guide of AB3](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/37), the software that HackNet diverged off, to suite HackNet
+  * [Adapting developer guide of](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/27) AB3 to suit HackNet
 
 * **Review/mentoring contributions**:
-  * to be added soon
+  * PRs reviewed [Add team forming functionality](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/55), [Branch feature undo redo](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/76)
+  * Create spreadsheet and make teammates record PR reviews they have done, to share the PR review work evenly as possible.
 
 * **Contributions beyond the project team**:
-    * to be added soon
+    * Have shared a [tip](https://github.com/nus-cs2103-AY2122S2/forum/issues/129) on how to customize Intellij to follow common git convention, on module's forum.
 
 
