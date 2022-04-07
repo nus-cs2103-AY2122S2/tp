@@ -19,8 +19,8 @@ Given below are my contributions to the project.
 
     <img src="../images/Ui.png" width="500px">>
   
-  * _Fixed storage system on Mac and Linux not saving to the correct location_
-    * Details: Mac and Linux data file path did not store together with the jar file. Worked together with [arcornior](arcornior.md) as he tested the storage system on Mac and Linux.
+  * _Fixed storage system on MacOS and Linux not saving to the correct location_
+    * Details: MacOS and Linux data file path did not store together with the jar file. Worked together with [arcornior](arcornior.md) as he tested the storage system on MacOS and Linux.
     * Issues: Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)], Editor Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)]
     * PRs: [[\#167](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/167)], [[\#177](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/177)]
 
