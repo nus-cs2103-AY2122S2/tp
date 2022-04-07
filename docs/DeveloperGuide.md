@@ -39,7 +39,7 @@ The UI consists of a `MainWindow` that is made up of multiple parts eg. `Command
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
 that are in the `src/main/resources/view` folder. For example, the layout of the 
-[`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+[`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in 
 [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
@@ -54,28 +54,26 @@ The bottom half of the `UI` component is split into two parts using a `SplitPane
 the JavaFX UI framework. 
 
 The left pane contains a `TabPane` that contains two tabs which hold a 
-[`LessonListPanel`](../src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) and a
-[`StudentListPanel`](../src/main/java/seedu/address/ui/listpanel/StudentListPanel.java).
+[`LessonListPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) and a
+[`StudentListPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/listpanel/StudentListPanel.java).
 The **_Lessons_** tab contains a 
-[`LessonListPanel`](../src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) which lists out `Lesson` entries 
+[`LessonListPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/listpanel/LessonListPanel.java) which lists out `Lesson` entries 
 while the **_Students_** tab contains a 
-[`StudentListPanel`](../src/main/java/seedu/address/ui/listpanel/StudentListPanel.java) which lists out `Student`
+[`StudentListPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/listpanel/StudentListPanel.java) which lists out `Student`
 entries.
 
-[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
 To switch between the tabs, the methods `MainWindow#toggleLessonTab()` and `MainWindow#toggleStudentTab()` can be used 
 to switch between the **_Lesson_** tab and **_Student_** tab respectively. Switching the tabs by using user commands is 
 done by the method `MainWindow#toggleTab()`.
 
 ![img.png](images/UiPhotos/InfoPanelClassDiagram.png)
 
-The right pane contains an [`InfoPanel`](../src/main/java/seedu/address/ui/infopanel/InfoPanel.java) 
+The right pane contains an [`InfoPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/infopanel/InfoPanel.java) 
 component can either show the details of a `Lesson` entry or `Student` entry. A
-[`LessonInfoPanel`](../src/main/java/seedu/address/ui/infopanel/LessonInfoPanel.java) is used to show the details of a 
-`Lesson` entry, while a [`StudentInfoPanel`](../src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java) is used
+[`LessonInfoPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/infopanel/LessonInfoPanel.java) is used to show the details of a 
+`Lesson` entry, while a [`StudentInfoPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java) is used
 to show the details of a `Student` entry.
 
-[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
 The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateInfoPanelWithStudent()` can be used to
 populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
 method `MainWindow#handleInfoPanelUpdate()`.
@@ -118,13 +116,15 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Viewing a Lesson or Student's details
 
-[//]: # (maybe add Lesson and Student's definition in the glossary)
-
 Viewing details of a `Lesson` or `Student` on the `InfoPanel` component in the `UI` is done through the `lesson` or 
 `student` command.
 
-When the command is entered, the `TeachWhatParser` class would **parse** the given user input and return either a 
-`ViewLessonInfoCommand` or `ViewStudentInfoCommand` object, depending on which command was used. 
+When the command is entered, the 
+[`TeachWhatParser`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/parser/TeachWhatParser.java)
+would **parse** the given user input and return either a 
+[`ViewLessonInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewLessonInfoCommand.java)
+or [`ViewStudentInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewStudentInfoCommand.java) 
+object, depending on which command was used. 
 
 When the Command is executed by `Logic`, the executed command would make some attribute changes to `Model` (which holds
 the data of the App in memory) and also update the `InfoPanel` component of the `UI` with detailed information of the 
@@ -135,46 +135,59 @@ list.
 
 Step 1: User inputs `student 1` into the `CommandBox` and hits enter.
 
-`MainWindow` receives the user input through the `MainWindow#executeCommand()` method. `MainWindow` then sends the user
-input to `LogicManager` and retrieves the result.
+[`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+receives the user input through the `MainWindow#executeCommand()` method. 
+[`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+then sends the user input to `Logic` and retrieves the result.
 
-Step 2: `LogicManager` parses the user's input and returns the result
+Step 2: `Logic` parses the user's input and returns the result
 
 ![](images/viewing-details/ViewStudentParseSequenceDiagram.png)
 
-`LogicManager` parses the user's input through multiple `Parser` classes as shown in the sequence diagram above. User
-input is first sent to the `TeachWhatParser` where it looks for the main command `student`. It passes the arguments to
-the relevant **Command Parser** which in this case is `ViewStudentInfoParser`.
+`Logic` parses the user's input through multiple `Parser` classes as shown in the sequence diagram above. User
+input is first sent to the [`TeachWhatParser`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/parser/TeachWhatParser.java)
+where it looks for the main command `student`. It passes the arguments to
+the relevant **Command Parser** which in this case is 
+[`ViewStudentInfoParser`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/parser/ViewStudentInfoCommandParser.java).
 
-`ViewStudentInfoParser` takes in the provided index and creates a `ViewStudentInfoCommand`. This `Command` is returned
-back to `LogicManager` where it is executed with the `ViewStudentInfoCommand#execute()` method.
+[`ViewStudentInfoParser`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/parser/ViewStudentInfoCommandParser.java)
+takes in the provided index and creates a 
+[`ViewStudentInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewStudentInfoCommand.java).
+This `Command` is returned back to `LogicManager` where it is executed with the `ViewStudentInfoCommand#execute()` method.
 
 Step 3: Executing the command
 
-[//]: # (Might split the above diagram into two, show the parsing section and execution)
+As shown in the diagram above, when `ViewStudentInfoCommand#execute()` is called,
+[`ViewStudentInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewStudentInfoCommand.java)
+retrieves the filtered list (the current list shown in the UI) from `Model` and picks out the selected student based on
+the index provided by the user's input. It then sets `ModelManager#selectedStudent` using the 
+`ModelManager#setSelectedStudent()` method, which will be used by
+[`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+later on.
 
-As shown in the diagram above, when `ViewStudentInfoCommand#execute()` is called, `ViewStudentInfoCommand` retrieves
-the filtered list (the current list shown in the UI) from `Model` and picks out the selected student based on the index
-provided by the user's input. It then sets `ModelManager#selectedStudent` using the `ModelManager#setSelectedStudent()`
-method, which will be used by `MainWindow` later on.
-
-[//]: # (Insert object diagram here to show what attributes CommandResult have. )
-
-[//]: # (Also explain why certain attributes are set and how they will be used by MainWindow to)
-
-[//]: # (show certain elements&#41;)
-
-`ViewStudentInfoCommand` creates a `CommandResult` object, with the attributes shown above. This is then returned back
-to `LogicManager` which returns it back to `MainWindow`.
+[`ViewStudentInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewStudentInfoCommand.java)
+creates a 
+[`CommandResult`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java)
+object, with the parameter `infoPanelType = InfoPanelTypes.STUDENT`. 
+[`InfoPanelTypes`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/misc/InfoPanelTypes.java)
+is an enumerator representing the different states of the InfoPanel. This is then returned to `LogicManager` which
+returns it back to `MainWindow`.
 
 Step 4: Updating the UI
 
 ![](images/viewing-details/ViewStudentSequenceDiagram.png)
 
-Once `MainWindow` receives the `CommandResult` object, it checks for the `CommandResult#updateInfoPanel` boolean. If the
+Once 
+[`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) 
+receives the 
+[`CommandResult`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/CommandResult.java)
+object, it checks for the `CommandResult#updateInfoPanel` boolean. If the
 boolean is true, it runs the `MainWindow#handleInfoPanelUpdate()` method which updates the `InfoPanel`. It does this by
-retrieving the selected student from `ModelManager#selectedStudent` and creates a new `StudentInfoPanel` with the 
-selected student and its details. The newly created `StudentInfoPanel` is shown on the right side of the application.
+retrieving the selected student from `ModelManager#selectedStudent` and creates a new
+[`StudentInfoPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java)
+with the selected student and its details. The newly created
+[`StudentInfoPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java)
+is shown on the right side of the application.
 
 The execution of the command is complete and the result is shown in the image below, where the right side of the
 application is updated with the details of the selected `Student`.
@@ -184,8 +197,8 @@ application is updated with the details of the selected `Student`.
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
 
 ### Add student
-Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the `TeachWhatParser` into a `Command`
-which is executed by `LogicManager#execute()`.
+Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the 
+`TeachWhatParser` into a `Command` which is executed by `LogicManager#execute()`.
 
 Given below is an example scenario:
 
