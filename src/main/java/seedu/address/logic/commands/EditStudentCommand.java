@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
@@ -73,7 +74,8 @@ public class EditStudentCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        boolean isIndexOutOfBounds = index.getZeroBased() >= lastShownList.size();
+        if (isIndexOutOfBounds) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 

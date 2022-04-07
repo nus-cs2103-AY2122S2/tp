@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.logic.commands.exceptions.NoInfoPanelTypeException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 
 /**
  * Represents the result of a command execution.

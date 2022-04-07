@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
@@ -57,11 +58,15 @@ public class UnassignCommand extends Command {
 
         Student student = model.getFilteredStudentList().get(studentId.getZeroBased());
         Lesson lesson = model.getFilteredLessonList().get(lessonId.getZeroBased());
-        if (!student.isEnrolledIn(lesson) || !lesson.hasAlreadyAssigned(student)) {
+
+        boolean ifNotEnrolledAlready = !student.isEnrolledIn(lesson) || !lesson.hasAlreadyAssigned(student);
+        if (ifNotEnrolledAlready) {
             throw new CommandException(String.format(MESSAGE_NOT_ENROLLED, student.getName(), lesson.getName()));
         }
+
         model.updateUnassignment(student, lesson);
         model.setSelectedStudent(student);
+
         String commandResultMessage = String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName());
         return new CommandResult(commandResultMessage, InfoPanelTypes.STUDENT, ViewTab.STUDENT);
     }

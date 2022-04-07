@@ -20,6 +20,7 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.ConflictingLessonsPredicate;
 import seedu.address.model.lesson.DateTimeSlot;
@@ -80,9 +81,12 @@ public class EditLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Lesson> lastShownList = model.getFilteredLessonList();
-        if (lastShownList.size() < lessonId.getOneBased()) {
+
+        boolean isIndexOutOfBounds = lastShownList.size() < lessonId.getOneBased();
+        if (isIndexOutOfBounds) {
             throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
+
         Lesson lessonToEdit = lastShownList.get(lessonId.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
         model.deleteLesson(lessonToEdit);

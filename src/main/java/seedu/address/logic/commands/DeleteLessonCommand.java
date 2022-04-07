@@ -38,12 +38,14 @@ public class DeleteLessonCommand extends Command {
         requireNonNull(model);
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        boolean isIndexOutOfBounds = targetIndex.getZeroBased() >= lastShownList.size();
+        if (isIndexOutOfBounds) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteLesson(lessonToDelete);
+
         boolean shouldClearInfoPanel = model.shouldClearLessonInfoPanelOnDelete(lessonToDelete);
         String commandResultMessage = String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
         if (shouldClearInfoPanel) {
