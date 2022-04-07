@@ -100,7 +100,7 @@ This could be a problem with Windows. You can alternatively start **HackNet** by
 
 * For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY…]​` as `s/Java_90`
-    
+
 
 </div>
 
@@ -133,8 +133,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 
 * A person can have any number of teams or skills(including 0)
 * teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.
+* `t/      ` and `s/        ` is treated as `t/` and `s/` as HackNet ignores whitespaces. Therefore, a name of a team cannot be consisting solely of whitespaces.
+* HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.
 * Consecutive white spaces right after `t/` and `s/` are ignored.
 * A name of a team or skill cannot be consisting solely of whitespaces.
+* Please check that you have correctly entered the skill proficiency level.
+There is currently no way of viewing the exact number that you entered.
+You may use the `edit` function to change it if it is wrong.
+* The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).
 </div>
 
 Examples:
@@ -158,6 +164,8 @@ Format: `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERN
 * In reset mode, editing teams edits the teams of a person from scratch. i.e adding of teams is not cumulative. You can remove all the person’s teams by typing `t/` without
   specifying any teams after it.
 * The concept of default and reset mode applies with skills as well.
+* when editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `Name` and `Phone` will be silently ignored.
+* HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.
 * When editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `NAME` and `PHONE` will be silently ignored.
 * When at least one of the indices provided are invalid for batch edit, HackNet informs that there was an error in the indices, but still delivers the modification for the indices that are valid.
 * In the unlikely case that same index is present multiple times for `INDEX [INDEX…]`, HackNet will still successfully execute the edit command as long as the index is valid.
@@ -249,6 +257,9 @@ Examples:
 * `sort Python` shows persons with `Python` as a skill in descending order of proficiency
 
 ### Mark/unmark contact as potential teammates: `team/unteam`
+
+This feature selects/deselect specified persons as potential members. If a person is selected as a potential teammate,
+the contact box will be highlighted in a shade of turquoise.
 
 Format:
 * `team INDEX`
@@ -385,7 +396,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
-**Filter Past Teammates** | `filterteam` 
+**Filter Past Teammates** | `filterteam`
 **Show potential teammates** | `show`
 **Exit HackNet** | `exit`
 **Navigate User Input History** | `↑`, `↓`

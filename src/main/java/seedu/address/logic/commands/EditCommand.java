@@ -21,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
@@ -64,7 +65,7 @@ public class EditCommand extends Command {
         + PREFIX_PHONE + "91234567 "
         + PREFIX_EMAIL + "johndoe@example.com" + "\n"
         + "Example 2: " + COMMAND_WORD + " 1 "
-        + PREFIX_TEAM + "System Maintenance, Python"
+        + PREFIX_TEAM + "System Maintenance, Python "
         + PREFIX_SKILL;
 
     public static final String MESSAGE_EDIT_SINGLE_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -159,6 +160,7 @@ public class EditCommand extends Command {
         } else {
             commandResult = executeBatchEdit(model, lastShownList);
         }
+        model.commitAddressBook();
         return commandResult;
     }
 
@@ -188,14 +190,18 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        Model modelToCheckAgainst = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        boolean isSuccessfullyRemoved = modelToCheckAgainst.safeDeletePerson(personToEdit);
+        if (!isSuccessfullyRemoved) {
+            throw new CommandException("Error: Unable to edit; please contact the developers");
+        }
+        if (modelToCheckAgainst.hasPerson(editedPerson)) {
+            String duplicatedField = modelToCheckAgainst.getDuplicateField(editedPerson);
+            throw new CommandException("Error: Operation would result in persons with same " + duplicatedField + ".");
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_SINGLE_PERSON_SUCCESS, editedPerson));
     }
 
@@ -211,10 +217,10 @@ public class EditCommand extends Command {
         return editOnlyTeamsAndSkills;
     }
 
-    private CommandResult executeBatchEdit(Model model, List<Person> lastShownList) throws CommandException {
+    private CommandResult executeBatchEdit(Model model, List<Person> lastShownList) {
 
         boolean isAllIndicesValid = true;
-        List<Name> editedNames = new ArrayList<Name>();
+        List<Name> editedNames = new ArrayList<>();
         EditPersonDescriptor onlyTeamAndSkillsetDescriptor = extractOnlyTeamsAndSkillSet(editPersonDescriptor);
         for (Index index : indicesToEdit) {
             if (index.getZeroBased() >= lastShownList.size()) {

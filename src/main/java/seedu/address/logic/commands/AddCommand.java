@@ -60,8 +60,10 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            String duplicatedField = model.getDuplicateField(toAdd);
+            throw new CommandException("Error: Operation would result in persons with same " + duplicatedField + ".");
         }
+
 
         model.addPerson(toAdd);
         model.commitAddressBook();

@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project would not have been possible without the help of [Ivan](https://github.com/wpinrui), and [prof Damith](https://github.com/damithc)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,7 +205,7 @@ This command is used to display a list of people who has the skill specified in 
 
 #### Execution
 
-Below is a sequence diagram showing the execution path when this command is entered. 
+Below is a sequence diagram showing the execution path when this command is entered.
 
 ![FilterSkillCommand](images/FilterSkillSequenceDiagram.png)
 
