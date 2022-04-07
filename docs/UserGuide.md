@@ -497,7 +497,14 @@ Examples:
 * `plotMonthlyCustomers`
 
 ### 4.5 Schedule management
+<div markdown="block" class="alert alert-info">
 
+**:information_source: Information:**
+<ul>
+    <li>Bookings that start and end on different dates will fall under its start date.</li>
+</ul>
+
+</div>
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Caution:**<br>
