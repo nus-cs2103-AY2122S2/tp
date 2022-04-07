@@ -11,9 +11,6 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=Jonathan&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
-* **Project management**:
-  * _TBA_
-
 * **Enhancements to existing features**:
   * Improved the GUI of Trackermon
     * Details: Used the design made by [aweijun](aweijun.md) and made some improvements to the application design of Trackermon. 
@@ -26,17 +23,27 @@ Given below are my contributions to the project.
     * Details: Mac and Linux data file path does not store together with the jar file. Work together with [arcornior](arcornior.md) as he tested the storage system on mac and linux.
     * Issues: Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)], Editor Storage Fix [[\#178](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/178)]
     * PRs: [[\#167](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/167)], [[\#177](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/177)]
-  
+
+  * Morph AB3 UI components to fit Trackermon's components
+    * Details: Refactor all Person classes of UI components to Show instead as Trackermon is used to track shows. 
+    * Issues: UI Morph [[\#56](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/56)]
+    * PRs: [[\#65](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/65)], [[\#66](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/66)]
+
+* **Project management**:
+  * Managed Trackermon's [releases](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases) for v1.2, v1.3.trial, and v1.3.
+  * Maintaining the issue tracker regarding assigning assignees, linking PRs to issues, and created these [issues](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues?q=is%3Aissue+author%3AJonathanHoshi+) on Github.
+  * Manage deadlines and plan team tasks schedules.
 
 * **Documentation**:
   * User Guide: 
-    * Added basic information of Trackermon and Quick Start
+    * Update basic information of Trackermon at the start of the project. [[\#19](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/19)]
+    * Add a section of Parameter conditions to consolidate all commands conditions regarding their parameters. [[\#258](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/258)]
   * Developer Guide: [[\#148](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/148)]
     * Update documentation and UML diagrams for UI.
-      * Format manual testing section.
+    * Format manual testing section.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): _TBA_ <!--[\#12](), [\#32](), [\#19](), [\#42]()-->
+  * PRs reviewed (with non-trivial review comments): [[\#12](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166)]
+  * Assisted [arcornior](arcornior.md) with his Import/Export issues. [\#162](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/162)
 
-* **Tools**:
 
