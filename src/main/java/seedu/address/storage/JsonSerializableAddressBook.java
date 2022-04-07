@@ -21,7 +21,7 @@ import seedu.address.model.position.Position;
 @JsonRootName(value = "HireLah")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "Persons list contains duplicate applicant(s).";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate applicant(s).";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
     public static final String MESSAGE_DUPLICATE_POSITION = "Positions list contains duplicate position(s).";
 
@@ -33,10 +33,10 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedApplicant> persons,
+    public JsonSerializableAddressBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants,
             @JsonProperty("interviews") List<JsonAdaptedInterview> interviews,
             @JsonProperty("positions") List<JsonAdaptedPosition> positions) {
-        this.applicants.addAll(persons);
+        this.applicants.addAll(applicants);
         this.interviews.addAll(interviews);
         this.positions.addAll(positions);
     }

@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalApplicants.ALICE;
 
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
