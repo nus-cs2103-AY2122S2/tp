@@ -38,7 +38,7 @@ Given below are my contributions to the project.
   * Justification :
     * This enhancement is important as all other features implemented by my teammates must be reflected correctly in the employee list and task list.
   * Highlights :
-    * This enhancement requires me to research on JavaFX extensively as I need to understand JavaFx properties and build layouts in fxml code with the help of the Scene Builder software.
+    * This enhancement requires me to research on JavaFX extensively as I need to understand JavaFx properties and build layouts in fxml code with the help of the Scene Builder software. I will also need to have knowledge on CSS as CSS is used to set the style and alignment of JavaFx containers and controls.
     * This enhancement ensures that the employee list and task list displayed in the GUI are updated synchronously whenever any changes to the data is made.
     * This enhancement ensures that all features implemented by my teammates are working as expected.
 
@@ -46,7 +46,7 @@ Given below are my contributions to the project.
   * Highlights :
     * This enhancement requires me to ensure that all validation checks are handled properly.
     * This enhancement requires me to ensure that all error messages shown to the user upon executing the wrong commands are correct and understandable, so that the user can recover from their errors and continue using the application.
-    * This enhancement covers the features `addTodo`, `addDeadline`, `addEvent`, `deleteEmployee`, `deleteTask`, `editEmployee`, `editTask`, `markTask`, `unmarkTask`, `tagTask`, `untagTask` and `tagPriority`.
+    * This enhancement covers the features including but not limited to `addTodo`, `addDeadline`, `addEvent`, `deleteEmployee`, `deleteTask`, `editEmployee`, `editTask`, `markTask`, `unmarkTask`, `tagTask`, `untagTask` and `tagPriority`.
 
 * **Edit Employee** : `editEmployee` ([#170](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/170), [#179](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/179))
   * Modified based on the Edit Person feature of the original AddressBook-Level3 code base
@@ -113,7 +113,7 @@ Given below are my contributions to the project.
 ### Documentation
 
 * User Guide :
-  * Added full details for the features `editEmployee`, `deleteEmployee`, `markTask`, `unmarkTask` and `deleteTask` ([#169](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/169))
+  * Added full details for the features `editEmployee`, `deleteEmployee`, `markTask`, `unmarkTask` and `deleteTask` ([#169](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/169), [#259](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/259))
   * Added more details for the features `tagTask`, `untagTask` and `tagPriority` ([#169](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/169))
   * Standardized the formatting of all commands and update some missing details in other commands ([#169](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/169))
   * Updated the table formatting for Command Summary ([#169](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/169))
@@ -123,6 +123,7 @@ Given below are my contributions to the project.
   * Updated implementation details of the `UI` component ([#129](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/129))
   * Added implementation details of the `Logic` component for `markTask`, `unmarkTask` and `deleteTask` features, including the class diagrams and screenshots of the application executing the feature ([#129](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/129))
   * **To be updated soon:**
+    * Look through Non-Functional Requirements and Glossary details
     * Update implementation details of the `Logic` component for `markTask`, `unmarkTask` and `deleteTask` features and the screenshots of the application executing the feature
     * Add implementation details of the `Logic` component for `editEmployee` and `deleteEmployee` features, including the class diagrams and screenshots of the application executing the feature
 
