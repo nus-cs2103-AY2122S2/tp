@@ -97,8 +97,6 @@ Shows a list of all employees in ManageEZPZ.
 
 Format: `listEmployee`
 
-<div style="page-break-after: always;"></div>
-
 ### Finding Employees by multiple options : `findEmployee`
 
 Finds employee(s) based on multiple conditions provided.
@@ -190,8 +188,6 @@ Shows a list of all tasks in ManageEZPZ.
 
 Format: `listTask`
 
-<div style="page-break-after: always;"></div>
-
 ### Finding Tasks by multiple options : `findTask`
 
 Finds task(s) based on multiple conditions provided.
@@ -238,9 +234,7 @@ Example:
         * priority high,
         * assigned to Alex Yeoh,
         * and is marked as done.
-
-<div style="page-break-after: always;"></div>
-
+        
 ### Editing a Task : `editTask`
 
 Edits an existing task in ManageEZPZ.
@@ -267,8 +261,6 @@ Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 and time field to be edited. 
 * Editing Tasks with the same Description, Date, Time will not change the physical state of the Task.
 
-<div style="page-break-after: always;"></div>
-
 Examples: <br/>
 
 Given a task list as follows... <br/>
@@ -293,8 +285,6 @@ and mm should only be between 00 and 59.
 For event, the START_TIME must be earlier than the END_TIME.
 
 </div>
-
-<div style="page-break-after: always;"></div>
 
 ### Marking a Task : `markTask`
 
@@ -344,8 +334,6 @@ Examples:
 * `listTask` followed by `deleteTask 2` sets the displayed task list to show all tasks in ManageEZPZ and deletes the 2nd task in ManageEZPZ. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 * `findTask desc/slides` followed by `deleteTask 1` sets the displayed task list with the results from the findTask command and deletes the 1st task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 
-<div style="page-break-after: always;"></div>
-
 ### Tagging a Task to an Employee : `tagTask`
 
 Assigns the specified task to an employee.
@@ -362,8 +350,6 @@ Example: `tagTask 1 n/Alex Yeoh`
 * `listTask` followed by `tagTask 1 n/Alex Yeoh` sets the displayed task list to show all tasks in ManageEZPZ and assigns the 1st task in ManageEZPZ to the employee with the name Alex Yeoh.
 * `findTask desc/slides` followed by `tagTask 1 n/Alex Yeoh` sets the displayed task list with the results from the findTask command and assigns the 1st task in the displayed task list to the employee with the name Alex Yeoh.
 
-<div style="page-break-after: always;"></div>
-
 ### Untagging a Task from an Employee : `untagTask`
 
 Deallocates the specified task from an employee.
@@ -379,8 +365,6 @@ Example:
 * `untagTask 1 n/Alex Yeoh` deallocates the 1st task in the displayed task list from the employee with the name Alex Yeoh.
 * `listTask` followed by `untagTask 1 n/Alex Yeoh` sets the displayed task list to show all tasks in ManageEZPZ and deallocates the 1st task in ManageEZPZ from the employee with the name Alex Yeoh.
 * `findTask desc/slides` followed by `untagTask 1 n/Alex Yeoh` sets the displayed task list with the results from the findTask command and deallocates the 1st task in the displayed task list from the employee with the name Alex Yeoh.
-
-<div style="page-break-after: always;"></div>
 
 ### Tagging a Priority to a Task : `tagPriority`
 
@@ -400,8 +384,6 @@ Example:
 * `tagPriority 1 priority/HIGH` assigns the 1st task in the displayed task list with the priority of `HIGH`.
 * `listTask` followed by `tagPriority 1 priority/HIGH` sets the displayed task list to show all tasks in ManageEZPZ and assigns the 1st task in ManageEZPZ with the priority of `HIGH`.
 * `findTask desc/slides` followed by `tagPriority 1 priority/HIGH` sets the displayed task list with the results from the findTask command and assigns the 1st task in the displayed task list with the priority of `HIGH`.
-
-<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -440,8 +422,6 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManageEZPZ home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Command summary
 
