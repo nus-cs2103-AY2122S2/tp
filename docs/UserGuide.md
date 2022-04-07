@@ -2,9 +2,9 @@
 layout: page
 title: User Guide
 ---
-
-<img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again
-later.">
+<figure class="figure">
+    <img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again later.">
+</figure>
 
 ## **Table of Contents**
 - [Introduction](#introduction)
@@ -135,7 +135,7 @@ Follow this tutorial to get started with using MedBook:
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -192,7 +192,9 @@ Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 Examples:
 * `view` followed by `edit 1 n/John` updates name of first patient information entry displayed on the screen.
 
-Caution*: Editing a contact will overwrite the old data.
+<div class="notecard warning">
+    **Caution**: Editing a contact will overwrite the old data.
+</div>
 
 ### View Summary of a Patient: `view i/NRIC`
 
@@ -209,7 +211,7 @@ Deletes a specified entry (patient, contact, medical information, ...) on the cu
 
 Format: `delete INDEX`
 
-* We can delete the entry only if the entry is being shown on the display panel.
+* You can delete the entry only if the entry is being shown on the display panel.
 * For all screens apart from Summary, the index refers to the index number shown in the displayed list.
 * The index must be a positive integer 1, 2, 3, …​
 * For Summary screen, `delete 1` deletes the patient being viewed; other indices are invalid.
@@ -218,7 +220,9 @@ Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
 * `view` followed by `delete 1` deletes the first patient displayed on the screen.
 
-Caution*: Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+<div class="notecard warning">
+    **Caution**: Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+</div>
 
 ### Finding any Entry: `find`
 
@@ -344,6 +348,9 @@ Adds a medical prescription of a patient to MedBook.
 
 Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
 
+* Adding prescription with same DRUG_NAME is allowed
+* DATE should in the format of YYYY-MM-DD
+
 Examples:
 * `add t/prescription i/S1234567L n/Amoxicillin dt/2021-09-15 s/2 tablets after meal everyday.`
 
@@ -352,6 +359,8 @@ Examples:
 Views a medical prescription of a patient in MedBook.
 
 Format: `view t/prescription i/NRIC`
+
+* Note that NRIC is necessary
 
 Examples:
 * `view t/prescription i/S1234567L`
