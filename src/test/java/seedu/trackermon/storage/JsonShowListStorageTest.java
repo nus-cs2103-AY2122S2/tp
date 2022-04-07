@@ -46,13 +46,16 @@ public class JsonShowListStorageTest {
     }
 
     /**
-     * Tests that the {@code ReadOnlyShowList} obtained after {@code ShowList} reading a non-existent file will not be present.
+     * Tests that a {@code ReadOnlyShowList} is not obtained after {@code ShowList} reads a non-existent file.
      */
     @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readShowList("NonExistentFile.json").isPresent());
     }
 
+    /**
+     * Tests
+     */
     @Test
     public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataConversionException.class, () -> readShowList("notJsonFormatShowList.json"));
