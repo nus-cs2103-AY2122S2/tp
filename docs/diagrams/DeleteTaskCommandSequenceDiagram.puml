@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 
-title DeleteModuleCommand\n
+title DeleteTaskCommand\n
 
 box "Logic" LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -52,7 +52,7 @@ deactivate AddressBookParser
 
 
 LogicManager -> DeleteTaskCommand LOGIC_COLOR : execute(model)
-
+activate DeleteTaskCommand LOGIC_COLOR
 
 alt#Grey #White index and studentId present case
 DeleteTaskCommand -> Model ++ MODEL_COLOR: deleteTaskOfPerson(studentId, index)
