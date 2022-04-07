@@ -252,7 +252,9 @@ Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 * For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
   and mm should only be between 00 and 59.
 * For todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
-and time field to be edited.
+and time field to be edited. 
+* Editing Tasks with the same Description, Date, Time will not change the physical state of the Task.
+
 
 Examples: <br/>
 
