@@ -28,7 +28,7 @@ activate ObservableList
 ObservableList -> LabList
 deactivate ObservableList
 
-[<- LabList : add(lab)
+[<- LabList
 deactivate LabList
 
 @enduml
