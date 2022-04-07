@@ -486,20 +486,20 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 1. Upon receiving the user input,
    the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
-3. Since the first word in the user input matches the word "task", `AssignCommandParser#parse(arguments)` will be called.
+3. Since the first word in the user input matches the word "assign", `AssignCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
 4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source:
-    **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
+    <b>Note:</b> A ParseException will be thrown if the prefix of `Task` is missing, or if either the prefix of `StudentId` or `ModuleCode` is missing, as they are compulsory fields.
    </div> 
 
 5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId).`
 
    <div markdown="span" class="alert alert-info">:information_source:
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
    </div> 
 
 6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
@@ -508,11 +508,18 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
    If the argument is valid, a new StudentId object will be created and returned to the `AssignCommandParser`.
    If the argument is not valid, a `ParseException` will be thrown.
 
+   <div markdown="span" class="alert alert-info">:information_source: 
+   <b>Note:</b> The above description for Steps 5 to 7 is specifically for when studentId is used as the input field.
+   In the case of moduleCode, the `ModuleCode` prefix will be used to tokenize the input.
+   Depending on the type of input field used (studentId or moduleCode), Steps 5 to 7 will be executed using the parse 
+   methods in `ParserUtil` that are specific to the field. The argument's validity would be checked in their respective classes as well.
+    </div>
+
 8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseTask(String task).`
 
    <div markdown="span" class="alert alert-info">:information_source:
-   **Note:** A NullException will be thrown if the supplied string argument is null.
+   <b>Note:</b> A NullException will be thrown if the supplied string argument is null.
    </div>
 
 9. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
@@ -520,15 +527,38 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
     which checks if the trimmed argument is valid (according to the Regex supplied).
     If the argument is valid, a new Task object will be created and returned to the `AssignCommandParser`.
     If the argument is not valid, a `ParseException` will be thrown.
-11. A new `AssignCommand` will be created (using the `StudentId` object and `Task` object created in Step 7 and 10) and returned to the `LogicManager`.
+    
+11. A new `AssignCommand` will be created (using the `StudentId` or `ModuleCode` object and `Task` object created) and returned to the `LogicManager`.
+    
 12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
-13. `model#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked, which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method
-    and `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method.
-14. `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called which will iterate through each `Person` object and check for matching `studentId`.
-    If no student with a matching `studentId` is found, then `PersonNotFoundException()` exception will be thrown.
-15. If a `Student` object with matching `studentId` is found the method uses `Person#isTaskAlreadyPresent(Task task)` method to check if the `task` is assigned.
-    If it is already assigned a `DuplicateTaskException()` exception is thrown.
+    
+13. If `StudentId` is used, `AssignCommand#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked, 
+    which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method and 
+    `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. If `ModuleCode` is used, 
+    `AssignCommand#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method will be invoked, which will in 
+    turn invoke `model#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method and 
+    `AddressBook#assignTaskToAllInModule(ModuleCode moduleCode, Task task)` method.
+    
+14. If `StudentId` is used, `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called.
+    If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
+    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode` . 
+
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b> 
+   If no student(s) with a matching `studentId` or `moduleCode`is found, then `PersonNotFoundException()` or `ModuleCodeNotFoundException()` will be thrown.
+   </div>
+
+
+15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)` 
+    method to check if the `task` is assigned.
     If no similar `task` is found, the following step will take place.
+
+   <div markdown="span" class="alert alert-info">:information_source:
+   <b>Note:</b>
+   If all the student(s) has already been assigned that task, then `DuplicateTaskException()` will be thrown. 
+   If some, not all students in the `moduleCode` has already been assigned that task, then `PartialDuplicateTaskException()` will be thrown.
+   </div>
+
 16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
 17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
 18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
