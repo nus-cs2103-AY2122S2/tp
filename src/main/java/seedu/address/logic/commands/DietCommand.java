@@ -13,7 +13,7 @@ import seedu.address.model.pet.Pet;
 
 
 /**
- * Adds diet details to a pet identified using its displayed index from the address book.
+ * Adds diet details to a pet identified using its displayed index from WoofAreYou.
  */
 public class DietCommand extends Command {
 

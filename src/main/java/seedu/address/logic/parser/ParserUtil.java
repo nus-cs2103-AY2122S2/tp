@@ -38,6 +38,8 @@ public class ParserUtil {
         "Pick up time should be valid and in HH:mm format!";
     public static final String MESSAGE_INVALID_DROPOFF_TIME =
         "Drop off time should be valid and in HH:mm format!";
+    public static final String MESSAGE_INVALID_NUMBER_OF_TAGS =
+            "User should only be able to key in one tag!";
 
 
     /**
@@ -149,6 +151,9 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        if (tags.size() > 1) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_TAGS);
+        }
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
