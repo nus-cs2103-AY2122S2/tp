@@ -1,5 +1,18 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AB3Model;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -8,20 +21,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AB3Model;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.classgroup.ClassGroupType;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -38,13 +37,22 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_ID_AMY = "e0123456";
+    public static final String VALID_ID_BOB = "e0123457";
+    public static final String VALID_TELEGRAM_AMY = "b0bSOC";
+    public static final String VALID_TELEGRAM_BOB = "amy123";
 
     public static final String VALID_CG_ID_CS2103T_TUT = "T13";
-    public static final ClassGroupType VALID_CG_TYPE_CS2103T_TUT = ClassGroupType.TUTORIAL;
+    public static final String VALID_CG_TYPE_CS2103T_TUT = "TUTORIAL";
     public static final String VALID_MOD_CODE_CS2103T_TUT = "CS2103T";
     public static final String VALID_CG_ID_CS2106_LAB = "B01";
-    public static final ClassGroupType VALID_CG_TYPE_CS2106_LAB = ClassGroupType.LAB;
+    public static final String VALID_CG_TYPE_CS2106_LAB = "LAB";
     public static final String VALID_MOD_CODE_CS2106_LAB = "CS2106";
+
+    public static final String VALID_WEEK_ID_1 = "1";
+    public static final String VALID_WEEK_ID_13 = "13";
+    public static final String VALID_ATTENDANCE_TRUE = "true";
+    public static final String VALID_ATTENDANCE_FALSE = "false";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
