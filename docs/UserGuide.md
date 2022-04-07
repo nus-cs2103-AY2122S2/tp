@@ -154,25 +154,25 @@ Adds a patient to MedBook.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
-   <div class="d-flex alert alert-info">
-   <div class="mr-2">
-       <span class="badge badge-info">INFO</span>
-   </div>
-   <div markdown="block">
-      Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
+<div class="d-flex alert alert-info">
+  <div class="mr-2">
+    <span class="badge badge-info">INFO</span>
+  </div>
+  <div markdown="block">
+    Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
-       1. NRIC consists alphanumeric characters only.
-       2. NRIC starts with either S, T, F, G, M character.
-       3. NRIC consists 7 digits after the first character.
-       4. NRIC ends with any character.
-      
-       Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
+    1. NRIC consists alphanumeric characters only.
+    2. NRIC starts with either S, T, F, G, M character.
+    3. NRIC consists 7 digits after the first character.
+    4. NRIC ends with any character.
 
-       See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
+    Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
 
-       NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
-   </div>
-   </div>
+    See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
+
+    NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
+  </div>
+</div>
 
 Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -190,19 +190,19 @@ Edits an existing patient information entry in MedBook when a list of patient's 
 This is with the exception of the NRIC field, which cannot be modified after creation of Patient Information.
 At least one field must be filled for edit command to be valid.
 
-Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
-* Edits the patient at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the patient at the specified INDEX. The index refers to the index number shown in the displayed patient list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 * `view` followed by `edit 1 n/John` updates name of first patient information entry displayed on the screen.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Editing a contact will overwrite the old data.
+Editing a patient will overwrite the old data.
 </div>
 
 ### View Summary of a Patient: `view i/NRIC`
@@ -253,8 +253,20 @@ Adds a patient's emergency contact to MedBook.
 
 Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
+* The NRIC specified here is the NRIC of the patient who has this emergency contact.
+
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
+The NRIC specified here cannot be edited in the future.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips:**
+1. A contact can have any number of tags (including 0).
+2. If you typed the wrong NRIC, `delete INDEX` the contact and `add` the contact again with the correct patient NRIC.
+</div>
+
 Examples:
-* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother`
+* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother` adds an emergency contact to patient with NRIC `S1234567L`.
+
 
 
 ### Viewing Contact Information: `view t/contact`
@@ -274,16 +286,18 @@ At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
-* Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed patient list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 * `view t/contact` followed by `edit 1 n/John` updates name of first contact information entry displayed on the screen.
 
-Caution*: Editing a contact will overwrite the old data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a contact will overwrite the old data.
+</div>
 
 ### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to MedBook.
@@ -440,7 +454,7 @@ Due to security reason, there is no way to reset to password. To continue using 
 <h6 markdown="1" class="card-title">What happens if I accidentally remove `password.enc`?</h6>
 Unfortunately, the encrypted data will be lost along with your password. However, you can restore your data if you have `medbook.json` with you. Make sure you place them in `HOME_DIRECTORY of MedBook.jar/data/` before launching the app. When you start MedBook again, you will be asked to set up a new password.
 
-We highly discourage users to temper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
+We highly discourage users to tamper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
 </div>
 </div>
 <div class="card mb-3">
