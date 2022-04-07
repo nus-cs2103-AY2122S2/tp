@@ -54,8 +54,11 @@ activate DeleteCommand
 
 ref over DeleteCommand, Model
 Deletion of multiple contacts
-
 end ref
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
 
 [<--LogicManager
 deactivate LogicManager
