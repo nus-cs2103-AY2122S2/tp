@@ -352,6 +352,72 @@ The following sequence diagram shows how the deleteModule operation works:
 
 ![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
+
+### Assign Command
+
+#### Description
+
+The `assign` command allows users to assign tasks to student.
+During the execution of the `assign` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `AssignCommand` object will be created, and is subsequently executed by the LogicManager.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AdddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+3. Since the first word in the user input matches the word "task", `AssignCommandParser#parse(arguments)` will be called.
+   In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
+4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+   by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+    **Note:** A ParseException will be thrown if the prefix of `StudentId` is missing, as it is a compulsory field.
+   </div>
+
+5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseStudentId(String studentId).`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+   </div>
+   
+6. In `ParserUtil#parseStudentId(String studentId)`, the supplied argument will be trimmed using `String#trim()`.
+7. `StudentId#isValidId(String studentId)` will then be invoked,
+   which checks if the trimmed argument is valid (according to the Regex supplied).
+   If the argument is valid, a new StudentId object will be created and returned to the `AssignCommandParser`.
+   If the argument is not valid, a `ParseException` will be thrown.
+
+8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
+   into `ParserUtil#parseTask(String task).`
+
+   <div markdown="span" class="alert alert-info">:information_source: 
+   **Note:** A NullException will be thrown if the supplied string argument is null.
+   </div>
+
+9. In `ParserUtil#parseTask(String task)`, the supplied argument will be trimmed using `String#trim()`.
+10. `Task#isValidTaskName(String task)` will then be invoked,
+    which checks if the trimmed argument is valid (according to the Regex supplied).
+    If the argument is valid, a new Task object will be created and returned to the `AssignCommandParser`.
+    If the argument is not valid, a `ParseException` will be thrown.
+11. A new `AssignCommand` will be created (using the `StudentId` object and `Task` object created in Step 7 and 10) and returned to the `LogicManager`.
+12. The `LogicManager` will then call `AssignCommand#execute(Model model)`.
+13. `model#assignTaskToPerson(StudentId studentId, Task task)` method will be invoked, which will in turn invoke `model#assignTaskToPerson(StudentId studentId, Task task)` method
+    and `AddressBook#assignTaskToPerson(StudentId studentId, Task task)` method. 
+14. `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called which will iterate through each `Person` object and check for matching `studentId`.
+    If no student with a matching `studentId` is found, then `PersonNotFoundException()` exception will be thrown. 
+15. If a `Student` object with matching `studentId` is found the method uses `Person#isTaskAlreadyPresent(Task task)` method to check if the `task` is assigned.
+    If it is already assigned a `DuplicateTaskException()` exception is thrown. 
+    If no similar `task` is found, the following step will take place.
+16. The method gets copy of the `Student` object by invoking `Person#getCopy()` method. The copy is updated to include `task` by invoking `Person#addTask(Task task)`.
+17. `Person#addTask(Task task)` method will invoke `TaskList#addTask(Task task)`, which adds the task to a list of assigned tasks.
+18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
+19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
+
+![AssignCommandSequenceDiagram-1](images/AssignCommandSequenceDiagram-1.png)
+
+![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
+
 ### Task Command
 
 #### Description
