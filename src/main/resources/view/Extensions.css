@@ -338,3 +338,7 @@
 .group-meeting-time-label-today {
     -fx-background-color: #e38381;
 }
+
+.no_elements_alert {
+    -fx-font-size: 20px;
+}

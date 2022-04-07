@@ -22,6 +22,9 @@ public class CustomPaneListFiller {
      * @param <T>
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, Function<T, ? extends Node> converter) {
+        if (underlyingList.size() == 0) {
+            return;
+        }
         pane.getChildren().clear();
         for (T item : underlyingList) {
             pane.getChildren().add(converter.apply(item));
@@ -38,6 +41,9 @@ public class CustomPaneListFiller {
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, BiFunction<T, Integer,
         ? extends Node> converter) {
+        if (underlyingList.size() == 0) {
+            return;
+        }
         pane.getChildren().clear();
         for (int i = 0; i < underlyingList.size(); i++) {
             pane.getChildren().add(converter.apply(underlyingList.get(i), i));
@@ -55,6 +61,9 @@ public class CustomPaneListFiller {
      */
     public static <T> void fillPaneFromList(Pane pane, List<T> underlyingList, TriFunction<T, Integer, Boolean,
         ? extends Node> converter) {
+        if (underlyingList.size() == 0) {
+            return;
+        }
         pane.getChildren().clear();
         for (int i = 0; i < underlyingList.size(); i++) {
             pane.getChildren().add(converter.apply(underlyingList.get(i), i, underlyingList.size() == 1));
