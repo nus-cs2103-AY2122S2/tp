@@ -164,14 +164,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ## `labadd`: Add Lab Command Feature
-The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. Its implementation introduces the following classes:
-- `Lab` that models a Lab
-- `LabList` that stores all the labs of a student
-- `MasterLabList` that extends `LabList` and acts as a control `LabList` for the `TAddressBook` application
-- `AddLabCommand` that extends `Command` and encapsulates information regarding adding labs
-- `AddLabCommandParser` that extends `Parser<AddLabCommand>` and parses user commands into a `AddLabCommand`
+The `labadd` feature allows a CS2030S Lab TA to add a new unique `Lab` into the TAddressBook. Its implementation relies on the following classes:
+- `Lab` that models a Lab.
+- `LabList` that stores all the labs of a student.
+- `MasterLabList` that extends `LabList` and acts as a control `LabList` for the `TAddressBook` application.
+- `AddLabCommand` that extends `Command` and encapsulates information regarding adding labs.
+- `AddLabCommandParser` that extends `Parser<AddLabCommand>` and parses user commands into a `AddLabCommand`.
+- `UniqueStudentList` that stores all the students.
 
+The command format is `labadd l/LAB_NUMBER` where `LAB_NUMBER` should be an Integer between 0 and 20 inclusive.
 
+The add lab mechanism is implemented as follows:
+1. When a `labadd` command is executed by the user, `AddLabCommandParser#parse()` will be invoked to parse the given command into a new `AddLabCommand` object instantiated with a new lab object with the given `LAB_NUMBER`. If the `LAB_NUMBER` is invalid, a `ParseException` will be thrown and displayed to the user.
+2. The `AddCommand` will then execute with the current `Model` object in the system.
+3. The `AddCommand` object will then check if the `Model` object already has the lab (in this case having a lab means that the `MasterLabList` has a `Lab` object with the same `LAB_NUMBER`), if the `Model` already has the `Lab`, it will throw a new `CommandException`.
+4. The `AddCommand` object will then check if the `Model` object's `UniqueStudentList` is empty, if it is empty, the system will output a message to the user to notify them that the student list is empty, however, the lab will still be added into the `MasterLabList` for storing.
+5. The `AddCommand` object will then add the new `Lab` to the `MasterLabList` and the `LabList` of every student in the `UniqueStudentList`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Every `add(Lab)` operation a `LabList` (this includes `MasterLabList` as it extends `LabList`) will sort the `LabList` according to ascending `LAB_NUMBER`.
+</div>
+
+The sequence for parsing the input is similar to the one shown in [this](#logic-component) sequence diagram above.
+
+The following UML sequence diagrams shows how the execution of the `labadd` command to aid understanding:
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.
+</div>
+
+<img src="images/AddLabCommandSequenceDiagram.png" width="550" />
+
+The following UML sequence diagram shows how `add` is implemented in `LabList`:
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `lab` refers to the `Lab` object with the given `LAB_NUMBER` to be added and `sortByLabNumber` is a `Comparator` that sorts the `Lab` objects by increasing `LAB_NUMBER`.
+</div>
+<img src="images/LabListAddSequenceDiagram.png" width="550" />
+
+The following UML activity diagram shows what happens when a user executes a `labadd` command:
+
+<img src="images/AddLabCommandActivityDiagram.png" width="550" />
 
 ### \[Proposed\] Undo/redo feature
 
