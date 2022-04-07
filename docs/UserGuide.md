@@ -359,7 +359,14 @@ _Details coming soon ..._
 
 ## FAQ
 
-_Details coming soon ..._
+**Q1**: How do I delete tags from my players?<br>
+**A1**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q2**: Why does the `delete` and `edit` command for players require case-sensitive full name of the player?<br>
+**A2**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q3**: How do I transfer my data to another Computer?<br>
+**A3**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
