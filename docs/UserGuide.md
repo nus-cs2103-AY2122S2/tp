@@ -318,6 +318,8 @@ Examples:
 * `listTask` followed by `unmarkTask 2` sets the displayed task list to show all tasks in ManageEZPZ and changes the 2nd task in ManageEZPZ back to not done.
 * `findTask desc/slides` followed by `unmarkTask 1` sets the displayed task list with the results from the findTask command and changes the 1st task in the displayed task list back to not done.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a Task : `deleteTask`
 
 Deletes the specified task from ManageEZPZ.
@@ -412,9 +414,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -452,6 +453,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | **Tag Task**          | `tagTask INDEX n/NAME` <br> e.g.,`tagTask 1 n/Alex Yeoh`                                                                        |
 | **Untag Task**        | `untagTask INDEX n/NAME` <br> e.g.,`untagTask 1 n/Alex Yeoh`                                                                    |
 | **Tag Priority**      | `tagPriority INDEX priority/PRIORITY` <br> e.g.,`tagPriority 1 priority/HIGH`                                                   |
+
+<div style="page-break-after: always;"></div>
 
 ### Others
 
