@@ -1,6 +1,8 @@
 package seedu.trackermon.logic.parser;
 
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INPUT;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
 import static seedu.trackermon.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.trackermon.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
@@ -37,6 +39,9 @@ import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 
+/**
+ * Contains unit tests for {@code EditCommandParser}.
+ */
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
@@ -48,11 +53,11 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, VALID_NAME_ALICE_IN_WONDERLAND, MESSAGE_INVALID_FORMAT);
+        // no index specified with field
+        assertParseFailure(parser, NAME_DESC_ALICE_IN_WONDERLAND, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -61,10 +66,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_ALICE_IN_WONDERLAND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_ALICE_IN_WONDERLAND, MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_ALICE_IN_WONDERLAND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_ALICE_IN_WONDERLAND, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -75,26 +80,34 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS); // invalid status
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC,
+                String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS)); // invalid name
+        assertParseFailure(parser, "1" + INVALID_STATUS_DESC,
+                String.format(MESSAGE_INVALID_INPUT, Status.MESSAGE_CONSTRAINTS)); // invalid status
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC,
+                String.format(MESSAGE_INVALID_INPUT, Tag.MESSAGE_CONSTRAINTS)); // invalid tag
 
         // invalid name followed by valid status
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + STATUS_DESC_COMPLETED, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + STATUS_DESC_COMPLETED,
+                String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
 
         // valid name followed by invalid name. The test case for invalid name followed by valid name
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + NAME_DESC_ALICE_IN_WONDERLAND + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + NAME_DESC_ALICE_IN_WONDERLAND + INVALID_NAME_DESC,
+                String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Show} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_DESC_HENTAI + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_EMPTY + TAG_DESC_HENTAI, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_MOVIE + TAG_DESC_HENTAI, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_DESC_HENTAI + TAG_EMPTY,
+                String.format(MESSAGE_INVALID_INPUT, Tag.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, "1" + TAG_DESC_MOVIE + TAG_EMPTY + TAG_DESC_HENTAI,
+                String.format(MESSAGE_INVALID_INPUT, Tag.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_MOVIE + TAG_DESC_HENTAI,
+                String.format(MESSAGE_INVALID_INPUT, Tag.MESSAGE_CONSTRAINTS));
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_STATUS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
     }
 
     @Test

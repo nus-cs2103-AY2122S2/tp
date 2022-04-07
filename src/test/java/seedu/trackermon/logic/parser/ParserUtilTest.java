@@ -2,7 +2,7 @@ package seedu.trackermon.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackermon.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
 
@@ -18,6 +18,9 @@ import seedu.trackermon.model.show.Name;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 
+/**
+ * Contains unit tests for {@code ParserUtil}.
+ */
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STATUS = " ";

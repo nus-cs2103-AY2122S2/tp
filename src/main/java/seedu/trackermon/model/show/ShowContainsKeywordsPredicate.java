@@ -6,7 +6,8 @@ import java.util.function.Predicate;
 import seedu.trackermon.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Show}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Show}'s {@code Name}, {@code Status}, {@code Tag} or {@code Rating} matches any of the
+ * keywords given.
  */
 public class ShowContainsKeywordsPredicate implements Predicate<Show> {
     private final List<String> keywords;
@@ -17,11 +18,12 @@ public class ShowContainsKeywordsPredicate implements Predicate<Show> {
 
     @Override
     public boolean test(Show show) {
-        // Checks for fragmented words in name, status and tags
+        // Checks for fragmented words in name, status, rating and tags
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsFragmentedWordIgnoreCase(show.getName().fullName, keyword)
                 || StringUtil.containsFragmentedWordIgnoreCase(show.getStatus().toString(), keyword)
-                || StringUtil.containsFragmentedWordIgnoreCase(show.getTags().toString(), keyword));
+                || StringUtil.containsFragmentedWordIgnoreCase(show.getTags().toString(), keyword)
+                || StringUtil.containsFragmentedWordIgnoreCase(show.getRating().toString(), keyword));
     }
 
     @Override

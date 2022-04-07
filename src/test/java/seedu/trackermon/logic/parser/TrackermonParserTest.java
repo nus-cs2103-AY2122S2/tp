@@ -2,7 +2,6 @@ package seedu.trackermon.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.trackermon.testutil.Assert.assertThrows;
 import static seedu.trackermon.testutil.TypicalIndexes.INDEX_FIRST_SHOW;
@@ -28,7 +27,12 @@ import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 import seedu.trackermon.testutil.ShowBuilder;
 import seedu.trackermon.testutil.ShowUtil;
 
+/**
+ * Contains unit tests for {@code TrackermonParser}.
+ */
 public class TrackermonParserTest {
+    private static final String UNKNOWN_COMMAND_HELP = String.format(MESSAGE_UNKNOWN_COMMAND,
+            HelpCommand.MESSAGE_USAGE);
 
     private final TrackermonParser parser = new TrackermonParser();
 
@@ -83,13 +87,11 @@ public class TrackermonParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String
-                .format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
+        assertThrows(ParseException.class, UNKNOWN_COMMAND_HELP, () -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, UNKNOWN_COMMAND_HELP, () -> parser.parseCommand("unknownCommand"));
     }
 }

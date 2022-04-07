@@ -1,6 +1,10 @@
 package seedu.trackermon.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
 
@@ -15,15 +19,22 @@ import seedu.trackermon.model.show.Show;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_FORMAT_PRECISE = "Parameters (Precise): "
+            + "{[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_RATING + "RATING]}"
+            + "[" + PREFIX_TAG + "TAG]…\u200B}";
+
+    public static final String COMMAND_FORMAT_GENERAL = "Parameters (General): "
+            + "KEYWORD…\u200B";
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " hero kyojin academia OR "
+            + COMMAND_WORD + " n/hero kyojin academia s/completed t/Action";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all shows whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers. "
             + "At least one parameter must be stated in the find command.\n"
-            + "Parameters: [NAME] [STATUS] [TAG]\n"
-            + "Example: " + COMMAND_WORD + " hero kyojin academia OR "
-            + COMMAND_WORD + " n/hero kyojin academia s/completed t/Action";
-    public static final String TAG_ERROR = "Tag parameter must only be a single word.\n"
-            + "Example: " + COMMAND_WORD + " t/Action";
+            + COMMAND_FORMAT_GENERAL + "\n" + COMMAND_FORMAT_PRECISE + "\n"
+            + COMMAND_EXAMPLE;
 
     private final Predicate<Show> predicate;
 
@@ -36,8 +47,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredShowList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SHOWS_LISTED_OVERVIEW, model.getFilteredShowList().size()),
-                true);
+                String.format(Messages.MESSAGE_SHOWS_LISTED_OVERVIEW, model.getFilteredShowList().size()));
     }
 
     @Override

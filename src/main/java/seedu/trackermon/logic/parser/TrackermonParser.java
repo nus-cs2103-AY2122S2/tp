@@ -1,21 +1,23 @@
 package seedu.trackermon.logic.parser;
 
-import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.trackermon.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.trackermon.logic.commands.AddCommand;
+import seedu.trackermon.logic.commands.ClearCommand;
 import seedu.trackermon.logic.commands.Command;
-import seedu.trackermon.logic.commands.CommentCommand;
 import seedu.trackermon.logic.commands.DeleteCommand;
 import seedu.trackermon.logic.commands.EditCommand;
 import seedu.trackermon.logic.commands.ExitCommand;
+import seedu.trackermon.logic.commands.ExportCommand;
 import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.logic.commands.HelpCommand;
+import seedu.trackermon.logic.commands.ImportCommand;
 import seedu.trackermon.logic.commands.ListCommand;
 import seedu.trackermon.logic.commands.SortCommand;
+import seedu.trackermon.logic.commands.SuggestCommand;
 import seedu.trackermon.logic.parser.exceptions.ParseException;
 
 /**
@@ -38,7 +40,7 @@ public class TrackermonParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND,
                     HelpCommand.MESSAGE_USAGE));
         }
 
@@ -67,14 +69,24 @@ public class TrackermonParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case CommentCommand.COMMAND_WORD:
-            return new CommentCommandParser().parse(arguments);
-
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommand();
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case SuggestCommand.COMMAND_WORD:
+            return new SuggestCommand();
+
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND,
+                    HelpCommand.MESSAGE_USAGE));
         }
     }
 

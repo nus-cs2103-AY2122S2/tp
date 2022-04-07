@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.trackermon.commons.core.GuiSettings;
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ReadOnlyShowList;
@@ -24,6 +25,9 @@ import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ */
 public class AddCommandTest {
 
     @Test
@@ -48,7 +52,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validShow);
         ModelStub modelStub = new ModelStubWithShow(validShow);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_SHOW, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_SHOW, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -124,6 +128,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Returns the ShowList size
+         */
+        @Override
+        public int getShowListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public boolean hasShow(Show show) {
             throw new AssertionError("This method should not be called.");
@@ -159,6 +171,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void saveSortedShowList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -201,6 +217,10 @@ public class AddCommandTest {
         public ReadOnlyShowList getShowList() {
             return new ShowList();
         }
-    }
 
+        @Override
+        public int getShowListSize() {
+            return showsAdded.size();
+        }
+    }
 }

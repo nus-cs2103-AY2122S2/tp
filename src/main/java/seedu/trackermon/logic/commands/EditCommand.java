@@ -4,6 +4,7 @@ package seedu.trackermon.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -20,6 +21,7 @@ import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.show.Comment;
 import seedu.trackermon.model.show.Name;
+import seedu.trackermon.model.show.Rating;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
@@ -30,23 +32,25 @@ import seedu.trackermon.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the show identified "
-            + "by the index number used in the displayed show list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+    public static final String COMMAND_FORMAT = "Parameters: INDEX "
+            + "{[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_RATING + "RATING] "
             + "[" + PREFIX_COMMENT + "COMMENT] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_TAG + "TAG]…\u200B}";
+
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Attack on Titan "
-            + PREFIX_STATUS + "watching"
+            + PREFIX_STATUS + "watching "
             + PREFIX_COMMENT + "This is not bad!";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Modifies the details of the show identified "
+            + "by the index number used in the displayed show list. "
+            + "Existing values will be overwritten by the input values. "
+            + "At least one parameter must be stated in the edit command.\n"
+            + COMMAND_FORMAT + "\n" + COMMAND_EXAMPLE;
+
     public static final String MESSAGE_EDIT_SHOW_SUCCESS = "Edited Show: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SHOW = "This show already exists in Trackermon.";
 
     private final Index index;
     private final EditShowDescriptor editShowDescriptor;
@@ -69,7 +73,7 @@ public class EditCommand extends Command {
         List<Show> lastShownList = model.getFilteredShowList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SHOW_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INDEX);
         }
 
         Show showToEdit = lastShownList.get(index.getZeroBased());
@@ -77,12 +81,11 @@ public class EditCommand extends Command {
 
 
         if (!showToEdit.isSameShow(editedShow) && model.hasShow(editedShow)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SHOW);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_SHOW);
         }
 
         model.setShow(showToEdit, editedShow);
-        model.updateFilteredShowList(Model.PREDICATE_SHOW_ALL_SHOWS);
-        return new CommandResult(String.format(MESSAGE_EDIT_SHOW_SUCCESS, editedShow));
+        return new CommandResult(String.format(MESSAGE_EDIT_SHOW_SUCCESS, editedShow), index.getZeroBased());
     }
 
     /**
@@ -96,8 +99,8 @@ public class EditCommand extends Command {
         Status updatedStatus = editShowDescriptor.getStatus().orElse(showToEdit.getStatus());
         Set<Tag> updatedTags = editShowDescriptor.getTags().orElse(showToEdit.getTags());
         Comment updateComment = editShowDescriptor.getComment().orElse(showToEdit.getComment());
-
-        return new Show(updatedName, updatedStatus, updatedTags, updateComment);
+        Rating updateRating = editShowDescriptor.getRating().orElse(showToEdit.getRating());
+        return new Show(updatedName, updatedStatus, updatedTags, updateComment, updateRating);
     }
 
     @Override
@@ -127,6 +130,7 @@ public class EditCommand extends Command {
         private Status status;
         private Set<Tag> tags;
         private Comment comment;
+        private Rating rating;
 
         public EditShowDescriptor() {}
 
@@ -139,13 +143,14 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setTags(toCopy.tags);
             setComment(toCopy.comment);
+            setRating(toCopy.rating);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, status, tags, comment);
+            return CollectionUtil.isAnyNonNull(name, status, tags, comment, rating);
         }
 
         public void setName(Name name) {
@@ -170,6 +175,14 @@ public class EditCommand extends Command {
 
         public Optional<Comment> getComment() {
             return Optional.ofNullable(comment);
+        }
+
+        public void setRating(Rating rating) {
+            this.rating = rating;
+        }
+
+        public Optional<Rating> getRating() {
+            return Optional.ofNullable(rating);
         }
 
         /**
@@ -207,7 +220,8 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags())
-                    && getComment().equals(e.getComment());
+                    && getComment().equals(e.getComment())
+                    && getRating().equals(e.getRating());
         }
     }
 }
