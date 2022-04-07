@@ -11,15 +11,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBuyers.BOB;
 import static seedu.address.testutil.TypicalBuyers.YUQI;
+import static seedu.address.testutil.TypicalSellers.BENSON;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.Location;
 import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToBuy;
+import seedu.address.model.seller.Seller;
 import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.SellerBuilder;
 
 
 public class BuyerTest {
@@ -60,6 +62,8 @@ public class BuyerTest {
     public void equals() {
         // same values -> returns true
         Buyer yuqiCopy = new BuyerBuilder(YUQI).build();
+        Seller yuqiSeller = new SellerBuilder(BENSON).build();
+
         assertEquals(YUQI, yuqiCopy);
 
         // same object -> returns true
@@ -70,6 +74,9 @@ public class BuyerTest {
 
         // different type -> returns false
         assertNotEquals(5, YUQI);
+
+        // different client type -> returns false
+        assertNotEquals(yuqiSeller, YUQI);
 
         // different client -> returns false
         assertNotEquals(YUQI, BOB);
