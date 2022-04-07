@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed submission releases `v1.2` - `v1.2b` (2 releases) on GitHub.
-  * Managed submissions meant for LumiNus.
+  * Managed submissions meant for LumiNUS.
   * Created issues trackers for members to complete for final milestones.
   * Peer reviewed team members PR and provided suggestions.
   * Offered suggestions and GUI UX/UI designs for Tracey.
