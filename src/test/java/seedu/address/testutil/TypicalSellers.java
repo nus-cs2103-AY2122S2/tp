@@ -24,7 +24,7 @@ import seedu.address.model.seller.Seller;
 public class TypicalSellers {
 
     // Sellers who are yet to indicate any properties to sell
-    public static final Seller YUQI = new SellerBuilder().withName("Alice Pauline")
+    public static final Seller ALICE = new SellerBuilder().withName("Alice Pauline")
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
             .withTags("friends").withProperty(
                     new PropertyToSellBuilder().withHouse(
@@ -40,35 +40,35 @@ public class TypicalSellers {
                 .withAddress("Bishan Ave 3 Blk 123")
                 .withPriceRange(new PriceRange(10, 20)).build()).build();
 
-    public static final Seller JUNHENG = new SellerBuilder().withName("Carl Kurz")
+    public static final Seller CARL = new SellerBuilder().withName("Carl Kurz")
             .withPhone("95352563").withProperty(
             new PropertyToSellBuilder().withHouse(
                 new HouseBuilder().withHouseType(HouseType.COLONIA).withLocation("clementi").build())
                 .withAddress("Clementi Town block 7")
                 .withPriceRange(new PriceRange(10, 20)).build()).build();
 
-    public static final Seller JUNHONG = new SellerBuilder().withName("Daniel Meier")
+    public static final Seller DANIEL = new SellerBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").withProperty(
             new PropertyToSellBuilder().withHouse(
                 new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("bishan").build())
                 .withAddress("Bishan District 8")
                 .withPriceRange(new PriceRange(30, 50)).build()).build();
 
-    public static final Seller JANALD = new SellerBuilder().withName("Elle Meyer")
+    public static final Seller ELLE = new SellerBuilder().withName("Elle Meyer")
             .withPhone("9482224").withProperty(
             new PropertyToSellBuilder().withHouse(
                 new HouseBuilder().withHouseType(HouseType.APARTMENT).withLocation("ang mo kio").build())
                 .withAddress("Ang Mo Kio Ave 3")
                 .withPriceRange(new PriceRange(10, 20)).build()).build();
 
-    public static final Seller DARA = new SellerBuilder().withName("Fiona Kunz")
+    public static final Seller FIONA = new SellerBuilder().withName("Fiona Kunz")
             .withPhone("9482427").withProperty(
             new PropertyToSellBuilder().withHouse(
                 new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("bishan").build())
                 .withAddress("Bishan Street 11")
                 .withPriceRange(new PriceRange(20, 25)).build()).build();
 
-    public static final Seller RICHARD = new SellerBuilder().withName("George Best")
+    public static final Seller GEORGE = new SellerBuilder().withName("George Best")
             .withPhone("9482442").build();
 
     // Manually added
@@ -102,6 +102,6 @@ public class TypicalSellers {
 
 
     public static List<Seller> getTypicalSellers() {
-        return new ArrayList<>(Arrays.asList(YUQI, BENSON, JUNHENG, JUNHONG, JANALD, DARA, RICHARD));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
