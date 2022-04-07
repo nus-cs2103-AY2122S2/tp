@@ -68,7 +68,7 @@ public class AddPtsCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showSellerAtIndex(model, INDEX_FIRST_SELLER);
+        showSellerAtIndex(model, INDEX_SEVENTH_SELLER);
 
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_TWO).build();
         Seller testSeller = model.getFilteredSellerList().get(INDEX_SEVENTH_SELLER.getZeroBased());
