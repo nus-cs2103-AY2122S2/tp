@@ -8,6 +8,9 @@ import java.nio.file.StandardCopyOption;
 
 import javafx.stage.FileChooser;
 
+/**
+ * A class to manage the importing and exporting of Json files.
+ */
 public class JsonFileManager {
 
     public static final int SUCCESS = 0;

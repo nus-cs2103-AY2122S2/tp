@@ -24,6 +24,11 @@ public class Version implements Comparable<Version> {
 
     /**
      * Constructs a {@code Version} with the given version details.
+     *
+     * @param major the major version number.
+     * @param minor the minor version number.
+     * @param patch the patch number of the current version.
+     * @param isEarlyAccess whether the version is in early access.
      */
     public Version(int major, int minor, int patch, boolean isEarlyAccess) {
         this.major = major;

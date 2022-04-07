@@ -2,6 +2,9 @@ package seedu.trackermon.ui;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * The UI component that is responsible for creating the command information to be displayed in {@code Tableview}.
+ */
 public class CommandBuilder {
     private SimpleStringProperty commandTitle;
     private SimpleStringProperty commandInput;

@@ -8,10 +8,16 @@ import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests for {@code StringUtil}.
+ */
 public class StringUtilTest {
 
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
 
+    /**
+     * Test method to test the isNonZeroUnsignedInteger method.
+     */
     @Test
     public void isNonZeroUnsignedInteger() {
 
@@ -54,23 +60,35 @@ public class StringUtilTest {
      * The four test cases below test one invalid input at a time.
      */
 
+    /**
+     * Test method to test the containsWordIgnoreCase method when given a null word.
+     */
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", null));
     }
 
+    /**
+     * Test method to test the containsWordIgnoreCase method when given an empty word.
+     */
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
             -> StringUtil.containsWordIgnoreCase("typical sentence", "  "));
     }
 
+    /**
+     * Test method to test the containsWordIgnoreCase method when given multiple words.
+     */
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
             -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
     }
 
+    /**
+     * Test method to test the containsWordIgnoreCase method when given a null sentence.
+     */
     @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(null, "abc"));
@@ -101,6 +119,9 @@ public class StringUtilTest {
      * The test method below tries to verify all above with a reasonably low number of test cases.
      */
 
+    /**
+     * Test method to test the containsWordIgnoreCase method when given valid inputs.
+     */
     @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
 
@@ -129,12 +150,18 @@ public class StringUtilTest {
      * Equivalence Partitions: null, valid throwable object
      */
 
+    /**
+     * Test method to test getting details of an exception.
+     */
     @Test
     public void getDetails_exceptionGiven() {
         assertTrue(StringUtil.getDetails(new FileNotFoundException("file not found"))
             .contains("java.io.FileNotFoundException: file not found"));
     }
 
+    /**
+     * Test method to test getting details of null Exception.
+     */
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
