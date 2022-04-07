@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * _Improved the GUI of Trackermon_
-    * Details: Used the design made by [aweijun](aweijun.md) and made some improvements to the application design of Trackermon. 
+    * Details: Used the design made by [aweijun](https://github.com/aweijun) and made some improvements to the application design of Trackermon. 
     * Issues: General GUI [[\#74](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/74)], Rating GUI [[\#70](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/70)], Comment GUI [[\#73](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/73)]
     * PRs: [[\#130](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/130)], [[\#170](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/170)], [[\#165](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/165)]
 
@@ -44,6 +44,4 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [[\#134](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/134)], [[\#166](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/166)]
-  * Assisted [arcornior](arcornior.md) with his Import/Export issues. [[\#162](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/162)]
-
-
+  * Assisted [arcornior](http://github.com/arcornior) with his Import/Export issues. [[\#162](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/162)]
