@@ -174,6 +174,10 @@ public class ModelManager implements Model {
         return count;
     }
 
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        return fullPersonList;
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

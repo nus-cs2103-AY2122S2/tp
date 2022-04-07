@@ -9,6 +9,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 <StackPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <HBox alignment="TOP_CENTER" fx:id="hBox">
       <padding>
@@ -18,37 +20,51 @@
          <Image url="/images/profile_icon.png"/>
       </ImageView>
    </HBox>
-   <VBox spacing="10" fx:id="vBox">
+   <VBox spacing="15" fx:id="vBox">
       <padding>
-         <Insets top="150" left="20" />
+         <Insets top="150" left="20" right="20" />
       </padding>
       <VBox>
          <Label styleClass="profile_information_label" text="Name"/>
-         <Label fx:id="name" styleClass="profile_big_label" text="\$name" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="name" styleClass="profile_text" text="\$name"/>
+         </TextFlow>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Phone"/>
-         <Label fx:id="phone" styleClass="profile_small_label" text="\$phone" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="phone" styleClass="profile_text" text="\$phone"/>
+         </TextFlow>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Email"/>
-         <Label fx:id="email" styleClass="profile_small_label" text="\$email" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="email" styleClass="profile_text" text="\$email"/>
+         </TextFlow>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Matriculation ID"/>
-         <Label fx:id="matriculation" styleClass="profile_small_label" text="\$matriculation" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="matriculation" styleClass="profile_text" text="\$matriculation"/>
+         </TextFlow>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Telegram"/>
-         <Label fx:id="telegram" styleClass="profile_small_label" text="\$telegram" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="telegram" styleClass="profile_text" text="\$telegram"/>
+         </TextFlow>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Course"/>
-         <Label fx:id="course" styleClass="profile_small_label" text="\$course" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="course" styleClass="profile_text" text="\$course"/>
+         </TextFlow>
       </VBox>
       <VBox>
          <Label styleClass="profile_information_label" text="Address"/>
-         <Label fx:id="address" styleClass="profile_small_label" text="\$address" wrapText="true"/>
+         <TextFlow>
+            <Text fx:id="address" styleClass="profile_text" text="\$address"/>
+         </TextFlow>
       </VBox>
       <VBox spacing="5">
          <Label styleClass="profile_information_label" text="Tags"/>

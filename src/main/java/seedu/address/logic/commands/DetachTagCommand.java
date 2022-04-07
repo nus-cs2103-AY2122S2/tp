@@ -26,7 +26,7 @@ public class DetachTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Detaches a tag from the person. \n"
             + "Parameters: "
-            + "[" + PREFIX_TAG + "TAG]\n"
+            + PREFIX_TAG + "TAG\n"
             + "Parameters: "
             + PREFIX_INDEX + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
