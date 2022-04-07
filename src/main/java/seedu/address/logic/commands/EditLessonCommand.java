@@ -29,6 +29,7 @@ import seedu.address.model.lesson.LessonAddress;
 import seedu.address.model.lesson.LessonName;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TemporaryLesson;
 
 public class EditLessonCommand extends Command {
 
@@ -89,6 +90,7 @@ public class EditLessonCommand extends Command {
 
         Lesson lessonToEdit = lastShownList.get(lessonId.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
+        requireNonNull(editedLesson);
         model.deleteLesson(lessonToEdit);
         if (model.hasConflictingLesson(editedLesson)) {
             model.addLesson(lessonToEdit);
@@ -106,31 +108,114 @@ public class EditLessonCommand extends Command {
     private Lesson createEditedLesson(Lesson toEdit, EditLessonDescriptor editLessonDescriptor)
             throws CommandException {
         requireAllNonNull(toEdit, editLessonDescriptor);
-        LessonName updatedName = editLessonDescriptor.getName().orElse(toEdit.getName());
-        Subject updatedSubject = editLessonDescriptor.getSubject().orElse(toEdit.getSubject());
-        LessonAddress updatedAddress = editLessonDescriptor.getAddress().orElse(toEdit.getLessonAddress());
-        LocalTime updatedStartTime = editLessonDescriptor.getStartTime()
-                .orElse(toEdit.getDateTimeSlot().getDateOfLesson().toLocalTime());
-        LocalDate updatedStartDate = editLessonDescriptor.getStartDate()
-                .orElse(toEdit.getDateTimeSlot().getDateOfLesson().toLocalDate());
-        Integer durationHours;
-        Integer durationMinutes;
-        if (editLessonDescriptor.getDurationHours().isPresent()
-                || editLessonDescriptor.getDurationMinutes().isPresent()) {
+
+        LessonName updatedName = getUpdatedName(toEdit, editLessonDescriptor);
+        Subject updatedSubject = getUpdatedSubject(toEdit, editLessonDescriptor);
+        LessonAddress updatedAddress = getUpdatedAddress(toEdit, editLessonDescriptor);
+        LocalTime updatedStartTime = getUpdatedStartTime(toEdit, editLessonDescriptor);
+        LocalDate updatedStartDate = getUpdatedStartDate(toEdit, editLessonDescriptor);
+        Duration updatedDuration = getUpdatedDuration(toEdit, editLessonDescriptor);
+
+        int durationHours = updatedDuration.getHour();
+        int durationMinutes = updatedDuration.getMinutes();
+
+        DateTimeSlot updatedDateTimeSlot = DateTimeSlot.makeDateTimeSlot(updatedStartDate.atTime(updatedStartTime),
+                durationHours, durationMinutes);
+
+        if (toEdit instanceof RecurringLesson) {
+            return Lesson.makeRecurringLesson(updatedName, updatedSubject,
+                    updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents());
+        } else if (toEdit instanceof TemporaryLesson) {
+            return Lesson.makeTemporaryLesson(updatedName, updatedSubject,
+                    updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents());
+        }
+        // Code shouldn't get to this point, as a Lesson can only be Recurring or Temporary
+        assert false;
+        return null;
+    }
+
+    /**
+     * Gets the Updated Name.
+     * If there's no new name, return the original.
+     */
+    private LessonName getUpdatedName(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+        return editLessonDescriptor.getName().orElse(toEdit.getName());
+    }
+
+    /**
+     * Gets the Updated Subject.
+     * If there's no new Subject, return the original.
+     */
+    private Subject getUpdatedSubject(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+        return editLessonDescriptor.getSubject().orElse(toEdit.getSubject());
+    }
+
+    /**
+     * Gets the Updated Address.
+     * If there's no new Address, return the original.
+     */
+    private LessonAddress getUpdatedAddress(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+        return editLessonDescriptor.getAddress().orElse(toEdit.getLessonAddress());
+    }
+
+    /**
+     * Gets the Updated StartTime.
+     * If there's no new StartTime, return the original.
+     */
+    private LocalTime getUpdatedStartTime(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+        return editLessonDescriptor.getStartTime().orElse(toEdit.getDateTimeSlot().getDateOfLesson().toLocalTime());
+    }
+
+    /**
+     * Gets the Updated StartDate.
+     * If there's no new StartDate, return the original.
+     */
+    private LocalDate getUpdatedStartDate(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+        return editLessonDescriptor.getStartDate().orElse(toEdit.getDateTimeSlot().getDateOfLesson().toLocalDate());
+    }
+
+    private Duration getUpdatedDuration(Lesson toEdit, EditLessonDescriptor editLessonDescriptor) {
+        boolean isHourPrefixPresent = editLessonDescriptor.getDurationHours().isPresent();
+        boolean isMinutesPrefixPresent = editLessonDescriptor.getDurationMinutes().isPresent();
+
+        int durationHours;
+        int durationMinutes;
+
+        if (isHourPrefixPresent || isMinutesPrefixPresent) {
             durationHours = editLessonDescriptor.getDurationHours().orElse(0);
             durationMinutes = editLessonDescriptor.getDurationMinutes().orElse(0);
         } else {
             durationHours = toEdit.getDateTimeSlot().getHours();
             durationMinutes = toEdit.getDateTimeSlot().getMinutes();
         }
-        DateTimeSlot updatedDateTimeSlot = DateTimeSlot.makeDateTimeSlot(updatedStartDate.atTime(updatedStartTime),
-                durationHours, durationMinutes);
 
-        return toEdit instanceof RecurringLesson
-                ? Lesson.makeRecurringLesson(updatedName, updatedSubject,
-                updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents())
-                : Lesson.makeTemporaryLesson(updatedName, updatedSubject,
-                updatedAddress, updatedDateTimeSlot, toEdit.getEnrolledStudents());
+        return new Duration(durationHours, durationMinutes);
+    }
+
+    /**
+     * Simple class to store hours and minutes in int.
+     */
+    protected static class Duration {
+        private final int hour;
+        private final int minutes;
+
+        /**
+         * Creates a {@code Duration object} with hours and minutes.
+         * @param hour Hours in int.
+         * @param minutes Minutes in int.
+         */
+        public Duration(int hour, int minutes) {
+            this.hour = hour;
+            this.minutes = minutes;
+        }
+
+        public int getHour() {
+            return hour;
+        }
+
+        public int getMinutes() {
+            return minutes;
+        }
     }
 
     public static class EditLessonDescriptor {
@@ -142,7 +227,7 @@ public class EditLessonCommand extends Command {
         private Integer durationHours;
         private Integer durationMinutes;
 
-        public EditLessonDescriptor () {}
+        public EditLessonDescriptor() {}
 
         public void setName(LessonName name) {
             this.name = name;
