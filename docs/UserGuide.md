@@ -337,7 +337,7 @@ Format: `clear-b`
 
 Function: Sort all the buyers according to the orders specified.
 
-Format: `sort-b [by/COMPAREDITEM] [o/ORDER]`
+Format: `sort-b by/COMPAREDITEM o/ORDER`
 
 * The `COMPAREDITEM` are:
   * `time`
@@ -504,7 +504,7 @@ Format: `clear-s`
 
 Function: Sort all the sellers according to the orders specified.
 
-Format: `sort-s [by/COMPAREDITEM] [o/ORDER]`
+Format: `sort-s by/COMPAREDITEM o/ORDER`
 
 * The `COMPAREDITEM` are:
   * `time`
