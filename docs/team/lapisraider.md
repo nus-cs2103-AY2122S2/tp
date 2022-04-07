@@ -45,4 +45,4 @@ Given below are my contributions to the project.
   [\#16](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/16)
   * Reported bugs and suggestions for other teams in the class (examples: [\#184](https://github.com/AY2122S2-CS2103-F09-3/tp/issues/184),
   [\#152](https://github.com/AY2122S2-CS2103-F09-3/tp/issues/152), [\#173](https://github.com/AY2122S2-CS2103-F09-3/tp/issues/173))
-  
+
