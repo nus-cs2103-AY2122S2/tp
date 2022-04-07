@@ -50,10 +50,15 @@ public class CompanyCard extends UiPart<Region> {
         super(FXML);
         this.company = company;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(company.getName().fullName);
+        name.setWrapText(true);
         phone.setText(company.getPhone().value);
+        phone.setWrapText(true);
         address.setText(company.getAddress().value);
+        address.setWrapText(true);
         email.setText(company.getEmail().value);
+        email.setWrapText(true);
         if (company.isArchived()) {
             archive.getChildren().add(new Label("ARCHIVED"));
         }

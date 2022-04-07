@@ -50,10 +50,15 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(person.getName().fullName);
+        name.setWrapText(true);
         companyName.setText(person.getCompanyName().fullName);
+        companyName.setWrapText(true);
         phone.setText(person.getPhone().value);
+        phone.setWrapText(true);
         email.setText(person.getEmail().value);
+        email.setWrapText(true);
         if (person.isArchived()) {
             archive.getChildren().add(new Label("ARCHIVED"));
         }
