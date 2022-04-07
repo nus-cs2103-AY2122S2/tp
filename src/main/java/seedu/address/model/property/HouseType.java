@@ -6,7 +6,7 @@ import java.util.HashMap;
  * All types of houses are listed here
  */
 public enum HouseType {
-    UNSPECIFIED( "unspecified") {
+    UNSPECIFIED("unspecified", "any") {
         @Override
         public String toString() {
             return "Unspecified";
@@ -57,7 +57,7 @@ public enum HouseType {
     NULLHOUSETYPE("nullhouse") {
         @Override
         public String toString() {
-            return "nullhouse";
+            return "-";
         }
     };
 

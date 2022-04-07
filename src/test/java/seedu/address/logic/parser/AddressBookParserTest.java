@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROPERTY_BUY_CHAD;
+import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_PROPERTY_BUY_CHAD;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalBuyers.CHAD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
@@ -19,7 +19,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.testutil.BuyerBuilder;
-import seedu.address.testutil.ClientUtil;
+import seedu.address.testutil.BuyerUtil;
+//import seedu.address.testutil.ClientUtil;
 
 public class AddressBookParserTest {
 
@@ -90,7 +91,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addbuyer() throws Exception {
         Buyer buyer = new BuyerBuilder().build();
-        AddBuyerCommand command = (AddBuyerCommand) parser.parseCommand(ClientUtil.getAddBuyerCommand(buyer));
+        AddBuyerCommand command = (AddBuyerCommand) parser.parseCommand(BuyerUtil.getAddBuyerCommand(buyer));
         AddBuyerCommand c = new AddBuyerCommand(buyer);
         assertEquals(c, command);
     }
@@ -100,7 +101,7 @@ public class AddressBookParserTest {
         Buyer buyer = new BuyerBuilder(CHAD).build();
         AddPropertyToBuyCommand command = (AddPropertyToBuyCommand)
                 parser.parseCommand(AddPropertyToBuyCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getPropertyToBuyCommand(buyer));
+                + INDEX_FIRST_CLIENT.getOneBased() + " " + BuyerUtil.getPropertyToBuyCommand(buyer));
         AddPropertyToBuyCommand c = new AddPropertyToBuyCommand(INDEX_FIRST_CLIENT,
                 VALID_PROPERTY_BUY_CHAD);
         boolean a = c.equals(command);
