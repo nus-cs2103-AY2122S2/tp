@@ -17,7 +17,7 @@ class NameExistsPredicateTest {
     private static NameExistsPredicate predicate = new NameExistsPredicate(new Name("Amy Bee"));
 
     /**
-     * Tests for the equals() method. 
+     * Tests for the equals() method.
      */
     @Test
     public void equals() {
