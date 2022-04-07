@@ -60,7 +60,9 @@ Constraint Types:
   * :heavy_check_mark: - yes 
   * :x: - no
 * _Additional Constraints_ : Any additional constraints on the field.
+
 ### Person - Student or Professor 
+
 Represents a person in university. The person must be a student or a professor.
 
 
