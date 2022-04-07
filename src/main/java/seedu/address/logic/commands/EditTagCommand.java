@@ -32,7 +32,7 @@ public class EditTagCommand extends Command {
             + "owesMoney :p2";
 
     public static final String MESSAGE_SUCCESS = "Edited tag in Client: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This client already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TAG = "New version of tag specified is already present.";
 
     private final Index index;
     private final int tagNumber;
@@ -67,7 +67,7 @@ public class EditTagCommand extends Command {
 
         model.setPerson(personToEdit, tagAddedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson));
     }
 
     private Person editTagOfPerson(Person personToEdit, int tagNumber, Tag tag) throws CommandException {
@@ -75,6 +75,9 @@ public class EditTagCommand extends Command {
         ArrayList<Tag> tagList = newPerson.getTags();
         if (tagNumber < 1 || tagNumber > tagList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TAG_NUMBER);
+        }
+        if (tagList.contains(tag)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
         tagList.set(tagNumber - 1, tag); // add exception later
@@ -90,6 +93,7 @@ public class EditTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditTagCommand // instanceof handles nulls
+                && index == ((EditTagCommand) other).index
                 && tagNumber == ((EditTagCommand) other).tagNumber
                 && toAdd.equals(((EditTagCommand) other).toAdd));
     }

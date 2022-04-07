@@ -28,7 +28,7 @@ public class AddTagCommandTest {
 
     @Test
     public void constructor_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTagCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddTagCommand(Index.fromOneBased(1), null));
     }
 
     @Test
