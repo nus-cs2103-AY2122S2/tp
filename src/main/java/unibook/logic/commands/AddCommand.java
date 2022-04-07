@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -107,10 +108,10 @@ public class AddCommand extends Command {
         + ": To add a module to the UniBook, use the following format.\n"
         + "Parameters: "
         + CliSyntax.PREFIX_OPTION + "module "
-        + CliSyntax.PREFIX_NAME + "NAME "
-        + CliSyntax.PREFIX_MODULE + "MODULE "
-        + CliSyntax.PREFIX_KEYEVENT + "TYPE "
-        + CliSyntax.PREFIX_DATETIME + "DATETIME\n"
+        + CliSyntax.PREFIX_NAME + "MODULE NAME "
+        + CliSyntax.PREFIX_MODULE + "MODULE CODE "
+        + "[" + CliSyntax.PREFIX_KEYEVENT + "TYPE "
+        + CliSyntax.PREFIX_DATETIME + "DATETIME]...\n"
         + "Example: " + COMMAND_WORD + " "
         + CliSyntax.PREFIX_OPTION + "module "
         + CliSyntax.PREFIX_NAME + "Computer Organisation "
@@ -410,6 +411,10 @@ public class AddCommand extends Command {
                 groupToAdd = new Group(groupName, moduleToAddGroupTo);
             }
             model.addGroup(groupToAdd);
+            if (isGroupListShowing) {
+                List<Group> lastShownGroupList = model.getShowingGroupList();
+                lastShownGroupList.add(groupToAdd);
+            }
             return new CommandResult(String.format(MESSAGE_SUCCESS_GROUP, groupToAdd));
         }
     }
