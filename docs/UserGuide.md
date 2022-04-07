@@ -161,7 +161,7 @@ Examples:
 
 Edits a candidate in the system.
 
-Format: `edit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…​`
+Format: `edit INDEX PREFIX/NEW_VALUE [PREFIX/NEW_VALUE]…​`
 
 <div markdown="block" class="alert alert-info">
 
