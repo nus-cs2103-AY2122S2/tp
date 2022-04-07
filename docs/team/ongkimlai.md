@@ -9,10 +9,6 @@ NUSocials is a desktop address book application for university students who like
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added test cases for Tag command.
-  * What it does: allows the user to tag additional information to an existing contact.
-  * Justification: This feature improves the product significantly because a user can tag important information to their own contacts for future references.
-
 * **Feature Enhancement**: Added the ability to delete multiple contacts.
   * What it does: allows the user to delete multiple contacts in a single command.
   * Justification: This feature improves the product as a user can efficiently delete many contacts at once instead of inputting a delete command for each contact that he or she wants to delete.
@@ -32,12 +28,25 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for `removetag` and `delete` enhancement
     * Updated documentation for exact tag names for `find` and `tag`
-    * Added all the screenshots in User Guide
-    * Added constraints for features
+    * Added all screenshots found in User Guide
+    * Added constraints section for all features
   * Developer Guide:
-    * Added user stories for `removetag`, `delete` multiple contacts, viewing all upcoming events
-    * Added use cases for `removetag`, `find`, `delete` multiple contacts, viewing all upcoming events
-    * Added implementation for delete multiple contacts and UML diagrams
+    * Added user stories for `removetag`, `delete` multiple contacts, viewing events
+    * Added use cases for `removetag`, `find`, `delete` multiple contacts, viewing events
+    * Added implementation for delete multiple contacts and its UML diagrams
+    * Added implementation for remove tags and its UML diagrams
+    * Updated UI component UML diagram
+    * Cosmetic tweaks to the formatting of use cases
+
+* **Test Case Implementation**:
+  * DeleteCommand
+  * DeleteCommandParser
+  * TagCommand
+  * TagCommandParser
+  * RemoveTagCommand
+  * RemoveTagCommandParser
+  * JsonAdaptedName
 
 * **Tools**:
   * Integrated Codecov into team repo
+  * Update site-wide settings [#18](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/18)

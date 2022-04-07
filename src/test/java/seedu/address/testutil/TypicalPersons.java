@@ -57,8 +57,6 @@ public class TypicalPersons {
             .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            //.withEducation(VALID_EDUCATION_BOB)
-            //.withCca(VALID_CCA_BOB).withInternship(VALID_INTERNSHIP_BOB).withModule(VALID_MODULE_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

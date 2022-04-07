@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidInformation(String)}
  */
 public class Information {
-    public static final String MESSAGE_CONSTRAINTS = "Name can take in at most 300 characters and it should not be "
+    public static final String MESSAGE_CONSTRAINTS = "Info can take in at most 300 characters and it should not be "
             + "blank";
 
     /**
@@ -16,7 +16,7 @@ public class Information {
      * otherwise " " (a blank string becomes a valid input.
      * There is also a 300 characters constraint.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].{1,300}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0,299}";
 
     public final String value;
 

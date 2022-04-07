@@ -17,7 +17,7 @@ public class EventName {
      * otherwise " " (a blank string becomes a valid input.
      * There is also a 100 characters constraint.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].{1,100}";
+    public static final String VALIDATION_REGEX = "[^\\s].{0,99}";
 
     public final String value;
 

@@ -7,11 +7,9 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":RemoveTagCommandParser" as RemoveTagCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
 participant "t:RemoveTagCommand" as RemoveTagCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "p2:Person" as Person MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
@@ -54,32 +52,11 @@ deactivate AddressBookParser
 LogicManager -> RemoveTagCommand : execute()
 activate RemoveTagCommand
 
-create Person
-RemoveTagCommand -> Person
-activate Person
-Person --> RemoveTagCommand : p2
-deactivate Person
-
-RemoveTagCommand -> RemoveTagCommand : remove matching tags from p2
-activate RemoveTagCommand
-RemoveTagCommand --> RemoveTagCommand : new_p2
-deactivate RemoveTagCommand
-
-RemoveTagCommand -> Model : setPerson(p2, new_p2)
-activate Model
-Model --> RemoveTagCommand
-deactivate Model
-
-create CommandResult
-RemoveTagCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> RemoveTagCommand
-deactivate CommandResult
+ref over RemoveTagCommand, Model
+Removal of matching tags
+end ref
 
 RemoveTagCommand --> LogicManager : result
 deactivate RemoveTagCommand
 
-[<--LogicManager
-deactivate LogicManager
 @enduml

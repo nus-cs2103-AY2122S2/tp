@@ -37,4 +37,11 @@ public abstract class Tag {
         return tagName;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Tag
+                && this.tagName.equals(((Tag) other).tagName));
+    }
+
 }

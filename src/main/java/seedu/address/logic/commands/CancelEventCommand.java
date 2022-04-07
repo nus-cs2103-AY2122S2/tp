@@ -110,7 +110,7 @@ public class CancelEventCommand extends Command {
         int lastShownListSize = lastShownList.size();
 
         if (!checkIndexRange(lastShownListSize)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
         String deletedEventOrEvents = extractDeletedInfo(lastShownList);
         deleteFromList(model, lastShownList);

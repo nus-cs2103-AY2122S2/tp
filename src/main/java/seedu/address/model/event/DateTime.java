@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,7 +33,11 @@ public class DateTime implements Comparable<DateTime> {
      */
     public static boolean isValidDateTime(int year, int month, int day, int hour, int min) {
         LocalDateTime now = LocalDateTime.now();
-        return LocalDateTime.of(year, month, day, hour, min).isAfter(now);
+        try {
+            return LocalDateTime.of(year, month, day, hour, min).isAfter(now);
+        } catch (DateTimeException e) {
+            return false;
+        }
     }
 
     public static boolean isValidDate(String test) {

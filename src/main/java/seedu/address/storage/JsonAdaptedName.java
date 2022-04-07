@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -15,6 +17,7 @@ public class JsonAdaptedName {
      */
     @JsonCreator
     public JsonAdaptedName(String name) {
+        requireNonNull(name);
         this.name = name;
     }
 
@@ -35,7 +38,7 @@ public class JsonAdaptedName {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted name.
      */
-    public Name toModelType(String name) throws IllegalValueException {
+    public Name toModelType() throws IllegalValueException {
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }

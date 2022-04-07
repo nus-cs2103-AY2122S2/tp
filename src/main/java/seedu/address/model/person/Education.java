@@ -10,7 +10,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Education extends Tag {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String MESSAGE_CONSTRAINTS = "Education can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Education can only take alphanumeric values, and it should not "
+            + "be blank";
 
     public final String value;
 
