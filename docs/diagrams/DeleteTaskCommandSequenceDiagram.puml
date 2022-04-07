@@ -1,0 +1,147 @@
+@startuml
+!include style.puml
+
+title DeleteTaskCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteTaskCommandParser" as DeleteTaskCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create DeleteTaskCommandParser
+AddressBookParser -> DeleteTaskCommandParser
+activate DeleteTaskCommandParser LOGIC_COLOR
+DeleteTaskCommandParser --> AddressBookParser
+deactivate DeleteTaskCommandParser
+
+AddressBookParser -> DeleteTaskCommandParser : parse(arguments)
+activate DeleteTaskCommandParser LOGIC_COLOR
+
+DeleteTaskCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> DeleteTaskCommandParser -- LOGIC_COLOR: argMultimap
+
+
+ref over DeleteTaskCommandParser, DeleteTaskCommand: Parsing user input arguments
+
+
+create DeleteTaskCommand
+DeleteTaskCommandParser -> DeleteTaskCommand
+activate DeleteTaskCommand LOGIC_COLOR
+DeleteTaskCommand --> DeleteTaskCommandParser
+deactivate DeleteTaskCommand
+
+DeleteTaskCommandParser --> AddressBookParser -- LOGIC_COLOR: DeleteTaskCommand
+deactivate DeleteTaskCommandParser
+
+AddressBookParser --> LogicManager  -- LOGIC_COLOR: DeleteTaskCommand
+deactivate AddressBookParser
+
+
+LogicManager -> DeleteTaskCommand LOGIC_COLOR : execute(model)
+activate DeleteTaskCommand LOGIC_COLOR
+
+alt#Grey #White index and studentId present case
+DeleteTaskCommand -> Model ++ MODEL_COLOR: deleteTaskOfPerson(studentId, index)
+
+deactivate
+else
+DeleteTaskCommand -> Model ++ MODEL_COLOR: deleteTaskTaskForAllInModule(moduleCode, Task)
+
+deactivate
+end
+
+
+create CommandResult
+DeleteTaskCommand -> CommandResult ++ LOGIC_COLOR:
+
+CommandResult --> DeleteTaskCommand --:
+deactivate CommandResult
+
+DeleteTaskCommand --> LogicManager --: commandResult
+deactivate DeleteTaskCommand
+
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+
+
+@startuml
+!include style.puml
+
+box "Logic" LOGIC_COLOR_T1
+participant ":DeleteTaskCommandParser" as DeleteTaskCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "studentId:StudentId" as StudentId MODEL_COLOR
+participant "index:Index" as Index MODEL_COLOR
+participant "moduleCode:ModuleCode" as ModuleCode MODEL_COLOR
+participant "task:Task" as Task MODEL_COLOR
+end box
+
+mainframe sd Parsing each field
+
+alt#Grey #White index or studentId given case
+DeleteTaskCommandParser -> DeleteTaskCommandParser : indexOrStudentIdGiven(argMultimap)
+activate DeleteTaskCommandParser LOGIC_COLOR
+
+DeleteTaskCommandParser -> ParserUtil ++ LOGIC_COLOR: parseStudentId(studentId)
+create StudentId
+ParserUtil -> StudentId
+activate StudentId MODEL_COLOR
+StudentId --> ParserUtil
+deactivate StudentId
+ParserUtil --> DeleteTaskCommandParser -- MODEL_COLOR: studentId
+
+DeleteTaskCommandParser -> ParserUtil ++ LOGIC_COLOR: parseIndex(index)
+create Index
+ParserUtil -> Index
+activate Index MODEL_COLOR
+Index --> ParserUtil
+deactivate Index
+ParserUtil --> DeleteTaskCommandParser -- MODEL_COLOR: Index
+
+deactivate
+
+else
+DeleteTaskCommandParser -> DeleteTaskCommandParser : moduleCodeOrTaskNameGiven(argMultimap)
+activate DeleteTaskCommandParser LOGIC_COLOR
+
+DeleteTaskCommandParser -> ParserUtil ++ LOGIC_COLOR: parseModuleCode(moduleCode)
+create ModuleCode
+ParserUtil -> ModuleCode
+activate ModuleCode MODEL_COLOR
+ModuleCode --> ParserUtil
+deactivate ModuleCode
+ParserUtil --> DeleteTaskCommandParser -- MODEL_COLOR: moduleCode
+
+
+DeleteTaskCommandParser -> ParserUtil ++ LOGIC_COLOR: parseTask(task)
+create Task
+ParserUtil -> Task
+activate Task MODEL_COLOR
+Task --> ParserUtil
+deactivate Task
+ParserUtil --> DeleteTaskCommandParser -- MODEL_COLOR: task
+
+deactivate
+end
+
+@enduml
