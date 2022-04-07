@@ -36,7 +36,7 @@ import seedu.trackermon.storage.StorageManager;
 import seedu.trackermon.testutil.ShowBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code LogicManagerParser}.
+ * Contains integration tests (interaction with the Model) for {@code LogicManager}.
  */
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
