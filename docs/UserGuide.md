@@ -597,6 +597,10 @@ Examples:
 * `batch editperson p/87438806 by/phone =/87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
 
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The `batch` operation is transactional, either all changes succeed or all changes fail (should an operation within `batch` fails). Any error message shown is from the failing operation.
+</div>
+
 ### Operate on Contacts within Range : `range`
 
 Perform actions on a group of contacts.
@@ -618,7 +622,7 @@ Examples:
   * Deletes the 2nd and 3rd contacts in the address book.
 
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
-The `batch` `range` operation are transactions, it will fail due to one command executed failed and the error message of that error command will show, no data will modify or save. 
+The `range` operation is transactional, either all changes succeed or all changes fail (should an operation within `range` fails). Any error message shown is from the failing operation.
 </div>
 
 ### Chaining Commands: `chain`
@@ -638,7 +642,7 @@ Examples:
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
 
 <div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
-The `chain` operation is executed sequentially, it will fail until a given command executed failed and the error message of that error command will show, the previous successful command before will be saved. 
+The `chain` operation is executed sequentially, it will execute the commands from left to right until a given command fails. Any error message shown is from the failing operation, and all preceding operations will be saved.
 </div>
 
 ### Exiting the program : `exit`
