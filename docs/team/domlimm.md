@@ -54,7 +54,17 @@ Given below are my contributions to the project.
     * Updating `shadowJar` naming.
     * Enabling assertions.
 
-* **Community**:
+* **Review/mentoring contributions**:
+  * [PRs Authored](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+author%3Adomlimm)
+    * Count: // To update
+  * [PRs Involved](https://github.com/AY2122S2-CS2103-F11-2/tp/pulls?q=is%3Apr+involves%3Adomlimm)
+    * Count: // To update
 
+* **Community**:
+  * Contributed to forum discussions
+    * Some e.g. [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/131), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/212), [3](https://github.com/nus-cs2103-AY2122S2/forum/issues/166), [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/124), [5](https://github.com/nus-cs2103-AY2122S2/forum/issues/121).
+  * Helped solve issues that classmates faced
+    * Some e.g. [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/225), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/89), [3](https://github.com/nus-cs2103-AY2122S2/forum/issues/123), [4](https://github.com/nus-cs2103-AY2122S2/forum/issues/37), [5](https://github.com/nus-cs2103-AY2122S2/forum/issues/195).
+  * Reported total of [11 issues](https://github.com/domlimm/ped/issues) during PE-D.
 
 * **Tools**:
