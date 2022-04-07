@@ -158,6 +158,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public boolean isStudentListEmpty() {
+        return students.isEmpty();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls

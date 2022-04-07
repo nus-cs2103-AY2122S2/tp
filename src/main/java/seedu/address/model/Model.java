@@ -103,6 +103,13 @@ public interface Model {
     void addOnFilteredStudentList(Predicate<Student> predicate);
 
     /**
+     * Returns whether the model's UniqueStudentList is empty.
+     *
+     * @return true is the model's UniqueStudentList is empty and false otherwise.
+     */
+    boolean isStudentListEmpty();
+
+    /**
      * Returns true if a lab with the same identity as {@code lab} exists in the TAddressBook.
      */
     boolean hasLab(Lab lab);

@@ -120,6 +120,15 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns whether the UniqueStudentList is empty.
+     *
+     * @return true is the UniqueStudentList is empty and false otherwise.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {

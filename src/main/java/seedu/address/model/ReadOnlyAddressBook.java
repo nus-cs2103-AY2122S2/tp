@@ -20,4 +20,11 @@ public interface ReadOnlyAddressBook {
      */
     MasterLabList getMasterLabList();
 
+    /**
+     * Returns whether the ReadOnlyAddressBook's UniqueStudentList is empty.
+     *
+     * @return true is the ReadOnlyAddressBook's UniqueStudentList is empty and false otherwise.
+     */
+    boolean isStudentListEmpty();
+
 }

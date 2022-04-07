@@ -155,6 +155,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isStudentListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasLab(Lab lab) {
             throw new AssertionError("This method should not be called.");
         }
@@ -192,6 +197,11 @@ public class AddCommandTest {
                 @Override
                 public MasterLabList getMasterLabList() {
                     return new MasterLabList();
+                }
+
+                @Override
+                public boolean isStudentListEmpty() {
+                    return true;
                 }
             };
         }

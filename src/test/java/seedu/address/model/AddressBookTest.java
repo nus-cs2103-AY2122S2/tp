@@ -151,6 +151,11 @@ public class AddressBookTest {
         public MasterLabList getMasterLabList() {
             return masterLabList;
         }
+
+        @Override
+        public boolean isStudentListEmpty() {
+            return students.isEmpty();
+        }
     }
 
 }
