@@ -96,6 +96,7 @@ public class BatchCommand extends Command {
                 } catch (CommandException ce) {
                     commandResultList.clear();
                     commandResultList.add(new CommandResult(ce.getMessage()));
+                    break;
                 }
             } catch (ParseException pe) {
                 throw new CommandException(pe.getMessage());

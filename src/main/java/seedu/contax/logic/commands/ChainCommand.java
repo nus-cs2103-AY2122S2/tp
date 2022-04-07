@@ -35,6 +35,7 @@ public class ChainCommand extends Command {
             } catch (CommandException ce) {
                 commandResultList.clear();
                 commandResultList.add(new CommandResult(ce.getMessage()));
+                break;
             }
         }
         StringBuilder resultOutput = new StringBuilder();

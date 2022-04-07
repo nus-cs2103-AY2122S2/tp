@@ -18,6 +18,7 @@ import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
+import seedu.contax.model.person.Person;
 
 /**
  * Range edit or delete a person identified using it's displayed from index and to index from the address book.
@@ -58,7 +59,8 @@ public class RangeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        // special case: to edit first occurrence person with duplicated name
+        Person restorePerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
         if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -73,7 +75,9 @@ public class RangeCommand extends Command {
                     commandResultList.add(command.execute(model));
                 } catch (CommandException ce) {
                     commandResultList.clear(); // only for the purpose of not changing output in feature freeze
+                    setFirstOccurrencePerson(model, restorePerson);
                     commandResultList.add(new CommandResult(ce.getMessage()));
+                    break;
                 }
             } catch (ParseException pe) {
                 throw new CommandException(pe.getMessage());
@@ -84,6 +88,13 @@ public class RangeCommand extends Command {
             resultOutput.append(result.getFeedbackToUser()).append("\n");
         }
         return new CommandResult(resultOutput.toString());
+    }
+
+
+    private void setFirstOccurrencePerson(Model model, Person restorePerson) {
+        Person lastPerson = model.getAddressBook().getPersonList().get(toIndex.getZeroBased());
+        model.setPerson(model.getAddressBook().getPersonList().get(toIndex.getZeroBased()), restorePerson);
+        model.setPerson(model.getAddressBook().getPersonList().get(fromIndex.getZeroBased()), lastPerson);
     }
 
 
