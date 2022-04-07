@@ -33,7 +33,7 @@ Given below are my contributions to the project.
   * Managed issues relating to `import` and `export`. ([\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156), [\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199))
   * Performed smoke testing on Windows, Linux, MacOS to ensure usability of features across different OS.
   * Performed vetting on documentation.
-  * Managed Trackermon's v1.3.1 [release](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
+  * Managed Trackermon's v1.3.1 and v1.4 [releases](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
   <br><br>
 
 * **Documentation**:
