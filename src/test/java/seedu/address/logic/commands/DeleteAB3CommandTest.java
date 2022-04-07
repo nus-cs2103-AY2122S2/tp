@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ENTITY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ENTITY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -28,8 +28,8 @@ public class DeleteAB3CommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteAB3Command deleteAB3Command = new DeleteAB3Command(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteAB3Command deleteAB3Command = new DeleteAB3Command(INDEX_FIRST_ENTITY);
 
         String expectedMessage = String.format(DeleteAB3Command.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -49,10 +49,10 @@ public class DeleteAB3CommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_ENTITY);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteAB3Command deleteAB3Command = new DeleteAB3Command(INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_ENTITY.getZeroBased());
+        DeleteAB3Command deleteAB3Command = new DeleteAB3Command(INDEX_FIRST_ENTITY);
 
         String expectedMessage = String.format(DeleteAB3Command.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -65,9 +65,9 @@ public class DeleteAB3CommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_ENTITY);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_ENTITY;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -78,14 +78,14 @@ public class DeleteAB3CommandTest {
 
     @Test
     public void equals() {
-        DeleteAB3Command deleteFirstCommand = new DeleteAB3Command(INDEX_FIRST_PERSON);
-        DeleteAB3Command deleteSecondCommand = new DeleteAB3Command(INDEX_SECOND_PERSON);
+        DeleteAB3Command deleteFirstCommand = new DeleteAB3Command(INDEX_FIRST_ENTITY);
+        DeleteAB3Command deleteSecondCommand = new DeleteAB3Command(INDEX_SECOND_ENTITY);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteAB3Command deleteFirstCommandCopy = new DeleteAB3Command(INDEX_FIRST_PERSON);
+        DeleteAB3Command deleteFirstCommandCopy = new DeleteAB3Command(INDEX_FIRST_ENTITY);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
