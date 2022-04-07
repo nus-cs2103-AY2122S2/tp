@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.PriceRange;
@@ -58,7 +58,7 @@ public class PropertyCommandsTestUtil {
     public static final String HOUSE_TYPE_DESC_1 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_1;
     public static final String HOUSE_TYPE_DESC_2 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_2;
     public static final String HOUSE_TYPE_DESC_3 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_3;
-    public static final String HOUSE_TYPE_DESC_4= " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_4;
+    public static final String HOUSE_TYPE_DESC_4 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_4;
     public static final String HOUSE_TYPE_DESC_5 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_5;
 
     public static final String LOCATION_DESC_1 = " " + PREFIX_LOCATION + VALID_LOCATION_1;

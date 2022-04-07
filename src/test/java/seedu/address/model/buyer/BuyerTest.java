@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalBuyers.YUQI;
 import static seedu.address.testutil.TypicalSellers.BENSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.property.House;
 import seedu.address.model.property.HouseType;
 import seedu.address.model.property.Location;

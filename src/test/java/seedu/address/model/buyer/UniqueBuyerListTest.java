@@ -1,8 +1,8 @@
 package seedu.address.model.buyer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.BuyerBuilder;
@@ -165,11 +166,11 @@ public class UniqueBuyerListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniquebuyerList.asUnmodifiableObservableList().remove(0));
+            -> uniquebuyerList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
-    public void sortByName_sortedBuyerList_SameSortOrder() {
+    public void sort_sortedBuyerList_sameSortOrder() {
         uniquebuyerList.add(CHAD);
         uniquebuyerList.add(BOB);
         uniquebuyerList.sortBuyers("name", "asc");
@@ -180,7 +181,7 @@ public class UniqueBuyerListTest {
     }
 
     @Test
-    public void sortByNameReverse_sortedBuyerList_DiffSortOrder() {
+    public void sort_sortedBuyerList_diffSortOrder() {
         uniquebuyerList.add(CHAD);
         uniquebuyerList.add(BOB);
         uniquebuyerList.sortBuyers("name", "desc");
@@ -191,7 +192,7 @@ public class UniqueBuyerListTest {
     }
 
     @Test
-    public void sortByTime_sortedBuyerList_SameSortOrder() {
+    public void sort_sortedBuyerList_sameSortOrderReverse() {
         uniquebuyerList.add(CHAD);
         uniquebuyerList.add(BOB);
         uniquebuyerList.sortBuyers("time", "asc");
@@ -202,7 +203,7 @@ public class UniqueBuyerListTest {
     }
 
     @Test
-    public void sortByTimeReverse_sortedBuyerList_DiffSortOrder() {
+    public void sort_sortedBuyerList_diffSortOrderReverse() {
         uniquebuyerList.add(CHAD);
         uniquebuyerList.add(BOB);
         uniquebuyerList.sortBuyers("time", "desc");
