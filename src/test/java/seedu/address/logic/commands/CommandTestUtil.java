@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND_OPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -28,6 +29,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
     public static final String VALID_SEPARATOR_COMMA = ",";
     public static final String VALID_SEPARATOR_COMMA_WITH_SPACES = "    ,    ";
+    public static final String VALID_EDIT_OPTION_R = "r";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -68,6 +70,7 @@ public class CommandTestUtil {
     public static final String SKILL_DESC_C_N_PYTHON_WITH_SPACES =
         " " + PREFIX_SKILL + VALID_SKILL_C + VALID_SEPARATOR_COMMA_WITH_SPACES + VALID_SKILL_PYTHON;
     public static final String SKILL_DESC_EMPTY = " " + PREFIX_SKILL;
+    public static final String EDIT_OPTION_R = " " + PREFIX_COMMAND_OPTION + VALID_EDIT_OPTION_R;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -75,6 +78,7 @@ public class CommandTestUtil {
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_GITHUB_USERNAME + "amy_cho"; // '_' not allowed
     public static final String INVALID_TEAM_DESC = " " + PREFIX_TEAM + "hubby*"; // '*' not allowed in s
     public static final String INVALID_SKILL_DESC = " " + PREFIX_SKILL + "Python*_1"; // '*' not allowed in skills
+    public static final String INVALID_EDIT_OPTION_DESC = " " + PREFIX_COMMAND_OPTION + "v";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
