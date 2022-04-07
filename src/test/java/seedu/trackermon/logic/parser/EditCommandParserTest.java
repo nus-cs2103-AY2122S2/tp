@@ -39,6 +39,9 @@ import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 
+/**
+ * Contains unit tests for {@code EditCommandParser}.
+ */
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
