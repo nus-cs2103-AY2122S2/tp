@@ -34,9 +34,9 @@ public class EditPrescriptionCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW PRESCRIPTION WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "DRUG_NAME "
-            + PREFIX_DATE + "DATE "
-            + PREFIX_INSTRUCTION + "INSTRUCTION \n"
+            + "[" + PREFIX_NAME + "DRUG_NAME] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_INSTRUCTION + "INSTRUCTION] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSTRUCTION + "1 tablet per day";
 

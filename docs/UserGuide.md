@@ -179,6 +179,7 @@ Format: `view`
 
 Edits an existing patient information entry in MedBook when a list of patient's information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Patient Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -256,6 +257,7 @@ Examples:
 
 Edits an existing contact information entry in MedBook when a patient's list of contact information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Contact Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
@@ -297,6 +299,7 @@ Examples:
 
 Edits an existing medical information entry in MedBook when a patient's list of medical information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Medical Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
@@ -357,6 +360,7 @@ Examples:
 
 Edits an existing prescription entry in MedBook when a list of prescription entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Prescription.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`
 
@@ -380,6 +384,17 @@ Format: `view t/test i/NRIC`
 
 Examples:
 * `view t/test i/S1234567L`
+
+### Editing Test Result: `edit`
+
+Edits an existing test result entry in MedBook when a list of test result entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Test Result.
+At least one field must be filled for edit command to be valid.
+
+Format:  `edit INDEX [td/TEST_DATE] [mt/MEDICAL_TEST] [r/TEST_RESULT]`
+
+Examples:
+* `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates result field of first test result entry displayed on the screen.
 
 
 
