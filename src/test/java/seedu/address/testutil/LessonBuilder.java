@@ -14,10 +14,6 @@ import seedu.address.model.studentattendance.StudentAttendance;
  * A utility class to help with building Lesson objects.
  */
 public class LessonBuilder {
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_STUDENT_ID = "E0123456";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ATTENDANCE = "false";
     public static final String DEFAULT_WEEK_ID = "1";
 
     private WeekId weekId;
