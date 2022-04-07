@@ -12,12 +12,12 @@ Given below are my contributions to the project.
 * **New Feature**: Added the model for student objects.
   * What it does: allows the TA to have the ability to manage students.
   * Justification: This feature improves the product significantly because a TA can interact with the student objects and the app should display the students accordingly.
-  * Highlights: This enhancement affects existing commands (e.g. `add student`, `delete student`, `list student`). It required an in-depth analysis of design alternatives.    
-  
-  
+  * Highlights: This enhancement affects existing commands (e.g. `add student`, `delete student`, `list student`). It required an in-depth analysis of design alternatives.
+
+
 * **New Feature**: Added the ability to enrol student(s) into class groups.
   * What it does: allows the TA to enrol existing student(s) into an existing class group. This automatically links the student(s) to the module associated to the class group. The app then displays the existing students in the given class group.
-  * Justification: This feature improves the product significantly because a TA can keep track of their students for each module they are teaching. 
+  * Justification: This feature improves the product significantly because a TA can keep track of their students for each module they are teaching.
   * Highlights: This enhancement affects existing v1.3 commands (e.g. `mark`, `unmark`, `grade`, `disenrol`). It required an in-depth analysis of design alternatives. The implementation too was challenging as appropriate error messages were needed to handle different scenarios.
 
 
@@ -28,14 +28,14 @@ Given below are my contributions to the project.
 
 
 * **New Feature**: Added the ability to find students whose names contain any of the given keywords.
-  * What it does: allows the TA to enter specific keywords to find existing student(s). Keywords which matches non-existing student(s) are accepted but nothing will be displayed by the app. 
+  * What it does: allows the TA to enter specific keywords to find existing student(s). Keywords which matches non-existing student(s) are accepted but nothing will be displayed by the app.
   * Justification: This feature improves the product because a TA can search for specific student(s) by their names.
 
 
 * **New Feature**:
   * Wrote tests for the `Student` and `JsonAdaptedStudent` components.
   * Wrote tests for `FindCommand` as well as the `EnrolCommand` and `DisenrolCommand`.
-  
+
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=wxliong&breakdown=true)
 
