@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project would not have been possible without the help of [Ivan](https://github.com/wpinrui), and [prof Damith](https://github.com/damithc)
 
 --------------------------------------------------------------------------------------------------------------------
 
