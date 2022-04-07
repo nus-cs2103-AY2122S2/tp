@@ -59,6 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the tag list with {@code tags} and strips tags in persons that are not in {@code tags}.
+     * {@code tags} must not contain duplicate tags.
      */
     public void setTags(List<Tag> tags) {
         persons.forEach(p -> stripTagsFromPerson(p, tags));
