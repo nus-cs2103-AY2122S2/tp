@@ -23,7 +23,7 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
   * Justification: Users who need the clients to be in certain orders are now able to obtain the data 
   they need easily, for example they want to obtain the first 10 names in alphabetical order etc.
 
-* **Code contributed**: [RepoSense link](https://github.com/LapisRaider/tp)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=lapisraider)
 
 * **Project management**:
   * Managed milestones `v1.1` to `v1.4` on GitHub
