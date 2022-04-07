@@ -29,15 +29,15 @@ public class EditTagCommandParserTest {
     @Test
     public void parse_noTag_failure() {
         assertParseFailure(parser, "1 " + "2" + VALID_TAG_COMMAND_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE)); // no tag prefix
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE)); // no tag prefix
         assertParseFailure(parser, "1 " + "2" + PREFIX_TAG,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE)); // no tag description
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE)); // no tag description
     }
 
     @Test
     public void parse_invalidTag_failure() {
         assertParseFailure(parser, "1 " + "2" + INVALID_TAG_DESC,
-                Tag.MESSAGE_CONSTRAINTS);
+            Tag.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class EditTagCommandParserTest {
         assertParseFailure(parser, "1 " + VALID_TAG_COMMAND_FRIEND,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         assertParseFailure(parser, VALID_TAG_COMMAND_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -57,6 +57,6 @@ public class EditTagCommandParserTest {
     @Test
     public void parse_invalidTagNumber_failure() {
         assertParseFailure(parser, "1 two " + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
     }
 }
