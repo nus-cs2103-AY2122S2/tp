@@ -140,13 +140,19 @@ Format: `add id/STUDENT_ID n/NAME p/PHONE e/EMAIL c/COURSE yr/SENIORITY avail/AV
 
 All fields of a `candidate` below should not be blank and will be validated.
 
-* `STUDENT_ID` is sensitive, and in this format `AXXXXXXXX` e.g. `A0123456B`.
+* `STUDENT_ID` is format-sensitive with ease of case sensitivity i.e. Allowing lower caps, and in this format `AXXXXXXXX` e.g. `A0123456B`.
+  * The first character has to be `A` or `a`.
+  * Followed by 7 digits.
+  * The last character with any alphabet is allowed.
 * `NAME` should only contain alphanumeric characters and spaces.
-* `EMAIL` is sensitive, and should only be in this format `EXXXXXXX@u.nus.edu`.
-* `PHONE` is sensitive, and should only be a local Singapore number. i.e. Starting number of Singapore's common phone/telephone numbers - 6, 8, 9.
+* `EMAIL` is format-sensitive, and should only be in this format `EXXXXXXX@u.nus.edu`.
+* `PHONE` is format-sensitive, and should only be a local Singapore number. i.e. Starting number of Singapore's common phone/telephone numbers - 6, 8, 9.
 * `COURSE` should only be Computing courses. e.g. Business Analytics, Computer Engineering, Computer Science, Information Security, Information Systems.
-* `SENIORITY` is a number range from only 1 to 4.
+  * The first character of each word in the course i.e. `C` in `Computer` and `S` in `Science` for `Computer Science` is case-sensitive.
+* `SENIORITY` is a single integer ranging from 1 to 4. i.e. 1 to 4 inclusive.
+  * This attribute field serves as a gauge for the SoC professor (user) on which year the candidate is in to better understand how far along they are in their undergraduate studies. It follows the faculty classification from `COM1` to `COM4`, and does not differentiate beyond `COM4` following the faculty system classification.
 * `AVAILABILITY` is an input to represent the available days. e.g. `1,2,3` corresponds to an availability of `Monday`, `Tuesday` and `Wednesday`. It accepts a number range from only 1 to 5.
+  * Each available day represented by the corresponding integer number should be comma-separated. It does not matter how the days are ordered in the user input.
 
 Examples:
 * `add id/A0123456B n/John Doe p/87654321 e/E0123456@u.nus.edu c/Computer Science yr/2 avail/1,2,3` adds a new candidate with Student ID, **A0123456B**, named John Doe.
