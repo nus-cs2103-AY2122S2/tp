@@ -88,17 +88,11 @@ public class AddressBookParser {
         case ClearSellerCommand.COMMAND_WORD:
             return new ClearSellerCommand();
 
-        //case FindCommand.COMMAND_WORD:
-        //    return new FindCommandParser().parse(arguments);
-
         case FindSellerCommand.COMMAND_WORD:
             return new FindSellerCommandParser().parse(arguments);
 
         case FindBuyerCommand.COMMAND_WORD:
             return new FindBuyerCommandParser().parse(arguments);
-
-        //case ListCommand.COMMAND_WORD:
-        //    return new ListCommand();
 
         case ListBuyerCommand.COMMAND_WORD:
             return new ListBuyerCommand();
