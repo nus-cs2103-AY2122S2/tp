@@ -261,6 +261,7 @@ Finds clients whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Names of clients should be separated by commas
   * Example: `find alex, david li` will match clients whose name contain `Alex` or `David Li`
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
