@@ -1,0 +1,24 @@
+@startuml
+!include detailed.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class SetReminderWindowCommandParser {
+    +SetReminderWindowCommand parse(String args)
+}
+Class SetReminderWindowCommand {
+    -int window
+    +SetReminderWindowCommand(int reminderWindow)
+    +CommandResult execute(Model model)
+}
+Class "<<interface>>\nParser" as Parser
+Class "{abstract}\nCommand" as Command
+
+SetReminderWindowCommand -up-|> Command
+
+SetReminderWindowCommandParser -up-|> Parser
+SetReminderWindowCommandParser .down.> SetReminderWindowCommand: creates >
+
+SetReminderWindowCommandParser -[hidden]Down- SetReminderWindowCommand
+@enduml
