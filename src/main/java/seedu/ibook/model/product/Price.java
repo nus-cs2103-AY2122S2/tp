@@ -9,10 +9,11 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
+    public static final Double MAX_PRICE = 999999.99;
     public static final String MESSAGE_CONSTRAINTS =
-            "Prices should only have at most two decimal places, and should not be negative";
+            "Prices should only have at most two decimal places, non-negative and at most " + MAX_PRICE;
 
-    public static final String VALIDATION_REGEX = "\\$?(?:0|[1-9]\\d*)(?:\\.\\d{1,2})?";
+    public static final String VALIDATION_REGEX = "\\$?0*(?:0|[1-9]\\d{0,5})(?:\\.\\d{1,2})?";
 
     public final Double price;
 
@@ -72,20 +73,20 @@ public class Price {
      * Checks that the price is within a specified range.
      */
     public boolean isWithin(PriceRange priceRange) {
-        return !lessThan(priceRange.getStartPrice()) && !moreThan(priceRange.getEndPrice());
+        return !isLessThan(priceRange.getStartPrice()) && !isMoreThan(priceRange.getEndPrice());
     }
 
     /**
      * Checks that the price is less than another price.
      */
-    public boolean lessThan(Price otherPrice) {
+    public boolean isLessThan(Price otherPrice) {
         return price < otherPrice.price;
     }
 
     /**
      * Checks that the price is more than another price.
      */
-    public boolean moreThan(Price otherPrice) {
+    public boolean isMoreThan(Price otherPrice) {
         return price > otherPrice.price;
     }
 

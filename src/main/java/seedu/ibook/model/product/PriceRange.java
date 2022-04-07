@@ -62,7 +62,7 @@ public class PriceRange {
      * @return Result of test.
      */
     public static boolean isValidPriceRange(Price startPrice, Price endPrice) {
-        return !startPrice.moreThan(endPrice);
+        return !startPrice.isMoreThan(endPrice);
     }
 
     @Override

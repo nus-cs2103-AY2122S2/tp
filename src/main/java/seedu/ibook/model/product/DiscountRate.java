@@ -14,7 +14,7 @@ public class DiscountRate {
     public static final String MESSAGE_CONSTRAINTS =
             "Discount Rate should only be a non-negative integer, and at most 100";
 
-    public static final String VALIDATION_REGEX = "|(?:0|[1-9]\\d?|100)%?";
+    public static final String VALIDATION_REGEX = "|0*(?:0|[1-9]\\d?|100)%?";
 
     public final Integer discountRate;
 

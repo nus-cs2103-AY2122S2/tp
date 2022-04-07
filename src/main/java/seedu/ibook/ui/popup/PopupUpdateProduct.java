@@ -71,7 +71,7 @@ public class PopupUpdateProduct extends Popup {
                 + " " + CliSyntax.PREFIX_DISCOUNTSTART.getPrefix()
                 + discountStart.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
-                + description.getText();
+                + description.getText().replace("\n", "");
 
         execute(commandText);
     }
