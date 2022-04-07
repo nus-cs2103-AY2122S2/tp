@@ -81,6 +81,7 @@ Adds a player/ lineup/ schedule to MyGM.
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
+* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`
 * `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
 * The first character of every word in `NAME` should be capitalized. For example:`John Doe`
 
