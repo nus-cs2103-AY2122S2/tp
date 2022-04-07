@@ -3,18 +3,12 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
-Package lab {
-    Class LabList
-    Class MasterLabList
-    Class Lab
-   }
 
 AddressBook *-right-> "1" UniqueStudentList
 AddressBook *-right-> "1" UniqueTagList
 AddressBook *-down-> "1" MasterLabList
 UniqueTagList -[hidden]down- UniqueStudentList
 UniqueTagList -[hidden]down- UniqueStudentList
-AddressBook -[hidden]r- MasterLabList
 
 MasterLabList -down-|> LabList
 LabList *--> "~*" Lab
@@ -23,10 +17,10 @@ UniqueStudentList -right-> Student
 
 Student -up-> "*" Tag
 
-Student *--> Name
-Student *--> GithubUsername
-Student *--> Email
-Student *--> Telegram
-Student *--> StudentId
+Student *--> "1" Name
+Student *--> "1" GithubUsername
+Student *--> "1" Email
+Student *--> "1" Telegram
+Student *--> "1" StudentId
 Student *--> "1" LabList
 @enduml

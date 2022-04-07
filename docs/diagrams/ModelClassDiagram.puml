@@ -41,11 +41,11 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueStudentList
 UniqueStudentList --> "~* all    " Student
-Student *--> Name
-Student *--> GithubUsername
-Student *--> Email
-Student *--> Telegram
-Student *--> StudentId
+Student *--> "1" Name
+Student *--> "1" GithubUsername
+Student *--> "1" Email
+Student *--> "1" Telegram
+Student *--> "1  " StudentId
 Student *--> "*" Tag
 Student *-down--> "1" LabList
 
