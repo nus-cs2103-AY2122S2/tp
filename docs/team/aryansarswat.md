@@ -5,7 +5,7 @@ title: Aryan Sarswat's Project Portfolio Page
 
 ### Project: Amigos
 
-Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep track of important details. It is optimized for use via a Command Line interface while still having the benefits of a Graphical User Interface (GUI). The user enters commands through the GUI which is built using JavaFX. It is written in Java and has over 10kLoC.
+Amigos is a desktop application to help tech-savvy university students manage their friendships by helping them to keep track of important details. It is optimized for use via a Command Line interface while still having the benefits of a Graphical User Interface (GUI). The user enters commands through the GUI which is built using JavaFX. It is written in Java and has over 20kLoC.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=aryansarswat&breakdown=true)
 
@@ -35,24 +35,23 @@ Given below are my contributions to the project.
     * Justification: We designed as such as we wanted to present all the necessary information in a concise yet informative fashion.
 
 5. **Enhancement to existing features**
-    * Abstraction of `FriendName`, `LogName`, `EventName` into a common `Name` class, this reduces the amount of repeated code (Pullrequests [\#105]())
+    * Abstraction of `FriendName`, `LogName`, `EventName` into a common `Name` class, this reduces the amount of repeated code (Pullrequests [\#104](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/104), [\#105](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/105))
 
 * **Contribution to team-based-tasks**
   * Maintained issue tracker for milestone v1.3b
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `showfriends`, `showfriend` and `showevents` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit` [\#74]()
+        * Added documentation for the features `edtifriend`, `showfriends`, `showfriend` and `showevents` [\#58](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/58)
     * Developer Guide:
         * Added User Stories, Glossary and Non-functional requirements
-        * Added Use cases for `showfriends`, `showfriend` and `showevents` [\#74]()
-        * Added implementation details for `editevent`, `showevents` and Tab management [\#143]()
+        * Added Use cases for `addevent`, `edtievent` `showfriends`, `showfriend` and `showevents` [\#44](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/44), [\$57](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/57)
+        * Added implementation details for `editevent`, `showevents` and Tab management [\#143](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/143)
     * Created a GUI Test documentation
-      * Contains all the various test performed manually on the GUI.
+      * Contains all the various test performed manually on the GUI [\#169](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/169).
 
 * **Community**:
-    * PR reviewed (with non-trivial review comments): [#166](), [#136]()
+    * PR reviewed (with non-trivial review comments): [#166](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/166), [#136](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/136)
 
 * **Tools**:
   * Wrote python script to generate upwards of 500 entries for names, events to stress test the application
