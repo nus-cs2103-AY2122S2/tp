@@ -5,14 +5,16 @@ import static seedu.ibook.commons.util.AppUtil.checkArgument;
 
 public class Quantity {
 
-    public static final String MESSAGE_CONSTRAINTS = "Quantities should only be of non-negative integers";
+    public static final Integer MAX_QUANTITY = 999999;
+    public static final String MESSAGE_CONSTRAINTS =
+        "Quantities should only be of non-negative integers and at most " + MAX_QUANTITY;
     public static final String SMALLER_THAN_CONSTRAINT =
         "Subtracted quantity must be smaller than or equal to the current quantity";
 
     /*
-     * Must be an integer.
+     * Must be a non-negative integer at most Quantity.MAX_QUANTITY.
      */
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "0*(?:0|[1-9]\\d{0,5})";
 
     public final Integer quantity;
 
@@ -68,6 +70,14 @@ public class Quantity {
     public Quantity subtract(Quantity other) {
         checkArgument(this.quantity >= other.quantity, SMALLER_THAN_CONSTRAINT);
         return new Quantity(quantity - other.getQuantity());
+    }
+
+    /**
+     * Checks if the quantity is in acceptable range.
+     * @return true if the quantity is in acceptable range.
+     */
+    public boolean inRange() {
+        return quantity >= 0 && quantity < Quantity.MAX_QUANTITY;
     }
 
     @Override

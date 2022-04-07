@@ -20,7 +20,7 @@ public class ProductBuilder {
     public static final String DEFAULT_CATEGORY = "Noodles";
     public static final String DEFAULT_DESCRIPTION = "Delicious noodles";
     public static final String DEFAULT_PRICE = "1.99";
-    public static final String DEFAULT_DISCOUNT_RATE = "25.0";
+    public static final String DEFAULT_DISCOUNT_RATE = "25";
     public static final String DEFAULT_DISCOUNT_START = "2";
 
     private Name name;

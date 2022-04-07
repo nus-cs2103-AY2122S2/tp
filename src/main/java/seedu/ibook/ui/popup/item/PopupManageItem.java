@@ -52,6 +52,12 @@ public class PopupManageItem extends Popup {
         quantity.setText(item.getQuantity().toString());
     }
 
+    @Override
+    public void hide() {
+        name.setText("");
+        super.hide();
+    }
+
     @FXML
     private void handleUpdateItem() {
         String commandText = UpdateItemCommand.COMMAND_WORD

@@ -24,7 +24,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
     };
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expiry dates should have format such as 03 Apr 2022, 3 Apr 2022 or 2022-04-03";
+            "Expiry dates should be valid and have format such as 03 Apr 2022, 3 Apr 2022 or 2022-04-03";
 
     public static final String DAYS_CONSTRAINTS =
             "Number of days should be non-negative.";
@@ -65,7 +65,7 @@ public class ExpiryDate implements Comparable<ExpiryDate> {
      * @return An expiryDate exactly {@code days} day from now.
      */
     public static ExpiryDate getDateFromNow(int days) {
-        checkArgument(days > 0, DAYS_CONSTRAINTS);
+        checkArgument(days >= 0, DAYS_CONSTRAINTS);
         LocalDate dateNow = LocalDate.now();
         return new ExpiryDate(dateNow.plusDays(days).toString());
     }

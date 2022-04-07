@@ -48,6 +48,12 @@ public class PopupAddItem extends Popup {
         quantity.setText("");
     }
 
+    @Override
+    public void hide() {
+        name.setText("");
+        super.hide();
+    }
+
     @FXML
     private void handleAddItem() {
         String commandText = AddItemCommand.COMMAND_WORD
