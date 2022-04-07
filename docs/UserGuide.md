@@ -456,6 +456,7 @@ Format: `addMembership INDEX m/TIER [d/Date]`
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
 * Adds a membership to the specified `INDEX`.
+* If the user already has an existing membership, the membership is overwritten.
 * The index refers to the user at the index number displayed.
 * The index **must be between 1 and 2147483647 inclusive**. e.g. 1, 2, 3, …​
 * The tier can be either Bronze,Silver or Gold. This is not case-sensitive.
