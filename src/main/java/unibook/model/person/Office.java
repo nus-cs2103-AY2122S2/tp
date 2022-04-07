@@ -8,8 +8,9 @@ import static unibook.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidOffice(String)}
  */
 public class Office {
-    public static final String MESSAGE_CONSTRAINTS = "Office address should be less than 20 characters and"
-            + " not be blank";
+
+    public static final String MESSAGE_CONSTRAINTS = "Office address can take any character up to 20 characters, "
+            + "and it should not be blank";
 
     /*
      * The first character of the office must not be a whitespace,
