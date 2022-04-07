@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SELLER;
 
 import org.junit.jupiter.api.Test;
-
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteSellerCommand;
 
 /**
@@ -23,11 +23,23 @@ public class DeleteSellerCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteSellerCommand(INDEX_FIRST_SELLER));
+        assertParseSuccess(parser, "2147483647", new DeleteSellerCommand(Index.fromOneBased(2147483647)));
+
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSellerCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "%", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteSellerCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1b", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteSellerCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteSellerCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteSellerCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "2147483648", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteSellerCommand.MESSAGE_USAGE));
     }
 }
