@@ -252,9 +252,13 @@
 .module-group-list-scroll-pane {
     -fx-background: #F5F5F5;
     -fx-border-width: 0;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 0 0 10 10;
+    -fx-background-radius: 0 0 10 10;
+}
+
+.module-group-list-scroll-pane .scroll-bar {
+    -fx-background-radius: 5 5 10 10;
 }
 
 .module-list-pane {
@@ -337,4 +341,8 @@
 
 .group-meeting-time-label-today {
     -fx-background-color: #e38381;
+}
+
+.no_elements_alert {
+    -fx-font-size: 20px;
 }

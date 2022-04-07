@@ -229,11 +229,11 @@ public class Module {
     public Group getGroupByName(String grpName) {
         requireNonNull(grpName);
         for (Group grp : groups) {
-            if ((grp.getGroupName().toLowerCase()).equals(grpName.toLowerCase())) {
+            if ((grp.getGroupName().equalsIgnoreCase(grpName.toLowerCase()))) {
                 return grp;
             }
         }
-        return null;
+        throw new GroupNotFoundException();
     }
 
     /**

@@ -219,6 +219,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getPhone().equals(phone)) {
+                System.out.println("get phone" + i);
                 return i;
             }
         }
@@ -248,6 +249,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).getEmail().equals(email)) {
+                System.out.println("get email" + i);
                 return i;
             }
         }

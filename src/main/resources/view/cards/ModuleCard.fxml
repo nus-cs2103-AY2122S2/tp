@@ -22,10 +22,18 @@
                 <Label fx:id="groupsTab" styleClass="module-groups-list-heading" text="Groups"/>
                 <Label fx:id="keyEventsTab" styleClass="module-key-events-list-heading" text="Key Events"/>
             </HBox>
-            <VBox fx:id="professors" styleClass="module-professor-list-pane" spacing="5" VBox.vgrow="ALWAYS"/>
-            <VBox fx:id="students" styleClass="module-student-list-pane" spacing="5" VBox.vgrow="ALWAYS"/>
-            <VBox fx:id="keyEvents" styleClass="module-key-events-list-pane" spacing="5" VBox.vgrow="ALWAYS"/>
-            <VBox fx:id="groups" styleClass="module-groups-list-pane" spacing="5" VBox.vgrow="ALWAYS"/>
+            <VBox fx:id="professors" styleClass="module-professor-list-pane" spacing="5" VBox.vgrow="ALWAYS">
+                <Label text="No Professors!" styleClass="no_elements_alert"/>
+            </VBox>
+            <VBox fx:id="students" styleClass="module-student-list-pane" spacing="5" VBox.vgrow="ALWAYS">
+                <Label text="No Students!" styleClass="no_elements_alert"/>
+            </VBox>
+            <VBox fx:id="keyEvents" styleClass="module-key-events-list-pane" spacing="5" VBox.vgrow="ALWAYS">
+                <Label text="No Key Events!" styleClass="no_elements_alert"/>
+            </VBox>
+            <VBox fx:id="groups" styleClass="module-groups-list-pane" spacing="5" VBox.vgrow="ALWAYS">
+                <Label text="No Groups!" styleClass="no_elements_alert"/>
+            </VBox>
         </VBox>
     </GridPane>
 </HBox>
