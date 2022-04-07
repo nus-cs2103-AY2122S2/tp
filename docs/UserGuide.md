@@ -25,7 +25,7 @@ UniBook is a **desktop app for students to manage their university contacts rela
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all entries.
+   * **`list`** : Lists all entries of a view.
 
    * **`add`**`o/student n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to UniBook.
 
@@ -37,11 +37,96 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Features
+
+
+# Main Function of UniBook
+To store and provide easy viewing and management of 3 types of entities relating to a student's studies in University.
+## Entities
+Each type of entity has a variety of fields that store some information on the entity. These fields have varying constraints that are enforced by UniBook.
+
+Constraint Types:
+* _Number of entries_ : The minimum - maximum number of entries of a field in one entity. 
+  * A number > 0 for minimum indicates the field is required to be filled.
+  * \* for maximum indicates that there can be an unbounded number of instances of this field in one entity.
+* _Acceptable Values_ : The acceptable characters for a field.
+* _Length Constraint_ : The minimum - maximum length of a field. 
+  * A number >0 for minimum means that if the field has been filled, then the value it was been filled with cannot be blank.
+  * \* for maximum means that the field is unbounded.
+* _Unique Constraint_ : If he field must be unique among all other entities of its type.
+  * :heavy_check_mark: - yes 
+  * :x: - no
+* _Additional Constraints_ : Any additional constraints on the field.
+### Person - Student or Professor 
+Represents a person in university. The person **must be a student or a professor.**
+
+|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints|Example|
+|-----|------|----|------|--------|-------|-----|---|
+| Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: | |_John Doe_ | :heavy_check_mark: |
+| Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits |:heavy_check_mark: | | _91234859_ |
+| Email | Person's email address| 0 - 1 | [Email Format](###email-address-format) |  4 - 320 characters | :heavy_check_mark:| | _tomjones@gmail.com_ |
+| Office | Professor's office location in university campus | 0 - 1 |Any character except whitespaces | 1 - 20 characters | :x: | Only Professor has this field| _COM2-02-57_ |
+| Tag |  A one word piece of information to attach to a person - similar to a hashtag on social media | 0 - * | Alphanumeric | 1 - 20 characters | :x: | Among the tags of a person, 1 specific tag can only appear once| _friend_ | 
+### Module
+Represents a university module.
+Can have both Professors and Students associated with it.
+* Association with Professor implies that the professor is involved in the teaching of the module.
+* Association with student implies student is taking the module.
+
+|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints|Example|
+|-----|------|----|------|--------|-------|-----|---|
+|Code| Module code| 1 |Any character except whitespaces | 1 - 10 characters| :heavy_check_mark: | A module code is case insensitive, e.g. _cs2103_ and _CS2103_ are considered the same. The case stored in UniBook is the case of the first module entered with the given module code. Future additions of the same module code with different case will not be allowed. | _CS2103_ | :heavy_check_mark:|
+|Name| Name of the module | 1 | Alphanumeric with whitespaces| 1 - 50 characters | :x: | | _Software Engineering_ | :heavy_check_mark: |
+|Key Event| A key event of the module that is occurring at a specific time and date. Consists of two subfields, key event type and key event datetime.| 0 - * | **Key event type**: <br>4 possible values: <br>1. `exam`<br>2. `quiz` <br>3.`assignment_release`<br>4. `assignment_due`<br> **Key event datetime**: [Date-Time Format](###datetime-format)| Not relevant as acceptable values covers this | :x: | Duplicate key events of exact same type and datetime cannot exist within the same module. <br> Case of characters for key event type does not matter. e.g. `exam ` and `EXAM`mean the same thing.| Key event type: _Exam_<br> Key event datetime: _2022-12-02 13:30_|
+
+### Group
+* Represents any kind of group related to a university module that a student is in - a study group, project group etc. 
+* Can contain multiple students, implying they are members of the group.
+* Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed.
+
+|Field|Description|Number of entries|Acceptable Values|Length Constraint| Unique Constraint | Additional Constraints |Example|
+|-----|------|----|------|--------|-------|-----|---|
+|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy-check-mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
+|Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](###datetime-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
+
+# Graphical User Interface
+## Main Function
+1. Complement the CLI by providing the User an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
+2. Provide basic ease-of-use features to enhance the user experience. 
+
+## Views 
+The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
+
+**Each view has its own variations of the basic command types.**
+### People View
+Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
+
+![PeopleView](images/peopleView.png)
+### Module View
+Displays all modules stored in UniBook, with all their individual details.
+
+![ModulesView](images/modulesView.png)
+### Groups View 
+Displays all the groups stored in UniBook, with all their individual details.
+
+![GroupsView](images/groupsView.png)
+
+## Navigation
+Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
+
+**However, some basic intuitive features are available for quick navigation**:
+  * On _people view_, click on a module code to enter the _module view_ displaying all the details of the module with the given module code.
+  * On _people view_, click on a group name to enter the _group view_ displaying all the details of the group with the given group name.
+
+## Other GUI features
+  * On _module view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
+  * On _group view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
+
+
+# Commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -67,55 +152,6 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
 </div>
 
-# Main Function of UniBook
-To store and provide easy viewing and management of 3 types of entities relating to a student'ss studies in University.
-## Entities
-### Person - Student or Professor 
-* Contains 3 basic details - name, phone and email. Phone and Email details can be left blank.
-* A Professor can contain one additional detail - office, the office in the University they are located in. This can also be left blank.
-### Module
-* Represents a University module, storing 4 basic details - module name, module code, groups of the module and key events of the module. Key Events represent events such as exams or assignment due dates, storing the associated date.
-* Can have both Professors and Students associated with it. 
-  * Association with Professor implies that the professor is involved in the teaching of the module.
-  * Association with student implies student is taking the module.
-### Group
-* Represents any kind of group related to a university module that a student is in - a study group, project grp etc. It stores meeting times for the group.
-* Can contain multiple students, implying they are members of the group.
-* Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed. 
-
-
-# Graphical User Interface
-## Main Functions of the GUI:
-1. Complement the CLI by providing the User an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
-2. Provide basic ease-of-use features to enhance the user experience. 
-
-## Views 
-The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
-
-**Each view has its own variations of the basic command types.**
-### People View
-Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
-
-![Ui](images/Ui.png)
-### Module View
-Displays all modules stored in UniBook, with all their individual details.
-
-![ModulesPage](images/modulesPage.png)
-### Groups View 
-Displays all the groups stored in UniBook, with all their individual details.
-
-![GroupsPage](images/groupsPage.png)
-
-## Navigation
-Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
-
-**However, some basic intuitive features are available for quick navigation**:
-  * On _people view_, click on a module code to enter the _module view_ displaying all the details of the module with the given module code.
-  * On _people view_, click on a group name to enter the _group view_ displaying all the details of the group with the given group name.
-
-## Other GUI features
-  * On _module view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
-  * On _group view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
 
 ## Viewing help : `help`
 
@@ -550,3 +586,26 @@ Action | Format
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | **Any View**:<br> `list` [(example)](#bulb-list-everything) <br> `list o/view v/VIEWTYPE` [(example)](#bulb-change-view)<br><br> **People View:** <br> `list type/PERSONTYPE` [(example)](#bulb-list-people-of-a-specific-type) <br> `list o/module m/MODULECODE [type/PERSONTYPE]` [(example)](#bulb-list-people-in-a-specific-module) <br> `list o/group m/MODULECODE g/GROUPNAME` [(example)](#bulb-list-people-in-a-specific-group-of-a-specific-module) <br><br> **Modules View:** <br> `list m/MODULECODE` [(example)](#bulb-list-a-module-with-a-specific-code) <br> `list [n/KEYWORD] [ke/KEYEVENT] [dt/YYYY-MM-DD]` [(example)](#bulb-list-a-module-with-a-name-containing-a-keyword)  <br> `list o/group g/GROUPNAME` [(example)](#bulb-list-groups-with-specific-group-name-module-page) <br><br> **Groups View:**<br> `list g/GROUPNAME [m/MODULECODE]` [(example)](#bulb-list-groups-with-specific-group-name-group-page) <br> `list mt/YYYY-MM-DD` [(example)](#bulb-list-groups-with-specific-meeting-date)
 **Help** | `help`
+
+# Appendix
+
+## Special Formats
+These are various fields that have special formats to be followed.
+### Email address format
+* Format: `local-part@domain`
+* The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
+* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+### DateTime Format
+* Date and time must be entered into UniBook in the following format : `YYYY-MM-DD HH-MM`, e.g. `2022-12-02 13:30`
+    * `YYYY` is the year, e.g. `2022`
+    * `MM` is the month, e.g. `12`
+    * `DD` is the day, e.g. `02`
+    * `HH` is the hour in 24H format, e.g. `13`
+    * `MM` is the minute, e.g. `30`
+* When displayed in UniBook, a date and time is shown in the format _Day Month Year, HH:MM:SS AM/PM_, e.g. _4 May 2022, 2:00:00PM_
+  * Time is in 12H format for convenience.
+
