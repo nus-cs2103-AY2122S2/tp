@@ -146,6 +146,7 @@ Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 * `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a buyer is initially added, they will default to having **no** Property. Use `add-ptb` to add a respective property.
+* `TAG` must be **alphanumeric** with no spaces
 
 Examples:
 * `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
