@@ -154,7 +154,7 @@ How the parsing works:
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-Breakdown of the Company and RoleManager packages:
+Breakdown of the Company, RoleManager and Reminder packages:
 
 ![Structure of the Company and RoleManager Classes](images/CompanyRoleManagerClassDiagram.png)
 
@@ -166,7 +166,7 @@ The `Model` component,
 * stores the company list data i.e., all `Company` objects (which are contained in a `UniqueCompanyList` object).
 * stores the currently selected `Company`, `Role` and `Reminder` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* the `Reminder` objects store data of a role in a company that has a reminder date that is within the reminder window.
+* the `Reminder` objects store data of a role in a company that has a reminder date which is within the reminder window.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage Component <a id="storage"></a>
@@ -324,10 +324,10 @@ The `favourite` feature allows users to highlight specific companies. Favourited
 
 ![UML diagram of the Favourite feature](images/FavouriteDiagram.png)
 
-Given below is an example usage scenario and how the find feature behaves at each step:
+Given below is an example usage scenario and how the favourite feature behaves at each step:
 1. The user executes the command `favourite 1` to favourite the first company within the displayed company list.
 2. Then the `FavouriteCompanyCommandParser#parse()` creates an instance of `FavouriteCompanyCommand` by passing the company index to be favourited.
-4. The `FavouriteCompanyCommand#execute()` method will update the `model` using the `Model#setCompany()` method, updated the model with the favourited company, replacing the previously unfavourited company.
+4. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
 5. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
 6. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
 
@@ -341,13 +341,13 @@ The following activity diagram summarises what happens when a user executes the 
 
 #### Design considerations <a id="design-considerations-favourite"></a>
 
-* Alternative 1 (current choice): Although both `favourite` and `editCompany` commands edits fields within a specified company, we decided to make them two separate commands.
+* Alternative 1 (current choice): Although both `favourite` and `editCompany` commands edit fields within a specified company, we decided to make them two separate commands.
     * Pros:
         * Users are able to favourite roles much more easily by just providing the index.
         * More intuitive to users to use `favourite` rather than `editCompany` to favourite a company.
     * Cons:
         * This feature was more challenging to implement as compared to simply integrating the functionality of `favourite` into `editCompany`.
-* Alternative 2: Making the favourite status field of a company another field that can be modified through `editCompany`.
+* Alternative 2: Allowing the favourite status field of a company to be modified through `editCompany`.
     * Pros:
         * Users can modify all fields within a company, including the favourite status, with the use of one single command. 
     * Cons:
@@ -664,11 +664,11 @@ Guarantees: every role in companies that have reminder dates within the reminder
 5. Test case: `find r/data`
     1. Expected: Both companies are displayed with only their respective `data engineer` roles shown.
 6. Test case: `find c/meta r/engineer`
-    1. Expected: Only the first company is displayed with both its roles.    
-7. Test case: `find r/hardware`    
+    1. Expected: Only the first company is displayed with both its roles.
+7. Test case: `find c/meta r/mobile`  
     1. Expected: No companies are displayed.
-8. Test case: `find c/meta r/mobile`  
-    1. Expected: No companies are displayed.
+8. Test case: `find r/mobile data software`
+    1. Expected: Both companies are displayed with all their roles.
 9. Other incorrect test cases to try: `find`, `find c/`, `find c/ r/`, `find test`, `find a/ b/`
     1. Expected: The response box shows an error message that it is an invalid command with additional information of the correct command format.
 
