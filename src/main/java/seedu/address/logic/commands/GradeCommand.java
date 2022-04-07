@@ -7,14 +7,18 @@ import java.util.Optional;
 import seedu.address.model.Model;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.Grade;
+import seedu.address.model.entity.EntityType;
 import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
 public class GradeCommand extends Command {
 
     public static final String COMMAND_WORD = "grade";
-    public static final String GRADED_STUDENTS = "Student %s(%s) has been successfully given the grade %d\n";
-    public static final String UNGRADED_STUDENTS = "Student %s(%s) is not enrolled to the module\n";
+    public static final String GRADED_STUDENTS = "Student %s (%s) has been successfully given the grade %d\n";
+    public static final String UNGRADED_STUDENTS = "Student %s (%s) is not enrolled to the module\n";
+    public static final String INVALID_INCREMENT = "Student %s (%s) has reached the maximum possible grade. "
+            + "Incrementing it would result in integer overflow\n";
+    public static final String RESULT_FORMAT = "%s\n%s\n%s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": grades an assessment for a group of students\n"
@@ -40,9 +44,11 @@ public class GradeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        String result = "";
+        String successResult = "";
+        String errResult = "";
+        String notEnrolResult = "";
 
-        TaModule module = model.getModule(assessment.getTaModule());
+        TaModule module = model.getModule(assessment.getModule());
         Assessment assessmentToEdit = new Assessment(assessment, module);
         List<Student> notInModule = new ArrayList<>();
         List<Student> toGrade = new ArrayList<>();
@@ -55,20 +61,23 @@ public class GradeCommand extends Command {
             }
         });
 
-        toGrade.stream().forEach(student -> assessmentToEdit.addAttempt(student, grade));
         for (Student s : toGrade) {
-            result += String.format(GRADED_STUDENTS,
+            try {
+                assessmentToEdit.addAttempt(s, grade);
+                successResult += String.format(GRADED_STUDENTS,
                     s.getName(), s.getStudentId(), assessmentToEdit.getAttemptOfStudent(s).get().value);
-        }
-        if (!result.isEmpty()) {
-            result += "\n";
+            } catch (ArithmeticException e) {
+                errResult += String.format(INVALID_INCREMENT, s.getName(), s.getStudentId());
+            }
         }
 
         for (Student s : notInModule) {
-            result += String.format(UNGRADED_STUDENTS,
+            notEnrolResult += String.format(UNGRADED_STUDENTS,
                     s.getName(), s.getStudentId());
         }
         model.setEntity(assessment, assessmentToEdit);
-        return new CommandResult(result);
+
+        String result = String.format(RESULT_FORMAT, successResult, errResult, notEnrolResult).trim();
+        return new CommandResult(result, EntityType.ASSESSMENT);
     }
 }

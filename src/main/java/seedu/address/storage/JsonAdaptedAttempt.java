@@ -19,19 +19,18 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedAttempt {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Attempt's %s field is missing!";
-    public static final String NONEXISTENT_STUDENT = "Student does not exist!";
     public static final String UNENROLLED_STUDENT = "Student is not enrolled in the module!";
 
-    private final JsonAdaptedStudent student;
+    private final String studentId;
     private final String grade;
 
     /**
      * Constructs a {@code JsonAdaptedAttempt} with the given attempt details.
      */
     @JsonCreator
-    public JsonAdaptedAttempt(@JsonProperty("student") JsonAdaptedStudent student,
+    public JsonAdaptedAttempt(@JsonProperty("studentId") String studentId,
                               @JsonProperty("grade") String grade) {
-        this.student = student;
+        this.studentId = studentId;
         this.grade = grade;
     }
 
@@ -39,26 +38,21 @@ class JsonAdaptedAttempt {
      * Converts a given {@code Map.Entry<Student, Grade>} into this class for Jackson use.
      */
     public JsonAdaptedAttempt(Map.Entry<Student, Grade> source) {
-        student = new JsonAdaptedStudent(source.getKey());
+        studentId = source.getKey().getStudentId().value;
         grade = String.valueOf(source.getValue());
     }
 
     /**
      * Converts this Jackson-friendly adapted attempt object into a {@code Entry<Student, Grade>} object.
-     * Checks that the student the grade is tied to already exists.
+     * Checks that the studentId the grade is tied to already exists.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted attempt.
      */
     public Map.Entry<Student, Grade> toModelType(TaModule module, List<Student> studentList)
             throws IllegalValueException {
-        if (student == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Student.class.getSimpleName()));
-        }
-        final Student modelStudent = student.toModelType();
-        if (!studentList.contains(modelStudent)) {
-            throw new IllegalValueException(NONEXISTENT_STUDENT);
-        }
+
+        final Student modelStudent = StorageUtil.getStudentByStudentId(studentList, studentId,
+                MISSING_FIELD_MESSAGE_FORMAT);
 
         if (!module.hasStudent(modelStudent)) {
             throw new IllegalValueException(UNENROLLED_STUDENT);

@@ -99,6 +99,14 @@ public class TaModule implements Entity {
     }
 
     /**
+     * Returns true if module has the same moduleCode and academicYear specified.
+     */
+    public boolean isSameModule(ModuleCode moduleCode, AcademicYear academicYear) {
+        return moduleCode.equals(getModuleCode())
+                && academicYear.equals(getAcademicYear());
+    }
+
+    /**
      * Returns a String representation of the module code and academic year.
      * These are the minimum fields required to uniquely represent a module class.
      */
@@ -139,7 +147,7 @@ public class TaModule implements Entity {
      * Returns true if both modules have the same identity and data fields.
      * This defines the strongest notion of equality between two modules.
      */
-    public boolean equals(TaModule otherTaModule) {
+    public boolean isExactSame(TaModule otherTaModule) {
         return otherTaModule.getModuleName().equals(getModuleName())
                 && otherTaModule.getAcademicYear().equals(getAcademicYear())
                 && otherTaModule.getModuleCode().equals(getModuleCode())

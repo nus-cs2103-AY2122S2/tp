@@ -21,12 +21,11 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedTaModule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "TaModule's %s field is missing!";
-    public static final String NONEXISTENT_STUDENT = "Student does not exist!";
 
     private final String moduleName;
     private final String moduleCode;
     private final String academicYear;
-    private final List<JsonAdaptedStudent> moduleStudents = new ArrayList<>();
+    private final List<String> moduleStudentIds = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedTaModule} with the given module details.
@@ -35,12 +34,12 @@ class JsonAdaptedTaModule {
     public JsonAdaptedTaModule(@JsonProperty("moduleName") String moduleName,
                                @JsonProperty("moduleCode") String moduleCode,
                                @JsonProperty("academicYear") String academicYear,
-                               @JsonProperty("moduleStudents") List<JsonAdaptedStudent> students) {
+                               @JsonProperty("moduleStudentIds") List<String> studentIds) {
         this.moduleName = moduleName;
         this.moduleCode = moduleCode;
         this.academicYear = academicYear;
-        if (!students.isEmpty()) {
-            this.moduleStudents.addAll(students);
+        if (!studentIds.isEmpty()) {
+            this.moduleStudentIds.addAll(studentIds);
         }
     }
 
@@ -51,8 +50,8 @@ class JsonAdaptedTaModule {
         moduleName = source.getModuleName().value;
         moduleCode = source.getModuleCode().value;
         academicYear = source.getAcademicYear().value;
-        moduleStudents.addAll(source.getStudents().stream()
-                .map(JsonAdaptedStudent::new)
+        moduleStudentIds.addAll(source.getStudents().stream()
+                .map(student -> student.getStudentId().value)
                 .collect(Collectors.toList()));
     }
 
@@ -72,29 +71,15 @@ class JsonAdaptedTaModule {
         }
         final ModuleName modelModuleName = new ModuleName(moduleName);
 
-        if (moduleCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ModuleCode.class.getSimpleName()));
-        }
-        if (!ModuleCode.isValidModuleCode(moduleCode)) {
-            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
-        }
-        final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
+        final ModuleCode modelModuleCode = StorageUtil.checkAndReturnModuleCode(moduleCode,
+                MISSING_FIELD_MESSAGE_FORMAT);
 
-        if (academicYear == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    AcademicYear.class.getSimpleName()));
-        }
-        if (!AcademicYear.isValidAcademicYear(academicYear)) {
-            throw new IllegalValueException(AcademicYear.MESSAGE_CONSTRAINTS);
-        }
-        final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
+        final AcademicYear modelAcademicYear = StorageUtil.checkAndReturnAcademicYear(academicYear,
+                MISSING_FIELD_MESSAGE_FORMAT);
+
         final UniqueStudentList modelStudents = new UniqueStudentList();
-        for (JsonAdaptedStudent s : moduleStudents) {
-            Student sObj = s.toModelType();
-            if (!studentList.contains(sObj)) {
-                throw new IllegalValueException(NONEXISTENT_STUDENT);
-            }
+        for (String s : moduleStudentIds) {
+            Student sObj = StorageUtil.getStudentByStudentId(studentList, s, MISSING_FIELD_MESSAGE_FORMAT);
             modelStudents.add(sObj);
         }
 

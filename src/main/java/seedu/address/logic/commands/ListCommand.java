@@ -244,7 +244,7 @@ public class ListCommand extends Command {
         ObservableList<TaModule> modules = model.getUnfilteredModuleList();
         TaModule module = modules.get(filterEntityIndex.get().getZeroBased());
         return (Assessment assessment) -> {
-            if (module.equals(assessment.getTaModule())) {
+            if (module.equals(assessment.getModule())) {
                 return true;
             }
             return false;

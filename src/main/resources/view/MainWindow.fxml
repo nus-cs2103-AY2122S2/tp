@@ -52,9 +52,9 @@
             <children>
                 <HBox fx:id="listButtons" styleClass="list-buttons">
                 <children>
+                    <Button fx:id="studentListButton" styleClass="list-button, active" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Students" onAction="#handleStudentListButtonPress"/>
                     <Button fx:id="moduleListButton" styleClass="list-button" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Modules" onAction="#handleModuleListButtonPress"/>
                     <Button fx:id="classGroupListButton" styleClass="list-button" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Classes" onAction="#handleClassGroupListButtonPress"/>
-                    <Button fx:id="studentListButton" styleClass="list-button, active" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Students" onAction="#handleStudentListButtonPress"/>
                     <Button fx:id="assessmentListButton" styleClass="list-button" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Assessments" onAction="#handleAssessmentListButtonPress"/>
                 </children>
                 </HBox>

@@ -48,13 +48,12 @@ public class LessonCard extends UiPart<Region> {
     }
 
     private String getAbsenteeText() {
-        StringBuilder sb = new StringBuilder();
         List<StudentAttendance> studentAttendanceList = lesson.getStudentAttendanceList();
         List<String> absenteeStrings = studentAttendanceList.stream()
                 .filter(filterAbsentees())
                 .map(this::getAbsenteeString)
                 .collect((Collectors.toList()));
-        return String.join(",", absenteeStrings);
+        return String.join("\n", absenteeStrings);
     }
 
     private String getAbsenteeString(StudentAttendance studentAttendance) {
@@ -65,8 +64,8 @@ public class LessonCard extends UiPart<Region> {
     private Predicate<StudentAttendance> filterAbsentees() {
         return (StudentAttendance studentAttendance) -> {
             Attendance attendance = studentAttendance.getAttendance();
-            boolean isAbsent = attendance.toString().equals("0");
-            return isAbsent;
+            boolean isPresent = attendance.value;
+            return !isPresent;
         };
     }
 

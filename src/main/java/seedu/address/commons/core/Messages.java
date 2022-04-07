@@ -16,5 +16,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_TA_MODULE_DISPLAYED_INDEX = "The module index provided is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_ERROR_MESSAGE_FORMAT = "%s\n\n%s";
 
 }

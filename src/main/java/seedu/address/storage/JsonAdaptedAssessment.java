@@ -24,10 +24,10 @@ import seedu.address.model.tamodule.TaModule;
 class JsonAdaptedAssessment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Assessment's %s field is missing!";
-    public static final String NONEXISTENT_MODULE = "Module does not exist!";
 
     private final String assessmentName;
-    private final JsonAdaptedTaModule module;
+    private final String moduleCode;
+    private final String academicYear;
     private final String simpleName;
     private final List<JsonAdaptedAttempt> attempts;
 
@@ -36,11 +36,13 @@ class JsonAdaptedAssessment {
      */
     @JsonCreator
     public JsonAdaptedAssessment(@JsonProperty("assessmentName") String assessmentName,
-                                 @JsonProperty("module") JsonAdaptedTaModule module,
+                                 @JsonProperty("moduleCode") String moduleCode,
+                                 @JsonProperty("academicYear") String academicYear,
                                  @JsonProperty("simpleName") String simpleName,
                                  @JsonProperty("attempts") List<JsonAdaptedAttempt> attempts) {
         this.assessmentName = assessmentName;
-        this.module = module;
+        this.moduleCode = moduleCode;
+        this.academicYear = academicYear;
         this.simpleName = simpleName;
         this.attempts = attempts;
     }
@@ -51,7 +53,8 @@ class JsonAdaptedAssessment {
     public JsonAdaptedAssessment(Assessment source) {
         assessmentName = source.getAssessmentName().value;
         simpleName = source.getSimpleName().value;
-        module = new JsonAdaptedTaModule(source.getTaModule());
+        moduleCode = source.getModule().getModuleCode().value;
+        academicYear = source.getModule().getAcademicYear().value;
         attempts = source.getAttempts().entrySet().stream()
                 .map(JsonAdaptedAttempt::new)
                 .collect(Collectors.toList());
@@ -73,14 +76,8 @@ class JsonAdaptedAssessment {
         }
         final AssessmentName modelAssessmentName = new AssessmentName(assessmentName);
 
-        if (module == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TaModule.class.getSimpleName()));
-        }
-        final TaModule modelModule = module.toModelType(studentList);
-        if (!taModuleList.contains(modelModule)) {
-            throw new IllegalValueException(NONEXISTENT_MODULE);
-        }
+        final TaModule modelModule = StorageUtil.getModuleByCodeAndAcadYear(taModuleList, moduleCode, academicYear,
+                MISSING_FIELD_MESSAGE_FORMAT);
 
         if (simpleName == null) {
             throw new IllegalValueException(

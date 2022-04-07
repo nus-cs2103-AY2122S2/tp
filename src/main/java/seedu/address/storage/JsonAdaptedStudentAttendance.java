@@ -16,17 +16,16 @@ import seedu.address.model.studentattendance.StudentAttendance;
 class JsonAdaptedStudentAttendance {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "StudentAttendance's %s field is missing!";
-    public static final String NONEXISTENT_STUDENT = "Student does not exist!";
-    private final JsonAdaptedStudent student;
+    private final String studentId;
     private final String isPresent;
 
     /**
      * Constructs a {@code JsonAdaptedStudentAttendance} with the given student attendance details.
      */
     @JsonCreator
-    public JsonAdaptedStudentAttendance(@JsonProperty("student") JsonAdaptedStudent student,
+    public JsonAdaptedStudentAttendance(@JsonProperty("studentId") String studentId,
                                         @JsonProperty("isPresent") String isPresent) {
-        this.student = student;
+        this.studentId = studentId;
         this.isPresent = isPresent;
     }
 
@@ -34,7 +33,7 @@ class JsonAdaptedStudentAttendance {
      * Converts a given {@code StudentAttendance} into this class for Jackson use.
      */
     public JsonAdaptedStudentAttendance(StudentAttendance source) {
-        student = new JsonAdaptedStudent(source.getStudent());
+        studentId = source.getStudent().getStudentId().value;
         isPresent = source.getAttendance().toString();
     }
 
@@ -45,14 +44,9 @@ class JsonAdaptedStudentAttendance {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student attendance.
      */
     public StudentAttendance toModelType(List<Student> studentList) throws IllegalValueException {
-        if (student == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Student.class.getSimpleName()));
-        }
-        final Student modelStudent = student.toModelType();
-        if (!studentList.contains(modelStudent)) {
-            throw new IllegalValueException(NONEXISTENT_STUDENT);
-        }
+
+        final Student modelStudent = StorageUtil.getStudentByStudentId(studentList, studentId,
+                MISSING_FIELD_MESSAGE_FORMAT);
 
         if (!Attendance.isValidAttendance(isPresent)) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);

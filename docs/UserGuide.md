@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAssist is a **desktop app for managing students and their participation in lessons, optimized for use via a Command Line Interface** (CLI). If you are a TA who prefers CLI to GUI while having a GUI to view the student data, TAssist is the app for you.
+TAssist is a **desktop app for managing students and their participation in lessons, optimized for typing usage**. If you are someone who prefers **Command Line Interface** (CLI) to **Graphical User Interface** (GUI) while having a GUI to view the student data, TAssist is the app for you.
 
 * Table of Contents
 {:toc}
@@ -28,15 +28,15 @@ TAssist is a **desktop app for managing students and their participation in less
 
    * **`list student`**: Lists all students.
 
-   * **`add student`**`id/E0123456 n/John Doe e/johnd@u.nus.edu`: Adds a student named `John Doe` to TAssist.
+   * **`add student`** `id/E0123456 n/John Doe e/johnd@u.nus.edu`: Adds a student named `John Doe` to TAssist.
 
-   * **`delete student`**`3`: Deletes the 3rd student shown in the listing of the entity.
+   * **`delete student`** `3`: Deletes the 3rd student shown in the listing of the entity.
 
 1. Refer to the 5rr below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features & Walkthrough
+## Using this Guide
 
 <div markdown="block" class="alert alert-info">
 
@@ -66,11 +66,167 @@ TAssist is a **desktop app for managing students and their participation in less
 </div>
 
 
+## Features & Walkthrough
+
+### User Interface (UI)
+
+TAssist's user interface features a command input box, a command results box, and a button bar. Use the buttons to switch between lists of your modules, class groups, students, and assessments.
+
+![Ui](images/Ui.png)
+
+From the class group list, click the "Check Attendance" button to open a popup window. This popup  displays a list of lessons 1-13 and any students who were **absent** for a lesson.
+
+![Ui](images/Ui_Check_Attendance.jpg)
+
+From the assessment list, click the "See Attempts" button to open a popup window. This popup displays a list of student attempts for that assessment including their name and assigned grade.
+
+![Ui](images/Ui_See_Attempts.jpg)
+
 ### Managing Modules
 
 #### Add a module: `add module`
 
 Start using TAssist by adding modules you're teaching.
+### Command Parameters
+
+<table>
+<tbody>
+    <tr>
+        <th>Parameter</th>
+        <th>Prefix</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ACADEMIC_YEAR</td>
+        <td><code>a/</code></td>
+        <td>It is represented by the year (last 2 digits) and a semester. Semester value ranges from <code>S1</code> to <code>S8</code>. The table under the <code>Add a module</code> feature shows the representation of each value.
+        </td>
+    </tr>
+    <tr>
+        <td>ASSESSMENT_INDEX</td>
+        <td><code>a/</code></td>
+        <td>It represents the index of the assessments shown when <code>list assessment</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>ASSESSMENT_NAME</td>
+        <td><code>n/</code></td>
+        <td>It represents the name of the assessments e.g. <code>Lab 1</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>CLASS_GROUP_ID</td>
+        <td><code>id/</code></td>
+        <td>It represents the ID of the class group, similar to those used by NUSMods, e.g. <code>T13</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>CLASS_GROUP_INDEX</td>
+        <td><code>c/</code></td>
+        <td>It represents the index of the class groups shown when <code>list class</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>CLASS_GROUP_TYPE</td>
+        <td><code>t/</code></td>
+        <td>It represents the type of the class groups e.g. <code>Tutorial</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>EMAIL</td>
+        <td><code>e/</code></td>
+        <td>It represents the email of the students.
+        </td>
+    </tr>
+    <tr>
+        <td>INDEX</td>
+        <td>No prefix</td>
+        <td>It represents the index of the students/modules/class groups/assessments shown when <code>list student</code>/<code>list module</code>/<code>list class</code>/<code>list assessment</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>KEYWORD</td>
+        <td>No prefix</td>
+        <td>It represents the numerical grade given to a student's assignment attempt.
+        </td>
+    </tr>
+    <tr>
+        <td>GRADE</td>
+        <td><code>g/</code></td>
+        <td>It represents the numerical grade given to a student's assignment attempt.
+        </td>
+    </tr>
+    <tr>
+        <td>MODULE_CODE</td>
+        <td><code>c/</code></td>
+        <td>It represents the code of the module, similar to those used by NUSMods, e.g. <code>CS2103T</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>MODULE_INDEX</td>
+        <td><code>m/</code></td>
+        <td>It represents the index of the modules shown when <code>list module</code> is run.
+        </td>
+    </tr>
+    <tr>
+        <td>MODULE_NAME</td>
+        <td><code>n/</code></td>
+        <td>It represents the name of the module, , similar to those used by NUSMods, e.g. <code>Software Engineering Project</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>NAME</td>
+        <td><code>n/</code></td>
+        <td>It represents the name of the student.
+        </td>
+    </tr>
+    <tr>
+        <td>SIMPLE_NAME</td>
+        <td><code>sn/</code></td>
+        <td>It represents the short form of the assessment. It is used to grade assessment, so that you do not need to type the full assessment name. If no simple name is provided, the assessment name will be used (with the spaces removed).
+        </td>
+    </tr>
+    <tr>
+        <td>STUDENT_ID</td>
+        <td><code>id/</code></td>
+        <td>It represents the ID of the student, e.g. <code>E012345</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>TELEGRAM_ID</td>
+        <td><code>t/</code></td>
+        <td>It represents the Telegram handle of the student.
+        </td>
+    </tr>
+    <tr>
+        <td>WEEK_INDEX</td>
+        <td><code>w/</code></td>
+        <td>It represents the week index of the lesson, similar to the ones used by NUS Academic Calendar, e.g. <code>1</code> to <code>13</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>all|STUDENT_INDEXES|STUDENT_IDS</td>
+        <td><code>s/</code></td>
+        <td>
+            <ul>
+                <li><code>all</code> refers to all students.</li>
+                <li><code>STUDENT_INDEXES</code> represents the index of the students shown when <code>list student</code> is run.</li>
+                <li><code>STUDENT_IDS</code> represents the student ID of the student, e.g. <code>E012345</code>.</li>
+            </ul>
+        </td>
+    </tr>
+</tbody>
+</table>
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Features
+### Adding entries
+
+#### Adding a module: `add module`
+
+Adds a module to TAssist.
 
 Format: `add module n/MODULE_NAME c/MODULE_CODE a/ACADEMIC_YEAR`
 
@@ -264,7 +420,7 @@ Examples:
 
 Delete the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
 
-Format: `delete student INDEX`
+Deletes the specified module from TAssist as well as its associated class group(s) and assessment(s).
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -272,7 +428,7 @@ Format: `delete student INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list student` followed by `delete student 2` deletes the 2nd student and their assessment(s)' attempt(s) in TAssist.
+* `list module` followed by `delete module 2` deletes the 2nd module in the whole module list and its associated class group(s) and assessment(s) in TAssist.
 
 
 #### Enrolling student: `enrol`

@@ -40,7 +40,7 @@ class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this class for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        weekId = source.getWeekId().value;
+        weekId = String.valueOf(source.getWeekId().value);
         studentAttendanceList.addAll(source.getStudentAttendanceList().stream()
                 .map(JsonAdaptedStudentAttendance::new)
                 .collect(Collectors.toList()));

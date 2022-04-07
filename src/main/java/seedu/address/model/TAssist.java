@@ -114,6 +114,14 @@ public class TAssist implements ReadOnlyTAssist {
     }
 
     /**
+     * Returns true if a student with the same StudentId exists in the TAssist.
+     */
+    public boolean hasStudent(StudentId studentId) {
+        requireNonNull(studentId);
+        return students.contains(studentId);
+    }
+
+    /**
      * Adds a student to the TAssist.
      * The student must not already exist in the TAssist.
      */
@@ -137,7 +145,11 @@ public class TAssist implements ReadOnlyTAssist {
      * {@code key} must exist in the TAssist.
      */
     public void removeStudent(Student key) {
+        removeStudentFromClassGroups(key);
+        removeStudentFromAssessments(key);
+        removeStudentFromModules(key);
         students.remove(key);
+
     }
 
     //// module-level operations
@@ -177,6 +189,10 @@ public class TAssist implements ReadOnlyTAssist {
         List<ClassGroup> lst = classGroups.findClassesOfModule(key);
         for (ClassGroup classGroup : lst) {
             this.removeClassGroup(classGroup);
+        }
+        List<Assessment> assessmentList = assessments.findAssessmentsOfModule(key);
+        for (Assessment assessment : assessmentList) {
+            this.removeAssessment(assessment);
         }
         modules.remove(key);
     }
@@ -263,11 +279,32 @@ public class TAssist implements ReadOnlyTAssist {
      * @param student The student to remove.
      */
     public void removeStudentFromAssessments(Student student) {
-        List<Assessment> assessmentToModify = new ArrayList<>(assessments.asUnmodifiableObservableList());
-        assessmentToModify.stream().forEach(assessment -> assessment.removeStudent(student));
-        assessments.setAssessments(assessmentToModify);
+        List<Assessment> assessmentsToModify = new ArrayList<>(assessments.asUnmodifiableObservableList());
+        assessmentsToModify.stream().forEach(assessment -> assessment.removeStudent(student));
+        assessments.setAssessments(assessmentsToModify);
     }
 
+    /**
+     * Removes the student from all the modules.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromModules(Student student) {
+        List<TaModule> modulesToModify = new ArrayList<>(modules.asUnmodifiableObservableList());
+        modulesToModify.stream().filter(module -> module.hasStudent(student))
+                .forEach(module -> module.removeStudent(student));
+        modules.setModules(modulesToModify);
+    }
+
+    /**
+     * Removes the student from all the class groups.
+     * @param student The student to remove.
+     */
+    public void removeStudentFromClassGroups(Student student) {
+        List<ClassGroup> classGroupsToModify = new ArrayList<>(classGroups.asUnmodifiableObservableList());
+        classGroupsToModify.stream().filter(classGroup -> classGroup.hasStudent(student))
+                .forEach(classGroup -> classGroup.removeStudent(student));
+        classGroups.setClassGroups(classGroupsToModify);
+    }
 
     //// util methods
 

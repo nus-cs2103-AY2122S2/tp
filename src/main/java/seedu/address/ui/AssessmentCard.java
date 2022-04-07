@@ -43,7 +43,7 @@ public class AssessmentCard extends UiPart<Region> {
 
         id.setText(displayedIndex + "");
         name.setText(assessment.getAssessmentName().value);
-        module.setText(assessment.getTaModule().getModuleCode().value);
+        module.setText(assessment.getModule().getModuleCode().value);
 
         attemptsWindow = new AssessmentAttemptsWindow(assessment.getAttempts());
     }
