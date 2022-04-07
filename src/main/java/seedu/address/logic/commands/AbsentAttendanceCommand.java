@@ -25,8 +25,9 @@ public class AbsentAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an attendance of a pet as absent "
             + "by the index number used in the displayed pet list. \n"
-            + "Includes the date, pick up time and drop off time (if any). \n"
+            + "Includes the date. \n"
             + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_DATE + "DATE_OF_ATTENDANCE in dd-MM-yyyy "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "15-03-2022 ";
 

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbsentAttendanceCommand;
 import seedu.address.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
@@ -23,28 +25,28 @@ public class AbsentAttendanceCommandParser implements Parser<AbsentAttendanceCom
     public AbsentAttendanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+            ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AbsentAttendanceCommand.MESSAGE_USAGE), pe);
+                AbsentAttendanceCommand.MESSAGE_USAGE));
         }
 
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         AbsentAttendanceDescriptor absentAttendanceDescriptor =
-                new AbsentAttendanceDescriptor();
-
-        if (argMultimap.getValue(PREFIX_DATE).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AbsentAttendanceCommand.MESSAGE_USAGE));
-        }
+            new AbsentAttendanceDescriptor();
 
         absentAttendanceDescriptor.setAttendanceDate(
-                ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get()));
+            ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get()));
 
         return new AbsentAttendanceCommand(index, absentAttendanceDescriptor);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
