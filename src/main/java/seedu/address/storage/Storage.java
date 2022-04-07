@@ -29,6 +29,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, TempAddre
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    //@@author LapisRaider
     @Override
     Path getTempAddressBookFilepath();
 

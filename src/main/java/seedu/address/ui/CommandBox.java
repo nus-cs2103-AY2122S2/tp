@@ -23,6 +23,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    //@@author LapisRaider
     private final CommandExecutor commandExecutor;
     private final ArrayList<String> historyBuffer;
     private final ArrayList<String> activeBuffer;
@@ -43,6 +44,7 @@ public class CommandBox extends UiPart<Region> {
         this.historyBuffer = new ArrayList<>();
         this.activeBuffer = new ArrayList<>(Arrays.asList(""));
         this.activeBufferIndex = 0;
+        //@@author
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -71,6 +73,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
+        //@@author LapisRaider
         // Replace the index of edited & executed command in the active buffer with actual history.
         if (activeBufferIndex < historyBuffer.size()) {
             activeBuffer.set(activeBufferIndex, historyBuffer.get(activeBufferIndex));
@@ -84,7 +87,7 @@ public class CommandBox extends UiPart<Region> {
             activeBuffer.add("");
         }
         activeBufferIndex = activeBuffer.size() - 1;
-
+        //@@author
         try {
             commandExecutor.execute(commandText);
         } catch (CommandException | ParseException e) {
@@ -92,6 +95,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author LapisRaider
     private void setPreviousCommand() {
         activeBuffer.set(activeBufferIndex, commandTextField.getText());
         activeBufferIndex = Math.max(activeBufferIndex - 1, 0);
@@ -105,6 +109,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(activeBuffer.get(activeBufferIndex));
         commandTextField.end();
     }
+    //@@author
 
     private void autocomplete(String input) {
         String trimmed = input.trim();

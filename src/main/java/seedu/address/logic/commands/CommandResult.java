@@ -17,6 +17,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    //@@author LapisRaider
     /** The application should undo the effects of the prev command. */
     private final boolean undoPrevCommand;
 
@@ -29,6 +30,7 @@ public class CommandResult {
         this.exit = exit;
         this.undoPrevCommand = false;
     }
+    //@@author
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -60,9 +62,11 @@ public class CommandResult {
         return exit;
     }
 
+    //@@author LapisRaider
     public boolean isUndoPrevCommand() {
         return undoPrevCommand;
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

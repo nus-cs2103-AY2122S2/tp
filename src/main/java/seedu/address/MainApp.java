@@ -58,10 +58,11 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new SerializableAddressBookStorage(userPrefs.getAddressBookFilePath());
+        //@@author LapisRaider
         SerializableTempAddressBookStorage tempAddressBookStorage = new SerializableTempAddressBookStorage(
                 userPrefs.getTempAddressBookFileDirectoryPath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, tempAddressBookStorage);
-
+        //@@author
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
@@ -182,11 +183,12 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-
+        //@@author LapisRaider
         try {
             storage.deleteAllTempFilesData();
         } catch (Exception e) {
             logger.severe("Unable to delete temporary files." + StringUtil.getDetails(e));
         }
+        //@@author
     }
 }

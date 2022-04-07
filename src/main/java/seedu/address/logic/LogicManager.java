@@ -26,9 +26,10 @@ import seedu.address.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    //@@author LapisRaider
     public static final String TEMP_FILE_OPS_ERROR_MESSAGE = "Could not save temp data to file: ";
     public static final String TEMP_FILE_READ_ERROR_MESSAGE = "Could not read temp file data, might be corrupted: ";
-
+    //@@author
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -50,7 +51,9 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult = null;
         String[] commands = userInput.split("\\|", -1); // -1 to stop split from ignoring trailing whitespace
+        //@@author LapisRaider
         ReadOnlyAddressBook addressBookBeforeCommand = new AddressBook(model.getAddressBook());
+        //@@author
         boolean isChain = commands.length > 1;
 
         for (String commandText : commands) {
@@ -86,6 +89,7 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    //@@author LapisRaider
     /**
      * Handles managing reading and writing address book temporary files.
      *
@@ -144,6 +148,7 @@ public class LogicManager implements Logic {
 
         return true;
     }
+    //@@author
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {

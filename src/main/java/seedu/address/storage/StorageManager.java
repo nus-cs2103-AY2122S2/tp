@@ -78,6 +78,7 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    //@@author LapisRaider
     // ================ AddressBook Temp data storage methods ==============================
     @Override
     public Path getTempAddressBookFilepath() {
