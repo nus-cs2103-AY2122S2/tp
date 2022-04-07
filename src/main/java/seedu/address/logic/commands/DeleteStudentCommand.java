@@ -49,7 +49,7 @@ public class DeleteStudentCommand extends Command {
         if (shouldClearInfoPanel) {
             return new CommandResult(commandResultMessage, InfoPanelTypes.EMPTY);
         }
-        return new CommandResult(commandResultMessage);
+        return new CommandResult(commandResultMessage, InfoPanelTypes.REFRESH);
     }
 
     @Override

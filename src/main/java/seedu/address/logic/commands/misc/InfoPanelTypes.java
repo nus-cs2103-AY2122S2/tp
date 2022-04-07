@@ -7,7 +7,8 @@ public enum InfoPanelTypes {
     STUDENT("Student Info Panel"),
     LESSON("Lesson Info Panel"),
     EMPTY("Clear Info Panel"),
-    NONE("No change to Info Panel");
+    NONE("No change to Info Panel"),
+    REFRESH("Refresh Info Panel");
 
     private final String str;
     InfoPanelTypes(String string) {
