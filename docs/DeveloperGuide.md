@@ -62,7 +62,6 @@ while the **_Students_** tab contains a
 [`StudentListPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/listpanel/StudentListPanel.java) which lists out `Student`
 entries.
 
-[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
 To switch between the tabs, the methods `MainWindow#toggleLessonTab()` and `MainWindow#toggleStudentTab()` can be used 
 to switch between the **_Lesson_** tab and **_Student_** tab respectively. Switching the tabs by using user commands is 
 done by the method `MainWindow#toggleTab()`.
@@ -75,7 +74,6 @@ component can either show the details of a `Lesson` entry or `Student` entry. A
 `Lesson` entry, while a [`StudentInfoPanel`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/infopanel/StudentInfoPanel.java) is used
 to show the details of a `Student` entry.
 
-[//]: # (COMMENT OUT LATER: might not need to reference methods here, might do it in the implementation section)
 The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateInfoPanelWithStudent()` can be used to
 populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
 method `MainWindow#handleInfoPanelUpdate()`.
@@ -117,8 +115,6 @@ TODO
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Viewing a Lesson or Student's details
-
-[//]: # (maybe add Lesson and Student's definition in the glossary)
 
 Viewing details of a `Lesson` or `Student` on the `InfoPanel` component in the `UI` is done through the `lesson` or 
 `student` command.
