@@ -87,15 +87,12 @@ Follow this tutorial to get started with using MedBook:
        <figcaption class="figure-caption">Figure 1: Password Prompt Display</figcaption>
    </figure>
 
-   <div markdown="block" class="d-flex alert alert-info">
-   <div class="mr-2">
-        **:information_source: Notes about password:**<br>
-   </div>
-   <div>
-       This password should only be known to you as it will be used to encrypt your MedBook data.
-       See <a href="#faq">FAQ</a> on how to reset your password.
-   </div>
-   </div>
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about password:**<br>
+
+This password should only be known to you as it will be used to encrypt your MedBook data.
+See [FAQ](#faq) on how to reset your password.
+</div>
 
 4. Once you have set up a password, you will be prompted to enter the same password every time you login.
 
@@ -154,24 +151,21 @@ Adds a patient to MedBook.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
-<div class="d-flex alert alert-info">
-  <div class="mr-2">
-    <span class="badge badge-info">INFO</span>
-  </div>
-  <div markdown="block">
-    Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:**<br>
 
-    1. NRIC consists alphanumeric characters only.
-    2. NRIC starts with either S, T, F, G, M character.
-    3. NRIC consists 7 digits after the first character.
-    4. NRIC ends with any character.
+Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
-    Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
+1. NRIC consists alphanumeric characters only.
+2. NRIC starts with either S, T, F, G, M character.
+3. NRIC consists 7 digits after the first character.
+4. NRIC ends with any character.
 
-    See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
+Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
 
-    NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
-  </div>
+See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
+
+NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
 </div>
 
 Examples:
@@ -259,7 +253,9 @@ Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]..
 The NRIC specified here cannot be edited in the future.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tips:**
+<div markdown="block" class="alert alert-primary">
+**:bulb: Tips:**
+
 1. A contact can have any number of tags (including 0).
 2. If you typed the wrong NRIC, `delete INDEX` the contact and `add` the contact again with the correct patient NRIC.
 </div>
@@ -437,22 +433,22 @@ Examples:
 <h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
 
 **Option 1:**
-By default, MedBook will always read `medbook.json` located in `HOME_DIRECTORY of MedBook.jar/data/`. Just move your data to `HOME_DIRECTORY of MedBook.jar/data/` in your new device if you wish to import them.
+By default, MedBook will always read `medbook.json` located in `[HOME_DIRECTORY of MedBook.jar]/data/`. Just move your data to `HOME_DIRECTORY of MedBook.jar/data/` in your new device if you wish to import them.
 
 **Option 2 (with encryption):**
-By default, MedBook will always encrypt your data to `password.enc` in `HOME_DIRECTORY of MedBook.jar/data/` for security reason. You can move `password.enc` to `HOME_DIRECTORY of MedBook.jar/data/` in your new device and MedBook will ask for your password upon launching.
+By default, MedBook will always encrypt your data to `password.enc` in `[HOME_DIRECTORY of MedBook.jar]/data/` for security reason. You can move `password.enc` to `HOME_DIRECTORY of MedBook.jar/data/` in your new device and MedBook will ask for your password upon launching.
 </div>
 </div>
 <div class="card mb-3">
 <div markdown="1" class="card-body pt-0 pb-0">
 <h6 markdown="1" class="card-title">What happens if I forget my password?</h6>
-Due to security reason, there is no way to reset to password. To continue using the application you need to delete the encrypted data file (located at `HOME_DIRECTORY of MedBook.jar/data/password.enc`) or move it to another location. MedBook will start with a fresh data for you to start over. See the next FAQ for restoring data.
+Due to security reason, there is no way to reset to password. To continue using the application you need to delete the encrypted data file (located at `[HOME_DIRECTORY of MedBook.jar]/data/password.enc`) or move it to another location. MedBook will start with a fresh data for you to start over. See the next FAQ for restoring data.
 </div>
 </div>
 <div class="card mb-3">
 <div markdown="1" class="card-body pt-0 pb-0">
 <h6 markdown="1" class="card-title">What happens if I accidentally remove `password.enc`?</h6>
-Unfortunately, the encrypted data will be lost along with your password. However, you can restore your data if you have `medbook.json` with you. Make sure you place them in `HOME_DIRECTORY of MedBook.jar/data/` before launching the app. When you start MedBook again, you will be asked to set up a new password.
+Unfortunately, the encrypted data will be lost along with your password. However, you can restore your data if you have `medbook.json` with you. Make sure you place them in `[HOME_DIRECTORY of MedBook.jar]/data/` before launching the app. When you start MedBook again, you will be asked to set up a new password.
 
 We highly discourage users to tamper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
 </div>
@@ -465,6 +461,8 @@ We highly discourage users from modifying `medbook.json` directly as any invalid
 If you understood what you are dealing with, you may proceed with cautions. We recommended you to back up a copy of `medbook.json` in case you accidentally corrupt the file at any point of time.
 </div>
 </div>
+
+## Command Summary
 
 | Action                        | Format Example                                                                                                                                                                                |
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
