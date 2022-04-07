@@ -25,7 +25,7 @@ import seedu.address.model.team.Team;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-    private final String separator = "\\s?,\\s?";
+    private static final String separator = "\\s?,\\s?";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
