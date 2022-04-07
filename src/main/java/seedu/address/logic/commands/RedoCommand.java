@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -18,6 +21,9 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_REDO_SUCCESS = "Last Command restored!";
     public static final String MESSAGE_REDO_FAILED = "No more commands left to redo!";
 
+    private static final Logger logger = LogsCenter.getLogger(RedoCommand.class);
+
+
     public RedoCommand() {}
 
     @Override
@@ -25,10 +31,12 @@ public class RedoCommand extends Command {
         requireNonNull(model);
 
         if (!model.canRedoAddressBook()) {
+            logger.info("Redo command attempted and failed.");
             throw new CommandException(MESSAGE_REDO_FAILED);
         }
 
         model.redoAddressBook();
+        logger.info("HackNet successfully redid last command.");
         return new CommandResult(MESSAGE_REDO_SUCCESS);
     }
 
