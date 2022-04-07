@@ -143,7 +143,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean areEventFriendsValid(Event toAdd) {
-        return toAdd.areFriendNamesValid(addressBook);
+        return addressBook.areFriendNamesValid(toAdd);
     }
 
     @Override
