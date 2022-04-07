@@ -81,7 +81,26 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getPhone().equals(getPhone())
+                || otherPerson.getEmail().equals(getEmail())
+                || otherPerson.getGithubUsername().equals(getGithubUsername()));
+    }
+
+    /**
+     * Returns value that are duplicate for person
+     * @param otherPerson other person to compare
+     * @return values that are duplicated
+     */
+    public String getDuplicateValue(Person otherPerson) {
+        if (otherPerson.getPhone().equals(getPhone())) {
+            return "Phone";
+        } else if (otherPerson.getEmail().equals(getEmail())) {
+            return "Email";
+        } else if (otherPerson.getGithubUsername().equals(getGithubUsername())) {
+            return "Github UserName";
+        } else {
+            return "Error no same duplicate values";
+        }
     }
 
     /**

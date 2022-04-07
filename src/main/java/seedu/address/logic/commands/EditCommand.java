@@ -21,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.GithubUsername;
 import seedu.address.model.person.Name;
@@ -188,9 +189,14 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, isResetMode);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        Model modelToCheckAgainst = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        boolean isSuccessfullyRemoved = modelToCheckAgainst.safeDeletePerson(personToEdit);
+        if (!isSuccessfullyRemoved) {
+            throw new CommandException("Error: Unable to edit; please contact the developers");
+        }
+        if (modelToCheckAgainst.hasPerson(editedPerson)) {
+            String duplicatedField = modelToCheckAgainst.getDuplicateField(editedPerson);
+            throw new CommandException("Error: Operation would result in persons with same " + duplicatedField + ".");
         }
 
         model.setPerson(personToEdit, editedPerson);
