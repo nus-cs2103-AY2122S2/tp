@@ -301,6 +301,9 @@ Format: `sort [n/] [desc] [p/] [desc] [e/] [desc] [a/] [desc] [r/] [desc] [b/] [
 * Clients with null values in the fields to be sorted will have lesser priority. 
   * For example `sort n/ b/`, 'Alice' will be at the top of the list. However, if there are multiple clients with the same name 'Alice',
   the client whose birthday field is empty, will be sorted to the bottom of the other clients named 'Alice'.
+* After sorting, the application will show the full client list, regardless if it was filtered
+  beforehand or not. This is to prevent confusion where users filter first, then sort and realized some data is 'missing'
+  as they had unintentionally filtered it out.
 
 </div>
 
