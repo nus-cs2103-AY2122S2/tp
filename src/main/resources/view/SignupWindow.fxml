@@ -45,7 +45,7 @@
                         <Insets top="5" right="10" bottom="5" left="10" />
                     </padding>
                     <PasswordField fx:id="userRepeatPassword" onAction="#handleSignup"
-                                   promptText="Enter password here" onKeyTyped="#handleOnKeyPressed"/>
+                                   promptText="Enter same password here" onKeyTyped="#handleOnKeyPressed"/>
                 </StackPane>
 
                 <VBox fx:id="responseDisplayPane" alignment="CENTER" maxWidth="425">
@@ -56,7 +56,7 @@
                         <padding>
                             <Insets top="5" bottom="5" />
                         </padding>
-                        <Label fx:id="responseDisplay" textAlignment="CENTER"/>
+                        <Label fx:id="responseDisplay" textAlignment="CENTER" wrapText="true"/>
                     </HBox>
                     <HBox alignment="CENTER_LEFT">
                         <ImageView fx:id="conditionImage1" fitHeight="16" fitWidth="16">

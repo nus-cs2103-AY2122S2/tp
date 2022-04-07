@@ -18,6 +18,7 @@ import seedu.address.model.patient.Patient;
 
 /**
  * Lists all persons in the address book to the user.
+ * @@author clement0010
  */
 public class ViewContactCommand extends Command {
     public static final String COMMAND_WORD = "view";
@@ -27,7 +28,6 @@ public class ViewContactCommand extends Command {
             + ": Lists all contacts whose names contain any of "
             + "the specified owner NRIC and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + PREFIX_TYPE + "contact "
             + PREFIX_NRIC + "NRIC \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "contact "

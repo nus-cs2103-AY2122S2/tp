@@ -17,11 +17,11 @@ title: User Guide
 - [Features](#features)
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
-  - [Listing all Patients: `view`](#listing-all-patients-view)
+  - [Viewing all Patients: `view`](#viewing-all-patients-view)
   - [Editing Patient Information: `edit`](#editing-patient-information-edit)
   - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
-  - [Finding any Entry: `find`](#finding-any-entry-find)  
+  - [Finding any Entry: `find`](#finding-any-entry-find)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
   - [Editing Contact Information: `edit`](#editing-contact-information-edit)
@@ -87,7 +87,7 @@ Follow this tutorial to get started with using MedBook:
        <figcaption class="figure-caption">Figure 1: Password Prompt Display</figcaption>
    </figure>
 
-   <div class="d-flex alert alert-info">
+   <div markdown="block" class="d-flex alert alert-info">
    <div class="mr-2">
         **:information_source: Notes about password:**<br>
    </div>
@@ -154,22 +154,31 @@ Adds a patient to MedBook.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
-   <div class="d-flex alert alert-info">
-   <div class="mr-2">
-       <span class="badge badge-info">INFO</span>
-   </div>
-   <div>
-       Patient's NRIC must be a valid Singapore-issued NRIC. See <a href="https://en.wikipedia.org/wiki/National_Registration_Identity_Card" target="_blank">here</a> for more information about the valid format.
+<div class="d-flex alert alert-info">
+  <div class="mr-2">
+    <span class="badge badge-info">INFO</span>
+  </div>
+  <div markdown="block">
+    Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
-       NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
-   </div>
-   </div>
+    1. NRIC consists alphanumeric characters only.
+    2. NRIC starts with either S, T, F, G, M character.
+    3. NRIC consists 7 digits after the first character.
+    4. NRIC ends with any character.
+
+    Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
+
+    See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
+
+    NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
+  </div>
+</div>
 
 Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add i/S1234568L n/Jane Doe p/98763488 e/janed@example.com a/311, Clementi Ave 2, #02-25 tg/diabetic tg/hypertension`
 
-### Listing all Patients: `view`
+### Viewing all Patients: `view`
 
 Shows a list of patients in MedBook.
 
@@ -181,19 +190,19 @@ Edits an existing patient information entry in MedBook when a list of patient's 
 This is with the exception of the NRIC field, which cannot be modified after creation of Patient Information.
 At least one field must be filled for edit command to be valid.
 
-Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
-* Edits the patient at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the patient at the specified INDEX. The index refers to the index number shown in the displayed patient list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 * `view` followed by `edit 1 n/John` updates name of first patient information entry displayed on the screen.
 
-<div class="notecard warning">
-    **Caution**: Editing a contact will overwrite the old data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a patient will overwrite the old data.
 </div>
 
 ### View Summary of a Patient: `view i/NRIC`
@@ -220,8 +229,8 @@ Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
 * `view` followed by `delete 1` deletes the first patient displayed on the screen.
 
-<div class="notecard warning">
-    **Caution**: Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
 </div>
 
 ### Finding any Entry: `find`
@@ -244,8 +253,20 @@ Adds a patient's emergency contact to MedBook.
 
 Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
+* The NRIC specified here is the NRIC of the patient who has this emergency contact.
+
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
+The NRIC specified here cannot be edited in the future.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips:**
+1. A contact can have any number of tags (including 0).
+2. If you typed the wrong NRIC, `delete INDEX` the contact and `add` the contact again with the correct patient NRIC.
+</div>
+
 Examples:
-* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother`
+* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother` adds an emergency contact to patient with NRIC `S1234567L`.
+
 
 
 ### Viewing Contact Information: `view t/contact`
@@ -255,7 +276,7 @@ Views a patient’s emergency contacts from MedBook.
 Format: `view t/contact i/NRIC`
 
 Examples:
-* `/view t/contact i/S1234567L`
+* `view t/contact i/S1234567L`
 
 ### Editing Contact Information: `edit`
 
@@ -265,16 +286,18 @@ At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
-* Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed patient list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 * `view t/contact` followed by `edit 1 n/John` updates name of first contact information entry displayed on the screen.
 
-Caution*: Editing a contact will overwrite the old data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a contact will overwrite the old data.
+</div>
 
 ### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to MedBook.
@@ -431,7 +454,7 @@ Due to security reason, there is no way to reset to password. To continue using 
 <h6 markdown="1" class="card-title">What happens if I accidentally remove `password.enc`?</h6>
 Unfortunately, the encrypted data will be lost along with your password. However, you can restore your data if you have `medbook.json` with you. Make sure you place them in `HOME_DIRECTORY of MedBook.jar/data/` before launching the app. When you start MedBook again, you will be asked to set up a new password.
 
-We highly discourage users to temper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
+We highly discourage users to tamper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
 </div>
 </div>
 <div class="card mb-3">
@@ -447,14 +470,14 @@ If you understood what you are dealing with, you may proceed with cautions. We r
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | View Help                     | `help`                                                                                                                                                                                        |
 | Add a Patient                 | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
-| List all Patients             | `view`                                                                                                                                                                                        |
+| View all Patients             | `view`                                                                                                                                                                                        |
 | Edit a Patient                | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
 | View Summary of a Patient     | `view i/NRIC`                                                                                                                                                                                 |
 | Delete any Entry              | `delete INDEX`                                                                                                                                                                                |
 | Finding any Entry             | `find KEYWORD`                                                                                                                                                                                |
 | Add Contact Information       | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                     |
 | View Contact Information      | `view t/contact i/NRIC`                                                                                                                                                                       |
-| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                                                                                                                  |
+| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`                                                                                                                                  |
 | Add Medical Information       | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | View Medical Information      | `view t/medical [i/NRIC]`                                                                                                                                                                     |
 | Edit Medical Information      | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`           |
