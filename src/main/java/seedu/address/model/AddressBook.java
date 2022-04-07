@@ -137,6 +137,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.add(toAdd);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+        alignFriendNames(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
+    //=========== Person-Event Consistency Methods ================================================
     private FriendName getExactName(FriendName name) {
         requireNonNull(name);
 
@@ -162,23 +183,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Returns true if all friend names in the given event correspond to actual Friends in the AddressBook.
+     *
+     * @param event Event to check friend names for validity.
+     * @return true if all friend names correspond to actual Friends in the AddressBook.
      */
-    public void removeEvent(Event key) {
-        events.remove(key);
-    }
-
-    /**
-     * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedEvent} must not be the same as another existing event in the address book.
-     */
-    public void setEvent(Event target, Event editedEvent) {
-        requireNonNull(editedEvent);
-        alignFriendNames(editedEvent);
-
-        events.setEvent(target, editedEvent);
+    public boolean areFriendNamesValid(Event event) {
+        for (FriendName name : event.getFriendNames()) {
+            if (!persons.containsPersonWithName(name)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //=========== Utility Methods ================================================
