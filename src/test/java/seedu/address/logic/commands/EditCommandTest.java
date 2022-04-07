@@ -194,7 +194,7 @@ public class EditCommandTest {
 
     //test batch edit
     @Test
-    public void test_batchEditAllIndicesValidInDefaultMode_success() {
+    public void execute_batchEditAllIndicesValidInDefaultMode_success() {
         //making the edit command to test
         List<Index> targetIndices = new ArrayList<>();
         targetIndices.add(INDEX_FIRST_PERSON);
@@ -225,6 +225,107 @@ public class EditCommandTest {
     }
 
     //test batch edit when some indices are invalid
-    //test batch edit to ignore fields other than team and skills
+    @Test
+    public void execute_batchEditSomeInvalidIndices_success() {
+
+        //make edit command
+        List<Index> targetIndices = new ArrayList<>();
+        targetIndices.add(INDEX_FIRST_PERSON);
+        targetIndices.add(INDEX_SECOND_PERSON);
+        Index veryBigInvalidIndex = Index.fromOneBased(1000);
+        targetIndices.add(veryBigInvalidIndex);
+        assertTrue(veryBigInvalidIndex.getZeroBased() > model.getDisplayPersonList().size());
+        EditPersonDescriptor editPersonDescriptorToAddTeam =
+            new EditPersonDescriptorBuilder().withTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM).build();
+        EditCommand editCommand = new EditCommand(targetIndices, editPersonDescriptorToAddTeam, false);
+
+        //make expected model
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Person firstIndexPerson = model.getDisplayPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondIndexPerson = model.getDisplayPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        PersonBuilder firstIndexEditPersonBuilder =
+            new PersonBuilder(firstIndexPerson).addTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM);
+        PersonBuilder secondIndexEditPersonBuilder =
+            new PersonBuilder(secondIndexPerson).addTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM);
+        expectedModel.setPerson(firstIndexPerson, firstIndexEditPersonBuilder.build());
+        expectedModel.setPerson(secondIndexPerson, secondIndexEditPersonBuilder.build());
+        expectedModel.commitAddressBook();
+
+        //make expected msg
+        List<Name> editedNames = new ArrayList<>();
+        editedNames.add(firstIndexPerson.getName());
+        editedNames.add(secondIndexPerson.getName());
+        String expectedMsg = String.format(
+            Messages.MESSAGE_INVALID_INDEX_FOR_SOME_PERSON + "\n" + MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames);
+
+        assertCommandSuccess(editCommand, model, expectedMsg, expectedModel);
+    }
+
+    //test batch edit to silently ignore fields other than team and skills, without throwing an error
+    @Test
+    public void execute_batchEditShouldEnableOnlyTeamsAndSkillsChange_success() {
+        //making edit command
+        List<Index> targetIndices = new ArrayList<>();
+        targetIndices.add(INDEX_FIRST_PERSON);
+        targetIndices.add(INDEX_SECOND_PERSON);
+        //changing names while adding teams
+        EditPersonDescriptor editPersonDescriptorToAddTeam =
+            new EditPersonDescriptorBuilder().withTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM)
+                .withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(targetIndices, editPersonDescriptorToAddTeam, false);
+
+        //make expected model
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Person firstIndexPerson = model.getDisplayPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondIndexPerson = model.getDisplayPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        PersonBuilder firstIndexEditPersonBuilder =
+            new PersonBuilder(firstIndexPerson).addTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM);
+        PersonBuilder secondIndexEditPersonBuilder =
+            new PersonBuilder(secondIndexPerson).addTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM);
+        expectedModel.setPerson(firstIndexPerson, firstIndexEditPersonBuilder.build());
+        expectedModel.setPerson(secondIndexPerson, secondIndexEditPersonBuilder.build());
+        expectedModel.commitAddressBook();
+
+        //make expected msg
+        List<Name> editedNames = new ArrayList<>();
+        editedNames.add(firstIndexPerson.getName());
+        editedNames.add(secondIndexPerson.getName());
+        String expectedMsg = String.format(MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames);
+
+        assertCommandSuccess(editCommand, model, expectedMsg, expectedModel);
+    }
+
     //test reset mode
+    @Test
+    public void execute_resetMode_success() {
+        //making batch edit command
+        List<Index> targetIndices = new ArrayList<>();
+        targetIndices.add(INDEX_FIRST_PERSON);
+        targetIndices.add(INDEX_SECOND_PERSON);
+        EditPersonDescriptor editPersonDescriptorToAddTeam =
+            new EditPersonDescriptorBuilder().withTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM)
+                .withName(VALID_NAME_BOB).build();
+        //reset mode is true
+        EditCommand editCommand = new EditCommand(targetIndices, editPersonDescriptorToAddTeam, true);
+
+        //make expected model
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Person firstIndexPerson = model.getDisplayPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondIndexPerson = model.getDisplayPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        PersonBuilder firstIndexEditPersonBuilder =
+            new PersonBuilder(firstIndexPerson).withTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM);
+        PersonBuilder secondIndexEditPersonBuilder =
+            new PersonBuilder(secondIndexPerson).withTeams(VALID_TEAM_GOOGLE, VALID_TEAM_HACKING_TEAM);
+        expectedModel.setPerson(firstIndexPerson, firstIndexEditPersonBuilder.build());
+        expectedModel.setPerson(secondIndexPerson, secondIndexEditPersonBuilder.build());
+        expectedModel.commitAddressBook();
+
+        //make expected msg
+        List<Name> editedNames = new ArrayList<>();
+        editedNames.add(firstIndexPerson.getName());
+        editedNames.add(secondIndexPerson.getName());
+        String expectedMsg = String.format(MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames);
+
+        assertCommandSuccess(editCommand, model, expectedMsg, expectedModel);
+    }
 }
