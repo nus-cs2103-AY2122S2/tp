@@ -307,7 +307,7 @@ public class EditCommand extends Command {
 
         if (this.editModuleDescriptor != null && this.editPersonDescriptor != null) {
             if (!isGroupListShowing && !isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_OR_GROUP_VIEW);
             }
             EditGroupDescriptor editGroupDescriptor = this.editModuleDescriptor.getGroups().get();
             editGroupDescriptor.setModel(model);
@@ -350,7 +350,7 @@ public class EditCommand extends Command {
         // Edit person
         if (this.editModuleDescriptor == null) {
             if (!isPersonListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_PERSON_VIEW);
             }
 
 
@@ -507,7 +507,7 @@ public class EditCommand extends Command {
             // Edit module
 
             if (!isModuleListShowing) {
-                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_PAGE);
+                throw new CommandException(Messages.MESSAGE_CHANGE_TO_MODULE_VIEW);
             }
 
             if (index.getZeroBased() >= lastShownList.size()) {

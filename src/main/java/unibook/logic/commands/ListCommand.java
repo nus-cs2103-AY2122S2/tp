@@ -410,24 +410,24 @@ public class ListCommand extends Command {
         if (this.viewType == ListView.MODULES) {
             //Switch view to modules
             if (isModuleListShowing) {
-                return new CommandResult(Messages.MESSAGE_ALREADY_ON_MODULE_PAGE);
+                return new CommandResult(Messages.MESSAGE_ALREADY_ON_MODULE_VIEW);
             } else {
                 modelManager.getUi().setModuleListPanel();
-                return new CommandResult(Messages.MESSAGE_CHANGED_TO_MODULE_PAGE);
+                return new CommandResult(Messages.MESSAGE_CHANGED_TO_MODULE_VIEW);
             }
         } else if (this.viewType == ListView.PEOPLE) {
             //Switch view to people
             if (isPersonListShowing) {
-                return new CommandResult(Messages.MESSAGE_ALREADY_ON_PEOPLE_PAGE);
+                return new CommandResult(Messages.MESSAGE_ALREADY_ON_PEOPLE_VIEW);
             } else {
                 modelManager.getUi().setPersonListPanel();
-                return new CommandResult(Messages.MESSAGE_CHANGED_TO_PERSON_PAGE);
+                return new CommandResult(Messages.MESSAGE_CHANGED_TO_PERSON_VIEW);
             }
         } else {
             //Switch view to groups
             assert this.viewType == ListView.GROUPS;
             if (isGroupListShowing) {
-                return new CommandResult(Messages.MESSAGE_ALREADY_ON_GROUP_PAGE);
+                return new CommandResult(Messages.MESSAGE_ALREADY_ON_GROUP_VIEW);
             } else {
                 ObservableList<Module> modules = modelManager.getUniBook()
                         .getModuleList();
@@ -437,7 +437,7 @@ public class ListCommand extends Command {
                     groups.addAll(moduleGroups);
                 }
                 modelManager.getUi().setGroupListPanel(groups);
-                return new CommandResult(Messages.MESSAGE_CHANGED_TO_GROUP_PAGE);
+                return new CommandResult(Messages.MESSAGE_CHANGED_TO_GROUP_VIEW);
             }
         }
     }

@@ -20,15 +20,15 @@ public class Messages {
     public static final String MESSAGE_INVALID_STU_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_INVALID_KEY_EVENT_DISPLAYED_INDEX = "The key event index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_CHANGE_TO_MODULE_PAGE = "Change page to Module Page!\n"
-            + "Command to change to module page: list o/view v/modules";
-    public static final String MESSAGE_CHANGE_TO_PERSON_PAGE = "Change page to Person Page!\n"
-            + "Command to change to person page: list o/view v/people";
-    public static final String MESSAGE_CHANGE_TO_GROUP_PAGE = "Change page to Group Page!\n"
-            + "Command to change to group page: list o/view v/groups";
-    public static final String MESSAGE_CHANGE_TO_MODULE_OR_GROUP_PAGE = "Change page to Module Page or Group Page!\n"
-            + "Command to change to module page: list o/view v/modules\n"
-            + "Command to change to group page: list o/view v/groups";
+    public static final String MESSAGE_CHANGE_TO_MODULE_VIEW = "Change to Modules View!\n"
+            + "Command to change to modules view: list o/view v/modules";
+    public static final String MESSAGE_CHANGE_TO_PERSON_VIEW = "Change to Person View!\n"
+            + "Command to change to people view: list o/view v/people";
+    public static final String MESSAGE_CHANGE_TO_GROUP_VIEW = "Change to Groups View!\n"
+            + "Command to change to groups view: list o/view v/groups";
+    public static final String MESSAGE_CHANGE_TO_MODULE_OR_GROUP_VIEW = "Change to Modules View or Groups View!\n"
+            + "Command to change to modules view: list o/view v/modules\n"
+            + "Command to change to groups view: list o/view v/groups";
     public static final String MESSAGE_MODULE_CODE_NOT_EXIST = "Module Code does not exist: %1$s";
     public static final String MESSAGE_GROUP_NOT_EXIST = "Group does not exist: %1$s";
     public static final String MESSAGE_INVALID_MODULE_CODE = "Invalid Module Code! Module Codes must contain 1-10 "
@@ -39,12 +39,12 @@ public class Messages {
 
     //ListCommand
     public static final String MESSAGE_FIELD_EMPTY = "%s field cannot be empty!";
-    public static final String MESSAGE_CHANGED_TO_MODULE_PAGE = "Changed page to Module Page!";
-    public static final String MESSAGE_CHANGED_TO_PERSON_PAGE = "Changed page to Person Page!";
-    public static final String MESSAGE_CHANGED_TO_GROUP_PAGE = "Changed page to Group Page!";
-    public static final String MESSAGE_ALREADY_ON_PEOPLE_PAGE = "You are already on the People view!";
-    public static final String MESSAGE_ALREADY_ON_MODULE_PAGE = "You are already on the Modules view!";
-    public static final String MESSAGE_ALREADY_ON_GROUP_PAGE = "You are already on the Groups view!";
+    public static final String MESSAGE_CHANGED_TO_MODULE_VIEW = "Changed to Modules view!";
+    public static final String MESSAGE_CHANGED_TO_PERSON_VIEW = "Changed to People view!";
+    public static final String MESSAGE_CHANGED_TO_GROUP_VIEW = "Changed to Group view!";
+    public static final String MESSAGE_ALREADY_ON_PEOPLE_VIEW = "You are already on the People view!";
+    public static final String MESSAGE_ALREADY_ON_MODULE_VIEW = "You are already on the Modules view!";
+    public static final String MESSAGE_ALREADY_ON_GROUP_VIEW = "You are already on the Groups view!";
     public static final String MESSAGE_LISTED_PEOPLE_WITH_MODULE = "Listed all people in module %s!";
     public static final String MESSAGE_LISTED_MODULE = "Listed module %s!";
     public static final String MESSAGE_LISTED_ALL_STUDENTS = "Listed all students!";
@@ -73,7 +73,7 @@ public class Messages {
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_DATE = "Displayed modules with key event(s) on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_DATE = "No modules have key events on %s!";
     public static final String MESSAGE_NO_MODULES_WITH_NAME = "No modules have names containing %s!";
-    public static final String MESSAGE_NO_GROUP_FIELD_REQUIRED = "You are on group page! No need to specify o/group!";
+    public static final String MESSAGE_NO_GROUP_FIELD_REQUIRED = "You are on groups view! No need to specify o/group!";
     public static final String MESSAGE_INVALID_KEY_EVENT = "Invalid Key Event: %s. Acceptable arguments are "
         + "EXAM, ASSIGNMENT_DUE, ASSIGNMENT_RELEASE or QUIZ.";
     public static final String MESSAGE_DISPLAYED_MODULES_WITH_EVENT_AND_DATE =
