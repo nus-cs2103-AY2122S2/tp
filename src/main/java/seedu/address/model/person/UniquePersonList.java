@@ -114,8 +114,8 @@ public class UniquePersonList implements Iterable<Person> {
      * Assumes that the given friend name matches the name of a person in the list.
      *
      * @param name Name to match with.
-     * @throws PersonNotFoundException If no person in the list is found matching the given name.
      * @return Exact name used by a person in the list that matches the given name.
+     * @throws PersonNotFoundException If no person in the list is found matching the given name.
      */
     public FriendName getExactName(FriendName name) {
         requireNonNull(name);

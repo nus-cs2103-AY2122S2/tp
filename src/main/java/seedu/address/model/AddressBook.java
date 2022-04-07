@@ -136,7 +136,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(toAdd);
         assert(areFriendNamesValid(toAdd));
         alignFriendNames(toAdd);
-        
+
         events.add(toAdd);
     }
 
