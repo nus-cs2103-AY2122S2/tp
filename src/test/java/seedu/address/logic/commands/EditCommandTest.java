@@ -221,8 +221,7 @@ public class EditCommandTest {
         editedNames.add(secondIndexPerson.getName());
         String expectedMsg = String.format(MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames);
 
-        assertCommandSuccess(editCommand, model, String.format(MESSAGE_EDIT_MULTIPLE_PERSON_SUCCESS, editedNames),
-            expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMsg, expectedModel);
     }
 
     //test batch edit when some indices are invalid
