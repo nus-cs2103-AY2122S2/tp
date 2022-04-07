@@ -18,17 +18,16 @@ Given below are my contributions to the project.
   * Highlights: Utilises user's native OS' File Explorer dialog boxes for a seamless experience.
   * Credits: [JonathanHoshi](https://github.com/JonathanHoshi) for assistance in implementing the features.
     <br><br>
+  
 * **Project management**:
   * Necessary general code enhancements
     * Morphing the product into Trackermon from AB-3.([\#64](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/64), [\#67](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/67))
-    * Managed issues relating to Import and Export. ([\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199), [\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156))
-    * Updated user/developer docs that are not specific to a feature.
-      * Updated Quick Start, FAQ, Table of Contents to enhance reader experience. ([\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197), [\#98](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197))
   * Managed issues relating to `import` and `export`. ([\#156](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/156), [\#199](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/199))
   * Performed smoke testing on Windows, Linux, MacOS to ensure usability of features across different OS.
   * Performed vetting on documentation.
   * Managed Trackermon's v1.3.1 [release](https://github.com/AY2122S2-CS2103T-T09-3/tp/releases).
   <br><br>
+
 * **Documentation**:
   * User Guide:
     * Added documentation for features `import` and `export`, and FAQ answers. [\#197](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/197/files)
@@ -40,6 +39,7 @@ Given below are my contributions to the project.
     * Updated documentation and UML diagrams for Storage. [\#89](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/89)
     * Added implementation details of `import` and `export` feature. ([\#155](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/155), [\#160](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/160))
       <br><br>
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): ([\#63](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/63#issuecomment-1062925638), [\#182](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/182#discussion_r837057450))
   * Reported [bugs and suggestions](https://github.com/arcornior/ped/issues) for other teams in the class.
