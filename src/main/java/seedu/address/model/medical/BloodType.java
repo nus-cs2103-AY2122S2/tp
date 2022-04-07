@@ -27,12 +27,12 @@ public class BloodType {
     /**
      * Constructs an {@code BloodType}.
      *
-     * @param address A valid address.
+     * @param bloodType A valid blood type.
      */
-    public BloodType(String address) {
-        requireNonNull(address);
-        checkArgument(isValidBloodType(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public BloodType(String bloodType) {
+        requireNonNull(bloodType);
+        checkArgument(isValidBloodType(bloodType), MESSAGE_CONSTRAINTS);
+        value = bloodType;
     }
 
     /**
