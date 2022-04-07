@@ -11,7 +11,7 @@ import seedu.trackbeau.commons.util.StringUtil;
  * Tests that a {@code booking's}'s {@code Data} matches any of the keywords given.
  */
 public class BookingSearchContainsKeywordsPredicate implements Predicate<Booking> {
-    public static final int FIND_ATTRIBUTE_COUNT = 2;
+    public static final int FIND_ATTRIBUTE_COUNT = 3;
     private final ArrayList<List<String>> keywordsList;
     /**
      * Constructs a {@code Predicate}.
@@ -26,12 +26,12 @@ public class BookingSearchContainsKeywordsPredicate implements Predicate<Booking
 
     @Override
     public boolean test(Booking booking) {
-        String[] find = {"getCustomerName", "getServiceName", "getBookingDateTime"};
+        String[] find = {"getCustomerName", "getServiceName", "getBookingDateTime", "getFeedback"};
         String searchString = "";
 
         try {
             List<String> keywords = keywordsList.get(0);
-            for (int i = 0; i < FIND_ATTRIBUTE_COUNT; i++) {
+            for (int i = 0; i < 2; i++) {
                 searchString = booking.getClass().getDeclaredMethod(find[i]).invoke(booking).toString();
 
                 if (keywords == null) {
@@ -45,16 +45,18 @@ public class BookingSearchContainsKeywordsPredicate implements Predicate<Booking
                 }
             }
 
-            keywords = keywordsList.get(1);
-            searchString = booking.getClass().getDeclaredMethod(find[2]).invoke(booking).toString();
+            for (int i = 1; i < FIND_ATTRIBUTE_COUNT; i++) {
+                keywords = keywordsList.get(i);
+                searchString = booking.getClass().getDeclaredMethod(find[i + 1]).invoke(booking).toString();
 
-            if (keywords == null) {
-                return false;
-            }
+                if (keywords == null) {
+                    continue;
+                }
 
-            for (String keyword : keywords) {
-                if (StringUtil.containsWordIgnoreCase(searchString, keyword)) {
-                    return true;
+                for (String keyword : keywords) {
+                    if (StringUtil.containsWordIgnoreCase(searchString, keyword)) {
+                        return true;
+                    }
                 }
             }
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {

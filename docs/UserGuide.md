@@ -409,6 +409,8 @@ Format: `editb INDEX [c/CUSTOMER_INDEX] [sev/SERVICE_INDEX] [st/BOOKING_DATE_TIM
 <ul>
     <li>At least one of the optional fields must be provided.</li>
     <li>Existing values will be updated to the input values.</li>
+    <li>Feedback can only be given if the current date is after booking date.</li>
+    <li>Editing booking date to be after current date will remove any feedback.</li>
 </ul>
 
 </div>

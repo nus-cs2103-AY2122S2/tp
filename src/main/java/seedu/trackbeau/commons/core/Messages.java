@@ -14,4 +14,5 @@ public class Messages {
     public static final String MESSAGE_SERVICES_LISTED_OVERVIEW = "%1$d service(s) listed!";
     public static final String MESSAGE_BOOKING_LISTED_OVERVIEW = "%1$d booking(s) listed!";
     public static final String MESSAGE_DUPLICATED_INDEX = "Duplicate index found!";
+    public static final String MESSAGE_INVALID_FEEDBACK_TIME = "A feedback cannot be made before the appointment!";
 }
