@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 
@@ -120,7 +119,7 @@ public class UniqueSellerList implements Iterable<Seller> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueClientList // instanceof handles nulls
+                || (other instanceof UniqueSellerList // instanceof handles nulls
                 && internalList.equals(((UniqueSellerList) other).internalList));
     }
 

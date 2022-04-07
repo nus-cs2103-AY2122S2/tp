@@ -28,24 +28,24 @@ import seedu.address.model.property.PriceRange;
 public class TypicalBuyers {
 
     // Buyers who are yet to indicate any properties to buy
-    public static final Buyer YUQI = new BuyerBuilder().withName("Alice Pauline")
+    public static final Buyer ALICE = new BuyerBuilder().withName("Alice Pauline")
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
             .withTags("friends").build();
     public static final Buyer BENSON = new BuyerBuilder().withName("Benson Meier")
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
             .withTags("owesMoney", "friends").build();
-    public static final Buyer JUNHENG = new BuyerBuilder().withName("Carl Kurz")
+    public static final Buyer CARL = new BuyerBuilder().withName("Carl Kurz")
             .withPhone("95352563").withProperty(
             new PropertyToBuyBuilder().withHouse(
                 new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("Bishan").build())
                     .withPriceRange(new PriceRange(0, 20)).build()).build();
-    public static final Buyer JUNHONG = new BuyerBuilder().withName("Daniel Meier")
+    public static final Buyer DANIEL = new BuyerBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").build();
-    public static final Buyer JANALD = new BuyerBuilder().withName("Elle Meyer")
+    public static final Buyer ELLE = new BuyerBuilder().withName("Elle Meyer")
             .withPhone("9482224").build();
-    public static final Buyer DARA = new BuyerBuilder().withName("Fiona Kunz")
+    public static final Buyer FIONA = new BuyerBuilder().withName("Fiona Kunz")
             .withPhone("9482427").build();
-    public static final Buyer RICHARD = new BuyerBuilder().withName("George Best")
+    public static final Buyer GEORGE = new BuyerBuilder().withName("George Best")
             .withPhone("9482442").build();
 
     // Manually added
@@ -82,6 +82,6 @@ public class TypicalBuyers {
     }
 
     public static List<Buyer> getTypicalBuyers() {
-        return new ArrayList<>(Arrays.asList(JUNHENG, JUNHONG, BENSON, JANALD, DARA, RICHARD, YUQI));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
