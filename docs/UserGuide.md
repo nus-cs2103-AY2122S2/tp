@@ -211,7 +211,7 @@ Adds a new event, which can be optionally linked to any number of existing frien
 * There **cannot** be any duplicate events with the same name and date.
 * The `DATE_TIME` must be given in the following format: `DD-MM-YYYY hhmm`
   * Individual fields are parsed intelligently where possible.
-  * e.g. A day-of-month that is out of range for the given month will be automatically corrected to the last valid day-of-month.
+  * e.g. A day-of-month that is out of range for the given month will be automatically corrected to the last valid day-of-month. (`31-06-2020 1200` will be automatically adjusted to `30-06-2020 1200`)
 * All given `FRIEND_NAME` values must match the `NAME` of an existing friend in Amigos.
 
 **Examples**:
