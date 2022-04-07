@@ -17,14 +17,18 @@ Given below are my contributions to the project.
 * **New Feature**: Added parsing for the mark and unmark commands.
   * What it does: Allows the TA to execute the mark and unmark commands by parsing the input.
   * Justification: This feature improves the product significantly because a TA needs to be able to take student attendances and the app should provide a convenient way to parse and check the TA's input.
-  * Highlights: This enhancement required the creation of new methods to accomodate for the parsing of the `s/` prefix (refer below).
+  * Highlights: This enhancement required the creation of new methods to accommodate for the parsing of the `s/` prefix (refer below).
 
 * **New Feature**: Added parsing for the `s/` prefix.
   * What it does: Allows the TA to specify the students he/she would like to run the commands on.
   * Justification: This feature improves the product significantly because a TA needs to be able to specify which students he/she would like to make changes to and the app should provide a convenient way to parse and check the TA's input.
   * Highlights: This enhancement affects v1.3 commands (e.g. `mark`, `unmark`). It required an in-depth analysis of design alternatives. The implementation too was challenging as various inputs need to be handled with the appropriate error messages.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jxt00&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+* **New Feature**:
+  * Wrote tests for the `ClassGroup`, `Lesson` and `StudentAttendance` components.
+  * Wrote tests for `JsonAdaptedClassGroup` as well as the `DeleteCommand` and `DeleteCommandParser`.
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=jxt00&breakdown=true)
 
 * **Documentation**:
   * User Guide:
