@@ -15,7 +15,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      */
     public ImportCommand parse(String args) throws ParseException {
         if (args.isEmpty()) {
-            throw new ParseException("cannot find the file path");
+            throw new ParseException("Cannot find the file path");
         }
         return new ImportCommand(args.trim());
     }
