@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public class RedoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new AddressBook(), new UserPrefs());
     private final DeleteCommand deleteCommandOne = new DeleteCommand(INDEX_FIRST_PERSON);
+    private final DeleteCommand deleteCommandTwo = new DeleteCommand(INDEX_SECOND_PERSON);
 
     @Test
     public void execute() throws Exception {
@@ -47,10 +49,10 @@ public class RedoCommandTest {
     public static StackUndoRedo prepareStack(List<RedoableCommand> undoElements,
                                              List<RedoableCommand> redoElements) {
         StackUndoRedo undoRedoStack = new StackUndoRedo();
-        undoElements.forEach(command -> undoRedoStack.push(command, ""));
+        undoElements.forEach(undoRedoStack::push);
 
         Collections.reverse(redoElements);
-        redoElements.forEach(command -> undoRedoStack.push(command, ""));
+        redoElements.forEach(undoRedoStack::push);
         redoElements.forEach(unused -> undoRedoStack.popUndo());
 
         return undoRedoStack;
