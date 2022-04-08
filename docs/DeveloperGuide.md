@@ -634,40 +634,52 @@ testers are expected to do more *exploratory* testing.
    The student contact is added to the last index of the student contact list. The student contact card appeared at the last in the list.
    The details of the added student contact is shown in the success message.
    
-   4. Test case: `add n/John Doe p/98765432 e/john@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
-   Expected: No student contact added to the student contact list because the student contact has the same  `PHONE_NUMBER` as someone else in the list (student contact in test case 3). 
-   Error details shown in the error message.
-   
-   5. Test case: `add n/John Doe p/12345678 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
-   Expected: No student contact added to the student contact list because the student contact ahs the same `EMAIL` as someone else in the list (student contact in test case 2).
-   Error details shown in the error message.
-   
-   6. Other incorrect add student contact commands to try: `add`, `add n/John Doe` etc.
+   4. Other incorrect add student contact commands to try: `add`, `add n/John Doe` etc.
    Expected: No student contact added to the student contact list. Error details shown in the error message.
 
-2. Adding a student contact while the student contact list is being filtered.
+2. Adding a student contact with duplicate/identical `PHONE_NUMBER` and/or `EMAIL` attributes.
+
+    1. Prerequisites: There exists a student contact in the list with given `PHONE_NUMBER` and `EMAIL` attributes: <br>
+        `PHONE_NUMBER`: 23456789 <br>
+        `EMAIL`: jd@u.nus.edu <br>
+        Example: `n/John Doe p/23456789 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` and `n/John Doe p/98765432 e/johndoe@u.nus.edu a/Computer Science t/friends t/owesMoney`
+
+    2. Test case: `add n/John Doe p/98765432 e/john@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+       Expected: No student contact added to the student contact list because the student contact has the same `PHONE_NUMBER` as someone else in the list.
+       Error details shown in the error message.
+
+    3. Test case: `add n/John Doe p/12345678 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+       Expected: No student contact added to the student contact list because the student contact ahs the same `EMAIL` as someone else in the list.
+       Error details shown in the error message.
+
+3. Adding a student contact while the student contact list is being filtered.
 
     1. Prerequisites: Filter the student contacts by attributes using the `find` command.
    
-    2. Test case: similar to previous. <br>
+    2. Test case: Similar to previous. <br>
     Expected: Similar to each respective test cases. However, the student contact list is reset to show all student contacts.
 
 ### Deleting a student contact
 
-1. Deleting a person while all persons are being shown.
+1. Deleting a student contact while all student contacts are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student contact is deleted from the list. Details of the deleted student contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student contact is deleted. Error details shown in the error message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a student contact while the student contact list is being filtered.
+
+    1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+   
+    2. Test case: Similar to previous. <br>
+        Expected: Similar to previous.
 
 ### Saving data
 
