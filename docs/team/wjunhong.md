@@ -12,8 +12,8 @@ Given below are my contributions to the project.
 * **Code contributed**:
     * `add-b` command
     * `add-ptb` and `add-pts` commands
-    * `delete-b` command
-    * `add-ptb` and `add-pts` and `delete-b` parser & associated test classes
+    * `delete-b` & `delete-s` command
+    * `add-ptb` and `add-pts` and `delete-b` and `delete-s` parser & associated test classes
     * `Buyer` class
     * `AddBuyerCommandParser` class
     * `BuyerTest` class
@@ -25,6 +25,7 @@ Given below are my contributions to the project.
     * `ReadOnlyBuyerAddressBook`, `BuyerAddressBook`
     * FXML for UI updates
     * `NullPropertyToBuy` (initial class before enhancements).
+    * `TypicalPropertyToBuy` & `TypicalPropertyToSell`, `HouseTypeTest`, `PropertyCommandsTestUtil`
 
 * **Enhancements implemented**:
   * Improved Find Command for v1.2 - Keywords need not exactly match the client name, and can simply be contained in them.
@@ -47,7 +48,7 @@ Given below are my contributions to the project.
     * Location & address being not matching
     * Price range problems
     * Why text cuts off
-    * _many more_
+    * Added explanation for design choices in `add-b`, `add-s`, `add-ptb`, `add-pts`
 
 * **Contributions to the DG**:
     * Added implementation details for `find` command
@@ -61,6 +62,7 @@ Given below are my contributions to the project.
     * Complete `addbuyer`, `add-pts`, `add-ptb`, UG update and UI update issues.
     * Help to assign PE-D issues to respective teammates.
     * Set up [#v1.4](https://github.com/AY2122S2-CS2103T-T11-2/tp/milestone/4)
+    * Edited product demo video + voice over.
 
 * **Review contributions**:
   * Made review for multiple Pull Requests such as
