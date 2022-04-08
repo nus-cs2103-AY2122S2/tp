@@ -85,8 +85,8 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-  
-* However, for the tag parameter, users will only be able to key in one tag. 
+
+* However, for the tag parameter, users will only be able to key in one tag.
   e.g. if you specify `t/Golden t/Retriever`, an error message will be shown.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -135,14 +135,14 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 **:information_source: Notes about editing `[t/BREED]`:**<br>
 
 * When editing `[t/BREED]`, the existing breed of the pet will be removed.
-* You can only edit *one* breed. 
+* You can only edit *one* breed.
 * Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
 by "German Sheppard" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
 </div>
 
 Examples:
-* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and 
+* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and
   the tag of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`
@@ -435,27 +435,6 @@ Format: `help`
 The table below summarises all the commands and features discussed above. You can refer to this nifty table if you do not
 wish to deal with the nitty-gritty details of each feature.
 
-<<<<<<< HEAD
-| Action        | Format                                                                                | Example                                                                       | Function                                                                                                              |
-|---------------|---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]...`                | `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog` | Adds Woofie into pet list along with its information                                                                  |
-| **Edit**      | `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/BREED]...` | `edit 1 p/98247076 t/bulldog`                                                 | Edits phone number and tag of pet at index 1                                                                          |
-| **Delete**    | `delete id`                                                                           | `delete 1`                                                                    | Deletes pet at index 1 from the pet list                                                                              |
-| **Find**      | `find NAME_OF_PET [KEYWORDS]...`                                                      | `find Woofie`                                                                 | Finds all pets with similar name as "Woofie"                                                                          |
-| **Diet**      | `diet INDEX d/remark`                                                                 | `diet 1 d/Only feed dry kibble`                                               | Adds a diet remark "Only feed dry kibble" to pet at index 1                                                           |
-| **Present**   | `present INDEX date/dd-MM-yyyy pu/HH:mm do/HH:mm`                                     | `present 1 date/22-03-2022 pu/08:00 do/17:00`                                 | Indicates that pet at index 1 will be attending daycare on 22 March 2022, requires pick up at 8am and drop off at 5pm |
-| **Absent**    | `absent INDEX date/dd-MM-yyyy`                                                        | `absent 1 date/22-03-2022`                                                    | Indicates that pet at index 1 was absent on 22 March 2022                                                             |
-| **Charge**    | `charge INDEX m/MM-yyyy c/number1[.number2]`                                          | `charge 1 m/03-2022 c/200.50`                                                 | Computes charge for pet 1 in the month of March on 2022, where each day's stay costs `200.50`                         |
-| **App**       | `app INDEX date/[dd-MM-yyyy HH:mm] at/[location]`                                     | `app 1 date/22-03-2022 09:30 at/ NUS Vet Clinic`                              | Indicates that pet at index 1 has an appointment on 22 March 2022, 9.30am at NUS Vet Clinic                           |
-| **App clear** | `app INDEX clear`                                                                     | `app 1 clear`                                                                 | Clears the current appointment of pet at index 1                                                                      |
-| **Sort**      | `sort SORT_BY`                                                                        | `sort name`                                                                   | Sorts pet list alphabetically by name of pets                                                                         |
-| **Filter**    | `filter f/KEYWORD`                                                                    | `filter byDate/22-03-2022`                                                    | Returns information of all pets present on 22 March 2022                                                              |
-| **List**      | `list`                                                                                | `list`                                                                        | Lists all pets in pet list                                                                                            |
-| **Clear**     | `clear`                                                                               | `clear`                                                                       | Clears all pets in pet list                                                                                           |
-| **Undo**      | `undo`                                                                                | `undo`                                                                        | Undoes the previous command made                                                                                      |
-| **Help**      | `help`                                                                                | `help`                                                                        | Shows a message explaining how to access the help page                                                                |
-| **Exit**      | `exit`                                                                                | `exit`                                                                        | Exits WoofAreYou                                                                                                      |
-=======
 | Action        | Format                                                                                | Example                                                                                                               | Function                                                                                                              |
 |---------------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | **Add**       | `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/Breed]...`                | `add n/Woofie o/Alice Tan p/98765432 a/523 Woodlands ave 5, #01-01 t/Bulldog`                                         | Adds Woofie into pet list along with its information                                                                  |
@@ -475,4 +454,3 @@ wish to deal with the nitty-gritty details of each feature.
 | **Undo**      | `undo`                                                                                | `undo`                                                                                                                | Undoes the previous command made                                                                                      |
 | **Help**      | `help`                                                                                | `help`                                                                                                                | Shows a message explaining how to access the help page                                                                |
 | **Exit**      | `exit`                                                                                | `exit`                                                                                                                | Exits WoofAreYou                                                                                                      |
->>>>>>> master
