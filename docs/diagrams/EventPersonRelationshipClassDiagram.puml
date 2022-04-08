@@ -9,10 +9,10 @@ AddressBook *-right-> "1" UniquePersonList
 UniquePersonList -[hidden]down- UniqueEventList
 UniquePersonList -[hidden]down- UniqueEventList
 
-UniquePersonList *-right-> "*" Person
+UniquePersonList -right-> "*" Person
 Person *-> "1" FriendName
 
-UniqueEventList *-right-> "*" Event
+UniqueEventList -right-> "*" Event
 
 Event -right-> "*" FriendName
 
