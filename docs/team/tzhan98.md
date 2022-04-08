@@ -14,6 +14,10 @@ Given below are my contributions to the project.
   * _Justification_: This feature is one of the unique selling point of HackNet and most of the other functions build on top of this feature. It allows the user to keep track of the expertise of individuals.
   * _Highlights_: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands. To improve abstraction, I had to implement the class `SkillSet` to store multiple `Skill`s and a `JsonAdaptedSkill` to store the information in Json format.
 
+* **New Feature**: Skill to display as different colors to indicate proficiency
+  * _What it does_: differentiate different level of skill proficiency with different hues of green with brighter green indicating a higher level of proficiency
+  * _Justification_: How everyone perceives their own skill proficiency is only a rough gauge, and they may have different standards of judging their skill levels. Therefore, the numbers may not accurately reflect in real life. To reduce bias, we have decided on using a range of colors to indicate proficiency instead.
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=tzhan98&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=tzhan98&tabRepo=AY2122S2-CS2103T-W13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
@@ -23,7 +27,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Enhanced `Help` Command to search for a topic to get help in.
-  * Enhanced `Skill` to display different hues of green to indicate how proficient the user is.
+    * This allows for users to easily check for information of commands without constantly referring to the user guide
 
 * **Bug fixes**:
   * Fix input validation of regex to exclude values from `Skill proficiency` [#136](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/136)
