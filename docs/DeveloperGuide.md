@@ -779,7 +779,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 1. User requests to list persons.
 2. ContaX shows a list of persons.<br>&nbsp;
-    Use case ends.
+    Use case ends.<br>&nbsp;
 
 **UC2: Add Person**
 
@@ -789,7 +789,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. User enters details of the new person.
 3. ContaX adds the new person.
 4. ContaX shows that the person has been added successfully.<br>&nbsp;
-    Use case ends.
+    Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -845,7 +845,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 4. User enters details to modify a specific person.
 5. ContaX updates the specified person.
 6. ContaX displays a message indicating that the person was successfully edited.<br>&nbsp;
-    Use case ends.
+    Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -884,7 +884,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 1. User requests to find persons.
 2. User enters details to find person by.
 3. ContaX shows a list of persons that matches the specified details.<br>&nbsp;
-   Use case ends.
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -909,7 +909,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 
 1. User requests to list tags.
 2. ContaX shows a list of tags.<br>&nbsp;
-    Use case ends.
+    Use case ends.<br>&nbsp;
 
 **UC7: Add Person Tag**
 
@@ -919,7 +919,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 2. User enters details to add tag.
 3. ContaX adds new tag.
 4. ContaX shows that the appointment has been added successfully.<br>&nbsp;
-   Use case ends.
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -945,7 +945,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 3. User enters details to edit tag.
 4. ContaX updates the specified tag.
 5. ContaX shows that the tag has been edited successfully.<br>&nbsp;
-   Use case ends.
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -975,7 +975,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 3. User enters details to delete tag.
 4. ContaX deletes the specified tag.
 5. ContaX shows that the tag has been deleted successfully.<br>&nbsp;
-   Use case ends.
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -994,7 +994,7 @@ Note that since underline is not allowed in markdown, included use cases are **b
 1. User requests to find persons by tag.
 2. User enters keyword to search by.
 3. ContaX shows a list of persons whose tags contain the specified keyword.<br>&nbsp;
-   Use case ends.
+   Use case ends.<br>&nbsp;
 
 **Extensions**
 
@@ -1253,31 +1253,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
-### Deleting a person
+### Tabbed View
+1. Tabs automatically change on `list*` command
 
-1. Deleting a person while all persons are being shown
+   1. Test case: `listtags` <br>
+      Expected: The selected tab should be changed to `Tags` if the user was not at that tab.
+   
+  2. Test case: `listpersons` <br>
+     Expected: The selected tab should be changed to `Persons` if the user was not at that tab.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+  3. Test case: `listappt` <br>
+     Expected: The selected tab should be changed to `Appointments` if the user was not at that tab.
 
 ### Saving data
 
