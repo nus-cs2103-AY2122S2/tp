@@ -49,6 +49,13 @@
     "email" : "anna@example.com",
     "tagged" : [ ],
     "isArchived": false
+  }, {
+    "name" : "Jane Lee",
+    "companyName": "Big Bank",
+    "phone" : "6444121",
+    "email" : "jane@example.com",
+    "tagged" : [ ],
+    "isArchived": true
   } ],
   "companies": [ {
     "name" : "DBSSS",

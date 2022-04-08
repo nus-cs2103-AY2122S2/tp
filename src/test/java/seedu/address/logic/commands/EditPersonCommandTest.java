@@ -52,6 +52,7 @@ public class EditPersonCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showPerson(expectedModel);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        showPerson(expectedModel);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
     }
@@ -182,9 +183,7 @@ public class EditPersonCommandTest {
     }
 
     private void showPerson(Model model) {
-        model.updateFilteredCompanyList(p -> false);
-        model.updateFilteredEventList(p -> false);
-        model.updateFilteredPersonList(p -> true);
+        model.showPersonList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
     }
 
 }

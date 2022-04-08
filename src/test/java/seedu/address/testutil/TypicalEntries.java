@@ -39,6 +39,8 @@ public class TypicalEntries {
             .withPhone("9482427").withEmail("lydia@example.com").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withCompanyName("Big Bank")
             .withPhone("9482442").withEmail("anna@example.com").build();
+    public static final Person JANE = new PersonBuilder().withName("Jane Lee").withCompanyName("Big Bank")
+            .withPhone("6444121").withEmail("jane@example.com").withArchived(true).build();
 
     public static final Company DBSSS = new CompanyBuilder().withName("DBSSS").withPhone("91123671")
             .withEmail("dbsss@example.com").withAddress("14 Jurong Street").build();
@@ -73,18 +75,20 @@ public class TypicalEntries {
     private TypicalEntries() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical entries.
+     * A copy of each of the static entries above is made so that different calls
+     * to this method will not be referring to the same entry objects.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Company company : getTypicalCompanies()) {
-            ab.addCompany(company);
+            ab.addCompany(new CompanyBuilder(company).build());
         }
         for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+            ab.addPerson(new PersonBuilder(person).build());
         }
         for (Event event : getTypicalEvents()) {
-            ab.addEvent(event);
+            ab.addEvent(new EventBuilder(event).build());
         }
         return ab;
     }
@@ -98,6 +102,6 @@ public class TypicalEntries {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JANE));
     }
 }
