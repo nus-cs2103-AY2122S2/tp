@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
-import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
+import static seedu.address.testutil.TypicalInterviews.VALID_AMY_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
 import java.time.LocalDateTime;
@@ -54,7 +54,7 @@ public class InterviewScheduleTest {
     public void resetData_withDuplicateInterviewCandidates_throwsDuplicateCandidateException() {
         // Two interviews with the same candidate
         Interview editedAliceInterview =
-                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME)
+                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME)
                 .build();
         List<Interview> newInterviews = Arrays.asList(INTERVIEW_ALICE, editedAliceInterview);
         InterviewScheduleStub newData = new InterviewScheduleStub(newInterviews);
@@ -66,7 +66,7 @@ public class InterviewScheduleTest {
     public void resetData_withConflictingInterviews_throwsConflictingInterviewException() {
         // Two interviews with the same date and time
         Interview editedAliceInterview =
-                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME)
+                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME)
                         .build();
         List<Interview> newInterviews = Arrays.asList(INTERVIEW_AMY_TYPICAL, editedAliceInterview);
         InterviewScheduleStub newData = new InterviewScheduleStub(newInterviews);
@@ -77,7 +77,7 @@ public class InterviewScheduleTest {
     public void setInterviews_withDuplicateInterviewCandidates_throwsDuplicateCandidateException() {
         // Two interviews with the same candidate
         Interview editedAliceInterview =
-                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME)
+                new InterviewBuilder(INTERVIEW_ALICE).withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME)
                         .build();
         List<Interview> newInterviews = Arrays.asList(INTERVIEW_ALICE, editedAliceInterview);
         assertThrows(DuplicateCandidateException.class, () -> new InterviewSchedule().setInterviews(newInterviews));
@@ -119,7 +119,7 @@ public class InterviewScheduleTest {
     public void hasCandidate_interviewWithSameCandidateInInterviewSchedule_returnsTrue() {
         interviewSchedule.addInterview(INTERVIEW_ALICE);
         Interview editedAliceInterview = new InterviewBuilder(INTERVIEW_ALICE)
-                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+                .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME).build();
         assertTrue(interviewSchedule.hasCandidate(editedAliceInterview));
     }
 
@@ -134,7 +134,7 @@ public class InterviewScheduleTest {
     @Test
     public void removeInterviewSuccess() {
         Interview interviewAlice = new InterviewBuilder(INTERVIEW_ALICE)
-                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+                .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME).build();
         InterviewSchedule schedule = new InterviewSchedule();
         schedule.addInterview(interviewAlice);
         schedule.removeInterview(interviewAlice);

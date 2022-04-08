@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
-import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
+import static seedu.address.testutil.TypicalInterviews.VALID_AMY_INTERVIEW_DATE_TIME;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -65,7 +65,7 @@ public class UniqueInterviewListTest {
     public void containsCandidate_interviewWithSameCandidateInList_returnsTrue() {
         uniqueInterviewList.add(INTERVIEW_ALICE);
         Interview editedAliceInterview = new InterviewBuilder(INTERVIEW_ALICE)
-                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+                .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME).build();
         assertTrue(uniqueInterviewList.containsCandidate(editedAliceInterview));
     }
 

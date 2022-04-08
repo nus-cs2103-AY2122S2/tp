@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,7 +84,7 @@ public class EditScheduleCommand extends ScheduleCommand {
             int indexCandidate = model.getFilteredCandidateList().indexOf(editedInterview.getCandidate());
             Logger.getLogger(EditScheduleCommand.class.getName()).log(Level.INFO, String.valueOf(indexCandidate));
             return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
-                    + " to " + editedInterview.getInterviewDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    + " to " + editedInterview.getInterviewDate().format(DATE_TIME_FORMATTER)
                     + " " + editedInterview.getInterviewStartTime()),
                     false, false, false, -1, true, indexCandidate);
         } catch (CommandException e) {

@@ -2,6 +2,8 @@ package seedu.address.logic.commands.schedule;
 
 import seedu.address.logic.commands.Command;
 
+import java.time.format.DateTimeFormatter;
+
 public abstract class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
@@ -10,6 +12,8 @@ public abstract class ScheduleCommand extends Command {
             + COMMAND_WORD + " edit INTERVIEW_INDEX at/DATE_TIME \n"
             + COMMAND_WORD + " delete INTERVIEW_INDEX \n"
             + COMMAND_WORD + " clear";
+
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public static final String MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW =
             "Interview for this candidate already exists!";

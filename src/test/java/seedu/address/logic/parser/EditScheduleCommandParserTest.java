@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_DATE_
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERVIEW;
-import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
+import static seedu.address.testutil.TypicalInterviews.VALID_AMY_INTERVIEW_DATE_TIME;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ public class EditScheduleCommandParserTest {
     @Test
     public void parse_validArgs_returnsEditScheduleCommand() {
         assertParseSuccess(parser, "1" + VALID_INTERVIEW_DATE_TIME,
-                new EditScheduleCommand(INDEX_FIRST_INTERVIEW, TYPICAL_INTERVIEW_DATE_TIME));
+                new EditScheduleCommand(INDEX_FIRST_INTERVIEW, VALID_AMY_INTERVIEW_DATE_TIME));
     }
 
     @Test
