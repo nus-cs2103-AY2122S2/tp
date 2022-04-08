@@ -19,10 +19,10 @@ LogicManager -> AddressBookParser : parseCommand("clear")
 activate AddressBookParser
 
 create ClearCommand
-AddressBookParser -> ClearCommand
+AddressBookParser -> ClearCommand : ClearCommand()
 activate ClearCommand
 
-ClearCommand --> AddressBookParser
+ClearCommand --> AddressBookParser : d
 deactivate ClearCommand
 
 AddressBookParser --> LogicManager
@@ -38,17 +38,17 @@ Model --> ClearCommand
 deactivate Model
 
 create CommandResult
-ClearCommand -> CommandResult
+ClearCommand -> CommandResult : CommandResult()
 activate CommandResult
 
 CommandResult --> ClearCommand
 deactivate CommandResult
 
-ClearCommand --> LogicManager : result
+ClearCommand --> LogicManager : commandResult
 deactivate ClearCommand
 
 ClearCommand -[hidden]-> AddressBookParser
-destroy ClearCommand
+deactivate ClearCommand
 
 [<--LogicManager
 deactivate LogicManager

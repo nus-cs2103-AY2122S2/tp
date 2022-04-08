@@ -222,8 +222,21 @@ This also required changes to `CLISyntax` to include the new prefixes for the ad
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
+**Class Diagram of Add Feature is shown below:**
+![AddClassDiagram](images/AddClassDiagram.png)
+
+Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
+
+1. `MESSAGE_SUCCESS`:
+   - Scenario: Adding of the specified `Person` to the database is successful.
+   - Message: "New person added: %1$s" where "%1$s" is the added person's details.
+2. `MESSAGE_DUPLICATE_PERSON`:
+   - Scenario: Specified `Person` already exists in the database due to conflicting `MatriculationNumber`, `Phone` or `Email`.
+   - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
+
 **Sequence Diagram of Add Feature is shown below:**
-![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+<img src='images/AddSequenceDiagram.png' height="701" width="1464">
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -320,12 +333,20 @@ user to replace the list of students with an empty one. Previous data are swiped
 **Path Execution of Clear Feature Activity Diagram is shown below:**
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
+**Class Diagram of Clear Feature is shown below:**
+![ClearClassDiagram](images/ClearClassDiagram.png)
+
+Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
+
+1. `MESSAGE_SUCCESS`
+   - Scenario: Tracey database successfully cleared.
+   - Message: "Tracey has been cleared!".
+
+
 **Sequence Diagram of Clear Feature is shown below:**
-![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<img src='images/ClearSequenceDiagram.png' height="701" width="1464">
 
-</div>
 
 <br>
 
@@ -456,7 +477,7 @@ The sequence diagram below shows the interactions between objects during the exe
 ![EmailSequenceDiagram](images/EmailSequenceDiagram.png)
 
 
-When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object. 
+When a user inputs an email command into the Tracey, the `executeCommand()` method of `MainWindow` will be called and this will call the `execute()` method of `LogicManager`. This will trigger a parsing process by `AddressBookParser`,  which then instantiates an `EmailCommand` object.
 
 Following this, the `LogicManager` will call the `execute()` method of the `EmailCommand` object. In this method, a `CommandResult` object will be instantiated.
 

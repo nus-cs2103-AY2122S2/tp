@@ -39,7 +39,7 @@ Given below are my contributions to the project.
         * Added documentation for the features `help`, `email` [\#96]()
         * Added comparison between CLI and GUI in application introduction [\#129]()
         * Added a Navigation Guide for the User Guide [\#129]()
-        * Edited quickstart section to make it more comprehensive for users. [\#129]()
+        * Edited quickstart section to make it more comprehensive for users [\#129]()
         * Edited the application information of Tracey [\#96]()
         * Added screenshots for features `find`, `summarise` and a general application Ui screenshot. [\#115](), [\#129]()
         * Added tables for Correct and Incorrect usages in `add` and
@@ -47,7 +47,10 @@ Given below are my contributions to the project.
         * Update table and figure numbering [\#143]()
         * Format User Guide to eliminate grammatical and spelling errors [\#143]()
     * Developer Guide:
-        * Added implementation details of the `add` feature. 
+        * Added implementation details of the `Add` feature [\#89]()
+        * Edited the sequence diagram for Add feature [\#89]() 
+        * Add Activity diagram for Add feature [\#89]()
+        * Added class diagrams for Add and Clear Feature [\#268]()
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#33](), [\#47](), [\#50](), [\#57](), [\#74](), [\#84](), [\#112](), [\#122](), [\#128](), [\#235]()
