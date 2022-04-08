@@ -55,8 +55,8 @@ Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Sched
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
-* Commands are case sensitive. `Add` is considered as invalid command, the correct command should be in lower case.
-* Parameters are case sensitive. `John Doe` and `joHN dOE` are considered as different people.
+* Commands are case-sensitive. `Add` is considered as invalid command, the correct command should be in lower case.
+* Parameters are case-sensitive. `John Doe` and `joHN dOE` are considered as different people.
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
 * If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
@@ -79,12 +79,12 @@ Format: `help`
 Adds a player/ lineup/ schedule to MyGM.
 
 **To add a player:**
-Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
+Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
 * The first character of every word in `NAME` are recommended to be capitalized. For example:`John Doe`
-* The new name must not exist in MyGM already.
-* The new jersey number must not exist in MyGM already.
+* The case-sensitive new `NAME` must not exist in MyGM already.
+* The new `JERSEY_NUMBER` must not exist in MyGM already.
 
 Examples:
 * `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of John Doe, jersey number of 3, position of PG, weight of 69kg, height of 188cm, handphone number of 98765432
@@ -95,7 +95,7 @@ and email of johnd@example.com to the player list.`
 **To add a lineup:**
 Format: `add L/ n/LINEUP_NAME`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM. 
-* The new lineup name must not exist in MyGM already.
+* The case-sensitive new `LINEUP_NAME` must not exist in MyGM already.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
@@ -107,7 +107,7 @@ Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a dd/mm/yyyy hhmm format.
 * The first character of every word in `SCHEDULE_NAME` are recommended to be capitalized. For example:`Starting Five`
-* Multiple schedules can be added to a same date due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the name and description section.
+* Multiple schedules can be added to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 Examples:
 * `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
@@ -274,18 +274,18 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 * Edit the details of a player from the player list.
 * If any fields are specified, it will change accordingly.
 * Multiple fields can be changed at once.
+* The case-sensitive new `NAME` must not exist in MyGM already.
+* The new `JERSEY_NUMBER` must not exist in MyGM already.
 
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
-* The new name must not exist in MyGM already.
-* The new jersey number must not exist in MyGM already.
 
 **To edit a lineup:**
 
 Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 
 * Edit the lineup name of lineup to a new lineup name.
-* The new lineup name must not exist in MyGM already.
+* The case-sensitive `NEW_LINEUP_NAME` must not exist in MyGM already.
 
 Example:
 * `edit L/Starting5 n/Worst5` will change name of the lineup Starting5 to Worst5
@@ -298,6 +298,7 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 * If any fields are specified, it will be changed accordingly
 * Multiple fields can be changed at once
 * At least one field must be specified
+* Multiple schedules can be edited to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
