@@ -17,11 +17,11 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-	requireAllNonNull(model, undoRedoStack);
+        requireAllNonNull(model, undoRedoStack);
 
-	if (!undoRedoStack.canRedo()) {
-	    throw new CommandException(MESSAGE_FAILURE);
-	}
+        if (!undoRedoStack.canRedo()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
         RedoableCommand command = undoRedoStack.popRedo();
         if (command instanceof SwitchCommand) {
