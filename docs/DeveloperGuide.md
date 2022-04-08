@@ -798,12 +798,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking a pet as present
     1. Prerequisites: Pet list must have at least 1 pet in it.
-    2. Test case: `present 1 date/22-03-2022 pu/09:00 do/18:00`
+    2. Test case: `present 1 date/21-03-2022`
+       Expected: Pet at index 1 will be marked as present on 21 March 2022 without any pick up or drop off time. Success
+       message shown in status message.
+    3. Test case: `present 1 date/22-03-2022 pu/09:00 do/18:00`
        Expected: Pet at index 1 will be marked as present on 22 March 2022 with pick up time at 9am and drop off time at
        6pm. Success message shown in status message. If date is within past 7 days, attendance tag in GUI will turn green.
-    3. Test case: `present 1 date/04-31-2022`
+    4. Test case: `present 1 date/04-31-2022`
        Expected: Attendance of pet at index 1 will not be marked. Error details shown in the status message.
-    4. Test case: `present 0 date/22-03-2022`
+    5. Test case: `present 0 date/22-03-2022`
        Expected: No pet will be marked as present. Error message will be shown in status message.
 2. Marking a pet as absent
     1. Prerequisites: Pet list must have at least 1 pet in it.
@@ -935,7 +938,7 @@ messages shown are crafted to be intuitive and easily understandable so that use
 
 ### Attendance Visual Cues
 
-WoofAreYou has a dedicated column on the right to indicate a pet's attendance. Significant amount of effort is put into
+WoofAreYou has a dedicated column on the right to indicate a pet's attendance. A significant amount of effort is put into
 the design of this feature as attendance is the crux of a daycare's operation. Different coloring of date labels
 serves as visual cues for absent and present attendance entries of each pet. It is designed this way so that daycare
 owners rely on WoofAreYou for any form of attendance recollection rather than on their memory.
@@ -956,10 +959,10 @@ the GUI.
 ### Challenges
 
 Since WoofAreYou handles a lot more information and data compared to AB3, the GUI may be more cluttered. In order to
-make the GUI neater, more VBox and HBox were introduced to accommodate more information displayed. This led to formatting
+make the GUI neater, more VBox and HBox components were introduced to accommodate more information displayed. This led to formatting
 issues of certain fields like addresses or tags being truncated and the GUI being less user-friendly. Character limit
 was introduced to ensure that input will not exceed its allocated space but this led to other bugs. Eventually, a hybrid
-of increased character limit and resizable components was adopted to enhance user-friendliness.
+approach of increased character limit and resizable components was adopted to enhance user-friendliness.
 
 
 ## Overall
