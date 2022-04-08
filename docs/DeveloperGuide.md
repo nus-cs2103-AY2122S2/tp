@@ -694,7 +694,7 @@ More information on usage: [delete command](UserGuide.html#delete-student-contac
    3. Test case: `delete 0`<br>
       Expected: No student contact is deleted. Error details shown in the error message. 
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the student contact list size)<br>
       Expected: Similar to previous.
 
 2. Deleting a student contact while the student contact list is being filtered.
@@ -767,8 +767,7 @@ More information on usage: [addgroup command](UserGuide.html#create-a-group-addg
    3. Test case: `addgroup g/nus fintech society` <br>
       Expected: No group added because the group with the same name but different case already exists. 
       Error details shown in the error message.
-
-
+   
 ### Deleting a group
 
 Command: `delgroup` <br>
@@ -792,7 +791,51 @@ More information on usage: [delgroup command](UserGuide.html#delete-a-group-delg
    2. Test case: `delgroup g/NUSSU` <br>
       Expected: No group deleted from the group list. Error details shown in the error message.
 
+### Assigning a student to a group
 
+Command: `assign` <br>
+More information on usage: [assign command](UserGuide.html#assign-a-student-to-a-group-assign)
+
+1. Assigning a student contact while all student contacts are being shown.
+
+   1. Prerequisites: List all student contacts using the `list` command. 
+   There exists a group with the name `NUS Fintech Society` in ArchDuke. The student contact has yet to exist in the group.
+   
+   2. Test case: `assign 3 g/NUS Fintech Society` <br>
+      Expected: Third student contact is assigned to the group `NUS Fintech Society`. The student contact appeared in the group.
+      The details of the assigned student contact and the target group is shown in the success message.
+   
+   3. Test case: `assign 0 g/NUS Fintech Society` <br>
+      Expected: No student contact is assigned to the group. Error details shown in the error message.
+   
+   4. Other incorrect delete commands to try: `assign`, `assign x` (where x is larger than the student contact list size)<br>
+      Expected: Similar to previous.
+
+2. Assigning a student contact while all student contacts are being shown to a group that does not exist.
+
+   1. Prerequisites: List all student contacts using the `list` command. There exists no group with the group name `NUSSU`.
+   
+   2. Test case: `assign 1 g/NUSSU` <br>
+      Expected: No student contact is assigned to the group. Error details shown in the error message.
+   
+   3. Test case: `assign 0 g/NUSSU` <br>
+      Expected: Similar to the previous.
+
+3. Assigning a student contact while all student contacts are being shown. The student contact already exists in the group.
+
+   1. Prerequisites: List all student contacts using the `list` command. 
+   There exists the first student contact in the group `NUS Fintech Society`.
+   
+   2. Test case: `assign 1 g/NUS Fintech Society` <br>
+      Expected: No student contact is assigned to the group. Error details shown in the error message.
+
+4. Assigning a student contact while the student contact list is being filtered.
+
+   1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+
+   2. Test case: Similar to previous. <br>
+      Expected: Similar to previous.
+    
 
 ### Saving data
 
