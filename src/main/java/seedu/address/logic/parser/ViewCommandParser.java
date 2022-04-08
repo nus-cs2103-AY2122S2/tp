@@ -22,6 +22,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,7 +61,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
     @Override
     public ViewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PLAYER, PREFIX_LINEUP, PREFIX_SCHEDULE,
-                PREFIX_ALL_SCHEDULE, PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_TAG, PREFIX_WITHOUT_LINEUP);
+                PREFIX_ALL_SCHEDULE, PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_TAG, PREFIX_WITHOUT_LINEUP, PREFIX_DATE);
 
         boolean hasPSlash = arePrefixesPresent(argMultimap, PREFIX_PLAYER); // P/
         boolean hasLSlash = arePrefixesPresent(argMultimap, PREFIX_LINEUP); // L/
@@ -205,8 +206,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
             boolean isViewDate = arePrefixesPresent(argMultimap, PREFIX_DATE)
                     && !arePrefixesPresent(argMultimap, PREFIX_ALL_SCHEDULE);
-            System.out.println("TEST: " + argMultimap.getValue(PREFIX_DATE));
 
+            System.out.println("isViewAll: " + isViewAll);
+            System.out.println("isViewDate: " + isViewDate);
             // view all schedules
             if (isViewAll) {
                 if (argMultimap.getValue(PREFIX_ALL_SCHEDULE).get().equals(ARCHIVED_SCHEDULES)) {
@@ -222,15 +224,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 }
             }
 
-            System.out.println(isViewDate);
-            System.out.println(arePrefixesPresent(argMultimap, PREFIX_DATE));
-
             if (isViewDate) {
-                String des = argMultimap.getValue(PREFIX_DATE).get();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                System.out.println("Description is " + des);
                 try {
-                    LocalDate date = LocalDate.parse(des, formatter);
+                    LocalDate date = ParserUtil.parseScheduleDate(
+                            argMultimap.getValue(PREFIX_DATE).get()
+                    );
                     return new ViewCommand(null, new ScheduleOnThisDatePredicate(date), prefixAndArgument);
                 } catch (DateTimeParseException e) {
                     throw new ParseException(String.format(MESSAGE_INVALID_VIEW_DATE_FORMAT,

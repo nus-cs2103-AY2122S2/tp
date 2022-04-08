@@ -50,10 +50,11 @@ public class ViewCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals\n"
             + "To view all schedules\n"
             + "Parameters: " + PREFIX_ALL_SCHEDULE + "all\n"
-            + "OR" + PREFIX_ALL_SCHEDULE + "active\n"
+            + "To view expired schedules\n"
+            + "Parameters: " + PREFIX_ALL_SCHEDULE + "archive\n"
             + "To view schedules on a certain date\n"
-            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "finals\n";
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "dd/MM/yyyy\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "03/01/2022\n";
 
     public static final String MESSAGE_ACTIVE_SCHEDULE_USAGE = COMMAND_WORD
             + ": To view all schedules\n"
@@ -66,8 +67,8 @@ public class ViewCommand extends Command {
             + MESSAGE_USAGE_LINEUP + "\n"
             + MESSAGE_USAGE_SCHEDULE;
     public static final String MESSAGE_VIEW_DATE_USAGE = COMMAND_WORD + ": To view Schedule on a certain date\n"
-            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "2022-03-10";
+            + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "dd/MM/yyyy\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "10/03/2020";
 
     private static String messageViewSuccess = "Listed all information!";
 
