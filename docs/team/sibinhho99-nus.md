@@ -14,6 +14,7 @@ MedBook is a health monitoring system for healthcare professionals that simplifi
 
 ## Contributions to the UG:
 - Medical information section
+- Summary section
 - Enhanced delete section's specifications to accommodate summary feature
 
 ## Contributions to the DG:
