@@ -10,7 +10,7 @@ import java.util.Optional;
 import woofareyou.model.attendance.AttendanceEntry;
 
 /**
- * Represents a Pet's attendance history in the address book.
+ * Represents a Pet's attendance history in WoofAreYou.
  * Guarantees: is always valid.
  */
 public class AttendanceHashMap {

@@ -14,7 +14,7 @@ import woofareyou.commons.core.LogsCenter;
 import woofareyou.model.pet.Pet;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the WoofAreYou data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

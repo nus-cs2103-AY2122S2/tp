@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static woofareyou.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Pet's name in the address book.
+ * Represents a Pet's name in WoofAreYou.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name implements Comparable<Name> {

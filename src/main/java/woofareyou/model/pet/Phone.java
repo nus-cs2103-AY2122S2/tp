@@ -7,7 +7,7 @@ import woofareyou.commons.util.AppUtil;
 
 
 /**
- * Represents a Pet's phone number in the address book.
+ * Represents a Pet's phone number in WoofAreYou.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

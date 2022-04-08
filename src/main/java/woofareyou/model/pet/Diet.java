@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static woofareyou.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Pet's diet in the address book.
+ * Represents a Pet's diet in WoofAreYou.
  * Guarantees: immutable; is always valid
  */
 public class Diet {

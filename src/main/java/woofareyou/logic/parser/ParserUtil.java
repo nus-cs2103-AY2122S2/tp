@@ -27,7 +27,7 @@ import woofareyou.model.pet.Phone;
 import woofareyou.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various Parser classes.
  */
 public class ParserUtil {
 

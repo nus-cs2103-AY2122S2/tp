@@ -8,7 +8,7 @@ import woofareyou.commons.util.AppUtil;
 
 
 /**
- * Represents a Pet's address in the address book.
+ * Represents a Pet's address in WoofAreYou.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
