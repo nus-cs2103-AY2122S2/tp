@@ -348,24 +348,26 @@ Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                              | I want to …​                                                       | So that I can…​                                                                 |
-|----------|----------------------------------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| `* * *`  | student who needs to contact other students for work-related matters | add the contact information of other students                      | easily view other students' contact when I need to                              |
-| `* * *`  | student                                                              | create a student group                                             | classify relevant students together in one place                                | 
-| `* * *`  | student who wants to only keep groups that are presently relevant    | delete my groups to clear the inactive groups out of my group list | not be distracted by outdated information                                       |
-| `* * *`  | student who works on a group project                                 | add other students to my group                                     | remember who are the students in my group                                       |
-| `* * *`  | student who works in a collaborative group project                   | add/delete tasks to the group                                      | let students in the same group see what are the tasks that need to be completed |
-| `* * *`  | student who needs to keep track of tasks that need to be done        | view the tasks that belong to each group                           | know the list of tasks I need to complete for that particular group             |
-| `* *`    | student                                                              | delete another student or myself from an existing group            | keep only relevant students in the group                                        |
-| `* *`    | student who needs to keep track of my deadlines                      | add a deadline to a task                                           | record when a task needs to be done                                             |
-| `* *`    | student with many groups in my list                                  | search for the group I am looking for                              | find the group I am looking for in a shorter amount of time                     |
-| `* *`    | student with many group tasks to complete                            | tag group tasks based on priority (high, medium, low)              | have an idea on which task my group need to start working on first              |
-| `* *`    | student who uses the application for the first time                  | view in-app guidance                                               | know how to navigate through the app when I am still unfamiliar with it         |
-| `* `     | student who wants to keep track of the project progress              | track the progress of the task that is handled by other students   | know the overall picture of our project                                         |
-| `*`      | student with bad time management                                     | get a reminder of my impending group projects                      | not forget to complete the tasks by the deadline                                |
-| `*`      | student                                                              | keep track of students who are in mutual groups                    | know who are in the same groups as I am                                         |
-
-*{More to be added}*
+| Priority | As a …​                                                              | I want to …​                                                     | So that I can…​                                                                               |
+|----------|----------------------------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`  | student who needs to contact other students for work-related matters | add the contact information of other students into my database   | easily view other students' contact when I need to                                            |
+| `* * *`  | student                                                              | delete a student information from my database                    | only keep the information of student contacts who are still relevant to me                    | 
+| `* * *`  | student who needs to work in a collaborative work                    | create a student group                                           | classify relevant students together in one place                                              | 
+| `* * *`  | student who wants to only keep groups that are presently relevant    | delete a student group                                           | clear the inactive groups out of my group list and not be distracted by outdated information  |
+| `* * *`  | student who works on a group project                                 | add other students to my group                                   | remember who are the students in my group                                                     |
+| `* * *`  | student                                                              | delete another student                                           | keep only relevant students in the group                                                      |
+| `* * *`  | student who works in a collaborative group project                   | add a task to a group                                            | let students in the same group see what are the tasks that need to be completed               |
+| `* * *`  | student who works in a collaborative group project                   | delete a task from a group                                       | remove irrelevant tasks from a group and only keep tasks that are still relevant in the group |
+| `* * *`  | student who works in a group project with other members              | view who are the students in my group                            | know who my group members are                                                                 |
+| `* * *`  | student who needs to keep track of tasks that need to be done        | view the tasks that belong to each group                         | know the list of tasks that need to be completed for that particular group                    |
+| `* * *`  | student with many other student contacts in my list                  | search for student contacts based on their information           | easily find student contacts that have the information that I am looking for                  |
+| `* *`    | student who needs to keep track of my deadlines                      | add a deadline to a task                                         | keep a record of when a task needs to be done                                                 |
+| `* *`    | student with many groups in my list                                  | search for the group I am looking for                            | find the group I am looking for in a shorter amount of time                                   |
+| `* *`    | student with many group tasks to complete                            | tag group tasks based on priority (high, medium, low)            | have an idea on which task my group need to start working on first                            |
+| `* *`    | student who uses the application for the first time                  | view in-app guidance                                             | know how to navigate through the app when I am still unfamiliar with it                       |
+| `* `     | student who wants to keep track of the project progress              | track the progress of the task that is handled by other students | know the overall picture of our project                                                       |
+| `*`      | student with bad time management                                     | get a reminder of my impending group projects                    | not forget to complete the tasks by the deadline                                              |
+| `*`      | student                                                              | keep track of students who are in mutual groups                  | know who are in the same groups as I am                                                       |
 
 ### Use cases
 
@@ -565,27 +567,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. The application should be able to work without a need for the user to install Gradle/JavaFX.
 6. The application is not required to support multiple users on a single device.
 7. The application is not required to support any other language other than English.
-8. The user interface should be intuitive enough for users who are not IT-savvy.
+8. The user interface should be intuitive and usable enough for users who are not IT-savvy.
 9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+10. The response to any commands carried out by the user should become visible within 5 seconds.
 
 ### Glossary
 
+* **Academic Major**: A student's major in university.
+* **Attribute**: A set of specific value for a given object that defines the property or characteristic of that object.
 * **Group list**: Every existing groups in ArchDuke.
 * **Group name**: An identifier for a group that suggests the function of that group.
+* **Index**: A number in front of a student contact, used to reference that particular student contact.
+* **Group list**: Every existing student groups in ArchDuke.
 * **Group task**: A piece of work to be done or undertaken by one or more student contacts in a group.
-* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **Student contact**: A contact of a student.
 * **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major, optional tag.
 * **Student contact list**: Every existing student contacts in ArchDuke or in a group.
 * **Student group**: A number of student contact that are classed together. A group can have zero to any number of student contacts. A student contact can be assigned to a group.
 * **Student group attribute**: A piece of information related to a group i.e. group name.
 * **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
+* **Task list**: Every existing tasks in a group.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
+
+### Prefix summary
+These are the list of prefixes used in the commands for manual testing.
+
+| Prefix  | Representation   | 
+|---------|------------------|
+| `n/`    | `NAME`           | 
+| `p/`    | `PHONE_NUMBER`   | 
+| `e/`    | `EMAIL`          | 
+| `a/`    | `ACADEMIC_MAJOR` | 
+| `t/`    | `TAG`            | 
+| `g/`    | `GROUP_NAME`     | 
+| `task/` | `TASK_NAME`      | 
+
+
 
 Given below are instructions to test the app manually.
 
@@ -598,35 +619,94 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. <br>
+   Expected: Shows the GUI with a set of sample student contacts and student groups. 
+   The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a student contact
 
-### Deleting a person
+Command: `add` <br>
+More information on usage: [add command](#add-student-contact-information)
 
-1. Deleting a person while all persons are being shown
+1. Adding a student contact while all student contacts are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all student contacts using the `list` command. 
+   
+   2. Test case: `add n/John Doe p/98765432 e/johndoe@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+   Expected: A student contact with the name `John Doe` with the following attributes added to the student contact list. 
+   The student contact is added to the last index of the student contact list. The student contact card appeared at the last in the list.
+   The details of the added student contact is shown in the success message.
+   
+   3. Test case: `add n/John Doe p/23456789 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+   Expected: A student contact with the name `John Doe` with the following attributes added to the student contact list.
+   Note that the `NAME` of this student contact is the same as that of test case 2. However, the student contact's `PHONE_NUMBER` and `EMAIL` are **different**.
+   The student contact is added to the last index of the student contact list. The student contact card appeared at the last in the list.
+   The details of the added student contact is shown in the success message.
+   
+   4. Other incorrect add student contact commands to try: `add`, `add n/John Doe` etc.
+   Expected: No student contact added to the student contact list. Error details shown in the error message.
+
+2. Adding a student contact with duplicate/identical `PHONE_NUMBER` and/or `EMAIL` attributes.
+
+    1. Prerequisites: There exists a student contact in the list with given `PHONE_NUMBER` and `EMAIL` attributes: <br>
+        `PHONE_NUMBER`: 23456789 <br>
+        `EMAIL`: jd@u.nus.edu <br>
+        Example: `n/John Doe p/23456789 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` and `n/John Doe p/98765432 e/johndoe@u.nus.edu a/Computer Science t/friends t/owesMoney`
+
+    2. Test case: `add n/John Doe p/98765432 e/john@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+       Expected: No student contact added to the student contact list because the student contact has the same `PHONE_NUMBER` as someone else in the list.
+       Error details shown in the error message.
+
+    3. Test case: `add n/John Doe p/12345678 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+       Expected: No student contact added to the student contact list because the student contact ahs the same `EMAIL` as someone else in the list.
+       Error details shown in the error message.
+
+3. Adding a student contact while the student contact list is being filtered.
+
+    1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+   
+    2. Test case: Similar to previous. <br>
+    Expected: Similar to each respective test cases. However, the student contact list is reset to show all student contacts.
+
+### Deleting a student contact
+
+1. Deleting a student contact while all student contacts are being shown.
+
+   1. Prerequisites: List all student contacts using the `list` command.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student contact is deleted from the list. Details of the deleted student contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student contact is deleted. Error details shown in the error message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a student contact while the student contact list is being filtered.
+
+    1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+   
+    2. Test case: Similar to previous. <br>
+        Expected: Similar to previous.
+
+### Finding student contacts by attributes
+
+1. Finding a student contact while all student contacts are being shown.
+    
+    1. Prerequisites: List all student contacts using the `list` command. 
+   
+    2. Test case: `find n/`
+2. Finding a student contact while the student contact list is being filtered.
 
 ### Saving data
 
