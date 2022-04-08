@@ -19,7 +19,7 @@ LogicManager -> AddressBookParser : parseCommand("summarise")
 activate AddressBookParser
 
 create SummariseCommand
-AddressBookParser -> SummariseCommand
+AddressBookParser -> SummariseCommand : SummariseCommand()
 activate SummariseCommand
 
 SummariseCommand --> AddressBookParser
@@ -63,13 +63,13 @@ deactivate SummariseCommand
 
 alt no answer
     create CommandResult
-    SummariseCommand -> CommandResult
+    SummariseCommand -> CommandResult : CommandResult(fail)
     activate CommandResult
     CommandResult --> SummariseCommand
     deactivate CommandResult
 else there's an answer
     create CommandResult
-    SummariseCommand -> CommandResult
+    SummariseCommand -> CommandResult : CommandResult(summary,f,f,t,f)
     activate CommandResult
     CommandResult --> SummariseCommand
     deactivate CommandResult
