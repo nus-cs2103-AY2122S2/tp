@@ -336,7 +336,7 @@ Adds a task to the specified group. `addtask` must be followed by a `TASK_NAME` 
 The group must **already exist** in ArchDuke. The task **must not already exist** in the specified group ArchDuke.
 `TASK_NAME` can take any values **except for that stated below in the limitation box**,
 and it **should not be blank** and **should not have preceding whitespaces**. `TASK_NAME` with preceding white spaces
-followed by words will be treated as if there is no preceding white spaces. E.g. `<whitespaces>Meeting` is the same as `Meeting`.
+followed by words will be treated as if there is no preceding white spaces. E.g. <code>&nbsp;&nbsp;&nbsp;&nbsp;Meeting</code> is the same as `Meeting`.
 
 <div markdown="block" class="alert alert-info">
 
