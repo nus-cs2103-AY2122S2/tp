@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
  * Contains unit tests for {@code commandResult}.
  */
 public class CommandResultTest {
+
+    /**
+     *  Tests if different types of CommandResult are the same from the execution of {@code CommandResult}.
+     */
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
@@ -38,6 +42,9 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
     }
 
+    /**
+     *  Tests if different types of hashcode are the same from the execution of {@code CommandResult}.
+     */
     @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");

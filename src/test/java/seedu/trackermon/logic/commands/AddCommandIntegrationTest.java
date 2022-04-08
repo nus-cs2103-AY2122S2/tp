@@ -26,6 +26,9 @@ public class AddCommandIntegrationTest {
         model = new ModelManager(getTypicalShowList(), new UserPrefs());
     }
 
+    /**
+     * Tests the adding of a new show from the execution of {@code AddCommand}.
+     */
     @Test
     public void execute_newShow_success() {
         Show validShow = new ShowBuilder().build();
@@ -37,6 +40,9 @@ public class AddCommandIntegrationTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, validShow), expectedModel);
     }
 
+    /**
+     * Tests the adding of a duplicate show from the execution of {@code AddCommand}.
+     */
     @Test
     public void execute_duplicateShow_throwsCommandException() {
         Show showInList = model.getShowList().getShows().get(0);
