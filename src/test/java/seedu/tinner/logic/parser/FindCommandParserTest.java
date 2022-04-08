@@ -1,6 +1,7 @@
 package seedu.tinner.logic.parser;
 
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tinner.commons.core.Messages.MESSAGE_NO_VALUE_AFTER_PREFIX;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -24,12 +25,16 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidArg_throwsParseException() {
-        assertParseFailure(parser, "find c/ r/ ",
+        assertParseFailure(parser, "abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "find c/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "find r/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/ ",
+                String.format(MESSAGE_NO_VALUE_AFTER_PREFIX, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " r/ ",
+                String.format(MESSAGE_NO_VALUE_AFTER_PREFIX, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/meta r/",
+                String.format(MESSAGE_NO_VALUE_AFTER_PREFIX, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/meta r/",
+                String.format(MESSAGE_NO_VALUE_AFTER_PREFIX, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -43,5 +48,17 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n c/Square Enix \n \t r/Software Engineer \t", expectedFindCommand);
+
+        // no company keywords
+        expectedFindCommand =
+                new FindCommand(new CompanyNameContainsKeywordsPredicate(Arrays.asList("Software", "Engineer"),
+                        Arrays.asList()), new RoleNameContainsKeywordsPredicate(Arrays.asList("Software", "Engineer")));
+        assertParseSuccess(parser, " r/Software Engineer", expectedFindCommand);
+
+        // no role keywords
+        expectedFindCommand =
+                new FindCommand(new CompanyNameContainsKeywordsPredicate(Arrays.asList(),
+                        Arrays.asList("Square", "Enix")), new RoleNameContainsKeywordsPredicate(Arrays.asList()));
+        assertParseSuccess(parser, " c/ Square Enix", expectedFindCommand);
     }
 }

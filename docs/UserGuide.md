@@ -89,7 +89,7 @@ java -jar tinner.jar
     * **`list`** : Lists all companies and internship roles.
     * **`addCompany`**`n/Google p/98765432 e/hr_google@gmail.com a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371` :
       Adds a company named `Google` to Tinner.
-    * **`addRole`**`1 n/Software Engineering Intern s/applying r/31-03-2022 23:59 d/Write mobile applications $/5000` :
+    * **`addRole`**`1 n/Software Engineering Intern s/applying r/30-05-2022 23:59 d/Write mobile applications $/5000` :
       Adds a software engineering intern role to the company at index 1.
     * **`deleteCompany`**`1` : Deletes the 1st company shown in the current list.
     * **`deleteRole`**`1 1` : Deletes the 1st role of the 1st company shown in the current list.
@@ -255,7 +255,7 @@ The following points explain the format of a command.
 
 ### Role Restrictions <a id="c-role-restrictions"></a>
 
-* The `ROLE_NAME` should only contain alphanumeric characters, spaces and an optional pair of round brackets and have a character limit of at most 30.
+* The `ROLE_NAME` should only contain alphanumeric characters, spaces and ending with an optional pair of round brackets to specify the role type. It has a character limit of at most 30.
 * The `REMINDER_DATE` should not be in the past and must be a valid date 
 in the following format: dd-MM-yyyy HH:mm.
 * The `STATUS` is case-sensitive and can only accept the following inputs:
@@ -559,8 +559,8 @@ company.
 
 **Examples:**
 
-* `addRole 1 n/Data Analyst s/applying r/31-03-2022 23:59 d/Analyse data $/4800 `
-* `addRole 3 n/Software Engineer (Front end) s/applying r/30-04-2022 01:20 d/web deveploment with react js $/2400 `
+* `addRole 1 n/Data Analyst s/applying r/30-05-2022 23:59 d/Analyse data $/4800 `
+* `addRole 3 n/Software Engineer (Front end) s/applying r/30-05-2022 01:20 d/web deveploment with react js $/2400 `
 * `list` followed by `deleteCompany 2` deletes the 2<sup>nd</sup> company in the displayed company list.
 * Refer to [Demo Use Case #1](#usecase1) for an example use case.
 
@@ -822,8 +822,8 @@ There are currently no features to revert the `clear` command.
 | **Delete company**            | `deleteCompany COMPANY_INDEX `<br><br> e.g., `deleteCompany 3 `                                                                                                                                                    |
 | **Favourite company**         | `favourite COMPANY_INDEX` <br><br> e.g., `favourite 1`                                                                                                                                                             |
 | **Unfavourite company**       | `unfavourite COMPANY_INDEX` <br><br> e.g., `unfavourite 1`                                                                                                                                                         |
-| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS b/DEADLINE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g., `addRole 1 n/Data Analyst s/applying b/31-03-2022 23:59 d/Analyse marketing data $/5000`               |
-| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [b/DEADLINE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g., `editRole 1 1 s/pending b/31-03-2022 23:59 $/5000`                                   |
+| **Add role**                  | `addRole COMPANY_INDEX n/ROLE_NAME [(TYPE)] s/STATUS r/REMINDER_DATE [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g., `addRole 1 n/Data Analyst s/applying r/30-05-2022 23:59 d/Analyse marketing data $/5000`               |
+| **Edit role**                 | `editRole COMPANY_INDEX ROLE_INDEX [n/ROLE_NAME [(TYPE)]] [s/STATUS] [r/REMINDER_DATE] [d/DESCRIPTION] [$/STIPEND]` <br><br> e.g., `editRole 1 1 s/pending r/30-05-2022 23:59 $/5000`                                   |
 | **Delete role**               | `deleteRole COMPANY_INDEX ROLE_INDEX` <br><br> e.g., `deleteRole 3 1 `                                                                                                                                             |
 | **List companies**            | `list`                                                                                                                                                                                                             |
 | **List favourited companies** | `listFavourite`                                                                                                                                                                                                    |

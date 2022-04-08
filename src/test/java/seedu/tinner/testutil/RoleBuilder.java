@@ -14,7 +14,7 @@ public class RoleBuilder {
 
     public static final String DEFAULT_NAME = "Google";
     public static final String DEFAULT_STATUS = "applying";
-    public static final String DEFAULT_REMINDER_DATE = "01-01-2022 00:00";
+    public static final String DEFAULT_REMINDER_DATE = "01-05-2022 00:00";
     public static final String DEFAULT_DESCRIPTION = "Frontend web development";
     public static final String DEFAULT_STIPEND = "1000";
 

@@ -17,6 +17,11 @@ Class StatusBarFooter
 Class CommandBox
 Class RoleListPanel
 Class RoleCard
+Class ReminderWindow
+Class ReminderDateListPanel
+Class ReminderDateCard
+Class ReminderListPanel
+Class ReminderCard
 }
 
 package Model <<Rectangle>> {
@@ -37,8 +42,14 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" CompanyListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" ReminderWindow
 
 CompanyListPanel -down-> "*" CompanyCard
+
+ReminderWindow *-down-> "1" ReminderDateListPanel
+ReminderDateListPanel -down-> "*" ReminderDateCard
+ReminderDateCard -down-> "0..1" ReminderListPanel
+ReminderListPanel -down-> "*" ReminderCard
 
 MainWindow -left-|> UiPart
 
@@ -50,15 +61,24 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 RoleListPanel --|> UiPart
 RoleCard --|> UiPart
+ReminderDateCard --|> UiPart
+ReminderCard --|> UiPart
 
 CompanyCard ..> Model
 RoleCard ..> Model
+ReminderDateCard ..> Model
+ReminderCard ..> Model
+ReminderCard .[hidden].> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
 CompanyCard -down-> "0..1" RoleListPanel
 RoleListPanel -down-> "*" RoleCard
 
+ReminderWindow -[hidden]left- CompanyListPanel
+ReminderDateListPanel -[hidden]left- CompanyCard
+ReminderDateCard -[hidden]left- RoleListPanel
+ReminderListPanel -[hidden]left- RoleCard
 CompanyListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
