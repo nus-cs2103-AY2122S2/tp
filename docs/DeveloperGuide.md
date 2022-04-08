@@ -203,7 +203,7 @@ Step 2. The user executes `delete 3` command to delete the 3rd product in the iB
 
 <img src="images/UndoRedoState1.png" width="550" />
 
-Step 3. The user executes `update 1 n~Maggie​` to add a new product. This command also calls `Model#saveIBookChanges()`, causing another `StateChange` to be saved into the `stateChanges` list.
+Step 3. The user executes `update 1 n:Maggie​` to add a new product. This command also calls `Model#saveIBookChanges()`, causing another `StateChange` to be saved into the `stateChanges` list.
 
 <img src="images/UndoRedoState2.png" width="550" />
 
