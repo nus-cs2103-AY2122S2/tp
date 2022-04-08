@@ -12,7 +12,7 @@ if () then ([Fields have wrong prefixes || \n Index is out of range || \n Fields
         :CommandException;
 
     else (            [Else])
-
+    endif
     if () then ([Edited field value that needs \nto be unique already \nexists in the address book])
     : Throws CommandException;
     else (            [Else])
