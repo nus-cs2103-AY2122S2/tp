@@ -408,7 +408,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 3. User requests to show a list of persons tagged to his past project team.
 4. HackNet shows the list of all persons linked with a past project team.
     
-*Use case: UC05 - Edit a person*
+**Use case: UC05 - Edit a person**
 
 **MSS**
 
@@ -431,7 +431,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
       Use case resumes at step 3.
 
-*Use case: UC06 - Find a person by skill*
+**Use case: UC06 - Find a person by skill**
 
 **MSS**
 
@@ -451,7 +451,7 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
 * *a. At any time user found person
 
-      Use case ends.
+    Use case ends.
 
 ### Non-Functional Requirements
 
