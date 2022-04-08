@@ -25,6 +25,10 @@ import seedu.trackermon.model.show.StatusContainsKeywordsPredicate;
 import seedu.trackermon.model.show.TagsContainsKeywordsPredicate;
 import seedu.trackermon.model.tag.Tag;
 
+// @@author Ardentsoul-reused
+// Reused from https://github.com/AY2021S2-CS2103T-T12-4/tp and
+// https://stackoverflow.com/questions/24553761/how-to-apply-multiple-predicates-to-a-java-util-stream
+// with minor modifications
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -139,3 +143,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         return trimmedArgs.split("\\s+");
     }
 }
+// @@author
