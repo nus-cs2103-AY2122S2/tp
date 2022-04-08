@@ -316,7 +316,7 @@ Format `upload INDEX [i/FilePath:description]`
 - Adds an image to the client at the specified `INDEX`.
 - The index refers to the index number shown in the displayed client list.
 - File path is from the directory the JAR file is ran from. e.g. `upload 1 i/example.png:living room`
-  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png).
+  ![images/user-guide/Upload_Directory_Example.png](images/user-guide/Upload_Directory_Example.png)
 - Description is optional and can be left blank e.g. `upload 1 i/example.png`.
 - multiple images can be uploaded at once by starting each file with a new flag e.g. `upload 1 i/example.png:living room i/example2.png:Bed Room`.
 
@@ -332,9 +332,15 @@ Format `viewimage INDEX`
 
 Sets a reminder for the specific client from the application. The user (real estate agent) will be able to view a more compact list of clients with reminders set, via a new window called the [Reminder window](#open-reminder-window).
 
-The user will only be able to create 1 Reminder for each client. The user will be able to create a new Reminder, edit a current Reminder or remove a Reminder for a client.
+<div markdown="block" class="alert alert-info">
 
-Reminders are meant to serve as temporary notes for the user & thus will not persist beyond the lifecycle of a RealEstatePro application. This means any reminders created will be removed once the RealEstatePro application is closed.
+**:information_source: Notes about Reminders:**<br>
+
+- The user will only be able to create 1 Reminder for each client. The user will be able to create a new Reminder, edit a current Reminder or remove a Reminder for a client.
+- Reminders are meant to serve as temporary notes for the user & thus will not persist beyond the lifecycle of a RealEstatePro application. This means any reminders created will be removed once the RealEstatePro application is closed.
+
+</div>
+
 
 Format: `remind INDEX r/ReminderDetails`
 - Sets a Reminder for the client at the specified `INDEX`.
