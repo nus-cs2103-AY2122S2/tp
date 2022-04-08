@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuccess;
@@ -29,6 +30,14 @@ public class MatchCommandTest {
 
     private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
         TypicalSellers.getTypicalSellerAddressBook(), TypicalBuyers.getTypicalBuyerAddressBook());
+
+
+    @Test
+    public void execute_invalidIndex_failure() {
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            model.getFilteredBuyerList().get(-1);
+        });
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
