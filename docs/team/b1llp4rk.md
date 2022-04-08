@@ -30,7 +30,7 @@ Given below are my contributions to the project.
 * **Bug Fixes**
     * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills when editing multiple persons in batch, as UserGuide states. This prevents such case when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
     * Inability to redo some edit commands was discovered while [reinforcing integration test of edit command](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/156), and was fixed.
-        * Commands that alter the data of HackNet have to commit the new changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
+        * Commands that alter the data of HackNet have to commit the changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
 
 
 * **Contributions to the UG**:
