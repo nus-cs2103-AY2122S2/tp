@@ -1,0 +1,143 @@
+@startuml
+!include style.puml
+
+title AssignCommand\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AssignCommandParser" as AssignCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":AssignCommand" as AssignCommand LOGIC_COLOR
+
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser LOGIC_COLOR
+
+create AssignCommandParser
+AddressBookParser -> AssignCommandParser
+activate AssignCommandParser LOGIC_COLOR
+AssignCommandParser --> AddressBookParser
+deactivate AssignCommandParser
+
+AddressBookParser -> AssignCommandParser : parse(arguments)
+activate AssignCommandParser LOGIC_COLOR
+
+AssignCommandParser -> ArgumentTokenizer ++ LOGIC_COLOR: tokenize(argsString, prefixes)
+ArgumentTokenizer --> AssignCommandParser -- LOGIC_COLOR: argMultimap
+
+ref over AssignCommandParser :Parsing inputted fields
+
+create AssignCommand
+AssignCommandParser -> AssignCommand
+activate AssignCommand LOGIC_COLOR
+AssignCommand --> AssignCommandParser
+deactivate AssignCommand
+
+AssignCommandParser --> AddressBookParser -- LOGIC_COLOR: AssignCommand
+deactivate AssignCommandParser
+
+AddressBookParser --> LogicManager  -- LOGIC_COLOR: AssignCommand
+deactivate AddressBookParser
+
+LogicManager -> AssignCommand LOGIC_COLOR : execute(model)
+activate AssignCommand LOGIC_COLOR
+
+alt user inputs studentId and task
+    AssignCommand -> Model ++ MODEL_COLOR: assignTaskToPerson(studentId, task)
+    deactivate
+
+else user inputs moduleCode and task
+    AssignCommand -> Model ++ MODEL_COLOR: assignTaskToAllInModule(moduleCode, task)
+    deactivate
+
+end
+
+create CommandResult
+AssignCommand -> CommandResult ++ LOGIC_COLOR:
+
+CommandResult --> AssignCommand --:
+deactivate CommandResult
+
+AssignCommand --> LogicManager --: commandResult
+deactivate AssignCommand
+
+[<--LogicManager --: commandResult
+deactivate LogicManager
+
+@enduml
+
+
+@startuml
+!include style.puml
+
+box
+participant ":AssignCommandParser" as AssignCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant ":ModuleCode" as ModuleCode MODEL_COLOR
+participant ":StudentId" as StudentId MODEL_COLOR
+participant ":Task" as Task MODEL_COLOR
+end box
+
+mainframe sd Parsing inputted field
+
+
+alt user inputs studentId and task
+    AssignCommandParser -> ParserUtil : parseStudentId(studentId)
+    activate ParserUtil LOGIC_COLOR
+    create StudentId
+    ParserUtil -> StudentId
+    activate StudentId MODEL_COLOR
+    StudentId --> ParserUtil
+    deactivate
+    ParserUtil --> AssignCommandParser : studentId
+    deactivate
+
+
+    AssignCommandParser -> ParserUtil : parseTask(task)
+    activate ParserUtil LOGIC_COLOR
+    create Task
+    ParserUtil -> Task
+    activate Task MODEL_COLOR
+    Task --> ParserUtil
+    deactivate
+    ParserUtil --> AssignCommandParser : task
+    deactivate
+
+else user inputs moduleCode and task
+
+    AssignCommandParser -> ParserUtil : parseModuleCode(moduleCode)
+    activate ParserUtil LOGIC_COLOR
+    create ModuleCode
+    ParserUtil -> ModuleCode
+    activate ModuleCode MODEL_COLOR
+    ModuleCode --> ParserUtil
+    deactivate
+    ParserUtil --> AssignCommandParser : moduleCode
+    deactivate
+
+
+    AssignCommandParser -> ParserUtil : parseTask(task)
+    activate ParserUtil LOGIC_COLOR
+    create Task
+    ParserUtil -> Task
+    activate Task MODEL_COLOR
+    Task --> ParserUtil
+    deactivate
+    ParserUtil --> AssignCommandParser : task
+    deactivate
+end
+
+@enduml

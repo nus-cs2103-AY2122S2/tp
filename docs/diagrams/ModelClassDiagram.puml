@@ -14,11 +14,13 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class ModuleCode
+Class TelegramHandle
+Class StudentId
+Class TaskList
 
 }
 
@@ -39,12 +41,14 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> StudentId
+Person *--> TelegramHandle
+Person *--> ModuleCode
+Person *--> TaskList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+
+StudentId -[hidden]right-> ModuleCode
+ModuleCode -[hidden]right-> Name
 
 ModelManager -->"~* filtered" Person
 @enduml
