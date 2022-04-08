@@ -545,14 +545,17 @@ Given below are instructions to test the app manually.
 # Effort
 
 ## Difficulty level
-RealEstatePro was developed from morphing the existing AB3 app
+The development was of moderate difficulty due to having to understand the existing codebase and adapting it for our project. We also had trouble integrating the various features together especially the buyer and seller feature.
 
 ## Challenges
 Challenges faced were the following:
 - Understanding and refactoring the existing AB3 code base.
+- Balancing the relationship between buyers, sellers, properties and preferences.
+- Understanding how to use JavaFX and adapting the existing JavaFX to suit our needs.
+- 
 
 ## Effort Required
-
+We had to research methods on how to implement the new features and think of the possible needs of real estate agents and difficulties that they face in their line of work. 
 
 ## Achievements
 RealEstatePro has been developed to become a fully functioning app that is fully capable fo fufilling the needs of a real estate agent in organising clients and is capable of
