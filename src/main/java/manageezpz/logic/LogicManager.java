@@ -47,9 +47,13 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        //@@author ChanWeiJie-reused
+        //Reused from https://stackoverflow.com/a/1795436
+        //with minor modifications
         Pattern pattern = Pattern.compile("[\\p{C}]");
         Matcher matcher = pattern.matcher(commandText);
         boolean isInvalid = matcher.find();
+        //@@author
 
         if (isInvalid) {
             throw new ParseException(INPUT_CONTAINS_SPECIAL_CHARACTERS);
