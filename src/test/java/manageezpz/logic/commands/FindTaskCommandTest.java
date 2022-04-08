@@ -4,7 +4,7 @@ import static manageezpz.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static manageezpz.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
-import static manageezpz.testutil.TypicalPersons.ALICE;
+import static manageezpz.testutil.TypicalPersons.GEORGE;
 import static manageezpz.testutil.TypicalTasks.FYP_REPORT;
 import static manageezpz.testutil.TypicalTasks.GET_A_DRINK;
 import static manageezpz.testutil.TypicalTasks.GET_HAIRCUT;
@@ -136,7 +136,7 @@ class FindTaskCommandTest {
     @Test
     void findCommand_findTaskWithAssignee_showTasksWithGivenAssignee() {
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(null,
-                null, null, null, ALICE.getName().fullName, null);
+                null, null, null, GEORGE.getName().fullName, null);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 4);
         List<Task> expectedTasks = List.of(PROJECT_CAPSTONE, FYP_REPORT, RETURN_BOOK, HOUSE_VISTING);
@@ -164,7 +164,7 @@ class FindTaskCommandTest {
         List<String> keywords = List.of("Capstone");
         Date date = new Date("2022-04-01");
         TaskMultiplePredicate predicate = new TaskMultiplePredicate(PREFIX_DEADLINE, keywords, date,
-                Priority.HIGH, ALICE.getName().toString(), Boolean.TRUE);
+                Priority.HIGH, GEORGE.getName().toString(), Boolean.TRUE);
         expectedModel.updateFilteredTaskList(predicate);
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 1);
         List<Task> expectedTasks = List.of(PROJECT_CAPSTONE);

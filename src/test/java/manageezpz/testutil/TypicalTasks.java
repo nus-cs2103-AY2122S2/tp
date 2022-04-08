@@ -1,7 +1,7 @@
 package manageezpz.testutil;
 
 import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
-import static manageezpz.testutil.TypicalPersons.ALICE;
+import static manageezpz.testutil.TypicalPersons.GEORGE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,10 +57,10 @@ public class TypicalTasks {
         FYP_REPORT.setPriority("HIGH");
 
         // Set Assignee
-        RETURN_BOOK.addAssignees(ALICE);
-        PROJECT_CAPSTONE.addAssignees(ALICE);
-        FYP_REPORT.addAssignees(ALICE);
-        HOUSE_VISTING.addAssignees(ALICE);
+        RETURN_BOOK.addAssignees(GEORGE);
+        PROJECT_CAPSTONE.addAssignees(GEORGE);
+        FYP_REPORT.addAssignees(GEORGE);
+        HOUSE_VISTING.addAssignees(GEORGE);
 
         // Set marked
         RETURN_BOOK.setTaskDone();
