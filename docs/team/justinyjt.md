@@ -47,4 +47,4 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments:) (Pull requests: [\#54](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/54), [\#92](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/92), [\#200](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/200))
-    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/justinyjt/ped/issues/7), [2](https://github.com/justinyjt/ped/issues/6), [3](https://github.com/justinyjt/ped/issues/2)
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/justinyjt/ped/issues/7), [2](https://github.com/justinyjt/ped/issues/6), [3](https://github.com/justinyjt/ped/issues/2))
