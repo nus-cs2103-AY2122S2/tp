@@ -51,11 +51,11 @@ public class ReminderTest {
                 .build();
         assertTrue(APPLE_ML_ENGINEER.isSameReminder(lowerCaseCompanyName));
 
-        // company name has trailing spaces, all other attributes same -> returns false
+        // company name has trailing spaces, all other attributes same -> returns true
         Reminder nameWithTrailingSpaces = new ReminderBuilder(APPLE_ML_ENGINEER)
                 .withCompanyName(VALID_NAME_APPLE + " ")
                 .build();
-        assertFalse(APPLE_ML_ENGINEER.isSameReminder(nameWithTrailingSpaces));
+        assertTrue(APPLE_ML_ENGINEER.isSameReminder(nameWithTrailingSpaces));
 
         // same role name includes brackets -> return true
         Reminder reminderOne = new ReminderBuilder()
