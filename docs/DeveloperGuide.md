@@ -342,14 +342,14 @@ System: RealEstatePro (REP)
 Actor: User
 
 **MSS**
-1. User requests to add a client. 
+1. User requests to add a client.
 2. REP adds the client to the system.
 
 **Extensions:**
 
 * 1a. REP detects error in details
    * 1a1. REP displays an error message.
-  
+
      Use case resumes at step 1
 
 **Use Case: Edit a client**
@@ -370,12 +370,12 @@ Actor: User
 
 * 3a. The given index is invalid
   * 3b1. REP displays an error message
-  
+
     Use case resumes at step 2
 
 * 3b. REP detects error in details
    * 3a1. REP displays an error message
-  
+
      Use case resumes at step 3
 
 **Use Case: Delete a client**
@@ -394,7 +394,7 @@ Actor: User
 
 * 3a. The given index is invalid
    * 3a1. REP displays an error message
-  
+
      Use case resumes at step 2
 
 **Use Case: Upload Image**
