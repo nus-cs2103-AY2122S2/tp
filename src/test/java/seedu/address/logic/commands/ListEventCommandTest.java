@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.getExpectedListCommandResult;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ENTRY;
 
@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListPersonCommand.
  */
-public class ListPersonCommandTest {
+public class ListEventCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,38 +28,38 @@ public class ListPersonCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        model.showPersonList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
-        expectedModel.showPersonList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
+        model.showEventList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
+        expectedModel.showEventList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        expectedCommandResult = getExpectedListCommandResult(SearchType.UNARCHIVED_ONLY, ListType.PERSON);
+        expectedCommandResult = getExpectedListCommandResult(SearchType.UNARCHIVED_ONLY, ListType.EVENT);
         assertCommandSuccess(
-                new ListPersonCommand(SearchType.UNARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
+                new ListEventCommand(SearchType.UNARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsUnarchived() {
-        showPersonAtIndex(model, INDEX_FIRST_ENTRY);
-        expectedCommandResult = getExpectedListCommandResult(SearchType.UNARCHIVED_ONLY, ListType.PERSON);
+        showEventAtIndex(model, INDEX_FIRST_ENTRY);
+        expectedCommandResult = getExpectedListCommandResult(SearchType.UNARCHIVED_ONLY, ListType.EVENT);
         assertCommandSuccess(
-                new ListPersonCommand(SearchType.UNARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
+                new ListEventCommand(SearchType.UNARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsArchived() {
-        expectedCommandResult = getExpectedListCommandResult(SearchType.ARCHIVED_ONLY, ListType.PERSON);
-        expectedModel.showPersonList(Model.PREDICATE_SHOW_ARCHIVED_ONLY);
+        expectedCommandResult = getExpectedListCommandResult(SearchType.ARCHIVED_ONLY, ListType.EVENT);
+        expectedModel.showEventList(Model.PREDICATE_SHOW_ARCHIVED_ONLY);
         assertCommandSuccess(
-                new ListPersonCommand(SearchType.ARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
+                new ListEventCommand(SearchType.ARCHIVED_ONLY), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsAll() {
-        expectedCommandResult = getExpectedListCommandResult(SearchType.ALL, ListType.PERSON);
-        expectedModel.showPersonList(Model.PREDICATE_SHOW_ALL);
+        expectedCommandResult = getExpectedListCommandResult(SearchType.ALL, ListType.EVENT);
+        expectedModel.showEventList(Model.PREDICATE_SHOW_ALL);
         assertCommandSuccess(
-                new ListPersonCommand(SearchType.ALL), model, expectedCommandResult, expectedModel);
+                new ListEventCommand(SearchType.ALL), model, expectedCommandResult, expectedModel);
     }
 }

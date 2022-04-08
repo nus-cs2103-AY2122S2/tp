@@ -13,10 +13,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.ListType;
+import seedu.address.commons.core.SearchTypeUtil.SearchType;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.entry.Company;
+import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 import seedu.address.model.entry.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -79,6 +83,7 @@ public class CommandTestUtil {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
+            expectedModel.equals(actualModel);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
@@ -120,9 +125,72 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.showPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the company at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showCompanyAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCompanyList().size());
+
+        Company company = model.getFilteredCompanyList().get(targetIndex.getZeroBased());
+        final String[] splitName = company.getName().fullName.split("\\s+");
+        model.showCompanyList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredCompanyList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitName = event.getName().fullName.split("\\s+");
+        model.showEventList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredEventList().size());
+    }
+
+    public static CommandResult getExpectedListCommandResult(SearchType searchType, ListType listType) {
+        String searchTypeString = "";
+        String msgSuccess = "";
+
+        switch (searchType) {
+        case UNARCHIVED_ONLY:
+            searchTypeString = " unarchived";
+            break;
+        case ARCHIVED_ONLY:
+            searchTypeString = " archived";
+            break;
+        case ALL:
+            searchTypeString = "";
+            break;
+        default:
+            // should not reach here
+        }
+
+        switch (listType) {
+        case PERSON:
+            msgSuccess = ListPersonCommand.MESSAGE_SUCCESS;
+            break;
+        case COMPANY:
+            msgSuccess = ListCompanyCommand.MESSAGE_SUCCESS;
+            break;
+        case EVENT:
+            msgSuccess = ListEventCommand.MESSAGE_SUCCESS;
+            break;
+        default:
+            // should not reach here
+        }
+
+        return new CommandResult(String.format(msgSuccess, searchTypeString),
+                false, false, listType == ListType.PERSON, listType == ListType.COMPANY, listType == ListType.EVENT);
+    }
 }

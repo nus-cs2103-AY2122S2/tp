@@ -68,7 +68,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         if (companyNamePresent) {
             List<String> dummy = Arrays.asList(argumentMultimap.getValue(PREFIX_COMPANY).get().split("\\s+"));
             for (String s : dummy) {
-                ParserUtil.parseCompanyName(s);
+                ParserUtil.parseName(s);
             }
         }
         if (tagPresent) {
