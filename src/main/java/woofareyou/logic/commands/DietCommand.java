@@ -1,19 +1,19 @@
 package woofareyou.logic.commands;
 
+import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.List;
 
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
-import woofareyou.commons.util.CollectionUtil;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.model.Model;
 import woofareyou.model.pet.Diet;
 import woofareyou.model.pet.Pet;
 
 
-
 /**
- * Adds diet details to a pet identified using its displayed index from the address book.
+ * Adds diet details to a pet identified using its displayed index from WoofAreYou.
  */
 public class DietCommand extends Command {
 
@@ -37,7 +37,7 @@ public class DietCommand extends Command {
      * @param diet of the pet to be updated to
      */
     public DietCommand(Index index, Diet diet) {
-        CollectionUtil.requireAllNonNull(index, diet);
+        requireAllNonNull(index, diet);
 
         this.index = index;
         this.diet = diet;
@@ -58,7 +58,7 @@ public class DietCommand extends Command {
                 petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet));
     }

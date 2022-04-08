@@ -6,7 +6,7 @@ import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 
 /**
- * Clears the address book.
+ * Clears WoofAreYou.
  */
 public class ClearCommand extends Command {
 

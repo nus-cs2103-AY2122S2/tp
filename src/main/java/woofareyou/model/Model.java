@@ -76,6 +76,8 @@ public interface Model {
      */
     void setPet(Pet target, Pet editedPet);
 
+    /** Returns the last used predicate to filter pet list by the model. */
+    Predicate<Pet> getLastUsedPredicate();
 
     /** Returns an unmodifiable view of the filtered pet list */
     ObservableList<Pet> getFilteredPetList();
@@ -85,6 +87,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPetList(Predicate<Pet> predicate);
+
+    /**
+     * Updates the filter of the filtered pet list to filter by the last given {@code predicate}.
+     * If no last used predicate is found, uses Predicate to display full Pet list.
+     */
+    void updateFilteredPetList();
+
+    /**
+     * Updates filtered pet list to display the entire pet list.
+     */
+    void updateFilteredPetListToFullPetList();
 
     /**
      * Sorts the pet list based on the field provided.

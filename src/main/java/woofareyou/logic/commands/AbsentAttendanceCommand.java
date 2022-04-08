@@ -3,7 +3,6 @@ package woofareyou.logic.commands;
 import static woofareyou.commons.util.AttendanceUtil.ATTENDANCE_DATE_FORMATTER;
 import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
 import static woofareyou.logic.parser.CliSyntax.PREFIX_DATE;
-import static woofareyou.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,8 +25,9 @@ public class AbsentAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an attendance of a pet as absent "
             + "by the index number used in the displayed pet list. \n"
-            + "Includes the date, pick up time and drop off time (if any). \n"
+            + "Includes the date. \n"
             + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_DATE + "DATE_OF_ATTENDANCE in dd-MM-yyyy "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "15-03-2022 ";
 
@@ -81,7 +81,7 @@ public class AbsentAttendanceCommand extends Command {
                 petToEdit.getAppointment(), targetAttendanceHashMap);
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, absentAttendance));
     }

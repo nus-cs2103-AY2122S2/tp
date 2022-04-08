@@ -3,7 +3,7 @@ package woofareyou.logic.commands;
 import woofareyou.model.Model;
 
 /**
- * Terminates the program.
+ * Terminates WoofAreYou.
  */
 public class ExitCommand extends Command {
 

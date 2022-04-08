@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -20,14 +21,13 @@ import woofareyou.model.Model;
 import woofareyou.model.ReadOnlyAddressBook;
 import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.pet.Pet;
-import woofareyou.testutil.Assert;
 import woofareyou.testutil.PetBuilder;
 
 public class AddCommandTest {
 
     @Test
     public void constructor_nullPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
@@ -47,8 +47,34 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPet);
         ModelStub modelStub = new ModelStubWithPet(validPet);
 
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () ->
-                addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePetDifferentTag_throwsCommandException() {
+        Pet validPet = new PetBuilder().withTags("Poodle").build();
+        AddCommand addCommand = new AddCommand(new PetBuilder().build());
+        ModelStub modelStub = new ModelStubWithPet(validPet);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePetDifferentDiet_throwsCommandException() {
+        Pet validPet = new PetBuilder().withDiet("Vegetarian").build();
+        AddCommand addCommand = new AddCommand(new PetBuilder().build());
+        ModelStub modelStub = new ModelStubWithPet(validPet);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePetDifferentAppointment_throwsCommandException() {
+        Pet validPet = new PetBuilder().withAppointment("05-05-2022 09:00", "NUS Vet Clinic").build();
+        AddCommand addCommand = new AddCommand(new PetBuilder().build());
+        ModelStub modelStub = new ModelStubWithPet(validPet);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PET, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -145,12 +171,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public Predicate<Pet> getLastUsedPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Pet> getFilteredPetList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPetList(Predicate<Pet> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPetListToFullPetList() {
             throw new AssertionError("This method should not be called.");
         }
 

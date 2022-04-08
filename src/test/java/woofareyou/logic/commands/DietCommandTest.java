@@ -69,7 +69,8 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(firstPerson, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);

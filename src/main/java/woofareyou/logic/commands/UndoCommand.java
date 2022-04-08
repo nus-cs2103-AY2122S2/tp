@@ -7,7 +7,9 @@ import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ReadOnlyAddressBook;
 
-
+/**
+ * Undoes pet owner's previous commands in WoofAreYou.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Undid previous command!";

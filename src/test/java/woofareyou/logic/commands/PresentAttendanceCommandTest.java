@@ -2,8 +2,8 @@ package woofareyou.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static woofareyou.logic.commands.CommandTestUtil.DESC_WITHOUT_TRANSPORT_ARRANGEMENT;
-import static woofareyou.logic.commands.CommandTestUtil.DESC_WITH_TRANSPORT_ARRANGEMENT;
+import static woofareyou.logic.commands.CommandTestUtil.PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE;
+import static woofareyou.logic.commands.CommandTestUtil.PRESENT_DESC_WITH_TRANSPORT_AMY;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandFailure;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.util.AttendanceUtil;
+import woofareyou.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
@@ -35,9 +36,9 @@ public class PresentAttendanceCommandTest {
     private static final String DROPOFF_TIME_STUB = "17:30";
     private static final String ALTERNATE_DROPOFF_TIME_STUB = "18:00";
 
-    private static PresentAttendanceCommand.PresentAttendanceDescriptor descriptorWithTransportArrangement;
-    private static PresentAttendanceCommand.PresentAttendanceDescriptor descriptorWithoutTransportArrangement;
-    private static PresentAttendanceCommand.PresentAttendanceDescriptor alternateDescriptorWithTransportArrangement;
+    private static PresentAttendanceDescriptor descriptorWithTransportArrangement;
+    private static PresentAttendanceDescriptor descriptorWithoutTransportArrangement;
+    private static PresentAttendanceDescriptor alternateDescriptorWithTransportArrangement;
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -97,7 +98,8 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -145,7 +147,8 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, descriptorWithoutTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -194,7 +197,8 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, alternateDescriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(secondPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -281,7 +285,8 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                model.getLastUsedPredicate());
         expectedModel.setPet(fourthPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -328,11 +333,10 @@ public class PresentAttendanceCommandTest {
     @Test
     public void equals() {
         final PresentAttendanceCommand standardCommand = new PresentAttendanceCommand(INDEX_FIRST_PET,
-            DESC_WITH_TRANSPORT_ARRANGEMENT);
+            PRESENT_DESC_WITH_TRANSPORT_AMY);
 
         // same values -> returns true
-        PresentAttendanceCommand.PresentAttendanceDescriptor copyDescriptor =
-                new PresentAttendanceCommand.PresentAttendanceDescriptor(DESC_WITH_TRANSPORT_ARRANGEMENT);
+        PresentAttendanceDescriptor copyDescriptor = new PresentAttendanceDescriptor(PRESENT_DESC_WITH_TRANSPORT_AMY);
         PresentAttendanceCommand commandWithSameValues = new PresentAttendanceCommand(INDEX_FIRST_PET, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -347,10 +351,10 @@ public class PresentAttendanceCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(
-            new PresentAttendanceCommand(INDEX_SECOND_PET, DESC_WITH_TRANSPORT_ARRANGEMENT)));
+            new PresentAttendanceCommand(INDEX_SECOND_PET, PRESENT_DESC_WITH_TRANSPORT_AMY)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(
-            new PresentAttendanceCommand(INDEX_FIRST_PET, DESC_WITHOUT_TRANSPORT_ARRANGEMENT)));
+            new PresentAttendanceCommand(INDEX_FIRST_PET, PRESENT_DESC_WITHOUT_TRANSPORT_CHARLIE)));
     }
 }

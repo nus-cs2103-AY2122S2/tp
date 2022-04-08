@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import woofareyou.model.Model;
 
 /**
- * Lists all pets in the address book to the user.
+ * Lists all pets in WoofAreYou to the pet owner.
  */
 public class ListCommand extends Command {
 
@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetListToFullPetList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

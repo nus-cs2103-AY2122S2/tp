@@ -1,7 +1,7 @@
 package woofareyou.logic.commands;
 
 import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
-import static woofareyou.model.Model.PREDICATE_SHOW_ALL_PETS;
+
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import woofareyou.model.pet.Pet;
 
 
 /**
- * Adds appointment details to a pet identified using it's displayed index from the address book.
+ * Adds appointment details to a pet identified using it's displayed index from WoofAreYou.
  */
 public class AppointmentCommand extends Command {
 
@@ -63,7 +63,7 @@ public class AppointmentCommand extends Command {
                 petToEdit.getAttendanceHashMap());
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet));
     }

@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_OWNER_NAME + "OWNERNAME] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "BREED] ... \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_OWNER_NAME + "johndoe";
@@ -84,7 +84,7 @@ public class EditCommand extends Command {
         }
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
         return new CommandResult(String.format(MESSAGE_EDIT_PET_SUCCESS, editedPet));
     }
 

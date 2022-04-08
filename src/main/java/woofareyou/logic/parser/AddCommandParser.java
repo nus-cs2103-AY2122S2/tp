@@ -1,5 +1,13 @@
 package woofareyou.logic.parser;
 
+import static woofareyou.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static woofareyou.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static woofareyou.logic.parser.CliSyntax.PREFIX_DIET;
+import static woofareyou.logic.parser.CliSyntax.PREFIX_NAME;
+import static woofareyou.logic.parser.CliSyntax.PREFIX_OWNER_NAME;
+import static woofareyou.logic.parser.CliSyntax.PREFIX_PHONE;
+import static woofareyou.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -30,21 +38,24 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_OWNER_NAME,
-                        CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_OWNER_NAME, PREFIX_PHONE,
+                        PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_OWNER_NAME, CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_OWNER_NAME, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        OwnerName ownerName = ParserUtil.parseOwnerName(argMultimap.getValue(CliSyntax.PREFIX_OWNER_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Diet diet = new Diet("");
+        if (arePrefixesPresent(argMultimap, PREFIX_DIET)) {
+            diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get());
+        }
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        OwnerName ownerName = ParserUtil.parseOwnerName(argMultimap.getValue(PREFIX_OWNER_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Appointment appointment = new Appointment();
         AttendanceHashMap attendanceHashMap = new AttendanceHashMap();
 

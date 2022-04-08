@@ -11,23 +11,46 @@ Given below are my contributions to the project.
 ***
 
 * **New Feature**:
-1. AppointmentCommand
+1. **Appointment Command** [#74](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/74) [#82](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/82)
+  * What it does:
+    * Allows the user to store appointment information of pets.
+    * Appointment information consists of date of appointment, time of appointment and location of appointment.
+  * Justification:
+    * This feature enables the user to track the pet appointments and ensure that user do not overlook or forget any appointment dates of the pets.
+  * Credits:
+    * This feature was extended and refined from the RemarkCommand tutorial that was done at the start of the tP iteration.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=dineshraj555&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
-* **Project management**: *to be added soon*
+* **Project management**:
+1. Participated in weekly project meeting.
+2. Managed project issues and releases on GitHub.
+3. Reviewed other member pull requests.
 
 * **Enhancements to existing features**:
-1. Update AddCommand -> Worked on second level refactoring to convert project from address book to pet book.
-2. Update SortCommand -> Implemented additional 3 sort fields : appointment, pickup time and drop off time.
+1. Second level Project refactoring [#62](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/62):
+  * Worked on second level refactoring to convert project from address book to woofareyou.
+  * Worked on ensuring pet attributes and model such as `ownerName` were refined correctly.
+2. Update SortCommand [#89](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/89) [#99](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/99):
+  * Changed the Sort Command format to be more user-friendly.
+  * Implemented sort functionality for 3 additional fields: 1.appointment, 2.pick up time and 3.drop off time.
+  * Implemented necessary comparator class for the additional fields and test cases.
+3. Update GUI for Appointment [#109](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/109):
+  * Initially appointment title label reflected the color of the appointment status while the appointment information had no color coding.
+  * Update appointment title label to be one singular while appointment info status label had a color coding reflecting the status of the appointment.
+4. Update GUI filtered list display [#158](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/158):
+  * Initially GUI display of filtered list formed by `find` and `filter` commands will prematurely refactor to display full unfiltered pet list when any command was executed.
+  * Refined GUI filtered list behaviour to retain the filtered list display.
 
 * **Documentation**:
   * User Guide:
-  1. Added Appointment Command, Add Command, Clear Command, Edit Command.
-  2. Updated SortCommand
+  1. Added Add Command, Appointment Command, Clear Command, Edit Command, List Command and Help Command.[#55](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/55) [#74](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/74) [#86](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/86).
+  2. Updated Sort Command. [#89](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/89).
   * Developer Guide:
-  1. Appointment Command feature design implementation.
+  1. Assisted with the offline generation of user stories.
+  2. Added developer documentation for Appointment feature. [#82](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/82).
 
-* **Community**: *to be added soon*
+* **Community**:
+1. Served as a second pair of eyes to check and review teammate codes. [#75](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/55) [#169](https://github.com/AY2122S2-CS2103T-T13-1/tp/pull/169)
+2. Reported bugs spotted. [#106](https://github.com/AY2122S2-CS2103T-T13-1/tp/issues/106) [#110](https://github.com/AY2122S2-CS2103T-T13-1/tp/issues/110)
 
-* **Tools**: *to be added soon*
 

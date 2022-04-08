@@ -11,6 +11,7 @@ import woofareyou.commons.util.AppUtil;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_SIZE_CONSTRAINTS = "User should only be able to key in one tag!";
     public static final String VALIDATION_REGEX = "\\s*\\p{Alnum}[\\p{Alnum}\\s]*";
 
     public final String tagName;

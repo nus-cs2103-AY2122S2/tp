@@ -41,17 +41,17 @@ public class TypicalPets {
     public static final Pet DANIEL = new PetBuilder().withName("Peepee").withPhone("87652533")
             .withOwnerName("Daniel Meier").withAddress("10th street").withTags("friends")
             .withDiet("").withAppointment().withPresentAttendanceEntry(DATE_TODAY).build();
-    public static final Pet PANCAKE = new PetBuilder().withName("Pancake").withPhone("9482224")
+    public static final Pet PANCAKE = new PetBuilder().withName("Pancake").withPhone("94822242")
             .withOwnerName("Elle Meyer").withAddress("michegan ave").withDiet("").withAppointment().build();
-    public static final Pet WAFFLE = new PetBuilder().withName("Waffle").withPhone("9482427")
+    public static final Pet WAFFLE = new PetBuilder().withName("Waffle").withPhone("94824272")
             .withOwnerName("Fiona Kunz").withAddress("little tokyo").withDiet("").withAppointment().build();
-    public static final Pet TOFU = new PetBuilder().withName("Tofu").withPhone("9482442")
+    public static final Pet TOFU = new PetBuilder().withName("Tofu").withPhone("94824422")
             .withOwnerName("George Best").withAddress("4th street").withDiet("").withAppointment().build();
 
     // Manually added
-    public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Pet HOON = new PetBuilder().withName("Hoon Meier").withPhone("84824242")
             .withOwnerName("Stefan Sim").withAddress("little india").build();
-    public static final Pet IDA = new PetBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Pet IDA = new PetBuilder().withName("Ida Mueller").withPhone("84821312")
             .withOwnerName("Han Solo").withAddress("chicago ave").build();
 
     // Manually added - Pet's details found in {@code CommandTestUtil}

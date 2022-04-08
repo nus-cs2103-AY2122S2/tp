@@ -1,5 +1,6 @@
 package woofareyou.logic.parser;
 
+import static woofareyou.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static woofareyou.logic.commands.CommandTestUtil.INVALID_CHARGE_AMY_INVALID_ARGS;
 import static woofareyou.logic.commands.CommandTestUtil.INVALID_CHARGE_AMY_INVALID_CHARGE_AMOUNT;
 import static woofareyou.logic.commands.CommandTestUtil.INVALID_CHARGE_AMY_INVALID_CHARGE_DATE;
@@ -42,35 +43,34 @@ public class ChargeCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_CHARGE_AMY, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                ChargeCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_CHARGE_AMY, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
 
         // no charge date and amount specified
-        assertParseFailure(parser, "1", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ChargeCommand.MESSAGE_USAGE));
 
         // no charge date only
         assertParseFailure(parser, "1 " + INVALID_CHARGE_AMY_NO_CHARGE_DATE,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_INVALID_DATE_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_INVALID_DATE_FORMAT));
 
         // no charge amount only
         assertParseFailure(parser, "1 " + INVALID_CHARGE_AMY_NO_CHARGE_AMOUNT,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Charge.MESSAGE_INVALID_CHARGE_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Charge.MESSAGE_INVALID_CHARGE_FORMAT));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid charge date
         assertParseFailure(parser, "1 " + INVALID_CHARGE_AMY_INVALID_CHARGE_DATE,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_INVALID_DATE_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_INVALID_DATE_FORMAT));
 
         // invalid charge
         assertParseFailure(parser, "1 " + INVALID_CHARGE_AMY_INVALID_CHARGE_AMOUNT,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, Charge.MESSAGE_INVALID_CHARGE_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, Charge.MESSAGE_INVALID_CHARGE_FORMAT));
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, "1 " + INVALID_CHARGE_AMY_INVALID_ARGS,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_INVALID_DATE_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChargeCommand.MESSAGE_INVALID_DATE_FORMAT));
 
     }
 }

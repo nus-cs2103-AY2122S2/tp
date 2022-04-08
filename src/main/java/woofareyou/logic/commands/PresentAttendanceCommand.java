@@ -4,7 +4,6 @@ import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
 import static woofareyou.logic.parser.CliSyntax.PREFIX_DATE;
 import static woofareyou.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static woofareyou.logic.parser.CliSyntax.PREFIX_PICKUP;
-import static woofareyou.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -31,9 +30,9 @@ public class PresentAttendanceCommand extends Command {
             + "by the index number used in the displayed pet list. \n"
             + "Includes the date, pick up time and drop off time (if any). \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_DATE + "DATE OF ATTENDANCE IN dd-MM-yyyy] "
-            + "[" + PREFIX_PICKUP + "PICK UP TIME IN HH:mm] "
-            + "[" + PREFIX_DROPOFF + "DROP OFF TIME IN HH:mm] \n"
+            + PREFIX_DATE + "DATE_OF_ATTENDANCE in dd-MM-yyyy "
+            + "[" + PREFIX_PICKUP + "PICK_UP_TIME in HH:mm "
+            + PREFIX_DROPOFF + "DROP_OFF_TIME in HH:mm] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "15-03-2022 "
             + PREFIX_PICKUP + "09:15 "
@@ -98,7 +97,7 @@ public class PresentAttendanceCommand extends Command {
                 petToEdit.getAppointment(), targetAttendanceHashMap);
 
         model.setPet(petToEdit, editedPet);
-        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+        model.updateFilteredPetList();
 
         return new CommandResult(generateSuccessMessage(editedPet, attendanceDateString, presentAttendance));
     }
