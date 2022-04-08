@@ -11,9 +11,9 @@ Given below are my contributions to the project.
 
 * **New Feature**: Patient's Medical Prescription
   
-    It allows user to add medical prescription information to the patients. This feature 
-    extends the product functionality by allowing medical professionals to keep track of
-    patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
+It allows user to add medical prescription information to the patients. This feature 
+extends the product functionality by allowing medical professionals to keep track of
+patients' medical prescription records. This feature was built on top of [AddressBook Level 3 (AB3)](https://github.com/se-edu/addressbook-level3).
 
 
 
