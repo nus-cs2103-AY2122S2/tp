@@ -37,8 +37,8 @@ public class AddApplicantCommand extends AddCommand {
             + PREFIX_AGE + "23 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_GENDER + "M "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "AWS Certified "
+            + PREFIX_TAG + "Ex-Facebook";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book";
