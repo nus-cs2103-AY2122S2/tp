@@ -161,19 +161,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidStudentIdFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        StudentId nonExistentId = new StudentId("A234Z");
-
-        DeleteCommand deleteCommand = new DeleteCommand(nonExistentId);
-
-        String expectedMessage = Messages.MESSAGE_NONEXISTENT_STUDENTID;
-
-        assertCommandFailure(deleteCommand, model, expectedMessage);
-    }
-
-    @Test
     public void equals_index() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(new Index[]{INDEX_FIRST_PERSON});
         DeleteCommand deleteSecondCommand = new DeleteCommand(new Index[]{INDEX_SECOND_PERSON});
@@ -267,6 +254,9 @@ public class DeleteCommandTest {
         assertFalse(deleteFirstId.equals(deleteSecondId));
     }
 
+    /**
+     * For testing between Delete and Find commands since both use predicates
+     */
     public void equals_differentCommand() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(new Index[]{INDEX_FIRST_PERSON});
         DeleteCommand deleteMultipleCommand = new DeleteCommand(
