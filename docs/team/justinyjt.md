@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Refactored class and variable names in Address Book 3 to suit the context of Tinner (Pull request [\#51](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/51))
-    * Refactored the edit command to editCompany and phased out the tag command (Pull request: [\121](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/121))
+    * Refactored the edit command to editCompany and phased out the tag command (Pull request: [\#121](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/121))
 
 * **Documentation**:
   * User Guide:
