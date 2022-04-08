@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=b1llp4rk&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Enhancements to existing features**:
-    * Enable editing multiple persons with `edit` command[batch edit](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79)
+    * Enable editing multiple persons with `edit` command
       * **What it does:** This feature allows user to edit multiple persons in HackNet at once, for teams and skills fields.
       * **Justification:** A student who uses HackNet might need to edit multiple persons. For example, the student might have learned about a team project that 5 of his friends are working on. After adding friends that were not present in the HackNet data, the student would prefer one command to `edit` the team info for all five of them, instead of having to type the `edit` command five times for each persons.
       * **Highlights:** [`batchedit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command was created initially to enable editing multiple persons. However later the command and its features were [assimilated to `edit` command](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/84). The decision was made as an attempt to minimize the types of commands that user has to learn.
@@ -28,7 +28,7 @@ Given below are my contributions to the project.
       * **Highlights:** Consecutive whitespaces before and after the commas are ignored. This is an attempt to take into account that normal use of comma is followed by a space, and to be generous towards mistakes where multiple spaces are used.
 
 * **Bug Fixes**
-  * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills, as UserGuide states. This is to prevent cases such as when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
+  * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills when editing multiple persons in batch, as UserGuide states. This is to prevent cases such as when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
   * [Inability to redo some edit commands](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/156) was discovered while reinforcing integration test of edit command, and was fixed.
     * Commands that alter the data of HackNet has to commit the new changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
 
