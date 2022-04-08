@@ -17,6 +17,9 @@ public class JsonUtilTest {
 
     private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
 
+    /**
+     * Tests a successful serializing object to Json file.
+     */
     @Test
     public void serializeObjectToJsonFile_noExceptionThrown() throws IOException {
         SerializableTestClass serializableTestClass = new SerializableTestClass();
@@ -27,6 +30,9 @@ public class JsonUtilTest {
         assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE), SerializableTestClass.JSON_STRING_REPRESENTATION);
     }
 
+    /**
+     * Tests a successful deserializing object to Json file.
+     */
     @Test
     public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
         FileUtil.writeToFile(SERIALIZATION_FILE, SerializableTestClass.JSON_STRING_REPRESENTATION);
