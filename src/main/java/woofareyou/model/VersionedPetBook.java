@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class VersionedPetBook extends PetBook {
 
-    private static final ArrayList<ReadOnlyPetBook> addressBookStateList = new ArrayList<>();
+    private static final ArrayList<ReadOnlyPetBook> petBookStateList = new ArrayList<>();
     private Integer currentStatePointer = 0;
     private final Logger logger = Logger.getLogger(VersionedPetBook.class.getName());
 
@@ -15,34 +15,34 @@ public class VersionedPetBook extends PetBook {
     public VersionedPetBook() {}
 
     /**
-     * Creates a VersionedAddressBook using the Pets in the {@code toBeCopied}
+     * Creates a VersionedPetBook using the Pets in the {@code toBeCopied}
      */
     public VersionedPetBook(ReadOnlyPetBook toBeCopied) {
         this();
-        addressBookStateList.add(new PetBook(toBeCopied));
+        petBookStateList.add(new PetBook(toBeCopied));
     }
 
     /**
-     * Commits a new addressBook state to the addressBookStateList
-     * @param currentAddressBookState current address book state
+     * Commits a new petBook state to the petBookStateList
+     * @param currentPetBookState current pet book state
      */
-    public void commit(ReadOnlyPetBook currentAddressBookState) {
-        addressBookStateList.add(new PetBook(currentAddressBookState));
-        this.currentStatePointer = addressBookStateList.size() - 1;
+    public void commit(ReadOnlyPetBook currentPetBookState) {
+        petBookStateList.add(new PetBook(currentPetBookState));
+        this.currentStatePointer = petBookStateList.size() - 1;
     }
 
     /**
      * Shifts the current state pointer to the left.
-     * @return The previous state of the address book.
+     * @return The previous state of the pet book.
      */
     public ReadOnlyPetBook undo() throws Exception {
-        if (addressBookStateList.size() <= 0) {
+        if (petBookStateList.size() <= 0) {
             throw new Exception("No commands to undo");
         }
 
-        logger.log(INFO, String.valueOf(addressBookStateList.size()));
+        logger.log(INFO, String.valueOf(petBookStateList.size()));
         this.currentStatePointer -= 1;
-        addressBookStateList.remove(this.currentStatePointer + 1);
-        return addressBookStateList.get(this.currentStatePointer);
+        petBookStateList.remove(this.currentStatePointer + 1);
+        return petBookStateList.get(this.currentStatePointer);
     }
 }
