@@ -33,7 +33,7 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added implementation details of the `Add` feature.
         * Edited the sequence diagram for Add feature [\#89]()
-        * Add Activity diagram for Add feature [\#89]()
+        * Added Activity diagram for Add feature [\#89]()
         * Added class diagrams for Add and Clear Feature [\#268]()
 
 * **Community**:

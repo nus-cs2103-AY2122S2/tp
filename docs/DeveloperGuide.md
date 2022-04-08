@@ -329,20 +329,20 @@ The clear mechanism implements the following sequence and interactions for the m
 The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
 user to replace the list of students with an empty one. Previous data are swiped away.
 
-**Path Execution of ClearCommand Activity Diagram is shown below:**
+**Path Execution of Clear feature Activity Diagram is shown below:**
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
-**Class Diagram of ClearCommand is shown below:**
+**Class Diagram of Clear feature is shown below:**
 ![ClearClassDiagram](images/ClearClassDiagram.png)
 
-Additionally, there is a static final static message to be displayed to the user when utilising the ClearCommand:
+Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
 
 1. `MESSAGE_SUCCESS`
    - Scenario: Tracey database successfully cleared.
    - Message: "Tracey has been cleared!".
 
 
-**Sequence Diagram of ClearCommand is shown below:**
+**Sequence Diagram of Clear feature is shown below:**
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
