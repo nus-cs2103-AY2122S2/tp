@@ -1066,7 +1066,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC06 - delete task assigned to student**
+**Use case: UC06 - Delete a task assigned to a student**
 
 **MSS**
 
