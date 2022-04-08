@@ -233,6 +233,115 @@ Manage Persons faster that a typical mouse/GUI driven app.
 | High | User | Upload images into the app                                                                                                                                                         | View and organise images that are related to the client                                             |
 
 ## Use cases
+System: RealEstatePro (REP)
+
+**Use case: Add a client**
+
+Actor: User
+
+**MSS**
+1. User requests to add a client. 
+2. REP adds the client to the system.
+
+**Extensions:**
+
+* 1a. REP detects error in details
+   * 1a1. REP displays an error message.
+  
+     Use case resumes at step 1
+
+**Use Case: Edit a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to edit a specific client
+4. REP edits the client in the system
+
+**Extensions:**
+
+* 1a. The list is empty
+
+  Use case ends
+
+* 3a. The given index is invalid
+  * 3b1. REP displays an error message
+  
+    Use case resumes at step 2
+
+* 3b. REP detects error in details
+   * 3a1. REP displays an error message
+  
+     Use case resumes at step 3
+
+**Use Case: Delete a client**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to delete a specific client
+4. REP deletes the client from the system
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+   * 3a1. REP displays an error message
+  
+     Use case resumes at step 2
+
+**Use Case: Upload Image**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to upload image for a specific client
+4. REP associates image to the client
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
+* 3b. Image given is invalid
+   * 3b1. REP displays an error message
+
+     Use case resumes at step 3
+
+**Use Case: View Image**
+
+Actor: User
+
+**MSS**
+1. User requests to list clients
+2. REP shows a list of clients
+3. User requests to view images of a specific client
+4. REP displays images associated to the client
+
+**Extensions:**
+* 1a. The list is empty
+  Use case ends
+
+* 3a. The given index is invalid
+   * 3a1. REP displays an error message
+
+     Use case resumes at step 2
+
+* 3b. Client has no images
+   * 3b1. REP displays an error message
+
+     Use case resumes at step 2
 
 ## Non-functional Requirements
 
