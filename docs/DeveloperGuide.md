@@ -176,6 +176,16 @@ The add command can also add a group/student/professor/event/meeting. In these c
 ![Implementation of adding a module](images/AddSequenceDiagram.png)
 
 
+### Delete feature
+The delete feature enables the user to delete a module/student/professor/group/event/meeting/key event from the UniBook depending on the option specified by the user.
+
+Given below is an example of a sequence diagram that shows the flow using the input `delete 1` on the people view.
+
+The command is first parsed with `execute("delete 1", true, false, false)` where `true`, `false` and `false` are boolean variables which indicate whether the `Person` or `Module` or `Group` view is active. Following that, the `parseCommand` method in `UniBookParser` will be called, which in turn calls `DeleteCommandParser`. This instantiates a new `DeleteCommand` object which is returned to `UniBookParser`. After which, the `DeleteCommand` is passed to `LogicManager` and the `execute` method will run. There will be checks to ensure that the command is able to be done, for example, if the index provided is out of range, no person will be deleted and the error message should inform the user that their command was invalid and how it can be fixed. Every command type will access model in different ways depending on what checks need to be done and how the model needs to be accessed. In this case, the `model` object will be accessed to delete the person at that index from the UniBook. Finally, the `CommandResult` will be returned.
+
+![Implementation of deleting a person](images/DeleteSequenceDiagram.png)
+
+
 
 ### List feature
 The list feature enables the user to customise which modules/people are currently visible. As an example, the sequence
