@@ -16,7 +16,6 @@ public abstract class RedoableCommand extends Command {
     private ReadOnlyAddressBook previousAddressBook;
     private ReadOnlyAddressBook previousArchiveBook;
     private boolean isSwapped;
-    private String executedCommand;
     protected abstract CommandResult executeUndoableCommand(Model model) throws CommandException;
 
     /**
