@@ -632,10 +632,45 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Listing student contacts
+
+Command: `list` <br>
+More information on usage: [list command](UserGuide.html#listing-all-persons--list)
+
+1. Test case: `list` <br>
+   Expected: All student contacts shown in the student contact list.
+
+### Clearing data
+
+Command: `clear` <br>
+More information on usage: [clear command](UserGuide.html#clearing-all-entries-clear)
+
+1. Test case: `clear` <br>
+   Expected: All data is cleared from ArchDuke.
+
+### Exiting ArchDuke
+
+Command: `exit` <br>
+More information on usage: [exit command](UserGuide.html#exiting-the-program--exit)
+
+1. Test case: `exit` <br>
+   Expected: Exits ArchDuke, and all data is being saved.
+
+### Help
+
+Command: `help` <br>
+More information on usage: [help command](UserGuide.html#viewing-help--help)
+
+1. Test case: `help` <br>
+   Expected: Help window pops up. 
+
+2. Test case: Press the `F1` key <br>
+   Expected: Similar to previous.
+
 ### Adding a student contact
 
 Command: `add` <br>
-More information on usage: [add command](UserGuide.html#add-student-contact-information)
+More information on usage: [add command](UserGuide.html#add-student-contact-information-add)
 
 1. Adding a student contact while all student contacts are being shown.
 
@@ -679,17 +714,22 @@ More information on usage: [add command](UserGuide.html#add-student-contact-info
 
 ### Deleting a student contact
 
+Command: `delete` <br>
+More information on usage: [delete command](UserGuide.html#delete-student-contact-information-delete)
+
 1. Deleting a student contact while all student contacts are being shown.
 
    1. Prerequisites: List all student contacts using the `list` command.
 
-   1. Test case: `delete 1`<br>
-      Expected: First student contact is deleted from the list. Details of the deleted student contact shown in the status message. 
+   2. Test case: `delete 1`<br>
+      Expected: First student contact is deleted from the list. 
+      Details of the deleted student contact shown in the status message. 
+      The student contact is also deleted from all previously assigned groups.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No student contact is deleted. Error details shown in the error message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the student contact list size)<br>
       Expected: Similar to previous.
 
 2. Deleting a student contact while the student contact list is being filtered.
@@ -701,17 +741,342 @@ More information on usage: [add command](UserGuide.html#add-student-contact-info
 
 ### Finding student contacts by attributes
 
+Command: `find` <br>
+More information on usage: [find command](UserGuide.html#locating-student-contacts-by-attributes-find)
+
 1. Finding a student contact while all student contacts are being shown.
     
     1. Prerequisites: List all student contacts using the `list` command. 
    
-    2. Test case: `find n/`
+    2. Test case: `find n/Alex` <br>
+       Expected: All student contacts with the word `Alex` in the name shown.
+   
+    3. Test case: `find p/99272758` <br>
+       Expected: A student contact with the phone number `99272758`.
+   
+    4. Test case: `find e/berniceyu@u.nus.edu` <br>
+       Expected: A student contact with the email `berniceyu@u.nus.edu`.
+   
+    5. Test case: `find a/computer science` <br>
+       Expected: All student contacts with the word `computer` and/or `science` in their academic major (e.g. computer science, science, material science).
+   
+    6. Test case: `find t/friends` <br>
+        Expected: All student contacts with the tag `friends`.
+
+    7. Other incorrect find commands to try: `find`, `find n/` etc. <br>
+       Expected: No student contacts filtered. Error details shown in the error message.
+
 2. Finding a student contact while the student contact list is being filtered.
 
+    1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+   
+    2. Test case: Similar to previous. <br>
+       Expected: Similar to previous.
+
+### Creating a group
+
+Command: `addgroup` <br>
+More information on usage: [addgroup command](UserGuide.html#create-a-group-addgroup)
+
+1. Adding a group that has yet to exist in ArchDuke.
+
+   1. Test case: `addgroup g/NUS` <br>
+      Expected: A group with the name `NUS` added to the group list. The group is added to the last index of the group list.
+      The group card appeared at the last in the list. The details of the added group is shown in the success message.
+   
+   2. Test case: `addgroup g/NUS Fintech Club g/NUS` <br>
+      Expected: A group with the name `NUS` added to the group list. The group `NUS Fintech Club` is not added to the group list.
+      This is because only the last occurrence of the parameter will be taken.
+   
+   4. Other incorrect add group commands to try: `addgroup`, `addgroup g/` <br>
+      Expected: No group added. Error details shown in the error message.
+   
+4. Adding a group that already exist in ArchDuke.
+
+   1. Prerequisite: There exists a group with the group name `NUS Fintech Society` (case-insensitive).
+   
+   2. Test case: `addgroup g/NUS Fintech Society` <br>
+      Expected: No group added because the group with the exact same name already exists. 
+      Error details shown in the error message.
+   
+   3. Test case: `addgroup g/nus fintech society` <br>
+      Expected: No group added because the group with the same name but different case already exists. 
+      Error details shown in the error message.
+   
+### Deleting a group
+
+Command: `delgroup` <br>
+More information on usage: [delgroup command](UserGuide.html#delete-a-group-delgroup)
+
+1. Deleting a group that exists in ArchDuke.
+
+   1. Prerequisite: There exists a group with the group name `NUS Data Science Society` (case-insensitive) in ArchDuke.
+
+   2. Test case: `delgroup g/NUS Data Science Society` <br>
+      Expected: The group with the name `NUS Data Science Society` (case-insensitive) deleted from the group list. 
+      The group card disappeared from the group list. The details of the deleted group is shown in the success message.
+   
+   3. Other incorrect delete group commands to try: `delgroup`, `delgroup g/`, `delgroup t/` etc.
+      Expected: No group deleted from the group list. Error details shown in the error message.
+   
+2. Deleting a group that does not exist in ArchDuke.
+
+   1. Prerequisite: There exists no group with the group name `NUSSU` (case-insensitive) in ArchDuke. 
+      
+   2. Test case: `delgroup g/NUSSU` <br>
+      Expected: No group deleted from the group list. Error details shown in the error message.
+
+### Assigning a student to a group
+
+Command: `assign` <br>
+More information on usage: [assign command](UserGuide.html#assign-a-student-to-a-group-assign)
+
+1. Assigning a student contact while all student contacts are being shown.
+
+   1. Prerequisites: List all student contacts using the `list` command. 
+   There exists a group with the name `NUS Fintech Society` (case-insensitive) in ArchDuke. The student contact has yet to exist in the group.
+   
+   2. Test case: `assign 3 g/NUS Fintech Society` <br>
+      Expected: Third student contact is assigned to the group `NUS Fintech Society`. The student contact appeared in the group.
+      The details of the assigned student contact and the target group is shown in the success message.
+   
+   3. Test case: `assign 0 g/NUS Fintech Society` <br>
+      Expected: No student contact is assigned to the group. Error details shown in the error message.
+   
+   4. Other incorrect assign commands to try: `assign`, `assign x` (where x is larger than the student contact list size)<br>
+      Expected: Similar to previous.
+
+2. Assigning a student contact while all student contacts are being shown to a group that does not exist.
+
+   1. Prerequisites: List all student contacts using the `list` command. There exists no group with the group name `NUSSU`.
+   
+   2. Test case: `assign 1 g/NUSSU` <br>
+      Expected: No student contact is assigned to the group. Error details shown in the error message.
+   
+   3. Test case: `assign 0 g/NUSSU` <br>
+      Expected: Similar to the previous.
+
+3. Assigning a student contact while all student contacts are being shown. The student contact already exists in the group.
+
+   1. Prerequisites: List all student contacts using the `list` command. 
+   There exists the first student contact in the group `NUS Fintech Society`.
+   
+   2. Test case: `assign 1 g/NUS Fintech Society` <br>
+      Expected: No student contact is assigned to the group. Error details shown in the error message.
+
+4. Assigning a student contact while the student contact list is being filtered.
+
+   1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+
+   2. Test case: Similar to previous. <br>
+      Expected: Similar to previous.
+
+### Deassigning a student to from group
+
+Command: `deassign` <br>
+More information on usage: [deassign command](UserGuide.html#deassign-a-student-to-a-group-deassign)
+
+1. Deassigning a student contact while all student contacts are being shown.
+
+   1. Prerequisites: List all student contacts using the `list` command. 
+   There exists the first student contact in the group `NUS Fintech Society`.
+   
+   2. Test case: `deassign 1 g/NUS Fintech Society` <br>
+      Expected: First student contact is deassigned from the group `NUS Fintech Society`. The student contact disappeared from the group.
+      The details of the deassigned student contact and the target group is shown in the success message.
+   
+   3. Test case: `deassign 0 g/NUS Fintech Society` <br>
+      Expected: No student contact is deassigned from the group. Error details shown in the error message.
+   
+   4. Other incorrect deassign commands to try: `deassign`, `deassign x` (where x is larger than the student contact list size)<br>
+      Expected: Similar to previous.
+   
+2. Deassigning a student contact while all student contacts are being shown. The target group does not exist in ArchDuke.
+
+   1. Prerequisites: List all student contacts using the `list` command. There exists no group with the group name `NUSSU`.
+   
+   2. Test case: `deassign 1 g/NUSSU` <br>
+      Expected: No student contact is deassigned from the group. Error details shown in the error message.
+
+3. Deassigning a student contact while all student contacts are being shown. The target student contact has not been assigned to the group.
+
+    1. Prerequisites: List all student contacts using the `list` command. 
+   The fourth student contact does not exist in the group `NUS Fintech Society`. 
+   The group `NUS Fintech Society` (case-insensitive) exists in ArchDuke.
+   
+    2. Test case: `deassign 4 g/NUS Fintech Society` <br>
+        Expected: No student contact is deassigned from the group. Error details shown in the error message.
+   
+4. Deassigning a student contact while the student contact list is being filtered.
+
+   1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+
+   2. Test case: Similar to previous. <br>
+   Expected: Similar to previous.
+
+### Viewing student contacts from a group
+
+Command: `viewcontact` <br>
+More information on usage: [viewcontact command](UserGuide.html#view-student-contacts-in-an-existing-group-viewcontact)
+
+1. Viewing student contacts in an existing group in ArchDuke.
+
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke.
+   
+   2. Test case: `viewcontact g/NUS Fintech Society` <br>
+      Expected: All student contacts assigned to the group `NUS Fintech Society` is shown on the result display.
+
+   3. Other incorrect view contact commands to try: `viewcontact`, `viewcontact g/`, `viewcontact t/` etc. <br>
+      Expected: No student contact is shown on the result display. Error details shown in the error message.
+   
+2. Viewing student contacts in a group that does not exist.
+
+   1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
+   
+   2. Test case: `viewcontact g/NUSSU` <br>
+      Expected: No student contact is shown on the result display. Error details shown in the error message.
+   
+### Adding a task to a group
+
+Command: `addtask` <br>
+More information on usage: [addtask command](UserGuide.html#add-a-task-in-a-group-addtask)
+
+1. Adding a task that has yet to exist in an existing group.
+
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke. 
+   There exists no task with the task name `write proposal` (case-insensitive) in the group.
+   
+   2. Test case: `addtask task/write proposal g/NUS Fintech Society` <br>
+      Expected: The task with the task name `write proposal` is added to the group `NUS Fintech Society`.
+      The task appeared inside the group's task list. 
+      The details of the added task is shown in the success message.
+   
+   3. Test case: `addtask task/submit proposal g/NUS Fintech Society task/write proposal` <br>
+      Expected: The task with the task name `write proposal` is added to the group `NUS Fintech Society`.
+      The task with the task name `submit proposal` is not added to any group as only the last occurrence of the parameter will be taken.
+      The task appeared inside the group's task list. The details of the added task is shown in the success message.
+
+   4. Test case: `addtask task/submit proposal g/NUS Data Science Society addtask task/write proposal g/NUS Fintech Society` <br>
+      Expected: Similar to previous.
+   
+   5. Other incorrect add task commands to try: `addtask`, `addtask task/`, `addtask task/proposal g/` etc. <br>
+         Expected: No task is added to a group. Error details shown in the error message.
+   
+2. Adding a task that has already existed in an existing group.
+
+   1. Prerequisites: There exists a task with the task name `Website design review` (case-insensitive) 
+   in an existing group with the group name `NUS Fintech Society` in ArchDuke.
+   
+   2. Test case: `addtask task/website design review g/NUS Fintech Society` <br>
+       Expected: No task is added to the group. Error details shown in the error message.
+   
+3. Adding a task to a non-existing group.
+
+   1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
+   
+   2. Test case: `addtask task/conduct interview g/NUSSU` <br>
+      Expected: No task is added to a group. Error details shown in the error message.
+
+### Deleting a task from a group
+
+Command: `deltask` <br>
+More information on usage: [deltask command](UserGuide.html#delete-a-task-in-a-group-deltask)
+
+1. Deleting an existing task from an existing group in ArchDuke.
+
+   1. Prerequisites: There exists a task with the task name `Website design review` (case-insensitive)
+      in an existing group with the group name `NUS Fintech Society` in ArchDuke.
+   
+   2. Test case: `deltask task/website design review g/NUS Fintech Society` <br>
+      Expected: A task with the task name `website design review` is deleted from a group with the group name `NUS Fintech Society`.
+      The task is removed from the group's task list. The details of the deleted task is shown in the success message.
+   
+   3. Test case: `deltask task/write proposal task/website design review g/NUS Fintech Society` <br>
+      Expected: Similar to previous as only the last occurrence of the parameter will be taken.
+   
+   4. Test case: `deltask task/write proposal task/website design reivew g/NUS Data Science Society g/NUS Fintech Society` <br>
+      Expected: Similar to previous as only the last occurrence of the parameters will be taken.
+   
+   5. Other incorrect delete task commands to try: `deltask`, `deltask task/`, `deltask task/proposal g/` etc. <br>
+      Expected: No task is deleted from a group. Error details shown in the error message.
+
+2. Deleting a non-existing task from an existing group in ArchDuke.
+
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke. 
+      There exists no task with the task name `recruit new members` (case-insensitive) in the group.
+   
+   2. Test case: `deltask task/recruit new members g/NUS Fintech Society` <br>
+      Expected: No task is deleted from the group. Error details shown in the error message.
+   
+4. Deleting a task from a non-existing group in ArchDuke.
+
+   1. Prerequisites: There exists no group with the group name `NUSSU` (case-insensitive) in ArchDuke.
+   
+   2. Test case: `deltask task/write proposal g/NUSSU` <br>
+      Expected: No task is deleted from a group. Error details shown in the error message.
+
+
+### Displaying tasks in a group
+
+Command: `viewtask` <br>
+More information on usage: [viewtask command](UserGuide.html#displays-the-tasks-in-a-group-viewtask)
+
+1. Viewing tasks in an existing group in ArchDuke.
+
+    1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke.
+
+    2. Test case: `viewtask g/NUS Fintech Society` <br>
+       Expected: All tasks added to the group `NUS Fintech Society` is shown on the result display.
+
+    3. Other incorrect view contact commands to try: `viewtask`, `viewtask g/`, `viewtask t/` etc. <br>
+       Expected: No task is shown on the result display. Error details shown in the error message.
+
+2. Viewing tasks in a group that does not exist.
+
+    1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
+
+    2. Test case: `viewtask g/NUSSU` <br>
+       Expected: No task is shown on the result display. Error details shown in the error message.
+    
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Open the `archduke.jar` file and do any types of modification on the student contact list or group list.
+   
+   2. Inside the data folder, edit the `addressbook.json` file by doing any of the following and save the modified `addressbook.json` file exit and reopen the app: 
+   
+      1. Invalid student contact
+      
+         1. Test case: Invalid `PHONE_NUMBER` <br>
+         Copy an existing phone number of a student contact, and paste it to the phone attribute of another student contact. <br>
+         Expected: ArchDuke starts with an empty student contact list and student group list.
+         
+         2. Test case: Invalid `EMAIL` <br>
+         Copy an existing email of a student contact, and paste it to the email attribute of another student contact. <br>
+         Expected: Similar to previous.
+      
+      2. Invalid group name
+      
+         1. Test case: Invalid `GROUP_NAME` <br>
+         Copy an existing group name and paste it to the group name attribute of another group. <br>
+         Expected: Similar to previous.
+         
+      3. Invalid task name
+      
+         1. Test case: Invalid `TASK_NAME` <br>
+         Copy an existing task name and paste it to the other task attribute **within the same group**. <br>
+         Expected: Only one task with that name will appear inside the group. 
+         If the task name differs in case, only the first occurrence will appear inside the task list.
+         
+2. Dealing with missing files.
 
-1. _{ more test cases …​ }_
+   1. Test case: Exit ArchDuke, then delete `data/addressbook.json`. Reopens Archduke. <br> 
+      Expected: All student contacts and groups will be deleted. ArchDuke will start with sample data.
+   
+   2. Test case: Exit ArchDuke, then delete `config.json` file. Reopens ArchDuke. <br>
+      Expected: ArchDuke starts as usual.
+   
+   3. Test case: Exit ArchDuke, then delete `preferences.json` file. Reopens ArchDuke. <br>
+      Expected: Previous user preferences such as window sizes will be reset. 
+      ArchDuke starts with the default GUI settings.
