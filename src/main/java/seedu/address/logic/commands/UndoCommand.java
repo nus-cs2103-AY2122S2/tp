@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_USAGE_SUCCESS = "Undo Command : ";
+    public static final String MESSAGE_USAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_USAGE_FAILURE = "No more commands to undo!";
 
     @Override
@@ -22,14 +22,12 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_USAGE_FAILURE);
         }
 
-        StackUndoRedo.ModelStack modelStack = undoRedoStack.popUndo();
-
-        if (modelStack.getRedoableCommand() instanceof SwitchCommand) {
+        RedoableCommand command = undoRedoStack.popUndo();
+        if (command instanceof SwitchCommand) {
             return new CommandResult(MESSAGE_USAGE_SUCCESS, false, false, false, false, false, true);
         }
-
-        modelStack.getRedoableCommand().undo(model);
-        return new CommandResult(MESSAGE_USAGE_SUCCESS + modelStack.getCommandText());
+        command.undo(model);
+        return new CommandResult(MESSAGE_USAGE_SUCCESS);
     }
 
     @Override
