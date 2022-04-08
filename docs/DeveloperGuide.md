@@ -295,7 +295,15 @@ Given below is an example usage scenario and how the find by status mechanism be
 Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
 Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
 Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
-Step 4. The filtered list of perons is displayed to the user.
+Step 4. The filtered list of persons is displayed to the user.
+
+The following sequence diagram shows how the `findstatus` operation works:
+
+![FindStatusSequenceDiagram](images/FindStatusSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStatusCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 #### Design considerations:
 
@@ -344,6 +352,14 @@ Step 1. The user launches the application. The full list of `Person`s will be sh
 Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
 Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
 Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findclasscode` operation works:
+
+![FindClassCodeSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindClassCodeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 #### Design considerations:
 
@@ -412,6 +428,14 @@ Step 1. The user launches the application. The full list of `Person`s will be sh
 Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
 Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
 Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findactivity` operation works:
+
+![FindActivitySequenceDiagram](images/FindActivitySequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindActivityCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 #### Design considerations:
 
@@ -504,20 +528,43 @@ The flow of saving and loading the data storage is updated to accommodate the ad
 
 #### Enhancements
 
-The purpose of the batch update enhancement is update all students by `ClassCode` when the `Status` of a student in that `ClassCode` changes from `Negative` -> `Positive` and vice-versa.
+The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
 
-The batch update enhancement is facilitated by using `execute()` command in the `EditCommand` class.
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, and `DeleteCommand` class.
 
 Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
 
 How the batch update works:
 
-* When `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
-  * If true, a filtered `List` of students with the same `ClassCode`, students who are not `Positive`, not the current student being edited would be created.
-  * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
-* Conversely, when a student's `Status` changes from `Positive` -> `Negative`, `execute()` will check the current student being edited that there are no `Positive` statuses in `ClassCode`.
-  * If true, all students `Status` in the filtered `List`will be switched to `Negative`.
-  
+* **EditCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
+    * If true, a filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being edited would be created.
+    * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+  * Conversely, `batchUpdatePositiveToNegative()` under `execute()` in `EditCommand` checks if a student's `Status` changes from `Positive` -> `Negative`.
+    * If true, a filtered `List` of students with the same `ClassCode` or `Activity` who are not the current student edited would be created.
+    * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+      * If the `List` is empty, edit A's status to `Negative`
+      * Else, do nothing.
+
+* **AddCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `AddCommand` checks for the `Status` of the student added,
+    * If the student to be added is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being added would be created.
+      * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+    * If the student to be added is `Negative` or `Close-Contact`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being added would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, edit the added student's status to `Close-Contact`.
+    
+* **DeleteCommand**:
+  * When `batchUpdateDeletedPerson()` under `execute()` in DeleteCommand checks for the `Status` of the student deleted,
+    * If the student to be deleted is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being deleted would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, do nothing.
+
 ### \[Proposed Enhancement\] Implementing CSV compatibility
 The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
 from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
