@@ -6,7 +6,7 @@ import woofareyou.model.pet.Pet;
 /**
  * Unmodifiable view of WoofAreYou
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyPetBook {
 
     /**
      * Returns an unmodifiable view of the pets list.

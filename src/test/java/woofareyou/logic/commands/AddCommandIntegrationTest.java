@@ -2,7 +2,7 @@ package woofareyou.logic.commands;
 
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandFailure;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPetBook(), new UserPrefs());
     }
 
     @Test

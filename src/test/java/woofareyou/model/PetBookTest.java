@@ -7,7 +7,7 @@ import static woofareyou.logic.commands.CommandTestUtil.VALID_ADDRESS_BOBA;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static woofareyou.testutil.Assert.assertThrows;
 import static woofareyou.testutil.TypicalPets.BOBA;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import woofareyou.model.pet.Pet;
 import woofareyou.model.pet.exceptions.DuplicatePetException;
 import woofareyou.testutil.PetBuilder;
 
-public class AddressBookTest {
+public class PetBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final PetBook petBook = new PetBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPetList());
+        assertEquals(Collections.emptyList(), petBook.getPetList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> petBook.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyWoofAreYou_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        PetBook newData = getTypicalPetBook();
+        petBook.resetData(newData);
+        assertEquals(newData, petBook);
     }
 
     @Test
@@ -49,47 +49,47 @@ public class AddressBookTest {
         Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOBA).withTags(VALID_TAG_FRIEND)
             .build();
         List<Pet> newPets = Arrays.asList(BOBA, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPets);
+        PetBookStub newData = new PetBookStub(newPets);
 
-        assertThrows(DuplicatePetException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePetException.class, () -> petBook.resetData(newData));
     }
 
     @Test
     public void hasPet_nullPet_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPet(null));
+        assertThrows(NullPointerException.class, () -> petBook.hasPet(null));
     }
 
     @Test
     public void hasPet_petNotInWoofAreYou_returnsFalse() {
-        assertFalse(addressBook.hasPet(BOBA));
+        assertFalse(petBook.hasPet(BOBA));
     }
 
     @Test
     public void hasPet_petInWoofAreYou_returnsTrue() {
-        addressBook.addPet(BOBA);
-        assertTrue(addressBook.hasPet(BOBA));
+        petBook.addPet(BOBA);
+        assertTrue(petBook.hasPet(BOBA));
     }
 
     @Test
     public void hasPet_petWithSameIdentityFieldsInWoofAreYou_returnsTrue() {
-        addressBook.addPet(BOBA);
+        petBook.addPet(BOBA);
         Pet editedAlice = new PetBuilder(BOBA).withAddress(VALID_ADDRESS_BOBA).withTags(VALID_TAG_FRIEND)
             .build();
-        assertTrue(addressBook.hasPet(editedAlice));
+        assertTrue(petBook.hasPet(editedAlice));
     }
 
     @Test
     public void getPetList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPetList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> petBook.getPetList().remove(0));
     }
 
     /**
      * A stub ReadOnlyAddressBook whose pets list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class PetBookStub implements ReadOnlyPetBook {
         private final ObservableList<Pet> pets = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Pet> pets) {
+        PetBookStub(Collection<Pet> pets) {
             this.pets.setAll(pets);
         }
 

@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import woofareyou.commons.core.GuiSettings;
 import woofareyou.logic.commands.exceptions.CommandException;
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.Model;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.PetBuilder;
@@ -146,12 +146,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyPetBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPetBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook undo() {
+        public ReadOnlyPetBook undo() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -238,8 +238,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPetBook getAddressBook() {
+            return new PetBook();
         }
     }
 

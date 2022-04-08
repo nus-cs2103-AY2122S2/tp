@@ -47,10 +47,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyPetBook addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyPetBook getAddressBook();
 
     /**
      * Returns true if a pet with the same identity as {@code pet} exists in the address book.
@@ -107,6 +107,6 @@ public interface Model {
     /**
      * Restores the previous address book state from its history.
      */
-    ReadOnlyAddressBook undo() throws Exception;
+    ReadOnlyPetBook undo() throws Exception;
 
 }

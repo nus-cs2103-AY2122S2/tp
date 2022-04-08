@@ -5,29 +5,29 @@ import static java.util.logging.Level.INFO;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-public class VersionedAddressBook extends AddressBook {
+public class VersionedPetBook extends PetBook {
 
-    private static final ArrayList<ReadOnlyAddressBook> addressBookStateList = new ArrayList<>();
+    private static final ArrayList<ReadOnlyPetBook> addressBookStateList = new ArrayList<>();
     private Integer currentStatePointer = 0;
-    private final Logger logger = Logger.getLogger(VersionedAddressBook.class.getName());
+    private final Logger logger = Logger.getLogger(VersionedPetBook.class.getName());
 
 
-    public VersionedAddressBook() {}
+    public VersionedPetBook() {}
 
     /**
      * Creates a VersionedAddressBook using the Pets in the {@code toBeCopied}
      */
-    public VersionedAddressBook(ReadOnlyAddressBook toBeCopied) {
+    public VersionedPetBook(ReadOnlyPetBook toBeCopied) {
         this();
-        addressBookStateList.add(new AddressBook(toBeCopied));
+        addressBookStateList.add(new PetBook(toBeCopied));
     }
 
     /**
      * Commits a new addressBook state to the addressBookStateList
      * @param currentAddressBookState current address book state
      */
-    public void commit(ReadOnlyAddressBook currentAddressBookState) {
-        addressBookStateList.add(new AddressBook(currentAddressBookState));
+    public void commit(ReadOnlyPetBook currentAddressBookState) {
+        addressBookStateList.add(new PetBook(currentAddressBookState));
         this.currentStatePointer = addressBookStateList.size() - 1;
     }
 
@@ -35,7 +35,7 @@ public class VersionedAddressBook extends AddressBook {
      * Shifts the current state pointer to the left.
      * @return The previous state of the address book.
      */
-    public ReadOnlyAddressBook undo() throws Exception {
+    public ReadOnlyPetBook undo() throws Exception {
         if (addressBookStateList.size() <= 0) {
             throw new Exception("No commands to undo");
         }

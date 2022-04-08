@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import woofareyou.commons.exceptions.DataConversionException;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends PetBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getPetBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyPetBook> readPetBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void savePetBook(ReadOnlyPetBook addressBook) throws IOException;
 
 }

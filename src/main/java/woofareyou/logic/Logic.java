@@ -7,7 +7,7 @@ import woofareyou.commons.core.GuiSettings;
 import woofareyou.logic.commands.CommandResult;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.pet.Pet;
 
 
@@ -29,7 +29,7 @@ public interface Logic {
      *
      * @see woofareyou.model.Model#getAddressBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyPetBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of pets */
     ObservableList<Pet> getFilteredPetList();

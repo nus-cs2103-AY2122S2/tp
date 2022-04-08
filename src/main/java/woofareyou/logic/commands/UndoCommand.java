@@ -3,9 +3,9 @@ package woofareyou.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import woofareyou.logic.commands.exceptions.CommandException;
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.Model;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.ReadOnlyPetBook;
 
 /**
  * Undoes pet owner's previous commands in WoofAreYou.
@@ -27,7 +27,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         try {
-            ReadOnlyAddressBook currentAddressBook = new AddressBook(model.undo());
+            ReadOnlyPetBook currentAddressBook = new PetBook(model.undo());
             model.setAddressBook(currentAddressBook);
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (Exception e) {

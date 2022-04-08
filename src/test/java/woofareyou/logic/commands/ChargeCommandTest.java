@@ -8,7 +8,7 @@ import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_THIRD_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.exceptions.CommandException;
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
@@ -40,7 +40,7 @@ class ChargeCommandTest {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-yyyy");
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @Test
     public void execute_computeChargeNoChargeUnfilteredList_success() {
@@ -79,7 +79,7 @@ class ChargeCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 200.50, month, year)
                         + attendance);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(chargeCommand, expectedModel, expectedCommandResult, expectedModel);
@@ -106,7 +106,7 @@ class ChargeCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month, year)
                         + attendance);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(chargeCommand, expectedModel, expectedCommandResult, expectedModel);

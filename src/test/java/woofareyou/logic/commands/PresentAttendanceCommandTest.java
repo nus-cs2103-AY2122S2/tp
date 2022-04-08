@@ -10,7 +10,7 @@ import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FOURTH_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.util.AttendanceUtil;
 import woofareyou.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
@@ -40,7 +40,7 @@ public class PresentAttendanceCommandTest {
     private static PresentAttendanceDescriptor descriptorWithoutTransportArrangement;
     private static PresentAttendanceDescriptor alternateDescriptorWithTransportArrangement;
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @BeforeAll
     static void setupDescriptors() {
@@ -72,7 +72,7 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -98,7 +98,7 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
@@ -122,7 +122,7 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, descriptorWithoutTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -147,7 +147,7 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, descriptorWithoutTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
@@ -172,7 +172,7 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, alternateDescriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(secondPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -197,7 +197,7 @@ public class PresentAttendanceCommandTest {
             petToMarkPresent.getName(),
             MESSAGE_DATE_STUB, alternateDescriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(secondPet, petToMarkPresent);
 
@@ -259,7 +259,7 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPet(fourthPet, petToMarkPresent);
 
         assertCommandSuccess(presentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -285,7 +285,7 @@ public class PresentAttendanceCommandTest {
             MESSAGE_DATE_STUB,
             descriptorWithTransportArrangement);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(fourthPet, petToMarkPresent);
 

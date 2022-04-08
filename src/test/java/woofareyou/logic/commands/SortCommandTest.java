@@ -1,12 +1,12 @@
 package woofareyou.logic.commands;
 
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
@@ -21,8 +21,8 @@ public class SortCommandTest {
      */
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        model = new ModelManager(getTypicalPetBook(), new UserPrefs());
+        expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
     }
 

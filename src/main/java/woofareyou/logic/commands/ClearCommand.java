@@ -2,7 +2,7 @@ package woofareyou.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAddressBook(new PetBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

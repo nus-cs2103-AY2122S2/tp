@@ -1,6 +1,6 @@
 package woofareyou.testutil;
 
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.pet.Pet;
 
 /**
@@ -10,25 +10,25 @@ import woofareyou.model.pet.Pet;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private PetBook petBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        petBook = new PetBook();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(PetBook petBook) {
+        this.petBook = petBook;
     }
 
     /**
      * Adds a new {@code Pet} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPet(Pet pet) {
-        addressBook.addPet(pet);
+        petBook.addPet(pet);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public PetBook build() {
+        return petBook;
     }
 }

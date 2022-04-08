@@ -8,7 +8,7 @@ import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.testutil.TypicalPets.BAGEL;
 import static woofareyou.testutil.TypicalPets.PANCAKE;
 import static woofareyou.testutil.TypicalPets.WAFFLE;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import woofareyou.model.pet.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @Test
     public void equals() {
