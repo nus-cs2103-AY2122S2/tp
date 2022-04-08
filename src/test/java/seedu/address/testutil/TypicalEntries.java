@@ -4,14 +4,24 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BIG_BANK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INTERVIEW_BIG_BANK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INTERVIEW_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BEHAVIOURAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECHNICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_B;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +83,18 @@ public class TypicalEntries {
             .withCompanyName(VALID_COMPANY_JANICE_STREET)
             .withPhone(VALID_PHONE_B).withEmail(VALID_EMAIL_B).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+
+    public static final Event INTERVIEW_BIG_BANK = new EventBuilder()
+            .withName(VALID_EVENT_INTERVIEW_BIG_BANK)
+            .withCompanyName(VALID_COMPANY_BIG_BANK)
+            .withDate(VALID_DATE_A).withTime(VALID_TIME_A)
+            .withLocation(VALID_LOCATION_A).withTags(VALID_TAG_TECHNICAL).build();
+
+    public static final Event INTERVIEW_JANICE_STREET = new EventBuilder()
+            .withName(VALID_EVENT_INTERVIEW_JANICE_STREET)
+            .withCompanyName(VALID_COMPANY_JANICE_STREET)
+            .withDate(VALID_DATE_B).withTime(VALID_TIME_B).withLocation(VALID_LOCATION_B)
+            .withTags(VALID_TAG_BEHAVIOURAL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

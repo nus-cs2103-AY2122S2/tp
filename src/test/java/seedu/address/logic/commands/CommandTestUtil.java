@@ -68,12 +68,12 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BIG_BANK = " " + PREFIX_NAME + VALID_COMPANY_BIG_BANK;
     public static final String NAME_DESC_JANICE_STREET = " " + PREFIX_NAME + VALID_COMPANY_JANICE_STREET;
     public static final String NAME_DESC_SHOPSG = " " + PREFIX_NAME + VALID_COMPANY_SHOPSG;
+    public static final String NAME_DESC_EVENT_INTERVIEW_BIG_BANK = " " + PREFIX_NAME + VALID_EVENT_INTERVIEW_BIG_BANK;
+    public static final String NAME_DESC_EVENT_INTERVIEW_JANICE_STREET = " " + PREFIX_NAME + VALID_EVENT_INTERVIEW_JANICE_STREET;
+    public static final String NAME_DESC_EVENT_INTERVIEW_SHOPSG = " " + PREFIX_NAME + VALID_EVENT_INTERVIEW_SHOPSG;
     public static final String COMPANY_DESC_BIG_BANK = " " + PREFIX_COMPANY + VALID_COMPANY_BIG_BANK;
     public static final String COMPANY_DESC_JANICE_STREET = " " + PREFIX_COMPANY + VALID_COMPANY_JANICE_STREET;
     public static final String COMPANY_DESC_SHOPSG = " " + PREFIX_COMPANY + VALID_COMPANY_SHOPSG;
-    public static final String EVENT_INTERVIEW_BIG_BANK = " " + PREFIX_COMPANY + VALID_EVENT_INTERVIEW_BIG_BANK;
-    public static final String EVENT_INTERVIEW_JANICE_STREET = " " + PREFIX_COMPANY + VALID_EVENT_INTERVIEW_JANICE_STREET;
-    public static final String EVENT_INTERVIEW_SHOPSG = " " + PREFIX_COMPANY + VALID_EVENT_INTERVIEW_SHOPSG;
     public static final String PHONE_DESC_A = " " + PREFIX_PHONE + VALID_PHONE_A;
     public static final String PHONE_DESC_B = " " + PREFIX_PHONE + VALID_PHONE_B;
     public static final String EMAIL_DESC_A = " " + PREFIX_EMAIL + VALID_EMAIL_A;
@@ -98,6 +98,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "test";
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "test";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
