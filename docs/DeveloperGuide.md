@@ -393,8 +393,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
-* 1e. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message.  
+* 1e. User already has existing class(es) overlapping with the specified starting, ending time and date.
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)
       Use case resumes at step 1.
 
 #### Add a recurring lesson
@@ -425,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 * 1e. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message.  
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es) 
       Use case resumes at step 1.
 
 #### Delete a lesson
@@ -449,13 +449,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TeachWhat! shows an error message.  
       Use case resumes at step 2.
 
-* 3b. The specified lesson still has students assigned to it.
-    * 3b1. TeachWhat! shows a warning message.
-    * 3b2a. User confirms deletion.  
-      Use case ends.
-    * 3b2b. User cancels deletion.  
-      Use case ends.
-
 #### Assign a student to a class
 
 **System:** TeachWhat!  
@@ -465,27 +458,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to list students
 2. TeachWhat! shows a list of students
-3. User selects the student
-4. User requests to list classes
-5. TeachWhat! shows a list of classes
-6. User selects the class to assign the student to  
+3. User requests to list classes
+4. TeachWhat! shows a list of classes
+5. User selects the class to assign the student to
+6. TeachWhat! assigns the student to the class.
    Use case ends.
 
 **Extensions**
-* 2a. The list is empty.  
+* 2a. The list of students is empty.  
   Use case ends.
 
-* 3a. The given index is invalid.
-    * 3a1. StudentBook shows an error message.  
-      Use case resumes at step 2.
+* 4a. The list of classes is empty.  
+  Use case ends.
 
-* 5a. The list is empty.
-    * 4a1. ClassBook shows a warning message.  
-      Use case ends.
-
-
-* 6a. The given index is invalid.
-    * 6a1. ClassBook shows an error message.  
+* 5a. The given index of student or class is invalid.
+    * 5a1. TeachWhat! shows an error message.  
       Use case resumes at step 5.
 
 #### Delete a student
