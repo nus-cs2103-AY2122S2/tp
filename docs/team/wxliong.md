@@ -43,6 +43,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for `Academic Year` under `add module`. [\#81](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/81)
+    * Added `add` command. [\#21](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/21)
   * Developer Guide:
     * Added implementation details of the `add` and `enrol` feature. [\#113](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/113)
     * Added use cases for Student. [\#35](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/35)
@@ -50,6 +51,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#142](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/142), [\#126](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/126), [\#19](), [\#42]()
-  * Bug tested with team lead to ensure product is ready for PE-D: [\#162](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/162), [\#163](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/163), [\#164](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/164), [\#165](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/165)
+  * Bug tested with team lead to ensure product is ready for PE-D: [\#156](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/156), [\#158](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/158), [\#163](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/163), [\#164](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/164)
+  * Bug fixed with team lead to ensure product is ready for PE-D: [\#162](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/162), [\#165](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/165) 
   * Updated AB3 diagrams under `Design` to diagrams that is suitable for TAssist.
   * Added use cases for Student. [\#35](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/35)
