@@ -913,13 +913,13 @@ More information on usage: [addtask command](UserGuide.html#add-a-task-in-a-grou
    
    2. Test case: `addtask task/write proposal g/NUS Fintech Society` <br>
       Expected: The task with the task name `write proposal` is added to the group `NUS Fintech Society`.
-      The task appeared as the last task inside the group's task list. 
+      The task appeared inside the group's task list. 
       The details of the added task is shown in the success message.
    
    3. Test case: `addtask task/submit proposal g/NUS Fintech Society task/write proposal` <br>
       Expected: The task with the task name `write proposal` is added to the group `NUS Fintech Society`.
       The task with the task name `submit proposal` is not added to any group as only the last occurrence of the parameter will be taken.
-      The task appeared as the last task inside the group's task list. The details of the added task is shown in the success message.
+      The task appeared inside the group's task list. The details of the added task is shown in the success message.
 
    4. Test case: `addtask task/submit proposal g/NUS Data Science Society addtask task/write proposal g/NUS Fintech Society` <br>
       Expected: Similar to previous.
@@ -1002,12 +1002,46 @@ More information on usage: [viewtask command](UserGuide.html#displays-the-tasks-
 
     2. Test case: `viewtask g/NUSSU` <br>
        Expected: No task is shown on the result display. Error details shown in the error message.
-
-
+    
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Open the `archduke.jar` file and do any types of modification on the student contact list or group list.
+   
+   2. Inside the data folder, edit the `addressbook.json` file by doing any of the following and save the modified `addressbook.json` file exit and reopen the app: 
+   
+      1. Invalid student contact
+      
+         1. Test case: Invalid `PHONE_NUMBER` <br>
+         Copy an existing phone number of a student contact, and paste it to the phone attribute of another student contact. <br>
+         Expected: ArchDuke starts with an empty student contact list and student group list.
+         
+         2. Test case: Invalid `EMAIL` <br>
+         Copy an existing email of a student contact, and paste it to the email attribute of another student contact. <br>
+         Expected: Similar to previous.
+      
+      2. Invalid group name
+      
+         1. Test case: Invalid `GROUP_NAME` <br>
+         Copy an existing group name and paste it to the group name attribute of another group. <br>
+         Expected: Similar to previous.
+         
+      3. Invalid task name
+      
+         1. Test case: Invalid `TASK_NAME` <br>
+         Copy an existing task name and paste it to the other task attribute **within the same group**. <br>
+         Expected: Only one task with that name will appear inside the group. 
+         If the task name differs in case, only the first occurrence will appear inside the task list.
+         
+2. Dealing with missing files.
 
-1. _{ more test cases …​ }_
+   1. Test case: Exit ArchDuke, then delete `data/addressbook.json`. Reopens Archduke. <br> 
+      Expected: All student contacts and groups will be deleted. ArchDuke will start with sample data.
+   
+   2. Test case: Exit ArchDuke, then delete `config.json` file. Reopens ArchDuke. <br>
+      Expected: ArchDuke starts as usual.
+   
+   3. Test case: Exit ArchDuke, then delete `preferences.json` file. Reopens ArchDuke. <br>
+      Expected: Previous user preferences such as window sizes will be reset. 
+      ArchDuke starts with the default GUI settings.
