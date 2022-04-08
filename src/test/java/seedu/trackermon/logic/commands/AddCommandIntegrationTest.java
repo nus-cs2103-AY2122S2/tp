@@ -27,7 +27,7 @@ public class AddCommandIntegrationTest {
     }
 
     /**
-     * Tests the adding a new show from the execution of {@code AddCommand}.
+     * Tests the adding of a new show from the execution of {@code AddCommand}.
      */
     @Test
     public void execute_newShow_success() {
@@ -41,7 +41,7 @@ public class AddCommandIntegrationTest {
     }
 
     /**
-     * Tests the adding a duplicate show from the execution of {@code AddCommand}.
+     * Tests the adding of a duplicate show from the execution of {@code AddCommand}.
      */
     @Test
     public void execute_duplicateShow_throwsCommandException() {

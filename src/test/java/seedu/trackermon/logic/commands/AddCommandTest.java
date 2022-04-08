@@ -31,7 +31,7 @@ import seedu.trackermon.testutil.ShowBuilder;
 public class AddCommandTest {
 
     /**
-     * Tests the adding a null from the execution of {@code AddCommand}.
+     * Tests the adding of a null from the execution of {@code AddCommand}.
      */
     @Test
     public void constructor_nullShow_throwsNullPointerException() {
@@ -39,7 +39,7 @@ public class AddCommandTest {
     }
 
     /**
-     * Tests the adding a valid show from the execution of {@code AddCommand}.
+     * Tests the adding of a valid show from the execution of {@code AddCommand}.
      */
     @Test
     public void execute_showAcceptedByModel_addSuccessful() throws Exception {
@@ -53,7 +53,7 @@ public class AddCommandTest {
     }
 
     /**
-     * Tests the adding a duplicate show from the execution of {@code AddCommand}.
+     * Tests the adding of a duplicate show from the execution of {@code AddCommand}.
      */
     @Test
     public void execute_duplicateShow_throwsCommandException() {
