@@ -117,13 +117,17 @@ public class ViewCommand extends Command {
     private void changeSuccessMessage(Model model) {
         if (keywords.size() > 1 && (keywords.contains("P/") || keywords.contains("L/"))) {
             System.out.println(keywords.size());
-            messageViewSuccess = String.format(
-                    Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
+            if (keywords.contains("N/")) {
+                messageViewSuccess = "Listed all players with no lineups";
+            } else {
+                messageViewSuccess = String.format(
+                        Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
+            }
         } else if (keywords.contains("S/")) {
             messageViewSuccess = String.format(
                     Messages.MESSAGE_SCHEDULE_LISTED_OVERVIEW, model.getFilteredScheduleList().size());
         } else if (keywords.contains("P/")) {
-            messageViewSuccess = "Listed all persons!";
+            messageViewSuccess = "Listed all players!";
         } else {
             StringBuilder sb = new StringBuilder();
             int i = 1;
