@@ -6,37 +6,7 @@ title: User Guide
 UNite is a **desktop app for managing contacts specifically designed for people in University**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you want an easy-to-use app to manage your University contacts, UNIte is the right place to go!
 
 * **Table of Contents**
-1. [Quick Start](#quick-start)
-2. [Features (CLI)](#features-cli)
-   1. [Add a new person](#add-a-new-person)
-   2. [Edit a person](#edit-a-person)
-   3. [Add a new tag](#add-a-new-tag)
-   4. [Delete a tag](#delete-a-tag)
-   5. [List all tags](#list-all-tags)
-   6. [Attach tag to a profile](#attach-tag-to-a-profile)
-   7. [Detach a tag from a profile](#detach-a-tag-from-a-profile)
-   8. [Filter list by tag](#filter-list-by-tag)
-   9. [Locate person by name](#locate-person-by-name)
-   10. [Grab person's attribute](#grab-person-attribute)
-   11. [Delete a person](#delete-a-person)
-   12. [Change the theme](#change-the-theme)
-   13. [View detail profile](#view-detailed-profile-cli)
-   14. [Clear all entries](#clear-all-entries)
-   15. [Exit the program](#exit-the-program)
-   16. [Save the data](#save-the-data)
-   17. [Edit the data file](#edit-the-data-file)
-   18. [Archive data file](#archive-data-file)
-3. [Features (Mouse interaction)](#features-mouse-interaction)
-   1. [Enable mouse interaction](#enable-mouse-interaction)
-   2. [Disable mouse interaction](#disable-mouse-interaction)
-   3. [View detail profile](#view-profile-click)
-   4. [Add a new profile](#add-a-new-person-click)
-   5. [Delete profile](#delete-profile)
-   6. [Add a new tag](#add-a-new-tag-click)
-   7. [Delete tag](#delete-tag-click)
-   8. [Filter list by tag](#filter-list-by-tag-click)
-4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -375,7 +345,10 @@ appear on the menu bar as shown in the figure below.
 Format: `enable_mouseUX`
 
 ### Disable mouse interaction : `disable_mouseUX`<a name="disable-mouse-interaction"></a>
-Enables mouse interaction in mouseUX.
+Disables mouse interaction in mouseUX. After disabling, buttons that help users access pop up windows will disappear.
+However, the below mouse interactions are still maintained:
+* Viewing a profile
+* Filtering contact list (by left clicking on the tag list)
 
 Format: `disable_mouseUX`
 
@@ -434,9 +407,8 @@ click on the tag to filter the list.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UNite home folder.<br>
 **Q**: How do I clear the "tag filter" after I typed the `filter` command?<br>
 **A**: Use `list` command to clear the filter.
-1
---------------------------------------------------------------------------------------------------------------------
 
+  --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary<a name="command-summary"></a>
 
