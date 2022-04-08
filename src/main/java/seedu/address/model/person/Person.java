@@ -200,11 +200,11 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        if (!getFavourite().isUnfavourited()) {
-            builder.append("; Favourite: Favourited");
-        } else {
-            builder.append("; Favourite: Unfavourited");
-        }
+//        if (!getFavourite().isUnfavourited()) {
+//            builder.append("; Favourite: Favourited");
+//        } else {
+//            builder.append("; Favourite: Unfavourited");
+//        }
 
         Set<Property> properties = getProperties();
         if (!properties.isEmpty()) {
