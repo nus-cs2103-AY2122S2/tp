@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.PETER;
+import static seedu.address.testutil.TypicalPersons.WILL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -166,5 +168,28 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void anyMeetingClash() {
+        uniquePersonList.add(WILL);
+        uniquePersonList.add(PETER);
+
+        // Same meeting as Peter
+        assertTrue(uniquePersonList
+                .anyMeetingClash(new ScheduledMeeting(new MeetingDate("2022-01-05"), new MeetingTime("1430"))));
+
+        // Different year
+        assertFalse(uniquePersonList
+                .anyMeetingClash(new ScheduledMeeting(new MeetingDate("2021-01-05"), new MeetingTime("1430"))));
+        // Different month
+        assertFalse(uniquePersonList
+                .anyMeetingClash(new ScheduledMeeting(new MeetingDate("2022-02-05"), new MeetingTime("1430"))));
+        // Different day
+        assertFalse(uniquePersonList
+                .anyMeetingClash(new ScheduledMeeting(new MeetingDate("2022-01-06"), new MeetingTime("1430"))));
+        // Different time
+        assertFalse(uniquePersonList
+                .anyMeetingClash(new ScheduledMeeting(new MeetingDate("2022-01-05"), new MeetingTime("1530"))));
     }
 }
