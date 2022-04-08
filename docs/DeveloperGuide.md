@@ -21,6 +21,16 @@ Take a look at our design which is mostly based off [AddressBook Level 3 (AB3)](
 ##UI Component
 <img src="images/developer-guide/UiArchitecture.png" width="800px">
 
+# Model Component
+The `Model` component,
+
+- stores the address book data, i.e., all Person objects (which are contained in a UniquePersonList object). 
+- stores the currently ‘selected’ `Person` objects (i.e., results of a search query) as a separate *filtered* list that is not exposed to outsiders.
+- stores the *sorted* 'selected' `Person` objects (i.e., results of a sort operation) as a separate *sorted* list that 'observes' the *filtered* list, i.e., it updates itself whenever the data in the *filtered* list changes. 
+- The *sorted* list is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
+- stores a UserPref object that represents the user’s preferences. This is exposed to the outside as a ReadOnlyUserPref objects. 
+- does not depend on any of the other three components (as the Model represents data entities of the domain, they should make sense on their own without depending on other components)
+
 # Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
