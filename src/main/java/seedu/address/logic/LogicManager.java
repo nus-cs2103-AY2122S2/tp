@@ -57,7 +57,7 @@ public class LogicManager implements Logic {
         saveBooks();
 
         if (!commandResult.isShowAdd() && !commandResult.isShowEdit()) {
-            undoRedoStack.push(command, commandText);
+            undoRedoStack.push(command);
         }
 
         return commandResult;
