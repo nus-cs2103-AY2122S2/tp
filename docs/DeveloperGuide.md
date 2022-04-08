@@ -417,12 +417,13 @@ The following sequence diagram summarizes what happens when a user executes the 
 #### 2.3 Implementing the findevent command
 Key Consideration: Keeping track of the various filtering conditions that could be potentially set by the user, so that it is easily maintained and extended.
 
-**INSERT SEQUENCE DIAGRAM HERE**
+![FindEventSequenceDiagram.png](images\FindEventSequenceDiagram.png)
 
 * **Current Implementation**:
   * The `FindEventCommandParser` class takes in the user's input and produces a List containing all the `Predicate<Event>` that can be derived from the input.
   * Each predicate type implements the `Predicate<Event>` interface in its own class. e.g. `EventDateIsBeforePredicate`
   * This list of `Predicate<Event>` is then passed to the `FindEventCommand` class via its constructor, and it will later filter the event list accessed by the UI based on all the given predicates.
+  * The sequence diagram shows how this process is carried out (with unnecessary details omitted) given two filtering conditions - by event name and by event date
   * Pros:
     * Easy to add new predicates and modify existing ones
   * Cons: 
