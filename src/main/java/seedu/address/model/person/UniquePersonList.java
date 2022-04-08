@@ -48,12 +48,6 @@ public class UniquePersonList implements Iterable<Person> {
             }).get();
     }
 
-    public String getDuplicateField(List<Person> toCheck) {
-        requireNonNull(toCheck);
-        Person duplicated = toCheck.stream().filter(this::contains).findFirst().get();
-        return getDuplicateField(duplicated);
-    }
-
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.

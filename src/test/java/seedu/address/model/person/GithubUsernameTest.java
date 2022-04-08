@@ -34,6 +34,7 @@ public class GithubUsernameTest {
         assertFalse(GithubUsername.isValidUsername("-alex_doe")); //starts with hyphen
         assertFalse(GithubUsername.isValidUsername("alex_doe-")); //ends with hyphen
         assertFalse(GithubUsername.isValidUsername("alex_--doe")); //has consecutive hyphens
+        assertFalse(GithubUsername.isValidUsername("alex--doe")); //has consecutive hyphens
         assertFalse(GithubUsername.isValidUsername(invalidLongName)); //40 character name
 
 
