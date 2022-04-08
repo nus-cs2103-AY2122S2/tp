@@ -15,10 +15,12 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Redo success!";
     public static final String MESSAGE_FAILURE = "No more commands to redo!";
 
-    @Override
-	@@ -23,12 +23,12 @@ public CommandResult execute(Model model) throws CommandException {
-            throw new CommandException(MESSAGE_FAILURE);
-        }
+    	@Override
+	public CommandResult execute(Model model) throws CommandException {
+		if (!undoRedoStack.canRedo()) {
+		    throw new CommandException(MESSAGE_FAILURE);
+		}
+	}
 
         RedoableCommand command = undoRedoStack.popRedo();
         if (command instanceof SwitchCommand) {
