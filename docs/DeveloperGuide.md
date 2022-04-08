@@ -962,7 +962,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list students.
-2. TAPA shows a list of students.
+2. TAPA shows a list of students in alphabetical order sorted by their name.
 
    Use case ends.
 
@@ -1035,6 +1035,79 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. TAPA shows an error message.
 
       Use case resumes from step 2.
+
+
+
+**Use case: UC05 - Assign task a student**
+
+**MSS**
+1. User requests TAPA to assign a task to a student, by specifying their studentId and task name or assign tasks to all the student taking a module, by specifying module code and task name.
+2. TAPA shows the updated list of students.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. If studentId is given and a student with the given studentId does not exist.
+
+    * 1a1. TAPA shows an error message.
+  
+      Use case ends.
+
+* 1b. If module code is given and no student is taking a module with the given module code.
+
+    * 1b1. TAPA shows an error message.
+      
+      Use case ends.
+
+* 1c. The task name already is assigned to the present.
+
+    * 1c1. TAPA shows an error message.
+
+      Use case ends. 
+
+
+**Use case: UC06 - delete task assigned to student**
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to delete a task that was assigned to a student by specifying their studentId and the index of the task or delete a task assigned to all students taking a certain module by specifying the module code and task name. 
+4. TAPA updates the details of the student with the supplied details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. If studentId is given and a student with the given studentId does not exist.
+
+    * 3a1. TAPA shows an error message.
+
+      Use case ends.
+  
+* 3b. If the index is out of range, that is a non-positive number or greater than the number of tasks assigned to that person.
+
+   * 3b1. TAPA shows an error message.
+  
+     Use case ends.
+
+* 3c. If module code is given and no student is taking a module with the given module code.
+
+    * 3c1. TAPA shows an error message.
+
+      Use case ends.
+
+* 3d. The task name already is assigned to the present.
+
+    * 3d1. TAPA shows an error message.
+
+      Use case ends.
+
 
 *{More to be added}*
 
