@@ -1,0 +1,28 @@
+@startuml
+ skinparam backgroundColor #ffffff
+ skinparam classAttributeIconSize 0
+ hide circle
+
+ abstract class "{abstract}\nCommand" {
+     + {abstract} execute(Model) : CommandResult
+ }
+
+ interface Model <<interface>> {
+ }
+
+ class ModelManager implements Model{
+     -addressBook : AddressBook
+     +setAddressBook(new AddressBook())
+ }
+
+ class HelpCommand {
+     /' Fields '/
+
+     /' Methods '/
+     + execute(Model) : CommandResult
+ }
+
+ ModelManager <-- HelpCommand
+ "{abstract}\nCommand" <|-- HelpCommand
+
+ @enduml
