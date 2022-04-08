@@ -67,10 +67,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
         ObservableList<Interview> internalListCopy = FXCollections.observableArrayList(internalList);
         // Credits to teammate @tiewweijian for initial suggestion of deletion/removal of interviews
         // to solve the issue of rescheduling the same candidate
-        internalListCopy.remove(target);
-        internalListCopy.add(editedInterview);
+        internalListCopy.set(index, editedInterview);
 
-        if (!interviewsDateTimeAreUnique(internalListCopy)) {
+        if (!interviewsDateTimeAreNonConflicting(internalListCopy)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
@@ -117,7 +116,7 @@ public class UniqueInterviewList implements Iterable<Interview> {
         if (!interviewsCandidatesAreUnique(interviews)) {
             throw new DuplicateCandidateException();
         }
-        if (!interviewsDateTimeAreUnique(interviews)) {
+        if (!interviewsDateTimeAreNonConflicting(interviews)) {
             throw new ConflictingInterviewException();
         }
 
@@ -172,9 +171,9 @@ public class UniqueInterviewList implements Iterable<Interview> {
         return true;
     }
     /**
-     * Returns true if {@code candidates} contains only unique candidates.
+     * Returns true if {@code interviews} contains only non-conflicting interviews.
      */
-    private boolean interviewsDateTimeAreUnique(List<Interview> interviews) {
+    private boolean interviewsDateTimeAreNonConflicting(List<Interview> interviews) {
         for (int i = 0; i < interviews.size() - 1; i++) {
             for (int j = i + 1; j < interviews.size(); j++) {
                 if (interviews.get(i).isConflictingInterview(interviews.get(j))) {
