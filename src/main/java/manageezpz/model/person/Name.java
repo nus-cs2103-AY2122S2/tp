@@ -35,11 +35,17 @@ public class Name {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return fullName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -47,6 +53,9 @@ public class Name {
                 && fullName.equals(((Name) other).fullName)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return fullName.hashCode();

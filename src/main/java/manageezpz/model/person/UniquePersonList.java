@@ -144,11 +144,17 @@ public class UniquePersonList implements Iterable<Person> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -156,6 +162,9 @@ public class UniquePersonList implements Iterable<Person> {
                         && internalList.equals(((UniquePersonList) other).internalList));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return internalList.hashCode();

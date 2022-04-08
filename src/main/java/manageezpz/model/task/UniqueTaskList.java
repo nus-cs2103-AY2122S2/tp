@@ -231,11 +231,17 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -243,6 +249,9 @@ public class UniqueTaskList implements Iterable<Task> {
                 && internalList.equals(((UniqueTaskList) other).internalList));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return internalList.hashCode();

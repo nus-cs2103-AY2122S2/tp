@@ -34,6 +34,9 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -41,6 +44,9 @@ public class Tag {
                 && tagName.equals(((Tag) other).tagName)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return tagName.hashCode();

@@ -460,6 +460,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
@@ -476,6 +479,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tasks.asUnmodifiableObservableList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -484,6 +490,9 @@ public class AddressBook implements ReadOnlyAddressBook {
                 && tasks.equals(((AddressBook) other).tasks));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return persons.hashCode();

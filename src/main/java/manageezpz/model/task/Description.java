@@ -28,11 +28,17 @@ public class Description {
         return !(test.trim().isEmpty());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return description;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -40,6 +46,9 @@ public class Description {
                 && description.equals(((Description) other).description)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return description.hashCode();

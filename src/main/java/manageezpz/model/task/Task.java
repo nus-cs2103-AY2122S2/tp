@@ -23,7 +23,6 @@ public abstract class Task {
      * {@code Date taskDate} has a default value that will be changed if the
      * object inheriting the Task object is a Deadline or Event object.
      *
-     * If object is a Todo object, this field will be ignored.
      */
     public Task() {
     }
@@ -127,11 +126,17 @@ public abstract class Task {
                 .anyMatch(person -> person.getName().fullName.equals(assignee));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] ";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

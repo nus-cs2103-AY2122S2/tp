@@ -58,6 +58,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -73,11 +76,17 @@ public class UserPrefs implements ReadOnlyUserPrefs {
                 && addressBookFilePath.equals(o.addressBookFilePath);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(guiSettings, addressBookFilePath);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

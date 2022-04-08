@@ -53,11 +53,17 @@ public class Email {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -65,6 +71,9 @@ public class Email {
                 && value.equals(((Email) other).value)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return value.hashCode();
