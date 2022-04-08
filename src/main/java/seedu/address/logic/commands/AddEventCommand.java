@@ -33,6 +33,8 @@ public class AddEventCommand extends Command {
             + PREFIX_FRIEND_NAME + "Amy Lim";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
+    public static final String MESSAGE_PAST_EVENT_WARNING =
+            "Warning: You have added a past event. Use 'listevents -a' if it is not visible.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
 
     private final Event toAdd;
@@ -57,7 +59,13 @@ public class AddEventCommand extends Command {
         }
 
         model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), false, false, true);
+
+        String output = String.format(MESSAGE_SUCCESS, toAdd);
+        if (toAdd.isBeforeNow()) {
+            output += "\n" + MESSAGE_PAST_EVENT_WARNING;
+        }
+
+        return new CommandResult(output, false, false, true);
     }
 
     @Override

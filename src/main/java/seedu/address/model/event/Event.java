@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.common.Description;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
@@ -57,27 +56,27 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns true if the given {@code substring} is contained within this event's name.
+     * Returns true if the given {@code nameSubstring} is contained within this event's name.
      * Case-insensitive.
      *
-     * @param substring Substring to search for in this event's name.
-     * @return True if given substring is contained within this event's name.
+     * @param nameSubstring Name substring to search for in this event's name.
+     * @return True if given name substring is contained within this event's name.
      */
-    public boolean hasNameSubstring(String substring) {
-        requireNonNull(substring);
-        return getName().containsIgnoreCase(substring);
+    public boolean hasNameSubstring(EventName nameSubstring) {
+        requireNonNull(nameSubstring);
+        return getName().containsIgnoreCase(nameSubstring);
     }
 
     /**
-     * Returns true if the given {@code substring} is contained within this event's friend names.
+     * Returns true if the given {@code nameSubstring} is contained within this event's friend names.
      * Case-insensitive.
      *
-     * @param substring Substring to search for in this event's friend names.
-     * @return True if the given substring is contained within this event's friend names.
+     * @param nameSubstring Substring to search for in this event's friend names.
+     * @return True if the given name substring is contained within this event's friend names.
      */
-    public boolean hasFriendNameSubstring(String substring) {
-        requireNonNull(substring);
-        return getFriendNames().stream().anyMatch(name -> name.containsIgnoreCase(substring));
+    public boolean hasFriendNameSubstring(FriendName nameSubstring) {
+        requireNonNull(nameSubstring);
+        return getFriendNames().stream().anyMatch(name -> name.containsIgnoreCase(nameSubstring));
     }
 
     /**
@@ -100,6 +99,24 @@ public class Event implements Comparable<Event> {
     public boolean isAfterDate(LocalDate date) {
         requireNonNull(date);
         return getDateTime().hasDateAfter(date);
+    }
+
+    /**
+     * Returns true if this event's date and time is before the system's date and time.
+     *
+     * @return True if this event's date and time is before the system's date and time.
+     */
+    public boolean isBeforeNow() {
+        return getDateTime().isBeforeNow();
+    }
+
+    /**
+     * Returns true if this event's date and time is after the system's date and time.
+     *
+     * @return True if this event's date and time is after the system's date and time.
+     */
+    public boolean isAfterNow() {
+        return getDateTime().isAfterNow();
     }
 
     /**
@@ -141,27 +158,6 @@ public class Event implements Comparable<Event> {
     public boolean hasFriendWithName(Person person) {
         requireNonNull(person);
         return this.getFriendNames().stream().anyMatch(person::hasName);
-    }
-
-
-    /**
-     * Returns true if all friend names correspond to actual Friends in the AddressBook.
-     *
-     * @return true if all friend names correspond to actual Friends in the AddressBook.
-     */
-    public boolean areFriendNamesValid(AddressBook addressBook) {
-        // There ought to be a better way of doing this - search AddressBook by name perhaps?
-        // worth thinking about - how to enforce search specifically by name, rather than relying
-        // on the ::hasPerson(Person) method. todo implement search by name (specifically name objects match)
-        // todo change this to take in a ReadOnlyAddressBook
-
-        for (FriendName name : getFriendNames()) {
-            Person beingLookedFor = new Person(name);
-            if (!addressBook.hasPerson(beingLookedFor)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

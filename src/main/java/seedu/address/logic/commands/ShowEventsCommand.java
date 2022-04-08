@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 
 /**
  * Lists all events in the address book to the user.
@@ -15,9 +16,9 @@ public class ShowEventsCommand extends Command {
 
     public static final String MESSAGE_USAGE = "showevents [-a]";
 
-    public static final String MESSAGE_SUCCESS = "Listed upcoming events";
+    public static final String MESSAGE_SUCCESS = "Listed all upcoming events. To see past events use the -a flag";
 
-    public static final String MESSAGE_SUCCESS_ALL = "Listed all events";
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all events, including past ones";
 
     private final boolean isShowAllEvents;
 
@@ -30,7 +31,7 @@ public class ShowEventsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (!isShowAllEvents) {
-            model.updateFilteredEventList(event -> event.getDateTime().isAfterNow());
+            model.updateFilteredEventList(Event::isAfterNow);
             return new CommandResult(MESSAGE_SUCCESS, false, false, true);
         }
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);

@@ -39,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        filteredEvents.setPredicate(Event::isAfterNow);
     }
 
     public ModelManager() {
@@ -142,7 +143,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean areEventFriendsValid(Event toAdd) {
-        return toAdd.areFriendNamesValid(addressBook);
+        return addressBook.areFriendNamesValid(toAdd);
     }
 
     @Override

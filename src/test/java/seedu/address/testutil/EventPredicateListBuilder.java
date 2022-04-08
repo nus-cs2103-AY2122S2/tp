@@ -12,7 +12,9 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDateIsAfterPredicate;
 import seedu.address.model.event.EventDateIsBeforePredicate;
 import seedu.address.model.event.EventFriendNamesContainSubstringPredicate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventNameContainsSubstringPredicate;
+import seedu.address.model.person.FriendName;
 
 /**
  * A utility class to help with building a list of event predicates.
@@ -115,7 +117,7 @@ public class EventPredicateListBuilder {
     public List<Predicate<Event>> build() {
         ArrayList<Predicate<Event>> predicates = new ArrayList<>();
         if (nameSubstring != null) {
-            predicates.add(new EventNameContainsSubstringPredicate(nameSubstring));
+            predicates.add(new EventNameContainsSubstringPredicate(new EventName(nameSubstring)));
         }
         if (startDate != null) {
             predicates.add(new EventDateIsAfterPredicate(startDate.minusDays(1)));
@@ -125,7 +127,7 @@ public class EventPredicateListBuilder {
             predicates.add(new EventDateIsBeforePredicate(endDate.plusDays(1)));
         }
         for (String friendNameSubstring : friendNameSubstrings) {
-            predicates.add(new EventFriendNamesContainSubstringPredicate(friendNameSubstring));
+            predicates.add(new EventFriendNamesContainSubstringPredicate(new FriendName(friendNameSubstring)));
         }
         return Collections.unmodifiableList(predicates);
     }

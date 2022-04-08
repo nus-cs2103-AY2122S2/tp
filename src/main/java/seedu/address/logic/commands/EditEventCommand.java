@@ -48,6 +48,8 @@ public class EditEventCommand extends Command {
             + PREFIX_DATETIME + "16-08-2021 1600";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
+    public static final String MESSAGE_PAST_EVENT_WARNING =
+            "Warning: The edited event is in the past. Use 'listevents -a' if it is not visible.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
     public static final String MESSAGE_INVALID_FRIENDS_TO_REMOVE =
@@ -88,7 +90,13 @@ public class EditEventCommand extends Command {
         }
 
         model.setEvent(eventToEdit, editedEvent);
-        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent), false, false, true);
+
+        String output = String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
+        if (editedEvent.isBeforeNow()) {
+            output += "\n" + MESSAGE_PAST_EVENT_WARNING;
+        }
+
+        return new CommandResult(output, false, false, true);
     }
 
     /**

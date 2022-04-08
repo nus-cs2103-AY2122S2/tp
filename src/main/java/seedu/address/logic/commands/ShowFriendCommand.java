@@ -78,7 +78,7 @@ public class ShowFriendCommand extends ByIndexByNameCommand {
         // updates UI to show upcoming events tied to this person
         // TODO: Known bug, will show upcoming events for today that have already passed...
         Predicate<Event> upcomingEventPredicate = new EventDateIsAfterPredicate(LocalDate.now());
-        Predicate<Event> friendPredicate = new EventFriendNamesContainSubstringPredicate(personToShow.getName().toString());
+        Predicate<Event> friendPredicate = new EventFriendNamesContainSubstringPredicate(personToShow.getName());
 
         model.updateFilteredEventList(event -> upcomingEventPredicate.test(event) && friendPredicate.test(event));
 

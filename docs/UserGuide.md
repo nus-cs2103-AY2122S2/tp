@@ -212,11 +212,13 @@ Adds a new event, which can be optionally linked to any number of existing frien
 
 * There **cannot** be any duplicate events with the same name and date.
 * The `DATE_TIME` must be given in the following format: `DD-MM-YYYY hhmm`
+  * Individual fields are parsed intelligently where possible.
+  * e.g. A day-of-month that is out of range for the given month will be automatically corrected to the last valid day-of-month. (`31-06-2020 1200` will be automatically adjusted to `30-06-2020 1200`)
 * All given `FRIEND_NAME` values must match the `NAME` of an existing friend in Amigos.
 
 **Examples**:
 * `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
-* `addevent n/Christmas Party dt/25-12-2022`
+* `addevent n/Christmas Party dt/25-12-2022 1930`
 
 ### Editing an event: `editevent` / `ee`
 Edits an existing event.
@@ -267,13 +269,16 @@ Find events in Amigos whose properties match the given search criteria.
   * For each search field, an event is a match if the search substring matches
     * e.g n/Birthday will match events with names John's Birthday, Bob's Birthday
     * e.g. f/joe will match events containing either Joe Maggio or Joe Allen in the friends list.
+    * Any leading or trailing whitespace in the search substring will be trimmed.
 
 * For search by `DATE`:
   * The date must be given as follows: `DD-MM-YYYY`
+  * The date is interpreted intelligently where possible, similar to `DATE_TIME` in `addevent`
   * It is acceptable to provide only the `DATE_START` or `DATE_END`, if desired.
   * `DATE_START` and `DATE_END` are inclusive.
 * At least one of the optional fields must be provided
 * If more than one field is given, only events with matches for **all** search criteria will be shown.
+* All events, including past ones, will be checked for matches.
 
 **Examples**:
 * `findevent n/dinner ds/20-03-2022` returns events starting from 20 Mar 2022 with an event name containing 'dinner' 

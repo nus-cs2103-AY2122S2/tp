@@ -35,10 +35,9 @@ public class FindEventCommandTest {
     public static final String[] MATCHING_DATE_RANGE = {"12-3-2022", "11-5-2022"};
 
     public static final String UNMATCHING_EVENT_NAME = "aksdjaskdj";
-    public static final String MATCHING_EVENT_NAME_SUBSTRING = " Birthday";
+    public static final String MATCHING_EVENT_NAME_SUBSTRING = "d Birthday";
     public static final String MATCHING_EVENT_NAME_ENTIRE = "2nd Birthday";
     public static final String UNMATCHING_FRIEND_NAME_1 = "Roger";
-    public static final String UNMATCHING_FRIEND_NAME_2 = "Dilbert Goh";
     public static final String MATCHING_FRIEND_NAME_1 = "Amy K";
     public static final String MATCHING_FRIEND_NAME_2 = "Alex Yeoh";
 
@@ -98,11 +97,11 @@ public class FindEventCommandTest {
     @Test
     public void execute_filterByEventName_multipleEventsFound() {
         // Match partial event name
-        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder().withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
                 .clearStartDate().clearEndDate().clearFriendNameSubstrings().build();
         List<Event> expectedFilteredList =
-                Arrays.asList(EVENT_WITH_DESCRIPTION, EVENT_NO_FRIENDS, EVENT_WITH_DIFF_DESCRIPTION);
+                Arrays.asList(EVENT_WITH_DESCRIPTION, EVENT_NO_FRIENDS);
         assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
 
         // Different case -> same outcome
@@ -243,11 +242,11 @@ public class FindEventCommandTest {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 1);
         List<Predicate<Event>> predicates = new EventPredicateListBuilder()
                 .withNameSubstring(MATCHING_EVENT_NAME_SUBSTRING)
-                .withStartDate(MATCHING_START_DATE)
-                .withEndDate("12-5-2022")
+                .withStartDate("11-3-2022")
+                .withEndDate("12-3-2022")
                 .withFriendNameSubstrings(MATCHING_FRIEND_NAME_1, MATCHING_FRIEND_NAME_2)
                 .build();
-        List<Event> expectedFilteredList = Arrays.asList(EVENT_WITH_DIFF_DESCRIPTION);
+        List<Event> expectedFilteredList = Arrays.asList(EVENT_WITH_DESCRIPTION);
 
         assertFindEventCommandSuccess(expectedMessage, predicates, expectedFilteredList);
     }

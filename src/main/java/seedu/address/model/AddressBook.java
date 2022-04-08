@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.insights.PersonInsight;
@@ -130,8 +132,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a event to the address book.
      * The event must not already exist in the address book.
      */
-    public void addEvent(Event p) {
-        events.add(p);
+    public void addEvent(Event toAdd) {
+        requireNonNull(toAdd);
+        assert(areFriendNamesValid(toAdd));
+        alignFriendNames(toAdd);
+
+        events.add(toAdd);
     }
 
     /**
@@ -149,8 +155,43 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
+        assert(areFriendNamesValid(editedEvent));
+        alignFriendNames(editedEvent);
 
         events.setEvent(target, editedEvent);
+    }
+
+    //=========== Person-Event Consistency Methods ================================================
+
+    /**
+     * Aligns event's friend names to be exactly the same as actual friend names, including capitalisation.
+     * Assumes that all event friend names are valid.
+     *
+     * @param event Event object containing friend names to be aligned.
+     */
+    private void alignFriendNames(Event event) {
+        requireNonNull(event);
+        List<FriendName> originalNames = new ArrayList<>(event.getFriendNames());
+
+        for (FriendName originalName : originalNames) {
+            FriendName actualName = persons.getExactName(originalName);
+            event.changeFriendNameIfPresent(originalName, actualName);
+        }
+    }
+
+    /**
+     * Returns true if all friend names in the given event correspond to actual Friends in the AddressBook.
+     *
+     * @param event Event to check friend names for validity.
+     * @return true if all friend names correspond to actual Friends in the AddressBook.
+     */
+    public boolean areFriendNamesValid(Event event) {
+        for (FriendName name : event.getFriendNames()) {
+            if (!persons.containsPersonWithName(name)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //=========== Utility Methods ================================================
