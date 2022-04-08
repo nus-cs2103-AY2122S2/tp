@@ -238,7 +238,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <img src="images/UndoRedoState4.png" width="550" />
 
-Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges()` at the end of its execution. Since the `currentStateChange` is not pointing at the end of the `stateChanges` list, all state changes after the `currentStateChange` will be cleared. Reason: It does not make sense to redo the `update 1 n~Maggie​` command. This is the convention that most modern desktop applications follow.
+Step 6. The user executes `clear`, which again will call `Model#saveIBookChanges()` at the end of its execution. Since the `currentStateChange` is not pointing at the end of the `stateChanges` list, all state changes after the `currentStateChange` will be cleared. Reason: It does not make sense to redo the `update 1 n:Maggie​` command. This is the convention that most modern desktop applications follow.
 
 <img src="images/UndoRedoState5.png" width="550" />
 
