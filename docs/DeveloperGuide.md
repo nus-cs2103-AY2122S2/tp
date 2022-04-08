@@ -359,10 +359,10 @@ Events in Amigos are implemented in a similar fashion to Persons in AB3, for the
 
 Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set. The latter represents the Friends that are linked to this event.
 
+![EventPersonRelationshipSequenceDiagram.png](images\EventPersonRelationshipSequenceDiagram.png)
+
 #### 2.1 Implementing Event-Person relationships
 Key Consideration: How to implement & maintain the validity of the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
-
-**(Insert a class diagram here)**
 
 * **Current Implementation**
   * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. (see above diagram)
