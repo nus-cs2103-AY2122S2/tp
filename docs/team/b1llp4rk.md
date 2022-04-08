@@ -5,7 +5,7 @@ title: B1LLP4RK's Project Portfolio Page
 
 ### Project: HackNet
 
-HackNet - HackNet is a desktop address book application used for finding teammates to do team projects with. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is a product of brownfield project of turning AB3 into an addressbook program targeted to computer science students trying to form a project team.
+HackNet - HackNet is a desktop address book application used for finding teammates to do team projects with. It interacts the user using a CLI, and has a GUI created with JavaFX. It is a product of brownfield project of turning [AB3](https://se-education.org/addressbook-level3/) into an addressbook program targeted to computer science students trying to form a project team.
 
 Given below are my contributions to the project.
 
@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 
     * Enable comma separation of multiple values for teams and skills
       * **What it does:** The user has to use a comma to separate multiple values of teams or skills, for `add` and `edit` command.
-      * **Justification:** The previous design of passing in multiple values of teams and skills required user to start each value with `t/` or `s/`. This is very inconvinient compared to comma, especially when having to pass a large number of teams or skills. This feature was first implemented on [`edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command, and was later expanded to [`add`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/87) command.
+      * **Justification:** The previous design of passing in multiple values of teams and skills required user to start each value with `t/` or `s/`. Using a comma is easier, especially when passing a large number of teams or skills. This feature was first implemented on [`edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79) command, and was later added to [`add`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/87) command.
       * **Highlights:** Consecutive whitespaces before and after the commas are ignored. This is an attempt to take into account that normal use of comma is followed by a space, and to be generous towards mistakes where multiple spaces are used.
 
 * **Bug Fixes**
