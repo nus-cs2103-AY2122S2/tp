@@ -27,7 +27,7 @@ public class JsonAdaptedBuyerTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final String VALID_APPOINTMENT = BENSON.getAppointment().toString();
-    private static final JsonAdaptedPropertyToBuy VALID_NULL_PROPERTY =
+    private static final JsonAdaptedPropertyToBuy VALID_PROPERTY =
             new JsonAdaptedPropertyToBuy(BENSON.getPropertyToBuy());
     @Test
     public void toModelType_validBuyerDetails_returnsBuyer() throws Exception {
@@ -38,7 +38,7 @@ public class JsonAdaptedBuyerTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer =
-                new JsonAdaptedBuyer(INVALID_NAME, VALID_PHONE, VALID_APPOINTMENT, VALID_TAGS, VALID_NULL_PROPERTY);
+                new JsonAdaptedBuyer(INVALID_NAME, VALID_PHONE, VALID_APPOINTMENT, VALID_TAGS, VALID_PROPERTY);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
@@ -46,7 +46,7 @@ public class JsonAdaptedBuyerTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(null, VALID_PHONE, VALID_APPOINTMENT, VALID_TAGS,
-                VALID_NULL_PROPERTY);
+                VALID_PROPERTY);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
@@ -54,7 +54,7 @@ public class JsonAdaptedBuyerTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer =
-                new JsonAdaptedBuyer(VALID_NAME, INVALID_PHONE, VALID_APPOINTMENT, VALID_TAGS, VALID_NULL_PROPERTY);
+                new JsonAdaptedBuyer(VALID_NAME, INVALID_PHONE, VALID_APPOINTMENT, VALID_TAGS, VALID_PROPERTY);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
@@ -62,7 +62,7 @@ public class JsonAdaptedBuyerTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, null, VALID_APPOINTMENT, VALID_TAGS,
-                VALID_NULL_PROPERTY);
+                VALID_PROPERTY);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
@@ -73,7 +73,7 @@ public class JsonAdaptedBuyerTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedBuyer buyer =
                 new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE,
-                        VALID_APPOINTMENT, invalidTags, VALID_NULL_PROPERTY);
+                        VALID_APPOINTMENT, invalidTags, VALID_PROPERTY);
         assertThrows(IllegalValueException.class, buyer::toModelType);
     }
 

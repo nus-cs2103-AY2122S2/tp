@@ -30,14 +30,20 @@ public class TypicalBuyers {
     // Buyers who are yet to indicate any properties to buy
     public static final Buyer ALICE = new BuyerBuilder().withName("Alice Pauline")
             .withPhone("94351253").withAppointment("2022-05-01-12-00")
-            .withTags("friends").build();
+            .withTags("friends").withProperty(
+            new PropertyToBuyBuilder().withHouse(
+                new HouseBuilder().withHouseType(HouseType.BUNGALOW).withLocation("clementi").build())
+            .withPriceRange(new PriceRange(0, 20)).build()).build();
     public static final Buyer BENSON = new BuyerBuilder().withName("Benson Meier")
             .withPhone("98765432").withAppointment("2022-05-04-09-00")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withProperty(
+            new PropertyToBuyBuilder().withHouse(
+                new HouseBuilder().withHouseType(HouseType.CONDOMINIUM).withLocation("utown").build())
+            .withPriceRange(new PriceRange(0, 20)).build()).build();;
     public static final Buyer CARL = new BuyerBuilder().withName("Carl Kurz")
             .withPhone("95352563").withProperty(
             new PropertyToBuyBuilder().withHouse(
-                new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("Bishan").build())
+                new HouseBuilder().withHouseType(HouseType.UNSPECIFIED).withLocation("bishan").build())
                     .withPriceRange(new PriceRange(0, 20)).build()).build();
     public static final Buyer DANIEL = new BuyerBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").build();
