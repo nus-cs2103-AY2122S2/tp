@@ -25,7 +25,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note**<br>
 
-The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/blob/master/main/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/master/main/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -422,26 +422,6 @@ Here is a brief example of how the command history works:
 * Each time the user presses the down arrow key, the command box will be replaced with the command they next executed, until they reach the latest command (the current one they have not executed).
 * If the user executes duplicate commands one after another, only the first will be added to history.
   * For example, if the user executes `list`, `list`, `list`, only the first list is added to history. 
-
-<div markdown="1" class="alert alert-info">:information_source: **Info**
-
-If the user cycles to a previous command and edits it, that command will stay edited until that command is executed. Upon execution, the command will be reverted to how it originally was.
-* For example, the current command history is `[clear, delete 5, addMembership 4 m/gold, null]`.
-  1. The command box is blank. The user types `list`. The user has _not_ pressed `Enter` and presses the up arrow _twice_.
-  2. The current command history is `[clear, delete 5, addMembership 4 m/gold, list]`.
-  3. The command box now shows `delete 5`.
-  4. The user replaces `5` with `6`. The command box now shows `delete 6`. The user has _not_ pressed `Enter`.
-  5. The current command history is `[clear, delete 6, addMembership 4 m/gold, list]`.
-  6. The user presses the down arrow _twice_. The command box will show `list` again.
-  7. The user presses `Enter`. The command box is now empty and the `list` command is executed and permanently added to the history.
-  8. The current command history is now `[clear, delete 6, addMembership 4 m/gold, list, null]`.
-  9. The user presses the up arrow _thrice_. The command box will show `delete 6`, and not `delete 5`. This is because the user edited this history.
-  10. Now the user presses `Enter`. The command box is now empty and the `delete 6` command is executed and added to the history.
-  11. The current command history is now `[clear, delete 5, addMembership 4 m/gold, list, delete 6, null]`.
-  12. If the user presses the up arrow _once_, the command box will show `delete 6`. This is because that was the last executed command.
-  13. If the user presses the up arrow another _three times_, the command box will show `delete 5`. This is because upon execution, `delete 6` was added as a new history, and `delete 5` was restored in the history.
-
-</div>
   
 The command history works with the use of two `ArrayList<String>`, `historyBuffer` and `activeBuffer`.
 
@@ -449,8 +429,46 @@ The command history works with the use of two `ArrayList<String>`, `historyBuffe
 Whenever the user executes a command, regardless whether it is valid or not, the command is added to a `historyBuffer`.
 Commands in `historyBuffer`, once added, will never change.
 
-`activeBuffer` is a duplicate of `historyBuffer` that allows editing. Whenever the user cycles through their history and edits the command, they are editing the contents of `activeBuffer`.
-When the user edits a previous command and presses `Enter`, the content of that command in `activeBuffer` is restored with the original in `historyBuffer`.
+`activeBuffer` is a duplicate of `historyBuffer` that allows editing. Whenever the user cycles through their history and edits the command, they are editing the commands of `activeBuffer`.
+When the user edits a previous command and executes, the content of that command in `activeBuffer` is restored with the original in `historyBuffer`.
+
+Example usage (red arrow is what the command box is displaying):
+
+1. ![Command History Flow 1](images/CommandHistoryFlow1.png)
+
+*Figure: User starts with a blank command box.*
+
+2. ![Command History Flow 2](images/CommandHistoryFlow2.png)
+
+*Figure: User types `append 1 t/vendor`.*
+
+3. ![Command History Flow 3](images/CommandHistoryFlow3.png)
+
+*Figure: User executes `append 1 t/vendor`. `append 1 t/vendor` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again.*
+
+4. ![Command History Flow 4](images/CommandHistoryFlow4.png)
+
+*Figure: User types `edit 2 e/` but does not execute. User then presses the up arrow key to cycle to `addMembership 1 m/silver`.*
+
+5. ![Command History Flow 5](images/CommandHistoryFlow5.png)
+
+*Figure: User changes `addMembership 1 m/silver` to `addMembership 3 m/bronze`.*
+
+6. ![Command History Flow 6](images/CommandHistoryFlow6.png)
+
+*Figure: User executes `addMembership 3 n/bronze`. `addMembership 3 n/bronze` is appended to `historyBuffer` and `activeBuffer`. Un-executed command `edit 2 e/` is erased. Command box is blank again. `addMembership 1 m/silver` in `activeBuffer` is restored.*
+
+7. ![Command History Flow 7](images/CommandHistoryFlow7.png)
+
+*Figure: User cycles to `listTransaction` and changes it to `random invalid string`.*
+
+8. ![Command History Flow 8](images/CommandHistoryFlow8.png)
+
+*Figure: User cycles to `delete 5` and changes it to `delete 7`.*
+
+9. ![Command History Flow 9](images/CommandHistoryFlow9.png)
+
+*Figure: User executes `delete 7`. `delete 7` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again. `delete 5` in `activeBuffer` is restored. `listTransaction` is not restored. *
 
 #### Design considerations
 
