@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuc
 import static seedu.address.logic.commands.BuyerCommandTestUtil.showBuyerAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_BUYER;
 import static seedu.address.testutil.TypicalPropertyToBuy.PROPERTY_TO_BUY_FIVE;
 import static seedu.address.testutil.TypicalPropertyToBuy.PROPERTY_TO_BUY_ONE;
 import static seedu.address.testutil.TypicalPropertyToBuy.PROPERTY_TO_BUY_TWO;
@@ -35,8 +36,8 @@ public class AddPtbCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         PropertyToBuy testProperty = new PropertyToBuyBuilder(PROPERTY_TO_BUY_ONE).build();
-        AddPropertyToBuyCommand ptbCommand = new AddPropertyToBuyCommand(INDEX_FIRST_BUYER, testProperty);
-        Buyer testBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        AddPropertyToBuyCommand ptbCommand = new AddPropertyToBuyCommand(INDEX_SEVENTH_BUYER, testProperty);
+        Buyer testBuyer = model.getFilteredBuyerList().get(INDEX_SEVENTH_BUYER.getZeroBased());
         String expectedMessage = String.format(AddPropertyToBuyCommand.MESSAGE_SUCCESS,
                 new BuyerBuilder(testBuyer).withProperty(testProperty).build());
 
@@ -67,7 +68,7 @@ public class AddPtbCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
+        showBuyerAtIndex(model, INDEX_SEVENTH_BUYER);
 
         PropertyToBuy testProperty = new PropertyToBuyBuilder(PROPERTY_TO_BUY_TWO).build();
         Buyer testBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());

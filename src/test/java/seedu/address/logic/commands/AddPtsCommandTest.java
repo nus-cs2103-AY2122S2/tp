@@ -21,6 +21,7 @@ import seedu.address.model.BuyerAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.property.NullPropertyToSell;
 import seedu.address.model.property.PropertyToSell;
 import seedu.address.model.seller.Seller;
 import seedu.address.testutil.PropertyToSellBuilder;
@@ -33,14 +34,17 @@ public class AddPtsCommandTest {
     private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
             TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
 
+    private PropertyToSell nullProperty = NullPropertyToSell.getNullPropertyToSell();
+
     @Test
     public void execute_validIndexUnfilteredList_success() {
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_ONE).build();
-        AddPropertyToSellCommand ptsCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
+
         Seller testSeller = model.getFilteredSellerList().get(INDEX_SEVENTH_SELLER.getZeroBased());
+        model.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(nullProperty).build());
+        AddPropertyToSellCommand ptsCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
         expectedModel.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(testProperty).build());
@@ -72,6 +76,7 @@ public class AddPtsCommandTest {
 
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_TWO).build();
         Seller testSeller = model.getFilteredSellerList().get(INDEX_FIRST_SELLER.getZeroBased());
+        model.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(nullProperty).build());
         AddPropertyToSellCommand ptsCommand = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, testProperty);
 
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
