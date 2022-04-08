@@ -34,11 +34,13 @@ public class RemindCommandParserTest {
 
     @Test
     public void parse_negative_throwParseException() {
-        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_bigNumber_throwParseException() {
-        assertParseFailure(parser, "100000000000", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "100000000000",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemindCommand.MESSAGE_USAGE));
     }
 }
