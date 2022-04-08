@@ -54,7 +54,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new {@code HelpWindow}.
      */
     public HelpWindow() {
         this(new Stage());
