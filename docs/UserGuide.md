@@ -245,7 +245,7 @@ Finds products that fit certain filters given by the user.
 
 Format: `find [TAG:VALUE ...]`
 
-Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` | `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
+Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` \| `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
 
 * For the name, category and description fields, the value provided can be a substring of the exact product
 * For searching a range of prices, `START_PRICE` and `END_PRICE` should be used instead
@@ -280,7 +280,7 @@ Format: `out-of-stock`
 
 *Alternatively*, 
 
-Click on the menu bar `Actions` > `Find out of stock items`
+Click on the menu bar `Actions` > `Find Out of Stock products`
 
 :information_source: Filters cannot be stacked with subsequent commands. 
 Thus, expired and out of stock filters cannot be stacked with other filters.
@@ -395,7 +395,7 @@ Format: `expired`
 
 *Alternatively*,
 
-Click on the menu bar `Actions` > `Find expired`
+Click on the menu bar `Actions` > `Find Expired items`
 
 #### 3.2.5 Finding items that are expiring soon: `remind`
 
