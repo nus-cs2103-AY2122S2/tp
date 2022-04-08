@@ -118,7 +118,7 @@ Deletes a student from TAPA.
   * the specified index is a negative number
   * the specified index is larger than the number of students in TAPA
   * there is no student with the specified matriculation number
-* Multiple indices can be inputted in order to delete multiple students.
+* Multiple indices can be inputted in order to delete multiple students. All inputted indices must be valid in order for the command to execute successfully.
 
 **Example**:
 * `delete 10`
@@ -152,6 +152,7 @@ Allows the user to look up the details of a particular student.
 **Format**: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`
 
 * The student whose name, student id or module code is specified after the `find` command will appear in the resulting list.
+* Search fields must be exact matches in order for the `find` command to display the result. For example, given a student John in TAPA, `find n/John` will successfully display this student but not `find n/Joh` or `find n/Jo`.
 
 **Example**:
 * `find n/John`
