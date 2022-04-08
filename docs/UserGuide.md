@@ -5,7 +5,7 @@ title: User Guide
 
 
 
-UniBook is a **desktop app for students to manage their university contacts related to their studies in an organised manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
+UniBook is a **desktop app for students to manage university contacts related to their studies in an organised manner,** optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
 * Table of Contents
 {:toc}
 
@@ -25,7 +25,7 @@ UniBook is a **desktop app for students to manage their university contacts rela
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all entries.
+   * **`list`** : Lists all entries of a view.
 
    * **`add`**`o/student n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to UniBook.
 
@@ -37,11 +37,99 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to [Commands](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Features
+
+
+# Main Function of UniBook
+To store and provide easy viewing and management of 3 types of entities relating to a student's studies in University.
+## Entities
+Each type of entity has a variety of fields that store some information on the entity. These fields have varying constraints that are enforced by UniBook.
+
+Constraint Types:
+* _Number of entries_ : The minimum - maximum number of entries of a field in one entity. 
+  * A number > 0 for minimum indicates the field is required to be filled.
+  * \* for maximum indicates that there can be an unbounded number of instances of this field in one entity.
+* _Acceptable Values_ : The acceptable characters for a field.
+* _Length Constraint_ : The minimum - maximum length of a field. 
+  * A number >0 for minimum means that if the field has been filled, then the value it was been filled with cannot be blank.
+  * \* for maximum means that the field is unbounded.
+* _Unique Constraint_ : If the field must be unique among all other entities of its type.
+  * :heavy_check_mark: - yes 
+  * :x: - no
+* _Additional Constraints_ : Any additional constraints on the field.
+
+### Person - Student or Professor 
+
+Represents a person in university. The person must be a student or a professor.
+
+| Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints | Example |
+| ----- | ------ | ---- | ------ | -------- | :-------: | ----- | --- |
+| Name | Person's name | 1 | Alphabets only | 1 - 50 characters | :x: |  | _John Doe_ |
+| Phone | Person's phone number | 0 - 1 | Digits only | 7 - 15 digits | :heavy_check_mark: |  | _91234859_ |
+| Email | Person's email address| 0 - 1 | [Email Format](#email-address-format) |  4 - 320 characters | :heavy_check_mark: |  | _johndoe@example.com_ |
+| Office | Professor's office location in university campus | 0 - 1 | Any character except whitespaces | 1 - 20 characters | :x: | Only Professor has this field | _COM2-02-57_ |
+| Tag |  A one word piece of information to attach to a person - similar to a hashtag on social media | 0 - * | Alphanumeric | 1 - 20 characters | :x: | Among the tags of a person, 1 specific tag can only appear once | _friend_ | 
+
+### Module
+Represents a university module.
+Can have both Professors and Students associated with it.
+* Association with Professor implies that the professor is involved in the teaching of the module.
+* Association with student implies student is taking the module.
+
+| Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints | Example |  
+| ----- | ------ | ---- | ------ | -------- | :-------: | ----- | --- |
+|Code| Module code| 1 |Any character except whitespaces | 1 - 10 characters| :heavy_check_mark: | A module code is case insensitive, e.g. _cs2103_ and _CS2103_ are considered the same. The case stored in UniBook is the case of the first module entered with the given module code. Future additions of the same module code with different case will not be allowed. | _CS2103_ |
+|Name| Name of the module | 1 | Alphanumeric with whitespaces| 1 - 50 characters | :x: | | _Software Engineering_ |
+|Key Event| A key event of the module that is occurring at a specific time and date. Consists of two subfields, key event type and key event datetime.| 0 - * | **Key event type**: <br>4 possible values: <br>1. `exam`<br>2. `quiz` <br>3.`assignment_release`<br>4. `assignment_due`<br> **Key event datetime**: [Date-Time Format](#date-time-format)| Not relevant as acceptable values covers this | :x: | Duplicate key events of exact same type and datetime cannot exist within the same module. <br> Case of characters for key event type does not matter. e.g. `exam` and `EXAM`mean the same thing.| Key event type: _Exam_<br> Key event datetime: _2022-12-02 13:30_|
+
+### Group
+* Represents any kind of group related to a university module that a student is in - a study group, project group etc. 
+* Can contain multiple students, implying they are members of the group.
+* Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed.
+
+| Field | Description | Number of entries | Acceptable Values | Length Constraint | Unique Constraint | Additional Constraints|Example |  
+| ----- | ------ | ---- | ------ | -------- | :-------: | ----- | --- |
+|Name| Name of the group | 1 | Any character | 1 - 50 | :heavy_check_mark: <br> Note: this is among the groups of a specific module. It is possible to have two groups with same name, but in different modules! | | _W16-1_|
+|Meeting date & time| The date and time of a scheduled meeting of the group | 0 - * | [Date-Time Format](#date-time-format) | Not relevant as accceptable values covers this | :x: | Duplicates of a meeting time with a specific date and time cannot exist in a group | _2022-12-02 13:30_ |
+
+# Graphical User Interface
+## Main Function
+1. Complement the CLI by providing the user an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
+2. Provide basic ease-of-use features to enhance the user experience. 
+
+## Views 
+The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
+
+**Each view has its own variations of the basic command types.**
+### People View
+Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
+
+![PeopleView](images/peopleView.png)
+### Modules View
+Displays all modules stored in UniBook, with all their individual details.
+
+![ModulesView](images/modulesView.png)
+### Groups View 
+Displays all the groups stored in UniBook, with all their individual details.
+
+![GroupsView](images/groupsView.png)
+
+## Navigation
+Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
+
+**However, some basic intuitive features are available for quick navigation**:
+  * On _people view_, click on a module code to enter the _module view_ displaying all the details of the module with the given module code.
+  * On _people view_, click on a group name to enter the _group view_ displaying all the details of the group with the given group name.
+
+## Other GUI features
+  * On _modules view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
+  * On _groups view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
+
+
+# Commands
 
 <div markdown="block" class="alert alert-info">
 
@@ -67,55 +155,6 @@ UniBook is a **desktop app for students to manage their university contacts rela
 
 </div>
 
-# Main Function of UniBook
-To store and provide easy viewing and management of 3 types of entities relating to a student'ss studies in University.
-## Entities
-### Person - Student or Professor 
-* Contains 3 basic details - name, phone and email. Phone and Email details can be left blank.
-* A Professor can contain one additional detail - office, the office in the University they are located in. This can also be left blank.
-### Module
-* Represents a University module, storing 4 basic details - module name, module code, groups of the module and key events of the module. Key Events represent events such as exams or assignment due dates, storing the associated date.
-* Can have both Professors and Students associated with it. 
-  * Association with Professor implies that the professor is involved in the teaching of the module.
-  * Association with student implies student is taking the module.
-### Group
-* Represents any kind of group related to a university module that a student is in - a study group, project grp etc. It stores meeting times for the group.
-* Can contain multiple students, implying they are members of the group.
-* Is associated with a module, and cannot exist without being associated with a module. The reasoning for this is that UniBook is specially designed for managing contacts associated with a student's studies - hence only groups related to university modules are allowed. 
-
-
-# Graphical User Interface
-## Main Functions of the GUI:
-1. Complement the CLI by providing the User an organised and aesthetically pleasing view of the information they wish to see (information which is determined through CLI commands).
-2. Provide basic ease-of-use features to enhance the user experience. 
-
-## Views 
-The GUI consists of 3 main views that a user can navigate through - the _people view_, _modules view_ and _groups view_.
-
-**Each view has its own variations of the basic command types.**
-### People View
-Displays all students and professors stored in UniBook, along with the module codes of each module and group names of each group stored in UniBook. This complements the CLI as a user is able to add a person to a module or group directly on this page using those displayed codes/names.
-
-![Ui](images/Ui.png)
-### Module View
-Displays all modules stored in UniBook, with all their individual details.
-
-![ModulesPage](images/modulesPage.png)
-### Groups View 
-Displays all the groups stored in UniBook, with all their individual details.
-
-![GroupsPage](images/groupsPage.png)
-
-## Navigation
-Navigation between views is done primarily with the `list` command, as UniBook is optimized as a CLI application.
-
-**However, some basic intuitive features are available for quick navigation**:
-  * On _people view_, click on a module code to enter the _module view_ displaying all the details of the module with the given module code.
-  * On _people view_, click on a group name to enter the _group view_ displaying all the details of the group with the given group name.
-
-## Other GUI features
-  * On _module view_ showing multiple modules, initially only the module code and name of each module is shown, to see the rest of the details of a module, just click the tab corresponding to the detail you wish to see. For example, to see all the students taking a module, just click the "Students" tab.
-  * On _group view_ showing multiple groups, initially only the module code of the module associated with each group and the group name will be displayed. To see the rest of the details of a group, just click the panel of the group.
 
 ## Viewing help : `help`
 
@@ -130,69 +169,81 @@ Format: `help`
 
 Adds a module/group/student/professor/event/meeting to the UniBook depending on the value defined in `o/OPTION`.
 
-Format: `add o/OPTION...`  
-OPTION values:  
-1. **module**  
+### On Any View:  
+
+#### :bulb: Add a module  
+
 Format: `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​`  
-This adds a Module to the UniBook. User can also add key events of the module.  
-The event types are as follows:  
+* This adds a Module to the UniBook. User can also add key events of the module.  
+* The event types are as follows:  
 `1` - Exam  
 `2` - Quiz  
 `3` - Assignment Release  
 `4` - Assignment Due  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-Example: `add o/module n/Discrete Mathematics m/CS1231S ke/1 dt/2022-05-04 13:00`  
-Adds a module "Discrete Mathematics" with module code CS1231S to the UniBook. The module will have a key event of type "Exam" on the datetime specified.
+* The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+* The format of `ke/KEYEVENTTYPE dt/DATETIME` has to be **strictly followed**.
+* Duplicate Module Codes are **not allowed**, however duplicate Module Names are allowed as modules may have same names.
+* Example: `add o/module n/Computer Organisation m/CS2100 ke/1 dt/2022-05-04 13:00`  
+* Adds a module "Computer Organisation" with module code CS2100 to the UniBook. The module will have a key event of type "Exam" on the datetime specified.
 
 
-2. **group**  
+#### :bulb: Add a group
+
 Format: `add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​`
-This adds a Group to the Module specified.  
-The `dt/DATETIME` represents meeting times of the group, it takes in the format `yyyy-MM-dd HH:mm`.  
-Example: `add o/group n/W16-1 m/CS2103 dt/2022-05-01 13:00 dt/2022-05-04 13:00`  
-Adds a group named "W16-1" to module "CS2103". This group will have the specified meeting times.
+* This adds a Group to the Module specified.  
+* `dt/DATETIME` represents meeting times of the group, and it takes in the format `yyyy-MM-dd HH:mm`.
+* The module specified **must** exist in the UniBook, otherwise add the module first.
+* Example: `add o/group n/Project Work m/CS2100 dt/2022-05-01 13:00 dt/2022-05-04 15:00`  
+* Adds a group named "Project Work" to module "CS2100". This group will have the specified meeting times.
 
 
+#### :bulb: Add a student
 
-3. **student**  
-Format: `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]…​]…​`  
-This adds a Student to the UniBook, it also adds the student into the student list of the corresponding Module objects.  
-Note that in order to add a student to a group of the specified module, the format of `m/MODULECODE [g/GROUPNAME]…​` must be strictly followed. This will allow the program to know which group of which module the user wishes to add the student to.  
-Example: `add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS1231S g/Project Work m/CS2103`  
-Adds a student named Johnston to the UniBook. The student will be added to the group "Project Work" in Module "CS1231S".
-
-
-4. **professor**  
-Format: `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  
-This adds a Professor to the UniBook, it also adds the professor into the professor list of the corresponding Module objects.  
-Example: `add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com of/COM2 01-15 t/smart m/CS1231S m/CS2100`  
-Adds a professor named Aaron Tan to the UniBook.
+Format: `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]…​]…​`
+* This adds a Student to the UniBook.  
+* Duplicate names are allowed, but duplicate phone numbers and emails are not.
+* The student can have any number of tags and modules including 0.
+* The student can also belong to any number of groups within the module including 0.
+* Note that in order to add a student to a group of the specified module, the format of `m/MODULECODE [g/GROUPNAME]…​` must be **strictly followed**.  
+* The module and group specified **must** exist in the UniBook, otherwise add the module and group first!
+* Example: `add o/student n/Johnston p/98765432 e/johnston@gmail.com t/friend m/CS2100 g/Project Work m/CS2103`  
+* Adds a student named Johnston to the UniBook. The student will be added to the group "Project Work" in Module "CS1231S".
 
 
-5. **event**  
-Format: `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  
-This adds a key event of the respective type and datetime to the module specified.  
-The event types are as follows:  
+#### :bulb: Add a professor
+
+Format: `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`
+* This adds a Professor to the UniBook.
+* Duplicate names are **allowed**, but duplicate phone numbers and emails are **not allowed**.
+* Professors can have **any number** of tags and modules including 0.
+* The module specified **must** exist in the UniBook, otherwise add the module first.
+* Example: `add o/professor n/Aaron Tan p/98723432 e/aarontan@gmail.com of/COM2 01-15 t/smart m/CS2100`  
+* Adds a professor named Aaron Tan to the UniBook.
+
+
+#### :bulb: Add an event
+
+Format: `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`
+* This adds a key event of the respective type and datetime to the module specified.  
+* The event types are as follows:  
 `1` - Exam  
 `2` - Quiz  
 `3` - Assignment Release  
 `4` - Assignment Due  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-Example: `add o/event m/CS2103 ke/1 dt/2022-05-04 13:00`  
-Adds an event of the specified type and datetime to module "CS2103".
+* The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+* Different event types with same datetimes are **allowed**, but same event types with the same datetimes are **not allowed** within the same module.
+* Example: `add o/event m/CS2100 ke/2 dt/2022-05-04 13:00`  
+* Adds an event of the specified type and datetime to module "CS2100".
 
 
-6. **meeting**  
+#### :bulb: Add a meeting
+
 Format: `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  
-This adds meetings of the specified datetime to the specified group belonging to the specified module. Multiple `dt/DATETIME` can be entered to add multiple meetings.  
-The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
-Example: `add o/meeting m/CS2103 g/W16-1 dt/2022-04-24 13:00 dt/2022-04-30 15:00 dt/2022-05-04 11:00`  
-Add meetings of the specified datetimes to module "CS2103".
-
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student/professor can have any number of tags and modules (including 0)
-</div>
+* This adds meetings to the specified group belonging to the specified module. Multiple `dt/DATETIME` can be entered to add multiple meetings.  
+* The accepted format of `dt/DATETIME` is `yyyy-MM-dd HH:mm`.  
+* Duplicate meeting times are **not allowed** within the same group.
+* Example: `add o/meeting m/CS2103 g/W16-1 dt/2022-04-24 13:00 dt/2022-04-30 15:00 dt/2022-05-04 11:00`  
+* Add meetings of the specified datetimes to module "CS2103".
 
 
 ## Listing entries: `list`
@@ -401,9 +452,11 @@ At least one optional field must be edited in order for module to be successfull
 
 ## Locating persons by name: `find`
 
-### On Any Page
+Finds a person stored in UniBook by the given keyword. **Only works on people view.**
 
-#### Find person whose names contain any of the given keywords
+### On People View:
+
+#### :bulb: Find person(s) whose name(s) contain any of the given keywords
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -540,13 +593,42 @@ If your changes to the data file makes its format invalid, UniBook will discard 
 
 # Command summary
 
-
 Action | Format
 --------|------------------
-**Add** | `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​` <br> e.g., `add o/module n/Software Engineering m/CS2103 ke/1 dt/2022-05-04 13:00` <br>`add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​` <br> e.g., `add o/group n/W16-1 m/CS2103 dt/2022-04-24 13:00` <br>`add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [[m/MODULECODE] [g/GROUPNAME]]…​`  <br> e.g., `add o/student n/Peter Ho p/81234567 e/peterho@u.nus.edu m/cs2103 g/W16-1` <br>`add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`  <br>e.g., `add o/professor n/James Ho p/22224444 e/jamesho@example.com of/123 Clementi Rd S123466 m/cs2103` <br>`add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`  <br>e.g., `add o/event m/CS2103 ke/4 dt/2022-04-28 13:00` <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`  <br>e.g., `add o/meeting m/CS2103 g/W16-1 dt/2022-04-29 13:00`
+**Add** | **Any View** <br> `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​`[(example)](#bulb-add-a-module) <br> `add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​`[(example)](#bulb-add-a-group) <br> `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]]…​`[(example)](#bulb-add-a-student) <br> `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`[(example)](#bulb-add-a-professor) <br> `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`[(example)](#bulb-add-an-event) <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`[(example)](#bulb-add-a-meeting)
 **Clear** | `clear`
-**Edit** |  Editing person: `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG] `<br> e.g. `edit 1 o/person p/91234567 e/prof@email.com of/COM1 nm/CS2103 ` <br><br> Editing Module: `edit INDEX o/module [n/NAME] [m/MODCODE]` e.g. `edit 1 o/module m/CS2103 n/Software Engineering` <br><br> Editing Groups: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]` e.g. `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` <br><br> Editing Key Events: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]` e.g. `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45`
+**Edit** |  **People View** <br> `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG]`[(example)](#bulb-edit-persons-name-phone-email-office-andor-tag) <br><br> **Modules View:** <br> `edit INDEX o/module [n/NAME] [m/MODCODE]`[(example)](#bulb-edit-modules-name-andor-module-code) <br>`edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`[(example)](#bulb-edit-groups-group-name-andor-meeting-times) <br> `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]`[(example)](#bulb-edit-key-event-of-modules-type-andor-date-time) <br><br> **Group View:**<br>`edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`[(example)](#bulb-edit-groups-group-name-andor-meeting-times) <br>
 **Delete** | **Any View** <br> `delete o/module m/[MODULECODE]`[(example)](#bulb-delete-module-by-module-code)<br> `delete o/group m/[MODULECODE] g/[GROUPNAME]`[(example)](#bulb-delete-group-by-module-code-and-group-name)<br><br> **People View:** <br> `delete [INDEX]`[(example)](#bulb-delete-a-person-by-index) <br>`delete [INDEX] p/ e/ t/[TAG] of/`[(example)](#bulb-delete-information-from-person) <br><br> **Modules View:**<br>`delete [INDEX]`[(example)](#bulb-delete-a-module-by-index) <br> `delete [INDEX] prof/[INDEX]`[(example)](#bulb-remove-a-professor-from-a-module-by-index) <br>`delete [INDEX] stu/[INDEX]`[(example)](#bulb-remove-a-student-from-a-module-by-index)<br> `delete [INDEX] g/[GROUPNAME]`[(example)](#bulb-delete-a-group-from-a-module-by-index) <br> `delete [INDEX] ke/[INDEX]`[(example)](#bulb-delete-a-key-event-from-a-module-by-index) <br><br> **Groups View**: <br>`delete [INDEX]`[(example)](#bulb-delete-group-by-index) <br>`delete [INDEX] stu/[INDEX]`[(example)](#bulb-remove-student-from-group-by-index) <br> `delete [INDEX] mt/[INDEX]`[(example)](#bulb-delete-meeting-time-from-group-by-index) <br> 
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | **People View** <br> `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`[(example)](#bulb-find-person-whose-name-contain-any-of-the-given-keywords)
 **List** | **Any View**:<br> `list` [(example)](#bulb-list-everything) <br> `list o/view v/VIEWTYPE` [(example)](#bulb-change-view)<br><br> **People View:** <br> `list type/PERSONTYPE` [(example)](#bulb-list-people-of-a-specific-type) <br> `list o/module m/MODULECODE [type/PERSONTYPE]` [(example)](#bulb-list-people-in-a-specific-module) <br> `list o/group m/MODULECODE g/GROUPNAME` [(example)](#bulb-list-people-in-a-specific-group-of-a-specific-module) <br><br> **Modules View:** <br> `list m/MODULECODE` [(example)](#bulb-list-a-module-with-a-specific-code) <br> `list [n/KEYWORD] [ke/KEYEVENT] [dt/YYYY-MM-DD]` [(example)](#bulb-list-a-module-with-a-name-containing-a-keyword)  <br> `list o/group g/GROUPNAME` [(example)](#bulb-list-groups-with-specific-group-name-module-page) <br><br> **Groups View:**<br> `list g/GROUPNAME [m/MODULECODE]` [(example)](#bulb-list-groups-with-specific-group-name-group-page) <br> `list mt/YYYY-MM-DD` [(example)](#bulb-list-groups-with-specific-meeting-date)
 **Help** | `help`
+
+# Appendix
+
+## Special Formats
+
+These are various fields that have special formats to be followed.
+
+### Email address format
+
+* Format: `local-part@domain`
+* The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
+* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+### Date-Time Format
+
+* Date and time must be entered into UniBook in the following format : `YYYY-MM-DD HH-MM`, e.g. `2022-12-02 13:30`
+    * `YYYY` is the year, e.g. `2022`
+    * `MM` is the month, e.g. `12`
+    * `DD` is the day, e.g. `02`
+    * `HH` is the hour in 24H format, e.g. `13`
+    * `MM` is the minute, e.g. `30`
+* When displayed in UniBook, a date and time is shown in the format _Day Month Year, HH:MM:SS AM/PM_, e.g. _4 May 2022, 2:00:00PM_
+  * Time is in 12H format for convenience.
+
+
+[#]: #bulb
