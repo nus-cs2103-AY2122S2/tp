@@ -65,4 +65,16 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents an integer.
+     * e.g. -1, 0, 1, 2, 3, ...
+     * Returns true for +1, +2, +3, for consistency
+     * Returns false for any other non-null string input
+     * @param s
+     * @return
+     */
+    public static boolean isNumber(String s) {
+        return s.matches("\\d+(\\.\\d+)?");
+    }
 }

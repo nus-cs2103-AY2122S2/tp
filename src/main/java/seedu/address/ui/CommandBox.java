@@ -45,13 +45,12 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
-
         try {
-            if (!StringUtil.isNonZeroUnsignedInteger(commandText)) {
-                this.lastCommandStr = commandText;
-            }
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+            if (!StringUtil.isNumber(commandText)) {
+                this.lastCommandStr = commandText;
+            }
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

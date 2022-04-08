@@ -42,7 +42,7 @@ public class HustleBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, Command lastCommand) throws ParseException {
-        if (StringUtil.isNonZeroUnsignedInteger(userInput)) {
+        if (StringUtil.isNumber(userInput)) {
             return new NumberParser(lastCommand).parse(userInput);
         }
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());

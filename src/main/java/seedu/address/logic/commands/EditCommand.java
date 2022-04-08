@@ -23,6 +23,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -71,6 +72,7 @@ public class EditCommand extends Command {
     private final String targetNameStr;
     private final EditPersonDescriptor editPersonDescriptor;
     private int index = 0;
+    private int listSize;
 
     /**
      * @param name name of the person in the filtered person list to edit
@@ -101,16 +103,16 @@ public class EditCommand extends Command {
 
             if (tempList.size() > 1) {
                 lastShownList.setPredicate(predicate);
+                listSize = lastShownList.size();
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
 
             targetIndex = model.getPersonListIndex(targetName);
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
+            }
         } else {
             targetIndex = Index.fromOneBased(index);
-        }
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
         }
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
@@ -125,7 +127,10 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
-    public void setIndex(int index) {
+    public void setIndex(int index) throws ParseException {
+        if (index <= 0 || index > listSize) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
         this.index = index;
     }
 
