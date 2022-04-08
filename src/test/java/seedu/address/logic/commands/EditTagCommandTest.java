@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -17,14 +19,15 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TagListBuilder;
 
 public class EditTagCommandTest {
+    private final Tag tag1 = VALID_TAG_FRIEND.get(0);
+    private final Tag tag2 = VALID_TAG_HUSBAND.get(0);
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EditTagCommand(null,
-                1, TagListBuilder.ADD_TAG_1));
+                1, tag1));
     }
 
     @Test
@@ -35,10 +38,10 @@ public class EditTagCommandTest {
     @Test
     public void execute_tagEditedByPerson_editSuccessful() throws Exception {
         Person person = new PersonBuilder().withTags(new ArrayList<>(
-                List.of(TagListBuilder.DEFAULT_TAG_1))).build();
+                List.of(tag1))).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
-        Tag editedTag = TagListBuilder.DEFAULT_TAG_2;
+        Tag editedTag = tag2;
 
         Person tagAddedPerson = new PersonBuilder().withTags(new ArrayList<>(
                 List.of(editedTag))).build();
@@ -54,7 +57,7 @@ public class EditTagCommandTest {
     @Test
     public void execute_indexOutOfBounds_throwsException() throws Exception {
         Index index = Index.fromOneBased(100);
-        Tag editedTag = TagListBuilder.DEFAULT_TAG_2;
+        Tag editedTag = tag2;
         EditTagCommand editTagCommand = new EditTagCommand(index, 1, editedTag);
 
         Person person = new PersonBuilder().build();
@@ -69,7 +72,7 @@ public class EditTagCommandTest {
     @Test
     public void execute_tagNumberNotPositive_throwsException() throws Exception {
         Index index = Index.fromOneBased(1);
-        Tag editedTag = TagListBuilder.DEFAULT_TAG_2;
+        Tag editedTag = tag2;
         EditTagCommand editTagCommand = new EditTagCommand(index, 0, editedTag);
 
         Person person = new PersonBuilder().build();
@@ -84,7 +87,7 @@ public class EditTagCommandTest {
     @Test
     public void execute_tagNumberOutOfBounds_throwsException() throws Exception {
         Index index = Index.fromOneBased(1);
-        Tag editedTag = TagListBuilder.DEFAULT_TAG_2;
+        Tag editedTag = tag1;
         EditTagCommand editTagCommand = new EditTagCommand(index, 100, editedTag);
 
         Person person = new PersonBuilder().build();
@@ -98,7 +101,7 @@ public class EditTagCommandTest {
 
     @Test
     public void execute_duplicateTagAlreadyExists_throwsException() throws Exception {
-        ArrayList<Tag> personTagList = new ArrayList<>(List.of(TagListBuilder.ADD_TAG_1, TagListBuilder.ADD_TAG_2));
+        ArrayList<Tag> personTagList = new ArrayList<>(List.of(tag1, tag2));
         Person person = new PersonBuilder().withTags(personTagList).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
@@ -106,7 +109,7 @@ public class EditTagCommandTest {
         ModelManager modelManager = new ModelManager();
         modelManager.setAddressBook(addressBookBuilder.build());
 
-        Tag alreadyPresentTag = TagListBuilder.ADD_TAG_2;
+        Tag alreadyPresentTag = tag2;
         EditTagCommand editTagCommand = new EditTagCommand(index, 1, alreadyPresentTag);
 
         assertThrows(CommandException.class, EditTagCommand.MESSAGE_DUPLICATE_TAG, () ->
@@ -120,8 +123,8 @@ public class EditTagCommandTest {
         int tagNumber1 = 3;
         int tagNumber2 = 5;
 
-        Tag tag1 = TagListBuilder.ADD_TAG_1;
-        Tag tag2 = TagListBuilder.ADD_TAG_2;
+        Tag tag1 = this.tag1;
+        Tag tag2 = this.tag2;
 
         assertEquals(new EditTagCommand(index1, tagNumber1, tag1),
                 new EditTagCommand(index1, tagNumber1, tag1)); // same values
