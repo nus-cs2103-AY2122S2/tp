@@ -7,7 +7,6 @@ import woofareyou.commons.core.GuiSettings;
 import woofareyou.logic.commands.CommandResult;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.model.Model;
 import woofareyou.model.ReadOnlyAddressBook;
 import woofareyou.model.pet.Pet;
 
