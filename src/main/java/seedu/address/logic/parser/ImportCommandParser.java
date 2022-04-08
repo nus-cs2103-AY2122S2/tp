@@ -13,10 +13,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ImportCommand parse(String args) throws ParseException {
-        if (args.isEmpty()) {
-            throw new ParseException("Cannot find the file path");
-        }
+    public ImportCommand parse(String args) {
         return new ImportCommand(args.trim());
     }
 
