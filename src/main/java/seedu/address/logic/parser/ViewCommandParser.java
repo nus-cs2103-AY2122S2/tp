@@ -18,6 +18,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEU
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ARCHIVED_SCHEDULES;
+import static seedu.address.model.person.Name.VALIDATION_REGEX;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -106,7 +107,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             // view P/[PLAYER_NAME...] [w/gte|lte|gt|lt|eq WEIGHT] [h/gte|lte|gt|lt|eq HEIGHT] [t/POSITION]
             String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
             if (!playerNameArg.equals("")) {
-                if (!playerNameArg.matches("^[a-zA-Z\\s]*$")) {
+                if (!playerNameArg.matches(VALIDATION_REGEX)) {
                     throw new ParseException("You have provided an invalid name criteria!");
                 }
                 String trimmedArgs = playerNameArg.trim();
@@ -174,7 +175,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             // view L/[LINEUP_NAME...]
             String lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
             if (!lineupNameArg.equals("")) {
-                if (!lineupNameArg.matches("^[a-zA-Z\\s]*$")) {
+                if (!lineupNameArg.matches(VALIDATION_REGEX)) {
                     throw new ParseException("You have provided an invalid name criteria!");
                 }
                 String trimmedArgs = lineupNameArg.trim();
@@ -250,7 +251,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             // view S/[SCHEDULE_NAME...]
             String scheduleNameArg = argMultimap.getValue(PREFIX_SCHEDULE).get();
             if (!scheduleNameArg.equals("")) {
-                if (!scheduleNameArg.matches("^[a-zA-Z\\s]*$")) {
+                if (!scheduleNameArg.matches(VALIDATION_REGEX)) {
                     throw new ParseException("You have provided an invalid name criteria!");
                 }
                 String trimmedArgs = scheduleNameArg.trim();
