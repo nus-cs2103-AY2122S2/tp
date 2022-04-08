@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lineup.LineupName;
 import seedu.address.model.person.Name;
 
 /**
@@ -29,18 +30,25 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
         if (arePrefixesPresent(argMultimap, PREFIX_PLAYER, PREFIX_LINEUP)) {
-            // delete player from lineup
-            // for now, we assume that there is only one team
-            Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
-            seedu.address.model.lineup.LineupName lineup = ParserUtil
-                    .parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
-            return new DeleteCommand(person, lineup);
-        } else if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
-            Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
-            return new DeleteCommand(person);
-        } else if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+                Name person = ParserUtil.parsePlayer(argMultimap.getValue(PREFIX_PLAYER).get());
+                LineupName lineup = ParserUtil
+                        .parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
+                return new DeleteCommand(person, lineup);
+            }
+        } else if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)
+                && !arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
             try {
-                seedu.address.model.lineup.LineupName lineup = ParserUtil
+                Name person = ParserUtil.parseName(argMultimap.getValue(PREFIX_PLAYER).get());
+                return new DeleteCommand(person);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE_PLAYER), pe);
+            }
+        } else if (arePrefixesPresent(argMultimap, PREFIX_LINEUP)
+                && !arePrefixesPresent(argMultimap, PREFIX_SCHEDULE)) {
+            try {
+                LineupName lineup = ParserUtil
                         .parseLineupName(argMultimap.getValue(PREFIX_LINEUP).get());
                 return new DeleteCommand(lineup);
             } catch (ParseException pe) {
@@ -55,9 +63,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE_SCHEDULE), pe);
             }
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
