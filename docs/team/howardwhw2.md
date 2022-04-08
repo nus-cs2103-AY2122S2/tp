@@ -18,9 +18,6 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=howardwhw2&tabRepo=AY2122S2-CS2103-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
 * **Enhancements to existing features**:
   * Improved on the existing help window to display additional information that the user will likely need regularly in one place apart from just the URL to the user guide.
 
@@ -33,5 +30,4 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94), [\#96](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/96), [\#102](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/102) [\#108](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/108)
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
 
