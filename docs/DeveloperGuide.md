@@ -236,7 +236,7 @@ Additionally, there are a few final static messages to be displayed to the user 
 
 **Sequence Diagram of Add Feature is shown below:**
 
-<img src='images/AddSequenceDiagram.png' height="800" width="900">
+<img src='images/AddSequenceDiagram.png' height="701" width="1464">
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -345,7 +345,7 @@ Additionally, there is a static final static message to be displayed to the user
 
 **Sequence Diagram of Clear Feature is shown below:**
 
-<img src='images/ClearSequenceDiagram.png' width="700" height="400">
+<img src='images/ClearSequenceDiagram.png' height="701" width="1464">
 
 
 <br>
