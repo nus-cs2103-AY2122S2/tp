@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 
 class ScheduledMeetingTest {
 
-    MeetingDate validDate = new MeetingDate("2022-03-15");
-    MeetingTime validTime = new MeetingTime("1400");
+    private MeetingDate validDate = new MeetingDate("2022-03-15");
+    private MeetingTime validTime = new MeetingTime("1400");
 
-    ScheduledMeeting noMeeting = new ScheduledMeeting();
-    ScheduledMeeting anotherNoMeeting = new ScheduledMeeting();
+    private ScheduledMeeting noMeeting = new ScheduledMeeting();
+    private ScheduledMeeting anotherNoMeeting = new ScheduledMeeting();
 
-    ScheduledMeeting meeting = new ScheduledMeeting(validDate, validTime);
-    ScheduledMeeting laterMeeting = new ScheduledMeeting(new MeetingDate("2022-12-12"), validTime);
-    ScheduledMeeting meetingLaterTime = new ScheduledMeeting(validDate, new MeetingTime("1430"));
+    private ScheduledMeeting meeting = new ScheduledMeeting(validDate, validTime);
+    private ScheduledMeeting laterMeeting = new ScheduledMeeting(new MeetingDate("2022-12-12"), validTime);
+    private ScheduledMeeting meetingLaterTime = new ScheduledMeeting(validDate, new MeetingTime("1430"));
 
     @Test
     public void constructor_null_throwsNullPointerException() {
