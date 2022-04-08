@@ -301,10 +301,6 @@ This is how we do our [DevOps](https://se-education.org/addressbook-level3/DevOp
 **Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
 </div>
 
-<aside>
-💡 
-</aside>
-
 # Appendix: Requirements
 
 ## Target user profile
