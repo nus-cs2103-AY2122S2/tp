@@ -30,7 +30,8 @@ Given below are my contributions to the project:
   * User Guide:
     * Added documentation for the commands `addevent`, `deleteevent`, and `findevent`
   * Developer Guide:
-    * ()
+    * Added implementation details and diagrams for `findevent` and representing the `Event`-`Person` dependency
+    * Updated `Model` section and diagram
 
 * **Contributions to team-based tasks**:
   * Managed the milestone and release for v1.2b
