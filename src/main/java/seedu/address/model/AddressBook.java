@@ -129,8 +129,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a event to the address book.
-     * The event must not already exist in the address book.
+     * Adds an event to the address book.
+     * The event must not already exist in the address book and its friend names must be already in the address book.
      */
     public void addEvent(Event toAdd) {
         requireNonNull(toAdd);
@@ -151,7 +151,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * The identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * Also, the friend names of {@code editedEvent} must be already in the address book.
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
