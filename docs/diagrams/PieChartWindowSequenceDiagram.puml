@@ -3,7 +3,8 @@
 
 box UI UI_COLOR_T1
 participant ":MainWindow" as MainWindow UI_COLOR
-participant ":PieChartWindow" as PieChartWindow UI_COLOR
+participant "newChart:PieChartWindow" as PieChartWindow UI_COLOR
+participant "oldChart:PieChartWindow" as PieChartWindow1 UI_COLOR
 end box
 
 box Logic LOGIC_COLOR_T1
@@ -13,7 +14,7 @@ end box
 [-> MainWindow : executeCommand()
 activate MainWindow
 
-MainWindow -> MainWindow : handleSummarise()
+MainWindow -> MainWindow : handleSummarise(message)
 activate MainWindow
 
 MainWindow -> SummariseCommand : shouldOpenPieChartWindow()
@@ -24,9 +25,20 @@ deactivate SummariseCommand
 
 alt#Gold #LightBlue Should display window
 
-create PieChartWindow
-MainWindow -> PieChartWindow : new
+opt#Gold #Pink Pie chart window is currently shown
+MainWindow -> PieChartWindow1 : hide()
 
+activate PieChartWindow1
+
+PieChartWindow1 --> MainWindow
+deactivate PieChartWindow1
+
+destroy PieChartWindow1
+
+end
+
+create PieChartWindow
+MainWindow -> PieChartWindow : PieChartWindow()
 
 activate PieChartWindow
 
@@ -42,7 +54,10 @@ activate SummariseCommand
 SummariseCommand --> PieChartWindow
 deactivate SummariseCommand
 
-PieChartWindow -> PieChartWindow : execute()
+PieChartWindow --> MainWindow
+deactivate PieChartWindow
+
+MainWindow -> PieChartWindow : execute()
 activate PieChartWindow
 
 PieChartWindow -> PieChartWindow : collateBlocksChart()
@@ -51,7 +66,7 @@ activate PieChartWindow
 PieChartWindow -> PieChartWindow : makePieChart(treemap, string)
 activate PieChartWindow
 
-PieChartWindow --> PieChartWindow : pieChart
+PieChartWindow --> PieChartWindow
 deactivate PieChartWindow
 
 PieChartWindow --> PieChartWindow
@@ -60,27 +75,24 @@ deactivate PieChartWindow
 PieChartWindow -> PieChartWindow : createFacultyChartPositive()
 activate PieChartWindow
 
-PieChartWindow -> PieChartWindow : makePieChart(treemap, string)
-activate PieChartWindow
+PieChartWindow -> SummariseCommand : getHighestPositiveByFaculty()
+activate SummariseCommand
 
-PieChartWindow --> PieChartWindow : pieChart
+SummariseCommand --> PieChartWindow
+deactivate SummariseCommand
+
+PieChartWindow --> PieChartWindow
+
 deactivate PieChartWindow
 
-PieChartWindow --> PieChartWindow : hbox
-
-deactivate PieChartWindow
-
-PieChartWindow -> PieChartWindow : makePieChartScene(allPieCharts)
+PieChartWindow -> PieChartWindow : makeChartScene(allCharts)
 activate PieChartWindow
 
 PieChartWindow --> PieChartWindow
 deactivate PieChartWindow
 
-PieChartWindow --> PieChartWindow
-deactivate PieChartWindow
 PieChartWindow --> MainWindow: pieChartWindow
 deactivate PieChartWindow
-
 
 MainWindow -> PieChartWindow : show()
 activate PieChartWindow
@@ -88,7 +100,7 @@ activate PieChartWindow
 MainWindow <--PieChartWindow : result
 deactivate PieChartWindow
 
-else #Pink Else
+else #Grey Else
 
 end
 deactivate MainWindow

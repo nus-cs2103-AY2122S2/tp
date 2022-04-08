@@ -278,17 +278,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleSummarise(String message) {
         if (SummariseCommand.shouldOpenPieChartWindow()) {
-            if (pieChartWindow == null || !pieChartWindow.isShowing()) {
-                pieChartWindow = new PieChartWindow();
-                pieChartWindow.execute();
-                pieChartWindow.show();
-                logger.info("Pie chart window is not yet initialised or not showing!");
-            } else {
+            if (pieChartWindow.isShowing()) {
                 pieChartWindow.hide();
-                pieChartWindow = new PieChartWindow();
-                pieChartWindow.show();
-                logger.info("Pie chart window already showing, proceeding to reopen it!");
+                logger.info("Pie chart window is not yet initialised or not showing!");
             }
+            pieChartWindow = new PieChartWindow();
+            pieChartWindow.execute();
+            pieChartWindow.show();
         } else {
             logger.info("Pie chart window not opened because address book is empty!");
         }
