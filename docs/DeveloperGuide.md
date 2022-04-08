@@ -360,32 +360,32 @@ Events in Amigos are implemented in a similar fashion to Persons in AB3, for the
 Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set. The latter represents the Friends that are linked to this event.
 
 #### 2.1 Implementing Event-Person relationships
-Key Consideration: How to implement the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
+Key Consideration: How to implement & maintain the validity of the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
 
-**(Insert a diagram here)**
+**(Insert a class diagram here)**
 
 * **Current Implementation**
-  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. Validity checks are performed on initializing an `Event`, editing an `Event`, and when editing/deleting a `Person` to make sure that all `FriendName` objects in `Event` refer to actual `Person` objects in the `AddressBook`.
+  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. (see above diagram)
+  * `AddressBook` is responsible for the maintenance of the relationship's validity, since it encapsulates both the `UniquePersonList` and `Unique EventList`. The relationship is maintained by the following processes:
+    * The validity of the friend names (i.e. they must always correspond to actual `Person` objects in Amigos) is checked during the creation of and when editing an `Event`.
+    * After a `Person` class is edited or deleted, the changes are cascaded to the `FriendName` set as well.
   * Pros:
     * Reduce coupling between the `Event` and `Person` classes by making it a one-way dependency.
     * Reduce dependency further by only storing the `FriendName` object and not the entire `Person` object.
   * Cons:
-    * Need to ensure that each `FriendName` is valid and remains valid after changes to the `Model` e.g. if a friend's name is edited, or when a friend is deleted. Prone to mistakes if this is overlooked.
-    * Not terribly efficient, because to check validity there is a need to cycle through the entire list of `Person` objects for each `FriendName` stored. Similarly, it is inefficient when querying which `Event` objects contain a specific `Person`.
-    * Need to either constantly mutate or replace an `Event` to change `FriendName`, which can be troublesome.
+    * Prone to errors if validity checks are overlooked.
+    * Not terribly efficient, because to check validity there is a need to loop through the entire list of `Person` objects for each `FriendName` stored. Similarly, it is inefficient when querying which `Event` objects contain a specific `Person`.
+    * Need to either constantly mutate or replace an `Event` to reflect changes to `FriendName`, which can be troublesome.
 
 * **Alternative Implementation**
   * The relationship could alternatively be represented using an association class between `Event` and `Person`. This `EventPersonAssociation` could then be stored in a list in the `AddressBook`.
   * Pros:
     * Improve abstraction and cohesion by storing and handling the details of the Event-Person relationship in a separate class.
     * This allows us to avoid modifications to the `Event` and `Person` classes, and reduce coupling between them as the dependency is one-way from the `EventPersonAssociation` class.
-    * Could be easier to ensure that the relationships remain valid.
   * Cons:
     * Additional overhead as new class(es) will have to be created and tested.
+    * Does not solve the error-proneness of maintaining the relationship validity after changes to `Event` or `Person`.
     * If implemented using a `EventPersonAssociation` list, will not be very efficient as well when making queries/changes,especially if there are a large number of associations in the list
-
-Another consideration: How do we maintain the relationship's validity as the user edits and deletes friend objects.
-
 
 #### 2.2 Implementing List event
 
@@ -417,7 +417,7 @@ The following sequence diagram summarizes what happens when a user executes the 
 #### 2.3 Implementing the findevent command
 Key Consideration: Keeping track of the various filtering conditions that could be potentially set by the user, so that it is easily maintained and extended.
 
-**INSERT DIAGRAM HERE**
+**INSERT SEQUENCE DIAGRAM HERE**
 
 * **Current Implementation**:
   * The `FindEventCommandParser` class takes in the user's input and produces a List containing all the `Predicate<Event>` that can be derived from the input.
