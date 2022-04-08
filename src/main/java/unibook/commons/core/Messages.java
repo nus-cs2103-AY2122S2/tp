@@ -41,7 +41,7 @@ public class Messages {
     public static final String MESSAGE_FIELD_EMPTY = "%s field cannot be empty!";
     public static final String MESSAGE_CHANGED_TO_MODULE_VIEW = "Changed to Modules view!";
     public static final String MESSAGE_CHANGED_TO_PERSON_VIEW = "Changed to People view!";
-    public static final String MESSAGE_CHANGED_TO_GROUP_VIEW = "Changed to Group view!";
+    public static final String MESSAGE_CHANGED_TO_GROUP_VIEW = "Changed to Groups view!";
     public static final String MESSAGE_ALREADY_ON_PEOPLE_VIEW = "You are already on the People view!";
     public static final String MESSAGE_ALREADY_ON_MODULE_VIEW = "You are already on the Modules view!";
     public static final String MESSAGE_ALREADY_ON_GROUP_VIEW = "You are already on the Groups view!";
@@ -54,7 +54,7 @@ public class Messages {
     public static final String MESSAGE_LISTED_GROUP_WITH_NAME = "Listed groups with name %s!";
     public static final String MESSAGE_WRONG_VIEW = "The command requires you to switch to the %s view.";
     public static final String MESSAGE_WRONG_TYPE = "The type field must be professors or students.";
-    public static final String MESSAGE_INVALID_VIEW = "The view field must be modules or people.\n";
+    public static final String MESSAGE_INVALID_VIEW = "The view field must be modules, groups or people.\n";
     public static final String MESSAGE_INVALID_LIST_OPTION = "The option field must be view, module, or group.";
     public static final String MESSAGE_MISSING_OPTION = "Missing o/OPTION field. "
             + "Options can be either person, module, group or keyevent \n";
