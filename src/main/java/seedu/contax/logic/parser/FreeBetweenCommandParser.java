@@ -57,7 +57,6 @@ public class FreeBetweenCommandParser implements Parser<FreeBetweenCommand> {
                 DateUtil::parseTime, FreeBetweenCommand.MESSAGE_END_TIME_INVALID);
         LocalDateTime startDateTime = DateUtil.combineDateTime(startDate, startTime);
         LocalDateTime endDateTime = DateUtil.combineDateTime(endDate, endTime);
-
         if (endDateTime.isBefore(startDateTime)) {
             throw new ParseException(FreeBetweenCommand.MESSAGE_END_BEFORE_START);
         }

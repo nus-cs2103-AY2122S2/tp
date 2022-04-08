@@ -30,7 +30,13 @@ public class ChainCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<CommandResult> commandResultList = new ArrayList<>();
         for (Command command:commands) {
-            commandResultList.add(command.execute(model));
+            try {
+                commandResultList.add(command.execute(model));
+            } catch (CommandException ce) {
+                commandResultList.clear();
+                commandResultList.add(new CommandResult(ce.getMessage()));
+                break;
+            }
         }
         StringBuilder resultOutput = new StringBuilder();
         for (CommandResult result: commandResultList) {

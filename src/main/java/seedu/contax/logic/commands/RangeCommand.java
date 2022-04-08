@@ -18,6 +18,7 @@ import seedu.contax.logic.parser.AddressBookParser;
 import seedu.contax.logic.parser.ParserUtil;
 import seedu.contax.logic.parser.exceptions.ParseException;
 import seedu.contax.model.Model;
+import seedu.contax.model.person.Person;
 
 /**
  * Range edit or delete a person identified using it's displayed from index and to index from the address book.
@@ -58,22 +59,31 @@ public class RangeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (fromIndex.getZeroBased() > toIndex.getZeroBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         List<CommandResult> commandResultList = new ArrayList<>();
+        Person restorePerson = model.getFilteredPersonList().get(toIndex.getZeroBased());
         for (int i = toIndex.getOneBased(); i >= fromIndex.getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(commandInput, Integer.toString(i));
-
                 logger.info("----------------[RANGE COMMAND][" + commandText + "]");
-
                 Command command = addressBookParser.parseCommand(commandText);
-                commandResultList.add(command.execute(model));
+                try {
+                    commandResultList.add(command.execute(model));
+                } catch (CommandException ce) {
+                    commandResultList.clear(); // only for the purpose of not changing output in feature freeze
+                    // special case: duplicated name editing, restore to previous name
+                    if (fromIndex.getZeroBased() != toIndex.getZeroBased()
+                            && commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
+                        model.setPerson(model.getFilteredPersonList().get(toIndex.getZeroBased()), restorePerson);
+                    }
+                    commandResultList.add(new CommandResult(ce.getMessage()));
+                    break;
+                }
             } catch (ParseException pe) {
-                return new CommandResult(pe.getMessage());
+                throw new CommandException(pe.getMessage());
             }
         }
         StringBuilder resultOutput = new StringBuilder();
@@ -82,7 +92,6 @@ public class RangeCommand extends Command {
         }
         return new CommandResult(resultOutput.toString());
     }
-
 
 
     @Override

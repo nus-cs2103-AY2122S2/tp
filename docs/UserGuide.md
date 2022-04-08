@@ -61,7 +61,7 @@ ContaX is generally designed to impose as little constraints on inputs as possib
 * **INTEGER** inputs are limited to a maximum value of `2,147,483,647`.<br>
   Any value above this limit will not be considered an integer.
 * Leading and Trailing **Whitespaces** are ignored for ***ALL*** user inputs.<br>
-  e.g. `  My Tag   &nbsp;` is treated simply as `My Tag`.
+  e.g. `My Tag   &nbsp;` is treated simply as `My Tag`.
 
 </div>
 
@@ -155,6 +155,8 @@ The onboarding guide will cover the following:
 - Find person
 - Delete person
 - List persons
+
+:rotating_light: **Important Note:** The order and case-sensitivity of keywords for `findperson` is only fixed for the Onboarding Guide.
 
 ### Viewing help : `help`
 
@@ -474,6 +476,7 @@ Format: `prioritizeappt INDEX pri/PRIORITY`
 
 * Edits the priority of appointment that is at `INDEX` in the displayed appointment list, setting the priority to the supplied value.
 * The `INDEX` parameter **must be a positive integer**, and refers to the index number shown in the **displayed appointment list**.
+* The `PRIORITY` parameter **must not be same as existing priority level** for appointment at `INDEX` in the **displayed appointment list**.
 * The `PRIORITY` parameter must be non-empty, and can only contain below values (case-insensitive):
   * High
   * Medium
@@ -594,6 +597,10 @@ Examples:
 * `batch editperson p/87438806 by/phone =/87438807 `
   * Edit contact with phone matches keyword 87438807 change to 87438806
 
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The `batch` operation is transactional, either all changes succeed or all changes fail (should an operation within `batch` fails). Any error message shown is from the failing operation.
+</div>
+
 ### Operate on Contacts within Range : `range`
 
 Perform actions on a group of contacts.
@@ -614,6 +621,10 @@ Examples:
 * `range deleteperson from/2 to/3`
   * Deletes the 2nd and 3rd contacts in the address book.
 
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The `range` operation is transactional, either all changes succeed or all changes fail (should an operation within `range` fails). Any error message shown is from the failing operation.
+</div>
+
 ### Chaining Commands: `chain`
 
 Perform multiple actions in a single command.
@@ -629,6 +640,10 @@ Examples:
 * `chain deleteappt 2 && addappt n/Contract Signing With Charlie d/22-10-2022 t/16:30 p/1 l/300`
     * Deletes the 2nd appointment in the list of appointments.
     * Then, create a 5-hour appointment named "Contract Signing With Charlie" on 22nd Oct 2022 at 4:30 PM, associated with the first person in the contact list
+
+<div markdown="span" class="alert alert-warning">:rotating_light: **Important Note:**
+The `chain` operation is executed sequentially, it will execute the commands from left to right until a given command fails. Any error message shown is from the failing operation, and all preceding operations will be saved.
+</div>
 
 ### Exiting the program : `exit`
 

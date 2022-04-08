@@ -29,7 +29,7 @@ import seedu.contax.model.tag.Tag;
 import seedu.contax.storage.CsvManager;
 
 /**
- * Imports CSV files into the address book based on specified column indicators
+ * Imports CSV files into the address book based on specified column indicators.
  */
 public class ImportCsvCommand extends Command {
     public static final String COMMAND_WORD = "importcsv";
@@ -50,7 +50,7 @@ public class ImportCsvCommand extends Command {
     private final IndexedCsvFile toImport;
 
     /**
-     * Creates an ImportCsvCommand to import with specified {@code params}
+     * Creates an ImportCsvCommand to import with specified {@code params}.
      */
     public ImportCsvCommand(IndexedCsvFile params) {
         requireNonNull(params);
@@ -76,6 +76,13 @@ public class ImportCsvCommand extends Command {
         }
     }
 
+    /**
+     * Parsed imported String array of person information into a Person object.
+     *
+     * @param importedPerson String array of information for person to be imported.
+     * @return Parsed Person object.
+     * @throws ParseException If any fields are invalid.
+     */
     private Person personParser(String[] importedPerson) throws ParseException {
         Name toAddName = ParserUtil.parseName(importedPerson[toImport.getNamePositionIndex()]);
         Phone toAddPhone = ParserUtil.parsePhone(importedPerson[toImport.getPhonePositionIndex()]);
@@ -93,6 +100,12 @@ public class ImportCsvCommand extends Command {
         return new Person(toAddName, toAddPhone, toAddEmail, toAddAddress, toAddTag);
     }
 
+    /**
+     * Function to build the resulting output String.
+     *
+     * @param skippedLines List of lines skipped.
+     * @return String containing lines skipped.
+     */
     private CommandResult outputStringBuilder(List<Integer> skippedLines) {
         if (skippedLines.size() > 0) {
             String skippedLinesString = "";

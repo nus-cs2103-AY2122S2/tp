@@ -19,7 +19,7 @@ import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.chrono.TimeRange;
 
 /**
- * A list of {@link Appointment} objects s that enforces that its elements cannot have overlapping periods and
+ * A list of {@link Appointment} objects that enforces that its elements cannot have overlapping periods and
  * does not allow nulls. This check is performed using {@link Appointment#isOverlapping(ScheduleItem)}, and
  * will be performed upon any modification to the list. It also enforces a chronological ordering of the
  * appointments in the list, done using the {@code Comparable} interface that {@code Appointment} implements.
@@ -276,7 +276,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         Appointment target = appointments.get(index);
         int otherIndex = index - 1;
         while (otherIndex >= 0 && target.compareTo(appointments.get(otherIndex)) < 0) {
-            appointments.set(otherIndex + 1, appointments.get(otherIndex)); // Right shift other appointment
+            // Right shift other appointment.
+            appointments.set(otherIndex + 1, appointments.get(otherIndex));
             otherIndex--;
         }
         appointments.set(otherIndex + 1, target);
@@ -291,7 +292,8 @@ public class DisjointAppointmentList implements Iterable<Appointment> {
         Appointment target = appointments.get(index);
         int otherIndex = index + 1;
         while (otherIndex < appointments.size() && target.compareTo(appointments.get(otherIndex)) > 0) {
-            appointments.set(otherIndex - 1, appointments.get(otherIndex)); // Left Shift other appointment
+            // Left Shift other appointment.
+            appointments.set(otherIndex - 1, appointments.get(otherIndex));
             otherIndex++;
         }
         appointments.set(otherIndex - 1, target);

@@ -54,35 +54,29 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() {
         AddressBook addressBook = new AddressBook();
-
         for (JsonAdaptedTag jsonAdaptedTag: tags) {
-            Tag tag;
             try {
-                tag = jsonAdaptedTag.toModelType();
+                Tag tag = jsonAdaptedTag.toModelType();
                 if (addressBook.hasTag(tag)) {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
                 }
                 addressBook.addTag(tag);
             } catch (IllegalValueException e) {
-                logger.fine("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
-                continue;
+                logger.info("Skipped Tag: " + jsonAdaptedTag.getTagNameString());
             }
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person;
             try {
-                person = jsonAdaptedPerson.toModelType();
+                Person person = jsonAdaptedPerson.toModelType();
                 if (addressBook.hasPerson(person)) {
-                    //skip instead of throwing exception
                     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
                 }
                 // Load tags that were not added from tag list
                 addMissingTags(person, addressBook);
                 addressBook.addPerson(person);
             } catch (IllegalValueException e) {
-                logger.fine("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
-                continue;
+                logger.info("Skipped Person: " + jsonAdaptedPerson.getPersonNameString());
             }
         }
         return addressBook;

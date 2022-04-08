@@ -84,6 +84,7 @@ public class BatchCommand extends Command {
                     + ": No result matching \"" + userValue + "\"");
         }
         List<CommandResult> commandResultList = new ArrayList<>();
+        Person restorePerson = model.getFilteredPersonList().get(indexList.get(0).getZeroBased());
         for (Index index: indexList) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
@@ -91,7 +92,17 @@ public class BatchCommand extends Command {
                         commandInput, Integer.toString(index.getOneBased()));
                 logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
-                commandResultList.add(command.execute(model));
+                try {
+                    commandResultList.add(command.execute(model));
+                } catch (CommandException ce) {
+                    commandResultList.clear();
+                    if (commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
+                        model.setPerson(model.getFilteredPersonList().get(indexList.get(0).getZeroBased()),
+                                restorePerson);
+                    }
+                    commandResultList.add(new CommandResult(ce.getMessage()));
+                    break;
+                }
             } catch (ParseException pe) {
                 throw new CommandException(pe.getMessage());
             }

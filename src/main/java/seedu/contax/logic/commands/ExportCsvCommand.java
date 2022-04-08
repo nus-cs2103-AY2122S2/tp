@@ -9,7 +9,7 @@ import seedu.contax.model.tag.Tag;
 import seedu.contax.storage.CsvManager;
 
 /**
- * Exports current address book manually to data/addressbook.csv
+ * Exports current address book manually to data/addressbook.csv.
  */
 public class ExportCsvCommand extends Command {
     public static final String COMMAND_WORD = "exportcsv";
@@ -49,8 +49,9 @@ public class ExportCsvCommand extends Command {
 
     /**
      * Extracts person information into a String array for writing to CSV.
-     * @param person Person to process
-     * @return String array with person information
+     *
+     * @param person Person to process.
+     * @return String array with person information.
      */
     private String[] processLine(Person person) {
         String[] lineDat = new String[5];

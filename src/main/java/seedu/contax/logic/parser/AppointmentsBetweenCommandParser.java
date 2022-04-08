@@ -55,7 +55,6 @@ public class AppointmentsBetweenCommandParser implements Parser<AppointmentsBetw
 
         LocalDateTime startDateTime = DateUtil.combineDateTime(startDate, startTime);
         LocalDateTime endDateTime = DateUtil.combineDateTime(endDate, endTime);
-
         if (endDateTime.isBefore(startDateTime)) {
             throw new ParseException(AppointmentsBetweenCommand.MESSAGE_END_BEFORE_START);
         }

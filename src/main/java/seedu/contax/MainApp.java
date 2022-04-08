@@ -52,7 +52,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ContaX ]=============================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -81,39 +81,46 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+        ReadOnlyAddressBook initialAddressBook = inflateAddressBook();
+        ReadOnlySchedule initialSchedule = inflateSchedule(initialAddressBook);
+
+        return new ModelManager(initialAddressBook, initialSchedule, userPrefs);
+    }
+
+    /** Invokes the loading of the {@code AddressBook} from storage. */
+    private ReadOnlyAddressBook inflateAddressBook() {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        Optional<ReadOnlySchedule> scheduleOptional;
-        ReadOnlyAddressBook initialAddressBook;
-        ReadOnlySchedule initialSchedule;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            return addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialAddressBook = new AddressBook();
+            return new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialAddressBook = new AddressBook();
+            return new AddressBook();
         }
+    }
 
+    /** Invokes the loading of the {@code Schedule} from storage. */
+    private ReadOnlySchedule inflateSchedule(ReadOnlyAddressBook addressBook) {
+        Optional<ReadOnlySchedule> scheduleOptional;
         try {
-            scheduleOptional = storage.readSchedule(initialAddressBook);
+            scheduleOptional = storage.readSchedule(addressBook);
             if (scheduleOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with an empty Schedule");
             }
-            initialSchedule = scheduleOptional.orElse(new Schedule());
+            return scheduleOptional.orElse(new Schedule());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Schedule");
-            initialSchedule = new Schedule();
+            return new Schedule();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty Schedule");
-            initialSchedule = new Schedule();
+            return new Schedule();
         }
-
-        return new ModelManager(initialAddressBook, initialSchedule, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -196,7 +203,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping ContaX ] ===============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

@@ -1,5 +1,6 @@
 package seedu.contax.model.person;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -10,7 +11,7 @@ public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
     private String keyword;
 
     public TagNameContainsKeywordsPredicate(String keyword) {
-        this.keyword = keyword;
+        this.keyword = keyword.toLowerCase();
     }
 
     public String getKeyword() {
@@ -24,12 +25,19 @@ public class TagNameContainsKeywordsPredicate implements Predicate<Person> {
         Set<Tag> tags = person.getTags();
 
         for (Tag tag : tags) {
-            if (tag.getTagNameString().contains(keyword)) {
+            if (tag.getTagNameString().equals(keyword)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Returns true if the keyword exists in the tag list.
+     */
+    public boolean existsInTagList(List<Tag> tagList) {
+        return tagList.stream().anyMatch(tag -> tag.getTagNameString().equals(keyword));
     }
 
     @Override

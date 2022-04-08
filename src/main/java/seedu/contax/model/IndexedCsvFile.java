@@ -5,6 +5,9 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.File;
 
+/**
+ * Represents an imported Csv File.
+ */
 public class IndexedCsvFile {
 
     public static final String FILE_PATH_CONSTRAINTS = "File path should point to a .csv file";
@@ -22,7 +25,7 @@ public class IndexedCsvFile {
     private final int tagPosition;
 
     /**
-     * Creates a new ImportCsv object to contain import parameters
+     * Creates a new IndexedCsvFile object to contain import parameters.
      */
     public IndexedCsvFile(File filePath, int namePosition, int phonePosition, int emailPosition,
                           int addressPosition, int tagPosition) {
