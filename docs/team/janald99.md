@@ -61,7 +61,7 @@ Added the new match features:
 * **Contributions to team tasks**:
   * Plan the architecture of our project, by drawing visually and screen-sharing.
   * Summarize the work distribution and agenda of each meeting.
-  * Set up [issues](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues) on GitHub.
+  * Set up new issues like [Issue #52](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/52) and [Issue #119](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/119) on GitHub.
   * Standardize language across code and documents.
   * Added and refactored java docs.
   * Adjust message displays.
