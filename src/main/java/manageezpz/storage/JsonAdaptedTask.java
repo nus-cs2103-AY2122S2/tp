@@ -31,7 +31,6 @@ class JsonAdaptedTask {
     public static final String NULL_STATUS_MESSAGE_FORMAT = "Task's status cannot be null!";
     public static final String INVALID_STATUS_MESSAGE_FORMAT = "Task's status is invalid!";
     public static final String NULL_TAG_MESSAGE_FORMAT = "Task's tag cannot be null!";
-    public static final String INVALID_TAG_MESSAGE_FORMAT = "Task's tag is invalid!";
     public static final String NULL_PRIORITY_MESSAGE_FORMAT = "Task's priority cannot be null!";
     public static final String INVALID_PRIORITY_MESSAGE_FORMAT = "Task's priority is invalid!";
 
