@@ -143,11 +143,12 @@ Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 * The `NAME`, `PHONE_NUMBER` and `TAG` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
 * `NAME` should only contain **alphanumeric** characters. E.g. `John 1` or `John 2` if you are using numbers to differentiate buyers with the same name.
 * `NAME` cannot be repeated for different buyers. E.g. `John` & `John`. However, we allow for different cases. E.g. `John` & `john`.
-* `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
+* `PHONE_NUMBER` can only contain non-negative, non-spaced whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` or `0 01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a buyer is initially added, they will default to having **no** Property. Use `add-ptb` to add a respective property.
 * `TAG` must be **alphanumeric** with no spaces between the words. E.g. `great` is ok but `great client` is not.
 * If there are **leading** or **trailing** whitespace for `NAME`, `PHONE_NUMBER` or `TAG`, it will be ignored. E.g. `____David_____` where `_` is whitespace is `David`.
+* If multiple inputs are provided for the same field E.g. `n/David n/#seeme`, only the **last** input will be processed. Hence, in the example, an error will be thrown since `#seeme` is invalid `NAME`. This applies to `p/PHONE` as well
 
 Examples:
 * `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
@@ -166,6 +167,7 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
 * You cannot add a new property to buy once one has already been added.
 * If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE` or `HOUSE_TYPE`, it will be ignored. E.g. `____hdb_____` where `_` is whitespace will be treated as `hdb`.
+* If there are multiple inputs for the same field, only the last one will be **processed**. Consequently, if it is invalid, earlier valid inputs will not be chosen. E.g. `h/hdb h/plaza` is invalid since `plaza` is not a recognized house type.
 
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
@@ -362,11 +364,12 @@ Format: `add-s n/NAME p/PHONE_NUMBER [t/TAG]...`
 * The `NAME`, `PHONE_NUMBER` and `TAG` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
 * `NAME` should only contain **alphanumeric** characters. E.g. `John 1` or `John 2` if you are using numbers to differentiate sellers with the same name.
 * `NAME` cannot be repeated for different sellers. E.g. `John` & `John`. However, we allow for different cases. E.g. `John` & `john`.
-* `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
+* `PHONE_NUMBER` can only contain non-negative, non-spaced whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` or `0 01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a seller is initially added, they will default to having **no** Property. Use `add-pts` to add a respective property.
 * `TAG` must be **alphanumeric** with no spaces between the words. E.g. `great` is ok but `great client` is not.
 * If there are **leading** or **trailing** whitespace for `NAME`, `PHONE_NUMBER` or `TAG`, it will be ignored. E.g. `____David_____` where `_` is whitespace is `David`.
+* If multiple inputs are provided for the same field E.g. `n/David n/#seeme`, only the **last** input will be processed. Hence, in the example, an error will be thrown since `#seeme` is invalid `NAME`. This applies to `p/PHONE` as well
 
 Examples:
 * `add-s n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
@@ -399,6 +402,7 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 * Similarly, it is possible for sellers with the same `ADDRESS` to have different `LOCATION`, `PRICE_RANGE` & `HOUSE_TYPE` since they might each have their own perspectives of where each property resides, its type, or what its worth.
 * You cannot add a new property to sell once one has already been added.
 * If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE`, `HOUSE_TYPE` or `ADDRESS`, it will be ignored. E.g. `____Colonia_____` where `_` is whitespace is `Colonia`.
+* If there are multiple inputs for the same field, only the last one will be **processed**. Consequently, if it is invalid, earlier valid inputs will not be chosen. E.g. `h/hdb h/plaza` is invalid since `plaza` is not a recognized house type.
 
   Examples:
 * `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Ajax at Ajax Ave 1, 02-100 for any price from $800,000 to $900,000.
