@@ -12,7 +12,6 @@ import static seedu.contax.testutil.TypicalAppointments.getTypicalSchedule;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ public class ScheduleTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), schedule.getAppointmentList());
+        assertEquals(List.of(), schedule.getAppointmentList());
     }
 
     @Test
@@ -41,7 +40,7 @@ public class ScheduleTest {
     }
 
     @Test
-    public void constructor_validScheduleInput_throwsNullPointerException() {
+    public void copyConstructor_validScheduleInput_throwsNullPointerException() {
         Schedule schedule = getTypicalSchedule();
         Schedule createdSchedule = new Schedule(schedule);
 
@@ -64,7 +63,8 @@ public class ScheduleTest {
     @Test
     public void setAppointments_validList_returnsSchedule() {
         Schedule createdSchedule = new Schedule();
-        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(APPOINTMENT_ALICE)
+        Schedule expectedSchedule = new ScheduleBuilder()
+                .withAppointment(APPOINTMENT_ALICE)
                 .withAppointment(APPOINTMENT_ALONE).build();
 
         createdSchedule.setAppointments(List.of(APPOINTMENT_ALICE, APPOINTMENT_ALONE));
@@ -87,7 +87,7 @@ public class ScheduleTest {
     public void resetData_withOverlappingAppointments_throwsOverlappingAppointmentException() {
         // Construct two appointments that have overlapping periods
         Appointment overlappingAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusMinutes(1))
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1))
                 .build();
         List<Appointment> newAppointments = Arrays.asList(APPOINTMENT_ALICE, overlappingAppointment);
         ScheduleStub newData = new ScheduleStub(newAppointments);
@@ -102,6 +102,7 @@ public class ScheduleTest {
 
     @Test
     public void hasAppointment_appointmentNotInSchedule_returnsFalse() {
+        schedule.addAppointment(APPOINTMENT_ALONE);
         assertFalse(schedule.hasAppointment(APPOINTMENT_ALICE));
     }
 
@@ -166,8 +167,7 @@ public class ScheduleTest {
     public void setAppointment_editedAppointmentIsOverlappingWithOnlyTarget_success() {
         schedule.addAppointment(APPOINTMENT_ALICE);
         Appointment editedAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusMinutes(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
 
         schedule.setAppointment(APPOINTMENT_ALICE, editedAppointment);
         Schedule expectedSchedule = new ScheduleBuilder().withAppointment(editedAppointment).build();
@@ -177,25 +177,25 @@ public class ScheduleTest {
     @Test
     public void setAppointment_editedAppointmentDisjoint_success() {
         schedule.addAppointment(APPOINTMENT_ALICE);
+        schedule.addAppointment(APPOINTMENT_ALONE);
         Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusYears(1)).build();
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusYears(1)).build();
 
-        schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment);
-        Schedule expectedSchedule = new ScheduleBuilder().withAppointment(disjointAppointment).build();
+        schedule.setAppointment(APPOINTMENT_ALONE, disjointAppointment);
+        Schedule expectedSchedule = new ScheduleBuilder()
+                .withAppointment(disjointAppointment).withAppointment(APPOINTMENT_ALICE).build();
         assertEquals(expectedSchedule, schedule);
     }
 
     @Test
     public void setAppointment_editedAppointmentOverlaps_throwsOverlappingAppointmentException() {
-        Appointment disjointAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
-                .withName("Another Meeting")
-                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTimeObject().value.plusYears(1)).build();
+        Appointment overlappingAppointment = new AppointmentBuilder(APPOINTMENT_ALICE)
+                .withStartDateTime(APPOINTMENT_ALICE.getStartDateTime().plusMinutes(1)).build();
         schedule.addAppointment(APPOINTMENT_ALICE);
-        schedule.addAppointment(disjointAppointment);
+        schedule.addAppointment(APPOINTMENT_ALONE);
 
         assertThrows(OverlappingAppointmentException.class, ()
-            -> schedule.setAppointment(APPOINTMENT_ALICE, disjointAppointment));
+            -> schedule.setAppointment(APPOINTMENT_ALONE, overlappingAppointment));
     }
 
     @Test
@@ -205,8 +205,7 @@ public class ScheduleTest {
 
     @Test
     public void removeAppointment_appointmentNotInList_throwsAppointmentNotFoundException() {
-        assertThrows(AppointmentNotFoundException.class, ()
-            -> schedule.removeAppointment(APPOINTMENT_ALICE));
+        assertThrows(AppointmentNotFoundException.class, () -> schedule.removeAppointment(APPOINTMENT_ALICE));
     }
 
     @Test
@@ -218,11 +217,11 @@ public class ScheduleTest {
 
     @Test
     public void findSlotsBetweenAppointments_nullInputs_throwsNullPointerException() {
-        LocalDateTime dummyTime = LocalDateTime.parse("2022-12-12T12:30");
+        LocalDateTime validTime = LocalDateTime.parse("2022-12-12T12:30");
         assertThrows(NullPointerException.class, ()
-            -> schedule.findSlotsBetweenAppointments(null, dummyTime, 1));
+            -> schedule.findSlotsBetweenAppointments(null, validTime, 1));
         assertThrows(NullPointerException.class, ()
-            -> schedule.findSlotsBetweenAppointments(dummyTime, null, 1));
+            -> schedule.findSlotsBetweenAppointments(validTime, null, 1));
     }
 
     @Test
@@ -232,10 +231,10 @@ public class ScheduleTest {
         LocalDateTime rangeEnd = LocalDateTime.parse("2022-12-12T14:30");
 
         Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T12:00"))
+                .withStartDateTime(rangeStart.minusMinutes(30))
                 .withDuration(30).build();
         Appointment appointment2 = new AppointmentBuilder(APPOINTMENT_ALONE)
-                .withStartDateTime(LocalDateTime.parse("2022-12-12T14:30"))
+                .withStartDateTime(rangeEnd)
                 .withDuration(30).build();
 
         schedule.addAppointment(appointment1);
@@ -254,13 +253,14 @@ public class ScheduleTest {
         Schedule refSchedule = new Schedule();
         Schedule otherSchedule = getTypicalSchedule();
 
-        assertTrue(refSchedule.equals(refSchedule));
-        assertTrue(refSchedule.equals(new Schedule()));
-        assertTrue(otherSchedule.equals(new ScheduleBuilder(getTypicalSchedule()).build()));
+        assertTrue(refSchedule.equals(refSchedule)); // Same object
+        assertTrue(refSchedule.equals(new Schedule())); // Same data
+        assertTrue(otherSchedule.equals(new ScheduleBuilder(getTypicalSchedule()).build())); // Same data
 
-        assertFalse(refSchedule.equals(null));
-        assertFalse(refSchedule.equals(0));
-        assertFalse(refSchedule.equals(otherSchedule));
+        assertFalse(refSchedule.equals(null)); // Null
+        assertFalse(refSchedule.equals(0)); // Different type
+        assertFalse(refSchedule.equals("test")); // Different type
+        assertFalse(refSchedule.equals(otherSchedule)); // Different data
     }
 
     @Test
@@ -273,6 +273,12 @@ public class ScheduleTest {
         assertEquals(otherSchedule.hashCode(), getTypicalSchedule().hashCode());
 
         assertNotEquals(refSchedule.hashCode(), otherSchedule.hashCode());
+    }
+
+    @Test
+    public void toStringTest() {
+        Schedule refSchedule = getTypicalSchedule();
+        assertEquals("2 appointments", refSchedule.toString());
     }
 
     /**

@@ -31,7 +31,7 @@ public class AppointmentBuilder {
         startDateTime = new StartDateTime(DEFAULT_START_DATETIME);
         duration = new Duration(DEFAULT_DURATION);
         person = null;
-        priority = Priority.LOW;
+        priority = null;
     }
 
     /**
@@ -86,10 +86,6 @@ public class AppointmentBuilder {
     }
 
     public Appointment build() {
-        return new Appointment(name, startDateTime, duration, person);
-    }
-
-    public Appointment buildWithPriority() {
         return new Appointment(name, startDateTime, duration, person, priority);
     }
 }

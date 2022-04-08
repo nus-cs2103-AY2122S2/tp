@@ -32,23 +32,20 @@ public class CompositeObservableListTest {
 
     @Test
     public void testListChangeNotify() {
-        ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
-        ObservableList<AppointmentSlot> slotList = FXCollections.observableArrayList();
-        CompositeObservableList<ScheduleItem> compositeList =
-                new CompositeObservableList<>(appointmentList, slotList);
-        LocalDateTime refTime = APPOINTMENT_ALONE.getStartDateTime();
-        AppointmentSlot slot = new AppointmentSlot(
-                new TimeRange(refTime.plusMinutes(120), refTime.plusMinutes(180)));
+        ObservableList<Integer> list1 = FXCollections.observableArrayList();
+        ObservableList<Integer> list2 = FXCollections.observableArrayList();
+        CompositeObservableList<Integer> compositeList = new CompositeObservableList<>(list1, list2);
+        ObservableList<Integer> watchList = FXCollections.observableList(compositeList.getUnmodifiableResultList());
 
-        assertEquals(List.of(), compositeList.getUnmodifiableResultList());
-        appointmentList.add(APPOINTMENT_ALONE);
-        slotList.add(slot);
-        assertEquals(List.of(APPOINTMENT_ALONE, slot), compositeList.getUnmodifiableResultList());
+        assertEquals(List.of(), watchList);
 
-        AppointmentSlot slotBefore = new AppointmentSlot(
-                new TimeRange(refTime.minusMinutes(120), refTime.minusMinutes(20)));
-        slotList.set(0, slotBefore);
-        assertEquals(List.of(slotBefore, APPOINTMENT_ALONE), compositeList.getUnmodifiableResultList());
+        list1.add(1);
+        list2.add(10);
+        assertEquals(List.of(1, 10), watchList);
+
+        list1.add(3);
+        list2.add(0, 9);
+        assertEquals(List.of(1, 3, 9, 10), watchList);
     }
 
     @Test

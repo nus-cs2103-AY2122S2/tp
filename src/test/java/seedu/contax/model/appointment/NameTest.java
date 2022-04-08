@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 public class NameTest {
 
+    private static final String INVALID_NAME = " ";
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Name(null));
@@ -17,8 +19,7 @@ public class NameTest {
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+        assertThrows(IllegalArgumentException.class, () -> new Name(INVALID_NAME));
     }
 
     @Test
@@ -29,24 +30,22 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // invalid non-alphanumeric characters
+        assertFalse(Name.isValidName(" test")); // begins with whitespace
         assertFalse(Name.isValidName("work?")); // contains invalid non-alphanumeric characters
 
         // valid name
-        assertTrue(Name.isValidName("work meeting")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("2nd work meeting")); // alphanumeric characters
-        assertTrue(Name.isValidName("IMPORTANT work meeting")); // with capital letters
-        assertTrue(Name.isValidName(".,!@#$%&*() aB1")); // Contains only valid symbols
-        assertTrue(Name.isValidName("Very important meeting with some Client 2")); // long names
+        assertTrue(Name.isValidName("Work Meeting")); // EP: alphabets only
+        assertTrue(Name.isValidName("12345")); // EP: numbers only
+        assertTrue(Name.isValidName(".,!@#$%&*()+_-=")); // EP: Contains only valid symbols
+        assertTrue(Name.isValidName("2nd Work Meeting!")); // EP: Alphanumeric and symbols
+
+        assertTrue(Name.isValidName("Very important meeting with some Client 2!")); // long names
     }
 
     @Test
     public void stringConversion() {
-        assertEquals("Work Meeting 1", new Name("Work Meeting 1").toString());
-        assertEquals("123455", new Name("123455").toString());
-        assertEquals("very long name that is very long",
-                new Name("very long name that is very long").toString());
+        assertEquals("A Mix of 3 Types Of Characters!",
+                new Name("A Mix of 3 Types Of Characters!").toString());
     }
 
     @Test
@@ -54,14 +53,15 @@ public class NameTest {
         Name reference1 = new Name("Work Meeting");
         Name reference2 = new Name("Work Meeting 2");
 
-        assertTrue(reference1.equals(new Name("Work Meeting")));
-        assertTrue(reference2.equals(new Name("Work Meeting 2")));
         assertTrue(reference1.equals(reference1));
+        assertTrue(reference1.equals(new Name("Work Meeting")));
 
-        assertFalse(reference1.equals("some string"));
-        assertFalse(reference1.equals(reference2));
-        assertFalse(reference1.equals(new Name("Wrong Name")));
-        assertFalse(reference1.equals(new Name("work meeting")));
+        assertFalse(reference1.equals(null)); // Null
+        assertFalse(reference1.equals("some string")); // Different Type
+        assertFalse(reference1.equals(1)); // Different Type
+
+        assertFalse(reference1.equals(reference2)); // Different Name
+        assertFalse(reference1.equals(new Name("work meeting"))); // Different Case
     }
 
     @Test
