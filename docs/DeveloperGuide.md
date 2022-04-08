@@ -775,7 +775,7 @@ More information on usage: [delgroup command](UserGuide.html#delete-a-group-delg
 
 1. Deleting a group that exists in ArchDuke.
 
-   1. Prerequisite: There exists a group with the group name `NUS Data Science Society` in ArchDuke.
+   1. Prerequisite: There exists a group with the group name `NUS Data Science Society` (case-insensitive) in ArchDuke.
 
    2. Test case: `delgroup g/NUS Data Science Society` <br>
       Expected: The group with the name `NUS Data Science Society` (case-insensitive) deleted from the group list. 
@@ -799,7 +799,7 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
 1. Assigning a student contact while all student contacts are being shown.
 
    1. Prerequisites: List all student contacts using the `list` command. 
-   There exists a group with the name `NUS Fintech Society` in ArchDuke. The student contact has yet to exist in the group.
+   There exists a group with the name `NUS Fintech Society` (case-insensitive) in ArchDuke. The student contact has yet to exist in the group.
    
    2. Test case: `assign 3 g/NUS Fintech Society` <br>
       Expected: Third student contact is assigned to the group `NUS Fintech Society`. The student contact appeared in the group.
@@ -867,7 +867,7 @@ More information on usage: [deassign command](UserGuide.html#deassign-a-student-
 
     1. Prerequisites: List all student contacts using the `list` command. 
    The fourth student contact does not exist in the group `NUS Fintech Society`. 
-   The group `NUS Fintech Society` exists in ArchDuke.
+   The group `NUS Fintech Society` (case-insensitive) exists in ArchDuke.
    
     2. Test case: `deassign 4 g/NUS Fintech Society` <br>
         Expected: No student contact is deassigned from the group. Error details shown in the error message.
@@ -886,7 +886,7 @@ More information on usage: [viewcontact command](UserGuide.html#view-student-con
 
 1. Viewing student contacts in an existing group in ArchDuke.
 
-   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` in ArchDuke.
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke.
    
    2. Test case: `viewcontact g/NUS Fintech Society` <br>
       Expected: All student contacts assigned to the group `NUS Fintech Society` is shown on the result display.
@@ -901,6 +901,47 @@ More information on usage: [viewcontact command](UserGuide.html#view-student-con
    2. Test case: `viewcontact g/NUSSU` <br>
       Expected: No student contact is shown on the result display. Error details shown in the error message.
    
+### Adding a task to a group
+
+Command: `addtask` <br>
+More information on usage: [addtask command](UserGuide.html#add-a-task-in-a-group-addtask)
+
+1. Adding a task that has yet to exist in an existing group.
+
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke. 
+   There exists no task with the task name `write proposal` (case-insensitive) in the group.
+   
+   2. Test case: `addtask task/write proposal g/NUS Fintech Society` <br>
+      Expected: The task with the task name `write proposal` is added to the group `NUS Fintech Society`.
+      The task appeared as the last task inside the group's task list. 
+      The details of the added task is shown in the success message.
+   
+   3. Test case: `addtask task/submit proposal g/NUS Fintech Society task/write proposal` <br>
+      Expected: The task with the task name `write proposal` is added to the group `NUS Fintech Society`.
+      The task with the task name `submit proposal` is not added to any group as only the last occurrence of the parameter will be taken.
+      The task appeared as the last task inside the group's task list. The details of the added task is shown in the success message.
+
+   4. Test case: `addtask task/submit proposal g/NUS Data Science Society addtask task/write proposal g/NUS Fintech Society` <br>
+      Expected: Similar to previous.
+   
+   5. Other incorrect add task commands to try: `addtask`, `addtask task/`, `addtask task/proposal g/` etc. <br>
+         Expected: No task is added to a group. Error details shown in the error message.
+   
+2. Adding a task that has already existed in an existing group.
+
+   1. Prerequisites: There exists a task with the task name `Website design review` (case-insensitive) 
+   in an existing group with the group name `NUS Fintech Society` in ArchDuke.
+   
+   2. Test case: `addtask task/website design review g/NUS Fintech Society` <br>
+       Expected: No task is added to the group. Error details shown in the error message.
+   
+4. Adding a task to a non-existing group.
+
+   1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
+   
+   2. Test case: `addtask task/conduct interview g/NUSSU` <br>
+      Expected: No task is added to a group. Error details shown in the error message.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
