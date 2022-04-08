@@ -8,8 +8,8 @@ abstract class "{abstract}\nCommand" {
 }
 
 interface Model <<interface>> {
-    + addPerson(Person person) : void
-    + hasPerson(Person person) : boolean
+    + addPerson(Person)
+    + hasPerson(Person) : boolean
 }
 
 class ModelManager implements Model{

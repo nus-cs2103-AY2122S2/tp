@@ -29,7 +29,7 @@ class PieChartWindow {
     - chartScene : Scene
 
     /' Methods '/
-    + PieChartWindow(root : Stage)
+    + PieChartWindow(root)
     + PieChartWindow()
     + execute()
     - collateBlocksChart()
