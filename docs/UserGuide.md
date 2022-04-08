@@ -246,7 +246,7 @@ Examples:
 
 #### List all modules: `list module`
 
-View a list of all your modules using the list command.
+Use the list command to view all your modules.
 
 Format: `list module`
 
@@ -280,16 +280,13 @@ Examples:
 
 #### List all assessments: `list assessment`
 
-Show a list of all assessments.
-
-Format: `list assessment`
-
-
-##### Filter assessments
-
-Show a list of all assessments belonging to a particular module.
+Use this command to display your assessments in TAssist's "Assessments" tab. Optionally, you can filter this list by a specific module.
 
 Format: `list assessment [m/MODULE_INDEX]`
+
+* Displays the assessments belonging to the module at the specified `MODULE_INDEX`. If `MODULE_INDEX` is not specified, displays all assessments.
+* The index refers to the index number shown in the displayed module list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
@@ -314,7 +311,7 @@ Examples:
 
 #### Add a class: `add class`
 
-Add class groups to modules you've created. Class groups refer to recitations, tutorials, labs, and sectionals you personally teach.
+After creating modules in TAssist, you can add class groups to these modules. Class groups refer to recitations, tutorials, labs, and sectionals you personally teach.
 
 Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
@@ -326,18 +323,11 @@ Examples:
 
 #### List all class groups: `list class`
 
-Show a list of all class groups.
+Use the list class command to display your class groups in TAssist's "Classes" tab. You may filter these class groups by specifying an optional module.
 
-Format: `list class`
+Format: `list class [m/MODULE_INDEX]`
 
-
-##### Filter class groups
-
-Show a list of class groups belonging to a module.
-
-Format: `list class m/MODULE_INDEX`
-
-* Displays the class groups belonging to the module at the specified `MODULE_INDEX`.
+* Displays the class groups belonging to the module at the specified `MODULE_INDEX`. If `MODULE_INDEX` is not specified, displays all class groups.
 * The index refers to the index number shown in the displayed module list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -347,7 +337,7 @@ Examples:
 
 #### Delete a class group: `delete class`
 
-Delete the specified class group from TAssist.
+Use the delete class command to remove a specified class group from TAssist.
 
 Format: `delete class INDEX`
 
@@ -375,14 +365,7 @@ Examples:
 
 #### List all students: `list student`
 
-Show a list of all students.
-
-Format: `list student`
-
-
-##### Filter students
-
-Show a list of students belonging to either module or class group.
+The list student command will You can also limit this list to a specified module or class group.
 
 Format: `list student {m/MODULE_INDEX | c/CLASS_GROUP_INDEX}`
 
@@ -483,7 +466,7 @@ Examples:
 
 #### Unmark attendance: `unmark`
 
-Unmark student(s)' attendance(s).
+Use the unmark command to mark a student(s) as "not present" for a given week.
 
 Format: `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
