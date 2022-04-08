@@ -167,17 +167,26 @@ Shows the full list of all products in iBook.
 
 Format: `list`
 
-#### 3.1.2 Adding a product : `add` 
+#### 3.1.2 Adding a product : `add`
 
 Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
+|                   |                                                              |
+|-------------------|--------------------------------------------------------------|
+| Compulsory Fields | `NAME`, `PRICE`                                              | 
+| Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
+
 * Only a single product would be added at a time.
 * The new product added must not be of the same `NAME` and `CATEGORY`.
 * The `NAME` and the `PRICE` fields cannot be empty.
+* If the `CATEGORY` field is not specified or is empty, the default category, **Miscellaneous**, would be used.
+* The default `DISCOUNT_RATE` is 0.
+* The default `DISCOUNT_START` is 0.
 
 Examples:
+
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
 
 *Alternatively*, 
