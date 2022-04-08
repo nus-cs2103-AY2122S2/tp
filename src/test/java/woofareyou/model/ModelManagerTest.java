@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setPetBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setPetBookFilePath(Paths.get("pet/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setPetBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setPetBookFilePath(Paths.get("new/pet/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,13 +61,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setPetBookFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setPetBookFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
+    public void setPetBookFilePath_validPath_setsPetBookFilePath() {
+        Path path = Paths.get("pet/book/file/path");
         modelManager.setPetBookFilePath(path);
         assertEquals(path, modelManager.getPetBookFilePath());
     }
@@ -113,7 +113,7 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different petBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentPetBook, userPrefs)));
 
         // different filteredList -> returns false

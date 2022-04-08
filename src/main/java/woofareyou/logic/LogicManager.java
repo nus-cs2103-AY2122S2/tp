@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyPetBook getAddressBook() {
+    public ReadOnlyPetBook getPetBook() {
         return model.getPetBook();
     }
 
@@ -65,7 +65,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getPetBookFilePath() {
         return model.getPetBookFilePath();
     }
 

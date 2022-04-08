@@ -25,19 +25,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the PetBook.
      *
      * @see woofareyou.model.Model#getPetBook()
      */
-    ReadOnlyPetBook getAddressBook();
+    ReadOnlyPetBook getPetBook();
 
     /** Returns an unmodifiable view of the filtered list of pets */
     ObservableList<Pet> getFilteredPetList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' pet book file path.
      */
-    Path getAddressBookFilePath();
+    Path getPetBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

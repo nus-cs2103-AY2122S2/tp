@@ -19,37 +19,37 @@ import woofareyou.model.pet.Pet;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedPetBook versionedAddressBook;
+    private final VersionedPetBook versionedPetBook;
     private final PetBook petBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Pet> filteredPets;
     private Predicate<Pet> lastUsedPredicate;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given petBook and userPrefs.
      */
-    public ModelManager(ReadOnlyPetBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+    public ModelManager(ReadOnlyPetBook petBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(petBook, userPrefs);
+        logger.fine("Initializing with pet book: " + petBook + " and user prefs " + userPrefs);
 
-        this.petBook = new PetBook(addressBook);
+        this.petBook = new PetBook(petBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.versionedAddressBook = new VersionedPetBook(this.petBook);
+        this.versionedPetBook = new VersionedPetBook(this.petBook);
         filteredPets = new FilteredList<>(this.petBook.getPetList());
         this.lastUsedPredicate = PREDICATE_SHOW_ALL_PETS;
     }
 
     /**
-     * Initializes a ModelManager with the given addressBook, userPrefs and predicate.
+     * Initializes a ModelManager with the given petBook, userPrefs and predicate.
      */
-    public ModelManager(ReadOnlyPetBook addressBook, ReadOnlyUserPrefs userPrefs, Predicate<Pet> predicate) {
-        requireAllNonNull(addressBook, userPrefs);
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+    public ModelManager(ReadOnlyPetBook petBook, ReadOnlyUserPrefs userPrefs, Predicate<Pet> predicate) {
+        requireAllNonNull(petBook, userPrefs);
+        logger.fine("Initializing with pet book: " + petBook + " and user prefs " + userPrefs
                 + " and predicate " + predicate);
 
-        this.petBook = new PetBook(addressBook);
+        this.petBook = new PetBook(petBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.versionedAddressBook = new VersionedPetBook(this.petBook);
+        this.versionedPetBook = new VersionedPetBook(this.petBook);
         filteredPets = new FilteredList<>(this.petBook.getPetList());
         this.lastUsedPredicate = predicate;
         updateFilteredPetList(lastUsedPredicate);
@@ -89,16 +89,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPetBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setPetBookFilePath(addressBookFilePath);
+    public void setPetBookFilePath(Path petBookFilePath) {
+        requireNonNull(petBookFilePath);
+        userPrefs.setPetBookFilePath(petBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== PetBook================================================================================
 
     @Override
-    public void setPetBook(ReadOnlyPetBook addressBook) {
-        this.petBook.resetData(addressBook);
+    public void setPetBook(ReadOnlyPetBook petBook) {
+        this.petBook.resetData(petBook);
     }
 
     @Override
@@ -115,13 +115,13 @@ public class ModelManager implements Model {
     @Override
     public void deletePet(Pet target) {
         petBook.removePet(target);
-        this.versionedAddressBook.commit(this.getPetBook());
+        this.versionedPetBook.commit(this.getPetBook());
     }
 
     @Override
     public void addPet(Pet pet) {
         petBook.addPet(pet);
-        this.versionedAddressBook.commit(this.getPetBook());
+        this.versionedPetBook.commit(this.getPetBook());
         updateFilteredPetList();
     }
 
@@ -129,22 +129,22 @@ public class ModelManager implements Model {
     public void setPet(Pet target, Pet editedPet) {
         requireAllNonNull(target, editedPet);
         petBook.setPet(target, editedPet);
-        this.versionedAddressBook.commit(this.getPetBook());
+        this.versionedPetBook.commit(this.getPetBook());
     }
 
-    /** Method that sorts the pet list via the sortPets() command in addressBook. **/
+    /** Method that sorts the pet list via the sortPets() command in petBook. **/
     @Override
     public void sortPetList(String field) {
         requireNonNull(field);
         petBook.sortPets(field);
-        this.versionedAddressBook.commit(this.getPetBook());
+        this.versionedPetBook.commit(this.getPetBook());
     }
 
 
     //============= Undo Command accessors ================//
     @Override
     public ReadOnlyPetBook undo() throws Exception {
-        return versionedAddressBook.undo();
+        return versionedPetBook.undo();
     }
 
     //=========== Filtered Pet List Accessors =============================================================
@@ -156,7 +156,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Pet} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedPetBook}
      */
     @Override
     public ObservableList<Pet> getFilteredPetList() {
