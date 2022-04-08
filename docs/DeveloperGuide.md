@@ -178,18 +178,17 @@ The add command can also add a group/student/professor/event/meeting. In these c
 
 
 ### List feature
-The list feature enables the user to customise which modules/people are currently visible. As an example, the sequence
-diagram below shows the flow using the input `list o/type ty/professors`.
+The list feature enables the user to customise which modules/people/groups are currently visible. As an example, the sequence
+diagram below shows the flow using the input `list type/professors` which runs on the people view.
 
-The command is first parsed with `execute("list o/type ty/professors", true, false)` where `true` and `false` are
-boolean variables indicating whether the `Person` view or `Module` view is currently active. Subsequently, the 
+The command is first parsed with `execute("list type/professors", true, false, false)` where the boolean variables indicate whether the `People`, `Modules` or `Groups` view is currently active. Subsequently, the 
 `parseCommand` method in `UniBookParser` is called which will call `ListCommandParser`, which creates the 
 `ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently the `ListCommand` is returned to 
 `LogicManager` and the `execute` method is run. In this case the `Model` instance is accessed to update the predicate
-which changes the view to the appropriate one (in this case showing all professors), 
+which changes the entries appropriately (in this case showing all professors), 
 before finally returning the `CommandResult`.
 
-Note that the `List` command can also list modules and in this case the flow would be very similar, just that the 
+Note that the `List` command can also list modules or groups and in this case the flow would be very similar, just that the 
 appropriate boolean variables will be flipped to represent the correct view.
 
 ![Interactions Inside the Logic Component for the `list` command](images/ListSequenceDiagram.png)
@@ -223,20 +222,23 @@ appropriate boolean variables will be flipped to represent the correct view.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | student                                    | add contacts of other students taking a specific module | I can easily contact other students for help |
-| `* * *`  | student                                    | remove contacts of students who have finished the module | I can see only those students who are still in the module |
-| `* * *`  | student/professor                          | view all my contacts |
-| `* * *`  | student                                    | edit specific details of a contact  | 
-| `* * *`  | professor                                  | edit specific details of a contact  | 
-| `* * *`  | student                                    | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly |
-| `* * *`  | student                                    | find classmates and their contact details taking the same module |  I can form teams with them for group projects                                                                      |
-| `* * `  | student with many modules                   | flag any important contacts to saved contacts | I can easily find the relevant contact in a hassle-free manner in the future |
-| `* `  | student with many modules                     | organise any saved contacts into categories | I can easily find the relevant contact in a hassle-free manner |
-| `*  `  | professor teaching multiple modules          | organise students into their respective modules | locate details of students in each module without having to go through the entire list |
-| `* `    | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)  | I can easily contact the relevant person with one command |
-| `*`      | student/professor with many contacts in the UniBook | sort persons by name | locate a person easily |
+| Priority  | As a …​                                                             | I want to …​             | So that I can…​                                                        |
+|-----------|---------------------------------------------------------------------| ---------------------- | ---------------------------------------------------------------------- |
+| `* * *`   | student                                                             | add contacts of other students taking a specific module | I can easily contact other students for help |
+| `* * *`   | student                                                             | remove contacts of students who have finished the module | I can see only those students who are still in the module |
+| `* * *`   | professor                                                           | view all students in my module     | Have a better sensing of the enrolment and better plan module activities.|
+| `* * *`   | student                                                             | see all students in the same module/group as me | Have a better idea of who I am working with, network with them and form groups/ask for help if necessary.|
+| `* * *`   | student                                                             | view all my upcoming key dates/meeting dates in one place | Better plan and remember my schedule.             |
+| `* * *`   | student                                                             | edit specific details of a contact | 
+| `* * *`   | professor                                                           | edit specific details of a contact | 
+| `* * *`   | student                                                             | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly |
+| `* * *`   | student                                                             | find classmates and their contact details taking the same module |  I can form teams with them for group projects                                                                      |
+| `* * `    | student with many modules                                           | flag any important contacts to saved contacts | I can easily find the relevant contact in a hassle-free manner in the future |
+| `* `      | student with many modules                                           | organise any saved contacts into categories | I can easily find the relevant contact in a hassle-free manner |
+| `* `      | student with many contacts                                          | narrow down contacts by module or group | I can easily find the relevant contact in a hassle-free manner. | 
+| `*  `     | professor teaching multiple modules                                 | organise students into their respective modules | locate details of students in each module without having to go through the entire list |
+| `* `      | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof) | I can easily contact the relevant person with one command |
+| `*`       | student/professor with many contacts in the UniBook                 | sort persons by name | locate a person easily |
 
 *{More to be added}*
 
@@ -261,18 +263,67 @@ Use case ends.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
 
-**Use case: UC02 - List Persons**
+**Use case: UC02 - List People of a specific type**
 
 Actor: User
 
 **MSS**
 
-1. User requests to list persons
-2. UniBook displays persons according to listing criteria.
+1. User requests to list all people of a specific type (e.g. professors)
+2. UniBook displays all professors.
+
+**Extensions**
+* 1a. The user request is wrongly formatted/incomplete.
+  * 1a1. User is prompted to enter the command correctly.
+  * Use case ends.
+
+* 1a. The user is currently on the wrong view
+  * 1a1. User is prompted to change views.
+  * Use case ends.
 
 Use case ends.
 
-**Use Case: UC03 - Edit Person/Module**
+**Use case: UC03 - Change currently active view**
+
+Actor: User
+
+**MSS**
+
+1. User requests to change views (e.g. to groups, modules or people)
+2. UniBook switches the view and displays all entries successfully.
+
+**Extensions**
+* 1a. The user request is wrongly formatted/incomplete.
+    * 1a1. User is prompted to enter the command correctly.
+    * Use case ends.
+
+* 1a. The user attempts to change to the view he/she is currently on.
+    * 1a1. User is informed in the command result that he/she is already on the view.
+    * Use case ends.
+
+Use case ends.
+
+**Use case: UC04 - Narrow down specific group from modules view**
+
+Actor: User
+
+**MSS**
+
+1. User gives the command to see a specific group whilst in modules view.
+2. UniBook switches the view to groups view and displays only that specific group.
+
+**Extensions**
+* 1a. The user request is wrongly formatted/incomplete.
+    * 1a1. User is prompted to enter the command correctly.
+    * Use case ends.
+
+* 1a. The modules view currently has more than 1 module showing
+    * 1a1. UniBook still switches to group page and displays all matching modules instead of one specific module.
+    * Use case ends.
+
+Use case ends.
+
+**Use Case: UC05 - Edit Person/Module**
 
 Actor: User
 
@@ -296,7 +347,7 @@ Use case ends.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
 
-**Use Case: UC04 - Finding specific persons**
+**Use Case: UC06 - Finding specific persons**
 
 Actor: User
 
@@ -307,7 +358,7 @@ Actor: User
 
 Use case ends.
 
-**Use Case: UC05 - Deleting**
+**Use Case: UC07 - Deleting**
 
 Actor: User
 
