@@ -175,9 +175,29 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented, updated
+or any new features that we have in mind.
+
+- Implemented
+  - [Status Feature](#implemented-status-feature)
+  - [Find By Status Feature](#implemented-find-by-status-feature)
+  - [Class Code Feature](#implemented-class-code-feature)
+  - [Find By Class Code Feature](#implemented-find-by-class-code-feature)
+  - [Activity Feature](#implemented-activity-feature)
+  - [Find By Activity Feature](#implemented-find-by-activity-feature)
+- Updated
+  - [Adding a Person Feature](#updated-adding-a-person-feature)
+  - [Editing a Person Feature](#updated-editing-a-person-feature)
+  - [User Interface](#updated-user-interface)
+  - [Storage](#updated-storage)
+- Enhancements
+  - [Batch Update Feature](#enhancement-batch-update)
+- Proposed
+  - [Implementing CSV Compatibility](#proposed-enhancement-implementing-csv-compatibility)
+  - [Undo/redo Feature](#proposed-undoredo-feature)
+  - [User Interface](#proposed-update-user-interface)
   
-### \[Implemented\] Status feature
+### \[Implemented\] Status Feature
 
 #### Implementation
 
@@ -209,7 +229,7 @@ The `Status` class is facilitated by using `execute()` command in the `EditComma
   * Cons: 
     * Lesser level of abstraction, changes made have to be constantly changed throughout the file
 
-### \[Implemented\] Find By Status feature
+### \[Implemented\] Find By Status Feature
 
 #### Implementation
 
@@ -256,7 +276,7 @@ The following sequence diagram shows how the `findstatus` operation works:
         * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
         * May violate SLAP principles, as every thing is done in a single class
 
-### \[Implemented\] Class Code feature
+### \[Implemented\] Class Code Feature
 
 #### Implementation
 
@@ -265,7 +285,7 @@ The implemented Class Code label is facilitated by `ClassCode`. It extends `Addr
 
 The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
 
-### \[Implemented\] Find By Class Code feature
+### \[Implemented\] Find By Class Code Feature
 
 #### Implementation
 
@@ -312,7 +332,7 @@ The following sequence diagram shows how the `findclasscode` operation works:
         * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
         * May violate SLAP principles, as every thing is done in a single class
 
-### \[Implemented\] Activity feature
+### \[Implemented\] Activity Feature
 
 #### Implementation
 
@@ -341,7 +361,7 @@ The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting
     * Cons:
         * Lesser level of abstraction, changes made have to be constantly changed throughout the file
 
-### \[Implemented\] Find By Activity feature
+### \[Implemented\] Find By Activity Feature
 
 #### Implementation
 
@@ -406,7 +426,7 @@ activities. Allows user to check across multiple activities instead of only that
     * Only students who are participating in all the input activities will be returned, possibly only a handful
 of students which makes it slightly impractical to use
 
-### \[Updated\] Adding a person feature
+### \[Updated\] Adding a Person Feature
 
 #### Updates
 
@@ -420,7 +440,7 @@ of students which makes it slightly impractical to use
   * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
   * A student can have ANY number of activities, including zero (optional).
 
-### \[Updated\] Editing a person feature
+### \[Updated\] Editing a Person Feature
 
 #### Updates
 
@@ -454,7 +474,7 @@ acitivity is contained in a blue box.
 The flow of saving and loading the data storage is updated to accommodate the addtion of
 `Status`, `ClassCode`, and `Activity`.
 
-### \[Enhancement\] Batch update
+### \[Enhancement\] Batch Update
 
 #### Enhancements
 
@@ -495,7 +515,7 @@ How the batch update works:
         * If the `List` is empty, edit A's status to `Negative`.
         * Else, do nothing.
 
-### \[Proposed Enhancement\] Implementing CSV compatibility
+### \[Proposed Enhancement\] Implementing CSV Compatibility
 The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
 from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
 that can be found in the `Person` Class.
@@ -543,7 +563,7 @@ _To be Continued_
 will be omitted from the read process.
 * File size will affect the performance of the application.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undo/redo Feature
 
 #### Proposed Implementation
 
@@ -633,7 +653,7 @@ seamless application.
 * Create a light themed display.
 * The display of a person card, along with its attributes, could be enhanced.
 
-### \[Testing\] JUnit tests
+### \[Testing\] JUnit Tests
 
 #### JUnit tests
 
@@ -657,11 +677,13 @@ Proper JUnit tests have been added as a means to check if the features listed ab
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts
+  * COVID-19 Cases in Schools
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+* Has access to details of students
 * School admins
 
 **Value proposition**:
