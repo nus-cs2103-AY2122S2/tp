@@ -398,18 +398,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user           | delete an internship role                                                  | remove internship roles that are outdated or complete    |
 | `* * *`  | user           | see a summary of my internship applications at a glance                    | have a general overview of the status of my applications |
 | `* *`    | user           | search keywords like company name, internship roles, etc.                  | locate my internship application quickly                 |
-| `* *`    | user           | sort company names in alphabetical order                                   | locate a company that I may have forgotten about         |
 | `* *`    | user           | sort applications in chronological order of deadlines                      | keep track of the timeline of applications               |
 | `* *`    | user           | modify each item                                                           | keep Tinner and all its contents up to date              |
 | `* *`    | user           | be reminded of upcoming deadlines                                          | be on time with my applications                          |
 | `* *`    | organised user | tag applications and events                                                | keep items compartmentalised and thus easier to access   |
-| `* *`    | long term user | archive/hide irrelevant events                                             | not get distracted by what is not important              |
 | `* *`    | new user       | learn how to use the application via a guide                               | use the application periodically with ease               |
+| `* *`    | user           | mark certain entries as my favourites                                      | view those that I am more interested in at a glance      |
+| `*`      | user           | sort company names in alphabetical order                                   | locate a company that I may have forgotten about         |
 | `*`      | user           | export calendar dates of important events into a .ics or .pdf file         | keep track of my events on an external platform          |
+| `*`      | long term user | archive/hide irrelevant events                                             | not get distracted by what is not important              |
 | `*`      | user           | export a list of interview reviews of different companies into a .csv file | share my experience with juniors and peers               |
-| `*`      | user           | mark certain entries as my favourites                                      | view those that I am more interested in at a glance      |
 
-*{More to be added}*
 
 ### Use cases <a id="use-cases"></a>
 

@@ -26,6 +26,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DOUBLE_INDEX = "Double indexes are missing.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_CONTENT = "Index[es] and/or content are missing.";
+    public static final String MESSAGE_EXTRANEOUS_PARAMETER = "This command does not take in any parameters!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing

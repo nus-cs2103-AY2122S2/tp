@@ -61,21 +61,41 @@ public class CompanyListParser {
             return new DeleteCompanyCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            if (!arguments.equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER));
+            }
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            if (!arguments.equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER));
+            }
             return new ListCommand();
 
         case ListFavouriteCommand.COMMAND_WORD:
+            if (!arguments.equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER));
+            }
             return new ListFavouriteCommand();
 
         case ExitCommand.COMMAND_WORD:
+            if (!arguments.equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER));
+            }
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            if (!arguments.equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER));
+            }
             return new HelpCommand();
 
         case AddRoleCommand.COMMAND_WORD:
