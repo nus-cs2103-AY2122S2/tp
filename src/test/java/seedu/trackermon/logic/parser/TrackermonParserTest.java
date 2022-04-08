@@ -36,6 +36,10 @@ public class TrackermonParserTest {
 
     private final TrackermonParser parser = new TrackermonParser();
 
+    /**
+     * Tests the parsing of {@code AddCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_add() throws Exception {
         Show show = new ShowBuilder().build();
@@ -43,6 +47,10 @@ public class TrackermonParserTest {
         assertEquals(new AddCommand(show), command);
     }
 
+    /**
+     * Tests the parsing of {@code DeleteCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
@@ -50,6 +58,10 @@ public class TrackermonParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_SHOW), command);
     }
 
+    /**
+     * Tests the parsing of {@code EditCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_edit() throws Exception {
         Show show = new ShowBuilder().build();
@@ -59,12 +71,20 @@ public class TrackermonParserTest {
         assertEquals(new EditCommand(INDEX_FIRST_SHOW, descriptor), command);
     }
 
+    /**
+     * Tests the parsing of {@code ExitCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
+    /**
+     * Tests the parsing of {@code FindCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
@@ -73,23 +93,37 @@ public class TrackermonParserTest {
         assertEquals(new FindCommand(new ShowContainsKeywordsPredicate(keywords)), command);
     }
 
+    /**
+     * Tests the parsing of {@code HelpCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
+    /**
+     * Tests the parsing of {@code ListCommand}.
+     * @throws Exception for invalid input string.
+     */
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+    /**
+     * Tests the parsing of invalid input.
+     */
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, UNKNOWN_COMMAND_HELP, () -> parser.parseCommand(""));
     }
 
+    /**
+     * Tests the parsing of invalid command.
+     */
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, UNKNOWN_COMMAND_HELP, () -> parser.parseCommand("unknownCommand"));
