@@ -34,9 +34,9 @@ import static seedu.address.testutil.TypicalEntries.JANICE_STREET;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCompanyCommand;
+import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Email;
 import seedu.address.model.entry.Name;
-import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CompanyBuilder;
@@ -134,7 +134,7 @@ public class AddCompanyCommandParserTest {
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_JANICE_STREET + PHONE_DESC_B
-                + INVALID_EMAIL_DESC  + ADDRESS_DESC_B
+                + INVALID_EMAIL_DESC + ADDRESS_DESC_B
                 + TAG_DESC_APPLIED, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address is not possible
