@@ -41,8 +41,8 @@ public class UniqueCompanyListTest {
     @Test
     public void contains_companyWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCompanyList.add(META);
-        Company editedAlice = new CompanyBuilder(META).withAddress(VALID_ADDRESS_WHATSAPP).build();
-        assertTrue(uniqueCompanyList.contains(editedAlice));
+        Company editedMeta = new CompanyBuilder(META).withAddress(VALID_ADDRESS_WHATSAPP).build();
+        assertTrue(uniqueCompanyList.contains(editedMeta));
     }
 
     @Test
@@ -83,10 +83,10 @@ public class UniqueCompanyListTest {
     @Test
     public void setCompany_editedCompanyHasSameIdentity_success() {
         uniqueCompanyList.add(META);
-        Company editedAlice = new CompanyBuilder(META).withAddress(VALID_ADDRESS_WHATSAPP).build();
-        uniqueCompanyList.setCompany(META, editedAlice);
+        Company editedMeta = new CompanyBuilder(META).withAddress(VALID_ADDRESS_WHATSAPP).build();
+        uniqueCompanyList.setCompany(META, editedMeta);
         UniqueCompanyList expectedUniqueCompanyList = new UniqueCompanyList();
-        expectedUniqueCompanyList.add(editedAlice);
+        expectedUniqueCompanyList.add(editedMeta);
         assertEquals(expectedUniqueCompanyList, uniqueCompanyList);
     }
 
