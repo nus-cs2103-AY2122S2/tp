@@ -3,7 +3,7 @@ layout: page
 title: Jun Heng's Project Portfolio Page
 ---
 
-### Project: AgenSee
+### Project: AgentSee
 
 Given below are my contributions to the project.
 
@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **New Feature**: List buyer, seller command
     * An enhancement to list command, can list each list seperately
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=cwnm&tabRepo=AY2122S2-CS2103T-T11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
     * `findBuyerCommand` class
     * `findSellerCommand` class
     * `findSellerCommandParser` class
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
     * Edited files to conform to checkstyle
 
 * **Project management**:
-    * Managed releases `v1.2` - `v1.3` (3 releases) on GitHub
+    * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
     * Added a few issues
 
 * **Documentation**:
@@ -49,6 +49,6 @@ Given below are my contributions to the project.
     * Set up weekly meeting times accounting for our individual schedules
     * Set up meeting agenda for weekly meetings
     * Added weekly reminders for deadlines on tasks for that week, especially for time sensitive team tasks, this includes soft deadline such as code for demo
-    * Built and released JAR for our team (v1.2, v1.3.trial, v1.3)
+    * Built and released JAR for our team (v1.2, v1.3.trial, v1.3, v1.4)
     * Submission of progress report
 
