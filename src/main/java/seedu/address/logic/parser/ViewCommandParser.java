@@ -106,6 +106,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             // view P/[PLAYER_NAME...] [w/gte|lte|gt|lt|eq WEIGHT] [h/gte|lte|gt|lt|eq HEIGHT] [t/POSITION]
             String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
             if (!playerNameArg.equals("")) {
+                if (!playerNameArg.matches("^[a-zA-Z\\s]*$")) {
+                    throw new ParseException("You have provided an invalid name criteria!");
+                }
                 String trimmedArgs = playerNameArg.trim();
                 prefixAndArgument.add(trimmedArgs);
                 String[] nameKeywords = trimmedArgs.split("\\s+");
@@ -171,6 +174,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             // view L/[LINEUP_NAME...]
             String lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
             if (!lineupNameArg.equals("")) {
+                if (!lineupNameArg.matches("^[a-zA-Z\\s]*$")) {
+                    throw new ParseException("You have provided an invalid name criteria!");
+                }
                 String trimmedArgs = lineupNameArg.trim();
                 prefixAndArgument.add(trimmedArgs);
                 String[] nameKeywords = trimmedArgs.split("\\s+");
@@ -244,6 +250,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             // view S/[SCHEDULE_NAME...]
             String scheduleNameArg = argMultimap.getValue(PREFIX_SCHEDULE).get();
             if (!scheduleNameArg.equals("")) {
+                if (!scheduleNameArg.matches("^[a-zA-Z\\s]*$")) {
+                    throw new ParseException("You have provided an invalid name criteria!");
+                }
                 String trimmedArgs = scheduleNameArg.trim();
                 prefixAndArgument.add(trimmedArgs);
                 String[] nameKeywords = trimmedArgs.split("\\s+");
