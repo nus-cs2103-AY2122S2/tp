@@ -133,6 +133,15 @@ It is split into the following subsections:
 5. [Schedule management](#45-schedule-management)
 6. [Miscellaneous ](#46-miscellaneous)
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Information:**
+The user needs to execute the list command for customer/service/booking,
+before using edit/delete command for customer/service/booking respectively. 
+As only indexes present in the displayed list are counted as valid `INDEX`.
+
+</div>
+
 ### 4.1 Customer management
 
 #### 4.1.1 Customer management command parameters
