@@ -12,7 +12,7 @@ It is written in Java and has over 10kLoC.
 Given below are my contributions to the project.
 
 1. **New Feature: showfriend**
-   * What it does: Allows the user to view the full details of a friend in Amigos on a single page (ExpandedPersonCard).
+   * What it does: Allows the user to view the full details of a friend in Amigos on a single page (`ExpandedPersonCard`).
    * Justification: We added more attributes for a friend, such as description and logs. We also added events which
       contain references to `FriendName`. Thus, it is essential for the user to be able to view all these new features 
       for an individual friend in an uncluttered manner.
@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     * What it does: Allows users to add a friend into address book by typing in the relevant command into the GUI.
     * Highlights:
       * Added a new `Description` field for a `Friend`
-      * Made other fields in optional and only `FriendName` compulsory, so that users who do not know full details of a friend
+      * Made other fields in `Friend` optional and only `FriendName` compulsory, so that users who do not know full details of a friend
         can still add the friend into `Amigos`.
       
 4. **Enhancement to existing feature `deletefriend`**: 
@@ -47,19 +47,22 @@ Given below are my contributions to the project.
       searched. The user input is split according to the prefixes (`n/` for `FriendName`, `t/` for `Tag`,
       `ttl` for `LogName`). Also, keywords do not have to be matched fully. As long as a substring is matched, then 
       the friend would be shown.
+    
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=dionegoh&breakdown=true)
 
 * **Project management**:
     * Update site-wide settings [\#21](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/21)
+    * Maintained issue tracker for milestone v1.2
     
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `addfriend`, `deletefriend`, and `editfriend`', `showfriend`,
-          `listfriend`, `listfriend`, and `clear`.
+        * Add documentation for the features `addfriend`, `deletefriend`, and `editfriend`', `showfriend`,
+          `listfriends`, and `clear`.
         * Add documentation for command aliases.
+
     * Developer Guide:
         * Add implementation and sequence diagram for `addfriend`
         * Add implementation and activity diagram for `findfriend`
         * Add implementation for `showfriend`
-        * Added use cases for `addfriend`, `deletefriend`, `editfriend`.
+        * Add use cases for `addfriend`, `deletefriend`, `editfriend`.
