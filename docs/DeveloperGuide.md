@@ -223,7 +223,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
     in TAPA, a `CommandException` will be thrown.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> In TAPA, two `Person` are equal only if they have the same `studentId`.
+    <b>Note:</b> In TAPA, two `Person` are considered as equal only if they have the same `studentId`.
     </div> 
 
 
