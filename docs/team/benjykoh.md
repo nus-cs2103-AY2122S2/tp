@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **New Feature**:
   * Added the ability to display the format, and a short description for a specified command. [#43](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/43)
     * What it does: Provides the user with a short description on what the given command does, as well as display the format of the command, allowing the users to learn how to use it.
-      * If no command is specified, this features provides the user with a listt all the existing commands.
+      * If no command is specified, this feature provides the user with a list of all the existing commands.
     * Justification: This feature allows users to find out more about existing commands, and helps them understand how to use these commands.
     * Highlights: This feature was fairly easy to implement, however, it required constant updates whenever a new feature is added into our application.
 
