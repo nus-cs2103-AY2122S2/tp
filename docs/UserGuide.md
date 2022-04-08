@@ -272,17 +272,7 @@ Click <img align="center" src = "images/ui-icons/x.png" alt="X" height = "25"/> 
 
 </div>
 
-#### 3.1.6 Looking for products having expired items : `expired`
-
-Finds products that contain expired items.
-
-Format: `expired`
-
-*Alternatively*, 
-
-Click on the menu bar `Actions` > `Find expired`
-
-#### 3.1.7 Looking for products that are out of stock : `out-of-stock`
+#### 3.1.6 Looking for products that are out of stock : `out-of-stock`
 
 Lists products that are out of stock.
 
@@ -295,7 +285,7 @@ Click on the menu bar `Actions` > `Find out of stock items`
 :information_source: Filters cannot be stacked with subsequent commands. 
 Thus, expired and out of stock filters cannot be stacked with other filters.
 
-#### 3.1.8 Updating all products : `update-all`
+#### 3.1.7 Updating all products : `update-all`
 
 Updates all products in the displayed list.
 
@@ -306,7 +296,7 @@ Examples:
 * `update-all c:fruits` updates all products in current displayed list to have category `fruits`.
 * `update-all p:5.00` updates all products in current displayed list to have price `5.00`.
 
-#### 3.1.9 Deleting all products : `delete-all`
+#### 3.1.8 Deleting all products : `delete-all`
 
 Deletes all products in the displayed list.
 
@@ -396,7 +386,18 @@ A pop-up window will appear.
 
 Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
 
-#### 3.2.4 Finding items that are expiring soon: `remind`
+
+#### 3.2.4 Looking expired items : `expired`
+
+Finds items that are expired.
+
+Format: `expired`
+
+*Alternatively*,
+
+Click on the menu bar `Actions` > `Find expired`
+
+#### 3.2.5 Finding items that are expiring soon: `remind`
 
 Lists items that are expiring within a certain number of days
 

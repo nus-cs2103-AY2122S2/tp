@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands.product;
+package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 

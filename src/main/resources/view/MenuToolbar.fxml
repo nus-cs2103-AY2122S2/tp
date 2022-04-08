@@ -9,8 +9,8 @@
         <MenuItem mnemonicParsing="false" text="Close" onAction="#handleExit"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Actions">
-        <MenuItem mnemonicParsing="false" text="Find Expired" onAction="#handleExpired"/>
-        <MenuItem mnemonicParsing="false" text="Find out of stock items" onAction="#handleOutOfStock"/>
+        <MenuItem mnemonicParsing="false" text="Find Expired items" onAction="#handleExpired"/>
+        <MenuItem mnemonicParsing="false" text="Find Out of Stock products" onAction="#handleOutOfStock"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Help">
         <MenuItem mnemonicParsing="false" text="Help" onAction="#handleHelp"/>

@@ -19,6 +19,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.logic.commands.item.ExpiredCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;

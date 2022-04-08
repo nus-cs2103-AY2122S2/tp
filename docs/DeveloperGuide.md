@@ -457,6 +457,54 @@ Use case ends.
 
       Use case resumes at step 1.
 
+#### UC6: Find out of stock products
+
+**MSS**
+
+1. User requests to find products that are out of stock.
+2. IBook updates the list to show the requested products
+   Use case ends.
+
+**Extensions**
+
+* 2a. No products found.
+
+    * 2a1. IBook shows a cute image stating nothing found.
+
+      Use case resumes at step 1.
+
+#### UC7: Find expired items
+
+**MSS**
+
+1. User requests to find items that are expired
+2. IBook updates the list to show the requested items
+   Use case ends.
+
+**Extensions**
+
+* 2a. No items found.
+
+    * 2a1. IBook shows a cute image stating nothing found.
+
+      Use case resumes at step 1.
+
+#### UC8: Find expiring items
+
+**MSS**
+
+1. User requests to find items that are expiring within a certain amount of days
+2. IBook updates the list to show the requested items
+   Use case ends.
+
+**Extensions**
+
+* 2a. No items found.
+
+    * 2a1. IBook shows a cute image stating nothing found.
+
+      Use case resumes at step 1.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -492,33 +540,81 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+   3. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a product
 
-1. Deleting a person while all persons are being shown
+1. Deleting a product while all products are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all products using the `list` command. Multiple products in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First product is deleted from the list. Details of the deleted product shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Finding products
+
+1. Find products that match a certain attribute like (`NAME`, `CATEGORY`, `DESCRIPTION`, `PRICE`)
+
+   1. Prerequisites: There are existing products in the list.
+
+   2. Test case: `find n:kaya`<br>
+      Expected: Products that contains `kaya` in the name is displayed. Details such as the number of products found would be shown in the status message.
+
+   3. Test case: `find n:kaya c:bread`<br>
+      Expected: Products that contains `kaya` in the name and `bread` in the category is displayed. Details such as the number of products found would be shown in the status message.
+
+   4. Test case: `find`<br>
+      Expected: Error details is shown in the status message as at least one attribute needs to be specified in the command.
+
+   5. Other incorrect find commands to try: `find blabla`<br>
+      Expected: Similar to previous.
+
+2. Find products that are out of stock
+
+   1. Prerequisites: There are existing products in the list.
+
+   2. Test case: `out-of-stock`<br>
+      Expected: Products that have no items would be displayed.
+
+3. Find items that have expired
+
+    1. Prerequisites: There are existing products in the list.
+
+    2. Test case: `expired`<br>
+       Expected: Products that contain expired items would be displayed.
+
+4. Find items that are expiring
+
+   1. Prerequisites: There are existing products and items in the list.
+
+   2. Test case: `remind 5`<br>
+      Expected: Items that are expiring within the next 5 days would be displayed.
+
+   3. Test case: `remind 0`<br>
+      Expected: Items that are expiring on the same day would be displayed.
+
+   4. Test case: `remind -1`<br>
+      Expected: Error details is shown in the status message as the days specified cannot be negative.
+
+   5. Other incorrect commands to try: `remind blabla`, `remind 9999999999999`<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
