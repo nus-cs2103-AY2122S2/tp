@@ -56,7 +56,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-###UI Component
+### UI Component
 
 The **API** of this component is specified in `Ui.java`
 
