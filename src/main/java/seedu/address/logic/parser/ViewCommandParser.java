@@ -283,6 +283,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
     }
 
+    /** Accumulates {@code Predicate<Person>} when t/ is detected */
     private static void parseTagFlag(ArgumentMultimap argMultimap,
                                         List<Predicate<Person>> predicates,
                                         List<String> prefixAndArg) throws ParseException {
@@ -291,6 +292,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         predicates.add(new TagContainsKeywordsPredicate(Arrays.asList(parseTagArg(tagArg))));
     }
 
+    /** Extracts keyword from t/ */
     private static String[] parseTagArg(String tagArg) throws ParseException {
         if (tagArg.equals("")) {
             throw new ParseException("You have provided an empty tag criteria!");
@@ -303,6 +305,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
     }
 
+    /** Returns {@code ViewCommand} when L/ and its optional parameters and prefix is detected */
     private static ViewCommand parseViewLineup(ArgumentMultimap argMultimap) throws ParseException {
         // capture the type of view
         List<String> prefixAndArg = new ArrayList<>();
@@ -328,6 +331,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
     }
 
+    /** Returns {@code ViewCommand} when L/ and N/ are detected */
     private static ViewCommand parseViewWithoutLineup(ArgumentMultimap argMultimap,
                                                       List<Predicate<Person>> predicates,
                                                       List<String> prefixAndArg) throws ParseException {
@@ -341,6 +345,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         return new ViewCommand(predicates, null, prefixAndArg);
     }
 
+    /** Returns {@code ViewCommand} when L/ and/or parameter is detected */
     private static ViewCommand parseViewWithLineup(List<Predicate<Person>> predicates, List<String> prefixAndArg,
                                                    String lineupNameArg) throws ParseException {
         if (lineupNameArg.equals("")) {

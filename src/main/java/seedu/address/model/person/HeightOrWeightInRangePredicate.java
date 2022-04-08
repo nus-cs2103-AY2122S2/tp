@@ -7,10 +7,18 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.parser.Prefix;
 
+/**
+ * Tests that a {@code Person}'s {@code Height} or {@code Weight} matches any of the keywords given.
+ */
 public class HeightOrWeightInRangePredicate implements Predicate<Person> {
     private final String keywords;
     private final Prefix prefix;
 
+    /**
+     * Constructs a predicate for {@code Height} or {@code Weight}
+     * @param keywords the filtering keywords
+     * @param prefix the prefix for weight or height
+     */
     public HeightOrWeightInRangePredicate(String keywords, Prefix prefix) {
         assert (prefix.equals(PREFIX_HEIGHT) || prefix.equals(PREFIX_WEIGHT));
         this.keywords = keywords;
