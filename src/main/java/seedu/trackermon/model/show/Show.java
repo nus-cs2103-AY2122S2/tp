@@ -109,7 +109,7 @@ public class Show {
     }
 
     /**
-     * Returns the {@code String} of the {@code Show}.
+     * Returns the {@code String} representation of the {@code Show}.
      */
     @Override
     public String toString() {

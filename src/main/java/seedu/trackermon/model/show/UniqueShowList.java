@@ -118,7 +118,7 @@ public class UniqueShowList implements Iterable<Show> {
     }
 
     /**
-     * Returns a {@code int} representation of {@code UniqueShowList}
+     * Returns the hashcode of {@code UniqueShowList}
      */
     @Override
     public int hashCode() {

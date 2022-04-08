@@ -34,7 +34,7 @@ public enum Status {
     }
 
     /**
-     * Return {@String} representation of {@code Status}.
+     * Returns the {@String} representation of {@code Status}.
      */
     @Override
     public String toString() {
