@@ -686,13 +686,15 @@ More information on usage: [delete command](UserGuide.html#delete-student-contac
 
    1. Prerequisites: List all student contacts using the `list` command.
 
-   1. Test case: `delete 1`<br>
-      Expected: First student contact is deleted from the list. Details of the deleted student contact shown in the status message. 
+   2. Test case: `delete 1`<br>
+      Expected: First student contact is deleted from the list. 
+      Details of the deleted student contact shown in the status message. 
+      The student contact is also deleted from all previously assigned groups.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No student contact is deleted. Error details shown in the error message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting a student contact while the student contact list is being filtered.
@@ -730,6 +732,67 @@ More information on usage: [find command](UserGuide.html#locating-student-contac
        Expected: No student contacts filtered. Error details shown in the error message.
 
 2. Finding a student contact while the student contact list is being filtered.
+
+    1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+   
+    2. Test case: Similar to previous. <br>
+       Expected: Similar to previous.
+
+### Creating a group
+
+Command: `addgroup` <br>
+More information on usage: [addgroup command](UserGuide.html#create-a-group-addgroup)
+
+1. Adding a group that has yet to exist in ArchDuke.
+
+   1. Test case: `addgroup g/NUS` <br>
+      Expected: A group with the name `NUS` added to the group list. The group is added to the last index of the group list.
+      The group card appeared at the last in the list. The details of the added group is shown in the success message.
+   
+   2. Test case: `addgroup g/NUS Fintech Club g/NUS` <br>
+      Expected: A group with the name `NUS` added to the group list. The group `NUS Fintech Club` is not added to the group list.
+      This is because only the last occurrence of the parameter will be taken.
+   
+   4. Other incorrect add group commands to try: `addgroup`, `addgroup g/` <br>
+      Expected: No group added. Error details shown in the error message.
+   
+4. Adding a group that already exist in ArchDuke.
+
+   1. Prerequisite: There exists a group with the group name `NUS Fintech Society` (case-insensitive).
+   
+   2. Test case: `addgroup g/NUS Fintech Society` <br>
+      Expected: No group added because the group with the exact same name already exists. 
+      Error details shown in the error message.
+   
+   3. Test case: `addgroup g/nus fintech society` <br>
+      Expected: No group added because the group with the same name but different case already exists. 
+      Error details shown in the error message.
+
+
+### Deleting a group
+
+Command: `delgroup` <br>
+More information on usage: [delgroup command](UserGuide.html#delete-a-group-delgroup)
+
+1. Deleting a group that exists in ArchDuke.
+
+   1. Prerequisite: There exists a group with the group name `NUS Data Science Society` in ArchDuke.
+
+   2. Test case: `delgroup g/NUS Data Science Society` <br>
+      Expected: The group with the name `NUS Data Science Society` (case-insensitive) deleted from the group list. 
+      The group card disappeared from the group list. The details of the deleted group is shown in the success message.
+   
+   3. Other incorrect delete group commands to try: `delgroup`, `delgroup g/`, `delgroup t/` etc.
+      Expected: No group deleted from the group list. Error details shown in the error message.
+   
+2. Deleting a group that does not exist in ArchDuke.
+
+   1. Prerequisite: There exists no group with the group name `NUSSU` (case-insensitive) in ArchDuke. 
+      
+   2. Test case: `delgroup g/NUSSU` <br>
+      Expected: No group deleted from the group list. Error details shown in the error message.
+
+
 
 ### Saving data
 
