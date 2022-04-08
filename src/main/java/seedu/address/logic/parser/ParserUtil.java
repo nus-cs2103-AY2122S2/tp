@@ -146,22 +146,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String companyName} into an valid String.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given companyName is invalid.
-     */
-
-    public static Name parseCompanyName(String companyName) throws ParseException {
-        requireNonNull(companyName);
-        String trimmedCompanyName = companyName.replaceAll("\\s{2,}", " ").trim();
-        if (!Name.isValidName(trimmedCompanyName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new Name(trimmedCompanyName);
-    }
-
-    /**
      * Parses a {@code String date} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -190,7 +174,7 @@ public class ParserUtil {
         if (!Time.isValidTime(trimmedTime)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        return new Time(time);
+        return new Time(trimmedTime);
     }
 
     /**
