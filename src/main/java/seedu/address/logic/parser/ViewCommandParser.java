@@ -184,6 +184,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                                 ViewCommand.MESSAGE_USAGE_NO_LINEUP));
                     }
                     predicates.add(PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP);
+                    prefixAndArgument.add(PREFIX_WITHOUT_LINEUP.toString());
                     return new ViewCommand(predicates, null, prefixAndArgument);
                 }
             }
