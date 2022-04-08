@@ -35,9 +35,9 @@ public class EditTestResultCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW TEST RESULT WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TESTDATE + "TEST_DATE "
-            + PREFIX_MEDICALTEST + "MEDICAL_TEST "
-            + PREFIX_RESULT + "TEST_RESULT \n"
+            + "[" + PREFIX_TESTDATE + "TEST_DATE] "
+            + "[" + PREFIX_MEDICALTEST + "MEDICAL_TEST] "
+            + "[" + PREFIX_RESULT + "TEST_RESULT] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_RESULT + "Brain damage";
 

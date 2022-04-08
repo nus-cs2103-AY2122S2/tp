@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -51,21 +52,22 @@ public class EditMedicalCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "NRIC FIELD CANNOT BE MODIFIED - CREATE A NEW MEDICAL INFORMATION WITH THE CORRECT NRIC INSTEAD.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_AGE + "AGE "
-            + PREFIX_BLOODTYPE + "BLOODTYPE "
-            + PREFIX_MEDICATION + "MEDICATION "
-            + PREFIX_HEIGHT + "HEIGHT "
-            + PREFIX_WEIGHT + "WEIGHT "
-            + PREFIX_ILLNESSES + "ILLNESSES "
-            + PREFIX_SURGERIES + "SURGERIES "
-            + PREFIX_FAMILY_HISTORY + "FAMILY_HISTORY "
-            + PREFIX_IMMUNIZATION_HISTORY + "IMMUNIZATION_HISTORY "
-            + PREFIX_GENDER + "GENDER "
-            + PREFIX_ETHNICITY + "ETHNICITY\n"
+            + "[" + PREFIX_AGE + "AGE "
+            + "[" + PREFIX_BLOODTYPE + "BLOODTYPE] "
+            + "[" + PREFIX_MEDICATION + "MEDICATION] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
+            + "[" + PREFIX_ILLNESSES + "ILLNESSES] "
+            + "[" + PREFIX_SURGERIES + "SURGERIES] "
+            + "[" + PREFIX_FAMILY_HISTORY + "FAMILY_HISTORY] "
+            + "[" + PREFIX_IMMUNIZATION_HISTORY + "IMMUNIZATION_HISTORY] "
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_ETHNICITY + "ETHNICITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_BLOODTYPE + "B";
 
     public static final String MESSAGE_EDIT_MEDICAL_SUCCESS = "Edited Medical Information: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_NRIC_EDIT_NOT_ALLOWED =
             "NRIC field cannot be modified. Create a new medical information with the correct NRIC instead.";
 
@@ -181,6 +183,14 @@ public class EditMedicalCommand extends Command {
             setImmunizationHistory(toCopy.immunizationHistory);
             setGender(toCopy.gender);
             setEthnicity(toCopy.ethnicity);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(age, bloodType, medication, height, weight, illnesses, surgeries,
+                    familyHistory, immunizationHistory, gender, ethnicity);
         }
 
         public Optional<Age> getAge() {

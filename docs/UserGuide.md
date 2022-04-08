@@ -2,9 +2,9 @@
 layout: page
 title: User Guide
 ---
-
-<img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again
-later.">
+<figure class="figure">
+    <img src = "images/user-guide/icon.png" width = "250" alt="Unable to load image! Try again later.">
+</figure>
 
 ## **Table of Contents**
 - [Introduction](#introduction)
@@ -17,11 +17,11 @@ later.">
 - [Features](#features)
   - [Viewing Help: `help`](#viewing-help-help)
   - [Adding a Patient: `add`](#adding-a-patient-add)
-  - [Listing all Patients: `view`](#listing-all-patients-view)
+  - [Viewing all Patients: `view`](#viewing-all-patients-view)
   - [Editing Patient Information: `edit`](#editing-patient-information-edit)
   - [View Summary of a Patient: `view i/NRIC`](#view-summary-of-a-patient-view-inric)
   - [Deleting any Entry: `delete`](#deleting-any-entry-delete)
-  - [Finding any Entry: `find`](#finding-any-entry-find)  
+  - [Finding any Entry: `find`](#finding-any-entry-find)
   - [Adding Contact Information: `add t/contact`](#adding-contact-information-add-tcontact)
   - [Viewing Contact Information: `view t/contact`](#viewing-contact-information-view-tcontact)
   - [Editing Contact Information: `edit`](#editing-contact-information-edit)
@@ -87,7 +87,7 @@ Follow this tutorial to get started with using MedBook:
        <figcaption class="figure-caption">Figure 1: Password Prompt Display</figcaption>
    </figure>
 
-   <div class="d-flex alert alert-info">
+   <div markdown="block" class="d-flex alert alert-info">
    <div class="mr-2">
         **:information_source: Notes about password:**<br>
    </div>
@@ -135,7 +135,7 @@ Follow this tutorial to get started with using MedBook:
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -154,22 +154,31 @@ Adds a patient to MedBook.
 
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
-   <div class="d-flex alert alert-info">
-   <div class="mr-2">
-       <span class="badge badge-info">INFO</span>
-   </div>
-   <div>
-       Patient's NRIC must be a valid Singapore-issued NRIC. See <a href="https://en.wikipedia.org/wiki/National_Registration_Identity_Card" target="_blank">here</a> for more information about the valid format.
+<div class="d-flex alert alert-info">
+  <div class="mr-2">
+    <span class="badge badge-info">INFO</span>
+  </div>
+  <div markdown="block">
+    Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
-       NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
-   </div>
-   </div>
+    1. NRIC consists alphanumeric characters only.
+    2. NRIC starts with either S, T, F, G, M character.
+    3. NRIC consists 7 digits after the first character.
+    4. NRIC ends with any character.
+
+    Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting of the NRIC.
+
+    See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid Singapore NRIC.
+
+    NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
+  </div>
+</div>
 
 Examples:
 * `add i/S1234567L n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add i/S1234568L n/Jane Doe p/98763488 e/janed@example.com a/311, Clementi Ave 2, #02-25 tg/diabetic tg/hypertension`
 
-### Listing all Patients: `view`
+### Viewing all Patients: `view`
 
 Shows a list of patients in MedBook.
 
@@ -179,19 +188,22 @@ Format: `view`
 
 Edits an existing patient information entry in MedBook when a list of patient's information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Patient Information.
+At least one field must be filled for edit command to be valid.
 
-Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
-* Edits the patient at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the patient at the specified INDEX. The index refers to the index number shown in the displayed patient list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 * `view` followed by `edit 1 n/John` updates name of first patient information entry displayed on the screen.
 
-Caution*: Editing a contact will overwrite the old data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a patient will overwrite the old data.
+</div>
 
 ### View Summary of a Patient: `view i/NRIC`
 
@@ -208,7 +220,7 @@ Deletes a specified entry (patient, contact, medical information, ...) on the cu
 
 Format: `delete INDEX`
 
-* We can delete the entry only if the entry is being shown on the display panel.
+* You can delete the entry only if the entry is being shown on the display panel.
 * For all screens apart from Summary, the index refers to the index number shown in the displayed list.
 * The index must be a positive integer 1, 2, 3, …​
 * For Summary screen, `delete 1` deletes the patient being viewed; other indices are invalid.
@@ -217,7 +229,9 @@ Examples:
 * `view t/prescription i/S1234567L` followed by `delete 2` deletes the second prescription of the patient displayed on the screen.
 * `view` followed by `delete 1` deletes the first patient displayed on the screen.
 
-Caution*: Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Deleting a patient will remove all the associated information (e.g medical info, prescriptions, consultations etc.)
+</div>
 
 ### Finding any Entry: `find`
 
@@ -239,8 +253,20 @@ Adds a patient's emergency contact to MedBook.
 
 Format: `add t/contact i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
+* The NRIC specified here is the NRIC of the patient who has this emergency contact.
+
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
+The NRIC specified here cannot be edited in the future.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips:**
+1. A contact can have any number of tags (including 0).
+2. If you typed the wrong NRIC, `delete INDEX` the contact and `add` the contact again with the correct patient NRIC.
+</div>
+
 Examples:
-* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother`
+* `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother` adds an emergency contact to patient with NRIC `S1234567L`.
+
 
 
 ### Viewing Contact Information: `view t/contact`
@@ -250,25 +276,28 @@ Views a patient’s emergency contacts from MedBook.
 Format: `view t/contact i/NRIC`
 
 Examples:
-* `/view t/contact i/S1234567L`
+* `view t/contact i/S1234567L`
 
 ### Editing Contact Information: `edit`
 
 Edits an existing contact information entry in MedBook when a patient's list of contact information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Contact Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
 
-* Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the contact at the specified INDEX. The index refers to the index number shown in the displayed patient list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 * `view t/contact` followed by `edit 1 n/John` updates name of first contact information entry displayed on the screen.
 
-Caution*: Editing a contact will overwrite the old data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a contact will overwrite the old data.
+</div>
 
 ### Adding Medical Information: `add t/medical`
 Adds a patient's medical information to MedBook.
@@ -297,6 +326,7 @@ Examples:
 
 Edits an existing medical information entry in MedBook when a patient's list of medical information entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Medical Information.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT]
 [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
@@ -308,7 +338,7 @@ Examples:
 
 Adds a consultation report of a patient to MedBook.
 
-Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE nt/NOTES`
+Format: `add t/consultation i/NRIC dt/DATE tm/TIME dg/DIAGNOSIS fe/FEE [nt/NOTES]`
 
 Examples:
 * `add t/consultation i/S1234567L dt/2021-09-15 tm/18-00 dg/Inflammation in the throat and windpipe, short and shallow breath, laboured breathing. Most likely has Upper Respiratory Infection. fe/54.00 nt/Patient is having fever.`
@@ -325,12 +355,13 @@ Examples:
 ### Editing Consultation Information: `edit`
 
 Edits an existing consultation entry in MedBook when a list of consultation entries is being displayed.
-This is with the exception of the NRIC field, which cannot be modified after creation of Consultation.
+This is with the exception of the NRIC field, which cannot be modified after creation of Consultation. 
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [dt/DATE] [tm/TIME] [dg/DIAGNOSIS] [fe/FEE] [nt/NOTES]`
 
 Examples:
-* `view t/consultation i/S1234567L` followed by `edit 1 dt/19-02-2019 tm/19-00` updates date and time of first consultation entry displayed on the screen.
+* `view t/consultation i/S1234567L` followed by `edit 1 dt/2019-08-10 tm/19-00` updates date and time of first consultation entry displayed on the screen.
 
 
 
@@ -339,6 +370,9 @@ Examples:
 Adds a medical prescription of a patient to MedBook.
 
 Format: `add t/prescription i/NRIC n/DRUG_NAME dt/DATE s/INSTRUCTION`
+
+* Adding prescription with same DRUG_NAME is allowed
+* DATE should in the format of YYYY-MM-DD
 
 Examples:
 * `add t/prescription i/S1234567L n/Amoxicillin dt/2021-09-15 s/2 tablets after meal everyday.`
@@ -349,6 +383,8 @@ Views a medical prescription of a patient in MedBook.
 
 Format: `view t/prescription i/NRIC`
 
+* Note that NRIC is necessary
+
 Examples:
 * `view t/prescription i/S1234567L`
 
@@ -356,6 +392,7 @@ Examples:
 
 Edits an existing prescription entry in MedBook when a list of prescription entries is being displayed.
 This is with the exception of the NRIC field, which cannot be modified after creation of Prescription.
+At least one field must be filled for edit command to be valid.
 
 Format:  `edit INDEX [n/DRUG_NAME] [dt/DATE] [s/INSTRUCTION]`
 
@@ -379,6 +416,17 @@ Format: `view t/test i/NRIC`
 
 Examples:
 * `view t/test i/S1234567L`
+
+### Editing Test Result: `edit`
+
+Edits an existing test result entry in MedBook when a list of test result entries is being displayed.
+This is with the exception of the NRIC field, which cannot be modified after creation of Test Result.
+At least one field must be filled for edit command to be valid.
+
+Format:  `edit INDEX [td/TEST_DATE] [mt/MEDICAL_TEST] [r/TEST_RESULT]`
+
+Examples:
+* `view t/test i/S1234567L` followed by `edit 1 r/Brain damage` updates result field of first test result entry displayed on the screen.
 
 
 
@@ -406,7 +454,7 @@ Due to security reason, there is no way to reset to password. To continue using 
 <h6 markdown="1" class="card-title">What happens if I accidentally remove `password.enc`?</h6>
 Unfortunately, the encrypted data will be lost along with your password. However, you can restore your data if you have `medbook.json` with you. Make sure you place them in `HOME_DIRECTORY of MedBook.jar/data/` before launching the app. When you start MedBook again, you will be asked to set up a new password.
 
-We highly discourage users to temper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
+We highly discourage users to tamper with `password.enc` for security reason as any encryption can be broken given sufficient amount of time. 
 </div>
 </div>
 <div class="card mb-3">
@@ -422,14 +470,14 @@ If you understood what you are dealing with, you may proceed with cautions. We r
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | View Help                     | `help`                                                                                                                                                                                        |
 | Add a Patient                 | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
-| List all Patients             | `view`                                                                                                                                                                                        |
+| View all Patients             | `view`                                                                                                                                                                                        |
 | Edit a Patient                | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                                              |
 | View Summary of a Patient     | `view i/NRIC`                                                                                                                                                                                 |
 | Delete any Entry              | `delete INDEX`                                                                                                                                                                                |
 | Finding any Entry             | `find KEYWORD`                                                                                                                                                                                |
 | Add Contact Information       | `add t/contact i/NRIC n/NAME r/RELATIONSHIP p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`                                                                                                     |
 | View Contact Information      | `view t/contact i/NRIC`                                                                                                                                                                       |
-| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                                                                                                                  |
+| Edit Contact Information      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`                                                                                                                                  |
 | Add Medical Information       | `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]` |
 | View Medical Information      | `view t/medical [i/NRIC]`                                                                                                                                                                     |
 | Edit Medical Information      | `edit INDEX [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`           |
