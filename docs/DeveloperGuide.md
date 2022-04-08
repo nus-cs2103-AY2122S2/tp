@@ -464,8 +464,7 @@ Actor: User
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-<aside>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 💡 **Note:** Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
 </div>
 
