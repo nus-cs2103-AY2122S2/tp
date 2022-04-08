@@ -368,7 +368,7 @@ Pros:
 - Less code duplication as we can reuse the logic that is used for filtering other entities
 
 Cons:
-- Increased coupling. For example, originally, the `add` command looks for the patient in the latest filtered list of patients to add new entities to. Since at the summary screen the list is in filtered state, we cannot add to other patients apart from one being viewed. The `Add` command had to be modified as a result.
+- Increased coupling. For example, originally, `AddXXXCommand`s look for the patient in the latest filtered list of patients to add new entities to. Since at the summary screen the list is in the filtered state, we cannot add to other patients apart from the one being viewed. `AddXXXCommand`s had to be modified as a result.
 
 Alternative 2: Having a dedicated model class `Summary`. A `Summary` object holds all needed information to be displayed. The `Summary` object is to be created by iterating over all existing unfiltered lists in `MedBook`.
 
