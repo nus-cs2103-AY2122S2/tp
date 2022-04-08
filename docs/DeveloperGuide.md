@@ -1059,7 +1059,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. The task name already is assigned to the present.
+* 1c. The student has already been assigned with a task that has the same name.
 
     * 1c1. TAPA shows an error message.
 
