@@ -1072,7 +1072,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list students.
 2. TAPA shows a list of students.
-3. User requests to delete a task that was assigned to a student by specifying their studentId and the index of the task or delete a task assigned to all students taking a certain module by specifying the module code and task name.
+3. User requests to delete a task that was assigned to a student. (This can be done for an individual student or for all the students taking the same module.)
 4. TAPA updates the details of the student with the supplied details.
 
    Use case ends.
