@@ -980,6 +980,30 @@ More information on usage: [deltask command](UserGuide.html#delete-a-task-in-a-g
    2. Test case: `deltask task/write proposal g/NUSSU` <br>
       Expected: No task is deleted from a group. Error details shown in the error message.
 
+
+### Displaying tasks in a group
+
+Command: `viewtask` <br>
+More information on usage: [viewtask command](UserGuide.html#displays-the-tasks-in-a-group-viewtask)
+
+1. Viewing tasks in an existing group in ArchDuke.
+
+    1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke.
+
+    2. Test case: `viewtask g/NUS Fintech Society` <br>
+       Expected: All tasks added to the group `NUS Fintech Society` is shown on the result display.
+
+    3. Other incorrect view contact commands to try: `viewtask`, `viewtask g/`, `viewtask t/` etc. <br>
+       Expected: No task is shown on the result display. Error details shown in the error message.
+
+2. Viewing tasks in a group that does not exist.
+
+    1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
+
+    2. Test case: `viewtask g/NUSSU` <br>
+       Expected: No task is shown on the result display. Error details shown in the error message.
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
