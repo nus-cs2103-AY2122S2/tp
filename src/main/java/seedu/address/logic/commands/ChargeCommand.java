@@ -20,7 +20,7 @@ import seedu.address.model.pet.Pet;
 
 
 /**
- * Computes a month's charge of a pet identified using it's displayed index from the address book.
+ * Computes a month's charge of a pet identified using it's displayed index from WoofAreYou.
  */
 public class ChargeCommand extends Command {
 

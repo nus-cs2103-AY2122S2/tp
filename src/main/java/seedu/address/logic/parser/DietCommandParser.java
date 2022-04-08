@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIET;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DietCommand;
@@ -24,16 +25,24 @@ public class DietCommandParser implements Parser<DietCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_DIET);
+        boolean isDietMissing = argMultimap.getValue(PREFIX_DIET).isEmpty();
+        if (isDietMissing) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DietCommand.MESSAGE_USAGE));
+        }
+
+        Diet diet;
+        try {
+            diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).orElse(""));
+        } catch (ParseException e) {
+            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
+        }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DietCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
-
-        Diet diet = ParserUtil.parseDiet(argMultimap.getValue(PREFIX_DIET).get());
 
         return new DietCommand(index, diet);
     }

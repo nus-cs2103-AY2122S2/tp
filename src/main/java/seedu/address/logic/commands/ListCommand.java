@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Lists all pets in the address book to the user.
+ * Lists all pets in WoofAreYou to the pet owner.
  */
 public class ListCommand extends Command {
 

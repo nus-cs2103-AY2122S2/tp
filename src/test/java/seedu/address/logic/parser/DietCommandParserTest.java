@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DIET_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DIET_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DIET_AMY;
@@ -19,8 +18,7 @@ public class DietCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // diet with special characters
-        assertParseFailure(parser, INVALID_DIET_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DietCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, INVALID_DIET_DESC, Diet.MESSAGE_CONSTRAINTS);
     }
 
     @Test

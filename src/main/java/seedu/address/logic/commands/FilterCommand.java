@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.filter.FilterByContainsFilterWordPredicate;
 
 /**
- * Filters all pets in address book by field provided.
+ * Filters all pets in WoofAreYou based on the field provided by the pet owner.
  * Filter word matching is case-insensitive.
  * Fields can only be from a defined set.
  */
