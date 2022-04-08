@@ -106,6 +106,54 @@ Peter with tags `classmates` and `friends`.
 * `add n/Aaron p/2345678 e/aaron@gmail.com`
 This command will not get executed successfully, because of the missing required field `a/ADDRESS`.
 
+>### Input Validation Rules<a name="input-validation"></a>
+>
+>There are certain rules that users should follow for input to be considered valid. Please refer to the following.
+> 
+>####NAME
+>NAME is case-insensitive and it should only contain alphanumeric characters and spaces (maximum 50 characters including spaces), and it should not be blank.
+>
+>* Valid Examples - `Alice Tan`, `Alice3tan`
+>* Invalid Examples - `peter*`
+>
+>####EMAIL 
+>Emails should be of the format local-part@domain and adhere to the following constraints: 
+>1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
+>2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:
+> end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+>
+>* Valid Examples - `aliceTan@gmail.com`, `123@145` 
+>* Invalid Examples - `peterjack@@example.com`, `peterjack@-`
+>
+>####PHONE
+>Phone numbers should only contain numbers, and it should be at least 3 digits long
+>
+>* Valid Examples - `12341234`, `123`
+>* Invalid Examples - `@123123`, `dasd123 123`
+>
+>####ADDRESS
+>Addresses can take any values, and it should not be blank
+>
+>* Valid Examples - `Blk 456, Den Road, #01-355`, `-`
+>* Invalid Examples - ``
+>
+>####TELEGRAM 
+>Telegram ID should only contain alphanumeric characters and underscore. It should be one word and must not start with an underscore.
+>
+>* Valid Examples - `alice_test_1234`, `alice123`
+>* Invalid Examples - `_alice`, `@`
+>
+>####COURSE
+>Course should only contain alphabet characters and spaces.
+>
+>* Valid Examples - `Computer Science and Mathematics`, `Math`
+>* Invalid Examples - `123`, `@`
+>
+>####MATRIC CARD
+>Matric Card should only contain alphanumeric characters, and it should be one word
+>
+>* Valid Examples - `A1231234E`
+>* Invalid Examples - `alice test`, `@`
 
 ### Edit a person : `edit`<a name="edit-a-person"></a>
 
