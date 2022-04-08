@@ -879,7 +879,28 @@ More information on usage: [deassign command](UserGuide.html#deassign-a-student-
    2. Test case: Similar to previous. <br>
    Expected: Similar to previous.
 
+### Viewing student contacts from a group
 
+Command: `viewcontact` <br>
+More information on usage: [viewcontact command](UserGuide.html#view-student-contacts-in-an-existing-group-viewcontact)
+
+1. Viewing student contacts in an existing group in ArchDuke.
+
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` in ArchDuke.
+   
+   2. Test case: `viewcontact g/NUS Fintech Society` <br>
+      Expected: All student contacts assigned to the group `NUS Fintech Society` is shown on the result display.
+
+   3. Other incorrect view contact commands to try: `viewcontact`, `viewcontact g/`, `viewcontact t/` etc. <br>
+      Expected: No student contact is shown on the result display. Error details shown in the error message.
+   
+2. Viewing student contacts in a group that does not exist.
+
+   1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
+   
+   2. Test case: `viewcontact g/NUSSU` <br>
+      Expected: No student contact is shown on the result display. Error details shown in the error message.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
