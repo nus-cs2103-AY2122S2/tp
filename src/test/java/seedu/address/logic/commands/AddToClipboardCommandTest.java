@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -89,18 +91,21 @@ class AddToClipboardCommandTest {
      */
     @Test
     void execute_personFound() throws HeadlessException {
-        String expectedMessage = AddToClipboardCommand.MESSAGE_SUCCESS;
-        NameExistsPredicate predicate = preparePredicate("Elle Meyer");
-        AddToClipboardCommand command = new AddToClipboardCommand(predicate);
         try {
+            //Checks if the environment has a clipboard to copy to. If not, return immediately.
             //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
             //so this test will be skipped.
-            expectedModel.updateFilteredPersonList(predicate);
-            assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         } catch (HeadlessException e) {
             return;
         }
+
+        String expectedMessage = AddToClipboardCommand.MESSAGE_SUCCESS;
+        NameExistsPredicate predicate = preparePredicate("Elle Meyer");
+        AddToClipboardCommand command = new AddToClipboardCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE), model.getFilteredPersonList());
     }
 
     /**
@@ -109,18 +114,21 @@ class AddToClipboardCommandTest {
      */
     @Test
     void execute_personNotFound() throws HeadlessException {
-        String expectedMessage = AddToClipboardCommand.MESSAGE_FAILURE;
-        NameExistsPredicate predicate = preparePredicate("Not Elle Meyer");
-        AddToClipboardCommand command = new AddToClipboardCommand(predicate);
         try {
+            //Checks if the environment has a clipboard to copy to. If not, return immediately.
             //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
             //so this test will be skipped.
-            expectedModel.updateFilteredPersonList(predicate);
-            assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         } catch (HeadlessException e) {
             return;
         }
+
+        String expectedMessage = AddToClipboardCommand.MESSAGE_FAILURE;
+        NameExistsPredicate predicate = preparePredicate("Not Elle Meyer");
+        AddToClipboardCommand command = new AddToClipboardCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     /**
@@ -129,18 +137,21 @@ class AddToClipboardCommandTest {
      */
     @Test
     void execute_indexFound() throws HeadlessException {
-        String expectedMessage = AddToClipboardCommand.MESSAGE_SUCCESS;
-        Person personToClip = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        AddToClipboardCommand command = new AddToClipboardCommand(INDEX_FIRST_PERSON);
         try {
+            //Checks if the environment has a clipboard to copy to. If not, return immediately.
             //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
             //so this test will be skipped.
-            expectedModel.updateFilteredPersonList(new NameExistsPredicate(personToClip.getName()));
-            assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            assertEquals(Arrays.asList(personToClip), model.getFilteredPersonList());
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         } catch (HeadlessException e) {
             return;
         }
+
+        String expectedMessage = AddToClipboardCommand.MESSAGE_SUCCESS;
+        Person personToClip = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        AddToClipboardCommand command = new AddToClipboardCommand(INDEX_FIRST_PERSON);
+        expectedModel.updateFilteredPersonList(new NameExistsPredicate(personToClip.getName()));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(personToClip), model.getFilteredPersonList());
     }
 
     /**
@@ -149,15 +160,18 @@ class AddToClipboardCommandTest {
      */
     @Test
     void execute_indexNotFound() throws HeadlessException {
-        String expectedMessage = AddToClipboardCommand.MESSAGE_FAILURE;
-        AddToClipboardCommand command = new AddToClipboardCommand(INDEX_FALSE);
         try {
+            //Checks if the environment has a clipboard to copy to. If not, return immediately.
             //This has to be implemented as automated testing on github does not have a "clipboard" to copy to,
             //so this test will be skipped.
-            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         } catch (HeadlessException e) {
             return;
         }
+
+        String expectedMessage = AddToClipboardCommand.MESSAGE_FAILURE;
+        AddToClipboardCommand command = new AddToClipboardCommand(INDEX_FALSE);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     /**
