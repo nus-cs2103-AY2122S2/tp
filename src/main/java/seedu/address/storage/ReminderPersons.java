@@ -79,10 +79,6 @@ public class ReminderPersons {
         return personReminderHashMap.get(person);
     }
 
-    public Reminder put(Person person, Reminder reminder) {
-        return personReminderHashMap.put(person, reminder);
-    }
-
     /**
      * Retrieves a {@code Set} view of the {@code Person} in this {@code HashMap}.
      */
