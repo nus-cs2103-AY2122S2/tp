@@ -63,7 +63,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests parsing of invalid command format from the execution of {@code LogicManager}.
+     * Tests the parsing of invalid command format from the execution of {@code LogicManager}.
      */
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
@@ -72,7 +72,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests parsing of command error from the execution of {@code LogicManager}.
+     * Tests the parsing of command error from the execution of {@code LogicManager}.
      */
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
@@ -81,7 +81,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests parsing of valid command from the execution of {@code LogicManager}.
+     * Tests the parsing of valid command from the execution of {@code LogicManager}.
      */
     @Test
     public void execute_validCommand_success() throws Exception {
@@ -90,7 +90,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests where storage throws IO exception from the execution of {@code LogicManager}.
+     * Tests if storage throws IO exception from the execution of {@code LogicManager}.
      */
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {

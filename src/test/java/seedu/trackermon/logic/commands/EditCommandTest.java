@@ -38,7 +38,7 @@ public class EditCommandTest {
     private final Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
 
     /**
-     * Tests the editing all fields from an unfiltered list from the execution of {@code EditCommand}.
+     * Tests the editing of all fields from an unfiltered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -55,7 +55,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Tests the editing some fields from an unfiltered list from the execution of {@code EditCommand}.
+     * Tests the editing of some fields from an unfiltered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -78,7 +78,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Tests the editing no fields from an unfiltered list from the execution of {@code EditCommand}.
+     * Tests the editing of no fields from an unfiltered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
@@ -93,7 +93,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Tests the editing fields from a filtered list from the execution of {@code EditCommand}.
+     * Tests the editing of fields from a filtered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_filteredList_success() {
@@ -113,7 +113,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Tests the editing to duplicate a show from an unfiltered list from the execution of {@code EditCommand}.
+     * Tests the editing of duplicate show from an unfiltered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_duplicateShowUnfilteredList_failure() {
@@ -125,7 +125,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Tests the editing to duplicate a show from a filtered list from the execution of {@code EditCommand}.
+     * Tests the editing of duplicate show from a filtered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_duplicateShowFilteredList_failure() {
@@ -140,7 +140,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Tests the editing an invalid from an unfiltered list from the execution of {@code EditCommand}.
+     * Tests the editing of an invalid index from an unfiltered list from the execution of {@code EditCommand}.
      */
     @Test
     public void execute_invalidShowIndexUnfilteredList_failure() {
@@ -152,7 +152,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Edits filtered list where index is larger than size of filtered list,
      * but smaller than size of show list
      */
     @Test
