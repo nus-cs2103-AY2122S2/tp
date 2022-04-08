@@ -54,9 +54,9 @@ For new users, it is highly recommended starting off from the `Quick Start` sect
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the HustleBook.
+   * **`add`**` n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the HustleBook.
 
-   * **`delete`**`John Doe` : Deletes `John Doe` from the list.
+   * **`delete`**` John Doe` : Deletes `John Doe` from the list.
 
    * **`clear`** : Deletes all contacts.
 
@@ -64,7 +64,7 @@ For new users, it is highly recommended starting off from the `Quick Start` sect
 
 6. Refer to the [Features](#features) below for details of each command.
 
-Now that you have set up the HustleBook, lets take a look at what Hustlebook offers to allow you to do the hustle without moving a muscle.
+Now that you have set up the HustleBook, lets take a look at what HustleBook offers to allow you to keep the hustle without lifting a muscle.
 
 --------------------------------------------------------------------------------------------------------------------
 
