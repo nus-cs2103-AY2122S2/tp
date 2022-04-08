@@ -82,7 +82,9 @@ Adds a player/ lineup/ schedule to MyGM.
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
-* The first character of every word in `NAME` should be capitalized. For example:`John Doe`
+* The first character of every word in `NAME` are recommended to be capitalized. For example:`John Doe`
+* The new name must not exist in MyGM already.
+* The new jersey number must not exist in MyGM already.
 
 Examples:
 * `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of John Doe, jersey number of 3, position of PG, weight of 69kg, height of 188cm, handphone number of 98765432
@@ -92,7 +94,8 @@ and email of johnd@example.com to the player list.`
 
 **To add a lineup:**
 Format: `add L/ n/LINEUP_NAME`
-* Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
+* Adds a lineup with the specified `LINEUP_NAME` inside MyGM. 
+* The new lineup name must not exist in MyGM already.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
@@ -103,7 +106,7 @@ Examples:
 Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a dd/mm/yyyy hhmm format.
-* The first character of every word in `SCHEDULE_NAME` should be capitalized. For example:`Starting Five`
+* The first character of every word in `SCHEDULE_NAME` are recommended to be capitalized. For example:`Starting Five`
 * Multiple schedules can be added to a same date due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the name and description section.
 
 Examples:
@@ -149,6 +152,7 @@ Format: `put P/PLAYER L/LINEUP`
 * Displays error if either the specified PLAYER or LINEUP does not exist.
 * Each player can join multiple lineups.
 * Each lineup can have up to five players.
+* Each player can not join the same lineup again.
 
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five.
@@ -273,7 +277,8 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
-
+* The new name must not exist in MyGM already.
+* The new jersey number must not exist in MyGM already.
 
 **To edit a lineup:**
 
