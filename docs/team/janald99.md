@@ -3,13 +3,13 @@ layout: page
 title: Janald's Project Portfolio Page
 ---
 
-### Project: AgenSee
+### Project: AgentSee
 
 AgentSee is a desktop application for property agents to efficiently manage their client information.
 
 Given below are my contributions to the project. I mainly contributed to the addition of Property classes and what they compose of, and discovered the match feature.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=janald99&brekdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=janald99&tabRepo=AY2122S2-CS2103T-T11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
   * `PropertyToBuy` class
   * `PropertyToSell` class
   * `PriceRange` class
@@ -61,7 +61,7 @@ Added the new match features:
 * **Contributions to team tasks**:
   * Plan the architecture of our project, by drawing visually and screen-sharing.
   * Summarize the work distribution and agenda of each meeting.
-  * Set up issues on GitHub](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues)
+  * Set up [issues](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues) on GitHub.
   * Standardize language across code and documents.
   * Added and refactored java docs.
   * Adjust message displays.
