@@ -17,7 +17,7 @@ import woofareyou.model.pet.Phone;
 import woofareyou.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code PetBook} with sample data.
  */
 public class SampleDataUtil {
 
@@ -47,7 +47,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyPetBook getSampleAddressBook() {
+    public static ReadOnlyPetBook getSamplePetBook() {
         PetBook sampleAb = new PetBook();
         for (Pet samplePet : getSamplePets()) {
             sampleAb.addPet(samplePet);

@@ -12,7 +12,7 @@ import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of PetBook data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -21,7 +21,7 @@ public class StorageManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code PetBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(PetBookStorage petBookStorage, UserPrefsStorage userPrefsStorage) {
         this.petBookStorage = petBookStorage;
@@ -46,7 +46,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ PetBook methods ==============================
 
     @Override
     public Path getPetBookFilePath() {
@@ -65,14 +65,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void savePetBook(ReadOnlyPetBook addressBook) throws IOException {
-        savePetBook(addressBook, petBookStorage.getPetBookFilePath());
+    public void savePetBook(ReadOnlyPetBook petBook) throws IOException {
+        savePetBook(petBook, petBookStorage.getPetBookFilePath());
     }
 
     @Override
-    public void savePetBook(ReadOnlyPetBook addressBook, Path filePath) throws IOException {
+    public void savePetBook(ReadOnlyPetBook petBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        petBookStorage.savePetBook(addressBook, filePath);
+        petBookStorage.savePetBook(petBook, filePath);
     }
 
 }

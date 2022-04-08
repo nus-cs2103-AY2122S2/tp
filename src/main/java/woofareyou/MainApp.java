@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyPetBook> addressBookOptional;
+        Optional<ReadOnlyPetBook> petBookOptional;
         ReadOnlyPetBook initialData;
         try {
-            addressBookOptional = storage.readPetBook();
-            if (!addressBookOptional.isPresent()) {
+            petBookOptional = storage.readPetBook();
+            if (!petBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = petBookOptional.orElseGet(SampleDataUtil::getSamplePetBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new PetBook();

@@ -30,7 +30,7 @@ public class PetBook implements ReadOnlyPetBook {
     public PetBook() {}
 
     /**
-     * Creates an AddressBook using the Pets in the {@code toBeCopied}
+     * Creates an PetBook using the Pets in the {@code toBeCopied}
      */
     public PetBook(ReadOnlyPetBook toBeCopied) {
         this();
