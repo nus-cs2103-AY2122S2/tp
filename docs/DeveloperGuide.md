@@ -689,7 +689,31 @@ After which, a new `SortCommand` object will be created, and is subsequently exe
 
 ![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
 
+### History Command
 
+#### Description
+
+The `history` command allows the users to view the list of students in TAPA, sorted by the number of incomplete tasks in **descending** order.
+During the execution of the `SORT` command, the user's input is being parsed in `AddressBookParser`.
+After which, a new `SortCommand` object will be created, and is subsequently executed by the `LogicManager`.
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
+
+### Undo Command
+
+#### Description
+
+The undo command is facilitated by 
+
+#### Implementation
+
+1. Upon receiving the user input,
+   the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 
 ### \[Proposed\] Undo/redo feature
 
