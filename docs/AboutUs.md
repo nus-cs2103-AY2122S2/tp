@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### James Yeap
@@ -17,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * [portfolio](team/jamesyeap.md)
 
 * Role: Developer
-* Responsibilities: `tbd`
+* Responsibilities: `Model`, `Storage` components
 
 ### Samuel Tee
 
@@ -27,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * [portfolio](team/kidsnd274.md)
 
 * Role: Developer
-* Responsibilities: `tbd`
+* Responsibilities: `UI`, `Logic` components
 
 ### Nyayapati Nikhil
 
@@ -36,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * [github](http://github.com/nnmoq)
 * [portfolio](team/nnmoq.md)
 * Role: Developer
-* Responsibilities: `tbd`
+* Responsibilities: `Model`, `Storage` components
 
 ### Ryan Low
 
@@ -46,4 +44,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * [Portfolio](team/ryan-l98.md)
 
 * Role: Developer
-* Responsibilities: `tbd`
+* Responsibilities: `Model`, `UI` components
