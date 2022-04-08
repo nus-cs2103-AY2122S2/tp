@@ -11,7 +11,6 @@ import static woofareyou.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.pet.Address;

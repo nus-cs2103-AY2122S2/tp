@@ -7,6 +7,7 @@ import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Appointment;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.PetBuilder;
-import woofareyou.testutil.TypicalPets;
+
 
 
 class AppointmentCommandTest {
@@ -27,7 +28,7 @@ class AppointmentCommandTest {
     private static final String APPOINTMENT_DATE_TIME_STUB = "02-04-2022 09:30";
     private static final String APPOINTMENT_LOCATION_STUB = "NUS Vet Clinic";
 
-    private Model model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addAppointmentUnfilteredList_success() {

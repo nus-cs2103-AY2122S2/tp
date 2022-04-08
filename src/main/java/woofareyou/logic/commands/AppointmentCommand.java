@@ -2,7 +2,6 @@ package woofareyou.logic.commands;
 
 import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
 
-
 import java.util.List;
 
 import woofareyou.commons.core.Messages;
