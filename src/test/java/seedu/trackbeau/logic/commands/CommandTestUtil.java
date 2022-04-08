@@ -5,15 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_CUSTOMERINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICEINDEX;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STARTTIME;
 import static seedu.trackbeau.model.customer.CustomerSearchContainsKeywordsPredicate.FIND_ATTRIBUTE_COUNT;
 import static seedu.trackbeau.testutil.Assert.assertThrows;
 
@@ -116,6 +119,18 @@ public class CommandTestUtil {
     public static final String INVALID_SERVICE_DESC = " " + PREFIX_SERVICES; //empty string not allowed for tags
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGIES; //empty string not allowed for tags
     public static final String INVALID_DATE = " " + PREFIX_DATE + "10-10"; //missing year
+
+    //Booking
+    public static final String CUSTOMERINDEX_FIRST = " " + PREFIX_CUSTOMERINDEX + "1";
+    public static final String CUSTOMERINDEX_SECOND = " " + PREFIX_CUSTOMERINDEX + "2";
+    public static final String SERVICEINDEX_FIRST = " " + PREFIX_SERVICEINDEX + "1";
+    public static final String SERVICEINDEX_SECOND = " " + PREFIX_SERVICEINDEX + "2";
+    public static final String DATETIME_DESC1 = " " + PREFIX_STARTTIME + "10-10-2022 10:00";
+    public static final String DATETIME_DESC2 = " " + PREFIX_STARTTIME + "20-10-2022 10:00";
+
+    public static final String INVALID_CUSTOMERINDEX = " " + PREFIX_CUSTOMERINDEX + "-1";
+    public static final String INVALID_SERVICEINDEX = " " + PREFIX_SERVICEINDEX + "-1";
+    public static final String INVALID_DATETIME = " " + PREFIX_STARTTIME + "10-30-2022 10:00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
