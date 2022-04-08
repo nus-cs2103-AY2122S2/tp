@@ -55,8 +55,8 @@ Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Sched
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
-* Commands are case sensitive. `Add` is considered as invalid commands, the correct command should be in lower case.
-* Parameters are case sensitive. `John Doe` and `joHN dOE` are considered as different person.
+* Commands are case sensitive. `Add` is considered as invalid command, the correct command should be in lower case.
+* Parameters are case sensitive. `John Doe` and `joHN dOE` are considered as different people.
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
 * If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
