@@ -574,6 +574,20 @@ The sequence diagram is as follows:
 
 The multiple commands executed will return a `CommandResult` which contains a list of feedback messages of the results executed combined all together and returned as `feedbackToUser`
 
+### \[Not implemented\] Tag Finding Feature
+
+The proposed find tag feature is similar to `findperson` where the user can search for tags from the specified keywords. This feature was not implemented as our target user need not maintain a large number of tabs (compared to persons and appointments). However, if this feature is required in the future, the developer simply needs to implement the `Logic` components as the required components in `Model` already exists.
+Similar to the system used for person, `Tag` filtering is facilitated by `FilteredList` from the JavaFX library which is implemented at the `ModelManager` level, and the related functions are:
+
+* `Model#updateFilteredTagList()`
+* `Model#getFilteredTagList()`
+
+The filtering is implemented at the `ModelManager` level as it is the highest common level between the `Logic` and `Ui` components which allows the filtering to be centralized, while allowing the lower level classes in the `Model` component access the unfiltered list of the `Tag` object.
+
+The sequence diagrams below illustrates the proposed implementations to access the tag filtering functionality.
+
+![Tag Find](images/TagFindSequenceDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
