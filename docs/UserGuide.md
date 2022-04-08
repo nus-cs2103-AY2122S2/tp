@@ -223,7 +223,7 @@ Edits a student's information in TAPA.
     * the specified index is a negative number
     * the specified index is larger than the number of students in TAPA
     * the field to be edited is in an invalid format
-    
+  
 **Example**:
 * `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
     * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
@@ -322,9 +322,9 @@ Deletes a task from a particular student's list of tasks.
 
 **Format**: `deleteTask i/STUDENT_ID idx/INDEX` (or) `deleteTask m/MODULE_CODE tn/TASK_NAME`
 
-An error message will be displayed if: 
+An error message will be displayed if:
 * the specified index is 0
-* the specified index is a negative number 
+* the specified index is a negative number
 * the specified index is larger than the number of tasks for that particular student
 * the student with the given student ID does not exist
 * none of the students taking the module had previously been assigned the task with the given task name

@@ -17,7 +17,7 @@ Given below are my contributions to the project.
   * Added the ability to assign tasks to a single person by using their studentId and task name. [#53](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/53)
     * What it does: The command adds the task to the list of tasks assigned to the person with the given studentId.
     * Justification: This would give TA the ability to add tasks to individual students.
-    * Highlights: The `Task` and `TaskList` classes were also created. A `Task` object contains the task name, and information about whether the task was done. A `TaskList` object contains a list of tasks that are assigned to a person.  
+    * Highlights: The `Task` and `TaskList` classes were also created. A `Task` object contains the task name, and information about whether the task was done. A `TaskList` object contains a list of tasks that are assigned to a person.
 
 * **New Feature**:
   * Added the ability to delete tasks from previously assigned to a single person. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
@@ -29,12 +29,12 @@ Given below are my contributions to the project.
   * Added the ability to delete tasks from previously assigned to all the persons taking the same module. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
     * What it does: The command deletes the task assigned to students taking a certain module. The module code and task name should be specified.
     * Justification: If the TA had incorrectly assigned a task, instead of deleting the task for each student taking the module individually by using their student code, and finding out the index of that particular task for student, the TA could directly use this command to delete this task for all the students under this module, if they were assigned the task.
-    * Highlights: I modified the implementation of `DeleteTask` that is executed by specifying studentId and index, to include this command. 
+    * Highlights: I modified the implementation of `DeleteTask` that is executed by specifying studentId and index, to include this command.
 
 
 * **Enhancements to existing features**:
-    * Modified the list command to display the students in alphabetical order, sorted by their name. This feature allows the TA to view all the students the TA is assigned to for this semester. [#49](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/49) 
-    
+    * Modified the list command to display the students in alphabetical order, sorted by their name. This feature allows the TA to view all the students the TA is assigned to for this semester. [#49](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/49)
+
 
 * **Contribution to team-based tasks**:
   * Joint effort in renaming the product to "TAPA".
@@ -55,4 +55,4 @@ Given below are my contributions to the project.
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [#47](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/47), [#50](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/50), [#52](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/52), [#129](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/129), [#189](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/189), [#230](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/230), [#231](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/231).
     * Reported a total of 7 bugs and suggestions for other teams in the class (as seen [here](https://github.com/harish-coding/ped/issues)).
-    
+
