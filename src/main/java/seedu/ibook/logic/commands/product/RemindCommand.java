@@ -51,4 +51,18 @@ public class RemindCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS
                 + String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof RemindCommand)) {
+            return false;
+        }
+
+        assert expiryDate != null;
+        return expiryDate.equals(((RemindCommand) other).expiryDate);
+    }
 }
