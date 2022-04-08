@@ -27,7 +27,7 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see woofareyou.model.Model#getAddressBook()
+     * @see woofareyou.model.Model#getPetBook()
      */
     ReadOnlyPetBook getAddressBook();
 

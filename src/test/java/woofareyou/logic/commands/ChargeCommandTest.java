@@ -79,7 +79,7 @@ class ChargeCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 200.50, month, year)
                         + attendance);
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(chargeCommand, expectedModel, expectedCommandResult, expectedModel);
@@ -106,7 +106,7 @@ class ChargeCommandTest {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(ChargeCommand.MESSAGE_COMPUTE_CHARGE_SUCCESS, petName, 401.00, month, year)
                         + attendance);
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPet, petToMarkPresent);
 
         assertCommandSuccess(chargeCommand, expectedModel, expectedCommandResult, expectedModel);

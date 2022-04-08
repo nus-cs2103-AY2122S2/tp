@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' pet book file path.
      */
-    Path getAddressBookFilePath();
+    Path getPetBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' pet book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setPetBookFilePath(Path petBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces pet book data with the data in {@code petBook}.
      */
-    void setAddressBook(ReadOnlyPetBook addressBook);
+    void setPetBook(ReadOnlyPetBook petBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyPetBook getAddressBook();
+    /** Returns the PetBook */
+    ReadOnlyPetBook getPetBook();
 
     /**
-     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     * Returns true if a pet with the same identity as {@code pet} exists in the pet book.
      */
     boolean hasPet(Pet pet);
 
     /**
      * Deletes the given pet.
-     * The pet must exist in the address book.
+     * The pet must exist in the pet book.
      */
     void deletePet(Pet target);
 
     /**
      * Adds the given pet.
-     * {@code pet} must not already exist in the address book.
+     * {@code pet} must not already exist in the pet book.
      */
     void addPet(Pet pet);
 
     /**
      * Replaces the given pet {@code target} with {@code editedPet}.
-     * {@code target} must exist in the address book.
-     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     * {@code target} must exist in the pet book.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in the pet book.
      */
     void setPet(Pet target, Pet editedPet);
 
@@ -105,7 +105,7 @@ public interface Model {
     void sortPetList(String field);
 
     /**
-     * Restores the previous address book state from its history.
+     * Restores the previous pet book state from its history.
      */
     ReadOnlyPetBook undo() throws Exception;
 

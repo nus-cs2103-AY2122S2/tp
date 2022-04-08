@@ -198,11 +198,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        PetBook expectedPetBook = new PetBook(actualModel.getAddressBook());
+        PetBook expectedPetBook = new PetBook(actualModel.getPetBook());
         List<Pet> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPetList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedPetBook, actualModel.getAddressBook());
+        assertEquals(expectedPetBook, actualModel.getPetBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPetList());
     }
 

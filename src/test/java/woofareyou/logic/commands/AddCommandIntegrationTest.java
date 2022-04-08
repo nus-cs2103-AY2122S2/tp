@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
     public void execute_newPet_success() {
         Pet validPet = new PetBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPetBook(), new UserPrefs());
         expectedModel.addPet(validPet);
 
         assertCommandSuccess(new AddCommand(validPet), model,
@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePet_throwsCommandException() {
-        Pet petInList = model.getAddressBook().getPetList().get(0);
+        Pet petInList = model.getPetBook().getPetList().get(0);
         assertCommandFailure(new AddCommand(petInList), model, AddCommand.MESSAGE_DUPLICATE_PET);
     }
 

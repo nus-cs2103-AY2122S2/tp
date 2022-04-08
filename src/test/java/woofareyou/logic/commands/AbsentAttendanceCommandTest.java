@@ -53,7 +53,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPet, petToMarkAbsent);
 
@@ -82,7 +82,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedFailureMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(thirdPet, petToMarkAbsent);
 
         assertCommandFailure(absentAttendanceCommand, model, expectedMessage);
@@ -104,7 +104,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedFailureMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(thirdPet, petToMarkAbsent);
 
         assertCommandFailure(absentAttendanceCommand, model, expectedMessage);
@@ -126,7 +126,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(secondPet, petToMarkAbsent);
 
         assertCommandSuccess(absentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -148,7 +148,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(secondPet, petToMarkAbsent);
 
@@ -171,7 +171,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(fourthPet, petToMarkAbsent);
 
         assertCommandSuccess(absentAttendanceCommand, model, expectedMessage, expectedModel);
@@ -193,7 +193,7 @@ public class AbsentAttendanceCommandTest {
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(fourthPet, petToMarkAbsent);
 

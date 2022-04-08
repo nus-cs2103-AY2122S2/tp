@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.GuiSettings;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
-import woofareyou.testutil.AddressBookBuilder;
+import woofareyou.testutil.PetBookBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new PetBook(), new PetBook(modelManager.getAddressBook()));
+        assertEquals(new PetBook(), new PetBook(modelManager.getPetBook()));
     }
 
     @Test
@@ -62,14 +62,14 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setPetBookFilePath(null));
     }
 
     @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setPetBookFilePath(path);
+        assertEquals(path, modelManager.getPetBookFilePath());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        PetBook petBook = new AddressBookBuilder().withPet(BOBA).withPet(PIZZA).build();
+        PetBook petBook = new PetBookBuilder().withPet(BOBA).withPet(PIZZA).build();
         PetBook differentPetBook = new PetBook();
         UserPrefs userPrefs = new UserPrefs();
 

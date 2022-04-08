@@ -40,7 +40,7 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_DELETE_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPerson, editedPerson);
 
@@ -98,7 +98,7 @@ class DietCommandTest {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         DietCommand remarkCommand = new DietCommand(outOfBoundIndex, new Diet(VALID_DIET_BOB));
 

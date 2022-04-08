@@ -44,7 +44,7 @@ class AppointmentCommandTest {
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ class AppointmentCommandTest {
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
@@ -80,7 +80,7 @@ class AppointmentCommandTest {
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPerson, editedPerson);
 
@@ -105,7 +105,7 @@ class AppointmentCommandTest {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(outOfBoundIndex,
                 new Appointment());

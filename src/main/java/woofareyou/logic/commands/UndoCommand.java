@@ -28,7 +28,7 @@ public class UndoCommand extends Command {
         requireNonNull(model);
         try {
             ReadOnlyPetBook currentAddressBook = new PetBook(model.undo());
-            model.setAddressBook(currentAddressBook);
+            model.setPetBook(currentAddressBook);
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (Exception e) {
             throw new CommandException(MESSAGE_NO_UNDO);

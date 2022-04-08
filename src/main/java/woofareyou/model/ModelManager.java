@@ -84,12 +84,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getPetBookFilePath() {
         return userPrefs.getPetBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setPetBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setPetBookFilePath(addressBookFilePath);
     }
@@ -97,12 +97,12 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyPetBook addressBook) {
+    public void setPetBook(ReadOnlyPetBook addressBook) {
         this.petBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyPetBook getAddressBook() {
+    public ReadOnlyPetBook getPetBook() {
         return petBook;
     }
 
@@ -115,13 +115,13 @@ public class ModelManager implements Model {
     @Override
     public void deletePet(Pet target) {
         petBook.removePet(target);
-        this.versionedAddressBook.commit(this.getAddressBook());
+        this.versionedAddressBook.commit(this.getPetBook());
     }
 
     @Override
     public void addPet(Pet pet) {
         petBook.addPet(pet);
-        this.versionedAddressBook.commit(this.getAddressBook());
+        this.versionedAddressBook.commit(this.getPetBook());
         updateFilteredPetList();
     }
 
@@ -129,7 +129,7 @@ public class ModelManager implements Model {
     public void setPet(Pet target, Pet editedPet) {
         requireAllNonNull(target, editedPet);
         petBook.setPet(target, editedPet);
-        this.versionedAddressBook.commit(this.getAddressBook());
+        this.versionedAddressBook.commit(this.getPetBook());
     }
 
     /** Method that sorts the pet list via the sortPets() command in addressBook. **/
@@ -137,7 +137,7 @@ public class ModelManager implements Model {
     public void sortPetList(String field) {
         requireNonNull(field);
         petBook.sortPets(field);
-        this.versionedAddressBook.commit(this.getAddressBook());
+        this.versionedAddressBook.commit(this.getPetBook());
     }
 
 

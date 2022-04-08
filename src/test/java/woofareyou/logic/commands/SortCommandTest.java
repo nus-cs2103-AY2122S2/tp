@@ -22,7 +22,7 @@ public class SortCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalPetBook(), new UserPrefs());
-        expectedModel = new ModelManager(new PetBook(model.getAddressBook()), new UserPrefs(),
+        expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
     }
 

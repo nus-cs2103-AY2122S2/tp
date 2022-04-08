@@ -38,7 +38,7 @@ public class UndoCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalPetBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getPetBook(), new UserPrefs());
     }
 
     /**
