@@ -37,9 +37,11 @@ public class CommandTestUtil {
 
     public static final String VALID_COMPANY_BIG_BANK = "Big Bank";
     public static final String VALID_COMPANY_JANICE_STREET = "Janice Street";
+    public static final String VALID_COMPANY_SHOPSG = "shopSG";
 
     public static final String VALID_EVENT_INTERVIEW_BIG_BANK = "Big Bank Interview";
     public static final String VALID_EVENT_INTERVIEW_JANICE_STREET = "Janice Street Interview";
+    public static final String VALID_EVENT_INTERVIEW_SHOPSG = "shopSG Interview";
 
     public static final String VALID_PHONE_A = "11111111";
     public static final String VALID_PHONE_B = "22222222";
