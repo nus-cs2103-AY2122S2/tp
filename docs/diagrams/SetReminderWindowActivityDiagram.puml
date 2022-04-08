@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+
+start
+:User sets the reminder window;
+:Parse command;
+if () then ([valid command format])
+    :Parse window;
+    if () then ([valid window (0 < window < 31)])
+        :Response box shows that the reminder window\n has been updated;
+    else ([else])
+        :Response box shows that
+        the window is invalid;
+    endif
+else ([else])
+    :Response box shows that the command format is invalid,
+    and the details of SetReminderWindow command;
+endif
+stop
+
+@enduml

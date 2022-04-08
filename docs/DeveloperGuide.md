@@ -23,6 +23,8 @@ title: Developer Guide
         * [Design considerations](#design-considerations-delete)
     * [Reminder feature](#reminder-feature)
         * [Implementation](#implementation-reminder)
+    * [Set reminder window feature](#set-reminder-window-feature)
+        * [Implementation](#implementation-set-reminder-window)
     * [Favourite feature](#favourite-feature)
         * [Implementation](#implementation-favourite)
         * [Design considerations](#design-considerations-favourite)
@@ -203,8 +205,8 @@ The `find` feature allows users to filter the company list to find roles by spec
 Given below is an example usage scenario and how the find feature behaves at each step:
 1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
 2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
-4. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
-5. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+3. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
+4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
 
 The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
 
@@ -248,7 +250,7 @@ an inner class `EditRoleDescriptor` that holds the changes to fields of the `Rol
 Given below is an example usage scenario and how the edit role feature behaves at each step:
 1. The user executes the command `editRole 1 1 d/react js` to edit the description in the 1<sup>st</sup> role from the 1<sup>st</sup> company.
 2. Then the `EditRoleCommandParser#parse()` creates an `EditRoleDescriptor` object with fields to be modified such as the description `react js` for the `EditRoleCommand`.
-3. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+3. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
 
 The following sequence diagram shows how the `editRole` command operation works with the valid user input `editRole 1 1 d/react js`:
 ![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)  
@@ -289,10 +291,10 @@ The following sequence diagram shows how the `deleteRole` command operation work
 
 1. The user first enters the input `deleteRole 1 1`, the `CompayListParser#parseCommand()` method parses the information `1 1` to `DeleteRoleCommandParser` using the method `parse()` based on the keyword `deleteRole`.
 2. The `DeleteRoleCommandParser#parse()` method creates an instance of `DeleteCommand` by passing the company index and role index of the role that is to be deleted.
-4. The `DeleteRoleCommand` object is returned to the `LogicManager` and invokes the `DeleteRoleCommand#execute()` method to implement the deletion.
-5. The  `DeleteRoleCommand#execute()` checks the validity of both the indexes, and invokes the `Model#deleteRole()` method using the stored company index and role index.
-6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
-7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
+3. The `DeleteRoleCommand` object is returned to the `LogicManager` and invokes the `DeleteRoleCommand#execute()` method to implement the deletion.
+4. The  `DeleteRoleCommand#execute()` checks the validity of both the indexes, and invokes the `Model#deleteRole()` method using the stored company index and role index.
+5. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
+6. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
 
 
 ### Reminder feature <a id="reminder-feature"></a>
@@ -316,6 +318,28 @@ The following sequence diagram shows how the reminder feature works:
 The following activity diagram summarises what happens when the user opens the application to see upcoming reminders:
 ![Activity diagram of the Reminder feature](images/ReminderActivityDiagram.png)
 
+### Set reminder window feature <a id="set-reminder-window-feature"></a>
+
+The `setWindow` feature allows users to set the reminder window to a specific number of days. Any roles stored in the company list that fall within the set window will be displayed in the reminder pane that automatically opens up on start.
+
+#### Implementation <a id="implementation-set-reminder-window"></a>
+
+![UML diagram of the SetWindow feature](images/SetReminderWindowDiagram.png)
+
+Given below is an example usage scenario and how the set reminder window feature behaves at each step:
+1. The user executes the command `setWindow 14` to set the reminder window to 14 days.
+2. Then the `SetReminderWindowCommandParser#parse()` creates an instance of `SetReminderWindowCommand` by passing the number of days to which the reminder window will be set.
+3. The `SetReminderWindowCommand#execute()` method will update the `model` using the `Model#setReminderWindow()` method, which consequently updates `userPrefs` by calling the `UserPrefs#setReminderWindow()` method to update the reminder window as stored in the user preferences.
+4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
+
+The following sequence diagram shows how the `setWindow` command operation works with the user input `setWindow 14`:
+
+![UML sequence diagram of the SetWindow feature](images/SetReminderWindowSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `setWindow` command:
+
+![UML activity diagram of the SetWindow feature](images/SetReminderWindowActivityDiagram.png)
+
 ### Favourite feature <a id="favourite-feature"></a>
 
 The `favourite` feature allows users to highlight specific companies. Favourited companies are indicated using a star beside their company name in the GUI.
@@ -327,9 +351,9 @@ The `favourite` feature allows users to highlight specific companies. Favourited
 Given below is an example usage scenario and how the favourite feature behaves at each step:
 1. The user executes the command `favourite 1` to favourite the first company within the displayed company list.
 2. Then the `FavouriteCompanyCommandParser#parse()` creates an instance of `FavouriteCompanyCommand` by passing the company index to be favourited.
-4. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
-5. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
-6. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+3. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
+4. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
+5. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
 
 The following sequence diagram shows how the `favourite` command operation works with the user input `favourite 1`:
 
@@ -610,7 +634,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `favourite 1`
     1. Expected: First company in the displayed company list is not favourited again as it is already favourited.
        The response box shows a message indicating that the company is already favourited.
-3. Other incorrect test cases to try: `favourite`, `favourite x` where x is an integer larger than the size of the company list or negative integer values.
+4. Other incorrect test cases to try: `favourite`, `favourite x` where x is an integer larger than the size of the company list or negative integer values.
     1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 ### Unfavouriting a company <a id="unfavouriting-a-company"></a>
@@ -621,7 +645,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `unfavourite 2`
     1. Expected: Second company in the displayed company list is not unfavourited as it is already unfavourited.
        The response box shows a message indicating that the company is already unfavourited.
-3. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
+4. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
     1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 
