@@ -9,7 +9,7 @@ WoofAreYou is a desktop app for pet daycare owners to handle the administrative 
 
 Given below are my contributions to the project:
 
-* **Contributions to UG**: 
+* **Contributions to UG**:
   1. Updated UG to include `time` and `delete` commands
   2. Updated UG for `charge` command
 * **New Feature**: Charge
@@ -20,7 +20,7 @@ Given below are my contributions to the project:
     * Justification:
         * This feature enables the user to calculate cost to charge a pet for a specified month. This cost is calculated based on the pet's attendance during the specified month.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=tiffanylin21&breakdown=true)
-* **Project management**: 
+* **Project management**:
     1. Reviewed pull requests by teammates
     2. Helped in opening and assigning issues
 * **Enhancements to existing features**:
