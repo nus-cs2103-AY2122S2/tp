@@ -10,16 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAM;
 
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.team.Skill;
 import seedu.address.model.team.SkillSet;
 import seedu.address.model.team.Team;
 
@@ -27,6 +24,7 @@ import seedu.address.model.team.Team;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    private static final String separator = "\\s?,\\s?";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -39,16 +37,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         String indexDelimeter = "\\s+";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_COMMAND_OPTION, PREFIX_NAME,
             PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TEAM, PREFIX_SKILL);
-        LinkedList<Index> indices;
 
+        LinkedList<Index> indices;
         Index index;
         boolean isBatchEdit = isMultipleArgs(argMultimap.getPreamble(), indexDelimeter);
         if (isBatchEdit) {
             try {
                 indices = ParserUtil.parseIndices(argMultimap.getPreamble(), indexDelimeter);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),
-                    pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
             }
         } else {
             try {
@@ -58,6 +55,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
         }
 
+        // check mode
         boolean isResetMode = false;
         if (argMultimap.getValue(PREFIX_COMMAND_OPTION).isPresent()) {
             int optionDeclarationNumber = argMultimap.getAllValues(PREFIX_COMMAND_OPTION).size();
@@ -67,7 +65,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_OPTIONS));
             }
             String option = argMultimap.getValue(PREFIX_COMMAND_OPTION).get();
-            // if there there is any other option declared other than the one and only currently supported option, 'r'
+            // if there is any other option declared other than the one and only currently supported option, 'r'
             if (!option.equals(EditCommand.RESET_ARG)) {
                 throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_OPTIONS));
@@ -94,28 +92,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_SKILL).isPresent()) {
-            List<String> separatedArgs = argMultimap.getValuesWithRegex(PREFIX_SKILL, "\\s?,\\s?");
-            Set<Skill> skillSet = new HashSet<>();
-            if (!(separatedArgs.size() == 1 && separatedArgs.get(0).equals(""))) {
-                for (String arg : separatedArgs) {
-                    Skill skill = ParserUtil.parseSkill(arg);
-                    skillSet.add(skill);
-                }
-            }
-            SkillSet skills = new SkillSet(skillSet);
-            editPersonDescriptor.setSkillSet(skills);
+            SkillSet skillSet =
+                new SkillSet(ParserUtil.parseSkillsWithRegex(argMultimap.getValue(PREFIX_SKILL), separator));
+            editPersonDescriptor.setSkillSet(skillSet);
         }
 
         if (argMultimap.getValue(PREFIX_TEAM).isPresent()) {
-            List<String> separatedArgs = argMultimap.getValuesWithRegex(PREFIX_TEAM, "\\s?,\\s?");
-            Set<Team> teams = new HashSet<>();
-            if (!(separatedArgs.size() == 1 && separatedArgs.get(0).equals(""))) {
-                for (String arg : separatedArgs) {
-                    Team team = ParserUtil.parseTeam(arg);
-                    teams.add(team);
-                }
-            }
-            editPersonDescriptor.setTeams(teams);
+            Set<Team> teamList = ParserUtil.parseTeamsWithRegex(argMultimap.getValue(PREFIX_TEAM), separator);
+            editPersonDescriptor.setTeams(teamList);
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -128,8 +112,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             try {
                 indices = ParserUtil.parseIndices(argMultimap.getPreamble(), indexDelimeter);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),
-                    pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
             }
             editCommand = new EditCommand(indices, editPersonDescriptor, isResetMode);
         } else {
