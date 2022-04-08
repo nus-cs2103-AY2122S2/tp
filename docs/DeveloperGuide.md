@@ -433,7 +433,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | export a list of interview reviews of different companies into a .csv file | share my experience with juniors and peers               |
 | `*`      | user           | mark certain entries as my favourites                                      | view those that I am more interested in at a glance      |
 
-*{More to be added}*
 
 ### Use cases <a id="use-cases"></a>
 
@@ -554,13 +553,75 @@ Precondition: there exist at least one company stored in Tinner
 
 Guarantees: every role in companies that have reminder dates within the reminder window from today will be shown
 
+**MSS**
+
 1. The user [adds a role(UC02)]() or [edits a role(UCXX)]() that has a reminder date.
 2. Tinner shows success message and adds/edits the role.
 3. The user closes the application and opens it up again immediately or some time in the future
 4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date/
-    Use case ends
+    
+   Use case ends
 
-*{More to be added}*
+**Use case: UC07 - Favouriting a company and viewing all favourited companies**
+
+Precondition: there exist at least one company in the list of companies
+
+Guarantees: a company is successfully favourited within the list of companies
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to favourite a specific company in the list
+4. Tinner favourites the company
+5. User requests to view all favourited companies
+6. Tinner shows a list of all favourited companies and their associated internship roles
+  
+   Use case ends
+
+**Extensions**
+
+3a. The input does not adhere to the command format <br/>
+3a1. Tinner shows an invalid input format error message <br/>
+Use case resumes at step 2
+
+3b. The input company index is invalid <br/>
+3b1. Tinner shows a company index out of bounds error message <br/>
+Use case resumes at step 2
+
+3c. The specific company to be favourited had already been favourited <br/>
+3c1. Tinner shows a company already favourited error message <br/>
+Use case resumes at step 2
+
+**Use case: UC08 - Unfavouriting a company**
+
+Precondition: there exist at least one company in the list of companies
+
+Guarantees: a company is successfully unfavourited within the list of companies
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to unfavourite a specific company in the list
+4. Tinner unfavourites the company
+
+   Use case ends
+
+**Extensions**
+
+3a. The input does not adhere to the command format <br/>
+3a1. Tinner shows an invalid input format error message <br/>
+Use case resumes at step 2
+
+3b. The input company index is invalid <br/>
+3b1. Tinner shows a company index out of bounds error message <br/>
+Use case resumes at step 2
+
+3c. The specific company to be unfavourited is already unfavourited<br/>
+3c1. Tinner shows a company already unfavourited error message <br/>
+Use case resumes at step 2
+
 
 ### Non-Functional Requirements <a id="non-functional-requirements"></a>
 
@@ -569,10 +630,6 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Should require no installation
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. Should be responsive and have a latency of less than 3 seconds
-
-
-
-*{More to be added}*
 
 ### Glossary <a id="glossary"></a>
 
