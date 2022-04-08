@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note**
+<div markdown="span" class="alert alert-primary">:bulb: **Note**<br>
 
 The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/blob/master/main/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -111,7 +111,10 @@ How the `Logic` component works:
 
 *Figure: Interactions inside the logic component for the `delete 1` command.*
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+
+The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -219,7 +222,8 @@ case since user has deleted the 5th client, it will call `LogicManager#savePrevA
 From there, it will call `Storage#addNewTempAddressBookFile()` where the previous state of the clients' list, before the `delete 5` was executed, will be saved as a temporary file.
 The new temporary file will then be added into `tempFiles` list in `SerializableTempAddressBookStorage`.
 
-<div markdown="1" class="alert alert-info">:information_source: **Note:**
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
+
 Only modifications made to the clients' list will be saved. See the user guide for more info.
 
 `SerializableTempAddressBookStorage` also will only store the 10 latest modifications. When the 11th modification is made, it will removed
@@ -227,6 +231,7 @@ the earliest modification saved and delete the temporary file for it.
 
 If there are any issues with creating the temporary file and saving the data, an exception will be thrown and the modification will not be saved in
 a temporary file, thus, the modification cannot be undone.
+
 </div>
 
 Step 3. The user executed `add n/David...` to add a new person. The steps mentioned in step 2 would be repeated. Thus, `tempFiles` will now store
@@ -236,12 +241,14 @@ Step 4. The user now decides that adding the person was a mistake and decides to
 The `undo` command will call `LogicManager#undoPrevModification()`, which calls `Storage#popTempAddressFileData()`. This will obtain
 the latest temporary file added and restore the clients' list to the state saved in the temporary file (the state of the clients' list before add the new person, so before step 3).
 
-<div markdown="1" class="alert alert-info">:information_source: **Note:**
+<div markdown="1" class="alert alert-info">:information_source: **Info**<br>
+
 If there are no previous modifications to be restored (no modifications in the first place, or the user has undone the last 10 modifications and reached
 the limit) an error message will be shown.
 
 If the temporary file for the modification user is trying to undo is corrupted or deleted, then for that particular modification it can no longer
 be undone and an error message will be shown there was issue reading the file.
+
 </div>
 
 Step 5. The user executed the command `filter Daniel` to find all Daniels. This command do not modify the clients' list.
@@ -634,8 +641,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<div markdown="span" class="alert alert-info">:bulb: **Note**<br>
+
+These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 
 </div>
 
