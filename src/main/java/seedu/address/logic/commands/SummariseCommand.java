@@ -27,7 +27,7 @@ public class SummariseCommand extends Command {
 
     public static final String MESSAGE_SUMMARISE_PERSON_SUCCESS = "Summarising all students in this hall: \n";
 
-    public static final String MESSAGE_SUMMARISE_PERSON_FAILURE = "Unable to summarise \n";
+    public static final String MESSAGE_SUMMARISE_PERSON_FAILURE = "Nothing to summarise \n";
 
     private static final String FACULTY_SUMMARY_FORM = "\nIn %s faculty with %d student(s),\n"
             + "Covid Positive: %d student(s)\n"
@@ -179,6 +179,9 @@ public class SummariseCommand extends Command {
         StringBuilder ans = new StringBuilder();
         int numberOfStudents = list.size();
 
+        if (numberOfStudents <= 0) {
+            return ans.toString();
+        }
         // Create a list of students in the Hall that are covid positive.
         List<Person> students = list.stream().filter(BY_POSITIVE).collect(Collectors.toList());
         int numberOfPositive = students.size();
