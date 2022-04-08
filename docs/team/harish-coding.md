@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     * Highlights: I made use of the `TaskList` class and added a new method to delete the task.
 
 * **New Feature**:
-  * Added the ability to delete tasks from previously assigned to all the persons taking the same module. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
+  * Added the ability to delete tasks that were previously assigned to all the persons taking the same module. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
     * What it does: The command deletes the task assigned to students taking a certain module. The module code and task name should be specified.
     * Justification: If the TA had incorrectly assigned a task, instead of deleting the task for each student taking the module individually by using their student code, and finding out the index of that particular task for student, the TA could directly use this command to delete this task for all the students under this module, if they were assigned the task.
     * Highlights: I modified the implementation of `DeleteTask` that is executed by specifying studentId and index, to include this command.
