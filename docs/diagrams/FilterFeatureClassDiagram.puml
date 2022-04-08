@@ -1,0 +1,42 @@
+@startuml
+
+abstract class Command {
++ execute(model: Model) {abstract}
+}
+interface Model {
++ updateFilteredPersonsList(predicate: Predicate<Person>)
+}
+class FilterCommand {
+- filterDescriptor: FilterDescriptor
+execute(model: Model): CommandResult
+}
+class FilterDescriptor {
+- faculty: Faculty
+- status: CovidStatus
+- block: Block
+- filter: ArrayList<Predicate<Person>>
++ getFilters(): Predicate<Person>
++ setFaculty(faculty: Faculty)
++ setCovidStatus(status: CovidStatus)
++ setBlock(block: Block)
++ isEmpty(): boolean
+}
+class FilterCommandParser {
+parse(args: String): FilterCommand
+}
+
+
+
+
+Command <|-- FilterCommand
+FilterDescriptor <|-- FilterCommandParser
+FilterCommand *-- FilterDescriptor
+Model <-- FilterCommand
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+
+@enduml

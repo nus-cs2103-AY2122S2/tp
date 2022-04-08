@@ -386,11 +386,13 @@ Person to be edited: `JOHN DOE f/SOC cs/POSITIVE ...` with index of `1`<br>
 
 ### Filter feature
 
-The filter mechanism implements the following sequence for the method call execute("filter").
+In this section, the functionality of the filter feature, the expected execution path, the structure of the FilterCommand class, the structure of the FilterCommand class and the interactions between objects with the FilterCommand object will be discussed.
 
 #### What is the filter feature
 
 The filter feature allows users to retrieve a list of specific students, filtering them by covid status, and/or faculty, and/or block.
+
+#### Path execution of filter feature
 
 The `filter` command is as follows:
 
@@ -413,6 +415,17 @@ There are two possible execution paths for this command.
 
 1. User inputs the `filter` command with invalid or empty arguments. A ParseException will be thrown, and Tracey will display an error message along with the correct input format to the user.
 2. User inputs the `filter` command with valid arguments. Tracey then stores the specified filter criteria, and displays a list based on those criteria.
+
+#### Structure of Filter feature
+
+The following is a class diagram of the filter feature. 
+
+**Class diagram of Filter feature is shown below:**
+![FilterFeatureClassDiagram](images/FilterFeatureClassDiagram.png)
+
+The above class diagram shows the structure of the FilterCommand and its associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in FilterCommand; such as public static fields and getter/setter methods.
+
+#### Interaction between objects when the Filter Command is executed
 
 The sequence diagram below shows the interactions between objects during the execution of a `filter` command.
 
