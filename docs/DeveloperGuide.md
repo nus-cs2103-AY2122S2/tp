@@ -565,10 +565,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. The application should be able to work without a need for the user to install Gradle/JavaFX.
 6. The application is not required to support multiple users on a single device.
 7. The application is not required to support any other language other than English.
-8. The user interface should be intuitive enough for users who are not IT-savvy.
+8. The user interface should be intuitive and usable enough for users who are not IT-savvy.
 9. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+10. The response to any commands carried out by the user should become visible within 5 seconds.
 
 ### Glossary
 
