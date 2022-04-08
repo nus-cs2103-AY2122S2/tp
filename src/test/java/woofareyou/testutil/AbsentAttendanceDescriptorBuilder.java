@@ -2,14 +2,14 @@ package woofareyou.testutil;
 
 import java.time.LocalDate;
 
-import woofareyou.logic.commands.AbsentAttendanceCommand;
+import woofareyou.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
 
 public class AbsentAttendanceDescriptorBuilder {
 
-    private AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor;
+    private AbsentAttendanceDescriptor descriptor;
 
     public AbsentAttendanceDescriptorBuilder() {
-        descriptor = new AbsentAttendanceCommand.AbsentAttendanceDescriptor();
+        descriptor = new AbsentAttendanceDescriptor();
     }
 
     /**
@@ -20,7 +20,7 @@ public class AbsentAttendanceDescriptorBuilder {
         return this;
     }
 
-    public AbsentAttendanceCommand.AbsentAttendanceDescriptor build() {
+    public AbsentAttendanceDescriptor build() {
         return descriptor;
     }
 }

@@ -2,10 +2,9 @@ package woofareyou.model.pet;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import woofareyou.testutil.Assert;
 
 public class OwnerNameTest {
     public static final String OWNER_NAME_1 = "Lau Low";
@@ -15,19 +14,19 @@ public class OwnerNameTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new OwnerName(null));
+        assertThrows(NullPointerException.class, () -> new OwnerName(null));
     }
 
     @Test
     public void constructor_invalidOwnerName_throwsIllegalArgumentException() {
         String invalidOwnerName = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new OwnerName(invalidOwnerName));
+        assertThrows(IllegalArgumentException.class, () -> new OwnerName(invalidOwnerName));
     }
 
     @Test
     public void isValidOwnerName() {
         // null ownerName
-        Assert.assertThrows(NullPointerException.class, () -> OwnerName.isValidOwnerName(null));
+        assertThrows(NullPointerException.class, () -> OwnerName.isValidOwnerName(null));
 
         // invalid ownerName
         assertFalse(OwnerName.isValidOwnerName("")); // empty string

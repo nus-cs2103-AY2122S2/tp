@@ -3,19 +3,20 @@ package woofareyou.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.model.Model.PREDICATE_SHOW_ALL_PETS;
+import static woofareyou.testutil.Assert.assertThrows;
+import static woofareyou.testutil.TypicalPets.BOBA;
+import static woofareyou.testutil.TypicalPets.PIZZA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.GuiSettings;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
 import woofareyou.testutil.AddressBookBuilder;
-import woofareyou.testutil.Assert;
-import woofareyou.testutil.TypicalPets;
 
 public class ModelManagerTest {
 
@@ -24,13 +25,13 @@ public class ModelManagerTest {
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
-        Assertions.assertEquals(new GuiSettings(), modelManager.getGuiSettings());
+        assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
     }
 
     @Test
@@ -73,28 +74,28 @@ public class ModelManagerTest {
 
     @Test
     public void hasPet_nullPet_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasPet(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasPet(null));
     }
 
     @Test
     public void hasPet_petNotInWoofAreYou_returnsFalse() {
-        assertFalse(modelManager.hasPet(TypicalPets.BOBA));
+        assertFalse(modelManager.hasPet(BOBA));
     }
 
     @Test
     public void hasPet_petInWoofAreYou_returnsTrue() {
-        modelManager.addPet(TypicalPets.BOBA);
-        assertTrue(modelManager.hasPet(TypicalPets.BOBA));
+        modelManager.addPet(BOBA);
+        assertTrue(modelManager.hasPet(BOBA));
     }
 
     @Test
     public void getFilteredPetList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPetList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPetList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPet(TypicalPets.BOBA).withPet(TypicalPets.PIZZA).build();
+        AddressBook addressBook = new AddressBookBuilder().withPet(BOBA).withPet(PIZZA).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,12 +117,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = TypicalPets.BOBA.getName().fullName.split("\\s+");
+        String[] keywords = BOBA.getName().fullName.split("\\s+");
         modelManager.updateFilteredPetList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
+        modelManager.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

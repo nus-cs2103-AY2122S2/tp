@@ -2,6 +2,8 @@ package woofareyou.logic.commands;
 
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
+import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
-import woofareyou.testutil.TypicalIndexes;
-import woofareyou.testutil.TypicalPets;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -22,7 +22,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPetAtIndex(model, TypicalIndexes.INDEX_FIRST_PET);
+        showPetAtIndex(model, INDEX_FIRST_PET);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

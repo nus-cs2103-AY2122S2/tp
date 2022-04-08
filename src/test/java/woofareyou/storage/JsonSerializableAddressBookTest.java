@@ -1,6 +1,7 @@
 package woofareyou.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static woofareyou.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import woofareyou.commons.exceptions.IllegalValueException;
 import woofareyou.commons.util.JsonUtil;
 import woofareyou.model.AddressBook;
-import woofareyou.testutil.Assert;
 import woofareyou.testutil.SimilarPets;
 import woofareyou.testutil.TypicalPets;
 
@@ -34,7 +34,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_invalidPetFile_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PET_FILE,
                 JsonSerializableAddressBook.class).get();
-        Assert.assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test

@@ -8,6 +8,7 @@ import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_THIRD_PET;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +25,6 @@ import woofareyou.model.UserPrefs;
 import woofareyou.model.charge.Charge;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.PetBuilder;
-import woofareyou.testutil.TypicalPets;
 
 
 class ChargeCommandTest {
@@ -40,7 +40,7 @@ class ChargeCommandTest {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-yyyy");
 
-    private Model model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_computeChargeNoChargeUnfilteredList_success() {

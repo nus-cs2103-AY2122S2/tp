@@ -2,10 +2,9 @@ package woofareyou.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import woofareyou.testutil.Assert;
 
 public class FileUtilTest {
 
@@ -18,7 +17,7 @@ public class FileUtilTest {
         assertFalse(FileUtil.isValidPath("a\0"));
 
         // null path -> throws NullPointerException
-        Assert.assertThrows(NullPointerException.class, () -> FileUtil.isValidPath(null));
+        assertThrows(NullPointerException.class, () -> FileUtil.isValidPath(null));
     }
 
 }

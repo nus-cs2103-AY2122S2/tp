@@ -3,26 +3,29 @@ package woofareyou.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.commons.core.Messages.MESSAGE_PETS_FOUND;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static woofareyou.testutil.TypicalPets.BAGEL;
+import static woofareyou.testutil.TypicalPets.PANCAKE;
+import static woofareyou.testutil.TypicalPets.WAFFLE;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import woofareyou.commons.core.Messages;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
-import woofareyou.testutil.TypicalPets;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -53,7 +56,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPetFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PETS_FOUND, 0);
+        String expectedMessage = String.format(MESSAGE_PETS_FOUND, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
@@ -63,13 +66,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePetsFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_PETS_FOUND, 3);
+        String expectedMessage = String.format(MESSAGE_PETS_FOUND, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Bagel Pancake Waffle");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPetList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPets.BAGEL, TypicalPets.PANCAKE, TypicalPets.WAFFLE),
-                model.getFilteredPetList());
+        assertEquals(Arrays.asList(BAGEL, PANCAKE, WAFFLE), model.getFilteredPetList());
     }
 
     /**

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import woofareyou.logic.commands.EditCommand;
+import woofareyou.logic.commands.EditCommand.EditPetDescriptor;
 import woofareyou.model.pet.Address;
 import woofareyou.model.pet.Name;
 import woofareyou.model.pet.OwnerName;
@@ -18,21 +19,21 @@ import woofareyou.model.tag.Tag;
  */
 public class EditPetDescriptorBuilder {
 
-    private EditCommand.EditPetDescriptor descriptor;
+    private EditPetDescriptor descriptor;
 
     public EditPetDescriptorBuilder() {
         descriptor = new EditCommand.EditPetDescriptor();
     }
 
     public EditPetDescriptorBuilder(EditCommand.EditPetDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditPetDescriptor(descriptor);
+        this.descriptor = new EditPetDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditPetDescriptor} with fields containing {@code pet}'s details
      */
     public EditPetDescriptorBuilder(Pet pet) {
-        descriptor = new EditCommand.EditPetDescriptor();
+        descriptor = new EditPetDescriptor();
         descriptor.setName(pet.getName());
         descriptor.setPhone(pet.getPhone());
         descriptor.setOwnerName(pet.getOwnerName());

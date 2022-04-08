@@ -1,6 +1,14 @@
 package woofareyou.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static woofareyou.commons.core.Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX;
+import static woofareyou.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static woofareyou.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static woofareyou.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static woofareyou.logic.commands.CommandTestUtil.OWNER_NAME_DESC_AMY;
+import static woofareyou.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static woofareyou.testutil.Assert.assertThrows;
+import static woofareyou.testutil.TypicalPets.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -9,10 +17,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.commands.CommandResult;
-import woofareyou.logic.commands.CommandTestUtil;
 import woofareyou.logic.commands.ListCommand;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
@@ -24,9 +30,7 @@ import woofareyou.model.pet.Pet;
 import woofareyou.storage.JsonAddressBookStorage;
 import woofareyou.storage.JsonUserPrefsStorage;
 import woofareyou.storage.StorageManager;
-import woofareyou.testutil.Assert;
 import woofareyou.testutil.PetBuilder;
-import woofareyou.testutil.TypicalPets;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -49,13 +53,13 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, Messages.MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
@@ -75,10 +79,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-                + CommandTestUtil.OWNER_NAME_DESC_AMY
-                + CommandTestUtil.ADDRESS_DESC_AMY;
-        Pet expectedPet = new PetBuilder(TypicalPets.AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + OWNER_NAME_DESC_AMY
+                + ADDRESS_DESC_AMY;
+        Pet expectedPet = new PetBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPet(expectedPet);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -87,7 +90,7 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredPetList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPetList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPetList().remove(0));
     }
 
     /**
@@ -98,7 +101,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+                                      Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -125,7 +128,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+                                      String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -138,8 +141,8 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
-        Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+                                      String expectedMessage, Model expectedModel) {
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
 

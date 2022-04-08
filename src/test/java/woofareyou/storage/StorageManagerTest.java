@@ -2,6 +2,7 @@ package woofareyou.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import java.nio.file.Path;
 
@@ -13,7 +14,6 @@ import woofareyou.commons.core.GuiSettings;
 import woofareyou.model.AddressBook;
 import woofareyou.model.ReadOnlyAddressBook;
 import woofareyou.model.UserPrefs;
-import woofareyou.testutil.TypicalPets;
 
 public class StorageManagerTest {
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook original = TypicalPets.getTypicalAddressBook();
+        AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook(retrieved));

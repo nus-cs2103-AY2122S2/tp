@@ -1,11 +1,12 @@
 package woofareyou.model.pet;
 
+import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import woofareyou.commons.util.CollectionUtil;
 import woofareyou.model.tag.Tag;
 
 /**
@@ -31,7 +32,7 @@ public class Pet {
      */
     public Pet(Name name, OwnerName ownerName, Phone phone, Address address,
                Set<Tag> tags, Diet diet, Appointment appointment, AttendanceHashMap attendanceHashMap) {
-        CollectionUtil.requireAllNonNull(name, ownerName, phone, address, tags, appointment, attendanceHashMap);
+        requireAllNonNull(name, ownerName, phone, address, tags, appointment, attendanceHashMap);
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
@@ -88,10 +89,10 @@ public class Pet {
         }
 
         return otherPet != null
-            && otherPet.getName().equals(getName())
-            && otherPet.getOwnerName().equals(getOwnerName())
-            && otherPet.getPhone().equals(getPhone())
-            && otherPet.getAddress().equals(getAddress());
+                && otherPet.getName().equals(getName())
+                && otherPet.getOwnerName().equals(getOwnerName())
+                && otherPet.getPhone().equals(getPhone())
+                && otherPet.getAddress().equals(getAddress());
     }
 
     /**
@@ -110,9 +111,9 @@ public class Pet {
 
         Pet otherPet = (Pet) other;
         return otherPet.getName().equals(getName())
-            && otherPet.getOwnerName().equals(getOwnerName())
-            && otherPet.getPhone().equals(getPhone())
-            && otherPet.getAddress().equals(getAddress());
+                && otherPet.getOwnerName().equals(getOwnerName())
+                && otherPet.getPhone().equals(getPhone())
+                && otherPet.getAddress().equals(getAddress());
     }
 
     @Override
@@ -125,16 +126,16 @@ public class Pet {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-            .append("; OwnerName: ")
-            .append(getOwnerName())
-            .append("; Phone: ")
-            .append(getPhone())
-            .append("; Address: ")
-            .append(getAddress())
-            .append("; Diet: ")
-            .append(getDiet())
-            .append("; Appointment: ")
-            .append(getAppointment());
+                .append("; OwnerName: ")
+                .append(getOwnerName())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Diet: ")
+                .append(getDiet())
+                .append("; Appointment: ")
+                .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

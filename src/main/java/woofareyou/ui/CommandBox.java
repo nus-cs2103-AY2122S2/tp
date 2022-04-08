@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import woofareyou.logic.Logic;
 import woofareyou.logic.commands.CommandResult;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
@@ -79,7 +78,7 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see Logic#execute(String)
+         * @see woofareyou.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }

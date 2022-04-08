@@ -2,6 +2,10 @@ package woofareyou.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static woofareyou.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static woofareyou.testutil.Assert.assertThrows;
+import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,11 +13,11 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import woofareyou.commons.core.Messages;
 import woofareyou.logic.commands.AddCommand;
 import woofareyou.logic.commands.ClearCommand;
 import woofareyou.logic.commands.DeleteCommand;
 import woofareyou.logic.commands.EditCommand;
+import woofareyou.logic.commands.EditCommand.EditPetDescriptor;
 import woofareyou.logic.commands.ExitCommand;
 import woofareyou.logic.commands.FindCommand;
 import woofareyou.logic.commands.HelpCommand;
@@ -21,12 +25,9 @@ import woofareyou.logic.commands.ListCommand;
 import woofareyou.logic.parser.exceptions.ParseException;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
 import woofareyou.model.pet.Pet;
-import woofareyou.testutil.Assert;
 import woofareyou.testutil.EditPetDescriptorBuilder;
 import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.PetUtil;
-import woofareyou.testutil.TypicalIndexes;
-
 
 public class AddressBookParserTest {
 
@@ -48,17 +49,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PET.getOneBased());
-        assertEquals(new DeleteCommand(TypicalIndexes.INDEX_FIRST_PET), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PET.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PET), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Pet pet = new PetBuilder().build();
-        EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder(pet).build();
+        EditPetDescriptor descriptor = new EditPetDescriptorBuilder(pet).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + TypicalIndexes.INDEX_FIRST_PET.getOneBased() + " " + PetUtil.getEditPetDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PET, descriptor), command);
+                + INDEX_FIRST_PET.getOneBased() + " " + PetUtil.getEditPetDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PET, descriptor), command);
     }
 
     @Test
@@ -89,13 +90,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-            HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND, () ->
-            parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

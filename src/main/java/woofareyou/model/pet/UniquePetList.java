@@ -1,6 +1,12 @@
 package woofareyou.model.pet;
 
 import static java.util.Objects.requireNonNull;
+import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
+import static woofareyou.logic.parser.SortUtil.SORT_BY_APPOINTMENT;
+import static woofareyou.logic.parser.SortUtil.SORT_BY_DROP_OFF_TIME;
+import static woofareyou.logic.parser.SortUtil.SORT_BY_NAME;
+import static woofareyou.logic.parser.SortUtil.SORT_BY_OWNER;
+import static woofareyou.logic.parser.SortUtil.SORT_BY_PICK_UP_TIME;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -8,13 +14,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import woofareyou.commons.util.CollectionUtil;
-import woofareyou.logic.parser.SortUtil;
 import woofareyou.model.pet.comparator.PetDropOffTimeComparator;
 import woofareyou.model.pet.comparator.PetPickUpTimeComparator;
 import woofareyou.model.pet.exceptions.DuplicatePetException;
 import woofareyou.model.pet.exceptions.PetNotFoundException;
-
 
 /**
  * A list of pets that enforces uniqueness between its elements and does not allow nulls.
@@ -48,22 +51,22 @@ public class UniquePetList implements Iterable<Pet> {
      */
     public void sortPetList(String field) {
         switch (field) {
-        case SortUtil.SORT_BY_NAME:
+        case SORT_BY_NAME:
             Comparator<Pet> petNameComparator = Comparator.comparing(Pet::getName);
             FXCollections.sort(internalList, petNameComparator);
             break;
-        case SortUtil.SORT_BY_OWNER:
+        case SORT_BY_OWNER:
             Comparator<Pet> petOwnerNameComparator = Comparator.comparing(Pet::getOwnerName);
             FXCollections.sort(internalList, petOwnerNameComparator);
             break;
-        case SortUtil.SORT_BY_APPOINTMENT:
+        case SORT_BY_APPOINTMENT:
             Comparator<Pet> petAppointmentComparator = Comparator.comparing(Pet::getAppointment);
             FXCollections.sort(internalList, petAppointmentComparator);
             break;
-        case SortUtil.SORT_BY_DROP_OFF_TIME:
+        case SORT_BY_DROP_OFF_TIME:
             FXCollections.sort(internalList, new PetDropOffTimeComparator());
             break;
-        case SortUtil.SORT_BY_PICK_UP_TIME:
+        case SORT_BY_PICK_UP_TIME:
             FXCollections.sort(internalList, new PetPickUpTimeComparator());
             break;
         default:
@@ -89,7 +92,7 @@ public class UniquePetList implements Iterable<Pet> {
      * The pet identity of {@code editedPet} must not be the same as another existing pet in the list.
      */
     public void setPet(Pet target, Pet editedPet) {
-        CollectionUtil.requireAllNonNull(target, editedPet);
+        requireAllNonNull(target, editedPet);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -124,7 +127,7 @@ public class UniquePetList implements Iterable<Pet> {
      * {@code pets} must not contain duplicate pets.
      */
     public void setPets(List<Pet> pets) {
-        CollectionUtil.requireAllNonNull(pets);
+        requireAllNonNull(pets);
         if (!petsAreUnique(pets)) {
             throw new DuplicatePetException();
         }
@@ -148,7 +151,7 @@ public class UniquePetList implements Iterable<Pet> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniquePetList // instanceof handles nulls
-                        && internalList.equals(((UniquePetList) other).internalList));
+                && internalList.equals(((UniquePetList) other).internalList));
     }
 
     @Override

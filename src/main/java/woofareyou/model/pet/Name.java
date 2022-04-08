@@ -1,11 +1,7 @@
 package woofareyou.model.pet;
 
 import static java.util.Objects.requireNonNull;
-
-import woofareyou.commons.util.AppUtil;
-
-
-
+import static woofareyou.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Pet's name in the address book.
@@ -31,7 +27,7 @@ public class Name implements Comparable<Name> {
      */
     public Name(String name) {
         requireNonNull(name);
-        AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name.trim().replaceAll(" +", " ");
     }
 
@@ -70,3 +66,4 @@ public class Name implements Comparable<Name> {
         return Integer.compare(this.fullName.compareToIgnoreCase(other.fullName), 0);
     }
 }
+

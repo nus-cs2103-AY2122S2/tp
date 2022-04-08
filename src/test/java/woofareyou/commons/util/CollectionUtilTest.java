@@ -2,6 +2,8 @@ package woofareyou.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.commons.util.CollectionUtil.requireAllNonNull;
+import static woofareyou.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
-import woofareyou.testutil.Assert;
 
 public class CollectionUtilTest {
     @Test
@@ -87,7 +87,7 @@ public class CollectionUtilTest {
      * if {@code objects} or any element of {@code objects} is null.
      */
     private void assertNullPointerExceptionThrown(Object... objects) {
-        Assert.assertThrows(NullPointerException.class, () -> CollectionUtil.requireAllNonNull(objects));
+        assertThrows(NullPointerException.class, () -> requireAllNonNull(objects));
     }
 
     /**
@@ -95,14 +95,14 @@ public class CollectionUtilTest {
      * if {@code collection} or any element of {@code collection} is null.
      */
     private void assertNullPointerExceptionThrown(Collection<?> collection) {
-        Assert.assertThrows(NullPointerException.class, () -> CollectionUtil.requireAllNonNull(collection));
+        assertThrows(NullPointerException.class, () -> requireAllNonNull(collection));
     }
 
     private void assertNullPointerExceptionNotThrown(Object... objects) {
-        CollectionUtil.requireAllNonNull(objects);
+        requireAllNonNull(objects);
     }
 
     private void assertNullPointerExceptionNotThrown(Collection<?> collection) {
-        CollectionUtil.requireAllNonNull(collection);
+        requireAllNonNull(collection);
     }
 }

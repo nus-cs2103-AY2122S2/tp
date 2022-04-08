@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandFailure;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
+import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +17,6 @@ import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Pet;
-import woofareyou.testutil.TypicalIndexes;
-import woofareyou.testutil.TypicalPets;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -23,12 +24,12 @@ import woofareyou.testutil.TypicalPets;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Pet petToDelete = model.getFilteredPetList().get(TypicalIndexes.INDEX_FIRST_PET.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PET);
+        Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PET);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PET_SUCCESS, petToDelete);
 
@@ -48,10 +49,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPetAtIndex(model, TypicalIndexes.INDEX_FIRST_PET);
+        showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Pet petToDelete = model.getFilteredPetList().get(TypicalIndexes.INDEX_FIRST_PET.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PET);
+        Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PET);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PET_SUCCESS, petToDelete);
 
@@ -64,9 +65,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPetAtIndex(model, TypicalIndexes.INDEX_FIRST_PET);
+        showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PET;
+        Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
 
@@ -77,14 +78,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PET);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(TypicalIndexes.INDEX_SECOND_PET);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PET);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PET);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PET);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PET);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

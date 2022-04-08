@@ -3,17 +3,17 @@ package woofareyou.testutil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import woofareyou.logic.commands.PresentAttendanceCommand;
+import woofareyou.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 
 /**
  * A utility class to help with building PresentAttendanceDescriptor objects.
  */
 public class PresentAttendanceDescriptorBuilder {
 
-    private PresentAttendanceCommand.PresentAttendanceDescriptor descriptor;
+    private PresentAttendanceDescriptor descriptor;
 
     public PresentAttendanceDescriptorBuilder() {
-        descriptor = new PresentAttendanceCommand.PresentAttendanceDescriptor();
+        descriptor = new PresentAttendanceDescriptor();
     }
 
     /**
@@ -40,7 +40,7 @@ public class PresentAttendanceDescriptorBuilder {
         return this;
     }
 
-    public PresentAttendanceCommand.PresentAttendanceDescriptor build() {
+    public PresentAttendanceDescriptor build() {
         return descriptor;
     }
 }

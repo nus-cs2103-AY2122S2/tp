@@ -3,6 +3,7 @@ package woofareyou.model.pet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static woofareyou.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import woofareyou.model.attendance.AbsentAttendanceEntry;
 import woofareyou.model.attendance.AttendanceEntry;
 import woofareyou.model.attendance.PresentAttendanceEntry;
-import woofareyou.testutil.Assert;
 
 public class AttendanceHashMapTest {
 
@@ -25,11 +25,11 @@ public class AttendanceHashMapTest {
     private static final LocalTime DROPOFF_TIME = LocalTime.of(17, 30);
 
     private static final PresentAttendanceEntry presentAttendanceEntryWithTransport =
-        new PresentAttendanceEntry(DATE_TODAY, PICKUP_TIME, DROPOFF_TIME);
+            new PresentAttendanceEntry(DATE_TODAY, PICKUP_TIME, DROPOFF_TIME);
     private static final AbsentAttendanceEntry absentAttendanceEntry =
-        new AbsentAttendanceEntry(DATE_TODAY);
+            new AbsentAttendanceEntry(DATE_TODAY);
     private static final PresentAttendanceEntry presentAttendanceEntryWithoutTransport =
-        new PresentAttendanceEntry(DATE_TODAY, null, null);
+            new PresentAttendanceEntry(DATE_TODAY, null, null);
 
     private static AttendanceHashMap emptyAttendanceHashMap;
     private static AttendanceHashMap presentEntryAttendanceHashMap;
@@ -50,7 +50,7 @@ public class AttendanceHashMapTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AttendanceHashMap(null));
+        assertThrows(NullPointerException.class, () -> new AttendanceHashMap(null));
     }
 
     @Test
@@ -75,9 +75,9 @@ public class AttendanceHashMapTest {
     public void getAttendance() {
         // Successful retrieval of attendance entry
         assertEquals(presentEntryAttendanceHashMap.getAttendance(DATE_TODAY),
-            Optional.of(presentAttendanceEntryWithTransport));
+                Optional.of(presentAttendanceEntryWithTransport));
         assertEquals(absentEntryAttendanceHashMap.getAttendance(DATE_TODAY),
-            Optional.of(absentAttendanceEntry));
+                Optional.of(absentAttendanceEntry));
 
         // No entry retrieved.
         assertEquals(emptyAttendanceHashMap.getAttendance(DATE_TODAY), Optional.empty());

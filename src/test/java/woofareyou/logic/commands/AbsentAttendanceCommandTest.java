@@ -7,6 +7,7 @@ import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FOURTH_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_THIRD_PET;
+import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
 
 import java.time.LocalDate;
 
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.util.AttendanceUtil;
+import woofareyou.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
 import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
@@ -21,16 +23,15 @@ import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.AbsentAttendanceDescriptorBuilder;
 import woofareyou.testutil.PetBuilder;
-import woofareyou.testutil.TypicalPets;
 
 public class AbsentAttendanceCommandTest {
 
     private static final String DATE_STUB = LocalDate.now().toString();
     private static final String MESSAGE_DATE_STUB = LocalDate.now().format(AttendanceUtil.ATTENDANCE_DATE_FORMATTER);
 
-    private static AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor;
+    private static AbsentAttendanceDescriptor descriptor;
 
-    private Model model = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @BeforeAll
     static void setupDescriptors() {
@@ -42,12 +43,12 @@ public class AbsentAttendanceCommandTest {
     public void execute_markPetAsAbsentUnfilteredList_success() {
         Pet firstPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(firstPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_FIRST_PET,
-            descriptor
+                INDEX_FIRST_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -71,12 +72,12 @@ public class AbsentAttendanceCommandTest {
     public void execute_markAbsentPetAbsentAgainUnfilteredList_failure() {
         Pet thirdPet = model.getFilteredPetList().get(INDEX_THIRD_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(thirdPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_THIRD_PET,
-            descriptor
+                INDEX_THIRD_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedFailureMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -93,12 +94,12 @@ public class AbsentAttendanceCommandTest {
 
         Pet thirdPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(thirdPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_FIRST_PET,
-            descriptor
+                INDEX_FIRST_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedFailureMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -115,12 +116,12 @@ public class AbsentAttendanceCommandTest {
     public void execute_markPetWithTransportAbsentUnfilteredList_success() {
         Pet secondPet = model.getFilteredPetList().get(INDEX_SECOND_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(secondPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_SECOND_PET,
-            descriptor
+                INDEX_SECOND_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -137,12 +138,12 @@ public class AbsentAttendanceCommandTest {
 
         Pet secondPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(secondPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_FIRST_PET,
-            descriptor
+                INDEX_FIRST_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -160,12 +161,12 @@ public class AbsentAttendanceCommandTest {
     public void execute_markPetWithoutTransportAbsentUnfilteredList_success() {
         Pet fourthPet = model.getFilteredPetList().get(INDEX_FOURTH_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(fourthPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_FOURTH_PET,
-            descriptor
+                INDEX_FOURTH_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -182,12 +183,12 @@ public class AbsentAttendanceCommandTest {
 
         Pet fourthPet = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         Pet petToMarkAbsent = new PetBuilder(fourthPet)
-            .withAbsentAttendanceEntry(DATE_STUB)
-            .build();
+                .withAbsentAttendanceEntry(DATE_STUB)
+                .build();
 
         AbsentAttendanceCommand absentAttendanceCommand = new AbsentAttendanceCommand(
-            INDEX_FIRST_PET,
-            descriptor
+                INDEX_FIRST_PET,
+                descriptor
         );
 
         String expectedMessage = generateExpectedSuccessMessage(petToMarkAbsent, MESSAGE_DATE_STUB, descriptor);
@@ -200,14 +201,14 @@ public class AbsentAttendanceCommandTest {
     }
 
     private static String generateExpectedSuccessMessage(Pet pet, String messageDate,
-        AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor) {
+                                                         AbsentAttendanceDescriptor descriptor) {
         return String.format(AbsentAttendanceCommand.MESSAGE_ABSENT_ATTENDANCE_SUCCESS,
-            pet.getName(), messageDate, descriptor);
+                pet.getName(), messageDate, descriptor);
     }
 
     private static String generateExpectedFailureMessage(Pet pet, String messageDate,
-        AbsentAttendanceCommand.AbsentAttendanceDescriptor descriptor) {
+                                                         AbsentAttendanceDescriptor descriptor) {
         return String.format(AbsentAttendanceCommand.MESSAGE_ABSENT_ATTENDANCE_FAILURE,
-            pet.getName(), messageDate, descriptor);
+                pet.getName(), messageDate, descriptor);
     }
 }
