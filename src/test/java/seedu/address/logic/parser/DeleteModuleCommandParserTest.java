@@ -1,13 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.DeleteModuleCommand;
-import seedu.address.model.person.ModuleCode;
-import seedu.address.model.person.ModuleCodeContainsKeywordsPredicate;
-
-import java.util.Arrays;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
@@ -25,6 +17,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.DeleteModuleCommand;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.ModuleCodeContainsKeywordsPredicate;
 
 public class DeleteModuleCommandParserTest {
 
