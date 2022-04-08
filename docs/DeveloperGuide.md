@@ -508,44 +508,92 @@ The sequence diagram below shows the interactions between objects during the exe
 ![ExitSequenceDiagram](images/ExitFeatureSequenceDiagram.jpg)
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/Redo features
 
-#### Proposed Implementation
+In this section, the functionality of the undo and redo features, the expected execution path, the structure of the UndoCommand and RedoCommand class, and the interactions between objects with the UndoCommand and RedoCommand objects will be discussed.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### What are the undo and redo features
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The undo feature allows users reverse an `add`, `edit`, or `delete` command.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The redo feature allows users to reverse an `undo` command. 
+
+#### Execution of undo feature
+
+The `undo` command is as follows:
+
+`undo`
+
+Calling this command undoes only the last executed add, edit or delete command, and can only be used after executing an add, edit, or delete command.
+
+This command cannot be used in succession to undo previously executed commands besides the last executed one.
+
+#### Execution of redo feature
+
+The `redo` command is as follows:
+
+`redo`
+
+Calling this command reverses only the last executed undo command, and can only be used after executing an undo command.
+
+This command cannot be used in succession.
+
+### Path execution of undo and redo features
+
+The activity diagram shows the possible execution paths for the `undo` and `redo` command.
+
+**Path Execution of Undo and Redo Features Activity Diagram is shown below:**
+![UndoRedoFeatureActivityDiagram](images/UndoRedoFeatureActivityDiagram.png)
+
+#### Implementation
+
+The proposed undo/redo mechanism is facilitated by `AddressBook`. On top of the current state of the `UniquePersonList` of `Person` objects, it stores two additional states, the history and the "original" state. Additionally, it implements the following operations:
+
+* `AddressBook#saveHistory()` — Saves the current persons list state in its history.
+* `AddressBook#restoreHistory()` — Restores the previous state of the persons list from its history and deletes the history.
+* `AddressBook#saveOriginal()` — Saves the current persons list state in an "original" state, used after an `undo` command is called.
+* `AddressBook#restoreOriginal()` — Restores the previous state of the persons list from its "original" state and deletes the history.
+
+
+The restoreHistory() and restoreOriginal() operations are exposed in the `Model` interface as `Model#restoreHistory()` and `Model#restoreOriginal()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with only the current state (state A) of the list of `Person` objects as `persons`. 
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book, modifying `persons` (now having a state B). The `delete` command calls `Model#saveHistory()`, causing the modified state of the address book before the `delete 5` command executes to be saved in the `personsHistory`.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#restoreHistory()`, which will replace the current state of `persons` with state A in `personsHistory`.
+
+The original list with the person at index 5 deleted, shown as state B, will be stored in `personsOriginal` and `personsHistory` will be set to null.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Step 4. The user then decides that the initial delete was not a mistake, and decides to redo that action by executing the `redo` command. The `redo` command will call `Model#restoreOriginal()`, which will replace the current state of `persons` with state B in `personsOriginal`.
 
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+`personsOriginal` will then be set to null.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If `undo` is called as the first command or in succession, `personsHistory` will be null. The `undo` command uses `Model#checkHistory()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo. Similarly, if `redo` is called as the first command or in succession, `personsOriginal` will be null. The `redo` command uses `Model#checkOriginal()` to check if this is the case and will also throw an error if so.
 
 </div>
+
+#### Structure of Undo and Redo features
+
+The following is a class diagram of the undo and redo features.
+
+**Class diagram of Undo/Redo features is shown below:**
+![FilterFeatureClassDiagram](images/UndoRedoClassDiagram.png)
+
+The above class diagram shows the structure of the UndoCommand and RedoCommand and their associated classes and interfaces. Some methods and fields are not included because they are not extensively utilised in UndoCommand and RedoCommand; such as public static fields and getter/setter methods.
+
+#### Interaction between objects when the Undo and Redo Commands are executed
 
 The following sequence diagram shows how the undo operation works:
 
@@ -555,29 +603,19 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The following sequence diagram shows how the redo operation works:
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire list of persons in the address book.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -585,8 +623,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Data archiving
 The archive mechanism implements the following sequence for the method call execute("archive") on a LogicManager object.

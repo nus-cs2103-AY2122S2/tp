@@ -1,9 +1,12 @@
 @startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
 
-abstract class Command {
+abstract class "{abstract}\nCommand" {
 + execute(model: Model) {abstract}
 }
-interface Model {
+interface Model <<interface>> {
 + updateFilteredPersonsList(predicate: Predicate<Person>)
 }
 class FilterCommand {
@@ -25,18 +28,9 @@ class FilterCommandParser {
 parse(args: String): FilterCommand
 }
 
-
-
-
-Command <|-- FilterCommand
+"{abstract}\nCommand" <|-- FilterCommand
 FilterDescriptor <|-- FilterCommandParser
 FilterCommand *-- FilterDescriptor
-Model <-- FilterCommand
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
+Model <.- FilterCommand
 
 @enduml
