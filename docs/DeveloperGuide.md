@@ -635,7 +635,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a student contact
 
 Command: `add` <br>
-More information on usage: [add command](#add-student-contact-information)
+More information on usage: [add command](#UserGuide.md/add-student-contact-information)
 
 1. Adding a student contact while all student contacts are being shown.
 
