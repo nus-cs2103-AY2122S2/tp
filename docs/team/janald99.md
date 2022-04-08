@@ -7,7 +7,7 @@ title: Janald's Project Portfolio Page
 
 AgentSee is a desktop application for property agents to efficiently manage their client information.
 
-Given below are my contributions to the project.
+Given below are my contributions to the project. I mainly contributed to the addition of Property classes and what they compose of, and discovered the match feature.
 
 * **Code contributed**: [RepoSense link]()
   * `PropertyToBuy` class
@@ -44,8 +44,10 @@ Added the new match features:
         * Contributed to the skeleton of the user guide by gaining inspiration from the AB3 User Guide.
         * Quick Start of the User Guide, including adding the UI prototype screenshot.
         * Removed the unnecessary documentation from the AB3 code base.
-        * Changed the language of the User Guide to be more user-friendly and informal.
+        * Adapted the language of the User Guide to be more user-friendly and informal.
         * Added Warnings, Cautions and Notes which alerts readers some things they should be careful/aware of.
+        * Added the entire match section of the User Guide.
+        * Updated FAQ questions and answers.
     * Developer Guide:
         * Added the Glossary section to clarify ambiguous terms.
         * Added the Non-functional requirements of our project.
@@ -63,7 +65,12 @@ Added the new match features:
   * Standardize language across code and documents.
   * Added and refactored java docs.
   * Adjust message displays.
-  * Several bug fixes.
+  * Added test cases to improve our test coverage, and discovered bugs along the way.
+  * Managed issues and pull requests on Github by opening new ones, and closing and reviewing existing ones.
+  * Several bug fixes, for example:
+    * [Issue #279](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/279) where sellers who had no property could be matched with buyers, leading to undesirable behaviors.
+    * [Issue #213](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/213) where index out of range had no exception thrown.
 
 * **Review contributions**:
-  * Reviewed multiple Pull Requests, and added comments to some of them.
+  * Reviewed many Pull Requests, and added comments to some of them.
+  * E.g: [PR #201](https://github.com/AY2122S2-CS2103T-T11-2/tp/pull/201) where I pointed out several typos and suggested ways to improve the user-friendliness and language of the user guide.
