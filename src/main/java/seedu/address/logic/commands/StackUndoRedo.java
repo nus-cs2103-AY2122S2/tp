@@ -10,10 +10,7 @@ import java.util.Stack;
 
 public class StackUndoRedo {
     private Stack<RedoableCommand> undoStack;
-    private Stack<String> commandUndoStack;
-
     private Stack<RedoableCommand> redoStack;
-    private Stack<String> commandRedoStack;
 
     /**
      * StackUndoRedo Class to enable storing of commands FIFO
