@@ -28,7 +28,7 @@ Given below are my contributions to the project.
 * **New Feature**:
   * Added the ability to delete tasks that were previously assigned to all the persons taking the same module. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
     * What it does: The command deletes the task assigned to students taking a certain module. The module code and task name should be specified.
-    * Justification: If the TA had incorrectly assigned a task, instead of deleting the task for each student taking the module individually by using their student code, and finding out the index of that particular task for student, the TA could directly use this command to delete this task for all the students under this module, if they were assigned the task.
+    * Justification: Before this feature was implemented, if a TA had incorrectly assigned a task, they would have to delete the task for each student taking the module using their student code, and the index of that particular task for each student. With this feature, the TA could simply use this command to delete a task for all the students who are taking this module and have been assigned with this task.
     * Highlights: I modified the implementation of `DeleteTask` that is executed by specifying studentId and index, to include this command.
 
 
