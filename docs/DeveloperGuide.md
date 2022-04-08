@@ -524,7 +524,7 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
-**Use case: UC06 - Adding or editing a role with a reminder date**
+**Use case: UC06 - Using the reminder feature**
 
 Precondition: there exist at least one company stored in Tinner
 
