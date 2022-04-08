@@ -13,19 +13,22 @@ title: Developer Guide
     * [Storage Component](#storage-component)
 * [Implementation](#implementation)
     * [Find feature](#find-feature)
-        * [Implementation](#implementation-find)
-        * [Design considerations](#design-considerations-find)
+      * [Implementation](#implementation-find)
+      * [Design considerations](#design-considerations-find)
+    * [Add role feature](#add-role-feature)
+      * [Implementation](#implementation-add)
+      * [Design considerations](#design-considerations-add)
     * [Edit role feature](#edit-role-feature)
-        * [Implementation](#implementation-edit)
-        * [Design considerations](#design-considerations-edit)
+      * [Implementation](#implementation-edit)
+      * [Design considerations](#design-considerations-edit)
     * [Delete role feature](#delete-role-feature)
-        * [Implementation](#implementation-delete)
-        * [Design considerations](#design-considerations-delete)
+      * [Implementation](#implementation-delete)
+      * [Design considerations](#design-considerations-delete)
     * [Reminder feature](#reminder-feature)
-        * [Implementation](#implementation-reminder)
+      * [Implementation](#implementation-reminder)
     * [Favourite feature](#favourite-feature)
-        * [Implementation](#implementation-favourite)
-        * [Design considerations](#design-considerations-favourite)
+      * [Implementation](#implementation-favourite)
+      * [Design considerations](#design-considerations-favourite)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#requirements)
   * [Product scope](#product-scope)
@@ -192,6 +195,10 @@ The `JsonAdaptedCompany` also contains a list of roles in `List<JsonAdaptedRole>
 
 ## Implementation <a id="implementation"></a>
 
+Due to some of our features having duality in its implementaion, we have decided to omit those features exclusive
+to `company` that have a `role` counterpart. This is due to the `role` counterpart being more complicated as it builds
+directly on top of the features exclusive to `company`.
+
 ### Find feature <a id="find-feature"></a>
 
 The `find` feature allows users to filter the company list to find roles by specifying company name keywords and role name keywords.
@@ -227,6 +234,66 @@ The following activity diagram summarises what happens when a user executes the 
     * Cons:
         * Users have less flexibility in searching for specific roles, especially when they have applied for multiple roles within the same company. They can only find all roles which belong to specific companies.
 
+### Add role feature <a id="add-role-feature"></a>
+The `addRole` command for the `Role` item allows the user to add a new role by specifying
+the company index this role is attached to, and the details of the role with the appropriate prefix.
+
+The fields of the `Role` that are necessary are as follows:
+* `RoleName`
+* `Status`
+
+The fields of the `Role` that are optional are as follows:
+* `ReminderDate`
+* `Description`
+* `Stipend`
+
+#### Implementation <a id="implementation-add"></a>
+
+![UML diagram of the AddRole feature](images/AddRoleDiagram.png)  
+The `addRole` command is primarily implemented by `AddRoleCommandParser` a class that extends `Parser`, 
+and `AddRoleCommand`, which is a class that extends `Command`.
+
+The `AddRoleCommandParser` has three main objective
+1. Ensure user inputs all necessary fields.
+2. Ensure validity of all fields from user input.
+3. If 1 and 2 are satisfied, store the user inputs into a new `Role` object.
+
+If all three objectives are achieved, the newly created `Role` object would then be passed to `AddRoleCommand`
+Upon completion of executing `addRole` command, the displayed list of roles would be dynamically updated accordingly.
+
+Given below is an example usage scenario and how the add role feature behaves at each step:
+1. The user executes the command `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59` to add a new role into the 1<sup>st</sup> company.
+2. Then the `AddRoleCommandParser#parse()` parses and creates a `Role` object with fields to be added such as the roleName `Data Analyst` before creating an instance of `AddRoleCommand` with it.
+3. The `AddRoleCommandParser` returns the `AddRoleCommand` to the `LogicManager`. `LogicManager` invokes `AddRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so append the `Role` object to the back of its `RoleManager`.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
+
+
+The following sequence diagram shows how the `addRole` command operation works with the
+valid user input `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59`:
+![Sequence diagram of the AddRole feature](images/AddRoleSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an `addRole` command:    
+![Activity diagram of the AddRole feature](images/AddRoleActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-add"></a>
+* Alternative 1 (current choice): Abstract `Role`'s storage to be handled by `RoleManager`
+    * Pros: 
+      * Reduce coupling between `Role` and `Company` as the `addRole` feature is implemented
+      via the `Role`'s model instead of the `Company`'s model.
+      * `Company` does not need to worry about the implementation details of `Role`,
+      which it shouldn't in the first place.
+    * Cons:
+      * Increases code duplication as `Company` class has to retain methods which acts as signals for
+      invoking execution of methods in `Role`.
+* Alternative 2 (used in v1.2): `Role` is stored in a Java List as an attribute of `Company` class
+    * Pros: 
+      * All commands related to `Role` can be implemented and handled on `Company` level, reduces code repetition.
+      * `AddRole` feature could be achieved via calling on an attribute of `Company`.
+    * Cons:
+      * Exposes the internal implementation of `Role` to `Company` even though they are different.
+      * Increases coupling between `Role` and `Company`.
+
+
 ### Edit role feature <a id="edit-role-feature"></a>
 The `editRole` command for the `Role` item allows the user to update any fields by specifying
 the company index, role index and prefixes of the fields to be updated.
@@ -244,16 +311,19 @@ The aforementioned fields of the `Role` that can be modified are as follows:
 The `editRole` command is primarily implemented by `EditRoleCommandParser` a class that
 extends `Parser`, and `EditRoleCommand`, which is a class that extends `Command`. The `EditRoleCommand` has
 an inner class `EditRoleDescriptor` that holds the changes to fields of the `Role` to be modified.
+Upon completion of executing `editRole` command, the displayed list of roles would be dynamically updated accordingly.
 
 Given below is an example usage scenario and how the edit role feature behaves at each step:
 1. The user executes the command `editRole 1 1 d/react js` to edit the description in the 1<sup>st</sup> role from the 1<sup>st</sup> company.
-2. Then the `EditRoleCommandParser#parse()` creates an `EditRoleDescriptor` object with fields to be modified such as the description `react js` for the `EditRoleCommand`.
-3. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+2. Then the `EditRoleCommandParser#parse()` parses and creates an `EditRoleDescriptor` object with fields to be modified such as the description `react js` before creating an instance of `EditRoleCommand` with it.
+3. The `EditRoleCommandParser` returns the `EditRoleCommand` to `LogicManager`. `LogicManager` invokes `EditRoleCommand#execute()` which validates the company and role indexes, if so edit its description to the user input.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
+
 
 The following sequence diagram shows how the `editRole` command operation works with the valid user input `editRole 1 1 d/react js`:
 ![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)  
 
-The following activity diagram summarizes what happens when a user executes an edit role command:    
+The following activity diagram summarizes what happens when a user executes an `editRole` command:    
 ![Activity diagram of the EditRole feature](images/EditRoleActivityDiagram.png)
 
 #### Design considerations <a id="design-considerations-edit"></a>
@@ -275,25 +345,39 @@ The following activity diagram summarizes what happens when a user executes an e
 The `deleteRole` command for the `Role` item allows the user to delete any role under a `Company` item by specifying the company index and role index that which are associated with the `Role` item to be deleted.
 
 #### Implementation <a id="implementation-delete"></a>
-The `deleteRole` command relies on the `DeleteRoleCommandParser`, a class that extends `Parser`, as well as `DeleteRoleCommand`, which is a class that extends `Command`. The `DeleteRoleCommand`, upon execution, dynamically updates the displayed list of roles accordingly.
-
-* Upon a valid user's input using the `deleteRole` command, the `DeleteRoleCommandParser#parse()` retrieves the indices of the role to be deleted from the parsed user input.
-* The `DeleteRoleCommandParser#parse()` then instantiates a `DeleteRoleCommand` that possesses the aforementioned indices.
-* Then invoking the `DeleteRoleCommand#execute()` method will update the internal `CompanyList` and `FilteredList<Company>` of the `ModelManager` to reflect the role deletion.
-
 ![UML diagram of the DeleteRole feature](images/DeleteRoleDiagram.png)
+
+The `deleteRole` command relies on the `DeleteRoleCommandParser`, a class that extends `Parser`, as well as `DeleteRoleCommand`, which is a class that extends `Command`.
+The `DeleteRoleCommand`, upon completion, dynamically updates the displayed list of roles accordingly.
+
+Given below is an example usage scenario and how the delete role feature behaves at each step:
+1. The user executes the command `deleteRole 1 1` to delete the 1<sup>st</sup> role from the 1<sup>st</sup> company.
+2. Then the `DeleteRoleCommandParser#parse()` parses and creates an instance of `DeleteRoleCommand` with the company index and role index parsed.
+3. The `DeleteRoleCommandParser` returns the `DeleteRoleCommand` to `LogicManager`. `LogicManager` invokes `DeleteRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so deletes the role.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
+
 
 The following sequence diagram shows how the `deleteRole` command operation works with the user input `deleteRole 1 1`:
 
 ![Sequence diagram of the DeleteRole feature](images/DeleteRoleSequenceDiagram.png)
 
-1. The user first enters the input `deleteRole 1 1`, the `CompayListParser#parseCommand()` method parses the information `1 1` to `DeleteRoleCommandParser` using the method `parse()` based on the keyword `deleteRole`.
-2. The `DeleteRoleCommandParser#parse()` method creates an instance of `DeleteCommand` by passing the company index and role index of the role that is to be deleted.
-4. The `DeleteRoleCommand` object is returned to the `LogicManager` and invokes the `DeleteRoleCommand#execute()` method to implement the deletion.
-5. The  `DeleteRoleCommand#execute()` checks the validity of both the indexes, and invokes the `Model#deleteRole()` method using the stored company index and role index.
-6. The  `Model#deleteRole()` – with the indices – deletes the relevant role from the internal `CompanyList` in the `ModelManager`, from which the changes are also reflected visually in the filtered company list.
-7. Upon successful operation, a new `CommandResult` object is returned to the `LogicManager`.
+The following activity diagram summarizes what happens when a user executes an `deleteRole` command:    
+![Activity diagram of the EditRole feature](images/DeleteRoleActivityDiagram.png)
 
+#### Design considerations <a id="design-considerations-delete"></a>
+* Alternative 1 (current choice): Split `delete` feature into `deleteCompany` and `deleteRole`
+    * Pros:
+        * Prevents users from accidentally deleting an entire company when intended action was to only delete roles.
+        * More intutive to users as it is easier to associate the differences with words compared to format of command. 
+    * Cons:
+        * Increases code repetition due to both delete features have similar components.
+* Alternative 2 (used in v1.2): Have a unified `delete` feature that changes functionality based off user input.
+    * Pros:
+        * Reduce code repetition due to not having two different class and two different parsers.
+    * Cons:
+        * User might accidentally delete an entire `company` if command was sent too early, resulting in the `company` and all associated `roles` being deleted.
+        * Due to the lack of an undo feature, this is can be a massive problem.
+    
 
 ### Reminder feature <a id="reminder-feature"></a>
 Whenever the user starts up the application, a reminder pane will automatically open along with the main window, showing all roles and their respective companies that have reminder dates that are within the reminder window.
@@ -639,7 +723,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
 5. Test case: `editRole 1 1 $/10000000000` or `editRole 1 1 $/0`
    1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
    The response box shows error message that stipend must be a positive value and input of stipend should be at most 10 digits long.
-6. Other incorrect test cases to try:`editRole`, `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
+6. Other incorrect test cases to try: `editRole`, `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
    1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
    The response box shows error message that it is an invalid command or company/role index provided is invalid.
 
