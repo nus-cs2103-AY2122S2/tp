@@ -406,9 +406,9 @@ Students who...
 
 **Value proposition**:
 
-* Track (View all your internship applications at a glance)
-* Remind (Be reminded of your upcoming assessments)
-* Review (Comment on each stage of the application process for future self-improvement or review the company’s hiring process)
+1. **Tracks** essential information such as statuses and deadlines at a glance.
+2. **Reminds** you of important deadlines so that you will not miss anything about your application.
+3. Allows you to **Review** the process and take down notes so that you can ace your next application.
 
 ### User stories <a id="user-stories"></a>
 
@@ -614,17 +614,17 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `editCompany 2 n/Tik Tok`
     1. Expected: The name 2<sup>nd</sup> company is not updated.
        The response box shows error message that the company already exists in the company list.
-4. Other incorrect test cases to try: `editCompany x n/VAlID_COMPANY_NAME` where x is an integer larger than the size of the company list or negative integer values.
+4. Other incorrect test cases to try: `editCompany`, `editCompany x n/VAlID_COMPANY_NAME` where x is an integer larger than the size of the company list or negative integer values.
     1. Expected: The intended company with index `x` is not updated.
-   The response box shows error message that company/ role index is invalid
+   The response box shows error message that it is an invalid command or company index provided is invalid. 
 
 ### Deleting a company <a id="deleting-a-company"></a>
 1. Prerequisites: At least 2 companies must exist and listed using the `list` command
 2. Test case: `deleteCompany 1`
    1. Expected: First company with its roles included if any, is removed from the company list. 
    The response box shows the details of the deleted company.
-3. Other incorrect test cases to try: `deleteCompany x` where x is an integer larger than the size of the company list or negative integer values.
-   1. Expected: Company with index `x` is not deleted. The response box shows error message that the company index provided is invalid.
+3. Other incorrect test cases to try: `deleteCompany`, `deleteCompany x` where x is an integer larger than the size of the company list or negative integer values.
+   1. Expected: Company with index `x` is not deleted. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 ### Favouriting a company <a id="favouriting-a-company"></a>
 1. Prerequisites: At least 2 companies must exist with the first company in the company list already favourited (indicated with a star beside its name in the GUI), and listed using the `list` command
@@ -634,8 +634,8 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `favourite 1`
     1. Expected: First company in the displayed company list is not favourited again as it is already favourited.
        The response box shows a message indicating that the company is already favourited.
-4. Other incorrect test cases to try: `favourite x` where x is an integer larger than the size of the company list or negative integer values.
-    1. Expected: Company with index `x` is not favourited. The response box shows error message that the company index provided is invalid.
+4. Other incorrect test cases to try: `favourite`, `favourite x` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 ### Unfavouriting a company <a id="unfavouriting-a-company"></a>
 1. Prerequisites: At least 2 companies must exist with the first company in the company list already favourited (indicated with a star beside its name in the GUI), and listed using the `list` command
@@ -645,8 +645,8 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `unfavourite 2`
     1. Expected: Second company in the displayed company list is not unfavourited as it is already unfavourited.
        The response box shows a message indicating that the company is already unfavourited.
-4. Other incorrect test cases to try: `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
-    1. Expected: Company with index `x` is not favourited. The response box shows error message that the company index provided is invalid.
+4. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
+    1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 
 ### Editing a role <a id="editing-a-role"></a>
@@ -663,9 +663,9 @@ Guarantees: every role in companies that have reminder dates within the reminder
 5. Test case: `editRole 1 1 $/10000000000` or `editRole 1 1 $/0`
    1. Expected: The stipend of 1<sup>st</sup> role from the 1<sup>st</sup> company is not updated.
    The response box shows error message that stipend must be a positive value and input of stipend should be at most 10 digits long.
-6. Other incorrect test cases to try: `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
+6. Other incorrect test cases to try:`editRole`, `editRole x1 x2 n/VAlID_ROLE_NAME` where x1 or x2 are integers larger than the size of the company list and role list respectively or negative integer values. 
    1. Expected: The intended company with index `x1` and role with index `x2` is not updated.
-   The response box shows error message that company/ role index is invalid
+   The response box shows error message that it is an invalid command or company/role index provided is invalid.
 
 
 ### Using the reminder feature <a id="using-reminders"></a>
