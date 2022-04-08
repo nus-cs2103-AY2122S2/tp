@@ -199,6 +199,7 @@ There are three cases of usage:
 * If `INDEX` or `NAME` is provided as well as a `-a` flag, then all logs of that person will
   be deleted.
 * If only `-a` is provided, then all possible logs of all friends will be deleted.
+  * Note that in the command summary, we present the above as `deletelog INDEX ? n/NAME [id/LOG_INDEX] [-a]` for convenience.
 
 **Examples:**
 * `deletelog n/John Doe id/1`
