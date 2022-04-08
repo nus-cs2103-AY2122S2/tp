@@ -249,9 +249,9 @@ Hence, `Storage#addNewTempAddressBookFile()` will not be called and no new tempo
 
 Step 6. The user closes the CinnamonBun application. All temporary files created will be deleted.
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: How undo executes:**
+**Aspect: How undo executes**
 
 * **Alternative 1 (current choice):** Saves the entire application data in temporary files.
   * Pros: Easy to implement.
@@ -270,9 +270,9 @@ The membership functionality will be to store all available memberships into a l
 
 Membership details will be created by users, user can then assign an existing membership to a client.
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: How it executes:**
+**Aspect: How it executes**
 
 * **Alternative 1 (current choice):** Create a list of Memberships, assign membership index to client.
   * Pros: Allows for easy management of memberships
@@ -294,9 +294,9 @@ fields must be registered in the `TransactionFieldRegistry`. Each field is eithe
 
 Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and `Note`.
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: How it executes:**
+**Aspect: How it executes**
 
 * **Alternative 1:** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`. 
     Everytime a user create a transaction, a new instance of transaction will be added to the list and a person/client
@@ -339,9 +339,9 @@ We then passed the `comparator` created and passed it to `Model#sortPersonList()
 
 Java's `list` library will then handle the sorting based on the `comparator`.
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: How it executes:**
+**Aspect: How it executes**
 
 * **Alternative 1 (current choice):** Each field class will handle how to sort its own data, `SortCommand` will then
 wrap it into a comparator and pass to `Model#sortPersonList()`.
@@ -356,7 +356,8 @@ wrap it into a comparator and pass to `Model#sortPersonList()`.
 
 
 ### Command chaining
-**Implementation**
+
+#### Implementation
 
 The command chaining mechanism is handled in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
 
@@ -364,31 +365,9 @@ To handle multiple commands, the program splits the given user input using the `
 
 While iterating through the individual commands, the program checks if any of the commands are a special command - `help`, `exit` and `undo` - or if it is invalid. If any of these conditions are met, the program will then set the `isValid` boolean to false, break out of the loop and set the addressBook of the model to one that was taken before the start of command execution, essentially reverting all the changes.
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: Behaviour of command chains with special commands and errors:**
-
-* **Alternative 1:** The valid commands before a special command `help`, `exit` or `undo` or command error will still be executed
-    * Pros: Easier to implement as there is no need to check the validity of each command and reset the model.
-    * Cons: Will only execute certain commands instead of all when a chain is broken which may be confusing. The undo feature may be harder to implement since a command can be partially run.
-
-
-* **Alternative 2 (current choice):** Disregard all commands in a chain whenever a special command or error is found.
-    * Pros: Intuitive and plays well with other features such as `undo`.
-    * Cons: Command validity has to be caught and handled in execution() which may slow down performance.
-
-### Command chaining
-**Implementation**
-
-The command chaining mechanism is handled in the `execute()` function in the `LogicManager` class which is where the user's input is parsed, executed and then returned as a `CommandResult`.
-
-To handle multiple commands, the program splits the given user input using the `|` delimiter used to separate the multiple commands. Once the input has been split, the program can then evaluate each command sequentially by iterating through the individual commands.
-
-While iterating through the individual commands, the program checks if any of the commands are a special command - `help`, `exit` and `undo` - or if it is invalid. If any of these conditions are met, the program will then set the `isValid` boolean to false, break out of the loop and set the addressBook of the model to one that was taken before the start of command execution, essentially reverting all the changes.
-
-#### Design considerations:
-
-**Aspect: Behaviour of command chains with special commands and errors:**
+**Aspect: Behaviour of command chains with special commands and errors**
 
 * **Alternative 1:** The valid commands before a special command `help`, `exit` or `undo` or command error will still be executed
     * Pros: Easier to implement as there is no need to check the validity of each command and reset the model.
@@ -410,9 +389,9 @@ Once the program determines that the last word cannot be completed, it will try 
 
 The Levenshtein distance is calculated using the `editDistance(String str1, String str2)` method which uses a typical dynamic programming algorithm with a runtime of O(m * n). Unlike standard algorithms, however, this method uses a fixed height matrix with only two rows that the program alternates between during computation. This means the size is bounded by the length of `str2` which in this case will be one of the fixed commands.
 
-#### Design considerations:
+#### Design considerations
 
-**Aspect: Behaviour of command completion/correction:**
+**Aspect: Behaviour of command completion/correction**
 
 * **Alternative 1:** Suggestions will be shown to the user in realtime while they are typing.
     * Pros: The user will be able to view each suggestion and will have much more information and freedom to decide whether to take up a suggestion.
@@ -435,7 +414,7 @@ Here is a brief example of how the command history works:
 * Each time the user presses the up arrow key, the command box will be replaced with the command they previously executed, until they reach the start of their history.
 * Each time the user presses the down arrow key, the command box will be replaced with the command they next executed, until they reach the latest command (the current one they have not executed).
 * If the user executes duplicate commands one after another, only the first will be added to history.
-  * For example, if the user executes `list`, `list, `list`, only the first list is added to history. 
+  * For example, if the user executes `list`, `list`, `list`, only the first list is added to history. 
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
