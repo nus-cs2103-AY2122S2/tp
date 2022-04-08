@@ -89,72 +89,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         // view P/[PLAYER_NAME...]
         if (hasPSlash) {
-            // capture the type of view
-            prefixAndArgument.add(PREFIX_PLAYER.toString());
-
-            // view P/ --> view all player
-            if (args.equals(" P/")) {
-                predicates.add(PREDICATE_SHOW_ALL_PERSONS);
-                return new ViewCommand(predicates, null, prefixAndArgument);
-            }
-
-            // check has preamble. check here because if arg = "P/", preamble = "P/" as well
-            if (!argMultimap.getPreamble().isEmpty() || hasBigNSlash) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ViewCommand.MESSAGE_USAGE_PLAYER));
-            }
-
-            // view P/[PLAYER_NAME...] [w/gte|lte|gt|lt|eq WEIGHT] [h/gte|lte|gt|lt|eq HEIGHT] [t/POSITION]
-            String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
-            if (!playerNameArg.equals("")) {
-                if (!playerNameArg.matches(VALIDATION_REGEX)) {
-                    throw new ParseException("You have provided an invalid name criteria!");
-                }
-                String trimmedArgs = playerNameArg.trim();
-                prefixAndArgument.add(trimmedArgs);
-                String[] nameKeywords = trimmedArgs.split("\\s+");
-                predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-                //return new ViewCommand(predicates, null, prefixAndArgument);
-            }
-
-            // height
-            if (arePrefixesPresent(argMultimap, PREFIX_HEIGHT)) {
-                String heightArg = argMultimap.getValue(PREFIX_HEIGHT).get();
-                if (!heightArg.equals("")) {
-                    String trimmedArgs = heightArg.trim();
-                    prefixAndArgument.add(trimmedArgs);
-                    trimmedArgs = parseRelationalOperator(trimmedArgs, VALID_HEIGHT_OPERATOR_REGEX);
-                    predicates.add(new HeightContainsKeywordsPredicate(trimmedArgs));
-                } else {
-                    throw new ParseException("You have provided an empty height criteria!");
-                }
-            }
-
-            // weight
-            if (arePrefixesPresent(argMultimap, PREFIX_WEIGHT)) {
-                String weightArg = argMultimap.getValue(PREFIX_WEIGHT).get();
-                if (!weightArg.equals("")) {
-                    String trimmedArgs = weightArg.trim();
-                    prefixAndArgument.add(trimmedArgs);
-                    trimmedArgs = parseRelationalOperator(trimmedArgs, VALID_WEIGHT_OPERATOR_REGEX);
-                    predicates.add(new WeightContainsKeywordsPredicate(trimmedArgs));
-                } else {
-                    throw new ParseException("You have provided an empty weight criteria!");
-                }
-            }
-
-            if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
-                String positionArg = argMultimap.getValue(PREFIX_TAG).get();
-                if (!positionArg.equals("")) {
-                    String trimmedArgs = positionArg.trim();
-                    prefixAndArgument.add(trimmedArgs);
-                    String[] nameKeywords = trimmedArgs.split("\\s+");
-                    predicates.add(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-                } else {
-                    throw new ParseException("You have provided an empty tag criteria!");
-                }
-            }
-            return new ViewCommand(predicates, null, prefixAndArgument);
+            return parseViewPlayer(argMultimap);
         }
 
         // view L/[LINEUP_NAME...]
@@ -265,16 +200,108 @@ public class ViewCommandParser implements Parser<ViewCommand> {
     }
 
     private static String parseRelationalOperator(String trimmedArgs, String regex) throws ParseException {
-        String heightOrWeight = "";
+        String heightOrWeightOrName = "";
         if (trimmedArgs.matches(regex)) {
             return trimmedArgs;
         }
-        if (regex.equals(VALID_HEIGHT_OPERATOR_REGEX)) {
-            heightOrWeight = "height";
-        } else if (regex.equals(VALID_WEIGHT_OPERATOR_REGEX)) {
-            heightOrWeight = "weight";
+        switch (regex) {
+        case VALID_HEIGHT_OPERATOR_REGEX:
+            heightOrWeightOrName = "height";
+            break;
+        case VALID_WEIGHT_OPERATOR_REGEX:
+            heightOrWeightOrName = "weight";
+            break;
+        case VALIDATION_REGEX:
+            heightOrWeightOrName = "name";
+            break;
         }
-        throw new ParseException("Please check your parameter for " + heightOrWeight + "!");
+        throw new ParseException("Please check your parameter for " + heightOrWeightOrName + "!");
+    }
+
+    private static ViewCommand parseViewPlayer(ArgumentMultimap argMultimap) throws ParseException {
+        // capture the type of view
+        List<String> prefixAndArg = new ArrayList<>();
+
+        // store the predicate for all the predicate that applies to player
+        List<Predicate<Person>> predicates = new ArrayList<>();
+
+        // capture the type of view
+        prefixAndArg.add(PREFIX_PLAYER.toString());
+
+        boolean hasBigNSlash = arePrefixesPresent(argMultimap, PREFIX_WITHOUT_LINEUP); // N/
+
+        // check has preamble and corner case of having N/ in P/
+        if (!argMultimap.getPreamble().isEmpty() || hasBigNSlash) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewCommand.MESSAGE_USAGE_PLAYER));
+        }
+
+        // player name
+        if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
+            String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
+            if (playerNameArg.equals("")) {
+                predicates.add(PREDICATE_SHOW_ALL_PERSONS);
+            } else {
+                String[] nameKeywords = parseName(playerNameArg);
+                prefixAndArg.add(playerNameArg);
+                predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            }
+        }
+
+        // height
+        if (arePrefixesPresent(argMultimap, PREFIX_HEIGHT)) {
+            String heightArg = argMultimap.getValue(PREFIX_HEIGHT).get();
+            prefixAndArg.add(heightArg);
+            predicates.add(new HeightContainsKeywordsPredicate(parseHeightArg(heightArg)));
+        }
+
+        // weight
+        if (arePrefixesPresent(argMultimap, PREFIX_WEIGHT)) {
+            String weightArg = argMultimap.getValue(PREFIX_WEIGHT).get();
+            prefixAndArg.add(weightArg);
+            predicates.add(new WeightContainsKeywordsPredicate(parseWeightArg(weightArg)));
+        }
+
+        // tag
+        if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+            String tagArg = argMultimap.getValue(PREFIX_TAG).get();
+            prefixAndArg.add(tagArg);
+            predicates.add(new TagContainsKeywordsPredicate(Arrays.asList(parseTagArg(tagArg))));
+        }
+        return new ViewCommand(predicates, null, prefixAndArg);
+    }
+
+    private static String[] parseName(String NameArg) throws ParseException {
+        try {
+            String trimmedArgs = parseRelationalOperator(NameArg.trim(), VALIDATION_REGEX);
+            return trimmedArgs.split("\\s+");
+        } catch (ParseException pe) {
+            throw pe;
+        }
+    }
+
+    private static String parseHeightArg(String heightArg) throws ParseException {
+        if (!heightArg.equals("")) {
+            return parseRelationalOperator(heightArg.trim(), VALID_HEIGHT_OPERATOR_REGEX);
+        }
+        throw new ParseException("You have provided an empty height criteria!");
+    }
+
+    private static String parseWeightArg(String weightArg) throws ParseException {
+        if (!weightArg.equals("")) {
+            return parseRelationalOperator(weightArg.trim(), VALID_WEIGHT_OPERATOR_REGEX);
+        } else {
+            throw new ParseException("You have provided an empty weight criteria!");
+        }
+    }
+
+    private static String[] parseTagArg(String tagArg) throws ParseException {
+        if (!tagArg.equals("")) {
+            String trimmedArgs = tagArg.trim();
+            return trimmedArgs.split("\\s+");
+        } else {
+            throw new ParseException("You have provided an empty tag criteria!");
+        }
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
