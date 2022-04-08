@@ -224,7 +224,7 @@ Original list:
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 ![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
 
-📓`Notes:` 
+📓`Notes:`
 * Tracey shows the entire edited database after the edit command is applied.
 * After every edit command, the student at the specified index will be shifted to the bottom of the list.
 
@@ -358,7 +358,7 @@ Archives the current Tracey database. The archived database will be saved in `[R
 * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
   * The day is abbreviated as DD, the month is abbreviated as MM and the last two digit of the year is abbreviated as YY.
 * `[ARCHIVED_FILE]`: Archived file name named using your local PC's date and time in the format of DDMMYY_hhmmssSSS
-  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS. 
+  * The hour is abbreviated as hh, the minute is abbreviated as mm, the seconds is abbreviated as ss and the milliseconds is abbreviated as SSS.
 
 Format: `archive`
 
