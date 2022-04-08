@@ -3,8 +3,8 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
-                PREFIX_PRICE, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
+                PREFIX_PRICE, PREFIX_DISCOUNT_RATE, PREFIX_DISCOUNT_START);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE)
             || !argMultimap.getPreamble().isEmpty()) {
@@ -51,10 +51,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
                 .orElse(Description.DEFAULT_DESCRIPTION));
         DiscountRate discountRate =
-                ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE)
+                ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNT_RATE)
                 .orElse(DiscountRate.DEFAULT_DISCOUNT_RATE));
         DiscountStart discountStart =
-                ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART)
+                ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNT_START)
                 .orElse(DiscountStart.DEFAULT_DISCOUNT_START));
 
         Product product = new Product(name, category, description, price, discountRate, discountStart);

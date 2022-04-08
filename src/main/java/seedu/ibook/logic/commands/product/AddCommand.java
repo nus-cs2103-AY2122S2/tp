@@ -3,8 +3,8 @@ package seedu.ibook.logic.commands.product;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 
@@ -26,16 +26,16 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_CATEGORY + "CATEGORY "
             + PREFIX_PRICE + "PRICE "
-            + PREFIX_DISCOUNTRATE + "DISCOUNT RATE "
-            + PREFIX_DISCOUNTSTART + "DISCOUNT START "
+            + PREFIX_DISCOUNT_RATE + "DISCOUNT RATE "
+            + PREFIX_DISCOUNT_START + "DISCOUNT START "
             + PREFIX_DESCRIPTION + "DESCRIPTION"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tasty Bread "
             + PREFIX_CATEGORY + "Bread "
             + PREFIX_PRICE + "3.00 "
-            + PREFIX_DISCOUNTRATE + "25 "
-            + PREFIX_DISCOUNTSTART + "3 "
+            + PREFIX_DISCOUNT_RATE + "25 "
+            + PREFIX_DISCOUNT_START + "3 "
             + PREFIX_DESCRIPTION + "Very Tasty";
 
     public static final String MESSAGE_SUCCESS = "New product added:\n%1$s";

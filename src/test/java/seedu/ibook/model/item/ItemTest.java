@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_02;
+import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_02_KAYA;
 import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 import static seedu.ibook.testutil.TypicalProducts.PEANUT_BUTTER_BREAD;
@@ -35,11 +35,11 @@ class ItemTest {
     @Test
     void add() {
         // 5 + 5 = 10
-        Item combinedItem = Q5_2022_03_01.add(Q5_2022_03_01);
-        assertEquals(Q10_2022_03_01, combinedItem);
+        Item combinedItem = Q5_2022_03_01_KAYA.add(Q5_2022_03_01_KAYA);
+        assertEquals(Q10_2022_03_01_KAYA, combinedItem);
 
         // adding Items with different expiry dates -> Exception
-        assertThrows(IllegalArgumentException.class, () -> Q5_2022_03_01.add(Q5_2022_03_02));
+        assertThrows(IllegalArgumentException.class, () -> Q5_2022_03_01_KAYA.add(Q5_2022_03_02_KAYA));
     }
 
     @Test
@@ -51,53 +51,53 @@ class ItemTest {
     @Test
     void isSameItem() {
         // same object -> returns true
-        assertTrue(Q5_2022_03_01.isSame(Q5_2022_03_01));
+        assertTrue(Q5_2022_03_01_KAYA.isSame(Q5_2022_03_01_KAYA));
 
         // null -> returns false
-        assertFalse(Q5_2022_03_01.isSame(null));
+        assertFalse(Q5_2022_03_01_KAYA.isSame(null));
 
         // same expiry date, different quantity -> returns true
-        Item editedItem = new ItemBuilder(Q5_2022_03_01).withQuantity(QUANTITY_10).build(KAYA_BREAD);
-        assertTrue(Q5_2022_03_01.isSame(editedItem));
+        Item editedItem = new ItemBuilder(Q5_2022_03_01_KAYA).withQuantity(QUANTITY_10).build(KAYA_BREAD);
+        assertTrue(Q5_2022_03_01_KAYA.isSame(editedItem));
 
         // different expiry date, same quantity -> returns false
-        editedItem = new ItemBuilder(Q5_2022_03_01).withExpiryDate("2020-01-01").build(KAYA_BREAD);
-        assertFalse(Q5_2022_03_01.isSame(editedItem));
+        editedItem = new ItemBuilder(Q5_2022_03_01_KAYA).withExpiryDate("2020-01-01").build(KAYA_BREAD);
+        assertFalse(Q5_2022_03_01_KAYA.isSame(editedItem));
 
         // same item, different product -> returns false
-        editedItem = new ItemBuilder(Q5_2022_03_01).build(PEANUT_BUTTER_BREAD);
-        assertFalse(Q5_2022_03_01.isSame(editedItem));
+        editedItem = new ItemBuilder(Q5_2022_03_01_KAYA).build(PEANUT_BUTTER_BREAD);
+        assertFalse(Q5_2022_03_01_KAYA.isSame(editedItem));
     }
 
     @Test
     void testEquals() {
         // same values -> returns true
-        Item itemCopy = new ItemBuilder(Q5_2022_03_01).build(KAYA_BREAD);
-        assertEquals(Q5_2022_03_01, itemCopy);
+        Item itemCopy = new ItemBuilder(Q5_2022_03_01_KAYA).build(KAYA_BREAD);
+        assertEquals(Q5_2022_03_01_KAYA, itemCopy);
 
         // different expiry date -> return false
-        assertNotEquals(Q5_2022_03_01, Q5_2022_03_02);
+        assertNotEquals(Q5_2022_03_01_KAYA, Q5_2022_03_02_KAYA);
 
         // different quantity -> return false
-        assertNotEquals(Q5_2022_03_01, Q10_2022_03_01);
+        assertNotEquals(Q5_2022_03_01_KAYA, Q10_2022_03_01_KAYA);
 
         // different product -> return false
-        assertNotEquals(Q5_2022_03_01, Q5_2022_03_01.toItem(PEANUT_BUTTER_BREAD));
+        assertNotEquals(Q5_2022_03_01_KAYA, Q5_2022_03_01_KAYA.toItem(PEANUT_BUTTER_BREAD));
 
         // null -> returns false
-        assertNotEquals(null, Q5_2022_03_01);
+        assertNotEquals(null, Q5_2022_03_01_KAYA);
 
         // different type -> returns false
-        assertNotEquals(5, Q5_2022_03_01);
+        assertNotEquals(5, Q5_2022_03_01_KAYA);
     }
 
     @Test
     void compareTo() {
-        Item itemWithEarlierExpiryDate = new ItemBuilder(Q5_2022_03_01)
+        Item itemWithEarlierExpiryDate = new ItemBuilder(Q5_2022_03_01_KAYA)
                 .withExpiryDate("2000-01-01").build(KAYA_BREAD);
-        assertTrue(itemWithEarlierExpiryDate.compareTo(Q5_2022_03_01) < 0);
-        assertTrue(Q5_2022_03_01.compareTo(itemWithEarlierExpiryDate) > 0);
-        assertEquals(0, Q5_2022_03_01.compareTo(Q10_2022_03_01));
+        assertTrue(itemWithEarlierExpiryDate.compareTo(Q5_2022_03_01_KAYA) < 0);
+        assertTrue(Q5_2022_03_01_KAYA.compareTo(itemWithEarlierExpiryDate) > 0);
+        assertEquals(0, Q5_2022_03_01_KAYA.compareTo(Q10_2022_03_01_KAYA));
     }
 
     @Test
@@ -122,9 +122,9 @@ class ItemTest {
         String expiryDate3 = LocalDate.now().plusDays(discountStart - 10000).format(dateFormatter);
 
         List<ItemDescriptor> items = new ArrayList<>(Arrays.asList(
-                new ItemBuilder(Q5_2022_03_01).withExpiryDate(expiryDate1).buildItemDescriptor(),
-                new ItemBuilder(Q10_2022_03_01).withExpiryDate(expiryDate2).buildItemDescriptor(),
-                new ItemBuilder(Q10_2022_03_01).withExpiryDate(expiryDate3).buildItemDescriptor()
+                new ItemBuilder(Q5_2022_03_01_KAYA).withExpiryDate(expiryDate1).buildItemDescriptor(),
+                new ItemBuilder(Q10_2022_03_01_KAYA).withExpiryDate(expiryDate2).buildItemDescriptor(),
+                new ItemBuilder(Q10_2022_03_01_KAYA).withExpiryDate(expiryDate3).buildItemDescriptor()
         ));
         Product product = new ProductBuilder(WAFFLES).buildWithItems(items);
         return product.getItems();
@@ -137,9 +137,9 @@ class ItemTest {
         String expiryDate3 = LocalDate.now().plusDays(discountStart + 10000).format(dateFormatter);
 
         List<ItemDescriptor> items = new ArrayList<>(Arrays.asList(
-                new ItemBuilder(Q5_2022_03_01).withExpiryDate(expiryDate1).buildItemDescriptor(),
-                new ItemBuilder(Q10_2022_03_01).withExpiryDate(expiryDate2).buildItemDescriptor(),
-                new ItemBuilder(Q10_2022_03_01).withExpiryDate(expiryDate3).buildItemDescriptor()
+                new ItemBuilder(Q5_2022_03_01_KAYA).withExpiryDate(expiryDate1).buildItemDescriptor(),
+                new ItemBuilder(Q10_2022_03_01_KAYA).withExpiryDate(expiryDate2).buildItemDescriptor(),
+                new ItemBuilder(Q10_2022_03_01_KAYA).withExpiryDate(expiryDate3).buildItemDescriptor()
         ));
         Product product = new ProductBuilder(WAFFLES).buildWithItems(items);
         return product.getItems();

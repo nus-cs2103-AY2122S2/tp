@@ -282,6 +282,8 @@ Format: `expired`
 
 Click on the menu bar `Actions` > `Find expired`
 
+:bulb: Items that are expiring on the same day are not considered expired
+
 #### 3.1.7 Looking for products that are out of stock : `out-of-stock`
 
 Lists products that are out of stock.
@@ -401,6 +403,8 @@ Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="
 Lists items that are expiring within a certain number of days
 
 Format: `remind NUMBER_OF_DAYS`
+
+* `NUMBER_OF_DAYS` should be a non-negative integer.
 
 Examples: `remind 10` lists items that are expiring 10 days from now.
 
