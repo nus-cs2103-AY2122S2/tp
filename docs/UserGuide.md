@@ -246,7 +246,7 @@ adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 * "today" (which will get the `DATE` for today)
 * "today DAY" (which will get the `DATE` for DAY days after today)
 While `TIME` must be in the format HH:MM.
-E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
+E.g. 2022-10-20 and 13:30, or "today 10" and 12:45.
 </div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
@@ -419,6 +419,10 @@ Examples:
 #### Locating events: `finde`
 
 Finds events with given details of the event by name, company, start date, end date, time, location and tag
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+START DATE and END DATE will find events from the START DATE to the END DATE **inclusively**.
+</div>
 
 Format: 
 ```
