@@ -239,7 +239,7 @@ Format:  `fw`
 
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
 
-### Locating clients by name: `find`
+### Finding clients by keyword: `find`
 
 Finds clients whose specified attribute contain any of the given keywords.
 
@@ -256,6 +256,22 @@ Examples:
 
 - `find name John` returns `john` and `John Doe`
 - `find name sam elon` returns `Sam Yeo`, `Elon Musk`
+- `find phone 99272758` returns `Bernice Yu`
+- `find email charlotte@example.com` return `Charlotte Oliveiro`
+- `find address 436` return `David Li`
+- `find properties jurong` return `Albus Dumbledore`
+- `find properties north` return `Bellatrix Lestrange`
+- `find properties 2-room` return `Cornelius Fudge`
+- `find properties $300` return `Draco Malfoy`
+- `find properties jurong north 2-room $300` return `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
+- `find preference east` return `Ernie Mcmillan`
+- `find preference 4-room` return `Fred Weasley`
+- `find preference $100` return `George Weasley`
+- `find preference $200` return `Harry Potter`
+- `find preference east 4-room $100 $200` return `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
+- `find all alex 99272758 charlotte@example.com 436 jurong $200` return `Alex Yeoh`, `Bernice Yu`, `Charlotte Oliveiro`, `David Li`, `Albus Dumbledore`, `Harry Potter`
+- `find usertype seller` return `Bernice Yu`, `David Li`, `Albus Dumbledore`, `Bellatrix Lestrange`, `Cornelius Fudge`, `Draco Malfoy`
+- `find usertype buyer` return `Alex Yeoh`, `Charlotte Oliveiro`, `Ernie Mcmillan`, `Fred Weasley`, `George Weasley`, `Harry Potter`
 
     ![images/user-guide/findSamElonResult.png](images/user-guide/findSamElonResult.png)
 
@@ -305,6 +321,11 @@ To sort by number of properties in the default order, but with buyers shifted to
 ### Matching properties and preferences: `match`
 
 Opens a new window and shows all sellers and buyers with matching property and preference.
+
+A preference matches with a property if 
+- they have the same `region`, and
+- they have the same `size`, and
+- the `price` of the property is between `lowPrice` and `highPrice` of the preference. 
 
 Format: `match`
 
