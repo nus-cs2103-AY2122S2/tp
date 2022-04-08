@@ -85,8 +85,8 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-  
-* However, for the tag parameter, users will only be able to key in one tag. 
+
+* However, for the tag parameter, users will only be able to key in one tag.
   e.g. if you specify `t/Golden t/Retriever`, an error message will be shown.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -135,14 +135,14 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 **:information_source: Notes about editing `[t/BREED]`:**<br>
 
 * When editing `[t/BREED]`, the existing breed of the pet will be removed.
-* You can only edit *one* breed. 
+* You can only edit *one* breed.
 * Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
 by "German Sheppard" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
 </div>
 
 Examples:
-* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and 
+* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and
   the tag of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`

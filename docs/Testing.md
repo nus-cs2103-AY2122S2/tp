@@ -34,4 +34,3 @@ This project has three types of tests:
    e.g. `woofareyou.storage.StorageManagerTest`
 1. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
    e.g. `woofareyou.logic.LogicManagerTest`
-   
