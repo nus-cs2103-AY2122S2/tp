@@ -5,10 +5,15 @@ title: Keith's Project Portfolio Page
 
 ### Project: CinnamonBun
 
+Small business owners and freelancers may find it difficult to keep track of all their clients.
 
-Given below are my contributions to the project.
+CinnamonBun is an application that helps to record and manage a large number of clients and business transactions, thus allowing business owners to focus more on their business and less on bookkeeping.
 
-* **Code contributed**: [RepoSense link](https://github.com/KeithCZW/tp)
+CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still being optimized for control via a Command Line Interface (CLI).
+
+### My Contributions
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=KeithCZW)
 
 * **Project management**:
   * Assisted to create issues and assign them to various members

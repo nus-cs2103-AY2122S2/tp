@@ -264,7 +264,7 @@ Format: `delete INDEX`
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the address book.
+* `list` followed by `delete 2` deletes the 2nd client in the client list.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Delete All Data (`clear`)
