@@ -11,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -45,6 +46,7 @@ public class MeetCommand extends Command {
     private final String targetNameStr;
     private final ScheduledMeeting scheduledMeeting;
     private int index = 0;
+    private int listSize;
 
     /**
      * @param targetName Name of person whose to schedule a meeting with.
@@ -74,16 +76,16 @@ public class MeetCommand extends Command {
 
             if (tempList.size() > 1) {
                 lastShownList.setPredicate(predicate);
+                listSize = lastShownList.size();
                 return new CommandResult(MESSAGE_MULTIPLE_PERSON);
             }
 
             targetIndex = model.getPersonListIndex(targetName);
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NAME);
+            }
         } else {
             targetIndex = Index.fromOneBased(index);
-        }
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToScheduleMeeting = lastShownList.get(targetIndex.getZeroBased());
@@ -93,7 +95,10 @@ public class MeetCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SCHEDULE_MEETING_PERSON_SUCCESS, personToScheduleMeeting));
     }
 
-    public void setIndex(int index) {
+    public void setIndex(int index) throws ParseException {
+        if (index <= 0 || index > listSize) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
         this.index = index;
     }
 
