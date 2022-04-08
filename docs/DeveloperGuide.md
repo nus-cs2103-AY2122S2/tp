@@ -692,7 +692,7 @@ Preconditions: User is currently using ManageEZPZ.
 
 **Extensions**
 
-* 5a. User selects a combination of information to edit:
+* 5a. User selects a combination of prefixes to edit:
   * `desc/` to edit the Description.
   * `at/` to edit the Time.
   * `date/` to edit the Date.
@@ -703,6 +703,12 @@ Preconditions: User is currently using ManageEZPZ.
 
     * 5b1. ManageEZPZ sends an error message to User, indicating syntax used for
       the edit Task command is incorrect, attached with the correct syntax format.
+
+      Use Case ends.
+    * 
+* 5c. User uses edit Task commands with prefix declared but no input value afterwards
+
+    * 5c1. ManageEZPZ sends an error message to User, indicating that User must input a value after a prefix.
 
       Use Case ends.
 
