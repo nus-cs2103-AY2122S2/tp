@@ -104,12 +104,23 @@ Since **InternBuddy** is designed to be used via a Command Line Interface (CLI),
   - [`listc`](#listing-all-companies--listc): Lists all companies.
   - [`listp`](#listing-all-persons--listp): Lists all persons.
   - [`liste`](#listing-all-events--liste): Lists all events.
+- **Sorting entries**
+  - [`sortc`](#sorting-companies-by-name--sortc): Sorts companies by name.
+  - [`sortp`](#sorting-persons-by-name--sortp): Sorts persons by name.
+  - [`sorte`](#sorting-events-by-date--sorte): Sorts events by date.
 - **Editing entries**
   - [`editc`](#editing-a-company--editc): Edits a company.
   - [`editp`](#editing-a-person--editp): Edits a person.
   - [`edite`](#editing-an-event--edite): Edits an event.
+- **Archiving entries**
+  - [`archive`](#archiving-an-entry--archive): Archives an entry.
+  - [`archive_all`](#archiving-entries-in-display--archive_all): Archives all entries in the display.
+  - [`unarchive`](#unarchiving-an-entry--unarchive): Unarchives an entry.
+  - [`unarchive_all`](#unarchiving-entries-in-display--unarchive_all): Unarchives all entries in the display.
 - **Deleting entries**
   - [`delete`](#deleting-an-entry--delete): Deletes an entry. 
+  - [`delete-all`](#deleting-entries-in-display--delete_all): Deletes all entries.
+  - [`clear`](#clearing-all-entries--clear): Clears all entries.
 - **Finding/Locating entries**
   - [`findc`](#locating-companies-findc): Finds a company.
   - [`findp`](#locating-people-by-name-findp): Finds a person.
@@ -156,7 +167,7 @@ With a simple command standards, we tried to make the commands as intuitive as p
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -167,7 +178,7 @@ And that's all there is to it! Now that you have a basic understanding of the co
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follows a certain command format. If you haven't read it, please refer to the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
+Our InternBuddy has a number of features that you can use to organize your InternBuddy lists. These features follow a certain command format. If you haven't read it, please refer to the [User Guide Icons](#user-guide-icons) and [Command Formats](#command-formats) section first. If you are still confused, please refer to the [FAQ](#faq) section. Otherwise, you can start using the features listed below. :smile:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche words in the user guide.
@@ -176,7 +187,7 @@ Read the <a href="#glossary">Glossary</a> section to find some uncommon or niche
 ### Getting help
 #### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -231,11 +242,15 @@ adde n/NAME c/COMPANY_NAME d/DATE ti/TIME l/LOCATION [t/TAG]…​
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
 `DATE` must be in the format:
-- YYYY-MM-DD
-- "Today" (which will get the `DATE` for today)
-- "Today DAY" (which will get the `DATE` for DAY days after today)
+* YYYY-MM-DD
+* "today" (which will get the `DATE` for today)
+* "today DAY" (which will get the `DATE` for DAY days after today)
 While `TIME` must be in the format HH:MM.
-E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
+E.g. 2022-10-20 and 13:30, or "today 10" and 12:45.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+the keyword "today" for DATE is case-insensitive.
 </div>
 
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
@@ -245,7 +260,7 @@ E.g. 2022-10-20 and 13:30, or "Today 10" and 12:45.
 Examples:
 * `adde n/Interview c/DBS d/2022-04-02 ti/14:00 l/Zoom`
 * `adde n/Career Talk ti/10:00 d/2022-03-19 c/Sony t/important l/22 Clementi Rd`
-* `adde n/Practical Test c/ABC d/Today ti/15:00 l/Zoom`
+* `adde n/Practical Test c/ABC d/today ti/15:00 l/Zoom`
 ### Listing entries
 - The `s/` parameter is an optional parameter that accepts 3 types of argument:
   - `s/all`: returns all entries
@@ -258,7 +273,7 @@ Shows a list of all companies in the list of companies.
 
 Format:
 ```
-listc [s/ARCHIVED]
+listc [s/SEARCH_TYPE]
 ```
 Examples:
 * `listc` (defaults to `s/unarchived`) displays all unarchived companies.
@@ -270,7 +285,7 @@ Shows a list of all people in the list of contact people.
 
 Format: 
 ```
-listp [s/ARCHIVED]
+listp [s/SEARCH_TYPE]
 ```
 Examples:
 * `listp` (defaults to `s/unarchived`) displays all unarchived people.
@@ -282,7 +297,7 @@ Shows a list of all events in the list of events.
 
 Format: 
 ```
-liste [s/ARCHIVED]
+liste [s/SEARCH_TYPE]
 ```
 Examples:
 * `liste` (defaults to `s/unarchived`) displays all unarchived events.
@@ -298,6 +313,7 @@ Examples:
 * At least one parameter aside from `INDEX` must be provided.
 * For the parameters not included in the edit command, the values stored for those parameters will remain the same.
 * When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
+* **When using the command `editc`, `editp`, or `edite`, the command will not work unless the respective list of entries is displayed (i.e. `editc` works after `listc` or `findc` or `sortc` command)**.
 
 </div>
 
@@ -380,23 +396,24 @@ Examples:
   i.e. `[n/NAME] [c/COMPANY_NAME] [d/DATE] [ti/TIME] [l/LOCATION] [t/TAG]…`
 #### Locating companies: `findc`
 
-Finds companies whose names contain any of the given keywords.
+Finds companies with given details of the company by name and tag.
 
 Format: 
 ```
-findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
+findc [n/NAME] [s/SEARCH_TYPE] [t/TAG]
 ```
 Examples:
+* `findc n/sgshop dbsss` returns `sgshop` and `sgshop sop` and `dbsss`
 * `findc n/Shopee` returns `Shopee` and `Shopee Express`
 * `findc n/abc google` returns `Google`, `ABC Pte`<br>
 
-#### Locating people by name: `findp`
+#### Locating people: `findp`
 
-Finds people whose names contain any of the given keywords.
+Finds all persons whose name, companyName, and tags contain any of the specified keywords (case-insensitive)  and displays them as a list with index numbers.
 
 Format: 
 ```
-findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]
+findp [n/NAME] [c/COMPANY] [s/SEARCH_TYPE] [t/TAG]
 ```
 
 Examples:
@@ -406,18 +423,73 @@ Examples:
 
 #### Locating events: `finde`
 
-Finds events whose names contain any of the given keywords and date is between START_DATE and END_DATE.
-If not provided, START_DATE and END_DATE are set to the earliest and latest date in the list of events respectively.
+Finds events with given details of the event by name, company, start date, end date, time, location and tag
+
+<div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
+START DATE and END DATE will find events from the START DATE to the END DATE **inclusively**.
+</div>
 
 Format: 
 ```
-finde [s/ARCHIVED] [sd/START_DATE] [ed/END_DATE] [MORE_KEYWORDS]
+finde [n/NAME] [c/COMPANY] [sd/START DATE] [ed/END DATE] [ti/TIME] [l/LOCATION] [s/SEARCH_TYPE] [MORE_KEYWORDS]
 ```
 Examples:
 * `finde n/online` returns `online interview` and `online assessment`
 * `finde s/all n/online` returns `online interview`, `online assessment`, `online assessment`
 * `finde s/archived n/test` returns `software test`, `practical test`<br> (given both events have been archived)
-* `find sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
+* `finde sd/Today ed/2022-05-21 java` returns `Java Developer` where the date is between today and 2022-05-21.
+
+### Sorting entries
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the Sort Commands:**<br>
+
+* Sort commands can take an optional parameter `Ordering` which can be `ascending` or `descending`. If not provided, `Ordering` defaults to `ascending`.
+* The parameter  `Ordering` can be passed by using `o/` followed by `ascending` or `descending`.
+* Similar to list commands, the `s/` parameter is an optional parameter that accepts 3 types of argument:
+  - `s/all`: returns all entries
+  - `s/archived`: returns all archived entries
+  - `s/unarchived`: returns all unarchived entries
+</div>
+
+#### Sorting companies by name: `sortc`
+Sort companies by name. The default is in `ascending` order. To sort in `descending` order, use `sortc o/descending`.
+
+Format:
+```
+sortc [s/SEARCH_TYPE] [o/ORDERING]
+```
+Examples:
+* `sortc` returns all unarchived companies in ascending order
+* `sortc o/descending` returns all unarchived companies in descending order
+* `sortc s/all o/descending` returns all companies in descending order
+
+#### Sorting people by name: `sortp`
+Sort people by name. The default is in `ascending` order. To sort in `descending` order, use `sortp o/descending`.
+
+Format:
+```
+sortp [s/SEARCH_TYPE] [o/ORDERING]
+```
+Examples:
+* `sortp` returns all unarchived people in ascending order
+* `sortp o/descending` returns all unarchived people in descending order
+* `sortp s/all o/descending` returns all people in descending order
+
+#### Sorting events by date: `sorte`
+Sort events by date. The default is in `ascending` order. To sort in `descending` order, use `sorte o/descending`.
+
+Format:
+```
+sorte [s/SEARCH_TYPE] [o/ORDERING]
+```
+Examples:
+* `sorte` returns all unarchived events in ascending order
+* `sorte o/descending` returns all unarchived events in descending order
+* `sorte s/all o/descending` returns all events in descending order
+
+</div>
+
 ### Archiving entries
 #### Archiving an entry: `archive`
 Archiving an entry will hide it from the list of entries.
@@ -495,13 +567,19 @@ delete_all
 
 Clears all entries from all lists.
 
-Format: `clear`
+Format: 
+```
+clear
+```
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+Format: 
+```
+exit
+```
 
 ### Saving the data
 
@@ -561,10 +639,10 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 | **Archive all in display**          |`archive_all`                                                                          |                                                                                      |
 | **Unarchive**     | `unarchive INDEX` | `unarchive 4`                                              |
 | **Unarchive all in display**          |`unarchive_all`                                                                          |                                                                                      |
-| **Find Person**    | `findp [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
-| **Find Company**    | `findc [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
-| **Find Event**     | `finde [s/ARCHIVED] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
-| **List Persons**   | `listp [s/ARCHIVED]`                                                                          |`listp s/all`                                                                                      |
-| **List Companies** | `listc [s/ARCHIVED]`                                                                          |`listc`                                                                                      |
-| **List Events**    | `liste [s/ARCHIVED]`                                                                          |`liste s/archived`                                                                                      |
+| **Find Person**    | `findp [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `findp n/James Jake`                                                                                     |
+| **Find Company**    | `findc [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `findc s/unarchived n/Shopee`                                                                                     |
+| **Find Event**     | `finde [s/SEARCH_TYPE] KEYWORD [MORE_KEYWORDS]`                                                  | `finde n/Career Talk`                                                                                |
+| **List Persons**   | `listp [s/SEARCH_TYPE]`                                                                          |`listp s/all`                                                                                      |
+| **List Companies** | `listc [s/SEARCH_TYPE]`                                                                          |`listc`                                                                                      |
+| **List Events**    | `liste [s/SEARCH_TYPE]`                                                                          |`liste s/archived`                                                                                      |
 | **Help**           | `help`                                                                           |                                                                                      |
