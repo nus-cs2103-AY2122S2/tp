@@ -3,14 +3,17 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +27,7 @@ import seedu.address.model.tag.Tag;
 public class AddTagWindow extends UiPart<Stage> {
 
     private static final String FXML = "AddTagWindow.fxml";
+    private static final String ICON_TAG_WINDOW = "/images/tag_window.png";
     private final Stage secondaryStage;
     private final Logic logic;
     private final ResultDisplay resultDisplay;
@@ -47,6 +51,8 @@ public class AddTagWindow extends UiPart<Stage> {
     public AddTagWindow(Stage secondaryStage, Logic logic) {
         super(FXML, secondaryStage);
         this.secondaryStage = secondaryStage;
+        this.secondaryStage.getIcons().add(new Image(Objects.requireNonNull(MainApp.class
+                .getResourceAsStream(ICON_TAG_WINDOW))));
         this.logic = logic;
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

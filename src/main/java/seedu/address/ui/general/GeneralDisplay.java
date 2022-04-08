@@ -84,6 +84,14 @@ public class GeneralDisplay extends UiPart<Region> {
         return tagList;
     }
 
+    public StackPane getProfileDisplayPlaceholder() {
+        return profileDisplayPlaceholder;
+    }
+
+    public StackPane getTagListPlaceholder() {
+        return tagListPlaceholder;
+    }
+
     public void resetProfile() {
         profileDisplayPlaceholder.getChildren().clear();
     }

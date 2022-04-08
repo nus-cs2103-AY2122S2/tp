@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import java.util.Objects;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddProfileWindow extends UiPart<Stage> {
 
     private static final String FXML = "AddProfileWindow.fxml";
+    private static final String ICON_TAG_WINDOW = "/images/profile_window.png";
     private Stage secondaryStage;
     private Logic logic;
     private ResultDisplay resultDisplay;
@@ -46,6 +51,8 @@ public class AddProfileWindow extends UiPart<Stage> {
         super(FXML, secondaryStage);
         this.logic = logic;
         this.secondaryStage = secondaryStage;
+        this.secondaryStage.getIcons().add(new Image(Objects.requireNonNull(MainApp.class
+                .getResourceAsStream(ICON_TAG_WINDOW))));
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }
