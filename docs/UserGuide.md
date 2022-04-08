@@ -225,7 +225,7 @@ Format: `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]â€
 
 Format: `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`
 * This adds a key event of the respective type and datetime to the module specified.  
-* The event types are as follows:
+* The event types are as follows:  
 `1` - Exam  
 `2` - Quiz  
 `3` - Assignment Release  
@@ -452,9 +452,11 @@ At least one optional field must be edited in order for module to be successfull
 
 ## Locating persons by name: `find`
 
-### On Any Page
+Finds a person stored in UniBook by the given keyword. **Only works on people view.**
 
-#### Find person whose names contain any of the given keywords
+### On People View:
+
+#### :bulb: Find person(s) whose name(s) contain any of the given keywords
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -598,7 +600,7 @@ Action | Format
 **Clear** | `clear`
 **Edit** |  Editing person: `edit INDEX o/PERSON [n/NAME] [p/PHONE] [e/EMAIL] [of/OFFICE] [nm/NEWMODULE] [g/GROUP] [m/MODULE] [t/TAG] `<br> e.g. `edit 1 o/person p/91234567 e/prof@email.com of/COM1 nm/CS2103 ` <br><br> Editing Module: `edit INDEX o/module [n/NAME] [m/MODCODE]` e.g. `edit 1 o/module m/CS2103 n/Software Engineering` <br><br> Editing Groups: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]` e.g. `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` <br><br> Editing Key Events: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]` e.g. `edit 1 o/keyevent ke/2 type/exam dt/2020-12-12 16:45`
 **Delete** | **Any View** <br> `delete o/module m/[MODULECODE]`[(example)](#bulb-delete-module-by-module-code)<br> `delete o/group m/[MODULECODE] g/[GROUPNAME]`[(example)](#bulb-delete-group-by-module-code-and-group-name)<br><br> **People View:** <br> `delete [INDEX]`[(example)](#bulb-delete-a-person-by-index) <br>`delete [INDEX] p/ e/ t/[TAG] of/`[(example)](#bulb-delete-information-from-person) <br><br> **Modules View:**<br>`delete [INDEX]`[(example)](#bulb-delete-a-module-by-index) <br> `delete [INDEX] prof/[INDEX]`[(example)](#bulb-remove-a-professor-from-a-module-by-index) <br>`delete [INDEX] stu/[INDEX]`[(example)](#bulb-remove-a-student-from-a-module-by-index)<br> `delete [INDEX] g/[GROUPNAME]`[(example)](#bulb-delete-a-group-from-a-module-by-index) <br> `delete [INDEX] ke/[INDEX]`[(example)](#bulb-delete-a-key-event-from-a-module-by-index) <br><br> **Groups View**: <br>`delete [INDEX]`[(example)](#bulb-delete-group-by-index) <br>`delete [INDEX] stu/[INDEX]`[(example)](#bulb-remove-student-from-group-by-index) <br> `delete [INDEX] mt/[INDEX]`[(example)](#bulb-delete-meeting-time-from-group-by-index) <br> 
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | **People View** <br> `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`[(example)](#bulb-find-person-whose-name-contain-any-of-the-given-keywords)
 **List** | **Any View**:<br> `list` [(example)](#bulb-list-everything) <br> `list o/view v/VIEWTYPE` [(example)](#bulb-change-view)<br><br> **People View:** <br> `list type/PERSONTYPE` [(example)](#bulb-list-people-of-a-specific-type) <br> `list o/module m/MODULECODE [type/PERSONTYPE]` [(example)](#bulb-list-people-in-a-specific-module) <br> `list o/group m/MODULECODE g/GROUPNAME` [(example)](#bulb-list-people-in-a-specific-group-of-a-specific-module) <br><br> **Modules View:** <br> `list m/MODULECODE` [(example)](#bulb-list-a-module-with-a-specific-code) <br> `list [n/KEYWORD] [ke/KEYEVENT] [dt/YYYY-MM-DD]` [(example)](#bulb-list-a-module-with-a-name-containing-a-keyword)  <br> `list o/group g/GROUPNAME` [(example)](#bulb-list-groups-with-specific-group-name-module-page) <br><br> **Groups View:**<br> `list g/GROUPNAME [m/MODULECODE]` [(example)](#bulb-list-groups-with-specific-group-name-group-page) <br> `list mt/YYYY-MM-DD` [(example)](#bulb-list-groups-with-specific-meeting-date)
 **Help** | `help`
 
