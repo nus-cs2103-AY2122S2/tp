@@ -30,7 +30,6 @@ import seedu.address.model.entity.exceptions.UnknownEntityException;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
