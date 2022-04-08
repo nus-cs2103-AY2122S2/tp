@@ -45,6 +45,9 @@ public class PropertyCommandsTestUtil {
     public static final String INVALID_HOUSE_TYPE_1 = "sandbox";
     public static final String INVALID_HOUSE_TYPE_2 = "hdb123";
 
+    public static final String INVALID_HOUSE_TYPE_DESC_1 = " " + PREFIX_HOUSE_TYPE + INVALID_HOUSE_TYPE_1;
+    public static final String INVALID_HOUSE_TYPE_DESC_2 = " " + PREFIX_HOUSE_TYPE + INVALID_HOUSE_TYPE_2;
+
     public static final String INVALID_LOCATION_1 = "";
 
     public static final String INVALID_ADDRESS_1 = "";
@@ -54,6 +57,12 @@ public class PropertyCommandsTestUtil {
     public static final String INVALID_PR_3 = "40,39";
     public static final String INVALID_PR_4 = "2147483647,2147483648";
     public static final String INVALID_PR_5 = "2147483648,2147483650";
+
+    public static final String INVALID_PR_DESC_1 = " " + PREFIX_PRICE_RANGE + "-1,1000";
+    public static final String INVALID_PR_DESC_2 = " " + PREFIX_PRICE_RANGE + "-1,-3";
+    public static final String INVALID_PR_DESC_3 = " " + PREFIX_PRICE_RANGE + "40,39";
+    public static final String INVALID_PR_DESC_4 = " " + PREFIX_PRICE_RANGE + "2147483647,2147483648";
+    public static final String INVALID_PR_DESC_5 = " " + PREFIX_PRICE_RANGE + "2147483648,2147483650";
 
     public static final String HOUSE_TYPE_DESC_1 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_1;
     public static final String HOUSE_TYPE_DESC_2 = " " + PREFIX_HOUSE_TYPE + VALID_HOUSE_TYPE_2;
