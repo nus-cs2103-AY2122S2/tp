@@ -478,11 +478,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 applicants without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The system should be usable by a novice which has not used other CLI application for applicant tracking.
-
-*{More to be added}*
+2. HireLah should respond within two seconds after any command is entered.
+3. Should be able to hold up to 1000 applicants, positions, and interviews each without a noticeable sluggishness in performance for typical usage.
+4. The data in the app should be easily transferable to another computer without losing any information.
+5. A user with above average typing speed for regular English text _(i.e. not code, not system admin commands)_ should be able to accomplish most of the tasks faster using commands than using the mouse.
+6. The system should be usable by a novice which has not used other CLI application for recruitment tracking.
+7. A new user should be able to pick up how to use HireLah within 20 minutes of usage.
+8. HireLah must boot up within 10 seconds on a device under a normal load.
+9. HireLah is not required to make any direct communication with the applicants.
 
 ### Glossary
 
