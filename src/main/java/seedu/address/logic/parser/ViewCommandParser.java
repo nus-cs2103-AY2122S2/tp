@@ -30,11 +30,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.HeightContainsKeywordsPredicate;
+import seedu.address.model.person.HeightOrWeightInRangePredicate;
 import seedu.address.model.person.LineupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.WeightContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleNameContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleOnThisDatePredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
@@ -51,6 +50,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             "^((gte|lte|gt|lt|eq)([1-9]|[1-9][0-9]|[1-2][0-9][0-9]|30[0-0]))$";
     private static final String VALID_WEIGHT_OPERATOR_REGEX =
             "^((gte|lte|gt|lt|eq)([1-9]|[1-9][0-9]|[1][0-9][0-9]|20[0-0]))$";
+    private static final String HEIGHT = "height";
+    private static final String WEIGHT = "weight";
+    private static final String NAME = "name";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
@@ -94,42 +96,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         // view L/[LINEUP_NAME...]
         if (hasLSlash) {
-            prefixAndArgument.add(PREFIX_LINEUP.toString());
-            // view L/ -> view all lineups
-            if (args.equals(" L/")) {
-                predicates.add(PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP);
-                return new ViewCommand(predicates, null, prefixAndArgument);
-            }
-
-            // check has preamble. check here because arg = "L/", preamble = "L/" as well
-            if (!argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ViewCommand.MESSAGE_USAGE_LINEUP));
-            }
-
-            // view L/[LINEUP_NAME...]
-            String lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
-            if (!lineupNameArg.equals("")) {
-                if (!lineupNameArg.matches(VALIDATION_REGEX)) {
-                    throw new ParseException("You have provided an invalid name criteria!");
-                }
-                String trimmedArgs = lineupNameArg.trim();
-                prefixAndArgument.add(trimmedArgs);
-                String[] nameKeywords = trimmedArgs.split("\\s+");
-                predicates.add(new LineupNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-                return new ViewCommand(predicates, null, prefixAndArgument);
-            } else {
-                // view L/ N/ -> view all players without lineup
-                if (hasBigNSlash) {
-                    if (!argMultimap.getValue(PREFIX_WITHOUT_LINEUP).get().equals("")) {
-                        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                ViewCommand.MESSAGE_USAGE_NO_LINEUP));
-                    }
-                    predicates.add(PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP);
-                    prefixAndArgument.add(PREFIX_WITHOUT_LINEUP.toString());
-                    return new ViewCommand(predicates, null, prefixAndArgument);
-                }
-            }
+            return parseViewLineup(argMultimap);
         }
 
         // view S/[SCHEDULE_NAME...]
@@ -199,6 +166,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
+    /** Checks if the parameters for h/, w/ and player/lineup/schedule name is valid and returns the string */
     private static String parseRelationalOperator(String trimmedArgs, String regex) throws ParseException {
         String heightOrWeightOrName = "";
         if (trimmedArgs.matches(regex)) {
@@ -206,27 +174,28 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
         switch (regex) {
         case VALID_HEIGHT_OPERATOR_REGEX:
-            heightOrWeightOrName = "height";
+            heightOrWeightOrName = HEIGHT;
             break;
         case VALID_WEIGHT_OPERATOR_REGEX:
-            heightOrWeightOrName = "weight";
+            heightOrWeightOrName = WEIGHT;
             break;
         case VALIDATION_REGEX:
-            heightOrWeightOrName = "name";
+            heightOrWeightOrName = NAME;
+            break;
+        default:
             break;
         }
         throw new ParseException("Please check your parameter for " + heightOrWeightOrName + "!");
     }
 
+    /** Returns ViewCommand when P/ is detected in the user input */
     private static ViewCommand parseViewPlayer(ArgumentMultimap argMultimap) throws ParseException {
         // capture the type of view
         List<String> prefixAndArg = new ArrayList<>();
+        prefixAndArg.add(PREFIX_PLAYER.toString());
 
         // store the predicate for all the predicate that applies to player
         List<Predicate<Person>> predicates = new ArrayList<>();
-
-        // capture the type of view
-        prefixAndArg.add(PREFIX_PLAYER.toString());
 
         boolean hasBigNSlash = arePrefixesPresent(argMultimap, PREFIX_WITHOUT_LINEUP); // N/
 
@@ -238,70 +207,150 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         // player name
         if (arePrefixesPresent(argMultimap, PREFIX_PLAYER)) {
-            String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
-            if (playerNameArg.equals("")) {
-                predicates.add(PREDICATE_SHOW_ALL_PERSONS);
-            } else {
-                String[] nameKeywords = parseName(playerNameArg);
-                prefixAndArg.add(playerNameArg);
-                predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-            }
+            parsePlayerFlag(argMultimap, predicates, prefixAndArg);
         }
 
         // height
         if (arePrefixesPresent(argMultimap, PREFIX_HEIGHT)) {
-            String heightArg = argMultimap.getValue(PREFIX_HEIGHT).get();
-            prefixAndArg.add(heightArg);
-            predicates.add(new HeightContainsKeywordsPredicate(parseHeightArg(heightArg)));
+            parseHeightOrWeightFlag(argMultimap, predicates, prefixAndArg, PREFIX_HEIGHT);
         }
 
         // weight
         if (arePrefixesPresent(argMultimap, PREFIX_WEIGHT)) {
-            String weightArg = argMultimap.getValue(PREFIX_WEIGHT).get();
-            prefixAndArg.add(weightArg);
-            predicates.add(new WeightContainsKeywordsPredicate(parseWeightArg(weightArg)));
+            parseHeightOrWeightFlag(argMultimap, predicates, prefixAndArg, PREFIX_WEIGHT);
         }
 
         // tag
         if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
-            String tagArg = argMultimap.getValue(PREFIX_TAG).get();
-            prefixAndArg.add(tagArg);
-            predicates.add(new TagContainsKeywordsPredicate(Arrays.asList(parseTagArg(tagArg))));
+            parseTagFlag(argMultimap, predicates, prefixAndArg);
         }
         return new ViewCommand(predicates, null, prefixAndArg);
     }
 
-    private static String[] parseName(String NameArg) throws ParseException {
+    /** Returns ViewCommand when P/ is detected */
+    private static void parsePlayerFlag(ArgumentMultimap argMultimap,
+                                        List<Predicate<Person>> predicates,
+                                        List<String> prefixAndArg) throws ParseException {
+        String playerNameArg = argMultimap.getValue(PREFIX_PLAYER).get();
+        if (playerNameArg.equals("")) {
+            predicates.add(PREDICATE_SHOW_ALL_PERSONS);
+        } else {
+            String[] nameKeywords = parseName(playerNameArg);
+            prefixAndArg.add(playerNameArg);
+            predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
+    }
+
+    /** Extracts the keywords from P/, L/ or S/ parameter*/
+    private static String[] parseName(String nameArg) throws ParseException {
         try {
-            String trimmedArgs = parseRelationalOperator(NameArg.trim(), VALIDATION_REGEX);
+            String trimmedArgs = parseRelationalOperator(nameArg.trim(), VALIDATION_REGEX);
             return trimmedArgs.split("\\s+");
         } catch (ParseException pe) {
             throw pe;
         }
     }
 
-    private static String parseHeightArg(String heightArg) throws ParseException {
-        if (!heightArg.equals("")) {
-            return parseRelationalOperator(heightArg.trim(), VALID_HEIGHT_OPERATOR_REGEX);
+    /** Accumulates {@code Predicate<Person>} when h/ or w/ are detected */
+    private static void parseHeightOrWeightFlag(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates,
+                                        List<String> prefixAndArg, Prefix prefix) throws ParseException {
+        String heightOrWeightArg = argMultimap.getValue(prefix).get();
+        String parsedArg = "";
+        prefixAndArg.add(heightOrWeightArg);
+        if (prefix.equals(PREFIX_HEIGHT)) {
+            parsedArg = parseHeightOrWeightArg(heightOrWeightArg, HEIGHT);
+        } else if (prefix.equals(PREFIX_WEIGHT)) {
+            parsedArg = parseHeightOrWeightArg(heightOrWeightArg, WEIGHT);
         }
-        throw new ParseException("You have provided an empty height criteria!");
+        predicates.add(new HeightOrWeightInRangePredicate(parsedArg, prefix));
     }
 
-    private static String parseWeightArg(String weightArg) throws ParseException {
-        if (!weightArg.equals("")) {
-            return parseRelationalOperator(weightArg.trim(), VALID_WEIGHT_OPERATOR_REGEX);
-        } else {
-            throw new ParseException("You have provided an empty weight criteria!");
+    /** Returns the valid parameter for {@code Prefix} h/ or w/ */
+    private static String parseHeightOrWeightArg(String arg, String heightOrWeight) throws ParseException {
+        assert(heightOrWeight.equals(HEIGHT) || heightOrWeight.equals(WEIGHT));
+
+        if (arg.equals("")) {
+            throw new ParseException(String.format("You have provided an empty %s criteria!", heightOrWeight));
         }
+
+        switch (heightOrWeight) {
+        case HEIGHT:
+            return parseRelationalOperator(arg.trim(), VALID_HEIGHT_OPERATOR_REGEX);
+        case WEIGHT:
+            return parseRelationalOperator(arg.trim(), VALID_WEIGHT_OPERATOR_REGEX);
+        default: // unreachable
+            return "";
+        }
+    }
+
+    private static void parseTagFlag(ArgumentMultimap argMultimap,
+                                        List<Predicate<Person>> predicates,
+                                        List<String> prefixAndArg) throws ParseException {
+        String tagArg = argMultimap.getValue(PREFIX_TAG).get();
+        prefixAndArg.add(tagArg);
+        predicates.add(new TagContainsKeywordsPredicate(Arrays.asList(parseTagArg(tagArg))));
     }
 
     private static String[] parseTagArg(String tagArg) throws ParseException {
-        if (!tagArg.equals("")) {
+        if (tagArg.equals("")) {
+            throw new ParseException("You have provided an empty tag criteria!");
+        }
+        if (tagArg.matches(VALIDATION_REGEX)) {
             String trimmedArgs = tagArg.trim();
             return trimmedArgs.split("\\s+");
         } else {
-            throw new ParseException("You have provided an empty tag criteria!");
+            throw new ParseException("You have provided an invalid tag criteria!");
         }
+    }
+
+    private static ViewCommand parseViewLineup(ArgumentMultimap argMultimap) throws ParseException {
+        // capture the type of view
+        List<String> prefixAndArg = new ArrayList<>();
+        prefixAndArg.add(PREFIX_LINEUP.toString());
+
+        // store the predicate for all the predicate that applies to player
+        List<Predicate<Person>> predicates = new ArrayList<>();
+
+        String lineupNameArg = argMultimap.getValue(PREFIX_LINEUP).get();
+        boolean hasBigNSlash = arePrefixesPresent(argMultimap, PREFIX_WITHOUT_LINEUP); // N/
+        boolean hasNoLineup = lineupNameArg.equals("") && hasBigNSlash;
+
+        // check has preamble
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewCommand.MESSAGE_USAGE_LINEUP));
+        }
+
+        if (hasNoLineup) {
+            return parseViewWithoutLineup(argMultimap, predicates, prefixAndArg);
+        } else {
+            return parseViewWithLineup(predicates, prefixAndArg, lineupNameArg);
+        }
+    }
+
+    private static ViewCommand parseViewWithoutLineup(ArgumentMultimap argMultimap,
+                                                      List<Predicate<Person>> predicates,
+                                                      List<String> prefixAndArg) throws ParseException {
+        // when N/ follows with something
+        if (!argMultimap.getValue(PREFIX_WITHOUT_LINEUP).get().equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewCommand.MESSAGE_USAGE_NO_LINEUP));
+        }
+        predicates.add(PREDICATE_SHOW_ALL_PERSONS_WITHOUT_LINEUP);
+        prefixAndArg.add(PREFIX_WITHOUT_LINEUP.toString());
+        return new ViewCommand(predicates, null, prefixAndArg);
+    }
+
+    private static ViewCommand parseViewWithLineup(List<Predicate<Person>> predicates, List<String> prefixAndArg,
+                                                   String lineupNameArg) throws ParseException {
+        if (lineupNameArg.equals("")) {
+            predicates.add(PREDICATE_SHOW_ALL_PERSONS_WITH_LINEUP);
+        } else {
+            String[] nameKeywords = parseName(lineupNameArg);
+            prefixAndArg.add(lineupNameArg);
+            predicates.add(new LineupNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
+        return new ViewCommand(predicates, null, prefixAndArg);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
