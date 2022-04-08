@@ -3,13 +3,13 @@ layout: page
 title: Janald's Project Portfolio Page
 ---
 
-### Project: AgenSee
+### Project: AgentSee
 
 AgentSee is a desktop application for property agents to efficiently manage their client information.
 
 Given below are my contributions to the project. I mainly contributed to the addition of Property classes and what they compose of, and discovered the match feature.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=janald99&brekdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=janald99&tabRepo=AY2122S2-CS2103T-T11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
   * `PropertyToBuy` class
   * `PropertyToSell` class
   * `PriceRange` class
@@ -59,15 +59,15 @@ Added the new match features:
           * [Client Class](https://github.com/AY2122S2-CS2103T-T11-2/tp/blob/master/docs/images/ClientClassDiagram.png)
           
 * **Contributions to team tasks**:
-  * Plan the architecture of our project, by drawing visually and screen-sharing.
-  * Summarize the work distribution and agenda of each meeting.
-  * Set up issues on GitHub](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues)
-  * Standardize language across code and documents.
+  * Planned the architecture of our project, by drawing visually and screen-sharing.
+  * Summarized the work distribution and agenda of each meeting.
+  * Set up new issues like [Issue #52](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/52) and [Issue #119](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/119) on GitHub.
+  * Standardized language across code and documents.
   * Added and refactored java docs.
-  * Adjust message displays.
+  * Adjusted message displays.
   * Added test cases to improve our test coverage, and discovered bugs along the way.
   * Managed issues and pull requests on Github by opening new ones, and closing and reviewing existing ones.
-  * Several bug fixes, for example:
+  * Fixed several bugs, for example:
     * [Issue #279](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/279) where sellers who had no property could be matched with buyers, leading to undesirable behaviors.
     * [Issue #213](https://github.com/AY2122S2-CS2103T-T11-2/tp/issues/213) where index out of range had no exception thrown.
 
