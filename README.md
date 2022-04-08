@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="docs/images/tapa banner.png">
-  <p><h1>Save time, use TAPA.</h1></p>
+  <p><h1>Teaching Assistant's Personal Assistant (TAPA)</h1></p>
 </p>
 
 ![Ui](docs/images/Ui.png)
