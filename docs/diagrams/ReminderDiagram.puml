@@ -66,5 +66,6 @@ UniqueReminderList -> ModelManager :ModelManager(ReadOnlyCompanyList, ReadOnlyUs
 activate ModelManager
 deactivate UniqueReminderList
 ModelManager --> MainApp :ModelManager
+deactivate ModelManager
 
 @enduml
