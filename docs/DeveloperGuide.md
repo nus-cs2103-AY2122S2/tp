@@ -349,7 +349,7 @@ The following sequence diagram shows how the deleteModule operation works:
 
 
 
-### deleteTask Command
+### DeleteTask Command
 
 #### Description
 
