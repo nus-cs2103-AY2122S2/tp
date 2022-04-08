@@ -22,8 +22,8 @@ import seedu.address.model.person.Weight;
 import seedu.address.model.schedule.ScheduleDateTime;
 import seedu.address.model.schedule.ScheduleDescription;
 import seedu.address.model.schedule.ScheduleName;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.lineup.LineupName;
+import seedu.address.model.tag.Tag;
 
 
 /**
