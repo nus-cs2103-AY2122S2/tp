@@ -85,11 +85,11 @@ public class BatchCommand extends Command {
         }
         List<CommandResult> commandResultList = new ArrayList<>();
         Person restorePerson = model.getFilteredPersonList().get(indexList.get(0).getZeroBased());
-        for (Index index: indexList) {
+        for (int i = indexList.get(indexList.size() - 1).getOneBased(); i >= indexList.get(0).getOneBased(); i--) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
                 String commandText = ParserUtil.parseAndCreateNewCommand(
-                        commandInput, Integer.toString(index.getOneBased()));
+                        commandInput, Integer.toString(i));
                 logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
                 try {
