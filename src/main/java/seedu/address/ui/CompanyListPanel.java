@@ -31,6 +31,7 @@ public class CompanyListPanel extends UiPart<Region> {
     public CompanyListPanel(ObservableList<Company> companyList) {
         super(FXML);
         listTitle.setText(LIST_TITLE);
+        listTitle.setWrapText(true);
         entryListView.setItems(companyList);
         entryListView.setCellFactory(listView -> new CompanyListViewCell());
     }

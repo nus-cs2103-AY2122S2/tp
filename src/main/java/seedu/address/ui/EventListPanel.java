@@ -31,6 +31,7 @@ public class EventListPanel extends UiPart<Region> {
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
         listTitle.setText(LIST_TITLE);
+        listTitle.setWrapText(true);
         entryListView.setItems(eventList);
         entryListView.setCellFactory(listView -> new EventListViewCell());
     }

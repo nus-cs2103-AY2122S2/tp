@@ -25,12 +25,11 @@ public class FindPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "findp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose name, companyName, and tags"
-            + " contain any of the specified keywords (case-insensitive)"
-            + " and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons with the same details as the "
+            + "given parameters.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_COMPANY + "COMPANY_NAME] "
             + "[" + PREFIX_SEARCH_TYPE + "SEARCH_TYPE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -51,7 +50,7 @@ public class FindPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.updateFilteredPersonList(predicate);
+        model.showPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
                 false, false, true, false, false);

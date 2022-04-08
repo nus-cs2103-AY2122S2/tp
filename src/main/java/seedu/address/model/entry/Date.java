@@ -30,7 +30,7 @@ public class Date implements Comparable<Date> {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
 
-        if (date.equals(TODAY_CONSTANT)) {
+        if (date.equalsIgnoreCase(TODAY_CONSTANT)) {
             this.date = LocalDate.now();
         } else if (isRelativeToToday(date)) {
             String[] dateSplit = date.split(" ");
@@ -50,7 +50,7 @@ public class Date implements Comparable<Date> {
             return false;
         }
 
-        if (!testSplit[0].equals(TODAY_CONSTANT)) {
+        if (!testSplit[0].equalsIgnoreCase(TODAY_CONSTANT)) {
             return false;
         }
 
@@ -62,7 +62,7 @@ public class Date implements Comparable<Date> {
      */
     public static boolean isValidDate(String test) {
         try {
-            if (test.equals(TODAY_CONSTANT) || isRelativeToToday(test)) {
+            if (test.equalsIgnoreCase(TODAY_CONSTANT) || isRelativeToToday(test)) {
                 return true;
             }
             LocalDate.parse(test);
