@@ -1257,7 +1257,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Module**: A specific class that a student is taking
 * **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
-* **Person**: A student in TAPA. 
+* **Person**: A student in TAPA
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
