@@ -82,7 +82,6 @@ public class ChargeCommand extends Command {
             day = day.plusDays(1);
         }
 
-        model.updateFilteredPetList();
         return new CommandResult(generateSuccessMessage(petToCharge.getName(),
                 amountChargeable, getMonthName(), chargeDate.getYear(), getAttendance(petToCharge)));
     }
