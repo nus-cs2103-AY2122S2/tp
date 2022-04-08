@@ -329,7 +329,7 @@ The `setWindow` feature allows users to set the reminder window to a specific nu
 Given below is an example usage scenario and how the set reminder window feature behaves at each step:
 1. The user executes the command `setWindow 14` to set the reminder window to 14 days.
 2. Then the `SetReminderWindowCommandParser#parse()` creates an instance of `SetReminderWindowCommand` by passing the number of days to which the reminder window will be set.
-3. The `SetReminderWindowCommand#execute()` method will update the `model` using the `Model#setReminderWindow()` method, which consequently updates `model.userPrefs` by calling the `UserPrefs#setReminderWindow()` method to update the reminder window as stored in the user preferences.
+3. The `SetReminderWindowCommand#execute()` method will update the `model` using the `Model#setReminderWindow()` method, which consequently updates `userPrefs` by calling the `UserPrefs#setReminderWindow()` method to update the reminder window as stored in the user preferences.
 4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
 
 The following sequence diagram shows how the `setWindow` command operation works with the user input `setWindow 14`:
