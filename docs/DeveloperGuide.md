@@ -1040,7 +1040,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC05 - Assign a task to a student**
 
 **MSS**
-1. User requests TAPA to assign a task to a student, by specifying their studentId and task name or assign tasks to all the student taking a module, by specifying module code and task name.
+1. User requests TAPA to assign a task to a student. (This can be done for an individual student or for all students taking the same module)
 2. TAPA shows the updated list of students.
 
     Use case ends.
