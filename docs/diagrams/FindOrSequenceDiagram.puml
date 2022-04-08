@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":FindOrPredicateParser" as FindOrPredicateParser LOGIC_COLOR
+participant "t:FindCommand" as TagCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("find n/Alex \n Yeoh edu/computer science")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find n/Alex \n Yeoh edu/computer science")
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+activate FindCommandParser
+
+FindCommandParser --> AddressBookParser
+deactivate FindCommandParser
+
+AddressBookParser -> FindCommandParser : parse("n/Alex Yeoh \n edu/computer science")
+activate FindCommandParser
+
+FindCommandParser -> ParserUtil : parseNames("Alex Yeoh")
+activate ParserUtil
+FindCommandParser -> ParserUtil : parseTagsForFind("computer science", \n Tag.EDUCATION)
+ParserUtil -> FindCommandParser : t
+deactivate ParserUtil
+
+
+FindCommand --> ParserUtil : t
+deactivate FindCommand
+ParserUtil --> FindCommandParser : t
+deactivate ParserUtil
+
+FindCommandParser --> AddressBookParser : t
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> AddressBookParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+activate FindOrPredicateParser
+FindCommandParser -> FindOrPredicateParser : parse()
+deactivate FindCommandParser
+
+activate FindCommand
+FindOrPredicateParser -> FindCommand
+
+@enduml
