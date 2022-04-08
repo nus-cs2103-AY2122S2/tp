@@ -356,13 +356,13 @@ as 'Alex Yeoh' and the education tag as 'computer science'. These would be ident
 are in ParserUtil (in this case, `ParserUtil#parseNames()` and `ParserUtil#parseTagsForFind()`)
 
 **Step 4.** After parsing the arguments, a FindOrPredicateParser object containing these arguments (in the form of a `FindPersonDescriptor` object)
-is created. FindOrPredicateParser converts the fields searched for into classes that extends `Predicate<Person>` (such as 
-`NameConatainsKeywordPredicateOr` for the name field). It then does the logical 'OR' operation on all the predicates 
+is created. FindOrPredicateParser converts the fields searched for into classes that extends `Predicate<Person>` (such as
+`NameConatainsKeywordPredicateOr` for the name field). It then does the logical 'OR' operation on all the predicates
 
 **Step 5.** Control is then handed over to FindCommand which takes the predicate as a constructor argument. `FindCommand#execute()`
-then calls `ModelManager#updateFilteredPersonList()` with the predicate as the argument. This changes the filteredList that is 
+then calls `ModelManager#updateFilteredPersonList()` with the predicate as the argument. This changes the filteredList that is
 rendered by the UI to only show the contacts for which the predicate evaluates to True. Finally, a CommandResult object with a success
-message is returned. 
+message is returned.
 
 The following class diagram shows important classes for the `find` command and their relationships. Note that there are similar classes
 for `find -s` and `find -e`
@@ -479,7 +479,7 @@ _{more aspects and alternatives to be added}_
 
 ### User stories
 
-Priorities: 
+Priorities:
 * `* * *` - High (must have)
 * `* *` - Medium (nice to have)
 * `*` - Low (unlikely to have)
