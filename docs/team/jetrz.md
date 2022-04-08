@@ -10,20 +10,33 @@ ClientConnect is a desktop client address book application for insurance agents 
 Given below are my contributions to the project.
 
 * **New Feature**:
-  * "clip" feature to allow efficient copying of a contact's information onto the user's clipboard.
+  * ***clip*** feature 
+    * Allows efficient copying of a client's information onto the user's clipboard.
+    * Expanded functionality in v1.3 to allow users to specify either name or index for the client they wish to copy.
+    * `NameExistsPredicate` class to compare & filter client list with provided `Name`, for facilitation of this command.
+    * Testing for all relevant classes.  
+  * ***prioList*** feature 
+    * Allows user to sort and display their client list by the priority level of their tags.
+    * `TagPriorityComparator` class to compare `Persons` and their tag priority level, for facilitation of this command.
+    * Method in `Model` to sort client list with a given comparator.
+    * Testing for all relevant classes.
 
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
-  * To be added soon
+  * Assigned & closed issues
+  * Reviewed and merged PRs
+  * Created and assigned tags
+  * Submitted all assigned deliverables by given milestone deadlines
 
 * **Enhancements to existing features**:
   * To be added soon
 
 * **Documentation**:
   * User Guide:
-    * To be added soon
+    * Added description and instructions for clip and prioList command, supported with clear visuals.
   * Developer Guide:
+    * Under [implementation section](../DeveloperGuide.md#Implementation), added descriptions on how clip and prioList works, supported with sequence diagrams.
     * Added section on product scope.
     * Added section on user stories.
     * Added section on non-functional requirements.
