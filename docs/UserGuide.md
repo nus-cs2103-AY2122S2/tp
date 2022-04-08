@@ -103,7 +103,7 @@ Examples:
 
 :information_source: Notes about the lineup added after the `add` Command.
 
-* After creating a lineup, unlike a new player or schedule, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](viewing-playerschedulelineup-view) section.
+* After creating a lineup, unlike a new player or schedule, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#viewing-playerschedulelineup-view) section.
 
 </div>
 
