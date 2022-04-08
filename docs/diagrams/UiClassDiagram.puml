@@ -11,6 +11,8 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class PackageWindow
+Class PackageListPanel
+Class PackageCard
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
@@ -39,7 +41,8 @@ MainWindow --> "0..1" PackageWindow
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
-PackageWindow -down-> "*" PackageCard
+PackageWindow -down-> "1" PackageListPanel
+PackageListPanel -down-> "*" PackageCard
 
 MainWindow -left-|> UiPart
 
@@ -50,6 +53,7 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 PackageWindow --|> UiPart
+PackageListPanel --|> UiPart
 PackageCard --|> UiPart
 
 PersonCard ..> Model
