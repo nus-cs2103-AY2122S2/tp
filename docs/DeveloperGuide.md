@@ -118,11 +118,11 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data and their representations as insights i.e. all `Person` and `Event` objects (which are contained in their respective `Unique{Object}List` object) and `PersonInsight` objects (encapsulating `Insight`) objects.
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The implementation is analogous for `Event` objects.
+* stores the data for Amigos, primarily through the `Person`, `Log` and `Event` classes. These classes are each contained in their respective `Unique{Object}List` object.
+* contains `Insight` classes, which store summary details about friendships, are generated using the current Model data on demand. They are encapsulated within a `PersonInsight` object for each `Person` in Amigos.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This implementation also applies to `Event` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -132,12 +132,11 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="650" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -359,7 +358,7 @@ Events in Amigos are implemented in a similar fashion to Persons in AB3, for the
 
 Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set. The latter represents the Friends that are linked to this event.
 
-![EventPersonRelationshipSequenceDiagram.png](images\EventPersonRelationshipSequenceDiagram.png)
+<img src="images/EventPersonRelationshipClassDiagram.png" width="450" />
 
 #### 2.1 Implementing Event-Person relationships
 Key Consideration: How to implement & maintain the validity of the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
@@ -393,7 +392,7 @@ Key Consideration: How to implement `listevents` when there exists multiple tabs
 
 The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`, the sequence diagram is similar for the other types of `show` commands which exist in Amigos.
 
-![ShowEventSequenceDiagram.png](images\ListEventsSequenceDiagram.png)
+<img src="images/ListEventsSequenceDiagram.png" width="700" />
 
 * **Current Implementation**
   * Using a `FilteredList` we are able to segregate events into past events and future events and display these events according to user's preference, this is largely similar to AB3's implementation of `list`, however we need to add the ability to automatically change tabs once this command is called, thus the `CommandResult` class was modified to contain a boolean `isEvent` which is `true` for any command related to events and enables the seamless switching between tabs.
@@ -417,7 +416,7 @@ The following sequence diagram summarizes what happens when a user executes the 
 #### 2.3 Implementing the findevent command
 Key Consideration: Keeping track of the various filtering conditions that could be potentially set by the user, so that it is easily maintained and extended.
 
-![FindEventSequenceDiagram.png](images\FindEventSequenceDiagram.png)
+<img src="images/FindEventSequenceDiagram.png" width="800" />
 
 * **Current Implementation**:
   * The `FindEventCommandParser` class takes in the user's input and produces a List containing all the `Predicate<Event>` that can be derived from the input.
