@@ -64,5 +64,5 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Add implementation and sequence diagram for `addfriend`
         * Add implementation and activity diagram for `findfriend`
-        * Add implementation for `showfriend`
+        * Add implementation and object diagram for `showfriend`
         * Add use cases for `addfriend`, `deletefriend`, `editfriend`.
