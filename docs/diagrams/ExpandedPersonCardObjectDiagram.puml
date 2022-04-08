@@ -40,5 +40,4 @@ expcard -down-> logs
 tags -down-> tagLabelOne
 tags -down-> tagLabelTwo
 
-
 @enduml
