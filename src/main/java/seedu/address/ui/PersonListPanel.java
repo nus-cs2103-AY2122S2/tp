@@ -2,32 +2,36 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.index.Index;
+import javafx.util.Callback;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ProfileCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.ui.general.GeneralDisplay;
 
 /**
  * Panel containing the list of persons.
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logic logic;
-    private final ContextMenu contextMenu = new ContextMenu();
-    private final javafx.event.EventHandler<MouseEvent> disableRightClick = event -> {
-        if (event.getButton() == MouseButton.SECONDARY) {
-            event.consume();
+    private static Logic logic;
+    private static final ContextMenu contextMenu = new ContextMenu();
+    private final javafx.event.EventHandler<MouseEvent> disableRightClick = mouseEvent -> {
+        if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+            mouseEvent.consume();
         }
     };
 
@@ -40,59 +44,107 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, Logic logic) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        //personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(new PersonListCellFactory());
         personListView.setContextMenu(contextMenu);
-        this.logic = logic;
+        PersonListPanel.logic = logic;
         personListView.addEventFilter(MouseEvent.ANY, disableRightClick);
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard} with
+     * customized {@code Callback}.
      */
-    static class PersonListViewCell extends ListCell<Person> {
+    public static class PersonListCellFactory implements Callback<ListView<Person>, ListCell<Person>> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        public ListCell<Person> call(ListView<Person> param) {
+            if (param.getItems().size() == 0) {
+                contextMenu.getItems().clear();
+                contextMenu.hide();
+            }
+            ListCell<Person> cell = new PersonListViewCell();
+            cell.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                // if clicking on an empty area, do nothing
+                if (cell.isEmpty()) {
+                    mouseEvent.consume();
+                    contextMenu.getItems().clear();
+                    contextMenu.hide();
+                    param.getSelectionModel().clearSelection();
+                } else {
+                    Parent p = (Parent) mouseEvent.getSource();
+                    // Handles the event where the selected person card changes. This handler will be triggered
+                    // only on mouse clicked (primary or secondary).
+                    if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                        handleSetProfile((Integer) p.getUserData());
+                    } else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                        handleContextMenu((Integer) p.getUserData(), param);
+                    }
+                }
+            });
+            return cell;
+        }
 
-            if (empty || person == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+        public static final class PersonListViewCell extends ListCell<Person> {
+            @Override
+            protected void updateItem(Person person, boolean empty) {
+                super.updateItem(person, empty);
+
+                if (empty || person == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                    setUserData(getIndex() + 1);
+                }
             }
         }
     }
 
     /**
-     * The handler to set general display to the selected person' profile.
+     * Handles the event where the user left-clicks on a person card to show profile in general display.
      */
-    public void handleSetProfile() {
+    public static void handleSetProfile(int index) {
         try {
-            if (personListView.getSelectionModel().getSelectedItem() != null) {
-                Index personIndexSelected = Index.fromZeroBased(personListView.getSelectionModel().getSelectedIndex());
-                ProfileCommand profileCommand = new ProfileCommand(personIndexSelected);
-                CommandResult commandResult = profileCommand.execute(logic.getModel());
-                UiManager.getMainWindow().getGeneralDisplay().setProfile(commandResult.getPerson());
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
-            }
-        } catch (CommandException e) {
+            CommandResult commandResult = logic.execute(ProfileCommand.COMMAND_WORD + " " + index);
+            UiManager.getMainWindow().getGeneralDisplay().setProfile(commandResult.getPerson());
+            UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        } catch (ParseException | CommandException e) {
             UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
         }
     }
 
     /**
-     * Handles the event whenever the selected person card changes. This handler will be triggered only on
-     * mouse clicked (primary or secondary).
+     * Handles the event where the user right-clicks on a person card to delete.
      */
-    public void handleMouseSelect(MouseEvent mouseEvent) {
-        // If primary key on mouse (left) is clicked, change the general display to profile of the selected person.
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            handleSetProfile();
-        }
-        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-            // If secondary key on mouse (right) is clicked, trigger context menu handler.
-            handleContextMenu();
-        }
+    public static void handleContextMenu(int index, ListView<Person> param) {
+        contextMenu.getItems().clear();
+        MenuItem delete = new MenuItem("Delete");
+        contextMenu.getItems().addAll(delete);
+        delete.setOnAction(event -> {
+            try {
+                CommandResult commandResult = logic.execute(DeleteCommand.COMMAND_WORD + " " + index);
+                Person personToDelete = commandResult.getPerson();
+                // clear the person list selection immediately after deletion
+                param.getSelectionModel().clearSelection();
+                // if the current profile is displaying the person being deleted, the profile will reset
+                GeneralDisplay generalDisplay = UiManager.getMainWindow().getGeneralDisplay();
+                Person currentPersonInProfile = generalDisplay.getProfile().getPerson();
+                if (generalDisplay.getProfileDisplayPlaceholder().isVisible()
+                        && currentPersonInProfile.isSamePerson(commandResult.getPerson())) {
+                    UiManager.getMainWindow().getGeneralDisplay().resetProfile();
+                } else if (currentPersonInProfile != null && !currentPersonInProfile.isSamePerson(personToDelete)) {
+                    // otherwise, select the person that is currently being displayed in profile.
+                    param.getSelectionModel().select(currentPersonInProfile);
+                }
+                // if tag list is being displayed, update the tag list accordingly.
+                if (generalDisplay.getTagListPlaceholder().isVisible()) {
+                    generalDisplay.getTagList().getTagListView().refresh();
+                }
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+            } catch (ParseException | CommandException e) {
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
+            }
+        });
     }
 
     /**
@@ -100,47 +152,12 @@ public class PersonListPanel extends UiPart<Region> {
      * key pressed, and will only be used to set general display to the selected person's profile.
      */
     public void handleKeySelect(KeyEvent keyEvent) {
-        if (personListView.getSelectionModel().getSelectedItem() != null) {
-            if (keyEvent.getCode().isArrowKey()) {
-                personListView.requestFocus();
-                handleSetProfile();
-            }
+        if (keyEvent.getCode().equals(KeyCode.UP) || keyEvent.getCode().equals(KeyCode.DOWN)) {
+            int index = personListView.getSelectionModel().getSelectedIndex();
+            handleSetProfile(index);
+        } else {
+            personListView.requestFocus();
         }
-    }
-
-    /**
-     * Handles the event where user right-clicks on a person card.
-     */
-    public void handleContextMenu() {
-        contextMenu.getItems().clear();
-        MenuItem delete = new MenuItem("Delete");
-        contextMenu.getItems().addAll(delete);
-        delete.setOnAction(event -> {
-            try {
-                Index personToDeleteIndex = Index.fromZeroBased(personListView.getSelectionModel().getSelectedIndex());
-                Person personToDelete = personListView.getSelectionModel().getSelectedItem();
-                DeleteCommand deleteCommand = new DeleteCommand(personToDeleteIndex);
-                CommandResult commandResult = deleteCommand.execute(logic.getModel());
-
-                // if the current profile is displaying the person being deleted, the profile will reset and the
-                // current selection after deletion is cleared.
-                Person currentPersonInProfile = UiManager.getMainWindow().getGeneralDisplay().getProfile().getPerson();
-                if (currentPersonInProfile != null && currentPersonInProfile.isSamePerson(commandResult.getPerson())) {
-                    UiManager.getMainWindow().getGeneralDisplay().resetProfile();
-                    personListView.getSelectionModel().clearSelection();
-                } else if (currentPersonInProfile != null && !currentPersonInProfile.isSamePerson(personToDelete)) {
-                    // otherwise, select the person that is currently being displayed in profile.
-                    personListView.getSelectionModel().select(currentPersonInProfile);
-                } else {
-                    // if the current profile is empty, clear the default selection.
-                    personListView.getSelectionModel().clearSelection();
-                }
-
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
-            } catch (CommandException e) {
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
-            }
-        });
     }
 
     /**

@@ -79,8 +79,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showProfile},
      * {@code showTagList}, {@code removeProfile}, {@code person}, and other fields
-     * set to their default value. Only applicable to AddCommand, AttachTagCommand, DetachTagCommand,
-     * DeleteCommand, EditCommand, ProfileCommand and RemarkCommand.
+     * set to their default value. Only applicable to AddCommand, AddTagCommand, AttachTagCommand, ClearEmptyTagCommand,
+     * DetachTagCommand, DeleteCommand, DeleteTagCommand, EditCommand, ListTag, ProfileCommand and RemarkCommand.
      */
     public CommandResult(String feedbackToUser,
                          boolean showProfile, boolean showTagList, boolean removeProfile, Person person) {
@@ -101,7 +101,7 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showGrabResult},
-     * {@code grabResult}, and other fields set to their default value.Only applicable to SwitchThemeCommand.
+     * {@code grabResult}, and other fields set to their default value. Only applicable to GrabCommand.
      */
     public CommandResult(String feedbackToUser, boolean showGrabResult, String grabResult) {
         this(feedbackToUser, false, false,

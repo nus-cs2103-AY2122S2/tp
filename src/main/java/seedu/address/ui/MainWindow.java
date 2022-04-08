@@ -266,10 +266,14 @@ public class MainWindow extends UiPart<Stage> {
 
             // when the command is a delete command, and the current profile is displaying the person being deleted,
             // the profile will reset and the current selection after deletion is cleared.
-            if (commandResult.isRemoveProfile() && generalDisplay.getProfile().getPerson() != null
+            if (commandResult.isRemoveProfile() && generalDisplay.getProfileDisplayPlaceholder().isVisible()
                     && generalDisplay.getProfile().getPerson().isSamePerson(commandResult.getPerson())) {
                 generalDisplay.resetProfile();
                 personListPanel.getPersonListView().getSelectionModel().clearSelection();
+            }
+
+            if (commandResult.isRemoveProfile() && generalDisplay.getTagListPlaceholder().isVisible()) {
+                generalDisplay.getTagList().getTagListView().refresh();
             }
 
             if (commandResult.isShowProfile()) {

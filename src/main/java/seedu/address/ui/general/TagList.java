@@ -2,29 +2,31 @@ package seedu.address.ui.general;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.index.Index;
+import javafx.util.Callback;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.PersonContainsTagPredicate;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.UiManager;
 import seedu.address.ui.UiPart;
 
 public class TagList extends UiPart<Region> {
     private static final String FXML = "TagList.fxml";
-    private final Logic logic;
-    private final ContextMenu contextMenu = new ContextMenu();
+    private static Logic logic;
+    private static final ContextMenu contextMenu = new ContextMenu();
     private final javafx.event.EventHandler<MouseEvent> disableRightClick = event -> {
         if (event.getButton() == MouseButton.SECONDARY) {
             event.consume();
@@ -39,28 +41,59 @@ public class TagList extends UiPart<Region> {
      */
     public TagList(Logic logic) {
         super(FXML);
-        this.logic = logic;
+        TagList.logic = logic;
         tagListView.addEventFilter(MouseEvent.ANY, disableRightClick);
     }
 
     public void setTagList(ObservableList<Tag> tagList) {
         tagListView.setItems(tagList);
-        tagListView.setCellFactory(listView -> new TagListViewCell());
+        tagListView.setCellFactory(new TagListCellFactory());
         tagListView.setContextMenu(contextMenu);
     }
 
-
-    class TagListViewCell extends ListCell<Tag> {
+    public static class TagListCellFactory implements Callback<ListView<Tag>, ListCell<Tag>> {
         @Override
-        protected void updateItem(Tag tag, boolean empty) {
-            super.updateItem(tag, empty);
+        public ListCell<Tag> call(ListView<Tag> param) {
+            if (param.getItems().size() == 0) {
+                contextMenu.getItems().clear();
+                contextMenu.hide();
+            }
+            ListCell<Tag> cell = new TagListViewCell();
+            cell.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                // if clicking on an empty area, do nothing
+                if (cell.isEmpty()) {
+                    mouseEvent.consume();
+                    contextMenu.getItems().clear();
+                    contextMenu.hide();
+                    param.getSelectionModel().clearSelection();
+                } else {
+                    Parent p = (Parent) mouseEvent.getSource();
+                    // Handles the event where the selected tag card changes. This handler will be triggered
+                    // only on mouse clicked (primary or secondary).
+                    int index = (Integer) p.getUserData();
+                    if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                        handleSetFilteredList(param.getItems().get(index).getTagName());
+                    } else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                        handleTagContextMenu(index + 1, param);
+                    }
+                }
+            });
+            return cell;
+        }
 
-            if (empty || tag == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new TagCard(tag, getIndex() + 1,
-                        logic.getModel().countPersonsInTag(tag)).getRoot());
+        public static final class TagListViewCell extends ListCell<Tag> {
+            @Override
+            protected void updateItem(Tag tag, boolean empty) {
+                super.updateItem(tag, empty);
+
+                if (empty || tag == null) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    setGraphic(new TagCard(tag, getIndex() + 1,
+                            logic.getModel().countPersonsInTag(tag)).getRoot());
+                    setUserData(getIndex());
+                }
             }
         }
     }
@@ -68,33 +101,32 @@ public class TagList extends UiPart<Region> {
     /**
      * Handles the event whenever the selected tag card changes.
      */
-    public void handleSetFilteredList() {
+    public static void handleSetFilteredList(String tagName) {
         try {
-            if (tagListView.getSelectionModel().getSelectedItem() != null) {
-                Tag tagSelected = tagListView.getSelectionModel().getSelectedItem();
-                PersonContainsTagPredicate personContainsTagPredicate = new PersonContainsTagPredicate(tagSelected);
-                FilterCommand filterCommand = new FilterCommand(personContainsTagPredicate, tagSelected);
-                CommandResult commandResult = filterCommand.execute(logic.getModel());
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
-            }
-        } catch (CommandException e) {
+            CommandResult commandResult = logic.execute(FilterCommand.COMMAND_WORD + " " + tagName);
+            UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+        } catch (ParseException | CommandException e) {
             UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
         }
     }
 
     /**
-     * Handles the event whenever the selected tag card changes. This handler will be triggered only on
-     * mouse clicked (primary or secondary).
+     * Handles the event where user right-clicks on a tag card.
      */
-    public void handleMouseSelect(MouseEvent mouseEvent) {
-        // If primary key on mouse (left) is clicked, change the person list panel to the filtered list.
-        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            handleSetFilteredList();
-        }
-        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-            // If secondary key on mouse (right) is clicked, trigger context menu handler.
-            handleTagContextMenu();
-        }
+    public static void handleTagContextMenu(int index, ListView<Tag> param) {
+        contextMenu.getItems().clear();
+        MenuItem delete = new MenuItem("Delete Tag");
+        contextMenu.getItems().addAll(delete);
+        delete.setOnAction(event -> {
+            try {
+                CommandResult commandResult = logic.execute(DeleteTagCommand.COMMAND_WORD + " " + index);
+                // clear the tag list selection immediately after deletion
+                param.getSelectionModel().clearSelection();
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+            } catch (ParseException | CommandException e) {
+                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
+            }
+        });
     }
 
     /**
@@ -102,31 +134,12 @@ public class TagList extends UiPart<Region> {
      * key pressed, and will only be used to set the person list panel to the filtered list.
      */
     public void handleKeySelect(KeyEvent keyEvent) {
-        if (tagListView.getSelectionModel().getSelectedItem() != null) {
-            if (keyEvent.getCode().isArrowKey()) {
-                tagListView.requestFocus();
-                handleSetFilteredList();
-            }
+        if (keyEvent.getCode().equals(KeyCode.UP) || keyEvent.getCode().equals(KeyCode.DOWN)) {
+            Tag tag = tagListView.getSelectionModel().getSelectedItem();
+            handleSetFilteredList(tag.getTagName());
+        } else {
+            tagListView.requestFocus();
         }
-    }
-
-    /**
-     * Handles the event where user right-clicks on a tag card.
-     */
-    public void handleTagContextMenu() {
-        contextMenu.getItems().clear();
-        MenuItem delete = new MenuItem("Delete Tag");
-        contextMenu.getItems().addAll(delete);
-        delete.setOnAction(event -> {
-            try {
-                Index tagToDeleteIndex = Index.fromZeroBased(tagListView.getSelectionModel().getSelectedIndex());
-                DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDeleteIndex);
-                CommandResult commandResult = deleteTagCommand.execute(logic.getModel());
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
-            } catch (CommandException e) {
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
-            }
-        });
     }
 
     /**
