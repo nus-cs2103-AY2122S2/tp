@@ -233,20 +233,27 @@ appropriate boolean variables will be flipped to represent the correct view.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | student                                    | add contacts of other students taking a specific module | I can easily contact other students for help |
-| `* * *`  | student                                    | remove contacts of students who have finished the module | I can see only those students who are still in the module |
-| `* * *`  | student/professor                          | view all my contacts |
-| `* * *`  | student                                    | edit specific details of a contact  | 
-| `* * *`  | professor                                  | edit specific details of a contact  | 
-| `* * *`  | student                                    | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly |
-| `* * *`  | student                                    | find classmates and their contact details taking the same module |  I can form teams with them for group projects                                                                      |
-| `* * `  | student with many modules                   | flag any important contacts to saved contacts | I can easily find the relevant contact in a hassle-free manner in the future |
-| `* `  | student with many modules                     | organise any saved contacts into categories | I can easily find the relevant contact in a hassle-free manner |
-| `*  `  | professor teaching multiple modules          | organise students into their respective modules | locate details of students in each module without having to go through the entire list |
-| `* `    | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)  | I can easily contact the relevant person with one command |
-| `*`      | student/professor with many contacts in the UniBook | sort persons by name | locate a person easily |
+| Priority | As a …​                                                             | I want to …​                                                                             | So that I can…​                                                                        |
+|----------|---------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | student                                                             | add contacts of other students taking a specific module                                  | I can easily contact other students for help                                           |
+| `* * *`  | student                                                             | remove contacts of students who have finished the module                                 | only keep the contacts I need                                                          |
+| `* * *`  | student/professor                                                   | view all my contacts                                                                     |
+| `* * *`  | student                                                             | edit specific details of a contact                                                       | 
+| `* * *`  | professor                                                           | edit specific details of a contact                                                       | 
+| `* * *`  | student                                                             | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly                                       |
+| `* * *`  | student                                                             | find classmates and their contact details taking the same module                         | I can form teams with them for group projects                                          |
+| `* * `   | student with many modules                                           | flag any important contacts to saved contacts                                            | I can easily find the relevant contact in a hassle-free manner in the future           |
+| `* * `   | student with many modules                                           | remove modules that I have completed                                                     |
+| `* `     | student with many modules                                           | organise any saved contacts into categories                                              | I can easily find the relevant contact in a hassle-free manner                         |
+| `* `     | student with many modules                                           | add key events such as exams, assignments deadlines                                      | I will not forget these important dates|
+| `* `     | student with many modules                                           | remove key events after they are over                                                    |
+| `* * `   | student with a group in a module                                    | add and find contacts of other students in a specific group                              | contact them quickly                                                                   |
+| `* * `   | student with a group in a module                                    | remove the group after the work is done                                                  |                                                                                        |
+| `* * `   | student with a group in a module                                    | add group meeting times                                                                  | I will not forget the meeting time |
+| `* * `   | student with a group in a module                                    | remove meeting times after the meeting is done                                           |
+| `*  `    | professor teaching multiple modules                                 | organise students into their respective modules                                          | locate details of students in each module without having to go through the entire list |
+| `* `     | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)                          | I can easily contact the relevant person with one command                              |
+| `*`      | student/professor with many contacts in the UniBook                 | sort persons by name                                                                     | locate a person easily                                                                 |
 
 *{More to be added}*
 
@@ -317,20 +324,29 @@ Actor: User
 
 Use case ends.
 
-**Use Case: UC05 - Deleting**
+**Use Case: UC05 - Deleting Person, Module or Group**
 
 Actor: User
 
+**Guarantees**
+
+- Nothing will be deleted if the user request is wrongly formatted/incomplete/incorrect.
+
 **MSS**
 
-1. User requests to delete a specified set of data.
+1. User requests to delete a specified set of data (Person, Module or Group).
 2. UniBook removes the specified set of data from the system.
 3. The UI is updated to no longer reflect or display this data.
 
 Use case ends.
 
-
-
+**Extensions**
+* 1a. The person, module or group does not exist
+    * The user is notified that the person, module or group does not exist.
+    * Use case ends.
+* 1a. The user request is wrongly formatted/incomplete/incorrect.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
 
 
 ### Non-Functional Requirements
