@@ -309,6 +309,7 @@ Examples:
 * At least one parameter aside from `INDEX` must be provided.
 * For the parameters not included in the edit command, the values stored for those parameters will remain the same.
 * When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
+* **When using the command `editc`, `editp`, or `edite`, the command will not work unless the respective list of entries is displayed (i.e. `editc` works after `listc` or `findc` or `sortc` command)**.
 
 </div>
 
