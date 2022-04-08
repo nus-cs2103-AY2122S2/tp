@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -61,6 +62,21 @@ public class PersonTest {
         Person personWithSameEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(BOB.isSamePerson(personWithSameEmail));
     }
+
+    @Test
+    public void getDuplicateValue() {
+        Person personWithSameEmail = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertEquals(BOB.getDuplicateValue(personWithSameEmail), "Email");
+
+        Person personWithSameGitHub = new PersonBuilder(ALICE).withGithubUsername(VALID_USERNAME_BOB).build();
+        assertEquals(BOB.getDuplicateValue(personWithSameGitHub), "Github UserName");
+
+        Person personWithSamePhone = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertEquals(BOB.getDuplicateValue(personWithSamePhone), "Phone");
+
+        assertEquals(ALICE.getDuplicateValue(BOB), "Error no same duplicate values");
+    }
+
 
     @Test
     public void equals() {
