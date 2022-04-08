@@ -14,6 +14,6 @@ With **Amigos**, you can:
 
 Amigos is also _super fast_ to use, and optimized for keyboard input while still having the benefits of a Graphical User Interface (GUI).
 
-For more information on how to get started, check out the **[Amigos User Guide](docs/UserGuide.md)**.
+For more information on how to get started, check out the **[Amigos User Guide](https://ay2122s2-cs2103-f09-2.github.io/tp/UserGuide.html)**.
 
 **Acknowledgements**: This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
