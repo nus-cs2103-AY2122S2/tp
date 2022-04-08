@@ -14,6 +14,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 
 /**
  * Schedules a candidate identified using it's displayed index from the address book for an interview
@@ -75,26 +76,18 @@ public class EditScheduleCommand extends ScheduleCommand {
         }
 
         try {
-            model.deleteInterview(interviewToEdit);
-            if (model.hasConflictingInterview(editedInterview)) {
-                throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
-            }
-            model.addInterview(editedInterview);
+            model.setInterview(interviewToEdit, editedInterview);
             model.updateFilteredInterviewSchedule(PREDICATE_SHOW_ALL_INTERVIEWS);
-            int indexCandidate = model.getFilteredCandidateList().indexOf(editedInterview.getCandidate());
-            Logger.getLogger(EditScheduleCommand.class.getName()).log(Level.INFO, String.valueOf(indexCandidate));
-            return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
-                    + " to " + editedInterview.getInterviewDate().format(DATE_TIME_FORMATTER)
-                    + " " + editedInterview.getInterviewStartTime()),
-                    false, false, false, -1, true, indexCandidate);
-        } catch (CommandException e) {
-            model.addInterview(interviewToEdit);
-            throw e;
+        } catch (ConflictingInterviewException e) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
-
-
-
+        int indexCandidate = model.getFilteredCandidateList().indexOf(editedInterview.getCandidate());
+        Logger.getLogger(EditScheduleCommand.class.getName()).log(Level.INFO, String.valueOf(indexCandidate));
+        return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, interviewToEdit
+                + " to " + editedInterview.getInterviewDate().format(DATE_TIME_FORMATTER)
+                + " " + editedInterview.getInterviewStartTime()),
+                false, false, false, -1, true, indexCandidate);
     }
 
     @Override

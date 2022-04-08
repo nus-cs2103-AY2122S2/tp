@@ -2,6 +2,7 @@ package seedu.address.model.interview;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.schedule.ScheduleCommand.MESSAGE_CONFLICTING_INTERVIEW;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
@@ -50,11 +52,11 @@ public class UniqueInterviewList implements Iterable<Interview> {
         internalList.add(toAdd);
     }
     /**
-     * Replaces the candidate {@code target} in the list with {@code editedCandidate}.
+     * Replaces the interview {@code target} in the list with {@code editedInterview}.
      * {@code target} must exist in the list.
-     * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the list.
+     * The interview {@code editedInterview} must not be in conflict with another interview for a different candidate.
      */
-    public void setInterview(Interview target, Interview editedInterview) {
+    public void setInterview(Interview target, Interview editedInterview) throws CommandException {
         requireAllNonNull(target, editedInterview);
 
         int index = internalList.indexOf(target);
@@ -62,8 +64,14 @@ public class UniqueInterviewList implements Iterable<Interview> {
             throw new InterviewNotFoundException();
         }
 
-        if (containsConflictingInterview(editedInterview)) {
-            throw new ConflictingInterviewException();
+        ObservableList<Interview> internalListCopy = FXCollections.observableArrayList(internalList);
+        // Credits to teammate @tiewweijian for initial suggestion of deletion/removal of interviews
+        // to solve the issue of rescheduling the same candidate
+        internalListCopy.remove(target);
+        internalListCopy.add(editedInterview);
+
+        if (!interviewsDateTimeAreUnique(internalListCopy)) {
+            throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
 
         internalList.set(index, editedInterview);

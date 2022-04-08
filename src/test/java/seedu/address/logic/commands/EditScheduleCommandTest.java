@@ -18,12 +18,12 @@ import static seedu.address.testutil.TypicalInterviews.VALID_NO_CONFLICT_INTERVI
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviewSchedule;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.schedule.EditScheduleCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.InterviewSchedule;
@@ -44,7 +44,7 @@ public class EditScheduleCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalInterviewSchedule(), new UserPrefs());
 
     @Test
-    public void execute_unfilteredList_success() {
+    public void execute_unfilteredList_success() throws CommandException {
         EditScheduleCommand editScheduleCommand =
                 new EditScheduleCommand(INDEX_FIRST_INTERVIEW, VALID_NO_CONFLICT_INTERVIEW_DATE_TIME);
 
@@ -61,12 +61,11 @@ public class EditScheduleCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
         expectedModel.setInterview(model.getFilteredInterviewSchedule().get(0), editedInterview);
-        expectedModel.updateFilteredInterviewSchedule(Model.PREDICATE_SHOW_ALL_INTERVIEWS);
 
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
         showInterviewAtIndex(model, INDEX_FIRST_INTERVIEW);
         Interview interviewInFilteredList =
                 model.getFilteredInterviewSchedule().get(INDEX_FIRST_INTERVIEW.getZeroBased());
@@ -78,7 +77,7 @@ public class EditScheduleCommandTest {
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_INTERVIEW_SUCCESS,
                 interviewInFilteredList + " to " + editedInterview.getInterviewDate()
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " "
+                        .format(DATE_TIME_FORMATTER) + " "
                         + editedInterview.getInterviewStartTime());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),

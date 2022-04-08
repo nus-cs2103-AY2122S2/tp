@@ -38,7 +38,6 @@ public class TypicalInterviews {
     public static final Interview INTERVIEW_CARL = new InterviewBuilder().withCandidate(TypicalCandidates.CARL)
             .withInterviewDateTime(VALID_CARL_INTERVIEW_DATE_TIME).build();
 
-    // Manually added - Candidate's details found in {@code CommandTestUtil}
     public static final Interview INTERVIEW_AMY_TYPICAL = new InterviewBuilder().withCandidate(TypicalCandidates.AMY)
             .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME).build();
     public static final Interview INTERVIEW_BOB_TYPICAL = new InterviewBuilder().withCandidate(TypicalCandidates.BOB)

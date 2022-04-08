@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
@@ -112,7 +113,7 @@ public class UniqueInterviewListTest {
     public void setInterview_hasConflictingInterview_throwsConflictingInterviewException() {
         uniqueInterviewList.add(INTERVIEW_ALICE);
         uniqueInterviewList.add(INTERVIEW_AMY_TYPICAL);
-        assertThrows(ConflictingInterviewException.class, () ->
+        assertThrows(CommandException.class, () ->
                 uniqueInterviewList.setInterview(INTERVIEW_ALICE, INTERVIEW_BOB_TYPICAL));
     }
 
