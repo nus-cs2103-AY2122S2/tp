@@ -240,17 +240,17 @@ Format: `labgrad INDEX l/LAB_NUMBER m/LAB_MARK`
 * The current status of the lab to be graded can be either `UNSUBMITTED` or `SUBMITTED`.
 * `INDEX` refers to the index number shown in the displayed student list. `INDEX` **must be a positive integer** 1, 2, 3, …
 * `LAB_NUMBER` must correspond to one of the `Lab`s currently in the TAddressBook.
-* `LAB_MARK` should be a non-negative integer between 0 and 100 inclusive.
+* `LAB_MARK` should be a non-negative integer between 0 and 100 inclusive. Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
 
 #### Editing individual labs : `labedit`
-Edits the status or marks of the specified lab for the student with the specified `INDEX`.
+Edits the status or marks of the specified lab for the student with the specified `INDEX`. This command can achieve similar outcomes as `labsub` and `labgrad`, but using those commands would require less parameter inputs and thus be more convenient.
+The main purpose of this command is to allow for editing of wrongly provided information.
 
 Format: `labedit INDEX l/LAB_NUMBER (s/LAB_STATUS) (m/LAB_MARK)`
 
-* This command can achieve similar outcomes as `labsub` and `labgrad`, but using those commands would require less parameter inputs and thus be more convenient.
-  The main purpose of this command is to allow for editing of wrongly provided information.
 * `INDEX` refers to the index number shown in the displayed student list. `INDEX` **must be a positive integer** 1, 2, 3, …
 * `LAB_STATUS` must be one of `u`/`s`/`g` (`UNSUBMITTED`/`SUBMITTED`/`GRADED`).
+* `LAB_MARK` should be a non-negative integer between 0 and 100 inclusive. Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
 * Only valid combinations of `LAB_STATUS` and `LAB_MARK` will be accepted.
   * If `LAB_MARK` is provided, there is no need to provide `LAB_STATUS`. However, if provided, `LAB_STATUS` must be `g`.
   * If `LAB_STATUS` is `u` or `s`, `LAB_MARK` cannot be provided.
