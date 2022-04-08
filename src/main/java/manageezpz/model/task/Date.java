@@ -28,27 +28,13 @@ public class Date {
         this.date = date;
     }
 
-    public String getDate() {
-        return date;
-    }
-
+    /**
+     * Checks if the given date is valid.
+     * @param date the date to be checked.
+     * @return true if the date is valid, false otherwise.
+     */
     public static boolean isValidDate(String date) {
         return date.matches(VALIDATION_REGEX) && validCheckDate(date);
-    }
-
-    public LocalDate getParsedDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate parsedDate = LocalDate.parse(date, dtf);
-        return parsedDate;
-    }
-
-    /**
-     * Gets today's date.
-     * @return Today's date
-     */
-    public static Date getTodayDate() {
-        LocalDate todayDate = LocalDate.now();
-        return new Date(todayDate.toString());
     }
 
     /**
@@ -67,8 +53,28 @@ public class Date {
         }
     }
 
+    /**
+     * Formats the given date.
+     * @param dtf DateTimeFormatter to be used to format the date.
+     * @return a formatted date.
+     */
     public String format(DateTimeFormatter dtf) {
         return getParsedDate().format(dtf);
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public LocalDate getParsedDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate parsedDate = LocalDate.parse(date, dtf);
+        return parsedDate;
+    }
+
+    public static Date getTodayDate() {
+        LocalDate todayDate = LocalDate.now();
+        return new Date(todayDate.toString());
     }
 
     /**
