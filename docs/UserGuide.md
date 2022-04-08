@@ -201,7 +201,7 @@ Example:
 * `filter l/2 s/u` returns all students with a status of `UNSUBMITTED` for `Lab 2`.
 
 #### View student details : `view`
-View a student's details from the TAddressBook. This includes their personal information (i.e. email, GitHub username, etc.) 
+View a student's details from the TAddressBook. This includes their personal information (i.e. email, GitHub username, etc.)
 as well as the status and/or marks achieved for their Labs. A sample result is shown below.<br>
 ![viewUi](images/viewUI.png)
 
@@ -254,7 +254,7 @@ Format: `labedit INDEX l/LAB_NUMBER (s/LAB_STATUS) (m/LAB_MARK)`
 * Only valid combinations of `LAB_STATUS` and `LAB_MARK` will be accepted.
   * If `LAB_MARK` is provided, there is no need to provide `LAB_STATUS`. However, if provided, `LAB_STATUS` must be `g`.
   * If `LAB_STATUS` is `u` or `s`, `LAB_MARK` cannot be provided.
-  
+
 #### Removing a lab: `labrm`
 Removes a specified lab from every student in the TAddressBook.
 
