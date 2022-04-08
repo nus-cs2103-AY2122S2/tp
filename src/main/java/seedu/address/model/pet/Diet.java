@@ -8,14 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is always valid
  */
 public class Diet {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Diet description can be empty but should only contain alphanumeric characters or spaces.";
-
-
     /*
      * Diet should not contain special characters.
-     */
-    public static final String VALIDATION_REGEX = "^$|[a-zA-Z0-9 ]+";
+    */
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]*$";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Diet description can be empty but should only contain alphanumeric characters or spaces.";
 
     public final String value;
     /**

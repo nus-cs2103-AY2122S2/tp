@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DROPOFF;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PICKUP;
 
 import java.time.LocalDate;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PresentAttendanceCommand;
@@ -31,32 +32,30 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_PICKUP, PREFIX_DROPOFF);
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                PresentAttendanceCommand.MESSAGE_USAGE));
+        }
+
         checkIfOnlyOneTimePresent(argMultimap);
 
-        Index index;
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         LocalDate attendanceDate;
         PresentAttendanceDescriptor presentAttendanceDescriptor =
             new PresentAttendanceDescriptor();
+        attendanceDate = ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get());
+        presentAttendanceDescriptor.setAttendanceDate(attendanceDate);
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            attendanceDate = ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_DATE).get());
-            presentAttendanceDescriptor.setAttendanceDate(attendanceDate);
+        if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
+            presentAttendanceDescriptor.setPickUpTime(
+                ParserUtil.parsePickUpTime(argMultimap.getValue(PREFIX_PICKUP).get())
+            );
+        }
 
-            if (argMultimap.getValue(PREFIX_PICKUP).isPresent()) {
-                presentAttendanceDescriptor.setPickUpTime(
-                    ParserUtil.parsePickUpTime(argMultimap.getValue(PREFIX_PICKUP).get())
-                );
-            }
-
-            if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
-                presentAttendanceDescriptor.setDropOffTime(
-                    ParserUtil.parseDropOffTime(argMultimap.getValue(PREFIX_DROPOFF).get())
-                );
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PresentAttendanceCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_DROPOFF).isPresent()) {
+            presentAttendanceDescriptor.setDropOffTime(
+                ParserUtil.parseDropOffTime(argMultimap.getValue(PREFIX_DROPOFF).get())
+            );
         }
 
         return new PresentAttendanceCommand(index, presentAttendanceDescriptor);
@@ -64,6 +63,7 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
 
     /**
      * Checks to see if only pick up or only drop off time for the command is present.
+     *
      * @param argumentMultimap the arguments of the command.
      * @throws ParseException if one and only one out of the two timings are provided.
      */
@@ -75,6 +75,14 @@ public class PresentAttendanceCommandParser implements Parser<PresentAttendanceC
             && argumentMultimap.getValue(PREFIX_DROPOFF).isEmpty()) {
             throw new ParseException(MESSAGE_MISSING_DROPOFF_TIME);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
 

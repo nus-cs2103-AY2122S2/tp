@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
@@ -10,13 +11,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.pet.Address;
 import seedu.address.model.pet.Diet;
@@ -39,18 +38,18 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_OWNERNAME = "Sarah";
     private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX, ()
+            -> ParserUtil.parseIndex("10 a"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
@@ -185,6 +184,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_multipleTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(TAG_DESC_FRIEND + TAG_DESC_HUSBAND));
+    }
+
+    @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
@@ -203,21 +207,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseTags_collectionWithInvalidTag_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Collections.singletonList(INVALID_TAG)));
     }
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
-
-        assertEquals(expectedTagSet, actualTagSet);
     }
 
     @Test
@@ -233,7 +229,20 @@ public class ParserUtilTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime expectedLocalDateTime = LocalDateTime.parse("22-08-2024 09:00", formatter);
         assertEquals(ParserUtil.parseAppointmentDateTime("22-08-2024 09:00"), expectedLocalDateTime);
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("2022-03-22 0830"));
+        // invalid date
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("2022-03-22 08:30"));
+        // invalid time
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("22-03-2023 0830"));
+        // missing date or time
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("22-08-2024"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("09:00"));
+        // missing date and time
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime(" "));
+        // leap year
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("30-02-2024 09:00"));
+        // previous dates
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDateTime("04-04-2022 09:00"));
+
     }
 
     @Test

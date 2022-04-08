@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ChargeCommand;
@@ -25,13 +26,21 @@ import seedu.address.model.pet.OwnerName;
 import seedu.address.model.pet.Phone;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_ATTENDANCE_DATE =
+        "Attendance date should be valid and in dd-MM-yyyy format!";
+    public static final String MESSAGE_INVALID_PICKUP_TIME =
+        "Pick up time should be valid and in HH:mm format!";
+    public static final String MESSAGE_INVALID_DROPOFF_TIME =
+        "Drop off time should be valid and in HH:mm format!";
+    public static final String MESSAGE_INVALID_NUMBER_OF_TAGS =
+            "User should only be able to key in one tag!";
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -41,7 +50,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -60,22 +69,6 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
-
-    /**
-     * Parses a {@code String diet} into a {@code Diet}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code diet} is invalid.
-     */
-    public static Diet parseDiet(String diet) throws ParseException {
-        requireNonNull(diet);
-        String trimmedDiet = diet.trim();
-        if (!Diet.isValidDiet(trimmedDiet)) {
-            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
-        }
-        return new Diet(trimmedDiet);
-    }
-
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -138,14 +131,35 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String diet} into a {@code Diet}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code diet} is invalid.
+     */
+    public static Diet parseDiet(String diet) throws ParseException {
+        requireNonNull(diet);
+        String trimmedDiet = diet.trim();
+        if (!Diet.isValidDiet(trimmedDiet)) {
+            throw new ParseException(Diet.MESSAGE_CONSTRAINTS);
+        }
+        return new Diet(trimmedDiet);
+    }
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+
+        // Strictly only allow one tag.
+        if (tags.size() > 1) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_TAGS);
+        }
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+
         return tagSet;
     }
 
@@ -211,11 +225,12 @@ public class ParserUtil {
     public static LocalDate parseAttendanceDate(String attendanceDate) throws ParseException {
         requireNonNull(attendanceDate);
         String trimmedAttendanceDate = attendanceDate.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDate.parse(trimmedAttendanceDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Attendance date should be in dd-MM-yyyy format!");
+            throw new ParseException(MESSAGE_INVALID_ATTENDANCE_DATE);
         }
     }
 
@@ -282,7 +297,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(trimmedPickUpTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Pick up time should be in HH:mm format!");
+            throw new ParseException(MESSAGE_INVALID_PICKUP_TIME);
         }
     }
 
@@ -300,7 +315,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(trimmedDropOffTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Drop off time should be in HH:mm format!");
+            throw new ParseException(MESSAGE_INVALID_DROPOFF_TIME);
         }
     }
 
@@ -335,6 +350,7 @@ public class ParserUtil {
         requireNonNull(charge);
 
         String trimmedCharge = charge.trim();
+        System.out.println(trimmedCharge);
         if (!Charge.isValidCharge(trimmedCharge)) {
             throw new ParseException(Charge.MESSAGE_INVALID_CHARGE_FORMAT);
         }

@@ -85,6 +85,9 @@ categorised into **Basic Administration**, **Optional Requirements** and **Effic
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  
+* However, for the tag parameter, users will only be able to key in one tag. 
+  e.g. if you specify `t/Golden t/Retriever`, an error message will be shown.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -102,7 +105,8 @@ When you receive a new pet in the daycare, you may wish to add them to WoofAreYo
 Format: `add n/NAME_OF_PET o/OWNER_NAME p/PHONE_NUMBER a/ADDRESS [t/BREED]...`
 * Each particular field is compulsory except for `BREED`.
 * `BREED` is an optional field which could be used to indicate the breed of a pet.
-  * If a pet is a Golden Dachshund, you can use `t/Golden Retriever t/Dachshund` or just `t/Golden Dachshund`.
+  * You should only be able to add *one* breed for a pet.
+  * Entering more than *one* breed will throw an error.
 * Each particular entered must strictly correspond to its legal prefix. e.g: `p/Address` is considered as invalid.
 * Phone number **must only contain numbers**.
 * `NAME_OF_PET` (pet name) and `OWNER_NAME` (owner name) **must only contain alphabets or spaces**.
@@ -130,14 +134,16 @@ Format: `edit INDEX [n/NAME_OF_PET] [o/OWNER_NAME] [p/PHONE_NUMBER] [a/ADDRESS] 
 
 **:information_source: Notes about editing `[t/BREED]`:**<br>
 
-* When editing `[t/BREED]`, the existing breed(s) of the pet will be removed.
+* When editing `[t/BREED]`, the existing breed of the pet will be removed.
+* You can only edit *one* breed. 
 * Following from the previous e.g., if you key in `edit 1 t/German Sheppard`, Woofie's "Bulldog" breed will be replaced
 by "German Sheppard" instead.
 * You can also remove all the breeds associated to the pet by typing `t/` without specifying any breed after it.
 </div>
 
 Examples:
-* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and the tag of Woofie from 'Bulldog' to 'German Sheppard'.
+* Continuing from the previous example, `edit 1 o/Pauline Tan t/German Sheppard` will change the owner's name and 
+  the tag of Woofie from 'Bulldog' to 'German Sheppard'.
 
 ### Mark a pet as present: `present`
 
@@ -261,7 +267,7 @@ Format: `diet INDEX d/REMARK`
 * The index refers to the index number shown in the current list of pets.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Entering `diet INDEX d/` will remove the dietary requirements of pet at `INDEX`.
-* The description of diet should only contain **alphanumeric characters, spaces and empty strings**. 
+* The description of diet should only contain **alphanumeric characters, spaces and empty strings**.
 
 Examples:
 * `diet 1 d/Only feed dry kibble` will store a dietary remark for Woofie indicating to "Only feed dry kibble" as shown below.
@@ -334,7 +340,8 @@ life easier when using the features previously introduced.
 
 ### Find pet details: `find`
 
-In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names, you can use this function to find pets with a particular name.
+In the event that you wish to search for particular pets in WoofAreYou to check up on details, and know their names,
+you can use this function to find pets with a particular name.
 
 If there are multiple pets with the same name, all such pets will be displayed.
 
@@ -389,20 +396,20 @@ If you just want to know common information about some pets, you can filter the 
 * You can filter by date, to find out which pets are present on a given date.
 * You can filter by appointment, to find out which pets have appointments on a given date.
 * You can filter by owner's name, to find all pets with the same owner.
-* You can also filter by tags, to find all pets of a common breed.
+* You can also filter by tag, to find all pets of a common breed.
 
 Format: `filter f/KEYWORD`
 
 * **One and only one** filter parameter is to be used with this command.
-* Specified `f/` only consists of: `byDate/`, `byApp/`, `byTags/` and `byOwner/`.
+* Specified `f/` only consists of: `byDate/`, `byApp/`, `byTag/` and `byOwner/`.
 * If you use `byDate/` or `byApp/`, `KEYWORD` has to be in `dd-MM-yyyy` format, or `today`.
 * If you use `byOwner/`, `KEYWORD` can be any length.
-* If you use `byTags/`, `KEYWORD` can be any length.
+* If you use `byTag/`, `KEYWORD` can be any length.
     * Can filter with a partial match in `Keyword`: `Bord`, `Borde Colli`, will match with pets tagged as `Border Collie`
 
 Examples:
 * `filter byOwner/Lily` shows pets owned by all Lily(s).
-* `filter byTags/Retriever` shows pets with `Retriever` in their tags.
+* `filter byTag/Retriever` shows pets with `Retriever` in their tag.
 * `filter byDate/06-04-2022` show pets present on 6 April 2022 as shown below.
 
 <p align="center">
@@ -429,7 +436,7 @@ Format: `undo`
 </div>
 
 Examples:
-* If the user chooses to delete a pet, `undo` will revert the address book to the state where the pet is not deleted.
+* If the user chooses to delete a pet, `undo` will revert the WoofAreYou to the state where the pet is not deleted.
 
 ### View help : `help`
 
@@ -461,3 +468,7 @@ wish to deal with the nitty-gritty details of each feature.
 | **List**      | `list`                                                                                | `list`                                                                                                                | Lists all pets in pet list                                                                                            |
 | **Undo**      | `undo`                                                                                | `undo`                                                                                                                | Undoes the previous command made                                                                                      |
 | **Help**      | `help`                                                                                | `help`                                                                                                                | Shows a message explaining how to access the help page                                                                |
+<<<<<<< HEAD
+=======
+| **Exit**      | `exit`                                                                                | `exit`                                                                                                                | Exits WoofAreYou                                                                                                      |
+>>>>>>> master

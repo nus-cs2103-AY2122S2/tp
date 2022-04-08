@@ -5,26 +5,29 @@ import static java.util.Objects.requireNonNull;
 import javafx.scene.control.Label;
 import seedu.address.model.pet.Appointment;
 
-public class AppointmentLabel {
+public class AppointmentLabel extends Label {
     private static final String LABEL = "Appointment:";
-    private static final String LABEL_COLOR = "-fx-background-color: #FFFF00";
+    private static final String LABEL_COLOR = "-fx-background-color: #f9c74f";
 
-    private AppointmentLabel() {}
+    private AppointmentLabel() {
+    }
 
     /**
      * Create an appointment label for GUI if there is any.
+     *
      * @param appointment of Pet
      * @return Appointment Label
      */
-    public static Label createAppointmentLabel(Appointment appointment) {
+    public static AppointmentLabel createAppointmentLabel(Appointment appointment) {
         requireNonNull(appointment);
-        Label appLabel = new Label();
+        AppointmentLabel appLabel = new AppointmentLabel();
 
         if (appointment.getDateTime() == null) {
             return appLabel;
         }
         appLabel.setText(LABEL);
         appLabel.setStyle(LABEL_COLOR);
+
         return appLabel;
     }
 }

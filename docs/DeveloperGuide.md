@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is adapted from a generic application called AddressBook-Level3 (AB3) (from https://se-education.org) as the starting point.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Pet` objects (which are contained in a `UniquePetList` object).
+* stores WoofAreYou data i.e., all `Pet` objects (which are contained in a `UniquePetList` object).
 * stores the currently 'selected' `Pet` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Pet>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -140,7 +140,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both WoofAreYou data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -159,7 +159,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The proposed sorting mechanism is facilitated by `SortCommand` class. It extends `Command`
-and takes in a field that the user wishes to sort the Address Book by. The field is parsed by
+and takes in a field that the user wishes to sort WoofAreYou by. The field is parsed by
 `SortCommandParser`.
 
 The primary sorting operation that takes place in the SortCommand class is sortPetList. This operation is exposed
@@ -203,7 +203,7 @@ Step 1. The user executes command `charge 1 /m03` to compute amount chargeable t
 
 The following sequence diagram shows how the charge operation works:
 
-![ChargeSequenceDiagram](images/charge.png)
+![ChargeSequenceDiagram](images/ChargeSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ChargeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -260,11 +260,11 @@ by the prefixes / augments.
 
 #### Implementation
 The proposed filter mechanism is facilitated by `FilterCommand` class.
-It extends `Command` and takes in a field that the user wishes to filter the Address Book by followed by
+It extends `Command` and takes in a field that the user wishes to filter WoofAreYou by followed by
 a given filter word. The field is parsed by `FilterCommandParser`. A filter word will follow after the keyword to
 indicate what the user wants to filter out specifically.
 
-Currently, pet list can be filtered by date, owner name and tag. Users can only filter the address book by one field at
+Currently, pet list can be filtered by date, owner name and tag. Users can only filter WoofAreYou by one field at
 a time only. `FilterCommandParser` ensure this by throwing a `ParseException` when more than one filter field is
 entered.
 
@@ -282,7 +282,7 @@ match in the specified field.
 `FindCommand` then updates the address book using one of the three classes (`Predicates`). Each class has a different
 way of testing `Pet`.
 
-The following sequence diagram shows how the filter operation works when `filter byTags/ beagle` is called:
+The following sequence diagram shows how the filter operation works when `filter byTag/ beagle` is called:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
@@ -307,31 +307,31 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current WoofAreYou state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous WoofAreYou state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone WoofAreYou state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th pet in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th pet in WoofAreYou. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of WoofAreYou after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted WoofAreYou state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new pet. The `add` command also calls `Model#commitAddressBook()`, causing another modified WoofAreYou state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the WoofAreYou state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the pet was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous WoofAreYou state, and restores the WoofAreYou to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -348,17 +348,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores WoofAreYou to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest WoofAreYou state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -370,7 +370,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entirety of WoofAreYou.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -441,12 +441,12 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * Pet daycare centre owners
-* has a need to manage administrative details of pets on a daily basis
-* prefer desktop apps over other types
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage administrative details of pets on a daily basis
+* Prefers desktop apps over other types
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage administrative duties faster than a typical mouse/GUI driven app and Excel
+**Value proposition**: Manage administrative duties faster than a typical mouse/ GUI driven app and Excel
 
 
 ### User stories
@@ -886,7 +886,7 @@ WoofAreYou's `Model` draws inspiration from original [AB3](https://se-education.
 However, WoofAreYou's model is more complicated because it is specifically adapted to handle pets' attributes instead of
 just Person objects.
 
-In WoofAreYou, it is essential to keep track of pets' attendance. Hence, the `AttendanceEntry` class in WoofAreYou is
+In WoofAreYou, it is crucial to keep track of pets' attendance. Hence, the `AttendanceEntry` class in WoofAreYou is
 essential for many of the functionalities. Not only does `AttendanceEntry` need to modify the database directly to store
 potentially large amount of attendance entries for each pet, it has to ensure that these data are easily retrievable.
 Similarly, the `Appointment` class has to be flexible to cater to the ever-changing nature of pets' appointments.
@@ -894,8 +894,8 @@ These 2 classes utilised Java's `LocalDate`, `LocalTime` and `LocalDateTime` lib
 which saved significant amount of time in handling invalid inputs.
 
 Complex attributes such as `Charge` is also implemented to calculate the specific cost every month for each pet. The
-`Model` of WoofAreYou support higher level features and commands like sorting, filtering and undoing to increase efficiency
-that were not present in AB3.
+`Model` of WoofAreYou supports higher level features and commands like sorting, filtering and undoing to increase efficiency
+that are not present in AB3.
 
 All the different classes in WoofAreYou `Model` have to interact with one another to ensure cohesiveness and efficient
 navigability for the user. For instance, filtering and sort have to access the `AttendaceEntry` or `Appointment` class
@@ -909,10 +909,10 @@ catered for its purpose.
 
 WoofAreYou's `Logic` is more advanced than that of AB3. WoofAreYou supports many more commands such as `sort`,
 `filter`, `undo`, `diet`, `app`, and the different commands for marking attendance. Existing commands of AB3 like
-`edit` and `find` were also enhanced and adapted to handle the complex `Model` of WoofAreYou.
+`edit` and `find` are also enhanced to handle the complex `Model` of WoofAreYou.
 
 Significant effort was placed in implementing the `Logic` for WoofAreYou. It encompasses the logic for pets'
-`AttendanceEntry`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which were adapted
+`AttendanceEntry`, `Diet`, `Appointment` and `Charge` on top of the logic that AB3 has initially which has been adapted
 for WoofAreYou.
 
 A huge amount of time was dedicated in validating user input for different commands. This is to ensure that WoofAreYou
@@ -921,12 +921,12 @@ effort was put into crafting error messages to ensure smooth handling of invalid
 
 ## Storage
 
-WoofAreYou's `Storage` extends that of AB3 to increase functionality and store the variety of attributes that pets may
-have. `AttendanceEntry`, `Appointment`, `Diet` and `Tags` were carefully organised and stored as separate entries in a
-JSON file. This ensures that these attributes are unique to each pet and can be retrieved easily for other implementations.
+WoofAreYou's `Storage` extends that of AB3 to increase functionality and store a variety of attributes that pets may
+have. `AttendanceEntry`, `Appointment`, `Diet` and `Tags` are carefully organised and stored as separate entries in a
+JSON file. Doing so ensures that these attributes are unique to each pet and can be retrieved easily for other implementations.
 
-More time and effort were spent in crating the JSON entries of `AttendanceEntry` as it needed to store dates that
-the pet was present and absent, and also the pick-up and drop off timings of different pets. All these needed to be
+More time and effort were spent in crafting the JSON entries of `AttendanceEntry` as it needs to store dates that
+the pet was present or absent, and also their respective pick-up and drop off timings. All these are well
 encapsulated in an organised format in the JSON file for easy retrieval.
 
 ## UI
@@ -959,10 +959,10 @@ the GUI.
 ### Challenges
 
 Since WoofAreYou handles a lot more information and data compared to AB3, the GUI may be more cluttered. In order to
-make the GUI neater, more VBox and HBox components were introduced to accommodate more information displayed. This led to formatting
+make the GUI neater, more VBox and HBox components are introduced to accommodate more information displayed. This initially led to formatting
 issues of certain fields like addresses or tags being truncated and the GUI being less user-friendly. Character limit
-was introduced to ensure that input will not exceed its allocated space but this led to other bugs. Eventually, a hybrid
-approach of increased character limit and resizable components was adopted to enhance user-friendliness.
+was then introduced to ensure that input will not exceed its allocated space but this led to other bugs. Eventually, a hybrid
+approach of increased character limit and resizable components is currently adopted to enhance user-friendliness.
 
 
 ## Overall
@@ -973,10 +973,10 @@ features had to be sacrificed for more essential ones.
 
 The team members all put in equal amount of effort into making WoofAreYou a success. Effort levels since the first
 iteration has been consistently increasing. Despite our busy schedules, all members made a conscious effort to meet
-weekly and work rigorously on WoofAreYou. Pull requests were generated every other day and reviews were followed shortly.
+weekly and work rigorously on WoofAreYou. Pull requests were generated every other day and reviews followed shortly.
 The team showed immense responsiveness when dealing with issues and worked at a very high level.
 
-From understanding the original code, implemented new features to conducting rigorous testing, the team ensured that
+From understanding the original code, implementing new features to conducting rigorous testing, the team ensured that
 every piece of work they had to do was of a high standard. With the given time constraints, the team has put in all the
 effort they can to make WoofAreYou a viable and concrete product that can already be used in the industry. Although
 WoofAreYou may not be perfect, there is always room for improvement and the team is proud of the end product.

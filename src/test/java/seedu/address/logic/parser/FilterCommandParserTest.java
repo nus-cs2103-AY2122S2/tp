@@ -55,8 +55,15 @@ public class FilterCommandParserTest {
     @Test
     public void parse_validTagArg_returnsFilterCommand() {
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new TagContainsFilterWordPredicate("ABC DEF"));
-        assertParseSuccess(parser, " byTags/ABC DEF", expectedFilterCommand);
+                new FilterCommand(new TagContainsFilterWordPredicate("ABC"));
+        assertParseSuccess(parser, " byTag/ABC", expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_validTagArgs_returnsFilterCommand() {
+        FilterCommand expectedFilterCommand =
+                new FilterCommand(new TagContainsFilterWordPredicate("ABC EFG"));
+        assertParseSuccess(parser, " byTag/ABC EFG", expectedFilterCommand);
     }
 
     @Test

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
-<?import seedu.address.ui.TextFieldLimited?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-  <TextFieldLimited fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter your command here..." />
+  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter your command here..." />
 </StackPane>
 

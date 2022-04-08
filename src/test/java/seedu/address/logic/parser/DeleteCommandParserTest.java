@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
@@ -18,6 +19,8 @@ import seedu.address.logic.commands.DeleteCommand;
  */
 public class DeleteCommandParserTest {
 
+    private static final String NEG_INTEGER_MAX = String.valueOf(-(Integer.MAX_VALUE + 1));
+    private static final String POS_INTEGER_MAX = String.valueOf(Integer.MAX_VALUE + 1);
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
@@ -27,6 +30,15 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_indexOutOfBoundsIntegerOverflow_throwsParseException() {
+        // large positive number
+        assertParseFailure(parser, POS_INTEGER_MAX, MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        // large negative number
+        assertParseFailure(parser, NEG_INTEGER_MAX, MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 }
