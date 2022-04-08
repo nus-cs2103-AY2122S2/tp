@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindClassCodeCommandParser" as FindClassCodeCommandParser LOGIC_COLOR
+participant "p:ClassCodeContainsKeywordsPredicate" as ClassCodeContainsKeywordPredicate LOGIC_COLOR
+participant "f:FindClassCodeCommand" as FindClassCodeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findclasscode 3A 3B")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findclasscode 3A 3B")
+activate AddressBookParser
+
+create FindClassCodeCommandParser
+AddressBookParser -> FindClassCodeCommandParser
+activate FindClassCodeCommandParser
+
+FindClassCodeCommandParser --> AddressBookParser
+deactivate FindClassCodeCommandParser
+
+AddressBookParser -> FindClassCodeCommandParser : parse("3A 3B")
+activate FindClassCodeCommandParser
+
+create ClassCodeContainsKeywordPredicate
+FindClassCodeCommandParser -> ClassCodeContainsKeywordPredicate
+activate ClassCodeContainsKeywordPredicate
+
+ClassCodeContainsKeywordPredicate --> FindClassCodeCommandParser : p
+deactivate ClassCodeContainsKeywordPredicate
+
+create FindClassCodeCommand
+FindClassCodeCommandParser -> FindClassCodeCommand
+activate FindClassCodeCommand
+
+FindClassCodeCommand --> FindClassCodeCommandParser : f
+deactivate FindClassCodeCommand
+
+FindClassCodeCommandParser --> AddressBookParser : f
+deactivate FindClassCodeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindClassCodeCommandParser -[hidden]-> AddressBookParser
+destroy FindClassCodeCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindClassCodeCommand : execute()
+activate FindClassCodeCommand
+
+FindClassCodeCommand -> Model : updateFilteredPersonList(p)
+activate Model
+
+Model --> FindClassCodeCommand
+deactivate Model
+
+create CommandResult
+FindClassCodeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindClassCodeCommand
+deactivate CommandResult
+
+FindClassCodeCommand --> LogicManager : result
+deactivate FindClassCodeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
