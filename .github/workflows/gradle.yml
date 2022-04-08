@@ -34,8 +34,8 @@ jobs:
         with:
           java-version: '11'
           java-package: jdk+fx
-          
-      - name: Test Java testcases
+
+      - name: Test Test Cases
         run: ./gradlew test
 
       - name: Build and check with Gradle
