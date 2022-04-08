@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.schedule;
 
-import seedu.address.logic.commands.Command;
-
 import java.time.format.DateTimeFormatter;
+
+import seedu.address.logic.commands.Command;
 
 public abstract class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";

@@ -64,6 +64,7 @@ public class EditScheduleCommandTest {
 
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
+
     @Test
     public void execute_filteredList_success() throws CommandException {
         showInterviewAtIndex(model, INDEX_FIRST_INTERVIEW);
@@ -86,6 +87,50 @@ public class EditScheduleCommandTest {
         expectedModel.updateFilteredInterviewSchedule(Model.PREDICATE_SHOW_ALL_INTERVIEWS);
 
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel); //change interview time slot
+    }
+
+    @Test
+    public void execute_sameCandidateLessThan30MinutesBefore_success() throws CommandException {
+        EditScheduleCommand editScheduleCommand =
+                new EditScheduleCommand(INDEX_FIRST_INTERVIEW, VALID_AMY_INTERVIEW_DATE_TIME.minusMinutes(29));
+
+        Interview interview = model.getFilteredInterviewSchedule().get(INDEX_FIRST_INTERVIEW.getZeroBased());
+        Interview editedInterview =
+                new InterviewBuilder(interview)
+                        .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME.minusMinutes(29)).build();
+
+        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_INTERVIEW_SUCCESS,
+                interview + " to " + editedInterview.getInterviewDate()
+                        .format(DATE_TIME_FORMATTER) + " "
+                        + editedInterview.getInterviewStartTime());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
+        expectedModel.setInterview(model.getFilteredInterviewSchedule().get(0), editedInterview);
+
+        assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sameCandidateLessThan30MinutesAfter_success() throws CommandException {
+        EditScheduleCommand editScheduleCommand =
+                new EditScheduleCommand(INDEX_FIRST_INTERVIEW, VALID_AMY_INTERVIEW_DATE_TIME.plusMinutes(29));
+
+        Interview interview = model.getFilteredInterviewSchedule().get(INDEX_FIRST_INTERVIEW.getZeroBased());
+        Interview editedInterview =
+                new InterviewBuilder(interview)
+                        .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME.plusMinutes(29)).build();
+
+        String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_INTERVIEW_SUCCESS,
+                interview + " to " + editedInterview.getInterviewDate()
+                        .format(DATE_TIME_FORMATTER) + " "
+                        + editedInterview.getInterviewStartTime());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new InterviewSchedule(model.getInterviewSchedule()), new UserPrefs());
+        expectedModel.setInterview(model.getFilteredInterviewSchedule().get(0), editedInterview);
+
+        assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
