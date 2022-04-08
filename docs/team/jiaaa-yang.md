@@ -38,6 +38,7 @@ Given below are my contributions to the project.
     * Documented my implementation on the team forming feature:
       * Added a class diagram for `MakeTeamCommand`
       * Added a sequence diagram for the execution of a `MakeTeamCommand`
+    * Added main use cases (UC01 - UC04)
 
 
 * **Team Based tasks**:
