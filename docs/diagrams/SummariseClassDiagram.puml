@@ -1,37 +1,58 @@
 @startuml
-'https://plantuml.com/activity-diagram-beta
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
 
-start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
-    endif
+abstract class "{abstract}\nCommand" {
+    + {abstract} execute(model : Model) : CommandResult
+}
 
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
-    endif
-    :Page.onRender();
-  endif
-else (false)
-endif
+interface Model <<interface>> {
+    + addPerson(Person person) : void
+    + hasPerson(Person person) : boolean
+}
 
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
-  endif
-endif
+class ModelManager implements Model{
+    -addressBook : AddressBook
+}
 
-stop
+class Person {
+    /' Fields '/
+     -block : Block
+     -faculty : Faculty
+     -status : CovidStatus
 
+    /' Methods '/
+    + getBlockAsString() : String
+    + getStatusAsString() : String
+    + getFacultyAsString() : String
+}
+
+class SummariseCommand {
+    /' Fields '/
+    - {static} FACULTY : List
+    - {static} BLOCKS : List
+    - {static} BY_POSITIVE : Predicate
+    - {static} BY_NEGATIVE : Predicate
+    - {static} BY_HRN : Predicate
+    - {static} covidStatsByBlockDataList : TreeMap
+    - {static} positiveStatsByFacultyData : TreeMap
+    - {static} highestPositiveByFaculty : int
+
+    /' Methods '/
+    + execute(model : Model) : CommandResult
+    + filterByFaculty(list : List) : String
+    + filterByBlock(list : List) : String
+    - summariseFaculty(list, faculty) : String
+    - summariseBlock(list, block) : String
+    - summariseAll(list : List) : String
+    + {static} getCovidStatsByBlockDataList() : TreeMap
+    + {static} getPositiveStatsByFacultyData() : TreeMap
+    + {static} shouldOpenPieChartWindow() : boolean
+    + {static} getHighestPositiveByFaculty() : int
+}
+
+ModelManager <-- SummariseCommand
+"{abstract}\nCommand" <|-- SummariseCommand
+SummariseCommand --> Person
 @enduml
