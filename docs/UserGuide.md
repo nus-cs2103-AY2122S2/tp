@@ -32,7 +32,7 @@ TAssist is a desktop app designed to **help teaching assistants manage their cla
 
    * **`delete student`** `3`: Deletes the 3rd student shown in the listing of the entity.
 
-1. Refer to the 5rr below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -314,7 +314,7 @@ Examples:
 
 #### Add a class: `add class`
 
-Add class groups to modules you've created. Class groups refer to tutorials, labs, and sectionals you personally teach.
+Add class groups to modules you've created. Class groups refer to recitations, tutorials, labs, and sectionals you personally teach.
 
 Format: `add class id/CLASS_GROUP_ID t/CLASS_GROUP_TYPE m/MODULE_INDEX`
 
@@ -415,8 +415,6 @@ Examples:
 #### Delete a student: `delete student`
 
 Delete the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
-
-Deletes the specified module from TAssist as well as its associated class group(s) and assessment(s).
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
