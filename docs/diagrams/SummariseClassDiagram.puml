@@ -40,12 +40,12 @@ class SummariseCommand {
     - {static} highestPositiveByFaculty : int
 
     /' Methods '/
-    + execute(model : Model) : CommandResult
-    + filterByFaculty(list : List) : String
-    + filterByBlock(list : List) : String
-    - summariseFaculty(list, faculty) : String
-    - summariseBlock(list, block) : String
-    - summariseAll(list : List) : String
+    + execute(Model) : CommandResult
+    + filterByFaculty(List) : String
+    + filterByBlock(List) : String
+    - summariseFaculty(List, String) : String
+    - summariseBlock(List, String) : String
+    - summariseAll(List) : String
     + {static} getCovidStatsByBlockDataList() : TreeMap
     + {static} getPositiveStatsByFacultyData() : TreeMap
     + {static} shouldOpenPieChartWindow() : boolean

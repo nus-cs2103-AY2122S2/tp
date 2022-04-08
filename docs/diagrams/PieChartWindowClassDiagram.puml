@@ -13,9 +13,9 @@ class SummariseCommand {
     -{static}covidStatsByBlockDataList : TreeMap
 
     /' Methods '/
-    + getCovidStatsByBlockDataList()
-    + getPositiveStatsByFacultyData()
-    + getHighestPositiveByFaculty()
+    +{static}getCovidStatsByBlockDataList() : TreeMap
+    +{static}getPositiveStatsByFacultyData() : TreeMap
+    +{static}getHighestPositiveByFaculty() : int
 }
 
 class PieChartWindow {
@@ -29,16 +29,14 @@ class PieChartWindow {
     - chartScene : Scene
 
     /' Methods '/
-    + PieChartWindow(root)
-    + PieChartWindow()
     + execute()
     - collateBlocksChart()
-    - createFacultyChartPositive()
-    - makePieChart(data, title)
+    - createFacultyChartPositive() : VBox
+    - makePieChart(data, title) : PieChart
     - setPieChartColor(pieChartData, list)
-    - makeChartScene(pieCharts)
+    - makeChartScene(pieCharts) : Scene
     + show()
-    + isShowing()
+    + isShowing() : boolean
     + hide()
 }
 
