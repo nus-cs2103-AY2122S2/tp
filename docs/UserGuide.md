@@ -253,8 +253,8 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 **Note that:**
 
 * Editing of the lesson's type is not allowed. Recurring lessons cannot be edited to become temporary lessons and vice-versa.
+* You can use `-h` and `-m` together to specify a more precise duration.
 * If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than **24 hours!**
-* You can use `-h` and `-m` together to specify a more precise duration
 ---
 
 ### Deleting a lesson
