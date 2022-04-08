@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class "{abstract}\nAttendanceEntry" as AttendanceEntry
+Class PresentAttendanceEntry extends AttendanceEntry
+Class AbsentAttendanceEntry extends AttendanceEntry
+
+AttendanceHashMap *-down-> "*"AttendanceEntry :> contains
+@enduml

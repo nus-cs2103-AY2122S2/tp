@@ -380,22 +380,27 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### \[Proposed\] Attendance feature
 
 #### Proposed Implementation
-The proposed attendance feature is facilitated by `AttendanceCommand`. `AttendanceCommand` consists of two subclasses,
-`PresentAttendanceCommand` and `AbsentAttendanceCommand`, which allows users to either mark a pet as present or absent
-on a particular day. Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off
-time (if applicable), is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into
-the command classes above. The command classes are then passed on to the Model component for execution.
+The proposed attendance feature is facilitated by the two classes `PresentAttendanceCommand` and `AbsentAttendanceCommand`,
+which extend the `Command` class. The commands allow users to either mark a pet as present or absent on a particular day. 
+Initially, user input, which includes the index of the pet, date, as well as pick-up and drop-off time (if applicable), 
+is parsed by the `PresentAttendanceCommandParser` or `AbsentAttendanceCommandParser` classes into the command classes above. 
+The command classes are then passed on to the `Model` component for execution.
 
-The data from the input is stored into the `AttendanceHashMap` class in pets, which consists of mappings of dates to
-`Attendance` objects. The class hence acts as an "attendance sheet", and is the main repository of data within the
-Model component that facilitates `Attendance` functionalities.
+During command execution, data from the user input is parsed into one of two subclasses of `AttendanceEntry` objects.
+The attendance entry is then stored into `AttendanceHashMap`. A class diagram illustrating the structure of `AttendanceHashMap`
+can be seen below.
+
+![AttendanceHashMapClassDiagram](images/AttendanceHashMapClassDiagram.png)
+
+The `AttendanceHashMap` in pets consists of mappings of dates to `AttendanceEntry` objects. The class hence acts as an "attendance sheet", 
+and is the main repository of data within the Model component that facilitates `Attendance` functionalities.
 
 The operation of updating the pet's attendance details and updating the GUI to reflect such changes are done by methods
 in the Model interface as `Model#setPet()` and `Model#updateFilterPetList()` respectively. `Attendance` GUI is also
-supported by the methods in `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes.
+supported by the `AttendanceTag`, `TransportTag` and `AttendanceUtil` classes as well as methods.
 
 The following sequence diagram below models the interactions between the Logic as well as the Model components to
-update the backend and frontend of the application.
+update the backend and frontend of the application for the `absent` command.
 
 ![AbsentAttendanceSequenceDiagram](images/AbsentAttendanceSequenceDiagram.png)
 
@@ -628,8 +633,11 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.</div>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+testers are expected to do more *exploratory* testing.
+</div>
 
 ### Launch and shutdown
 
