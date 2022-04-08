@@ -201,4 +201,24 @@ public class UniquePersonListTest {
         assertTrue(result.contains(ALICE));
     }
 
+    @Test
+    public void equals() {
+        UniquePersonList personList = new UniquePersonList();
+        UniquePersonList list2 = new UniquePersonList();
+        list2.add(ALICE);
+
+        UniquePersonList list3 = new UniquePersonList();
+        list3.add(ALICE);
+
+        // Same tag list
+        assertTrue(personList.equals(personList));
+        assertTrue(personList.equals(new UniquePersonList()));
+        assertTrue(list2.equals(list3));
+
+        // Null checking
+        assertFalse(personList.equals(null));
+        assertFalse(personList.equals(list2));
+        assertFalse(personList.equals(0));
+    }
+
 }
