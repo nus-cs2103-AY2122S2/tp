@@ -55,12 +55,15 @@ public class AttachTagCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        if (!model.hasTag(toAttach)) {
-            throw new CommandException(MESSAGE_MISSING_TAG);
+        if (targetIndex.getZeroBased() >= lastShownList.size() && !model.hasTag(toAttach)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + " and " + MESSAGE_MISSING_TAG);
+        } else {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            if (!model.hasTag(toAttach)) {
+                throw new CommandException(MESSAGE_MISSING_TAG);
+            }
         }
 
         Person personToAttachNewTag = lastShownList.get(targetIndex.getZeroBased());
