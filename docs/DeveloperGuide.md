@@ -205,7 +205,7 @@ This command is used to display a list of people who has the skill specified in 
 
 #### Execution
 
-Below is a sequence diagram showing the execution path when this command is entered. 
+Below is a sequence diagram showing the execution path when this command is entered.
 
 ![FilterSkillCommand](images/FilterSkillSequenceDiagram.png)
 
@@ -407,6 +407,51 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 2. HackNet links person to the specified project team.
 3. User requests to show a list of persons tagged to his past project team.
 4. HackNet shows the list of all persons linked with a past project team.
+    
+*Use case: UC05 - Edit a person*
+
+**MSS**
+
+1.  User requests to list persons
+2.  HackNet shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  HackNet edits the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid or execution of command will result in person with duplicate email, Github username or phone number field.
+
+    * 3a1. HackNet shows an error message.
+
+      Use case resumes at step 3.
+
+*Use case: UC06 - Find a person by skill*
+
+**MSS**
+
+1. User filters contacts by skill name
+2. HackNet displays list of person(s) with matching skill name
+3. User sorts contacts by skill name
+4. HackNet displays list of person(s) with matching skill name in descending order
+5. User found person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* *a. At any time user found person
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -414,6 +459,12 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The program should not have functionalities sharing data with others.
+5. Raw data stored must be human-readable and easy to edit for power users to edit. (at their own risk)
+6. Product should be able to work without internet connection.
+7. User commands must be easy to understand and use.
+8. HackNet must respond to all user inputs under 3s.
+9. HackNet must be free of charge and open sourced.
+10. HackNet must be able to run after downloading and not require installation.
 
 *{More to be added}*
 
@@ -421,6 +472,8 @@ Priorities: High (must have) - A, Medium (nice to have) - B, Low (unlikely to ha
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Team**: A group of potential teammates that user wants to work with for their project
+* **Contact**: An entry in HackNet
 
 --------------------------------------------------------------------------------------------------------------------
 

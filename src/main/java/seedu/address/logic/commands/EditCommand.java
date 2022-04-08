@@ -65,7 +65,7 @@ public class EditCommand extends Command {
         + PREFIX_PHONE + "91234567 "
         + PREFIX_EMAIL + "johndoe@example.com" + "\n"
         + "Example 2: " + COMMAND_WORD + " 1 "
-        + PREFIX_TEAM + "System Maintenance, Python"
+        + PREFIX_TEAM + "System Maintenance, Python "
         + PREFIX_SKILL;
 
     public static final String MESSAGE_EDIT_SINGLE_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -160,6 +160,7 @@ public class EditCommand extends Command {
         } else {
             commandResult = executeBatchEdit(model, lastShownList);
         }
+        model.commitAddressBook();
         return commandResult;
     }
 
@@ -201,7 +202,6 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateDisplayPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_SINGLE_PERSON_SUCCESS, editedPerson));
     }
 
@@ -217,10 +217,10 @@ public class EditCommand extends Command {
         return editOnlyTeamsAndSkills;
     }
 
-    private CommandResult executeBatchEdit(Model model, List<Person> lastShownList) throws CommandException {
+    private CommandResult executeBatchEdit(Model model, List<Person> lastShownList) {
 
         boolean isAllIndicesValid = true;
-        List<Name> editedNames = new ArrayList<Name>();
+        List<Name> editedNames = new ArrayList<>();
         EditPersonDescriptor onlyTeamAndSkillsetDescriptor = extractOnlyTeamsAndSkillSet(editPersonDescriptor);
         for (Index index : indicesToEdit) {
             if (index.getZeroBased() >= lastShownList.size()) {

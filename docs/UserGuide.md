@@ -100,7 +100,7 @@ This could be a problem with the Windows OS. You can alternatively start **HackN
 
 * For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY…]​` as `s/Java_90`
-    
+
 
 </div>
 
@@ -139,7 +139,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 * A name of a team or skill cannot be consisting solely of whitespaces.
 * Please check that you have correctly entered the skill proficiency level.
 There is currently no way of viewing the exact number that you entered.
-You may use the `edit` function to change it if it is wrong. 
+You may use the `edit` function to change it if it is wrong.
 * The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).
 </div>
 
@@ -277,7 +277,9 @@ Examples:
 
 ### Filter for past teammates: `filterteam`
 
-Shows a list of past teammates in HackNet.
+Shows a list of past teammates that have been tagged with /t in HackNet.
+E.g. `edit INDEX [t/TEAM]` command or `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM]` command.
+Potential teammates marked using the `team` command will **NOT** be shown using the `filterteam` command.
 
 Format: `filterteam`
 
@@ -377,6 +379,15 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HackNet home folder.
 
+**Q**: Why does HackNet not show the proficiency of individual's skills?<br>
+**A**: This is because how everyone perceives their own skill proficiency is only a rough gauge and the numbers may not accurately reflect in real life. Therefore, to reduce bias, HackNet distinguishes between different level of skill proficiencies with different hues of green, with brighter green as more proficient in that particular skill.
+
+**Q**: I am colour blind and cannot differentiate between skill proficiency colours. What should I do?<br>
+**A**: You can use the feature `sort` to list out contacts with that particular skill in descending order. (eg. `sort Java`)
+
+**Q**: What is the difference between `list`, `show` and `filterteam`?<br>
+**A**: `list` displays _all_ of your contacts while `show` will only display contacts that you have marked with `team`. Lastly, `filterteam` will display those contacts that you have marked with `/t` (the blue tags)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -393,7 +404,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Filter** | `filter SKILL`<br> e.g. `filter c`
 **Sort** | `sort SKILL`<br> e.g., `sort Python`
-**Filter Past Teammates** | `filterteam` 
+**Filter Past Teammates** | `filterteam`
 **Show potential teammates** | `show`
 **Exit HackNet** | `exit`
 **Navigate User Input History** | `↑`, `↓`

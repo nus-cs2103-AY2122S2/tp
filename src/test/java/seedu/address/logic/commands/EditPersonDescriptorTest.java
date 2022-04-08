@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TEAM_GOOGLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different s -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTeams(VALID_TEAM_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTeams(VALID_TEAM_GOOGLE).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
