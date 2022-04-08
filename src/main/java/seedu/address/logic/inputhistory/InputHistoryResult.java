@@ -1,5 +1,7 @@
 package seedu.address.logic.inputhistory;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -19,6 +21,7 @@ public class InputHistoryResult {
      * @param userInputString {@code UserInputString} retrieved from {@code UserInputHistory}.
      */
     public InputHistoryResult(UserInputString userInputString) {
+        requireNonNull(userInputString);
         this.userInputString = userInputString;
         isChanged = true;
     }

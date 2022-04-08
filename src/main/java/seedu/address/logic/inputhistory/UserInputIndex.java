@@ -24,7 +24,7 @@ public class UserInputIndex {
         index = -1;
     }
 
-    protected int currentIndex() {
+    protected int getCurrentIndex() {
         return index;
     }
 

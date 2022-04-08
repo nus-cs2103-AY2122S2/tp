@@ -45,15 +45,15 @@ public class UserInputHistory {
      * @return The previous user's input as a {@code InputHistoryResult} object.
      */
     public InputHistoryResult getPreviousInput() { // Up arrow
-        boolean historyAvailable = selectedIndex.currentIndex() < inputHistory.size() - 1;
+        boolean historyAvailable = selectedIndex.getCurrentIndex() < inputHistory.size() - 1;
         if (!historyAvailable) {
             getLog();
             // Return a result with no changes
             return new InputHistoryResult();
         }
-        assert selectedIndex.currentIndex() >= -1; // Sanity check
+        assert selectedIndex.getCurrentIndex() >= -1; // Sanity check
         selectedIndex.increment();
-        int calculatedIndex = inputHistory.size() - 1 - selectedIndex.currentIndex();
+        int calculatedIndex = inputHistory.size() - 1 - selectedIndex.getCurrentIndex();
         UserInputString selectedInput = inputHistory.get(calculatedIndex);
         getLog();
         return new InputHistoryResult(selectedInput);
@@ -67,15 +67,15 @@ public class UserInputHistory {
      * @return The following user's input as a {@code InputHistoryResult} object.
      */
     public InputHistoryResult getNextInput() { // Down arrow
-        boolean forwardHistoryAvailable = selectedIndex.currentIndex() > 0;
+        boolean forwardHistoryAvailable = selectedIndex.getCurrentIndex() > 0;
         if (!forwardHistoryAvailable) {
             getLog();
             // Return a result with no changes
             return new InputHistoryResult();
         }
-        assert selectedIndex.currentIndex() >= -1; // Sanity check
+        assert selectedIndex.getCurrentIndex() >= -1; // Sanity check
         selectedIndex.decrement();
-        int calculatedIndex = inputHistory.size() - 1 - selectedIndex.currentIndex();
+        int calculatedIndex = inputHistory.size() - 1 - selectedIndex.getCurrentIndex();
         UserInputString selectedInput = inputHistory.get(calculatedIndex);
         getLog();
         return new InputHistoryResult(selectedInput);
@@ -88,7 +88,7 @@ public class UserInputHistory {
     }
 
     private String getCurrentStatus() {
-        return String.format("UserInputHistory - Index %d - HistoryLength %d", selectedIndex.currentIndex(),
+        return String.format("UserInputHistory - Index %d - HistoryLength %d", selectedIndex.getCurrentIndex(),
                 inputHistory.size());
     }
 }
