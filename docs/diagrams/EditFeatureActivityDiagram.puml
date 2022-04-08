@@ -2,16 +2,20 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User inputs Edit Command with index and tags;
+:User inputs Edit Command with index and field prefixes;
 
-if () then ([tags with wrong prefix || \n index is out of range || \n tags parameters with\n wrong format])
+if () then ([Fields have wrong prefixes || \n Index is out of range || \n Fields with wrong format])
     :Throws ParseException;
-    else ([else])
+    else (                [Else])
 
-    if () then ([Field value to be \n edited is the same as the \n coresponding field \n value of the person])
+    if () then ([New field values to be \n are the same as the \n corresponding edited field \n values of the person])
         :CommandException;
 
-    else ([else])
+    else (            [Else])
+
+    if () then ([Edited field value that needs \nto be unique already \nexists in the address book])
+    : Throws CommandException;
+    else (            [Else])
         :Field values of person in \n the addressbook is updated;
         :Returns Message to user indicating Success;
         :ResultDisplay prints result to user;

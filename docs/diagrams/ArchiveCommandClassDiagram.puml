@@ -1,0 +1,33 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\n Command" as Command {
+    {abstract} execute(Model) : CommandResult
+}
+
+class ArchiveCommand {
+    {static} +ARCHIVE_DIRECTORY_NAME_FORMAT : SimpleDateFormat
+    {static} +ARCHIVE_FILE_NAME_FORMAT : SimpleDateFormat
+    +execute(Model) : CommandResult
+    -archiveFile(Model)
+    -initArchiveFileName : String
+    -initArchiveDirectoryName : String
+    -initArchiveFilePath(Path, String, String) : Path
+}
+
+class ModelManager {
+    -userPrefs : UserPrefs
+    +getAddressBookFilePath() : Path
+}
+
+interface "<<interface>>\n Model" as Model {
+
+}
+
+Command <|-- ArchiveCommand
+ModelManager <-- ArchiveCommand
+Model <.. ModelManager
+
+@enduml
