@@ -222,7 +222,7 @@ This also required changes to `CLISyntax` to include the new prefixes for the ad
 
 Modelling the workflow of the `Add` Command, when the user inputs an **Add Command**, the command is checked if the required prefixes are present **and** the parameters of the command are valid. If not valid, a **ParseException** will be thrown. If valid, the parameters are then checked for uniqueness. If it is a duplicate `Person` object, a **CommandException** is thrown. Else, a new `Person` object is created and added to `AddressBook`. Subsequently, the result is printed out to the User.
 
-**Class Diagram of AddCommand class is shown below:**
+**Class Diagram of Add Feature is shown below:**
 ![AddClassDiagram](images/AddClassDiagram.png)
 
 Additionally, there are a few final static messages to be displayed to the user for various scenarios when utilising the AddCommand:
@@ -329,10 +329,10 @@ The clear mechanism implements the following sequence and interactions for the m
 The original AB3 implementation of the clear feature acts a similar way to how we clear the address list. This clear feature allows
 user to replace the list of students with an empty one. Previous data are swiped away.
 
-**Path Execution of Clear feature Activity Diagram is shown below:**
+**Path Execution of Clear Feature Activity Diagram is shown below:**
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
-**Class Diagram of Clear feature is shown below:**
+**Class Diagram of Clear Feature is shown below:**
 ![ClearClassDiagram](images/ClearClassDiagram.png)
 
 Additionally, there is a static final static message to be displayed to the user when utilising the Clear Command:
@@ -342,7 +342,7 @@ Additionally, there is a static final static message to be displayed to the user
    - Message: "Tracey has been cleared!".
 
 
-**Sequence Diagram of Clear feature is shown below:**
+**Sequence Diagram of Clear Feature is shown below:**
 ![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
