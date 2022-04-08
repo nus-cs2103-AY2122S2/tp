@@ -31,6 +31,7 @@ Given below are my contributions to the project.
   * Add more topics that `help` is able to search for such as `filterteam` [#107](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/107)
   * Add input validation for `Github username` such that it complies with actual Github username rules [#147](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/147)
   * Change HackNet to allow for duplicate `name` fields but reject any command that try to add/edit a duplicate or existing `Github username`, `phone number` or `email` [#154](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/154)
+  * Add length checks for `email`, `team` and `skill` [#167](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/167)
 
 * **Documentation**:
   * User Guide:
