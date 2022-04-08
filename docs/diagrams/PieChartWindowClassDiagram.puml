@@ -1,0 +1,47 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "{abstract}\nUiPart" {
+    + {abstract} getRoot()
+}
+
+class SummariseCommand {
+    /' Fields '/
+    -{static}positiveStatsByFacultyData : TreeMap
+    -{static}covidStatsByBlockDataList : TreeMap
+
+    /' Methods '/
+    + getCovidStatsByBlockDataList()
+    + getPositiveStatsByFacultyData()
+    + getHighestPositiveByFaculty()
+}
+
+class PieChartWindow {
+    /' Fields '/
+    - {static} logger : Logger
+    - {static} FXML : String
+    - covidStatsByBlockData : TreeMap
+    - positiveStatsByFacultyData : TreeMap
+    - pieChart : PieChart
+    - charts : VBox
+    - chartScene : Scene
+
+    /' Methods '/
+    + PieChartWindow(root : Stage)
+    + PieChartWindow()
+    + execute()
+    - collateBlocksChart()
+    - createFacultyChartPositive()
+    - makePieChart(data, title)
+    - setPieChartColor(pieChartData, list)
+    - makeChartScene(pieCharts)
+    + show()
+    + isShowing()
+    + hide()
+}
+
+SummariseCommand <-- PieChartWindow
+"{abstract}\nUiPart" <|-- PieChartWindow
+@enduml
