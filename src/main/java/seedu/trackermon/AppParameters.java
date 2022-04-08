@@ -43,6 +43,11 @@ public class AppParameters {
         return appParameters;
     }
 
+    /**
+     * Returns whether the other object specified is equals this object.
+     * @param other object to be checked against this object.
+     * @return true if the other object is equal to this object.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -57,6 +62,10 @@ public class AppParameters {
         return Objects.equals(getConfigPath(), otherAppParameters.getConfigPath());
     }
 
+    /**
+     * Returns the hash code of the {@code AppParameters} object.
+     * @return a hash code of the object.
+     */
     @Override
     public int hashCode() {
         return configPath.hashCode();

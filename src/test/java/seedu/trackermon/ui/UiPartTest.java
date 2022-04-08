@@ -13,6 +13,9 @@ import org.junit.jupiter.api.io.TempDir;
 import javafx.fxml.FXML;
 import seedu.trackermon.MainApp;
 
+/**
+ * Contains integration tests (interaction with the the UI) for {@code CommandBuilder}.
+ */
 public class UiPartTest {
 
     private static final String MISSING_FILE_PATH = "UiPartTest/missingFile.fxml";

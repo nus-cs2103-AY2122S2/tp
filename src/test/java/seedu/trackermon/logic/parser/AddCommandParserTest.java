@@ -1,6 +1,7 @@
 package seedu.trackermon.logic.parser;
 
 import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.trackermon.commons.core.Messages.MESSAGE_INVALID_INPUT;
 import static seedu.trackermon.logic.commands.CommandTestUtil.COMMENT_DESC_BAD;
 import static seedu.trackermon.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.trackermon.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
@@ -38,9 +39,15 @@ import seedu.trackermon.model.show.Status;
 import seedu.trackermon.model.tag.Tag;
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Contains unit tests for {@code AddCommandParser}.
+ */
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
+    /**
+     * Tests the parsing of all field present from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_allFieldsPresent_success() {
         Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withStatus(VALID_STATUS_COMPLETED)
@@ -67,6 +74,9 @@ public class AddCommandParserTest {
                 + TAG_DESC_YURI + TAG_DESC_HENTAI, new AddCommand(expectedShowMultipleTags));
     }
 
+    /**
+     * Tests the parsing of missing optional field from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_optionalFieldsMissing_success() {
         Show expectedShow = new ShowBuilder(ALICE_IN_WONDERLAND).withTags().withComment().withRating().build();
@@ -74,6 +84,9 @@ public class AddCommandParserTest {
                 new AddCommand(expectedShow));
     }
 
+    /**
+     * Tests the parsing of missing field from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
@@ -91,23 +104,26 @@ public class AddCommandParserTest {
                 expectedMessage);
     }
 
+    /**
+     * Tests the parsing of invalid fields from the execution of {@code AddCommandParser}.
+     */
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + STATUS_DESC_COMPLETED
-                + TAG_DESC_MOVIE, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_MOVIE, String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
 
         // invalid status
         assertParseFailure(parser, NAME_DESC_ALICE_IN_WONDERLAND + INVALID_STATUS_DESC
-                + TAG_DESC_MOVIE, Status.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_MOVIE, String.format(MESSAGE_INVALID_INPUT, Status.MESSAGE_CONSTRAINTS));
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_ALICE_IN_WONDERLAND + STATUS_DESC_COMPLETED
-                + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC, String.format(MESSAGE_INVALID_INPUT, Tag.MESSAGE_CONSTRAINTS));
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + INVALID_STATUS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_ALICE_IN_WONDERLAND

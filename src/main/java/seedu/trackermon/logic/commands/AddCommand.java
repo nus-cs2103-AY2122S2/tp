@@ -7,6 +7,7 @@ import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.trackermon.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.logic.commands.exceptions.CommandException;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.show.Show;
@@ -18,25 +19,25 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a show to Trackermon. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+    public static final String COMMAND_FORMAT = "Parameters: " + PREFIX_NAME + "NAME "
             + PREFIX_STATUS + "STATUS "
-            + "[" + PREFIX_RATING + "Rating]...\n"
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_RATING + "RATING] "
+            + "[" + PREFIX_COMMENT + "COMMENT] "
+            + "[" + PREFIX_TAG + "TAG]…\u200B";
+
+    public static final String COMMAND_EXAMPLE = "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Boku no Hero "
             + PREFIX_STATUS + "completed "
-            + PREFIX_COMMENT + "This is about kids fighting "
             + PREFIX_RATING + "2 "
+            + PREFIX_COMMENT + "This is about kids fighting "
             + PREFIX_TAG + "Anime "
             + PREFIX_TAG + "Action";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a show to Trackermon.\n" + COMMAND_FORMAT + "\n"
+            + COMMAND_EXAMPLE;
+
     public static final String MESSAGE_SUCCESS = "New show added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SHOW = "This show already exists in Trackermon";
-
     private final Show toAdd;
-
     /**
      * Creates an AddCommand to add the specified {@code Show}
      * @param show a show to add into the show list.
@@ -46,20 +47,29 @@ public class AddCommand extends Command {
         toAdd = show;
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is a duplicated show.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasShow(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SHOW);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_SHOW);
         }
 
-        //this line is to make the show add to last index
-        model.updateSortedShowList(Model.COMPARATOR_SHOW_ALL_SHOWS);
         model.addShow(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), model.getShowListSize() - 1);
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

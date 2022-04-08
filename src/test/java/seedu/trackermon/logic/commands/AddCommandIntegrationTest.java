@@ -7,6 +7,7 @@ import static seedu.trackermon.testutil.TypicalShows.getTypicalShowList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.trackermon.commons.core.Messages;
 import seedu.trackermon.model.Model;
 import seedu.trackermon.model.ModelManager;
 import seedu.trackermon.model.UserPrefs;
@@ -25,6 +26,9 @@ public class AddCommandIntegrationTest {
         model = new ModelManager(getTypicalShowList(), new UserPrefs());
     }
 
+    /**
+     * Tests the adding of a new show from the execution of {@code AddCommand}.
+     */
     @Test
     public void execute_newShow_success() {
         Show validShow = new ShowBuilder().build();
@@ -36,9 +40,12 @@ public class AddCommandIntegrationTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, validShow), expectedModel);
     }
 
+    /**
+     * Tests the adding of a duplicate show from the execution of {@code AddCommand}.
+     */
     @Test
     public void execute_duplicateShow_throwsCommandException() {
         Show showInList = model.getShowList().getShows().get(0);
-        assertCommandFailure(new AddCommand(showInList), model, AddCommand.MESSAGE_DUPLICATE_SHOW);
+        assertCommandFailure(new AddCommand(showInList), model, Messages.MESSAGE_DUPLICATE_SHOW);
     }
 }

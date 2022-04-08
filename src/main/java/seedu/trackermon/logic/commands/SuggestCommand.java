@@ -17,15 +17,18 @@ public class SuggestCommand extends Command {
 
     public static final String COMMAND_WORD = "suggest";
 
-    public static final String MESSAGE_SUCCESS = "Here is my suggestion";
+    public static final String MESSAGE_SUCCESS = "Here is my suggestion!";
 
     public static final String MESSAGE_FAILURE_NO_SHOWS = "There are no shows currently being listed!";
 
     public static final String MESSAGE_FAILURE_ONE_SHOW = "There is only one show in the list";
 
-    public static final String TAG_ERROR = "Tag parameter must only be a single word.\n"
-            + "Example: " + COMMAND_WORD + " t/Action";
-
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is an invalid index.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -48,7 +51,7 @@ public class SuggestCommand extends Command {
         Random rn = new Random();
         List<Show> currList = model.getFilteredShowList();
         Integer sizeOfShowList = currList.size();
-        Integer randomIndex = rn.nextInt(sizeOfShowList - 1);
+        Integer randomIndex = rn.nextInt(sizeOfShowList);
         return currList.get(randomIndex);
     }
 }

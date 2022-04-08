@@ -12,10 +12,19 @@ import seedu.trackermon.commons.util.StringUtil;
 public class ShowContainsKeywordsPredicate implements Predicate<Show> {
     private final List<String> keywords;
 
+    /**
+     * Creates a predicate that contains the {@code Show}.
+     * @param keywords the {@code Show}.
+     */
     public ShowContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
+    /**
+     * Tests for partial words in {@code Show}.
+     * @param show {@code Show}.
+     * @return returns true if partial word matches the {@code Show}, else returns false.
+     */
     @Override
     public boolean test(Show show) {
         // Checks for fragmented words in name, status, rating and tags
@@ -26,6 +35,11 @@ public class ShowContainsKeywordsPredicate implements Predicate<Show> {
                 || StringUtil.containsFragmentedWordIgnoreCase(show.getRating().toString(), keyword));
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

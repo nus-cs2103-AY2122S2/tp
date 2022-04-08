@@ -53,18 +53,19 @@ public class ShowDetailsCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code ShowCard} with the given {@code Show} and index to display.
+     * Creates a default {@code ShowDetailsCard} that has no show to display.
      */
     public ShowDetailsCard() {
         this(null);
     }
 
     /**
-     * Creates a {@code ShowCard} with the given {@code Show} and index to display.
+     * Creates a {@code ShowDetailsCard} with the given {@code Show} to display.
      */
     public ShowDetailsCard(Show show) {
         super(FXML);
         this.show = show;
+        updateShowDetails(show);
     }
 
     /**
@@ -96,7 +97,7 @@ public class ShowDetailsCard extends UiPart<Region> {
         tags.getChildren().clear();
         show.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
         ratings.getChildren().clear();
 
         for (int i = 0; i < Rating.MAX_RATING; i++) {
