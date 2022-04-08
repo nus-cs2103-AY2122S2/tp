@@ -642,13 +642,30 @@ More information on usage: [list command](UserGuide.html#listing-all-persons--li
 
 ### Clearing data
 
+Command: `clear` <br>
+More information on usage: [clear command](UserGuide.html#clearing-all-entries-clear)
+
 1. Test case: `clear` <br>
    Expected: All data is cleared from ArchDuke.
 
 ### Exiting ArchDuke
 
+Command: `exit` <br>
+More information on usage: [exit command](UserGuide.html#exiting-the-program--exit)
+
 1. Test case: `exit` <br>
    Expected: Exits ArchDuke, and all data is being saved.
+
+### Help
+
+Command: `help` <br>
+More information on usage: [help command](UserGuide.html#viewing-help--help)
+
+1. Test case: `help` <br>
+   Expected: Help window pops up. 
+
+2. Test case: Press the `F1` key <br>
+   Expected: Similar to previous.
 
 ### Adding a student contact
 
