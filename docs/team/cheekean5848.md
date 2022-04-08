@@ -19,8 +19,8 @@ Given below are my contributions to the project.
 
 * **New Feature**: Command History Navigation
 
-    It enhances the user experience by allowing users to navigate through the command
-    history by pressing the `↑` and `↓` arrow keys.
+It enhances the user experience by allowing users to navigate through the command
+history by pressing the `↑` and `↓` arrow keys.
 
 
 
