@@ -593,6 +593,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
+### Prefix summary
+These are the list of prefixes used in the commands for manual testing.
+
+| Prefix  | Representation   | 
+|---------|------------------|
+| `n/`    | `NAME`           | 
+| `p/`    | `PHONE_NUMBER`   | 
+| `e/`    | `EMAIL`          | 
+| `a/`    | `ACADEMIC_MAJOR` | 
+| `t/`    | `TAG`            | 
+| `g/`    | `GROUP_NAME`     | 
+| `task/` | `TASK_NAME`      | 
+
+
+
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
@@ -618,6 +633,9 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Adding a student contact
+
+Command: `add` <br>
+More information on usage: [add command](#add-student-contact-information)
 
 1. Adding a student contact while all student contacts are being shown.
 
@@ -663,7 +681,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student contact while all student contacts are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all student contacts using the `list` command.
 
    1. Test case: `delete 1`<br>
       Expected: First student contact is deleted from the list. Details of the deleted student contact shown in the status message. 
@@ -680,6 +698,15 @@ testers are expected to do more *exploratory* testing.
    
     2. Test case: Similar to previous. <br>
         Expected: Similar to previous.
+
+### Finding student contacts by attributes
+
+1. Finding a student contact while all student contacts are being shown.
+    
+    1. Prerequisites: List all student contacts using the `list` command. 
+   
+    2. Test case: `find n/`
+2. Finding a student contact while the student contact list is being filtered.
 
 ### Saving data
 

@@ -68,7 +68,7 @@ If you can type fast, ArchDuke can get your contact management, group management
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page and shows the format of all commands.
+Shows a message explaining how to access the help page and shows the format of all commands.
 
 ![help message](images/helpMessage.png)
 
