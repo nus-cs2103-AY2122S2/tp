@@ -574,6 +574,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Academic Major**: A student's major in university.
+* **Attribute**: A set of specific value for a given object that defines the property or characteristic of that object.
 * **Group list**: Every existing groups in ArchDuke.
 * **Group name**: An identifier for a group that suggests the function of that group.
 * **Index**: A number in front of a student contact, used to reference that particular student contact.
@@ -603,22 +604,57 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. <br>
+   Expected: Shows the GUI with a set of sample student contacts and student groups. 
+   The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a student contact
 
-### Deleting a person
+1. Adding a student contact while all student contacts are being shown.
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: List all student contacts using the `list` command. 
+   
+   2. Test case: `add n/John Doe p/98765432 e/johndoe@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+   Expected: A student contact with the name `John Doe` with the following attributes added to the student contact list. 
+   The student contact is added to the last index of the student contact list. The student contact card appeared at the last in the list.
+   The details of the added student contact is shown in the success message.
+   
+   3. Test case: `add n/John Doe p/23456789 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+   Expected: A student contact with the name `John Doe` with the following attributes added to the student contact list.
+   Note that the `NAME` of this student contact is the same as that of test case 2. However, the student contact's `PHONE_NUMBER` and `EMAIL` are **different**.
+   The student contact is added to the last index of the student contact list. The student contact card appeared at the last in the list.
+   The details of the added student contact is shown in the success message.
+   
+   4. Test case: `add n/John Doe p/98765432 e/john@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+   Expected: No student contact added to the student contact list because the student contact has the same  `PHONE_NUMBER` as someone else in the list (student contact in test case 3). 
+   Error details shown in the error message.
+   
+   5. Test case: `add n/John Doe p/12345678 e/jd@u.nus.edu a/Computer Science t/friends t/owesMoney` <br>
+   Expected: No student contact added to the student contact list because the student contact ahs the same `EMAIL` as someone else in the list (student contact in test case 2).
+   Error details shown in the error message.
+   
+   6. Other incorrect add student contact commands to try: `add`, `add n/John Doe` etc.
+   Expected: No student contact added to the student contact list. Error details shown in the error message.
+
+2. Adding a student contact while the student contact list is being filtered.
+
+    1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+   
+    2. Test case: similar to previous. <br>
+    Expected: Similar to each respective test cases. However, the student contact list is reset to show all student contacts.
+
+### Deleting a student contact
+
+1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
