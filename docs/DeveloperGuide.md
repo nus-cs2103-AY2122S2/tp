@@ -935,12 +935,50 @@ More information on usage: [addtask command](UserGuide.html#add-a-task-in-a-grou
    2. Test case: `addtask task/website design review g/NUS Fintech Society` <br>
        Expected: No task is added to the group. Error details shown in the error message.
    
-4. Adding a task to a non-existing group.
+3. Adding a task to a non-existing group.
 
    1. Prerequisites: There exists no group with the group name `NUSSU` in ArchDuke.
    
    2. Test case: `addtask task/conduct interview g/NUSSU` <br>
       Expected: No task is added to a group. Error details shown in the error message.
+
+### Deleting a task from a group
+
+Command: `deltask` <br>
+More information on usage: [deltask command](UserGuide.html#delete-a-task-in-a-group-deltask)
+
+1. Deleting an existing task from an existing group in ArchDuke.
+
+   1. Prerequisites: There exists a task with the task name `Website design review` (case-insensitive)
+      in an existing group with the group name `NUS Fintech Society` in ArchDuke.
+   
+   2. Test case: `deltask task/website design review g/NUS Fintech Society` <br>
+      Expected: A task with the task name `website design review` is deleted from a group with the group name `NUS Fintech Society`.
+      The task is removed from the group's task list. The details of the deleted task is shown in the success message.
+   
+   3. Test case: `deltask task/write proposal task/website design review g/NUS Fintech Society` <br>
+      Expected: Similar to previous as only the last occurrence of the parameter will be taken.
+   
+   4. Test case: `deltask task/write proposal task/website design reivew g/NUS Data Science Society g/NUS Fintech Society` <br>
+      Expected: Similar to previous as only the last occurrence of the parameters will be taken.
+   
+   5. Other incorrect delete task commands to try: `deltask`, `deltask task/`, `deltask task/proposal g/` etc. <br>
+      Expected: No task is deleted from a group. Error details shown in the error message.
+
+2. Deleting a non-existing task from an existing group in ArchDuke.
+
+   1. Prerequisites: There exists a group with the group name `NUS Fintech Society` (case-insensitive) in ArchDuke. 
+      There exists no task with the task name `recruit new members` (case-insensitive) in the group.
+   
+   2. Test case: `deltask task/recruit new members g/NUS Fintech Society` <br>
+      Expected: No task is deleted from the group. Error details shown in the error message.
+   
+4. Deleting a task from a non-existing group in ArchDuke.
+
+   1. Prerequisites: There exists no group with the group name `NUSSU` (case-insensitive) in ArchDuke.
+   
+   2. Test case: `deltask task/write proposal g/NUSSU` <br>
+      Expected: No task is deleted from a group. Error details shown in the error message.
 
 ### Saving data
 
