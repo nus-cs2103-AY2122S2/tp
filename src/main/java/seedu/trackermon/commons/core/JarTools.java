@@ -10,6 +10,9 @@ import java.net.URL;
  */
 public class JarTools {
 
+    //@@author JonathanHoshi-reused
+    //Reused from https://stackoverflow.com/a/936738
+    // with minor modifications
     private static File getClassLocation(Class cls, boolean trmjar) {
         ClassLoader clsldr; // class loader
         URL urlobj; // url object
@@ -61,6 +64,7 @@ public class JarTools {
         }
         return rtnfil;
     }
+    //@@author
 
     /**
      * Returns the actual class file path location. This will return you the file path of the Jar file
