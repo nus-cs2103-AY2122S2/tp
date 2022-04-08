@@ -147,7 +147,7 @@ The `viewImageWindow` is then launched after it retrieves the set from `model`
 Step 5: The set of `UserImage` is then converted into an `ArrayList` and the first image is displayed in the window.
 
 ## Statistics feature/Window
-<img src="images/user-guide/stats.png" height="400px">
+<img src="images/user-guide/Stats.png" height="400px">
 
 The `stats` opens a new `StatisticsWindow` that displays a pie chart with the data of the number of sellers & buyers in the 5 different regions, namely {North, South, East, West, Central}.
 
@@ -269,13 +269,46 @@ Given below are instructions to test the app manually.
     2. Another way is to click on ‘File’ menu item and click on ‘Exit’.
     3. Lastly, you can enter the `exit` command.
 
-## Deleting a Person
+## Adding a Client
+1. Adding a new client
+   1. Prerequisites: None
+   2. Test Case: `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000`<br>
+   Expected: A new client is created at the end of the list with a buyer tag. Details of the new client is shown in the result display.
+   3. Test Case: `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`<br>
+   Expected: A new client is created at the end of the list with a seller tag. Details of the new client is shown in the result display.
+   4. Test Case: `add n/Mary Sue`<br>
+   Expected: No client is created. Error details are shown in the result display and list remains the same.
+   5. Other incorrect add commands to try: `add`, `add p/999`, `...`<br>
+   Expected: Similar to previous.
 
-1. Deleting a Person while all Persons are being shown
-    1. Prerequisites: List all Persons using the `list` command. Multiple Persons in the list.
-    2. Test case: `delete 1`Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-    3. Test case: `delete 0`Expected: No Person is deleted. Error details shown in the status message. Status bar remains the same.
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+## Editing a Client
+
+1. Editing a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   2. Test case: `edit 1 n/John Deen`<br>
+   Expected: Name of first client is changed to John Deen. Details of the edited client is shown in the result display.
+   3. Test case: `edit 1 n/Mary Susna p/999`<br>
+   Expected: Name and Phone number of first client is changed to Mary Susan and 999 respectively. Details of the edited client is shown in the result display.
+   4. Test case: `edit 0`<br>
+   Expected: No client is edited. Error details are shown in the result display. List remains the same.
+   5. Other incorrect edit commands to try: `edit`, `edit 1 John Done`, `...`
+   Expected: Similar to previous
+
+## Deleting a Client
+
+1. Deleting a client while all clients are being shown
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+    2. Test case: `delete 1`<br>Expected: First client is deleted from the list. Details of the deleted contact shown in the result display. Timestamp in the status bar is updated.
+    3. Test case: `delete 0`<br>Expected: No client is deleted. Error details shown in the result display. List remains the same.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or smaller than 0)Expected: Similar to previous.
+
+## Favoriting a client
+
+## Finding a client
+
+## Sorting clients
+
+## Matching clients
 
 ## Uploading an Image
 
@@ -283,8 +316,10 @@ Given below are instructions to test the app manually.
    1. Prerequisites:
       1. There must be at least a client in the list.
       2. There must be an image file in the same folder as the JAR file. You may download sample files from [here](https://github.com/AY2122S2-CS2103-W16-4/tp/tree/master/src/test/resources/images)
-   2. Test case: `upload 1 i/success.png:successful upload` Expected: an image is successfully associated to the first client with successful upload message.
-   3. Test case: `upload 1 i/test.txt:Fail upload` Expected: upload fails and error message is shown.
+   2. Test case: `upload 1 i/success.png:successful upload`<br>
+   Expected: an image is successfully associated to the first client with successful upload message.
+   3. Test case: `upload 1 i/test.txt:Fail upload`<br>
+   Expected: upload fails and error message is shown.
    4. Other incorrect upload commands to try: `upload` `upload i/fail.png`, `...` Expected: Incorrect command format or invalid file error messages.
 
 ## Viewing an Image
@@ -296,6 +331,8 @@ Given below are instructions to test the app manually.
    3. client must have at least one image associated with
 2. Test case: `viewimage 1` Expected: a new window pops up displaying the user's image and description.
 3. Test case: `viewimage` Expected: Error message is displayed and no window pops up.
+
+## Setting reminders
 
 # Effort
 
