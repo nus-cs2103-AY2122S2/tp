@@ -640,6 +640,11 @@ More information on usage: [list command](UserGuide.html#listing-all-persons--li
 1. Test case: `list` <br>
    Expected: All student contacts shown in the student contact list.
 
+### Clearing data
+
+1. Test case: `clear` <br>
+   Expected: All data is cleared from ArchDuke.
+
 ### Adding a student contact
 
 Command: `add` <br>
