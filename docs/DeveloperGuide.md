@@ -300,6 +300,10 @@ Given below is how the different classes work together in an example usage scena
     - Upcoming `Event`s related to the friend, wrapped in a `StackPane`
     - All `Log`s of the friend
 
+   An object diagram showing the `ExpandedPersonCard` of a friend named `Alex Yeoh`:  
+   ![ExpandedPersonCardObjectDiagram](images/ExpandedPersonCardObjectDiagram.png)
+
+
 ##### Design Considerations
 
 **Aspect**: Switching view from `PersonCard` to `ExpandedPersonCard`
