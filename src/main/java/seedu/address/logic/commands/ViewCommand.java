@@ -50,7 +50,7 @@ public class ViewCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + "finals\n"
             + "To view all schedules\n"
             + "Parameters: " + PREFIX_ALL_SCHEDULE + "all\n"
-            + "OR" + PREFIX_ALL_SCHEDULE + "active\n"
+            + "OR " + PREFIX_ALL_SCHEDULE + "active\n"
             + "To view schedules on a certain date\n"
             + "Parameters: " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "yyyy-MM-dd"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SCHEDULE + " " + PREFIX_DATE + "finals\n";
