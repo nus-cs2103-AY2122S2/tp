@@ -294,12 +294,11 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
     /** Extracts keyword from t/ */
     private static String[] parseTagArg(String tagArg) throws ParseException {
-        if (tagArg.equals("")) {
-            throw new ParseException("You have provided an empty tag criteria!");
-        }
         if (tagArg.matches(VALIDATION_REGEX)) {
             String trimmedArgs = tagArg.trim();
             return trimmedArgs.split("\\s+");
+        } else if (tagArg.trim().equals("")) {
+            throw new ParseException("You have provided an empty tag criteria!");
         } else {
             throw new ParseException("You have provided an invalid tag criteria!");
         }
