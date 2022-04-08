@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.common.Description;
 import seedu.address.model.person.FriendName;
 import seedu.address.model.person.Person;
@@ -159,27 +158,6 @@ public class Event implements Comparable<Event> {
     public boolean hasFriendWithName(Person person) {
         requireNonNull(person);
         return this.getFriendNames().stream().anyMatch(person::hasName);
-    }
-
-
-    /**
-     * Returns true if all friend names correspond to actual Friends in the AddressBook.
-     *
-     * @return true if all friend names correspond to actual Friends in the AddressBook.
-     */
-    public boolean areFriendNamesValid(AddressBook addressBook) {
-        // There ought to be a better way of doing this - search AddressBook by name perhaps?
-        // worth thinking about - how to enforce search specifically by name, rather than relying
-        // on the ::hasPerson(Person) method. todo implement search by name (specifically name objects match)
-        // todo change this to take in a ReadOnlyAddressBook
-
-        for (FriendName name : getFriendNames()) {
-            Person beingLookedFor = new Person(name);
-            if (!addressBook.hasPerson(beingLookedFor)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**

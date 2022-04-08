@@ -231,6 +231,7 @@ public class MainWindow extends UiPart<Stage> {
             tabs.getSelectionModel().select(eventsListTab);
             eventListPanelPlaceholder.requestFocus();
         } else {
+            logic.execute("le");
             tabs.getSelectionModel().select(personListTab);
             if (isExpandedCard) {
                 //force refresh so that size of upcoming events can be detected
