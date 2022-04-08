@@ -18,25 +18,20 @@ public class StackUndoRedo {
     public StackUndoRedo() {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
-
-        commandRedoStack = new Stack<>();
-        commandUndoStack = new Stack<>();
     }
 
     /**
      * Pushes {@code command} onto the undo-stack if it is of type {@code UndoableCommand}. Clears the redo-stack
      * if {@code command} is not of type {@code UndoCommand} or {@code RedoCommand}.
      */
-    public void push(Command command, String commandName) {
+    public void push(Command command) {
         if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
             redoStack.clear();
-            commandRedoStack.clear();
         }
 
         if (!(command instanceof RedoableCommand)) {
             return;
         }
-        commandUndoStack.add(commandName);
         undoStack.add((RedoableCommand) command);
     }
 
