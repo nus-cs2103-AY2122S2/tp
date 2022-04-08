@@ -10,8 +10,9 @@ import static seedu.tinner.commons.util.AppUtil.checkArgument;
 public class RoleName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Role names should only contain alphanumeric characters, spaces and an optional pair of round brackets, "
-                    + "but not blank, and have a character limit of at most 30";
+            "Role names should only contain alphanumeric characters, spaces and "
+                    + "ending with an optional pair of round brackets to specify the role type. "
+                    + "It should not be blanked, and have a character limit of at most 30";
 
     /**
      * The first character of the address must not be a whitespace,
