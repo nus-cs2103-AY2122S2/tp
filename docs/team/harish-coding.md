@@ -51,6 +51,7 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added `deleteTask` command description, implementation and puml diagrams. [#227](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/227)
         * Added `assign` command description, implementation and puml diagrams. [#228](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/228)
+        * Updated Use cases to include deleteTask command, and assign command. [#238](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/238)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [#47](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/47), [#50](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/50), [#52](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/52), [#129](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/129), [#189](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/189), [#230](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/230), [#231](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/231).
