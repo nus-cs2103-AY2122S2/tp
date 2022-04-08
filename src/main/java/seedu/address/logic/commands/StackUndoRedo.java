@@ -32,31 +32,26 @@ public class StackUndoRedo {
         if (!(command instanceof RedoableCommand)) {
             return;
         }
+
         undoStack.add((RedoableCommand) command);
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be undone in the stack.
      */
-    public ModelStack popUndo() {
+    public RedoableCommand popUndo() {
         RedoableCommand toUndo = undoStack.pop();
-        String commandText = commandUndoStack.pop();
-
         redoStack.push(toUndo);
-        commandRedoStack.push(commandText);
-        return new ModelStack(commandText, toUndo);
+        return toUndo;
     }
 
     /**
      * Pops and returns the next {@code UndoableCommand} to be redone in the stack.
      */
-    public ModelStack popRedo() {
+    public RedoableCommand popRedo() {
         RedoableCommand toRedo = redoStack.pop();
-        String commandText = commandRedoStack.pop();
-
         undoStack.push(toRedo);
-        commandUndoStack.push(commandText);
-        return new ModelStack(commandText, toRedo);
+        return toRedo;
     }
 
     /**
@@ -92,21 +87,17 @@ public class StackUndoRedo {
                 && redoStack.equals(stack.redoStack);
     }
 
-    final class ModelStack {
-        private final String commandText;
-        private final RedoableCommand redoableCommand;
-
-        public ModelStack(String commandText, RedoableCommand redoableCommand) {
-            this.commandText = commandText;
-            this.redoableCommand = redoableCommand;
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("Undo Stack: \n");
+        for (RedoableCommand command : undoStack) {
+            s.append(command.getClass().getSimpleName()).append(" ");
         }
-
-        public String getCommandText() {
-            return commandText;
+        s.append("\nRedo Stack: \n");
+        for (RedoableCommand command : redoStack) {
+            s.append(command.getClass().getSimpleName()).append(" ");
         }
-
-        public RedoableCommand getRedoableCommand() {
-            return redoableCommand;
-        }
+        return s.toString();
     }
 }
