@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.lineup.LineupName;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -41,7 +41,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             try {
                 Name person = ParserUtil.parseName(argMultimap.getValue(PREFIX_PLAYER).get());
                 return new DeleteCommand(person);
-            }  catch (ParseException pe) {
+            } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE_PLAYER), pe);
             }
