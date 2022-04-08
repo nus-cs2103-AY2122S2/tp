@@ -28,6 +28,9 @@ public class Seniority {
      * Returns true if a given string is a valid seniority.
      */
     public static boolean isValidSeniority(String test) {
+        if (test == null) {
+            return false;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 

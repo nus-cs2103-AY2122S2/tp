@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class SeniorityTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Seniority(null));
+        assertThrows(IllegalArgumentException.class, () -> new Seniority(null));
     }
 
     @Test

@@ -127,6 +127,10 @@ class JsonAdaptedInterview {
         }
         final Course modelCourse = new Course(course);
 
+        if (seniority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Seniority.class.getSimpleName()));
+        }
         if (!Seniority.isValidSeniority(seniority)) {
             throw new IllegalValueException(Seniority.MESSAGE_CONSTRAINTS);
         }
