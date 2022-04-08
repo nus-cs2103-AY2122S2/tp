@@ -26,6 +26,7 @@ public class Prefix {
         return description;
     }
 
+    @Override
     public String toString() {
         return getPrefix();
     }

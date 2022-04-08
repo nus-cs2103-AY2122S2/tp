@@ -35,7 +35,15 @@ public class FormatPersonUtil {
         this.format = DEFAULT_FORMAT;
     }
 
-    public FormatPersonUtil(String format) {
+    /**
+     * Constructor for FormatPersonUtil
+     * @param format
+     * @throws IllegalArgumentException
+     */
+    public FormatPersonUtil(String format) throws IllegalArgumentException {
+        if (!isValidFormat(format)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         this.format = format;
     }
 
@@ -61,8 +69,11 @@ public class FormatPersonUtil {
         } else if (format.equals(CSV_FORMAT)) {
             return formatPersonCsv(person, prefixes);
 
-        } else {
+        } else if (format.equals(DEFAULT_FORMAT)) {
             return formatPersonDefault(person, prefixes);
+        } else {
+            assert false;
+            return "";
         }
     }
 
@@ -77,8 +88,11 @@ public class FormatPersonUtil {
             return formatAddressBookJson(persons, prefixes);
         } else if (format.equals(CSV_FORMAT)) {
             return formatAddressBookCsv(persons, prefixes);
-        } else {
+        } else if (format.equals(DEFAULT_FORMAT)) {
             return formatAddressBookDefault(persons, prefixes);
+        } else {
+            assert false;
+            return "";
         }
     }
 

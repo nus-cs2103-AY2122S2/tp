@@ -299,12 +299,13 @@ Format: `deletemodules INDEX m/MODULE [m/MODULE]...`
 * Deletes modules for the contact at the specified `INDEX`.
 * The Index refers to the Index number shown in the displayed contact list.
 * The Index **must be a positive integer** 1, 2, 3, …​
-* The modules will be deleted only if the contact has the specified modules.
+* The modules will be deleted only if the contact has the **all** the specified modules.
 * **One or more** modules must be specified.
 
 Examples:
 * `list` followed by `deletemodules 2 m/CS3230` deletes the module CS3230 for the 2nd contact in ModuleMateFinder.
 * `find Betsy` followed by `deletemodules 1 m/CS2102 m/CS2040S` deletes the specified modules for the 1st contact in the results of the `find` command.
+* `deletemodules 1 m/CS2102 m/CS2040S` will fail when user has CS2102 but does not have CS2040S.
 
 ### Editing a contact : `edit`
 

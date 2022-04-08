@@ -63,7 +63,7 @@ public class DeleteModulesCommand extends RedoableCommand {
 
         Set<Module> oldModules = personToEdit.getModules();
         Set<Module> updatedModules = new HashSet<>(oldModules);
-        modules.removeIf(module -> updatedModules.remove(module));
+        modules.removeIf(updatedModules::remove);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedStatus, updatedModules, updatedComment);
@@ -92,7 +92,7 @@ public class DeleteModulesCommand extends RedoableCommand {
         Person editedPerson = createEditedPerson(personToEdit, modulesToDelete);
 
         if (modulesToDelete.size() != 0) {
-            throw new CommandException(String.format(MESSAGE_FAILURE, modules));
+            throw new CommandException(String.format(MESSAGE_FAILURE, modulesToDelete));
         }
 
         model.setPerson(personToEdit, editedPerson);
