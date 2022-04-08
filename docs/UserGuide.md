@@ -447,6 +447,30 @@ If you need additional help when using WoofAreYou, feel free to use the help com
 
 Format: `help`
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Saving the data
+
+PetBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+PetBook data are saved as a JSON file `[JAR file location]/data/woofareyou.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, PetBook will discard all data and start with an empty data file at the next run.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PetBook home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 ## Command Summary
 
 The table below summarises all the commands and features in the order that we have discussed above. You can refer to this nifty table if you do not
