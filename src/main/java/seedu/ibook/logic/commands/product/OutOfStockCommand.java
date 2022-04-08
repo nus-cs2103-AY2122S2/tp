@@ -24,6 +24,6 @@ public class OutOfStockCommand extends Command {
         model.addProductFilter(outOfStockFilter);
         model.updateFilteredItemListForProducts(Product.PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(MESSAGE_SUCCESS
-                + String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+                + String.format(Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW, model.getFilteredProductList().size()));
     }
 }

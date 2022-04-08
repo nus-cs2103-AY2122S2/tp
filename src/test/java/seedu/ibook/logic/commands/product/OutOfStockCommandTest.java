@@ -1,6 +1,7 @@
 package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01;
 import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02;
@@ -25,6 +26,7 @@ import seedu.ibook.model.product.filters.OutOfStockFilter;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class OutOfStockCommandTest {
+
     private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getAllItemsOut());
     private final Product peanutButterBreadWithAllExpired =
             new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getZeroItems());
@@ -40,7 +42,7 @@ public class OutOfStockCommandTest {
 
     @Test
     public void execute_someOutOfStock_someFound() {
-        String expectedMessage = "Listed products that are out of stock.\n1 product listed!";
+        String expectedMessage = OutOfStockCommand.MESSAGE_SUCCESS + String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 1);
         expectedModel.addProductFilter(new OutOfStockFilter());
         expectedModel.updateFilteredItemListForProducts(Product.PREDICATE_SHOW_ALL_ITEMS);
         assertCommandSuccess(outOfStockCommand, model, expectedMessage, expectedModel);
@@ -51,6 +53,5 @@ public class OutOfStockCommandTest {
                     Arrays.asList(Q0_2022_03_01.toItem(PEANUT_BUTTER_BREAD),
                             Q0_2022_03_02.toItem(PEANUT_BUTTER_BREAD)));
         }
-
     }
 }

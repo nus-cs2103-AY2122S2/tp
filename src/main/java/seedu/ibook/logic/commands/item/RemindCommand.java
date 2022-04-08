@@ -49,7 +49,7 @@ public class RemindCommand extends Command {
         model.addProductFilter(expiringFilter);
         model.updateFilteredItemListForProducts(itemPredicate);
         return new CommandResult(MESSAGE_SUCCESS
-                + String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+                + String.format(Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW, model.getFilteredProductList().size()));
     }
 
     @Override
