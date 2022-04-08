@@ -1,0 +1,24 @@
+@startuml
+start
+:User executes meet command;
+
+if () then ([No prefixes in input])
+    : Inform user command format is invalid;
+else ([else])
+    if () then ([clear meeting prefix in input])
+        if () then ([date or time prefix present in input])
+            : Inform user command format is invalid;
+        else ([else])
+            : Clear Meeting for the indicated client;
+            : Update client data in HustleBook;
+        endif
+    else ([else])
+        : Create new meeting date from input;
+        : Create new meeting time from input;
+        : Create new schedule meeting with date and time;
+        : Update schedule meeting for indicated client;
+        : Update client data in HustleBook;
+    endif
+endif
+stop
+@enduml
