@@ -1,5 +1,10 @@
 [![CI Status](https://github.com/AY2122S2-CS2103T-W09-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-W09-4/tp/actions)
 
+<p align="center">
+  <img src="docs/images/tapa banner.png">
+  <p><h1>Teaching Assistant's Personal Assistant (TAPA)</h1></p>
+</p>
+
 ![Ui](docs/images/Ui.png)
 
 * **TAPA** allows TAs to better manage their student’s contact details and progress, especially for TAs who are teaching multiple classes/modules at the same time. It is optimised for use on CLI.<br>
