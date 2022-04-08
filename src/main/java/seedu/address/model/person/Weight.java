@@ -8,9 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight implements Comparable<Weight> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Weights should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain numeric characters.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Weights should adhere to the following constraints:\n"
+            + "1. Weight should only contain numeric characters.\n"
             + "2. Weight should be between 1 and 200 (inclusive).\n"
             + "3. Weight should be a whole number.\n";
     public static final String VALIDATION_REGEX = "^([1-9]|[1-9][0-9]|[1][0-9][0-9]|20[0])$";
