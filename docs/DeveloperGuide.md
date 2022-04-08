@@ -632,6 +632,14 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Listing student contacts
+
+Command: `list` <br>
+More information on usage: [list command](UserGuide.html#listing-all-persons--list)
+
+1. Test case: `list` <br>
+   Expected: All student contacts shown in the student contact list.
+
 ### Adding a student contact
 
 Command: `add` <br>
