@@ -439,7 +439,7 @@ A: An error message colored in red will appear stating that you have typed an un
 
 ## Glossary
 | Term      | Meaning                                 |
-|-----------|-----------------------------------------|
+|-----------|:----------------------------------------|
 | Parameter | Input supplied after the command        |
 | JSON      | A file type that UDT uses to store data |
 | csv       | A common file type used to store data   |

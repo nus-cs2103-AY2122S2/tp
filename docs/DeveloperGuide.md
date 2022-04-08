@@ -7,6 +7,7 @@ title: Developer Guide
 
 | Quick Links                                                                                                     |
 |-----------------------------------------------------------------------------------------------------------------|
+| [Introduction](#introduction)                                                                                   |
 | [Acknowledgements](#acknowledgements)                                                                           |
 | [Setting up, getting started](#setting-up-getting-started)                                                      |
 | [Design](#design)                                                                                               |
@@ -16,7 +17,16 @@ title: Developer Guide
 | [Appendix: Requirements](#appendix-requirements)                                                                |
 | [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)                          |
 
+--------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+**Ultimate DivocTracker _(UDT)_** is a desktop app for managing COVID-19 contacts in school administration,
+optimized for use via interacting with the application through easy-to-use commands on a user-centric interface.
+Ultimate Divoc Tracker can get your contact-tracing tasks done faster than traditional GUI apps.
+
+This is a Developer Guide written to help developers get a deeper understanding of how UDT is implemented and the reasons this project is done a certain way. 
+It explains the internal structure and how components in the architecture work together to allow users to command UDT.
+Our team would like to welcome any form improvements or adaptations to our application via Github Pull Requests or Issues.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -165,9 +175,395 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented, updated
+or any new features that we have in mind.
 
-### \[Proposed\] Undo/redo feature
+- Implemented
+  - [Status Feature](#implemented-status-feature)
+  - [Find By Status Feature](#implemented-find-by-status-feature)
+  - [Class Code Feature](#implemented-class-code-feature)
+  - [Find By Class Code Feature](#implemented-find-by-class-code-feature)
+  - [Activity Feature](#implemented-activity-feature)
+  - [Find By Activity Feature](#implemented-find-by-activity-feature)
+- Updated
+  - [Adding a Person Feature](#updated-adding-a-person-feature)
+  - [Editing a Person Feature](#updated-editing-a-person-feature)
+  - [User Interface](#updated-user-interface)
+  - [Storage](#updated-storage)
+- Enhancements
+  - [Batch Update Feature](#enhancement-batch-update)
+- Proposed
+  - [Implementing CSV Compatibility](#proposed-enhancement-implementing-csv-compatibility)
+  - [Undo/redo Feature](#proposed-undoredo-feature)
+  - [User Interface](#proposed-update-user-interface)
+  
+### \[Implemented\] Status Feature
+
+#### Implementation
+
+The implemented status label is facilitated by `Status` attribute. This label is an additional attribute for each person within the application
+and is implemented as a separate file within the `Person` Package.
+
+The `Status` attribute of each `Person` will take either `"Positive"`, `"Negative"` or `"Close Contact"`.
+- `"Positive"` denotes that the `Person` is labelled as COVID positive.
+- `"Negative"` denotes that the `Person` is labelled as COVID negative.
+- `"Close Contact"` denotes that the `Person` is labelled as having close contact to another `Person` who is COVID positive.
+
+The `Status` class is facilitated by using `execute()` command in the `EditCommand` and `AddCommand` classes.
+
+#### Design considerations:
+
+**Aspect: Abstracting `Status` attribute**
+
+* **Alternative 1 (current choice):** Abstracted class.
+  * Pros: 
+    * Higher Level of abstraction
+    * Changes can be made easily from this class
+  * Cons: 
+    * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
+    * Difficulty navigating through folders to find specific files
+
+* **Alternative 2:** Attribute placed within `Person` class.
+  * Pros: 
+    * Single file where changes can be made
+  * Cons: 
+    * Lesser level of abstraction, changes made have to be constantly changed throughout the file
+
+### \[Implemented\] Find By Status Feature
+
+#### Implementation
+
+The implemented find by status mechanism is facilitated by `findstatus` command. It extends `UDT` with a Find By Status, allowing users to find persons by their current COVID-19 statuses.
+
+Classes added for this feature: 
+* `StatusContainsKeywordsPredicate`
+* `FindStatusCommand`
+* `FindStatusCommandParser`
+
+Given below is an example usage scenario and how the find by status mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
+Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
+Step 4. The filtered list of persons is displayed to the user.
+
+The following sequence diagram shows how the `findstatus` operation works:
+
+![FindStatusSequenceDiagram](images/FindStatusSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStatusCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+### \[Implemented\] Class Code Feature
+
+#### Implementation
+
+The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
+* Group students by using `ClassCode` and used as an identifier for contact-tracing.
+
+The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
+
+### \[Implemented\] Find By Class Code Feature
+
+#### Implementation
+
+The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
+
+Classes added for this feature: 
+* `ClassCodeContainsKeywordsPredicate`
+* `FindClassCodeCommand`
+* `FindClassCodeCommandParser`
+
+Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
+Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
+Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findclasscode` operation works:
+
+![FindClassCodeSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindClassCodeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+### \[Implemented\] Activity Feature
+
+#### Implementation
+
+The implemented status label is facilitated by `Activity` attribute. This label is an additional attribute for each person within the application
+and is implemented as a separate package within the `activity` Package. A `person` will have a Set of `activity` as an attribute.
+
+The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting their different activities
+* Each `Person` can hold multiple `Activity` attributes.
+
+#### Design considerations:
+
+**Aspect: Abstracting `activity` attribute**
+
+* **Alternative 1 (current choice):** Abstracted class.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily from this class
+        * Ease of accommodating how `activity` attribute can be implemented and added in to the `Person` class as a `Set`
+    * Cons:
+        * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
+        * Difficulty navigating through folders to find specific files
+
+* **Alternative 2:** Attribute placed within `Person` class.
+    * Pros:
+        * Single file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, changes made have to be constantly changed throughout the file
+
+### \[Implemented\] Find By Activity Feature
+
+#### Implementation
+
+The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
+
+Classes added for this feature: 
+* `ActivityContainsKeywordsPredicate`
+* `FindActivityCommand`
+* `FindActivityCommandParser`
+
+Given below is an example usage scenario and how the find by activity mechanism behaves at each step.
+
+Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
+Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
+Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
+Step 4. The filtered list of perons is displayed to the user.
+
+The following sequence diagram shows how the `findactivity` operation works:
+
+![FindActivitySequenceDiagram](images/FindActivitySequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindActivityCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Abstracting into different classes**
+
+* **Alternative 1 (current choice):** Abstracted classes.
+    * Pros:
+        * Higher Level of abstraction
+        * Changes can be made easily for each class
+        * Better organisation of classes into separate packages (e.g. `FindActivityCommandParser` belongs to the `parser` package)
+          * Different classes serve different lower-level purposes
+    * Cons:
+        * Adds more class files to the currently already large amount of class files
+        * Changes to one method may require going through all the different class files due to high level of abstraction
+
+* **Alternative 2:** Single command that executed upon reading from parser
+    * Pros:
+        * Single class file where changes can be made
+    * Cons:
+        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
+        * May violate SLAP principles, as every thing is done in a single class
+
+**Aspect: `findactivity` with multiple inputs**
+
+* **Alternative 1 (current choice):** Student participating in **ANY** of the input activities will be returned.
+  * Pros:
+    * Applicable to use case. `findactivity` with 2 inputs returns a list of students who are in either of those
+activities. Allows user to check across multiple activities instead of only that few students participating in both activities
+    * More practical for usecase
+  * Cons:
+    * Less specific
+    * Returns a larger list as compared to alternative 2
+* **Alternative 2:** Student participating in **ALL** the input activities will be returned
+  * Pros:
+    * More specific, allowing for a more detailed search
+    * List is smaller and easier to browse through
+  * Cons:
+    * Only students who are participating in all the input activities will be returned, possibly only a handful
+of students which makes it slightly impractical to use
+
+### \[Updated\] Adding a Person Feature
+
+#### Updates
+
+`AddCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+  * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Positive`).
+* `ClassCode`
+  * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4A`).
+* `Activity`
+  * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
+  * A student can have ANY number of activities, including zero (optional).
+
+### \[Updated\] Editing a Person Feature
+
+#### Updates
+
+`EditCommand` is updated to accommodate the addition of the following attributes:
+
+* `Status`
+    * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Negative`).
+* `ClassCode`
+    * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4B`).
+* `Activity`
+    * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/badminton`).
+    * When editing a student's activities, the user has to list out all activities even if the activities 
+have already been added.
+
+### \[Updated\] User Interface
+
+#### Updates
+
+The User Interface is updated to display the newly added attributes:
+* `Status`
+* `ClassCode`
+* `Activity`
+    * The list of activities will be displayed horizontally under the name where each
+acitivity is contained in a blue box.
+
+
+### \[Updated\] Storage
+
+#### Updates
+
+The flow of saving and loading the data storage is updated to accommodate the addtion of
+`Status`, `ClassCode`, and `Activity`.
+
+### \[Enhancement\] Batch Update
+
+#### Enhancements
+
+The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
+
+The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, and `DeleteCommand` class.
+
+Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
+
+How the batch update works:
+
+* **EditCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
+    * If true, a filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being edited would be created.
+    * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+  * Conversely, `batchUpdatePositiveToNegative()` under `execute()` in `EditCommand` checks if a student's `Status` changes from `Positive` -> `Negative`.
+    * If true, a filtered `List` of students with the same `ClassCode` or `Activity` who are not the current student edited would be created.
+    * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+      * If the `List` is empty, edit A's status to `Negative`
+      * Else, do nothing.
+
+* **AddCommand**:
+  * When `batchUpdateNegativeToPositive()` under `execute()` in `AddCommand` checks for the `Status` of the student added,
+    * If the student to be added is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being added would be created.
+      * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
+    * If the student to be added is `Negative` or `Close-Contact`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being added would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, edit the added student's status to `Close-Contact`.
+    
+* **DeleteCommand**:
+  * When `batchUpdateDeletedPerson()` under `execute()` in DeleteCommand checks for the `Status` of the student deleted,
+    * If the student to be deleted is `Positive`,
+      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being deleted would be created.
+      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
+        * If the `List` is empty, edit A's status to `Negative`.
+        * Else, do nothing.
+
+### \[Proposed Enhancement\] Implementing CSV Compatibility
+The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
+from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
+that can be found in the `Person` Class.
+
+The proposed CSV support mechanism is facilitated by `AddressBook`. It performs read/write on a target Excel file,
+stored internally as an `addressBookContactList`. Additionally, it supports the following operations:
+
+* `AddressBook#readCSV()` — Reads the target Excel file and streams the information into a `Person` list.
+* `VersionedAddressBook#writeCSV()` — Writes `Person` information to a target Excel file.
+
+These operations are exposed in the `Model` interface as `Model#readCSV()` and `Model#writeCSV()` respectively.
+
+#### Design considerations:
+
+**Aspect: How reading of CSV executes:**
+
+* **Alternative 1 (current choice):** Automatically attempt to read from a target CSV file.
+    * Pros: Automated process of importing contacts.
+    * Cons: May have performance issues due to constant execution read operation.
+
+* **Alternative 2:** Individual command to execute read by
+  itself.
+    * Pros: Will use less memory (e.g. create another UI component to a user to input the CSV file).
+    * Cons: More components to implement (e.g. an Upload file component on JavaFX).
+
+_{more aspects and alternatives to be added}_
+
+Given below is an example usage scenario and how read mechanism behaves at each step.
+
+1. The user launches the application for the first time. The Addressbook will be initialized with the initial
+address book state, and the `addressBookContactList` initialized as an empty list.
+2. The AddressBook then attempts to execute `Model#readCSV()`, reading the target CSV file that the administrator
+has _uploaded into the same directory_ as the file.
+3. The User Interface will prompt the administrator that the information from the CSV file is being processed and it
+will require time to complete the import process.
+4. `addressBookContactList` is populated by `Model#readCSV()` and changes the state of the User Interface.
+5. Administrator can interact with the Addressbook, with all the relevant contacts being updated on the list.
+
+Given below is an example usage scenario and how write mechanism behaves at each step.
+_To be Continued_
+
+#### Limitations:
+
+* Data accepted is scoped to the `Person` model. Other information deemed important
+will be omitted from the read process.
+* File size will affect the performance of the application.
+
+### \[Proposed\] Undo/redo Feature
 
 #### Proposed Implementation
 
@@ -237,381 +633,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Implemented\] Status feature
-
-#### Implementation
-
-The implemented status label is facilitated by `Status` attribute. This label is an additional attribute for each person within the application
-and is implemented as a separate file within the `Person` Package.
-
-The `Status` attribute of each `Person` will take either `"Positive"`, `"Negative"` or `"Close Contact"`.
-- `"Positive"` denotes that the `Person` is labelled as COVID positive.
-- `"Negative"` denotes that the `Person` is labelled as COVID negative.
-- `"Close Contact"` denotes that the `Person` is labelled as having close contact to another `Person` who is COVID positive.
-
-The `Status` class is facilitated by using `execute()` command in the `EditCommand` and `AddCommand` classes.
-
-#### Design considerations:
-
-**Aspect: Abstracting `Status` attribute**
-
-* **Alternative 1 (current choice):** Abstracted class.
-  * Pros: 
-    * Higher Level of abstraction
-    * Changes can be made easily from this class
-  * Cons: 
-    * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
-    * Difficulty navigating through folders to find specific files
-
-* **Alternative 2:** Attribute placed within `Person` class.
-  * Pros: 
-    * Single file where changes can be made
-  * Cons: 
-    * Lesser level of abstraction, changes made have to be constantly changed throughout the file
-
-### \[Implemented\] Find By Status feature
-
-#### Implementation
-
-The implemented find by status mechanism is facilitated by `findstatus` command. It extends `UDT` with a Find By Status, allowing users to find persons by their current COVID-19 statuses.
-
-Classes added for this feature: 
-* `StatusContainsKeywordsPredicate`
-* `FindStatusCommand`
-* `FindStatusCommandParser`
-
-Given below is an example usage scenario and how the find by status mechanism behaves at each step.
-
-Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
-Step 2. The user executes `findstatus positive` command to find all `Person`s that are COVID positive in the address book. The `findstatus` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindStatusCommandParser#parse()` to parse the given arguments.
-Step 3. `FindStatusCommandParser#parse()` calls `FindStatusCommand`'s constructor along with `StatusContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Status` of `"positive"`.
-Step 4. The filtered list of persons is displayed to the user.
-
-The following sequence diagram shows how the `findstatus` operation works:
-
-![FindStatusSequenceDiagram](images/FindStatusSequenceDiagram.png)
-
-<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStatusCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-#### Design considerations:
-
-**Aspect: Abstracting into different classes**
-
-* **Alternative 1 (current choice):** Abstracted classes.
-    * Pros:
-        * Higher Level of abstraction
-        * Changes can be made easily for each class
-        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
-          * Different classes serve different lower-level purposes
-    * Cons:
-        * Adds more class files to the currently already large amount of class files
-        * Changes to one method may require going through all the different class files due to high level of abstraction
-
-* **Alternative 2:** Single command that executed upon reading from parser
-    * Pros:
-        * Single class file where changes can be made
-    * Cons:
-        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
-        * May violate SLAP principles, as every thing is done in a single class
-
-### \[Implemented\] Class Code feature
-
-#### Implementation
-
-The implemented Class Code label is facilitated by `ClassCode`. It extends `AddressBook` with a Class Code, tied to each person.
-* Group students by using `ClassCode` and used as an identifier for contact-tracing.
-
-The `ClassCode` attribute of each `Person` will take a `String` _(Java)_ denoting their class groups.
-
-### \[Implemented\] Find By Class Code feature
-
-#### Implementation
-
-The implemented find by class code mechanism is facilitated by `FindByClassCode`. It extends `AddressBook` with a Find By Class Code, allowing users to find persons by their current statuses.
-
-Classes added for this feature: 
-* `ClassCodeContainsKeywordsPredicate`
-* `FindClassCodeCommand`
-* `FindClassCodeCommandParser`
-
-Given below is an example usage scenario and how the find by class code mechanism behaves at each step.
-
-Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
-Step 2. The user executes `findclasscode 4A` command to find all `Person`s that are COVID positive in the address book. The `findclasscode` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindClassCodeCommandParser#parse()` to parse the given arguments.
-Step 3. `FindClassCodeCommandParser#parse()` calls `FindClassCodeCommand`'s constructor along with `ClassCodeContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `ClassCode` of `"4A"`.
-Step 4. The filtered list of perons is displayed to the user.
-
-The following sequence diagram shows how the `findclasscode` operation works:
-
-![FindClassCodeSequenceDiagram](images/FindClassCodeSequenceDiagram.png)
-
-<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindClassCodeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-#### Design considerations:
-
-**Aspect: Abstracting into different classes**
-
-* **Alternative 1 (current choice):** Abstracted classes.
-    * Pros:
-        * Higher Level of abstraction
-        * Changes can be made easily for each class
-        * Better organisation of classes into separate packages (e.g. `FindStatusCommandParser` belongs to the `parser` package)
-          * Different classes serve different lower-level purposes
-    * Cons:
-        * Adds more class files to the currently already large amount of class files
-        * Changes to one method may require going through all the different class files due to high level of abstraction
-
-* **Alternative 2:** Single command that executed upon reading from parser
-    * Pros:
-        * Single class file where changes can be made
-    * Cons:
-        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
-        * May violate SLAP principles, as every thing is done in a single class
-
-### \[Implemented\] Activity feature
-
-#### Implementation
-
-The implemented status label is facilitated by `Activity` attribute. This label is an additional attribute for each person within the application
-and is implemented as a separate package within the `activity` Package. A `person` will have a Set of `activity` as an attribute.
-
-The `Activity` attribute of each `Person` will take a `String` _(Java)_ denoting their different activities
-* Each `Person` can hold multiple `Activity` attributes.
-
-#### Design considerations:
-
-**Aspect: Abstracting `activity` attribute**
-
-* **Alternative 1 (current choice):** Abstracted class.
-    * Pros:
-        * Higher Level of abstraction
-        * Changes can be made easily from this class
-        * Ease of accommodating how `activity` attribute can be implemented and added in to the `Person` class as a `Set`
-    * Cons:
-        * Existing layers of abstraction and tangled dependencies make introducing a new attribute for the base Person model difficult
-        * Difficulty navigating through folders to find specific files
-
-* **Alternative 2:** Attribute placed within `Person` class.
-    * Pros:
-        * Single file where changes can be made
-    * Cons:
-        * Lesser level of abstraction, changes made have to be constantly changed throughout the file
-
-### \[Implemented\] Find By Activity feature
-
-#### Implementation
-
-The implemented find by activity mechanism is facilitated by `FindByActivity`. It extends `AddressBook` with a Find By Activity, allowing users to find persons by their Activity.
-
-Classes added for this feature: 
-* `ActivityContainsKeywordsPredicate`
-* `FindActivityCommand`
-* `FindActivityCommandParser`
-
-Given below is an example usage scenario and how the find by activity mechanism behaves at each step.
-
-Step 1. The user launches the application. The full list of `Person`s will be shown to the user. 
-Step 2. The user executes `findactivity choir` command to find all `Person`s that are COVID positive in the address book. The `findactivity` command calls `AddressBookParser#parseCommand()` to parse the command given, which then calls `FindActivityCommandParser#parse()` to parse the given arguments.
-Step 3. `FindActivityCommandParser#parse()` calls `FindActivityCommand`'s constructor along with `ActivityContainsKeywordsPredicate`'s constructor given the arguments to allow the command, when executed, to use the given `Predicate` _(Java)_ to filter the list of `Person`s by checking if they have the matching `Activity` of `"choir"`.
-Step 4. The filtered list of perons is displayed to the user.
-
-The following sequence diagram shows how the `findactivity` operation works:
-
-![FindActivitySequenceDiagram](images/FindActivitySequenceDiagram.png)
-
-<div markdown="block" class="alert alert-info">:information_source: **Note:** The lifeline for `FindActivityCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-#### Design considerations:
-
-**Aspect: Abstracting into different classes**
-
-* **Alternative 1 (current choice):** Abstracted classes.
-    * Pros:
-        * Higher Level of abstraction
-        * Changes can be made easily for each class
-        * Better organisation of classes into separate packages (e.g. `FindActivityCommandParser` belongs to the `parser` package)
-          * Different classes serve different lower-level purposes
-    * Cons:
-        * Adds more class files to the currently already large amount of class files
-        * Changes to one method may require going through all the different class files due to high level of abstraction
-
-* **Alternative 2:** Single command that executed upon reading from parser
-    * Pros:
-        * Single class file where changes can be made
-    * Cons:
-        * Lesser level of abstraction, class file may become exceptionally long to accommodate all the smaller features required
-        * May violate SLAP principles, as every thing is done in a single class
-
-**Aspect: `findactivity` with multiple inputs**
-
-* **Alternative 1 (current choice):** Student participating in **ANY** of the input activities will be returned.
-  * Pros:
-    * Applicable to use case. `findactivity` with 2 inputs returns a list of students who are in either of those
-activities. Allows user to check across multiple activities instead of only that few students participating in both activities
-    * More practical for usecase
-  * Cons:
-    * Less specific
-    * Returns a larger list as compared to alternative 2
-* **Alternative 2:** Student participating in **ALL** the input activities will be returned
-  * Pros:
-    * More specific, allowing for a more detailed search
-    * List is smaller and easier to browse through
-  * Cons:
-    * Only students who are participating in all the input activities will be returned, possibly only a handful
-of students which makes it slightly impractical to use
-
-### \[Updated\] Adding a person feature
-
-#### Updates
-
-`AddCommand` is updated to accommodate the addition of the following attributes:
-
-* `Status`
-  * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Positive`).
-* `ClassCode`
-  * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4A`).
-* `Activity`
-  * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/basketball`).
-  * A student can have ANY number of activities, including zero (optional).
-
-### \[Updated\] Editing a person feature
-
-#### Updates
-
-`EditCommand` is updated to accommodate the addition of the following attributes:
-
-* `Status`
-    * Use the prefix `s/` followed by the `STATUS` (e.g. `s/Negative`).
-* `ClassCode`
-    * Use the prefix `c/` followed by the `CLASSCODE` (e.g. `c/4B`).
-* `Activity`
-    * Use the prefix `act/` followed by the `ACTIVITES` (e.g. `act/badminton`).
-    * When editing a student's activities, the user has to list out all activities even if the activities 
-have already been added.
-
-### \[Updated\] User Interface
-
-#### Updates
-
-The User Interface is updated to display the newly added attributes:
-* `Status`
-* `ClassCode`
-* `Activity`
-    * The list of activities will be displayed horizontally under the name where each
-acitivity is contained in a blue box.
-
-
-### \[Updated\] Storage
-
-#### Updates
-
-The flow of saving and loading the data storage is updated to accommodate the addtion of
-`Status`, `ClassCode`, and `Activity`.
-
-### \[Enhancement\] Batch update
-
-#### Enhancements
-
-The purpose of the batch update enhancement is to update all students by `ClassCode` and `Activity` when the `Status` of a student in that `ClassCode` or `Activity` changes from `Negative` -> `Positive` and vice-versa.
-
-The batch update enhancement is facilitated by using `execute()` command in the `EditCommand`, `AddCommand`, and `DeleteCommand` class.
-
-Batch update depends on the `Model` and `Person` class and methods to implement this enhancement.
-
-How the batch update works:
-
-* **EditCommand**:
-  * When `batchUpdateNegativeToPositive()` under `execute()` in `EditCommand` checks for a change in `Status` if the person to edit from `Negative` -> `Positive` and `Status` is not already `Positive`
-    * If true, a filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being edited would be created.
-    * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
-  * Conversely, `batchUpdatePositiveToNegative()` under `execute()` in `EditCommand` checks if a student's `Status` changes from `Positive` -> `Negative`.
-    * If true, a filtered `List` of students with the same `ClassCode` or `Activity` who are not the current student edited would be created.
-    * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
-      * If the `List` is empty, edit A's status to `Negative`
-      * Else, do nothing.
-
-* **AddCommand**:
-  * When `batchUpdateNegativeToPositive()` under `execute()` in `AddCommand` checks for the `Status` of the student added,
-    * If the student to be added is `Positive`,
-      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not `Positive` and not the current student being added would be created.
-      * All students `Status` in the filtered `List` will be switched from `Negative` -> `Close-Contact`.
-    * If the student to be added is `Negative` or `Close-Contact`,
-      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being added would be created.
-      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
-        * If the `List` is empty, edit A's status to `Negative`.
-        * Else, edit the added student's status to `Close-Contact`.
-    
-* **DeleteCommand**:
-  * When `batchUpdateDeletedPerson()` under `execute()` in DeleteCommand checks for the `Status` of the student deleted,
-    * If the student to be deleted is `Positive`,
-      * A filtered `List` of students with the same `ClassCode` or `Acitivty` who are not the current student being deleted would be created.
-      * For every student in that list (denoted as A), another `List` is created consisting students who have the same `ClassCode` or `Activity` as A and have `Positive` as their `Status`.
-        * If the `List` is empty, edit A's status to `Negative`.
-        * Else, do nothing.
-
-### \[Proposed Enhancement\] Implementing CSV compatibility
-The purpose of the CSV compatibility ehancement is to enable administrators to quickly import students' information
-from a central data bank. Fields that are required includes `Name`, `Address`, `ClassCode` and other attributes
-that can be found in the `Person` Class.
-
-The proposed CSV support mechanism is facilitated by `AddressBook`. It performs read/write on a target Excel file,
-stored internally as an `addressBookContactList`. Additionally, it supports the following operations:
-
-* `AddressBook#readCSV()` — Reads the target Excel file and streams the information into a `Person` list.
-* `VersionedAddressBook#writeCSV()` — Writes `Person` information to a target Excel file.
-
-These operations are exposed in the `Model` interface as `Model#readCSV()` and `Model#writeCSV()` respectively.
-
-#### Design considerations:
-
-**Aspect: How reading of CSV executes:**
-
-* **Alternative 1 (current choice):** Automatically attempt to read from a target CSV file.
-    * Pros: Automated process of importing contacts.
-    * Cons: May have performance issues due to constant execution read operation.
-
-* **Alternative 2:** Individual command to execute read by
-  itself.
-    * Pros: Will use less memory (e.g. create another UI component to a user to input the CSV file).
-    * Cons: More components to implement (e.g. an Upload file component on JavaFX).
-
-_{more aspects and alternatives to be added}_
-
-Given below is an example usage scenario and how read mechanism behaves at each step.
-
-1. The user launches the application for the first time. The Addressbook will be initialized with the initial
-address book state, and the `addressBookContactList` initialized as an empty list.
-2. The AddressBook then attempts to execute `Model#readCSV()`, reading the target CSV file that the administrator
-has _uploaded into the same directory_ as the file.
-3. The User Interface will prompt the administrator that the information from the CSV file is being processed and it
-will require time to complete the import process.
-4. `addressBookContactList` is populated by `Model#readCSV()` and changes the state of the User Interface.
-5. Administrator can interact with the Addressbook, with all the relevant contacts being updated on the list.
-
-Given below is an example usage scenario and how write mechanism behaves at each step.
-_To be Continued_
-
-#### Limitations:
-
-* Data accepted is scoped to the `Person` model. Other information deemed important
-will be omitted from the read process.
-* File size will affect the performance of the application.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 #### Proposed Enhancement:
 
@@ -625,7 +653,7 @@ seamless application.
 * Create a light themed display.
 * The display of a person card, along with its attributes, could be enhanced.
 
-### \[Testing\] JUnit tests
+### \[Testing\] JUnit Tests
 
 #### JUnit tests
 
@@ -649,11 +677,13 @@ Proper JUnit tests have been added as a means to check if the features listed ab
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts
+  * COVID-19 Cases in Schools
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+* Has access to details of students
 * School admins
 
 **Value proposition**:
