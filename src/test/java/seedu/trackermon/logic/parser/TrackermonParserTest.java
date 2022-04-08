@@ -27,6 +27,9 @@ import seedu.trackermon.testutil.EditShowDescriptorBuilder;
 import seedu.trackermon.testutil.ShowBuilder;
 import seedu.trackermon.testutil.ShowUtil;
 
+/**
+ * Contains unit tests for {@code TrackermonParser}.
+ */
 public class TrackermonParserTest {
     private static final String UNKNOWN_COMMAND_HELP = String.format(MESSAGE_UNKNOWN_COMMAND,
             HelpCommand.MESSAGE_USAGE);

@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import seedu.trackermon.logic.commands.FindCommand;
 import seedu.trackermon.model.show.ShowContainsKeywordsPredicate;
 
+/**
+ * Contains unit tests for {@code FindCommandParser}.
+ */
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();

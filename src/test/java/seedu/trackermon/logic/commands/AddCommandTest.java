@@ -25,6 +25,9 @@ import seedu.trackermon.model.ShowList;
 import seedu.trackermon.model.show.Show;
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ */
 public class AddCommandTest {
 
     @Test

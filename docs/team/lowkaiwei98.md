@@ -15,17 +15,17 @@ Given below are my contributions to the project.
 * Justification: This feature improves the product significantly because a user can sort the list and view it in an organised manner. Without this feature, the list might remain a mess, making it less appealing to the user. 
 
 **Project management**:
-  * Managed issues relating to Sort, Edit, Clear, etc. [\#118] (https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/118) [\#103] (https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/103)
-  * Tested for bugs and asked teammates to fix bugs relating to their code [\#145] (https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/145)
+  * Managed issues relating to Sort, Edit, Clear, etc. [\#118](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/118) [\#103](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/103)
+  * Tested for bugs and asked teammates to fix bugs relating to their code [\#145](https://github.com/AY2122S2-CS2103T-T09-3/tp/issues/145)
 
 **Enhancements to existing features**: 
-* Refactor and morph AB3 code into a working product for Trackermon [\#77] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/77)
-* Morph and implement Edit feature for Trackermon  [\#102] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102)
-* Morph and implement Clear feature for Trackermon [\#147] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/147)
+* Refactor and morph AB3 code into a working product for Trackermon [\#77](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/77)
+* Morph and implement Edit feature for Trackermon  [\#102](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102)
+* Morph and implement Clear feature for Trackermon [\#147](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/147)
 
 **Documentation**:
-* In charge of Sort, Edit sections [\#192] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/192/files) [#\102] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102/files)
+* In charge of Sort, Edit sections [\#192](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/192/files) [\#102](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/102/files)
 
 **Community**:
-* PRs reviewed (with non-trivial review comments):[\#149] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/149#discussion_r833837438) [\#175] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/175) [\#130] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/130)
+* PRs reviewed (with non-trivial review comments):[\#149](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/149#discussion_r833837438) [\#175] (https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/175) [\#130](https://github.com/AY2122S2-CS2103T-T09-3/tp/pull/130)
 
