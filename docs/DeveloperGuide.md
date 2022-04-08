@@ -1,9 +1,6 @@
 ---
 layout: page
 title: Developer Guide
-
-* Table of Contents
-  {:toc}
 ---
 
 # Acknowledgements
@@ -300,8 +297,12 @@ This is how we do our [configurations](https://se-education.org/addressbook-leve
 
 This is how we do our [DevOps](https://se-education.org/addressbook-level3/DevOps.html).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+**Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
+</div>
+
 <aside>
-💡 **Note:** We decided to follow the procedure that AddressBook Level 3 (ABL3) implements as we have identified that their process suits our needs (a CLI based application that can keep information of people).
+💡 
 </aside>
 
 # Appendix: Requirements
@@ -463,9 +464,10 @@ Actor: User
 
 Given below are instructions to test the app manually.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 <aside>
 💡 **Note:** Please bear in mind to extend your testing to more *exploratory* testing after following these steps.
-</aside>
+</div>
 
 ## Launch and shutdown
 
