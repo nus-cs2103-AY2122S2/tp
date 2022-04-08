@@ -3,10 +3,12 @@ package seedu.trackbeau.logic.commands.customer;
 import static java.util.Objects.requireNonNull;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_ALLERGIES;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_HAIRTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_REGDATE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SERVICES;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_SKINTYPE;
 import static seedu.trackbeau.logic.parser.CliSyntax.PREFIX_STAFFS;
@@ -32,6 +34,8 @@ public class FindCustomerCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE]\n"
             + "[" + PREFIX_EMAIL + "EMAIL]\n"
             + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+            + "[" + PREFIX_REGDATE + "REGISTRATION DATE]\n"
+            + "[" + PREFIX_BIRTHDATE + "BIRTHDATE]\n"
             + "[" + PREFIX_SKINTYPE + "SKIN TYPE]\n"
             + "[" + PREFIX_HAIRTYPE + "HAIR TYPE]\n"
             + "[" + PREFIX_STAFFS + "STAFFS]...\n"
@@ -39,13 +43,6 @@ public class FindCustomerCommand extends Command {
             + "[" + PREFIX_ALLERGIES + "ALLERGIES]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "Clementi "
-            + PREFIX_SKINTYPE + "oily "
-            + PREFIX_HAIRTYPE + "coiled "
-            + PREFIX_STAFFS + "Jason "
-            + PREFIX_SERVICES + "Acne treatment "
             + PREFIX_ALLERGIES + "Nickel";
 
     private final CustomerSearchContainsKeywordsPredicate predicate;
