@@ -41,7 +41,7 @@ public class DeleteTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Person> fullPersonList = model.getAddressBook().getPersonList();
         List<Task> lastShownTaskList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
@@ -54,7 +54,7 @@ public class DeleteTaskCommand extends Command {
         List<Person> affectedPersonList = taskToDelete.getAssignees();
 
         for (Person person : affectedPersonList) {
-            Person personToUpdate = lastShownPersonList.get(lastShownPersonList.indexOf(person));
+            Person personToUpdate = fullPersonList.get(fullPersonList.indexOf(person));
             model.decreaseNumOfTasks(personToUpdate);
         }
 

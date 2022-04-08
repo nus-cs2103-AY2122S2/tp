@@ -12,8 +12,6 @@ import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses input arguments and creates a new EditTaskCommand object.
  */
@@ -62,7 +60,6 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
      * Initialize a hashmap that contains the status of a prefix.
      * By status, it means whether a prefix has been inputted by a user or not.
      */
-
     private HashMap<String, Boolean> initPrefixStatusHash() {
         HashMap<String, Boolean> prefixStatusHash = new HashMap<>();
         prefixStatusHash.put("description", true);
@@ -78,9 +75,9 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
      * Note that it only checks if the prefix has been inputted.
      * It does not check if there's a value attached to the prefix.
      */
-
     private HashMap<String, Boolean> prefixStatusCheck (ArgumentMultimap argMultimap) {
         HashMap<String, Boolean> prefixStatusHash = initPrefixStatusHash();
+
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isEmpty()) {
             prefixStatusHash.replace("description", false);
         }

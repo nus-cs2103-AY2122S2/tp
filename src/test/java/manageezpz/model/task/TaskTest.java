@@ -68,4 +68,5 @@ public class TaskTest {
         GET_A_DRINK.setTaskNotDone();
         assertFalse(GET_A_DRINK.isDone);
     }
+
 }

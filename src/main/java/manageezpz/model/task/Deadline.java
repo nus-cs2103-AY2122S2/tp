@@ -15,9 +15,9 @@ public class Deadline extends Task {
      * Constructor to initialize an instance of Deadline class with task
      * description, date and time.
      *
-     * @param taskDescription Description of the task
-     * @param date Date by which the Deadline task needs to be completed
-     * @param time Time by which the Deadline task needs to be completed
+     * @param taskDescription Description of the task.
+     * @param date Date by which the Deadline task needs to be completed.
+     * @param time Time by which the Deadline task needs to be completed.
      */
     public Deadline(Description taskDescription, Date date, Time time) {
         this.type = "deadline";
@@ -50,16 +50,6 @@ public class Deadline extends Task {
         return this.time;
     }
 
-    @Override
-    public String getType() {
-        return this.type;
-    }
-
-    @Override
-    public Description getDescription() {
-        return this.description;
-    }
-
     public void setDescription(Description description) {
         this.description = description;
     }
@@ -70,6 +60,16 @@ public class Deadline extends Task {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public Description getDescription() {
+        return this.description;
     }
 
     @Override

@@ -66,6 +66,8 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the user guide and copying employee details to Computer Clipboard.
@@ -73,6 +75,8 @@ Shows a message explaining how to access the user guide and copying employee det
 ![help message](images/helpMessage_new.png)
 
 Format: `help`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Employee : `addEmployee`
 
@@ -123,10 +127,11 @@ Format: `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL`
 * The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
+* All tasks that are assigned to the edited employee will be updated to reflect the new changes of the employee.
 
 Examples:
-* `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. 
-* `editEmployee 2 n/Betsy Crower` edits the name of the 2nd person to be Betsy Crower.
+* `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. All tasks that are assigned to the 1st employee will be updated to reflect the new changes of the employee.
+* `editEmployee 2 n/Betsy Crower` edits the name of the 2nd employee to be Betsy Crower. All tasks that are assigned to the 2nd employee will be updated to reflect the new changes of the employee.
 
 ### Deleting an Employee : `deleteEmployee`
 
@@ -137,11 +142,14 @@ Format: `deleteEmployee INDEX`
 * Deletes the employee at the specified INDEX.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* All tasks that are assigned to the deleted employee will be updated to remove the employee from the respective tasks.
 
 Examples:
-* `deleteEmployee 2` deletes the 2nd employee in the displayed employee list.
-* `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ.
-* `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list.
+* `deleteEmployee 2` deletes the 2nd employee in the displayed employee list. All tasks that are assigned to the 2nd employee will be updated to remove the employee from the respective tasks.
+* `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ. All tasks that are assigned to the 2nd employee will be updated to remove the employee from the respective tasks.
+* `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list. All tasks that are assigned to the 1st employee will be updated to remove the employee from the respective tasks.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Task : `addTodo`, `addEvent`, `addDeadline`
 
@@ -226,7 +234,7 @@ Example:
         * priority high,
         * assigned to Alex Yeoh,
         * and is marked as done.
-
+        
 ### Editing a Task : `editTask`
 
 Edits an existing task in ManageEZPZ.
@@ -250,7 +258,8 @@ Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 * For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
   and mm should only be between 00 and 59.
 * For todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
-and time field to be edited.
+and time field to be edited. 
+* Editing Tasks with the same Description, Date, Time will not change the physical state of the Task.
 
 Examples: <br/>
 
@@ -309,6 +318,8 @@ Examples:
 * `listTask` followed by `unmarkTask 2` sets the displayed task list to show all tasks in ManageEZPZ and changes the 2nd task in ManageEZPZ back to not done.
 * `findTask desc/slides` followed by `unmarkTask 1` sets the displayed task list with the results from the findTask command and changes the 1st task in the displayed task list back to not done.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a Task : `deleteTask`
 
 Deletes the specified task from ManageEZPZ.
@@ -318,11 +329,12 @@ Format: `deleteTask INDEX`
 * Deletes the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 
 Examples:
-* `deleteTask 2` deletes the 2nd task in the displayed task list.
-* `listTask` followed by `deleteTask 2` sets the displayed task list to show all tasks in ManageEZPZ and deletes the 2nd task in ManageEZPZ.
-* `findTask desc/slides` followed by `deleteTask 1` sets the displayed task list with the results from the findTask command and deletes the 1st task in the displayed task list.
+* `deleteTask 2` deletes the 2nd task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
+* `listTask` followed by `deleteTask 2` sets the displayed task list to show all tasks in ManageEZPZ and deletes the 2nd task in ManageEZPZ. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
+* `findTask desc/slides` followed by `deleteTask 1` sets the displayed task list with the results from the findTask command and deletes the 1st task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 
 ### Tagging a Task to an Employee : `tagTask`
 
@@ -403,6 +415,7 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -423,6 +436,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | **Edit Employee**   | `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`        |
 | **Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`                                                             |
 
+<div style="page-break-after: always;"></div>
+
 ### Task Related Commands
 
 | Action                | Format, Examples                                                                                                                |
@@ -438,6 +453,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | **Tag Task**          | `tagTask INDEX n/NAME` <br> e.g.,`tagTask 1 n/Alex Yeoh`                                                                        |
 | **Untag Task**        | `untagTask INDEX n/NAME` <br> e.g.,`untagTask 1 n/Alex Yeoh`                                                                    |
 | **Tag Priority**      | `tagPriority INDEX priority/PRIORITY` <br> e.g.,`tagPriority 1 priority/HIGH`                                                   |
+
+<div style="page-break-after: always;"></div>
 
 ### Others
 

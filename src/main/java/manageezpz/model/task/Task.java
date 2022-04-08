@@ -28,6 +28,14 @@ public abstract class Task {
     public Task() {
     }
 
+    /**
+     * Checks if the task is done or not.
+     * @return true if task is done, false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
     public abstract String getType();
 
     public abstract Description getDescription();
@@ -36,14 +44,6 @@ public abstract class Task {
 
     public String getStatusIcon() {
         return this.isDone() ? "X" : " ";
-    }
-
-    /**
-     * Checks if the task is done or not.
-     * @return true if task is done, false otherwise.
-     */
-    public boolean isDone() {
-        return isDone;
     }
 
     public Priority getPriority() {
@@ -81,6 +81,8 @@ public abstract class Task {
     /**
      * Returns true if both Task have the same Description.
      * This defines a weaker notion of equality between two Task.
+     * @param otherTask the other task to be compared to.
+     * @return true if both tasks are the same, false otherwise.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -99,6 +101,11 @@ public abstract class Task {
         assignees.add(person);
     }
 
+    /**
+     * Used to assign a new person to the specific index in the assignee list.
+     * @param index the index specified to the assignee list.
+     * @param newPerson the new person to be placed into the assignee list.
+     */
     public void assignedTo(int index, Person newPerson) {
         assignees.set(index, newPerson);
     }
@@ -114,7 +121,7 @@ public abstract class Task {
     /**
      * Checks whether the assignee is assigned to the task.
      * @param assignee The assignee to be searched
-     * @return True if the assignee is assigned, false otherwise
+     * @return true if the assignee is assigned, false otherwise
      */
     public boolean haveAssignees(String assignee) {
         return assignees.stream()
