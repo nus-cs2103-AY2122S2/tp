@@ -452,39 +452,45 @@ Guarantees: a company will be successfully created
 
 **Extensions**
 
- 1a. The input does not adhere to the command format <br/>
-  1a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 1
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
 
- 1b. The specific company is already stored <br/>
-  1b1. Tinner shows a duplicate company error message <br/>
-     Use case resumes at step 1
+&emsp;1b. The specific company is already stored <br/>
+&emsp;&emsp;1b1. Tinner shows a duplicate company error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-**Use case: UC02 - Add an internship role**
 
-Precondition: the company to which the internship role will belong has already been created
+**Use case: UC02 - Edit a company** <a id="uc02"></a>
 
-Guarantees: an internship role will be successfully created
+Precondition: there exists at least one company in Tinner
 
 **MSS**
+1. User request to edit certain details of a specific company
+2. Tinner edits certain details specified by the user
+3. Tinner displays the list of companies with updated details
 
-1. User requests to view a list of companies
-2. User requests to add an internship role and provides the relevant details
-3. Tinner adds the internship role to the list of roles of the specific company
+    Use case ends
 
-   Use case ends
+**Extensions**  
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-**Extensions**
+&emsp;1b. Company already exists in Tinner format <br/>
+&emsp;&emsp;1b1. Tinner shows error that company is duplicated <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
- 1a. The input does not adhere to the command format <br/>
-  1a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 1
+&emsp;1c. Field restrictions violated <br/>
+&emsp;&emsp;1c1. Tinner shows error that a specific restriction is violated <br/> 
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
 
 **Use case: UC03 - Delete a company**
 
-Precondition: there exists at least one company in the list of companies
+Precondition: there exists at least one company in Tinner
 
-Guarantees: a company is successfully removed from the list of companies
+Guarantees: a company is successfully removed from Tinner
 
 **MSS**
 
@@ -497,17 +503,73 @@ Guarantees: a company is successfully removed from the list of companies
 
 **Extensions**
 
- 3a. The input does not adhere to the command format <br/>
-  3a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 2
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
- 3b. The input company index is invalid <br/>
-  3b1. Tinner shows a company index out of bounds error message <br/>
-     Use case resumes at step 2
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC04 - Delete an internship role**
 
-Precondition: there exists at least one internship role associated with a company in the list of companies
+**Use case: UC04- Add an internship role**
+
+Precondition: the company to which the internship role will belong has already been created
+
+Guarantees: an internship role will be successfully created
+
+**MSS**
+
+1. User requests to view a list of companies 
+2. User requests to add an internship role and provides the relevant details 
+3. Tinner adds the internship role to the list of roles of the specific company
+
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+
+**Use case: UC05 - Edits an internship role** <a id="uc05"></a>
+
+Precondition: there exists at least one role associated with a company in Tinner
+
+**MSS**
+
+1. User requests to edit a specific internship role of a company 
+2. Tinner edits certain details specified by the user 
+3. Tinner displays the list of companies with roles and its updated details
+   
+    Use case ends
+
+**Extensions**  
+&emsp; 1a. The input does not adhere to the command format <br/>
+&emsp; &emsp; 1a1. Tinner shows an invalid input format error message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1b. The input company index is invalid <br/>
+&emsp; &emsp; 1b1. Tinner shows error that the company index is invalid  message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1c. The input internship role index is invalid <br/>
+&emsp; &emsp; 1c1. Tinner shows error that the role index is invalid message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1d. Role already exists in Tinner format <br/>
+&emsp;&emsp; 1d1. Tinner shows error that role is duplicated <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+&emsp; 1e. Field restrictions violated <br/>
+&emsp;&emsp; 1e1. Tinner shows error that a specific restriction is violated <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+
+**Use case: UC06 - Delete an internship role**
+
+Precondition: there exists at least one internship role associated with a company 
 
 Guarantees: a specified internship role is successfully removed from the associated company
 
@@ -522,19 +584,19 @@ Guarantees: a specified internship role is successfully removed from the associa
 
 **Extensions**
 
- 3a. The input does not adhere to the command format <br/>
-  3a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 2
+&emsp;a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 2
 
- 3b. The input company index is invalid <br/>
-  3b1. Tinner shows a company index out of bounds error message <br/>
-     Use case resumes at step 2
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
- 3c. The input internship role index is invalid <br/>
-  3c1. Tinner shows an internship role index out of bounds error message <br/>
-     Use case resumes at step 2
+&emsp;3c. The input internship role index is invalid <br/>
+&emsp;&emsp;c1. Tinner shows an internship role index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC05 - List all companies**
+**Use case: UC07 - List all companies**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -547,7 +609,7 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
-**Use case: UC06 - Using the reminder feature**
+**Use case: UC08 - Using the reminder feature**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -555,18 +617,18 @@ Guarantees: every role in companies that have reminder dates within the reminder
 
 **MSS**
 
-1. The user [adds a role(UC02)]() or [edits a role(UCXX)]() that has a reminder date.
+1. The user [adds a role(UC02)](#uc02) or [edits a role(UC05)](#uc05) that has a reminder date.
 2. Tinner shows success message and adds/edits the role.
 3. The user closes the application and opens it up again immediately or some time in the future
 4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date/
     
    Use case ends
 
-**Use case: UC07 - Favouriting a company and viewing all favourited companies**
+**Use case: UC09 - Favouriting a company and viewing all favourited companies**
 
-Precondition: there exist at least one company in the list of companies
+Precondition: there exist at least one company in Tinner
 
-Guarantees: a company is successfully favourited within the list of companies
+Guarantees: a company is successfully favourited within Tinner
 
 **MSS**
 
@@ -581,23 +643,23 @@ Guarantees: a company is successfully favourited within the list of companies
 
 **Extensions**
 
-3a. The input does not adhere to the command format <br/>
-3a1. Tinner shows an invalid input format error message <br/>
-Use case resumes at step 2
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-3b. The input company index is invalid <br/>
-3b1. Tinner shows a company index out of bounds error message <br/>
-Use case resumes at step 2
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-3c. The specific company to be favourited had already been favourited <br/>
-3c1. Tinner shows a company already favourited error message <br/>
-Use case resumes at step 2
+&emsp;3c. The specific company to be favourited had already been favourited <br/>
+&emsp;&emsp;3c1. Tinner shows a company already favourited error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC08 - Unfavouriting a company**
+**Use case: UC10 - Unfavouriting a company**
 
-Precondition: there exist at least one company in the list of companies
+Precondition: there exist at least one company in Tinner 
 
-Guarantees: a company is successfully unfavourited within the list of companies
+Guarantees: a company is successfully unfavourited within Tinner
 
 **MSS**
 
@@ -610,17 +672,17 @@ Guarantees: a company is successfully unfavourited within the list of companies
 
 **Extensions**
 
-3a. The input does not adhere to the command format <br/>
-3a1. Tinner shows an invalid input format error message <br/>
-Use case resumes at step 2
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-3b. The input company index is invalid <br/>
-3b1. Tinner shows a company index out of bounds error message <br/>
-Use case resumes at step 2
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-3c. The specific company to be unfavourited is already unfavourited<br/>
-3c1. Tinner shows a company already unfavourited error message <br/>
-Use case resumes at step 2
+&emsp;3c. The specific company to be unfavourited is already unfavourited<br/>
+&emsp;&emsp;3c1. Tinner shows a company already unfavourited error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
 
 ### Non-Functional Requirements <a id="non-functional-requirements"></a>
