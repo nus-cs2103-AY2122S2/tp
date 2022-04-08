@@ -52,6 +52,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
+        requireNonNull(persons);
+
         persons.forEach(this::addTagsNotInList);
 
         this.persons.setPersons(persons);
@@ -62,6 +64,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code tags} must not contain duplicate tags.
      */
     public void setTags(List<Tag> tags) {
+        requireNonNull(tags);
+
         persons.forEach(p -> stripTagsFromPerson(p, tags));
         this.tags.setTags(tags);
     }
