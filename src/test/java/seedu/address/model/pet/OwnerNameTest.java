@@ -38,6 +38,7 @@ public class OwnerNameTest {
 
 
         // valid ownerName
+        assertTrue(OwnerName.isValidOwnerName("p")); // single character
         assertTrue(OwnerName.isValidOwnerName("peter jack")); // alphabets only
         assertTrue(OwnerName.isValidOwnerName("Capital Tan")); // with capital letters
         assertTrue(OwnerName.isValidOwnerName("David Roger Jackson Ray Jr")); // long names
