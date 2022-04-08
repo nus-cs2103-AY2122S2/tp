@@ -249,6 +249,10 @@ While `TIME` must be in the format HH:MM.
 E.g. 2022-10-20 and 13:30, or "today 10" and 12:45.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+the keyword "today" for DATE is case-insensitive.
+</div>
+
 <div markdown="span" class="alert alert-warning">:grey_exclamation: **Note:**
 `COMPANY_NAME` must match the name of an existing Company in the Company list.
 </div>
