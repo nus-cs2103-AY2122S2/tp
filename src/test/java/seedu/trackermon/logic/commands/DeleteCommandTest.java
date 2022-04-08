@@ -24,8 +24,11 @@ import seedu.trackermon.model.show.Show;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalShowList(), new UserPrefs());
 
+    /**
+     * Tests the deleting of a valid index from an unfiltered list from the execution of {@code DeleteCommand}.
+     */
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Show showToDelete = model.getFilteredShowList().get(INDEX_FIRST_SHOW.getZeroBased());
@@ -39,6 +42,9 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the deleting of an invalid index from an unfiltered list from the execution of {@code DeleteCommand}.
+     */
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredShowList().size() + 1);
@@ -47,6 +53,10 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
+
+    /**
+     * Tests the deleting of a valid index from a filtered list from the execution of {@code DeleteCommand}.
+     */
     @Test
     public void execute_validIndexFilteredList_success() {
         showShowAtIndex(model, INDEX_FIRST_SHOW);
@@ -63,6 +73,10 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+
+    /**
+     * Tests the deleting of an invalid index from a filtered list from the execution of {@code DeleteCommand}.
+     */
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showShowAtIndex(model, INDEX_FIRST_SHOW);
@@ -76,6 +90,9 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_INDEX);
     }
 
+    /**
+     *  Tests if deleting different types of shows are the same from the execution of {@code AddCommand}.
+     */
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_SHOW);
@@ -99,7 +116,7 @@ public class DeleteCommandTest {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered list to no show.
      */
     private void showNoShow(Model model) {
         model.updateFilteredShowList(p -> false);

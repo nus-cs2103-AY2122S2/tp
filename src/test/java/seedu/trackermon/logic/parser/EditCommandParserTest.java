@@ -49,8 +49,11 @@ public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private final EditCommandParser parser = new EditCommandParser();
 
+    /**
+     * Tests the parsing of missing parts from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_missingParts_failure() {
         // no index specified with field
@@ -63,6 +66,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
+    /**
+     * Tests the parsing of invalid preamble from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
@@ -78,6 +84,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
+    /**
+     * Tests the parsing of invalid value from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC,
@@ -110,6 +119,9 @@ public class EditCommandParserTest {
                 String.format(MESSAGE_INVALID_INPUT, Name.MESSAGE_CONSTRAINTS));
     }
 
+    /**
+     * Tests the parsing of valid all fields from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_SHOW;
@@ -125,6 +137,9 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    /**
+     * Tests the parsing of valid some fields from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_SHOW;
@@ -139,6 +154,9 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    /**
+     * Tests the parsing of valid one fields from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
@@ -162,6 +180,9 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    /**
+     * Tests the parsing of valid repeated fields from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_SHOW;
@@ -177,6 +198,9 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    /**
+     * Tests the parsing of invalid fields followed by valid fields from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
@@ -199,6 +223,9 @@ public class EditCommandParserTest {
 
     }
 
+    /**
+     * Tests the parsing of resetting tags from the execution of {@code EditCommandParser}.
+     */
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_SHOW;
