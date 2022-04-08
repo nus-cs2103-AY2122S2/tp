@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TAddressBook (TAB) is a **desktop app made for CS2030S Lab Teaching Assistants (TA) to keep track of students Lab assignments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+TAddressBook (TAB) is a **desktop app made for CS2030S Lab Teaching Assistants (TAs) to keep track of students' Lab assignments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 If you can type fast, TAB can get your Lab management tasks done faster than traditional GUI apps.
 
@@ -14,16 +14,16 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
 
-1. Download the latest `TAddressBook.jar` from [here](https://github.com/AY2122S2-CS2103-F10-1/tp/releases).
+2. Download the latest `TAddressBook.jar` from [here](https://github.com/AY2122S2-CS2103-F10-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TAddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAddressBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/sampleUI.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all students.
@@ -36,7 +36,7 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#feature-list) below for details of each command.
+6. Refer to the [Features](#feature-list) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Feature List
@@ -72,7 +72,10 @@ If you can type fast, TAB can get your Lab management tasks done faster than tra
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/year2` or as `n/John Doe`.
+
+* Items in parentheses means that at least one of the items must be supplied.<br>
+  e.g. `(s/STATUS) (m/MARK)` can be used as `s/u`, `m/10` or `s/g m/10`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/12A`, `t/12A t/year2` etc.
@@ -101,13 +104,13 @@ Exits the program.
 Format: `exit`
 
 #### Saving the data
-TAddress Book data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Editing the data file
 TAddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any labNumber of individual `Student`'s `Lab`s.<br>
+We recommend that users be **extra careful** when editing data of the `MasterLabList` as well as any `labNumber` of individual `Student`'s `Lab`s.<br>
 If your changes to the JSON data file makes its format invalid, TAddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -116,33 +119,35 @@ If the data loaded is different from the data JSON, refer to [FAQ Q2](#faq).
 ### Student-related features
 
 #### Adding a student : `add`
-Adds a student to the address book with the necessary attributes.
+Adds a student to the TAddressBook with the provided attributes.
+
+Format: `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
-Format: `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...`
+Examples:
+* `add n/James Ho e/jamesho@email.com g/jamesH tl/jamesho i/A0123456T`
+* `add n/John Doe g/johnD e/johndoe@email.com tl/johndoe i/A0111111B t/year2`
 
 #### Listing all students : `list`
-Lists all the students
+Shows a list of all students in the TAddressBook.
 
 Format: `list`
 
 #### Editing a student : `edit`
-Edits an existing student in the TAddress book
+Edits an existing student in the TAddressBook.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`
+Format: `edit INDEX (n/NAME) (e/EMAIL) (g/GITHUB) (tl/TELEGRAM_HANDLE) (i/STUDENT_ID) (t/TAG)...`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
+* Edits the student at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed student list. `INDEX` **must be a positive integer** 1, 2, 3, …
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-  specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit 1 g/johnedit e/johndoe@example.com` Edits the github username and email address of the 1st student to be `johnedit` and `johndoe@example.com` respectively.
+*  `edit 1 g/johnedit e/johndoe@example.com` Edits the GitHub username and email address of the 1st student to be `johnedit` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 #### Locating students by name : `find`
@@ -150,85 +155,112 @@ Finds students whose names contain any of the given keywords. At least one keywo
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive e.g. `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Students matching at least one keyword will be returned (i.e. `OR` search),
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 #### Deleting a student : `delete`
-Deletes the specified student from the TAddress book. INDEX must be a positive integer 1, 2, 3...
+Deletes the specified student from the TAddressBook.
 
 Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …
+* `INDEX` refers to the index number shown in the displayed student list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the TAddressBook.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-
 #### Clearing all entries : `clear`
-Clears all entries from the TAddress book.
+Clears all entries from the TAddressBook.
 
 Format: `clear`
 
 #### Filter (by status of individual labs) : `filter`
-Filters students based on the status of their lab tags. LAB_NUMBER must be a positive integer.
-
-Multiple filters can be applied in a conjunctional manner by executing the filter command multiple times
-
-Using the `list` command clears all filters that are currently applied
-
-LAB_STATUS:
-* Unsubmitted = u
-* Submitted = s
-* Graded = g
+Filters students based on the `LabStatus` of their `Lab` tags.
 
 Format: `filter l/LAB_NUMBER s/LAB_STATUS`
 
+* Multiple filters can be applied cumulatively by executing the filter command multiple times.
+  Using the `list` command clears all filters that are currently applied.
+* `LAB_NUMBER` must correspond to one of the `Lab`s currently in the TAddressBook.
+* `LAB_STATUS` must correspond to one of the following:
+  * `UNSUBMITTED` = u
+  * `SUBMITTED` = s
+  * `GRADED` = g
+
+Example:
+* `filter l/2 s/u` returns all students with a status of `UNSUBMITTED` for `Lab 2`.
+
 #### View student details : `view`
-View a student's details from the TAddressBook. INDEX must be a positive integer 1, 2, 3...
+View a student's details from the TAddressBook. This includes their personal information (i.e. email, GitHub username, etc.) 
+as well as the status and/or marks achieved for their Labs. A sample result is shown below.<br>
+![viewUi](images/viewUI.png)
 
 Format: `view INDEX`
 
+* `INDEX` refers to the index number shown in the displayed student list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …
+
 ### Lab-related features
 
-#### Adding a Lab : `labadd`
-Adds a Lab to every student. Shows up as a `LabLabel` on each student’s entry. By default, the `LabLabel` will be colored red for “UNSUBMITTED”.
-The `LabLabel` can subsequently be colored differently to represent different statuses e.g. “UNSUBMITTED” = red, "SUBMITTED" = yellow, "GRADED" = green.
-LAB_NUMBER must be an integer between 0 and 20 inclusive.<br>
-Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
+#### Adding a lab : `labadd`
+Adds a lab to every student. Shows up as a `LabLabel` on each student’s entry. By default, the `LabLabel` will be colored red for `UNSUBMITTED`.
+The `LabLabel` is subsequently colored differently to represent different statuses:
+* `UNSUBMITTED` = red
+* `SUBMITTED` = yellow
+* `GRADED` = green
 
 Format: `labadd l/LAB_NUMBER`
 
-#### Submitting a Lab : `labsub`
-Changes the status of the specified lab for the student with the specified INDEX from UNSUBMITTED to SUBMITTED.
+* `LAB_NUMBER` must be an integer between 0 and 20 inclusive.
+* Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
+
+#### Submitting a lab : `labsub`
+Changes the status of the specified lab for the student with the specified `INDEX` from `UNSUBMITTED` to `SUBMITTED`.
 
 Format: `labsub INDEX l/LAB_NUMBER`
 
-#### Grading a Lab : `labgrad`
-Changes the status of the specified lab for the student with the specified INDEX to GRADED and records down the marks given for the Lab. LAB_MARK should be a non-negative integer.
+* `INDEX` refers to the index number shown in the displayed student list. `INDEX` **must be a positive integer** 1, 2, 3, …
+* `LAB_NUMBER` must correspond to one of the `Lab`s currently in the TAddressBook.
+
+#### Grading a lab : `labgrad`
+Changes the status of the specified lab for the student with the specified `INDEX` to `GRADED` and records down the marks given for the lab.
 
 Format: `labgrad INDEX l/LAB_NUMBER m/LAB_MARK`
 
-#### Editing individual Labs : `labedit`
-Edits the status or marks of the specified Lab for the student with the specified INDEX. LAB_STATUS must be one of u/s/g (UNSUBMITTED/SUBMITTED/GRADED).
-Only valid combinations of LAB_STATUS and LAB_MARK will be accepted (e.g. if LAB_MARK is provided, LAB_STATUS must be 'g').
+* The current status of the lab to be graded can be either `UNSUBMITTED` or `SUBMITTED`.
+* `INDEX` refers to the index number shown in the displayed student list. `INDEX` **must be a positive integer** 1, 2, 3, …
+* `LAB_NUMBER` must correspond to one of the `Lab`s currently in the TAddressBook.
+* `LAB_MARK` should be a non-negative integer between 0 and 100 inclusive. Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
 
-Format: `labedit INDEX l/LAB_NUMBER [s/LAB_STATUS] [m/LAB_MARK]`
+#### Editing individual labs : `labedit`
+Edits the status or marks of the specified lab for the student with the specified `INDEX`. This command can achieve similar outcomes as `labsub` and `labgrad`, but using those commands would require less parameter inputs and thus be more convenient.
+The main purpose of this command is to allow for editing of wrongly provided information.
 
-#### Removing a Lab: `labrm`
-Removes a specified lab from every student in the TAddressBook. LAB_NUMBER must correspond to an existing Lab in the TAddressBook.
+Format: `labedit INDEX l/LAB_NUMBER (s/LAB_STATUS) (m/LAB_MARK)`
+
+* `INDEX` refers to the index number shown in the displayed student list. `INDEX` **must be a positive integer** 1, 2, 3, …
+* `LAB_STATUS` must be one of `u`/`s`/`g` (`UNSUBMITTED`/`SUBMITTED`/`GRADED`).
+* `LAB_MARK` should be a non-negative integer between 0 and 100 inclusive. Note that "00000012" will be treated as 12 i.e. we ignore zeros at the start.
+* Only valid combinations of `LAB_STATUS` and `LAB_MARK` will be accepted.
+  * If `LAB_MARK` is provided, there is no need to provide `LAB_STATUS`. However, if provided, `LAB_STATUS` must be `g`.
+  * If `LAB_STATUS` is `u` or `s`, `LAB_MARK` cannot be provided.
+  
+#### Removing a lab: `labrm`
+Removes a specified lab from every student in the TAddressBook.
 
 Format: `labrm l/LAB_NUMBER`
+
+* `LAB_NUMBER` must correspond to an existing lab in the TAddressBook.
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
@@ -243,7 +275,7 @@ Format: `labrm l/LAB_NUMBER`
 2. If a `Student` has a lab that has a missing or invalid `LabStatus`, it is loaded as an `UNSUBMITTED` lab or `GRADED` if `labMark` is present and valid.
 3. If a `Student` has a lab with a missing or invalid `labMark` but has a `LabStatus` of `GRADED`,  it is loaded as an `UNSUBMITTED` lab with `Unknown` mark.
 
-If the TAddressBook starts up with blank data, but the user expects there to be data, it means that there are  formatting issues in the data JSON due to editing by the user.
+If the TAddressBook starts up with blank data, but the user expects there to be data, it means that there are formatting issues in the data JSON due to editing by the user.
 In which case, if the user wants to fix the data JSON, the user should exit the app without using any commands that can modify data.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -257,7 +289,7 @@ In which case, if the user wants to fix the data JSON, the user should exit the 
 | **Exit**       | `exit`                                                                                                                                                  |
 | **Add**        | `add n/NAME e/EMAIL g/GITHUB tl/TELEGRAM_HANDLE i/STUDENT_ID [t/TAG]...` <br> e.g., `add n/James Ho e/jamesho@email.com g/jamesH t/jamesho i/A0123456T` |
 | **List**       | `list`                                                                                                                                                  |
-| **Edit**       | `edit INDEX [n/NAME] [e/EMAIL] [g/GITHUB] [tl/TELEGRAM_HANDLE] [i/STUDENT_ID] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
+| **Edit**       | `edit INDEX (n/NAME) (e/EMAIL) (g/GITHUB) (tl/TELEGRAM_HANDLE) (i/STUDENT_ID) (t/TAG)...`<br> e.g.,`edit 2 n/James Lee g/jamesHo`                       |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                              |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                     |
 | **Clear**      | `clear`                                                                                                                                                 |
@@ -266,5 +298,5 @@ In which case, if the user wants to fix the data JSON, the user should exit the 
 | **Add lab**    | `labadd l/LAB_NUMBER`                                                                                                                                   |
 | **Submit lab** | `labsub INDEX l/LAB_NUMBER`                                                                                                                             |
 | **Grade lab**  | `labgrad INDEX l/LAB_NUMBER m/LAB_MARK`                                                                                                                 |
-| **Edit lab**   | `labedit INDEX l/LAB_NUMBER [s/LAB_STATUS] [m/LAB_MARK]`                                                                                                |
+| **Edit lab**   | `labedit INDEX l/LAB_NUMBER (s/LAB_STATUS) (m/LAB_MARK)`                                                                                                |
 | **Remove lab** | `labrm l/LAB_NUMBER`                                                                                                                                    |

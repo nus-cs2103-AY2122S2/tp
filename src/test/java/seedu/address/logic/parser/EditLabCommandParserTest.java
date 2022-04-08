@@ -84,7 +84,7 @@ public class EditLabCommandParserTest {
 
         // invalid marks
         assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/e", LabMark.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/01", LabMark.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/0101", LabMark.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "m/-1", LabMark.MESSAGE_CONSTRAINTS);
     }
 
