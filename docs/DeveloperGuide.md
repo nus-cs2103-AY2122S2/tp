@@ -203,7 +203,7 @@ Step 1. The user executes command `charge 1 /m03` to compute amount chargeable t
 
 The following sequence diagram shows how the charge operation works:
 
-![ChargeSequenceDiagram](images/charge.png)
+![ChargeSequenceDiagram](images/ChargeSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ChargeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
