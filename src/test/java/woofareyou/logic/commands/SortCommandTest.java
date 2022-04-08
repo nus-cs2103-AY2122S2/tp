@@ -6,9 +6,9 @@ import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
+import woofareyou.model.PetBook;
 import woofareyou.model.UserPrefs;
 
 

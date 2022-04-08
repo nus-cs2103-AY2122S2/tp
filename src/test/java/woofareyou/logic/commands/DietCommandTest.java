@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
-import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
+import woofareyou.model.PetBook;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Diet;
 import woofareyou.model.pet.Pet;

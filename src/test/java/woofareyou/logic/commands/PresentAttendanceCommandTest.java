@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.util.AttendanceUtil;
 import woofareyou.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
-import woofareyou.model.PetBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
+import woofareyou.model.PetBook;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.PetBuilder;

@@ -2,8 +2,8 @@ package woofareyou.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import woofareyou.model.PetBook;
 import woofareyou.model.Model;
+import woofareyou.model.PetBook;
 
 /**
  * Clears WoofAreYou.
