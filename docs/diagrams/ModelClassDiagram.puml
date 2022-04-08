@@ -16,9 +16,23 @@ Class UniquePersonList
 Class Person
 Class Address
 Class Email
-Class Name
+Class FriendName
 Class Phone
 Class Tag
+Class UniqueLogList
+Class Log
+Class LogName
+
+Class PersonInsight
+Class Insight
+
+Class UniqueEventList
+Class Event
+Class DateTime
+Class EventName
+
+Class Description
+
 
 }
 
@@ -35,16 +49,30 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+
 UniquePersonList --> "~* all" Person
-Person *--> Name
+Person *--> FriendName
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Description
 Person *--> "*" Tag
+Person *--> "1" UniqueLogList
+UniqueLogList *--> "*" Log
+Log *--> LogName
+Log *--> Description
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *--> "1" UniqueEventList
+UniqueEventList --> "~* all" Event
+Event *-> Description
+Event *---> EventName
+Event *--> DateTime
+
+PersonInsight *--> Insight
+Insight ...> Event
+Insight ...> Person
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Event
+
 @enduml
