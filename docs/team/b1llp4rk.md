@@ -28,7 +28,7 @@ Given below are my contributions to the project.
       * **Highlights:** Consecutive whitespaces before and after the commas are ignored. This is an attempt to take into account that normal use of comma is followed by a space, and to be generous towards mistakes where multiple spaces are used.
 
 * **Bug Fixes**
-  * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills when editing multiple persons in batch, as UserGuide states. This is to prevent cases such as when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
+  * [Fixed `edit`](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/143) to ignore fields other than teams and skills when editing multiple persons in batch, as UserGuide states. This prevents such case when the user tries to edit multiple persons in HackNet to have the same phone number, which is likely to be invalid.
   * [Inability to redo some edit commands](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/156) was discovered while reinforcing integration test of edit command, and was fixed.
     * Commands that alter the data of HackNet has to commit the new changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
 
