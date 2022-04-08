@@ -12,7 +12,7 @@ public enum ClassGroupType {
     TUTORIAL("Tutorial");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Class Group Type should only be Lab, Recitation, Sectional or Tutorial.";
+            "Class type should only be Lab, Recitation, Sectional or Tutorial.";
     private final String value;
 
     ClassGroupType(String classGroupType) {
