@@ -285,6 +285,16 @@ Show a list of all assessments.
 Format: `list assessment`
 
 
+##### Filter assessments
+
+Show a list of all assessments belonging to a particular module.
+
+Format: `list assessment [m/MODULE_INDEX]`
+
+Examples:
+* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
+
+
 #### Delete an assessment: `delete assessment`
 
 Delete any assessment from TAssist by specifying its index.
@@ -298,16 +308,6 @@ Format: `delete assessment INDEX`
 
 Examples:
 * `list assessment` followed by `delete assessment 2` deletes the 2nd assessment in TAssist.
-
-
-##### Filter assessments
-
-Show a list of all assessments belonging to a particular module.
-
-Format: `list assessment [m/MODULE_INDEX]`
-
-Examples:
-* `list assessment m/1` displays the assessment(s) belonging to the 1st module shown when `list module` is run.
 
 
 ### Managing Classes
