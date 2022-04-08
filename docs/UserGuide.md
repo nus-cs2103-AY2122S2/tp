@@ -20,7 +20,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your MyGM. **Put the JAR file in an empty folder in which the app is allowed to create files (i.e., do not use a write-protected folder). You can copy it to your desktop or just leave it in your Downloads folder.**
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
+4. Double-click the file to start the app(Mac user are recommended to type `java -jar MyGM.jar` in terminal). The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
 The GUI is split into two parts: Players and Schedules. <br>
    ![Ui](images/Ui.png) ![Ui2](images/Ui2.png) <br>
 Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Schedule](images/UiSchedule.png)<br>
@@ -83,9 +83,20 @@ Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_
 * Adds a player with the specified attributes to the player list in MyGM.
 * The first character of every word in `NAME` are recommended to be capitalized. For example:`John Doe`
 * `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
-* The new `NAME` must not exist in MyGM already.
-* The new `JERSEY_NUMBER` must not exist in MyGM already.
-* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`
+* `NAME` must not exist in MyGM already.
+* `JERSEY_NUMBER` should be an integer between 0 and 99.
+* `JERSEY_NUMBER` must not exist in MyGM already.
+* `WEIGHT` should be an integer between 1 and 200.
+* `HEIGHT` should be an integer between 1 and 300.
+* `PHNOE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+* `EMAIL_ADDRESS` should be of the format local-part@domain and adhere to the following constraints:
+  * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
+  * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+    - End with a domain label at least 2 characters long
+    - Have each domain label start and end with alphanumeric characters
+    - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`.
 
 Examples:
 * `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of John Doe, jersey number of 3, position of PG, weight of 69kg, height of 188cm, handphone number of 98765432
@@ -97,8 +108,8 @@ and email of johnd@example.com to the player list.`
 Format: `add L/ n/LINEUP_NAME`
 * 
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM. 
-* The new `LINEUP_NAME` must not exist in MyGM already.
 * `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
+* The new `LINEUP_NAME` must not exist in MyGM already.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
@@ -284,8 +295,21 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 * Edit the details of a player from the player list.
 * If any fields are specified, it will change accordingly.
 * Multiple fields can be changed at once.
-* The case-sensitive new `NAME` must not exist in MyGM already.
-* The new `JERSEY_NUMBER` must not exist in MyGM already.
+* The new `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
+* The new `NAME` must not exist in MyGM already.
+* `JERSEY_NUMBER` should be an integer between 0 and 99.
+* `JERSEY_NUMBER` must not exist in MyGM already.
+* `WEIGHT` should be an integer between 1 and 200.
+* `HEIGHT` should be an integer between 1 and 300.
+* `PHNOE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+* `EMAIL_ADDRESS` should be of the format local-part@domain and adhere to the following constraints:
+    * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+      The domain name must:
+        - End with a domain label at least 2 characters long
+        - Have each domain label start and end with alphanumeric characters
+        - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`.
 
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
