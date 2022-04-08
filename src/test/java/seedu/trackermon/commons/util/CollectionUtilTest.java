@@ -12,7 +12,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests for {@code CollectionUtil}.
+ */
 public class CollectionUtilTest {
+
+    /**
+     * Tests the requireAllNonNull method with an argument list.
+     */
     @Test
     public void requireAllNonNullVarargs() {
         // no arguments
@@ -44,6 +51,9 @@ public class CollectionUtilTest {
         assertNullPointerExceptionNotThrown(containingNull, new Object());
     }
 
+    /**
+     * Tests the requireAllNonNull method with a collection list.
+     */
     @Test
     public void requireAllNonNullCollection() {
         // lists containing nulls in the front
@@ -73,6 +83,9 @@ public class CollectionUtilTest {
         assertNullPointerExceptionNotThrown(Arrays.asList(containingNull, new Object()));
     }
 
+    /**
+     * Tests the isAnyNonNull method.
+     */
     @Test
     public void isAnyNonNull() {
         assertFalse(CollectionUtil.isAnyNonNull());

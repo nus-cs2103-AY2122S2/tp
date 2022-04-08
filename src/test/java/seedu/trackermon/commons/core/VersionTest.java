@@ -6,8 +6,14 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests for {@code Version}.
+ */
 public class VersionTest {
 
+    /**
+     * Tests acceptable version numbers being parsed.
+     */
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
         verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
@@ -15,11 +21,17 @@ public class VersionTest {
         verifyVersionParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
     }
 
+    /**
+     * Tests invalid version numbers being parsed.
+     */
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
     }
 
+    /**
+     * Tests getting major, minor, patch and isEarlyAccess numbers and statuses.
+     */
     @Test
     public void versionConstructor_correctParameter_valueAsExpected() {
         Version version = new Version(19, 10, 20, true);
@@ -30,6 +42,9 @@ public class VersionTest {
         assertEquals(true, version.isEarlyAccess());
     }
 
+    /**
+     * Tests the string of a default {@code Version} object.
+     */
     @Test
     public void versionToString_validVersion_correctStringRepresentation() {
         // boundary at 0
@@ -45,6 +60,9 @@ public class VersionTest {
         assertEquals("V100.100.100ea", version.toString());
     }
 
+    /**
+     * Tests the compareTo method of {@code Version}.
+     */
     @Test
     public void versionComparable_validVersion_compareToIsCorrect() {
         Version one;
@@ -105,6 +123,9 @@ public class VersionTest {
         assertTrue(one.compareTo(another) < 0);
     }
 
+    /**
+     * Tests the hash method of {@code Config}.
+     */
     @Test
     public void versionComparable_validVersion_hashCodeIsCorrect() {
         Version version = new Version(100, 100, 100, true);
@@ -114,6 +135,9 @@ public class VersionTest {
         assertEquals(1010010010, version.hashCode());
     }
 
+    /**
+     * Tests the equals method of {@code Version}.
+     */
     @Test
     public void versionComparable_validVersion_equalIsCorrect() {
         Version one;
