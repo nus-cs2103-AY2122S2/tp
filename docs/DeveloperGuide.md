@@ -679,6 +679,9 @@ More information on usage: [add command](UserGuide.html#add-student-contact-info
 
 ### Deleting a student contact
 
+Command: `delete` <br>
+More information on usage: [delete command](UserGuide.html#delete-student-contact-information-delete)
+
 1. Deleting a student contact while all student contacts are being shown.
 
    1. Prerequisites: List all student contacts using the `list` command.
@@ -701,11 +704,31 @@ More information on usage: [add command](UserGuide.html#add-student-contact-info
 
 ### Finding student contacts by attributes
 
+Command: `find` <br>
+More information on usage: [find command](UserGuide.html#locating-student-contacts-by-attributes-find)
+
 1. Finding a student contact while all student contacts are being shown.
     
     1. Prerequisites: List all student contacts using the `list` command. 
    
-    2. Test case: `find n/`
+    2. Test case: `find n/Alex` <br>
+       Expected: All student contacts with the word `Alex` in the name shown.
+   
+    3. Test case: `find p/99272758` <br>
+       Expected: A student contact with the phone number `99272758`.
+   
+    4. Test case: `find e/berniceyu@u.nus.edu` <br>
+       Expected: A student contact with the email `berniceyu@u.nus.edu`.
+   
+    5. Test case: `find a/computer science` <br>
+       Expected: All student contacts with the word `computer` and/or `science` in their academic major (e.g. computer science, science, material science).
+   
+    6. Test case: `find t/friends` <br>
+        Expected: All student contacts with the tag `friends`.
+
+    7. Other incorrect find commands to try: `find`, `find n/` etc. <br>
+       Expected: No student contacts filtered. Error details shown in the error message.
+
 2. Finding a student contact while the student contact list is being filtered.
 
 ### Saving data
