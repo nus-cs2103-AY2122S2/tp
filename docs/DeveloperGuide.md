@@ -343,11 +343,8 @@ Additionally, there is a static final static message to be displayed to the user
 
 
 **Sequence Diagram of Clear Feature is shown below:**
-![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
+<img src='images/ClearSequenceDiagram.png' width="550" height="300">
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SummariseCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
 
 <br>
 
