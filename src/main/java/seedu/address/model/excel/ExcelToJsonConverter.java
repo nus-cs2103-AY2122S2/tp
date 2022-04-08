@@ -82,10 +82,11 @@ public class ExcelToJsonConverter {
      * @param workbook
      * @param excelData
      */
-    private void setRowColData(int numOfSheet, Workbook workbook, ObjectNode excelData) throws NullPointerException {
+    private void setRowColData(int numOfSheet, Workbook workbook, ObjectNode excelData) {
         for (int i = 0; i < numOfSheet; i++) {
             Sheet sheet = workbook.getSheetAt(i);
             String sheetName = sheet.getSheetName();
+
             List<String> headers = new ArrayList<String>();
             ArrayNode sheetData = mapper.createArrayNode();
             // Reading each row of the sheet
