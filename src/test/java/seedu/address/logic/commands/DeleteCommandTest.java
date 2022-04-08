@@ -119,20 +119,6 @@ public class DeleteCommandTest {
     }
 
     private void showPerson(Model model) {
-        model.updateFilteredCompanyList(p -> false);
-        model.updateFilteredEventList(p -> false);
-        model.updateFilteredPersonList(p -> true);
-    }
-
-    private void showEvent(Model model) {
-        model.updateFilteredCompanyList(p -> false);
-        model.updateFilteredEventList(p -> true);
-        model.updateFilteredPersonList(p -> false);
-    }
-
-    private void showCompany(Model model) {
-        model.updateFilteredCompanyList(p -> true);
-        model.updateFilteredEventList(p -> false);
-        model.updateFilteredPersonList(p -> false);
+        model.showPersonList(Model.PREDICATE_SHOW_UNARCHIVED_ONLY);
     }
 }
