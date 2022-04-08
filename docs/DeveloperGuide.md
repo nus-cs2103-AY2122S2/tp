@@ -193,7 +193,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
     </div> 
 
 5. The `AddCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId)`
+   into `ParserUtil#parseStudentId(String studentId)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -260,7 +260,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
     </div> 
 
 5. The `DeleteCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId)`
+   into `ParserUtil#parseStudentId(String studentId)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -318,7 +318,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
     </div>
 
 5. The `DeleteModuleCommandParser` will pass the moduleCode input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseModuleCode(String moduleCode)`
+   into `ParserUtil#parseModuleCode(String moduleCode)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -380,7 +380,7 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
      Both `StudentId` and `Index` must be provided.   
     </div>
    
-    1. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId).`
+    1. The `indexOrStudentIdGiven` method will pass the `studentId` input (found in the `ArgumentMultimap`) into `ParserUtil#parseStudentId(String studentId)`.
    
     <div markdown="span" class="alert alert-info">:information_source: 
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -392,7 +392,7 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     If the argument is valid, a new `StudentId` object will be created and returned to the `DeleteTaskCommandParser`.
     If the argument is not valid, a `ParseException` will be thrown.
     4. The `indexOrStudentIdGiven` method will pass the index input (found in the `ArgumentMultimap`) into
-       `ParserUtil#parseIndex(String oneBasedIndex).`
+       `ParserUtil#parseIndex(String oneBasedIndex)`.
        
     <div markdown="span" class="alert alert-info">:information_source: 
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -424,7 +424,7 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
     If the argument is valid, a new `ModuleCode` object will be created and returned to the `DeleteTaskCommandParser`.
     If the argument is not valid, a `ParseException` will be thrown.
     4. The `moduleCodeOrTaskNameGiven` method will pass the taskName input (found in the `ArgumentMultimap`) into 
-       `ParserUtil#parseTask(String task).`
+       `ParserUtil#parseTask(String task)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
     <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -457,7 +457,7 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
    4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
       updates the filter of the person list to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
    
-10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`
+10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
 
 ![DeleteTaskCommandSequenceDiagram-1](images/DeleteTaskCommandSequenceDiagram-1.png)
 
@@ -486,7 +486,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
    </div> 
 
 5. The `AssignCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId).`
+   into `ParserUtil#parseStudentId(String studentId)`.
 
    <div markdown="span" class="alert alert-info">:information_source:
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -506,7 +506,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
     </div>
 
 8. The `AssignCommandParser` will pass the task input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseTask(String task).`
+   into `ParserUtil#parseTask(String task)`.
 
    <div markdown="span" class="alert alert-info">:information_source:
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -531,7 +531,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
     
 14. If `StudentId` is used, `UniquePersonList#assignTaskToPerson(StudentId studentId, Task task)` method is called.
     If `ModuleCode` is used, `UniquePersonList#assignTaskToAllInModule(ModuleCode moduleCoded, Task task)` is called.
-    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode` . 
+    This will iterate through each `Person` object and check for matching `studentId` or `moduleCode`. 
 
    <div markdown="span" class="alert alert-info">:information_source:
    <b>Note:</b> 
@@ -581,7 +581,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
    </div>
 
 5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId).`
+   into `ParserUtil#parseStudentId(String studentId)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -642,7 +642,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
     </div> 
 
 5. The `FindCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
-   into `ParserUtil#parseStudentId(String studentId)`
+   into `ParserUtil#parseStudentId(String studentId)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
    <b>Note:</b> A `NullPointerException` will be thrown if the supplied string argument is `null`.
@@ -711,7 +711,7 @@ The `mark` command marks a specific undone task as done for a particular student
     <b>Note:</b> A `CommandException` will be thrown if the supplied `index` or `studentId` is invalid, or if the task is already marked as completed.
     </div>
     
-14. Lastly, the `MarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
+14. Lastly, the `MarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
 The following sequence diagrams shows how the mark command works:
 
@@ -755,7 +755,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
     <b>Note:</b> A `CommandException` will be thrown if the supplied `index` or `studentId` is invalid, or if the task is already marked as not complete.
     </div>
 
-14. Lastly, the `UnmarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`
+14. Lastly, the `UnmarkCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
 The following sequence diagrams shows how the unmark command works:
 
@@ -772,7 +772,7 @@ The `clear` command deletes all students currently stored in TAPA. During the ex
 #### Implementation
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
-3. The `LogicManager` will then call `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`
+3. The `LogicManager` will then call `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
 5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
     <div markdown="span" class="alert alert-info">:information_source:
@@ -1064,27 +1064,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. A student with the same matriculation number already exist.
+* 1a. A student with the same matriculation number already exists.
 
-    * 1a1. TAPA shows an error message
+    * 1a1. TAPA shows an error message.
 
         Use case ends.
 
 * 1b. The matriculation number of the student is not in the input command.
 
-    * 1b1. TAPA shows an error message
+    * 1b1. TAPA shows an error message.
 
         Use case ends.
 
 * 1c. The name of the student is not in the input command.
 
-    * 1c1. TAPA shows an error message
+    * 1c1. TAPA shows an error message.
 
         Use case ends.
 
 * 1d. The module code that the student is currently taking is not in the input command.
 
-    * 1d1. TAPA shows an error message
+    * 1d1. TAPA shows an error message.
 
         Use case ends.
 
@@ -1202,7 +1202,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
