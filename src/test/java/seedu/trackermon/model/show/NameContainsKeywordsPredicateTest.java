@@ -11,8 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Tests that a {@code Show}'s {@code Name} matches any of the keywords given.
+ */
 public class NameContainsKeywordsPredicateTest {
 
+    /**
+     * Tests whether two NameContainsKeywordsPredicates are equal.
+     */
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -38,6 +44,9 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
+    /**
+     * Tests whether NameContainsKeywordsPredicate contains show name keywords.
+     */
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
@@ -58,6 +67,9 @@ public class NameContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new ShowBuilder().withName("Another Erased").build()));
     }
 
+    /**
+     * Tests whether NameContainsKeywordsPredicate does not contain show name keywords.
+     */
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords

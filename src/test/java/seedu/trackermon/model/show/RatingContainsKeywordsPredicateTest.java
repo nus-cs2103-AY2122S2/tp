@@ -11,8 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Tests that a {@code Show}'s {@code Rating} matches any of the keywords given.
+ */
 public class RatingContainsKeywordsPredicateTest {
 
+    /**
+     * Tests whether two RatingContainsKeywordsPredicates are equal.
+     */
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -40,6 +46,9 @@ public class RatingContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
+    /**
+     * Tests whether RatingContainsKeywordsPredicate contains show rating keywords.
+     */
     @Test
     public void test_ratingContainsKeywords_returnsTrue() {
         // One keyword
@@ -52,6 +61,9 @@ public class RatingContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new ShowBuilder().withRating("1").build()));
     }
 
+    /**
+     * Tests whether RatingContainsKeywordsPredicate does not contain show rating keywords.
+     */
     @Test
     public void test_ratingDoesNotContainKeywords_returnsFalse() {
         // Zero keywords

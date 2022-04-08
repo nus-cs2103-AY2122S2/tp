@@ -11,8 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Tests that a {@code Show}'s {@code Tag} matches any of the keywords given.
+ */
 public class TagsContainsKeywordsPredicateTest {
 
+    /**
+     * Tests whether two TagsContainsKeywordsPredicates are equal.
+     */
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -40,6 +46,9 @@ public class TagsContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
+    /**
+     * Tests whether TagsContainsKeywordsPredicate contains show tag keywords.
+     */
     @Test
     public void test_tagContainsKeywords_returnsTrue() {
         // One keyword
@@ -56,6 +65,9 @@ public class TagsContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new ShowBuilder().withTags("anime").build()));
     }
 
+    /**
+     * Tests whether TagsContainsKeywordsPredicate does not contain show tag keywords.
+     */
     @Test
     public void test_tagDoesNotContainKeywords_returnsFalse() {
         // Zero keywords

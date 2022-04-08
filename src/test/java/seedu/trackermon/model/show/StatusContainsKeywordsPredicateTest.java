@@ -11,8 +11,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.trackermon.testutil.ShowBuilder;
 
+/**
+ * Tests that a {@code Show}'s {@code Status} matches any of the keywords given.
+ */
 public class StatusContainsKeywordsPredicateTest {
 
+    /**
+     * Tests whether two StatusContainsKeywordsPredicates are equal.
+     */
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
@@ -40,6 +46,9 @@ public class StatusContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
+    /**
+     * Tests whether StatusContainsKeywordsPredicate contains show status keywords.
+     */
     @Test
     public void test_statusContainsKeywords_returnsTrue() {
         // One keyword
@@ -56,6 +65,9 @@ public class StatusContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new ShowBuilder().withStatus("completed").build()));
     }
 
+    /**
+     * Tests whether StatusContainsKeywordsPredicate does not contain show status keywords.
+     */
     @Test
     public void test_statusDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
