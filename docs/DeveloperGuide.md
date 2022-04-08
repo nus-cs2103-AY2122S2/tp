@@ -409,7 +409,7 @@ The Levenshtein distance is calculated using the `editDistance(String str1, Stri
     * Pros: Less computationally intensive and a lot easier to implement.
     * Cons: The user will not have a choice of suggestions and will not know what they'll get (blackbox).
 
-### Command History
+### Command history
 
 #### Implementation
 
@@ -502,32 +502,50 @@ Store the history using two lists, and store edits for every command. If the use
 
 **Target user profile**:
 
-* has a need to manage a significant number of clients
-* wants to be able to mail large groups of people
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+A small business owner or freelancer that:
+1. has a need to manage not more than 1000 clients.
+2. has a need to keep track of transactions with clients.
+3. prefers desktop applications over other types.
+4. can type fast.
+5. prefers keyboard interactions to mouse interactions.
+6. is reasonably comfortable using CLI apps.
 
-**Value proposition**: manage clients faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+CinnamonBun is a free, open source, purpose built application that handles client and transaction information easily.
+CinnamonBun helps small businesses and freelancers on a budget to get up and running quickly. 
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
-| Priority | As a …​        | I want to …​                                    | So that I can…​                                             |
-|----------|----------------|-------------------------------------------------|-------------------------------------------------------------|
-| `* * *`  | business owner | list all my clients information                 | see my clients information.                                 |
-| `* * *`  | business owner | add a new client to CinnamonBun                 |                                                             |
-| `* * *`  | business owner | edit a client’s information                     | keep my client’s information updated.                       |
-| `* * *`  | business owner | delete a client information                     | remove those who are no longer customers.                   |
-| `* *`    | business owner | find a client based on keywords                 | easily find a specific client or group of clients.          |
- | `* * *`  | business owner | store a transaction of a particular client      | easily keep track of unpaid transactions                    |
-| `* * `   | business owner | sort my clients based on certain field          | easily sort and see the customers based on the field I want |
-| `* * `   | business owner | undo previous modifications made to CinnamonBun | prevent mistakes made to the clients' list data             |
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​                                               | So that I can…​                                                         |
+|----------|---------|------------------------------------------------------------|-------------------------------------------------------------------------|
+| `HIGH`   | user    | add new clients                                            | keep my client list updated.                                            |
+| `HIGH`   | user    | delete clients                                             | remove those who are no longer my clients.                              |
+| `HIGH`   | user    | edit client information                                    | keep my clients' information updated.                                   |
+| `HIGH`   | user    | list all my clients                                        | see all my client's information.                                        |
+| `HIGH`   | user    | find client via keywords                                   | easily find specific clients.                                           |
+| `MEDIUM` | user    | delete clients via filtered keywords                       | easily manipulate and delete people from CinnamonBun.                   |
+| `MEDIUM` | user    | add membership to clients                                  | have a rewards program for my clients.                                  |
+| `MEDIUM` | user    | sort my clients                                            | sort the clients based on fields I want.                                |
+| `LOW`    | user    | store my client's birthday                                 | give them discounts on their birthday.                                  |
+| `LOW`    | user    | store my client's age                                      | know if I can sell them age restricted items.                           |
+| `HIGH`   | user    | add client transaction                                     | store the transaction history of my clients.                            |
+| `MEDIUM` | user    | chain multiple commands                                    | execute multiple commands at once.                                      |
+| `LOW`    | user    | list all clients who are members.                          |                                                                         |
+| `LOW`    | user    | assign different tiers of memberships to my clients.       |                                                                         |
+| `MEDIUM` | user    | undo previous modifications made to the data               | undo mistakes.                                                          |
+| `MEDIUM` | user    | have to ability to auto-complete/auto-correct the commands | type faster.                                                            |
+| `MEDIUM` | user    | append data fields and tags to clients                     | append fields and tags to a client without editing the entire client.   |
+| `MEDIUM` | user    | remove data fields and tags from clients                   | remove fields and tags from a client without editing the entire client. |
+| `HIGH`   | user    | be able to re-input my previous commands                   | execute similar commands without having to retype the whole command.    |
+| `HIGH`   | user    | switch between light and dark themes.                      |                                                                         |
+| `HIGH`   | user    | list a client's transactions                               | see all the transactions associated with a particular client.           |
+| `MEDIUM` | user    | flag a transaction as paid or unpaid                       | know if a transaction has been paid.                                    |
+| `LOW`    | user    | click on a client to see the list of their transactions    | see a client's transactions without typing.                             |
+| `HIGH`   | user    | remove memberships from clients                            | remove a client from my rewards program.                                |
 
 ### Use cases
 
