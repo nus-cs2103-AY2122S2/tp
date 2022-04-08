@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
@@ -47,19 +48,26 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.checkStudentListIndex(studentIndex)) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "student", studentIndex.getOneBased()));
+            String errorMessage = String.format(MESSAGE_NO_SUCH_ID, "student", studentIndex.getOneBased());
+            throw new CommandException(errorMessage);
         }
         if (model.checkLessonListIndex(lessonIndex)) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonIndex.getOneBased()));
+            String errorMessage = String.format(MESSAGE_NO_SUCH_ID, "lesson", lessonIndex.getOneBased());
+            throw new CommandException(errorMessage);
 
         }
         Lesson lesson = model.getFilteredLessonList().get(lessonIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
-        if (student.isEnrolledIn(lesson) || lesson.hasAlreadyAssigned(student)) {
-            throw new CommandException(String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName()));
+
+        boolean ifAlreadyEnrolled = student.isEnrolledIn(lesson) || lesson.hasAlreadyAssigned(student);
+        if (ifAlreadyEnrolled) {
+            String errorMessage = String.format(MESSAGE_ALREADY_ENROLLED, student.getName(), lesson.getName());
+            throw new CommandException(errorMessage);
         }
+
         model.setSelectedLesson(lesson);
         model.updateAssignment(student, lesson);
+
         String commandResultMessage = String.format(MESSAGE_SUCCESS, student.getName(), lesson.getName());
         return new CommandResult(commandResultMessage, InfoPanelTypes.LESSON, ViewTab.LESSON);
     }

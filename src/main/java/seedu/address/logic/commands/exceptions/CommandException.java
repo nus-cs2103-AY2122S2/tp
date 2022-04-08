@@ -3,7 +3,7 @@ package seedu.address.logic.commands.exceptions;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ViewTab;
+import seedu.address.logic.commands.misc.ViewTab;
 
 /**
  * Represents an error which occurs during execution of a {@link Command}.

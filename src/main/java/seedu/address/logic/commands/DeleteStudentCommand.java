@@ -38,12 +38,14 @@ public class DeleteStudentCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        boolean isIndexOutOfBounds = targetIndex.getZeroBased() >= lastShownList.size();
+        if (isIndexOutOfBounds) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudent(studentToDelete);
+
         boolean shouldClearInfoPanel = model.shouldClearStudentInfoPanelOnDelete(studentToDelete);
         String commandResultMessage = String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
         if (shouldClearInfoPanel) {

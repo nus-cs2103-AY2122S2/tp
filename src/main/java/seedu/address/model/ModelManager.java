@@ -44,6 +44,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
         filteredLessons = new FilteredList<>(this.lessonBook.getLessonList());
+        currentInfoPanel = InfoPanelTypes.EMPTY;
     }
 
     // TODO: delete this constructor after updating testcases (creating TypicalLessons class etc)

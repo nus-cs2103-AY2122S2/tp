@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 
@@ -38,7 +39,8 @@ public class ViewLessonInfoCommand extends Command {
         requireNonNull(model);
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        boolean isIndexOutOfBounds = targetIndex.getZeroBased() >= lastShownList.size();
+        if (isIndexOutOfBounds) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 

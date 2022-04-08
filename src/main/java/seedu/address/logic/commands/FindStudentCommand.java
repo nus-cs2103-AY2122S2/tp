@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.student.NameOrTagsContainsKeywordsPredicate;
 
@@ -31,9 +32,9 @@ public class FindStudentCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()),
-                ViewTab.STUDENT);
+        String resultMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW,
+                model.getFilteredStudentList().size());
+        return new CommandResult(resultMessage, ViewTab.STUDENT);
     }
 
     @Override

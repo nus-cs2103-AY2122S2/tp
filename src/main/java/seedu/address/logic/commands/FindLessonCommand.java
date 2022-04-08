@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.LessonNameOrSubjectContainsKeywordsPredicate;
 
@@ -32,9 +33,9 @@ public class FindLessonCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredLessonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredLessonList().size()),
-                ViewTab.LESSON);
+        String resultMessage = String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW,
+                model.getFilteredLessonList().size());
+        return new CommandResult(resultMessage, ViewTab.LESSON);
     }
 
     @Override

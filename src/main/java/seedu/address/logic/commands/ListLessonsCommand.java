@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.model.Model;
 
 public class ListLessonsCommand extends Command {

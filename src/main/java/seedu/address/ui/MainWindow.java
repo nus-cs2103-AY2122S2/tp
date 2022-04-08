@@ -20,9 +20,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ViewTab;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.misc.InfoPanelTypes;
+import seedu.address.logic.commands.misc.ViewTab;
 import seedu.address.logic.inputhistory.InputHistoryResult;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
@@ -52,7 +52,6 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private LessonListPanel lessonListPanel;
     private StudentListPanel studentListPanel;
-    //    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private InfoPanel infoPanel;
@@ -92,7 +91,6 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
 
         helpWindow = new HelpWindow();
@@ -145,12 +143,23 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         updateAndPopulateLessonList();
         updateAndPopulateStudentList();
+
+        createResultDisplay();
+        createStatusBarFooter();
+        createCommandBox();
+    }
+
+    private void createResultDisplay() {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+    }
 
+    private void createStatusBarFooter() {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudentBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+    }
 
+    private void createCommandBox() {
         CommandBox commandBox = new CommandBox(this::executeCommand, this::getPreviousUserInput,
                 this::getNextUserInput);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -189,11 +198,18 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
-        logic.setGuiSettings(guiSettings);
+        saveGuiSettings();
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    private void saveGuiSettings() {
+        double windowWidth = primaryStage.getWidth();
+        double windowHeight = primaryStage.getHeight();
+        int windowXPos = (int) primaryStage.getX();
+        int windowYPos = (int) primaryStage.getY();
+        GuiSettings guiSettings = new GuiSettings(windowWidth, windowHeight, windowXPos, windowYPos);
+        logic.setGuiSettings(guiSettings);
     }
 
     /**
@@ -267,7 +283,6 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleStudentTab() {
-        // updateAndPopulateStudentList();
         listPane.getSelectionModel().select(studentTab);
     }
 
@@ -275,7 +290,6 @@ public class MainWindow extends UiPart<Stage> {
      * Toggles to student tab.
      */
     public void toggleLessonTab() {
-        // updateAndPopulateLessonList();
         listPane.getSelectionModel().select(lessonTab);
     }
 
@@ -357,12 +371,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void refreshInfoPanel() {
+        requireNonNull(infoPanel);
         if (infoPanel instanceof RecurringLessonInfoPanel || infoPanel instanceof LessonInfoPanel) {
             Lesson lesson = logic.getSelectedLesson();
             populateInfoPanelWithLesson(lesson);
-        } else {
+        } else if (infoPanel instanceof StudentInfoPanel) {
             Student student = logic.getSelectedStudent();
             populateInfoPanelWithStudent(student);
+        } else {
+            logger.severe("Something went wrong when refreshing the InfoPanel");
+            assert false;
         }
     }
 
@@ -386,6 +404,7 @@ public class MainWindow extends UiPart<Stage> {
             populateInfoPanel(lessonInfoPanel);
             return;
         }
+        logger.severe("Something went wrong when populating InfoPanel with Lesson");
         assert false;
     }
 
