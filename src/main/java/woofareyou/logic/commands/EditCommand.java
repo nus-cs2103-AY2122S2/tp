@@ -29,7 +29,7 @@ import woofareyou.model.pet.Phone;
 import woofareyou.model.tag.Tag;
 
 /**
- * Edits the details of an existing pet in the address book.
+ * Edits the details of an existing pet in WoofAreYou.
  */
 public class EditCommand extends Command {
 
