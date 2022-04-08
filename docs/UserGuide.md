@@ -372,6 +372,10 @@ After undo (where we undo command `delete 1`):
 
 ![result after undo](images/undo2UG.png)
 
+Note:
+* Undo only works on add, delete, edit, clear, addTag, deleteTag, editTag commands and
+will not work for addp, deletep, editp and prioList commands.
+
 ------------------------------------------------------------------------------------
 ### Redo previous command: `redo`
 Redoes undone command
@@ -385,6 +389,10 @@ Before redo (we undo `delete 1`):
 After redo (where we redo `delete 1`):
 
 ![result after redo](images/redo2UG.png)
+
+Note:
+* Redo only works on commands that are undo-able, which are: add, delete, edit, clear, addTag, 
+deleteTag, editTag commands.
 
 ------------------------------------------------------------------------------------
 ### Clearing all entries : `clear`
