@@ -591,13 +591,6 @@ If your changes to the data file makes its format invalid, UniBook will discard 
 
 # Command summary
 
-#bulb-edit-groups-group-name-andor-meeting-times
-#bulb-edit-key-event-of-modules-type-andor-date-time
-#bulb-edit-modules-name-andor-module-code
-#bulb-edit-persons-name-phone-email-office-andor-tag
-
-
-
 Action | Format
 --------|------------------
 **Add** | **Any View** <br> `add o/module n/MODULENAME m/MODULECODE [ke/KEYEVENTTYPE dt/DATETIME]…​`[(example)](#bulb-add-a-module) <br> `add o/group n/GROUPNAME m/MODULECODE [dt/DATETIME]…​`[(example)](#bulb-add-a-group) <br> `add o/student n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [m/MODULECODE [g/GROUPNAME]]…​`[(example)](#bulb-add-a-student) <br> `add o/professor n/NAME [p/PHONE_NUMBER] [e/EMAIL] [of/OFFICE] [t/TAG]…​ [m/MODULECODE]…​`[(example)](#bulb-add-a-professor) <br> `add o/event m/MODULECODE ke/KEYEVENTTYPE dt/DATETIME`[(example)](#bulb-add-an-event) <br> `add o/meeting m/MODULECODE g/GROUPNAME dt/DATETIME…​`[(example)](#bulb-add-a-meeting)
