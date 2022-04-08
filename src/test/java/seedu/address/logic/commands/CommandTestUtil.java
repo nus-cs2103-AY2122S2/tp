@@ -23,6 +23,8 @@ import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Person;
 import seedu.address.model.entry.predicate.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditCompanyDescriptorBuilder;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -32,23 +34,40 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_COMPANY_AMY = "Big Bank";
-    public static final String VALID_COMPANY_BOB = "Janice Street";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
+
+    public static final String VALID_COMPANY_BIG_BANK = "Big Bank";
+    public static final String VALID_COMPANY_JANICE_STREET = "Janice Street";
+
+    public static final String VALID_EVENT_INTERVIEW_BIG_BANK = "Big Bank Interview";
+    public static final String VALID_EVENT_INTERVIEW_JANICE_STREET = "Janice Street Interview";
+
+    public static final String VALID_PHONE_A = "11111111";
+    public static final String VALID_PHONE_B = "22222222";
+    public static final String VALID_EMAIL_A = "atesting@example.com";
+    public static final String VALID_EMAIL_B = "btesting@example.com";
+    public static final String VALID_ADDRESS_A = "123 Jurong South Street";
+    public static final String VALID_ADDRESS_B = "456 South West Orchard";
+    public static final String VALID_DATE_A = "2022-03-03";
+    public static final String VALID_DATE_B = "2022-05-05";
+    public static final String VALID_TIME_A = "12:00";
+    public static final String VALID_TIME_B = "13:30";
+    public static final String VALID_LOCATION_A = "zoom";
+    public static final String VALID_LOCATION_B = "meet";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_INTERVIEW = "interview";
+    public static final String VALID_TAG_APPLIED = "applied";
+    public static final String VALID_TAG_TECHNICAL = "technical";
+    public static final String VALID_TAG_BEHAVIOURAL = "behavioural";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_AMY;
-    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_BIG_BANK;
+    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_JANICE_STREET;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_A;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_B;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_A;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_B;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -64,13 +83,31 @@ public class CommandTestUtil {
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditCompanyCommand.EditCompanyDescriptor DESC_BIG_BANK;
+    public static final EditCompanyCommand.EditCompanyDescriptor DESC_JANICE_STREET;
+
+    public static final EditEventCommand.EditEventDescriptor DESC_INTERVIEW_BIG_BANK;
+    public static final EditEventCommand.EditEventDescriptor DESC_INTERVIEW_JANICE_STREET;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCompanyName(VALID_COMPANY_AMY)
+                .withPhone(VALID_PHONE_A).withEmail(VALID_EMAIL_A).withCompanyName(VALID_COMPANY_BIG_BANK)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withCompanyName(VALID_COMPANY_BOB)
+                .withPhone(VALID_PHONE_B).withEmail(VALID_EMAIL_B).withCompanyName(VALID_COMPANY_JANICE_STREET)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_BIG_BANK = new EditCompanyDescriptorBuilder().withName(VALID_COMPANY_BIG_BANK)
+                .withEmail(VALID_EMAIL_A).withPhone(VALID_PHONE_A).withEmail(VALID_EMAIL_A)
+                .withAddress(VALID_ADDRESS_A).withTags(VALID_TAG_APPLIED).build();
+        DESC_JANICE_STREET = new EditCompanyDescriptorBuilder().withName(VALID_COMPANY_JANICE_STREET)
+                .withEmail(VALID_EMAIL_B).withPhone(VALID_PHONE_B).withEmail(VALID_EMAIL_B)
+                .withAddress(VALID_ADDRESS_B).withTags(VALID_TAG_INTERVIEW).build();
+        DESC_INTERVIEW_BIG_BANK = new EditEventDescriptorBuilder().withName(VALID_EVENT_INTERVIEW_BIG_BANK)
+                .withCompanyName(VALID_COMPANY_BIG_BANK).withDate(VALID_DATE_A)
+                .withTime(VALID_TIME_A).withLocation(VALID_LOCATION_A).withTags(VALID_TAG_TECHNICAL).build();
+        DESC_INTERVIEW_JANICE_STREET = new EditEventDescriptorBuilder().withName(VALID_EVENT_INTERVIEW_JANICE_STREET)
+                .withCompanyName(VALID_COMPANY_JANICE_STREET).withDate(VALID_DATE_B)
+                .withTime(VALID_TIME_B).withLocation(VALID_LOCATION_B).withTags(VALID_TAG_BEHAVIOURAL).build();
     }
 
     /**
