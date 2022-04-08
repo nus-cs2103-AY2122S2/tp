@@ -170,9 +170,7 @@ public class ParserUtil {
      */
     public static PriceRange parsePriceRange(String startPrice, String endPrice) throws ParseException {
         requireAllNonNull(startPrice, endPrice);
-        Price parsedStartPrice = parsePrice(startPrice);
-        Price parsedEndPrice = parsePrice(endPrice);
-        if (!PriceRange.isValidPriceRange(parsedStartPrice, parsedEndPrice)) {
+        if (!PriceRange.isValidPriceRange(startPrice, endPrice)) {
             throw new ParseException(PriceRange.MESSAGE_CONSTRAINTS);
         }
         return new PriceRange(startPrice, endPrice);

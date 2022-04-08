@@ -7,6 +7,12 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
+import static seedu.ibook.logic.parser.ParserUtil.parseDescription;
+import static seedu.ibook.logic.parser.ParserUtil.parseDiscountRate;
+import static seedu.ibook.logic.parser.ParserUtil.parseDiscountStart;
+import static seedu.ibook.logic.parser.ParserUtil.parseName;
+import static seedu.ibook.logic.parser.ParserUtil.parsePrice;
 
 import seedu.ibook.logic.commands.product.UpdateAllCommand;
 import seedu.ibook.logic.commands.product.UpdateCommand.UpdateProductDescriptor;
@@ -29,25 +35,25 @@ public class UpdateAllCommandParser implements Parser<UpdateAllCommand> {
 
         UpdateProductDescriptor updateProductDescriptor = new UpdateProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            updateProductDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            updateProductDescriptor.setName(parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            updateProductDescriptor.setCategory(ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
+            updateProductDescriptor.setCategory(parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             updateProductDescriptor.setDescription(
-                    ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+                    parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            updateProductDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
+            updateProductDescriptor.setPrice(parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
         }
         if (argMultimap.getValue(PREFIX_DISCOUNTRATE).isPresent()) {
             updateProductDescriptor.setDiscountRate(
-                    ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE).get()));
+                    parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE).get()));
         }
         if (argMultimap.getValue(PREFIX_DISCOUNTSTART).isPresent()) {
             updateProductDescriptor.setDiscountStart(
-                    ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART).get()));
+                    parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART).get()));
         }
 
         if (!updateProductDescriptor.isAnyFieldUpdated()) {
