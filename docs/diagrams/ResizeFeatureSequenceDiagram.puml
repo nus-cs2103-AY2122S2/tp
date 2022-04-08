@@ -23,7 +23,7 @@ LogicManager -> AddressBookParser : parseCommand("resize 1")
 activate AddressBookParser
 
 create ResizeCommandParser
-AddressBookParser -> ResizeCommandParser
+AddressBookParser -> ResizeCommandParser : ResizeCommandParser("1")
 activate ResizeCommandParser
 
 ResizeCommandParser --> AddressBookParser
@@ -33,7 +33,7 @@ AddressBookParser -> ResizeCommandParser : parse("1")
 activate ResizeCommandParser
 
 create ResizeCommand
-ResizeCommandParser -> ResizeCommand
+ResizeCommandParser -> ResizeCommand : ResizeCommand("1")
 activate ResizeCommand
 
 ResizeCommand --> ResizeCommandParser : r
@@ -53,7 +53,7 @@ activate ResizeCommand
 
 
 create CommandResult
-ResizeCommand -> CommandResult
+ResizeCommand -> CommandResult : CommandResult()
 activate CommandResult
 
 CommandResult --> ResizeCommand
