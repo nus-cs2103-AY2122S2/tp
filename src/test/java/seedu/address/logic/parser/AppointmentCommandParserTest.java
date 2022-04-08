@@ -1,23 +1,22 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AppointmentCommand;
-import seedu.address.model.pet.Appointment;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.APPT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_TIME_AMY;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX;
-import static seedu.address.logic.commands.CommandTestUtil.APPT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_APPT_TIME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import org.junit.jupiter.api.Test;
 
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
-
+import seedu.address.logic.commands.AppointmentCommand;
+import seedu.address.model.pet.Appointment;
 
 public class AppointmentCommandParserTest {
 
@@ -40,7 +39,7 @@ public class AppointmentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsApptCommand() {
-        String userInput =  INDEX_FIRST_PET.getOneBased() + APPT_DESC_AMY;
+        String userInput = INDEX_FIRST_PET.getOneBased() + APPT_DESC_AMY;
         LocalDateTime dateTime = LocalDateTime.parse(VALID_APPT_DATE_AMY + " " + VALID_APPT_TIME_AMY,
                 dateFormatter);
         Appointment newApp = new Appointment(dateTime, VALID_ADDRESS_AMY);
