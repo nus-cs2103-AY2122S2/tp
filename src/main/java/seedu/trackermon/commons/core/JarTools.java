@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 /**
- * A functionality class that interacts different based on the running application
+ * A functionality class that is used to get class path location depending on
  * whether it is from a Jar file or the editor.
  */
 public class JarTools {
