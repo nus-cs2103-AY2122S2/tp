@@ -381,13 +381,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`    | expert user | access previous commands I made        | send multiple similar commands without having to type the whole command |
 
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `Hirelah Application` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HireLah Application` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 01: Delete a applicant**
+####**Use case 01: Delete a applicant**
 
 **MSS**
 
@@ -410,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case 02: Add an interview**
+####**Use case 02: Add an interview**
 
 **MSS**
 
@@ -432,9 +430,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. HireLah shows an error message.
 
       Use case resumes at step 2.
-*{More to be added}*
 
-**Use case 03: Editing position**
+#### **Use case 03: Editing position**
 
 **MSS**
 1. User requests to list positions
@@ -455,6 +452,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b1. HireLah informs user that the new position name is not valid.
   <br/><br/>
   Use case ends.
+
+#### **Use case 04: Filtering data**
+
+**MSS**
+1. User requests to list data with filter applied.
+2. HireLah refreshes the list of data to display with only data that matches the filter given.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No data in HireLah fits the filter given.
+* 1a1. HireLah informs user that no data is found.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 1b. The filter type given is invalid.
+* 1b1. HireLah informs user that the filter type given is invalid.
+  <br/><br/>
+  Use case ends.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 
