@@ -30,7 +30,7 @@ activate AddLogCommandParser
 AddLogCommandParser --> AddressBookParser
 deactivate AddLogCommandParser
 
-AddressBookParser -> AddLogCommandParser : parse("addlog JOHN DOE ttl/some log title")
+AddressBookParser -> AddLogCommandParser : parse("JOHN DOE ttl/some log title")
 activate AddLogCommandParser
 
 create AddLogDescriptor
