@@ -576,9 +576,9 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
-                                                                                                                                                                                                                                                                                                                                                <div markdown="span" class="alert alert-info">:information_source: 
-                                                                                                                                                                                                                                                                                                                                                 <b>Note:</b> A ParseException will be thrown if the prefix of StudentId is missing, as it is a compulsory field.
-                                                                                                                                                                                                                                                                                                                                                </div>
+   <div markdown="span" class="alert alert-info">:information_source: 
+   <b>Note:</b> A ParseException will be thrown if the prefix of StudentId is missing, as it is a compulsory field.
+   </div>
 
 5. The `TaskCommandParser` will pass the studentId input (found in the `ArgumentMultimap`)
    into `ParserUtil#parseStudentId(String studentId).`
