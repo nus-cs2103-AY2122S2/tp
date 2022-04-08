@@ -20,7 +20,7 @@ Given below are my contributions to the project.
     * Highlights: The `Task` and `TaskList` classes were also created. A `Task` object contains the task name, and information about whether the task was done. A `TaskList` object contains a list of tasks that are assigned to a person.
 
 * **New Feature**:
-  * Added the ability to delete tasks from previously assigned to a single person. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
+  * Added the ability to delete tasks that were previously assigned to a single person. [#127](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/127)
     * What it does: The command deletes a task assigned to a person, by using studentId and the index of the task.
     * Justification: This would give the TA the ability to delete tasks if they assigned tasks incorrectly.
     * Highlights: I made use of the `TaskList` class and added a new method to delete the task.
