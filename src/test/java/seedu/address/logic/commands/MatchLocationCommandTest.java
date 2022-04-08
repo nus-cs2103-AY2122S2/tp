@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FORTH_BUYER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_BUYER;
 
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class MatchLocationCommandTest {
 
         LocationMatchBuyerPredicate predicate = new LocationMatchBuyerPredicate(buyerToMatch);
 
-        String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 4);
+        String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 5);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
             new UserPrefs(), new SellerAddressBook(),
@@ -47,9 +47,9 @@ class MatchLocationCommandTest {
 
     @Test
     public void execute_noPropertyAdded_failure() {
-        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_FORTH_BUYER.getZeroBased());
 
-        MatchLocationCommand matchCommand = new MatchLocationCommand(INDEX_SECOND_CLIENT);
+        MatchLocationCommand matchCommand = new MatchLocationCommand(INDEX_FORTH_BUYER);
 
         LocationMatchBuyerPredicate predicate = new LocationMatchBuyerPredicate(buyerToMatch);
 

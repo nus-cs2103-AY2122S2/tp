@@ -35,6 +35,10 @@ public class EditBuyerDescriptorBuilder {
         descriptor.setPhone(buyer.getPhone());
         descriptor.setTags(buyer.getTags());
         descriptor.setAppointment(buyer.getAppointment());
+        descriptor.setPropertyToBuy(buyer.getPropertyToBuy());
+        descriptor.setHouseType(buyer.getPropertyToBuy().getHouse().getHouseType());
+        descriptor.setLocation(buyer.getPropertyToBuy().getHouse().getLocation());
+        descriptor.setPriceRange(buyer.getPropertyToBuy().getPriceRange());
     }
 
     /**

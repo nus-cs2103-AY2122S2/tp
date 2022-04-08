@@ -26,14 +26,19 @@ public class EditSellerDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditclientDescriptor} with fields containing {@code buyer}'s details
+     * Returns an {@code EditclientDescriptor} with fields containing {@code seller}'s details
      */
-    public EditSellerDescriptorBuilder(Seller buyer) {
+    public EditSellerDescriptorBuilder(Seller seller) {
         descriptor = new EditSellerDescriptor();
-        descriptor.setName(buyer.getName());
-        descriptor.setPhone(buyer.getPhone());
-        descriptor.setTags(buyer.getTags());
-        descriptor.setAppointment(buyer.getAppointment());
+        descriptor.setName(seller.getName());
+        descriptor.setPhone(seller.getPhone());
+        descriptor.setTags(seller.getTags());
+        descriptor.setAppointment(seller.getAppointment());
+        descriptor.setPropertyToSell(seller.getPropertyToSell());
+        descriptor.setHouseType(seller.getPropertyToSell().getHouse().getHouseType());
+        descriptor.setLocation(seller.getPropertyToSell().getHouse().getLocation());
+        descriptor.setPriceRange(seller.getPropertyToSell().getPriceRange());
+        descriptor.setAddress(seller.getAddress());
     }
 
     /**
