@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE_PLAYER = COMMAND_WORD
-            + ": Deletes a player from MyGM."
+            + ": Deletes a player from MyGM or lineup if lineup name is specified."
             + "\nParameters: "
             + PREFIX_PLAYER + "NAME "
             + "[" + PREFIX_LINEUP + "LINEUP NAME]\n"

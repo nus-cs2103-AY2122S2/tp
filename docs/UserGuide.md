@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-MyGM is a **desktop app for high school basketball team trainers to manage players’ contacts and data, optimized for use
+MyGM is a **desktop app for high school basketball team trainers to manage players’ data and schedules, optimized for use
 via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, MyGM can get your contact management tasks done faster than traditional GUI apps.
 
@@ -47,19 +47,18 @@ Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Sched
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**<br>
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
-  e.g. in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+  e.g. in `add L/ n/LINEUP_NAME`, `LINEUP_NAME` is a parameter which can be used as `add L/ n/allstars`.
 * Items in square brackets are optional.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/PG` or as `n/John Doe`.
 * Items with …​ after them can be used multiple times including zero times.
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/SF`, `t/PF t/C` etc.
-* Commands are case sensitive. `Add` is considered as invalid commands, the correct command should be in lower case.
-* Parameters are case sensitive. `John Doe` and `joHN dOE` are considered as different person.
+* Commands are case-sensitive. `Add` is considered as invalid commands, the correct command should be `add` which is in lower case.
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER, p/PHONE_NUMBER n/NAME` is also acceptable.
-* If a parameter is expected only once in the command but you have specified it multiple times, only the last occurrence of the parameter will be taken.
+* If a parameter is expected only once in the command, but you have specified it multiple times, only the last occurrence of the parameter will be taken.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as help.
@@ -78,10 +77,12 @@ Format: `help`
 
 Adds a player/ lineup/ schedule to MyGM.
 
-**To add a player:**
+**To add a player:**<br>
 Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
+* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`
+* `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
 * The first character of every word in `NAME` should be capitalized. For example:`John Doe`
 
 Examples:
@@ -90,16 +91,25 @@ and email of johnd@example.com to the player list.`
 
 ![AddPlayer_SS](images/AddPlayer_SS.png)
 
-**To add a lineup:**
+**To add a lineup:**<br>
 Format: `add L/ n/LINEUP_NAME`
 * Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
+* `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: Notes about the lineup added after the `add` Command.
+
+* After creating a lineup, unlike a new player or schedule, empty lineup will not be displayed on the GUI. To find all the lineups you have created, you can leverage on the `view L/` command. To know more about `view` related command, please go to [view](#viewing-playerschedulelineup-view) section.
+
+</div>
+
 ![AddLineup_SS](images/AddLineup_SS.png)
 
-**To add a schedule:**
+**To add a schedule:**<br>
 Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a dd/mm/yyyy hhmm format.
@@ -111,11 +121,10 @@ Examples:
 
 ![AddSchedule_SS](images/AddSchedule_SS.png)
 
-
 ### deleting a player/ lineup/ schedule :  `delete`
 deletes a player/ lineup/ schedule from MyGM
 
-**To delete a player:**
+**To delete a player:**<br>
 Format: `delete P/PLAYER [L/LINEUP]`
 
 * Deletes the player from the player list.
@@ -126,14 +135,14 @@ Example:
 *`delete P/James Soften` `L/Starting 5` will delete player `James Soften` from the lineup `Starting 5`.
 
 
-**To delete a lineup:**
+**To delete a lineup:**<br>
 Format: `delete L/LINEUP`
 * Delete the lineup.
 
 Example:
 * `delete L/Starting 5` will delete the lineup `Starting 5` from MyGM.
 
-**To delete a schedule:**
+**To delete a schedule:**<br>
 Format: `delete S/INDEX_SCHEDULE`
 * Delete the i-th schedule of MyGM.
 
@@ -274,6 +283,21 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
 
+<div markdown="block" class="alert alert-info">
+
+:information_source: Notes about `t/TAG` in the `edit` Command.
+
+* When editing tags, the existing tags of the player will be removed i.e adding of tags is not cumulative.
+* You can remove all the tags of the specified player by typing `t/` without specifying any tags after it.<br>
+e.g `edit P/Anthony Glass t/`
+
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Tip: Cannot find your player after edit? Players in the GUI are arranged in lexicographical order (i.e in the order of A to Z followed by a to z), use this property to your advantage!
+
+</div>
 
 **To edit a lineup:**
 
@@ -344,7 +368,6 @@ Format: `load PATH`
 Example:
 * `load ./Documents/data.txt`
 
-
 ### Editing the data file `[coming in v2.0]`
 
 MyGM data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -361,7 +384,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-_Details coming soon ..._
+**Q1**: Why does the `delete` and `edit` command for players require case-sensitive full name?<br>
+**A1**: Considering that these commands has side effects on the existing player data and is irreversible, we have decided that case-sensitive full name for these commands is necessary. This is useful as it can serve as a reminder to the user which player he/she is editing or deleting. Furthermore, it may not necessarily slow down the user as generally, human beings tend to remember names easily as opposed to the index of the player in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
