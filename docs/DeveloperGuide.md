@@ -535,7 +535,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 
    <div markdown="span" class="alert alert-info">:information_source:
    <b>Note:</b> 
-   If no student(s) with a matching studentId or moduleCodeis found, then PersonNotFoundException() or ModuleCodeNotFoundException() will be thrown.
+   If no student(s) with a matching studentId or moduleCode is found, then PersonNotFoundException() or ModuleCodeNotFoundException() will be thrown.
    </div>
 
 15. If a `Student` object with matching `studentId` or `moduleCode` is found the method uses `Person#isTaskAlreadyPresent(Task task)` 
