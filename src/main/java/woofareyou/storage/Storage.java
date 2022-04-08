@@ -27,6 +27,6 @@ public interface Storage extends PetBookStorage, UserPrefsStorage {
     Optional<ReadOnlyPetBook> readPetBook() throws DataConversionException, IOException;
 
     @Override
-    void savePetBook(ReadOnlyPetBook addressBook) throws IOException;
+    void savePetBook(ReadOnlyPetBook petBook) throws IOException;
 
 }

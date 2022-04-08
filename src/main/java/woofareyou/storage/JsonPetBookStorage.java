@@ -15,7 +15,7 @@ import woofareyou.commons.util.JsonUtil;
 import woofareyou.model.ReadOnlyPetBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access WoofAreYou data stored as a json file on the hard disk.
  */
 public class JsonPetBookStorage implements PetBookStorage {
 
@@ -60,8 +60,8 @@ public class JsonPetBookStorage implements PetBookStorage {
     }
 
     @Override
-    public void savePetBook(ReadOnlyPetBook addressBook) throws IOException {
-        savePetBook(addressBook, filePath);
+    public void savePetBook(ReadOnlyPetBook petBook) throws IOException {
+        savePetBook(petBook, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonPetBookStorage implements PetBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void savePetBook(ReadOnlyPetBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void savePetBook(ReadOnlyPetBook petBook, Path filePath) throws IOException {
+        requireNonNull(petBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializablePetBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializablePetBook(petBook), filePath);
     }
 
 }

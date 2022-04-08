@@ -98,13 +98,13 @@ class AppointmentCommandTest {
 
     /**s
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of pet book
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of pet book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(outOfBoundIndex,

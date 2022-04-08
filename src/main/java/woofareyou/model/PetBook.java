@@ -48,7 +48,7 @@ public class PetBook implements ReadOnlyPetBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code PetBook} with {@code newData}.
      */
     public void resetData(ReadOnlyPetBook newData) {
         requireNonNull(newData);
@@ -58,7 +58,7 @@ public class PetBook implements ReadOnlyPetBook {
     //// pet-level operations
 
     /**
-     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     * Returns true if a pet with the same identity as {@code pet} exists in PetBook.
      */
     public boolean hasPet(Pet pet) {
         requireNonNull(pet);
@@ -66,15 +66,15 @@ public class PetBook implements ReadOnlyPetBook {
     }
 
     /**
-     * Adds a pet to the address book.
-     * The pet must not already exist in the address book.
+     * Adds a pet to the pet book.
+     * The pet must not already exist in the pet book.
      */
     public void addPet(Pet p) {
         pets.add(p);
     }
 
     /**
-     * Sorts the list of pets in the address book.
+     * Sorts the list of pets in the pet book.
      * Currently, it will sort the list of pets according to the field provided.
      */
     public void sortPets(String field) {
@@ -83,8 +83,8 @@ public class PetBook implements ReadOnlyPetBook {
 
     /**
      * Replaces the given pet {@code target} in the list with {@code editedPet}.
-     * {@code target} must exist in the address book.
-     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     * {@code target} must exist in WoofAreYou.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in WoofAreYou.
      */
     public void setPet(Pet target, Pet editedPet) {
         requireNonNull(editedPet);
@@ -94,8 +94,8 @@ public class PetBook implements ReadOnlyPetBook {
 
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PetBook}.
+     * {@code key} must exist in the pet book.
      */
     public void removePet(Pet key) {
         pets.remove(key);
