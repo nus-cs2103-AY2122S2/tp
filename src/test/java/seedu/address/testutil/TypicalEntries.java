@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BIG_BANK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
@@ -44,10 +46,10 @@ public class TypicalEntries {
 
     public static final Company DBSSS = new CompanyBuilder().withName("DBSSS").withPhone("91123671")
             .withEmail("dbsss@example.com").withAddress("14 Jurong Street").build();
-    public static final Company BIG_BANK = new CompanyBuilder().withName("Big Bank").withPhone("94316789")
-            .withEmail("bigbank@example.com").withAddress("16 Race Course Road").build();
-    public static final Company JANICE_STREET = new CompanyBuilder().withName("Janice Street").withPhone("89245223")
-            .withEmail("janicestreet@example.com").withAddress("21 Marina Bay Sands").build();
+    public static final Company BIG_BANK = new CompanyBuilder().withName("Big Bank").withPhone(VALID_PHONE_A)
+            .withEmail(VALID_EMAIL_A).withAddress(VALID_ADDRESS_A).build();
+    public static final Company JANICE_STREET = new CompanyBuilder().withName("Janice Street").withPhone(VALID_PHONE_B)
+            .withEmail(VALID_EMAIL_B).withAddress(VALID_ADDRESS_B).build();
 
     public static final Event INTERVIEW_A = new EventBuilder().withName("DBSSS Interview").withCompanyName("DBSSS")
             .withDate("2022-05-01").withTime("10:00").withLocation("Zoom").withTags("Technical").build();

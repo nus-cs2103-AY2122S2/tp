@@ -2,11 +2,15 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -34,21 +38,18 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-
     public static final String VALID_COMPANY_BIG_BANK = "Big Bank";
     public static final String VALID_COMPANY_JANICE_STREET = "Janice Street";
     public static final String VALID_COMPANY_SHOPSG = "shopSG";
-
     public static final String VALID_EVENT_INTERVIEW_BIG_BANK = "Big Bank Interview";
     public static final String VALID_EVENT_INTERVIEW_JANICE_STREET = "Janice Street Interview";
     public static final String VALID_EVENT_INTERVIEW_SHOPSG = "shopSG Interview";
-
-    public static final String VALID_PHONE_A = "11111111";
-    public static final String VALID_PHONE_B = "22222222";
-    public static final String VALID_EMAIL_A = "atesting@example.com";
-    public static final String VALID_EMAIL_B = "btesting@example.com";
-    public static final String VALID_ADDRESS_A = "123 Jurong South Street";
-    public static final String VALID_ADDRESS_B = "456 South West Orchard";
+    public static final String VALID_PHONE_A = "94316789";
+    public static final String VALID_PHONE_B = "89245223";
+    public static final String VALID_EMAIL_A = "bigbank@example.com";
+    public static final String VALID_EMAIL_B = "janicestreet@example.com";
+    public static final String VALID_ADDRESS_A = "16 Race Course Road";
+    public static final String VALID_ADDRESS_B = "21 Marina Bay Sands";
     public static final String VALID_DATE_A = "2022-03-03";
     public static final String VALID_DATE_B = "2022-05-05";
     public static final String VALID_TIME_A = "12:00";
@@ -64,14 +65,33 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_BIG_BANK;
-    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_JANICE_STREET;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_A;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_B;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_A;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_B;
+    public static final String NAME_DESC_BIG_BANK = " " + PREFIX_NAME + VALID_COMPANY_BIG_BANK;
+    public static final String NAME_DESC_JANICE_STREET = " " + PREFIX_NAME + VALID_COMPANY_JANICE_STREET;
+    public static final String NAME_DESC_SHOPSG = " " + PREFIX_NAME + VALID_COMPANY_SHOPSG;
+    public static final String COMPANY_DESC_BIG_BANK = " " + PREFIX_COMPANY + VALID_COMPANY_BIG_BANK;
+    public static final String COMPANY_DESC_JANICE_STREET = " " + PREFIX_COMPANY + VALID_COMPANY_JANICE_STREET;
+    public static final String COMPANY_DESC_SHOPSG = " " + PREFIX_COMPANY + VALID_COMPANY_SHOPSG;
+    public static final String EVENT_INTERVIEW_BIG_BANK = " " + PREFIX_COMPANY + VALID_EVENT_INTERVIEW_BIG_BANK;
+    public static final String EVENT_INTERVIEW_JANICE_STREET = " " + PREFIX_COMPANY + VALID_EVENT_INTERVIEW_JANICE_STREET;
+    public static final String EVENT_INTERVIEW_SHOPSG = " " + PREFIX_COMPANY + VALID_EVENT_INTERVIEW_SHOPSG;
+    public static final String PHONE_DESC_A = " " + PREFIX_PHONE + VALID_PHONE_A;
+    public static final String PHONE_DESC_B = " " + PREFIX_PHONE + VALID_PHONE_B;
+    public static final String EMAIL_DESC_A = " " + PREFIX_EMAIL + VALID_EMAIL_A;
+    public static final String EMAIL_DESC_B = " " + PREFIX_EMAIL + VALID_EMAIL_B;
+    public static final String ADDRESS_DESC_A = " " + PREFIX_ADDRESS + VALID_ADDRESS_A;
+    public static final String ADDRESS_DESC_B = " " + PREFIX_ADDRESS + VALID_ADDRESS_B;
+    public static final String DATE_DESC_A = " " + PREFIX_DATE + VALID_DATE_A;
+    public static final String DATE_DESC_B = " " + PREFIX_DATE + VALID_DATE_B;
+    public static final String TIME_DESC_A = " " + PREFIX_TIME + VALID_TIME_A;
+    public static final String TIME_DESC_B = " " + PREFIX_TIME + VALID_TIME_B;
+    public static final String LOCATION_DESC_A = " " + PREFIX_LOCATION + VALID_LOCATION_A;
+    public static final String LOCATION_DESC_B = " " + PREFIX_LOCATION + VALID_LOCATION_B;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_INTERVIEW = " " + PREFIX_TAG + VALID_TAG_INTERVIEW;
+    public static final String TAG_DESC_APPLIED = " " + PREFIX_TAG + VALID_TAG_APPLIED;
+    public static final String TAG_DESC_TECHNICAL = " " + PREFIX_TAG + VALID_TAG_TECHNICAL;
+    public static final String TAG_DESC_BEHAVIOURAL = " " + PREFIX_TAG + VALID_TAG_BEHAVIOURAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "DB$$$"; // '$' not allowed in names
