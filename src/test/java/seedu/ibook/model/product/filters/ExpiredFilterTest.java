@@ -19,7 +19,8 @@ class ExpiredFilterTest {
 
     private final ExpiredFilter expiredFilter = new ExpiredFilter();
 
-    private final Product productExpiredBefore = new ProductBuilder(PRODUCT_A).buildWithItems(List.of(Q5_2020_01_01_KAYA));
+    private final Product productExpiredBefore = new ProductBuilder(PRODUCT_A)
+        .buildWithItems(List.of(Q5_2020_01_01_KAYA));
     private final Product productExpireToday = new ProductBuilder(PRODUCT_A).buildWithItems(getItemToday());
     private final Product productExpireTenDays = new ProductBuilder(PRODUCT_A).buildWithItems(getItemTenDays());
 
