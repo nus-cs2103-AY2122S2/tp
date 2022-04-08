@@ -9,9 +9,9 @@ Tracey is a desktop app for managing health statuses of NUS Hall Residents. The 
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
   * Added the ability to copy email from the Tracey database.
-      * What it does: allows the user to use the `email` command or click on the `Show Email` button to open a Window containing the list of emails Tracey database. After which, the administrator can click on the copy email button to copy this set of emails to their clipboard. 
+      * What it does: allows the user to use the `email` command or click on the `Show Email` button to open a Window containing the list of emails Tracey database. After which, the administrator can click on the copy email button to copy this set of emails to their clipboard.
       * Justification: This feature improves the product significantly because an administrator might want to contact these set of students via email and can do so easily by clicking on the copy email button. They can then proceed to their email domain of choice and easily paste this into the recipient address box.
       * Highlights: This enhancement addresses user story #15. This enhancement introduces a new Stackpane component UI to be used for further features such as Resize Display and Import.
 
@@ -21,7 +21,7 @@ Given below are my contributions to the project.
     * Managed releases `v1.3` - `v1.3b` (2 releases) on GitHub.
     * Created Github Team Repo and created team PR to main repo.
     * Set up labels to be used in the issue tracker.
-    * Establish CodeCov to track our application. 
+    * Establish CodeCov to track our application.
     * Set up team project website.
 
 * **Enhancements to existing features**:
@@ -39,15 +39,18 @@ Given below are my contributions to the project.
         * Added documentation for the features `help`, `email` [\#96]()
         * Added comparison between CLI and GUI in application introduction [\#129]()
         * Added a Navigation Guide for the User Guide [\#129]()
-        * Edited quickstart section to make it more comprehensive for users. [\#129]()
-        * Edited the application information of Tracey [\#96]() 
+        * Edited quickstart section to make it more comprehensive for users [\#129]()
+        * Edited the application information of Tracey [\#96]()
         * Added screenshots for features `find`, `summarise` and a general application Ui screenshot. [\#115](), [\#129]()
-        * Added tables for Correct and Incorrect usages in `add` and 
+        * Added tables for Correct and Incorrect usages in `add` and
         * Fixed tables in GFMD for Command Summary, Glossary and List of Pre-defined constants. [\#115](), [\#143]()
         * Update table and figure numbering [\#143]()
         * Format User Guide to eliminate grammatical and spelling errors [\#143]()
     * Developer Guide:
-        * Added implementation details of the `add` feature. 
+        * Added implementation details of the `Add` feature [\#89]()
+        * Edited the sequence diagram for Add feature [\#89]() 
+        * Add Activity diagram for Add feature [\#89]()
+        * Added class diagrams for Add and Clear Feature [\#268]()
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#33](), [\#47](), [\#50](), [\#57](), [\#74](), [\#84](), [\#112](), [\#122](), [\#128](), [\#235]()
