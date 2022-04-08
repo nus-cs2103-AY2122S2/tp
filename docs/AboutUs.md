@@ -25,8 +25,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/clement0010.md)]
 
 
-* Role: Code quality, Scheduling and tracking
-* Responsibilities: UI
+* Role: Code quality, Scheduling and tracking, Git Expert
+* Responsibilities: User Interface, Authentication and Encryption
 
 ### Si Binh Ho
 
