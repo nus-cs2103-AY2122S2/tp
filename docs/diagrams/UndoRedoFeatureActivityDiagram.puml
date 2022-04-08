@@ -4,12 +4,16 @@
 start
 :User opens Tracey;
 
-if () then ([User executes an "Undo" or
-"Redo" command first])
+if () then ([User executes an "Undo"
+or "Redo" command first ||
+user adds extra arguments])
     :Throws CommandException;
     else ([else])
     :User successfully executes an "Add", "Edit" or "Delete" command;
     :User executes an "Undo" command;
+    if () then ([User adds extra arguments])
+    :Throws CommandException;
+    else ([else])
     :The previous command is reversed and the original state of
     Addressbook is returned;
 

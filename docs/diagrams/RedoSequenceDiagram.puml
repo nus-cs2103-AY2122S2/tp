@@ -42,21 +42,31 @@ deactivate AddressBook
 Model --> RedoCommand : true
 deactivate Model
 
-RedoCommand -> Model : restoreOriginal()
-activate Model
+alt if original state is stored in personsOriginal
 
-Model -> AddressBook : restoreOriginal()
-activate AddressBook
+    RedoCommand -> Model : restoreOriginal()
+    activate Model
 
-AddressBook --> Model
-deactivate AddressBook
+    Model -> AddressBook : restoreOriginal()
+    activate AddressBook
 
-Model --> RedoCommand
-deactivate Model
+    AddressBook --> Model
+    deactivate AddressBook
 
-RedoCommand --> LogicManager : result
-deactivate RedoCommand
-RedoCommand -[hidden]-> LogicManager : result
+    Model --> RedoCommand
+    deactivate Model
+
+    RedoCommand --> LogicManager : result
+    deactivate RedoCommand
+    RedoCommand -[hidden]-> LogicManager : result
+
+else if original state absent || extra arguments added
+
+    RedoCommand --> LogicManager : throw new CommandException
+    deactivate RedoCommand
+    RedoCommand -[hidden]-> LogicManager : result
+
+end
 destroy RedoCommand
 
 [<--LogicManager

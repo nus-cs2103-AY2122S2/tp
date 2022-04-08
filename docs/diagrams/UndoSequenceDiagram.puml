@@ -36,27 +36,38 @@ activate Model
 Model -> AddressBook : checkHistory()
 activate AddressBook
 
-AddressBook --> Model : true
-deactivate AddressBook
-
-Model --> UndoCommand : true
-deactivate Model
-
-UndoCommand -> Model : restoreHistory()
-activate Model
-
-Model -> AddressBook : restoreHistory()
-activate AddressBook
-
 AddressBook --> Model
 deactivate AddressBook
 
 Model --> UndoCommand
 deactivate Model
 
-UndoCommand --> LogicManager : result
-deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
+alt if previous state is stored in personsHistory
+
+    UndoCommand -> Model : restoreHistory()
+    activate Model
+
+    Model -> AddressBook : restoreHistory()
+    activate AddressBook
+
+    AddressBook --> Model
+    deactivate AddressBook
+
+    Model --> UndoCommand
+    deactivate Model
+
+    UndoCommand --> LogicManager : result
+    deactivate UndoCommand
+    UndoCommand -[hidden]-> LogicManager : result
+
+else if previous state absent || extra arguments added
+
+    UndoCommand --> LogicManager : throw new CommandException
+    deactivate UndoCommand
+    UndoCommand -[hidden]-> LogicManager : result
+
+end
+
 destroy UndoCommand
 
 [<--LogicManager
