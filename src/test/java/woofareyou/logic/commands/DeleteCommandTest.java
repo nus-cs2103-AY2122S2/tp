@@ -68,7 +68,7 @@ public class DeleteCommandTest {
         showPetAtIndex(model, INDEX_FIRST_PET);
 
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of pet book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
