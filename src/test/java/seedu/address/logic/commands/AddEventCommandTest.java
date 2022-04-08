@@ -26,19 +26,17 @@ import seedu.address.model.entry.Entry;
 import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
-import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddEventCommandTest {
 
     @Test
-    public void constructor_nullCompany_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCompanyCommand(null));
+    public void constructor_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
     }
 
     @Test
-    public void execute_CompanyAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
@@ -49,7 +47,7 @@ public class AddEventCommandTest {
     }
 
     @Test
-    public void execute_duplicateCompany_throwsCommandException() {
+    public void execute_duplicateEvent_throwsCommandException() {
         Event validEvent = new EventBuilder().build();
         AddEventCommand addEventCommand = new AddEventCommand(validEvent);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);

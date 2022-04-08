@@ -44,7 +44,8 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -87,7 +88,8 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withCompanyName(VALID_COMPANY_JANICE_STREET)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setEntry(ALICE, editedAlice);
         UniqueEntryList<Person> expectedUniquePersonList = new UniqueEntryList<>();

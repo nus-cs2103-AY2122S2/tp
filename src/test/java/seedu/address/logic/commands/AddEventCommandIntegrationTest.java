@@ -10,12 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.entry.Company;
 import seedu.address.model.entry.Event;
-import seedu.address.model.entry.Person;
-import seedu.address.testutil.CompanyBuilder;
 import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddEventCommand}.

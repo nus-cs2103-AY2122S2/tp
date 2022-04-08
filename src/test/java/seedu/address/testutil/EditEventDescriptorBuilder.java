@@ -5,7 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
-import seedu.address.model.entry.*;
+import seedu.address.model.entry.Date;
+import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Location;
+import seedu.address.model.entry.Name;
+import seedu.address.model.entry.Time;
 import seedu.address.model.tag.Tag;
 
 /**

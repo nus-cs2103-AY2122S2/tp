@@ -64,9 +64,11 @@ public class TypicalEntries {
             .withPhone("8482131").withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withCompanyName(VALID_COMPANY_BIG_BANK)
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withCompanyName(VALID_COMPANY_BIG_BANK)
             .withPhone(VALID_PHONE_A).withEmail(VALID_EMAIL_A).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withCompanyName(VALID_COMPANY_JANICE_STREET)
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
+            .withCompanyName(VALID_COMPANY_JANICE_STREET)
             .withPhone(VALID_PHONE_B).withEmail(VALID_EMAIL_B).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

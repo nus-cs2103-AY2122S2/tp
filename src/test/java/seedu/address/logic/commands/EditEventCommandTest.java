@@ -2,7 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_INTERVIEW_BIG_BANK;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_INTERVIEW_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INTERVIEW_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INTERVIEW_SHOPSG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BEHAVIOURAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_B;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ENTRY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ENTRY;
@@ -18,7 +29,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.entry.Event;
-import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 

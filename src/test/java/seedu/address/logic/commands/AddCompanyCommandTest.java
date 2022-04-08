@@ -27,7 +27,6 @@ import seedu.address.model.entry.Event;
 import seedu.address.model.entry.Name;
 import seedu.address.model.entry.Person;
 import seedu.address.testutil.CompanyBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddCompanyCommandTest {
 
@@ -37,7 +36,7 @@ public class AddCompanyCommandTest {
     }
 
     @Test
-    public void execute_CompanyAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_companyAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
         Company validCompany = new CompanyBuilder().build();
 

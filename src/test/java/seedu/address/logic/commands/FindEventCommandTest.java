@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.*;
+import static seedu.address.commons.core.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalEntries.*;
+import static seedu.address.testutil.TypicalEntries.INTERVIEW_A;
+import static seedu.address.testutil.TypicalEntries.INTERVIEW_B;
+import static seedu.address.testutil.TypicalEntries.ONLINE_ASSESSMENT;
+import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +20,7 @@ import seedu.address.commons.core.SearchTypeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.entry.predicate.CompanyContainsKeywordsPredicate;
 import seedu.address.model.entry.predicate.EventContainsKeywordsPredicate;
-import seedu.address.model.entry.predicate.PersonContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
