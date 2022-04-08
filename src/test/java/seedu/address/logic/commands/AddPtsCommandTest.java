@@ -36,7 +36,7 @@ public class AddPtsCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_ONE).build();
-        AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
+        AddPropertyToSellCommand ptsCommand = new AddPropertyToSellCommand(INDEX_SEVENTH_SELLER, testProperty);
         Seller testSeller = model.getFilteredSellerList().get(INDEX_SEVENTH_SELLER.getZeroBased());
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
@@ -44,7 +44,7 @@ public class AddPtsCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
         expectedModel.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(testProperty).build());
-        assertCommandSuccess(ptbCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(ptsCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class AddPtsCommandTest {
 
         PropertyToSell testProperty = new PropertyToSellBuilder(PROPERTY_TO_SELL_TWO).build();
         Seller testSeller = model.getFilteredSellerList().get(INDEX_FIRST_SELLER.getZeroBased());
-        AddPropertyToSellCommand ptbCommand = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, testProperty);
+        AddPropertyToSellCommand ptsCommand = new AddPropertyToSellCommand(INDEX_FIRST_SELLER, testProperty);
 
         String expectedMessage = String.format(AddPropertyToSellCommand.MESSAGE_SUCCESS,
                 new SellerBuilder(testSeller).withProperty(testProperty).build());
@@ -80,7 +80,7 @@ public class AddPtsCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 TypicalSellers.getTypicalSellerAddressBook(), new BuyerAddressBook());
         expectedModel.setSeller(testSeller, new SellerBuilder(testSeller).withProperty(testProperty).build());
-        assertCommandSuccess(ptbCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(ptsCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
