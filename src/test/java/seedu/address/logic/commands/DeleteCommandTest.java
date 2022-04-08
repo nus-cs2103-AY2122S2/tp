@@ -20,7 +20,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.entity.EntityType;
 import seedu.address.model.entity.exceptions.UnknownEntityException;
-import seedu.address.model.student.Student;
 import seedu.address.model.tamodule.TaModule;
 
 //@@author jxt00
