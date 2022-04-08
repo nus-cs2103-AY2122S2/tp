@@ -36,7 +36,7 @@ jobs:
           java-package: jdk+fx
 
       - name: Test Test Cases
-        run: ./gradlew test
+        run: ./gradlew test --debug
 
       - name: Build and check with Gradle
         run: ./gradlew check coverage
