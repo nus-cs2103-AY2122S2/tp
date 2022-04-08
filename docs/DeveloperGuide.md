@@ -808,7 +808,7 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
    3. Test case: `assign 0 g/NUS Fintech Society` <br>
       Expected: No student contact is assigned to the group. Error details shown in the error message.
    
-   4. Other incorrect delete commands to try: `assign`, `assign x` (where x is larger than the student contact list size)<br>
+   4. Other incorrect assign commands to try: `assign`, `assign x` (where x is larger than the student contact list size)<br>
       Expected: Similar to previous.
 
 2. Assigning a student contact while all student contacts are being shown to a group that does not exist.
@@ -835,7 +835,50 @@ More information on usage: [assign command](UserGuide.html#assign-a-student-to-a
 
    2. Test case: Similar to previous. <br>
       Expected: Similar to previous.
-    
+
+### Deassigning a student to from group
+
+Command: `deassign` <br>
+More information on usage: [deassign command](UserGuide.html#deassign-a-student-to-a-group-deassign)
+
+1. Deassigning a student contact while all student contacts are being shown.
+
+   1. Prerequisites: List all student contacts using the `list` command. 
+   There exists the first student contact in the group `NUS Fintech Society`.
+   
+   2. Test case: `deassign 1 g/NUS Fintech Society` <br>
+      Expected: First student contact is deassigned from the group `NUS Fintech Society`. The student contact disappeared from the group.
+      The details of the deassigned student contact and the target group is shown in the success message.
+   
+   3. Test case: `deassign 0 g/NUS Fintech Society` <br>
+      Expected: No student contact is deassigned from the group. Error details shown in the error message.
+   
+   4. Other incorrect deassign commands to try: `deassign`, `deassign x` (where x is larger than the student contact list size)<br>
+      Expected: Similar to previous.
+   
+2. Deassigning a student contact while all student contacts are being shown. The target group does not exist in ArchDuke.
+
+   1. Prerequisites: List all student contacts using the `list` command. There exists no group with the group name `NUSSU`.
+   
+   2. Test case: `deassign 1 g/NUSSU` <br>
+      Expected: No student contact is deassigned from the group. Error details shown in the error message.
+
+3. Deassigning a student contact while all student contacts are being shown. The target student contact has not been assigned to the group.
+
+    1. Prerequisites: List all student contacts using the `list` command. 
+   The fourth student contact does not exist in the group `NUS Fintech Society`. 
+   The group `NUS Fintech Society` exists in ArchDuke.
+   
+    2. Test case: `deassign 4 g/NUS Fintech Society` <br>
+        Expected: No student contact is deassigned from the group. Error details shown in the error message.
+   
+4. Deassigning a student contact while the student contact list is being filtered.
+
+   1. Prerequisites: Filter the student contacts by attributes using the `find` command.
+
+   2. Test case: Similar to previous. <br>
+   Expected: Similar to previous.
+
 
 ### Saving data
 
