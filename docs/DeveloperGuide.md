@@ -366,27 +366,71 @@ return a CommandResult showing that the update has been successful.
 separated with an **empty space** must be provided. Other than the time values being valid,
 the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
 
-### **The `listTask` command**
-* The `listTask` command shows all the tasks in the list.
+### Finding tasks and employees features
 
-#### How it is implemented
+#### All about this feature
 
+The feature for finding task and employee uses the following two commands:
+* `findTask`: Find tasks
+* `findEmployee`: Finds employees
 
-#### Sequence diagram when the user enters `list`
+`findEmployee` improves on the `find` feature in AB3 where instead on finding persons (on in the case of our project
+manageezpz, we now refer persons as employees) based only on their names, we can also find employees based their other
+two properties, phone number and email.
 
-<img src="images/List.png" />
+`findTask` similarly searches tasks based on any of their attributes (as stated in the task implementation) 
+stated by the user.
 
-### **The `findTask` command**
-* The ``findTask`` command has multiple options to search for tasks.
-* The options are:
-  * `todo/`, `deadline/`, `event/`: Represents the types of tasks for the user to search.
-  * `desc/`, `date/`, `priority/`, `assignees/`, `isMarked`: Represents the properties for each task
+#### Design of the find feature
 
-#### How it is implemented
+The find feature utilizes mainly the following classes:
+* Parser: 
+  * Check whether the attributes for either task and employees as entered by the user are valid as stated in the `Task`
+    and `Person` (class to represent employee) respectively.
+  * The first class when user enters `findTask`/`findEmployee`.
+  * Parser will first check if at least one attribute is entered.
+  * After which, it will check whether the attributes entered are valid as implemented in the `Task` and `Person` method.
+  * If the user fails to enter any of the attributes, or enters an invalid attribute, the Parser class will collate all
+    the mistakes the user has made as error messages, and it will be shown to the user.
+  * Otherwise, the parser will create a predicate by indicating all attributes entered by the user and setting 
+    attributes not specified by the user as null (use optional parameter if the programming language used permits).
+  * The parser class will then return a command class, using the predicate as the argument.
+  * `FindTaskCommandParser` for findTask and `FindEmployeeCommandParser` for findEmployee
+* Command:
+  * Executes command by showing all tasks/employee based on the attributes specified by the user.
+  * `FindTaskCommand` for findTask and `FindEmployeeCommand` for findEmployee
+* Predicate:
+  * The parser class creates this predicate which will be used to filter tasks/employees based on the attributes given.
+  * If the attribute is set to null, it will default to true, otherwise, the predicate will check whether the 
+    task/employee has these attributes.
+  * The results from the attributes (or true if not specified) are and together to produce the result from the predicate.
+  * `TaskMultiplePredicate` for filtering task and `PersonMultiplePredicate` for filtering employees.
+  
+#### Implementation flow for the find task/employee feature
+Given below is the implementation of the find task command when the user enters `findTask priority/HIGH event/`
 
-#### Sequence diagram when a user enters the command ``
+1. The user input will be sent to `FindTaskCommandParser`
+2. `FindTaskCommandParser` will note down that the task type to search for is an event with a high priority.
+3. Since the inputs that the user entered is valid, the parser will create a `TaskMultiplePredicate` using priority 
+   `high` and task type `event` while setting the rest of the attributes to `null`.
+4. The attribute will be used as the argument to create the `FindTaskCommand`
+5. When the `FindTaskCommand` executes, the predicate will be sent to the `ModelManager` to filter out tasks that 
+   satisfy the predicate.
 
-<img src="images/FindTask.png" />
+![Expected find task command result](images/FindTaskCommand.png)
+
+*The expected result for `findTask priority/HIGH event/`*
+
+![UML diagram for find task command](images/FindTaskCommandSequenceDiagram.png)
+*The UML Sequence diagram for `findTask priority/HIGH event/`*
+
+#### Design Consideration
+* Allow usage of multiple attributes as search term to filter out tasks/employee that has the specified attributes.
+* Useful for finding tasks based on priority and whether it is marked or not.
+
+#### UML Diagram for finding task/employee
+
+![UML Diagram for finding task/employee](images/FindTaskClassDiagram.png)
 
 ### Tagging Task to Employee feature
 
@@ -792,34 +836,6 @@ Preconditions: User is currently using ManageEZPZ.
 
 ****
 
-**Use Case 12 - Deleting all Entries in ManageEZPZ**
-
-Preconditions: User is currently using ManageEZPZ.
-
-**MSS**
-
-1. User enters the command to clear ManageEZPZ.
-2. ManageEZPZ clears all Employee and Task data, sending a confirmation
-   message that ManageEZPZ entries are cleared.
-
-   Use case ends.
-
-****
-
-**Use Case 13 - Exit ManageEZPZ**
-
-Preconditions: User is currently using ManageEZPZ.
-
-**MSS**
-
-1. User enters a command to exit ManageEZPZ.
-2. ManageEZPZ confirms with a successful exit message.
-3. ManageEZPZ saves all changes to disk.
-
-   Use case ends.
-
-****
-
 ### Non-Functional Requirements
 
 #### Technical Requirements
@@ -910,6 +926,57 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Finding employees
+
+1. Find employees with the given predicate
+
+    1. Prerequisites: List all employees using the `listEmployee` command.
+
+    2. Test case: `findEmployee`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Valid test cases to try: `findEmployee n/Alice`, `findEmployee p/999`, `...` (So long as the task attribute are
+        valid)<br>
+        Expected: All employees with the specified attributes will be listed.
+
+    4. Other invalid test cases to try: `findEmployee someOtherPrefix/`, `findEmployee n/Jame$`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
+### Listing all employees
+
+1. List down all employees
+    1. Prerequisites: Filter employees using `findEmployee` command.
+    2. Test Case: `listEmployee`<br>
+       Expected: Shows all the employees in ManageEZPZ
+
+### Finding tasks
+
+1. Find tasks with the given predicate
+
+    1. Prerequisites: List all tasks using the `listTask` command.
+
+    2. Test case: `findTask`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Test case: `findTask todo/ date/2022-01-01`<br>
+       Expected: Error showing that todo and date option cannot be together.
+   
+    4. Valid test cases to try: `findTask todo/`, `findTask desc/Meeting`, `...` (So long as the task attribute are
+       valid)<br>
+       Expected: All tasks with the specified attributes will be listed.
+   
+    5. Other invalid test cases to try: `findTask someOtherPrefix/`, `findTask date/1-1-2022`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
+### Listing all tasks
+
+1. List down all tasks
+   1. Prerequisites: Filter tasks using `findTask` command.
+   2. Test Case: `listTask`<br>
+      Expected: Shows all the tasks in ManageEZPZ
 
 ### Saving data
 
