@@ -369,14 +369,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​     | I want to …​                                                | So that I can…​                                                 |
-| -------- |-------------|-------------------------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | new user    | see usage instructions                                      | refer to instructions when I forget how to use the App          |
-| `* * *`  | recruiter   | add a new candidate                                         |                                                                 |
-| `* * *`  | recruiter   | delete a candidate                                          | remove entries that I no longer need                            |
-| `* * *`  | recruiter   | access information of candidates                            | I can contact them                                              |
-| `* *`    | recruiter   | access status (OA/first interview etc) of candidates        | I can easily identify where they are in the recruiting pipeline |
-| `*`      | expert user | access previous commands which I have sent to the interface | I can work faster                                               |
+| Priority | As a …​     | I want to …​                           | So that I can…​                                                         |
+| ------ |-------------|----------------------------------------|-------------------------------------------------------------------------|
+| `* * *` | new user    | see usage instructions of all commands | know what are the commands available and how to use them                |
+| `* * *` | recruiter   | add a new applicant                    | keep track of all the applicants                                        |
+| `* * *` | recruiter   | delete an applicant                    | remove entries that I no longer need                                    |
+| `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                               |
+| `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                   |
+| `* * *` | recruiter   | view the interviews I have             | know my schedule and plan my work day                                   |
+| `* *`  | recruiter   | filter the displayed data              | find the information I am looking for easily                            |
+| `*`    | expert user | access previous commands I made        | send multiple similar commands without having to type the whole command |
 
 
 *{More to be added}*
