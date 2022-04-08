@@ -362,6 +362,8 @@ Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set.
 #### 2.1 Implementing Event-Person relationships
 Key Consideration: How to implement the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
 
+**(Insert a diagram here)**
+
 * **Current Implementation**
   * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. Validity checks are performed on initializing an `Event`, editing an `Event`, and when editing/deleting a `Person` to make sure that all `FriendName` objects in `Event` refer to actual `Person` objects in the `AddressBook`.
   * Pros:
@@ -382,9 +384,12 @@ Key Consideration: How to implement the relationship between `Event` and `Person
     * Additional overhead as new class(es) will have to be created and tested.
     * If implemented using a `EventPersonAssociation` list, will not be very efficient as well when making queries/changes,especially if there are a large number of associations in the list
 
+Another consideration: How do we maintain the relationship's validity as the user edits and deletes friend objects.
+
+
 #### 2.2 Implementing List event
 
-Key Consideration: How to implement `showevents` when there exists multiple tabs and other `show` commands such as `listfriends` and `showinsights`.
+Key Consideration: How to implement `listevents` when there exists multiple tabs and other `show` commands such as `listfriends` and `showinsights`.
 
 The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`, the sequence diagram is similar for the other types of `show` commands which exist in Amigos.
 
@@ -409,6 +414,29 @@ The following sequence diagram summarizes what happens when a user executes the 
     * Increases the coupling between the `Commands` classes and the `MainWindow` since now we need to add a new switch case for every new command created.
     * Involves a lot of code duplication as well
     
+#### 2.3 Implementing the findevent command
+Key Consideration: Keeping track of the various filtering conditions that could be potentially set by the user, so that it is easily maintained and extended.
+
+**INSERT DIAGRAM HERE**
+
+* **Current Implementation**:
+  * The `FindEventCommandParser` class takes in the user's input and produces a List containing all the `Predicate<Event>` that can be derived from the input.
+  * Each predicate type implements the `Predicate<Event>` interface in its own class. e.g. `EventDateIsBeforePredicate`
+  * This list of `Predicate<Event>` is then passed to the `FindEventCommand` class via its constructor, and it will later filter the event list accessed by the UI based on all the given predicates.
+  * Pros:
+    * Easy to add new predicates and modify existing ones
+  * Cons: 
+    * A bit of extra overhead in code, as we need to create a class for each predicate to override the equals() method, which is needed in testing.
+    
+* **Alternative Implementation**:
+  * Create a single class that acts as a predicate for all possible filtering conditions i.e. an `EventFilterPredicate`.
+  * The `FindEventCommandParser` will instead initialize this predicate class and pass it on to the `FindEventCommand` class which will use it to filter the list.
+  * Pros: Less overhead because we only need to create a single predicate class for filtering the Event list.
+  * Cons:
+    * Violates both Separation of Concerns and the Single Responsibility Principle
+    * Harder to test due to increased complexity of the single predicate class
+    * Decreased modularity means it is harder to modify and extend in the future e.g. if we wanted to add more filtering conditions
+
 ### 3. Logs Feature
 
 _Amigos_ supports logs, via `addlog`, `deletelog` and `editlog` features.
