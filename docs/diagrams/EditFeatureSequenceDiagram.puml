@@ -32,7 +32,7 @@ AddressBookParser -> EditCommandParser : parse("n/Poppy")
 activate EditCommandParser
 
 create EditPersonDescriptor
-EditCommandParser --> EditPersonDescriptor
+EditCommandParser --> EditPersonDescriptor : EditPersonDescriptor("n/Poppy")
 activate EditPersonDescriptor
 EditPersonDescriptor --> EditCommandParser : d
 deactivate EditPersonDescriptor
@@ -47,7 +47,7 @@ EditPersonDescriptor --> EditCommandParser
 deactivate EditPersonDescriptor
 
 create EditCommand
-EditCommandParser -> EditCommand : d
+EditCommandParser -> EditCommand : EditCommand(d)
 activate EditCommand
 
 EditCommand --> EditCommandParser : e
@@ -72,7 +72,7 @@ Model --> EditCommand
 deactivate Model
 
 create CommandResult
-EditCommand -> CommandResult
+EditCommand -> CommandResult : CommandResult()
 activate CommandResult
 
 CommandResult --> EditCommand
