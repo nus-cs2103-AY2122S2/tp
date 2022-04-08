@@ -55,10 +55,10 @@ public class UndoCommandTest {
     public static StackUndoRedo prepareStack(List<RedoableCommand> undoElements,
                                              List<RedoableCommand> redoElements) {
         StackUndoRedo undoRedoStack = new StackUndoRedo();
-        undoElements.forEach(command -> undoRedoStack.push(command, ""));
+        undoElements.forEach(undoRedoStack::push);
 
         Collections.reverse(redoElements);
-        redoElements.forEach(command -> undoRedoStack.push(command, ""));
+        redoElements.forEach(undoRedoStack::push);
         redoElements.forEach(unused -> undoRedoStack.popUndo());
 
         return undoRedoStack;
