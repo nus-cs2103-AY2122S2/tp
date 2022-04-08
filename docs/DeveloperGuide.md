@@ -96,7 +96,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. `HelpWindow` and `PackageWindow` opens a new pop up window, displaying the link to the User Guide and the details of the `InsurancePackage` object respectively. 
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -106,6 +106,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* The `PackageCard` component depends on some classes in the `Model` component as it displays an `InsurancePackage` object residing in the `Model`.
 
 ### Logic component
 
@@ -236,6 +237,10 @@ The `FindCommandParser` was implemented this way as there are multiple prefixes 
 The predicate is implemented in this way since updating the filteredPersonList in the `Model` class requires a single `Predicate`, so a single `CombineContainsKeywordsPredicate` was used, where the `CombineContainsKeywordsPredicate#test(person)` will make use of all the subclasses of `FieldContainsKeywordsPredicate` to update the filteredPersonList.
 
 **Aspect: How FindCommand executes:**
+
+![FindCommandSequece](images/FindSequenceDiagram.png)
+
+![ParseFindSequence](images/ParseFindSequenceDiagram.png)
 
 ![FindCommand](images/FindCommand.png)
 
