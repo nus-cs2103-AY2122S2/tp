@@ -235,7 +235,8 @@ Additionally, there are a few final static messages to be displayed to the user 
    - Message: "This person's %s already exists in the address book" where "%s" refers to the unique fields: `Phone`, `Matriculation Number`, `Email`.
 
 **Sequence Diagram of Add Feature is shown below:**
-![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+<img src='images/AddSequenceDiagram.png' height="701" width="1464">
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -343,7 +344,8 @@ Additionally, there is a static final static message to be displayed to the user
 
 
 **Sequence Diagram of Clear Feature is shown below:**
-<img src='images/ClearSequenceDiagram.png' width="550" height="300">
+
+<img src='images/ClearSequenceDiagram.png' height="701" width="1464">
 
 
 <br>
