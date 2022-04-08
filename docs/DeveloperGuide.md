@@ -152,10 +152,14 @@ The `Model` component,
 
 * stores the IBook data i.e., all `Product` objects (which are contained in a `UniqueProductList` object).
 * stores the currently 'selected' `Product` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the current `ProductFilter` which is applied to the _filtered_ list.
 * stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 A more detailed representation of the `Product` class is shown below which includes more details regarding the `Item` class.
+
+* The `Item` object enforces a two-way relationship with `Product`.
+* An `Item` can only belong to one `Product`, but a `Product` can contain many `Item`.
 
 <img src="images/DetailedModelClassDiagram.png" width="450" />
 
@@ -179,6 +183,48 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Product filters
+
+#### Implementation
+
+The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command. Both the `ProductFilter` as well as the `AttributeFilter` has a `test` method to test whether a given `Product` fulfils the query specified by the user.
+
+Given below is the class diagram of the `ProductFilter` class and the `AttributeFilter` class.
+
+<img src="images/ProductFilterClassDiagram.png" width="550" />
+
+The following sequence diagrams shows how the `Find` command works:
+
+The sequence diagram below shows how the `FindCommand` object is created:
+
+<img src="images/FindCreationSequenceDiagram.png" width="550" />
+
+The sequence diagram below shows how the `FindCommand` object is executed:
+
+<img src="images/FindExecutionSequenceDiagram.png" width="550" />
+
+As different attributes have different constraints, the `parse` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any attribute that is invalid, an exception would be thrown.
+
+When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfils every condition in the `AttributeFilter` (i.e. returning true for when the `test` method is called with `Product` as the argument). The updated filtered product list would then be displayed in the GUI.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` has the capability to do partial matching so the query given does not have to exactly match the actual product.  
+
+</div>
+
+#### Design considerations
+
+**Aspect: How to filter the products:**
+
+* **Alternative 1:** Create a single predicate as the product filter.
+    * Pros: Easy to implement.
+    * Cons: User does not have fine-grained control over the current filter.
+
+* **Alternative 2 (current choice):** Create a `ProductFilter` that contains a list of `AttributeFilter`
+    * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
+    * Cons: More complicated to implement.
 
 ### Undo/redo feature
 
