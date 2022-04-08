@@ -18,7 +18,8 @@ public class UnarchiveCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNARCHIVE_ENTRY_SUCCESS = "Unarchived Entry: %1$s\nListing all archived entries.";
+    public static final String MESSAGE_UNARCHIVE_ENTRY_SUCCESS = "Unarchived Entry: %1$s\n"
+            + "Listing all archived entries.";
 
     private final Index targetIndex;
 
