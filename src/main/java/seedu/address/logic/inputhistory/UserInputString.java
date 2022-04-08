@@ -1,5 +1,7 @@
 package seedu.address.logic.inputhistory;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Immutable String containing a previous user input
  */
@@ -12,6 +14,7 @@ public class UserInputString {
      * @param userInput The previous user input
      */
     public UserInputString(String userInput) {
+        requireNonNull(userInput);
         this.userInput = userInput;
     }
 

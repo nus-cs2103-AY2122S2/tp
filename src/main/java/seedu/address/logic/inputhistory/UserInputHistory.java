@@ -1,5 +1,7 @@
 package seedu.address.logic.inputhistory;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -28,6 +30,7 @@ public class UserInputHistory {
      * @param userInput The new user input.
      */
     public void addToHistory(String userInput) {
+        requireNonNull(userInput);
         selectedIndex.reset();
         UserInputString newUserInput = new UserInputString(userInput);
         inputHistory.add(newUserInput);
