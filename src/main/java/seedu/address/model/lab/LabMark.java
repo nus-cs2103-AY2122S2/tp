@@ -14,9 +14,9 @@ import seedu.address.model.lab.exceptions.IllegalLabStateException;
 public class LabMark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Lab mark should be a non-negative integer.";
+            "Lab mark should be an integer between 0 and 100 inclusive.";
 
-    public static final String VALIDATION_REGEX = "0|([1-9]\\d*)";
+    public static final String VALIDATION_REGEX = "\\d*";
 
     /*
      * A placeholder value to represent that the marks have not been initialized.
@@ -46,10 +46,27 @@ public class LabMark {
     }
 
     /**
-     * Returns true if a given string is a valid lab mark.
+     * Returns true if a given string contains only digits and the Integer it parses to is between 0 and 100 inclusive.
+     *
+     * @param test The string to be checked and parsed.
+     * @return True if the string is a valid Integer between 0 and 100 inclusive and false otherwise.
      */
     public static boolean isValidLabMark(String test) {
+        return isValidString(test) && isIntegerInBounds(test);
+    }
+
+    private static boolean isValidString(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    private static boolean isIntegerInBounds(String test) {
+        try {
+            int labMark = Integer.parseInt(test);
+            return labMark >= 0 && labMark <= 100;
+        } catch (NumberFormatException e) {
+            // can't be parsed to Integer so return false.
+            return false;
+        }
     }
 
     /**
