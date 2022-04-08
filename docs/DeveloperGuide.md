@@ -645,6 +645,11 @@ More information on usage: [list command](UserGuide.html#listing-all-persons--li
 1. Test case: `clear` <br>
    Expected: All data is cleared from ArchDuke.
 
+### Exiting ArchDuke
+
+1. Test case: `exit` <br>
+   Expected: Exits ArchDuke, and all data is being saved.
+
 ### Adding a student contact
 
 Command: `add` <br>
