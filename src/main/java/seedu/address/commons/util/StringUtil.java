@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class StringUtil {
 
-    private static String NUMBER_VALIDATION_REGEX = "\\d+(\\.\\d+)?";
+    private static final String NUMBER_VALIDATION_REGEX = "\\d+(\\.\\d+)?";
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
@@ -72,8 +72,6 @@ public class StringUtil {
      * e.g. -1, 0, 1, 2, 3, ...
      * Returns true for +1, +2, +3, for consistency
      * Returns false for any other non-null string input
-     * @param s
-     * @return
      */
     public static boolean isNumber(String s) {
         return s.matches(NUMBER_VALIDATION_REGEX);
