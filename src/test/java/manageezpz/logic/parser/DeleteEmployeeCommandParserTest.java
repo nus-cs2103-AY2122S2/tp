@@ -1,6 +1,5 @@
 package manageezpz.logic.parser;
 
-import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
@@ -28,6 +27,6 @@ public class DeleteEmployeeCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND, DeleteEmployeeCommand.MESSAGE_USAGE));
+                ParserUtil.MESSAGE_INVALID_INDEX + "\n\n" + DeleteEmployeeCommand.MESSAGE_USAGE);
     }
 }

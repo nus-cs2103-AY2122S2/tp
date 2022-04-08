@@ -1,8 +1,7 @@
 package manageezpz.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_NAME;
-import static manageezpz.commons.core.Messages.MESSAGE_EMPTY_TASK_NUMBER;
+import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -14,6 +13,9 @@ import manageezpz.logic.parser.exceptions.ParseException;
 
 public class TagTaskCommandParser implements Parser<TagTaskCommand> {
 
+    public static final String MESSAGE_TAG_EMPLOYEE_TO_TASK_INSTRUCTIONS =
+            "Tag an employee to a task by specifying prefix n/ followed by the employee's full name!\n\n%1$s";
+
     /**
      * Parses the given {@code String} of arguments in the context of the TagTaskCommand
      * and returns an TagTaskCommand object for execution.
@@ -21,40 +23,41 @@ public class TagTaskCommandParser implements Parser<TagTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagTaskCommand parse(String args) throws ParseException {
-        requireNonNull(args);
+        ArgumentMultimap argMultimapTagTask = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        ArgumentMultimap argMultimapTag =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        // Invalid command if getPreamble() is empty
+        if (argMultimapTagTask.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
+                    TagTaskCommand.MESSAGE_USAGE));
+        }
+
+        // Invalid command if getPreamble() contains whitespaces
+        if (argMultimapTagTask.getPreamble().contains(" ")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT + " "
+                    + MESSAGE_TAG_EMPLOYEE_TO_TASK_INSTRUCTIONS, TagTaskCommand.MESSAGE_USAGE));
+        }
 
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimapTag.getPreamble());
+            index = ParserUtil.parseIndex(argMultimapTagTask.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
-                    TagTaskCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage() + "\n\n" + TagTaskCommand.MESSAGE_USAGE, pe);
         }
 
-        if (!arePrefixesPresent(argMultimapTag, PREFIX_NAME)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_BIND,
+        if (!arePrefixesPresent(argMultimapTagTask, PREFIX_NAME)) {
+            throw new ParseException(String.format(MESSAGE_TAG_EMPLOYEE_TO_TASK_INSTRUCTIONS,
                     TagTaskCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimapTag.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_TASK_NUMBER,
-                    TagTaskCommand.MESSAGE_USAGE));
-        }
-
-        String name = argMultimapTag.getValue(PREFIX_NAME).get();
+        String name = argMultimapTagTask.getValue(PREFIX_NAME).get();
 
         if (name.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_NAME,
-                    TagTaskCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_EMPTY_NAME, TagTaskCommand.MESSAGE_USAGE));
         }
 
         return new TagTaskCommand(index, name);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

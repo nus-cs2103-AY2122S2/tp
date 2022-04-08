@@ -17,12 +17,12 @@ public class AddDeadlineTaskCommand extends Command {
             + ": Adds a Deadline Task to ManageEZPZ.\n"
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_BY_DATETIME + "DATETIME\n"
+            + PREFIX_BY_DATETIME + "DATE TIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Do Daily Commissions "
             + PREFIX_BY_DATETIME + "2022-03-15 0400";
 
-    public static final String MESSAGE_SUCCESS = "New Deadline task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New Deadline Task added: %1$s";
 
     private final Deadline toAdd;
 

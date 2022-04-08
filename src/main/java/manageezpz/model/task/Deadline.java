@@ -50,16 +50,6 @@ public class Deadline extends Task {
         return this.time;
     }
 
-    @Override
-    public String getType() {
-        return this.type;
-    }
-
-    @Override
-    public Description getDescription() {
-        return this.description;
-    }
-
     public void setDescription(Description description) {
         this.description = description;
     }
@@ -70,6 +60,16 @@ public class Deadline extends Task {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public Description getDescription() {
+        return this.description;
     }
 
     @Override

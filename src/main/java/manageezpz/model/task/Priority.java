@@ -15,7 +15,7 @@ public enum Priority {
      * Constructor to initialize an instance of Priority enumeration
      * with value field.
      *
-     * @param value Value of the Priority
+     * @param value Value of the Priority.
      * */
     Priority(int value) {
         this.value = value;

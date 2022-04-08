@@ -28,7 +28,7 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
    * **`deleteTask`**`3` : Deletes the 3rd Task shown in the Task list.
 
-   * **`clear`** : Deletes everything from ManageEZPZ.
+   * **`clear`** : Deletes **ALL** data from ManageEZPZ.
    
    * **`addTodo desc/read book`** : Adds a todo task with a description of `read book` to the Task list.
 
@@ -66,17 +66,24 @@ ManageEZPZ is a **desktop app for that allows managers or supervisors to manage 
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the user guide and copying employee details to Computer Clipboard.
 
 ![help message](images/helpMessage_new.png)
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
+
 ### Adding an Employee : `addEmployee`
 
 Adds an employee to ManageEZPZ.
+
+Note:
+- Adding a duplicated Employee will result in an error.
 
 Format: `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL`
 
@@ -97,6 +104,7 @@ Finds employee(s) based on multiple conditions provided.
 Note:
 * Parameters for finding employees can be entered together in any order.
 * You must enter at least one parameter.
+* Names are case-insensitive 
 
 Format: `findEmployee n/NAMES p/PHONE_NUMBER e/EMAIL`
 * `findEmployee n/[LIST OF NAMES]` finds employees whose names contain any of the words in [LIST OF NAMES].
@@ -119,10 +127,11 @@ Format: `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL`
 * The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
+* All tasks that are assigned to the edited employee will be updated to reflect the new changes of the employee.
 
 Examples:
-* `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. 
-* `editEmployee 2 n/Betsy Crower` edits the name of the 2nd person to be Betsy Crower.
+* `editEmployee 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st employee to be 91234567 and johndoe@example.com respectively. All tasks that are assigned to the 1st employee will be updated to reflect the new changes of the employee.
+* `editEmployee 2 n/Betsy Crower` edits the name of the 2nd employee to be Betsy Crower. All tasks that are assigned to the 2nd employee will be updated to reflect the new changes of the employee.
 
 ### Deleting an Employee : `deleteEmployee`
 
@@ -133,11 +142,14 @@ Format: `deleteEmployee INDEX`
 * Deletes the employee at the specified INDEX.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* All tasks that are assigned to the deleted employee will be updated to remove the employee from the respective tasks.
 
 Examples:
-* `deleteEmployee 2` deletes the 2nd employee in the displayed employee list.
-* `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ.
-* `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list.
+* `deleteEmployee 2` deletes the 2nd employee in the displayed employee list. All tasks that are assigned to the 2nd employee will be updated to remove the employee from the respective tasks.
+* `listEmployee` followed by `deleteEmployee 2` sets the displayed employee list to show all employees in ManageEZPZ and deletes the 2nd employee in ManageEZPZ. All tasks that are assigned to the 2nd employee will be updated to remove the employee from the respective tasks.
+* `findEmployee n/Betsy` followed by `deleteEmployee 1` sets the displayed employee list with the results from the findEmployee command and deletes the 1st employee in the displayed employee list. All tasks that are assigned to the 1st employee will be updated to remove the employee from the respective tasks.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Task : `addTodo`, `addEvent`, `addDeadline`
 
@@ -146,7 +158,7 @@ Adds a task to ManageEZPZ.
 Format:
 * `addTodo desc/TASK_DESCRIPTION`
 * `addDeadline desc/TASK_DESCRIPTION by/DATE TIME`
-* `addEvent desc/TASK_DESCRIPTION at/[DATE] START_TIME END_TIME`
+* `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME`
 
 Examples:
 * `addTodo desc/Powerpoint Slides for Company XYZ`
@@ -157,9 +169,16 @@ Examples:
 
 **:bulb: Take Note:**
 
-For deadline and event, the DATE must be in this format: YYYY-MM-DD and the TIME in this format: HHmm (in 24 hr format).
+For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track.
+
+For deadline and event, the DATE must be in this format: YYYY-MM-DD 
+
+For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+and mm should only be between 00 and 59.
 
 For event, the START_TIME must be earlier than the END_TIME.
+
+Adding a duplicated Task will result in an error.
 
 </div>
 
@@ -177,7 +196,8 @@ Note:
 * Parameters for finding tasks can be entered together in any order.
 * You must enter at least one parameter from either Task Type or the valid options.
 * Task Type is optional, however, when entered, only one task type is allowed.
-* Any other invalid options not stated below will be ignored.
+* The first option must be valid.
+* After the first valid option, any other invalid options that is not stated below will be ignored.
 
 Task Type Available:
 * `todo/`: Todos
@@ -199,7 +219,8 @@ Format:
 * `findTask date/YYYY-MM-DD` finds all deadlines and events with the date
 * `findTask priority/PRIORITY` find all tasks with the given PRIORITY [HIGH, MEDIUM, LOW, NONE]
 * `findTask assignees/ASSIGNEE FULL NAME` finds all tasks assigned to the stated assignee (in full name)
-* `findTask isMarked/BOOLEAN` finds all tasks that is already marked as done (`true`) or unmarked i.e., not done (`false`)
+* `findTask isMarked/true` finds all tasks that is already marked as done.
+* `findTask isMarked/false` finds all tasks that is already marked as not done.
 
 Example:
 * `findTask desc/homework`
@@ -213,7 +234,7 @@ Example:
         * priority high,
         * assigned to Alex Yeoh,
         * and is marked as done.
-
+        
 ### Editing a Task : `editTask`
 
 Edits an existing task in ManageEZPZ.
@@ -226,15 +247,19 @@ Formats:
 * `editTask INDEX date/DATE at/TIME`
 * `editTask INDEX at/TIME`
 
-Editing tasks is flexible in ManageEZPZ. 
+Editing tasks is flexible in ManageEZPZ.
 For example, you can update just the task description or perhaps
-just the date and time of the task only. 
-However, you are not allowed to edit a task with no input supplied.
-Either `desc/NAME`, `date/DATE` or `at/TIME` must have a value.
+just the date and time of the task only. <br/>
+However, you are not allowed to edit a task with no prefix supplied or if you have supplied a prefix, 
+a corresponding input after the prefix must exist. <br/>
+Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 
-<b>Note:</b> For an `Event` task, a start time and an end time separated with an empty space must be provided 
-instead of a single time value.
-
+<b>Note:</b> 
+* For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+  and mm should only be between 00 and 59.
+* For todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
+and time field to be edited. 
+* Editing Tasks with the same Description, Date, Time will not change the physical state of the Task.
 
 Examples: <br/>
 
@@ -245,8 +270,21 @@ Given a task list as follows... <br/>
 3. Type: `Event`, Description: `Final Exam`, Date: `2022-06-04`, Time: `1700 2000`
 
 * `editTask 1 desc/Drink Water` edits the task description of a `Todo` task.
-* `editTask 2 date/2022-05-10 at/ 2000` edits the date and the time of a `Deadline` task.
+* `editTask 2 date/2022-05-10 at/2000` edits the date and the time of a `Deadline` task.
 * `editTask 3 at/1800 2100` edits the time of an `Event` task.
+
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Take Note:**
+
+For deadline and event, the DATE must be in this format: YYYY-MM-DD
+
+For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+and mm should only be between 00 and 59.
+
+For event, the START_TIME must be earlier than the END_TIME.
+
+</div>
 
 ### Marking a Task : `markTask`
 
@@ -257,6 +295,7 @@ Format: `markTask INDEX`
 * Marks the task at the specified `INDEX` as done.
 * The index refers to the index number shown in the displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Marking a marked task (i.e., that is already set as done) will not change its physical state.
 
 Examples:
 * `markTask 2` marks the 2nd task in the displayed task list as done.
@@ -272,11 +311,14 @@ Format: `unmarkTask INDEX`
 * Unmarks the task at the specified `INDEX` to change the status back to not done.
 * The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Unmarking an unmarked task (i.e., that is already set as not done) will not change its physical state.
 
 Examples:
 * `unmarkTask 2` changes the 2nd task in the displayed task list back to not done.
 * `listTask` followed by `unmarkTask 2` sets the displayed task list to show all tasks in ManageEZPZ and changes the 2nd task in ManageEZPZ back to not done.
 * `findTask desc/slides` followed by `unmarkTask 1` sets the displayed task list with the results from the findTask command and changes the 1st task in the displayed task list back to not done.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Task : `deleteTask`
 
@@ -287,11 +329,12 @@ Format: `deleteTask INDEX`
 * Deletes the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 
 Examples:
-* `deleteTask 2` deletes the 2nd task in the displayed task list.
-* `listTask` followed by `deleteTask 2` sets the displayed task list to show all tasks in ManageEZPZ and deletes the 2nd task in ManageEZPZ.
-* `findTask desc/slides` followed by `deleteTask 1` sets the displayed task list with the results from the findTask command and deletes the 1st task in the displayed task list.
+* `deleteTask 2` deletes the 2nd task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
+* `listTask` followed by `deleteTask 2` sets the displayed task list to show all tasks in ManageEZPZ and deletes the 2nd task in ManageEZPZ. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
+* `findTask desc/slides` followed by `deleteTask 1` sets the displayed task list with the results from the findTask command and deletes the 1st task in the displayed task list. The number of assigned tasks of the employees who were assigned to the deleted task will be decreased by 1.
 
 ### Tagging a Task to an Employee : `tagTask`
 
@@ -299,9 +342,10 @@ Assigns the specified task to an employee.
 
 Format: `tagTask INDEX n/NAME`
 * Assigns the task at the specified `INDEX` to the employee with the specified `NAME`.
-* The index refers to the index number shown in the displayed task list. 
+* The index refers to the index number shown in the current displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The name must be a valid employee name in ManageEZPZ.
+* The employee you are tagging **must** be in the current displayed employees list.
+* The name must be a valid employee **full name** in ManageEZPZ.
 
 Example: `tagTask 1 n/Alex Yeoh`
 * `tagTask 1 n/Alex Yeoh` assigns the 1st task in the displayed task list to the employee with the name Alex Yeoh.
@@ -314,9 +358,10 @@ Deallocates the specified task from an employee.
 
 Format: `untagTask INDEX n/NAME`
 * Deallocates the task at the specified `INDEX` from the employee with the specified `NAME`.
-* The index refers to the index number shown in the displayed task list.
+* The index refers to the index number shown in the current displayed task list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The name must be a valid employee name in ManageEZPZ.
+* The employee you are tagging **must** be in the current displayed employees list.
+* The name must be a valid employee **full name** in ManageEZPZ.
 
 Example:
 * `untagTask 1 n/Alex Yeoh` deallocates the 1st task in the displayed task list from the employee with the name Alex Yeoh.
@@ -334,6 +379,7 @@ Format: `tagPriority INDEX priority/PRIORITY`
 * The priority must be either `HIGH`, `MEDIUM`, `LOW`, or `NONE`.
 * The priority is case-insensitive, e.g., `high`, `HIGH`, `HiGh` or `hIgH` will match as `HIGH`.
 * A task with the priority of `NONE` will not have the priority reflected in the displayed task list.
+* Tagging the same priority to the Task, will not change its physical state.
 
 Example: 
 * `tagPriority 1 priority/HIGH`
@@ -343,7 +389,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the employee list and task list.
+Deletes all entries from the employee list and task list.
 
 Format: `clear`
 
@@ -369,6 +415,7 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -385,9 +432,11 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 |---------------------|------------------------------------------------------------------------------------------------------------------|
 | **Add Employee**    | `addEmployee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `addEmployee n/James Ho p/22224444 e/jamesho@example.com` |
 | **List Employees**  | `listEmployee`                                                                                                   |
-| **Find Employee**   | `findEmployee OPTIONS` <br> `findEmployee n/Alex Yeoh`                                                           |
+| **Find Employee**   | `findEmployee OPTIONS` <br> e.g. `findEmployee n/Alex Yeoh`                                                      |
 | **Edit Employee**   | `editEmployee INDEX n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`        |
 | **Delete Employee** | `deleteEmployee INDEX` <br> e.g., `deleteEmployee 3`                                                             |
+
+<div style="page-break-after: always;"></div>
 
 ### Task Related Commands
 
@@ -404,6 +453,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 | **Tag Task**          | `tagTask INDEX n/NAME` <br> e.g.,`tagTask 1 n/Alex Yeoh`                                                                        |
 | **Untag Task**        | `untagTask INDEX n/NAME` <br> e.g.,`untagTask 1 n/Alex Yeoh`                                                                    |
 | **Tag Priority**      | `tagPriority INDEX priority/PRIORITY` <br> e.g.,`tagPriority 1 priority/HIGH`                                                   |
+
+<div style="page-break-after: always;"></div>
 
 ### Others
 

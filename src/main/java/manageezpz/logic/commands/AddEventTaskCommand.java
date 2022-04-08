@@ -17,12 +17,12 @@ public class AddEventTaskCommand extends Command {
             + ": Adds an Event Task to ManageEZPZ.\n"
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_AT_DATETIME + "[DATE] [START_TIME] [END_TIME]\n"
+            + PREFIX_AT_DATETIME + "DATE START_TIME END_TIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Finish 160 Resins "
             + PREFIX_AT_DATETIME + "2022-03-15 1800 2000";
 
-    public static final String MESSAGE_SUCCESS = "New Event task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New Event Task added: %1$s";
 
     private final Event toAdd;
 

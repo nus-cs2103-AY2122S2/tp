@@ -5,6 +5,7 @@ import static manageezpz.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static manageezpz.testutil.TypicalPersons.ALICE;
 import static manageezpz.testutil.TypicalPersons.BOB;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -73,5 +74,18 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+    }
+
+    @Test
+    public void increaseTaskCount_validPerson_success() {
+        ALICE.increaseTaskCount();
+        assertEquals(1, ALICE.getNumOfTasks());
+    }
+
+    @Test
+    public void decreaseTaskCount_validPerson_success() {
+        ALICE.increaseTaskCount();
+        ALICE.decreaseTaskCount();
+        assertEquals(0, ALICE.getNumOfTasks());
     }
 }
