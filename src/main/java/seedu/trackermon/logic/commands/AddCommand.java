@@ -37,10 +37,7 @@ public class AddCommand extends Command {
             + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New show added: %1$s";
-
-
     private final Show toAdd;
-
     /**
      * Creates an AddCommand to add the specified {@code Show}
      * @param show a show to add into the show list.
@@ -50,6 +47,12 @@ public class AddCommand extends Command {
         toAdd = show;
     }
 
+    /**
+     * Executes a {@code Model} object.
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code CommandResult} object.
+     * @throws CommandException if there is a duplicated show.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -62,6 +65,11 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), model.getShowListSize() - 1);
     }
 
+    /**
+     * Returns whether two objects are equal.
+     * @param other the second object to be compared with.
+     * @return true if both objects are equal, else return false.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -7,8 +7,14 @@ import static seedu.trackermon.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains integration tests for {@code Index}.
+ */
 public class IndexTest {
 
+    /**
+     * Tests oneBasedIndex being parsed.
+     */
     @Test
     public void createOneBasedIndex() {
         // invalid index
@@ -23,6 +29,9 @@ public class IndexTest {
         assertEquals(4, Index.fromOneBased(5).getZeroBased());
     }
 
+    /**
+     * Tests zeroBasedIndex being parsed.
+     */
     @Test
     public void createZeroBasedIndex() {
         // invalid index
@@ -37,6 +46,9 @@ public class IndexTest {
         assertEquals(6, Index.fromZeroBased(5).getOneBased());
     }
 
+    /**
+     * Tests the equals method of {@code Index}.
+     */
     @Test
     public void equals() {
         final Index fifthPersonIndex = Index.fromOneBased(5);
