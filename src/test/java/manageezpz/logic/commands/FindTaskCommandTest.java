@@ -38,24 +38,6 @@ class FindTaskCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
 
-    @BeforeEach
-    void setMoreProperties() {
-        // Set Priority
-        WEEKLY_QUIZ.setPriority("HIGH");
-        PROJECT_CAPSTONE.setPriority("HIGH");
-        FYP_REPORT.setPriority("HIGH");
-
-        // Set Assignee
-        RETURN_BOOK.addAssignees(ALICE);
-        PROJECT_CAPSTONE.addAssignees(ALICE);
-        FYP_REPORT.addAssignees(ALICE);
-        HOUSE_VISTING.addAssignees(ALICE);
-
-        // Set marked
-        RETURN_BOOK.setTaskDone();
-        PROJECT_CAPSTONE.setTaskDone();
-    }
-
     @Test
     void equals() {
         TaskMultiplePredicate firstPredicate =
