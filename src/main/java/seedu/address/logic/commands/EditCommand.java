@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_SENIORITY + "SENIORITY] "
             + "[" + PREFIX_APPLICATION_STATUS + "APPLICATION_STATUS] "
-            + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]...\n"
+            + "[" + PREFIX_AVAILABILITY + "AVAILABILITY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "E0123456@u.nus.edu\n"
