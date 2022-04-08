@@ -635,7 +635,7 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **A** Certain inputs like `MaNsIoN` are also accepted, but are not visually appealing, hence, we default each input for a house type to a certain displayed text.
 
 **Q** Why is `add-b n/goutham s/o karthik p/3456789` not accepted in `add-b` or `add-s`? <br>
-**A** Your name contains non-alphanumeric characters `/`. Even if it is an actual name, it does not conform to our requirements.
+**A** Our application does not allow non-alphanumeric characters! You can consider using `goutham so karthik`, or simply `goutham son of karthik`.
 
 **Q** My phone number be ridiculously long `238223212393288...` even though it's not possible! <br>
 **A** We do not set a hard limit to the length of your phone number since they can be of different lengths.
@@ -643,8 +643,8 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **Q** Why have location and address, aren't they the same thing? <br>
 **A** Location refers to the area/town/city the property can/does reside in. Address is the exact location. We decided to separate them as it allows you to more easily match properties where the exact address may not necessarily contain the location name. E.g. 36 College Ave E, North Tower can be considered to be in Clementi/Dover/NUS but does not contain the location name.
 
-**Q** How do I "reset" my property fields like location to "No location"? <br>
-**A** Once you have added a property, you cannot remove a specific field, only edit it. Basically, we do not allow a property to have missing fields, except when the client is first added and all the fields are empty. We have plans in the future to allow users to remove a property completely.
+**Q** How do I "reset" my property `LOCATION` if my buyer suddenly has no location preference? <br>
+**A** You can consider typing in a "dummy" location to indicate that the client hadn't decided yet. For example `any`.
 
 **Q** Why does typing `delete-b 0` and `delete-b 999999` return 2 different error messages even though they are both violating the same condition? <br>
 **A** We check whether you have first inputted a positive integer first. If not, we will throw the error message seen in `delete-b 0`. If you have typed in a positive integer, but it was larger than the displayed list size, it will inform you to check the range again with the other error message.
