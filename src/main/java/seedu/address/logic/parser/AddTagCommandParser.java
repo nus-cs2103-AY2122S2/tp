@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,21 +24,17 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
     public AddTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG);
-        Index index;
-
-        if ((!argMultimap.getValue(PREFIX_TAG).isPresent())
-                || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
-        }
+        Pair<Index, String> indexAndTag;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            indexAndTag = ParserUtil.parseOutIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
         }
 
-        ArrayList<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        return new AddTagCommand(index, tagList);
+        Index index = indexAndTag.getKey();
+        Tag tag = ParserUtil.parseTag(indexAndTag.getValue());
+        return new AddTagCommand(index, tag);
     }
 
     /**

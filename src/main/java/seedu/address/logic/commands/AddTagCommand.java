@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -22,33 +20,30 @@ public class AddTagCommand extends Command {
 
     public static final String COMMAND_WORD = "addTag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tags to the client identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds tag to the client identified "
             + "by the index number used in the displayed person list. "
-            + "At least one tag should be specified. Does not allow for duplicates. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Only one tag can be added at a time. "
+            + "Parameters: INDEX (must be a positive integer) + TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "owes money :p3 "
-            + PREFIX_TAG + "friends and family";;
+            + "owes money :p3 ";
 
     public static final String MESSAGE_SUCCESS = "Added tag(s) to Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "One of the tags listed is already present,"
-            + " either in the existing tags or in your input.";
+    public static final String MESSAGE_DUPLICATE_TAG = "The tag you want to add is already present.";
 
     private final Index index;
-    private final ArrayList<Tag> tagsToAdd;
+    private final Tag tagToAdd;
 
     /**
-     * Creates an AddTagCommand to add the specified {@code Tag}s
+     * Creates an AddTagCommand to add the specified {@code Tag}.
      *
      * @param index of the person in the filtered person list to edit
-     * @param tags to be added to the person identified
+     * @param tag to be added to the person identified
      */
-    public AddTagCommand(Index index, ArrayList<Tag> tags) {
+    public AddTagCommand(Index index, Tag tag) {
         requireNonNull(index);
-        requireNonNull(tags);
+        requireNonNull(tag);
         this.index = index;
-        tagsToAdd = tags;
+        tagToAdd = tag;
     }
 
     @Override
@@ -61,25 +56,28 @@ public class AddTagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person tagAddedPerson = addTagsToPerson(personToEdit, tagsToAdd);
+        Person tagAddedPerson = addTagToPerson(personToEdit, tagToAdd);
 
         model.setPerson(personToEdit, tagAddedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, tagAddedPerson));
     }
 
-    private Person addTagsToPerson(Person personToEdit, ArrayList<Tag> tagsToAdd) throws CommandException {
+    /**
+     * Adds {@code Tag} to taglist of {@code Person} specified.
+     * @param personToEdit Person to add tag to
+     * @param tagToAdd Tag to be added
+     * @return Person with the tag added
+     * @throws CommandException
+     */
+    private Person addTagToPerson(Person personToEdit, Tag tagToAdd) throws CommandException {
         Person newPerson = Person.copyPerson(personToEdit);
         ArrayList<Tag> tagList = newPerson.getTags();
-        HashSet<Tag> setForCheckingDuplicates = new HashSet<>(tagList);
 
-        for (Tag tag: tagsToAdd) {
-            if (!setForCheckingDuplicates.contains(tag)) {
-                tagList.add(tag);
-                setForCheckingDuplicates.add(tag);
-            } else {
-                throw new CommandException(MESSAGE_DUPLICATE_TAG);
-            }
+        if (!tagList.contains(tagToAdd)) {
+            tagList.add(tagToAdd);
+        } else {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
         newPerson.setTags(tagList);
@@ -91,6 +89,6 @@ public class AddTagCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddTagCommand // instanceof handles nulls
                 && index.equals(((AddTagCommand) other).index)
-                && tagsToAdd.equals(((AddTagCommand) other).tagsToAdd));
+                && tagToAdd.equals(((AddTagCommand) other).tagToAdd));
     }
 }

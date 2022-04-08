@@ -74,11 +74,12 @@ public class Person {
     }
 
     public void setTags(ArrayList<Tag> tagList) {
+        assert tagList != null;
         this.tags = tagList;
     }
 
     public ArrayList<Tag> getTags() {
-        return tags;
+        return new ArrayList<>(tags);
     }
 
     /**
