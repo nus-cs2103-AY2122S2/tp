@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.Set;
 
 import seedu.address.model.Model;
+import seedu.address.model.team.Skill;
 
 
 /**
@@ -33,8 +34,7 @@ public class HelpCommand extends Command {
     public static final String HELP_MESSAGE_UNDO = UndoCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_SHOW = ShowCommand.MESSAGE_USAGE;
     public static final String HELP_MESSAGE_FILTERTEAM = FilterPastTeamCommand.MESSAGE_USAGE;
-    public static final String HELP_MESSAGE_SKILL = "Skill stores a Skill Name and Skill proficiency. Usage: "
-            + "<Command> s/<Skill Name>_<Skill Proficiency> \nExample: edit 1 s/Java_50\n ";
+    public static final String HELP_MESSAGE_SKILL = Skill.MESSAGE_USAGE;
 
     public final String topic;
     public HelpCommand(String topic) {

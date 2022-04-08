@@ -37,8 +37,12 @@ Given below are my contributions to the project.
     * Add documentation for [Help feature](https://github.com/AY2122S2-CS2103T-W13-3/tp/blob/master/docs/UserGuide.md#viewing-help-help)
     * Add documentation for [Skills feature](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/39/files)
     * [Fix UG errors](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/140)
+    * [Update UG and Add Q&A](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/164)
+
   * Developer Guide:
     * [Update DG to include sequence diagrams and class diagrams of skills](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/59)
+    * [Add use cases, NFR and glossary](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/164)
+
 
 * **Community**:
-  * PR reviewed [#62](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/62), [#73](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/73), [#79](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79), [#141](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/141)
+  * PR reviewed with non-trivial comments [#62](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/62), [#73](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/73), [#79](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79), [#141](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/141)

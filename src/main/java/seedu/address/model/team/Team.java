@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Team {
 
-    public static final String MESSAGE_CONSTRAINTS = "teams names should be alphanumeric word(s)";
+    public static final int MAX_LENGTH_OF_TEAM_NAME = 20;
+    public static final String MESSAGE_CONSTRAINTS = "Team names should be alphanumeric word(s) and may"
+            + " contain spaces.\n Maximum length of a Team name is 20 characters.";
     // The REGEX below is the regex that checks for the team name constraint mentioned on MESSAGE_CONSTRAINTS
     public static final String VALIDATION_REGEX = "[\\d|\\w|\\s]+";
 
@@ -30,7 +32,7 @@ public class Team {
      * Returns true if a given string is a valid team name.
      */
     public static boolean isValidTeamName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_LENGTH_OF_TEAM_NAME;
     }
 
     @Override
