@@ -21,7 +21,7 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
     * Functionality: Allow the user to only append, or only remove fields from clients.
     * Justification: Previously, there was only the `edit` function, which did not work well in certain situations. For example, it could not remove existing fields. If the client had multiple tags, and the user wanted to remove one tag, she would have to input every other tag except that one.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=TypeDefinition&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=TypeDefinition)
 
 * **Project management**:
     * Managed releases `v1.2.0`, `v1.3.0-alpha` and `v1.3.0` (3 release) on GitHub.

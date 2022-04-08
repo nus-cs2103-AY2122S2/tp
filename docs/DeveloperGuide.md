@@ -131,9 +131,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the client data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the address book data i.e., all `Transaction` objects (which are contained in a `TransactionList` object).
+* stores the transaction data i.e., all `Transaction` objects (which are contained in a `TransactionList` object).
 * stores the currently 'selected' `Transaction` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Transaction>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
@@ -162,6 +162,33 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Person, Field & Tags
+
+#### Implementation
+
+The `Person` class is used to represent a client. The abstract `Field` class represents the client data, and the `Tag` class represents the tags of the Person.
+`Person` contains an immutable `HashMap<Prefix, Field>` of fields, and an immutable `HashSet<Tag>` of tags. Since `Person` is immutable, any getters and setters
+will return a new instance of `Person`. By using a `HashMap<Prefix, Field>` and `HashSet<Tag>`, `Person` can be made modular, as it is easy to add any new data to Person
+without needing to edit `Person.java`.
+
+By adding the getter and setter functions, we were able to remove unnecessary classes like `EditPersonDescriptor` & `PersonBuilder` from the original AB-3 base code.
+
+![Person Class Diagram](images/PersonClassDiagram.png)
+
+*Figure: Simplified class diagram of showing the association between Person, Field and Tag.*
+
+#### Design considerations
+
+**Aspect: Structure for storing fields**
+* **Alternative 1 (original AB-3 method)**:
+  Hard-code every field directly into `Person`.
+    * Pros: None.
+    * Cons: Extremely highly coupled code that requires many changes to be done everytime a new field is added. Pront to bugs.
+* **Alternative 2 (current choice)**
+  Make `Person` modular by storing a `HashMap<Prefix, Field>` of fields instead.
+    * Pros: Code is much less coupled. Much easier to maintain.
+    * Cons: A lot of work was required to decouple the existing `Person` implementation from AB-3.
+
 ### Undo
 
 #### Implementation
@@ -183,7 +210,7 @@ Step 1. The user launches the application for the first time. The `SerializableT
 with the file path of where the temporary files will be saved, and an empty `arraylist` named `tempFiles` is created to store the file paths of the
 temporary files that will be created.
 
-Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th person in the address book.
+Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th person in the client list.
 In `LogicManager`, before executing the command, it will locally store the current clients' list state.
 
 After executing the command, it will compare the previous state with the current state of the clients' list. If it senses they are different, such as in this
@@ -226,7 +253,7 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
 
 **Aspect: How undo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book in temporary files.
+* **Alternative 1 (current choice):** Saves the entire application data in temporary files.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of storage and memory usage.
 
@@ -396,7 +423,62 @@ The Levenshtein distance is calculated using the `editDistance(String str1, Stri
     * Pros: Less computationally intensive and a lot easier to implement.
     * Cons: The user will not have a choice of suggestions and will not know what they'll get (blackbox).
 
+### Command History
 
+#### Implementation
+
+The command history is handled by `CommandBox`, which also handles the user input.
+This mechanism aims to be as close to the history mechanism in the Linux Bash terminal as possible.
+
+Here is a brief example of how the command history works:
+* The command history only begins when the application is launched, and is cleared when the application closes.
+* Each time the user presses the up arrow key, the command box will be replaced with the command they previously executed, until they reach the start of their history.
+* Each time the user presses the down arrow key, the command box will be replaced with the command they next executed, until they reach the latest command (the current one they have not executed).
+* If the user executes duplicate commands one after another, only the first will be added to history.
+  * For example, if the user executes `list`, `list, `list`, only the first list is added to history. 
+
+<div markdown="1" class="alert alert-info">:information_source: **Info**
+
+If the user cycles to a previous command and edits it, that command will stay edited until that command is executed. Upon execution, the command will be reverted to how it originally was.
+* For example, the current command history is `[clear, delete 5, addMembership 4 m/gold, null]`.
+  1. The command box is blank. The user types `list`. The user has _not_ pressed `Enter` and presses the up arrow _twice_.
+  2. The current command history is `[clear, delete 5, addMembership 4 m/gold, list]`.
+  3. The command box now shows `delete 5`.
+  4. The user replaces `5` with `6`. The command box now shows `delete 6`. The user has _not_ pressed `Enter`.
+  5. The current command history is `[clear, delete 6, addMembership 4 m/gold, list]`.
+  6. The user presses the down arrow _twice_. The command box will show `list` again.
+  7. The user presses `Enter`. The command box is now empty and the `list` command is executed and permanently added to the history.
+  8. The current command history is now `[clear, delete 6, addMembership 4 m/gold, list, null]`.
+  9. The user presses the up arrow _thrice_. The command box will show `delete 6`, and not `delete 5`. This is because the user edited this history.
+  10. Now the user presses `Enter`. The command box is now empty and the `delete 6` command is executed and added to the history.
+  11. The current command history is now `[clear, delete 5, addMembership 4 m/gold, list, delete 6, null]`.
+  12. If the user presses the up arrow _once_, the command box will show `delete 6`. This is because that was the last executed command.
+  13. If the user presses the up arrow another _three times_, the command box will show `delete 5`. This is because upon execution, `delete 6` was added as a new history, and `delete 5` was restored in the history.
+
+</div>
+  
+The command history works with the use of two `ArrayList<String>`, `historyBuffer` and `activeBuffer`.
+
+`historyBuffer` contains the commands that was actually executed by the user (i.e., the user pressed enter).
+Whenever the user executes a command, regardless whether it is valid or not, the command is added to a `historyBuffer`.
+Commands in `historyBuffer`, once added, will never change.
+
+`activeBuffer` is a duplicate of `historyBuffer` that allows editing. Whenever the user cycles through their history and edits the command, they are editing the contents of `activeBuffer`.
+When the user edits a previous command and presses `Enter`, the content of that command in `activeBuffer` is restored with the original in `historyBuffer`.
+
+#### Design considerations
+
+**Aspect: Functionality**
+* **Alternative 1**:
+Have a very simple implementation with only one history list.
+Do not store edits for every single entry, and simply replace the command box with the previous command. 
+If the user presses up or down, any edits are lost.
+  * Pros: Very simple to implement.
+  * Cons: Less feature rich.
+* **Alternative 2 (current choice)**
+Store the history using two lists, and store edits for every command. If the user presses up or down, edits are not lost.
+  * Pros: Very similar to Linux Bash terminal, intuitive for experienced command line users.
+  * Cons: More complicated to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -430,16 +512,16 @@ The Levenshtein distance is calculated using the `editDistance(String str1, Stri
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                               | So that I can…​                                             |
-| ------- |--------------------------------------------|--------------------------------------------|-------------------------------------------------------------|
-| `* * *` | business owner                                   | list all my clients information            | see my clients information.                                 |
-| `* * *` | business owner                                       | add a new client to CinnamonBun            |                                                             |
-| `* * *` | business owner                                       | edit a client’s information                | keep my client’s information updated.                       |
-| `* * *` | business owner                                       | delete a client information                | remove those who are no longer customers.                   |
-| `* *`   | business owner                                       | find a client based on keywords            | easily find a specific client or group of clients.          |
- | `* * *` | business owner                                 | store a transaction of a particular client | easily keep track of unpaid transactions                    |
-| `* * ` | business owner                                 | sort my clients based on certain field                        | easily sort and see the customers based on the field I want |
-| `* * ` | business owner                                 | undo previous modifications made to the address book                        | prevent mistakes made to the clients' list data             |
+| Priority | As a …​        | I want to …​                                    | So that I can…​                                             |
+|----------|----------------|-------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | business owner | list all my clients information                 | see my clients information.                                 |
+| `* * *`  | business owner | add a new client to CinnamonBun                 |                                                             |
+| `* * *`  | business owner | edit a client’s information                     | keep my client’s information updated.                       |
+| `* * *`  | business owner | delete a client information                     | remove those who are no longer customers.                   |
+| `* *`    | business owner | find a client based on keywords                 | easily find a specific client or group of clients.          |
+ | `* * *`  | business owner | store a transaction of a particular client      | easily keep track of unpaid transactions                    |
+| `* * `   | business owner | sort my clients based on certain field          | easily sort and see the customers based on the field I want |
+| `* * `   | business owner | undo previous modifications made to CinnamonBun | prevent mistakes made to the clients' list data             |
 
 *{More to be added}*
 
