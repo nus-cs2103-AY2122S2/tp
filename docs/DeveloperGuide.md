@@ -185,7 +185,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "add", `AddCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("add").
-4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `AddCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
@@ -252,7 +252,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "delete", `DeleteCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("delete").
-4. In the `DeleteCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `DeleteCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
@@ -310,7 +310,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "deleteModule", `DeleteModuleCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteModule").
-4. In the `DeleteModuleCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `DeleteModuleCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
    
     <div markdown="span" class="alert alert-info">:information_source: 
@@ -364,7 +364,7 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "deleteTask", `DeleteTaskCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("deleteTask").
-4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `DeleteTaskCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
@@ -478,7 +478,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "assign", `AssignCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("assign").
-4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `AssignCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefex... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source:
@@ -573,7 +573,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "task", `TaskCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("task").
-4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `TaskCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
@@ -634,7 +634,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "find", `FindCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("find").
-4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `FindCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
     <div markdown="span" class="alert alert-info">:information_source: 
@@ -685,7 +685,7 @@ The `mark` command marks a specific undone task as done for a particular student
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "mark", `MarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "mark".
-4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into an `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
     </div>
@@ -729,7 +729,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
 2. The `AddressBookParser` invokes the respective `Parser` based on the first word of the input text.
 3. Since the first word in the user input matches the word "unmark", `UnmarkCommandParser#parse(arguments)` will be called. In this case, the arguments refer to the remaining input text after the exclusion of the command word "unmark".
-4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into a `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
+4. In the `AddressBookParser#parseCommand(arguments)`, the arguments will be tokenized into an `ArgumentMultiMap`, by `using ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
     <div markdown="span" class="alert alert-info">:information_source:
     <b>Note:</b> A `ParseException` will be thrown if the prefix of the compulsory fields are missing or if the arguments are invalid.
     </div>
@@ -836,7 +836,7 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
 3. Since the first word in the user input matches the word "progress", 
    `ProgressCommandParser#parse(arguments)` will be called.
    In this case, the arguments refer to the remaining input text after the exclusion of the command word ("progress").
-4. In the `ProgressCommandParser#parse(arguments)`, the arguments will be tokenized into a `ArgumentMultimap`,
+4. In the `ProgressCommandParser#parse(arguments)`, the arguments will be tokenized into an `ArgumentMultimap`,
    by using `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)`.
 
    <div markdown="span" class="alert alert-info">:information_source: 
