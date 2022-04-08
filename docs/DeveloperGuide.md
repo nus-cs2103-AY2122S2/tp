@@ -348,24 +348,26 @@ Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                              | I want to …​                                                       | So that I can…​                                                                 |
-|----------|----------------------------------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| `* * *`  | student who needs to contact other students for work-related matters | add the contact information of other students                      | easily view other students' contact when I need to                              |
-| `* * *`  | student                                                              | create a student group                                             | classify relevant students together in one place                                | 
-| `* * *`  | student who wants to only keep groups that are presently relevant    | delete my groups to clear the inactive groups out of my group list | not be distracted by outdated information                                       |
-| `* * *`  | student who works on a group project                                 | add other students to my group                                     | remember who are the students in my group                                       |
-| `* * *`  | student who works in a collaborative group project                   | add/delete tasks to the group                                      | let students in the same group see what are the tasks that need to be completed |
-| `* * *`  | student who needs to keep track of tasks that need to be done        | view the tasks that belong to each group                           | know the list of tasks I need to complete for that particular group             |
-| `* *`    | student                                                              | delete another student or myself from an existing group            | keep only relevant students in the group                                        |
-| `* *`    | student who needs to keep track of my deadlines                      | add a deadline to a task                                           | record when a task needs to be done                                             |
-| `* *`    | student with many groups in my list                                  | search for the group I am looking for                              | find the group I am looking for in a shorter amount of time                     |
-| `* *`    | student with many group tasks to complete                            | tag group tasks based on priority (high, medium, low)              | have an idea on which task my group need to start working on first              |
-| `* *`    | student who uses the application for the first time                  | view in-app guidance                                               | know how to navigate through the app when I am still unfamiliar with it         |
-| `* `     | student who wants to keep track of the project progress              | track the progress of the task that is handled by other students   | know the overall picture of our project                                         |
-| `*`      | student with bad time management                                     | get a reminder of my impending group projects                      | not forget to complete the tasks by the deadline                                |
-| `*`      | student                                                              | keep track of students who are in mutual groups                    | know who are in the same groups as I am                                         |
-
-*{More to be added}*
+| Priority | As a …​                                                              | I want to …​                                                     | So that I can…​                                                                               |
+|----------|----------------------------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`  | student who needs to contact other students for work-related matters | add the contact information of other students into my database   | easily view other students' contact when I need to                                            |
+| `* * *`  | student                                                              | delete a student information from my database                    | only keep the information of student contacts who are still relevant to me                    | 
+| `* * *`  | student who needs to work in a collaborative work                    | create a student group                                           | classify relevant students together in one place                                              | 
+| `* * *`  | student who wants to only keep groups that are presently relevant    | delete a student group                                           | clear the inactive groups out of my group list and not be distracted by outdated information  |
+| `* * *`  | student who works on a group project                                 | add other students to my group                                   | remember who are the students in my group                                                     |
+| `* * *`  | student                                                              | delete another student                                           | keep only relevant students in the group                                                      |
+| `* * *`  | student who works in a collaborative group project                   | add a task to a group                                            | let students in the same group see what are the tasks that need to be completed               |
+| `* * *`  | student who works in a collaborative group project                   | delete a task from a group                                       | remove irrelevant tasks from a group and only keep tasks that are still relevant in the group |
+| `* * *`  | student who works in a group project with other members              | view who are the students in my group                            | know who my group members are                                                                 |
+| `* * *`  | student who needs to keep track of tasks that need to be done        | view the tasks that belong to each group                         | know the list of tasks that need to be completed for that particular group                    |
+| `* * *`  | student with many other student contacts in my list                  | search for student contacts based on their information           | easily find student contacts that have the information that I am looking for                  |
+| `* *`    | student who needs to keep track of my deadlines                      | add a deadline to a task                                         | keep a record of when a task needs to be done                                                 |
+| `* *`    | student with many groups in my list                                  | search for the group I am looking for                            | find the group I am looking for in a shorter amount of time                                   |
+| `* *`    | student with many group tasks to complete                            | tag group tasks based on priority (high, medium, low)            | have an idea on which task my group need to start working on first                            |
+| `* *`    | student who uses the application for the first time                  | view in-app guidance                                             | know how to navigate through the app when I am still unfamiliar with it                       |
+| `* `     | student who wants to keep track of the project progress              | track the progress of the task that is handled by other students | know the overall picture of our project                                                       |
+| `*`      | student with bad time management                                     | get a reminder of my impending group projects                    | not forget to complete the tasks by the deadline                                              |
+| `*`      | student                                                              | keep track of students who are in mutual groups                  | know who are in the same groups as I am                                                       |
 
 ### Use cases
 
