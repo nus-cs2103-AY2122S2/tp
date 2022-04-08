@@ -171,7 +171,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. Stepping through the method shows that it calls `ArgumentTokenizer#tokenize()` and `ParserUtil#parseIndex()` to obtain the arguments and index required.
 
-1. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `edit` command and store any possible changes in an `EditPersonDescriptor`. Recall that we can verify the contents of `editPersonDesciptor` through the 'Variables' window.<br>
+1. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `edit` command and store any possible changes in an `EditPetDescriptor`. Recall that we can verify the contents of `editPetDesciptor` through the 'Variables' window.<br>
    ![EditCommand](../images/tracing/EditCommand.png)
 
 1. As you just traced through some code involved in parsing a command, you can take a look at this class diagram to see where the various parsing-related classes you encountered fit into the design of the `Logic` component.
@@ -189,20 +189,20 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
    @Override
    public CommandResult execute(Model model) throws CommandException {
        ...
-       Person petToEdit = lastShownList.get(index.getZeroBased());
-       Person editedPet = createEditedPerson(petToEdit, editPetDescriptor);
-       if (!petToEdit.isSamePerson(editedPet) && model.hasPerson(editedPet)) {
+       Pet petToEdit = lastShownList.get(index.getZeroBased());
+       Pet editedPet = createEditedPet(petToEdit, editPetDescriptor);
+       if (!petToEdit.isSamePet(editedPet) && model.hasPet(editedPet)) {
            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
        }
-       model.setPerson(petToEdit, editedPet);
-       model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+       model.setPet(petToEdit, editedPet);
+       model.updateFilteredPetList(PREDICATE_SHOW_ALL_PERSONS);
        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPet));
    }
    ```
 
 1. As suspected, `command#execute()` does indeed make changes to the `model` object. Specifically,
-    * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the pet data.
-    * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ pets.<br>
+    * it uses the `setPet()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the pet data.
+    * it uses the `updateFilteredPetList` method to ask the `Model` to populate the 'filtered list' with _all_ pets.<br>
       FYI, The 'filtered list' is the list of pets resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the pets so that the user can see the edited pet along with all other pets. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
       To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of pets is being tracked.
       <img src="../images/ModelClassDiagram.png" width="450" /><br>
@@ -232,14 +232,14 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         pets.addAll(
-            source.getPersonList()
+            source.getPetList()
                   .stream()
-                  .map(JsonAdaptedPerson::new)
+                  .map(JsonAdaptedPet::new)
                   .collect(Collectors.toList()));
     }
     ```
 
-1. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the `JsonSerializableAddressBook`.
+1. It appears that a `JsonAdaptedPet` is created for each `Pet` and then added to the `JsonSerializableAddressBook`.
    This is because regular Java objects need to go through an _adaptation_ for them to be suitable to be saved in JSON format.
 
 1. While you are stepping through the classes in the `Storage` component, here is the component's class diagram to help you understand how those classes fit into the structure of the component.<br>
@@ -296,6 +296,6 @@ Here are some quick questions you can try to answer based on your execution path
 
     4.  Add a new command
 
-    5.  Add a new field to `Person`
+    5.  Add a new field to `Pet`
 
     6.  Add a new entity to the address book
