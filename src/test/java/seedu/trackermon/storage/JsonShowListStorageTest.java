@@ -54,23 +54,35 @@ public class JsonShowListStorageTest {
     }
 
     /**
-     * Tests
+     * Tests that a {@code DataConversionException} is thrown when {@code readShowList} is provided
+     * a non-Json format data file.
      */
     @Test
     public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataConversionException.class, () -> readShowList("notJsonFormatShowList.json"));
     }
 
+    /**
+     * Tests that a {@code DataConversionException} is thrown when {@code readShowList} is provided
+     * a data file with invalid Shows.
+     */
     @Test
     public void readShowList_invalidShowShowList_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readShowList("invalidShowShowList.json"));
     }
 
+    /**
+     * Tests that a {@code DataConversionException} is thrown when {@code readShowList} is provided
+     * a data file with both valid and invalid Shows.
+     */
     @Test
-    public void readShowList_invalidAndValidPersonShowList_throwDataConversionException() {
+    public void readShowList_invalidAndValidShowShowList_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readShowList("invalidAndValidShowShowList.json"));
     }
 
+    /**
+     * Tests that no errors are thrown when providing {@code readShowList} and {@code saveShowList} valid inputs.
+     */
     @Test
     public void readAndSaveShowList_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempShowList.json");
@@ -97,6 +109,10 @@ public class JsonShowListStorageTest {
 
     }
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code saveShowList}
+     * attempts to save a null {@code ShowList}.
+     */
     @Test
     public void saveShowList_nullShowList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveShowList(null, "SomeFile.json"));
@@ -114,6 +130,10 @@ public class JsonShowListStorageTest {
         }
     }
 
+    /**
+     * Tests that a {@code NullPointerException} is thrown when {@code saveShowList}
+     * attempts to save {@code ShowList} to a null file path.
+     */
     @Test
     public void saveShowList_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveShowList(new ShowList(), null));
