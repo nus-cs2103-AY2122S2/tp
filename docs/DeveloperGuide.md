@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a `Person`).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagrams below illustrate the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -285,7 +285,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 9. The `LogicManager` will then call `DeleteCommand#execute(Model model)`.
 10. In the `DeleteCommand`, a new `StudentIdContainsKeywordsPredicate` is created if `StudentId` was used as the input.
 11. If `StudentId` was used, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked, which
-    updates the filter of the person list to filter by the given `StudentIdContainsKeywordsPredicate`, after which the entry (if any) that matches the `StudentIdContainsKeywordsPredicate` will be deleted by invoking `model#deletePerson(Person person)`.
+    updates the filter of the `PersonList` to filter by the given `StudentIdContainsKeywordsPredicate`, after which the entry (if any) that matches the `StudentIdContainsKeywordsPredicate` will be deleted by invoking `model#deletePerson(Person person)`.
 12. Otherwise, if an `Index` array was used, a list of `Person`s corresponding to their `Index` in the displayed list will be created, after which they will be processed one by one for deletion.
 13. Lastly, the `DeleteCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
@@ -337,7 +337,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
 9. A new `DeleteModuleCommand` will be created (using the `ModuleCodeContainsKeywordsPredicate` returned in Step 8) and returned to the `LogicManager`.
 10. The `LogicManager` will then call `DeleteModuleCommand#execute(Model model)`.
 11. The `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked, which
-    updates the filter of the person list to filter by the given `ModuleIdContainsKeywordsPredicate`.
+    updates the filter of the `PersonList` to filter by the given `ModuleIdContainsKeywordsPredicate`.
 12. Each `Person` that appears in the filtered list will then be deleted by invoking `model#deletePerson(Person person)`.
 13. Lastly, the `DeleteModuleCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
@@ -440,22 +440,22 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
 8. If the both the `studentId` and `index` is present then `model#deleteTaskOfPerson(StudentId studentId, Index index)` method is invoked.
    1. `AddressBook#deleteTaskOfPerson(StudentId studentId, Index index)`is invoked, which invokes `UniquePersonList#deleteTaskOfPerson(StudentId studentId, Index index)` method.
    2. This method will iterate through each `Person` object in and check for matching `studentId`.
-      If found, the method will get a copy of the person by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`. 
+      If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Index index)`. 
       If the index is out of bounds, `InvalidTaskIndexException()` will be thrown by the `taskList#deleteTask(Index index)` method. 
       If no student with matching studentId is found, `PersonNotFoundException()` will be thrown. 
-   3. The updated person will be replaced the person.
+   3. The updated `Person` will be replaced the current `Person` object.
    4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskOfPerson(StudentId studentId, Index index)` method, which
-      updates the filter of the person list to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+      updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
    
 9. If the both the `moduleCode` and `task` is present then `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method is invoked.
    1. `AddressBook#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)`is invoked, which invokes `UniquePersonList#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method.
    2. This method will iterate through each `Person` object in and check for matching `moduleCode`.
-      If found, the method will get a copy of the person by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
+      If found, the method will get a copy of the `Person` object by invoking `Person#getCopy()`, deletes the task by invoking `Person#deleteTask(Task task)`.
       If no task is found, `TaskNotFoundException()` will be thrown by the `taskList#deleteTask(Task task)` method.
       If no student with matching moduleCode is found, `ModuleCodeNotFoundException()` will be thrown.
-   3. The updated person will replace the person.
+   3. The updated `Person` will be replaced the current `Person` object.
    4. If the task is successfully deleted, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will then be invoked by `model#deleteTaskForAllInModule(ModuleCode moduleCode, Task task)` method, which
-      updates the filter of the person list to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
+      updates the filter of the `PersonList` to filter by the given `PREDICATE_SHOW_ALL_PERSONS`.
    
 10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
 
@@ -601,7 +601,7 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
     If the size is equals to 0, a `CommandException` will be thrown.
 
     <div markdown="span" class="alert alert-info">:information_source: 
-    <b>Note:</b> The `studentId` is a UNIQUE field in TAPA.
+    <b>Note:</b> The `studentId` is a UNIQUE field in TAPA, so multiple students cannot have the same `studentId`.
     </div>
 
 13. The `Person` object in the filtered list is then extracted out using `model#getFilteredPersonList().get(0)`.
@@ -666,7 +666,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 9. A new `FindCommand` will be created (using the `Predicate` in Step 8) and returned to the `LogicManager`.
 10. The `LogicManager` will then call `FindCommand#execute(Model model)`.
 11. In the `FindCommand`, the `model#updateFilteredPersonList(Predicate<Person> predicate)` will be invoked, which
-    updates the filter of the person list to filter by the given `Predicate`.
+    updates the filter of the `PersonList` to filter by the given `Predicate`.
 12. Lastly, the `FindCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
 The following sequence diagram shows how the find operation works:
@@ -1172,7 +1172,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  Usage should be more efficient than a regular contact management application for a user who types fast in English text.
 4.  Should be usable by a novice who has never used a contact management application before.
 5.  The system should respond within 3 seconds.
@@ -1185,7 +1185,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Module**: A specific class that a student is taking
 * **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
-
+* **Person**: A student in TAPA. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
