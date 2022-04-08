@@ -69,7 +69,7 @@ public class ClassGroup implements Entity {
      * Construct a {@code ClassGroup} by copying all the provided fields.
      */
     public ClassGroup(ClassGroupId classGroupId, ClassGroupType classGroupType, TaModule taModule,
-                       UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
+                      UniqueStudentList uniqueStudentList, List<Lesson> lessons) {
         this.classGroupId = classGroupId;
         this.classGroupType = classGroupType;
         this.taModule = taModule;
