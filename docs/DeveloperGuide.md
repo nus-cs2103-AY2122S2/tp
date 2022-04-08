@@ -1064,13 +1064,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. A student with the same matriculation number already exists.
+* 1a. A student with the same Student ID already exists.
 
     * 1a1. TAPA shows an error message.
 
         Use case ends.
 
-* 1b. The matriculation number of the student is not in the input command.
+* 1b. The Student ID of the student is not in the input command.
 
     * 1b1. TAPA shows an error message.
 
@@ -1161,7 +1161,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-* 3c. The new matriculation number specified is already in the database.
+* 3c. The new Student ID specified is already in the database.
 
     * 3c1. TAPA shows an error message.
 
