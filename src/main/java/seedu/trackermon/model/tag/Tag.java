@@ -40,6 +40,9 @@ public class Tag {
                 && tagName.equals(((Tag) other).tagName)); // state check
     }
 
+    /**
+     * Returns a {@code int} representation of {@code Tag}
+     */
     @Override
     public int hashCode() {
         return tagName.hashCode();
