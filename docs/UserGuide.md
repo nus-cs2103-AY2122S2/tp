@@ -20,7 +20,7 @@ If you can type fast, MyGM can get your contact management tasks done faster tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your MyGM. **Put the JAR file in an empty folder in which the app is allowed to create files (i.e., do not use a write-protected folder). You can copy it to your desktop or just leave it in your Downloads folder.**
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
+4. Double-click the file to start the app(Mac user are recommended to type `java -jar MyGM.jar` in terminal). The GUI similar to the below should appear in a few seconds (note that there might be slight difference in different OS).<br>
 The GUI is split into two parts: Players and Schedules. <br>
    ![Ui](images/Ui.png) ![Ui2](images/Ui2.png) <br>
 Details of the GUI are shown below![Ui_Players](images/UiPlayers.png) ![Ui_Schedule](images/UiSchedule.png)<br>
@@ -77,13 +77,26 @@ Format: `help`
 
 Adds a player/ lineup/ schedule to MyGM.
 
-**To add a player:**<br>
-Format: `add P/ n/NAME j/JERSY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
+**To add a player:**
+Format: `add P/ n/NAME j/JERSEY_NUMBER w/WEIGHT h/HEIGHT p/PHONE_NUMBER e/EMAIL_ADDRESS [t/TAG]…​`
 
 * Adds a player with the specified attributes to the player list in MyGM.
-* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`
+* The first character of every word in `NAME` are recommended to be capitalized. For example:`John Doe`
 * `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
-* The first character of every word in `NAME` should be capitalized. For example:`John Doe`
+* `NAME` must not exist in MyGM already.
+* `JERSEY_NUMBER` should be an integer between 0 and 99.
+* `JERSEY_NUMBER` must not exist in MyGM already.
+* `WEIGHT` should be an integer between 1 and 200.
+* `HEIGHT` should be an integer between 1 and 300.
+* `PHNOE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+* `EMAIL_ADDRESS` should be of the format local-part@domain and adhere to the following constraints:
+  * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 
+  * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+    - End with a domain label at least 2 characters long
+    - Have each domain label start and end with alphanumeric characters
+    - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`.
 
 Examples:
 * `add P/ n/John Doe j/3 w/69 h/188 p/98765432 e/johnd@example.com t/PG` Adds a player by the name of John Doe, jersey number of 3, position of PG, weight of 69kg, height of 188cm, handphone number of 98765432
@@ -93,8 +106,10 @@ and email of johnd@example.com to the player list.`
 
 **To add a lineup:**<br>
 Format: `add L/ n/LINEUP_NAME`
-* Adds a lineup with the specified `LINEUP_NAME` inside MyGM.
+* 
+* Adds a lineup with the specified `LINEUP_NAME` inside MyGM. 
 * `LINEUP_NAME` is case-sensitive. `allstar` and `AllStar` are considered as different lineups.
+* The new `LINEUP_NAME` must not exist in MyGM already.
 
 Examples:
 * `add L/ n/starting five` adds a lineup by the name of `starting five` inside MyGM.
@@ -113,8 +128,8 @@ Examples:
 Format: `add S/ n/SCHEDULE_NAME r/DESCRIPTION d/DATETIME`
 * Adds a schedule with the schedule name `SCHEDULE_NAME` description of `DESCRIPTION` and the date time of `DATETIME` inside MyGM.
 * `DATETIME` must be in a dd/mm/yyyy hhmm format.
-* The first character of every word in `SCHEDULE_NAME` should be capitalized. For example:`Starting Five`
-* Multiple schedules can be added to a same date due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the name and description section.
+* The first character of every word in `SCHEDULE_NAME` are recommended to be capitalized. For example:`Starting Five`
+* Multiple schedules can be added to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 Examples:
 * `add S/ n/Competition r/first game of national competition d/20/04/2024 2200` adds a schedule with name `Competition`, description of `first game of national competition` that is held on `20/04/2024 2200`.
@@ -158,6 +173,7 @@ Format: `put P/PLAYER L/LINEUP`
 * Displays error if either the specified PLAYER or LINEUP does not exist.
 * Each player can join multiple lineups.
 * Each lineup can have up to five players.
+* Each player can not join the same lineup again.
 
 * Example:
 * `put P/John Doe L/starting five` Puts John Doe into the lineup named starting five.
@@ -279,9 +295,25 @@ Format: `edit P/NAME [n/NAME] [p/PHONE_NUMBER] [w/WEIGHT] [h/HEIGHT] [j/JERSEY_N
 * Edit the details of a player from the player list.
 * If any fields are specified, it will change accordingly.
 * Multiple fields can be changed at once.
+* The new `NAME` is case-sensitive. `John Doe` and `joHN dOE` are considered as different players.
+* The new `NAME` must not exist in MyGM already.
+* `JERSEY_NUMBER` should be an integer between 0 and 99.
+* `JERSEY_NUMBER` must not exist in MyGM already.
+* `WEIGHT` should be an integer between 1 and 200.
+* `HEIGHT` should be an integer between 1 and 300.
+* `PHNOE_NUMBER` should only contain numbers, and it should be at least 3 digits long.
+* `EMAIL_ADDRESS` should be of the format local-part@domain and adhere to the following constraints:
+    * The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    * This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+      The domain name must:
+        - End with a domain label at least 2 characters long
+        - Have each domain label start and end with alphanumeric characters
+        - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* `TAG` must only be either `PG`, `SG`, `SF`, `PF` or `C`.
 
 Example:
 * `edit P/James Soften p/8888888` will change the phone number of player James Soften to 88888888.
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -304,7 +336,7 @@ e.g `edit P/Anthony Glass t/`
 Format: `edit L/LINEUP n/NEW_LINEUP_NAME`
 
 * Edit the lineup name of lineup to a new lineup name.
-* The new lineup name must not exist in MyGM already.
+* The case-sensitive `NEW_LINEUP_NAME` must not exist in MyGM already.
 
 Example:
 * `edit L/Starting5 n/Worst5` will change name of the lineup Starting5 to Worst5
@@ -317,6 +349,7 @@ Format: `edit S/INDEX_SCHEDULE [n/NEW_NAME] [r/NEW_DESC] [d/NEW_DATE]`
 * If any fields are specified, it will be changed accordingly
 * Multiple fields can be changed at once
 * At least one field must be specified
+* Multiple schedules can be edited to a same `DATETIME` due to the concern that the user might have different arrangements for different lineups, and such details can be specified in the `SCHEDULE_NAME` and `DESCRIPTION` sections.
 
 Example:
 * `edit S/1 n/finals r/nba finals d/06/06/2022 2100` will edits the first schedule.
