@@ -113,7 +113,8 @@ How the `Logic` component works:
 
 <div markdown="span" class="alert alert-info">:information_source: **Info**<br>
 
-The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -181,6 +182,24 @@ By adding the getter and setter functions, we were able to remove unnecessary cl
 *Figure: Simplified class diagram of showing the association between Person, Field and Tag.*
 
 `AddCommand`, `EditCommand`, `RemarkCommand`, `AppendCommand` and `RemoveCommand` adds and removes fields and tags from a `Person`.
+
+![Append Sequence Diagram](images/AppendSequenceDiagram.png)
+
+*Figure: Simplified sequence diagram of `AppendCommand`.*
+
+<div markdown="span" class="alert alert-info">:information_source: **Info**<br>
+
+* The lifeline for `AppendCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+* The lifeline for `AppendCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+<div markdown="span" class="alert alert-info">:bulb: **Note**<br>
+
+* The above sequence diagram has been simplified to provide a more comprehensible overview. It is not completely accurate as some unnecessary details have been omitted.
+* While not shown here, `AddCommand`, `EditCommand`, `RemarkCommand`, `RemoveCommand` work very similarly to `AppendCommand`, and their sequence diagram will be almost identical to `AppendCommand`'s.
+
+</div>
 
 #### Design considerations
 
