@@ -38,7 +38,7 @@ ClearCommand --> LogicManager : CommandResult with isClearRequest == true
 deactivate ClearCommand
 
 LogicManager --> MainWindow : CommandResult with isClearRequest == true
-deactivate ClearCommand
+deactivate LogicManager
 
 MainWindow -> MainWindow : handleClearRequest()
 activate MainWindow UI_COLOR

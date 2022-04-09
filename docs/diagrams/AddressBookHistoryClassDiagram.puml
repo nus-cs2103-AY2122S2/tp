@@ -1,8 +1,8 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor LOGIC_COLOR_T4
-skinparam classBackgroundColor LOGIC_COLOR
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
 skinparam classAttributeFontColor BackgroundColor
 show members
 
@@ -22,7 +22,7 @@ Class "<<interface>>\nModel" as Model
 
     class AddressBookHistory {
         List<>: previousAddressBooks
-        addAddressBook()
+        addAddressBook(addressBook: AddressBook)
         getPreviousAddressBook()
         clearHistory()
     }
