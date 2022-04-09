@@ -45,7 +45,7 @@ Given below are my contributions to the project.
         * Added documentation for the features `edtifriend`, `showfriends`, `showfriend` and `showevents` [\#58](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/58)
     * Developer Guide:
         * Added User Stories, Glossary and Non-functional requirements
-        * Added Use cases for `addevent`, `edtievent` `showfriends`, `showfriend` and `showevents` [\#44](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/44), [\$57](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/57)
+        * Added Use cases for `addevent`, `edtievent` `showfriends`, `showfriend` and `showevents` [\#44](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/44), [\#57](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/57)
         * Added implementation details for `editevent`, `showevents` and Tab management [\#143](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/143)
     * Created a GUI Test documentation
       * Contains all the various test performed manually on the GUI [\#169](https://github.com/AY2122S2-CS2103-F09-2/tp/pull/169).
