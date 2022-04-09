@@ -6,7 +6,7 @@ start
 'diamond we place it as the true branch instead.
 
 if (Command is Valid)
-    :ManageEZPZ marks the [Task] as not done;
+    :ManageEZPZ unmarks the [Task], which changes the status back to not done;
 else ([else])
 endif
 stop
