@@ -12,11 +12,11 @@ Given below are my contributions to the project.
 * **Enhancement**: Creation of the model component for `Task` as a baseline for the use by other teammates. [#64](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/64), [#81](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/81)
   * What it does : The creation of the `Task` component allows for smoother creation of the different types of Task related commands.
   * Justification : This enhancement is important as the different type of Task related command such as adding, deleting, editing and even finding. All relies on the methods created in the `Task` model.  
-  * Highlights : This enhancement required me to constantly update the methods that are required by my teammates as the methods in the `Task` Model changes as more commands are being added. As well as the importance of abstraction principles in the implementation of the new `Task` class.
+  * Highlights : This enhancement required me to constantly update the methods that are required by my teammates as the methods in the `Task` Model changes as more commands are being added. As well as the importance of abstraction principles in the implementation of the `Task` class.
 
 
 * **Enhancement**: Creation of Enum class `Priority`.
-  * What it does : The Enum class `Priority` allows the different types of Task to be assigned with a Priority.
+  * What it does : The Enum class `Priority` allows the different types of Task to be assigned with a Priority. [#145](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/145)
   * Justification : This enhancement is important as the tagPriority command relies on Tasks having priorities.
   * Highlights : Creating a separate enum class for `Priority` makes the `Task` class more readable as opposed to clustering them together.
 
@@ -46,7 +46,7 @@ Given below are my contributions to the project.
       * Added back the `delete` command for Person but renamed it as `deleteEmployee`. [#103](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/103)
   * Developer Guide :
       * Added implementation details of the `Task` Model, including two class diagrams. [#120](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/120), [#127](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/127)
-  
+      * Added appendix instructions for manual testing & appendix for Effort. [#286](https://github.com/AY2122S2-CS2103-F11-1/tp/pull/286)
 
 * **Community**:
   * Setting up the GitHub team org & repo.

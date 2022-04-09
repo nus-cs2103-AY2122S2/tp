@@ -1,9 +1,11 @@
 package manageezpz.logic.commands;
 
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EVENT;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_TODO;
 import static manageezpz.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,6 +30,7 @@ import manageezpz.model.task.TaskMultiplePredicate;
 import manageezpz.model.task.Time;
 import manageezpz.model.task.Todo;
 import manageezpz.testutil.EditEmployeeDescriptorBuilder;
+import manageezpz.testutil.TodoBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -69,9 +72,30 @@ public class CommandTestUtil {
     public static final String INVALID_PRIORITY = "H1GH";
     public static final String VALID_BOOLEAN = "true";
     public static final String INVALID_BOOLEAN = "t";
-
     public static final String INVALID_DATE = "2022 01 01";
 
+    // addTodo-related commands
+    public static final String VALID_TODO_DESC_READ_BOOK = " " + PREFIX_DESCRIPTION + "Read Book";
+    public static final String INVALID_TODO_DESC_DRINK = " " + PREFIX_DESCRIPTION + " ";
+
+    // tagTask-related commands
+    public static final String VALID_TAG_TASK = " " + 1 + " " + PREFIX_NAME + "Bob Choo";
+    public static final String INVALID_TAG_TASK_NO_PREFIX = " " + 1 + " ";
+    public static final String INVALID_TAG_TASK_NO_INDEX = " " + PREFIX_NAME + "BOB";
+    public static final String INVALID_TAG_TASK_INVALID_INDEX = "asd " + PREFIX_NAME + "BOB";
+    public static final String INVALID_TAG_TASK_EMPTY_NAME = " " + 1 + " " + PREFIX_NAME + " ";
+    public static final String INVALID_TAG_TASK_PREAMBLE = "asd 1 " + PREFIX_NAME + "BOB";
+
+    // tagPriority-related commands
+    public static final String VALID_TAG_PRIORITY = " " + 1 + " " + PREFIX_PRIORITY + "HIGH";
+    public static final String INVALID_TAG_PRIORITY_NO_PREFIX = " " + 1 + " ";
+    public static final String INVALID_TAG_PRIORITY_NO_INDEX = " " + PREFIX_PRIORITY + "HIGH";
+    public static final String INVALID_TAG_PRIORITY_INVALID_INDEX = "asd " + PREFIX_PRIORITY + "HIGH";
+    public static final String INVALID_TAG_PRIORITY_INVALID_PRIORITY = " " + 1 + " " + PREFIX_PRIORITY + "IMPORTANT";
+    public static final String INVALID_TAG_PRIORITY_EMPTY_PRIORITY = " " + 1 + " " + PREFIX_PRIORITY + " ";
+    public static final String INVALID_TAG_PRIORITY_PREAMBLE = "asd 1 " + PREFIX_PRIORITY + "HIGH";
+    public static final String INVALID_TAG_PRIORITY_EMPTY_PREAMBLE = " " + PREFIX_PRIORITY + "HIGH";
+    // Creation of events
     public static final Todo TODO_TASK;
     public static final Event EVENT_TASK;
     public static final Deadline DEADLINE_TASK;
@@ -87,7 +111,7 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
 
-        TODO_TASK = new Todo(new Description(VALID_TASK_DESCRIPTION));
+        TODO_TASK = new TodoBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
         EVENT_TASK = new Event(new Description(VALID_TASK_DESCRIPTION), new Date(VALID_DATE),
                 new Time(VALID_START_TIME), new Time(VALID_END_TIME));
         DEADLINE_TASK = new Deadline(new Description(VALID_TASK_DESCRIPTION), new Date(VALID_DATE),

@@ -58,4 +58,12 @@ public class TagTaskPriorityCommand extends Command {
         return new CommandResult(String.format(MESSAGE_TAG_PRIORITY_SUCCESS, priority.name())
                 + taggedPriorityTask);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagTaskPriorityCommand// instanceof handles nulls
+                && targetIndex.equals(((TagTaskPriorityCommand) other).targetIndex)
+                && priority.equals(((TagTaskPriorityCommand) other).priority));
+    }
 }
