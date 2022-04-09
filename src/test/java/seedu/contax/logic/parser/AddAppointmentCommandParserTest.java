@@ -111,6 +111,11 @@ public class AddAppointmentCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // non-empty preamble
+        assertParseFailure(parser, " amble" + APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE + APPOINTMENT_TIME
+                + APPOINTMENT_DURATION, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddAppointmentCommand.MESSAGE_USAGE));
+
         // invalid name
         assertParseFailure(parser, INVALID_APPOINTMENT_NAME_DESC + APPOINTMENT_DATE + APPOINTMENT_TIME
                 + APPOINTMENT_DURATION, Name.MESSAGE_CONSTRAINTS);
