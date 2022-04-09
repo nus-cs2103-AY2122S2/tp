@@ -1,6 +1,8 @@
 package seedu.ibook.model.product.filters;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.testutil.TypicalItems.getItemTenDays;
 import static seedu.ibook.testutil.TypicalItems.getItemToday;
@@ -18,6 +20,7 @@ public class ExpiringFilterTest {
 
     private final Product productA = new ProductBuilder(PRODUCT_A).buildWithItems(getItemToday());
     private final Product productB = new ProductBuilder(PRODUCT_B).buildWithItems(getItemTenDays());
+
     @Test
     void test_exactDate_match() {
         assertTrue(EXPIRING_FILTER_TODAY.test(productA));
@@ -32,5 +35,11 @@ public class ExpiringFilterTest {
     @Test
     void test_dateAfter_noMatch() {
         assertFalse(EXPIRING_FILTER_TODAY.test(productB));
+    }
+
+    @Test
+    void testEquals() {
+        assertEquals(EXPIRING_FILTER_TODAY, EXPIRING_FILTER_TODAY);
+        assertNotEquals(EXPIRING_FILTER_TODAY, EXPIRING_FILTER_TEN_DAYS);
     }
 }

@@ -167,17 +167,26 @@ Shows the full list of all products in iBook.
 
 Format: `list`
 
-#### 3.1.2 Adding a product : `add` 
+#### 3.1.2 Adding a product : `add`
 
 Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
+|                   |                                                              |
+|-------------------|--------------------------------------------------------------|
+| Compulsory Fields | `NAME`, `PRICE`                                              | 
+| Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
+
 * Only a single product would be added at a time.
 * The new product added must not be of the same `NAME` and `CATEGORY`.
 * The `NAME` and the `PRICE` fields cannot be empty.
+* If the `CATEGORY` field is not specified or is empty, the default category, **Miscellaneous**, would be used.
+* The default `DISCOUNT_RATE` is 0.
+* The default `DISCOUNT_START` is 0.
 
 Examples:
+
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
 
 *Alternatively*, 
@@ -272,7 +281,19 @@ Click <img align="center" src = "images/ui-icons/x.png" alt="X" height = "25"/> 
 
 </div>
 
-#### 3.1.6 Looking for products that are out of stock : `out-of-stock`
+#### 3.1.6 Looking for products having expired items : `expired`
+
+Finds products that contain expired items.
+
+Format: `expired`
+
+*Alternatively*, 
+
+Click on the menu bar `Actions` > `Find expired`
+
+:bulb: Items that are expiring on the same day are not considered expired
+
+#### 3.1.7 Looking for products that are out of stock : `out-of-stock`
 
 Lists products that are out of stock.
 
@@ -402,6 +423,8 @@ Click on the menu bar `Actions` > `Find Expired items`
 Lists items that are expiring within a certain number of days
 
 Format: `remind NUMBER_OF_DAYS`
+
+* `NUMBER_OF_DAYS` should be a non-negative integer.
 
 Examples: `remind 10` lists items that are expiring 10 days from now.
 
