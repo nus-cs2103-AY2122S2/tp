@@ -7,7 +7,7 @@
 ![Ui](docs/images/Ui.png)
 
 * This is a brown field **curriculum based project by Software Engineering (SE) students**.<br>
-* The project delivers a desktop application (called _TAlent Assistant™_) used by professors to schedule interviews and
+* The project delivers a desktop application (called _TAlent Assistant™_) used by NUS School of Computing professors to schedule interviews and
   keep track of applications for teaching assistants.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base.
   * It comes with a **reasonable level of user and developer documentation**.
