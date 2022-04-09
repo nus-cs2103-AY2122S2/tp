@@ -13,17 +13,19 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+
 Class Person
-Class Address
-Class Email
 Class Name
+Class Email
 Class Phone
+Class Address
 Class Remark
 Class Birthday
 Class Membership
 Class Tag
 
 Class TransactionList
+
 Class Transaction
 Class Amount
 Class Status
@@ -36,17 +38,21 @@ Class Note
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
-
-ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+
+ModelManager .up.|> Model
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+AddressBook .up.|> ReadOnlyAddressBook
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" TransactionList
+
 UniquePersonList --> "~* all" Person
+
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -56,17 +62,29 @@ Person *--> "0..1" Birthday
 Person *--> "0..1" Membership
 Person *--> "*" Tag
 
-AddressBook *--> "1" TransactionList
+Name -[hidden]right-> Email
+Phone -[hidden]up-> Name
+Phone -[hidden]right-> Address
+Address -[hidden]up-> Email
+Remark -[hidden]up-> Phone
+Remark -[hidden]right-> Birthday
+Birthday -[hidden]up-> Address
+Membership -[hidden]up-> Remark
+Membership -[hidden]right-> Tag
+Tag -[hidden]up-> Birthday
+
 TransactionList --> "~* all" Transaction
+
 Transaction *--> Amount
 Transaction *--> Status
 Transaction *--> TransactionDate
 Transaction *--> "0..1" DueDate
 Transaction *--> "0..1" Note
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Amount -[hidden]down-> Status
+Status -[hidden]down-> TransactionDate
+TransactionDate -[hidden]down-> DueDate
+DueDate -[hidden]down-> Note
 
 ModelManager -->"~* filtered" Person
 ModelManager -->"~* filtered" Transaction
