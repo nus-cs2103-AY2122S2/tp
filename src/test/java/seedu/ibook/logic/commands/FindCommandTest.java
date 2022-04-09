@@ -2,7 +2,7 @@ package seedu.ibook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
+import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ibook.testutil.TypicalProductFilters.CATEGORY_FILTER_BREAD;
 import static seedu.ibook.testutil.TypicalProductFilters.NAME_FILTER_A;
@@ -58,7 +58,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_noKeywords_allProductsFound() {
-        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 5);
         FindCommand command = new FindCommand();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(getTypicalProducts(), model.getFilteredProductList());
@@ -66,7 +66,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneKeyword_oneProductFound() {
-        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 1);
         FindCommand command = new FindCommand(List.of(NAME_FILTER_KAYA));
         expectedModel.addProductFilter(NAME_FILTER_KAYA);
 
@@ -76,7 +76,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_differentCasesName_productFound() {
-        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 1);
         expectedModel.addProductFilter(NAME_FILTER_KAYA);
 
         NameFilter upperNameFilter = new NameFilter(new Name("KAYA BREAD"));
@@ -94,7 +94,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_differentCasesCategory_productFound() {
-        String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 3);
         expectedModel.addProductFilter(CATEGORY_FILTER_BREAD);
 
         CategoryFilter upperCategoryFilter = new CategoryFilter(new Category("BREAD"));

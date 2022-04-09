@@ -1,4 +1,4 @@
-package seedu.ibook.logic.commands.product;
+package seedu.ibook.logic.commands.item;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,7 +16,7 @@ import seedu.ibook.model.product.filters.ExpiringFilter;
 public class RemindCommand extends Command {
     public static final String COMMAND_WORD = "remind";
 
-    public static final String MESSAGE_SUCCESS = "Listed expiring products.\n";
+    public static final String MESSAGE_SUCCESS = "Listed expiring items.\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists products with their items that are expiring "
             + "within the specified number of days\n"
@@ -49,7 +49,7 @@ public class RemindCommand extends Command {
         model.addProductFilter(expiringFilter);
         model.updateFilteredItemListForProducts(itemPredicate);
         return new CommandResult(MESSAGE_SUCCESS
-                + String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+                + String.format(Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW, model.getFilteredProductList().size()));
     }
 
     @Override

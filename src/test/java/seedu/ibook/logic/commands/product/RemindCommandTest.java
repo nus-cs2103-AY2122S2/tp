@@ -2,6 +2,7 @@ package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.ibook.commons.core.Messages.MESSAGE_PRODUCTS_FOUND_OVERVIEW;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ibook.testutil.TypicalItems.Q5_TODAY_KAYA;
 import static seedu.ibook.testutil.TypicalItems.getAllItemsRemind;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ibook.logic.commands.item.RemindCommand;
 import seedu.ibook.model.Model;
 import seedu.ibook.model.ModelManager;
 import seedu.ibook.model.UserPrefs;
@@ -27,6 +29,7 @@ import seedu.ibook.model.product.filters.ExpiringFilter;
 import seedu.ibook.testutil.ProductBuilder;
 
 public class RemindCommandTest {
+
     private final Product kayaBreadWithAllItems = new ProductBuilder(KAYA_BREAD).buildWithItems(getAllItemsRemind());
     private final Product peanutButterBreadWithAllExpiringToday =
             new ProductBuilder(PEANUT_BUTTER_BREAD).buildWithItems(getOnlyExpiringItems());
@@ -35,13 +38,12 @@ public class RemindCommandTest {
     private final List<Product> products = Arrays.asList(kayaBreadWithAllItems,
             peanutButterBreadWithAllExpiringToday, chocolateBreadWithAllNonExpiringToday);
 
-
     private final Model model = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalIBookWithCustomList(products), new UserPrefs());
 
     @Test
     public void execute_oneExpiringToday_oneFound() {
-        String expectedMessage = "Listed expiring products.\n2 product listed!";
+        String expectedMessage = RemindCommand.MESSAGE_SUCCESS + String.format(MESSAGE_PRODUCTS_FOUND_OVERVIEW, 2);
         String dateToday = LocalDate.now().toString();
         ExpiryDate date = new ExpiryDate(dateToday);
         ExpiringFilter expiringFilter = new ExpiringFilter(date);
@@ -64,6 +66,5 @@ public class RemindCommandTest {
 
             assertNotEquals(p, CHOCOLATE_BREAD);
         }
-
     }
 }

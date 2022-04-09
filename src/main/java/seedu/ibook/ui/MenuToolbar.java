@@ -2,7 +2,7 @@ package seedu.ibook.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
-import seedu.ibook.logic.commands.product.ExpiredCommand;
+import seedu.ibook.logic.commands.item.ExpiredCommand;
 import seedu.ibook.logic.commands.product.OutOfStockCommand;
 
 /**
