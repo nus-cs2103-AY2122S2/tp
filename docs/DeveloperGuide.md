@@ -1245,7 +1245,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list students.
 2. TAPA shows a list of students.
 3. User requests to find students from the list.
-4. TAPA displays the students that matches the request.
+4. TAPA displays the students who fit the request.
 
    Use case ends.
 
