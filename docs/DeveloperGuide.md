@@ -314,13 +314,56 @@ The aim is to make reference to the target group as easy as possible and to mini
 
 ## Add task to an existing group feature
 
-The proposed `addTask` is implemented by adding enhancements to the current `Group` in the `AddressBook`.
-Similar to how a `Person` stores identities such as `Name` or `Phone`, this feature enables `Group` to stores
-`Task`.
+### About add task feature
 
-## Delete task from an existing group feature
+The add task feature allows users to add a yet-to-exist task to an existing
+student group via the command `addtask task/TASK_NAME g/GROUP_NAME`.
 
-to be updated
+### How it is implemented
+
+The `addtask` command mechanism is facilitated by the `AddTaskCommand` and the `AddTaskCommandParser`.
+It allows users to add a yet-to-exist task to an already existing group in ArchDuke. It uses the `AddressBook#addTassk(Task task, Group group)`
+which is exposed in the `Model` interface as `Model#addTask(Task task, Group group)`. Then, the `getGroup(Group group)` is called on the `UniqueGroupList` to get the target group,
+and `Group#addTask(Task task)` is called on the target group to add the task to the group.
+to remove the group from the group list.
+
+Given below is the example usage scenario and how add task mechanism behaves at each step.
+
+1. The user inputs the `addtask` command and provide the `TASK_NAME` and `GROUP_NAME` of the task and group
+in which the user wants to add.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddTaskCommandParser`.
+
+3. The `AddTaskCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+   It also checks whether the command is in the correct format. In this case, the required prefix is and attribute are `task/TASK_NAME` and `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   `ParseException` would be thrown.
+
+4. If the required prefixes and attributes are present (i.e. `task/TASK_NAME` and `g/GROUP_NAME`), `AddTaskCommandParser` will then call the `ParserUtil#parseGroupName()`
+   and `ParseUtil#parseTaskName()` to check for the validity of the input `TASK_NAME` and `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the
+   `GROUP_NAME` and/or `TASK_NAME` specified is invalid.
+
+5. The `AddTaskCommandParser` then creates the `AddTaskCommand` based on the processed inputs.
+
+6. The `LogicManager` executes the `AddTaskCommand`.
+
+7. The `AddTaskCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has existed in the group list.
+   `CommandException` would be thrown if there has yet to exist a group with the same group name. 
+
+8. Similarly, the `AddTaskCommand` then call the `Model#hasTask()` to check if the task with the same `TASK_NAME` has already existed in that group.
+`CommandException` would be thrown if there is already a task with the same task name in the group.
+
+9. `AddTaskCommand` then call the static `createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model)` to create a new `Group` with the task added.
+The task is added through the call of `Model#addTask()` by `AddTaskCommand`.
+
+10. `AddTaskCommand` then call `Model#setGroup(Group target, Group editedGroup)` to replace the old target group with the new group with the task added. This will notify
+
+11. Finally, the `AddTaskCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+    The GUI would also be updated on this change in the group list and update the display of group list accordingly.
+
+The following sequence diagram shows how the `delgroup` mechanism works:
+
+### Design considerations
+
 
 ## View task feature
 
