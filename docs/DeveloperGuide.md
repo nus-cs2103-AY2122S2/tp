@@ -21,6 +21,9 @@ Take a look at our design which is mostly based off [AddressBook Level 3 (AB3)](
 ##UI Component
 <img src="images/developer-guide/UiArchitecture.png" width="800px">
 
+##Model Component
+<img src="images/developer-guide/RealEstateProModel.png" width="800px">
+
 # Implementation
 
 This section describes some noteworthy details on how certain features are implemented.

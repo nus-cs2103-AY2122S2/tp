@@ -26,21 +26,22 @@ Given below are my contributions to the project.
   * Credits: @flairekq (https://github.com/nus-cs2103-AY2122S2/forum/issues/233)
 
 * **Project management**:
-  * Acted as repository master for the first iteration
-    * Merged PRs into respective branches after reviewing changes
-    * Provided effective reviews for PRs
+  * Act as repository master for the first iteration
+    * Merge PRs into respective branches after reviewing changes
+    * Provide effective reviews for PRs
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `delete`, `find`, `favourite` & `Favourites window`[\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), `Statistics command/window` [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94)
   * Developer Guide:
-    * Added user stories for RealEstatePro
-    * * Added documentation for the features `favourite` & `Favourites window`[\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), `stats` & `Statistics window` [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94)
+    * Add user stories for RealEstatePro
+    * Create Model diagram for RealEstatePro
+    * * Add documentation for the features `favourite` & `Favourites window`[\#47](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/47), `stats` & `Statistics window` [\#94](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/94)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#5](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/5), [\#11](https://github.com/AY2122S2-CS2103-W16-4/tp/pull/11/)
-  * Created Ui mockup for RealEstatePro
+  * Create Ui mockup for RealEstatePro
 
 * **Tools**:
-  * Introduced Trello for brainstorming process of User Stories
+  * Introduce Trello for brainstorming process of User Stories
 
