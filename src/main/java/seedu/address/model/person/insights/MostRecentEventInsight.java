@@ -19,7 +19,7 @@ public class MostRecentEventInsight extends Insight implements Comparable<MostRe
 
 
     // constants
-    public static final String DEFAULT_NO_EVENT_MESSAGE = "Never had an event!";
+    public static final String DEFAULT_NO_EVENT_MESSAGE = "Most recent event: Never had an event (yet)!";
     public static final String DEFAULT_HAS_EVENT_PREFIX = "Most recent event: ";
 
     // data field
