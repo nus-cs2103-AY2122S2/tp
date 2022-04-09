@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.entry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.entry.Person;
-import seedu.address.model.entry.UniqueEntryList;
 import seedu.address.model.entry.exceptions.DuplicateEntryException;
 import seedu.address.model.entry.exceptions.EntryNotFoundException;
 import seedu.address.testutil.PersonBuilder;
