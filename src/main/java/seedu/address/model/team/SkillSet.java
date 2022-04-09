@@ -22,7 +22,7 @@ public class SkillSet {
      */
     public SkillSet(Set<Skill> skillSet) {
         requireAllNonNull(skillSet);
-        this.skillSet = skillSet;
+        this.skillSet = removeDuplicates(skillSet);
     }
 
     /**
@@ -31,7 +31,28 @@ public class SkillSet {
      */
     public SkillSet(SkillSet skillSet) {
         requireAllNonNull(skillSet);
-        this.skillSet = skillSet.getSkillSet();
+        this.skillSet = removeDuplicates(skillSet.getSkillSet());
+    }
+
+    /**
+     * Returns Set of Skills without duplicated skills. Will always take the largest skill proficiency if
+     * duplicated skill is given.
+     * @param skillSetToTest set of skills to test for
+     * @return unique set of skills
+     */
+    public Set<Skill> removeDuplicates(Set<Skill> skillSetToTest) {
+        SkillSet skillSet = new SkillSet();
+        for (Skill skill : skillSetToTest) {
+            if (skillSet.hasSkill(skill)) {
+                if (skill.skillProficiency > skillSet.getSkillProficiency(skill)) {
+                    skillSet.removeSkill(skill);
+                    skillSet.add(skill);
+                }
+            } else {
+                skillSet.add(skill);
+            }
+        }
+        return skillSet.getSkillSet();
     }
 
     /**

@@ -143,11 +143,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 * A name of a team or skill cannot be consisting solely of whitespaces.<br>
 * Please check that you have correctly entered the skill proficiency level. There is currently no way of viewing the exact number that you entered. You may use the `edit` function to change it if it is wrong. <br>
 * The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).<br>
+* If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency. 
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
 * `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/gmail plugin, Sublime Text dev s/`
+* `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123 s/C_90, C_2, C_22` will result in `C_90` as it has the highest value.
 
 ### Editing any number of person(s): `edit`
 
@@ -171,6 +173,7 @@ Format: `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERN
 * When editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `NAME` and `PHONE` will be silently ignored.
 * When at least one of the indices provided are invalid for batch edit, HackNet informs that there was an error in the indices, but still delivers the modification for the indices that are valid.
 * In the unlikely case that same index is present multiple times for `INDEX [INDEX…]`, HackNet will still successfully execute the edit command as long as the index is valid.
+* If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -178,6 +181,7 @@ Examples:
 * `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
 * `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and appends`GoogleProject` and `Hackathon2022` to the list of teams they belong to.
 * `edit 1 2 3 -r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The exiting teams are cleared as well.
+* `edit 1 s/C_90, C_2, C_11` will result in the 1st person in the list having skill `C` with proficiency `90` as it is the highest value.
 
 ### Deleting a person: `delete`
 
