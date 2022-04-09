@@ -10,10 +10,9 @@ title: Developer Guide
 ## **Acknowledgements**
 
 1. Referred to [CS2103T textbook](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/index.html) for fundamental knowledge on software development.
+2. This product is based on the AddressBook-Level3 project created by [SE-EDU initiative](https://se-education.org/)
+3. Libraries used: [JavaFx](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson)
 
-```
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-```
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -753,15 +752,23 @@ The user wants to delete event(s) instead.
 
 1. Should work on _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should work on both 32-bit and 64-bit environments.
 5. The system should respond within 3 seconds.
-
-*{More to be added}*
+6. The product is strictly an offline application and data is stored locally.
+7. The product is not required to handle the feature of finding past events based on the date and time. 
+(i.e using a past date & time for the "find -e" command would be invalid)
+8. The product is not required to handle multiple whitespaces in between words for all data field inputs. 
+(i.e "Alison Baker" will not be identified the same as "Alison   Baker")
+9. The product is not required to handle the multiple events occurring at the same time.
+(i.e Multiple events sharing the same date and time would be recognized as separate unique events respectively)
+10. The product is not required to handle the visibility of long addresses in the person's contact card.
+11. The system should be usable by a novice who has used CLI commands before.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, macOS
+* **CLI**: Command Line Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
