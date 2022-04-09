@@ -3,7 +3,7 @@ layout: page
 title: Weiu Cheng's Project Portfolio Page
 ---
 
- ### Project: iBook
+### Project: iBook
 
  iBook is a desktop application for managing incoming and outgoing products of a store.
 

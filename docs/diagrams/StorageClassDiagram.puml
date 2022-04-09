@@ -18,6 +18,7 @@ package Storage {
         class JsonIBookStorage
         class JsonSerializableIBook
         class JsonAdaptedProduct
+        class JsonAdaptedItem
     }
 
 }
@@ -36,5 +37,6 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonIBookStorage .up.|> IBookStorage
 JsonIBookStorage ..> JsonSerializableIBook
 JsonSerializableIBook --> "*" JsonAdaptedProduct
+JsonAdaptedProduct --> "*" JsonAdaptedItem
 
 @enduml
