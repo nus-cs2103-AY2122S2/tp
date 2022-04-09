@@ -173,8 +173,7 @@ For creation of Tasks, ManageEZPZ will allow past deadlines and events to be add
  
 For Deadline and Event, the DATE must be in this format: YYYY-MM-DD <br>  
 
-For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
-and mm should only be between 00 and 59. <br>
+For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23 and mm should only be between 00 and 59. <br>
  
 For event, the START_TIME must be earlier than the END_TIME. <br>
 
@@ -279,8 +278,7 @@ Given a task list as follows... <br/>
 
 For Deadline and Event, the DATE must be in this format: YYYY-MM-DD <br>
  
-For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
-and mm should only be between 00 and 59. <br>
+For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23 and mm should only be between 00 and 59. <br>
 
 For Event, the START_TIME must be earlier than the END_TIME.
 
