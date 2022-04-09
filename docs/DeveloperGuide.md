@@ -1317,7 +1317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User request to view which students (in a particular module) have completed or yet to complete a particular task.
+1. User request to view which students (in a particular module) have completed or have yet to complete a particular task.
 2. TAPA shows a list of students who are taking this module and are currently being assigned with the specified tasks(along with their respective completion status).
 
 **Extensions**
