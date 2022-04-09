@@ -958,7 +958,7 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
 
 ![AddToAddressBookHistorySequenceDiagram](images/AddToAddressBookHistorySequenceDiagram.png)
 
-4. When the user inputs `undo`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+4. When the user inputs "undo", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 5. A new `UndoCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
 6. The `LogicManager` will then call `UndoCommand#execute(Model model)`.
 7. Following this, the `UndoCommand` calls `Model#undoAddressBook()` to revert the current details stored in TAPA to those stored before the previous command was executed. (Within `ModelManager`, `AddressBookHistory#getPreviousAddressBook` is called to retrieve the state of TAPA before the previous command.)
