@@ -1242,7 +1242,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find students from the list.
+1. User requests to find students that match the inputted search field.
 2. TAPA displays the students who fit the request.
 
    Use case ends.
@@ -1265,7 +1265,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete all students from a particular module in the list.
+1. User requests to delete all students from a particular module.
 2. TAPA deletes the students.
 
    Use case ends.
