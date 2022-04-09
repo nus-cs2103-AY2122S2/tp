@@ -503,20 +503,18 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                                               | So that I can…​                                                                                   |
-|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *`  | user           | add a task to the database                                                 | better organise my time                                                                           |
-| `* * *`  | user           | delete a task from the database                                            | better organise my list                                                                           |
-| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                                                              |
-| `* * *`  | user           | able to edit a task                                                        | update any details                                                                                |
-| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                                                             |
-| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week                                                 |
-| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                                                           |
-| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                                                          |
-| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload. For example, command: ``Track <name> |
-| `* *`    | new user       | have a more begineer-friendly user guide                                   | learn more about the product                                                                      |
-| `* *`    | recurring user | be able to see tasks that are due within X number of days                  | better manage my time                                                                             |
-| `* *`    | advance user   | able to sort tasks based on a specific location                            | better plan my travel to that location                                                            |
+| Priority | As a …​        | I want to …​                                                               | So that I can…​                                               |
+|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | user           | add a task to the database                                                 | better organise my time                                       |
+| `* * *`  | user           | delete a task from the database                                            | better organise my list                                       |
+| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                          |
+| `* * *`  | user           | able to edit a task                                                        | update any details                                            |
+| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                         |
+| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week             |
+| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                       |
+| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                      |
+| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload.  |
+| `* *`    | new user       | have a more beginner-friendly user guide                                   | learn more about the product                                  |
 
 
 ### Use cases
@@ -818,6 +816,36 @@ Preconditions: User is currently using ManageEZPZ.
    confirmation message to the Priority has been assigned to the Task.
 
    Use case ends.
+
+****
+
+**Use Case 12 - Deleting all Entries in ManageEZPZ**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters the command to clear ManageEZPZ.
+2. ManageEZPZ clears all Employee and Task data, sending a confirmation
+   message that ManageEZPZ entries are cleared.
+
+   Use case ends.
+
+****
+
+**Use Case 13 - Exit ManageEZPZ**
+
+Preconditions: User is currently using ManageEZPZ.
+
+**MSS**
+
+1. User enters a command to exit ManageEZPZ.
+2. ManageEZPZ confirms with a successful exit message.
+3. ManageEZPZ saves all changes to disk.
+
+   Use case ends.
+
+****
 
 **Extensions**
 
