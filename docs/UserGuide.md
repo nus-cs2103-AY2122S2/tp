@@ -46,11 +46,11 @@ We hope you enjoy Tracey as much as we did when developing it!
 
 There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
-| Symbol  |                                                 Purpose                                                 |
-|:-------:|:-------------------------------------------------------------------------------------------------------:|
-|   📓    |     Additional notes are parked here. They contain beneficial information in case you are confused.     |
-|   ⚠️    |          Warnings are parked here. They contain information that you **NEED** to take note of.          |
-|   💡    | Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.  |
+| Symbol  |                                                                            Purpose                                                                             |
+|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|   :information_source:    |      <div markdown="span" class="alert alert-info"> Additional notes are parked here. They contain beneficial information in case you are confused.</div>      |
+|   ⚠️    |         <div markdown="span" class="alert alert-warning"> Warnings are parked here. They contain information that you **NEED** to take note of.</div>          |
+|   💡    | <div markdown="span" class="alert alert-primary"> Tips are parked here. They  highlight certain information that will allow you to fully utilise Tracey.</div> |
 
 *Table 1: Symbols and their purposes.*
 
@@ -68,21 +68,23 @@ Additional formatting guidelines:
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
- 📓`Note:`
+ <div markdown="span" class="alert alert-info">:information_source: **Note:**
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
    2. To check your java version:
       1. For Mac users, open up Terminal and type in `java --version`.
       2. For Windows users, open up Command Prompt and type in `java --version`.
    3. If you have the supported version of Java, the response should resemble something like this `java 11.0.9 2020-10-20 LTS`.
    4. If you do not see the supported version of Java, download Java from this [page](https://www.java.com/en/download/).
+</div>
 2. Download the latest **Tracey.jar** from [here](https://github.com/AY2122S2-CS2103T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your Tracey application.
 4. Double-click the file to start the app. The GUI, similar to the one below, should appear in a few seconds.
    Note how the app contains some sample data. <br>
    ![Ui](images/UiScreenshot.png) *Figure 1: Screenshot showing sample data.* <br>
-   📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
    1. If you are a Mac user and are unable to open the JAR file after double-clicking, please open Terminal and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
    2. If you are a Windows user and are unable to open the JAR file after double-clicking, please open Command Prompt and change directory to where **Tracey.jar** is located. Then, type the following command to open the application: `java -jar Tracey.jar`.
+</div>
 6. Type your commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -120,8 +122,9 @@ Add a list of students from an Excel file into Tracey. Import feature can be use
 
 Format: `import FILE PATH`
 
-💡`Tips`:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * The file path is relative to the root directory.
+</div>
 
 Examples of usage:
 * `import C:\Users\Documents\tp.xlsx`
@@ -139,10 +142,11 @@ Sample Excel file:
 How to identify import button:
 ![Import_Button](images/Import_Button.png) *Figure 4: Screenshot of import button.*
 
-⚠️`Warning:`
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
 * The excel file must contain only one sheet named "Sheet1".
 * The column of the table must be capital and starts with Column A.
 * The data in the table needs to be ensured no space behind
+</div>
 
 ### Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
@@ -190,9 +194,10 @@ Examples of usage:
 As described in Table 4, these are the possible prefixes that can be used with Tracey. E.g `n/`, `cs/` etc.
 In addition, the list of pre-defined constants are also provided for `Faculty` and `Covid Status`.
 
-💡`Tips`:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * You are able to add optional tags with no restrictions using the `t/` prefix.
 * Additions can be reversed with the `undo` feature.
+</div>
 
 ### Editing an existing contact
 Edit a contact at a specific index.
@@ -224,12 +229,14 @@ Original list:
 Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 ![After_Edit](images/AfterEdit.png) *Figure 7: Screenshot of Tracey after applying the edit command.*
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * Tracey shows the entire edited database after the edit command is applied.
 * After every edit command, the student at the specified index will be shifted to the bottom of the list.
+</div>
 
-💡`Tip`:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * Edits can be reversed with the `undo` feature.
+</div>
 
 ### Deleting a contact
 Delete a contact at a specific index.
@@ -248,11 +255,12 @@ Examples of usage:
 * `delete 2` removes the 2nd student on the list.
 * `delete 10` removes the 10th student on the list.
 
-💡`Tips:`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * The `INDEX` used for each student is not fixed. It depends on the number shown on the displayed list of students.
 * You can use <a href='#finding-a-contact'>`find`</a> to get his/her `INDEX` and then apply `delete`.
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
 * Deletions can be reversed with the `undo` feature.
+</div>
 
 ### Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
@@ -314,8 +322,9 @@ An example is shown below:
 
 As seen in *Figure 9*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
+</div>
 
 ### Listing the records
 List all students, displaying all their data stored in Tracey.
@@ -331,8 +340,9 @@ Opens up a separate window that consists of all the emails of the current displa
 
 Format:`email`
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
 There is also a `Show Email` button on the GUI which you can click to open the same window.
+</div>
 
 ![Email](images/CopyEmailScreenshot.png) *Figure 11: Screenshot of Copy Email function.*
 
@@ -368,10 +378,11 @@ Example:
 * The archived file will be saved **as** `270322_152833`.
 * The file path will be `[ROOT]/data/archive/270322/270322_152833123`.
 
-💡`Tips:`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * You can rename the archived file in the file path manually for easier reference.
   * Features for naming of the archived file via the CLI will be available in later releases.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
+</div>
 
 ### Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
@@ -381,11 +392,13 @@ Format: `resize SIZE`
 * The default result display window size is option 1.
 * Refer to figure 13 for the comparison for the different result display window sizes.
 
-💡`Tips:`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * This feature is especially useful if you need a bigger result display window size to better view the result feedback given by Tracey, especially if the result feedback is long.
+</div>
 
-📓`Note:`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
+</div>
 
 ![Comparison of 3 resize options](images/resize_options.png) *Figure 13: Comparison of the 3 different resizing options for the result display window.*
 
@@ -394,9 +407,10 @@ Clear all the data inside Tracey.
 
 Format:`clear`
 
-⚠️`Warning:`
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
 * Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 * This feature cannot be reversed using `undo`.
+</div>
 
 ### Exiting Tracey
 Close the application.
