@@ -24,7 +24,7 @@ public class AddTodoTaskCommand extends Command {
     private final Todo toAdd;
 
     /**
-     * Creates an AddEmployeeCommand to add the specified {@code Person}
+     * Creates an AddTodoTaskCommand to add the specified {@code Task}
      */
     public AddTodoTaskCommand(Todo task) {
         requireNonNull(task);
