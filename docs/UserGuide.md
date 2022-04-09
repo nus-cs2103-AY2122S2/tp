@@ -328,13 +328,17 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features (Mouse interaction)<a name="features-mouse-interaction"></a>
-**_Implementations will be coming soon ..._**
 
 By default, mouse interactions are disabled in UNite. However, users who are not familiar with using CLI can enable
 it. Below are the features that are supported by mouse interactions.
 
 **Note:** Some features included in the CLI section cannot be done using mouse interaction. To execute those features,
 enter the command in the command box following the instructions in the previous section.
+
+Below is an annotated screenshot of UNite for reference to UI components:
+
+<img src="images/UNite_annotated.png" width="400"/>
+
 
 ### Enable mouse interaction : `enable_mouseUX`<a name="enable-mouse-interaction"></a>
 Enables mouse interaction in mouseUX. After enabling mouse interactions, 2 new buttons ("Add" and "New tag") will
@@ -378,7 +382,7 @@ To delete a profile, right click on the profile and select `delete`.
 To add a new tag, click the `New tag` button on the menu bar, and select `New tag`. A **new tag pop up
 window** will appear.
 
-<img src="images/tag_popup.png" width="400"/>
+<img src="images/tag_popup.png" width="600"/>
 
 
 Enter the new tag name into the text field, and click the `Add` button to create a new tag. To cancel adding tags, click
