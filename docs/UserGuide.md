@@ -309,7 +309,7 @@ Examples:
 
 ### Managing Classes
 
-#### Add a class: `add class`
+#### Add a class group: `add class`
 
 After creating modules in TAssist, you can add class groups to these modules. Class groups refer to recitations, tutorials, labs, and sectionals you personally teach.
 
