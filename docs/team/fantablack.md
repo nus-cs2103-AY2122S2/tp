@@ -38,20 +38,17 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=fantablack&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the feature `Add Modules` [(PR #55)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/55)
+        * Updated documentation for the features `Switch`, `Archive` and `Unarchive` [(PR #133)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/133)
+        * Updated User Guide from peer, CS2101 and PE Dry Run Feedback [(PR #198)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198), [(PR #133)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/133)
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
-
+        * Added Product Scope, User Stories and NFRs [(PR #37)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/37)
+        * Added documentation and diagrams for `Add Modules` [(PR #91)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91)
+        * Update ModelClassDiagram and BetterModelClassDiagram [(PR #107)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/107), [(PR #133)](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/133)
+  
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
     * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
