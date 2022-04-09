@@ -427,7 +427,7 @@ Action | Command format, Examples                                               
 **enable_mouseUX** | `enable_mouseUX`                                                                                                                                                  | -
 **exit** | `exit`                                                                                                                                                            | -
 **filter** | `filter TAGMAME`                                                                                                                                                | (Command box) `list_tag` -> click on tag card to filter
-**find** | `find [KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
+**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                     | -
 **grab** | `grab ATTRIBUTE_PREFIX/[INDEX] [t/TAGS]`<br> e.g., `grab e/ t/classmates`                                                                                         | -
 **help** | `help`                                                                                                                                                            | (Menu bar) `Help` -> `Help`
 **list** | `list`                                                                                                                                                            | -
