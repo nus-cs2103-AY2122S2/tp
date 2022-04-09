@@ -770,7 +770,7 @@ The following sequence diagrams shows how the unmark command works:
 The `clear` command deletes all students currently stored in TAPA. Before all the students are deleted, the user will have to confirm their decision by inputting `confirm`.
 
 #### Implementation
-1. When the user inputs `clear`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+1. When the user inputs "clear", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
 3. The `LogicManager` calls `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
@@ -779,12 +779,12 @@ The `clear` command deletes all students currently stored in TAPA. Before all th
 ![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b> A CommandException will be thrown if the user inputs anything other than `confirm` for the next input. The CommandBox will then return to its normal operation, accepting all commands as described in the user guide.
+<b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
 </div>
 
 ![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
 
-6. If the user inputs `confirm`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
+6. If the user inputs "confirm", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
 7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
 8. The `ConfirmClearCommand` calls `Model#setAddressBook(new AddressBook())` which resets the current list of students stored in TAPA to an empty list.
 9. Lastly, the `ConfirmClearCommand` creates a new `CommandResult`, which is returned to the `LogicManager`.
@@ -796,11 +796,11 @@ The `clear` command deletes all students currently stored in TAPA. Before all th
 **Aspect: How TAPA confirms the user's decision to clear TAPA**
 
 * **Alternative 1 (current choice):** Have the user input `confirm`, which is treated by TAPA as a command being executed.
-   * Pros: Easy to implement and test. Having the user type `confirm` is an added safety measure to ensure the user does not clear TAPA accidentally.
-   * Cons: The user would take a longer time to clear TAPA than if a "confirm button" is implemented.
+   * Pros: Easy to implement and test. Having the user type "confirm" is an added safety measure to ensure the user does not clear TAPA accidentally.
+   * Cons: The user would take a longer time to clear TAPA than if a "confirm" button is implemented.
 
-* **Alternative 2:** Have a pop-up window with a "confirm button" which the user can click to confirm or cancel their decision.
-   * Pros: Faster to click a button than having to type `confirm` to clear TAPA.
+* **Alternative 2:** Have a pop-up window with a "confirm" button which the user can click to confirm or cancel their decision.
+   * Pros: Faster to click a button than having to type "confirm" to clear TAPA.
    * Cons: More difficult to implement and test as it involves extending the UI.
 
 ### Archive Command
@@ -935,11 +935,11 @@ The `history` command displays a list of the user's previously executed commands
 
 ![AddToCommandHistorySequenceDiagram](images/AddToCommandHistorySequenceDiagram.png)
 
-4. When the user inputs `history`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+4. When the user inputs "history", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 5. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
 6. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
 7. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
-8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a String which is returned to `LogicManager` through a new `CommandResult`.
+8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a `String` which is returned to `LogicManager` through a new `CommandResult`.
 
 ![HistoryCommandSequenceDiagram](images/HistoryCommandSequenceDiagram.png)
 
@@ -958,7 +958,7 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
 
 ![AddToAddressBookHistorySequenceDiagram](images/AddToAddressBookHistorySequenceDiagram.png)
 
-4. When the user inputs `undo`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+4. When the user inputs "undo", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 5. A new `UndoCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
 6. The `LogicManager` will then call `UndoCommand#execute(Model model)`.
 7. Following this, the `UndoCommand` calls `Model#undoAddressBook()` to revert the current details stored in TAPA to those stored before the previous command was executed. (Within `ModelManager`, `AddressBookHistory#getPreviousAddressBook` is called to retrieve the state of TAPA before the previous command.)
@@ -978,7 +978,6 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
    * Pros: Will not incur major performance issues as it uses less memory.
    * Cons: More difficult to implement and test. Each command would need a unique implementation to be undone and this would also need to be implemented for commands added in the future.
    
-*{More features to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
