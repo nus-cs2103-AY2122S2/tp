@@ -18,7 +18,18 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Remark
+Class Birthday
+Class Membership
 Class Tag
+
+Class TransactionList
+Class Transaction
+Class Amount
+Class Status
+Class TransactionDate
+Class DueDate
+Class Note
 
 }
 
@@ -40,11 +51,23 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> "0..1" Remark
+Person *--> "0..1" Birthday
+Person *--> "0..1" Membership
 Person *--> "*" Tag
+
+AddressBook *--> "1" TransactionList
+TransactionList --> "~* all" Transaction
+Transaction *--> Amount
+Transaction *--> Status
+Transaction *--> TransactionDate
+Transaction *--> "0..1" DueDate
+Transaction *--> "0..1" Note
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Transaction
 @enduml

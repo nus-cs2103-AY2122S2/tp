@@ -180,6 +180,12 @@ By adding the getter and setter functions, we were able to remove unnecessary cl
 
 *Figure: Simplified class diagram of showing the association between Person, Field and Tag.*
 
+##### Add/remove fields and tags.
+
+`AddCommand`, `EditCommand`, `AppendCommand` and `RemoveCommand` adds and removes fields and tags from a `Person`.
+
+
+
 #### Design considerations
 
 **Aspect: Structure for storing fields**
