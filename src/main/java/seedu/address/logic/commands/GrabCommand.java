@@ -1,14 +1,14 @@
-package seedu.address.logic.commands;
+package seedu.unite.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Prefix;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.unite.commons.core.Messages;
+import seedu.unite.logic.commands.exceptions.CommandException;
+import seedu.unite.logic.parser.Prefix;
+import seedu.unite.model.Model;
+import seedu.unite.model.person.Person;
+import seedu.unite.model.tag.Tag;
 
 /**
  * Grabs a specific attribute of all persons
@@ -59,7 +59,7 @@ public class GrabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> currAddressBook = model.getFilteredPersonList();
+        ObservableList<Person> currUnite = model.getFilteredPersonList();
 
         try {
             if (!index.equals("")) {
@@ -69,7 +69,7 @@ public class GrabCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!index.equals("") && (Integer.parseInt(index) > currAddressBook.size() || Integer.parseInt(index) < 1)) {
+        if (!index.equals("") && (Integer.parseInt(index) > currUnite.size() || Integer.parseInt(index) < 1)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -78,17 +78,17 @@ public class GrabCommand extends Command {
         if (tag == null) {
             // no tag situation
             if (index.equals("")) {
-                builder.append(grabAllPerson(currAddressBook));
+                builder.append(grabAllPerson(currUnite));
             } else {
                 int personIndex = Integer.parseInt(index);
-                Person personToBeGrabbed = currAddressBook.get(personIndex - 1);
+                Person personToBeGrabbed = currUnite.get(personIndex - 1);
                 builder.append(grabOnePerson(personToBeGrabbed));
             }
             return new CommandResult(MESSAGE_SUCCESS, true, builder.toString());
         } else {
             if (index.equals("")) {
                 ObservableList<Person> newPersonList =
-                        currAddressBook.filtered(t->t.getTags().contains(tag));
+                        currUnite.filtered(t->t.getTags().contains(tag));
                 if (newPersonList.size() == 0) {
                     throw new CommandException(MESSAGE_MISSING_TAG);
                 }
