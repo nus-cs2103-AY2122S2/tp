@@ -8,16 +8,18 @@ import static seedu.contax.commons.util.AppUtil.checkArgument;
  * Guarantees: Immutable; is valid declared as in {@link #isValidName(String)}.
  */
 public class Name {
+    private static final String ALLOWED_SYMBOLS = ".,!@#$%&*()_=+-";
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, spaces, the symbols .,!@#$%&*() "
-                    + "and it should not be blank";
+            "Names should only contain alphanumeric characters, spaces, the symbols " + ALLOWED_SYMBOLS
+                    + " and it should not be blank";
 
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX =
-            "[\\p{Alnum}.,!@#$%&*()\\-_=+][\\p{Alnum} .,!@#$%&*()\\-_=+]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}" + ALLOWED_SYMBOLS + "]"
+                    + "[\\p{Alnum} " + ALLOWED_SYMBOLS + "]*";
 
     public final String name;
 
@@ -35,7 +37,7 @@ public class Name {
     /**
      * Returns true if a given string is a valid name.
      * A name is considered valid if it is a non-empty string with only alphanumeric characters,
-     * whitespaces, the symbols .,!@#$%&*() and does not begin with a whitespace.
+     * whitespaces, the symbols in {@link #ALLOWED_SYMBOLS} and does not begin with a whitespace.
      *
      * @param test The string to test.
      * @return A boolean indicating if the test string supplied is a valid name.

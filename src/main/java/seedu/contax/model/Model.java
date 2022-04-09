@@ -154,7 +154,7 @@ public interface Model {
     boolean hasAppointment(Appointment appointment);
 
     /**
-     * Returns true if an overlapping {@code appointment} exists in the schedule.
+     * Returns true if an overlapping {@code Appointment} exists in the schedule.
      * See {@link Appointment#isOverlapping(ScheduleItem)} for the overlap checking logic.
      */
     boolean hasOverlappingAppointment(Appointment appointment);

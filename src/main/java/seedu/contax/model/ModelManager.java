@@ -6,6 +6,7 @@ import static seedu.contax.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the both the AddressBook and Schedule.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -53,6 +54,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getAppointmentList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
         displayedAppointmentSlots = new AppointmentSlotList(this.schedule);
         scheduleItemList = new CompositeObservableList<>(filteredAppointments,
                 displayedAppointmentSlots.getSlotList());
@@ -115,7 +117,14 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        requireNonNull(addressBook);
         this.addressBook.resetData(addressBook);
+
+        Predicate<Appointment> shouldSyncAppointment = (appointment)
+            -> appointment.getPerson() != null && !this.addressBook.hasPerson(appointment.getPerson());
+        Consumer<Appointment> syncAction = (appointment)
+            -> this.schedule.setAppointment(appointment, appointment.withPerson(null));
+        syncScheduleWithAddressBook(shouldSyncAppointment, syncAction);
     }
 
     @Override
@@ -136,12 +145,10 @@ public class ModelManager implements Model {
         // Delete Successful, dissociate target with any appointments.
         // The list of matching appointments is cloned because the list iterator is destroyed upon
         // any modification to the list.
-        List<Appointment> oldAppointments = new ArrayList<>(
-                schedule.getAppointmentList()
-                        .filtered(appointment -> target.equals(appointment.getPerson())));
-        oldAppointments.forEach(appointment -> {
-            setAppointment(appointment, appointment.withPerson(null));
-        });
+        Predicate<Appointment> shouldSyncAppointment = (appointment) -> target.equals(appointment.getPerson());
+        Consumer<Appointment> syncAction = (appointment)
+            -> this.schedule.setAppointment(appointment, appointment.withPerson(null));
+        syncScheduleWithAddressBook(shouldSyncAppointment, syncAction);
     }
 
     @Override
@@ -159,13 +166,10 @@ public class ModelManager implements Model {
         // Update success, update appointments with target.
         // The list of matching appointments is cloned because the list iterator is destroyed upon
         // any modification to the list.
-        List<Appointment> oldAppointments = new ArrayList<>(
-                schedule.getAppointmentList()
-                        .filtered(appointment -> target.equals(appointment.getPerson())));
-
-        oldAppointments.forEach(appointment -> {
-            setAppointment(appointment, appointment.withPerson(editedPerson));
-        });
+        Predicate<Appointment> shouldSyncAppointment = (appointment) -> target.equals(appointment.getPerson());
+        Consumer<Appointment> syncAction = (appointment)
+            -> this.schedule.setAppointment(appointment, appointment.withPerson(editedPerson));
+        syncScheduleWithAddressBook(shouldSyncAppointment, syncAction);
     }
 
     // Tag management
@@ -230,7 +234,14 @@ public class ModelManager implements Model {
     //=========== Schedule ===================================================================================
     @Override
     public void setSchedule(ReadOnlySchedule schedule) {
+        requireNonNull(schedule);
         this.schedule.resetData(schedule);
+
+        Predicate<Appointment> shouldSyncAppointment = (appointment)
+            -> appointment.getPerson() != null && !this.addressBook.hasPerson(appointment.getPerson());
+        Consumer<Appointment> syncAction = (appointment)
+            -> this.addressBook.addPerson(appointment.getPerson());
+        syncScheduleWithAddressBook(shouldSyncAppointment, syncAction);
     }
 
     @Override
@@ -271,8 +282,8 @@ public class ModelManager implements Model {
     //=========== Filtered Appointment List Accessors ========================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Appointments} backed by the internal list of
-     * {@code schedule}
+     * Returns an unmodifiable view of the list of {@code Appointments} backed by the appointments list of
+     * {@code Schedule}
      */
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {
@@ -305,7 +316,21 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<ScheduleItem> getScheduleItemList() {
-        return this.scheduleItemList.getUnmodifiableList();
+        return this.scheduleItemList.getUnmodifiableResultList();
+    }
+
+    /**
+     * Synchronizes the schedule by performing {@code syncAction} on every Appointment in the Schedule that
+     * matches {@code syncFilter}.
+     *
+     * @param syncFilter A {@code Predicate} matching the Appointments that require synchronization.
+     * @param syncAction A {@code Consumer} that performs the actual synchronization on an Appointment.
+     */
+    private void syncScheduleWithAddressBook(Predicate<Appointment> syncFilter,
+                                             Consumer<Appointment> syncAction) {
+        List<Appointment> matchingAppointments =
+                new ArrayList<>(this.schedule.getAppointmentList().filtered(syncFilter));
+        matchingAppointments.forEach(syncAction);
     }
 
     @Override

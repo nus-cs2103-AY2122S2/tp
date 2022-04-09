@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Represents an anchored period of time, from a start date-time to an end date-time inclusive.
+ * Represents an anchored period of time, from a start Date-Time to an end Date-Time inclusive.
  * This is in contrast to {@link java.time.Period}, which is not anchored to a start time.
  * {@code TimeRange} objects are immutable.
  */
@@ -22,8 +22,8 @@ public class TimeRange implements TemporalComparable {
     /**
      * Constructs a {@code TimeRange} object.
      *
-     * @param start The start date-time of the range.
-     * @param end The end date-time of the range.
+     * @param start The start Date-Time of the range.
+     * @param end The end Date-Time of the range.
      */
     public TimeRange(LocalDateTime start, LocalDateTime end) {
         requireNonNull(start);
@@ -34,10 +34,12 @@ public class TimeRange implements TemporalComparable {
         this.end = end;
     }
 
+    /** Returns the starting Date-Time of this range. */
     public LocalDateTime getStartDateTime() {
         return start;
     }
 
+    /** Returns the ending Date-Time of this range. */
     public LocalDateTime getEndDateTime() {
         return end;
     }

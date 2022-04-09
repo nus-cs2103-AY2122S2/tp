@@ -63,8 +63,9 @@ public class AppointmentsBetweenCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
+
         model.clearDisplayedAppointmentSlots();
+        model.updateFilteredAppointmentList(new DateRangePredicate(rangeStart, rangeEnd));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
         String responseMessage = String.format(MESSAGE_SUCCESS, rangeStart.format(formatter),
                 rangeEnd.toLocalDate().equals(LocalDate.MAX) ? PHRASE_NO_END_RANGE : rangeEnd.format(formatter));

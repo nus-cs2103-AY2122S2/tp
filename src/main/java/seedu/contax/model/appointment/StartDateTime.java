@@ -12,9 +12,11 @@ import seedu.contax.model.chrono.TemporalComparable;
  * Guarantees: Immutable; is always a valid {@link LocalDateTime}; Seconds field is always zeroed.
  */
 public class StartDateTime implements TemporalComparable {
-    public static final String DATETIME_FORMAT = "dd-MM-uuuu HH:mm";
-    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
     public static final String MESSAGE_CONSTRAINTS = "Date and Time have to be valid";
+    private static final String DATETIME_FORMAT = "dd-MM-uuuu HH:mm";
+
+    // This is intentionally package private to limit visibility.
+    static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
     public final LocalDateTime value;
 

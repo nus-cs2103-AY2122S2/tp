@@ -7,6 +7,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -83,7 +84,9 @@ public class BatchCommand extends Command {
             return new CommandResult(COMMAND_WORD
                     + ": No result matching \"" + userValue + "\"");
         }
+        Collections.reverse(indexList);
         List<CommandResult> commandResultList = new ArrayList<>();
+        Person restorePerson = model.getFilteredPersonList().get(indexList.get(0).getZeroBased());
         for (Index index: indexList) {
             AddressBookParser addressBookParser = new AddressBookParser();
             try {
@@ -91,7 +94,17 @@ public class BatchCommand extends Command {
                         commandInput, Integer.toString(index.getOneBased()));
                 logger.info("----------------[BATCH COMMAND][" + commandText + "]");
                 Command command = addressBookParser.parseCommand(commandText);
-                commandResultList.add(command.execute(model));
+                try {
+                    commandResultList.add(command.execute(model));
+                } catch (CommandException ce) {
+                    commandResultList.clear();
+                    if (commandText.startsWith(EditPersonCommand.COMMAND_WORD)) {
+                        model.setPerson(model.getFilteredPersonList().get(indexList.get(0).getZeroBased()),
+                                restorePerson);
+                    }
+                    commandResultList.add(new CommandResult(ce.getMessage()));
+                    break;
+                }
             } catch (ParseException pe) {
                 throw new CommandException(pe.getMessage());
             }

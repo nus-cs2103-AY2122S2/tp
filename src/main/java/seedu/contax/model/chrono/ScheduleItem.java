@@ -5,10 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.contax.commons.util.DateUtil;
+
 /**
  * Represents an entry in the Schedule. This class only implements temporal-related operations required for
  * comparing Temporal items and {@code Schedule} maintenance. It does not specify any problem-domain
  * specific logic.
+ * {@code ScheduleItem} objects are immutable.
  */
 public abstract class ScheduleItem implements TemporalComparable {
     private final TimeRange period;
@@ -16,7 +19,7 @@ public abstract class ScheduleItem implements TemporalComparable {
     /**
      * Constructs a {@code ScheduleItem}.
      *
-     * @param period The time period over which this ScheduleItem occupies.
+     * @param period The time period over which this {@code ScheduleItem} spans.
      */
     public ScheduleItem(TimeRange period) {
         requireNonNull(period);
@@ -35,19 +38,21 @@ public abstract class ScheduleItem implements TemporalComparable {
         this.period = new TimeRange(start, end);
     }
 
+    /** Returns the start Date-Time of this ScheduleItem. */
     public LocalDateTime getStartDateTime() {
         return period.getStartDateTime();
     }
 
+    /** Returns the end Date-Time of this ScheduleItem. */
     public LocalDateTime getEndDateTime() {
         return period.getEndDateTime();
     }
 
     /**
-     * Returns true if this {@code ScheduleItem} overlaps with {@code other}, that is, the start time of one
-     * ScheduleItem is strictly before the end time (start time + duration) of the other ScheduleItem.
-     * Note that ScheduleItems are not considered to be overlapping if the start time of one ScheduleItem
-     * is exactly the end time of the other.
+     * Returns true if this {@code ScheduleItem} overlaps with {@code other}, that is, the start Date-Time of
+     * one ScheduleItem is strictly before the end Date-Time (start time + duration) of the other ScheduleItem.
+     * Note that ScheduleItems are not considered to be overlapping if the start of one ScheduleItem
+     * is exactly the end of the other.
      *
      * @param other The other {@code ScheduleItem} to compare against.
      * @return True if both ScheduleItems overlap, otherwise false.
@@ -61,8 +66,8 @@ public abstract class ScheduleItem implements TemporalComparable {
         final LocalDateTime otherStartDateTime = other.getStartDateTime();
         final LocalDateTime selfStartDateTime = getStartDateTime();
 
-        if (otherStartDateTime.isAfter(selfStartDateTime.minusSeconds(1))) {
-            // In this case, other.startDateTime is after this.startDateTime.
+        if (DateUtil.isAfterOrEqual(otherStartDateTime, selfStartDateTime)) {
+            // It is not overlapping if the other item starts exactly at this item's end time
             return otherStartDateTime.isBefore(getEndDateTime());
         }
 
@@ -72,7 +77,7 @@ public abstract class ScheduleItem implements TemporalComparable {
     }
 
     /**
-     * Returns true if both ScheduleItems have exactly the same time range.
+     * Returns true if both ScheduleItems span exactly the same time range.
      * This is a stronger notion of equality, and extending subclasses should minimally check for this
      * condition in the equals function.
      */

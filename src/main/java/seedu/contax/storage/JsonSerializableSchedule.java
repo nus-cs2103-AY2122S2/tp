@@ -18,7 +18,8 @@ import seedu.contax.model.appointment.exceptions.OverlappingAppointmentException
 import seedu.contax.model.person.Person;
 
 /**
- * An Immutable Schedule that is serializable to JSON format.
+ * Represents an immutable Schedule that is serializable to JSON format.
+ * This class is used for Jackson's Json inflation and deflation.
  */
 @JsonRootName(value = "schedule")
 class JsonSerializableSchedule {
@@ -45,7 +46,8 @@ class JsonSerializableSchedule {
      * @param source Future changes to this will not affect the created {@code JsonSerializableSchedule}.
      */
     public JsonSerializableSchedule(ReadOnlySchedule source) {
-        appointments.addAll(source.getAppointmentList().stream().map(JsonAdaptedAppointment::new)
+        appointments.addAll(source.getAppointmentList().stream()
+                .map(JsonAdaptedAppointment::new)
                 .collect(Collectors.toList()));
     }
 

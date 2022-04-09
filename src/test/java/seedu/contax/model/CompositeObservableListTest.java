@@ -6,6 +6,8 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,14 +40,27 @@ public class CompositeObservableListTest {
         AppointmentSlot slot = new AppointmentSlot(
                 new TimeRange(refTime.plusMinutes(120), refTime.plusMinutes(180)));
 
-        assertEquals(List.of(), compositeList.getUnmodifiableList());
+        assertEquals(List.of(), compositeList.getUnmodifiableResultList());
         appointmentList.add(APPOINTMENT_ALONE);
         slotList.add(slot);
-        assertEquals(List.of(APPOINTMENT_ALONE, slot), compositeList.getUnmodifiableList());
+        assertEquals(List.of(APPOINTMENT_ALONE, slot), compositeList.getUnmodifiableResultList());
 
         AppointmentSlot slotBefore = new AppointmentSlot(
                 new TimeRange(refTime.minusMinutes(120), refTime.minusMinutes(20)));
         slotList.set(0, slotBefore);
-        assertEquals(List.of(slotBefore, APPOINTMENT_ALONE), compositeList.getUnmodifiableList());
+        assertEquals(List.of(slotBefore, APPOINTMENT_ALONE), compositeList.getUnmodifiableResultList());
+    }
+
+    @Test
+    public void testCascadingNotify() {
+        ObservableList<Integer> baseList = FXCollections.observableArrayList();
+        ObservableList<Integer> intermediateList = baseList.filtered(x -> x < 60);
+        ObservableList<Integer> finalList = intermediateList.filtered(x -> x > 30);
+
+        CompositeObservableList<Integer> combinedList = new CompositeObservableList<>(intermediateList, finalList);
+
+        baseList.setAll(IntStream.range(1, 100).boxed().collect(Collectors.toList()));
+        baseList.setAll(IntStream.range(20, 200).boxed().collect(Collectors.toList()));
+        baseList.setAll(IntStream.range(40, 400).boxed().collect(Collectors.toList()));
     }
 }
