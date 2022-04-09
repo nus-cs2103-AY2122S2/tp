@@ -94,7 +94,7 @@ public class ModelManager implements Model {
         userPrefs.setPetBookFilePath(petBookFilePath);
     }
 
-    //=========== PetBook================================================================================
+    //=========== PetBook ================================================================================
 
     @Override
     public void setPetBook(ReadOnlyPetBook petBook) {

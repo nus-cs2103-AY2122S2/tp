@@ -26,9 +26,9 @@ public class SimilarPets {
     private SimilarPets() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the similar pets.
+     * Returns a {@code PetBook} with all the similar pets.
      */
-    public static PetBook getSimilarAddressBook() {
+    public static PetBook getSimilarPetBook() {
         PetBook ab = new PetBook();
         for (Pet pet : getSimilarPets()) {
             ab.addPet(pet);

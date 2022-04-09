@@ -42,7 +42,7 @@ public class JsonSerializablePetBookTest {
         JsonSerializablePetBook dataFromFile = JsonUtil.readJsonFile(SIMILAR_PET_FILE,
                 JsonSerializablePetBook.class).get();
         PetBook petBookFromFile = dataFromFile.toModelType();
-        PetBook similarPetsPetBook = SimilarPets.getSimilarAddressBook();
+        PetBook similarPetsPetBook = SimilarPets.getSimilarPetBook();
         assertEquals(petBookFromFile, similarPetsPetBook);
     }
 

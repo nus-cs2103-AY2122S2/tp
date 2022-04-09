@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import woofareyou.model.pet.Pet;
 
 /**
- * Unmodifiable view of WoofAreYou
+ * Unmodifiable view of PetBook
  */
 public interface ReadOnlyPetBook {
 

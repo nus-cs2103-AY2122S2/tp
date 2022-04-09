@@ -67,7 +67,7 @@ public class TypicalPets {
     private TypicalPets() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical pets.
+     * Returns a {@code PetBook} with all the typical pets.
      */
     public static PetBook getTypicalPetBook() {
         PetBook ab = new PetBook();

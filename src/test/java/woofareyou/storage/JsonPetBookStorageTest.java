@@ -62,49 +62,49 @@ public class JsonPetBookStorageTest {
 
     @Test
     public void readAndSavePetBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path filePath = testFolder.resolve("TempPetBook.json");
         PetBook original = getTypicalPetBook();
-        JsonPetBookStorage jsonAddressBookStorage = new JsonPetBookStorage(filePath);
+        JsonPetBookStorage jsonPetBookStorage = new JsonPetBookStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.savePetBook(original, filePath);
-        ReadOnlyPetBook readBack = jsonAddressBookStorage.readPetBook(filePath).get();
+        jsonPetBookStorage.savePetBook(original, filePath);
+        ReadOnlyPetBook readBack = jsonPetBookStorage.readPetBook(filePath).get();
         assertEquals(original, new PetBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPet(HOON);
         original.removePet(BOBA);
-        jsonAddressBookStorage.savePetBook(original, filePath);
-        readBack = jsonAddressBookStorage.readPetBook(filePath).get();
+        jsonPetBookStorage.savePetBook(original, filePath);
+        readBack = jsonPetBookStorage.readPetBook(filePath).get();
         assertEquals(original, new PetBook(readBack));
 
         // Save and read without specifying file path
         original.addPet(IDA);
-        jsonAddressBookStorage.savePetBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readPetBook().get(); // file path not specified
+        jsonPetBookStorage.savePetBook(original); // file path not specified
+        readBack = jsonPetBookStorage.readPetBook().get(); // file path not specified
         assertEquals(original, new PetBook(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void savePetBook_nullPetBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> savePetBook(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code petBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyPetBook addressBook, String filePath) {
+    private void savePetBook(ReadOnlyPetBook petBook, String filePath) {
         try {
             new JsonPetBookStorage(Paths.get(filePath))
-                    .savePetBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .savePetBook(petBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new PetBook(), null));
+    public void savePetBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> savePetBook(new PetBook(), null));
     }
 }
