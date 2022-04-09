@@ -3,8 +3,8 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
@@ -40,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_DESCRIPTION,
-                PREFIX_PRICE, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
+                PREFIX_PRICE, PREFIX_DISCOUNT_RATE, PREFIX_DISCOUNT_START);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE)
             || !argMultimap.getPreamble().isEmpty()) {

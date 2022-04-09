@@ -59,9 +59,9 @@ public class PopupAddProduct extends Popup {
                 + category.getText()
                 + " " + CliSyntax.PREFIX_PRICE.getPrefix()
                 + price.getText()
-                + " " + CliSyntax.PREFIX_DISCOUNTRATE.getPrefix()
+                + " " + CliSyntax.PREFIX_DISCOUNT_RATE.getPrefix()
                 + discountRate.getText()
-                + " " + CliSyntax.PREFIX_DISCOUNTSTART.getPrefix()
+                + " " + CliSyntax.PREFIX_DISCOUNT_START.getPrefix()
                 + discountStart.getText()
                 + " " + CliSyntax.PREFIX_DESCRIPTION.getPrefix()
                 + description.getText().replace("\n", "");

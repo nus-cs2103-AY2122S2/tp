@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_END_PRICE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -68,10 +68,10 @@ public class CommandTestUtil {
     public static final String START_PRICE_FULL_100 = " " + PREFIX_START_PRICE + VALID_PRICE_100;
     public static final String END_PRICE_FULL_100 = " " + PREFIX_END_PRICE + VALID_PRICE_100;
     public static final String END_PRICE_FULL_0 = " " + PREFIX_END_PRICE + VALID_PRICE_0;
-    public static final String DISCOUNT_RATE_FULL_A = " " + PREFIX_DISCOUNTRATE + VALID_DISCOUNT_RATE_A;
-    public static final String DISCOUNT_RATE_FULL_B = " " + PREFIX_DISCOUNTRATE + VALID_DISCOUNT_RATE_B;
-    public static final String DISCOUNT_START_FULL_A = " " + PREFIX_DISCOUNTSTART + VALID_DISCOUNT_START_A;
-    public static final String DISCOUNT_START_FULL_B = " " + PREFIX_DISCOUNTSTART + VALID_DISCOUNT_START_B;
+    public static final String DISCOUNT_RATE_FULL_A = " " + PREFIX_DISCOUNT_RATE + VALID_DISCOUNT_RATE_A;
+    public static final String DISCOUNT_RATE_FULL_B = " " + PREFIX_DISCOUNT_RATE + VALID_DISCOUNT_RATE_B;
+    public static final String DISCOUNT_START_FULL_A = " " + PREFIX_DISCOUNT_START + VALID_DISCOUNT_START_A;
+    public static final String DISCOUNT_START_FULL_B = " " + PREFIX_DISCOUNT_START + VALID_DISCOUNT_START_B;
     public static final String EXPIRY_DATE_FULL_A = " " + PREFIX_EXPIRY_DATE + VALID_EXPIRY_DATE_A;
     public static final String EXPIRY_DATE_FULL_B = " " + PREFIX_EXPIRY_DATE + VALID_EXPIRY_DATE_B;
     public static final String QUANTITY_FULL_A = " " + PREFIX_QUANTITY + VALID_QUANTITY_A;
@@ -79,9 +79,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "-1"; // price must be a positive amount
     // discount rate must be less than 100;
-    public static final String INVALID_DISCOUNTRATE_DESC = " " + PREFIX_DISCOUNTRATE + "101";
+    public static final String INVALID_DISCOUNT_RATE_DESC = " " + PREFIX_DISCOUNT_RATE + "101";
     // discount start must be a positive number;
-    public static final String INVALID_DISCOUNTSTART_DESC = " " + PREFIX_DISCOUNTSTART + "-1";
+    public static final String INVALID_DISCOUNT_START_DESC = " " + PREFIX_DISCOUNT_START + "-1";
     public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "2022 03 08"; // incorrect format
     public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-2"; // quantity must be non-negative
 
