@@ -84,7 +84,7 @@ public class PetBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose pets list can violate interface constraints.
+     * A stub ReadOnlyPetBook whose pets list can violate interface constraints.
      */
     private static class PetBookStub implements ReadOnlyPetBook {
         private final ObservableList<Pet> pets = FXCollections.observableArrayList();

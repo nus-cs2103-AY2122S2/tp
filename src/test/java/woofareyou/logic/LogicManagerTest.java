@@ -70,7 +70,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup LogicManager with JsonPetBookIoExceptionThrowingStub
         JsonPetBookStorage petBookStorage =
                 new JsonPetBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionPetBook.json"));
         JsonUserPrefsStorage userPrefsStorage =

@@ -13,7 +13,7 @@ import woofareyou.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyPetBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyPetBook_success() {
         Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalPetBook(), new UserPrefs());
         expectedModel.setPetBook(new PetBook());
