@@ -5,11 +5,10 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 public class Comment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Comment is limited ASCII values and to 30000 characters";
+            "Comment is limited ASCII values and to 300000 characters";
+    
 
-    public static final Integer MAX_COMMENT_LENGTH = 300000;
-
-    public static final String VALIDATION_REGEX_COMMENT = "[[\\p{Alnum}]*[\\p{Digit}]*[\\p{Punct}]*]{0,300000}";
+    public static final String VALIDATION_REGEX_COMMENT = "[\\p{ASCII}]{0,300000}";
 
     public final String comment;
 
@@ -19,16 +18,14 @@ public class Comment {
      */
     public Comment(String comment) {
         checkArgument(isValidComment(comment), MESSAGE_CONSTRAINTS);
-        String emojiFilter = "[(\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|"
-            + "\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff])]";
-        this.comment = comment.replaceAll(emojiFilter, "");
+        this.comment = comment;
     }
 
     /**
      * Returns true is Comment is valid.
      */
     public static boolean isValidComment(String comment) {
-        return comment.length() <= MAX_COMMENT_LENGTH;
+        return comment.matches(VALIDATION_REGEX_COMMENT);
     }
 
     @Override
