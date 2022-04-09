@@ -2,9 +2,7 @@ package seedu.contax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,10 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.contax.model.appointment.Appointment;
-import seedu.contax.model.appointment.AppointmentSlot;
-import seedu.contax.model.chrono.ScheduleItem;
-import seedu.contax.model.chrono.TimeRange;
 
 public class CompositeObservableListTest {
 

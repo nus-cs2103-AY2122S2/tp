@@ -2,7 +2,6 @@ package seedu.contax.logic.parser;
 
 import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.contax.commons.util.DateUtil.combineDateTime;
-import static seedu.contax.logic.commands.CommandTestUtil.APPOINTMENT_NAME_ALONE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DURATION;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_TIME;
@@ -27,7 +26,6 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.contax.commons.util.DateUtil;
-import seedu.contax.logic.commands.AppointmentsBetweenCommand;
 import seedu.contax.logic.commands.FreeBetweenCommand;
 import seedu.contax.model.appointment.Duration;
 

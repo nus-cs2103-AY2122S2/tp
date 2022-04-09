@@ -13,7 +13,6 @@ import static seedu.contax.testutil.TypicalPersons.ALICE;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 

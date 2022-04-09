@@ -7,7 +7,6 @@ import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.logic.commands.CommandResult;
 import seedu.contax.logic.commands.exceptions.CommandException;
 import seedu.contax.logic.parser.exceptions.ParseException;
-import seedu.contax.model.ReadOnlyAddressBook;
 import seedu.contax.model.chrono.ScheduleItem;
 import seedu.contax.model.person.Person;
 import seedu.contax.model.tag.Tag;

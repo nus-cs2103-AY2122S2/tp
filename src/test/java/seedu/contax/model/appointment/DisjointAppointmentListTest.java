@@ -10,7 +10,6 @@ import static seedu.contax.testutil.TypicalAppointments.APPOINTMENT_ALONE;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,12 +22,12 @@ import seedu.contax.testutil.AppointmentBuilder;
 
 public class DisjointAppointmentListTest {
 
-    private final DisjointAppointmentList appointmentList = new DisjointAppointmentList();
-
     private static final LocalDateTime SAMPLE_APPOINTMENT1_START = LocalDateTime.parse("2022-12-12T12:00");
     private static final LocalDateTime SAMPLE_APPOINTMENT1_END = SAMPLE_APPOINTMENT1_START.plusMinutes(30);
     private static final LocalDateTime SAMPLE_APPOINTMENT2_START = LocalDateTime.parse("2022-12-12T14:30");
     private static final LocalDateTime SAMPLE_APPOINTMENT2_END = SAMPLE_APPOINTMENT2_START.plusMinutes(30);
+
+    private final DisjointAppointmentList appointmentList = new DisjointAppointmentList();
 
     private DisjointAppointmentList buildSampleList() {
         Appointment appointment1 = new AppointmentBuilder(APPOINTMENT_ALONE).withDuration(30)

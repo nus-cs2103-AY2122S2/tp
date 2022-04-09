@@ -2,7 +2,6 @@ package seedu.contax.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_NAME;
 import static seedu.contax.storage.JsonAdaptedAppointment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.contax.testutil.Assert.assertThrows;
@@ -96,7 +95,7 @@ public class JsonAdaptedAppointmentTest {
 
     @Test
     public void toModelType_nullStartDateTime_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment( VALID_NAME, null,
+        JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, null,
                 VALID_DURATION, VALID_PERSON, VALID_PRIORITY_LOW);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 StartDateTime.class.getSimpleName());
@@ -152,7 +151,7 @@ public class JsonAdaptedAppointmentTest {
                 VALID_START_DATETIME, VALID_DURATION, VALID_PERSON, INVALID_PRIORITY);
         String expectedMessage = JsonAdaptedAppointment.INVALID_PRIORITY_MESSAGE;
         assertThrows(IllegalValueException.class, expectedMessage, ()
-                -> appointment.toModelType(addressBook.getPersonList()));
+            -> appointment.toModelType(addressBook.getPersonList()));
     }
     //@@author
 }

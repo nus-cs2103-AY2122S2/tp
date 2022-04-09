@@ -7,7 +7,6 @@ import static seedu.contax.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ScheduleItemTest {

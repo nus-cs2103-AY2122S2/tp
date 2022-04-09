@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class TimeRangeTest {
 
-    private final static LocalDateTime REF_TIME = LocalDateTime.parse("2022-12-12T12:30");
+    private static final LocalDateTime REF_TIME = LocalDateTime.parse("2022-12-12T12:30");
 
     @Test
     public void constructorTest_nullParameters_throwsNullPointerException() {

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.contax.model.chrono.DateRangePredicate;
 import seedu.contax.testutil.AppointmentBuilder;
 
 public class DateRangePredicateTest {
