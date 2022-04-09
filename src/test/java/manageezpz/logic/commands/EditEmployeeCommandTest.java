@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
-import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;

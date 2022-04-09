@@ -8,14 +8,10 @@ import static manageezpz.logic.commands.DeleteTaskCommand.MESSAGE_DELETE_TASK_SU
 import static manageezpz.logic.commands.DeleteTaskCommand.MESSAGE_USAGE;
 import static manageezpz.testutil.TypicalIndexes.INDEX_FIRST;
 import static manageezpz.testutil.TypicalIndexes.INDEX_SECOND;
-import static manageezpz.testutil.TypicalPersons.AMY;
-import static manageezpz.testutil.TypicalPersons.BOB;
 import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import manageezpz.model.person.Person;
-import manageezpz.testutil.PersonBuilder;
-import manageezpz.testutil.TodoBuilder;
 import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.index.Index;
@@ -23,8 +19,6 @@ import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 import manageezpz.model.task.Task;
-
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
