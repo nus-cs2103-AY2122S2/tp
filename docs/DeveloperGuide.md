@@ -371,47 +371,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ArchDuke` and the **Actor** is the `Student`, unless specified otherwise)
+(For all use cases below, the **System** is `ArchDuke` and the **Actor** is the `Student`, unless specified otherwise)
 
 **Use case: UC01 - Add a student contact**
 
 **MSS:**
 
-1. Student requests to add a student contact in ArchDuke contact list.
-2. ArchDuke adds the student contact to the contact list.
-3. ArchDuke updates the contact list and displays the student contact in the contact list.
+1. Student requests to add a student contact in ArchDuke.
+
+2. ArchDuke adds and displays the student contact to the contact list.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The student contact attributes are in an invalid format.
+
     * 1a1. ArchDuke displays an error message.
   
       Use case resumes from step 1.
 
+* 1b. The student contact has missing attributes.
+
+    * 1b1. ArchDuke displays an error message.
+  
+      Use case resumes from step 1.
+        
+    
 **Use case: UC02 - Delete a student contact**
 
 **MSS:**
 
 1. Student requests to delete a student in the contact list.
-2. ArchDuke deletes the particular student.
-3. ArchDuke updates the contact list and deletes that student contact from the contact list.
+
+2. ArchDuke deletes the particular student contact and no longer display that student contact.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The given index of the student contact is invalid.
+
     * 1a1. ArchDuke shows an error message.
   
        Use case resumes from step 1.
+  
+* 1b. The student contact list is empty.
+
+    Use case ends. 
+
 
 **Use case: UC03 - List student contacts**
 
 **MSS:**
 
 1. User requests to list student contacts.
+
 2. ArchDuke displays a list of student contacts.
 
     Use case ends.
@@ -422,39 +437,89 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC04 - Add a student group**
+
+**Use case: UC04 - Find student contacts**
+
+**MSS:**
+
+1. User requests to filter student contacts.
+
+2. ArchDuke filters and displays all the relevant student contacts based on the input attributes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid find command format.
+
+  * 1a1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1b. The student contact list is empty.
+
+    Use case ends.
+
+
+**Use case: UC05 - Add a student group**
 
 **MSS:**
 
 1. User requests to add a student group.
-2. ArchDuke adds the group.
-3. ArchDuke updates the group list and displays the group in the group list.
+
+2. ArchDuke adds the group and display the group.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The group attributes are in an invalid format.
+
   * 1a1. ArchDuke shows an error message.
   
     Use case resumes from step 1.
 
-**Use case: UC05 - Delete a student group**
+* 1b. The group attributes are missing.
+
+  * 1b1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1c. The group already exists in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+
+**Use case: UC06 - Delete a student group**
 
 **MSS:**
 
 1. User requests to delete a group in the group list.
-2. ArchDuke deletes the group.
-3. ArchDuke updates the group list and removes the group from the group list.
+
+2. ArchDuke deletes the group and no longer display the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given index of the group is invalid.
+* 1a. The group attributes are in an invalid format.
+
     * 1a1. ArchDuke shows an error message.
   
        Use case resumes from step 1.
+
+* 1b. The group does not exist in ArchDuke.
+
+    * 1b1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+* 1c. The group list is empty.
+
+  Use case ends.
+
 
 **Use case: UC06 - Assign a student to a group**
 
