@@ -1,6 +1,7 @@
 package seedu.ibook.logic.parser;
 
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ibook.logic.parser.ParserUtil.parseNumberIntoDate;
 
 import seedu.ibook.logic.commands.item.RemindCommand;
 import seedu.ibook.logic.parser.exceptions.ParseException;
@@ -14,7 +15,7 @@ public class RemindCommandParser implements Parser<RemindCommand> {
     @Override
     public RemindCommand parse(String userInput) throws ParseException {
         try {
-            ExpiryDate expiryDate = ParserUtil.parseNumberIntoDate(userInput);
+            ExpiryDate expiryDate = parseNumberIntoDate(userInput);
             return new RemindCommand(expiryDate);
         } catch (ParseException pe) {
             throw new ParseException(
