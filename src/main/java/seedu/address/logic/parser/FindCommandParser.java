@@ -23,6 +23,7 @@ import seedu.address.model.tag.TagContainsKeywordsPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -39,6 +40,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (containsMultiples(args) == true) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            FindCommand.COMMAND_CONTAINS_MULTIPLES_PREFIXES));
         }
 
         if (args.contains(PREFIX_NAME.getPrefix())) {
@@ -71,6 +78,33 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+    }
+
+    /**
+     * Checks whether {@code String args} contain multiples prefixes.
+     */
+    public boolean containsMultiples(String args) {
+        int multipleCounts = 0;
+
+        if (args.contains(PREFIX_NAME.getPrefix())) {
+            multipleCounts++;
+        }
+        if (args.contains(PREFIX_PHONE.getPrefix())) {
+            multipleCounts++;
+        }
+        if (args.contains(PREFIX_EMAIL.getPrefix())) {
+            multipleCounts++;
+        }
+        if (args.contains(PREFIX_ACADEMIC_MAJOR.getPrefix())) {
+            multipleCounts++;
+        }
+        if (args.contains(PREFIX_TAG.getPrefix())) {
+            multipleCounts++;
+        }
+        if (multipleCounts > 1) {
+            return true;
+        }
+        return false;
     }
 }
 

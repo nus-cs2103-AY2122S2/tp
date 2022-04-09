@@ -168,6 +168,7 @@ Locates all student contact in ArchDuke based on attributes that matches the giv
 * The attributes supported are: `n/NAME`, `p/PHONE_NUMER`, `e/EMAIL`, `a/ACADEMIC_MAJOR`, `t/TAG`
 * The specified keywords are **case-insensitive**. 
 * The attributes could be accessed by adding prefixes before the keywords.
+* Only one prefix is allowed (e.g. `find n/Alice p/86472814` will throw an error, but `find n/Alice` or `find p/86472814` will work).
 * The result must match the **exact word**, partial word will not match (e.g. `n/Dav` will not match the student contact
 `David` or `David Li` as there is no word `Dav`).
 * The command will list out all student contacts that matches the keyword.

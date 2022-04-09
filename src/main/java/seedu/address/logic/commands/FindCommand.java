@@ -21,9 +21,12 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Attributes can be accessed by adding prefixes before the keywords.\n"
             + "Parameters: PREFIX/KEYWORD [MORE_KEYWORDS]...\n"
-            + "Note that [MORE_KEYWORDS] only apply for syntax n/ a/ t/ \n"
+            + "Note that [MORE_KEYWORDS] only apply for syntax n/ a/ t/ "
+            + "and only one prefix can be used for find. \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie "
             + "or " + COMMAND_WORD + " " + PREFIX_ACADEMIC_MAJOR + "Computer Science";
+
+    public static final String COMMAND_CONTAINS_MULTIPLES_PREFIXES = COMMAND_WORD + " can only take in one prefix.";
 
     private final AttributeContainsKeywordsPredicate predicate;
 
