@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/danemarc.md)]
 
 * Role: Developer
-* Responsibilities: Documentation + Search
+* Responsibilities: Search, UI
 
 
 ### Daffa

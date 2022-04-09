@@ -321,6 +321,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**
 
+* `find` always searches all clients and not filtered clients.
 * The search is case-insensitive.
 * The order of the keywords does not matter. e.g. `find Hans Bob` will work the same as `find Bob Hans`.
 * Partial matches are allowed e.g. `find Bob` will match a client named `Bobs`.
