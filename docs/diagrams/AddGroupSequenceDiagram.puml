@@ -49,6 +49,12 @@ deactivate AddressBookParser
 LogicManager -> AddGroupCommand : execute()
 activate AddGroupCommand
 
+AddGroupCommand -> Model : hasGroup(example)
+activate Model
+
+Model --> AddGroupCommand
+deactivate Model
+
 AddGroupCommand -> Model : addGroup(example)
 activate Model
 
@@ -59,7 +65,7 @@ create CommandResult
 AddGroupCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddGroupCommand
+CommandResult --> AddGroupCommand : result
 deactivate CommandResult
 
 AddGroupCommand --> LogicManager : result

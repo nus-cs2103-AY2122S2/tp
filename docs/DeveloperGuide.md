@@ -159,13 +159,48 @@ This section describes some noteworthy details on how certain features are imple
 
 ## Delete student contact feature
 
+### About delete student contact feature
+
+The delete student contact feature allows users to delete an existing student contact from the student contact list.
+
 ## Add group feature
 
+### About add group feature
+
+The add group feature allows users to create a has-yet-to-exist student group in the student group list.
+
+### How it is implemented
+
 The `addgroup` command mechanism is facilitated by the `AddGroupCommand` and the `AddGroupCommandParser`.
-It allows users to add a not already existing group to the ArchDuke student group list. 
+It allows users to add a not-already-existing-group to the ArchDuke student group list. 
 It uses the `AddressBook#addGroup(Group group)` which is exposed in the `Model` 
 interface as `Model#addGroup(Group group)`. Then, the `add(Group groupToAdd)` is called on the `UniqueGroupList`
-in `AddressBook` to add the group to the `UniqueGroupList`.
+in `AddressBook` to add the group to the `UniqueGroupList`. 
+
+Given below is the example usage scenario and how the add group mechanism behaves at each step.
+
+1. The user inputs the `addgroup` command and provide the `GROUP_NAME` of the group in which the user wants to add.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddGroupCommandParser`.
+
+3. The `AddGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes. 
+In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
+`ParseException` would be thrown.
+
+4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `AddGroupCommandParser` will then call the `ParserUtil#parseGroupName()` 
+method to check for the validity of the input `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the 
+`GROUP_NAME` specified is invalid.
+
+5. The `AddGroupCommandParser` then creates the `AddGroupCommand` based on the processed input.
+
+6. The `LogicManager` executes the `AddGroupCommand`.
+
+7. The `AddGroupCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has already existed in the group list. 
+`CommandException` would be thrown if there already existed a group with the same group name.
+
+8. The `AddGroupCommand` then calls the `Model#addGroup()` to add the input group to the list.
+
+9. Finally, the `AddGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
 
 The following sequence diagram shows how the `addgroup` mechanism works:
 
@@ -180,6 +215,13 @@ The following activity diagram summarizes what happens when a user executes the 
 ![](images/AddGroupCommandActivityDiagram.png)
 
 ## Delete group feature
+
+### About delete group feature
+
+### How it is implemented
+
+### Design considerations
+
 to be updated...
 
 ## Add task to an existing group feature
