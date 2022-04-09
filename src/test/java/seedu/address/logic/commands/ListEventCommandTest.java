@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.getExpectedListCommandResult;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
@@ -61,5 +63,27 @@ public class ListEventCommandTest {
         expectedModel.showEventList(Model.PREDICATE_SHOW_ALL);
         assertCommandSuccess(
                 new ListEventCommand(SearchType.ALL), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListEventCommand firstCommand = new ListEventCommand(SearchType.UNARCHIVED_ONLY);
+        ListEventCommand secondCommand = new ListEventCommand(SearchType.ARCHIVED_ONLY);
+
+        // same object -> returns true
+        assertTrue(firstCommand.equals(firstCommand));
+
+        // same values -> returns true
+        ListEventCommand firstCommandCopy = new ListEventCommand(SearchType.UNARCHIVED_ONLY);
+        assertTrue(firstCommand.equals(firstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(firstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(firstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstCommand.equals(secondCommand));
     }
 }
