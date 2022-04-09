@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
+## Table of Contents
   {:toc}
 
 ## **Introduction**
@@ -31,10 +31,50 @@ Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/m
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W11-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
+[return to top ↑](#table-of-contents)
 
 ### Architecture
 
-TODO
+<img src="images/ArchitectureDiagram.png" width="280" />
+
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+
+Each of the four main components (also shown in the diagram above),
+
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" width="300" />
+
+The sections below give more details of each component.
+
+[return to top ↑](#table-of-contents)
 
 ### UI component
 The **API** of this component is specified in `Ui.java`
@@ -86,6 +126,10 @@ The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateI
 populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
 method `MainWindow#handleInfoPanelUpdate()`.
 
+Refer to [**Viewing a Lesson or Student's details**](#Viewing a Lesson or Student's details) implementation.
+
+[return to top ↑](#table-of-contents)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/AY2122S2-CS2103T-W11-3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -115,6 +159,7 @@ How the parsing works:
 * When called upon to parse a user command, the `TeachWhatParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteStudentCommand`) which the `TeachWhatParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[return to top ↑](#table-of-contents)
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -134,6 +179,8 @@ Each `Lesson` has an association with a list of `EnrolledStudents`, which contai
 
 ![Model Class Diagram](images/LessonBookStudentBookModelClassDiagram.png)
 
+[return to top ↑](#table-of-contents)
+
 ### Storage component
 
 **API** : [`StorageManager.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/storage/StorageManager.java)
@@ -147,9 +194,13 @@ corresponding objects.
 one of the three (if only the functionality of one is needed).
 * depends on some classes in the `Model` component because its job is to save/retrieve objects that belong to the `Model`.
 
+[return to top ↑](#table-of-contents)
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+[return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -239,6 +290,8 @@ application is updated with the details of the selected `Student`.
 
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
 
+[return to top ↑](#table-of-contents)
+
 ### Add student
 Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the 
 `TeachWhatParser` into a `Command` which is executed by `LogicManager#execute()`.
@@ -276,6 +329,8 @@ Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Studen
 The following sequence diagram shows how the add student command works.
 ![](images/AddStudentSequenceDiagram.png)
 
+[return to top ↑](#table-of-contents)
+
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
 - the `TeachWhatParser` detects the command word `addlesson` and passes the lessons details to `AddLessonCommandParser#parse`
@@ -306,6 +361,7 @@ The following sequence diagram shows how `AddLessonCommand`
 
 ![Add Lesson Sequence Diagram 4](images/AddLessonSequenceDiagram_4.png)
 
+
 #### Determining if a lesson clashes with any existing lessons
 
 When a user requests to add a new lesson to the list, it is important to check that the new lesson ***does not clash with any existing lessons in the list.***
@@ -323,6 +379,8 @@ This is done with the method `ConsistentLessonList#hasConflictingLesson()`, whic
 The following sequence diagram shows how this is done:
 
 ![Add Lesson Sequence Diagram 5](images/AddLessonSequenceDiagram_5.png)
+
+[return to top ↑](#table-of-contents)
 
 ### Assign student to lesson
 
@@ -368,6 +426,7 @@ The following sequence diagram shows how the assign operation works.
 > **Note**: The lifeline for AssignCommandParser should end at the destroy marker (X) but due to a limitation of 
 > PlantUML, the lifeline reaches the end of diagram.
 
+[return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -554,6 +613,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Command Line**: A text interface for your computer.
 
+[return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -577,3 +637,5 @@ TODO
 ### Saving data
 
 TODO
+
+[return to top ↑](#table-of-contents)
