@@ -40,7 +40,6 @@ public class AddPtbCommandTest {
         Buyer testBuyer = model.getFilteredBuyerList().get(INDEX_SEVENTH_BUYER.getZeroBased());
         String expectedMessage = String.format(AddPropertyToBuyCommand.MESSAGE_SUCCESS,
                 new BuyerBuilder(testBuyer).withProperty(testProperty).build());
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
                 TypicalBuyers.getTypicalBuyerAddressBook());
         expectedModel.setBuyer(testBuyer, new BuyerBuilder(testBuyer).withProperty(testProperty).build());
