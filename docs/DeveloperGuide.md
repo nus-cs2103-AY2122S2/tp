@@ -1221,3 +1221,27 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Resizing the Help Window
+
+1. Resizing the Help Window
+
+   1. Prerequisite: Help Window is open
+
+   1. Test case: Resize Help Window to be smaller <br>
+   Expected: The Help Window's dimesions will not go below `1000x600`.
+
+   1. Test case: Resize Help Window to be larger <br>
+   Expected: The Help Window's dimesions will not go above `1250x700`.
+
+### Resizing the Onboarding Guide prompt
+
+1. Resizing the Onboarding Guide prompt
+
+   1. Prerequisite: Onboarding Guide prompt is open
+
+   1. Test case: Resize Onboarding Guide prompt to be smaller <br>
+   Expected: The prompt's dimesions will not go below `150x500`.
+
+   1. Test case: Resize Onboarding Guide prompt to be larger <br>
+   Expected: The prompt's dimesions will not go above `400x700`.
