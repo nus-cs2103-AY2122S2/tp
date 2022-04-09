@@ -2,6 +2,7 @@ package seedu.address.model.entry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -168,5 +169,23 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void findPerson_emptyList_returnsNull() {
+        assertNull(uniquePersonList.find(ALICE));
+    }
+
+    @Test
+    public void archivePerson_emptyList_throwsEntryNotFoundException() {
+        assertThrows(EntryNotFoundException.class, () -> uniquePersonList.setArchived(ALICE, true));
+    }
+
+    @Test
+    public void removeMatchingCompanyName_personInList_throwsEntryNotFoundException() {
+        uniquePersonList.add(ALICE);
+        UniqueEntryList<Person> expectedUniquePersonList = new UniqueEntryList<>();
+        uniquePersonList.removeMatchingCompanyName("DBSSS");
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }
