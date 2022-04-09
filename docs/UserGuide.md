@@ -60,8 +60,9 @@ EMAIL            |   e/   | Denotes the email address of the student            
 TASK             |   tn/  | Denotes the name of the task that is being assigned to the student | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters and spaces</li><li>Symbols are not allowed</li></ul>                                                     | Any non-negative number
 
 
-<div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> <br>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** <br>
     * Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
     * More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
