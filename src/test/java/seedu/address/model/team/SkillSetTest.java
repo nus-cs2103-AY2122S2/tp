@@ -73,11 +73,11 @@ public class SkillSetTest {
     @Test
     public void removeDuplicates() {
         Set<Skill> duplicatedSet = new HashSet<>();
-        duplicatedSet.add(c1);
+        duplicatedSet.add(java100);
         duplicatedSet.add(c1);
         duplicatedSet.add(c20);
+        duplicatedSet.add(c1);
         duplicatedSet.add(java90);
-        duplicatedSet.add(java100);
         skillSet3.add(c20);
         skillSet3.add(java100);
         assertEquals(new SkillSet(duplicatedSet), skillSet3);
