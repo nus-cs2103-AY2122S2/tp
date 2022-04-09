@@ -50,6 +50,7 @@ from what the user sees, how Tinner can help the user, and even its limitations.
         * [Viewing help: `help`](#c-help)
         * [Exiting Tinner: `exit`](#c-exit)
         * [Saving the data](#c-saving-the-data)
+    * [Coming soon](#coming-soon)
 * [Frequently Asked Questions (FAQs)](#faq)
 * [Command Summary](#command-summary)
 
@@ -779,6 +780,12 @@ Use `exit` if you're too lazy to click out of the application.
 
 Tinner data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
+
+[Back to Table of Contents](#toc)
+
+## Coming soon <a id="coming-soon"></a>
+
+Review feature that allows you to add reviews to roles.
 
 [Back to Table of Contents](#toc)
 

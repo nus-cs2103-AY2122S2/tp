@@ -65,7 +65,9 @@ public class CompanyListParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER), () ->
+                        parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -132,7 +134,17 @@ public class CompanyListParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER), () ->
+                        parser.parseCommand(ExitCommand.COMMAND_WORD + " 3"));
+    }
+
+    @Test
+    public void parseCommand_listFavourite() throws Exception {
+        assertTrue(parser.parseCommand(ListFavouriteCommand.COMMAND_WORD) instanceof ListFavouriteCommand);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER), () ->
+                        parser.parseCommand(ListFavouriteCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -147,20 +159,17 @@ public class CompanyListParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER), () ->
+                        parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommand_listFavourite() throws Exception {
-        assertTrue(parser.parseCommand(ListFavouriteCommand.COMMAND_WORD) instanceof ListFavouriteCommand);
-        assertTrue(parser.parseCommand(ListFavouriteCommand.COMMAND_WORD
-                + " 3") instanceof ListFavouriteCommand);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParserUtil.MESSAGE_EXTRANEOUS_PARAMETER), () ->
+                        parser.parseCommand(ClearCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
