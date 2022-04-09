@@ -364,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list products ([UC1](#uc1-listing-products))
+1. User requests to list products ([UC1](#uc1-listing-products)).
 2. User requests to delete a product in the list specified by the index
 3. IBook deletes the product
 
@@ -400,12 +400,82 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find products.
-2. IBook updates the list to show the requested products
+2. IBook updates the list to show the requested products.
 Use case ends.
 
 **Extensions**
 
 * 2a. Requested fields are invalid.
+
+    * 2a1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+#### UC6: Update all products
+
+**MSS**
+
+1. User requests to update all products displayed in the list.
+2. IBook updates the list to show all products updated.
+   Use case ends.
+
+**Extensions**
+
+* 1a. Some provided fields are invalid.
+
+    * 1a1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The current display list is empty.
+
+    * 2a1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+#### UC7: Delete all products
+
+**MSS**
+
+1. User requests to delete all products displayed in the list.
+2. IBook updates the list to show all products updated.
+   Use case ends.
+
+**Extensions**
+
+* 2a. The current display list is empty.
+
+    * 2a1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+#### UC8: Undo changes
+
+**MSS**
+
+1. User requests to undo the most recent command that made changes to iBook.
+2. IBook revert the most recent changes.
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no changes that can be reverted.
+
+    * 2a1. IBook shows an error message.
+
+      Use case resumes at step 1.
+
+#### UC9: Redo changes
+
+**MSS**
+
+1. User requests to redo the most recent undone command that made changes to iBook.
+2. IBook restore the most recent undone changes.
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no changes that can be restored.
 
     * 2a1. IBook shows an error message.
 
