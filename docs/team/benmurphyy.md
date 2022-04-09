@@ -22,13 +22,11 @@ Given below are my contributions to the project.
   * Added ability to store different types of classes and variables in storage, to meet the needs of the application
     * Justification: As UniBook required a lot of additional classes to be added to AB3, storage had to be heavily modified to support them
     * Implemented all the JSON adapted versions of the model classes in UniBook so that they could be stored easily using Jackson
-    * Added support for DateTime objects
-    * Added support for class subtyping in Jackson
-      * UniBook contains two class types that inherit from another, `Student` and `Professor`, which both inherit from an abstract class `Person`
+    * Added support for DateTime objects and class subtyping in Jackson
+      * UniBook contains two child classes `Student` and `Professor`, which both inherit from an abstract class `Person`
       * Support had to be added so that storage of the two different child classes could be differentiated
     * Ensured that deserialization works given the bidirectional associations that many classes share
-      * Bidirectional association meant that when deserializing UniBook, it had to be done in a specific order so that the associations could be maintained
-    * Added extensive checks to the JSON storage file before loading into UniBook, to ensure that any illegal data, due to corruption of the file (perhaps from modification by advanced users), would be detected, with the file being rejected and reset if that was the case
+    * Added extensive checks to the JSON storage file before loading into UniBook to reject corrupted JSON files
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benmurphyy&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 * **Project management**:
@@ -36,8 +34,8 @@ Given below are my contributions to the project.
     * Scheduling and directing meetings
     * Allocating project work and setting deliverables and deadlines, and ensuring they were met
     * Setting standards for the team to follow, these include:
-      * Command format standards - to ensure a consistent command structure to maximise ease-of-use
-      * Documentation format standards - to ensure documentation such as User Guide and Developer Guide had a homogeneous structure, making it easy to read and understand
+      * Command format standards - to ensure consistent commands to enhance ease-of-use
+      * Documentation format standards - to ensure consistent documentation
     * Defining interface methods between components of UniBook - to ensure little duplication of code and to minimise bugs
     * Setting up and maintaining the Github project team and repo.
   * Managed releases `1.2`, `1.3.1` and `1.3.2`
