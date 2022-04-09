@@ -175,9 +175,11 @@ The `addgroup` command mechanism is facilitated by the `AddGroupCommand` and the
 It allows users to add a not-already-existing-group to the ArchDuke student group list. 
 It uses the `AddressBook#addGroup(Group group)` which is exposed in the `Model` 
 interface as `Model#addGroup(Group group)`. Then, the `add(Group groupToAdd)` is called on the `UniqueGroupList`
-in `AddressBook` to add the group to the `UniqueGroupList`. 
+in `AddressBook` to add the group to the group list.
 
 Given below is the example usage scenario and how the add group mechanism behaves at each step.
+
+#### Parsing user input
 
 1. The user inputs the `addgroup` command and provide the `GROUP_NAME` of the group in which the user wants to add.
 
@@ -193,6 +195,8 @@ method to check for the validity of the input `GROUP_NAME`. <br> <br> At this st
 
 5. The `AddGroupCommandParser` then creates the `AddGroupCommand` based on the processed input.
 
+#### Command execution
+
 6. The `LogicManager` executes the `AddGroupCommand`.
 
 7. The `AddGroupCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has already existed in the group list. 
@@ -200,7 +204,8 @@ method to check for the validity of the input `GROUP_NAME`. <br> <br> At this st
 
 8. The `AddGroupCommand` then calls the `Model#addGroup()` to add the input group to the list.
 
-9. Finally, the `AddGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+9. Finally, the `AddGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution. 
+The GUI would also be updated on this change in the group list and update the display of group list accordingly.
 
 The following sequence diagram shows how the `addgroup` mechanism works:
 
