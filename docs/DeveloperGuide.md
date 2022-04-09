@@ -586,14 +586,94 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
     Use case ends.
 
+**Use case: Edit a client's information**
+
+**MSS**
+1. User specify which client to be edited
+2. User inputs the values to be edited
+3. CinnamonBun edits the value
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No client index specified
+    * 1a1. CinnamonBun shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. No fields are provided
+    * 2a1. CinnamonBun shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. Some fields are inputed wrongly
+    * 2b1. CinnamonBun shows the appropriate error message.
+
+      Use case resumes at step 2.
+
+* 2c. Value edited is email and there is already an existing email by another client in CinnamonBun
+    * 2c1. CinnamonBun shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Append fields and tags to a client**
+
+**MSS**
+
+1. User specify which client to be edited.
+2. User input the fields and tags to be appended.
+3. CinnamonBun appends the fields and tags to the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+* 1b. CinnamonBun detects a duplicate client.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+**Use case: Remove fields and tags to a client**
+
+**MSS**
+
+1. User specify which client to be edited.
+2. User input the fields and tags to be removed.
+3. CinnamonBun removes the fields and tags from the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+**Use case: Add remark to a client**
+
+**MSS**
+
+1. User specify which client to be edited.
+2. User input the remark to be added.
+3. CinnamonBun adds the remark to the client.
+
+   Use case ends.
+
 **Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list clients
-2.  CinnamonBun shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  CinnamonBun deletes the client
+1.  User requests to list clients.
+2.  CinnamonBun shows a list of clients.
+3.  User specify which client to be deleted.
+4.  CinnamonBun deletes the specified client.
 
     Use case ends.
 
@@ -622,54 +702,27 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
     * 1a1. CinnamonBun shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 * 2a. The list is empty.
 
   Use case ends.
 
-**Use case: Edit a client's information**
-
-**MSS**
-1. User specify which client to be edited
-2. User inputs the values to be edited
-3. CinnamonBun edits the value
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No client index specified
-    * 1a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 1.
-
-* 2a. No fields are provided
-    * 2a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
-* 2b. Some fields are inputed wrongly
-    * 2b1. CinnamonBun shows the appropriate error message.
-
-      Use case resumes at step 2.
-
-* 2c. Value edited is email and there is already an existing email by another client in CinnamonBun
-    * 2c1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
-
 **Use case: Sort customer list**
 
 **MSS**
+
 1. User inputs the fields the list is to be sorted on.
 2. CinnamonBun sorts the client list accordingly in order of the fields specified.
 3. The sorted list is displayed.
 
 **Extensions**
+
 * 1a. User inputs no fields
   * 1a1. An error message is shown.
 
     Use case resumes at step 1.
+
 * 1b. User inputs non-existent/not supported fields
   * 1b1. An error message is shown
 
@@ -678,6 +731,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 **Use case: Undo modifications**
 
 **MSS**
+
 1. User undos the latest modification made to the Clients' list in the CinnamonBun.
 2. The modifications have been undone.
 3. CinnamonBun shows the earlier clients' list without the modifications.
@@ -685,12 +739,13 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 **Extensions**
 * 1a. There have been no modification made prior to calling undo.
   * 1a1. CinnamonBun shows an error message. <br>
-  Use case ends.
+
+    Use case ends.
   
 * 1b. The previous data cannot be read due to file reading issues/corruption
   * 1b1. CinnamonBun shows an error message. <br>
-  Use case ends.
-
+  
+    Use case ends.
     
 ### Non-functional requirements
 
@@ -725,7 +780,7 @@ These instructions only provide a starting point for testers to work on; testers
 * Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
-          Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 ### Adding a client
 
@@ -765,6 +820,15 @@ These instructions only provide a starting point for testers to work on; testers
        Expected: First client's `vendor` tag is removed.
     5. Test case: `remove 1 n/`<br>
        Expected: First client's name is not removed as every client must have a name. Error message is shown.
+
+### Add or remove remark from a client
+
+* Add or remove remark from a client.
+    1. List all clients using the `list` command. Multiple clients in the list.
+    2. Test case: `remark 1 r/High shipping cost.`<br>
+       Expected: First client's remark is set to `High shipping cost.`.
+    3. Test case: `remark 1 r/`<br>
+       Expected: First client's remark removed.
 
 ### Deleting a client
 
