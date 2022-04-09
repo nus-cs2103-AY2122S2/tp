@@ -230,7 +230,8 @@ and stored in the addressbook. `CommandResult` would then generate a success mes
 successfully.
 
 The following sequence diagram shows how the tag operation works:
-![Tag Sequence Diagram](images/TagSequenceDiagram.png)
+![Tag Sequence Diagram](images/TagSequenceDiagram0.png)
+![Tag Sequence Diagram](images/TagSequenceDiagram1.png)
 
 ### Remove Tag feature
 
@@ -291,12 +292,13 @@ will eventually return to `LogicManager` which will call `EventCommand#execute()
 `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
 The following sequence diagram shows how the tag operation works:
-![Event Sequence Diagram](images/EventSequenceDiagram.png)
+![Event Sequence Diagram](images/EventSequenceDiagram0.png)
+![Event Sequence Diagram](images/EventSequenceDiagram1.png)
 
-### Cance Event feature
+### Cancel Event feature
 
 #### Current Implementation
-The cancelevent command would allow the user to cancel and remove an event from the address book. The index specified by the user would
+The cancel event command would allow the user to cancel and remove an event from the address book. The index specified by the user would
 lead to the deletion of the corresponding event in the event list, as long as it is a valid index. The user also has the option of specifying
 multiple indexes if multiple deletions are required.
 
@@ -318,7 +320,8 @@ notifying the user later. Afterwards, the events will be deleted from the `Addre
 Finally, `CommandResult` would then generate a success message to inform the user the event has been added successfully.
 
 The following sequence diagram shows how the tag operation works:
-![Cancel Event Sequence Diagram](images/CancelEventSequenceDiagram.png)
+![Cancel Event Sequence Diagram](images/CancelEventSequenceDiagram0.png)
+![Cancel Event Sequence Diagram](images/CancelEventSequenceDiagram1.png)
 
 ### Edit Feature
 
