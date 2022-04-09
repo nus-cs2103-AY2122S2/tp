@@ -371,47 +371,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ArchDuke` and the **Actor** is the `Student`, unless specified otherwise)
+(For all use cases below, the **System** is `ArchDuke` and the **Actor** is the `Student`, unless specified otherwise)
 
 **Use case: UC01 - Add a student contact**
 
 **MSS:**
 
-1. Student requests to add a student contact in ArchDuke contact list.
-2. ArchDuke adds the student contact to the contact list.
-3. ArchDuke updates the contact list and displays the student contact in the contact list.
+1. Student requests to add a student contact in ArchDuke.
+
+2. ArchDuke adds and displays the student contact to the contact list.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The student contact attributes are in an invalid format.
+
     * 1a1. ArchDuke displays an error message.
   
       Use case resumes from step 1.
 
+* 1b. The student contact has missing attributes.
+
+    * 1b1. ArchDuke displays an error message.
+  
+      Use case resumes from step 1.
+        
+    
 **Use case: UC02 - Delete a student contact**
 
 **MSS:**
 
 1. Student requests to delete a student in the contact list.
-2. ArchDuke deletes the particular student.
-3. ArchDuke updates the contact list and deletes that student contact from the contact list.
+
+2. ArchDuke deletes the particular student contact and no longer display that student contact.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The given index of the student contact is invalid.
+
     * 1a1. ArchDuke shows an error message.
   
        Use case resumes from step 1.
+  
+* 1b. The student contact list is empty.
+
+    Use case ends. 
+
 
 **Use case: UC03 - List student contacts**
 
 **MSS:**
 
 1. User requests to list student contacts.
+
 2. ArchDuke displays a list of student contacts.
 
     Use case ends.
@@ -422,141 +437,365 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC04 - Add a student group**
+
+**Use case: UC04 - Find student contacts**
 
 **MSS:**
 
-1. User requests to add a student group.
-2. ArchDuke adds the group.
-3. ArchDuke updates the group list and displays the group in the group list.
+1. User requests to filter/find student contacts.
+
+2. ArchDuke filters and displays all the relevant student contacts based on the input attributes.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group attributes are in an invalid format.
+* 1a. User enters an invalid find command format.
+
   * 1a1. ArchDuke shows an error message.
   
     Use case resumes from step 1.
 
-**Use case: UC05 - Delete a student group**
+* 1b. The student contact list is empty.
+
+    Use case ends.
+
+
+**Use case: UC05 - Add a student group**
+
+**MSS:**
+
+1. User requests to add a student group.
+
+2. ArchDuke adds the group and display the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The group command format is invalid.
+
+    * 1a1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
+
+* 1b. The group name is invalid.
+
+  * 1b1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1c. The group already exists in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+
+**Use case: UC06 - Delete a student group**
 
 **MSS:**
 
 1. User requests to delete a group in the group list.
-2. ArchDuke deletes the group.
-3. ArchDuke updates the group list and removes the group from the group list.
+
+2. ArchDuke deletes the group and no longer display the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given index of the group is invalid.
+* 1a. The group command format is invalid.
+
     * 1a1. ArchDuke shows an error message.
   
        Use case resumes from step 1.
 
-**Use case: UC06 - Assign a student to a group**
+* 1b. The group name is invalid.
+
+    * 1b1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
+
+* 1c. The group does not exist in ArchDuke.
+
+    * 1c1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+* 1d. The group list is empty.
+
+  Use case ends.
+
+
+**Use case: UC07 - Assign a student to a group**
 
 **MSS:**
 
 1. User requests to add a student to a specific group.
-2. ArchDuke adds the student to the group.
-3. ArchDuke updates the student list in the group and displays the student in the group.
+
+2. ArchDuke adds the student to the group and display the student contact in the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group index is invalid.
-    * 1a1. ArchDuke shows an error message.
+* 1a. The assign command format is invalid.
 
-      Use case resumes from step 1.
+    * 1a1. ArchDuke shows an error message.
   
-* 1b. The student index is invalid.
+      Use case resumes from step 1.
+
+* 1b. The group name is invalid.
+
     * 1b1. ArchDuke shows an error message.
 
-       Use case resumes from step 1.
+      Use case resumes from step 1.
 
-**Use case: UC07 - Add a task in a group**
+* 1c. The group does not exist in ArchDuke.
+
+    * 1c1. ArchDuke shows an error message.
+      
+      Use case resumes from step 1.
+  
+* 1d. The student index is invalid.
+
+    * 1d1. ArchDuke shows an error message.
+
+       Use case resumes from step 1.
+  
+* 1e. The target student contact already exists in the group.
+
+  * 1e1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+
+**Use case: UC08 - Deassign a student contact from a group**  
+
+**MSS:**
+
+1. User requests to deassign a student from a specific group.
+
+2. ArchDuke deassigns the student from the group and no longer displays the student contact in the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The deassign command format is invalid.
+
+  * 1a1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1b. The group name is invalid.
+
+  * 1b1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1c. The group does not exist in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1d. The student index is invalid.
+
+  * 1d1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1e. The student contact is not previously assigned in the group.
+
+  * 1e1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1f. The student contact list in the target group is empty.
+
+    Use case ends.
+
+
+**Use case: UC09 - View student contacts in a group**
+
+**MSS:**
+
+1. User requests to view student contacts in a specific group.
+
+2. ArchDuke displays all student contacts currently assigned to the group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The view contact command format is invalid.
+
+  * 1a1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1b. The group name is invalid.
+
+  * 1b1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1c. The group does not exist in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+
+**Use case: UC10 - Add a task in a group**
 
 **MSS:**
 
 1. User requests to add a specific task to a specific group.
-2. ArchDuke adds the specific task in the group.
-3. ArchDuke updates the group task list and displays the task in the group.
+
+2. ArchDuke adds the specific task to the group and displays the task in the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group index is invalid.
-    * 1a1. ArchDuke shows an error message.
+* 1a. The add task command format is invalid.
+
+* 1b. The group name is invalid.
+
+    * 1b1. ArchDuke shows an error message.
 
        Use case resumes from step 1.
 
-* 2a. The task format is invalid.
-    * 2a1. ArchDuke shows an error message.
+* 1c. The group does not exist in ArchDuke.
 
+  * 1c1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+* 1d. The task name is invalid.
+
+  * 1d1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+* 1e. The task already exists in the target group.
+
+  * 1e1. ArchDuke shows an error message.
+  
       Use case resumes from step 1.
 
-**Use case: UC08 - Delete a task in a group**
+
+**Use case: UC11 - Delete a task from a group**
 
 **MSS:**
 
 1. User requests to delete a specific task from a specific group.
-2. ArchDuke deletes the specific task in the group.
-3. ArchDuke updates the group task list and removes the task from the group.
+
+2. ArchDuke deletes the specific task from the group and no longer displays the task in the group.
    
    Use case ends.
 
 **Extensions**
 
-* 1a. The group task index is invalid.
+* 1a. The delete task command format is invalid.
 
     * 1a1. ArchDuke shows an error message.
-
-      Use case resumes at step 1.
   
-* 1b. The group index is invalid. 
+        Use case resumes from step 1.
+  
+* 1b. The group name is invalid.
 
     * 1b1. ArchDuke shows an error message.
   
-       Use case resumes from step 1.
+        Use case resumes from step 1.
+  
+* 1c. The group does not exist in ArchDuke.
 
-**Use case: UC09 - View tasks in a group**
+    * 1c1. ArchDuke shows an error message.
+  
+        Use case resumes from step 1.
+      
+* 1d. The task name is invalid.
+
+    * 1d1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+
+* 1e. The task does not exist in the target group.
+
+    * 1e1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+  
+* 1f. The task list in the target group is empty.
+
+    Use case ends.
+    
+
+**Use case: UC12 - View tasks in a group**
 
 **MSS:**
 
 1. User requests to view tasks that belong to a specific group.
+
 2. ArchDuke displays all tasks in that group.
+
    Use case ends.
 
 **Extensions**
 
-* 1a. The group index is invalid.
+* 1a. The view task command format is invalid.
 
     * 1a1. ArchDuke shows an error message.
 
-      Use case resumes from step 1.
+        Use case resumes from step 1.
+  
+* 1b. The group name is invalid.
 
-**Use case: UC10 - Find people from the contact list**
+    * 1b1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+  
+* 1c. The group does not exist in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+
+  Use case resumes from step 1.
+
+
+**Use case: UC13 - View help window**
 
 **MSS:**
 
-1. User requests to find the contacts by inputting keywords based on the attribute prefix.
-2. ArchDuke displays all the contacts which have the keywords.
+1. User requests to view help window in ArchDuke.
+
+2. ArchDuke pops up help window.
+
    Use case ends.
 
-**Extensions**
 
-* 1a. The student contact attribute(s) input is/are in an invalid format.
+**Use case: UC14 - Exit the program**
 
-    * 1a1. ArchDuke shows an error message.
+**MSS:**
 
-      Use case resumes from step 1.
-    
-*{More to be added}*
+1. User requests to exit ArchDuke.
+
+2. ArchDuke exits.
+
+   Use case ends.
+
+
+**Use case: UC15 - Clear the data**
+
+**MSS:**
+
+1. User requests to clear all data in ArchDuke.
+
+2. ArchDuke clears all data.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
@@ -577,15 +816,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Attribute**: A set of specific value for a given object that defines the property or characteristic of that object.
 * **Group list**: Every existing groups in ArchDuke.
 * **Group name**: An identifier for a group that suggests the function of that group.
-* **Index**: A number in front of a student contact, used to reference that particular student contact.
-* **Group list**: Every existing student groups in ArchDuke.
 * **Group task**: A piece of work to be done or undertaken by one or more student contacts in a group.
+* **Index**: A number in front of a student contact, used to reference that particular student contact.
 * **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **Student contact**: A contact of a student.
-* **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major, optional tag.
 * **Student contact list**: Every existing student contacts in ArchDuke or in a group.
 * **Student group**: A number of student contact that are classed together. A group can have zero to any number of student contacts. A student contact can be assigned to a group.
-* **Student group attribute**: A piece of information related to a group i.e. group name.
 * **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
 * **Task list**: Every existing tasks in a group.
 
@@ -1067,7 +1303,7 @@ More information on usage: [viewtask command](UserGuide.html#displays-the-tasks-
          1. Test case: Invalid `TASK_NAME` <br>
          Copy an existing task name and paste it to the other task attribute **within the same group**. <br>
          Expected: Only one task with that name will appear inside the group. 
-         If the task name differs in case, only the first occurrence will appear inside the task list.
+         If the task name differs in case, only the first occurrence will appear inside the task list. <br>
          
 2. Dealing with missing files.
 
