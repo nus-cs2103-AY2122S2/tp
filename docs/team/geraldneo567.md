@@ -1,7 +1,5 @@
----
-layout: page
-title: Gerald Neo's Project Portfolio Page
----
+
+## Gerald Neo's Project Portfolio Page
 
 ### Project: UniBook
 
