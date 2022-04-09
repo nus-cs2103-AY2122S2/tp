@@ -76,11 +76,11 @@ TAssist's user interface features a command input box, a command results box, an
 
 From the class group list, click the "Check Attendance" button to open a popup window. This popup  displays a list of lessons 1-13 and any students who were **absent** for a lesson.
 
-![Ui](images/Ui_Check_Attendance.jpg)
+<img src="images/Ui_Check_Attendance.jpg" style="display:block;margin:0 auto;max-width:500px;">
 
 From the assessment list, click the "See Attempts" button to open a popup window. This popup displays a list of student attempts for that assessment including their name and assigned grade.
 
-![Ui](images/Ui_See_Attempts.jpg)
+<img src="images/Ui_See_Attempts.jpg" style="display:block;margin:0 auto;max-width:500px;">
 
 ### Command Parameters
 
@@ -365,9 +365,9 @@ Examples:
 
 #### List all students: `list student`
 
-The list student command will You can also limit this list to a specified module or class group.
+The list student command will list all students in TAssist. You can also limit this list to a specified module or class group.
 
-Format: `list student {m/MODULE_INDEX | c/CLASS_GROUP_INDEX}`
+Format: `list student [{m/MODULE_INDEX | c/CLASS_GROUP_INDEX}]`
 
 * Displays the students belonging to the module at the specified `MODULE_INDEX` or the class group at the specified `CLASS_GROUP_INDEX`.
 * The index refers to the index number shown in the displayed module or class group list.
@@ -380,7 +380,7 @@ Examples:
 
 #### Find students: `find`
 
-Find students whose names contain any of the given keywords.
+Use the find command to search for students whose names contain any of the specified keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -397,7 +397,7 @@ Examples:
 
 #### Delete a student: `delete student`
 
-Delete the specified student from TAssist as well as the student's attempt(s) in the assessment(s).
+Delete a specified student from TAssist as well as the student's attempt(s) in any assessment(s).
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -428,7 +428,7 @@ Examples:
 
 #### Disenrol a student: `disenrol`
 
-Disenrol 1 or more students from a class group.
+Use this command to remove 1 or more students from a class group.
 
 Format: `disenrol c/CLASS_GROUP_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -466,7 +466,7 @@ Examples:
 
 #### Unmark attendance: `unmark`
 
-Use the unmark command to mark a student(s) as "not present" for a given week.
+Use the unmark command to mark a student(s) as "not present" during a specified lesson (identified by class group and week).
 
 Format: `unmark c/CLASS_GROUP_INDEX w/WEEK_INDEX s/all|STUDENT_INDEXES|STUDENT_IDS`
 
@@ -509,7 +509,7 @@ Examples:
 This command is destructive.
 </div>
 
-Clear all entries from TAssist including modules, assessments, class groups, and students. You will not be able to restore this data.
+Use this command to clear all entries from TAssist including modules, assessments, class groups, and students. You will not be able to restore this data.
 
 Format: `clear`
 
