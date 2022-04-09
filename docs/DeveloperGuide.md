@@ -188,18 +188,17 @@ The command is first parsed with `execute("delete 1", true, false, false)` where
 
 
 ### List feature
-The list feature enables the user to customise which modules/people are currently visible. As an example, the sequence
-diagram below shows the flow using the input `list o/type ty/professors`.
+The list feature enables the user to customise which modules/people/groups are currently visible. As an example, the sequence
+diagram below shows the flow using the input `list type/professors` which runs on the people view.
 
-The command is first parsed with `execute("list o/type ty/professors", true, false)` where `true` and `false` are
-boolean variables indicating whether the `Person` view or `Module` view is currently active. Subsequently, the 
+The command is first parsed with `execute("list type/professors", true, false, false)` where the boolean variables indicate whether the `People`, `Modules` or `Groups` view is currently active. Subsequently, the 
 `parseCommand` method in `UniBookParser` is called which will call `ListCommandParser`, which creates the 
 `ListCommand` for `ListCommandParser` to pass to `UniBookParser`. Subsequently the `ListCommand` is returned to 
 `LogicManager` and the `execute` method is run. In this case the `Model` instance is accessed to update the predicate
-which changes the view to the appropriate one (in this case showing all professors), 
+which changes the entries appropriately (in this case showing all professors), 
 before finally returning the `CommandResult`.
 
-Note that the `List` command can also list modules and in this case the flow would be very similar, just that the 
+Note that the `List` command can also list modules or groups and in this case the flow would be very similar, just that the 
 appropriate boolean variables will be flipped to represent the correct view.
 
 ![Interactions Inside the Logic Component for the `list` command](images/ListSequenceDiagram.png)
@@ -278,18 +277,67 @@ Use case ends.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
 
-**Use case: UC02 - List Persons**
+**Use case: UC02 - List People of a specific type**
 
 Actor: User
 
 **MSS**
 
-1. User requests to list persons
-2. UniBook displays persons according to listing criteria.
+1. User requests to list all people of a specific type (e.g. professors)
+2. UniBook displays all professors.
+
+**Extensions**
+* 1a. The user request is wrongly formatted/incomplete.
+  * 1a1. User is prompted to enter the command correctly.
+  * Use case ends.
+
+* 1a. The user is currently on the wrong view
+  * 1a1. User is prompted to change views.
+  * Use case ends.
 
 Use case ends.
 
-**Use Case: UC03 - Edit Person/Module**
+**Use case: UC03 - Change currently active view**
+
+Actor: User
+
+**MSS**
+
+1. User requests to change views (e.g. to groups, modules or people)
+2. UniBook switches the view and displays all entries successfully.
+
+**Extensions**
+* 1a. The user request is wrongly formatted/incomplete.
+    * 1a1. User is prompted to enter the command correctly.
+    * Use case ends.
+
+* 1a. The user attempts to change to the view he/she is currently on.
+    * 1a1. User is informed in the command result that he/she is already on the view.
+    * Use case ends.
+
+Use case ends.
+
+**Use case: UC04 - Narrow down specific group from modules view**
+
+Actor: User
+
+**MSS**
+
+1. User gives the command to see a specific group whilst in modules view.
+2. UniBook switches the view to groups view and displays only that specific group.
+
+**Extensions**
+* 1a. The user request is wrongly formatted/incomplete.
+    * 1a1. User is prompted to enter the command correctly.
+    * Use case ends.
+
+* 1a. The modules view currently has more than 1 module showing
+    * 1a1. UniBook still switches to group page and displays all matching modules instead of one specific module.
+    * Use case ends.
+
+Use case ends.
+
+**Use Case: UC05 - Edit Person/Module**
 
 Actor: User
 
@@ -313,7 +361,7 @@ Use case ends.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
 
-**Use Case: UC04 - Finding specific persons**
+**Use Case: UC06 - Finding specific persons**
 
 Actor: User
 
@@ -323,6 +371,7 @@ Actor: User
 2. UniBook displays the people who match the specified search criteria.
 
 Use case ends.
+
 
 **Use Case: UC05 - Deleting Person, Module or Group**
 
