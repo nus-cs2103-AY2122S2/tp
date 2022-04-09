@@ -1538,14 +1538,96 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Shutdown
+   
+   1. Shut down TAPA using the `exit` command.
+   
+       Expected: TAPA exits immediately.
+
+### Adding a student
+
+1. Adding a student to TAPA
+
+   1. Prerequisites: Sample data is loaded in TAPA.
+
+   2. Test case: `add i/A0000000R m/CS2100 n/Test`<br>
+      Expected: No student is added as there is already another student in TAPA who has the same student ID. Error message will be displayed to the user.
+
+   3. Test case: `add m/CS2100 n/Test`, `add i/AXXXXXXXR m/CS2100`, `add i/AXXXXXXXR n/Test`<br>
+      Expected: No student is added due to missing compulsory fields. Error message will be displayed to the user.
+
+   4. Test case: `add i/AXXXXXXXR m/CS2100 n/Test`<br>
+      Expected: Student is added into TAPA, even if some/all optional fields are missing.
+
+   5. Test case: `add i/A!@#$%^&R m/CS2100 n/Test`<br>
+      Expected: No student is added due to invalid format for student ID. Error message will be displayed to the user.
+
+   6. Other incorrect add commands to try: `add i/AXXXXXXXR m/CS2@00 n/Test`, `add i/AXXXXXXXR m/CS2100 n/T@st`<br>
+      Expected: Similar to previous
+
+### Checking all the tasks that a student has
+
+1. Checking all the tasks that a student has
+
+   1. Prerequisites: Sample data is loaded in TAPA. The student associated with the student ID ("A0000000Z") has a task assigned to him/her. 
+   
+   2. Test case: `task`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory field (student ID).
+   
+   3. Test case: `task i/A!@#$%^&R`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID.
+   
+   4. Test case: `task i/AXXXXXXXR`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
+   
+   5. Test case: `task i/A1111111Z`<br>
+      Expected: An error message will be displayed to the user, as there are no tasks assigned to this student.
+
+   6. Test case: `task i/A0000000Z`<br>
+      Expected: An output list will be displayed to the user, which consists of all the tasks ("Task A") that are assigned to the student.
+
+### Viewing the completion status of a particular task
+
+1. Viewing the completion status of a particular task
+
+   1. Prerequisites: Sample data is loaded in TAPA. All students taking the module ("CS2100") are being assigned with a task ("Task A").
+
+   2. Test case: `progress`, `progress m/CS2100`, `progress tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
+
+   3. Test case: `progress m/CS@@@@ tn/Task A`, `progress m/CS2100 tn/T@sk @`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for module code/task name.
+
+   4. Test case: `progress m/CS2100 tn/Task B`<br>
+      Expected: An error message will be displayed to the user, as no students who are taking "CS2100" are assigned with "Task B".
+
+   5. Test case: `progress m/CS2100 tn/Task A`<br>
+      Expected: An output list will be displayed to the user, which consists of all students (and their respective completion status) who are taking "CS2100" and are assigned with "Task A".
+
+### Archiving details
+
+1. Saving a copy of the details currently saved in TAPA into a separate file
+
+   1. Prerequisites: Sample data is loaded in TAPA.
+   
+   2. Test Case: `archive`<br>
+      Expected: A new `.json` file is created in `/data`, with the same contents as the original `.json` data file.
+
+2. Saving a copy of the details currently saved in TAPA into a separate file
+   
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. Remove the data directory's (`/data`) read and write permissions. 
+   
+   2. Test case: `archive`<br>
+      Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
 
 ### Deleting a person
 
