@@ -157,7 +157,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentShowList, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE_IN_WONDERLAND.getName().fullName.split("\\s+");
+        String[] keywords = ALICE_IN_WONDERLAND.getName().name.split("\\s+");
         modelManager.updateFilteredShowList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(showList, userPrefs)));
 
