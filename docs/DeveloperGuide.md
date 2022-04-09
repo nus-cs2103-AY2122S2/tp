@@ -383,7 +383,7 @@ By making the task name case-insensitive, users can easily refer to the particul
 
 ## View task feature
 
-to be updated
+
 
 ## Assign feature
 
