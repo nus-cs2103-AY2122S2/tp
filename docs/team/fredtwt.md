@@ -40,6 +40,7 @@ Given below are my contributions to the project.
   * CancelEventCommand
   * CancelEventCommandParser
   * All the event field types
+  * JsonAdaptedEvent
   
 * **Documentation**:
     * User Guide:
