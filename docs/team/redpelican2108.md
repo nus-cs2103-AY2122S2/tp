@@ -1,4 +1,9 @@
-###Project: IBook
+---
+layout: page
+title: Loo Xin Wei's Project Portfolio Page
+---
+
+### Project: IBook
 
 IBook is an inventory recording system for storekeepers to manage incoming and outgoing products in a store.
 
