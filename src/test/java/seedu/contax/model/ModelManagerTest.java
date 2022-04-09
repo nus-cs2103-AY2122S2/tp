@@ -15,6 +15,8 @@ import static seedu.contax.testutil.TypicalPersons.BENSON;
 import static seedu.contax.testutil.TypicalPersons.BOB;
 import static seedu.contax.testutil.TypicalPersons.CARL;
 import static seedu.contax.testutil.TypicalPersons.FRIENDS;
+import static seedu.contax.testutil.TypicalPersons.HOON;
+import static seedu.contax.testutil.TypicalPersons.IDA;
 import static seedu.contax.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.contax.testutil.TypicalTags.CLIENTS;
 import static seedu.contax.testutil.TypicalTags.FAMILY;
@@ -137,8 +139,12 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBook_validAddressBook_success() {
+        modelManager.addAppointment(new AppointmentBuilder(APPOINTMENT_ALONE).withPerson(HOON).build());
+        modelManager.addAppointment(new AppointmentBuilder(APPOINTMENT_ALICE).withPerson(IDA).build());
         modelManager.setAddressBook(getTypicalAddressBook());
         assertEquals(getTypicalAddressBook(), modelManager.getAddressBook());
+        assertEquals(List.of(APPOINTMENT_ALONE, APPOINTMENT_ALICE.withPerson(null)),
+                modelManager.getSchedule().getAppointmentList());
     }
 
     @Test
@@ -294,6 +300,7 @@ public class ModelManagerTest {
     public void setSchedule_validSchedule_success() {
         modelManager.setSchedule(getTypicalSchedule());
         assertEquals(getTypicalSchedule(), modelManager.getSchedule());
+        assertEquals(List.of(ALICE), modelManager.getFilteredPersonList());
     }
 
     @Test

@@ -7,6 +7,7 @@ import static seedu.contax.logic.parser.CliSyntax.PREFIX_EQUALS;
 import static seedu.contax.logic.parser.CliSyntax.PREFIX_SEARCH_TYPE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -83,6 +84,7 @@ public class BatchCommand extends Command {
             return new CommandResult(COMMAND_WORD
                     + ": No result matching \"" + userValue + "\"");
         }
+        Collections.reverse(indexList);
         List<CommandResult> commandResultList = new ArrayList<>();
         Person restorePerson = model.getFilteredPersonList().get(indexList.get(0).getZeroBased());
         for (Index index: indexList) {
