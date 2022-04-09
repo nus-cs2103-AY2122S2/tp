@@ -42,4 +42,11 @@ public class AddDeadlineTaskCommand extends Command {
         model.addDeadline(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddDeadlineTaskCommand // instanceof handles nulls
+                && toAdd.equals(((AddDeadlineTaskCommand) other).toAdd));
+    }
 }
