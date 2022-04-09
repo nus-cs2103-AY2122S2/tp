@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -131,6 +132,11 @@ public class ModelManager implements Model {
     public void removeLab(Lab lab) {
         requireNonNull(lab);
         addressBook.removeLab(lab);
+    }
+
+    @Override
+    public ArrayList<Lab> getLabsAsArrayList() {
+        return addressBook.getLabsAsArrayList();
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -1,6 +1,9 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
+import seedu.address.model.lab.Lab;
 import seedu.address.model.student.Student;
 
 /**
@@ -27,4 +30,8 @@ public interface ReadOnlyAddressBook {
      */
     boolean isStudentListEmpty();
 
+    /**
+     * Returns the list of labs in the ReadOnlyAddressBook as an ArrayList.
+     */
+    ArrayList<Lab> getLabsAsArrayList();
 }

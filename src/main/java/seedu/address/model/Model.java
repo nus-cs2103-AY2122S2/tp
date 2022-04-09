@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -125,4 +126,9 @@ public interface Model {
      * {@code lab} must already exist in the TAddressbook.
      */
     void removeLab(Lab lab);
+
+    /**
+     * Returns the list of labs in the Model as an ArrayList.
+     */
+    ArrayList<Lab> getLabsAsArrayList();
 }
