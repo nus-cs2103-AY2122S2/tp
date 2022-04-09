@@ -424,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 * 1e. User already has existing class(es) overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)\
       Use case resumes at step 1.
 
 #### Add a recurring lesson
@@ -455,7 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 * 1e. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es) 
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)\
       Use case resumes at step 1.
 
 #### Delete a lesson
@@ -477,7 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
     * 3a1. TeachWhat! shows an error message.  
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 #### Assign a student to a class
 
@@ -524,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
     * 3a1. TeachWhat! shows an error message.  
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
