@@ -230,7 +230,6 @@ Format: `copy [INDEX] [n/] [p/] [e/] [a/] [s/] [m/] [c/] [f/]​`
 * The `INDEX` refers to the Index number shown in the displayed contact list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​ and must exist in the displayed contact list.
 * If no `INDEX` is specified, **all contacts will be copied**.
-* Choice of format is default, csv and json.
 * Order of field names determines the order of attributes in the output.
 * Choice of format is **default**, **csv** and **json**.
 * If no format is specified, **default format will be used**.
