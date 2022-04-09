@@ -5,18 +5,22 @@ title: Developer Guide
 * Table of Contents
   {:toc}
 
+## **Introduction**
+
+TeachWhat! is a desktop application that helps private Tutors manage their students and classes.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-TODO
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- TeachWhat! is adapted from [AddressBook Level-3 (AB3)](https://se-education.org/addressbook-level3/)
+- Libraries used: JavaFX, Jackson, JUnit5
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-TODO
+Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/SettingUp.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,7 +88,33 @@ method `MainWindow#handleInfoPanelUpdate()`.
 
 ### Logic component
 
-TODO
+**API** : [`Logic.java`](https://github.com/se-edu/AY2122S2-CS2103T-W11-3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+
+Here's a (partial) class diagram of the `Logic` component:
+
+<img src="images/LogicClassDiagram.png" width="550"/>
+
+How the `Logic` component works:
+1. When `Logic` is called upon to execute a command, it uses the `TeachWhatParser` class to parse the user command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteStudentCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("rms 1")` API call.
+
+![Interactions Inside the Logic Component for the `rms 1` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+
+<img src="images/ParserClasses.png" width="600"/>
+
+How the parsing works:
+* When called upon to parse a user command, the `TeachWhatParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteStudentCommand`) which the `TeachWhatParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -407,7 +437,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 * 1e. User already has existing class(es) overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)\
       Use case resumes at step 1.
 
 #### Add a recurring lesson
@@ -438,7 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 * 1e. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es) 
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)\
       Use case resumes at step 1.
 
 #### Delete a lesson
@@ -460,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
     * 3a1. TeachWhat! shows an error message.  
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 #### Assign a student to a class
 
@@ -507,7 +537,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
     * 3a1. TeachWhat! shows an error message.  
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
