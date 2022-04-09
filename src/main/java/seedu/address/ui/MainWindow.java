@@ -93,7 +93,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
 
         this.primaryStage.setMinWidth(1000);
-        this.primaryStage.setMinHeight(900);
+        this.primaryStage.setMinHeight(850);
         this.primaryStage.widthProperty().addListener((o, oldValue, newValue)->{
             if(newValue.intValue() < 1000.0) {
                 this.primaryStage.setResizable(false);

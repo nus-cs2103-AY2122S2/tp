@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -36,7 +38,9 @@ public class ScheduleCard extends UiPart<Region> {
         this.schedule = schedule;
         id.setText(displayedIndex + ". ");
         name.setText(schedule.getScheduleName().toString());
+        name.setWrapText(true);
         description.setText(schedule.getScheduleDescription().toString());
+        description.setWrapText(true);
         Stream.of(schedule.getScheduleDateTime())
                 .forEach(dateTime -> dateTimes.getChildren().add(new Label(dateTime.toString())));
     }

@@ -26,6 +26,7 @@ public class PlayerSuggestion extends UiPart<Region> {
      */
     public PlayerSuggestion(ObservableList<Person> persons) {
         super(FXML);
+        playerSuggestion.setWrapText(true);
         setFeedbackToUser(DataAnalyzer.analyzePlayerPosition(persons));
         // playerSuggestion.setStyle("-fx-control-inner-background: #383838;");
     }
