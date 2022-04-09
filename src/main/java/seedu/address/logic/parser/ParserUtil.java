@@ -156,19 +156,17 @@ public class ParserUtil {
             throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_INTEGER);
         }
 
-        int skillProficiency;
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedSkill[1])) {
+            throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_INTEGER);
+        }
 
-        try {
-            skillProficiency = Integer.parseInt(trimmedSkill[1]);
+        int skillProficiency = Integer.parseInt(trimmedSkill[1]);
 
-            if (!Skill.isValidSkillName(trimmedSkillName)) {
-                throw new ParseException(Skill.NAME_CONSTRAINTS);
-            }
-            if (!Skill.isValidSkillProficiencyRange(skillProficiency)) {
-                throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_RANGE);
-            }
+        if (!Skill.isValidSkillName(trimmedSkillName)) {
+            throw new ParseException(Skill.NAME_CONSTRAINTS);
+        }
 
-        } catch (NumberFormatException e) {
+        if (!Skill.isValidSkillProficiencyRange(skillProficiency)) {
             throw new ParseException(Skill.PROFICIENCY_CONSTRAINTS_RANGE);
         }
 
