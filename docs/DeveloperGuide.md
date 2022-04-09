@@ -780,21 +780,41 @@ The following sequence diagrams shows how the unmark command works:
 
 #### Description
 
-The `clear` command deletes all students currently stored in TAPA. During the execution of the `clear` command, a new `ClearCommand` object will be created, and is executed by the `LogicManager`. The `MainWindow` changes the `commandBox` to only recognise a followup `confirm` command. If the user executes a `confirm` command, a new `ConfirmClearCommand` object is created and executed by the `LogicManager`. Subsequently, `ModelManager` clears the students currently stored in TAPA.
+The `clear` command deletes all students currently stored in TAPA. Before all the students are deleted, the user will have to confirm their decision by inputting `confirm`.
 
 #### Implementation
-1. Upon receiving the user input, the `LogicManager` starts to parse the given input text using `AddressBookParser#parseCommand()`.
+1. When the user inputs "clear", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 2. A new `ClearCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
-3. The `LogicManager` will then call `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
+3. The `LogicManager` calls `ClearCommand#execute(Model model)`, which returns a new `CommandResult` object (with its `isClearRequest` field set to `true`) to the `LogicManager`.
 4. The `CommandResult` (with its `isClearRequest` field set to `true`) is then returned to the `MainWindow`.
 5. To confirm the user's decision to clear TAPA, the `MainWindow` executes `MainWindow#handleClearRequest()` which updates the `CommandBox` to only recognise a `confirm` input for the next command.
-    <div markdown="span" class="alert alert-info">:information_source:
-    <b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than confirm for the next input. The CommandBox then returns to accepting all commands as described in the user guide.
-    </div>
-6. If the user inputs `confirm`, `LogicManager` parses the given input text using `AddressBookParser#parseCommand()` and a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
+
+![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source:
+<b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
+</div>
+
+![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
+
+6. If the user inputs "confirm", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
 7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
-8. In the `ConfirmClearCommand`, `model.setAddressBook(new AddressBook())` is invoked, resetting the current list of students stored in TAPA to an empty list.
-9. Lastly, the `ConfirmClearCommand` will create a new `CommandResult`, which will be returned to the `LogicManager`.
+8. The `ConfirmClearCommand` calls `Model#setAddressBook(new AddressBook())` which resets the current list of students stored in TAPA to an empty list.
+9. Lastly, the `ConfirmClearCommand` creates a new `CommandResult`, which is returned to the `LogicManager`.
+
+![ConfirmClearCommandSequenceDiagram](images/ConfirmClearCommandSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How TAPA confirms the user's decision to clear TAPA**
+
+* **Alternative 1 (current choice):** Have the user input "confirm", which is treated by TAPA as a command being executed.
+   * Pros: Easy to implement and test. Having the user type "confirm" is an added safety measure to ensure the user does not clear TAPA accidentally.
+   * Cons: The user would take a longer time to clear TAPA than if a "confirm" button is implemented.
+
+* **Alternative 2:** Have a pop-up window with a "confirm" button which the user can click to confirm or cancel their decision.
+   * Pros: Faster to click a button than having to type "confirm" to clear TAPA.
+   * Cons: More difficult to implement and test as it involves extending the UI.
 
 ### Archive Command
 
@@ -909,85 +929,68 @@ After which, a new `SortCommand` object will be created, and is subsequently exe
 
 ![SortCommandSequenceDiagram](images/SortCommandSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### History Command
 
-#### Proposed Implementation
+#### Description
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `history` command displays a list of the user's previously executed commands. It is facilitated by `CommandHistory`, which stores the list of commands.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![CommandHistoryClassDiagram](images/CommandHistoryClassDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If a command fails its execution, it will not call Model#commitAddressBook(), so the address book state will not be saved into the addressBookStateList.
-
+<div markdown="span" class="alert alert-info">:information_source:
+<b>Note:</b> The :arrow_up_small: Up and :arrow_down_small: Down keyboard arrow keys can also be used to browse through the user's previously executed commands. This functionality is also facilitated by `CommandHistory`.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+#### Implementation
 
-![UndoRedoState3](images/UndoRedoState3.png)
+1. When the user launches the application, `ModelManager` is initialised with a new `CommandHistory` object.
+2. Whenever the user successfully executes a command, the `LogicManager` calls `Model#addToCommandHistory()`. This adds the command to the list of previously executed commands in `CommandHistory`.
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If the currentStatePointer is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The undo command uses Model#canUndoAddressBook() to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+![AddToCommandHistorySequenceDiagram](images/AddToCommandHistorySequenceDiagram.png)
 
-</div>
+4. When the user inputs "history", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+5. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
+6. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
+7. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
+8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a `String` which is returned to `LogicManager` through a new `CommandResult`.
 
-The following sequence diagram shows how the undo operation works:
+![HistoryCommandSequenceDiagram](images/HistoryCommandSequenceDiagram.png)
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+### Undo Command
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> The lifeline for UndoCommand should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+#### Description
 
-</div>
+The `undo` command reverts the most recently executed command by restoring TAPA to its previous state before the last command was executed. It is facilitated by `AddressBookHistory` which saves all the details in TAPA as each command is executed during the current user session.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+![AddressBookHistoryClassDiagram](images/AddressBookHistoryClassDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If the currentStatePointer is at index addressBookStateList.size() - 1, pointing to the latest address book state, then there are no undone AddressBook states to restore. The redo command uses Model#canRedoAddressBook() to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Implementation
 
-</div>
+1. When the user launches the application, `ModelManager` is initialised with a new `AddressBookHistory` object.
+2. Whenever the user successfully executes a command (excluding `clear` and `undo` itself), the `LogicManager` calls `Model#saveCurrentAddressBookToHistory()`. This adds a copy of TAPA to the list of TAPA’s previous states in `AddressBookHistory`.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+![AddToAddressBookHistorySequenceDiagram](images/AddToAddressBookHistorySequenceDiagram.png)
 
-![UndoRedoState4](images/UndoRedoState4.png)
+4. When the user inputs "undo", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+5. A new `UndoCommand` is created by `AddressBookParser` and returned to the `LogicManager`.
+6. The `LogicManager` will then call `UndoCommand#execute(Model model)`.
+7. Following this, the `UndoCommand` calls `Model#undoAddressBook()` to revert the current details stored in TAPA to those stored before the previous command was executed. (Within `ModelManager`, `AddressBookHistory#getPreviousAddressBook` is called to retrieve the state of TAPA before the previous command.)
+8. Lastly, the `UndoCommand` creates a new `CommandResult` which is returned to the `LogicManager`.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+![UndoCommandSequenceDiagram](images/UndoCommandSequenceDiagram.png)
 
-![UndoRedoState5](images/UndoRedoState5.png)
+#### Design considerations
 
-The following activity diagram summarizes what happens when a user executes a new command:
+**Aspect: How the `UndoCommand` reverts the changes made by the previous command**
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+* **Alternative 1 (current choice):** Store the details of TAPA after each successfully executed command, then recover them when `undo` is executed.
+   * Pros: Easy to implement and test.
+   * Cons: Will take up more memory with each command executed.
 
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+* **Alternative 2:** Extend each command to be able to revert the changes it has made to TAPA.
+   * Pros: Will not incur major performance issues as it uses less memory.
+   * Cons: More difficult to implement and test. Each command would need a unique implementation to be undone and this would also need to be implemented for commands added in the future.
+   
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1005,17 +1008,18 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-**Target user profile**: Teaching Assistants who
+**Target user profile** <br>
+Teaching Assistants who:
+* Need to manage a significant number of students (especially across multiple modules)
+* Prefer desktop apps over other platforms
+* Can type fast
+* Prefer typing to mouse interactions
+* Are reasonably comfortable using CLI apps
 
-* has a need to manage a significant number of students (especially across multiple modules)
-* prefers desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**:  better manage the student’s contact and progress,
-especially for those who are teaching multiple classes/modules at the same time.
-It is optimised for use on CLI.
+**Value proposition** <br>
+TAPA will allow TAs to better manage their student’s contact and progress,
+especially for TAs who are teaching multiple classes/modules at the same time.
+It is optimised for use on CLI, and allows for more efficient student detail management for TAs who can type fast.
 
 
 
@@ -1066,7 +1070,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TAPA` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a student**
+####**Use case UC01 - Add a student**
 
 **MSS**
 
@@ -1122,7 +1126,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC03 - Delete a student**
+####**Use case UC03 - Delete a student**
 
 **MSS**
 
@@ -1151,7 +1155,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC04 - Edit a student**
+####**Use case UC04 - Edit a student**
 
 **MSS**
 
