@@ -24,7 +24,7 @@ public class HelpArgument {
             "1. Adding an applicant: \n"
             + "Format: 'add -a n/APPLICANT_NAME ag/AGE g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…' \n"
             + "Some notice: \n"
-            + "- Age provided must be at least two digits eg: “23”. \n"
+            + "- Age provided must be two digits, and cannot start with a 0. eg: “23”. \n"
             + "- Name, Phone number and email must be unique  \n"
             + "- Gender must be M/F. \n"
             + "Examples: \n"
@@ -44,7 +44,7 @@ public class HelpArgument {
             + "Some notice: \n"
             + "- Positions must have a unique name. \n"
             + "- Name provided is case-insensitive. \n"
-            + "- Number of openings in the position must be 0 or more 0, 1, 2,… \n"
+            + "- Number of openings in the position must be between 1 to 5 digits, and cannot start with 0. \n"
             + "Examples: \n"
             + "add -p p/Senior Software Engineer o/3 d/More than 5 years experience r/JavaScript r/HTML r/CSS";
 

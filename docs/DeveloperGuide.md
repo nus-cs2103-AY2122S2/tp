@@ -97,13 +97,14 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. In the case of commands that is common to all data types (e.g. `add`, `edit`, `delete`, `list`), an intermediate parser may be used to select the specific parser for the data type.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddApplicantCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a applicant).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete -a 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete -a 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -185,6 +186,26 @@ Hence it made sense to refactor `Person` to `Applicant` and to extend and build 
 support the needs of HireLah.
 
 ### To Add: Position feature?
+A position in HireLah is represented by `Position`. `Position` is implemented with the following attributes:
+* `PositionName` — M refers to the name of the job opening. 
+  Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 100 characters.
+* `Description` — M refers to the description of the position. 
+  Can allow any characters, but must have at least one alphanumeric character. Length is restricted to a maximum of 200 characters.
+* `PositionOpenings` — M refers to the number of openings in the position. Can allow only numbers of 1 to 5 digits.
+* `PositionOffers` — M refers to the number of outstanding offers handed out for the position. 
+  Number of offers is initialized as 0 when a position is created. Number of offers cannot be directly mutated, and is only altered through commands of `pass`, `accept`, `reject`.
+* `Set<Requirement>` — M refers to a set of requirements that is required for an `Applicant` to be considered for the `Position`. 
+  There can be any number of requirements for the `Position`.
+  
+These classes are contained in the `position` package which belongs to the `model` package.
+
+Position is implemented this way as for HireLah, as we need to keep track of these informations, in order to aid recruiters
+in keeping track of crucial information in the hiring process.
+
+`PositionOffers` is implemented in a way that disallow users from directly mutating the underlying value.
+It is implemented in this way, so that it accurately reflects the number of `Applicants` that have been offered a job at
+the position. It would defeat the purpose if `PositionOffers` can be set to any number, as it would no longer be able to accurately
+keep track of offers handed out.
 
 ### To Add: Interview feature?
 
