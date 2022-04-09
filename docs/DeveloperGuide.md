@@ -517,7 +517,7 @@ The following activity diagram summarizes what happens when a user executes a `f
 <img src="images/FocusCommandDiagram.png" width="250" />
 
 
-#TO DELETE ****
+# TO DELETE ****
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
