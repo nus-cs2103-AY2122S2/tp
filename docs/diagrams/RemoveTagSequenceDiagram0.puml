@@ -59,4 +59,7 @@ end ref
 RemoveTagCommand --> LogicManager : result
 deactivate RemoveTagCommand
 
+[<--LogicManager
+deactivate LogicManager
+
 @enduml

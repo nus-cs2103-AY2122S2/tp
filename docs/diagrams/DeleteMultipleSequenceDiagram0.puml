@@ -59,7 +59,7 @@ end ref
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 
-
 [<--LogicManager
 deactivate LogicManager
+
 @enduml

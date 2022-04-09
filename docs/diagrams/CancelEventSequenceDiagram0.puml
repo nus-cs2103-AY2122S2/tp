@@ -59,4 +59,7 @@ end ref
 CancelEventCommand --> LogicManager : result
 deactivate CancelEventCommand
 
+[<--LogicManager
+deactivate LogicManager
+
 @enduml

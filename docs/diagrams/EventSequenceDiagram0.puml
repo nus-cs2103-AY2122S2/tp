@@ -61,4 +61,7 @@ end ref
 EventCommand --> LogicManager : result
 deactivate EventCommand
 
+[<--LogicManager
+deactivate LogicManager
+
 @enduml
