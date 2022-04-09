@@ -26,12 +26,17 @@ public class Tag {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Check if a given string is a valid tag name.
+     * @param test the tag name to be checked.
+     * @return true if the tag is valid, false otherwise.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -39,6 +44,9 @@ public class Tag {
                 && tagName.equals(((Tag) other).tagName)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return tagName.hashCode();
