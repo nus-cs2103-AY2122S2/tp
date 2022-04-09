@@ -51,15 +51,15 @@ public class UniqueGroupList implements Iterable<Group> {
      * Retrieves a group from the list.
      * The group must already exist in the list.
      *
-     * @param groupToGet Group to be retrieved.
+     * @param group Group to be retrieved.
      */
-    public Group getGroup(Group groupToGet) {
-        requireNonNull(groupToGet);
+    public Group getGroup(Group group) {
+        requireNonNull(group);
 
         try {
             for (int i = 0; i < internalList.size(); i++) {
                 System.out.println(internalList.get(i));
-                if (internalList.get(i).equals(groupToGet)) {
+                if (internalList.get(i).equals(group)) {
                     return internalList.get(i);
                 }
             }
