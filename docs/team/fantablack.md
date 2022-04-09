@@ -11,12 +11,13 @@ ModuleMateFinder is a desktop address-book-like application used to keep track o
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to add modules to a contact.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+   - **What it does:** Allows the user to add `Module` to a `Person`
+   - **Justification:** This feature improves the product significantly because the addition of modules to a contact is the initial touch-point in allowing all future operations involving modules. Finding module-mates, the main value proposition of the product, revolves around the management and querying of modules taken by one's contact list. Thus, the addition of modules to a contact is the first step in making this possible in the first place. This is a core feature of the product.
+   - **Highlights:** This feature required an understanding of how to add a new command, along with its own parser. It also involved understanding of a `Person`'s structure and how to add new fields to it. Considerations also had to be made on the architectural design of Module; whether it should be a standalone `List of Modules` that each `Person` references, or instead a field that each `Person` has.
+   - **Credits:** The way `Module` is stored and associated with a `Person` is adapted from `Tags` in AB3. However, the adding mechanism is designed and implemented differently.
+   
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added a hyistor command that allows the user to navigate to previous commands using up/down keys.
 
 * **Code contributed**: [RepoSense link]()
 
