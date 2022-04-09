@@ -1242,59 +1242,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list students.
-2. TAPA shows a list of students.
-3. User requests to find students from the list.
-4. TAPA displays the students who fit the request.
+1. User requests to find students from the list.
+2. TAPA displays the students who fit the request.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given Student ID is invalid.
 
-    Use case ends.
+    * 1a1. TAPA shows an error message.
 
-* 3a. The given Student ID is invalid.
+      Use case resumes from step 1.
 
-    * 3a1. TAPA shows an error message.
+* 1b. The given module code is invalid.
 
-      Use case resumes from step 2.
+    * 1b1. TAPA shows an error message.
 
-* 3b. The given module code is invalid.
-
-    * 3b1. TAPA shows an error message.
-
-      Use case resumes from step 2.
+      Use case resumes from step 1.
 
 **Use case: UC08 - Delete all students from a module**
 
 **MSS**
 
-1. User requests to list students.
-2. TAPA shows a list of students.
-3. User requests to delete all students from a particular module in the list.
-4. TAPA deletes the students.
+1. User requests to delete all students from a particular module in the list.
+2. TAPA deletes the students.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given module code is invalid.
 
-    Use case ends.
+    * 1a1. TAPA shows an error message.
 
-* 3a. The given module code is invalid.
+      Use case resumes from step 1.
 
-    * 3a1. TAPA shows an error message.
-
-      Use case resumes from step 2.
-
-* 3b. There are no students taking the module specified by the given module code.
+* 1b. There are no students taking the module specified by the given module code.
 
     * 3b1. TAPA shows an error message.
 
-      Use case resumes from step 2.
+      Use case resumes from step 1.
 
 *{More to be added}*
 
