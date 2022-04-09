@@ -756,4 +756,3 @@ These instructions only provide a starting point for testers to work on; testers
 
 * Dealing with missing/corrupted data files
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-   
