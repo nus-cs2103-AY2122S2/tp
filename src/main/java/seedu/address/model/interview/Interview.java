@@ -151,8 +151,13 @@ public class Interview {
      */
     public void markAsRejected() {
         this.status.markAsRejected();
+    }
 
-        // decrement position count and offering
+    /**
+     * Checks whether an interview is passed.
+     */
+    public boolean isPassedStatus() {
+        return this.status.isPassedStatus();
     }
 
     /**
