@@ -28,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_TEAM = "#friend";
     private static final String INVALID_SKILL_PROFICIENCY_TYPE = "good";
     private static final String INVALID_SKILL_PROFICIENCY_RANGE = "500";
+    private static final String INVALID_SKILL_PROFICIENCY_RANGE_OVERFLOW = "999999999999999999999999999999999999999999";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -203,6 +204,8 @@ public class ParserUtilTest {
     @Test
     public void parseSkill_throwsParseException() throws Exception {
         String invalidProficiencyRange = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_RANGE;
+        String invalidProficiencyRangeOverflow =
+                VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_RANGE_OVERFLOW;
         String invalidProficiencyType = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_TYPE;
         String invalidSkillInput1 = VALID_SKILL + VALID_SKILL_PREFIX + VALID_SKILL_PROFICIENCY
                 + VALID_SKILL_PREFIX + VALID_SKILL;
@@ -210,6 +213,7 @@ public class ParserUtilTest {
         String invalidSkillInput3 = VALID_SKILL;
 
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidProficiencyRange));
+        assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidProficiencyRangeOverflow));
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidProficiencyType));
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput1));
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput2));
