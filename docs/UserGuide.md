@@ -90,7 +90,7 @@ Additional formatting guidelines:
 
 * **`summarise`** : Summarises all contacts into their respective faculty and informs the reader percentage of student from that faculty is Covid positive.
 
-* **`add`**`add n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/friends t/owesMoney` : Adds a contact named `John Doe` to the Tracey.
+* **`add`**` n/John Doe b/E f/SoC p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 mc/A0253647C cs/NEGATIVE t/ccaMate` : Adds a contact named `John Doe` to Tracey.
 
 * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -109,7 +109,7 @@ It includes a summary to briefly explain all the commands.
 
 The pop-up window also offers a button for easy access to the User Guide via the user's default browser.
 
-This is a sample screenshot of what you can expect from the `help` command.
+This is a sample screenshot of what you can expect from the `help` command:
 
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
@@ -177,7 +177,7 @@ Examples of usage:
 |:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 60 characters.                                                                                                                                                                                                                  |
 | `p/`  | Phone Number         | None                                                                                                  |                                                                                                                                                                                                                                        Can only be numbers at least 3 digits long.                                                                                                                                                                                                                                        |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
 | `a/`  | Address              | None                                                                                                  |                                                                                                                                                                                                                                                     Cannot be blank.                                                                                                                                                                                                                                                      |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS` |                                                                                                                                                                                                                          Can only be one of the pre-defined constants, and is case-insensitive.                                                                                                                                                                                                                           |
 | `mc/` | Matriculation Number | None                                                                                                  |                                                                                                                                                                                                                          Can only start with an "A", followed by 7 digits, ending with a letter.                                                                                                                                                                                                                          |
@@ -227,6 +227,7 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 📓`Note:`
 * Tracey shows the entire edited database after the edit command is applied.
 * After every edit command, the student at the specified index will be shifted to the bottom of the list.
+* If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 
 💡`Tip`:
 * Edits can be reversed with the `undo` feature.
@@ -263,7 +264,7 @@ Format: `undo`
 * Cannot be used in succession to undo previously executed commands besides the last executed one.
 
 ### 3.7. Redoing an action
-Reverses an executed undo command.
+Reverse an executed undo command.
 
 Format: `redo`
 * Reverses only the last executed `undo` command.
@@ -478,7 +479,7 @@ there are changes to Tracey.
 |:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
 | `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
 | `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
 | `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
