@@ -28,6 +28,7 @@ Given below are my contributions to the project.
   * Update Storage class to allow storing of TAssist data. [\#91](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/91)
   * Improve storage in V1.3 to reduce storing of duplicated data. [\#158](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/158)
   * Fix miscellaneous bugs before PE-D. [\#156](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/156), [\#158](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/158), [\#163](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/163), [\#164](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/164)
+  * Add test cases for module and JsonAdaptedModule.
 
 * **Documentation**:
   * User Guide:
