@@ -21,7 +21,6 @@ public class GrabCommandParser implements Parser<GrabCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GrabCommand parse(String args) throws ParseException {
-        System.out.println(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_COURSE, PREFIX_MATRICCARD, PREFIX_TELEGRAM, PREFIX_TAG);
