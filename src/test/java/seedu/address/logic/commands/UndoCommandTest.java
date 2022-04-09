@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
@@ -36,7 +38,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TagListBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -128,18 +129,16 @@ public class UndoCommandTest {
         Person person = new PersonBuilder().build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
-        ArrayList<Tag> tagList = new TagListBuilder().build();
+        Tag tag = VALID_TAG_FRIEND.get(0);
 
         Person tagAddedPerson = new PersonBuilder().build();
         ArrayList<Tag> tagAddedTagList = tagAddedPerson.getTags();
-        for (Tag tag : tagList) {
-            boolean b = tagAddedTagList.add(tag);
-        }
+        boolean b = tagAddedTagList.add(tag);
 
         ModelManager modelManager = new ModelManager();
         modelManager.setAddressBook(addressBookBuilder.build());
 
-        CommandResult commandResult = new AddTagCommand(index, tagList).execute(modelManager);
+        CommandResult commandResult = new AddTagCommand(index, tag).execute(modelManager);
         commandResult = new UndoCommand().execute(modelManager);
 
         assertEquals(String.format(UndoCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
@@ -147,8 +146,7 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoCommand_deleteTagUndoSuccess() throws Exception {
-        Person person = new PersonBuilder().withTags(new ArrayList<>(
-                List.of(TagListBuilder.DEFAULT_TAG_1))).build();
+        Person person = new PersonBuilder().withTags(VALID_TAG_FRIEND).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
 
@@ -165,11 +163,10 @@ public class UndoCommandTest {
 
     @Test
     public void execute_undoCommand_editTagUndoSuccess() throws Exception {
-        Person person = new PersonBuilder().withTags(new ArrayList<>(
-                List.of(TagListBuilder.DEFAULT_TAG_1))).build();
+        Person person = new PersonBuilder().withTags(VALID_TAG_FRIEND).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
-        Tag editedTag = TagListBuilder.DEFAULT_TAG_2;
+        Tag editedTag = VALID_TAG_HUSBAND.get(0);
 
         Person tagAddedPerson = new PersonBuilder().withTags(new ArrayList<>(
                 List.of(editedTag))).build();

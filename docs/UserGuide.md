@@ -372,6 +372,10 @@ After undo (where we undo command `delete 1`):
 
 ![result after undo](images/undo2UG.png)
 
+Note:
+* Undo only works on add, delete, edit, clear, addTag, deleteTag, editTag commands and
+will not work for addp, deletep, editp and prioList commands.
+
 ------------------------------------------------------------------------------------
 ### Redo previous command: `redo`
 Redoes undone command
@@ -385,6 +389,10 @@ Before redo (we undo `delete 1`):
 After redo (where we redo `delete 1`):
 
 ![result after redo](images/redo2UG.png)
+
+Note:
+* Redo only works on commands that are undo-able, which are: add, delete, edit, clear, addTag, 
+deleteTag, editTag commands.
 
 ------------------------------------------------------------------------------------
 ### Clearing all entries : `clear`
@@ -405,7 +413,7 @@ Format: `clip n/NAME` or `clip INDEX`
 * You can look for a client’s name or his number by using the `list` command.
 
 Examples:
-1. `clip n/John Doe`
+1. `clip n/Bernice Yu`
 2. `clip 1`
 
 Before `clip 1`:
@@ -418,9 +426,26 @@ Information copied using `clip 1`:
 ![info copied using 'clip 1'](images/afterClip1UG.png)
 
 ------------------------------------------------------------------------------------
-### Listing contact list by priority level of their tags: `prioList`
-![listedByPriority](images/listedByPriority.PNG)
-<details><summary>Contacts with multiple tags have the priority level of the highest priority out of all of their tags. </summary>
+### Listing client list by priority level of their tags: `prioList`
+In order of decreasing priority, priorities have the following color scheme:
+- Priority 1: Red
+- Priority 2: Orange
+- Priority 3: Yellow
+- Priority 4: Peach
+- No Priority: Blue 
+
+Before `prioList`:
+
+![before 'prioList'](images/beforePrioList.PNG)
+
+
+After `prioList`:
+
+![after 'prioList'](images/afterPrioList.PNG)
+
+Note that:
+- Clients with multiple tags have the priority level of the highest priority out of all of their tags.
+- Clients without any tags are filtered below all other clients, even those with only 'No Priority' tags.
 <p>
 
 Format: `prioList`

@@ -83,7 +83,8 @@ public class CommandTestUtil {
     public static final String INVALID_INSURANCE_PACKAGE_DESC =
             " " + PREFIX_INSURANCE_PACKAGE; // empty string not allowed for insurance packages
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_COMMAND = "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + INVALID_TAG_COMMAND;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

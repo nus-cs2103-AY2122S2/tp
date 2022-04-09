@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TagListBuilder;
 
 public class DeleteTagCommandTest {
 
@@ -27,8 +26,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_tagDeletedByPerson_deleteSuccessful() throws Exception {
-        Person person = new PersonBuilder().withTags(new ArrayList<>(
-                List.of(TagListBuilder.DEFAULT_TAG_1))).build();
+        Person person = new PersonBuilder().withTags(VALID_TAG_FRIEND).build();
         AddressBookBuilder addressBookBuilder = new AddressBookBuilder().withPerson(person);
         Index index = Index.fromOneBased(1);
 
