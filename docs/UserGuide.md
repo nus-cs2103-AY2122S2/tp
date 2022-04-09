@@ -159,7 +159,7 @@ Example:
 
 **Scenario 1**: You have a client named `John Doe`
 
-`flag John Doe` flags client `John Doe` from on HustleBook.
+`flag John Doe` flags client `John Doe` on HustleBook.
 
 **Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
 * Running the command `flag John` will show a list of clients with names containing "John".
@@ -184,7 +184,7 @@ Example:
 
 **Scenario 1**: You have a client named `John Doe`
 
-`unflag John Doe` unflags client `John Doe` from on HustleBook.
+`unflag John Doe` unflags client `John Doe` on HustleBook.
 
 **Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
 * Running the command `unflag John` will show a list of clients with names containing "John".
