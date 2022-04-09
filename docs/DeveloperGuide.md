@@ -396,7 +396,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ArchDuke displays an error message.
   
       Use case resumes from step 1.
-        
+
+--------------------------------------------------------------------------------------------------------------------
     
 **Use case: UC02 - Delete a student contact**
 
@@ -420,6 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends. 
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC03 - List student contacts**
 
@@ -437,6 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC04 - Find student contacts**
 
@@ -460,6 +463,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC05 - Add a student group**
 
@@ -490,7 +494,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ArchDuke shows an error message.
   
     Use case resumes from step 1.
-  
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC06 - Delete a student group**
 
@@ -526,6 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC07 - Assign a student to a group**
 
@@ -568,7 +574,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1e1. ArchDuke shows an error message.
   
       Use case resumes from step 1.
-  
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC08 - Deassign a student contact from a group**  
 
@@ -616,6 +623,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC09 - View student contacts in a group**
 
@@ -647,6 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes from step 1.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC10 - Add a task in a group**
 
@@ -686,6 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes from step 1.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC11 - Delete a task from a group**
 
@@ -732,7 +742,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1f. The task list in the target group is empty.
 
     Use case ends.
-    
+
+--------------------------------------------------------------------------------------------------------------------    
 
 **Use case: UC12 - View tasks in a group**
 
@@ -764,6 +775,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC13 - View help window**
 
@@ -775,6 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC14 - Exit the program**
 
@@ -786,6 +799,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC15 - Clear the data**
 
@@ -796,6 +810,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ArchDuke clears all data.
 
    Use case ends.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Non-Functional Requirements
 
