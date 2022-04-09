@@ -113,8 +113,7 @@ How the `Logic` component works:
 
 <div markdown="span" class="alert alert-info">:information_source: **Info**<br>
 
-* The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-* The lifeline for `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -189,8 +188,7 @@ By adding the getter and setter functions, we were able to remove unnecessary cl
 
 <div markdown="span" class="alert alert-info">:information_source: **Info**<br>
 
-* The lifeline for `AppendCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-* The lifeline for `AppendCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifeline for `AppendCommandParser` and `AppendCommand` should end at their destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
