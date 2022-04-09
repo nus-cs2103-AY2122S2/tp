@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  Cancelling the event
+
+box Logic LOGIC_COLOR_T1
+participant "c:CancelEventCommand" as CancelEventCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate CancelEventCommand
+CancelEventCommand -> CancelEventCommand : extractDeletedInfo()
+activate CancelEventCommand
+CancelEventCommand --> CancelEventCommand
+deactivate CancelEventCommand
+CancelEventCommand -> CancelEventCommand : deleteFromList()
+activate CancelEventCommand
+CancelEventCommand -> Model : deleteEvent(Event2)
+activate Model
+Model --> CancelEventCommand
+deactivate Model
+
+CancelEventCommand -> Model : deleteEvent(Event1)
+activate Model
+Model --> CancelEventCommand
+deactivate Model
+
+CancelEventCommand --> CancelEventCommand
+deactivate CancelEventCommand
+
+create CommandResult
+CancelEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CancelEventCommand
+deactivate CommandResult
+
+@enduml
