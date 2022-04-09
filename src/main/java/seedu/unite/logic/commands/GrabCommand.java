@@ -172,4 +172,14 @@ public class GrabCommand extends Command {
         }
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof GrabCommand// instanceof handles nulls
+                && attribute.equals(((GrabCommand) other).attribute)
+                && index.equals(((GrabCommand) other).index)
+                && (((tag == null) && ((GrabCommand) other).tag == null) // handle when tags are null
+                || tag.equals(((GrabCommand) other).tag))); // state check
+    }
 }
