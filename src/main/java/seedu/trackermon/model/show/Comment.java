@@ -6,7 +6,6 @@ public class Comment {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Comment is limited ASCII values and to 300000 characters";
-    
 
     public static final String VALIDATION_REGEX_COMMENT = "[\\p{ASCII}]{0,300000}";
 
