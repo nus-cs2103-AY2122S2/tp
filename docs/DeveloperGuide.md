@@ -1468,7 +1468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to sort students.
-2. TAPA shows a list of students in order sorted by their number of incomplete tasks in descending order.
+2. TAPA shows a list of students in order, sorted by their number of incomplete tasks in descending order.
 
    Use case ends.
 
