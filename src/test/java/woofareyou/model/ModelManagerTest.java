@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.GuiSettings;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
-import woofareyou.testutil.AddressBookBuilder;
+import woofareyou.testutil.PetBookBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new PetBook(), new PetBook(modelManager.getPetBook()));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setPetBookFilePath(Paths.get("pet/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setPetBookFilePath(Paths.get("new/pet/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +61,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setPetBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPetBookFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+    public void setPetBookFilePath_validPath_setsPetBookFilePath() {
+        Path path = Paths.get("pet/book/file/path");
+        modelManager.setPetBookFilePath(path);
+        assertEquals(path, modelManager.getPetBookFilePath());
     }
 
     @Test
@@ -95,13 +95,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPet(BOBA).withPet(PIZZA).build();
-        AddressBook differentAddressBook = new AddressBook();
+        PetBook petBook = new PetBookBuilder().withPet(BOBA).withPet(PIZZA).build();
+        PetBook differentPetBook = new PetBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(petBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(petBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +113,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different petBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentPetBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = BOBA.getName().fullName.split("\\s+");
         modelManager.updateFilteredPetList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(petBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setPetBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(petBook, differentUserPrefs)));
     }
 }

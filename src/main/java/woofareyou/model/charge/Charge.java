@@ -3,7 +3,7 @@ package woofareyou.model.charge;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents the daily amount chargeable of a Pet in the address book.
+ * Represents the daily amount chargeable of a Pet in the pet book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Charge {

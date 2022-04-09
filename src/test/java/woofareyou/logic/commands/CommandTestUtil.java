@@ -25,8 +25,8 @@ import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.AbsentAttendanceCommand.AbsentAttendanceDescriptor;
 import woofareyou.logic.commands.PresentAttendanceCommand.PresentAttendanceDescriptor;
 import woofareyou.logic.commands.exceptions.CommandException;
-import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
+import woofareyou.model.PetBook;
 import woofareyou.model.pet.NameContainsKeywordsPredicate;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.AbsentAttendanceDescriptorBuilder;
@@ -193,22 +193,22 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered pet list and selected pet in {@code actualModel} remain unchanged
+     * - the pet book, filtered pet list and selected pet in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        PetBook expectedPetBook = new PetBook(actualModel.getPetBook());
         List<Pet> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPetList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedPetBook, actualModel.getPetBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPetList());
     }
 
     /**
      * Updates {@code model}'s filtered list to show only the pet at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s pet book.
      */
     public static void showPetAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPetList().size());

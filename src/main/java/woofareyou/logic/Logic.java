@@ -7,7 +7,7 @@ import woofareyou.commons.core.GuiSettings;
 import woofareyou.logic.commands.CommandResult;
 import woofareyou.logic.commands.exceptions.CommandException;
 import woofareyou.logic.parser.exceptions.ParseException;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.pet.Pet;
 
 
@@ -25,19 +25,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the PetBook.
      *
-     * @see woofareyou.model.Model#getAddressBook()
+     * @see woofareyou.model.Model#getPetBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyPetBook getPetBook();
 
     /** Returns an unmodifiable view of the filtered list of pets */
     ObservableList<Pet> getFilteredPetList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' pet book file path.
      */
-    Path getAddressBookFilePath();
+    Path getPetBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

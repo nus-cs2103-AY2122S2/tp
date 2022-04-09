@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.pet.Pet;
 
 public class SimilarPets {
@@ -26,10 +26,10 @@ public class SimilarPets {
     private SimilarPets() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the similar pets.
+     * Returns a {@code PetBook} with all the similar pets.
      */
-    public static AddressBook getSimilarAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static PetBook getSimilarPetBook() {
+        PetBook ab = new PetBook();
         for (Pet pet : getSimilarPets()) {
             ab.addPet(pet);
         }

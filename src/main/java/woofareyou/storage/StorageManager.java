@@ -7,24 +7,24 @@ import java.util.logging.Logger;
 
 import woofareyou.commons.core.LogsCenter;
 import woofareyou.commons.exceptions.DataConversionException;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of PetBook data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private PetBookStorage petBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code PetBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(PetBookStorage petBookStorage, UserPrefsStorage userPrefsStorage) {
+        this.petBookStorage = petBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,33 +46,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ PetBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getPetBookFilePath() {
+        return petBookStorage.getPetBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyPetBook> readPetBook() throws DataConversionException, IOException {
+        return readPetBook(petBookStorage.getPetBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyPetBook> readPetBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return petBookStorage.readPetBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void savePetBook(ReadOnlyPetBook petBook) throws IOException {
+        savePetBook(petBook, petBookStorage.getPetBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void savePetBook(ReadOnlyPetBook petBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        petBookStorage.savePetBook(petBook, filePath);
     }
 
 }

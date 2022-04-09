@@ -15,16 +15,16 @@ import woofareyou.commons.util.ConfigUtil;
 import woofareyou.commons.util.StringUtil;
 import woofareyou.logic.Logic;
 import woofareyou.logic.LogicManager;
-import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.PetBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.ReadOnlyUserPrefs;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.util.SampleDataUtil;
-import woofareyou.storage.AddressBookStorage;
-import woofareyou.storage.JsonAddressBookStorage;
+import woofareyou.storage.JsonPetBookStorage;
 import woofareyou.storage.JsonUserPrefsStorage;
+import woofareyou.storage.PetBookStorage;
 import woofareyou.storage.Storage;
 import woofareyou.storage.StorageManager;
 import woofareyou.storage.UserPrefsStorage;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing WoofAreYou ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        PetBookStorage petBookStorage = new JsonPetBookStorage(userPrefs.getPetBookFilePath());
+        storage = new StorageManager(petBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,25 +69,25 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s pet book and {@code userPrefs}. <br>
+     * The data from the sample pet book will be used instead if {@code storage}'s pet book is not found,
+     * or an empty pet book will be used instead if errors occur when reading {@code storage}'s pet book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyPetBook> petBookOptional;
+        ReadOnlyPetBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            petBookOptional = storage.readPetBook();
+            if (!petBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample PetBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = petBookOptional.orElseGet(SampleDataUtil::getSamplePetBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty PetBook");
+            initialData = new PetBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty PetBook");
+            initialData = new PetBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +151,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty PetBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,13 +167,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting WoofAreYou " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping WoofAreYou ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

@@ -3,7 +3,7 @@ package woofareyou.logic.commands;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPetBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getPetBook(), new UserPrefs());
     }
 
     @Test

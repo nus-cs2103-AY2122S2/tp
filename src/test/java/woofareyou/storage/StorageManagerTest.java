@@ -2,7 +2,7 @@ package woofareyou.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import woofareyou.commons.core.GuiSettings;
-import woofareyou.model.AddressBook;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.PetBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonPetBookStorage petBookStorage = new JsonPetBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(petBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void petBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonPetBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonPetBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        PetBook original = getTypicalPetBook();
+        storageManager.savePetBook(original);
+        ReadOnlyPetBook retrieved = storageManager.readPetBook().get();
+        assertEquals(original, new PetBook(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getPetBookFilePath() {
+        assertNotNull(storageManager.getPetBookFilePath());
     }
 
 }
