@@ -34,7 +34,10 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/limweiliang)] [[portfolio](team/limweiliang.md)]
 
 * Role: Developer
-* Responsibilities: [To be discussed]
+* Responsibilities:
+  * Implement `Event` related commands
+  * Update relevant documentation
+  * Monitor changes to `Model` and Documentation
 
 ### Naaman Tan
 
