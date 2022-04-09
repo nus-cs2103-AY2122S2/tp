@@ -6,7 +6,6 @@ title: Ben Murphy's Project Portfolio Page
 ### Project: UniBook
 
 UniBook is a desktop app for students to manage their university contacts related to their studies in an organized manner, optimized for command-line interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-UniBook is a brownfield project based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 Given below are my contributions to the project.
 
@@ -14,14 +13,12 @@ Given below are my contributions to the project.
   * Revamped Graphical User Interface (GUI) to suit the application
     * Added new views to the GUI to view the new different types of information that can be stored in UniBook
       * Views include: the people view, modules view and groups view of UniBook
-      * Implementation required the addition of many classes, along with the complementing design and layout fxml files
-      * Handled integration of all the various GUI elements and views together to ensure a seamless User Experience (UX)
+      * Implementation required the creation and integration of many classes, along with the complementing design and layout fxml files
     * Added ease-of-use features such as clicking navigation
     * Styled GUI to make it more aesthetically pleasing
   * Added ability to manage university groups to UniBook
-    * What is it: A group in UniBook corresponds to a group related to a the user's studies in UniBook. It stores a list of members, along with details such as a list of meeting times, which a student can easily view and manage
+    * What is it: A group in UniBook corresponds to a group related to a user's studies in UniBook. It stores a list of members, along with details such as a list of meeting times, which a student can easily view and manage
     * Designed and implemented `Group` and its related classes
-    * Added ability to store groups in storage.
   * Added ability to store different types of classes and variables in storage, to meet the needs of the application
     * Justification: As UniBook required a lot of additional classes to be added to AB3, storage had to be heavily modified to support them
     * Implemented all the JSON adapted versions of the model classes in UniBook so that they could be stored easily using Jackson
@@ -34,19 +31,17 @@ Given below are my contributions to the project.
     * Added extensive checks to the JSON storage file before loading into UniBook, to ensure that any illegal data, due to corruption of the file (perhaps from modification by advanced users), would be detected, with the file being rejected and reset if that was the case
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benmurphyy&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
-
 * **Project management**:
   * As Team Lead, I was responsible for:
     * Scheduling and directing meetings
     * Allocating project work and setting deliverables and deadlines, and ensuring they were met
     * Setting standards for the team to follow, these include:
       * Command format standards - to ensure a consistent command structure to maximise ease-of-use
-      * Documentation format standards - to ensure documentation such as User Guide and Developer Guide had a homogeneous structure, making it easy to read and understand.
-    * Defining interface methods between components of UniBook - to ensure little duplication of code and to minimise bugs.
+      * Documentation format standards - to ensure documentation such as User Guide and Developer Guide had a homogeneous structure, making it easy to read and understand
+    * Defining interface methods between components of UniBook - to ensure little duplication of code and to minimise bugs
     * Setting up and maintaining the Github project team and repo.
   * Managed releases `1.2`, `1.3.1` and `1.3.2`
-
-* **Documentation**:
+  * **Documentation**:
   * User Guide: 
     * Added:
       * Section describing the details of the entities that UniBook can store - Person, Module and Group
@@ -56,12 +51,10 @@ Given below are my contributions to the project.
         * Described the ease-of-use features such as click button navigation from people view
       * Appendix
   * Developer Guide:
-    * Modified all the original diagrams (architecture diagrams and component diagrams) from AB3 to describe UniBook
-    * Added descriptions of how components in UniBook work under the diagram of each component
+    * Added diagrams and descriptions of components of UniBook
     * Added user stories and use cases relating to UI and storage
   * Index page:
     * Changed the index page from AB3 to UniBook by replacing screenshots and descriptions to be on UniBook instead of AB3
-
 * **Community**:
   * Actively reviewed PRs of teammates - Total number of PRs reviewed: 49
   * Opened issues for features that needed to be completed, along with bugs noticed - Total number of issues opened: 17
