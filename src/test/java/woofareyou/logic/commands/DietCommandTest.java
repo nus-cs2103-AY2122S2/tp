@@ -9,15 +9,15 @@ import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
-import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
+import woofareyou.model.PetBook;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Diet;
 import woofareyou.model.pet.Pet;
@@ -29,7 +29,7 @@ class DietCommandTest {
 
     private static final String DIET_STUB = "Some diet";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @Test
     public void execute_addDietUnfilteredList_success() {
@@ -40,7 +40,7 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_DELETE_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(dietCommand, model, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ class DietCommandTest {
 
         String expectedMessage = String.format(DietCommand.MESSAGE_ADD_DIET_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPerson, editedPerson);
 
@@ -91,14 +91,14 @@ class DietCommandTest {
 
     /**s
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of pet book
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
+        // ensures that outOfBoundIndex is still in bounds of pet book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         DietCommand remarkCommand = new DietCommand(outOfBoundIndex, new Diet(VALID_DIET_BOB));
 

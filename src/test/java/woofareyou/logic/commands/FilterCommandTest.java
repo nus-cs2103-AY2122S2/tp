@@ -9,7 +9,7 @@ import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_THIRD_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -36,8 +36,8 @@ public class FilterCommandTest {
     private static final String APPOINTMENT_DATE_TIME_STUB = "02-04-2022 09:30";
     private static final String APPOINTMENT_LOCATION_STUB = "NUS Vet Clinic";
     private static final String PARSE_EX_THROWN_MESSAGE = "Should not have thrown parse exception.";
-    private static final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private static final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static final Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
+    private static final Model expectedModel = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @Test
     public void equals_date_predicate() {
@@ -192,8 +192,8 @@ public class FilterCommandTest {
 
     @Test
     public void execute_attendanceDateMatch_multiplePetsFound() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
         try {
             DateContainsFilterDatePredicate predicate =

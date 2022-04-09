@@ -12,16 +12,16 @@ import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
 import woofareyou.logic.commands.EditCommand.EditPetDescriptor;
-import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
+import woofareyou.model.PetBook;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Pet;
 import woofareyou.testutil.EditPetDescriptorBuilder;
@@ -32,7 +32,7 @@ import woofareyou.testutil.PetBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(model.getFilteredPetList().get(0), editedPet);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(lastPet, editedPet);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -92,7 +92,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PET_SUCCESS, editedPet);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(model.getFilteredPetList().get(0), editedPet);
 
@@ -112,8 +112,8 @@ public class EditCommandTest {
     public void execute_duplicatePetFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
 
-        // edit pet in filtered list into a duplicate in address book
-        Pet petInList = model.getAddressBook().getPetList().get(INDEX_SECOND_PET.getZeroBased());
+        // edit pet in filtered list into a duplicate in pet book
+        Pet petInList = model.getPetBook().getPetList().get(INDEX_SECOND_PET.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PET,
                 new EditPetDescriptorBuilder(petInList).build());
 
@@ -133,7 +133,7 @@ public class EditCommandTest {
     public void execute_duplicatePetDifferentTagFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
 
-        Pet petInList = model.getAddressBook().getPetList().get(INDEX_SECOND_PET.getZeroBased());
+        Pet petInList = model.getPetBook().getPetList().get(INDEX_SECOND_PET.getZeroBased());
         EditCommand.EditPetDescriptor descriptor = new EditPetDescriptorBuilder(petInList).withTag("poodle").build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PET, descriptor);
 
@@ -151,14 +151,14 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of pet book
      */
     @Test
     public void execute_invalidPetIndexFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
+        // ensures that outOfBoundIndex is still in bounds of pet book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPetDescriptorBuilder().withName(VALID_NAME_BOB).build());

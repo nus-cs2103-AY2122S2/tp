@@ -4,7 +4,6 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -410,11 +409,6 @@ The activity diagram below illustrates the workflow of attendance commands.
     * Cons: May have performance issues due to nested data structure.
 
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -728,6 +722,7 @@ Use case ends.
 
 Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Non-Functional Requirements
 

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Represents a Pet's upcoming appointment in the address book.
+ * Represents a Pet's upcoming appointment in the pet book.
  * Guarantees: immutable; is always valid.
  */
 public class Appointment implements Comparable<Appointment> {

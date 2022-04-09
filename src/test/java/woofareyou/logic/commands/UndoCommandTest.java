@@ -5,7 +5,7 @@ import static woofareyou.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static woofareyou.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import java.time.LocalDate;
 
@@ -37,8 +37,8 @@ public class UndoCommandTest {
      */
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalPetBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getPetBook(), new UserPrefs());
     }
 
     /**
