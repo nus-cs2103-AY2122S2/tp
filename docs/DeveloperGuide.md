@@ -1374,6 +1374,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
      Use case ends.
 
+**Use case: UC12 - Finding out what a certain command does**
+
+**MSS**
+
+1. User requests TAPA to provide a description for a particular command, as well as how to use the command.
+2. TAPA provides a short description of what the specified command does.
+3. TAPA provides the format for how to use the command.
+4. TAPA provides an example to show the user how to use the command.
+
+   Use case ends.
+
+**Extensions**
+
+*  1a. The user does not input a specific command.
+
+   * 1a1. TAPA provides the list of all available commands.
+
+     Use case ends.
+   
+*  1b. The user inputs a command that is not valid (not in the existing list of commands)
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+**Use case: UC13 - Marking an undone task as complete**
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to mark a student's task as done.
+4. TAPA shows the updated list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+   Use case ends.
+
+* 3a. If student ID is given and a student with the given student ID does not exist.
+
+   * 3a1. TAPA shows an error message. 
+     
+      Use case ends.
+   
+* 3b. If the index given is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
+  
+   * 3b1. TAPA shows an error message. 
+     
+      Use case ends.
+
+* 3c. The specified task with the given index has already been marked as complete.
+
+   * 3c1. TAPA shows an error message.
+
+     Use case ends.
+
+**Use case: UC14 - Marking a done task as incomplete**
+
+**MSS**
+
+1. User requests to list students.
+2. TAPA shows a list of students.
+3. User requests to mark a student's task as undone.
+4. TAPA shows the updated list of students.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. If student ID is given and a student with the given student ID does not exist.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
+   
+* 3b. If the index is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
+
+   * 3b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3c. The specified task with the given index has already been marked as incomplete.
+
+   * 3c1. TAPA shows an error message.
+
+     Use case ends.
+
+**Use case: UC15 - Sorting list of students by their number of incomplete tasks in descending order**
+
+**MSS**
+
+1. User requests to sort students.
+2. TAPA shows a list of students in order, sorted by their number of incomplete tasks in descending order.
+
+   Use case ends.
+
+* 2a. The list is empty. 
+  
+   Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
