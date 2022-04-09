@@ -72,7 +72,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -109,7 +109,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a `Person`).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagrams below illustrate the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -1201,7 +1201,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. If studentId is given and a student with the given studentId does not exist.
+* 1a. If studentId is given, and a student with the given studentId does not exist.
 
     * 1a1. TAPA shows an error message.
 
@@ -1237,7 +1237,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. If studentId is given and a student with the given studentId does not exist.
+* 3a. If studentId is given, and a student with the given studentId does not exist.
 
     * 3a1. TAPA shows an error message.
 
@@ -1433,7 +1433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
    Use case ends.
 
-* 3a. If student ID is given and a student with the given student ID does not exist.
+* 3a. If student ID is given, and a student with the given student ID does not exist.
 
    * 3a1. TAPA shows an error message. 
      
@@ -1468,7 +1468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. If student ID is given and a student with the given student ID does not exist.
+* 3a. If student ID is given, and a student with the given student ID does not exist.
 
    * 3a1. TAPA shows an error message.
 
@@ -1571,12 +1571,110 @@ testers are expected to do more *exploratory* testing.
 
    6. Other incorrect add commands to try: `add i/AXXXXXXXR m/CS2@00 n/Test`, `add i/AXXXXXXXR m/CS2100 n/T@st`<br>
       Expected: Similar to previous
+      
+### Assigning task(s) to students
+
+1. Assigning task(s) to students by their student ID
+
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. The student associated with the student ID ("A0000000Z") has a task (Task A) assigned to him/her.
+
+   2. Test case: `assign`, `assign i/A1111111Z`, `assign tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task name).
+      
+   3. Test case: `assign i/A!@#$%^&R tn/Task A`, `assign i/A1111111Z tn/@@@@`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID or task name.
+
+   4. Test case: `assign i/AXXXXXXXR tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this student ID in TAPA.
+
+   5. Test case: `assign i/A0000000Z tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as the task (Task A) has already been assigned to the student associated with the student ID ("A0000000Z").
+      
+   6. Test case: `assign i/A0000000Z tn/Task B`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the student associated with the student ID ("A0000000Z").
+      
+2. Assigning task(s) to students by their module code
+   
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. The students associated with the student ID ("A0000000Z") and ("A1111111Z") has a task (Task A) assigned to them. 
+      3. The student associated with the student ID ("A5555555Z") has the same module code (CS2100) as the student associated with the student ID ("A0000000Z").
+
+   2. Test case: `assign`, `assign m/CS2100`, `assign tn/Task A`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
+
+   3. Test case: `assign m/CS@@@@ tn/Task A`, `assign m/CS2100 tn/@@@@`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for module code or task name.
+
+   4. Test case: `assign m/LAM1201 tn/Task A`<br>
+      Expected: An error message will be displayed to the user, as there are no students associated with this module code in TAPA.
+
+   5. Test case: `assign m/CS2101 tn/Task A`<br>
+      Expected: An error message will be displayed to the user, all the students with the module code (CS2101) already has the specified task (Task A) assigned to them.
+
+   6. Test case: `assign m/CS2100 tn/Task A`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task A) being assigned to the student associated with the student ID ("A5555555Z"). A message will be displayed to the user, informing that the task is only assigned to **some** of the students in the module (CS2100).
+
+   7. Test case: `assign m/CS2100 tn/Task B`<br>
+      Expected: The list of students in TAPA will be updated, with the task (Task B) being assigned to the students associated with the module code (CS2100).
+
+### Marking an incomplete task as complete
+
+1. Marking an incomplete task as complete
+
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. The student associated with the student ID ("A0000000Z") has an incomplete task assigned to him/her, and the task is the first and only one on his/her task list. 
+      3. The student associated with the student ID ("A1111111Z") has a complete task assigned to him/her, and the task is the first and only one on his/her task list.
+
+   2. Test case: `mark`, `mark i/A0000000Z`, `mark idx/1`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task index).
+
+   3. Test case: `mark i/A!@#$%^&R idx/1`, `mark i/A0000000Z idx/0`, `mark i/A0000000Z idx/-1`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID or task index.
+
+   4. Test case: `mark i/A0000000Z idx/3`<br>
+      Expected: An error message will be displayed to the user, due to the task index being out of range.
+
+   5. Test case: `mark i/A1111111Z idx/1`<br>
+      Expected: An error message will be displayed to the user, due to the task being already marked as complete.
+
+   5. Test case: `mark i/A0000000Z idx/1`<br>
+      Expected:  The list of students in TAPA will be updated, with the first task belonging to the student associated with the student ID ("A0000000Z") marked as complete.
+
+### Marking a complete task as incomplete
+
+1. Marking a complete task as incomplete
+
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. The student associated with the student ID ("A0000000Z") has an incomplete task assigned to him/her, and the task is the first and only one on his/her task list. 
+      3. The student associated with the student ID ("A1111111Z") has a complete task assigned to him/her, and the task is the first and only one on his/her task list.
+
+   2. Test case: `ununmark`, `unmark i/A0000000Z`, `unmark idx/1`<br>
+      Expected: An error message will be displayed to the user, due to missing compulsory fields (student ID and task index).
+
+   3. Test case: `unmark i/A!@#$%^&R idx/1`, `unmark i/A0000000Z idx/0`, `unmark i/A0000000Z idx/-1`<br>
+      Expected: An error message will be displayed to the user, due to invalid format for student ID or task index.
+
+   4. Test case: `unmark i/A0000000Z idx/3`<br>
+      Expected: An error message will be displayed to the user, due to the task index being out of range.
+
+   5. Test case: `unmark i/A0000000Z idx/1`<br>
+      Expected: An error message will be displayed to the user, due to the task being already marked as incomplete.
+
+   5. Test case: `unmark i/A1111111Z idx/1`<br>
+      Expected:  The list of students in TAPA will be updated, with the first task belonging to the student associated with the student ID ("A1111111Z") marked as incomplete.
 
 ### Checking all the tasks that a student has
 
 1. Checking all the tasks that a student has
 
-   1. Prerequisites: Sample data is loaded in TAPA. The student associated with the student ID ("A0000000Z") has a task assigned to him/her. 
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. The student associated with the student ID ("A0000000Z") has a task assigned to him/her. 
    
    2. Test case: `task`<br>
       Expected: An error message will be displayed to the user, due to missing compulsory field (student ID).
@@ -1597,7 +1695,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing the completion status of a particular task
 
-   1. Prerequisites: Sample data is loaded in TAPA. All students taking the module ("CS2100") are being assigned with a task ("Task A").
+   1. Prerequisites: 
+      1. Sample data is loaded in TAPA. 
+      2. All students taking the module ("CS2100") are being assigned with a task ("Task A").
 
    2. Test case: `progress`, `progress m/CS2100`, `progress tn/Task A`<br>
       Expected: An error message will be displayed to the user, due to missing compulsory fields (module code and task name).
@@ -1610,6 +1710,34 @@ testers are expected to do more *exploratory* testing.
 
    5. Test case: `progress m/CS2100 tn/Task A`<br>
       Expected: An output list will be displayed to the user, which consists of all students (and their respective completion status) who are taking "CS2100" and are assigned with "Task A".
+
+### Sorting the list of students in TAPA by the number of incomplete tasks in **descending** order
+
+1. Sorting the list of students in TAPA by the number of incomplete tasks in **descending** order
+
+   1. Prerequisites: Sample data is loaded in TAPA.
+   
+   2. Test case: `sort`<br>
+      Expected: The list of students in TAPA will be updated, and the students will be in order by the number of incomplete tasks in **descending** order.
+      
+### Displaying a manual guide for TAPA
+
+1. Display the format, example, and a short description for a specified command
+
+   1. Prerequisites: No prerequisites required
+   
+   2. Test case: `manual @@@@`, `manual sleep`<br>
+      Expected: An error message will be displayed to the user, due to the specified command not existing.
+      
+   3. Test case: `manual add`<br>
+      Expected: The format, example, and a short description for the command `add` will be displayed.
+      
+2. Displays all possible commands
+
+   1. Prerequisites: No prerequisites required
+
+   2. Test case: `manual`<br>
+      Expected: All possible commands are listed out.
 
 ### Archiving details
 
