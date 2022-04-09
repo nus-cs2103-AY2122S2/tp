@@ -65,6 +65,7 @@ public class AddTaskCommand extends Command {
      */
     private static Group createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model) {
         assert groupToAddTask != null;
+        assert taskToAdd != null;
 
         model.addTask(taskToAdd, groupToAddTask);
         Group groupAddedTask = model.getGroup(groupToAddTask);

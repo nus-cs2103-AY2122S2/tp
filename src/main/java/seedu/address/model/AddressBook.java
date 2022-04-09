@@ -123,8 +123,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The group must already exist in the address book.
      * The task must not already exist in the specified group in the address book.
      */
-    public void addTask(Task task, Group g) {
-        groups.getGroup(g).addTask(task);
+    public void addTask(Task task, Group group) {
+        groups.getGroup(group).addTask(task);
     }
 
     /**

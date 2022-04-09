@@ -44,9 +44,9 @@ import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TaskUtil;
 
-public class AddressBookParserTest {
+public class ArchDukeParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ArchDukeParser parser = new ArchDukeParser();
 
     @Test
     public void parseCommand_add() throws Exception {

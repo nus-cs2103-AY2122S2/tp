@@ -153,16 +153,62 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **Implementation**
+## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+## Delete student contact feature
+
+### About delete student contact feature
+
+The delete student contact feature allows users to delete an existing student contact from the student contact list.
+
 ## Add group feature
+
+### About add group feature
+
+The add group feature allows users to create a has-yet-to-exist student group in the student group list via the command 
+`addgroup g/GROUP_NAME`.
+
+### How it is implemented
+
 The `addgroup` command mechanism is facilitated by the `AddGroupCommand` and the `AddGroupCommandParser`.
-It allows users to add a not already existing group to the ArchDuke student group list. 
+It allows users to add a not-already-existing-group to the ArchDuke student group list. 
 It uses the `AddressBook#addGroup(Group group)` which is exposed in the `Model` 
 interface as `Model#addGroup(Group group)`. Then, the `add(Group groupToAdd)` is called on the `UniqueGroupList`
-in `AddressBook` to add the group to the `UniqueGroupList`.
+in `AddressBook` to add the group to the group list.
+
+Given below is the example usage scenario and how the add group mechanism behaves at each step.
+
+#### Parsing user input
+
+1. The user inputs the `addgroup` command and provide the `GROUP_NAME` of the group in which the user wants to add.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddGroupCommandParser`.
+
+3. The `AddGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes. 
+It also checks whether the command is in the correct format. In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
+`ParseException` would be thrown.
+
+4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `AddGroupCommandParser` will then call the `ParserUtil#parseGroupName()` 
+method to check for the validity of the input `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the 
+`GROUP_NAME` specified is invalid.
+
+5. The `AddGroupCommandParser` then creates the `AddGroupCommand` based on the processed input.
+
+#### Command execution
+
+6. The `LogicManager` executes the `AddGroupCommand`.
+
+7. The `AddGroupCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has already existed in the group list. 
+`CommandException` would be thrown if there already existed a group with the same group name.
+
+8. The `AddGroupCommand` then calls the `Model#addGroup()` to add the input group to the list.
+
+#### Displaying of result
+
+9. Finally, the `AddGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution. 
+The GUI would also be updated on this change in the group list and update the display of group list accordingly.
 
 The following sequence diagram shows how the `addgroup` mechanism works:
 
@@ -177,15 +223,167 @@ The following activity diagram summarizes what happens when a user executes the 
 ![](images/AddGroupCommandActivityDiagram.png)
 
 ## Delete group feature
-to be updated...
 
-### Add task feature to an existing group feature
+### About delete group feature
 
-### Delete task from an existing group feature
-to be updated
+The delete group feature allows users to delete an existing student group in 
+the student group list via the command `delgroup g/GROUP_NAME`.
 
-### View task feature
-to be updated
+### How it is implemented
+
+The `delgroup` command mechanism is facilitated by the `DeleteGroupCommand` and the `DeleteGroupCommandParser`. 
+It allows users to delete an already-existing-group from the ArchDuke student group list. It uses the `AddressBook#removeGroup(Group key)`
+which is exposed in the `Model` interface as `Model#deleteGroup(Group target)`. Then, the `remove(Group toRemove)` is called on the `UniqueGroupList`
+to remove the group from the group list.
+
+Given below is the example usage scenario and how the delete group mechanism behaves at each step.
+
+#### Parsing user input
+
+1. The user inputs the `delgroup` command and provide the `GROUP_NAME` of the group in which the user wants to remove.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `DeleteGroupCommandParser`.
+
+3. The `DeleteGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+    It also checks whether the command is in the correct format. In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   `ParseException` would be thrown.
+
+4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `DeleteGroupCommandParser` will then call the `ParserUtil#parseGroupName()`
+   method to check for the validity of the input `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the
+   `GROUP_NAME` specified is invalid.
+
+5. The `DeleteGroupCommandParser` then creates the `DeleteGroupCommand` based on the processed input.
+
+#### Command execution
+
+6. The `LogicManager` executes the `DeleteGroupCommand`.
+
+7. The `DeleteGroupCommand` calls the `Model#getFilteredGroupList()` to get the current unmodifiable view of the filtered group list.
+
+8. The `DeleteGroupCommand` calls the `contains()` method on the obtained filtered group list to check if the group with the same `GROUP_NAME` existed in the group list.
+      `CommandException` would be thrown if there exists no group with the same group name.
+
+9. The `DeleteGroupCommand` then calls the `Model#deleteGroup()` to delete the input group to from the group list.
+
+#### Displaying of result
+
+10. Finally, the `DeleteGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+    The GUI would also be updated on this change in the group list and update the display of group list accordingly.
+
+The following sequence diagram shows how the `delgroup` mechanism works:
+
+![](images/DeleteGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `delgroup` command:
+
+![](images/DeleteGroupCommandActivityDiagram.png)
+
+### Design considerations
+
+#### Aspect: What the delgroup command deletes by
+
+* **Alternative 1 (current choice)**: Deletes a group by the group name.
+
+  * Pros: It is more intuitive as user who wants to delete a group would **already know** what group he/she wants to delete, and hence the group name.
+  Users would not have to search through the group list to see which index the group he/she wants to delete is located. 
+  Searching through the list may be especially troublesome if there are many groups in the group list.
+  
+  * Cons: User would have to type the entire group name.
+  
+* **Alternative 2**: Deletes a group by the index of the group in the list.
+
+  * Pros: Users could delete the group by just typing a single number. This may be faster if the group is already visible in the group list without having to search
+    (e.g. when the target group to delete is at the top of the list).
+  
+  * Cons: If there are many groups in the group list, users would have to execute another command (i.e. to find the group to get the group index) 
+  before being able to delete the desired group.
+
+#### Aspect: Allowing reference to group name to be case-insensitive
+
+The implementation takes in user experience as one of the most important decision when deciding how a feature should behave. 
+Since the implementation chooses to delete a group by its group name, there was a concern about the user having to type possibly lengthy
+group name to refer to the target group to delete. <br>
+
+To enhance the user experience for the target group (i.e. fast typists), the reference to the group is designed such that it is case-insensitive.
+This means that the users would not need to worry about cases as long as the spelling and spacing are correct. 
+The aim is to make reference to the target group as easy as possible and to minimize typo errors.
+
+## Add task to an existing group feature
+
+### About add task feature
+
+The add task feature allows users to add a yet-to-exist task to an existing
+student group via the command `addtask task/TASK_NAME g/GROUP_NAME`.
+
+### How it is implemented
+
+The `addtask` command mechanism is facilitated by the `AddTaskCommand` and the `AddTaskCommandParser`.
+It allows users to add a yet-to-exist task to an already existing group in ArchDuke. It uses the `AddressBook#addTassk(Task task, Group group)`
+which is exposed in the `Model` interface as `Model#addTask(Task task, Group group)`. Then, the `getGroup(Group group)` is called on the `UniqueGroupList` to get the target group,
+and `Group#addTask(Task task)` is called on the target group to add the task to the group.
+to remove the group from the group list.
+
+Given below is the example usage scenario and how add task mechanism behaves at each step.
+
+1. The user inputs the `addtask` command and provide the `TASK_NAME` and `GROUP_NAME` of the task and group
+in which the user wants to add.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddTaskCommandParser`.
+
+3. The `AddTaskCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+   It also checks whether the command is in the correct format. In this case, the required prefix is and attribute are `task/TASK_NAME` and `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   `ParseException` would be thrown.
+
+4. If the required prefixes and attributes are present (i.e. `task/TASK_NAME` and `g/GROUP_NAME`), `AddTaskCommandParser` will then call the `ParserUtil#parseGroupName()`
+   and `ParseUtil#parseTaskName()` to check for the validity of the input `TASK_NAME` and `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the
+   `GROUP_NAME` and/or `TASK_NAME` specified is invalid.
+
+5. The `AddTaskCommandParser` then creates the `AddTaskCommand` based on the processed inputs.
+
+6. The `LogicManager` executes the `AddTaskCommand`.
+
+7. The `AddTaskCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has existed in the group list.
+   `CommandException` would be thrown if there has yet to exist a group with the same group name. 
+
+8. Similarly, the `AddTaskCommand` then call the `Model#hasTask()` to check if the task with the same `TASK_NAME` has already existed in that group.
+`CommandException` would be thrown if there is already a task with the same task name in the group.
+
+9. `AddTaskCommand` then call the static `createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model)` to create a new `Group` with the task added.
+The task is added through the call of `Model#addTask()` by `AddTaskCommand`.
+
+10. `AddTaskCommand` then call `Model#setGroup(Group target, Group editedGroup)` to replace the old target group with the new group with the task added. 
+This will update the `UniqueGroupList` of the new `Group` with the task added.
+
+11. Finally, the `AddTaskCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+    The GUI would also be updated on this change in the group list and update the display of group list accordingly.
+
+The following sequence diagram shows how the `addtask` mechanism works:
+
+![](images/AddTaskSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `addtask` command:
+
+![](images/AddTaskCommandActivityDiagram.png)
+
+### Design considerations
+
+#### Aspect: Allowing reference to task name to be case-insensitive
+
+As users are required to type the entire task name to reference a task (i.e. in `addtask` and subsequently in `deltask` commands), 
+the reference to a task is implemented in such a way to minimise typo errors and to facilitate target users (i.e. fast typists).
+By making the task name case-insensitive, users can easily refer to the particular task so long as the spelling and spacing is correct.
+
+## View task feature
+
+
 
 ## Assign feature
 
@@ -198,6 +396,23 @@ is called on `UniqueGroupList` to update the `Group` with the assigned `Person`.
 The following sequence diagram shows how the `assign` mechanism works:
 
 To be updated...
+
+## Find student contact feature
+
+The current FindCommand allows the search of a contact through keywords.
+The keywords used are of `Name` of a `Person` and hence are facilitated by a class `NameContainsKeywordsPredicate`.
+The enhanced FindCommand allows the users to search a contact through keywords
+which are the attributes of a person such as `Phone`, `Email`, `AcademicMajor` and `Tag`.
+
+The new feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
+implemented by all the `Person`'s attributes. Hence, there are more classes being introduced -
+`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and so on.
+
+Given below is the example usage scenario and how the FindCommand behaves at each step
+
+Step 1. How the initial FindCommand works with the `NameContainsKeywordsPredicate`
+
+Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -283,32 +498,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Adding tasks to a group feature
 
-#### Proposed implementation
-
-The proposed `addTask` is implemented by adding enhancements to the current `Group` in the `AddressBook`.
-Similar to how a `Person` stores identities such as `Name` or `Phone`, this feature enables `Group` to stores
-`Task`. 
-
-### \[Proposed\] Upgrade the feature of FindCommand
-
-#### Proposed Implementation
-
-The current FindCommand allows the search of a contact through keywords.
-The keywords used are of `Name` of a `Person` and hence are facilitated by a class `NameContainsKeywordsPredicate`.
-The enhanced FindCommand allows the users to search a contact through keywords 
-which are the attributes of a person such as `Phone`, `Email`, `AcademicMajor` and `Tag`.
-
-The new feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
-implemented by all the `Person`'s attributes. Hence, there are more classes being introduced -
-`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and so on.
-
-Given below is the example usage scenario and how the FindCommand behaves at each step
-
-Step 1. How the initial FindCommand works with the `NameContainsKeywordsPredicate`
-
-Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
 
 
 
@@ -396,7 +586,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ArchDuke displays an error message.
   
       Use case resumes from step 1.
-        
+
+--------------------------------------------------------------------------------------------------------------------
     
 **Use case: UC02 - Delete a student contact**
 
@@ -420,6 +611,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends. 
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC03 - List student contacts**
 
@@ -437,6 +629,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC04 - Find student contacts**
 
@@ -460,6 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC05 - Add a student group**
 
@@ -490,7 +684,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ArchDuke shows an error message.
   
     Use case resumes from step 1.
-  
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC06 - Delete a student group**
 
@@ -526,6 +721,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC07 - Assign a student to a group**
 
@@ -568,7 +764,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1e1. ArchDuke shows an error message.
   
       Use case resumes from step 1.
-  
+
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC08 - Deassign a student contact from a group**  
 
@@ -616,6 +813,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC09 - View student contacts in a group**
 
@@ -647,6 +845,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes from step 1.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC10 - Add a task in a group**
 
@@ -686,6 +885,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes from step 1.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC11 - Delete a task from a group**
 
@@ -732,7 +932,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1f. The task list in the target group is empty.
 
     Use case ends.
-    
+
+--------------------------------------------------------------------------------------------------------------------    
 
 **Use case: UC12 - View tasks in a group**
 
@@ -764,6 +965,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 1.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC13 - View help window**
 
@@ -775,6 +977,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC14 - Exit the program**
 
@@ -786,6 +989,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+--------------------------------------------------------------------------------------------------------------------
 
 **Use case: UC15 - Clear the data**
 
@@ -796,6 +1000,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. ArchDuke clears all data.
 
    Use case ends.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Non-Functional Requirements
 

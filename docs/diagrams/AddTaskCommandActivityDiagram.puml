@@ -1,0 +1,28 @@
+@startuml
+start
+:User executes addtask command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is in invalid format])
+    :Show invalid command format as error message;
+
+
+else ([else])
+    if () then ([Group name does not exist in ArchDuke])
+    : Show non existent group error message;
+    else([else])
+        if () then ([Task name already exist in the group])
+        : Show duplicate task error message;
+        else ([else])
+        : Add task to the group;
+        : Update task list in the group GUI;
+
+        endif
+    endif
+endif
+stop
+
+
+@enduml
