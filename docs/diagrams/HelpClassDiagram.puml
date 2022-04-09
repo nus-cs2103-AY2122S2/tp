@@ -22,7 +22,27 @@
      + execute(Model) : CommandResult
  }
 
- ModelManager <-- HelpCommand
- "{abstract}\nCommand" <|-- HelpCommand
+ class MainWindow {
+
+    + handleHelp()
+ }
+
+ class HelpWindow {
+    /' Fields '/
+    - helpMessage: TextArea
+    - openUserGuideButton: Button
+
+     /' Methods '/
+     + show()
+     + isShowing() : boolean
+     + hide()
+     + focus()
+     + openUG()
+ }
+
+MainWindow *-- HelpWindow
+HelpCommand <-- MainWindow
+ModelManager <-- HelpCommand
+"{abstract}\nCommand" <|-- HelpCommand
 
  @enduml
