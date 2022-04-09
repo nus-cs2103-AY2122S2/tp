@@ -165,7 +165,7 @@ Classes used by multiple components are in the `seedu.address book.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Person, Field & Tag
+### Person, Field and Tag
 
 #### Implementation
 
@@ -180,11 +180,7 @@ By adding the getter and setter functions, we were able to remove unnecessary cl
 
 *Figure: Simplified class diagram of showing the association between Person, Field and Tag.*
 
-##### Add/remove fields and tags.
-
-`AddCommand`, `EditCommand`, `AppendCommand` and `RemoveCommand` adds and removes fields and tags from a `Person`.
-
-
+`AddCommand`, `EditCommand`, `RemarkCommand`, `AppendCommand` and `RemoveCommand` adds and removes fields and tags from a `Person`.
 
 #### Design considerations
 
@@ -728,6 +724,8 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 2. CinnamonBun sorts the client list accordingly in order of the fields specified.
 3. The sorted list is displayed.
 
+   Use case ends.
+
 **Extensions**
 
 * 1a. User inputs no fields
@@ -774,14 +772,12 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 **Extensions**
 
 * 1a. The given index is invalid.
-
     * 1a1. CinnamonBun shows an error message.
   
       Use case ends.
 
 * 1b. The given membership tier is invalid.
-
-    * 2a1. CinnamonBun shows an error message.
+    * 1b1. CinnamonBun shows an error message.
 
       Use case ends.
     
@@ -793,7 +789,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 4. A user should be able to easily find a client.
 5. A user should be able to easily navigate the interface.
 6. Commands should be able to execute without any noticeable latency.
-7. Error messages when inputting invalid commands will be displayed in the text box.
+7. Error messages when inputting invalid commands will be displayed in the output box.
 
 ### Glossary
 
@@ -983,7 +979,7 @@ We felt that the requirements of TP was too much (application, UG, DG, weekly qu
 
 Despite that, the team still managed to deliver a high quality product at the end.
 
-### Person, Field & Tag
+### Person, Field and Tag
 
 The `Person` and `Tag` classes were modified from AB-3, while `Field` is an abstract class representing existing classes such as `Name`, `Email` etc. as well as new classes such as `Birthday`, `Remark` etc.
 Originally, all of `Person`'s fields were hard-coded into the `Person` class, resulting in extremely high coupling, and it was very difficult to add new fields to `Person`.
