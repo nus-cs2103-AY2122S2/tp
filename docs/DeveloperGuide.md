@@ -797,7 +797,7 @@ The `clear` command deletes all students currently stored in TAPA. Before all th
 
 * **Alternative 1 (current choice):** Have the user input `confirm`, which is treated by TAPA as a command being executed.
    * Pros: Easy to implement and test. Having the user type "confirm" is an added safety measure to ensure the user does not clear TAPA accidentally.
-   * Cons: The user would take a longer time to clear TAPA than if a "confirm button" is implemented.
+   * Cons: The user would take a longer time to clear TAPA than if a "confirm" button is implemented.
 
 * **Alternative 2:** Have a pop-up window with a "confirm button" which the user can click to confirm or cancel their decision.
    * Pros: Faster to click a button than having to type `confirm` to clear TAPA.
