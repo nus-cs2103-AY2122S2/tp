@@ -60,7 +60,7 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Fourth constructor for Person.
+     * Third constructor for Person.
      */
     public Person(Person person, Event event) {
         requireAllNonNull(person, event);

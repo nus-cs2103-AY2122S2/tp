@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Frederick Tang
@@ -15,9 +13,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/fredtwt)][[portfolio](team/fredtwt.md)]
 
-* Role: Team Lead / Developer [tbd]
+* Roles: Team Lead / Developer / Scheduling and tracking
 * Responsibilities:
   * Oversee the entire project
+  * Storage, Model, Logic Components
 
 ### Ong Kim Lai
 
@@ -25,9 +24,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/ongkimlai)][[portfolio](team/ongkimlai.md)]
 
-* Role: Deliverables and deadlines / Developer [tbd]
+* Roles: Deliverables and deadlines / Developer / Documentation
 * Responsibilities:
   * Handle project deliverables and plan deadlines
+  * UI, Logic Components
 
 ### Vikrant
 
@@ -35,9 +35,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/viki0526)] [[portfolio](team/viki0526.md)]
 
-* Role: Testing / Developer [tbd]
+* Roles: Testing / Developer
 * Responsibilities:
   * Testing of project to ensure everything is proper
+  * Logic Component
 
 ### Manusha
 
@@ -46,7 +47,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/manu2002g)]
 [[portfolio](team/manu2002g.md)]
 
-* Role: Documentation / Code Quality / Developer [tbd]
+* Roles: Developer
 * Responsibilities:
   * Ensures project documentation done properly
   * Ensures code adheres to coding standards
+  * Logic Component

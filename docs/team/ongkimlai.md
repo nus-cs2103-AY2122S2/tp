@@ -46,7 +46,15 @@ Given below are my contributions to the project.
   * RemoveTagCommand
   * RemoveTagCommandParser
   * JsonAdaptedName
+  * EditCommand (fixed bugs)
+
+* **Review/mentoring contributions**:
+  * Supported a teammate with the steps to implement `showevents`
+  * Suggested fixes for a few test cases in `EditCommand` [#92](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/92)
 
 * **Tools**:
   * Integrated Codecov into team repo
+  * Change the header to NUSocials
+  * Update the links to the Java-CI and CodeCov status-banners
+  * Update the link to the project’s GitHub repository
   * Update site-wide settings [#18](https://github.com/AY2122S2-CS2103T-W11-1/tp/pull/18)
