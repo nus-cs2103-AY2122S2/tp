@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import seedu.unite.logic.Logic;
 import seedu.unite.model.person.Person;
 import seedu.unite.model.tag.Tag;
+import seedu.unite.ui.UiManager;
 import seedu.unite.ui.UiPart;
 
 /**
@@ -29,10 +30,10 @@ public class GeneralDisplay extends UiPart<Region> {
     /**
      * Creates a {@code GeneralDisplay}.
      */
-    public GeneralDisplay(Logic logic) {
+    public GeneralDisplay(Logic logic, UiManager uiManager) {
         super(FXML);
-        profile = new Profile();
-        tagList = new TagList(logic);
+        profile = new Profile(logic, uiManager);
+        tagList = new TagList(logic, uiManager);
         grabResult = new GrabResult();
         tagListPlaceholder.setVisible(false);
         profileDisplayPlaceholder.setVisible(false);

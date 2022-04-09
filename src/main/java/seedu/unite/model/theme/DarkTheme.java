@@ -47,6 +47,8 @@ public class DarkTheme extends Theme {
         return other == this
                 || (other instanceof DarkTheme
                 && darkThemeResource.equals(((DarkTheme) other).darkThemeResource)
-                && darkExtensionsResource.equals(((DarkTheme) other).darkExtensionsResource));
+                && darkExtensionsResource.equals(((DarkTheme) other).darkExtensionsResource)
+                && darkAddTagWindow.equals(((DarkTheme) other).darkAddTagWindow)
+                && darkAddProfileWindow.equals(((DarkTheme) other).darkAddProfileWindow));
     }
 }

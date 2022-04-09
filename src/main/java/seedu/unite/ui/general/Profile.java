@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.unite.commons.core.index.Index;
+import seedu.unite.logic.Logic;
 import seedu.unite.model.person.Person;
 import seedu.unite.ui.UiManager;
 import seedu.unite.ui.UiPart;
@@ -15,6 +16,7 @@ import seedu.unite.ui.UiPart;
 public class Profile extends UiPart<Region> {
 
     private static final String FXML = "Profile.fxml";
+    private UiManager uiManager;
     private Index index;
     private Person person;
 
@@ -38,12 +40,13 @@ public class Profile extends UiPart<Region> {
     /**
      * Creates a {@code Profile}.
      */
-    public Profile() {
+    public Profile(Logic logic, UiManager uiManager) {
         super(FXML);
+        this.uiManager = uiManager;
     }
 
     public void setPerson(Person person) {
-        this.index = Index.fromZeroBased(UiManager.getMainWindow().getPersonListPanel()
+        this.index = Index.fromZeroBased(uiManager.getMainWindow().getPersonListPanel()
                 .getPersonListView().getItems().indexOf(person));
         this.person = person;
         name.setText(person.getName().fullName);

@@ -21,9 +21,8 @@ public class UiManager implements Ui {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/unite_32.png";
-    private static MainWindow mainWindow;
-
-    private Logic logic;
+    private MainWindow mainWindow;
+    private final Logic logic;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -40,7 +39,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, this);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -85,7 +84,7 @@ public class UiManager implements Ui {
         System.exit(1);
     }
 
-    public static MainWindow getMainWindow() {
-        return UiManager.mainWindow;
+    public MainWindow getMainWindow() {
+        return this.mainWindow;
     }
 }

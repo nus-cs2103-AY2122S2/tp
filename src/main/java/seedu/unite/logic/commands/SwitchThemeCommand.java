@@ -22,7 +22,6 @@ public class SwitchThemeCommand extends Command {
             + "light";
 
     public static final String MESSAGE_SWITCH_THEME_SUCCESS = "Switched to %1$s";
-    public static final String MESSAGE_THEME_ALREADY_IN_USE = "You are using %1$s already";
 
     private static final Logger logger = Logger.getLogger(SwitchThemeCommand.class.getName());
 
@@ -42,8 +41,7 @@ public class SwitchThemeCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SwitchThemeCommand // instanceof handles nulls
-                && theme.equals(((SwitchThemeCommand) other).theme)); // state check
+        return other == this
+                || other instanceof SwitchThemeCommand && ((SwitchThemeCommand) other).theme.equals(theme);
     }
 }
