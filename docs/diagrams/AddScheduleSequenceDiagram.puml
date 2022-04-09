@@ -68,7 +68,7 @@ deactivate AddressBookParser
 
 LogicManager -> AddScheduleCommand : execute()
 activate AddScheduleCommand
-
+newpage
 AddScheduleCommand -> Model : getFilteredCandidateList()
 activate Model
 
