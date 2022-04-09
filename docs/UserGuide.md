@@ -3,9 +3,12 @@ layout: page
 title: User Guide
 ---
 
+<p align="center">
+  <img src="images/tapa banner.png">
+</p>
+
 TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
-especially for those
-who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
+especially for those who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
 
 * Table of Contents
 {:toc}
@@ -45,6 +48,31 @@ Here are some example commands you can try:
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Information about contacts in TAPA
+
+Each contact in TAPA represents a student, who can have the following fields:
+
+Field            | Prefix | Description                                                        | Restrictions                                                                                                                                                                            | Multiplicity
+-----------------|--------|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------
+STUDENT_ID       |   i/   | Denotes the unique identification number of a student              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                           | 1
+MODULE_CODE      |   m/   | Denotes the module that a student is currently taking              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                            | 1
+NAME             |   n/   | Denotes the name of the student                                    | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                 | 1
+PHONE            |   p/   | Denotes the phone number of the student                            | •Optional field<br>•Should not be blank<br>•Should only contain numeric characters<br>•Letters, whitespaces and symbols are not allowed<br>•Must be at least 3 digits long       | 0 or 1
+TELEGRAM_HANDLE  |   t/   | Denotes the telegram handle of the student                         | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed<br>•Must be between 5 to 32 characters long  | 0 or 1
+EMAIL            |   e/   | Denotes the email address of the student                           | •Optional field<br>•Should not be blank<br>•Should adhere to the standard email format as mentioned [here](https://snov.io/knowledgebase/what-is-a-valid-email-address-format/ ) | 0 or 1
+TASK             |   tn/  | Denotes the name of the task that is being assigned to the student | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                   | Any non-negative number
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** <br>
+
+* Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
+
+* More details regarding the use of prefix can be found in the [Features](#features) section below.
+</div>
+
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -70,8 +98,6 @@ Here are some example commands you can try:
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
-
-* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 alphanumeric characters. The telegram handle cannot have any symbols (such as underscore) as well as whitespaces.
 </div>
 
 ### Adding a student: `add`
@@ -84,6 +110,7 @@ Adds a student to TAPA.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 <div markdown="block" class="alert alert-info">
+
 :warning: <b>Warning!</b>
 
 * The student's student ID (matriculation number) has to be unique.
@@ -91,13 +118,12 @@ Adds a student to TAPA.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b> 
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b> <br>
 
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
 * The current version of TAPA expects that a TA will only teach each student in, at most, one module. Thus, each student to be added can only have one module code.
-
+* You may refer to the [table](#information-about-contacts-in-tapa) above for more information about each individual field of a student.
 </div>
 
 **Example**:
@@ -151,7 +177,7 @@ Allows the user to look up the details of a particular student.
 
 **Format**: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`
 
-* The student whose name, student id or module code is specified after the `find` command will appear in the resulting list.
+* The student whose name, student ID or module code is specified after the `find` command will appear in the resulting list.
 * Search fields must be exact matches in order for the `find` command to display the result. For example, given a student John in TAPA, `find n/John` will successfully display this student but not `find n/Joh` or `find n/Jo`.
 
 **Example**:
@@ -207,8 +233,8 @@ Marks a specific done task as undone for a particular student.
 * An error message will be displayed to the user if:
   * the specified index is 0
   * the specified index is a negative number
-  * the specified index is larger than the number of tasks for that particular student.
-  * the task with that specified index for the particular student is already marked as undone.
+  * the specified index is larger than the number of tasks for that particular student
+  * the task with that specified index for the particular student is already marked as undone
 
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
@@ -234,6 +260,13 @@ Edits a student's information in TAPA.
 * `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
     * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
 
+<div markdown="block" class="alert alert-info">
+:warning: <b>Warning!</b>
+
+* The `edit` command cannot to applied to `Task`.
+
+</div>
+
 <br>
 
 ### Deleting all students: `clear`
@@ -246,8 +279,7 @@ Clears all students from TAPA.
 * TAPA will request for the user's confirmation before clearing all students.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b><br>
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b><br>
 
 * Inputting the `clear` command puts TAPA in the "clear confirmation" mode. In this mode, TAPA will not recognise any command other than `confirm`. Inputting any command other than `confirm` will cause TAPA to exit the "clear confirmation" mode and resume its normal operation.
 * As clearing TAPA cannot be undone, you will have to click the commandBox again to input `confirm`. (This is an additional measure to ensure a user does not clear TAPA accidentally.) After inputting `confirm`, you can click the commandBox again, then continue to use TAPA as per normal.
@@ -262,7 +294,7 @@ Clears all students from TAPA.
 
 <br>
 
-### Archiving details in the address book: `archive`
+### Archiving details in TAPA: `archive`
 
 Saves a copy of the details currently saved in TAPA into a separate file.
 
@@ -308,8 +340,10 @@ Assigns a task to a particular student.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b>The name of the assigned task will be converted to Title Case.
+<div markdown="block" class="alert alert-info">:information_source:
+<b>Note:</b>
+
+The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
@@ -358,7 +392,7 @@ An error message will be displayed if:
 Displays a list of previous commands that were executed successfully.
 
 <div markdown="block" class="alert alert-info">
-:information_source: <b>Quick Tip!:</b><br>
+:information_source: <b>Quick Tip!</b><br>
 
 * Aside from the `history` command, you can also use the :arrow_up_small: Up and :arrow_down_small: Down arrow keys on your keyboard to navigate through your previously executed commands.
 
@@ -387,8 +421,7 @@ Reverts the changes made by the previously executed command.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b><br>
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b><br>
 
 * While other apps may only allow the undoing of commands that alter stored details, TAPA's `undo` command can revert the changes of almost every command other than `clear` and `undo` itself. (This would include commands like `list`, `sort`, and `add`.) This feature is intended to aid the user in undoing their intended command, since it can be difficult to remember which commands can be undone, or to keep track of the last command that made changes to stored details.
 * Inputting `undo` after the [`archive` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#archiving-details-in-the-address-book-archive) will not delete the copy of TAPA that has been saved in a separate file.
@@ -409,12 +442,12 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 
 **Format**: `sort`
 
-* Displays the students from the list of students by the number of undone tasks in **descending** order
+* Displays the students from the list of students by the number of undone tasks in **descending** order.
 * The students are indexed as 1, 2, 3, ......
 
 **Example**:
 * `sort`
-    * Displays all the enrolled students by the number of undone tasks in **descending** order
+    * Displays all the enrolled students by the number of undone tasks in **descending** order.
 
 <br>
 
@@ -502,6 +535,12 @@ Action              | Command Format with Examples
 **Help**            | `help`
 **Exit**            | `exit`
 
+### Glossary
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Module**: A specific class that a student is taking
+* **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
+* **Person**: A student in TAPA
+* **Student ID/Matriculation number**: Used interchangeably to refer to the unique identification number of a student
 
 
 
