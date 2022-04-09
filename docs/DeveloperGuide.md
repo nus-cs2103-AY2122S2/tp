@@ -526,24 +526,88 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. User requests to add a student to a specific group.
-2. ArchDuke adds the student to the group.
-3. ArchDuke updates the student list in the group and displays the student in the group.
+
+2. ArchDuke adds the student to the group and display the student contact in the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group index is invalid.
-    * 1a1. ArchDuke shows an error message.
+* 1a. The assign command attributes are in an invalid format.
 
-      Use case resumes from step 1.
+    * 1a1. ArchDuke shows an error message.
   
-* 1b. The student index is invalid.
+      Use case resumes from step 1.
+
+* 1b. The group name is invalid.
+
     * 1b1. ArchDuke shows an error message.
 
-       Use case resumes from step 1.
+      Use case resumes from step 1.
 
-**Use case: UC07 - Add a task in a group**
+* 1c. The group does not exist in ArchDuke.
+
+    * 1c1. ArchDuke shows an error message.
+      
+      Use case resumes from step 1.
+  
+* 1d. The student index is invalid.
+
+    * 1d1. ArchDuke shows an error message.
+
+       Use case resumes from step 1.
+  
+* 1e. The target student contact already exists in the group.
+
+  * 1e1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+
+**Use case: UC07 - Deassign a student contact from a group**  
+
+**MSS:**
+
+1. User requests to deassign a student from a specific group.
+
+2. ArchDuke deassigns the student from the group and no longer displays the student contact in the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The deassign command attributes are in an invalid format.
+
+  * 1a1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1b. The group name is invalid.
+
+  * 1b1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1c. The group does not exist in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1d. The student index is invalid.
+
+  * 1d1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+  
+* 1e. The student contact is not previously assigned in the group.
+
+  * 1e1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+
+**Use case: UC08 - Add a task in a group**
 
 **MSS:**
 
