@@ -109,6 +109,13 @@ activate Interview
 
 Interview --> AddScheduleCommand : toAdd
 deactivate Interview
+
+AddScheduleCommand -> Model : addInterview(toAdd)
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
 AddScheduleCommand -> Model : setCandidate(candidateToInterview, editedCandidate)
 activate Model
 
