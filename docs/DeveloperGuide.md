@@ -1296,4 +1296,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: Resize Onboarding Guide prompt to be larger <br>
    Expected: The prompt's dimesions will not go above `400x700`.
-   
