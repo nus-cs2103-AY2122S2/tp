@@ -142,7 +142,7 @@ From the assessment list, click the "See Attempts" button to open a popup window
     <tr>
         <td>KEYWORD</td>
         <td>No prefix</td>
-        <td>It represents the numerical grade given to a student's assignment attempt.
+        <td>It represents the string to match when returning search results.
         </td>
     </tr>
     <tr>
