@@ -5,7 +5,7 @@ import static seedu.trackermon.commons.util.AppUtil.checkArgument;
 public class Comment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Comment is limited ASCII values and can contain up to 300000 ASCII characters";
+            "Comment is limited to standard ASCII characters and can contain up to 300000 ASCII characters";
 
     public static final String VALIDATION_REGEX_COMMENT = "[\\p{ASCII}]{0,300000}";
 
