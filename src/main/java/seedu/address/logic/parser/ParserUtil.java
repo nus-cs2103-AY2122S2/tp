@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_THEME;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -140,7 +141,7 @@ public class ParserUtil {
         if (trimmedTheme.equals("light")) {
             return new LightTheme();
         }
-        throw new ParseException("Theme should be either light or dark.");
+        throw new ParseException(MESSAGE_INVALID_THEME);
     }
 
     /**

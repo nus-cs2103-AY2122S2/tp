@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddProfileWindow extends UiPart<Stage> {
 
     private static final String FXML = "AddProfileWindow.fxml";
-    private static final String ICON_TAG_WINDOW = "/images/profile_window.png";
+    private static final String ICON_PROFILE_WINDOW = "/images/profile_window.png";
     private Stage secondaryStage;
     private Logic logic;
     private ResultDisplay resultDisplay;
@@ -52,7 +52,7 @@ public class AddProfileWindow extends UiPart<Stage> {
         this.logic = logic;
         this.secondaryStage = secondaryStage;
         this.secondaryStage.getIcons().add(new Image(Objects.requireNonNull(MainApp.class
-                .getResourceAsStream(ICON_TAG_WINDOW))));
+                .getResourceAsStream(ICON_PROFILE_WINDOW))));
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
     }

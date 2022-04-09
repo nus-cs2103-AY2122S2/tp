@@ -46,7 +46,9 @@ public class LightTheme extends Theme {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof LightTheme
-                && lightThemeResource.equals(((LightTheme) other).lightExtensionsResource)
-                && lightExtensionsResource.equals(((LightTheme) other).lightExtensionsResource));
+                && lightThemeResource.equals(((LightTheme) other).lightThemeResource)
+                && lightExtensionsResource.equals(((LightTheme) other).lightExtensionsResource)
+                && lightAddTagWindow.equals(((LightTheme) other).lightAddTagWindow)
+                && lightAddProfileWindow.equals(((LightTheme) other).lightAddProfileWindow));
     }
 }
