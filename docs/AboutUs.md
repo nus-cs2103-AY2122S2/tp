@@ -44,6 +44,10 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/tanyjnaaman.md)]
 
 * Role: Developer
-* Responsibilities:
+* Responsibilities: 
+  * IC for testing and storage
+  * Implement, test and maintain all features related to `insights` feature
+  * Implement, test and maintain all features related to `logs` feature
+
 
 
