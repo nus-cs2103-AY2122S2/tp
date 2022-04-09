@@ -1,8 +1,5 @@
 @startuml
-!include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+hide empty members
 
 class Person {
     - fields : final HashMap<Prefix, Field>
@@ -44,12 +41,12 @@ Person o--> "0..1" Birthday
 Person o--> "0..1" Membership
 Person o--> "*" Tag
 
-Name -up-|> Field
-Email -up-|> Field
-Address -up-|> Field
-Phone -up-|> Field
-Remark -up-|> Field
-Birthday -up-|> Field
-Membership -up-|> Field
+Name --|> Field
+Email --|> Field
+Address --|> Field
+Phone --|> Field
+Remark --|> Field
+Birthday --|> Field
+Membership --|> Field
 
 @enduml
