@@ -87,6 +87,7 @@ Adds a student to TAPA.
 * The phone number, telegram handle, and email address fields are optional and can be excluded.
 
 <div markdown="block" class="alert alert-info">
+
 :warning: <b>Warning!</b>
 
 * The student's student ID (matriculation number) has to be unique.
@@ -94,8 +95,7 @@ Adds a student to TAPA.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b> <br>
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b> <br>
 
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
@@ -256,8 +256,7 @@ Clears all students from TAPA.
 * TAPA will request for the user's confirmation before clearing all students.
 * A message will be displayed if TAPA is already empty and there are no students to be removed.
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b><br>
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b><br>
 
 * Inputting the `clear` command puts TAPA in the "clear confirmation" mode. In this mode, TAPA will not recognise any command other than `confirm`. Inputting any command other than `confirm` will cause TAPA to exit the "clear confirmation" mode and resume its normal operation.
 * As clearing TAPA cannot be undone, you will have to click the commandBox again to input `confirm`. (This is an additional measure to ensure a user does not clear TAPA accidentally.) After inputting `confirm`, you can click the commandBox again, then continue to use TAPA as per normal.
@@ -318,8 +317,10 @@ Assigns a task to a particular student.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b>The name of the assigned task will be converted to Title Case.
+<div markdown="block" class="alert alert-info">:information_source:
+<b>Note:</b>
+
+The name of the assigned task will be converted to Title Case.
 </div>
 
 <br>
@@ -368,7 +369,7 @@ An error message will be displayed if:
 Displays a list of previous commands that were executed successfully.
 
 <div markdown="block" class="alert alert-info">
-:information_source: <b>Quick Tip!:</b><br>
+:information_source: <b>Quick Tip!</b><br>
 
 * Aside from the `history` command, you can also use the :arrow_up_small: Up and :arrow_down_small: Down arrow keys on your keyboard to navigate through your previously executed commands.
 
@@ -395,8 +396,7 @@ Reverts the changes made by the previously executed command.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b><br>
+<div markdown="block" class="alert alert-info">:information_source: <b>Notes:</b><br>
 
 * While other apps may only allow the undoing of commands that alter stored details, TAPA's `undo` command can revert the changes of almost every command other than `clear` and `undo` itself. (This would include commands like `list`, `sort`, and `add`.) This feature is intended to aid the user in undoing their intended command, since it can be difficult to remember which commands can be undone, or to keep track of the last command that made changes to stored details.
 * Inputting `undo` after the [`archive` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#archiving-details-in-the-address-book-archive) will not delete the copy of TAPA that has been saved in a separate file.
