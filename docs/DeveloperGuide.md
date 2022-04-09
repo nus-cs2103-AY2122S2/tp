@@ -113,7 +113,7 @@ How the `Logic` component works:
 
 The Sequence Diagrams below illustrate the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew-1.png)
+<img src="images/DeleteSequenceDiagramNew-1.png" width="1320" />
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramNew-2.png)
 
@@ -128,7 +128,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="691" />
 
 
 The `Model` component,
@@ -180,7 +180,7 @@ The `manual` command displays the format and a short description for a particula
 
 The following sequence diagram shows how the manual command works:
 
-![ManualCommandSequenceDiagram](images/ManualCommandSequenceDiagram.png)
+<img src="images/ManualCommandSequenceDiagram.png" width="1091" />
 
 ### Add Command
 
@@ -245,9 +245,9 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the add operation works:
 
-![AddCommandSequenceDiagram-1](images/AddCommandSequenceDiagram-1.png)
+<img src="images/AddCommandSequenceDiagram-1.png" width="1443" />
 
-![AddCommandSequenceDiagram-2](images/AddCommandSequenceDiagram-2.png)
+<img src="images/AddCommandSequenceDiagram-2.png" width="849" />
 
 ### Delete Command
 
@@ -304,7 +304,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the delete operation works:
 
-![DeleteCommandSequenceDiagram-1](images/DeleteCommandSequenceDiagram-1.png)
+<img src="images/DeleteCommandSequenceDiagram-1.png" width="1330" />
 
 ![DeleteCommandSequenceDiagram-2](images/DeleteCommandSequenceDiagram-2.png)
 
@@ -356,7 +356,7 @@ After which, a new `DeleteModuleCommand` object will be created, and is subseque
 
 The following sequence diagram shows how the deleteModule operation works:
 
-![DeleteModuleCommandSequenceDiagram-1](images/DeleteModuleCommandSequenceDiagram-1.png)
+<img src="images/DeleteModuleCommandSequenceDiagram-1.png" width="1771" />
 
 ![DeleteModuleCommandSequenceDiagram-2](images/DeleteModuleCommandSequenceDiagram-2.png)
 
@@ -472,9 +472,9 @@ After which, a new `deleteTaskCommand` object will be created, and is subsequent
    
 10. Lastly, the `DeleteTaskCommand` will create a new `CommandResult` which `CommandResult` will be returned to `LogicManager`.
 
-![DeleteTaskCommandSequenceDiagram-1](images/DeleteTaskCommandSequenceDiagram-1.png)
+<img src="images/DeleteTaskCommandSequenceDiagram-1.png" width="830" />
 
-![DeleteTaskCommandSequenceDiagram-2](images/DeleteTaskCommandSequenceDiagram-2.png)
+<img src="images/DeleteTaskCommandSequenceDiagram-2.png" width="749" />
 
 ### Assign Command
 
@@ -566,7 +566,7 @@ After which, a new `AssignCommand` object will be created, and is subsequently e
 18. The `model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is then invoked such that the list is filtered by the predicate created. In this case all the students will be in the filtered list.
 19. Lastly, the `AssignCommand` will create a new `CommandResult`, which will be returned to `LogicManager`.
 
-![AssignCommandSequenceDiagram-1](images/AssignCommandSequenceDiagram-1.png)
+<img src="images/AssignCommandSequenceDiagram-1.png" width="1338" />
 
 ![AssignCommandSequenceDiagram-2](images/AssignCommandSequenceDiagram-2.png)
 
@@ -625,11 +625,11 @@ After which, a new `TaskCommand` object will be created, and is subsequently exe
 17. Lastly, the `TaskCommand` will create a new `CommandResult` by using the `TaskList` in Step 16.
     This `CommandResult` will then be returned to `LogicManager`.
 
-![TaskCommandSequenceDiagram-1](images/TaskCommandSequenceDiagram-1.png)
+<img src="images/TaskCommandSequenceDiagram-1.png" width="905" />
 
-![TaskCommandSequenceDiagram-2](images/TaskCommandSequenceDiagram-2.png)
+<img src="images/TaskCommandSequenceDiagram-2.png" width="881" />
 
-![TaskCommandSequenceDiagram-3](images/TaskCommandSequenceDiagram-3.png)
+<img src="images/TaskCommandSequenceDiagram-3.png" width="570" />
 
 ### Find Command
 
@@ -684,7 +684,7 @@ object will be created, and is subsequently executed by the `LogicManager`.
 
 The following sequence diagram shows how the find operation works:
 
-![FindCommandSequenceDiagram-1](images/FindCommandSequenceDiagram-1.png)
+<img src="images/FindCommandSequenceDiagram-1.png" width="1477" />
 
 ![FindCommandSequenceDiagram-2](images/FindCommandSequenceDiagram-2.png)
 
@@ -728,7 +728,7 @@ The `mark` command marks a specific undone task as done for a particular student
 
 The following sequence diagrams shows how the mark command works:
 
-![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-1.png)
+<img src="images/MarkCommandSequenceDiagram-1.png" width="1432" />
 
 ![MarkCommandSequenceDiagram](images/MarkCommandSequenceDiagram-2.png)
 
@@ -772,7 +772,7 @@ The `unmark` command marks a specific done task as undone for a particular stude
 
 The following sequence diagrams shows how the unmark command works:
 
-![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-1.png)
+<img src="images/UnmarkCommandSequenceDiagram-1.png" width="1466" />
 
 ![UnmarkCommandSequenceDiagram](images/UnmarkCommandSequenceDiagram-2.png)
 
@@ -850,7 +850,7 @@ in most cases.
     A `CommandException` will be thrown if `ArchiveCommand` fails to populate the data file.
 12. Lastly, the `ArchiveCommand` will create a new `CommandResult`, which will then be returned to `LogicManager`.
 
-![ArchiveCommandSequenceDiagram](images/ArchiveCommandSequenceDiagram.png)
+<img src="images/ArchiveCommandSequenceDiagram.png" width="1188" />
 
 ### Progress Command
 
@@ -901,7 +901,7 @@ After which, a new `ProgressCommand` object will be created, and is subsequently
 14. The output string will be used in creating a new `CommandResult` object.
 15. Lastly, the `CommandResult` object will be returned to `LogicManager`.
 
-![ProgressCommandSequenceDiagram-1](images/ProgressCommandSequenceDiagram-1.png)
+<img src="images/ProgressCommandSequenceDiagram-1.png" width="1411" />
 
 ![ProgressCommandSequenceDiagram-2](images/ProgressCommandSequenceDiagram-2.png)
 
