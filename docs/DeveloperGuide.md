@@ -167,7 +167,8 @@ The delete student contact feature allows users to delete an existing student co
 
 ### About add group feature
 
-The add group feature allows users to create a has-yet-to-exist student group in the student group list.
+The add group feature allows users to create a has-yet-to-exist student group in the student group list via the command 
+`addgroup g/GROUP_NAME`.
 
 ### How it is implemented
 
@@ -204,6 +205,8 @@ method to check for the validity of the input `GROUP_NAME`. <br> <br> At this st
 
 8. The `AddGroupCommand` then calls the `Model#addGroup()` to add the input group to the list.
 
+#### Displaying of result
+
 9. Finally, the `AddGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution. 
 The GUI would also be updated on this change in the group list and update the display of group list accordingly.
 
@@ -223,7 +226,12 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ### About delete group feature
 
+The delete group feature allows users to delete an existing student group in 
+the student group list via the command `delgroup g/GROUP_NAME`.
+
 ### How it is implemented
+
+The `delgroup` command mechanism is facilitated by the 
 
 ### Design considerations
 
