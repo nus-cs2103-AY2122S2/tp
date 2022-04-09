@@ -625,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The view task command format is invalid.
+* 1a. The view contact command format is invalid.
 
   * 1a1. ArchDuke shows an error message.
   
@@ -731,17 +731,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. User requests to view tasks that belong to a specific group.
+
 2. ArchDuke displays all tasks in that group.
+
    Use case ends.
 
 **Extensions**
 
-* 1a. The group index is invalid.
+* 1a. The view task command format is invalid.
 
     * 1a1. ArchDuke shows an error message.
 
-      Use case resumes from step 1.
+        Use case resumes from step 1.
+  
+* 1b. The group name is invalid.
 
+    * 1b1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+  
+* 1c. The group does not exist in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+
+  
 **Use case: UC10 - Find people from the contact list**
 
 **MSS:**
