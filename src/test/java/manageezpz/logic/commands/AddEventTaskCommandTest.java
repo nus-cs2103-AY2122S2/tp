@@ -5,12 +5,10 @@ import static manageezpz.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_DATE;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_END_TIME;
 import static manageezpz.logic.commands.CommandTestUtil.VALID_START_TIME;
-import static manageezpz.testutil.TypicalTasks.*;
-import static manageezpz.testutil.TypicalTasks.WEEKLY_QUIZ;
+import static manageezpz.testutil.TypicalTasks.HOUSE_VISTING;
+import static manageezpz.testutil.TypicalTasks.getTypicalAddressBookTasks;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import manageezpz.testutil.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +20,7 @@ import manageezpz.model.task.Date;
 import manageezpz.model.task.Description;
 import manageezpz.model.task.Event;
 import manageezpz.model.task.Time;
+import manageezpz.testutil.Assert;
 
 public class AddEventTaskCommandTest {
     private Model model;
@@ -38,7 +37,7 @@ public class AddEventTaskCommandTest {
         AddEventTaskCommand addEventTaskCommand = new AddEventTaskCommand(newEventTask);
         String expectedMessage = String.format(AddEventTaskCommand.MESSAGE_SUCCESS, newEventTask);
         CommandResult commandResult = new CommandResult(expectedMessage);
-        assertEquals(commandResult,  addEventTaskCommand.execute(model));
+        assertEquals(commandResult, addEventTaskCommand.execute(model));
     }
 
     @Test
