@@ -42,7 +42,7 @@ We hope you enjoy Tracey as much as we did when developing it!
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## How to navigate the User Guide
+## 1. How to navigate the User Guide
 
 There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
@@ -66,7 +66,7 @@ Additional formatting guidelines:
 
 
 --------------------------------------------------------------------------------------------------------------------
-## Quick Start
+## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
  📓`Note:`
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
@@ -102,8 +102,8 @@ Additional formatting guidelines:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-### Viewing help
+## 3. Features
+### 3.1. Viewing help
 Help users to search for all the commands that Tracey offers by opening a pop-up window.
 It includes a summary to briefly explain all the commands.
 
@@ -115,7 +115,7 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 Format: `help`
 
-### Importing Excel sheet
+### 3.2. Importing Excel sheet
 Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
 
 Format: `import FILE PATH`
@@ -144,7 +144,7 @@ How to identify import button:
 * The column of the table must be capital and starts with Column A.
 * The data in the table needs to be ensured no space behind
 
-### Adding a contact
+### 3.3. Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
@@ -194,7 +194,7 @@ In addition, the list of pre-defined constants are also provided for `Faculty` a
 * You are able to add optional tags with no restrictions using the `t/` prefix.
 * Additions can be reversed with the `undo` feature.
 
-### Editing an existing contact
+### 3.4. Editing an existing contact
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
@@ -231,7 +231,7 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 💡`Tip`:
 * Edits can be reversed with the `undo` feature.
 
-### Deleting a contact
+### 3.5. Deleting a contact
 Delete a contact at a specific index.
 
 Format: `delete INDEX`
@@ -254,7 +254,7 @@ Examples of usage:
 * This can save you time scrolling down an entire list to get his/her `INDEX`!
 * Deletions can be reversed with the `undo` feature.
 
-### Undoing an action
+### 3.6. Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
@@ -262,7 +262,7 @@ Format: `undo`
 * You can only use the undo command after executing an add, edit, or delete command.
 * Cannot be used in succession to undo previously executed commands besides the last executed one.
 
-### Redoing an action
+### 3.7. Redoing an action
 Reverses an executed undo command.
 
 Format: `redo`
@@ -270,7 +270,7 @@ Format: `redo`
 * You can only use the `redo` command after executing an `undo` command.
 * Cannot be used in succession to reverse previously executed `undo` commands besides the last executed one.
 
-### Finding a contact
+### 3.8. Finding a contact
 Find a particular contact in Tracey and retrieve their specific details.
 
 Format: `find NAME`
@@ -291,7 +291,7 @@ Scenario:
 
 As seen in the *Figure 8*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
-### Filtering contacts
+### 3.9. Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
 
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
@@ -317,7 +317,7 @@ As seen in *Figure 9*, using the `filter` command with "negative" as covid statu
 📓`Note:`
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
 
-### Listing the records
+### 3.10. Listing the records
 List all students, displaying all their data stored in Tracey.
 
 Format: `list`
@@ -326,7 +326,7 @@ This is a sample screenshot of what you can expect from the `list` command.
 
 ![list](images/ListFeatureScreenShot.PNG) *Figure 10: Screenshot of list command.*
 
-### Copying emails
+### 3.11. Copying emails
 Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
 
 Format:`email`
@@ -338,7 +338,7 @@ There is also a `Show Email` button on the GUI which you can click to open the s
 
 From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
-### Summarising the records
+### 3.12. Summarising the records
 Summarises the statistics of the student records inside Tracey.
 
 Format:`summarise`
@@ -352,7 +352,7 @@ Example of usage:
 
 From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
-### Archiving Tracey
+### 3.13. Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
 * `[ROOT]`: The folder where the Tracey.jar is in.
 * `[DATE]`: Archived file directory named using your local PC's date in the format of DDMMYY.
@@ -373,7 +373,7 @@ Example:
   * Features for naming of the archived file via the CLI will be available in later releases.
 * To restore Tracey to a previous version, just replace the address book file in `[ROOT]/data` with the archived file.
 
-### Resizing the result display window
+### 3.14. Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
@@ -389,7 +389,7 @@ Format: `resize SIZE`
 
 ![Comparison of 3 resize options](images/resize_options.png) *Figure 13: Comparison of the 3 different resizing options for the result display window.*
 
-### Clearing all records
+### 3.15. Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
@@ -398,19 +398,19 @@ Format:`clear`
 * Use the <a href='#archiving-tracey'>`archive`</a> feature to save a copy of the data file if you intend to keep it as the deleted files cannot be recovered.
 * This feature cannot be reversed using `undo`.
 
-### Exiting Tracey
+### 3.16. Exiting Tracey
 Close the application.
 
 Format: `exit`
 * Closes the application.
 
-### Saving
+### 3.17. Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to Tracey.
 
 ---------------------------------------------------------------------------------------------------------------
 
-### FAQ
+### 4. FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
    **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
@@ -443,7 +443,7 @@ there are changes to Tracey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Command Summary
+### 5. Command Summary
 
 *Table 5: Command Summary.*
 
@@ -470,7 +470,7 @@ there are changes to Tracey.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Glossary
+### 6. Glossary
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
