@@ -247,8 +247,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Design considerations:
 
 * **Alternative 1 (current choice):** Currently the appointment command is responsible for both the adding and clearing
-of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only
-by the prefixes / augments.
+  of appointment details to / from a pet. These 2 tasks follow a similar command format and are differentiated only
+  by the prefixes / augments.
     * Pros: Easy and simple to implement.
     * Cons: User may struggle to get familiar with the command.
 
@@ -293,27 +293,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Design considerations:
 
 * **Alternative 1 (current choice):** Currently each filter field extends its own `FilterByContainsFilterWordPredicate` class.
-  * Pros: Easy to implement and increases flexibility when testing using a `Predicate`.
-  * Cons: May generate a lot more classes if filter fields were to expand in the future.
+    * Pros: Easy to implement and increases flexibility when testing using a `Predicate`.
+    * Cons: May generate a lot more classes if filter fields were to expand in the future.
 
 * **Alternative 2:** Generate a new package containing the various predicate and methods to identify different fields.
-  * Pros: Cleaner code. Better for future scalability.
-  * Cons: Requires more lines of code. Harder to set up initially. Risk being messy if not careful.
+    * Pros: Cleaner code. Better for future scalability.
+    * Cons: Requires more lines of code. Harder to set up initially. Risk being messy if not careful.
 
 
-### Undo/redo feature
+### Undo feature
 
 #### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current WoofAreYou state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous WoofAreYou state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone WoofAreYou state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()` and `Model#undoAddressBook()` respectively.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial WoofAreYou state, and the `currentStatePointer` pointing to that single WoofAreYou state.
 
@@ -348,17 +347,11 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores WoofAreYou to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest WoofAreYou state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify WoofAreYou, such as `list`, will usually not call `Model#commitAddressBook()` or `Model#undoAddressBook()` Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all WoofAreYou states after the `currentStatePointer` will be purged.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -368,16 +361,16 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo executes:**
 
 * **Alternative 1 (current choice):** Saves the entirety of WoofAreYou.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the pet being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Attendance feature
 
@@ -410,11 +403,11 @@ The activity diagram below illustrates the workflow of attendance commands.
 **Aspect: Attendance data within `Model` component**
 
 * **Alternative 1 (current choice):** Attendance entries in every pets' HashMaps.
-  * Pros: Better OOP and performance.
-  * Cons: Higher memory usage.
+    * Pros: Better OOP and performance.
+    * Cons: Higher memory usage.
 * **Alternative 2:** All attendance entries in a single HashMap.
-  * Pros: Lesser memory usage, easier to implement.
-  * Cons: May have performance issues due to nested data structure.
+    * Pros: Lesser memory usage, easier to implement.
+    * Cons: May have performance issues due to nested data structure.
 
 
 ### \[Proposed\] Data archiving
@@ -561,9 +554,9 @@ Use case ends.
 
 * 1b. User included special characters in dietary requirement.
 
-  * 1b1. System shows an error message that dietary requirements only can consist of alphanumeric characters and spacing.
+    * 1b1. System shows an error message that dietary requirements only can consist of alphanumeric characters and spacing.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 
 **Use case: Key in pet appointment**
@@ -765,24 +758,24 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Adding a pet
 
 1. Adding a pet
-   1. Test case: `add n/Hazel o/Romeo Tan p/91234567 a/30 East Coast Road t/Golden Dachshund`
-      Expected: A pet with all the details will be added to the pet list and success message shown in the status message.
-   2. Test case: `add`
-      Expected: No pet will be added. Error details shown in the status message. Pet list remains the same.
+    1. Test case: `add n/Hazel o/Romeo Tan p/91234567 a/30 East Coast Road t/Golden Dachshund`
+       Expected: A pet with all the details will be added to the pet list and success message shown in the status message.
+    2. Test case: `add`
+       Expected: No pet will be added. Error details shown in the status message. Pet list remains the same.
 
 ### Editing a pet
 
@@ -819,13 +812,13 @@ testers are expected to do more *exploratory* testing.
 ### Charging a pet
 
 1. Charging a pet for the month
-   1. Prerequisites: Pet list must have at least 1 pet in it.
-   2. Test case: `charge 1 m/03-2022 c/100.00`
-      Expected: Total chargeable amount for pet at index 1 for the month of March 2022 will be shown in status message.
-   3. Test case: `charge 1 m/2022-03 c/100.00`
-      Expected: No chargeable amount will be calculated. Error message shown in status message.
-   4. Test case: `charge 1 m/03-2022 c/100.0101`
-      Expected: No chargeable amount will be calculated. Error message shown in status message.
+    1. Prerequisites: Pet list must have at least 1 pet in it.
+    2. Test case: `charge 1 m/03-2022 c/100.00`
+       Expected: Total chargeable amount for pet at index 1 for the month of March 2022 will be shown in status message.
+    3. Test case: `charge 1 m/2022-03 c/100.00`
+       Expected: No chargeable amount will be calculated. Error message shown in status message.
+    4. Test case: `charge 1 m/03-2022 c/100.0101`
+       Expected: No chargeable amount will be calculated. Error message shown in status message.
 
 ### Adding a pet's dietary requirement
 
