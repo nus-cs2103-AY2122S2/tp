@@ -65,7 +65,7 @@ public class ArchiveCommand extends Command {
      * Initialises the name for the directory for the archived file using the current date.
      * @return Name for the directory for the archived file
      */
-    private String initArchiveDirectoryPathName() {
+    private String initArchiveDirectoryName() {
         Date date = new Date();
         return ARCHIVE_DIRECTORY_NAME_FORMAT.format(date);
     }
@@ -74,7 +74,7 @@ public class ArchiveCommand extends Command {
      * Initialises the name for the archived file using the current date and time.
      * @return Name for the archived file
      */
-    private String initArchiveFilePathName() {
+    private String initArchiveFileName() {
         Date date = new Date();
         return ARCHIVE_FILE_NAME_FORMAT.format(date) + ".json";
     }
@@ -87,8 +87,8 @@ public class ArchiveCommand extends Command {
      */
     private void archiveFile(Model model) throws CommandException {
         Path addressBookFilePath = model.getAddressBookFilePath();
-        String archiveDirectoryName = initArchiveDirectoryPathName();
-        String archiveFileName = initArchiveFilePathName();
+        String archiveDirectoryName = initArchiveDirectoryName();
+        String archiveFileName = initArchiveFileName();
         Path archiveFilePath = initArchiveFilePath(addressBookFilePath, archiveDirectoryName, archiveFileName);
         try {
             FileUtil.createIfMissing(archiveFilePath);

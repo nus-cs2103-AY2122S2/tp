@@ -238,7 +238,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleResizeResultDisplayWindow() {
         resultDisplayPlaceholder.setMinHeight(ResizeCommand.getResultWindowDisplaySize()
-                * ResizeCommand.getResizeWindowMultiplier());
+                * ResizeCommand.RESIZE_WINDOW_MULTIPLIER);
     }
 
     /**
