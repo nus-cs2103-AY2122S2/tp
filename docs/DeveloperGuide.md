@@ -1122,3 +1122,20 @@ testers are expected to do more *exploratory* testing.
    3. Relaunch the app. <br>
       Expected: ManageEZPZ would retain the recent changes.
 
+## **Appendix: Effort**
+
+**Difficulty Level** :
+
+While AB3 deals with only one entity type, `Persons`, ManageEZPZ deals with multiple entity types, including `Todos`, `Deadlines`, `Events` and `Tasks`.
+The inclusion of the Task model has definitely increased the functionality but at the same time the difficulty of the project when compared to AB3 which 
+only had the `Persons` model.
+
+**Challenges faced** :
+
+As more features were implemented, we faced challenges that arose from the dependencies between the `Person` and `Tasks` classes in order to make ManageEZPZ's functionalities more user-centric and convenient for users (e.g. Deleting an Employee also results in deletion of an assignee from the task that was assigned to the employee and vice versa where Deleting a Task results in the decrement of the total number of task assigned to an Employee.)
+Many of the bugs we encountered at the beginning of the project were also due to unfamiliarity with the code base and having to unearth the many layers of AB3, but as time went by, identified bugs have been resolved to result in the ManageEZPZ application today.
+
+
+**Effort Required** :
+
+Our MangeEZPZ Team has also spent a considerable amount of effort on the UI aspect, from choosing the position of the additional Task list (ultimately settling on a split UI), to the different pictures and colour scheme that was used to represent the different fields such as done/not done, priority, etc. So that it is the most appropriate to our users. 
