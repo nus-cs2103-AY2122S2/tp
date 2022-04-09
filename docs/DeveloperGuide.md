@@ -116,6 +116,8 @@ from `CompanyCard`.
 
 The `RoleListPanel` appears at the bottom of `CompanyCard` displaying key information of `Role` from `RoleCard`.
 
+The `ReminderWindow` appears as a separate window displaying key information of `Reminder` from `ReminderCard`.
+
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 The `UI` component,
@@ -232,8 +234,7 @@ Given below is an example usage scenario and how the add role feature behaves at
 1. The user executes the command `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59` to add a new role into the 1<sup>st</sup> company.
 2. Then the `AddRoleCommandParser#parse()` parses and creates a `Role` object with fields to be added such as the roleName `Data Analyst` before creating an instance of `AddRoleCommand` with it.
 3. The `AddRoleCommandParser` returns the `AddRoleCommand` to the `LogicManager`. `LogicManager` invokes `AddRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so add the new role into the company's `RoleManager`.
-4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
-
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to display changes to the user.
 
 The following sequence diagram shows how the `addRole` command operation works with the
 valid user input `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59`:
@@ -284,8 +285,7 @@ Given below is an example usage scenario and how the edit role feature behaves a
 1. The user executes the command `editRole 1 1 d/react js` to edit the description in the 1<sup>st</sup> role from the 1<sup>st</sup> company.
 2. Then the `EditRoleCommandParser#parse()` parses and creates an `EditRoleDescriptor` object with fields to be modified such as the description `react js` before creating an instance of `EditRoleCommand` with it.
 3. The `EditRoleCommandParser` returns the `EditRoleCommand` to `LogicManager`. `LogicManager` invokes `EditRoleCommand#execute()` which validates the company and role indexes, if so edit its description to the user input.
-4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
-
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to display changes to the user.
 
 The following sequence diagram shows how the `editRole` command operation works with the valid user input `editRole 1 1 d/react js`:
 ![Sequence diagram of the EditRole feature](images/EditRoleSequenceDiagram.png)  
@@ -321,7 +321,7 @@ Given below is an example usage scenario and how the delete role feature behaves
 1. The user executes the command `deleteRole 1 1` to delete the 1<sup>st</sup> role from the 1<sup>st</sup> company.
 2. Then the `DeleteRoleCommandParser#parse()` parses and creates an instance of `DeleteRoleCommand` with the company index and role index parsed.
 3. The `DeleteRoleCommandParser` returns the `DeleteRoleCommand` to `LogicManager`. `LogicManager` invokes `DeleteRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so deletes the role.
-4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
+4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to display the changes to the user.
 
 
 The following sequence diagram shows how the `deleteRole` command operation works with the user input `deleteRole 1 1`:
@@ -357,7 +357,8 @@ Given below is an example usage scenario and how the find feature behaves at eac
 1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
 2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
 3. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
-4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
+4. The `Parser` returns the `FindCommand` to `LogicManager` which then returns the `CommandResult` to `MainWindow` in order to display the changes to the user.
+
 
 The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
 
@@ -413,7 +414,8 @@ Given below is an example usage scenario and how the set reminder window feature
 1. The user executes the command `setWindow 14` to set the reminder window to 14 days.
 2. Then the `SetReminderWindowCommandParser#parse()` creates an instance of `SetReminderWindowCommand` by passing the number of days to which the reminder window will be set.
 3. The `SetReminderWindowCommand#execute()` method will update the `model` using the `Model#setReminderWindow()` method, which consequently updates `userPrefs` by calling the `UserPrefs#setReminderWindow()` method to update the reminder window as stored in the user preferences.
-4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
+4. The `Parser` returns the `SetReminderWindowCommand` to `LogicManager` which then returns the `CommandResult` to `MainWindow` in order display the changes to the user.
+
 
 The following sequence diagram shows how the `setWindow` command operation works with the user input `setWindow 14`:
 
@@ -436,7 +438,8 @@ Given below is an example usage scenario and how the favourite feature behaves a
 2. Then the `FavouriteCompanyCommandParser#parse()` creates an instance of `FavouriteCompanyCommand` by passing the company index to be favourited.
 3. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
 4. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
-5. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
+5. The `Parser` returns the `FavouriteCompanyCommand` to `LogicManager` which then returns the `CommandResult` to `MainWindow` in order to display the changes to the user.
+
 
 The following sequence diagram shows how the `favourite` command operation works with the user input `favourite 1`:
 

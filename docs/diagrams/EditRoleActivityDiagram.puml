@@ -1,7 +1,8 @@
 @startuml
 
 start
-:User enter edit role command;
+:User edits a role in a specific company;
+:Parse command;
 
 if () then ([role command is valid])
     if () then ([company index is valid])
