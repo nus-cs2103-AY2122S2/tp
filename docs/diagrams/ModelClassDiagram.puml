@@ -13,26 +13,16 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class UniqueEventList
+
 Class Person
-Class Address
-Class Email
-Class FriendName
-Class Phone
-Class Tag
+Class Event
+
 Class UniqueLogList
 Class Log
-Class LogName
 
 Class PersonInsight
 Class Insight
-
-Class UniqueEventList
-Class Event
-Class DateTime
-Class EventName
-
-Class Description
-
 
 }
 
@@ -49,30 +39,21 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *-d-> "1" UniqueEventList
 
-UniquePersonList --> "~* all" Person
-Person *--> FriendName
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> Description
-Person *--> "*" Tag
+UniquePersonList -r-> "~* all" Person
+UniqueEventList --> "~* all" Event
+
 Person *--> "1" UniqueLogList
 UniqueLogList *--> "*" Log
-Log *--> LogName
-Log *--> Description
-
-AddressBook *--> "1" UniqueEventList
-UniqueEventList --> "~* all" Event
-Event *-> Description
-Event *---> EventName
-Event *--> DateTime
 
 PersonInsight *--> Insight
-Insight ...> Event
-Insight ...> Person
+Insight .left..> Event
+Insight .left.> Person
 
-ModelManager -->"~* filtered" Person
-ModelManager -->"~* filtered" Event
+ModelManager ---->"~* filtered" Person
+ModelManager ----->"~* filtered" Event
 
 @enduml
+
+

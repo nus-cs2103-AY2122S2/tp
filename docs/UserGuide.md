@@ -72,7 +72,9 @@ Adds a new friend to _Amigos_. A friend has:
 * Note that there can be no duplicate friends having the same name.
 
 **Examples**:
-* `addfriend n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/Physics Major, Sarah’s friend. Met at Freshman Dinner.`
+* `addfriend n/John Doe p/98765432 a/John street, block 123, #01-01 t/Classmate
+  ![Addfriend_JohnDoe](images/Addfriend_JohnDoe.png)
+
 * `addfriend n/John Doe t/Friend t/Banker`
 
 ### Editing a friend : `editfriend` or `ef`
@@ -119,11 +121,14 @@ Shows expanded page containing the full details related to an existing friend in
   will update the name of `Charlotte Tan`'s current 2nd upcoming event to `Dinner with Bernice`. Similarly, `deletefriend 1`
   will remove `Charlotte Tan` from Amigos, since `Charlotte Tan` is the only friend currently being viewed on the 
   expanded friend page.
+* Clicking on the `Events` tab directly after entering the `showfriend` command would only show events related to the 
+  friend currently being viewed on the expanded friend page. 
 
 **Examples**:
-* `showfriend n/John Doe` Will open up the page containing full details related to John Doe - his name, address, phone number, email, description, logs, and upcoming events with him.
+* `showfriend n/Bernice Yu` Will open up the page containing full details related to Bernice Yu - her name, address, 
+   phone number, email, description, logs, and upcoming events with her.
+   ![ShowFriendExample](images/ShowFriendExample.png)
 * `showfriend 2` Will open up the page containing full details related to the friend at `INDEX` 2 on the filtered GUI list.
-
 
 
 ### List all friends : `listfriends` or `lf`
@@ -151,6 +156,7 @@ Find friends in _Amigos_ whose name, tags or logs' title matches ANY of the give
 **Examples**:
 * `findfriend n/John t/neighbour` returns all friends with 'John' in the name and 'neighbour' in any of the tags.
 * `findfriend n/John n/Emily n/Russel`returns all friends with 'John' or 'Emily' or 'Russel' in the name.
+  ![FindFriendExample](images/FindFriendExample.png)
 
 
 ## Logs management

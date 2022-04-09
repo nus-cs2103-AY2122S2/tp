@@ -1,4 +1,4 @@
- ---
+---
 layout: page
 title: Developer Guide
 ---
@@ -118,11 +118,11 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data and their representations as insights i.e. all `Person` and `Event` objects (which are contained in their respective `Unique{Object}List` object) and `PersonInsight` objects (encapsulating `Insight`) objects.
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The implementation is analogous for `Event` objects.
+* stores the data for Amigos, primarily through the `Person`, `Log` and `Event` classes. These classes are each contained in their respective `Unique{Object}List` object.
+* contains `Insight` classes, which store summary details about friendships, are generated using the current Model data on demand. They are encapsulated within a `PersonInsight` object for each `Person` in Amigos.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. This implementation also applies to `Event` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -132,12 +132,11 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S2-CS2103-F09-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="650" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -186,7 +185,7 @@ doing it by the model entailed creating model exception classes, which would be 
 
 ##### Implementation
 
-The implementation of adding a friend into Amigos is facilitated by the 'AddCommand', 'AddCommandParser' in the `Logic` component,
+The implementation of adding a friend into Amigos is facilitated by the `AddCommand`, `AddCommandParser` in the `Logic` component,
 `UniquePersonList` and `Person` classes in the `Model` component, and `JsonAdaptedPerson` in the `Storage` component.
 
 A friend is a `Person` containing attributes - `FriendName`, `Phone`, `Address`, `Email`, `Description`, `Set<Tag>`
@@ -226,7 +225,10 @@ about certain particulars (e.g `Address`/ `Email`) of a friend.
 * Alternative implementation
   - An alternative way is to simply pass `null` directly into the `Person` attributes. For example, if an address is not given,
     then simply make `p.address` to be `null`. 
-  - While this may seem more convenient, it is error-prone because we would be passing null values around which
+  - Pros:
+    - More convenient and less hassle required to wrap `null` in the value. 
+  - Cons:
+    - It is error-prone because we would be passing null values around which
     makes the occurrence of exceptions such as `NullPointerException` highly likely.
  
 **Aspect**: How to check that a `Person` already exists in Amigos
@@ -235,7 +237,7 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
 * Current implementation
   - We check whether a `Person` is already in Amigos by `Person::isSamePerson` which makes use of `FriendName::equals`.
     Furthermore, we made `FriendName::equals` case-insensitive, thus disallowing users from adding a person with the same 
-    name but in different capitalisation. 
+    name but in different capitalisation.
 
 * Alternative implementations 
   - An alternative way is to define equality of 2 `Person` objects in a stricter way - to make sure that all the attributes
@@ -243,12 +245,112 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
     checks must be done. 
   - Another alternative way to define equality of 2 `Person` objects would be by using case-sensitive `FriendName`, but
     we decided that our current implementation makes more logical sense. 
+  
 
-    
-
-#### 1.2 Delete friend
+#### 1.2 Find friend
 
 ##### Implementation
+
+The implementation of searching for friends in Amigos is facilitated by the `FindCommand`, `FindCommandParser` in the `Logic`
+component and `FriendFilterPredicate` class in the `Model` component.
+
+Given below is an example usage scenario and how the `Logic` and `Model` components behave at every step. 
+
+1. User keys in a valid `FindCommand` `e.g findfriend n/Alex t/Friend ttl/Dinner` into the command box of the GUI. 
+2. `AddressBookParser` calls `FindCommandParser::parse` and parses the input.
+
+   - `FindCommandParser::parse` converts the arguments entered by the user into a `FriendFilterPredicate` by 
+      grouping the user inputs into `Set<FriendName>`, `Set<Tag>` and `Set<LogName>` based on the input prefixes. Next, 
+      a `FindCommand` is created with the new `FriendFilterPredicate` passed into it.
+   
+   - `FriendFilterPredicate::test(Person person)` performs three checks and returns `true` if any of the checks are met:
+      - For each name keyword entered by the user, whether the person's name contains the keyword.
+      - For each tag keyword entered by the user, whether any of the person's tags contains the keyword.
+      - For each log title keyword entered by the user, whether any of the person's log title contains the keyword.
+   
+      - When `FindCommand::execute` is called, the `FilteredList<Person>` in `ModelManager` will be updated to only contain
+        friends who have passed the predicate test.
+      
+An activity diagram showing the implementation of the feature:  
+![FindFriendActivityDiagram](images/FindFriendActivityDiagram.png)
+
+##### Design Considerations
+
+**Aspect**: Whether to store the user inputs as `String` or attribute.
+
+* Current implementation
+    - The user inputs are stored as attributes.
+    - Inputs beginning with `n/`, `t/`, `ttl` are converted to `FriendName`, `Tag`, `LogName` respectively.
+    - Pros:
+       - Each of the `FriendName`, `Tag` , `LogName` inputs would be subject to their respective regex constraints.
+       - Any invalid input will throw an error. For example, `findfriend n/!` would throw an error because a `FriendName`
+         should only contain alphanumeric characters and spaces.
+    - Cons:
+       - Overhead required to wrap the user input in their respective objects, and then extracting out their values again
+         for the check comparison.
+      
+* Alternative implementation
+    - An alternative way would be to store the inputs as `String` without converting them to their respective attributes.
+    - Pros:
+      - This reduces the amount of code needed, and possible errors due to conversion.
+    - Cons:
+      - The user would be allowed to search for invalid keywords.
+      
+
+#### 1.3 Show friend
+
+##### Implementation
+
+The implementation of showing a specific friend in Amigos is facilitated by `ShowFriendCommand`, `ShowFriendCommandParser`, and `CommandResult`
+in the `Logic`component, as well as `ExpandedPersonCard`, `ExpandedPersonListPanel`, and `MainWindow` in the `UI` component.
+
+Given below is how the different classes work together in an example usage scenario.
+
+1. User keys in a valid `ShowFriendCommand` `e.g showfriend n/Alex Yeoh` into the command box of the GUI.
+2. `AddressBookParser` calls `ShowFriendCommandParser::parse` and parses the input, creating a `ShowFriendCommand`.
+    - `ShowFriendCommand` extends from `ByIndexByNameCommand` and accepts either an `Index` or a `FriendName` in its constructors
+       to identify the particular friend.
+3. `ShowFriendCommand` filters the friend list on the GUI to be of length 1, only showing the friend requested by the user.
+    It also filters the event list on the GUI to only show upcoming events for the particular friend.
+    - A `CommandResult` is returned, with a boolean field `showDetails` in its constructor instantiated to be `True`.
+    
+4. `MainWindow` switches the view on the GUI to the `ExpandedPersonListPanel` in the Friends tab.
+    This is done by calling `StackPane::requestFocus()` and `StackPane::toFront()`, bringing the `ExpandedPersonListPanel`
+    to the front.
+    As the list panel has already been filtered in `ShowFriendCommand::execute`, only a single `ExpandedPersonCard` 
+    would be shown.
+    The following are details displayed on the `ExpandedPersonCard`:
+    - `FriendName`, `Address`, `Email`, `Phone` 
+    - `Description`
+    - Upcoming `Event`s related to the friend, wrapped in a `StackPane`
+    - All `Log`s of the friend
+
+   An object diagram showing the `ExpandedPersonCard` of a friend named `Alex Yeoh`:  
+   ![ExpandedPersonCardObjectDiagram](images/ExpandedPersonCardObjectDiagram.png)
+
+
+##### Design Considerations
+
+**Aspect**: Switching view from `PersonCard` to `ExpandedPersonCard`
+
+* Current implementation
+    - Both `PersonListPanel` and `ExpandedPersonListPanel` are superimposed on each other and
+      `StackPane::toFront()` is called to bring the selected list to the front based on the command entered by 
+      the user.
+    - Pros: 
+       - User will be able to see all details pertaining to the particular friend in full view.
+    - Cons: 
+       - Overhead required as both lists are running simultaneously in the foreground/background.
+       - May not be extendable to larger features with a large number of lists.
+
+* Alternative implementation
+    - Have a SplitPane, with the left pane showing the `PersonListPanel` and the right pane showing the
+      `ExpandedPersonListPanel`.
+    - Pros:
+       - Do not have to keep calling `StackPane::toFront()` each time a friend-related command is called.
+    - Cons:
+       - Have to fill the `ExpandedPersonListPanel` with something to display upon start up.
+       - There will be duplicate information on both the left and right pane when `ShowFriend` is called.
 
 ### 2. Events Feature
 
@@ -256,36 +358,41 @@ Events in Amigos are implemented in a similar fashion to Persons in AB3, for the
 
 Each event contains a `Name`, `DateTime`, `Description`, and a `FriendName` set. The latter represents the Friends that are linked to this event.
 
+<img src="images/EventPersonRelationshipClassDiagram.png" width="450" />
+
 #### 2.1 Implementing Event-Person relationships
-Key Consideration: How to implement the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
+Key Consideration: How to implement & maintain the validity of the relationship between `Event` and `Person` objects, since Events contain a list of friends involved.
 
 * **Current Implementation**
-  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. Validity checks are performed on initializing an `Event`, editing an `Event`, and when editing/deleting a `Person` to make sure that all `FriendName` objects in `Event` refer to actual `Person` objects in the `AddressBook`.
+  * This relationship is represented by a `FriendName` set that is encapsulated within the `Event` class. (see above diagram)
+  * `AddressBook` is responsible for the maintenance of the relationship's validity, since it encapsulates both the `UniquePersonList` and `Unique EventList`. The relationship is maintained by the following processes:
+    * The validity of the friend names (i.e. they must always correspond to actual `Person` objects in Amigos) is checked during the creation of and when editing an `Event`.
+    * After a `Person` class is edited or deleted, the changes are cascaded to the `FriendName` set as well.
   * Pros:
     * Reduce coupling between the `Event` and `Person` classes by making it a one-way dependency.
     * Reduce dependency further by only storing the `FriendName` object and not the entire `Person` object.
   * Cons:
-    * Need to ensure that each `FriendName` is valid and remains valid after changes to the `Model` e.g. if a friend's name is edited, or when a friend is deleted. Prone to mistakes if this is overlooked.
-    * Not terribly efficient, because to check validity there is a need to cycle through the entire list of `Person` objects for each `FriendName` stored. Similarly, it is inefficient when querying which `Event` objects contain a specific `Person`.
-    * Need to either constantly mutate or replace an `Event` to change `FriendName`, which can be troublesome.
+    * Prone to errors if validity checks are overlooked.
+    * Not terribly efficient, because to check validity there is a need to loop through the entire list of `Person` objects for each `FriendName` stored. Similarly, it is inefficient when querying which `Event` objects contain a specific `Person`.
+    * Need to either constantly mutate or replace an `Event` to reflect changes to `FriendName`, which can be troublesome.
 
 * **Alternative Implementation**
   * The relationship could alternatively be represented using an association class between `Event` and `Person`. This `EventPersonAssociation` could then be stored in a list in the `AddressBook`.
   * Pros:
     * Improve abstraction and cohesion by storing and handling the details of the Event-Person relationship in a separate class.
     * This allows us to avoid modifications to the `Event` and `Person` classes, and reduce coupling between them as the dependency is one-way from the `EventPersonAssociation` class.
-    * Could be easier to ensure that the relationships remain valid.
   * Cons:
     * Additional overhead as new class(es) will have to be created and tested.
+    * Does not solve the error-proneness of maintaining the relationship validity after changes to `Event` or `Person`.
     * If implemented using a `EventPersonAssociation` list, will not be very efficient as well when making queries/changes,especially if there are a large number of associations in the list
 
 #### 2.2 Implementing List event
 
-Key Consideration: How to implement `showevents` when there exists multiple tabs and other `show` commands such as `listfriends` and `showinsights`.
+Key Consideration: How to implement `listevents` when there exists multiple tabs and other `show` commands such as `listfriends` and `showinsights`.
 
 The following sequence diagram summarizes what happens when a user executes the `ShowEventsCommand`, the sequence diagram is similar for the other types of `show` commands which exist in Amigos.
 
-![ShowEventSequenceDiagram.png](images\ListEventsSequenceDiagram.png)
+<img src="images/ListEventsSequenceDiagram.png" width="700" />
 
 * **Current Implementation**
   * Using a `FilteredList` we are able to segregate events into past events and future events and display these events according to user's preference, this is largely similar to AB3's implementation of `list`, however we need to add the ability to automatically change tabs once this command is called, thus the `CommandResult` class was modified to contain a boolean `isEvent` which is `true` for any command related to events and enables the seamless switching between tabs.
@@ -306,6 +413,30 @@ The following sequence diagram summarizes what happens when a user executes the 
     * Increases the coupling between the `Commands` classes and the `MainWindow` since now we need to add a new switch case for every new command created.
     * Involves a lot of code duplication as well
     
+#### 2.3 Implementing the findevent command
+Key Consideration: Keeping track of the various filtering conditions that could be potentially set by the user, so that it is easily maintained and extended.
+
+<img src="images/FindEventSequenceDiagram.png" width="800" />
+
+* **Current Implementation**:
+  * The `FindEventCommandParser` class takes in the user's input and produces a List containing all the `Predicate<Event>` that can be derived from the input.
+  * Each predicate type implements the `Predicate<Event>` interface in its own class. e.g. `EventDateIsBeforePredicate`
+  * This list of `Predicate<Event>` is then passed to the `FindEventCommand` class via its constructor, and it will later filter the event list accessed by the UI based on all the given predicates.
+  * The sequence diagram shows how this process is carried out (with unnecessary details omitted) given two filtering conditions - by event name and by event date
+  * Pros:
+    * Easy to add new predicates and modify existing ones
+  * Cons: 
+    * A bit of extra overhead in code, as we need to create a class for each predicate to override the equals() method, which is needed in testing.
+    
+* **Alternative Implementation**:
+  * Create a single class that acts as a predicate for all possible filtering conditions i.e. an `EventFilterPredicate`.
+  * The `FindEventCommandParser` will instead initialize this predicate class and pass it on to the `FindEventCommand` class which will use it to filter the list.
+  * Pros: Less overhead because we only need to create a single predicate class for filtering the Event list.
+  * Cons:
+    * Violates both Separation of Concerns and the Single Responsibility Principle
+    * Harder to test due to increased complexity of the single predicate class
+    * Decreased modularity means it is harder to modify and extend in the future e.g. if we wanted to add more filtering conditions
+
 ### 3. Logs Feature
 
 _Amigos_ supports logs, via `addlog`, `deletelog` and `editlog` features.
