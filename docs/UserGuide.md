@@ -279,6 +279,9 @@ in the following format: dd-MM-yyyy HH:mm.
 
 # Demo Use Cases <a id="demos"></a>
 
+:information-source: Note that all these demos are done in the past, as such do remember to
+update the reminder date if you wish to follow the demo as [reminder dates cannot be in the past](#c-role-restrictions).
+
 ## Use Case #1: Applying to a role in a company <a id="usecase1"></a>
 
 Say you found a company with an opening that you are interested in. You did your research and found relevant information
