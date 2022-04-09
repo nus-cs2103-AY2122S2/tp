@@ -12,15 +12,15 @@ It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-##Overview
+## Overview
 
-##Summary of Contributions
+## Summary of Contributions
 [Click here](https://github.com/AY2122S2-CS2103T-W11-3/tp/commits?author=nnmoq)
 
-###Code contributed
+### Code contributed
 [Click here](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=nnmoq&zR=AY2122S2-CS2103T-W11-3%2Ftp%5Bmaster%5D&zACS=201.4071329319129&zS=2022-02-18&zFS=&zU=2022-04-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
-###Enhancements implemented
+### Enhancements implemented
 1. Student Functionality
    (Pull requests [#71](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/71) and [#146](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/146))
    - What it does
@@ -44,20 +44,20 @@ Given below are my contributions to the project.
       opening the user guide.
       - The user can simply click on the hyperlink and it opens the user guide on their default browser. This saves the user time.
 
-###Contributions to the UG
+### Contributions to the UG
       
 1. Created the initial format and draft of the user guide on our Team's shared google docs.
 2. Updated the user guide to use consistent wording.
-###Contributions to the DG
+### Contributions to the DG
 
 1. Added functionality and use-cases for `AddStudent` command.
 2. Added Sequence Diagram for `AddStudent` command.
 
-###Contributions to team-based tasks
+### Contributions to team-based tasks
 1. Created and assigned tasks to milestones 1.3 and 1.4
 2. Created 1.3.1 release and uploaded its jar file
 
-###Review/mentoring contributions
+### Review/mentoring contributions
 1. Made multiple good suggestions when reviewing PRs [#92](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/92#issuecomment-1072136978), 
 2. Debated with [james]() about how command shortcuts were to be implemented and justified my use of `Fallthroughs` over creating a `list` to hold all the command words for every command because we decided to not implement user specified keybinds.
 3. Spotted bugs made that were not caught such as [#249](https://github.com/AY2122S2-CS2103T-W11-3/tp/issues/249) and [#73](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/73/files) and provided suggestions to fix them.
