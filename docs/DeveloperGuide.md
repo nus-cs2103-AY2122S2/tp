@@ -257,7 +257,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | student                                                             | view all my contacts                                                                     |
 | `* * *`  | student                                                             | view all the details of each module I am a student of                                    |
 | `* * *`  | student                                                             | edit specific details of a contact                                                       | 
-| `* * *`  | student                                                             | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly                                       |
+| `* * *`  | student                                                             | find the relevant contact details (eg office location, email) to reach my professors or other students | I am able to contact others quickly                                       |
 | `* * *`  | student                                                             | find classmates and their contact details taking the same module                         | I can form teams with them for group projects                                          |
 | `* * `   | student with many modules                                           | flag any important contacts to saved contacts                                            | I can easily find the relevant contact in a hassle-free manner in the future           |
 | `* * `   | student with many modules                                           | remove modules that I have completed                                                     |
@@ -268,7 +268,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | student with a group in a module                                    | add group meeting times                                                                  | I will not forget the meeting time |
 | `* * `   | student with a group in a module                                    | remove meeting times after the meeting is done                                           |
 | `* * *`  | student with a group in a module                                   | view all the members of my group on one page                                             |
-| `* * *`     | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)                          | I can easily contact the relevant person with one command                              |
+| `* * *`     | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command                                 | I can use UniBook quickly                             |
 | `* *`      | student with many contacts in the UniBook                 | find a person by their name                                                                        | locate a person easily                                                                 |
 | `* *`    | student who is less tech-savvy and more visually-inclined           | navigate through different pages of UniBook with a click                                 | not have to remember commands to do a simple task like view another page, enhancing my user experience|
 
