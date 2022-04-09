@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of properties.
+RealEstatePro is a desktop app for managing contacts, optimized for real estate agents to manage their client's contacts and sales of HDB/Condominium properties.
 The app also includes various tools which aims to help agents in their work.
 
 # Reference
@@ -72,7 +72,7 @@ Some example commands you can try:
 - Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[p/PHONE_NUMBER]…` can be used as ` ` (i.e. 0 times), `p/12345`, `p/12345 p/54321` etc.
 
-- Inputting information after `pr/` & `p/` indicates the type of property a client is selling or the property preference that a client is looking to buy.<br>
+- Inputting information after `pr/` & `pf/` indicates the type of property a client is selling or the property preference that a client is looking to buy.<br>
   e.g. `pr/PROPERTY` can be used as `pr/East, Block 123, 2-room, $550000` which means that this client is a seller looking to sell a 2-room property at Block 123 located in the East, with a price of $550000.<br>More information about the required format of properties/preferences can be found in the next section.
 
 - client parameters can be in any order.<br>
@@ -107,7 +107,7 @@ Some example commands you can try:
 
 **:information_source: Notes about the image format:**<br>
 
-- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted. [exp. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pr/north,123 Street,1-room,$300000 i/JohnDoe.jpg:Profile Picture of John Doe`]
+- Image must be specified in the following format `i/FILEPATH:DESCRIPTION`. Make sure your file path is from the directory the jar file is run. Description is optional and can be omitted. [exp. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pf/north,123 Street,1-room,$300000 i/Livingroom(blk123).jpg:Living room of Block 123 #01-01`]
 
 </div>
 
@@ -169,10 +169,10 @@ A client is either a `buyer`, or `seller` based on whether he has a property or 
 
 Examples:
 
-- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000`
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000 i/living.png:living room`
+- `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pf/West, 1-room, $100000, $200000 i/Betsy Crowe.png:Profile Picture of Betsy Crowe`
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street block 123 #01-01, pr/East, John street block 123 #01-01, 2-room, $200000`
 
-    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addJohnDoeResult.png)
+    ![images/user-guide/addBetsyCroweResult.png](images/user-guide/addBetsyCroweResult.png)
 
 ### Editing a client: `edit`
 
@@ -219,7 +219,7 @@ Favourites the specified client in the RealEstatePro represented by a star as sh
 
 The user (real estate agent) will be able to view a more compact list of favourited clients in a new window called Favourites window.
 
-![images/Favouritestar.png](images/Favouritestar.png)
+![images/user-guide/favouritingBerniceYu.png](images/user-guide/favouritingBerniceYu.png)
 
 Format: `favourite INDEX`
 
@@ -240,6 +240,8 @@ Format:  `fw`
 2) Under it, click on `Favourites`.
 
 3) The system will pop up the Favourites window that displays the compacted list of clients that have been favourited.
+
+![images/user-guide/openFavouriteWindow.png](images/user-guide/openFavouriteWindow.png)
 
 ### Locating clients by name: `find`
 
