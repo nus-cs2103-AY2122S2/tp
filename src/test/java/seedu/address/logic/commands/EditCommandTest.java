@@ -54,9 +54,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withEducation(PersonBuilder.DEFAULT_EDUCATION)
-                    .withInternship(PersonBuilder.DEFAULT_INTERNSHIP).withModule(PersonBuilder.DEFAULT_MODULE)
+        Person editedPerson = new PersonBuilder()
+                    .withEducation(PersonBuilder.DEFAULT_EDUCATION)
+                    .withInternship(PersonBuilder.DEFAULT_INTERNSHIP)
+                    .withModule(PersonBuilder.DEFAULT_MODULE)
                     .withCca(PersonBuilder.DEFAULT_CCA).build();
+
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 

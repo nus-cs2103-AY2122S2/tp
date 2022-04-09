@@ -8,15 +8,18 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,33 +53,33 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
-    //@Test
-    //public void parse_oneFieldSpecified_success() {
-    // name
-    //Index targetIndex = INDEX_THIRD_PERSON;
-    //String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-    //EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-    //EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-    //assertParseSuccess(parser, userInput, expectedCommand);
+    @Test
+    public void parse_oneFieldSpecified_success() {
+        //name
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
-    // phone
-    //userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-    //descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-    //expectedCommand = new EditCommand(targetIndex, descriptor);
-    //assertParseSuccess(parser, userInput, expectedCommand);
+        //phone
+        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
-    // email
-    //userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-    //descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-    //expectedCommand = new EditCommand(targetIndex, descriptor);
-    //assertParseSuccess(parser, userInput, expectedCommand);
+        //email
+        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
-    // address
-    //userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-    //descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
-    //expectedCommand = new EditCommand(targetIndex, descriptor);
-    //assertParseSuccess(parser, userInput, expectedCommand);
-    //}
+        //address
+        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 
 
     @Test
