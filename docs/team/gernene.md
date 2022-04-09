@@ -33,7 +33,7 @@ Given below are my contributions to the project.
   * What it does: Adds a "See Attempts" button to each item in the assessment list. Clicking the button opens a panel that lists students' attempts that that assessment, particularly the grade they earned.
   * Justification: This feature helps users find information about their classes more quickly. It also gives them a comprehensive visualization of student performance in each class.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/#breakdown=true&search=Gernene)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=Gernene)
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme
