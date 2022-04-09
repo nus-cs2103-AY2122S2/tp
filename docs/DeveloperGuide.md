@@ -325,9 +325,8 @@ Given below is how the different classes work together in an example usage scena
     - Upcoming `Event`s related to the friend, wrapped in a `StackPane`
     - All `Log`s of the friend
 
-   An object diagram showing the `ExpandedPersonCard` of a friend named `Alex Yeoh`:  
-   ![ExpandedPersonCardObjectDiagram](images/ExpandedPersonCardObjectDiagram.png)
-
+   An object diagram showing the `ExpandedPersonCard` of a friend named `Alex Yeoh`:
+   <img src="images/ExpandedPersonCard_ObjectDiagram.png" height="200">
 
 ##### Design Considerations
 
@@ -621,7 +620,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. A friend with the same name already exists in Amigos.
     * 1a1. Amigos displays the existing friend with the same name and the corresponding error message.
-    * 1a2. Amigos clears the user input.
 
     Use case ends
 
@@ -646,30 +644,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case ends.
 
 
-* 3a. No name is entered by the user.
-    * 3a1. Amigos requests user to enter a name.
-    * 3a2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
+* 3a. No name or index is entered by the user.
+    * 3a1. Amigos requests user to enter a name or index.
+    * 3a2. User reenters the command along with a valid name or index and other relevant fields (at least one) to edit.
 
   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
 
-* 3b. Amigos finds no contact with the given name.
+* 3b. Amigos finds no contact with the given name or invalid index is given.
     * 3b1. Amigos requests user to check input and reenter.
-    * 3b2. User reenters the command along with a valid name and other relevant fields (at least one) to edit.
+    * 3b2. User reenters the command along with a valid name or index and other relevant fields (at least one) to edit.
 
   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
 
-* 3c. A valid name is entered by user but no fields to edit are given.
+* 3c. A valid name or index is entered by user but no fields to edit are given.
     * 3c1. Amigos requests user to enter at least one field to edit.
-    * 3c2. User reenters command and name, along with at least one field to edit.
+    * 3c2. User reenters command and name or index, along with at least one field to edit.
 
   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
 **Use case: F03 - Delete a friend**
 
 **Guarantees** 
-* An existing friend in Amigos will be deleted only if the name input matches that of an existing friend in Amigos.
+* An existing friend in Amigos will be deleted only if the name input matches that of an existing friend in Amigos
+  or a valid index is provided.
 
 **MSS**
 
@@ -685,24 +684,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
     * Use case ends.
 
-* 2b. User requests to delete all friends.
-   * 2b1. Amigos deletes all friends and clears the user input.
-   
-   Use case ends.
     
-
-* 3a. No name is entered by the user. 
-   * 3a1. Amigos requests user to enter a name.
-   * 3a2. User reenters the command along with a valid name.
+* 3a. No name or index is entered by the user. 
+   * 3a1. Amigos shows an error message showing the correct command format.
+   * 3a2. User reenters the command along with a valid name or index.
      
-   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again. 
+   Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again. 
 
 
 * 3b. Amigos finds no contact with the given name.
-    * 3b1. Amigos requests user to check input and reenter.
+    * 3b1. Amigos throws an error message that the name entered is invalid.
     * 3b2. User reenters the command along with a valid name. 
 
-    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
+    Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
+
+* 3c. An invalid index is provided.
+    * 3c1. Amigos throws an error message that the index entered is invalid.
+    * 3c2. User reenters the command along with a valid index.
+
+  Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
 
 
 **Use case: F04 - Checking details of a friend**
@@ -711,26 +711,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to see all friends in Amigos.
 2. Amigos switches the GUI to the friends tab and shows all friends.
-4. User requests to view full details of a particular friend.
-5. Amigos displays a page containing the full details of that particular friend accompanied by some logs.
+3. User requests to view full details of a particular friend.
+4. Amigos displays a page containing the full details of that particular friend.
 
 Use case ends
 
 **Extensions**
-* 3a. There are no existing friends.
-    * 3a.1 Amigos displays an empty interface with the message “No friends yet”.
+* 3a. The friend does not exist.
+    * 3a1. Amigos shows an error message.
 
       Use case ends
   
-* 4a. User wants to see all the logs of a person
-    * 4a.1 Amigos displays a page containing the full details of that friend accompanied by all the logs
-      
-      Use Case ends.
+* 3b. Amigos detects an issue in the input (e.g. incorrect input format)
+    * 3b1. Amigos displays the error feedback to the user.
+    * 3b2. User reenters command with a valid input. 
   
-* 4b. Amigos detects an issue in the input (e.g. incorrect input format, cannot find friend in the system)
-    * 4b.1 Amigos displays the error feedback to the user.
-  
-      Use case resumes at 4
+      Use case resumes at 4 if newly-entered user input is valid, otherwise it may reach 3a/3b again.
+
+**Use case: F05 - Finding a friend**
+
+**MSS**
+
+1. User requests to list friends.
+2. Amigos shows a list of friends.
+3. User enters search keyword(s) to find a specific friend/friends based on name/tags/log titles.
+4. Amigos displays a list containing friends who match at least one of the keyword(s) entered by user.
+
+Use case ends
+
+**Extensions**
+
+* 3a. User enters invalid keywords.
+    * 2a1. Amigos throws an error message and requests user to check input.
+    * 2a2. User corrects command, and keys in edited command.
+
+  Use case resumes at step 4 if newly-entered command is valid.
 
 **Use case: L01 - Adding a new log to a friend**
 
@@ -741,31 +756,23 @@ Use case ends
 
 
 1. User decides to add a new log to a specific friend. 
-2. User keys in necessary details with the one-line command 
-3. Amigos displays the friend and the specific log, and clears the input
+2. User keys in necessary details.
+3. Amigos adds the log to the friend.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Amigos finds no friend with the given name.
-  * 2a1. Amigos clears the input, and requests user to check input and reenter.
+* 2a. Amigos finds no friend with the given name or index.
+  * 2a1. Amigos requests user to check input and reenter.
   * 2a2. User corrects command, and keys in edited command.
 
   Use case resumes at step 3.
 
 
-* 2b. Amigos detects that user has requested for a pop-up window in the command.
-  * 2b1. Amigos creates a separate window, allowing for long-form text to be keyed in.
-  * 2b2. User keys in long form text into pop-up window, with first line as title.
-  * 2b3. User confirms entry, closing the window.
-
-  Use case resumes at step 3.
-
-
-* 2d. Amigos detects that an invalid format of the command has been keyed in.
-  * 2d1. Amigos clears the input and prompts the user with potential corrections, and requests for input.
-  * 2d2. User corrects command, and keys in edited command.
+* 2b. Amigos detects that an invalid format of the command has been keyed in.
+  * 2b1. Amigos clears the input and prompts the user with potential corrections, and requests for input.
+  * 2b2. User corrects command, and keys in edited command.
   
   Use case resumes at step 3.
   
@@ -780,15 +787,15 @@ Use case ends
 
 
 1. User decides to edit a log in a specific friend. 
-2. User keys in necessary details with the one-line command. 
-3. Amigos clears the input and displays the friend and the specific log.
+2. User keys in necessary details. 
+3. Amigos edits the specific log of the friend.
 
     Use case ends.
 
 
 **Extensions**
 
-* 2a. Amigos finds no friend with the given name.
+* 2a. Amigos finds no friend with the given name or index.
     * 2a1. Amigos requests user to check input and reenter.
     * 2a2. User corrects command (if desired), and keys in edited command.
 
@@ -808,18 +815,8 @@ Use case ends
 
     Use case resumes at step 3.
 
-
-
-* 2d. Amigos detects that user has requested for a pop-up window in the command.
-    * 2d1. Amigos creates a separate window, allowing for long-form text to be keyed in.
-    * 2d2. User keys in long form text into pop-up window in an appropriate format.
-    * 2d3. User confirms entry, closing the window.
-
-  Use case resumes at step 3.
-
-
-* 2e. Amigos detects that the requested friend has no logs to be edited.
-    * 2e1. Amigos clears the input and notifies the user that this friend has no logs to be edited.
+* 2d. Amigos detects that the requested friend has no logs to be edited.
+    * 2d1. Amigos clears the input and notifies the user that this friend has no logs to be edited.
 
   Use case ends.
 
@@ -832,7 +829,7 @@ Use case ends
 **MSS**
 
 1. User decides to delete a log/logs in a specific friend.
-2. User keys in necessary details with the one-line command.
+2. User keys in necessary details.
 3. Amigos clears the input and provides feedback of deletion success.
 
    Use case ends.
@@ -840,7 +837,7 @@ Use case ends
 
 **Extensions**
 
-* 2a. Amigos finds no friend with the given name.
+* 2a. Amigos finds no friend with the given name or index.
     * 2a1. Amigos requests user to check input and reenter.
     * 2a2. User corrects command (if desired), and keys in edited command.
 
@@ -936,24 +933,51 @@ Use case ends
      
      Use case ends.
 
-**Use case: E03 - Checking all events**
+**Use case: E03 - Checking upcoming events**
 
 **Guarantees**
 
-* If any events exist within the system they will be displayed.
+* If any upcoming events exist within the system they will be displayed.
 
 **MSS**
 
-1. User requests to show all events
-2. Amigos switches the GUI to the events tab and displays all the stored events.
+1. User requests to show all upcoming events.
+2. Amigos switches the GUI to the events tab and displays all the upcoming events.
     
    Use case ends.
 
 **Extensions**
-* 2a. There are no events to show.
-    * 2a1. Amigos displays an empty interface with no entries and the message “No events”.
+
+* 1a. User requests to show all events, both past and upcoming. 
+    * 1a1. Amigos switches the GUI to the events tab and displays all stored events.
     
     Use case ends.
+
+* 2a. There are no events to show.
+    * 2a1. Amigos displays an empty interface.
+    
+    Use case ends.
+
+**Use case : S01 - Show insights**
+
+**Guarantees**
+
+* Insights (number of logs and number of events) of each friend would be displayed.
+
+**MSS**
+
+1. User requests view insights of all friends in Amigos.
+2. Amigos switches the GUI to the Insights tab and displays all statistics.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no friends to show insights of.
+    * 2a1. Amigos displays an empty interface.
+
+  Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -996,7 +1020,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -1013,7 +1036,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 

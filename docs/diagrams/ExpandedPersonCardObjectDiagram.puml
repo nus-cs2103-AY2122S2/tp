@@ -37,6 +37,8 @@ upcomingEvents -down-> EventCardOne
 upcomingEvents -down-> EventCardTwo
 expcard -down-> tags
 expcard -down-> logs
+description -[hidden]-> tags
+logs -[hidden]-> upcomingEvents
 tags -down-> tagLabelOne
 tags -down-> tagLabelTwo
 

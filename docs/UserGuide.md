@@ -72,7 +72,7 @@ Adds a new friend to _Amigos_. A friend has:
 * Note that there can be no duplicate friends having the same name.
 
 **Examples**:
-* `addfriend n/John Doe p/98765432 a/John street, block 123, #01-01 t/Classmate
+* `addfriend n/John Doe p/98765432 a/John street, block 123, #01-01 t/Classmate`
   ![Addfriend_JohnDoe](images/Addfriend_JohnDoe.png)
 
 * `addfriend n/John Doe t/Friend t/Banker`
