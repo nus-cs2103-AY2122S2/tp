@@ -153,11 +153,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **Implementation**
+## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+## Delete student contact feature
+
 ## Add group feature
+
 The `addgroup` command mechanism is facilitated by the `AddGroupCommand` and the `AddGroupCommandParser`.
 It allows users to add a not already existing group to the ArchDuke student group list. 
 It uses the `AddressBook#addGroup(Group group)` which is exposed in the `Model` 
@@ -179,12 +182,18 @@ The following activity diagram summarizes what happens when a user executes the 
 ## Delete group feature
 to be updated...
 
-### Add task feature to an existing group feature
+## Add task to an existing group feature
 
-### Delete task from an existing group feature
+The proposed `addTask` is implemented by adding enhancements to the current `Group` in the `AddressBook`.
+Similar to how a `Person` stores identities such as `Name` or `Phone`, this feature enables `Group` to stores
+`Task`.
+
+## Delete task from an existing group feature
+
 to be updated
 
-### View task feature
+## View task feature
+
 to be updated
 
 ## Assign feature
@@ -198,6 +207,23 @@ is called on `UniqueGroupList` to update the `Group` with the assigned `Person`.
 The following sequence diagram shows how the `assign` mechanism works:
 
 To be updated...
+
+## Find student contact feature
+
+The current FindCommand allows the search of a contact through keywords.
+The keywords used are of `Name` of a `Person` and hence are facilitated by a class `NameContainsKeywordsPredicate`.
+The enhanced FindCommand allows the users to search a contact through keywords
+which are the attributes of a person such as `Phone`, `Email`, `AcademicMajor` and `Tag`.
+
+The new feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
+implemented by all the `Person`'s attributes. Hence, there are more classes being introduced -
+`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and so on.
+
+Given below is the example usage scenario and how the FindCommand behaves at each step
+
+Step 1. How the initial FindCommand works with the `NameContainsKeywordsPredicate`
+
+Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -283,32 +309,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Adding tasks to a group feature
 
-#### Proposed implementation
-
-The proposed `addTask` is implemented by adding enhancements to the current `Group` in the `AddressBook`.
-Similar to how a `Person` stores identities such as `Name` or `Phone`, this feature enables `Group` to stores
-`Task`. 
-
-### \[Proposed\] Upgrade the feature of FindCommand
-
-#### Proposed Implementation
-
-The current FindCommand allows the search of a contact through keywords.
-The keywords used are of `Name` of a `Person` and hence are facilitated by a class `NameContainsKeywordsPredicate`.
-The enhanced FindCommand allows the users to search a contact through keywords 
-which are the attributes of a person such as `Phone`, `Email`, `AcademicMajor` and `Tag`.
-
-The new feature is made possible through introducing an `AttributeContainsKeywordsPredicate` interface which is
-implemented by all the `Person`'s attributes. Hence, there are more classes being introduced -
-`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate` and so on.
-
-Given below is the example usage scenario and how the FindCommand behaves at each step
-
-Step 1. How the initial FindCommand works with the `NameContainsKeywordsPredicate`
-
-Step 2. How it currently works with `AttributeContainsKeywordsPredicate`
 
 
 
