@@ -7,6 +7,12 @@ import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
+import static seedu.ibook.logic.parser.ParserUtil.parseDescription;
+import static seedu.ibook.logic.parser.ParserUtil.parseDiscountRate;
+import static seedu.ibook.logic.parser.ParserUtil.parseDiscountStart;
+import static seedu.ibook.logic.parser.ParserUtil.parseName;
+import static seedu.ibook.logic.parser.ParserUtil.parsePrice;
 
 import java.util.stream.Stream;
 
@@ -42,19 +48,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // Required fields
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
+        Name name = parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Price price = parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
 
         // Optional fields
-        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY)
+        Category category = parseCategory(argMultimap.getValue(PREFIX_CATEGORY)
                 .orElse(Category.DEFAULT_CATEGORY));
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
+        Description description = parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)
                 .orElse(Description.DEFAULT_DESCRIPTION));
         DiscountRate discountRate =
-                ParserUtil.parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNT_RATE)
+                parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNT_RATE)
                 .orElse(DiscountRate.DEFAULT_DISCOUNT_RATE));
         DiscountStart discountStart =
-                ParserUtil.parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNT_START)
+                parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNT_START)
                 .orElse(DiscountStart.DEFAULT_DISCOUNT_START));
 
         Product product = new Product(name, category, description, price, discountRate, discountStart);

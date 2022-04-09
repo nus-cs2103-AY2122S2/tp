@@ -45,6 +45,81 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    //---------------- Tests for isNonZeroUnsignedCompoundInteger ----------------------------
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_doesNotContainHyphen_returnFalse() {
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(""));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("  "));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("aa"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1a"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("11"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1 1"));
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_emptyParts_returnFalse() {
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(" -"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(" -"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("- "));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(" - "));
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_nonNumbers_returnFalse() {
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("a-1"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1-a"));
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_containsZero_nonZeroValuesReturnTrue() {
+
+        // value is zero
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("0-2"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("2-0"));
+
+        // zero as prefix
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("01-2"));
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("1-02"));
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("01-02"));
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("01-02"));
+
+        // number contains zero digit
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("10-20"));
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_signed_returnFalse() {
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("-1-2"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("+1-2"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1-+2"));
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1--2"));
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_containsWhitespace_returnFalse() {
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(" 1-2")); // Leading spaces
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1-2 ")); // Trailing spaces
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1 -2")); // Spaces in the middle
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger("1- 2")); // Spaces in the middle
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_numberExceedingInteger_returnFalse() {
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(
+                String.format("%s-1", Long.toString(Integer.MAX_VALUE + 1))));
+
+        assertFalse(StringUtil.isNonZeroUnsignedCompoundInteger(
+                String.format("1-%s", Long.toString(Integer.MAX_VALUE + 1))));
+    }
+
+    @Test
+    public void isNonZeroUnsignedCompoundInteger_validCompoundInteger_returnTrue() {
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("1-2"));
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("3-10"));
+        assertTrue(StringUtil.isNonZeroUnsignedCompoundInteger("3-1"));
+    }
+
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 

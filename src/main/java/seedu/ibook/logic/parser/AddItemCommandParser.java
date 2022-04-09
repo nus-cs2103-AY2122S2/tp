@@ -3,6 +3,9 @@ package seedu.ibook.logic.parser;
 import static seedu.ibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_QUANTITY;
+import static seedu.ibook.logic.parser.ParserUtil.parseExpiryDate;
+import static seedu.ibook.logic.parser.ParserUtil.parseIndex;
+import static seedu.ibook.logic.parser.ParserUtil.parseQuantity;
 
 import java.util.stream.Stream;
 
@@ -30,10 +33,10 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Index index = parseIndex(argMultimap.getPreamble());
 
-        ExpiryDate expiry = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
-        Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+        ExpiryDate expiry = parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY_DATE).get());
+        Quantity quantity = parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
 
         ItemDescriptor itemDescriptor = new ItemDescriptor(expiry, quantity);
 
