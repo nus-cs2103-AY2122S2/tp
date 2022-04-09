@@ -520,8 +520,7 @@ The following activity diagram summarizes what happens when a user executes a `f
 
 Below is a sequence diagram and explanation of how the `AddScheduleCommand` is executed.
 
-<img src="images/TestAddScheduleSequenceDiagram-0.png"/>
-<img src ="images/TestAddScheduleSequenceDiagram-1.png"/>
+<img src="images/AddScheduleSequenceDiagram.png"/>
 
 **Step 1.** The user executes the command `schedule add candidate/1 at/24-05-2022`.
 
