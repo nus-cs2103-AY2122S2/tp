@@ -935,7 +935,7 @@ The `history` command displays a list of the user's previously executed commands
 
 ![AddToCommandHistorySequenceDiagram](images/AddToCommandHistorySequenceDiagram.png)
 
-4. When the user inputs `history`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
+4. When the user inputs "history", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`.
 5. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
 6. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
 7. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
