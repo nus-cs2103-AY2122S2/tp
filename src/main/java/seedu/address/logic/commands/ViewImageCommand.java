@@ -54,10 +54,4 @@ public class ViewImageCommand extends Command {
         }
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-            || (other instanceof ViewImageCommand // instanceof handles nulls
-            && targetIndex.equals(((ViewImageCommand) other).targetIndex));
-    }
 }
