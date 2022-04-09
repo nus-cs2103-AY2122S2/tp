@@ -482,7 +482,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
 
 ### Deleting a person
 
@@ -498,7 +498,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-1. _{ more test cases …​ }_
+
 
 ### Deleting a tag
 1. Deleting a tag while all tags are being shown
@@ -513,8 +513,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete_tag`, `delete_tag x`, (where x is larger than the list size),`delete_tag abc`, `...`, (where abc is not integer) <br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+       
 
 ### Detach a tag from a profile
 1.  Detach a tag from a profile in index
@@ -530,7 +529,14 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect detach commands to try: `detach`, `detach t/TAGNAME i/x`, (where x is larger than the list size), `...`<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Filter contacts through tag
+1. Filter the full contact list using a tag
+    1. Prerequisites: Have an existing tag with some profiles attached to it
+    1. Test case: `filter TAGNAME`<br>
+       Expected: All contacts in displayed list are the ones attached to the given tag. If no profile is attached to the tag,
+       the displayed list will be empty.
+    1. Test case: `filter INVALID_TAGNAME`<br>
+        Expected: List is not filtered. Error details shown in result display area.
 
 ### Saving data
 
