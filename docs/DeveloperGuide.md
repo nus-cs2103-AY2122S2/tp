@@ -161,13 +161,13 @@ The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateI
 populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
 method `MainWindow#handleInfoPanelUpdate()`.
 
-Refer to [**Viewing a Lesson or Student's details**](#Viewing a Lesson or Student's details) implementation.
+Refer to [Viewing a Lesson or Student's details](#viewing-a-lesson-or-students-details) implementation.
 
 [return to top ↑](#table-of-contents)
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/AY2122S2-CS2103T-W11-3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
