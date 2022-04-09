@@ -37,7 +37,7 @@ activate EditPersonDescriptor
 EditPersonDescriptor --> EditCommandParser : d
 deactivate EditPersonDescriptor
 
-EditCommandParser --> EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor : setName()
 activate EditPersonDescriptor
 EditPersonDescriptor -[hidden]-> EditCommandParser
 EditPersonDescriptor -[hidden]-> EditCommandParser
