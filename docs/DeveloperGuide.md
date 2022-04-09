@@ -366,50 +366,71 @@ return a CommandResult showing that the update has been successful.
 separated with an **empty space** must be provided. Other than the time values being valid,
 the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
 
-### **The `Find` command**
-- The ``Find`` command has two seperate arguments `task/` and `day/`
-- The `task/` argument has an additional `desc/` as a keyword which is the search term to search for all the tasks that
-  contains the keyword
-- `day/` arguments searches for either the deadline or the event that has this date as the deadline/ event that will
-  be held
+### Finding tasks and employees features
 
-#### How it is implemented
-1. When the user enters the find command, the FindCommandParser searches for either the `task/` or the `day/` argument
-2. Then, the FindCommandParser will self invoke either the `findCommandTask()` or `findCommandDate()` respectively.
-3. `findCommandTask()` will return the FindCommand that searches for all the task which contains the given keyword whereas `findCommandDate()` searches for deadline/event with the given date
-4. The FindCommand will execute and update the Model with the updateFilteredTaskList where the filtered task list will be updated with the tasks that statisfy the predicate
-5. After execution, the FindCommand will return the CommandResult that contains a string of the outcome of the command.
+#### All about this feature
 
-#### Sequence diagram when a user enters the command `find task/ desc/ Genshin`
+The feature for finding task and employee uses the following two commands:
+* `findTask`: Find tasks
+* `findEmployee`: Finds employees
 
-<img src="images/FindTask.png" width="450" />
+`findEmployee` improves on the `find` feature in AB3 where instead on finding persons (on in the case of our project
+manageezpz, we now refer persons as employees) based only on their names, we can also find employees based their other
+two properties, phone number and email.
 
-#### Improvements needed
-* As we are also listing employees as well, we also need an argument that searches for the number of people instead
-* In v1.3, as priority tagging is implemented for all tasks, we also need an argument to find all tasks.
-* For employee searching, we can also implement more arguments to search for an employee using the employee's components
-  as the search term.
+`findTask` similarly searches tasks based on any of their attributes (as stated in the task implementation) 
+stated by the user.
 
+#### Design of the find feature
 
-### **The `List` command**
-- The `List` command shows all the tasks in the list.
-- It has arguments such as `todo/`, `deadline/` and `event/` which searches for all todos, deadlines and events respectively.
+The find feature utilizes mainly the following classes:
+* Parser: 
+  * Check whether the attributes for either task and employees as entered by the user are valid as stated in the `Task`
+    and `Person` (class to represent employee) respectively.
+  * The first class when user enters `findTask`/`findEmployee`.
+  * Parser will first check if at least one attribute is entered.
+  * After which, it will check whether the attributes entered are valid as implemented in the `Task` and `Person` method.
+  * If the user fails to enter any of the attributes, or enters an invalid attribute, the Parser class will collate all
+    the mistakes the user has made as error messages, and it will be shown to the user.
+  * Otherwise, the parser will create a predicate by indicating all attributes entered by the user and setting 
+    attributes not specified by the user as null (use optional parameter if the programming language used permits).
+  * The parser class will then return a command class, using the predicate as the argument.
+  * `FindTaskCommandParser` for findTask and `FindEmployeeCommandParser` for findEmployee
+* Command:
+  * Executes command by showing all tasks/employee based on the attributes specified by the user.
+  * `FindTaskCommand` for findTask and `FindEmployeeCommand` for findEmployee
+* Predicate:
+  * The parser class creates this predicate which will be used to filter tasks/employees based on the attributes given.
+  * If the attribute is set to null, it will default to true, otherwise, the predicate will check whether the 
+    task/employee has these attributes.
+  * The results from the attributes (or true if not specified) are and together to produce the result from the predicate.
+  * `TaskMultiplePredicate` for filtering task and `PersonMultiplePredicate` for filtering employees.
+  
+#### Implementation flow for the find task/employee feature
+Given below is the implementation of the find task command when the user enters `findTask priority/HIGH event/`
 
-#### How it is implemented
-1. When the user enters `List`, the ListCommandParser will simply return a ListCommand
-2. If the user enters additional options such as `todo/`, `deadline/` and `events/`, ListCommandParse will then check if the user enters a valid option. ListCommandParse will throw an ParseException if the user enters an invalid option, or more than 1 option.
-3. When the ListCommand is executed, it will update the model to show all the task in the task list
-4. If options are provided, the command will update the model with all tasks with the specified task type.
-5. After execution, ListCommand will return a CommandResult that contains the message of the outcome of the command
+1. The user input will be sent to `FindTaskCommandParser`
+2. `FindTaskCommandParser` will note down that the task type to search for is an event with a high priority.
+3. Since the inputs that the user entered is valid, the parser will create a `TaskMultiplePredicate` using priority 
+   `high` and task type `event` while setting the rest of the attributes to `null`.
+4. The attribute will be used as the argument to create the `FindTaskCommand`
+5. When the `FindTaskCommand` executes, the predicate will be sent to the `ModelManager` to filter out tasks that 
+   satisfy the predicate.
 
+![Expected find task command result](images/FindTaskCommand.png)
 
-#### Sequence diagram when the user enters `list todo/`
+*The expected result for `findTask priority/HIGH event/`*
 
-<img src="images/List.png" width="450"/>
+![UML diagram for find task command](images/FindTaskCommandSequenceDiagram.png)
+*The UML Sequence diagram for `findTask priority/HIGH event/`*
 
-#### Improvements to be added
-* We feel that the options may be better suited for the find option
-* The tasks needs to be updated into the UI.
+#### Design Consideration
+* Allow usage of multiple attributes as search term to filter out tasks/employee that has the specified attributes.
+* Useful for finding tasks based on priority and whether it is marked or not.
+
+#### UML Diagram for finding task/employee
+
+![UML Diagram for finding task/employee](images/FindTaskClassDiagram.png)
 
 ### Tagging Task to Employee feature
 
@@ -481,20 +502,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                                               | So that I can…​                                                                                   |
-|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *`  | user           | add a task to the database                                                 | better organise my time                                                                           |
-| `* * *`  | user           | delete a task from the database                                            | better organise my list                                                                           |
-| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                                                              |
-| `* * *`  | user           | able to edit a task                                                        | update any details                                                                                |
-| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                                                             |
-| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week                                                 |
-| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                                                           |
-| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                                                          |
-| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload. For example, command: ``Track <name> |
-| `* *`    | new user       | have a more begineer-friendly user guide                                   | learn more about the product                                                                      |
-| `* *`    | recurring user | be able to see tasks that are due within X number of days                  | better manage my time                                                                             |
-| `* *`    | advance user   | able to sort tasks based on a specific location                            | better plan my travel to that location                                                            |
+| Priority | As a …​        | I want to …​                                                               | So that I can…​                                               |
+|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | user           | add a task to the database                                                 | better organise my time                                       |
+| `* * *`  | user           | delete a task from the database                                            | better organise my list                                       |
+| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                          |
+| `* * *`  | user           | able to edit a task                                                        | update any details                                            |
+| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                         |
+| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week             |
+| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                       |
+| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                      |
+| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload.  |
+| `* *`    | new user       | have a more beginner-friendly user guide                                   | learn more about the product                                  |
 
 
 ### Use cases
@@ -804,12 +823,12 @@ Preconditions: User is currently using ManageEZPZ.
     * 1a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
       correct syntax format.
-    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List, 
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List,
       indicating to the User to enter a valid Task number.
-    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four: 
-           None, Low, Medium, High. ManageEZPZ reminds the User to use a valid 
-           Priority.
-  
+    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four:
+      None, Low, Medium, High. ManageEZPZ reminds the User to use a valid
+      Priority.
+
       Use Case ends.
 
 ****
@@ -1100,6 +1119,57 @@ testers are expected to do more *exploratory* testing.
     2. Command: `tagPriority 1 priority/Important` <br>
        Expected: Similar to previous.
 
+
+### Finding employees
+
+1. Find employees with the given predicate
+
+    1. Prerequisites: List all employees using the `listEmployee` command.
+
+    2. Test case: `findEmployee`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Valid test cases to try: `findEmployee n/Alice`, `findEmployee p/999`, `...` (So long as the task attribute are
+        valid)<br>
+        Expected: All employees with the specified attributes will be listed.
+
+    4. Other invalid test cases to try: `findEmployee someOtherPrefix/`, `findEmployee n/Jame$`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
+### Listing all employees
+
+1. List down all employees
+    1. Prerequisites: Filter employees using `findEmployee` command.
+    2. Test Case: `listEmployee`<br>
+       Expected: Shows all the employees in ManageEZPZ
+
+### Finding tasks
+
+1. Find tasks with the given predicate
+
+    1. Prerequisites: List all tasks using the `listTask` command.
+
+    2. Test case: `findTask`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Test case: `findTask todo/ date/2022-01-01`<br>
+       Expected: Error showing that todo and date option cannot be together.
+   
+    4. Valid test cases to try: `findTask todo/`, `findTask desc/Meeting`, `...` (So long as the task attribute are
+       valid)<br>
+       Expected: All tasks with the specified attributes will be listed.
+   
+    5. Other invalid test cases to try: `findTask someOtherPrefix/`, `findTask date/1-1-2022`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
+### Listing all tasks
+
+1. List down all tasks
+   1. Prerequisites: Filter tasks using `findTask` command.
+   2. Test Case: `listTask`<br>
+      Expected: Shows all the tasks in ManageEZPZ
 
 ### Saving data
 
