@@ -187,7 +187,7 @@ Given below is the example usage scenario and how the add group mechanism behave
 2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddGroupCommandParser`.
 
 3. The `AddGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes. 
-In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
+It also checks whether the command is in the correct format. In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
 `ParseException` would be thrown.
 
 4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `AddGroupCommandParser` will then call the `ParserUtil#parseGroupName()` 
@@ -231,11 +231,86 @@ the student group list via the command `delgroup g/GROUP_NAME`.
 
 ### How it is implemented
 
-The `delgroup` command mechanism is facilitated by the 
+The `delgroup` command mechanism is facilitated by the `DeleteGroupCommand` and the `DeleteGroupCommandParser`. 
+It allows users to delete an already-existing-group from the ArchDuke student group list. It uses the `AddressBook#removeGroup(Group key)`
+which is exposed in the `Model` interface as `Model#deleteGroup(Group target)`. Then, the `remove(Group toRemove)` is called on the `UniqueGroupList`
+to remove the group from the group list.
+
+Given below is the example usage scenario and how the delete group mechanism behaves at each step.
+
+#### Parsing user input
+
+1. The user inputs the `delgroup` command and provide the `GROUP_NAME` of the group in which the user wants to remove.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `DeleteGroupCommandParser`.
+
+3. The `DeleteGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+    It also checks whether the command is in the correct format. In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   `ParseException` would be thrown.
+
+4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `DeleteGroupCommandParser` will then call the `ParserUtil#parseGroupName()`
+   method to check for the validity of the input `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the
+   `GROUP_NAME` specified is invalid.
+
+5. The `DeleteGroupCommandParser` then creates the `DeleteGroupCommand` based on the processed input.
+
+#### Command execution
+
+6. The `LogicManager` executes the `DeleteGroupCommand`.
+
+7. The `DeleteGroupCommand` calls the `Model#getFilteredGroupList()` to get the current unmodifiable view of the filtered group list.
+
+8. The `DeleteGroupCommand` calls the `contains()` method on the obtained filtered group list to check if the group with the same `GROUP_NAME` existed in the group list.
+      `CommandException` would be thrown if there exists no group with the same group name.
+
+9. The `DeleteGroupCommand` then calls the `Model#deleteGroup()` to delete the input group to from the group list.
+
+#### Displaying of result
+
+10. Finally, the `DeleteGroupCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+    The GUI would also be updated on this change in the group list and update the display of group list accordingly.
+
+The following sequence diagram shows how the `delgroup` mechanism works:
+
+![](images/DeleteGroupSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `delgroup` command:
+
+![](images/DeleteGroupCommandActivityDiagram.png)
 
 ### Design considerations
 
-to be updated...
+#### Aspect: What the delgroup command deletes by
+
+* **Alternative 1 (current choice)**: Deletes a group by the group name.
+
+  * Pros: It is more intuitive as user who wants to delete a group would **already know** what group he/she wants to delete, and hence the group name.
+  Users would not have to search through the group list to see which index the group he/she wants to delete is located. 
+  Searching through the list may be especially troublesome if there are many groups in the group list.
+  
+  * Cons: User would have to type the entire group name.
+  
+* **Alternative 2**: Deletes a group by the index of the group in the list.
+
+  * Pros: Users could delete the group by just typing a single number. This may be faster if the group is already visible in the group list without having to search
+    (e.g. when the target group to delete is at the top of the list).
+  
+  * Cons: If there are many groups in the group list, users would have to execute another command (i.e. to find the group to get the group index) 
+  before being able to delete the desired group.
+
+#### Aspect: Allowing reference to group name to be case-insensitive
+
+The implementation takes in user experience as one of the most important decision when deciding how a feature should behave. 
+Since the implementation chooses to delete a group by its group name, there was a concern about the user having to type possibly lengthy
+group name to refer to the target group to delete. <br>
+
+To enhance the user experience for the target group (i.e. fast typists), the reference to the group is designed such that it is case-insensitive.
+This means that the users would not need to worry about cases as long as the spelling and spacing are correct. 
+The aim is to make reference to the target group as easy as possible and to minimize typo errors.
 
 ## Add task to an existing group feature
 

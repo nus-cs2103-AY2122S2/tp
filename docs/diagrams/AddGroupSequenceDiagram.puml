@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ArchDukeParser" as ArchDukeParser LOGIC_COLOR
 participant ":AddGroupCommandParser" as AddGroupCommandParser LOGIC_COLOR
 participant "g:AddGroupCommand" as AddGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("addgroup g/example")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addgroup g/example")
-activate AddressBookParser
+LogicManager -> ArchDukeParser : parseCommand("addgroup g/example")
+activate ArchDukeParser
 
 create AddGroupCommandParser
-AddressBookParser -> AddGroupCommandParser
+ArchDukeParser -> AddGroupCommandParser
 activate AddGroupCommandParser
 
-AddGroupCommandParser --> AddressBookParser
+AddGroupCommandParser --> ArchDukeParser
 deactivate AddGroupCommandParser
 
-AddressBookParser -> AddGroupCommandParser : parse("g/example")
+ArchDukeParser -> AddGroupCommandParser : parse("g/example")
 activate AddGroupCommandParser
 
 create AddGroupCommand
@@ -36,15 +36,15 @@ activate AddGroupCommand
 AddGroupCommand --> AddGroupCommandParser : g
 deactivate AddGroupCommand
 
-AddGroupCommandParser --> AddressBookParser : g
+AddGroupCommandParser --> ArchDukeParser : g
 deactivate AddGroupCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddGroupCommandParser -[hidden]-> AddressBookParser
+AddGroupCommandParser -[hidden]-> ArchDukeParser
 destroy AddGroupCommandParser
 
-AddressBookParser --> LogicManager : g
-deactivate AddressBookParser
+ArchDukeParser --> LogicManager : g
+deactivate ArchDukeParser
 
 LogicManager -> AddGroupCommand : execute()
 activate AddGroupCommand
