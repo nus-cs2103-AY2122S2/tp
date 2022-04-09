@@ -55,6 +55,11 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        if (commandWord.equals(ClearCommand.COMMAND_WORD)) {
+            return new ClearCommandParser().parse(userInput);
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -77,9 +82,6 @@ public class AddressBookParser {
 
         case DetachTagCommand.COMMAND_WORD:
             return new DetachTagCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
