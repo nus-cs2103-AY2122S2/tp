@@ -2,8 +2,8 @@ package seedu.ibook.logic.commands.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02;
+import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q0_2022_03_02_KAYA;
 import static seedu.ibook.testutil.TypicalItems.getAllItemsOut;
 import static seedu.ibook.testutil.TypicalItems.getNonZeroItems;
 import static seedu.ibook.testutil.TypicalItems.getZeroItems;
@@ -48,8 +48,8 @@ public class OutOfStockCommandTest {
         for (Product p: model.getFilteredProductList()) {
             assertEquals(p, PEANUT_BUTTER_BREAD);
             assertEquals(p.getFilteredItems().getInternalList(),
-                    Arrays.asList(Q0_2022_03_01.toItem(PEANUT_BUTTER_BREAD),
-                            Q0_2022_03_02.toItem(PEANUT_BUTTER_BREAD)));
+                    Arrays.asList(Q0_2022_03_01_KAYA.toItem(PEANUT_BUTTER_BREAD),
+                            Q0_2022_03_02_KAYA.toItem(PEANUT_BUTTER_BREAD)));
         }
 
     }

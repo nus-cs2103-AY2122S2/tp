@@ -3,7 +3,7 @@ package seedu.ibook.logic.commands.product;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.ibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ibook.testutil.TypicalItems.Q5_TODAY;
+import static seedu.ibook.testutil.TypicalItems.Q5_TODAY_KAYA;
 import static seedu.ibook.testutil.TypicalItems.getAllItemsRemind;
 import static seedu.ibook.testutil.TypicalItems.getOnlyExpiringItems;
 import static seedu.ibook.testutil.TypicalItems.getOnlyNonExpiringItems;
@@ -54,12 +54,12 @@ public class RemindCommandTest {
         for (Product p: model.getFilteredProductList()) {
             if (p.equals(KAYA_BREAD)) {
                 assertEquals(p.getFilteredItems().getInternalList(),
-                        Arrays.asList(Q5_TODAY.toItem(p)));
+                        Arrays.asList(Q5_TODAY_KAYA.toItem(p)));
             }
 
             if (p.equals(PEANUT_BUTTER_BREAD)) {
                 assertEquals(p.getFilteredItems().getInternalList(),
-                        Arrays.asList(Q5_TODAY.toItem(p)));
+                        Arrays.asList(Q5_TODAY_KAYA.toItem(p)));
             }
 
             assertNotEquals(p, CHOCOLATE_BREAD);
