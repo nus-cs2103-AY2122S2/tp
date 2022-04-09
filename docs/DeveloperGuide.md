@@ -157,7 +157,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address book.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -564,7 +564,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 (For all use cases below, the **System** is `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise.)
 
-**Use case: Get client list**
+#### Use case: Get client list
 
 **MSS**
 
@@ -573,7 +573,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
     Use case ends.
 
-**Use case: Add a client**
+#### Use case: Add a client
 
 **MSS**
 
@@ -594,7 +594,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
     Use case ends.
 
-**Use case: Edit a client's information**
+#### Use case: Edit a client's information
 
 **MSS**
 1. User specify which client to be edited
@@ -625,7 +625,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
       Use case resumes at step 2.
 
-**Use case: Append fields and tags to a client**
+#### Use case: Append fields and tags to a client
 
 **MSS**
 
@@ -647,7 +647,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
       Use case ends.
 
-**Use case: Remove fields and tags to a client**
+#### Use case: Remove fields and tags from a client
 
 **MSS**
 
@@ -664,7 +664,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
       Use case ends.
 
-**Use case: Add remark to a client**
+#### Use case: Add remark to a client
 
 **MSS**
 
@@ -674,7 +674,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
    Use case ends.
 
-**Use case: Delete a client**
+#### Use case: Delete a client
 
 **MSS**
 
@@ -697,7 +697,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
       Use case resumes at step 2.
 
-**Use case: Find a client**
+#### Use case: Find a client
 
 **MSS**
 
@@ -716,7 +716,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
   Use case ends.
 
-**Use case: Sort customer list**
+#### Use case: Sort customer list
 
 **MSS**
 
@@ -738,7 +738,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
      Use case resumes at step 1
 
-**Use case: Undo modifications**
+#### Use case: Undo modifications
 
 **MSS**
 
@@ -759,7 +759,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
   
     Use case ends.
 
-**Use case: Add membership to a client**
+#### Use case: Add membership to a client
 
 **MSS**
 
@@ -967,10 +967,6 @@ These instructions only provide a starting point for testers to work on; testers
 ## **Appendix: Effort**
 
 This appendix will highlight the difficulty level, challenges faced, effort required, and achievements of CinnamonBun.
-
-### Poor quality of AB-3 base code
-
-We felt that the quality of the AB-3 base code was extremely poor, resulting in much time wasted in order to implement features that could have been done much easier otherwise.
 
 ### Time constraint and high workload
 
