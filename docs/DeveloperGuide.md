@@ -577,15 +577,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Attribute**: A set of specific value for a given object that defines the property or characteristic of that object.
 * **Group list**: Every existing groups in ArchDuke.
 * **Group name**: An identifier for a group that suggests the function of that group.
-* **Index**: A number in front of a student contact, used to reference that particular student contact.
-* **Group list**: Every existing student groups in ArchDuke.
 * **Group task**: A piece of work to be done or undertaken by one or more student contacts in a group.
+* **Index**: A number in front of a student contact, used to reference that particular student contact.
 * **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **Student contact**: A contact of a student.
-* **Student contact attribute**: A piece of information related to a student contact i.e. name, phone number, email, academic major, optional tag.
 * **Student contact list**: Every existing student contacts in ArchDuke or in a group.
 * **Student group**: A number of student contact that are classed together. A group can have zero to any number of student contacts. A student contact can be assigned to a group.
-* **Student group attribute**: A piece of information related to a group i.e. group name.
 * **Tag**: An optional one-word identifier of a student contact. A student contact can have multiple tags.
 * **Task list**: Every existing tasks in a group.
 
@@ -1067,7 +1064,7 @@ More information on usage: [viewtask command](UserGuide.html#displays-the-tasks-
          1. Test case: Invalid `TASK_NAME` <br>
          Copy an existing task name and paste it to the other task attribute **within the same group**. <br>
          Expected: Only one task with that name will appear inside the group. 
-         If the task name differs in case, only the first occurrence will appear inside the task list.
+         If the task name differs in case, only the first occurrence will appear inside the task list. <br>
          
 2. Dealing with missing files.
 
