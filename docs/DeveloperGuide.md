@@ -455,7 +455,7 @@ Note: ManageEZPZ comes with preloaded data, and can be started on a fresh state 
 
 Step 1. The user launches the application for the first time. ManageEZPZ will be initialized with the preloaded data.
 
-Step 2. The user executes `tagTask 4 n/Alex Yeoh` command to assign `Alex Yeoh` to the 4th `Task`.
+Step 2. The user executes `tagTask 7 n/Alex Yeoh` command to assign `Alex Yeoh` to the 7th `Task`.
 ![AddTodo1](images/TagTask.png)
 
 #### Design considerations:

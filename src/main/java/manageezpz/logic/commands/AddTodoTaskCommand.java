@@ -24,7 +24,7 @@ public class AddTodoTaskCommand extends Command {
     private final Todo toAdd;
 
     /**
-     * Creates an AddEmployeeCommand to add the specified {@code Person}
+     * Creates an AddTodoTaskCommand to add the specified {@code Task}
      */
     public AddTodoTaskCommand(Todo task) {
         requireNonNull(task);
@@ -42,5 +42,12 @@ public class AddTodoTaskCommand extends Command {
 
         model.addTodo(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddTodoTaskCommand // instanceof handles nulls
+                && toAdd.equals(((AddTodoTaskCommand) other).toAdd));
     }
 }

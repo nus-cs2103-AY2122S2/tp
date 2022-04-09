@@ -85,4 +85,11 @@ public class TagTaskCommand extends Command {
                 person.getName().toString()) + taggedEmployeeTask);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagTaskCommand// instanceof handles nulls
+                && targetIndex.equals(((TagTaskCommand) other).targetIndex)
+                && name.equals(((TagTaskCommand) other).name));
+    }
 }
