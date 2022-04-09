@@ -32,7 +32,7 @@ AddressBookParser -> EditCommandParser : parse("n/Poppy")
 activate EditCommandParser
 
 create EditPersonDescriptor
-EditCommandParser --> EditPersonDescriptor : EditPersonDescriptor()
+EditCommandParser --> EditPersonDescriptor : EditPersonDescriptor("n/Poppy")
 activate EditPersonDescriptor
 EditPersonDescriptor --> EditCommandParser : d
 deactivate EditPersonDescriptor

@@ -33,7 +33,7 @@ AddressBookParser -> ResizeCommandParser : parse("1")
 activate ResizeCommandParser
 
 create ResizeCommand
-ResizeCommandParser -> ResizeCommand : ResizeCommand("1")
+ResizeCommandParser -> ResizeCommand : ResizeCommand(1)
 activate ResizeCommand
 
 ResizeCommand --> ResizeCommandParser : r
