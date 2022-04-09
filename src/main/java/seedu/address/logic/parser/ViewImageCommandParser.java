@@ -11,6 +11,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ViewImageCommandParser implements Parser<ViewImageCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ViewImageCommand
+     * and returns a ViewImageCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ViewImageCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
