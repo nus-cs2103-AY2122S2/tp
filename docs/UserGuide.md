@@ -63,8 +63,10 @@ TASK             |   tn/  | Denotes the name of the task that is being assigned 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** <br>
-    * Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
-    * More details regarding the use of prefix can be found in the [Features](#features) section below.
+
+* Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
+
+* More details regarding the use of prefix can be found in the [Features](#features) section below.
 </div>
 
 
