@@ -84,4 +84,12 @@ public class UntagTaskCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNTAG_TASK_SUCCESS,
                 person.getName().toString()) + untaggedEmployeeTask);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UntagTaskCommand// instanceof handles nulls
+                && targetIndex.equals(((UntagTaskCommand) other).targetIndex)
+                && name.equals(((UntagTaskCommand) other).name));
+    }
 }

@@ -9,7 +9,11 @@ import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_PRIORITY_INV
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_PRIORITY_NO_INDEX;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_PRIORITY_NO_PREFIX;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_PRIORITY_PREAMBLE;
+import static manageezpz.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TAG_PRIORITY;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static manageezpz.logic.parser.TagTaskPriorityCommandParser.MESSAGE_EMPTY_PRIORITY;
 import static manageezpz.logic.parser.TagTaskPriorityCommandParser.MESSAGE_INVALID_PRIORITY;
 import static manageezpz.logic.parser.TagTaskPriorityCommandParser.MESSAGE_TAG_PRIORITY_TO_TASK_INSTRUCTIONS;
@@ -25,7 +29,10 @@ import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
 import manageezpz.model.task.Priority;
+import manageezpz.model.task.Todo;
+import manageezpz.testutil.TodoBuilder;
 import manageezpz.testutil.TypicalTasks;
+
 
 public class TagTaskPriorityCommandParserTest {
     private final TagTaskPriorityCommandParser parser = new TagTaskPriorityCommandParser();
@@ -33,19 +40,19 @@ public class TagTaskPriorityCommandParserTest {
     private final Model model = new ModelManager(TypicalTasks.getTypicalAddressBookTasks(),
             new UserPrefs());
 
-    // WILL GIVE ME DIFFERNT OBJECT
-    //    @Test
-    //    public void parse_allFieldsPresent_success() throws ParseException {
-    //
-    //        // Setup Model's UniquePersonList
-    //        model.addPerson(BOB);
-    //
-    //        Todo expectedTodo = new TodoBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
-    //        model.tagEmployeeToTask(expectedTodo, BOB);
-    //        // whitespace only preamble
-    //        assertParseSuccess(parser,PREAMBLE_WHITESPACE + VALID_TAG_TASK,
-    //                new TagTaskCommand(ParserUtil.parseIndex("1"), BOB.getName().toString()));
-    //    }
+    @Test
+    public void parse_allFieldsPresent_success() throws ParseException {
+
+        // Setup Priority
+        Priority priority = Priority.valueOf("HIGH");
+
+        Todo expectedTodo = new TodoBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
+        expectedTodo.setPriority(priority);
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_TAG_PRIORITY,
+                new TagTaskPriorityCommand(ParserUtil.parseIndex("1"), priority));
+    }
 
 
     @Test
@@ -108,4 +115,5 @@ public class TagTaskPriorityCommandParserTest {
         // preamble empty
         assertParseFailure(parser, INVALID_TAG_PRIORITY_EMPTY_PREAMBLE, expectedMessageEmptyPreamble);
     }
+
 }

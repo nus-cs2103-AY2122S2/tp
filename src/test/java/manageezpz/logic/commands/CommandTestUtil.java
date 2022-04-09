@@ -75,11 +75,11 @@ public class CommandTestUtil {
     public static final String INVALID_DATE = "2022 01 01";
 
     // addTodo-related commands
-    public static final String VALID_TODO_DESC_DRINK = " " + PREFIX_DESCRIPTION + VALID_TASK_DESCRIPTION;
+    public static final String VALID_TODO_DESC_READ_BOOK = " " + PREFIX_DESCRIPTION + "Read Book";
     public static final String INVALID_TODO_DESC_DRINK = " " + PREFIX_DESCRIPTION + " ";
 
     // tagTask-related commands
-    public static final String VALID_TAG_TASK = " " + 1 + " " + PREFIX_NAME + "BOB";
+    public static final String VALID_TAG_TASK = " " + 1 + " " + PREFIX_NAME + "Bob Choo";
     public static final String INVALID_TAG_TASK_NO_PREFIX = " " + 1 + " ";
     public static final String INVALID_TAG_TASK_NO_INDEX = " " + PREFIX_NAME + "BOB";
     public static final String INVALID_TAG_TASK_INVALID_INDEX = "asd " + PREFIX_NAME + "BOB";

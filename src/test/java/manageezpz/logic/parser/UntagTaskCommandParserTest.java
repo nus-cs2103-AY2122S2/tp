@@ -8,8 +8,12 @@ import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_TASK_INVALID
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_TASK_NO_INDEX;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_TASK_NO_PREFIX;
 import static manageezpz.logic.commands.CommandTestUtil.INVALID_TAG_TASK_PREAMBLE;
+import static manageezpz.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TAG_TASK;
+import static manageezpz.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
 import static manageezpz.logic.commands.TagTaskCommand.MESSAGE_NO_SUCH_PERSON;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static manageezpz.logic.parser.UntagTaskCommandParser.MESSAGE_UNTAG_EMPLOYEE_TO_TASK_INSTRUCTIONS;
 import static manageezpz.testutil.Assert.assertThrows;
 import static manageezpz.testutil.TypicalPersons.BOB;
@@ -23,6 +27,8 @@ import manageezpz.logic.parser.exceptions.ParseException;
 import manageezpz.model.Model;
 import manageezpz.model.ModelManager;
 import manageezpz.model.UserPrefs;
+import manageezpz.model.task.Todo;
+import manageezpz.testutil.TodoBuilder;
 import manageezpz.testutil.TypicalTasks;
 
 public class UntagTaskCommandParserTest {
@@ -31,19 +37,18 @@ public class UntagTaskCommandParserTest {
     private final Model model = new ModelManager(TypicalTasks.getTypicalAddressBookTasks(),
             new UserPrefs());
 
-    // WILL GIVE ME DIFFERNT OBJECT
-    //    @Test
-    //    public void parse_allFieldsPresent_success() throws ParseException {
-    //
-    //        // Setup Model's UniquePersonList
-    //        model.addPerson(BOB);
-    //
-    //        Todo expectedTodo = new TodoBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
-    //        model.untagEmployeeToTask(expectedTodo, BOB);
-    //        // whitespace only preamble
-    //        assertParseSuccess(parser,PREAMBLE_WHITESPACE + VALID_TAG_TASK,
-    //                new UntagTaskCommand(ParserUtil.parseIndex("1"), BOB.getName().toString()));
-    //    }
+    @Test
+    public void parse_allFieldsPresent_success() throws ParseException {
+
+        // Setup Model's UniquePersonList
+        model.addPerson(BOB);
+
+        Todo expectedTodo = new TodoBuilder().withDescription(VALID_TASK_DESCRIPTION).build();
+        model.tagEmployeeToTask(expectedTodo, BOB);
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_TAG_TASK,
+                new UntagTaskCommand(ParserUtil.parseIndex("1"), BOB.getName().toString()));
+    }
 
 
     @Test
