@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -21,6 +23,8 @@ import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.InputHistoryResult;
+import seedu.address.logic.inputhistory.UserInputString;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -96,6 +100,49 @@ public class LogicManagerTest {
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void testInputHistory_addNullToHistory() {
+        assertThrows(NullPointerException.class, () -> logic.addNewUserInputToHistory(null));
+    }
+
+    @Test
+    public void testInputHistory_previousCommand() {
+        String command = "test1";
+        logic.addNewUserInputToHistory(command);
+        InputHistoryResult result = logic.getPreviousInput();
+        assertTrue(result.isChanged());
+        UserInputString resultString = result.getUserInputString();
+        assertEquals(command, resultString.toString());
+    }
+
+    @Test
+    public void testInputHistory_nextCommand() {
+        String command = "test1";
+        String command2 = "test2";
+        logic.addNewUserInputToHistory(command);
+        logic.addNewUserInputToHistory(command2);
+
+        // First command
+        InputHistoryResult result = logic.getPreviousInput();
+        assertTrue(result.isChanged());
+        UserInputString resultString = result.getUserInputString();
+        assertEquals(command2, resultString.toString());
+
+        // Second command
+        InputHistoryResult result2 = logic.getPreviousInput();
+        assertTrue(result2.isChanged());
+        UserInputString resultString2 = result2.getUserInputString();
+        assertEquals(command, resultString2.toString());
+    }
+
+    @Test
+    public void testInputHistory_noCommands() {
+        InputHistoryResult result = logic.getPreviousInput();
+        assertFalse(result.isChanged());
+        InputHistoryResult result2 = logic.getNextInput();
+        assertFalse(result2.isChanged());
     }
 
     /**
