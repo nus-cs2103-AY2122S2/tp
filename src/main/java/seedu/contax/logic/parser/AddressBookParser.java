@@ -157,11 +157,11 @@ public class AddressBookParser {
         case FreeBetweenCommand.COMMAND_WORD:
             return new FreeBetweenCommandParser().parse(arguments);
 
-        //@@author hanjiyao
+        //@@author HanJiyao
         case EditPriorityCommand.COMMAND_WORD:
             return new EditPriorityCommandParser().parse(arguments);
-
-        //@@author wei-xinn
+        //@@author
+        //@@author Wei-Xinn
         case FindAppointmentCommand.COMMAND_WORD:
             return new FindAppointmentCommandParser().parse(arguments);
         //@@author
@@ -203,7 +203,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        //@@author hanjiyao
+        //@@author HanJiyao
         // Command chaining
         case ChainCommand.COMMAND_WORD:
             return new ChainCommandParser().parse(arguments);
