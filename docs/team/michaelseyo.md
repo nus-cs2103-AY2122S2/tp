@@ -43,6 +43,7 @@ Given below are my contributions to the project.
 
 * **Community**:
     * Provided reviews for teammates PRs. (Pull request [#35](https://github.com/AY2122S2-CS2103-W17-3/tp/pull/35))
+    * Reported bugs for other teams in class ([#19](https://github.com/michaelseyo/ped/issues/19), [#21](https://github.com/michaelseyo/ped/issues/21), [#12](https://github.com/michaelseyo/ped/issues/12))
     * Contributed to the User Guide to document the target user profile and ClientConnect's potential appeal to them.
     * Standardise the use of "Client" instead of "Person" in the app display messages.
     * Changed icon of ClientConnect app.
