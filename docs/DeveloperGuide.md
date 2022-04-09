@@ -817,6 +817,21 @@ Preconditions: User is currently using ManageEZPZ.
 
    Use case ends.
 
+**Extensions**
+
+* 1a. ManageEZPZ detects an error in the entered data.
+
+    * 1a1. ManageEZPZ sends an error message to User, indicating the
+      format for the add Employee command is incorrect, attached with the
+      correct syntax format.
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List,
+      indicating to the User to enter a valid Task number.
+    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four:
+      None, Low, Medium, High. ManageEZPZ reminds the User to use a valid
+      Priority.
+
+      Use Case ends.
+
 ****
 
 **Use Case 12 - Deleting all Entries in ManageEZPZ**
