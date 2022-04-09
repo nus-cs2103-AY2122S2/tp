@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 <p align="center">
-  <img src="docs/images/tapa banner.png">
+  <img src="images/tapa banner.png">
 </p>
 
 TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
