@@ -9,7 +9,7 @@ title: KangLi's Project Portfolio Page
 
 Given below are my contributions to the project.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/#breakdown=true&search=lkldev)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?breakdown=true&search=lkldev)
 
 * **New Feature**: Create model and storage classes for Modules
 * **New Feature**: Create model and storage classes for TAssist
