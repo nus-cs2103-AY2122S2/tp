@@ -1088,6 +1088,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
+* 1e. The fields specified are in an invalid format.
+
+   * 1e1. TAPA shows an error message.
+
+       Use case ends.
+
 **Use case: UC02 - List all students**
 
 **MSS**
