@@ -26,19 +26,15 @@ public class UserInputHistoryTest {
 
         // First command
         InputHistoryResult result = userInputHistory.getPreviousInput();
-        assertTrue(result.isChanged());
-        UserInputString resultString = result.getUserInputString();
-        assertEquals(command2, resultString.toString());
+        checkIfResultValid(result, command2);
 
         // Second command
         InputHistoryResult result2 = userInputHistory.getPreviousInput();
-        assertTrue(result2.isChanged());
-        UserInputString resultString2 = result2.getUserInputString();
-        assertEquals(command, resultString2.toString());
+        checkIfResultValid(result2, command);
 
         // Empty
         InputHistoryResult result3 = userInputHistory.getPreviousInput();
-        assertFalse(result3.isChanged());
+        checkIfResultNoChange(result3);
     }
 
     @Test
@@ -52,15 +48,13 @@ public class UserInputHistoryTest {
         userInputHistory.addToHistory(command);
 
         InputHistoryResult result = userInputHistory.getPreviousInput();
-        assertTrue(result.isChanged());
-        UserInputString resultString = result.getUserInputString();
-        assertEquals(command, resultString.toString());
+        checkIfResultValid(result, command);
     }
 
     @Test
     public void testNextInput_noHistoryAtStart() {
         InputHistoryResult result = userInputHistory.getNextInput();
-        assertFalse(result.isChanged());
+        checkIfResultNoChange(result);
     }
 
     @Test
@@ -69,12 +63,10 @@ public class UserInputHistoryTest {
         userInputHistory.addToHistory(command);
 
         InputHistoryResult result = userInputHistory.getPreviousInput();
-        assertTrue(result.isChanged());
-        UserInputString resultString = result.getUserInputString();
-        assertEquals(command, resultString.toString());
+        checkIfResultValid(result, command);
 
         InputHistoryResult result2 = userInputHistory.getNextInput();
-        assertFalse(result2.isChanged());
+        checkIfResultNoChange(result2);
     }
 
     @Test
@@ -89,32 +81,43 @@ public class UserInputHistoryTest {
 
         // Scroll up 3 times
         InputHistoryResult result = userInputHistory.getPreviousInput();
-        assertTrue(result.isChanged());
-        UserInputString resultString = result.getUserInputString();
-        assertEquals(command3, resultString.toString());
+        checkIfResultValid(result, command3);
 
         InputHistoryResult result2 = userInputHistory.getPreviousInput();
-        assertTrue(result2.isChanged());
-        UserInputString resultString2 = result2.getUserInputString();
-        assertEquals(command2, resultString2.toString());
+        checkIfResultValid(result2, command2);
 
         InputHistoryResult result3 = userInputHistory.getPreviousInput();
-        assertTrue(result3.isChanged());
-        UserInputString resultString3 = result3.getUserInputString();
-        assertEquals(command, resultString3.toString());
+        checkIfResultValid(result3, command);
 
         // Scroll to end
         InputHistoryResult result4 = userInputHistory.getNextInput();
-        assertTrue(result4.isChanged());
-        UserInputString resultString4 = result4.getUserInputString();
-        assertEquals(command2, resultString4.toString());
+        checkIfResultValid(result4, command2);
 
         InputHistoryResult result5 = userInputHistory.getNextInput();
-        assertTrue(result5.isChanged());
-        UserInputString resultString5 = result5.getUserInputString();
-        assertEquals(command3, resultString5.toString());
+        checkIfResultValid(result5, command3);
 
         InputHistoryResult result6 = userInputHistory.getNextInput();
-        assertFalse(result6.isChanged());
+        checkIfResultNoChange(result6);
+    }
+
+    /**
+     * Check if the provided {@code InputHistoryResult} has the correct command returned.
+     *
+     * @param result The {@code InputHistoryResult} to check.
+     * @param correctResult The correct command that has been saved to the history.
+     */
+    private void checkIfResultValid(InputHistoryResult result, String correctResult) {
+        assertTrue(result.isChanged());
+        UserInputString resultString = result.getUserInputString();
+        assertEquals(correctResult, resultString.toString());
+    }
+
+    /**
+     * Check if the provided {@code InputHistoryResult} returns no change.
+     *
+     * @param result The {@code InputHistoryResult} to check.
+     */
+    private void checkIfResultNoChange(InputHistoryResult result) {
+        assertFalse(result.isChanged());
     }
 }
