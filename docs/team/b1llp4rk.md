@@ -10,7 +10,6 @@ HackNet - HackNet is a desktop address book application used for finding teammat
 Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=b1llp4rk&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
-
 * **Enhancements to existing features**:
     * Enable editing multiple persons with `edit` command
         * **What it does:** This feature allows user to edit multiple persons in HackNet at once, for teams and skills fields.
@@ -32,14 +31,13 @@ Given below are my contributions to the project.
     * Inability to redo some edit commands was discovered while [reinforcing integration test of edit command](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/156), and was fixed.
         * Commands that alter the data of HackNet have to commit the changed data, and this step was omitted for `edit` commands that modify multiple persons at once.
 
-
 * **Contributions to the UG**:
     * Updated section of `edit` command on how to edit multiple persons, and using the reset and default mode.
     * Updated sections of `edit` and `add` command on the use of commas to separate multiple values.
 
 * **Contributions to the DG**:
-    * Class diagram for EditCommand
-    * Sequence diagram for `edit` command
+    * Class diagram for EditCommand and Sequence diagram for `edit` command.
+    * Updated AB3 diagrams including 'delete' sequence diagram and `Model` component's class diagrams.
 
 * **Contributions to the team-based tasks**:
     * Took demo screenshots of v1.2 features
