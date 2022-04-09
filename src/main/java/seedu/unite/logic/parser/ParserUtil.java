@@ -1,7 +1,7 @@
 package seedu.unite.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_THEME;
+import static seedu.unite.commons.core.Messages.MESSAGE_INVALID_THEME;
 
 import java.util.Collection;
 import java.util.HashSet;
