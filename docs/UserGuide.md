@@ -237,6 +237,13 @@ Edits a student's information in TAPA.
 * `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
     * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
 
+<div markdown="block" class="alert alert-info">
+:warning: <b>Warning!</b>
+
+* The `edit` command cannot to applied to `Task`.
+
+</div>
+
 <br>
 
 ### Deleting all students: `clear`
