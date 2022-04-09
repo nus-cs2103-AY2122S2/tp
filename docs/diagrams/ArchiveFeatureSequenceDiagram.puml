@@ -23,13 +23,13 @@ LogicManager -> AddressBookParser : parseCommand("archive")
 activate AddressBookParser
 
 create ArchiveCommand
-AddressBookParser -> ArchiveCommand
+AddressBookParser -> ArchiveCommand : ArchiveCommand()
 
 activate ArchiveCommand
-ArchiveCommand --> AddressBookParser : d
+ArchiveCommand --> AddressBookParser : a
 deactivate ArchiveCommand
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
 LogicManager -> ArchiveCommand : execute()
@@ -61,7 +61,7 @@ LogicManager -[hidden]-> AddressBookParser
 destroy Files
 
 create CommandResult
-ArchiveCommand -> CommandResult
+ArchiveCommand -> CommandResult : CommandResult()
 activate CommandResult
 
 CommandResult --> ArchiveCommand
