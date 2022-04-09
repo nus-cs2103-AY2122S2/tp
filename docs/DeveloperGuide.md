@@ -1416,7 +1416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      
       Use case ends.
    
-* 3b. If the index is out of range, that is a non-positive number or greater than the number of tasks assigned to that person.
+* 3b. If the index given is out of range, that is, it is a non-positive number, or greater than the number of tasks assigned to that person.
   
    * 3b1. TAPA shows an error message. 
      
