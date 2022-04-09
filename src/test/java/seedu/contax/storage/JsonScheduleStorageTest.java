@@ -129,7 +129,6 @@ public class JsonScheduleStorageTest {
         jsonScheduleStorage.saveSchedule(original); // file path not specified
         readBack = jsonScheduleStorage.readSchedule(GLOBAL_ADDRESSBOOK).get(); // file path not specified
         assertEquals(original, new Schedule(readBack));
-
     }
 
     @Test
