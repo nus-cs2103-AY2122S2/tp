@@ -23,7 +23,6 @@ public abstract class Task {
      * {@code Date taskDate} has a default value that will be changed if the
      * object inheriting the Task object is a Deadline or Event object.
      *
-     * If object is a Todo object, this field will be ignored.
      */
     public Task() {
     }
@@ -79,10 +78,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns true if both Task have the same Description.
-     * This defines a weaker notion of equality between two Task.
-     * @param otherTask the other task to be compared to.
-     * @return true if both tasks are the same, false otherwise.
+     * Checks if both Task have the same Description.
+     * @param otherTask the task to be checked against.
+     * @return true if both task are the same, false otherwise.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -129,16 +127,16 @@ public abstract class Task {
     }
 
     /**
-     * Returns the string representation of the task.
-     *
-     * @return The string representation of the task, consisting of whether
-     * it is done or not
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] ";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
