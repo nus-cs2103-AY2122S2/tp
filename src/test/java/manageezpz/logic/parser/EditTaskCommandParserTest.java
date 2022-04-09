@@ -2,27 +2,25 @@ package manageezpz.logic.parser;
 
 import static manageezpz.commons.core.Messages.MESSAGE_FIELD_NOT_EDITED;
 import static manageezpz.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT_BIND;
-import static manageezpz.logic.parser.CliSyntax.*;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_AT_DATETIME;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DATE;
+import static manageezpz.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static manageezpz.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static manageezpz.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.HashMap;
+
+import org.junit.jupiter.api.Test;
 
 import manageezpz.commons.core.index.Index;
 import manageezpz.logic.commands.EditTaskCommand;
 import manageezpz.logic.parser.exceptions.ParseException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 
 public class EditTaskCommandParserTest {
 
     private static final String INVALID_PREAMBLE_CONTAINS_WHITESPACE = "INVALID PREAMBLE";
-    private static final String VALID_INPUT= "1 desc/ hello date/ 2022-01-01 at/ 1900";
-    private static final String VALID_INPUT_WITHOUT_PREAMBLE = "desc/ hello date/ 2022-01-01 at/ 1900";
-
+    private static final String VALID_INPUT = "1 desc/ hello date/ 2022-01-01 at/ 1900";
     private EditTaskCommandParser parser = new EditTaskCommandParser();
 
     @Test
