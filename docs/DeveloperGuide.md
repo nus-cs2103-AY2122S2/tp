@@ -784,7 +784,7 @@ The `clear` command deletes all students currently stored in TAPA. Before all th
 
 ![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
 
-6. If the user inputs `confirm`, the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
+6. If the user inputs "confirm", the `LogicManager` parses the given input text using `AddressBookParser#parseCommand()`, then a new `ConfirmClearCommand` is created and returned to the `LogicManager`.
 7. The `LogicManager` will then call `ConfirmClearCommand#execute(Model model)`.
 8. The `ConfirmClearCommand` calls `Model#setAddressBook(new AddressBook())` which resets the current list of students stored in TAPA to an empty list.
 9. Lastly, the `ConfirmClearCommand` creates a new `CommandResult`, which is returned to the `LogicManager`.
