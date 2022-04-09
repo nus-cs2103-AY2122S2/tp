@@ -46,8 +46,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label prevDateMet;
     @FXML
-    private Pane salary;
-    @FXML
     private Label info;
     @FXML
     private Label scheduledMeeting;
@@ -79,8 +77,10 @@ public class PersonCard extends UiPart<Region> {
             scheduledMeeting.setText("Upcoming meeting:\n" + meetingDate + " at " + meetingTime);
         }
 
-        salary.getChildren().add(new Label("Salary: $" + person.getSalary().value));
-
+        tags.getChildren().add(new Label("Salary: $" + person.getSalary().value));
+        tags.getChildren().get(0).setStyle("-fx-background-color: #6bd16b;"
+                + "-fx-hgap: 7;"
+                + "-fx-vgap: 3;");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
