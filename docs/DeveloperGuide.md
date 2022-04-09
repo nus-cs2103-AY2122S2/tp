@@ -102,6 +102,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("add n/junha p/12341234 g/B1LL e/bill@exmple.com")` API call. The input string is abbreviated to [ADD].
+
+![Interactions Inside the Logic Component for the `add 1` Command](images/AddSequenceDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -173,6 +177,12 @@ Given below is an example of how `SkillSet` interacts with the `Skill` class whe
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+### Edit feature
+#### Implementation
+
+`EditCommand` is responsible for the `edit` command. `EditCommandParser` provides necessary information to `EditCommand` when creating it through parse method. The information includes `isResetMode`, `EditPersonDescriptor`, and `indices`. `indices` is the reference to the list of `index` in the displayed list in GUI, of the person(s) to be edited. `EditPersonDescriptor` encapsulates how the person(s) should be edited, such as which field(e.g. name) should be changed to what(a new name). `isResetMode` is true if the user declared `-r` to activate reset mode in command, and false otherwise.
+
+![EditCommandClassDiagram](images/EditCommandClassDiagram.png)
 
 ### Team forming feature
 
