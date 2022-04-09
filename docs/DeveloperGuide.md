@@ -1283,8 +1283,90 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. TAPA shows an error message.
 
       Use case resumes from step 1.
+   
+**Use case: UC09 - Check all the tasks that a student has**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to check all the tasks that a student has.
+2. TAPA shows a list of tasks that the student has.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The specified student ID is invalid (not in a correct format).
+
+   * 1a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 1b. There is no student with the specified student ID in TAPA.
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 2b. The student does not have any tasks assigned to him/her.
+
+   * 2b1. TAPA shows an error message.
+
+     Use case ends.
+
+**Use case: UC10 - View the completion status of a particular task**
+
+**MSS**
+
+1. User request to view which students (in a particular module) have completed or have yet to complete a particular task.
+2. TAPA shows a list of students who are taking this module and are currently assigned with the specified tasks (along with their respective completion status).
+
+**Extensions**
+
+* 1a. The specified task name is invalid (not in a correct format).
+
+   * 1a1. TAPA shows an error message.
+
+     Use case ends.
+
+* 1b. The specified module code is invalid (not in a correct format).
+
+   * 1b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 2a. There are no students who are taking this module and are assigned with the specified task.
+
+   * 2a1. TAPA shows an error message.
+
+     Use case ends.
+
+**Use case: UC11 - Save a copy of the data in TAPA**
+
+**MSS**
+
+1. User request to save a copy of the data that is currently being stored in TAPA.
+2. TAPA creates a new data file in the same directory as the existing stored data.
+3. TAPA copies the content of the existing stored data into the new data file.
+
+**Extensions**
+
+* 2a. There is already a data file that has the same file name as the new data file that is going to be created.
+
+   * 2a1. TAPA does not create a new data file.
+
+     Use case resumes from step 3.
+
+* 2b. User does not have the permission to create a new file.
+
+   * 2b1. TAPA shows an error message.
+
+     Use case ends.
+
+* 3. There is an unexpected error when copying from the existing data file to the new data file.
+
+   * 3a1. TAPA shows an error message.
+
+     Use case ends.
 
 ### Non-Functional Requirements
 
