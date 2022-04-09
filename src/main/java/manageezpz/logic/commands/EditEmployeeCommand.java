@@ -6,7 +6,6 @@ import static manageezpz.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_
 import static manageezpz.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_NAME;
 import static manageezpz.logic.parser.CliSyntax.PREFIX_PHONE;
-import static manageezpz.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +22,7 @@ import manageezpz.model.person.Phone;
 import manageezpz.model.task.Task;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing employee in the address book.
  */
 public class EditEmployeeCommand extends Command {
 
@@ -79,6 +78,7 @@ public class EditEmployeeCommand extends Command {
         Person personToEdit = lastShownPersonList.get(index.getZeroBased());
         Person editedPerson = createEditedEmployee(personToEdit, editEmployeeDescriptor);
 
+        // Check for same person (i.e., name, phone or email already exists)
         for (Person person : fullPersonList) {
             if (!person.equals(personToEdit) && person.isSamePerson(editedPerson)) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON, MESSAGE_USAGE));
@@ -101,8 +101,6 @@ public class EditEmployeeCommand extends Command {
                 }
             }
         }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }

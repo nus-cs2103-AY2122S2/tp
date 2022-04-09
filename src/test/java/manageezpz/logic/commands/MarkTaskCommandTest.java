@@ -27,7 +27,7 @@ import manageezpz.model.task.Task;
  */
 public class MarkTaskCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookTasks(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -62,7 +62,7 @@ public class MarkTaskCommandTest {
 
         String expectedMessage = String.format(MESSAGE_MARK_TASK_SUCCESS, markedTask);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showTaskAtIndex(expectedModel, INDEX_FIRST);
 
         assertCommandSuccess(markTaskCommand, model, expectedMessage, expectedModel);

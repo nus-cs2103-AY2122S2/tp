@@ -35,7 +35,7 @@ import manageezpz.testutil.PersonBuilder;
  */
 public class EditEmployeeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +45,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
@@ -65,7 +65,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
@@ -80,7 +80,7 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }
@@ -97,8 +97,9 @@ public class EditEmployeeCommandTest {
 
         String expectedMessage = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST);
+        expectedModel.setPerson(personInFilteredList, editedPerson);
 
         assertCommandSuccess(editEmployeeCommand, model, expectedMessage, expectedModel);
     }

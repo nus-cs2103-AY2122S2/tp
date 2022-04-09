@@ -26,7 +26,7 @@ import manageezpz.model.person.Person;
  */
 public class DeleteEmployeeCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookEmployees(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -44,6 +44,7 @@ public class DeleteEmployeeCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+
         DeleteEmployeeCommand deleteEmployeeCommand = new DeleteEmployeeCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteEmployeeCommand, model,
