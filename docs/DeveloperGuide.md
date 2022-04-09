@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -272,7 +273,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] View detailed profile
+### View detailed profile
 In the original AB3 Address Book, all information about a person are displayed within the respective `PersonCard`. This
 limits the amount of information a user can see at one time. If simply increase the size, or more specifically, the
 height of a `PersonCard`, less person will be displayed of the same window size.
@@ -282,7 +283,7 @@ conventional `PersonListPanel`, on the right-hand side, is the newly implemented
 information about a person.
 
 
-### \[Proposed\] Enhanced Add Profile Feature
+### Enhanced Add Profile Feature
 
 In the original add profile feature in the AB3 Address Book, all the profiles are being stored in the `AddressBook`.
 
@@ -310,14 +311,10 @@ This is a sample of the `Person` object diagram.
 ![AddProfileSampleObjectDiagram](images/AddProfileSampleObjectDiagram.png)
 
 
-### \[Proposed\] Theme choosing
+### Theme choosing
 In the original AB3 Address Book, there is no choice for the user to style up the appearance of the application. Given
 that the target users of UNite are school admins and students, we want to give users a choice to change between a light and a
 dark theme, so that the application fits better to the vibrant energy of a university.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
