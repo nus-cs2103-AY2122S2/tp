@@ -1383,7 +1383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *  1a. The user does not input a specific command.
 
-   * 1a1. TAPA provides the list of all available commands
+   * 1a1. TAPA provides the list of all available commands.
 
      Use case ends.
    
