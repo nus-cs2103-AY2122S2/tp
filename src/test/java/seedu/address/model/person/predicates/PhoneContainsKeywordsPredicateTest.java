@@ -62,6 +62,10 @@ public class PhoneContainsKeywordsPredicateTest {
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("98765432"));
         assertFalse(predicate.test(new PersonBuilder().withPhone("22222222").build()));
 
+        // Multiple Non-matching keyword
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("98765432", "12345678"));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("22222222").build()));
+
         // Keywords match name, email and address, but does not match phone
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
                 "Main", "Street"));

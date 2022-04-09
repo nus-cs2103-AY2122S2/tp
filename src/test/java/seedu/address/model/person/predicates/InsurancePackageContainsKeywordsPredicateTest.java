@@ -72,6 +72,10 @@ public class InsurancePackageContainsKeywordsPredicateTest {
         predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Undecided"));
         assertFalse(predicate.test(new PersonBuilder().withInsurancePackage("Golden Premium").build()));
 
+        // Multiple Non-matching keyword
+        predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Undecided", "Dragon"));
+        assertFalse(predicate.test(new PersonBuilder().withInsurancePackage("Golden Premium").build()));
+
         // Keywords match phone, email and address, but does not match insurance package
         predicate = new InsurancePackageContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
                 "Main", "Street", "Golden"));
