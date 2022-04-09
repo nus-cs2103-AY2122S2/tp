@@ -150,6 +150,9 @@ public class CommandBox extends UiPart<Region> {
     }
 
     // Levenshtein distance (matrix size bounded by length of str2 aka one of the program commands)
+    //@@author DaneMarc-reused
+    // Reused from https://www.geeksforgeeks.org/edit-distance-dp-5/
+    // with minor modifications
     private int editDistance(String str1, String str2) {
         int m = str1.length();
         int n = str2.length();
@@ -172,6 +175,7 @@ public class CommandBox extends UiPart<Region> {
 
         return dp[m % 2][n];
     }
+    //@@author
 
     /**
      * Sets the command box style to use the default style.
