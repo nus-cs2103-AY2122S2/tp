@@ -1424,7 +1424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3c. The specified task with the given index has already been marked as complete.
 
-   * 3b1. TAPA shows an error message.
+   * 3c1. TAPA shows an error message.
 
      Use case ends.
 
