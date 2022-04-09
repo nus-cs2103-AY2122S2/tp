@@ -125,7 +125,7 @@ public interface Model {
 
     void addInterview(Interview interview);
 
-    void setInterview(Interview target, Interview editedInterview);
+    void setInterview(Interview target, Interview editedInterview) throws CommandException;
 
     /**
      * Gets candidate's scheduled interview if present

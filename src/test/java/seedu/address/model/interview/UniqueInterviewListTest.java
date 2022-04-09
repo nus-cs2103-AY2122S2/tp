@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BENSON;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_BOB_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.INTERVIEW_CARL;
-import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
+import static seedu.address.testutil.TypicalInterviews.VALID_AMY_INTERVIEW_DATE_TIME;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.interview.exceptions.ConflictingInterviewException;
 import seedu.address.model.interview.exceptions.DuplicateCandidateException;
 import seedu.address.model.interview.exceptions.InterviewNotFoundException;
@@ -65,7 +66,7 @@ public class UniqueInterviewListTest {
     public void containsCandidate_interviewWithSameCandidateInList_returnsTrue() {
         uniqueInterviewList.add(INTERVIEW_ALICE);
         Interview editedAliceInterview = new InterviewBuilder(INTERVIEW_ALICE)
-                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build();
+                .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME).build();
         assertTrue(uniqueInterviewList.containsCandidate(editedAliceInterview));
     }
 
@@ -112,7 +113,7 @@ public class UniqueInterviewListTest {
     public void setInterview_hasConflictingInterview_throwsConflictingInterviewException() {
         uniqueInterviewList.add(INTERVIEW_ALICE);
         uniqueInterviewList.add(INTERVIEW_AMY_TYPICAL);
-        assertThrows(ConflictingInterviewException.class, () ->
+        assertThrows(CommandException.class, () ->
                 uniqueInterviewList.setInterview(INTERVIEW_ALICE, INTERVIEW_BOB_TYPICAL));
     }
 
