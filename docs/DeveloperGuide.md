@@ -516,6 +516,38 @@ that this will be a heavy headway for our application.
 The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
 <img src="images/FocusCommandDiagram.png" width="250" />
 
+### Scheduling interviews feature
+
+Below is a sequence diagram and explanation of how the `AddScheduleCommand` is executed.
+
+<img src="images/AddScheduleSequenceDiagram.png"/>
+
+**Step 1.** The user executes the command `schedule add candidate/1 at/24-05-2022`.
+
+**Step 2.** User input is passed to the `AddressBookParser`, which calls `ScheduleCommandParser#parse`, 
+which then calls `AddScheduleCommandParser#parse` to create a new `AddScheduleCommand`.
+
+**Step 3.** The `AddScheduleCommand` will then be executed by calling its `execute` method.
+
+**Step 4.** Since the Model is passed to AddScheduleCommand#execute, it is able to call a method `Model#getFilteredCandidateList` to get the last candidate list shown.
+
+**Step 5.** From the candidate list, we can find the desired candidate to schedule for interview by calling the get function with the specified Index.
+
+**Step 6.** A new `Interview` is created for the candidate and the Model#addInterview method is called to add the `Interview` to the Model.
+
+**Step 7.** After the interview is successfully added, we call the `Candidate#triggerInterviewStatusScheduled` method which returns
+the `Candidate` with his interview status set to `Scheduled`. The Model will then call Model#setCandidate to update the candidate in the list.
+
+#### Design Consideration
+* **Alternative 1 (Current Choice)**: Newly created interviews are added to a list of interviews, and
+each interview object contains its corresponding `Candidate`.
+  * Pros: No need to iterate through every candidate to initialise the interview schedule. Better performanece when 
+  editing or deleting interviews by index in the interview schedule.
+  * Cons: Editing a `Candidate` requires an update to their corresponding `Interview`.
+* Alternative 2: Every candidate has an `Interview` attribute, initialised to null. When a candidate is scheduled for an
+interview, the newly created interview is assigned to be the candidate's `Interview` attribute.
+  * Pros: Editing a `Candidate` attribute does not affect their `Interview` attribute.
+  * Cons: Interview schedule has to iterate through every candidate to check.
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

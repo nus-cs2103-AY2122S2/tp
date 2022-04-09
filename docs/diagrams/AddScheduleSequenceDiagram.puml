@@ -21,7 +21,7 @@ end box
 [-> LogicManager : execute("schedule add ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("schedule add ..."))
+LogicManager -> AddressBookParser : parseCommand(userInput)
 activate AddressBookParser
 
 create ScheduleCommandParser
@@ -97,12 +97,6 @@ deactivate lastShownCandidateList
 lastShownCandidateList -[hidden]-> AddScheduleCommand
 destroy lastShownCandidateList
 
-AddScheduleCommand -> Candidate : triggerInterviewStatusScheduled()
-activate Candidate
-
-Candidate --> AddScheduleCommand : editedCandidate
-deactivate Candidate
-
 create Interview
 AddScheduleCommand -> Interview : Interview(candidateToInterview, interviewDateTime)
 activate Interview
@@ -115,6 +109,12 @@ activate Model
 
 Model --> AddScheduleCommand
 deactivate Model
+
+AddScheduleCommand -> Candidate : triggerInterviewStatusScheduled()
+activate Candidate
+
+Candidate --> AddScheduleCommand : editedCandidate
+deactivate Candidate
 
 AddScheduleCommand -> Model : setCandidate(candidateToInterview, editedCandidate)
 activate Model
