@@ -19,9 +19,10 @@ _Amigos_ is a desktop application to help tech-savvy university students manage 
 3. Copy the file to the folder you want to use as the _home folder_ for your application.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. Here are some starters:
+![Ui](images/Ui.png)
+
+6. Type the command in the command box and press Enter to execute it. Here are some starters:
 
   * **`listfriends`** : Lists all friends.
   * **`listevents`** : Lists all events.
@@ -72,8 +73,9 @@ Adds a new friend to _Amigos_. A friend has:
 * Note that there can be no duplicate friends having the same name.
 
 **Examples**:
-* `addfriend n/John Doe p/98765432 a/John street, block 123, #01-01 t/Classmate
-  ![Addfriend_JohnDoe](images/Addfriend_JohnDoe.png)
+* `addfriend n/John Doe p/98765432 a/John street, block 123, #01-01 t/Classmate` will result in the following friend being added.
+
+![Addfriend_JohnDoe](images/Addfriend_JohnDoe.png)
 
 * `addfriend n/John Doe t/Friend t/Banker`
 
@@ -105,8 +107,12 @@ Deletes a friend in _Amigos_.
 
 **Examples**:
 * `deletefriend n/John Doe`
-* `deletefriend 1`
 
+|                  Before                   |                     After                     |
+|:-----------------------------------------:|:---------------------------------------------:|
+| ![PreClear](images/Addfriend_JohnDoe.png) | ![PostClear](images/DeleteFriend_JohnDoe.png) |
+
+* `deletefriend 1`
 
 ### Show a specific friend: `showfriend` or `sf`
 
@@ -127,7 +133,9 @@ Shows expanded page containing the full details related to an existing friend in
 **Examples**:
 * `showfriend n/Bernice Yu` Will open up the page containing full details related to Bernice Yu - her name, address, 
    phone number, email, description, logs, and upcoming events with her.
-   ![ShowFriendExample](images/ShowFriendExample.png)
+
+* ![ShowFriendExample](images/ShowFriendExample.png)
+
 * `showfriend 2` Will open up the page containing full details related to the friend at `INDEX` 2 on the filtered GUI list.
 
 
@@ -136,6 +144,8 @@ Shows expanded page containing the full details related to an existing friend in
 Lists all friends in _Amigos_. Switches GUI to the friends tab.
 
 **Format**: `listfriends`
+
+![ListFriendExample](images/ListFriendExample.png)
 
 ### Find friends : `findfriend` or `ff`
 
@@ -154,10 +164,10 @@ Find friends in _Amigos_ whose name, tags or logs' title matches ANY of the give
    as well as all friends with log titles containing the substring `John`.
 
 **Examples**:
-* `findfriend n/John t/neighbour` returns all friends with 'John' in the name and 'neighbour' in any of the tags.
+* `findfriend n/John t/neighbour` returns all friends with 'John' in the name or 'neighbour' in any of the tags.
 * `findfriend n/John n/Emily n/Russel`returns all friends with 'John' or 'Emily' or 'Russel' in the name.
-  ![FindFriendExample](images/FindFriendExample.png)
 
+![FindFriendExample](images/FindFriendExample.png)
 
 ## Logs management
 _Amigos_ provides functionality to manage logs, which are essentially detailed notes about a specific friend.
@@ -176,6 +186,9 @@ The `INDEX` refers to the index number shown in the displayed person's list.
 
 **Examples**:
 * `addlog 1 ttl/has a pet named poki` adds a log to the person at index 1 of the "Friends" tab with the title "has a pet named poki".
+
+![AddLogExample](images/AddLogExample.png)
+
 * `addlog n/Benson Meier ttl/recommended movies d/the martian, interstellar, three idiots`
 
 ### Editing a log: `editlog` or `el`
@@ -183,7 +196,7 @@ The `INDEX` refers to the index number shown in the displayed person's list.
 Edits an existing log of an existing friend in _Amigos_.
 
 **Format**:
-`editlog INDEX ? n/NAME id/LOG_INDEX ttl/NEW_TITLE [d/NEW_DESCRIPTION]` or `INDEX ? n/NAME id/LOG_INDEX [ttl/NEW_TITLE] d/NEW_DESCRIPTION`
+`editlog INDEX ? n/NAME id/LOG_INDEX [ttl/NEW_TITLE] [d/NEW_DESCRIPTION]`
 
 * Exactly one of `INDEX` or the `NAME` fields is compulsory.
 * At least one of the `NEW_TITLE` or `NEW_DESCRIPTION` arguments must be provided.
@@ -209,11 +222,17 @@ There are three cases of usage:
 
 **Examples:**
 * `deletelog n/John Doe id/1`
+
+|                Before                 |                   After                   |
+|:-------------------------------------:|:-----------------------------------------:|
+| ![PreClear](images/AddLogExample.png) | ![PostClear](images/DeleteLogExample.png) |
+
 * `deletelog n/John Doe -a`
 * `deletelog -a`
 
 ## Event Management
 _Amigos_ also allows you to keep track of your social events!
+
 ![Events Page](images/EventPage.png)
 
 ### Creating an event: `addevent` or `ae`
@@ -228,7 +247,10 @@ Adds a new event, which can be optionally linked to any number of existing frien
 * All given `FRIEND_NAME` values must match the `NAME` of an existing friend in _Amigos_.
 
 **Examples**:
-* `addevent n/John’s Birthday dt/15-08-2021 1700 d/Remember to get a present! f/John Low f/Alex Yeo`
+* `addevent n/John’s Birthday dt/15-08-2022 1700 d/Remember to get a present! f/John Doe f/Alex Yeo`
+
+![AddEventExample](images/AddEventExample.png)
+
 * `addevent n/Christmas Party dt/25-12-2022 1930`
 
 ### Editing an event: `editevent` or `ee`
@@ -304,6 +326,8 @@ _Amigos_ aims to help you improve your relationships by providing the tools to r
 Shows insights about friends in _Amigos_. Switches GUI to the Insights tab.
 
 **Format**: `showinsights`
+
+![ShowInsightsExample](images/ShowInsightsExample.png)
 
 ## Miscellaneous
 ### Viewing help : `help`
