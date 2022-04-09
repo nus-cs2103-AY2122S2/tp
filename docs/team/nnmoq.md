@@ -26,28 +26,32 @@ Given below are my contributions to the project.
    - What it does
      - Allows user to Add/Delete/Edit a `Student`.
 2. Added support for optional prefixes in `Student`
-   - What it does
+   (Pull requests [#71](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/71)
+    - What it does
      - All prefixes except for `Name` and `Phone` are optional.
    - Justification
      - The user does not need to know the address or email of every student.
 3. Command Shortcuts
+   (Pull requests [#145](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/145)
    - What it does
      - Provides support for shortcut command words.
    - Justification
      - This makes typing faster, instead of typing `addstudent`, the user can simply use `as`.
 4. Help Page
-    - What it does
-      - Displays a table with the description, command word, command shortcut for each command.
-      - A hyperlink to TeachWhat! user guide.
-    - Justification
-      - It makes it easier for the user to refer to command words and their functionality using the table instead of 
-      opening the user guide.
-      - The user can simply click on the hyperlink and it opens the user guide on their default browser. This saves the user time.
+   (Pull requests [#158](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/158)
+   - What it does
+     - Displays a table with the description, command word, command shortcut for each command.
+     - A hyperlink to TeachWhat! user guide.
+   - Justification
+     - It makes it easier for the user to refer to command words and their functionality using the table instead of 
+        opening the user guide.
+     - The user can simply click on the hyperlink to open it instead of copying it. This saves the user time.
 
 ### Contributions to the UG
       
 1. Created the initial format and draft of the user guide on our Team's shared google docs.
 2. Updated the user guide to use consistent wording.
+
 ### Contributions to the DG
 
 1. Added functionality and use-cases for `AddStudent` command.
