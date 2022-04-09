@@ -1410,7 +1410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
    Use case ends.
 
-* 3a. If studentId is given and a student with the given studentId does not exist.
+* 3a. If student ID is given and a student with the given student ID does not exist.
 
    * 3a1. TAPA shows an error message. 
      
