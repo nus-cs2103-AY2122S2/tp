@@ -21,18 +21,24 @@ public class Description {
 
     /**
      * Checks if a given string is a valid description.
-     * @param test the string to be checked.
+     * @param test the description to be checked.
      * @return true if a given string is a valid description, false otherwise.
      */
     public static boolean isValidDescription(String test) {
         return !(test.trim().isEmpty());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return description;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -40,6 +46,9 @@ public class Description {
                 && description.equals(((Description) other).description)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return description.hashCode();

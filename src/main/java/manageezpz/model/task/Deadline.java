@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * Constructor to initialize an instance of Deadline class with an existing
      * Deadline object.
      *
-     * @param deadline Deadline task
+     * @param deadline Deadline task.
      */
     public Deadline(Deadline deadline) {
         this.type = deadline.getType();
@@ -82,7 +82,7 @@ public class Deadline extends Task {
      * Returns the string representation of a Deadline task.
      *
      * @return The string representation of the Deadline task, consisting of its
-     * description and formatted date and time
+     * description and formatted date and time.
      */
     @Override
     public String toString() {

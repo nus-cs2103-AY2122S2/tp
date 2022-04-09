@@ -1,12 +1,12 @@
 @startuml
 start
-:User executes Unmark command;
+:User executes findTask/findEmployee command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if (Command is Valid)
-    :ManageEZPZ unmarks the [Task], which changes the status back to not done;
+if (Attributes entered are Valid)
+    :ManageEZPZ finds [Tasks/Employees] that contains the stated attributes;
 else ([else])
 endif
 stop

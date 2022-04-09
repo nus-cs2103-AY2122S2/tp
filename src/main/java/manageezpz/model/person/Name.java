@@ -26,18 +26,26 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Checks if a given string is a valid name.
+     * @param test the name to be checked.
+     * @return true if the name is valid, false otherwise.
      */
     public static boolean isValidName(String test) {
         return !test.trim().isEmpty();
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return fullName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -45,6 +53,9 @@ public class Name {
                 && fullName.equals(((Name) other).fullName)); // state check
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return fullName.hashCode();
