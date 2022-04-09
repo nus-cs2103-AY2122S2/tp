@@ -84,6 +84,6 @@ public class EditPositionCommandParser implements Parser<EditPositionCommand> {
         }
         Collection<String> requirementSet = requirements.size() == 1 && requirements.contains("")
                 ? Collections.emptySet() : requirements;
-        return Optional.of(ParserUtil.parseRequirements(requirements));
+        return Optional.of(ParserUtil.parseRequirements(requirementSet));
     }
 }
