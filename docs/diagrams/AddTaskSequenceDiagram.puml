@@ -14,7 +14,7 @@ box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addgroup g/example")
+[-> LogicManager : execute("addtask task/exampleT g/exampleG")
 activate LogicManager
 
 LogicManager -> ArchDukeParser : parseCommand("addtask task/exampleT g/exampleG")

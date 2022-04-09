@@ -444,17 +444,93 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ![](images/ViewTaskCommandActivityDiagram.png)
 
-## Assign feature
+## Assign student contact to an existing group feature
 
-The `assign` command assigns an existing `Person` to an existing `Group` in ArchDuke,
-through the `AssignCommandParser` and `AssignCommand`.
-It uses the `AddressBook#assignPerson(Person personToAssign, Group group)` which is exposed in the `Model`
-interface as `Model#assignPerson(Person person, Group group)`. Subsequently, `setGroup(Group target, Group editedGroup)`
-is called on `UniqueGroupList` to update the `Group` with the assigned `Person`.
+### About assign feature
+
+The assign feature allows users to assign a yet-to-assign student contact to an existing
+student group via the command `assign INDEX g/GROUP_NAME`.
+
+### How it is implemented
+
+The `assign` command mechanism is facilitated by the `AssignCommand` and the `AssignCommandParser`.
+It allows users to add a yet-to-assign student contact to an already existing group in ArchDuke. It uses the `AddressBook#assignPerson(Person personToAssign, Group group)`
+which is exposed in the `Model` interface as `Model#assignPerson(Person person, Group group)`. Then, the `Group#AssignPerson(Person person)` is called to 
+assign a person to the group. 
+
+Given below is the example usage scenario and how assign mechanism behaves at each step.
+
+#### Parsing user input
+
+1. The user inputs the `assign` command and provide the `INDEX` of the student contact and `GROUP_NAME` of the group
+in which the users want to assign the student contact to.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `AssignCommandParser`.
+
+3. The `AassignCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+   It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   `ParseException` would be thrown. 
+
+4. If the required prefixes and attributes is present (i.e. `g/GROUP_NAME`), `AssignCommandParser` will then call the `ParserUtil#parseGroupName()`
+   to check for the validity of the input `GROUP_NAME`. It also calls the `ParserUtil#parseIndex()` to check for the validity of the `INDEX`.
+   <br> <br> At this stage, `ParseException` would be thrown if the
+   `GROUP_NAME` specified is invalid and/or the `INDEX` is invalid.
+
+5. The `AssignCommandParser` then creates the `AssignCommand` based on the processed inputs.
+
+#### Command execution
+
+6. The `LogicManager` executes the `AssignCommand`.
+
+7. The `AssignCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has existed in the group list.
+   `CommandException` would be thrown if there has yet to exist a group with the same group name. Subsequently, `Model#getFilteredGroupList()`
+is called to get the unmodifiable view of the group list. The list is then being looped through to obtain the target group.
+
+8. Similarly, `AssignCommand` calls the `Model#getFilteredPersonList()` and get the target student contact by index.
+
+9. `AssignCommand` calls `Group#personExists` on the target group to check if the student contact has already existed in the group.
+`CommandException` is thrown if there exists the same person in the group.
+
+10. The `Model#assignPerson(Person person, Group group)` is called to assign the student contact to the target group.
+
+#### Displaying of result
+
+11. Finally, the `AssignCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
+     The GUI would also be updated on this change in the group list and update the display of group list accordingly.
 
 The following sequence diagram shows how the `assign` mechanism works:
 
-To be updated...
+![](images/AssignSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AssignCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `assign` command:
+
+![](images/AssignCommandActivityDiagram.png)
+
+### Design considerations
+
+#### Aspect: What the assign command assigns student contact by
+
+* **Alternative 1 (current choice)**: Assigns by student contact index.
+
+    * Pros: It is more intuitive as user who wants to delete a group would **already know** what group he/she wants to delete, and hence the group name.
+      Users would not have to search through the group list to see which index the group he/she wants to delete is located.
+      Searching through the list may be especially troublesome if there are many groups in the group list.
+
+    * Cons: User would have to type the entire group name.
+
+* **Alternative 2**: Assigns by student contact name.
+
+    * Pros: Users could delete the group by just typing a single number. This may be faster if the group is already visible in the group list without having to search
+      (e.g. when the target group to delete is at the top of the list).
+
+    * Cons: If there are many groups in the group list, users would have to execute another command (i.e. to find the group to get the group index)
+      before being able to delete the desired group.
+  
+    * Limitations: 
 
 ## Find student contact feature
 
