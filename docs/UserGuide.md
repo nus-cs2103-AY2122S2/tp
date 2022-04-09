@@ -89,38 +89,38 @@ You may see more than one command word for a command, the second one being the s
 
 Displays the details for the student with the specified student ID.
 
-Command word: `student`
+**Command word**: `student`
 
-Format: `student <STUDENT_ID>`
+**Format**: `student <STUDENT_ID>`
 
-Examples: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
+**Examples**: `student 3` displays the details of the student with `STUDENT_ID` of **3**.
 
 ___
 
 ### Viewing a lesson
 Displays the details for the lesson with the specified lesson ID.
 
-Command word: `lesson`
+**Command word**: `lesson`
 
-Format: `lesson <LESSON_ID>`
+**Format**: `lesson <LESSON_ID>`
 
-Example: `lesson 3` displays the details of the lesson with `LESSON_ID` of **3**.
+**Example**: `lesson 3` displays the details of the lesson with `LESSON_ID` of **3**.
 
 ---
 
 ### Viewing all students
 
-Format: `liststudents` / `ls`
+**Command word**: `liststudents` / `ls`
 
-Example: `liststudents` would display a list of all the students that a tutor has.
+**Example**: `liststudents` would display a list of all the students that a tutor has.
 
 ---
 
 ### Viewing all lessons
 
-Format: `listlessons` / `ll`
+**Command word**: `listlessons` / `ll`
 
-Example: `listlessons` would display a list of all the lessons that a tutor has.
+**Example**: `listlessons` would display a list of all the lessons that a tutor has.
 
 ---
 
@@ -128,11 +128,11 @@ Example: `listlessons` would display a list of all the lessons that a tutor has.
 
 Adds a student to TeachWhat!
 
-Command word: `addstudent` / `as`
+**Command word**: `addstudent` / `as`
 
-Format: `addstudent -n <STUDENT_NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>` 
+**Format**: `addstudent -n <STUDENT_NAME> -p <PHONE_NO> -e <EMAIL> -a <ADDRESS> -t <TAG>` 
 
-Example: `addstudent -n James -p 999 -e jamesboyo@gmail.com -a 34 Lor 11 Geylang -t hardworking -t small`
+**Example**: `addstudent -n James -p 999 -e jamesboyo@gmail.com -a 34 Lor 11 Geylang -t hardworking -t small`
 
 Adds a student with the following attributes:
 
@@ -142,8 +142,8 @@ Adds a student with the following attributes:
 * address: 34 Lor 11 Geylang 
 * tags: hardworking, small
 
-**Note that :**
-
+**:information_source: Note that:**
+<div markdown="block" class="alert alert-info">
 * The address, email and tag are optional and can be omitted so that the tutor only keeps the most vital 
 information which is the student's name and phone number.
 * There can be **multiple tags** assigned to one student, as demonstrated in the example above.
@@ -153,18 +153,18 @@ information which is the student's name and phone number.
 * Address is limited to 100 characters.
 * Email is limited to 100 characters.
 * Tags are limited to 30 alphanumeric characters with no spaces allowed.
-
+</div>
 ---
 
 ### Editing a Student
 
 Edits an existing student in TeachWhat!.
 
-Command word: `editstudent` / `es`
+**Command word**: `editstudent` / `es`
 
-Format: `editstudent <STUDENT_ID> -n [NAME] -p [PHONE_NO] -e [EMAIL] -a [ADDRESS] -t [TAG]`
+**Format**: `editstudent <STUDENT_ID> -n [NAME] -p [PHONE_NO] -e [EMAIL] -a [ADDRESS] -t [TAG]`
 
-Example: `editstudent 2 -n Sammy -p 123 -t codinggod -t extrageeky -t extrahansum`
+**Example**: `editstudent 2 -n Sammy -p 123 -t codinggod -t extrageeky -t extrahansum`
 
 Suppose the student with the `<STUDENT_ID>` of **2** is "Sammy boyo". The edit command above will cause the changes shown.
 
@@ -172,10 +172,12 @@ Suppose the student with the `<STUDENT_ID>` of **2** is "Sammy boyo". The edit c
 |------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | Name: Sammy boyo<br/>Phone no.: 911 <br/>Email: sam@gmail.com<br/>Address: 123 West Coast road<br/>Tags: geeky, hansum | Name: Sammy boyo<br/>Phone no.: 123 <br/>Email: sam@gmail.com<br/>Address: 123 West Coast road<br/>Tags: codinggod, extrageeky, extrahansum |
 
-**Note that:**
+<div markdown="block" class="alert alert-info">
+**:information_source: Note that:**
 
 * At least one prefix must be given to edit the student. 
 * If tags are provided, **all** existing tags will be replaced with the new tags.
+</div>
 
 ---
 
@@ -183,11 +185,11 @@ Suppose the student with the `<STUDENT_ID>` of **2** is "Sammy boyo". The edit c
 
 Deletes a student from TeachWhat!
 
-Command word: `rmstudent` / `rms`
+**Command word**: `rmstudent` / `rms`
 
-Format: `rmstudent <STUDENT_ID>`
+**Format**: `rmstudent <STUDENT_ID>`
 
-Example: `rmstudent 13`
+**Example**: `rmstudent 13`
 
 ---
 
@@ -195,26 +197,27 @@ Example: `rmstudent 13`
 
 Adds a lesson to TeachWhat!
 
-Command word: `addlesson` / `al`
+**Command word**: `addlesson` / `al`
 
-Format: `addlesson [-r] -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES] -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
+**Format**: `addlesson [-r] -n <LESSON_NAME> -d <DATE_OF_LESSON> -t <STARTING_TIME> -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES] -s <LESSON_SUBJECT> -a <ADDRESS_OF_LESSON> -r <IF_LESSON_IS_RECURRING`
 
-<div markdown="block" class="alert alert-info">
-
-* **ℹ Adding Recurring Lessons:** to specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! if it is a temporary lesson, simply leave it out.
+<div markdown="span" class="alert alert-warning">:bulb:
+**Adding Recurring Lessons**: To specify that the lesson added is recurring on a weekly-basis, simply specify `-r` in your command! If it is a temporary lesson, simply leave it out.
 
 </div>
 
+<div markdown="block" class="alert alert-info">
 **Note that:**
 - The subject and address are optional fields and can be omitted so that the tutor only keeps the most vital information of the lesson.
 - Lesson durations cannot be greater than **24 hours**!
 - You can use `-h` and `-m` together to specify a more precise duration
 - Lesson name is limited to 50 alphanumeric characters with spaces allowed.
 - Address is limited to 100 characters.
+</div>
 
 Supported Types: Recurring `-r` and Temporary
 
-Example: `addlesson -r -n Biology group 1 -s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04 -d 27-02-2022 -t 18:00 -h 1 -m 50`
+**Example**: `addlesson -r -n Biology group 1 -s Biology -a Blk 11 Ang Mo Kio Street 74, #11-04 -d 27-02-2022 -t 18:00 -h 1 -m 50`
 
 Adds a recurring lesson with the following attributes:
 * name: Biology group 1
@@ -238,11 +241,11 @@ Adds a recurring lesson with the following attributes:
 
 Edits an existing lesson in TeachWhat!.
 
-Command word: `editlesson` / `el`
+**Command word**: `editlesson` / `el`
 
-Format: `editlesson <LESSON_ID> -n [LESSON_NAME] -s [SUBJECT] -a [ADDRESS_OF_LESSON] -d [DATE_OF_LESSON] -t [STARTING_TIME] -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES]`
+**Format**: `editlesson <LESSON_ID> -n [LESSON_NAME] -s [SUBJECT] -a [ADDRESS_OF_LESSON] -d [DATE_OF_LESSON] -t [STARTING_TIME] -h [DURATION_OF_LESSON_IN_HOURS] -m [DURATION_OF_LESSON_IN_MINUTES]`
 
-Example: `editlesson 2 -n Bio Make Up Session -t 17:00 -h 2`
+**Example**: `editlesson 2 -n Bio Make Up Session -t 17:00 -h 2`
 
 Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit command will cause the changes shown below.
 
@@ -250,28 +253,34 @@ Suppose the lesson with `<LESSON_ID>` of **2** is "Biology group 1". The edit co
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Name: Biology group 1<br/>Subject: Biology<br/>Address: Blk 11 Ang Mo Kio Street 74, #11-04<br/>Date: 27 February 2022<br/>Start Time: 6pm<br/>Duration: 1h 50mins | Name: Bio Make Up Session<br/>Subject: Biology<br/>Address: Blk 11 Ang Mo Kio Street 74, # 11-04<br/>Date: 27 February 2022<br/>Start Time: 5pm<br/>Duration: 2hrs |
 
-**Note that:**
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Note that:**
 * Editing of the lesson's type is not allowed. Recurring lessons cannot be edited to become temporary lessons and vice-versa.
 * You can use `-h` and `-m` together to specify a more precise duration.
 * If you are changing the lesson's duration, take note that durations of the lesson cannot be greater than **24 hours!**
+</div>
+
 ---
 
 ### Deleting a lesson
 
 Deletes the specified lesson from the list of lessons.
 
-Command word: `rmlesson` / `rml`
+**Command word**: `rmlesson` / `rml`
 
-Format:  `rmlesson <LESSON_ID>`
+**Format**:  `rmlesson <LESSON_ID>`
 
-Deletes the lesson with the specified `LESSON_ID`.
-The `LESSON_ID` corresponds to the number in the displayed lesson list.
-The `LESSON_ID` must be a positive integer.
-
-Example:
+**Example**:
 `listlessons` to list the lessons and display their `LESSON_ID`, 
 followed by `rmlesson 5` to delete the lesson with the id **5**.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note that:** <br>
+* Deletes the lesson with the **specified `LESSON_ID`**.
+* The `LESSON_ID` corresponds to the number in the **displayed lesson list**.
+* The `LESSON_ID` must be a **positive integer**.
+</div>
 
 ---
 
@@ -279,11 +288,11 @@ followed by `rmlesson 5` to delete the lesson with the id **5**.
 
 Assigns the specified student to the specified lesson.
 
-Command word: `assign`
+**Command word**: `assign`
 
-Format: `assign -s <STUDENT_ID> -l <LESSON_ID>`
+**Format**: `assign -s <STUDENT_ID> -l <LESSON_ID>`
 
-Example: `liststudents` followed by `assign -s 5 -l 11` assigns the student with `<STUDENT_ID>` of **5**
+**Example**: `liststudents` followed by `assign -s 5 -l 11` assigns the student with `<STUDENT_ID>` of **5**
 to the lesson with `<LESSON_ID>` of **11**.
 
 ---
@@ -292,11 +301,11 @@ to the lesson with `<LESSON_ID>` of **11**.
 
 Unssigns the specified student from the specified lesson.
 
-Command word: `unassign`
+**Command word**: `unassign`
 
-Format: `unassign -s <STUDENT_ID> -l <LESSON_ID>`
+**Format**: `unassign -s <STUDENT_ID> -l <LESSON_ID>`
 
-Example: `liststudents` followed by `unassign -s 5 -l 11` unassigns the student with `<STUDENT_ID>` of **5**
+**Example**: `liststudents` followed by `unassign -s 5 -l 11` unassigns the student with `<STUDENT_ID>` of **5**
 to the lesson with `<LESSON_ID>` of **11**.
 
 ---
@@ -305,11 +314,11 @@ to the lesson with `<LESSON_ID>` of **11**.
 
 Displays the students whose names or tags contain the input provided.
 
-Command word: `findstudents` / `fs`
+**Command word**: `findstudents` / `fs`
 
-Format: `findstudents <FIND_CRITERIA>`
+**Format**: `findstudents <FIND_CRITERIA>`
 
-Examples: `findstudents alex friends` searches the student list for students whose names or tags contain the keyword "alex" **or** "friends".
+**Examples**: `findstudents alex friends` searches the student list for students whose names or tags contain the keyword "alex" **or** "friends".
 
 ---
 
@@ -317,34 +326,37 @@ Examples: `findstudents alex friends` searches the student list for students who
 
 Displays the lessons whose names or subjects contain the any of the keywords provided.
 
-Command word: `findlessons` / `fl`
+**Command word**: `findlessons` / `fl`
 
-Format: `findlessons <FIND_CRITERIA>`
+**Format**: `findlessons <FIND_CRITERIA>`
 
-Examples: `findlesson biology` searches the lesson list for lessons with names or subjects that contain the keyword "biology".
-
-Examples: `findlessons biology` searches the lesson list for lessons which names
- include "biology"
+**Examples**: `findlesson biology` searches the lesson list for lessons with names or subjects that contain the keyword "biology".
 
 ---
 
 ### Clearing all entries
 
-Clears all lessons and students from `TeachWhat!`.
+Clears and deletes all lessons and students from `TeachWhat!`.
 
-Format: `clear -f`
+**Format**: `clear -f`
 
 <div markdown="block" class="alert alert-info">
-To save you from accidentally deleting everything if you accidentally enter `clear`, we made it mandatory for you to include `-f` together with the command (to get confirmation from you that you indeed wish to do so).
+**:information_source: Note that:**
+To prevent accidental deletion on your entire list, it is **mandatory** for you to include `-f` with the command (confirmation).
 
-So, remember to include `-f` when typing this command! 
+Remember to include **`-f`** when typing this command! 
+</div>
+
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Caution:**<br>
+THIS WILL WIPE YOUR ENTIRE LESSON AND STUDENT LIST!
 </div>
 
 ### Help
 
 Opens a pop-up that gives you a link to the User guide.
 
-Format: `help`
+**Format**: `help`
 
 _Alternatively, you can press <kbd>F1</kbd> to open the pop-up._
 
@@ -366,7 +378,7 @@ _Newly executed commands would be added to the history as you use TeachWhat!._
 
 Closes TeachWhat! window.
   
-Format: `exit`
+**Format**: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -379,7 +391,7 @@ the data of your previous TeachWhat! folder.
 **Q**: Why are both student and lesson lists empty? <br>
 **A**: This is most probably due to data in the respective files that holds the data for students and lessons.
 
-To guard against the possibility of you being misled by corrupted data, TeachWhat! will wipe all data and start from scratch if any
+To guard against the possibility of you being misled by corrupted data, TeachWhat! **will wipe all data** and start from scratch if any
 error is found in the data files for students *or* lessons.
 
 An example of such an error would be conflicting lessons being found in the data file that holds lessons.

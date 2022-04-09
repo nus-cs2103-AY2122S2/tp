@@ -64,6 +64,7 @@ to see the code I've contributed.
 [#138](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/138))
    - Added sequence diagrams to show how the input is parsed and how the command is executed.
    - Added a step-by-step example of how the entire command execution process is done.
+3. Added table of contents and cleaned up formatting
 
 ### Contributions to the User Guide
 1. Updated user stories (Pull request [#49](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/49))
@@ -75,6 +76,7 @@ to see the code I've contributed.
 [#168](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/168) and 
 [#245](https://github.com/AY2122S2-CS2103T-W11-3/tp/pull/245))
 5. Updated the screenshot of the UI
+6. Improved the formatting of the user guide, by making some elements more prominent.
 
 ### Contributions to team-based tasks
  - Worked on fixing bugs that were found during the PE Dry Run with the team

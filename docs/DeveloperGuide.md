@@ -2,8 +2,43 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+## Table of Contents
+* [**Introduction**](#introduction)
+* [**Acknowledgements**](#acknowledgements)
+* [**Setting up, getting started**](#setting-up-getting-started)
+* [**Design**](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+* [**Implementation**](#implementation)
+  * [Viewing a Lesson or Student's details](#viewing-a-lesson-or-students-details)
+    * [Step 1: User input](#step-1-user-inputs-student-1-into-the-commandbox-and-hits-enter)
+    * [Step 2: Logic parses input](#step-2-logic-parses-the-users-input-and-returns-the-result)
+    * [Step 3: Executing the command](#step-3-executing-the-command)
+    * [Step 4: Updating the UI](#step-4-updating-the-ui)
+  * [Add student](#add-student)
+  * [Add temporary/recurring lesson](#add-temporaryrecurring-lesson)
+    * [Determining if a lesson clashes with any existing lessons](#determining-if-a-lesson-clashes-with-any-existing-lessons)
+  * [Assign student to lesson](#assign-student-to-lesson)
+    * [Step 1: User launches application and executes command](#step-1-the-user-launches-the-application-and-executes-the-following)
+    * [Step 2: User executes commands to find IDs](#step-2-the-user-executes-the-following-to-find-the-respective-ids-of-the-student-and-lesson)
+    * [Step 3: User executes assign command](#step-3-the-user-executes-the-command-assign--s-1--l-1-the-command-does-the-following)
+* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+* [**Appendix: Requirements**](#appendix-requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+    * [Add a temporary lesson](#add-a-temporary-lesson)
+    * [Add a recurring lesson](#add-a-recurring-lesson)
+    * [Delete a lesson](#delete-a-lesson)
+    * [Assign a student to a class](#assign-a-student-to-a-lesson)
+    * [Delete a student](#delete-a-student)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
 
 ## **Introduction**
 
@@ -31,10 +66,50 @@ Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/m
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W11-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
+[return to top ↑](#table-of-contents)
 
 ### Architecture
 
-TODO
+<img src="images/ArchitectureDiagram.png" width="280" />
+
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+
+Each of the four main components (also shown in the diagram above),
+
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" width="300" />
+
+The sections below give more details of each component.
+
+[return to top ↑](#table-of-contents)
 
 ### UI component
 The **API** of this component is specified in `Ui.java`
@@ -86,6 +161,10 @@ The methods `MainWindow#populateInfoPanelWithLesson()` and `MainWindow#populateI
 populate the `InfoPanel` with the provided entry. Populating the `InfoPanel` using user commands is handled by the 
 method `MainWindow#handleInfoPanelUpdate()`.
 
+Refer to [**Viewing a Lesson or Student's details**](#Viewing a Lesson or Student's details) implementation.
+
+[return to top ↑](#table-of-contents)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/AY2122S2-CS2103T-W11-3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -115,6 +194,7 @@ How the parsing works:
 * When called upon to parse a user command, the `TeachWhatParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DeleteStudentCommand`) which the `TeachWhatParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[return to top ↑](#table-of-contents)
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -134,6 +214,8 @@ Each `Lesson` has an association with a list of `EnrolledStudents`, which contai
 
 ![Model Class Diagram](images/LessonBookStudentBookModelClassDiagram.png)
 
+[return to top ↑](#table-of-contents)
+
 ### Storage component
 
 **API** : [`StorageManager.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/storage/StorageManager.java)
@@ -147,9 +229,13 @@ corresponding objects.
 one of the three (if only the functionality of one is needed).
 * depends on some classes in the `Model` component because its job is to save/retrieve objects that belong to the `Model`.
 
+[return to top ↑](#table-of-contents)
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+[return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -176,14 +262,14 @@ selected `Lesson` or `Student`. A more detailed explanation is shown below.
 Given below is an example where a user inputs `student 1` as a command to view the details of the first student on the 
 list.
 
-Step 1: User inputs `student 1` into the `CommandBox` and hits enter.
+#### Step 1: User inputs `student 1` into the `CommandBox` and hits enter.
 
 [`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 receives the user input through the `MainWindow#executeCommand()` method. 
 [`MainWindow`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 then sends the user input to `Logic` and retrieves the result.
 
-Step 2: `Logic` parses the user's input and returns the result
+#### Step 2: `Logic` parses the user's input and returns the result
 
 ![](images/viewing-details/ViewStudentParseSequenceDiagram.png)
 
@@ -198,7 +284,7 @@ takes in the provided index and creates a
 [`ViewStudentInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewStudentInfoCommand.java).
 This `Command` is returned back to `LogicManager` where it is executed with the `ViewStudentInfoCommand#execute()` method.
 
-Step 3: Executing the command
+#### Step 3: Executing the command
 
 As shown in the diagram above, when `ViewStudentInfoCommand#execute()` is called,
 [`ViewStudentInfoCommand`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewStudentInfoCommand.java)
@@ -216,7 +302,7 @@ object, with the parameter `infoPanelType = InfoPanelTypes.STUDENT`.
 is an enumerator representing the different states of the InfoPanel. This is then returned to `LogicManager` which
 returns it back to `MainWindow`.
 
-Step 4: Updating the UI
+#### Step 4: Updating the UI
 
 ![](images/viewing-details/ViewStudentSequenceDiagram.png)
 
@@ -238,6 +324,8 @@ application is updated with the details of the selected `Student`.
 <img src="images/viewing-details/UiExample.png" width="550" />
 
 A similar process is done when using the `lesson` command but with its corresponding `Parser` and `Command` objects.
+
+[return to top ↑](#table-of-contents)
 
 ### Add student
 Adding a new `Student` to TeachWhat! is done through the `LogicManager`. The user input is parsed by the 
@@ -276,6 +364,8 @@ Step 7. The `LogicManager` then executes the `AddStudentCommand` and the `Studen
 The following sequence diagram shows how the add student command works.
 ![](images/AddStudentSequenceDiagram.png)
 
+[return to top ↑](#table-of-contents)
+
 ### Add temporary/recurring lesson
 Adding a new `Lesson` to TeachWhat! follows a process that is similar to adding a new `Student`, with the following key differences,
 - the `TeachWhatParser` detects the command word `addlesson` and passes the lessons details to `AddLessonCommandParser#parse`
@@ -306,6 +396,7 @@ The following sequence diagram shows how `AddLessonCommand`
 
 ![Add Lesson Sequence Diagram 4](images/AddLessonSequenceDiagram_4.png)
 
+
 #### Determining if a lesson clashes with any existing lessons
 
 When a user requests to add a new lesson to the list, it is important to check that the new lesson ***does not clash with any existing lessons in the list.***
@@ -323,6 +414,8 @@ This is done with the method `ConsistentLessonList#hasConflictingLesson()`, whic
 The following sequence diagram shows how this is done:
 
 ![Add Lesson Sequence Diagram 5](images/AddLessonSequenceDiagram_5.png)
+
+[return to top ↑](#table-of-contents)
 
 ### Assign student to lesson
 
@@ -368,6 +461,7 @@ The following sequence diagram shows how the assign operation works.
 > **Note**: The lifeline for AssignCommandParser should end at the destroy marker (X) but due to a limitation of 
 > PlantUML, the lifeline reaches the end of diagram.
 
+[return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -387,25 +481,28 @@ The following sequence diagram shows how the assign operation works.
 
 **Target user profile**:
 - is a private tutor
-- has multiple students and classes
+- has multiple students and lessons
 - can type fast
 - skilled at using the command line
 
 **Value proposition**:\
 If a tutor has many students, it may be difficult to keep track of all of the students and the rates offered to each of them. TeachWhat! solves this issue by helping tutors manage their schedule, students and income more efficiently.
 
+[return to top ↑](#table-of-contents)
+
 ### User stories
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​    | I want to …​                                             | So that I can…​                                              |
-|---------|------------|----------------------------------------------------------|--------------------------------------------------------------|
-| `* * *` | user       | add my student's information                             | keep track of their progress                                 |
-| `* * *` | user       | delete classes                                           | clear old classes                                            |
-| `* * *` | user       | delete students and their details                        | reduce clutter of old students and keep their privacy intact |
-| `* * *` | user       | add classes to the list and assign students to the class | have an overview of which students are attending the class   |
-| `* *`   | a new user | clear and reset my entire list of classes and students   | add actual data after testing the program out                |
-| `* *`   | user       | specify the type of class when creating one              | know if a class is permanent or a temporary class            |
+| Priority | As a …​    | I want to …​                                              | So that I can…​                                              |
+|---------|------------|-----------------------------------------------------------|--------------------------------------------------------------|
+| `* * *` | user       | add my student's information                              | keep track of their progress                                 |
+| `* * *` | user       | delete lessons                                            | clear old lessons                                            |
+| `* * *` | user       | delete students and their details                         | reduce clutter of old students and keep their privacy intact |
+| `* * *` | user       | add lessons to the list and assign students to the lesson | have an overview of which students are attending the lesson  |
+| `* *`   | a new user | clear and reset my entire list of lessons and students    | add actual data after testing the program out                |
+| `* *`   | user       | specify the type of lesson when creating one              | know if a lesson is permanent or a temporary lesson          |
 
+[return to top ↑](#table-of-contents)
 
 ### Use cases
 
@@ -432,12 +529,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
-* 1d. User did not provide the duration of class or duration of class has invalid format.
+* 1d. User did not provide the duration of lesson or duration of lesson has invalid format.
     * 1d1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
-* 1e. User already has existing class(es) overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)\
+* 1e. User already has existing lesson(s) overlapping with the specified starting, ending time and date.
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping lesson(s)\
       Use case resumes at step 1.
 
 #### Add a recurring lesson
@@ -463,12 +560,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
-* 1d. User did not provide the duration of class or duration of class has invalid format.
+* 1d. User did not provide the duration of lesson or duration of lesson has invalid format.
     * 1d1. TeachWhat! shows an error message.  
       Use case resumes at step 1.
 
-* 1e. User already has an existing class overlapping with the specified starting, ending time and date.
-    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping class(es)\
+* 1e. User already has an existing lesson overlapping with the specified starting, ending time and date.
+    * 1e1. TeachWhat! shows an error message and displays a list of such overlapping lesson(s)\
       Use case resumes at step 1.
 
 #### Delete a lesson
@@ -492,29 +589,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TeachWhat! shows an error message.  
       Use case resumes at step 3.
 
-#### Assign a student to a class
+#### Assign a student to a lesson
 
 **System:** TeachWhat!  
-**Use case:** UC4 - Assign a student to a class  
+**Use case:** UC4 - Assign a student to a lesson  
 **Actor:** User
 
 **MSS**
 1. User requests to list students
 2. TeachWhat! shows a list of students
-3. User requests to list classes
-4. TeachWhat! shows a list of classes
-5. User selects the class to assign the student to
-6. TeachWhat! assigns the student to the class.
+3. User requests to list lessons
+4. TeachWhat! shows a list of lessons
+5. User selects the lesson to assign the student to
+6. TeachWhat! assigns the student to the lesson.
    Use case ends.
 
 **Extensions**
 * 2a. The list of students is empty.  
   Use case ends.
 
-* 4a. The list of classes is empty.  
+* 4a. The list of lessons is empty.  
   Use case ends.
 
-* 5a. The given index of student or class is invalid.
+* 5a. The given index of student or lesson is invalid.
     * 5a1. TeachWhat! shows an error message.  
       Use case resumes at step 5.
 
@@ -539,10 +636,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. TeachWhat! shows an error message.  
       Use case resumes at step 3.
 
+[return to top ↑](#table-of-contents)
+
 ### Non-Functional Requirements
 
 1. TeachWhat! able to run on all mainstream OS that has Java 11 or above installed
-2. Should be able to hold up to 1000 students and classes without a noticeable sluggishness in performance for typical
+2. Should be able to hold up to 1000 students and lessons without a noticeable sluggishness in performance for typical
    usage
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse
@@ -554,6 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Command Line**: A text interface for your computer.
 
+[return to top ↑](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -577,3 +677,5 @@ TODO
 ### Saving data
 
 TODO
+
+[return to top ↑](#table-of-contents)
