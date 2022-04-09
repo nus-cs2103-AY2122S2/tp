@@ -28,7 +28,7 @@ public class ResizeCommand extends Command {
         return resultWindowDisplaySize;
     }
 
-    public static int getResieWindowMultiplier() {
+    public static int getResizeWindowMultiplier() {
         return RESIZE_WINDOW_MULTIPLIER;
     }
 
