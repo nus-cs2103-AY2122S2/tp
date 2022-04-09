@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.CS2101;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tamodule.UniqueModuleList;
 import seedu.address.model.tamodule.exceptions.DuplicateModuleException;
 import seedu.address.model.tamodule.exceptions.ModuleNotFoundException;
 import seedu.address.testutil.ModuleBuilder;

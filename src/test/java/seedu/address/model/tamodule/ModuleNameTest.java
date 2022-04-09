@@ -33,7 +33,7 @@ public class ModuleNameTest {
     @Test
     public void isValidModuleName() throws IOException {
         String modulesList = FileUtil.readFromFile(TEST_DATA_FOLDER.resolve("moduleList.json"));
-        JsonAdaptedNUSModule[] nusModuleList = JsonUtil.fromJsonString(modulesList, JsonAdaptedNUSModule[].class);
+        JsonAdaptedNusModule[] nusModuleList = JsonUtil.fromJsonString(modulesList, JsonAdaptedNusModule[].class);
         Arrays.asList(nusModuleList).stream().filter(x -> !ModuleName.isValidModuleName(x.getTitle()))
                 .peek(x -> System.out.println(x.getTitle())).findAny().ifPresent(x -> fail());
 

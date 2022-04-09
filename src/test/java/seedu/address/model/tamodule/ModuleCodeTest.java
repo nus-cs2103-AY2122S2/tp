@@ -32,7 +32,7 @@ public class ModuleCodeTest {
     @Test
     public void isValidModuleCode() throws IOException {
         String modulesList = FileUtil.readFromFile(TEST_DATA_FOLDER.resolve("moduleList.json"));
-        JsonAdaptedNUSModule[] nusModuleList = JsonUtil.fromJsonString(modulesList, JsonAdaptedNUSModule[].class);
+        JsonAdaptedNusModule[] nusModuleList = JsonUtil.fromJsonString(modulesList, JsonAdaptedNusModule[].class);
         Arrays.asList(nusModuleList).stream().filter(x -> !ModuleCode.isValidModuleCode(x.getModuleCode()))
                 .peek(x -> System.out.println(x.getModuleCode())).findAny().ifPresent(x -> fail());
 

@@ -6,7 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2101;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ModuleBuilder;
