@@ -434,12 +434,15 @@ Given below is the example usage scenario and how view task mechanism behaves at
 
 The following sequence diagram shows how the `viewtask` mechanism works:
 
-
+![](images/ViewTaskSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
+The following activity diagram summarizes what happens when a user executes the `viewtask` command:
+
+![](images/ViewTaskCommandActivityDiagram.png)
 
 ## Assign feature
 
