@@ -152,10 +152,14 @@ The `Model` component,
 
 * stores the IBook data i.e., all `Product` objects (which are contained in a `UniqueProductList` object).
 * stores the currently 'selected' `Product` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Product>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the current `ProductFilter` which is applied to the _filtered_ list.
 * stores a `UserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPrefs` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 A more detailed representation of the `Product` class is shown below which includes more details regarding the `Item` class.
+
+* The `Item` object enforces a two-way relationship with `Product`.
+* An `Item` can only belong to one `Product`, but a `Product` can contain many `Item`.
 
 <img src="images/DetailedModelClassDiagram.png" width="450" />
 
@@ -179,6 +183,48 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Product filters
+
+#### Implementation
+
+The implementation of product filter is facilitated by the `ProductFilter` class and the `AttributeFilter` class. `ProductFilter` contains a list of `AttributeFilter` which specifies the filter for the individual attributes of a product that was queried in the `Find` command. Both the `ProductFilter` as well as the `AttributeFilter` has a `test` method to test whether a given `Product` fulfils the query specified by the user.
+
+Given below is the class diagram of the `ProductFilter` class and the `AttributeFilter` class.
+
+<img src="images/ProductFilterClassDiagram.png" width="550" />
+
+The following sequence diagrams shows how the `Find` command works:
+
+The sequence diagram below shows how the `FindCommand` object is created:
+
+<img src="images/FindCreationSequenceDiagram.png" width="550" />
+
+The sequence diagram below shows how the `FindCommand` object is executed:
+
+<img src="images/FindExecutionSequenceDiagram.png" width="550" />
+
+As different attributes have different constraints, the `parse` method in the `FindCommandParser` checks that all the attributes are valid before creating the `AttributeFilter` and the `FindCommand` objects. If there is any attribute that is invalid, an exception would be thrown.
+
+When executing the `FindCommand`, the `clearProductFilters` method of the `Model` would be called to ensure that previous filters are removed. The individual `AttributeFilter`s would then be applied by calling the `addProductFilter` method in the `Model` class. This would then update the list of filtered products by checking if the product fulfils every condition in the `AttributeFilter` (i.e. returning true for when the `test` method is called with `Product` as the argument). The updated filtered product list would then be displayed in the GUI.
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** Some `AttributeFilter`s like `NameFilter`, `CategoryFilter` and `DescriptionFilter` has the capability to do partial matching so the query given does not have to exactly match the actual product.  
+
+</div>
+
+#### Design considerations
+
+**Aspect: How to filter the products:**
+
+* **Alternative 1:** Create a single predicate as the product filter.
+    * Pros: Easy to implement.
+    * Cons: User does not have fine-grained control over the current filter.
+
+* **Alternative 2 (current choice):** Create a `ProductFilter` that contains a list of `AttributeFilter`
+    * Pros: Allow the UI to display the individual `AttributeFilter` being applied and delete any one of them individually.
+    * Cons: More complicated to implement.
 
 ### Undo/redo feature
 
@@ -324,9 +370,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list products according to a filter
-2. IBook shows a list of products
+1. User requests to list products according to a filter.
+2. IBook shows a list of products.
 
+   Use case ends.
 
 **Extensions**
 
@@ -338,9 +385,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User request to add a product to IBook
-2. IBook adds the product
+1. User request to add a product to IBook.
+2. IBook adds the product.
 
+   Use case ends.
+   
 **Extensions**
 
 * 1a. Required fields are all present but are invalid.
@@ -368,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User requests to delete a product in the list specified by the index
 3. IBook deletes the product
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -384,8 +433,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list products ([UC1](#uc1-listing-products)).
 2. User requests to update a product in the list specified by the index.
-3. IBook updates the product
-    Use case ends.
+3. IBook updates the product.
+   
+   Use case ends.
 
 **Extensions**
 
@@ -401,7 +451,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to find products.
 2. IBook updates the list to show the requested products.
-Use case ends.
+
+   Use case ends.
 
 **Extensions**
 
@@ -411,12 +462,62 @@ Use case ends.
 
       Use case resumes at step 1.
 
-#### UC6: Update all products
+#### UC6: Find out of stock products
+
+**MSS**
+
+1. User requests to find products that are out of stock.
+2. IBook updates the list to show the requested products.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No products found.
+
+    * 2a1. IBook shows a cute image stating nothing found.
+
+      Use case resumes at step 1.
+
+#### UC7: Find expired items
+
+**MSS**
+
+1. User requests to find items that are expired.
+2. IBook updates the list to show the requested items.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No items found.
+
+    * 2a1. IBook shows a cute image stating nothing found.
+
+      Use case resumes at step 1.
+
+#### UC8: Find expiring items
+
+**MSS**
+
+1. User requests to find items that are expiring within a certain amount of days
+2. IBook updates the list to show the requested items
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No items found.
+
+    * 2a1. IBook shows a cute image stating nothing found.
+
+#### UC9: Update all products
 
 **MSS**
 
 1. User requests to update all products displayed in the list.
 2. IBook updates the list to show all products updated.
+
    Use case ends.
 
 **Extensions**
@@ -433,12 +534,13 @@ Use case ends.
 
       Use case resumes at step 1.
 
-#### UC7: Delete all products
+#### UC10: Delete all products
 
 **MSS**
 
 1. User requests to delete all products displayed in the list.
 2. IBook updates the list to show all products updated.
+
    Use case ends.
 
 **Extensions**
@@ -449,12 +551,13 @@ Use case ends.
 
       Use case resumes at step 1.
 
-#### UC8: Undo changes
+#### UC11: Undo changes
 
 **MSS**
 
 1. User requests to undo the most recent command that made changes to iBook.
 2. IBook revert the most recent changes.
+   
    Use case ends.
 
 **Extensions**
@@ -465,12 +568,13 @@ Use case ends.
 
       Use case resumes at step 1.
 
-#### UC9: Redo changes
+#### UC12: Redo changes
 
 **MSS**
 
 1. User requests to redo the most recent undone command that made changes to iBook.
 2. IBook restore the most recent undone changes.
+   
    Use case ends.
 
 **Extensions**
@@ -516,33 +620,81 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+   3. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a product
 
-1. Deleting a person while all persons are being shown
+1. Deleting a product while all products are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all products using the `list` command. Multiple products in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First product is deleted from the list. Details of the deleted product shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Finding products
+
+1. Find products that match a certain attribute like (`NAME`, `CATEGORY`, `DESCRIPTION`, `PRICE`)
+
+   1. Prerequisites: There are existing products in the list.
+
+   2. Test case: `find n:kaya`<br>
+      Expected: Products that contains `kaya` in the name is displayed. Details such as the number of products found would be shown in the status message.
+
+   3. Test case: `find n:kaya c:bread`<br>
+      Expected: Products that contains `kaya` in the name and `bread` in the category is displayed. Details such as the number of products found would be shown in the status message.
+
+   4. Test case: `find`<br>
+      Expected: Error details is shown in the status message as at least one attribute needs to be specified in the command.
+
+   5. Other incorrect find commands to try: `find blabla`<br>
+      Expected: Similar to previous.
+
+2. Find products that are out of stock
+
+   1. Prerequisites: There are existing products in the list.
+
+   2. Test case: `out-of-stock`<br>
+      Expected: Products that have no items would be displayed.
+
+3. Find items that have expired
+
+    1. Prerequisites: There are existing products in the list.
+
+    2. Test case: `expired`<br>
+       Expected: Products that contain expired items would be displayed.
+
+4. Find items that are expiring
+
+   1. Prerequisites: There are existing products and items in the list.
+
+   2. Test case: `remind 5`<br>
+      Expected: Items that are expiring within the next 5 days would be displayed.
+
+   3. Test case: `remind 0`<br>
+      Expected: Items that are expiring on the same day would be displayed.
+
+   4. Test case: `remind -1`<br>
+      Expected: Error details is shown in the status message as the days specified cannot be negative.
+
+   5. Other incorrect commands to try: `remind blabla`, `remind 9999999999999`<br>
+      Expected: Similar to previous.
 
 ### Saving data
 

@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":IBookParser" as IBookParser LOGIC_COLOR
+participant "f:FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":ProductFilter" as ProductFilter MODEL_COLOR
+end box
+
+[-> LogicManager
+activate LogicManager
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : clearProductFilters
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+loop each attributeFilter
+    FindCommand -> Model : addProductFilter(attributeFilter)
+    activate Model
+
+    Model -> ProductFilter : add(attributeFilter)
+    activate ProductFilter
+
+    ProductFilter --> Model
+    deactivate ProductFilter
+
+    Model --> FindCommand
+    deactivate Model
+end
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+destroy FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

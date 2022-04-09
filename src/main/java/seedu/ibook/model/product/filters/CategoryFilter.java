@@ -10,8 +10,7 @@ public class CategoryFilter extends AttributeFilter {
     private final Category category;
 
     /**
-     * Creates a predicate that checks if the product has the same parameters.
-     * @param category
+     * Creates a filter that checks if the product has a similar category.
      */
     public CategoryFilter(Category category) {
         this.category = category;
