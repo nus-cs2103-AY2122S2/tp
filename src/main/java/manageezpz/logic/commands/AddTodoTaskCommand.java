@@ -25,6 +25,7 @@ public class AddTodoTaskCommand extends Command {
 
     /**
      * Creates an AddTodoTaskCommand to add the specified {@code Task}
+     * @param task Task to be added.
      */
     public AddTodoTaskCommand(Todo task) {
         requireNonNull(task);
