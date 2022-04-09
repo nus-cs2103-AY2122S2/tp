@@ -35,9 +35,13 @@ Given below are my contributions to the project.
   - **Credits:** Due to the gargantuan nature of this feature set from the design phase down to the actual implementation, my group mates Wei Jie and Wei Ming were kind to help me and expand upon my base implementation. They helped me with bug-fixes improving correctness of the features and enhancements of underlying code design to better fit OOP's decoupling of components principle.
 
 
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=fantablack&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 
+
+- **Project Management**:
+    - Organised and facilitated weekly team meetings.
+    - Prepared weekly team meeting agendas and compiled them with After-Meeting action items into [meeting minutes.](https://drive.google.com/drive/folders/1sPGhs3vea9voPhYEhF4pVXfrG-D-iQWM?usp=sharing)
+    - Helped manage weekly milestones (ensure closing of issues, and milestone wrap-ups).
 
 * **Documentation**:
     * User Guide:
