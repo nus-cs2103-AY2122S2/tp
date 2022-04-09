@@ -12,7 +12,11 @@ Given below are my contributions to the project.
 * **New Feature**: Added the model for class groups, lessons and student attendances.
   * What it does: Allows the TA to manage the class groups, lessons as well as the students enrolled in the class groups.
   * Justification: This feature improves the product significantly because a TA needs to manage the class groups he/she is teaching as well as the weekly lessons and student attendances and the app should provide a convenient way to represent them.
-  * Highlights: This enhancement required an in-depth analysis of design alternatives. The implementation too was challenging as changes were made to accomodate the model classes and methods needed for each version iteration (e.g. added `Lesson` and `StudentAttendance` in v1.3).
+  * Highlights: This enhancement required an in-depth analysis of design alternatives. The implementation too was challenging as changes were made to accommodate the model classes and methods needed for each version iteration (e.g. added `Lesson` and `StudentAttendance` in v1.3).
+
+* **New Feature**: Added the storage for class groups and assessments.
+  * What it does: Allows the class groups, assessments as well as the students' attempts to be stored.
+  * Justification: This feature improves the product significantly because data can be stored and retrieved whenever the TA runs the app.
 
 * **New Feature**: Added parsing for the mark and unmark commands.
   * What it does: Allows the TA to execute the mark and unmark commands by parsing the input.
