@@ -241,7 +241,7 @@ Additionally, there are a few final static messages to be displayed to the user 
 
 **Sequence Diagram of Add Feature is shown below:**
 
-<img src='images/AddSequenceDiagram.png' height="701" width="1464">
+![AddSequenceDiagram/png](images/AddSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -327,6 +327,37 @@ The data needed for the pie charts should be coupled with `SummariseCommand`, th
     * Pros: No modifications to the `SummariseCommand` class.
     * Cons: Dependent on the feedback message, need to implement complicated methods to parse the message, parsing methods need to be modified if the format of the feedback message is changed.
 
+### Help feature
+
+The help mechanism implements the following sequence for the method call execute("help").
+
+What is the help feature
+
+The help feature opens up a separate window that contains a simple user guide for the user to adhere to. The window contains a list of commands that Tracey provides, their formats and examples.
+When the Help Window is open, the user can also choose to view the comprehensive user guide on the user's default browser by clicking on the `Open User Guide` button.
+
+The `help` command is as follows:
+
+`help`
+
+The user can choose when to execute the `help` command.
+
+The activity diagram shows the possible execution paths for the `help` command.
+
+**Path Execution of Help Feature Activity Diagram is shown below:**
+
+![HelpActivityDiagram](images/HelpActivityDiagram.png)
+
+**Class Diagram of Help Feature is shown below:**
+
+![HelpClassDiagram](images/HelpClassDiagram.png)
+
+**Sequence Diagram of Help Feature is shown below:**
+
+![HelpSequenceDiagram](images/HelpSequenceDiagram.png)
+
+
+
 
 ### Clear feature
 
@@ -336,6 +367,7 @@ The original AB3 implementation of the clear feature acts a similar way to how w
 user to replace the list of students with an empty one. Previous data are swiped away.
 
 **Path Execution of Clear Feature Activity Diagram is shown below:**
+
 ![ClearFeatureActivityDiagram](images/ClearFeatureActivityDiagram.png)
 
 **Class Diagram of Clear Feature is shown below:**
@@ -350,8 +382,7 @@ Additionally, there is a static final static message to be displayed to the user
 
 **Sequence Diagram of Clear Feature is shown below:**
 
-<img src='images/ClearSequenceDiagram.png' height="701" width="1464">
-
+![ClearSequenceDiagram](images/ClearSequenceDiagram.png)
 
 <br>
 
