@@ -52,12 +52,12 @@ public class DataAnalyzer {
             }
         }
 
-        int averagePlayers = positions.values().stream().reduce(0, (x, y) -> x + y);
+        double averagePlayers = positions.values().stream().reduce(0, (x, y) -> x + y) / ((double) 5);
 
         List<Tag> lackingPlayers = new ArrayList<Tag>();
 
         for (Tag tag : POSITION_TAGS) {
-            if (positions.get(tag) < averagePlayers - 1) {
+            if (positions.get(tag) < averagePlayers - 1 || positions.get(tag) < 2) {
                 lackingPlayers.add(tag);
             }
         }
