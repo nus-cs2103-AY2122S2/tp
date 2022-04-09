@@ -222,23 +222,27 @@ appropriate boolean variables will be flipped to represent the correct view.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​                                                             | I want to …​             | So that I can…​                                                        |
-|-----------|---------------------------------------------------------------------| ---------------------- | ---------------------------------------------------------------------- |
-| `* * *`   | student                                                             | add contacts of other students taking a specific module | I can easily contact other students for help |
-| `* * *`   | student                                                             | remove contacts of students who have finished the module | I can see only those students who are still in the module |
-| `* * *`   | professor                                                           | view all students in my module     | Have a better sensing of the enrolment and better plan module activities.|
-| `* * *`   | student                                                             | see all students in the same module/group as me | Have a better idea of who I am working with, network with them and form groups/ask for help if necessary.|
-| `* * *`   | student                                                             | view all my upcoming key dates/meeting dates in one place | Better plan and remember my schedule.             |
-| `* * *`   | student                                                             | edit specific details of a contact | 
-| `* * *`   | professor                                                           | edit specific details of a contact | 
-| `* * *`   | student                                                             | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly |
-| `* * *`   | student                                                             | find classmates and their contact details taking the same module |  I can form teams with them for group projects                                                                      |
-| `* * `    | student with many modules                                           | flag any important contacts to saved contacts | I can easily find the relevant contact in a hassle-free manner in the future |
-| `* `      | student with many modules                                           | organise any saved contacts into categories | I can easily find the relevant contact in a hassle-free manner |
-| `* `      | student with many contacts                                          | narrow down contacts by module or group | I can easily find the relevant contact in a hassle-free manner. | 
-| `*  `     | professor teaching multiple modules                                 | organise students into their respective modules | locate details of students in each module without having to go through the entire list |
-| `* `      | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof) | I can easily contact the relevant person with one command |
-| `*`       | student/professor with many contacts in the UniBook                 | sort persons by name | locate a person easily |
+| Priority  | As a …​                                                             | I want to …​                                                                             | So that I can…​                                                                                           |
+|-----------|---------------------------------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `* * *`   | student                                                             | add contacts of other students taking a specific module                                  | I can easily contact other students for help.                                                             |
+| `* * *`   | student                                                             | add important dates of a module's events                                                 | I can easily keep track of when my exams/submissions are.                                                 |
+| `* * *`   | student                                                             | add my groupmates of a module into a group                                               | I can quickly look for the contact information of my groupmates.                                          |
+| `* * *`   | student                                                             | add meeting dates of my project group                                                    | I can keep track of when my group meetings are and attend them.                                           |
+| `* * *`   | student                                                             | add contacts of my professors                                                            | I can easily contact the professors for consultation.                                                     |
+| `* * *`   | student                                                             | remove contacts of students who have finished the module                                 | I can see only those students who are still in the module.                                                |
+| `* * *`   | student                                                             | remove contacts of students who have finished the module                                 | I can see only those students who are still in the module.                                                |
+| `* * *`   | professor                                                           | view all students in my module                                                           | Have a better sensing of the enrolment and better plan module activities.                                 |
+| `* * *`   | student                                                             | see all students in the same module/group as me                                          | Have a better idea of who I am working with, network with them and form groups/ask for help if necessary. |
+| `* * *`   | student                                                             | view all my upcoming key dates/meeting dates in one place                                | Better plan and remember my schedule.                                                                     |
+| `* * *`   | student                                                             | edit specific details of a contact                                                       | 
+| `* * *`   | professor                                                           | edit specific details of a contact                                                       | 
+| `* * *`   | student                                                             | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly                                                          |
+| `* * *`   | student                                                             | find classmates and their contact details taking the same module                         | I can form teams with them for group projects                                                             |
+| `* * `    | student with many modules                                           | flag any important contacts to saved contacts                                            | I can easily find the relevant contact in a hassle-free manner in the future                              |
+| `* `      | student with many modules                                           | organise any saved contacts into categories                                              | I can easily find the relevant contact in a hassle-free manner                                            |
+| `* `      | student with many contacts                                          | narrow down contacts by module or group                                                  | I can easily find the relevant contact in a hassle-free manner.                                           | 
+| `*  `     | professor teaching multiple modules                                 | organise students into their respective modules                                          | locate details of students in each module without having to go through the entire list                    |
+| `*`       | student/professor with many contacts in the UniBook                 | sort persons by name                                                                     | locate a person easily                                                                                    |
 
 *{More to be added}*
 
@@ -263,7 +267,99 @@ Use case ends.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
 
-**Use case: UC02 - List People of a specific type**
+* 1a. The user inputs an unaccepted input for any of the fields.
+    - 1a1. User is prompted about the input's constraints.
+    - Use case ends.
+
+**Use Case: UC02 - Add a Module**
+
+Actor: User
+
+**MSS**
+
+1. User requests to add a module.
+2. UniBook adds the appropriate module object to the system.
+
+Use case ends.
+
+**Extensions**
+* 1a. The UniBook list is currently full.
+    - Use case ends.
+
+* 1a. The user request is wrongly formatted/incomplete.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
+
+* 1a. The user inputs an unaccepted input for any of the fields.
+    - 1a1. User is prompted about the input's constraints.
+    - Use case ends.
+
+**Use Case: UC03 - Add a Group to a Module**
+
+Actor: User
+
+**MSS**
+
+1. User requests to add a group to a module.
+2. UniBook adds the appropriate group object to the system.
+
+Use case ends.
+
+**Extensions**
+* 1a. The UniBook list is currently full.
+    - Use case ends.
+
+* 1a. The user request is wrongly formatted/incomplete.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
+
+* 1a. The user inputs an unaccepted input for any of the fields.
+    - 1a1. User is prompted about the input's constraints.
+    - Use case ends.
+
+**Use Case: UC04 - Add a Key Event to a Module**
+
+Actor: User
+
+**MSS**
+
+1. User requests to add a key event to a module.
+2. UniBook updates the respective module in the system.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The user request is wrongly formatted/incomplete.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
+
+* 1a. The user inputs an unaccepted input for any of the fields.
+    - 1a1. User is prompted about the input's constraints.
+    - Use case ends.
+
+**Use Case: UC05 - Add a meeting time to a Group of a Module**
+
+Actor: User
+
+**MSS**
+
+1. User requests to add a meeting time to a group of a module.
+2. UniBook updates the meeting time list of the group of the respective module in the system.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The user request is wrongly formatted/incomplete.
+    - 1a1. User is prompted to enter the format correctly.
+    - Use case ends.
+
+* 1a. The user inputs an unaccepted input for any of the fields.
+    - 1a1. User is prompted about the input's constraints.
+    - Use case ends.
+    
+**Use case: UC06 - List People of a specific type**
 
 Actor: User
 
@@ -283,7 +379,7 @@ Actor: User
 
 Use case ends.
 
-**Use case: UC03 - Change currently active view**
+**Use case: UC07 - Change currently active view**
 
 Actor: User
 
@@ -303,7 +399,7 @@ Actor: User
 
 Use case ends.
 
-**Use case: UC04 - Narrow down specific group from modules view**
+**Use case: UC08 - Narrow down specific group from modules view**
 
 Actor: User
 
@@ -323,7 +419,7 @@ Actor: User
 
 Use case ends.
 
-**Use Case: UC05 - Edit Person/Module**
+**Use Case: UC09 - Edit Person/Module**
 
 Actor: User
 
@@ -347,7 +443,7 @@ Use case ends.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
 
-**Use Case: UC06 - Finding specific persons**
+**Use Case: UC10 - Finding specific persons**
 
 Actor: User
 
@@ -358,7 +454,7 @@ Actor: User
 
 Use case ends.
 
-**Use Case: UC07 - Deleting**
+**Use Case: UC11 - Deleting**
 
 Actor: User
 
