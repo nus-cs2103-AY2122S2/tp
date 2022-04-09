@@ -167,6 +167,14 @@ public class EditEventCommandTest {
     }
 
     @Test
+    public void execute_invalidCompany_failure() {
+        EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withCompanyName("Fake").build();
+        EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_ENTRY, descriptor);
+
+        assertCommandFailure(editEventCommand, model, Messages.MESSAGE_NONEXISTENT_COMPANY);
+    }
+
+    @Test
     public void equals() {
         final EditEventCommand standardCommand = new EditEventCommand(INDEX_FIRST_ENTRY, DESC_INTERVIEW_BIG_BANK);
 

@@ -7,11 +7,14 @@ import static seedu.address.testutil.TypicalEntries.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.entry.Event;
+import seedu.address.model.entry.Person;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddEventCommand}.
@@ -37,9 +40,14 @@ public class AddEventCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateCompany_throwsCommandException() {
+    public void execute_duplicateEvent_throwsCommandException() {
         Event eventInList = model.getAddressBook().getEventList().get(0);
         assertCommandFailure(new AddEventCommand(eventInList), model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
+    @Test
+    public void execute_invalidCompany_throwsCommandException() {
+        Event invalidCompanyEvent = new EventBuilder().withCompanyName("Fake").build();
+        assertCommandFailure(new AddEventCommand(invalidCompanyEvent), model, Messages.MESSAGE_NONEXISTENT_COMPANY);
+    }
 }
