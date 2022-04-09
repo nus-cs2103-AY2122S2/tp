@@ -12,7 +12,7 @@ import java.util.Locale;
 public class Appointment {
     public static final String MESSAGE_CONSTRAINTS =
             "Appointment should be in the form of"
-                    + " 'yyyy-MM-dd-HH-hh'.\nIt can't be empty when using appointment command";
+                    + " 'yyyy-MM-dd-HH-mm'.\nIt can't be empty when using appointment command";
 
     public static final String EMPTY_APPOINTMENT = "";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm");
@@ -102,13 +102,9 @@ public class Appointment {
     }
 
     /**
-     * Returns the appointmentTime object, of the type LocalDateTime, it could be possibly be null.
-     * @return
+     * Checks whether the appointment time is later than current time
+     * @return return true if the time later than current time, false if the time is in the past.
      */
-    public LocalDateTime getAppointmentTime() {
-        return appointmentTime;
-    }
-
     public boolean isLaterThanCurrentTime() {
         return appointmentTime.isAfter(LocalDateTime.now());
     }
