@@ -188,10 +188,14 @@ The sequence for parsing the input is similar to the one shown in [this](#logic-
 
 The following UML sequence diagrams shows how the execution of the `labadd` command to aid understanding:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `toAdd` refers to the `Lab` object with the given `LAB_NUMBER` to be added.<br>
-The method `addLabToAll` in `UniqueStudentList` will call `addLab` for all `Student`s in the list. 
+The method `addLabToAll` in `UniqueStudentList` will call `LabList#add()`for all `Student`s in the list. This is left out of the sequence diagram as it is meant to be a higher level diagram.
 </div>
 
 <img src="images/AddLabCommandSequenceDiagram.png" width="550" />
+
+The implementation of `LabList#add()` was left out of the above sequence diagram as it is meant to be a higher level diagram.
+The sequence diagram for `LabList#add()` will be shown seperately below.
+Note that instead of putting a reference frame in the above UML diagram, I chose to leave the reference frame out as PlantUML's reference frames are huge and would lead to clutter in the above sequence diagram thereby decreasing readability. Instead this short note will suffice.
 
 The following UML sequence diagram shows how `add` is implemented in `LabList`:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the sequence diagram, `lab` refers to the `Lab` object with the given `LAB_NUMBER` to be added and `sortByLabNumber` is a `Comparator` that sorts the `Lab` objects by increasing `LAB_NUMBER`.
