@@ -699,8 +699,6 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. A user should be able to easily find a client.
 5. A user should be able to easily navigate the interface.
-6. The project should be open source.
-7. The product is offered as a free service.
 
 ### Glossary
 
