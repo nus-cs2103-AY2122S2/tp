@@ -15,9 +15,12 @@ Given below are my contributions to the project.
 * **New Feature**: Create model and storage classes for TAssist
 * **New Feature**: Create Parsers for enrol/disenrol, grade, list commands
 * **New Feature**: Create model and add/delete/list commands for Assessment
+  * What it does: Allows the application to model an assessment as an object using the assessment name, module index and optionally a simple name. Each assessment will store the attempts of the student in a map.
+  * Justification: This feature improves the product significantly as now the TA will be able to keep track of the assessment (or gradable component such as class participation) in each module. With the implementation of the grade command, it will allow the TA to grade these assessments as well.
+  * Highlights: To allow TA to easily keep track of the various assessment in each module, so that they can monitor how each student is performing based on the assessments they have submitted.
 * **New Feature**: Added Grade command
   * What it does: Allows TA to grade a student for their students for each of the assessment in the module.
-  * Justification: This feature improves the product significantly as now the TA will be able to keep track of which student has submitted the assessments. They can use this command to easily grade the student's participation in class as well.
+  * Justification: This feature improves the product significantly as now the TA will be able to grade the assessments for each student. They can use this command to easily grade the student's participation in class as well.
   * Highlights: To allow the TA to easily keep track of student participation, this command is created to increment the grade if no grade is provided so that the TA do not need to specify a grade for marking participation, they simply have to issue the command without a grade argument.
 
 * **Enhancements to existing features**:
