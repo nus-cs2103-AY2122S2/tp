@@ -8,6 +8,7 @@ ModuleMateFinder (MMF) is a **desktop application for managing contacts and find
 If you can type fast, you can get your contact management tasks done fast, but even if you are not a slow typist -- fret not, you can still use it!
 
 
+- [Shortcuts](#shortcut-to-specific-features)
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [FAQ](#faq)
