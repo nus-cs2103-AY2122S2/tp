@@ -2,10 +2,12 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalApplicants.getTypicalApplicants;
 import static seedu.address.testutil.TypicalInterviews.getTypicalInterviews;
+import static seedu.address.testutil.TypicalPositions.getTypicalPositions;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.position.Position;
 
 
 public class TypicalAddressBook {
@@ -20,6 +22,10 @@ public class TypicalAddressBook {
 
         for (Interview interview : getTypicalInterviews()) {
             ab.addInterview(interview);
+        }
+
+        for (Position position : getTypicalPositions()) {
+            ab.addPosition(position);
         }
 
         return ab;
