@@ -84,7 +84,7 @@ This could be a problem with the Windows OS. You can alternatively start **HackN
     * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-    * e.g `n/NAME [t/TEAM]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+    * e.g. `n/NAME [t/TEAM]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can have multiple values including 0.<br>
     * e.g. `[t/TEAM…]​` can be used as ` ` (i.e. 0 times), `t/`, `t/friend, family` etc.
@@ -98,7 +98,9 @@ This could be a problem with the Windows OS. You can alternatively start **HackN
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `undo`, `redo`, `exit` and `clear`) will be ignored.<br>
     * e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
-* For skill field, Skill name have to be followed by a underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level.
+* For the team field, maximum length of a team name is 20 characters.
+
+* For skill field, Skill name have to be followed by an underscore `_` and Skill proficiency level that ranges from 0 to 100 with 0 being the lowest proficiency level. Maximum length of a skill name is 10 characters.
     * e.g. `[s/SKILLNAME_SKILLPROFICENCY…]​` as `s/Java_90`
 
 
@@ -129,18 +131,18 @@ Adds a person to HackNet.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/SKILLNAME_SKILLPROFICENCY…]​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
 
-* A person can have any number of teams or skills(including 0)
-* teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.
-* `t/      ` and `s/        ` is treated as `t/` and `s/` as HackNet ignores whitespaces. Therefore, a name of a team cannot be consisting solely of whitespaces.
-* HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.
-* Consecutive white spaces right after `t/` and `s/` are ignored.
-* A name of a team or skill cannot be consisting solely of whitespaces.
-* Please check that you have correctly entered the skill proficiency level.
-There is currently no way of viewing the exact number that you entered.
-You may use the `edit` function to change it if it is wrong.
-* The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).
+**:information_source: Notes regarding adding a person:**<br>
+
+* A person can have any number of teams or skills(including 0)<br>
+* teams and skills in `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` must be separated by a comma. The comma can be preceded or followed by any number of whitespaces, which will be ignored. Any excess commas after the last valid value will be ignored.<br>
+* `t/      ` and `s/        ` is treated as `t/` and `s/` as HackNet ignores whitespaces. Therefore, a name of a team cannot be consisting solely of whitespaces.<br>
+* HackNet can store multiple contacts with the same `Name` but will reject inputs that contain any `Email`, `Github Username` or `Phone Number` fields that already exists in HackNet.<br>
+* Consecutive white spaces right after `t/` and `s/` are ignored.<br>
+* A name of a team or skill cannot be consisting solely of whitespaces.<br>
+* Please check that you have correctly entered the skill proficiency level. There is currently no way of viewing the exact number that you entered. You may use the `edit` function to change it if it is wrong. <br>
+* The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).<br>
 </div>
 
 Examples:

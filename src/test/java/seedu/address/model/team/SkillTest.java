@@ -69,6 +69,33 @@ public class SkillTest {
     public void isValidSkillName() {
         // null skill argument
         assertThrows(NullPointerException.class, () -> Skill.isValidSkillName(null));
+
+        //valid skill name
+        assertTrue(Skill.isValidSkillName("Java"));
+
+        //valid skill name (10 characters)
+        assertTrue(Skill.isValidSkillName("MakingSome"));
+
+        //valid special character: +
+        assertTrue(Skill.isValidSkillName("C++"));
+
+        //valid special character: #
+        assertTrue(Skill.isValidSkillName("C#"));
+
+        //valid special character: -
+        assertTrue(Skill.isValidSkillName("Sky-diving"));
+
+        //invalid special character: $
+        assertFalse(Skill.isValidSkillName("making$"));
+
+        //invalid special character: space
+        assertFalse(Skill.isValidSkillName("making some money"));
+
+        //no name provided
+        assertFalse(Skill.isValidSkillName(""));
+
+        //skill name longer than 10 characters (11 characters)
+        assertFalse(Skill.isValidSkillName("MakingSomeM"));
     }
 
     @Test void isValidSkillProficiency() {
