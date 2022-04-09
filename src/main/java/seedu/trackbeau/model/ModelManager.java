@@ -260,6 +260,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return trackBeau.equals(other.trackBeau)
+                && selectedDate.equals(other.selectedDate)
                 && userPrefs.equals(other.userPrefs)
                 && filteredCustomers.equals(other.filteredCustomers)
                 && filteredServices.equals(other.filteredServices)
