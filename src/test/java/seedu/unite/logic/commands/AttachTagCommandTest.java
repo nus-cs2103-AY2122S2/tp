@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.unite.commons.core.Messages;
 import seedu.unite.commons.core.index.Index;
-import seedu.unite.model.Unite;
 import seedu.unite.model.Model;
 import seedu.unite.model.ModelManager;
+import seedu.unite.model.Unite;
 import seedu.unite.model.UserPrefs;
 import seedu.unite.model.person.Person;
 import seedu.unite.model.tag.Tag;

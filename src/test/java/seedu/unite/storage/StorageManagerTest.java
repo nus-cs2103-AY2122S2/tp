@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.unite.commons.core.GuiSettings;
-import seedu.unite.model.Unite;
 import seedu.unite.model.ReadOnlyUnite;
+import seedu.unite.model.Unite;
 import seedu.unite.model.UserPrefs;
 
 public class StorageManagerTest {

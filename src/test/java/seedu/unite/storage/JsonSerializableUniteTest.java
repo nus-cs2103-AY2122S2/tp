@@ -18,9 +18,9 @@ import seedu.unite.testutil.TypicalPersons;
 public class JsonSerializableUniteTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableUniteTest");
-    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
-    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
-    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsUnite.json");
+    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonUnite.json");
+    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonUnite.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {

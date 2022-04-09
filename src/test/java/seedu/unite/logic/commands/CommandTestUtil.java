@@ -18,8 +18,8 @@ import java.util.List;
 
 import seedu.unite.commons.core.index.Index;
 import seedu.unite.logic.commands.exceptions.CommandException;
-import seedu.unite.model.Unite;
 import seedu.unite.model.Model;
+import seedu.unite.model.Unite;
 import seedu.unite.model.person.NameContainsKeywordsPredicate;
 import seedu.unite.model.person.Person;
 import seedu.unite.testutil.EditPersonDescriptorBuilder;
