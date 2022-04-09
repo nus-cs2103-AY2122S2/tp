@@ -84,7 +84,7 @@ public class EditTaskCommand extends Command {
      * @param desc New description of the Task
      * @param date New date of the Task
      * @param time New time of the Task
-     * @param prefixStatusHash To fill up
+     * @param prefixStatusHash Indicate whether user had declared a prefix
      */
     public EditTaskCommand(Index index, String desc, String date, String time,
                            HashMap<String, Boolean> prefixStatusHash) {
@@ -254,5 +254,22 @@ public class EditTaskCommand extends Command {
         }
 
         return updatedEventTask;
+    }
+
+    private boolean arePrefixStatusHashesEqual(HashMap<String, Boolean> other) {
+        return prefixStatusHash.get("description").equals(other.get("description"))
+                && prefixStatusHash.get("date").equals(other.get("date"))
+                && prefixStatusHash.get("datetime").equals(other.get("datetime"));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EditTaskCommand // instanceof handles nulls
+                && index.equals(((EditTaskCommand) other).index)
+                && desc.equals(((EditTaskCommand) other).desc)
+                && date.equals(((EditTaskCommand) other).date)
+                && time.equals(((EditTaskCommand) other).time))
+                && arePrefixStatusHashesEqual(((EditTaskCommand) other).prefixStatusHash);
     }
 }
