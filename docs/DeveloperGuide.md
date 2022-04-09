@@ -181,15 +181,33 @@ doing it by the model entailed creating model exception classes, which would be 
 
 ### 1. Friends Feature
 
-#### 1.1 Add friend
+#### 1.1 Friends' representation in the model and storage
 
-##### Implementation
+A friend is a `Person` containing attributes - `FriendName`, `Phone`, `Address`, `Email`, `Description`, `Set<Tag>`
+containing a set of `Tag` objects and a `UniqueLogList` containing a list of `Log` objects. Relevant implementations in the 
+model and storage follow from it.
+
+#### 1.2 Execution of command for adding, deleting or editing details of a friend
+
+All three (add, edit, delete) log commands work the same at a high level.
+
+1. `Parser` parses input
+2. (Optional) Details wrapped into a `{Type}Descriptor` 
+3. `{Type}Command` takes in descriptor and executes with mode
+
+##### 1.2.1 Choice of using descriptor subclasses
+
+As with a general command, the friend-related commands could have put all the logic into the `Command::execute` method.
+
+A conscious choice to use `Descriptor` objects arose from the complexity of editing person details - a lot could be edited, 
+and having it all in the `Command::execute` implementation could lead to verbose code.
+Having a parser decipher the specific action and wrapping error-handling logic to a `Descriptor` object allowed the
+implementation to be clean and easily extendable.
+
+##### 1.2.2 A concrete example: `addfriend`
 
 The implementation of adding a friend into Amigos is facilitated by the `AddCommand`, `AddCommandParser` in the `Logic` component,
 `UniquePersonList` and `Person` classes in the `Model` component, and `JsonAdaptedPerson` in the `Storage` component.
-
-A friend is a `Person` containing attributes - `FriendName`, `Phone`, `Address`, `Email`, `Description`, `Set<Tag>`
-containing a set of `Tag` objects and a `UniqueLogList` containing a list of `Log` objects.
 
 Given below is an example usage scenario and how the `Logic` and `Model` components behave at every
 step.
@@ -210,9 +228,8 @@ A sequence diagram showing the interactions between `AddCommand`, `AddCommandPar
 after the user has entered a valid `FriendName`, `Phone`, and `Email`.
 ![AddFriendSequenceDiagram](images/AddFriendSequenceDiagram.png)
 
-##### Design Considerations
+#### 1.3 Storing optional fields in Person as "wrapped" nulls
 
-**Aspect**: How to store optional fields in a Person
 Minimally, the `AddCommand` requires the user to enter the `FriendName` of the new `Person` to be added using the `n/` prefix. 
 The other fields are optional. This is to allow flexibility for the user to add a friend into Amigos even if the user is unsure 
 about certain particulars (e.g `Address`/ `Email`) of a friend.
@@ -231,7 +248,8 @@ about certain particulars (e.g `Address`/ `Email`) of a friend.
     - It is error-prone because we would be passing null values around which
     makes the occurrence of exceptions such as `NullPointerException` highly likely.
  
-**Aspect**: How to check that a `Person` already exists in Amigos
+#### 1.4 Setting a duplicate `Person` as a case-insensitive match
+
 Similar to AB3, Amigos prevents a user from adding a duplicate `Person`. 
 
 * Current implementation
@@ -247,36 +265,9 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
     we decided that our current implementation makes more logical sense. 
   
 
-#### 1.2 Find friend
+#### 1.5 Finding friends
 
-##### Implementation
-
-The implementation of searching for friends in Amigos is facilitated by the `FindCommand`, `FindCommandParser` in the `Logic`
-component and `FriendFilterPredicate` class in the `Model` component.
-
-Given below is an example usage scenario and how the `Logic` and `Model` components behave at every step. 
-
-1. User keys in a valid `FindCommand` `e.g findfriend n/Alex t/Friend ttl/Dinner` into the command box of the GUI. 
-2. `AddressBookParser` calls `FindCommandParser::parse` and parses the input.
-
-   - `FindCommandParser::parse` converts the arguments entered by the user into a `FriendFilterPredicate` by 
-      grouping the user inputs into `Set<FriendName>`, `Set<Tag>` and `Set<LogName>` based on the input prefixes. Next, 
-      a `FindCommand` is created with the new `FriendFilterPredicate` passed into it.
-   
-   - `FriendFilterPredicate::test(Person person)` performs three checks and returns `true` if any of the checks are met:
-      - For each name keyword entered by the user, whether the person's name contains the keyword.
-      - For each tag keyword entered by the user, whether any of the person's tags contains the keyword.
-      - For each log title keyword entered by the user, whether any of the person's log title contains the keyword.
-   
-      - When `FindCommand::execute` is called, the `FilteredList<Person>` in `ModelManager` will be updated to only contain
-        friends who have passed the predicate test.
-      
-An activity diagram showing the implementation of the feature:  
-![FindFriendActivityDiagram](images/FindFriendActivityDiagram.png)
-
-##### Design Considerations
-
-**Aspect**: Whether to store the user inputs as `String` or attribute.
+##### 1.5.1 Storing the user inputs as attributes, rather than `String`.
 
 * Current implementation
     - The user inputs are stored as attributes.
@@ -295,11 +286,37 @@ An activity diagram showing the implementation of the feature:
       - This reduces the amount of code needed, and possible errors due to conversion.
     - Cons:
       - The user would be allowed to search for invalid keywords.
-      
 
-#### 1.3 Show friend
+##### 1.5.2 Concrete example of execution: `findfriend`
 
-##### Implementation
+The implementation of searching for friends in Amigos is facilitated by the `FindCommand`, `FindCommandParser` in the `Logic`
+component and `FriendFilterPredicate` class in the `Model` component.
+
+Given below is an example usage scenario and how the `Logic` and `Model` components behave at every step.
+
+1. User keys in a valid `FindCommand` `e.g findfriend n/Alex t/Friend ttl/Dinner` into the command box of the GUI.
+2. `AddressBookParser` calls `FindCommandParser::parse` and parses the input.
+
+    - `FindCommandParser::parse` converts the arguments entered by the user into a `FriendFilterPredicate` by
+      grouping the user inputs into `Set<FriendName>`, `Set<Tag>` and `Set<LogName>` based on the input prefixes. Next,
+      a `FindCommand` is created with the new `FriendFilterPredicate` passed into it.
+
+    - `FriendFilterPredicate::test(Person person)` performs three checks and returns `true` if any of the checks are met:
+        - For each name keyword entered by the user, whether the person's name contains the keyword.
+        - For each tag keyword entered by the user, whether any of the person's tags contains the keyword.
+        - For each log title keyword entered by the user, whether any of the person's log title contains the keyword.
+
+        - When `FindCommand::execute` is called, the `FilteredList<Person>` in `ModelManager` will be updated to only contain
+          friends who have passed the predicate test.
+
+An activity diagram showing the implementation of the feature:  
+![FindFriendActivityDiagram](images/FindFriendActivityDiagram.png)
+
+#### 1.6 Show friend
+
+This feature provides users with a way of seeing details of a friend more in depth.
+
+##### 1.6.1 Concrete example of execution: `showfriend`
 
 The implementation of showing a specific friend in Amigos is facilitated by `ShowFriendCommand`, `ShowFriendCommandParser`, and `CommandResult`
 in the `Logic`component, as well as `ExpandedPersonCard`, `ExpandedPersonListPanel`, and `MainWindow` in the `UI` component.
@@ -329,9 +346,7 @@ Given below is how the different classes work together in an example usage scena
    ![ExpandedPersonCardObjectDiagram](images/ExpandedPersonCardObjectDiagram.png)
 
 
-##### Design Considerations
-
-**Aspect**: Switching view from `PersonCard` to `ExpandedPersonCard`
+##### 1.6.2 Thought process behind switching view from `PersonCard` to `ExpandedPersonCard`
 
 * Current implementation
     - Both `PersonListPanel` and `ExpandedPersonListPanel` are superimposed on each other and
@@ -351,6 +366,7 @@ Given below is how the different classes work together in an example usage scena
     - Cons:
        - Have to fill the `ExpandedPersonListPanel` with something to display upon start up.
        - There will be duplicate information on both the left and right pane when `ShowFriend` is called.
+
 
 ### 2. Events Feature
 
@@ -386,7 +402,7 @@ Key Consideration: How to implement & maintain the validity of the relationship 
     * Does not solve the error-proneness of maintaining the relationship validity after changes to `Event` or `Person`.
     * If implemented using a `EventPersonAssociation` list, will not be very efficient as well when making queries/changes,especially if there are a large number of associations in the list
 
-#### 2.2 Implementing List event
+#### 2.2 Notes about implementing `listevent`
 
 Key Consideration: How to implement `listevents` when there exists multiple tabs and other `show` commands such as `listfriends` and `showinsights`.
 
@@ -413,7 +429,7 @@ The following sequence diagram summarizes what happens when a user executes the 
     * Increases the coupling between the `Commands` classes and the `MainWindow` since now we need to add a new switch case for every new command created.
     * Involves a lot of code duplication as well
     
-#### 2.3 Implementing the findevent command
+#### 2.3 Notes about implementing the `findevent` command
 Key Consideration: Keeping track of the various filtering conditions that could be potentially set by the user, so that it is easily maintained and extended.
 
 <img src="images/FindEventSequenceDiagram.png" width="800" />
@@ -544,7 +560,7 @@ Key consideration: How to display information about Friends, Events and insights
 
 The following images show how the Tabs feature look when the tab for each feature is selected.
 
-![friendsTab.png](images\friendsTab.png) ![eventsTab.png](images\eventsTab.png) ![insights.png](images\insightsTab.png)
+![friendsTab.png](images/friendsTab.png) ![eventsTab.png](images/eventsTab.png) ![insights.png](images/insightsTab.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
