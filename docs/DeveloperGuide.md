@@ -703,11 +703,29 @@ Guarantees: every role in companies that have reminder dates within the reminder
 1. The user [adds a role(UC02)](#uc02) or [edits a role(UC05)](#uc05) that has a reminder date.
 2. Tinner shows success message and adds/edits the role.
 3. The user closes the application and opens it up again immediately or some time in the future
-4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date/
+4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date
     
    Use case ends
 
-**Use case: UC09 - Favouriting a company and viewing all favourited companies**
+**Use case: UC09 - Using the set reminder window feature**
+
+Guarantees: the reminder window will be successfully updated
+
+**MSS**
+
+1. User requests to update reminder window to a new reminder window
+2. Tinner updates the reminder window
+3. The updated reminder window is reflected upon restarting the application
+    
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input reminder window is invalid (i.e. negative or bigger than 30) <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input reminder window error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+**Use case: UC10 - Favouriting a company and viewing all favourited companies**
 
 Precondition: there exist at least one company in Tinner
 
@@ -738,7 +756,7 @@ Guarantees: a company is successfully favourited within Tinner
 &emsp;&emsp;3c1. Tinner shows a company already favourited error message <br/>
 &emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC10 - Unfavouriting a company**
+**Use case: UC11 - Unfavouriting a company**
 
 Precondition: there exist at least one company in Tinner 
 
