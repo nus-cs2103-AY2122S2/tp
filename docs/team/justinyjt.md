@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **Code contributed**:
     * [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=justinyjt&brekdown=true)
 
-* **New Feature**: Added Storage for the `Role` class and its fields. (Pull request [\64](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/64))
+* **New Feature**: Added Storage for the `Role` class and its fields. (Pull request [\#64](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/64))
   * What it does: Allows the application to store and load user created roles within their associated companies automatically.
   * Justification: This feature is necessary to keep track of user given data on their internships and allow proper storing and loading of files.
   * Highlights: This change required major changes to components in the `Storage` package with the addition of new classes like `JsonAdaptedRole`.
@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Refactored class and variable names in Address Book 3 to suit the context of Tinner (Pull request [\#51](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/51))
-    * Refactored the edit command to editCompany and phased out the tag command (Pull request: [\121](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/121))
+    * Refactored the edit command to editCompany and phased out the tag command (Pull request: [\#121](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/121))
 
 * **Documentation**:
   * User Guide:
@@ -47,4 +47,4 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments:) (Pull requests: [\#54](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/54), [\#92](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/92), [\#200](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/200))
-    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/justinyjt/ped/issues/7), [2](https://github.com/justinyjt/ped/issues/6), [3](https://github.com/justinyjt/ped/issues/2)
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/justinyjt/ped/issues/7), [2](https://github.com/justinyjt/ped/issues/6), [3](https://github.com/justinyjt/ped/issues/2))

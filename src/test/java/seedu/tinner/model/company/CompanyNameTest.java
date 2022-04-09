@@ -47,6 +47,10 @@ public class CompanyNameTest {
         CompanyName meta = new CompanyName(META.getName().toString().toLowerCase());
         assertTrue(meta.equals(META.getName()));
 
+        // same company name with diff case and spaces-> return true
+        CompanyName meta2 = new CompanyName(META.getName().toString().toLowerCase() + " 1 2");
+        assertTrue(meta2.equals(new CompanyName(META.getName().toString() + " 1      2   ")));
+
         // different company name -> return false
         assertFalse(meta.equals(WHATSAPP.getName()));
     }

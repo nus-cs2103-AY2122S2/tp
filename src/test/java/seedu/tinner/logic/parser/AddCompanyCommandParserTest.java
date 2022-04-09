@@ -1,6 +1,7 @@
 package seedu.tinner.logic.parser;
 
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tinner.commons.core.Messages.MESSAGE_NO_VALUE_AFTER_PREFIX;
 import static seedu.tinner.logic.commands.CommandTestUtil.ADDRESS_DESC_INSTAGRAM;
 import static seedu.tinner.logic.commands.CommandTestUtil.ADDRESS_DESC_WHATSAPP;
 import static seedu.tinner.logic.commands.CommandTestUtil.EMAIL_DESC_INSTAGRAM;
@@ -18,6 +19,10 @@ import static seedu.tinner.logic.commands.CommandTestUtil.VALID_ADDRESS_WHATSAPP
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_EMAIL_WHATSAPP;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_NAME_WHATSAPP;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_PHONE_WHATSAPP;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.tinner.testutil.TypicalCompanies.INSTAGRAM;
@@ -74,6 +79,27 @@ public class AddCompanyCommandParserTest {
     }
 
     @Test
+    public void parse_prefixWithoutValue_failure() {
+        String expectedMessage = String.format(MESSAGE_NO_VALUE_AFTER_PREFIX, AddCompanyCommand.MESSAGE_USAGE);
+
+        // missing value but prefix present for name field
+        assertParseFailure(parser, PHONE_DESC_INSTAGRAM + EMAIL_DESC_INSTAGRAM + ADDRESS_DESC_INSTAGRAM
+                + " " + PREFIX_NAME, expectedMessage);
+
+        // missing value but prefix present for phone field
+        assertParseFailure(parser, NAME_DESC_INSTAGRAM + EMAIL_DESC_INSTAGRAM + ADDRESS_DESC_INSTAGRAM
+                + " " + PREFIX_PHONE, expectedMessage);
+
+        // missing value but prefix present for email field
+        assertParseFailure(parser, NAME_DESC_INSTAGRAM + PHONE_DESC_INSTAGRAM + ADDRESS_DESC_INSTAGRAM
+                + " " + PREFIX_EMAIL, expectedMessage);
+
+        // missing value but prefix present for address field
+        assertParseFailure(parser, NAME_DESC_INSTAGRAM + EMAIL_DESC_INSTAGRAM + PHONE_DESC_INSTAGRAM
+                + " " + PREFIX_ADDRESS, expectedMessage);
+    }
+
+    @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Company expectedCompany = new CompanyBuilder(INSTAGRAM).withRoles().build();
@@ -111,6 +137,8 @@ public class AddCompanyCommandParserTest {
                         + VALID_EMAIL_WHATSAPP + VALID_ADDRESS_WHATSAPP,
                 expectedMessage);
     }
+
+
 
     @Test
     public void parse_invalidValue_failure() {

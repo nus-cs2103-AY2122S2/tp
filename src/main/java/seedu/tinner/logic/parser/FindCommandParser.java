@@ -46,11 +46,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedCompanyName = companyName.trim();
         String trimmedRoleName = roleName.trim();
 
-        if (trimmedCompanyName.isEmpty() && trimmedRoleName.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
         String[] roleNameKeywords = trimmedRoleName.split("\\s+");
         String[] companyNameKeywords = trimmedCompanyName.split("\\s+");
 

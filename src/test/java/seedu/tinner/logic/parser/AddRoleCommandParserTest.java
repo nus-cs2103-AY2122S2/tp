@@ -1,6 +1,7 @@
 package seedu.tinner.logic.parser;
 
 import static seedu.tinner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tinner.commons.core.Messages.MESSAGE_NO_VALUE_AFTER_PREFIX;
 import static seedu.tinner.logic.commands.CommandTestUtil.DESCRIPTION_DESC_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.INDEX_DESC_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.INVALID_INDEX_DESC;
@@ -15,6 +16,11 @@ import static seedu.tinner.logic.commands.CommandTestUtil.STIPEND_DESC_SOFTWARE_
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_NAME_SOFTWARE_ENGINEER;
 import static seedu.tinner.logic.commands.CommandTestUtil.VALID_STATUS_SOFTWARE_ENGINEER;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.tinner.logic.parser.CliSyntax.PREFIX_STIPEND;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tinner.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.tinner.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
@@ -84,6 +90,36 @@ public class AddRoleCommandParserTest {
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_SOFTWARE_ENGINEER + VALID_STATUS_SOFTWARE_ENGINEER
                 + VALID_DESCRIPTION_SOFTWARE_ENGINEER, expectedMessage);
+    }
+
+    @Test
+    public void parse_prefixWithoutValue_failure() {
+        String expectedMessage = String.format(MESSAGE_NO_VALUE_AFTER_PREFIX, AddRoleCommand.MESSAGE_USAGE);
+
+        // missing value for description field
+        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
+                + STATUS_DESC_SOFTWARE_ENGINEER + REMINDER_DATE_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER
+                + " " + PREFIX_DESCRIPTION, expectedMessage);
+
+        // missing value for reminder date field
+        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
+                + STATUS_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
+                + STIPEND_DESC_SOFTWARE_ENGINEER + " " + PREFIX_REMINDER_DATE, expectedMessage);
+
+        // missing value for stipend field
+        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + NAME_DESC_SOFTWARE_ENGINEER
+                + STATUS_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
+                + REMINDER_DATE_DESC_SOFTWARE_ENGINEER + " " + PREFIX_STIPEND, expectedMessage);
+
+        // missing value for name field
+        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER
+                + STATUS_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
+                + REMINDER_DATE_DESC_SOFTWARE_ENGINEER + " " + PREFIX_NAME, expectedMessage);
+
+        // missing value for status field
+        assertParseFailure(parser, INDEX_DESC_SOFTWARE_ENGINEER + STIPEND_DESC_SOFTWARE_ENGINEER
+                + NAME_DESC_SOFTWARE_ENGINEER + DESCRIPTION_DESC_SOFTWARE_ENGINEER
+                + REMINDER_DATE_DESC_SOFTWARE_ENGINEER + " " + PREFIX_STATUS, expectedMessage);
     }
 
     @Test

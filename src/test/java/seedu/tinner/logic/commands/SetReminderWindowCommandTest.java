@@ -3,6 +3,8 @@ package seedu.tinner.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tinner.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.tinner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tinner.logic.commands.SetReminderWindowCommand.MESSAGE_SET_REMINDER_WINDOW_SUCCESS;
 import static seedu.tinner.testutil.TypicalCompanies.getTypicalCompanyList;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,18 @@ public class SetReminderWindowCommandTest {
 
     private Model model = new ModelManager(getTypicalCompanyList(), new UserPrefs(),
             UniqueReminderList.getInstance());
+
+    @Test
+    public void execute_validReminderWindow_success() {
+        SetReminderWindowCommand setReminderWindowCommand = new SetReminderWindowCommand(20);
+
+        Model modelCopy = new ModelManager(getTypicalCompanyList(), new UserPrefs(),
+                UniqueReminderList.getInstance());
+        modelCopy.setReminderWindow(20);
+
+        assertCommandSuccess(setReminderWindowCommand, model,
+                String.format(MESSAGE_SET_REMINDER_WINDOW_SUCCESS, 20), modelCopy);
+    }
 
     @Test
     public void execute_invalidReminderWindowHigh_throwsCommandException() {

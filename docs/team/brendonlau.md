@@ -9,27 +9,43 @@ Tinner (Anagram of Intern) is a desktop app for managing internship applications
 
 Given below are my contributions to the project.
 
-* **New Feature**: {to be added}
+* **New Feature**: Added the `editRole` feature to edit a specific role in a company
+* What it does: allows the user to edit any fields or remove optional fields in `Role` by specifying the company and role indexes
+* Justification: This feature is necessary for the user to update essential fields such as status, set or disable reminder and rectify any mistakes
+* Highlight: This change requires a major change in `Model` internal components and additional classes in `Logic` internal components
+
+* **New Feature**: Added the `deleteRole` feature to delete a specific role in a company
+* What it does: allows the user to delete a `Role` by specifying the company and role indexes
+* Justification: This feature is necessary for the user to delete their internship applications 
+* Highlight: This change requires a major change in `Model` internal components and additional classes in `Logic` internal components
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=brendonlau&breakdown=true)
 
 * **Project management**:
-  * Managed releases {to be added} (0 releases) on GitHub
+  * Managed releases {v1.2 to v1.3} (3 releases) on GitHub
+  * Facilitate weekly meeting with updated agendas
+  * Keep track of the tasks required to be completed by the team
+  * Keep track of milestones such as making sure issues are completed or carry over to the next milestone
 
 * **Enhancements to existing features**:
-  {to be added}
+  * Implemented colour-coding of role tags according to role statuses to allow users to gather information 
+  pertaining to the roles at a glance [\#181](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/181)
+  * Updated `Model` as a Facade class for clients to interact with its internal components and relevant test cases that
+  interacted with it [\#146](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/146)
+  * Refactored `Delete` to suit Tinner project requirements [\#58](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/58)
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for `Introduction` and `Quickstart` [\#6](https://github.com/AY2122S2-CS2103T-T17-1/tp/issues/6)
-    * Converted .docx to .md for iteration v1.1 [\#6](https://github.com/AY2122S2-CS2103T-T17-1/tp/issues/6)
+    * Converted documentation from Words to markdown file [\#19](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/19/files) 
+    * Added documentation for `editRole` and `deleteRole` features [\#56](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/56), [\#139](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/139/files)
+    * Added demo for `reminder`, `find`, `editRole`, `editCompany` and `favourite` features [\#200](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/200), [\#263](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/263)  
+    * Update index.md for v1.3 [\#190](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/190)
+    
   * Developer Guide:
-    * Added value proposition and user stories [\#20](https://github.com/AY2122S2-CS2103T-T17-1/tp/issues/20)
-
+    * Update UI component section [\#151](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/151)
+    * Added `editRole` for implementation section and 4 features for the testing section [\#152](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/152), [\#261](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/261)
+    
 * **Community**:
-  {to be added}
-
-* **Tools**:
-  {to be added}
+  * PRs reviewed (with non-trivial review comments): examples, [\#721](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/271), [\#194](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/194), [\#167](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/167), [\#183](https://github.com/AY2122S2-CS2103T-T17-1/tp/pull/183)
 
 

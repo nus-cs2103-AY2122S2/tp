@@ -25,7 +25,9 @@ title: Developer Guide
       * [Implementation](#implementation-delete)
       * [Design considerations](#design-considerations-delete)
     * [Reminder feature](#reminder-feature)
-      * [Implementation](#implementation-reminder)
+        * [Implementation](#implementation-reminder)
+    * [Set reminder window feature](#set-reminder-window-feature)
+        * [Implementation](#implementation-set-reminder-window)
     * [Favourite feature](#favourite-feature)
       * [Implementation](#implementation-favourite)
       * [Design considerations](#design-considerations-favourite)
@@ -210,8 +212,8 @@ The `find` feature allows users to filter the company list to find roles by spec
 Given below is an example usage scenario and how the find feature behaves at each step:
 1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
 2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
-4. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
-5. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+3. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
+4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
 
 The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
 
@@ -362,13 +364,13 @@ The following sequence diagram shows how the `deleteRole` command operation work
 ![Sequence diagram of the DeleteRole feature](images/DeleteRoleSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes an `deleteRole` command:    
-![Activity diagram of the EditRole feature](images/DeleteRoleActivityDiagram.png)
+![Activity diagram of the DeleteRole feature](images/DeleteRoleActivityDiagram.png)
 
 #### Design considerations <a id="design-considerations-delete"></a>
 * Alternative 1 (current choice): Split `delete` feature into `deleteCompany` and `deleteRole`
     * Pros:
         * Prevents users from accidentally deleting an entire company when intended action was to only delete roles.
-        * More intutive to users as it is easier to associate the differences with words compared to format of command. 
+        * More intuitive to users as it is easier to associate the differences with words compared to format of command. 
     * Cons:
         * Increases code repetition due to both delete features have similar components.
 * Alternative 2 (used in v1.2): Have a unified `delete` feature that changes functionality based off user input.
@@ -400,6 +402,28 @@ The following sequence diagram shows how the reminder feature works:
 The following activity diagram summarises what happens when the user opens the application to see upcoming reminders:
 ![Activity diagram of the Reminder feature](images/ReminderActivityDiagram.png)
 
+### Set reminder window feature <a id="set-reminder-window-feature"></a>
+
+The `setWindow` feature allows users to set the reminder window to a specific number of days. Any roles stored in the company list that fall within the set window will be displayed in the reminder pane that automatically opens up on start.
+
+#### Implementation <a id="implementation-set-reminder-window"></a>
+
+![UML diagram of the SetWindow feature](images/SetReminderWindowDiagram.png)
+
+Given below is an example usage scenario and how the set reminder window feature behaves at each step:
+1. The user executes the command `setWindow 14` to set the reminder window to 14 days.
+2. Then the `SetReminderWindowCommandParser#parse()` creates an instance of `SetReminderWindowCommand` by passing the number of days to which the reminder window will be set.
+3. The `SetReminderWindowCommand#execute()` method will update the `model` using the `Model#setReminderWindow()` method, which consequently updates `userPrefs` by calling the `UserPrefs#setReminderWindow()` method to update the reminder window as stored in the user preferences.
+4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
+
+The following sequence diagram shows how the `setWindow` command operation works with the user input `setWindow 14`:
+
+![UML sequence diagram of the SetWindow feature](images/SetReminderWindowSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `setWindow` command:
+
+![UML activity diagram of the SetWindow feature](images/SetReminderWindowActivityDiagram.png)
+
 ### Favourite feature <a id="favourite-feature"></a>
 
 The `favourite` feature allows users to highlight specific companies. Favourited companies are indicated using a star beside their company name in the GUI.
@@ -411,9 +435,9 @@ The `favourite` feature allows users to highlight specific companies. Favourited
 Given below is an example usage scenario and how the favourite feature behaves at each step:
 1. The user executes the command `favourite 1` to favourite the first company within the displayed company list.
 2. Then the `FavouriteCompanyCommandParser#parse()` creates an instance of `FavouriteCompanyCommand` by passing the company index to be favourited.
-4. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
-5. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
-6. The `Parser` returns the `CommandResult` which is then executed by LogicManager.
+3. The `FavouriteCompanyCommand#execute()` method will update the `model` with the favourited company using the `Model#setCompany()` method, replacing the previous company that was not favourited.
+4. The `model` is then updated with the `Model#updateFilteredCompanyList()` method, displaying all companies and roles in the company list.
+5. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
 
 The following sequence diagram shows how the `favourite` command operation works with the user input `favourite 1`:
 
@@ -493,7 +517,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | export a list of interview reviews of different companies into a .csv file | share my experience with juniors and peers               |
 | `*`      | user           | mark certain entries as my favourites                                      | view those that I am more interested in at a glance      |
 
-*{More to be added}*
 
 ### Use cases <a id="use-cases"></a>
 
@@ -513,39 +536,45 @@ Guarantees: a company will be successfully created
 
 **Extensions**
 
- 1a. The input does not adhere to the command format <br/>
-  1a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 1
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
 
- 1b. The specific company is already stored <br/>
-  1b1. Tinner shows a duplicate company error message <br/>
-     Use case resumes at step 1
+&emsp;1b. The specific company is already stored <br/>
+&emsp;&emsp;1b1. Tinner shows a duplicate company error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-**Use case: UC02 - Add an internship role**
 
-Precondition: the company to which the internship role will belong has already been created
+**Use case: UC02 - Edit a company** <a id="uc02"></a>
 
-Guarantees: an internship role will be successfully created
+Precondition: there exists at least one company in Tinner
 
 **MSS**
+1. User request to edit certain details of a specific company
+2. Tinner edits certain details specified by the user
+3. Tinner displays the list of companies with updated details
 
-1. User requests to view a list of companies
-2. User requests to add an internship role and provides the relevant details
-3. Tinner adds the internship role to the list of roles of the specific company
+    Use case ends
 
-   Use case ends
+**Extensions**  
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
-**Extensions**
+&emsp;1b. Company already exists in Tinner format <br/>
+&emsp;&emsp;1b1. Tinner shows error that company is duplicated <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
 
- 1a. The input does not adhere to the command format <br/>
-  1a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 1
+&emsp;1c. Field restrictions violated <br/>
+&emsp;&emsp;1c1. Tinner shows error that a specific restriction is violated <br/> 
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
 
 **Use case: UC03 - Delete a company**
 
-Precondition: there exists at least one company in the list of companies
+Precondition: there exists at least one company in Tinner
 
-Guarantees: a company is successfully removed from the list of companies
+Guarantees: a company is successfully removed from Tinner
 
 **MSS**
 
@@ -558,17 +587,73 @@ Guarantees: a company is successfully removed from the list of companies
 
 **Extensions**
 
- 3a. The input does not adhere to the command format <br/>
-  3a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 2
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
- 3b. The input company index is invalid <br/>
-  3b1. Tinner shows a company index out of bounds error message <br/>
-     Use case resumes at step 2
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC04 - Delete an internship role**
 
-Precondition: there exists at least one internship role associated with a company in the list of companies
+**Use case: UC04- Add an internship role**
+
+Precondition: the company to which the internship role will belong has already been created
+
+Guarantees: an internship role will be successfully created
+
+**MSS**
+
+1. User requests to view a list of companies 
+2. User requests to add an internship role and provides the relevant details 
+3. Tinner adds the internship role to the list of roles of the specific company
+
+   Use case ends
+
+**Extensions**
+
+&emsp;1a. The input does not adhere to the command format <br/>
+&emsp;&emsp;1a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 1
+
+
+**Use case: UC05 - Edits an internship role** <a id="uc05"></a>
+
+Precondition: there exists at least one role associated with a company in Tinner
+
+**MSS**
+
+1. User requests to edit a specific internship role of a company 
+2. Tinner edits certain details specified by the user 
+3. Tinner displays the list of companies with roles and its updated details
+   
+    Use case ends
+
+**Extensions**  
+&emsp; 1a. The input does not adhere to the command format <br/>
+&emsp; &emsp; 1a1. Tinner shows an invalid input format error message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1b. The input company index is invalid <br/>
+&emsp; &emsp; 1b1. Tinner shows error that the company index is invalid  message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1c. The input internship role index is invalid <br/>
+&emsp; &emsp; 1c1. Tinner shows error that the role index is invalid message <br/>
+&emsp; &emsp; &emsp; &emsp;  Use case resumes at step 1
+
+&emsp; 1d. Role already exists in Tinner format <br/>
+&emsp;&emsp; 1d1. Tinner shows error that role is duplicated <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+&emsp; 1e. Field restrictions violated <br/>
+&emsp;&emsp; 1e1. Tinner shows error that a specific restriction is violated <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 1
+
+
+**Use case: UC06 - Delete an internship role**
+
+Precondition: there exists at least one internship role associated with a company 
 
 Guarantees: a specified internship role is successfully removed from the associated company
 
@@ -583,19 +668,19 @@ Guarantees: a specified internship role is successfully removed from the associa
 
 **Extensions**
 
- 3a. The input does not adhere to the command format <br/>
-  3a1. Tinner shows an invalid input format error message <br/>
-     Use case resumes at step 2
+&emsp;a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp; Use case resumes at step 2
 
- 3b. The input company index is invalid <br/>
-  3b1. Tinner shows a company index out of bounds error message <br/>
-     Use case resumes at step 2
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
- 3c. The input internship role index is invalid <br/>
-  3c1. Tinner shows an internship role index out of bounds error message <br/>
-     Use case resumes at step 2
+&emsp;3c. The input internship role index is invalid <br/>
+&emsp;&emsp;c1. Tinner shows an internship role index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
 
-**Use case: UC05 - List all companies**
+**Use case: UC07 - List all companies**
 
 Precondition: there exist at least one company stored in Tinner
 
@@ -608,19 +693,81 @@ Guarantees: every company stored in Tinner will be shown
 
    Use case ends
 
-**Use case: UC06 - Adding or editing a role with a reminder date**
+**Use case: UC08 - Using the reminder feature**
 
 Precondition: there exist at least one company stored in Tinner
 
 Guarantees: every role in companies that have reminder dates within the reminder window from today will be shown
 
-1. The user [adds a role(UC02)]() or [edits a role(UCXX)]() that has a reminder date.
+**MSS**
+
+1. The user [adds a role(UC02)](#uc02) or [edits a role(UC05)](#uc05) that has a reminder date.
 2. Tinner shows success message and adds/edits the role.
 3. The user closes the application and opens it up again immediately or some time in the future
 4. Tinner displays all roles in companies that have reminder dates within the reminder window from today's date/
-    Use case ends
+    
+   Use case ends
 
-*{More to be added}*
+**Use case: UC09 - Favouriting a company and viewing all favourited companies**
+
+Precondition: there exist at least one company in Tinner
+
+Guarantees: a company is successfully favourited within Tinner
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to favourite a specific company in the list
+4. Tinner favourites the company
+5. User requests to view all favourited companies
+6. Tinner shows a list of all favourited companies and their associated internship roles
+  
+   Use case ends
+
+**Extensions**
+
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3c. The specific company to be favourited had already been favourited <br/>
+&emsp;&emsp;3c1. Tinner shows a company already favourited error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+**Use case: UC10 - Unfavouriting a company**
+
+Precondition: there exist at least one company in Tinner 
+
+Guarantees: a company is successfully unfavourited within Tinner
+
+**MSS**
+
+1. User requests to view a list of companies
+2. Tinner shows a list of companies and the associated internship roles
+3. User requests to unfavourite a specific company in the list
+4. Tinner unfavourites the company
+
+   Use case ends
+
+**Extensions**
+
+&emsp;3a. The input does not adhere to the command format <br/>
+&emsp;&emsp;3a1. Tinner shows an invalid input format error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3b. The input company index is invalid <br/>
+&emsp;&emsp;3b1. Tinner shows a company index out of bounds error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
+&emsp;3c. The specific company to be unfavourited is already unfavourited<br/>
+&emsp;&emsp;3c1. Tinner shows a company already unfavourited error message <br/>
+&emsp;&emsp;&emsp;&emsp;Use case resumes at step 2
+
 
 ### Non-Functional Requirements <a id="non-functional-requirements"></a>
 
@@ -629,10 +776,6 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Should require no installation
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. Should be responsive and have a latency of less than 3 seconds
-
-
-
-*{More to be added}*
 
 ### Glossary <a id="glossary"></a>
 
@@ -694,7 +837,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `favourite 1`
     1. Expected: First company in the displayed company list is not favourited again as it is already favourited.
        The response box shows a message indicating that the company is already favourited.
-3. Other incorrect test cases to try: `favourite`, `favourite x` where x is an integer larger than the size of the company list or negative integer values.
+4. Other incorrect test cases to try: `favourite`, `favourite x` where x is an integer larger than the size of the company list or negative integer values.
     1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 ### Unfavouriting a company <a id="unfavouriting-a-company"></a>
@@ -705,7 +848,7 @@ Guarantees: every role in companies that have reminder dates within the reminder
 3. Test case: `unfavourite 2`
     1. Expected: Second company in the displayed company list is not unfavourited as it is already unfavourited.
        The response box shows a message indicating that the company is already unfavourited.
-3. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
+4. Other incorrect test cases to try: `unfavourite`, `unfavourite x` where x is an integer larger than the size of the company list or negative integer values.
     1. Expected: Company with index `x` is not favourited. The response box shows error message that it is an invalid command or company index provided is invalid.
 
 
