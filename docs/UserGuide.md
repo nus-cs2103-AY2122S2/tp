@@ -142,8 +142,8 @@ Adds a student with the following attributes:
 * address: 34 Lor 11 Geylang 
 * tags: hardworking, small
 
-**:information_source: Note that:**
 <div markdown="block" class="alert alert-info">
+**:information_source: Note that:**
 * The address, email and tag are optional and can be omitted so that the tutor only keeps the most vital 
 information which is the student's name and phone number.
 * There can be **multiple tags** assigned to one student, as demonstrated in the example above.
@@ -207,7 +207,7 @@ Adds a lesson to TeachWhat!
 </div>
 
 <div markdown="block" class="alert alert-info">
-**Note that:**
+**:information_source: Note that:**
 - The subject and address are optional fields and can be omitted so that the tutor only keeps the most vital information of the lesson.
 - Lesson durations cannot be greater than **24 hours**!
 - You can use `-h` and `-m` together to specify a more precise duration
@@ -227,12 +227,15 @@ Adds a recurring lesson with the following attributes:
 * starting at: 6pm
 * duration: 1 hour and 50 minutes
 
-<div markdown="block" class="alert alert-info">
 
-* **❗ Conflicting Lessons:** If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Conflicting Lessons:**<br>
+If you have any existing lessons that clash with the one that you're trying to add, TeachWhat! will **not** add this lesson. In this scenario, TeachWhat! will show you a warning message and also a list of such conflicting lessons.
+</div>
 
-* **💡 Tip:** If you still want to add this lesson, use [`rmlesson`](#deleting a-lesson) to remove the list of conflicting lessons shown before proceeding to add the new lesson.
-
+<div markdown="span" class="alert alert-warning">
+:bulb: **Tip:**<br>
+If you still want to add this lesson, use [`rmlesson`](#deleting a-lesson) to remove the list of conflicting lessons shown before proceeding to add the new lesson.
 </div>
 
 ---
@@ -276,7 +279,7 @@ Deletes the specified lesson from the list of lessons.
 followed by `rmlesson 5` to delete the lesson with the id **5**.
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Note that:** <br>
+**:information_source: Note that:**<br>
 * Deletes the lesson with the **specified `LESSON_ID`**.
 * The `LESSON_ID` corresponds to the number in the **displayed lesson list**.
 * The `LESSON_ID` must be a **positive integer**.
@@ -341,7 +344,7 @@ Clears and deletes all lessons and students from `TeachWhat!`.
 **Format**: `clear -f`
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Note that:**
+**:information_source: Note that:**<br>
 To prevent accidental deletion on your entire list, it is **mandatory** for you to include `-f` with the command (confirmation).
 
 Remember to include **`-f`** when typing this command! 
@@ -358,7 +361,10 @@ Opens a pop-up that gives you a link to the User guide.
 
 **Format**: `help`
 
-_Alternatively, you can press <kbd>F1</kbd> to open the pop-up._
+<div markdown="span" class="alert alert-warning">
+:bulb: **Tip:**<br>
+Alternatively, you can press <kbd>F1</kbd> to open the pop-up.
+</div>
 
 ---
 
@@ -370,7 +376,10 @@ While typing in the command text box, you can use
 - <kbd>↑</kbd> key to go back in history and
 - <kbd>↓</kbd> key to go forward in history
 
-_Newly executed commands would be added to the history as you use TeachWhat!._
+<div markdown="block" class="alert alert-info">
+**:information_source: Note that:**<br>
+Newly executed commands would be added to the history as you use TeachWhat!.
+</div>
 
 ---
 
