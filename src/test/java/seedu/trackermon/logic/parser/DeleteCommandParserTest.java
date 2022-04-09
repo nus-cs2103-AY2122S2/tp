@@ -20,11 +20,17 @@ public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
+    /**
+     * Tests the parsing of valid index from the execution of {@code DeleteCommandParser}.
+     */
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_SHOW));
     }
 
+    /**
+     * Tests the parsing of invalid index from the execution of {@code DeleteCommandParser}.
+     */
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", MESSAGE_INVALID_INDEX);

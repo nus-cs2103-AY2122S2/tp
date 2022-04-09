@@ -16,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.trackermon.commons.core.LogsCenter;
 
+// @@author Ardentsoul-reused
+// Reused from https://youtu.be/vego72w5kPU
+// with minor modifications
 /**
  * Controller for a help page
  */
@@ -54,7 +57,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new {@code HelpWindow}.
      */
     public HelpWindow() {
         this(new Stage());
@@ -163,5 +166,5 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandBuilder("Suggest", "suggest")
         );
     }
-
 }
+// @@author
