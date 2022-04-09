@@ -44,7 +44,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Unite ]===========================");
+        logger.info("=============================[ Initializing UNite ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
