@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ibook.logic.commands.product.RemindCommand;
+import seedu.ibook.logic.commands.item.RemindCommand;
 import seedu.ibook.model.item.ExpiryDate;
 
 public class RemindCommandParserTest {

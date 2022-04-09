@@ -3,8 +3,8 @@ package seedu.ibook.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTRATE;
-import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNTSTART;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_RATE;
+import static seedu.ibook.logic.parser.CliSyntax.PREFIX_DISCOUNT_START;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ibook.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.ibook.logic.parser.ParserUtil.parseCategory;
@@ -31,7 +31,7 @@ public class UpdateAllCommandParser implements Parser<UpdateAllCommand> {
     public UpdateAllCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CATEGORY,
-                PREFIX_PRICE, PREFIX_DESCRIPTION, PREFIX_DISCOUNTRATE, PREFIX_DISCOUNTSTART);
+                PREFIX_PRICE, PREFIX_DESCRIPTION, PREFIX_DISCOUNT_RATE, PREFIX_DISCOUNT_START);
 
         UpdateProductDescriptor updateProductDescriptor = new UpdateProductDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -47,13 +47,13 @@ public class UpdateAllCommandParser implements Parser<UpdateAllCommand> {
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             updateProductDescriptor.setPrice(parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
         }
-        if (argMultimap.getValue(PREFIX_DISCOUNTRATE).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DISCOUNT_RATE).isPresent()) {
             updateProductDescriptor.setDiscountRate(
-                    parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNTRATE).get()));
+                    parseDiscountRate(argMultimap.getValue(PREFIX_DISCOUNT_RATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_DISCOUNTSTART).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DISCOUNT_START).isPresent()) {
             updateProductDescriptor.setDiscountStart(
-                    parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNTSTART).get()));
+                    parseDiscountStart(argMultimap.getValue(PREFIX_DISCOUNT_START).get()));
         }
 
         if (!updateProductDescriptor.isAnyFieldUpdated()) {

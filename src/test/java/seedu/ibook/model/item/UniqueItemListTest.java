@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
+import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01_KAYA;
 import static seedu.ibook.testutil.TypicalItems.QUANTITY_10;
 import static seedu.ibook.testutil.TypicalProducts.KAYA_BREAD;
 
@@ -25,19 +25,19 @@ class UniqueItemListTest {
 
     @Test
     public void contains_itemNotInList_returnsFalse() {
-        assertFalse(uniqueItemList.contains(Q5_2022_03_01));
+        assertFalse(uniqueItemList.contains(Q5_2022_03_01_KAYA));
     }
 
     @Test
     public void contains_itemInList_returnsTrue() {
-        uniqueItemList.add(Q5_2022_03_01);
-        assertTrue(uniqueItemList.contains(Q5_2022_03_01));
+        uniqueItemList.add(Q5_2022_03_01_KAYA);
+        assertTrue(uniqueItemList.contains(Q5_2022_03_01_KAYA));
     }
 
     @Test
     public void contains_itemWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueItemList.add(Q5_2022_03_01);
-        Item editedItem = new ItemBuilder(Q5_2022_03_01).withQuantity(QUANTITY_10)
+        uniqueItemList.add(Q5_2022_03_01_KAYA);
+        Item editedItem = new ItemBuilder(Q5_2022_03_01_KAYA).withQuantity(QUANTITY_10)
             .build(KAYA_BREAD);
         assertTrue(uniqueItemList.contains(editedItem));
     }
@@ -49,9 +49,9 @@ class UniqueItemListTest {
 
     @Test
     public void add_duplicateItem_mergeItems() {
-        uniqueItemList.add(Q5_2022_03_01);
-        uniqueItemList.add(Q5_2022_03_01);
-        Item expectedItem = Q10_2022_03_01;
+        uniqueItemList.add(Q5_2022_03_01_KAYA);
+        uniqueItemList.add(Q5_2022_03_01_KAYA);
+        Item expectedItem = Q10_2022_03_01_KAYA;
         assertEquals(expectedItem, uniqueItemList.getExisting(expectedItem));
     }
 
@@ -62,27 +62,27 @@ class UniqueItemListTest {
 
     @Test
     public void remove_itemDoesNotExist_throwsItemNotFoundException() {
-        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01));
+        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01_KAYA));
     }
 
     @Test
     public void remove_existingItemWithSameQuantity_removesItem() {
-        uniqueItemList.add(Q5_2022_03_01);
-        uniqueItemList.remove(Q5_2022_03_01);
+        uniqueItemList.add(Q5_2022_03_01_KAYA);
+        uniqueItemList.remove(Q5_2022_03_01_KAYA);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
         assertEquals(expectedUniqueItemList, uniqueItemList);
     }
 
     @Test
     public void remove_existingItemWithSmallerQuantity_throwsElementNotFoundException() {
-        uniqueItemList.add(Q10_2022_03_01);
-        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01));
+        uniqueItemList.add(Q10_2022_03_01_KAYA);
+        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q5_2022_03_01_KAYA));
     }
 
     @Test
     public void remove_existingItemWithLargerQuantity_throwsElementNotFoundException() {
-        uniqueItemList.add(Q5_2022_03_01);
-        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q10_2022_03_01));
+        uniqueItemList.add(Q5_2022_03_01_KAYA);
+        assertThrows(ElementNotFoundException.class, () -> uniqueItemList.remove(Q10_2022_03_01_KAYA));
     }
 
     @Test

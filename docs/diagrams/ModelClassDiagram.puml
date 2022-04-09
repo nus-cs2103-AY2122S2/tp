@@ -7,12 +7,14 @@ package Model {
     class "<<interface>>\nReadOnlyIBook" as ReadOnlyIBook
     class "<<interface>>\nModel" as Model
     class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    class "{abstract}\nAttributeFilter" as AttributeFilter
 
     class IBook
     class ModelManager
     class UserPrefs
 
     class UniqueProductList
+    class ProductFilter
     class Product
 }
 
@@ -29,7 +31,10 @@ ModelManager -left-> "1" IBook
 ModelManager -right-> "1" UserPrefs
 
 IBook *--> "1" UniqueProductList
-UniqueProductList ---> "~* all" Product
+UniqueProductList -right-> "~* all" Product
 
-ModelManager -->"~* filtered" Product
+ModelManager --> "1" ProductFilter
+ProductFilter *-> "*" AttributeFilter
+
+ModelManager --->"~* filtered" Product
 @enduml

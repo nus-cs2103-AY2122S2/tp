@@ -167,17 +167,26 @@ Shows the full list of all products in iBook.
 
 Format: `list`
 
-#### 3.1.2 Adding a product : `add` 
+#### 3.1.2 Adding a product : `add`
 
 Adds a new product to iBook.
 
 Format: `add n:NAME c:CATEGORY p:PRICE d:DESCRIPTION dr:DISCOUNT_RATE ds:DISCOUNT_START`
 
+|                   |                                                              |
+|-------------------|--------------------------------------------------------------|
+| Compulsory Fields | `NAME`, `PRICE`                                              | 
+| Optional Fields   | `CATEGORY`, `DESCRIPTION`, `DISCOUNT_RATE`, `DISCOUNT_START` |
+
 * Only a single product would be added at a time.
 * The new product added must not be of the same `NAME` and `CATEGORY`.
 * The `NAME` and the `PRICE` fields cannot be empty.
+* If the `CATEGORY` field is not specified or is empty, the default category, **Miscellaneous**, would be used.
+* The default `DISCOUNT_RATE` is 0.
+* The default `DISCOUNT_START` is 0.
 
 Examples:
+
 * `add n:Maggie Mee c:noodles p:3.00 d:curry flavour dr:25 ds:10`
 
 *Alternatively*, 
@@ -245,7 +254,7 @@ Finds products that fit certain filters given by the user.
 
 Format: `find [TAG:VALUE ...]`
 
-Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` | `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
+Tags and their values: [`n:NAME`] [`c:CATEGORY`] [`p:PRICE` \| `sp:START_PRICE` `ep:END_PRICE`] [`d:DESCRIPTION`]
 
 * For the name, category and description fields, the value provided can be a substring of the exact product
 * For searching a range of prices, `START_PRICE` and `END_PRICE` should be used instead
@@ -282,6 +291,8 @@ Format: `expired`
 
 Click on the menu bar `Actions` > `Find expired`
 
+:bulb: Items that are expiring on the same day are not considered expired
+
 #### 3.1.7 Looking for products that are out of stock : `out-of-stock`
 
 Lists products that are out of stock.
@@ -290,12 +301,12 @@ Format: `out-of-stock`
 
 *Alternatively*, 
 
-Click on the menu bar `Actions` > `Find out of stock items`
+Click on the menu bar `Actions` > `Find Out of Stock products`
 
 :information_source: Filters cannot be stacked with subsequent commands. 
 Thus, expired and out of stock filters cannot be stacked with other filters.
 
-#### 3.1.8 Updating all products : `update-all`
+#### 3.1.7 Updating all products : `update-all`
 
 Updates all products in the displayed list.
 
@@ -306,7 +317,7 @@ Examples:
 * `update-all c:fruits` updates all products in current displayed list to have category `fruits`.
 * `update-all p:5.00` updates all products in current displayed list to have price `5.00`.
 
-#### 3.1.9 Deleting all products : `delete-all`
+#### 3.1.8 Deleting all products : `delete-all`
 
 Deletes all products in the displayed list.
 
@@ -396,11 +407,24 @@ A pop-up window will appear.
 
 Then, click on <img align="center" src = "images/ui-icons/delete-item.png" alt="Delete" height = "25"/> to delete the item.
 
-#### 3.2.4 Finding items that are expiring soon: `remind`
+
+#### 3.2.4 Looking expired items : `expired`
+
+Finds items that are expired.
+
+Format: `expired`
+
+*Alternatively*,
+
+Click on the menu bar `Actions` > `Find Expired items`
+
+#### 3.2.5 Finding items that are expiring soon: `remind`
 
 Lists items that are expiring within a certain number of days
 
 Format: `remind NUMBER_OF_DAYS`
+
+* `NUMBER_OF_DAYS` should be a non-negative integer.
 
 Examples: `remind 10` lists items that are expiring 10 days from now.
 

@@ -2,9 +2,9 @@ package seedu.ibook.model.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2020_01_01;
-import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01;
+import static seedu.ibook.testutil.TypicalItems.Q10_2022_03_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2020_01_01_KAYA;
+import static seedu.ibook.testutil.TypicalItems.Q5_2022_03_01_KAYA;
 import static seedu.ibook.testutil.TypicalProducts.PRODUCT_A;
 
 import org.junit.jupiter.api.Test;
@@ -24,36 +24,36 @@ class ProductTest {
 
     @Test
     void getTotalQuantity_multipleQuantities_getSum() {
-        testProduct.addItem(Q5_2022_03_01);
+        testProduct.addItem(Q5_2022_03_01_KAYA);
         assertEquals(new Quantity(5), testProduct.getTotalQuantity());
 
-        testProduct.addItem(Q10_2022_03_01);
+        testProduct.addItem(Q10_2022_03_01_KAYA);
         assertEquals(new Quantity(15), testProduct.getTotalQuantity());
     }
 
     @Test
     void addItem_singleItem_itemAdded() {
-        testProduct.addItem(Q5_2022_03_01);
+        testProduct.addItem(Q5_2022_03_01_KAYA);
         assertEquals(1, testProduct.getItems().size());
     }
 
     @Test
     void addItem_multipleDifferentItems_itemAdded() {
-        testProduct.addItem(Q5_2022_03_01);
-        testProduct.addItem(Q5_2020_01_01);
+        testProduct.addItem(Q5_2022_03_01_KAYA);
+        testProduct.addItem(Q5_2020_01_01_KAYA);
         assertEquals(2, testProduct.getItems().size());
     }
 
     @Test
     void addItem_multipleSameItems_itemCombined() {
-        testProduct.addItem(Q5_2022_03_01);
-        testProduct.addItem(Q5_2022_03_01);
+        testProduct.addItem(Q5_2022_03_01_KAYA);
+        testProduct.addItem(Q5_2022_03_01_KAYA);
         assertEquals(1, testProduct.getItems().size());
     }
 
     @Test
     void removeItem_itemDoesNotExist_throwElementNotFoundException() {
         assertThrows(ElementNotFoundException.class, () ->
-                testProduct.removeItem(Q5_2020_01_01.toItem(testProduct)));
+                testProduct.removeItem(Q5_2020_01_01_KAYA.toItem(testProduct)));
     }
 }

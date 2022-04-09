@@ -30,7 +30,11 @@ public class Category {
     public Category(String categoryName) {
         requireNonNull(categoryName);
         checkArgument(isValidCategoryName(categoryName), MESSAGE_CONSTRAINTS);
-        fullCategoryName = categoryName;
+        if (categoryName.isEmpty()) {
+            fullCategoryName = DEFAULT_CATEGORY;
+        } else {
+            fullCategoryName = categoryName;
+        }
     }
 
     /**
