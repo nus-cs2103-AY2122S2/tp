@@ -21,7 +21,7 @@ UiManager -> MainWindow : fillInnerParts()
 activate MainWindow
 MainWindow -> Model : getFilteredTagList()
 activate Model
-UiManager <-- Model
+MainWindow <-- Model
 deactivate Model
 UiManager <-- MainWindow
 deactivate MainWindow

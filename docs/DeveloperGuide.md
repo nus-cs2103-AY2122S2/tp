@@ -659,23 +659,25 @@ The following user stories were considered but ultimately not implemented. Some 
 * Document linking and handling is infeasible due the requirement of either an external file system or a large internal data folder for maintaining the fiels
 * A To-Do list does not add value to the problem that is being tackled
 * Custom commands add significant complexity without much value. It was decided that keeping the commands simple and short would eliminate the need for this entirely.
+* Finding tags by name does not add value to the problem that is being tackled
 
-| Priority | As a …​     | I want to …​                                                     | So that I can…​                                                     |
-|----------|----------------|------------------------------------------------------------------| ---------------------------------------------------------------------- |
-| `*    `  | beginner user  | see usage instructions and tutorials                             | remember how to perform certain tasks                                  |
-| `*    `  | power user     | link documents to a person                                       | easily locate related documents for a person                           |
-| `*    `  | power user     | unlink documents from a person                                   | remove documents no longer required for a person                       |
-| `*    `  | user           | view all appointments on a calendar interface                    | get an overview of all my appointments in the month                    |
-| `* *  `  | user           | be reminded of things that are happening on a particular day     | remember to attend them                                                |
-| `* *  `  | power user     | add a to-do list to an appointment                               | be reminded to make preparations for that appointment                  |
-| `* *  `  | power user     | view the to-do list of an appointment                            | ensure that I am fully prepared for the appointment                    |
-| `* *  `  | power user     | indicate if a task in the to-do list of an appointment is done   | keep track of the things that are already done                         |
-| `* *  `  | power user     | search for appointments by tags and other filters                | easily find appointments amongst my large address book                 |
-| `* *  `  | power user     | link documents to an appointment                                 | easily find them to prepare for my appointment                         |
-| `*    `  | seasoned user  | export contact information to PDF                                | easily print mailing labels for contacts                               |
-| `*    `  | seasoned user  | export all my data files as backup                               | have a copy of the contact list and import it in case of data loss     |
-| `*    `  | seasoned user  | customise the names and format of text-based commands            | easily remember and use commands I need                                |
-| `*    `  | seasoned user  | add macros to chain multiple actions together as custom command  | perform complex actions that I need in 1 command                       |
+| Priority | As a …​        | I want to …​                                                    | So that I can…​                                                    |
+|----------|----------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `*    `  | beginner user  | see usage instructions and tutorials                            | remember how to perform certain tasks                              |
+| `*    `  | power user     | link documents to a person                                      | easily locate related documents for a person                       |
+| `*    `  | power user     | unlink documents from a person                                  | remove documents no longer required for a person                   |
+| `*    `  | user           | view all appointments on a calendar interface                   | get an overview of all my appointments in the month                |
+| `* *  `  | user           | be reminded of things that are happening on a particular day    | remember to attend them                                            |
+| `* *  `  | forgetful user | find a tag by name                                              | locate details of tag without having to go through the entire list |
+| `* *  `  | power user     | add a to-do list to an appointment                              | be reminded to make preparations for that appointment              |
+| `* *  `  | power user     | view the to-do list of an appointment                           | ensure that I am fully prepared for the appointment                |
+| `* *  `  | power user     | indicate if a task in the to-do list of an appointment is done  | keep track of the things that are already done                     |
+| `* *  `  | power user     | search for appointments by tags and other filters               | easily find appointments amongst my large address book             |
+| `* *  `  | power user     | link documents to an appointment                                | easily find them to prepare for my appointment                     |
+| `*    `  | seasoned user  | export contact information to PDF                               | easily print mailing labels for contacts                           |
+| `*    `  | seasoned user  | export all my data files as backup                              | have a copy of the contact list and import it in case of data loss |
+| `*    `  | seasoned user  | customise the names and format of text-based commands           | easily remember and use commands I need                            |
+| `*    `  | seasoned user  | add macros to chain multiple actions together as custom command | perform complex actions that I need in 1 command                   |
 
 
 ### Use cases
