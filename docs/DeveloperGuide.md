@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to filter student contacts.
+1. User requests to filter/find student contacts.
 
 2. ArchDuke filters and displays all the relevant student contacts based on the input attributes.
 
@@ -755,25 +755,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ArchDuke shows an error message.
 
         Use case resumes from step 1.
-
   
-**Use case: UC10 - Find people from the contact list**
-
-**MSS:**
-
-1. User requests to find the contacts by inputting keywords based on the attribute prefix.
-2. ArchDuke displays all the contacts which have the keywords.
-   Use case ends.
-
-**Extensions**
-
-* 1a. The student contact attribute(s) input is/are in an invalid format.
-
-    * 1a1. ArchDuke shows an error message.
-
-      Use case resumes from step 1.
-    
-*{More to be added}*
 
 ### Non-Functional Requirements
 
