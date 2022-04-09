@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+title HistoryCommand Sequence Diagram\n
+
+box "Logic" LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":HistoryCommand" as HistoryCommand LOGIC_COLOR
+end box
+
+box "Model" MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant ":CommandHistory" as CommandHistory MODEL_COLOR
+end box
+
+[-> LogicManager : execute("history")
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> AddressBookParser : parseCommand("history")
+activate AddressBookParser LOGIC_COLOR
+
+create HistoryCommand
+AddressBookParser -> HistoryCommand
+activate HistoryCommand LOGIC_COLOR
+HistoryCommand --> AddressBookParser
+deactivate HistoryCommand
+
+AddressBookParser --> LogicManager : HistoryCommand
+deactivate AddressBookParser
+
+LogicManager -> HistoryCommand : execute(model)
+activate HistoryCommand LOGIC_COLOR
+
+HistoryCommand -> Model : getCommandHistory()
+activate Model MODEL_COLOR
+
+Model -> CommandHistory
+activate CommandHistory MODEL_COLOR
+
+CommandHistory --> Model
+deactivate CommandHistory
+
+Model --> HistoryCommand : previously executed commands
+deactivate Model
+
+HistoryCommand --> LogicManager : CommandResult
+deactivate HistoryCommand
+
+[<--LogicManager : CommandResult
+deactivate LogicManager
+@enduml

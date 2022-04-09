@@ -377,6 +377,8 @@ Reverts the changes made by the previously executed command.
 
 **Format**: `undo`
 
+* Reverts the changes of the previously executed command, and removes the command from history.
+
 <div markdown="block" class="alert alert-info">
 :warning: <b>Warning!</b>
 
@@ -391,8 +393,6 @@ Reverts the changes made by the previously executed command.
 * Inputting `undo` after the [`archive` command](https://ay2122s2-cs2103t-w09-4.github.io/tp/UserGuide.html#archiving-details-in-the-address-book-archive) will not delete the copy of TAPA that has been saved in a separate file.
 
 </div>
-
-* Reverts the changes of the previously executed command, and removes the command from history.
 
 **Example**:
 * `undo`
