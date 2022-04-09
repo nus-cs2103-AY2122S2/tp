@@ -168,12 +168,11 @@ Examples:
 <div markdown="span" class="alert alert-primary">
 
 **:bulb: Take Note:**
-
-- For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track. 
-- For Deadline and Event, the DATE must be in this format: YYYY-MM-DD 
-- For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+* For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track. 
+* For Deadline and Event, the DATE must be in this format: YYYY-MM-DD 
+* For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
 and mm should only be between 00 and 59. 
-- For event, the START_TIME must be earlier than the END_TIME.
+* For event, the START_TIME must be earlier than the END_TIME.
 
 Adding a duplicate Task will result in an error.
 
@@ -274,10 +273,10 @@ Given a task list as follows... <br/>
 
 **:bulb: Take Note:**
 
-- For Deadline and Event, the DATE must be in this format: YYYY-MM-DD 
-- For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+* For Deadline and Event, the DATE must be in this format: YYYY-MM-DD 
+* For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
 and mm should only be between 00 and 59. 
-- For Event, the START_TIME must be earlier than the END_TIME.
+* For Event, the START_TIME must be earlier than the END_TIME.
 
 </div>
 
