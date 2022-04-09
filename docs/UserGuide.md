@@ -167,16 +167,19 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Take Note:**
+**:bulb: Take Note:** <br>
 
-<ul>
-<li> For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track. </li> 
-<li> For Deadline and Event, the DATE must be in this format: YYYY-MM-DD </li> 
-<li> For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
-and mm should only be between 00 and 59. </li>
-<li> For event, the START_TIME must be earlier than the END_TIME. </li>
-<li> Adding a duplicate Task will result in an error. </li>
-</ul>
+For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track. <br>  
+ 
+For Deadline and Event, the DATE must be in this format: YYYY-MM-DD <br>  
+
+For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+and mm should only be between 00 and 59. <br>
+ 
+For event, the START_TIME must be earlier than the END_TIME. <br>
+
+Adding a duplicate Task will result in an error.
+
 </div>
 
 ### Listing all Tasks : `listTask`
@@ -272,14 +275,15 @@ Given a task list as follows... <br/>
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Take Note:**
+**:bulb: Take Note:** <br>
 
-<ul>
-<li> For Deadline and Event, the DATE must be in this format: YYYY-MM-DD </li>
-<li> For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
-and mm should only be between 00 and 59. </li>
-<li> For Event, the START_TIME must be earlier than the END_TIME. </li>
-</ul>
+For Deadline and Event, the DATE must be in this format: YYYY-MM-DD <br>
+ 
+For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+and mm should only be between 00 and 59. <br>
+
+For Event, the START_TIME must be earlier than the END_TIME.
+
 </div>
 
 ### Marking a Task : `markTask`
