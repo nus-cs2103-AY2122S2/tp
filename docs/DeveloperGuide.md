@@ -69,20 +69,23 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+
+Note that `ApplicantListPanel`, `PositionListPanel`, and `InterviewListPanel` will all exists simultaneously in the `UI` component, but only one will be visible to the user as controlled by tabs in `MainWindow`.
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
+* changes the selected tab automatically according to the `DataType` in `CommandResult` from the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays the `Applicant`, `Position` and `Interview` objects residing in the `Model`.
 
 ### Logic component
 
@@ -181,6 +184,10 @@ A new `Applicant` class had to be created to support the functionality. It is al
 Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
 support the needs of HireLah.
 
+### To Add: Position feature?
+
+### To Add: Interview feature?
+
 ### Adding of Data 
 
 #### Implementation
@@ -225,8 +232,29 @@ Hence, it is important to delete the associated interview(s) when deleting an ap
 * **Alternative 2:** Keep relevant list of interviews for each applicant and position.
     * Pros: More efficient when deleting since all the associated interviews are already available.
     * Cons: Increased coupling between applicant, position, and interview which make it more bug-prone.
+    
+### Filtering of Data
 
-### Sorting of Data
+#### Implementation
+
+The implementation of filtering data is done as an extension of the `list -X` command, which takes in optional parameters that will trigger the filtering of data to display if given. The filtering of data is done similar to the `find` command in AB3, which is now deprecated in HireLah. It applies a predicate to the `filteredXYZ` filtered lists in the `ModelManager`, which the `UI` will pick up and display the latest filtered list of the data to the user.
+
+To support different filters for different data types, each filter is a predicate class in the `Model` component. For example, to support filtering applicants by gender, there is a [`ApplicantGenderPredicate`](https://github.com/AY2122S2-CS2103-W17-4/tp/blob/master/src/main/java/seedu/address/model/applicant/ApplicantGenderPredicate.java) in the `Model` component under `applicant`. The predicate implements Java's `Predicate<Applicant>` interface for filtered lists.
+
+#### Design considerations:
+
+#### Aspect: Should the filter feature be a separate command by itself?
+
+* **Alternative 1:** Implement filter as a separate `filter -X` command.
+    * Pros: May be more intuitive for new users to pick up. Can also potentially make the parsing of filter-related arguments less complicated.
+    * Cons: Multiple commands doing similar things because `filter` is essentially `list` with different predicates applied to the filtered lists. Listing all data is also a predicate itself. 
+
+
+* **Alternative 2 (current choice):** Implement filter as part of the `list -X` command (by taking in more parameters).
+    * Pros: No two commands doing the similar things, which may lead to chunks of repeated code under the two commands.
+    * Cons: May be confusing for new users, need to explain it well in user guide and help window. Also, will have to parse filter-related arguments together with other arguments in `list -X` command (such as for sorting), which may cause the parsing to be more complicated.
+
+### Sorting of Data !NEED TO UPDATE!
 
 #### Implementation
 The implementation of sorting data is similar to list data, where sorting of different data types is done through `ModelManger`, which implements the methods in the `Model` interface.
@@ -245,92 +273,7 @@ The parsing of a sorting command from user input is also done through the 3 leve
 * **Alternative 2:** Mark an integer represent the position of the original data
     * Pros: More efficient in memory space
     * Cons: Increased the complexity of the relevant code, which make it more bug-prone.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th applicant in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new applicant. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -366,23 +309,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​     | I want to …​                                                | So that I can…​                                                 |
-| -------- |-------------|-------------------------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | new user    | see usage instructions                                      | refer to instructions when I forget how to use the App          |
-| `* * *`  | recruiter   | add a new candidate                                         |                                                                 |
-| `* * *`  | recruiter   | delete a candidate                                          | remove entries that I no longer need                            |
-| `* * *`  | recruiter   | access information of candidates                            | I can contact them                                              |
-| `* *`    | recruiter   | access status (OA/first interview etc) of candidates        | I can easily identify where they are in the recruiting pipeline |
-| `*`      | expert user | access previous commands which I have sent to the interface | I can work faster                                               |
+| Priority | As a …​     | I want to …​                           | So that I can…​                                                         |
+| ------ |-------------|----------------------------------------|-------------------------------------------------------------------------|
+| `* * *` | new user    | see usage instructions of all commands | know what are the commands available and how to use them                |
+| `* * *` | recruiter   | add a new applicant                    | keep track of all the applicants                                        |
+| `* * *` | recruiter   | delete an applicant                    | remove entries that I no longer need                                    |
+| `* * *` | recruiter   | view the applicants in my contact      | access their information and contact them                               |
+| `* * *` | recruiter   | view the positions I am recruiting for | know what are the positions available                                   |
+| `* * *` | recruiter   | view the interviews I have             | know my schedule and plan my work day                                   |
+| `* *`  | recruiter   | filter the displayed data              | find the information I am looking for easily                            |
+| `*`    | expert user | access previous commands I made        | send multiple similar commands without having to type the whole command |
 
-
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Hirelah Application` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HireLah Application` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 01: Delete a applicant**
+####**Use case 01: Delete a applicant**
 
 **MSS**
 
@@ -405,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case 02: Add an interview**
+####**Use case 02: Add an interview**
 
 **MSS**
 
@@ -427,9 +370,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. HireLah shows an error message.
 
       Use case resumes at step 2.
-*{More to be added}*
 
-**Use case 03: Editing position**
+#### **Use case 03: Editing position**
 
 **MSS**
 1. User requests to list positions
@@ -451,14 +393,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br/><br/>
   Use case ends.
 
+#### **Use case 04: Filtering data**
+
+**MSS**
+1. User requests to list data with filter applied.
+2. HireLah refreshes the list of data to display with only data that matches the filter given.
+   <br/><br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. No data in HireLah fits the filter given.
+* 1a1. HireLah informs user that no data is found.
+  <br/><br/>
+  Use case ends.
+  <br/><br/>
+* 1b. The filter type given is invalid.
+* 1b1. HireLah informs user that the filter type given is invalid.
+  <br/><br/>
+  Use case ends.
+
+*{More to be added}*
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 applicants without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The system should be usable by a novice which has not used other CLI application for applicant tracking.
-
-*{More to be added}*
+2. HireLah should respond within two seconds after any command is entered.
+3. Should be able to hold up to 1000 applicants, positions, and interviews each without a noticeable sluggishness in performance for typical usage.
+4. The data in the app should be easily transferable to another computer without losing any information.
+5. A user with above average typing speed for regular English text _(i.e. not code, not system admin commands)_ should be able to accomplish most of the tasks faster using commands than using the mouse.
+6. The system should be usable by a novice which has not used other CLI application for recruitment tracking.
+7. A new user should be able to pick up how to use HireLah within 20 minutes of usage.
+8. HireLah must boot up within 10 seconds on a device under a normal load.
+9. HireLah is not required to make any direct communication with the applicants.
 
 ### Glossary
 
