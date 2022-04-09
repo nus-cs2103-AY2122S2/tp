@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import woofareyou.model.AddressBook;
-import woofareyou.model.ReadOnlyAddressBook;
+import woofareyou.model.PetBook;
+import woofareyou.model.ReadOnlyPetBook;
 import woofareyou.model.pet.Address;
 import woofareyou.model.pet.Appointment;
 import woofareyou.model.pet.AttendanceHashMap;
@@ -17,7 +17,7 @@ import woofareyou.model.pet.Phone;
 import woofareyou.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code PetBook} with sample data.
  */
 public class SampleDataUtil {
 
@@ -47,8 +47,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyPetBook getSamplePetBook() {
+        PetBook sampleAb = new PetBook();
         for (Pet samplePet : getSamplePets()) {
             sampleAb.addPet(samplePet);
         }

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import woofareyou.model.AddressBook;
+import woofareyou.model.PetBook;
 import woofareyou.model.pet.Pet;
 
 /**
@@ -67,10 +67,10 @@ public class TypicalPets {
     private TypicalPets() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical pets.
+     * Returns a {@code PetBook} with all the typical pets.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static PetBook getTypicalPetBook() {
+        PetBook ab = new PetBook();
         for (Pet pet : getTypicalPets()) {
             ab.addPet(pet);
         }

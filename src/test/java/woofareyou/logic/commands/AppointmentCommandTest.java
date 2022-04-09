@@ -7,15 +7,15 @@ import static woofareyou.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static woofareyou.logic.commands.CommandTestUtil.showPetAtIndex;
 import static woofareyou.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static woofareyou.testutil.TypicalIndexes.INDEX_SECOND_PET;
-import static woofareyou.testutil.TypicalPets.getTypicalAddressBook;
+import static woofareyou.testutil.TypicalPets.getTypicalPetBook;
 
 import org.junit.jupiter.api.Test;
 
 import woofareyou.commons.core.Messages;
 import woofareyou.commons.core.index.Index;
-import woofareyou.model.AddressBook;
 import woofareyou.model.Model;
 import woofareyou.model.ModelManager;
+import woofareyou.model.PetBook;
 import woofareyou.model.UserPrefs;
 import woofareyou.model.pet.Appointment;
 import woofareyou.model.pet.Pet;
@@ -28,7 +28,7 @@ class AppointmentCommandTest {
     private static final String APPOINTMENT_DATE_TIME_STUB = "02-04-2022 09:30";
     private static final String APPOINTMENT_LOCATION_STUB = "NUS Vet Clinic";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPetBook(), new UserPrefs());
 
     @Test
     public void execute_addAppointmentUnfilteredList_success() {
@@ -44,7 +44,7 @@ class AppointmentCommandTest {
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ class AppointmentCommandTest {
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs());
         expectedModel.setPet(firstPerson, editedPerson);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
@@ -80,7 +80,7 @@ class AppointmentCommandTest {
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new PetBook(model.getPetBook()), new UserPrefs(),
                 model.getLastUsedPredicate());
         expectedModel.setPet(firstPerson, editedPerson);
 
@@ -98,14 +98,14 @@ class AppointmentCommandTest {
 
     /**s
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of pet book
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPetAtIndex(model, INDEX_FIRST_PET);
         Index outOfBoundIndex = INDEX_SECOND_PET;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
+        // ensures that outOfBoundIndex is still in bounds of pet book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getPetBook().getPetList().size());
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(outOfBoundIndex,
                 new Appointment());

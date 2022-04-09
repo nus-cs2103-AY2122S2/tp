@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Mini Beagle ";
 
     public static final String MESSAGE_SUCCESS = "New pet added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PET = "This pet already exists in WoofAreYou!";
 
     private final Pet toAdd;
 

@@ -29,9 +29,9 @@ import woofareyou.testutil.EditPetDescriptorBuilder;
 import woofareyou.testutil.PetBuilder;
 import woofareyou.testutil.PetUtil;
 
-public class AddressBookParserTest {
+public class PetBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final PetBookParser parser = new PetBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
