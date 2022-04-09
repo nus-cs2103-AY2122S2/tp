@@ -8,9 +8,9 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+As UniBook is a brownfield project based on the _AddressBook Level-3_ project created by the [SE-EDU intiative](https://se-education.org), many of the diagrams and descriptions present in this guide have been adapted from the [AB3 developer guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -80,22 +80,40 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `ModuleListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-W16-1/tp/blob/master/src/main/java/unibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-W16-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
-
-The `UI` componnent contains two different listviews `PersonListPanel` and `ModuleListPanel` as inner components, but only displays one of them at a time depending on the view that the user wishes to see - modules or people.
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component
-  * `ModuleListPanel` and `ModuleCard` display the `ModuleList` of the `Model` and `Modules` inside `ModuleList`, respectively.
-  * `PersonListPanel` displays the filtered `UniquePersonList` of the `Model`.
-  * `StudentCard` and `Professor` display the `Student` and `Professsor` objects residing in the `Model` respectively.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands. 
 
+The `MainWindow` of the `UI` component is composed of 3 sub-components, called views - `PeopleView`, `ModulesView` and `GroupsView`. A view refers to what a user is seeing on `MainWindow`. Only 1 view can be shown at a time. The user can switch between these views with the `list` command.
+
+#### Views Sub-Components
+![Structure of the Views Sub-Component](images/UiViewsDiagram.png)
+
+The `Views` Sub-Components consists of 3 distinct views:
+
+* `PeopleView`
+  * Consists of the `PersonListPanel` class, which displays a list of filtered persons to the user in the form of multiple instances of `StudentCard` and `ProfessorCard`.
+  * Also consists of multiple instances of `ModuleAndGroupMiniCard` which displays module codes and the group names of each group in each module to the user.
+* `ModuleView`
+  * Consists of the `ModuleListPanel` class, which displays a list of filtered modules to the user in the form of instances of `ModuleCard`. 
+    * Each `ModuleCard` displays information on a module such as: 
+      * groups in the module in the form of instances of `GroupCard`
+      * students in the module in the form of instances of `StudentCard`
+      * professors in the module in the form of instances of `ProfessorCard`
+      * key events of the module in the form of instances of `ModuleKeyEventCard`
+* `GroupView`
+  * Consists of the `GroupsView` class, which displays a list of filtered groups to the user in the form of instances of `GroupCard`.
+    * Each `GroupCard` displays information on a group such as:
+      * members of the group in the form of instances of `StudentCard`
+
+All classes in the `Views` Sub-Component inherit from `UiPart` abstract class which captures the commonalities between classes that represent parts of the visible GUI.
+      
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S2-CS2103-W16-1/tp/blob/master/src/main/java/unibook/logic/Logic.java)
@@ -236,23 +254,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|---------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
 | `* * *`  | student                                                             | add contacts of other students taking a specific module                                  | I can easily contact other students for help                                           |
 | `* * *`  | student                                                             | remove contacts of students who have finished the module                                 | only keep the contacts I need                                                          |
-| `* * *`  | student/professor                                                   | view all my contacts                                                                     |
+| `* * *`  | student                                                             | view all my contacts                                                                     |
+| `* * *`  | student                                                             | view all the details of each module I am a student of                                    |
 | `* * *`  | student                                                             | edit specific details of a contact                                                       | 
-| `* * *`  | professor                                                           | edit specific details of a contact                                                       | 
 | `* * *`  | student                                                             | find the relevant contact details (eg office location, email) to reach my TAs/professors | I am able to find the information I need quickly                                       |
 | `* * *`  | student                                                             | find classmates and their contact details taking the same module                         | I can form teams with them for group projects                                          |
 | `* * `   | student with many modules                                           | flag any important contacts to saved contacts                                            | I can easily find the relevant contact in a hassle-free manner in the future           |
 | `* * `   | student with many modules                                           | remove modules that I have completed                                                     |
-| `* `     | student with many modules                                           | organise any saved contacts into categories                                              | I can easily find the relevant contact in a hassle-free manner                         |
-| `* `     | student with many modules                                           | add key events such as exams, assignments deadlines                                      | I will not forget these important dates|
-| `* `     | student with many modules                                           | remove key events after they are over                                                    |
+| `* *`     | student with many modules                                           | add key events such as exams, assignments deadlines                                      | I will not forget these important dates|
+| `* *`     | student with many modules                                           | remove key events after they are over                                                    |
 | `* * `   | student with a group in a module                                    | add and find contacts of other students in a specific group                              | contact them quickly                                                                   |
 | `* * `   | student with a group in a module                                    | remove the group after the work is done                                                  |                                                                                        |
 | `* * `   | student with a group in a module                                    | add group meeting times                                                                  | I will not forget the meeting time |
 | `* * `   | student with a group in a module                                    | remove meeting times after the meeting is done                                           |
-| `*  `    | professor teaching multiple modules                                 | organise students into their respective modules                                          | locate details of students in each module without having to go through the entire list |
-| `* `     | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)                          | I can easily contact the relevant person with one command                              |
-| `*`      | student/professor with many contacts in the UniBook                 | sort persons by name                                                                     | locate a person easily                                                                 |
+| `* * *`  | student with a group in a module                                   | view all the members of my group on one page                                             |
+| `* * *`     | tech savvy user who is well-versed in using command-line interfaces | use command-lines to carry out a command (eg email cs2103 prof)                          | I can easily contact the relevant person with one command                              |
+| `* *`      | student with many contacts in the UniBook                 | find a person by their name                                                                        | locate a person easily                                                                 |
+| `* *`    | student who is less tech-savvy and more visually-inclined           | navigate through different pages of UniBook with a click                                 | not have to remember commands to do a simple task like view another page, enhancing my user experience|
 
 *{More to be added}*
 
@@ -396,19 +414,30 @@ Use case ends.
 * 1a. The user request is wrongly formatted/incomplete/incorrect.
     - 1a1. User is prompted to enter the format correctly.
     - Use case ends.
+    
+**Use Case UC06 - Viewing more details of a module or group from _people view_**  
 
+Actor: User
+
+**MSS**
+1. User wants to view more details fo a module or group from the module code or group code he sees on _people view_.
+2. User clicks with the mouse on the displayed module code / group name that he wants view more details of.
+3. UniBook changes to _modules view_/_groups view_ showing all the details of the module/group that the User wants to view.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should be able to work on any Popular Operating System as long as Java is installed.
-2.  The program should be able to handle up to 500 students per module.
+1. Should be able to work on any Popular Operating System as long as Java is installed.
+2. The program should be able to handle up to 500 students per module.
 3. System should respond to commands within 2 seconds.
 4. There should be no memory leaks.
 
 ### Glossary
 
 * **User**: A user of UniBook, either a student or a professor.
-* **Module**: A group of students led by professor(s), representing a university course. 
+* **Module**: A university course, which has professor(s) teaching it, and students participating in it. 
+* **Group**: A group within a module. For example, a tutorial group or project group.
 * **Popular Operating System**: Windows, Linux, Unix, MacOS
 
 
