@@ -181,6 +181,20 @@ public class UndoCommandTest {
     }
 
     @Test
+    public void execute_undoCommand_clearUndoSuccess() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new InsurancePackagesSet());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new InsurancePackagesSet());
+        ClearCommand clearCommand = new ClearCommand();
+        UndoCommand undoCommand = new UndoCommand();
+
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS);
+
+        clearCommand.execute(model);
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_undoCommand_undoLimit() {
         try {
             DeleteCommand deleteCommand6 = new DeleteCommand(INDEX_SIXTH_PERSON);

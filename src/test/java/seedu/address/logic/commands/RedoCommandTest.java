@@ -194,6 +194,28 @@ public class RedoCommandTest {
     }
 
     @Test
+    public void execute_redoCommand_clearRedoSuccess() {
+        try {
+            Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new InsurancePackagesSet());
+            Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                    new InsurancePackagesSet());
+            ClearCommand clearCommand = new ClearCommand();
+            UndoCommand undoCommand = new UndoCommand();
+            RedoCommand redoCommand = new RedoCommand();
+
+            String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS);
+
+            expectedModel.setAddressBook(new AddressBook());
+            clearCommand.execute(model);
+            undoCommand.execute(model);
+
+            assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of redo should not fail.", ce);
+        }
+    }
+
+    @Test
     public void execute_redoCommand_redoLimit() {
         try {
             DeleteCommand deleteCommand6 = new DeleteCommand(INDEX_SIXTH_PERSON);

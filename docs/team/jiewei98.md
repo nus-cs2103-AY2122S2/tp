@@ -35,4 +35,3 @@ Given below are my contributions to the project.
         * Added section on user stories.
         * Added section on non-functional requirements.
         * Improved overall styling.
-        
