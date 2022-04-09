@@ -231,7 +231,7 @@ Upon completion of executing `addRole` command, the displayed list of roles woul
 Given below is an example usage scenario and how the add role feature behaves at each step:
 1. The user executes the command `addRole 1 n/Data Analyst s/applying r/31-07-2022 23:59` to add a new role into the 1<sup>st</sup> company.
 2. Then the `AddRoleCommandParser#parse()` parses and creates a `Role` object with fields to be added such as the roleName `Data Analyst` before creating an instance of `AddRoleCommand` with it.
-3. The `AddRoleCommandParser` returns the `AddRoleCommand` to the `LogicManager`. `LogicManager` invokes `AddRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so append the `Role` object to the back of its `RoleManager`.
+3. The `AddRoleCommandParser` returns the `AddRoleCommand` to the `LogicManager`. `LogicManager` invokes `AddRoleCommand#execute()` which validates if role is present according to the company and role indexes, if so add the new role into the company's `RoleManager`.
 4. The `LogicManager` then returns the `CommandResult` to `MainWindow` in order to be display to the user if the command have succeeded.
 
 
