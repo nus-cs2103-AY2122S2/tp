@@ -12,9 +12,6 @@ title: Developer Guide
     * [Model Component](#model-component)
     * [Storage Component](#storage-component)
 * [Implementation](#implementation)
-    * [Find feature](#find-feature)
-      * [Implementation](#implementation-find)
-      * [Design considerations](#design-considerations-find)
     * [Add role feature](#add-role-feature)
       * [Implementation](#implementation-add)
       * [Design considerations](#design-considerations-add)
@@ -24,6 +21,9 @@ title: Developer Guide
     * [Delete role feature](#delete-role-feature)
       * [Implementation](#implementation-delete)
       * [Design considerations](#design-considerations-delete)
+    * [Find feature](#find-feature)
+      * [Implementation](#implementation-find)
+      * [Design considerations](#design-considerations-find)
     * [Reminder feature](#reminder-feature)
         * [Implementation](#implementation-reminder)
     * [Set reminder window feature](#set-reminder-window-feature)
@@ -201,41 +201,6 @@ Due to some of our features having duality in its implementaion, we have decided
 to `company` that have a `role` counterpart. This is due to the `role` counterpart being more complicated as it builds
 directly on top of the features exclusive to `company`.
 
-### Find feature <a id="find-feature"></a>
-
-The `find` feature allows users to filter the company list to find roles by specifying company name keywords and role name keywords.
-
-#### Implementation <a id="implementation-find"></a>
-
-![UML diagram of the Find feature](images/FindDiagram.png)
-
-Given below is an example usage scenario and how the find feature behaves at each step:
-1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
-2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
-3. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
-4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
-
-The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
-
-![UML diagram of the Find feature](images/FindSequenceDiagram.png)
-
-The following activity diagram summarises what happens when a user executes the `find` command:
-
-![UML diagram of the Find feature](images/FindActivityDiagram.png)
-
-#### Design considerations <a id="design-considerations-find"></a>
-
-* Alternative 1 (current choice): The use of one unified `find` command with prefixes `c/` and `r/` to concurrently filter the company list by role name and company name.
-    * Pros:
-        * Users are able to quickly sieve through the company list to find the specific roles.
-    * Cons:
-        * Increased dependencies and coupling between components, as `model` now depends on both classes `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
-* Alternative 2 (used in v1.2): `find` only allows users to filter the company list by company name keywords and not role name keywords.
-    * Pros:
-        * Reduced coupling between components as `model` depends on `CompanyNameContainsKeywordsPredicate` but not `RoleNameContainsKeywordsPredicate`.
-    * Cons:
-        * Users have less flexibility in searching for specific roles, especially when they have applied for multiple roles within the same company. They can only find all roles which belong to specific companies.
-
 ### Add role feature <a id="add-role-feature"></a>
 The `addRole` command for the `Role` item allows the user to add a new role by specifying
 the company index this role is attached to, and the details of the role with the appropriate prefix.
@@ -379,7 +344,41 @@ The following activity diagram summarizes what happens when a user executes an `
     * Cons:
         * User might accidentally delete an entire `company` if command was sent too early, resulting in the `company` and all associated `roles` being deleted.
         * Due to the lack of an undo feature, this is can be a massive problem.
-    
+
+### Find feature <a id="find-feature"></a>
+
+The `find` feature allows users to filter the company list to find roles by specifying company name keywords and role name keywords.
+
+#### Implementation <a id="implementation-find"></a>
+
+![UML diagram of the Find feature](images/FindDiagram.png)
+
+Given below is an example usage scenario and how the find feature behaves at each step:
+1. The user executes the command `find c/meta r/software mobile` to find roles whose role names contain role name keywords `software` or `mobile`, which belong to companies whose company names contains the company name keyword `meta`.
+2. Then the `FindCommandParser#parse()` creates a `CompanyNameContainsKeywordsPredicate` object and a `RoleNameContainsKeywordsPredicate` object with the role name keywords and company name keyword.
+3. The `FindCommand#execute()` method will update the `model` using the `Model#updateFilteredCompanyList()` method, displaying only roles that match the keywords, and the companies that they belong to.
+4. The `Parser` returns the `CommandResult` which is then executed by `LogicManager`.
+
+The following sequence diagram shows how the `find` command operation works with the user input `find c/meta r/software mobile`:
+
+![UML diagram of the Find feature](images/FindSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes the `find` command:
+
+![UML diagram of the Find feature](images/FindActivityDiagram.png)
+
+#### Design considerations <a id="design-considerations-find"></a>
+
+* Alternative 1 (current choice): The use of one unified `find` command with prefixes `c/` and `r/` to concurrently filter the company list by role name and company name.
+    * Pros:
+        * Users are able to quickly sieve through the company list to find the specific roles.
+    * Cons:
+        * Increased dependencies and coupling between components, as `model` now depends on both classes `CompanyNameContainsKeywordsPredicate` and `RoleNameContainsKeywordsPredicate`.
+* Alternative 2 (used in v1.2): `find` only allows users to filter the company list by company name keywords and not role name keywords.
+    * Pros:
+        * Reduced coupling between components as `model` depends on `CompanyNameContainsKeywordsPredicate` but not `RoleNameContainsKeywordsPredicate`.
+    * Cons:
+        * Users have less flexibility in searching for specific roles, especially when they have applied for multiple roles within the same company. They can only find all roles which belong to specific companies.
 
 ### Reminder feature <a id="reminder-feature"></a>
 Whenever the user starts up the application, a reminder pane will automatically open along with the main window, showing all roles and their respective companies that have reminder dates that are within the reminder window.
