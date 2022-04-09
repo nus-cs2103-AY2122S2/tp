@@ -48,6 +48,31 @@ Here are some example commands you can try:
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Information about contacts in TAPA
+
+Each contact in TAPA represents a student, who can have the following fields:
+
+Field            | Prefix | Description                                                        | Restrictions                                                                                                                                                                                               | Multiplicity
+-----------------|--------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------
+STUDENT_ID       |   i/   | Denotes the unique identification number of a student              | <ul><li>Compulsory field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters</li><li>Whitespaces and symbols are not allowed</li></ul>                                         | 1
+MODULE_CODE      |   m/   | Denotes the module that a student is currently taking              | <ul><li>Compulsory field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters</li><li>Whitespaces and symbols are not allowed</li></ul>                                              | 1
+NAME             |   n/   | Denotes the name of the student                                    | <ul><li>Compulsory field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters and spaces</li><li>Symbols are not allowed</li></ul>                                                   | 1
+PHONE            |   p/   | Denotes the phone number of the student                            | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain numeric characters</li><li>Letters, whitespaces and symbols are not allowed</li><li>Must be at least 3 digits long</li></ul>     | 0 or 1
+TELEGRAM_HANDLE  |   t/   | Denotes the telegram handle of the student                         | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters</li><li>Whitespaces and symbols are not allowed</li><li>Must be between 5 to 32 characters long</li></ul> | 0 or 1
+EMAIL            |   e/   | Denotes the email address of the student                           | <ul><li>Optional field</li><li>Should not be blank</li><li>Should adhere to the standard email format as mentioned [here](https://snov.io/knowledgebase/what-is-a-valid-email-address-format/ )</li></ul>       | 0 or 1
+TASK             |   tn/  | Denotes the name of the task that is being assigned to the student | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters and spaces</li><li>Symbols are not allowed</li></ul>                                                     | Any non-negative number
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** <br>
+
+* Multiplicity refers to the number of instances of each field, that a student can have. (e.g. a student can have either 0 or 1 phone numbers associated to him/her)
+
+* More details regarding the use of prefix can be found in the [Features](#features) section below.
+</div>
+
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -73,8 +98,6 @@ Here are some example commands you can try:
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   Example: For the command `help`, if the user inputs `help help 123`, the input will be interpreted as `help`.
-
-* The parameter `TELEGRAM_HANDLE` should contain 5 to 32 alphanumeric characters. The telegram handle cannot have any symbols (such as underscore) as well as whitespaces.
 </div>
 
 ### Adding a student: `add`
@@ -100,7 +123,7 @@ Adds a student to TAPA.
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
 * The current version of TAPA expects that a TA will only teach each student in, at most, one module. Thus, each student to be added can only have one module code.
-
+* You may refer to the [table](#Information-about-contacts-in-TAPA) above for more information about each individual field of a student.
 </div>
 
 **Example**:
