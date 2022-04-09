@@ -502,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 > Definition:
 > - For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
-> - More specifically, the `User` are **Supervisors**.
+> - More specifically, the `User` are **Supervisors and Managers**.
 
 > Guarantees:
 > - For any use cases below that changes any data, ManageEZPZ will guarantee that the data is updated and saved.
@@ -512,31 +512,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User uses the appropriate command to add Task.
-4. ManageEZPZ adds the task & confirms with a successful message that the task is added.
+1. User starts up ManageEZPZ 
+2. User uses the appropriate command to add Task. 
+3. ManageEZPZ adds the task & confirms with a successful message that the task is added.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the three `add` commands: 
-    * 3a1. User uses `addTodo` command 
+* 2a. User uses one of the three `add` commands: 
+    * 2a1. User uses `addTodo` command 
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
 
-    * 3a2. User uses `addDeadline` command 
+    * 2a2. User uses `addDeadline` command 
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
 
-    * 3a3. User uses `addEvent` command 
+    * 2a3. User uses `addEvent` command 
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
     
-* 3b. User uses Add Task Commands with the wrong syntax
+* 2b. User uses Add Task Commands with the wrong syntax
 
-    * 3b1. ManageEZPZ sends an error message to User, indicating the
+    * 2b1. ManageEZPZ sends an error message to User, indicating the
       format for adding Task is incorrect, attached with the correct syntax format.
 
       Use case ends.
@@ -550,17 +549,16 @@ Guarantees: Deletion of any Task will also result in the removal
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User uses the appropriate command to delete a Task
-4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted.
+1. User starts up ManageEZPZ 
+2. User uses the appropriate command to delete a Task 
+3. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. (Invalid index)
-    * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
+* 2a. ManageEZPZ detects an error in the entered data. (Invalid index)
+    * 2a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
       command is incorrect, attached with the correct syntax format.
 
       Use case ends.
@@ -571,17 +569,16 @@ Guarantees: Deletion of any Task will also result in the removal
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User enters the command to list Tasks.
-4. ManageEZPZ displays the all Tasks.
+1. User starts up ManageEZPZ 
+2. User enters the command to list Tasks.
+3. ManageEZPZ displays the all Tasks.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses list Task commands with the wrong syntax. 
-    * 3a1. ManageEZPZ sends an error message to User, that the list
+* 2a. User uses list Task commands with the wrong syntax. 
+    * 2a1. ManageEZPZ sends an error message to User, that the list
       command is incorrect, attached with the correct syntax format. 
 
       Use case ends.
@@ -643,17 +640,16 @@ Preconditions: User is currently using ManageEZPZ.
 **MSS**
 
 1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User enters the command to find Tasks.
-4. ManageEZPZ displays the Task(s) which matches the search keyword.
+2. User enters the command to find Tasks.
+3. ManageEZPZ displays the Task(s) which matches the search keyword.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the three Find Task commands: 
+* 2a. User uses one of the three Find Task commands: 
 
-    * 3a1. User uses any of the `findTask` command:
+    * 2a1. User uses any of the `findTask` command:
         * `findTask todo/`
         * `findTask deadline/`
         * `findTask event/`
@@ -666,11 +662,11 @@ Preconditions: User is currently using ManageEZPZ.
           * `assignees/` for Assignees search.
           * `isMarked/` for finished Tasks Search.
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
 
-* 3b. User uses find Task commands with the wrong syntax
+* 2b. User uses find Task commands with the wrong syntax
 
-    * 3b1. ManageEZPZ sends an error message to User, indicating syntax used for
+    * 2b1. ManageEZPZ sends an error message to User, indicating syntax used for
       the find Task command is incorrect, attached with the correct syntax format.
 
       Use Case ends.
@@ -681,27 +677,26 @@ Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User enters the command to list Tasks.
-4. User realizes that some Tasks have the wrong information.
-5. User enters the command to edit the Task(s).
-6. ManageEZPZ sends a message to the User indicating that the edit has been successful.
+1. User starts up ManageEZPZ 
+2. User enters the command to list Tasks.
+3. User realizes that some Tasks have the wrong information.
+4. User enters the command to edit the Task(s).
+5. ManageEZPZ sends a message to the User indicating that the edit has been successful.
 
    Use case ends.
 
 **Extensions**
 
-* 5a. User selects a combination of information to edit:
+* 4a. User selects a combination of information to edit:
   * `desc/` to edit the Description.
   * `at/` to edit the Time.
   * `date/` to edit the Date.
 
-  Use case resumes from step 6.
+  Use case resumes from step 5.
 
-* 5b. User uses edit Task commands with the wrong syntax
+* 4b. User uses edit Task commands with the wrong syntax
 
-    * 5b1. ManageEZPZ sends an error message to User, indicating syntax used for
+    * 4b1. ManageEZPZ sends an error message to User, indicating syntax used for
       the edit Task command is incorrect, attached with the correct syntax format.
 
       Use Case ends.
@@ -835,9 +830,8 @@ Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
-1. User enters a command to exit ManageEZPZ.
-2. ManageEZPZ confirms with a successful exit message.
-3. ManageEZPZ saves all changes to disk.
+1. User enters a command to exit ManageEZPZ. 
+2. ManageEZPZ saves all changes to disk and closes.
 
    Use case ends.
 
