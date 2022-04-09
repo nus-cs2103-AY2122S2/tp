@@ -8,7 +8,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-* https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components {Documentation idea of splitting the Model component into 2, to prevent cramping of image}
+* [Documentation idea of splitting the Model component into 2, to prevent cramping of images](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -94,15 +94,15 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddEmployeeCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddTaskCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteEmployee 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("addTask")` API call.
 
-![Interactions Inside the Logic Component for the `deleteEmployee 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `addTask` Command](images/AddSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,8 +110,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTaskCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTaskCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddTaskCommandParser`, `DeleteTaskCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -173,7 +173,7 @@ A `Task` contains the following attributes,
 4. can be assigned/Tagged to multiple different `Person`
 5. a type, to differentiate between the different types of task
 6. can be marked/unmarked based on whether the task is done or not.
-7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+7. can be assigned to a single `Priority` such as "NONE", "LOW", "MEDIUM" or "HIGH"
 
 #### Design considerations:
 
@@ -309,7 +309,7 @@ The edit mechanism is facilitated by `EditTaskCommandParser` and `EditTaskComman
 `EditTaskCommand.execute()` - creates a new `Task` object based on the parsed user input and calls `Model.setTask()`
 to replace the old `Task` object with the new `Task` object.
 
-The command is as follows: taskEdit [TASK_INDEX] desc/ [DESC] at/ [TIME] date/ [DATE]
+The command is as follows: editTask [TASK_INDEX] desc/ [DESC] at/ [TIME] date/ [DATE]
 
 - [TASK_INDEX] must not be empty.
 - At least one of [DESC], [TIME] and [DATE] should not be empty.
@@ -367,50 +367,71 @@ return a CommandResult showing that the update has been successful.
 separated with an **empty space** must be provided. Other than the time values being valid,
 the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
 
-### **The `Find` command**
-- The ``Find`` command has two seperate arguments `task/` and `day/`
-- The `task/` argument has an additional `desc/` as a keyword which is the search term to search for all the tasks that
-  contains the keyword
-- `day/` arguments searches for either the deadline or the event that has this date as the deadline/ event that will
-  be held
+### Finding tasks and employees features
 
-#### How it is implemented
-1. When the user enters the find command, the FindCommandParser searches for either the `task/` or the `day/` argument
-2. Then, the FindCommandParser will self invoke either the `findCommandTask()` or `findCommandDate()` respectively.
-3. `findCommandTask()` will return the FindCommand that searches for all the task which contains the given keyword whereas `findCommandDate()` searches for deadline/event with the given date
-4. The FindCommand will execute and update the Model with the updateFilteredTaskList where the filtered task list will be updated with the tasks that statisfy the predicate
-5. After execution, the FindCommand will return the CommandResult that contains a string of the outcome of the command.
+#### All about this feature
 
-#### Sequence diagram when a user enters the command `find task/ desc/ Genshin`
+The feature for finding task and employee uses the following two commands:
+* `findTask`: Find tasks
+* `findEmployee`: Finds employees
 
-<img src="images/FindTask.png" width="450" />
+`findEmployee` improves on the `find` feature in AB3 where instead on finding persons (on in the case of our project
+manageezpz, we now refer persons as employees) based only on their names, we can also find employees based their other
+two properties, phone number and email.
 
-#### Improvements needed
-* As we are also listing employees as well, we also need an argument that searches for the number of people instead
-* In v1.3, as priority tagging is implemented for all tasks, we also need an argument to find all tasks.
-* For employee searching, we can also implement more arguments to search for an employee using the employee's components
-  as the search term.
+`findTask` similarly searches tasks based on any of their attributes (as stated in the task implementation) 
+stated by the user.
 
+#### Design of the find feature
 
-### **The `List` command**
-- The `List` command shows all the tasks in the list.
-- It has arguments such as `todo/`, `deadline/` and `event/` which searches for all todos, deadlines and events respectively.
+The find feature utilizes mainly the following classes:
+* Parser: 
+  * Check whether the attributes for either task and employees as entered by the user are valid as stated in the `Task`
+    and `Person` (class to represent employee) respectively.
+  * The first class when user enters `findTask`/`findEmployee`.
+  * Parser will first check if at least one attribute is entered.
+  * After which, it will check whether the attributes entered are valid as implemented in the `Task` and `Person` method.
+  * If the user fails to enter any of the attributes, or enters an invalid attribute, the Parser class will collate all
+    the mistakes the user has made as error messages, and it will be shown to the user.
+  * Otherwise, the parser will create a predicate by indicating all attributes entered by the user and setting 
+    attributes not specified by the user as null (use optional parameter if the programming language used permits).
+  * The parser class will then return a command class, using the predicate as the argument.
+  * `FindTaskCommandParser` for findTask and `FindEmployeeCommandParser` for findEmployee
+* Command:
+  * Executes command by showing all tasks/employee based on the attributes specified by the user.
+  * `FindTaskCommand` for findTask and `FindEmployeeCommand` for findEmployee
+* Predicate:
+  * The parser class creates this predicate which will be used to filter tasks/employees based on the attributes given.
+  * If the attribute is set to null, it will default to true, otherwise, the predicate will check whether the 
+    task/employee has these attributes.
+  * The results from the attributes (or true if not specified) are and together to produce the result from the predicate.
+  * `TaskMultiplePredicate` for filtering task and `PersonMultiplePredicate` for filtering employees.
+  
+#### Implementation flow for the find task/employee feature
+Given below is the implementation of the find task command when the user enters `findTask priority/HIGH event/`
 
-#### How it is implemented
-1. When the user enters `List`, the ListCommandParser will simply return a ListCommand
-2. If the user enters additional options such as `todo/`, `deadline/` and `events/`, ListCommandParse will then check if the user enters a valid option. ListCommandParse will throw an ParseException if the user enters an invalid option, or more than 1 option.
-3. When the ListCommand is executed, it will update the model to show all the task in the task list
-4. If options are provided, the command will update the model with all tasks with the specified task type.
-5. After execution, ListCommand will return a CommandResult that contains the message of the outcome of the command
+1. The user input will be sent to `FindTaskCommandParser`
+2. `FindTaskCommandParser` will note down that the task type to search for is an event with a high priority.
+3. Since the inputs that the user entered is valid, the parser will create a `TaskMultiplePredicate` using priority 
+   `high` and task type `event` while setting the rest of the attributes to `null`.
+4. The attribute will be used as the argument to create the `FindTaskCommand`
+5. When the `FindTaskCommand` executes, the predicate will be sent to the `ModelManager` to filter out tasks that 
+   satisfy the predicate.
 
+![Expected find task command result](images/FindTaskCommand.png)
 
-#### Sequence diagram when the user enters `list todo/`
+*The expected result for `findTask priority/HIGH event/`*
 
-<img src="images/List.png" width="450"/>
+![UML diagram for find task command](images/FindTaskCommandSequenceDiagram.png)
+*The UML Sequence diagram for `findTask priority/HIGH event/`*
 
-#### Improvements to be added
-* We feel that the options may be better suited for the find option
-* The tasks needs to be updated into the UI.
+#### Design Consideration
+* Allow usage of multiple attributes as search term to filter out tasks/employee that has the specified attributes.
+* Useful for finding tasks based on priority and whether it is marked or not.
+
+#### UML Diagram for finding task/employee
+
+![UML Diagram for finding task/employee](images/FindTaskClassDiagram.png)
 
 ### Tagging Task to Employee feature
 
@@ -448,7 +469,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/TagTaskActivityDiagram.png" width="250" />
 
-_{more aspects and alternatives to be added}_
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -483,27 +503,25 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                                               | So that I can…​                                                                                   |
-|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *`  | user           | add a task to the database                                                 | better organise my time                                                                           |
-| `* * *`  | user           | delete a task from the database                                            | better organise my list                                                                           |
-| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                                                              |
-| `* * *`  | user           | able to edit a task                                                        | update any details                                                                                |
-| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                                                             |
-| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week                                                 |
-| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                                                           |
-| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                                                          |
-| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload. For example, command: ``Track <name> |
-| `* *`    | new user       | have a more begineer-friendly user guide                                   | learn more about the product                                                                      |
-| `* *`    | recurring user | be able to see tasks that are due within X number of days                  | better manage my time                                                                             |
-| `* *`    | advance user   | able to sort tasks based on a specific location                            | better plan my travel to that location                                                            |
+| Priority | As a …​        | I want to …​                                                               | So that I can…​                                               |
+|----------|----------------|----------------------------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | user           | add a task to the database                                                 | better organise my time                                       |
+| `* * *`  | user           | delete a task from the database                                            | better organise my list                                       |
+| `* * *`  | user           | view all my tasks                                                          | have a better picture of my schedule                          |
+| `* * *`  | user           | able to edit a task                                                        | update any details                                            |
+| `* * *`  | user           | able to view my tasks for the day (i.e. today)                             | better manage my time                                         |
+| `* * *`  | user           | able to view the tasks for the week                                        | have a better picture of my schedule for the week             |
+| `* * *`  | user           | view the tasks on a specific day                                           | plan for that day ahead                                       |
+| `* *`    | CEO or manager | have the flexibility to reschedule tasks that are assigned to any employee | better manage the manpower and deadlines                      |
+| `* *`    | manager        | retrieve the list of tasks allocated with an employee                      | allow myself to have an overview of the employee's workload.  |
+| `* *`    | new user       | have a more beginner-friendly user guide                                   | learn more about the product                                  |
 
 
 ### Use cases
 
 > Definition:
 > - For all use cases below, the **System** is `ManageEZPZ` and the **Actor** is the `User`, unless specified otherwise.
-> - More specifically, the `User` are **Supervisors**.
+> - More specifically, the `User` are **Supervisors and Managers**.
 
 > Guarantees:
 > - For any use cases below that changes any data, ManageEZPZ will guarantee that the data is updated and saved.
@@ -513,31 +531,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User uses the appropriate command to add Task.
-4. ManageEZPZ adds the task & confirms with a successful message that the task is added.
+1. User starts up ManageEZPZ 
+2. User uses the appropriate command to add Task. 
+3. ManageEZPZ adds the task & confirms with a successful message that the task is added.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the three `add` commands: 
-    * 3a1. User uses `addTodo` command 
+* 2a. User uses one of the three `add` commands: 
+    * 2a1. User uses `addTodo` command 
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
 
-    * 3a2. User uses `addDeadline` command 
+    * 2a2. User uses `addDeadline` command 
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
 
-    * 3a3. User uses `addEvent` command 
+    * 2a3. User uses `addEvent` command 
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
     
-* 3b. User uses Add Task Commands with the wrong syntax
+* 2b. User uses Add Task Commands with the wrong syntax
 
-    * 3b1. ManageEZPZ sends an error message to User, indicating the
+    * 2b1. ManageEZPZ sends an error message to User, indicating the
       format for adding Task is incorrect, attached with the correct syntax format.
 
       Use case ends.
@@ -551,17 +568,16 @@ Guarantees: Deletion of any Task will also result in the removal
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User uses the appropriate command to delete a Task
-4. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted.
+1. User starts up ManageEZPZ 
+2. User uses the appropriate command to delete a Task 
+3. ManageEZPZ deletes the Task & confirms with a successful message that the Task is deleted.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. ManageEZPZ detects an error in the entered data. (Invalid index)
-    * 3a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
+* 2a. ManageEZPZ detects an error in the entered data. (Invalid index)
+    * 2a1. ManageEZPZ sends an error message to User, indicating the Index used for the delete
       command is incorrect, attached with the correct syntax format.
 
       Use case ends.
@@ -572,17 +588,16 @@ Guarantees: Deletion of any Task will also result in the removal
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User enters the command to list Tasks.
-4. ManageEZPZ displays the all Tasks.
+1. User starts up ManageEZPZ 
+2. User enters the command to list Tasks.
+3. ManageEZPZ displays the all Tasks.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses list Task commands with the wrong syntax. 
-    * 3a1. ManageEZPZ sends an error message to User, that the list
+* 2a. User uses list Task commands with the wrong syntax. 
+    * 2a1. ManageEZPZ sends an error message to User, that the list
       command is incorrect, attached with the correct syntax format. 
 
       Use case ends.
@@ -644,17 +659,16 @@ Preconditions: User is currently using ManageEZPZ.
 **MSS**
 
 1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User enters the command to find Tasks.
-4. ManageEZPZ displays the Task(s) which matches the search keyword.
+2. User enters the command to find Tasks.
+3. ManageEZPZ displays the Task(s) which matches the search keyword.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. User uses one of the three Find Task commands: 
+* 2a. User uses one of the three Find Task commands: 
 
-    * 3a1. User uses any of the `findTask` command:
+    * 2a1. User uses any of the `findTask` command:
         * `findTask todo/`
         * `findTask deadline/`
         * `findTask event/`
@@ -667,11 +681,11 @@ Preconditions: User is currently using ManageEZPZ.
           * `assignees/` for Assignees search.
           * `isMarked/` for finished Tasks Search.
 
-      Use case resumes from step 4. 
+      Use case resumes from step 3. 
 
-* 3b. User uses find Task commands with the wrong syntax
+* 2b. User uses find Task commands with the wrong syntax
 
-    * 3b1. ManageEZPZ sends an error message to User, indicating syntax used for
+    * 2b1. ManageEZPZ sends an error message to User, indicating syntax used for
       the find Task command is incorrect, attached with the correct syntax format.
 
       Use Case ends.
@@ -682,28 +696,33 @@ Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
-1. User starts up ManageEZPZ
-2. ManageEZPZ greets User with our HELP page, with all the commands.
-3. User enters the command to list Tasks.
-4. User realizes that some Tasks have the wrong information.
-5. User enters the command to edit the Task(s).
-6. ManageEZPZ sends a message to the User indicating that the edit has been successful.
+1. User starts up ManageEZPZ 
+2. User enters the command to list Tasks.
+3. User realizes that some Tasks have the wrong information.
+4. User enters the command to edit the Task(s).
+5. ManageEZPZ sends a message to the User indicating that the edit has been successful.
 
    Use case ends.
 
 **Extensions**
 
-* 5a. User selects a combination of information to edit:
+* 4a. User selects a combination of prefixes to edit:
   * `desc/` to edit the Description.
   * `at/` to edit the Time.
   * `date/` to edit the Date.
 
-  Use case resumes from step 6.
+  Use case resumes from step 5.
 
-* 5b. User uses edit Task commands with the wrong syntax
+* 4b. User uses edit Task commands with the wrong syntax
 
-    * 5b1. ManageEZPZ sends an error message to User, indicating syntax used for
+    * 4b1. ManageEZPZ sends an error message to User, indicating syntax used for
       the edit Task command is incorrect, attached with the correct syntax format.
+
+      Use Case ends.
+    * 
+* 4c. User uses edit Task commands with prefix declared but no input value afterwards
+
+    * 4c1. ManageEZPZ sends an error message to User, indicating that User must input a value after a prefix.
 
       Use Case ends.
 
@@ -806,12 +825,12 @@ Preconditions: User is currently using ManageEZPZ.
     * 1a1. ManageEZPZ sends an error message to User, indicating the
       format for the add Employee command is incorrect, attached with the
       correct syntax format.
-    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List, 
+    * 1a2. ManageEZPZ detects that supplied Task Index is not in the Task List,
       indicating to the User to enter a valid Task number.
-    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four: 
-           None, Low, Medium, High. ManageEZPZ reminds the User to use a valid 
-           Priority.
-  
+    * 1a3. ManageEZPZ detects that an invalid Priority that is not one of the four:
+      None, Low, Medium, High. ManageEZPZ reminds the User to use a valid
+      Priority.
+
       Use Case ends.
 
 ****
@@ -836,9 +855,8 @@ Preconditions: User is currently using ManageEZPZ.
 
 **MSS**
 
-1. User enters a command to exit ManageEZPZ.
-2. ManageEZPZ confirms with a successful exit message.
-3. ManageEZPZ saves all changes to disk.
+1. User enters a command to exit ManageEZPZ. 
+2. ManageEZPZ saves all changes to disk and closes.
 
    Use case ends.
 
@@ -898,42 +916,292 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Test case : Initial launch
+   1. [Download](https://github.com/AY2122S2-CS2103-F11-1/tp/releases) the jar file and copy into an empty folder
+   2. Double-click the jar file <br> 
+      Expected: Shows the GUI with a set of sample Employees and Tasks. The window size may not be optimum.
 
-    1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. Test case : Saving window preferences
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
+   
 
-1. Saving window preferences
+3. Test case : Shutdown
+    1. Click the cross button at top right side of window for WindowsOS, and top left side of window for MacOS.
+   
+    2. Type `exit` command in the command box in GUI.
+       Expected: The programs stops executing and closes.
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Adding an employee
 
-1. _{ more test cases …​ }_
+1. Adding an employee while all employees are being shown
 
+    1. Prerequisites: List all employee using the `listEmployee` command. Multiple employees in the list.
+
+    2. Test case: `addEmployee n/Peter Tan p/97852145 e/PeterTan@gmail.com`<br>
+       Expected: A new `Employee` is added to the end of the list. Details of the newly added `Deadline` shown in the status message. GUI immediately updates to show the newly added `Employee`.
+
+    3. Test case: `addEmployee n/Peter Tan`<br>
+       Expected: No employee is added. Error details shown in the status message. GUI remains the same.
+
+    4. Other incorrect delete commands to try: `addEmployee p/98451254`, `addEmployee e/PeterTan@gmail.com`, `addEmployee n/Peter p/85245127`<br>
+       Expected: Similar to previous.
+
+       
 ### Deleting an employee
 
-1. Deleting a person while all persons are being shown
+1. Deleting an employee while all employee are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all employee using the `listEmployee` command. Multiple employees in the list.
 
     1. Test case: `deleteEmployee 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+       Expected: First employee is deleted from the list. Details of the deleted employee shown in the status message. GUI immediately updates to show the employee is deleted.
+    
     1. Test case: `deleteEmployee 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No employee is deleted. Error details shown in the status message. GUI remains the same.
 
     1. Other incorrect delete commands to try: `deleteEmployee`, `deleteEmployee x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Deleting a Task
+1. Prerequisites: List all tasks using the `listTask` command. Multiple tasks in the list.
+
+2. Test case: `deleteTask 1`<br>
+   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. GUI immediately updates to show that the task is deleted.
+
+
+3. Test case: `deleteTask 0`<br>
+   Expected: No task is deleted. Error details shown in the status message. GUI remains the same.
+
+
+4. Other incorrect delete commands to try: `deleteTask `, `deleteTask x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+### Adding a Task (Deadline)
+1. Adding a `Deadline`
+2. Prerequisites: None.
+   
+3. Test case : Adding a valid deadline 
+   1. Command: `addDeadline desc/Testing by/2020-08-08 1800` <br>
+      Expected: A new `Deadline` is added to the end of the list. Details of the newly added `Deadline` shown in the status message. GUI immediately updates to show the newly added `Deadline`.
+  
+ 
+4. Test case : invalid date 
+   1. Command: `addDeadline desc/Testing by/0000-14-08 1800`<br>
+      Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
+   
+
+5. Test case : invalid time 
+   1. Command: `addDeadline desc/Testing by/2020-12-08 6000`<br>
+      Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
+   
+
+6. Other incorrect addDeadline commands to try: `addDeadline desc/`, `addDeadline desc/Testing by/`<br>
+   Expected: Similar to previous.
+
+### Editing a task
+1. Prerequisites: None.
+2. List all task using the `listTask` command.
+3. Test case : Edit task description 
+    1. Condition: the edited task description must not already exist in the task list.
+    2. Command: `editTask 1 desc/Complete Sales Report`<br>
+       Expected: Description of Task at index 1 is changed to `Complete Sales Report`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+   
+
+4. Test case : Edit task time
+   1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
+   2. Command: `editTask 1 at/1700`<br>
+      Expected: Time of Task at index 1 is changed to `1700`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+
+
+5. Test case : Edit task date
+   1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
+   2. Command: `editTask 1 date/2022-02-05`<br>
+      Expected: Date of Task at index 1 is changed to `2022-02-05`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+
+
+6. Test case : Invalid edit index
+   1. Condition : index provided exceeds the task list size or index are not positive.
+   2. Command: `editTask 0 at/1700`, `editTask -4 date/2022-02-05`, `editTask <int_greater_than_size_of_list> desc/Complete Sales Report` <br>
+      Expected: No task is edited. Error details shown in the status message. GUI stays the same.
+
+
+7. Other incorrect editTask commands to try: `editTask 1 desc/`, `editTask 1 date/0000-01-01`, `editTask 1 time/2549` <br>
+    Expected: Similar to previous.
+
+### Marking a Task
+1. Prerequisites: None.
+2. List all task using the `listTask` command.
+3. Test case : Marking a valid task.
+   1. Condition : None.
+   2. Command: `markTask 1` <br>
+      Expected: Task at index 1 is marked as done. Edited task details shown in status message. GUI immediately updates status from not done to done.
+
+
+4. Test case : Invalid mark index
+   1. Condition : index provided exceeds the task list size or index are not positive.
+   2. Command: `markTask 0`, `markTask -4`, `markTask <int_greater_than_size_of_list>` <br>
+      Expected: No task marked. Error details shown in the status message. GUI stays the same.
+
+
+### Finding a Task
+1. Prerequisites: None, but if the task list is empty, all searches will lead to no results.
+2. List all task using the `listTask` command.
+3. Test case : Find by a single keyword.
+   1. Command `findTask todo/` <br>
+      Expected: Task list will show all tasks that are of type `todo`. Find task details shown in status message. GUI immediately updates to show only `todo` type tasks.
+   2. Command `findTask desc/report` <br>
+      Expected: Task list will show all tasks that have the description of `report`. Find task details shown in status message. GUI immediately updates to show all task with description `report`.
+
+
+4. Test case : Find by multiple keywords.
+   1. Command: `findTask deadline/ desc/report` <br>
+      Expected: Task list will show all task with type `deadline` & description of `report`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with description `report`.
+   2. Command : `findTask deadline/ date/2022-05-05` <br>
+      Expected: Task list will show all task with type `deadline` & date of `2022-05-05`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with date `2020-05-05`.
+
+
+5. test case : Invalid command formats.
+    1. Command: `findTask` <br>
+       Expected: No task would be found. Error details shown in status message. GUI stays the same.
+    2. Other incorrect findTask commands to try: `findTask todo/ deadline/`, `findTask isMarked/maybe` <br>
+       Expected: Similar to previous.
+
+   
+### Tagging a task to an Employee
+1. Prerequisites: None, but if the task list or employee list is empty, all tagging will lead to an error.
+2. List all task using the `listTask` command.
+3. List all employee using the `listEmployee` command.
+4. Test case : valid Task & valid Employee
+   1. Command: `tagTask 1 n/ Alex Yeoh` <br>
+      Expected: Tags the Task at index 1 to Alex Yeoh. Tagged task details shown in status message. GUI immediately updates assignees field of the task at index 1.
+
+
+5. Test case : invalid tag index
+   1. Condition : index provided exceeds the task list size or index are not positive. 
+   2. Command: `tagTask 0 n/ Alex Yeoh`, `tagTask -4 n/ Alex Yeoh`, `tagTask <int_greater_than_size_of_list> n/ Alex Yeoh` <br>
+   Expected: No task tagged. Error details shown in the status message. GUI stays the same.
+
+
+6. Test case : valid Task & invalid Employee
+    1. Condition : employee provided not in the employee list.
+    2. Command: `tagTask 1 n/Alex Yeog` <br>
+       Expected: Similar to previous.
+
+
+7. Other incorrect tagTask commands to try: `tagTask 1 n/`, `tagTask 1 n/ Alex`(Full name not used) <br>
+   Expected: Similar to previous.
+
+
+### Tagging a priority to a Task.
+1. Prerequisites: None, but if the task list is empty, all tagging will lead to an error.
+2. List all task using the `listTask` command.
+3. Test case : Valid Priority
+   1. Command: `tagPriority 1 priority/HIGH` <br>
+      Expected: Tags the Task at index 1 to priority of HIGH. Tagged task details shown in status message. GUI immediately updates priority fields of the task at index 1.
+   
+
+4. Test case : Invalid tag index
+   1. Condition : index provided exceeds the task list size or index are not positive.
+   2. Command: `tagPriority 1 priority/HIGH`, `tagPriority -4 priority/HIGH`, `tagTask <int_greater_than_size_of_list> priority/HIGH` <br>
+      Expected: No task tagged. Error details shown in the status message. GUI stays the same.
+
+
+5. Test case : Invalid Priority
+    2. Command: `tagPriority 1 priority/Important` <br>
+       Expected: Similar to previous.
+
+
+### Finding employees
+
+1. Find employees with the given predicate
+
+    1. Prerequisites: List all employees using the `listEmployee` command.
+
+    2. Test case: `findEmployee`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Valid test cases to try: `findEmployee n/Alice`, `findEmployee p/999`, `...` (So long as the task attribute are
+        valid)<br>
+        Expected: All employees with the specified attributes will be listed.
+
+    4. Other invalid test cases to try: `findEmployee someOtherPrefix/`, `findEmployee n/Jame$`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
+### Listing all employees
+
+1. List down all employees
+    1. Prerequisites: Filter employees using `findEmployee` command.
+    2. Test Case: `listEmployee`<br>
+       Expected: Shows all the employees in ManageEZPZ
+
+### Finding tasks
+
+1. Find tasks with the given predicate
+
+    1. Prerequisites: List all tasks using the `listTask` command.
+
+    2. Test case: `findTask`<br>
+       Expected: Error showing that at least an option is needed.
+
+    3. Test case: `findTask todo/ date/2022-01-01`<br>
+       Expected: Error showing that todo and date option cannot be together.
+   
+    4. Valid test cases to try: `findTask todo/`, `findTask desc/Meeting`, `...` (So long as the task attribute are
+       valid)<br>
+       Expected: All tasks with the specified attributes will be listed.
+   
+    5. Other invalid test cases to try: `findTask someOtherPrefix/`, `findTask date/1-1-2022`, `...` (So long as the
+       attribute are invalid)<br>
+       Expected: Error showing which attributes are entered wrongly.
+
+### Listing all tasks
+
+1. List down all tasks
+   1. Prerequisites: Filter tasks using `findTask` command.
+   2. Test Case: `listTask`<br>
+      Expected: Shows all the tasks in ManageEZPZ
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case : `ManageEZPZ.json` is edited incorrectly while the program is running. <br>
+       Expected: No issues caused. Upon closing and re-launching the program, `ManageEZPZ.json` will be updated to an empty json file.
 
-1. _{ more test cases …​ }_
+
+2. Dealing with missing data files
+   1. Prerequisites : JSON file is missing.
+       1. Delete the `data/ManageEZPZ.json` to simulate the missing json file.
+       2. Relaunch the program. <br>
+       Expected: ManageEZPZ starts with a default json list containing default Employees and Tasks.
+
+
+3. Saving data between sessions
+   1. Launch the program.
+   2. Modify the Employee list or Task list by using any commands that will affect the out come of both lists.
+   3. Relaunch the app. <br>
+      Expected: ManageEZPZ would retain the recent changes.
+
+## **Appendix: Effort**
+
+**Difficulty Level** :
+
+While AB3 deals with only one entity type, `Persons`, ManageEZPZ deals with multiple entity types, including `Todos`, `Deadlines`, `Events` and `Tasks`.
+The inclusion of the Task model has definitely increased the functionality but at the same time the difficulty of the project when compared to AB3 which 
+only had the `Persons` model.
+
+**Challenges faced** :
+
+As more features were implemented, we faced challenges that arose from the dependencies between the `Person` and `Tasks` classes in order to make ManageEZPZ's functionalities more user-centric and convenient for users (e.g. Deleting an Employee also results in deletion of an assignee from the task that was assigned to the employee and vice versa where Deleting a Task results in the decrement of the total number of task assigned to an Employee.)
+Many of the bugs we encountered at the beginning of the project were also due to unfamiliarity with the code base and having to unearth the many layers of AB3, but as time went by, identified bugs have been resolved to result in the ManageEZPZ application today.
+
+
+**Effort Required** :
+
+Our MangeEZPZ Team has also spent a considerable amount of effort on the UI aspect, from choosing the position of the additional Task list (ultimately settling on a split UI), to the different pictures and colour scheme that was used to represent the different fields such as done/not done, priority, etc. So that it is the most appropriate to our users. 

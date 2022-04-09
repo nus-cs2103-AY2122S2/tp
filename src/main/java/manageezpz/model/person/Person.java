@@ -18,7 +18,11 @@ public class Person {
     private int numOfTasks;
 
     /**
-     * Every field must be present and not null.
+     * Constructs an {@code Person}.
+     * @param name A valid name.
+     * @param phone A valid phone number.
+     * @param email A valid Email.
+     * @param numOfTasks the number of task assigned to the person.
      */
     public Person(Name name, Phone phone, Email email, int numOfTasks) {
         requireAllNonNull(name, phone, email);
@@ -40,9 +44,15 @@ public class Person {
         return email;
     }
 
+    public int getNumOfTasks() {
+        return numOfTasks;
+    }
+
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name or email or phone number.
      * This defines a weaker notion of equality between two persons.
+     * @param otherPerson the person to check against.
+     * @return true if both persons are the same, false otherwise.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -71,10 +81,6 @@ public class Person {
         this.numOfTasks = numOfTasks - 1;
     }
 
-    public int getNumOfTasks() {
-        return numOfTasks;
-    }
-
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -95,12 +101,18 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

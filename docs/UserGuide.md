@@ -171,14 +171,14 @@ Examples:
 
 For creation of Tasks, ManageEZPZ will allow past deadlines and events to be added for the Managers to track.
 
-For deadline and event, the DATE must be in this format: YYYY-MM-DD 
+For Deadline and Event, the DATE must be in this format: YYYY-MM-DD 
 
-For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
 and mm should only be between 00 and 59.
 
 For event, the START_TIME must be earlier than the END_TIME.
 
-Adding a duplicated Task will result in an error.
+Adding a duplicate Task will result in an error.
 
 </div>
 
@@ -255,11 +255,11 @@ a corresponding input after the prefix must exist. <br/>
 Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 
 <b>Note:</b> 
-* For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+* For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
   and mm should only be between 00 and 59.
-* For todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
+* For Todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
 and time field to be edited. 
-* Editing Tasks with the same Description, Date, Time will not change the physical state of the Task.
+* You can update a task with the same description, date and/or time.  
 
 Examples: <br/>
 
@@ -277,12 +277,12 @@ Given a task list as follows... <br/>
 
 **:bulb: Take Note:**
 
-For deadline and event, the DATE must be in this format: YYYY-MM-DD
+For Deadline and Event, the DATE must be in this format: YYYY-MM-DD
 
-For deadline and event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
+For Deadline and Event, any TIME related fields must be in the format HHmm, where HH should only be between 00 and 23
 and mm should only be between 00 and 59.
 
-For event, the START_TIME must be earlier than the END_TIME.
+For Event, the START_TIME must be earlier than the END_TIME.
 
 </div>
 
@@ -444,7 +444,8 @@ If your changes to the data file makes its format invalid, ManageEZPZ will disca
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | **Add Todo Task**     | `addTodo desc/TASK_DESCRIPTION` <br> e.g., `addTodo desc/read book`                                                             |
 | **Add Deadline Task** | `addDeadline desc/TASK_DESCRIPTION by/DATETIME` <br> e.g., `addDeadline desc/return book by/2022-02-16 1800`                    |
-| **Add Event Task**    | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/2022-02-17 1900 2000` |
+| **Add Event Task**    | `addEvent desc/TASK_DESCRIPTION at/DATE START_TIME END_TIME` <br> e.g., `addEvent desc/project meeting at/2022-02-17 1900 2000` 
+  **Edit Task**         | `editTask desc/TASK_DESCRIPTION date/DATE at/TIME` <br> e.g., `editTask desc/homework deadline date/2022-03-15 at/1700`
 | **List Tasks**        | `listTasks`                                                                                                                     |
 | **Find Task**         | `findTask OPTIONS` <br> e.g.,`findTask todo/`                                                                                   |
 | **Mark Task**         | `markTask INDEX` <br> e.g., `markTask 2`                                                                                        |
