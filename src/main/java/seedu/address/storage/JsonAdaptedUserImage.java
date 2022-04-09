@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.property.Region;
 import seedu.address.model.userimage.FilePath;
 import seedu.address.model.userimage.UserImage;
 
