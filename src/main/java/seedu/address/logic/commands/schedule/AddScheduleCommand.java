@@ -77,8 +77,8 @@ public class AddScheduleCommand extends ScheduleCommand {
         if (model.hasConflictingInterview(toAdd)) {
             throw new CommandException(MESSAGE_CONFLICTING_INTERVIEW);
         }
-        model.setCandidate(candidateToInterview, editedCandidate);
         model.addInterview(toAdd);
+        model.setCandidate(candidateToInterview, editedCandidate);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),
                 toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate()
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), toAdd.getInterviewStartTime()),
