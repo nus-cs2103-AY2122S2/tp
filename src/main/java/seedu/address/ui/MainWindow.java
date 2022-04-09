@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -22,7 +21,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.theme.DarkTheme;
 import seedu.address.model.theme.LightTheme;
 import seedu.address.ui.general.GeneralDisplay;
-import seedu.address.ui.general.Profile;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,13 +29,12 @@ import seedu.address.ui.general.Profile;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static Profile profile;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private final Stage primaryStage;
     private final Logic logic;
-
+    private final UiManager uiManager;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
@@ -76,13 +73,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) throws FileNotFoundException {
+    public MainWindow(Stage primaryStage, Logic logic, UiManager uiManager) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
+        this.uiManager = uiManager;
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -145,7 +142,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic, uiManager);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -157,7 +154,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        generalDisplay = new GeneralDisplay(logic);
+        generalDisplay = new GeneralDisplay(logic, uiManager);
         generalDisplayPlaceholder.getChildren().add(generalDisplay.getRoot());
     }
 

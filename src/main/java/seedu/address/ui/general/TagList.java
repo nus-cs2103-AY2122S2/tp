@@ -26,6 +26,7 @@ import seedu.address.ui.UiPart;
 public class TagList extends UiPart<Region> {
     private static final String FXML = "TagList.fxml";
     private static Logic logic;
+    private static UiManager uiManager;
     private static final ContextMenu contextMenu = new ContextMenu();
     private final javafx.event.EventHandler<MouseEvent> disableRightClick = event -> {
         if (event.getButton() == MouseButton.SECONDARY) {
@@ -39,10 +40,11 @@ public class TagList extends UiPart<Region> {
     /**
      * Creates a {@code TagList}.
      */
-    public TagList(Logic logic) {
+    public TagList(Logic logic, UiManager uiManager) {
         super(FXML);
         TagList.logic = logic;
         tagListView.addEventFilter(MouseEvent.ANY, disableRightClick);
+        TagList.uiManager = uiManager;
     }
 
     public void setTagList(ObservableList<Tag> tagList) {
@@ -104,9 +106,9 @@ public class TagList extends UiPart<Region> {
     public static void handleSetFilteredList(String tagName) {
         try {
             CommandResult commandResult = logic.execute(FilterCommand.COMMAND_WORD + " " + tagName);
-            UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+            uiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
         } catch (ParseException | CommandException e) {
-            UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
+            uiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
         }
     }
 
@@ -122,9 +124,9 @@ public class TagList extends UiPart<Region> {
                 CommandResult commandResult = logic.execute(DeleteTagCommand.COMMAND_WORD + " " + index);
                 // clear the tag list selection immediately after deletion
                 param.getSelectionModel().clearSelection();
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
+                uiManager.getMainWindow().getResultDisplay().setFeedbackToUser(commandResult.getFeedbackToUser());
             } catch (ParseException | CommandException e) {
-                UiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
+                uiManager.getMainWindow().getResultDisplay().setFeedbackToUser(e.getMessage());
             }
         });
     }
