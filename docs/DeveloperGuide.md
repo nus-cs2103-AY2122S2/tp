@@ -779,7 +779,7 @@ The `clear` command deletes all students currently stored in TAPA. Before all th
 ![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
-<b>Note:</b> A CommandException will be thrown if the user inputs anything other than `confirm` for the next input. The CommandBox will then return to its normal operation, accepting all commands as described in the user guide.
+<b>Note:</b> A `CommandException` will be thrown if the user inputs anything other than `confirm` for the next input. The `CommandBox` will then return to its normal operation, accepting all commands as described in the user guide.
 </div>
 
 ![ClearCommandActivityDiagram](images/ClearCommandActivityDiagram.png)
