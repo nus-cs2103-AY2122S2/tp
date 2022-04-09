@@ -35,9 +35,9 @@ Given below are my contributions to the project.
 
   * Modified the `delete` feature to allow deletion with multiple indices. [#126](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/126)
     * Justification: The `delete` command ships with the default AB3, but only takes in a single index as a possible parameter. I extended it to also allow users to input multiple indices, such that users can conveniently delete multiple students at once without having to retype the command again and again.
-    
+
   * Wrote additional tests for new and existing features to increase code coverage. ([#113](https://github.com/AY2122S2-CS2103T-W09-4/tp/pull/113)) (TODO: More to be added)
-  
+
 
 * **Contribution to team-based tasks**:
   * Joint effort in renaming the product to "TAPA".
@@ -45,7 +45,7 @@ Given below are my contributions to the project.
   * Joint effort in morphing product into "TAPA" by extending relevant features.
   * Maintained the issue tracker by assigning/labelling issues.
   * Tested product for cross-platform compatibility for MacOS.
-  
+
 
 * **Documentation**:
   * User Guide:
