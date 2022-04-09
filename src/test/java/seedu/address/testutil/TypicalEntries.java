@@ -1,15 +1,27 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BIG_BANK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INTERVIEW_BIG_BANK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_INTERVIEW_JANICE_STREET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BEHAVIOURAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TECHNICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_B;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,10 +56,10 @@ public class TypicalEntries {
 
     public static final Company DBSSS = new CompanyBuilder().withName("DBSSS").withPhone("91123671")
             .withEmail("dbsss@example.com").withAddress("14 Jurong Street").build();
-    public static final Company BIG_BANK = new CompanyBuilder().withName("Big Bank").withPhone("94316789")
-            .withEmail("bigbank@example.com").withAddress("16 Race Course Road").build();
-    public static final Company JANICE_STREET = new CompanyBuilder().withName("Janice Street").withPhone("89245223")
-            .withEmail("janicestreet@example.com").withAddress("21 Marina Bay Sands").build();
+    public static final Company BIG_BANK = new CompanyBuilder().withName("Big Bank").withPhone(VALID_PHONE_A)
+            .withEmail(VALID_EMAIL_A).withAddress(VALID_ADDRESS_A).build();
+    public static final Company JANICE_STREET = new CompanyBuilder().withName("Janice Street").withPhone(VALID_PHONE_B)
+            .withEmail(VALID_EMAIL_B).withAddress(VALID_ADDRESS_B).build();
 
     public static final Event INTERVIEW_A = new EventBuilder().withName("DBSSS Interview").withCompanyName("DBSSS")
             .withDate("2022-05-01").withTime("10:00").withLocation("Zoom").withTags("Technical").build();
@@ -64,11 +76,25 @@ public class TypicalEntries {
             .withPhone("8482131").withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withCompanyName(VALID_COMPANY_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withCompanyName(VALID_COMPANY_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withCompanyName(VALID_COMPANY_BIG_BANK)
+            .withPhone(VALID_PHONE_A).withEmail(VALID_EMAIL_A).withTags(VALID_TAG_FRIEND).build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
+            .withCompanyName(VALID_COMPANY_JANICE_STREET)
+            .withPhone(VALID_PHONE_B).withEmail(VALID_EMAIL_B).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
+
+    public static final Event INTERVIEW_BIG_BANK = new EventBuilder()
+            .withName(VALID_EVENT_INTERVIEW_BIG_BANK)
+            .withCompanyName(VALID_COMPANY_BIG_BANK)
+            .withDate(VALID_DATE_A).withTime(VALID_TIME_A)
+            .withLocation(VALID_LOCATION_A).withTags(VALID_TAG_TECHNICAL).build();
+
+    public static final Event INTERVIEW_JANICE_STREET = new EventBuilder()
+            .withName(VALID_EVENT_INTERVIEW_JANICE_STREET)
+            .withCompanyName(VALID_COMPANY_JANICE_STREET)
+            .withDate(VALID_DATE_B).withTime(VALID_TIME_B).withLocation(VALID_LOCATION_B)
+            .withTags(VALID_TAG_BEHAVIOURAL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

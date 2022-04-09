@@ -16,7 +16,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class EventBuilder {
 
-    public static final String DEFAULT_NAME = "DBSSS Interview";
+    public static final String DEFAULT_NAME = "DBSSS Online Assessment";
     public static final String DEFAULT_COMPANY = "DBSSS";
     public static final String DEFAULT_DATE = "2022-05-01";
     public static final String DEFAULT_TIME = "10:00";

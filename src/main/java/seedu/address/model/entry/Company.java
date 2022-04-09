@@ -82,7 +82,9 @@ public class Company extends Entry {
     }
 
     @Override
-    public boolean hasCompanyName(String testName) { return false; }
+    public boolean hasCompanyName(String testName) {
+        return false;
+    }
 
     /**
      * Returns true if both companies have the same identity and data fields.
