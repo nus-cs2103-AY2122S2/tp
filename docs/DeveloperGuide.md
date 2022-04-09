@@ -1624,7 +1624,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Prerequisites: 
       1. Sample data is loaded in TAPA. 
-      2. Remove the data directory's (`/data`) read/write permission 
+      2. Remove the data directory's (`/data`) read and write permissions. 
    
    2. Test case: `archive`<br>
       Expected: An error message will be displayed to the user, due to errors in creating/writing to a new `.json` file.
