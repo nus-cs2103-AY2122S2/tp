@@ -16,6 +16,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities:
+  * IC for UI and Integration
+  * Implement, test and maintain `editfriend`, `showfriends`
+  * Implement, test and maintain Tab management feature
+  * Create python script to stress test application
 
 ### Dione Goh
 
