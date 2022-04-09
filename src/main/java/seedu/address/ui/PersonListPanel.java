@@ -35,6 +35,9 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         MultipleSelectionModel<Person> selectionModel = personListView.getSelectionModel();
         personListView.setItems(personList);
+
+        // Solution below adapted from:
+        // https://stackoverflow.com/questions/23622703/deselect-an-item-on-an-javafx-listview-on-click
         personListView.setCellFactory(listView -> {
             PersonListViewCell cell = new PersonListViewCell();
             cell.setCursor(Cursor.HAND);

@@ -25,7 +25,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note**<br>
 
-The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/master/main/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W09-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -161,11 +161,11 @@ Classes used by multiple components are in the `seedu.address book.commons` pack
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementations**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Person, Field & Tags
+### Person, Field & Tag
 
 #### Implementation
 
@@ -566,16 +566,126 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 ### Use cases
 
-(For all use cases below, the **System** is the `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise.)
+
+**Use case: Get client list**
+
+**MSS**
+
+1. User requests to list all clients.
+2. CinnamonBun displays a list of all clients.
+
+    Use case ends.
+
+**Use case: Add a client**
+
+**MSS**
+
+1. User requests to add a new client with specified fields.
+2. CinnamonBun adds the client with the specified fields.
+
+    Use case ends.
+
+**Extension**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements. 
+  * 1a1. CinnamonBun displays error message.
+
+    Use case ends.
+
+* 1b. CinnamonBun detects a duplicate client.
+    * 1a1. CinnamonBun displays error message.
+
+    Use case ends.
+
+**Use case: Edit a client's information**
+
+**MSS**
+1. User specify which client to be edited
+2. User inputs the values to be edited
+3. CinnamonBun edits the value
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No client index specified
+    * 1a1. CinnamonBun shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. No fields are provided
+    * 2a1. CinnamonBun shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. Some fields are inputed wrongly
+    * 2b1. CinnamonBun shows the appropriate error message.
+
+      Use case resumes at step 2.
+
+* 2c. Value edited is email and there is already an existing email by another client in CinnamonBun
+    * 2c1. CinnamonBun shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Append fields and tags to a client**
+
+**MSS**
+
+1. User specify which client to be edited.
+2. User input the fields and tags to be appended.
+3. CinnamonBun appends the fields and tags to the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+* 1b. CinnamonBun detects a duplicate client.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+**Use case: Remove fields and tags to a client**
+
+**MSS**
+
+1. User specify which client to be edited.
+2. User input the fields and tags to be removed.
+3. CinnamonBun removes the fields and tags from the client.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. CinnamonBun detects that the specified fields do not satisfy requirements.
+    * 1a1. CinnamonBun displays error message.
+
+      Use case ends.
+
+**Use case: Add remark to a client**
+
+**MSS**
+
+1. User specify which client to be edited.
+2. User input the remark to be added.
+3. CinnamonBun adds the remark to the client.
+
+   Use case ends.
 
 **Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list clients
-2.  CinnamonBun shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  CinnamonBun deletes the client
+1.  User requests to list clients.
+2.  CinnamonBun shows a list of clients.
+3.  User specify which client to be deleted.
+4.  CinnamonBun deletes the specified client.
 
     Use case ends.
 
@@ -604,54 +714,27 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
     * 1a1. CinnamonBun shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 * 2a. The list is empty.
 
   Use case ends.
 
-**Use case: Edit a client's information**
-
-**MSS**
-1. User specify which client to be edited
-2. User inputs the values to be edited
-3. CinnamonBun edits the value
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No client index specified
-    * 1a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 1.
-
-* 2a. No fields are provided
-    * 2a1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
-* 2b. Some fields are inputed wrongly
-    * 2b1. CinnamonBun shows the appropriate error message.
-
-      Use case resumes at step 2.
-
-* 2c. Value edited is email and there is already an existing email by another client in CinnamonBun
-    * 2c1. CinnamonBun shows an error message.
-
-      Use case resumes at step 2.
-
 **Use case: Sort customer list**
 
 **MSS**
+
 1. User inputs the fields the list is to be sorted on.
 2. CinnamonBun sorts the client list accordingly in order of the fields specified.
 3. The sorted list is displayed.
 
 **Extensions**
+
 * 1a. User inputs no fields
   * 1a1. An error message is shown.
 
     Use case resumes at step 1.
+
 * 1b. User inputs non-existent/not supported fields
   * 1b1. An error message is shown
 
@@ -660,18 +743,23 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 **Use case: Undo modifications**
 
 **MSS**
+
 1. User undos the latest modification made to the Clients' list in the CinnamonBun.
 2. The modifications have been undone.
 3. CinnamonBun shows the earlier clients' list without the modifications.
 
+   Use case ends.
+
 **Extensions**
 * 1a. There have been no modification made prior to calling undo.
   * 1a1. CinnamonBun shows an error message. <br>
-  Use case ends.
+
+    Use case ends.
   
 * 1b. The previous data cannot be read due to file reading issues/corruption
   * 1b1. CinnamonBun shows an error message. <br>
-  Use case ends.
+  
+    Use case ends.
 
 **Use case: Add membership to a client**
 
@@ -732,36 +820,76 @@ These instructions only provide a starting point for testers to work on; testers
 * Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
-          Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 ### Adding a client
 
-* Adding a new client
-  1. List all clients using the `list` command. Multiple clients in the list.
-  2. Test case: `add n/Gawr Gura p/12345678 e/gura@hololive.com a/123 Atlantis`<br>
-      Expected: A new client named Gawr Gura should appear at the bottom of the client list.
+* Adding a new client while all clients are being shown
+  1. Test case: `add n/Gawr Gura p/12345678 e/gura@hololive.com a/123 Atlantis`<br>
+     Expected: A new client named `Gawr Gura` should appear at the bottom of the client list.
+  2. Test case: `add n/Ceres Fauna p/12345678`<br>
+     Expected: No new client is added as not all required fields are provided. Error message is shown. 
+
+### Editing a client
+
+* Editing a client while all clients are being shown
+  1. Prerequisites: There needs to be existing client data in the client's list.
+  2. Test case: `edit 1 e/client_name@example.com`<br>
+     Expected: First client's email is changed to `client_name@example.com`.
+  3. Test case: `edit 2 e/client_name@example.com`<br>
+     Expected: Second client's email is not changed as the email is already in use. Error message is shown.
+
+### Append fields to a client
+
+* Append fields to a client.
+    1. Prerequisites: There needs to be existing client data in the client's list.
+    2. Test case: `append 1 b/1999-02-17`<br>
+       Expected: First client's birthday is set to `1999-02-17`.
+    3. Test case: `append 1 n/Ookami Mio`<br>
+       Expected: First client's name is set to `Ookami Mio`.
+
+### Remove fields from a client
+
+* Remove fields from a client.
+    1. Prerequisites: There needs to be existing client data in the client's list.
+    2. Append a tag and birthday to the first client using the command `append 1 t/vendor b/1999-02-17`.
+    3. Test case: `remove 1 b/`<br>
+       Expected: First client's birthday is removed.
+    4. Test case: `remove 1 t/vendor`<br>
+       Expected: First client's `vendor` tag is removed.
+    5. Test case: `remove 1 n/`<br>
+       Expected: First client's name is not removed as every client must have a name. Error message is shown.
+
+### Add or remove remark from a client
+
+* Add or remove remark from a client.
+    1. Prerequisites: There needs to be existing client data in the client's list.
+    2. Test case: `remark 1 r/High shipping cost.`<br>
+       Expected: First client's remark is set to `High shipping cost.`.
+    3. Test case: `remark 1 r/`<br>
+       Expected: First client's remark removed.
 
 ### Deleting a client
 
 * Deleting a client while all clients are being shown
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. 
-   3. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Prerequisites: There needs to be existing client data in the client's list.
+    2. Test case: `delete 1`<br>
+       Expected: First client is deleted from the list.
+    3. Test case: `delete 0`<br>
+       Expected: No client is deleted. Error message is shown.
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: No client is deleted. Error message is shown.
 
 ### Sorting client's list
 
 * Sorting the client's list based on certain fields
    1. Prerequisites: There needs to be existing client data in the client's list.
    2. Test case: `sort n/`<br>
-       Expected: The client's list will display the clients in ascending alphabetical order.
+      Expected: The client's list will display the clients in ascending alphabetical order.
    3. Test case: `sort n/ a/ p/ desc`<br>
-       Expected: The client's list will display the clients in ascending alphabetical order. Clients with the same name will
-       then be displayed according to their addresses in ascending order. And if they also have the same address, they'll be 
-        displayed based on their phone number in descending order.
+      Expected: The client's list will display the clients in ascending alphabetical order. Clients with the same name will
+      then be displayed according to their addresses in ascending order. And if they also have the same address, they'll be 
+      displayed based on their phone number in descending order.
    4. Test case: `sort l:)/ djewijw p/`<br>
       Expected: An error would be thrown as the fields specified do not exist.
 
@@ -771,7 +899,7 @@ These instructions only provide a starting point for testers to work on; testers
    1. Prerequisites: There needs to be modifications made to the clients' list.
    2. Test case: `undo` <br>
       Expected: The previous modification done will be reverted and the application will display the previous version
-   of the clients' list.
+      of the clients' list.
 * Undo a modification when there are none
    1. Prerequisites: No modifications were made since the start of the application or all modifications have been reverted.
    2. Test case: `undo` <br>
@@ -786,12 +914,12 @@ These instructions only provide a starting point for testers to work on; testers
    by the user and not the application.
    2. Test case: `undo` <br>
       Expected: An error message would be shown stating it cannot read the temporary file. The temporary file if it's not
-   already deleted by the user, will then be deleted by the application. The clients' list will not be able to revert to before the modification stored 
-   in the corrupted temporary file. 
+      already deleted by the user, will then be deleted by the application. The clients' list will not be able to revert to before the modification stored 
+      in the corrupted temporary file. 
    
       However, if the user were to call `undo` again, and if the second latest temporary file data
-   is not corrupted or deleted by user, the application will be able to revert the clients' list to the state stored in the temporary file. Thus,
-   effectively undoing the latest 2 modifications.
+      is not corrupted or deleted by user, the application will be able to revert the clients' list to the state stored in the temporary file.
+      Thus, effectively undoing the latest 2 modifications.
 
 ### Adding membership
 
@@ -837,3 +965,29 @@ These instructions only provide a starting point for testers to work on; testers
    1. Test case: Delete the `CinnamonBun.save` file in the data folder which should be in the same folder as the jar file.
     This will simulate a missing save file.<br>
     Expected: A data set with some default users will be used and a new save file will be created after running any command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+This appendix will highlight the difficulty level, challenges faced, effort required, and achievements of CinnamonBun.
+
+### Poor quality of AB-3 base code
+
+We felt that the quality of the AB-3 base code was extremely poor, resulting in much time wasted in order to implement features that could have been done much easier otherwise.
+
+### Time constraint and high workload
+
+This semester, all of our team members had high workload from multiple modules. The amount of effort that TP required was very taxing on all members of the team.
+We felt that the requirements of TP was too much (application, UG, DG, weekly quizzes).
+
+Despite that, the team still managed to deliver a high quality product at the end.
+
+### Person, Field & Tag
+
+The `Person` and `Tag` classes were modified from AB-3, while `Field` is an abstract class representing existing classes such as `Name`, `Email` etc. as well as new classes such as `Birthday`, `Remark` etc.
+Originally, all of `Person`'s fields were hard-coded into the `Person` class, resulting in extremely high coupling, and it was very difficult to add new fields to `Person`.
+A lot of effort had to be put into fixing this issue. Due to the extremely high coupling, this changed affected multiple systems across the entire project, including the saving system, edit command, and many more.
+It took almost two weeks to rewrite multiple systems while ensuring compatibility with other existing systems and test cases.
+
+Fortunately, these changes allowed some features we added later on to be done much more easily compared to when the project first started.
