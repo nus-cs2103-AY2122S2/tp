@@ -15,8 +15,7 @@ import seedu.address.model.position.exceptions.UnableToRejectOfferException;
  * Represent a Position in HireLah.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class
-Position {
+public class Position {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Position cannot have more offers than openings.";
