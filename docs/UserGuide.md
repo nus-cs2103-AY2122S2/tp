@@ -187,6 +187,8 @@ Shows a list of all tasks in ManageEZPZ.
 
 Format: `listTask`
 
+<div style="page-break-after: always;"></div>
+
 ### Finding Tasks by multiple options : `findTask`
 
 Finds task(s) based on multiple conditions provided.
