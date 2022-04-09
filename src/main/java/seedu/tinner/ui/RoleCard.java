@@ -39,6 +39,7 @@ public class RoleCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         roleName.setText(role.getName().value);
         status.setText("Status: " + role.getStatus().value);
+        description.setWrapText(true);
         if (role.getReminderDate().toString().isEmpty()) {
             reminderDate.setText("Reminder Date: N/A");
         } else {
