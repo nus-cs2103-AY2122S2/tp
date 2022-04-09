@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import java.util.List;
+
+import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tamodule.AcademicYear;
 import seedu.address.model.tamodule.ModuleCode;
 import seedu.address.model.tamodule.ModuleName;
@@ -17,6 +21,7 @@ public class ModuleBuilder {
     private ModuleName moduleName;
     private ModuleCode moduleCode;
     private AcademicYear academicYear;
+    private UniqueStudentList studentList = new UniqueStudentList();
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -34,6 +39,7 @@ public class ModuleBuilder {
         moduleName = moduleToCopy.getModuleName();
         moduleCode = moduleToCopy.getModuleCode();
         academicYear = moduleToCopy.getAcademicYear();
+        studentList.setStudents(moduleToCopy.getStudents());
     }
 
     /**
@@ -60,8 +66,17 @@ public class ModuleBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code studentList} of the {@code Module} that we are building.
+     */
+    public ModuleBuilder withStudentList(List<Student> studentList) {
+        this.studentList.setStudents(studentList);
+        return this;
+    }
+
+
     public TaModule build() {
-        return new TaModule(moduleName, moduleCode, academicYear);
+        return new TaModule(moduleName, moduleCode, academicYear, studentList);
     }
 
 }

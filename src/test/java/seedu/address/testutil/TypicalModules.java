@@ -14,6 +14,9 @@ public class TypicalModules {
             .withModuleCode("CS2101").withAcademicYear("21S1").build();
     public static final TaModule CS2103T = new ModuleBuilder().withModuleName("Software Engineering")
             .withModuleCode("CS2103T").withAcademicYear("21S1").build();
+    public static final TaModule CS2103T_WITH_STUDENT = new ModuleBuilder().withModuleName("Software Engineering")
+            .withModuleCode("CS2103T").withAcademicYear("21S2")
+            .withStudentList(TypicalStudents.getTypicalStudents()).build();
     public static final TaModule CS2030 = new ModuleBuilder().withModuleName("Programming Methodology II")
             .withModuleCode("CS2030").withAcademicYear("20S2").build();
     public static final TaModule CS2040 = new ModuleBuilder().withModuleName("Data Structures and Algorithms")
@@ -24,6 +27,6 @@ public class TypicalModules {
     private TypicalModules() {} // prevents instantiation
 
     public static List<TaModule> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2101, CS2103T, CS2030, CS2040, CS2105));
+        return new ArrayList<>(Arrays.asList(CS2101, CS2103T, CS2030, CS2040, CS2105, CS2103T_WITH_STUDENT));
     }
 }
