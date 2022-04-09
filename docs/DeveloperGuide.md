@@ -104,7 +104,7 @@ The `UI` component,
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a client).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 ![Delete Sequence Diagram](images/DeleteSequenceDiagram.png)
@@ -213,7 +213,7 @@ Step 1. The user launches the application for the first time. The `SerializableT
 with the file path of where the temporary files will be saved, and an empty `arraylist` named `tempFiles` is created to store the file paths of the
 temporary files that will be created.
 
-Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th person in the client list.
+Step 2. The user makes a modification to the clients' list such as executing the command `delete 5` to delete the 5th client in the client list.
 In `LogicManager`, before executing the command, it will locally store the current clients' list state.
 
 After executing the command, it will compare the previous state with the current state of the clients' list. If it senses they are different, such as in this
@@ -226,7 +226,7 @@ The new temporary file will then be added into `tempFiles` list in `Serializable
 
 Only modifications made to the clients' list will be saved. See the user guide for more info.
 
-`SerializableTempAddressBookStorage` also will only store the 10 latest modifications. When the 11th modification is made, it will removed
+`SerializableTempAddressBookStorage` also will only store the 10 latest modifications. When the 11th modification is made, it will remove
 the earliest modification saved and delete the temporary file for it.
 
 If there are any issues with creating the temporary file and saving the data, an exception will be thrown and the modification will not be saved in
@@ -234,12 +234,12 @@ a temporary file, thus, the modification cannot be undone.
 
 </div>
 
-Step 3. The user executed `add n/David...` to add a new person. The steps mentioned in step 2 would be repeated. Thus, `tempFiles` will now store
+Step 3. The user executed `add n/David...` to add a new client. The steps mentioned in step 2 would be repeated. Thus, `tempFiles` will now store
 2 file paths to the 2 temporary files created.
 
-Step 4. The user now decides that adding the person was a mistake and decides to undo that action by executing the `undo` command.
+Step 4. The user now decides that adding the client was a mistake and decides to undo that action by executing the `undo` command.
 The `undo` command will call `LogicManager#undoPrevModification()`, which calls `Storage#popTempAddressFileData()`. This will obtain
-the latest temporary file added and restore the clients' list to the state saved in the temporary file (the state of the clients' list before add the new person, so before step 3).
+the latest temporary file added and restore the clients' list to the state saved in the temporary file (the state of the clients' list before add the new client, so before step 3).
 
 <div markdown="1" class="alert alert-info">:information_source: **Info**<br>
 
@@ -265,7 +265,7 @@ Step 6. The user closes the CinnamonBun application. All temporary files created
   * Cons: May have performance issues in terms of storage and memory usage.
 
 * **Alternative 2:** Individual command knows how to undo by itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -295,7 +295,7 @@ Membership details will be created by users, user can then assign an existing me
 The Transaction Functionality will allow users to store a transaction and assign it to a client. 
 User will have to specify the client the transaction will be assigned to, and input all the transaction's attributes.
 
-The current implementation of `Transaction` class is similar to Person class. Every field/attribute of transaction needs to 
+The current implementation of `Transaction` class is similar to `Person` class. Every field/attribute of transaction needs to 
 extend from the `TransactionField` class. The `Transaction` class will have a list of `TransactionField`s in which all of it's 
 fields must be registered in the `TransactionFieldRegistry`. Each field is either a required field or an optional field. 
 
@@ -306,19 +306,19 @@ Transaction class consists of fields `Amount`, `TransactionDate`, `DueDate`, and
 **Aspect: How it executes**
 
 * **Alternative 1:** Create a list (`FilteredList`) of Transactions, controlled by `ModelManager`. 
-    Everytime a user create a transaction, a new instance of transaction will be added to the list and a person/client
-  specified by it's unique identifier (`Email`) will be referenced by this transaction. To list all of the transactions 
-    of a particular person, the `FilteredList` should be updated to only contain `Transaction`
-    with a reference to the person's id. 
-    * Pros: Consistent design with the Person class.
+    Everytime a user create a transaction, a new instance of transaction will be added to the list and a client 
+    specified by its unique identifier (`Email`) will be referenced by this transaction. To list all the transactions 
+    of a particular client, the `FilteredList` should be updated to only contain `Transaction`
+    with a reference to the client's id. 
+    * Pros: Consistent design with the `Person` class.
     * Cons: Have to handle cases when a user is updated/removed. The input specified by the users 
     corresponds to the index of the displayed clients/users. Hence we need to retrieve the client's attributes 
     before initializing the Transaction object.
 
 
-* **Alternative 2 (current implementation):** Every person object has a list of transactions which will be
+* **Alternative 2 (current implementation):** Every `Person` object has a list of transactions which will be
     initialized with an empty list. Each time a user add a transaction, the object will be 
-    added into the specified Person's Transaction List.
+    added into the specified `Person`'s Transaction List.
     * Pros: Easy to implement
     * Cons: Lower abstraction especially when displaying the transaction to the UI. Inconsistent design
     in comparison to the `Person` class.
@@ -379,7 +379,6 @@ While iterating through the individual commands, the program checks if any of th
 * **Alternative 1:** The valid commands before a special command `help`, `exit` or `undo` or command error will still be executed
     * Pros: Easier to implement as there is no need to check the validity of each command and reset the model.
     * Cons: Will only execute certain commands instead of all when a chain is broken which may be confusing. The undo feature may be harder to implement since a command can be partially run.
-
 
 * **Alternative 2 (current choice):** Disregard all commands in a chain whenever a special command or error is found.
     * Pros: Intuitive and plays well with other features such as `undo`.
@@ -551,14 +550,14 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 (For all use cases below, the **System** is the `CinnamonBun` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list clients
+2.  CinnamonBun shows a list of clients
+3.  User requests to delete a specific client in the list
+4.  CinnamonBun deletes the client
 
     Use case ends.
 
@@ -570,11 +569,11 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. CinnamonBun shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Find a person**
+**Use case: Find a client**
 
 **MSS**
 
@@ -593,33 +592,33 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
   Use case ends.
 
-**Use case: Edit a person information**
+**Use case: Edit a client's information**
 
 **MSS**
-1. User specify which person to be edited
+1. User specify which client to be edited
 2. User inputs the values to be edited
-3. AddressBook edits the value
+3. CinnamonBun edits the value
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No person index specified
-    * 1a1. AddressBook shows an error message.
+* 1a. No client index specified
+    * 1a1. CinnamonBun shows an error message.
 
       Use case resumes at step 1.
 
 * 2a. No fields are provided
-    * 2a1. AddressBook shows an error message.
+    * 2a1. CinnamonBun shows an error message.
 
       Use case resumes at step 2.
 * 2b. Some fields are inputed wrongly
-    * 2b1. AddressBook shows the appropriate error message.
+    * 2b1. CinnamonBun shows the appropriate error message.
 
       Use case resumes at step 2.
 
-* 2c. Value edited is email and there is already an existing email by another person in the addressBook
-    * 2c1. AddressBook shows an error message.
+* 2c. Value edited is email and there is already an existing email by another client in CinnamonBun
+    * 2c1. CinnamonBun shows an error message.
 
       Use case resumes at step 2.
 
@@ -627,7 +626,7 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 
 **MSS**
 1. User inputs the fields the list is to be sorted on.
-2. AddressBook sorts the person list accordingly in order of the fields specified.
+2. CinnamonBun sorts the client list accordingly in order of the fields specified.
 3. The sorted list is displayed.
 
 **Extensions**
@@ -643,9 +642,9 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 **Use case: Undo modifications**
 
 **MSS**
-1. User undos the latest modification made to the Clients' list in the AddressBook.
+1. User undos the latest modification made to the Clients' list in the CinnamonBun.
 2. The modifications have been undone.
-3. The AddressBook shows the earlier clients' list without the modifications.
+3. CinnamonBun shows the earlier clients' list without the modifications.
 
 **Extensions**
 * 1a. There have been no modification made prior to calling undo.
@@ -657,19 +656,19 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
   Use case ends.
 
     
-### Non-Functional Requirements
+### Non-functional requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  A user should be able to easily find a client.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A user should be able to easily find a client.
+5. A user should be able to easily navigate the interface.
+6. The project should be open source.
+7. The product is offered as a free service.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -685,40 +684,36 @@ These instructions only provide a starting point for testers to work on; testers
 
 ### Launch and shutdown
 
-1. Initial launch
-
+* Initial launch
    1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
+* Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by double-clicking the jar file.<br>
+          Expected: The most recent window size and location is retained.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Adding a client
 
-1. _{ more test cases …​ }_
+* Adding a new client
+  1. List all clients using the `list` command. Multiple clients in the list.
+  3. Test case: `add n/Gawr Gura p/12345678 e/gura@hololive.com a/123 Atlantis`<br>
+      Expected: A new client named Gawr Gura should appear at the bottom of the client list.
 
-### Deleting a person
+### Deleting a client
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+* Deleting a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. 
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. 
+   3. Test case: `delete 0`<br>
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Sorting client's list
-1. Sorting the client's list based on certain fields
+
+* Sorting the client's list based on certain fields
    1. Prerequisites: There needs to be existing client data in the client's list.
    2. Test case: `sort n/`<br>
        Expected: The client's list will display the clients in ascending alphabetical order.
@@ -730,21 +725,22 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: An error would be thrown as the fields specified do not exist.
 
 ### Undo data modifications
-1. Undo a modification that was previously made
+
+* Undo a modification that was previously made
    1. Prerequisites: There needs to be modifications made to the clients' list.
    2. Test case: `undo` <br>
       Expected: The previous modification done will be reverted and the application will display the previous version
    of the clients' list.
-2. Undo a modification when there are none
+* Undo a modification when there are none
    1. Prerequisites: No modifications were made since the start of the application or all modifications have been reverted.
    2. Test case: `undo` <br>
       Expected: An error message will be shown stating that there is nothing to undo since there are no modifications.
-3. Only able to undo the 10 latest modifications.
+* Only able to undo the 10 latest modifications.
    1. Prerequisites: More than 10 modifications were made without reverting any of them.
    2. Test case: `undo` 11 times <br>
       Expected: Notice that it can only revert the clients' list by the latest 10 modifications made and not the modifications before those.
       At the 11th `undo`, will show an error message stating that there is nothing to undo since there are no modifications.
-4. Handling temporary file corruption.
+* Handling temporary file corruption.
    1. Prerequisites: Some modifications were made, but the latest temporary files in the `data\.tempdata` are either corrupted or deleted
    by the user and not the application.
    2. Test case: `undo` <br>
@@ -758,8 +754,6 @@ These instructions only provide a starting point for testers to work on; testers
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-
+* Dealing with missing/corrupted data files
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   
