@@ -6,6 +6,19 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+<p align="center">
+  <img src="images/tapa banner.png">
+</p>
+
+TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
+especially for those who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
+
+TAPA's developer guide is written for developers who wish to contribute to our project. 
+The developer guide will explain the technical aspects of the inner workings behind TAPA, and how the various components will come together.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
