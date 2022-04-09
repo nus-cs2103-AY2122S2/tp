@@ -527,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-**Use case: UC06 - Assign a student to a group**
+**Use case: UC07 - Assign a student to a group**
 
 **MSS:**
 
@@ -570,7 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 1.
   
 
-**Use case: UC07 - Deassign a student contact from a group**  
+**Use case: UC08 - Deassign a student contact from a group**  
 
 **MSS:**
 
@@ -612,8 +612,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes from step 1.
 
+* 1f. The student contact list in the target group is empty.
 
-**Use case: UC08 - View student contacts in a group**
+    Use case ends.
+
+
+**Use case: UC09 - View student contacts in a group**
 
 **MSS:**
 
@@ -644,7 +648,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 1.
 
 
-**Use case: UC09 - Add a task in a group**
+**Use case: UC10 - Add a task in a group**
 
 **MSS:**
 
@@ -683,7 +687,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 1.
 
 
-**Use case: UC08 - Delete a task from a group**
+**Use case: UC11 - Delete a task from a group**
 
 **MSS:**
 
@@ -724,9 +728,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. ArchDuke shows an error message.
 
         Use case resumes from step 1.
+  
+* 1f. The task list in the target group is empty.
+
+    Use case ends.
     
 
-**Use case: UC09 - View tasks in a group**
+**Use case: UC12 - View tasks in a group**
 
 **MSS:**
 
@@ -754,8 +762,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 1c1. ArchDuke shows an error message.
 
-        Use case resumes from step 1.
-  
+  Use case resumes from step 1.
+
+
+**Use case: UC13 - View help window**
+
+**MSS:**
+
+1. User requests to view help window in ArchDuke.
+
+2. ArchDuke pops up help window.
+
+   Use case ends.
+
+
+**Use case: UC14 - Exit the program**
+
+**MSS:**
+
+1. User requests to exit ArchDuke.
+
+2. ArchDuke exits.
+
+   Use case ends.
+
+
+**Use case: UC15 - Clear the data**
+
+**MSS:**
+
+1. User requests to clear all data in ArchDuke.
+
+2. ArchDuke clears all data.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
