@@ -516,21 +516,25 @@ The following activity diagram summarizes what happens when a user executes the 
 
 * **Alternative 1 (current choice)**: Assigns by student contact index.
 
-    * Pros: It is more intuitive as user who wants to delete a group would **already know** what group he/she wants to delete, and hence the group name.
-      Users would not have to search through the group list to see which index the group he/she wants to delete is located.
-      Searching through the list may be especially troublesome if there are many groups in the group list.
+    * Pros: It is fast as the users could just refer to the student contact by a number. This makes the command very short
+    as compared to having to type out the student contact's name etc.
 
-    * Cons: User would have to type the entire group name.
+    * Cons: If there exists many student contacts in the student contact list, users would have to search through the list to 
+    obtain the index of the student contact that the users want to assign to a group. This may result in an additional step of 
+    filtering through the list via other commands to obtain the target student contact.
 
 * **Alternative 2**: Assigns by student contact name.
 
-    * Pros: Users could delete the group by just typing a single number. This may be faster if the group is already visible in the group list without having to search
-      (e.g. when the target group to delete is at the top of the list).
+    * Pros: It is arguably more intuitive as the users would already know the name of the student contact in which the users 
+    want to assign to the group. 
 
-    * Cons: If there are many groups in the group list, users would have to execute another command (i.e. to find the group to get the group index)
-      before being able to delete the desired group.
+    * Cons: It may result in long commands as users would have to type in the student contact's name.
   
-    * Limitations: 
+    * Limitations: Although the reference to the student contact by name might be more intuitive and is a closer representation of 
+    how a person is being referred to in the real-world, the current limitation of the app makes it impossible to refer to a student contact
+    solely by his name. This is because the current implementation of the app allows any two users to have the same name (i.e. name is not
+  a unique identifier of a student contact). In the current implementation, a student contact is uniquely identified by `EMAIL` and/or `PHONE_NUMBER`.
+    Hence, reference to a student contact by his name is impossible due to possible duplications in their names.
 
 ## Find student contact feature
 
