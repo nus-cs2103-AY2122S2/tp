@@ -355,15 +355,31 @@ in which the user wants to add.
 9. `AddTaskCommand` then call the static `createAddedTaskGroup(Group groupToAddTask, Task taskToAdd, Model model)` to create a new `Group` with the task added.
 The task is added through the call of `Model#addTask()` by `AddTaskCommand`.
 
-10. `AddTaskCommand` then call `Model#setGroup(Group target, Group editedGroup)` to replace the old target group with the new group with the task added. This will notify
+10. `AddTaskCommand` then call `Model#setGroup(Group target, Group editedGroup)` to replace the old target group with the new group with the task added. 
+This will update the `UniqueGroupList` of the new `Group` with the task added.
 
 11. Finally, the `AddTaskCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
     The GUI would also be updated on this change in the group list and update the display of group list accordingly.
 
-The following sequence diagram shows how the `delgroup` mechanism works:
+The following sequence diagram shows how the `addtask` mechanism works:
+
+![](images/AddTaskSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `addtask` command:
+
+![](images/AddTaskCommandActivityDiagram.png)
 
 ### Design considerations
 
+#### Aspect: Allowing reference to task name to be case-insensitive
+
+As users are required to type the entire task name to reference a task (i.e. in `addtask` and subsequently in `deltask` commands), 
+the reference to a task is implemented in such a way to minimise typo errors and to facilitate target users (i.e. fast typists).
+By making the task name case-insensitive, users can easily refer to the particular task so long as the spelling and spacing is correct.
 
 ## View task feature
 
