@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. Not all required fields are present (eg Name).
+* 1b. Not all required fields are present (e.g. Name).
 
     * 1b1. IBook shows an error message.
 
@@ -620,7 +620,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -631,22 +632,56 @@ testers are expected to do more *exploratory* testing.
 
    3. _{ more test cases …​ }_
 
-### Deleting a product
+### Deleting product(s)
 
 1. Deleting a product while all products are being shown
 
    1. Prerequisites: List all products using the `list` command. Multiple products in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First product is deleted from the list. Details of the deleted product shown in the status message. Timestamp in the status bar is updated.
+      Expected: First product is deleted from the list. Details of the deleted product shown in the command output window.
 
    3. Test case: `delete 0`<br>
-      Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No product is deleted. Error details shown in the command output window.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting all products
+
+    1. Prerequisites: There are existing products in the current displayed list.
+
+    2. Test case: `delete-all`<br>
+       Expected: All products shown in current list will be deleted. This can be verified by using `list` command to show all products in iBook.
+
+3. _{ more test cases …​ }_
+
+### Updating product(s)
+
+1. Updating a product while all products are being shown
+
+    1. Prerequisites: List all products using the `list` command. Multiple products in the list.
+
+    2. Test case: `update 1 d:update description`<br>
+       Expected: First product in the list is updated. Previous description will now become `update description`.
+
+    3. Test case: `update 2 p:100.99 d:another description`<br>
+       Expected: Second product in the list is updated. Previous price and description will now become `100.99` and `another description` respectively.
+
+    4. Test case: `update 0 p:9.99`<br>
+       Expected: No product is updated. Error details shown in the command output window.
+
+    5. Other incorrect update commands to try: `update`, `update x`, `...` (where x is larger than the list size) <br>
+       Expected: Similar to previous.
+
+2. Updating all products
+
+    1. Prerequisites: There are existing products in the current displayed list.
+
+    2. Test case: `update-all p:19.99 d:Stock clearance sales`<br>
+       Expected: All products shown in current list will be updated to have price `19.99` and description `Stock clearance sales`.
+
+3. _{ more test cases …​ }_
 
 ### Finding products
 
@@ -661,7 +696,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Products that contains `kaya` in the name and `bread` in the category is displayed. Details such as the number of products found would be shown in the status message.
 
    4. Test case: `find`<br>
-      Expected: Error details is shown in the status message as at least one attribute needs to be specified in the command.
+      Expected: Error details is shown in the command output window as at least one attribute needs to be specified in the command.
 
    5. Other incorrect find commands to try: `find blabla`<br>
       Expected: Similar to previous.
@@ -691,15 +726,46 @@ testers are expected to do more *exploratory* testing.
       Expected: Items that are expiring on the same day would be displayed.
 
    4. Test case: `remind -1`<br>
-      Expected: Error details is shown in the status message as the days specified cannot be negative.
+      Expected: Error details is shown in the command output window as the days specified cannot be negative.
 
    5. Other incorrect commands to try: `remind blabla`, `remind 9999999999999`<br>
       Expected: Similar to previous.
+
+### Undo/redo changes
+
+1. Undo changes
+   
+    1. Prerequisites: There are existing products in the list. At least one command that makes changes to iBook (e.g. `add/update/delete`) have been performed.
+
+    2. Test case: `undo`<br>
+       Expected: The most recent command that makes changes to iBook is reverted. 
+
+    3. Test case: `add n:new_product p:3.00` then `undo` <br>
+       Expected: The `new_product` just added will be deleted.
+
+    4. Test case: `undo haha`<br>
+       Expected: Any additional input after the keyword `undo` will be ignored, as if this is a normal `undo` command.
+       
+2. Redo changes
+
+    1. Prerequisites: A `undo` command has just been successfully executed.
+
+    2. Test case: `redo`<br>
+       Expected: The just undone changes will be redone again.
+
+    3. Test case: `add n:new_product p:3.00` then `undo` then `redo` <br>
+       Expected: The `new_product` just deleted by the `undo` command will be added back again.
+
+    4. Test case: `redo haha`<br>
+       Expected: Any additional input after the keyword `redo` will be ignored, as if this is a normal `redo` command.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Prerequisites: iBook is not currently running.
+      
+   2. Locate the data file of iBook at `[JAR file location]/data/ibook.json`.
+    
+   3. Delete the file or replace the data in it with random garbage values. <br>
+      Expected: The following launch of iBook will have no data.
