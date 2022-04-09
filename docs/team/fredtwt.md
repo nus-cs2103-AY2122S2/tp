@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features:**
   * Removed the tag functionality from add command
   * Created a tag command that can tag specific fields to existing contact entries
-  * Enhanced the cancelevent command to handle multiple cancellations at once
+  * Enhanced the cancel event command to handle multiple cancellations at once
   * Contributed to the logic for `find` command to handle the following cases:
     * basic particulars' prefixes can only be used once for each field
     * search inputs can take in multiple strings now  (i.e edu/computer science)
@@ -40,6 +40,7 @@ Given below are my contributions to the project.
   * CancelEventCommand
   * CancelEventCommandParser
   * All the event field types
+  
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `event`, `tag`, `cancelevent`.
@@ -52,3 +53,4 @@ Given below are my contributions to the project.
       * Modified the `ModelClassDiagram` and `StorageClassDiagram`.
       * Added `TagSequenceDiagram`.
       * Added the implementation design details for `tag`, `event`, `cancelevent`.
+      * Contributed to the NFRs.
