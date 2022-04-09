@@ -363,6 +363,9 @@ value as "eat", and the date and time values set to be the same
 value from the copy obtained using `model.getFilteredTaskList().get(index)`. Then, `model.setTask()` is called and
 return a CommandResult showing that the update has been successful.
 
+![EditTaskDesc](images/EditTaskDesc.PNG)
+
+
 <b>Note:</b> For the Event type, a String value with two time values corresponding to be the start and end time
 separated with an **empty space** must be provided. Other than the time values being valid,
 the range between the start and end time must be valid as well. For example, 1700 2000 is valid while 2000 1700 is not.
