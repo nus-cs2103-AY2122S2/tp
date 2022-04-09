@@ -29,7 +29,7 @@ deactivate FindCommandParser
 ref over AddressBookParser, FindCommandParser : parse find
 
 create FindCommand
-FindCommandParser -> FindCommand : FindCommand(predicate)
+FindCommandParser -> FindCommand : FindCommand(c)
 activate FindCommand
 
 FindCommand --> FindCommandParser : f
