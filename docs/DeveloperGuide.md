@@ -8,7 +8,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-* https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components {Documentation idea of splitting the Model component into 2, to prevent cramping of image}
+* [Documentation idea of splitting the Model component into 2, to prevent cramping of images](https://ay2021s2-cs2103t-t12-4.github.io/tp/DeveloperGuide.html#endpoint-components)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ A `Task` contains the following attributes,
 4. can be assigned/Tagged to multiple different `Person`
 5. a type, to differentiate between the different types of task
 6. can be marked/unmarked based on whether the task is done or not.
-7. can be assigned to a single `Priority` such as "LOW", "MEDIUM" or "HIGH"
+7. can be assigned to a single `Priority` such as "LOW", "MEDIUM", "HIGH" or "NONE".
 
 #### Design considerations:
 
@@ -447,7 +447,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/TagTaskActivityDiagram.png" width="250" />
 
-_{more aspects and alternatives to be added}_
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -902,42 +901,241 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Test case : Initial launch
+   1. [Download](https://github.com/AY2122S2-CS2103-F11-1/tp/releases) the jar file and copy into an empty folder
+   2. Double-click the jar file <br> 
+      Expected: Shows the GUI with a set of sample Employees and Tasks. The window size may not be optimum.
 
-    1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. Test case : Saving window preferences
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
+   
 
-1. Saving window preferences
+3. Test case : Shutdown
+    1. Click the cross button at top right side of window for WindowsOS, and top left side of window for MacOS.
+   
+    2. Type `exit` command in the command box in GUI.
+       Expected: The programs stops executing and closes.
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Adding an employee
 
-1. _{ more test cases …​ }_
+1. Adding an employee while all employees are being shown
 
+    1. Prerequisites: List all employee using the `listEmployee` command. Multiple employees in the list.
+
+    2. Test case: `addEmployee n/Peter Tan p/97852145 e/PeterTan@gmail.com`<br>
+       Expected: A new `Employee` is added to the end of the list. Details of the newly added `Deadline` shown in the status message. GUI immediately updates to show the newly added `Employee`.
+
+    3. Test case: `addEmployee n/Peter Tan`<br>
+       Expected: No employee is added. Error details shown in the status message. GUI remains the same.
+
+    4. Other incorrect delete commands to try: `addEmployee p/98451254`, `addEmployee e/PeterTan@gmail.com`, `addEmployee n/Peter p/85245127`<br>
+       Expected: Similar to previous.
+
+       
 ### Deleting an employee
 
-1. Deleting a person while all persons are being shown
+1. Deleting an employee while all employee are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all employee using the `listEmployee` command. Multiple employees in the list.
 
     1. Test case: `deleteEmployee 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+       Expected: First employee is deleted from the list. Details of the deleted employee shown in the status message. GUI immediately updates to show the employee is deleted.
+    
     1. Test case: `deleteEmployee 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No employee is deleted. Error details shown in the status message. GUI remains the same.
 
     1. Other incorrect delete commands to try: `deleteEmployee`, `deleteEmployee x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Deleting a Task
+1. Prerequisites: List all tasks using the `listTask` command. Multiple tasks in the list.
+
+2. Test case: `deleteTask 1`<br>
+   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. GUI immediately updates to show that the task is deleted.
+
+
+3. Test case: `deleteTask 0`<br>
+   Expected: No task is deleted. Error details shown in the status message. GUI remains the same.
+
+
+4. Other incorrect delete commands to try: `deleteTask `, `deleteTask x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+### Adding a Task (Deadline)
+1. Adding a `Deadline`
+2. Prerequisites: None.
+   
+3. Test case : Adding a valid deadline 
+   1. Command: `addDeadline desc/Testing by/2020-08-08 1800` <br>
+      Expected: A new `Deadline` is added to the end of the list. Details of the newly added `Deadline` shown in the status message. GUI immediately updates to show the newly added `Deadline`.
+  
+ 
+4. Test case : invalid date 
+   1. Command: `addDeadline desc/Testing by/0000-14-08 1800`<br>
+      Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
+   
+
+5. Test case : invalid time 
+   1. Command: `addDeadline desc/Testing by/2020-12-08 6000`<br>
+      Expected: No `deadline` is added. Error details shown in the status message. GUI stays the same.
+   
+
+6. Other incorrect addDeadline commands to try: `addDeadline desc/`, `addDeadline desc/Testing by/`<br>
+   Expected: Similar to previous.
+
+### Editing a task
+1. Prerequisites: None.
+2. List all task using the `listTask` command.
+3. Test case : Edit task description 
+    1. Condition: the edited task description must not already exist in the task list.
+    2. Command: `editTask 1 desc/Complete Sales Report`<br>
+       Expected: Description of Task at index 1 is changed to `Complete Sales Report`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+   
+
+4. Test case : Edit task time
+   1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
+   2. Command: `editTask 1 at/1700`<br>
+      Expected: Time of Task at index 1 is changed to `1700`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+
+
+5. Test case : Edit task date
+   1. Condition : The task to be edited must be of either `Deadline` or `Event` type.
+   2. Command: `editTask 1 date/2022-02-05`<br>
+      Expected: Date of Task at index 1 is changed to `2022-02-05`. Edited task details shown in status message. GUI immediately updates to show newly edited Task.
+
+
+6. Test case : Invalid edit index
+   1. Condition : index provided exceeds the task list size or index are not positive.
+   2. Command: `editTask 0 at/1700`, `editTask -4 date/2022-02-05`, `editTask <int_greater_than_size_of_list> desc/Complete Sales Report` <br>
+      Expected: No task is edited. Error details shown in the status message. GUI stays the same.
+
+
+7. Other incorrect editTask commands to try: `editTask 1 desc/`, `editTask 1 date/0000-01-01`, `editTask 1 time/2549` <br>
+    Expected: Similar to previous.
+
+### Marking a Task
+1. Prerequisites: None.
+2. List all task using the `listTask` command.
+3. Test case : Marking a valid task.
+   1. Condition : None.
+   2. Command: `markTask 1` <br>
+      Expected: Task at index 1 is marked as done. Edited task details shown in status message. GUI immediately updates status from not done to done.
+
+
+4. Test case : Invalid mark index
+   1. Condition : index provided exceeds the task list size or index are not positive.
+   2. Command: `markTask 0`, `markTask -4`, `markTask <int_greater_than_size_of_list>` <br>
+      Expected: No task marked. Error details shown in the status message. GUI stays the same.
+
+
+### Finding a Task
+1. Prerequisites: None, but if the task list is empty, all searches will lead to no results.
+2. List all task using the `listTask` command.
+3. Test case : Find by a single keyword.
+   1. Command `findTask todo/` <br>
+      Expected: Task list will show all tasks that are of type `todo`. Find task details shown in status message. GUI immediately updates to show only `todo` type tasks.
+   2. Command `findTask desc/report` <br>
+      Expected: Task list will show all tasks that have the description of `report`. Find task details shown in status message. GUI immediately updates to show all task with description `report`.
+
+
+4. Test case : Find by multiple keywords.
+   1. Command: `findTask deadline/ desc/report` <br>
+      Expected: Task list will show all task with type `deadline` & description of `report`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with description `report`.
+   2. Command : `findTask deadline/ date/2022-05-05` <br>
+      Expected: Task list will show all task with type `deadline` & date of `2022-05-05`. Find task details shown in status message. GUI immediately updates to show all task of type `deadline` with date `2020-05-05`.
+
+
+5. test case : Invalid command formats.
+    1. Command: `findTask` <br>
+       Expected: No task would be found. Error details shown in status message. GUI stays the same.
+    2. Other incorrect findTask commands to try: `findTask todo/ deadline/`, `findTask isMarked/maybe` <br>
+       Expected: Similar to previous.
+
+   
+### Tagging a task to an Employee
+1. Prerequisites: None, but if the task list or employee list is empty, all tagging will lead to an error.
+2. List all task using the `listTask` command.
+3. List all employee using the `listEmployee` command.
+4. Test case : valid Task & valid Employee
+   1. Command: `tagTask 1 n/ Alex Yeoh` <br>
+      Expected: Tags the Task at index 1 to Alex Yeoh. Tagged task details shown in status message. GUI immediately updates assignees field of the task at index 1.
+
+
+5. Test case : invalid tag index
+   1. Condition : index provided exceeds the task list size or index are not positive. 
+   2. Command: `tagTask 0 n/ Alex Yeoh`, `tagTask -4 n/ Alex Yeoh`, `tagTask <int_greater_than_size_of_list> n/ Alex Yeoh` <br>
+   Expected: No task tagged. Error details shown in the status message. GUI stays the same.
+
+
+6. Test case : valid Task & invalid Employee
+    1. Condition : employee provided not in the employee list.
+    2. Command: `tagTask 1 n/Alex Yeog` <br>
+       Expected: Similar to previous.
+
+
+7. Other incorrect tagTask commands to try: `tagTask 1 n/`, `tagTask 1 n/ Alex`(Full name not used) <br>
+   Expected: Similar to previous.
+
+
+### Tagging a priority to a Task.
+1. Prerequisites: None, but if the task list is empty, all tagging will lead to an error.
+2. List all task using the `listTask` command.
+3. Test case : Valid Priority
+   1. Command: `tagPriority 1 priority/HIGH` <br>
+      Expected: Tags the Task at index 1 to priority of HIGH. Tagged task details shown in status message. GUI immediately updates priority fields of the task at index 1.
+   
+
+4. Test case : Invalid tag index
+   1. Condition : index provided exceeds the task list size or index are not positive.
+   2. Command: `tagPriority 1 priority/HIGH`, `tagPriority -4 priority/HIGH`, `tagTask <int_greater_than_size_of_list> priority/HIGH` <br>
+      Expected: No task tagged. Error details shown in the status message. GUI stays the same.
+
+
+5. Test case : Invalid Priority
+    2. Command: `tagPriority 1 priority/Important` <br>
+       Expected: Similar to previous.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case : `ManageEZPZ.json` is edited incorrectly while the program is running. <br>
+       Expected: No issues caused. Upon closing and re-launching the program, `ManageEZPZ.json` will be updated to an empty json file.
 
-1. _{ more test cases …​ }_
+
+2. Dealing with missing data files
+   1. Prerequisites : JSON file is missing.
+       1. Delete the `data/ManageEZPZ.json` to simulate the missing json file.
+       2. Relaunch the program. <br>
+       Expected: ManageEZPZ starts with a default json list containing default Employees and Tasks.
+
+
+3. Saving data between sessions
+   1. Launch the program.
+   2. Modify the Employee list or Task list by using any commands that will affect the out come of both lists.
+   3. Relaunch the app. <br>
+      Expected: ManageEZPZ would retain the recent changes.
+
+## **Appendix: Effort**
+
+**Difficulty Level** :
+
+While AB3 deals with only one entity type, `Persons`, ManageEZPZ deals with multiple entity types, including `Todos`, `Deadlines`, `Events` and `Tasks`.
+The inclusion of the Task model has definitely increased the functionality but at the same time the difficulty of the project when compared to AB3 which 
+only had the `Persons` model.
+
+**Challenges faced** :
+
+As more features were implemented, we faced challenges that arose from the dependencies between the `Person` and `Tasks` classes in order to make ManageEZPZ's functionalities more user-centric and convenient for users (e.g. Deleting an Employee also results in deletion of an assignee from the task that was assigned to the employee and vice versa where Deleting a Task results in the decrement of the total number of task assigned to an Employee.)
+Many of the bugs we encountered at the beginning of the project were also due to unfamiliarity with the code base and having to unearth the many layers of AB3, but as time went by, identified bugs have been resolved to result in the ManageEZPZ application today.
+
+
+**Effort Required** :
+
+Our MangeEZPZ Team has also spent a considerable amount of effort on the UI aspect, from choosing the position of the additional Task list (ultimately settling on a split UI), to the different pictures and colour scheme that was used to represent the different fields such as done/not done, priority, etc. So that it is the most appropriate to our users. 
