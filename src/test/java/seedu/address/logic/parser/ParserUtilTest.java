@@ -204,7 +204,8 @@ public class ParserUtilTest {
     @Test
     public void parseSkill_throwsParseException() throws Exception {
         String invalidProficiencyRange = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_RANGE;
-        String invalidProficiencyRangeOverflow = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_RANGE_OVERFLOW;
+        String invalidProficiencyRangeOverflow =
+                VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_RANGE_OVERFLOW;
         String invalidProficiencyType = VALID_SKILL + VALID_SKILL_PREFIX + INVALID_SKILL_PROFICIENCY_TYPE;
         String invalidSkillInput1 = VALID_SKILL + VALID_SKILL_PREFIX + VALID_SKILL_PROFICIENCY
                 + VALID_SKILL_PREFIX + VALID_SKILL;
@@ -217,6 +218,5 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput1));
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput2));
         assertThrows(ParseException.class, ()-> ParserUtil.parseSkill(invalidSkillInput3));
-
     }
 }
