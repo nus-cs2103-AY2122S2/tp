@@ -93,7 +93,6 @@ public class FlagCommand extends Command {
         Person personToFlag = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createFlagEditedPerson(personToFlag, flag);
         model.setPerson(personToFlag, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, personToFlag));
     }
 
