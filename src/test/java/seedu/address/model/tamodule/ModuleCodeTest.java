@@ -2,10 +2,11 @@ package seedu.address.model.tamodule;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.model.tamodule.TaModuleTest.TEST_DATA_FOLDER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,8 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 
 public class ModuleCodeTest {
+
+    public static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "TaModuleTest");
 
     @Test
     public void constructor_null_throwsNullPointerException() {
