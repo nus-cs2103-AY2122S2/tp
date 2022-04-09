@@ -3,9 +3,12 @@ layout: page
 title: User Guide
 ---
 
+<p align="center">
+  <img src="docs/images/tapa banner.png">
+</p>
+
 TAPA (Teaching Assistant's Personal Assistant) is a desktop app that allows TAs to better manage their student’s progress,
-especially for those
-who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
+especially for those who are teaching multiple classes/modules at the same time. It is optimised for use on a CLI.
 
 * Table of Contents
 {:toc}
@@ -92,7 +95,7 @@ Adds a student to TAPA.
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source:
-<b>Notes:</b> 
+<b>Notes:</b> <br>
 
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
@@ -151,7 +154,7 @@ Allows the user to look up the details of a particular student.
 
 **Format**: `find n/STUDENT_NAME` (or) `find i/STUDENT_ID` (or) `find m/MODULE_CODE`
 
-* The student whose name, student id or module code is specified after the `find` command will appear in the resulting list.
+* The student whose name, student ID or module code is specified after the `find` command will appear in the resulting list.
 * Search fields must be exact matches in order for the `find` command to display the result. For example, given a student John in TAPA, `find n/John` will successfully display this student but not `find n/Joh` or `find n/Jo`.
 
 **Example**:
@@ -207,8 +210,8 @@ Marks a specific done task as undone for a particular student.
 * An error message will be displayed to the user if:
   * the specified index is 0
   * the specified index is a negative number
-  * the specified index is larger than the number of tasks for that particular student.
-  * the task with that specified index for the particular student is already marked as undone.
+  * the specified index is larger than the number of tasks for that particular student
+  * the task with that specified index for the particular student is already marked as undone
 
 **Example**:
 * `unmark i/AXXXXXXXR idx/1`
@@ -233,6 +236,13 @@ Edits a student's information in TAPA.
 **Example**:
 * `edit 10 m/CS2103T p/98765432 t/johnnn e/e0123456z@u.nus.edu`
     * A student (whose list index is “10”) has their module, phone number, telegram handle and email address edited.
+
+<div markdown="block" class="alert alert-info">
+:warning: <b>Warning!</b>
+
+* The `edit` command cannot to applied to `Task`.
+
+</div>
 
 <br>
 
@@ -262,7 +272,7 @@ Clears all students from TAPA.
 
 <br>
 
-### Archiving details in the address book: `archive`
+### Archiving details in TAPA: `archive`
 
 Saves a copy of the details currently saved in TAPA into a separate file.
 
@@ -409,12 +419,12 @@ Sorts and displays the students in TAPA by the number of undone tasks in **desce
 
 **Format**: `sort`
 
-* Displays the students from the list of students by the number of undone tasks in **descending** order
+* Displays the students from the list of students by the number of undone tasks in **descending** order.
 * The students are indexed as 1, 2, 3, ......
 
 **Example**:
 * `sort`
-    * Displays all the enrolled students by the number of undone tasks in **descending** order
+    * Displays all the enrolled students by the number of undone tasks in **descending** order.
 
 <br>
 
@@ -502,6 +512,12 @@ Action              | Command Format with Examples
 **Help**            | `help`
 **Exit**            | `exit`
 
+### Glossary
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Module**: A specific class that a student is taking
+* **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
+* **Person**: A student in TAPA
+* **Student ID/Matriculation number**: Used interchangeably to refer to the unique identification number of a student
 
 
 
