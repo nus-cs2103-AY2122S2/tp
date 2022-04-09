@@ -272,8 +272,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | student with many contacts in the UniBook                 | find a person by their name                                                                        | locate a person easily                                                                 |
 | `* *`    | student who is less tech-savvy and more visually-inclined           | navigate through different pages of UniBook with a click                                 | not have to remember commands to do a simple task like view another page, enhancing my user experience|
 
-*{More to be added}*
-
 ### Use cases
 
 **Use Case: UC01 - Add a Person**
