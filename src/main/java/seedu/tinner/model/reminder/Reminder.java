@@ -110,6 +110,10 @@ public class Reminder implements Comparable<Reminder> {
 
     @Override
     public int compareTo(Reminder other) {
-        return this.getReminderDate().value.compareTo(other.getReminderDate().value);
+        int dateCompareValue = this.getReminderDate().value.compareTo(other.getReminderDate().value);
+        if (dateCompareValue == 0) {
+            return this.getCompanyName().value.compareTo(other.getCompanyName().value);
+        }
+        return dateCompareValue;
     }
 }
