@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteEmployee 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -94,13 +94,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddEmployeeCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deleteEmployee 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteEmployee 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -114,6 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103-F11-1/tp/blob/master/src/main/java/manageezpz/model/Model.java)
 
 <img src="images/ModelClassDiagramUpdated.png" width="450" />
@@ -227,7 +228,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 The Mark Task mechanism is facilitated by `AddressBook`. This feature allows the user to mark a task as done.
 
 For the command, the feature extends `command`, and is implemented as such:
-* `mark INDEX`
+* `markTask INDEX`
 
 #### Implementation Flow of Task Marking feature
 
@@ -235,13 +236,13 @@ Given below is an example usage scenario and how the Mark Task mechanism behaves
 
 Step 1. The user lists all the task by listing the task with the 'list' command.
 
-Step 2. The user executes `mark 4` command to mark the task `Watch Netflix with Mum` as done.
+Step 2. The user executes `markTask 3` command to mark the task `Meeting with Client` as done.
 
 ![](images/MarkTask.png)
 
 #### Design considerations
 
-- The user is able to mark a task as done through the index specified in the list view.
+- The user is able to mark a task as done through the index number specified in the list view.
 
 #### UML Diagram for Task Marking
 
@@ -251,10 +252,10 @@ Step 2. The user executes `mark 4` command to mark the task `Watch Netflix with 
 
 #### What is Task Unmarking feature about?
 
-The Unmark Task mechanism is facilitated by `AddressBook`. This feature allows the user to mark a task as not done yet.
+The Unmark Task mechanism is facilitated by `AddressBook`. This feature allows the user to unmark a task, which changes the status back to not done.
 
 For the command, the feature extends `command`, and is implemented as such:
-* `unmark INDEX`
+* `unmarkTask INDEX`
 
 #### Implementation Flow of Task Unmarking feature
 
@@ -262,13 +263,13 @@ Given below is an example usage scenario and how the Unmark Task mechanism behav
 
 Step 1. The user lists all the task by listing the task with the 'list' command.
 
-Step 2. The user executes `unmark 4` command to mark the task `Watch Netflix with Mum` as not done yet.
+Step 2. The user executes `unmark 3` command to unmark the task `Meeting with Client`, which changes the status back to not done.
 
 ![](images/UnmarkTask.png)
 
 #### Design considerations
 
-- The user is able to mark a task as not done yet through the index specified in the list view.
+- The user is able to unmark a task, which changes the status back to not done through the index number specified in the list view.
 
 #### UML Diagram for Task Unmarking
 
@@ -281,7 +282,7 @@ Step 2. The user executes `unmark 4` command to mark the task `Watch Netflix wit
 The Delete Task mechanism is facilitated by `AddressBook`. This feature allows the user to delete a task.
 
 For the command, the feature extends `command`, and is implemented as such:
-* `delete INDEX`
+* `deleteTask INDEX`
 
 #### Implementation Flow of Task Deleting feature
 
@@ -289,13 +290,13 @@ Given below is an example usage scenario and how the Delete Task mechanism behav
 
 Step 1. The user lists all the task by listing the task with the 'list' command.
 
-Step 2. The user executes `delete 4` command to delete the task `Watch Netflix with Mum`.
+Step 2. The user executes `deleteTask 3` command to delete the task `Meeting with Client`.
 
 ![](images/DeleteTask.png)
 
 #### Design considerations
 
-- The user is able to delete a task as through the index specified in the list view.
+- The user is able to delete a task as through the index number specified in the list view.
 
 #### UML Diagram for Task Deleting
 
@@ -874,20 +875,15 @@ Preconditions: User is currently using ManageEZPZ.
 
 #### Other Noteworthy Points
 
-1. ManageEZPZ should not be used to support management of illegal activities
+1. ManageEZPZ should not be used to support management of illegal activities.
 
 ### Glossary
 
-| Terms             | Meaning                                                                     |
-|:------------------|:----------------------------------------------------------------------------|
-| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                  |
-| **Users**         | Applies to both supervisors & employees                                     |
-| **command**       | A message sent as an input from User, that coincides with our Command List  |
-| **todo**          | A task that only needs a description with no dates or times                 |
-| **deadline**      | A task that needs a description, a date, and a end time                     |
-| **event**         | A task that needs a description, a date, start and end times                |
-| **mark**          | To indicate that Task is done                                               |
-| **unmark**        | To indicate that Task is not done                                           |
+| Terms             | Meaning                                                                    |
+|:------------------|:---------------------------------------------------------------------------|
+| **Mainstream OS** | Windows, Linux, Unix, OS-X                                                 |
+| **Users**         | Applies to both managers or supervisors                                    |
+| **command**       | A message sent as an input from User, that coincides with our Command List |
 
 --------------------------------------------------------------------------------------------------------------------
 
