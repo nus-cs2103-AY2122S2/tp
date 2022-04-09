@@ -1,5 +1,7 @@
 package seedu.contax.logic.parser;
 
+import static seedu.contax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.contax.commons.util.DateUtil.combineDateTime;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.contax.logic.commands.CommandTestUtil.INVALID_TIME;
 import static seedu.contax.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -30,13 +32,20 @@ public class AppointmentsBetweenCommandParserTest {
     private static final String INPUT_START_TIME = " " + PREFIX_TIME_START + VALID_TIME2;
     private static final String INPUT_END_TIME = " " + PREFIX_TIME_END + VALID_TIME;
 
-    private AppointmentsBetweenCommandParser parser = new AppointmentsBetweenCommandParser();
+    private static final LocalDate START_DATE_OBJ = DateUtil.parseDate(VALID_DATE2).get();
+    private static final LocalTime START_TIME_OBJ = DateUtil.parseTime(VALID_TIME2).get();
+    private static final LocalDate END_DATE_OBJ = DateUtil.parseDate(VALID_DATE).get();
+    private static final LocalTime END_TIME_OBJ = DateUtil.parseTime(VALID_TIME).get();
+
+    private static final LocalDateTime FOREVER_DATETIME = LocalDate.MAX.atTime(23, 59);
+
+    private final AppointmentsBetweenCommandParser parser = new AppointmentsBetweenCommandParser();
 
     @Test
     public void parse_defaultValuesOnly_success() {
         LocalDateTime expectedStart = LocalDate.now().atTime(0, 0);
-        LocalDateTime expectedEnd = LocalDate.MAX.atTime(23, 59);
-        AppointmentsBetweenCommand expectedCommand = new AppointmentsBetweenCommand(expectedStart, expectedEnd);
+
+        AppointmentsBetweenCommand expectedCommand = new AppointmentsBetweenCommand(expectedStart, FOREVER_DATETIME);
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE, expectedCommand);
@@ -49,35 +58,29 @@ public class AppointmentsBetweenCommandParserTest {
     public void parse_optionalFieldsPresent_success() {
         LocalDate defaultStartDate = LocalDate.now();
         LocalDate defaultEndDate = LocalDate.MAX;
+        LocalTime defaultStartTime = LocalTime.of(0, 0);
         LocalTime defaultEndTime = LocalTime.of(23, 59);
-        LocalDateTime defaultEnd = DateUtil.combineDateTime(defaultEndDate, defaultEndTime);
-        LocalDate modifiedStartDate = DateUtil.parseDate(VALID_DATE2).get();
-        LocalTime modifiedStartTime = DateUtil.parseTime(VALID_TIME2).get();
-        LocalDate modifiedEndDate = DateUtil.parseDate(VALID_DATE).get();
-        LocalTime modifiedEndTime = DateUtil.parseTime(VALID_TIME).get();
+        LocalDateTime defaultStart = combineDateTime(defaultStartDate, defaultStartTime);
+        LocalDateTime defaultEnd = combineDateTime(defaultEndDate, defaultEndTime);
 
-        // Change start. Default values for start date/time tested in compulsory field test
+        // Change start. Default values for start date/time tested in defaultValuesOnly test
         assertParseSuccess(parser, INPUT_START_DATE,
-                new AppointmentsBetweenCommand(modifiedStartDate.atStartOfDay(), defaultEnd));
+                new AppointmentsBetweenCommand(START_DATE_OBJ.atStartOfDay(), defaultEnd));
         assertParseSuccess(parser, INPUT_START_TIME,
-                new AppointmentsBetweenCommand(DateUtil.combineDateTime(defaultStartDate, modifiedStartTime),
-                        defaultEnd));
+                new AppointmentsBetweenCommand(combineDateTime(defaultStartDate, START_TIME_OBJ), defaultEnd));
         assertParseSuccess(parser, INPUT_START_TIME + INPUT_START_DATE,
-                new AppointmentsBetweenCommand(DateUtil.combineDateTime(modifiedStartDate, modifiedStartTime),
-                        defaultEnd));
+                new AppointmentsBetweenCommand(combineDateTime(START_DATE_OBJ, START_TIME_OBJ), defaultEnd));
 
         // Change end
-        assertParseSuccess(parser, INPUT_START_DATE + INPUT_END_DATE,
-                new AppointmentsBetweenCommand(modifiedStartDate.atStartOfDay(),
-                        DateUtil.combineDateTime(modifiedEndDate, defaultEndTime)));
-        assertParseSuccess(parser, INPUT_START_DATE + INPUT_END_DATE + INPUT_END_TIME,
-                new AppointmentsBetweenCommand(modifiedStartDate.atStartOfDay(),
-                        DateUtil.combineDateTime(modifiedEndDate, modifiedEndTime)));
+        assertParseSuccess(parser, INPUT_END_DATE,
+                new AppointmentsBetweenCommand(defaultStart, combineDateTime(END_DATE_OBJ, defaultEndTime)));
+        assertParseSuccess(parser, INPUT_END_DATE + INPUT_END_TIME,
+                new AppointmentsBetweenCommand(defaultStart, combineDateTime(END_DATE_OBJ, END_TIME_OBJ)));
 
         // All fields present
         assertParseSuccess(parser, INPUT_START_DATE + INPUT_START_TIME + INPUT_END_DATE + INPUT_END_TIME,
-                new AppointmentsBetweenCommand(DateUtil.combineDateTime(modifiedStartDate, modifiedStartTime),
-                        DateUtil.combineDateTime(modifiedEndDate, modifiedEndTime)));
+                new AppointmentsBetweenCommand(combineDateTime(START_DATE_OBJ, START_TIME_OBJ),
+                        combineDateTime(END_DATE_OBJ, END_TIME_OBJ)));
     }
 
     @Test
@@ -88,6 +91,10 @@ public class AppointmentsBetweenCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // non-empty preamble
+        assertParseFailure(parser, "1 ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentsBetweenCommand.MESSAGE_USAGE));
+
         // invalid start date
         assertParseFailure(parser, " " + PREFIX_DATE_START + INVALID_DATE,
                 AppointmentsBetweenCommand.MESSAGE_START_DATE_INVALID);
@@ -107,10 +114,8 @@ public class AppointmentsBetweenCommandParserTest {
 
     @Test
     public void parse_duplicatedInvalidValid_success() {
-        LocalDateTime expectedStart = DateUtil.combineDateTime(
-                DateUtil.parseDate(VALID_DATE2).get(), DateUtil.parseTime(VALID_TIME2).get());
-        LocalDateTime expectedEnd = DateUtil.combineDateTime(
-                DateUtil.parseDate(VALID_DATE).get(), DateUtil.parseTime(VALID_TIME).get());
+        LocalDateTime expectedStart = combineDateTime(START_DATE_OBJ, START_TIME_OBJ);
+        LocalDateTime expectedEnd = combineDateTime(END_DATE_OBJ, END_TIME_OBJ);
         AppointmentsBetweenCommand expectedCommand = new AppointmentsBetweenCommand(expectedStart, expectedEnd);
 
         assertParseSuccess(parser, " " + PREFIX_DATE_START + INVALID_DATE + INPUT_START_DATE
@@ -156,7 +161,7 @@ public class AppointmentsBetweenCommandParserTest {
         String endDate = " " + PREFIX_DATE_END + VALID_DATE;
         String startTime = " " + PREFIX_TIME_START + VALID_TIME;
         String endTime = " " + PREFIX_TIME_END + VALID_TIME;
-        LocalDateTime expectedStartEnd = DateUtil.combineDateTime(
+        LocalDateTime expectedStartEnd = combineDateTime(
                 DateUtil.parseDate(VALID_DATE).get(), DateUtil.parseTime(VALID_TIME).get());
 
         assertParseSuccess(parser, startDate + startTime + endDate + endTime,

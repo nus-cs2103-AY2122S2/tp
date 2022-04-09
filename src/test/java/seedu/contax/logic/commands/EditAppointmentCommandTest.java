@@ -100,9 +100,7 @@ public class EditAppointmentCommandTest {
     public void execute_noFieldSpecified_success() {
         EditAppointmentCommand editCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
                 new EditAppointmentDescriptor());
-        Appointment targetAppointment = model.getFilteredAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_NOT_EDITED, targetAppointment);
+        String expectedMessage = EditAppointmentCommand.MESSAGE_NOT_EDITED;
 
         Model expectedModel = new ModelManager(new AddressBook(), new Schedule(model.getSchedule()),
                 new UserPrefs());
@@ -217,6 +215,8 @@ public class EditAppointmentCommandTest {
 
         assertFalse(refDescriptor.equals(null));
         assertFalse(refDescriptor.equals(1));
+
+        // Different values
         assertFalse(refDescriptor.equals(new EditAppointmentDescriptorBuilder(refDescriptor)
                 .withName("Another Name").build()));
         assertFalse(refDescriptor.equals(new EditAppointmentDescriptorBuilder(refDescriptor)

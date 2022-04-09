@@ -36,7 +36,7 @@ import seedu.contax.testutil.AppointmentBuilder;
 import seedu.contax.testutil.TypicalIndexes;
 
 public class AddAppointmentCommandParserTest {
-    private AddAppointmentCommandParser parser = new AddAppointmentCommandParser();
+    private final AddAppointmentCommandParser parser = new AddAppointmentCommandParser();
 
     @Test
     public void parse_compulsoryFieldsPresent_success() {
@@ -66,7 +66,6 @@ public class AddAppointmentCommandParserTest {
         assertParseSuccess(parser, APPOINTMENT_NAME_ALONE + APPOINTMENT_DATE + APPOINTMENT_TIME
                         + APPOINTMENT_DURATION2 + APPOINTMENT_DURATION,
                 new AddAppointmentCommand(expectedAppointment, null));
-
     }
 
     @Test

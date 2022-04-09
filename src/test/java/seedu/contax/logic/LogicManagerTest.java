@@ -49,7 +49,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -82,7 +82,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
+    public void execute_addressBookStorageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
@@ -101,19 +101,26 @@ public class LogicManagerTest {
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
 
+    @Test
+    public void execute_scheduleStorageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonScheduleIoExceptionThrowingStub
-        addressBookStorage = new JsonAddressBookStorage(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        scheduleStorage =
+        JsonAddressBookStorage addressBookStorage =
+                new JsonAddressBookStorage(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonScheduleStorage scheduleStorage =
                 new JsonScheduleIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionSchedule.json"));
-        userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, scheduleStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
         String addAppointmentCommand = AddAppointmentCommand.COMMAND_WORD + APPOINTMENT_NAME_ALONE
                 + APPOINTMENT_DATE + APPOINTMENT_TIME + APPOINTMENT_DURATION;
+        ModelManager expectedModel = new ModelManager();
         expectedModel.addAppointment(APPOINTMENT_ALONE);
+        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addAppointmentCommand, CommandException.class, expectedMessage, expectedModel);
     }
 

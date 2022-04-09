@@ -9,12 +9,9 @@ import org.junit.jupiter.api.Test;
 import seedu.contax.commons.core.index.Index;
 import seedu.contax.logic.commands.DeleteAppointmentCommand;
 
-/**
- * Tests the parsing for the {@code deleteAppointment} command.
- */
 public class DeleteAppointmentCommandParserTest {
 
-    private DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();
+    private final DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteAppointmentCommand() {
@@ -22,7 +19,13 @@ public class DeleteAppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_nonPositiveInteger_throwsParseException() {
+        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteAppointmentCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonInteger_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteAppointmentCommand.MESSAGE_USAGE));
     }
