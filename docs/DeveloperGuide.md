@@ -625,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The viewtask command format is invalid.
+* 1a. The view task command format is invalid.
 
   * 1a1. ArchDuke shows an error message.
   
@@ -656,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The addtask command format is invalid.
+* 1a. The add task command format is invalid.
 
 * 1b. The group name is invalid.
 
@@ -683,29 +683,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 1.
 
 
-**Use case: UC08 - Delete a task in a group**
+**Use case: UC08 - Delete a task from a group**
 
 **MSS:**
 
 1. User requests to delete a specific task from a specific group.
-2. ArchDuke deletes the specific task in the group.
-3. ArchDuke updates the group task list and removes the task from the group.
+
+2. ArchDuke deletes the specific task from the group and no longer displays the task in the group.
    
    Use case ends.
 
 **Extensions**
 
-* 1a. The group task index is invalid.
+* 1a. The delete task command format is invalid.
 
     * 1a1. ArchDuke shows an error message.
-
-      Use case resumes at step 1.
   
-* 1b. The group index is invalid. 
+        Use case resumes from step 1.
+  
+* 1b. The group name is invalid.
 
     * 1b1. ArchDuke shows an error message.
   
-       Use case resumes from step 1.
+        Use case resumes from step 1.
+  
+* 1c. The group does not exist in ArchDuke.
+
+    * 1c1. ArchDuke shows an error message.
+  
+        Use case resumes from step 1.
+      
+* 1d. The task name is invalid.
+
+    * 1d1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+
+* 1e. The task does not exist in the target group.
+
+    * 1e1. ArchDuke shows an error message.
+
+        Use case resumes from step 1.
+    
 
 **Use case: UC09 - View tasks in a group**
 
