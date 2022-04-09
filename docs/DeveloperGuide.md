@@ -161,11 +161,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementations**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Person, Field & Tags
+### Person, Field & Tag
 
 #### Implementation
 
@@ -886,3 +886,29 @@ These instructions only provide a starting point for testers to work on; testers
 
 * Dealing with missing/corrupted data files
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+This appendix will highlight the difficulty level, challenges faced, effort required, and achievements of CinnamonBun.
+
+### Poor quality of AB-3 base code
+
+We felt that the quality of the AB-3 base code was extremely poor, resulting in much time wasted in order to implement features that could have been done much easier otherwise.
+
+### Time constraint and high workload
+
+This semester, all of our team members had high workload from multiple modules. The amount of effort that TP required was very taxing on all members of the team.
+We felt that the requirements of TP was too much (application, UG, DG, weekly quizzes).
+
+Despite that, the team still managed to deliver a high quality product at the end.
+
+### Person, Field & Tag
+
+The `Person` and `Tag` classes were modified from AB-3, while `Field` is an abstract class representing existing classes such as `Name`, `Email` etc. as well as new classes such as `Birthday`, `Remark` etc.
+Originally, all of `Person`'s fields were hard-coded into the `Person` class, resulting in extremely high coupling, and it was very difficult to add new fields to `Person`.
+A lot of effort had to be put into fixing this issue. Due to the extremely high coupling, this changed affected multiple systems across the entire project, including the saving system, edit command, and many more.
+It took almost two weeks to rewrite multiple systems while ensuring compatibility with other existing systems and test cases.
+
+Fortunately, these changes allowed some features we added later on to be done much more easily compared to when the project first started.
