@@ -49,15 +49,15 @@ Here are some example commands you can try:
 
 Each contact in TAPA represents a student, who can have the following fields:
 
-Field            | Prefix | Description                                                        | Restrictions                                                                                                                                                                                               | Multiplicity
------------------|--------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------
-STUDENT_ID       |   i/   | Denotes the unique identification number of a student              | <ul><li>Compulsory field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters</li><li>Whitespaces and symbols are not allowed</li></ul>                                         | 1
-MODULE_CODE      |   m/   | Denotes the module that a student is currently taking              | <ul><li>Compulsory field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters</li><li>Whitespaces and symbols are not allowed</li></ul>                                              | 1
-NAME             |   n/   | Denotes the name of the student                                    | <ul><li>Compulsory field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters and spaces</li><li>Symbols are not allowed</li></ul>                                                   | 1
-PHONE            |   p/   | Denotes the phone number of the student                            | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain numeric characters</li><li>Letters, whitespaces and symbols are not allowed</li><li>Must be at least 3 digits long</li></ul>     | 0 or 1
-TELEGRAM_HANDLE  |   t/   | Denotes the telegram handle of the student                         | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters</li><li>Whitespaces and symbols are not allowed</li><li>Must be between 5 to 32 characters long</li></ul> | 0 or 1
-EMAIL            |   e/   | Denotes the email address of the student                           | <ul><li>Optional field</li><li>Should not be blank</li><li>Should adhere to the standard email format as mentioned [here](https://snov.io/knowledgebase/what-is-a-valid-email-address-format/ )</li></ul>       | 0 or 1
-TASK             |   tn/  | Denotes the name of the task that is being assigned to the student | <ul><li>Optional field</li><li>Should not be blank</li><li>Should only contain alphanumeric characters and spaces</li><li>Symbols are not allowed</li></ul>                                                     | Any non-negative number
+Field            | Prefix | Description                                                        | Restrictions                                                                                                                                                                            | Multiplicity
+-----------------|--------|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------
+STUDENT_ID       |   i/   | Denotes the unique identification number of a student              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                           | 1
+MODULE_CODE      |   m/   | Denotes the module that a student is currently taking              | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed                                            | 1
+NAME             |   n/   | Denotes the name of the student                                    | •Compulsory field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                 | 1
+PHONE            |   p/   | Denotes the phone number of the student                            | •Optional field<br>•Should not be blank<br>•Should only contain numeric characters<br>•Letters, whitespaces and symbols are not allowed<br>•Must be at least 3 digits long       | 0 or 1
+TELEGRAM_HANDLE  |   t/   | Denotes the telegram handle of the student                         | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters<br>•Whitespaces and symbols are not allowed<br>•Must be between 5 to 32 characters long  | 0 or 1
+EMAIL            |   e/   | Denotes the email address of the student                           | •Optional field<br>•Should not be blank<br>•Should adhere to the standard email format as mentioned [here](https://snov.io/knowledgebase/what-is-a-valid-email-address-format/ ) | 0 or 1
+TASK             |   tn/  | Denotes the name of the task that is being assigned to the student | •Optional field<br>•Should not be blank<br>•Should only contain alphanumeric characters and spaces<br>•Symbols are not allowed                                                   | Any non-negative number
 
 
 <div markdown="block" class="alert alert-info">
@@ -120,7 +120,7 @@ Adds a student to TAPA.
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
 * The current version of TAPA expects that a TA will only teach each student in, at most, one module. Thus, each student to be added can only have one module code.
-* You may refer to the [table](#Information-about-contacts-in-TAPA) above for more information about each individual field of a student.
+* You may refer to the [table](#information-about-contacts-in-tapa) above for more information about each individual field of a student.
 </div>
 
 **Example**:
