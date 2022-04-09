@@ -5,18 +5,22 @@ title: Developer Guide
 * Table of Contents
   {:toc}
 
+## **Introduction**
+
+TeachWhat! is a desktop application that helps private Tutors manage their students and classes.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-TODO
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- TeachWhat! is adapted from [AddressBook Level-3 (AB3)](https://se-education.org/addressbook-level3/)
+- Libraries used: JavaFX, Jackson, JUnit5
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-TODO
+Refer to the [set-up guide.](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/docs/SettingUp.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
