@@ -939,7 +939,7 @@ The `history` command displays a list of the user's previously executed commands
 5. A new `HistoryCommand` is created by `AddressBookParser` and returned to the `LogicManager`. 
 6. The `LogicManager` will then call `HistoryCommand#execute(Model model)`. 
 7. Following this, the `HistoryCommand` calls `Model#getCommandHistory()` to retrieve the list of previously executed commands. 
-8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a String which is returned to `LogicManager` through a new `CommandResult`.
+8. The `HistoryCommand` then calls `CommandHistory#display()` to convert the list to a `String` which is returned to `LogicManager` through a new `CommandResult`.
 
 ![HistoryCommandSequenceDiagram](images/HistoryCommandSequenceDiagram.png)
 
