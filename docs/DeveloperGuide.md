@@ -189,10 +189,10 @@ model and storage follow from it.
 
 #### 1.2 Execution of command for adding, deleting or editing details of a friend
 
-All three (add, edit, delete) log commands work the same at a high level.
+All three (add, edit, delete) friends commands work the same at a high level.
 
 1. `Parser` parses input
-2. (Optional) Details wrapped into a `{Type}Descriptor` 
+2. (Optional) Details wrapped into a `{Type}Descriptor` / `{Type}Person` 
 3. `{Type}Command` takes in descriptor and executes with mode
 
 ##### 1.2.1 Choice of using descriptor subclasses
@@ -234,12 +234,12 @@ Minimally, the `AddCommand` requires the user to enter the `FriendName` of the n
 The other fields are optional. This is to allow flexibility for the user to add a friend into Amigos even if the user is unsure 
 about certain particulars (e.g `Address`/ `Email`) of a friend.
 
-* Current implementation
+* **Current implementation**
   - To allow this, we place a `null` value into the value of the optional attribute that was not provided by the user.
    For example, if an address is not given, then for the newly created `Person` object `p`, `p.address.value` will be `null`.
   - Whenever a `Person` object is instantiated, we ensure that all the attributes are non-null.
   
-* Alternative implementation
+* **Alternative implementation**
   - An alternative way is to simply pass `null` directly into the `Person` attributes. For example, if an address is not given,
     then simply make `p.address` to be `null`. 
   - Pros:
@@ -252,12 +252,12 @@ about certain particulars (e.g `Address`/ `Email`) of a friend.
 
 Similar to AB3, Amigos prevents a user from adding a duplicate `Person`. 
 
-* Current implementation
+* **Current implementation**
   - We check whether a `Person` is already in Amigos by `Person::isSamePerson` which makes use of `FriendName::equals`.
     Furthermore, we made `FriendName::equals` case-insensitive, thus disallowing users from adding a person with the same 
     name but in different capitalisation.
 
-* Alternative implementations 
+* **Alternative implementations** 
   - An alternative way is to define equality of 2 `Person` objects in a stricter way - to make sure that all the attributes
     are the same (not just the `FriendName`) for 2 `Person` objects to be considered as duplicates. This means that more
     checks must be done. 
@@ -269,7 +269,7 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
 
 ##### 1.5.1 Storing the user inputs as attributes, rather than `String`.
 
-* Current implementation
+* **Current implementation**
     - The user inputs are stored as attributes.
     - Inputs beginning with `n/`, `t/`, `ttl` are converted to `FriendName`, `Tag`, `LogName` respectively.
     - Pros:
@@ -280,7 +280,7 @@ Similar to AB3, Amigos prevents a user from adding a duplicate `Person`.
        - Overhead required to wrap the user input in their respective objects, and then extracting out their values again
          for the check comparison.
       
-* Alternative implementation
+* **Alternative implementation**
     - An alternative way would be to store the inputs as `String` without converting them to their respective attributes.
     - Pros:
       - This reduces the amount of code needed, and possible errors due to conversion.
@@ -343,11 +343,11 @@ Given below is how the different classes work together in an example usage scena
     - All `Log`s of the friend
 
    An object diagram showing the `ExpandedPersonCard` of a friend named `Alex Yeoh`:
-   <img src="images/ExpandedPersonCard_ObjectDiagram.png" height="200">
+   <img src="images/ExpandedPersonCard_ObjectDiagram.png" height="250">
 
 ##### 1.6.2 Thought process behind switching view from `PersonCard` to `ExpandedPersonCard`
 
-* Current implementation
+* **Current implementation**
     - Both `PersonListPanel` and `ExpandedPersonListPanel` are superimposed on each other and
       `StackPane::toFront()` is called to bring the selected list to the front based on the command entered by 
       the user.
@@ -357,7 +357,7 @@ Given below is how the different classes work together in an example usage scena
        - Overhead required as both lists are running simultaneously in the foreground/background.
        - May not be extendable to larger features with a large number of lists.
 
-* Alternative implementation
+* **Alternative implementation**
     - Have a SplitPane, with the left pane showing the `PersonListPanel` and the right pane showing the
       `ExpandedPersonListPanel`.
     - Pros:
