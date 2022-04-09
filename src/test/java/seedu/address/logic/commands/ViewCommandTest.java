@@ -46,7 +46,7 @@ public class ViewCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
 
     }
 
@@ -75,7 +75,7 @@ public class ViewCommandTest {
 
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test

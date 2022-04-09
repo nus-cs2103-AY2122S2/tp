@@ -76,8 +76,6 @@ public class EditLabCommandParserTest {
         // invalid labs
         assertParseFailure(parser, VALID_INDEX + "l/a " + SUBMITTED_LABSTATUS_DESC, Lab.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, VALID_INDEX + "l/-1 " + SUBMITTED_LABSTATUS_DESC, Lab.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_INDEX + "l/0 " + SUBMITTED_LABSTATUS_DESC, Lab.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, VALID_INDEX + "l/0001 " + SUBMITTED_LABSTATUS_DESC, Lab.MESSAGE_CONSTRAINTS);
 
         // invalid statuses
         assertParseFailure(parser, VALID_INDEX + VALID_LAB_DESC + "s/e", LabStatus.MESSAGE_CONSTRAINTS);

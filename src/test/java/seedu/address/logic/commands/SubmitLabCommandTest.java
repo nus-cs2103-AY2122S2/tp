@@ -58,7 +58,7 @@ public class SubmitLabCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         SubmitLabCommand command = new SubmitLabCommand(outOfBoundIndex, VALID_LABNUMBER);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class SubmitLabCommandTest {
 
         SubmitLabCommand command = new SubmitLabCommand(outOfBoundIndex, VALID_LABNUMBER);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test

@@ -26,7 +26,6 @@ public class RemoveLabCommandParserTest {
         // invalid labs
         assertParseFailure(parser, " l/a ", MESSAGE_INVALID_FORMAT);
         assertParseFailure(parser, " l/-1 ", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, " l/0001 ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

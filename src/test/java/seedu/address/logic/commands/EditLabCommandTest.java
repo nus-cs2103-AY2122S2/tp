@@ -113,7 +113,7 @@ public class EditLabCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         EditLabCommand command = new EditLabCommand(outOfBoundIndex, VALID_LABNUMBER, LabStatus.SUBMITTED);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class EditLabCommandTest {
 
         EditLabCommand command = new EditLabCommand(outOfBoundIndex, VALID_LABNUMBER, LabStatus.SUBMITTED);
 
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 
     @Test
