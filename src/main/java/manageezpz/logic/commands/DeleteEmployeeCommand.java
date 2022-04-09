@@ -38,6 +38,9 @@ public class DeleteEmployeeCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
