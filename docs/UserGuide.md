@@ -362,6 +362,10 @@ HustleBook data are saved as a JSON file `[JAR file location]/data/hustlebook.js
 If your changes to the data file makes its format invalid, HustleBook will discard all data and start with an empty data file at the next run.
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you decide to make changes to the data file, HustleBook will not check the validity of the data. Such as meeting clashes and clients with the same name.
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
