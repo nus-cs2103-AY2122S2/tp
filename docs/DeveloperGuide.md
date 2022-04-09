@@ -591,31 +591,32 @@ The following images show how the Tabs feature look when the tab for each featur
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                                                            | So that I can…​                                                                                             |
-|----------|----------------|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| `* * *`  | User           | add new friends                                                                         | keep track of any new friends I make                                                                        |
-| `* * *`  | User           | remove friends I am no longer in contact with                                           | keep my friends list updated and remove irrelevant contacts                                                 |
-| `* * *`  | User           | view all details, descriptions and logs that I previously wrote about my friend         | do a quick recap of important details about my friend                                                       |
-| `* * *`  | User           | view all my friends                                                                     | ensure that the information I have added is saved and check all of my friends' details                      |
-| `* * *`  | User           | add events relating to my friends                                                       | keep track of any future events                                                                             |
-| `* * *`  | User           | remove an event                                                                         | cancel events previously added to keep my event list updated                                                |
-| `* * *`  | User           | review my events for the next day along with their relevant details                     | take note and be prepared for the next day                                                                  |
-| `* * *`  | Forgetful user | keep track of things that my friend has recently talked about                           | appear invested in my relationship and not forget important things about my friends                         |
-| `* * *`  | Forgetful user | add descriptions and details about my friends that I would like to remember             | not stress about remember these details for the next time we meet                                           |
-| `* * *`  | User           | remove a previous log recorded about a friend                                           | clear irrelevant details about my friend                                                                    |
-| `* *`    | User           | update details about friends                                                            | keep my friends list up-to-date                                                                             |
-| `* *`    | User           | update details of events                                                                | correct outdated or wrong information entered about any event                                               |
-| `* *`    | User           | update previous logs recorded about a friend                                            | ensure that information about my friend is up-to-date and accurate                                          |
-| `* *`    | User           | tag friends under different categories                                                  | better classify and organise my friend circle                                                               |
-| `* *`    | User           | use a name search to find friends                                                       | view the friend I want to check out efficiently instead of scrolling through the list of friends            |
-| `* *`    | New User       | access a help page                                                                      | learn how to use certain commands I am unfamiliar with                                                      |
-| `* *`    | New User       | undo a command                                                                          | revert back accidental commands                                                                             | 
-| `* *`    | New User       | reset the application to its default state                                              | properly experiment with the application before using it properly                                           |
-| `* *`    | Forgetful User | use a keyword search to find a note written about someone                               | find out who I spoke to about a certain issue                                                               |
-| `* *`    | Seasoned User  | shorten command lengths                                                                 | increase my efficiency while using this application                                                         |
-| `* *`    | Seasoned User  | see which of my friends I am closest to and which of them I have not visited in a while | reflect more about how I spend my time with my friend and maybe catch up with ones I have not met in awhile | 
-| `* *`    | Seasoned User  | chain commands                                                                          | reduce the number of commands I need to type thereby increasing efficiency                                  |
-| `*`      | New User       | know which features of the application I am not using as often                          | fully utilise the application to its maximum capability                                                     | 
+| Priority | As a …​         | I want to …​                                                                    | So that I can…​                                                                                  |
+|----------|-----------------|---------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `* * *`  | User            | add new friends                                                                 | keep track of any new friends I make                                                             |
+| `* * *`  | User            | remove friends I am no longer in contact with                                   | keep my friends list updated and remove irrelevant contacts                                      |
+| `* * *`  | User            | view all details, descriptions and logs that I previously wrote about my friend | do a quick recap of important details about my friend                                            |
+| `* * *`  | User            | view all my friends                                                             | ensure that the information I have added is saved and check all of my friends' details           |
+| `* * *`  | User            | add events relating to my friends                                               | keep track of any future events                                                                  |
+| `* * *`  | User            | remove an event                                                                 | cancel events previously added to keep my event list updated                                     |
+| `* * *`  | User            | review my upcoming events along with their relevant details                     | take note and be prepared for them                                                               |
+| `* * *`  | Forgetful user  | add descriptions and logs about my friends that I would like to remember        | not stress about remember these details for the next time we meet                                |
+| `* * *`  | User            | remove a previous log recorded about a friend                                   | clear irrelevant details about my friend                                                         |
+| `* *`    | User            | update details about friends                                                    | keep my friends list up-to-date                                                                  |
+| `* *`    | User            | update details of events                                                        | correct outdated or wrong information entered about any event                                    |
+| `* *`    | User            | update previous logs recorded about a friend                                    | ensure that information about my friend is up-to-date and accurate                               |
+| `* *`    | Organized User  | tag friends under different categories                                          | better classify and organise my friend circle                                                    |
+| `* *`    | User            | find specific friends using a keyword search                                    | view the friend I want to check out efficiently instead of scrolling through the list of friends |
+| `* *`    | Forgetful User  | use a keyword search to find a note written about someone                       | find out who I spoke to about a certain issue                                                    |
+| `* *`    | User            | view upcoming events tied to a specific friend                                  | take note and be prepared for specific events                                                    |
+| `* *`    | User            | find specific events using certain search criteria                              | view the specific event(s) I want to see efficiently and flexibly                                |
+| `* *`    | Reflective user | look at summary statistics about my friendships                                 | reflect about how well my friendships are doing                                                  |
+| `* *`    | New User        | access a help page                                                              | learn how to use certain commands I am unfamiliar with                                           |
+| `* *`    | New User        | reset the application to its default state                                      | properly experiment with the application before using it properly                                |
+| `* *`    | Seasoned User   | shorten command lengths                                                         | increase my efficiency while using this application                                              |
+| `*`      | Careless User   | undo a command                                                                  | revert back accidental commands                                                                  | 
+| `*`      | Seasoned User   | chain commands                                                                  | reduce the number of commands I need to type thereby increasing efficiency                       |
+| `*`      | New User        | know which features of the application I am not using as often                  | fully utilise the application to its maximum capability                                          | 
 
 ### Use cases
 
