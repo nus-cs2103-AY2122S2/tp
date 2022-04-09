@@ -308,6 +308,17 @@ Undoes the previous commands executed.
 
 Format: `undo`
 
+When a command is undone successfully, a message `Undo Successful!` will be displayed as shown below.
+![undo_success_message](images/undoSuccess.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about the `undo` command:**<br>
+
+* For `list`, `find` and `help` commands, `undo` will be executed successfully. The `Undo Successful!` message will be displayed, however, undoing these commands will not cause visible changes in the client list displayed and their information.
+
+</div>
+
 ### Redoing the previous commands : `redo`
 
 Redoes the previous commands executed.
@@ -315,6 +326,17 @@ Redoes the previous commands executed.
   * Maximum possible `redo` is till the last executed command.
 
 Format: `redo`
+
+When a command is redo successfully, a message `Redo Successful!` will be displayed as shown below.
+![redo_success_message](images/redoSuccess.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about the `redo` command:**<br>
+
+* For `list`, `find` and `help` commands, `redo` will be executed successfully. The `Redo Successful!` message will be displayed, however, redoing these commands will not cause visible changes in the client list displayed and their information.
+
+</div>
 
 ### Clearing all entries : `clear`
 
