@@ -481,7 +481,7 @@ Example usage (red arrow is what the command box is displaying):
 
 9. ![Command History Flow 9](images/CommandHistoryFlow9.png)
 
-*Figure: User executes `delete 7`. `delete 7` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again. `delete 5` in `activeBuffer` is restored. `listTransaction` is not restored. *
+*Figure: User executes `delete 7`. `delete 7` is appended to `historyBuffer` and `activeBuffer`. Command box is blank again. `delete 5` in `activeBuffer` is restored. `listTransaction` is not restored.*
 
 #### Design considerations
 
