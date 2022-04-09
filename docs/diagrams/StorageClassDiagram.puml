@@ -4,9 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
-package Storage{
+package Storage <<Rectangle>> {
 
-package "UserPrefs Storage" #F4F6F6{
+package "UserPrefs Storage" <<Rectangle>> #F4F6F6  {
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
@@ -14,12 +14,19 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "StudentBook Storage" #F4F6F6{
-Class "<<interface>>\nStudentBookStorage" as StudentBookStorage
-Class JsonStudentBookStorage
-Class JsonSerializableStudentBook
-Class JsonAdaptedStudent
-Class JsonAdaptedTag
+package "StudentBook Storage" <<Rectangle>> #F4F6F6 {
+    Class "<<interface>>\nStudentBookStorage" as StudentBookStorage
+    Class JsonStudentBookStorage
+    Class JsonSerializableStudentBook
+    Class JsonAdaptedStudent
+    Class JsonAdaptedTag
+}
+
+package "LessonBook Storage" <<Rectangle>> #F4F6F6 {
+    Class "<<interface>>\nLessonBookStorage" as LessonBookStorage
+    Class JsonLessonBookStorage
+    Class JsonSerializableLessonBook
+    Class JsonAdaptedLesson
 }
 
 }
@@ -30,14 +37,21 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" StudentBookStorage
+StorageManager -up-> "1" LessonBookStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> StudentBookStorage
+Storage -down-|> UserPrefsStorage
+Storage -down-|> StudentBookStorage
+Storage -down-|> LessonBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonStudentBookStorage .up.|> StudentBookStorage
 JsonStudentBookStorage ..> JsonSerializableStudentBook
 JsonSerializableStudentBook --> "*" JsonAdaptedStudent
 JsonAdaptedStudent --> "*" JsonAdaptedTag
+
+JsonLessonBookStorage .up.|> LessonBookStorage
+JsonLessonBookStorage ..> JsonSerializableLessonBook
+JsonSerializableLessonBook --> "*" JsonAdaptedLesson
+JsonAdaptedLesson --> "*" JsonAdaptedStudent
 
 @enduml
