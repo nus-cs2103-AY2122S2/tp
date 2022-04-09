@@ -473,13 +473,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The group attributes are in an invalid format.
+* 1a. The group command format is invalid.
 
-  * 1a1. ArchDuke shows an error message.
-  
-    Use case resumes from step 1.
+    * 1a1. ArchDuke shows an error message.
 
-* 1b. The group attributes are missing.
+      Use case resumes from step 1.
+
+* 1b. The group name is invalid.
 
   * 1b1. ArchDuke shows an error message.
   
@@ -504,19 +504,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The group attributes are in an invalid format.
+* 1a. The group command format is invalid.
 
     * 1a1. ArchDuke shows an error message.
   
        Use case resumes from step 1.
 
-* 1b. The group does not exist in ArchDuke.
+* 1b. The group name is invalid.
 
     * 1b1. ArchDuke shows an error message.
+
+      Use case resumes from step 1.
+
+* 1c. The group does not exist in ArchDuke.
+
+    * 1c1. ArchDuke shows an error message.
   
       Use case resumes from step 1.
   
-* 1c. The group list is empty.
+* 1d. The group list is empty.
 
   Use case ends.
 
@@ -533,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The assign command attributes are in an invalid format.
+* 1a. The assign command format is invalid.
 
     * 1a1. ArchDuke shows an error message.
   
@@ -576,7 +582,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The deassign command attributes are in an invalid format.
+* 1a. The deassign command format is invalid.
 
   * 1a1. ArchDuke shows an error message.
   
@@ -607,7 +613,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 1.
 
 
-**Use case: UC08 - Add a task in a group**
+**Use case: UC08 - View student contacts in a group**
+
+**MSS:**
+
+1. User requests to view student contacts in a specific group.
+
+2. ArchDuke displays all student contacts currently assigned to the group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The viewtask command format is invalid.
+
+  * 1a1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1b. The group name is invalid.
+
+  * 1b1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+* 1c. The group does not exist in ArchDuke.
+
+  * 1c1. ArchDuke shows an error message.
+  
+    Use case resumes from step 1.
+
+
+**Use case: UC09 - Add a task in a group**
 
 **MSS:**
 
