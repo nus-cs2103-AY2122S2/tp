@@ -100,9 +100,9 @@ Commands in CinnamonBun can be broken down into several components.
 * Items with `…`​ after them can be used zero or more times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family t/colleague` etc.
 
-### Fields & Tags
+### Fields and Tags
 
-A client can have many fields & tags, including both optional and compulsory ones.
+A client can have many fields and tags, including both optional and compulsory ones.
 
 <div markdown="1" class="alert alert-primary">:bangbang: **Attention**
 

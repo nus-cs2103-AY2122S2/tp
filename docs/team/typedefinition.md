@@ -28,12 +28,18 @@ CinnamonBun comes with a beautiful Graphical User Interface (GUI) while still be
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for Command Syntax. [\#95](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/95)
-        * Added documentation for User Guide Syntax. [\#95](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/95)
-        * Added documentation for Fields & Tags. [\#95](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/95)
-        * Added documentation for the `remark` feature. [\#95](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/95)
-        * Added documentation for the `append` feature. [\#108](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/108)
-        * Added documentation for the `remove` feature. [\#108](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/108)
-        * Added documentation for Command History feature. [\#98](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/98)
+        * [Commands - Command Syntax](../UserGuide.md#command-syntax)
+        * [Commands - User Guide Syntax](../UserGuide.md#user-guide-syntax)
+        * [Commands - Fields and Tags](../UserGuide.md#fields-and-tags)
+        * [Commands - Append Remark to Client](../UserGuide.md#append-remark-to-client-remark)
+        * [Commands - Append Fields to Client](../UserGuide.md#append-fields-to-client-append)
+        * [Commands - Remove Fields from Client](../UserGuide.md#remove-fields-from-client-remove)
+        * [Special Features - Command History](../UserGuide.md#command-history)
     * Developer Guide:
-        * Update default DG diagrams to reflect our current application. [\#161](https://github.com/AY2122S2-CS2103T-W09-2/tp/pull/161)
+        * [Design - Update diagrams](../DeveloperGuide.md#design)
+        * [Implementations - Person, Field and Tag](../DeveloperGuide.md#person-field-and-tag)
+        * [Implementations - Command history](../DeveloperGuide.md#command-history)
+        * [Manual Testing - Adding a client](../DeveloperGuide.md#adding-a-client)
+        * [Manual Testing - Append fields to a client](../DeveloperGuide.md#append-fields-to-a-client)
+        * [Manual Testing - Remove fields from a client](../DeveloperGuide.md#remove-fields-from-a-client)
+        * [Manual Testing - Add or remove remark from a client](../DeveloperGuide.md#add-or-remove-remark-from-a-client)
