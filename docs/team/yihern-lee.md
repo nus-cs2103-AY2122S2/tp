@@ -9,8 +9,11 @@ HireLah is a desktop address book application used for managing interview applic
 
 Given below are my contributions to the project.
 
-* **New Feature**: To be added
-* **New Feature**: To be added
+* **New Feature**: Position
+    * New Position data type to represent a position in the company that is open for hire.
+    * Position tracks the number of openings, as well as, the number of offers handed out the applicants.
+    * Position contains other fields, such as, description and requirement tags, to allow recruiters to associate information with the position.
+    
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
@@ -21,7 +24,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `posadd`, `posedit`, `poslist` and `posdel` [\#72]()
+        * Added documentation for the features `add -p`, `edit -p`, and `delete -p` [\#72]()
     * Developer Guide:
         * To be added
 

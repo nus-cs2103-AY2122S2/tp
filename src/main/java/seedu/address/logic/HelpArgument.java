@@ -1,6 +1,11 @@
-package seedu.address.logic.commands.help;
+package seedu.address.logic;
 
-public class HelpDescription {
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.HashMap;
+
+public class HelpArgument {
     public static final String OVERALL_HELPING_DESCRIPTION =
             "Looks like you forget something. Don't worry, here are the overall command list. "
             + "For a more detail of each command, you can type 'help + command' to view the full description. \n"
@@ -203,5 +208,51 @@ public class HelpDescription {
 
     public static final String HELP_COMMAND_DESCRIPTION =
             "Well what do you expect? New version of help? Here you are, welcome to our new help."
-            + "Now please type the 'help' to get the real help.";
+                    + " Now please type 'help' to get the real help.";
+
+    public static final HashMap<String, String> HELP_ARGUMENT_WITH_DESCRIPTION = loadHelpArgument();
+
+    private final String argument;
+
+    /**
+     * Constructs a {@code HelpArgument}.
+     */
+    public HelpArgument(String argument) {
+        requireNonNull(argument);
+        checkArgument(isValidHelpArgument(argument), COMMAND_NOT_FOUND_DESCRIPTION);
+        this.argument = HELP_ARGUMENT_WITH_DESCRIPTION.get(argument);
+    }
+
+    private static HashMap<String, String> loadHelpArgument() {
+        HashMap<String, String> argumentWithDescription = new HashMap<>();
+        argumentWithDescription.put("add", ADD_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("edit", EDIT_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("delete", DELETE_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("list", LIST_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("pass", PASS_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("fail", FAIL_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("accept", ACCEPT_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("reject", REJECT_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("export", EXPORT_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("exit", EXIT_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("help", HELP_COMMAND_DESCRIPTION);
+        argumentWithDescription.put("", OVERALL_HELPING_DESCRIPTION);
+        return argumentWithDescription;
+    }
+
+    public static Boolean isValidHelpArgument(String argument) {
+        return HELP_ARGUMENT_WITH_DESCRIPTION.containsKey(argument);
+    }
+
+    @Override
+    public String toString() {
+        return this.argument;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof HelpArgument // instanceof handles nulls
+                && argument.equals(((HelpArgument) other).argument)); // state check
+    }
 }

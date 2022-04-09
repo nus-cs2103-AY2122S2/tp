@@ -18,10 +18,10 @@ import seedu.address.commons.core.DataType;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.ExportCsvOpenException;
+import seedu.address.logic.HelpArgument;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.help.HelpDescription;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -83,7 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow(HelpDescription.OVERALL_HELPING_DESCRIPTION);
+        helpWindow = new HelpWindow(HelpArgument.OVERALL_HELPING_DESCRIPTION);
     }
 
     public Stage getPrimaryStage() {
@@ -175,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelpTab() {
-        helpWindow.setHelpDescription(HelpDescription.OVERALL_HELPING_DESCRIPTION);
+        helpWindow.setHelpDescription(HelpArgument.OVERALL_HELPING_DESCRIPTION);
         handleHelp();
     }
 
