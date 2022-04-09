@@ -1391,7 +1391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Module**: A specific class that a student is taking
 * **Tag**: A category that the student belong to (usually denotes the module that is currently being taken)
 * **Person**: A student in TAPA
-* **Student ID/Matriculation number**: Used interchangeable to refer to the unique identification number of a student
+* **Student ID/Matriculation number**: Used interchangeably to refer to the unique identification number of a student
 
 --------------------------------------------------------------------------------------------------------------------
 
