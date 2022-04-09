@@ -78,6 +78,7 @@ public class CompanyCard extends UiPart<Region> {
         address.setText(addressField);
         address.setWrapText(true);
         email.setText(emailField);
+        email.setWrapText(true);
         setStarIcon();
 
         phone.setManaged(!phoneField.isEmpty());
