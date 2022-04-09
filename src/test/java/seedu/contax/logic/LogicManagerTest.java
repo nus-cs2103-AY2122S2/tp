@@ -23,6 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.contax.commons.core.GuiSettings;
 import seedu.contax.logic.commands.AddAppointmentCommand;
 import seedu.contax.logic.commands.AddPersonCommand;
 import seedu.contax.logic.commands.CommandResult;
@@ -130,8 +131,20 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTagList().remove(0));
+    }
+
+    @Test
     public void getScheduleItemList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getScheduleItemList().remove(0));
+    }
+
+    @Test
+    public void userPrefSetters_noInput_notNull() {
+        GuiSettings sampleSettings = new GuiSettings(1, 1, 1, 1);
+        logic.setGuiSettings(sampleSettings);
+        assertEquals(sampleSettings, logic.getGuiSettings());
     }
 
     @Test
