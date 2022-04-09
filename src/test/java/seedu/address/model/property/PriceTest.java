@@ -60,7 +60,6 @@ public class PriceTest {
         assertTrue(Price.isValidPrice("$1000000")); // 10^6
         assertTrue(Price.isValidPrice("$10000000")); // 10^7
         assertTrue(Price.isValidPrice("$100000000")); // 10^8
-        assertTrue(Price.isValidPrice("$1000000000")); // 10^9
     }
 
     @Test
