@@ -36,6 +36,7 @@ Given below are my contributions to the project.
   * Add input validation for `Github username` such that it complies with actual Github username rules [#147](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/147)
   * Change HackNet to allow for duplicate `name` fields but reject any command that try to add/edit a duplicate or existing `Github username`, `phone number` or `email` [#154](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/154)
   * Add length checks for `email`, `team` and `skill` [#167](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/167)
+  * Fix duplicate `Skill` tags during **multiple** `Skill` entry inputs (Separate issue from [#130](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/130))  [#181](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/181)
 
 * **Documentation**:
   * User Guide:
