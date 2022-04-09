@@ -1280,7 +1280,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. There are no students taking the module specified by the given module code.
 
-    * 3b1. TAPA shows an error message.
+    * 1b1. TAPA shows an error message.
 
       Use case resumes from step 1.
 
