@@ -25,7 +25,10 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/dionegoh.md)]
 
 * Role: Developer
-* Responsibilities: [to be discussed]
+* Responsibilities: 
+  * IC for Logic and code quality
+  * Implement, test and maintain all features related to `friends` feature
+
 
 ### Lim Wei Liang
 
