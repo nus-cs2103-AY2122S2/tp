@@ -50,5 +50,4 @@ deactivate UpdateCommand
 
 [<--LogicManager
 deactivate LogicManager
-
-@enduml
+@end
