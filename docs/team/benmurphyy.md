@@ -31,7 +31,6 @@ Given below are my contributions to the project.
     * Added extensive checks to the JSON storage file before loading into UniBook, to ensure that any illegal data, due to corruption of the file (perhaps from modification by advanced users), would be detected, with the file being rejected and reset if that was the case
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=benmurphyy&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
-
 * **Project management**:
   * As Team Lead, I was responsible for:
     * Scheduling and directing meetings
@@ -42,8 +41,7 @@ Given below are my contributions to the project.
     * Defining interface methods between components of UniBook - to ensure little duplication of code and to minimise bugs
     * Setting up and maintaining the Github project team and repo.
   * Managed releases `1.2`, `1.3.1` and `1.3.2`
-
-* **Documentation**:
+  * **Documentation**:
   * User Guide: 
     * Added:
       * Section describing the details of the entities that UniBook can store - Person, Module and Group
@@ -57,7 +55,6 @@ Given below are my contributions to the project.
     * Added user stories and use cases relating to UI and storage
   * Index page:
     * Changed the index page from AB3 to UniBook by replacing screenshots and descriptions to be on UniBook instead of AB3
-
 * **Community**:
   * Actively reviewed PRs of teammates - Total number of PRs reviewed: 49
   * Opened issues for features that needed to be completed, along with bugs noticed - Total number of issues opened: 17
