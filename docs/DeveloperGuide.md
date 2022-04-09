@@ -698,6 +698,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 4 if newly-entered user input is valid, otherwise it may reach 3a/3b/3c again.
 
+
 * 3c. An invalid index is provided.
     * 3c1. Amigos throws an error message that the index entered is invalid.
     * 3c2. User reenters the command along with a valid index.
@@ -722,6 +723,7 @@ Use case ends
 
       Use case ends
   
+
 * 3b. Amigos detects an issue in the input (e.g. incorrect input format)
     * 3b1. Amigos displays the error feedback to the user.
     * 3b2. User reenters command with a valid input. 
@@ -815,8 +817,9 @@ Use case ends
 
     Use case resumes at step 3.
 
+
 * 2d. Amigos detects that the requested friend has no logs to be edited.
-    * 2d1. Amigos clears the input and notifies the user that this friend has no logs to be edited.
+    * 2d1. Amigos throws an error message saying that the log does not exist.
 
   Use case ends.
 
@@ -838,36 +841,30 @@ Use case ends
 **Extensions**
 
 * 2a. Amigos finds no friend with the given name or index.
-    * 2a1. Amigos requests user to check input and reenter.
+    * 2a1. Amigos throws an error message saying that name or index is invalid.
     * 2a2. User corrects command (if desired), and keys in edited command.
 
   Use case resumes at step 3.
 
 
-* 2b. Amigos detects that the user has not requested to delete a specific log.
-  * 2b1. Amigos clears the input and lists all logs of the friend with an index.
-  * 2b2. User keys in index, and deletes the log.
+* 2b. Amigos detects User has requested to delete all logs of all friends.
+  * 2b1. All logs in all friend are deleted.
 
   Use case resumes at step 3.
 
 
-* 2c. Amigos detects User has requested to delete all logs of all friends.
-  * 2c1. All logs in all friend are deleted.
+* 2c. Amigos detects that User has requested to delete all logs of a friend.
+  * 2c1. Amigos deletes all logs of the friend.
 
   Use case resumes at step 3.
 
 
-* 2d. Amigos detects that User has requested to delete all logs of a friend.
-  * 2d1. Amigos deletes all logs of the friend.
-
-  Use case resumes at step 3.
+* 2d. Amigos detects an invalid combination of arguments.
+  * 2d1. Amigos clears the input and requests the user to check input and reenter if necessary.
 
 
-* 2e. Amigos detects an invalid combination of arguments.
-  * 2e1. Amigos clears the input and requests the user to check input and reenter if necessary.
-
-* 2f. Amigos detects that the requested friend has no logs.
-    * 2f1. Amigos clears the input and notifies the user that this friend has no logs to be deleted.
+* 2e. Amigos detects that the requested friend has no logs.
+    * 2e1. Amigos clears the input and notifies the user that this friend has no logs to be deleted.
 
   Use case ends.
 
@@ -953,10 +950,31 @@ Use case ends
     
     Use case ends.
 
+
 * 2a. There are no events to show.
     * 2a1. Amigos displays an empty interface.
     
     Use case ends.
+
+**Use case: E04 - Finding events**
+
+**MSS**
+
+1. User requests to list events.
+2. Amigos shows a list of events.
+3. User enters search keyword(s) to find a specific event(s) based on the event name / date / friends 
+   involved in the event.
+4. Amigos displays a list of events matching all the keyword(s) entered by user.
+
+Use case ends
+
+**Extensions**
+
+* 3a. User enters invalid keywords.
+    * 2a1. Amigos throws an error message and requests user to check input.
+    * 2a2. User corrects command, and keys in edited command.
+
+Use case resumes at step 4 if newly-entered command is valid.
 
 **Use case : S01 - Show insights**
 
@@ -1039,8 +1057,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. To test whether `Amigos` can detect corrupted data files, navigate to the data folder of `Amigos`.
+      and modify some data in `addressbook.json` to be invalid. For example, change an email to be of an invalid format (e.g `alexyeoh@e`).
+   2. Upon running `Amigos` after editing `addressbook.json`, `Amigos` should start without any data in it due to the error.
+   3. To revert `Amigos` back to its previous state, reopen `addressbook.json` and undo the edits made in step 1.
 
-1. _{ more test cases …​ }_
