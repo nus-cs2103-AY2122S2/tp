@@ -649,22 +649,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. User requests to add a specific task to a specific group.
-2. ArchDuke adds the specific task in the group.
-3. ArchDuke updates the group task list and displays the task in the group.
+
+2. ArchDuke adds the specific task to the group and displays the task in the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The group index is invalid.
-    * 1a1. ArchDuke shows an error message.
+* 1a. The addtask command format is invalid.
+
+* 1b. The group name is invalid.
+
+    * 1b1. ArchDuke shows an error message.
 
        Use case resumes from step 1.
 
-* 2a. The task format is invalid.
-    * 2a1. ArchDuke shows an error message.
+* 1c. The group does not exist in ArchDuke.
 
+  * 1c1. ArchDuke shows an error message.
+  
       Use case resumes from step 1.
+  
+* 1d. The task name is invalid.
+
+  * 1d1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+  
+* 1e. The task already exists in the target group.
+
+  * 1e1. ArchDuke shows an error message.
+  
+      Use case resumes from step 1.
+
 
 **Use case: UC08 - Delete a task in a group**
 
