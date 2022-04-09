@@ -48,7 +48,8 @@ public class CompanyName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CompanyName // instanceof handles nulls
-                && value.toLowerCase().equals(((CompanyName) other).value.toLowerCase())); // state check
+                && value.replaceAll("\\s+", "").toLowerCase()
+                .equals(((CompanyName) other).value.replaceAll("\\s+", "").toLowerCase())); // state check
     }
 
     @Override
