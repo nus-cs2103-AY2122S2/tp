@@ -149,10 +149,24 @@ Flag a client in the HustleBook to mark them as important.
 
 Format: `flag NAME`
 
-* `NAME` input should be a name found in the HustleBook.
-* `NAME` is not case-sensitive.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX` 
-of the list shown.
+* Flags the client with the specified `NAME`.
+  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names.
+  * Input the position on the list of the client you wish to edit.
+
+Example:
+
+**Scenario 1**: You have a client named `John Doe`
+
+`flag John Doe` flags client `John Doe` on HustleBook.
+
+**Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
+* Running the command `flag John` will show a list of clients with names containing "John".
+* If you wish to flag `John Doe` and he is the first person listed, typing `1` and `Enter` will flag `John Doe`.
+* Subsequently, you can continue to flag other "John" listed here by typing their indexes and pressing `Enter`.
+* Run `list` to show all clients and stop flagging clients with names containing "John".
+
 
 ### Unflagging a client : `unflag`
 
@@ -160,10 +174,23 @@ Unflag a client in the HustleBook to unmark flagged clients.
 
 Format: `unflag NAME`
 
-* `NAME` input should be a name found in the HustleBook.
-* `NAME` is not case-sensitive.
-* In the event where more than one name is matches `NAME` input, you would need to specify using `INDEX`
-  of the list shown.
+* Unflags the client with the specified `NAME`.
+  * `Name` is case-insensitive. e.g. `John` will match `john`.
+  * Only full words will be matched e.g. `Han` will not match `Hans`.
+* If `NAME` matches multiple clients, you will see a list of clients with matching names.
+  * Input the position on the list of the client you wish to edit.
+
+Example:
+
+**Scenario 1**: You have a client named `John Doe`
+
+`unflag John Doe` unflags client `John Doe` on HustleBook.
+
+**Scenario 2**: You have clients named `John Doe`, `John Smith` and `John Willams`.
+* Running the command `unflag John` will show a list of clients with names containing "John".
+* If you wish to unflag `John Doe` and he is the first person listed, typing `1` and `Enter` will unflag `John Doe`.
+* Subsequently, you can continue to unflag other "John" listed here by typing their indexes and pressing `Enter`.
+* Run `list` to show all clients and stop flagging clients with names containing "John".
 
 ### Sorting all clients : `sort`
 
@@ -283,10 +310,6 @@ Format: `delete NAME`
 * Deletes the client with the specified `NAME`.
   * `Name` is case-insensitive. e.g. `John` will match `john`.
   * Only full words will be matched e.g. `Han` will not match `Hans`.
-  * Words separated by spaces in `NAME` will be counted as separate names, unless `NAME` fully matches a client's name
-    * Example: `delete John Doe ` will find clients with names containing `John` and `Doe`, unless
-                there exists a client with the name `John Doe`
-  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * If `NAME` matches multiple clients, you will see a list of clients with matching names
   * Input the position on the list of the client you wish to edit.
   

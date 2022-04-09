@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -93,7 +92,6 @@ public class FlagCommand extends Command {
         Person personToFlag = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = createFlagEditedPerson(personToFlag, flag);
         model.setPerson(personToFlag, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, personToFlag));
     }
 
