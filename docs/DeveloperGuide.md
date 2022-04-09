@@ -978,7 +978,6 @@ The `undo` command reverts the most recently executed command by restoring TAPA 
    * Pros: Will not incur major performance issues as it uses less memory.
    * Cons: More difficult to implement and test. Each command would need a unique implementation to be undone and this would also need to be implemented for commands added in the future.
    
-*{More features to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
