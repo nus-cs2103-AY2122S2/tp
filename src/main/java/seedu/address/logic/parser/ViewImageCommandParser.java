@@ -11,7 +11,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ViewImageCommandParser implements Parser<ViewImageCommand> {
 
-    @Override
     public ViewImageCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);

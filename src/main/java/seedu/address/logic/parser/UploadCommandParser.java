@@ -16,7 +16,6 @@ import seedu.address.model.userimage.UserImage;
  */
 public class UploadCommandParser implements Parser<UploadCommand> {
 
-    @Override
     public UploadCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_USERIMAGE);
