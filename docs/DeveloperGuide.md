@@ -187,7 +187,7 @@ Given below is the example usage scenario and how the add group mechanism behave
 2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddGroupCommandParser`.
 
 3. The `AddGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes. 
-It also checks whether the command is in the correct format. In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
+It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present, 
 `ParseException` would be thrown.
 
 4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `AddGroupCommandParser` will then call the `ParserUtil#parseGroupName()` 
@@ -245,7 +245,7 @@ Given below is the example usage scenario and how the delete group mechanism beh
 2. The `ArchDukeParser` then preliminary process the user input and creates a new `DeleteGroupCommandParser`.
 
 3. The `DeleteGroupCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
-    It also checks whether the command is in the correct format. In this case, the required prefix is and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+    It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
    `ParseException` would be thrown.
 
 4. If the required prefixes and attributes are present (i.e. `g/GROUP_NAME`), `DeleteGroupCommandParser` will then call the `ParserUtil#parseGroupName()`
@@ -325,9 +325,10 @@ The `addtask` command mechanism is facilitated by the `AddTaskCommand` and the `
 It allows users to add a yet-to-exist task to an already existing group in ArchDuke. It uses the `AddressBook#addTassk(Task task, Group group)`
 which is exposed in the `Model` interface as `Model#addTask(Task task, Group group)`. Then, the `getGroup(Group group)` is called on the `UniqueGroupList` to get the target group,
 and `Group#addTask(Task task)` is called on the target group to add the task to the group.
-to remove the group from the group list.
 
 Given below is the example usage scenario and how add task mechanism behaves at each step.
+
+#### Parsing user input
 
 1. The user inputs the `addtask` command and provide the `TASK_NAME` and `GROUP_NAME` of the task and group
 in which the user wants to add.
@@ -335,7 +336,7 @@ in which the user wants to add.
 2. The `ArchDukeParser` then preliminary process the user input and creates a new `AddTaskCommandParser`.
 
 3. The `AddTaskCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
-   It also checks whether the command is in the correct format. In this case, the required prefix is and attribute are `task/TASK_NAME` and `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   It also checks whether the command is in the correct format. In this case, the required prefix and attribute are `task/TASK_NAME` and `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
    `ParseException` would be thrown.
 
 4. If the required prefixes and attributes are present (i.e. `task/TASK_NAME` and `g/GROUP_NAME`), `AddTaskCommandParser` will then call the `ParserUtil#parseGroupName()`
@@ -343,6 +344,8 @@ in which the user wants to add.
    `GROUP_NAME` and/or `TASK_NAME` specified is invalid.
 
 5. The `AddTaskCommandParser` then creates the `AddTaskCommand` based on the processed inputs.
+
+#### Command execution
 
 6. The `LogicManager` executes the `AddTaskCommand`.
 
@@ -357,6 +360,8 @@ The task is added through the call of `Model#addTask()` by `AddTaskCommand`.
 
 10. `AddTaskCommand` then call `Model#setGroup(Group target, Group editedGroup)` to replace the old target group with the new group with the task added. 
 This will update the `UniqueGroupList` of the new `Group` with the task added.
+
+#### Displaying of result
 
 11. Finally, the `AddTaskCommand` creates a `CommandResult` with a success message and return it to the `LogicManager` to complete the command execution.
     The GUI would also be updated on this change in the group list and update the display of group list accordingly.
@@ -383,6 +388,57 @@ By making the task name case-insensitive, users can easily refer to the particul
 
 ## View task feature
 
+### About view task feature
+
+The view task feature allows users to view tasks in an existing 
+student group via the command `viewtask g/GROUP_NAME`.
+
+### How it is implemented
+
+The `viewtask` command mechanism is facilitated by the `ViewTaskCommand` and the `ViewTaskCommandParser`.
+It allows users to view tasks in an already existing group in ArchDuke. It uses the `AddressBook#viewTassk(Group group)`
+which is exposed in the `Model` interface as `Model#viewTask(Group group)`. Then, the `getGroup(Group group)` is called on the `UniqueGroupList` to get the target group,
+and `Group#viewTask()` is called on the target group to view tasks in the group.
+
+Given below is the example usage scenario and how view task mechanism behaves at each step.
+
+#### Parsing user input
+
+1. The user inputs the `viewtask` command and provide the `GROUP_NAME` of the group
+   in which the user wants to view tasks.
+
+2. The `ArchDukeParser` then preliminary process the user input and creates a new `ViewTaskCommandParser`.
+
+3. The `ViewTaskCommandParser` then parses the user input and check whether all the input attributes are present by checking the presence of the prefixes.
+   It also checks whether the command is in the correct format. In this case, the required prefix and attribute is `g/GROUP_NAME`. <br> <br> At this stage, if not all the prefixes are present,
+   `ParseException` would be thrown.
+
+4. If the required prefixes and attributes is present (i.e. `g/GROUP_NAME`), `ViewTaskCommandParser` will then call the `ParserUtil#parseGroupName()`
+   to check for the validity of the input `GROUP_NAME`. <br> <br> At this stage, `ParseException` would be thrown if the
+   `GROUP_NAME` specified is invalid.
+
+5. The `ViewTaskCommandParser` then creates the `ViewTaskCommand` based on the processed inputs.
+
+#### Command execution
+
+6. The `LogicManager` executes the `ViewTaskCommand`.
+
+7. The `ViewTaskCommand` calls the `Model#hasGroup()` to check if the group with the same `GROUP_NAME` has existed in the group list.
+   `CommandException` would be thrown if there has yet to exist a group with the same group name.
+
+8. The `ViewTaskCommand` then calls the `Model#viewTask(Group group)` to generate the `String` output of the tasks in the group's task list.
+
+#### Displaying of result
+
+9. Finally, the `ViewTaskCommand` creates a `CommandResult` with the previously generated `String` as message and return it to the `LogicManager` to complete the command execution.
+
+The following sequence diagram shows how the `viewtask` mechanism works:
+
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 
 ## Assign feature
