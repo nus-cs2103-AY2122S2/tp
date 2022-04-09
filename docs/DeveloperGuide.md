@@ -118,7 +118,6 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
@@ -131,7 +130,6 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -153,6 +151,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about `AddressBook` named classes:**<br>
+
+TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes, unless otherwise stated.
+
+</div>
 
 ### Candidate model
 
@@ -177,7 +183,7 @@ List of new entities:
 ### Add feature
 
 #### What is the feature about?
-The `add` mechanism is facilitated by `AddressBook` (TAlent Assistant™'s development team has decided to stick with AB3 naming convention on this part). The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked, introducing a few more related attributes (Refer to the [Current Implementation](#current-implementation)).
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked, introducing a few more related attributes (Refer to the [Current Implementation](#current-implementation)).
 
 The enhancement works by adding additional prefixes i.e. `id/[StudentId]`, `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the attributes `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned.
 
