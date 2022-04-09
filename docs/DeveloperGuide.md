@@ -22,7 +22,11 @@ TODO
 
 ## **Design**
 
-TODO
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-W11-3/tp/tree/master/docs/diagrams) folder.
+</div>
+
 
 ### Architecture
 
@@ -102,11 +106,20 @@ Each `Lesson` has an association with a list of `EnrolledStudents`, which contai
 
 ### Storage component
 
-TODO
+**API** : [`StorageManager.java`](https://github.com/AY2122S2-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/address/storage/StorageManager.java)
+
+![](images/StorageClassDiagram.png)
+
+The `Storage` component
+* saves lesson book data, student book data and user preference data in json format, and read them back into the 
+corresponding objects.
+* inherits from `LessonBookStorage`, `StudentBookStorage` and `UserPrefStorage`, which means it can be treated as any 
+one of the three (if only the functionality of one is needed).
+* depends on some classes in the `Model` component because its job is to save/retrieve objects that belong to the `Model`.
 
 ### Common classes
 
-TODO
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
