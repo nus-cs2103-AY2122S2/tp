@@ -589,16 +589,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | User            | update details about friends                                                    | keep my friends list up-to-date                                                                  |
 | `* *`    | User            | update details of events                                                        | correct outdated or wrong information entered about any event                                    |
 | `* *`    | User            | update previous logs recorded about a friend                                    | ensure that information about my friend is up-to-date and accurate                               |
-| `* *`    | User            | tag friends under different categories                                          | better classify and organise my friend circle                                                    |
+| `* *`    | Organized User  | tag friends under different categories                                          | better classify and organise my friend circle                                                    |
 | `* *`    | User            | find specific friends using a keyword search                                    | view the friend I want to check out efficiently instead of scrolling through the list of friends |
 | `* *`    | Forgetful User  | use a keyword search to find a note written about someone                       | find out who I spoke to about a certain issue                                                    |
 | `* *`    | User            | view upcoming events tied to a specific friend                                  | take note and be prepared for specific events                                                    |
 | `* *`    | User            | find specific events using certain search criteria                              | view the specific event(s) I want to see efficiently and flexibly                                |
 | `* *`    | Reflective user | look at summary statistics about my friendships                                 | reflect about how well my friendships are doing                                                  |
 | `* *`    | New User        | access a help page                                                              | learn how to use certain commands I am unfamiliar with                                           |
-| `* *`    | New User        | undo a command                                                                  | revert back accidental commands                                                                  | 
 | `* *`    | New User        | reset the application to its default state                                      | properly experiment with the application before using it properly                                |
 | `* *`    | Seasoned User   | shorten command lengths                                                         | increase my efficiency while using this application                                              |
+| `*`      | Careless User   | undo a command                                                                  | revert back accidental commands                                                                  | 
 | `*`      | Seasoned User   | chain commands                                                                  | reduce the number of commands I need to type thereby increasing efficiency                       |
 | `*`      | New User        | know which features of the application I am not using as often                  | fully utilise the application to its maximum capability                                          | 
 
