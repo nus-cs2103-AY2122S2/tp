@@ -30,12 +30,14 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_singleEmptyField_throwsParseException() {
-        assertParseFailure(parser, " n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_KEYWORD));
+        assertParseFailure(parser, " n/",
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_KEYWORD));
     }
 
     @Test
     public void parse_multipleEmptyField_throwsParseException() {
-        assertParseFailure(parser, " n/ i/ a/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_KEYWORD));
+        assertParseFailure(parser, " n/ i/ a/",
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_KEYWORD));
     }
 
     @Test
