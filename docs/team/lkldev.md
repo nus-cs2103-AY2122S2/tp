@@ -24,9 +24,9 @@ Given below are my contributions to the project.
   * Highlights: To allow the TA to easily keep track of student participation, this command is created to increment the grade if no grade is provided so that the TA do not need to specify a grade for marking participation, they simply have to issue the command without a grade argument.
 
 * **Enhancements to existing features**:
-  * Update common classes (Model, Logic, ModelManager, LogicManager) to be compatible with TAssist.
-  * Update Storage class to allow storing of TAssist data.
-  * Improve storage in V1.3 to reduce storing of duplicated data.
+  * Update common classes (Model, Logic, ModelManager, LogicManager) to be compatible with TAssist. [\#61](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/61), [\#132](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/132), [\#139](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/139)
+  * Update Storage class to allow storing of TAssist data. [\#91](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/91)
+  * Improve storage in V1.3 to reduce storing of duplicated data. [\#158](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/158)
   * Fix miscellaneous bugs before PE-D. [\#156](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/156), [\#158](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/158), [\#163](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/163), [\#164](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/164)
 
 * **Documentation**:
@@ -34,9 +34,9 @@ Given below are my contributions to the project.
     * Added documentation for project description and quick start. [\#4](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/4)
     * Fix miscellaneous errors in User Guide (e.g. making parameters optional, wrong parameters, etc)
   * Developer Guide:
-    * Added use cases for modules
-    * Added Grade command implementation
-    * Update AB3 Design to match TAssist design
+    * Added use cases for modules [\#32](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/32)
+    * Added Grade command implementation [\#123](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/123)
+    * Update AB3 Design to match TAssist design [\#130](https://github.com/AY2122S2-CS2103T-T13-2/tp/pull/130)
     * Fix miscellaneous errors in Developer Guide
 
 * **Community**:
