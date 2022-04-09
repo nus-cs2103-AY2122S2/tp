@@ -48,7 +48,7 @@ deactivate UniBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deletePerson(person)
 activate Model
 
 Model --> DeleteCommand
