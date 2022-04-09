@@ -87,9 +87,12 @@ Given below are my contributions to the project.
   - Non-trivial PRs reviewed and commented on for Julio:
     - [PR #62](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/62)
     - [PR #90](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/90)
+    - [PR #200](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/200)
   - Non-trivial PRs reviewed for Bryan:
     - [PR #91](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/91)
-- Reviewed some PRs by Wei Ming and Benjamin
+    - [PR #116](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/116)
+    - [PR #198](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/198)
+- Reviewed most PRs by Wei Ming and Benjamin
   - Non-trivial PRs reviewed and commented on for Wei Ming
     - [PR #44](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/44)
     - [PR #78](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/78)
