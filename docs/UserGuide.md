@@ -223,6 +223,8 @@ Format:
 * `findTask isMarked/true` finds all tasks that is already marked as done.
 * `findTask isMarked/false` finds all tasks that is already marked as not done.
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `findTask desc/homework`
 * `findTask date/2022-04-16`
@@ -261,6 +263,8 @@ Either one of `desc/NAME`, `date/DATE` or `at/TIME` must exist.
 * For Todo, you are not allowed to use `date/DATE` and/or `at/TIME` as it does not have a date 
 and time field to be edited. 
 * You can update a task with the same description, date and/or time.  
+
+<div style="page-break-after: always;"></div>
 
 Examples: <br/>
 
@@ -301,6 +305,8 @@ Examples:
 * `markTask 2` marks the 2nd task in the displayed task list as done.
 * `listTask` followed by `markTask 2` sets the displayed task list to show all tasks in ManageEZPZ and marks the 2nd task in ManageEZPZ as done.
 * `findTask desc/slides` followed by `markTask 1` sets the displayed task list with the results from the findTask command and marks the 1st task in the displayed task list as done.
+
+<div style="page-break-after: always;"></div>
 
 ### Unmarking a Task : `unmarkTask`
 
