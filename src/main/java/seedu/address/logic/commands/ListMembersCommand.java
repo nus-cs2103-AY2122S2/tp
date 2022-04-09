@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Membership;
 import seedu.address.model.person.util.PersonContainsMembershipPredicate;
 
 /**
@@ -19,7 +18,7 @@ public class ListMembersCommand extends Command {
             + "It displays all members if no tier is specified. "
             + "There are 3 membership tiers: Bronze, Silver & Gold.\n"
             + "Parameters: "
-            + "[" + Membership.PREFIX + "MEMBERSHIP]\n"
+            + "[MEMBERSHIP]\n"
             + "Example: " + COMMAND_WORD + " gold";
 
     private final PersonContainsMembershipPredicate predicate;

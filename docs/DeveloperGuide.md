@@ -157,7 +157,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address book.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -279,21 +279,33 @@ _{more aspects and alternatives to be added}_
 ### Membership functionality
 
 #### Implementation
-The membership functionality will be to store all available memberships into a list and allow clients to be assigned a membership.
+The membership functionality allows users to be assigned a membership tier, either 'Bronze','Silver' or 'Gold'. It inherits
+from the `Field` abstract class and is stored as a `Field` in fields HashMap of the `Person` class.
 
-Membership details will be created by users, user can then assign an existing membership to a client.
+When the user calls the `addMembership` functionality along with a specified client and membership tier, a Membership 
+object is created and stored in the fields HashMap of the specified client with the key being the `Membership` prefix and functions as if any other `Field`.
+The `removeMembership` functions in a similar manner to other fields in that the `Field` with the `Membership` prefix is removed
+from the fields HashMap.
+
+The `listMembers` command functions in a similar fashion to the `Find` command in that it uses a `Predicate` in order to filter
+clients with a Membership. It utilizes the `PersonContainsMembershipPredicate` which checks if a user has a `Membership` stored
+in its fields HashMap.
+
+When a client's membership is displayed on the screen, the colour of the membership `Label` changes according to the membership
+tier. This is done by having a `FlowPane` stored in the `PersonCard` class. When a membership is displayed, a `Label` with
+a different tier is created with a different id. The CSS files (Cinnamon.css or Caramel.css) then decides what colour to render the label background accordingly.
 
 #### Design considerations
 
 **Aspect: How it executes**
 
-* **Alternative 1 (current choice):** Create a list of Memberships, assign membership index to client.
-  * Pros: Allows for easy management of memberships
-  * Cons: Have to handle edge cases, what if user deletes a membership? etc.
-
-* **Alternative 2:** Create a new membership whenever assigning a membership to client.
+* **Alternative 1 (current choice):** Store each Membership in each user.
   * Pros: Easy to implement
-  * Cons: Harder to manage individual memberships, functions similar to a tag, but with extra variables.
+  * Cons: Membership functionality is limited (only able to have predefined membership tiers)
+
+* **Alternative 2:** Create a list of memberships and assign users a membership index.
+  * Pros: Allows for more flexible memberships (more than just gold,silver,bronze) with extra details such as descriptions
+  * Cons: Harder to implement.
 
 ### Transaction functionality
 
@@ -461,7 +473,7 @@ Example usage (red arrow is what the command box is displaying):
 
 6. ![Command History Flow 6](images/CommandHistoryFlow6.png)
 
-*Figure: User executes `addMembership 3 n/bronze`. `addMembership 3 n/bronze` is appended to `historyBuffer` and `activeBuffer`. Un-executed command `edit 2 e/` is erased. Command box is blank again. `addMembership 1 m/silver` in `activeBuffer` is restored.*
+*Figure: User executes `addMembership 3 m/bronze`. `addMembership 3 m/bronze` is appended to `historyBuffer` and `activeBuffer`. Un-executed command `edit 2 e/` is erased. Command box is blank again. `addMembership 1 m/silver` in `activeBuffer` is restored.*
 
 7. ![Command History Flow 7](images/CommandHistoryFlow7.png)
 
@@ -736,6 +748,8 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 2. The modifications have been undone.
 3. CinnamonBun shows the earlier clients' list without the modifications.
 
+   Use case ends.
+
 **Extensions**
 * 1a. There have been no modification made prior to calling undo.
   * 1a1. CinnamonBun shows an error message. <br>
@@ -746,6 +760,30 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
   * 1b1. CinnamonBun shows an error message. <br>
   
     Use case ends.
+
+**Use case: Add membership to a client**
+
+**MSS**
+
+1.  User specifies which client to add membership to and what membership tier to assign to the client
+3.  CinnamonBun assigned the membership to the specified client
+4.  CinnamonBun displays the list of clients with updated membership
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. CinnamonBun shows an error message.
+  
+      Use case ends.
+
+* 1b. The given membership tier is invalid.
+
+    * 2a1. CinnamonBun shows an error message.
+
+      Use case ends.
     
 ### Non-functional requirements
 
@@ -754,6 +792,8 @@ Priorities: High (must have), Medium (nice to have), Low (unlikely to have)
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. A user should be able to easily find a client.
 5. A user should be able to easily navigate the interface.
+6. Commands should be able to execute without any noticeable latency.
+7. Error messages when inputting invalid commands will be displayed in the text box.
 
 ### Glossary
 
@@ -785,16 +825,15 @@ These instructions only provide a starting point for testers to work on; testers
 ### Adding a client
 
 * Adding a new client while all clients are being shown
-  1. List all clients using the `list` command. Multiple clients in the list.
-  2. Test case: `add n/Gawr Gura p/12345678 e/gura@hololive.com a/123 Atlantis`<br>
+  1. Test case: `add n/Gawr Gura p/12345678 e/gura@hololive.com a/123 Atlantis`<br>
      Expected: A new client named `Gawr Gura` should appear at the bottom of the client list.
-  3. Test case: `add n/Ceres Fauna p/12345678`<br>
+  2. Test case: `add n/Ceres Fauna p/12345678`<br>
      Expected: No new client is added as not all required fields are provided. Error message is shown. 
 
 ### Editing a client
 
 * Editing a client while all clients are being shown
-  1. List all clients using the `list` command. Multiple clients in the list.
+  1. Prerequisites: There needs to be existing client data in the client's list.
   2. Test case: `edit 1 e/client_name@example.com`<br>
      Expected: First client's email is changed to `client_name@example.com`.
   3. Test case: `edit 2 e/client_name@example.com`<br>
@@ -803,7 +842,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Append fields to a client
 
 * Append fields to a client.
-    1. List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: There needs to be existing client data in the client's list.
     2. Test case: `append 1 b/1999-02-17`<br>
        Expected: First client's birthday is set to `1999-02-17`.
     3. Test case: `append 1 n/Ookami Mio`<br>
@@ -812,7 +851,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Remove fields from a client
 
 * Remove fields from a client.
-    1. List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: There needs to be existing client data in the client's list.
     2. Append a tag and birthday to the first client using the command `append 1 t/vendor b/1999-02-17`.
     3. Test case: `remove 1 b/`<br>
        Expected: First client's birthday is removed.
@@ -824,7 +863,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Add or remove remark from a client
 
 * Add or remove remark from a client.
-    1. List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: There needs to be existing client data in the client's list.
     2. Test case: `remark 1 r/High shipping cost.`<br>
        Expected: First client's remark is set to `High shipping cost.`.
     3. Test case: `remark 1 r/`<br>
@@ -833,7 +872,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Deleting a client
 
 * Deleting a client while all clients are being shown
-    1. List all clients using the `list` command. Multiple clients in the list.
+    1. Prerequisites: There needs to be existing client data in the client's list.
     2. Test case: `delete 1`<br>
        Expected: First client is deleted from the list.
     3. Test case: `delete 0`<br>
@@ -882,10 +921,50 @@ These instructions only provide a starting point for testers to work on; testers
       is not corrupted or deleted by user, the application will be able to revert the clients' list to the state stored in the temporary file.
       Thus, effectively undoing the latest 2 modifications.
 
+### Adding membership
+
+* Adding a membership to a user
+    1. Prerequisites: There needs to be existing client data in the client's list.
+    2. Test case: `addMembership 1 m/gold`<br>
+       Expected: The client at index 1 will have a gold membership assigned to him.
+    3. Test case: `addMembership 3 m/bronze`<br>
+       Expected: The client at index 3 will have a bronze membership assigned to him.
+    4. Test case: `addMembership 1 m/platinum`<br>
+       Expected: An error will be displayed as there is no tier called 'platinum'.
+    5. Test case: `addMembership -1 m/silver`<br>
+       Expected: An error will be displayed as -1 is an invalid index.
+
+### Removing membership
+
+* Removing a membership from a user
+    1. Prerequisites: There needs to be existing client data in the client's list with a membership.
+    2. Test case: `removeMembership 1` (User at index 1 has a membership)<br>
+       Expected: The client at index 1 will have his membership removed.
+    3. Test case: `removeMembership 1` (User at index 1 has no membership)<br>
+       Expected: Error message showing that user at that index has no membership.
+    4. Test case: `removeMembership -1`<br>
+       Expected: An error will be displayed as -1 is an invalid index.
+
+### Listing all members
+
+* Listing members
+    1. Prerequisites: There needs to be existing client data in the client's list with memberships.
+    2. Test case: `listMembers` (Some users have memberships)<br>
+       Expected: List of all members will be displayed.
+    3. Test case: `listMembers` (No users have memberships)<br>
+       Expected: No clients displayed.
+    4. Test case: `listMembers gold` (Some users have gold memberships)<br>
+       Expected: All members with gold membership will be displayed. 
+    5. Test case: `listMembers hello`<br>
+       Expected: Error message shown as hello is not a valid membership tier.
+
+
 ### Saving data
 
 * Dealing with missing/corrupted data files
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Delete the `CinnamonBun.save` file in the data folder which should be in the same folder as the jar file.
+    This will simulate a missing save file.<br>
+    Expected: A data set with some default users will be used and a new save file will be created after running any command.
 
 --------------------------------------------------------------------------------------------------------------------
 
