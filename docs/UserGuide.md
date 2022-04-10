@@ -9,6 +9,7 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 
 ## Table of Contents
 * [Quick Start](#quick-start)
+* [Overview](#overview)
 * [Features](#features)
     * [Viewing help: help](#viewing-help-help)
     * [Contact Management](#contact-management)
@@ -46,16 +47,16 @@ Welcome to the User Guide for **HackNet**, where we will guide you through all y
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-<div markdown="block" class="alert alert-info">
+    <div markdown="block" class="alert alert-info">
 
-**:information_source: If double-clicking doesn't work:**<br>
+    **:information_source: If double-clicking doesn't work:**<br>
 
-This could be a problem with the Windows OS. You can alternatively start **HackNet** by:
-1. Starting a terminal session on your computer
-2. Change the directory to the folder containing the file using `cd path/to/HackNet_home_folder`
-3. Start HackNet using `java -jar HackNet.jar`
+    This could be a problem with the Windows OS. You can alternatively start **HackNet** by:
+    * Starting a terminal session on your computer
+    * Change the directory to the folder containing the file using `cd path/to/HackNet_home_folder`
+    * Start HackNet using `java -jar HackNet.jar`
 
-</div>
+    </div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -73,6 +74,20 @@ This could be a problem with the Windows OS. You can alternatively start **HackN
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Overview
+
+**HackNet** is a small desktop application, and contains simple components working together to form a powerful product.
+
+![Ui](images/UI-annotated.png)
+
+* Input field: This is where you enter your commands to **HackNet**.
+* Result box: This is where **HackNet** tells you whether your command succeeded, or to provide guidance on why your command failed.
+* Personal details: This contains all the details of your contacts:
+  * Past teams: These are tags you can add onto your contacts, whom have worked with you on technical projects in the past
+  * Technical skills: These are skill labels to help you keep track of technical proficiency of your contacts. It is color coded such that a brighter green tag indicates a higher proficiency in that skill
+  * GitHub username: This is the [GitHub](https://github.com) username of your contact. It is also a hyperlink that will open up the GitHub profile of that contact in your browser
+* Potential teammates: These are contacts you marked as potential teammates, which are part of the dream team you are forming for the next Hackathon. **HackNet** highlights such contacts to make them stand out.
 
 ## Features
 
@@ -143,11 +158,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL g/GITHUB_USERNAME [t/TEAM…]​ [s/S
 * A name of a team or skill cannot be consisting solely of whitespaces.<br>
 * Please check that you have correctly entered the skill proficiency level. There is currently no way of viewing the exact number that you entered. You may use the `edit` function to change it if it is wrong. <br>
 * The skill proficiency will only be a visual guide in a shade of green (bright green for high proficiency and dark green for low proficiency).<br>
+* If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency. 
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123`
 * `add n/Betsy Crowe e/betsycrowe@example.com g/betsycoder p/1234567 t/gmail plugin, Sublime Text dev s/`
+* `add n/John Doe p/98765432 e/johnd@example.com g/johndoe123 s/C_90, C_2, C_22` will result in `C_90` as it has the highest value.
 
 ### Editing any number of person(s): `edit`
 
@@ -171,6 +188,7 @@ Format: `edit INDEX [INDEX…] [-r] [n/NAME] [p/PHONE] [e/EMAIL] [g/GITHUB_USERN
 * When editing multiple persons, only `[t/TEAM…]` and `[s/SKILLNAME_SKILLPROFICENCY…]` will take effect. Other arguments such as `NAME` and `PHONE` will be silently ignored.
 * When at least one of the indices provided are invalid for batch edit, HackNet informs that there was an error in the indices, but still delivers the modification for the indices that are valid.
 * In the unlikely case that same index is present multiple times for `INDEX [INDEX…]`, HackNet will still successfully execute the edit command as long as the index is valid.
+* If multiple duplicate skill names are entered, HackNet will only take the skill with the highest proficiency.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -178,6 +196,7 @@ Examples:
 * `edit 2 t/HackNet s/` Appends the team `Hacknet` to the 2nd person and keep the current skills.
 * `edit 2 3 s/ t/GoogleProject, Hackathon2022` Does not change the skills of 2nd and 3rd person in the list, and appends`GoogleProject` and `Hackathon2022` to the list of teams they belong to.
 * `edit 1 2 3 -r s/Java_100, Python_80, t/` Edits the skills of the 1st, 2nd and 3rd person to be `java` and `python` only with proficiency of 100 and 80. The exiting teams are cleared as well.
+* `edit 1 s/C_90, C_2, C_11` will result in the 1st person in the list having skill `C` with proficiency `90` as it is the highest value.
 
 ### Deleting a person: `delete`
 
@@ -260,8 +279,7 @@ Examples:
 
 ### Mark/unmark contact as potential teammates: `team/unteam`
 
-This feature selects/deselect specified persons as potential members. If a person is selected as a potential teammate,
-the contact box will be highlighted in a shade of turquoise.
+Mark/unmark contacts as potential teammates for the team you are currently forming. A marked contact will be highlighted for clarity.
 
 Format:
 * `team INDEX`
@@ -386,6 +404,9 @@ _Details coming soon ..._
 
 **Q**: I am colour blind and cannot differentiate between skill proficiency colours. What should I do?<br>
 **A**: You can use the feature `sort` to list out contacts with that particular skill in descending order. (eg. `sort Java`)
+
+**Q**: What is the difference between **past teammates** and **potential teammates**?<br>
+**A**: Past teammates are contacts that you have worked on a project together with, and appear as a _blue_ tag in **HackNet**. Potential teammates are contacts you want to work with, whom you mark in **HackNet** with a highlighted _turquoise_ colour.
 
 **Q**: What is the difference between `list`, `show` and `filterteam`?<br>
 **A**: `list` displays _all_ of your contacts while `show` will only display contacts that you have marked with `team`. Lastly, `filterteam` will display those contacts that you have marked with `/t` (the blue tags)

@@ -23,19 +23,19 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Teo"), new Phone("87438807"), new Email("alexteo@example.com"),
-                    new GithubUsername("alexteo98"), getTeamSet("friends"),
+                    new GithubUsername("alexteo98"), getTeamSet("Google CodeJam"),
                     getSkillSet("C_50"), false),
             new Person(new Name("Junha Park"), new Phone("91031282"), new Email("billpark@example.com"),
-                    new GithubUsername("B1LLP4RK"), getTeamSet("family"),
+                    new GithubUsername("B1LLP4RK"), getTeamSet("CTF 2022"),
                     getSkillSet("Java_70"), true),
             new Person(new Name("Lye Jia Yang"), new Phone("99272758"), new Email("lyejy@example.com"),
-                    new GithubUsername("Jiaaa-yang"), getTeamSet("colleagues", "friends"),
+                    new GithubUsername("Jiaaa-yang"), getTeamSet("Shopee League", "Kickstart"),
                     getSkillSet("C_90"), false),
             new Person(new Name("Melvin Chan"), new Phone("93210283"), new Email("mchan@example.com"),
-                    new GithubUsername("MelvinCZJ"), getTeamSet("neighbours"),
+                    new GithubUsername("MelvinCZJ"), getTeamSet("CS2103T"),
                     getSkillSet("Bash_50"), false),
             new Person(new Name("Toh Zhan Qing"), new Phone("92492021"), new Email("tohzq@example.com"),
-                    new GithubUsername("tzhan98"), getTeamSet("classmates"),
+                    new GithubUsername("tzhan98"), getTeamSet("CS2100"),
                     getSkillSet("C_50"), false),
         };
     }

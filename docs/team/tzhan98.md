@@ -30,12 +30,13 @@ Given below are my contributions to the project.
     * This allows for users to easily check for information of commands without constantly referring to the user guide
 
 * **Bug fixes**:
-  * Fix input validation of regex to exclude values from `Skill proficiency` [#136](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/136)
-  * Fix bug that causes duplicates in `Skill`s tag and hence `Sort` feature to have unexpected output [#130](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/130)
+  * Fix input validation of regex to exclude values from `skill proficiency` [#136](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/136)
+  * Fix bug that causes duplicates in `skill`s tag and hence `sort` feature to have unexpected output [#130](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/130)
   * Add more topics that `help` is able to search for such as `filterteam` [#107](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/107)
   * Add input validation for `Github username` such that it complies with actual Github username rules [#147](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/147)
   * Change HackNet to allow for duplicate `name` fields but reject any command that try to add/edit a duplicate or existing `Github username`, `phone number` or `email` [#154](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/154)
   * Add length checks for `email`, `team` and `skill` [#167](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/167)
+  * Fix duplicate `skill` tags during **multiple** `skill` entry inputs (different issue from [#130](https://github.com/AY2122S2-CS2103T-W13-3/tp/issues/130))  [#181](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/181)
 
 * **Documentation**:
   * User Guide:
@@ -50,4 +51,4 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-  * PR reviewed with non-trivial comments [#62](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/62), [#73](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/73), [#79](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79), [#141](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/141)
+  * PR reviewed with non-trivial comments [#62](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/62), [#73](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/73), [#79](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/79), [#141](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/141), [#163](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/163), [#182](https://github.com/AY2122S2-CS2103T-W13-3/tp/pull/182)

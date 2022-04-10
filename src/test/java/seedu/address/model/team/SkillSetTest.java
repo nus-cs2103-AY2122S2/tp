@@ -13,11 +13,20 @@ import static seedu.address.testutil.TypicalSkills.SKILL_LINUX_60;
 import static seedu.address.testutil.TypicalSkills.SKILL_PYTHON_30;
 import static seedu.address.testutil.TypicalSkills.getTypicalSkillSet;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 public class SkillSetTest {
 
+
     private SkillSet skillSet1 = getTypicalSkillSet();
+    private Skill java100 = new Skill("Java", 100);
+    private Skill java90 = new Skill("Java", 90);
+    private Skill python100 = new Skill("python", 100);
+    private Skill c20 = new Skill("C", 20);
+    private Skill c1 = new Skill("C");
     private SkillSet skillSet2 = new SkillSet();
     private SkillSet skillSet3 = new SkillSet();
 
@@ -59,5 +68,18 @@ public class SkillSetTest {
     public void getSkill() {
         assertEquals(SKILL_C_20, skillSet1.getSkill(new Skill("C")));
         assertNull(skillSet1.getSkill(SKILL_BASH_70));
+    }
+
+    @Test
+    public void removeDuplicates() {
+        Set<Skill> duplicatedSet = new HashSet<>();
+        duplicatedSet.add(java100);
+        duplicatedSet.add(c1);
+        duplicatedSet.add(c20);
+        duplicatedSet.add(c1);
+        duplicatedSet.add(java90);
+        skillSet3.add(c20);
+        skillSet3.add(java100);
+        assertEquals(new SkillSet(duplicatedSet), skillSet3);
     }
 }
