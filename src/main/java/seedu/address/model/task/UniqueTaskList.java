@@ -47,6 +47,17 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(taskToAdd);
     }
 
+    /**
+     * Returns the task if the list contains an equivalent task as the given argument.
+     */
+    public Task getTask(Task taskToCheck) {
+        requireNonNull(taskToCheck);
+        if (!internalList.stream().anyMatch(taskToCheck::isSameTask)) {
+            throw new TaskNotFoundException();
+        };
+        return taskToCheck;
+    }
+
     public ObservableList<Task> getInternalList() {
         return internalList;
     }
@@ -67,7 +78,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * {@code target} must exist in the list.
      * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
-    public void setTasks(Task target, Task editedTask) {
+    public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
         int index = internalList.indexOf(target);
@@ -82,7 +93,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(index, editedTask);
     }
 
-    public void setTasks(UniqueTaskList replacement) {
+    public void setTask(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
