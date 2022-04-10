@@ -32,7 +32,7 @@ Given below are my contributions to the project.
     
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#25](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/205), [\#215](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/216)
+  * PRs reviewed (with non-trivial review comments): [\#25](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/205), [\#216](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/216)
   * Reported bugs and suggestions for other teams in the class (examples: [\#111](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/111), [\#195](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/195), [\#112](https://github.com/AY2122S2-CS2103T-T13-4/tp/pull/112))
 
 
