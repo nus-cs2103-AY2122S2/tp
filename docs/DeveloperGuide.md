@@ -53,6 +53,7 @@ title: Developer Guide
   * [Editing a show](#editing-a-show)
   * [Saving data](#saving-data)
   * [Finding a show](#finding-a-show)
+  * [Sorting the list of shows](#sorting-the-list-of-shows)
   * [Suggesting a show](#suggesting-a-show)
   * [Importing Trackermon data](#importing-trackermon-data)
   * [Exporting Trackermon data](#exporting-trackermon-data)
@@ -101,8 +102,6 @@ The developer guide allows developers who want to work on Trackermon to gain a b
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T09-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
-
-[return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
 ### Architecture
 
@@ -525,8 +524,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `Trackermon` and the **Actor** is the `user`, unless specified otherwise)
 
----
-
 **Use case: UC01 - Add a show**
 
 **Preconditions: Trackermon application is started.**
@@ -835,12 +832,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any [_Mainstream OS_](#glossary) as long as it has Java `11` or above installed.
+1.  Should work on any [_Mainstream OS_](#appendix-b-glossary) as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 shows without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using [CLI](#appendix-b-glossary) compared to [GUI](#appendix-b-glossary).
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
+---
 
 ## **Appendix B: Glossary**
 
@@ -849,6 +847,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **Mainstream OS** | Windows, Linux, Unix, OS-X                                                                    |
 | **Parameter**     | Information passed in as part of a command with its type identified by a prefix (e.g. `NAME`) |
 | **JavaFx**        | 	JavaFX is a set of Java graphics libraries for creating Java GUI applications                |
+| **Command Line Interface (CLI)**   | A Command Line Interface connects a you to a computer program or operating system. Through the CLI, you can interact with a system or application by typing in text (commands).        | 
+| **Graphical User Interface (GUI)** | A form of user interface that allows you to interact with electronic devices through graphical icons instead of text-based user interfaces, typed command labels or text navigation.        |
 
 [return to top <img src="images/toc-icon.png" width="25px">](#table-of-contents)
 
@@ -861,8 +861,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </div>
-
----
 
 ### Launch and shutdown
 
