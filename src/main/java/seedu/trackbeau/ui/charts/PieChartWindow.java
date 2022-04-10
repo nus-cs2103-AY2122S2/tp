@@ -28,13 +28,9 @@ public class PieChartWindow extends UiPart<Stage> {
         //referenced from https://docs.oracle.com/javafx/2/charts/pie-chart.htm
         Scene scene = new Scene(new Group());
         root.setTitle(rootTitle);
-        root.setWidth(500);
-        root.setHeight(500);
         pieChart.setLabelLineLength(10);
         pieChart.setTitle(chartTitle); (
                 (Group) scene.getRoot()).getChildren().add(pieChart);
-        pieChart.setLegendVisible(false);
-        pieChart.setMinSize(500, 500);
         root.setScene(scene);
     }
 
@@ -68,6 +64,7 @@ public class PieChartWindow extends UiPart<Stage> {
         getRoot().show();
         getRoot().centerOnScreen();
     }
+
 
     public PieChart getPieChart() {
         return this.pieChart;
