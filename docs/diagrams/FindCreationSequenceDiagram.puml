@@ -1,15 +1,16 @@
 @startuml
-!include style.puml
+!include Style.puml
+!include SequenceStyle.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":IBookParser" as IBookParser LOGIC_COLOR
-participant "f:FindCommand" as FindCommand LOGIC_COLOR
-end box
+Box Logic LOGIC_COLOR_LIGHT
+Participant ":LogicManager" as LogicManager<<Logic>>
+Participant ":IBookParser" as IBookParser<<Logic>>
+Participant "f:FindCommand" as FindCommand<<Logic>>
+end Box
 
-box Model MODEL_COLOR_T1
-participant ":AttributeFilter" as AttributeFilter MODEL_COLOR
-end box
+Box Model MODEL_COLOR_LIGHT
+Participant ":AttributeFilter" as AttributeFilter<<Model>>
+end Box
 
 [-> LogicManager : execute(find)
 activate LogicManager

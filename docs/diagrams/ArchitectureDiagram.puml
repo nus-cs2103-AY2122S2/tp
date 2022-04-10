@@ -1,26 +1,35 @@
 @startuml
-!include <office/Concepts/globe_internet>
-!include <office/Concepts/documents>
-!include <office/Users/user>
-!include style.puml
+!include <material/common>
+!include <material/account>
+!include <material/file_document>
+!include Style.puml
+
+skinparam PackagePadding 1
 
 Package " "<<Rectangle>>{
-    Class UI UI_COLOR
-    Class Logic LOGIC_COLOR
-    Class Storage STORAGE_COLOR
-    Class Model MODEL_COLOR
-    Class Main #grey
-    Class Commons LOGIC_COLOR_T2
+    Class UI<<Ui>>
+    Class Logic<<Logic>>
+    Class Storage<<Storage>>
+    Class Model<<Model>>
+
+    skinparam ClassBorderColor<<Main>> grey
+    skinparam ClassFontColor<<Main>> grey
+    hide <<Main>> stereotype
+    Class Main<<Main>>
+
+    skinparam ClassBorderColor<<Commons>> LOGIC_COLOR_T2
+    skinparam ClassFontColor<<Commons>> LOGIC_COLOR_T2
+    hide <<Commons>> stereotype
+    Class Commons<<Commons>>
 }
 
-Class "<$user>" as User MODEL_COLOR_T2
-Class "<$documents>" as File UI_COLOR_T1
+Class "<$ma_account>" as User<<Hidden>>
+Class "<$ma_file_document>" as File<<Hidden>>
 
-
-UI -[#green]> Logic
-UI -right[#green]-> Model
-Logic -[#blue]-> Storage
-Logic -down[#blue]-> Model
+UI -[UI_COLOR]> Logic
+UI -right[UI_COLOR]-> Model
+Logic -[LOGIC_COLOR]-> Storage
+Logic -down[LOGIC_COLOR]-> Model
 Main -[#grey]-> UI
 Main -[#grey]-> Logic
 Main -[#grey]-> Storage
