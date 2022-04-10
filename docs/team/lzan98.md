@@ -55,6 +55,7 @@ to view the detailed breakdown of my code contribution!
     * Added documentation for the section `Scheduling interviews`.
     * Implemented sequence diagrams for the section `Scheduling interviews`.
     * Updated documentation and class diagram for the section `Storage Component`
+    * Added use cases for schedule add, edit, delete and clear.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#135](https://github.com/AY2122S2-CS2103-F11-2/tp/pull/135),
