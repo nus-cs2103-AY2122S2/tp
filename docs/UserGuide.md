@@ -446,6 +446,7 @@ Format: `edit INDEX o/keyevent ke/INDEX [type/TYPE] [dt/DATETIME]`
 At least one optional field must be edited in order for module to be successfully edited.
 
 #### :bulb: Edit group's group name and/or meeting times.
+* Format: `edit INDEX o/group m/MODULE [g/GROUPNAME] [mt/INDEX DATETIME]`
 * Edits the `groupname` and/or `meetingtimes` of the group at `INDEX` of the `module`.
 * `DATETIME` must be in `YYYY-MM-DD HH:mm` format.
 * Example: `edit 1 o/group m/CS2103 g/T2 mt/2 2020-12-12 16:45` edits the first group's name and second index of meeting time of the CS2103 `module` to T2 and 12th December 2022 4:45pm respectively.
