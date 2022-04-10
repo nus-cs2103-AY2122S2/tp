@@ -450,29 +450,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                      | So that I can…​                                                        |
-|----------|-------------------|-------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | pet daycare owner | retrieve pet owner's contact                                      | contact pet owners                                                     |
-| `* * *`  | pet daycare owner | tag different types of pets                                       | easily differentiate between the types of pets                         |
-| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                        | schedule the school bus for each day                                   |
-| `* * *`  | pet daycare owner | track the different food preferences required by different pets   | make sure the pets are served the right foods                          |
-| `* * *`  | pet daycare owner | track the attendanceEntry of pets                                 | charge pet owners the correct amount depending on pets attendanceEntry |
-| `* * *`  | pet daycare owner | add pets in the daycare to system                                 | I have a consolidated information sheet                                |
-| `* * *`  | pet daycare owner | retrieve the pets addresses                                       | inform the school bus driver correctly                                 |
-| `* * *`  | pet daycare owner | find pets by their INDEX                                          | retrieve the pet information accordingly                               |
-| `* * *`  | pet daycare owner | delete pet's information from the system                          | information of pets that are in the system will be up to date          |
-| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                          | bill owners accordingly                                                |
-| `* *`    | pet daycare owner | track pets' grooming appointments                                 | remember to bring them for grooming                                    |
-| `* *`    | pet daycare owner | track the allergies that each pet has                             | avoid giving them food they may be allergic to                         |
-| `* *`    | pet daycare owner | order pets chronologically by there name                          | easily search for their name in the system                             |
-| `* *`    | pet daycare owner | order pets' appointments chronologically                          | know what is the next appointment I should take note of                |
-| `*`      | pet daycare owner | track the vet appointments of pets                                | make sure pets do not miss their medical appointments                  |
-| `*`      | pet daycare owner | track the medicine that pets need to take                         | i can feed them medicine appropriately                                 |
-| `*`      | pet daycare owner | change the attendanceEntry of pets anytime I want                 | I can allow for last minute scheduling                                 |
-| `*`      | pet daycare owner | update pet's information                                          |                                                                        |
-| `*`      | pet daycare owner | update pet owner's information                                    |                                                                        |
-| `*`      | pet daycare owner | access the previous attendanceEntry of pets                       | update owners if they were to enquire                                  |
-| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day        | arrange the necessary manpower                                         |
+| Priority | As a …​           | I want to …​                                                    | So that I can…​                                                    |
+|----------|-------------------|-----------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | pet daycare owner | retrieve pet owner's contact                                    | contact pet owners                                                 |
+| `* * *`  | pet daycare owner | tag different types of pets                                     | easily differentiate between the types of pets                     |
+| `* * *`  | pet daycare owner | track when pets require pickup or drop-off                      | schedule the school bus for each day                               |
+| `* * *`  | pet daycare owner | track the different food preferences required by different pets | make sure the pets are served the right foods                      |
+| `* * *`  | pet daycare owner | track the attendance of pets                                    | charge pet owners the correct amount depending on pet's attendance |
+| `* * *`  | pet daycare owner | add pets in the daycare to system                               | I have a consolidated information sheet                            |
+| `* * *`  | pet daycare owner | retrieve the pets addresses                                     | inform the school bus driver correctly                             |
+| `* * *`  | pet daycare owner | find pets by their INDEX                                        | retrieve the pet information accordingly                           |
+| `* * *`  | pet daycare owner | delete pet's information from the system                        | information of pets that are in the system will be up to date      |
+| `* *`    | pet daycare owner | tabulate the monthly charge of each pets                        | bill owners accordingly                                            |
+| `* *`    | pet daycare owner | track pets' grooming appointments                               | remember to bring them for grooming                                |
+| `* *`    | pet daycare owner | track the allergies that each pet has                           | avoid giving them food they may be allergic to                     |
+| `* *`    | pet daycare owner | order pets chronologically by there name                        | easily search for their name in the system                         |
+| `* *`    | pet daycare owner | order pets' appointments chronologically                        | know what is the next appointment I should take note of            |
+| `*`      | pet daycare owner | track the vet appointments of pets                              | make sure pets do not miss their medical appointments              |
+| `*`      | pet daycare owner | track the medicine that pets need to take                       | i can feed them medicine appropriately                             |
+| `*`      | pet daycare owner | change the attendance of pets anytime I want                    | I can allow for last minute scheduling                             |
+| `*`      | pet daycare owner | update pet's information                                        |                                                                    |
+| `*`      | pet daycare owner | update pet owner's information                                  |                                                                    |
+| `*`      | pet daycare owner | access the previous attendance of pets                          | update owners if they were to enquire                              |
+| `*`      | pet daycare owner | find the number of pets present in the daycare fo each day      | arrange the necessary manpower                                     |
 
 ### Use cases
 
