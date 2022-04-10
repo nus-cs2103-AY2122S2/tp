@@ -43,7 +43,7 @@ We hope you enjoy Tracey as much as we did when developing it!
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## How to navigate the User Guide
+## 1. How to navigate the User Guide
 
 There are a few symbols to take note of in our User Guide. Their purposes are stated below:
 
@@ -67,7 +67,7 @@ Additional formatting guidelines:
 
 
 --------------------------------------------------------------------------------------------------------------------
-## Quick Start
+## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. <br>
  <div markdown="span" class="alert alert-info">:information_source: **Note:**
    1. If you are unsure of which version of Java you are on, follow these steps. Otherwise, continue on from step 2.
@@ -105,14 +105,14 @@ Additional formatting guidelines:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-### Viewing help
+## 3. Features
+### 3.1. Viewing help
 Help users to search for all the commands that Tracey offers by opening a pop-up window.
 It includes a summary to briefly explain all the commands.
 
 The pop-up window also offers a button for easy access to the User Guide via the user's default browser.
 
-This is a sample screenshot of what you can expect from the `help` command.
+This is a sample screenshot of what you can expect from the `help` command:
 
 ![help](images/HelpScreenshot.png) *Figure 2: Screenshot of help command.*
 
@@ -122,7 +122,7 @@ This is a sample screenshot of what you can expect from the `help` command.
 
 Format: `help`
 
-### Importing Excel sheet
+### 3.2. Importing Excel sheet
 Add a list of students from an Excel file into Tracey. Import feature can be used in the command line or import button.
 
 Format: `import FILE PATH`
@@ -153,7 +153,7 @@ How to identify import button:
 * The data in the table needs to be ensured no space behind
 </div>
 
-### Adding a contact
+### 3.3. Adding a contact
 Add a student with relevant details such as faculty and Covid status into Tracey.
 
 Format: `add n/NAME b/BLOCK f/FACULTY p/PHONE e/EMAIL a/ADDRESS mc/MATRICULATION_NUMBER cs/COVID_STATUS t/TAGS...`
@@ -186,7 +186,7 @@ Examples of usage:
 |:-----:|:--------------------:|:-------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  |                                                                                                                                                                                                                 Can only contain alphanumeric characters and spaces. Must be no more than 60 characters.                                                                                                                                                                                                                  |
 | `p/`  | Phone Number         | None                                                                                                  |                                                                                                                                                                                                                                        Can only be numbers at least 3 digits long.                                                                                                                                                                                                                                        |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
 | `a/`  | Address              | None                                                                                                  |                                                                                                                                                                                                                                                     Cannot be blank.                                                                                                                                                                                                                                                      |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS` |                                                                                                                                                                                                                          Can only be one of the pre-defined constants, and is case-insensitive.                                                                                                                                                                                                                           |
 | `mc/` | Matriculation Number | None                                                                                                  |                                                                                                                                                                                                                          Can only start with an "A", followed by 7 digits, ending with a letter.                                                                                                                                                                                                                          |
@@ -204,7 +204,7 @@ In addition, the list of pre-defined constants are also provided for `Faculty` a
 * Additions can be reversed with the `undo` feature.
 </div>
 
-### Editing an existing contact
+### 3.4. Editing an existing contact
 Edit a contact at a specific index.
 
 Format: `edit INDEX n/NAME ...`
@@ -237,13 +237,14 @@ Result of applying `edit 1 p/91234567 e/johndoe@example.com`:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 * Tracey shows the entire edited database after the edit command is applied.
 * After every edit command, the student at the specified index will be shifted to the bottom of the list.
+* If the input phone number, matric number, or email address is already in the address book, Tracey will show an error message saying "This person already exists in the address book."
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 * Edits can be reversed with the `undo` feature.
 </div>
 
-### Deleting a contact
+### 3.5. Deleting a contact
 Delete a contact at a specific index.
 
 Format: `delete INDEX`
@@ -267,7 +268,7 @@ Examples of usage:
 * Deletions can be reversed with the `undo` feature.
 </div>
 
-### Undoing an action
+### 3.6. Undoing an action
 Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
@@ -293,7 +294,8 @@ The command `edit 3 t/` will remove all tags from Jane Doe. However, you then ch
   * Using an `undo` command will not restore the student's index back to 1
 </div>
 
-### Redoing an action
+### 3.7. Redoing an action
+
 Reverse an executed undo command.
 
 Format: `redo`
@@ -319,7 +321,7 @@ to counteract the effects of the `undo` command on the `edit` command, and to co
   * Using a `redo` command after using an `undo` command will not restore the student's index back to 1
 </div>
 
-### Finding a contact
+### 3.8. Finding a contact
 Find a student in Tracey using the student's full or partial name to retrieve their specific details.
 
 Format: `find NAME`
@@ -339,7 +341,7 @@ Scenario:
 
 As seen in the *Figure 10*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
-### Filtering contacts
+### 3.9. Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
 
 Format:`filter f/FACULTY cs/COVID_STATUS b/BLOCK`
@@ -366,7 +368,7 @@ As seen in *Figure 11*, using the `filter` command with "negative" as covid stat
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
 </div>
 
-### Listing the records
+### 3.10. Listing the records
 List all students, displaying all their data stored in Tracey.
 
 Format: `list`
@@ -375,7 +377,7 @@ This is a sample screenshot of what you can expect from the `list` command.
 
 ![list](images/ListFeatureScreenShot.PNG) *Figure 12: Screenshot of list command.*
 
-### Copying emails
+### 3.11. Copying emails
 Open up a separate window that consists of all the emails of the current displayed students.
 
 Format:`email`
@@ -389,7 +391,7 @@ Format:`email`
 
 From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular list of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
-### Summarising the records
+### 3.12. Summarising the records
 Summarise the statistics of the student records inside Tracey.
 
 Format:`summarise`
@@ -405,7 +407,7 @@ Example of usage:
 
 From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the results are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
-### Archiving Tracey
+### 3.13. Archiving Tracey
 Archive the current Tracey database. The archived database will be saved in `ROOT/data/archive/DIRECTORY/ARCHIVED_FILE` where:
 * `ROOT`: The folder where the Tracey.jar is in.
 * `DIRECTORY`: Archived file directory named using your local PC's date in the format of DDMMYY.
@@ -437,7 +439,7 @@ Examples of usage:
 * To restore Tracey to a previous version, rename the archived file name to `addressbook.json` and replace the file in `ROOT/data` with the archived file.
 </div>
 
-### Resizing the result display window
+### 3.14. Resizing the result display window
 Resizes the result display window to 3 pre-set sizes.
 
 Format: `resize SIZE`
@@ -455,7 +457,7 @@ Format: `resize SIZE`
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
 </div>
 
-### Clearing all records
+### 3.15. Clearing all records
 Clear all the data inside Tracey.
 
 Format:`clear`
@@ -465,19 +467,19 @@ Format:`clear`
 * This feature cannot be reversed using `undo`.
 </div>
 
-### Exiting Tracey
+### 3.16. Exiting Tracey
 Close the application.
 
 Format: `exit`
 * Closes the application.
 
-### Saving
+### 3.17. Saving
 Saving in the application is automatic. The data in the file will be saved accordingly whenever
 there are changes to Tracey.
 
 ---------------------------------------------------------------------------------------------------------------
 
-### FAQ
+### 4. FAQ
 1. **Q**: How do I transfer my data to another computer? <br>
    **A**: Copy the file from [ROOT]/data/addressbook.json over to your other computer. <br>
 
@@ -510,7 +512,7 @@ there are changes to Tracey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Command Summary
+### 5. Command Summary
 
 *Table 5: Command Summary.*
 
@@ -537,7 +539,7 @@ there are changes to Tracey.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Glossary
+### 6. Glossary
 
 *Table 4: List of prefixes, fields, pre-defined constants and constraints.*
 
@@ -545,7 +547,7 @@ there are changes to Tracey.
 |:-----:|:--------------------:|:-----------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------:|
 | `n/`  | Name                 | None                                                                                                  | Can only contain alphanumeric characters and spaces.                    |
 | `p/`  | Phone Number         | None                                                                                                  | Can only be numbers at least 3 digits long.                             |
-| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters, excluding the parentheses: (+_.-). The local part cannot start with a special character. This should be followed by a '@' and then a domain name. The domain name should be made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
+| `e/`  | Email                | None                                                                                                  | An email address should begin with a local part containing alphanumeric characters and these special characters: `+_.-`. The local part cannot start with a special character. This should be followed by a '@' and then a domain name.<br/><br/>The domain name should be made up of domain labels separated by periods, and must end with a domain label at least 2 characters long and each domain label can only consist of alphanumeric characters, separated only by hyphens, if any. |
 | `a/`  | Address              | None                                                                                                  | Cannot be blank.                                                        |
 | `f/`  | Faculty              | `FASS` `BIZ` `SOC` `SCALE` `FOD` `CDE` `DUKE` `FOL` `YLLSOM` `YSTCOM` `SOPP` `LKYSPP` `SPH` `FOS`     | Can only be one of the pre-defined constants, and is case-insensitive.  |
 | `mc/` | Matriculation Number | None                                                                                                  | Can only start with an "A", followed by 7 digits, ending with a letter. |
