@@ -1252,12 +1252,55 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding an entity
+
+1. Adding an entity (module/student/class group/assessment).
+
+  1. Test case: `add student id/E0123456 n/John Doe e/johnd@u.nus.edu`, `add module n/Software Engineering Project c/CS2103T a/21S1`, `add class id/T13 t/tutorial m/1`, `add assessment n/Test m/1`<br>
+     Expected: Details of the added entity shown in the status message.
+
+  1. Test case: `add ENTITY` where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
+     Expected: No entity is added. Error details shown in the status message.
+
+  1. Other incorrect add commands to try: `add`, `add student id/E012345a n/John Doe e/johnd@u.nus.edu`, `...` (where `E012345a` is an invalid student ID)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the other entities and also by using their shorthand forms.<br>
+     Examples: `add s id/E0123456 n/John Doe e/johnd@u.nus.edu`, `add m n/Software Engineering Project c/CS2103T a/21S1`, `add c id/T13 t/tutorial m/1`, `add a n/Test m/1`.
+
+### Listing and filtering entities
+
+1. Listing and filtering entities (module/student/class group/assessment).
+
+  1. Test case: List all entities using the `list ENTITY` command where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
+     Filters may be used in the `list` command for students, class groups and assessments, e.g. `list student m/1`, `list class m/1`, `list assessment m/1`.
+     Expected: Details of the listed entities shown in their respective GUI panels.
+
+  1. Test case: `list`<br>
+     Expected: No entity is listed. Error details shown in the status message.
+
+  1. Other incorrect add commands to try: `list student m/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the other entities and also by using their shorthand forms.<br>
+     Examples: `list s m/1`, `list m`, `list c`, `list a`.
+
+### Finding students
+
+1. Finding students by their name.
+
+  1. Test case: `find John`.
+     Expected: Students whose name contains `John` is listed.
+
+  1. Test case: `find`<br>
+     Expected: No student is listed. Error details shown in the status message.
+
 ### Deleting an entity
 
 1. Deleting an entity (module/student/class group/assessment) while all entities are being shown in their respective list.
 
   1. Prerequisites: List all entities using the `list ENTITY` command where `ENTITY` can be `module`/`student`/`class`/`assessment`.<br>
-     Filters may be used in the `list` command for students, class groups and assessments as well, e.g. `list students m/1`.
+     Filters may be used in the `list` command for students, class groups and assessments as well, e.g. `list student m/1`.
 
   1. Test case: `delete module 1`, `delete m 1`<br>
      Expected: First module is deleted from the list. Details of the deleted module shown in the status message.
@@ -1265,11 +1308,76 @@ testers are expected to do more *exploratory* testing.
   1. Test case: `delete module 0`, `delete m 0`<br>
      Expected: No module is deleted. Error details shown in the status message.
 
-  1. Other incorrect delete commands to try: `delete`, `delete module x`, `...` (where x is larger than the list size)<br>
+  1. Other incorrect delete commands to try: `delete`, `delete module x`, `...` (where x is out of bounds)<br>
      Expected: Similar to previous.
 
   1. The above test cases can be repeated with the other entities by replacing `module` with `student`/`class`/`assessment` and also by using their shorthand forms.<br>
      Examples: `delete student 1`, `delete class 1`, `delete assessment 1`, `delete s 1`, `delete c 1`, `delete a 1`.
+
+### Enrolling and disenrolling students
+
+1. Enrolling and disenrolling students.
+
+  1. Test case: `enrol c/1 s/all`<br>
+     Expected: All students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `enrol c/1 s/1,2,3,4,5,6`<br>
+     Expected: The 1st 6 students shown will be enrolled in the 1st class group shown in the GUI panel. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `enrol c/1 s/e0123456,e0234567`<br>
+     Expected: Students with ID `E0123456` and `E02345767` will be enrolled in the 1st class group shown in the GUI panel. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `enrol c/1`<br>
+     Expected: No student is enrolled. Error details shown in the status message.
+
+  1. Other incorrect mark commands to try: `enrol c/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the `disenrol` command by replacing `enrol` with `disenrol`.<br>
+
+### Taking student attendance
+
+1. Taking student attendance.
+
+  1. Prerequisites: Student(s) should already be enrolled in the class group.<br>
+
+  1. Test case: `mark c/1 w/3 s/all`<br>
+     Expected: All students enrolled in the 1st class group shown in the GUI panel will have their attendance marked for week 3. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `mark c/1 w/3 s/1,2,3,4,5,6`<br>
+     Expected: The 1st 6 students enrolled in the 1st class group shown in the GUI panel will have their attendance marked for week 3. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `mark c/1 w/3 s/e0123456,e0234567`<br>
+     Expected: Students with ID `E0123456` and `E02345767` enrolled in the 1st class group shown in the GUI panel will have their attendance marked for week 3. Details of the students with attendance marked shown in the status message.
+
+  1. Test case: `mark c/1 w/3`<br>
+     Expected: No student attendance is marked. Error details shown in the status message.
+
+  1. Other incorrect mark commands to try: `mark c/x`, `mark c/1 w/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
+
+  1. The above test cases can be repeated with the `unmark` command by replacing `mark` with `unmark`.<br>
+
+### Grading student assessment
+
+1. Grading student assessment.
+
+  1. Prerequisites: Student(s) should already be enrolled in the class group and 1/more assessments belonging to the module has been created.<br>
+
+  1. Test case: `grade sn/lab1 m/1 s/all g/1`<br>
+     Expected: All students enrolled in the 1st module shown in the GUI panel will be assigned a grade of 1 for the assessment with a simple name of `lab1`. Details of the students with assessment graded in the status message.
+
+  1. Test case: `grade a/1 s/1,2,3,4,5,6`<br>
+     Expected: The 1st 6 students shown in the GUI panel will be assigned a grade of 1 for the 1st assessment. Details of the students with assessment graded in the status message.
+
+  1. Test case: `grade a/1 s/e0123456,e0234567 g/1`<br>
+     Expected: Students with ID `E0123456` and `E02345767` enrolled in the module will be assigned a grade of 1 for the 1st assessment. Details of the students with assessment graded in the status message.
+
+  1. Test case: `grade a/1`<br>
+     Expected: No student assessment is graded. Error details shown in the status message.
+
+  1. Other incorrect grade commands to try: `grade a/x`, `grade sn/lab1 m/x`, `...` (where x is out of bounds)<br>
+     Expected: Similar to previous.
 
 ### Saving data
 
