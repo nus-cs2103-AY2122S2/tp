@@ -1,11 +1,9 @@
 package seedu.address.model.person.predicates;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MULTIPLE_NAME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MULTIPLE_NAME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 
 import java.util.Arrays;
 import java.util.Collections;

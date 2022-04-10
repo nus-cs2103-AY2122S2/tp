@@ -1,11 +1,11 @@
 package seedu.address.model.person.predicates;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MULTIPLE_TAGS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFERENT_PRIO_ONE_TAG;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFERENT_PRIO_MULTI_TAG;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFERENT_PRIO_MULTI_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DIFFERENT_PRIO_ONE_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MULTIPLE_TAGS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 
 import java.util.Arrays;
 import java.util.Collections;
