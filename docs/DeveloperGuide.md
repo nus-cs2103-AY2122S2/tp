@@ -495,6 +495,7 @@ Actor: User
 
 Use case ends.
 
+
 **Use Case: UC11 - Deleting Person, Module or Group**
 
 Actor: User
