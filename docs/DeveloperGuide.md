@@ -1034,6 +1034,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
   * 4b1. Contax shows an error message indicating that the tag already exists in the system.<br>&nbsp;
   * Use case ends.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 **UC9: Delete Person Tag**
 
 **MSS**
@@ -1144,6 +1146,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
     * 3a1. ContaX shows an error message indicating that no such appointment exists.<br>&nbsp;
     * Use case resumes at step 2.<br>&nbsp;
 
+<div style="page-break-after: always;"></div>
+
 **UC14: Edit Appointment**
 
 **MSS**
@@ -1217,6 +1221,8 @@ Note that since underline is not allowed in markdown, included use cases are **b
 * 1a. User enters invalid slot properties.
     * 1a1. ContaX shows an error message that the properties entered are invalid.<br>&nbsp;
     * Use Case ends.<br>&nbsp;
+
+<div style="page-break-after: always;"></div>
 
 **UC17: Edit Appointment Priority**
 
