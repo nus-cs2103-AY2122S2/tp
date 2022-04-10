@@ -267,8 +267,26 @@ Undo an executed `add`, `edit` or `delete` command.
 
 Format: `undo`
 * Undoes only the last executed add, edit or delete command.
-* You can only use the undo command after executing an add, edit, or delete command.
+* You can only use the `undo` command after executing an add, edit, or delete command.
 * Cannot be used in succession to undo previously executed commands besides the last executed one.
+
+Examples of usage:
+* Using `undo` after an `add` command will remove the recently added student.
+* Using `undo` after an `edit` command will restore the details of the student back to his/her previous state.
+* Using `undo` after a `delete` command will add the recently deleted student.
+
+Scenario for undoing an edit command:
+![UndoingAnEditCommand](images/UndoCommandScenario.png) *Figure 8: Scenario of using an undo command following an edit command.*
+
+Figure *8* depicts a scenario in which an `undo` command is used to restore any previous changes made to a student using the `edit` command. Let's say you want to remove the tags for Jane Doe who is at index 3. 
+The command `edit 3 t/` will remove all tags from Jane Doe. However, you then changed your mind in removing all tags from Jane Doe. You can then use the `undo` command to restore all tags for Jane Doe.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+* After using an `undo` command successfully, you cannot use an `undo` command following that `undo` command.
+* Using an `undo` command after an `edit` command will not restore the student's index back to his/her original index.
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  * Using an `undo` command will not restore the student's index back to 1
+</div>
 
 ### Redoing an action
 Reverses an executed undo command.
@@ -277,6 +295,24 @@ Format: `redo`
 * Reverses only the last executed `undo` command.
 * You can only use the `redo` command after executing an `undo` command.
 * Cannot be used in succession to reverse previously executed `undo` commands besides the last executed one.
+
+Examples of usage:
+* Using `redo` after using `undo` on an `add` command will counteract the effect of undoing an `add` command and the overall result adds a student into Tracey.
+* Using `redo` after using `undo` on a `delete` command will counteract the effect of undoing a `delete` command and the overall result deletes the student from Tracey.
+* Using `redo` after using `undo` on an `edit` command will counteract the effect of undoing an `edit` command and the overall result edits the details of the student in Tracey.
+
+Scenario for redoing after undoing an edit command:
+![RedoingTheUndoingAnEditCommand](images/RedoCommandScenario.png) *Figure 9: Scenario of using a redo command after using an undo command following an edit command.*
+
+Following the scenario from *Figure 8*, *Figure 9* depicts the scenario in which you have decided once again to change your mind and remove the tags for Jane Doe. You can use the `redo` command
+to counteract the effects of the `undo` command on the `edit` command, and the overall results in the tags being removed from Jane Doe.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+* After using an `redo` command successfully, you cannot use a `redo` command following that `redo` command.
+* Using a `redo` command after an `undo` command on an `edit` command will not restore the student's index back to his/her original index.
+  * If the student's original index is 1, using an `edit` command will place him/her at the last index of Tracey
+  * Using a `redo` command after using an `undo` command will not restore the student's index back to 1
+</div>
 
 ### Finding a contact
 Find a particular contact in Tracey and retrieve their specific details.
@@ -295,9 +331,9 @@ Examples of usages:
 * `find J` returns `john` and`jay`.
 
 Scenario:
-![find](images/FindScreenshotForUG.png) *Figure 8: Screenshot of result of the find command.*
+![find](images/FindScreenshotForUG.png) *Figure 10: Screenshot of result of the find command.*
 
-As seen in the *Figure 8*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
+As seen in the *Figure 10*, after the user keys in `find Bernice`, the application returns Bernice's details: `Name`, `Matriculation Number`, `Faculty`, `Block`, `Phone`, `Address`, `Email` amd `Covid Status`.
 
 ### Filtering contacts
 Filter students based on faculties, health statuses and/or blocks.
@@ -318,9 +354,9 @@ Examples of usage:
 * `filter cs/negative f/soc b/e` returns all students that are tagged as covid-negative, enrolled in the faculty SOC (School of Computing) and live in block E of the hall.
 
 An example is shown below:
-![find](images/FilterScreenshotForUG.png) *Figure 9: Example result of `filter` command.*
+![find](images/FilterScreenshotForUG.png) *Figure 11: Example result of `filter` command.*
 
-As seen in *Figure 9*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
+As seen in *Figure 11*, using the `filter` command with "negative" as covid status, "soc" as faculty and "e" as block will return a list of contacts matching these criteria.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 * `filter` command only allows you to search via faculty, health status and block. To search for contacts whose names contain a keyword, use the `find` command instead.
@@ -333,7 +369,7 @@ Format: `list`
 
 This is a sample screenshot of what you can expect from the `list` command.
 
-![list](images/ListFeatureScreenShot.PNG) *Figure 10: Screenshot of list command.*
+![list](images/ListFeatureScreenShot.PNG) *Figure 12: Screenshot of list command.*
 
 ### Copying emails
 Opens up a separate window that consists of all the emails of the current displayed individuals. On the window, there will be a `Copy Email` button that copies the list of emails to the user's clipboard to allow the user to efficiently send out mass emails.
@@ -344,9 +380,9 @@ Format:`email`
 There is also a `Show Email` button on the GUI which you can click to open the same window.
 </div>
 
-![Email](images/CopyEmailScreenshot.png) *Figure 11: Screenshot of Copy Email function.*
+![Email](images/CopyEmailScreenshot.png) *Figure 13: Screenshot of Copy Email function.*
 
-From *Figure 11*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
+From *Figure 13*, this function is beneficial for administrators as you may want to contact this particular set of students. Simply click `Copy Email` and you can go to the email platform of your choice and paste this in the Address section. This function definitely faster than individually copy-pasting student emails.
 
 ### Summarising the records
 Summarises the statistics of the student records inside Tracey.
@@ -360,7 +396,7 @@ Example of usage:
 
 ![SummariseExample](images/SummariseExample.png) *Figure 12a: Example pie charts of Tracey in response to the `summarise` command.* ![SummariseExample2](images/SummariseExample2.png) *Figure 12b: Example bar chart of Tracey in response to the `summarise` command.*
 
-From *Figure 12a and 12b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
+From *Figure 14a and 14b*, when the user inputs the `Summarise` command, the result are multiple charts of the proportion of the student population categorised by `Covid Status`. These charts are separated into the student `Blocks` and the wider hall population.
 
 ### Archiving Tracey
 Archives the current Tracey database. The archived database will be saved in `[ROOT]/data/archive/[DATE]/[ARCHIVED_FILE]` where:
@@ -400,7 +436,7 @@ Format: `resize SIZE`
 * There is also a `Resize Display` button on the GUI which you can click to cycle between the 3 different resizing options.
 </div>
 
-![Comparison of 3 resize options](images/resize_options.png) *Figure 13: Comparison of the 3 different resizing options for the result display window.*
+![Comparison of 3 resize options](images/resize_options.png) *Figure 15: Comparison of the 3 different resizing options for the result display window.*
 
 ### Clearing all records
 Clear all the data inside Tracey.
