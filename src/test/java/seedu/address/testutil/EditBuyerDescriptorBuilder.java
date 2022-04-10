@@ -9,10 +9,13 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.client.Appointment;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.property.HouseType;
+import seedu.address.model.property.Location;
+import seedu.address.model.property.PriceRange;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditclientDescriptor objects.
+ * A utility class to help with building EditBuyerDescriptor objects.
  */
 public class EditBuyerDescriptorBuilder {
 
@@ -27,7 +30,7 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditclientDescriptor} with fields containing {@code buyer}'s details
+     * Returns an {@code EditBuyerDescriptor} with fields containing {@code buyer}'s details
      */
     public EditBuyerDescriptorBuilder(Buyer buyer) {
         descriptor = new EditBuyerDescriptor();
@@ -35,10 +38,14 @@ public class EditBuyerDescriptorBuilder {
         descriptor.setPhone(buyer.getPhone());
         descriptor.setTags(buyer.getTags());
         descriptor.setAppointment(buyer.getAppointment());
+        descriptor.setPropertyToBuy(buyer.getPropertyToBuy());
+        descriptor.setHouseType(buyer.getPropertyToBuy().getHouse().getHouseType());
+        descriptor.setLocation(buyer.getPropertyToBuy().getHouse().getLocation());
+        descriptor.setPriceRange(buyer.getPropertyToBuy().getPriceRange());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditclientDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -47,7 +54,7 @@ public class EditBuyerDescriptorBuilder {
 
 
     /**
-     * Sets the {@code Phone} of the {@code EditclientDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -55,7 +62,7 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Appointment} of the {@code EditclientDescriptor} that we are building.
+     * Sets the {@code Appointment} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withAppointment(String appointment) {
         descriptor.setAppointment(new Appointment(appointment));
@@ -63,12 +70,36 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditclientDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditBuyerDescriptor}
      * that we are building.
      */
     public EditBuyerDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code HouseType} of the {@code EditBuyerDescriptor} that we are building.
+     */
+    public EditBuyerDescriptorBuilder withHouseType(String houseType) {
+        descriptor.setHouseType(HouseType.getHouseType(houseType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Location} of the {@code EditBuyerDescriptor} that we are building.
+     */
+    public EditBuyerDescriptorBuilder withLocation(String location) {
+        descriptor.setLocation(new Location(location));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PriceRange} of the {@code EditBuyerDescriptor} that we are building.
+     */
+    public EditBuyerDescriptorBuilder withPriceRange(int lower, int upper) {
+        descriptor.setPriceRange(new PriceRange(lower, upper));
         return this;
     }
 

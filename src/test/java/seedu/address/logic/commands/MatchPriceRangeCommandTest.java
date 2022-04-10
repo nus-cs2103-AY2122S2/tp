@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FORTH_BUYER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_BUYER;
 
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,13 @@ class MatchPriceRangeCommandTest {
         TypicalSellers.getTypicalSellerAddressBook(), TypicalBuyers.getTypicalBuyerAddressBook());
 
     @Test
+    public void execute_invalidIndex_failure() {
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            model.getFilteredBuyerList().get(-1);
+        });
+    }
+
+    @Test
     public void execute_validIndexUnfilteredList_success() {
         Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_THIRD_BUYER.getZeroBased());
 
@@ -34,7 +42,7 @@ class MatchPriceRangeCommandTest {
 
         PriceRangeMatchBuyerPredicate predicate = new PriceRangeMatchBuyerPredicate(buyerToMatch);
 
-        String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 6);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
             new UserPrefs(), new SellerAddressBook(),
@@ -47,9 +55,9 @@ class MatchPriceRangeCommandTest {
 
     @Test
     public void execute_noPropertyAdded_failure() {
-        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_FORTH_BUYER.getZeroBased());
 
-        MatchPriceRangeCommand matchCommand = new MatchPriceRangeCommand(INDEX_SECOND_CLIENT);
+        MatchPriceRangeCommand matchCommand = new MatchPriceRangeCommand(INDEX_FORTH_BUYER);
 
         PriceRangeMatchBuyerPredicate predicate = new PriceRangeMatchBuyerPredicate(buyerToMatch);
 

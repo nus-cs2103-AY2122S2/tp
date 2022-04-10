@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -90,12 +90,12 @@ public class EditSellerCommand extends Command {
         Seller sellerToEdit = lastShownList.get(index.getZeroBased());
         Seller editedSeller = createEditedSeller(sellerToEdit, editSellerDescriptor);
 
-        if (!sellerToEdit.isSameclient(editedSeller) && model.hasClient(editedSeller)) {
+        if (!sellerToEdit.isSameclient(editedSeller) && model.hasSeller(editedSeller)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
 
         model.setSeller(sellerToEdit, editedSeller);
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        model.updateFilteredSellerList(PREDICATE_SHOW_ALL_SELLERS);
         return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, editedSeller));
     }
 
@@ -167,7 +167,7 @@ public class EditSellerCommand extends Command {
         private Phone phone;
         private Set<Tag> tags;
         private Appointment appointment;
-        //private PropertyToSell propertyToSell;
+        private PropertyToSell propertyToSell;
         private Address address;
         private HouseType houseType;
         private Location location;
@@ -187,6 +187,7 @@ public class EditSellerCommand extends Command {
             setHouseType(toCopy.houseType);
             setLocation(toCopy.location);
             setPriceRange(toCopy.priceRange);
+            setPropertyToSell(toCopy.propertyToSell);
         }
 
 
@@ -258,6 +259,14 @@ public class EditSellerCommand extends Command {
 
         public Optional<PriceRange> getPriceRange() {
             return Optional.ofNullable(priceRange);
+        }
+
+        public void setPropertyToSell(PropertyToSell propertyToSell) {
+            this.propertyToSell = propertyToSell;
+        }
+
+        public Optional<PropertyToSell> getPropertyToSell() {
+            return Optional.ofNullable(propertyToSell);
         }
 
         /**

@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.BuyerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FORTH_BUYER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_BUYER;
 
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,14 @@ public class MatchCommandTest {
     private Model model = new ModelManager(TypicalClients.getTypicalAddressBook(), new UserPrefs(),
         TypicalSellers.getTypicalSellerAddressBook(), TypicalBuyers.getTypicalBuyerAddressBook());
 
+
+    @Test
+    public void execute_invalidIndex_failure() {
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            model.getFilteredBuyerList().get(-1);
+        });
+    }
+
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_THIRD_BUYER.getZeroBased());
@@ -38,7 +47,7 @@ public class MatchCommandTest {
 
         AllFieldsMatchBuyerPredicate predicate = new AllFieldsMatchBuyerPredicate(buyerToMatch);
 
-        String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(Messages.MESSAGE_SELLERS_LISTED_OVERVIEW, 4);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
               new UserPrefs(), new SellerAddressBook(),
@@ -51,9 +60,9 @@ public class MatchCommandTest {
 
     @Test
     public void execute_noPropertyAdded_failure() {
-        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Buyer buyerToMatch = model.getFilteredBuyerList().get(INDEX_FORTH_BUYER.getZeroBased());
 
-        MatchCommand matchCommand = new MatchCommand(INDEX_SECOND_CLIENT);
+        MatchCommand matchCommand = new MatchCommand(INDEX_FORTH_BUYER);
 
         AllFieldsMatchBuyerPredicate predicate = new AllFieldsMatchBuyerPredicate(buyerToMatch);
 

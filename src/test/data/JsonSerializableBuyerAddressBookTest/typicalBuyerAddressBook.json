@@ -4,13 +4,31 @@
     "phone" : "94351253",
     "appointment" : "2022-05-01-12-00",
     "tagged" : [ "friends" ],
-    "propertyToBuy" : null
+    "propertyToBuy" : {
+      "house" : {
+        "houseType" : "Bungalow",
+        "location" : "clementi"
+      },
+      "priceRange" : {
+        "lower" : "0",
+        "upper" : "20"
+      }
+    }
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "appointment" : "2022-05-04-09-00",
     "tagged" : [ "owesMoney", "friends" ],
-    "propertyToBuy" : null
+    "propertyToBuy" : {
+      "house" : {
+        "houseType" : "Condominium",
+        "location" : "utown"
+      },
+      "priceRange" : {
+        "lower" : "0",
+        "upper" : "20"
+      }
+    }
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",

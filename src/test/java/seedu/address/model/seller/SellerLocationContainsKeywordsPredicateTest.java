@@ -17,23 +17,23 @@ import seedu.address.model.property.PriceRange;
 import seedu.address.model.property.PropertyToSell;
 import seedu.address.testutil.SellerBuilder;
 
-public class SellerHouseTypeContainsKeywordsPredicateTest {
+public class SellerLocationContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        SellerHouseTypeContainsKeywordsPredicate firstPredicate = new SellerHouseTypeContainsKeywordsPredicate(
+        SellerLocationContainsKeywordsPredicate firstPredicate = new SellerLocationContainsKeywordsPredicate(
                 firstPredicateKeywordList);
-        SellerHouseTypeContainsKeywordsPredicate secondPredicate = new SellerHouseTypeContainsKeywordsPredicate(
+        SellerLocationContainsKeywordsPredicate secondPredicate = new SellerLocationContainsKeywordsPredicate(
                 secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        SellerHouseTypeContainsKeywordsPredicate firstPredicateCopy = new SellerHouseTypeContainsKeywordsPredicate(
+        SellerLocationContainsKeywordsPredicate firstPredicateCopy = new SellerLocationContainsKeywordsPredicate(
                 firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
@@ -48,60 +48,60 @@ public class SellerHouseTypeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_houseTypeContainsKeywords_returnsTrue() {
+    public void test_locationContainsKeywords_returnsTrue() {
         // One keyword
-        SellerHouseTypeContainsKeywordsPredicate predicate = new SellerHouseTypeContainsKeywordsPredicate(
-                Collections.singletonList("Bungalow"));
+        SellerLocationContainsKeywordsPredicate predicate = new SellerLocationContainsKeywordsPredicate(
+                Collections.singletonList("Kranji"));
         assertTrue(predicate.test(new SellerBuilder().withProperty(new PropertyToSell(
                 new House(HouseType.BUNGALOW, new Location("Kranji")),
                 new PriceRange(100, 500),
-                new Address("Avenue 20"))).build()));
+                new Address("Avenue 10"))).build()));
 
         // Multiple keywords
-        predicate = new SellerHouseTypeContainsKeywordsPredicate(Arrays.asList("Bunga", "Low"));
+        predicate = new SellerLocationContainsKeywordsPredicate(Arrays.asList("Kran", "Ji"));
         assertTrue(predicate.test(new SellerBuilder().withProperty(new PropertyToSell(
                 new House(HouseType.BUNGALOW, new Location("Kranji")),
                 new PriceRange(100, 500),
-                new Address("Avenue 20"))).build()));
+                new Address("Avenue 10"))).build()));
 
         // Only one matching keyword
-        predicate = new SellerHouseTypeContainsKeywordsPredicate(Arrays.asList("Bunga", "High"));
+        predicate = new SellerLocationContainsKeywordsPredicate(Arrays.asList("Kran", "Pi"));
         assertTrue(predicate.test(new SellerBuilder().withProperty(new PropertyToSell(
                 new House(HouseType.BUNGALOW, new Location("Kranji")),
                 new PriceRange(100, 500),
-                new Address("Avenue 20"))).build()));
+                new Address("Avenue 10"))).build()));
 
         // Mixed-case keywords
-        predicate = new SellerHouseTypeContainsKeywordsPredicate(Arrays.asList("BuNg", "aLoW"));
+        predicate = new SellerLocationContainsKeywordsPredicate(Arrays.asList("kRaN", "jI"));
         assertTrue(predicate.test(new SellerBuilder().withProperty(new PropertyToSell(
                 new House(HouseType.BUNGALOW, new Location("Kranji")),
                 new PriceRange(100, 500),
-                new Address("Avenue 20"))).build()));
+                new Address("Avenue 10"))).build()));
     }
 
     @Test
-    public void test_houseTypeDoesNotContainKeywords_returnsFalse() {
+    public void test_locationDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        SellerHouseTypeContainsKeywordsPredicate predicate = new SellerHouseTypeContainsKeywordsPredicate(
+        SellerLocationContainsKeywordsPredicate predicate = new SellerLocationContainsKeywordsPredicate(
                 Collections.emptyList());
         assertFalse(predicate.test(new SellerBuilder().withProperty(new PropertyToSell(
                 new House(HouseType.BUNGALOW, new Location("Kranji")),
                 new PriceRange(100, 500),
-                new Address("Avenue 20"))).build()));
+                new Address("Avenue 10"))).build()));
 
         // Non-matching keyword
-        predicate = new SellerHouseTypeContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new SellerLocationContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new SellerBuilder().withProperty(new PropertyToSell(
                 new House(HouseType.BUNGALOW, new Location("Kranji")),
                 new PriceRange(100, 500),
-                new Address("Avenue 20"))).build()));
+                new Address("Avenue 10"))).build()));
 
         // Keywords match phone, email and address, but does not match House Type
-        predicate = new SellerHouseTypeContainsKeywordsPredicate(
+        predicate = new SellerLocationContainsKeywordsPredicate(
                 Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new SellerBuilder().withName("Alice").withPhone("12345")
                 .withProperty(new PropertyToSell(new House(HouseType.BUNGALOW, new Location("Kranji")),
                         new PriceRange(100, 500),
-                        new Address("Avenue 20"))).build()));
+                        new Address("Avenue 10"))).build()));
     }
 }

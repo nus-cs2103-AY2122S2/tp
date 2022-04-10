@@ -42,7 +42,7 @@ public class AddBuyerCommandTest {
         CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub);
 
         assertEquals(String.format(AddBuyerCommand.MESSAGE_SUCCESS, validBuyer), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validBuyer), modelStub.clientsAdded);
+        assertEquals(List.of(validBuyer), modelStub.buyersAdded);
     }
 
     @Test
@@ -302,18 +302,18 @@ public class AddBuyerCommandTest {
      * A Model stub that always accept the client being added.
      */
     private static class ModelStubAcceptingBuyerAdded extends ModelStub {
-        final ArrayList<Client> clientsAdded = new ArrayList<>();
+        final ArrayList<Buyer> buyersAdded = new ArrayList<>();
 
         @Override
         public boolean hasBuyer(Buyer buyer) {
             requireNonNull(buyer);
-            return clientsAdded.stream().anyMatch(buyer::isSameclient);
+            return buyersAdded.stream().anyMatch(buyer::isSameclient);
         }
 
         @Override
         public void addBuyer(Buyer buyer) {
             requireNonNull(buyer);
-            clientsAdded.add(buyer);
+            buyersAdded.add(buyer);
         }
 
         @Override

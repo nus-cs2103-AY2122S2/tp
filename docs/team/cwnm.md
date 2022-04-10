@@ -3,44 +3,52 @@ layout: page
 title: Jun Heng's Project Portfolio Page
 ---
 
-### Project: AgenSee
-
-AgenSee is a desktop application used for ...
+### Project: AgentSee
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to ..
-    * What it does: allows the user to us
-    * Justification: This feature improves th
-    * Highlights: This enhancement affects existquh
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Find Buyer and Seller command
+    * An enhancement to the current buyer and seller command, including more fields such as house type and location
+    * Split Find into both Buyer and Seller specific commands
 
-* **New Feature**: Added a mmands.. using up/down keys.
+* **New Feature**: Clear buyer, seller and all command
+    * An enhancement to the current clear command, clears either list, or both lists.
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: List buyer, seller command
+    * An enhancement to list command, can list each list seperately
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=cwnm&tabRepo=AY2122S2-CS2103T-T11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+    * `findBuyerCommand` class
+    * `findSellerCommand` class
+    * `findSellerCommandParser` class
+    * `findBuyerCommandParser` class
+    * Predicate class for buyer location, house type and name
+    * Predicate class for seller location, house type and name
+    * Addition of clear-b, clear-s and clear-all and the corresponding classes
+    * Addition of list-b, list-s and the corresponding classes
+    * Addition of intial seller class and initial AddSeller methods
+    * Addition of intial version of edit-b 
+    * Refractoring of the project from "Person" to "Client", including classes, files, variables and methods
+    * Fixed FXML bugs that caused the JAR application to start with Nullpointerexception
+    * Associated test cases for the classes
+    * Edited files to conform to checkstyle
 
 * **Project management**:
-    * Managed releases `v1.0` - `v1.rc` (X releases) on GitHub
-
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
+    * Added a few issues
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+        * Added documentation for the features `find-b` and `find-s`
+        * Added documentation for the features `clear-b` and `clear-s` and `clear-all`
+        * Added documentation for the features `list-b` and `list-s`
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Added implementation details of the `find-b` and `find-s` feature.
 
-* **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+* **Contributions to team tasks**:
+    * Set up weekly meeting times accounting for our individual schedules
+    * Set up meeting agenda for weekly meetings
+    * Added weekly reminders for deadlines on tasks for that week, especially for time sensitive team tasks, this includes soft deadline such as code for demo
+    * Built and released JAR for our team (v1.2, v1.3.trial, v1.3, v1.4)
+    * Submission of progress report
 
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_

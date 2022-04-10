@@ -59,7 +59,7 @@ public class DeleteBuyerCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new SellerAddressBook(),
                 TypicalBuyers.getTypicalBuyerAddressBook());
         expectedModel.deleteBuyer(buyerToDelete);
-        showNobuyer(expectedModel);
+        showNoBuyer(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -102,7 +102,7 @@ public class DeleteBuyerCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNobuyer(Model model) {
+    private void showNoBuyer(Model model) {
         model.updateFilteredBuyerList(p -> false);
 
         assertTrue(model.getFilteredBuyerList().isEmpty());

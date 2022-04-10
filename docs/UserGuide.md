@@ -143,9 +143,12 @@ Format: `add-b n/NAME p/PHONE_NUMBER [t/TAG]...`
 * The `NAME`, `PHONE_NUMBER` and `TAG` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
 * `NAME` should only contain **alphanumeric** characters. E.g. `John 1` or `John 2` if you are using numbers to differentiate buyers with the same name.
 * `NAME` cannot be repeated for different buyers. E.g. `John` & `John`. However, we allow for different cases. E.g. `John` & `john`.
-* `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
+* `PHONE_NUMBER` can only contain non-negative, non-spaced whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` or `0 01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a buyer is initially added, they will default to having **no** Property. Use `add-ptb` to add a respective property.
+* `TAG` must be **alphanumeric** with no spaces between the words. E.g. `great` is ok but `great client` is not.
+* If there are **leading** or **trailing** whitespace for `NAME`, `PHONE_NUMBER` or `TAG`, it will be ignored. E.g. `____David_____` where `_` is whitespace is `David`.
+* If multiple inputs are provided for the same field E.g. `n/David n/#seeme`, only the **last** input will be processed. Hence, in the example, an error will be thrown since `#seeme` is invalid `NAME`. This applies to `p/PHONE` as well
 
 Examples:
 * `add-b n/Yu Qi p/98765432` adds a new buyer with name `Yu Qi` and phone number `98765432`
@@ -162,7 +165,9 @@ Format: `add-ptb INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE`
 * The `PRICE_RANGE` must be a valid **non-negative integer** with `lower` being less than or equal to `upper`.
 * The `PRICE_RANGE` can include `0` since the buyer might want to try their luck and see if anyone is selling their property for free.
 * Do use appropriate `LOCATION` for your own utility. E.g. `Bishan` or `Marymount`. The application will not check if it is an actual location in Singapore or elsewhere.
-
+* You cannot add a new property to buy once one has already been added.
+* If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE` or `HOUSE_TYPE`, it will be ignored. E.g. `____hdb_____` where `_` is whitespace will be treated as `hdb`.
+* If there are multiple inputs for the same field, only the last one will be **processed**. Consequently, if it is invalid, earlier valid inputs will not be chosen. E.g. `h/hdb h/plaza` is invalid since `plaza` is not a recognized house type.
 
 Examples:
 * `add-ptb 1 l/Bishan pr/400000,500000 h/hdb` means that 1st buyer in the displayed buyer list wishes to buy a HDB in Bishan for any price from $400,000 to $500,000. 
@@ -359,9 +364,12 @@ Format: `add-s n/NAME p/PHONE_NUMBER [t/TAG]...`
 * The `NAME`, `PHONE_NUMBER` and `TAG` cannot be empty. E.g. `n/` or `n/` followed by only spaces or tabs.
 * `NAME` should only contain **alphanumeric** characters. E.g. `John 1` or `John 2` if you are using numbers to differentiate sellers with the same name.
 * `NAME` cannot be repeated for different sellers. E.g. `John` & `John`. However, we allow for different cases. E.g. `John` & `john`.
-* `PHONE_NUMBER` can only contain non-negative whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` is not.
+* `PHONE_NUMBER` can only contain non-negative, non-spaced whole numbers E.g. `1234`, `0000` (zero) and must be at least 3 digits long E.g. `001` is accepted but `01` or `0 01` is not.
 * Multiple different buyers or sellers might have the same phone number. E.g. Buyer `John`, Buyer `Bob` and Seller `Jess` have phone number `62353535`. This is because the phone number might be a home number/office number which multiple clients can share.
 * When a seller is initially added, they will default to having **no** Property. Use `add-pts` to add a respective property.
+* `TAG` must be **alphanumeric** with no spaces between the words. E.g. `great` is ok but `great client` is not.
+* If there are **leading** or **trailing** whitespace for `NAME`, `PHONE_NUMBER` or `TAG`, it will be ignored. E.g. `____David_____` where `_` is whitespace is `David`.
+* If multiple inputs are provided for the same field E.g. `n/David n/#seeme`, only the **last** input will be processed. Hence, in the example, an error will be thrown since `#seeme` is invalid `NAME`. This applies to `p/PHONE` as well
 
 Examples:
 * `add-s n/Yu Qi p/98765432` adds a new seller with name `Yu Qi` and phone number `98765432`
@@ -392,6 +400,9 @@ Format: `add-pts INDEX l/LOCATION pr/PRICE_RANGE h/HOUSE_TYPE a/ADDRESS`
 * The application will not check if the `LOCATION` actually contains a property with the given `ADDRESS`. It is up to your due diligence to ensure `ADDRESS` is at `LOCATION` stated.
 * It is possible for multiple different sellers to sell same `ADDRESS` properties. This is for cases that you are storing information about separate residents of the property.
 * Similarly, it is possible for sellers with the same `ADDRESS` to have different `LOCATION`, `PRICE_RANGE` & `HOUSE_TYPE` since they might each have their own perspectives of where each property resides, its type, or what its worth.
+* You cannot add a new property to sell once one has already been added.
+* If there are **leading** or **trailing** whitespace for `LOCATION`, `PRICE_RANGE`, `HOUSE_TYPE` or `ADDRESS`, it will be ignored. E.g. `____Colonia_____` where `_` is whitespace is `Colonia`.
+* If there are multiple inputs for the same field, only the last one will be **processed**. Consequently, if it is invalid, earlier valid inputs will not be chosen. E.g. `h/hdb h/plaza` is invalid since `plaza` is not a recognized house type.
 
   Examples:
 * `add-pts 1 l/Ajax pr/800000,900000 h/condo a/Ajax Ave 1, 02-100` means that 1st seller in the displayed seller list wishes to sell a condominium in Ajax at Ajax Ave 1, 02-100 for any price from $800,000 to $900,000.
@@ -624,7 +635,7 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **A** Certain inputs like `MaNsIoN` are also accepted, but are not visually appealing, hence, we default each input for a house type to a certain displayed text.
 
 **Q** Why is `add-b n/goutham s/o karthik p/3456789` not accepted in `add-b` or `add-s`? <br>
-**A** Your name contains non-alphanumeric characters `/`. Even if it is an actual name, it does not conform to our requirements.
+**A** Our application does not allow non-alphanumeric characters! You can consider using `goutham so karthik`, or simply `goutham son of karthik`.
 
 **Q** My phone number be ridiculously long `238223212393288...` even though it's not possible! <br>
 **A** We do not set a hard limit to the length of your phone number since they can be of different lengths.
@@ -632,8 +643,8 @@ Otherwise, all other value will be translated to `Unspecified` housetype!
 **Q** Why have location and address, aren't they the same thing? <br>
 **A** Location refers to the area/town/city the property can/does reside in. Address is the exact location. We decided to separate them as it allows you to more easily match properties where the exact address may not necessarily contain the location name. E.g. 36 College Ave E, North Tower can be considered to be in Clementi/Dover/NUS but does not contain the location name.
 
-**Q** How do I "reset" my property fields like location to "No location"? <br>
-**A** Once you have added a property, you cannot remove a specific field, only edit it. Basically, we do not allow a property to have missing fields, except when the client is first added and all the fields are empty. We have plans in the future to allow users to remove a property completely.
+**Q** How do I "reset" my property `LOCATION` if my buyer suddenly has no location preference? <br>
+**A** You can consider typing in a "dummy" location to indicate that the client hadn't decided yet. For example `any`.
 
 **Q** Why does typing `delete-b 0` and `delete-b 999999` return 2 different error messages even though they are both violating the same condition? <br>
 **A** We check whether you have first inputted a positive integer first. If not, we will throw the error message seen in `delete-b 0`. If you have typed in a positive integer, but it was larger than the displayed list size, it will inform you to check the range again with the other error message.
