@@ -25,7 +25,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/yokester98.md)]
 
 * Role: Code Quality
-* Responsibilities: Add contacts to UniBook
+* Responsibilities: Add Command functionality
 
 ### Gerald Neo
 
