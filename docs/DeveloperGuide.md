@@ -1360,6 +1360,8 @@ testers are expected to do more *exploratory* testing.
   3. Test case: `listappt` <br>
      Expected: The selected tab should be changed to `Appointments` if the user was not at that tab.
 
+<div markdown="span" class="alert alert-info">
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -1385,6 +1387,8 @@ testers are expected to do more *exploratory* testing.
    
    3. Test case: Editing the entries but with invalid data <br>
       **Expected:** Upon opening of ContaX, the particular entry will be skipped.
+
+<div markdown="span" class="alert alert-info">
 
 ### Importing Contacts from CSV Files
 
