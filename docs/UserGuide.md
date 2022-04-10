@@ -401,55 +401,33 @@ Find is case-insensitive, and the order in which the keywords are entered is irr
 
 **Explanation** 
 
+To sort your show list by rating ascendingly, you can key in `sort r/asc`! For more examples, refer to this table below!
+
 | To sort by | ascendingly | descendingly | Notes |
 | ---------- | ----------- | ------------ | ----- |
 | name       | n/asc       | n/dsc        | Name is sorted by comparing alphabets and numbers. For example, in ascending order, 300 comes before 47 Ronin! |
-| status     | s/asc       | s/dsc        | Status is sorted in this ascending order: `completed`, `watching`, `plan-to-watch` |
+| status     | s/asc       | s/dsc        | Status is sorted ascendingly in this order: `completed`, `watching`, `plan-to-watch` |
 | rating     | r/asc       | r/dsc        |       |
 | tag        | t/asc       | t/dsc        | Tag is sorted by number of tags |
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order
+:exclamation: **Take note** The order of how you type the prefixes does not affect the outcome! If you type `sort s/asc n/asc`, Trackermon will still sort by name in ascending order then by status in ascending order. By default, Trackermon prioritises sorting in the following order if the criteria are used: 
+
+* `name` > `status` > `rating` > `tag`
 </div>
 
 Therefore, let's say you want to sort by status in ascending order then by name in ascending order.
 Use `sort n/asc s/asc so/statusname`.
 
 <div markdown="block" class="alert alert-warning">
-:exclamation: **Take note** We use `so/SEQUENCE` to swap the priority of the sorting criteria! By default, Trackermon always prioritises sorting in the following order if the criteria are used:
-
-  1. name
-  2. status
-  3. rating
-  4. tag
-
-So, use the "tagratingstatusname" as the `SEQUENCE` if you want to swap the ordering to:
-1. tag
-2. rating
-3. status
-4. name
-
-Additionally, when using `so/` prefix, Trackermon will check if the required criteria is presented in your `SEQUENCE`.
-So if you use `sort n/asc s/asc so/haha`, the required criteria are name and status. As name and status are not provided, Trackermon will tell you the input is invalid!
+:exclamation: **Take note** When using `so/` prefix, Trackermon will check if all the prefixes used are present in your `SEQUENCE`. If they aren't, an error message will be displayed!
 </div>
 
 <div markdown="block" class="alert alert-warning">
 
 :bulb: **Tip:** Summary:
-* `Sort` will sort according to the [prefixes](#command-structure).<br>
-* Use `n/` if you want to sort by name.
-* Use `s/` if you want to sort by status. We sort status in this ascending order: `completed`, `watching`, `plan-to-watch`.
-* Use `t/` if you want to sort by number of tags.
-* Use `r/` if you want to sort by rating.
-* For the above prefixes, you have to specify the `ORDER` right after the prefix.
-* `ORDER` is the order you want to sort the list by! Type `asc` to sort by ascending or type `dsc` to sort by descending!
-* The criteria are name, status, tag, rating
-* If two or more of the above criteria are being used, sort will prioritise sorting by name, then status, followed by rating, and finally tags.
-* Use `so/` if you want to reorder the priority and state the `SEQUENCE`
-* List the `SEQUENCE` by listing out the full name of the criteria used in the order you want.
-* For example: you want to sort by rating, then status, followed by name, and finally tag, `SEQUENCE` will be "ratingstatusnametag"
-* `SEQUENCE` input is case-insensitive and spaces between the criteria does not matter. So the input "RaTing Status NAMETag" works too!
-* If you are confused, don't worry! Just do not use any prefix, we will help you sort it by name in ascending order!
+* Enter all prefixes you want to use for your sort along with the order. Specify the priority of the prefixes to sort with `SEQUENCE`!
+* `sort` can also be used like this! It will sort by name in ascending order.
 </div>
 
 <div markdown="block" class="alert alert-info">
