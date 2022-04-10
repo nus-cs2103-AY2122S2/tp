@@ -124,7 +124,7 @@ Adds a student to TAPA.
 * Other than the student ID, all other fields do not have to be unique. For example, two different students could share the same full name.
 * The name of the student to be added will be converted to Title Case.
 * The current version of TAPA expects that a TA will only teach each student in, at most, one module. Thus, each student to be added can only have one module code.
-* You may refer to the [table](#2-information-about-contacts-in-tapa) above for more information about each individual field of a student.
+* You may refer to the [table](#information-about-contacts-in-tapa) above for more information about each individual field of a student.
 </div>
 
 **Example**:
