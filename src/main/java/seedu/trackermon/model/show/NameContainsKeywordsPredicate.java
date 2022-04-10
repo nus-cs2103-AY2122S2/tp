@@ -28,7 +28,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Show> {
     public boolean test(Show show) {
         // Checks for fragmented words in name
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsFragmentedWordIgnoreCase(show.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsFragmentedWordIgnoreCase(show.getName().name, keyword));
     }
 
     /**

@@ -54,7 +54,7 @@ public class ShowCard extends UiPart<Region> {
         super(FXML);
         this.show = show;
         id.setText(displayedIndex + ". ");
-        name.setText(show.getName().fullName);
+        name.setText(show.getName().name);
 
         String statusString = show.getStatus().toString();
         String statusMessage = "[" + statusString.substring(0, 1).toUpperCase()
