@@ -422,7 +422,7 @@ Given below is the implementation of the find task command when the user enters 
 
 *The expected result for `findTask priority/HIGH event/`*
 
-![UML diagram for find task command](images/FindTaskCommandSequenceDiagram.png)
+<img src="images/FindTaskCommandSequenceDiagram.png">
 *The UML Sequence diagram for `findTask priority/HIGH event/`*
 
 #### Design Consideration
@@ -902,7 +902,7 @@ Preconditions: User is currently using ManageEZPZ.
 | **Mainstream OS** | Windows, Linux, Unix, OS-X                                                 |
 | **Users**         | Applies to both managers or supervisors                                    |
 | **command**       | A message sent as an input from User, that coincides with our Command List |
-| **Person**        | An employee
+| **Person**        | An employee                                                                |
 
 --------------------------------------------------------------------------------------------------------------------
 
