@@ -21,7 +21,7 @@ end box
 [-> LogicManager : execute("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate LogicManager
 
-LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+LogicManager -> TrackBeauParser : parseCommand("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate TrackBeauParser
 
 create AddCustomerCommandParser
@@ -31,7 +31,7 @@ activate AddCustomerCommandParser
 AddCustomerCommandParser --> TrackBeauParser
 deactivate AddCustomerCommandParser
 
-TrackBeauParser -> AddCustomerCommandParser : parse("addc n/Alex p/90211201 \n e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
+TrackBeauParser -> AddCustomerCommandParser : parse("addc n/Alex p/90211201 e/ale@gmail.com \n a/Chuang Road 113 rd/10-04-2022")
 activate AddCustomerCommandParser
 
 create Customer
@@ -53,39 +53,7 @@ AddCustomerCommandParser -[hidden]-> TrackBeauParser
 destroy AddCustomerCommandParser
 
 TrackBeauParser --> LogicManager : a
-deactivate TrackBeauParser
-
-LogicManager -> AddCustomerCommand : execute()
-activate AddCustomerCommand
-
-AddCustomerCommand -> Model : hasCustomer()
-Model --> AddCustomerCommand
-activate Model
-alt customer to add is unique
-    AddCustomerCommand -> Model : addCustomer(c)
-    Model --> AddCustomerCommand
-
-    create CommandResult
-    AddCustomerCommand -> CommandResult
-    activate CommandResult
-
-    CommandResult --> AddCustomerCommand
-    deactivate CommandResult
-
-    AddCustomerCommand --> LogicManager : result
-    deactivate AddCustomerCommand
-
-    [<--LogicManager
-
-else customer with same identity already in TrackBeau
-AddCustomerCommand -> CommandException
-activate CommandException
-
-CommandException --> LogicManager
-
-[<--LogicManager
-deactivate LogicManager
-end
+destroy TrackBeauParser
 
 
 @enduml
