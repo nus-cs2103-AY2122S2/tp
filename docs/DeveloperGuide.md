@@ -169,6 +169,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<<<<<<< HEAD
 ### Applicant feature
 
 #### Proposed Implementation
@@ -196,7 +197,7 @@ A new `Applicant` class had to be created to support the functionality. It is al
 Hence it made sense to refactor `Person` to `Applicant` and to extend and build on the existing functionalities to
 support the needs of HireLah.
 
-### To Add: Position feature
+### Position feature
 
 #### Proposed Implementation
 
