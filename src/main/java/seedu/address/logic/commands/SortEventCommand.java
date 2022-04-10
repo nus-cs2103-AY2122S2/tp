@@ -39,4 +39,12 @@ public class SortEventCommand extends SortCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, getSuccessMessage()),
                 false, false, false, false, true);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortEventCommand // instanceof handles nulls
+                && searchType.equals(((SortEventCommand) other).searchType)
+                && ordering.equals(((SortEventCommand) other).ordering)); // state check
+    }
 }
