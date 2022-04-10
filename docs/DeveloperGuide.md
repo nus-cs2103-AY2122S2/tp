@@ -1046,7 +1046,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file <br>Expected: Shows the GUI with a set of sample friends. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -1055,22 +1055,176 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Friend management
 
-### Deleting a person
+#### Adding a friend
 
-1. Deleting a person while all persons are being shown
+1. Adding a friend while all friends are being shown
+    1. Test case: `addfriend n/John Doe p/92402912 e/johndoe@example.com` <br>
+       Expected: a new entry in the `Friends` tab with the name `John Doe`, phone number `92402912` and email `johndoe@example.com` should appear.
+    2. Test case: `addfriend n/John& Doe` <br>
+       Expected: an error message regarding incorrect name format should be displayed
+    3. Test case: `addfriend p/942142412 n/Jane Doe` <br>
+       Expected: Order of arguments does not matter, command should create a friend `Jane Doe` with the phone number `942142412`.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Adding a friend while in another tab
+    1. Prerequisites: Must be in either `Events` or `Insights` tab.
+    
+    2. Test case: `addfriend n/Jennifer Doe` <br>
+       Expected: Tab should switch to `Friends` tab and a new friend `Jennifer Doe` should be present in the friends list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### Deleting a friend
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Deleting a friend while all friends are being shown
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Prerequisites: List all persons using the `listfriend` command. Multiple friends in the list.
+
+   2. Test case: `deletefriend 1`<br>
+      Expected: First friend is deleted from the list. Details of the deleted contact shown in the status message.
+
+   3. Test case: `deletefriend 0`<br>
+      Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect delete commands to try: `deletefriend`, `deletefriend x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+#### Editing a friend
+
+1. Editing a friend while all friends are being shown
+   1. Prerequisites: At least 3 friends present, with one their names being `Alex Yeoh`
+
+   2. Test case: `editfriend cn/Alex Yeoh nn/Alex Row d/Best friend` <br>
+      Expected: Friend with the name `Alex Yeoh` edited to have a new name `Alex Row` and a new description `Best friend`
+   
+   3. Test case: `editfriend 2 nn/Barney Smith t/Cartoon` <br>
+      Expected: Friend with index `2` in the friend list is edited to have a new name `Barney Smith` and all tags are replaced with `Cartoon`.
+
+   4. Test case: `editfriend 3 cn/Alex Yeoh p/29529592` <br>
+      Expected: Error message stating that either a name is provided or an index, but not both.
+   
+#### Finding a friend
+
+1. finding a friend while all friends are being shown
+    1. Prerequisites: At least 3 friends present, with one their names being `Alex Row`, one of them having a tag `colleagues` and one of them having a log titled `Dinner`
+
+    2. Test case: `findfriend n/Alex Row` <br>
+       Expected: Contacts whose names contain the substring `Alex Row` are displayed
+
+    3. Test case: `findfriend ttl/Dinner` <br>
+       Expected: Contacts whose log titles contain the substring `Dinner` are displayed
+
+    4. Test case: `findfriend t/colleagues` <br>
+       Expected: Contacts whose tags contain `colleagues` is displayed
+
+    5. Test case: `findfriend n/Alex Row ttl/Dinner t/colleagues` <br>
+       Expected: All the above 3 contacts are displayed
+
+### Log management
+
+#### Adding a log
+
+1. Adding a log while all friends being shown
+   1. Prerequisites Atleast 1 friend present
+
+   2. Test case: `addlog n/Alex Row ttl/Dinner` <br>
+      Expected: Log added to `Alex Row`, GUI updated to display log title
+   
+   3. Test case: `addlog 1 ttl/Bday` <br>
+      Expected: Log added to friend in index 1, GUI updated to display log title as well
+
+   4. Test case: `addlog 1 n/Alex Row ttl/Event_Log` <br>
+      Expected: Error either the name is provided or the index, not both
+   
+#### Deleting a log
+
+1. Deleting a log from a friend while all friend are being shown
+
+    1. Prerequisites: List all persons using the `listfriend` command. Multiple friends in the list, log must be present to delete
+
+    2. Test case: `deletelog n/Alex Row id/1`<br>
+       Expected: Alex Row's first log is deleted
+
+    3. Test case: `deletelog 1 id/1`<br>
+       Expected: The first log of the friend who is at index 1 is deleted
+
+    4. Other incorrect delete commands to try: `deletelog 1 n/Alex Row id/1`, `deletelog 1 id/x`, `...` (where x is larger than the list size)<br>
+       Expected: Error message provided for incorrect format or, incorrect index provided.
+
+#### Editing a log
+
+1. Editing a friend's log while all friends are being shown
+    1. Prerequisites: Atleast two friends each with a log is present.
+
+    2. Test case: `editlog n/Alex Yeoh id/1 ttl/New Log Title` <br>
+       Expected: `Alex Yeoh`'s first log's title is changed to `New Log description`
+
+    3. Test case: `editlog 2 id/1 d/The new description` <br>
+       Expected: First log's description of friend at index `2` in the friend list is edited to have a description `New Log description`
+    
+### Event management
+
+#### Adding an event
+
+1. Adding an event while all upcoming events are being shown
+    1. Test case: `addevent n/Old Event dt/14-04-2020 1600` <br>
+       Expected: No change in the GUI as the event is past event, although if `listevent -a` is run this event should be visable.
+    2. Test case: `addevent n/Future Event dt/14-04-2023 1300` <br>
+       Expected: GUI should be updated with a new event called `Future Event`
+    3. Test case: `addfriend n/Date Check dt/99-04-2023 1240` <br>
+       Expected: Error message should be displayed concerning the incorrect format of date.
+
+2. Adding an event while in another tab
+    1. Prerequisites: Must be in either `Friends` or `Insights` tab.
+
+    2. Test case: `addevent n/Party dt/14-04-2023 1400 d/Cool party` <br>
+       Expected: Tab should switch to `Events` tab and a new event `Party` should be present in the events list.
+
+#### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `listevents` command. Multiple events in the list.
+
+    2. Test case: `deletevent 1`<br>
+       Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+
+    3. Test case: `deletefriend 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `deleteevent`, `deleteevent x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+#### Editing an event
+
+1. Editing an event while all events are being shown
+
+    1. Prerequisites: Atleast 3 events present, with one their names being `Birthday`
+
+    2. Test case: `editevent 1 n/Alex's Birthday d/Alex's 26th birthday` <br>
+       Expected: Event at index 1 is changed to have the name `Alex's Birthday` and description `Alex's 26th birthday`
+
+    3. Test case: `editevent 1 af/Alex Yeoh rf/Bernice Yu` <br>
+       Expected: `Alex Yeoh` is added to the first event and `Bernice Yu` is removed from the first event.
+
+    4. Test case: `editevent x n/New Event Title` (where x is larger than the list size) <br>
+       Expected: No event edited, index error message provided.
+
+#### Finding an event
+
+1. finding an event while all events are being shown
+    1. Prerequisites: Atleast 3 events present, with one their names being `Birthday`, one of them having a friend `Alex Row` and one of having a starting date of `10-03-2022`
+
+    2. Test case: `findevent n/Birthday` <br>
+       Expected: Events whose names contain the substring `Birthday` are displayed
+
+    3. Test case: `findevent f/Alex Row` <br>
+       Expected: Events whose friends contain `Alex Row` are displayed
+
+    4. Test case: `findevent ds/10-03-2022` <br>
+       Expected: Events which occur on `10-03-2022` and after are displayed,
+   
+    5. Test case: `findevent n/Birthday f/Alex Row  ds/10-03-2022` <br>
+       Expected: All the events matching the above predicates are displayed
 
 ### Saving data
 
@@ -1079,5 +1233,5 @@ testers are expected to do more *exploratory* testing.
    1. To test whether `Amigos` can detect corrupted data files, navigate to the data folder of `Amigos`.
       and modify some data in `addressbook.json` to be invalid. For example, change an email to be of an invalid format (e.g `alexyeoh@e`).
    2. Upon running `Amigos` after editing `addressbook.json`, `Amigos` should start without any data in it due to the error.
-   3. To revert `Amigos` back to its previous state, reopen `addressbook.json` and undo the edits made in step 1.
+   3. To revert `Amigos` back to its previous state, reopen `addressbook.json` and undo the edits made in step 1, or alternatively delete the `addressbook.json` to initialise a template `addressbook.json`.
 
