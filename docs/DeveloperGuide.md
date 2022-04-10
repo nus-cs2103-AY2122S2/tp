@@ -7,9 +7,20 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+
+ModuleMateFinder is a desktop address-book-like application that is designed for university students. It is used to 
+keep track of your friends' contacts, as well as the modules they are taking. ModuleMateFinder is optimized for use 
+via the CLI, and it has a GUI created with JavaFX. It is written in Java.
+
+This Developer Guide documents the architecture, design implementations and considerations of various 
+components and features in ModuleMateFinder, and aims to allow developers to gain a deeper understanding on the 
+application.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 * Code reused from [tutorial](https://nus-cs2103-ay2122s2.github.io/tp/tutorials/AddRemark.html) for implementing `Remark`
 --------------------------------------------------------------------------------------------------------------------
 
