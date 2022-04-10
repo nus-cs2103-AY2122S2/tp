@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import manageezpz.commons.core.GuiSettings;
 import manageezpz.logic.commands.exceptions.CommandException;
-import manageezpz.logic.parser.Prefix;
 import manageezpz.model.AddressBook;
 import manageezpz.model.Model;
 import manageezpz.model.ReadOnlyAddressBook;
@@ -222,16 +221,6 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
-        public String listTasks() {
-            return null;
-        }
-
-        @Override
-        public String listTasks(Prefix option) {
-            return null;
-        }
-
-        @Override
         public boolean hasPriority(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -264,11 +253,6 @@ public class AddEmployeeCommandTest {
         @Override
         public Task tagPriorityToTask(Task task, Priority priority) {
             return null;
-        }
-
-        @Override
-        public void findTask(Task task) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override

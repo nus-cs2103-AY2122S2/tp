@@ -58,13 +58,6 @@ public class ArgumentMultimap {
         return getValue(new Prefix("")).orElse("");
     }
 
-    /**
-     * Returns the number of arguments including the preamble.
-     * @return The number of arguments including the preamble.
-     */
-    public int numberOfArguments() {
-        return argMultimap.size();
-    }
 
     public boolean isPrefixExist(Prefix prefix) {
         return argMultimap.containsKey(prefix);

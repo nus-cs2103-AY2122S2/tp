@@ -61,7 +61,7 @@ public class Date {
         SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
         sdfrmt.setLenient(false);
         try {
-            LocalDate testDate = LocalDate.parse(date);
+            LocalDate.parse(date);
             return true;
         } catch (DateTimeParseException e) {
             return false;
