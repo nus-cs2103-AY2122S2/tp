@@ -1275,6 +1275,39 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Listing the data
+
+1. List all the students in Tracey. The order of students arranged is dependent on who is the last added/edited student 
+   
+   a. Test case: `list` <br>
+   Expected: All students are shown on the Main Window.
+
+   b. Test case: `list` on an empty list of students <br>
+   Expected: No students will be shown. Instead, it shows a list of no students.
+
+   c. Test case: `list` `ANY_WORDS_OR_CHARACTERS`<br>
+   Expected: Error message indicating format of command is wrong.
+
+### Summarising the data
+
+1. Summarising all the students' data at that specific time using the `summarise` command.
+   A separate window containing charts that categorises student by covid status and faculty or block will be shown if there are student data in Tracey.
+
+    a. Test case: `summarise` on a non-empty list of students <br>
+       Expected: Pie Chart Window will display at least one pie chart and one bar chart.
+
+    b. Test case: `summarise` on an empty list of students <br>
+       Expected: No Pie Chart Window displayed. Tracey will respond with "Nothing to summarise".
+
+    c. Test case: `summarise` on a non-empty list of students followed by a `delete 1` command without closing the Pie Chart Window and use `summarise` again <br>
+       Expected: New Pie Chart Window will display containing updated data set due to a deletion.
+
+    d. Test case: `summarise` on a non-empty list of students followed by a `exit` command without closing the Pie Chart Window <br>
+       Expected: Existing Pie Chart Window will close along with the Main Window.
+
+    e. Other incorrect summarise commands to try: `summarise positive`, `summarise 3` <br>
+       Expected: Error message indicating format of command is wrong.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
