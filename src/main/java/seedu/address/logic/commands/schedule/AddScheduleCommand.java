@@ -3,7 +3,6 @@ package seedu.address.logic.commands.schedule;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -81,7 +80,7 @@ public class AddScheduleCommand extends ScheduleCommand {
         model.setCandidate(candidateToInterview, editedCandidate);
         return new CommandResult(String.format(MESSAGE_SCHEDULED_CANDIDATE_SUCCESS, toAdd.getCandidate().getName(),
                 toAdd.getCandidate().getStudentId(), toAdd.getInterviewDate()
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), toAdd.getInterviewStartTime()),
+                        .format(DATE_TIME_FORMATTER), toAdd.getInterviewStartTime()),
                 false, false, false, -1, true, targetIndex.getZeroBased());
     }
 

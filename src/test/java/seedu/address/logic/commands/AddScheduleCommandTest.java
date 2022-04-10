@@ -19,7 +19,7 @@ import static seedu.address.testutil.TypicalInterviews.INTERVIEW_AMY_TYPICAL;
 import static seedu.address.testutil.TypicalInterviews.ON_WEEKEND;
 import static seedu.address.testutil.TypicalInterviews.THURSDAY_INTERVIEW_DATE_TIME;
 import static seedu.address.testutil.TypicalInterviews.TUESDAY_INTERVIEW_DATE_TIME;
-import static seedu.address.testutil.TypicalInterviews.TYPICAL_INTERVIEW_DATE_TIME;
+import static seedu.address.testutil.TypicalInterviews.VALID_AMY_INTERVIEW_DATE_TIME;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -67,7 +67,7 @@ public class AddScheduleCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCandidateList().size() + 1);
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(outOfBoundIndex, VALID_AMY_INTERVIEW_DATE_TIME);
 
         assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
@@ -104,7 +104,7 @@ public class AddScheduleCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getCandidateList().size());
         AddScheduleCommand addScheduleCommand =
-                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, VALID_AMY_INTERVIEW_DATE_TIME);
         assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_INVALID_CANDIDATE_DISPLAYED_INDEX);
     }
 
@@ -112,7 +112,7 @@ public class AddScheduleCommandTest {
     public void execute_emptyList_throwsCommandException() {
         Index outOfBoundIndex = INDEX_FIRST_CANDIDATE;
         model.updateFilteredCandidateList(Model.PREDICATE_SHOW_EMPTY_LIST);
-        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(outOfBoundIndex, TYPICAL_INTERVIEW_DATE_TIME);
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(outOfBoundIndex, VALID_AMY_INTERVIEW_DATE_TIME);
 
         assertCommandFailure(addScheduleCommand, model, Messages.MESSAGE_NO_CANDIDATES_IN_SYSTEM);
     }
@@ -121,9 +121,9 @@ public class AddScheduleCommandTest {
     public void execute_hasSameCandidate_throwsCommandException() {
         Candidate candidateToInterview = model.getFilteredCandidateList().get(INDEX_FIRST_CANDIDATE.getZeroBased());
         model.addInterview(new InterviewBuilder().withCandidate(candidateToInterview)
-                .withInterviewDateTime(TYPICAL_INTERVIEW_DATE_TIME).build());
+                .withInterviewDateTime(VALID_AMY_INTERVIEW_DATE_TIME).build());
         AddScheduleCommand addScheduleCommand =
-                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, VALID_AMY_INTERVIEW_DATE_TIME);
 
         assertCommandFailure(addScheduleCommand, model, MESSAGE_DUPLICATE_CANDIDATE_INTERVIEW);
     }
@@ -131,7 +131,7 @@ public class AddScheduleCommandTest {
     @Test
     public void execute_hasConflictingInterview_throwsCommandException() {
         model.addInterview(INTERVIEW_AMY_TYPICAL);
-        LocalDateTime interviewDateTime = TYPICAL_INTERVIEW_DATE_TIME;
+        LocalDateTime interviewDateTime = VALID_AMY_INTERVIEW_DATE_TIME;
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_SECOND_CANDIDATE, interviewDateTime);
 
         assertCommandFailure(addScheduleCommand, model, MESSAGE_CONFLICTING_INTERVIEW);
@@ -172,16 +172,16 @@ public class AddScheduleCommandTest {
     @Test
     public void equals() {
         AddScheduleCommand scheduleFirstCommand =
-                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, VALID_AMY_INTERVIEW_DATE_TIME);
         AddScheduleCommand scheduleSecondCommand =
-                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+                new AddScheduleCommand(INDEX_SECOND_CANDIDATE, VALID_AMY_INTERVIEW_DATE_TIME);
 
         // same object -> returns true
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommand));
 
         // same values -> returns true
         AddScheduleCommand scheduleFirstCommandcopy =
-                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, TYPICAL_INTERVIEW_DATE_TIME);
+                new AddScheduleCommand(INDEX_FIRST_CANDIDATE, VALID_AMY_INTERVIEW_DATE_TIME);
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommandcopy));
 
         // different types -> returns false

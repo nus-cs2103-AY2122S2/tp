@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103-F11-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -118,7 +118,6 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Candidate` objects (which are contained in a `UniqueCandidateList` object).
@@ -131,7 +130,6 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -153,6 +151,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about `AddressBook` named classes:**<br>
+
+TAlent Assistant™'s development team has decided to stick with AB3's naming convention for certain classes, unless otherwise stated.
+
+</div>
 
 ### Candidate model
 
@@ -177,9 +183,9 @@ List of new entities:
 ### Add feature
 
 #### What is the feature about?
-The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked slightly, introducing a few more related entities (Refer to [TODO: UPDATE LINK]).
+The `add` mechanism is facilitated by `AddressBook`. The implementation of adding a `Candidate` through the `add` command has been enhanced on the existing approach. It extends `Command`. The input parameters of the `add` command has been tweaked, introducing a few more related attributes (Refer to the [Current Implementation](#current-implementation)).
 
-The enhancement works by adding additional prefixes i.e. `id/[StudentId] `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned to the entities.
+The enhancement works by adding additional prefixes i.e. `id/[StudentId]`, `c/[Course]`, `yr/[Seniority]`, `avail/[Availability]`. As for the attributes `ApplicationStatus` and `InterviewStatus`, users are not required to enter a value for it as the default value of `PENDING` will be assigned.
 
 #### How is the feature implemented?
 
@@ -197,22 +203,16 @@ Step 2. The user proceeds to add a candidate by running the `add` command with i
 
 ![AddStep2](images/AddStep2.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Tip:** Todo: Update image
-
-</div>
-
 #### Why is the feature implemented as such?
 
-The `add` command is done up with the goals of being as convenient and efficient for users. It is kept simple with easy to interpret and understand prefixes that convey to the user on what is expected from their input.
+The `add` command is done up with the goals of being as convenient and efficient as possible for the users. It is kept simple with easy to interpret and understandable prefixes that convey to the user on what is expected from their input.
 
 #### UML Diagrams
 **Activity Diagram**
 
 The following activity diagram summarizes what happens when a user executes an `add` command:
 
-<img src="images/AddActivityDiagram.png" width="250" />
+<img src="images/AddActivityDiagram.png" />
 
 ### Delete feature
 
@@ -516,6 +516,7 @@ that this will be a heavy headway for our application.
 The following activity diagram summarizes what happens when a user executes a `focus` command.<br>
 <img src="images/FocusCommandDiagram.png" width="250" />
 
+
 ### Scheduling interviews feature
 
 Below is a sequence diagram and explanation of how the `AddScheduleCommand` is executed.
@@ -548,6 +549,9 @@ each interview object contains its corresponding `Candidate`.
 interview, the newly created interview is assigned to be the candidate's `Interview` attribute.
   * Pros: Editing a `Candidate` attribute does not affect their `Interview` attribute.
   * Cons: Interview schedule has to iterate through every candidate to check.
+
+
+# TO DELETE ****
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -657,28 +661,27 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Reasonably comfortable using CLI apps
 
-**Value proposition**: TAlent Assistant™ creates a centralized management system for professors to manage TA
-applications by providing access to various application data such as qualifications, experience and
-interview availability dates.
-
+**Value proposition**: TAlent Assistant™ creates a centralized management system for NUS School of Computing professors to manage 
+undergraduate TA applications by providing easy access to candidates' data to review their general availability for
+scheduling interviews during office hours.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                            | So that I can…​                                                               |
-|----------|----------|---------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user     | add a candidate to the system                           | keep track of their application details for consideration.                    |
-| `* * *`  | user     | edit a candidate in the system                          | correct any wrong inputs when I added this candidate.                         |
-| `* * *`  | user     | delete a candidate from the system                      | remove entries that I no longer need.                                         |
-| `* * *`  | user     | find a candidate in the system                          | access details of the candidate without having to go through the entire list. |
-| `* * *`  | user     | list all candidates in the system                       | monitor the application pool.                                                 |
-| `* *`    | user     | sort candidates                                         | reorder candidates based on a specific attribute field for easier viewing.    |
-| `* * *`  | user     | view scheduled interviews within a specific time period | keep track of the upcoming interview schedule.                                |
-| `* * *`  | user     | schedule TA candidates for interviews                   | keep track of the interview schedule.                                         |
-| `* * *`  | new user | view all available commands                             | get familiarised with the system.                                             |
+| Priority | As a …​  | I want to …​                                            | So that I can…​                                                                    |
+|----------|----------|---------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | user     | add a candidate to the system                           | keep track of their application details for consideration.                         |
+| `* * *`  | user     | edit a candidate in the system                          | correct any wrong inputs when I added this candidate.                              |
+| `* * *`  | user     | delete a candidate from the system                      | remove entries that I no longer need.                                              |
+| `* * *`  | user     | find a candidate in the system                          | access details of the candidate without having to go through the entire list.      |
+| `* * *`  | user     | list all candidates in the system                       | monitor the application pool.                                                      |
+| `* *`    | user     | sort candidates in the system                           | view the candidates in a more organised manner based on a certain attribute field. |
+| `* * *`  | user     | view scheduled interviews within a specific time period | keep track of the upcoming interview schedule.                                     |
+| `* * *`  | user     | schedule TA candidates for interviews                   | keep track of the interview schedule.                                              |
+| `* * *`  | user     | update the remark for a candidate in the system         | keep a note of important details relating to the candidate.                        |
+| `* * *`  | new user | view all available commands                             | get familiarised with the system.                                                  |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -829,17 +832,49 @@ TA - Teaching Assistant
 
 <hr>
 
-**Sort candidates**
+**Use case: Sort candidates in the system**
 
 **MSS**
 
-1. User requests to sort candidates by a specific field
-2. TAlent Assistant™ returns a list of candidates sorted in ascending order with regard to the specified attribute field
+1. User requests to sort candidates by a specific attribute field
+2. TAlent Assistant™ returns a list of candidates sorted with regard to the specified attribute field
 
    Use case ends.
 
 * 2b. The specified attribute field is invalid
     * 2b1. TAlent Assistant™ returns an error message
+
+  Use case resumes at step 1.
+
+<hr>
+
+**Use case: View scheduled interviews in the system**
+
+**MSS**
+
+1. User requests to view scheduled interviews within a specific time period
+2. TAlent Assistant™ returns a list of scheduled interviews within the specified time period, sorted from earliest to latest
+
+   Use case ends.
+
+* 2b. The specified time period is invalid
+    * 2b1. TAlent Assistant™ returns an error message
+
+  Use case resumes at step 1.
+
+<hr>
+
+**Use case: Update remark of a candidate in the system**
+
+**MSS**
+
+1. User requests to update the remark of a candidate in the system
+2. TAlent Assistant™ returns the candidate with the updated remark in the feedback panel
+
+   Use case ends.
+
+* 2b. The candidate specified is displayed in the focus panel
+    * 2b1. TAlent Assistant™ updates the candidate's remark displayed
 
   Use case resumes at step 1.
 
@@ -942,13 +977,13 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and shutdown (WIP)
 
 1. Initial launch
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample candidates. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -959,7 +994,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a candidate
+### Deleting a candidate (WIP)
 
 1. Deleting a candidate while all candidates are being shown
 
@@ -974,7 +1009,100 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Viewing the interview schedule
+
+1. Viewing the interview schedule for a specific time period
+
+    1. Prerequisites: Schedule an interview using the `schedule add` command that is within 7 days of the current date and time.
+   Schedule another interview using the `schedule add` command that is after 7 days but within 14 days of the current date and time.
+
+    2. Test case: `view week`<br>
+       Expected: The earlier interview scheduled within 7 days of the current date and time is displayed in the interview
+   panel. The other interview scheduled after 7 days of the current date and time is not displayed. Number of interviews listed is displayed in the feedback panel.
+
+    4. Test case: `view month`<br>
+       Expected: Both interviews scheduled earlier are displayed in the interview panel. Number of interviews listed is displayed in the feedback panel.
+
+    5. Test case: `view`<br>
+       Expected: No change to the interview schedule already displayed. Error message is shown in the feedback panel.
+
+    6. Other incorrect view commands to try: `view this week`, `view xxx` (where 'xxx' is any string other than the accepted keywords `all`, `today`, `week` or `month` for time period specified)<br>
+       Expected: No change to the interview schedule already displayed. Error message is shown in the feedback panel.
+
+### Updating a candidate's remark
+
+1. Updating a candidate's remark while the candidate is displayed in the focus panel
+
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. Bring up the details
+   of the first candidate listed to the focus panel using the `focus 1` command.
+
+    2. Test case: `remark 1 r/`<br>
+       Expected: Remark for candidate at index 1 in the displayed candidate list is removed. Focus panel updates
+       to display the remark field as `No remark added!`. Details of the candidate with the updated remark is shown in the feedback panel.
+
+    5. Test case: `remark 1 r/updated remark`<br>
+       Expected: Remark for candidate at index 1 in the displayed candidate list is updated. Focus panel updates
+       to display the remark field as `updated remark`. Details of the candidate with the updated remark is shown in the feedback panel.
+
+    6. Test case: `remark 0`<br>
+       Expected: No update to remarks of any candidate. Error message is shown in the feedback panel.
+
+    7. Other incorrect remark commands to try: `remark 1 r`, `remark r/`<br>
+       Expected: No update to remarks of any candidate. Error message is shown in the feedback panel.
+
+2. Updating a candidate's remark while only some candidates are being shown
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. Bring up the details
+       of the first candidate listed to the focus panel using the `focus 1` command. 
+       Use the `find` command to display a new filtered list of candidates excluding the first candidate previously listed.
+
+    2. Test case: `remark 1 r/new remark`<br>
+       Expected: Remark for candidate at index 1 in the currently displayed candidate list is updated to
+       `new remark`. Details of the candidate with the updated remark is shown in the feedback panel. Focus panel does not update the remark of the currently displayed candidate.
+    
+### Sorting candidates in the system
+
+1. Sorting candidates while all candidates are being shown
+
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
+
+    1. Test case: `sort s/name`<br>
+       Expected: All candidates are sorted in case-insensitive alphanumerical order 0-9, A-Z based on each candidate's displayed name. Number of candidates sorted is shown in the feedback panel.
+
+    1. Test case: `sort s/name s/course`<br>
+       Expected: The last sorting key `course` will be utilised and verified. All candidates are sorted in case-insensitive alphanumerical order 0-9, A-Z based on each candidate's displayed course.  Number of candidates sorted is shown in the feedback panel.
+
+    1. Incorrect sort commands to try: `sort`, `sort s/xxx` (where xxx is an invalid attribute field to be sorted by)<br>
+       Expected: No change to the list of candidates already displayed. Error message is shown in the feedback panel.
+
+2. Sorting candidates while only some candidates are being shown
+
+    1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. 
+       Use the `find` command to display a new filtered list with fewer candidates. Multiple candidates in the filtered list.
+
+     2. Test case: `sort s/name`<br>
+       Expected: Currently displayed candidates are sorted in case-insensitive alphanumerical order 0-9, A-Z based on each candidate's displayed name. Number of candidates sorted is shown in the feedback panel.
+    
+
+### Finding candidates in the system
+
+1. Finding a candidate from existing candidates in the system
+
+    1. Prerequisites: Add a new candidate with the name `Alex Chang` using the `add` command.
+
+   1. Test case: `find k/Alex f/name`<br>
+      Expected: Only candidates containing `Alex` in their names (case-insensitive) should be displayed. Previously added candidate with the name `Alex Chang` should be displayed. Number of candidates found and displayed is shown in the feedback panel.
+
+   1. Test case: `find k/Alex f/course `<br>
+      Expected: No candidates should be displayed. Message `0 candidates listed!` is shown in the feedback panel.
+
+   1. Test case: `find k/Alex f/`<br>
+      Expected: Only candidates containing `Alex` in any of their valid searchable attribute fields (case-insensitive) should be displayed. Previously added candidate with the name `Alex Chang` should be displayed. Number of candidates found and displayed is shown in the feedback panel.
+   
+   1. Incorrect find commands to try: `find`, `find f/xxx` (where xxx is any invalid attribute field to search by)<br>
+      Expected: No change to the list of candidates already displayed. Error message is shown in the feedback panel.
+   
 
 ### Saving data
 

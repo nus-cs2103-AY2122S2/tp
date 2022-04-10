@@ -4,9 +4,14 @@
 start
 :User executes add command;
 
-if () then ([candidate does not exist in system])
-    :Save candidate to system;
-else ([else])
+if () then ([valid command])
+    if () then ([candidate not in system])
+        :Save candidate to system;
+    else ([else])
+        :Show duplicate candidate message;
+    endif
+else ([invalid command])
+    :Show invalid command message;
 endif
 stop
 

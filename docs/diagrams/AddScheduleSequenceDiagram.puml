@@ -1,114 +1,59 @@
 @startuml
-'https://plantuml.com/class-diagram
-
 !include style.puml
 
-box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":ABParser" as AddressBookParser LOGIC_COLOR
-participant ":ScheduleCParser" as ScheduleCommandParser LOGIC_COLOR
-participant ":AddScheduleCParser" as AddScheduleCommandParser LOGIC_COLOR
-participant "a:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
-end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant "l:List<Candidate>" as lastShownCandidateList MODEL_COLOR
+participant ":AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+participant ":ModelManager" as ModelManager MODEL_COLOR
+
+participant ":List<Candidate>" as List MODEL_COLOR
+
 participant ":Candidate" as Candidate MODEL_COLOR
-participant "toAdd:Interview" as Interview MODEL_COLOR
-end box
 
-[-> LogicManager : execute("schedule add ...")
+participant ":Interview" as Interview MODEL_COLOR
+
+[-> LogicManager : execute\n("schedule add ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(userInput)
-activate AddressBookParser
-
-create ScheduleCommandParser
-AddressBookParser -> ScheduleCommandParser
-activate ScheduleCommandParser
-
-ScheduleCommandParser --> AddressBookParser
-deactivate ScheduleCommandParser
-
-AddressBookParser -> ScheduleCommandParser : parse(arguments)
-activate ScheduleCommandParser
-
-create AddScheduleCommandParser
-ScheduleCommandParser -> AddScheduleCommandParser
-activate AddScheduleCommandParser
-
-AddScheduleCommandParser --> ScheduleCommandParser
-deactivate AddScheduleCommandParser
-
-ScheduleCommandParser -> AddScheduleCommandParser : parse(args)
-activate AddScheduleCommandParser
-
-create AddScheduleCommand
-AddScheduleCommandParser -> AddScheduleCommand
+LogicManager -> AddScheduleCommand : execute(model)
 activate AddScheduleCommand
 
-AddScheduleCommand --> AddScheduleCommandParser : a
-deactivate AddScheduleCommand
+AddScheduleCommand -> ModelManager : getFilteredCandidateList()
+activate ModelManager
 
-AddScheduleCommandParser --> ScheduleCommandParser : a
-deactivate AddScheduleCommandParser
+ModelManager -> List
+activate List
+List--> ModelManager : l
+deactivate List
 
-AddScheduleCommandParser -[hidden]-> AddressBookParser
-destroy AddScheduleCommandParser
+ModelManager --> AddScheduleCommand : l
+deactivate ModelManager
 
-ScheduleCommandParser --> AddressBookParser : a
-deactivate ScheduleCommandParser
+AddScheduleCommand -> List : get(index)
+activate List
 
-ScheduleCommandParser -[hidden]-> AddressBookParser
-destroy ScheduleCommandParser
-
-AddressBookParser --> LogicManager : a
-deactivate AddressBookParser
-
-LogicManager -> AddScheduleCommand : execute()
-activate AddScheduleCommand
-
-AddScheduleCommand -> Model : getFilteredCandidateList()
-activate Model
-
-create lastShownCandidateList
-Model -> lastShownCandidateList
-activate lastShownCandidateList
-
-lastShownCandidateList --> Model : l
-deactivate lastShownCandidateList
-
-Model --> AddScheduleCommand : l
-deactivate Model
-
-AddScheduleCommand -> lastShownCandidateList : get(index)
-activate lastShownCandidateList
-
-lastShownCandidateList -> Candidate
+List -> Candidate
 activate Candidate
 
-Candidate --> lastShownCandidateList : c
+Candidate --> List : c
 deactivate Candidate
 
-lastShownCandidateList --> AddScheduleCommand : c
-deactivate lastShownCandidateList
-
-lastShownCandidateList -[hidden]-> AddScheduleCommand
-destroy lastShownCandidateList
+List --> AddScheduleCommand : c
+deactivate List
 
 create Interview
-AddScheduleCommand -> Interview : Interview(c, interviewDateTime)
+AddScheduleCommand -> Interview : Interview(c, interviewDateTime);
 activate Interview
-
 Interview --> AddScheduleCommand : toAdd
 deactivate Interview
 
-AddScheduleCommand -> Model : addInterview(toAdd)
-activate Model
-
-Model --> AddScheduleCommand
-deactivate Model
+AddScheduleCommand -> ModelManager : addInterview(toAdd)
+activate ModelManager
+ModelManager --> AddScheduleCommand
+deactivate ModelManager
 
 AddScheduleCommand -> Candidate : triggerInterviewStatusScheduled()
 activate Candidate
@@ -116,25 +61,24 @@ activate Candidate
 Candidate --> AddScheduleCommand : ec
 deactivate Candidate
 
-AddScheduleCommand -> Model : setCandidate(c, ec)
-activate Model
+AddScheduleCommand -> ModelManager : setCandidate(c, ec)
+activate ModelManager
 
-Model --> AddScheduleCommand
-deactivate Model
-AddScheduleCommand --> LogicManager : commandResult
+ModelManager --> AddScheduleCommand
+deactivate ModelManager
+
+create CommandResult
+AddScheduleCommand -> CommandResult
+activate CommandResult
+CommandResult --> AddScheduleCommand
+deactivate CommandResult
+
+AddScheduleCommand --> LogicManager
 deactivate AddScheduleCommand
-
+'Hidden arrow to position the destroy marker below the end of the activation bar.
 AddScheduleCommand -[hidden]-> LogicManager
 destroy AddScheduleCommand
 
 [<--LogicManager
 deactivate LogicManager
-@enduml
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
-
 @enduml

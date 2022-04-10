@@ -236,7 +236,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setInterview(Interview target, Interview editedInterview) {
+    public void setInterview(Interview target, Interview editedInterview) throws CommandException {
         requireAllNonNull(target, editedInterview);
 
         interviewSchedule.setInterview(target, editedInterview);
