@@ -538,9 +538,30 @@ The `TableView<CommandCard` is made up of three `TableColumn<CommandCard>` corre
 A `CommandCard` contains the `description`, `commandWord` and `commandShortcut` fields.
 These are used by `TableColumn<CommandCard>` to create the columns of each corresponding field.
 
-Given below is a class diagram of `TableView<CommandCard>`  
+Given below is a class diagram of `TableView<CommandCard>`.
 
 <img align="center" src="images/TableView.png"/>
+
+**Design considerations**  
+The `CommandCard` class became a nested class because there were no other features that would be implemented that need to use it. Only the `HelpWindow` requires it,
+thus, it was made as a nested class.
+
+### Command Shortcuts
+
+Command shortcuts were implemented for commands that have a lengthy `COMMAND_WORD`. This was done by adding another field `SHORTENED_COMMAND_WORD`.
+
+**Design Considerations**
+
+The shortcuts were implemented in `TeachWhatParser` by using fallthroughs in a `switch-case` block. This was done because the code would be more readable and
+it would be easier to implement.
+There was some consideration over whether we should use ```if-else``` statements instead but this was rejected as it would cause the code to be difficult to read compared to
+`case` statements.  
+
+There was also some debate about using a command list in each `Command` to hold both the command word and shortcut if it exists.
+This would make adding more commands trivial as `TeachWhatParser` would check the command list in each command.
+However, this was rejected because it would take a lot of time to implement and the current iteration would only be using at most two command words (`COMMAND_WORD` and `SHORTENED_COMMAND_WORD`).
+If we had a feature that allows the user to create custom command words for each command then only would it be worthwhile to implement but we did not plan on adding that feature.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
