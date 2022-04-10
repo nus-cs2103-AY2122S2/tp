@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +32,11 @@ public class SalaryTest {
         assertThrows(NullPointerException.class, () -> Salary.isValidSalary(null));
 
         // Invalid
-        assertFalse(Salary.isValidSalary("-1"));    // Negative value
-        assertFalse(Salary.isValidSalary(""));      // Empty string
-        assertFalse(Salary.isValidSalary(" "));     // Space
-        assertFalse(Salary.isValidSalary("a"));     // non-integer
-        assertFalse(Salary.isValidSalary("!"));     // non-integer special char
+        assertFalse(Salary.isValidSalary("-1")); // Negative value
+        assertFalse(Salary.isValidSalary("")); // Empty string
+        assertFalse(Salary.isValidSalary(" ")); // Space
+        assertFalse(Salary.isValidSalary("a")); // non-integer
+        assertFalse(Salary.isValidSalary("!")); // non-integer special char
 
         // Valid
         assertTrue(Salary.isValidSalary("0"));
@@ -69,8 +69,8 @@ public class SalaryTest {
 
         assertEquals(expectedForSameSalary, highSalary.compare(highSalary));
         assertEquals(expectedForSameSalary, highSalary.compare(highSalaryClone));
-        assertTrue(lowSalary.compare(highSalary) > 0);  // when lowSalary < HighSalary
-        assertTrue(highSalary.compare(lowSalary) < 0);  // when highSalary > lowSalary
+        assertTrue(lowSalary.compare(highSalary) > 0); // when lowSalary < HighSalary
+        assertTrue(highSalary.compare(lowSalary) < 0); // when highSalary > lowSalary
     }
 
     @Test

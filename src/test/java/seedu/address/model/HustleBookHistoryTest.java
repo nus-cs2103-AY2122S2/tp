@@ -9,19 +9,18 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.getTypicalHustleBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.HustleBookBuilder;
 
 public class HustleBookHistoryTest {
-    private final HustleBookHistory hustleBookHistory = HustleBookHistory.getInstance();
-    private final HustleBook HUSTLEBOOK_EMPTY = new HustleBookBuilder().build();
-    private final HustleBook HUSTLEBOOK_WITH_PERSON_ALICE = new HustleBookBuilder().withPerson(ALICE).build();
-    private final HustleBook HUSTLEBOOK_WITH_PERSON_BOB = new HustleBookBuilder().withPerson(BOB).build();
-    private final HustleBook HUSTLEBOOK_WITH_PERSON_CARL = new HustleBookBuilder().withPerson(CARL).build();
-    private final HustleBook HUSTLEBOOK_WITH_PERSON_DANIEL = new HustleBookBuilder().withPerson(DANIEL).build();
+    private static final HustleBookHistory hustleBookHistory = HustleBookHistory.getInstance();
+    private static final HustleBook HUSTLEBOOK_EMPTY = new HustleBookBuilder().build();
+    private static final HustleBook HUSTLEBOOK_WITH_PERSON_ALICE = new HustleBookBuilder().withPerson(ALICE).build();
+    private static final HustleBook HUSTLEBOOK_WITH_PERSON_BOB = new HustleBookBuilder().withPerson(BOB).build();
+    private static final HustleBook HUSTLEBOOK_WITH_PERSON_CARL = new HustleBookBuilder().withPerson(CARL).build();
+    private static final HustleBook HUSTLEBOOK_WITH_PERSON_DANIEL = new HustleBookBuilder().withPerson(DANIEL).build();
 
     // Check to ensure all instances are the same
     @Test
@@ -158,7 +157,7 @@ public class HustleBookHistoryTest {
 
     @Test
     public void update_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,  () -> hustleBookHistory.update(null));
+        assertThrows(NullPointerException.class, () -> hustleBookHistory.update(null));
     }
 
     @Test
