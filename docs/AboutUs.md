@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/tzhan98)][[portfolio](team/tzhan98.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation + Skill feature
 
 ### Alex Teo
 
