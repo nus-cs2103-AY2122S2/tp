@@ -30,7 +30,7 @@ process of using WoofAreYou step-by-step. By the end of this user guide, it is o
 Let's get started!
 
 <p align="center">
-  <img src="images/forUserGuide/Ui.png" alt="WoofForYou sample screenshot" width="500"/>
+  <img src="images/forUserGuide/Ui.png" alt="WoofForYou sample screenshot" height="432"/>
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
