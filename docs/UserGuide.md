@@ -409,16 +409,16 @@ UDT data are saved as a JSON file `[JAR file location]/data/addressbook.json`.
 ----------------
 # FAQ
 
-Q: How do I transfer my data to another Computer?  
+Q: How do I transfer my data to another Computer?
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous _**UDT**_.
 
-Q: I edited my data file directly and now the application does not work properly!  
+Q: I edited my data file directly and now the application does not work properly!
 A: Delete the data folder to allow _**UDT**_ to create a new data file. Your previous data has unfortunately been lost to time.
 
-Q: Manual insertion of students takes time, is there a faster way to do it?  
+Q: Manual insertion of students takes time, is there a faster way to do it?
 A: We are working on a feature to allow importing of **.csv** files into _**UDT**_!
 
-Q: What if I key in the wrong command?  
+Q: What if I key in the wrong command?
 A: An error message colored in red will appear stating that you have typed an unknown command.
 ![invalid command](images/user-guide/invalidcommand.png)
 

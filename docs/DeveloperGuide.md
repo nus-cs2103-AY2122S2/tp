@@ -226,7 +226,7 @@ The `Status` class is facilitated by using `execute()` command in the `EditComma
 * **Alternative 2:** Attribute placed within `Person` class.
   * Pros:
     * Single file where changes can be made
-  * Cons: 
+  * Cons:
     * Lesser level of abstraction, changes made have to be constantly changed throughout the file
 
 ### \[Implemented\] Find By Status Feature
@@ -925,7 +925,5 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
